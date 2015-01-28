@@ -48,12 +48,13 @@ func shiftLower(bit byte, b []byte) byte {
 }
 
 func init() {
+	return
 	m := &dota.CUserMessageSayText2{
 		Chat:        proto.Bool(true),
 		Entityindex: proto.Uint32(1),
 		Messagename: proto.String("DOTA_Chat_All"),
 		Param1:      proto.String("manveru"),
-		Param2:      proto.String("dotabuff rocks"),
+		Param2:      proto.String("one"),
 		Param3:      proto.String(""),
 		Param4:      proto.String(""),
 	}
@@ -63,26 +64,53 @@ func init() {
 	headerLen := proto.EncodeVarint(uint64(len(out)))
 	PP(headerType, headerLen, out)
 	msg := append(append(headerType, headerLen...), out...)
+	PP(out)
+	PP(msg)
 
 	ioutil.WriteFile("expected", msg, 0644)
 }
 
 // FIXME
 func (p *Parser) OnCDemoPacket(msg Message, obj *dota.CDemoPacket) {
+	if msg.Tick != 1445 || msg.Size != 173 {
+		return
+	}
+
 	data := obj.GetData()
+	PP(data)
+	shiftLower(0, data)
+	shiftLower(0, data)
+	PP(msg, data)
+	o := &dota.CUserMessageSayText2{}
+	for n := 0; n <= len(data); n++ {
+		for m := 0; m <= len(data); m++ {
+			if n+m >= len(data) || m <= n {
+				continue
+			}
+			err := proto.Unmarshal(data[n:m], o)
+			if err != nil {
+				// spew.Println(err)
+				continue
+			}
+			PP(n, m, data[n:m], o)
+		}
+	}
+
+	//orig := make([]byte, len(data))
+	//copy(orig[:], data[:])
+	//shiftLower(0, data)
+	//shiftLower(0, data)
+	//PP(msg)
+	//mustDecode(orig, data, &dota.CUserMessageSayText2{})
+
+	return
+
 	if len(data) != 51 || msg.Tick != 260 {
 		return
 	}
-	// shiftLower(0, data)
-	// shiftLower(0, data)
 	PP(msg, data)
 	ioutil.WriteFile("actual", data, 0644)
 	return
-
-	// actual.unpack('B*')[0][0..100]
-	//   "11010110110000010010000000000100010000000000010001101000001101000001000000111101010100010000010101111"
-	// expected.unpack('B*')[0][0..100]
-	// "01110110001100000000100000000001000100000000000100011010000011010100010001001111010101000100000101011"
 
 	defer func() {
 		if r := recover(); r != nil {
@@ -138,13 +166,67 @@ func (p *Parser) OnCDemoPacket(msg Message, obj *dota.CDemoPacket) {
 	*/
 }
 
-func mustDecode(b []byte, msg proto.Message) {
+func mustDecode(o, b []byte, msg proto.Message) {
 	err := proto.Unmarshal(b, msg)
 	if err != nil {
 		spew.Println(err)
 	}
-	PP(msg)
+	PP(o, b, msg)
 }
+
+/*
+([]uint8) (len=40 cap=40) {
+	00000000  d6 95 20 04 40 04 68 34  10 3d 51 05 7d 0d a1 85  |.. .@.h4.=Q.}...|
+	00000010  d1 7d 05 b1 b1 89 1c b4  85 b9 d9 95 c9 d5 a9 0c  |.}..............|
+	00000020  bc b9 95 c9 00 e8 00 00                           |........|
+}
+
+([]uint8) (len=40 cap=40) {
+	00000000  d6 95 20 04 40 04 68 34  10 3d 51 05 7d 0d a1 85  |.. .@.h4.=Q.}...|
+	00000010  d1 7d 05 b1 b1 89 1c b4  85 b9 d9 95 c9 d5 a9 0c  |.}..............|
+	00000020  d0 dd bd c9 00 e8 00 00                           |........|
+}
+
+([]uint8) (len=42 cap=42) {
+	00000000  d6 9d 20 04 40 04 68 34  10 3d 51 05 7d 0d a1 85  |.. .@.h4.=Q.}...|
+	00000010  d1 7d 05 b1 b1 89 1c b4  85 b9 d9 95 c9 d5 a9 14  |.}..............|
+	00000020  d0 a1 c9 95 95 c9 00 e8  00 00                    |..........|
+}
+
+([]uint8) (len=41 cap=41) {
+	00000000  d6 99 20 04 40 04 68 34  10 3d 51 05 7d 0d a1 85  |.. .@.h4.=Q.}...|
+	00000010  d1 7d 05 b1 b1 89 1c b4  85 b9 d9 95 c9 d5 a9 10  |.}..............|
+	00000020  98 bd d5 c9 c9 00 e8 00  00                       |.........|
+}
+
+([]uint8) (len=41 cap=41) {
+	00000000  d6 99 20 04 40 04 68 34  10 3d 51 05 7d 0d a1 85  |.. .@.h4.=Q.}...|
+	00000010  d1 7d 05 b1 b1 89 1c b4  85 b9 d9 95 c9 d5 a9 10  |.}..............|
+	00000020  98 a5 d9 95 c9 00 e8 00  00                       |.........|
+}
+
+([]uint8) (len=64 cap=64) {
+	00000000  d6 f5 20 04 40 04 68 34  10 3d 51 05 7d 0d a1 85  |.. .@.h4.=Q.}...|
+	00000010  d1 7d 05 b1 b1 89 1c b4  85 b9 d9 95 c9 d5 a9 6c  |.}.............l|
+	00000020  bc b9 95 81 a0 d5 b9 91  c9 95 91 81 84 b9 91 81  |................|
+	00000030  d0 dd 95 b9 d1 e5 81 98  a5 d9 95 c9 00 e8 00 00  |................|
+}
+
+([]uint8) (len=164 cap=164) {
+	00000000  d6 81 06 20 04 40 04 68  34 10 3d 51 05 7d 0d a1  |... .@.h4.=Q.}..|
+	00000010  85 d1 7d 05 b1 b1 89 1c  b4 85 b9 d9 95 c9 d5 a9  |..}.............|
+	00000020  f8 31 bd c9 95 b5 81 a4  c1 cd d5 b5 81 90 bd b1  |.1..............|
+	00000030  bd c9 81 cc a5 d1 81 84  b5 95 d1 b1 80 8c bd b9  |................|
+	00000040  cd 95 8d d1 95 d1 d5 c9  81 84 91 a5 c1 a5 cd 8d  |................|
+	00000050  a5 b9 9d 81 94 b1 a5 d1  b9 80 10 bd b9 95 8d 81  |................|
+	00000060  84 81 90 a5 85 b5 81 b0  95 8d d1 d5 cd b9 80 4c  |...............L|
+	00000070  95 91 81 cc a5 d1 81 84  b5 95 d1 81 a4 c1 cd d5  |................|
+	00000080  b5 81 b4 85 d5 c9 a5 cd  b9 80 34 85 95 8d 95 b9  |..........4.....|
+	00000090  85 cd 81 8c bd b9 9d d5  95 81 b0 a5 9d d5 b1 c9  |................|
+	000000a0  00 e8 00 00                                       |....|
+}
+
+*/
 
 func (p *Parser) OnCDemoSpawnGroups(msg Message, obj *dota.CDemoSpawnGroups) {
 	// PP(obj.GetData())

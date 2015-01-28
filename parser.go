@@ -16,7 +16,13 @@ import (
 )
 
 func main() {
-	fd, err := os.Open("/home/manveru/Dropbox/Dotabuff/dotabuff_rocks.dem")
+	for _, arg := range os.Args[1:] {
+		parse(arg)
+	}
+}
+
+func parse(path string) {
+	fd, err := os.Open(path)
 	if err != nil {
 		panic(err)
 	}
@@ -75,7 +81,7 @@ func (p *Parser) ReadHeader() error {
 	}
 
 	if header.Magic != ProtobufDemoSource2Magic {
-		panic(spew.Sprintf("Expected %v but got %v", ProtobufDemoSource2Magic, header.Magic))
+		panic(spew.Sprintf("Expected %s but got %s", ProtobufDemoSource2Magic, header.Magic))
 	}
 	p.Header = header
 
