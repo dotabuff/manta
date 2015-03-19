@@ -27,7 +27,12 @@ It is generated from these files:
 	network_connection.proto
 	networkbasetypes.proto
 	peertopeer_netmessages.proto
+	rendermessages.proto
 	steammessages.proto
+	steammessages_cloud.steamworkssdk.proto
+	steammessages_oauth.steamworkssdk.proto
+	steammessages_publishedfile.steamworkssdk.proto
+	steammessages_unified_base.steamworkssdk.proto
 	te.proto
 	usermessages.proto
 
@@ -120,7 +125,7 @@ It has these top-level messages:
 */
 package dota
 
-import proto "code.google.com/p/goprotobuf/proto"
+import proto "github.com/golang/protobuf/proto"
 import math "math"
 
 // Reference imports to suppress errors if they are not otherwise used.

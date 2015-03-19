@@ -4,7 +4,7 @@
 
 package dota
 
-import proto "code.google.com/p/goprotobuf/proto"
+import proto "github.com/golang/protobuf/proto"
 import math "math"
 import google_protobuf "github.com/dotabuff/manta/dota/google/protobuf"
 
