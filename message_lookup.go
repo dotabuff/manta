@@ -413,7 +413,7 @@ func MessageTypeForEBaseGameEvents(t dota.EBaseGameEvents) (proto.Message, error
 	return nil, fmt.Errorf("no type found: dota.EBaseGameEvents(%d)", t)
 }
 
-func (p *Parser) HandleRawMessage(t int, b []byte) error {
+func (p *Parser) HandleRawMessage(t int32, b []byte, debug bool) error {
 	var m proto.Message
 	var err error
 
@@ -422,6 +422,8 @@ func (p *Parser) HandleRawMessage(t int, b []byte) error {
 		if hook, ok := p.hookNET[net]; ok {
 			callHook(b, m, hook)
 			return nil
+		} else if debug {
+			fmt.Printf("ignoring %T\n", m)
 		}
 	}
 
@@ -430,6 +432,8 @@ func (p *Parser) HandleRawMessage(t int, b []byte) error {
 		if hook, ok := p.hookSVC[svc]; ok {
 			callHook(b, m, hook)
 			return nil
+		} else if debug {
+			fmt.Printf("ignoring %T\n", m)
 		}
 	}
 
@@ -438,6 +442,8 @@ func (p *Parser) HandleRawMessage(t int, b []byte) error {
 		if hook, ok := p.hookDUM[dum]; ok {
 			callHook(b, m, hook)
 			return nil
+		} else if debug {
+			fmt.Printf("ignoring %T\n", m)
 		}
 	}
 
@@ -446,6 +452,8 @@ func (p *Parser) HandleRawMessage(t int, b []byte) error {
 		if hook, ok := p.hookBEM[bem]; ok {
 			callHook(b, m, hook)
 			return nil
+		} else if debug {
+			fmt.Printf("ignoring %T\n", m)
 		}
 	}
 
@@ -454,6 +462,8 @@ func (p *Parser) HandleRawMessage(t int, b []byte) error {
 		if hook, ok := p.hookBUM[bum]; ok {
 			callHook(b, m, hook)
 			return nil
+		} else if debug {
+			fmt.Printf("ignoring %T\n", m)
 		}
 	}
 
@@ -462,8 +472,17 @@ func (p *Parser) HandleRawMessage(t int, b []byte) error {
 		if hook, ok := p.hookBGE[bge]; ok {
 			callHook(b, m, hook)
 			return nil
+		} else if debug {
+			fmt.Printf("ignoring %T\n", m)
 		}
 	}
 
 	return fmt.Errorf("missing handler for %d", t)
 }
+func (p *Parser) HookDEM(t dota.EDemoCommands, f func(proto.Message))       { p.hookDEM[t] = f }
+func (p *Parser) HookNET(t dota.NET_Messages, f func(proto.Message))        { p.hookNET[t] = f }
+func (p *Parser) HookSVC(t dota.SVC_Messages, f func(proto.Message))        { p.hookSVC[t] = f }
+func (p *Parser) HookDUM(t dota.EDotaUserMessages, f func(proto.Message))   { p.hookDUM[t] = f }
+func (p *Parser) HookBEM(t dota.EBaseEntityMessages, f func(proto.Message)) { p.hookBEM[t] = f }
+func (p *Parser) HookBUM(t dota.EBaseUserMessages, f func(proto.Message))   { p.hookBUM[t] = f }
+func (p *Parser) HookBGE(t dota.EBaseGameEvents, f func(proto.Message))     { p.hookBGE[t] = f }

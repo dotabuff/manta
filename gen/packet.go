@@ -123,6 +123,7 @@ import (
 
 	values := map[int]string{}
 	rawMsg := []string{}
+	rawHook := []string{}
 
 	for _, enum := range enums {
 		switches := []string{}
@@ -198,14 +199,20 @@ func %s(t %s) (proto.Message, error) {
 		if hook, ok := p.hook%s[%s]; ok {
 			callHook(b, m, hook)
 			return nil
+		} else if debug {
+			fmt.Printf("ignoring %%T\n", m)
 		}
 	}
 		`, hookVar, typName, funName, hookVar, enum.Hook, hookVar))
 		}
+
+		rawHook = append(rawHook,
+			spew.Sprintf(`func (p *Parser) Hook%s(t %s, f func(proto.Message)){p.hook%s[t] = f }`,
+				enum.Hook, typName, enum.Hook))
 	}
 
 	file.WriteString(spew.Sprintf(`
-func (p *Parser) HandleRawMessage(t int, b []byte) error {
+func (p *Parser) HandleRawMessage(t int32, b []byte, debug bool) error {
 	var m proto.Message
 	var err error
 
@@ -214,6 +221,8 @@ func (p *Parser) HandleRawMessage(t int, b []byte) error {
 	return fmt.Errorf("missing handler for %%d", t)
 }
 	`, strings.Join(rawMsg, "\n")))
+
+	file.WriteString(strings.Join(rawHook, "\n"))
 
 	source, err := format.Source(file.Bytes())
 	if err != nil {

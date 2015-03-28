@@ -16,15 +16,13 @@ import (
 )
 
 func main() {
+	DEBUG = true
 	for _, arg := range os.Args[1:] {
 		parser := NewParserFromFile(arg)
-		parser.HookNET(dota.NET_Messages_net_Tick, func(m proto.Message) { PP(m) })
+		parser.HookNET(dota.NET_Messages_net_Tick, func(m proto.Message) {})
+		parser.HookSVC(dota.SVC_Messages_svc_PacketEntities, func(m proto.Message) {})
 		parser.Start()
 	}
-}
-
-func (p *Parser) HookNET(mType dota.NET_Messages, callback func(m proto.Message)) {
-	p.hookNET[mType] = callback
 }
 
 func NewParserFromFile(path string) *Parser {
@@ -36,10 +34,11 @@ func NewParserFromFile(path string) *Parser {
 	parser := &Parser{
 		sendTableId: -1,
 		stream:      bufio.NewReader(fd),
+		classInfo:   map[int]string{},
 	}
 
 	parser.hookNET = map[dota.NET_Messages]func(proto.Message){
-		dota.NET_Messages_net_SpawnGroup_Load: func(m proto.Message) { parser.OnSpawnGroupLoad(m.(*dota.CNETMsg_SpawnGroup_Load)) },
+	// dota.NET_Messages_net_SpawnGroup_Load: func(m proto.Message) { parser.OnSpawnGroupLoad(m.(*dota.CNETMsg_SpawnGroup_Load)) },
 	}
 	parser.hookSVC = map[dota.SVC_Messages]func(proto.Message){}
 	parser.hookDUM = map[dota.EDotaUserMessages]func(proto.Message){}
@@ -47,17 +46,17 @@ func NewParserFromFile(path string) *Parser {
 	parser.hookBUM = map[dota.EBaseUserMessages]func(proto.Message){}
 	parser.hookBGE = map[dota.EBaseGameEvents]func(proto.Message){}
 	parser.hookDEM = map[dota.EDemoCommands]func(proto.Message){
-		dota.EDemoCommands_DEM_FileHeader:   func(m proto.Message) {},
-		dota.EDemoCommands_DEM_SignonPacket: func(m proto.Message) {},
+		dota.EDemoCommands_DEM_FileHeader:   func(m proto.Message) { PP(m) },
+		dota.EDemoCommands_DEM_SignonPacket: func(m proto.Message) { parser.OnCDemoPacket(m.(*dota.CDemoPacket)) },
 		dota.EDemoCommands_DEM_SendTables:   func(m proto.Message) {},
-		dota.EDemoCommands_DEM_ClassInfo:    func(m proto.Message) {},
+		dota.EDemoCommands_DEM_ClassInfo:    func(m proto.Message) { parser.OnCDemoClassInfo(m.(*dota.CDemoClassInfo)) },
 		dota.EDemoCommands_DEM_ConsoleCmd:   func(m proto.Message) {},
 		dota.EDemoCommands_DEM_FileInfo:     func(m proto.Message) { parser.Stop() },
-		dota.EDemoCommands_DEM_Packet:       func(m proto.Message) {},
+		dota.EDemoCommands_DEM_Packet:       func(m proto.Message) { parser.OnCDemoPacket(m.(*dota.CDemoPacket)) },
 		dota.EDemoCommands_DEM_SpawnGroups:  func(m proto.Message) { parser.OnCDemoSpawnGroups(m.(*dota.CDemoSpawnGroups)) },
 		dota.EDemoCommands_DEM_Stop:         func(m proto.Message) {},
-		dota.EDemoCommands_DEM_StringTables: func(m proto.Message) {},
-		dota.EDemoCommands_DEM_SyncTick:     func(m proto.Message) {},
+		dota.EDemoCommands_DEM_StringTables: func(m proto.Message) { parser.OnCDemoStringTables(m.(*dota.CDemoStringTables)) },
+		dota.EDemoCommands_DEM_SyncTick:     func(m proto.Message) { PP(m) },
 		dota.EDemoCommands_DEM_UserCmd:      func(m proto.Message) { parser.OnCDemoUserCmd(m.(*dota.CDemoUserCmd)) },
 	}
 
@@ -78,13 +77,15 @@ type Parser struct {
 	Header      DemoHeader
 	isStopping  bool
 	sendTableId int64
-	hookDEM     map[dota.EDemoCommands]func(proto.Message)
-	hookNET     map[dota.NET_Messages]func(proto.Message)
-	hookSVC     map[dota.SVC_Messages]func(proto.Message)
-	hookDUM     map[dota.EDotaUserMessages]func(proto.Message)
-	hookBEM     map[dota.EBaseEntityMessages]func(proto.Message)
-	hookBUM     map[dota.EBaseUserMessages]func(proto.Message)
-	hookBGE     map[dota.EBaseGameEvents]func(proto.Message)
+	classInfo   map[int]string
+
+	hookDEM map[dota.EDemoCommands]func(proto.Message)
+	hookNET map[dota.NET_Messages]func(proto.Message)
+	hookSVC map[dota.SVC_Messages]func(proto.Message)
+	hookDUM map[dota.EDotaUserMessages]func(proto.Message)
+	hookBEM map[dota.EBaseEntityMessages]func(proto.Message)
+	hookBUM map[dota.EBaseUserMessages]func(proto.Message)
+	hookBGE map[dota.EBaseGameEvents]func(proto.Message)
 }
 
 func (p *Parser) Start() {
@@ -201,10 +202,10 @@ func (p *Parser) HandleDemoMessage(msg Message) error {
 			hook(m)
 			return nil
 		} else {
-			return spew.Errorf("Unhandled Raw Message: %v", msg)
+			return spew.Errorf("Unhandled Raw Message: %v", msg.Type)
 		}
 	}
-	return spew.Errorf("Unknown Raw Message: %v", msg)
+	return spew.Errorf("Unknown Raw Message: %v", msg.Type)
 }
 
 var (

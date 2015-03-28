@@ -7,10 +7,6 @@ func (p *Parser) OnCDemoFileHeader(fileHeader *dota.CDemoFileHeader) {
 	PP(fileHeader)
 }
 
-func (p *Parser) OnCDemoStringTables(stringTables *dota.CDemoStringTables) {
-	PP(stringTables)
-}
-
 func (p *Parser) OnCDemoSendTables(sendTables *dota.CDemoSendTables) {
 	b := NewBitReader(sendTables.GetData())
 	l := b.ReadVarInt()

@@ -1,12 +1,21 @@
 package main
 
 import (
-	"github.com/davecgh/go-spew/spew"
+	"os"
+
 	"github.com/dotabuff/manta/dota"
 	"github.com/golang/protobuf/proto"
 )
 
-//go:generate go run gen/packet.go dota packet.go
+var DEBUG bool
+
+func init() {
+	if os.Getenv("DEBUG") != "" {
+		DEBUG = true
+	}
+}
+
+//go:generate go run gen/packet.go dota message_lookup.go
 
 func (p *Parser) OnCDemoPacket(obj *dota.CDemoPacket) error {
 	b := NewBitReader(obj.GetData())
@@ -17,14 +26,8 @@ func (p *Parser) OnCDemoPacket(obj *dota.CDemoPacket) error {
 		}
 		demType, demBytes := b.ReadInnerPacket()
 
-		dem := dota.EDemoCommands(demType)
-		if m, err := MessageTypeForEDemoCommands(dem); err == nil {
-			if hook, ok := p.hookDEM[dem]; ok {
-				callHook(demBytes, m, hook)
-			}
-		} else {
-			PP(dem)
-			return (spew.Errorf("unknown message"))
+		if err := p.HandleRawMessage(demType, demBytes, DEBUG); err != nil {
+			return err
 		}
 	}
 }
