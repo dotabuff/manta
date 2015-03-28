@@ -17,11 +17,17 @@ import (
 
 func main() {
 	for _, arg := range os.Args[1:] {
-		parse(arg)
+		parser := NewParserFromFile(arg)
+		parser.HookNET(dota.NET_Messages_net_Tick, func(m proto.Message) { PP(m) })
+		parser.Start()
 	}
 }
 
-func parse(path string) {
+func (p *Parser) HookNET(mType dota.NET_Messages, callback func(m proto.Message)) {
+	p.hookNET[mType] = callback
+}
+
+func NewParserFromFile(path string) *Parser {
 	fd, err := os.Open(path)
 	if err != nil {
 		panic(err)
@@ -32,19 +38,34 @@ func parse(path string) {
 		stream:      bufio.NewReader(fd),
 	}
 
-	if err = parser.ReadHeader(); err != nil {
+	parser.hookNET = map[dota.NET_Messages]func(proto.Message){
+		dota.NET_Messages_net_SpawnGroup_Load: func(m proto.Message) { parser.OnSpawnGroupLoad(m.(*dota.CNETMsg_SpawnGroup_Load)) },
+	}
+	parser.hookSVC = map[dota.SVC_Messages]func(proto.Message){}
+	parser.hookDUM = map[dota.EDotaUserMessages]func(proto.Message){}
+	parser.hookBEM = map[dota.EBaseEntityMessages]func(proto.Message){}
+	parser.hookBUM = map[dota.EBaseUserMessages]func(proto.Message){}
+	parser.hookBGE = map[dota.EBaseGameEvents]func(proto.Message){}
+	parser.hookDEM = map[dota.EDemoCommands]func(proto.Message){
+		dota.EDemoCommands_DEM_FileHeader:   func(m proto.Message) {},
+		dota.EDemoCommands_DEM_SignonPacket: func(m proto.Message) {},
+		dota.EDemoCommands_DEM_SendTables:   func(m proto.Message) {},
+		dota.EDemoCommands_DEM_ClassInfo:    func(m proto.Message) {},
+		dota.EDemoCommands_DEM_ConsoleCmd:   func(m proto.Message) {},
+		dota.EDemoCommands_DEM_FileInfo:     func(m proto.Message) { parser.Stop() },
+		dota.EDemoCommands_DEM_Packet:       func(m proto.Message) {},
+		dota.EDemoCommands_DEM_SpawnGroups:  func(m proto.Message) { parser.OnCDemoSpawnGroups(m.(*dota.CDemoSpawnGroups)) },
+		dota.EDemoCommands_DEM_Stop:         func(m proto.Message) {},
+		dota.EDemoCommands_DEM_StringTables: func(m proto.Message) {},
+		dota.EDemoCommands_DEM_SyncTick:     func(m proto.Message) {},
+		dota.EDemoCommands_DEM_UserCmd:      func(m proto.Message) { parser.OnCDemoUserCmd(m.(*dota.CDemoUserCmd)) },
+	}
+
+	if err = parser.readHeader(); err != nil {
 		panic(err)
 	}
 
-	for !parser.isStopping {
-		if msg, err := parser.Read(); err != nil {
-			panic(err)
-		} else {
-			if err = parser.OnRawMessage(msg); err != nil {
-				panic(err)
-			}
-		}
-	}
+	return parser
 }
 
 type DemoHeader struct {
@@ -57,6 +78,25 @@ type Parser struct {
 	Header      DemoHeader
 	isStopping  bool
 	sendTableId int64
+	hookDEM     map[dota.EDemoCommands]func(proto.Message)
+	hookNET     map[dota.NET_Messages]func(proto.Message)
+	hookSVC     map[dota.SVC_Messages]func(proto.Message)
+	hookDUM     map[dota.EDotaUserMessages]func(proto.Message)
+	hookBEM     map[dota.EBaseEntityMessages]func(proto.Message)
+	hookBUM     map[dota.EBaseUserMessages]func(proto.Message)
+	hookBGE     map[dota.EBaseGameEvents]func(proto.Message)
+}
+
+func (p *Parser) Start() {
+	for !p.isStopping {
+		if msg, err := p.read(); err != nil {
+			panic(err)
+		} else {
+			if err = p.HandleDemoMessage(msg); err != nil {
+				panic(err)
+			}
+		}
+	}
 }
 
 func (p *Parser) Stop() {
@@ -73,7 +113,7 @@ type Message struct {
 
 var ProtobufDemoSource2Magic = [8]byte{'P', 'B', 'D', 'E', 'M', 'S', '2', '\000'}
 
-func (p *Parser) ReadHeader() error {
+func (p *Parser) readHeader() error {
 	header := DemoHeader{}
 	err := binary.Read(p.stream, binary.LittleEndian, &header)
 	if err != nil {
@@ -88,7 +128,7 @@ func (p *Parser) ReadHeader() error {
 	return nil
 }
 
-func (p *Parser) Read() (Message, error) {
+func (p *Parser) read() (Message, error) {
 	msg := Message{}
 
 	binType, err := binary.ReadUvarint(p.stream)
@@ -148,85 +188,28 @@ func (p *Parser) Read() (Message, error) {
 	return msg, nil
 }
 
-func (p *Parser) OnRawMessage(msg Message) error {
-	switch msg.Type {
-	case dota.EDemoCommands_DEM_FileHeader:
-		return p.OnProtoMessage(msg, &dota.CDemoFileHeader{})
-	case dota.EDemoCommands_DEM_SignonPacket:
-		return p.OnProtoMessage(msg, &dota.CDemoPacket{})
-	case dota.EDemoCommands_DEM_SendTables:
-		return p.OnProtoMessage(msg, &dota.CDemoSendTables{})
-	case dota.EDemoCommands_DEM_ClassInfo:
-		return p.OnProtoMessage(msg, &dota.CDemoClassInfo{})
-	case dota.EDemoCommands_DEM_ConsoleCmd:
-		return p.OnProtoMessage(msg, &dota.CDemoConsoleCmd{})
-	case dota.EDemoCommands_DEM_FileInfo:
-		return p.OnProtoMessage(msg, &dota.CDemoFileInfo{})
-	case dota.EDemoCommands_DEM_Packet:
-		return p.OnProtoMessage(msg, &dota.CDemoPacket{})
-	case dota.EDemoCommands_DEM_SpawnGroups:
-		return p.OnProtoMessage(msg, &dota.CDemoSpawnGroups{})
-	case dota.EDemoCommands_DEM_Stop:
-		return p.OnProtoMessage(msg, &dota.CDemoStop{})
-	case dota.EDemoCommands_DEM_StringTables:
-		return p.OnProtoMessage(msg, &dota.CDemoStringTables{})
-	case dota.EDemoCommands_DEM_SyncTick:
-		return p.OnProtoMessage(msg, &dota.CDemoSyncTick{})
-	case dota.EDemoCommands_DEM_UserCmd:
-		return p.OnProtoMessage(msg, &dota.CDemoUserCmd{})
-	}
-	return spew.Errorf("Unhandled Raw Message: %v", msg)
-}
-
-type HasGetData interface {
-	GetData() []byte
-}
-
-func (p *Parser) OnProtoMessage(msg Message, obj proto.Message) error {
-	if err := proto.Unmarshal(msg.data, obj); err != nil {
-		return err
-	}
-	msg.data = nil
-
-	/*
-		isHasGetData, ok := obj.(HasGetData)
-		if ok {
-			PP(msg.Compressed, msg.Type, isHasGetData.GetData())
+func (p *Parser) HandleDemoMessage(msg Message) error {
+	if _, ok := dota.EDemoCommands_name[int32(msg.Type)]; ok {
+		if hook, ok := p.hookDEM[msg.Type]; ok {
+			m, err := MessageTypeForEDemoCommands(msg.Type)
+			if err != nil {
+				return err
+			}
+			if err := proto.Unmarshal(msg.data, m); err != nil {
+				return err
+			}
+			hook(m)
+			return nil
 		} else {
-			PP(msg.Compressed, msg.Type, obj)
+			return spew.Errorf("Unhandled Raw Message: %v", msg)
 		}
-	*/
-
-	switch typedObject := obj.(type) {
-	case *dota.CDemoFileHeader:
-		p.OnCDemoFileHeader(msg, typedObject)
-	case *dota.CDemoPacket:
-		p.OnCDemoPacket(msg, typedObject)
-	case *dota.CDemoSendTables:
-		p.OnCDemoSendTables(msg, typedObject)
-	case *dota.CDemoClassInfo:
-		p.OnCDemoClassInfo(msg, typedObject)
-	case *dota.CDemoSyncTick:
-		p.OnCDemoSyncTick(msg, typedObject)
-	case *dota.CDemoStringTables:
-		p.OnCDemoStringTables(msg, typedObject)
-	case *dota.CDemoSpawnGroups:
-		p.OnCDemoSpawnGroups(msg, typedObject)
-	case *dota.CDemoConsoleCmd:
-		p.OnCDemoConsoleCmd(msg, typedObject)
-	case *dota.CDemoUserCmd:
-		p.OnCDemoUserCmd(msg, typedObject)
-	case *dota.CDemoStop:
-		p.OnCDemoStop(msg, typedObject)
-	default:
-		PP(msg, obj)
 	}
-
-	return nil
+	return spew.Errorf("Unknown Raw Message: %v", msg)
 }
 
 var (
 	P = spew.Dump
+	E = spew.Errorf
 )
 
 // use this to make debugging output that shows the location.

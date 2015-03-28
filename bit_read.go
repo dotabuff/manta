@@ -33,7 +33,7 @@ func (br *BitReader) Length() int      { return len(br.buffer) }
 func (br *BitReader) CurrentBit() int  { return br.currentBit }
 func (br *BitReader) CurrentByte() int { return br.currentBit / 8 }
 func (br *BitReader) BitsLeft() int    { return (len(br.buffer) * 8) - br.currentBit }
-func (br *BitReader) BytesLeft() int   { return len(br.buffer) - (br.currentBit * 8) }
+func (br *BitReader) BytesLeft() int   { return len(br.buffer) - (br.currentBit / 8) }
 
 type Vector3 struct {
 	X, Y, Z float64
@@ -182,12 +182,9 @@ func (br *BitReader) ReadByte() byte {
 	return byte(br.ReadUBits(8))
 }
 
-func (br *BitReader) ReadBytes(nBytes int) []byte {
-	if nBytes <= 0 {
-		panic("Must be positive integer: nBytes")
-	}
+func (br *BitReader) ReadBytes(nBytes uint) []byte {
 	result := make([]byte, nBytes)
-	for i := 0; i < nBytes; i++ {
+	for i := uint(0); i < nBytes; i++ {
 		result[i] = br.ReadByte()
 	}
 	return result
@@ -272,7 +269,7 @@ func (br *BitReader) ReadStringN(n int) string {
 func (br *BitReader) ReadLengthPrefixedString() string {
 	stringLength := uint(br.ReadUBits(9))
 	if stringLength > 0 {
-		return string(br.ReadBytes(int(stringLength)))
+		return string(br.ReadBytes(stringLength))
 	}
 	return ""
 }
@@ -288,4 +285,27 @@ func (br *BitReader) ReadNextEntityIndex(oldEntity int) int {
 		ret += (br.ReadUBits(8) << 4)
 	}
 	return oldEntity + 1 + int(ret)
+}
+
+// [2 bits header][X bits type][varint size][8*size content]
+// X = (header 00 = 4; header 01 = 8; header 10 = 12).
+// Die ersten 4 bits vor den Rest pasten, oder via bitmask machen.
+// Du musst 6 bits lesen, die ersten beiden davon entscheiden wie viel du dazu lesen musst
+// also [XXYYYY]
+// die ersten 4 musst du vor den rest, den du liest, pushen
+// also wenn du danach noch mal vier liest musst du das so machen:
+// [nimm 4 untere bits von den 6 die du liest], xor (4 neue bits gelesen und nach vorne geshifted)
+func (br *BitReader) ReadInnerPacket() (int32, []byte) {
+	initial := br.ReadUBits(6)
+	header := initial >> 4
+	var pType uint
+	if header == 0 {
+		pType = initial
+	} else {
+		pType = (initial & 15) | (br.ReadUBits(int(header*4+(((2-header)>>31)&16))) << 4)
+	}
+
+	pLen := br.ReadVarInt()
+	pBytes := br.ReadBytes(pLen)
+	return int32(pType), pBytes
 }
