@@ -66,6 +66,59 @@ type Callbacks struct {
 	OnCSVCMsg_TempEntities                    func(*dota.CSVCMsg_TempEntities) error
 	OnCSVCMsg_GameEventList                   func(*dota.CSVCMsg_GameEventList) error
 	OnCSVCMsg_FullFrameSplit                  func(*dota.CSVCMsg_FullFrameSplit) error
+	OnCUserMessageAchievementEvent            func(*dota.CUserMessageAchievementEvent) error
+	OnCUserMessageCloseCaption                func(*dota.CUserMessageCloseCaption) error
+	OnCUserMessageCloseCaptionDirect          func(*dota.CUserMessageCloseCaptionDirect) error
+	OnCUserMessageCurrentTimescale            func(*dota.CUserMessageCurrentTimescale) error
+	OnCUserMessageDesiredTimescale            func(*dota.CUserMessageDesiredTimescale) error
+	OnCUserMessageFade                        func(*dota.CUserMessageFade) error
+	OnCUserMessageGameTitle                   func(*dota.CUserMessageGameTitle) error
+	OnCUserMessageHintText                    func(*dota.CUserMessageHintText) error
+	OnCUserMessageHudMsg                      func(*dota.CUserMessageHudMsg) error
+	OnCUserMessageHudText                     func(*dota.CUserMessageHudText) error
+	OnCUserMessageKeyHintText                 func(*dota.CUserMessageKeyHintText) error
+	OnCUserMessageColoredText                 func(*dota.CUserMessageColoredText) error
+	OnCUserMessageRequestState                func(*dota.CUserMessageRequestState) error
+	OnCUserMessageResetHUD                    func(*dota.CUserMessageResetHUD) error
+	OnCUserMessageRumble                      func(*dota.CUserMessageRumble) error
+	OnCUserMessageSayText                     func(*dota.CUserMessageSayText) error
+	OnCUserMessageSayText2                    func(*dota.CUserMessageSayText2) error
+	OnCUserMessageSayTextChannel              func(*dota.CUserMessageSayTextChannel) error
+	OnCUserMessageShake                       func(*dota.CUserMessageShake) error
+	OnCUserMessageShakeDir                    func(*dota.CUserMessageShakeDir) error
+	OnCUserMessageTextMsg                     func(*dota.CUserMessageTextMsg) error
+	OnCUserMessageScreenTilt                  func(*dota.CUserMessageScreenTilt) error
+	OnCUserMessageTrain                       func(*dota.CUserMessageTrain) error
+	OnCUserMessageVGUIMenu                    func(*dota.CUserMessageVGUIMenu) error
+	OnCUserMessageVoiceMask                   func(*dota.CUserMessageVoiceMask) error
+	OnCUserMessageVoiceSubtitle               func(*dota.CUserMessageVoiceSubtitle) error
+	OnCUserMessageSendAudio                   func(*dota.CUserMessageSendAudio) error
+	OnCUserMessageItemPickup                  func(*dota.CUserMessageItemPickup) error
+	OnCUserMessageAmmoDenied                  func(*dota.CUserMessageAmmoDenied) error
+	OnCUserMessageCrosshairAngle              func(*dota.CUserMessageCrosshairAngle) error
+	OnCUserMessageShowMenu                    func(*dota.CUserMessageShowMenu) error
+	OnCUserMessageCreditsMsg                  func(*dota.CUserMessageCreditsMsg) error
+	OnCUserMessageCloseCaptionPlaceholder     func(*dota.CUserMessageCloseCaptionPlaceholder) error
+	OnCUserMessageCameraTransition            func(*dota.CUserMessageCameraTransition) error
+	OnCEntityMessagePlayJingle                func(*dota.CEntityMessagePlayJingle) error
+	OnCEntityMessageScreenOverlay             func(*dota.CEntityMessageScreenOverlay) error
+	OnCEntityMessageRemoveAllDecals           func(*dota.CEntityMessageRemoveAllDecals) error
+	OnCEntityMessagePropagateForce            func(*dota.CEntityMessagePropagateForce) error
+	OnCEntityMessageDoSpark                   func(*dota.CEntityMessageDoSpark) error
+	OnCEntityMessageFixAngle                  func(*dota.CEntityMessageFixAngle) error
+	OnCMsgVDebugGameSessionIDEvent            func(*dota.CMsgVDebugGameSessionIDEvent) error
+	OnCMsgPlaceDecalEvent                     func(*dota.CMsgPlaceDecalEvent) error
+	OnCMsgClearWorldDecalsEvent               func(*dota.CMsgClearWorldDecalsEvent) error
+	OnCMsgClearEntityDecalsEvent              func(*dota.CMsgClearEntityDecalsEvent) error
+	OnCMsgClearDecalsForSkeletonInstanceEvent func(*dota.CMsgClearDecalsForSkeletonInstanceEvent) error
+	OnCMsgSource1LegacyGameEventList          func(*dota.CMsgSource1LegacyGameEventList) error
+	OnCMsgSource1LegacyListenEvents           func(*dota.CMsgSource1LegacyListenEvents) error
+	OnCMsgSource1LegacyGameEvent              func(*dota.CMsgSource1LegacyGameEvent) error
+	OnCMsgSosStartSoundEvent                  func(*dota.CMsgSosStartSoundEvent) error
+	OnCMsgSosStopSoundEvent                   func(*dota.CMsgSosStopSoundEvent) error
+	OnCMsgSosSetSoundEventParam               func(*dota.CMsgSosSetSoundEventParam) error
+	OnCMsgSosSetLibraryStackField             func(*dota.CMsgSosSetLibraryStackField) error
+	OnCMsgSosStopSoundEventHash               func(*dota.CMsgSosStopSoundEventHash) error
 	OnCDOTAUserMsg_AIDebugLine                func(*dota.CDOTAUserMsg_AIDebugLine) error
 	OnCDOTAUserMsg_ChatEvent                  func(*dota.CDOTAUserMsg_ChatEvent) error
 	OnCDOTAUserMsg_CombatHeroPositions        func(*dota.CDOTAUserMsg_CombatHeroPositions) error
@@ -137,59 +190,6 @@ type Callbacks struct {
 	OnCDOTAUserMsg_BuyBackStateAlert          func(*dota.CDOTAUserMsg_BuyBackStateAlert) error
 	OnCDOTAUserMsg_SpeechBubble               func(*dota.CDOTAUserMsg_SpeechBubble) error
 	OnCDOTAUserMsg_CustomHeaderMessage        func(*dota.CDOTAUserMsg_CustomHeaderMessage) error
-	OnCEntityMessagePlayJingle                func(*dota.CEntityMessagePlayJingle) error
-	OnCEntityMessageScreenOverlay             func(*dota.CEntityMessageScreenOverlay) error
-	OnCEntityMessageRemoveAllDecals           func(*dota.CEntityMessageRemoveAllDecals) error
-	OnCEntityMessagePropagateForce            func(*dota.CEntityMessagePropagateForce) error
-	OnCEntityMessageDoSpark                   func(*dota.CEntityMessageDoSpark) error
-	OnCEntityMessageFixAngle                  func(*dota.CEntityMessageFixAngle) error
-	OnCUserMessageAchievementEvent            func(*dota.CUserMessageAchievementEvent) error
-	OnCUserMessageCloseCaption                func(*dota.CUserMessageCloseCaption) error
-	OnCUserMessageCloseCaptionDirect          func(*dota.CUserMessageCloseCaptionDirect) error
-	OnCUserMessageCurrentTimescale            func(*dota.CUserMessageCurrentTimescale) error
-	OnCUserMessageDesiredTimescale            func(*dota.CUserMessageDesiredTimescale) error
-	OnCUserMessageFade                        func(*dota.CUserMessageFade) error
-	OnCUserMessageGameTitle                   func(*dota.CUserMessageGameTitle) error
-	OnCUserMessageHintText                    func(*dota.CUserMessageHintText) error
-	OnCUserMessageHudMsg                      func(*dota.CUserMessageHudMsg) error
-	OnCUserMessageHudText                     func(*dota.CUserMessageHudText) error
-	OnCUserMessageKeyHintText                 func(*dota.CUserMessageKeyHintText) error
-	OnCUserMessageColoredText                 func(*dota.CUserMessageColoredText) error
-	OnCUserMessageRequestState                func(*dota.CUserMessageRequestState) error
-	OnCUserMessageResetHUD                    func(*dota.CUserMessageResetHUD) error
-	OnCUserMessageRumble                      func(*dota.CUserMessageRumble) error
-	OnCUserMessageSayText                     func(*dota.CUserMessageSayText) error
-	OnCUserMessageSayText2                    func(*dota.CUserMessageSayText2) error
-	OnCUserMessageSayTextChannel              func(*dota.CUserMessageSayTextChannel) error
-	OnCUserMessageShake                       func(*dota.CUserMessageShake) error
-	OnCUserMessageShakeDir                    func(*dota.CUserMessageShakeDir) error
-	OnCUserMessageTextMsg                     func(*dota.CUserMessageTextMsg) error
-	OnCUserMessageScreenTilt                  func(*dota.CUserMessageScreenTilt) error
-	OnCUserMessageTrain                       func(*dota.CUserMessageTrain) error
-	OnCUserMessageVGUIMenu                    func(*dota.CUserMessageVGUIMenu) error
-	OnCUserMessageVoiceMask                   func(*dota.CUserMessageVoiceMask) error
-	OnCUserMessageVoiceSubtitle               func(*dota.CUserMessageVoiceSubtitle) error
-	OnCUserMessageSendAudio                   func(*dota.CUserMessageSendAudio) error
-	OnCUserMessageItemPickup                  func(*dota.CUserMessageItemPickup) error
-	OnCUserMessageAmmoDenied                  func(*dota.CUserMessageAmmoDenied) error
-	OnCUserMessageCrosshairAngle              func(*dota.CUserMessageCrosshairAngle) error
-	OnCUserMessageShowMenu                    func(*dota.CUserMessageShowMenu) error
-	OnCUserMessageCreditsMsg                  func(*dota.CUserMessageCreditsMsg) error
-	OnCUserMessageCloseCaptionPlaceholder     func(*dota.CUserMessageCloseCaptionPlaceholder) error
-	OnCUserMessageCameraTransition            func(*dota.CUserMessageCameraTransition) error
-	OnCMsgVDebugGameSessionIDEvent            func(*dota.CMsgVDebugGameSessionIDEvent) error
-	OnCMsgPlaceDecalEvent                     func(*dota.CMsgPlaceDecalEvent) error
-	OnCMsgClearWorldDecalsEvent               func(*dota.CMsgClearWorldDecalsEvent) error
-	OnCMsgClearEntityDecalsEvent              func(*dota.CMsgClearEntityDecalsEvent) error
-	OnCMsgClearDecalsForSkeletonInstanceEvent func(*dota.CMsgClearDecalsForSkeletonInstanceEvent) error
-	OnCMsgSource1LegacyGameEventList          func(*dota.CMsgSource1LegacyGameEventList) error
-	OnCMsgSource1LegacyListenEvents           func(*dota.CMsgSource1LegacyListenEvents) error
-	OnCMsgSource1LegacyGameEvent              func(*dota.CMsgSource1LegacyGameEvent) error
-	OnCMsgSosStartSoundEvent                  func(*dota.CMsgSosStartSoundEvent) error
-	OnCMsgSosStopSoundEvent                   func(*dota.CMsgSosStopSoundEvent) error
-	OnCMsgSosSetSoundEventParam               func(*dota.CMsgSosSetSoundEventParam) error
-	OnCMsgSosSetLibraryStackField             func(*dota.CMsgSosSetLibraryStackField) error
-	OnCMsgSosStopSoundEventHash               func(*dota.CMsgSosStopSoundEventHash) error
 }
 
 func (p *Parser) CallByDemoType(t int32, raw []byte) error {
@@ -718,6 +718,483 @@ func (p *Parser) CallByPacketType(t int32, raw []byte) error {
 	case 70: // dota.SVC_Messages_svc_FullFrameSplit
 		if cb := callbacks.OnCSVCMsg_FullFrameSplit; cb != nil {
 			msg := &dota.CSVCMsg_FullFrameSplit{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 101: // dota.EBaseUserMessages_UM_AchievementEvent
+		if cb := callbacks.OnCUserMessageAchievementEvent; cb != nil {
+			msg := &dota.CUserMessageAchievementEvent{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 102: // dota.EBaseUserMessages_UM_CloseCaption
+		if cb := callbacks.OnCUserMessageCloseCaption; cb != nil {
+			msg := &dota.CUserMessageCloseCaption{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 103: // dota.EBaseUserMessages_UM_CloseCaptionDirect
+		if cb := callbacks.OnCUserMessageCloseCaptionDirect; cb != nil {
+			msg := &dota.CUserMessageCloseCaptionDirect{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 104: // dota.EBaseUserMessages_UM_CurrentTimescale
+		if cb := callbacks.OnCUserMessageCurrentTimescale; cb != nil {
+			msg := &dota.CUserMessageCurrentTimescale{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 105: // dota.EBaseUserMessages_UM_DesiredTimescale
+		if cb := callbacks.OnCUserMessageDesiredTimescale; cb != nil {
+			msg := &dota.CUserMessageDesiredTimescale{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 106: // dota.EBaseUserMessages_UM_Fade
+		if cb := callbacks.OnCUserMessageFade; cb != nil {
+			msg := &dota.CUserMessageFade{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 107: // dota.EBaseUserMessages_UM_GameTitle
+		if cb := callbacks.OnCUserMessageGameTitle; cb != nil {
+			msg := &dota.CUserMessageGameTitle{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 109: // dota.EBaseUserMessages_UM_HintText
+		if cb := callbacks.OnCUserMessageHintText; cb != nil {
+			msg := &dota.CUserMessageHintText{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 110: // dota.EBaseUserMessages_UM_HudMsg
+		if cb := callbacks.OnCUserMessageHudMsg; cb != nil {
+			msg := &dota.CUserMessageHudMsg{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 111: // dota.EBaseUserMessages_UM_HudText
+		if cb := callbacks.OnCUserMessageHudText; cb != nil {
+			msg := &dota.CUserMessageHudText{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 112: // dota.EBaseUserMessages_UM_KeyHintText
+		if cb := callbacks.OnCUserMessageKeyHintText; cb != nil {
+			msg := &dota.CUserMessageKeyHintText{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 113: // dota.EBaseUserMessages_UM_ColoredText
+		if cb := callbacks.OnCUserMessageColoredText; cb != nil {
+			msg := &dota.CUserMessageColoredText{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 114: // dota.EBaseUserMessages_UM_RequestState
+		if cb := callbacks.OnCUserMessageRequestState; cb != nil {
+			msg := &dota.CUserMessageRequestState{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 115: // dota.EBaseUserMessages_UM_ResetHUD
+		if cb := callbacks.OnCUserMessageResetHUD; cb != nil {
+			msg := &dota.CUserMessageResetHUD{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 116: // dota.EBaseUserMessages_UM_Rumble
+		if cb := callbacks.OnCUserMessageRumble; cb != nil {
+			msg := &dota.CUserMessageRumble{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 117: // dota.EBaseUserMessages_UM_SayText
+		if cb := callbacks.OnCUserMessageSayText; cb != nil {
+			msg := &dota.CUserMessageSayText{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 118: // dota.EBaseUserMessages_UM_SayText2
+		if cb := callbacks.OnCUserMessageSayText2; cb != nil {
+			msg := &dota.CUserMessageSayText2{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 119: // dota.EBaseUserMessages_UM_SayTextChannel
+		if cb := callbacks.OnCUserMessageSayTextChannel; cb != nil {
+			msg := &dota.CUserMessageSayTextChannel{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 120: // dota.EBaseUserMessages_UM_Shake
+		if cb := callbacks.OnCUserMessageShake; cb != nil {
+			msg := &dota.CUserMessageShake{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 121: // dota.EBaseUserMessages_UM_ShakeDir
+		if cb := callbacks.OnCUserMessageShakeDir; cb != nil {
+			msg := &dota.CUserMessageShakeDir{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 124: // dota.EBaseUserMessages_UM_TextMsg
+		if cb := callbacks.OnCUserMessageTextMsg; cb != nil {
+			msg := &dota.CUserMessageTextMsg{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 125: // dota.EBaseUserMessages_UM_ScreenTilt
+		if cb := callbacks.OnCUserMessageScreenTilt; cb != nil {
+			msg := &dota.CUserMessageScreenTilt{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 126: // dota.EBaseUserMessages_UM_Train
+		if cb := callbacks.OnCUserMessageTrain; cb != nil {
+			msg := &dota.CUserMessageTrain{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 127: // dota.EBaseUserMessages_UM_VGUIMenu
+		if cb := callbacks.OnCUserMessageVGUIMenu; cb != nil {
+			msg := &dota.CUserMessageVGUIMenu{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 128: // dota.EBaseUserMessages_UM_VoiceMask
+		if cb := callbacks.OnCUserMessageVoiceMask; cb != nil {
+			msg := &dota.CUserMessageVoiceMask{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 129: // dota.EBaseUserMessages_UM_VoiceSubtitle
+		if cb := callbacks.OnCUserMessageVoiceSubtitle; cb != nil {
+			msg := &dota.CUserMessageVoiceSubtitle{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 130: // dota.EBaseUserMessages_UM_SendAudio
+		if cb := callbacks.OnCUserMessageSendAudio; cb != nil {
+			msg := &dota.CUserMessageSendAudio{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 131: // dota.EBaseUserMessages_UM_ItemPickup
+		if cb := callbacks.OnCUserMessageItemPickup; cb != nil {
+			msg := &dota.CUserMessageItemPickup{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 132: // dota.EBaseUserMessages_UM_AmmoDenied
+		if cb := callbacks.OnCUserMessageAmmoDenied; cb != nil {
+			msg := &dota.CUserMessageAmmoDenied{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 133: // dota.EBaseUserMessages_UM_CrosshairAngle
+		if cb := callbacks.OnCUserMessageCrosshairAngle; cb != nil {
+			msg := &dota.CUserMessageCrosshairAngle{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 134: // dota.EBaseUserMessages_UM_ShowMenu
+		if cb := callbacks.OnCUserMessageShowMenu; cb != nil {
+			msg := &dota.CUserMessageShowMenu{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 135: // dota.EBaseUserMessages_UM_CreditsMsg
+		if cb := callbacks.OnCUserMessageCreditsMsg; cb != nil {
+			msg := &dota.CUserMessageCreditsMsg{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 142: // dota.EBaseUserMessages_UM_CloseCaptionPlaceholder
+		if cb := callbacks.OnCUserMessageCloseCaptionPlaceholder; cb != nil {
+			msg := &dota.CUserMessageCloseCaptionPlaceholder{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 143: // dota.EBaseUserMessages_UM_CameraTransition
+		if cb := callbacks.OnCUserMessageCameraTransition; cb != nil {
+			msg := &dota.CUserMessageCameraTransition{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 136: // dota.EBaseEntityMessages_EM_PlayJingle
+		if cb := callbacks.OnCEntityMessagePlayJingle; cb != nil {
+			msg := &dota.CEntityMessagePlayJingle{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 137: // dota.EBaseEntityMessages_EM_ScreenOverlay
+		if cb := callbacks.OnCEntityMessageScreenOverlay; cb != nil {
+			msg := &dota.CEntityMessageScreenOverlay{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 138: // dota.EBaseEntityMessages_EM_RemoveAllDecals
+		if cb := callbacks.OnCEntityMessageRemoveAllDecals; cb != nil {
+			msg := &dota.CEntityMessageRemoveAllDecals{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 139: // dota.EBaseEntityMessages_EM_PropagateForce
+		if cb := callbacks.OnCEntityMessagePropagateForce; cb != nil {
+			msg := &dota.CEntityMessagePropagateForce{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 140: // dota.EBaseEntityMessages_EM_DoSpark
+		if cb := callbacks.OnCEntityMessageDoSpark; cb != nil {
+			msg := &dota.CEntityMessageDoSpark{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 141: // dota.EBaseEntityMessages_EM_FixAngle
+		if cb := callbacks.OnCEntityMessageFixAngle; cb != nil {
+			msg := &dota.CEntityMessageFixAngle{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 200: // dota.EBaseGameEvents_GE_VDebugGameSessionIDEvent
+		if cb := callbacks.OnCMsgVDebugGameSessionIDEvent; cb != nil {
+			msg := &dota.CMsgVDebugGameSessionIDEvent{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 201: // dota.EBaseGameEvents_GE_PlaceDecalEvent
+		if cb := callbacks.OnCMsgPlaceDecalEvent; cb != nil {
+			msg := &dota.CMsgPlaceDecalEvent{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 202: // dota.EBaseGameEvents_GE_ClearWorldDecalsEvent
+		if cb := callbacks.OnCMsgClearWorldDecalsEvent; cb != nil {
+			msg := &dota.CMsgClearWorldDecalsEvent{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 203: // dota.EBaseGameEvents_GE_ClearEntityDecalsEvent
+		if cb := callbacks.OnCMsgClearEntityDecalsEvent; cb != nil {
+			msg := &dota.CMsgClearEntityDecalsEvent{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 204: // dota.EBaseGameEvents_GE_ClearDecalsForSkeletonInstanceEvent
+		if cb := callbacks.OnCMsgClearDecalsForSkeletonInstanceEvent; cb != nil {
+			msg := &dota.CMsgClearDecalsForSkeletonInstanceEvent{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 205: // dota.EBaseGameEvents_GE_Source1LegacyGameEventList
+		if cb := callbacks.OnCMsgSource1LegacyGameEventList; cb != nil {
+			msg := &dota.CMsgSource1LegacyGameEventList{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 206: // dota.EBaseGameEvents_GE_Source1LegacyListenEvents
+		if cb := callbacks.OnCMsgSource1LegacyListenEvents; cb != nil {
+			msg := &dota.CMsgSource1LegacyListenEvents{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 207: // dota.EBaseGameEvents_GE_Source1LegacyGameEvent
+		if cb := callbacks.OnCMsgSource1LegacyGameEvent; cb != nil {
+			msg := &dota.CMsgSource1LegacyGameEvent{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 208: // dota.EBaseGameEvents_GE_SosStartSoundEvent
+		if cb := callbacks.OnCMsgSosStartSoundEvent; cb != nil {
+			msg := &dota.CMsgSosStartSoundEvent{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 209: // dota.EBaseGameEvents_GE_SosStopSoundEvent
+		if cb := callbacks.OnCMsgSosStopSoundEvent; cb != nil {
+			msg := &dota.CMsgSosStopSoundEvent{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 210: // dota.EBaseGameEvents_GE_SosSetSoundEventParam
+		if cb := callbacks.OnCMsgSosSetSoundEventParam; cb != nil {
+			msg := &dota.CMsgSosSetSoundEventParam{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 211: // dota.EBaseGameEvents_GE_SosSetLibraryStackField
+		if cb := callbacks.OnCMsgSosSetLibraryStackField; cb != nil {
+			msg := &dota.CMsgSosSetLibraryStackField{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			return cb(msg)
+		}
+		return nil
+	case 212: // dota.EBaseGameEvents_GE_SosStopSoundEventHash
+		if cb := callbacks.OnCMsgSosStopSoundEventHash; cb != nil {
+			msg := &dota.CMsgSosStopSoundEventHash{}
 			if err := proto.Unmarshal(raw, msg); err != nil {
 				return err
 			}
@@ -1357,483 +1834,6 @@ func (p *Parser) CallByPacketType(t int32, raw []byte) error {
 	case 539: // dota.EDotaUserMessages_DOTA_UM_CustomHeaderMessage
 		if cb := callbacks.OnCDOTAUserMsg_CustomHeaderMessage; cb != nil {
 			msg := &dota.CDOTAUserMsg_CustomHeaderMessage{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 136: // dota.EBaseEntityMessages_EM_PlayJingle
-		if cb := callbacks.OnCEntityMessagePlayJingle; cb != nil {
-			msg := &dota.CEntityMessagePlayJingle{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 137: // dota.EBaseEntityMessages_EM_ScreenOverlay
-		if cb := callbacks.OnCEntityMessageScreenOverlay; cb != nil {
-			msg := &dota.CEntityMessageScreenOverlay{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 138: // dota.EBaseEntityMessages_EM_RemoveAllDecals
-		if cb := callbacks.OnCEntityMessageRemoveAllDecals; cb != nil {
-			msg := &dota.CEntityMessageRemoveAllDecals{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 139: // dota.EBaseEntityMessages_EM_PropagateForce
-		if cb := callbacks.OnCEntityMessagePropagateForce; cb != nil {
-			msg := &dota.CEntityMessagePropagateForce{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 140: // dota.EBaseEntityMessages_EM_DoSpark
-		if cb := callbacks.OnCEntityMessageDoSpark; cb != nil {
-			msg := &dota.CEntityMessageDoSpark{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 141: // dota.EBaseEntityMessages_EM_FixAngle
-		if cb := callbacks.OnCEntityMessageFixAngle; cb != nil {
-			msg := &dota.CEntityMessageFixAngle{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 101: // dota.EBaseUserMessages_UM_AchievementEvent
-		if cb := callbacks.OnCUserMessageAchievementEvent; cb != nil {
-			msg := &dota.CUserMessageAchievementEvent{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 102: // dota.EBaseUserMessages_UM_CloseCaption
-		if cb := callbacks.OnCUserMessageCloseCaption; cb != nil {
-			msg := &dota.CUserMessageCloseCaption{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 103: // dota.EBaseUserMessages_UM_CloseCaptionDirect
-		if cb := callbacks.OnCUserMessageCloseCaptionDirect; cb != nil {
-			msg := &dota.CUserMessageCloseCaptionDirect{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 104: // dota.EBaseUserMessages_UM_CurrentTimescale
-		if cb := callbacks.OnCUserMessageCurrentTimescale; cb != nil {
-			msg := &dota.CUserMessageCurrentTimescale{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 105: // dota.EBaseUserMessages_UM_DesiredTimescale
-		if cb := callbacks.OnCUserMessageDesiredTimescale; cb != nil {
-			msg := &dota.CUserMessageDesiredTimescale{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 106: // dota.EBaseUserMessages_UM_Fade
-		if cb := callbacks.OnCUserMessageFade; cb != nil {
-			msg := &dota.CUserMessageFade{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 107: // dota.EBaseUserMessages_UM_GameTitle
-		if cb := callbacks.OnCUserMessageGameTitle; cb != nil {
-			msg := &dota.CUserMessageGameTitle{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 109: // dota.EBaseUserMessages_UM_HintText
-		if cb := callbacks.OnCUserMessageHintText; cb != nil {
-			msg := &dota.CUserMessageHintText{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 110: // dota.EBaseUserMessages_UM_HudMsg
-		if cb := callbacks.OnCUserMessageHudMsg; cb != nil {
-			msg := &dota.CUserMessageHudMsg{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 111: // dota.EBaseUserMessages_UM_HudText
-		if cb := callbacks.OnCUserMessageHudText; cb != nil {
-			msg := &dota.CUserMessageHudText{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 112: // dota.EBaseUserMessages_UM_KeyHintText
-		if cb := callbacks.OnCUserMessageKeyHintText; cb != nil {
-			msg := &dota.CUserMessageKeyHintText{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 113: // dota.EBaseUserMessages_UM_ColoredText
-		if cb := callbacks.OnCUserMessageColoredText; cb != nil {
-			msg := &dota.CUserMessageColoredText{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 114: // dota.EBaseUserMessages_UM_RequestState
-		if cb := callbacks.OnCUserMessageRequestState; cb != nil {
-			msg := &dota.CUserMessageRequestState{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 115: // dota.EBaseUserMessages_UM_ResetHUD
-		if cb := callbacks.OnCUserMessageResetHUD; cb != nil {
-			msg := &dota.CUserMessageResetHUD{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 116: // dota.EBaseUserMessages_UM_Rumble
-		if cb := callbacks.OnCUserMessageRumble; cb != nil {
-			msg := &dota.CUserMessageRumble{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 117: // dota.EBaseUserMessages_UM_SayText
-		if cb := callbacks.OnCUserMessageSayText; cb != nil {
-			msg := &dota.CUserMessageSayText{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 118: // dota.EBaseUserMessages_UM_SayText2
-		if cb := callbacks.OnCUserMessageSayText2; cb != nil {
-			msg := &dota.CUserMessageSayText2{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 119: // dota.EBaseUserMessages_UM_SayTextChannel
-		if cb := callbacks.OnCUserMessageSayTextChannel; cb != nil {
-			msg := &dota.CUserMessageSayTextChannel{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 120: // dota.EBaseUserMessages_UM_Shake
-		if cb := callbacks.OnCUserMessageShake; cb != nil {
-			msg := &dota.CUserMessageShake{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 121: // dota.EBaseUserMessages_UM_ShakeDir
-		if cb := callbacks.OnCUserMessageShakeDir; cb != nil {
-			msg := &dota.CUserMessageShakeDir{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 124: // dota.EBaseUserMessages_UM_TextMsg
-		if cb := callbacks.OnCUserMessageTextMsg; cb != nil {
-			msg := &dota.CUserMessageTextMsg{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 125: // dota.EBaseUserMessages_UM_ScreenTilt
-		if cb := callbacks.OnCUserMessageScreenTilt; cb != nil {
-			msg := &dota.CUserMessageScreenTilt{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 126: // dota.EBaseUserMessages_UM_Train
-		if cb := callbacks.OnCUserMessageTrain; cb != nil {
-			msg := &dota.CUserMessageTrain{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 127: // dota.EBaseUserMessages_UM_VGUIMenu
-		if cb := callbacks.OnCUserMessageVGUIMenu; cb != nil {
-			msg := &dota.CUserMessageVGUIMenu{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 128: // dota.EBaseUserMessages_UM_VoiceMask
-		if cb := callbacks.OnCUserMessageVoiceMask; cb != nil {
-			msg := &dota.CUserMessageVoiceMask{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 129: // dota.EBaseUserMessages_UM_VoiceSubtitle
-		if cb := callbacks.OnCUserMessageVoiceSubtitle; cb != nil {
-			msg := &dota.CUserMessageVoiceSubtitle{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 130: // dota.EBaseUserMessages_UM_SendAudio
-		if cb := callbacks.OnCUserMessageSendAudio; cb != nil {
-			msg := &dota.CUserMessageSendAudio{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 131: // dota.EBaseUserMessages_UM_ItemPickup
-		if cb := callbacks.OnCUserMessageItemPickup; cb != nil {
-			msg := &dota.CUserMessageItemPickup{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 132: // dota.EBaseUserMessages_UM_AmmoDenied
-		if cb := callbacks.OnCUserMessageAmmoDenied; cb != nil {
-			msg := &dota.CUserMessageAmmoDenied{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 133: // dota.EBaseUserMessages_UM_CrosshairAngle
-		if cb := callbacks.OnCUserMessageCrosshairAngle; cb != nil {
-			msg := &dota.CUserMessageCrosshairAngle{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 134: // dota.EBaseUserMessages_UM_ShowMenu
-		if cb := callbacks.OnCUserMessageShowMenu; cb != nil {
-			msg := &dota.CUserMessageShowMenu{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 135: // dota.EBaseUserMessages_UM_CreditsMsg
-		if cb := callbacks.OnCUserMessageCreditsMsg; cb != nil {
-			msg := &dota.CUserMessageCreditsMsg{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 142: // dota.EBaseUserMessages_UM_CloseCaptionPlaceholder
-		if cb := callbacks.OnCUserMessageCloseCaptionPlaceholder; cb != nil {
-			msg := &dota.CUserMessageCloseCaptionPlaceholder{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 143: // dota.EBaseUserMessages_UM_CameraTransition
-		if cb := callbacks.OnCUserMessageCameraTransition; cb != nil {
-			msg := &dota.CUserMessageCameraTransition{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 200: // dota.EBaseGameEvents_GE_VDebugGameSessionIDEvent
-		if cb := callbacks.OnCMsgVDebugGameSessionIDEvent; cb != nil {
-			msg := &dota.CMsgVDebugGameSessionIDEvent{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 201: // dota.EBaseGameEvents_GE_PlaceDecalEvent
-		if cb := callbacks.OnCMsgPlaceDecalEvent; cb != nil {
-			msg := &dota.CMsgPlaceDecalEvent{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 202: // dota.EBaseGameEvents_GE_ClearWorldDecalsEvent
-		if cb := callbacks.OnCMsgClearWorldDecalsEvent; cb != nil {
-			msg := &dota.CMsgClearWorldDecalsEvent{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 203: // dota.EBaseGameEvents_GE_ClearEntityDecalsEvent
-		if cb := callbacks.OnCMsgClearEntityDecalsEvent; cb != nil {
-			msg := &dota.CMsgClearEntityDecalsEvent{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 204: // dota.EBaseGameEvents_GE_ClearDecalsForSkeletonInstanceEvent
-		if cb := callbacks.OnCMsgClearDecalsForSkeletonInstanceEvent; cb != nil {
-			msg := &dota.CMsgClearDecalsForSkeletonInstanceEvent{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 205: // dota.EBaseGameEvents_GE_Source1LegacyGameEventList
-		if cb := callbacks.OnCMsgSource1LegacyGameEventList; cb != nil {
-			msg := &dota.CMsgSource1LegacyGameEventList{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 206: // dota.EBaseGameEvents_GE_Source1LegacyListenEvents
-		if cb := callbacks.OnCMsgSource1LegacyListenEvents; cb != nil {
-			msg := &dota.CMsgSource1LegacyListenEvents{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 207: // dota.EBaseGameEvents_GE_Source1LegacyGameEvent
-		if cb := callbacks.OnCMsgSource1LegacyGameEvent; cb != nil {
-			msg := &dota.CMsgSource1LegacyGameEvent{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 208: // dota.EBaseGameEvents_GE_SosStartSoundEvent
-		if cb := callbacks.OnCMsgSosStartSoundEvent; cb != nil {
-			msg := &dota.CMsgSosStartSoundEvent{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 209: // dota.EBaseGameEvents_GE_SosStopSoundEvent
-		if cb := callbacks.OnCMsgSosStopSoundEvent; cb != nil {
-			msg := &dota.CMsgSosStopSoundEvent{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 210: // dota.EBaseGameEvents_GE_SosSetSoundEventParam
-		if cb := callbacks.OnCMsgSosSetSoundEventParam; cb != nil {
-			msg := &dota.CMsgSosSetSoundEventParam{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 211: // dota.EBaseGameEvents_GE_SosSetLibraryStackField
-		if cb := callbacks.OnCMsgSosSetLibraryStackField; cb != nil {
-			msg := &dota.CMsgSosSetLibraryStackField{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			return cb(msg)
-		}
-		return nil
-	case 212: // dota.EBaseGameEvents_GE_SosStopSoundEventHash
-		if cb := callbacks.OnCMsgSosStopSoundEventHash; cb != nil {
-			msg := &dota.CMsgSosStopSoundEventHash{}
 			if err := proto.Unmarshal(raw, msg); err != nil {
 				return err
 			}

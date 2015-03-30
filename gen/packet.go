@@ -36,10 +36,10 @@ func main() {
 		&EnumMap{Hook: "DEM", Struct: "CDemo", Enum: "EDemoCommands", Fill: "_DEM_"},
 		&EnumMap{Hook: "NET", Struct: "CNETMsg_", Enum: "NET_Messages", Fill: "_net_"},
 		&EnumMap{Hook: "SVC", Struct: "CSVCMsg_", Enum: "SVC_Messages", Fill: "_svc_"},
-		&EnumMap{Hook: "DUM", Struct: "CDOTAUserMsg_", Enum: "EDotaUserMessages", Fill: "_DOTA_UM_"},
-		&EnumMap{Hook: "BEM", Struct: "CEntityMessage", Enum: "EBaseEntityMessages", Fill: "_EM_"},
 		&EnumMap{Hook: "BUM", Struct: "CUserMessage", Enum: "EBaseUserMessages", Fill: "_UM_"},
+		&EnumMap{Hook: "BEM", Struct: "CEntityMessage", Enum: "EBaseEntityMessages", Fill: "_EM_"},
 		&EnumMap{Hook: "BGE", Struct: "CMsg", Enum: "EBaseGameEvents", Fill: "_GE_"},
+		&EnumMap{Hook: "DUM", Struct: "CDOTAUserMsg_", Enum: "EDotaUserMessages", Fill: "_DOTA_UM_"},
 	}
 
 	for _, enum := range enums {
