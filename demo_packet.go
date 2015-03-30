@@ -17,7 +17,7 @@ func init() {
 
 //go:generate go run gen/packet.go dota message_lookup.go
 
-func (p *Parser) OnCDemoPacket(obj *dota.CDemoPacket) error {
+func (p *Parser) onCDemoPacket(obj *dota.CDemoPacket) error {
 	b := NewBitReader(obj.GetData())
 
 	for {
@@ -26,9 +26,7 @@ func (p *Parser) OnCDemoPacket(obj *dota.CDemoPacket) error {
 		}
 		demType, demBytes := b.ReadInnerPacket()
 
-		if err := p.HandleRawMessage(demType, demBytes, DEBUG); err != nil {
-			return err
-		}
+		p.CallByPacketType(demType, demBytes)
 	}
 }
 

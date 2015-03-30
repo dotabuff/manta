@@ -123,10 +123,10 @@ import (
 
 	values := map[int]string{}
 	rawMsg := []string{}
-	rawHook := []string{}
+	switches := []string{}
+	demSwitches := []string{}
 
 	for _, enum := range enums {
-		switches := []string{}
 
 		slice.SortTyped(&enum.EnumNames, func(a, b string) bool {
 			return enum.Values[a] < enum.Values[b]
@@ -173,56 +173,50 @@ import (
 				panic("no matching enum found")
 			}
 
-			switches = append(switches,
-				spew.Sprintf("case dota.%s: // %d", e, enum.Values[e]),
-				spew.Sprintf("  return &dota.%s{}, nil", matching),
-			)
+			cb := "On" + matching
+			if e == "EDemoCommands_DEM_SignonPacket" {
+				cb = "OnSignonPacket"
+			}
+
+			swtch := spew.Sprintf(
+				`case %d: // dota.%s
+					if cb := callbacks.%s; cb != nil {
+						msg := &dota.%s{}
+						if err := proto.Unmarshal(raw, msg); err != nil {
+						  return err
+						}
+						return cb(msg)
+				  }
+					return nil`, enum.Values[e], e, cb, matching)
+
+			if enum.Hook == "DEM" {
+				demSwitches = append(demSwitches, swtch)
+			} else {
+				switches = append(switches, swtch)
+			}
+
+			rawMsg = append(rawMsg, spew.Sprintf(`%s func(*dota.%s) error`, cb, matching))
 		}
-
-		funName := "MessageTypeFor" + enum.Enum
-		typName := "dota." + enum.Enum
-
-		file.WriteString(spew.Sprintf(`
-func %s(t %s) (proto.Message, error) {
-	switch t {
-	%s
-	}
-	return nil, fmt.Errorf("no type found: %v(%%d)", t)
-}
-		`, funName, typName, strings.Join(switches, "\n"), typName))
-
-		if enum.Hook != "DEM" {
-			hookVar := strings.ToLower(enum.Hook)
-			rawMsg = append(rawMsg, spew.Sprintf(`
-	%s := %s(t)
-	if m, err = %s(%s); err == nil {
-		if hook, ok := p.hook%s[%s]; ok {
-			callHook(b, m, hook)
-			return nil
-		} else if debug {
-			fmt.Printf("ignoring %%T\n", m)
-		}
-	}
-		`, hookVar, typName, funName, hookVar, enum.Hook, hookVar))
-		}
-
-		rawHook = append(rawHook,
-			spew.Sprintf(`func (p *Parser) Hook%s(t %s, f func(proto.Message)){p.hook%s[t] = f }`,
-				enum.Hook, typName, enum.Hook))
 	}
 
 	file.WriteString(spew.Sprintf(`
-func (p *Parser) HandleRawMessage(t int32, b []byte, debug bool) error {
-	var m proto.Message
-	var err error
-
+type Callbacks struct {
 	%s
-
-	return fmt.Errorf("missing handler for %%d", t)
 }
 	`, strings.Join(rawMsg, "\n")))
 
-	file.WriteString(strings.Join(rawHook, "\n"))
+	callTemplate := `
+func (p *Parser) %s(t int32, raw []byte) (error) {
+	callbacks := p.Callbacks
+	switch t {
+	%s
+	}
+	return fmt.Errorf("no type found: %%d", t)
+}
+	`
+
+	file.WriteString(spew.Sprintf(callTemplate, "CallByDemoType", strings.Join(demSwitches, "\n")))
+	file.WriteString(spew.Sprintf(callTemplate, "CallByPacketType", strings.Join(switches, "\n")))
 
 	source, err := format.Source(file.Bytes())
 	if err != nil {

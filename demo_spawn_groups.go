@@ -2,7 +2,8 @@ package manta
 
 import "github.com/dotabuff/manta/dota"
 
-func (p *Parser) OnCDemoSpawnGroups(spawnGroups *dota.CDemoSpawnGroups) error {
+func (p *Parser) onCDemoSpawnGroups(spawnGroups *dota.CDemoSpawnGroups) error {
+	return nil
 	b := NewBitReader(spawnGroups.GetData())
 
 	for {
@@ -11,14 +12,17 @@ func (p *Parser) OnCDemoSpawnGroups(spawnGroups *dota.CDemoSpawnGroups) error {
 		}
 		demType, demBytes := b.ReadInnerPacket()
 
-		net := dota.NET_Messages(demType)
-		if m, err := MessageTypeForNET_Messages(net); err == nil {
-			if hook, ok := p.hookNET[net]; ok {
-				callHook(demBytes, m, hook)
+		PP(demType, demBytes)
+		/*
+			net := dota.NET_Messages(demType)
+			if m, err := MessageTypeForNET_Messages(net); err == nil {
+				if hook, ok := p.hookNET[net]; ok {
+					callHook(demBytes, m, hook)
+				}
+			} else {
+				PP(net)
+				return E("unknown message")
 			}
-		} else {
-			PP(net)
-			return E("unknown message")
-		}
+		*/
 	}
 }

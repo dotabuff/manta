@@ -287,14 +287,6 @@ func (br *BitReader) ReadNextEntityIndex(oldEntity int) int {
 	return oldEntity + 1 + int(ret)
 }
 
-// [2 bits header][X bits type][varint size][8*size content]
-// X = (header 00 = 4; header 01 = 8; header 10 = 12).
-// Die ersten 4 bits vor den Rest pasten, oder via bitmask machen.
-// Du musst 6 bits lesen, die ersten beiden davon entscheiden wie viel du dazu lesen musst
-// also [XXYYYY]
-// die ersten 4 musst du vor den rest, den du liest, pushen
-// also wenn du danach noch mal vier liest musst du das so machen:
-// [nimm 4 untere bits von den 6 die du liest], xor (4 neue bits gelesen und nach vorne geshifted)
 func (br *BitReader) ReadInnerPacket() (int32, []byte) {
 	initial := br.ReadUBits(6)
 	header := initial >> 4

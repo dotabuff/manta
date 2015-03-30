@@ -2,12 +2,12 @@ package manta
 
 import "github.com/dotabuff/manta/dota"
 
-func (p *Parser) OnCDemoStop(stop *dota.CDemoStop) { p.Stop() }
-func (p *Parser) OnCDemoFileHeader(fileHeader *dota.CDemoFileHeader) {
+func (p *Parser) onCDemoStop(stop *dota.CDemoStop) { p.Stop() }
+func (p *Parser) onCDemoFileHeader(fileHeader *dota.CDemoFileHeader) {
 	PP(fileHeader)
 }
 
-func (p *Parser) OnCDemoSendTables(sendTables *dota.CDemoSendTables) {
+func (p *Parser) onCDemoSendTables(sendTables *dota.CDemoSendTables) {
 	b := NewBitReader(sendTables.GetData())
 	l := b.ReadVarInt()
 	PP(l)

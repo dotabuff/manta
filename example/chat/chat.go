@@ -7,16 +7,15 @@ import (
 
 	"github.com/dotabuff/manta"
 	"github.com/dotabuff/manta/dota"
-	"github.com/golang/protobuf/proto"
 )
 
 func main() {
 	for _, arg := range os.Args[1:] {
 		parser := manta.NewParserFromFile(arg)
-		parser.HookBUM(dota.EBaseUserMessages_UM_SayText2, func(m proto.Message) {
-			msg := m.(*dota.CUserMessageSayText2)
-			fmt.Printf("%s (%s) | %s: %s\n", filepath.Base(arg), msg.GetMessagename(), msg.GetParam1(), msg.GetParam2())
-		})
+		parser.Callbacks.OnCUserMessageSayText2 = func(m *dota.CUserMessageSayText2) error {
+			fmt.Printf("%s (%s) | %s: %s\n", filepath.Base(arg), m.GetMessagename(), m.GetParam1(), m.GetParam2())
+			return nil
+		}
 		parser.Start()
 	}
 }
