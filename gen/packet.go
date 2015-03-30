@@ -112,7 +112,7 @@ func main() {
 	}
 
 	file := bytes.NewBufferString(`
-package main
+package manta
 import (
 	"fmt"
 

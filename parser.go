@@ -1,4 +1,4 @@
-package main
+package manta
 
 import (
 	"bufio"
@@ -15,16 +15,6 @@ import (
 	"github.com/golang/protobuf/proto"
 )
 
-func main() {
-	DEBUG = true
-	for _, arg := range os.Args[1:] {
-		parser := NewParserFromFile(arg)
-		parser.HookNET(dota.NET_Messages_net_Tick, func(m proto.Message) {})
-		parser.HookSVC(dota.SVC_Messages_svc_PacketEntities, func(m proto.Message) {})
-		parser.Start()
-	}
-}
-
 func NewParserFromFile(path string) *Parser {
 	fd, err := os.Open(path)
 	if err != nil {
@@ -32,21 +22,24 @@ func NewParserFromFile(path string) *Parser {
 	}
 
 	parser := &Parser{
-		sendTableId: -1,
-		stream:      bufio.NewReader(fd),
-		classInfo:   map[int]string{},
+		sendTableId:  -1,
+		stream:       bufio.NewReader(fd),
+		classInfo:    map[int]string{},
+		stringTables: NewStringTables(),
 	}
 
 	parser.hookNET = map[dota.NET_Messages]func(proto.Message){
 	// dota.NET_Messages_net_SpawnGroup_Load: func(m proto.Message) { parser.OnSpawnGroupLoad(m.(*dota.CNETMsg_SpawnGroup_Load)) },
 	}
-	parser.hookSVC = map[dota.SVC_Messages]func(proto.Message){}
+	parser.hookSVC = map[dota.SVC_Messages]func(proto.Message){
+		dota.SVC_Messages_svc_UpdateStringTable: func(m proto.Message) { parser.stringTables.OnUpdateStringTable(m.(*dota.CSVCMsg_UpdateStringTable)) },
+	}
 	parser.hookDUM = map[dota.EDotaUserMessages]func(proto.Message){}
 	parser.hookBEM = map[dota.EBaseEntityMessages]func(proto.Message){}
 	parser.hookBUM = map[dota.EBaseUserMessages]func(proto.Message){}
 	parser.hookBGE = map[dota.EBaseGameEvents]func(proto.Message){}
 	parser.hookDEM = map[dota.EDemoCommands]func(proto.Message){
-		dota.EDemoCommands_DEM_FileHeader:   func(m proto.Message) { PP(m) },
+		dota.EDemoCommands_DEM_FileHeader:   func(m proto.Message) {},
 		dota.EDemoCommands_DEM_SignonPacket: func(m proto.Message) { parser.OnCDemoPacket(m.(*dota.CDemoPacket)) },
 		dota.EDemoCommands_DEM_SendTables:   func(m proto.Message) {},
 		dota.EDemoCommands_DEM_ClassInfo:    func(m proto.Message) { parser.OnCDemoClassInfo(m.(*dota.CDemoClassInfo)) },
@@ -55,8 +48,8 @@ func NewParserFromFile(path string) *Parser {
 		dota.EDemoCommands_DEM_Packet:       func(m proto.Message) { parser.OnCDemoPacket(m.(*dota.CDemoPacket)) },
 		dota.EDemoCommands_DEM_SpawnGroups:  func(m proto.Message) { parser.OnCDemoSpawnGroups(m.(*dota.CDemoSpawnGroups)) },
 		dota.EDemoCommands_DEM_Stop:         func(m proto.Message) {},
-		dota.EDemoCommands_DEM_StringTables: func(m proto.Message) { parser.OnCDemoStringTables(m.(*dota.CDemoStringTables)) },
-		dota.EDemoCommands_DEM_SyncTick:     func(m proto.Message) { PP(m) },
+		dota.EDemoCommands_DEM_StringTables: func(m proto.Message) { parser.stringTables.OnCDemoStringTables(m.(*dota.CDemoStringTables)) },
+		dota.EDemoCommands_DEM_SyncTick:     func(m proto.Message) {},
 		dota.EDemoCommands_DEM_UserCmd:      func(m proto.Message) { parser.OnCDemoUserCmd(m.(*dota.CDemoUserCmd)) },
 	}
 
@@ -73,11 +66,12 @@ type DemoHeader struct {
 }
 
 type Parser struct {
-	stream      *bufio.Reader
-	Header      DemoHeader
-	isStopping  bool
-	sendTableId int64
-	classInfo   map[int]string
+	stream       *bufio.Reader
+	Header       DemoHeader
+	isStopping   bool
+	sendTableId  int64
+	classInfo    map[int]string
+	stringTables *StringTables
 
 	hookDEM map[dota.EDemoCommands]func(proto.Message)
 	hookNET map[dota.NET_Messages]func(proto.Message)
