@@ -35,5 +35,5 @@ If you have any questions, just ask manveru in the #dota2replay channel on Quake
 
 ## Acknowledgements
 
-* [Robin](https://github.com/invokr) worked out how the new CDemoPackets are
+* [Robin Dietrich](https://github.com/invokr) worked out how the new CDemoPackets are
   encoded and helped a lot in other areas as well.
