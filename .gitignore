@@ -1,3 +1,4 @@
 manta
 manta-cli/manta-cli
 example/chat/chat
+replays/*.dem*
