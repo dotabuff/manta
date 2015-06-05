@@ -3,15 +3,15 @@ package manta
 import (
 	"bufio"
 	"encoding/binary"
+	"fmt"
 	"io"
 	"os"
 	"runtime"
 	"strings"
 
-	"code.google.com/p/snappy-go/snappy"
-
 	"github.com/davecgh/go-spew/spew"
 	"github.com/dotabuff/manta/dota"
+	"github.com/golang/snappy/snappy"
 )
 
 func NewParserFromFile(path string) *Parser {
@@ -20,9 +20,11 @@ func NewParserFromFile(path string) *Parser {
 		panic(err)
 	}
 
+	// TODO: look into why we're unable to use bufio.ByteReader with a buffer size > 0.
+	// Probably has to do with the different ways we're reading and byte alignment.
 	parser := &Parser{
 		sendTableId:  -1,
-		stream:       bufio.NewReader(fd),
+		stream:       bufio.NewReaderSize(fd, 0),
 		classInfo:    map[int]string{},
 		stringTables: NewStringTables(),
 		Callbacks:    &Callbacks{},
@@ -31,7 +33,10 @@ func NewParserFromFile(path string) *Parser {
 	cb := parser.Callbacks
 
 	cb.OnCNETMsg_SpawnGroup_Load = func(m *dota.CNETMsg_SpawnGroup_Load) error { parser.onSpawnGroupLoad(m); return nil }
-	cb.OnCSVCMsg_UpdateStringTable = func(m *dota.CSVCMsg_UpdateStringTable) error { parser.stringTables.onUpdateStringTable(m); return nil }
+	cb.OnCSVCMsg_UpdateStringTable = func(m *dota.CSVCMsg_UpdateStringTable) error {
+		parser.stringTables.onUpdateStringTable(m)
+		return nil
+	}
 	cb.OnSignonPacket = func(m *dota.CDemoPacket) error { parser.onCDemoPacket(m); return nil }
 	cb.OnCDemoClassInfo = func(m *dota.CDemoClassInfo) error { parser.onCDemoClassInfo(m); return nil }
 	cb.OnCDemoStop = func(m *dota.CDemoStop) error { parser.Stop(); return nil }
@@ -68,8 +73,13 @@ func (p *Parser) Start() {
 			panic(err)
 		} else {
 			if err = p.CallByDemoType(int32(msg.Type), msg.data); err != nil {
+				// Dump header and data, then panic with the error.
+				msg.Dump(-1)
 				panic(err)
 			}
+
+			// Dump just the header of a successfully parsed message.
+			msg.Dump(0)
 		}
 	}
 }
@@ -86,6 +96,26 @@ type Message struct {
 	Size       uint64
 }
 
+// Dumps the header of the message, optionally including a preview of the data.
+// Preview size of -1 dumps the entire thing, 0 dumps nothing, otherwise length.
+func (m *Message) Dump(preview_size int) {
+	if preview_size == -1 {
+		preview_size = len(m.data)
+	}
+
+	if preview_size > len(m.data) {
+		preview_size = 0
+	}
+
+	fmt.Printf("{tick: %d, type: %v, size: %d, compressed: %v, preview_size: %d}\n", m.Tick, m.Type, m.Size, m.Compressed, preview_size)
+
+	if preview_size > 0 {
+		spew.Dump(m.data[:preview_size])
+		fmt.Println("-")
+	}
+
+}
+
 var ProtobufDemoSource2Magic = [8]byte{'P', 'B', 'D', 'E', 'M', 'S', '2', '\000'}
 
 func (p *Parser) readHeader() error {
@@ -96,9 +126,16 @@ func (p *Parser) readHeader() error {
 	}
 
 	if header.Magic != ProtobufDemoSource2Magic {
-		panic(spew.Sprintf("Expected %s but got %s", ProtobufDemoSource2Magic, header.Magic))
+		return fmt.Errorf("expected magic %s, got %s", ProtobufDemoSource2Magic, header.Magic)
 	}
+
 	p.Header = header
+	spew.Dump(p.Header)
+
+	// TODO: what is this?
+	tmp := make([]byte, 8)
+	p.stream.Read(tmp)
+	spew.Dump(tmp)
 
 	return nil
 }
