@@ -77,9 +77,6 @@ func (p *Parser) Start() {
 				msg.Dump(-1)
 				panic(err)
 			}
-
-			// Dump just the header of a successfully parsed message.
-			msg.Dump(0)
 		}
 	}
 }
