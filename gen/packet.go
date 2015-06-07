@@ -125,6 +125,8 @@ import (
 	rawMsg := []string{}
 	switches := []string{}
 	demSwitches := []string{}
+	onFns := []string{}
+	onFnNames := make(map[string]bool)
 
 	for _, enum := range enums {
 
@@ -173,21 +175,37 @@ import (
 				panic("no matching enum found")
 			}
 
-			cb := "On" + matching
+			cbEnt := "on" + matching
+			cbName := "On" + matching
+			fnsig := spew.Sprintf("func (*dota.%s) error", matching)
+
 			if e == "EDemoCommands_DEM_SignonPacket" {
-				cb = "OnSignonPacket"
+				cbEnt = "onCDemoSignonPacket"
+				cbName = "OnCDemoSignonPacket"
 			}
 
 			swtch := spew.Sprintf(
 				`case %d: // dota.%s
-					if cb := callbacks.%s; cb != nil {
+					if cbs := callbacks.%s; cbs != nil {
 						msg := &dota.%s{}
 						if err := proto.Unmarshal(raw, msg); err != nil {
 						  return err
 						}
-						return cb(msg)
+						for _, fn := range cbs {
+							if err := fn(msg); err != nil {
+								return err
+							}
+						}
 				  }
-					return nil`, enum.Values[e], e, cb, matching)
+					return nil`, enum.Values[e], e, cbEnt, matching)
+
+			onfn := spew.Sprintf(
+				`func (c *Callbacks) %s(fn %s) {
+					if c.%s == nil {
+						c.%s = make([]%s, 0)
+					}
+					c.%s = append(c.%s, fn)
+					}`, cbName, fnsig, cbEnt, cbEnt, fnsig, cbEnt, cbEnt)
 
 			if enum.Hook == "DEM" {
 				demSwitches = append(demSwitches, swtch)
@@ -195,7 +213,11 @@ import (
 				switches = append(switches, swtch)
 			}
 
-			rawMsg = append(rawMsg, spew.Sprintf(`%s func(*dota.%s) error`, cb, matching))
+			rawMsg = append(rawMsg, spew.Sprintf(`%s []%s`, cbEnt, fnsig))
+			if _, ok := onFnNames[matching]; !ok {
+				onFnNames[cbName] = true
+				onFns = append(onFns, onfn)
+			}
 		}
 	}
 
@@ -214,6 +236,8 @@ func (p *Parser) %s(t int32, raw []byte) (error) {
 	return fmt.Errorf("no type found: %%d", t)
 }
 	`
+
+	file.WriteString(strings.Join(onFns, "\n"))
 
 	file.WriteString(spew.Sprintf(callTemplate, "CallByDemoType", strings.Join(demSwitches, "\n")))
 	file.WriteString(spew.Sprintf(callTemplate, "CallByPacketType", strings.Join(switches, "\n")))

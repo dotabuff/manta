@@ -1,90 +1,144 @@
 package manta
 
 import (
-	"bufio"
-	"encoding/binary"
-	"fmt"
-	"io"
+	"bytes"
+	"io/ioutil"
 	"os"
-	"runtime"
-	"strings"
 
-	"github.com/davecgh/go-spew/spew"
 	"github.com/dotabuff/manta/dota"
 	"github.com/golang/snappy/snappy"
 )
 
-func NewParserFromFile(path string) *Parser {
+// The first 8 bytes of a replay for Source 1 and Source 2
+var magicSource1 = []byte{'P', 'U', 'F', 'D', 'E', 'M', 'S', '\000'}
+var magicSource2 = []byte{'P', 'B', 'D', 'E', 'M', 'S', '2', '\000'}
+
+// A replay parser capable of parsing Source 2 replays
+type Parser struct {
+	Callbacks *Callbacks
+	Tick      uint32
+
+	classInfo map[int]string
+
+	reader     *reader
+	isStopping bool
+}
+
+// Create a new Parser from a file
+func NewParserFromFile(path string) (*Parser, error) {
 	fd, err := os.Open(path)
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 
-	// TODO: look into why we're unable to use bufio.ByteReader with a buffer size > 0.
-	// Probably has to do with the different ways we're reading and byte alignment.
+	buf, err := ioutil.ReadAll(fd)
+	if err != nil {
+		return nil, err
+	}
+
+	return NewParser(buf)
+}
+
+// Create a new parser from a byte slice
+func NewParser(buf []byte) (*Parser, error) {
+	// Create a new parser with an internal reader for the given buffer.
 	parser := &Parser{
-		sendTableId:  -1,
-		stream:       bufio.NewReaderSize(fd, 0),
-		classInfo:    map[int]string{},
-		stringTables: NewStringTables(),
-		Callbacks:    &Callbacks{},
+		Callbacks: &Callbacks{},
+		Tick:      0,
+
+		reader:     newReader(buf),
+		isStopping: false,
+
+		classInfo: make(map[int]string),
 	}
 
-	cb := parser.Callbacks
-
-	cb.OnCNETMsg_SpawnGroup_Load = func(m *dota.CNETMsg_SpawnGroup_Load) error { parser.onSpawnGroupLoad(m); return nil }
-	cb.OnCSVCMsg_UpdateStringTable = func(m *dota.CSVCMsg_UpdateStringTable) error {
-		parser.stringTables.onUpdateStringTable(m)
-		return nil
-	}
-	cb.OnSignonPacket = func(m *dota.CDemoPacket) error { parser.onCDemoPacket(m); return nil }
-	cb.OnCDemoClassInfo = func(m *dota.CDemoClassInfo) error { parser.onCDemoClassInfo(m); return nil }
-	cb.OnCDemoStop = func(m *dota.CDemoStop) error { parser.Stop(); return nil }
-	cb.OnCDemoPacket = func(m *dota.CDemoPacket) error { parser.onCDemoPacket(m); return nil }
-	cb.OnCDemoSpawnGroups = func(m *dota.CDemoSpawnGroups) error { parser.onCDemoSpawnGroups(m); return nil }
-	cb.OnCDemoStringTables = func(m *dota.CDemoStringTables) error { parser.stringTables.onCDemoStringTables(m); return nil }
-	cb.OnCDemoUserCmd = func(m *dota.CDemoUserCmd) error { parser.onCDemoUserCmd(m); return nil }
-
-	if err = parser.readHeader(); err != nil {
-		panic(err)
+	// Parse out the header, ensuring that it's valid.
+	if magic := parser.reader.read_bytes(8); !bytes.Equal(magic, magicSource2) {
+		return nil, _errorf("unexpected magic: expected %s, got %s", magicSource2, magic)
 	}
 
-	return parser
-}
+	// Skip the next 8 bytes, which appear to be two int32s
+	parser.reader.seek_bytes(8)
 
-type DemoHeader struct {
-	Magic         [8]byte
-	SummaryOffset int32
-}
+	// Register callbacks
 
-type Parser struct {
-	stream       *bufio.Reader
-	Header       DemoHeader
-	isStopping   bool
-	sendTableId  int64
-	classInfo    map[int]string
-	stringTables *StringTables
-	Callbacks    *Callbacks
-}
+	// CDemoPacket outer messages have a inner handler
+	parser.Callbacks.OnCDemoPacket(parser.onCDemoPacket)
+	parser.Callbacks.OnCDemoSignonPacket(parser.onCDemoPacket)
 
-func (p *Parser) Start() {
-	for !p.isStopping {
-		if msg, err := p.read(); err != nil {
-			panic(err)
-		} else {
-			if err = p.CallByDemoType(int32(msg.Type), msg.data); err != nil {
-				// Dump header and data, then panic with the error.
-				msg.Dump(-1)
-				panic(err)
+	// Packet entities, send tables and string tables are also low-level and
+	// require internal handlers.
+	parser.Callbacks.OnCSVCMsg_PacketEntities(parser.onCSVCMsg_PacketEntities)
+	parser.Callbacks.OnCDemoSendTables(parser.onCDemoSendTables)
+	parser.Callbacks.OnCDemoStringTables(parser.onCDemoStringTables)
+	parser.Callbacks.OnCSVCMsg_CreateStringTable(parser.onCSVCMsg_CreateStringTable)
+	parser.Callbacks.OnCSVCMsg_UpdateStringTable(parser.onCSVCMsg_UpdateStringTable)
+
+	parser.Callbacks.OnCDemoClassInfo(func(m *dota.CDemoClassInfo) error {
+		for _, class := range m.GetClasses() {
+			parser.classInfo[int(class.GetClassId())] = class.GetNetworkName()
+			if class.TableName != nil {
+				_panicf("unexpected class table name %s", class.GetTableName())
 			}
 		}
-	}
+
+		return nil
+	})
+
+	// Maintains the value of parser.Tick
+	parser.Callbacks.OnCNETMsg_Tick(func(m *dota.CNETMsg_Tick) error {
+		parser.Tick = m.GetTick()
+		return nil
+	})
+
+	// Stops parsing when we reach the end of the replay.
+	parser.Callbacks.OnCDemoStop(func(m *dota.CDemoStop) error {
+		parser.Stop()
+		return nil
+	})
+
+	// TODO
+	parser.Callbacks.OnCDemoSpawnGroups(func(m *dota.CDemoSpawnGroups) error {
+		return nil
+	})
+
+	// TODO
+	parser.Callbacks.OnCNETMsg_SpawnGroup_Load(func(m *dota.CNETMsg_SpawnGroup_Load) error {
+		return nil
+	})
+
+	// TODO
+	parser.Callbacks.OnCDemoUserCmd(func(m *dota.CDemoUserCmd) error {
+		return nil
+	})
+
+	return parser, nil
 }
 
+// Start parsing the replay. Will stop processing new events after Stop() is called.
+func (p *Parser) Start() error {
+	var msg Message
+	var err error
+
+	for !p.isStopping {
+		if msg, err = p.read(); err != nil {
+			return err
+		}
+
+		if err = p.CallByDemoType(int32(msg.Type), msg.data); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+// Stop parsing the replay, causing the parser to stop processing new events.
 func (p *Parser) Stop() {
 	p.isStopping = true
 }
 
+// An outer message, right off the wire.
 type Message struct {
 	Compressed bool
 	Tick       uint64
@@ -93,86 +147,22 @@ type Message struct {
 	Size       uint64
 }
 
-// Dumps the header of the message, optionally including a preview of the data.
-// Preview size of -1 dumps the entire thing, 0 dumps nothing, otherwise length.
-func (m *Message) Dump(preview_size int) {
-	if preview_size == -1 {
-		preview_size = len(m.data)
-	}
-
-	if preview_size > len(m.data) {
-		preview_size = 0
-	}
-
-	fmt.Printf("{tick: %d, type: %v, size: %d, compressed: %v, preview_size: %d}\n", m.Tick, m.Type, m.Size, m.Compressed, preview_size)
-
-	if preview_size > 0 {
-		spew.Dump(m.data[:preview_size])
-		fmt.Println("-")
-	}
-
-}
-
-var ProtobufDemoSource2Magic = [8]byte{'P', 'B', 'D', 'E', 'M', 'S', '2', '\000'}
-
-func (p *Parser) readHeader() error {
-	header := DemoHeader{}
-	err := binary.Read(p.stream, binary.LittleEndian, &header)
-	if err != nil {
-		return err
-	}
-
-	if header.Magic != ProtobufDemoSource2Magic {
-		return fmt.Errorf("expected magic %s, got %s", ProtobufDemoSource2Magic, header.Magic)
-	}
-
-	p.Header = header
-	spew.Dump(p.Header)
-
-	// TODO: what is this?
-	tmp := make([]byte, 8)
-	p.stream.Read(tmp)
-	spew.Dump(tmp)
-
-	return nil
-}
-
+// Read the next outer message from the buffer.
 func (p *Parser) read() (Message, error) {
-	msg := Message{}
+	binType := p.reader.read_var_uint64()
+	binTick := p.reader.read_var_uint64()
+	binSize := p.reader.read_var_uint64()
 
-	binType, err := binary.ReadUvarint(p.stream)
-	if err != nil {
-		return msg, err
+	msg := Message{
+		Tick: binTick,
+		Size: binSize,
 	}
-
-	binTick, err := binary.ReadUvarint(p.stream)
-	if err != nil {
-		return msg, err
-	}
-	msg.Tick = binTick
-
-	binSize, err := binary.ReadUvarint(p.stream)
-	if err != nil {
-		return msg, err
-	}
-	msg.Size = binSize
 
 	command := dota.EDemoCommands(binType)
 	msg.Compressed = (command & dota.EDemoCommands_DEM_IsCompressed) == dota.EDemoCommands_DEM_IsCompressed
 	msg.Type = command & ^dota.EDemoCommands_DEM_IsCompressed
 
-	if binSize > 0x100000 {
-		return msg, spew.Errorf("buffer too big: %d", binSize)
-	}
-
-	buf := make([]byte, binSize)
-	readLen, err := io.ReadFull(p.stream, buf)
-	if err != nil {
-		return msg, err
-	}
-	if uint64(readLen) != binSize {
-		return msg, spew.Errorf("readLen %d != binSize %d", readLen, binSize)
-	}
+	buf := p.reader.read_bytes(int(msg.Size))
 
 	if msg.Compressed {
 		decodedLen, err := snappy.DecodedLen(buf)
@@ -181,7 +171,7 @@ func (p *Parser) read() (Message, error) {
 		}
 
 		if decodedLen > 0x100000 {
-			return msg, spew.Errorf("decompressed size too big: %d", decodedLen)
+			return msg, _errorf("decompressed size too big: %d", decodedLen)
 		}
 
 		out, err := snappy.Decode(nil, buf)
@@ -195,27 +185,4 @@ func (p *Parser) read() (Message, error) {
 	}
 
 	return msg, nil
-}
-
-var (
-	P = spew.Dump
-	E = spew.Errorf
-)
-
-// use this to make debugging output that shows the location.
-func PP(args ...interface{}) {
-	pc, _, _, ok := runtime.Caller(1)
-	if ok {
-		f := runtime.FuncForPC(pc)
-		fParts := strings.Split(f.Name(), ".")
-		fun := fParts[len(fParts)-1]
-		s := spew.Sprintf("vvvvvvvvvvvvvvv %s vvvvvvvvvvvvvvv\n", fun)
-		spew.Print(s)
-		spew.Dump(args...)
-		spew.Println(strings.Repeat("^", len(s)-1))
-	} else {
-		spew.Println("vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv")
-		spew.Dump(args...)
-		spew.Println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
-	}
 }

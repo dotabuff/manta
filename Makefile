@@ -3,6 +3,13 @@ default: build
 test:
 	go test -cover -v
 
+bench:
+	go test -bench=. -v
+
+cover:
+	go test -cover -coverprofile /tmp/manta.cov -v
+	go tool cover -html=/tmp/manta.cov
+
 update: update-game-tracking gen-dota-proto gen-message-lookup
 
 game-tracking:

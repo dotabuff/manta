@@ -7,28 +7,30 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func init() {
+	debugMode = true
+}
+
 // Simply tests that we can read the outer structure of a real match
 func TestOuterParserRealMatch(t *testing.T) {
 	assert := assert.New(t)
 
-	parser := NewParserFromFile("replays/real_match.dem")
+	parser, err := NewParserFromFile("replays/real_match.dem")
+	if err != nil {
+		t.Fatal(err)
+	}
 
-	tick := uint32(0)
 	lastChatTick := uint32(0)
 	lastChatMessage := ""
 
-	parser.Callbacks.OnCNETMsg_Tick = func(m *dota.CNETMsg_Tick) error {
-		tick = m.GetTick()
-		return nil
-	}
-
-	parser.Callbacks.OnCUserMessageSayText2 = func(m *dota.CUserMessageSayText2) error {
-		lastChatTick = tick
+	parser.Callbacks.OnCUserMessageSayText2(func(m *dota.CUserMessageSayText2) error {
+		lastChatTick = parser.Tick
 		lastChatMessage = m.GetParam2()
 		return nil
-	}
+	})
 
-	parser.Start()
+	err = parser.Start()
+	assert.Nil(err)
 
 	assert.Equal(uint32(105819), lastChatTick)
 	assert.Equal("yah totally", lastChatMessage)
