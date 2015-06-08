@@ -18,7 +18,7 @@ type Parser struct {
 	Callbacks *Callbacks
 	Tick      uint32
 
-	classInfo    map[int]string
+	classInfo    map[int32]string
 	stringTables *StringTables
 
 	reader     *reader
@@ -50,7 +50,7 @@ func NewParser(buf []byte) (*Parser, error) {
 		reader:     newReader(buf),
 		isStopping: false,
 
-		classInfo:    make(map[int]string),
+		classInfo:    make(map[int32]string),
 		stringTables: NewStringTables(),
 	}
 
