@@ -12,8 +12,17 @@ func (p *Parser) onCDemoPacket(m *dota.CDemoPacket) error {
 
 	for r.hasNext() {
 		t, buf := r.readNext()
+
+		// Skip message we don't have a definition for (yet)
+		// XXX TODO: remove this when we get updated protos.
+		if t == 547 || t == 400 {
+			continue
+		}
+
+		// Call each packet, panic if we encounter an error.
+		// XXX TODO: this should return the error up the chain. Panic for debugging.
 		if err := p.CallByPacketType(t, buf); err != nil {
-			return err
+			panic(err)
 		}
 	}
 

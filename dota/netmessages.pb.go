@@ -1888,6 +1888,7 @@ func (m *CSVCMsg_TempEntities) GetEntityData() []byte {
 	return nil
 }
 
+// XXX TODO: this was manually edited pending a binary update.
 type CSVCMsg_CreateStringTable struct {
 	Name              *string `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
 	MaxEntries        *int32  `protobuf:"varint,2,opt,name=max_entries" json:"max_entries,omitempty"`
@@ -1895,8 +1896,8 @@ type CSVCMsg_CreateStringTable struct {
 	UserDataFixedSize *bool   `protobuf:"varint,4,opt,name=user_data_fixed_size" json:"user_data_fixed_size,omitempty"`
 	UserDataSize      *int32  `protobuf:"varint,5,opt,name=user_data_size" json:"user_data_size,omitempty"`
 	UserDataSizeBits  *int32  `protobuf:"varint,6,opt,name=user_data_size_bits" json:"user_data_size_bits,omitempty"`
-	Flags             *int32  `protobuf:"varint,7,opt,name=flags" json:"flags,omitempty"`
-	StringData        []byte  `protobuf:"bytes,8,opt,name=string_data" json:"string_data,omitempty"`
+	StringData        []byte  `protobuf:"bytes,7,opt,name=string_data" json:"string_data,omitempty"`
+	Flags             *int32  `protobuf:"varint,8,opt,name=flags" json:"flags,omitempty"`
 	UncompressedSize  *int32  `protobuf:"varint,9,opt,name=uncompressed_size" json:"uncompressed_size,omitempty"`
 	DataCompressed    *bool   `protobuf:"varint,10,opt,name=data_compressed" json:"data_compressed,omitempty"`
 	XXX_unrecognized  []byte  `json:"-"`
