@@ -76,16 +76,7 @@ func NewParser(buf []byte) (*Parser, error) {
 	parser.Callbacks.OnCSVCMsg_CreateStringTable(parser.onCSVCMsg_CreateStringTable)
 	parser.Callbacks.OnCSVCMsg_UpdateStringTable(parser.onCSVCMsg_UpdateStringTable)
 
-	parser.Callbacks.OnCDemoClassInfo(func(m *dota.CDemoClassInfo) error {
-		for _, class := range m.GetClasses() {
-			parser.classInfo[int(class.GetClassId())] = class.GetNetworkName()
-			if class.TableName != nil {
-				_panicf("unexpected class table name %s", class.GetTableName())
-			}
-		}
-
-		return nil
-	})
+	parser.Callbacks.OnCDemoClassInfo(parser.onCDemoClassInfo)
 
 	// Maintains the value of parser.Tick
 	parser.Callbacks.OnCNETMsg_Tick(func(m *dota.CNETMsg_Tick) error {
