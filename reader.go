@@ -124,7 +124,7 @@ func (r *reader) read_boolean() bool {
 		_panicf("read overflow: no bits left")
 	}
 
-	b := r.buf[r.pos*8]&(1<<uint(r.pos%8)) != 0
+	b := r.buf[r.pos/8]&(1<<uint(r.pos%8)) != 0
 	r.pos += 1
 	return b
 }
