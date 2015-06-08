@@ -8,10 +8,8 @@ import (
 func (p *Parser) onCDemoStringTables(m *dota.CDemoStringTables) error {
 	for _, t := range m.GetTables() {
 		switch t.GetTableName() {
-		case "userinfo":
-			if err := stParseUserInfo(t); err != nil {
-				return err
-			}
+		default:
+			_debugf("ignoring string table %s with flags %d, %d/%d items", t.GetTableName(), t.GetTableFlags(), len(t.GetItems()), len(t.GetItemsClientside()))
 		}
 	}
 
@@ -20,6 +18,7 @@ func (p *Parser) onCDemoStringTables(m *dota.CDemoStringTables) error {
 
 // Internal parser for callback OnCSVCMsg_CreateStringTable.
 func (p *Parser) onCSVCMsg_CreateStringTable(m *dota.CSVCMsg_CreateStringTable) error {
+	_dump("onCSVCMsg_CreateStringTable", m)
 	return nil
 }
 
