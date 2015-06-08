@@ -18,7 +18,8 @@ type Parser struct {
 	Callbacks *Callbacks
 	Tick      uint32
 
-	classInfo map[int]string
+	classInfo    map[int]string
+	stringTables *StringTables
 
 	reader     *reader
 	isStopping bool
@@ -49,7 +50,8 @@ func NewParser(buf []byte) (*Parser, error) {
 		reader:     newReader(buf),
 		isStopping: false,
 
-		classInfo: make(map[int]string),
+		classInfo:    make(map[int]string),
+		stringTables: NewStringTables(),
 	}
 
 	// Parse out the header, ensuring that it's valid.

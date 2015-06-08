@@ -22,7 +22,6 @@ It is generated from these files:
 	gameevents.proto
 	gcsdk_gcmessages.proto
 	gcsystemmsgs.proto
-	htmlmessages.proto
 	netmessages.proto
 	network_connection.proto
 	networkbasetypes.proto

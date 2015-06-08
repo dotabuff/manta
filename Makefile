@@ -28,8 +28,7 @@ update-game-tracking: game-tracking
 
 gen-dota-proto: dota/google/protobuf/descriptor.pb.go
 	rm -rf dota/*.proto
-	cp -f game-tracking/Protobufs/dota/*.proto dota/
-	cp -f game-tracking/Protobufs/dota_s2/*/*.proto dota/
+	cp -f game-tracking/Protobufs/dota_s2/*/*.proto -t dota/ || true
 	sed -i 's/^\(\s*\)\(optional\|repeated\|required\|extend\)\s*\./\1\2 /' dota/*.proto
 	sed -i 's!^\s*rpc\s*\(\S*\)\s*(\.\([^)]*\))\s*returns\s*(\.\([^)]*\))\s*{!rpc \1 (\2) returns (\3) {!' dota/*.proto
 	sed -i '1ipackage dota;\n' dota/*.proto

@@ -12,7 +12,9 @@ func (p *Parser) onCDemoPacket(m *dota.CDemoPacket) error {
 
 	for r.hasNext() {
 		t, buf := r.readNext()
-		p.CallByPacketType(t, buf)
+		if err := p.CallByPacketType(t, buf); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -48,4 +50,17 @@ func (r *demoPacketReader) readNext() (int32, []byte) {
 	buf := r.r.read_bytes(int(size))
 
 	return int32(t), buf
+}
+
+func (p *Parser) onCDemoFullPacket(m *dota.CDemoFullPacket) error {
+	r := newDemoPacketReader(m.GetPacket().GetData())
+
+	for r.hasNext() {
+		t, buf := r.readNext()
+		if err := p.CallByPacketType(t, buf); err != nil {
+			return err
+		}
+	}
+
+	return nil
 }
