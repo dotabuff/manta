@@ -54,11 +54,14 @@ func (r *demoPacketReader) readNext() (int32, []byte) {
 }
 
 func (p *Parser) onCDemoFullPacket(m *dota.CDemoFullPacket) error {
-	r := newDemoPacketReader(m.GetPacket().GetData())
+	if m.Packet != nil {
+		if err := p.onCDemoPacket(m.GetPacket()); err != nil {
+			return err
+		}
+	}
 
-	for r.hasNext() {
-		t, buf := r.readNext()
-		if err := p.CallByPacketType(t, buf); err != nil {
+	if m.StringTable != nil {
+		if err := p.onCDemoStringTables(m.GetStringTable()); err != nil {
 			return err
 		}
 	}

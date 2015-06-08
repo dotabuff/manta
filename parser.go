@@ -67,6 +67,7 @@ func NewParser(buf []byte) (*Parser, error) {
 	// CDemoPacket outer messages have a inner handler
 	parser.Callbacks.OnCDemoPacket(parser.onCDemoPacket)
 	parser.Callbacks.OnCDemoSignonPacket(parser.onCDemoPacket)
+	parser.Callbacks.OnCDemoFullPacket(parser.onCDemoFullPacket)
 
 	// Packet entities, send tables and string tables are also low-level and
 	// require internal handlers.
