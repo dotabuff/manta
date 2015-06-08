@@ -3,6 +3,7 @@ package manta
 import (
 	"bytes"
 	"io/ioutil"
+	"math"
 	"os"
 
 	"github.com/dotabuff/manta/dota"
@@ -19,6 +20,7 @@ type Parser struct {
 	Tick      uint32
 
 	classInfo    map[int32]string
+	classIdSize  int
 	stringTables *StringTables
 
 	reader     *reader
@@ -78,6 +80,11 @@ func NewParser(buf []byte) (*Parser, error) {
 	parser.Callbacks.OnCSVCMsg_UpdateStringTable(parser.onCSVCMsg_UpdateStringTable)
 
 	parser.Callbacks.OnCDemoClassInfo(parser.onCDemoClassInfo)
+
+	parser.Callbacks.OnCSVCMsg_ServerInfo(func(m *dota.CSVCMsg_ServerInfo) error {
+		parser.classIdSize = int(math.Log(float64(m.GetMaxClasses()))/math.Log(2)) + 1
+		return nil
+	})
 
 	// Maintains the value of parser.Tick
 	parser.Callbacks.OnCNETMsg_Tick(func(m *dota.CNETMsg_Tick) error {
