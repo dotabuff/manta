@@ -1,0 +1,16 @@
+language: go
+
+go:
+  - 1.4
+
+install:
+  - export PATH=$PATH:$HOME/gopath/bin
+  - go get golang.org/x/tools/cmd/cover
+  - go get -t
+
+script:
+  - make test
+
+cache:
+  directories:
+    - $HOME/gopath/src/github.com/dotabuff/manta/replays
