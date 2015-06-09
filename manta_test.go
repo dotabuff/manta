@@ -15,7 +15,9 @@ func init() {
 func TestOuterParserRealMatch(t *testing.T) {
 	assert := assert.New(t)
 
-	parser, err := NewParserFromFile("replays/real_match.dem")
+	buf := mustGetReplayData("real_match", "https://s3-us-west-2.amazonaws.com/manta.dotabuff/real_match.dem")
+
+	parser, err := NewParser(buf)
 	if err != nil {
 		t.Fatal(err)
 	}
