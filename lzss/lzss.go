@@ -51,19 +51,18 @@ func Uncompress(input []byte) (output []byte, err error) {
 
 		if cmdByte&0x01 != 0 {
 			// int32_t position = *pInput++ << LZSS_LOOKSHIFT;
+			position := cmdByte << 4
+
 			if p, err = buf.ReadByte(); err != nil {
 				return nil, err
 			}
 
-			position := p << 4
+			// position |= ( *pInput >> LZSS_LOOKSHIFT );
+			position |= (p >> 4)
 
 			if q, err = buf.ReadByte(); err != nil {
 				return nil, err
 			}
-
-			position |= (q >> 4)
-
-			// position |= ( *pInput >> LZSS_LOOKSHIFT );
 
 			count := (q & 0x0f) + 1
 			if count == 1 {
