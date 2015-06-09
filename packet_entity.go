@@ -50,15 +50,15 @@ func newPacketEntityReader(p *Parser, buf []byte) *packetEntityReader {
 // Reads the index for the next packet entity, updating the internal reader state.
 // Status: this appears to work for the first entity. Don't trust it.
 func (r *packetEntityReader) readNextIndex() {
-	x := r.r.read_bits(4)
-	b1 := r.r.read_boolean()
-	b2 := r.r.read_boolean()
+	x := r.r.readBits(4)
+	b1 := r.r.readBoolean()
+	b2 := r.r.readBoolean()
 
 	if b1 {
-		x += (r.r.read_bits(4) << 4)
+		x += (r.r.readBits(4) << 4)
 	}
 	if b2 {
-		x += (r.r.read_bits(8) << 4)
+		x += (r.r.readBits(8) << 4)
 	}
 
 	r.index += 1 + int(x)
@@ -67,8 +67,8 @@ func (r *packetEntityReader) readNextIndex() {
 // Determines the PE update type by reading two booleans
 // Status: this appears to work for the first entity. Don't trust it.
 func (r *packetEntityReader) readUpdateType() int {
-	b1 := r.r.read_boolean()
-	b2 := r.r.read_boolean()
+	b1 := r.r.readBoolean()
+	b2 := r.r.readBoolean()
 
 	switch {
 	case b1 && b2:
@@ -103,8 +103,8 @@ func (r *packetEntityReader) readNextPacketEntity() *PacketEntity {
 	case peUpdateTypeCreate:
 		pe = &PacketEntity{
 			Tick:       r.p.Tick,
-			ClassId:    int32(r.r.read_bits(r.p.classIdSize)), // assumption from yasha, 10.
-			SerialNum:  int(r.r.read_bits(10)),                // assumption from yasha
+			ClassId:    int32(r.r.readBits(r.p.classIdSize)), // assumption from yasha, 10.
+			SerialNum:  int(r.r.readBits(10)),                // assumption from yasha
 			Index:      r.index,
 			UpdateType: updateType,
 			Values:     make(map[string]interface{}),
@@ -139,12 +139,12 @@ func (r *packetEntityReader) readPropertiesIndex() []int {
 	prop := -1
 
 	for {
-		if r.r.read_boolean() {
+		if r.r.readBoolean() {
 			prop += 1
 			props = append(props, prop)
 			_debugf("easy %d", prop)
 		} else {
-			x := r.r.read_var_uint32()
+			x := r.r.readVarUint32()
 			if x == 16383 {
 				break
 			}

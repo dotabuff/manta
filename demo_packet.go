@@ -43,21 +43,21 @@ type demoPacketReader struct {
 // XXX TODO: this seems wrong, we may be skipping the last packet or some
 // other value at the end of the buffer.
 func (r *demoPacketReader) hasNext() bool {
-	return r.r.rem_bits() > 10
+	return r.r.remBits() > 10
 }
 
 // Reads the next packet, returning a type and inner buffer.
 // XXX TODO: detail our knowledge of the structure of this packet.
 func (r *demoPacketReader) readNext() (int32, []byte) {
-	t := r.r.read_bits(6)
+	t := r.r.readBits(6)
 
 	if header := t >> 4; header != 0 {
 		bits := int(header*4 + (((2 - header) >> 31) & 16))
-		t = (t & 15) | (r.r.read_bits(bits) << 4)
+		t = (t & 15) | (r.r.readBits(bits) << 4)
 	}
 
-	size := r.r.read_var_uint32()
-	buf := r.r.read_bytes(int(size))
+	size := r.r.readVarUint32()
+	buf := r.r.readBytes(int(size))
 
 	return int32(t), buf
 }

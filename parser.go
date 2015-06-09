@@ -57,12 +57,12 @@ func NewParser(buf []byte) (*Parser, error) {
 	}
 
 	// Parse out the header, ensuring that it's valid.
-	if magic := parser.reader.read_bytes(8); !bytes.Equal(magic, magicSource2) {
+	if magic := parser.reader.readBytes(8); !bytes.Equal(magic, magicSource2) {
 		return nil, _errorf("unexpected magic: expected %s, got %s", magicSource2, magic)
 	}
 
 	// Skip the next 8 bytes, which appear to be two int32s
-	parser.reader.seek_bytes(8)
+	parser.reader.seekBytes(8)
 
 	// Register callbacks
 
@@ -143,17 +143,17 @@ func (p *Parser) Stop() {
 // An outer message, right off the wire.
 type Message struct {
 	Compressed bool
-	Tick       uint64
+	Tick       uint32
 	Type       dota.EDemoCommands
 	data       []byte
-	Size       uint64
+	Size       uint32
 }
 
 // Read the next outer message from the buffer.
 func (p *Parser) read() (Message, error) {
-	binType := p.reader.read_var_uint64()
-	binTick := p.reader.read_var_uint64()
-	binSize := p.reader.read_var_uint64()
+	binType := p.reader.readVarUint32()
+	binTick := p.reader.readVarUint32()
+	binSize := p.reader.readVarUint32()
 
 	msg := Message{
 		Tick: binTick,
@@ -164,7 +164,7 @@ func (p *Parser) read() (Message, error) {
 	msg.Compressed = (command & dota.EDemoCommands_DEM_IsCompressed) == dota.EDemoCommands_DEM_IsCompressed
 	msg.Type = command & ^dota.EDemoCommands_DEM_IsCompressed
 
-	buf := p.reader.read_bytes(int(msg.Size))
+	buf := p.reader.readBytes(int(msg.Size))
 
 	if msg.Compressed {
 		decodedLen, err := snappy.DecodedLen(buf)
@@ -181,7 +181,7 @@ func (p *Parser) read() (Message, error) {
 			return msg, err
 		}
 		msg.data = out
-		msg.Size = uint64(decodedLen)
+		msg.Size = uint32(decodedLen)
 	} else {
 		msg.data = buf
 	}

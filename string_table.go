@@ -75,11 +75,11 @@ func parseStringTable(m *dota.CSVCMsg_CreateStringTable) map[int]*StringTableIte
 	// Some values are compressed and include a header containing LZSS and a uint32
 	// denoting the length of the entire file.
 	if m.GetDataCompressed() {
-		if h1 := r.read_string_n(4); h1 != "LZSS" {
+		if h1 := r.readStringN(4); h1 != "LZSS" {
 			_panicf("expected LZSS header, got %s", h1)
 		}
 
-		if h2 := r.read_le_uint32(); int(h2) != len(buf) {
+		if h2 := r.readLeUint32(); int(h2) != len(buf) {
 			_panicf("expected %d length header, got %d", len(buf), h2)
 		}
 	}
@@ -91,44 +91,44 @@ func parseStringTable(m *dota.CSVCMsg_CreateStringTable) map[int]*StringTableIte
 
 	bitsPerIndex := int(math.Log(float64(m.GetMaxEntries())) / math.Log(2))
 	keyHistory := make([]string, 0, 32)
-	mysteryFlag := r.read_boolean()
+	mysteryFlag := r.readBoolean()
 	index := -1
 
-	for r.rem_bits() > 3 {
-		if r.read_boolean() {
+	for r.remBits() > 3 {
+		if r.readBoolean() {
 			index += 1
 		} else {
-			index = int(r.read_bits(bitsPerIndex))
+			index = int(r.readBits(bitsPerIndex))
 		}
 
 		name := ""
 
-		if r.read_boolean() {
+		if r.readBoolean() {
 
-			if mysteryFlag && r.read_boolean() {
+			if mysteryFlag && r.readBoolean() {
 				panic("mysteryFlag assertion failed!")
 			}
 
-			if r.read_boolean() {
+			if r.readBoolean() {
 
-				basis := r.read_bits(5)
-				length := r.read_bits(5)
+				basis := r.readBits(5)
+				length := r.readBits(5)
 				if int(basis) >= len(keyHistory) {
 
-					name += r.read_string()
+					name += r.readString()
 				} else {
 
 					s := keyHistory[basis]
 					if int(length) > len(s) {
-						name += s + r.read_string()
+						name += s + r.readString()
 
 					} else {
-						name += s[0:length] + r.read_string()
+						name += s[0:length] + r.readString()
 
 					}
 				}
 			} else {
-				name += r.read_string()
+				name += r.readString()
 			}
 
 			if len(keyHistory) >= 32 {
@@ -140,16 +140,16 @@ func parseStringTable(m *dota.CSVCMsg_CreateStringTable) map[int]*StringTableIte
 		}
 
 		value := []byte{}
-		if r.read_boolean() {
+		if r.readBoolean() {
 			bitLen := 0
 			if dataFixedSize {
 				bitLen = int(dataSizeBits)
 
 			} else {
-				bitLen = int(r.read_bits(14) * 8)
+				bitLen = int(r.readBits(14) * 8)
 
 			}
-			value = r.read_bits_as_bytes(bitLen)
+			value = r.readBitsAsBytes(bitLen)
 		}
 		items[index] = &StringTableItem{Name: name, Data: value}
 	}

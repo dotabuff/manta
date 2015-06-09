@@ -22,9 +22,9 @@ func parseSendTables(m *dota.CDemoSendTables) error {
 	r := newReader(m.GetData())
 
 	// The buffer starts with a varint encoded length
-	size := int(r.read_var_uint32())
-	if size != r.rem_bytes() {
-		_panicf("expected %d additional bytes, got %d", size, r.rem_bytes())
+	size := int(r.readVarUint32())
+	if size != r.remBytes() {
+		_panicf("expected %d additional bytes, got %d", size, r.remBytes())
 	}
 
 	// XXX TODO:
@@ -36,10 +36,10 @@ func parseSendTables(m *dota.CDemoSendTables) error {
 	// wrong.
 	// This technique produces about 5000 short messages.
 	// The reads align: we don't under-read or over-read the buffer.
-	for r.rem_bytes() > 0 {
-		r.read_var_uint32()           // type
-		s := int(r.read_var_uint32()) // length
-		r.read_bytes(s)               // buffer
+	for r.remBytes() > 0 {
+		r.readVarUint32()           // type
+		s := int(r.readVarUint32()) // length
+		r.readBytes(s)              // buffer
 	}
 
 	return nil

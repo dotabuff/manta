@@ -22,22 +22,22 @@ func newReader(buf []byte) *reader {
 }
 
 // Calculates our byte position.
-func (r *reader) byte_pos() int {
+func (r *reader) bytePos() int {
 	return r.pos / 8
 }
 
 // Calculates how many bits are remaining.
-func (r *reader) rem_bits() int {
+func (r *reader) remBits() int {
 	return r.size - r.pos
 }
 
 // Calculates how many bytes are remaining.
-func (r *reader) rem_bytes() int {
-	return (r.size - r.pos) / 8
+func (r *reader) remBytes() int {
+	return r.remBits() / 8
 }
 
 // Seeks a given number of bits (may be negative).
-func (r *reader) seek_bits(n int) {
+func (r *reader) seekBits(n int) {
 	if r.pos+n >= r.size || r.pos+n < 0 {
 		_panicf("seek overflow: %d bits requested, only %d remaining", n, r.size-r.pos)
 	}
@@ -45,46 +45,46 @@ func (r *reader) seek_bits(n int) {
 }
 
 // Seeks a given number of bytes (may be negative).
-func (r *reader) seek_bytes(n int) {
-	r.seek_bits(n * 8)
+func (r *reader) seekBytes(n int) {
+	r.seekBits(n * 8)
 }
 
 // Reads a little-endian uint16.
-func (r *reader) read_le_uint16() uint16 {
-	return littleEndian.Uint16(r.read_bytes(2))
+func (r *reader) readLeUint16() uint16 {
+	return littleEndian.Uint16(r.readBytes(2))
 }
 
 // Reads a little-endian uint32.
-func (r *reader) read_le_uint32() uint32 {
-	return littleEndian.Uint32(r.read_bytes(4))
+func (r *reader) readLeUint32() uint32 {
+	return littleEndian.Uint32(r.readBytes(4))
 }
 
 // Reads a little-endian uint64.
-func (r *reader) read_le_uint64() uint64 {
-	return littleEndian.Uint64(r.read_bytes(8))
+func (r *reader) readLeUint64() uint64 {
+	return littleEndian.Uint64(r.readBytes(8))
 }
 
 // Reads a big-endian uint16.
-func (r *reader) read_be_uint16() uint16 {
-	return bigEndian.Uint16(r.read_bytes(2))
+func (r *reader) readBeUint16() uint16 {
+	return bigEndian.Uint16(r.readBytes(2))
 }
 
 // Reads a big-endian uint32.
-func (r *reader) read_be_uint32() uint32 {
-	return bigEndian.Uint32(r.read_bytes(4))
+func (r *reader) readBeUint32() uint32 {
+	return bigEndian.Uint32(r.readBytes(4))
 }
 
 // Reads a big-endian uint64.
-func (r *reader) read_be_uint64() uint64 {
-	return bigEndian.Uint64(r.read_bytes(8))
+func (r *reader) readBeUint64() uint64 {
+	return bigEndian.Uint64(r.readBytes(8))
 }
 
 // Reads an unsigned 32-bit varint.
-func (r *reader) read_var_uint32() uint32 {
+func (r *reader) readVarUint32() uint32 {
 	var x uint
 	var s uint
 	for {
-		b := uint(r.read_byte())
+		b := uint(r.readByte())
 		x |= (b & 0x7F) << s
 		s += 7
 		if ((b & 0x80) == 0) || (s == 35) {
@@ -96,11 +96,11 @@ func (r *reader) read_var_uint32() uint32 {
 }
 
 // Reads an unsigned 64-bit varint.
-func (r *reader) read_var_uint64() uint64 {
+func (r *reader) readVarUint64() uint64 {
 	var x uint64
 	var s uint
 	for i := 0; ; i++ {
-		b := r.read_byte()
+		b := r.readByte()
 		if b < 0x80 {
 			if i > 9 || i == 9 && b > 1 {
 				_panicf("read overflow: varint overflows uint64")
@@ -113,8 +113,8 @@ func (r *reader) read_var_uint64() uint64 {
 }
 
 // Reads a signed 64-bit varint.
-func (r *reader) read_var_sint64() int64 {
-	ux := r.read_var_uint64()
+func (r *reader) readVarSint64() int64 {
+	ux := r.readVarUint64()
 	x := int64(ux >> 1)
 	if ux&1 != 0 {
 		x = ^x
@@ -124,8 +124,8 @@ func (r *reader) read_var_sint64() int64 {
 
 // Reads a boolean value.
 // TODO XXX: untested.
-func (r *reader) read_boolean() bool {
-	if r.rem_bits() < 1 {
+func (r *reader) readBoolean() bool {
+	if r.remBits() < 1 {
 		_panicf("read overflow: no bits left")
 	}
 
@@ -135,13 +135,13 @@ func (r *reader) read_boolean() bool {
 }
 
 // Reads the next byte (8 bits) in the buffer.
-func (r *reader) read_byte() byte {
-	return r.read_bytes(1)[0]
+func (r *reader) readByte() byte {
+	return r.readBytes(1)[0]
 }
 
 // Reads the given number of bytes from the buffer.
-func (r *reader) read_bytes(n int) []byte {
-	if r.rem_bits() < (n * 8) {
+func (r *reader) readBytes(n int) []byte {
+	if r.remBits() < (n * 8) {
 		_panicf("read overflow: %d bits requested, only %d remaining", n*8, r.size-r.pos)
 	}
 
@@ -155,21 +155,21 @@ func (r *reader) read_bytes(n int) []byte {
 	// Slow path if our position isn't byte aligned.
 	buf := make([]byte, n)
 	for i := 0; i < n; i++ {
-		buf[i] = byte(r.read_bits(8))
+		buf[i] = byte(r.readBits(8))
 	}
 	return buf
 }
 
 // Reads a string of a given length.
-func (r *reader) read_string_n(n int) string {
-	return string(r.read_bytes(n))
+func (r *reader) readStringN(n int) string {
+	return string(r.readBytes(n))
 }
 
 // Read a null terminated string.
-func (r *reader) read_string() string {
+func (r *reader) readString() string {
 	buf := make([]byte, 0)
 	for {
-		b := r.read_byte()
+		b := r.readByte()
 		if b == 0 {
 			break
 		}
@@ -180,23 +180,23 @@ func (r *reader) read_string() string {
 }
 
 // Reads bits as bytes.
-func (r *reader) read_bits_as_bytes(n int) []byte {
+func (r *reader) readBitsAsBytes(n int) []byte {
 	buf := make([]byte, (n+7)/8)
 	i := 0
 	for n > 7 {
 		n -= 8
-		buf[i] = byte(r.read_bits(8))
+		buf[i] = byte(r.readBits(8))
 		i++
 	}
 	if n != 0 {
-		buf[i] = byte(r.read_bits(8))
+		buf[i] = byte(r.readBits(8))
 	}
 	return buf
 }
 
 // Read bits of a given length as a uint, may or may not be byte-aligned.
-func (r *reader) read_bits(n int) uint {
-	if r.rem_bits() < n {
+func (r *reader) readBits(n int) uint {
+	if r.remBits() < n {
 		_panicf("read overflow: %d bits requested, only %d remaining", n, r.size-r.pos)
 	}
 
@@ -224,7 +224,7 @@ func (r *reader) read_bits(n int) uint {
 }
 
 // Take a peek at what's next in the buffer.
-func (r *reader) _peek(depth, max int) {
+func (r *reader) peekAhead(depth, max int) {
 	pos := r.pos
 
 	indent := func(n int) string {
@@ -239,27 +239,27 @@ func (r *reader) _peek(depth, max int) {
 		r.pos = pos
 	}()
 
-	if r.rem_bits() == 0 || depth > max {
+	if r.remBits() == 0 || depth > max {
 		return
 	}
 
-	str := r.read_string()
-	_debugf("%s [%d/%d] str = %s", indent(depth), pos, r.size, str)
-	r._peek(depth+1, max)
-	r.pos = pos
-
-	buf := r.read_bytes(8)
+	buf := r.readBytes(8)
 	_debugf("%s [%d/%d] buf = %v (%s)", indent(depth), pos, r.size, buf, string(buf))
-	r._peek(depth+1, max)
+	r.peekAhead(depth+1, max)
 	r.pos = pos
 
-	u32 := r.read_le_uint32()
+	u32 := r.readLeUint32()
 	_debugf("%s [%d/%d] u32 = %d", indent(depth), pos, r.size, u32)
-	r._peek(depth+1, max)
+	r.peekAhead(depth+1, max)
 	r.pos = pos
 
-	bln := r.read_boolean()
+	vui := r.readLeUint32()
+	_debugf("%s [%d/%d] var = %d", indent(depth), pos, r.size, vui)
+	r.peekAhead(depth+1, max)
+	r.pos = pos
+
+	bln := r.readBoolean()
 	_debugf("%s [%d/%d] bln = %v", indent(depth), pos, r.size, bln)
-	r._peek(depth+1, max)
+	r.peekAhead(depth+1, max)
 	r.pos = pos
 }
