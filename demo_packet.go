@@ -62,15 +62,18 @@ func (r *demoPacketReader) readNext() (int32, []byte) {
 	return int32(t), buf
 }
 
+// Internal parser for callback OnCDemoFullPacket.
 func (p *Parser) onCDemoFullPacket(m *dota.CDemoFullPacket) error {
-	if m.Packet != nil {
-		if err := p.onCDemoPacket(m.GetPacket()); err != nil {
+	// Per Valve docs, parse the CDemoStringTables first.
+	if m.StringTable != nil {
+		if err := p.onCDemoStringTables(m.GetStringTable()); err != nil {
 			return err
 		}
 	}
 
-	if m.StringTable != nil {
-		if err := p.onCDemoStringTables(m.GetStringTable()); err != nil {
+	// Then the CDemoPacket.
+	if m.Packet != nil {
+		if err := p.onCDemoPacket(m.GetPacket()); err != nil {
 			return err
 		}
 	}
