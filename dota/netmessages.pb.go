@@ -1893,13 +1893,17 @@ type CSVCMsg_CreateStringTable struct {
 	Name              *string `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
 	MaxEntries        *int32  `protobuf:"varint,2,opt,name=max_entries" json:"max_entries,omitempty"`
 	NumEntries        *int32  `protobuf:"varint,3,opt,name=num_entries" json:"num_entries,omitempty"`
-	UserDataFixedSize *bool   `protobuf:"varint,4,opt,name=user_data_fixed_size" json:"user_data_fixed_size,omitempty"`
+	UserDataFixedSize *int32  `protobuf:"varint,4,opt,name=user_data_fixed_size" json:"user_data_fixed_size,omitempty"`
 	UserDataSize      *int32  `protobuf:"varint,5,opt,name=user_data_size" json:"user_data_size,omitempty"`
 	UserDataSizeBits  *int32  `protobuf:"varint,6,opt,name=user_data_size_bits" json:"user_data_size_bits,omitempty"`
 	StringData        []byte  `protobuf:"bytes,7,opt,name=string_data" json:"string_data,omitempty"`
-	Flags             *int32  `protobuf:"varint,8,opt,name=flags" json:"flags,omitempty"`
-	UncompressedSize  *int32  `protobuf:"varint,9,opt,name=uncompressed_size" json:"uncompressed_size,omitempty"`
-	DataCompressed    *bool   `protobuf:"varint,10,opt,name=data_compressed" json:"data_compressed,omitempty"`
+	CompressedSize    *int32  `protobuf:"varint,8,opt,name=compressed_size" json:"compressed_size,omitempty"`
+	DataCompressed    *bool   `protobuf:"varint,9,opt,name=data_compressed" json:"data_compressed,omitempty"`
+	Flags             *int32  `protobuf:"varint,10,opt,name=flags" json:"flags,omitempty"`
+	Unknown1          *int32  `protobuf:"varint,11,opt,name=unknown1" json:"unknown1,omitempty"`
+	Unknown2          *int32  `protobuf:"varint,12,opt,name=unknown2" json:"unknown2,omitempty"`
+	Unknown3          *int32  `protobuf:"varint,13,opt,name=unknown3" json:"unknown3,omitempty"`
+	Unknown4          *int32  `protobuf:"varint,14,opt,name=unknown4" json:"unknown4,omitempty"`
 	XXX_unrecognized  []byte  `json:"-"`
 }
 
@@ -1928,11 +1932,11 @@ func (m *CSVCMsg_CreateStringTable) GetNumEntries() int32 {
 	return 0
 }
 
-func (m *CSVCMsg_CreateStringTable) GetUserDataFixedSize() bool {
+func (m *CSVCMsg_CreateStringTable) GetUserDataFixedSize() int32 {
 	if m != nil && m.UserDataFixedSize != nil {
 		return *m.UserDataFixedSize
 	}
-	return false
+	return 0
 }
 
 func (m *CSVCMsg_CreateStringTable) GetUserDataSize() int32 {
@@ -1963,9 +1967,9 @@ func (m *CSVCMsg_CreateStringTable) GetStringData() []byte {
 	return nil
 }
 
-func (m *CSVCMsg_CreateStringTable) GetUncompressedSize() int32 {
-	if m != nil && m.UncompressedSize != nil {
-		return *m.UncompressedSize
+func (m *CSVCMsg_CreateStringTable) GetCompressedSize() int32 {
+	if m != nil && m.CompressedSize != nil {
+		return *m.CompressedSize
 	}
 	return 0
 }

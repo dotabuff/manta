@@ -1,6 +1,8 @@
 package manta
 
 import (
+	"math"
+
 	"github.com/dotabuff/manta/dota"
 )
 
@@ -46,7 +48,6 @@ func (p *Parser) onCDemoStringTables(m *dota.CDemoStringTables) error {
 
 // Internal parser for callback OnCSVCMsg_CreateStringTable.
 func (p *Parser) onCSVCMsg_CreateStringTable(m *dota.CSVCMsg_CreateStringTable) error {
-	_dump("onCSVCMsg_CreateStringTable", m)
 	return nil
 }
 
@@ -55,26 +56,103 @@ func (p *Parser) onCSVCMsg_UpdateStringTable(m *dota.CSVCMsg_UpdateStringTable) 
 	return nil
 }
 
-// TODO XXX: WIP
-// So far:
-// - First byte (calling it flags) reads in as a int8 or varint, value 10
-// - Second byte (calling it length) reads in as a int8 or varint and provides the length of the following string
-// - Next item is a string with the player name
-// - The byte after the name reads in as int8 or varint, value 17
-func stParseUserInfo(t *dota.CDemoStringTablesTableT) error {
-	_debugf("stParseUserInfo flags %d", t.GetTableFlags())
-	for i, item := range t.GetItems() {
-		if len(item.GetData()) == 0 {
-			continue
-		}
+type StringTableItem struct {
+	Name string
+	Data []byte
+}
 
-		r := newReader(item.GetData())
-		flags := r.read_var_uint64()
-		nameLen := r.read_var_uint64()
-		name := r.read_string_n(int(nameLen))
-		_dump("user info buffer", item.GetData())
-		_debugf("index=%d flags=%d name_len=%d name='%s'", i, flags, nameLen, name)
+// Parse the entries in a string table
+func parseStringTable(m *dota.CSVCMsg_CreateStringTable) map[int]*StringTableItem {
+	items := make(map[int]*StringTableItem)
+
+	buf := m.GetStringData()
+	if len(buf) == 0 {
+		return items
 	}
 
-	return nil
+	r := newReader(buf)
+
+	// Some values are compressed and include a header containing LZSS and a uint32
+	// denoting the length of the entire file.
+	if m.GetDataCompressed() {
+		if h1 := r.read_string_n(4); h1 != "LZSS" {
+			_panicf("expected LZSS header, got %s", h1)
+		}
+
+		if h2 := r.read_le_uint32(); int(h2) != len(buf) {
+			_panicf("expected %d length header, got %d", len(buf), h2)
+		}
+	}
+
+	// This is all guesswork ported from Yasha.
+
+	dataFixedSize := m.GetUserDataFixedSize() == 1
+	dataSizeBits := m.GetUserDataSizeBits()
+
+	bitsPerIndex := int(math.Log(float64(m.GetMaxEntries())) / math.Log(2))
+	keyHistory := make([]string, 0, 32)
+	mysteryFlag := r.read_boolean()
+	index := -1
+
+	for r.rem_bits() > 3 {
+		if r.read_boolean() {
+			index += 1
+		} else {
+			index = int(r.read_bits(bitsPerIndex))
+		}
+
+		name := ""
+
+		if r.read_boolean() {
+
+			if mysteryFlag && r.read_boolean() {
+				panic("mysteryFlag assertion failed!")
+			}
+
+			if r.read_boolean() {
+
+				basis := r.read_bits(5)
+				length := r.read_bits(5)
+				if int(basis) >= len(keyHistory) {
+
+					name += r.read_string()
+				} else {
+
+					s := keyHistory[basis]
+					if int(length) > len(s) {
+						name += s + r.read_string()
+
+					} else {
+						name += s[0:length] + r.read_string()
+
+					}
+				}
+			} else {
+				name += r.read_string()
+			}
+
+			if len(keyHistory) >= 32 {
+				copy(keyHistory[0:], keyHistory[1:])
+				keyHistory[len(keyHistory)-1] = ""
+				keyHistory = keyHistory[:len(keyHistory)-1]
+			}
+			keyHistory = append(keyHistory, name)
+		}
+
+		value := []byte{}
+		if r.read_boolean() {
+			bitLen := 0
+			if dataFixedSize {
+				bitLen = int(dataSizeBits)
+
+			} else {
+				bitLen = int(r.read_bits(14) * 8)
+
+			}
+			value = r.read_bits_as_bytes(bitLen)
+		}
+		items[index] = &StringTableItem{Name: name, Data: value}
+	}
+
+	return items
 }

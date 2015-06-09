@@ -160,6 +160,35 @@ func (r *reader) read_string_n(n int) string {
 	return string(r.read_bytes(n))
 }
 
+// Read a null terminated string.
+func (r *reader) read_string() string {
+	buf := make([]byte, 0)
+	for {
+		b := r.read_byte()
+		if b == 0 {
+			break
+		}
+		buf = append(buf, b)
+	}
+
+	return string(buf)
+}
+
+// Reads bits as bytes.
+func (r *reader) read_bits_as_bytes(n int) []byte {
+	buf := make([]byte, (n+7)/8)
+	i := 0
+	for n > 7 {
+		n -= 8
+		buf[i] = byte(r.read_bits(8))
+		i++
+	}
+	if n != 0 {
+		buf[i] = byte(r.read_bits(8))
+	}
+	return buf
+}
+
 // Read bits of a given length as a uint, may or may not be byte-aligned.
 func (r *reader) read_bits(n int) uint {
 	if r.rem_bits() < n {
@@ -187,4 +216,45 @@ func (r *reader) read_bits(n int) uint {
 	r.pos += n
 
 	return uint(val)
+}
+
+// Take a peek at what's next in the buffer.
+func (r *reader) _peek(depth, max int) {
+	pos := r.pos
+
+	indent := func(n int) string {
+		s := ""
+		for i := 0; i < n; i++ {
+			s += "-- "
+		}
+		return s
+	}
+
+	defer func() {
+		r.pos = pos
+	}()
+
+	if r.rem_bits() == 0 || depth > max {
+		return
+	}
+
+	str := r.read_string()
+	_debugf("%s [%d/%d] str = %s", indent(depth), pos, r.size, str)
+	r._peek(depth+1, max)
+	r.pos = pos
+
+	buf := r.read_bytes(8)
+	_debugf("%s [%d/%d] buf = %v (%s)", indent(depth), pos, r.size, buf, string(buf))
+	r._peek(depth+1, max)
+	r.pos = pos
+
+	u32 := r.read_le_uint32()
+	_debugf("%s [%d/%d] u32 = %d", indent(depth), pos, r.size, u32)
+	r._peek(depth+1, max)
+	r.pos = pos
+
+	bln := r.read_boolean()
+	_debugf("%s [%d/%d] bln = %v", indent(depth), pos, r.size, bln)
+	r._peek(depth+1, max)
+	r.pos = pos
 }

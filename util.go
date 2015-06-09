@@ -2,11 +2,13 @@ package manta
 
 import (
 	"fmt"
+	"io/ioutil"
 	"os"
 	"runtime"
 	"strings"
 
 	"github.com/davecgh/go-spew/spew"
+	"github.com/golang/protobuf/proto"
 )
 
 var debugMode bool
@@ -16,6 +18,8 @@ func init() {
 		debugMode = true
 	}
 }
+
+var _sprintf = fmt.Sprintf
 
 // printf only if debugging
 func _debugf(format string, args ...interface{}) {
@@ -41,6 +45,31 @@ func _dump(label string, args ...interface{}) {
 		fmt.Printf("%s: %s", _caller(2), label)
 		spew.Dump(args...)
 	}
+}
+
+// dumps a given byte buffer to the given fixture filename
+func _dump_fixture(filename string, buf []byte) {
+	if err := ioutil.WriteFile("./fixtures/"+filename, buf, 0644); err != nil {
+		panic(err)
+	}
+}
+
+// reads a byte buffer from the given fixture filename
+func _read_fixture(filename string) []byte {
+	buf, err := ioutil.ReadFile("./fixtures/" + filename)
+	if err != nil {
+		panic(err)
+	}
+	return buf
+}
+
+// marshal a proto.Message to bytes
+func _proto_marshal(obj proto.Message) []byte {
+	buf, err := proto.Marshal(obj)
+	if err != nil {
+		panic(err)
+	}
+	return buf
 }
 
 // Returns the name of the calling function
