@@ -78,6 +78,7 @@ func NewParser(buf []byte) (*Parser, error) {
 	parser.Callbacks.OnCDemoStringTables(parser.onCDemoStringTables)
 	parser.Callbacks.OnCSVCMsg_CreateStringTable(parser.onCSVCMsg_CreateStringTable)
 	parser.Callbacks.OnCSVCMsg_UpdateStringTable(parser.onCSVCMsg_UpdateStringTable)
+	parser.Callbacks.OnCSVCMsg_SendTable(parser.onCSVCMsg_SendTable)
 
 	parser.Callbacks.OnCDemoClassInfo(parser.onCDemoClassInfo)
 

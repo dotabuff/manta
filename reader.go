@@ -31,6 +31,11 @@ func (r *reader) rem_bits() int {
 	return r.size - r.pos
 }
 
+// Calculates how many bytes are remaining.
+func (r *reader) rem_bytes() int {
+	return (r.size - r.pos) / 8
+}
+
 // Seeks a given number of bits (may be negative).
 func (r *reader) seek_bits(n int) {
 	if r.pos+n >= r.size || r.pos+n < 0 {
