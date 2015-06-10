@@ -1,9 +1,15 @@
 package lzss
 
+// #include "./lzss.h"
+// #cgo CFLAGS: -std=c11
+import "C"
+
 import (
 	"bytes"
 	"encoding/binary"
 	"fmt"
+
+	"github.com/davecgh/go-spew/spew"
 )
 
 var magic = [4]byte{'L', 'Z', 'S', 'S'}
@@ -31,6 +37,7 @@ func Uncompress(input []byte) (output []byte, err error) {
 
 	var totalBytes int32
 	var cmdByte, getCmdByte byte
+	var p, q, i byte
 
 	for {
 		if getCmdByte == 0 {
@@ -42,47 +49,58 @@ func Uncompress(input []byte) (output []byte, err error) {
 
 		getCmdByte = (getCmdByte + 1) & 0x07
 
-		if cmdByte&0x01 == 0x01 {
-			p, err := buf.ReadByte()
-			if err != nil {
+		if cmdByte&0x01 != 0 {
+			// int32_t position = *pInput++ << LZSS_LOOKSHIFT;
+			position := cmdByte << 4
+
+			if p, err = buf.ReadByte(); err != nil {
 				return nil, err
 			}
 
-			position := p << 4
+			// position |= ( *pInput >> LZSS_LOOKSHIFT );
+			position |= (p >> 4)
 
-			q, err := buf.ReadByte()
-			if err != nil {
+			if q, err = buf.ReadByte(); err != nil {
 				return nil, err
 			}
-
-			position |= (q >> 4)
 
 			count := (q & 0x0f) + 1
 			if count == 1 {
 				break
 			}
 
-			source := byte(len(input)-buf.Len()) - position - 1
-			for i := byte(0); i < count; i++ {
+			for i = 0; i < count; i++ {
+				offset := (len(output) - int(position) - 1) + int(i)
+				source := output[offset]
 				output = append(output, source)
 			}
-
-			totalBytes += int32(count)
 		} else {
-			b, err := buf.ReadByte()
-			if err != nil {
+			if p, err = buf.ReadByte(); err != nil {
 				return nil, err
 			}
-			output = append(output, b)
-			totalBytes++
+			output = append(output, p)
 		}
 
 		cmdByte = cmdByte >> 1
 	}
 
-	if totalBytes != header.Size {
+	if int32(len(output)) != header.Size {
 		return nil, fmt.Errorf("Unexpected failure: total(%d) != actual(%d)", totalBytes, header.Size)
 	}
 
 	return output, nil
+}
+
+func uncompressReference(sample string) []byte {
+	outRaw := ""
+	out := C.CString(outRaw)
+	in := C.CString(sample)
+	f := C.lzss_uncompress(in, out, 99999)
+
+	if f > 0 {
+		return []byte(C.GoStringN(out, C.int(f)))
+	} else {
+		spew.Dump(f)
+	}
+	return nil
 }
