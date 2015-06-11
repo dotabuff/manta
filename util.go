@@ -19,7 +19,10 @@ func init() {
 	}
 }
 
-var _sprintf = fmt.Sprintf
+var (
+	_sprintf = fmt.Sprintf
+	_sdump   = spew.Sdump
+)
 
 // printf only if debugging
 func _debugf(format string, args ...interface{}) {

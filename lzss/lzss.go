@@ -91,7 +91,7 @@ func Uncompress(input []byte) (output []byte, err error) {
 	return output, nil
 }
 
-func uncompressReference(sample string) []byte {
+func UncompressReference(sample string) []byte {
 	outRaw := ""
 	out := C.CString(outRaw)
 	in := C.CString(sample)

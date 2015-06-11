@@ -80,6 +80,11 @@ func NewParser(buf []byte) (*Parser, error) {
 	parser.Callbacks.OnCSVCMsg_UpdateStringTable(parser.onCSVCMsg_UpdateStringTable)
 	parser.Callbacks.OnCSVCMsg_SendTable(parser.onCSVCMsg_SendTable)
 
+	parser.Callbacks.OnCSVCMsg_GameEvent(func(m *dota.CSVCMsg_GameEvent) error {
+		_dump("gameevent", m)
+		return nil
+	})
+
 	parser.Callbacks.OnCDemoClassInfo(parser.onCDemoClassInfo)
 
 	parser.Callbacks.OnCSVCMsg_ServerInfo(func(m *dota.CSVCMsg_ServerInfo) error {

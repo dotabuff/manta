@@ -57,102 +57,152 @@ func (p *Parser) onCSVCMsg_UpdateStringTable(m *dota.CSVCMsg_UpdateStringTable) 
 }
 
 type StringTableItem struct {
-	Name string
-	Data []byte
+	Index int
+	Name  string
+	Data  []byte
 }
 
-// Parse the entries in a string table
-func parseStringTable(m *dota.CSVCMsg_CreateStringTable) map[int]*StringTableItem {
-	items := make(map[int]*StringTableItem)
+const (
+	STRINGTABLE_MAX_KEY_SIZE = 1024
+	STRINGTABLE_KEY_HISTORY  = 32
+)
 
-	buf := m.GetStringData()
+type stringTableItem struct {
+	index int
+	key   string
+	value []byte
+}
+
+func parseStringTable(buf []byte, maxEntries int32, userDataFixed bool, userDataSize int32, userDataSizeBits int32) []*stringTableItem {
+	r := newReader(buf)
+	items := make([]*stringTableItem, 0)
+
+	// Start with an index of -1.
+	// If the first item is at index 0 it will use a incr operation.
+	index := -1
+
+	// Maintain a list of key history
+	keys := make([]string, 0, STRINGTABLE_KEY_HISTORY)
+
+	// Some tables have no data
 	if len(buf) == 0 {
 		return items
 	}
 
-	r := newReader(buf)
+	_debugf("index bits = %d", log2(int(maxEntries)))
 
-	// Some values are compressed and include a header containing LZSS and a uint32
-	// denoting the length of the entire file.
-	if m.GetDataCompressed() {
-		if h1 := r.readStringN(4); h1 != "LZSS" {
-			_panicf("expected LZSS header, got %s", h1)
-		}
+	// Loop through entries in the data structure
+	//
+	// Each entry is a tuple consisting of {index, key, value}
+	//
+	// Index can either be incremented from the previous position or
+	// overwritten with a given entry.
+	//
+	// Key may be omitted (will be represented here as "")
+	for i := 0; true; i++ {
+		key := ""
+		value := []byte{}
 
-		if h2 := r.readLeUint32(); int(h2) != len(buf) {
-			_panicf("expected %d length header, got %d", len(buf), h2)
-		}
-	}
+		// Read a boolean to determine whether the operation is an increment or
+		// has a fixed index position. A fixed index position of zero should be
+		// the last data in the buffer, and indicates that all data has been read.
+		incr := r.readBoolean()
+		if incr {
+			index++
 
-	// This is all guesswork ported from Yasha.
-
-	dataFixedSize := m.GetUserDataFixedSize() == 1
-	dataSizeBits := m.GetUserDataSizeBits()
-
-	bitsPerIndex := int(math.Log(float64(m.GetMaxEntries())) / math.Log(2))
-	keyHistory := make([]string, 0, 32)
-	mysteryFlag := r.readBoolean()
-	index := -1
-
-	for r.remBits() > 3 {
-		if r.readBoolean() {
-			index += 1
+			_debugf("%d: incr index to %d", i, index)
 		} else {
-			index = int(r.readBits(bitsPerIndex))
+			size := log2(int(maxEntries))
+			_debugf("%d: reading %d index bits", i, size) // this might just be 5
+			index = int(r.readBits(size))
+			_debugf("%d: modify index to %d", i, index)
+
+			// An index of zero given by value indicates the end of the buffer.
+			if index == 0 {
+				if r.remBits() > 7 {
+					_panicf("still have too many (%d) bits left!", r.remBits())
+				}
+
+				break
+			}
 		}
 
-		name := ""
+		_debugf("bits left: %d (%d bytes)", r.remBits(), r.remBytes())
 
-		if r.readBoolean() {
+		// Some values have keys, some don't.
+		hasKey := r.readBoolean()
+		if hasKey {
+			_debugf("%d: has a key!", i)
+			// if full && r.readBoolean() {
+			// 	panic("shouldnt happen")
+			// }
 
-			if mysteryFlag && r.readBoolean() {
-				panic("mysteryFlag assertion failed!")
-			}
+			substring := r.readBoolean()
+			if substring {
+				sIndex := r.readBits(5)  // index of substr in keyhistory
+				sLength := r.readBits(5) // prefix length to new key
 
-			if r.readBoolean() {
+				_debugf("%d: substring index=%d length=%d", i, sIndex, sLength)
 
-				basis := r.readBits(5)
-				length := r.readBits(5)
-				if int(basis) >= len(keyHistory) {
+				if (sIndex >= STRINGTABLE_KEY_HISTORY) || (sLength >= STRINGTABLE_MAX_KEY_SIZE) {
+					panic("shouldnt happen 2.0")
+				}
 
-					name += r.readString()
+				if int(sIndex) >= len(keys) {
+					key += r.readString()
 				} else {
-
-					s := keyHistory[basis]
-					if int(length) > len(s) {
-						name += s + r.readString()
-
+					s := keys[sIndex]
+					if int(sLength) > len(s) {
+						key += s + r.readString()
 					} else {
-						name += s[0:length] + r.readString()
-
+						key += s[0:sLength] + r.readString()
 					}
 				}
 			} else {
-				name += r.readString()
+				_debugf("%d: reading normal string", i)
+				key = r.readString()
 			}
 
-			if len(keyHistory) >= 32 {
-				copy(keyHistory[0:], keyHistory[1:])
-				keyHistory[len(keyHistory)-1] = ""
-				keyHistory = keyHistory[:len(keyHistory)-1]
+			_debugf("%d: key = %s", i, key)
+
+			if len(keys) >= STRINGTABLE_KEY_HISTORY {
+				copy(keys[0:], keys[1:])
+				keys[len(keys)-1] = ""
+				keys = keys[:len(keys)-1]
 			}
-			keyHistory = append(keyHistory, name)
+			keys = append(keys, key)
+		} else {
+			_debugf("%d: no key", i)
 		}
 
-		value := []byte{}
-		if r.readBoolean() {
-			bitLen := 0
-			if dataFixedSize {
-				bitLen = int(dataSizeBits)
+		// read value
 
+		hasValue := r.readBoolean()
+		length := 0
+		if hasValue {
+			_debugf("has value!")
+
+			valSize := 0
+			if userDataFixed {
+				length = int(userDataSize)
+				valSize = int(userDataSizeBits)
+				_debugf("fixed length = %d (%d bits) at pos %d (byte %d)", length, valSize, r.pos, r.bytePos())
 			} else {
-				bitLen = int(r.readBits(14) * 8)
-
+				length = int(r.readBits(14))
+				valSize = length * 8
+				_debugf("variable length = %d (%d bits) at pos %d (byte %d)", length, valSize, r.pos, r.bytePos())
 			}
-			value = r.readBitsAsBytes(bitLen)
+
+			value = r.readBitsAsBytes(valSize)
 		}
-		items[index] = &StringTableItem{Name: name, Data: value}
+
+		_debugf("got string %s, len %d", key, len(value))
+		items = append(items, &stringTableItem{index, key, value})
 	}
 
 	return items
+}
+
+func log2(n int) int {
+	return int(math.Ceil(math.Log2(float64(n))))
 }
