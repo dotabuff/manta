@@ -9,31 +9,18 @@ import (
 func TestDecompressLZSS(t *testing.T) {
 	assert := assert.New(t)
 
-	fixtures := []string{"4162", "18726", "22356"}
+	fixtures := []string{
+		"18726",
+		"22356",
+		"4162",
+	}
 
 	for _, f := range fixtures {
-		// Read a compressed fixture
 		compressed := _read_fixture(_sprintf("lzss/%s_compressed", f))
-
-		res1, err := decompress2(compressed)
+		expect := _read_fixture(_sprintf("lzss/%s_decompressed", f))
+		got, err := unlzss(compressed)
 		assert.Nil(err)
-
-		res2, err := decompress3(compressed)
-		assert.Nil(err)
-
-		assert.True(byteCompareVerbose(t, res1, res2))
-
-		/*
-			// Read a reference fixture decompressed with LZSS.CPP
-			reference := _read_fixture(_sprintf("lzss/%s_reference_out", f))
-
-			// Decompress using our internal lib and write a comparison fixture
-			result, err := decompress(compressed)
-			_dump_fixture(_sprintf("lzss/%s_internal_out", f), result)
-
-			assert.Nil(err)
-			assert.Equal(reference, result)
-		*/
+		assert.True(byteCompareVerbose(t, expect, got))
 	}
 }
 

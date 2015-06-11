@@ -56,16 +56,10 @@ func (p *Parser) onCSVCMsg_UpdateStringTable(m *dota.CSVCMsg_UpdateStringTable) 
 	return nil
 }
 
-type StringTableItem struct {
-	Index int
-	Name  string
-	Data  []byte
+type stringTable struct {
+	name  string
+	items []*stringTableItem
 }
-
-const (
-	STRINGTABLE_MAX_KEY_SIZE = 1024
-	STRINGTABLE_KEY_HISTORY  = 32
-)
 
 type stringTableItem struct {
 	index int
@@ -73,9 +67,26 @@ type stringTableItem struct {
 	value []byte
 }
 
-func parseStringTable(buf []byte, maxEntries int32, userDataFixed bool, userDataSize int32, userDataSizeBits int32) []*stringTableItem {
+const (
+	STRINGTABLE_MAX_KEY_SIZE = 1024
+	STRINGTABLE_KEY_HISTORY  = 32
+)
+
+func parseStringTable(buf []byte, maxEntries int32, userDataFixed bool, userDataSize int32, userDataSizeBits int32) (items []*stringTableItem) {
+	items = make([]*stringTableItem, 0)
+
+	// XXX TODO: Clean up after we're done debugging.
+	debugMode = false
+	defer func() {
+		debugMode = true
+		if err := recover(); err != nil {
+			_debugf("recovered: %s", err)
+			return
+		}
+	}()
+
+	// Create a reader for the buffer
 	r := newReader(buf)
-	items := make([]*stringTableItem, 0)
 
 	// Start with an index of -1.
 	// If the first item is at index 0 it will use a incr operation.
@@ -102,6 +113,12 @@ func parseStringTable(buf []byte, maxEntries int32, userDataFixed bool, userData
 	for i := 0; true; i++ {
 		key := ""
 		value := []byte{}
+
+		// if i > 12 && i < 16 {
+		// 	debugMode = true
+		// } else {
+		// 	debugMode = false
+		// }
 
 		// Read a boolean to determine whether the operation is an increment or
 		// has a fixed index position. A fixed index position of zero should be
@@ -159,7 +176,7 @@ func parseStringTable(buf []byte, maxEntries int32, userDataFixed bool, userData
 					}
 				}
 			} else {
-				_debugf("%d: reading normal string", i)
+				_debugf("%d: reading normal string from byte %d bit %d", i, r.bytePos(), r.pos%8)
 				key = r.readString()
 			}
 
@@ -180,6 +197,7 @@ func parseStringTable(buf []byte, maxEntries int32, userDataFixed bool, userData
 		hasValue := r.readBoolean()
 		length := 0
 		if hasValue {
+			_panicf("has value")
 			_debugf("has value!")
 
 			valSize := 0
