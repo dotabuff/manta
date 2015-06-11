@@ -36,6 +36,8 @@ func (p *StringTables) onCDemoStringTables(stringTables *dota.CDemoStringTables)
 
 // Internal parser for callback OnCDemoStringTables.
 func (p *Parser) onCDemoStringTables(m *dota.CDemoStringTables) error {
+	return nil
+
 	for _, t := range m.GetTables() {
 		switch t.GetTableName() {
 		default:
@@ -110,7 +112,7 @@ func parseStringTable(buf []byte, maxEntries int32, userDataFixed bool, userData
 	// overwritten with a given entry.
 	//
 	// Key may be omitted (will be represented here as "")
-	for i := 0; true; i++ {
+	for i := 0; i < int(maxEntries); i++ {
 		key := ""
 		value := []byte{}
 
@@ -197,7 +199,6 @@ func parseStringTable(buf []byte, maxEntries int32, userDataFixed bool, userData
 		hasValue := r.readBoolean()
 		length := 0
 		if hasValue {
-			_panicf("has value")
 			_debugf("has value!")
 
 			valSize := 0
