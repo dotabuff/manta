@@ -1893,7 +1893,7 @@ type CSVCMsg_CreateStringTable struct {
 	Name              *string `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
 	MaxEntries        *int32  `protobuf:"varint,2,opt,name=max_entries" json:"max_entries,omitempty"`
 	NumEntries        *int32  `protobuf:"varint,3,opt,name=num_entries" json:"num_entries,omitempty"`
-	UserDataFixedSize *int32  `protobuf:"varint,4,opt,name=user_data_fixed_size" json:"user_data_fixed_size,omitempty"`
+	UserDataFixedSize *bool   `protobuf:"varint,4,opt,name=user_data_fixed_size" json:"user_data_fixed_size,omitempty"`
 	UserDataSize      *int32  `protobuf:"varint,5,opt,name=user_data_size" json:"user_data_size,omitempty"`
 	UserDataSizeBits  *int32  `protobuf:"varint,6,opt,name=user_data_size_bits" json:"user_data_size_bits,omitempty"`
 	StringData        []byte  `protobuf:"bytes,7,opt,name=string_data" json:"string_data,omitempty"`
@@ -1932,11 +1932,11 @@ func (m *CSVCMsg_CreateStringTable) GetNumEntries() int32 {
 	return 0
 }
 
-func (m *CSVCMsg_CreateStringTable) GetUserDataFixedSize() int32 {
+func (m *CSVCMsg_CreateStringTable) GetUserDataFixedSize() bool {
 	if m != nil && m.UserDataFixedSize != nil {
 		return *m.UserDataFixedSize
 	}
-	return 0
+	return false
 }
 
 func (m *CSVCMsg_CreateStringTable) GetUserDataSize() int32 {

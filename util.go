@@ -11,7 +11,7 @@ import (
 	"github.com/golang/protobuf/proto"
 )
 
-var debugMode bool
+var debugMode, traceMode bool
 
 func init() {
 	if os.Getenv("DEBUG") != "" {
@@ -19,11 +19,22 @@ func init() {
 	}
 }
 
-var _sprintf = fmt.Sprintf
+var (
+	_sprintf = fmt.Sprintf
+	_sdump   = spew.Sdump
+)
 
 // printf only if debugging
 func _debugf(format string, args ...interface{}) {
 	if debugMode {
+		args = append([]interface{}{_caller(2)}, args...)
+		fmt.Printf("%s: "+format+"\n", args...)
+	}
+}
+
+// printf only if tracing
+func _tracef(format string, args ...interface{}) {
+	if traceMode {
 		args = append([]interface{}{_caller(2)}, args...)
 		fmt.Printf("%s: "+format+"\n", args...)
 	}

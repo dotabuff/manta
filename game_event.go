@@ -24,7 +24,7 @@ type CombatLogEntry interface {
 }
 
 type combatLogParser struct {
-	stringTables *StringTables
+	stringTables *stringTables
 }
 
 /*
@@ -385,12 +385,13 @@ func (c combatLogParser) assign(v CombatLogEntry, keys []*dota.CSVCMsg_GameEvent
 		case 4:
 			valShort := key.GetValShort()
 			if logTable := fieldTag.Get("logTable"); logTable != "" {
-				table := c.stringTables.tables[logTable].items
-				entry := table[int(valShort)]
-				if entry == nil {
-					spew.Printf("no entry %d in %s for %v\n", valShort, logTable, v)
-				} else {
-					field.SetString(entry.GetStr())
+				if table, ok := c.stringTables.getTableByName(logTable); ok {
+					entry := table.items[valShort]
+					if entry == nil {
+						spew.Printf("no entry %d in %s for %v\n", valShort, logTable, v)
+					} else {
+						field.SetString(entry.key)
+					}
 				}
 			} else if field.Kind() == reflect.Bool {
 				field.SetBool(valShort == 1)

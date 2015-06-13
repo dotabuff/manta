@@ -18,7 +18,6 @@ func mustGetReplayData(name string, url string) []byte {
 func getReplayData(name string, url string) ([]byte, error) {
 	path := fmt.Sprintf("replays/%s.dem", name)
 	if data, err := ioutil.ReadFile(path); err == nil {
-		fmt.Printf("read replay %s from %s\n", name, path)
 		return data, nil
 	}
 

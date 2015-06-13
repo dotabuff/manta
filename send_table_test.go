@@ -13,7 +13,7 @@ func TestSendTableParsing(t *testing.T) {
 
 	// The single message from a real match
 	m := &dota.CDemoSendTables{}
-	if err := proto.Unmarshal(_read_fixture("send_tables_1.pbmsg"), m); err != nil {
+	if err := proto.Unmarshal(_read_fixture("send_tables/01.pbmsg"), m); err != nil {
 		panic(err)
 	}
 

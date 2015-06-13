@@ -21,7 +21,7 @@ type Parser struct {
 
 	classInfo    map[int32]string
 	classIdSize  int
-	stringTables *StringTables
+	stringTables *stringTables
 
 	reader     *reader
 	isStopping bool
@@ -53,7 +53,7 @@ func NewParser(buf []byte) (*Parser, error) {
 		isStopping: false,
 
 		classInfo:    make(map[int32]string),
-		stringTables: NewStringTables(),
+		stringTables: newStringTables(),
 	}
 
 	// Parse out the header, ensuring that it's valid.
@@ -79,6 +79,11 @@ func NewParser(buf []byte) (*Parser, error) {
 	parser.Callbacks.OnCSVCMsg_CreateStringTable(parser.onCSVCMsg_CreateStringTable)
 	parser.Callbacks.OnCSVCMsg_UpdateStringTable(parser.onCSVCMsg_UpdateStringTable)
 	parser.Callbacks.OnCSVCMsg_SendTable(parser.onCSVCMsg_SendTable)
+
+	parser.Callbacks.OnCSVCMsg_GameEvent(func(m *dota.CSVCMsg_GameEvent) error {
+		_dump("gameevent", m)
+		return nil
+	})
 
 	parser.Callbacks.OnCDemoClassInfo(parser.onCDemoClassInfo)
 
