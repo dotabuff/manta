@@ -1,8 +1,6 @@
 package manta
 
 import (
-	"math"
-
 	"github.com/dotabuff/manta/dota"
 )
 
@@ -13,14 +11,26 @@ const (
 // Holds and maintains the string table information for an
 // instance of the Parser.
 type stringTables struct {
-	tables    map[string]*stringTable
+	tables    map[int32]*stringTable
+	nameIndex map[string]int32
 	nextIndex int32
+}
+
+// Retrieves a string table by its name. Check the bool.
+func (ts *stringTables) getTableByName(name string) (*stringTable, bool) {
+	i, ok := ts.nameIndex[name]
+	if !ok {
+		return nil, false
+	}
+	t, ok := ts.tables[i]
+	return t, ok
 }
 
 // Creates a new empty stringTables.
 func newStringTables() *stringTables {
 	return &stringTables{
-		tables:    map[string]*stringTable{},
+		tables:    make(map[int32]*stringTable),
+		nameIndex: make(map[string]int32),
 		nextIndex: 0,
 	}
 }
@@ -43,14 +53,16 @@ type stringTableItem struct {
 }
 
 // Internal parser for callback OnCDemoStringTables.
+// These appear to be periodic state dumps and appear every 1800 outer ticks.
+// XXX TODO: decide if we want to at all integrate these updates,
+// or trust create/update entirely. Let's ignore them for now.
 func (p *Parser) onCDemoStringTables(m *dota.CDemoStringTables) error {
-	// TODO: integrate
-
 	return nil
 }
 
 // Internal parser for callback OnCSVCMsg_CreateStringTable.
 func (p *Parser) onCSVCMsg_CreateStringTable(m *dota.CSVCMsg_CreateStringTable) error {
+	// Create a new string table at the next index position
 	t := &stringTable{
 		index:             p.stringTables.nextIndex,
 		name:              m.GetName(),
@@ -60,8 +72,10 @@ func (p *Parser) onCSVCMsg_CreateStringTable(m *dota.CSVCMsg_CreateStringTable) 
 		userDataSize:      m.GetUserDataSize(),
 	}
 
+	// Increment the index
 	p.stringTables.nextIndex += 1
 
+	// Decompress the data if necessary
 	buf := m.GetStringData()
 	if m.GetDataCompressed() {
 		var err error
@@ -70,10 +84,17 @@ func (p *Parser) onCSVCMsg_CreateStringTable(m *dota.CSVCMsg_CreateStringTable) 
 		}
 	}
 
-	items := parseStringTable(buf, t.maxEntries, t.userDataFixedSize, t.userDataSize)
+	// Parse the items out of the string table data
+	items := parseStringTable(buf, m.GetMaxEntries(), t.userDataFixedSize, t.userDataSize)
+
+	// Insert the items into the table
 	for _, item := range items {
 		t.items[item.index] = item
 	}
+
+	// Add the table to the parser state
+	p.stringTables.tables[t.index] = t
+	p.stringTables.nameIndex[t.name] = t.index
 
 	return nil
 }
@@ -81,11 +102,39 @@ func (p *Parser) onCSVCMsg_CreateStringTable(m *dota.CSVCMsg_CreateStringTable) 
 // Internal parser for callback OnCSVCMsg_UpdateStringTable.
 func (p *Parser) onCSVCMsg_UpdateStringTable(m *dota.CSVCMsg_UpdateStringTable) error {
 	// TODO: integrate
+	t, ok := p.stringTables.tables[m.GetTableId()]
+	if !ok {
+		_panicf("missing string table %d", m.GetTableId())
+	}
+
+	_tracef("tick=%d name=%s changedEntries=%d buflen=%d", p.Tick, t.name, m.GetNumChangedEntries(), len(m.GetStringData()))
+
+	// Parse the updates out of the string table data
+	items := parseStringTable(m.GetStringData(), m.GetNumChangedEntries(), t.userDataFixedSize, t.userDataSize)
+
+	// Apply the updates to the parser state
+	for _, item := range items {
+		if _, ok := t.items[item.index]; ok {
+			// XXX TODO: Sometimes ActiveModifiers change keys, which is suspicous...
+			if item.key != "" && item.key != t.items[item.index].key {
+				_tracef("tick=%d name=%s index=%d key='%s' update key -> %s", p.Tick, t.name, item.index, t.items[item.index].key, item.key)
+				t.items[item.index].key = item.key
+			}
+			if len(item.value) > 0 {
+				_tracef("tick=%d name=%s index=%d key='%s' update value len %d -> %d", p.Tick, t.name, item.index, t.items[item.index].key, len(t.items[item.index].value), len(item.value))
+				t.items[item.index].value = item.value
+			}
+		} else {
+			_tracef("tick=%d name=%s inserting new item %d key '%s'", p.Tick, t.name, item.index, item.key)
+			t.items[item.index] = item
+		}
+	}
 
 	return nil
 }
 
-func parseStringTable(buf []byte, maxEntries int32, userDataFixed bool, userDataSize int32) (items []*stringTableItem) {
+// Parse a string table data blob, returning a list of item updates.
+func parseStringTable(buf []byte, numUpdates int32, userDataFixed bool, userDataSize int32) (items []*stringTableItem) {
 	items = make([]*stringTableItem, 0)
 
 	// Create a reader for the buffer
@@ -94,7 +143,6 @@ func parseStringTable(buf []byte, maxEntries int32, userDataFixed bool, userData
 	// Start with an index of -1.
 	// If the first item is at index 0 it will use a incr operation.
 	index := int32(-1)
-	indexBits := log2(int(maxEntries))
 
 	// Maintain a list of key history
 	keys := make([]string, 0, STRINGTABLE_KEY_HISTORY_SIZE)
@@ -114,7 +162,7 @@ func parseStringTable(buf []byte, maxEntries int32, userDataFixed bool, userData
 	// Key may be omitted (will be represented here as "")
 	//
 	// Value may be omitted
-	for i := 0; i < int(maxEntries); i++ {
+	for i := 0; i < int(numUpdates); i++ {
 		key := ""
 		value := []byte{}
 
@@ -125,8 +173,7 @@ func parseStringTable(buf []byte, maxEntries int32, userDataFixed bool, userData
 		if incr {
 			index++
 		} else {
-			// XXX TODO: This path is untested and should not be trusted.
-			index = int32(r.readBits(indexBits))
+			index = int32(r.readVarUint32()) + 1
 		}
 
 		// Some values have keys, some don't.
@@ -183,8 +230,4 @@ func parseStringTable(buf []byte, maxEntries int32, userDataFixed bool, userData
 	}
 
 	return items
-}
-
-func log2(n int) int {
-	return int(math.Ceil(math.Log2(float64(n))))
 }

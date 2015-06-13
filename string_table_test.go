@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestParseStringTable(t *testing.T) {
+func TestParseStringTableCreate(t *testing.T) {
 	assert := assert.New(t)
 
 	scenarios := []struct {
@@ -148,4 +148,19 @@ func TestParseStringTable(t *testing.T) {
 			assert.Equal(s.lastItem, items[len(items)-1], s.tableName)
 		}
 	}
+}
+
+func TestParseStringTableUpdate(t *testing.T) {
+	assert := assert.New(t)
+	buf := _read_fixture("string_tables/updates/tick_03960_table_7_items_13_size_208")
+
+	items := parseStringTable(buf, 13, false, 0)
+
+	assert.Equal(int32(261), items[0].index)
+	assert.Equal("broodmother_spawn_spiderlings", items[0].key)
+	assert.Equal(int32(262), items[1].index)
+	assert.Equal("broodmother_spin_web", items[1].key)
+	assert.Equal(int32(263), items[2].index)
+	assert.Equal("broodmother_incapacitating_bite", items[2].key)
+
 }
