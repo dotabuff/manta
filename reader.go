@@ -181,17 +181,15 @@ func (r *reader) readString() string {
 
 // Reads bits as bytes.
 func (r *reader) readBitsAsBytes(n int) []byte {
-	buf := make([]byte, (n+7)/8)
-	i := 0
-	for n > 7 {
+	tmp := make([]byte, 0)
+	for n >= 8 {
+		tmp = append(tmp, r.readByte())
 		n -= 8
-		buf[i] = byte(r.readBits(8))
-		i++
 	}
-	if n != 0 {
-		buf[i] = byte(r.readBits(8))
+	if n > 0 {
+		tmp = append(tmp, byte(r.readBits(n)))
 	}
-	return buf
+	return tmp
 }
 
 // Read bits of a given length as a uint, may or may not be byte-aligned.

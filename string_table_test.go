@@ -18,7 +18,7 @@ func TestParseStringTable(t *testing.T) {
 		firstItem   *stringTableItem
 		lastItem    *stringTableItem
 	}{
-		// PASSING: CombatLogNames is uncompressed and has 24 entries (working)
+		// CombatLogNames is uncompressed and has 24 entries (working)
 		{
 			"17_335_uncompressed.pbmsg",
 			"CombatLogNames",
@@ -27,7 +27,7 @@ func TestParseStringTable(t *testing.T) {
 			&stringTableItem{23, "item_flask", []byte{}},
 		},
 
-		// PASSING: downloadables is uncompressed and has no entries (working)
+		// downloadables is uncompressed and has no entries (working)
 		{
 			"01_29_uncompressed.pbmsg",
 			"downloadables",
@@ -36,7 +36,7 @@ func TestParseStringTable(t *testing.T) {
 			nil,
 		},
 
-		// PASSING: ResponseKeys is uncompressed and has 15 entries (working)
+		// ResponseKeys is uncompressed and has 15 entries (working)
 		{
 			"18_175_uncompressed.pbmsg",
 			"ResponseKeys",
@@ -45,7 +45,7 @@ func TestParseStringTable(t *testing.T) {
 			&stringTableItem{14, "game_start_time", []byte{}},
 		},
 
-		// PASSING: server_query_info is uncompressed and has 1 entry
+		// server_query_info is uncompressed and has 1 entry
 		{
 			"07_50_uncompressed.pbmsg",
 			"server_query_info",
@@ -54,29 +54,26 @@ func TestParseStringTable(t *testing.T) {
 			&stringTableItem{0, "QueryPort", []byte{0x0, 0x0, 0x0, 0x0}},
 		},
 
-		// FAILING: lightstyles is compressed and has NNNNNNN entries with values
-		/*
-			{
-				"05_590_compressed.pbmsg",
-				"lightstyles",
-				1,
-				&stringTableItem{0, "", []byte{}},
-				&stringTableItem{0, "", []byte{}},
-			},
-		*/
+		// lightstyles is compressed and has NNNNNNN entries with values
+		{
+			"05_590_compressed.pbmsg",
+			"lightstyles",
+			64,
+			&stringTableItem{0, "0", []byte{0x6D, 0x00}},
+			&stringTableItem{63, "63", []byte{0x61, 0x00}},
+		},
 
-		// FAILING: instancebaseline is compressed and has NNNNNNN entries with values
-		/*
-			{
-				"04_22356_compressed.pbmsg",
-				"instancebaseline",
-				1,
-				&stringTableItem{0, "", []byte{}},
-				&stringTableItem{0, "", []byte{}},
-			},
-		*/
+		// instancebaseline is compressed and has 75 entries with values
+		// XXX TODO: I'm suspicious about the last keys having no values... make sure a delta matches the update!
+		{
+			"04_22356_compressed.pbmsg",
+			"instancebaseline",
+			75,
+			&stringTableItem{0, "664", _read_fixture("string_tables/instancebaseline/0000_664_414")},
+			&stringTableItem{74, "387", []byte{}},
+		},
 
-		// PASSING: EntityNames is compressed and has 123 entries
+		// EntityNames is compressed and has 123 entries
 		{
 			"08_4162_compressed.pbmsg",
 			"EntityNames",
@@ -85,7 +82,7 @@ func TestParseStringTable(t *testing.T) {
 			&stringTableItem{349, "item_flask", []byte{}},
 		},
 
-		// PASSING: EntityNames is compressed and has 123 entries
+		// EntityNames is compressed and has 123 entries
 		{
 			"13_18726_compressed.pbmsg",
 			"ModifierNames",
@@ -94,16 +91,24 @@ func TestParseStringTable(t *testing.T) {
 			&stringTableItem{1273, "modifier_item_yasha", []byte{}},
 		},
 
-		// FAILING: EconItems is not compressed and fails on values
-		/*
-			{
-				"16_559_uncompressed.pbmsg",
-				"EconItems",
-				0,
-				nil,
-				nil,
-			},
-		*/
+		// EconItems is not compressed and fails on values
+		// XXX TODO: I'm suspicious about the last keys having no values... make sure a delta matches the update!
+		{
+			"16_559_uncompressed.pbmsg",
+			"EconItems",
+			57,
+			&stringTableItem{0, "6498667144", []byte{}},
+			&stringTableItem{56, "422364528", []byte{}},
+		},
+
+		// GenericPrecache is uncompressed with a fixed data (bit) length
+		{
+			"02_33_uncompressed.pbmsg",
+			"genericprecache",
+			1,
+			&stringTableItem{0, "", []byte{0x00}},
+			&stringTableItem{0, "", []byte{0x00}},
+		},
 	}
 
 	// Iterate through test scenarios
@@ -127,49 +132,20 @@ func TestParseStringTable(t *testing.T) {
 		}
 
 		// Make sure we're looking at the right table
-		assert.Equal(s.tableName, m.GetName())
-
-		// XXX TODO: remove
-		t.Logf("name=%s buflen=%d max_entries=%d fixed=%d size=%d size_bits=%d",
-			m.GetName(), len(buf), m.GetMaxEntries(), m.GetUserDataFixedSize(), m.GetUserDataSize(), m.GetUserDataSizeBits())
+		assert.Equal(s.tableName, m.GetName(), s.tableName)
 
 		// Parse the table data
-		items := parseStringTable(buf, m.GetMaxEntries(), m.GetUserDataFixedSize() == 1, m.GetUserDataSize(), m.GetUserDataSizeBits())
+		items := parseStringTable(buf, m.GetMaxEntries(), m.GetUserDataFixedSize(), m.GetUserDataSize())
 
 		// Make sure we have the correct number of entries
-		assert.Equal(s.itemCount, len(items))
+		assert.Equal(s.itemCount, len(items), s.tableName)
 
 		// Verify the first and last entries
 		if s.firstItem != nil {
-			assert.Equal(s.firstItem, items[0])
+			assert.Equal(s.firstItem, items[0], s.tableName)
 		}
 		if s.lastItem != nil {
-			assert.Equal(s.lastItem, items[len(items)-1])
+			assert.Equal(s.lastItem, items[len(items)-1], s.tableName)
 		}
 	}
-}
-
-func TestStringTableSpecific(t *testing.T) {
-	assert := assert.New(t)
-	m := &dota.CSVCMsg_CreateStringTable{}
-	proto.Unmarshal(_read_fixture("string_tables/08_4162_compressed.pbmsg"), m)
-
-	buf, err := unlzss(m.GetStringData())
-	assert.Nil(err)
-	items := parseStringTable(buf, 350, false, 0, 0)
-	assert.Equal("kobold_taskmaster_speed_aura", items[0].key)
-	assert.Equal("gnoll_assassin_envenomed_weapon", items[1].key)
-	assert.Equal("forest_troll_high_priest_heal", items[2].key)
-	assert.Equal("forest_troll_high_priest_mana_aura", items[3].key)
-	assert.Equal("ghost_frost_attack", items[4].key)
-	assert.Equal("harpy_storm_chain_lightning", items[5].key)
-	assert.Equal("ogre_magi_frost_armor", items[6].key)
-	assert.Equal("giant_wolf_critical_strike", items[7].key)
-	assert.Equal("alpha_wolf_critical_strike", items[8].key)
-	assert.Equal("alpha_wolf_command_aura", items[9].key)
-	assert.Equal("mud_golem_hurl_boulder", items[10].key)
-	assert.Equal("mud_golem_rock_destroy", items[11].key)
-	assert.Equal("satyr_trickster_purge", items[12].key)
-	assert.Equal("satyr_soulstealer_mana_burn", items[13].key)
-	assert.Equal("centaur_khan_war_stomp", items[14].key)
 }

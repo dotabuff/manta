@@ -6,103 +6,103 @@ import (
 	"github.com/dotabuff/manta/dota"
 )
 
-func NewStringTables() *StringTables {
-	return &StringTables{
-		tables: map[string]StringTable{},
+const (
+	STRINGTABLE_KEY_HISTORY_SIZE = 32
+)
+
+// Holds and maintains the string table information for an
+// instance of the Parser.
+type stringTables struct {
+	tables    map[string]*stringTable
+	nextIndex int32
+}
+
+// Creates a new empty stringTables.
+func newStringTables() *stringTables {
+	return &stringTables{
+		tables:    map[string]*stringTable{},
+		nextIndex: 0,
 	}
 }
 
-type StringTables struct {
-	tables map[string]StringTable
+// Holds and maintains the information for a string table.
+type stringTable struct {
+	index             int32
+	name              string
+	items             map[int32]*stringTableItem
+	maxEntries        int32
+	userDataFixedSize bool
+	userDataSize      int32
 }
 
-type StringTable struct {
-	items map[int]*dota.CDemoStringTablesItemsT
-}
-
-func (p *StringTables) onCDemoStringTables(stringTables *dota.CDemoStringTables) error {
-	tables := map[string]StringTable{}
-
-	for _, st := range stringTables.GetTables() {
-		table := StringTable{items: map[int]*dota.CDemoStringTablesItemsT{}}
-		tables[st.GetTableName()] = table
-		for n, item := range st.GetItems() {
-			table.items[n] = item
-		}
-	}
-
-	return nil
+// Holds and maintains a single entry in a string table.
+type stringTableItem struct {
+	index int32
+	key   string
+	value []byte
 }
 
 // Internal parser for callback OnCDemoStringTables.
 func (p *Parser) onCDemoStringTables(m *dota.CDemoStringTables) error {
-	return nil
-
-	for _, t := range m.GetTables() {
-		switch t.GetTableName() {
-		default:
-			_debugf("ignoring string table %s with flags %d, %d/%d items", t.GetTableName(), t.GetTableFlags(), len(t.GetItems()), len(t.GetItemsClientside()))
-		}
-	}
+	// TODO: integrate
 
 	return nil
 }
 
 // Internal parser for callback OnCSVCMsg_CreateStringTable.
 func (p *Parser) onCSVCMsg_CreateStringTable(m *dota.CSVCMsg_CreateStringTable) error {
+	t := &stringTable{
+		index:             p.stringTables.nextIndex,
+		name:              m.GetName(),
+		items:             make(map[int32]*stringTableItem),
+		maxEntries:        m.GetMaxEntries(),
+		userDataFixedSize: m.GetUserDataFixedSize(),
+		userDataSize:      m.GetUserDataSize(),
+	}
+
+	p.stringTables.nextIndex += 1
+
+	buf := m.GetStringData()
+	if m.GetDataCompressed() {
+		var err error
+		if buf, err = unlzss(buf); err != nil {
+			return err
+		}
+	}
+
+	items := parseStringTable(buf, t.maxEntries, t.userDataFixedSize, t.userDataSize)
+	for _, item := range items {
+		t.items[item.index] = item
+	}
+
 	return nil
 }
 
 // Internal parser for callback OnCSVCMsg_UpdateStringTable.
 func (p *Parser) onCSVCMsg_UpdateStringTable(m *dota.CSVCMsg_UpdateStringTable) error {
+	// TODO: integrate
+
 	return nil
 }
 
-type stringTable struct {
-	name  string
-	items []*stringTableItem
-}
-
-type stringTableItem struct {
-	index int
-	key   string
-	value []byte
-}
-
-const (
-	STRINGTABLE_MAX_KEY_SIZE = 1024
-	STRINGTABLE_KEY_HISTORY  = 32
-)
-
-func parseStringTable(buf []byte, maxEntries int32, userDataFixed bool, userDataSize int32, userDataSizeBits int32) (items []*stringTableItem) {
+func parseStringTable(buf []byte, maxEntries int32, userDataFixed bool, userDataSize int32) (items []*stringTableItem) {
 	items = make([]*stringTableItem, 0)
-
-	// XXX TODO: Clean up after we're done debugging.
-	debugMode = false
-	defer func() {
-		debugMode = true
-		if err := recover(); err != nil {
-			_debugf("recovered: %s", err)
-			return
-		}
-	}()
 
 	// Create a reader for the buffer
 	r := newReader(buf)
 
 	// Start with an index of -1.
 	// If the first item is at index 0 it will use a incr operation.
-	index := -1
+	index := int32(-1)
+	indexBits := log2(int(maxEntries))
 
 	// Maintain a list of key history
-	keys := make([]string, 0, STRINGTABLE_KEY_HISTORY)
+	keys := make([]string, 0, STRINGTABLE_KEY_HISTORY_SIZE)
 
 	// Some tables have no data
 	if len(buf) == 0 {
 		return items
 	}
-
-	_debugf("index bits = %d", log2(int(maxEntries)))
 
 	// Loop through entries in the data structure
 	//
@@ -112,15 +112,11 @@ func parseStringTable(buf []byte, maxEntries int32, userDataFixed bool, userData
 	// overwritten with a given entry.
 	//
 	// Key may be omitted (will be represented here as "")
+	//
+	// Value may be omitted
 	for i := 0; i < int(maxEntries); i++ {
 		key := ""
 		value := []byte{}
-
-		// if i > 12 && i < 16 {
-		// 	debugMode = true
-		// } else {
-		// 	debugMode = false
-		// }
 
 		// Read a boolean to determine whether the operation is an increment or
 		// has a fixed index position. A fixed index position of zero should be
@@ -128,94 +124,61 @@ func parseStringTable(buf []byte, maxEntries int32, userDataFixed bool, userData
 		incr := r.readBoolean()
 		if incr {
 			index++
-
-			_debugf("%d: incr index to %d", i, index)
 		} else {
-			size := log2(int(maxEntries))
-			_debugf("%d: reading %d index bits", i, size) // this might just be 5
-			index = int(r.readBits(size))
-			_debugf("%d: modify index to %d", i, index)
-
-			// An index of zero given by value indicates the end of the buffer.
-			if index == 0 {
-				if r.remBits() > 7 {
-					_panicf("still have too many (%d) bits left!", r.remBits())
-				}
-
-				break
-			}
+			// XXX TODO: This path is untested and should not be trusted.
+			index = int32(r.readBits(indexBits))
 		}
-
-		_debugf("bits left: %d (%d bytes)", r.remBits(), r.remBytes())
 
 		// Some values have keys, some don't.
 		hasKey := r.readBoolean()
 		if hasKey {
-			_debugf("%d: has a key!", i)
-			// if full && r.readBoolean() {
-			// 	panic("shouldnt happen")
-			// }
+			// Some entries use reference a position in the key history for
+			// part of the key. If referencing the history, read the position
+			// and size from the buffer, then use those to build the string
+			// combined with an extra string read (null terminated).
+			// Alternatively, just read the string.
+			useHistory := r.readBoolean()
+			if useHistory {
+				pos := r.readBits(5)
+				size := r.readBits(5)
 
-			substring := r.readBoolean()
-			if substring {
-				sIndex := r.readBits(5)  // index of substr in keyhistory
-				sLength := r.readBits(5) // prefix length to new key
-
-				_debugf("%d: substring index=%d length=%d", i, sIndex, sLength)
-
-				if (sIndex >= STRINGTABLE_KEY_HISTORY) || (sLength >= STRINGTABLE_MAX_KEY_SIZE) {
-					panic("shouldnt happen 2.0")
-				}
-
-				if int(sIndex) >= len(keys) {
+				if int(pos) >= len(keys) {
 					key += r.readString()
 				} else {
-					s := keys[sIndex]
-					if int(sLength) > len(s) {
+					s := keys[pos]
+					if int(size) > len(s) {
 						key += s + r.readString()
 					} else {
-						key += s[0:sLength] + r.readString()
+						key += s[0:size] + r.readString()
 					}
 				}
 			} else {
-				_debugf("%d: reading normal string from byte %d bit %d", i, r.bytePos(), r.pos%8)
 				key = r.readString()
 			}
 
-			_debugf("%d: key = %s", i, key)
-
-			if len(keys) >= STRINGTABLE_KEY_HISTORY {
+			if len(keys) >= STRINGTABLE_KEY_HISTORY_SIZE {
 				copy(keys[0:], keys[1:])
 				keys[len(keys)-1] = ""
 				keys = keys[:len(keys)-1]
 			}
 			keys = append(keys, key)
-		} else {
-			_debugf("%d: no key", i)
 		}
 
-		// read value
-
+		// Some entries have a value.
 		hasValue := r.readBoolean()
-		length := 0
 		if hasValue {
-			_debugf("has value!")
-
-			valSize := 0
+			// Values can be either fixed size (with a size specified in
+			// bits during table creation, or have a variable size with
+			// a 14-bit prefixed size.
 			if userDataFixed {
-				length = int(userDataSize)
-				valSize = int(userDataSizeBits)
-				_debugf("fixed length = %d (%d bits) at pos %d (byte %d)", length, valSize, r.pos, r.bytePos())
+				value = r.readBitsAsBytes(int(userDataSize))
 			} else {
-				length = int(r.readBits(14))
-				valSize = length * 8
-				_debugf("variable length = %d (%d bits) at pos %d (byte %d)", length, valSize, r.pos, r.bytePos())
+				size := int(r.readBits(14))
+				r.readBits(3) // XXX TODO: what is this?
+				value = r.readBytes(size)
 			}
-
-			value = r.readBitsAsBytes(valSize)
 		}
 
-		_debugf("got string %s, len %d", key, len(value))
 		items = append(items, &stringTableItem{index, key, value})
 	}
 

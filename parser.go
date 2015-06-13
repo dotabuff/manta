@@ -21,7 +21,7 @@ type Parser struct {
 
 	classInfo    map[int32]string
 	classIdSize  int
-	stringTables *StringTables
+	stringTables *stringTables
 
 	reader     *reader
 	isStopping bool
@@ -53,7 +53,7 @@ func NewParser(buf []byte) (*Parser, error) {
 		isStopping: false,
 
 		classInfo:    make(map[int32]string),
-		stringTables: NewStringTables(),
+		stringTables: newStringTables(),
 	}
 
 	// Parse out the header, ensuring that it's valid.
