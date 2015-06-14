@@ -1,0 +1,39 @@
+option go_package = "manta";
+
+message WireSendTable {
+  required int32 index = 1;
+  optional int32 unknown2 = 2; // sometimes present, unknown. flags?
+  repeated int32 properties = 3;
+}
+
+message WireSendProp {
+  required int32 type_index = 1; // identifier, mapped from Thing10.Unknown3. has a string
+  required int32 var_index = 2; // string index
+  optional int32 unknown3 = 3; // num_bits?
+  optional float low_value = 4; // low_value ?
+  optional float high_value = 5; // high_value ?
+  optional int32 unknown6 = 6;
+  optional int32 unknown7 = 7;
+  optional int32 unknown8 = 8;
+  required int32 unknown9 = 9; // type?
+}
+
+
+// message CSVCMsg_SendTable {
+//   message sendprop_t {
+//     optional int32 type = 1;
+//     optional string var_name = 2;
+//     optional int32 flags = 3;
+//     optional int32 priority = 4;
+//     optional string dt_name = 5;
+//     optional int32 num_elements = 6;
+//     optional float low_value = 7;
+//     optional float high_value = 8;
+//     optional int32 num_bits = 9;
+//   }
+//
+//   optional bool is_end = 1;
+//   optional string net_table_name = 2;
+//   optional bool needs_decoder = 3;
+//   repeated .CSVCMsg_SendTable.sendprop_t props = 4;
+// }

@@ -43,5 +43,9 @@ dota/google/protobuf/descriptor.pb.go: google/protobuf/descriptor.proto
 gen-message-lookup:
 	go run gen/packet.go dota message_lookup.go
 
+gen-wire-proto:
+	protoc --go_out=. wire.proto
+	sed -i 's/Wire/wire/g' wire.pb.go
+
 sync-replays:
 	s3cmd --region=us-west-2 sync ./replays/*.dem s3://manta.dotabuff/

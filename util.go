@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"os"
 	"runtime"
+	"strconv"
 	"strings"
 
 	"github.com/davecgh/go-spew/spew"
@@ -23,6 +24,15 @@ var (
 	_sprintf = fmt.Sprintf
 	_sdump   = spew.Sdump
 )
+
+// Convert a string to an int32
+func atoi32(s string) (int32, error) {
+	n, err := strconv.Atoi(s)
+	if err != nil {
+		return 0, err
+	}
+	return int32(n), nil
+}
 
 // printf only if debugging
 func _debugf(format string, args ...interface{}) {

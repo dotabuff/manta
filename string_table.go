@@ -52,7 +52,7 @@ type stringTableItem struct {
 	value []byte
 }
 
-// Internal parser for callback OnCDemoStringTables.
+// Internal callback for CDemoStringTables.
 // These appear to be periodic state dumps and appear every 1800 outer ticks.
 // XXX TODO: decide if we want to at all integrate these updates,
 // or trust create/update entirely. Let's ignore them for now.
@@ -60,7 +60,7 @@ func (p *Parser) onCDemoStringTables(m *dota.CDemoStringTables) error {
 	return nil
 }
 
-// Internal parser for callback OnCSVCMsg_CreateStringTable.
+// Internal callback for CSVCMsg_CreateStringTable.
 func (p *Parser) onCSVCMsg_CreateStringTable(m *dota.CSVCMsg_CreateStringTable) error {
 	// Create a new string table at the next index position
 	t := &stringTable{
@@ -96,10 +96,15 @@ func (p *Parser) onCSVCMsg_CreateStringTable(m *dota.CSVCMsg_CreateStringTable) 
 	p.stringTables.tables[t.index] = t
 	p.stringTables.nameIndex[t.name] = t.index
 
+	// Apply the updates to baseline state
+	if t.name == "instancebaseline" {
+		p.updateInstanceBaseline()
+	}
+
 	return nil
 }
 
-// Internal parser for callback OnCSVCMsg_UpdateStringTable.
+// Internal callback for CSVCMsg_UpdateStringTable.
 func (p *Parser) onCSVCMsg_UpdateStringTable(m *dota.CSVCMsg_UpdateStringTable) error {
 	// TODO: integrate
 	t, ok := p.stringTables.tables[m.GetTableId()]
@@ -128,6 +133,11 @@ func (p *Parser) onCSVCMsg_UpdateStringTable(m *dota.CSVCMsg_UpdateStringTable) 
 			_tracef("tick=%d name=%s inserting new item %d key '%s'", p.Tick, t.name, item.index, item.key)
 			t.items[item.index] = item
 		}
+	}
+
+	// Apply the updates to baseline state
+	if t.name == "instancebaseline" {
+		p.updateInstanceBaseline()
 	}
 
 	return nil
