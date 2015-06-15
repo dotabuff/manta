@@ -3,7 +3,6 @@ package manta
 import (
 	"testing"
 
-	"github.com/dotabuff/manta/dota"
 	"github.com/golang/protobuf/proto"
 	"github.com/stretchr/testify/assert"
 )
@@ -114,7 +113,7 @@ func TestParseStringTableCreate(t *testing.T) {
 	// Iterate through test scenarios
 	for _, s := range scenarios {
 		// Load the message from the fixture
-		m := &dota.CSVCMsg_CreateStringTable{}
+		m := &wireCreateStringTable{}
 		err := proto.Unmarshal(_read_fixture(_sprintf("string_tables/%s", s.fixturePath)), m)
 		if err != nil {
 			t.Errorf("unable to decode %s: %s", s.fixturePath, err)

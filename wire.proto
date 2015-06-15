@@ -1,3 +1,8 @@
+// This file contains temporary wire-level protobuf messages that we have
+// identified to be different or missing from the current protobuf files
+// last updated in January 2015. These messages will disappear once we have
+// new protobufs extracted from the real Source 2 client.
+
 option go_package = "manta";
 
 message WireSendTable {
@@ -48,6 +53,23 @@ message WireSource1GameEvent {
   optional string event_name = 1;
   required int32 eventid = 2;
   repeated WireSource1GameEvent.key_t keys = 3;
+}
+
+message WireCreateStringTable {
+  optional string name = 1;
+  optional int32 max_entries = 2;
+  optional int32 num_entries = 3;
+  optional bool user_data_fixed_size = 4;
+  optional int32 user_data_size = 5;
+  optional int32 user_data_size_bits = 6;
+  optional bytes string_data = 7;
+  optional int32 compressed_size = 8;
+  optional bool data_compressed = 9;
+  optional int32 flags = 10;
+  optional int32 unknown11 = 11;
+  optional int32 unknown12 = 12;
+  optional int32 unknown13 = 13;
+  optional int32 unknown14 = 14;
 }
 
 // message CSVCMsg_SendTable {

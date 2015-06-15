@@ -61,7 +61,9 @@ func (p *Parser) onCDemoStringTables(m *dota.CDemoStringTables) error {
 }
 
 // Internal callback for CSVCMsg_CreateStringTable.
-func (p *Parser) onCSVCMsg_CreateStringTable(m *dota.CSVCMsg_CreateStringTable) error {
+// XXX TODO: This is currently using an artificial, internally crafted message.
+// This should be replaced with the real message once we have updated protos.
+func (p *Parser) onCSVCMsg_CreateStringTable(m *wireCreateStringTable) error {
 	// Create a new string table at the next index position
 	t := &stringTable{
 		index:             p.stringTables.nextIndex,

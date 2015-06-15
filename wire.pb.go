@@ -13,6 +13,7 @@ It has these top-level messages:
 	wireSendProp
 	wireSource1GameEventList
 	wireSource1GameEvent
+	wireCreateStringTable
 */
 package manta
 
@@ -307,6 +308,126 @@ func (m *wireSource1GameEventKeyT) GetValBool() bool {
 func (m *wireSource1GameEventKeyT) GetValUint64() uint64 {
 	if m != nil && m.ValUint64 != nil {
 		return *m.ValUint64
+	}
+	return 0
+}
+
+type wireCreateStringTable struct {
+	Name              *string `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
+	MaxEntries        *int32  `protobuf:"varint,2,opt,name=max_entries" json:"max_entries,omitempty"`
+	NumEntries        *int32  `protobuf:"varint,3,opt,name=num_entries" json:"num_entries,omitempty"`
+	UserDataFixedSize *bool   `protobuf:"varint,4,opt,name=user_data_fixed_size" json:"user_data_fixed_size,omitempty"`
+	UserDataSize      *int32  `protobuf:"varint,5,opt,name=user_data_size" json:"user_data_size,omitempty"`
+	UserDataSizeBits  *int32  `protobuf:"varint,6,opt,name=user_data_size_bits" json:"user_data_size_bits,omitempty"`
+	StringData        []byte  `protobuf:"bytes,7,opt,name=string_data" json:"string_data,omitempty"`
+	CompressedSize    *int32  `protobuf:"varint,8,opt,name=compressed_size" json:"compressed_size,omitempty"`
+	DataCompressed    *bool   `protobuf:"varint,9,opt,name=data_compressed" json:"data_compressed,omitempty"`
+	Flags             *int32  `protobuf:"varint,10,opt,name=flags" json:"flags,omitempty"`
+	Unknown11         *int32  `protobuf:"varint,11,opt,name=unknown11" json:"unknown11,omitempty"`
+	Unknown12         *int32  `protobuf:"varint,12,opt,name=unknown12" json:"unknown12,omitempty"`
+	Unknown13         *int32  `protobuf:"varint,13,opt,name=unknown13" json:"unknown13,omitempty"`
+	Unknown14         *int32  `protobuf:"varint,14,opt,name=unknown14" json:"unknown14,omitempty"`
+	XXX_unrecognized  []byte  `json:"-"`
+}
+
+func (m *wireCreateStringTable) Reset()         { *m = wireCreateStringTable{} }
+func (m *wireCreateStringTable) String() string { return proto.CompactTextString(m) }
+func (*wireCreateStringTable) ProtoMessage()    {}
+
+func (m *wireCreateStringTable) GetName() string {
+	if m != nil && m.Name != nil {
+		return *m.Name
+	}
+	return ""
+}
+
+func (m *wireCreateStringTable) GetMaxEntries() int32 {
+	if m != nil && m.MaxEntries != nil {
+		return *m.MaxEntries
+	}
+	return 0
+}
+
+func (m *wireCreateStringTable) GetNumEntries() int32 {
+	if m != nil && m.NumEntries != nil {
+		return *m.NumEntries
+	}
+	return 0
+}
+
+func (m *wireCreateStringTable) GetUserDataFixedSize() bool {
+	if m != nil && m.UserDataFixedSize != nil {
+		return *m.UserDataFixedSize
+	}
+	return false
+}
+
+func (m *wireCreateStringTable) GetUserDataSize() int32 {
+	if m != nil && m.UserDataSize != nil {
+		return *m.UserDataSize
+	}
+	return 0
+}
+
+func (m *wireCreateStringTable) GetUserDataSizeBits() int32 {
+	if m != nil && m.UserDataSizeBits != nil {
+		return *m.UserDataSizeBits
+	}
+	return 0
+}
+
+func (m *wireCreateStringTable) GetStringData() []byte {
+	if m != nil {
+		return m.StringData
+	}
+	return nil
+}
+
+func (m *wireCreateStringTable) GetCompressedSize() int32 {
+	if m != nil && m.CompressedSize != nil {
+		return *m.CompressedSize
+	}
+	return 0
+}
+
+func (m *wireCreateStringTable) GetDataCompressed() bool {
+	if m != nil && m.DataCompressed != nil {
+		return *m.DataCompressed
+	}
+	return false
+}
+
+func (m *wireCreateStringTable) GetFlags() int32 {
+	if m != nil && m.Flags != nil {
+		return *m.Flags
+	}
+	return 0
+}
+
+func (m *wireCreateStringTable) GetUnknown11() int32 {
+	if m != nil && m.Unknown11 != nil {
+		return *m.Unknown11
+	}
+	return 0
+}
+
+func (m *wireCreateStringTable) GetUnknown12() int32 {
+	if m != nil && m.Unknown12 != nil {
+		return *m.Unknown12
+	}
+	return 0
+}
+
+func (m *wireCreateStringTable) GetUnknown13() int32 {
+	if m != nil && m.Unknown13 != nil {
+		return *m.Unknown13
+	}
+	return 0
+}
+
+func (m *wireCreateStringTable) GetUnknown14() int32 {
+	if m != nil && m.Unknown14 != nil {
+		return *m.Unknown14
 	}
 	return 0
 }

@@ -190,6 +190,9 @@ import (
 
 			case "EBaseGameEvents_GE_Source1LegacyGameEvent":
 				cbType = "wireSource1GameEvent"
+
+			case "SVC_Messages_svc_CreateStringTable":
+				cbType = "wireCreateStringTable"
 			}
 
 			fnsig := spew.Sprintf("func (*%s) error", cbType)

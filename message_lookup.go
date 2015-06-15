@@ -43,7 +43,7 @@ type Callbacks struct {
 	onCSVCMsg_FlattenedSerializer             []func(*dota.CSVCMsg_FlattenedSerializer) error
 	onCSVCMsg_ClassInfo                       []func(*dota.CSVCMsg_ClassInfo) error
 	onCSVCMsg_SetPause                        []func(*dota.CSVCMsg_SetPause) error
-	onCSVCMsg_CreateStringTable               []func(*dota.CSVCMsg_CreateStringTable) error
+	onCSVCMsg_CreateStringTable               []func(*wireCreateStringTable) error
 	onCSVCMsg_UpdateStringTable               []func(*dota.CSVCMsg_UpdateStringTable) error
 	onCSVCMsg_VoiceInit                       []func(*dota.CSVCMsg_VoiceInit) error
 	onCSVCMsg_VoiceData                       []func(*dota.CSVCMsg_VoiceData) error
@@ -397,9 +397,9 @@ func (c *Callbacks) OnCSVCMsg_SetPause(fn func(*dota.CSVCMsg_SetPause) error) {
 	}
 	c.onCSVCMsg_SetPause = append(c.onCSVCMsg_SetPause, fn)
 }
-func (c *Callbacks) OnCSVCMsg_CreateStringTable(fn func(*dota.CSVCMsg_CreateStringTable) error) {
+func (c *Callbacks) OnCSVCMsg_CreateStringTable(fn func(*wireCreateStringTable) error) {
 	if c.onCSVCMsg_CreateStringTable == nil {
-		c.onCSVCMsg_CreateStringTable = make([]func(*dota.CSVCMsg_CreateStringTable) error, 0)
+		c.onCSVCMsg_CreateStringTable = make([]func(*wireCreateStringTable) error, 0)
 	}
 	c.onCSVCMsg_CreateStringTable = append(c.onCSVCMsg_CreateStringTable, fn)
 }
@@ -1739,7 +1739,7 @@ func (p *Parser) CallByPacketType(t int32, raw []byte) error {
 		return nil
 	case 44: // dota.SVC_Messages_svc_CreateStringTable
 		if cbs := callbacks.onCSVCMsg_CreateStringTable; cbs != nil {
-			msg := &dota.CSVCMsg_CreateStringTable{}
+			msg := &wireCreateStringTable{}
 			if err := proto.Unmarshal(raw, msg); err != nil {
 				return err
 			}
