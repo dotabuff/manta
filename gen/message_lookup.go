@@ -23,8 +23,8 @@ type EnumMap struct {
 	Values                   map[string]int
 }
 
-func main() {
-	protoDir, outFile := os.Args[1], os.Args[2]
+func genMessageLookup() {
+	protoDir, outFile := os.Args[2], os.Args[3]
 
 	fset := &token.FileSet{}
 	pkgs, err := parser.ParseDir(fset, protoDir, nil, 0)
@@ -114,12 +114,12 @@ func main() {
 	file := bytes.NewBufferString(`
 package manta
 import (
-	"fmt"
+  "fmt"
 
-	"github.com/dotabuff/manta/dota"
-	"github.com/golang/protobuf/proto"
+  "github.com/dotabuff/manta/dota"
+  "github.com/golang/protobuf/proto"
 )
-	`)
+  `)
 
 	values := map[int]string{}
 	rawMsg := []string{}
@@ -175,37 +175,46 @@ import (
 				panic("no matching enum found")
 			}
 
+			cbType := "dota." + matching
 			cbEnt := "on" + matching
 			cbName := "On" + matching
-			fnsig := spew.Sprintf("func (*dota.%s) error", matching)
 
-			if e == "EDemoCommands_DEM_SignonPacket" {
+			switch e {
+			case "EDemoCommands_DEM_SignonPacket":
 				cbEnt = "onCDemoSignonPacket"
 				cbName = "OnCDemoSignonPacket"
+
+			case "EBaseGameEvents_GE_Source1LegacyGameEventList":
+				cbType = "wireSource1GameEventList"
+
+			case "EBaseGameEvents_GE_Source1LegacyGameEvent":
+				cbType = "wireSource1GameEvent"
 			}
+
+			fnsig := spew.Sprintf("func (*%s) error", cbType)
 
 			swtch := spew.Sprintf(
 				`case %d: // dota.%s
-					if cbs := callbacks.%s; cbs != nil {
-						msg := &dota.%s{}
-						if err := proto.Unmarshal(raw, msg); err != nil {
-						  return err
-						}
-						for _, fn := range cbs {
-							if err := fn(msg); err != nil {
-								return err
-							}
-						}
-				  }
-					return nil`, enum.Values[e], e, cbEnt, matching)
+          if cbs := callbacks.%s; cbs != nil {
+            msg := &%s{}
+            if err := proto.Unmarshal(raw, msg); err != nil {
+              return err
+            }
+            for _, fn := range cbs {
+              if err := fn(msg); err != nil {
+                return err
+              }
+            }
+          }
+        return nil`, enum.Values[e], e, cbEnt, cbType)
 
 			onfn := spew.Sprintf(
 				`func (c *Callbacks) %s(fn %s) {
-					if c.%s == nil {
-						c.%s = make([]%s, 0)
-					}
-					c.%s = append(c.%s, fn)
-					}`, cbName, fnsig, cbEnt, cbEnt, fnsig, cbEnt, cbEnt)
+          if c.%s == nil {
+            c.%s = make([]%s, 0)
+          }
+          c.%s = append(c.%s, fn)
+          }`, cbName, fnsig, cbEnt, cbEnt, fnsig, cbEnt, cbEnt)
 
 			if enum.Hook == "DEM" {
 				demSwitches = append(demSwitches, swtch)
@@ -223,19 +232,19 @@ import (
 
 	file.WriteString(spew.Sprintf(`
 type Callbacks struct {
-	%s
+  %s
 }
-	`, strings.Join(rawMsg, "\n")))
+  `, strings.Join(rawMsg, "\n")))
 
 	callTemplate := `
 func (p *Parser) %s(t int32, raw []byte) (error) {
-	callbacks := p.Callbacks
-	switch t {
-	%s
-	}
-	return fmt.Errorf("no type found: %%d", t)
+  callbacks := p.Callbacks
+  switch t {
+  %s
+  }
+  return fmt.Errorf("no type found: %%d", t)
 }
-	`
+  `
 
 	file.WriteString(strings.Join(onFns, "\n"))
 

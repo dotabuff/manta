@@ -3,7 +3,6 @@ package manta
 import (
 	"bytes"
 	"io/ioutil"
-	"math"
 	"os"
 
 	"github.com/dotabuff/manta/dota"
@@ -16,8 +15,9 @@ var magicSource2 = []byte{'P', 'B', 'D', 'E', 'M', 'S', '2', '\000'}
 
 // A replay parser capable of parsing Source 2 replays
 type Parser struct {
-	Callbacks *Callbacks
-	Tick      uint32
+	Callbacks  *Callbacks
+	GameEvents *GameEvents
+	Tick       uint32
 
 	hasClassInfo  bool
 	classInfo     map[int32]string
@@ -50,8 +50,10 @@ func NewParserFromFile(path string) (*Parser, error) {
 func NewParser(buf []byte) (*Parser, error) {
 	// Create a new parser with an internal reader for the given buffer.
 	parser := &Parser{
-		Callbacks: &Callbacks{},
-		Tick:      0,
+		Callbacks:  &Callbacks{},
+		GameEvents: &GameEvents{},
+
+		Tick: 0,
 
 		reader:     newReader(buf),
 		isStopping: false,
@@ -66,7 +68,8 @@ func NewParser(buf []byte) (*Parser, error) {
 		return nil, _errorf("unexpected magic: expected %s, got %s", magicSource2, magic)
 	}
 
-	// Skip the next 8 bytes, which appear to be two int32s
+	// Skip the next 8 bytes, which appear to be two int32s related to the size
+	// of the demo file. We may need them in the future, but not so far.
 	parser.reader.seekBytes(8)
 
 	// Register callbacks
@@ -76,24 +79,19 @@ func NewParser(buf []byte) (*Parser, error) {
 	parser.Callbacks.OnCDemoSignonPacket(parser.onCDemoPacket)
 	parser.Callbacks.OnCDemoFullPacket(parser.onCDemoFullPacket)
 
-	// Packet entities, send tables and string tables are also low-level and
-	// require internal handlers.
-	parser.Callbacks.OnCSVCMsg_PacketEntities(parser.onCSVCMsg_PacketEntities)
-	parser.Callbacks.OnCDemoSendTables(parser.onCDemoSendTables)
-	parser.Callbacks.OnCDemoStringTables(parser.onCDemoStringTables)
-	parser.Callbacks.OnCSVCMsg_CreateStringTable(parser.onCSVCMsg_CreateStringTable)
-	parser.Callbacks.OnCSVCMsg_UpdateStringTable(parser.onCSVCMsg_UpdateStringTable)
-	parser.Callbacks.OnCSVCMsg_SendTable(parser.onCSVCMsg_SendTable)
-
-	parser.Callbacks.OnCSVCMsg_GameEvent(func(m *dota.CSVCMsg_GameEvent) error {
-		_dump("gameevent", m)
-		return nil
-	})
-
+	// Internal handlers
 	parser.Callbacks.OnCDemoClassInfo(parser.onCDemoClassInfo)
+	parser.Callbacks.OnCDemoSendTables(parser.onCDemoSendTables)
+	parser.Callbacks.OnCSVCMsg_CreateStringTable(parser.onCSVCMsg_CreateStringTable)
+	parser.Callbacks.OnCSVCMsg_PacketEntities(parser.onCSVCMsg_PacketEntities)
+	parser.Callbacks.OnCSVCMsg_SendTable(parser.onCSVCMsg_SendTable)
+	parser.Callbacks.OnCSVCMsg_UpdateStringTable(parser.onCSVCMsg_UpdateStringTable)
+	parser.Callbacks.OnCSVCMsg_ServerInfo(parser.onCSVCMsg_ServerInfo)
+	parser.Callbacks.OnCMsgSource1LegacyGameEvent(parser.GameEvents.onCMsgSource1LegacyGameEvent)
 
-	parser.Callbacks.OnCSVCMsg_ServerInfo(func(m *dota.CSVCMsg_ServerInfo) error {
-		parser.classIdSize = int(math.Log(float64(m.GetMaxClasses()))/math.Log(2)) + 1
+	// Panic if we see any of these
+	parser.Callbacks.OnCSVCMsg_GameEvent(func(m *dota.CSVCMsg_GameEvent) error {
+		_panicf("unexpected: saw a CSVCMsg_GameEvent")
 		return nil
 	})
 
@@ -106,21 +104,6 @@ func NewParser(buf []byte) (*Parser, error) {
 	// Stops parsing when we reach the end of the replay.
 	parser.Callbacks.OnCDemoStop(func(m *dota.CDemoStop) error {
 		parser.Stop()
-		return nil
-	})
-
-	// TODO
-	parser.Callbacks.OnCDemoSpawnGroups(func(m *dota.CDemoSpawnGroups) error {
-		return nil
-	})
-
-	// TODO
-	parser.Callbacks.OnCNETMsg_SpawnGroup_Load(func(m *dota.CNETMsg_SpawnGroup_Load) error {
-		return nil
-	})
-
-	// TODO
-	parser.Callbacks.OnCDemoUserCmd(func(m *dota.CDemoUserCmd) error {
 		return nil
 	})
 

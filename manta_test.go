@@ -22,6 +22,9 @@ func TestOuterParserRealMatch(t *testing.T) {
 		t.Fatal(err)
 	}
 
+	totalCombatLogDamage := 0
+	totalCombatLogHealing := 0
+	numCombatLogEvents := 0
 	lastChatTick := uint32(0)
 	lastChatMessage := ""
 
@@ -31,9 +34,25 @@ func TestOuterParserRealMatch(t *testing.T) {
 		return nil
 	})
 
+	parser.GameEvents.OnDotaCombatlog(func(m *GameEventDotaCombatlog) error {
+		numCombatLogEvents += 1
+
+		switch m.Type {
+		case 0:
+			totalCombatLogDamage += int(m.Value)
+		case 1:
+			totalCombatLogHealing += int(m.Value)
+		}
+
+		return nil
+	})
+
 	err = parser.Start()
 	assert.Nil(err)
 
+	assert.Equal(1400664, totalCombatLogDamage)
+	assert.Equal(62031, totalCombatLogHealing)
+	assert.Equal(58776, numCombatLogEvents)
 	assert.Equal(uint32(105819), lastChatTick)
 	assert.Equal("yah totally", lastChatMessage)
 }

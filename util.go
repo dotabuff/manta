@@ -1,8 +1,10 @@
 package manta
 
 import (
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"math"
 	"os"
 	"runtime"
 	"strconv"
@@ -93,6 +95,15 @@ func _proto_marshal(obj proto.Message) []byte {
 	return buf
 }
 
+// marshal an interface{} to JSON bytes
+func _json_marshal(obj interface{}) []byte {
+	buf, err := json.MarshalIndent(obj, "", "  ")
+	if err != nil {
+		panic(err)
+	}
+	return buf
+}
+
 // Returns the name of the calling function
 func _caller(n int) string {
 	if pc, _, _, ok := runtime.Caller(n); ok {
@@ -101,4 +112,8 @@ func _caller(n int) string {
 	}
 
 	return "unknown"
+}
+
+func log2(n int) int {
+	return int(math.Log(float64(n))/math.Log(2)) + 1
 }

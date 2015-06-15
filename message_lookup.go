@@ -111,9 +111,9 @@ type Callbacks struct {
 	onCMsgClearWorldDecalsEvent               []func(*dota.CMsgClearWorldDecalsEvent) error
 	onCMsgClearEntityDecalsEvent              []func(*dota.CMsgClearEntityDecalsEvent) error
 	onCMsgClearDecalsForSkeletonInstanceEvent []func(*dota.CMsgClearDecalsForSkeletonInstanceEvent) error
-	onCMsgSource1LegacyGameEventList          []func(*dota.CMsgSource1LegacyGameEventList) error
+	onCMsgSource1LegacyGameEventList          []func(*wireSource1GameEventList) error
 	onCMsgSource1LegacyListenEvents           []func(*dota.CMsgSource1LegacyListenEvents) error
-	onCMsgSource1LegacyGameEvent              []func(*dota.CMsgSource1LegacyGameEvent) error
+	onCMsgSource1LegacyGameEvent              []func(*wireSource1GameEvent) error
 	onCMsgSosStartSoundEvent                  []func(*dota.CMsgSosStartSoundEvent) error
 	onCMsgSosStopSoundEvent                   []func(*dota.CMsgSosStopSoundEvent) error
 	onCMsgSosSetSoundEventParam               []func(*dota.CMsgSosSetSoundEventParam) error
@@ -810,9 +810,9 @@ func (c *Callbacks) OnCMsgClearDecalsForSkeletonInstanceEvent(fn func(*dota.CMsg
 	}
 	c.onCMsgClearDecalsForSkeletonInstanceEvent = append(c.onCMsgClearDecalsForSkeletonInstanceEvent, fn)
 }
-func (c *Callbacks) OnCMsgSource1LegacyGameEventList(fn func(*dota.CMsgSource1LegacyGameEventList) error) {
+func (c *Callbacks) OnCMsgSource1LegacyGameEventList(fn func(*wireSource1GameEventList) error) {
 	if c.onCMsgSource1LegacyGameEventList == nil {
-		c.onCMsgSource1LegacyGameEventList = make([]func(*dota.CMsgSource1LegacyGameEventList) error, 0)
+		c.onCMsgSource1LegacyGameEventList = make([]func(*wireSource1GameEventList) error, 0)
 	}
 	c.onCMsgSource1LegacyGameEventList = append(c.onCMsgSource1LegacyGameEventList, fn)
 }
@@ -822,9 +822,9 @@ func (c *Callbacks) OnCMsgSource1LegacyListenEvents(fn func(*dota.CMsgSource1Leg
 	}
 	c.onCMsgSource1LegacyListenEvents = append(c.onCMsgSource1LegacyListenEvents, fn)
 }
-func (c *Callbacks) OnCMsgSource1LegacyGameEvent(fn func(*dota.CMsgSource1LegacyGameEvent) error) {
+func (c *Callbacks) OnCMsgSource1LegacyGameEvent(fn func(*wireSource1GameEvent) error) {
 	if c.onCMsgSource1LegacyGameEvent == nil {
-		c.onCMsgSource1LegacyGameEvent = make([]func(*dota.CMsgSource1LegacyGameEvent) error, 0)
+		c.onCMsgSource1LegacyGameEvent = make([]func(*wireSource1GameEvent) error, 0)
 	}
 	c.onCMsgSource1LegacyGameEvent = append(c.onCMsgSource1LegacyGameEvent, fn)
 }
@@ -2635,7 +2635,7 @@ func (p *Parser) CallByPacketType(t int32, raw []byte) error {
 		return nil
 	case 205: // dota.EBaseGameEvents_GE_Source1LegacyGameEventList
 		if cbs := callbacks.onCMsgSource1LegacyGameEventList; cbs != nil {
-			msg := &dota.CMsgSource1LegacyGameEventList{}
+			msg := &wireSource1GameEventList{}
 			if err := proto.Unmarshal(raw, msg); err != nil {
 				return err
 			}
@@ -2661,7 +2661,7 @@ func (p *Parser) CallByPacketType(t int32, raw []byte) error {
 		return nil
 	case 207: // dota.EBaseGameEvents_GE_Source1LegacyGameEvent
 		if cbs := callbacks.onCMsgSource1LegacyGameEvent; cbs != nil {
-			msg := &dota.CMsgSource1LegacyGameEvent{}
+			msg := &wireSource1GameEvent{}
 			if err := proto.Unmarshal(raw, msg); err != nil {
 				return err
 			}

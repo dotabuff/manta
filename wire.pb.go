@@ -11,6 +11,8 @@ It is generated from these files:
 It has these top-level messages:
 	wireSendTable
 	wireSendProp
+	wireSource1GameEventList
+	wireSource1GameEvent
 */
 package manta
 
@@ -129,6 +131,182 @@ func (m *wireSendProp) GetUnknown8() int32 {
 func (m *wireSendProp) GetUnknown9() int32 {
 	if m != nil && m.Unknown9 != nil {
 		return *m.Unknown9
+	}
+	return 0
+}
+
+type wireSource1GameEventList struct {
+	Descriptors      []*wireSource1GameEventListDescriptorT `protobuf:"bytes,1,rep,name=descriptors" json:"descriptors,omitempty"`
+	XXX_unrecognized []byte                                 `json:"-"`
+}
+
+func (m *wireSource1GameEventList) Reset()         { *m = wireSource1GameEventList{} }
+func (m *wireSource1GameEventList) String() string { return proto.CompactTextString(m) }
+func (*wireSource1GameEventList) ProtoMessage()    {}
+
+func (m *wireSource1GameEventList) GetDescriptors() []*wireSource1GameEventListDescriptorT {
+	if m != nil {
+		return m.Descriptors
+	}
+	return nil
+}
+
+type wireSource1GameEventListKeyT struct {
+	Type             *int32  `protobuf:"varint,1,req,name=type" json:"type,omitempty"`
+	Name             *string `protobuf:"bytes,2,req,name=name" json:"name,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *wireSource1GameEventListKeyT) Reset()         { *m = wireSource1GameEventListKeyT{} }
+func (m *wireSource1GameEventListKeyT) String() string { return proto.CompactTextString(m) }
+func (*wireSource1GameEventListKeyT) ProtoMessage()    {}
+
+func (m *wireSource1GameEventListKeyT) GetType() int32 {
+	if m != nil && m.Type != nil {
+		return *m.Type
+	}
+	return 0
+}
+
+func (m *wireSource1GameEventListKeyT) GetName() string {
+	if m != nil && m.Name != nil {
+		return *m.Name
+	}
+	return ""
+}
+
+type wireSource1GameEventListDescriptorT struct {
+	Eventid          *int32                          `protobuf:"varint,1,req,name=eventid" json:"eventid,omitempty"`
+	Name             *string                         `protobuf:"bytes,2,req,name=name" json:"name,omitempty"`
+	Keys             []*wireSource1GameEventListKeyT `protobuf:"bytes,3,rep,name=keys" json:"keys,omitempty"`
+	XXX_unrecognized []byte                          `json:"-"`
+}
+
+func (m *wireSource1GameEventListDescriptorT) Reset()         { *m = wireSource1GameEventListDescriptorT{} }
+func (m *wireSource1GameEventListDescriptorT) String() string { return proto.CompactTextString(m) }
+func (*wireSource1GameEventListDescriptorT) ProtoMessage()    {}
+
+func (m *wireSource1GameEventListDescriptorT) GetEventid() int32 {
+	if m != nil && m.Eventid != nil {
+		return *m.Eventid
+	}
+	return 0
+}
+
+func (m *wireSource1GameEventListDescriptorT) GetName() string {
+	if m != nil && m.Name != nil {
+		return *m.Name
+	}
+	return ""
+}
+
+func (m *wireSource1GameEventListDescriptorT) GetKeys() []*wireSource1GameEventListKeyT {
+	if m != nil {
+		return m.Keys
+	}
+	return nil
+}
+
+type wireSource1GameEvent struct {
+	EventName        *string                     `protobuf:"bytes,1,opt,name=event_name" json:"event_name,omitempty"`
+	Eventid          *int32                      `protobuf:"varint,2,req,name=eventid" json:"eventid,omitempty"`
+	Keys             []*wireSource1GameEventKeyT `protobuf:"bytes,3,rep,name=keys" json:"keys,omitempty"`
+	XXX_unrecognized []byte                      `json:"-"`
+}
+
+func (m *wireSource1GameEvent) Reset()         { *m = wireSource1GameEvent{} }
+func (m *wireSource1GameEvent) String() string { return proto.CompactTextString(m) }
+func (*wireSource1GameEvent) ProtoMessage()    {}
+
+func (m *wireSource1GameEvent) GetEventName() string {
+	if m != nil && m.EventName != nil {
+		return *m.EventName
+	}
+	return ""
+}
+
+func (m *wireSource1GameEvent) GetEventid() int32 {
+	if m != nil && m.Eventid != nil {
+		return *m.Eventid
+	}
+	return 0
+}
+
+func (m *wireSource1GameEvent) GetKeys() []*wireSource1GameEventKeyT {
+	if m != nil {
+		return m.Keys
+	}
+	return nil
+}
+
+type wireSource1GameEventKeyT struct {
+	Type             *int32   `protobuf:"varint,1,opt,name=type" json:"type,omitempty"`
+	ValString        *string  `protobuf:"bytes,2,opt,name=val_string" json:"val_string,omitempty"`
+	ValFloat         *float32 `protobuf:"fixed32,3,opt,name=val_float" json:"val_float,omitempty"`
+	ValLong          *int32   `protobuf:"varint,4,opt,name=val_long" json:"val_long,omitempty"`
+	ValShort         *int32   `protobuf:"varint,5,opt,name=val_short" json:"val_short,omitempty"`
+	ValByte          *int32   `protobuf:"varint,6,opt,name=val_byte" json:"val_byte,omitempty"`
+	ValBool          *bool    `protobuf:"varint,7,opt,name=val_bool" json:"val_bool,omitempty"`
+	ValUint64        *uint64  `protobuf:"varint,8,opt,name=val_uint64" json:"val_uint64,omitempty"`
+	XXX_unrecognized []byte   `json:"-"`
+}
+
+func (m *wireSource1GameEventKeyT) Reset()         { *m = wireSource1GameEventKeyT{} }
+func (m *wireSource1GameEventKeyT) String() string { return proto.CompactTextString(m) }
+func (*wireSource1GameEventKeyT) ProtoMessage()    {}
+
+func (m *wireSource1GameEventKeyT) GetType() int32 {
+	if m != nil && m.Type != nil {
+		return *m.Type
+	}
+	return 0
+}
+
+func (m *wireSource1GameEventKeyT) GetValString() string {
+	if m != nil && m.ValString != nil {
+		return *m.ValString
+	}
+	return ""
+}
+
+func (m *wireSource1GameEventKeyT) GetValFloat() float32 {
+	if m != nil && m.ValFloat != nil {
+		return *m.ValFloat
+	}
+	return 0
+}
+
+func (m *wireSource1GameEventKeyT) GetValLong() int32 {
+	if m != nil && m.ValLong != nil {
+		return *m.ValLong
+	}
+	return 0
+}
+
+func (m *wireSource1GameEventKeyT) GetValShort() int32 {
+	if m != nil && m.ValShort != nil {
+		return *m.ValShort
+	}
+	return 0
+}
+
+func (m *wireSource1GameEventKeyT) GetValByte() int32 {
+	if m != nil && m.ValByte != nil {
+		return *m.ValByte
+	}
+	return 0
+}
+
+func (m *wireSource1GameEventKeyT) GetValBool() bool {
+	if m != nil && m.ValBool != nil {
+		return *m.ValBool
+	}
+	return false
+}
+
+func (m *wireSource1GameEventKeyT) GetValUint64() uint64 {
+	if m != nil && m.ValUint64 != nil {
+		return *m.ValUint64
 	}
 	return 0
 }

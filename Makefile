@@ -40,8 +40,11 @@ dota/google/protobuf/descriptor.pb.go: google/protobuf/descriptor.proto
 	mkdir -p dota/google/protobuf
 	protoc -I. --go_out=dota $<
 
+gen-game-events:
+	go run gen/*.go game_events fixtures/game_events_list.pbmsg game_event_lookup.go
+
 gen-message-lookup:
-	go run gen/packet.go dota message_lookup.go
+	go run gen/*.go message_lookup dota message_lookup.go
 
 gen-wire-proto:
 	protoc --go_out=. wire.proto

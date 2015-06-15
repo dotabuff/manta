@@ -4,14 +4,21 @@ import (
 	"github.com/dotabuff/manta/dota"
 )
 
-// Internal parser for callback dota.CDemoClassInfo.
-func (p *Parser) onCDemoClassInfo(classInfo *dota.CDemoClassInfo) error {
-	// Iterate through items, storing the mapping in the parser state
-	for _, class := range classInfo.GetClasses() {
-		p.classInfo[class.GetClassId()] = class.GetNetworkName()
+// Internal callback for CSVCMsg_ServerInfo.
+func (p *Parser) onCSVCMsg_ServerInfo(m *dota.CSVCMsg_ServerInfo) error {
+	// This may be needed to parse PacketEntities.
+	p.classIdSize = log2(int(m.GetMaxClasses()))
+	return nil
+}
 
-		if _, ok := p.sendTables.getTableByName(class.GetNetworkName()); !ok {
-			_panicf("unable to find table for class %d (%s)", class.GetClassId, class.GetNetworkName())
+// Internal callback for CDemoClassInfo.
+func (p *Parser) onCDemoClassInfo(m *dota.CDemoClassInfo) error {
+	// Iterate through items, storing the mapping in the parser state
+	for _, c := range m.GetClasses() {
+		p.classInfo[c.GetClassId()] = c.GetNetworkName()
+
+		if _, ok := p.sendTables.getTableByName(c.GetNetworkName()); !ok {
+			_panicf("unable to find table for class %d (%s)", c.GetClassId, c.GetNetworkName())
 		}
 	}
 

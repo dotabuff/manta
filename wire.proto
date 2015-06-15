@@ -18,6 +18,37 @@ message WireSendProp {
   required int32 unknown9 = 9; // type?
 }
 
+message WireSource1GameEventList {
+  message key_t {
+    required int32 type = 1;
+    required string name = 2;
+  }
+
+  message descriptor_t {
+    required int32 eventid = 1;
+    required string name = 2;
+    repeated WireSource1GameEventList.key_t keys = 3;
+  }
+
+  repeated WireSource1GameEventList.descriptor_t descriptors = 1;
+}
+
+message WireSource1GameEvent {
+  message key_t {
+    optional int32 type = 1;
+    optional string val_string = 2;
+    optional float val_float = 3;
+    optional int32 val_long = 4;
+    optional int32 val_short = 5;
+    optional int32 val_byte = 6;
+    optional bool val_bool = 7;
+    optional uint64 val_uint64 = 8;
+  }
+
+  optional string event_name = 1;
+  required int32 eventid = 2;
+  repeated WireSource1GameEvent.key_t keys = 3;
+}
 
 // message CSVCMsg_SendTable {
 //   message sendprop_t {
