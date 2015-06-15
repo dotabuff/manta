@@ -15,9 +15,16 @@ var magicSource2 = []byte{'P', 'B', 'D', 'E', 'M', 'S', '2', '\000'}
 
 // A replay parser capable of parsing Source 2 replays
 type Parser struct {
-	Callbacks  *Callbacks
+	// Callbacks provide a mechanism for receiving notification
+	// when a specific message has been received and decoded.
+	Callbacks *Callbacks
+
+	// GameEvents provides a mechanism for receiving notification
+	// when a specific game event message has been received and decoded.
 	GameEvents *GameEvents
-	Tick       uint32
+
+	// Contains the game tick associated with the last message processed.
+	Tick uint32
 
 	hasClassInfo  bool
 	classInfo     map[int32]string
@@ -31,7 +38,7 @@ type Parser struct {
 	isStopping bool
 }
 
-// Create a new Parser from a file
+// Create a new Parser from a file on disk.
 func NewParserFromFile(path string) (*Parser, error) {
 	fd, err := os.Open(path)
 	if err != nil {
@@ -46,7 +53,7 @@ func NewParserFromFile(path string) (*Parser, error) {
 	return NewParser(buf)
 }
 
-// Create a new parser from a byte slice
+// Create a new parser from a byte slice.
 func NewParser(buf []byte) (*Parser, error) {
 	// Create a new parser with an internal reader for the given buffer.
 	parser := &Parser{
@@ -72,14 +79,10 @@ func NewParser(buf []byte) (*Parser, error) {
 	// of the demo file. We may need them in the future, but not so far.
 	parser.reader.seekBytes(8)
 
-	// Register callbacks
-
-	// CDemoPacket outer messages have a inner handler
+	// Internal handlers
 	parser.Callbacks.OnCDemoPacket(parser.onCDemoPacket)
 	parser.Callbacks.OnCDemoSignonPacket(parser.onCDemoPacket)
 	parser.Callbacks.OnCDemoFullPacket(parser.onCDemoFullPacket)
-
-	// Internal handlers
 	parser.Callbacks.OnCDemoClassInfo(parser.onCDemoClassInfo)
 	parser.Callbacks.OnCDemoSendTables(parser.onCDemoSendTables)
 	parser.Callbacks.OnCSVCMsg_CreateStringTable(parser.onCSVCMsg_CreateStringTable)
@@ -112,15 +115,20 @@ func NewParser(buf []byte) (*Parser, error) {
 
 // Start parsing the replay. Will stop processing new events after Stop() is called.
 func (p *Parser) Start() error {
-	var msg Message
+	var msg *outerMessage
 	var err error
 
+	// Loop through all outer messages until we're signaled to stop. Stopping
+	// happens when either the OnCDemoStop message is encountered or
+	// parser.Stop() is called programatically.
 	for !p.isStopping {
-		if msg, err = p.read(); err != nil {
+		// Read the next outer message.
+		if msg, err = p.readOuterMessage(); err != nil {
 			return err
 		}
 
-		if err = p.CallByDemoType(int32(msg.Type), msg.data); err != nil {
+		// Invoke callbacks for the given message type.
+		if err = p.CallByDemoType(msg.typeId, msg.data); err != nil {
 			return err
 		}
 	}
@@ -133,51 +141,44 @@ func (p *Parser) Stop() {
 	p.isStopping = true
 }
 
-// An outer message, right off the wire.
-type Message struct {
-	Compressed bool
-	Tick       uint32
-	Type       dota.EDemoCommands
-	data       []byte
-	Size       uint32
+// Describes a demo message parsed from the replay.
+type outerMessage struct {
+	tick   uint32
+	typeId int32
+	data   []byte
 }
 
 // Read the next outer message from the buffer.
-func (p *Parser) read() (Message, error) {
-	binType := p.reader.readVarUint32()
-	binTick := p.reader.readVarUint32()
-	binSize := p.reader.readVarUint32()
+func (p *Parser) readOuterMessage() (*outerMessage, error) {
+	// Read a command header, which includes both the message type
+	// well as a flag to determine whether or not whether or not the
+	// message is compressed with snappy.
+	command := dota.EDemoCommands(p.reader.readVarUint32())
 
-	msg := Message{
-		Tick: binTick,
-		Size: binSize,
+	// Extract the type and compressed flag out of the command
+	msgType := int32(command & ^dota.EDemoCommands_DEM_IsCompressed)
+	msgCompressed := (command & dota.EDemoCommands_DEM_IsCompressed) == dota.EDemoCommands_DEM_IsCompressed
+
+	// Read the tick that the message corresponds with.
+	tick := p.reader.readVarUint32()
+
+	// Read the size and following buffer.
+	size := int(p.reader.readVarUint32())
+	buf := p.reader.readBytes(size)
+
+	// If the buffer is compressed, decompress it with snappy.
+	if msgCompressed {
+		var err error
+		if buf, err = snappy.Decode(nil, buf); err != nil {
+			return nil, err
+		}
 	}
 
-	command := dota.EDemoCommands(binType)
-	msg.Compressed = (command & dota.EDemoCommands_DEM_IsCompressed) == dota.EDemoCommands_DEM_IsCompressed
-	msg.Type = command & ^dota.EDemoCommands_DEM_IsCompressed
-
-	buf := p.reader.readBytes(int(msg.Size))
-
-	if msg.Compressed {
-		decodedLen, err := snappy.DecodedLen(buf)
-		if err != nil {
-			return msg, err
-		}
-
-		if decodedLen > 0x100000 {
-			return msg, _errorf("decompressed size too big: %d", decodedLen)
-		}
-
-		out, err := snappy.Decode(nil, buf)
-		if err != nil {
-			return msg, err
-		}
-		msg.data = out
-		msg.Size = uint32(decodedLen)
-	} else {
-		msg.data = buf
+	// Return the message
+	msg := &outerMessage{
+		tick:   tick,
+		typeId: msgType,
+		data:   buf,
 	}
-
 	return msg, nil
 }
