@@ -10,7 +10,7 @@ cover:
 	go test -cover -coverprofile /tmp/manta.cov -v
 	go tool cover -html=/tmp/manta.cov
 
-update: update-game-tracking gen-dota-proto gen-message-lookup
+update: update-game-tracking gen-dota-proto gen-game-events gen-message-lookup
 
 game-tracking:
 	git init game-tracking
@@ -41,10 +41,10 @@ dota/google/protobuf/descriptor.pb.go: google/protobuf/descriptor.proto
 	protoc -I. --go_out=dota $<
 
 gen-game-events:
-	go run gen/*.go game_events fixtures/game_events_list.pbmsg game_event_lookup.go
+	go run gen/game_event.go fixtures/game_events_list.pbmsg game_event_lookup.go
 
 gen-message-lookup:
-	go run gen/*.go message_lookup dota message_lookup.go
+	go run gen/message_lookup.go dota message_lookup.go
 
 gen-wire-proto:
 	protoc --go_out=. wire.proto

@@ -23,8 +23,8 @@ type EnumMap struct {
 	Values                   map[string]int
 }
 
-func genMessageLookup() {
-	protoDir, outFile := os.Args[2], os.Args[3]
+func main() {
+	protoDir, outFile := os.Args[1], os.Args[2]
 
 	fset := &token.FileSet{}
 	pkgs, err := parser.ParseDir(fset, protoDir, nil, 0)
@@ -111,7 +111,8 @@ func genMessageLookup() {
 		}
 	}
 
-	file := bytes.NewBufferString(`
+	file := bytes.NewBufferString(spew.Sprintf(
+		`//go:generate go run gen/message_lookup.go %s %s
 package manta
 import (
   "fmt"
@@ -119,7 +120,7 @@ import (
   "github.com/dotabuff/manta/dota"
   "github.com/golang/protobuf/proto"
 )
-  `)
+  `, protoDir, outFile))
 
 	values := map[int]string{}
 	rawMsg := []string{}

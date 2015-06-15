@@ -1,3 +1,5 @@
+//go:generate go run gen/game_event.go fixtures/game_events_list.pbmsg game_event_lookup.go
+
 package manta
 
 const (

@@ -48,8 +48,8 @@ func geTypeName(t int32) (string, string) {
 	return "", ""
 }
 
-func genGameEventLookup() {
-	buf, err := ioutil.ReadFile(os.Args[2])
+func main() {
+	buf, err := ioutil.ReadFile(os.Args[1])
 	if err != nil {
 		panic(err)
 	}
@@ -140,7 +140,8 @@ func genGameEventLookup() {
     return nil
   }`
 
-	out := "package manta\n"
+	out := fmt.Sprintf("//go:generate go run gen/game_event.go %s %s\n\n", os.Args[1], os.Args[2])
+	out += "package manta\n\n"
 	out += constOut
 	out += structOut
 	out += geStructOut
@@ -152,7 +153,7 @@ func genGameEventLookup() {
 		panic(err)
 	}
 
-	ioutil.WriteFile(os.Args[3], outbuf, 0644)
+	ioutil.WriteFile(os.Args[2], outbuf, 0644)
 }
 
 func camelCase(src string, export bool) string {

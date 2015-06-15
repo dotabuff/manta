@@ -1,3 +1,4 @@
+//go:generate go run gen/message_lookup.go dota message_lookup.go
 package manta
 
 import (
