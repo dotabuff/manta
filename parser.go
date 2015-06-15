@@ -26,13 +26,13 @@ type Parser struct {
 	// Contains the game tick associated with the last message processed.
 	Tick uint32
 
-	hasClassInfo  bool
-	classInfo     map[int32]string
-	classIdSize   int
-	classBaseline map[int32]map[string]interface{}
-
-	sendTables   *sendTables
-	stringTables *stringTables
+	hasClassInfo   bool
+	classInfo      map[int32]string
+	classIdSize    int
+	classBaseline  map[int32]map[string]interface{}
+	packetEntities map[int32]*packetEntity
+	sendTables     *sendTables
+	stringTables   *stringTables
 
 	reader     *reader
 	isStopping bool
@@ -65,9 +65,10 @@ func NewParser(buf []byte) (*Parser, error) {
 		reader:     newReader(buf),
 		isStopping: false,
 
-		classInfo:     make(map[int32]string),
-		classBaseline: make(map[int32]map[string]interface{}),
-		stringTables:  newStringTables(),
+		classInfo:      make(map[int32]string),
+		classBaseline:  make(map[int32]map[string]interface{}),
+		packetEntities: make(map[int32]*packetEntity),
+		stringTables:   newStringTables(),
 	}
 
 	// Parse out the header, ensuring that it's valid.

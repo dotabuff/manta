@@ -69,20 +69,13 @@ func (p *Parser) updateInstanceBaseline() {
 			_panicf("unable to find send table %s for instancebaseline key %d", className, classId)
 		}
 
+		// TODO XXX: Remove once we've gotten readProperties working.
+		continue
+
 		// Parse the properties out of the string table buffer and store
 		// them as the class baseline in the Parser.
 		if len(item.value) > 0 {
-			p.classBaseline[classId] = parsePropsValues(item.value, sendTable)
+			p.classBaseline[classId] = readProperties(newReader(item.value), sendTable)
 		}
 	}
-}
-
-// Extracts key-value pairs from a buffer using a given send table.
-func parsePropsValues(buf []byte, table *sendTable) map[string]interface{} {
-	result := make(map[string]interface{})
-
-	// XXX TODO: read the buffer. We need to link type information to the send tables
-	// before we can approach this with any reasonable hope of success.
-
-	return result
 }

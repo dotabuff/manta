@@ -4,155 +4,119 @@ import (
 	"github.com/dotabuff/manta/dota"
 )
 
-const (
-	peUpdateTypeCreate   = 1
-	peUpdateTypePreserve = 2
-	peUpdateTypeDelete   = 3
-	peUpdateTypeLeave    = 4
-)
-
-type PacketEntity struct {
-	Tick         uint32
-	Index        int
-	SerialNum    int
-	ClassId      int32
-	ClassName    string
-	EntityHandle int
-	Name         string
-	UpdateType   int
-	Values       map[string]interface{}
+// Represents the state of an entity
+type packetEntity struct {
+	index      int32
+	classId    int32
+	className  string
+	sendTable  *sendTable
+	properties map[string]interface{}
 }
 
-// Internal parser for callback CSVCMsg_PacketEntities.
+// Internal callback for CSVCMsg_PacketEntities.
 func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error {
-	// XXX TODO: continue exploring
+	// XXX: Remove once we've gotten readProperties working.
 	return nil
 
-	r := newPacketEntityReader(p, m.GetEntityData())
+	defer func() {
+		if err := recover(); err != nil {
+			_debugf("recovered: %s", err)
+		}
+	}()
+
+	_debugf("pTick=%d isDelta=%v deltaFrom=%d updatedEntries=%d maxEntries=%d baseline=%d updateBaseline=%v", p.Tick, m.GetIsDelta(), m.GetDeltaFrom(), m.GetUpdatedEntries(), m.GetMaxEntries(), m.GetBaseline(), m.GetUpdateBaseline())
+
+	r := newReader(m.GetEntityData())
+	index := int32(-1)
+	ok := false
+
+	// Iterate over all entries
 	for i := 0; i < int(m.GetUpdatedEntries()); i++ {
-		r.readNextPacketEntity()
+		// Read the index delta from the buffer. This is an implementation
+		// from Alice. An alternate implementation from Yasha has the same result.
+		delta := r.readBits(6)
+		switch delta & 0x30 {
+		case 16:
+			delta = (delta & 15) | (r.readBits(4) << 4)
+		case 32:
+			delta = (delta & 15) | (r.readBits(8) << 4)
+		case 48:
+			delta = (delta & 15) | (r.readBits(28) << 4)
+		}
+		index += int32(delta) + 1
+		_debugf("index delta is %d to %d", delta, index)
+
+		// Read the type of update based on two booleans.
+		// This appears to be backwards from source 1:
+		// true+true used to be "create", now appears to be false+true?
+		// This seems suspcious.
+		updateType := " "
+		if r.readBoolean() {
+			if r.readBoolean() {
+				updateType = "D"
+			} else {
+				updateType = "?"
+			}
+		} else {
+			if r.readBoolean() {
+				updateType = "C"
+			} else {
+				updateType = "U"
+			}
+		}
+		_debugf("update type is %s", updateType)
+
+		// Proceed based on the update type
+		switch updateType {
+		case "C":
+			// Create a new packetEntity.
+			pe := &packetEntity{
+				index:      index,
+				classId:    int32(r.readBits(p.classIdSize)),
+				properties: make(map[string]interface{}),
+			}
+
+			// Skip the 10 serial bits for now.
+			r.seekBits(10)
+
+			// Get the associated class.
+			if pe.className, ok = p.classInfo[pe.classId]; !ok {
+				_panicf("unable to find class %d", pe.classId)
+			}
+
+			// Get the associated send table.
+			if pe.sendTable, ok = p.sendTables.getTableByName(pe.className); !ok {
+				_panicf("unable to find sendtable for class %s", pe.className)
+			}
+
+			// Register the packetEntity with the parser.
+			p.packetEntities[index] = pe
+
+			_debugf("created a pe: %+v", pe)
+
+			// Read properties and set them in the packetEntity
+			pe.properties = readProperties(r, pe.sendTable)
+
+		case "U":
+			// Find the existing packetEntity
+			pe, ok := p.packetEntities[index]
+			if !ok {
+				_panicf("unable to find packet entity %d for update", index)
+			}
+
+			// Read properties and update the packetEntity
+			for k, v := range readProperties(r, pe.sendTable) {
+				pe.properties[k] = v
+			}
+
+		case "D":
+			if _, ok := p.packetEntities[index]; !ok {
+				_panicf("unable to find packet entity %d for delete", index)
+			} else {
+				delete(p.packetEntities, index)
+			}
+		}
 	}
 
 	return nil
-}
-
-type packetEntityReader struct {
-	p     *Parser
-	r     *reader
-	index int
-}
-
-// Creates a new packetEntityReader, used to read data in the expected format.
-func newPacketEntityReader(p *Parser, buf []byte) *packetEntityReader {
-	return &packetEntityReader{p, newReader(buf), -1}
-}
-
-// Reads the index for the next packet entity, updating the internal reader state.
-// Status: this appears to work for the first entity. Don't trust it.
-func (r *packetEntityReader) readNextIndex() {
-	x := r.r.readBits(4)
-	b1 := r.r.readBoolean()
-	b2 := r.r.readBoolean()
-
-	if b1 {
-		x += (r.r.readBits(4) << 4)
-	}
-	if b2 {
-		x += (r.r.readBits(8) << 4)
-	}
-
-	r.index += 1 + int(x)
-}
-
-// Determines the PE update type by reading two booleans
-// Status: this appears to work for the first entity. Don't trust it.
-func (r *packetEntityReader) readUpdateType() int {
-	b1 := r.r.readBoolean()
-	b2 := r.r.readBoolean()
-
-	switch {
-	case b1 && b2:
-		return peUpdateTypeDelete
-	case b1 && !b2:
-		return peUpdateTypeLeave
-	case !b1 && b2:
-		return peUpdateTypeCreate
-	case !b1 && !b2:
-		return peUpdateTypePreserve
-	}
-
-	// impossible
-	return -1
-}
-
-// Reads the next packet entity from the buffer
-func (r *packetEntityReader) readNextPacketEntity() *PacketEntity {
-	// Each entity in the buffer is prefixed by an indexing command,
-	// read that first and update the internal reader state.
-	r.readNextIndex()
-	_debugf("pe index %d", r.index)
-
-	// Each entity in the buffer can be one of many update types, which
-	// dictates the encoding and application. Get the update type here.
-	updateType := r.readUpdateType()
-	_debugf("pe update type %d", updateType)
-
-	var pe *PacketEntity
-
-	switch updateType {
-	case peUpdateTypeCreate:
-		pe = &PacketEntity{
-			Tick:       r.p.Tick,
-			ClassId:    int32(r.r.readBits(r.p.classIdSize)), // assumption from yasha, 10.
-			SerialNum:  int(r.r.readBits(10)),                // assumption from yasha
-			Index:      r.index,
-			UpdateType: updateType,
-			Values:     make(map[string]interface{}),
-		}
-		pe.ClassName = r.p.classInfo[pe.ClassId]
-
-	case peUpdateTypePreserve:
-		// XXX TODO: this should look up an existing PE from the Parser
-		pe = &PacketEntity{
-			Tick:       r.p.Tick,
-			UpdateType: updateType,
-		}
-	case peUpdateTypeDelete:
-		// XXX TODO
-	case peUpdateTypeLeave:
-		// XXX TODO
-	}
-
-	if updateType == peUpdateTypeCreate || updateType == peUpdateTypePreserve {
-		// XXX TODO: do something with this after we get it reading properly.
-		r.readPropertiesIndex()
-	}
-
-	return pe
-}
-
-// Reads the property index for the current PE from the buffer.
-// Status: this is a direct port from source1 logic and is not working,
-// or reading at the wrong position. Don't trust it.
-func (r *packetEntityReader) readPropertiesIndex() []int {
-	props := []int{}
-	prop := -1
-
-	for {
-		if r.r.readBoolean() {
-			prop += 1
-			props = append(props, prop)
-			_debugf("easy %d", prop)
-		} else {
-			x := r.r.readVarUint32()
-			if x == 16383 {
-				break
-			}
-			prop += 1 + int(x)
-			props = append(props, prop)
-			_debugf("hard %d", prop)
-		}
-	}
-
-	return props
 }
