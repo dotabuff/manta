@@ -72,6 +72,7 @@ func _dump(label string, args ...interface{}) {
 
 // dumps a given byte buffer to the given fixture filename
 func _dump_fixture(filename string, buf []byte) {
+	fmt.Printf("writing fixture %s...\n", filename)
 	if err := ioutil.WriteFile("./fixtures/"+filename, buf, 0644); err != nil {
 		panic(err)
 	}
