@@ -8,6 +8,7 @@ import (
 	"go/token"
 	"io/ioutil"
 	"os"
+	"sort"
 	"strconv"
 	"strings"
 
@@ -128,6 +129,8 @@ import (
 	demSwitches := []string{}
 	onFns := []string{}
 	onFnNames := make(map[string]bool)
+	packetTypeIds := make([]int, 0)
+	packetTypeNames := make(map[int]string)
 
 	for _, enum := range enums {
 
@@ -168,6 +171,13 @@ import (
 					panic("dupe")
 				} else {
 					values[enum.Values[e]] = e
+				}
+
+				if _, ok := packetTypeNames[enum.Values[e]]; !ok {
+					packetTypeIds = append(packetTypeIds, enum.Values[e])
+					packetTypeNames[enum.Values[e]] = e
+				} else {
+					spew.Printf("duplicate enum %d: have %s, new %s\n", enum.Values[e], packetTypeNames[enum.Values[e]], e)
 				}
 			}
 
@@ -233,6 +243,14 @@ import (
 			}
 		}
 	}
+
+	file.WriteString(spew.Sprintf("var packetNames = map[int32]string{\n"))
+	sort.Ints(packetTypeIds)
+	for _, id := range packetTypeIds {
+		name := packetTypeNames[id]
+		file.WriteString(spew.Sprintf("\t%d: \"%s\",\n", id, name))
+	}
+	file.WriteString(spew.Sprintf("}\n"))
 
 	file.WriteString(spew.Sprintf(`
 type Callbacks struct {
