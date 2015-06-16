@@ -175,6 +175,7 @@ var packetNames = map[int32]string{
 	537: "EDotaUserMessages_DOTA_UM_BuyBackStateAlert",
 	538: "EDotaUserMessages_DOTA_UM_SpeechBubble",
 	539: "EDotaUserMessages_DOTA_UM_CustomHeaderMessage",
+	547: "EDotaUserMessages_DOTA_UM_SpectatorPlayerUnitOrders",
 }
 
 type Callbacks struct {
@@ -360,6 +361,7 @@ type Callbacks struct {
 	onCDOTAUserMsg_BuyBackStateAlert          []func(*dota.CDOTAUserMsg_BuyBackStateAlert) error
 	onCDOTAUserMsg_SpeechBubble               []func(*dota.CDOTAUserMsg_SpeechBubble) error
 	onCDOTAUserMsg_CustomHeaderMessage        []func(*dota.CDOTAUserMsg_CustomHeaderMessage) error
+	onCDOTAUserMsg_SpectatorPlayerUnitOrders  []func(*TempUnitOrder) error
 }
 
 func (c *Callbacks) OnCDemoStop(fn func(*dota.CDemoStop) error) {
@@ -1453,6 +1455,12 @@ func (c *Callbacks) OnCDOTAUserMsg_CustomHeaderMessage(fn func(*dota.CDOTAUserMs
 		c.onCDOTAUserMsg_CustomHeaderMessage = make([]func(*dota.CDOTAUserMsg_CustomHeaderMessage) error, 0)
 	}
 	c.onCDOTAUserMsg_CustomHeaderMessage = append(c.onCDOTAUserMsg_CustomHeaderMessage, fn)
+}
+func (c *Callbacks) OnCDOTAUserMsg_SpectatorPlayerUnitOrders(fn func(*TempUnitOrder) error) {
+	if c.onCDOTAUserMsg_SpectatorPlayerUnitOrders == nil {
+		c.onCDOTAUserMsg_SpectatorPlayerUnitOrders = make([]func(*TempUnitOrder) error, 0)
+	}
+	c.onCDOTAUserMsg_SpectatorPlayerUnitOrders = append(c.onCDOTAUserMsg_SpectatorPlayerUnitOrders, fn)
 }
 func (p *Parser) CallByDemoType(t int32, raw []byte) error {
 	callbacks := p.Callbacks
@@ -3820,6 +3828,19 @@ func (p *Parser) CallByPacketType(t int32, raw []byte) error {
 	case 539: // dota.EDotaUserMessages_DOTA_UM_CustomHeaderMessage
 		if cbs := callbacks.onCDOTAUserMsg_CustomHeaderMessage; cbs != nil {
 			msg := &dota.CDOTAUserMsg_CustomHeaderMessage{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			for _, fn := range cbs {
+				if err := fn(msg); err != nil {
+					return err
+				}
+			}
+		}
+		return nil
+	case 547: // dota.EDotaUserMessages_DOTA_UM_SpectatorPlayerUnitOrders
+		if cbs := callbacks.onCDOTAUserMsg_SpectatorPlayerUnitOrders; cbs != nil {
+			msg := &TempUnitOrder{}
 			if err := proto.Unmarshal(raw, msg); err != nil {
 				return err
 			}

@@ -149,6 +149,21 @@ func (p *Parser) Stop() {
 	p.isStopping = true
 }
 
+// Performs a lookup on a string table by an entry index.
+func (p *Parser) LookupStringByIndex(table string, index int32) (string, bool) {
+	t, ok := p.stringTables.getTableByName(table)
+	if !ok {
+		return "", false
+	}
+
+	item, ok := t.items[index]
+	if !ok {
+		return "", false
+	}
+
+	return item.key, true
+}
+
 // Describes a demo message parsed from the replay.
 type outerMessage struct {
 	tick   uint32

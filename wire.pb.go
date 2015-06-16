@@ -14,6 +14,8 @@ It has these top-level messages:
 	wireSource1GameEventList
 	wireSource1GameEvent
 	wireCreateStringTable
+	TempVector
+	TempUnitOrder
 */
 package manta
 
@@ -430,6 +432,102 @@ func (m *wireCreateStringTable) GetUnknown14() int32 {
 		return *m.Unknown14
 	}
 	return 0
+}
+
+type TempVector struct {
+	X                *float32 `protobuf:"fixed32,1,opt,name=x" json:"x,omitempty"`
+	Y                *float32 `protobuf:"fixed32,2,opt,name=y" json:"y,omitempty"`
+	Z                *float32 `protobuf:"fixed32,3,opt,name=z" json:"z,omitempty"`
+	XXX_unrecognized []byte   `json:"-"`
+}
+
+func (m *TempVector) Reset()         { *m = TempVector{} }
+func (m *TempVector) String() string { return proto.CompactTextString(m) }
+func (*TempVector) ProtoMessage()    {}
+
+func (m *TempVector) GetX() float32 {
+	if m != nil && m.X != nil {
+		return *m.X
+	}
+	return 0
+}
+
+func (m *TempVector) GetY() float32 {
+	if m != nil && m.Y != nil {
+		return *m.Y
+	}
+	return 0
+}
+
+func (m *TempVector) GetZ() float32 {
+	if m != nil && m.Z != nil {
+		return *m.Z
+	}
+	return 0
+}
+
+type TempUnitOrder struct {
+	Entindex         *int32      `protobuf:"varint,1,req,name=entindex" json:"entindex,omitempty"`
+	OrderType        *int32      `protobuf:"varint,2,req,name=order_type" json:"order_type,omitempty"`
+	Units            *int32      `protobuf:"varint,3,opt,name=units" json:"units,omitempty"`
+	TargetIndex      *int32      `protobuf:"varint,4,opt,name=target_index" json:"target_index,omitempty"`
+	AbilityIndex     *int32      `protobuf:"varint,5,opt,name=ability_index" json:"ability_index,omitempty"`
+	Position         *TempVector `protobuf:"bytes,6,opt,name=position" json:"position,omitempty"`
+	Queue            *bool       `protobuf:"varint,7,opt,name=queue" json:"queue,omitempty"`
+	XXX_unrecognized []byte      `json:"-"`
+}
+
+func (m *TempUnitOrder) Reset()         { *m = TempUnitOrder{} }
+func (m *TempUnitOrder) String() string { return proto.CompactTextString(m) }
+func (*TempUnitOrder) ProtoMessage()    {}
+
+func (m *TempUnitOrder) GetEntindex() int32 {
+	if m != nil && m.Entindex != nil {
+		return *m.Entindex
+	}
+	return 0
+}
+
+func (m *TempUnitOrder) GetOrderType() int32 {
+	if m != nil && m.OrderType != nil {
+		return *m.OrderType
+	}
+	return 0
+}
+
+func (m *TempUnitOrder) GetUnits() int32 {
+	if m != nil && m.Units != nil {
+		return *m.Units
+	}
+	return 0
+}
+
+func (m *TempUnitOrder) GetTargetIndex() int32 {
+	if m != nil && m.TargetIndex != nil {
+		return *m.TargetIndex
+	}
+	return 0
+}
+
+func (m *TempUnitOrder) GetAbilityIndex() int32 {
+	if m != nil && m.AbilityIndex != nil {
+		return *m.AbilityIndex
+	}
+	return 0
+}
+
+func (m *TempUnitOrder) GetPosition() *TempVector {
+	if m != nil {
+		return m.Position
+	}
+	return nil
+}
+
+func (m *TempUnitOrder) GetQueue() bool {
+	if m != nil && m.Queue != nil {
+		return *m.Queue
+	}
+	return false
 }
 
 func init() {

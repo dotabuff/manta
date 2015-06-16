@@ -132,6 +132,11 @@ import (
 	packetTypeIds := make([]int, 0)
 	packetTypeNames := make(map[int]string)
 
+	// Fake an entry for unit orders. Later replaced by a wire type.
+	enums[6].EnumNames = append(enums[6].EnumNames, "EDotaUserMessages_DOTA_UM_SpectatorPlayerUnitOrders")
+	enums[6].Values["EDotaUserMessages_DOTA_UM_SpectatorPlayerUnitOrders"] = 547
+	enums[6].StructNames = append(enums[6].StructNames, "CDOTAUserMsg_SpectatorPlayerUnitOrders")
+
 	for _, enum := range enums {
 
 		slice.SortTyped(&enum.EnumNames, func(a, b string) bool {
@@ -203,6 +208,9 @@ import (
 
 			case "SVC_Messages_svc_CreateStringTable":
 				cbType = "wireCreateStringTable"
+
+			case "EDotaUserMessages_DOTA_UM_SpectatorPlayerUnitOrders":
+				cbType = "TempUnitOrder"
 			}
 
 			fnsig := spew.Sprintf("func (*%s) error", cbType)

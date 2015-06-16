@@ -72,6 +72,34 @@ message WireCreateStringTable {
   optional int32 unknown14 = 14;
 }
 
+/*
+message CDOTAUserMsg_SpectatorPlayerUnitOrders {
+  optional int32 entindex = 1;
+  optional int32 order_type = 2;
+  repeated int32 units = 3;
+  optional int32 target_index = 4;
+  optional int32 ability_index = 5;
+  optional .CMsgVector position = 6;
+  optional bool queue = 7;
+}
+*/
+
+message TempVector {
+  optional float x = 1;
+  optional float y = 2;
+  optional float z = 3;
+}
+
+message TempUnitOrder {
+  required int32 entindex = 1;
+  required int32 order_type = 2;
+  optional int32 units = 3;
+  optional int32 target_index = 4;
+  optional int32 ability_index = 5;
+  optional .TempVector position = 6;
+  optional bool queue = 7;
+}
+
 // message CSVCMsg_SendTable {
 //   message sendprop_t {
 //     optional int32 type = 1;
