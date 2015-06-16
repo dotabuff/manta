@@ -29,7 +29,7 @@ func TestOuterParserRealMatch(t *testing.T) {
 	lastChatMessage := ""
 
 	parser.Callbacks.OnCUserMessageSayText2(func(m *dota.CUserMessageSayText2) error {
-		lastChatTick = parser.Tick
+		lastChatTick = parser.NetTick
 		lastChatMessage = m.GetParam2()
 		return nil
 	})
@@ -53,6 +53,6 @@ func TestOuterParserRealMatch(t *testing.T) {
 	assert.Equal(1400664, totalCombatLogDamage)
 	assert.Equal(62031, totalCombatLogHealing)
 	assert.Equal(58776, numCombatLogEvents)
-	assert.Equal(uint32(105819), lastChatTick)
+	assert.Equal(uint32(105821), lastChatTick)
 	assert.Equal("yah totally", lastChatMessage)
 }
