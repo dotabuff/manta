@@ -26,6 +26,9 @@ type Parser struct {
 	// Contains the game tick associated with the last message processed.
 	Tick uint32
 
+	// Contains the net tick associated with the last net message processed.
+	NetTick uint32
+
 	hasClassInfo   bool
 	classInfo      map[int32]string
 	classIdSize    int
@@ -60,7 +63,8 @@ func NewParser(buf []byte) (*Parser, error) {
 		Callbacks:  &Callbacks{},
 		GameEvents: &GameEvents{},
 
-		Tick: 0,
+		Tick:    0,
+		NetTick: 0,
 
 		reader:     newReader(buf),
 		isStopping: false,
@@ -101,7 +105,7 @@ func NewParser(buf []byte) (*Parser, error) {
 
 	// Maintains the value of parser.Tick
 	parser.Callbacks.OnCNETMsg_Tick(func(m *dota.CNETMsg_Tick) error {
-		parser.Tick = m.GetTick()
+		parser.NetTick = m.GetTick()
 		return nil
 	})
 
@@ -127,6 +131,9 @@ func (p *Parser) Start() error {
 		if msg, err = p.readOuterMessage(); err != nil {
 			return err
 		}
+
+		// Update the parser tick
+		p.Tick = msg.tick
 
 		// Invoke callbacks for the given message type.
 		if err = p.CallByDemoType(msg.typeId, msg.data); err != nil {
@@ -162,6 +169,11 @@ func (p *Parser) readOuterMessage() (*outerMessage, error) {
 
 	// Read the tick that the message corresponds with.
 	tick := p.reader.readVarUint32()
+
+	// This appears to actually be an int32, where a -1 means pre-game.
+	if tick == 4294967295 {
+		tick = 0
+	}
 
 	// Read the size and following buffer.
 	size := int(p.reader.readVarUint32())
