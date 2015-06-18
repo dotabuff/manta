@@ -88,6 +88,16 @@ func TestParseRealMatches(t *testing.T) {
 		err = parser.Start()
 		assert.Nil(err, s.matchId)
 
+		/*
+			Use this to write out instancebaseline fixtures
+			t, _ := parser.stringTables.getTableByName("instancebaseline")
+			for _, i := range t.items {
+				classId, _ := atoi32(i.key)
+				className := parser.classInfo[classId]
+				_dump_fixture(_sprintf("instancebaseline/%s_%s.rawbuf", className), s.matchId, i.value)
+			}
+		*/
+
 		assert.Equal(s.expectCombatLogDamage, gotCombatLogDamage, s.matchId)
 		assert.Equal(s.expectCombatLogHealing, gotCombatLogHealing, s.matchId)
 		assert.Equal(s.expectCombatLogDeaths, gotCombatLogDeaths, s.matchId)

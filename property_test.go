@@ -25,7 +25,7 @@ func TestReadProperties(t *testing.T) {
 
 	// Load our send tables
 	m := &dota.CDemoSendTables{}
-	if err := proto.Unmarshal(_read_fixture("send_tables/01.pbmsg"), m); err != nil {
+	if err := proto.Unmarshal(_read_fixture("send_tables/1560315800.pbmsg"), m); err != nil {
 		panic(err)
 	}
 
@@ -35,7 +35,7 @@ func TestReadProperties(t *testing.T) {
 	// Iterate through scenarios
 	for _, s := range scenarios {
 		// Load up a fixture
-		buf := _read_fixture(_sprintf("instancebaseline/%s.raw", s.tableName))
+		buf := _read_fixture(_sprintf("instancebaseline/1560315800_%s.rawbuf", s.tableName))
 		st, ok := st.getTableByName(s.tableName)
 		assert.True(ok)
 

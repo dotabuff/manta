@@ -13,12 +13,12 @@ func TestSendTableParsing(t *testing.T) {
 
 	// The single message from a real match
 	m := &dota.CDemoSendTables{}
-	if err := proto.Unmarshal(_read_fixture("send_tables/01.pbmsg"), m); err != nil {
+	if err := proto.Unmarshal(_read_fixture("send_tables/1560315800.pbmsg"), m); err != nil {
 		panic(err)
 	}
 
 	// Just a basic length check
-	assert.Equal(185130, len(m.GetData()))
+	assert.Equal(185229, len(m.GetData()))
 
 	// Parse the send tables
 	st, err := parseSendTables(m)
@@ -30,7 +30,7 @@ func TestSendTableParsing(t *testing.T) {
 	assert.Equal("CBaseAnimating", st.tables["CBaseAnimating"].name)
 
 	// Verify the properties
-	assert.Equal(1301, len(st.props))
+	assert.Equal(1303, len(st.props))
 
 	assert.Equal("uint16", st.props[0].dtName)
 	assert.Equal("m_cellX", st.props[0].varName)
