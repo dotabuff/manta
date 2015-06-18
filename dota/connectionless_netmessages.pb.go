@@ -2,46 +2,31 @@
 // source: connectionless_netmessages.proto
 // DO NOT EDIT!
 
+/*
+Package dota is a generated protocol buffer package.
+
+It is generated from these files:
+	connectionless_netmessages.proto
+	demo.proto
+	netmessages.proto
+	network_connection.proto
+	networkbasetypes.proto
+	networksystem_protomessages.proto
+	rendermessages.proto
+	toolevents.proto
+
+It has these top-level messages:
+	C2S_CONNECT_Message
+	C2S_CONNECTION_Message
+*/
 package dota
 
 import proto "github.com/golang/protobuf/proto"
 import math "math"
 
-// discarding unused import google_protobuf "github.com/dotabuff/manta/dota/google/protobuf"
-
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
 var _ = math.Inf
-
-type ConnectionLessMessageIds int32
-
-const (
-	ConnectionLessMessageIds_C2S_CONNECT_id ConnectionLessMessageIds = 80
-)
-
-var ConnectionLessMessageIds_name = map[int32]string{
-	80: "C2S_CONNECT_id",
-}
-var ConnectionLessMessageIds_value = map[string]int32{
-	"C2S_CONNECT_id": 80,
-}
-
-func (x ConnectionLessMessageIds) Enum() *ConnectionLessMessageIds {
-	p := new(ConnectionLessMessageIds)
-	*p = x
-	return p
-}
-func (x ConnectionLessMessageIds) String() string {
-	return proto.EnumName(ConnectionLessMessageIds_name, int32(x))
-}
-func (x *ConnectionLessMessageIds) UnmarshalJSON(data []byte) error {
-	value, err := proto.UnmarshalJSONEnum(ConnectionLessMessageIds_value, data, "ConnectionLessMessageIds")
-	if err != nil {
-		return err
-	}
-	*x = ConnectionLessMessageIds(value)
-	return nil
-}
 
 type C2S_CONNECT_Message struct {
 	HostVersion       *uint32                       `protobuf:"varint,1,opt,name=host_version" json:"host_version,omitempty"`
@@ -115,6 +100,21 @@ func (m *C2S_CONNECT_Message) GetAuthSteam() []byte {
 	return nil
 }
 
+type C2S_CONNECTION_Message struct {
+	AddonName        *string `protobuf:"bytes,1,opt,name=addon_name" json:"addon_name,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *C2S_CONNECTION_Message) Reset()         { *m = C2S_CONNECTION_Message{} }
+func (m *C2S_CONNECTION_Message) String() string { return proto.CompactTextString(m) }
+func (*C2S_CONNECTION_Message) ProtoMessage()    {}
+
+func (m *C2S_CONNECTION_Message) GetAddonName() string {
+	if m != nil && m.AddonName != nil {
+		return *m.AddonName
+	}
+	return ""
+}
+
 func init() {
-	proto.RegisterEnum("dota.ConnectionLessMessageIds", ConnectionLessMessageIds_name, ConnectionLessMessageIds_value)
 }

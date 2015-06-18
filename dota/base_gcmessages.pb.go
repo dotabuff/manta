@@ -22,7 +22,6 @@ It is generated from these files:
 	netmessages.proto
 	network_connection.proto
 	networkbasetypes.proto
-	rendermessages.proto
 	steammessages.proto
 	te.proto
 	toolevents.proto
