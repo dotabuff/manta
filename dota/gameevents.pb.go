@@ -7,8 +7,6 @@ package dota
 import proto "github.com/golang/protobuf/proto"
 import math "math"
 
-// discarding unused import google_protobuf "github.com/dotabuff/manta/dota/google/protobuf"
-
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
 var _ = math.Inf
@@ -26,8 +24,8 @@ const (
 	EBaseGameEvents_GE_Source1LegacyGameEvent              EBaseGameEvents = 207
 	EBaseGameEvents_GE_SosStartSoundEvent                  EBaseGameEvents = 208
 	EBaseGameEvents_GE_SosStopSoundEvent                   EBaseGameEvents = 209
-	EBaseGameEvents_GE_SosSetSoundEventParam               EBaseGameEvents = 210
-	EBaseGameEvents_GE_SosSetLibraryStackField             EBaseGameEvents = 211
+	EBaseGameEvents_GE_SosSetSoundEventParams              EBaseGameEvents = 210
+	EBaseGameEvents_GE_SosSetLibraryStackFields            EBaseGameEvents = 211
 	EBaseGameEvents_GE_SosStopSoundEventHash               EBaseGameEvents = 212
 )
 
@@ -42,8 +40,8 @@ var EBaseGameEvents_name = map[int32]string{
 	207: "GE_Source1LegacyGameEvent",
 	208: "GE_SosStartSoundEvent",
 	209: "GE_SosStopSoundEvent",
-	210: "GE_SosSetSoundEventParam",
-	211: "GE_SosSetLibraryStackField",
+	210: "GE_SosSetSoundEventParams",
+	211: "GE_SosSetLibraryStackFields",
 	212: "GE_SosStopSoundEventHash",
 }
 var EBaseGameEvents_value = map[string]int32{
@@ -57,8 +55,8 @@ var EBaseGameEvents_value = map[string]int32{
 	"GE_Source1LegacyGameEvent":              207,
 	"GE_SosStartSoundEvent":                  208,
 	"GE_SosStopSoundEvent":                   209,
-	"GE_SosSetSoundEventParam":               210,
-	"GE_SosSetLibraryStackField":             211,
+	"GE_SosSetSoundEventParams":              210,
+	"GE_SosSetLibraryStackFields":            211,
 	"GE_SosStopSoundEventHash":               212,
 }
 
@@ -282,25 +280,75 @@ func (m *CMsgClearDecalsForSkeletonInstanceEvent) GetSkeletoninstancehash() uint
 }
 
 type CMsgSource1LegacyGameEventList struct {
-	Count            *uint32 `protobuf:"varint,1,opt,name=count" json:"count,omitempty"`
-	Data             []byte  `protobuf:"bytes,2,opt,name=data" json:"data,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Descriptors      []*CMsgSource1LegacyGameEventListDescriptorT `protobuf:"bytes,1,rep,name=descriptors" json:"descriptors,omitempty"`
+	XXX_unrecognized []byte                                       `json:"-"`
 }
 
 func (m *CMsgSource1LegacyGameEventList) Reset()         { *m = CMsgSource1LegacyGameEventList{} }
 func (m *CMsgSource1LegacyGameEventList) String() string { return proto.CompactTextString(m) }
 func (*CMsgSource1LegacyGameEventList) ProtoMessage()    {}
 
-func (m *CMsgSource1LegacyGameEventList) GetCount() uint32 {
-	if m != nil && m.Count != nil {
-		return *m.Count
+func (m *CMsgSource1LegacyGameEventList) GetDescriptors() []*CMsgSource1LegacyGameEventListDescriptorT {
+	if m != nil {
+		return m.Descriptors
+	}
+	return nil
+}
+
+type CMsgSource1LegacyGameEventListKeyT struct {
+	Type             *int32  `protobuf:"varint,1,opt,name=type" json:"type,omitempty"`
+	Name             *string `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CMsgSource1LegacyGameEventListKeyT) Reset()         { *m = CMsgSource1LegacyGameEventListKeyT{} }
+func (m *CMsgSource1LegacyGameEventListKeyT) String() string { return proto.CompactTextString(m) }
+func (*CMsgSource1LegacyGameEventListKeyT) ProtoMessage()    {}
+
+func (m *CMsgSource1LegacyGameEventListKeyT) GetType() int32 {
+	if m != nil && m.Type != nil {
+		return *m.Type
 	}
 	return 0
 }
 
-func (m *CMsgSource1LegacyGameEventList) GetData() []byte {
+func (m *CMsgSource1LegacyGameEventListKeyT) GetName() string {
+	if m != nil && m.Name != nil {
+		return *m.Name
+	}
+	return ""
+}
+
+type CMsgSource1LegacyGameEventListDescriptorT struct {
+	Eventid          *int32                                `protobuf:"varint,1,opt,name=eventid" json:"eventid,omitempty"`
+	Name             *string                               `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
+	Keys             []*CMsgSource1LegacyGameEventListKeyT `protobuf:"bytes,3,rep,name=keys" json:"keys,omitempty"`
+	XXX_unrecognized []byte                                `json:"-"`
+}
+
+func (m *CMsgSource1LegacyGameEventListDescriptorT) Reset() {
+	*m = CMsgSource1LegacyGameEventListDescriptorT{}
+}
+func (m *CMsgSource1LegacyGameEventListDescriptorT) String() string { return proto.CompactTextString(m) }
+func (*CMsgSource1LegacyGameEventListDescriptorT) ProtoMessage()    {}
+
+func (m *CMsgSource1LegacyGameEventListDescriptorT) GetEventid() int32 {
+	if m != nil && m.Eventid != nil {
+		return *m.Eventid
+	}
+	return 0
+}
+
+func (m *CMsgSource1LegacyGameEventListDescriptorT) GetName() string {
+	if m != nil && m.Name != nil {
+		return *m.Name
+	}
+	return ""
+}
+
+func (m *CMsgSource1LegacyGameEventListDescriptorT) GetKeys() []*CMsgSource1LegacyGameEventListKeyT {
 	if m != nil {
-		return m.Data
+		return m.Keys
 	}
 	return nil
 }
@@ -330,19 +378,107 @@ func (m *CMsgSource1LegacyListenEvents) GetEventarraybits() []uint32 {
 }
 
 type CMsgSource1LegacyGameEvent struct {
-	Data             []byte `protobuf:"bytes,1,opt,name=data" json:"data,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	EventName        *string                           `protobuf:"bytes,1,opt,name=event_name" json:"event_name,omitempty"`
+	Eventid          *int32                            `protobuf:"varint,2,opt,name=eventid" json:"eventid,omitempty"`
+	Keys             []*CMsgSource1LegacyGameEventKeyT `protobuf:"bytes,3,rep,name=keys" json:"keys,omitempty"`
+	XXX_unrecognized []byte                            `json:"-"`
 }
 
 func (m *CMsgSource1LegacyGameEvent) Reset()         { *m = CMsgSource1LegacyGameEvent{} }
 func (m *CMsgSource1LegacyGameEvent) String() string { return proto.CompactTextString(m) }
 func (*CMsgSource1LegacyGameEvent) ProtoMessage()    {}
 
-func (m *CMsgSource1LegacyGameEvent) GetData() []byte {
+func (m *CMsgSource1LegacyGameEvent) GetEventName() string {
+	if m != nil && m.EventName != nil {
+		return *m.EventName
+	}
+	return ""
+}
+
+func (m *CMsgSource1LegacyGameEvent) GetEventid() int32 {
+	if m != nil && m.Eventid != nil {
+		return *m.Eventid
+	}
+	return 0
+}
+
+func (m *CMsgSource1LegacyGameEvent) GetKeys() []*CMsgSource1LegacyGameEventKeyT {
 	if m != nil {
-		return m.Data
+		return m.Keys
 	}
 	return nil
+}
+
+type CMsgSource1LegacyGameEventKeyT struct {
+	Type             *int32   `protobuf:"varint,1,opt,name=type" json:"type,omitempty"`
+	ValString        *string  `protobuf:"bytes,2,opt,name=val_string" json:"val_string,omitempty"`
+	ValFloat         *float32 `protobuf:"fixed32,3,opt,name=val_float" json:"val_float,omitempty"`
+	ValLong          *int32   `protobuf:"varint,4,opt,name=val_long" json:"val_long,omitempty"`
+	ValShort         *int32   `protobuf:"varint,5,opt,name=val_short" json:"val_short,omitempty"`
+	ValByte          *int32   `protobuf:"varint,6,opt,name=val_byte" json:"val_byte,omitempty"`
+	ValBool          *bool    `protobuf:"varint,7,opt,name=val_bool" json:"val_bool,omitempty"`
+	ValUint64        *uint64  `protobuf:"varint,8,opt,name=val_uint64" json:"val_uint64,omitempty"`
+	XXX_unrecognized []byte   `json:"-"`
+}
+
+func (m *CMsgSource1LegacyGameEventKeyT) Reset()         { *m = CMsgSource1LegacyGameEventKeyT{} }
+func (m *CMsgSource1LegacyGameEventKeyT) String() string { return proto.CompactTextString(m) }
+func (*CMsgSource1LegacyGameEventKeyT) ProtoMessage()    {}
+
+func (m *CMsgSource1LegacyGameEventKeyT) GetType() int32 {
+	if m != nil && m.Type != nil {
+		return *m.Type
+	}
+	return 0
+}
+
+func (m *CMsgSource1LegacyGameEventKeyT) GetValString() string {
+	if m != nil && m.ValString != nil {
+		return *m.ValString
+	}
+	return ""
+}
+
+func (m *CMsgSource1LegacyGameEventKeyT) GetValFloat() float32 {
+	if m != nil && m.ValFloat != nil {
+		return *m.ValFloat
+	}
+	return 0
+}
+
+func (m *CMsgSource1LegacyGameEventKeyT) GetValLong() int32 {
+	if m != nil && m.ValLong != nil {
+		return *m.ValLong
+	}
+	return 0
+}
+
+func (m *CMsgSource1LegacyGameEventKeyT) GetValShort() int32 {
+	if m != nil && m.ValShort != nil {
+		return *m.ValShort
+	}
+	return 0
+}
+
+func (m *CMsgSource1LegacyGameEventKeyT) GetValByte() int32 {
+	if m != nil && m.ValByte != nil {
+		return *m.ValByte
+	}
+	return 0
+}
+
+func (m *CMsgSource1LegacyGameEventKeyT) GetValBool() bool {
+	if m != nil && m.ValBool != nil {
+		return *m.ValBool
+	}
+	return false
+}
+
+func (m *CMsgSource1LegacyGameEventKeyT) GetValUint64() uint64 {
+	if m != nil && m.ValUint64 != nil {
+		return *m.ValUint64
+	}
+	return 0
 }
 
 type CMsgSosStartSoundEvent struct {
@@ -350,6 +486,7 @@ type CMsgSosStartSoundEvent struct {
 	SoundeventHash    *uint32 `protobuf:"fixed32,2,opt,name=soundevent_hash" json:"soundevent_hash,omitempty"`
 	SourceEntityIndex *int32  `protobuf:"varint,3,opt,name=source_entity_index" json:"source_entity_index,omitempty"`
 	Seed              *int32  `protobuf:"varint,4,opt,name=seed" json:"seed,omitempty"`
+	PackedParams      []byte  `protobuf:"bytes,5,opt,name=packed_params" json:"packed_params,omitempty"`
 	XXX_unrecognized  []byte  `json:"-"`
 }
 
@@ -383,6 +520,13 @@ func (m *CMsgSosStartSoundEvent) GetSeed() int32 {
 		return *m.Seed
 	}
 	return 0
+}
+
+func (m *CMsgSosStartSoundEvent) GetPackedParams() []byte {
+	if m != nil {
+		return m.PackedParams
+	}
+	return nil
 }
 
 type CMsgSosStopSoundEvent struct {
@@ -425,84 +569,52 @@ func (m *CMsgSosStopSoundEventHash) GetSourceEntityIndex() int32 {
 	return 0
 }
 
-type CMsgSosSetSoundEventParam struct {
-	SoundeventGuid   *int32  `protobuf:"varint,1,opt,name=soundevent_guid" json:"soundevent_guid,omitempty"`
-	OpfieldHash      *uint32 `protobuf:"fixed32,2,opt,name=opfield_hash" json:"opfield_hash,omitempty"`
-	Data             []byte  `protobuf:"bytes,3,opt,name=data" json:"data,omitempty"`
-	Index            *int32  `protobuf:"varint,4,opt,name=index" json:"index,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+type CMsgSosSetSoundEventParams struct {
+	SoundeventGuid   *int32 `protobuf:"varint,1,opt,name=soundevent_guid" json:"soundevent_guid,omitempty"`
+	PackedParams     []byte `protobuf:"bytes,5,opt,name=packed_params" json:"packed_params,omitempty"`
+	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CMsgSosSetSoundEventParam) Reset()         { *m = CMsgSosSetSoundEventParam{} }
-func (m *CMsgSosSetSoundEventParam) String() string { return proto.CompactTextString(m) }
-func (*CMsgSosSetSoundEventParam) ProtoMessage()    {}
+func (m *CMsgSosSetSoundEventParams) Reset()         { *m = CMsgSosSetSoundEventParams{} }
+func (m *CMsgSosSetSoundEventParams) String() string { return proto.CompactTextString(m) }
+func (*CMsgSosSetSoundEventParams) ProtoMessage()    {}
 
-func (m *CMsgSosSetSoundEventParam) GetSoundeventGuid() int32 {
+func (m *CMsgSosSetSoundEventParams) GetSoundeventGuid() int32 {
 	if m != nil && m.SoundeventGuid != nil {
 		return *m.SoundeventGuid
 	}
 	return 0
 }
 
-func (m *CMsgSosSetSoundEventParam) GetOpfieldHash() uint32 {
-	if m != nil && m.OpfieldHash != nil {
-		return *m.OpfieldHash
-	}
-	return 0
-}
-
-func (m *CMsgSosSetSoundEventParam) GetData() []byte {
+func (m *CMsgSosSetSoundEventParams) GetPackedParams() []byte {
 	if m != nil {
-		return m.Data
+		return m.PackedParams
 	}
 	return nil
 }
 
-func (m *CMsgSosSetSoundEventParam) GetIndex() int32 {
-	if m != nil && m.Index != nil {
-		return *m.Index
-	}
-	return 0
-}
-
-type CMsgSosSetLibraryStackField struct {
+type CMsgSosSetLibraryStackFields struct {
 	StackHash        *uint32 `protobuf:"fixed32,1,opt,name=stack_hash" json:"stack_hash,omitempty"`
-	OpfieldHash      *uint32 `protobuf:"fixed32,2,opt,name=opfield_hash" json:"opfield_hash,omitempty"`
-	Data             []byte  `protobuf:"bytes,3,opt,name=data" json:"data,omitempty"`
-	Index            *int32  `protobuf:"varint,4,opt,name=index" json:"index,omitempty"`
+	PackedFields     []byte  `protobuf:"bytes,5,opt,name=packed_fields" json:"packed_fields,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CMsgSosSetLibraryStackField) Reset()         { *m = CMsgSosSetLibraryStackField{} }
-func (m *CMsgSosSetLibraryStackField) String() string { return proto.CompactTextString(m) }
-func (*CMsgSosSetLibraryStackField) ProtoMessage()    {}
+func (m *CMsgSosSetLibraryStackFields) Reset()         { *m = CMsgSosSetLibraryStackFields{} }
+func (m *CMsgSosSetLibraryStackFields) String() string { return proto.CompactTextString(m) }
+func (*CMsgSosSetLibraryStackFields) ProtoMessage()    {}
 
-func (m *CMsgSosSetLibraryStackField) GetStackHash() uint32 {
+func (m *CMsgSosSetLibraryStackFields) GetStackHash() uint32 {
 	if m != nil && m.StackHash != nil {
 		return *m.StackHash
 	}
 	return 0
 }
 
-func (m *CMsgSosSetLibraryStackField) GetOpfieldHash() uint32 {
-	if m != nil && m.OpfieldHash != nil {
-		return *m.OpfieldHash
-	}
-	return 0
-}
-
-func (m *CMsgSosSetLibraryStackField) GetData() []byte {
+func (m *CMsgSosSetLibraryStackFields) GetPackedFields() []byte {
 	if m != nil {
-		return m.Data
+		return m.PackedFields
 	}
 	return nil
-}
-
-func (m *CMsgSosSetLibraryStackField) GetIndex() int32 {
-	if m != nil && m.Index != nil {
-		return *m.Index
-	}
-	return 0
 }
 
 func init() {

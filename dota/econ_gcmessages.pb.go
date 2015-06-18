@@ -44,11 +44,6 @@ const (
 	EGCItemMsg_k_EMsgGCGiftedItems                            EGCItemMsg = 1027
 	EGCItemMsg_k_EMsgGCRemoveItemName                         EGCItemMsg = 1030
 	EGCItemMsg_k_EMsgGCRemoveItemPaint                        EGCItemMsg = 1031
-	EGCItemMsg_k_EMsgGCGiftWrapItem                           EGCItemMsg = 1032
-	EGCItemMsg_k_EMsgGCGiftWrapItemResponse                   EGCItemMsg = 1033
-	EGCItemMsg_k_EMsgGCDeliverGift                            EGCItemMsg = 1034
-	EGCItemMsg_k_EMsgGCDeliverGiftResponseGiver               EGCItemMsg = 1035
-	EGCItemMsg_k_EMsgGCDeliverGiftResponseReceiver            EGCItemMsg = 1036
 	EGCItemMsg_k_EMsgGCUnwrapGiftRequest                      EGCItemMsg = 1037
 	EGCItemMsg_k_EMsgGCUnwrapGiftResponse                     EGCItemMsg = 1038
 	EGCItemMsg_k_EMsgGCSetItemStyle                           EGCItemMsg = 1039
@@ -102,6 +97,11 @@ const (
 	EGCItemMsg_k_EMsgGCRequestCrateItems                      EGCItemMsg = 1092
 	EGCItemMsg_k_EMsgGCRequestCrateItemsResponse              EGCItemMsg = 1093
 	EGCItemMsg_k_EMsgGCServerUseItemRequest                   EGCItemMsg = 1103
+	EGCItemMsg_k_EMsgGCAddGiftItem                            EGCItemMsg = 1104
+	EGCItemMsg_k_EMsgGCRemoveItemGiftMessage                  EGCItemMsg = 1105
+	EGCItemMsg_k_EMsgGCRemoveItemGiftMessageResponse          EGCItemMsg = 1106
+	EGCItemMsg_k_EMsgGCRemoveItemGifterAccountId              EGCItemMsg = 1107
+	EGCItemMsg_k_EMsgGCRemoveItemGifterAccountIdResponse      EGCItemMsg = 1108
 	EGCItemMsg_k_EMsgGCTradingBase                            EGCItemMsg = 1500
 	EGCItemMsg_k_EMsgGCTrading_InitiateTradeRequest           EGCItemMsg = 1501
 	EGCItemMsg_k_EMsgGCTrading_InitiateTradeResponse          EGCItemMsg = 1502
@@ -174,6 +174,12 @@ const (
 	EGCItemMsg_k_EMsgGCRedeemCode                             EGCItemMsg = 2562
 	EGCItemMsg_k_EMsgGCRedeemCodeResponse                     EGCItemMsg = 2563
 	EGCItemMsg_k_EMsgGCToGCItemConsumptionRollback            EGCItemMsg = 2564
+	EGCItemMsg_k_EMsgClientToGCWrapAndDeliverGift             EGCItemMsg = 2565
+	EGCItemMsg_k_EMsgClientToGCWrapAndDeliverGiftResponse     EGCItemMsg = 2566
+	EGCItemMsg_k_EMsgGCToClientBundleUnpacked                 EGCItemMsg = 2567
+	EGCItemMsg_k_EMsgGCToClientStoreTransactionCompleted      EGCItemMsg = 2568
+	EGCItemMsg_k_EMsgClientToGCEquipItems                     EGCItemMsg = 2569
+	EGCItemMsg_k_EMsgClientToGCEquipItemsResponse             EGCItemMsg = 2570
 )
 
 var EGCItemMsg_name = map[int32]string{
@@ -207,11 +213,6 @@ var EGCItemMsg_name = map[int32]string{
 	1027: "k_EMsgGCGiftedItems",
 	1030: "k_EMsgGCRemoveItemName",
 	1031: "k_EMsgGCRemoveItemPaint",
-	1032: "k_EMsgGCGiftWrapItem",
-	1033: "k_EMsgGCGiftWrapItemResponse",
-	1034: "k_EMsgGCDeliverGift",
-	1035: "k_EMsgGCDeliverGiftResponseGiver",
-	1036: "k_EMsgGCDeliverGiftResponseReceiver",
 	1037: "k_EMsgGCUnwrapGiftRequest",
 	1038: "k_EMsgGCUnwrapGiftResponse",
 	1039: "k_EMsgGCSetItemStyle",
@@ -265,6 +266,11 @@ var EGCItemMsg_name = map[int32]string{
 	1092: "k_EMsgGCRequestCrateItems",
 	1093: "k_EMsgGCRequestCrateItemsResponse",
 	1103: "k_EMsgGCServerUseItemRequest",
+	1104: "k_EMsgGCAddGiftItem",
+	1105: "k_EMsgGCRemoveItemGiftMessage",
+	1106: "k_EMsgGCRemoveItemGiftMessageResponse",
+	1107: "k_EMsgGCRemoveItemGifterAccountId",
+	1108: "k_EMsgGCRemoveItemGifterAccountIdResponse",
 	1500: "k_EMsgGCTradingBase",
 	1501: "k_EMsgGCTrading_InitiateTradeRequest",
 	1502: "k_EMsgGCTrading_InitiateTradeResponse",
@@ -337,6 +343,12 @@ var EGCItemMsg_name = map[int32]string{
 	2562: "k_EMsgGCRedeemCode",
 	2563: "k_EMsgGCRedeemCodeResponse",
 	2564: "k_EMsgGCToGCItemConsumptionRollback",
+	2565: "k_EMsgClientToGCWrapAndDeliverGift",
+	2566: "k_EMsgClientToGCWrapAndDeliverGiftResponse",
+	2567: "k_EMsgGCToClientBundleUnpacked",
+	2568: "k_EMsgGCToClientStoreTransactionCompleted",
+	2569: "k_EMsgClientToGCEquipItems",
+	2570: "k_EMsgClientToGCEquipItemsResponse",
 }
 var EGCItemMsg_value = map[string]int32{
 	"k_EMsgGCBase":                                   1000,
@@ -369,11 +381,6 @@ var EGCItemMsg_value = map[string]int32{
 	"k_EMsgGCGiftedItems":                            1027,
 	"k_EMsgGCRemoveItemName":                         1030,
 	"k_EMsgGCRemoveItemPaint":                        1031,
-	"k_EMsgGCGiftWrapItem":                           1032,
-	"k_EMsgGCGiftWrapItemResponse":                   1033,
-	"k_EMsgGCDeliverGift":                            1034,
-	"k_EMsgGCDeliverGiftResponseGiver":               1035,
-	"k_EMsgGCDeliverGiftResponseReceiver":            1036,
 	"k_EMsgGCUnwrapGiftRequest":                      1037,
 	"k_EMsgGCUnwrapGiftResponse":                     1038,
 	"k_EMsgGCSetItemStyle":                           1039,
@@ -427,6 +434,11 @@ var EGCItemMsg_value = map[string]int32{
 	"k_EMsgGCRequestCrateItems":                      1092,
 	"k_EMsgGCRequestCrateItemsResponse":              1093,
 	"k_EMsgGCServerUseItemRequest":                   1103,
+	"k_EMsgGCAddGiftItem":                            1104,
+	"k_EMsgGCRemoveItemGiftMessage":                  1105,
+	"k_EMsgGCRemoveItemGiftMessageResponse":          1106,
+	"k_EMsgGCRemoveItemGifterAccountId":              1107,
+	"k_EMsgGCRemoveItemGifterAccountIdResponse":      1108,
 	"k_EMsgGCTradingBase":                            1500,
 	"k_EMsgGCTrading_InitiateTradeRequest":           1501,
 	"k_EMsgGCTrading_InitiateTradeResponse":          1502,
@@ -499,6 +511,12 @@ var EGCItemMsg_value = map[string]int32{
 	"k_EMsgGCRedeemCode":                             2562,
 	"k_EMsgGCRedeemCodeResponse":                     2563,
 	"k_EMsgGCToGCItemConsumptionRollback":            2564,
+	"k_EMsgClientToGCWrapAndDeliverGift":             2565,
+	"k_EMsgClientToGCWrapAndDeliverGiftResponse":     2566,
+	"k_EMsgGCToClientBundleUnpacked":                 2567,
+	"k_EMsgGCToClientStoreTransactionCompleted":      2568,
+	"k_EMsgClientToGCEquipItems":                     2569,
+	"k_EMsgClientToGCEquipItemsResponse":             2570,
 }
 
 func (x EGCItemMsg) Enum() *EGCItemMsg {
@@ -775,6 +793,46 @@ func (m *CMsgApplyAutograph) GetAutographItemId() uint64 {
 func (m *CMsgApplyAutograph) GetItemItemId() uint64 {
 	if m != nil && m.ItemItemId != nil {
 		return *m.ItemItemId
+	}
+	return 0
+}
+
+type CMsgAdjustItemEquippedState struct {
+	ItemId           *uint64 `protobuf:"varint,1,opt,name=item_id" json:"item_id,omitempty"`
+	NewClass         *uint32 `protobuf:"varint,2,opt,name=new_class" json:"new_class,omitempty"`
+	NewSlot          *uint32 `protobuf:"varint,3,opt,name=new_slot" json:"new_slot,omitempty"`
+	StyleIndex       *uint32 `protobuf:"varint,4,opt,name=style_index" json:"style_index,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CMsgAdjustItemEquippedState) Reset()         { *m = CMsgAdjustItemEquippedState{} }
+func (m *CMsgAdjustItemEquippedState) String() string { return proto.CompactTextString(m) }
+func (*CMsgAdjustItemEquippedState) ProtoMessage()    {}
+
+func (m *CMsgAdjustItemEquippedState) GetItemId() uint64 {
+	if m != nil && m.ItemId != nil {
+		return *m.ItemId
+	}
+	return 0
+}
+
+func (m *CMsgAdjustItemEquippedState) GetNewClass() uint32 {
+	if m != nil && m.NewClass != nil {
+		return *m.NewClass
+	}
+	return 0
+}
+
+func (m *CMsgAdjustItemEquippedState) GetNewSlot() uint32 {
+	if m != nil && m.NewSlot != nil {
+		return *m.NewSlot
+	}
+	return 0
+}
+
+func (m *CMsgAdjustItemEquippedState) GetStyleIndex() uint32 {
+	if m != nil && m.StyleIndex != nil {
+		return *m.StyleIndex
 	}
 	return 0
 }
@@ -1970,9 +2028,11 @@ func (m *CMsgRedeemCodeResponse) GetResponse() uint32 {
 }
 
 type CMsgDevNewItemRequest struct {
-	ItemDefName      *string `protobuf:"bytes,3,opt,name=item_def_name" json:"item_def_name,omitempty"`
-	LootListName     *string `protobuf:"bytes,4,opt,name=loot_list_name" json:"loot_list_name,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	ItemDefName      *string  `protobuf:"bytes,3,opt,name=item_def_name" json:"item_def_name,omitempty"`
+	LootListName     *string  `protobuf:"bytes,4,opt,name=loot_list_name" json:"loot_list_name,omitempty"`
+	AttrDefName      []string `protobuf:"bytes,5,rep,name=attr_def_name" json:"attr_def_name,omitempty"`
+	AttrValue        []string `protobuf:"bytes,6,rep,name=attr_value" json:"attr_value,omitempty"`
+	XXX_unrecognized []byte   `json:"-"`
 }
 
 func (m *CMsgDevNewItemRequest) Reset()         { *m = CMsgDevNewItemRequest{} }
@@ -1993,6 +2053,20 @@ func (m *CMsgDevNewItemRequest) GetLootListName() string {
 	return ""
 }
 
+func (m *CMsgDevNewItemRequest) GetAttrDefName() []string {
+	if m != nil {
+		return m.AttrDefName
+	}
+	return nil
+}
+
+func (m *CMsgDevNewItemRequest) GetAttrValue() []string {
+	if m != nil {
+		return m.AttrValue
+	}
+	return nil
+}
+
 type CMsgDevNewItemRequestResponse struct {
 	Success          *bool  `protobuf:"varint,1,opt,name=success" json:"success,omitempty"`
 	XXX_unrecognized []byte `json:"-"`
@@ -2007,6 +2081,220 @@ func (m *CMsgDevNewItemRequestResponse) GetSuccess() bool {
 		return *m.Success
 	}
 	return false
+}
+
+type CMsgGCAddGiftItem struct {
+	AccountId        *uint32 `protobuf:"varint,1,opt,name=account_id" json:"account_id,omitempty"`
+	ItemId           *uint64 `protobuf:"varint,2,opt,name=item_id" json:"item_id,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CMsgGCAddGiftItem) Reset()         { *m = CMsgGCAddGiftItem{} }
+func (m *CMsgGCAddGiftItem) String() string { return proto.CompactTextString(m) }
+func (*CMsgGCAddGiftItem) ProtoMessage()    {}
+
+func (m *CMsgGCAddGiftItem) GetAccountId() uint32 {
+	if m != nil && m.AccountId != nil {
+		return *m.AccountId
+	}
+	return 0
+}
+
+func (m *CMsgGCAddGiftItem) GetItemId() uint64 {
+	if m != nil && m.ItemId != nil {
+		return *m.ItemId
+	}
+	return 0
+}
+
+type CMsgClientToGCWrapAndDeliverGift struct {
+	ItemId           *uint64 `protobuf:"varint,1,opt,name=item_id" json:"item_id,omitempty"`
+	GiveToAccountId  *uint32 `protobuf:"varint,2,opt,name=give_to_account_id" json:"give_to_account_id,omitempty"`
+	GiftMessage      *string `protobuf:"bytes,3,opt,name=gift_message" json:"gift_message,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CMsgClientToGCWrapAndDeliverGift) Reset()         { *m = CMsgClientToGCWrapAndDeliverGift{} }
+func (m *CMsgClientToGCWrapAndDeliverGift) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCWrapAndDeliverGift) ProtoMessage()    {}
+
+func (m *CMsgClientToGCWrapAndDeliverGift) GetItemId() uint64 {
+	if m != nil && m.ItemId != nil {
+		return *m.ItemId
+	}
+	return 0
+}
+
+func (m *CMsgClientToGCWrapAndDeliverGift) GetGiveToAccountId() uint32 {
+	if m != nil && m.GiveToAccountId != nil {
+		return *m.GiveToAccountId
+	}
+	return 0
+}
+
+func (m *CMsgClientToGCWrapAndDeliverGift) GetGiftMessage() string {
+	if m != nil && m.GiftMessage != nil {
+		return *m.GiftMessage
+	}
+	return ""
+}
+
+type CMsgClientToGCWrapAndDeliverGiftResponse struct {
+	Response           *EGCMsgResponse `protobuf:"varint,1,opt,name=response,enum=dota.EGCMsgResponse,def=0" json:"response,omitempty"`
+	GiftingChargeUses  *uint32         `protobuf:"varint,2,opt,name=gifting_charge_uses" json:"gifting_charge_uses,omitempty"`
+	GiftingChargeMax   *int32          `protobuf:"varint,3,opt,name=gifting_charge_max" json:"gifting_charge_max,omitempty"`
+	GiftingUses        *uint32         `protobuf:"varint,4,opt,name=gifting_uses" json:"gifting_uses,omitempty"`
+	GiftingMax         *int32          `protobuf:"varint,5,opt,name=gifting_max" json:"gifting_max,omitempty"`
+	GiftingWindowHours *uint32         `protobuf:"varint,6,opt,name=gifting_window_hours" json:"gifting_window_hours,omitempty"`
+	XXX_unrecognized   []byte          `json:"-"`
+}
+
+func (m *CMsgClientToGCWrapAndDeliverGiftResponse) Reset() {
+	*m = CMsgClientToGCWrapAndDeliverGiftResponse{}
+}
+func (m *CMsgClientToGCWrapAndDeliverGiftResponse) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCWrapAndDeliverGiftResponse) ProtoMessage()    {}
+
+const Default_CMsgClientToGCWrapAndDeliverGiftResponse_Response EGCMsgResponse = EGCMsgResponse_k_EGCMsgResponseOK
+
+func (m *CMsgClientToGCWrapAndDeliverGiftResponse) GetResponse() EGCMsgResponse {
+	if m != nil && m.Response != nil {
+		return *m.Response
+	}
+	return Default_CMsgClientToGCWrapAndDeliverGiftResponse_Response
+}
+
+func (m *CMsgClientToGCWrapAndDeliverGiftResponse) GetGiftingChargeUses() uint32 {
+	if m != nil && m.GiftingChargeUses != nil {
+		return *m.GiftingChargeUses
+	}
+	return 0
+}
+
+func (m *CMsgClientToGCWrapAndDeliverGiftResponse) GetGiftingChargeMax() int32 {
+	if m != nil && m.GiftingChargeMax != nil {
+		return *m.GiftingChargeMax
+	}
+	return 0
+}
+
+func (m *CMsgClientToGCWrapAndDeliverGiftResponse) GetGiftingUses() uint32 {
+	if m != nil && m.GiftingUses != nil {
+		return *m.GiftingUses
+	}
+	return 0
+}
+
+func (m *CMsgClientToGCWrapAndDeliverGiftResponse) GetGiftingMax() int32 {
+	if m != nil && m.GiftingMax != nil {
+		return *m.GiftingMax
+	}
+	return 0
+}
+
+func (m *CMsgClientToGCWrapAndDeliverGiftResponse) GetGiftingWindowHours() uint32 {
+	if m != nil && m.GiftingWindowHours != nil {
+		return *m.GiftingWindowHours
+	}
+	return 0
+}
+
+type CMsgClientToGCUnwrapGift struct {
+	ItemId           *uint64 `protobuf:"varint,1,opt,name=item_id" json:"item_id,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CMsgClientToGCUnwrapGift) Reset()         { *m = CMsgClientToGCUnwrapGift{} }
+func (m *CMsgClientToGCUnwrapGift) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCUnwrapGift) ProtoMessage()    {}
+
+func (m *CMsgClientToGCUnwrapGift) GetItemId() uint64 {
+	if m != nil && m.ItemId != nil {
+		return *m.ItemId
+	}
+	return 0
+}
+
+type CMsgGCToClientBundleUnpacked struct {
+	BundleItemId     *uint64  `protobuf:"varint,1,opt,name=bundle_item_id" json:"bundle_item_id,omitempty"`
+	ItemIds          []uint64 `protobuf:"varint,2,rep,name=item_ids" json:"item_ids,omitempty"`
+	XXX_unrecognized []byte   `json:"-"`
+}
+
+func (m *CMsgGCToClientBundleUnpacked) Reset()         { *m = CMsgGCToClientBundleUnpacked{} }
+func (m *CMsgGCToClientBundleUnpacked) String() string { return proto.CompactTextString(m) }
+func (*CMsgGCToClientBundleUnpacked) ProtoMessage()    {}
+
+func (m *CMsgGCToClientBundleUnpacked) GetBundleItemId() uint64 {
+	if m != nil && m.BundleItemId != nil {
+		return *m.BundleItemId
+	}
+	return 0
+}
+
+func (m *CMsgGCToClientBundleUnpacked) GetItemIds() []uint64 {
+	if m != nil {
+		return m.ItemIds
+	}
+	return nil
+}
+
+type CMsgGCToClientStoreTransactionCompleted struct {
+	TxnId            *uint64  `protobuf:"varint,1,opt,name=txn_id" json:"txn_id,omitempty"`
+	ItemIds          []uint64 `protobuf:"varint,2,rep,name=item_ids" json:"item_ids,omitempty"`
+	XXX_unrecognized []byte   `json:"-"`
+}
+
+func (m *CMsgGCToClientStoreTransactionCompleted) Reset() {
+	*m = CMsgGCToClientStoreTransactionCompleted{}
+}
+func (m *CMsgGCToClientStoreTransactionCompleted) String() string { return proto.CompactTextString(m) }
+func (*CMsgGCToClientStoreTransactionCompleted) ProtoMessage()    {}
+
+func (m *CMsgGCToClientStoreTransactionCompleted) GetTxnId() uint64 {
+	if m != nil && m.TxnId != nil {
+		return *m.TxnId
+	}
+	return 0
+}
+
+func (m *CMsgGCToClientStoreTransactionCompleted) GetItemIds() []uint64 {
+	if m != nil {
+		return m.ItemIds
+	}
+	return nil
+}
+
+type CMsgClientToGCEquipItems struct {
+	Equips           []*CMsgAdjustItemEquippedState `protobuf:"bytes,1,rep,name=equips" json:"equips,omitempty"`
+	XXX_unrecognized []byte                         `json:"-"`
+}
+
+func (m *CMsgClientToGCEquipItems) Reset()         { *m = CMsgClientToGCEquipItems{} }
+func (m *CMsgClientToGCEquipItems) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCEquipItems) ProtoMessage()    {}
+
+func (m *CMsgClientToGCEquipItems) GetEquips() []*CMsgAdjustItemEquippedState {
+	if m != nil {
+		return m.Equips
+	}
+	return nil
+}
+
+type CMsgClientToGCEquipItemsResponse struct {
+	SoCacheVersionId *uint64 `protobuf:"fixed64,1,opt,name=so_cache_version_id" json:"so_cache_version_id,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CMsgClientToGCEquipItemsResponse) Reset()         { *m = CMsgClientToGCEquipItemsResponse{} }
+func (m *CMsgClientToGCEquipItemsResponse) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCEquipItemsResponse) ProtoMessage()    {}
+
+func (m *CMsgClientToGCEquipItemsResponse) GetSoCacheVersionId() uint64 {
+	if m != nil && m.SoCacheVersionId != nil {
+		return *m.SoCacheVersionId
+	}
+	return 0
 }
 
 func init() {

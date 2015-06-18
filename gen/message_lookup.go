@@ -132,11 +132,6 @@ import (
 	packetTypeIds := make([]int, 0)
 	packetTypeNames := make(map[int]string)
 
-	// Fake an entry for unit orders. Later replaced by a wire type.
-	enums[6].EnumNames = append(enums[6].EnumNames, "EDotaUserMessages_DOTA_UM_SpectatorPlayerUnitOrders")
-	enums[6].Values["EDotaUserMessages_DOTA_UM_SpectatorPlayerUnitOrders"] = 547
-	enums[6].StructNames = append(enums[6].StructNames, "CDOTAUserMsg_SpectatorPlayerUnitOrders")
-
 	for _, enum := range enums {
 
 		slice.SortTyped(&enum.EnumNames, func(a, b string) bool {
@@ -166,7 +161,7 @@ import (
 				case "EDemoCommands_DEM_SignonPacket":
 					matching = "CDemoPacket"
 				default:
-					pp(e)
+					//pp(e)
 				}
 			}
 
@@ -187,8 +182,8 @@ import (
 			}
 
 			if matching == "" {
-				pp(e, enum.Values[e])
-				panic("no matching enum found")
+				spew.Printf("WARN: no matching enum found for %s (%d)\n", e, enum.Values[e])
+				continue
 			}
 
 			cbType := "dota." + matching
@@ -199,18 +194,6 @@ import (
 			case "EDemoCommands_DEM_SignonPacket":
 				cbEnt = "onCDemoSignonPacket"
 				cbName = "OnCDemoSignonPacket"
-
-			case "EBaseGameEvents_GE_Source1LegacyGameEventList":
-				cbType = "wireSource1GameEventList"
-
-			case "EBaseGameEvents_GE_Source1LegacyGameEvent":
-				cbType = "wireSource1GameEvent"
-
-			case "SVC_Messages_svc_CreateStringTable":
-				cbType = "wireCreateStringTable"
-
-			case "EDotaUserMessages_DOTA_UM_SpectatorPlayerUnitOrders":
-				cbType = "TempUnitOrder"
 			}
 
 			fnsig := spew.Sprintf("func (*%s) error", cbType)

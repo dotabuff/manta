@@ -7,8 +7,6 @@ package dota
 import proto "github.com/golang/protobuf/proto"
 import math "math"
 
-// discarding unused import google_protobuf "github.com/dotabuff/manta/dota/google/protobuf"
-
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
 var _ = math.Inf
@@ -75,6 +73,9 @@ type CDOTAModifierBuffTableEntry struct {
 	Range               *int32                    `protobuf:"varint,26,opt,name=range" json:"range,omitempty"`
 	DdModifierIndex     *int32                    `protobuf:"varint,27,opt,name=dd_modifier_index" json:"dd_modifier_index,omitempty"`
 	DdAbilityIndex      *int32                    `protobuf:"varint,28,opt,name=dd_ability_index" json:"dd_ability_index,omitempty"`
+	IllusionLabel       *string                   `protobuf:"bytes,29,opt,name=illusion_label" json:"illusion_label,omitempty"`
+	Active              *bool                     `protobuf:"varint,30,opt,name=active" json:"active,omitempty"`
+	LuaName             *string                   `protobuf:"bytes,31,opt,name=lua_name" json:"lua_name,omitempty"`
 	XXX_unrecognized    []byte                    `json:"-"`
 }
 
@@ -279,6 +280,27 @@ func (m *CDOTAModifierBuffTableEntry) GetDdAbilityIndex() int32 {
 		return *m.DdAbilityIndex
 	}
 	return 0
+}
+
+func (m *CDOTAModifierBuffTableEntry) GetIllusionLabel() string {
+	if m != nil && m.IllusionLabel != nil {
+		return *m.IllusionLabel
+	}
+	return ""
+}
+
+func (m *CDOTAModifierBuffTableEntry) GetActive() bool {
+	if m != nil && m.Active != nil {
+		return *m.Active
+	}
+	return false
+}
+
+func (m *CDOTAModifierBuffTableEntry) GetLuaName() string {
+	if m != nil && m.LuaName != nil {
+		return *m.LuaName
+	}
+	return ""
 }
 
 func init() {

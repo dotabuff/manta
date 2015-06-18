@@ -7,8 +7,6 @@ package dota
 import proto "github.com/golang/protobuf/proto"
 import math "math"
 
-// discarding unused import google_protobuf "github.com/dotabuff/manta/dota/google/protobuf"
-
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
 var _ = math.Inf
@@ -89,6 +87,19 @@ const (
 	EDOTAChatWheelMessage_k_EDOTA_CW_Relax               EDOTAChatWheelMessage = 70
 	EDOTAChatWheelMessage_k_EDOTA_CW_MissingHero         EDOTAChatWheelMessage = 71
 	EDOTAChatWheelMessage_k_EDOTA_CW_ReturnedHero        EDOTAChatWheelMessage = 72
+	EDOTAChatWheelMessage_k_EDOTA_CW_GG                  EDOTAChatWheelMessage = 73
+	EDOTAChatWheelMessage_k_EDOTA_CW_GGWP                EDOTAChatWheelMessage = 74
+	EDOTAChatWheelMessage_k_EDOTA_CW_All_GG              EDOTAChatWheelMessage = 75
+	EDOTAChatWheelMessage_k_EDOTA_CW_All_GGWP            EDOTAChatWheelMessage = 76
+	EDOTAChatWheelMessage_k_EDOTA_CW_What_To_Buy         EDOTAChatWheelMessage = 77
+	EDOTAChatWheelMessage_k_EDOTA_CW_Im_Retreating       EDOTAChatWheelMessage = 78
+	EDOTAChatWheelMessage_k_EDOTA_CW_Space_Created       EDOTAChatWheelMessage = 79
+	EDOTAChatWheelMessage_k_EDOTA_CW_Whoops              EDOTAChatWheelMessage = 80
+	EDOTAChatWheelMessage_k_EDOTA_CW_Tower_then_Back     EDOTAChatWheelMessage = 81
+	EDOTAChatWheelMessage_k_EDOTA_CW_Barracks_then_Back  EDOTAChatWheelMessage = 82
+	EDOTAChatWheelMessage_k_EDOTA_CW_Ward_Bottom_Rune    EDOTAChatWheelMessage = 83
+	EDOTAChatWheelMessage_k_EDOTA_CW_Ward_Top_Rune       EDOTAChatWheelMessage = 84
+	EDOTAChatWheelMessage_k_EDOTA_CW_Zeus_Ult            EDOTAChatWheelMessage = 85
 )
 
 var EDOTAChatWheelMessage_name = map[int32]string{
@@ -165,6 +176,19 @@ var EDOTAChatWheelMessage_name = map[int32]string{
 	70: "k_EDOTA_CW_Relax",
 	71: "k_EDOTA_CW_MissingHero",
 	72: "k_EDOTA_CW_ReturnedHero",
+	73: "k_EDOTA_CW_GG",
+	74: "k_EDOTA_CW_GGWP",
+	75: "k_EDOTA_CW_All_GG",
+	76: "k_EDOTA_CW_All_GGWP",
+	77: "k_EDOTA_CW_What_To_Buy",
+	78: "k_EDOTA_CW_Im_Retreating",
+	79: "k_EDOTA_CW_Space_Created",
+	80: "k_EDOTA_CW_Whoops",
+	81: "k_EDOTA_CW_Tower_then_Back",
+	82: "k_EDOTA_CW_Barracks_then_Back",
+	83: "k_EDOTA_CW_Ward_Bottom_Rune",
+	84: "k_EDOTA_CW_Ward_Top_Rune",
+	85: "k_EDOTA_CW_Zeus_Ult",
 }
 var EDOTAChatWheelMessage_value = map[string]int32{
 	"k_EDOTA_CW_Ok":                  0,
@@ -240,6 +264,19 @@ var EDOTAChatWheelMessage_value = map[string]int32{
 	"k_EDOTA_CW_Relax":               70,
 	"k_EDOTA_CW_MissingHero":         71,
 	"k_EDOTA_CW_ReturnedHero":        72,
+	"k_EDOTA_CW_GG":                  73,
+	"k_EDOTA_CW_GGWP":                74,
+	"k_EDOTA_CW_All_GG":              75,
+	"k_EDOTA_CW_All_GGWP":            76,
+	"k_EDOTA_CW_What_To_Buy":         77,
+	"k_EDOTA_CW_Im_Retreating":       78,
+	"k_EDOTA_CW_Space_Created":       79,
+	"k_EDOTA_CW_Whoops":              80,
+	"k_EDOTA_CW_Tower_then_Back":     81,
+	"k_EDOTA_CW_Barracks_then_Back":  82,
+	"k_EDOTA_CW_Ward_Bottom_Rune":    83,
+	"k_EDOTA_CW_Ward_Top_Rune":       84,
+	"k_EDOTA_CW_Zeus_Ult":            85,
 }
 
 func (x EDOTAChatWheelMessage) Enum() *EDOTAChatWheelMessage {
@@ -295,6 +332,120 @@ func (x *EDOTAStatPopupTypes) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	*x = EDOTAStatPopupTypes(value)
+	return nil
+}
+
+type DotaunitorderT int32
+
+const (
+	DotaunitorderT_DOTA_UNIT_ORDER_NONE                  DotaunitorderT = 0
+	DotaunitorderT_DOTA_UNIT_ORDER_MOVE_TO_POSITION      DotaunitorderT = 1
+	DotaunitorderT_DOTA_UNIT_ORDER_MOVE_TO_TARGET        DotaunitorderT = 2
+	DotaunitorderT_DOTA_UNIT_ORDER_ATTACK_MOVE           DotaunitorderT = 3
+	DotaunitorderT_DOTA_UNIT_ORDER_ATTACK_TARGET         DotaunitorderT = 4
+	DotaunitorderT_DOTA_UNIT_ORDER_CAST_POSITION         DotaunitorderT = 5
+	DotaunitorderT_DOTA_UNIT_ORDER_CAST_TARGET           DotaunitorderT = 6
+	DotaunitorderT_DOTA_UNIT_ORDER_CAST_TARGET_TREE      DotaunitorderT = 7
+	DotaunitorderT_DOTA_UNIT_ORDER_CAST_NO_TARGET        DotaunitorderT = 8
+	DotaunitorderT_DOTA_UNIT_ORDER_CAST_TOGGLE           DotaunitorderT = 9
+	DotaunitorderT_DOTA_UNIT_ORDER_HOLD_POSITION         DotaunitorderT = 10
+	DotaunitorderT_DOTA_UNIT_ORDER_TRAIN_ABILITY         DotaunitorderT = 11
+	DotaunitorderT_DOTA_UNIT_ORDER_DROP_ITEM             DotaunitorderT = 12
+	DotaunitorderT_DOTA_UNIT_ORDER_GIVE_ITEM             DotaunitorderT = 13
+	DotaunitorderT_DOTA_UNIT_ORDER_PICKUP_ITEM           DotaunitorderT = 14
+	DotaunitorderT_DOTA_UNIT_ORDER_PICKUP_RUNE           DotaunitorderT = 15
+	DotaunitorderT_DOTA_UNIT_ORDER_PURCHASE_ITEM         DotaunitorderT = 16
+	DotaunitorderT_DOTA_UNIT_ORDER_SELL_ITEM             DotaunitorderT = 17
+	DotaunitorderT_DOTA_UNIT_ORDER_DISASSEMBLE_ITEM      DotaunitorderT = 18
+	DotaunitorderT_DOTA_UNIT_ORDER_MOVE_ITEM             DotaunitorderT = 19
+	DotaunitorderT_DOTA_UNIT_ORDER_CAST_TOGGLE_AUTO      DotaunitorderT = 20
+	DotaunitorderT_DOTA_UNIT_ORDER_STOP                  DotaunitorderT = 21
+	DotaunitorderT_DOTA_UNIT_ORDER_TAUNT                 DotaunitorderT = 22
+	DotaunitorderT_DOTA_UNIT_ORDER_BUYBACK               DotaunitorderT = 23
+	DotaunitorderT_DOTA_UNIT_ORDER_GLYPH                 DotaunitorderT = 24
+	DotaunitorderT_DOTA_UNIT_ORDER_EJECT_ITEM_FROM_STASH DotaunitorderT = 25
+	DotaunitorderT_DOTA_UNIT_ORDER_CAST_RUNE             DotaunitorderT = 26
+	DotaunitorderT_DOTA_UNIT_ORDER_PING_ABILITY          DotaunitorderT = 27
+	DotaunitorderT_DOTA_UNIT_ORDER_MOVE_TO_DIRECTION     DotaunitorderT = 28
+)
+
+var DotaunitorderT_name = map[int32]string{
+	0:  "DOTA_UNIT_ORDER_NONE",
+	1:  "DOTA_UNIT_ORDER_MOVE_TO_POSITION",
+	2:  "DOTA_UNIT_ORDER_MOVE_TO_TARGET",
+	3:  "DOTA_UNIT_ORDER_ATTACK_MOVE",
+	4:  "DOTA_UNIT_ORDER_ATTACK_TARGET",
+	5:  "DOTA_UNIT_ORDER_CAST_POSITION",
+	6:  "DOTA_UNIT_ORDER_CAST_TARGET",
+	7:  "DOTA_UNIT_ORDER_CAST_TARGET_TREE",
+	8:  "DOTA_UNIT_ORDER_CAST_NO_TARGET",
+	9:  "DOTA_UNIT_ORDER_CAST_TOGGLE",
+	10: "DOTA_UNIT_ORDER_HOLD_POSITION",
+	11: "DOTA_UNIT_ORDER_TRAIN_ABILITY",
+	12: "DOTA_UNIT_ORDER_DROP_ITEM",
+	13: "DOTA_UNIT_ORDER_GIVE_ITEM",
+	14: "DOTA_UNIT_ORDER_PICKUP_ITEM",
+	15: "DOTA_UNIT_ORDER_PICKUP_RUNE",
+	16: "DOTA_UNIT_ORDER_PURCHASE_ITEM",
+	17: "DOTA_UNIT_ORDER_SELL_ITEM",
+	18: "DOTA_UNIT_ORDER_DISASSEMBLE_ITEM",
+	19: "DOTA_UNIT_ORDER_MOVE_ITEM",
+	20: "DOTA_UNIT_ORDER_CAST_TOGGLE_AUTO",
+	21: "DOTA_UNIT_ORDER_STOP",
+	22: "DOTA_UNIT_ORDER_TAUNT",
+	23: "DOTA_UNIT_ORDER_BUYBACK",
+	24: "DOTA_UNIT_ORDER_GLYPH",
+	25: "DOTA_UNIT_ORDER_EJECT_ITEM_FROM_STASH",
+	26: "DOTA_UNIT_ORDER_CAST_RUNE",
+	27: "DOTA_UNIT_ORDER_PING_ABILITY",
+	28: "DOTA_UNIT_ORDER_MOVE_TO_DIRECTION",
+}
+var DotaunitorderT_value = map[string]int32{
+	"DOTA_UNIT_ORDER_NONE":                  0,
+	"DOTA_UNIT_ORDER_MOVE_TO_POSITION":      1,
+	"DOTA_UNIT_ORDER_MOVE_TO_TARGET":        2,
+	"DOTA_UNIT_ORDER_ATTACK_MOVE":           3,
+	"DOTA_UNIT_ORDER_ATTACK_TARGET":         4,
+	"DOTA_UNIT_ORDER_CAST_POSITION":         5,
+	"DOTA_UNIT_ORDER_CAST_TARGET":           6,
+	"DOTA_UNIT_ORDER_CAST_TARGET_TREE":      7,
+	"DOTA_UNIT_ORDER_CAST_NO_TARGET":        8,
+	"DOTA_UNIT_ORDER_CAST_TOGGLE":           9,
+	"DOTA_UNIT_ORDER_HOLD_POSITION":         10,
+	"DOTA_UNIT_ORDER_TRAIN_ABILITY":         11,
+	"DOTA_UNIT_ORDER_DROP_ITEM":             12,
+	"DOTA_UNIT_ORDER_GIVE_ITEM":             13,
+	"DOTA_UNIT_ORDER_PICKUP_ITEM":           14,
+	"DOTA_UNIT_ORDER_PICKUP_RUNE":           15,
+	"DOTA_UNIT_ORDER_PURCHASE_ITEM":         16,
+	"DOTA_UNIT_ORDER_SELL_ITEM":             17,
+	"DOTA_UNIT_ORDER_DISASSEMBLE_ITEM":      18,
+	"DOTA_UNIT_ORDER_MOVE_ITEM":             19,
+	"DOTA_UNIT_ORDER_CAST_TOGGLE_AUTO":      20,
+	"DOTA_UNIT_ORDER_STOP":                  21,
+	"DOTA_UNIT_ORDER_TAUNT":                 22,
+	"DOTA_UNIT_ORDER_BUYBACK":               23,
+	"DOTA_UNIT_ORDER_GLYPH":                 24,
+	"DOTA_UNIT_ORDER_EJECT_ITEM_FROM_STASH": 25,
+	"DOTA_UNIT_ORDER_CAST_RUNE":             26,
+	"DOTA_UNIT_ORDER_PING_ABILITY":          27,
+	"DOTA_UNIT_ORDER_MOVE_TO_DIRECTION":     28,
+}
+
+func (x DotaunitorderT) Enum() *DotaunitorderT {
+	p := new(DotaunitorderT)
+	*p = x
+	return p
+}
+func (x DotaunitorderT) String() string {
+	return proto.EnumName(DotaunitorderT_name, int32(x))
+}
+func (x *DotaunitorderT) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(DotaunitorderT_value, data, "DotaunitorderT")
+	if err != nil {
+		return err
+	}
+	*x = DotaunitorderT(value)
 	return nil
 }
 
@@ -372,30 +523,6 @@ func (m *CDOTAMsg_ItemAlert) GetY() int32 {
 }
 
 func (m *CDOTAMsg_ItemAlert) GetItemid() int32 {
-	if m != nil && m.Itemid != nil {
-		return *m.Itemid
-	}
-	return 0
-}
-
-type CDOTAMsg_EnemyItemAlert struct {
-	PlayerId         *uint32 `protobuf:"varint,1,opt,name=player_id" json:"player_id,omitempty"`
-	Itemid           *int32  `protobuf:"varint,2,opt,name=itemid" json:"itemid,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
-}
-
-func (m *CDOTAMsg_EnemyItemAlert) Reset()         { *m = CDOTAMsg_EnemyItemAlert{} }
-func (m *CDOTAMsg_EnemyItemAlert) String() string { return proto.CompactTextString(m) }
-func (*CDOTAMsg_EnemyItemAlert) ProtoMessage()    {}
-
-func (m *CDOTAMsg_EnemyItemAlert) GetPlayerId() uint32 {
-	if m != nil && m.PlayerId != nil {
-		return *m.PlayerId
-	}
-	return 0
-}
-
-func (m *CDOTAMsg_EnemyItemAlert) GetItemid() int32 {
 	if m != nil && m.Itemid != nil {
 		return *m.Itemid
 	}
@@ -551,4 +678,5 @@ func (m *CDOTAMsg_CoachHUDPing) GetTgtpath() string {
 func init() {
 	proto.RegisterEnum("dota.EDOTAChatWheelMessage", EDOTAChatWheelMessage_name, EDOTAChatWheelMessage_value)
 	proto.RegisterEnum("dota.EDOTAStatPopupTypes", EDOTAStatPopupTypes_name, EDOTAStatPopupTypes_value)
+	proto.RegisterEnum("dota.DotaunitorderT", DotaunitorderT_name, DotaunitorderT_value)
 }

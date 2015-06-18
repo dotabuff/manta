@@ -50,17 +50,20 @@ const (
 	PartnerAccountType_PARTNER_NONE          PartnerAccountType = 0
 	PartnerAccountType_PARTNER_PERFECT_WORLD PartnerAccountType = 1
 	PartnerAccountType_PARTNER_NEXON         PartnerAccountType = 2
+	PartnerAccountType_PARTNER_INVALID       PartnerAccountType = 3
 )
 
 var PartnerAccountType_name = map[int32]string{
 	0: "PARTNER_NONE",
 	1: "PARTNER_PERFECT_WORLD",
 	2: "PARTNER_NEXON",
+	3: "PARTNER_INVALID",
 }
 var PartnerAccountType_value = map[string]int32{
 	"PARTNER_NONE":          0,
 	"PARTNER_PERFECT_WORLD": 1,
 	"PARTNER_NEXON":         2,
+	"PARTNER_INVALID":       3,
 }
 
 func (x PartnerAccountType) Enum() *PartnerAccountType {
@@ -1489,6 +1492,46 @@ func (m *CWorkshop_SetItemPaymentRules_Response) Reset() {
 }
 func (m *CWorkshop_SetItemPaymentRules_Response) String() string { return proto.CompactTextString(m) }
 func (*CWorkshop_SetItemPaymentRules_Response) ProtoMessage()    {}
+
+type CBroadcast_PostGameDataFrame_Request struct {
+	Appid            *uint32 `protobuf:"varint,1,opt,name=appid" json:"appid,omitempty"`
+	Steamid          *uint64 `protobuf:"fixed64,2,opt,name=steamid" json:"steamid,omitempty"`
+	BroadcastId      *uint64 `protobuf:"fixed64,3,opt,name=broadcast_id" json:"broadcast_id,omitempty"`
+	FrameData        []byte  `protobuf:"bytes,4,opt,name=frame_data" json:"frame_data,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CBroadcast_PostGameDataFrame_Request) Reset()         { *m = CBroadcast_PostGameDataFrame_Request{} }
+func (m *CBroadcast_PostGameDataFrame_Request) String() string { return proto.CompactTextString(m) }
+func (*CBroadcast_PostGameDataFrame_Request) ProtoMessage()    {}
+
+func (m *CBroadcast_PostGameDataFrame_Request) GetAppid() uint32 {
+	if m != nil && m.Appid != nil {
+		return *m.Appid
+	}
+	return 0
+}
+
+func (m *CBroadcast_PostGameDataFrame_Request) GetSteamid() uint64 {
+	if m != nil && m.Steamid != nil {
+		return *m.Steamid
+	}
+	return 0
+}
+
+func (m *CBroadcast_PostGameDataFrame_Request) GetBroadcastId() uint64 {
+	if m != nil && m.BroadcastId != nil {
+		return *m.BroadcastId
+	}
+	return 0
+}
+
+func (m *CBroadcast_PostGameDataFrame_Request) GetFrameData() []byte {
+	if m != nil {
+		return m.FrameData
+	}
+	return nil
+}
 
 func init() {
 	proto.RegisterEnum("dota.ESourceEngine", ESourceEngine_name, ESourceEngine_value)

@@ -7,8 +7,6 @@ package dota
 import proto "github.com/golang/protobuf/proto"
 import math "math"
 
-// discarding unused import google_protobuf "github.com/dotabuff/manta/dota/google/protobuf"
-
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
 var _ = math.Inf
@@ -235,20 +233,17 @@ const (
 	RequestPauseT_RP_PAUSE       RequestPauseT = 0
 	RequestPauseT_RP_UNPAUSE     RequestPauseT = 1
 	RequestPauseT_RP_TOGGLEPAUSE RequestPauseT = 2
-	RequestPauseT_RP_BUGPAUSE    RequestPauseT = 3
 )
 
 var RequestPauseT_name = map[int32]string{
 	0: "RP_PAUSE",
 	1: "RP_UNPAUSE",
 	2: "RP_TOGGLEPAUSE",
-	3: "RP_BUGPAUSE",
 }
 var RequestPauseT_value = map[string]int32{
 	"RP_PAUSE":       0,
 	"RP_UNPAUSE":     1,
 	"RP_TOGGLEPAUSE": 2,
-	"RP_BUGPAUSE":    3,
 }
 
 func (x RequestPauseT) Enum() *RequestPauseT {
@@ -478,6 +473,81 @@ func (x *Bidirectional_Messages) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
+type Bidirectional_Messages_LowFrequency int32
+
+const (
+	Bidirectional_Messages_LowFrequency_bi_RelayInfo   Bidirectional_Messages_LowFrequency = 700
+	Bidirectional_Messages_LowFrequency_bi_RelayPacket Bidirectional_Messages_LowFrequency = 701
+)
+
+var Bidirectional_Messages_LowFrequency_name = map[int32]string{
+	700: "bi_RelayInfo",
+	701: "bi_RelayPacket",
+}
+var Bidirectional_Messages_LowFrequency_value = map[string]int32{
+	"bi_RelayInfo":   700,
+	"bi_RelayPacket": 701,
+}
+
+func (x Bidirectional_Messages_LowFrequency) Enum() *Bidirectional_Messages_LowFrequency {
+	p := new(Bidirectional_Messages_LowFrequency)
+	*p = x
+	return p
+}
+func (x Bidirectional_Messages_LowFrequency) String() string {
+	return proto.EnumName(Bidirectional_Messages_LowFrequency_name, int32(x))
+}
+func (x *Bidirectional_Messages_LowFrequency) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(Bidirectional_Messages_LowFrequency_value, data, "Bidirectional_Messages_LowFrequency")
+	if err != nil {
+		return err
+	}
+	*x = Bidirectional_Messages_LowFrequency(value)
+	return nil
+}
+
+type CBidirMsg_RelayInfo_OperationT int32
+
+const (
+	CBidirMsg_RelayInfo_RIO_REQUEST_RELAY        CBidirMsg_RelayInfo_OperationT = 0
+	CBidirMsg_RelayInfo_RIO_WILL_RELAY           CBidirMsg_RelayInfo_OperationT = 1
+	CBidirMsg_RelayInfo_RIO_NO_ROUTE             CBidirMsg_RelayInfo_OperationT = 2
+	CBidirMsg_RelayInfo_RIO_REJECT_RELAY         CBidirMsg_RelayInfo_OperationT = 3
+	CBidirMsg_RelayInfo_RIO_ESTABLISH_CONNECTION CBidirMsg_RelayInfo_OperationT = 4
+)
+
+var CBidirMsg_RelayInfo_OperationT_name = map[int32]string{
+	0: "RIO_REQUEST_RELAY",
+	1: "RIO_WILL_RELAY",
+	2: "RIO_NO_ROUTE",
+	3: "RIO_REJECT_RELAY",
+	4: "RIO_ESTABLISH_CONNECTION",
+}
+var CBidirMsg_RelayInfo_OperationT_value = map[string]int32{
+	"RIO_REQUEST_RELAY":        0,
+	"RIO_WILL_RELAY":           1,
+	"RIO_NO_ROUTE":             2,
+	"RIO_REJECT_RELAY":         3,
+	"RIO_ESTABLISH_CONNECTION": 4,
+}
+
+func (x CBidirMsg_RelayInfo_OperationT) Enum() *CBidirMsg_RelayInfo_OperationT {
+	p := new(CBidirMsg_RelayInfo_OperationT)
+	*p = x
+	return p
+}
+func (x CBidirMsg_RelayInfo_OperationT) String() string {
+	return proto.EnumName(CBidirMsg_RelayInfo_OperationT_name, int32(x))
+}
+func (x *CBidirMsg_RelayInfo_OperationT) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(CBidirMsg_RelayInfo_OperationT_value, data, "CBidirMsg_RelayInfo_OperationT")
+	if err != nil {
+		return err
+	}
+	*x = CBidirMsg_RelayInfo_OperationT(value)
+	return nil
+}
+
 type CCLCMsg_ClientInfo struct {
 	SendTableCrc     *uint32  `protobuf:"fixed32,1,opt,name=send_table_crc" json:"send_table_crc,omitempty"`
 	ServerCount      *uint32  `protobuf:"varint,2,opt,name=server_count" json:"server_count,omitempty"`
@@ -574,25 +644,78 @@ func (m *CCLCMsg_Move) GetData() []byte {
 	return nil
 }
 
-type CCLCMsg_VoiceData struct {
-	Data                     []byte            `protobuf:"bytes,1,opt,name=data" json:"data,omitempty"`
-	Xuid                     *uint64           `protobuf:"fixed64,2,opt,name=xuid" json:"xuid,omitempty"`
-	Format                   *VoiceDataFormatT `protobuf:"varint,3,opt,name=format,enum=dota.VoiceDataFormatT,def=0" json:"format,omitempty"`
-	SequenceBytes            *int32            `protobuf:"varint,4,opt,name=sequence_bytes" json:"sequence_bytes,omitempty"`
-	SectionNumber            *uint32           `protobuf:"varint,5,opt,name=section_number" json:"section_number,omitempty"`
+type CMsgVoiceAudio struct {
+	Format                   *VoiceDataFormatT `protobuf:"varint,1,opt,name=format,enum=dota.VoiceDataFormatT,def=0" json:"format,omitempty"`
+	VoiceData                []byte            `protobuf:"bytes,2,opt,name=voice_data" json:"voice_data,omitempty"`
+	SequenceBytes            *int32            `protobuf:"varint,3,opt,name=sequence_bytes" json:"sequence_bytes,omitempty"`
+	SectionNumber            *uint32           `protobuf:"varint,4,opt,name=section_number" json:"section_number,omitempty"`
+	SampleRate               *uint32           `protobuf:"varint,5,opt,name=sample_rate" json:"sample_rate,omitempty"`
 	UncompressedSampleOffset *uint32           `protobuf:"varint,6,opt,name=uncompressed_sample_offset" json:"uncompressed_sample_offset,omitempty"`
 	XXX_unrecognized         []byte            `json:"-"`
+}
+
+func (m *CMsgVoiceAudio) Reset()         { *m = CMsgVoiceAudio{} }
+func (m *CMsgVoiceAudio) String() string { return proto.CompactTextString(m) }
+func (*CMsgVoiceAudio) ProtoMessage()    {}
+
+const Default_CMsgVoiceAudio_Format VoiceDataFormatT = VoiceDataFormatT_VOICEDATA_FORMAT_STEAM
+
+func (m *CMsgVoiceAudio) GetFormat() VoiceDataFormatT {
+	if m != nil && m.Format != nil {
+		return *m.Format
+	}
+	return Default_CMsgVoiceAudio_Format
+}
+
+func (m *CMsgVoiceAudio) GetVoiceData() []byte {
+	if m != nil {
+		return m.VoiceData
+	}
+	return nil
+}
+
+func (m *CMsgVoiceAudio) GetSequenceBytes() int32 {
+	if m != nil && m.SequenceBytes != nil {
+		return *m.SequenceBytes
+	}
+	return 0
+}
+
+func (m *CMsgVoiceAudio) GetSectionNumber() uint32 {
+	if m != nil && m.SectionNumber != nil {
+		return *m.SectionNumber
+	}
+	return 0
+}
+
+func (m *CMsgVoiceAudio) GetSampleRate() uint32 {
+	if m != nil && m.SampleRate != nil {
+		return *m.SampleRate
+	}
+	return 0
+}
+
+func (m *CMsgVoiceAudio) GetUncompressedSampleOffset() uint32 {
+	if m != nil && m.UncompressedSampleOffset != nil {
+		return *m.UncompressedSampleOffset
+	}
+	return 0
+}
+
+type CCLCMsg_VoiceData struct {
+	Audio            *CMsgVoiceAudio `protobuf:"bytes,1,opt,name=audio" json:"audio,omitempty"`
+	Xuid             *uint64         `protobuf:"fixed64,2,opt,name=xuid" json:"xuid,omitempty"`
+	Tick             *uint32         `protobuf:"varint,3,opt,name=tick" json:"tick,omitempty"`
+	XXX_unrecognized []byte          `json:"-"`
 }
 
 func (m *CCLCMsg_VoiceData) Reset()         { *m = CCLCMsg_VoiceData{} }
 func (m *CCLCMsg_VoiceData) String() string { return proto.CompactTextString(m) }
 func (*CCLCMsg_VoiceData) ProtoMessage()    {}
 
-const Default_CCLCMsg_VoiceData_Format VoiceDataFormatT = VoiceDataFormatT_VOICEDATA_FORMAT_STEAM
-
-func (m *CCLCMsg_VoiceData) GetData() []byte {
+func (m *CCLCMsg_VoiceData) GetAudio() *CMsgVoiceAudio {
 	if m != nil {
-		return m.Data
+		return m.Audio
 	}
 	return nil
 }
@@ -604,30 +727,9 @@ func (m *CCLCMsg_VoiceData) GetXuid() uint64 {
 	return 0
 }
 
-func (m *CCLCMsg_VoiceData) GetFormat() VoiceDataFormatT {
-	if m != nil && m.Format != nil {
-		return *m.Format
-	}
-	return Default_CCLCMsg_VoiceData_Format
-}
-
-func (m *CCLCMsg_VoiceData) GetSequenceBytes() int32 {
-	if m != nil && m.SequenceBytes != nil {
-		return *m.SequenceBytes
-	}
-	return 0
-}
-
-func (m *CCLCMsg_VoiceData) GetSectionNumber() uint32 {
-	if m != nil && m.SectionNumber != nil {
-		return *m.SectionNumber
-	}
-	return 0
-}
-
-func (m *CCLCMsg_VoiceData) GetUncompressedSampleOffset() uint32 {
-	if m != nil && m.UncompressedSampleOffset != nil {
-		return *m.UncompressedSampleOffset
+func (m *CCLCMsg_VoiceData) GetTick() uint32 {
+	if m != nil && m.Tick != nil {
+		return *m.Tick
 	}
 	return 0
 }
@@ -858,6 +960,7 @@ func (*CCLCMsg_ServerPing) ProtoMessage()    {}
 
 type CCLCMsg_RequestPause struct {
 	PauseType        *RequestPauseT `protobuf:"varint,1,opt,name=pause_type,enum=dota.RequestPauseT,def=0" json:"pause_type,omitempty"`
+	PauseGroup       *int32         `protobuf:"varint,2,opt,name=pause_group" json:"pause_group,omitempty"`
 	XXX_unrecognized []byte         `json:"-"`
 }
 
@@ -872,6 +975,13 @@ func (m *CCLCMsg_RequestPause) GetPauseType() RequestPauseT {
 		return *m.PauseType
 	}
 	return Default_CCLCMsg_RequestPause_PauseType
+}
+
+func (m *CCLCMsg_RequestPause) GetPauseGroup() int32 {
+	if m != nil && m.PauseGroup != nil {
+		return *m.PauseGroup
+	}
+	return 0
 }
 
 type CCLCMsg_CmdKeyValues struct {
@@ -1777,16 +1887,17 @@ func (m *CSVCMsg_GameEventListDescriptorT) GetKeys() []*CSVCMsg_GameEventListKey
 }
 
 type CSVCMsg_PacketEntities struct {
-	MaxEntries             *int32  `protobuf:"varint,1,opt,name=max_entries" json:"max_entries,omitempty"`
-	UpdatedEntries         *int32  `protobuf:"varint,2,opt,name=updated_entries" json:"updated_entries,omitempty"`
-	IsDelta                *bool   `protobuf:"varint,3,opt,name=is_delta" json:"is_delta,omitempty"`
-	UpdateBaseline         *bool   `protobuf:"varint,4,opt,name=update_baseline" json:"update_baseline,omitempty"`
-	Baseline               *int32  `protobuf:"varint,5,opt,name=baseline" json:"baseline,omitempty"`
-	DeltaFrom              *int32  `protobuf:"varint,6,opt,name=delta_from" json:"delta_from,omitempty"`
-	EntityData             []byte  `protobuf:"bytes,7,opt,name=entity_data" json:"entity_data,omitempty"`
-	PendingFullFrame       *bool   `protobuf:"varint,8,opt,name=pending_full_frame" json:"pending_full_frame,omitempty"`
-	ActiveSpawngroupHandle *uint32 `protobuf:"varint,9,opt,name=active_spawngroup_handle" json:"active_spawngroup_handle,omitempty"`
-	XXX_unrecognized       []byte  `json:"-"`
+	MaxEntries                    *int32  `protobuf:"varint,1,opt,name=max_entries" json:"max_entries,omitempty"`
+	UpdatedEntries                *int32  `protobuf:"varint,2,opt,name=updated_entries" json:"updated_entries,omitempty"`
+	IsDelta                       *bool   `protobuf:"varint,3,opt,name=is_delta" json:"is_delta,omitempty"`
+	UpdateBaseline                *bool   `protobuf:"varint,4,opt,name=update_baseline" json:"update_baseline,omitempty"`
+	Baseline                      *int32  `protobuf:"varint,5,opt,name=baseline" json:"baseline,omitempty"`
+	DeltaFrom                     *int32  `protobuf:"varint,6,opt,name=delta_from" json:"delta_from,omitempty"`
+	EntityData                    []byte  `protobuf:"bytes,7,opt,name=entity_data" json:"entity_data,omitempty"`
+	PendingFullFrame              *bool   `protobuf:"varint,8,opt,name=pending_full_frame" json:"pending_full_frame,omitempty"`
+	ActiveSpawngroupHandle        *uint32 `protobuf:"varint,9,opt,name=active_spawngroup_handle" json:"active_spawngroup_handle,omitempty"`
+	MaxSpawngroupCreationsequence *uint32 `protobuf:"varint,10,opt,name=max_spawngroup_creationsequence" json:"max_spawngroup_creationsequence,omitempty"`
+	XXX_unrecognized              []byte  `json:"-"`
 }
 
 func (m *CSVCMsg_PacketEntities) Reset()         { *m = CSVCMsg_PacketEntities{} }
@@ -1856,6 +1967,13 @@ func (m *CSVCMsg_PacketEntities) GetActiveSpawngroupHandle() uint32 {
 	return 0
 }
 
+func (m *CSVCMsg_PacketEntities) GetMaxSpawngroupCreationsequence() uint32 {
+	if m != nil && m.MaxSpawngroupCreationsequence != nil {
+		return *m.MaxSpawngroupCreationsequence
+	}
+	return 0
+}
+
 type CSVCMsg_TempEntities struct {
 	Reliable         *bool  `protobuf:"varint,1,opt,name=reliable" json:"reliable,omitempty"`
 	NumEntries       *int32 `protobuf:"varint,2,opt,name=num_entries" json:"num_entries,omitempty"`
@@ -1890,15 +2008,14 @@ func (m *CSVCMsg_TempEntities) GetEntityData() []byte {
 
 type CSVCMsg_CreateStringTable struct {
 	Name              *string `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
-	MaxEntries        *int32  `protobuf:"varint,2,opt,name=max_entries" json:"max_entries,omitempty"`
-	NumEntries        *int32  `protobuf:"varint,3,opt,name=num_entries" json:"num_entries,omitempty"`
-	UserDataFixedSize *bool   `protobuf:"varint,4,opt,name=user_data_fixed_size" json:"user_data_fixed_size,omitempty"`
-	UserDataSize      *int32  `protobuf:"varint,5,opt,name=user_data_size" json:"user_data_size,omitempty"`
-	UserDataSizeBits  *int32  `protobuf:"varint,6,opt,name=user_data_size_bits" json:"user_data_size_bits,omitempty"`
-	Flags             *int32  `protobuf:"varint,7,opt,name=flags" json:"flags,omitempty"`
-	StringData        []byte  `protobuf:"bytes,8,opt,name=string_data" json:"string_data,omitempty"`
-	UncompressedSize  *int32  `protobuf:"varint,9,opt,name=uncompressed_size" json:"uncompressed_size,omitempty"`
-	DataCompressed    *bool   `protobuf:"varint,10,opt,name=data_compressed" json:"data_compressed,omitempty"`
+	NumEntries        *int32  `protobuf:"varint,2,opt,name=num_entries" json:"num_entries,omitempty"`
+	UserDataFixedSize *bool   `protobuf:"varint,3,opt,name=user_data_fixed_size" json:"user_data_fixed_size,omitempty"`
+	UserDataSize      *int32  `protobuf:"varint,4,opt,name=user_data_size" json:"user_data_size,omitempty"`
+	UserDataSizeBits  *int32  `protobuf:"varint,5,opt,name=user_data_size_bits" json:"user_data_size_bits,omitempty"`
+	Flags             *int32  `protobuf:"varint,6,opt,name=flags" json:"flags,omitempty"`
+	StringData        []byte  `protobuf:"bytes,7,opt,name=string_data" json:"string_data,omitempty"`
+	UncompressedSize  *int32  `protobuf:"varint,8,opt,name=uncompressed_size" json:"uncompressed_size,omitempty"`
+	DataCompressed    *bool   `protobuf:"varint,9,opt,name=data_compressed" json:"data_compressed,omitempty"`
 	XXX_unrecognized  []byte  `json:"-"`
 }
 
@@ -1911,13 +2028,6 @@ func (m *CSVCMsg_CreateStringTable) GetName() string {
 		return *m.Name
 	}
 	return ""
-}
-
-func (m *CSVCMsg_CreateStringTable) GetMaxEntries() int32 {
-	if m != nil && m.MaxEntries != nil {
-		return *m.MaxEntries
-	}
-	return 0
 }
 
 func (m *CSVCMsg_CreateStringTable) GetNumEntries() int32 {
@@ -2009,23 +2119,25 @@ func (m *CSVCMsg_UpdateStringTable) GetStringData() []byte {
 }
 
 type CSVCMsg_VoiceData struct {
-	Client                   *int32            `protobuf:"varint,1,opt,name=client" json:"client,omitempty"`
-	Proximity                *bool             `protobuf:"varint,2,opt,name=proximity" json:"proximity,omitempty"`
-	Xuid                     *uint64           `protobuf:"fixed64,3,opt,name=xuid" json:"xuid,omitempty"`
-	AudibleMask              *int32            `protobuf:"varint,4,opt,name=audible_mask" json:"audible_mask,omitempty"`
-	VoiceData                []byte            `protobuf:"bytes,5,opt,name=voice_data" json:"voice_data,omitempty"`
-	Format                   *VoiceDataFormatT `protobuf:"varint,6,opt,name=format,enum=dota.VoiceDataFormatT,def=0" json:"format,omitempty"`
-	SequenceBytes            *int32            `protobuf:"varint,7,opt,name=sequence_bytes" json:"sequence_bytes,omitempty"`
-	SectionNumber            *uint32           `protobuf:"varint,8,opt,name=section_number" json:"section_number,omitempty"`
-	UncompressedSampleOffset *uint32           `protobuf:"varint,9,opt,name=uncompressed_sample_offset" json:"uncompressed_sample_offset,omitempty"`
-	XXX_unrecognized         []byte            `json:"-"`
+	Audio            *CMsgVoiceAudio `protobuf:"bytes,1,opt,name=audio" json:"audio,omitempty"`
+	Client           *int32          `protobuf:"varint,2,opt,name=client" json:"client,omitempty"`
+	Proximity        *bool           `protobuf:"varint,3,opt,name=proximity" json:"proximity,omitempty"`
+	Xuid             *uint64         `protobuf:"fixed64,4,opt,name=xuid" json:"xuid,omitempty"`
+	AudibleMask      *int32          `protobuf:"varint,5,opt,name=audible_mask" json:"audible_mask,omitempty"`
+	Tick             *uint32         `protobuf:"varint,6,opt,name=tick" json:"tick,omitempty"`
+	XXX_unrecognized []byte          `json:"-"`
 }
 
 func (m *CSVCMsg_VoiceData) Reset()         { *m = CSVCMsg_VoiceData{} }
 func (m *CSVCMsg_VoiceData) String() string { return proto.CompactTextString(m) }
 func (*CSVCMsg_VoiceData) ProtoMessage()    {}
 
-const Default_CSVCMsg_VoiceData_Format VoiceDataFormatT = VoiceDataFormatT_VOICEDATA_FORMAT_STEAM
+func (m *CSVCMsg_VoiceData) GetAudio() *CMsgVoiceAudio {
+	if m != nil {
+		return m.Audio
+	}
+	return nil
+}
 
 func (m *CSVCMsg_VoiceData) GetClient() int32 {
 	if m != nil && m.Client != nil {
@@ -2055,37 +2167,9 @@ func (m *CSVCMsg_VoiceData) GetAudibleMask() int32 {
 	return 0
 }
 
-func (m *CSVCMsg_VoiceData) GetVoiceData() []byte {
-	if m != nil {
-		return m.VoiceData
-	}
-	return nil
-}
-
-func (m *CSVCMsg_VoiceData) GetFormat() VoiceDataFormatT {
-	if m != nil && m.Format != nil {
-		return *m.Format
-	}
-	return Default_CSVCMsg_VoiceData_Format
-}
-
-func (m *CSVCMsg_VoiceData) GetSequenceBytes() int32 {
-	if m != nil && m.SequenceBytes != nil {
-		return *m.SequenceBytes
-	}
-	return 0
-}
-
-func (m *CSVCMsg_VoiceData) GetSectionNumber() uint32 {
-	if m != nil && m.SectionNumber != nil {
-		return *m.SectionNumber
-	}
-	return 0
-}
-
-func (m *CSVCMsg_VoiceData) GetUncompressedSampleOffset() uint32 {
-	if m != nil && m.UncompressedSampleOffset != nil {
-		return *m.UncompressedSampleOffset
+func (m *CSVCMsg_VoiceData) GetTick() uint32 {
+	if m != nil && m.Tick != nil {
+		return *m.Tick
 	}
 	return 0
 }
@@ -2203,19 +2287,22 @@ func (m *CMsgIPCAddress) GetProcessId() uint32 {
 }
 
 type CMsgServerPeer struct {
-	Clientid         *int32          `protobuf:"varint,1,opt,name=clientid" json:"clientid,omitempty"`
-	Steamid          *uint64         `protobuf:"fixed64,2,opt,name=steamid" json:"steamid,omitempty"`
-	Ipc              *CMsgIPCAddress `protobuf:"bytes,3,opt,name=ipc" json:"ipc,omitempty"`
-	XXX_unrecognized []byte          `json:"-"`
+	PlayerSlot         *int32          `protobuf:"varint,1,opt,name=player_slot" json:"player_slot,omitempty"`
+	Steamid            *uint64         `protobuf:"fixed64,2,opt,name=steamid" json:"steamid,omitempty"`
+	Ipc                *CMsgIPCAddress `protobuf:"bytes,3,opt,name=ipc" json:"ipc,omitempty"`
+	TheyHearYou        *bool           `protobuf:"varint,4,opt,name=they_hear_you" json:"they_hear_you,omitempty"`
+	YouHearThem        *bool           `protobuf:"varint,5,opt,name=you_hear_them" json:"you_hear_them,omitempty"`
+	IsListenserverHost *bool           `protobuf:"varint,6,opt,name=is_listenserver_host" json:"is_listenserver_host,omitempty"`
+	XXX_unrecognized   []byte          `json:"-"`
 }
 
 func (m *CMsgServerPeer) Reset()         { *m = CMsgServerPeer{} }
 func (m *CMsgServerPeer) String() string { return proto.CompactTextString(m) }
 func (*CMsgServerPeer) ProtoMessage()    {}
 
-func (m *CMsgServerPeer) GetClientid() int32 {
-	if m != nil && m.Clientid != nil {
-		return *m.Clientid
+func (m *CMsgServerPeer) GetPlayerSlot() int32 {
+	if m != nil && m.PlayerSlot != nil {
+		return *m.PlayerSlot
 	}
 	return 0
 }
@@ -2232,6 +2319,27 @@ func (m *CMsgServerPeer) GetIpc() *CMsgIPCAddress {
 		return m.Ipc
 	}
 	return nil
+}
+
+func (m *CMsgServerPeer) GetTheyHearYou() bool {
+	if m != nil && m.TheyHearYou != nil {
+		return *m.TheyHearYou
+	}
+	return false
+}
+
+func (m *CMsgServerPeer) GetYouHearThem() bool {
+	if m != nil && m.YouHearThem != nil {
+		return *m.YouHearThem
+	}
+	return false
+}
+
+func (m *CMsgServerPeer) GetIsListenserverHost() bool {
+	if m != nil && m.IsListenserverHost != nil {
+		return *m.IsListenserverHost
+	}
+	return false
 }
 
 type CSVCMsg_PeerList struct {
@@ -2355,10 +2463,10 @@ func (m *ProtoFlattenedSerializerFieldT) GetSendNodeSym() int32 {
 }
 
 type ProtoFlattenedSerializerT struct {
-	SerializerNameSym *int32                            `protobuf:"varint,1,opt,name=serializer_name_sym" json:"serializer_name_sym,omitempty"`
-	SerializerVersion *int32                            `protobuf:"varint,2,opt,name=serializer_version" json:"serializer_version,omitempty"`
-	Fields            []*ProtoFlattenedSerializerFieldT `protobuf:"bytes,3,rep,name=fields" json:"fields,omitempty"`
-	XXX_unrecognized  []byte                            `json:"-"`
+	SerializerNameSym *int32  `protobuf:"varint,1,opt,name=serializer_name_sym" json:"serializer_name_sym,omitempty"`
+	SerializerVersion *int32  `protobuf:"varint,2,opt,name=serializer_version" json:"serializer_version,omitempty"`
+	FieldsIndex       []int32 `protobuf:"varint,3,rep,name=fields_index" json:"fields_index,omitempty"`
+	XXX_unrecognized  []byte  `json:"-"`
 }
 
 func (m *ProtoFlattenedSerializerT) Reset()         { *m = ProtoFlattenedSerializerT{} }
@@ -2379,17 +2487,18 @@ func (m *ProtoFlattenedSerializerT) GetSerializerVersion() int32 {
 	return 0
 }
 
-func (m *ProtoFlattenedSerializerT) GetFields() []*ProtoFlattenedSerializerFieldT {
+func (m *ProtoFlattenedSerializerT) GetFieldsIndex() []int32 {
 	if m != nil {
-		return m.Fields
+		return m.FieldsIndex
 	}
 	return nil
 }
 
 type CSVCMsg_FlattenedSerializer struct {
-	Serializers      []*ProtoFlattenedSerializerT `protobuf:"bytes,1,rep,name=serializers" json:"serializers,omitempty"`
-	Symbols          []string                     `protobuf:"bytes,2,rep,name=symbols" json:"symbols,omitempty"`
-	XXX_unrecognized []byte                       `json:"-"`
+	Serializers      []*ProtoFlattenedSerializerT      `protobuf:"bytes,1,rep,name=serializers" json:"serializers,omitempty"`
+	Symbols          []string                          `protobuf:"bytes,2,rep,name=symbols" json:"symbols,omitempty"`
+	Fields           []*ProtoFlattenedSerializerFieldT `protobuf:"bytes,3,rep,name=fields" json:"fields,omitempty"`
+	XXX_unrecognized []byte                            `json:"-"`
 }
 
 func (m *CSVCMsg_FlattenedSerializer) Reset()         { *m = CSVCMsg_FlattenedSerializer{} }
@@ -2406,6 +2515,13 @@ func (m *CSVCMsg_FlattenedSerializer) GetSerializers() []*ProtoFlattenedSerializ
 func (m *CSVCMsg_FlattenedSerializer) GetSymbols() []string {
 	if m != nil {
 		return m.Symbols
+	}
+	return nil
+}
+
+func (m *CSVCMsg_FlattenedSerializer) GetFields() []*ProtoFlattenedSerializerFieldT {
+	if m != nil {
+		return m.Fields
 	}
 	return nil
 }
@@ -2482,6 +2598,164 @@ func (m *CBidirMsg_RebroadcastSource) GetEventsource() int32 {
 	return 0
 }
 
+type SerializedNetAddressT struct {
+	SerializedAddress []byte `protobuf:"bytes,1,req,name=serializedAddress" json:"serializedAddress,omitempty"`
+	XXX_unrecognized  []byte `json:"-"`
+}
+
+func (m *SerializedNetAddressT) Reset()         { *m = SerializedNetAddressT{} }
+func (m *SerializedNetAddressT) String() string { return proto.CompactTextString(m) }
+func (*SerializedNetAddressT) ProtoMessage()    {}
+
+func (m *SerializedNetAddressT) GetSerializedAddress() []byte {
+	if m != nil {
+		return m.SerializedAddress
+	}
+	return nil
+}
+
+type CBidirMsg_RelayInfo struct {
+	Operation               *CBidirMsg_RelayInfo_OperationT `protobuf:"varint,1,req,name=operation,enum=dota.CBidirMsg_RelayInfo_OperationT,def=0" json:"operation,omitempty"`
+	SerializedTargetAddress *SerializedNetAddressT          `protobuf:"bytes,2,opt,name=serializedTargetAddress" json:"serializedTargetAddress,omitempty"`
+	AdditionalHops          *uint32                         `protobuf:"varint,3,opt,name=additionalHops" json:"additionalHops,omitempty"`
+	XXX_unrecognized        []byte                          `json:"-"`
+}
+
+func (m *CBidirMsg_RelayInfo) Reset()         { *m = CBidirMsg_RelayInfo{} }
+func (m *CBidirMsg_RelayInfo) String() string { return proto.CompactTextString(m) }
+func (*CBidirMsg_RelayInfo) ProtoMessage()    {}
+
+const Default_CBidirMsg_RelayInfo_Operation CBidirMsg_RelayInfo_OperationT = CBidirMsg_RelayInfo_RIO_REQUEST_RELAY
+
+func (m *CBidirMsg_RelayInfo) GetOperation() CBidirMsg_RelayInfo_OperationT {
+	if m != nil && m.Operation != nil {
+		return *m.Operation
+	}
+	return Default_CBidirMsg_RelayInfo_Operation
+}
+
+func (m *CBidirMsg_RelayInfo) GetSerializedTargetAddress() *SerializedNetAddressT {
+	if m != nil {
+		return m.SerializedTargetAddress
+	}
+	return nil
+}
+
+func (m *CBidirMsg_RelayInfo) GetAdditionalHops() uint32 {
+	if m != nil && m.AdditionalHops != nil {
+		return *m.AdditionalHops
+	}
+	return 0
+}
+
+type SignedPayloadT struct {
+	PayloadData       []byte  `protobuf:"bytes,1,req,name=payloadData" json:"payloadData,omitempty"`
+	Signature         *uint32 `protobuf:"varint,2,req,name=signature" json:"signature,omitempty"`
+	BPayloadEncrypted *bool   `protobuf:"varint,3,req,name=bPayloadEncrypted" json:"bPayloadEncrypted,omitempty"`
+	XXX_unrecognized  []byte  `json:"-"`
+}
+
+func (m *SignedPayloadT) Reset()         { *m = SignedPayloadT{} }
+func (m *SignedPayloadT) String() string { return proto.CompactTextString(m) }
+func (*SignedPayloadT) ProtoMessage()    {}
+
+func (m *SignedPayloadT) GetPayloadData() []byte {
+	if m != nil {
+		return m.PayloadData
+	}
+	return nil
+}
+
+func (m *SignedPayloadT) GetSignature() uint32 {
+	if m != nil && m.Signature != nil {
+		return *m.Signature
+	}
+	return 0
+}
+
+func (m *SignedPayloadT) GetBPayloadEncrypted() bool {
+	if m != nil && m.BPayloadEncrypted != nil {
+		return *m.BPayloadEncrypted
+	}
+	return false
+}
+
+type CBidirMsg_RelayPacket struct {
+	Prevhopcount     *uint32                                            `protobuf:"varint,1,req,name=prevhopcount" json:"prevhopcount,omitempty"`
+	OriginalSender   *SerializedNetAddressT                             `protobuf:"bytes,2,req,name=originalSender" json:"originalSender,omitempty"`
+	SignedPayload    *SignedPayloadT                                    `protobuf:"bytes,3,req,name=signedPayload" json:"signedPayload,omitempty"`
+	RecipientList    []*CBidirMsg_RelayPacket_SignedDestinationAddressT `protobuf:"bytes,4,rep,name=recipientList" json:"recipientList,omitempty"`
+	XXX_unrecognized []byte                                             `json:"-"`
+}
+
+func (m *CBidirMsg_RelayPacket) Reset()         { *m = CBidirMsg_RelayPacket{} }
+func (m *CBidirMsg_RelayPacket) String() string { return proto.CompactTextString(m) }
+func (*CBidirMsg_RelayPacket) ProtoMessage()    {}
+
+func (m *CBidirMsg_RelayPacket) GetPrevhopcount() uint32 {
+	if m != nil && m.Prevhopcount != nil {
+		return *m.Prevhopcount
+	}
+	return 0
+}
+
+func (m *CBidirMsg_RelayPacket) GetOriginalSender() *SerializedNetAddressT {
+	if m != nil {
+		return m.OriginalSender
+	}
+	return nil
+}
+
+func (m *CBidirMsg_RelayPacket) GetSignedPayload() *SignedPayloadT {
+	if m != nil {
+		return m.SignedPayload
+	}
+	return nil
+}
+
+func (m *CBidirMsg_RelayPacket) GetRecipientList() []*CBidirMsg_RelayPacket_SignedDestinationAddressT {
+	if m != nil {
+		return m.RecipientList
+	}
+	return nil
+}
+
+type CBidirMsg_RelayPacket_SignedDestinationAddressT struct {
+	SerializedAddr      *SerializedNetAddressT `protobuf:"bytes,1,req,name=serializedAddr" json:"serializedAddr,omitempty"`
+	Signature           *uint32                `protobuf:"varint,2,req,name=signature" json:"signature,omitempty"`
+	EncryptedPayloadKey []byte                 `protobuf:"bytes,3,opt,name=encryptedPayloadKey" json:"encryptedPayloadKey,omitempty"`
+	XXX_unrecognized    []byte                 `json:"-"`
+}
+
+func (m *CBidirMsg_RelayPacket_SignedDestinationAddressT) Reset() {
+	*m = CBidirMsg_RelayPacket_SignedDestinationAddressT{}
+}
+func (m *CBidirMsg_RelayPacket_SignedDestinationAddressT) String() string {
+	return proto.CompactTextString(m)
+}
+func (*CBidirMsg_RelayPacket_SignedDestinationAddressT) ProtoMessage() {}
+
+func (m *CBidirMsg_RelayPacket_SignedDestinationAddressT) GetSerializedAddr() *SerializedNetAddressT {
+	if m != nil {
+		return m.SerializedAddr
+	}
+	return nil
+}
+
+func (m *CBidirMsg_RelayPacket_SignedDestinationAddressT) GetSignature() uint32 {
+	if m != nil && m.Signature != nil {
+		return *m.Signature
+	}
+	return 0
+}
+
+func (m *CBidirMsg_RelayPacket_SignedDestinationAddressT) GetEncryptedPayloadKey() []byte {
+	if m != nil {
+		return m.EncryptedPayloadKey
+	}
+	return nil
+}
+
 func init() {
 	proto.RegisterEnum("dota.CLC_Messages", CLC_Messages_name, CLC_Messages_value)
 	proto.RegisterEnum("dota.SVC_Messages", SVC_Messages_name, SVC_Messages_value)
@@ -2493,4 +2767,6 @@ func init() {
 	proto.RegisterEnum("dota.DIALOG_TYPE", DIALOG_TYPE_name, DIALOG_TYPE_value)
 	proto.RegisterEnum("dota.SVC_Messages_LowFrequency", SVC_Messages_LowFrequency_name, SVC_Messages_LowFrequency_value)
 	proto.RegisterEnum("dota.Bidirectional_Messages", Bidirectional_Messages_name, Bidirectional_Messages_value)
+	proto.RegisterEnum("dota.Bidirectional_Messages_LowFrequency", Bidirectional_Messages_LowFrequency_name, Bidirectional_Messages_LowFrequency_value)
+	proto.RegisterEnum("dota.CBidirMsg_RelayInfo_OperationT", CBidirMsg_RelayInfo_OperationT_name, CBidirMsg_RelayInfo_OperationT_value)
 }
