@@ -1,14 +1,50 @@
 package manta
 
 import (
+	"os"
 	"testing"
 
 	"github.com/dotabuff/manta/dota"
+	"github.com/golang/protobuf/proto"
 	"github.com/stretchr/testify/assert"
 )
 
 func init() {
 	debugMode = true
+}
+
+func TestDumpEverything(t *testing.T) {
+	t.Skip()
+
+	assert := assert.New(t)
+
+	buf := mustGetReplayData("1560315800", "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1560315800.dem")
+	parser, err := NewParser(buf)
+	if err != nil {
+		t.Fatalf("unable to instantiate parser: %s", err)
+	}
+
+	msgNums := make(map[int32]int)
+
+	parser.Callbacks.all = func(t int32, m proto.Message) {
+		dirName, ok := packetNames[t]
+		if !ok {
+			dirName = _sprintf("type_%d", t)
+		}
+		dir := _sprintf("everything/1560315800/%s", dirName)
+		os.MkdirAll("fixtures/"+dir, 0755)
+
+		if _, ok := msgNums[t]; !ok {
+			msgNums[t] = 0
+		}
+		msgNums[t]++
+
+		fileName := _sprintf("%s/tick_%05d_msg_%05d", dir, parser.Tick, msgNums[t])
+		_dump_fixture(fileName, []byte(_sdump(m)))
+	}
+
+	err = parser.Start()
+	assert.Nil(err)
 }
 
 // Simply tests that we can read the outer structure of a real match
