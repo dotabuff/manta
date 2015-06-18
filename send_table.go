@@ -40,25 +40,53 @@ func (ts *sendTables) getTableByName(name string) (*sendTable, bool) {
 
 // Represents a single send table.
 type sendTable struct {
-	index    int32
-	name     string
-	unknown2 int32
-	props    []*sendProp
+	index   int32
+	name    string
+	version int32
+	props   []*sendProp
 }
 
 // Represents a property in a send table.
 type sendProp struct {
-	dtIndex   int32
-	dtName    string
-	varIndex  int32
-	varName   string
-	lowValue  *float32
-	highValue *float32
-	unknown3  *int32
-	unknown6  *int32
-	unknown7  *int32
-	unknown8  *int32
-	unknown9  int32
+	dtIndex                int32
+	dtName                 string
+	varIndex               int32
+	varName                string
+	bitCount               *int32
+	lowValue               *float32
+	highValue              *float32
+	encodeFlags            *int32
+	fieldSerializerIndex   *int32
+	fieldSerializerName    *string
+	fieldSerializerVersion *int32
+	sendNodeIndex          int32
+	sendNodeName           string
+}
+
+func (p *sendProp) Describe() string {
+	out := _sprintf("type:%s(%d) name:%s(%d) sendNode: %s(%d)",
+		p.dtName, p.dtIndex, p.varName, p.varIndex, p.sendNodeName, p.sendNodeIndex)
+
+	if p.fieldSerializerIndex != nil {
+		out += _sprintf(" serializer:%s(%d)", *p.fieldSerializerName, *p.fieldSerializerIndex)
+	}
+
+	if p.bitCount != nil {
+		out += _sprintf(" bitCount:%d", *p.bitCount)
+	}
+	if p.lowValue != nil {
+		out += _sprintf(" lowValue:%f", *p.lowValue)
+	}
+	if p.highValue != nil {
+		out += _sprintf(" highValue:%f", *p.highValue)
+	}
+	if p.encodeFlags != nil {
+		out += _sprintf(" encodeFlags:%d", *p.encodeFlags)
+	}
+	if p.fieldSerializerVersion != nil {
+		out += _sprintf(" fieldSerVer:%d", *p.fieldSerializerVersion)
+	}
+	return out
 }
 
 // Parses a CDemoSendTables buffer, producing a sendTables object.
@@ -72,120 +100,59 @@ func parseSendTables(m *dota.CDemoSendTables) (*sendTables, error) {
 		_panicf("expected %d additional bytes, got %d", size, r.remBytes())
 	}
 
-	// The rest of the buffer contains a repeated structure where each entry
-	// contains a type (varint), size (varint) and buffer of the given size.
-	//
-	// So far we've encountered three types of packets:
-	//
-	// - Type 10 appears to be a SendTable. It has a string index, an unknown
-	//   field (probably flags), and a repeating list of property indexes.
-	//   This is encoded as a protobuf message.
-	//
-	// - Type 18 is a string, which appears to be indexed by the nature order
-	//   of items in the message.
-	//
-	// - Type 26 appears to be a SendProp. It has 9 fields, most of which are
-	//   optional. This is encoded as a protobuf message. Field descriptions:
-	//
-	//   - The first field (a varint) contains the index of a string that
-	//     represents the type (ex. "Vector", "bool", "int32", "MoveCollide_t",
-	//     "CHandle< CBaseCombatWeapon >", etc...)
-	//
-	//   - The second field (also a varint) contains the index of a string that
-	//     represents the name of the field (ex. "m_vecSpecifiedSurroundingMaxs",
-	//     "m_bSimulatedEveryTick", "m_MoveCollide", "m_fEffects", etc...)
-	//
-	//   - The third field appears to be bit size, but we're not sure quite yet.
-	//
-	//   - The fourth and fifth fields appear to be lowValue and highValue.
-	//
-	//   - The 6th, 7th, and 8th fields are usually not present. We're not yet
-	//     sure what they are used for.
-	//
-	//   - The 9th field (a varint) contains the index of a string that **MIGHT**
-	//     represent a base type, or relation of some kind. Rationale:
-	//
-	//     - All fields have a 9th field
-	//     - All entries in the 9th field correspond to an indexed string.
-	//     - Most values for the 9th field are grouped by type (ex. most int32's
-	//       share the same value for field 9).
-	//
-	//     It's also possible that the 9th field contains bitmasked flags.
-	//
-
-	wireTables := make([]*wireSendTable, 0)
-	wireProps := make([]*wireSendProp, 0)
-	wireStrings := make([]string, 0)
-
-	for i := 0; r.remBytes() > 0; i++ {
-		// Read the type
-		t := r.readVarUint32()
-
-		// Then the length-prefixed buffer
-		size := int(r.readVarUint32())
-		buf := r.readBytes(size)
-
-		// Handle the message based on type
-		switch t {
-		case 10:
-			// Type 10 appears to be a SendTable-like thing.
-			o := &wireSendTable{}
-			if err := proto.Unmarshal(buf, o); err != nil {
-				_debugf("unable to unmarshal a thing10: %s", err)
-				continue
-			}
-			wireTables = append(wireTables, o)
-
-		case 18:
-			// Type 18 is an indexed string.
-			wireStrings = append(wireStrings, string(buf))
-
-		case 26:
-			// Type 26 appears to be a SendProp-like thing.
-			o := &wireSendProp{}
-			if err := proto.Unmarshal(buf, o); err != nil {
-				_debugf("unable to unmarshal a thing10: %s", err)
-				continue
-			}
-			wireProps = append(wireProps, o)
-
-		default:
-			_panicf("unknown type %d", t)
-		}
+	// Read the rest of the buffer as a CSVCMsg_FlattenedSerializer.
+	buf := r.readBytes(size)
+	msg := &dota.CSVCMsg_FlattenedSerializer{}
+	if err := proto.Unmarshal(buf, msg); err != nil {
+		_panicf("cannot decode proto: %s", err)
 	}
 
 	// Create a list of sendProps
 	props := make([]*sendProp, 0)
-	for _, o := range wireProps {
+	for _, o := range msg.GetFields() {
 		p := &sendProp{
-			dtIndex:   o.GetTypeIndex(),
-			dtName:    wireStrings[int(o.GetTypeIndex())],
-			varIndex:  o.GetVarIndex(),
-			varName:   wireStrings[int(o.GetVarIndex())],
-			lowValue:  o.LowValue,
-			highValue: o.HighValue,
-			unknown3:  o.Unknown3,
-			unknown6:  o.Unknown6,
-			unknown7:  o.Unknown7,
-			unknown8:  o.Unknown8,
-			unknown9:  o.GetUnknown9(),
+			dtIndex:                o.GetVarTypeSym(),
+			dtName:                 msg.GetSymbols()[o.GetVarTypeSym()],
+			varIndex:               o.GetVarNameSym(),
+			varName:                msg.GetSymbols()[o.GetVarNameSym()],
+			bitCount:               o.BitCount,
+			lowValue:               o.LowValue,
+			highValue:              o.HighValue,
+			encodeFlags:            o.EncodeFlags,
+			fieldSerializerVersion: o.FieldSerializerVersion,
+			sendNodeIndex:          o.GetSendNodeSym(),
+			sendNodeName:           msg.GetSymbols()[o.GetSendNodeSym()],
 		}
+
+		if o.FieldSerializerNameSym != nil {
+			p.fieldSerializerIndex = o.FieldSerializerNameSym
+			p.fieldSerializerName = proto.String(msg.GetSymbols()[o.GetFieldSerializerNameSym()])
+		}
+
 		props = append(props, p)
 	}
 
-	// Create a list of sendTables
+	// Create a map of sendTables
 	tables := make(map[string]*sendTable)
-	for _, o := range wireTables {
+	for _, o := range msg.GetSerializers() {
 		t := &sendTable{
-			index:    o.GetIndex(),
-			name:     wireStrings[int(o.GetIndex())],
-			unknown2: o.GetUnknown2(),
-			props:    make([]*sendProp, len(o.GetProperties())),
+			index:   o.GetSerializerNameSym(),
+			name:    msg.GetSymbols()[o.GetSerializerNameSym()],
+			version: o.GetSerializerVersion(),
+			props:   make([]*sendProp, len(o.GetFieldsIndex())),
 		}
-		for i, pid := range o.GetProperties() {
+		for i, pid := range o.GetFieldsIndex() {
 			t.props[i] = props[int(pid)]
 		}
 		tables[t.name] = t
+
+		/*
+			_debugf("table %d (%s) version %d", t.index, t.name, t.version)
+			for i, p := range t.props {
+				_debugf(" --> prop %d %+s", i, p.Describe())
+			}
+			_debugf("----")
+		*/
 	}
 
 	// Return a sendTables object

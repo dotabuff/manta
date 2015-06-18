@@ -44,9 +44,5 @@ gen-game-events:
 gen-message-lookup:
 	go run gen/message_lookup.go dota message_lookup.go
 
-gen-wire-proto:
-	protoc --go_out=. wire.proto
-	sed -i 's/Wire/wire/g' wire.pb.go
-
 sync-replays:
 	s3cmd --region=us-west-2 sync ./replays/*.dem s3://manta.dotabuff/
