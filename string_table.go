@@ -40,7 +40,6 @@ type stringTable struct {
 	index             int32
 	name              string
 	items             map[int32]*stringTableItem
-	maxEntries        int32
 	userDataFixedSize bool
 	userDataSize      int32
 }
@@ -63,13 +62,12 @@ func (p *Parser) onCDemoStringTables(m *dota.CDemoStringTables) error {
 // Internal callback for CSVCMsg_CreateStringTable.
 // XXX TODO: This is currently using an artificial, internally crafted message.
 // This should be replaced with the real message once we have updated protos.
-func (p *Parser) onCSVCMsg_CreateStringTable(m *wireCreateStringTable) error {
+func (p *Parser) onCSVCMsg_CreateStringTable(m *dota.CSVCMsg_CreateStringTable) error {
 	// Create a new string table at the next index position
 	t := &stringTable{
 		index:             p.stringTables.nextIndex,
 		name:              m.GetName(),
 		items:             make(map[int32]*stringTableItem),
-		maxEntries:        m.GetMaxEntries(),
 		userDataFixedSize: m.GetUserDataFixedSize(),
 		userDataSize:      m.GetUserDataSize(),
 	}
@@ -87,7 +85,7 @@ func (p *Parser) onCSVCMsg_CreateStringTable(m *wireCreateStringTable) error {
 	}
 
 	// Parse the items out of the string table data
-	items := parseStringTable(buf, m.GetMaxEntries(), t.userDataFixedSize, t.userDataSize)
+	items := parseStringTable(buf, m.GetNumEntries(), t.userDataFixedSize, t.userDataSize)
 
 	// Insert the items into the table
 	for _, item := range items {

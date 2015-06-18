@@ -7,8 +7,6 @@ package dota
 import proto "github.com/golang/protobuf/proto"
 import math "math"
 
-// discarding unused import google_protobuf "github.com/dotabuff/manta/dota/google/protobuf"
-
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
 var _ = math.Inf
@@ -16,41 +14,47 @@ var _ = math.Inf
 type EBaseUserMessages int32
 
 const (
-	EBaseUserMessages_UM_AchievementEvent        EBaseUserMessages = 101
-	EBaseUserMessages_UM_CloseCaption            EBaseUserMessages = 102
-	EBaseUserMessages_UM_CloseCaptionDirect      EBaseUserMessages = 103
-	EBaseUserMessages_UM_CurrentTimescale        EBaseUserMessages = 104
-	EBaseUserMessages_UM_DesiredTimescale        EBaseUserMessages = 105
-	EBaseUserMessages_UM_Fade                    EBaseUserMessages = 106
-	EBaseUserMessages_UM_GameTitle               EBaseUserMessages = 107
-	EBaseUserMessages_UM_HintText                EBaseUserMessages = 109
-	EBaseUserMessages_UM_HudMsg                  EBaseUserMessages = 110
-	EBaseUserMessages_UM_HudText                 EBaseUserMessages = 111
-	EBaseUserMessages_UM_KeyHintText             EBaseUserMessages = 112
-	EBaseUserMessages_UM_ColoredText             EBaseUserMessages = 113
-	EBaseUserMessages_UM_RequestState            EBaseUserMessages = 114
-	EBaseUserMessages_UM_ResetHUD                EBaseUserMessages = 115
-	EBaseUserMessages_UM_Rumble                  EBaseUserMessages = 116
-	EBaseUserMessages_UM_SayText                 EBaseUserMessages = 117
-	EBaseUserMessages_UM_SayText2                EBaseUserMessages = 118
-	EBaseUserMessages_UM_SayTextChannel          EBaseUserMessages = 119
-	EBaseUserMessages_UM_Shake                   EBaseUserMessages = 120
-	EBaseUserMessages_UM_ShakeDir                EBaseUserMessages = 121
-	EBaseUserMessages_UM_TextMsg                 EBaseUserMessages = 124
-	EBaseUserMessages_UM_ScreenTilt              EBaseUserMessages = 125
-	EBaseUserMessages_UM_Train                   EBaseUserMessages = 126
-	EBaseUserMessages_UM_VGUIMenu                EBaseUserMessages = 127
-	EBaseUserMessages_UM_VoiceMask               EBaseUserMessages = 128
-	EBaseUserMessages_UM_VoiceSubtitle           EBaseUserMessages = 129
-	EBaseUserMessages_UM_SendAudio               EBaseUserMessages = 130
-	EBaseUserMessages_UM_ItemPickup              EBaseUserMessages = 131
-	EBaseUserMessages_UM_AmmoDenied              EBaseUserMessages = 132
-	EBaseUserMessages_UM_CrosshairAngle          EBaseUserMessages = 133
-	EBaseUserMessages_UM_ShowMenu                EBaseUserMessages = 134
-	EBaseUserMessages_UM_CreditsMsg              EBaseUserMessages = 135
-	EBaseUserMessages_UM_CloseCaptionPlaceholder EBaseUserMessages = 142
-	EBaseUserMessages_UM_CameraTransition        EBaseUserMessages = 143
-	EBaseUserMessages_UM_MAX_BASE                EBaseUserMessages = 200
+	EBaseUserMessages_UM_AchievementEvent                      EBaseUserMessages = 101
+	EBaseUserMessages_UM_CloseCaption                          EBaseUserMessages = 102
+	EBaseUserMessages_UM_CloseCaptionDirect                    EBaseUserMessages = 103
+	EBaseUserMessages_UM_CurrentTimescale                      EBaseUserMessages = 104
+	EBaseUserMessages_UM_DesiredTimescale                      EBaseUserMessages = 105
+	EBaseUserMessages_UM_Fade                                  EBaseUserMessages = 106
+	EBaseUserMessages_UM_GameTitle                             EBaseUserMessages = 107
+	EBaseUserMessages_UM_HintText                              EBaseUserMessages = 109
+	EBaseUserMessages_UM_HudMsg                                EBaseUserMessages = 110
+	EBaseUserMessages_UM_HudText                               EBaseUserMessages = 111
+	EBaseUserMessages_UM_KeyHintText                           EBaseUserMessages = 112
+	EBaseUserMessages_UM_ColoredText                           EBaseUserMessages = 113
+	EBaseUserMessages_UM_RequestState                          EBaseUserMessages = 114
+	EBaseUserMessages_UM_ResetHUD                              EBaseUserMessages = 115
+	EBaseUserMessages_UM_Rumble                                EBaseUserMessages = 116
+	EBaseUserMessages_UM_SayText                               EBaseUserMessages = 117
+	EBaseUserMessages_UM_SayText2                              EBaseUserMessages = 118
+	EBaseUserMessages_UM_SayTextChannel                        EBaseUserMessages = 119
+	EBaseUserMessages_UM_Shake                                 EBaseUserMessages = 120
+	EBaseUserMessages_UM_ShakeDir                              EBaseUserMessages = 121
+	EBaseUserMessages_UM_TextMsg                               EBaseUserMessages = 124
+	EBaseUserMessages_UM_ScreenTilt                            EBaseUserMessages = 125
+	EBaseUserMessages_UM_Train                                 EBaseUserMessages = 126
+	EBaseUserMessages_UM_VGUIMenu                              EBaseUserMessages = 127
+	EBaseUserMessages_UM_VoiceMask                             EBaseUserMessages = 128
+	EBaseUserMessages_UM_VoiceSubtitle                         EBaseUserMessages = 129
+	EBaseUserMessages_UM_SendAudio                             EBaseUserMessages = 130
+	EBaseUserMessages_UM_ItemPickup                            EBaseUserMessages = 131
+	EBaseUserMessages_UM_AmmoDenied                            EBaseUserMessages = 132
+	EBaseUserMessages_UM_CrosshairAngle                        EBaseUserMessages = 133
+	EBaseUserMessages_UM_ShowMenu                              EBaseUserMessages = 134
+	EBaseUserMessages_UM_CreditsMsg                            EBaseUserMessages = 135
+	EBaseUserMessages_UM_CloseCaptionPlaceholder               EBaseUserMessages = 142
+	EBaseUserMessages_UM_CameraTransition                      EBaseUserMessages = 143
+	EBaseUserMessages_UM_AudioParameter                        EBaseUserMessages = 144
+	EBaseUserMessages_UM_ParticleManager                       EBaseUserMessages = 145
+	EBaseUserMessages_UM_HudError                              EBaseUserMessages = 146
+	EBaseUserMessages_UM_CustomGameEvent_ClientToServer        EBaseUserMessages = 147
+	EBaseUserMessages_UM_CustomGameEvent_ServerToClient        EBaseUserMessages = 148
+	EBaseUserMessages_UM_TrackedControllerInput_ClientToServer EBaseUserMessages = 149
+	EBaseUserMessages_UM_MAX_BASE                              EBaseUserMessages = 200
 )
 
 var EBaseUserMessages_name = map[int32]string{
@@ -88,44 +92,56 @@ var EBaseUserMessages_name = map[int32]string{
 	135: "UM_CreditsMsg",
 	142: "UM_CloseCaptionPlaceholder",
 	143: "UM_CameraTransition",
+	144: "UM_AudioParameter",
+	145: "UM_ParticleManager",
+	146: "UM_HudError",
+	147: "UM_CustomGameEvent_ClientToServer",
+	148: "UM_CustomGameEvent_ServerToClient",
+	149: "UM_TrackedControllerInput_ClientToServer",
 	200: "UM_MAX_BASE",
 }
 var EBaseUserMessages_value = map[string]int32{
-	"UM_AchievementEvent":        101,
-	"UM_CloseCaption":            102,
-	"UM_CloseCaptionDirect":      103,
-	"UM_CurrentTimescale":        104,
-	"UM_DesiredTimescale":        105,
-	"UM_Fade":                    106,
-	"UM_GameTitle":               107,
-	"UM_HintText":                109,
-	"UM_HudMsg":                  110,
-	"UM_HudText":                 111,
-	"UM_KeyHintText":             112,
-	"UM_ColoredText":             113,
-	"UM_RequestState":            114,
-	"UM_ResetHUD":                115,
-	"UM_Rumble":                  116,
-	"UM_SayText":                 117,
-	"UM_SayText2":                118,
-	"UM_SayTextChannel":          119,
-	"UM_Shake":                   120,
-	"UM_ShakeDir":                121,
-	"UM_TextMsg":                 124,
-	"UM_ScreenTilt":              125,
-	"UM_Train":                   126,
-	"UM_VGUIMenu":                127,
-	"UM_VoiceMask":               128,
-	"UM_VoiceSubtitle":           129,
-	"UM_SendAudio":               130,
-	"UM_ItemPickup":              131,
-	"UM_AmmoDenied":              132,
-	"UM_CrosshairAngle":          133,
-	"UM_ShowMenu":                134,
-	"UM_CreditsMsg":              135,
-	"UM_CloseCaptionPlaceholder": 142,
-	"UM_CameraTransition":        143,
-	"UM_MAX_BASE":                200,
+	"UM_AchievementEvent":                      101,
+	"UM_CloseCaption":                          102,
+	"UM_CloseCaptionDirect":                    103,
+	"UM_CurrentTimescale":                      104,
+	"UM_DesiredTimescale":                      105,
+	"UM_Fade":                                  106,
+	"UM_GameTitle":                             107,
+	"UM_HintText":                              109,
+	"UM_HudMsg":                                110,
+	"UM_HudText":                               111,
+	"UM_KeyHintText":                           112,
+	"UM_ColoredText":                           113,
+	"UM_RequestState":                          114,
+	"UM_ResetHUD":                              115,
+	"UM_Rumble":                                116,
+	"UM_SayText":                               117,
+	"UM_SayText2":                              118,
+	"UM_SayTextChannel":                        119,
+	"UM_Shake":                                 120,
+	"UM_ShakeDir":                              121,
+	"UM_TextMsg":                               124,
+	"UM_ScreenTilt":                            125,
+	"UM_Train":                                 126,
+	"UM_VGUIMenu":                              127,
+	"UM_VoiceMask":                             128,
+	"UM_VoiceSubtitle":                         129,
+	"UM_SendAudio":                             130,
+	"UM_ItemPickup":                            131,
+	"UM_AmmoDenied":                            132,
+	"UM_CrosshairAngle":                        133,
+	"UM_ShowMenu":                              134,
+	"UM_CreditsMsg":                            135,
+	"UM_CloseCaptionPlaceholder":               142,
+	"UM_CameraTransition":                      143,
+	"UM_AudioParameter":                        144,
+	"UM_ParticleManager":                       145,
+	"UM_HudError":                              146,
+	"UM_CustomGameEvent_ClientToServer":        147,
+	"UM_CustomGameEvent_ServerToClient":        148,
+	"UM_TrackedControllerInput_ClientToServer": 149,
+	"UM_MAX_BASE":                              200,
 }
 
 func (x EBaseUserMessages) Enum() *EBaseUserMessages {
@@ -229,6 +245,75 @@ func (x *ERollType) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	*x = ERollType(value)
+	return nil
+}
+
+type PARTICLE_MESSAGE int32
+
+const (
+	PARTICLE_MESSAGE_GAME_PARTICLE_MANAGER_EVENT_CREATE                          PARTICLE_MESSAGE = 0
+	PARTICLE_MESSAGE_GAME_PARTICLE_MANAGER_EVENT_UPDATE                          PARTICLE_MESSAGE = 1
+	PARTICLE_MESSAGE_GAME_PARTICLE_MANAGER_EVENT_UPDATE_FORWARD                  PARTICLE_MESSAGE = 2
+	PARTICLE_MESSAGE_GAME_PARTICLE_MANAGER_EVENT_UPDATE_ORIENTATION              PARTICLE_MESSAGE = 3
+	PARTICLE_MESSAGE_GAME_PARTICLE_MANAGER_EVENT_UPDATE_FALLBACK                 PARTICLE_MESSAGE = 4
+	PARTICLE_MESSAGE_GAME_PARTICLE_MANAGER_EVENT_UPDATE_ENT                      PARTICLE_MESSAGE = 5
+	PARTICLE_MESSAGE_GAME_PARTICLE_MANAGER_EVENT_UPDATE_OFFSET                   PARTICLE_MESSAGE = 6
+	PARTICLE_MESSAGE_GAME_PARTICLE_MANAGER_EVENT_DESTROY                         PARTICLE_MESSAGE = 7
+	PARTICLE_MESSAGE_GAME_PARTICLE_MANAGER_EVENT_DESTROY_INVOLVING               PARTICLE_MESSAGE = 8
+	PARTICLE_MESSAGE_GAME_PARTICLE_MANAGER_EVENT_RELEASE                         PARTICLE_MESSAGE = 9
+	PARTICLE_MESSAGE_GAME_PARTICLE_MANAGER_EVENT_LATENCY                         PARTICLE_MESSAGE = 10
+	PARTICLE_MESSAGE_GAME_PARTICLE_MANAGER_EVENT_SHOULD_DRAW                     PARTICLE_MESSAGE = 11
+	PARTICLE_MESSAGE_GAME_PARTICLE_MANAGER_EVENT_FROZEN                          PARTICLE_MESSAGE = 12
+	PARTICLE_MESSAGE_GAME_PARTICLE_MANAGER_EVENT_CHANGE_CONTROL_POINT_ATTACHMENT PARTICLE_MESSAGE = 13
+)
+
+var PARTICLE_MESSAGE_name = map[int32]string{
+	0:  "GAME_PARTICLE_MANAGER_EVENT_CREATE",
+	1:  "GAME_PARTICLE_MANAGER_EVENT_UPDATE",
+	2:  "GAME_PARTICLE_MANAGER_EVENT_UPDATE_FORWARD",
+	3:  "GAME_PARTICLE_MANAGER_EVENT_UPDATE_ORIENTATION",
+	4:  "GAME_PARTICLE_MANAGER_EVENT_UPDATE_FALLBACK",
+	5:  "GAME_PARTICLE_MANAGER_EVENT_UPDATE_ENT",
+	6:  "GAME_PARTICLE_MANAGER_EVENT_UPDATE_OFFSET",
+	7:  "GAME_PARTICLE_MANAGER_EVENT_DESTROY",
+	8:  "GAME_PARTICLE_MANAGER_EVENT_DESTROY_INVOLVING",
+	9:  "GAME_PARTICLE_MANAGER_EVENT_RELEASE",
+	10: "GAME_PARTICLE_MANAGER_EVENT_LATENCY",
+	11: "GAME_PARTICLE_MANAGER_EVENT_SHOULD_DRAW",
+	12: "GAME_PARTICLE_MANAGER_EVENT_FROZEN",
+	13: "GAME_PARTICLE_MANAGER_EVENT_CHANGE_CONTROL_POINT_ATTACHMENT",
+}
+var PARTICLE_MESSAGE_value = map[string]int32{
+	"GAME_PARTICLE_MANAGER_EVENT_CREATE":                          0,
+	"GAME_PARTICLE_MANAGER_EVENT_UPDATE":                          1,
+	"GAME_PARTICLE_MANAGER_EVENT_UPDATE_FORWARD":                  2,
+	"GAME_PARTICLE_MANAGER_EVENT_UPDATE_ORIENTATION":              3,
+	"GAME_PARTICLE_MANAGER_EVENT_UPDATE_FALLBACK":                 4,
+	"GAME_PARTICLE_MANAGER_EVENT_UPDATE_ENT":                      5,
+	"GAME_PARTICLE_MANAGER_EVENT_UPDATE_OFFSET":                   6,
+	"GAME_PARTICLE_MANAGER_EVENT_DESTROY":                         7,
+	"GAME_PARTICLE_MANAGER_EVENT_DESTROY_INVOLVING":               8,
+	"GAME_PARTICLE_MANAGER_EVENT_RELEASE":                         9,
+	"GAME_PARTICLE_MANAGER_EVENT_LATENCY":                         10,
+	"GAME_PARTICLE_MANAGER_EVENT_SHOULD_DRAW":                     11,
+	"GAME_PARTICLE_MANAGER_EVENT_FROZEN":                          12,
+	"GAME_PARTICLE_MANAGER_EVENT_CHANGE_CONTROL_POINT_ATTACHMENT": 13,
+}
+
+func (x PARTICLE_MESSAGE) Enum() *PARTICLE_MESSAGE {
+	p := new(PARTICLE_MESSAGE)
+	*p = x
+	return p
+}
+func (x PARTICLE_MESSAGE) String() string {
+	return proto.EnumName(PARTICLE_MESSAGE_name, int32(x))
+}
+func (x *PARTICLE_MESSAGE) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(PARTICLE_MESSAGE_value, data, "PARTICLE_MESSAGE")
+	if err != nil {
+		return err
+	}
+	*x = PARTICLE_MESSAGE(value)
 	return nil
 }
 
@@ -848,6 +933,38 @@ func (m *CUserMessageSendAudio) GetStop() bool {
 	return false
 }
 
+type CUserMessageAudioParameter struct {
+	ParameterType    *uint32  `protobuf:"varint,1,opt,name=parameter_type" json:"parameter_type,omitempty"`
+	NameHashCode     *uint32  `protobuf:"varint,2,opt,name=name_hash_code" json:"name_hash_code,omitempty"`
+	Value            *float32 `protobuf:"fixed32,3,opt,name=value" json:"value,omitempty"`
+	XXX_unrecognized []byte   `json:"-"`
+}
+
+func (m *CUserMessageAudioParameter) Reset()         { *m = CUserMessageAudioParameter{} }
+func (m *CUserMessageAudioParameter) String() string { return proto.CompactTextString(m) }
+func (*CUserMessageAudioParameter) ProtoMessage()    {}
+
+func (m *CUserMessageAudioParameter) GetParameterType() uint32 {
+	if m != nil && m.ParameterType != nil {
+		return *m.ParameterType
+	}
+	return 0
+}
+
+func (m *CUserMessageAudioParameter) GetNameHashCode() uint32 {
+	if m != nil && m.NameHashCode != nil {
+		return *m.NameHashCode
+	}
+	return 0
+}
+
+func (m *CUserMessageAudioParameter) GetValue() float32 {
+	if m != nil && m.Value != nil {
+		return *m.Value
+	}
+	return 0
+}
+
 type CUserMessageVoiceMask struct {
 	GamerulesMasks   []uint32 `protobuf:"varint,1,rep,name=gamerules_masks" json:"gamerules_masks,omitempty"`
 	BanMasks         []uint32 `protobuf:"varint,2,rep,name=ban_masks" json:"ban_masks,omitempty"`
@@ -1454,8 +1571,609 @@ func (m *CUserMessageCameraTransition_Transition_DataDriven) GetAttachEntIndex()
 	return 0
 }
 
+type CUserMsg_ParticleManager struct {
+	Type                         *PARTICLE_MESSAGE                                      `protobuf:"varint,1,req,name=type,enum=dota.PARTICLE_MESSAGE,def=0" json:"type,omitempty"`
+	Index                        *uint32                                                `protobuf:"varint,2,req,name=index" json:"index,omitempty"`
+	ReleaseParticleIndex         *CUserMsg_ParticleManager_ReleaseParticleIndex         `protobuf:"bytes,3,opt,name=release_particle_index" json:"release_particle_index,omitempty"`
+	CreateParticle               *CUserMsg_ParticleManager_CreateParticle               `protobuf:"bytes,4,opt,name=create_particle" json:"create_particle,omitempty"`
+	DestroyParticle              *CUserMsg_ParticleManager_DestroyParticle              `protobuf:"bytes,5,opt,name=destroy_particle" json:"destroy_particle,omitempty"`
+	DestroyParticleInvolving     *CUserMsg_ParticleManager_DestroyParticleInvolving     `protobuf:"bytes,6,opt,name=destroy_particle_involving" json:"destroy_particle_involving,omitempty"`
+	UpdateParticle               *CUserMsg_ParticleManager_UpdateParticle               `protobuf:"bytes,7,opt,name=update_particle" json:"update_particle,omitempty"`
+	UpdateParticleFwd            *CUserMsg_ParticleManager_UpdateParticleFwd            `protobuf:"bytes,8,opt,name=update_particle_fwd" json:"update_particle_fwd,omitempty"`
+	UpdateParticleOrient         *CUserMsg_ParticleManager_UpdateParticleOrient         `protobuf:"bytes,9,opt,name=update_particle_orient" json:"update_particle_orient,omitempty"`
+	UpdateParticleFallback       *CUserMsg_ParticleManager_UpdateParticleFallback       `protobuf:"bytes,10,opt,name=update_particle_fallback" json:"update_particle_fallback,omitempty"`
+	UpdateParticleOffset         *CUserMsg_ParticleManager_UpdateParticleOffset         `protobuf:"bytes,11,opt,name=update_particle_offset" json:"update_particle_offset,omitempty"`
+	UpdateParticleEnt            *CUserMsg_ParticleManager_UpdateParticleEnt            `protobuf:"bytes,12,opt,name=update_particle_ent" json:"update_particle_ent,omitempty"`
+	UpdateParticleShouldDraw     *CUserMsg_ParticleManager_UpdateParticleShouldDraw     `protobuf:"bytes,14,opt,name=update_particle_should_draw" json:"update_particle_should_draw,omitempty"`
+	UpdateParticleSetFrozen      *CUserMsg_ParticleManager_UpdateParticleSetFrozen      `protobuf:"bytes,15,opt,name=update_particle_set_frozen" json:"update_particle_set_frozen,omitempty"`
+	ChangeControlPointAttachment *CUserMsg_ParticleManager_ChangeControlPointAttachment `protobuf:"bytes,16,opt,name=change_control_point_attachment" json:"change_control_point_attachment,omitempty"`
+	XXX_unrecognized             []byte                                                 `json:"-"`
+}
+
+func (m *CUserMsg_ParticleManager) Reset()         { *m = CUserMsg_ParticleManager{} }
+func (m *CUserMsg_ParticleManager) String() string { return proto.CompactTextString(m) }
+func (*CUserMsg_ParticleManager) ProtoMessage()    {}
+
+const Default_CUserMsg_ParticleManager_Type PARTICLE_MESSAGE = PARTICLE_MESSAGE_GAME_PARTICLE_MANAGER_EVENT_CREATE
+
+func (m *CUserMsg_ParticleManager) GetType() PARTICLE_MESSAGE {
+	if m != nil && m.Type != nil {
+		return *m.Type
+	}
+	return Default_CUserMsg_ParticleManager_Type
+}
+
+func (m *CUserMsg_ParticleManager) GetIndex() uint32 {
+	if m != nil && m.Index != nil {
+		return *m.Index
+	}
+	return 0
+}
+
+func (m *CUserMsg_ParticleManager) GetReleaseParticleIndex() *CUserMsg_ParticleManager_ReleaseParticleIndex {
+	if m != nil {
+		return m.ReleaseParticleIndex
+	}
+	return nil
+}
+
+func (m *CUserMsg_ParticleManager) GetCreateParticle() *CUserMsg_ParticleManager_CreateParticle {
+	if m != nil {
+		return m.CreateParticle
+	}
+	return nil
+}
+
+func (m *CUserMsg_ParticleManager) GetDestroyParticle() *CUserMsg_ParticleManager_DestroyParticle {
+	if m != nil {
+		return m.DestroyParticle
+	}
+	return nil
+}
+
+func (m *CUserMsg_ParticleManager) GetDestroyParticleInvolving() *CUserMsg_ParticleManager_DestroyParticleInvolving {
+	if m != nil {
+		return m.DestroyParticleInvolving
+	}
+	return nil
+}
+
+func (m *CUserMsg_ParticleManager) GetUpdateParticle() *CUserMsg_ParticleManager_UpdateParticle {
+	if m != nil {
+		return m.UpdateParticle
+	}
+	return nil
+}
+
+func (m *CUserMsg_ParticleManager) GetUpdateParticleFwd() *CUserMsg_ParticleManager_UpdateParticleFwd {
+	if m != nil {
+		return m.UpdateParticleFwd
+	}
+	return nil
+}
+
+func (m *CUserMsg_ParticleManager) GetUpdateParticleOrient() *CUserMsg_ParticleManager_UpdateParticleOrient {
+	if m != nil {
+		return m.UpdateParticleOrient
+	}
+	return nil
+}
+
+func (m *CUserMsg_ParticleManager) GetUpdateParticleFallback() *CUserMsg_ParticleManager_UpdateParticleFallback {
+	if m != nil {
+		return m.UpdateParticleFallback
+	}
+	return nil
+}
+
+func (m *CUserMsg_ParticleManager) GetUpdateParticleOffset() *CUserMsg_ParticleManager_UpdateParticleOffset {
+	if m != nil {
+		return m.UpdateParticleOffset
+	}
+	return nil
+}
+
+func (m *CUserMsg_ParticleManager) GetUpdateParticleEnt() *CUserMsg_ParticleManager_UpdateParticleEnt {
+	if m != nil {
+		return m.UpdateParticleEnt
+	}
+	return nil
+}
+
+func (m *CUserMsg_ParticleManager) GetUpdateParticleShouldDraw() *CUserMsg_ParticleManager_UpdateParticleShouldDraw {
+	if m != nil {
+		return m.UpdateParticleShouldDraw
+	}
+	return nil
+}
+
+func (m *CUserMsg_ParticleManager) GetUpdateParticleSetFrozen() *CUserMsg_ParticleManager_UpdateParticleSetFrozen {
+	if m != nil {
+		return m.UpdateParticleSetFrozen
+	}
+	return nil
+}
+
+func (m *CUserMsg_ParticleManager) GetChangeControlPointAttachment() *CUserMsg_ParticleManager_ChangeControlPointAttachment {
+	if m != nil {
+		return m.ChangeControlPointAttachment
+	}
+	return nil
+}
+
+type CUserMsg_ParticleManager_ReleaseParticleIndex struct {
+	XXX_unrecognized []byte `json:"-"`
+}
+
+func (m *CUserMsg_ParticleManager_ReleaseParticleIndex) Reset() {
+	*m = CUserMsg_ParticleManager_ReleaseParticleIndex{}
+}
+func (m *CUserMsg_ParticleManager_ReleaseParticleIndex) String() string {
+	return proto.CompactTextString(m)
+}
+func (*CUserMsg_ParticleManager_ReleaseParticleIndex) ProtoMessage() {}
+
+type CUserMsg_ParticleManager_CreateParticle struct {
+	ParticleNameIndex *uint64 `protobuf:"fixed64,1,opt,name=particle_name_index" json:"particle_name_index,omitempty"`
+	AttachType        *int32  `protobuf:"varint,2,opt,name=attach_type" json:"attach_type,omitempty"`
+	EntityHandle      *int32  `protobuf:"varint,3,opt,name=entity_handle" json:"entity_handle,omitempty"`
+	XXX_unrecognized  []byte  `json:"-"`
+}
+
+func (m *CUserMsg_ParticleManager_CreateParticle) Reset() {
+	*m = CUserMsg_ParticleManager_CreateParticle{}
+}
+func (m *CUserMsg_ParticleManager_CreateParticle) String() string { return proto.CompactTextString(m) }
+func (*CUserMsg_ParticleManager_CreateParticle) ProtoMessage()    {}
+
+func (m *CUserMsg_ParticleManager_CreateParticle) GetParticleNameIndex() uint64 {
+	if m != nil && m.ParticleNameIndex != nil {
+		return *m.ParticleNameIndex
+	}
+	return 0
+}
+
+func (m *CUserMsg_ParticleManager_CreateParticle) GetAttachType() int32 {
+	if m != nil && m.AttachType != nil {
+		return *m.AttachType
+	}
+	return 0
+}
+
+func (m *CUserMsg_ParticleManager_CreateParticle) GetEntityHandle() int32 {
+	if m != nil && m.EntityHandle != nil {
+		return *m.EntityHandle
+	}
+	return 0
+}
+
+type CUserMsg_ParticleManager_DestroyParticle struct {
+	DestroyImmediately *bool  `protobuf:"varint,1,opt,name=destroy_immediately" json:"destroy_immediately,omitempty"`
+	XXX_unrecognized   []byte `json:"-"`
+}
+
+func (m *CUserMsg_ParticleManager_DestroyParticle) Reset() {
+	*m = CUserMsg_ParticleManager_DestroyParticle{}
+}
+func (m *CUserMsg_ParticleManager_DestroyParticle) String() string { return proto.CompactTextString(m) }
+func (*CUserMsg_ParticleManager_DestroyParticle) ProtoMessage()    {}
+
+func (m *CUserMsg_ParticleManager_DestroyParticle) GetDestroyImmediately() bool {
+	if m != nil && m.DestroyImmediately != nil {
+		return *m.DestroyImmediately
+	}
+	return false
+}
+
+type CUserMsg_ParticleManager_DestroyParticleInvolving struct {
+	DestroyImmediately *bool  `protobuf:"varint,1,opt,name=destroy_immediately" json:"destroy_immediately,omitempty"`
+	EntityHandle       *int32 `protobuf:"varint,3,opt,name=entity_handle" json:"entity_handle,omitempty"`
+	XXX_unrecognized   []byte `json:"-"`
+}
+
+func (m *CUserMsg_ParticleManager_DestroyParticleInvolving) Reset() {
+	*m = CUserMsg_ParticleManager_DestroyParticleInvolving{}
+}
+func (m *CUserMsg_ParticleManager_DestroyParticleInvolving) String() string {
+	return proto.CompactTextString(m)
+}
+func (*CUserMsg_ParticleManager_DestroyParticleInvolving) ProtoMessage() {}
+
+func (m *CUserMsg_ParticleManager_DestroyParticleInvolving) GetDestroyImmediately() bool {
+	if m != nil && m.DestroyImmediately != nil {
+		return *m.DestroyImmediately
+	}
+	return false
+}
+
+func (m *CUserMsg_ParticleManager_DestroyParticleInvolving) GetEntityHandle() int32 {
+	if m != nil && m.EntityHandle != nil {
+		return *m.EntityHandle
+	}
+	return 0
+}
+
+type CUserMsg_ParticleManager_UpdateParticle struct {
+	ControlPoint     *int32      `protobuf:"varint,1,opt,name=control_point" json:"control_point,omitempty"`
+	Position         *CMsgVector `protobuf:"bytes,2,opt,name=position" json:"position,omitempty"`
+	XXX_unrecognized []byte      `json:"-"`
+}
+
+func (m *CUserMsg_ParticleManager_UpdateParticle) Reset() {
+	*m = CUserMsg_ParticleManager_UpdateParticle{}
+}
+func (m *CUserMsg_ParticleManager_UpdateParticle) String() string { return proto.CompactTextString(m) }
+func (*CUserMsg_ParticleManager_UpdateParticle) ProtoMessage()    {}
+
+func (m *CUserMsg_ParticleManager_UpdateParticle) GetControlPoint() int32 {
+	if m != nil && m.ControlPoint != nil {
+		return *m.ControlPoint
+	}
+	return 0
+}
+
+func (m *CUserMsg_ParticleManager_UpdateParticle) GetPosition() *CMsgVector {
+	if m != nil {
+		return m.Position
+	}
+	return nil
+}
+
+type CUserMsg_ParticleManager_UpdateParticleFwd struct {
+	ControlPoint     *int32      `protobuf:"varint,1,opt,name=control_point" json:"control_point,omitempty"`
+	Forward          *CMsgVector `protobuf:"bytes,2,opt,name=forward" json:"forward,omitempty"`
+	XXX_unrecognized []byte      `json:"-"`
+}
+
+func (m *CUserMsg_ParticleManager_UpdateParticleFwd) Reset() {
+	*m = CUserMsg_ParticleManager_UpdateParticleFwd{}
+}
+func (m *CUserMsg_ParticleManager_UpdateParticleFwd) String() string {
+	return proto.CompactTextString(m)
+}
+func (*CUserMsg_ParticleManager_UpdateParticleFwd) ProtoMessage() {}
+
+func (m *CUserMsg_ParticleManager_UpdateParticleFwd) GetControlPoint() int32 {
+	if m != nil && m.ControlPoint != nil {
+		return *m.ControlPoint
+	}
+	return 0
+}
+
+func (m *CUserMsg_ParticleManager_UpdateParticleFwd) GetForward() *CMsgVector {
+	if m != nil {
+		return m.Forward
+	}
+	return nil
+}
+
+type CUserMsg_ParticleManager_UpdateParticleOrient struct {
+	ControlPoint     *int32      `protobuf:"varint,1,opt,name=control_point" json:"control_point,omitempty"`
+	Forward          *CMsgVector `protobuf:"bytes,2,opt,name=forward" json:"forward,omitempty"`
+	Right            *CMsgVector `protobuf:"bytes,3,opt,name=right" json:"right,omitempty"`
+	Up               *CMsgVector `protobuf:"bytes,4,opt,name=up" json:"up,omitempty"`
+	XXX_unrecognized []byte      `json:"-"`
+}
+
+func (m *CUserMsg_ParticleManager_UpdateParticleOrient) Reset() {
+	*m = CUserMsg_ParticleManager_UpdateParticleOrient{}
+}
+func (m *CUserMsg_ParticleManager_UpdateParticleOrient) String() string {
+	return proto.CompactTextString(m)
+}
+func (*CUserMsg_ParticleManager_UpdateParticleOrient) ProtoMessage() {}
+
+func (m *CUserMsg_ParticleManager_UpdateParticleOrient) GetControlPoint() int32 {
+	if m != nil && m.ControlPoint != nil {
+		return *m.ControlPoint
+	}
+	return 0
+}
+
+func (m *CUserMsg_ParticleManager_UpdateParticleOrient) GetForward() *CMsgVector {
+	if m != nil {
+		return m.Forward
+	}
+	return nil
+}
+
+func (m *CUserMsg_ParticleManager_UpdateParticleOrient) GetRight() *CMsgVector {
+	if m != nil {
+		return m.Right
+	}
+	return nil
+}
+
+func (m *CUserMsg_ParticleManager_UpdateParticleOrient) GetUp() *CMsgVector {
+	if m != nil {
+		return m.Up
+	}
+	return nil
+}
+
+type CUserMsg_ParticleManager_UpdateParticleFallback struct {
+	ControlPoint     *int32      `protobuf:"varint,1,opt,name=control_point" json:"control_point,omitempty"`
+	Position         *CMsgVector `protobuf:"bytes,2,opt,name=position" json:"position,omitempty"`
+	XXX_unrecognized []byte      `json:"-"`
+}
+
+func (m *CUserMsg_ParticleManager_UpdateParticleFallback) Reset() {
+	*m = CUserMsg_ParticleManager_UpdateParticleFallback{}
+}
+func (m *CUserMsg_ParticleManager_UpdateParticleFallback) String() string {
+	return proto.CompactTextString(m)
+}
+func (*CUserMsg_ParticleManager_UpdateParticleFallback) ProtoMessage() {}
+
+func (m *CUserMsg_ParticleManager_UpdateParticleFallback) GetControlPoint() int32 {
+	if m != nil && m.ControlPoint != nil {
+		return *m.ControlPoint
+	}
+	return 0
+}
+
+func (m *CUserMsg_ParticleManager_UpdateParticleFallback) GetPosition() *CMsgVector {
+	if m != nil {
+		return m.Position
+	}
+	return nil
+}
+
+type CUserMsg_ParticleManager_UpdateParticleOffset struct {
+	ControlPoint     *int32      `protobuf:"varint,1,opt,name=control_point" json:"control_point,omitempty"`
+	OriginOffset     *CMsgVector `protobuf:"bytes,2,opt,name=origin_offset" json:"origin_offset,omitempty"`
+	XXX_unrecognized []byte      `json:"-"`
+}
+
+func (m *CUserMsg_ParticleManager_UpdateParticleOffset) Reset() {
+	*m = CUserMsg_ParticleManager_UpdateParticleOffset{}
+}
+func (m *CUserMsg_ParticleManager_UpdateParticleOffset) String() string {
+	return proto.CompactTextString(m)
+}
+func (*CUserMsg_ParticleManager_UpdateParticleOffset) ProtoMessage() {}
+
+func (m *CUserMsg_ParticleManager_UpdateParticleOffset) GetControlPoint() int32 {
+	if m != nil && m.ControlPoint != nil {
+		return *m.ControlPoint
+	}
+	return 0
+}
+
+func (m *CUserMsg_ParticleManager_UpdateParticleOffset) GetOriginOffset() *CMsgVector {
+	if m != nil {
+		return m.OriginOffset
+	}
+	return nil
+}
+
+type CUserMsg_ParticleManager_UpdateParticleEnt struct {
+	ControlPoint     *int32      `protobuf:"varint,1,opt,name=control_point" json:"control_point,omitempty"`
+	EntityHandle     *int32      `protobuf:"varint,2,opt,name=entity_handle" json:"entity_handle,omitempty"`
+	AttachType       *int32      `protobuf:"varint,3,opt,name=attach_type" json:"attach_type,omitempty"`
+	Attachment       *int32      `protobuf:"varint,4,opt,name=attachment" json:"attachment,omitempty"`
+	FallbackPosition *CMsgVector `protobuf:"bytes,5,opt,name=fallback_position" json:"fallback_position,omitempty"`
+	IncludeWearables *bool       `protobuf:"varint,6,opt,name=include_wearables" json:"include_wearables,omitempty"`
+	XXX_unrecognized []byte      `json:"-"`
+}
+
+func (m *CUserMsg_ParticleManager_UpdateParticleEnt) Reset() {
+	*m = CUserMsg_ParticleManager_UpdateParticleEnt{}
+}
+func (m *CUserMsg_ParticleManager_UpdateParticleEnt) String() string {
+	return proto.CompactTextString(m)
+}
+func (*CUserMsg_ParticleManager_UpdateParticleEnt) ProtoMessage() {}
+
+func (m *CUserMsg_ParticleManager_UpdateParticleEnt) GetControlPoint() int32 {
+	if m != nil && m.ControlPoint != nil {
+		return *m.ControlPoint
+	}
+	return 0
+}
+
+func (m *CUserMsg_ParticleManager_UpdateParticleEnt) GetEntityHandle() int32 {
+	if m != nil && m.EntityHandle != nil {
+		return *m.EntityHandle
+	}
+	return 0
+}
+
+func (m *CUserMsg_ParticleManager_UpdateParticleEnt) GetAttachType() int32 {
+	if m != nil && m.AttachType != nil {
+		return *m.AttachType
+	}
+	return 0
+}
+
+func (m *CUserMsg_ParticleManager_UpdateParticleEnt) GetAttachment() int32 {
+	if m != nil && m.Attachment != nil {
+		return *m.Attachment
+	}
+	return 0
+}
+
+func (m *CUserMsg_ParticleManager_UpdateParticleEnt) GetFallbackPosition() *CMsgVector {
+	if m != nil {
+		return m.FallbackPosition
+	}
+	return nil
+}
+
+func (m *CUserMsg_ParticleManager_UpdateParticleEnt) GetIncludeWearables() bool {
+	if m != nil && m.IncludeWearables != nil {
+		return *m.IncludeWearables
+	}
+	return false
+}
+
+type CUserMsg_ParticleManager_UpdateParticleSetFrozen struct {
+	SetFrozen        *bool  `protobuf:"varint,1,opt,name=set_frozen" json:"set_frozen,omitempty"`
+	XXX_unrecognized []byte `json:"-"`
+}
+
+func (m *CUserMsg_ParticleManager_UpdateParticleSetFrozen) Reset() {
+	*m = CUserMsg_ParticleManager_UpdateParticleSetFrozen{}
+}
+func (m *CUserMsg_ParticleManager_UpdateParticleSetFrozen) String() string {
+	return proto.CompactTextString(m)
+}
+func (*CUserMsg_ParticleManager_UpdateParticleSetFrozen) ProtoMessage() {}
+
+func (m *CUserMsg_ParticleManager_UpdateParticleSetFrozen) GetSetFrozen() bool {
+	if m != nil && m.SetFrozen != nil {
+		return *m.SetFrozen
+	}
+	return false
+}
+
+type CUserMsg_ParticleManager_UpdateParticleShouldDraw struct {
+	ShouldDraw       *bool  `protobuf:"varint,1,opt,name=should_draw" json:"should_draw,omitempty"`
+	XXX_unrecognized []byte `json:"-"`
+}
+
+func (m *CUserMsg_ParticleManager_UpdateParticleShouldDraw) Reset() {
+	*m = CUserMsg_ParticleManager_UpdateParticleShouldDraw{}
+}
+func (m *CUserMsg_ParticleManager_UpdateParticleShouldDraw) String() string {
+	return proto.CompactTextString(m)
+}
+func (*CUserMsg_ParticleManager_UpdateParticleShouldDraw) ProtoMessage() {}
+
+func (m *CUserMsg_ParticleManager_UpdateParticleShouldDraw) GetShouldDraw() bool {
+	if m != nil && m.ShouldDraw != nil {
+		return *m.ShouldDraw
+	}
+	return false
+}
+
+type CUserMsg_ParticleManager_ChangeControlPointAttachment struct {
+	AttachmentOld    *int32 `protobuf:"varint,1,opt,name=attachment_old" json:"attachment_old,omitempty"`
+	AttachmentNew    *int32 `protobuf:"varint,2,opt,name=attachment_new" json:"attachment_new,omitempty"`
+	EntityHandle     *int32 `protobuf:"varint,3,opt,name=entity_handle" json:"entity_handle,omitempty"`
+	XXX_unrecognized []byte `json:"-"`
+}
+
+func (m *CUserMsg_ParticleManager_ChangeControlPointAttachment) Reset() {
+	*m = CUserMsg_ParticleManager_ChangeControlPointAttachment{}
+}
+func (m *CUserMsg_ParticleManager_ChangeControlPointAttachment) String() string {
+	return proto.CompactTextString(m)
+}
+func (*CUserMsg_ParticleManager_ChangeControlPointAttachment) ProtoMessage() {}
+
+func (m *CUserMsg_ParticleManager_ChangeControlPointAttachment) GetAttachmentOld() int32 {
+	if m != nil && m.AttachmentOld != nil {
+		return *m.AttachmentOld
+	}
+	return 0
+}
+
+func (m *CUserMsg_ParticleManager_ChangeControlPointAttachment) GetAttachmentNew() int32 {
+	if m != nil && m.AttachmentNew != nil {
+		return *m.AttachmentNew
+	}
+	return 0
+}
+
+func (m *CUserMsg_ParticleManager_ChangeControlPointAttachment) GetEntityHandle() int32 {
+	if m != nil && m.EntityHandle != nil {
+		return *m.EntityHandle
+	}
+	return 0
+}
+
+type CUserMsg_HudError struct {
+	OrderId          *int32 `protobuf:"varint,1,opt,name=order_id" json:"order_id,omitempty"`
+	XXX_unrecognized []byte `json:"-"`
+}
+
+func (m *CUserMsg_HudError) Reset()         { *m = CUserMsg_HudError{} }
+func (m *CUserMsg_HudError) String() string { return proto.CompactTextString(m) }
+func (*CUserMsg_HudError) ProtoMessage()    {}
+
+func (m *CUserMsg_HudError) GetOrderId() int32 {
+	if m != nil && m.OrderId != nil {
+		return *m.OrderId
+	}
+	return 0
+}
+
+type CUserMsg_CustomGameEvent_ClientToServer struct {
+	EventName        *string `protobuf:"bytes,1,opt,name=event_name" json:"event_name,omitempty"`
+	Data             []byte  `protobuf:"bytes,2,opt,name=data" json:"data,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CUserMsg_CustomGameEvent_ClientToServer) Reset() {
+	*m = CUserMsg_CustomGameEvent_ClientToServer{}
+}
+func (m *CUserMsg_CustomGameEvent_ClientToServer) String() string { return proto.CompactTextString(m) }
+func (*CUserMsg_CustomGameEvent_ClientToServer) ProtoMessage()    {}
+
+func (m *CUserMsg_CustomGameEvent_ClientToServer) GetEventName() string {
+	if m != nil && m.EventName != nil {
+		return *m.EventName
+	}
+	return ""
+}
+
+func (m *CUserMsg_CustomGameEvent_ClientToServer) GetData() []byte {
+	if m != nil {
+		return m.Data
+	}
+	return nil
+}
+
+type CUserMsg_CustomGameEvent_ServerToClient struct {
+	EventName        *string `protobuf:"bytes,1,opt,name=event_name" json:"event_name,omitempty"`
+	Data             []byte  `protobuf:"bytes,2,opt,name=data" json:"data,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CUserMsg_CustomGameEvent_ServerToClient) Reset() {
+	*m = CUserMsg_CustomGameEvent_ServerToClient{}
+}
+func (m *CUserMsg_CustomGameEvent_ServerToClient) String() string { return proto.CompactTextString(m) }
+func (*CUserMsg_CustomGameEvent_ServerToClient) ProtoMessage()    {}
+
+func (m *CUserMsg_CustomGameEvent_ServerToClient) GetEventName() string {
+	if m != nil && m.EventName != nil {
+		return *m.EventName
+	}
+	return ""
+}
+
+func (m *CUserMsg_CustomGameEvent_ServerToClient) GetData() []byte {
+	if m != nil {
+		return m.Data
+	}
+	return nil
+}
+
+type CUserMsg_TrackedControllerInput_ClientToServer struct {
+	Data             []byte `protobuf:"bytes,1,opt,name=data" json:"data,omitempty"`
+	XXX_unrecognized []byte `json:"-"`
+}
+
+func (m *CUserMsg_TrackedControllerInput_ClientToServer) Reset() {
+	*m = CUserMsg_TrackedControllerInput_ClientToServer{}
+}
+func (m *CUserMsg_TrackedControllerInput_ClientToServer) String() string {
+	return proto.CompactTextString(m)
+}
+func (*CUserMsg_TrackedControllerInput_ClientToServer) ProtoMessage() {}
+
+func (m *CUserMsg_TrackedControllerInput_ClientToServer) GetData() []byte {
+	if m != nil {
+		return m.Data
+	}
+	return nil
+}
+
 func init() {
 	proto.RegisterEnum("dota.EBaseUserMessages", EBaseUserMessages_name, EBaseUserMessages_value)
 	proto.RegisterEnum("dota.EBaseEntityMessages", EBaseEntityMessages_name, EBaseEntityMessages_value)
 	proto.RegisterEnum("dota.ERollType", ERollType_name, ERollType_value)
+	proto.RegisterEnum("dota.PARTICLE_MESSAGE", PARTICLE_MESSAGE_name, PARTICLE_MESSAGE_value)
 }

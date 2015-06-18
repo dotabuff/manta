@@ -7,8 +7,6 @@ package dota
 import proto "github.com/golang/protobuf/proto"
 import math "math"
 
-// discarding unused import google_protobuf "github.com/dotabuff/manta/dota/google/protobuf"
-
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
 var _ = math.Inf
@@ -684,6 +682,7 @@ type CMsgEffectData struct {
 	Flags            *uint32     `protobuf:"varint,16,opt,name=flags" json:"flags,omitempty"`
 	Attachmentindex  *int32      `protobuf:"varint,17,opt,name=attachmentindex" json:"attachmentindex,omitempty"`
 	Effectname       *uint32     `protobuf:"varint,18,opt,name=effectname" json:"effectname,omitempty"`
+	Attachmentname   *uint32     `protobuf:"varint,19,opt,name=attachmentname" json:"attachmentname,omitempty"`
 	XXX_unrecognized []byte      `json:"-"`
 }
 
@@ -813,6 +812,13 @@ func (m *CMsgEffectData) GetAttachmentindex() int32 {
 func (m *CMsgEffectData) GetEffectname() uint32 {
 	if m != nil && m.Effectname != nil {
 		return *m.Effectname
+	}
+	return 0
+}
+
+func (m *CMsgEffectData) GetAttachmentname() uint32 {
+	if m != nil && m.Attachmentname != nil {
+		return *m.Attachmentname
 	}
 	return 0
 }

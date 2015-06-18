@@ -17,6 +17,7 @@ type CMsgBeginFrame struct {
 	SurfaceHeight    *uint32  `protobuf:"varint,3,opt,name=surface_height" json:"surface_height,omitempty"`
 	RenderTarget     *uint32  `protobuf:"varint,4,opt,name=render_target" json:"render_target,omitempty"`
 	UiScaleFactor    *float64 `protobuf:"fixed64,5,opt,name=ui_scale_factor" json:"ui_scale_factor,omitempty"`
+	EmptyFrame       *bool    `protobuf:"varint,6,opt,name=empty_frame" json:"empty_frame,omitempty"`
 	XXX_unrecognized []byte   `json:"-"`
 }
 
@@ -57,6 +58,13 @@ func (m *CMsgBeginFrame) GetUiScaleFactor() float64 {
 		return *m.UiScaleFactor
 	}
 	return 0
+}
+
+func (m *CMsgBeginFrame) GetEmptyFrame() bool {
+	if m != nil && m.EmptyFrame != nil {
+		return *m.EmptyFrame
+	}
+	return false
 }
 
 type CMsgEndFrame struct {
@@ -106,6 +114,14 @@ func (m *CMsgClearBackbuffer) GetClearColorRgba() uint32 {
 	}
 	return 0
 }
+
+type CMsgClearGPUResources struct {
+	XXX_unrecognized []byte `json:"-"`
+}
+
+func (m *CMsgClearGPUResources) Reset()         { *m = CMsgClearGPUResources{} }
+func (m *CMsgClearGPUResources) String() string { return proto.CompactTextString(m) }
+func (*CMsgClearGPUResources) ProtoMessage()    {}
 
 type CMsgDeleteTexture struct {
 	TexturePointer   *uint64 `protobuf:"varint,1,opt,name=texture_pointer" json:"texture_pointer,omitempty"`
@@ -699,6 +715,102 @@ func (m *CBoxShadowData) GetAnimating() bool {
 	return false
 }
 
+type CTextShadowData struct {
+	HorizontalOffset *float64 `protobuf:"fixed64,2,opt,name=horizontal_offset" json:"horizontal_offset,omitempty"`
+	VerticalOffset   *float64 `protobuf:"fixed64,3,opt,name=vertical_offset" json:"vertical_offset,omitempty"`
+	BlurRadius       *float64 `protobuf:"fixed64,4,opt,name=blur_radius" json:"blur_radius,omitempty"`
+	Color            *uint32  `protobuf:"varint,6,opt,name=color" json:"color,omitempty"`
+	Animating        *bool    `protobuf:"varint,8,opt,name=animating" json:"animating,omitempty"`
+	Strength         *float64 `protobuf:"fixed64,9,opt,name=strength" json:"strength,omitempty"`
+	XXX_unrecognized []byte   `json:"-"`
+}
+
+func (m *CTextShadowData) Reset()         { *m = CTextShadowData{} }
+func (m *CTextShadowData) String() string { return proto.CompactTextString(m) }
+func (*CTextShadowData) ProtoMessage()    {}
+
+func (m *CTextShadowData) GetHorizontalOffset() float64 {
+	if m != nil && m.HorizontalOffset != nil {
+		return *m.HorizontalOffset
+	}
+	return 0
+}
+
+func (m *CTextShadowData) GetVerticalOffset() float64 {
+	if m != nil && m.VerticalOffset != nil {
+		return *m.VerticalOffset
+	}
+	return 0
+}
+
+func (m *CTextShadowData) GetBlurRadius() float64 {
+	if m != nil && m.BlurRadius != nil {
+		return *m.BlurRadius
+	}
+	return 0
+}
+
+func (m *CTextShadowData) GetColor() uint32 {
+	if m != nil && m.Color != nil {
+		return *m.Color
+	}
+	return 0
+}
+
+func (m *CTextShadowData) GetAnimating() bool {
+	if m != nil && m.Animating != nil {
+		return *m.Animating
+	}
+	return false
+}
+
+func (m *CTextShadowData) GetStrength() float64 {
+	if m != nil && m.Strength != nil {
+		return *m.Strength
+	}
+	return 0
+}
+
+type CMsgClipData struct {
+	Left             *float64 `protobuf:"fixed64,1,opt,name=left" json:"left,omitempty"`
+	Top              *float64 `protobuf:"fixed64,2,opt,name=top" json:"top,omitempty"`
+	Right            *float64 `protobuf:"fixed64,3,opt,name=right" json:"right,omitempty"`
+	Bottom           *float64 `protobuf:"fixed64,4,opt,name=bottom" json:"bottom,omitempty"`
+	XXX_unrecognized []byte   `json:"-"`
+}
+
+func (m *CMsgClipData) Reset()         { *m = CMsgClipData{} }
+func (m *CMsgClipData) String() string { return proto.CompactTextString(m) }
+func (*CMsgClipData) ProtoMessage()    {}
+
+func (m *CMsgClipData) GetLeft() float64 {
+	if m != nil && m.Left != nil {
+		return *m.Left
+	}
+	return 0
+}
+
+func (m *CMsgClipData) GetTop() float64 {
+	if m != nil && m.Top != nil {
+		return *m.Top
+	}
+	return 0
+}
+
+func (m *CMsgClipData) GetRight() float64 {
+	if m != nil && m.Right != nil {
+		return *m.Right
+	}
+	return 0
+}
+
+func (m *CMsgClipData) GetBottom() float64 {
+	if m != nil && m.Bottom != nil {
+		return *m.Bottom
+	}
+	return 0
+}
+
 type CMsgPushCompositingLayer struct {
 	LayerId               *uint64           `protobuf:"varint,1,opt,name=layer_id" json:"layer_id,omitempty"`
 	Width                 *float64          `protobuf:"fixed64,2,opt,name=width" json:"width,omitempty"`
@@ -748,6 +860,14 @@ type CMsgPushCompositingLayer struct {
 	Scale_2DFactorsY      *float64          `protobuf:"fixed64,46,opt,name=scale_2d_factors_y" json:"scale_2d_factors_y,omitempty"`
 	Rotate_2D             *float64          `protobuf:"fixed64,47,opt,name=rotate_2d" json:"rotate_2d,omitempty"`
 	NeedsClear            *bool             `protobuf:"varint,48,opt,name=needs_clear" json:"needs_clear,omitempty"`
+	NeedsDepth            *bool             `protobuf:"varint,49,opt,name=needs_depth" json:"needs_depth,omitempty"`
+	NeedsRedrawEveryFrame *bool             `protobuf:"varint,50,opt,name=needs_redraw_every_frame" json:"needs_redraw_every_frame,omitempty"`
+	TextShadow            *CTextShadowData  `protobuf:"bytes,51,opt,name=text_shadow" json:"text_shadow,omitempty"`
+	MixBlendMode          *uint32           `protobuf:"varint,52,opt,name=mix_blend_mode" json:"mix_blend_mode,omitempty"`
+	OccludedLeftEdge      *float64          `protobuf:"fixed64,53,opt,name=occluded_left_edge" json:"occluded_left_edge,omitempty"`
+	OccludedTopEdge       *float64          `protobuf:"fixed64,54,opt,name=occluded_top_edge" json:"occluded_top_edge,omitempty"`
+	OccludedRightEdge     *float64          `protobuf:"fixed64,55,opt,name=occluded_right_edge" json:"occluded_right_edge,omitempty"`
+	OccludedBottomEdge    *float64          `protobuf:"fixed64,56,opt,name=occluded_bottom_edge" json:"occluded_bottom_edge,omitempty"`
 	XXX_unrecognized      []byte            `json:"-"`
 }
 
@@ -1089,6 +1209,62 @@ func (m *CMsgPushCompositingLayer) GetNeedsClear() bool {
 		return *m.NeedsClear
 	}
 	return false
+}
+
+func (m *CMsgPushCompositingLayer) GetNeedsDepth() bool {
+	if m != nil && m.NeedsDepth != nil {
+		return *m.NeedsDepth
+	}
+	return false
+}
+
+func (m *CMsgPushCompositingLayer) GetNeedsRedrawEveryFrame() bool {
+	if m != nil && m.NeedsRedrawEveryFrame != nil {
+		return *m.NeedsRedrawEveryFrame
+	}
+	return false
+}
+
+func (m *CMsgPushCompositingLayer) GetTextShadow() *CTextShadowData {
+	if m != nil {
+		return m.TextShadow
+	}
+	return nil
+}
+
+func (m *CMsgPushCompositingLayer) GetMixBlendMode() uint32 {
+	if m != nil && m.MixBlendMode != nil {
+		return *m.MixBlendMode
+	}
+	return 0
+}
+
+func (m *CMsgPushCompositingLayer) GetOccludedLeftEdge() float64 {
+	if m != nil && m.OccludedLeftEdge != nil {
+		return *m.OccludedLeftEdge
+	}
+	return 0
+}
+
+func (m *CMsgPushCompositingLayer) GetOccludedTopEdge() float64 {
+	if m != nil && m.OccludedTopEdge != nil {
+		return *m.OccludedTopEdge
+	}
+	return 0
+}
+
+func (m *CMsgPushCompositingLayer) GetOccludedRightEdge() float64 {
+	if m != nil && m.OccludedRightEdge != nil {
+		return *m.OccludedRightEdge
+	}
+	return 0
+}
+
+func (m *CMsgPushCompositingLayer) GetOccludedBottomEdge() float64 {
+	if m != nil && m.OccludedBottomEdge != nil {
+		return *m.OccludedBottomEdge
+	}
+	return 0
 }
 
 type CMsgPopCompositingLayer struct {
@@ -2946,6 +3122,134 @@ func (m *CMsgBoxShadow_AnimationFrameData) GetData() *CBoxShadowData {
 	return nil
 }
 
+type CMsgTextShadow struct {
+	Base             *CTextShadowData     `protobuf:"bytes,1,opt,name=base" json:"base,omitempty"`
+	TransitionData   *CMsgTransitionData  `protobuf:"bytes,2,opt,name=transition_data" json:"transition_data,omitempty"`
+	Transition       *CTextShadowData     `protobuf:"bytes,3,opt,name=transition" json:"transition,omitempty"`
+	Animations       []*CMsgAnimationData `protobuf:"bytes,4,rep,name=animations" json:"animations,omitempty"`
+	XXX_unrecognized []byte               `json:"-"`
+}
+
+func (m *CMsgTextShadow) Reset()         { *m = CMsgTextShadow{} }
+func (m *CMsgTextShadow) String() string { return proto.CompactTextString(m) }
+func (*CMsgTextShadow) ProtoMessage()    {}
+
+func (m *CMsgTextShadow) GetBase() *CTextShadowData {
+	if m != nil {
+		return m.Base
+	}
+	return nil
+}
+
+func (m *CMsgTextShadow) GetTransitionData() *CMsgTransitionData {
+	if m != nil {
+		return m.TransitionData
+	}
+	return nil
+}
+
+func (m *CMsgTextShadow) GetTransition() *CTextShadowData {
+	if m != nil {
+		return m.Transition
+	}
+	return nil
+}
+
+func (m *CMsgTextShadow) GetAnimations() []*CMsgAnimationData {
+	if m != nil {
+		return m.Animations
+	}
+	return nil
+}
+
+var E_CMsgTextShadow_AnimationFrameData = &proto.ExtensionDesc{
+	ExtendedType:  (*CMsgAnimationFrameData)(nil),
+	ExtensionType: (*CMsgTextShadow_AnimationFrameData)(nil),
+	Field:         1017,
+	Name:          "dota.CMsgTextShadow.animation_frame_data",
+	Tag:           "bytes,1017,opt,name=animation_frame_data",
+}
+
+type CMsgTextShadow_AnimationFrameData struct {
+	Data             *CTextShadowData `protobuf:"bytes,1,opt,name=data" json:"data,omitempty"`
+	XXX_unrecognized []byte           `json:"-"`
+}
+
+func (m *CMsgTextShadow_AnimationFrameData) Reset()         { *m = CMsgTextShadow_AnimationFrameData{} }
+func (m *CMsgTextShadow_AnimationFrameData) String() string { return proto.CompactTextString(m) }
+func (*CMsgTextShadow_AnimationFrameData) ProtoMessage()    {}
+
+func (m *CMsgTextShadow_AnimationFrameData) GetData() *CTextShadowData {
+	if m != nil {
+		return m.Data
+	}
+	return nil
+}
+
+type CMsgClip struct {
+	Base             *CMsgClipData        `protobuf:"bytes,1,opt,name=base" json:"base,omitempty"`
+	TransitionData   *CMsgTransitionData  `protobuf:"bytes,2,opt,name=transition_data" json:"transition_data,omitempty"`
+	Transition       *CMsgClipData        `protobuf:"bytes,3,opt,name=transition" json:"transition,omitempty"`
+	Animations       []*CMsgAnimationData `protobuf:"bytes,4,rep,name=animations" json:"animations,omitempty"`
+	XXX_unrecognized []byte               `json:"-"`
+}
+
+func (m *CMsgClip) Reset()         { *m = CMsgClip{} }
+func (m *CMsgClip) String() string { return proto.CompactTextString(m) }
+func (*CMsgClip) ProtoMessage()    {}
+
+func (m *CMsgClip) GetBase() *CMsgClipData {
+	if m != nil {
+		return m.Base
+	}
+	return nil
+}
+
+func (m *CMsgClip) GetTransitionData() *CMsgTransitionData {
+	if m != nil {
+		return m.TransitionData
+	}
+	return nil
+}
+
+func (m *CMsgClip) GetTransition() *CMsgClipData {
+	if m != nil {
+		return m.Transition
+	}
+	return nil
+}
+
+func (m *CMsgClip) GetAnimations() []*CMsgAnimationData {
+	if m != nil {
+		return m.Animations
+	}
+	return nil
+}
+
+var E_CMsgClip_AnimationFrameData = &proto.ExtensionDesc{
+	ExtendedType:  (*CMsgAnimationFrameData)(nil),
+	ExtensionType: (*CMsgClip_AnimationFrameData)(nil),
+	Field:         1018,
+	Name:          "dota.CMsgClip.animation_frame_data",
+	Tag:           "bytes,1018,opt,name=animation_frame_data",
+}
+
+type CMsgClip_AnimationFrameData struct {
+	Data             *CMsgClipData `protobuf:"bytes,1,opt,name=data" json:"data,omitempty"`
+	XXX_unrecognized []byte        `json:"-"`
+}
+
+func (m *CMsgClip_AnimationFrameData) Reset()         { *m = CMsgClip_AnimationFrameData{} }
+func (m *CMsgClip_AnimationFrameData) String() string { return proto.CompactTextString(m) }
+func (*CMsgClip_AnimationFrameData) ProtoMessage()    {}
+
+func (m *CMsgClip_AnimationFrameData) GetData() *CMsgClipData {
+	if m != nil {
+		return m.Data
+	}
+	return nil
+}
+
 type CMsgPushClipLayer struct {
 	TopLeft          *CMsgPoint   `protobuf:"bytes,1,opt,name=top_left" json:"top_left,omitempty"`
 	BottomRight      *CMsgPoint   `protobuf:"bytes,2,opt,name=bottom_right" json:"bottom_right,omitempty"`
@@ -3008,9 +3312,13 @@ type CMsgPushAAndTContext struct {
 	BoxShadow                  *CMsgBoxShadow                    `protobuf:"bytes,20,opt,name=box_shadow" json:"box_shadow,omitempty"`
 	Scale_2DCentered           *CMsgPointWithTransition          `protobuf:"bytes,21,opt,name=scale_2d_centered" json:"scale_2d_centered,omitempty"`
 	Rotate_2DCentered          *CMsgRotate2D                     `protobuf:"bytes,22,opt,name=rotate_2d_centered" json:"rotate_2d_centered,omitempty"`
-	SuppressClipToBounds       *bool                             `protobuf:"varint,23,opt,name=suppress_clip_to_bounds" json:"suppress_clip_to_bounds,omitempty"`
-	NeedsFullRepaint           *int32                            `protobuf:"varint,24,opt,name=needs_full_repaint" json:"needs_full_repaint,omitempty"`
-	WantsHitTest               *bool                             `protobuf:"varint,25,opt,name=wants_hit_test" json:"wants_hit_test,omitempty"`
+	TextShadow                 *CMsgTextShadow                   `protobuf:"bytes,23,opt,name=text_shadow" json:"text_shadow,omitempty"`
+	Clip                       *CMsgClip                         `protobuf:"bytes,24,opt,name=clip" json:"clip,omitempty"`
+	SuppressClipToBounds       *bool                             `protobuf:"varint,25,opt,name=suppress_clip_to_bounds" json:"suppress_clip_to_bounds,omitempty"`
+	NeedsFullRepaint           *int32                            `protobuf:"varint,26,opt,name=needs_full_repaint" json:"needs_full_repaint,omitempty"`
+	WantsHitTest               *bool                             `protobuf:"varint,27,opt,name=wants_hit_test" json:"wants_hit_test,omitempty"`
+	MixBlendMode               *uint32                           `protobuf:"varint,28,opt,name=mix_blend_mode" json:"mix_blend_mode,omitempty"`
+	OpaqueBackground           *bool                             `protobuf:"varint,29,opt,name=opaque_background" json:"opaque_background,omitempty"`
 	XXX_unrecognized           []byte                            `json:"-"`
 }
 
@@ -3165,6 +3473,20 @@ func (m *CMsgPushAAndTContext) GetRotate_2DCentered() *CMsgRotate2D {
 	return nil
 }
 
+func (m *CMsgPushAAndTContext) GetTextShadow() *CMsgTextShadow {
+	if m != nil {
+		return m.TextShadow
+	}
+	return nil
+}
+
+func (m *CMsgPushAAndTContext) GetClip() *CMsgClip {
+	if m != nil {
+		return m.Clip
+	}
+	return nil
+}
+
 func (m *CMsgPushAAndTContext) GetSuppressClipToBounds() bool {
 	if m != nil && m.SuppressClipToBounds != nil {
 		return *m.SuppressClipToBounds
@@ -3182,6 +3504,20 @@ func (m *CMsgPushAAndTContext) GetNeedsFullRepaint() int32 {
 func (m *CMsgPushAAndTContext) GetWantsHitTest() bool {
 	if m != nil && m.WantsHitTest != nil {
 		return *m.WantsHitTest
+	}
+	return false
+}
+
+func (m *CMsgPushAAndTContext) GetMixBlendMode() uint32 {
+	if m != nil && m.MixBlendMode != nil {
+		return *m.MixBlendMode
+	}
+	return 0
+}
+
+func (m *CMsgPushAAndTContext) GetOpaqueBackground() bool {
+	if m != nil && m.OpaqueBackground != nil {
+		return *m.OpaqueBackground
 	}
 	return false
 }
@@ -3321,6 +3657,7 @@ type CMsgDrawTexturedRect struct {
 	TextureTopLeft     *CMsgPoint `protobuf:"bytes,4,opt,name=texture_top_left" json:"texture_top_left,omitempty"`
 	TextureBottomRight *CMsgPoint `protobuf:"bytes,5,opt,name=texture_bottom_right" json:"texture_bottom_right,omitempty"`
 	TextureSerial      *int32     `protobuf:"varint,6,opt,name=texture_serial,def=0" json:"texture_serial,omitempty"`
+	TextureSampleMode  *uint32    `protobuf:"varint,7,opt,name=texture_sample_mode,def=0" json:"texture_sample_mode,omitempty"`
 	XXX_unrecognized   []byte     `json:"-"`
 }
 
@@ -3329,6 +3666,7 @@ func (m *CMsgDrawTexturedRect) String() string { return proto.CompactTextString(
 func (*CMsgDrawTexturedRect) ProtoMessage()    {}
 
 const Default_CMsgDrawTexturedRect_TextureSerial int32 = 0
+const Default_CMsgDrawTexturedRect_TextureSampleMode uint32 = 0
 
 func (m *CMsgDrawTexturedRect) GetTopLeft() *CMsgPoint {
 	if m != nil {
@@ -3370,6 +3708,13 @@ func (m *CMsgDrawTexturedRect) GetTextureSerial() int32 {
 		return *m.TextureSerial
 	}
 	return Default_CMsgDrawTexturedRect_TextureSerial
+}
+
+func (m *CMsgDrawTexturedRect) GetTextureSampleMode() uint32 {
+	if m != nil && m.TextureSampleMode != nil {
+		return *m.TextureSampleMode
+	}
+	return Default_CMsgDrawTexturedRect_TextureSampleMode
 }
 
 type CMsgDrawDoubleBufferedRect struct {
@@ -3475,6 +3820,7 @@ type CMsgRenderTexturedRect struct {
 	TextureTopLeft     *CMsgPoint `protobuf:"bytes,4,opt,name=texture_top_left" json:"texture_top_left,omitempty"`
 	TextureBottomRight *CMsgPoint `protobuf:"bytes,5,opt,name=texture_bottom_right" json:"texture_bottom_right,omitempty"`
 	TextureSerial      *int32     `protobuf:"varint,6,opt,name=texture_serial,def=0" json:"texture_serial,omitempty"`
+	TextureSampleMode  *uint32    `protobuf:"varint,7,opt,name=texture_sample_mode,def=0" json:"texture_sample_mode,omitempty"`
 	XXX_unrecognized   []byte     `json:"-"`
 }
 
@@ -3483,6 +3829,7 @@ func (m *CMsgRenderTexturedRect) String() string { return proto.CompactTextStrin
 func (*CMsgRenderTexturedRect) ProtoMessage()    {}
 
 const Default_CMsgRenderTexturedRect_TextureSerial int32 = 0
+const Default_CMsgRenderTexturedRect_TextureSampleMode uint32 = 0
 
 func (m *CMsgRenderTexturedRect) GetTopLeft() *CMsgPoint {
 	if m != nil {
@@ -3526,6 +3873,13 @@ func (m *CMsgRenderTexturedRect) GetTextureSerial() int32 {
 	return Default_CMsgRenderTexturedRect_TextureSerial
 }
 
+func (m *CMsgRenderTexturedRect) GetTextureSampleMode() uint32 {
+	if m != nil && m.TextureSampleMode != nil {
+		return *m.TextureSampleMode
+	}
+	return Default_CMsgRenderTexturedRect_TextureSampleMode
+}
+
 type CMsgLockTexture struct {
 	TextureId        *uint32 `protobuf:"varint,1,opt,name=texture_id" json:"texture_id,omitempty"`
 	TextureSerial    *int32  `protobuf:"varint,2,opt,name=texture_serial,def=0" json:"texture_serial,omitempty"`
@@ -3552,6 +3906,30 @@ func (m *CMsgLockTexture) GetTextureSerial() int32 {
 	return Default_CMsgLockTexture_TextureSerial
 }
 
+type CMsgTextInlineObject struct {
+	Width            *float32 `protobuf:"fixed32,1,opt,name=width" json:"width,omitempty"`
+	Height           *float32 `protobuf:"fixed32,2,opt,name=height" json:"height,omitempty"`
+	XXX_unrecognized []byte   `json:"-"`
+}
+
+func (m *CMsgTextInlineObject) Reset()         { *m = CMsgTextInlineObject{} }
+func (m *CMsgTextInlineObject) String() string { return proto.CompactTextString(m) }
+func (*CMsgTextInlineObject) ProtoMessage()    {}
+
+func (m *CMsgTextInlineObject) GetWidth() float32 {
+	if m != nil && m.Width != nil {
+		return *m.Width
+	}
+	return 0
+}
+
+func (m *CMsgTextInlineObject) GetHeight() float32 {
+	if m != nil && m.Height != nil {
+		return *m.Height
+	}
+	return 0
+}
+
 type CMsgTextFormat struct {
 	FontName            *string                  `protobuf:"bytes,1,opt,name=font_name" json:"font_name,omitempty"`
 	FontSize            *float64                 `protobuf:"fixed64,2,opt,name=font_size" json:"font_size,omitempty"`
@@ -3560,6 +3938,8 @@ type CMsgTextFormat struct {
 	Underline           *bool                    `protobuf:"varint,5,opt,name=underline" json:"underline,omitempty"`
 	Strikethrough       *bool                    `protobuf:"varint,6,opt,name=strikethrough" json:"strikethrough,omitempty"`
 	FillBrushCollection *CMsgFillBrushCollection `protobuf:"bytes,7,opt,name=fill_brush_collection" json:"fill_brush_collection,omitempty"`
+	LetterSpacing       *int32                   `protobuf:"varint,8,opt,name=letter_spacing,def=0" json:"letter_spacing,omitempty"`
+	InlineObject        *CMsgTextInlineObject    `protobuf:"bytes,9,opt,name=inline_object" json:"inline_object,omitempty"`
 	XXX_unrecognized    []byte                   `json:"-"`
 }
 
@@ -3569,6 +3949,7 @@ func (*CMsgTextFormat) ProtoMessage()    {}
 
 const Default_CMsgTextFormat_FontWeight int32 = -1
 const Default_CMsgTextFormat_FontStyle int32 = -1
+const Default_CMsgTextFormat_LetterSpacing int32 = 0
 
 func (m *CMsgTextFormat) GetFontName() string {
 	if m != nil && m.FontName != nil {
@@ -3619,6 +4000,20 @@ func (m *CMsgTextFormat) GetFillBrushCollection() *CMsgFillBrushCollection {
 	return nil
 }
 
+func (m *CMsgTextFormat) GetLetterSpacing() int32 {
+	if m != nil && m.LetterSpacing != nil {
+		return *m.LetterSpacing
+	}
+	return Default_CMsgTextFormat_LetterSpacing
+}
+
+func (m *CMsgTextFormat) GetInlineObject() *CMsgTextInlineObject {
+	if m != nil {
+		return m.InlineObject
+	}
+	return nil
+}
+
 type CMsgTextRangeFormat struct {
 	StartIndex       *uint32         `protobuf:"varint,1,opt,name=start_index" json:"start_index,omitempty"`
 	EndIndex         *uint32         `protobuf:"varint,2,opt,name=end_index" json:"end_index,omitempty"`
@@ -3659,6 +4054,8 @@ type CMsgRenderTextFormat struct {
 	Underline           *bool                          `protobuf:"varint,5,opt,name=underline" json:"underline,omitempty"`
 	Strikethrough       *bool                          `protobuf:"varint,6,opt,name=strikethrough" json:"strikethrough,omitempty"`
 	FillBrushCollection *CMsgRenderFillBrushCollection `protobuf:"bytes,7,opt,name=fill_brush_collection" json:"fill_brush_collection,omitempty"`
+	LetterSpacing       *int32                         `protobuf:"varint,8,opt,name=letter_spacing,def=0" json:"letter_spacing,omitempty"`
+	InlineObject        *CMsgTextInlineObject          `protobuf:"bytes,9,opt,name=inline_object" json:"inline_object,omitempty"`
 	XXX_unrecognized    []byte                         `json:"-"`
 }
 
@@ -3668,6 +4065,7 @@ func (*CMsgRenderTextFormat) ProtoMessage()    {}
 
 const Default_CMsgRenderTextFormat_FontWeight int32 = -1
 const Default_CMsgRenderTextFormat_FontStyle int32 = -1
+const Default_CMsgRenderTextFormat_LetterSpacing int32 = 0
 
 func (m *CMsgRenderTextFormat) GetFontName() string {
 	if m != nil && m.FontName != nil {
@@ -3714,6 +4112,20 @@ func (m *CMsgRenderTextFormat) GetStrikethrough() bool {
 func (m *CMsgRenderTextFormat) GetFillBrushCollection() *CMsgRenderFillBrushCollection {
 	if m != nil {
 		return m.FillBrushCollection
+	}
+	return nil
+}
+
+func (m *CMsgRenderTextFormat) GetLetterSpacing() int32 {
+	if m != nil && m.LetterSpacing != nil {
+		return *m.LetterSpacing
+	}
+	return Default_CMsgRenderTextFormat_LetterSpacing
+}
+
+func (m *CMsgRenderTextFormat) GetInlineObject() *CMsgTextInlineObject {
+	if m != nil {
+		return m.InlineObject
 	}
 	return nil
 }
@@ -3840,6 +4252,7 @@ type CMsgRenderTextRegion struct {
 	Wrapping         *bool                        `protobuf:"varint,8,opt,name=wrapping" json:"wrapping,omitempty"`
 	Ellipsis         *bool                        `protobuf:"varint,9,opt,name=ellipsis" json:"ellipsis,omitempty"`
 	RangeFormats     []*CMsgRenderTextRangeFormat `protobuf:"bytes,10,rep,name=range_formats" json:"range_formats,omitempty"`
+	TextShadow       *CTextShadowData             `protobuf:"bytes,11,opt,name=text_shadow" json:"text_shadow,omitempty"`
 	XXX_unrecognized []byte                       `json:"-"`
 }
 
@@ -3910,6 +4323,69 @@ func (m *CMsgRenderTextRegion) GetRangeFormats() []*CMsgRenderTextRangeFormat {
 	return nil
 }
 
+func (m *CMsgRenderTextRegion) GetTextShadow() *CTextShadowData {
+	if m != nil {
+		return m.TextShadow
+	}
+	return nil
+}
+
+type CMsgRequestRenderCallback struct {
+	CallbackObj           []byte     `protobuf:"bytes,1,opt,name=callback_obj" json:"callback_obj,omitempty"`
+	TopLeft               *CMsgPoint `protobuf:"bytes,2,opt,name=top_left" json:"top_left,omitempty"`
+	BottomRight           *CMsgPoint `protobuf:"bytes,3,opt,name=bottom_right" json:"bottom_right,omitempty"`
+	TopLeftPadding        *CMsgPoint `protobuf:"bytes,4,opt,name=top_left_padding" json:"top_left_padding,omitempty"`
+	BottomRightPadding    *CMsgPoint `protobuf:"bytes,5,opt,name=bottom_right_padding" json:"bottom_right_padding,omitempty"`
+	NeedsRedrawEveryFrame *bool      `protobuf:"varint,6,opt,name=needs_redraw_every_frame" json:"needs_redraw_every_frame,omitempty"`
+	XXX_unrecognized      []byte     `json:"-"`
+}
+
+func (m *CMsgRequestRenderCallback) Reset()         { *m = CMsgRequestRenderCallback{} }
+func (m *CMsgRequestRenderCallback) String() string { return proto.CompactTextString(m) }
+func (*CMsgRequestRenderCallback) ProtoMessage()    {}
+
+func (m *CMsgRequestRenderCallback) GetCallbackObj() []byte {
+	if m != nil {
+		return m.CallbackObj
+	}
+	return nil
+}
+
+func (m *CMsgRequestRenderCallback) GetTopLeft() *CMsgPoint {
+	if m != nil {
+		return m.TopLeft
+	}
+	return nil
+}
+
+func (m *CMsgRequestRenderCallback) GetBottomRight() *CMsgPoint {
+	if m != nil {
+		return m.BottomRight
+	}
+	return nil
+}
+
+func (m *CMsgRequestRenderCallback) GetTopLeftPadding() *CMsgPoint {
+	if m != nil {
+		return m.TopLeftPadding
+	}
+	return nil
+}
+
+func (m *CMsgRequestRenderCallback) GetBottomRightPadding() *CMsgPoint {
+	if m != nil {
+		return m.BottomRightPadding
+	}
+	return nil
+}
+
+func (m *CMsgRequestRenderCallback) GetNeedsRedrawEveryFrame() bool {
+	if m != nil && m.NeedsRedrawEveryFrame != nil {
+		return *m.NeedsRedrawEveryFrame
+	}
+	return false
+}
+
 func init() {
 	proto.RegisterExtension(E_CMsgPointWithTransition_AnimationFrameData)
 	proto.RegisterExtension(E_CMsgColor_AnimationFrameData)
@@ -3927,4 +4403,6 @@ func init() {
 	proto.RegisterExtension(E_CMsgBorderRadius_AnimationFrameData)
 	proto.RegisterExtension(E_CMsgBorder_AnimationFrameData)
 	proto.RegisterExtension(E_CMsgBoxShadow_AnimationFrameData)
+	proto.RegisterExtension(E_CMsgTextShadow_AnimationFrameData)
+	proto.RegisterExtension(E_CMsgClip_AnimationFrameData)
 }

@@ -1,8 +1,5 @@
 package dota;
 
-import "google/protobuf/descriptor.proto";
-import "networkbasetypes.proto";
-
 option optimize_for = SPEED;
 option cc_generic_services = false;
 
@@ -31,5 +28,8 @@ message CDOTABroadcastMsg_LANLobbyReply {
 	repeated CDOTABroadcastMsg_LANLobbyReply.CLobbyMember members = 4;
 	optional bool requires_pass_key = 5;
 	optional uint32 leader_account_id = 6;
+	optional uint32 game_mode = 7;
+	optional string name = 8;
+	optional uint32 players = 9;
 }
 

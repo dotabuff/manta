@@ -33,8 +33,8 @@ func (p *Parser) onCDemoClassInfo(m *dota.CDemoClassInfo) error {
 
 // Updates the state of instancebaseline
 func (p *Parser) updateInstanceBaseline() {
+	// We can't update the instancebaseline until we have class info.
 	if !p.hasClassInfo {
-		_debugf("skipping updateInstanceBaseline: no class info")
 		return
 	}
 

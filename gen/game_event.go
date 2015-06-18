@@ -64,7 +64,7 @@ func main() {
 	geStructOut := "type GameEvents struct {\n"
 	registerOut := ""
 	handlerOut := `
-    func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *wireSource1GameEvent) error {
+    func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGameEvent) error {
       switch m.GetEventid() {
       `
 
@@ -142,6 +142,7 @@ func main() {
 
 	out := fmt.Sprintf("//go:generate go run gen/game_event.go %s %s\n\n", os.Args[1], os.Args[2])
 	out += "package manta\n\n"
+	out += "import (\n\t\"github.com/dotabuff/manta/dota\"\n)\n"
 	out += constOut
 	out += structOut
 	out += geStructOut
@@ -150,6 +151,7 @@ func main() {
 
 	outbuf, err := format.Source([]byte(out))
 	if err != nil {
+		fmt.Println(string(out))
 		panic(err)
 	}
 

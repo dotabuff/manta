@@ -18,6 +18,7 @@ game-tracking:
 	git remote add -f origin https://github.com/SteamDatabase/GameTracking && \
 	git config core.sparseCheckout true && \
 	echo Protobufs/dota/ >> .git/info/sparse-checkout && \
+	echo Protobufs/dota_reborn/ >> .git/info/sparse-checkout && \
 	echo Protobufs/dota_s2/ >> .git/info/sparse-checkout && \
 	echo Protobufs/dota_test/ >> .git/info/sparse-checkout && \
 	git pull --depth=1 origin master
@@ -28,7 +29,7 @@ update-game-tracking: game-tracking
 
 gen-dota-proto: dota/google/protobuf/descriptor.pb.go
 	rm -rf dota/*.proto
-	cp -f game-tracking/Protobufs/dota_s2/*/*.proto -t dota/ || true
+	cp -f game-tracking/Protobufs/dota_reborn/*/*.proto -t dota/ || true
 	sed -i 's/^\(\s*\)\(optional\|repeated\|required\|extend\)\s*\./\1\2 /' dota/*.proto
 	sed -i 's!^\s*rpc\s*\(\S*\)\s*(\.\([^)]*\))\s*returns\s*(\.\([^)]*\))\s*{!rpc \1 (\2) returns (\3) {!' dota/*.proto
 	sed -i '1ipackage dota;\n' dota/*.proto
@@ -41,7 +42,7 @@ dota/google/protobuf/descriptor.pb.go: google/protobuf/descriptor.proto
 	protoc -I. --go_out=dota $<
 
 gen-game-events:
-	go run gen/game_event.go fixtures/game_events_list.pbmsg game_event_lookup.go
+	go run gen/game_event.go fixtures/source_1_legacy_game_events_list.pbmsg game_event_lookup.go
 
 gen-message-lookup:
 	go run gen/message_lookup.go dota message_lookup.go

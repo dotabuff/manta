@@ -7,13 +7,10 @@ Package dota is a generated protocol buffer package.
 
 It is generated from these files:
 	base_gcmessages.proto
-	connectionless_netmessages.proto
 	demo.proto
 	dota_broadcastmessages.proto
 	dota_clientmessages.proto
 	dota_commonmessages.proto
-	dota_gcmessages_client.proto
-	dota_gcmessages_client_fantasy.proto
 	dota_gcmessages_common.proto
 	dota_gcmessages_server.proto
 	dota_modifiers.proto
@@ -25,26 +22,22 @@ It is generated from these files:
 	netmessages.proto
 	network_connection.proto
 	networkbasetypes.proto
-	peertopeer_netmessages.proto
 	rendermessages.proto
 	steammessages.proto
-	steammessages_cloud.steamworkssdk.proto
-	steammessages_oauth.steamworkssdk.proto
-	steammessages_publishedfile.steamworkssdk.proto
-	steammessages_unified_base.steamworkssdk.proto
 	te.proto
+	toolevents.proto
 	usermessages.proto
 
 It has these top-level messages:
 	CGCStorePurchaseInit_LineItem
 	CMsgGCStorePurchaseInit
 	CMsgGCStorePurchaseInitResponse
-	CSOPartyInvite
-	CSOLobbyInvite
 	CMsgSystemBroadcast
 	CMsgInviteToParty
+	CMsgInviteToLobby
 	CMsgInvitationCreated
 	CMsgPartyInviteResponse
+	CMsgLobbyInviteResponse
 	CMsgKickFromParty
 	CMsgLeaveParty
 	CMsgServerAvailable
@@ -59,7 +52,6 @@ It has these top-level messages:
 	CSOEconItemAttribute
 	CSOEconItemEquipped
 	CSOEconItem
-	CMsgAdjustItemEquippedState
 	CMsgSortItems
 	CSOEconClaimCode
 	CMsgStoreGetUserData
@@ -148,6 +140,8 @@ const (
 	EGCBaseMsg_k_EMsgGCError                    EGCBaseMsg = 4509
 	EGCBaseMsg_k_EMsgGCReplay_UploadedToYouTube EGCBaseMsg = 4510
 	EGCBaseMsg_k_EMsgGCLANServerAvailable       EGCBaseMsg = 4511
+	EGCBaseMsg_k_EMsgGCInviteToLobby            EGCBaseMsg = 4512
+	EGCBaseMsg_k_EMsgGCLobbyInviteResponse      EGCBaseMsg = 4513
 )
 
 var EGCBaseMsg_name = map[int32]string{
@@ -165,6 +159,8 @@ var EGCBaseMsg_name = map[int32]string{
 	4509: "k_EMsgGCError",
 	4510: "k_EMsgGCReplay_UploadedToYouTube",
 	4511: "k_EMsgGCLANServerAvailable",
+	4512: "k_EMsgGCInviteToLobby",
+	4513: "k_EMsgGCLobbyInviteResponse",
 }
 var EGCBaseMsg_value = map[string]int32{
 	"k_EMsgGCSystemMessage":            4001,
@@ -181,6 +177,8 @@ var EGCBaseMsg_value = map[string]int32{
 	"k_EMsgGCError":                    4509,
 	"k_EMsgGCReplay_UploadedToYouTube": 4510,
 	"k_EMsgGCLANServerAvailable":       4511,
+	"k_EMsgGCInviteToLobby":            4512,
+	"k_EMsgGCLobbyInviteResponse":      4513,
 }
 
 func (x EGCBaseMsg) Enum() *EGCBaseMsg {
@@ -378,70 +376,6 @@ func (m *CMsgGCStorePurchaseInitResponse) GetTxnId() uint64 {
 	return 0
 }
 
-type CSOPartyInvite struct {
-	GroupId          *uint64 `protobuf:"varint,1,opt,name=group_id" json:"group_id,omitempty"`
-	SenderId         *uint64 `protobuf:"fixed64,2,opt,name=sender_id" json:"sender_id,omitempty"`
-	SenderName       *string `protobuf:"bytes,3,opt,name=sender_name" json:"sender_name,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
-}
-
-func (m *CSOPartyInvite) Reset()         { *m = CSOPartyInvite{} }
-func (m *CSOPartyInvite) String() string { return proto.CompactTextString(m) }
-func (*CSOPartyInvite) ProtoMessage()    {}
-
-func (m *CSOPartyInvite) GetGroupId() uint64 {
-	if m != nil && m.GroupId != nil {
-		return *m.GroupId
-	}
-	return 0
-}
-
-func (m *CSOPartyInvite) GetSenderId() uint64 {
-	if m != nil && m.SenderId != nil {
-		return *m.SenderId
-	}
-	return 0
-}
-
-func (m *CSOPartyInvite) GetSenderName() string {
-	if m != nil && m.SenderName != nil {
-		return *m.SenderName
-	}
-	return ""
-}
-
-type CSOLobbyInvite struct {
-	GroupId          *uint64 `protobuf:"varint,1,opt,name=group_id" json:"group_id,omitempty"`
-	SenderId         *uint64 `protobuf:"fixed64,2,opt,name=sender_id" json:"sender_id,omitempty"`
-	SenderName       *string `protobuf:"bytes,3,opt,name=sender_name" json:"sender_name,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
-}
-
-func (m *CSOLobbyInvite) Reset()         { *m = CSOLobbyInvite{} }
-func (m *CSOLobbyInvite) String() string { return proto.CompactTextString(m) }
-func (*CSOLobbyInvite) ProtoMessage()    {}
-
-func (m *CSOLobbyInvite) GetGroupId() uint64 {
-	if m != nil && m.GroupId != nil {
-		return *m.GroupId
-	}
-	return 0
-}
-
-func (m *CSOLobbyInvite) GetSenderId() uint64 {
-	if m != nil && m.SenderId != nil {
-		return *m.SenderId
-	}
-	return 0
-}
-
-func (m *CSOLobbyInvite) GetSenderName() string {
-	if m != nil && m.SenderName != nil {
-		return *m.SenderName
-	}
-	return ""
-}
-
 type CMsgSystemBroadcast struct {
 	Message          *string `protobuf:"bytes,1,opt,name=message" json:"message,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
@@ -496,6 +430,30 @@ func (m *CMsgInviteToParty) GetAsCoach() bool {
 		return *m.AsCoach
 	}
 	return false
+}
+
+type CMsgInviteToLobby struct {
+	SteamId          *uint64 `protobuf:"fixed64,1,opt,name=steam_id" json:"steam_id,omitempty"`
+	ClientVersion    *uint32 `protobuf:"varint,2,opt,name=client_version" json:"client_version,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CMsgInviteToLobby) Reset()         { *m = CMsgInviteToLobby{} }
+func (m *CMsgInviteToLobby) String() string { return proto.CompactTextString(m) }
+func (*CMsgInviteToLobby) ProtoMessage()    {}
+
+func (m *CMsgInviteToLobby) GetSteamId() uint64 {
+	if m != nil && m.SteamId != nil {
+		return *m.SteamId
+	}
+	return 0
+}
+
+func (m *CMsgInviteToLobby) GetClientVersion() uint32 {
+	if m != nil && m.ClientVersion != nil {
+		return *m.ClientVersion
+	}
+	return 0
 }
 
 type CMsgInvitationCreated struct {
@@ -580,6 +538,54 @@ func (m *CMsgPartyInviteResponse) GetGameLanguageEnum() uint32 {
 }
 
 func (m *CMsgPartyInviteResponse) GetGameLanguageName() string {
+	if m != nil && m.GameLanguageName != nil {
+		return *m.GameLanguageName
+	}
+	return ""
+}
+
+type CMsgLobbyInviteResponse struct {
+	LobbyId          *uint64 `protobuf:"fixed64,1,opt,name=lobby_id" json:"lobby_id,omitempty"`
+	Accept           *bool   `protobuf:"varint,2,opt,name=accept" json:"accept,omitempty"`
+	ClientVersion    *uint32 `protobuf:"varint,3,opt,name=client_version" json:"client_version,omitempty"`
+	GameLanguageEnum *uint32 `protobuf:"varint,4,opt,name=game_language_enum" json:"game_language_enum,omitempty"`
+	GameLanguageName *string `protobuf:"bytes,5,opt,name=game_language_name" json:"game_language_name,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CMsgLobbyInviteResponse) Reset()         { *m = CMsgLobbyInviteResponse{} }
+func (m *CMsgLobbyInviteResponse) String() string { return proto.CompactTextString(m) }
+func (*CMsgLobbyInviteResponse) ProtoMessage()    {}
+
+func (m *CMsgLobbyInviteResponse) GetLobbyId() uint64 {
+	if m != nil && m.LobbyId != nil {
+		return *m.LobbyId
+	}
+	return 0
+}
+
+func (m *CMsgLobbyInviteResponse) GetAccept() bool {
+	if m != nil && m.Accept != nil {
+		return *m.Accept
+	}
+	return false
+}
+
+func (m *CMsgLobbyInviteResponse) GetClientVersion() uint32 {
+	if m != nil && m.ClientVersion != nil {
+		return *m.ClientVersion
+	}
+	return 0
+}
+
+func (m *CMsgLobbyInviteResponse) GetGameLanguageEnum() uint32 {
+	if m != nil && m.GameLanguageEnum != nil {
+		return *m.GameLanguageEnum
+	}
+	return 0
+}
+
+func (m *CMsgLobbyInviteResponse) GetGameLanguageName() string {
 	if m != nil && m.GameLanguageName != nil {
 		return *m.GameLanguageName
 	}
@@ -1271,38 +1277,6 @@ func (m *CSOEconItem) GetEquippedState() []*CSOEconItemEquipped {
 		return m.EquippedState
 	}
 	return nil
-}
-
-type CMsgAdjustItemEquippedState struct {
-	ItemId           *uint64 `protobuf:"varint,1,opt,name=item_id" json:"item_id,omitempty"`
-	NewClass         *uint32 `protobuf:"varint,2,opt,name=new_class" json:"new_class,omitempty"`
-	NewSlot          *uint32 `protobuf:"varint,3,opt,name=new_slot" json:"new_slot,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
-}
-
-func (m *CMsgAdjustItemEquippedState) Reset()         { *m = CMsgAdjustItemEquippedState{} }
-func (m *CMsgAdjustItemEquippedState) String() string { return proto.CompactTextString(m) }
-func (*CMsgAdjustItemEquippedState) ProtoMessage()    {}
-
-func (m *CMsgAdjustItemEquippedState) GetItemId() uint64 {
-	if m != nil && m.ItemId != nil {
-		return *m.ItemId
-	}
-	return 0
-}
-
-func (m *CMsgAdjustItemEquippedState) GetNewClass() uint32 {
-	if m != nil && m.NewClass != nil {
-		return *m.NewClass
-	}
-	return 0
-}
-
-func (m *CMsgAdjustItemEquippedState) GetNewSlot() uint32 {
-	if m != nil && m.NewSlot != nil {
-		return *m.NewSlot
-	}
-	return 0
 }
 
 type CMsgSortItems struct {

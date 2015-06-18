@@ -7,8 +7,6 @@ package dota
 import proto "github.com/golang/protobuf/proto"
 import math "math"
 
-// discarding unused import google_protobuf "github.com/dotabuff/manta/dota/google/protobuf"
-
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
 var _ = math.Inf
@@ -87,6 +85,9 @@ type CDOTABroadcastMsg_LANLobbyReply struct {
 	Members          []*CDOTABroadcastMsg_LANLobbyReply_CLobbyMember `protobuf:"bytes,4,rep,name=members" json:"members,omitempty"`
 	RequiresPassKey  *bool                                           `protobuf:"varint,5,opt,name=requires_pass_key" json:"requires_pass_key,omitempty"`
 	LeaderAccountId  *uint32                                         `protobuf:"varint,6,opt,name=leader_account_id" json:"leader_account_id,omitempty"`
+	GameMode         *uint32                                         `protobuf:"varint,7,opt,name=game_mode" json:"game_mode,omitempty"`
+	Name             *string                                         `protobuf:"bytes,8,opt,name=name" json:"name,omitempty"`
+	Players          *uint32                                         `protobuf:"varint,9,opt,name=players" json:"players,omitempty"`
 	XXX_unrecognized []byte                                          `json:"-"`
 }
 
@@ -132,6 +133,27 @@ func (m *CDOTABroadcastMsg_LANLobbyReply) GetRequiresPassKey() bool {
 func (m *CDOTABroadcastMsg_LANLobbyReply) GetLeaderAccountId() uint32 {
 	if m != nil && m.LeaderAccountId != nil {
 		return *m.LeaderAccountId
+	}
+	return 0
+}
+
+func (m *CDOTABroadcastMsg_LANLobbyReply) GetGameMode() uint32 {
+	if m != nil && m.GameMode != nil {
+		return *m.GameMode
+	}
+	return 0
+}
+
+func (m *CDOTABroadcastMsg_LANLobbyReply) GetName() string {
+	if m != nil && m.Name != nil {
+		return *m.Name
+	}
+	return ""
+}
+
+func (m *CDOTABroadcastMsg_LANLobbyReply) GetPlayers() uint32 {
+	if m != nil && m.Players != nil {
+		return *m.Players
 	}
 	return 0
 }

@@ -19,10 +19,10 @@ var packetNames = map[int32]string{
 	7:   "NET_Messages_net_SignonState",
 	8:   "NET_Messages_net_SpawnGroup_Load",
 	9:   "NET_Messages_net_SpawnGroup_ManifestUpdate",
-	10:  "NET_Messages_net_SpawnGroup_ForceBlockingLoad",
 	11:  "NET_Messages_net_SpawnGroup_SetCreationTick",
 	12:  "NET_Messages_net_SpawnGroup_Unload",
 	13:  "NET_Messages_net_SpawnGroup_LoadCompleted",
+	14:  "NET_Messages_net_ReliableMessageEndMarker",
 	40:  "SVC_Messages_svc_ServerInfo",
 	41:  "SVC_Messages_svc_FlattenedSerializer",
 	42:  "SVC_Messages_svc_ClassInfo",
@@ -91,6 +91,12 @@ var packetNames = map[int32]string{
 	141: "EBaseEntityMessages_EM_FixAngle",
 	142: "EBaseUserMessages_UM_CloseCaptionPlaceholder",
 	143: "EBaseUserMessages_UM_CameraTransition",
+	144: "EBaseUserMessages_UM_AudioParameter",
+	145: "EBaseUserMessages_UM_ParticleManager",
+	146: "EBaseUserMessages_UM_HudError",
+	147: "EBaseUserMessages_UM_CustomGameEvent_ClientToServer",
+	148: "EBaseUserMessages_UM_CustomGameEvent_ServerToClient",
+	149: "EBaseUserMessages_UM_TrackedControllerInput_ClientToServer",
 	200: "EBaseGameEvents_GE_VDebugGameSessionIDEvent",
 	201: "EBaseGameEvents_GE_PlaceDecalEvent",
 	202: "EBaseGameEvents_GE_ClearWorldDecalsEvent",
@@ -101,8 +107,8 @@ var packetNames = map[int32]string{
 	207: "EBaseGameEvents_GE_Source1LegacyGameEvent",
 	208: "EBaseGameEvents_GE_SosStartSoundEvent",
 	209: "EBaseGameEvents_GE_SosStopSoundEvent",
-	210: "EBaseGameEvents_GE_SosSetSoundEventParam",
-	211: "EBaseGameEvents_GE_SosSetLibraryStackField",
+	210: "EBaseGameEvents_GE_SosSetSoundEventParams",
+	211: "EBaseGameEvents_GE_SosSetLibraryStackFields",
 	212: "EBaseGameEvents_GE_SosStopSoundEventHash",
 	465: "EDotaUserMessages_DOTA_UM_AIDebugLine",
 	466: "EDotaUserMessages_DOTA_UM_ChatEvent",
@@ -175,7 +181,18 @@ var packetNames = map[int32]string{
 	537: "EDotaUserMessages_DOTA_UM_BuyBackStateAlert",
 	538: "EDotaUserMessages_DOTA_UM_SpeechBubble",
 	539: "EDotaUserMessages_DOTA_UM_CustomHeaderMessage",
+	540: "EDotaUserMessages_DOTA_UM_QuickBuyAlert",
+	541: "EDotaUserMessages_DOTA_UM_StatsHeroDetails",
+	542: "EDotaUserMessages_DOTA_UM_PredictionResult",
+	543: "EDotaUserMessages_DOTA_UM_ModifierAlert",
+	544: "EDotaUserMessages_DOTA_UM_HPManaAlert",
+	545: "EDotaUserMessages_DOTA_UM_GlyphAlert",
+	546: "EDotaUserMessages_DOTA_UM_BeastChat",
 	547: "EDotaUserMessages_DOTA_UM_SpectatorPlayerUnitOrders",
+	548: "EDotaUserMessages_DOTA_UM_CustomHudElement_Create",
+	549: "EDotaUserMessages_DOTA_UM_CustomHudElement_Modify",
+	550: "EDotaUserMessages_DOTA_UM_CustomHudElement_Destroy",
+	551: "EDotaUserMessages_DOTA_UM_CompendiumState",
 }
 
 type Callbacks struct {
@@ -205,15 +222,15 @@ type Callbacks struct {
 	onCNETMsg_SignonState                     []func(*dota.CNETMsg_SignonState) error
 	onCNETMsg_SpawnGroup_Load                 []func(*dota.CNETMsg_SpawnGroup_Load) error
 	onCNETMsg_SpawnGroup_ManifestUpdate       []func(*dota.CNETMsg_SpawnGroup_ManifestUpdate) error
-	onCNETMsg_SpawnGroup_ForceBlockingLoad    []func(*dota.CNETMsg_SpawnGroup_ForceBlockingLoad) error
 	onCNETMsg_SpawnGroup_SetCreationTick      []func(*dota.CNETMsg_SpawnGroup_SetCreationTick) error
 	onCNETMsg_SpawnGroup_Unload               []func(*dota.CNETMsg_SpawnGroup_Unload) error
 	onCNETMsg_SpawnGroup_LoadCompleted        []func(*dota.CNETMsg_SpawnGroup_LoadCompleted) error
+	onCNETMsg_ReliableMessageEndMarker        []func(*dota.CNETMsg_ReliableMessageEndMarker) error
 	onCSVCMsg_ServerInfo                      []func(*dota.CSVCMsg_ServerInfo) error
 	onCSVCMsg_FlattenedSerializer             []func(*dota.CSVCMsg_FlattenedSerializer) error
 	onCSVCMsg_ClassInfo                       []func(*dota.CSVCMsg_ClassInfo) error
 	onCSVCMsg_SetPause                        []func(*dota.CSVCMsg_SetPause) error
-	onCSVCMsg_CreateStringTable               []func(*wireCreateStringTable) error
+	onCSVCMsg_CreateStringTable               []func(*dota.CSVCMsg_CreateStringTable) error
 	onCSVCMsg_UpdateStringTable               []func(*dota.CSVCMsg_UpdateStringTable) error
 	onCSVCMsg_VoiceInit                       []func(*dota.CSVCMsg_VoiceInit) error
 	onCSVCMsg_VoiceData                       []func(*dota.CSVCMsg_VoiceData) error
@@ -271,6 +288,7 @@ type Callbacks struct {
 	onCUserMessageCreditsMsg                  []func(*dota.CUserMessageCreditsMsg) error
 	onCUserMessageCloseCaptionPlaceholder     []func(*dota.CUserMessageCloseCaptionPlaceholder) error
 	onCUserMessageCameraTransition            []func(*dota.CUserMessageCameraTransition) error
+	onCUserMessageAudioParameter              []func(*dota.CUserMessageAudioParameter) error
 	onCEntityMessagePlayJingle                []func(*dota.CEntityMessagePlayJingle) error
 	onCEntityMessageScreenOverlay             []func(*dota.CEntityMessageScreenOverlay) error
 	onCEntityMessageRemoveAllDecals           []func(*dota.CEntityMessageRemoveAllDecals) error
@@ -282,13 +300,13 @@ type Callbacks struct {
 	onCMsgClearWorldDecalsEvent               []func(*dota.CMsgClearWorldDecalsEvent) error
 	onCMsgClearEntityDecalsEvent              []func(*dota.CMsgClearEntityDecalsEvent) error
 	onCMsgClearDecalsForSkeletonInstanceEvent []func(*dota.CMsgClearDecalsForSkeletonInstanceEvent) error
-	onCMsgSource1LegacyGameEventList          []func(*wireSource1GameEventList) error
+	onCMsgSource1LegacyGameEventList          []func(*dota.CMsgSource1LegacyGameEventList) error
 	onCMsgSource1LegacyListenEvents           []func(*dota.CMsgSource1LegacyListenEvents) error
-	onCMsgSource1LegacyGameEvent              []func(*wireSource1GameEvent) error
+	onCMsgSource1LegacyGameEvent              []func(*dota.CMsgSource1LegacyGameEvent) error
 	onCMsgSosStartSoundEvent                  []func(*dota.CMsgSosStartSoundEvent) error
 	onCMsgSosStopSoundEvent                   []func(*dota.CMsgSosStopSoundEvent) error
-	onCMsgSosSetSoundEventParam               []func(*dota.CMsgSosSetSoundEventParam) error
-	onCMsgSosSetLibraryStackField             []func(*dota.CMsgSosSetLibraryStackField) error
+	onCMsgSosSetSoundEventParams              []func(*dota.CMsgSosSetSoundEventParams) error
+	onCMsgSosSetLibraryStackFields            []func(*dota.CMsgSosSetLibraryStackFields) error
 	onCMsgSosStopSoundEventHash               []func(*dota.CMsgSosStopSoundEventHash) error
 	onCDOTAUserMsg_AIDebugLine                []func(*dota.CDOTAUserMsg_AIDebugLine) error
 	onCDOTAUserMsg_ChatEvent                  []func(*dota.CDOTAUserMsg_ChatEvent) error
@@ -361,7 +379,17 @@ type Callbacks struct {
 	onCDOTAUserMsg_BuyBackStateAlert          []func(*dota.CDOTAUserMsg_BuyBackStateAlert) error
 	onCDOTAUserMsg_SpeechBubble               []func(*dota.CDOTAUserMsg_SpeechBubble) error
 	onCDOTAUserMsg_CustomHeaderMessage        []func(*dota.CDOTAUserMsg_CustomHeaderMessage) error
-	onCDOTAUserMsg_SpectatorPlayerUnitOrders  []func(*TempUnitOrder) error
+	onCDOTAUserMsg_QuickBuyAlert              []func(*dota.CDOTAUserMsg_QuickBuyAlert) error
+	onCDOTAUserMsg_PredictionResult           []func(*dota.CDOTAUserMsg_PredictionResult) error
+	onCDOTAUserMsg_ModifierAlert              []func(*dota.CDOTAUserMsg_ModifierAlert) error
+	onCDOTAUserMsg_HPManaAlert                []func(*dota.CDOTAUserMsg_HPManaAlert) error
+	onCDOTAUserMsg_GlyphAlert                 []func(*dota.CDOTAUserMsg_GlyphAlert) error
+	onCDOTAUserMsg_BeastChat                  []func(*dota.CDOTAUserMsg_BeastChat) error
+	onCDOTAUserMsg_SpectatorPlayerUnitOrders  []func(*dota.CDOTAUserMsg_SpectatorPlayerUnitOrders) error
+	onCDOTAUserMsg_CustomHudElement_Create    []func(*dota.CDOTAUserMsg_CustomHudElement_Create) error
+	onCDOTAUserMsg_CustomHudElement_Modify    []func(*dota.CDOTAUserMsg_CustomHudElement_Modify) error
+	onCDOTAUserMsg_CustomHudElement_Destroy   []func(*dota.CDOTAUserMsg_CustomHudElement_Destroy) error
+	onCDOTAUserMsg_CompendiumState            []func(*dota.CDOTAUserMsg_CompendiumState) error
 }
 
 func (c *Callbacks) OnCDemoStop(fn func(*dota.CDemoStop) error) {
@@ -520,12 +548,6 @@ func (c *Callbacks) OnCNETMsg_SpawnGroup_ManifestUpdate(fn func(*dota.CNETMsg_Sp
 	}
 	c.onCNETMsg_SpawnGroup_ManifestUpdate = append(c.onCNETMsg_SpawnGroup_ManifestUpdate, fn)
 }
-func (c *Callbacks) OnCNETMsg_SpawnGroup_ForceBlockingLoad(fn func(*dota.CNETMsg_SpawnGroup_ForceBlockingLoad) error) {
-	if c.onCNETMsg_SpawnGroup_ForceBlockingLoad == nil {
-		c.onCNETMsg_SpawnGroup_ForceBlockingLoad = make([]func(*dota.CNETMsg_SpawnGroup_ForceBlockingLoad) error, 0)
-	}
-	c.onCNETMsg_SpawnGroup_ForceBlockingLoad = append(c.onCNETMsg_SpawnGroup_ForceBlockingLoad, fn)
-}
 func (c *Callbacks) OnCNETMsg_SpawnGroup_SetCreationTick(fn func(*dota.CNETMsg_SpawnGroup_SetCreationTick) error) {
 	if c.onCNETMsg_SpawnGroup_SetCreationTick == nil {
 		c.onCNETMsg_SpawnGroup_SetCreationTick = make([]func(*dota.CNETMsg_SpawnGroup_SetCreationTick) error, 0)
@@ -543,6 +565,12 @@ func (c *Callbacks) OnCNETMsg_SpawnGroup_LoadCompleted(fn func(*dota.CNETMsg_Spa
 		c.onCNETMsg_SpawnGroup_LoadCompleted = make([]func(*dota.CNETMsg_SpawnGroup_LoadCompleted) error, 0)
 	}
 	c.onCNETMsg_SpawnGroup_LoadCompleted = append(c.onCNETMsg_SpawnGroup_LoadCompleted, fn)
+}
+func (c *Callbacks) OnCNETMsg_ReliableMessageEndMarker(fn func(*dota.CNETMsg_ReliableMessageEndMarker) error) {
+	if c.onCNETMsg_ReliableMessageEndMarker == nil {
+		c.onCNETMsg_ReliableMessageEndMarker = make([]func(*dota.CNETMsg_ReliableMessageEndMarker) error, 0)
+	}
+	c.onCNETMsg_ReliableMessageEndMarker = append(c.onCNETMsg_ReliableMessageEndMarker, fn)
 }
 func (c *Callbacks) OnCSVCMsg_ServerInfo(fn func(*dota.CSVCMsg_ServerInfo) error) {
 	if c.onCSVCMsg_ServerInfo == nil {
@@ -568,9 +596,9 @@ func (c *Callbacks) OnCSVCMsg_SetPause(fn func(*dota.CSVCMsg_SetPause) error) {
 	}
 	c.onCSVCMsg_SetPause = append(c.onCSVCMsg_SetPause, fn)
 }
-func (c *Callbacks) OnCSVCMsg_CreateStringTable(fn func(*wireCreateStringTable) error) {
+func (c *Callbacks) OnCSVCMsg_CreateStringTable(fn func(*dota.CSVCMsg_CreateStringTable) error) {
 	if c.onCSVCMsg_CreateStringTable == nil {
-		c.onCSVCMsg_CreateStringTable = make([]func(*wireCreateStringTable) error, 0)
+		c.onCSVCMsg_CreateStringTable = make([]func(*dota.CSVCMsg_CreateStringTable) error, 0)
 	}
 	c.onCSVCMsg_CreateStringTable = append(c.onCSVCMsg_CreateStringTable, fn)
 }
@@ -916,6 +944,12 @@ func (c *Callbacks) OnCUserMessageCameraTransition(fn func(*dota.CUserMessageCam
 	}
 	c.onCUserMessageCameraTransition = append(c.onCUserMessageCameraTransition, fn)
 }
+func (c *Callbacks) OnCUserMessageAudioParameter(fn func(*dota.CUserMessageAudioParameter) error) {
+	if c.onCUserMessageAudioParameter == nil {
+		c.onCUserMessageAudioParameter = make([]func(*dota.CUserMessageAudioParameter) error, 0)
+	}
+	c.onCUserMessageAudioParameter = append(c.onCUserMessageAudioParameter, fn)
+}
 func (c *Callbacks) OnCEntityMessagePlayJingle(fn func(*dota.CEntityMessagePlayJingle) error) {
 	if c.onCEntityMessagePlayJingle == nil {
 		c.onCEntityMessagePlayJingle = make([]func(*dota.CEntityMessagePlayJingle) error, 0)
@@ -982,9 +1016,9 @@ func (c *Callbacks) OnCMsgClearDecalsForSkeletonInstanceEvent(fn func(*dota.CMsg
 	}
 	c.onCMsgClearDecalsForSkeletonInstanceEvent = append(c.onCMsgClearDecalsForSkeletonInstanceEvent, fn)
 }
-func (c *Callbacks) OnCMsgSource1LegacyGameEventList(fn func(*wireSource1GameEventList) error) {
+func (c *Callbacks) OnCMsgSource1LegacyGameEventList(fn func(*dota.CMsgSource1LegacyGameEventList) error) {
 	if c.onCMsgSource1LegacyGameEventList == nil {
-		c.onCMsgSource1LegacyGameEventList = make([]func(*wireSource1GameEventList) error, 0)
+		c.onCMsgSource1LegacyGameEventList = make([]func(*dota.CMsgSource1LegacyGameEventList) error, 0)
 	}
 	c.onCMsgSource1LegacyGameEventList = append(c.onCMsgSource1LegacyGameEventList, fn)
 }
@@ -994,9 +1028,9 @@ func (c *Callbacks) OnCMsgSource1LegacyListenEvents(fn func(*dota.CMsgSource1Leg
 	}
 	c.onCMsgSource1LegacyListenEvents = append(c.onCMsgSource1LegacyListenEvents, fn)
 }
-func (c *Callbacks) OnCMsgSource1LegacyGameEvent(fn func(*wireSource1GameEvent) error) {
+func (c *Callbacks) OnCMsgSource1LegacyGameEvent(fn func(*dota.CMsgSource1LegacyGameEvent) error) {
 	if c.onCMsgSource1LegacyGameEvent == nil {
-		c.onCMsgSource1LegacyGameEvent = make([]func(*wireSource1GameEvent) error, 0)
+		c.onCMsgSource1LegacyGameEvent = make([]func(*dota.CMsgSource1LegacyGameEvent) error, 0)
 	}
 	c.onCMsgSource1LegacyGameEvent = append(c.onCMsgSource1LegacyGameEvent, fn)
 }
@@ -1012,17 +1046,17 @@ func (c *Callbacks) OnCMsgSosStopSoundEvent(fn func(*dota.CMsgSosStopSoundEvent)
 	}
 	c.onCMsgSosStopSoundEvent = append(c.onCMsgSosStopSoundEvent, fn)
 }
-func (c *Callbacks) OnCMsgSosSetSoundEventParam(fn func(*dota.CMsgSosSetSoundEventParam) error) {
-	if c.onCMsgSosSetSoundEventParam == nil {
-		c.onCMsgSosSetSoundEventParam = make([]func(*dota.CMsgSosSetSoundEventParam) error, 0)
+func (c *Callbacks) OnCMsgSosSetSoundEventParams(fn func(*dota.CMsgSosSetSoundEventParams) error) {
+	if c.onCMsgSosSetSoundEventParams == nil {
+		c.onCMsgSosSetSoundEventParams = make([]func(*dota.CMsgSosSetSoundEventParams) error, 0)
 	}
-	c.onCMsgSosSetSoundEventParam = append(c.onCMsgSosSetSoundEventParam, fn)
+	c.onCMsgSosSetSoundEventParams = append(c.onCMsgSosSetSoundEventParams, fn)
 }
-func (c *Callbacks) OnCMsgSosSetLibraryStackField(fn func(*dota.CMsgSosSetLibraryStackField) error) {
-	if c.onCMsgSosSetLibraryStackField == nil {
-		c.onCMsgSosSetLibraryStackField = make([]func(*dota.CMsgSosSetLibraryStackField) error, 0)
+func (c *Callbacks) OnCMsgSosSetLibraryStackFields(fn func(*dota.CMsgSosSetLibraryStackFields) error) {
+	if c.onCMsgSosSetLibraryStackFields == nil {
+		c.onCMsgSosSetLibraryStackFields = make([]func(*dota.CMsgSosSetLibraryStackFields) error, 0)
 	}
-	c.onCMsgSosSetLibraryStackField = append(c.onCMsgSosSetLibraryStackField, fn)
+	c.onCMsgSosSetLibraryStackFields = append(c.onCMsgSosSetLibraryStackFields, fn)
 }
 func (c *Callbacks) OnCMsgSosStopSoundEventHash(fn func(*dota.CMsgSosStopSoundEventHash) error) {
 	if c.onCMsgSosStopSoundEventHash == nil {
@@ -1456,11 +1490,71 @@ func (c *Callbacks) OnCDOTAUserMsg_CustomHeaderMessage(fn func(*dota.CDOTAUserMs
 	}
 	c.onCDOTAUserMsg_CustomHeaderMessage = append(c.onCDOTAUserMsg_CustomHeaderMessage, fn)
 }
-func (c *Callbacks) OnCDOTAUserMsg_SpectatorPlayerUnitOrders(fn func(*TempUnitOrder) error) {
+func (c *Callbacks) OnCDOTAUserMsg_QuickBuyAlert(fn func(*dota.CDOTAUserMsg_QuickBuyAlert) error) {
+	if c.onCDOTAUserMsg_QuickBuyAlert == nil {
+		c.onCDOTAUserMsg_QuickBuyAlert = make([]func(*dota.CDOTAUserMsg_QuickBuyAlert) error, 0)
+	}
+	c.onCDOTAUserMsg_QuickBuyAlert = append(c.onCDOTAUserMsg_QuickBuyAlert, fn)
+}
+func (c *Callbacks) OnCDOTAUserMsg_PredictionResult(fn func(*dota.CDOTAUserMsg_PredictionResult) error) {
+	if c.onCDOTAUserMsg_PredictionResult == nil {
+		c.onCDOTAUserMsg_PredictionResult = make([]func(*dota.CDOTAUserMsg_PredictionResult) error, 0)
+	}
+	c.onCDOTAUserMsg_PredictionResult = append(c.onCDOTAUserMsg_PredictionResult, fn)
+}
+func (c *Callbacks) OnCDOTAUserMsg_ModifierAlert(fn func(*dota.CDOTAUserMsg_ModifierAlert) error) {
+	if c.onCDOTAUserMsg_ModifierAlert == nil {
+		c.onCDOTAUserMsg_ModifierAlert = make([]func(*dota.CDOTAUserMsg_ModifierAlert) error, 0)
+	}
+	c.onCDOTAUserMsg_ModifierAlert = append(c.onCDOTAUserMsg_ModifierAlert, fn)
+}
+func (c *Callbacks) OnCDOTAUserMsg_HPManaAlert(fn func(*dota.CDOTAUserMsg_HPManaAlert) error) {
+	if c.onCDOTAUserMsg_HPManaAlert == nil {
+		c.onCDOTAUserMsg_HPManaAlert = make([]func(*dota.CDOTAUserMsg_HPManaAlert) error, 0)
+	}
+	c.onCDOTAUserMsg_HPManaAlert = append(c.onCDOTAUserMsg_HPManaAlert, fn)
+}
+func (c *Callbacks) OnCDOTAUserMsg_GlyphAlert(fn func(*dota.CDOTAUserMsg_GlyphAlert) error) {
+	if c.onCDOTAUserMsg_GlyphAlert == nil {
+		c.onCDOTAUserMsg_GlyphAlert = make([]func(*dota.CDOTAUserMsg_GlyphAlert) error, 0)
+	}
+	c.onCDOTAUserMsg_GlyphAlert = append(c.onCDOTAUserMsg_GlyphAlert, fn)
+}
+func (c *Callbacks) OnCDOTAUserMsg_BeastChat(fn func(*dota.CDOTAUserMsg_BeastChat) error) {
+	if c.onCDOTAUserMsg_BeastChat == nil {
+		c.onCDOTAUserMsg_BeastChat = make([]func(*dota.CDOTAUserMsg_BeastChat) error, 0)
+	}
+	c.onCDOTAUserMsg_BeastChat = append(c.onCDOTAUserMsg_BeastChat, fn)
+}
+func (c *Callbacks) OnCDOTAUserMsg_SpectatorPlayerUnitOrders(fn func(*dota.CDOTAUserMsg_SpectatorPlayerUnitOrders) error) {
 	if c.onCDOTAUserMsg_SpectatorPlayerUnitOrders == nil {
-		c.onCDOTAUserMsg_SpectatorPlayerUnitOrders = make([]func(*TempUnitOrder) error, 0)
+		c.onCDOTAUserMsg_SpectatorPlayerUnitOrders = make([]func(*dota.CDOTAUserMsg_SpectatorPlayerUnitOrders) error, 0)
 	}
 	c.onCDOTAUserMsg_SpectatorPlayerUnitOrders = append(c.onCDOTAUserMsg_SpectatorPlayerUnitOrders, fn)
+}
+func (c *Callbacks) OnCDOTAUserMsg_CustomHudElement_Create(fn func(*dota.CDOTAUserMsg_CustomHudElement_Create) error) {
+	if c.onCDOTAUserMsg_CustomHudElement_Create == nil {
+		c.onCDOTAUserMsg_CustomHudElement_Create = make([]func(*dota.CDOTAUserMsg_CustomHudElement_Create) error, 0)
+	}
+	c.onCDOTAUserMsg_CustomHudElement_Create = append(c.onCDOTAUserMsg_CustomHudElement_Create, fn)
+}
+func (c *Callbacks) OnCDOTAUserMsg_CustomHudElement_Modify(fn func(*dota.CDOTAUserMsg_CustomHudElement_Modify) error) {
+	if c.onCDOTAUserMsg_CustomHudElement_Modify == nil {
+		c.onCDOTAUserMsg_CustomHudElement_Modify = make([]func(*dota.CDOTAUserMsg_CustomHudElement_Modify) error, 0)
+	}
+	c.onCDOTAUserMsg_CustomHudElement_Modify = append(c.onCDOTAUserMsg_CustomHudElement_Modify, fn)
+}
+func (c *Callbacks) OnCDOTAUserMsg_CustomHudElement_Destroy(fn func(*dota.CDOTAUserMsg_CustomHudElement_Destroy) error) {
+	if c.onCDOTAUserMsg_CustomHudElement_Destroy == nil {
+		c.onCDOTAUserMsg_CustomHudElement_Destroy = make([]func(*dota.CDOTAUserMsg_CustomHudElement_Destroy) error, 0)
+	}
+	c.onCDOTAUserMsg_CustomHudElement_Destroy = append(c.onCDOTAUserMsg_CustomHudElement_Destroy, fn)
+}
+func (c *Callbacks) OnCDOTAUserMsg_CompendiumState(fn func(*dota.CDOTAUserMsg_CompendiumState) error) {
+	if c.onCDOTAUserMsg_CompendiumState == nil {
+		c.onCDOTAUserMsg_CompendiumState = make([]func(*dota.CDOTAUserMsg_CompendiumState) error, 0)
+	}
+	c.onCDOTAUserMsg_CompendiumState = append(c.onCDOTAUserMsg_CompendiumState, fn)
 }
 func (p *Parser) CallByDemoType(t int32, raw []byte) error {
 	callbacks := p.Callbacks
@@ -1810,19 +1904,6 @@ func (p *Parser) CallByPacketType(t int32, raw []byte) error {
 			}
 		}
 		return nil
-	case 10: // dota.NET_Messages_net_SpawnGroup_ForceBlockingLoad
-		if cbs := callbacks.onCNETMsg_SpawnGroup_ForceBlockingLoad; cbs != nil {
-			msg := &dota.CNETMsg_SpawnGroup_ForceBlockingLoad{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			for _, fn := range cbs {
-				if err := fn(msg); err != nil {
-					return err
-				}
-			}
-		}
-		return nil
 	case 11: // dota.NET_Messages_net_SpawnGroup_SetCreationTick
 		if cbs := callbacks.onCNETMsg_SpawnGroup_SetCreationTick; cbs != nil {
 			msg := &dota.CNETMsg_SpawnGroup_SetCreationTick{}
@@ -1852,6 +1933,19 @@ func (p *Parser) CallByPacketType(t int32, raw []byte) error {
 	case 13: // dota.NET_Messages_net_SpawnGroup_LoadCompleted
 		if cbs := callbacks.onCNETMsg_SpawnGroup_LoadCompleted; cbs != nil {
 			msg := &dota.CNETMsg_SpawnGroup_LoadCompleted{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			for _, fn := range cbs {
+				if err := fn(msg); err != nil {
+					return err
+				}
+			}
+		}
+		return nil
+	case 14: // dota.NET_Messages_net_ReliableMessageEndMarker
+		if cbs := callbacks.onCNETMsg_ReliableMessageEndMarker; cbs != nil {
+			msg := &dota.CNETMsg_ReliableMessageEndMarker{}
 			if err := proto.Unmarshal(raw, msg); err != nil {
 				return err
 			}
@@ -1916,7 +2010,7 @@ func (p *Parser) CallByPacketType(t int32, raw []byte) error {
 		return nil
 	case 44: // dota.SVC_Messages_svc_CreateStringTable
 		if cbs := callbacks.onCSVCMsg_CreateStringTable; cbs != nil {
-			msg := &wireCreateStringTable{}
+			msg := &dota.CSVCMsg_CreateStringTable{}
 			if err := proto.Unmarshal(raw, msg); err != nil {
 				return err
 			}
@@ -2668,6 +2762,19 @@ func (p *Parser) CallByPacketType(t int32, raw []byte) error {
 			}
 		}
 		return nil
+	case 144: // dota.EBaseUserMessages_UM_AudioParameter
+		if cbs := callbacks.onCUserMessageAudioParameter; cbs != nil {
+			msg := &dota.CUserMessageAudioParameter{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			for _, fn := range cbs {
+				if err := fn(msg); err != nil {
+					return err
+				}
+			}
+		}
+		return nil
 	case 136: // dota.EBaseEntityMessages_EM_PlayJingle
 		if cbs := callbacks.onCEntityMessagePlayJingle; cbs != nil {
 			msg := &dota.CEntityMessagePlayJingle{}
@@ -2813,7 +2920,7 @@ func (p *Parser) CallByPacketType(t int32, raw []byte) error {
 		return nil
 	case 205: // dota.EBaseGameEvents_GE_Source1LegacyGameEventList
 		if cbs := callbacks.onCMsgSource1LegacyGameEventList; cbs != nil {
-			msg := &wireSource1GameEventList{}
+			msg := &dota.CMsgSource1LegacyGameEventList{}
 			if err := proto.Unmarshal(raw, msg); err != nil {
 				return err
 			}
@@ -2839,7 +2946,7 @@ func (p *Parser) CallByPacketType(t int32, raw []byte) error {
 		return nil
 	case 207: // dota.EBaseGameEvents_GE_Source1LegacyGameEvent
 		if cbs := callbacks.onCMsgSource1LegacyGameEvent; cbs != nil {
-			msg := &wireSource1GameEvent{}
+			msg := &dota.CMsgSource1LegacyGameEvent{}
 			if err := proto.Unmarshal(raw, msg); err != nil {
 				return err
 			}
@@ -2876,9 +2983,9 @@ func (p *Parser) CallByPacketType(t int32, raw []byte) error {
 			}
 		}
 		return nil
-	case 210: // dota.EBaseGameEvents_GE_SosSetSoundEventParam
-		if cbs := callbacks.onCMsgSosSetSoundEventParam; cbs != nil {
-			msg := &dota.CMsgSosSetSoundEventParam{}
+	case 210: // dota.EBaseGameEvents_GE_SosSetSoundEventParams
+		if cbs := callbacks.onCMsgSosSetSoundEventParams; cbs != nil {
+			msg := &dota.CMsgSosSetSoundEventParams{}
 			if err := proto.Unmarshal(raw, msg); err != nil {
 				return err
 			}
@@ -2889,9 +2996,9 @@ func (p *Parser) CallByPacketType(t int32, raw []byte) error {
 			}
 		}
 		return nil
-	case 211: // dota.EBaseGameEvents_GE_SosSetLibraryStackField
-		if cbs := callbacks.onCMsgSosSetLibraryStackField; cbs != nil {
-			msg := &dota.CMsgSosSetLibraryStackField{}
+	case 211: // dota.EBaseGameEvents_GE_SosSetLibraryStackFields
+		if cbs := callbacks.onCMsgSosSetLibraryStackFields; cbs != nil {
+			msg := &dota.CMsgSosSetLibraryStackFields{}
 			if err := proto.Unmarshal(raw, msg); err != nil {
 				return err
 			}
@@ -3838,9 +3945,139 @@ func (p *Parser) CallByPacketType(t int32, raw []byte) error {
 			}
 		}
 		return nil
+	case 540: // dota.EDotaUserMessages_DOTA_UM_QuickBuyAlert
+		if cbs := callbacks.onCDOTAUserMsg_QuickBuyAlert; cbs != nil {
+			msg := &dota.CDOTAUserMsg_QuickBuyAlert{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			for _, fn := range cbs {
+				if err := fn(msg); err != nil {
+					return err
+				}
+			}
+		}
+		return nil
+	case 542: // dota.EDotaUserMessages_DOTA_UM_PredictionResult
+		if cbs := callbacks.onCDOTAUserMsg_PredictionResult; cbs != nil {
+			msg := &dota.CDOTAUserMsg_PredictionResult{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			for _, fn := range cbs {
+				if err := fn(msg); err != nil {
+					return err
+				}
+			}
+		}
+		return nil
+	case 543: // dota.EDotaUserMessages_DOTA_UM_ModifierAlert
+		if cbs := callbacks.onCDOTAUserMsg_ModifierAlert; cbs != nil {
+			msg := &dota.CDOTAUserMsg_ModifierAlert{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			for _, fn := range cbs {
+				if err := fn(msg); err != nil {
+					return err
+				}
+			}
+		}
+		return nil
+	case 544: // dota.EDotaUserMessages_DOTA_UM_HPManaAlert
+		if cbs := callbacks.onCDOTAUserMsg_HPManaAlert; cbs != nil {
+			msg := &dota.CDOTAUserMsg_HPManaAlert{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			for _, fn := range cbs {
+				if err := fn(msg); err != nil {
+					return err
+				}
+			}
+		}
+		return nil
+	case 545: // dota.EDotaUserMessages_DOTA_UM_GlyphAlert
+		if cbs := callbacks.onCDOTAUserMsg_GlyphAlert; cbs != nil {
+			msg := &dota.CDOTAUserMsg_GlyphAlert{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			for _, fn := range cbs {
+				if err := fn(msg); err != nil {
+					return err
+				}
+			}
+		}
+		return nil
+	case 546: // dota.EDotaUserMessages_DOTA_UM_BeastChat
+		if cbs := callbacks.onCDOTAUserMsg_BeastChat; cbs != nil {
+			msg := &dota.CDOTAUserMsg_BeastChat{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			for _, fn := range cbs {
+				if err := fn(msg); err != nil {
+					return err
+				}
+			}
+		}
+		return nil
 	case 547: // dota.EDotaUserMessages_DOTA_UM_SpectatorPlayerUnitOrders
 		if cbs := callbacks.onCDOTAUserMsg_SpectatorPlayerUnitOrders; cbs != nil {
-			msg := &TempUnitOrder{}
+			msg := &dota.CDOTAUserMsg_SpectatorPlayerUnitOrders{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			for _, fn := range cbs {
+				if err := fn(msg); err != nil {
+					return err
+				}
+			}
+		}
+		return nil
+	case 548: // dota.EDotaUserMessages_DOTA_UM_CustomHudElement_Create
+		if cbs := callbacks.onCDOTAUserMsg_CustomHudElement_Create; cbs != nil {
+			msg := &dota.CDOTAUserMsg_CustomHudElement_Create{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			for _, fn := range cbs {
+				if err := fn(msg); err != nil {
+					return err
+				}
+			}
+		}
+		return nil
+	case 549: // dota.EDotaUserMessages_DOTA_UM_CustomHudElement_Modify
+		if cbs := callbacks.onCDOTAUserMsg_CustomHudElement_Modify; cbs != nil {
+			msg := &dota.CDOTAUserMsg_CustomHudElement_Modify{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			for _, fn := range cbs {
+				if err := fn(msg); err != nil {
+					return err
+				}
+			}
+		}
+		return nil
+	case 550: // dota.EDotaUserMessages_DOTA_UM_CustomHudElement_Destroy
+		if cbs := callbacks.onCDOTAUserMsg_CustomHudElement_Destroy; cbs != nil {
+			msg := &dota.CDOTAUserMsg_CustomHudElement_Destroy{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			for _, fn := range cbs {
+				if err := fn(msg); err != nil {
+					return err
+				}
+			}
+		}
+		return nil
+	case 551: // dota.EDotaUserMessages_DOTA_UM_CompendiumState
+		if cbs := callbacks.onCDOTAUserMsg_CompendiumState; cbs != nil {
+			msg := &dota.CDOTAUserMsg_CompendiumState{}
 			if err := proto.Unmarshal(raw, msg); err != nil {
 				return err
 			}

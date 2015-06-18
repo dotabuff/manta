@@ -7,8 +7,6 @@ package dota
 import proto "github.com/golang/protobuf/proto"
 import math "math"
 
-// discarding unused import google_protobuf "github.com/dotabuff/manta/dota/google/protobuf"
-
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
 var _ = math.Inf
@@ -16,20 +14,20 @@ var _ = math.Inf
 type NET_Messages int32
 
 const (
-	NET_Messages_net_NOP                          NET_Messages = 0
-	NET_Messages_net_Disconnect                   NET_Messages = 1
-	NET_Messages_net_File                         NET_Messages = 2
-	NET_Messages_net_SplitScreenUser              NET_Messages = 3
-	NET_Messages_net_Tick                         NET_Messages = 4
-	NET_Messages_net_StringCmd                    NET_Messages = 5
-	NET_Messages_net_SetConVar                    NET_Messages = 6
-	NET_Messages_net_SignonState                  NET_Messages = 7
-	NET_Messages_net_SpawnGroup_Load              NET_Messages = 8
-	NET_Messages_net_SpawnGroup_ManifestUpdate    NET_Messages = 9
-	NET_Messages_net_SpawnGroup_ForceBlockingLoad NET_Messages = 10
-	NET_Messages_net_SpawnGroup_SetCreationTick   NET_Messages = 11
-	NET_Messages_net_SpawnGroup_Unload            NET_Messages = 12
-	NET_Messages_net_SpawnGroup_LoadCompleted     NET_Messages = 13
+	NET_Messages_net_NOP                        NET_Messages = 0
+	NET_Messages_net_Disconnect                 NET_Messages = 1
+	NET_Messages_net_File                       NET_Messages = 2
+	NET_Messages_net_SplitScreenUser            NET_Messages = 3
+	NET_Messages_net_Tick                       NET_Messages = 4
+	NET_Messages_net_StringCmd                  NET_Messages = 5
+	NET_Messages_net_SetConVar                  NET_Messages = 6
+	NET_Messages_net_SignonState                NET_Messages = 7
+	NET_Messages_net_SpawnGroup_Load            NET_Messages = 8
+	NET_Messages_net_SpawnGroup_ManifestUpdate  NET_Messages = 9
+	NET_Messages_net_SpawnGroup_SetCreationTick NET_Messages = 11
+	NET_Messages_net_SpawnGroup_Unload          NET_Messages = 12
+	NET_Messages_net_SpawnGroup_LoadCompleted   NET_Messages = 13
+	NET_Messages_net_ReliableMessageEndMarker   NET_Messages = 14
 )
 
 var NET_Messages_name = map[int32]string{
@@ -43,26 +41,26 @@ var NET_Messages_name = map[int32]string{
 	7:  "net_SignonState",
 	8:  "net_SpawnGroup_Load",
 	9:  "net_SpawnGroup_ManifestUpdate",
-	10: "net_SpawnGroup_ForceBlockingLoad",
 	11: "net_SpawnGroup_SetCreationTick",
 	12: "net_SpawnGroup_Unload",
 	13: "net_SpawnGroup_LoadCompleted",
+	14: "net_ReliableMessageEndMarker",
 }
 var NET_Messages_value = map[string]int32{
-	"net_NOP":                          0,
-	"net_Disconnect":                   1,
-	"net_File":                         2,
-	"net_SplitScreenUser":              3,
-	"net_Tick":                         4,
-	"net_StringCmd":                    5,
-	"net_SetConVar":                    6,
-	"net_SignonState":                  7,
-	"net_SpawnGroup_Load":              8,
-	"net_SpawnGroup_ManifestUpdate":    9,
-	"net_SpawnGroup_ForceBlockingLoad": 10,
-	"net_SpawnGroup_SetCreationTick":   11,
-	"net_SpawnGroup_Unload":            12,
-	"net_SpawnGroup_LoadCompleted":     13,
+	"net_NOP":                        0,
+	"net_Disconnect":                 1,
+	"net_File":                       2,
+	"net_SplitScreenUser":            3,
+	"net_Tick":                       4,
+	"net_StringCmd":                  5,
+	"net_SetConVar":                  6,
+	"net_SignonState":                7,
+	"net_SpawnGroup_Load":            8,
+	"net_SpawnGroup_ManifestUpdate":  9,
+	"net_SpawnGroup_SetCreationTick": 11,
+	"net_SpawnGroup_Unload":          12,
+	"net_SpawnGroup_LoadCompleted":   13,
+	"net_ReliableMessageEndMarker":   14,
 }
 
 func (x NET_Messages) Enum() *NET_Messages {
@@ -87,27 +85,36 @@ type SpawnGroupFlagsT int32
 const (
 	SpawnGroupFlagsT_SPAWN_GROUP_LOAD_ENTITIES_FROM_SAVE     SpawnGroupFlagsT = 1
 	SpawnGroupFlagsT_SPAWN_GROUP_DONT_SPAWN_ENTITIES         SpawnGroupFlagsT = 2
+	SpawnGroupFlagsT_SPAWN_GROUP_SYNCHRONOUS_SPAWN           SpawnGroupFlagsT = 4
 	SpawnGroupFlagsT_SPAWN_GROUP_IS_INITIAL_SPAWN_GROUP      SpawnGroupFlagsT = 8
 	SpawnGroupFlagsT_SPAWN_GROUP_CREATE_CLIENT_ONLY_ENTITIES SpawnGroupFlagsT = 16
 	SpawnGroupFlagsT_SPAWN_GROUP_SAVE_ENTITIES               SpawnGroupFlagsT = 32
 	SpawnGroupFlagsT_SPAWN_GROUP_BLOCK_UNTIL_LOADED          SpawnGroupFlagsT = 64
+	SpawnGroupFlagsT_SPAWN_GROUP_LOAD_STREAMING_DATA         SpawnGroupFlagsT = 128
+	SpawnGroupFlagsT_SPAWN_GROUP_CREATE_NEW_SCENE_WORLD      SpawnGroupFlagsT = 256
 )
 
 var SpawnGroupFlagsT_name = map[int32]string{
-	1:  "SPAWN_GROUP_LOAD_ENTITIES_FROM_SAVE",
-	2:  "SPAWN_GROUP_DONT_SPAWN_ENTITIES",
-	8:  "SPAWN_GROUP_IS_INITIAL_SPAWN_GROUP",
-	16: "SPAWN_GROUP_CREATE_CLIENT_ONLY_ENTITIES",
-	32: "SPAWN_GROUP_SAVE_ENTITIES",
-	64: "SPAWN_GROUP_BLOCK_UNTIL_LOADED",
+	1:   "SPAWN_GROUP_LOAD_ENTITIES_FROM_SAVE",
+	2:   "SPAWN_GROUP_DONT_SPAWN_ENTITIES",
+	4:   "SPAWN_GROUP_SYNCHRONOUS_SPAWN",
+	8:   "SPAWN_GROUP_IS_INITIAL_SPAWN_GROUP",
+	16:  "SPAWN_GROUP_CREATE_CLIENT_ONLY_ENTITIES",
+	32:  "SPAWN_GROUP_SAVE_ENTITIES",
+	64:  "SPAWN_GROUP_BLOCK_UNTIL_LOADED",
+	128: "SPAWN_GROUP_LOAD_STREAMING_DATA",
+	256: "SPAWN_GROUP_CREATE_NEW_SCENE_WORLD",
 }
 var SpawnGroupFlagsT_value = map[string]int32{
 	"SPAWN_GROUP_LOAD_ENTITIES_FROM_SAVE":     1,
 	"SPAWN_GROUP_DONT_SPAWN_ENTITIES":         2,
+	"SPAWN_GROUP_SYNCHRONOUS_SPAWN":           4,
 	"SPAWN_GROUP_IS_INITIAL_SPAWN_GROUP":      8,
 	"SPAWN_GROUP_CREATE_CLIENT_ONLY_ENTITIES": 16,
 	"SPAWN_GROUP_SAVE_ENTITIES":               32,
 	"SPAWN_GROUP_BLOCK_UNTIL_LOADED":          64,
+	"SPAWN_GROUP_LOAD_STREAMING_DATA":         128,
+	"SPAWN_GROUP_CREATE_NEW_SCENE_WORLD":      256,
 }
 
 func (x SpawnGroupFlagsT) Enum() *SpawnGroupFlagsT {
@@ -211,6 +218,78 @@ func (m *CMsgQAngle) GetY() float32 {
 func (m *CMsgQAngle) GetZ() float32 {
 	if m != nil && m.Z != nil {
 		return *m.Z
+	}
+	return 0
+}
+
+type CMsgPlayerInfo struct {
+	Name             *string  `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
+	Xuid             *uint64  `protobuf:"fixed64,2,opt,name=xuid" json:"xuid,omitempty"`
+	Userid           *int32   `protobuf:"varint,3,opt,name=userid" json:"userid,omitempty"`
+	Steamid          *uint64  `protobuf:"fixed64,4,opt,name=steamid" json:"steamid,omitempty"`
+	Fakeplayer       *bool    `protobuf:"varint,5,opt,name=fakeplayer" json:"fakeplayer,omitempty"`
+	Ishltv           *bool    `protobuf:"varint,6,opt,name=ishltv" json:"ishltv,omitempty"`
+	CustomFiles      []uint32 `protobuf:"fixed32,7,rep,name=customFiles" json:"customFiles,omitempty"`
+	FilesDownloaded  *int32   `protobuf:"varint,8,opt,name=filesDownloaded" json:"filesDownloaded,omitempty"`
+	XXX_unrecognized []byte   `json:"-"`
+}
+
+func (m *CMsgPlayerInfo) Reset()         { *m = CMsgPlayerInfo{} }
+func (m *CMsgPlayerInfo) String() string { return proto.CompactTextString(m) }
+func (*CMsgPlayerInfo) ProtoMessage()    {}
+
+func (m *CMsgPlayerInfo) GetName() string {
+	if m != nil && m.Name != nil {
+		return *m.Name
+	}
+	return ""
+}
+
+func (m *CMsgPlayerInfo) GetXuid() uint64 {
+	if m != nil && m.Xuid != nil {
+		return *m.Xuid
+	}
+	return 0
+}
+
+func (m *CMsgPlayerInfo) GetUserid() int32 {
+	if m != nil && m.Userid != nil {
+		return *m.Userid
+	}
+	return 0
+}
+
+func (m *CMsgPlayerInfo) GetSteamid() uint64 {
+	if m != nil && m.Steamid != nil {
+		return *m.Steamid
+	}
+	return 0
+}
+
+func (m *CMsgPlayerInfo) GetFakeplayer() bool {
+	if m != nil && m.Fakeplayer != nil {
+		return *m.Fakeplayer
+	}
+	return false
+}
+
+func (m *CMsgPlayerInfo) GetIshltv() bool {
+	if m != nil && m.Ishltv != nil {
+		return *m.Ishltv
+	}
+	return false
+}
+
+func (m *CMsgPlayerInfo) GetCustomFiles() []uint32 {
+	if m != nil {
+		return m.CustomFiles
+	}
+	return nil
+}
+
+func (m *CMsgPlayerInfo) GetFilesDownloaded() int32 {
+	if m != nil && m.FilesDownloaded != nil {
+		return *m.FilesDownloaded
 	}
 	return 0
 }
@@ -699,10 +778,13 @@ type CNETMsg_SpawnGroup_Load struct {
 	WorldOffsetAngle      *CMsgQAngle `protobuf:"bytes,7,opt,name=world_offset_angle" json:"world_offset_angle,omitempty"`
 	Spawngroupmanifest    []byte      `protobuf:"bytes,8,opt,name=spawngroupmanifest" json:"spawngroupmanifest,omitempty"`
 	Flags                 *uint32     `protobuf:"varint,9,opt,name=flags" json:"flags,omitempty"`
-	Tickcount             *uint32     `protobuf:"varint,10,opt,name=tickcount" json:"tickcount,omitempty"`
+	Tickcount             *int32      `protobuf:"varint,10,opt,name=tickcount" json:"tickcount,omitempty"`
 	Manifestincomplete    *bool       `protobuf:"varint,11,opt,name=manifestincomplete" json:"manifestincomplete,omitempty"`
 	Localnamefixup        *string     `protobuf:"bytes,12,opt,name=localnamefixup" json:"localnamefixup,omitempty"`
 	Parentnamefixup       *string     `protobuf:"bytes,13,opt,name=parentnamefixup" json:"parentnamefixup,omitempty"`
+	Manifestloadpriority  *int32      `protobuf:"varint,14,opt,name=manifestloadpriority" json:"manifestloadpriority,omitempty"`
+	Worldgroupid          *uint32     `protobuf:"varint,15,opt,name=worldgroupid" json:"worldgroupid,omitempty"`
+	Creationsequence      *uint32     `protobuf:"varint,16,opt,name=creationsequence" json:"creationsequence,omitempty"`
 	XXX_unrecognized      []byte      `json:"-"`
 }
 
@@ -773,7 +855,7 @@ func (m *CNETMsg_SpawnGroup_Load) GetFlags() uint32 {
 	return 0
 }
 
-func (m *CNETMsg_SpawnGroup_Load) GetTickcount() uint32 {
+func (m *CNETMsg_SpawnGroup_Load) GetTickcount() int32 {
 	if m != nil && m.Tickcount != nil {
 		return *m.Tickcount
 	}
@@ -799,6 +881,27 @@ func (m *CNETMsg_SpawnGroup_Load) GetParentnamefixup() string {
 		return *m.Parentnamefixup
 	}
 	return ""
+}
+
+func (m *CNETMsg_SpawnGroup_Load) GetManifestloadpriority() int32 {
+	if m != nil && m.Manifestloadpriority != nil {
+		return *m.Manifestloadpriority
+	}
+	return 0
+}
+
+func (m *CNETMsg_SpawnGroup_Load) GetWorldgroupid() uint32 {
+	if m != nil && m.Worldgroupid != nil {
+		return *m.Worldgroupid
+	}
+	return 0
+}
+
+func (m *CNETMsg_SpawnGroup_Load) GetCreationsequence() uint32 {
+	if m != nil && m.Creationsequence != nil {
+		return *m.Creationsequence
+	}
+	return 0
 }
 
 type CNETMsg_SpawnGroup_ManifestUpdate struct {
@@ -833,25 +936,10 @@ func (m *CNETMsg_SpawnGroup_ManifestUpdate) GetManifestincomplete() bool {
 	return false
 }
 
-type CNETMsg_SpawnGroup_ForceBlockingLoad struct {
-	Spawngrouphandle *uint32 `protobuf:"varint,1,opt,name=spawngrouphandle" json:"spawngrouphandle,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
-}
-
-func (m *CNETMsg_SpawnGroup_ForceBlockingLoad) Reset()         { *m = CNETMsg_SpawnGroup_ForceBlockingLoad{} }
-func (m *CNETMsg_SpawnGroup_ForceBlockingLoad) String() string { return proto.CompactTextString(m) }
-func (*CNETMsg_SpawnGroup_ForceBlockingLoad) ProtoMessage()    {}
-
-func (m *CNETMsg_SpawnGroup_ForceBlockingLoad) GetSpawngrouphandle() uint32 {
-	if m != nil && m.Spawngrouphandle != nil {
-		return *m.Spawngrouphandle
-	}
-	return 0
-}
-
 type CNETMsg_SpawnGroup_SetCreationTick struct {
 	Spawngrouphandle *uint32 `protobuf:"varint,1,opt,name=spawngrouphandle" json:"spawngrouphandle,omitempty"`
-	Tickcount        *uint32 `protobuf:"varint,2,opt,name=tickcount" json:"tickcount,omitempty"`
+	Tickcount        *int32  `protobuf:"varint,2,opt,name=tickcount" json:"tickcount,omitempty"`
+	Creationsequence *uint32 `protobuf:"varint,3,opt,name=creationsequence" json:"creationsequence,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
@@ -866,9 +954,16 @@ func (m *CNETMsg_SpawnGroup_SetCreationTick) GetSpawngrouphandle() uint32 {
 	return 0
 }
 
-func (m *CNETMsg_SpawnGroup_SetCreationTick) GetTickcount() uint32 {
+func (m *CNETMsg_SpawnGroup_SetCreationTick) GetTickcount() int32 {
 	if m != nil && m.Tickcount != nil {
 		return *m.Tickcount
+	}
+	return 0
+}
+
+func (m *CNETMsg_SpawnGroup_SetCreationTick) GetCreationsequence() uint32 {
+	if m != nil && m.Creationsequence != nil {
+		return *m.Creationsequence
 	}
 	return 0
 }
@@ -876,7 +971,7 @@ func (m *CNETMsg_SpawnGroup_SetCreationTick) GetTickcount() uint32 {
 type CNETMsg_SpawnGroup_Unload struct {
 	Spawngrouphandle *uint32 `protobuf:"varint,1,opt,name=spawngrouphandle" json:"spawngrouphandle,omitempty"`
 	Flags            *uint32 `protobuf:"varint,2,opt,name=flags" json:"flags,omitempty"`
-	Tickcount        *uint32 `protobuf:"varint,3,opt,name=tickcount" json:"tickcount,omitempty"`
+	Tickcount        *int32  `protobuf:"varint,3,opt,name=tickcount" json:"tickcount,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
@@ -898,7 +993,7 @@ func (m *CNETMsg_SpawnGroup_Unload) GetFlags() uint32 {
 	return 0
 }
 
-func (m *CNETMsg_SpawnGroup_Unload) GetTickcount() uint32 {
+func (m *CNETMsg_SpawnGroup_Unload) GetTickcount() int32 {
 	if m != nil && m.Tickcount != nil {
 		return *m.Tickcount
 	}
@@ -936,6 +1031,7 @@ type CSVCMsg_GameSessionConfiguration struct {
 	Gamemode         *string `protobuf:"bytes,12,opt,name=gamemode" json:"gamemode,omitempty"`
 	ServerIpAddress  *string `protobuf:"bytes,13,opt,name=server_ip_address" json:"server_ip_address,omitempty"`
 	Data             []byte  `protobuf:"bytes,14,opt,name=data" json:"data,omitempty"`
+	IsLocalonly      *bool   `protobuf:"varint,15,opt,name=is_localonly" json:"is_localonly,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
@@ -1040,6 +1136,21 @@ func (m *CSVCMsg_GameSessionConfiguration) GetData() []byte {
 	}
 	return nil
 }
+
+func (m *CSVCMsg_GameSessionConfiguration) GetIsLocalonly() bool {
+	if m != nil && m.IsLocalonly != nil {
+		return *m.IsLocalonly
+	}
+	return false
+}
+
+type CNETMsg_ReliableMessageEndMarker struct {
+	XXX_unrecognized []byte `json:"-"`
+}
+
+func (m *CNETMsg_ReliableMessageEndMarker) Reset()         { *m = CNETMsg_ReliableMessageEndMarker{} }
+func (m *CNETMsg_ReliableMessageEndMarker) String() string { return proto.CompactTextString(m) }
+func (*CNETMsg_ReliableMessageEndMarker) ProtoMessage()    {}
 
 func init() {
 	proto.RegisterEnum("dota.NET_Messages", NET_Messages_name, NET_Messages_value)

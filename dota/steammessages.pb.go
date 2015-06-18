@@ -177,9 +177,9 @@ const (
 	CMsgDPPartnerMicroTxnsResponse_k_MsgNoTransactions          CMsgDPPartnerMicroTxnsResponse_EErrorCode = 3
 	CMsgDPPartnerMicroTxnsResponse_k_MsgSQLFailure              CMsgDPPartnerMicroTxnsResponse_EErrorCode = 4
 	CMsgDPPartnerMicroTxnsResponse_k_MsgPartnerInfoDiscrepancy  CMsgDPPartnerMicroTxnsResponse_EErrorCode = 5
-	CMsgDPPartnerMicroTxnsResponse_k_MsgTransactionDeleteFailed CMsgDPPartnerMicroTxnsResponse_EErrorCode = 6
 	CMsgDPPartnerMicroTxnsResponse_k_MsgTransactionInsertFailed CMsgDPPartnerMicroTxnsResponse_EErrorCode = 7
 	CMsgDPPartnerMicroTxnsResponse_k_MsgAlreadyRunning          CMsgDPPartnerMicroTxnsResponse_EErrorCode = 8
+	CMsgDPPartnerMicroTxnsResponse_k_MsgInvalidTransactionData  CMsgDPPartnerMicroTxnsResponse_EErrorCode = 9
 )
 
 var CMsgDPPartnerMicroTxnsResponse_EErrorCode_name = map[int32]string{
@@ -189,9 +189,9 @@ var CMsgDPPartnerMicroTxnsResponse_EErrorCode_name = map[int32]string{
 	3: "k_MsgNoTransactions",
 	4: "k_MsgSQLFailure",
 	5: "k_MsgPartnerInfoDiscrepancy",
-	6: "k_MsgTransactionDeleteFailed",
 	7: "k_MsgTransactionInsertFailed",
 	8: "k_MsgAlreadyRunning",
+	9: "k_MsgInvalidTransactionData",
 }
 var CMsgDPPartnerMicroTxnsResponse_EErrorCode_value = map[string]int32{
 	"k_MsgValid":                   0,
@@ -200,9 +200,9 @@ var CMsgDPPartnerMicroTxnsResponse_EErrorCode_value = map[string]int32{
 	"k_MsgNoTransactions":          3,
 	"k_MsgSQLFailure":              4,
 	"k_MsgPartnerInfoDiscrepancy":  5,
-	"k_MsgTransactionDeleteFailed": 6,
 	"k_MsgTransactionInsertFailed": 7,
 	"k_MsgAlreadyRunning":          8,
+	"k_MsgInvalidTransactionData":  9,
 }
 
 func (x CMsgDPPartnerMicroTxnsResponse_EErrorCode) Enum() *CMsgDPPartnerMicroTxnsResponse_EErrorCode {
@@ -1463,6 +1463,62 @@ func (m *CGCMsgGetIPLocationResponse) GetInfos() []*CIPLocationInfo {
 	return nil
 }
 
+type CGCMsgGetIPASN struct {
+	Ips              []uint32 `protobuf:"fixed32,1,rep,name=ips" json:"ips,omitempty"`
+	XXX_unrecognized []byte   `json:"-"`
+}
+
+func (m *CGCMsgGetIPASN) Reset()         { *m = CGCMsgGetIPASN{} }
+func (m *CGCMsgGetIPASN) String() string { return proto.CompactTextString(m) }
+func (*CGCMsgGetIPASN) ProtoMessage()    {}
+
+func (m *CGCMsgGetIPASN) GetIps() []uint32 {
+	if m != nil {
+		return m.Ips
+	}
+	return nil
+}
+
+type CIPASNInfo struct {
+	Ip               *uint32 `protobuf:"fixed32,1,opt,name=ip" json:"ip,omitempty"`
+	Asn              *uint32 `protobuf:"varint,2,opt,name=asn" json:"asn,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CIPASNInfo) Reset()         { *m = CIPASNInfo{} }
+func (m *CIPASNInfo) String() string { return proto.CompactTextString(m) }
+func (*CIPASNInfo) ProtoMessage()    {}
+
+func (m *CIPASNInfo) GetIp() uint32 {
+	if m != nil && m.Ip != nil {
+		return *m.Ip
+	}
+	return 0
+}
+
+func (m *CIPASNInfo) GetAsn() uint32 {
+	if m != nil && m.Asn != nil {
+		return *m.Asn
+	}
+	return 0
+}
+
+type CGCMsgGetIPASNResponse struct {
+	Infos            []*CIPASNInfo `protobuf:"bytes,1,rep,name=infos" json:"infos,omitempty"`
+	XXX_unrecognized []byte        `json:"-"`
+}
+
+func (m *CGCMsgGetIPASNResponse) Reset()         { *m = CGCMsgGetIPASNResponse{} }
+func (m *CGCMsgGetIPASNResponse) String() string { return proto.CompactTextString(m) }
+func (*CGCMsgGetIPASNResponse) ProtoMessage()    {}
+
+func (m *CGCMsgGetIPASNResponse) GetInfos() []*CIPASNInfo {
+	if m != nil {
+		return m.Infos
+	}
+	return nil
+}
+
 type CGCMsgSystemStatsSchema struct {
 	GcAppId          *uint32 `protobuf:"varint,1,opt,name=gc_app_id" json:"gc_app_id,omitempty"`
 	SchemaKv         []byte  `protobuf:"bytes,2,opt,name=schema_kv" json:"schema_kv,omitempty"`
@@ -2232,6 +2288,46 @@ func (m *CMsgGCCheckFriendship_Response) GetFoundFriendship() bool {
 		return *m.FoundFriendship
 	}
 	return false
+}
+
+type CMsgGCGetAppFriendsList struct {
+	Steamid          *uint64 `protobuf:"fixed64,1,opt,name=steamid" json:"steamid,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CMsgGCGetAppFriendsList) Reset()         { *m = CMsgGCGetAppFriendsList{} }
+func (m *CMsgGCGetAppFriendsList) String() string { return proto.CompactTextString(m) }
+func (*CMsgGCGetAppFriendsList) ProtoMessage()    {}
+
+func (m *CMsgGCGetAppFriendsList) GetSteamid() uint64 {
+	if m != nil && m.Steamid != nil {
+		return *m.Steamid
+	}
+	return 0
+}
+
+type CMsgGCGetAppFriendsList_Response struct {
+	Success          *bool    `protobuf:"varint,1,opt,name=success" json:"success,omitempty"`
+	Steamids         []uint64 `protobuf:"fixed64,2,rep,name=steamids" json:"steamids,omitempty"`
+	XXX_unrecognized []byte   `json:"-"`
+}
+
+func (m *CMsgGCGetAppFriendsList_Response) Reset()         { *m = CMsgGCGetAppFriendsList_Response{} }
+func (m *CMsgGCGetAppFriendsList_Response) String() string { return proto.CompactTextString(m) }
+func (*CMsgGCGetAppFriendsList_Response) ProtoMessage()    {}
+
+func (m *CMsgGCGetAppFriendsList_Response) GetSuccess() bool {
+	if m != nil && m.Success != nil {
+		return *m.Success
+	}
+	return false
+}
+
+func (m *CMsgGCGetAppFriendsList_Response) GetSteamids() []uint64 {
+	if m != nil {
+		return m.Steamids
+	}
+	return nil
 }
 
 type CMsgGCMsgMasterSetDirectory struct {

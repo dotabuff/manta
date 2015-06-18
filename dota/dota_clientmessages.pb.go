@@ -7,8 +7,6 @@ package dota
 import proto "github.com/golang/protobuf/proto"
 import math "math"
 
-// discarding unused import google_protobuf "github.com/dotabuff/manta/dota/google/protobuf"
-
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
 var _ = math.Inf
@@ -48,7 +46,22 @@ const (
 	EDotaClientMessages_DOTA_CM_EnemyItemAlert                         EDotaClientMessages = 330
 	EDotaClientMessages_DOTA_CM_FreeInventory                          EDotaClientMessages = 331
 	EDotaClientMessages_DOTA_CM_BuyBackStateAlert                      EDotaClientMessages = 332
-	EDotaClientMessages_DOTA_CM_FillEmptySlotsWithBots                 EDotaClientMessages = 333
+	EDotaClientMessages_DOTA_CM_QuickBuyAlert                          EDotaClientMessages = 333
+	EDotaClientMessages_DOTA_CM_HeroStatueLike                         EDotaClientMessages = 334
+	EDotaClientMessages_DOTA_CM_ModifierAlert                          EDotaClientMessages = 335
+	EDotaClientMessages_DOTA_CM_TeamShowcaseEditor                     EDotaClientMessages = 336
+	EDotaClientMessages_DOTA_CM_HPManaAlert                            EDotaClientMessages = 337
+	EDotaClientMessages_DOTA_CM_GlyphAlert                             EDotaClientMessages = 338
+	EDotaClientMessages_DOTA_CM_TeamShowcaseClientData                 EDotaClientMessages = 339
+	EDotaClientMessages_DOTA_CM_PlayTeamShowcase                       EDotaClientMessages = 340
+	EDotaClientMessages_DOTA_CM_EventCNY2015Cmd                        EDotaClientMessages = 341
+	EDotaClientMessages_DOTA_CM_FillEmptySlotsWithBots                 EDotaClientMessages = 342
+	EDotaClientMessages_DOTA_CM_DemoHero                               EDotaClientMessages = 343
+	EDotaClientMessages_DOTA_CM_AbilityLearnModeToggled                EDotaClientMessages = 344
+	EDotaClientMessages_DOTA_CM_AbilityStartUse                        EDotaClientMessages = 345
+	EDotaClientMessages_DOTA_CM_ChallengeSelect                        EDotaClientMessages = 346
+	EDotaClientMessages_DOTA_CM_ChallengeReroll                        EDotaClientMessages = 347
+	EDotaClientMessages_DOTA_CM_ClickedBuff                            EDotaClientMessages = 348
 )
 
 var EDotaClientMessages_name = map[int32]string{
@@ -84,7 +97,22 @@ var EDotaClientMessages_name = map[int32]string{
 	330: "DOTA_CM_EnemyItemAlert",
 	331: "DOTA_CM_FreeInventory",
 	332: "DOTA_CM_BuyBackStateAlert",
-	333: "DOTA_CM_FillEmptySlotsWithBots",
+	333: "DOTA_CM_QuickBuyAlert",
+	334: "DOTA_CM_HeroStatueLike",
+	335: "DOTA_CM_ModifierAlert",
+	336: "DOTA_CM_TeamShowcaseEditor",
+	337: "DOTA_CM_HPManaAlert",
+	338: "DOTA_CM_GlyphAlert",
+	339: "DOTA_CM_TeamShowcaseClientData",
+	340: "DOTA_CM_PlayTeamShowcase",
+	341: "DOTA_CM_EventCNY2015Cmd",
+	342: "DOTA_CM_FillEmptySlotsWithBots",
+	343: "DOTA_CM_DemoHero",
+	344: "DOTA_CM_AbilityLearnModeToggled",
+	345: "DOTA_CM_AbilityStartUse",
+	346: "DOTA_CM_ChallengeSelect",
+	347: "DOTA_CM_ChallengeReroll",
+	348: "DOTA_CM_ClickedBuff",
 }
 var EDotaClientMessages_value = map[string]int32{
 	"DOTA_CM_MapLine":                                301,
@@ -119,7 +147,22 @@ var EDotaClientMessages_value = map[string]int32{
 	"DOTA_CM_EnemyItemAlert":                         330,
 	"DOTA_CM_FreeInventory":                          331,
 	"DOTA_CM_BuyBackStateAlert":                      332,
-	"DOTA_CM_FillEmptySlotsWithBots":                 333,
+	"DOTA_CM_QuickBuyAlert":                          333,
+	"DOTA_CM_HeroStatueLike":                         334,
+	"DOTA_CM_ModifierAlert":                          335,
+	"DOTA_CM_TeamShowcaseEditor":                     336,
+	"DOTA_CM_HPManaAlert":                            337,
+	"DOTA_CM_GlyphAlert":                             338,
+	"DOTA_CM_TeamShowcaseClientData":                 339,
+	"DOTA_CM_PlayTeamShowcase":                       340,
+	"DOTA_CM_EventCNY2015Cmd":                        341,
+	"DOTA_CM_FillEmptySlotsWithBots":                 342,
+	"DOTA_CM_DemoHero":                               343,
+	"DOTA_CM_AbilityLearnModeToggled":                344,
+	"DOTA_CM_AbilityStartUse":                        345,
+	"DOTA_CM_ChallengeSelect":                        346,
+	"DOTA_CM_ChallengeReroll":                        347,
+	"DOTA_CM_ClickedBuff":                            348,
 }
 
 func (x EDotaClientMessages) Enum() *EDotaClientMessages {
@@ -172,19 +215,99 @@ func (m *CDOTAClientMsg_ItemAlert) GetItemAlert() *CDOTAMsg_ItemAlert {
 }
 
 type CDOTAClientMsg_EnemyItemAlert struct {
-	EnemyItemAlert   *CDOTAMsg_EnemyItemAlert `protobuf:"bytes,1,opt,name=enemy_item_alert" json:"enemy_item_alert,omitempty"`
-	XXX_unrecognized []byte                   `json:"-"`
+	ItemEntindex     *uint32 `protobuf:"varint,1,opt,name=item_entindex" json:"item_entindex,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
 }
 
 func (m *CDOTAClientMsg_EnemyItemAlert) Reset()         { *m = CDOTAClientMsg_EnemyItemAlert{} }
 func (m *CDOTAClientMsg_EnemyItemAlert) String() string { return proto.CompactTextString(m) }
 func (*CDOTAClientMsg_EnemyItemAlert) ProtoMessage()    {}
 
-func (m *CDOTAClientMsg_EnemyItemAlert) GetEnemyItemAlert() *CDOTAMsg_EnemyItemAlert {
-	if m != nil {
-		return m.EnemyItemAlert
+func (m *CDOTAClientMsg_EnemyItemAlert) GetItemEntindex() uint32 {
+	if m != nil && m.ItemEntindex != nil {
+		return *m.ItemEntindex
 	}
-	return nil
+	return 0
+}
+
+type CDOTAClientMsg_ModifierAlert struct {
+	BuffInternalIndex *int32  `protobuf:"varint,1,opt,name=buff_internal_index" json:"buff_internal_index,omitempty"`
+	TargetEntindex    *uint32 `protobuf:"varint,2,opt,name=target_entindex" json:"target_entindex,omitempty"`
+	XXX_unrecognized  []byte  `json:"-"`
+}
+
+func (m *CDOTAClientMsg_ModifierAlert) Reset()         { *m = CDOTAClientMsg_ModifierAlert{} }
+func (m *CDOTAClientMsg_ModifierAlert) String() string { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_ModifierAlert) ProtoMessage()    {}
+
+func (m *CDOTAClientMsg_ModifierAlert) GetBuffInternalIndex() int32 {
+	if m != nil && m.BuffInternalIndex != nil {
+		return *m.BuffInternalIndex
+	}
+	return 0
+}
+
+func (m *CDOTAClientMsg_ModifierAlert) GetTargetEntindex() uint32 {
+	if m != nil && m.TargetEntindex != nil {
+		return *m.TargetEntindex
+	}
+	return 0
+}
+
+type CDOTAClientMsg_ClickedBuff struct {
+	BuffInternalIndex *int32  `protobuf:"varint,1,opt,name=buff_internal_index" json:"buff_internal_index,omitempty"`
+	TargetEntindex    *uint32 `protobuf:"varint,2,opt,name=target_entindex" json:"target_entindex,omitempty"`
+	XXX_unrecognized  []byte  `json:"-"`
+}
+
+func (m *CDOTAClientMsg_ClickedBuff) Reset()         { *m = CDOTAClientMsg_ClickedBuff{} }
+func (m *CDOTAClientMsg_ClickedBuff) String() string { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_ClickedBuff) ProtoMessage()    {}
+
+func (m *CDOTAClientMsg_ClickedBuff) GetBuffInternalIndex() int32 {
+	if m != nil && m.BuffInternalIndex != nil {
+		return *m.BuffInternalIndex
+	}
+	return 0
+}
+
+func (m *CDOTAClientMsg_ClickedBuff) GetTargetEntindex() uint32 {
+	if m != nil && m.TargetEntindex != nil {
+		return *m.TargetEntindex
+	}
+	return 0
+}
+
+type CDOTAClientMsg_HPManaAlert struct {
+	TargetEntindex   *uint32 `protobuf:"varint,1,opt,name=target_entindex" json:"target_entindex,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CDOTAClientMsg_HPManaAlert) Reset()         { *m = CDOTAClientMsg_HPManaAlert{} }
+func (m *CDOTAClientMsg_HPManaAlert) String() string { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_HPManaAlert) ProtoMessage()    {}
+
+func (m *CDOTAClientMsg_HPManaAlert) GetTargetEntindex() uint32 {
+	if m != nil && m.TargetEntindex != nil {
+		return *m.TargetEntindex
+	}
+	return 0
+}
+
+type CDOTAClientMsg_GlyphAlert struct {
+	Negative         *bool  `protobuf:"varint,1,opt,name=negative" json:"negative,omitempty"`
+	XXX_unrecognized []byte `json:"-"`
+}
+
+func (m *CDOTAClientMsg_GlyphAlert) Reset()         { *m = CDOTAClientMsg_GlyphAlert{} }
+func (m *CDOTAClientMsg_GlyphAlert) String() string { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_GlyphAlert) ProtoMessage()    {}
+
+func (m *CDOTAClientMsg_GlyphAlert) GetNegative() bool {
+	if m != nil && m.Negative != nil {
+		return *m.Negative
+	}
+	return false
 }
 
 type CDOTAClientMsg_MapLine struct {
@@ -584,8 +707,9 @@ func (m *CDOTAClientMsg_RecordVote) GetChoiceIndex() int32 {
 }
 
 type CDOTAClientMsg_WillPurchaseAlert struct {
-	Itemid           *int32 `protobuf:"varint,1,opt,name=itemid" json:"itemid,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	Itemid           *int32  `protobuf:"varint,1,opt,name=itemid" json:"itemid,omitempty"`
+	GoldRemaining    *uint32 `protobuf:"varint,2,opt,name=gold_remaining" json:"gold_remaining,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
 }
 
 func (m *CDOTAClientMsg_WillPurchaseAlert) Reset()         { *m = CDOTAClientMsg_WillPurchaseAlert{} }
@@ -599,6 +723,13 @@ func (m *CDOTAClientMsg_WillPurchaseAlert) GetItemid() int32 {
 	return 0
 }
 
+func (m *CDOTAClientMsg_WillPurchaseAlert) GetGoldRemaining() uint32 {
+	if m != nil && m.GoldRemaining != nil {
+		return *m.GoldRemaining
+	}
+	return 0
+}
+
 type CDOTAClientMsg_BuyBackStateAlert struct {
 	XXX_unrecognized []byte `json:"-"`
 }
@@ -606,6 +737,30 @@ type CDOTAClientMsg_BuyBackStateAlert struct {
 func (m *CDOTAClientMsg_BuyBackStateAlert) Reset()         { *m = CDOTAClientMsg_BuyBackStateAlert{} }
 func (m *CDOTAClientMsg_BuyBackStateAlert) String() string { return proto.CompactTextString(m) }
 func (*CDOTAClientMsg_BuyBackStateAlert) ProtoMessage()    {}
+
+type CDOTAClientMsg_QuickBuyAlert struct {
+	Itemid           *int32 `protobuf:"varint,1,opt,name=itemid" json:"itemid,omitempty"`
+	GoldRequired     *int32 `protobuf:"varint,2,opt,name=gold_required" json:"gold_required,omitempty"`
+	XXX_unrecognized []byte `json:"-"`
+}
+
+func (m *CDOTAClientMsg_QuickBuyAlert) Reset()         { *m = CDOTAClientMsg_QuickBuyAlert{} }
+func (m *CDOTAClientMsg_QuickBuyAlert) String() string { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_QuickBuyAlert) ProtoMessage()    {}
+
+func (m *CDOTAClientMsg_QuickBuyAlert) GetItemid() int32 {
+	if m != nil && m.Itemid != nil {
+		return *m.Itemid
+	}
+	return 0
+}
+
+func (m *CDOTAClientMsg_QuickBuyAlert) GetGoldRequired() int32 {
+	if m != nil && m.GoldRequired != nil {
+		return *m.GoldRequired
+	}
+	return 0
+}
 
 type CDOTAClientMsg_PlayerShowCase struct {
 	Showcase         *bool  `protobuf:"varint,1,opt,name=showcase" json:"showcase,omitempty"`
@@ -739,6 +894,174 @@ func (m *CDOTAClientMsg_FillEmptySlotsWithBots) GetFillwithbots() bool {
 		return *m.Fillwithbots
 	}
 	return false
+}
+
+type CDOTAClientMsg_HeroStatueLike struct {
+	OwnerPlayerId    *uint32 `protobuf:"varint,1,opt,name=owner_player_id" json:"owner_player_id,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CDOTAClientMsg_HeroStatueLike) Reset()         { *m = CDOTAClientMsg_HeroStatueLike{} }
+func (m *CDOTAClientMsg_HeroStatueLike) String() string { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_HeroStatueLike) ProtoMessage()    {}
+
+func (m *CDOTAClientMsg_HeroStatueLike) GetOwnerPlayerId() uint32 {
+	if m != nil && m.OwnerPlayerId != nil {
+		return *m.OwnerPlayerId
+	}
+	return 0
+}
+
+type CDOTAClientMsg_TeamShowcaseEditor struct {
+	Data             []byte `protobuf:"bytes,1,opt,name=data" json:"data,omitempty"`
+	XXX_unrecognized []byte `json:"-"`
+}
+
+func (m *CDOTAClientMsg_TeamShowcaseEditor) Reset()         { *m = CDOTAClientMsg_TeamShowcaseEditor{} }
+func (m *CDOTAClientMsg_TeamShowcaseEditor) String() string { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_TeamShowcaseEditor) ProtoMessage()    {}
+
+func (m *CDOTAClientMsg_TeamShowcaseEditor) GetData() []byte {
+	if m != nil {
+		return m.Data
+	}
+	return nil
+}
+
+type CDOTAClientMsg_TeamShowcaseClientData struct {
+	Data             []byte `protobuf:"bytes,1,opt,name=data" json:"data,omitempty"`
+	XXX_unrecognized []byte `json:"-"`
+}
+
+func (m *CDOTAClientMsg_TeamShowcaseClientData) Reset()         { *m = CDOTAClientMsg_TeamShowcaseClientData{} }
+func (m *CDOTAClientMsg_TeamShowcaseClientData) String() string { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_TeamShowcaseClientData) ProtoMessage()    {}
+
+func (m *CDOTAClientMsg_TeamShowcaseClientData) GetData() []byte {
+	if m != nil {
+		return m.Data
+	}
+	return nil
+}
+
+type CDOTAClientMsg_PlayTeamShowcase struct {
+	XXX_unrecognized []byte `json:"-"`
+}
+
+func (m *CDOTAClientMsg_PlayTeamShowcase) Reset()         { *m = CDOTAClientMsg_PlayTeamShowcase{} }
+func (m *CDOTAClientMsg_PlayTeamShowcase) String() string { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_PlayTeamShowcase) ProtoMessage()    {}
+
+type CDOTAClientMsg_EventCNY2015Cmd struct {
+	Data             []byte `protobuf:"bytes,1,opt,name=data" json:"data,omitempty"`
+	XXX_unrecognized []byte `json:"-"`
+}
+
+func (m *CDOTAClientMsg_EventCNY2015Cmd) Reset()         { *m = CDOTAClientMsg_EventCNY2015Cmd{} }
+func (m *CDOTAClientMsg_EventCNY2015Cmd) String() string { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_EventCNY2015Cmd) ProtoMessage()    {}
+
+func (m *CDOTAClientMsg_EventCNY2015Cmd) GetData() []byte {
+	if m != nil {
+		return m.Data
+	}
+	return nil
+}
+
+type CDOTAClientMsg_DemoHero struct {
+	HeroId           *int32   `protobuf:"varint,1,opt,name=hero_id" json:"hero_id,omitempty"`
+	ItemDefs         []uint32 `protobuf:"varint,2,rep,name=item_defs" json:"item_defs,omitempty"`
+	ItemIds          []uint64 `protobuf:"varint,3,rep,name=item_ids" json:"item_ids,omitempty"`
+	XXX_unrecognized []byte   `json:"-"`
+}
+
+func (m *CDOTAClientMsg_DemoHero) Reset()         { *m = CDOTAClientMsg_DemoHero{} }
+func (m *CDOTAClientMsg_DemoHero) String() string { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_DemoHero) ProtoMessage()    {}
+
+func (m *CDOTAClientMsg_DemoHero) GetHeroId() int32 {
+	if m != nil && m.HeroId != nil {
+		return *m.HeroId
+	}
+	return 0
+}
+
+func (m *CDOTAClientMsg_DemoHero) GetItemDefs() []uint32 {
+	if m != nil {
+		return m.ItemDefs
+	}
+	return nil
+}
+
+func (m *CDOTAClientMsg_DemoHero) GetItemIds() []uint64 {
+	if m != nil {
+		return m.ItemIds
+	}
+	return nil
+}
+
+type CDOTAClientMsg_ChallengeSelect struct {
+	EventId          *uint32 `protobuf:"varint,1,opt,name=event_id" json:"event_id,omitempty"`
+	SlotId           *uint32 `protobuf:"varint,2,opt,name=slot_id" json:"slot_id,omitempty"`
+	SequenceId       *uint32 `protobuf:"varint,3,opt,name=sequence_id" json:"sequence_id,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CDOTAClientMsg_ChallengeSelect) Reset()         { *m = CDOTAClientMsg_ChallengeSelect{} }
+func (m *CDOTAClientMsg_ChallengeSelect) String() string { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_ChallengeSelect) ProtoMessage()    {}
+
+func (m *CDOTAClientMsg_ChallengeSelect) GetEventId() uint32 {
+	if m != nil && m.EventId != nil {
+		return *m.EventId
+	}
+	return 0
+}
+
+func (m *CDOTAClientMsg_ChallengeSelect) GetSlotId() uint32 {
+	if m != nil && m.SlotId != nil {
+		return *m.SlotId
+	}
+	return 0
+}
+
+func (m *CDOTAClientMsg_ChallengeSelect) GetSequenceId() uint32 {
+	if m != nil && m.SequenceId != nil {
+		return *m.SequenceId
+	}
+	return 0
+}
+
+type CDOTAClientMsg_ChallengeReroll struct {
+	EventId          *uint32 `protobuf:"varint,1,opt,name=event_id" json:"event_id,omitempty"`
+	SlotId           *uint32 `protobuf:"varint,2,opt,name=slot_id" json:"slot_id,omitempty"`
+	SequenceId       *uint32 `protobuf:"varint,3,opt,name=sequence_id" json:"sequence_id,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CDOTAClientMsg_ChallengeReroll) Reset()         { *m = CDOTAClientMsg_ChallengeReroll{} }
+func (m *CDOTAClientMsg_ChallengeReroll) String() string { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_ChallengeReroll) ProtoMessage()    {}
+
+func (m *CDOTAClientMsg_ChallengeReroll) GetEventId() uint32 {
+	if m != nil && m.EventId != nil {
+		return *m.EventId
+	}
+	return 0
+}
+
+func (m *CDOTAClientMsg_ChallengeReroll) GetSlotId() uint32 {
+	if m != nil && m.SlotId != nil {
+		return *m.SlotId
+	}
+	return 0
+}
+
+func (m *CDOTAClientMsg_ChallengeReroll) GetSequenceId() uint32 {
+	if m != nil && m.SequenceId != nil {
+		return *m.SequenceId
+	}
+	return 0
 }
 
 func init() {

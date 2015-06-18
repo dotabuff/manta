@@ -7,8 +7,6 @@ package dota
 import proto "github.com/golang/protobuf/proto"
 import math "math"
 
-// discarding unused import google_protobuf "github.com/dotabuff/manta/dota/google/protobuf"
-
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
 var _ = math.Inf
@@ -107,6 +105,7 @@ type CDemoFileHeader struct {
 	FullpacketsVersion       *int32  `protobuf:"varint,7,opt,name=fullpackets_version" json:"fullpackets_version,omitempty"`
 	AllowClientsideEntities  *bool   `protobuf:"varint,8,opt,name=allow_clientside_entities" json:"allow_clientside_entities,omitempty"`
 	AllowClientsideParticles *bool   `protobuf:"varint,9,opt,name=allow_clientside_particles" json:"allow_clientside_particles,omitempty"`
+	Addons                   *string `protobuf:"bytes,10,opt,name=addons" json:"addons,omitempty"`
 	XXX_unrecognized         []byte  `json:"-"`
 }
 
@@ -175,6 +174,13 @@ func (m *CDemoFileHeader) GetAllowClientsideParticles() bool {
 		return *m.AllowClientsideParticles
 	}
 	return false
+}
+
+func (m *CDemoFileHeader) GetAddons() string {
+	if m != nil && m.Addons != nil {
+		return *m.Addons
+	}
+	return ""
 }
 
 type CGameInfo struct {
@@ -748,25 +754,17 @@ func (m *CDemoUserCmd) GetData() []byte {
 }
 
 type CDemoSpawnGroups struct {
-	Count            *int32 `protobuf:"varint,1,opt,name=count" json:"count,omitempty"`
-	Data             []byte `protobuf:"bytes,2,opt,name=data" json:"data,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	Msgs             [][]byte `protobuf:"bytes,3,rep,name=msgs" json:"msgs,omitempty"`
+	XXX_unrecognized []byte   `json:"-"`
 }
 
 func (m *CDemoSpawnGroups) Reset()         { *m = CDemoSpawnGroups{} }
 func (m *CDemoSpawnGroups) String() string { return proto.CompactTextString(m) }
 func (*CDemoSpawnGroups) ProtoMessage()    {}
 
-func (m *CDemoSpawnGroups) GetCount() int32 {
-	if m != nil && m.Count != nil {
-		return *m.Count
-	}
-	return 0
-}
-
-func (m *CDemoSpawnGroups) GetData() []byte {
+func (m *CDemoSpawnGroups) GetMsgs() [][]byte {
 	if m != nil {
-		return m.Data
+		return m.Msgs
 	}
 	return nil
 }
