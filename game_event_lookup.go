@@ -6,6 +6,302 @@ import (
 	"github.com/dotabuff/manta/dota"
 )
 
+var gameEventNames = map[int32]string{
+	0:   "server_spawn",
+	1:   "server_pre_shutdown",
+	2:   "server_shutdown",
+	3:   "server_cvar",
+	4:   "server_message",
+	5:   "server_addban",
+	6:   "server_removeban",
+	7:   "player_connect",
+	8:   "player_info",
+	9:   "player_disconnect",
+	10:  "player_activate",
+	11:  "player_connect_full",
+	12:  "player_say",
+	13:  "player_full_update",
+	14:  "team_info",
+	15:  "team_score",
+	16:  "teamplay_broadcast_audio",
+	17:  "player_team",
+	18:  "player_class",
+	19:  "player_death",
+	20:  "player_hurt",
+	21:  "player_chat",
+	22:  "player_score",
+	23:  "player_spawn",
+	24:  "player_shoot",
+	25:  "player_use",
+	26:  "player_changename",
+	27:  "player_hintmessage",
+	28:  "game_init",
+	29:  "game_newmap",
+	30:  "game_start",
+	31:  "game_end",
+	32:  "round_start",
+	33:  "round_end",
+	34:  "round_start_pre_entity",
+	35:  "teamplay_round_start",
+	36:  "hostname_changed",
+	37:  "difficulty_changed",
+	38:  "finale_start",
+	39:  "game_message",
+	40:  "break_breakable",
+	41:  "break_prop",
+	42:  "npc_spawned",
+	43:  "npc_replaced",
+	44:  "entity_killed",
+	45:  "entity_hurt",
+	46:  "bonus_updated",
+	47:  "player_stats_updated",
+	48:  "achievement_event",
+	49:  "achievement_earned",
+	50:  "achievement_write_failed",
+	51:  "physgun_pickup",
+	52:  "flare_ignite_npc",
+	53:  "helicopter_grenade_punt_miss",
+	54:  "user_data_downloaded",
+	55:  "ragdoll_dissolved",
+	56:  "gameinstructor_draw",
+	57:  "gameinstructor_nodraw",
+	58:  "map_transition",
+	59:  "instructor_server_hint_create",
+	60:  "instructor_server_hint_stop",
+	61:  "chat_new_message",
+	62:  "chat_members_changed",
+	63:  "inventory_updated",
+	64:  "cart_updated",
+	65:  "store_pricesheet_updated",
+	66:  "gc_connected",
+	67:  "item_schema_initialized",
+	68:  "drop_rate_modified",
+	69:  "event_ticket_modified",
+	70:  "modifier_event",
+	71:  "dota_player_kill",
+	72:  "dota_player_deny",
+	73:  "dota_barracks_kill",
+	74:  "dota_tower_kill",
+	75:  "dota_effigy_kill",
+	76:  "dota_roshan_kill",
+	77:  "dota_courier_lost",
+	78:  "dota_courier_respawned",
+	79:  "dota_glyph_used",
+	80:  "dota_super_creeps",
+	81:  "dota_item_purchase",
+	82:  "dota_item_gifted",
+	83:  "dota_rune_pickup",
+	84:  "dota_rune_spotted",
+	85:  "dota_item_spotted",
+	86:  "dota_no_battle_points",
+	87:  "dota_chat_informational",
+	88:  "dota_action_item",
+	89:  "dota_chat_ban_notification",
+	90:  "dota_chat_event",
+	91:  "dota_chat_timed_reward",
+	92:  "dota_pause_event",
+	93:  "dota_chat_kill_streak",
+	94:  "dota_chat_first_blood",
+	95:  "dota_chat_assassin_announce",
+	96:  "dota_chat_assassin_denied",
+	97:  "dota_chat_assassin_success",
+	98:  "dota_player_update_hero_selection",
+	99:  "dota_player_update_selected_unit",
+	100: "dota_player_update_query_unit",
+	101: "dota_player_update_killcam_unit",
+	102: "dota_player_take_tower_damage",
+	103: "dota_hud_error_message",
+	104: "dota_action_success",
+	105: "dota_starting_position_changed",
+	106: "dota_money_changed",
+	107: "dota_enemy_money_changed",
+	108: "dota_portrait_unit_stats_changed",
+	109: "dota_portrait_unit_modifiers_changed",
+	110: "dota_force_portrait_update",
+	111: "dota_inventory_changed",
+	112: "dota_item_picked_up",
+	113: "dota_inventory_item_changed",
+	114: "dota_ability_changed",
+	115: "dota_portrait_ability_layout_changed",
+	116: "dota_inventory_item_added",
+	117: "dota_inventory_changed_query_unit",
+	118: "dota_link_clicked",
+	119: "dota_set_quick_buy",
+	120: "dota_quick_buy_changed",
+	121: "dota_player_shop_changed",
+	122: "dota_player_show_killcam",
+	123: "dota_player_show_minikillcam",
+	124: "gc_user_session_created",
+	125: "team_data_updated",
+	126: "guild_data_updated",
+	127: "guild_open_parties_updated",
+	128: "fantasy_updated",
+	129: "fantasy_league_changed",
+	130: "fantasy_score_info_changed",
+	131: "player_info_updated",
+	132: "player_info_individual_updated",
+	133: "game_rules_state_change",
+	134: "match_history_updated",
+	135: "match_details_updated",
+	136: "live_games_updated",
+	137: "recent_matches_updated",
+	138: "news_updated",
+	139: "persona_updated",
+	140: "tournament_state_updated",
+	141: "party_updated",
+	142: "lobby_updated",
+	143: "dashboard_caches_cleared",
+	144: "last_hit",
+	145: "player_completed_game",
+	146: "player_reconnected",
+	147: "nommed_tree",
+	148: "dota_rune_activated_server",
+	149: "dota_player_gained_level",
+	150: "dota_player_learned_ability",
+	151: "dota_player_used_ability",
+	152: "dota_non_player_used_ability",
+	153: "dota_player_begin_cast",
+	154: "dota_non_player_begin_cast",
+	155: "dota_ability_channel_finished",
+	156: "dota_holdout_revive_complete",
+	157: "dota_player_killed",
+	158: "bindpanel_open",
+	159: "bindpanel_close",
+	160: "keybind_changed",
+	161: "dota_item_drag_begin",
+	162: "dota_item_drag_end",
+	163: "dota_shop_item_drag_begin",
+	164: "dota_shop_item_drag_end",
+	165: "dota_item_purchased",
+	166: "dota_item_combined",
+	167: "dota_item_used",
+	168: "dota_item_auto_purchase",
+	169: "dota_unit_event",
+	170: "dota_quest_started",
+	171: "dota_quest_completed",
+	172: "gameui_activated",
+	173: "gameui_hidden",
+	174: "player_fullyjoined",
+	175: "dota_spectate_hero",
+	176: "dota_match_done",
+	177: "dota_match_done_client",
+	178: "set_instructor_group_enabled",
+	179: "joined_chat_channel",
+	180: "left_chat_channel",
+	181: "gc_chat_channel_list_updated",
+	182: "today_messages_updated",
+	183: "file_downloaded",
+	184: "player_report_counts_updated",
+	185: "scaleform_file_download_complete",
+	186: "item_purchased",
+	187: "gc_mismatched_version",
+	190: "demo_stop",
+	191: "map_shutdown",
+	192: "dota_workshop_fileselected",
+	193: "dota_workshop_filecanceled",
+	194: "rich_presence_updated",
+	195: "dota_hero_random",
+	196: "dota_rd_chat_turn",
+	197: "dota_favorite_heroes_updated",
+	198: "profile_opened",
+	199: "profile_closed",
+	200: "item_preview_closed",
+	201: "dashboard_switched_section",
+	202: "dota_tournament_item_event",
+	203: "dota_hero_swap",
+	204: "dota_reset_suggested_items",
+	205: "halloween_high_score_received",
+	206: "halloween_phase_end",
+	207: "halloween_high_score_request_failed",
+	208: "dota_hud_skin_changed",
+	209: "dota_inventory_player_got_item",
+	210: "player_is_experienced",
+	211: "player_is_notexperienced",
+	212: "dota_tutorial_lesson_start",
+	213: "dota_tutorial_task_advance",
+	214: "dota_tutorial_shop_toggled",
+	215: "map_location_updated",
+	216: "richpresence_custom_updated",
+	217: "game_end_visible",
+	218: "antiaddiction_update",
+	219: "highlight_hud_element",
+	220: "hide_highlight_hud_element",
+	221: "intro_video_finished",
+	222: "matchmaking_status_visibility_changed",
+	223: "practice_lobby_visibility_changed",
+	224: "dota_courier_transfer_item",
+	225: "full_ui_unlocked",
+	227: "hero_selector_preview_set",
+	228: "antiaddiction_toast",
+	229: "hero_picker_shown",
+	230: "hero_picker_hidden",
+	231: "dota_local_quickbuy_changed",
+	232: "show_center_message",
+	233: "hud_flip_changed",
+	234: "frosty_points_updated",
+	235: "defeated",
+	236: "reset_defeated",
+	237: "booster_state_updated",
+	238: "event_points_updated",
+	239: "local_player_event_points",
+	240: "custom_game_difficulty",
+	241: "tree_cut",
+	242: "ugc_details_arrived",
+	243: "ugc_subscribed",
+	244: "ugc_unsubscribed",
+	245: "ugc_download_requested",
+	246: "ugc_installed",
+	247: "prizepool_received",
+	248: "microtransaction_success",
+	249: "dota_rubick_ability_steal",
+	250: "compendium_event_actions_loaded",
+	251: "compendium_selections_loaded",
+	252: "compendium_set_selection_failed",
+	253: "compendium_trophies_loaded",
+	254: "community_cached_names_updated",
+	255: "spec_item_pickup",
+	256: "spec_aegis_reclaim_time",
+	257: "account_trophies_changed",
+	258: "account_all_hero_challenge_changed",
+	259: "team_showcase_ui_update",
+	260: "ingame_events_changed",
+	261: "dota_match_signout",
+	262: "dota_illusions_created",
+	263: "dota_year_beast_killed",
+	264: "dota_hero_undoselection",
+	265: "dota_challenge_socache_updated",
+	266: "party_invites_updated",
+	267: "lobby_invites_updated",
+	268: "custom_game_mode_list_updated",
+	269: "custom_game_lobby_list_updated",
+	270: "friend_lobby_list_updated",
+	271: "dota_team_player_list_changed",
+	272: "dota_player_details_changed",
+	273: "player_profile_stats_updated",
+	274: "custom_game_player_count_updated",
+	275: "custom_game_friends_played_updated",
+	276: "custom_games_friends_play_updated",
+	277: "dota_player_update_assigned_hero",
+	278: "dota_player_hero_selection_dirty",
+	279: "dota_npc_goal_reached",
+	280: "dota_player_selected_custom_team",
+	281: "hltv_status",
+	282: "hltv_cameraman",
+	283: "hltv_rank_camera",
+	284: "hltv_rank_entity",
+	285: "hltv_fixed",
+	286: "hltv_chase",
+	287: "hltv_message",
+	288: "hltv_title",
+	289: "hltv_chat",
+	290: "hltv_versioninfo",
+	291: "dota_chase_hero",
+	292: "dota_combatlog",
+	293: "dota_game_state_change",
+	294: "dota_player_pick_hero",
+	295: "dota_team_kill_credit",
+}
+
 const (
 	EGameEvent_ServerSpawn                        = 0
 	EGameEvent_ServerPreShutdown                  = 1
@@ -4010,30 +4306,17 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 0: // EGameEvent_ServerSpawn
 		if cbs := ge.onServerSpawn; cbs != nil {
 			msg := &GameEventServerSpawn{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Hostname = k.GetValString()
-				case 1:
-					msg.Address = k.GetValString()
-				case 2:
-					msg.Port = k.GetValShort()
-				case 3:
-					msg.Game = k.GetValString()
-				case 4:
-					msg.Mapname = k.GetValString()
-				case 5:
-					msg.Addonname = k.GetValString()
-				case 6:
-					msg.Maxplayers = k.GetValLong()
-				case 7:
-					msg.Os = k.GetValString()
-				case 8:
-					msg.Dedicated = k.GetValBool()
-				case 9:
-					msg.Password = k.GetValBool()
-				}
-			}
+			msg.Hostname = m.GetKeys()[0].GetValString()
+			msg.Address = m.GetKeys()[1].GetValString()
+			msg.Port = m.GetKeys()[2].GetValShort()
+			msg.Game = m.GetKeys()[3].GetValString()
+			msg.Mapname = m.GetKeys()[4].GetValString()
+			msg.Addonname = m.GetKeys()[5].GetValString()
+			msg.Maxplayers = m.GetKeys()[6].GetValLong()
+			msg.Os = m.GetKeys()[7].GetValString()
+			msg.Dedicated = m.GetKeys()[8].GetValBool()
+			msg.Password = m.GetKeys()[9].GetValBool()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4045,12 +4328,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 1: // EGameEvent_ServerPreShutdown
 		if cbs := ge.onServerPreShutdown; cbs != nil {
 			msg := &GameEventServerPreShutdown{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Reason = k.GetValString()
-				}
-			}
+			msg.Reason = m.GetKeys()[0].GetValString()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4062,12 +4341,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 2: // EGameEvent_ServerShutdown
 		if cbs := ge.onServerShutdown; cbs != nil {
 			msg := &GameEventServerShutdown{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Reason = k.GetValString()
-				}
-			}
+			msg.Reason = m.GetKeys()[0].GetValString()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4079,14 +4354,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 3: // EGameEvent_ServerCvar
 		if cbs := ge.onServerCvar; cbs != nil {
 			msg := &GameEventServerCvar{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Cvarname = k.GetValString()
-				case 1:
-					msg.Cvarvalue = k.GetValString()
-				}
-			}
+			msg.Cvarname = m.GetKeys()[0].GetValString()
+			msg.Cvarvalue = m.GetKeys()[1].GetValString()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4098,12 +4368,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 4: // EGameEvent_ServerMessage
 		if cbs := ge.onServerMessage; cbs != nil {
 			msg := &GameEventServerMessage{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Text = k.GetValString()
-				}
-			}
+			msg.Text = m.GetKeys()[0].GetValString()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4115,24 +4381,14 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 5: // EGameEvent_ServerAddban
 		if cbs := ge.onServerAddban; cbs != nil {
 			msg := &GameEventServerAddban{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Name = k.GetValString()
-				case 1:
-					msg.Userid = k.GetValShort()
-				case 2:
-					msg.Networkid = k.GetValString()
-				case 3:
-					msg.Ip = k.GetValString()
-				case 4:
-					msg.Duration = k.GetValString()
-				case 5:
-					msg.By = k.GetValString()
-				case 6:
-					msg.Kicked = k.GetValBool()
-				}
-			}
+			msg.Name = m.GetKeys()[0].GetValString()
+			msg.Userid = m.GetKeys()[1].GetValShort()
+			msg.Networkid = m.GetKeys()[2].GetValString()
+			msg.Ip = m.GetKeys()[3].GetValString()
+			msg.Duration = m.GetKeys()[4].GetValString()
+			msg.By = m.GetKeys()[5].GetValString()
+			msg.Kicked = m.GetKeys()[6].GetValBool()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4144,16 +4400,10 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 6: // EGameEvent_ServerRemoveban
 		if cbs := ge.onServerRemoveban; cbs != nil {
 			msg := &GameEventServerRemoveban{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Networkid = k.GetValString()
-				case 1:
-					msg.Ip = k.GetValString()
-				case 2:
-					msg.By = k.GetValString()
-				}
-			}
+			msg.Networkid = m.GetKeys()[0].GetValString()
+			msg.Ip = m.GetKeys()[1].GetValString()
+			msg.By = m.GetKeys()[2].GetValString()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4165,20 +4415,12 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 7: // EGameEvent_PlayerConnect
 		if cbs := ge.onPlayerConnect; cbs != nil {
 			msg := &GameEventPlayerConnect{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Name = k.GetValString()
-				case 1:
-					msg.Index = k.GetValByte()
-				case 2:
-					msg.Userid = k.GetValShort()
-				case 3:
-					msg.Networkid = k.GetValString()
-				case 4:
-					msg.Address = k.GetValString()
-				}
-			}
+			msg.Name = m.GetKeys()[0].GetValString()
+			msg.Index = m.GetKeys()[1].GetValByte()
+			msg.Userid = m.GetKeys()[2].GetValShort()
+			msg.Networkid = m.GetKeys()[3].GetValString()
+			msg.Address = m.GetKeys()[4].GetValString()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4190,20 +4432,12 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 8: // EGameEvent_PlayerInfo
 		if cbs := ge.onPlayerInfo; cbs != nil {
 			msg := &GameEventPlayerInfo{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Name = k.GetValString()
-				case 1:
-					msg.Index = k.GetValByte()
-				case 2:
-					msg.Userid = k.GetValShort()
-				case 3:
-					msg.Networkid = k.GetValString()
-				case 4:
-					msg.Bot = k.GetValBool()
-				}
-			}
+			msg.Name = m.GetKeys()[0].GetValString()
+			msg.Index = m.GetKeys()[1].GetValByte()
+			msg.Userid = m.GetKeys()[2].GetValShort()
+			msg.Networkid = m.GetKeys()[3].GetValString()
+			msg.Bot = m.GetKeys()[4].GetValBool()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4215,18 +4449,11 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 9: // EGameEvent_PlayerDisconnect
 		if cbs := ge.onPlayerDisconnect; cbs != nil {
 			msg := &GameEventPlayerDisconnect{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Userid = k.GetValShort()
-				case 1:
-					msg.Reason = k.GetValShort()
-				case 2:
-					msg.Name = k.GetValString()
-				case 3:
-					msg.Networkid = k.GetValString()
-				}
-			}
+			msg.Userid = m.GetKeys()[0].GetValShort()
+			msg.Reason = m.GetKeys()[1].GetValShort()
+			msg.Name = m.GetKeys()[2].GetValString()
+			msg.Networkid = m.GetKeys()[3].GetValString()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4238,12 +4465,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 10: // EGameEvent_PlayerActivate
 		if cbs := ge.onPlayerActivate; cbs != nil {
 			msg := &GameEventPlayerActivate{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Userid = k.GetValShort()
-				}
-			}
+			msg.Userid = m.GetKeys()[0].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4255,14 +4478,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 11: // EGameEvent_PlayerConnectFull
 		if cbs := ge.onPlayerConnectFull; cbs != nil {
 			msg := &GameEventPlayerConnectFull{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Userid = k.GetValShort()
-				case 1:
-					msg.Index = k.GetValByte()
-				}
-			}
+			msg.Userid = m.GetKeys()[0].GetValShort()
+			msg.Index = m.GetKeys()[1].GetValByte()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4274,14 +4492,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 12: // EGameEvent_PlayerSay
 		if cbs := ge.onPlayerSay; cbs != nil {
 			msg := &GameEventPlayerSay{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Userid = k.GetValShort()
-				case 1:
-					msg.Text = k.GetValString()
-				}
-			}
+			msg.Userid = m.GetKeys()[0].GetValShort()
+			msg.Text = m.GetKeys()[1].GetValString()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4293,14 +4506,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 13: // EGameEvent_PlayerFullUpdate
 		if cbs := ge.onPlayerFullUpdate; cbs != nil {
 			msg := &GameEventPlayerFullUpdate{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Userid = k.GetValShort()
-				case 1:
-					msg.Count = k.GetValShort()
-				}
-			}
+			msg.Userid = m.GetKeys()[0].GetValShort()
+			msg.Count = m.GetKeys()[1].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4312,14 +4520,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 14: // EGameEvent_TeamInfo
 		if cbs := ge.onTeamInfo; cbs != nil {
 			msg := &GameEventTeamInfo{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Teamid = k.GetValByte()
-				case 1:
-					msg.Teamname = k.GetValString()
-				}
-			}
+			msg.Teamid = m.GetKeys()[0].GetValByte()
+			msg.Teamname = m.GetKeys()[1].GetValString()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4331,14 +4534,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 15: // EGameEvent_TeamScore
 		if cbs := ge.onTeamScore; cbs != nil {
 			msg := &GameEventTeamScore{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Teamid = k.GetValByte()
-				case 1:
-					msg.Score = k.GetValShort()
-				}
-			}
+			msg.Teamid = m.GetKeys()[0].GetValByte()
+			msg.Score = m.GetKeys()[1].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4350,14 +4548,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 16: // EGameEvent_TeamplayBroadcastAudio
 		if cbs := ge.onTeamplayBroadcastAudio; cbs != nil {
 			msg := &GameEventTeamplayBroadcastAudio{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Team = k.GetValByte()
-				case 1:
-					msg.Sound = k.GetValString()
-				}
-			}
+			msg.Team = m.GetKeys()[0].GetValByte()
+			msg.Sound = m.GetKeys()[1].GetValString()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4369,22 +4562,13 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 17: // EGameEvent_PlayerTeam
 		if cbs := ge.onPlayerTeam; cbs != nil {
 			msg := &GameEventPlayerTeam{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Userid = k.GetValShort()
-				case 1:
-					msg.Team = k.GetValByte()
-				case 2:
-					msg.Oldteam = k.GetValByte()
-				case 3:
-					msg.Disconnect = k.GetValBool()
-				case 4:
-					msg.Autoteam = k.GetValBool()
-				case 5:
-					msg.Silent = k.GetValBool()
-				}
-			}
+			msg.Userid = m.GetKeys()[0].GetValShort()
+			msg.Team = m.GetKeys()[1].GetValByte()
+			msg.Oldteam = m.GetKeys()[2].GetValByte()
+			msg.Disconnect = m.GetKeys()[3].GetValBool()
+			msg.Autoteam = m.GetKeys()[4].GetValBool()
+			msg.Silent = m.GetKeys()[5].GetValBool()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4396,14 +4580,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 18: // EGameEvent_PlayerClass
 		if cbs := ge.onPlayerClass; cbs != nil {
 			msg := &GameEventPlayerClass{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Userid = k.GetValShort()
-				case 1:
-					msg.Class = k.GetValString()
-				}
-			}
+			msg.Userid = m.GetKeys()[0].GetValShort()
+			msg.Class = m.GetKeys()[1].GetValString()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4415,14 +4594,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 19: // EGameEvent_PlayerDeath
 		if cbs := ge.onPlayerDeath; cbs != nil {
 			msg := &GameEventPlayerDeath{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Userid = k.GetValShort()
-				case 1:
-					msg.Attacker = k.GetValShort()
-				}
-			}
+			msg.Userid = m.GetKeys()[0].GetValShort()
+			msg.Attacker = m.GetKeys()[1].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4434,16 +4608,10 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 20: // EGameEvent_PlayerHurt
 		if cbs := ge.onPlayerHurt; cbs != nil {
 			msg := &GameEventPlayerHurt{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Userid = k.GetValShort()
-				case 1:
-					msg.Attacker = k.GetValShort()
-				case 2:
-					msg.Health = k.GetValByte()
-				}
-			}
+			msg.Userid = m.GetKeys()[0].GetValShort()
+			msg.Attacker = m.GetKeys()[1].GetValShort()
+			msg.Health = m.GetKeys()[2].GetValByte()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4455,16 +4623,10 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 21: // EGameEvent_PlayerChat
 		if cbs := ge.onPlayerChat; cbs != nil {
 			msg := &GameEventPlayerChat{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Teamonly = k.GetValBool()
-				case 1:
-					msg.Userid = k.GetValShort()
-				case 2:
-					msg.Text = k.GetValString()
-				}
-			}
+			msg.Teamonly = m.GetKeys()[0].GetValBool()
+			msg.Userid = m.GetKeys()[1].GetValShort()
+			msg.Text = m.GetKeys()[2].GetValString()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4476,18 +4638,11 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 22: // EGameEvent_PlayerScore
 		if cbs := ge.onPlayerScore; cbs != nil {
 			msg := &GameEventPlayerScore{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Userid = k.GetValShort()
-				case 1:
-					msg.Kills = k.GetValShort()
-				case 2:
-					msg.Deaths = k.GetValShort()
-				case 3:
-					msg.Score = k.GetValShort()
-				}
-			}
+			msg.Userid = m.GetKeys()[0].GetValShort()
+			msg.Kills = m.GetKeys()[1].GetValShort()
+			msg.Deaths = m.GetKeys()[2].GetValShort()
+			msg.Score = m.GetKeys()[3].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4499,12 +4654,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 23: // EGameEvent_PlayerSpawn
 		if cbs := ge.onPlayerSpawn; cbs != nil {
 			msg := &GameEventPlayerSpawn{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Userid = k.GetValShort()
-				}
-			}
+			msg.Userid = m.GetKeys()[0].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4516,16 +4667,10 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 24: // EGameEvent_PlayerShoot
 		if cbs := ge.onPlayerShoot; cbs != nil {
 			msg := &GameEventPlayerShoot{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Userid = k.GetValShort()
-				case 1:
-					msg.Weapon = k.GetValByte()
-				case 2:
-					msg.Mode = k.GetValByte()
-				}
-			}
+			msg.Userid = m.GetKeys()[0].GetValShort()
+			msg.Weapon = m.GetKeys()[1].GetValByte()
+			msg.Mode = m.GetKeys()[2].GetValByte()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4537,14 +4682,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 25: // EGameEvent_PlayerUse
 		if cbs := ge.onPlayerUse; cbs != nil {
 			msg := &GameEventPlayerUse{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Userid = k.GetValShort()
-				case 1:
-					msg.Entity = k.GetValShort()
-				}
-			}
+			msg.Userid = m.GetKeys()[0].GetValShort()
+			msg.Entity = m.GetKeys()[1].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4556,16 +4696,10 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 26: // EGameEvent_PlayerChangename
 		if cbs := ge.onPlayerChangename; cbs != nil {
 			msg := &GameEventPlayerChangename{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Userid = k.GetValShort()
-				case 1:
-					msg.Oldname = k.GetValString()
-				case 2:
-					msg.Newname = k.GetValString()
-				}
-			}
+			msg.Userid = m.GetKeys()[0].GetValShort()
+			msg.Oldname = m.GetKeys()[1].GetValString()
+			msg.Newname = m.GetKeys()[2].GetValString()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4577,12 +4711,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 27: // EGameEvent_PlayerHintmessage
 		if cbs := ge.onPlayerHintmessage; cbs != nil {
 			msg := &GameEventPlayerHintmessage{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Hintmessage = k.GetValString()
-				}
-			}
+			msg.Hintmessage = m.GetKeys()[0].GetValString()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4594,6 +4724,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 28: // EGameEvent_GameInit
 		if cbs := ge.onGameInit; cbs != nil {
 			msg := &GameEventGameInit{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4605,12 +4736,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 29: // EGameEvent_GameNewmap
 		if cbs := ge.onGameNewmap; cbs != nil {
 			msg := &GameEventGameNewmap{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Mapname = k.GetValString()
-				}
-			}
+			msg.Mapname = m.GetKeys()[0].GetValString()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4622,18 +4749,11 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 30: // EGameEvent_GameStart
 		if cbs := ge.onGameStart; cbs != nil {
 			msg := &GameEventGameStart{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Roundslimit = k.GetValLong()
-				case 1:
-					msg.Timelimit = k.GetValLong()
-				case 2:
-					msg.Fraglimit = k.GetValLong()
-				case 3:
-					msg.Objective = k.GetValString()
-				}
-			}
+			msg.Roundslimit = m.GetKeys()[0].GetValLong()
+			msg.Timelimit = m.GetKeys()[1].GetValLong()
+			msg.Fraglimit = m.GetKeys()[2].GetValLong()
+			msg.Objective = m.GetKeys()[3].GetValString()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4645,12 +4765,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 31: // EGameEvent_GameEnd
 		if cbs := ge.onGameEnd; cbs != nil {
 			msg := &GameEventGameEnd{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Winner = k.GetValByte()
-				}
-			}
+			msg.Winner = m.GetKeys()[0].GetValByte()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4662,16 +4778,10 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 32: // EGameEvent_RoundStart
 		if cbs := ge.onRoundStart; cbs != nil {
 			msg := &GameEventRoundStart{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Timelimit = k.GetValLong()
-				case 1:
-					msg.Fraglimit = k.GetValLong()
-				case 2:
-					msg.Objective = k.GetValString()
-				}
-			}
+			msg.Timelimit = m.GetKeys()[0].GetValLong()
+			msg.Fraglimit = m.GetKeys()[1].GetValLong()
+			msg.Objective = m.GetKeys()[2].GetValString()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4683,16 +4793,10 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 33: // EGameEvent_RoundEnd
 		if cbs := ge.onRoundEnd; cbs != nil {
 			msg := &GameEventRoundEnd{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Winner = k.GetValByte()
-				case 1:
-					msg.Reason = k.GetValByte()
-				case 2:
-					msg.Message = k.GetValString()
-				}
-			}
+			msg.Winner = m.GetKeys()[0].GetValByte()
+			msg.Reason = m.GetKeys()[1].GetValByte()
+			msg.Message = m.GetKeys()[2].GetValString()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4704,6 +4808,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 34: // EGameEvent_RoundStartPreEntity
 		if cbs := ge.onRoundStartPreEntity; cbs != nil {
 			msg := &GameEventRoundStartPreEntity{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4715,12 +4820,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 35: // EGameEvent_TeamplayRoundStart
 		if cbs := ge.onTeamplayRoundStart; cbs != nil {
 			msg := &GameEventTeamplayRoundStart{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.FullReset = k.GetValBool()
-				}
-			}
+			msg.FullReset = m.GetKeys()[0].GetValBool()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4732,12 +4833,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 36: // EGameEvent_HostnameChanged
 		if cbs := ge.onHostnameChanged; cbs != nil {
 			msg := &GameEventHostnameChanged{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Hostname = k.GetValString()
-				}
-			}
+			msg.Hostname = m.GetKeys()[0].GetValString()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4749,16 +4846,10 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 37: // EGameEvent_DifficultyChanged
 		if cbs := ge.onDifficultyChanged; cbs != nil {
 			msg := &GameEventDifficultyChanged{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.NewDifficulty = k.GetValShort()
-				case 1:
-					msg.OldDifficulty = k.GetValShort()
-				case 2:
-					msg.StrDifficulty = k.GetValString()
-				}
-			}
+			msg.NewDifficulty = m.GetKeys()[0].GetValShort()
+			msg.OldDifficulty = m.GetKeys()[1].GetValShort()
+			msg.StrDifficulty = m.GetKeys()[2].GetValString()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4770,12 +4861,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 38: // EGameEvent_FinaleStart
 		if cbs := ge.onFinaleStart; cbs != nil {
 			msg := &GameEventFinaleStart{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Rushes = k.GetValShort()
-				}
-			}
+			msg.Rushes = m.GetKeys()[0].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4787,14 +4874,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 39: // EGameEvent_GameMessage
 		if cbs := ge.onGameMessage; cbs != nil {
 			msg := &GameEventGameMessage{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Target = k.GetValByte()
-				case 1:
-					msg.Text = k.GetValString()
-				}
-			}
+			msg.Target = m.GetKeys()[0].GetValByte()
+			msg.Text = m.GetKeys()[1].GetValString()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4806,16 +4888,10 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 40: // EGameEvent_BreakBreakable
 		if cbs := ge.onBreakBreakable; cbs != nil {
 			msg := &GameEventBreakBreakable{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Entindex = k.GetValLong()
-				case 1:
-					msg.Userid = k.GetValShort()
-				case 2:
-					msg.Material = k.GetValByte()
-				}
-			}
+			msg.Entindex = m.GetKeys()[0].GetValLong()
+			msg.Userid = m.GetKeys()[1].GetValShort()
+			msg.Material = m.GetKeys()[2].GetValByte()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4827,14 +4903,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 41: // EGameEvent_BreakProp
 		if cbs := ge.onBreakProp; cbs != nil {
 			msg := &GameEventBreakProp{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Entindex = k.GetValLong()
-				case 1:
-					msg.Userid = k.GetValShort()
-				}
-			}
+			msg.Entindex = m.GetKeys()[0].GetValLong()
+			msg.Userid = m.GetKeys()[1].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4846,12 +4917,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 42: // EGameEvent_NpcSpawned
 		if cbs := ge.onNpcSpawned; cbs != nil {
 			msg := &GameEventNpcSpawned{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Entindex = k.GetValLong()
-				}
-			}
+			msg.Entindex = m.GetKeys()[0].GetValLong()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4863,14 +4930,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 43: // EGameEvent_NpcReplaced
 		if cbs := ge.onNpcReplaced; cbs != nil {
 			msg := &GameEventNpcReplaced{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.OldEntindex = k.GetValLong()
-				case 1:
-					msg.NewEntindex = k.GetValLong()
-				}
-			}
+			msg.OldEntindex = m.GetKeys()[0].GetValLong()
+			msg.NewEntindex = m.GetKeys()[1].GetValLong()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4882,18 +4944,11 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 44: // EGameEvent_EntityKilled
 		if cbs := ge.onEntityKilled; cbs != nil {
 			msg := &GameEventEntityKilled{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.EntindexKilled = k.GetValLong()
-				case 1:
-					msg.EntindexAttacker = k.GetValLong()
-				case 2:
-					msg.EntindexInflictor = k.GetValLong()
-				case 3:
-					msg.Damagebits = k.GetValLong()
-				}
-			}
+			msg.EntindexKilled = m.GetKeys()[0].GetValLong()
+			msg.EntindexAttacker = m.GetKeys()[1].GetValLong()
+			msg.EntindexInflictor = m.GetKeys()[2].GetValLong()
+			msg.Damagebits = m.GetKeys()[3].GetValLong()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4905,18 +4960,11 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 45: // EGameEvent_EntityHurt
 		if cbs := ge.onEntityHurt; cbs != nil {
 			msg := &GameEventEntityHurt{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.EntindexKilled = k.GetValLong()
-				case 1:
-					msg.EntindexAttacker = k.GetValLong()
-				case 2:
-					msg.EntindexInflictor = k.GetValLong()
-				case 3:
-					msg.Damagebits = k.GetValLong()
-				}
-			}
+			msg.EntindexKilled = m.GetKeys()[0].GetValLong()
+			msg.EntindexAttacker = m.GetKeys()[1].GetValLong()
+			msg.EntindexInflictor = m.GetKeys()[2].GetValLong()
+			msg.Damagebits = m.GetKeys()[3].GetValLong()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4928,18 +4976,11 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 46: // EGameEvent_BonusUpdated
 		if cbs := ge.onBonusUpdated; cbs != nil {
 			msg := &GameEventBonusUpdated{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Numadvanced = k.GetValShort()
-				case 1:
-					msg.Numbronze = k.GetValShort()
-				case 2:
-					msg.Numsilver = k.GetValShort()
-				case 3:
-					msg.Numgold = k.GetValShort()
-				}
-			}
+			msg.Numadvanced = m.GetKeys()[0].GetValShort()
+			msg.Numbronze = m.GetKeys()[1].GetValShort()
+			msg.Numsilver = m.GetKeys()[2].GetValShort()
+			msg.Numgold = m.GetKeys()[3].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4951,12 +4992,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 47: // EGameEvent_PlayerStatsUpdated
 		if cbs := ge.onPlayerStatsUpdated; cbs != nil {
 			msg := &GameEventPlayerStatsUpdated{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Forceupload = k.GetValBool()
-				}
-			}
+			msg.Forceupload = m.GetKeys()[0].GetValBool()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4968,16 +5005,10 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 48: // EGameEvent_AchievementEvent
 		if cbs := ge.onAchievementEvent; cbs != nil {
 			msg := &GameEventAchievementEvent{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.AchievementName = k.GetValString()
-				case 1:
-					msg.CurVal = k.GetValShort()
-				case 2:
-					msg.MaxVal = k.GetValShort()
-				}
-			}
+			msg.AchievementName = m.GetKeys()[0].GetValString()
+			msg.CurVal = m.GetKeys()[1].GetValShort()
+			msg.MaxVal = m.GetKeys()[2].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -4989,14 +5020,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 49: // EGameEvent_AchievementEarned
 		if cbs := ge.onAchievementEarned; cbs != nil {
 			msg := &GameEventAchievementEarned{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Player = k.GetValByte()
-				case 1:
-					msg.Achievement = k.GetValShort()
-				}
-			}
+			msg.Player = m.GetKeys()[0].GetValByte()
+			msg.Achievement = m.GetKeys()[1].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5008,6 +5034,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 50: // EGameEvent_AchievementWriteFailed
 		if cbs := ge.onAchievementWriteFailed; cbs != nil {
 			msg := &GameEventAchievementWriteFailed{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5019,12 +5046,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 51: // EGameEvent_PhysgunPickup
 		if cbs := ge.onPhysgunPickup; cbs != nil {
 			msg := &GameEventPhysgunPickup{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Entindex = k.GetValLong()
-				}
-			}
+			msg.Entindex = m.GetKeys()[0].GetValLong()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5036,12 +5059,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 52: // EGameEvent_FlareIgniteNpc
 		if cbs := ge.onFlareIgniteNpc; cbs != nil {
 			msg := &GameEventFlareIgniteNpc{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Entindex = k.GetValLong()
-				}
-			}
+			msg.Entindex = m.GetKeys()[0].GetValLong()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5053,6 +5072,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 53: // EGameEvent_HelicopterGrenadePuntMiss
 		if cbs := ge.onHelicopterGrenadePuntMiss; cbs != nil {
 			msg := &GameEventHelicopterGrenadePuntMiss{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5064,6 +5084,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 54: // EGameEvent_UserDataDownloaded
 		if cbs := ge.onUserDataDownloaded; cbs != nil {
 			msg := &GameEventUserDataDownloaded{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5075,12 +5096,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 55: // EGameEvent_RagdollDissolved
 		if cbs := ge.onRagdollDissolved; cbs != nil {
 			msg := &GameEventRagdollDissolved{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Entindex = k.GetValLong()
-				}
-			}
+			msg.Entindex = m.GetKeys()[0].GetValLong()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5092,6 +5109,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 56: // EGameEvent_GameinstructorDraw
 		if cbs := ge.onGameinstructorDraw; cbs != nil {
 			msg := &GameEventGameinstructorDraw{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5103,6 +5121,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 57: // EGameEvent_GameinstructorNodraw
 		if cbs := ge.onGameinstructorNodraw; cbs != nil {
 			msg := &GameEventGameinstructorNodraw{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5114,6 +5133,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 58: // EGameEvent_MapTransition
 		if cbs := ge.onMapTransition; cbs != nil {
 			msg := &GameEventMapTransition{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5125,46 +5145,25 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 59: // EGameEvent_InstructorServerHintCreate
 		if cbs := ge.onInstructorServerHintCreate; cbs != nil {
 			msg := &GameEventInstructorServerHintCreate{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.HintName = k.GetValString()
-				case 1:
-					msg.HintReplaceKey = k.GetValString()
-				case 2:
-					msg.HintTarget = k.GetValLong()
-				case 3:
-					msg.HintActivatorUserid = k.GetValShort()
-				case 4:
-					msg.HintTimeout = k.GetValShort()
-				case 5:
-					msg.HintIconOnscreen = k.GetValString()
-				case 6:
-					msg.HintIconOffscreen = k.GetValString()
-				case 7:
-					msg.HintCaption = k.GetValString()
-				case 8:
-					msg.HintActivatorCaption = k.GetValString()
-				case 9:
-					msg.HintColor = k.GetValString()
-				case 10:
-					msg.HintIconOffset = k.GetValFloat()
-				case 11:
-					msg.HintRange = k.GetValFloat()
-				case 12:
-					msg.HintFlags = k.GetValLong()
-				case 13:
-					msg.HintBinding = k.GetValString()
-				case 14:
-					msg.HintAllowNodrawTarget = k.GetValBool()
-				case 15:
-					msg.HintNooffscreen = k.GetValBool()
-				case 16:
-					msg.HintForcecaption = k.GetValBool()
-				case 17:
-					msg.HintLocalPlayerOnly = k.GetValBool()
-				}
-			}
+			msg.HintName = m.GetKeys()[0].GetValString()
+			msg.HintReplaceKey = m.GetKeys()[1].GetValString()
+			msg.HintTarget = m.GetKeys()[2].GetValLong()
+			msg.HintActivatorUserid = m.GetKeys()[3].GetValShort()
+			msg.HintTimeout = m.GetKeys()[4].GetValShort()
+			msg.HintIconOnscreen = m.GetKeys()[5].GetValString()
+			msg.HintIconOffscreen = m.GetKeys()[6].GetValString()
+			msg.HintCaption = m.GetKeys()[7].GetValString()
+			msg.HintActivatorCaption = m.GetKeys()[8].GetValString()
+			msg.HintColor = m.GetKeys()[9].GetValString()
+			msg.HintIconOffset = m.GetKeys()[10].GetValFloat()
+			msg.HintRange = m.GetKeys()[11].GetValFloat()
+			msg.HintFlags = m.GetKeys()[12].GetValLong()
+			msg.HintBinding = m.GetKeys()[13].GetValString()
+			msg.HintAllowNodrawTarget = m.GetKeys()[14].GetValBool()
+			msg.HintNooffscreen = m.GetKeys()[15].GetValBool()
+			msg.HintForcecaption = m.GetKeys()[16].GetValBool()
+			msg.HintLocalPlayerOnly = m.GetKeys()[17].GetValBool()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5176,12 +5175,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 60: // EGameEvent_InstructorServerHintStop
 		if cbs := ge.onInstructorServerHintStop; cbs != nil {
 			msg := &GameEventInstructorServerHintStop{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.HintName = k.GetValString()
-				}
-			}
+			msg.HintName = m.GetKeys()[0].GetValString()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5193,12 +5188,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 61: // EGameEvent_ChatNewMessage
 		if cbs := ge.onChatNewMessage; cbs != nil {
 			msg := &GameEventChatNewMessage{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Channel = k.GetValByte()
-				}
-			}
+			msg.Channel = m.GetKeys()[0].GetValByte()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5210,12 +5201,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 62: // EGameEvent_ChatMembersChanged
 		if cbs := ge.onChatMembersChanged; cbs != nil {
 			msg := &GameEventChatMembersChanged{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Channel = k.GetValByte()
-				}
-			}
+			msg.Channel = m.GetKeys()[0].GetValByte()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5227,14 +5214,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 63: // EGameEvent_InventoryUpdated
 		if cbs := ge.onInventoryUpdated; cbs != nil {
 			msg := &GameEventInventoryUpdated{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Itemdef = k.GetValShort()
-				case 1:
-					msg.Itemid = k.GetValLong()
-				}
-			}
+			msg.Itemdef = m.GetKeys()[0].GetValShort()
+			msg.Itemid = m.GetKeys()[1].GetValLong()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5246,6 +5228,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 64: // EGameEvent_CartUpdated
 		if cbs := ge.onCartUpdated; cbs != nil {
 			msg := &GameEventCartUpdated{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5257,6 +5240,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 65: // EGameEvent_StorePricesheetUpdated
 		if cbs := ge.onStorePricesheetUpdated; cbs != nil {
 			msg := &GameEventStorePricesheetUpdated{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5268,6 +5252,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 66: // EGameEvent_GcConnected
 		if cbs := ge.onGcConnected; cbs != nil {
 			msg := &GameEventGcConnected{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5279,6 +5264,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 67: // EGameEvent_ItemSchemaInitialized
 		if cbs := ge.onItemSchemaInitialized; cbs != nil {
 			msg := &GameEventItemSchemaInitialized{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5290,6 +5276,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 68: // EGameEvent_DropRateModified
 		if cbs := ge.onDropRateModified; cbs != nil {
 			msg := &GameEventDropRateModified{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5301,6 +5288,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 69: // EGameEvent_EventTicketModified
 		if cbs := ge.onEventTicketModified; cbs != nil {
 			msg := &GameEventEventTicketModified{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5312,16 +5300,10 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 70: // EGameEvent_ModifierEvent
 		if cbs := ge.onModifierEvent; cbs != nil {
 			msg := &GameEventModifierEvent{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Eventname = k.GetValString()
-				case 1:
-					msg.Caster = k.GetValShort()
-				case 2:
-					msg.Ability = k.GetValShort()
-				}
-			}
+			msg.Eventname = m.GetKeys()[0].GetValString()
+			msg.Caster = m.GetKeys()[1].GetValShort()
+			msg.Ability = m.GetKeys()[2].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5333,28 +5315,16 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 71: // EGameEvent_DotaPlayerKill
 		if cbs := ge.onDotaPlayerKill; cbs != nil {
 			msg := &GameEventDotaPlayerKill{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.VictimUserid = k.GetValShort()
-				case 1:
-					msg.Killer1Userid = k.GetValShort()
-				case 2:
-					msg.Killer2Userid = k.GetValShort()
-				case 3:
-					msg.Killer3Userid = k.GetValShort()
-				case 4:
-					msg.Killer4Userid = k.GetValShort()
-				case 5:
-					msg.Killer5Userid = k.GetValShort()
-				case 6:
-					msg.Bounty = k.GetValShort()
-				case 7:
-					msg.Neutral = k.GetValShort()
-				case 8:
-					msg.Greevil = k.GetValShort()
-				}
-			}
+			msg.VictimUserid = m.GetKeys()[0].GetValShort()
+			msg.Killer1Userid = m.GetKeys()[1].GetValShort()
+			msg.Killer2Userid = m.GetKeys()[2].GetValShort()
+			msg.Killer3Userid = m.GetKeys()[3].GetValShort()
+			msg.Killer4Userid = m.GetKeys()[4].GetValShort()
+			msg.Killer5Userid = m.GetKeys()[5].GetValShort()
+			msg.Bounty = m.GetKeys()[6].GetValShort()
+			msg.Neutral = m.GetKeys()[7].GetValShort()
+			msg.Greevil = m.GetKeys()[8].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5366,14 +5336,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 72: // EGameEvent_DotaPlayerDeny
 		if cbs := ge.onDotaPlayerDeny; cbs != nil {
 			msg := &GameEventDotaPlayerDeny{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.KillerUserid = k.GetValShort()
-				case 1:
-					msg.VictimUserid = k.GetValShort()
-				}
-			}
+			msg.KillerUserid = m.GetKeys()[0].GetValShort()
+			msg.VictimUserid = m.GetKeys()[1].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5385,12 +5350,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 73: // EGameEvent_DotaBarracksKill
 		if cbs := ge.onDotaBarracksKill; cbs != nil {
 			msg := &GameEventDotaBarracksKill{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.BarracksId = k.GetValShort()
-				}
-			}
+			msg.BarracksId = m.GetKeys()[0].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5402,16 +5363,10 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 74: // EGameEvent_DotaTowerKill
 		if cbs := ge.onDotaTowerKill; cbs != nil {
 			msg := &GameEventDotaTowerKill{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.KillerUserid = k.GetValShort()
-				case 1:
-					msg.Teamnumber = k.GetValShort()
-				case 2:
-					msg.Gold = k.GetValShort()
-				}
-			}
+			msg.KillerUserid = m.GetKeys()[0].GetValShort()
+			msg.Teamnumber = m.GetKeys()[1].GetValShort()
+			msg.Gold = m.GetKeys()[2].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5423,12 +5378,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 75: // EGameEvent_DotaEffigyKill
 		if cbs := ge.onDotaEffigyKill; cbs != nil {
 			msg := &GameEventDotaEffigyKill{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.OwnerUserid = k.GetValShort()
-				}
-			}
+			msg.OwnerUserid = m.GetKeys()[0].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5440,14 +5391,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 76: // EGameEvent_DotaRoshanKill
 		if cbs := ge.onDotaRoshanKill; cbs != nil {
 			msg := &GameEventDotaRoshanKill{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Teamnumber = k.GetValShort()
-				case 1:
-					msg.Gold = k.GetValShort()
-				}
-			}
+			msg.Teamnumber = m.GetKeys()[0].GetValShort()
+			msg.Gold = m.GetKeys()[1].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5459,12 +5405,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 77: // EGameEvent_DotaCourierLost
 		if cbs := ge.onDotaCourierLost; cbs != nil {
 			msg := &GameEventDotaCourierLost{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Teamnumber = k.GetValShort()
-				}
-			}
+			msg.Teamnumber = m.GetKeys()[0].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5476,12 +5418,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 78: // EGameEvent_DotaCourierRespawned
 		if cbs := ge.onDotaCourierRespawned; cbs != nil {
 			msg := &GameEventDotaCourierRespawned{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Teamnumber = k.GetValShort()
-				}
-			}
+			msg.Teamnumber = m.GetKeys()[0].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5493,12 +5431,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 79: // EGameEvent_DotaGlyphUsed
 		if cbs := ge.onDotaGlyphUsed; cbs != nil {
 			msg := &GameEventDotaGlyphUsed{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Teamnumber = k.GetValShort()
-				}
-			}
+			msg.Teamnumber = m.GetKeys()[0].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5510,12 +5444,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 80: // EGameEvent_DotaSuperCreeps
 		if cbs := ge.onDotaSuperCreeps; cbs != nil {
 			msg := &GameEventDotaSuperCreeps{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Teamnumber = k.GetValShort()
-				}
-			}
+			msg.Teamnumber = m.GetKeys()[0].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5527,14 +5457,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 81: // EGameEvent_DotaItemPurchase
 		if cbs := ge.onDotaItemPurchase; cbs != nil {
 			msg := &GameEventDotaItemPurchase{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Userid = k.GetValShort()
-				case 1:
-					msg.Itemid = k.GetValShort()
-				}
-			}
+			msg.Userid = m.GetKeys()[0].GetValShort()
+			msg.Itemid = m.GetKeys()[1].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5546,16 +5471,10 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 82: // EGameEvent_DotaItemGifted
 		if cbs := ge.onDotaItemGifted; cbs != nil {
 			msg := &GameEventDotaItemGifted{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Userid = k.GetValShort()
-				case 1:
-					msg.Itemid = k.GetValShort()
-				case 2:
-					msg.Sourceid = k.GetValShort()
-				}
-			}
+			msg.Userid = m.GetKeys()[0].GetValShort()
+			msg.Itemid = m.GetKeys()[1].GetValShort()
+			msg.Sourceid = m.GetKeys()[2].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5567,16 +5486,10 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 83: // EGameEvent_DotaRunePickup
 		if cbs := ge.onDotaRunePickup; cbs != nil {
 			msg := &GameEventDotaRunePickup{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Userid = k.GetValShort()
-				case 1:
-					msg.Type = k.GetValShort()
-				case 2:
-					msg.Rune = k.GetValShort()
-				}
-			}
+			msg.Userid = m.GetKeys()[0].GetValShort()
+			msg.Type = m.GetKeys()[1].GetValShort()
+			msg.Rune = m.GetKeys()[2].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5588,14 +5501,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 84: // EGameEvent_DotaRuneSpotted
 		if cbs := ge.onDotaRuneSpotted; cbs != nil {
 			msg := &GameEventDotaRuneSpotted{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Userid = k.GetValShort()
-				case 1:
-					msg.Rune = k.GetValShort()
-				}
-			}
+			msg.Userid = m.GetKeys()[0].GetValShort()
+			msg.Rune = m.GetKeys()[1].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5607,14 +5515,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 85: // EGameEvent_DotaItemSpotted
 		if cbs := ge.onDotaItemSpotted; cbs != nil {
 			msg := &GameEventDotaItemSpotted{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Userid = k.GetValShort()
-				case 1:
-					msg.Itemid = k.GetValShort()
-				}
-			}
+			msg.Userid = m.GetKeys()[0].GetValShort()
+			msg.Itemid = m.GetKeys()[1].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5626,14 +5529,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 86: // EGameEvent_DotaNoBattlePoints
 		if cbs := ge.onDotaNoBattlePoints; cbs != nil {
 			msg := &GameEventDotaNoBattlePoints{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Userid = k.GetValShort()
-				case 1:
-					msg.Reason = k.GetValShort()
-				}
-			}
+			msg.Userid = m.GetKeys()[0].GetValShort()
+			msg.Reason = m.GetKeys()[1].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5645,14 +5543,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 87: // EGameEvent_DotaChatInformational
 		if cbs := ge.onDotaChatInformational; cbs != nil {
 			msg := &GameEventDotaChatInformational{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Userid = k.GetValShort()
-				case 1:
-					msg.Type = k.GetValShort()
-				}
-			}
+			msg.Userid = m.GetKeys()[0].GetValShort()
+			msg.Type = m.GetKeys()[1].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5664,16 +5557,10 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 88: // EGameEvent_DotaActionItem
 		if cbs := ge.onDotaActionItem; cbs != nil {
 			msg := &GameEventDotaActionItem{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Reason = k.GetValShort()
-				case 1:
-					msg.Itemdef = k.GetValShort()
-				case 2:
-					msg.Message = k.GetValShort()
-				}
-			}
+			msg.Reason = m.GetKeys()[0].GetValShort()
+			msg.Itemdef = m.GetKeys()[1].GetValShort()
+			msg.Message = m.GetKeys()[2].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5685,12 +5572,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 89: // EGameEvent_DotaChatBanNotification
 		if cbs := ge.onDotaChatBanNotification; cbs != nil {
 			msg := &GameEventDotaChatBanNotification{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Userid = k.GetValShort()
-				}
-			}
+			msg.Userid = m.GetKeys()[0].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5702,16 +5585,10 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 90: // EGameEvent_DotaChatEvent
 		if cbs := ge.onDotaChatEvent; cbs != nil {
 			msg := &GameEventDotaChatEvent{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Userid = k.GetValShort()
-				case 1:
-					msg.Gold = k.GetValShort()
-				case 2:
-					msg.Message = k.GetValShort()
-				}
-			}
+			msg.Userid = m.GetKeys()[0].GetValShort()
+			msg.Gold = m.GetKeys()[1].GetValShort()
+			msg.Message = m.GetKeys()[2].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5723,16 +5600,10 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 91: // EGameEvent_DotaChatTimedReward
 		if cbs := ge.onDotaChatTimedReward; cbs != nil {
 			msg := &GameEventDotaChatTimedReward{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Userid = k.GetValShort()
-				case 1:
-					msg.Itmedef = k.GetValShort()
-				case 2:
-					msg.Message = k.GetValShort()
-				}
-			}
+			msg.Userid = m.GetKeys()[0].GetValShort()
+			msg.Itmedef = m.GetKeys()[1].GetValShort()
+			msg.Message = m.GetKeys()[2].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5744,16 +5615,10 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 92: // EGameEvent_DotaPauseEvent
 		if cbs := ge.onDotaPauseEvent; cbs != nil {
 			msg := &GameEventDotaPauseEvent{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Userid = k.GetValShort()
-				case 1:
-					msg.Value = k.GetValShort()
-				case 2:
-					msg.Message = k.GetValShort()
-				}
-			}
+			msg.Userid = m.GetKeys()[0].GetValShort()
+			msg.Value = m.GetKeys()[1].GetValShort()
+			msg.Message = m.GetKeys()[2].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5765,22 +5630,13 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 93: // EGameEvent_DotaChatKillStreak
 		if cbs := ge.onDotaChatKillStreak; cbs != nil {
 			msg := &GameEventDotaChatKillStreak{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Gold = k.GetValShort()
-				case 1:
-					msg.KillerId = k.GetValShort()
-				case 2:
-					msg.KillerStreak = k.GetValShort()
-				case 3:
-					msg.KillerMultikill = k.GetValShort()
-				case 4:
-					msg.VictimId = k.GetValShort()
-				case 5:
-					msg.VictimStreak = k.GetValShort()
-				}
-			}
+			msg.Gold = m.GetKeys()[0].GetValShort()
+			msg.KillerId = m.GetKeys()[1].GetValShort()
+			msg.KillerStreak = m.GetKeys()[2].GetValShort()
+			msg.KillerMultikill = m.GetKeys()[3].GetValShort()
+			msg.VictimId = m.GetKeys()[4].GetValShort()
+			msg.VictimStreak = m.GetKeys()[5].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5792,16 +5648,10 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 94: // EGameEvent_DotaChatFirstBlood
 		if cbs := ge.onDotaChatFirstBlood; cbs != nil {
 			msg := &GameEventDotaChatFirstBlood{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Gold = k.GetValShort()
-				case 1:
-					msg.KillerId = k.GetValShort()
-				case 2:
-					msg.VictimId = k.GetValShort()
-				}
-			}
+			msg.Gold = m.GetKeys()[0].GetValShort()
+			msg.KillerId = m.GetKeys()[1].GetValShort()
+			msg.VictimId = m.GetKeys()[2].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5813,16 +5663,10 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 95: // EGameEvent_DotaChatAssassinAnnounce
 		if cbs := ge.onDotaChatAssassinAnnounce; cbs != nil {
 			msg := &GameEventDotaChatAssassinAnnounce{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.AssassinId = k.GetValShort()
-				case 1:
-					msg.TargetId = k.GetValShort()
-				case 2:
-					msg.Message = k.GetValShort()
-				}
-			}
+			msg.AssassinId = m.GetKeys()[0].GetValShort()
+			msg.TargetId = m.GetKeys()[1].GetValShort()
+			msg.Message = m.GetKeys()[2].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5834,16 +5678,10 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 96: // EGameEvent_DotaChatAssassinDenied
 		if cbs := ge.onDotaChatAssassinDenied; cbs != nil {
 			msg := &GameEventDotaChatAssassinDenied{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.AssassinId = k.GetValShort()
-				case 1:
-					msg.TargetId = k.GetValShort()
-				case 2:
-					msg.Message = k.GetValShort()
-				}
-			}
+			msg.AssassinId = m.GetKeys()[0].GetValShort()
+			msg.TargetId = m.GetKeys()[1].GetValShort()
+			msg.Message = m.GetKeys()[2].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5855,16 +5693,10 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 97: // EGameEvent_DotaChatAssassinSuccess
 		if cbs := ge.onDotaChatAssassinSuccess; cbs != nil {
 			msg := &GameEventDotaChatAssassinSuccess{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.AssassinId = k.GetValShort()
-				case 1:
-					msg.TargetId = k.GetValShort()
-				case 2:
-					msg.Message = k.GetValShort()
-				}
-			}
+			msg.AssassinId = m.GetKeys()[0].GetValShort()
+			msg.TargetId = m.GetKeys()[1].GetValShort()
+			msg.Message = m.GetKeys()[2].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5876,12 +5708,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 98: // EGameEvent_DotaPlayerUpdateHeroSelection
 		if cbs := ge.onDotaPlayerUpdateHeroSelection; cbs != nil {
 			msg := &GameEventDotaPlayerUpdateHeroSelection{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Tabcycle = k.GetValBool()
-				}
-			}
+			msg.Tabcycle = m.GetKeys()[0].GetValBool()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5893,6 +5721,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 99: // EGameEvent_DotaPlayerUpdateSelectedUnit
 		if cbs := ge.onDotaPlayerUpdateSelectedUnit; cbs != nil {
 			msg := &GameEventDotaPlayerUpdateSelectedUnit{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5904,6 +5733,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 100: // EGameEvent_DotaPlayerUpdateQueryUnit
 		if cbs := ge.onDotaPlayerUpdateQueryUnit; cbs != nil {
 			msg := &GameEventDotaPlayerUpdateQueryUnit{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5915,6 +5745,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 101: // EGameEvent_DotaPlayerUpdateKillcamUnit
 		if cbs := ge.onDotaPlayerUpdateKillcamUnit; cbs != nil {
 			msg := &GameEventDotaPlayerUpdateKillcamUnit{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5926,14 +5757,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 102: // EGameEvent_DotaPlayerTakeTowerDamage
 		if cbs := ge.onDotaPlayerTakeTowerDamage; cbs != nil {
 			msg := &GameEventDotaPlayerTakeTowerDamage{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.PlayerID = k.GetValShort()
-				case 1:
-					msg.Damage = k.GetValShort()
-				}
-			}
+			msg.PlayerID = m.GetKeys()[0].GetValShort()
+			msg.Damage = m.GetKeys()[1].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5945,14 +5771,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 103: // EGameEvent_DotaHudErrorMessage
 		if cbs := ge.onDotaHudErrorMessage; cbs != nil {
 			msg := &GameEventDotaHudErrorMessage{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Reason = k.GetValByte()
-				case 1:
-					msg.Message = k.GetValString()
-				}
-			}
+			msg.Reason = m.GetKeys()[0].GetValByte()
+			msg.Message = m.GetKeys()[1].GetValString()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5964,6 +5785,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 104: // EGameEvent_DotaActionSuccess
 		if cbs := ge.onDotaActionSuccess; cbs != nil {
 			msg := &GameEventDotaActionSuccess{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5975,6 +5797,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 105: // EGameEvent_DotaStartingPositionChanged
 		if cbs := ge.onDotaStartingPositionChanged; cbs != nil {
 			msg := &GameEventDotaStartingPositionChanged{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5986,6 +5809,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 106: // EGameEvent_DotaMoneyChanged
 		if cbs := ge.onDotaMoneyChanged; cbs != nil {
 			msg := &GameEventDotaMoneyChanged{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -5997,6 +5821,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 107: // EGameEvent_DotaEnemyMoneyChanged
 		if cbs := ge.onDotaEnemyMoneyChanged; cbs != nil {
 			msg := &GameEventDotaEnemyMoneyChanged{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6008,6 +5833,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 108: // EGameEvent_DotaPortraitUnitStatsChanged
 		if cbs := ge.onDotaPortraitUnitStatsChanged; cbs != nil {
 			msg := &GameEventDotaPortraitUnitStatsChanged{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6019,6 +5845,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 109: // EGameEvent_DotaPortraitUnitModifiersChanged
 		if cbs := ge.onDotaPortraitUnitModifiersChanged; cbs != nil {
 			msg := &GameEventDotaPortraitUnitModifiersChanged{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6030,6 +5857,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 110: // EGameEvent_DotaForcePortraitUpdate
 		if cbs := ge.onDotaForcePortraitUpdate; cbs != nil {
 			msg := &GameEventDotaForcePortraitUpdate{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6041,6 +5869,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 111: // EGameEvent_DotaInventoryChanged
 		if cbs := ge.onDotaInventoryChanged; cbs != nil {
 			msg := &GameEventDotaInventoryChanged{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6052,18 +5881,11 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 112: // EGameEvent_DotaItemPickedUp
 		if cbs := ge.onDotaItemPickedUp; cbs != nil {
 			msg := &GameEventDotaItemPickedUp{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Itemname = k.GetValString()
-				case 1:
-					msg.PlayerID = k.GetValShort()
-				case 2:
-					msg.ItemEntityIndex = k.GetValShort()
-				case 3:
-					msg.HeroEntityIndex = k.GetValShort()
-				}
-			}
+			msg.Itemname = m.GetKeys()[0].GetValString()
+			msg.PlayerID = m.GetKeys()[1].GetValShort()
+			msg.ItemEntityIndex = m.GetKeys()[2].GetValShort()
+			msg.HeroEntityIndex = m.GetKeys()[3].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6075,12 +5897,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 113: // EGameEvent_DotaInventoryItemChanged
 		if cbs := ge.onDotaInventoryItemChanged; cbs != nil {
 			msg := &GameEventDotaInventoryItemChanged{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.EntityIndex = k.GetValShort()
-				}
-			}
+			msg.EntityIndex = m.GetKeys()[0].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6092,6 +5910,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 114: // EGameEvent_DotaAbilityChanged
 		if cbs := ge.onDotaAbilityChanged; cbs != nil {
 			msg := &GameEventDotaAbilityChanged{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6103,6 +5922,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 115: // EGameEvent_DotaPortraitAbilityLayoutChanged
 		if cbs := ge.onDotaPortraitAbilityLayoutChanged; cbs != nil {
 			msg := &GameEventDotaPortraitAbilityLayoutChanged{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6114,12 +5934,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 116: // EGameEvent_DotaInventoryItemAdded
 		if cbs := ge.onDotaInventoryItemAdded; cbs != nil {
 			msg := &GameEventDotaInventoryItemAdded{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Itemname = k.GetValString()
-				}
-			}
+			msg.Itemname = m.GetKeys()[0].GetValString()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6131,6 +5947,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 117: // EGameEvent_DotaInventoryChangedQueryUnit
 		if cbs := ge.onDotaInventoryChangedQueryUnit; cbs != nil {
 			msg := &GameEventDotaInventoryChangedQueryUnit{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6142,20 +5959,12 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 118: // EGameEvent_DotaLinkClicked
 		if cbs := ge.onDotaLinkClicked; cbs != nil {
 			msg := &GameEventDotaLinkClicked{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Link = k.GetValString()
-				case 1:
-					msg.Nav = k.GetValBool()
-				case 2:
-					msg.NavBack = k.GetValBool()
-				case 3:
-					msg.Recipe = k.GetValShort()
-				case 4:
-					msg.Shop = k.GetValShort()
-				}
-			}
+			msg.Link = m.GetKeys()[0].GetValString()
+			msg.Nav = m.GetKeys()[1].GetValBool()
+			msg.NavBack = m.GetKeys()[2].GetValBool()
+			msg.Recipe = m.GetKeys()[3].GetValShort()
+			msg.Shop = m.GetKeys()[4].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6167,16 +5976,10 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 119: // EGameEvent_DotaSetQuickBuy
 		if cbs := ge.onDotaSetQuickBuy; cbs != nil {
 			msg := &GameEventDotaSetQuickBuy{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Item = k.GetValString()
-				case 1:
-					msg.Recipe = k.GetValByte()
-				case 2:
-					msg.Toggle = k.GetValBool()
-				}
-			}
+			msg.Item = m.GetKeys()[0].GetValString()
+			msg.Recipe = m.GetKeys()[1].GetValByte()
+			msg.Toggle = m.GetKeys()[2].GetValBool()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6188,14 +5991,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 120: // EGameEvent_DotaQuickBuyChanged
 		if cbs := ge.onDotaQuickBuyChanged; cbs != nil {
 			msg := &GameEventDotaQuickBuyChanged{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Item = k.GetValString()
-				case 1:
-					msg.Recipe = k.GetValByte()
-				}
-			}
+			msg.Item = m.GetKeys()[0].GetValString()
+			msg.Recipe = m.GetKeys()[1].GetValByte()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6207,14 +6005,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 121: // EGameEvent_DotaPlayerShopChanged
 		if cbs := ge.onDotaPlayerShopChanged; cbs != nil {
 			msg := &GameEventDotaPlayerShopChanged{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Prevshopmask = k.GetValByte()
-				case 1:
-					msg.Shopmask = k.GetValByte()
-				}
-			}
+			msg.Prevshopmask = m.GetKeys()[0].GetValByte()
+			msg.Shopmask = m.GetKeys()[1].GetValByte()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6226,14 +6019,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 122: // EGameEvent_DotaPlayerShowKillcam
 		if cbs := ge.onDotaPlayerShowKillcam; cbs != nil {
 			msg := &GameEventDotaPlayerShowKillcam{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Nodes = k.GetValByte()
-				case 1:
-					msg.Player = k.GetValShort()
-				}
-			}
+			msg.Nodes = m.GetKeys()[0].GetValByte()
+			msg.Player = m.GetKeys()[1].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6245,14 +6033,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 123: // EGameEvent_DotaPlayerShowMinikillcam
 		if cbs := ge.onDotaPlayerShowMinikillcam; cbs != nil {
 			msg := &GameEventDotaPlayerShowMinikillcam{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Nodes = k.GetValByte()
-				case 1:
-					msg.Player = k.GetValShort()
-				}
-			}
+			msg.Nodes = m.GetKeys()[0].GetValByte()
+			msg.Player = m.GetKeys()[1].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6264,6 +6047,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 124: // EGameEvent_GcUserSessionCreated
 		if cbs := ge.onGcUserSessionCreated; cbs != nil {
 			msg := &GameEventGcUserSessionCreated{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6275,6 +6059,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 125: // EGameEvent_TeamDataUpdated
 		if cbs := ge.onTeamDataUpdated; cbs != nil {
 			msg := &GameEventTeamDataUpdated{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6286,6 +6071,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 126: // EGameEvent_GuildDataUpdated
 		if cbs := ge.onGuildDataUpdated; cbs != nil {
 			msg := &GameEventGuildDataUpdated{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6297,6 +6083,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 127: // EGameEvent_GuildOpenPartiesUpdated
 		if cbs := ge.onGuildOpenPartiesUpdated; cbs != nil {
 			msg := &GameEventGuildOpenPartiesUpdated{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6308,6 +6095,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 128: // EGameEvent_FantasyUpdated
 		if cbs := ge.onFantasyUpdated; cbs != nil {
 			msg := &GameEventFantasyUpdated{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6319,6 +6107,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 129: // EGameEvent_FantasyLeagueChanged
 		if cbs := ge.onFantasyLeagueChanged; cbs != nil {
 			msg := &GameEventFantasyLeagueChanged{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6330,6 +6119,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 130: // EGameEvent_FantasyScoreInfoChanged
 		if cbs := ge.onFantasyScoreInfoChanged; cbs != nil {
 			msg := &GameEventFantasyScoreInfoChanged{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6341,6 +6131,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 131: // EGameEvent_PlayerInfoUpdated
 		if cbs := ge.onPlayerInfoUpdated; cbs != nil {
 			msg := &GameEventPlayerInfoUpdated{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6352,12 +6143,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 132: // EGameEvent_PlayerInfoIndividualUpdated
 		if cbs := ge.onPlayerInfoIndividualUpdated; cbs != nil {
 			msg := &GameEventPlayerInfoIndividualUpdated{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.AccountId = k.GetValLong()
-				}
-			}
+			msg.AccountId = m.GetKeys()[0].GetValLong()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6369,6 +6156,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 133: // EGameEvent_GameRulesStateChange
 		if cbs := ge.onGameRulesStateChange; cbs != nil {
 			msg := &GameEventGameRulesStateChange{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6380,12 +6168,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 134: // EGameEvent_MatchHistoryUpdated
 		if cbs := ge.onMatchHistoryUpdated; cbs != nil {
 			msg := &GameEventMatchHistoryUpdated{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.SteamID = k.GetValUint64()
-				}
-			}
+			msg.SteamID = m.GetKeys()[0].GetValUint64()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6397,14 +6181,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 135: // EGameEvent_MatchDetailsUpdated
 		if cbs := ge.onMatchDetailsUpdated; cbs != nil {
 			msg := &GameEventMatchDetailsUpdated{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.MatchID = k.GetValUint64()
-				case 1:
-					msg.Result = k.GetValByte()
-				}
-			}
+			msg.MatchID = m.GetKeys()[0].GetValUint64()
+			msg.Result = m.GetKeys()[1].GetValByte()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6416,6 +6195,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 136: // EGameEvent_LiveGamesUpdated
 		if cbs := ge.onLiveGamesUpdated; cbs != nil {
 			msg := &GameEventLiveGamesUpdated{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6427,12 +6207,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 137: // EGameEvent_RecentMatchesUpdated
 		if cbs := ge.onRecentMatchesUpdated; cbs != nil {
 			msg := &GameEventRecentMatchesUpdated{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Page = k.GetValShort()
-				}
-			}
+			msg.Page = m.GetKeys()[0].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6444,6 +6220,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 138: // EGameEvent_NewsUpdated
 		if cbs := ge.onNewsUpdated; cbs != nil {
 			msg := &GameEventNewsUpdated{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6455,12 +6232,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 139: // EGameEvent_PersonaUpdated
 		if cbs := ge.onPersonaUpdated; cbs != nil {
 			msg := &GameEventPersonaUpdated{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.SteamID = k.GetValUint64()
-				}
-			}
+			msg.SteamID = m.GetKeys()[0].GetValUint64()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6472,6 +6245,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 140: // EGameEvent_TournamentStateUpdated
 		if cbs := ge.onTournamentStateUpdated; cbs != nil {
 			msg := &GameEventTournamentStateUpdated{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6483,6 +6257,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 141: // EGameEvent_PartyUpdated
 		if cbs := ge.onPartyUpdated; cbs != nil {
 			msg := &GameEventPartyUpdated{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6494,6 +6269,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 142: // EGameEvent_LobbyUpdated
 		if cbs := ge.onLobbyUpdated; cbs != nil {
 			msg := &GameEventLobbyUpdated{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6505,6 +6281,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 143: // EGameEvent_DashboardCachesCleared
 		if cbs := ge.onDashboardCachesCleared; cbs != nil {
 			msg := &GameEventDashboardCachesCleared{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6516,20 +6293,12 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 144: // EGameEvent_LastHit
 		if cbs := ge.onLastHit; cbs != nil {
 			msg := &GameEventLastHit{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.PlayerID = k.GetValShort()
-				case 1:
-					msg.EntKilled = k.GetValShort()
-				case 2:
-					msg.FirstBlood = k.GetValBool()
-				case 3:
-					msg.HeroKill = k.GetValBool()
-				case 4:
-					msg.TowerKill = k.GetValBool()
-				}
-			}
+			msg.PlayerID = m.GetKeys()[0].GetValShort()
+			msg.EntKilled = m.GetKeys()[1].GetValShort()
+			msg.FirstBlood = m.GetKeys()[2].GetValBool()
+			msg.HeroKill = m.GetKeys()[3].GetValBool()
+			msg.TowerKill = m.GetKeys()[4].GetValBool()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6541,14 +6310,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 145: // EGameEvent_PlayerCompletedGame
 		if cbs := ge.onPlayerCompletedGame; cbs != nil {
 			msg := &GameEventPlayerCompletedGame{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.PlayerID = k.GetValShort()
-				case 1:
-					msg.Winner = k.GetValByte()
-				}
-			}
+			msg.PlayerID = m.GetKeys()[0].GetValShort()
+			msg.Winner = m.GetKeys()[1].GetValByte()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6560,12 +6324,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 146: // EGameEvent_PlayerReconnected
 		if cbs := ge.onPlayerReconnected; cbs != nil {
 			msg := &GameEventPlayerReconnected{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.PlayerID = k.GetValShort()
-				}
-			}
+			msg.PlayerID = m.GetKeys()[0].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6577,12 +6337,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 147: // EGameEvent_NommedTree
 		if cbs := ge.onNommedTree; cbs != nil {
 			msg := &GameEventNommedTree{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.PlayerID = k.GetValShort()
-				}
-			}
+			msg.PlayerID = m.GetKeys()[0].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6594,14 +6350,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 148: // EGameEvent_DotaRuneActivatedServer
 		if cbs := ge.onDotaRuneActivatedServer; cbs != nil {
 			msg := &GameEventDotaRuneActivatedServer{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.PlayerID = k.GetValShort()
-				case 1:
-					msg.Rune = k.GetValShort()
-				}
-			}
+			msg.PlayerID = m.GetKeys()[0].GetValShort()
+			msg.Rune = m.GetKeys()[1].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6613,14 +6364,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 149: // EGameEvent_DotaPlayerGainedLevel
 		if cbs := ge.onDotaPlayerGainedLevel; cbs != nil {
 			msg := &GameEventDotaPlayerGainedLevel{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.PlayerID = k.GetValShort()
-				case 1:
-					msg.Level = k.GetValShort()
-				}
-			}
+			msg.PlayerID = m.GetKeys()[0].GetValShort()
+			msg.Level = m.GetKeys()[1].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6632,14 +6378,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 150: // EGameEvent_DotaPlayerLearnedAbility
 		if cbs := ge.onDotaPlayerLearnedAbility; cbs != nil {
 			msg := &GameEventDotaPlayerLearnedAbility{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.PlayerID = k.GetValShort()
-				case 1:
-					msg.Abilityname = k.GetValString()
-				}
-			}
+			msg.PlayerID = m.GetKeys()[0].GetValShort()
+			msg.Abilityname = m.GetKeys()[1].GetValString()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6651,14 +6392,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 151: // EGameEvent_DotaPlayerUsedAbility
 		if cbs := ge.onDotaPlayerUsedAbility; cbs != nil {
 			msg := &GameEventDotaPlayerUsedAbility{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.PlayerID = k.GetValShort()
-				case 1:
-					msg.Abilityname = k.GetValString()
-				}
-			}
+			msg.PlayerID = m.GetKeys()[0].GetValShort()
+			msg.Abilityname = m.GetKeys()[1].GetValString()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6670,12 +6406,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 152: // EGameEvent_DotaNonPlayerUsedAbility
 		if cbs := ge.onDotaNonPlayerUsedAbility; cbs != nil {
 			msg := &GameEventDotaNonPlayerUsedAbility{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Abilityname = k.GetValString()
-				}
-			}
+			msg.Abilityname = m.GetKeys()[0].GetValString()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6687,14 +6419,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 153: // EGameEvent_DotaPlayerBeginCast
 		if cbs := ge.onDotaPlayerBeginCast; cbs != nil {
 			msg := &GameEventDotaPlayerBeginCast{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.PlayerID = k.GetValShort()
-				case 1:
-					msg.Abilityname = k.GetValString()
-				}
-			}
+			msg.PlayerID = m.GetKeys()[0].GetValShort()
+			msg.Abilityname = m.GetKeys()[1].GetValString()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6706,12 +6433,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 154: // EGameEvent_DotaNonPlayerBeginCast
 		if cbs := ge.onDotaNonPlayerBeginCast; cbs != nil {
 			msg := &GameEventDotaNonPlayerBeginCast{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Abilityname = k.GetValString()
-				}
-			}
+			msg.Abilityname = m.GetKeys()[0].GetValString()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6723,14 +6446,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 155: // EGameEvent_DotaAbilityChannelFinished
 		if cbs := ge.onDotaAbilityChannelFinished; cbs != nil {
 			msg := &GameEventDotaAbilityChannelFinished{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Abilityname = k.GetValString()
-				case 1:
-					msg.Interrupted = k.GetValBool()
-				}
-			}
+			msg.Abilityname = m.GetKeys()[0].GetValString()
+			msg.Interrupted = m.GetKeys()[1].GetValBool()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6742,14 +6460,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 156: // EGameEvent_DotaHoldoutReviveComplete
 		if cbs := ge.onDotaHoldoutReviveComplete; cbs != nil {
 			msg := &GameEventDotaHoldoutReviveComplete{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Caster = k.GetValShort()
-				case 1:
-					msg.Target = k.GetValShort()
-				}
-			}
+			msg.Caster = m.GetKeys()[0].GetValShort()
+			msg.Target = m.GetKeys()[1].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6761,16 +6474,10 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 157: // EGameEvent_DotaPlayerKilled
 		if cbs := ge.onDotaPlayerKilled; cbs != nil {
 			msg := &GameEventDotaPlayerKilled{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.PlayerID = k.GetValShort()
-				case 1:
-					msg.HeroKill = k.GetValBool()
-				case 2:
-					msg.TowerKill = k.GetValBool()
-				}
-			}
+			msg.PlayerID = m.GetKeys()[0].GetValShort()
+			msg.HeroKill = m.GetKeys()[1].GetValBool()
+			msg.TowerKill = m.GetKeys()[2].GetValBool()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6782,6 +6489,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 158: // EGameEvent_BindpanelOpen
 		if cbs := ge.onBindpanelOpen; cbs != nil {
 			msg := &GameEventBindpanelOpen{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6793,6 +6501,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 159: // EGameEvent_BindpanelClose
 		if cbs := ge.onBindpanelClose; cbs != nil {
 			msg := &GameEventBindpanelClose{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6804,6 +6513,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 160: // EGameEvent_KeybindChanged
 		if cbs := ge.onKeybindChanged; cbs != nil {
 			msg := &GameEventKeybindChanged{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6815,6 +6525,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 161: // EGameEvent_DotaItemDragBegin
 		if cbs := ge.onDotaItemDragBegin; cbs != nil {
 			msg := &GameEventDotaItemDragBegin{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6826,6 +6537,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 162: // EGameEvent_DotaItemDragEnd
 		if cbs := ge.onDotaItemDragEnd; cbs != nil {
 			msg := &GameEventDotaItemDragEnd{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6837,6 +6549,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 163: // EGameEvent_DotaShopItemDragBegin
 		if cbs := ge.onDotaShopItemDragBegin; cbs != nil {
 			msg := &GameEventDotaShopItemDragBegin{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6848,6 +6561,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 164: // EGameEvent_DotaShopItemDragEnd
 		if cbs := ge.onDotaShopItemDragEnd; cbs != nil {
 			msg := &GameEventDotaShopItemDragEnd{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6859,16 +6573,10 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 165: // EGameEvent_DotaItemPurchased
 		if cbs := ge.onDotaItemPurchased; cbs != nil {
 			msg := &GameEventDotaItemPurchased{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.PlayerID = k.GetValShort()
-				case 1:
-					msg.Itemname = k.GetValString()
-				case 2:
-					msg.Itemcost = k.GetValShort()
-				}
-			}
+			msg.PlayerID = m.GetKeys()[0].GetValShort()
+			msg.Itemname = m.GetKeys()[1].GetValString()
+			msg.Itemcost = m.GetKeys()[2].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6880,16 +6588,10 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 166: // EGameEvent_DotaItemCombined
 		if cbs := ge.onDotaItemCombined; cbs != nil {
 			msg := &GameEventDotaItemCombined{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.PlayerID = k.GetValShort()
-				case 1:
-					msg.Itemname = k.GetValString()
-				case 2:
-					msg.Itemcost = k.GetValShort()
-				}
-			}
+			msg.PlayerID = m.GetKeys()[0].GetValShort()
+			msg.Itemname = m.GetKeys()[1].GetValString()
+			msg.Itemcost = m.GetKeys()[2].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6901,14 +6603,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 167: // EGameEvent_DotaItemUsed
 		if cbs := ge.onDotaItemUsed; cbs != nil {
 			msg := &GameEventDotaItemUsed{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.PlayerID = k.GetValShort()
-				case 1:
-					msg.Itemname = k.GetValString()
-				}
-			}
+			msg.PlayerID = m.GetKeys()[0].GetValShort()
+			msg.Itemname = m.GetKeys()[1].GetValString()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6920,12 +6617,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 168: // EGameEvent_DotaItemAutoPurchase
 		if cbs := ge.onDotaItemAutoPurchase; cbs != nil {
 			msg := &GameEventDotaItemAutoPurchase{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.ItemId = k.GetValShort()
-				}
-			}
+			msg.ItemId = m.GetKeys()[0].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6937,20 +6630,12 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 169: // EGameEvent_DotaUnitEvent
 		if cbs := ge.onDotaUnitEvent; cbs != nil {
 			msg := &GameEventDotaUnitEvent{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Victim = k.GetValShort()
-				case 1:
-					msg.Attacker = k.GetValShort()
-				case 2:
-					msg.Basepriority = k.GetValShort()
-				case 3:
-					msg.Priority = k.GetValShort()
-				case 4:
-					msg.Eventtype = k.GetValShort()
-				}
-			}
+			msg.Victim = m.GetKeys()[0].GetValShort()
+			msg.Attacker = m.GetKeys()[1].GetValShort()
+			msg.Basepriority = m.GetKeys()[2].GetValShort()
+			msg.Priority = m.GetKeys()[3].GetValShort()
+			msg.Eventtype = m.GetKeys()[4].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6962,12 +6647,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 170: // EGameEvent_DotaQuestStarted
 		if cbs := ge.onDotaQuestStarted; cbs != nil {
 			msg := &GameEventDotaQuestStarted{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.QuestIndex = k.GetValLong()
-				}
-			}
+			msg.QuestIndex = m.GetKeys()[0].GetValLong()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6979,12 +6660,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 171: // EGameEvent_DotaQuestCompleted
 		if cbs := ge.onDotaQuestCompleted; cbs != nil {
 			msg := &GameEventDotaQuestCompleted{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.QuestIndex = k.GetValLong()
-				}
-			}
+			msg.QuestIndex = m.GetKeys()[0].GetValLong()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -6996,6 +6673,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 172: // EGameEvent_GameuiActivated
 		if cbs := ge.onGameuiActivated; cbs != nil {
 			msg := &GameEventGameuiActivated{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7007,6 +6685,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 173: // EGameEvent_GameuiHidden
 		if cbs := ge.onGameuiHidden; cbs != nil {
 			msg := &GameEventGameuiHidden{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7018,14 +6697,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 174: // EGameEvent_PlayerFullyjoined
 		if cbs := ge.onPlayerFullyjoined; cbs != nil {
 			msg := &GameEventPlayerFullyjoined{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Userid = k.GetValShort()
-				case 1:
-					msg.Name = k.GetValString()
-				}
-			}
+			msg.Userid = m.GetKeys()[0].GetValShort()
+			msg.Name = m.GetKeys()[1].GetValString()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7037,12 +6711,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 175: // EGameEvent_DotaSpectateHero
 		if cbs := ge.onDotaSpectateHero; cbs != nil {
 			msg := &GameEventDotaSpectateHero{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Entindex = k.GetValByte()
-				}
-			}
+			msg.Entindex = m.GetKeys()[0].GetValByte()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7054,12 +6724,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 176: // EGameEvent_DotaMatchDone
 		if cbs := ge.onDotaMatchDone; cbs != nil {
 			msg := &GameEventDotaMatchDone{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Winningteam = k.GetValByte()
-				}
-			}
+			msg.Winningteam = m.GetKeys()[0].GetValByte()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7071,6 +6737,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 177: // EGameEvent_DotaMatchDoneClient
 		if cbs := ge.onDotaMatchDoneClient; cbs != nil {
 			msg := &GameEventDotaMatchDoneClient{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7082,14 +6749,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 178: // EGameEvent_SetInstructorGroupEnabled
 		if cbs := ge.onSetInstructorGroupEnabled; cbs != nil {
 			msg := &GameEventSetInstructorGroupEnabled{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Group = k.GetValString()
-				case 1:
-					msg.Enabled = k.GetValShort()
-				}
-			}
+			msg.Group = m.GetKeys()[0].GetValString()
+			msg.Enabled = m.GetKeys()[1].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7101,12 +6763,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 179: // EGameEvent_JoinedChatChannel
 		if cbs := ge.onJoinedChatChannel; cbs != nil {
 			msg := &GameEventJoinedChatChannel{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.ChannelName = k.GetValString()
-				}
-			}
+			msg.ChannelName = m.GetKeys()[0].GetValString()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7118,12 +6776,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 180: // EGameEvent_LeftChatChannel
 		if cbs := ge.onLeftChatChannel; cbs != nil {
 			msg := &GameEventLeftChatChannel{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.ChannelName = k.GetValString()
-				}
-			}
+			msg.ChannelName = m.GetKeys()[0].GetValString()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7135,6 +6789,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 181: // EGameEvent_GcChatChannelListUpdated
 		if cbs := ge.onGcChatChannelListUpdated; cbs != nil {
 			msg := &GameEventGcChatChannelListUpdated{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7146,12 +6801,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 182: // EGameEvent_TodayMessagesUpdated
 		if cbs := ge.onTodayMessagesUpdated; cbs != nil {
 			msg := &GameEventTodayMessagesUpdated{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.NumMessages = k.GetValShort()
-				}
-			}
+			msg.NumMessages = m.GetKeys()[0].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7163,16 +6814,10 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 183: // EGameEvent_FileDownloaded
 		if cbs := ge.onFileDownloaded; cbs != nil {
 			msg := &GameEventFileDownloaded{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Success = k.GetValBool()
-				case 1:
-					msg.LocalFilename = k.GetValString()
-				case 2:
-					msg.RemoteUrl = k.GetValString()
-				}
-			}
+			msg.Success = m.GetKeys()[0].GetValBool()
+			msg.LocalFilename = m.GetKeys()[1].GetValString()
+			msg.RemoteUrl = m.GetKeys()[2].GetValString()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7184,18 +6829,11 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 184: // EGameEvent_PlayerReportCountsUpdated
 		if cbs := ge.onPlayerReportCountsUpdated; cbs != nil {
 			msg := &GameEventPlayerReportCountsUpdated{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.PositiveRemaining = k.GetValByte()
-				case 1:
-					msg.NegativeRemaining = k.GetValByte()
-				case 2:
-					msg.PositiveTotal = k.GetValShort()
-				case 3:
-					msg.NegativeTotal = k.GetValShort()
-				}
-			}
+			msg.PositiveRemaining = m.GetKeys()[0].GetValByte()
+			msg.NegativeRemaining = m.GetKeys()[1].GetValByte()
+			msg.PositiveTotal = m.GetKeys()[2].GetValShort()
+			msg.NegativeTotal = m.GetKeys()[3].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7207,16 +6845,10 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 185: // EGameEvent_ScaleformFileDownloadComplete
 		if cbs := ge.onScaleformFileDownloadComplete; cbs != nil {
 			msg := &GameEventScaleformFileDownloadComplete{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Success = k.GetValBool()
-				case 1:
-					msg.LocalFilename = k.GetValString()
-				case 2:
-					msg.RemoteUrl = k.GetValString()
-				}
-			}
+			msg.Success = m.GetKeys()[0].GetValBool()
+			msg.LocalFilename = m.GetKeys()[1].GetValString()
+			msg.RemoteUrl = m.GetKeys()[2].GetValString()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7228,12 +6860,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 186: // EGameEvent_ItemPurchased
 		if cbs := ge.onItemPurchased; cbs != nil {
 			msg := &GameEventItemPurchased{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Itemid = k.GetValShort()
-				}
-			}
+			msg.Itemid = m.GetKeys()[0].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7245,6 +6873,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 187: // EGameEvent_GcMismatchedVersion
 		if cbs := ge.onGcMismatchedVersion; cbs != nil {
 			msg := &GameEventGcMismatchedVersion{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7256,6 +6885,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 190: // EGameEvent_DemoStop
 		if cbs := ge.onDemoStop; cbs != nil {
 			msg := &GameEventDemoStop{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7267,6 +6897,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 191: // EGameEvent_MapShutdown
 		if cbs := ge.onMapShutdown; cbs != nil {
 			msg := &GameEventMapShutdown{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7278,12 +6909,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 192: // EGameEvent_DotaWorkshopFileselected
 		if cbs := ge.onDotaWorkshopFileselected; cbs != nil {
 			msg := &GameEventDotaWorkshopFileselected{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Filename = k.GetValString()
-				}
-			}
+			msg.Filename = m.GetKeys()[0].GetValString()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7295,6 +6922,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 193: // EGameEvent_DotaWorkshopFilecanceled
 		if cbs := ge.onDotaWorkshopFilecanceled; cbs != nil {
 			msg := &GameEventDotaWorkshopFilecanceled{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7306,6 +6934,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 194: // EGameEvent_RichPresenceUpdated
 		if cbs := ge.onRichPresenceUpdated; cbs != nil {
 			msg := &GameEventRichPresenceUpdated{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7317,14 +6946,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 195: // EGameEvent_DotaHeroRandom
 		if cbs := ge.onDotaHeroRandom; cbs != nil {
 			msg := &GameEventDotaHeroRandom{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Userid = k.GetValShort()
-				case 1:
-					msg.Heroid = k.GetValShort()
-				}
-			}
+			msg.Userid = m.GetKeys()[0].GetValShort()
+			msg.Heroid = m.GetKeys()[1].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7336,12 +6960,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 196: // EGameEvent_DotaRdChatTurn
 		if cbs := ge.onDotaRdChatTurn; cbs != nil {
 			msg := &GameEventDotaRdChatTurn{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Userid = k.GetValShort()
-				}
-			}
+			msg.Userid = m.GetKeys()[0].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7353,6 +6973,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 197: // EGameEvent_DotaFavoriteHeroesUpdated
 		if cbs := ge.onDotaFavoriteHeroesUpdated; cbs != nil {
 			msg := &GameEventDotaFavoriteHeroesUpdated{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7364,6 +6985,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 198: // EGameEvent_ProfileOpened
 		if cbs := ge.onProfileOpened; cbs != nil {
 			msg := &GameEventProfileOpened{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7375,6 +6997,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 199: // EGameEvent_ProfileClosed
 		if cbs := ge.onProfileClosed; cbs != nil {
 			msg := &GameEventProfileClosed{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7386,6 +7009,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 200: // EGameEvent_ItemPreviewClosed
 		if cbs := ge.onItemPreviewClosed; cbs != nil {
 			msg := &GameEventItemPreviewClosed{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7397,12 +7021,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 201: // EGameEvent_DashboardSwitchedSection
 		if cbs := ge.onDashboardSwitchedSection; cbs != nil {
 			msg := &GameEventDashboardSwitchedSection{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Section = k.GetValShort()
-				}
-			}
+			msg.Section = m.GetKeys()[0].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7414,14 +7034,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 202: // EGameEvent_DotaTournamentItemEvent
 		if cbs := ge.onDotaTournamentItemEvent; cbs != nil {
 			msg := &GameEventDotaTournamentItemEvent{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.WinnerCount = k.GetValShort()
-				case 1:
-					msg.EventType = k.GetValShort()
-				}
-			}
+			msg.WinnerCount = m.GetKeys()[0].GetValShort()
+			msg.EventType = m.GetKeys()[1].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7433,14 +7048,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 203: // EGameEvent_DotaHeroSwap
 		if cbs := ge.onDotaHeroSwap; cbs != nil {
 			msg := &GameEventDotaHeroSwap{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Playerid1 = k.GetValByte()
-				case 1:
-					msg.Playerid2 = k.GetValByte()
-				}
-			}
+			msg.Playerid1 = m.GetKeys()[0].GetValByte()
+			msg.Playerid2 = m.GetKeys()[1].GetValByte()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7452,6 +7062,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 204: // EGameEvent_DotaResetSuggestedItems
 		if cbs := ge.onDotaResetSuggestedItems; cbs != nil {
 			msg := &GameEventDotaResetSuggestedItems{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7463,12 +7074,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 205: // EGameEvent_HalloweenHighScoreReceived
 		if cbs := ge.onHalloweenHighScoreReceived; cbs != nil {
 			msg := &GameEventHalloweenHighScoreReceived{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Round = k.GetValShort()
-				}
-			}
+			msg.Round = m.GetKeys()[0].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7480,14 +7087,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 206: // EGameEvent_HalloweenPhaseEnd
 		if cbs := ge.onHalloweenPhaseEnd; cbs != nil {
 			msg := &GameEventHalloweenPhaseEnd{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Phase = k.GetValByte()
-				case 1:
-					msg.Team = k.GetValByte()
-				}
-			}
+			msg.Phase = m.GetKeys()[0].GetValByte()
+			msg.Team = m.GetKeys()[1].GetValByte()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7499,12 +7101,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 207: // EGameEvent_HalloweenHighScoreRequestFailed
 		if cbs := ge.onHalloweenHighScoreRequestFailed; cbs != nil {
 			msg := &GameEventHalloweenHighScoreRequestFailed{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Round = k.GetValShort()
-				}
-			}
+			msg.Round = m.GetKeys()[0].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7516,14 +7114,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 208: // EGameEvent_DotaHudSkinChanged
 		if cbs := ge.onDotaHudSkinChanged; cbs != nil {
 			msg := &GameEventDotaHudSkinChanged{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Skin = k.GetValString()
-				case 1:
-					msg.Style = k.GetValByte()
-				}
-			}
+			msg.Skin = m.GetKeys()[0].GetValString()
+			msg.Style = m.GetKeys()[1].GetValByte()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7535,12 +7128,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 209: // EGameEvent_DotaInventoryPlayerGotItem
 		if cbs := ge.onDotaInventoryPlayerGotItem; cbs != nil {
 			msg := &GameEventDotaInventoryPlayerGotItem{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Itemname = k.GetValString()
-				}
-			}
+			msg.Itemname = m.GetKeys()[0].GetValString()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7552,6 +7141,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 210: // EGameEvent_PlayerIsExperienced
 		if cbs := ge.onPlayerIsExperienced; cbs != nil {
 			msg := &GameEventPlayerIsExperienced{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7563,6 +7153,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 211: // EGameEvent_PlayerIsNotexperienced
 		if cbs := ge.onPlayerIsNotexperienced; cbs != nil {
 			msg := &GameEventPlayerIsNotexperienced{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7574,6 +7165,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 212: // EGameEvent_DotaTutorialLessonStart
 		if cbs := ge.onDotaTutorialLessonStart; cbs != nil {
 			msg := &GameEventDotaTutorialLessonStart{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7585,6 +7177,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 213: // EGameEvent_DotaTutorialTaskAdvance
 		if cbs := ge.onDotaTutorialTaskAdvance; cbs != nil {
 			msg := &GameEventDotaTutorialTaskAdvance{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7596,12 +7189,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 214: // EGameEvent_DotaTutorialShopToggled
 		if cbs := ge.onDotaTutorialShopToggled; cbs != nil {
 			msg := &GameEventDotaTutorialShopToggled{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.ShopOpened = k.GetValBool()
-				}
-			}
+			msg.ShopOpened = m.GetKeys()[0].GetValBool()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7613,6 +7202,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 215: // EGameEvent_MapLocationUpdated
 		if cbs := ge.onMapLocationUpdated; cbs != nil {
 			msg := &GameEventMapLocationUpdated{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7624,6 +7214,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 216: // EGameEvent_RichpresenceCustomUpdated
 		if cbs := ge.onRichpresenceCustomUpdated; cbs != nil {
 			msg := &GameEventRichpresenceCustomUpdated{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7635,6 +7226,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 217: // EGameEvent_GameEndVisible
 		if cbs := ge.onGameEndVisible; cbs != nil {
 			msg := &GameEventGameEndVisible{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7646,6 +7238,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 218: // EGameEvent_AntiaddictionUpdate
 		if cbs := ge.onAntiaddictionUpdate; cbs != nil {
 			msg := &GameEventAntiaddictionUpdate{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7657,14 +7250,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 219: // EGameEvent_HighlightHudElement
 		if cbs := ge.onHighlightHudElement; cbs != nil {
 			msg := &GameEventHighlightHudElement{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Elementname = k.GetValString()
-				case 1:
-					msg.Duration = k.GetValFloat()
-				}
-			}
+			msg.Elementname = m.GetKeys()[0].GetValString()
+			msg.Duration = m.GetKeys()[1].GetValFloat()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7676,6 +7264,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 220: // EGameEvent_HideHighlightHudElement
 		if cbs := ge.onHideHighlightHudElement; cbs != nil {
 			msg := &GameEventHideHighlightHudElement{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7687,6 +7276,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 221: // EGameEvent_IntroVideoFinished
 		if cbs := ge.onIntroVideoFinished; cbs != nil {
 			msg := &GameEventIntroVideoFinished{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7698,6 +7288,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 222: // EGameEvent_MatchmakingStatusVisibilityChanged
 		if cbs := ge.onMatchmakingStatusVisibilityChanged; cbs != nil {
 			msg := &GameEventMatchmakingStatusVisibilityChanged{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7709,6 +7300,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 223: // EGameEvent_PracticeLobbyVisibilityChanged
 		if cbs := ge.onPracticeLobbyVisibilityChanged; cbs != nil {
 			msg := &GameEventPracticeLobbyVisibilityChanged{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7720,6 +7312,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 224: // EGameEvent_DotaCourierTransferItem
 		if cbs := ge.onDotaCourierTransferItem; cbs != nil {
 			msg := &GameEventDotaCourierTransferItem{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7731,6 +7324,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 225: // EGameEvent_FullUiUnlocked
 		if cbs := ge.onFullUiUnlocked; cbs != nil {
 			msg := &GameEventFullUiUnlocked{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7742,12 +7336,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 227: // EGameEvent_HeroSelectorPreviewSet
 		if cbs := ge.onHeroSelectorPreviewSet; cbs != nil {
 			msg := &GameEventHeroSelectorPreviewSet{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Setindex = k.GetValShort()
-				}
-			}
+			msg.Setindex = m.GetKeys()[0].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7759,14 +7349,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 228: // EGameEvent_AntiaddictionToast
 		if cbs := ge.onAntiaddictionToast; cbs != nil {
 			msg := &GameEventAntiaddictionToast{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Message = k.GetValString()
-				case 1:
-					msg.Duration = k.GetValFloat()
-				}
-			}
+			msg.Message = m.GetKeys()[0].GetValString()
+			msg.Duration = m.GetKeys()[1].GetValFloat()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7778,6 +7363,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 229: // EGameEvent_HeroPickerShown
 		if cbs := ge.onHeroPickerShown; cbs != nil {
 			msg := &GameEventHeroPickerShown{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7789,6 +7375,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 230: // EGameEvent_HeroPickerHidden
 		if cbs := ge.onHeroPickerHidden; cbs != nil {
 			msg := &GameEventHeroPickerHidden{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7800,6 +7387,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 231: // EGameEvent_DotaLocalQuickbuyChanged
 		if cbs := ge.onDotaLocalQuickbuyChanged; cbs != nil {
 			msg := &GameEventDotaLocalQuickbuyChanged{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7811,16 +7399,10 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 232: // EGameEvent_ShowCenterMessage
 		if cbs := ge.onShowCenterMessage; cbs != nil {
 			msg := &GameEventShowCenterMessage{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Message = k.GetValString()
-				case 1:
-					msg.Duration = k.GetValFloat()
-				case 2:
-					msg.ClearMessageQueue = k.GetValBool()
-				}
-			}
+			msg.Message = m.GetKeys()[0].GetValString()
+			msg.Duration = m.GetKeys()[1].GetValFloat()
+			msg.ClearMessageQueue = m.GetKeys()[2].GetValBool()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7832,12 +7414,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 233: // EGameEvent_HudFlipChanged
 		if cbs := ge.onHudFlipChanged; cbs != nil {
 			msg := &GameEventHudFlipChanged{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Flipped = k.GetValBool()
-				}
-			}
+			msg.Flipped = m.GetKeys()[0].GetValBool()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7849,6 +7427,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 234: // EGameEvent_FrostyPointsUpdated
 		if cbs := ge.onFrostyPointsUpdated; cbs != nil {
 			msg := &GameEventFrostyPointsUpdated{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7860,12 +7439,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 235: // EGameEvent_Defeated
 		if cbs := ge.onDefeated; cbs != nil {
 			msg := &GameEventDefeated{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Entindex = k.GetValShort()
-				}
-			}
+			msg.Entindex = m.GetKeys()[0].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7877,6 +7452,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 236: // EGameEvent_ResetDefeated
 		if cbs := ge.onResetDefeated; cbs != nil {
 			msg := &GameEventResetDefeated{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7888,6 +7464,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 237: // EGameEvent_BoosterStateUpdated
 		if cbs := ge.onBoosterStateUpdated; cbs != nil {
 			msg := &GameEventBoosterStateUpdated{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7899,18 +7476,11 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 238: // EGameEvent_EventPointsUpdated
 		if cbs := ge.onEventPointsUpdated; cbs != nil {
 			msg := &GameEventEventPointsUpdated{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.EventId = k.GetValShort()
-				case 1:
-					msg.Points = k.GetValShort()
-				case 2:
-					msg.PremiumPoints = k.GetValShort()
-				case 3:
-					msg.Owned = k.GetValBool()
-				}
-			}
+			msg.EventId = m.GetKeys()[0].GetValShort()
+			msg.Points = m.GetKeys()[1].GetValShort()
+			msg.PremiumPoints = m.GetKeys()[2].GetValShort()
+			msg.Owned = m.GetKeys()[3].GetValBool()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7922,14 +7492,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 239: // EGameEvent_LocalPlayerEventPoints
 		if cbs := ge.onLocalPlayerEventPoints; cbs != nil {
 			msg := &GameEventLocalPlayerEventPoints{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Points = k.GetValShort()
-				case 1:
-					msg.ConversionRate = k.GetValShort()
-				}
-			}
+			msg.Points = m.GetKeys()[0].GetValShort()
+			msg.ConversionRate = m.GetKeys()[1].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7941,12 +7506,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 240: // EGameEvent_CustomGameDifficulty
 		if cbs := ge.onCustomGameDifficulty; cbs != nil {
 			msg := &GameEventCustomGameDifficulty{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Difficulty = k.GetValByte()
-				}
-			}
+			msg.Difficulty = m.GetKeys()[0].GetValByte()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7958,14 +7519,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 241: // EGameEvent_TreeCut
 		if cbs := ge.onTreeCut; cbs != nil {
 			msg := &GameEventTreeCut{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.TreeX = k.GetValFloat()
-				case 1:
-					msg.TreeY = k.GetValFloat()
-				}
-			}
+			msg.TreeX = m.GetKeys()[0].GetValFloat()
+			msg.TreeY = m.GetKeys()[1].GetValFloat()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7977,12 +7533,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 242: // EGameEvent_UgcDetailsArrived
 		if cbs := ge.onUgcDetailsArrived; cbs != nil {
 			msg := &GameEventUgcDetailsArrived{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.PublishedFileId = k.GetValUint64()
-				}
-			}
+			msg.PublishedFileId = m.GetKeys()[0].GetValUint64()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -7994,12 +7546,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 243: // EGameEvent_UgcSubscribed
 		if cbs := ge.onUgcSubscribed; cbs != nil {
 			msg := &GameEventUgcSubscribed{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.PublishedFileId = k.GetValUint64()
-				}
-			}
+			msg.PublishedFileId = m.GetKeys()[0].GetValUint64()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8011,12 +7559,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 244: // EGameEvent_UgcUnsubscribed
 		if cbs := ge.onUgcUnsubscribed; cbs != nil {
 			msg := &GameEventUgcUnsubscribed{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.PublishedFileId = k.GetValUint64()
-				}
-			}
+			msg.PublishedFileId = m.GetKeys()[0].GetValUint64()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8028,12 +7572,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 245: // EGameEvent_UgcDownloadRequested
 		if cbs := ge.onUgcDownloadRequested; cbs != nil {
 			msg := &GameEventUgcDownloadRequested{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.PublishedFileId = k.GetValUint64()
-				}
-			}
+			msg.PublishedFileId = m.GetKeys()[0].GetValUint64()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8045,12 +7585,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 246: // EGameEvent_UgcInstalled
 		if cbs := ge.onUgcInstalled; cbs != nil {
 			msg := &GameEventUgcInstalled{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.PublishedFileId = k.GetValUint64()
-				}
-			}
+			msg.PublishedFileId = m.GetKeys()[0].GetValUint64()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8062,16 +7598,10 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 247: // EGameEvent_PrizepoolReceived
 		if cbs := ge.onPrizepoolReceived; cbs != nil {
 			msg := &GameEventPrizepoolReceived{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Success = k.GetValBool()
-				case 1:
-					msg.Prizepool = k.GetValUint64()
-				case 2:
-					msg.Leagueid = k.GetValUint64()
-				}
-			}
+			msg.Success = m.GetKeys()[0].GetValBool()
+			msg.Prizepool = m.GetKeys()[1].GetValUint64()
+			msg.Leagueid = m.GetKeys()[2].GetValUint64()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8083,12 +7613,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 248: // EGameEvent_MicrotransactionSuccess
 		if cbs := ge.onMicrotransactionSuccess; cbs != nil {
 			msg := &GameEventMicrotransactionSuccess{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Txnid = k.GetValUint64()
-				}
-			}
+			msg.Txnid = m.GetKeys()[0].GetValUint64()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8100,14 +7626,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 249: // EGameEvent_DotaRubickAbilitySteal
 		if cbs := ge.onDotaRubickAbilitySteal; cbs != nil {
 			msg := &GameEventDotaRubickAbilitySteal{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.AbilityIndex = k.GetValShort()
-				case 1:
-					msg.AbilityLevel = k.GetValByte()
-				}
-			}
+			msg.AbilityIndex = m.GetKeys()[0].GetValShort()
+			msg.AbilityLevel = m.GetKeys()[1].GetValByte()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8119,18 +7640,11 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 250: // EGameEvent_CompendiumEventActionsLoaded
 		if cbs := ge.onCompendiumEventActionsLoaded; cbs != nil {
 			msg := &GameEventCompendiumEventActionsLoaded{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.AccountId = k.GetValUint64()
-				case 1:
-					msg.LeagueId = k.GetValUint64()
-				case 2:
-					msg.LocalTest = k.GetValBool()
-				case 3:
-					msg.OriginalPoints = k.GetValUint64()
-				}
-			}
+			msg.AccountId = m.GetKeys()[0].GetValUint64()
+			msg.LeagueId = m.GetKeys()[1].GetValUint64()
+			msg.LocalTest = m.GetKeys()[2].GetValBool()
+			msg.OriginalPoints = m.GetKeys()[3].GetValUint64()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8142,16 +7656,10 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 251: // EGameEvent_CompendiumSelectionsLoaded
 		if cbs := ge.onCompendiumSelectionsLoaded; cbs != nil {
 			msg := &GameEventCompendiumSelectionsLoaded{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.AccountId = k.GetValUint64()
-				case 1:
-					msg.LeagueId = k.GetValUint64()
-				case 2:
-					msg.LocalTest = k.GetValBool()
-				}
-			}
+			msg.AccountId = m.GetKeys()[0].GetValUint64()
+			msg.LeagueId = m.GetKeys()[1].GetValUint64()
+			msg.LocalTest = m.GetKeys()[2].GetValBool()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8163,16 +7671,10 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 252: // EGameEvent_CompendiumSetSelectionFailed
 		if cbs := ge.onCompendiumSetSelectionFailed; cbs != nil {
 			msg := &GameEventCompendiumSetSelectionFailed{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.AccountId = k.GetValUint64()
-				case 1:
-					msg.LeagueId = k.GetValUint64()
-				case 2:
-					msg.LocalTest = k.GetValBool()
-				}
-			}
+			msg.AccountId = m.GetKeys()[0].GetValUint64()
+			msg.LeagueId = m.GetKeys()[1].GetValUint64()
+			msg.LocalTest = m.GetKeys()[2].GetValBool()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8184,16 +7686,10 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 253: // EGameEvent_CompendiumTrophiesLoaded
 		if cbs := ge.onCompendiumTrophiesLoaded; cbs != nil {
 			msg := &GameEventCompendiumTrophiesLoaded{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.AccountId = k.GetValUint64()
-				case 1:
-					msg.LeagueId = k.GetValUint64()
-				case 2:
-					msg.LocalTest = k.GetValBool()
-				}
-			}
+			msg.AccountId = m.GetKeys()[0].GetValUint64()
+			msg.LeagueId = m.GetKeys()[1].GetValUint64()
+			msg.LocalTest = m.GetKeys()[2].GetValBool()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8205,6 +7701,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 254: // EGameEvent_CommunityCachedNamesUpdated
 		if cbs := ge.onCommunityCachedNamesUpdated; cbs != nil {
 			msg := &GameEventCommunityCachedNamesUpdated{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8216,16 +7713,10 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 255: // EGameEvent_SpecItemPickup
 		if cbs := ge.onSpecItemPickup; cbs != nil {
 			msg := &GameEventSpecItemPickup{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.PlayerId = k.GetValShort()
-				case 1:
-					msg.ItemName = k.GetValString()
-				case 2:
-					msg.Purchase = k.GetValBool()
-				}
-			}
+			msg.PlayerId = m.GetKeys()[0].GetValShort()
+			msg.ItemName = m.GetKeys()[1].GetValString()
+			msg.Purchase = m.GetKeys()[2].GetValBool()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8237,12 +7728,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 256: // EGameEvent_SpecAegisReclaimTime
 		if cbs := ge.onSpecAegisReclaimTime; cbs != nil {
 			msg := &GameEventSpecAegisReclaimTime{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.ReclaimTime = k.GetValFloat()
-				}
-			}
+			msg.ReclaimTime = m.GetKeys()[0].GetValFloat()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8254,12 +7741,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 257: // EGameEvent_AccountTrophiesChanged
 		if cbs := ge.onAccountTrophiesChanged; cbs != nil {
 			msg := &GameEventAccountTrophiesChanged{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.AccountId = k.GetValUint64()
-				}
-			}
+			msg.AccountId = m.GetKeys()[0].GetValUint64()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8271,12 +7754,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 258: // EGameEvent_AccountAllHeroChallengeChanged
 		if cbs := ge.onAccountAllHeroChallengeChanged; cbs != nil {
 			msg := &GameEventAccountAllHeroChallengeChanged{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.AccountId = k.GetValUint64()
-				}
-			}
+			msg.AccountId = m.GetKeys()[0].GetValUint64()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8288,18 +7767,11 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 259: // EGameEvent_TeamShowcaseUiUpdate
 		if cbs := ge.onTeamShowcaseUiUpdate; cbs != nil {
 			msg := &GameEventTeamShowcaseUiUpdate{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Show = k.GetValBool()
-				case 1:
-					msg.AccountId = k.GetValUint64()
-				case 2:
-					msg.HeroEntindex = k.GetValShort()
-				case 3:
-					msg.DisplayUiOnLeft = k.GetValBool()
-				}
-			}
+			msg.Show = m.GetKeys()[0].GetValBool()
+			msg.AccountId = m.GetKeys()[1].GetValUint64()
+			msg.HeroEntindex = m.GetKeys()[2].GetValShort()
+			msg.DisplayUiOnLeft = m.GetKeys()[3].GetValBool()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8311,6 +7783,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 260: // EGameEvent_IngameEventsChanged
 		if cbs := ge.onIngameEventsChanged; cbs != nil {
 			msg := &GameEventIngameEventsChanged{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8322,6 +7795,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 261: // EGameEvent_DotaMatchSignout
 		if cbs := ge.onDotaMatchSignout; cbs != nil {
 			msg := &GameEventDotaMatchSignout{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8333,12 +7807,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 262: // EGameEvent_DotaIllusionsCreated
 		if cbs := ge.onDotaIllusionsCreated; cbs != nil {
 			msg := &GameEventDotaIllusionsCreated{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.OriginalEntindex = k.GetValShort()
-				}
-			}
+			msg.OriginalEntindex = m.GetKeys()[0].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8350,16 +7820,10 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 263: // EGameEvent_DotaYearBeastKilled
 		if cbs := ge.onDotaYearBeastKilled; cbs != nil {
 			msg := &GameEventDotaYearBeastKilled{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.KillerPlayerId = k.GetValShort()
-				case 1:
-					msg.Message = k.GetValShort()
-				case 2:
-					msg.BeastId = k.GetValUint64()
-				}
-			}
+			msg.KillerPlayerId = m.GetKeys()[0].GetValShort()
+			msg.Message = m.GetKeys()[1].GetValShort()
+			msg.BeastId = m.GetKeys()[2].GetValUint64()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8371,12 +7835,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 264: // EGameEvent_DotaHeroUndoselection
 		if cbs := ge.onDotaHeroUndoselection; cbs != nil {
 			msg := &GameEventDotaHeroUndoselection{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Playerid1 = k.GetValByte()
-				}
-			}
+			msg.Playerid1 = m.GetKeys()[0].GetValByte()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8388,6 +7848,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 265: // EGameEvent_DotaChallengeSocacheUpdated
 		if cbs := ge.onDotaChallengeSocacheUpdated; cbs != nil {
 			msg := &GameEventDotaChallengeSocacheUpdated{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8399,6 +7860,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 266: // EGameEvent_PartyInvitesUpdated
 		if cbs := ge.onPartyInvitesUpdated; cbs != nil {
 			msg := &GameEventPartyInvitesUpdated{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8410,6 +7872,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 267: // EGameEvent_LobbyInvitesUpdated
 		if cbs := ge.onLobbyInvitesUpdated; cbs != nil {
 			msg := &GameEventLobbyInvitesUpdated{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8421,6 +7884,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 268: // EGameEvent_CustomGameModeListUpdated
 		if cbs := ge.onCustomGameModeListUpdated; cbs != nil {
 			msg := &GameEventCustomGameModeListUpdated{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8432,6 +7896,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 269: // EGameEvent_CustomGameLobbyListUpdated
 		if cbs := ge.onCustomGameLobbyListUpdated; cbs != nil {
 			msg := &GameEventCustomGameLobbyListUpdated{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8443,6 +7908,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 270: // EGameEvent_FriendLobbyListUpdated
 		if cbs := ge.onFriendLobbyListUpdated; cbs != nil {
 			msg := &GameEventFriendLobbyListUpdated{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8454,6 +7920,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 271: // EGameEvent_DotaTeamPlayerListChanged
 		if cbs := ge.onDotaTeamPlayerListChanged; cbs != nil {
 			msg := &GameEventDotaTeamPlayerListChanged{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8465,6 +7932,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 272: // EGameEvent_DotaPlayerDetailsChanged
 		if cbs := ge.onDotaPlayerDetailsChanged; cbs != nil {
 			msg := &GameEventDotaPlayerDetailsChanged{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8476,12 +7944,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 273: // EGameEvent_PlayerProfileStatsUpdated
 		if cbs := ge.onPlayerProfileStatsUpdated; cbs != nil {
 			msg := &GameEventPlayerProfileStatsUpdated{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.AccountId = k.GetValUint64()
-				}
-			}
+			msg.AccountId = m.GetKeys()[0].GetValUint64()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8493,12 +7957,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 274: // EGameEvent_CustomGamePlayerCountUpdated
 		if cbs := ge.onCustomGamePlayerCountUpdated; cbs != nil {
 			msg := &GameEventCustomGamePlayerCountUpdated{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.CustomGameId = k.GetValUint64()
-				}
-			}
+			msg.CustomGameId = m.GetKeys()[0].GetValUint64()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8510,12 +7970,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 275: // EGameEvent_CustomGameFriendsPlayedUpdated
 		if cbs := ge.onCustomGameFriendsPlayedUpdated; cbs != nil {
 			msg := &GameEventCustomGameFriendsPlayedUpdated{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.CustomGameId = k.GetValUint64()
-				}
-			}
+			msg.CustomGameId = m.GetKeys()[0].GetValUint64()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8527,6 +7983,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 276: // EGameEvent_CustomGamesFriendsPlayUpdated
 		if cbs := ge.onCustomGamesFriendsPlayUpdated; cbs != nil {
 			msg := &GameEventCustomGamesFriendsPlayUpdated{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8538,6 +7995,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 277: // EGameEvent_DotaPlayerUpdateAssignedHero
 		if cbs := ge.onDotaPlayerUpdateAssignedHero; cbs != nil {
 			msg := &GameEventDotaPlayerUpdateAssignedHero{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8549,6 +8007,7 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 278: // EGameEvent_DotaPlayerHeroSelectionDirty
 		if cbs := ge.onDotaPlayerHeroSelectionDirty; cbs != nil {
 			msg := &GameEventDotaPlayerHeroSelectionDirty{}
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8560,16 +8019,10 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 279: // EGameEvent_DotaNpcGoalReached
 		if cbs := ge.onDotaNpcGoalReached; cbs != nil {
 			msg := &GameEventDotaNpcGoalReached{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.NpcEntindex = k.GetValShort()
-				case 1:
-					msg.GoalEntindex = k.GetValShort()
-				case 2:
-					msg.NextGoalEntindex = k.GetValShort()
-				}
-			}
+			msg.NpcEntindex = m.GetKeys()[0].GetValShort()
+			msg.GoalEntindex = m.GetKeys()[1].GetValShort()
+			msg.NextGoalEntindex = m.GetKeys()[2].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8581,16 +8034,10 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 280: // EGameEvent_DotaPlayerSelectedCustomTeam
 		if cbs := ge.onDotaPlayerSelectedCustomTeam; cbs != nil {
 			msg := &GameEventDotaPlayerSelectedCustomTeam{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.PlayerId = k.GetValShort()
-				case 1:
-					msg.TeamId = k.GetValShort()
-				case 2:
-					msg.Success = k.GetValBool()
-				}
-			}
+			msg.PlayerId = m.GetKeys()[0].GetValShort()
+			msg.TeamId = m.GetKeys()[1].GetValShort()
+			msg.Success = m.GetKeys()[2].GetValBool()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8602,18 +8049,11 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 281: // EGameEvent_HltvStatus
 		if cbs := ge.onHltvStatus; cbs != nil {
 			msg := &GameEventHltvStatus{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Clients = k.GetValLong()
-				case 1:
-					msg.Slots = k.GetValLong()
-				case 2:
-					msg.Proxies = k.GetValShort()
-				case 3:
-					msg.Master = k.GetValString()
-				}
-			}
+			msg.Clients = m.GetKeys()[0].GetValLong()
+			msg.Slots = m.GetKeys()[1].GetValLong()
+			msg.Proxies = m.GetKeys()[2].GetValShort()
+			msg.Master = m.GetKeys()[3].GetValString()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8625,12 +8065,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 282: // EGameEvent_HltvCameraman
 		if cbs := ge.onHltvCameraman; cbs != nil {
 			msg := &GameEventHltvCameraman{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Index = k.GetValShort()
-				}
-			}
+			msg.Index = m.GetKeys()[0].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8642,16 +8078,10 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 283: // EGameEvent_HltvRankCamera
 		if cbs := ge.onHltvRankCamera; cbs != nil {
 			msg := &GameEventHltvRankCamera{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Index = k.GetValByte()
-				case 1:
-					msg.Rank = k.GetValFloat()
-				case 2:
-					msg.Target = k.GetValShort()
-				}
-			}
+			msg.Index = m.GetKeys()[0].GetValByte()
+			msg.Rank = m.GetKeys()[1].GetValFloat()
+			msg.Target = m.GetKeys()[2].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8663,16 +8093,10 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 284: // EGameEvent_HltvRankEntity
 		if cbs := ge.onHltvRankEntity; cbs != nil {
 			msg := &GameEventHltvRankEntity{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Index = k.GetValShort()
-				case 1:
-					msg.Rank = k.GetValFloat()
-				case 2:
-					msg.Target = k.GetValShort()
-				}
-			}
+			msg.Index = m.GetKeys()[0].GetValShort()
+			msg.Rank = m.GetKeys()[1].GetValFloat()
+			msg.Target = m.GetKeys()[2].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8684,26 +8108,15 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 285: // EGameEvent_HltvFixed
 		if cbs := ge.onHltvFixed; cbs != nil {
 			msg := &GameEventHltvFixed{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Posx = k.GetValLong()
-				case 1:
-					msg.Posy = k.GetValLong()
-				case 2:
-					msg.Posz = k.GetValLong()
-				case 3:
-					msg.Theta = k.GetValShort()
-				case 4:
-					msg.Phi = k.GetValShort()
-				case 5:
-					msg.Offset = k.GetValShort()
-				case 6:
-					msg.Fov = k.GetValFloat()
-				case 7:
-					msg.Target = k.GetValShort()
-				}
-			}
+			msg.Posx = m.GetKeys()[0].GetValLong()
+			msg.Posy = m.GetKeys()[1].GetValLong()
+			msg.Posz = m.GetKeys()[2].GetValLong()
+			msg.Theta = m.GetKeys()[3].GetValShort()
+			msg.Phi = m.GetKeys()[4].GetValShort()
+			msg.Offset = m.GetKeys()[5].GetValShort()
+			msg.Fov = m.GetKeys()[6].GetValFloat()
+			msg.Target = m.GetKeys()[7].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8715,24 +8128,14 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 286: // EGameEvent_HltvChase
 		if cbs := ge.onHltvChase; cbs != nil {
 			msg := &GameEventHltvChase{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Target1 = k.GetValShort()
-				case 1:
-					msg.Target2 = k.GetValShort()
-				case 2:
-					msg.Distance = k.GetValShort()
-				case 3:
-					msg.Theta = k.GetValShort()
-				case 4:
-					msg.Phi = k.GetValShort()
-				case 5:
-					msg.Inertia = k.GetValByte()
-				case 6:
-					msg.Ineye = k.GetValByte()
-				}
-			}
+			msg.Target1 = m.GetKeys()[0].GetValShort()
+			msg.Target2 = m.GetKeys()[1].GetValShort()
+			msg.Distance = m.GetKeys()[2].GetValShort()
+			msg.Theta = m.GetKeys()[3].GetValShort()
+			msg.Phi = m.GetKeys()[4].GetValShort()
+			msg.Inertia = m.GetKeys()[5].GetValByte()
+			msg.Ineye = m.GetKeys()[6].GetValByte()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8744,12 +8147,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 287: // EGameEvent_HltvMessage
 		if cbs := ge.onHltvMessage; cbs != nil {
 			msg := &GameEventHltvMessage{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Text = k.GetValString()
-				}
-			}
+			msg.Text = m.GetKeys()[0].GetValString()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8761,12 +8160,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 288: // EGameEvent_HltvTitle
 		if cbs := ge.onHltvTitle; cbs != nil {
 			msg := &GameEventHltvTitle{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Text = k.GetValString()
-				}
-			}
+			msg.Text = m.GetKeys()[0].GetValString()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8778,16 +8173,10 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 289: // EGameEvent_HltvChat
 		if cbs := ge.onHltvChat; cbs != nil {
 			msg := &GameEventHltvChat{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Name = k.GetValString()
-				case 1:
-					msg.Text = k.GetValString()
-				case 2:
-					msg.SteamID = k.GetValUint64()
-				}
-			}
+			msg.Name = m.GetKeys()[0].GetValString()
+			msg.Text = m.GetKeys()[1].GetValString()
+			msg.SteamID = m.GetKeys()[2].GetValUint64()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8799,12 +8188,8 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 290: // EGameEvent_HltvVersioninfo
 		if cbs := ge.onHltvVersioninfo; cbs != nil {
 			msg := &GameEventHltvVersioninfo{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Version = k.GetValByte()
-				}
-			}
+			msg.Version = m.GetKeys()[0].GetValByte()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8816,28 +8201,16 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 291: // EGameEvent_DotaChaseHero
 		if cbs := ge.onDotaChaseHero; cbs != nil {
 			msg := &GameEventDotaChaseHero{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Target1 = k.GetValShort()
-				case 1:
-					msg.Target2 = k.GetValShort()
-				case 2:
-					msg.Type = k.GetValByte()
-				case 3:
-					msg.Priority = k.GetValShort()
-				case 4:
-					msg.Gametime = k.GetValFloat()
-				case 5:
-					msg.Highlight = k.GetValBool()
-				case 6:
-					msg.Target1playerid = k.GetValByte()
-				case 7:
-					msg.Target2playerid = k.GetValByte()
-				case 8:
-					msg.Eventtype = k.GetValShort()
-				}
-			}
+			msg.Target1 = m.GetKeys()[0].GetValShort()
+			msg.Target2 = m.GetKeys()[1].GetValShort()
+			msg.Type = m.GetKeys()[2].GetValByte()
+			msg.Priority = m.GetKeys()[3].GetValShort()
+			msg.Gametime = m.GetKeys()[4].GetValFloat()
+			msg.Highlight = m.GetKeys()[5].GetValBool()
+			msg.Target1playerid = m.GetKeys()[6].GetValByte()
+			msg.Target2playerid = m.GetKeys()[7].GetValByte()
+			msg.Eventtype = m.GetKeys()[8].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8849,48 +8222,26 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 292: // EGameEvent_DotaCombatlog
 		if cbs := ge.onDotaCombatlog; cbs != nil {
 			msg := &GameEventDotaCombatlog{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Type = k.GetValByte()
-				case 1:
-					msg.Sourcename = k.GetValShort()
-				case 2:
-					msg.Targetname = k.GetValShort()
-				case 3:
-					msg.Attackername = k.GetValShort()
-				case 4:
-					msg.Inflictorname = k.GetValShort()
-				case 5:
-					msg.Attackerillusion = k.GetValBool()
-				case 6:
-					msg.Targetillusion = k.GetValBool()
-				case 7:
-					msg.Value = k.GetValShort()
-				case 8:
-					msg.Health = k.GetValShort()
-				case 9:
-					msg.Timestamp = k.GetValFloat()
-				case 10:
-					msg.Targetsourcename = k.GetValShort()
-				case 11:
-					msg.Timestampraw = k.GetValFloat()
-				case 12:
-					msg.Attackerhero = k.GetValBool()
-				case 13:
-					msg.Targethero = k.GetValBool()
-				case 14:
-					msg.AbilityToggleOn = k.GetValBool()
-				case 15:
-					msg.AbilityToggleOff = k.GetValBool()
-				case 16:
-					msg.AbilityLevel = k.GetValShort()
-				case 17:
-					msg.GoldReason = k.GetValShort()
-				case 18:
-					msg.XpReason = k.GetValShort()
-				}
-			}
+			msg.Type = m.GetKeys()[0].GetValByte()
+			msg.Sourcename = m.GetKeys()[1].GetValShort()
+			msg.Targetname = m.GetKeys()[2].GetValShort()
+			msg.Attackername = m.GetKeys()[3].GetValShort()
+			msg.Inflictorname = m.GetKeys()[4].GetValShort()
+			msg.Attackerillusion = m.GetKeys()[5].GetValBool()
+			msg.Targetillusion = m.GetKeys()[6].GetValBool()
+			msg.Value = m.GetKeys()[7].GetValShort()
+			msg.Health = m.GetKeys()[8].GetValShort()
+			msg.Timestamp = m.GetKeys()[9].GetValFloat()
+			msg.Targetsourcename = m.GetKeys()[10].GetValShort()
+			msg.Timestampraw = m.GetKeys()[11].GetValFloat()
+			msg.Attackerhero = m.GetKeys()[12].GetValBool()
+			msg.Targethero = m.GetKeys()[13].GetValBool()
+			msg.AbilityToggleOn = m.GetKeys()[14].GetValBool()
+			msg.AbilityToggleOff = m.GetKeys()[15].GetValBool()
+			msg.AbilityLevel = m.GetKeys()[16].GetValShort()
+			msg.GoldReason = m.GetKeys()[17].GetValShort()
+			msg.XpReason = m.GetKeys()[18].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8902,14 +8253,9 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 293: // EGameEvent_DotaGameStateChange
 		if cbs := ge.onDotaGameStateChange; cbs != nil {
 			msg := &GameEventDotaGameStateChange{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.OldState = k.GetValShort()
-				case 1:
-					msg.NewState = k.GetValShort()
-				}
-			}
+			msg.OldState = m.GetKeys()[0].GetValShort()
+			msg.NewState = m.GetKeys()[1].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8921,16 +8267,10 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 294: // EGameEvent_DotaPlayerPickHero
 		if cbs := ge.onDotaPlayerPickHero; cbs != nil {
 			msg := &GameEventDotaPlayerPickHero{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.Player = k.GetValShort()
-				case 1:
-					msg.Heroindex = k.GetValShort()
-				case 2:
-					msg.Hero = k.GetValString()
-				}
-			}
+			msg.Player = m.GetKeys()[0].GetValShort()
+			msg.Heroindex = m.GetKeys()[1].GetValShort()
+			msg.Hero = m.GetKeys()[2].GetValString()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err
@@ -8942,18 +8282,11 @@ func (ge *GameEvents) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGame
 	case 295: // EGameEvent_DotaTeamKillCredit
 		if cbs := ge.onDotaTeamKillCredit; cbs != nil {
 			msg := &GameEventDotaTeamKillCredit{}
-			for i, k := range m.GetKeys() {
-				switch i {
-				case 0:
-					msg.KillerUserid = k.GetValShort()
-				case 1:
-					msg.VictimUserid = k.GetValShort()
-				case 2:
-					msg.Teamnumber = k.GetValShort()
-				case 3:
-					msg.Herokills = k.GetValShort()
-				}
-			}
+			msg.KillerUserid = m.GetKeys()[0].GetValShort()
+			msg.VictimUserid = m.GetKeys()[1].GetValShort()
+			msg.Teamnumber = m.GetKeys()[2].GetValShort()
+			msg.Herokills = m.GetKeys()[3].GetValShort()
+
 			for _, fn := range cbs {
 				if err := fn(msg); err != nil {
 					return err

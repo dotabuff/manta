@@ -59,6 +59,7 @@ func main() {
 		panic(err)
 	}
 
+	lookupOut := "var gameEventNames = map[int32]string{\n"
 	constOut := "const (\n"
 	structOut := ""
 	geStructOut := "type GameEvents struct {\n"
@@ -89,6 +90,8 @@ func main() {
 
 		// Handler function signature, ex. func (*GameEventSomeEvent) error
 		fnSig := fmt.Sprintf("func (*%s) error", typeSig)
+
+		lookupOut += fmt.Sprintf("\t%d: \"%s\",\n", eventId, eventName)
 
 		constOut += fmt.Sprintf("\t%s = %d\n", constSig, eventId)
 
@@ -131,6 +134,8 @@ func main() {
 		constidx = append(constidx, eventId)
 	}
 
+	lookupOut += "}\n"
+
 	constOut += ")\n"
 	geStructOut += "}\n"
 	handlerOut += `
@@ -143,6 +148,7 @@ func main() {
 	out := fmt.Sprintf("//go:generate go run gen/game_event.go %s %s\n\n", os.Args[1], os.Args[2])
 	out += "package manta\n\n"
 	out += "import (\n\t\"github.com/dotabuff/manta/dota\"\n)\n"
+	out += lookupOut
 	out += constOut
 	out += structOut
 	out += geStructOut
