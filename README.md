@@ -6,7 +6,7 @@ Manta parses Dota 2 replays based on the *currently unreleased* Source 2 game en
 
 If you're interested in parsing current Dota 2 replays (which are played on the Source 1 game engine), take a look at [Yasha](https://github.com/dotabuff/yasha).
 
-*Source 2 Status:* The Dota 2 Source 2 client has not yet been released.
+*Source 2 Status:* The Dota 2 Source 2 client has been released as a beta
 
 *Manta Status:* Manta is currently incomplete and unusable.
 
