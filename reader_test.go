@@ -66,12 +66,41 @@ func TestReaderVarints(t *testing.T) {
 	assert.Equal(uint32(1), r.readVarUint32())
 	assert.Equal(uint32(4294967295), r.readVarUint32())
 	assert.Equal(uint32(140), r.readVarUint32())
+
+	r.pos = 0
+	assert.Equal(uint32(1), r.readVarUint32())
+	assert.Equal(int32(-2147483648), r.readVarInt32())
+
 	r.pos = 0
 
 	// Ensure that readVarUint64 works as expected
 	assert.Equal(uint64(1), r.readVarUint64())
 	assert.Equal(uint64(4294967295), r.readVarUint64())
 	assert.Equal(uint64(140), r.readVarUint64())
+}
+
+func TestReaderBoolean(t *testing.T) {
+	assert := assert.New(t)
+
+	// Start with any random mixed buffer
+	buf := _read_fixture("send_tables/1560315800.pbmsg")
+	r := newReader(buf)
+
+	// Iterate through each bit
+	for r.pos < r.size {
+		// Read it as a 1-bit uint, either 0 (false) or 1 (true)
+		expect := false
+		if n := r.readBits(1); n == 1 {
+			expect = true
+		}
+		r.pos--
+
+		// Read it as a bool
+		got := r.readBoolean()
+
+		// Check that uint 1 == true, uint 0 = false
+		assert.Equal(expect, got)
+	}
 }
 
 func TestReaderStrings(t *testing.T) {

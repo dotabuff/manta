@@ -1,6 +1,9 @@
 package manta
 
 import (
+	"strconv"
+	"strings"
+
 	"github.com/dotabuff/manta/dota"
 	"github.com/golang/protobuf/proto"
 )
@@ -63,9 +66,29 @@ type sendProp struct {
 	sendNodeName           string
 }
 
+// Returns the type name and count for a sendprop.
+func (p *sendProp) typeInfo() (s string, n int, err error) {
+	ss := strings.Split(strings.Replace(p.dtName, "]", "[", 1), "[")
+	s = ss[0]
+	switch s {
+	case "char":
+		n = 1
+	default:
+		if len(ss) >= 2 {
+			n, err = strconv.Atoi(ss[1])
+		} else {
+			n = 1
+		}
+	}
+	return
+}
+
 func (p *sendProp) Describe() string {
-	out := _sprintf("type:%s(%d) name:%s(%d) sendNode: %s(%d)",
-		p.dtName, p.dtIndex, p.varName, p.varIndex, p.sendNodeName, p.sendNodeIndex)
+	out := _sprintf("type:%s(%d) name:%s(%d)",
+		p.dtName, p.dtIndex, p.varName, p.varIndex)
+
+	// This doesn't seem to be very helpful yet.
+	// out += _sprintf(" sendNode: %s(%d)", p.sendNodeName, p.sendNodeIndex)
 
 	if p.fieldSerializerIndex != nil {
 		out += _sprintf(" serializer:%s(%d)", *p.fieldSerializerName, *p.fieldSerializerIndex)
@@ -145,14 +168,6 @@ func parseSendTables(m *dota.CDemoSendTables) (*sendTables, error) {
 			t.props[i] = props[int(pid)]
 		}
 		tables[t.name] = t
-
-		/*
-			_debugf("table %d (%s) version %d", t.index, t.name, t.version)
-			for i, p := range t.props {
-				_debugf(" --> prop %d %+s", i, p.Describe())
-			}
-			_debugf("----")
-		*/
 	}
 
 	// Return a sendTables object

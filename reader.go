@@ -2,6 +2,7 @@ package manta
 
 import (
 	"encoding/binary"
+	"math"
 )
 
 var (
@@ -95,6 +96,16 @@ func (r *reader) readVarUint32() uint32 {
 	return uint32(x)
 }
 
+// Reads a signed 32-bit varint.
+func (r *reader) readVarInt32() int32 {
+	ux := r.readVarUint32()
+	x := int32(ux >> 1)
+	if ux&1 != 0 {
+		x = ^x
+	}
+	return x
+}
+
 // Reads an unsigned 64-bit varint.
 func (r *reader) readVarUint64() uint64 {
 	var x uint64
@@ -113,7 +124,7 @@ func (r *reader) readVarUint64() uint64 {
 }
 
 // Reads a signed 64-bit varint.
-func (r *reader) readVarSint64() int64 {
+func (r *reader) readVarInt64() int64 {
 	ux := r.readVarUint64()
 	x := int64(ux >> 1)
 	if ux&1 != 0 {
@@ -123,7 +134,6 @@ func (r *reader) readVarSint64() int64 {
 }
 
 // Reads a boolean value.
-// TODO XXX: untested.
 func (r *reader) readBoolean() bool {
 	if r.remBits() < 1 {
 		_panicf("read overflow: no bits left")
@@ -179,6 +189,11 @@ func (r *reader) readString() string {
 	return string(buf)
 }
 
+// Reads a float32 as the IEEE 754 binary representation of the next 4 bytes.
+func (r *reader) readFloat32() float32 {
+	return math.Float32frombits(r.readLeUint32())
+}
+
 // Reads bits as bytes.
 func (r *reader) readBitsAsBytes(n int) []byte {
 	tmp := make([]byte, 0)
@@ -219,45 +234,4 @@ func (r *reader) readBits(n int) uint {
 	r.pos += n
 
 	return uint(val)
-}
-
-// Take a peek at what's next in the buffer.
-func (r *reader) peekAhead(depth, max int) {
-	pos := r.pos
-
-	indent := func(n int) string {
-		s := ""
-		for i := 0; i < n; i++ {
-			s += "-- "
-		}
-		return s
-	}
-
-	defer func() {
-		r.pos = pos
-	}()
-
-	if r.remBits() == 0 || depth > max {
-		return
-	}
-
-	buf := r.readBytes(8)
-	_debugf("%s [%d/%d] buf = %v (%s)", indent(depth), pos, r.size, buf, string(buf))
-	r.peekAhead(depth+1, max)
-	r.pos = pos
-
-	u32 := r.readLeUint32()
-	_debugf("%s [%d/%d] u32 = %d", indent(depth), pos, r.size, u32)
-	r.peekAhead(depth+1, max)
-	r.pos = pos
-
-	vui := r.readLeUint32()
-	_debugf("%s [%d/%d] var = %d", indent(depth), pos, r.size, vui)
-	r.peekAhead(depth+1, max)
-	r.pos = pos
-
-	bln := r.readBoolean()
-	_debugf("%s [%d/%d] bln = %v", indent(depth), pos, r.size, bln)
-	r.peekAhead(depth+1, max)
-	r.pos = pos
 }

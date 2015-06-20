@@ -8,6 +8,31 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestSendPropTypeInfo(t *testing.T) {
+	assert := assert.New(t)
+
+	scenarios := []struct {
+		in    string
+		name  string
+		count int
+	}{
+		{"uint8", "uint8", 1},
+		{"CUtlVector< CHandle< CBasePlayer > >", "CUtlVector< CHandle< CBasePlayer > >", 1},
+		{"CUtlVector< CHandle< CBasePlayer > >[16]", "CUtlVector< CHandle< CBasePlayer > >", 16},
+		{"CEntityIdentity*", "CEntityIdentity*", 1},
+		{"uint32[32]", "uint32", 32},
+		{"int32", "int32", 1},
+	}
+
+	for _, s := range scenarios {
+		sp := &sendProp{dtName: s.in}
+		name, count, err := sp.typeInfo()
+		assert.Equal(s.name, name, s.in)
+		assert.Equal(s.count, count, s.in)
+		assert.Nil(err, s.in)
+	}
+}
+
 func TestSendTableParsing(t *testing.T) {
 	assert := assert.New(t)
 
