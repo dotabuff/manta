@@ -571,8 +571,6 @@ const (
 	EDOTAGCMsg_k_EMsgGCToClientProfileCardStatsUpdated                    EDOTAGCMsg = 8040
 	EDOTAGCMsg_k_EMsgServerToGCRealtimeStats                              EDOTAGCMsg = 8041
 	EDOTAGCMsg_k_EMsgGCToServerRealtimeStatsStartStop                     EDOTAGCMsg = 8042
-	EDOTAGCMsg_k_EMsgGCToClientDOTARealtimeGameStats                      EDOTAGCMsg = 8043
-	EDOTAGCMsg_k_EMsgClientToGCRealtimeGameStateViewing                   EDOTAGCMsg = 8044
 	EDOTAGCMsg_k_EMsgGCToGCGetServersForClients                           EDOTAGCMsg = 8045
 	EDOTAGCMsg_k_EMsgGCToGCGetServersForClientsResponse                   EDOTAGCMsg = 8046
 	EDOTAGCMsg_k_EMsgGCPracticeLobbyKickFromTeam                          EDOTAGCMsg = 8047
@@ -1144,8 +1142,6 @@ var EDOTAGCMsg_name = map[int32]string{
 	8040: "k_EMsgGCToClientProfileCardStatsUpdated",
 	8041: "k_EMsgServerToGCRealtimeStats",
 	8042: "k_EMsgGCToServerRealtimeStatsStartStop",
-	8043: "k_EMsgGCToClientDOTARealtimeGameStats",
-	8044: "k_EMsgClientToGCRealtimeGameStateViewing",
 	8045: "k_EMsgGCToGCGetServersForClients",
 	8046: "k_EMsgGCToGCGetServersForClientsResponse",
 	8047: "k_EMsgGCPracticeLobbyKickFromTeam",
@@ -1716,8 +1712,6 @@ var EDOTAGCMsg_value = map[string]int32{
 	"k_EMsgGCToClientProfileCardStatsUpdated":                    8040,
 	"k_EMsgServerToGCRealtimeStats":                              8041,
 	"k_EMsgGCToServerRealtimeStatsStartStop":                     8042,
-	"k_EMsgGCToClientDOTARealtimeGameStats":                      8043,
-	"k_EMsgClientToGCRealtimeGameStateViewing":                   8044,
 	"k_EMsgGCToGCGetServersForClients":                           8045,
 	"k_EMsgGCToGCGetServersForClientsResponse":                   8046,
 	"k_EMsgGCPracticeLobbyKickFromTeam":                          8047,
@@ -2195,41 +2189,44 @@ func (x *DOTAGameVersion) UnmarshalJSON(data []byte) error {
 type DOTAJoinLobbyResult int32
 
 const (
-	DOTAJoinLobbyResult_DOTA_JOIN_RESULT_SUCCESS            DOTAJoinLobbyResult = 0
-	DOTAJoinLobbyResult_DOTA_JOIN_RESULT_ALREADY_IN_GAME    DOTAJoinLobbyResult = 1
-	DOTAJoinLobbyResult_DOTA_JOIN_RESULT_INVALID_LOBBY      DOTAJoinLobbyResult = 2
-	DOTAJoinLobbyResult_DOTA_JOIN_RESULT_INCORRECT_PASSWORD DOTAJoinLobbyResult = 3
-	DOTAJoinLobbyResult_DOTA_JOIN_RESULT_ACCESS_DENIED      DOTAJoinLobbyResult = 4
-	DOTAJoinLobbyResult_DOTA_JOIN_RESULT_GENERIC_ERROR      DOTAJoinLobbyResult = 5
-	DOTAJoinLobbyResult_DOTA_JOIN_RESULT_INCORRECT_VERSION  DOTAJoinLobbyResult = 6
-	DOTAJoinLobbyResult_DOTA_JOIN_RESULT_IN_TEAM_PARTY      DOTAJoinLobbyResult = 7
-	DOTAJoinLobbyResult_DOTA_JOIN_RESULT_NO_LOBBY_FOUND     DOTAJoinLobbyResult = 8
-	DOTAJoinLobbyResult_DOTA_JOIN_RESULT_LOBBY_FULL         DOTAJoinLobbyResult = 9
+	DOTAJoinLobbyResult_DOTA_JOIN_RESULT_SUCCESS                       DOTAJoinLobbyResult = 0
+	DOTAJoinLobbyResult_DOTA_JOIN_RESULT_ALREADY_IN_GAME               DOTAJoinLobbyResult = 1
+	DOTAJoinLobbyResult_DOTA_JOIN_RESULT_INVALID_LOBBY                 DOTAJoinLobbyResult = 2
+	DOTAJoinLobbyResult_DOTA_JOIN_RESULT_INCORRECT_PASSWORD            DOTAJoinLobbyResult = 3
+	DOTAJoinLobbyResult_DOTA_JOIN_RESULT_ACCESS_DENIED                 DOTAJoinLobbyResult = 4
+	DOTAJoinLobbyResult_DOTA_JOIN_RESULT_GENERIC_ERROR                 DOTAJoinLobbyResult = 5
+	DOTAJoinLobbyResult_DOTA_JOIN_RESULT_INCORRECT_VERSION             DOTAJoinLobbyResult = 6
+	DOTAJoinLobbyResult_DOTA_JOIN_RESULT_IN_TEAM_PARTY                 DOTAJoinLobbyResult = 7
+	DOTAJoinLobbyResult_DOTA_JOIN_RESULT_NO_LOBBY_FOUND                DOTAJoinLobbyResult = 8
+	DOTAJoinLobbyResult_DOTA_JOIN_RESULT_LOBBY_FULL                    DOTAJoinLobbyResult = 9
+	DOTAJoinLobbyResult_DOTA_JOIN_RESULT_CUSTOM_GAME_INCORRECT_VERSION DOTAJoinLobbyResult = 10
 )
 
 var DOTAJoinLobbyResult_name = map[int32]string{
-	0: "DOTA_JOIN_RESULT_SUCCESS",
-	1: "DOTA_JOIN_RESULT_ALREADY_IN_GAME",
-	2: "DOTA_JOIN_RESULT_INVALID_LOBBY",
-	3: "DOTA_JOIN_RESULT_INCORRECT_PASSWORD",
-	4: "DOTA_JOIN_RESULT_ACCESS_DENIED",
-	5: "DOTA_JOIN_RESULT_GENERIC_ERROR",
-	6: "DOTA_JOIN_RESULT_INCORRECT_VERSION",
-	7: "DOTA_JOIN_RESULT_IN_TEAM_PARTY",
-	8: "DOTA_JOIN_RESULT_NO_LOBBY_FOUND",
-	9: "DOTA_JOIN_RESULT_LOBBY_FULL",
+	0:  "DOTA_JOIN_RESULT_SUCCESS",
+	1:  "DOTA_JOIN_RESULT_ALREADY_IN_GAME",
+	2:  "DOTA_JOIN_RESULT_INVALID_LOBBY",
+	3:  "DOTA_JOIN_RESULT_INCORRECT_PASSWORD",
+	4:  "DOTA_JOIN_RESULT_ACCESS_DENIED",
+	5:  "DOTA_JOIN_RESULT_GENERIC_ERROR",
+	6:  "DOTA_JOIN_RESULT_INCORRECT_VERSION",
+	7:  "DOTA_JOIN_RESULT_IN_TEAM_PARTY",
+	8:  "DOTA_JOIN_RESULT_NO_LOBBY_FOUND",
+	9:  "DOTA_JOIN_RESULT_LOBBY_FULL",
+	10: "DOTA_JOIN_RESULT_CUSTOM_GAME_INCORRECT_VERSION",
 }
 var DOTAJoinLobbyResult_value = map[string]int32{
-	"DOTA_JOIN_RESULT_SUCCESS":            0,
-	"DOTA_JOIN_RESULT_ALREADY_IN_GAME":    1,
-	"DOTA_JOIN_RESULT_INVALID_LOBBY":      2,
-	"DOTA_JOIN_RESULT_INCORRECT_PASSWORD": 3,
-	"DOTA_JOIN_RESULT_ACCESS_DENIED":      4,
-	"DOTA_JOIN_RESULT_GENERIC_ERROR":      5,
-	"DOTA_JOIN_RESULT_INCORRECT_VERSION":  6,
-	"DOTA_JOIN_RESULT_IN_TEAM_PARTY":      7,
-	"DOTA_JOIN_RESULT_NO_LOBBY_FOUND":     8,
-	"DOTA_JOIN_RESULT_LOBBY_FULL":         9,
+	"DOTA_JOIN_RESULT_SUCCESS":                       0,
+	"DOTA_JOIN_RESULT_ALREADY_IN_GAME":               1,
+	"DOTA_JOIN_RESULT_INVALID_LOBBY":                 2,
+	"DOTA_JOIN_RESULT_INCORRECT_PASSWORD":            3,
+	"DOTA_JOIN_RESULT_ACCESS_DENIED":                 4,
+	"DOTA_JOIN_RESULT_GENERIC_ERROR":                 5,
+	"DOTA_JOIN_RESULT_INCORRECT_VERSION":             6,
+	"DOTA_JOIN_RESULT_IN_TEAM_PARTY":                 7,
+	"DOTA_JOIN_RESULT_NO_LOBBY_FOUND":                8,
+	"DOTA_JOIN_RESULT_LOBBY_FULL":                    9,
+	"DOTA_JOIN_RESULT_CUSTOM_GAME_INCORRECT_VERSION": 10,
 }
 
 func (x DOTAJoinLobbyResult) Enum() *DOTAJoinLobbyResult {
@@ -4144,6 +4141,7 @@ type CSODOTALobbyInvite struct {
 	Members          []*CSODOTALobbyInvite_LobbyMember `protobuf:"bytes,4,rep,name=members" json:"members,omitempty"`
 	CustomGameId     *uint64                           `protobuf:"varint,5,opt,name=custom_game_id" json:"custom_game_id,omitempty"`
 	InviteGid        *uint64                           `protobuf:"fixed64,6,opt,name=invite_gid" json:"invite_gid,omitempty"`
+	CustomGameCrc    *uint64                           `protobuf:"fixed64,7,opt,name=custom_game_crc" json:"custom_game_crc,omitempty"`
 	XXX_unrecognized []byte                            `json:"-"`
 }
 
@@ -4189,6 +4187,13 @@ func (m *CSODOTALobbyInvite) GetCustomGameId() uint64 {
 func (m *CSODOTALobbyInvite) GetInviteGid() uint64 {
 	if m != nil && m.InviteGid != nil {
 		return *m.InviteGid
+	}
+	return 0
+}
+
+func (m *CSODOTALobbyInvite) GetCustomGameCrc() uint64 {
+	if m != nil && m.CustomGameCrc != nil {
+		return *m.CustomGameCrc
 	}
 	return 0
 }
@@ -4942,6 +4947,7 @@ type CSODOTALobby struct {
 	PartnerType               *PartnerAccountType           `protobuf:"varint,73,opt,name=partner_type,enum=dota.PartnerAccountType,def=0" json:"partner_type,omitempty"`
 	LanHostPingToServerRegion *uint32                       `protobuf:"varint,74,opt,name=lan_host_ping_to_server_region" json:"lan_host_ping_to_server_region,omitempty"`
 	Visibility                *DOTALobbyVisibility          `protobuf:"varint,75,opt,name=visibility,enum=dota.DOTALobbyVisibility,def=0" json:"visibility,omitempty"`
+	CustomGameCrc             *uint64                       `protobuf:"fixed64,76,opt,name=custom_game_crc" json:"custom_game_crc,omitempty"`
 	XXX_unrecognized          []byte                        `json:"-"`
 }
 
@@ -5391,6 +5397,13 @@ func (m *CSODOTALobby) GetVisibility() DOTALobbyVisibility {
 		return *m.Visibility
 	}
 	return Default_CSODOTALobby_Visibility
+}
+
+func (m *CSODOTALobby) GetCustomGameCrc() uint64 {
+	if m != nil && m.CustomGameCrc != nil {
+		return *m.CustomGameCrc
+	}
+	return 0
 }
 
 type CSODOTALobby_CExtraMsg struct {
@@ -8147,34 +8160,32 @@ func (m *CMsgDOTARealtimeGameStats_BuildingDetails) GetY() float32 {
 	return 0
 }
 
-type CMsgDOTARealtimeGameStats_DeathDetails struct {
+type CMsgDOTARealtimeGameStats_KillDetails struct {
 	PlayerId         *uint32 `protobuf:"varint,1,opt,name=player_id" json:"player_id,omitempty"`
 	DeathTime        *int32  `protobuf:"varint,2,opt,name=death_time" json:"death_time,omitempty"`
 	KillerPlayerId   *uint32 `protobuf:"varint,3,opt,name=killer_player_id" json:"killer_player_id,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CMsgDOTARealtimeGameStats_DeathDetails) Reset() {
-	*m = CMsgDOTARealtimeGameStats_DeathDetails{}
-}
-func (m *CMsgDOTARealtimeGameStats_DeathDetails) String() string { return proto.CompactTextString(m) }
-func (*CMsgDOTARealtimeGameStats_DeathDetails) ProtoMessage()    {}
+func (m *CMsgDOTARealtimeGameStats_KillDetails) Reset()         { *m = CMsgDOTARealtimeGameStats_KillDetails{} }
+func (m *CMsgDOTARealtimeGameStats_KillDetails) String() string { return proto.CompactTextString(m) }
+func (*CMsgDOTARealtimeGameStats_KillDetails) ProtoMessage()    {}
 
-func (m *CMsgDOTARealtimeGameStats_DeathDetails) GetPlayerId() uint32 {
+func (m *CMsgDOTARealtimeGameStats_KillDetails) GetPlayerId() uint32 {
 	if m != nil && m.PlayerId != nil {
 		return *m.PlayerId
 	}
 	return 0
 }
 
-func (m *CMsgDOTARealtimeGameStats_DeathDetails) GetDeathTime() int32 {
+func (m *CMsgDOTARealtimeGameStats_KillDetails) GetDeathTime() int32 {
 	if m != nil && m.DeathTime != nil {
 		return *m.DeathTime
 	}
 	return 0
 }
 
-func (m *CMsgDOTARealtimeGameStats_DeathDetails) GetKillerPlayerId() uint32 {
+func (m *CMsgDOTARealtimeGameStats_KillDetails) GetKillerPlayerId() uint32 {
 	if m != nil && m.KillerPlayerId != nil {
 		return *m.KillerPlayerId
 	}
@@ -8255,7 +8266,7 @@ type CMsgDOTARealtimeGameStats_MatchDetails struct {
 	TeamidDire          *uint32                                         `protobuf:"varint,9,opt,name=teamid_dire" json:"teamid_dire,omitempty"`
 	Picks               []*CMsgDOTARealtimeGameStats_PickBanDetails     `protobuf:"bytes,10,rep,name=picks" json:"picks,omitempty"`
 	Bans                []*CMsgDOTARealtimeGameStats_PickBanDetails     `protobuf:"bytes,11,rep,name=bans" json:"bans,omitempty"`
-	Deaths              []*CMsgDOTARealtimeGameStats_DeathDetails       `protobuf:"bytes,12,rep,name=deaths" json:"deaths,omitempty"`
+	Kills               []*CMsgDOTARealtimeGameStats_KillDetails        `protobuf:"bytes,12,rep,name=kills" json:"kills,omitempty"`
 	Broadcasters        []*CMsgDOTARealtimeGameStats_BroadcasterDetails `protobuf:"bytes,13,rep,name=broadcasters" json:"broadcasters,omitempty"`
 	XXX_unrecognized    []byte                                          `json:"-"`
 }
@@ -8343,9 +8354,9 @@ func (m *CMsgDOTARealtimeGameStats_MatchDetails) GetBans() []*CMsgDOTARealtimeGa
 	return nil
 }
 
-func (m *CMsgDOTARealtimeGameStats_MatchDetails) GetDeaths() []*CMsgDOTARealtimeGameStats_DeathDetails {
+func (m *CMsgDOTARealtimeGameStats_MatchDetails) GetKills() []*CMsgDOTARealtimeGameStats_KillDetails {
 	if m != nil {
-		return m.Deaths
+		return m.Kills
 	}
 	return nil
 }
@@ -8401,6 +8412,376 @@ func (m *CMsgDOTARealtimeGameStats_GraphData) GetGraphTower() []int32 {
 func (m *CMsgDOTARealtimeGameStats_GraphData) GetGraphRax() []int32 {
 	if m != nil {
 		return m.GraphRax
+	}
+	return nil
+}
+
+type CMsgDOTARealtimeGameStatsTerse struct {
+	Match            *CMsgDOTARealtimeGameStatsTerse_MatchDetails      `protobuf:"bytes,1,opt,name=match" json:"match,omitempty"`
+	Teams            []*CMsgDOTARealtimeGameStatsTerse_TeamDetails     `protobuf:"bytes,2,rep,name=teams" json:"teams,omitempty"`
+	Buildings        []*CMsgDOTARealtimeGameStatsTerse_BuildingDetails `protobuf:"bytes,3,rep,name=buildings" json:"buildings,omitempty"`
+	GraphData        *CMsgDOTARealtimeGameStatsTerse_GraphData         `protobuf:"bytes,4,opt,name=graph_data" json:"graph_data,omitempty"`
+	DeltaFrame       *bool                                             `protobuf:"varint,5,opt,name=delta_frame" json:"delta_frame,omitempty"`
+	XXX_unrecognized []byte                                            `json:"-"`
+}
+
+func (m *CMsgDOTARealtimeGameStatsTerse) Reset()         { *m = CMsgDOTARealtimeGameStatsTerse{} }
+func (m *CMsgDOTARealtimeGameStatsTerse) String() string { return proto.CompactTextString(m) }
+func (*CMsgDOTARealtimeGameStatsTerse) ProtoMessage()    {}
+
+func (m *CMsgDOTARealtimeGameStatsTerse) GetMatch() *CMsgDOTARealtimeGameStatsTerse_MatchDetails {
+	if m != nil {
+		return m.Match
+	}
+	return nil
+}
+
+func (m *CMsgDOTARealtimeGameStatsTerse) GetTeams() []*CMsgDOTARealtimeGameStatsTerse_TeamDetails {
+	if m != nil {
+		return m.Teams
+	}
+	return nil
+}
+
+func (m *CMsgDOTARealtimeGameStatsTerse) GetBuildings() []*CMsgDOTARealtimeGameStatsTerse_BuildingDetails {
+	if m != nil {
+		return m.Buildings
+	}
+	return nil
+}
+
+func (m *CMsgDOTARealtimeGameStatsTerse) GetGraphData() *CMsgDOTARealtimeGameStatsTerse_GraphData {
+	if m != nil {
+		return m.GraphData
+	}
+	return nil
+}
+
+func (m *CMsgDOTARealtimeGameStatsTerse) GetDeltaFrame() bool {
+	if m != nil && m.DeltaFrame != nil {
+		return *m.DeltaFrame
+	}
+	return false
+}
+
+type CMsgDOTARealtimeGameStatsTerse_TeamDetails struct {
+	TeamNumber       *uint32                                         `protobuf:"varint,1,opt,name=team_number" json:"team_number,omitempty"`
+	TeamId           *uint32                                         `protobuf:"varint,2,opt,name=team_id" json:"team_id,omitempty"`
+	TeamName         *string                                         `protobuf:"bytes,3,opt,name=team_name" json:"team_name,omitempty"`
+	TeamLogo         *uint64                                         `protobuf:"fixed64,4,opt,name=team_logo" json:"team_logo,omitempty"`
+	Score            *uint32                                         `protobuf:"varint,5,opt,name=score" json:"score,omitempty"`
+	Players          []*CMsgDOTARealtimeGameStatsTerse_PlayerDetails `protobuf:"bytes,6,rep,name=players" json:"players,omitempty"`
+	XXX_unrecognized []byte                                          `json:"-"`
+}
+
+func (m *CMsgDOTARealtimeGameStatsTerse_TeamDetails) Reset() {
+	*m = CMsgDOTARealtimeGameStatsTerse_TeamDetails{}
+}
+func (m *CMsgDOTARealtimeGameStatsTerse_TeamDetails) String() string {
+	return proto.CompactTextString(m)
+}
+func (*CMsgDOTARealtimeGameStatsTerse_TeamDetails) ProtoMessage() {}
+
+func (m *CMsgDOTARealtimeGameStatsTerse_TeamDetails) GetTeamNumber() uint32 {
+	if m != nil && m.TeamNumber != nil {
+		return *m.TeamNumber
+	}
+	return 0
+}
+
+func (m *CMsgDOTARealtimeGameStatsTerse_TeamDetails) GetTeamId() uint32 {
+	if m != nil && m.TeamId != nil {
+		return *m.TeamId
+	}
+	return 0
+}
+
+func (m *CMsgDOTARealtimeGameStatsTerse_TeamDetails) GetTeamName() string {
+	if m != nil && m.TeamName != nil {
+		return *m.TeamName
+	}
+	return ""
+}
+
+func (m *CMsgDOTARealtimeGameStatsTerse_TeamDetails) GetTeamLogo() uint64 {
+	if m != nil && m.TeamLogo != nil {
+		return *m.TeamLogo
+	}
+	return 0
+}
+
+func (m *CMsgDOTARealtimeGameStatsTerse_TeamDetails) GetScore() uint32 {
+	if m != nil && m.Score != nil {
+		return *m.Score
+	}
+	return 0
+}
+
+func (m *CMsgDOTARealtimeGameStatsTerse_TeamDetails) GetPlayers() []*CMsgDOTARealtimeGameStatsTerse_PlayerDetails {
+	if m != nil {
+		return m.Players
+	}
+	return nil
+}
+
+type CMsgDOTARealtimeGameStatsTerse_PlayerDetails struct {
+	Accountid        *uint32  `protobuf:"varint,1,opt,name=accountid" json:"accountid,omitempty"`
+	Playerid         *uint32  `protobuf:"varint,2,opt,name=playerid" json:"playerid,omitempty"`
+	Name             *string  `protobuf:"bytes,3,opt,name=name" json:"name,omitempty"`
+	Team             *uint32  `protobuf:"varint,4,opt,name=team" json:"team,omitempty"`
+	Heroid           *uint32  `protobuf:"varint,5,opt,name=heroid" json:"heroid,omitempty"`
+	Level            *uint32  `protobuf:"varint,6,opt,name=level" json:"level,omitempty"`
+	KillCount        *uint32  `protobuf:"varint,7,opt,name=kill_count" json:"kill_count,omitempty"`
+	DeathCount       *uint32  `protobuf:"varint,8,opt,name=death_count" json:"death_count,omitempty"`
+	AssistsCount     *uint32  `protobuf:"varint,9,opt,name=assists_count" json:"assists_count,omitempty"`
+	DeniesCount      *uint32  `protobuf:"varint,10,opt,name=denies_count" json:"denies_count,omitempty"`
+	LhCount          *uint32  `protobuf:"varint,11,opt,name=lh_count" json:"lh_count,omitempty"`
+	Gold             *uint32  `protobuf:"varint,12,opt,name=gold" json:"gold,omitempty"`
+	X                *float32 `protobuf:"fixed32,13,opt,name=x" json:"x,omitempty"`
+	Y                *float32 `protobuf:"fixed32,14,opt,name=y" json:"y,omitempty"`
+	XXX_unrecognized []byte   `json:"-"`
+}
+
+func (m *CMsgDOTARealtimeGameStatsTerse_PlayerDetails) Reset() {
+	*m = CMsgDOTARealtimeGameStatsTerse_PlayerDetails{}
+}
+func (m *CMsgDOTARealtimeGameStatsTerse_PlayerDetails) String() string {
+	return proto.CompactTextString(m)
+}
+func (*CMsgDOTARealtimeGameStatsTerse_PlayerDetails) ProtoMessage() {}
+
+func (m *CMsgDOTARealtimeGameStatsTerse_PlayerDetails) GetAccountid() uint32 {
+	if m != nil && m.Accountid != nil {
+		return *m.Accountid
+	}
+	return 0
+}
+
+func (m *CMsgDOTARealtimeGameStatsTerse_PlayerDetails) GetPlayerid() uint32 {
+	if m != nil && m.Playerid != nil {
+		return *m.Playerid
+	}
+	return 0
+}
+
+func (m *CMsgDOTARealtimeGameStatsTerse_PlayerDetails) GetName() string {
+	if m != nil && m.Name != nil {
+		return *m.Name
+	}
+	return ""
+}
+
+func (m *CMsgDOTARealtimeGameStatsTerse_PlayerDetails) GetTeam() uint32 {
+	if m != nil && m.Team != nil {
+		return *m.Team
+	}
+	return 0
+}
+
+func (m *CMsgDOTARealtimeGameStatsTerse_PlayerDetails) GetHeroid() uint32 {
+	if m != nil && m.Heroid != nil {
+		return *m.Heroid
+	}
+	return 0
+}
+
+func (m *CMsgDOTARealtimeGameStatsTerse_PlayerDetails) GetLevel() uint32 {
+	if m != nil && m.Level != nil {
+		return *m.Level
+	}
+	return 0
+}
+
+func (m *CMsgDOTARealtimeGameStatsTerse_PlayerDetails) GetKillCount() uint32 {
+	if m != nil && m.KillCount != nil {
+		return *m.KillCount
+	}
+	return 0
+}
+
+func (m *CMsgDOTARealtimeGameStatsTerse_PlayerDetails) GetDeathCount() uint32 {
+	if m != nil && m.DeathCount != nil {
+		return *m.DeathCount
+	}
+	return 0
+}
+
+func (m *CMsgDOTARealtimeGameStatsTerse_PlayerDetails) GetAssistsCount() uint32 {
+	if m != nil && m.AssistsCount != nil {
+		return *m.AssistsCount
+	}
+	return 0
+}
+
+func (m *CMsgDOTARealtimeGameStatsTerse_PlayerDetails) GetDeniesCount() uint32 {
+	if m != nil && m.DeniesCount != nil {
+		return *m.DeniesCount
+	}
+	return 0
+}
+
+func (m *CMsgDOTARealtimeGameStatsTerse_PlayerDetails) GetLhCount() uint32 {
+	if m != nil && m.LhCount != nil {
+		return *m.LhCount
+	}
+	return 0
+}
+
+func (m *CMsgDOTARealtimeGameStatsTerse_PlayerDetails) GetGold() uint32 {
+	if m != nil && m.Gold != nil {
+		return *m.Gold
+	}
+	return 0
+}
+
+func (m *CMsgDOTARealtimeGameStatsTerse_PlayerDetails) GetX() float32 {
+	if m != nil && m.X != nil {
+		return *m.X
+	}
+	return 0
+}
+
+func (m *CMsgDOTARealtimeGameStatsTerse_PlayerDetails) GetY() float32 {
+	if m != nil && m.Y != nil {
+		return *m.Y
+	}
+	return 0
+}
+
+type CMsgDOTARealtimeGameStatsTerse_BuildingDetails struct {
+	Team             *uint32  `protobuf:"varint,1,opt,name=team" json:"team,omitempty"`
+	Heading          *float32 `protobuf:"fixed32,2,opt,name=heading" json:"heading,omitempty"`
+	Type             *uint32  `protobuf:"varint,3,opt,name=type" json:"type,omitempty"`
+	Lane             *uint32  `protobuf:"varint,4,opt,name=lane" json:"lane,omitempty"`
+	Tier             *uint32  `protobuf:"varint,5,opt,name=tier" json:"tier,omitempty"`
+	X                *float32 `protobuf:"fixed32,6,opt,name=x" json:"x,omitempty"`
+	Y                *float32 `protobuf:"fixed32,7,opt,name=y" json:"y,omitempty"`
+	XXX_unrecognized []byte   `json:"-"`
+}
+
+func (m *CMsgDOTARealtimeGameStatsTerse_BuildingDetails) Reset() {
+	*m = CMsgDOTARealtimeGameStatsTerse_BuildingDetails{}
+}
+func (m *CMsgDOTARealtimeGameStatsTerse_BuildingDetails) String() string {
+	return proto.CompactTextString(m)
+}
+func (*CMsgDOTARealtimeGameStatsTerse_BuildingDetails) ProtoMessage() {}
+
+func (m *CMsgDOTARealtimeGameStatsTerse_BuildingDetails) GetTeam() uint32 {
+	if m != nil && m.Team != nil {
+		return *m.Team
+	}
+	return 0
+}
+
+func (m *CMsgDOTARealtimeGameStatsTerse_BuildingDetails) GetHeading() float32 {
+	if m != nil && m.Heading != nil {
+		return *m.Heading
+	}
+	return 0
+}
+
+func (m *CMsgDOTARealtimeGameStatsTerse_BuildingDetails) GetType() uint32 {
+	if m != nil && m.Type != nil {
+		return *m.Type
+	}
+	return 0
+}
+
+func (m *CMsgDOTARealtimeGameStatsTerse_BuildingDetails) GetLane() uint32 {
+	if m != nil && m.Lane != nil {
+		return *m.Lane
+	}
+	return 0
+}
+
+func (m *CMsgDOTARealtimeGameStatsTerse_BuildingDetails) GetTier() uint32 {
+	if m != nil && m.Tier != nil {
+		return *m.Tier
+	}
+	return 0
+}
+
+func (m *CMsgDOTARealtimeGameStatsTerse_BuildingDetails) GetX() float32 {
+	if m != nil && m.X != nil {
+		return *m.X
+	}
+	return 0
+}
+
+func (m *CMsgDOTARealtimeGameStatsTerse_BuildingDetails) GetY() float32 {
+	if m != nil && m.Y != nil {
+		return *m.Y
+	}
+	return 0
+}
+
+type CMsgDOTARealtimeGameStatsTerse_MatchDetails struct {
+	ServerSteamId    *uint64 `protobuf:"fixed64,1,opt,name=server_steam_id" json:"server_steam_id,omitempty"`
+	Matchid          *uint64 `protobuf:"varint,2,opt,name=matchid" json:"matchid,omitempty"`
+	Timestamp        *uint32 `protobuf:"varint,3,opt,name=timestamp" json:"timestamp,omitempty"`
+	GameTime         *int32  `protobuf:"varint,4,opt,name=game_time" json:"game_time,omitempty"`
+	IsTournamentGame *bool   `protobuf:"varint,5,opt,name=is_tournament_game" json:"is_tournament_game,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CMsgDOTARealtimeGameStatsTerse_MatchDetails) Reset() {
+	*m = CMsgDOTARealtimeGameStatsTerse_MatchDetails{}
+}
+func (m *CMsgDOTARealtimeGameStatsTerse_MatchDetails) String() string {
+	return proto.CompactTextString(m)
+}
+func (*CMsgDOTARealtimeGameStatsTerse_MatchDetails) ProtoMessage() {}
+
+func (m *CMsgDOTARealtimeGameStatsTerse_MatchDetails) GetServerSteamId() uint64 {
+	if m != nil && m.ServerSteamId != nil {
+		return *m.ServerSteamId
+	}
+	return 0
+}
+
+func (m *CMsgDOTARealtimeGameStatsTerse_MatchDetails) GetMatchid() uint64 {
+	if m != nil && m.Matchid != nil {
+		return *m.Matchid
+	}
+	return 0
+}
+
+func (m *CMsgDOTARealtimeGameStatsTerse_MatchDetails) GetTimestamp() uint32 {
+	if m != nil && m.Timestamp != nil {
+		return *m.Timestamp
+	}
+	return 0
+}
+
+func (m *CMsgDOTARealtimeGameStatsTerse_MatchDetails) GetGameTime() int32 {
+	if m != nil && m.GameTime != nil {
+		return *m.GameTime
+	}
+	return 0
+}
+
+func (m *CMsgDOTARealtimeGameStatsTerse_MatchDetails) GetIsTournamentGame() bool {
+	if m != nil && m.IsTournamentGame != nil {
+		return *m.IsTournamentGame
+	}
+	return false
+}
+
+type CMsgDOTARealtimeGameStatsTerse_GraphData struct {
+	GraphGold        []int32 `protobuf:"varint,1,rep,name=graph_gold" json:"graph_gold,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CMsgDOTARealtimeGameStatsTerse_GraphData) Reset() {
+	*m = CMsgDOTARealtimeGameStatsTerse_GraphData{}
+}
+func (m *CMsgDOTARealtimeGameStatsTerse_GraphData) String() string { return proto.CompactTextString(m) }
+func (*CMsgDOTARealtimeGameStatsTerse_GraphData) ProtoMessage()    {}
+
+func (m *CMsgDOTARealtimeGameStatsTerse_GraphData) GetGraphGold() []int32 {
+	if m != nil {
+		return m.GraphGold
 	}
 	return nil
 }

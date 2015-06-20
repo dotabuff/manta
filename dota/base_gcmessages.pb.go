@@ -549,6 +549,7 @@ type CMsgLobbyInviteResponse struct {
 	ClientVersion    *uint32 `protobuf:"varint,3,opt,name=client_version" json:"client_version,omitempty"`
 	GameLanguageEnum *uint32 `protobuf:"varint,4,opt,name=game_language_enum" json:"game_language_enum,omitempty"`
 	GameLanguageName *string `protobuf:"bytes,5,opt,name=game_language_name" json:"game_language_name,omitempty"`
+	CustomGameCrc    *uint64 `protobuf:"fixed64,6,opt,name=custom_game_crc" json:"custom_game_crc,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
@@ -589,6 +590,13 @@ func (m *CMsgLobbyInviteResponse) GetGameLanguageName() string {
 		return *m.GameLanguageName
 	}
 	return ""
+}
+
+func (m *CMsgLobbyInviteResponse) GetCustomGameCrc() uint64 {
+	if m != nil && m.CustomGameCrc != nil {
+		return *m.CustomGameCrc
+	}
+	return 0
 }
 
 type CMsgKickFromParty struct {

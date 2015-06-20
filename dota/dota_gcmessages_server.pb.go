@@ -1270,16 +1270,16 @@ func (m *CMsgDOTAFantasyMatch) GetTeam_2() uint32 {
 }
 
 type CMsgServerToGCRealtimeStats struct {
-	Delayed          *CMsgDOTARealtimeGameStats `protobuf:"bytes,1,opt,name=delayed" json:"delayed,omitempty"`
-	Current          *CMsgDOTARealtimeGameStats `protobuf:"bytes,2,opt,name=current" json:"current,omitempty"`
-	XXX_unrecognized []byte                     `json:"-"`
+	Delayed          *CMsgDOTARealtimeGameStatsTerse `protobuf:"bytes,1,opt,name=delayed" json:"delayed,omitempty"`
+	Current          *CMsgDOTARealtimeGameStats      `protobuf:"bytes,2,opt,name=current" json:"current,omitempty"`
+	XXX_unrecognized []byte                          `json:"-"`
 }
 
 func (m *CMsgServerToGCRealtimeStats) Reset()         { *m = CMsgServerToGCRealtimeStats{} }
 func (m *CMsgServerToGCRealtimeStats) String() string { return proto.CompactTextString(m) }
 func (*CMsgServerToGCRealtimeStats) ProtoMessage()    {}
 
-func (m *CMsgServerToGCRealtimeStats) GetDelayed() *CMsgDOTARealtimeGameStats {
+func (m *CMsgServerToGCRealtimeStats) GetDelayed() *CMsgDOTARealtimeGameStatsTerse {
 	if m != nil {
 		return m.Delayed
 	}
@@ -1294,7 +1294,8 @@ func (m *CMsgServerToGCRealtimeStats) GetCurrent() *CMsgDOTARealtimeGameStats {
 }
 
 type CMsgGCToServerRealtimeStatsStartStop struct {
-	Start            *bool  `protobuf:"varint,1,opt,name=start" json:"start,omitempty"`
+	Delayed          *bool  `protobuf:"varint,1,opt,name=delayed" json:"delayed,omitempty"`
+	Current          *bool  `protobuf:"varint,2,opt,name=current" json:"current,omitempty"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
@@ -1302,9 +1303,16 @@ func (m *CMsgGCToServerRealtimeStatsStartStop) Reset()         { *m = CMsgGCToSe
 func (m *CMsgGCToServerRealtimeStatsStartStop) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCToServerRealtimeStatsStartStop) ProtoMessage()    {}
 
-func (m *CMsgGCToServerRealtimeStatsStartStop) GetStart() bool {
-	if m != nil && m.Start != nil {
-		return *m.Start
+func (m *CMsgGCToServerRealtimeStatsStartStop) GetDelayed() bool {
+	if m != nil && m.Delayed != nil {
+		return *m.Delayed
+	}
+	return false
+}
+
+func (m *CMsgGCToServerRealtimeStatsStartStop) GetCurrent() bool {
+	if m != nil && m.Current != nil {
+		return *m.Current
 	}
 	return false
 }

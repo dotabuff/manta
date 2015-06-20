@@ -205,12 +205,13 @@ message CMsgDOTAFantasyMatch {
 }
 
 message CMsgServerToGCRealtimeStats {
-	optional CMsgDOTARealtimeGameStats delayed = 1;
+	optional CMsgDOTARealtimeGameStatsTerse delayed = 1;
 	optional CMsgDOTARealtimeGameStats current = 2;
 }
 
 message CMsgGCToServerRealtimeStatsStartStop {
-	optional bool start = 1;
+	optional bool delayed = 1;
+	optional bool current = 2;
 }
 
 message CMsgGameMatchSignOut {

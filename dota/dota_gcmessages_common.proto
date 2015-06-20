@@ -564,8 +564,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCToClientProfileCardStatsUpdated = 8040;
 	k_EMsgServerToGCRealtimeStats = 8041;
 	k_EMsgGCToServerRealtimeStatsStartStop = 8042;
-	k_EMsgGCToClientDOTARealtimeGameStats = 8043;
-	k_EMsgClientToGCRealtimeGameStateViewing = 8044;
 	k_EMsgGCToGCGetServersForClients = 8045;
 	k_EMsgGCToGCGetServersForClientsResponse = 8046;
 	k_EMsgGCPracticeLobbyKickFromTeam = 8047;
@@ -684,6 +682,7 @@ enum DOTAJoinLobbyResult {
 	DOTA_JOIN_RESULT_IN_TEAM_PARTY = 7;
 	DOTA_JOIN_RESULT_NO_LOBBY_FOUND = 8;
 	DOTA_JOIN_RESULT_LOBBY_FULL = 9;
+	DOTA_JOIN_RESULT_CUSTOM_GAME_INCORRECT_VERSION = 10;
 }
 
 enum DOTAMatchVote {
@@ -980,6 +979,7 @@ message CSODOTALobbyInvite {
 	repeated CSODOTALobbyInvite.LobbyMember members = 4;
 	optional uint64 custom_game_id = 5;
 	optional fixed64 invite_gid = 6;
+	optional fixed64 custom_game_crc = 7;
 }
 
 message CDOTASaveGame {
@@ -1174,6 +1174,7 @@ message CSODOTALobby {
 	optional PartnerAccountType partner_type = 73 [default = PARTNER_NONE];
 	optional uint32 lan_host_ping_to_server_region = 74;
 	optional DOTALobbyVisibility visibility = 75 [default = DOTALobbyVisibility_Public];
+	optional fixed64 custom_game_crc = 76;
 }
 
 message CMsgLobbyEventPoints {
@@ -1668,7 +1669,7 @@ message CMsgDOTARealtimeGameStats {
 		optional float y = 8;
 	}
 
-	message DeathDetails {
+	message KillDetails {
 		optional uint32 player_id = 1;
 		optional int32 death_time = 2;
 		optional uint32 killer_player_id = 3;
@@ -1697,7 +1698,7 @@ message CMsgDOTARealtimeGameStats {
 		optional uint32 teamid_dire = 9;
 		repeated CMsgDOTARealtimeGameStats.PickBanDetails picks = 10;
 		repeated CMsgDOTARealtimeGameStats.PickBanDetails bans = 11;
-		repeated CMsgDOTARealtimeGameStats.DeathDetails deaths = 12;
+		repeated CMsgDOTARealtimeGameStats.KillDetails kills = 12;
 		repeated CMsgDOTARealtimeGameStats.BroadcasterDetails broadcasters = 13;
 	}
 
@@ -1713,6 +1714,62 @@ message CMsgDOTARealtimeGameStats {
 	repeated CMsgDOTARealtimeGameStats.TeamDetails teams = 2;
 	repeated CMsgDOTARealtimeGameStats.BuildingDetails buildings = 3;
 	optional CMsgDOTARealtimeGameStats.GraphData graph_data = 4;
+	optional bool delta_frame = 5;
+}
+
+message CMsgDOTARealtimeGameStatsTerse {
+	message TeamDetails {
+		optional uint32 team_number = 1;
+		optional uint32 team_id = 2;
+		optional string team_name = 3;
+		optional fixed64 team_logo = 4;
+		optional uint32 score = 5;
+		repeated CMsgDOTARealtimeGameStatsTerse.PlayerDetails players = 6;
+	}
+
+	message PlayerDetails {
+		optional uint32 accountid = 1;
+		optional uint32 playerid = 2;
+		optional string name = 3;
+		optional uint32 team = 4;
+		optional uint32 heroid = 5;
+		optional uint32 level = 6;
+		optional uint32 kill_count = 7;
+		optional uint32 death_count = 8;
+		optional uint32 assists_count = 9;
+		optional uint32 denies_count = 10;
+		optional uint32 lh_count = 11;
+		optional uint32 gold = 12;
+		optional float x = 13;
+		optional float y = 14;
+	}
+
+	message BuildingDetails {
+		optional uint32 team = 1;
+		optional float heading = 2;
+		optional uint32 type = 3;
+		optional uint32 lane = 4;
+		optional uint32 tier = 5;
+		optional float x = 6;
+		optional float y = 7;
+	}
+
+	message MatchDetails {
+		optional fixed64 server_steam_id = 1;
+		optional uint64 matchid = 2;
+		optional uint32 timestamp = 3;
+		optional int32 game_time = 4;
+		optional bool is_tournament_game = 5;
+	}
+
+	message GraphData {
+		repeated int32 graph_gold = 1;
+	}
+
+	optional CMsgDOTARealtimeGameStatsTerse.MatchDetails match = 1;
+	repeated CMsgDOTARealtimeGameStatsTerse.TeamDetails teams = 2;
+	repeated CMsgDOTARealtimeGameStatsTerse.BuildingDetails buildings = 3;
+	optional CMsgDOTARealtimeGameStatsTerse.GraphData graph_data = 4;
 	optional bool delta_frame = 5;
 }
 
