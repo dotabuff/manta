@@ -125,3 +125,19 @@ func TestParseRealMatches(t *testing.T) {
 		assert.Equal(s.expectUnitOrderEvents, gotUnitOrderEvents, s.matchId)
 	}
 }
+
+func BenchmarkParseMatch(b *testing.B) {
+	assert := assert.New(b)
+
+	buf := mustGetReplayData("1560315800", "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1560315800.dem")
+
+	b.ResetTimer()
+	for n := 0; n < b.N; n++ {
+		parser, err := NewParser(buf)
+		assert.Nil(err)
+		err = parser.Start()
+		assert.Nil(err)
+	}
+
+	b.ReportAllocs()
+}
