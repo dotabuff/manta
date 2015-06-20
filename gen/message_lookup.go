@@ -200,28 +200,18 @@ import (
 
 			swtch := spew.Sprintf(
 				`case %d: // dota.%s
-          msg := &%s{}
-          if err := proto.Unmarshal(raw, msg); err != nil {
-            return err
-          }
-         `, enum.Values[e], e, cbType)
-
-			if enum.Hook != "DEM" {
-				swtch += spew.Sprintf(`
-          if callbacks.all != nil {
-          	callbacks.all(%d, msg)
-          }`, enum.Values[e])
-			}
-
-			swtch += spew.Sprintf(`
           if cbs := callbacks.%s; cbs != nil {
+            msg := &%s{}
+            if err := proto.Unmarshal(raw, msg); err != nil {
+              return err
+            }
             for _, fn := range cbs {
               if err := fn(msg); err != nil {
                 return err
               }
             }
           }
-        return nil`, cbEnt)
+        return nil`, enum.Values[e], e, cbEnt, cbType)
 
 			onfn := spew.Sprintf(
 				`func (c *Callbacks) %s(fn %s) {
@@ -255,7 +245,6 @@ import (
 
 	file.WriteString(spew.Sprintf(`
 type Callbacks struct {
-	all func(int32, proto.Message)
   %s
 }
   `, strings.Join(rawMsg, "\n")))
