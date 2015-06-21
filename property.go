@@ -44,7 +44,8 @@ func readProperties(r *reader, t *sendTable) (result map[string]interface{}) {
 		seekBits = 2
 	case "CDOTAFogOfWarWasVisible": // 1 field, 1024 entries (uint64[1024])
 		seekBits = 16
-	case "CDOTA_DataDire": // 5 fields, 307 entries
+	case "CDOTA_DataDire", "CDOTA_DataRadiant", "CDOTA_DataCustomTeam":
+		// 5 fields, 307 entries
 		seekBits = 384 - 307 // 384 total header - 307 field bits.
 	}
 	if seekBits > 0 {

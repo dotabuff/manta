@@ -209,6 +209,46 @@ func TestReadProperties(t *testing.T) {
 			},
 		},
 
+		{
+			tableName:   "CDOTA_DataRadiant",
+			run:         true,
+			debug:       false,
+			expectCount: (10 + 10 + 1 + 30 + 256),
+			expectKeys: map[string]interface{}{
+				"m_iReliableGold.0":       int32(0),
+				"m_iReliableGold.9":       int32(0),
+				"m_iUnreliableGold.0":     int32(625),
+				"m_iUnreliableGold.9":     int32(625),
+				"m_iTeamNum":              uint8(2),
+				"m_iStartingPositions.0":  int32(-1),
+				"m_iStartingPositions.29": int32(-1),
+				"m_bWorldTreeState.0":     uint64(18446744073709551615),
+				"m_bWorldTreeState.127":   uint64(18446744073709551615),
+				"m_bWorldTreeState.128":   uint64(0),
+				"m_bWorldTreeState.255":   uint64(0),
+			},
+		},
+
+		{
+			tableName:   "CDOTA_DataCustomTeam",
+			run:         true,
+			debug:       false,
+			expectCount: (10 + 10 + 1 + 30 + 256),
+			expectKeys: map[string]interface{}{
+				"m_iReliableGold.0":       int32(0),
+				"m_iReliableGold.9":       int32(0),
+				"m_iUnreliableGold.0":     int32(625),
+				"m_iUnreliableGold.9":     int32(625),
+				"m_iTeamNum":              uint8(6),
+				"m_iStartingPositions.0":  int32(-1),
+				"m_iStartingPositions.29": int32(-1),
+				"m_bWorldTreeState.0":     uint64(18446744073709551615),
+				"m_bWorldTreeState.127":   uint64(18446744073709551615),
+				"m_bWorldTreeState.128":   uint64(0),
+				"m_bWorldTreeState.255":   uint64(0),
+			},
+		},
+
 		/*
 			WIP:
 
