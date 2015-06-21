@@ -47,6 +47,8 @@ func readProperties(r *reader, t *sendTable) (result map[string]interface{}) {
 	case "CDOTA_DataDire", "CDOTA_DataRadiant", "CDOTA_DataCustomTeam":
 		// 5 fields, 307 entries
 		seekBits = 384 - 307 // 384 total header - 307 field bits.
+	case "CDOTA_PlayerResource":
+		seekBits = 4274 - 2056 // 4274 first pos - 2056 field bits.
 	}
 	if seekBits > 0 {
 		_debugf("seeking %d bits for table %s", seekBits, t.name)
@@ -82,10 +84,6 @@ func readProperties(r *reader, t *sendTable) (result map[string]interface{}) {
 		if err != nil {
 			_panicf("unable to decode type info for %s: %s", prop.dtName, err)
 		}
-
-		// While debugging, print the next 8 bits ahead of us.
-		r.dumpBits(8)
-
 		// Iterate through the fields in the prop. Many props have multiple
 		// entries. For example, a uint32[8] is read 8 times.
 		for i := 0; i < propCount; i++ {
@@ -101,6 +99,9 @@ func readProperties(r *reader, t *sendTable) (result map[string]interface{}) {
 			// Just debugging help.
 			_debugf("reading %s from position %d/%d", prop.Describe(), r.pos, r.size)
 			pos := r.pos
+
+			// While debugging, print the next 8 bits ahead of us.
+			r.dumpBits(8)
 
 			// Read the property off based on the type. This is hackey, and while I
 			// hope we can get better property information, it appears that there
@@ -143,8 +144,8 @@ func readProperties(r *reader, t *sendTable) (result map[string]interface{}) {
 				v = uint8(r.readBits(8))
 
 			case "uint16":
-				// There's *some* evidence that uint16 is read as fixed-length.
-				v = uint16(r.readBits(16))
+				// uint16 appears to be read as a varint.
+				v = uint16(r.readVarUint32())
 
 			case "char":
 				// A char[N] type appears to be a null terminated string, so
