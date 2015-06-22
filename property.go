@@ -13,6 +13,8 @@ func readProperties(r *reader, t *sendTable) (result map[string]interface{}) {
 	// The result we'll return.
 	result = make(map[string]interface{})
 
+	t, _ = t.flatten()
+
 	// We may need to calculate indexBits based on the max number of properties.
 	// So far this has not shown any better results, but it's here as a reminder
 	// that we've considered it (and continue to).
@@ -46,28 +48,15 @@ func readProperties(r *reader, t *sendTable) (result map[string]interface{}) {
 		seekBits = 16
 	case "CDOTA_DataDire", "CDOTA_DataRadiant", "CDOTA_DataCustomTeam":
 		// 5 fields, 307 entries
-		seekBits = 384 - 307 // 384 total header - 307 field bits.
+		seekBits = 77 // 384 total header - 307 field bits.
 	case "CDOTA_PlayerResource":
-		seekBits = 4274 - 2056 // 4274 first pos - 2056 field bits.
-	}
-	if seekBits > 0 {
-		_debugf("seeking %d bits for table %s", seekBits, t.name)
-		r.seekBits(seekBits)
+		seekBits = 2218 // 4274 first pos - 2056 field bits.
 	}
 
-	// It appears that the header of a buffer grows with the number of elements
-	// in it. For now, let's just throw away 1 bit for each field.
-	throwBits := make([]uint, 0)
-	for _, prop := range t.props {
-		_, propCount, err := prop.typeInfo()
-		if err != nil {
-			_panicf("unable to decode type info for %s: %s", prop.dtName, err)
-		}
-		for i := 0; i < propCount; i++ {
-			throwBits = append(throwBits, r.readBits(1))
-		}
-	}
-	_debugf("read %d field index bits", len(throwBits))
+	throwBits := len(t.props)
+	_debugf("skipping %d bits (%d for table, %d inferred field index)", seekBits+throwBits, seekBits, throwBits)
+	r.dumpBits(seekBits + throwBits)
+	r.seekBits(seekBits + throwBits)
 
 	// Once we're past the header, the data seems to be serialized contiguously.
 	// This loop iterates over properties we expect to be present, reading them
@@ -79,116 +68,108 @@ func readProperties(r *reader, t *sendTable) (result map[string]interface{}) {
 
 	// Iterate through the props in the sendtable.
 	for _, prop := range t.props {
-		// Extract type information from the sendprop.
-		propType, propCount, err := prop.typeInfo()
-		if err != nil {
-			_panicf("unable to decode type info for %s: %s", prop.dtName, err)
+		// Just debugging help.
+		_debugf("reading %s from position %d/%d", prop.Describe(), r.pos, r.size)
+		pos := r.pos
+
+		k = prop.varName
+
+		// While debugging, print the next bit ahead of us.
+		r.dumpBits(1)
+
+		// Temporary: warn if we haven't flattened something with a serializer.
+		// We'll want to pre-flatten these, but just make sure we're not overstepping
+		// any bounds for now.
+		if prop.fieldSerializerIndex != nil {
+			_panicf("field %s needs flattening!", prop.varName)
 		}
-		// Iterate through the fields in the prop. Many props have multiple
-		// entries. For example, a uint32[8] is read 8 times.
-		for i := 0; i < propCount; i++ {
-			// Determine the key based on the prop count
-			if propCount > 1 {
-				// Multiple entries have the key %NAME.%N, where N is a zero based index.
-				k = _sprintf("%s.%d", prop.varName, i)
+
+		// Read the property off based on the type. This is hackey, and while I
+		// hope we can get better property information, it appears that there
+		// may simply be an understanding of types mapped right in the game
+		// engine. That would mean that we need to recognize types by name (or id)
+		// which is currently what we're doing. Let's hope we can do better here.
+		switch prop.dtName {
+		case "float32":
+			// This will be tricky as floats can be encoded in oh-so-many ways.
+
+			// We haven't yet determined how to read a float with a bitcount.
+			if prop.bitCount != nil {
+				// This uses the source 1 calculation using bits, lowValue, highValue.
+				v = r.readFloat32Bits(*prop.bitCount, prop.lowValue, prop.highValue)
 			} else {
-				// Single properties have the key %NAME.
-				k = prop.varName
-			}
-
-			// Just debugging help.
-			_debugf("reading %s from position %d/%d", prop.Describe(), r.pos, r.size)
-			pos := r.pos
-
-			// While debugging, print the next 8 bits ahead of us.
-			r.dumpBits(8)
-
-			// Read the property off based on the type. This is hackey, and while I
-			// hope we can get better property information, it appears that there
-			// may simply be an understanding of types mapped right in the game
-			// engine. That would mean that we need to recognize types by name (or id)
-			// which is currently what we're doing. Let's hope we can do better here.
-			switch propType {
-			case "float32":
-				// This will be tricky as floats can be encoded in oh-so-many ways.
-
-				// We haven't yet determined how to read a float with a bitcount.
-				if prop.bitCount != nil && *prop.bitCount != 32 {
-					_panicf("unhandled bitcount: %s", prop.Describe())
-				}
-
 				// This just reads a fixed length IEEE 754 float32. It might be 100%
 				// wrong, and it will at least be wrong in cases where we have
 				// flags, lowVal, highVal or bitcount.
 				v = r.readFloat32()
-
-			case "int32":
-				// Signed integers appear to be varints.
-				v = r.readVarInt32()
-
-			case "int8":
-				// So far there's *some* evidence to suggest that this is read as
-				// a varint. That doesn't make much sense though, so.... be skeptical.
-				v = int8(r.readVarInt32())
-
-			case "uint32":
-				// uint32's appear to be varints.
-				v = r.readVarUint32()
-
-			case "uint64":
-				// uint64's appear to be varints.
-				v = r.readVarUint64()
-
-			case "uint8":
-				// uint8 appears to be read as a byte.
-				v = uint8(r.readBits(8))
-
-			case "uint16":
-				// uint16 appears to be read as a varint.
-				v = uint16(r.readVarUint32())
-
-			case "char":
-				// A char[N] type appears to be a null terminated string, so
-				// this will usually be reasonable.
-				v = r.readString()
-
-			case "CUtlSymbolLarge":
-				// This appears to be a C++ type that provides some optimization,
-				// but so far simply gets serialized as a string with N entries.
-				// Example: CUtlSymbolLarge[6] would be 6 strings. It may or may not
-				// have an outer element.
-				v = r.readString()
-
-			case "bool":
-				// Seems reasonable so far.
-				v = r.readBoolean()
-
-			case "CUtlVector< CHandle< CBasePlayer > >":
-				// XXX TODO: this is just wrong. This is some FML stuff.
-				v = r.readBits(1)
-
-			case "Vector":
-				// So far we've seen XYZ types represented as Vector, so we're simply
-				// reading 3 IEEE 754 float32's in here. It's probably wrong, and may
-				// be quite complex. See float32 above for more details.
-				v = []float32{r.readFloat32(), r.readFloat32(), r.readFloat32()}
-
-			default:
-				// Read unknown types as a varint, which seems to be the most popular
-				// way to read most entries.
-				_debugf("WARN: reading %s (%s) as varint32", k, propType)
-				v = r.readVarInt32()
 			}
 
-			// Debugging
-			_debugf("read %s = %v in %d bits", k, v, r.pos-pos)
+		case "int32":
+			// Signed integers appear to be varints.
+			v = r.readVarInt32()
 
-			// Add the entry to the ordered map.
-			om.add(k, v)
+		case "int8":
+			// So far there's *some* evidence to suggest that this is read as
+			// a varint. That doesn't make much sense though, so.... be skeptical.
+			v = int8(r.readVarInt32())
 
-			// Set the result to the omap value, just in case we panic early.
-			result = om.toMap()
+		case "uint32":
+			// uint32's appear to be varints.
+			v = r.readVarUint32()
+
+		case "uint64":
+			// uint64's appear to be varints.
+			v = r.readVarUint64()
+
+		case "uint8":
+			// uint8 appears to be read as a byte.
+			v = uint8(r.readBits(8))
+
+		case "uint16":
+			// uint16 appears to be read as a varint.
+			v = uint16(r.readVarUint32())
+
+		case "char":
+			// A char[N] type appears to be a null terminated string, so
+			// this will usually be reasonable.
+			v = r.readString()
+
+		case "CUtlSymbolLarge":
+			// This appears to be a C++ type that provides some optimization,
+			// but so far simply gets serialized as a string with N entries.
+			// Example: CUtlSymbolLarge[6] would be 6 strings. It may or may not
+			// have an outer element.
+			v = r.readString()
+
+		case "bool":
+			// Seems reasonable so far.
+			v = r.readBoolean()
+
+		case "CUtlVector< CHandle< CBasePlayer > >":
+			// XXX TODO: this is just wrong. This is some FML stuff.
+			v = r.readBits(1)
+
+		case "Vector":
+			// So far we've seen XYZ types represented as Vector, so we're simply
+			// reading 3 IEEE 754 float32's in here. It's probably wrong, and may
+			// be quite complex. See float32 above for more details.
+			v = []float32{r.readFloat32(), r.readFloat32(), r.readFloat32()}
+
+		default:
+			// Read unknown types as a varint, which seems to be the most popular
+			// way to read most entries.
+			_debugf("WARN: reading %s (%s) as varint32", k, prop.dtName)
+			v = r.readVarInt32()
 		}
+
+		// Debugging
+		_debugf("read %s = %v in %d bits", k, v, r.pos-pos)
+
+		// Add the entry to the ordered map.
+		om.add(k, v)
+
+		// Set the result to the omap value, just in case we panic early.
+		result = om.toMap()
 	}
 
 	// Dump how many bits are left and print out the omap items.

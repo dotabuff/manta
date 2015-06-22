@@ -66,6 +66,59 @@ type sendProp struct {
 	sendNodeName           string
 }
 
+// Debugging method to describe the table.
+func (t *sendTable) Describe() {
+	_debugf("table %d (%s) version %d with %d raw props", t.index, t.name, t.version, len(t.props))
+	for i, p := range t.props {
+		_debugf("-> prop %d: %s", i, p.Describe())
+	}
+}
+
+// Flattens multiple count fields in a table, returning a new table.
+func (t *sendTable) flatten() (*sendTable, error) {
+	// Create a new table based on the original.
+	t2 := &sendTable{
+		index:   t.index,
+		name:    t.name,
+		version: t.version,
+		props:   make([]*sendProp, 0),
+	}
+
+	// Iterate through original props, flattening them
+	for _, p := range t.props {
+		pName, pCount, err := p.typeInfo()
+		if err != nil {
+			return nil, err
+		}
+
+		for i := 0; i < pCount; i++ {
+			p2 := &sendProp{
+				dtIndex:                p.dtIndex,
+				dtName:                 pName,
+				varIndex:               p.varIndex,
+				varName:                p.varName,
+				bitCount:               p.bitCount,
+				lowValue:               p.lowValue,
+				highValue:              p.highValue,
+				encodeFlags:            p.encodeFlags,
+				fieldSerializerIndex:   p.fieldSerializerIndex,
+				fieldSerializerName:    p.fieldSerializerName,
+				fieldSerializerVersion: p.fieldSerializerVersion,
+				sendNodeIndex:          p.sendNodeIndex,
+				sendNodeName:           p.sendNodeName,
+			}
+
+			if pCount > 1 {
+				p2.varName = _sprintf("%s.%d", p.varName, i)
+			}
+
+			t2.props = append(t2.props, p2)
+		}
+	}
+
+	return t2, nil
+}
+
 // Returns the type name and count for a sendprop.
 func (p *sendProp) typeInfo() (s string, n int, err error) {
 	ss := strings.Split(strings.Replace(p.dtName, "]", "[", 1), "[")
