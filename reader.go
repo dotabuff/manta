@@ -194,6 +194,24 @@ func (r *reader) readFloat32() float32 {
 	return math.Float32frombits(r.readLeUint32())
 }
 
+// Reads a float32 with props
+func (r *reader) readFloat32Bits(b int32, lP *float32, hP *float32) float32 {
+	bits := int(b)
+	lV, hV := float32(0.0), float32(0.0)
+	if lP != nil {
+		lV = *lP
+	}
+	if hP != nil {
+		hV = *hP
+	}
+
+	dividend := r.readBits(bits)
+	divisor := (1 << uint(bits)) - 1
+	base := float32(dividend) / float32(divisor)
+	diff := hV - lV
+	return (base * diff) - lV
+}
+
 // Reads bits as bytes.
 func (r *reader) readBitsAsBytes(n int) []byte {
 	tmp := make([]byte, 0)
