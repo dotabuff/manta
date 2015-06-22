@@ -13,8 +13,6 @@ func readProperties(r *reader, t *sendTable) (result map[string]interface{}) {
 	// The result we'll return.
 	result = make(map[string]interface{})
 
-	t, _ = t.flatten()
-
 	// We may need to calculate indexBits based on the max number of properties.
 	// So far this has not shown any better results, but it's here as a reminder
 	// that we've considered it (and continue to).

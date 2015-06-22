@@ -62,8 +62,31 @@ type sendProp struct {
 	fieldSerializerIndex   *int32
 	fieldSerializerName    *string
 	fieldSerializerVersion *int32
+	serializedFromIndex    *int32
+	serializedFromName     *string
 	sendNodeIndex          int32
 	sendNodeName           string
+}
+
+// Copies a sendProp.
+func (p *sendProp) copy() *sendProp {
+	return &sendProp{
+		dtIndex:                p.dtIndex,
+		dtName:                 p.dtName,
+		varIndex:               p.varIndex,
+		varName:                p.varName,
+		bitCount:               p.bitCount,
+		lowValue:               p.lowValue,
+		highValue:              p.highValue,
+		encodeFlags:            p.encodeFlags,
+		fieldSerializerIndex:   p.fieldSerializerIndex,
+		fieldSerializerName:    p.fieldSerializerName,
+		fieldSerializerVersion: p.fieldSerializerVersion,
+		serializedFromIndex:    p.serializedFromIndex,
+		serializedFromName:     p.serializedFromName,
+		sendNodeIndex:          p.sendNodeIndex,
+		sendNodeName:           p.sendNodeName,
+	}
 }
 
 // Debugging method to describe the table.
@@ -72,51 +95,6 @@ func (t *sendTable) Describe() {
 	for i, p := range t.props {
 		_debugf("-> prop %d: %s", i, p.Describe())
 	}
-}
-
-// Flattens multiple count fields in a table, returning a new table.
-func (t *sendTable) flatten() (*sendTable, error) {
-	// Create a new table based on the original.
-	t2 := &sendTable{
-		index:   t.index,
-		name:    t.name,
-		version: t.version,
-		props:   make([]*sendProp, 0),
-	}
-
-	// Iterate through original props, flattening them
-	for _, p := range t.props {
-		pName, pCount, err := p.typeInfo()
-		if err != nil {
-			return nil, err
-		}
-
-		for i := 0; i < pCount; i++ {
-			p2 := &sendProp{
-				dtIndex:                p.dtIndex,
-				dtName:                 pName,
-				varIndex:               p.varIndex,
-				varName:                p.varName,
-				bitCount:               p.bitCount,
-				lowValue:               p.lowValue,
-				highValue:              p.highValue,
-				encodeFlags:            p.encodeFlags,
-				fieldSerializerIndex:   p.fieldSerializerIndex,
-				fieldSerializerName:    p.fieldSerializerName,
-				fieldSerializerVersion: p.fieldSerializerVersion,
-				sendNodeIndex:          p.sendNodeIndex,
-				sendNodeName:           p.sendNodeName,
-			}
-
-			if pCount > 1 {
-				p2.varName = _sprintf("%s.%d", p.varName, i)
-			}
-
-			t2.props = append(t2.props, p2)
-		}
-	}
-
-	return t2, nil
 }
 
 // Returns the type name and count for a sendprop.
@@ -145,6 +123,10 @@ func (p *sendProp) Describe() string {
 
 	if p.fieldSerializerIndex != nil {
 		out += _sprintf(" serializer:%s(%d)", *p.fieldSerializerName, *p.fieldSerializerIndex)
+	}
+
+	if p.serializedFromIndex != nil {
+		out += _sprintf(" serializedFrom:%s(%d)", *p.serializedFromName, *p.serializedFromIndex)
 	}
 
 	if p.bitCount != nil {
@@ -211,16 +193,61 @@ func parseSendTables(m *dota.CDemoSendTables) (*sendTables, error) {
 	// Create a map of sendTables
 	tables := make(map[string]*sendTable)
 	for _, o := range msg.GetSerializers() {
+		// Create the basic table.
 		t := &sendTable{
 			index:   o.GetSerializerNameSym(),
 			name:    msg.GetSymbols()[o.GetSerializerNameSym()],
 			version: o.GetSerializerVersion(),
-			props:   make([]*sendProp, len(o.GetFieldsIndex())),
+			props:   make([]*sendProp, 0),
 		}
-		for i, pid := range o.GetFieldsIndex() {
-			t.props[i] = props[int(pid)]
+
+		// Iterate through prop field indexes.
+		for _, pid := range o.GetFieldsIndex() {
+			// Get the property at the given index.
+			prop := props[int(pid)]
+
+			// If the prop has a serializer, inherit its properties
+			if prop.fieldSerializerIndex != nil {
+				// Find the serializer.
+				ser, ok := tables[*prop.fieldSerializerName]
+				if !ok {
+					_panicf("unable to find serializer %d (%s)", *prop.fieldSerializerIndex, *prop.fieldSerializerName)
+				}
+
+				// Iterate through serializer props, adding them to the table.
+				// Property names are subclassed as "%propVarName.%serializerVarName"
+				for _, p := range ser.props {
+					p2 := p.copy()
+					p2.serializedFromIndex = prop.fieldSerializerIndex
+					p2.serializedFromName = prop.fieldSerializerName
+					p2.varName = _sprintf("%s.%s", prop.varName, p.varName)
+					t.props = append(t.props, p2)
+				}
+				continue
+			}
+
+			// For normal props (without serializers), extract base type name
+			// and element count, then store those as props in the table.
+			typName, typCount, err := prop.typeInfo()
+			if err != nil {
+				_panicf("unable to flatten property %s: %s", prop.Describe(), err)
+			}
+
+			// Iterate through elements, adding them as new properties to the table.
+			// Single element properties are named using the property var name.
+			// Multiple element properties are named as "%propVarName.N".
+			for i := 0; i < typCount; i++ {
+				p2 := prop.copy()
+				p2.dtName = typName
+				if typCount > 1 {
+					p2.varName = _sprintf("%s.%d", prop.varName, i)
+				}
+				t.props = append(t.props, p2)
+			}
 		}
+
 		tables[t.name] = t
+		t.Describe()
 	}
 
 	// Return a sendTables object
