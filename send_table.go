@@ -240,14 +240,13 @@ func parseSendTables(m *dota.CDemoSendTables) (*sendTables, error) {
 				p2 := prop.copy()
 				p2.dtName = typName
 				if typCount > 1 {
-					p2.varName = _sprintf("%s.%d", prop.varName, i)
+					p2.varName = _sprintf("%s.%04d", prop.varName, i)
 				}
 				t.props = append(t.props, p2)
 			}
 		}
 
 		tables[t.name] = t
-		t.Describe()
 	}
 
 	// Return a sendTables object
