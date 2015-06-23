@@ -61,7 +61,7 @@ func TestReadProperties(t *testing.T) {
 				"m_iTeamNum": uint8(0),
 				// Maybe a single bit to say no data / zero entries?
 				// manta.(*reader).dumpBits: @ bit 00032 (byte 004 + 0)  | binary: 0 | uint8: 0   | var32: 0           | varu32: 0          | varu64: 0                    | uint64: 15197087717208489984           | bitfloat32: -3.8280597e+17 | string: -
-				"m_aPlayers": uint(0), // Most certainly wrong
+				"m_aPlayers": uint32(0), // Most certainly wrong
 				// manta.(*reader).dumpBits: @ bit 00033 (byte 004 + 1)  | binary: 0 | uint8: 0   | var32: 0           | varu32: 0          | varu64: 0                    | uint64: 7598543858604244992            | bitfloat32: 1.6480077e+28 | string: -
 				"m_iScore": int32(0),
 				// manta.(*reader).dumpBits: @ bit 00041 (byte 005 + 1)  | binary: 0 | uint8: 0   | var32: 0           | varu32: 0          | varu64: 0                    | uint64: 7451613997854250240            | bitfloat32: 2.7477812e+20 | string: -

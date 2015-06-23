@@ -226,7 +226,7 @@ func (r *reader) readBitsAsBytes(n int) []byte {
 }
 
 // Read bits of a given length as a uint, may or may not be byte-aligned.
-func (r *reader) readBits(n int) uint {
+func (r *reader) readBits(n int) uint32 {
 	if r.remBits() < n {
 		_panicf("read overflow: %d bits requested, only %d remaining", n, r.size-r.pos)
 	}
@@ -242,14 +242,14 @@ func (r *reader) readBits(n int) uint {
 		nBytesToRead += 1
 	}
 
-	var val uint64
+	var val uint32
 	for i := 0; i < nBytesToRead; i++ {
 		m := r.buf[(r.pos/8)+i]
-		val += (uint64(m) << (uint64(i) * 8))
+		val += (uint32(m) << uint32(i*8))
 	}
-	val >>= uint(bitOffset)
-	val &= ((1 << uint64(n)) - 1)
+	val >>= uint32(bitOffset)
+	val &= ((1 << uint32(n)) - 1)
 	r.pos += n
 
-	return uint(val)
+	return val
 }
