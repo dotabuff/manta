@@ -38,6 +38,8 @@ func readProperties(r *reader, t *sendTable) (result map[string]interface{}) {
 	// more about the structure.
 	seekBits := 0
 	switch t.name {
+	case "CDOTA_DataSpectator": // 3 fields, 12 entries.
+		seekBits = 9 // 21 total header - 12 field bits
 	case "CDOTATeam": // 15 fields, 15 entries. 1 unknown/array type
 		seekBits = 9
 	case "CRagdollManager": // 1 field, 1 entry (uint8)
@@ -146,6 +148,11 @@ func readProperties(r *reader, t *sendTable) (result map[string]interface{}) {
 		case "CUtlVector< CHandle< CBasePlayer > >":
 			// XXX TODO: this is just wrong. This is some FML stuff.
 			v = r.readBits(1)
+
+		case "CHandle< CBaseEntity >":
+			// So far these seem to be 4-byte ints, but the data looks better as
+			// an unsigned varint than a uint32.
+			v = r.readVarUint32()
 
 		case "Vector":
 			// So far we've seen XYZ types represented as Vector, so we're simply

@@ -230,6 +230,23 @@ func TestReadProperties(t *testing.T) {
 		},
 
 		{
+			tableName:   "CDOTA_DataSpectator",
+			run:         true,
+			debug:       true,
+			expectCount: 12,
+			expectKeys: map[string]interface{}{
+				// manta.(*reader).dumpBits: @ bit 00021 (byte 002 + 5)  | binary: 1 | uint8: 255 | var32: -8388608    | varu32: 16777215   | varu64: 16777215             | float32: 3.8518597e-34      | float32coord: -16384.969         | string: ERR
+				"m_hPrimaryRune": uint32(16777215),
+				// manta.(*reader).dumpBits: @ bit 00053 (byte 006 + 5)  | binary: 1 | uint8: 255 | var32: -8388608    | varu32: 16777215   | varu64: 16777215             | float32: 3.8518597e-34      | float32coord: -16384.969         | string: ERR
+				"m_hSecondaryRune": uint32(16777215),
+				// manta.(*reader).dumpBits: @ bit 00085 (byte 010 + 5)  | binary: 0 | uint8: 226 | var32: 625         | varu32: 1250       | varu64: 1250                 | float32: 5.4416815e-33      | float32coord: 0.875              | string: ERR
+				"m_iNetWorth.0000": int32(625),
+				// manta.(*reader).dumpBits: @ bit 00229 (byte 028 + 5)  | binary: 0 | uint8: 226 | var32: 625         | varu32: 1250       | varu64: 1250                 | float32: ERR                | float32coord: 0.875              | string: ERR
+				"m_iNetWorth.0009": int32(625),
+			},
+		},
+
+		{
 			tableName:   "CDOTA_DataCustomTeam",
 			run:         true,
 			debug:       false,
@@ -724,16 +741,16 @@ func TestReadProperties(t *testing.T) {
 				// manta.readProperties: reading type:CHandle< CBaseEntity >[10](1004) name:m_hCameraTarget(1288) from position 16252/49616
 				// manta.readProperties: WARN: reading m_hCameraTarget.0 (CHandle< CBaseEntity >) as varint32
 				// manta.(*reader).dumpBits: @ bit 16252 (byte 2031 + 4)  | binary: 1 | uint8: 255 | var32: -8388608    | varu32: 16777215   | varu64: 16777215             | float32: 3.8518597e-34 | string: -
-				"m_hCameraTarget.0000": int32(-8388608), // these align but value looks wrong
-				"m_hCameraTarget.0001": int32(-8388608), // these align but value looks wrong
-				"m_hCameraTarget.0002": int32(-8388608), // these align but value looks wrong
-				"m_hCameraTarget.0003": int32(-8388608), // these align but value looks wrong
-				"m_hCameraTarget.0004": int32(-8388608), // these align but value looks wrong
-				"m_hCameraTarget.0005": int32(-8388608), // these align but value looks wrong
-				"m_hCameraTarget.0006": int32(-8388608), // these align but value looks wrong
-				"m_hCameraTarget.0007": int32(-8388608), // these align but value looks wrong
-				"m_hCameraTarget.0008": int32(-8388608), // these align but value looks wrong
-				"m_hCameraTarget.0009": int32(-8388608), // these align but value looks wrong
+				"m_hCameraTarget.0000": uint32(16777215), // these align but value looks wrong
+				"m_hCameraTarget.0001": uint32(16777215), // these align but value looks wrong
+				"m_hCameraTarget.0002": uint32(16777215), // these align but value looks wrong
+				"m_hCameraTarget.0003": uint32(16777215), // these align but value looks wrong
+				"m_hCameraTarget.0004": uint32(16777215), // these align but value looks wrong
+				"m_hCameraTarget.0005": uint32(16777215), // these align but value looks wrong
+				"m_hCameraTarget.0006": uint32(16777215), // these align but value looks wrong
+				"m_hCameraTarget.0007": uint32(16777215), // these align but value looks wrong
+				"m_hCameraTarget.0008": uint32(16777215), // these align but value looks wrong
+				"m_hCameraTarget.0009": uint32(16777215), // these align but value looks wrong
 
 				// manta.readProperties: reading type:Color[10](1289) name:m_CustomPlayerColors(1290) from position 16572/49616
 				// manta.readProperties: WARN: reading m_CustomPlayerColors.0 (Color) as varint32
