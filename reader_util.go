@@ -31,6 +31,7 @@ type readerDumper struct {
 var readerDumpers = []readerDumper{
 	{"binary", "%-1v", "0", func(r *reader) interface{} { return r.readBits(1) }},
 	{"uint8", "%-3v", "0", func(r *reader) interface{} { return r.readBits(8) }},
+	{"handle", "%-10v", "0", func(r *reader) interface{} { return r.readBits(21) }},
 	{"var32", "%-11v", "0", func(r *reader) interface{} { return r.readVarInt32() }},
 	{"varu32", "%-10v", "0", func(r *reader) interface{} { return r.readVarUint32() }},
 	{"varu64", "%-20v", "0", func(r *reader) interface{} { return r.readVarUint64() }},

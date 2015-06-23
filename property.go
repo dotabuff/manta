@@ -150,9 +150,11 @@ func readProperties(r *reader, t *sendTable) (result map[string]interface{}) {
 			v = r.readBits(1)
 
 		case "CHandle< CBaseEntity >":
-			// So far these seem to be 4-byte ints, but the data looks better as
-			// an unsigned varint than a uint32.
-			v = r.readVarUint32()
+			// So far these seem to occupy 32 bits but the value is made up only
+			// out of what's present in the first 21 bits. In source 1, these only
+			// occupied 21 bits of space.
+			v = r.readBits(21) // a uint32
+			r.seekBits(11)     // skip the rest of the 32 bits
 
 		case "Vector":
 			// So far we've seen XYZ types represented as Vector, so we're simply
