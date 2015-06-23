@@ -10,7 +10,7 @@ cover:
 	go test -cover -coverprofile /tmp/manta.cov -v
 	go tool cover -html=/tmp/manta.cov
 
-update: update-game-tracking gen-dota-proto gen-game-events gen-message-lookup
+update: update-game-tracking gen-dota-proto generate
 
 game-tracking:
 	git init game-tracking
@@ -26,7 +26,7 @@ update-game-tracking: game-tracking
 
 gen-dota-proto: dota/google/protobuf/descriptor.pb.go
 	rm -rf dota/*.proto
-	cp -f game-tracking/Protobufs/dota_s2/server/*.proto -t dota/ || true
+	cp -f game-tracking/Protobufs/dota_s2/libserver/*.proto -t dota/ || true
 	sed -i 's/^\(\s*\)\(optional\|repeated\|required\|extend\)\s*\./\1\2 /' dota/*.proto
 	sed -i 's!^\s*rpc\s*\(\S*\)\s*(\.\([^)]*\))\s*returns\s*(\.\([^)]*\))\s*{!rpc \1 (\2) returns (\3) {!' dota/*.proto
 	sed -i '1ipackage dota;\n' dota/*.proto
@@ -38,11 +38,8 @@ dota/google/protobuf/descriptor.pb.go: google/protobuf/descriptor.proto
 	mkdir -p dota/google/protobuf
 	protoc -I. --go_out=dota $<
 
-gen-game-events:
-	go run gen/game_event.go fixtures/source_1_legacy_game_events_list.pbmsg game_event_lookup.go
-
-gen-message-lookup:
-	go run gen/message_lookup.go dota message_lookup.go
+generate:
+	go generate
 
 sync-replays:
 	s3cmd --region=us-west-2 sync ./replays/*.dem s3://manta.dotabuff/
