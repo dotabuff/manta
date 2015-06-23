@@ -58,7 +58,7 @@ type sendProp struct {
 	bitCount               *int32
 	lowValue               *float32
 	highValue              *float32
-	encodeFlags            *int32
+	encodeFlags            *uint32
 	fieldSerializerIndex   *int32
 	fieldSerializerName    *string
 	fieldSerializerVersion *int32
@@ -176,10 +176,13 @@ func parseSendTables(m *dota.CDemoSendTables) (*sendTables, error) {
 			bitCount:               o.BitCount,
 			lowValue:               o.LowValue,
 			highValue:              o.HighValue,
-			encodeFlags:            o.EncodeFlags,
 			fieldSerializerVersion: o.FieldSerializerVersion,
 			sendNodeIndex:          o.GetSendNodeSym(),
 			sendNodeName:           msg.GetSymbols()[o.GetSendNodeSym()],
+		}
+
+		if o.EncodeFlags != nil {
+			p.encodeFlags = proto.Uint32(uint32(*o.EncodeFlags))
 		}
 
 		if o.FieldSerializerNameSym != nil {
