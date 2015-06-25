@@ -11,6 +11,16 @@ func init() {
 	debugMode = true
 }
 
+func TestParseOneMatch(t *testing.T) {
+	assert := assert.New(t)
+
+	buf := mustGetReplayData("1560315800", "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1560315800.dem")
+	parser, err := NewParser(buf)
+	assert.Nil(err)
+	err = parser.Start()
+	assert.Nil(err)
+}
+
 // Simply tests that we can read the outer structure of a real match
 func TestParseRealMatches(t *testing.T) {
 	assert := assert.New(t)
