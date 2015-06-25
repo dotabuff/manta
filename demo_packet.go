@@ -109,13 +109,7 @@ func (r *demoPacketReader) hasNext() bool {
 // Reads the next packet, returning a type and inner buffer.
 // XXX TODO: detail our knowledge of the structure of this packet.
 func (r *demoPacketReader) readNext() (int32, []byte) {
-	t := r.r.readBits(6)
-
-	if header := t >> 4; header != 0 {
-		bits := int(header*4 + (((2 - header) >> 31) & 16))
-		t = (t & 15) | (r.r.readBits(bits) << 4)
-	}
-
+	t := r.r.readUBitVar()
 	size := r.r.readVarUint32()
 	buf := r.r.readBytes(int(size))
 
