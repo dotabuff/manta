@@ -34,15 +34,7 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 	for i := 0; i < int(m.GetUpdatedEntries()); i++ {
 		// Read the index delta from the buffer. This is an implementation
 		// from Alice. An alternate implementation from Yasha has the same result.
-		delta := r.readBits(6)
-		switch delta & 0x30 {
-		case 16:
-			delta = (delta & 15) | (r.readBits(4) << 4)
-		case 32:
-			delta = (delta & 15) | (r.readBits(8) << 4)
-		case 48:
-			delta = (delta & 15) | (r.readBits(28) << 4)
-		}
+		delta := r.readUBitVar()
 		index += int32(delta) + 1
 		_debugf("index delta is %d to %d", delta, index)
 
