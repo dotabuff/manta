@@ -144,6 +144,25 @@ func (r *reader) readBoolean() bool {
 	return b
 }
 
+// Reads a bit varint
+func (r *reader) readUBitVar() uint32 {
+	ret := r.readBits(6)
+
+	switch (ret & 0x30) {
+	case 16:
+		ret = (ret & 15) | (r.readBits(4) << 4);
+		break;
+	case 32:
+		ret = (ret & 15) | (r.readBits(8) << 4);
+		break;
+	case 48:
+		ret = (ret & 15) | (r.readBits(28) << 4);
+		break;
+	}
+
+	return ret
+}
+
 // Reads the next byte (8 bits) in the buffer.
 func (r *reader) readByte() byte {
 	return r.readBytes(1)[0]
