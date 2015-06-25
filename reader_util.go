@@ -36,7 +36,8 @@ var readerDumpers = []readerDumper{
 	{"varu32", "%-10v", "0", func(r *reader) interface{} { return r.readVarUint32() }},
 	{"varu64", "%-20v", "0", func(r *reader) interface{} { return r.readVarUint64() }},
 	{"ubitvar", "%-10v", "0", func(r *reader) interface{} { return r.readUBitVar() }},
-	{"float32", "%-12v", "0", func(r *reader) interface{} { return r.readFloat32() }},
+	{"float32", "%-16v", "0", func(r *reader) interface{} { return r.readFloat32() }},
+	{"byte", "%-4s", "[]", func(r *reader) interface{} { return _sprintf("0x%02x", r.readByte()) }},
 	{"string", "%v", "-", func(r *reader) interface{} {
 		if s := r.readString(); isPrintable(s) {
 			return s
