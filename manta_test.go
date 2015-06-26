@@ -61,6 +61,15 @@ func TestParseRealMatches(t *testing.T) {
 			expectCombatLogEvents:  51288,
 			expectUnitOrderEvents:  63992,
 		},
+		{
+			matchId:                "1582611189",
+			replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1582611189.dem",
+			expectCombatLogDamage:  599388,
+			expectCombatLogHealing: 28576,
+			expectCombatLogDeaths:  930,
+			expectCombatLogEvents:  23800,
+			expectUnitOrderEvents:  40237,
+		},
 	}
 
 	for _, s := range scenarios {
