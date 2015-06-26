@@ -972,6 +972,7 @@ type CDOTAClientMsg_DemoHero struct {
 	HeroId           *int32   `protobuf:"varint,1,opt,name=hero_id" json:"hero_id,omitempty"`
 	ItemDefs         []uint32 `protobuf:"varint,2,rep,name=item_defs" json:"item_defs,omitempty"`
 	ItemIds          []uint64 `protobuf:"varint,3,rep,name=item_ids" json:"item_ids,omitempty"`
+	StyleIndex       *uint32  `protobuf:"varint,4,opt,name=style_index" json:"style_index,omitempty"`
 	XXX_unrecognized []byte   `json:"-"`
 }
 
@@ -998,6 +999,13 @@ func (m *CDOTAClientMsg_DemoHero) GetItemIds() []uint64 {
 		return m.ItemIds
 	}
 	return nil
+}
+
+func (m *CDOTAClientMsg_DemoHero) GetStyleIndex() uint32 {
+	if m != nil && m.StyleIndex != nil {
+		return *m.StyleIndex
+	}
+	return 0
 }
 
 type CDOTAClientMsg_ChallengeSelect struct {

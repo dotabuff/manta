@@ -303,6 +303,30 @@ func (m *CDOTAModifierBuffTableEntry) GetLuaName() string {
 	return ""
 }
 
+type CDOTALuaModifierEntry struct {
+	ModifierType     *int32  `protobuf:"varint,1,req,name=modifier_type" json:"modifier_type,omitempty"`
+	ModifierFilename *string `protobuf:"bytes,2,req,name=modifier_filename" json:"modifier_filename,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CDOTALuaModifierEntry) Reset()         { *m = CDOTALuaModifierEntry{} }
+func (m *CDOTALuaModifierEntry) String() string { return proto.CompactTextString(m) }
+func (*CDOTALuaModifierEntry) ProtoMessage()    {}
+
+func (m *CDOTALuaModifierEntry) GetModifierType() int32 {
+	if m != nil && m.ModifierType != nil {
+		return *m.ModifierType
+	}
+	return 0
+}
+
+func (m *CDOTALuaModifierEntry) GetModifierFilename() string {
+	if m != nil && m.ModifierFilename != nil {
+		return *m.ModifierFilename
+	}
+	return ""
+}
+
 func init() {
 	proto.RegisterEnum("dota.DOTA_MODIFIER_ENTRY_TYPE", DOTA_MODIFIER_ENTRY_TYPE_name, DOTA_MODIFIER_ENTRY_TYPE_value)
 }

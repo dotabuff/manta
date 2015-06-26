@@ -1760,6 +1760,7 @@ message CMsgDOTARealtimeGameStatsTerse {
 		optional uint32 timestamp = 3;
 		optional int32 game_time = 4;
 		optional bool is_tournament_game = 5;
+		repeated uint32 steam_broadcaster_account_ids = 6;
 	}
 
 	message GraphData {

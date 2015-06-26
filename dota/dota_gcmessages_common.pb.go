@@ -8717,12 +8717,13 @@ func (m *CMsgDOTARealtimeGameStatsTerse_BuildingDetails) GetY() float32 {
 }
 
 type CMsgDOTARealtimeGameStatsTerse_MatchDetails struct {
-	ServerSteamId    *uint64 `protobuf:"fixed64,1,opt,name=server_steam_id" json:"server_steam_id,omitempty"`
-	Matchid          *uint64 `protobuf:"varint,2,opt,name=matchid" json:"matchid,omitempty"`
-	Timestamp        *uint32 `protobuf:"varint,3,opt,name=timestamp" json:"timestamp,omitempty"`
-	GameTime         *int32  `protobuf:"varint,4,opt,name=game_time" json:"game_time,omitempty"`
-	IsTournamentGame *bool   `protobuf:"varint,5,opt,name=is_tournament_game" json:"is_tournament_game,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	ServerSteamId              *uint64  `protobuf:"fixed64,1,opt,name=server_steam_id" json:"server_steam_id,omitempty"`
+	Matchid                    *uint64  `protobuf:"varint,2,opt,name=matchid" json:"matchid,omitempty"`
+	Timestamp                  *uint32  `protobuf:"varint,3,opt,name=timestamp" json:"timestamp,omitempty"`
+	GameTime                   *int32   `protobuf:"varint,4,opt,name=game_time" json:"game_time,omitempty"`
+	IsTournamentGame           *bool    `protobuf:"varint,5,opt,name=is_tournament_game" json:"is_tournament_game,omitempty"`
+	SteamBroadcasterAccountIds []uint32 `protobuf:"varint,6,rep,name=steam_broadcaster_account_ids" json:"steam_broadcaster_account_ids,omitempty"`
+	XXX_unrecognized           []byte   `json:"-"`
 }
 
 func (m *CMsgDOTARealtimeGameStatsTerse_MatchDetails) Reset() {
@@ -8766,6 +8767,13 @@ func (m *CMsgDOTARealtimeGameStatsTerse_MatchDetails) GetIsTournamentGame() bool
 		return *m.IsTournamentGame
 	}
 	return false
+}
+
+func (m *CMsgDOTARealtimeGameStatsTerse_MatchDetails) GetSteamBroadcasterAccountIds() []uint32 {
+	if m != nil {
+		return m.SteamBroadcasterAccountIds
+	}
+	return nil
 }
 
 type CMsgDOTARealtimeGameStatsTerse_GraphData struct {
