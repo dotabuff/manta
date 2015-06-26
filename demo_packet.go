@@ -40,7 +40,7 @@ func (m *pendingMessage) priority() int {
 	return 0
 }
 
-// Provides a sortable structure for storing packets in the same tick.
+// Provides a sortable structure for storing messages in the same packet.
 type pendingMessages []*pendingMessage
 
 func (ms pendingMessages) Len() int      { return len(ms) }
@@ -49,26 +49,29 @@ func (ms pendingMessages) Less(i, j int) bool {
 	if ms[i].tick < ms[j].tick {
 		return true
 	}
-
-	// String tables first
 	return ms[i].priority() < ms[j].priority()
 }
 
 // Internal parser for callback OnCDemoPacket, responsible for extracting
-// multiple inner packets from a single CDemoPacket. This is the main payload
-// for most data in the replay.
+// multiple inner packets from a single CDemoPacket. This is the main structure
+// that contains all other data types in the demo file.
 func (p *Parser) onCDemoPacket(m *dota.CDemoPacket) error {
-	r := newDemoPacketReader(m.GetData())
-
+	// Create a slice to store pending mesages. Messages are read first as
+	// pending messages then sorted before dispatch.
 	ms := make(pendingMessages, 0)
 
-	// Collect all messages from the packet.
-	for r.hasNext() {
-		t, buf := r.readNext()
+	// Read all messages from the buffer. Messages are packed serially as
+	// {type, size, data}. We keep reading until until less than a byte remains.
+	r := newReader(m.GetData())
+	for r.remBytes() > 0 {
+		t := int32(r.readUBitVar())
+		size := int(r.readVarUint32())
+		buf := r.readBytes(size)
 		ms = append(ms, &pendingMessage{p.Tick, t, buf})
 	}
 
-	// Sort messages to ensure context dependencies are met.
+	// Sort messages to ensure dependencies are met. For example, we need to
+	// process string tables before game events that may reference them.
 	sort.Sort(ms)
 
 	// Dispatch messages in order.
@@ -87,33 +90,6 @@ func (p *Parser) onCDemoPacket(m *dota.CDemoPacket) error {
 	}
 
 	return nil
-}
-
-// Creates a new demoPacketHandler, used to read data in the expected format.
-func newDemoPacketReader(buf []byte) *demoPacketReader {
-	return &demoPacketReader{newReader(buf)}
-}
-
-// Reads a series of inner packets from a CDemoPacket buffer
-type demoPacketReader struct {
-	r *reader
-}
-
-// Determines whether or not another packet is available.
-// XXX TODO: this seems wrong, we may be skipping the last packet or some
-// other value at the end of the buffer.
-func (r *demoPacketReader) hasNext() bool {
-	return r.r.remBits() > 10
-}
-
-// Reads the next packet, returning a type and inner buffer.
-// XXX TODO: detail our knowledge of the structure of this packet.
-func (r *demoPacketReader) readNext() (int32, []byte) {
-	t := r.r.readUBitVar()
-	size := r.r.readVarUint32()
-	buf := r.r.readBytes(int(size))
-
-	return int32(t), buf
 }
 
 // Internal parser for callback OnCDemoFullPacket.
