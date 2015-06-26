@@ -1,6 +1,7 @@
 package manta
 
 import (
+	"os"
 	"testing"
 
 	"github.com/dotabuff/manta/dota"
@@ -51,6 +52,15 @@ func TestParseRealMatches(t *testing.T) {
 			expectCombatLogEvents:  51288,
 			expectUnitOrderEvents:  63992,
 		},
+		{
+			matchId:                "1583142634",
+			replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1583142634.dem",
+			expectCombatLogDamage:  3549758,
+			expectCombatLogHealing: 71002,
+			expectCombatLogDeaths:  4199,
+			expectCombatLogEvents:  93808,
+			expectUnitOrderEvents:  104481,
+		},
 	}
 
 	for _, s := range scenarios {
@@ -88,15 +98,15 @@ func TestParseRealMatches(t *testing.T) {
 		err = parser.Start()
 		assert.Nil(err, s.matchId)
 
-		/*
-			Use this to write out instancebaseline fixtures
+		if os.Getenv("MAKE_INSTANCEBASELINES") != "" {
+			// Use this to write out instancebaseline fixtures
 			t, _ := parser.stringTables.getTableByName("instancebaseline")
 			for _, i := range t.items {
 				classId, _ := atoi32(i.key)
 				className := parser.classInfo[classId]
-				_dump_fixture(_sprintf("instancebaseline/%s_%s.rawbuf", className), s.matchId, i.value)
+				_dump_fixture(_sprintf("instancebaseline/%s_%s.rawbuf", s.matchId, className), i.value)
 			}
-		*/
+		}
 
 		/*
 				Use this to dump layout of sendtables
@@ -118,11 +128,11 @@ func TestParseRealMatches(t *testing.T) {
 			}
 		*/
 
-		assert.Equal(s.expectCombatLogDamage, gotCombatLogDamage, s.matchId)
-		assert.Equal(s.expectCombatLogHealing, gotCombatLogHealing, s.matchId)
-		assert.Equal(s.expectCombatLogDeaths, gotCombatLogDeaths, s.matchId)
-		assert.Equal(s.expectCombatLogEvents, gotCombatLogEvents, s.matchId)
-		assert.Equal(s.expectUnitOrderEvents, gotUnitOrderEvents, s.matchId)
+		assert.Equal(s.expectCombatLogDamage, gotCombatLogDamage, _sprintf("%s (%s)", s.matchId, "CombatLogDamage"))
+		assert.Equal(s.expectCombatLogHealing, gotCombatLogHealing, _sprintf("%s (%s)", s.matchId, "CombatLogHealing"))
+		assert.Equal(s.expectCombatLogDeaths, gotCombatLogDeaths, _sprintf("%s (%s)", s.matchId, "CombatLogDeaths"))
+		assert.Equal(s.expectCombatLogEvents, gotCombatLogEvents, _sprintf("%s (%s)", s.matchId, "CombatLogEvents"))
+		assert.Equal(s.expectUnitOrderEvents, gotUnitOrderEvents, _sprintf("%s (%s)", s.matchId, "UnitOrderEvents"))
 	}
 }
 

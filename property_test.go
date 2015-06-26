@@ -811,6 +811,24 @@ func TestReadProperties(t *testing.T) {
 				"m_iTotalEarnedXP.0009": int32(0),
 			},
 		},
+		{
+			tableName:   "CWorld",
+			run:         true,
+			debug:       false,
+			expectCount: 2056,
+			expectKeys: map[string]interface{}{
+				"m_flWaveHeight": 0,
+			},
+		},
+		{
+			tableName:   "CInfoWorldLayer",
+			run:         true,
+			debug:       true,
+			expectCount: 9999,
+			expectKeys: map[string]interface{}{
+				"m_worldName": "dota",
+			},
+		},
 
 		/*
 			WIP:
