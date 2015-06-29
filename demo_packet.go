@@ -21,7 +21,8 @@ func (m *pendingMessage) priority() int {
 		// and should have the highest priority.
 		int32(dota.NET_Messages_net_Tick),
 		int32(dota.SVC_Messages_svc_CreateStringTable),
-		int32(dota.SVC_Messages_svc_UpdateStringTable):
+		int32(dota.SVC_Messages_svc_UpdateStringTable),
+		int32(dota.NET_Messages_net_SpawnGroup_Load):
 		return -10
 
 	case
