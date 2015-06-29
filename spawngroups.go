@@ -33,6 +33,25 @@ func (sg *spawnGroup) writeFixture() {
     }
 }
 
+// Parse a spawnGroup manifest
+// Format: <1 bit IsLZSSCompressed | 24 bit length | Data>
+func (sg *spawnGroup) parse() {
+    reader := newReader(sg.manifest)
+    
+    isCompressed := reader.readBoolean()
+    size := reader.readBits(24)
+    data := reader.readBytes(int(size))
+    
+    if isCompressed {
+        dataUnc, err := unlzss(data)
+        if err != nil {
+            _panicf("Error uncompressing spawnGroup data %s", err)   
+        }
+        
+        data = dataUnc
+    }
+}
+
 func (p *Parser) onCNETMsg_SpawnGroup_Load(m *dota.CNETMsg_SpawnGroup_Load) error {
     sg := &spawnGroup{
         worldName     : m.GetWorldname(),
@@ -63,7 +82,7 @@ func (p *Parser) onCNETMsg_SpawnGroup_ManifestUpdate(m *dota.CNETMsg_SpawnGroup_
     // - If it's incomplete, append the rest of the data
     // - Always update the completion status
     //
-    // There might be a delta-update mechanism but the manifest has to be parsed first
+    // There might be a delta-update mechanism but the manifest decyphered first
 
     if sg.complete {
         sg.manifest = m.GetSpawngroupmanifest()
