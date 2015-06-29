@@ -36,6 +36,7 @@ type Parser struct {
 	packetEntities map[int32]*packetEntity
 	sendTables     *sendTables
 	stringTables   *stringTables
+	spawnGroups    map[uint32]*spawnGroup
 
 	reader     *reader
 	isStopping bool
@@ -73,6 +74,7 @@ func NewParser(buf []byte) (*Parser, error) {
 		classBaseline:  make(map[int32]map[string]interface{}),
 		packetEntities: make(map[int32]*packetEntity),
 		stringTables:   newStringTables(),
+		spawnGroups:    make(map[uint32]*spawnGroup),
 	}
 
 	// Parse out the header, ensuring that it's valid.
