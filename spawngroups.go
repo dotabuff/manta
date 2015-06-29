@@ -1,6 +1,8 @@
 package manta
 
 import (
+    "io/ioutil"
+    "fmt"
 	"github.com/dotabuff/manta/dota"
 )
 
@@ -19,6 +21,16 @@ type spawnGroup struct {
     localName     string
     parentName    string
     complete      bool
+}
+
+func (sg *spawnGroup) writeFixture() {
+    // [id]_[isComplete]_sg_manifest.raw
+    fname := fmt.Sprintf("%d_%t_sg_manifest.raw", sg.handle, sg.complete);
+    err := ioutil.WriteFile(fname, sg.manifest, 0644)
+    
+    if err != nil {
+        _panicf("Error writing spawnGroup fixture, %s", err)
+    }
 }
 
 func (p *Parser) onCNETMsg_SpawnGroup_Load(m *dota.CNETMsg_SpawnGroup_Load) error {
@@ -43,7 +55,7 @@ func (p *Parser) onCNETMsg_SpawnGroup_Load(m *dota.CNETMsg_SpawnGroup_Load) erro
 func (p *Parser) onCNETMsg_SpawnGroup_ManifestUpdate(m *dota.CNETMsg_SpawnGroup_ManifestUpdate) error {
     sg, ok := p.spawnGroups[m.GetSpawngrouphandle()]
     if !ok {
-        _panicf("Unable to find spawngroup %d for update %u", m.GetSpawngrouphandle(), p.Tick)
+        _panicf("Unable to find spawngroup %d for update %d", m.GetSpawngrouphandle(), p.Tick)
     }
 
     // Current rationale:
