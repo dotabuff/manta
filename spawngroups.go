@@ -54,18 +54,18 @@ func (sg *spawnGroup) parse() {
 
     reader2 := newReader(data)
     iSize := reader2.readBits(8)
+    _ = iSize
 
     // The actual size reading is probably just readUntilNullByte
     // @Todo: find a package that is larger that 256 entries to investigate this
-    if iSize > 0 {
-        null1 := reader2.readBits(8)
-        ressourceStrings := reader2.readBits(8)
-        null2 := reader2.readBits(8)
-        unkown := reader2.readBits(8)
-        null3 := reader2.readBits(8)
+    
+    // null1 := reader2.readBits(8)
+    // ressourceStrings := reader2.readBits(8)
+    // null2 := reader2.readBits(8)
+    // unkown := reader2.readBits(8)
+    // null3 := reader2.readBits(8)
 
-        // @Todo: decypher the rest of the package and add it to the spawnGroup struct
-    }
+    // @Todo: decypher the rest of the package and add it to the spawnGroup struct
 }
 
 func (p *Parser) onCNETMsg_SpawnGroup_Load(m *dota.CNETMsg_SpawnGroup_Load) error {
