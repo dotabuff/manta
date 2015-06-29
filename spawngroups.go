@@ -27,7 +27,7 @@ func (sg *spawnGroup) writeFixture() {
     // [id]_[isComplete]_sg_manifest.raw
     fname := fmt.Sprintf("%d_%t_sg_manifest.raw", sg.handle, sg.complete);
     err := ioutil.WriteFile(fname, sg.manifest, 0644)
-    
+
     if err != nil {
         _panicf("Error writing spawnGroup fixture, %s", err)
     }
@@ -35,20 +35,36 @@ func (sg *spawnGroup) writeFixture() {
 
 // Parse a spawnGroup manifest
 // Format: <1 bit IsLZSSCompressed | 24 bit length | Data>
+// Data: <8 bit arrayLength | 0 | 8 bit ressourceStrings | 0 | 8 bit unkown | 0 | dataTypes * arrayLength | 0 | ... data ...>
 func (sg *spawnGroup) parse() {
     reader := newReader(sg.manifest)
-    
+
     isCompressed := reader.readBoolean()
     size := reader.readBits(24)
     data := reader.readBytes(int(size))
-    
+
     if isCompressed {
         dataUnc, err := unlzss(data)
         if err != nil {
-            _panicf("Error uncompressing spawnGroup data %s", err)   
+            _panicf("Error uncompressing spawnGroup data %s", err)
         }
-        
+
         data = dataUnc
+    }
+
+    reader2 := newReader(data)
+    iSize := reader2.readBits(8)
+
+    // The actual size reading is probably just readUntilNullByte
+    // @Todo: find a package that is larger that 256 entries to investigate this
+    if iSize > 0 {
+        null1 := reader2.readBits(8)
+        ressourceStrings := reader2.readBits(8)
+        null2 := reader2.readBits(8)
+        unkown := reader2.readBits(8)
+        null3 := reader2.readBits(8)
+
+        // @Todo: decypher the rest of the package and add it to the spawnGroup struct
     }
 }
 
@@ -77,19 +93,17 @@ func (p *Parser) onCNETMsg_SpawnGroup_ManifestUpdate(m *dota.CNETMsg_SpawnGroup_
         _panicf("Unable to find spawngroup %d for update %d", m.GetSpawngrouphandle(), p.Tick)
     }
 
-    // Current rationale:
-    // - If the previous spawn group is complete, overrride it with the new one
-    // - If it's incomplete, append the rest of the data
-    // - Always update the completion status
-    //
-    // There might be a delta-update mechanism but the manifest decyphered first
+    // Invoke the parse method, the data should be added to the spawnGroup variable
+    // when it is fully decyphered
 
     if sg.complete {
         sg.manifest = m.GetSpawngroupmanifest()
         sg.complete = !m.GetManifestincomplete()
+	    sg.parse()
     } else {
-        sg.manifest = append(sg.manifest, m.GetSpawngroupmanifest()...)
+        sg.manifest = m.GetSpawngroupmanifest()
         sg.complete = !m.GetManifestincomplete()
+	    sg.parse()
     }
 
 	return nil
