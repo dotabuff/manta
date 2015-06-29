@@ -95,6 +95,11 @@ func NewParser(buf []byte) (*Parser, error) {
 	parser.Callbacks.OnCSVCMsg_SendTable(parser.onCSVCMsg_SendTable)
 	parser.Callbacks.OnCSVCMsg_UpdateStringTable(parser.onCSVCMsg_UpdateStringTable)
 	parser.Callbacks.OnCSVCMsg_ServerInfo(parser.onCSVCMsg_ServerInfo)
+	parser.Callbacks.OnCNETMsg_SpawnGroup_Load(parser.onCNETMsg_SpawnGroup_Load)
+	parser.Callbacks.OnCNETMsg_SpawnGroup_ManifestUpdate(parser.onCNETMsg_SpawnGroup_ManifestUpdate)
+	parser.Callbacks.OnCNETMsg_SpawnGroup_SetCreationTick(parser.onCNETMsg_SpawnGroup_SetCreationTick)
+	parser.Callbacks.OnCNETMsg_SpawnGroup_Unload(parser.onCNETMsg_SpawnGroup_Unload)
+	parser.Callbacks.OnCNETMsg_SpawnGroup_LoadCompleted(parser.onCNETMsg_SpawnGroup_LoadCompleted)
 	parser.Callbacks.OnCMsgSource1LegacyGameEvent(parser.GameEvents.onCMsgSource1LegacyGameEvent)
 
 	// Panic if we see any of these
