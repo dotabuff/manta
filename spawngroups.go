@@ -53,19 +53,20 @@ func (sg *spawnGroup) parse() {
     }
 
     reader2 := newReader(data)
-    iSize := reader2.readBits(8)
-    _ = iSize
-
-    // The actual size reading is probably just readUntilNullByte
-    // @Todo: find a package that is larger that 256 entries to investigate this
+    rTypes := reader2.readBits(16) // number of different ressource types in the data
     
-    // null1 := reader2.readBits(8)
-    // ressourceStrings := reader2.readBits(8)
-    // null2 := reader2.readBits(8)
-    // unkown := reader2.readBits(8)
-    // null3 := reader2.readBits(8)
-
-    // @Todo: decypher the rest of the package and add it to the spawnGroup struct
+    if rTypes > 1 {
+        rStrings := reader2.readBits(16) // number of models / particles / ressources to load
+        _ = reader2.readBits(16) // currently not known, probably the size for another field
+        
+        for i := 0; uint32(i) < rTypes; i++ {
+            _ = reader2.readString() // e.g. vmdl, vmat, vpcf
+        }
+        
+        for i := 0; uint32(i) < rStrings; i++ {
+            _ = reader2.readString() // e.g. models/items/rubick/peculiar_prestidigitator_shoulders/
+        }
+    }
 }
 
 func (p *Parser) onCNETMsg_SpawnGroup_Load(m *dota.CNETMsg_SpawnGroup_Load) error {
@@ -84,6 +85,7 @@ func (p *Parser) onCNETMsg_SpawnGroup_Load(m *dota.CNETMsg_SpawnGroup_Load) erro
 	}
 
 	p.spawnGroups[m.GetSpawngrouphandle()] = sg
+	sg.parse()
 	return nil
 }
 
@@ -96,15 +98,9 @@ func (p *Parser) onCNETMsg_SpawnGroup_ManifestUpdate(m *dota.CNETMsg_SpawnGroup_
     // Invoke the parse method, the data should be added to the spawnGroup variable
     // when it is fully decyphered
 
-    if sg.complete {
-        sg.manifest = m.GetSpawngroupmanifest()
-        sg.complete = !m.GetManifestincomplete()
-	    sg.parse()
-    } else {
-        sg.manifest = m.GetSpawngroupmanifest()
-        sg.complete = !m.GetManifestincomplete()
-	    sg.parse()
-    }
+    sg.manifest = m.GetSpawngroupmanifest()
+    sg.complete = !m.GetManifestincomplete()
+    sg.parse()
 
 	return nil
 }
