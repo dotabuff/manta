@@ -1,6 +1,7 @@
 package manta
 
 import (
+	"encoding/json"
 	"strconv"
 	"strings"
 
@@ -145,6 +146,28 @@ func (p *sendProp) Describe() string {
 		out += _sprintf(" fieldSerVer:%d", *p.fieldSerializerVersion)
 	}
 	return out
+}
+
+// Dumps the json representation of the new FlattenedSerializer Packets
+func dumpSendTables(m *dota.CDemoSendTables) string {
+	// This packet just contains a single large buffer
+	r := newReader(m.GetData())
+
+	// The buffer starts with a varint encoded length
+	size := int(r.readVarUint32())
+	if size != r.remBytes() {
+		_panicf("expected %d additional bytes, got %d", size, r.remBytes())
+	}
+
+	// Read the rest of the buffer as a CSVCMsg_FlattenedSerializer.
+	buf := r.readBytes(size)
+	msg := &dota.CSVCMsg_FlattenedSerializer{}
+	if err := proto.Unmarshal(buf, msg); err != nil {
+		_panicf("cannot decode proto: %s", err)
+	}
+
+	str, _ := json.MarshalIndent(msg, "", "  ") // two space ident
+	return string(str)
 }
 
 // Parses a CDemoSendTables buffer, producing a sendTables object.
