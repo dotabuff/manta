@@ -1,9 +1,9 @@
 package manta
 
 import (
-	"io/ioutil"
 	"fmt"
 	"github.com/dotabuff/manta/dota"
+	"io/ioutil"
 )
 
 // Represents the state of a spawngroup
@@ -25,7 +25,7 @@ type spawnGroup struct {
 
 func (sg *spawnGroup) writeFixture() {
 	// [id]_[isComplete]_sg_manifest.raw
-	fname := fmt.Sprintf("%d_%t_sg_manifest.raw", sg.handle, sg.complete);
+	fname := fmt.Sprintf("%d_%t_sg_manifest.raw", sg.handle, sg.complete)
 	err := ioutil.WriteFile(fname, sg.manifest, 0644)
 
 	if err != nil {
@@ -57,7 +57,7 @@ func (sg *spawnGroup) parse() {
 
 	if rTypes > 1 {
 		rStrings := reader2.readBits(16) // number of models / particles / ressources to load
-		_ = reader2.readBits(16) // currently not known, probably the size for another field
+		_ = reader2.readBits(16)         // currently not known, probably the size for another field
 
 		for i := 0; uint32(i) < rTypes; i++ {
 			_ = reader2.readString() // e.g. vmdl, vmat, vpcf
@@ -71,17 +71,17 @@ func (sg *spawnGroup) parse() {
 
 func (p *Parser) onCNETMsg_SpawnGroup_Load(m *dota.CNETMsg_SpawnGroup_Load) error {
 	sg := &spawnGroup{
-		worldName     : m.GetWorldname(),
-		entLumpName   : m.GetEntitylumpname(),
-		entFilterName : m.GetEntityfiltername(),
-		handle        : m.GetSpawngrouphandle(),
-		ownerHandle   : m.GetSpawngroupownerhandle(),
-		manifest      : m.GetSpawngroupmanifest(),
-		flags         : m.GetFlags(),
-		tickCount     : m.GetTickcount(),
-		localName     : m.GetLocalnamefixup(),
-		parentName    : m.GetParentnamefixup(),
-		complete      : !m.GetManifestincomplete(),
+		worldName:     m.GetWorldname(),
+		entLumpName:   m.GetEntitylumpname(),
+		entFilterName: m.GetEntityfiltername(),
+		handle:        m.GetSpawngrouphandle(),
+		ownerHandle:   m.GetSpawngroupownerhandle(),
+		manifest:      m.GetSpawngroupmanifest(),
+		flags:         m.GetFlags(),
+		tickCount:     m.GetTickcount(),
+		localName:     m.GetLocalnamefixup(),
+		parentName:    m.GetParentnamefixup(),
+		complete:      !m.GetManifestincomplete(),
 	}
 
 	p.spawnGroups[m.GetSpawngrouphandle()] = sg
