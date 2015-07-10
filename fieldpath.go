@@ -19,19 +19,19 @@ func fielpath_init(parentTbl *dt) *fieldpath {
 }
 
 func (fp *fieldpath) PlusOne(r *reader) {
-
+	fp.index[len(fp.index)-1] += 1
 }
 
 func (fp *fieldpath) PlusTwo(r *reader) {
-
+	fp.index[len(fp.index)-1] += 2
 }
 
 func (fp *fieldpath) PlusThree(r *reader) {
-
+	fp.index[len(fp.index)-1] += 3
 }
 
 func (fp *fieldpath) PlusFour(r *reader) {
-
+	fp.index[len(fp.index)-1] += 4
 }
 
 func (fp *fieldpath) PlusN(r *reader) {
