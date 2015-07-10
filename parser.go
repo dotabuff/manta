@@ -36,6 +36,7 @@ type Parser struct {
 	packetEntities map[int32]*packetEntity
 	sendTables     *sendTables
 	stringTables   *stringTables
+	spawnGroups    map[uint32]*spawnGroup
 
 	reader     *reader
 	isStopping bool
@@ -73,6 +74,7 @@ func NewParser(buf []byte) (*Parser, error) {
 		classBaseline:  make(map[int32]map[string]interface{}),
 		packetEntities: make(map[int32]*packetEntity),
 		stringTables:   newStringTables(),
+		spawnGroups:    make(map[uint32]*spawnGroup),
 	}
 
 	// Parse out the header, ensuring that it's valid.
@@ -95,6 +97,11 @@ func NewParser(buf []byte) (*Parser, error) {
 	parser.Callbacks.OnCSVCMsg_SendTable(parser.onCSVCMsg_SendTable)
 	parser.Callbacks.OnCSVCMsg_UpdateStringTable(parser.onCSVCMsg_UpdateStringTable)
 	parser.Callbacks.OnCSVCMsg_ServerInfo(parser.onCSVCMsg_ServerInfo)
+	parser.Callbacks.OnCNETMsg_SpawnGroup_Load(parser.onCNETMsg_SpawnGroup_Load)
+	parser.Callbacks.OnCNETMsg_SpawnGroup_ManifestUpdate(parser.onCNETMsg_SpawnGroup_ManifestUpdate)
+	parser.Callbacks.OnCNETMsg_SpawnGroup_SetCreationTick(parser.onCNETMsg_SpawnGroup_SetCreationTick)
+	parser.Callbacks.OnCNETMsg_SpawnGroup_Unload(parser.onCNETMsg_SpawnGroup_Unload)
+	parser.Callbacks.OnCNETMsg_SpawnGroup_LoadCompleted(parser.onCNETMsg_SpawnGroup_LoadCompleted)
 	parser.Callbacks.OnCMsgSource1LegacyGameEvent(parser.GameEvents.onCMsgSource1LegacyGameEvent)
 
 	// Panic if we see any of these
