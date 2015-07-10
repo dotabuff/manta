@@ -1,6 +1,7 @@
 package manta
 
 import (
+	"encoding/json"
 	"os"
 
 	"github.com/dotabuff/manta/dota"
@@ -38,6 +39,23 @@ type dt struct {
 type flattened_serializers struct {
 	Serializers map[string]map[int32]*dt // serializer name -> [versions]
 	proto       *dota.CSVCMsg_FlattenedSerializer
+}
+
+// Dumps a flattened table as json
+func (sers *flattened_serializers) dump_json(name string) string {
+	// Can't marshal map[int32]x
+	type jContainer struct {
+		Version int32
+		Data    *dt
+	}
+
+	j := make([]jContainer, 0)
+	for i, o := range sers.Serializers[name] {
+		j = append(j, jContainer{i, o})
+	}
+
+	str, _ := json.MarshalIndent(j, "", "  ") // two space ident
+	return string(str)
 }
 
 // Fills properties for a data table
