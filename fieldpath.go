@@ -18,162 +18,162 @@ func fielpath_init(parentTbl *dt) *fieldpath {
 	return fp
 }
 
-func (fp *fieldpath) PlusOne(r *reader) {
+func PlusOne(r *reader, fp *fieldpath) {
 	fp.index[len(fp.index)-1] += 1
 }
 
-func (fp *fieldpath) PlusTwo(r *reader) {
+func PlusTwo(r *reader, fp *fieldpath) {
 	fp.index[len(fp.index)-1] += 2
 }
 
-func (fp *fieldpath) PlusThree(r *reader) {
+func PlusThree(r *reader, fp *fieldpath) {
 	fp.index[len(fp.index)-1] += 3
 }
 
-func (fp *fieldpath) PlusFour(r *reader) {
+func PlusFour(r *reader, fp *fieldpath) {
 	fp.index[len(fp.index)-1] += 4
 }
 
-func (fp *fieldpath) PlusN(r *reader) {
+func PlusN(r *reader, fp *fieldpath) {
 
 }
 
-func (fp *fieldpath) PushOneLeftDeltaZeroRightZero(r *reader) {
+func PushOneLeftDeltaZeroRightZero(r *reader, fp *fieldpath) {
 
 }
 
-func (fp *fieldpath) PushOneLeftDeltaZeroRightNonZero(r *reader) {
+func PushOneLeftDeltaZeroRightNonZero(r *reader, fp *fieldpath) {
 
 }
 
-func (fp *fieldpath) PushOneLeftDeltaOneRightZero(r *reader) {
+func PushOneLeftDeltaOneRightZero(r *reader, fp *fieldpath) {
 
 }
 
-func (fp *fieldpath) PushOneLeftDeltaOneRightNonZero(r *reader) {
+func PushOneLeftDeltaOneRightNonZero(r *reader, fp *fieldpath) {
 
 }
 
-func (fp *fieldpath) PushOneLeftDeltaNRightZero(r *reader) {
+func PushOneLeftDeltaNRightZero(r *reader, fp *fieldpath) {
 
 }
 
-func (fp *fieldpath) PushOneLeftDeltaNRightNonZero(r *reader) {
+func PushOneLeftDeltaNRightNonZero(r *reader, fp *fieldpath) {
 
 }
 
-func (fp *fieldpath) PushOneLeftDeltaNRightNonZeroPack6Bits(r *reader) {
+func PushOneLeftDeltaNRightNonZeroPack6Bits(r *reader, fp *fieldpath) {
 
 }
 
-func (fp *fieldpath) PushOneLeftDeltaNRightNonZeroPack8Bits(r *reader) {
+func PushOneLeftDeltaNRightNonZeroPack8Bits(r *reader, fp *fieldpath) {
 
 }
 
-func (fp *fieldpath) PushTwoLeftDeltaZero(r *reader) {
+func PushTwoLeftDeltaZero(r *reader, fp *fieldpath) {
 
 }
 
-func (fp *fieldpath) PushTwoLeftDeltaOne(r *reader) {
+func PushTwoLeftDeltaOne(r *reader, fp *fieldpath) {
 
 }
 
-func (fp *fieldpath) PushTwoLeftDeltaN(r *reader) {
+func PushTwoLeftDeltaN(r *reader, fp *fieldpath) {
 
 }
 
-func (fp *fieldpath) PushTwoPack5LeftDeltaZero(r *reader) {
+func PushTwoPack5LeftDeltaZero(r *reader, fp *fieldpath) {
 
 }
 
-func (fp *fieldpath) PushTwoPack5LeftDeltaOne(r *reader) {
+func PushTwoPack5LeftDeltaOne(r *reader, fp *fieldpath) {
 
 }
 
-func (fp *fieldpath) PushTwoPack5LeftDeltaN(r *reader) {
+func PushTwoPack5LeftDeltaN(r *reader, fp *fieldpath) {
 
 }
 
-func (fp *fieldpath) PushThreeLeftDeltaZero(r *reader) {
+func PushThreeLeftDeltaZero(r *reader, fp *fieldpath) {
 
 }
 
-func (fp *fieldpath) PushThreeLeftDeltaOne(r *reader) {
+func PushThreeLeftDeltaOne(r *reader, fp *fieldpath) {
 
 }
 
-func (fp *fieldpath) PushThreeLeftDeltaN(r *reader) {
+func PushThreeLeftDeltaN(r *reader, fp *fieldpath) {
 
 }
 
-func (fp *fieldpath) PushThreePack5LeftDeltaZero(r *reader) {
+func PushThreePack5LeftDeltaZero(r *reader, fp *fieldpath) {
 
 }
 
-func (fp *fieldpath) PushThreePack5LeftDeltaOne(r *reader) {
+func PushThreePack5LeftDeltaOne(r *reader, fp *fieldpath) {
 
 }
 
-func (fp *fieldpath) PushThreePack5LeftDeltaN(r *reader) {
+func PushThreePack5LeftDeltaN(r *reader, fp *fieldpath) {
 
 }
 
-func (fp *fieldpath) PushN(r *reader) {
+func PushN(r *reader, fp *fieldpath) {
 
 }
 
-func (fp *fieldpath) PushNAndNonTopological(r *reader) {
+func PushNAndNonTopological(r *reader, fp *fieldpath) {
 
 }
 
-func (fp *fieldpath) PopOnePlusOne(r *reader) {
+func PopOnePlusOne(r *reader, fp *fieldpath) {
 
 }
 
-func (fp *fieldpath) PopOnePlusN(r *reader) {
+func PopOnePlusN(r *reader, fp *fieldpath) {
 
 }
 
-func (fp *fieldpath) PopAllButOnePlusOne(r *reader) {
+func PopAllButOnePlusOne(r *reader, fp *fieldpath) {
 
 }
 
-func (fp *fieldpath) PopAllButOnePlusNPackN(r *reader) {
+func PopAllButOnePlusNPackN(r *reader, fp *fieldpath) {
 
 }
 
-func (fp *fieldpath) PopAllButOnePlusNPack3Bits(r *reader) {
+func PopAllButOnePlusNPack3Bits(r *reader, fp *fieldpath) {
 
 }
 
-func (fp *fieldpath) PopAllButOnePlusNPack6Bits(r *reader) {
+func PopAllButOnePlusNPack6Bits(r *reader, fp *fieldpath) {
 
 }
 
-func (fp *fieldpath) PopNPlusOne(r *reader) {
+func PopNPlusOne(r *reader, fp *fieldpath) {
 
 }
 
-func (fp *fieldpath) PopNPlusN(r *reader) {
+func PopNPlusN(r *reader, fp *fieldpath) {
 
 }
 
-func (fp *fieldpath) PopNAndNonTopographical(r *reader) {
+func PopNAndNonTopographical(r *reader, fp *fieldpath) {
 
 }
 
-func (fp *fieldpath) NonTopoComplex(r *reader) {
+func NonTopoComplex(r *reader, fp *fieldpath) {
 
 }
 
-func (fp *fieldpath) NonTopoPenultimatePlusOne(r *reader) {
+func NonTopoPenultimatePlusOne(r *reader, fp *fieldpath) {
 
 }
 
-func (fp *fieldpath) NonTopoComplexPack4Bits(r *reader) {
+func NonTopoComplexPack4Bits(r *reader, fp *fieldpath) {
 
 }
 
-func (fp *fieldpath) FieldPathEncodeFinish(r *reader) {
+func FieldPathEncodeFinish(r *reader, fp *fieldpath) {
 
 }
