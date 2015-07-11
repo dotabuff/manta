@@ -2,7 +2,6 @@ package manta
 
 import (
 	"encoding/json"
-	"os"
 
 	"github.com/dotabuff/manta/dota"
 	"github.com/golang/protobuf/proto"
@@ -109,8 +108,8 @@ func (sers *flattened_serializers) recurse_table(cur *dota.ProtoFlattenedSeriali
 	return table
 }
 
-// Internal callback for OnCDemoSendTables.
-func (p *Parser) onCDemoSendTablesNew(m *dota.CDemoSendTables) error {
+// Parses a CDemoSendTables packet
+func parseSendTablesNew(m *dota.CDemoSendTables) (*flattened_serializers, error) {
 	// This packet just contains a single large buffer
 	r := newReader(m.GetData())
 
@@ -145,8 +144,11 @@ func (p *Parser) onCDemoSendTablesNew(m *dota.CDemoSendTables) error {
 		fs.Serializers[sName][sVer] = fs.recurse_table(o)
 	}
 
-	// Exit here before work continues
-	os.Exit(0)
+	return fs, nil
+}
 
+// Internal callback for OnCDemoSendTables.
+func (p *Parser) onCDemoSendTablesNew(m *dota.CDemoSendTables) error {
+	parseSendTablesNew(m)
 	return nil
 }
