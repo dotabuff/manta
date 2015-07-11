@@ -23,7 +23,8 @@ type dt_field struct {
 	LowValue  *float32
 	HighValue *float32
 
-	Version *int32
+	Version    *int32
+	Serializer *PropertySerializer
 }
 
 // A single datatable
@@ -38,6 +39,7 @@ type dt struct {
 type flattened_serializers struct {
 	Serializers map[string]map[int32]*dt // serializer name -> [versions]
 	proto       *dota.CSVCMsg_FlattenedSerializer
+	pst         *PropertySerializerTable
 }
 
 // Dumps a flattened table as json
@@ -82,8 +84,9 @@ func (sers *flattened_serializers) recurse_table(cur *dota.ProtoFlattenedSeriali
 			LowValue:  pField.LowValue,
 			HighValue: pField.HighValue,
 
-			Type:    (sers.proto.GetSymbols()[pField.GetVarTypeSym()]),
-			Version: pField.FieldSerializerVersion,
+			Type:       (sers.proto.GetSymbols()[pField.GetVarTypeSym()]),
+			Version:    pField.FieldSerializerVersion,
+			Serializer: sers.pst.GetPropertySerializerByName((sers.proto.GetSymbols()[pField.GetVarTypeSym()])),
 		}
 
 		// Optional: Attach the serializer version for the property if applicable
@@ -109,7 +112,7 @@ func (sers *flattened_serializers) recurse_table(cur *dota.ProtoFlattenedSeriali
 }
 
 // Parses a CDemoSendTables packet
-func parseSendTablesNew(m *dota.CDemoSendTables) (*flattened_serializers, error) {
+func parseSendTablesNew(m *dota.CDemoSendTables, pst *PropertySerializerTable) (*flattened_serializers, error) {
 	// This packet just contains a single large buffer
 	r := newReader(m.GetData())
 
@@ -130,6 +133,7 @@ func parseSendTablesNew(m *dota.CDemoSendTables) (*flattened_serializers, error)
 	fs := &flattened_serializers{
 		Serializers: make(map[string]map[int32]*dt),
 		proto:       msg,
+		pst:         pst,
 	}
 
 	// Iterate through all flattened serializers and fill their properties
@@ -149,6 +153,6 @@ func parseSendTablesNew(m *dota.CDemoSendTables) (*flattened_serializers, error)
 
 // Internal callback for OnCDemoSendTables.
 func (p *Parser) onCDemoSendTablesNew(m *dota.CDemoSendTables) error {
-	parseSendTablesNew(m)
+	parseSendTablesNew(m, nil) // @todo: Add the table to the parser
 	return nil
 }
