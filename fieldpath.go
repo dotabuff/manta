@@ -121,12 +121,9 @@ func PlusOne(r *reader, fp *fieldpath) {
 		_panicf("Overflow in PlusOne")
 	}
 
-	if field.Table != nil {
-		_panicf("Trying to push dt as field index")
+	if field.Table == nil {
+		fp.fields = append(fp.fields, field.Field)
 	}
-
-	// Append the field to our list
-	fp.fields = append(fp.fields, field.Field)
 }
 
 func PlusTwo(r *reader, fp *fieldpath) {
@@ -145,8 +142,8 @@ func PlusTwo(r *reader, fp *fieldpath) {
 		_panicf("Overflow in PlusOne")
 	}
 
-	if field.Table != nil {
-		_panicf("Trying to push dt as field index")
+	if field.Table == nil {
+		fp.fields = append(fp.fields, field.Field)
 	}
 
 	// Append the field to our list
@@ -169,8 +166,8 @@ func PlusThree(r *reader, fp *fieldpath) {
 		_panicf("Overflow in PlusOne")
 	}
 
-	if field.Table != nil {
-		_panicf("Trying to push dt as field index")
+	if field.Table == nil {
+		fp.fields = append(fp.fields, field.Field)
 	}
 
 	// Append the field to our list
@@ -193,8 +190,8 @@ func PlusFour(r *reader, fp *fieldpath) {
 		_panicf("Overflow in PlusOne")
 	}
 
-	if field.Table != nil {
-		_panicf("Trying to push dt as field index")
+	if field.Table == nil {
+		fp.fields = append(fp.fields, field.Field)
 	}
 
 	// Append the field to our list
@@ -211,6 +208,21 @@ func PushOneLeftDeltaZeroRightZero(r *reader, fp *fieldpath) {
 	if debugMode {
 		_debugf("Calling PushOneLeftDeltaZeroRightZero, %s", fp.hierarchy[0].Name)
 	}
+
+	// Get current field and index
+	tbl := fp.hierarchy[len(fp.index)-1]
+	field := tbl.Properties[fp.index[len(fp.index)-1]]
+
+	if field.Table == nil {
+		_panicf("Trying to push field as table")
+	}
+
+	// Push the table, reset position to -1
+	fp.hierarchy = append(fp.hierarchy, field.Table)
+	fp.index = append(fp.index, -1)
+
+	// We abuse PlusOne instead of copying the verification code
+	PlusOne(r, fp)
 }
 
 func PushOneLeftDeltaZeroRightNonZero(r *reader, fp *fieldpath) {
@@ -223,6 +235,35 @@ func PushOneLeftDeltaOneRightZero(r *reader, fp *fieldpath) {
 	if debugMode {
 		_debugf("Calling PushOneLeftDeltaOneRightZero, %s", fp.hierarchy[0].Name)
 	}
+
+	// PlusOne to advance the hierarchy to the next datatable
+	PlusOne(r, fp)
+
+	// Get current field and index
+	tbl := fp.hierarchy[len(fp.index)-1]
+	field := tbl.Properties[fp.index[len(fp.index)-1]]
+
+	if field.Table == nil {
+		_panicf("Trying to push field as table, %s", field.Field.Name)
+		//
+		// Explanation why this is failing on CWorld:
+		// - Param 28 is a float[24]
+		// - The fact that it is an array is not relayed in the flatser-protobuf
+		// - The current PushOneLeftDeltaOneRightZero expectes (rightfully) a datatable
+		// - We panic
+		//
+		// Fix:
+		// - Implement the property_serializers table, create an IsArray function
+		// - Run it analog to field.Table
+		//
+	}
+
+	// Push the table, reset position to -1
+	fp.hierarchy = append(fp.hierarchy, field.Table)
+	fp.index = append(fp.index, -1)
+
+	// We abuse PlusOne instead of copying the verification code
+	PlusOne(r, fp)
 }
 
 func PushOneLeftDeltaOneRightNonZero(r *reader, fp *fieldpath) {
