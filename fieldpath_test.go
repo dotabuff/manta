@@ -21,14 +21,20 @@ func TestFieldpath(t *testing.T) {
 		{
 			tableName:   "CRagdollManager",
 			run:         true,
-			debug:       true,
+			debug:       false,
 			expectCount: 1,
 		},
 		{
 			tableName:   "CDOTATeam",
 			run:         true,
-			debug:       true,
+			debug:       false,
 			expectCount: 15,
+		},
+		{
+			tableName:   "CWorld",
+			run:         true,
+			debug:       true,
+			expectCount: 99, // tbd
 		},
 	}
 
