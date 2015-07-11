@@ -15,8 +15,9 @@ type dt_property struct {
 
 // A datatable field
 type dt_field struct {
-	Name string
-	Type string
+	Name  string
+	Type  string
+	Index uint32
 
 	Flags     *int32
 	BitCount  *int32
@@ -77,7 +78,8 @@ func (sers *flattened_serializers) recurse_table(cur *dota.ProtoFlattenedSeriali
 
 		// Field can always be set
 		prop.Field = &dt_field{
-			Name: sers.proto.GetSymbols()[pField.GetVarNameSym()],
+			Name:  sers.proto.GetSymbols()[pField.GetVarNameSym()],
+			Index: 0,
 
 			Flags:     pField.EncodeFlags,
 			BitCount:  pField.BitCount,
