@@ -2,6 +2,7 @@ package manta
 
 // A fieldpath, used to walk through the flattened table hierarchy
 type fieldpath struct {
+	fields    []*dt_field
 	hierarchy []*dt
 	index     []int32
 	tree      *HuffmanTree
@@ -31,9 +32,7 @@ func fieldpath_init(parentTbl *dt, huf *HuffmanTree) *fieldpath {
 }
 
 // Walk an encoded fieldpath based on a huffman tree
-func (fp *fieldpath) fieldpath_walk(r *reader) []dt_field {
-	fields := make([]dt_field, 0)
-
+func (fp *fieldpath) fieldpath_walk(r *reader) {
 	// where is do-while when you need it -.-
 	// @todo: Refactor this using node.IsLeaf()
 	node := (*fp.tree).(HuffmanNode)
@@ -56,8 +55,6 @@ func (fp *fieldpath) fieldpath_walk(r *reader) []dt_field {
 			}
 		}
 	}
-
-	return fields
 }
 
 // Returns a huffman tree based on the operation weights
@@ -109,7 +106,23 @@ func fieldpath_huffman() HuffmanTree {
 }
 
 func PlusOne(r *reader, fp *fieldpath) {
+	// Increment the index
 	fp.index[len(fp.index)-1] += 1
+
+	// Verify that the field exists
+	tbl := fp.hierarchy[len(fp.index)-1]
+	field := tbl.Properties[fp.index[len(fp.index)-1]]
+
+	if field == nil {
+		_panicf("Overflow in PlusOne")
+	}
+
+	if field.Table != nil {
+		_panicf("Trying to push dt as field index")
+	}
+
+	// Append the field to our list
+	fp.fields = append(fp.fields, field.Field)
 }
 
 func PlusTwo(r *reader, fp *fieldpath) {
