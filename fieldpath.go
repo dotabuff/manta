@@ -228,6 +228,18 @@ func PushOneLeftDeltaZeroRightZero(r *reader, fp *fieldpath) {
 func PushOneLeftDeltaZeroRightNonZero(r *reader, fp *fieldpath) {
 	if debugMode {
 		_debugf("Calling PushOneLeftDeltaZeroRightNonZero, %s, %d", fp.hierarchy[0].Name, fp.index[len(fp.index)-1])
+
+		//
+		// This get's called for the following fp_trace:
+		//
+		// '3/28/23','3/29',15
+		//
+		// Move:
+		// -----
+		// FROM: table["m_animationController.m_flPoseParameter"][23]
+		// TO: table["m_animationController.m_AnimOverlay"]
+		//
+		// This doesn't seem correct, I'd expected PopOnePlusOne to be called here
 	}
 }
 
