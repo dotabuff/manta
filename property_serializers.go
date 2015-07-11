@@ -38,3 +38,33 @@ package manta
 //
 // - float32[24]
 // - CStrongHandle< InfoForResourceTypeIMaterial2 >[6]
+
+// Type for a decoder function
+type DecodeFcn func(*reader) interface{}
+
+// Type for an array decoder function
+type DecodeArrayFcn func(*reader) interface{}
+
+// PropertySerializer interface
+type PropertySerializer struct {
+	Decode      DecodeFcn
+	DecodeArray DecodeArrayFcn
+	IsArray     bool
+	Length      uint32
+}
+
+// Contains a list of available property serializers
+type PropertySerializerTable struct {
+	Serializers map[string]*PropertySerializer
+}
+
+// Returns a table containing all know property serializers
+func GetDefaultPropertySerializerTable() *PropertySerializerTable {
+	// Init table
+	tbl := &PropertySerializerTable{}
+	tbl.Serializers = make(map[string]*PropertySerializer)
+
+	// Append default serializers/decoders
+
+	return tbl
+}
