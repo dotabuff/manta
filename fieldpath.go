@@ -126,15 +126,63 @@ func PlusOne(r *reader, fp *fieldpath) {
 }
 
 func PlusTwo(r *reader, fp *fieldpath) {
+	// Increment the index
 	fp.index[len(fp.index)-1] += 2
+
+	// Verify that the field exists
+	tbl := fp.hierarchy[len(fp.index)-1]
+	field := tbl.Properties[fp.index[len(fp.index)-1]]
+
+	if field == nil {
+		_panicf("Overflow in PlusOne")
+	}
+
+	if field.Table != nil {
+		_panicf("Trying to push dt as field index")
+	}
+
+	// Append the field to our list
+	fp.fields = append(fp.fields, field.Field)
 }
 
 func PlusThree(r *reader, fp *fieldpath) {
+	// Increment the index
 	fp.index[len(fp.index)-1] += 3
+
+	// Verify that the field exists
+	tbl := fp.hierarchy[len(fp.index)-1]
+	field := tbl.Properties[fp.index[len(fp.index)-1]]
+
+	if field == nil {
+		_panicf("Overflow in PlusOne")
+	}
+
+	if field.Table != nil {
+		_panicf("Trying to push dt as field index")
+	}
+
+	// Append the field to our list
+	fp.fields = append(fp.fields, field.Field)
 }
 
 func PlusFour(r *reader, fp *fieldpath) {
+	// Increment the index
 	fp.index[len(fp.index)-1] += 4
+
+	// Verify that the field exists
+	tbl := fp.hierarchy[len(fp.index)-1]
+	field := tbl.Properties[fp.index[len(fp.index)-1]]
+
+	if field == nil {
+		_panicf("Overflow in PlusOne")
+	}
+
+	if field.Table != nil {
+		_panicf("Trying to push dt as field index")
+	}
+
+	// Append the field to our list
+	fp.fields = append(fp.fields, field.Field)
 }
 
 func PlusN(r *reader, fp *fieldpath) {
