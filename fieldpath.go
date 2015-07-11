@@ -23,6 +23,10 @@ func fieldpath_init(parentTbl *dt, huf *HuffmanTree) *fieldpath {
 	fp.tree = huf
 	fp.finished = false
 
+	var x FieldPathOpFcn
+	x = PlusOne
+	_ = x
+
 	return fp
 }
 
@@ -37,7 +41,7 @@ func (fp *fieldpath) fieldpath_walk(r *reader) []dt_field {
 		if r.readBits(1) == 1 {
 			switch i := node.right.(type) {
 			case HuffmanLeaf:
-				i.value.(FieldPathOpFcn)(r, fp)
+				i.value.(func(*reader, *fieldpath))(r, fp)
 				node = (*fp.tree).(HuffmanNode)
 			case HuffmanNode:
 				node = i
@@ -45,7 +49,7 @@ func (fp *fieldpath) fieldpath_walk(r *reader) []dt_field {
 		} else {
 			switch i := node.left.(type) {
 			case HuffmanLeaf:
-				i.value.(FieldPathOpFcn)(r, fp)
+				i.value.(func(*reader, *fieldpath))(r, fp)
 				node = (*fp.tree).(HuffmanNode)
 			case HuffmanNode:
 				node = i
