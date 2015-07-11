@@ -24,6 +24,12 @@ func TestFieldpath(t *testing.T) {
 			debug:       true,
 			expectCount: 1,
 		},
+		{
+			tableName:   "CDOTATeam",
+			run:         true,
+			debug:       true,
+			expectCount: 15,
+		},
 	}
 
 	// Load our send tables
@@ -62,5 +68,8 @@ func TestFieldpath(t *testing.T) {
 		// Initialize a field path and walk it
 		fieldPath := fieldpath_init(serializer, &huf)
 		fieldPath.fieldpath_walk(newReader(buf))
+
+		// Verify field count
+		assert.Equal(len(fieldPath.fields), s.expectCount)
 	}
 }
