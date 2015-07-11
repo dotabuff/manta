@@ -12,7 +12,7 @@ type fieldpath struct {
 type FieldPathOpFcn func(*reader, *fieldpath)
 
 // Initialize a fieldpath object
-func fielpath_init(parentTbl *dt) *fieldpath {
+func fieldpath_init(parentTbl *dt, huf *HuffmanTree) *fieldpath {
 	fp := &fieldpath{
 		hierarchy: make([]*dt, 0),
 		index:     make([]int32, 0),
@@ -20,6 +20,7 @@ func fielpath_init(parentTbl *dt) *fieldpath {
 
 	fp.hierarchy = append(fp.hierarchy, parentTbl)
 	fp.index = append(fp.index, -1) // Always start at -1
+	fp.tree = huf
 	fp.finished = false
 
 	return fp
