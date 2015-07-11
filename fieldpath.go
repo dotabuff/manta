@@ -6,6 +6,7 @@ type fieldpath struct {
 	index     []int32
 }
 
+// Initialize a fieldpath object
 func fielpath_init(parentTbl *dt) *fieldpath {
 	fp := &fieldpath{
 		hierarchy: make([]*dt, 0),
@@ -16,6 +17,55 @@ func fielpath_init(parentTbl *dt) *fieldpath {
 	fp.index = append(fp.index, -1) // Always start at -1
 
 	return fp
+}
+
+// Returns a huffman tree based on the operation weights
+func fieldpath_huffman() HuffmanTree {
+	FieldPathOperations := make(map[int]interface{})
+
+	FieldPathOperations[36271] = PlusOne
+	FieldPathOperations[10334] = PlusTwo
+	FieldPathOperations[1375] = PlusThree
+	FieldPathOperations[646] = PlusFour
+	FieldPathOperations[4128] = PlusN
+	FieldPathOperations[35] = PushOneLeftDeltaZeroRightZero
+	FieldPathOperations[3] = PushOneLeftDeltaZeroRightNonZero
+	FieldPathOperations[521] = PushOneLeftDeltaOneRightZero
+	FieldPathOperations[2942] = PushOneLeftDeltaOneRightNonZero
+	FieldPathOperations[560] = PushOneLeftDeltaNRightZero
+	FieldPathOperations[471] = PushOneLeftDeltaNRightNonZero
+	FieldPathOperations[10530] = PushOneLeftDeltaNRightNonZeroPack6Bits
+	FieldPathOperations[251] = PushOneLeftDeltaNRightNonZeroPack8Bits
+	FieldPathOperations[0] = PushTwoLeftDeltaZero
+	FieldPathOperations[0] = PushTwoLeftDeltaOne
+	FieldPathOperations[0] = PushTwoLeftDeltaN
+	FieldPathOperations[0] = PushTwoPack5LeftDeltaZero
+	FieldPathOperations[0] = PushTwoPack5LeftDeltaOne
+	FieldPathOperations[0] = PushTwoPack5LeftDeltaN
+	FieldPathOperations[0] = PushThreeLeftDeltaZero
+	FieldPathOperations[0] = PushThreeLeftDeltaOne
+	FieldPathOperations[0] = PushThreeLeftDeltaN
+	FieldPathOperations[0] = PushThreePack5LeftDeltaZero
+	FieldPathOperations[0] = PushThreePack5LeftDeltaOne
+	FieldPathOperations[0] = PushThreePack5LeftDeltaN
+	FieldPathOperations[0] = PushN
+	FieldPathOperations[310] = PushNAndNonTopological
+	FieldPathOperations[2] = PopOnePlusOne
+	FieldPathOperations[0] = PopOnePlusN
+	FieldPathOperations[1837] = PopAllButOnePlusOne
+	FieldPathOperations[149] = PopAllButOnePlusN
+	FieldPathOperations[300] = PopAllButOnePlusNPack3Bits
+	FieldPathOperations[634] = PopAllButOnePlusNPack6Bits
+	FieldPathOperations[0] = PopNPlusOne
+	FieldPathOperations[0] = PopNPlusN
+	FieldPathOperations[1] = PopNAndNonTopographical
+	FieldPathOperations[76] = NonTopoComplex
+	FieldPathOperations[271] = NonTopoPenultimatePlusOne
+	FieldPathOperations[99] = NonTopoComplexPack4Bits
+	FieldPathOperations[25474] = FieldPathEncodeFinish
+
+	printCodes(buildTree(FieldPathOperations), []byte{})
+	return buildTree(FieldPathOperations)
 }
 
 func PlusOne(r *reader, fp *fieldpath) {
@@ -135,6 +185,10 @@ func PopOnePlusN(r *reader, fp *fieldpath) {
 }
 
 func PopAllButOnePlusOne(r *reader, fp *fieldpath) {
+
+}
+
+func PopAllButOnePlusN(r *reader, fp *fieldpath) {
 
 }
 
