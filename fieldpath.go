@@ -30,12 +30,14 @@ func (fp *fieldpath) fieldpath_walk(r *reader) []dt_field {
 	fields := make([]dt_field, 0)
 
 	// where is do-while when you need it -.-
+	// @todo: Refactor this using node.IsLeaf()
 	node := (*fp.tree).(HuffmanNode)
 	for fp.finished == false {
 		if r.readBits(1) == 1 {
 			switch i := node.right.(type) {
 			case HuffmanLeaf:
 				i.value.(FieldPathOpFcn)(r, fp)
+				node = (*fp.tree).(HuffmanNode)
 			case HuffmanNode:
 				node = i
 			}
@@ -43,6 +45,7 @@ func (fp *fieldpath) fieldpath_walk(r *reader) []dt_field {
 			switch i := node.left.(type) {
 			case HuffmanLeaf:
 				i.value.(FieldPathOpFcn)(r, fp)
+				node = (*fp.tree).(HuffmanNode)
 			case HuffmanNode:
 				node = i
 			}
