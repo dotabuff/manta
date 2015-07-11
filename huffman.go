@@ -84,7 +84,7 @@ func buildTree(symFreqs map[int]interface{}) HuffmanTree {
 func printCodes(tree HuffmanTree, prefix []byte) {
 	switch i := tree.(type) {
 	case HuffmanLeaf:
-		fmt.Printf("%s\t%d\t%s\n", i.value, i.weight, string(prefix))
+		fmt.Printf("%v\t%d\t%s\n", i.value, i.weight, string(prefix))
 	case HuffmanNode:
 		prefix = append(prefix, '0')
 		printCodes(i.left, prefix)
