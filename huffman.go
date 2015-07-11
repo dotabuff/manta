@@ -8,6 +8,7 @@ import (
 // Interface for the tree, only implements Weight
 type HuffmanTree interface {
 	Weight() int
+	IsLeaf() bool
 }
 
 // A leaf, contains encoded value
@@ -28,9 +29,19 @@ func (self HuffmanLeaf) Weight() int {
 	return self.weight
 }
 
+// Return leaf state
+func (self HuffmanLeaf) IsLeaf() bool {
+	return true
+}
+
 // Return weight for node
 func (self HuffmanNode) Weight() int {
 	return self.weight
+}
+
+// Return leaf state
+func (self HuffmanNode) IsLeaf() bool {
+	return false
 }
 
 type treeHeap []HuffmanTree
