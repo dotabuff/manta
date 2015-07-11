@@ -65,6 +65,21 @@ func GetDefaultPropertySerializerTable() *PropertySerializerTable {
 	tbl.Serializers = make(map[string]*PropertySerializer)
 
 	// Append default serializers/decoders
+	// For now, only arrays are added
+
+	tbl.Serializers["float32[24]"] = &PropertySerializer{
+		nil, nil, true, 24,
+	}
+
+	tbl.Serializers["CStrongHandle< InfoForResourceTypeIMaterial2 >[6]"] = &PropertySerializer{
+		nil, nil, true, 6,
+	}
 
 	return tbl
+}
+
+// Returns a serializer by name
+func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *PropertySerializer {
+	// This function should panic at some point
+	return pst.Serializers[name]
 }
