@@ -47,10 +47,11 @@ type DecodeArrayFcn func(*reader) interface{}
 
 // PropertySerializer interface
 type PropertySerializer struct {
-	Decode      DecodeFcn
-	DecodeArray DecodeArrayFcn
-	IsArray     bool
-	Length      uint32
+	Decode          DecodeFcn
+	DecodeArray     DecodeArrayFcn
+	IsArray         bool
+	Length          uint32
+	ArraySerializer *PropertySerializer
 }
 
 // Contains a list of available property serializers
@@ -67,12 +68,20 @@ func GetDefaultPropertySerializerTable() *PropertySerializerTable {
 	// Append default serializers/decoders
 	// For now, only arrays are added
 
+	tbl.Serializers["float32"] = &PropertySerializer{
+		nil, nil, false, 0, nil,
+	}
+
 	tbl.Serializers["float32[24]"] = &PropertySerializer{
-		nil, nil, true, 24,
+		nil, nil, true, 24, tbl.Serializers["float32"],
+	}
+
+	tbl.Serializers["CStrongHandle< InfoForResourceTypeIMaterial2 >"] = &PropertySerializer{
+		nil, nil, false, 0, nil,
 	}
 
 	tbl.Serializers["CStrongHandle< InfoForResourceTypeIMaterial2 >[6]"] = &PropertySerializer{
-		nil, nil, true, 6,
+		nil, nil, true, 6, tbl.Serializers["CStrongHandle< InfoForResourceTypeIMaterial2 >"],
 	}
 
 	return tbl
@@ -85,7 +94,7 @@ func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *Pr
 	if ser == nil {
 		// This function should panic at some point
 		return &PropertySerializer{
-			nil, nil, false, 0,
+			nil, nil, false, 0, nil,
 		}
 	}
 
