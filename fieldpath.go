@@ -36,19 +36,15 @@ func (fp *fieldpath) fieldpath_walk(r *reader) []dt_field {
 			switch i := node.right.(type) {
 			case HuffmanLeaf:
 				i.value.(FieldPathOpFcn)(r, fp)
-				break
 			case HuffmanNode:
 				node = i
-				break
 			}
 		} else {
 			switch i := node.left.(type) {
 			case HuffmanLeaf:
 				i.value.(FieldPathOpFcn)(r, fp)
-				break
 			case HuffmanNode:
 				node = i
-				break
 			}
 		}
 	}
