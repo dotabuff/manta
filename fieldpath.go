@@ -74,6 +74,8 @@ func fieldpath_huffman() HuffmanTree {
 	FieldPathOperations[471] = PushOneLeftDeltaNRightNonZero
 	FieldPathOperations[10530] = PushOneLeftDeltaNRightNonZeroPack6Bits
 	FieldPathOperations[251] = PushOneLeftDeltaNRightNonZeroPack8Bits
+
+	// Continously assigning different methods to the same index can't work
 	FieldPathOperations[0] = PushTwoLeftDeltaZero
 	FieldPathOperations[0] = PushTwoLeftDeltaOne
 	FieldPathOperations[0] = PushTwoLeftDeltaN
@@ -228,6 +230,7 @@ func PushOneLeftDeltaZeroRightZero(r *reader, fp *fieldpath) {
 func PushOneLeftDeltaZeroRightNonZero(r *reader, fp *fieldpath) {
 	if debugMode {
 		_debugf("Calling PushOneLeftDeltaZeroRightNonZero, %s, %d", fp.hierarchy[0].Name, fp.index[len(fp.index)-1])
+		printCodes(*fp.tree, []byte{})
 
 		//
 		// This get's called for the following fp_trace:
