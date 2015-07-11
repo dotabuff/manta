@@ -80,6 +80,14 @@ func GetDefaultPropertySerializerTable() *PropertySerializerTable {
 
 // Returns a serializer by name
 func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *PropertySerializer {
-	// This function should panic at some point
-	return pst.Serializers[name]
+	ser := pst.Serializers[name]
+
+	if ser == nil {
+		// This function should panic at some point
+		return &PropertySerializer{
+			nil, nil, false, 0,
+		}
+	}
+
+	return ser
 }
