@@ -227,7 +227,7 @@ func PushOneLeftDeltaZeroRightZero(r *reader, fp *fieldpath) {
 
 func PushOneLeftDeltaZeroRightNonZero(r *reader, fp *fieldpath) {
 	if debugMode {
-		_debugf("Calling PushOneLeftDeltaZeroRightNonZero, %s", fp.hierarchy[0].Name)
+		_debugf("Calling PushOneLeftDeltaZeroRightNonZero, %s, %d", fp.hierarchy[0].Name, fp.index[len(fp.index)-1])
 	}
 }
 
@@ -243,27 +243,54 @@ func PushOneLeftDeltaOneRightZero(r *reader, fp *fieldpath) {
 	tbl := fp.hierarchy[len(fp.index)-1]
 	field := tbl.Properties[fp.index[len(fp.index)-1]]
 
-	if field.Table == nil {
-		_panicf("Trying to push field as table, %s", field.Field.Name)
-		//
-		// Explanation why this is failing on CWorld:
-		// - Param 28 is a float[24]
-		// - The fact that it is an array is not relayed in the flatser-protobuf
-		// - The current PushOneLeftDeltaOneRightZero expectes (rightfully) a datatable
-		// - We panic
-		//
-		// Fix:
-		// - Implement the property_serializers table, create an IsArray function
-		// - Run it analog to field.Table
-		//
+	// Are we pushing a field?
+	if field.Table != nil {
+		fp.hierarchy = append(fp.hierarchy, field.Table)
+		fp.index = append(fp.index, -1)
+
+		// We abuse PlusOne instead of copying the verification code
+		PlusOne(r, fp)
+
+		return
 	}
 
-	// Push the table, reset position to -1
-	fp.hierarchy = append(fp.hierarchy, field.Table)
-	fp.index = append(fp.index, -1)
+	// Are we pushing an array?
+	if field.Field.Serializer.IsArray {
+		_debugf("Entering array subroutine")
 
-	// We abuse PlusOne instead of copying the verification code
-	PlusOne(r, fp)
+		// Add our own temp table for the array
+		tmpDt := &dt{
+			Name:       field.Field.Name,
+			Flags:      nil,
+			Version:    0,
+			Properties: make([]*dt_property, 0),
+		}
+
+		// Add each array field to the table
+		for i := uint32(0); i < field.Field.Serializer.Length; i++ {
+			tmpDt.Properties = append(tmpDt.Properties, &dt_property{
+				Field: &dt_field{
+					Name:       field.Field.Name,
+					Type:       "",
+					Index:      i,
+					Flags:      field.Field.Flags,
+					BitCount:   field.Field.BitCount,
+					LowValue:   field.Field.LowValue,
+					HighValue:  field.Field.HighValue,
+					Version:    field.Field.Version,
+					Serializer: field.Field.Serializer.ArraySerializer,
+				},
+				Table: nil,
+			})
+		}
+
+		fp.hierarchy = append(fp.hierarchy, tmpDt)
+		fp.index = append(fp.index, -1)
+
+		PlusOne(r, fp)
+
+		return
+	}
 }
 
 func PushOneLeftDeltaOneRightNonZero(r *reader, fp *fieldpath) {
