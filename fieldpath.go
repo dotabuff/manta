@@ -4,7 +4,12 @@ package manta
 type fieldpath struct {
 	hierarchy []*dt
 	index     []int32
+	tree      *HuffmanTree
+	finished  bool
 }
+
+// Typedef for a field operation function
+type FieldPathOpFcn func(*reader, *fieldpath)
 
 // Initialize a fieldpath object
 func fielpath_init(parentTbl *dt) *fieldpath {
@@ -15,8 +20,40 @@ func fielpath_init(parentTbl *dt) *fieldpath {
 
 	fp.hierarchy = append(fp.hierarchy, parentTbl)
 	fp.index = append(fp.index, -1) // Always start at -1
+	fp.finished = false
 
 	return fp
+}
+
+// Walk an encoded fieldpath based on a huffman tree
+func (fp *fieldpath) fieldpath_walk(r *reader) []dt_field {
+	fields := make([]dt_field, 0)
+
+	// where is do-while when you need it -.-
+	node := (*fp.tree).(HuffmanNode)
+	for fp.finished == false {
+		if r.readBits(1) == 1 {
+			switch i := node.right.(type) {
+			case HuffmanLeaf:
+				i.value.(FieldPathOpFcn)(r, fp)
+				break
+			case HuffmanNode:
+				node = i
+				break
+			}
+		} else {
+			switch i := node.left.(type) {
+			case HuffmanLeaf:
+				i.value.(FieldPathOpFcn)(r, fp)
+				break
+			case HuffmanNode:
+				node = i
+				break
+			}
+		}
+	}
+
+	return fields
 }
 
 // Returns a huffman tree based on the operation weights
@@ -64,7 +101,6 @@ func fieldpath_huffman() HuffmanTree {
 	FieldPathOperations[99] = NonTopoComplexPack4Bits
 	FieldPathOperations[25474] = FieldPathEncodeFinish
 
-	printCodes(buildTree(FieldPathOperations), []byte{})
 	return buildTree(FieldPathOperations)
 }
 
@@ -229,5 +265,5 @@ func NonTopoComplexPack4Bits(r *reader, fp *fieldpath) {
 }
 
 func FieldPathEncodeFinish(r *reader, fp *fieldpath) {
-
+	fp.finished = true
 }
