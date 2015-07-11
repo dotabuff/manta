@@ -106,6 +106,10 @@ func fieldpath_huffman() HuffmanTree {
 }
 
 func PlusOne(r *reader, fp *fieldpath) {
+	if debugMode {
+		_debugf("Calling PlusOne, %s", fp.hierarchy[0].Name)
+	}
+
 	// Increment the index
 	fp.index[len(fp.index)-1] += 1
 
@@ -126,6 +130,10 @@ func PlusOne(r *reader, fp *fieldpath) {
 }
 
 func PlusTwo(r *reader, fp *fieldpath) {
+	if debugMode {
+		_debugf("Calling PlusTwo, %s", fp.hierarchy[0].Name)
+	}
+
 	// Increment the index
 	fp.index[len(fp.index)-1] += 2
 
@@ -146,6 +154,10 @@ func PlusTwo(r *reader, fp *fieldpath) {
 }
 
 func PlusThree(r *reader, fp *fieldpath) {
+	if debugMode {
+		_debugf("Calling PlusThree, %s", fp.hierarchy[0].Name)
+	}
+
 	// Increment the index
 	fp.index[len(fp.index)-1] += 3
 
@@ -166,6 +178,10 @@ func PlusThree(r *reader, fp *fieldpath) {
 }
 
 func PlusFour(r *reader, fp *fieldpath) {
+	if debugMode {
+		_debugf("Calling PlusFour, %s", fp.hierarchy[0].Name)
+	}
+
 	// Increment the index
 	fp.index[len(fp.index)-1] += 4
 
@@ -186,149 +202,225 @@ func PlusFour(r *reader, fp *fieldpath) {
 }
 
 func PlusN(r *reader, fp *fieldpath) {
-
+	if debugMode {
+		_debugf("Calling PlusN, %s", fp.hierarchy[0].Name)
+	}
 }
 
 func PushOneLeftDeltaZeroRightZero(r *reader, fp *fieldpath) {
-
+	if debugMode {
+		_debugf("Calling PushOneLeftDeltaZeroRightZero, %s", fp.hierarchy[0].Name)
+	}
 }
 
 func PushOneLeftDeltaZeroRightNonZero(r *reader, fp *fieldpath) {
-
+	if debugMode {
+		_debugf("Calling PushOneLeftDeltaZeroRightNonZero, %s", fp.hierarchy[0].Name)
+	}
 }
 
 func PushOneLeftDeltaOneRightZero(r *reader, fp *fieldpath) {
-
+	if debugMode {
+		_debugf("Calling PushOneLeftDeltaOneRightZero, %s", fp.hierarchy[0].Name)
+	}
 }
 
 func PushOneLeftDeltaOneRightNonZero(r *reader, fp *fieldpath) {
-
+	if debugMode {
+		_debugf("Calling PushOneLeftDeltaOneRightNonZero, %s", fp.hierarchy[0].Name)
+	}
 }
 
 func PushOneLeftDeltaNRightZero(r *reader, fp *fieldpath) {
-
+	if debugMode {
+		_debugf("Calling PushOneLeftDeltaNRightZero, %s", fp.hierarchy[0].Name)
+	}
 }
 
 func PushOneLeftDeltaNRightNonZero(r *reader, fp *fieldpath) {
-
+	if debugMode {
+		_debugf("Calling PushOneLeftDeltaNRightNonZero, %s", fp.hierarchy[0].Name)
+	}
 }
 
 func PushOneLeftDeltaNRightNonZeroPack6Bits(r *reader, fp *fieldpath) {
-
+	if debugMode {
+		_debugf("Calling PushOneLeftDeltaNRightNonZeroPack6Bits, %s", fp.hierarchy[0].Name)
+	}
 }
 
 func PushOneLeftDeltaNRightNonZeroPack8Bits(r *reader, fp *fieldpath) {
-
+	if debugMode {
+		_debugf("Calling PushOneLeftDeltaNRightNonZeroPack8Bits, %s", fp.hierarchy[0].Name)
+	}
 }
 
 func PushTwoLeftDeltaZero(r *reader, fp *fieldpath) {
-
+	if debugMode {
+		_debugf("Calling PushTwoLeftDeltaZero, %s", fp.hierarchy[0].Name)
+	}
 }
 
 func PushTwoLeftDeltaOne(r *reader, fp *fieldpath) {
-
+	if debugMode {
+		_debugf("Calling PushTwoLeftDeltaOne, %s", fp.hierarchy[0].Name)
+	}
 }
 
 func PushTwoLeftDeltaN(r *reader, fp *fieldpath) {
-
+	if debugMode {
+		_debugf("Calling PushTwoLeftDeltaN, %s", fp.hierarchy[0].Name)
+	}
 }
 
 func PushTwoPack5LeftDeltaZero(r *reader, fp *fieldpath) {
-
+	if debugMode {
+		_debugf("Calling PushTwoPack5LeftDeltaZero, %s", fp.hierarchy[0].Name)
+	}
 }
 
 func PushTwoPack5LeftDeltaOne(r *reader, fp *fieldpath) {
-
+	if debugMode {
+		_debugf("Calling PushTwoPack5LeftDeltaOne, %s", fp.hierarchy[0].Name)
+	}
 }
 
 func PushTwoPack5LeftDeltaN(r *reader, fp *fieldpath) {
-
+	if debugMode {
+		_debugf("Calling PushTwoPack5LeftDeltaN, %s", fp.hierarchy[0].Name)
+	}
 }
 
 func PushThreeLeftDeltaZero(r *reader, fp *fieldpath) {
-
+	if debugMode {
+		_debugf("Calling PushThreeLeftDeltaZero, %s", fp.hierarchy[0].Name)
+	}
 }
 
 func PushThreeLeftDeltaOne(r *reader, fp *fieldpath) {
-
+	if debugMode {
+		_debugf("Calling PushThreeLeftDeltaOne, %s", fp.hierarchy[0].Name)
+	}
 }
 
 func PushThreeLeftDeltaN(r *reader, fp *fieldpath) {
-
+	if debugMode {
+		_debugf("Calling PushThreeLeftDeltaN, %s", fp.hierarchy[0].Name)
+	}
 }
 
 func PushThreePack5LeftDeltaZero(r *reader, fp *fieldpath) {
-
+	if debugMode {
+		_debugf("Calling PushThreePack5LeftDeltaZero, %s", fp.hierarchy[0].Name)
+	}
 }
 
 func PushThreePack5LeftDeltaOne(r *reader, fp *fieldpath) {
-
+	if debugMode {
+		_debugf("Calling PushThreePack5LeftDeltaOne, %s", fp.hierarchy[0].Name)
+	}
 }
 
 func PushThreePack5LeftDeltaN(r *reader, fp *fieldpath) {
-
+	if debugMode {
+		_debugf("Calling PushThreePack5LeftDeltaN, %s", fp.hierarchy[0].Name)
+	}
 }
 
 func PushN(r *reader, fp *fieldpath) {
-
+	if debugMode {
+		_debugf("Calling PushN, %s", fp.hierarchy[0].Name)
+	}
 }
 
 func PushNAndNonTopological(r *reader, fp *fieldpath) {
-
+	if debugMode {
+		_debugf("Calling PushNAndNonTopological, %s", fp.hierarchy[0].Name)
+	}
 }
 
 func PopOnePlusOne(r *reader, fp *fieldpath) {
-
+	if debugMode {
+		_debugf("Calling PopOnePlusOne, %s", fp.hierarchy[0].Name)
+	}
 }
 
 func PopOnePlusN(r *reader, fp *fieldpath) {
-
+	if debugMode {
+		_debugf("Calling PopOnePlusN, %s", fp.hierarchy[0].Name)
+	}
 }
 
 func PopAllButOnePlusOne(r *reader, fp *fieldpath) {
-
+	if debugMode {
+		_debugf("Calling PopAllButOnePlusOne, %s", fp.hierarchy[0].Name)
+	}
 }
 
 func PopAllButOnePlusN(r *reader, fp *fieldpath) {
-
+	if debugMode {
+		_debugf("Calling PopAllButOnePlusN, %s", fp.hierarchy[0].Name)
+	}
 }
 
 func PopAllButOnePlusNPackN(r *reader, fp *fieldpath) {
-
+	if debugMode {
+		_debugf("Calling PopAllButOnePlusNPackN, %s", fp.hierarchy[0].Name)
+	}
 }
 
 func PopAllButOnePlusNPack3Bits(r *reader, fp *fieldpath) {
-
+	if debugMode {
+		_debugf("Calling PopAllButOnePlusNPack3Bits, %s", fp.hierarchy[0].Name)
+	}
 }
 
 func PopAllButOnePlusNPack6Bits(r *reader, fp *fieldpath) {
-
+	if debugMode {
+		_debugf("Calling PopAllButOnePlusNPack6Bits, %s", fp.hierarchy[0].Name)
+	}
 }
 
 func PopNPlusOne(r *reader, fp *fieldpath) {
-
+	if debugMode {
+		_debugf("Calling PopNPlusOne, %s", fp.hierarchy[0].Name)
+	}
 }
 
 func PopNPlusN(r *reader, fp *fieldpath) {
-
+	if debugMode {
+		_debugf("Calling PopNPlusN, %s", fp.hierarchy[0].Name)
+	}
 }
 
 func PopNAndNonTopographical(r *reader, fp *fieldpath) {
-
+	if debugMode {
+		_debugf("Calling PopNAndNonTopographical, %s", fp.hierarchy[0].Name)
+	}
 }
 
 func NonTopoComplex(r *reader, fp *fieldpath) {
-
+	if debugMode {
+		_debugf("Calling NonTopoComplex, %s", fp.hierarchy[0].Name)
+	}
 }
 
 func NonTopoPenultimatePlusOne(r *reader, fp *fieldpath) {
-
+	if debugMode {
+		_debugf("Calling NonTopoPenultimatePlusOne, %s", fp.hierarchy[0].Name)
+	}
 }
 
 func NonTopoComplexPack4Bits(r *reader, fp *fieldpath) {
-
+	if debugMode {
+		_debugf("Calling NonTopoComplexPack4Bits, %s", fp.hierarchy[0].Name)
+	}
 }
 
 func FieldPathEncodeFinish(r *reader, fp *fieldpath) {
+	if debugMode {
+		_debugf("Calling FieldPathEncodeFinish, %s", fp.hierarchy[0].Name)
+	}
+
 	fp.finished = true
 }
