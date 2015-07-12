@@ -263,19 +263,7 @@ func PushOneLeftDeltaZeroRightZero(r *reader, fp *fieldpath) {
 
 func PushOneLeftDeltaZeroRightNonZero(r *reader, fp *fieldpath) {
 	if debugMode {
-		_debugf("Calling PushOneLeftDeltaZeroRightNonZero, %s, %d", fp.hierarchy[0].Name, fp.index[len(fp.index)-1])
-
-		//
-		// This get's called for the following fp_trace:
-		//
-		// '3/28/23','3/29',15
-		//
-		// Move:
-		// -----
-		// FROM: table["m_animationController.m_flPoseParameter"][23]
-		// TO: table["m_animationController.m_AnimOverlay"]
-		//
-		// This doesn't seem correct, I'd expected PopOnePlusOne to be called here
+		_debugf("Calling PushOneLeftDeltaZeroRightNonZero, %s", fp.hierarchy[0].Name)
 	}
 }
 
@@ -285,7 +273,7 @@ func PushOneLeftDeltaOneRightZero(r *reader, fp *fieldpath) {
 	}
 
 	// PlusOne to advance the hierarchy to the next datatable
-	PlusOne(r, fp)
+	fp.index[len(fp.index)-1] += 1
 
 	// Get current field and index
 	tbl := fp.hierarchy[len(fp.index)-1]
@@ -459,6 +447,18 @@ func PopOnePlusOne(r *reader, fp *fieldpath) {
 	if debugMode {
 		_debugf("Calling PopOnePlusOne, %s", fp.hierarchy[0].Name)
 	}
+
+	// Check if we can pop an element
+	if len(fp.index) <= 1 {
+		_panicf("Trying to pop last element")
+	}
+
+	// Pop last index and table
+	fp.hierarchy = fp.hierarchy[:len(fp.hierarchy)-1]
+	fp.index = fp.index[:len(fp.index)-1]
+
+	// Read next element
+	PlusOne(r, fp)
 }
 
 func PopOnePlusN(r *reader, fp *fieldpath) {
@@ -471,6 +471,12 @@ func PopAllButOnePlusOne(r *reader, fp *fieldpath) {
 	if debugMode {
 		_debugf("Calling PopAllButOnePlusOne, %s", fp.hierarchy[0].Name)
 	}
+
+	// Remove all hierarchy and index element
+	fp.hierarchy = fp.hierarchy[:1]
+	fp.index = fp.index[:1]
+
+	PlusOne(r, fp)
 }
 
 func PopAllButOnePlusN(r *reader, fp *fieldpath) {
