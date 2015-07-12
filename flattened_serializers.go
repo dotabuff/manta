@@ -25,7 +25,7 @@ type dt_field struct {
 	HighValue *float32
 
 	Version    *int32
-	Serializer *PropertySerializer
+	Serializer *PropertySerializer `json:"-"`
 }
 
 // A single datatable
@@ -56,7 +56,7 @@ func (sers *flattened_serializers) dump_json(name string) string {
 		j = append(j, jContainer{i, o})
 	}
 
-	str, _ := json.MarshalIndent(j, "", "  ") // two space ident
+	str, err := json.MarshalIndent(j, "", "  ") // two space ident
 	return string(str)
 }
 
