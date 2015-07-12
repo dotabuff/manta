@@ -53,7 +53,7 @@ func (th treeHeap) Len() int {
 
 // Weight compare function
 func (th treeHeap) Less(i int, j int) bool {
-	return th[i].Weight() < th[j].Weight()
+	return th[i].Weight() <= th[j].Weight()
 }
 
 // Append item, required for heap
