@@ -33,8 +33,8 @@ func TestFieldpath(t *testing.T) {
 		{
 			tableName:   "CWorld",
 			run:         true,
-			debug:       true,
-			expectCount: 99, // tbd
+			debug:       false,
+			expectCount: 134,
 		},
 	}
 
@@ -77,5 +77,14 @@ func TestFieldpath(t *testing.T) {
 
 		// Verify field count
 		assert.Equal(len(fieldPath.fields), s.expectCount)
+
+		// Print a list of all fields read
+		for i, f := range fieldPath.fields {
+			if f.Index >= 0 {
+				_debugf("%d\t%s[%d]\t%s", i, f.Name, f.Index, f.Type)
+			} else {
+				_debugf("%d\t%s\t%s", i, f.Name, f.Type)
+			}
+		}
 	}
 }
