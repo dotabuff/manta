@@ -56,7 +56,7 @@ func (sers *flattened_serializers) dump_json(name string) string {
 		j = append(j, jContainer{i, o})
 	}
 
-	str, err := json.MarshalIndent(j, "", "  ") // two space ident
+	str, _ := json.MarshalIndent(j, "", "  ") // two space ident
 	return string(str)
 }
 
