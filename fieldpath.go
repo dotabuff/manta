@@ -1,5 +1,20 @@
 package manta
 
+// This is a list of encoding functions that are know to resolve to a correct layout.
+// All of these have been verified
+// ----------------------------------------------------------------------------------
+//
+// ID  NAME                           WEIGHT  ORIG  LEN  BITS
+//  0  PlusOne                         36271          1   0
+//  1  EncodingFinish                  25474          2   10
+//  2  PlusTwo                         10334          4   1110
+//  3  PushOneLeftDeltaZeroRightZero      35         12   110110001101
+//  4  PlusThree                        1375          6   110010
+//  5  PushOneLeftDeltaOneRightZero      521          8   11011010
+//  6  PopOnePlusOne                       1     2   15   110110001100001
+//  7  PopAllButOnePlusOne              1837          6   110011
+//
+
 // A fieldpath, used to walk through the flattened table hierarchy
 type fieldpath struct {
 	fields    []*dt_field
