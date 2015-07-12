@@ -37,6 +37,7 @@ var fieldpath_lookup []fieldpathop
 // Initialize a fieldpath object
 func fieldpath_init(parentTbl *dt, huf *HuffmanTree) *fieldpath {
 	fp := &fieldpath{
+		fields:    make([]*dt_field, 0),
 		hierarchy: make([]*dt, 0),
 		index:     make([]int32, 0),
 	}
@@ -60,22 +61,22 @@ func (fp *fieldpath) fieldpath_walk(r *reader) {
 		if r.readBits(1) == 1 {
 			switch i := node.right.(type) {
 			case *HuffmanLeaf:
-				_debugf("Reached in %d bits", cnt)
-				cnt = 0
-
 				fieldpath_lookup[i.value].Function(r, fp)
 				node = (*fp.tree).(*HuffmanNode)
+
+				_debugf("Reached in %d bits, %s", cnt, fp.fields[len(fp.fields)-1].Name)
+				cnt = 0
 			case *HuffmanNode:
 				node = i
 			}
 		} else {
 			switch i := node.left.(type) {
 			case *HuffmanLeaf:
-				_debugf("Reached in %d bits", cnt)
-				cnt = 0
-
 				fieldpath_lookup[i.value].Function(r, fp)
 				node = (*fp.tree).(*HuffmanNode)
+
+				_debugf("Reached in %d bits, %s", cnt, fp.fields[len(fp.fields)-1].Name)
+				cnt = 0
 			case *HuffmanNode:
 				node = i
 			}
@@ -181,9 +182,6 @@ func PlusTwo(r *reader, fp *fieldpath) {
 	if field.Table == nil {
 		fp.fields = append(fp.fields, field.Field)
 	}
-
-	// Append the field to our list
-	fp.fields = append(fp.fields, field.Field)
 }
 
 func PlusThree(r *reader, fp *fieldpath) {
@@ -205,9 +203,6 @@ func PlusThree(r *reader, fp *fieldpath) {
 	if field.Table == nil {
 		fp.fields = append(fp.fields, field.Field)
 	}
-
-	// Append the field to our list
-	fp.fields = append(fp.fields, field.Field)
 }
 
 func PlusFour(r *reader, fp *fieldpath) {
@@ -252,6 +247,9 @@ func PushOneLeftDeltaZeroRightZero(r *reader, fp *fieldpath) {
 	if field.Table == nil {
 		_panicf("Trying to push field as table")
 	}
+
+	// It might be nessecary to actually push the base table here
+	// PlusOne(r, fp)
 
 	// Push the table, reset position to -1
 	fp.hierarchy = append(fp.hierarchy, field.Table)
@@ -308,7 +306,7 @@ func PushOneLeftDeltaOneRightZero(r *reader, fp *fieldpath) {
 				Field: &dt_field{
 					Name:       field.Field.Name,
 					Type:       "",
-					Index:      i,
+					Index:      int32(i),
 					Flags:      field.Field.Flags,
 					BitCount:   field.Field.BitCount,
 					LowValue:   field.Field.LowValue,
