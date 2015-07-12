@@ -325,6 +325,8 @@ func PushOneLeftDeltaOneRightZero(r *reader, fp *fieldpath) {
 
 		return
 	}
+
+	_panicf("Type: %s is neither Array not Table", field.Field.Name)
 }
 
 func PushOneLeftDeltaOneRightNonZero(r *reader, fp *fieldpath) {
