@@ -14,7 +14,7 @@ type HuffmanTree interface {
 // A leaf, contains encoded value
 type HuffmanLeaf struct {
 	weight int
-	value  interface{}
+	value  int
 }
 
 // A node with potential left / right nodes or leafs
@@ -74,9 +74,9 @@ func (th treeHeap) Swap(i, j int) {
 }
 
 // Construct a tree from a map of weight -> item
-func buildTree(symFreqs map[int]interface{}) HuffmanTree {
+func buildTree(symFreqs map[int]int) HuffmanTree {
 	var trees treeHeap
-	for w, v := range symFreqs {
+	for v, w := range symFreqs {
 		trees = append(trees, HuffmanLeaf{w, v})
 	}
 
@@ -95,7 +95,7 @@ func buildTree(symFreqs map[int]interface{}) HuffmanTree {
 func printCodes(tree HuffmanTree, prefix []byte) {
 	switch i := tree.(type) {
 	case HuffmanLeaf:
-		fmt.Printf("%v\t%d\t%s\n", i.value, i.weight, string(prefix))
+		fmt.Printf("%v\t%d\t%d\t%s\n", i.value, i.weight, len(prefix), string(prefix))
 	case HuffmanNode:
 		prefix = append(prefix, '0')
 		printCodes(i.left, prefix)
