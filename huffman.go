@@ -74,10 +74,10 @@ func (th treeHeap) Swap(i, j int) {
 }
 
 // Construct a tree from a map of weight -> item
-func buildTree(symFreqs map[int]int) HuffmanTree {
+func buildTree(symFreqs []int) HuffmanTree {
 	var trees treeHeap
 	for v, w := range symFreqs {
-		trees = append(trees, HuffmanLeaf{w, v})
+		trees = append(trees, &HuffmanLeaf{w, v})
 	}
 
 	heap.Init(&trees)
@@ -85,18 +85,45 @@ func buildTree(symFreqs map[int]int) HuffmanTree {
 		a := heap.Pop(&trees).(HuffmanTree)
 		b := heap.Pop(&trees).(HuffmanTree)
 
-		heap.Push(&trees, HuffmanNode{a.Weight() + b.Weight(), a, b})
+		heap.Push(&trees, &HuffmanNode{a.Weight() + b.Weight(), a, b})
 	}
 
 	return heap.Pop(&trees).(HuffmanTree)
 }
 
+// Swap two nodes based on the given path
+func swapNodes(tree HuffmanTree, path uint32, len uint32) {
+	for len > 0 {
+		// get current bit
+		len--
+		one := path & 1
+		path = path >> 1
+
+		// check if we are correct
+		if tree.IsLeaf() {
+			_panicf("Touching leaf in node swap, %d left in path", len)
+		}
+
+		// switch on the type
+		if one == 1 {
+			tree = (tree.(*HuffmanNode).right)
+		} else {
+			tree = (tree.(*HuffmanNode).left)
+		}
+	}
+
+	node := tree.(*HuffmanNode)
+	tmp := node.left
+	node.left = node.right
+	node.right = tmp
+}
+
 // Print computed tree order
 func printCodes(tree HuffmanTree, prefix []byte) {
 	switch i := tree.(type) {
-	case HuffmanLeaf:
+	case *HuffmanLeaf:
 		fmt.Printf("%v\t%d\t%d\t%s\n", i.value, i.weight, len(prefix), string(prefix))
-	case HuffmanNode:
+	case *HuffmanNode:
 		prefix = append(prefix, '0')
 		printCodes(i.left, prefix)
 		prefix = prefix[:len(prefix)-1]
