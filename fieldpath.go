@@ -9,8 +9,15 @@ type fieldpath struct {
 	finished  bool
 }
 
+// Contains the weight and lookup function for a single operation
+type fieldpathop struct {
+	Name     string
+	Function func(*reader, *fieldpath)
+	Weight   int
+}
+
 // Global fieldpath lookup array
-var fieldpath_lookup []func(*reader, *fieldpath)
+var fieldpath_lookup []fieldpathop
 
 // Initialize a fieldpath object
 func fieldpath_init(parentTbl *dt, huf *HuffmanTree) *fieldpath {
@@ -24,51 +31,6 @@ func fieldpath_init(parentTbl *dt, huf *HuffmanTree) *fieldpath {
 	fp.tree = huf
 	fp.finished = false
 
-	// Get's initialized only once
-	if fieldpath_lookup == nil {
-		fieldpath_lookup = make([]func(*reader, *fieldpath), 40)
-		fieldpath_lookup[0] = PlusOne
-		fieldpath_lookup[1] = PlusTwo
-		fieldpath_lookup[2] = PlusThree
-		fieldpath_lookup[3] = PlusFour
-		fieldpath_lookup[4] = PlusN
-		fieldpath_lookup[5] = PushOneLeftDeltaZeroRightZero
-		fieldpath_lookup[6] = PushOneLeftDeltaZeroRightNonZero
-		fieldpath_lookup[7] = PushOneLeftDeltaOneRightZero
-		fieldpath_lookup[8] = PushOneLeftDeltaOneRightNonZero
-		fieldpath_lookup[9] = PushOneLeftDeltaNRightZero
-		fieldpath_lookup[10] = PushOneLeftDeltaNRightNonZero
-		fieldpath_lookup[11] = PushOneLeftDeltaNRightNonZeroPack6Bits
-		fieldpath_lookup[12] = PushOneLeftDeltaNRightNonZeroPack8Bits
-		fieldpath_lookup[13] = PushTwoLeftDeltaZero
-		fieldpath_lookup[14] = PushTwoLeftDeltaOne
-		fieldpath_lookup[15] = PushTwoLeftDeltaN
-		fieldpath_lookup[16] = PushTwoPack5LeftDeltaZero
-		fieldpath_lookup[17] = PushTwoPack5LeftDeltaOne
-		fieldpath_lookup[18] = PushTwoPack5LeftDeltaN
-		fieldpath_lookup[19] = PushThreeLeftDeltaZero
-		fieldpath_lookup[20] = PushThreeLeftDeltaOne
-		fieldpath_lookup[21] = PushThreeLeftDeltaN
-		fieldpath_lookup[22] = PushThreePack5LeftDeltaZero
-		fieldpath_lookup[23] = PushThreePack5LeftDeltaOne
-		fieldpath_lookup[24] = PushThreePack5LeftDeltaN
-		fieldpath_lookup[25] = PushN
-		fieldpath_lookup[26] = PushNAndNonTopological
-		fieldpath_lookup[27] = PopOnePlusOne
-		fieldpath_lookup[28] = PopOnePlusN
-		fieldpath_lookup[29] = PopAllButOnePlusOne
-		fieldpath_lookup[30] = PopAllButOnePlusN
-		fieldpath_lookup[31] = PopAllButOnePlusNPack3Bits
-		fieldpath_lookup[32] = PopAllButOnePlusNPack6Bits
-		fieldpath_lookup[33] = PopNPlusOne
-		fieldpath_lookup[34] = PopNPlusN
-		fieldpath_lookup[35] = PopNAndNonTopographical
-		fieldpath_lookup[36] = NonTopoComplex
-		fieldpath_lookup[37] = NonTopoPenultimatePlusOne
-		fieldpath_lookup[38] = NonTopoComplexPack4Bits
-		fieldpath_lookup[39] = FieldPathEncodeFinish
-	}
-
 	return fp
 }
 
@@ -76,22 +38,30 @@ func fieldpath_init(parentTbl *dt, huf *HuffmanTree) *fieldpath {
 func (fp *fieldpath) fieldpath_walk(r *reader) {
 	// where is do-while when you need it -.-
 	// @todo: Refactor this using node.IsLeaf()
-	node := (*fp.tree).(HuffmanNode)
+	cnt := 0
+	node := (*fp.tree).(*HuffmanNode)
 	for fp.finished == false {
+		cnt++
 		if r.readBits(1) == 1 {
 			switch i := node.right.(type) {
-			case HuffmanLeaf:
-				fieldpath_lookup[i.value](r, fp)
-				node = (*fp.tree).(HuffmanNode)
-			case HuffmanNode:
+			case *HuffmanLeaf:
+				_debugf("Reached in %d bits", cnt)
+				cnt = 0
+
+				fieldpath_lookup[i.value].Function(r, fp)
+				node = (*fp.tree).(*HuffmanNode)
+			case *HuffmanNode:
 				node = i
 			}
 		} else {
 			switch i := node.left.(type) {
-			case HuffmanLeaf:
-				fieldpath_lookup[i.value](r, fp)
-				node = (*fp.tree).(HuffmanNode)
-			case HuffmanNode:
+			case *HuffmanLeaf:
+				_debugf("Reached in %d bits", cnt)
+				cnt = 0
+
+				fieldpath_lookup[i.value].Function(r, fp)
+				node = (*fp.tree).(*HuffmanNode)
+			case *HuffmanNode:
 				node = i
 			}
 		}
@@ -100,50 +70,60 @@ func (fp *fieldpath) fieldpath_walk(r *reader) {
 
 // Returns a huffman tree based on the operation weights
 func fieldpath_huffman() HuffmanTree {
-	FieldPathOperations := make(map[int]int)
+	// Get's initialized only once
+	if fieldpath_lookup == nil {
+		fieldpath_lookup = make([]fieldpathop, 40)
+		fieldpath_lookup[0] = fieldpathop{"PlusOne", PlusOne, 36271}
+		fieldpath_lookup[1] = fieldpathop{"FieldPathEncodeFinish", FieldPathEncodeFinish, 25474}
+		fieldpath_lookup[2] = fieldpathop{"PushOneLeftDeltaNRightNonZeroPack6Bits", PushOneLeftDeltaNRightNonZeroPack6Bits, 10530}
+		fieldpath_lookup[3] = fieldpathop{"PlusTwo", PlusTwo, 10334}
+		fieldpath_lookup[4] = fieldpathop{"PlusN", PlusN, 4128}
+		fieldpath_lookup[5] = fieldpathop{"PushOneLeftDeltaOneRightNonZero", PushOneLeftDeltaOneRightNonZero, 2942}
+		fieldpath_lookup[6] = fieldpathop{"PopAllButOnePlusOne", PopAllButOnePlusOne, 1837}
+		fieldpath_lookup[7] = fieldpathop{"PlusThree", PlusThree, 1375}
+		fieldpath_lookup[8] = fieldpathop{"PlusFour", PlusFour, 646}
+		fieldpath_lookup[9] = fieldpathop{"PopAllButOnePlusNPack6Bits", PopAllButOnePlusNPack6Bits, 634}
+		fieldpath_lookup[10] = fieldpathop{"PushOneLeftDeltaNRightZero", PushOneLeftDeltaNRightZero, 560}
+		fieldpath_lookup[11] = fieldpathop{"PushOneLeftDeltaOneRightZero", PushOneLeftDeltaOneRightZero, 521}
+		fieldpath_lookup[12] = fieldpathop{"PushOneLeftDeltaNRightNonZero", PushOneLeftDeltaNRightNonZero, 471}
+		fieldpath_lookup[13] = fieldpathop{"PushNAndNonTopological", PushNAndNonTopological, 310}
+		fieldpath_lookup[14] = fieldpathop{"PopAllButOnePlusNPack3Bits", PopAllButOnePlusNPack3Bits, 300}
+		fieldpath_lookup[15] = fieldpathop{"NonTopoPenultimatePlusOne", NonTopoPenultimatePlusOne, 271}
+		fieldpath_lookup[16] = fieldpathop{"PushOneLeftDeltaNRightNonZeroPack8Bits", PushOneLeftDeltaNRightNonZeroPack8Bits, 251}
+		fieldpath_lookup[17] = fieldpathop{"PopAllButOnePlusN", PopAllButOnePlusN, 149}
+		fieldpath_lookup[18] = fieldpathop{"NonTopoComplexPack4Bits", NonTopoComplexPack4Bits, 99}
+		fieldpath_lookup[19] = fieldpathop{"NonTopoComplex", NonTopoComplex, 76}
+		fieldpath_lookup[20] = fieldpathop{"PushOneLeftDeltaZeroRightZero", PushOneLeftDeltaZeroRightZero, 35}
+		fieldpath_lookup[21] = fieldpathop{"PushOneLeftDeltaZeroRightNonZero", PushOneLeftDeltaZeroRightNonZero, 3}
+		fieldpath_lookup[22] = fieldpathop{"PopOnePlusOne", PopOnePlusOne, 1}                     // should be 2 but our algorithm is wrong
+		fieldpath_lookup[23] = fieldpathop{"PopNAndNonTopographical", PopNAndNonTopographical, 2} // should be 1 but our algorithm is wrong
+		fieldpath_lookup[24] = fieldpathop{"PopNPlusN", PopNPlusN, 0}
+		fieldpath_lookup[25] = fieldpathop{"PopNPlusOne", PopNPlusOne, 0}
+		fieldpath_lookup[26] = fieldpathop{"PopOnePlusN", PopOnePlusN, 0}
+		fieldpath_lookup[27] = fieldpathop{"PushN", PushN, 0}
+		fieldpath_lookup[28] = fieldpathop{"PushThreePack5LeftDeltaN", PushThreePack5LeftDeltaN, 0}
+		fieldpath_lookup[29] = fieldpathop{"PushThreePack5LeftDeltaOne", PushThreePack5LeftDeltaOne, 0}
+		fieldpath_lookup[30] = fieldpathop{"PushThreePack5LeftDeltaZero", PushThreePack5LeftDeltaZero, 0}
+		fieldpath_lookup[31] = fieldpathop{"PushThreeLeftDeltaN", PushThreeLeftDeltaN, 0}
+		fieldpath_lookup[32] = fieldpathop{"PushThreeLeftDeltaOne", PushThreeLeftDeltaOne, 0}
+		fieldpath_lookup[33] = fieldpathop{"PushThreeLeftDeltaZero", PushThreeLeftDeltaZero, 0}
+		fieldpath_lookup[34] = fieldpathop{"PushTwoPack5LeftDeltaN", PushTwoPack5LeftDeltaN, 0}
+		fieldpath_lookup[35] = fieldpathop{"PushTwoPack5LeftDeltaOne", PushTwoPack5LeftDeltaOne, 0}
+		fieldpath_lookup[36] = fieldpathop{"PushTwoPack5LeftDeltaZero", PushTwoPack5LeftDeltaZero, 0}
+		fieldpath_lookup[37] = fieldpathop{"PushTwoLeftDeltaN", PushTwoLeftDeltaN, 0}
+		fieldpath_lookup[38] = fieldpathop{"PushTwoLeftDeltaOne", PushTwoLeftDeltaOne, 0}
+		fieldpath_lookup[39] = fieldpathop{"PushTwoLeftDeltaZero", PushTwoLeftDeltaZero, 0}
+	}
 
-	FieldPathOperations[0] = 36271
-	FieldPathOperations[1] = 10334
-	FieldPathOperations[2] = 1375
-	FieldPathOperations[3] = 646
-	FieldPathOperations[4] = 4128
-	FieldPathOperations[5] = 35
-	FieldPathOperations[6] = 3
-	FieldPathOperations[7] = 521
-	FieldPathOperations[8] = 2942
-	FieldPathOperations[9] = 560
-	FieldPathOperations[10] = 471
-	FieldPathOperations[11] = 10530
-	FieldPathOperations[12] = 251
-	FieldPathOperations[13] = 0
-	FieldPathOperations[14] = 0
-	FieldPathOperations[15] = 0
-	FieldPathOperations[16] = 0
-	FieldPathOperations[17] = 0
-	FieldPathOperations[18] = 0
-	FieldPathOperations[19] = 0
-	FieldPathOperations[20] = 0
-	FieldPathOperations[21] = 0
-	FieldPathOperations[22] = 0
-	FieldPathOperations[23] = 0
-	FieldPathOperations[24] = 0
-	FieldPathOperations[25] = 0
-	FieldPathOperations[26] = 310
-	FieldPathOperations[27] = 2
-	FieldPathOperations[28] = 0
-	FieldPathOperations[29] = 1837
-	FieldPathOperations[30] = 149
-	FieldPathOperations[31] = 300
-	FieldPathOperations[32] = 634
-	FieldPathOperations[33] = 0
-	FieldPathOperations[34] = 0
-	FieldPathOperations[35] = 1
-	FieldPathOperations[36] = 76
-	FieldPathOperations[37] = 271
-	FieldPathOperations[38] = 99
-	FieldPathOperations[39] = 25474
+	// Generate feq map
+	huffmanlist := make([]int, 40)
+	for i, fpo := range fieldpath_lookup {
+		huffmanlist[i] = fpo.Weight
+	}
 
-	return buildTree(FieldPathOperations)
+	tree := buildTree(huffmanlist)
+
+	return tree
 }
 
 func PlusOne(r *reader, fp *fieldpath) {
@@ -269,7 +249,6 @@ func PushOneLeftDeltaZeroRightZero(r *reader, fp *fieldpath) {
 func PushOneLeftDeltaZeroRightNonZero(r *reader, fp *fieldpath) {
 	if debugMode {
 		_debugf("Calling PushOneLeftDeltaZeroRightNonZero, %s, %d", fp.hierarchy[0].Name, fp.index[len(fp.index)-1])
-		printCodes(*fp.tree, []byte{})
 
 		//
 		// This get's called for the following fp_trace:
