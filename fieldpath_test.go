@@ -34,7 +34,7 @@ func TestFieldpath(t *testing.T) {
 			tableName:   "CWorld",
 			run:         true,
 			debug:       false,
-			expectCount: 134,
+			expectCount: 139,
 		},
 	}
 
