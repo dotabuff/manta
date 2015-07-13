@@ -29,7 +29,7 @@ var (
 
 // Convert a string to an int32
 func atoi32(s string) (int32, error) {
-	n, err := strconv.Atoi(s)
+	n, err := strconv.ParseInt(s, 0, 32)
 	if err != nil {
 		return 0, err
 	}
