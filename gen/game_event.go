@@ -115,11 +115,8 @@ func main() {
 
 		registerOut += fmt.Sprintf(`
       func (ge *GameEvents) %s(fn %s) {
-        if ge.%s == nil {
-          ge.%s = make([]%s, 0)
-        }
         ge.%s = append(ge.%s, fn)
-      }`+"\n\n", cbExt, fnSig, cbInt, cbInt, fnSig, cbInt, cbInt)
+      }`+"\n\n", cbExt, fnSig, cbInt, cbInt)
 
 		handlerOut += `
           for _, fn := range cbs {

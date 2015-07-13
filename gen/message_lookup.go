@@ -215,11 +215,8 @@ import (
 
 			onfn := spew.Sprintf(
 				`func (c *Callbacks) %s(fn %s) {
-          if c.%s == nil {
-            c.%s = make([]%s, 0)
-          }
           c.%s = append(c.%s, fn)
-          }`, cbName, fnsig, cbEnt, cbEnt, fnsig, cbEnt, cbEnt)
+          }`, cbName, fnsig, cbEnt, cbEnt)
 
 			if enum.Hook == "DEM" {
 				demSwitches = append(demSwitches, swtch)
