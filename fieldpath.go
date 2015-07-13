@@ -158,9 +158,11 @@ func PlusOne(r *reader, fp *fieldpath) {
 		_panicf("Overflow in PlusOne")
 	}
 
-	if field.Table == nil {
-		fp.fields = append(fp.fields, field.Field)
-	}
+	// It's likely that we should actually push the tables
+	// CWorld baseline advances from CPhysicsComponent.m_bCollisionActivationDisabled
+	// to CRenderComponent and calls Finish without actually reading any element.
+	// @todo: Investigate data, probably a handle
+	fp.fields = append(fp.fields, field.Field)
 }
 
 func PlusTwo(r *reader, fp *fieldpath) {
@@ -179,9 +181,7 @@ func PlusTwo(r *reader, fp *fieldpath) {
 		_panicf("Overflow in PlusOne")
 	}
 
-	if field.Table == nil {
-		fp.fields = append(fp.fields, field.Field)
-	}
+	fp.fields = append(fp.fields, field.Field)
 }
 
 func PlusThree(r *reader, fp *fieldpath) {
@@ -200,9 +200,7 @@ func PlusThree(r *reader, fp *fieldpath) {
 		_panicf("Overflow in PlusOne")
 	}
 
-	if field.Table == nil {
-		fp.fields = append(fp.fields, field.Field)
-	}
+	fp.fields = append(fp.fields, field.Field)
 }
 
 func PlusFour(r *reader, fp *fieldpath) {
@@ -221,11 +219,6 @@ func PlusFour(r *reader, fp *fieldpath) {
 		_panicf("Overflow in PlusOne")
 	}
 
-	if field.Table == nil {
-		fp.fields = append(fp.fields, field.Field)
-	}
-
-	// Append the field to our list
 	fp.fields = append(fp.fields, field.Field)
 }
 
@@ -247,9 +240,6 @@ func PushOneLeftDeltaZeroRightZero(r *reader, fp *fieldpath) {
 	if field.Table == nil {
 		_panicf("Trying to push field as table")
 	}
-
-	// It might be nessecary to actually push the base table here
-	// PlusOne(r, fp)
 
 	// Push the table, reset position to -1
 	fp.hierarchy = append(fp.hierarchy, field.Table)
