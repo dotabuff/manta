@@ -114,6 +114,18 @@ func TestReaderStrings(t *testing.T) {
 	assert.Equal("EXTRA", r.readString())
 }
 
+func TestReaderUnaligned(t *testing.T) {
+	assert := assert.New(t)
+
+	r := newReader([]byte{0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff})
+
+	assert.Equal(uint32(0x7f), r.readBits(7))
+	assert.Equal(uint32(0xff), r.readBits(8))
+	assert.Equal(uint32(0xffff), r.readBits(16))
+	assert.Equal(uint32(0xffffffff), r.readBits(32))
+	assert.Equal(uint32(0x01), r.readBits(1))
+}
+
 func BenchmarkReadVarUint32(b *testing.B) {
 	r := newReader([]byte{0x01, 0xFF, 0xFF, 0xFF, 0xFF, 0x0F, 0x8C, 0x01})
 	b.ResetTimer()
