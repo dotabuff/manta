@@ -2250,2053 +2250,1174 @@ type GameEvents struct {
 }
 
 func (ge *GameEvents) OnServerSpawn(fn func(*GameEventServerSpawn) error) {
-	if ge.onServerSpawn == nil {
-		ge.onServerSpawn = make([]func(*GameEventServerSpawn) error, 0)
-	}
 	ge.onServerSpawn = append(ge.onServerSpawn, fn)
 }
 
 func (ge *GameEvents) OnServerPreShutdown(fn func(*GameEventServerPreShutdown) error) {
-	if ge.onServerPreShutdown == nil {
-		ge.onServerPreShutdown = make([]func(*GameEventServerPreShutdown) error, 0)
-	}
 	ge.onServerPreShutdown = append(ge.onServerPreShutdown, fn)
 }
 
 func (ge *GameEvents) OnServerShutdown(fn func(*GameEventServerShutdown) error) {
-	if ge.onServerShutdown == nil {
-		ge.onServerShutdown = make([]func(*GameEventServerShutdown) error, 0)
-	}
 	ge.onServerShutdown = append(ge.onServerShutdown, fn)
 }
 
 func (ge *GameEvents) OnServerCvar(fn func(*GameEventServerCvar) error) {
-	if ge.onServerCvar == nil {
-		ge.onServerCvar = make([]func(*GameEventServerCvar) error, 0)
-	}
 	ge.onServerCvar = append(ge.onServerCvar, fn)
 }
 
 func (ge *GameEvents) OnServerMessage(fn func(*GameEventServerMessage) error) {
-	if ge.onServerMessage == nil {
-		ge.onServerMessage = make([]func(*GameEventServerMessage) error, 0)
-	}
 	ge.onServerMessage = append(ge.onServerMessage, fn)
 }
 
 func (ge *GameEvents) OnServerAddban(fn func(*GameEventServerAddban) error) {
-	if ge.onServerAddban == nil {
-		ge.onServerAddban = make([]func(*GameEventServerAddban) error, 0)
-	}
 	ge.onServerAddban = append(ge.onServerAddban, fn)
 }
 
 func (ge *GameEvents) OnServerRemoveban(fn func(*GameEventServerRemoveban) error) {
-	if ge.onServerRemoveban == nil {
-		ge.onServerRemoveban = make([]func(*GameEventServerRemoveban) error, 0)
-	}
 	ge.onServerRemoveban = append(ge.onServerRemoveban, fn)
 }
 
 func (ge *GameEvents) OnPlayerConnect(fn func(*GameEventPlayerConnect) error) {
-	if ge.onPlayerConnect == nil {
-		ge.onPlayerConnect = make([]func(*GameEventPlayerConnect) error, 0)
-	}
 	ge.onPlayerConnect = append(ge.onPlayerConnect, fn)
 }
 
 func (ge *GameEvents) OnPlayerInfo(fn func(*GameEventPlayerInfo) error) {
-	if ge.onPlayerInfo == nil {
-		ge.onPlayerInfo = make([]func(*GameEventPlayerInfo) error, 0)
-	}
 	ge.onPlayerInfo = append(ge.onPlayerInfo, fn)
 }
 
 func (ge *GameEvents) OnPlayerDisconnect(fn func(*GameEventPlayerDisconnect) error) {
-	if ge.onPlayerDisconnect == nil {
-		ge.onPlayerDisconnect = make([]func(*GameEventPlayerDisconnect) error, 0)
-	}
 	ge.onPlayerDisconnect = append(ge.onPlayerDisconnect, fn)
 }
 
 func (ge *GameEvents) OnPlayerActivate(fn func(*GameEventPlayerActivate) error) {
-	if ge.onPlayerActivate == nil {
-		ge.onPlayerActivate = make([]func(*GameEventPlayerActivate) error, 0)
-	}
 	ge.onPlayerActivate = append(ge.onPlayerActivate, fn)
 }
 
 func (ge *GameEvents) OnPlayerConnectFull(fn func(*GameEventPlayerConnectFull) error) {
-	if ge.onPlayerConnectFull == nil {
-		ge.onPlayerConnectFull = make([]func(*GameEventPlayerConnectFull) error, 0)
-	}
 	ge.onPlayerConnectFull = append(ge.onPlayerConnectFull, fn)
 }
 
 func (ge *GameEvents) OnPlayerSay(fn func(*GameEventPlayerSay) error) {
-	if ge.onPlayerSay == nil {
-		ge.onPlayerSay = make([]func(*GameEventPlayerSay) error, 0)
-	}
 	ge.onPlayerSay = append(ge.onPlayerSay, fn)
 }
 
 func (ge *GameEvents) OnPlayerFullUpdate(fn func(*GameEventPlayerFullUpdate) error) {
-	if ge.onPlayerFullUpdate == nil {
-		ge.onPlayerFullUpdate = make([]func(*GameEventPlayerFullUpdate) error, 0)
-	}
 	ge.onPlayerFullUpdate = append(ge.onPlayerFullUpdate, fn)
 }
 
 func (ge *GameEvents) OnTeamInfo(fn func(*GameEventTeamInfo) error) {
-	if ge.onTeamInfo == nil {
-		ge.onTeamInfo = make([]func(*GameEventTeamInfo) error, 0)
-	}
 	ge.onTeamInfo = append(ge.onTeamInfo, fn)
 }
 
 func (ge *GameEvents) OnTeamScore(fn func(*GameEventTeamScore) error) {
-	if ge.onTeamScore == nil {
-		ge.onTeamScore = make([]func(*GameEventTeamScore) error, 0)
-	}
 	ge.onTeamScore = append(ge.onTeamScore, fn)
 }
 
 func (ge *GameEvents) OnTeamplayBroadcastAudio(fn func(*GameEventTeamplayBroadcastAudio) error) {
-	if ge.onTeamplayBroadcastAudio == nil {
-		ge.onTeamplayBroadcastAudio = make([]func(*GameEventTeamplayBroadcastAudio) error, 0)
-	}
 	ge.onTeamplayBroadcastAudio = append(ge.onTeamplayBroadcastAudio, fn)
 }
 
 func (ge *GameEvents) OnPlayerTeam(fn func(*GameEventPlayerTeam) error) {
-	if ge.onPlayerTeam == nil {
-		ge.onPlayerTeam = make([]func(*GameEventPlayerTeam) error, 0)
-	}
 	ge.onPlayerTeam = append(ge.onPlayerTeam, fn)
 }
 
 func (ge *GameEvents) OnPlayerClass(fn func(*GameEventPlayerClass) error) {
-	if ge.onPlayerClass == nil {
-		ge.onPlayerClass = make([]func(*GameEventPlayerClass) error, 0)
-	}
 	ge.onPlayerClass = append(ge.onPlayerClass, fn)
 }
 
 func (ge *GameEvents) OnPlayerDeath(fn func(*GameEventPlayerDeath) error) {
-	if ge.onPlayerDeath == nil {
-		ge.onPlayerDeath = make([]func(*GameEventPlayerDeath) error, 0)
-	}
 	ge.onPlayerDeath = append(ge.onPlayerDeath, fn)
 }
 
 func (ge *GameEvents) OnPlayerHurt(fn func(*GameEventPlayerHurt) error) {
-	if ge.onPlayerHurt == nil {
-		ge.onPlayerHurt = make([]func(*GameEventPlayerHurt) error, 0)
-	}
 	ge.onPlayerHurt = append(ge.onPlayerHurt, fn)
 }
 
 func (ge *GameEvents) OnPlayerChat(fn func(*GameEventPlayerChat) error) {
-	if ge.onPlayerChat == nil {
-		ge.onPlayerChat = make([]func(*GameEventPlayerChat) error, 0)
-	}
 	ge.onPlayerChat = append(ge.onPlayerChat, fn)
 }
 
 func (ge *GameEvents) OnPlayerScore(fn func(*GameEventPlayerScore) error) {
-	if ge.onPlayerScore == nil {
-		ge.onPlayerScore = make([]func(*GameEventPlayerScore) error, 0)
-	}
 	ge.onPlayerScore = append(ge.onPlayerScore, fn)
 }
 
 func (ge *GameEvents) OnPlayerSpawn(fn func(*GameEventPlayerSpawn) error) {
-	if ge.onPlayerSpawn == nil {
-		ge.onPlayerSpawn = make([]func(*GameEventPlayerSpawn) error, 0)
-	}
 	ge.onPlayerSpawn = append(ge.onPlayerSpawn, fn)
 }
 
 func (ge *GameEvents) OnPlayerShoot(fn func(*GameEventPlayerShoot) error) {
-	if ge.onPlayerShoot == nil {
-		ge.onPlayerShoot = make([]func(*GameEventPlayerShoot) error, 0)
-	}
 	ge.onPlayerShoot = append(ge.onPlayerShoot, fn)
 }
 
 func (ge *GameEvents) OnPlayerUse(fn func(*GameEventPlayerUse) error) {
-	if ge.onPlayerUse == nil {
-		ge.onPlayerUse = make([]func(*GameEventPlayerUse) error, 0)
-	}
 	ge.onPlayerUse = append(ge.onPlayerUse, fn)
 }
 
 func (ge *GameEvents) OnPlayerChangename(fn func(*GameEventPlayerChangename) error) {
-	if ge.onPlayerChangename == nil {
-		ge.onPlayerChangename = make([]func(*GameEventPlayerChangename) error, 0)
-	}
 	ge.onPlayerChangename = append(ge.onPlayerChangename, fn)
 }
 
 func (ge *GameEvents) OnPlayerHintmessage(fn func(*GameEventPlayerHintmessage) error) {
-	if ge.onPlayerHintmessage == nil {
-		ge.onPlayerHintmessage = make([]func(*GameEventPlayerHintmessage) error, 0)
-	}
 	ge.onPlayerHintmessage = append(ge.onPlayerHintmessage, fn)
 }
 
 func (ge *GameEvents) OnGameInit(fn func(*GameEventGameInit) error) {
-	if ge.onGameInit == nil {
-		ge.onGameInit = make([]func(*GameEventGameInit) error, 0)
-	}
 	ge.onGameInit = append(ge.onGameInit, fn)
 }
 
 func (ge *GameEvents) OnGameNewmap(fn func(*GameEventGameNewmap) error) {
-	if ge.onGameNewmap == nil {
-		ge.onGameNewmap = make([]func(*GameEventGameNewmap) error, 0)
-	}
 	ge.onGameNewmap = append(ge.onGameNewmap, fn)
 }
 
 func (ge *GameEvents) OnGameStart(fn func(*GameEventGameStart) error) {
-	if ge.onGameStart == nil {
-		ge.onGameStart = make([]func(*GameEventGameStart) error, 0)
-	}
 	ge.onGameStart = append(ge.onGameStart, fn)
 }
 
 func (ge *GameEvents) OnGameEnd(fn func(*GameEventGameEnd) error) {
-	if ge.onGameEnd == nil {
-		ge.onGameEnd = make([]func(*GameEventGameEnd) error, 0)
-	}
 	ge.onGameEnd = append(ge.onGameEnd, fn)
 }
 
 func (ge *GameEvents) OnRoundStart(fn func(*GameEventRoundStart) error) {
-	if ge.onRoundStart == nil {
-		ge.onRoundStart = make([]func(*GameEventRoundStart) error, 0)
-	}
 	ge.onRoundStart = append(ge.onRoundStart, fn)
 }
 
 func (ge *GameEvents) OnRoundEnd(fn func(*GameEventRoundEnd) error) {
-	if ge.onRoundEnd == nil {
-		ge.onRoundEnd = make([]func(*GameEventRoundEnd) error, 0)
-	}
 	ge.onRoundEnd = append(ge.onRoundEnd, fn)
 }
 
 func (ge *GameEvents) OnRoundStartPreEntity(fn func(*GameEventRoundStartPreEntity) error) {
-	if ge.onRoundStartPreEntity == nil {
-		ge.onRoundStartPreEntity = make([]func(*GameEventRoundStartPreEntity) error, 0)
-	}
 	ge.onRoundStartPreEntity = append(ge.onRoundStartPreEntity, fn)
 }
 
 func (ge *GameEvents) OnTeamplayRoundStart(fn func(*GameEventTeamplayRoundStart) error) {
-	if ge.onTeamplayRoundStart == nil {
-		ge.onTeamplayRoundStart = make([]func(*GameEventTeamplayRoundStart) error, 0)
-	}
 	ge.onTeamplayRoundStart = append(ge.onTeamplayRoundStart, fn)
 }
 
 func (ge *GameEvents) OnHostnameChanged(fn func(*GameEventHostnameChanged) error) {
-	if ge.onHostnameChanged == nil {
-		ge.onHostnameChanged = make([]func(*GameEventHostnameChanged) error, 0)
-	}
 	ge.onHostnameChanged = append(ge.onHostnameChanged, fn)
 }
 
 func (ge *GameEvents) OnDifficultyChanged(fn func(*GameEventDifficultyChanged) error) {
-	if ge.onDifficultyChanged == nil {
-		ge.onDifficultyChanged = make([]func(*GameEventDifficultyChanged) error, 0)
-	}
 	ge.onDifficultyChanged = append(ge.onDifficultyChanged, fn)
 }
 
 func (ge *GameEvents) OnFinaleStart(fn func(*GameEventFinaleStart) error) {
-	if ge.onFinaleStart == nil {
-		ge.onFinaleStart = make([]func(*GameEventFinaleStart) error, 0)
-	}
 	ge.onFinaleStart = append(ge.onFinaleStart, fn)
 }
 
 func (ge *GameEvents) OnGameMessage(fn func(*GameEventGameMessage) error) {
-	if ge.onGameMessage == nil {
-		ge.onGameMessage = make([]func(*GameEventGameMessage) error, 0)
-	}
 	ge.onGameMessage = append(ge.onGameMessage, fn)
 }
 
 func (ge *GameEvents) OnBreakBreakable(fn func(*GameEventBreakBreakable) error) {
-	if ge.onBreakBreakable == nil {
-		ge.onBreakBreakable = make([]func(*GameEventBreakBreakable) error, 0)
-	}
 	ge.onBreakBreakable = append(ge.onBreakBreakable, fn)
 }
 
 func (ge *GameEvents) OnBreakProp(fn func(*GameEventBreakProp) error) {
-	if ge.onBreakProp == nil {
-		ge.onBreakProp = make([]func(*GameEventBreakProp) error, 0)
-	}
 	ge.onBreakProp = append(ge.onBreakProp, fn)
 }
 
 func (ge *GameEvents) OnNpcSpawned(fn func(*GameEventNpcSpawned) error) {
-	if ge.onNpcSpawned == nil {
-		ge.onNpcSpawned = make([]func(*GameEventNpcSpawned) error, 0)
-	}
 	ge.onNpcSpawned = append(ge.onNpcSpawned, fn)
 }
 
 func (ge *GameEvents) OnNpcReplaced(fn func(*GameEventNpcReplaced) error) {
-	if ge.onNpcReplaced == nil {
-		ge.onNpcReplaced = make([]func(*GameEventNpcReplaced) error, 0)
-	}
 	ge.onNpcReplaced = append(ge.onNpcReplaced, fn)
 }
 
 func (ge *GameEvents) OnEntityKilled(fn func(*GameEventEntityKilled) error) {
-	if ge.onEntityKilled == nil {
-		ge.onEntityKilled = make([]func(*GameEventEntityKilled) error, 0)
-	}
 	ge.onEntityKilled = append(ge.onEntityKilled, fn)
 }
 
 func (ge *GameEvents) OnEntityHurt(fn func(*GameEventEntityHurt) error) {
-	if ge.onEntityHurt == nil {
-		ge.onEntityHurt = make([]func(*GameEventEntityHurt) error, 0)
-	}
 	ge.onEntityHurt = append(ge.onEntityHurt, fn)
 }
 
 func (ge *GameEvents) OnBonusUpdated(fn func(*GameEventBonusUpdated) error) {
-	if ge.onBonusUpdated == nil {
-		ge.onBonusUpdated = make([]func(*GameEventBonusUpdated) error, 0)
-	}
 	ge.onBonusUpdated = append(ge.onBonusUpdated, fn)
 }
 
 func (ge *GameEvents) OnPlayerStatsUpdated(fn func(*GameEventPlayerStatsUpdated) error) {
-	if ge.onPlayerStatsUpdated == nil {
-		ge.onPlayerStatsUpdated = make([]func(*GameEventPlayerStatsUpdated) error, 0)
-	}
 	ge.onPlayerStatsUpdated = append(ge.onPlayerStatsUpdated, fn)
 }
 
 func (ge *GameEvents) OnAchievementEvent(fn func(*GameEventAchievementEvent) error) {
-	if ge.onAchievementEvent == nil {
-		ge.onAchievementEvent = make([]func(*GameEventAchievementEvent) error, 0)
-	}
 	ge.onAchievementEvent = append(ge.onAchievementEvent, fn)
 }
 
 func (ge *GameEvents) OnAchievementEarned(fn func(*GameEventAchievementEarned) error) {
-	if ge.onAchievementEarned == nil {
-		ge.onAchievementEarned = make([]func(*GameEventAchievementEarned) error, 0)
-	}
 	ge.onAchievementEarned = append(ge.onAchievementEarned, fn)
 }
 
 func (ge *GameEvents) OnAchievementWriteFailed(fn func(*GameEventAchievementWriteFailed) error) {
-	if ge.onAchievementWriteFailed == nil {
-		ge.onAchievementWriteFailed = make([]func(*GameEventAchievementWriteFailed) error, 0)
-	}
 	ge.onAchievementWriteFailed = append(ge.onAchievementWriteFailed, fn)
 }
 
 func (ge *GameEvents) OnPhysgunPickup(fn func(*GameEventPhysgunPickup) error) {
-	if ge.onPhysgunPickup == nil {
-		ge.onPhysgunPickup = make([]func(*GameEventPhysgunPickup) error, 0)
-	}
 	ge.onPhysgunPickup = append(ge.onPhysgunPickup, fn)
 }
 
 func (ge *GameEvents) OnFlareIgniteNpc(fn func(*GameEventFlareIgniteNpc) error) {
-	if ge.onFlareIgniteNpc == nil {
-		ge.onFlareIgniteNpc = make([]func(*GameEventFlareIgniteNpc) error, 0)
-	}
 	ge.onFlareIgniteNpc = append(ge.onFlareIgniteNpc, fn)
 }
 
 func (ge *GameEvents) OnHelicopterGrenadePuntMiss(fn func(*GameEventHelicopterGrenadePuntMiss) error) {
-	if ge.onHelicopterGrenadePuntMiss == nil {
-		ge.onHelicopterGrenadePuntMiss = make([]func(*GameEventHelicopterGrenadePuntMiss) error, 0)
-	}
 	ge.onHelicopterGrenadePuntMiss = append(ge.onHelicopterGrenadePuntMiss, fn)
 }
 
 func (ge *GameEvents) OnUserDataDownloaded(fn func(*GameEventUserDataDownloaded) error) {
-	if ge.onUserDataDownloaded == nil {
-		ge.onUserDataDownloaded = make([]func(*GameEventUserDataDownloaded) error, 0)
-	}
 	ge.onUserDataDownloaded = append(ge.onUserDataDownloaded, fn)
 }
 
 func (ge *GameEvents) OnRagdollDissolved(fn func(*GameEventRagdollDissolved) error) {
-	if ge.onRagdollDissolved == nil {
-		ge.onRagdollDissolved = make([]func(*GameEventRagdollDissolved) error, 0)
-	}
 	ge.onRagdollDissolved = append(ge.onRagdollDissolved, fn)
 }
 
 func (ge *GameEvents) OnGameinstructorDraw(fn func(*GameEventGameinstructorDraw) error) {
-	if ge.onGameinstructorDraw == nil {
-		ge.onGameinstructorDraw = make([]func(*GameEventGameinstructorDraw) error, 0)
-	}
 	ge.onGameinstructorDraw = append(ge.onGameinstructorDraw, fn)
 }
 
 func (ge *GameEvents) OnGameinstructorNodraw(fn func(*GameEventGameinstructorNodraw) error) {
-	if ge.onGameinstructorNodraw == nil {
-		ge.onGameinstructorNodraw = make([]func(*GameEventGameinstructorNodraw) error, 0)
-	}
 	ge.onGameinstructorNodraw = append(ge.onGameinstructorNodraw, fn)
 }
 
 func (ge *GameEvents) OnMapTransition(fn func(*GameEventMapTransition) error) {
-	if ge.onMapTransition == nil {
-		ge.onMapTransition = make([]func(*GameEventMapTransition) error, 0)
-	}
 	ge.onMapTransition = append(ge.onMapTransition, fn)
 }
 
 func (ge *GameEvents) OnInstructorServerHintCreate(fn func(*GameEventInstructorServerHintCreate) error) {
-	if ge.onInstructorServerHintCreate == nil {
-		ge.onInstructorServerHintCreate = make([]func(*GameEventInstructorServerHintCreate) error, 0)
-	}
 	ge.onInstructorServerHintCreate = append(ge.onInstructorServerHintCreate, fn)
 }
 
 func (ge *GameEvents) OnInstructorServerHintStop(fn func(*GameEventInstructorServerHintStop) error) {
-	if ge.onInstructorServerHintStop == nil {
-		ge.onInstructorServerHintStop = make([]func(*GameEventInstructorServerHintStop) error, 0)
-	}
 	ge.onInstructorServerHintStop = append(ge.onInstructorServerHintStop, fn)
 }
 
 func (ge *GameEvents) OnChatNewMessage(fn func(*GameEventChatNewMessage) error) {
-	if ge.onChatNewMessage == nil {
-		ge.onChatNewMessage = make([]func(*GameEventChatNewMessage) error, 0)
-	}
 	ge.onChatNewMessage = append(ge.onChatNewMessage, fn)
 }
 
 func (ge *GameEvents) OnChatMembersChanged(fn func(*GameEventChatMembersChanged) error) {
-	if ge.onChatMembersChanged == nil {
-		ge.onChatMembersChanged = make([]func(*GameEventChatMembersChanged) error, 0)
-	}
 	ge.onChatMembersChanged = append(ge.onChatMembersChanged, fn)
 }
 
 func (ge *GameEvents) OnInventoryUpdated(fn func(*GameEventInventoryUpdated) error) {
-	if ge.onInventoryUpdated == nil {
-		ge.onInventoryUpdated = make([]func(*GameEventInventoryUpdated) error, 0)
-	}
 	ge.onInventoryUpdated = append(ge.onInventoryUpdated, fn)
 }
 
 func (ge *GameEvents) OnCartUpdated(fn func(*GameEventCartUpdated) error) {
-	if ge.onCartUpdated == nil {
-		ge.onCartUpdated = make([]func(*GameEventCartUpdated) error, 0)
-	}
 	ge.onCartUpdated = append(ge.onCartUpdated, fn)
 }
 
 func (ge *GameEvents) OnStorePricesheetUpdated(fn func(*GameEventStorePricesheetUpdated) error) {
-	if ge.onStorePricesheetUpdated == nil {
-		ge.onStorePricesheetUpdated = make([]func(*GameEventStorePricesheetUpdated) error, 0)
-	}
 	ge.onStorePricesheetUpdated = append(ge.onStorePricesheetUpdated, fn)
 }
 
 func (ge *GameEvents) OnGcConnected(fn func(*GameEventGcConnected) error) {
-	if ge.onGcConnected == nil {
-		ge.onGcConnected = make([]func(*GameEventGcConnected) error, 0)
-	}
 	ge.onGcConnected = append(ge.onGcConnected, fn)
 }
 
 func (ge *GameEvents) OnItemSchemaInitialized(fn func(*GameEventItemSchemaInitialized) error) {
-	if ge.onItemSchemaInitialized == nil {
-		ge.onItemSchemaInitialized = make([]func(*GameEventItemSchemaInitialized) error, 0)
-	}
 	ge.onItemSchemaInitialized = append(ge.onItemSchemaInitialized, fn)
 }
 
 func (ge *GameEvents) OnDropRateModified(fn func(*GameEventDropRateModified) error) {
-	if ge.onDropRateModified == nil {
-		ge.onDropRateModified = make([]func(*GameEventDropRateModified) error, 0)
-	}
 	ge.onDropRateModified = append(ge.onDropRateModified, fn)
 }
 
 func (ge *GameEvents) OnEventTicketModified(fn func(*GameEventEventTicketModified) error) {
-	if ge.onEventTicketModified == nil {
-		ge.onEventTicketModified = make([]func(*GameEventEventTicketModified) error, 0)
-	}
 	ge.onEventTicketModified = append(ge.onEventTicketModified, fn)
 }
 
 func (ge *GameEvents) OnModifierEvent(fn func(*GameEventModifierEvent) error) {
-	if ge.onModifierEvent == nil {
-		ge.onModifierEvent = make([]func(*GameEventModifierEvent) error, 0)
-	}
 	ge.onModifierEvent = append(ge.onModifierEvent, fn)
 }
 
 func (ge *GameEvents) OnDotaPlayerKill(fn func(*GameEventDotaPlayerKill) error) {
-	if ge.onDotaPlayerKill == nil {
-		ge.onDotaPlayerKill = make([]func(*GameEventDotaPlayerKill) error, 0)
-	}
 	ge.onDotaPlayerKill = append(ge.onDotaPlayerKill, fn)
 }
 
 func (ge *GameEvents) OnDotaPlayerDeny(fn func(*GameEventDotaPlayerDeny) error) {
-	if ge.onDotaPlayerDeny == nil {
-		ge.onDotaPlayerDeny = make([]func(*GameEventDotaPlayerDeny) error, 0)
-	}
 	ge.onDotaPlayerDeny = append(ge.onDotaPlayerDeny, fn)
 }
 
 func (ge *GameEvents) OnDotaBarracksKill(fn func(*GameEventDotaBarracksKill) error) {
-	if ge.onDotaBarracksKill == nil {
-		ge.onDotaBarracksKill = make([]func(*GameEventDotaBarracksKill) error, 0)
-	}
 	ge.onDotaBarracksKill = append(ge.onDotaBarracksKill, fn)
 }
 
 func (ge *GameEvents) OnDotaTowerKill(fn func(*GameEventDotaTowerKill) error) {
-	if ge.onDotaTowerKill == nil {
-		ge.onDotaTowerKill = make([]func(*GameEventDotaTowerKill) error, 0)
-	}
 	ge.onDotaTowerKill = append(ge.onDotaTowerKill, fn)
 }
 
 func (ge *GameEvents) OnDotaEffigyKill(fn func(*GameEventDotaEffigyKill) error) {
-	if ge.onDotaEffigyKill == nil {
-		ge.onDotaEffigyKill = make([]func(*GameEventDotaEffigyKill) error, 0)
-	}
 	ge.onDotaEffigyKill = append(ge.onDotaEffigyKill, fn)
 }
 
 func (ge *GameEvents) OnDotaRoshanKill(fn func(*GameEventDotaRoshanKill) error) {
-	if ge.onDotaRoshanKill == nil {
-		ge.onDotaRoshanKill = make([]func(*GameEventDotaRoshanKill) error, 0)
-	}
 	ge.onDotaRoshanKill = append(ge.onDotaRoshanKill, fn)
 }
 
 func (ge *GameEvents) OnDotaCourierLost(fn func(*GameEventDotaCourierLost) error) {
-	if ge.onDotaCourierLost == nil {
-		ge.onDotaCourierLost = make([]func(*GameEventDotaCourierLost) error, 0)
-	}
 	ge.onDotaCourierLost = append(ge.onDotaCourierLost, fn)
 }
 
 func (ge *GameEvents) OnDotaCourierRespawned(fn func(*GameEventDotaCourierRespawned) error) {
-	if ge.onDotaCourierRespawned == nil {
-		ge.onDotaCourierRespawned = make([]func(*GameEventDotaCourierRespawned) error, 0)
-	}
 	ge.onDotaCourierRespawned = append(ge.onDotaCourierRespawned, fn)
 }
 
 func (ge *GameEvents) OnDotaGlyphUsed(fn func(*GameEventDotaGlyphUsed) error) {
-	if ge.onDotaGlyphUsed == nil {
-		ge.onDotaGlyphUsed = make([]func(*GameEventDotaGlyphUsed) error, 0)
-	}
 	ge.onDotaGlyphUsed = append(ge.onDotaGlyphUsed, fn)
 }
 
 func (ge *GameEvents) OnDotaSuperCreeps(fn func(*GameEventDotaSuperCreeps) error) {
-	if ge.onDotaSuperCreeps == nil {
-		ge.onDotaSuperCreeps = make([]func(*GameEventDotaSuperCreeps) error, 0)
-	}
 	ge.onDotaSuperCreeps = append(ge.onDotaSuperCreeps, fn)
 }
 
 func (ge *GameEvents) OnDotaItemPurchase(fn func(*GameEventDotaItemPurchase) error) {
-	if ge.onDotaItemPurchase == nil {
-		ge.onDotaItemPurchase = make([]func(*GameEventDotaItemPurchase) error, 0)
-	}
 	ge.onDotaItemPurchase = append(ge.onDotaItemPurchase, fn)
 }
 
 func (ge *GameEvents) OnDotaItemGifted(fn func(*GameEventDotaItemGifted) error) {
-	if ge.onDotaItemGifted == nil {
-		ge.onDotaItemGifted = make([]func(*GameEventDotaItemGifted) error, 0)
-	}
 	ge.onDotaItemGifted = append(ge.onDotaItemGifted, fn)
 }
 
 func (ge *GameEvents) OnDotaRunePickup(fn func(*GameEventDotaRunePickup) error) {
-	if ge.onDotaRunePickup == nil {
-		ge.onDotaRunePickup = make([]func(*GameEventDotaRunePickup) error, 0)
-	}
 	ge.onDotaRunePickup = append(ge.onDotaRunePickup, fn)
 }
 
 func (ge *GameEvents) OnDotaRuneSpotted(fn func(*GameEventDotaRuneSpotted) error) {
-	if ge.onDotaRuneSpotted == nil {
-		ge.onDotaRuneSpotted = make([]func(*GameEventDotaRuneSpotted) error, 0)
-	}
 	ge.onDotaRuneSpotted = append(ge.onDotaRuneSpotted, fn)
 }
 
 func (ge *GameEvents) OnDotaItemSpotted(fn func(*GameEventDotaItemSpotted) error) {
-	if ge.onDotaItemSpotted == nil {
-		ge.onDotaItemSpotted = make([]func(*GameEventDotaItemSpotted) error, 0)
-	}
 	ge.onDotaItemSpotted = append(ge.onDotaItemSpotted, fn)
 }
 
 func (ge *GameEvents) OnDotaNoBattlePoints(fn func(*GameEventDotaNoBattlePoints) error) {
-	if ge.onDotaNoBattlePoints == nil {
-		ge.onDotaNoBattlePoints = make([]func(*GameEventDotaNoBattlePoints) error, 0)
-	}
 	ge.onDotaNoBattlePoints = append(ge.onDotaNoBattlePoints, fn)
 }
 
 func (ge *GameEvents) OnDotaChatInformational(fn func(*GameEventDotaChatInformational) error) {
-	if ge.onDotaChatInformational == nil {
-		ge.onDotaChatInformational = make([]func(*GameEventDotaChatInformational) error, 0)
-	}
 	ge.onDotaChatInformational = append(ge.onDotaChatInformational, fn)
 }
 
 func (ge *GameEvents) OnDotaActionItem(fn func(*GameEventDotaActionItem) error) {
-	if ge.onDotaActionItem == nil {
-		ge.onDotaActionItem = make([]func(*GameEventDotaActionItem) error, 0)
-	}
 	ge.onDotaActionItem = append(ge.onDotaActionItem, fn)
 }
 
 func (ge *GameEvents) OnDotaChatBanNotification(fn func(*GameEventDotaChatBanNotification) error) {
-	if ge.onDotaChatBanNotification == nil {
-		ge.onDotaChatBanNotification = make([]func(*GameEventDotaChatBanNotification) error, 0)
-	}
 	ge.onDotaChatBanNotification = append(ge.onDotaChatBanNotification, fn)
 }
 
 func (ge *GameEvents) OnDotaChatEvent(fn func(*GameEventDotaChatEvent) error) {
-	if ge.onDotaChatEvent == nil {
-		ge.onDotaChatEvent = make([]func(*GameEventDotaChatEvent) error, 0)
-	}
 	ge.onDotaChatEvent = append(ge.onDotaChatEvent, fn)
 }
 
 func (ge *GameEvents) OnDotaChatTimedReward(fn func(*GameEventDotaChatTimedReward) error) {
-	if ge.onDotaChatTimedReward == nil {
-		ge.onDotaChatTimedReward = make([]func(*GameEventDotaChatTimedReward) error, 0)
-	}
 	ge.onDotaChatTimedReward = append(ge.onDotaChatTimedReward, fn)
 }
 
 func (ge *GameEvents) OnDotaPauseEvent(fn func(*GameEventDotaPauseEvent) error) {
-	if ge.onDotaPauseEvent == nil {
-		ge.onDotaPauseEvent = make([]func(*GameEventDotaPauseEvent) error, 0)
-	}
 	ge.onDotaPauseEvent = append(ge.onDotaPauseEvent, fn)
 }
 
 func (ge *GameEvents) OnDotaChatKillStreak(fn func(*GameEventDotaChatKillStreak) error) {
-	if ge.onDotaChatKillStreak == nil {
-		ge.onDotaChatKillStreak = make([]func(*GameEventDotaChatKillStreak) error, 0)
-	}
 	ge.onDotaChatKillStreak = append(ge.onDotaChatKillStreak, fn)
 }
 
 func (ge *GameEvents) OnDotaChatFirstBlood(fn func(*GameEventDotaChatFirstBlood) error) {
-	if ge.onDotaChatFirstBlood == nil {
-		ge.onDotaChatFirstBlood = make([]func(*GameEventDotaChatFirstBlood) error, 0)
-	}
 	ge.onDotaChatFirstBlood = append(ge.onDotaChatFirstBlood, fn)
 }
 
 func (ge *GameEvents) OnDotaChatAssassinAnnounce(fn func(*GameEventDotaChatAssassinAnnounce) error) {
-	if ge.onDotaChatAssassinAnnounce == nil {
-		ge.onDotaChatAssassinAnnounce = make([]func(*GameEventDotaChatAssassinAnnounce) error, 0)
-	}
 	ge.onDotaChatAssassinAnnounce = append(ge.onDotaChatAssassinAnnounce, fn)
 }
 
 func (ge *GameEvents) OnDotaChatAssassinDenied(fn func(*GameEventDotaChatAssassinDenied) error) {
-	if ge.onDotaChatAssassinDenied == nil {
-		ge.onDotaChatAssassinDenied = make([]func(*GameEventDotaChatAssassinDenied) error, 0)
-	}
 	ge.onDotaChatAssassinDenied = append(ge.onDotaChatAssassinDenied, fn)
 }
 
 func (ge *GameEvents) OnDotaChatAssassinSuccess(fn func(*GameEventDotaChatAssassinSuccess) error) {
-	if ge.onDotaChatAssassinSuccess == nil {
-		ge.onDotaChatAssassinSuccess = make([]func(*GameEventDotaChatAssassinSuccess) error, 0)
-	}
 	ge.onDotaChatAssassinSuccess = append(ge.onDotaChatAssassinSuccess, fn)
 }
 
 func (ge *GameEvents) OnDotaPlayerUpdateHeroSelection(fn func(*GameEventDotaPlayerUpdateHeroSelection) error) {
-	if ge.onDotaPlayerUpdateHeroSelection == nil {
-		ge.onDotaPlayerUpdateHeroSelection = make([]func(*GameEventDotaPlayerUpdateHeroSelection) error, 0)
-	}
 	ge.onDotaPlayerUpdateHeroSelection = append(ge.onDotaPlayerUpdateHeroSelection, fn)
 }
 
 func (ge *GameEvents) OnDotaPlayerUpdateSelectedUnit(fn func(*GameEventDotaPlayerUpdateSelectedUnit) error) {
-	if ge.onDotaPlayerUpdateSelectedUnit == nil {
-		ge.onDotaPlayerUpdateSelectedUnit = make([]func(*GameEventDotaPlayerUpdateSelectedUnit) error, 0)
-	}
 	ge.onDotaPlayerUpdateSelectedUnit = append(ge.onDotaPlayerUpdateSelectedUnit, fn)
 }
 
 func (ge *GameEvents) OnDotaPlayerUpdateQueryUnit(fn func(*GameEventDotaPlayerUpdateQueryUnit) error) {
-	if ge.onDotaPlayerUpdateQueryUnit == nil {
-		ge.onDotaPlayerUpdateQueryUnit = make([]func(*GameEventDotaPlayerUpdateQueryUnit) error, 0)
-	}
 	ge.onDotaPlayerUpdateQueryUnit = append(ge.onDotaPlayerUpdateQueryUnit, fn)
 }
 
 func (ge *GameEvents) OnDotaPlayerUpdateKillcamUnit(fn func(*GameEventDotaPlayerUpdateKillcamUnit) error) {
-	if ge.onDotaPlayerUpdateKillcamUnit == nil {
-		ge.onDotaPlayerUpdateKillcamUnit = make([]func(*GameEventDotaPlayerUpdateKillcamUnit) error, 0)
-	}
 	ge.onDotaPlayerUpdateKillcamUnit = append(ge.onDotaPlayerUpdateKillcamUnit, fn)
 }
 
 func (ge *GameEvents) OnDotaPlayerTakeTowerDamage(fn func(*GameEventDotaPlayerTakeTowerDamage) error) {
-	if ge.onDotaPlayerTakeTowerDamage == nil {
-		ge.onDotaPlayerTakeTowerDamage = make([]func(*GameEventDotaPlayerTakeTowerDamage) error, 0)
-	}
 	ge.onDotaPlayerTakeTowerDamage = append(ge.onDotaPlayerTakeTowerDamage, fn)
 }
 
 func (ge *GameEvents) OnDotaHudErrorMessage(fn func(*GameEventDotaHudErrorMessage) error) {
-	if ge.onDotaHudErrorMessage == nil {
-		ge.onDotaHudErrorMessage = make([]func(*GameEventDotaHudErrorMessage) error, 0)
-	}
 	ge.onDotaHudErrorMessage = append(ge.onDotaHudErrorMessage, fn)
 }
 
 func (ge *GameEvents) OnDotaActionSuccess(fn func(*GameEventDotaActionSuccess) error) {
-	if ge.onDotaActionSuccess == nil {
-		ge.onDotaActionSuccess = make([]func(*GameEventDotaActionSuccess) error, 0)
-	}
 	ge.onDotaActionSuccess = append(ge.onDotaActionSuccess, fn)
 }
 
 func (ge *GameEvents) OnDotaStartingPositionChanged(fn func(*GameEventDotaStartingPositionChanged) error) {
-	if ge.onDotaStartingPositionChanged == nil {
-		ge.onDotaStartingPositionChanged = make([]func(*GameEventDotaStartingPositionChanged) error, 0)
-	}
 	ge.onDotaStartingPositionChanged = append(ge.onDotaStartingPositionChanged, fn)
 }
 
 func (ge *GameEvents) OnDotaMoneyChanged(fn func(*GameEventDotaMoneyChanged) error) {
-	if ge.onDotaMoneyChanged == nil {
-		ge.onDotaMoneyChanged = make([]func(*GameEventDotaMoneyChanged) error, 0)
-	}
 	ge.onDotaMoneyChanged = append(ge.onDotaMoneyChanged, fn)
 }
 
 func (ge *GameEvents) OnDotaEnemyMoneyChanged(fn func(*GameEventDotaEnemyMoneyChanged) error) {
-	if ge.onDotaEnemyMoneyChanged == nil {
-		ge.onDotaEnemyMoneyChanged = make([]func(*GameEventDotaEnemyMoneyChanged) error, 0)
-	}
 	ge.onDotaEnemyMoneyChanged = append(ge.onDotaEnemyMoneyChanged, fn)
 }
 
 func (ge *GameEvents) OnDotaPortraitUnitStatsChanged(fn func(*GameEventDotaPortraitUnitStatsChanged) error) {
-	if ge.onDotaPortraitUnitStatsChanged == nil {
-		ge.onDotaPortraitUnitStatsChanged = make([]func(*GameEventDotaPortraitUnitStatsChanged) error, 0)
-	}
 	ge.onDotaPortraitUnitStatsChanged = append(ge.onDotaPortraitUnitStatsChanged, fn)
 }
 
 func (ge *GameEvents) OnDotaPortraitUnitModifiersChanged(fn func(*GameEventDotaPortraitUnitModifiersChanged) error) {
-	if ge.onDotaPortraitUnitModifiersChanged == nil {
-		ge.onDotaPortraitUnitModifiersChanged = make([]func(*GameEventDotaPortraitUnitModifiersChanged) error, 0)
-	}
 	ge.onDotaPortraitUnitModifiersChanged = append(ge.onDotaPortraitUnitModifiersChanged, fn)
 }
 
 func (ge *GameEvents) OnDotaForcePortraitUpdate(fn func(*GameEventDotaForcePortraitUpdate) error) {
-	if ge.onDotaForcePortraitUpdate == nil {
-		ge.onDotaForcePortraitUpdate = make([]func(*GameEventDotaForcePortraitUpdate) error, 0)
-	}
 	ge.onDotaForcePortraitUpdate = append(ge.onDotaForcePortraitUpdate, fn)
 }
 
 func (ge *GameEvents) OnDotaInventoryChanged(fn func(*GameEventDotaInventoryChanged) error) {
-	if ge.onDotaInventoryChanged == nil {
-		ge.onDotaInventoryChanged = make([]func(*GameEventDotaInventoryChanged) error, 0)
-	}
 	ge.onDotaInventoryChanged = append(ge.onDotaInventoryChanged, fn)
 }
 
 func (ge *GameEvents) OnDotaItemPickedUp(fn func(*GameEventDotaItemPickedUp) error) {
-	if ge.onDotaItemPickedUp == nil {
-		ge.onDotaItemPickedUp = make([]func(*GameEventDotaItemPickedUp) error, 0)
-	}
 	ge.onDotaItemPickedUp = append(ge.onDotaItemPickedUp, fn)
 }
 
 func (ge *GameEvents) OnDotaInventoryItemChanged(fn func(*GameEventDotaInventoryItemChanged) error) {
-	if ge.onDotaInventoryItemChanged == nil {
-		ge.onDotaInventoryItemChanged = make([]func(*GameEventDotaInventoryItemChanged) error, 0)
-	}
 	ge.onDotaInventoryItemChanged = append(ge.onDotaInventoryItemChanged, fn)
 }
 
 func (ge *GameEvents) OnDotaAbilityChanged(fn func(*GameEventDotaAbilityChanged) error) {
-	if ge.onDotaAbilityChanged == nil {
-		ge.onDotaAbilityChanged = make([]func(*GameEventDotaAbilityChanged) error, 0)
-	}
 	ge.onDotaAbilityChanged = append(ge.onDotaAbilityChanged, fn)
 }
 
 func (ge *GameEvents) OnDotaPortraitAbilityLayoutChanged(fn func(*GameEventDotaPortraitAbilityLayoutChanged) error) {
-	if ge.onDotaPortraitAbilityLayoutChanged == nil {
-		ge.onDotaPortraitAbilityLayoutChanged = make([]func(*GameEventDotaPortraitAbilityLayoutChanged) error, 0)
-	}
 	ge.onDotaPortraitAbilityLayoutChanged = append(ge.onDotaPortraitAbilityLayoutChanged, fn)
 }
 
 func (ge *GameEvents) OnDotaInventoryItemAdded(fn func(*GameEventDotaInventoryItemAdded) error) {
-	if ge.onDotaInventoryItemAdded == nil {
-		ge.onDotaInventoryItemAdded = make([]func(*GameEventDotaInventoryItemAdded) error, 0)
-	}
 	ge.onDotaInventoryItemAdded = append(ge.onDotaInventoryItemAdded, fn)
 }
 
 func (ge *GameEvents) OnDotaInventoryChangedQueryUnit(fn func(*GameEventDotaInventoryChangedQueryUnit) error) {
-	if ge.onDotaInventoryChangedQueryUnit == nil {
-		ge.onDotaInventoryChangedQueryUnit = make([]func(*GameEventDotaInventoryChangedQueryUnit) error, 0)
-	}
 	ge.onDotaInventoryChangedQueryUnit = append(ge.onDotaInventoryChangedQueryUnit, fn)
 }
 
 func (ge *GameEvents) OnDotaLinkClicked(fn func(*GameEventDotaLinkClicked) error) {
-	if ge.onDotaLinkClicked == nil {
-		ge.onDotaLinkClicked = make([]func(*GameEventDotaLinkClicked) error, 0)
-	}
 	ge.onDotaLinkClicked = append(ge.onDotaLinkClicked, fn)
 }
 
 func (ge *GameEvents) OnDotaSetQuickBuy(fn func(*GameEventDotaSetQuickBuy) error) {
-	if ge.onDotaSetQuickBuy == nil {
-		ge.onDotaSetQuickBuy = make([]func(*GameEventDotaSetQuickBuy) error, 0)
-	}
 	ge.onDotaSetQuickBuy = append(ge.onDotaSetQuickBuy, fn)
 }
 
 func (ge *GameEvents) OnDotaQuickBuyChanged(fn func(*GameEventDotaQuickBuyChanged) error) {
-	if ge.onDotaQuickBuyChanged == nil {
-		ge.onDotaQuickBuyChanged = make([]func(*GameEventDotaQuickBuyChanged) error, 0)
-	}
 	ge.onDotaQuickBuyChanged = append(ge.onDotaQuickBuyChanged, fn)
 }
 
 func (ge *GameEvents) OnDotaPlayerShopChanged(fn func(*GameEventDotaPlayerShopChanged) error) {
-	if ge.onDotaPlayerShopChanged == nil {
-		ge.onDotaPlayerShopChanged = make([]func(*GameEventDotaPlayerShopChanged) error, 0)
-	}
 	ge.onDotaPlayerShopChanged = append(ge.onDotaPlayerShopChanged, fn)
 }
 
 func (ge *GameEvents) OnDotaPlayerShowKillcam(fn func(*GameEventDotaPlayerShowKillcam) error) {
-	if ge.onDotaPlayerShowKillcam == nil {
-		ge.onDotaPlayerShowKillcam = make([]func(*GameEventDotaPlayerShowKillcam) error, 0)
-	}
 	ge.onDotaPlayerShowKillcam = append(ge.onDotaPlayerShowKillcam, fn)
 }
 
 func (ge *GameEvents) OnDotaPlayerShowMinikillcam(fn func(*GameEventDotaPlayerShowMinikillcam) error) {
-	if ge.onDotaPlayerShowMinikillcam == nil {
-		ge.onDotaPlayerShowMinikillcam = make([]func(*GameEventDotaPlayerShowMinikillcam) error, 0)
-	}
 	ge.onDotaPlayerShowMinikillcam = append(ge.onDotaPlayerShowMinikillcam, fn)
 }
 
 func (ge *GameEvents) OnGcUserSessionCreated(fn func(*GameEventGcUserSessionCreated) error) {
-	if ge.onGcUserSessionCreated == nil {
-		ge.onGcUserSessionCreated = make([]func(*GameEventGcUserSessionCreated) error, 0)
-	}
 	ge.onGcUserSessionCreated = append(ge.onGcUserSessionCreated, fn)
 }
 
 func (ge *GameEvents) OnTeamDataUpdated(fn func(*GameEventTeamDataUpdated) error) {
-	if ge.onTeamDataUpdated == nil {
-		ge.onTeamDataUpdated = make([]func(*GameEventTeamDataUpdated) error, 0)
-	}
 	ge.onTeamDataUpdated = append(ge.onTeamDataUpdated, fn)
 }
 
 func (ge *GameEvents) OnGuildDataUpdated(fn func(*GameEventGuildDataUpdated) error) {
-	if ge.onGuildDataUpdated == nil {
-		ge.onGuildDataUpdated = make([]func(*GameEventGuildDataUpdated) error, 0)
-	}
 	ge.onGuildDataUpdated = append(ge.onGuildDataUpdated, fn)
 }
 
 func (ge *GameEvents) OnGuildOpenPartiesUpdated(fn func(*GameEventGuildOpenPartiesUpdated) error) {
-	if ge.onGuildOpenPartiesUpdated == nil {
-		ge.onGuildOpenPartiesUpdated = make([]func(*GameEventGuildOpenPartiesUpdated) error, 0)
-	}
 	ge.onGuildOpenPartiesUpdated = append(ge.onGuildOpenPartiesUpdated, fn)
 }
 
 func (ge *GameEvents) OnFantasyUpdated(fn func(*GameEventFantasyUpdated) error) {
-	if ge.onFantasyUpdated == nil {
-		ge.onFantasyUpdated = make([]func(*GameEventFantasyUpdated) error, 0)
-	}
 	ge.onFantasyUpdated = append(ge.onFantasyUpdated, fn)
 }
 
 func (ge *GameEvents) OnFantasyLeagueChanged(fn func(*GameEventFantasyLeagueChanged) error) {
-	if ge.onFantasyLeagueChanged == nil {
-		ge.onFantasyLeagueChanged = make([]func(*GameEventFantasyLeagueChanged) error, 0)
-	}
 	ge.onFantasyLeagueChanged = append(ge.onFantasyLeagueChanged, fn)
 }
 
 func (ge *GameEvents) OnFantasyScoreInfoChanged(fn func(*GameEventFantasyScoreInfoChanged) error) {
-	if ge.onFantasyScoreInfoChanged == nil {
-		ge.onFantasyScoreInfoChanged = make([]func(*GameEventFantasyScoreInfoChanged) error, 0)
-	}
 	ge.onFantasyScoreInfoChanged = append(ge.onFantasyScoreInfoChanged, fn)
 }
 
 func (ge *GameEvents) OnPlayerInfoUpdated(fn func(*GameEventPlayerInfoUpdated) error) {
-	if ge.onPlayerInfoUpdated == nil {
-		ge.onPlayerInfoUpdated = make([]func(*GameEventPlayerInfoUpdated) error, 0)
-	}
 	ge.onPlayerInfoUpdated = append(ge.onPlayerInfoUpdated, fn)
 }
 
 func (ge *GameEvents) OnPlayerInfoIndividualUpdated(fn func(*GameEventPlayerInfoIndividualUpdated) error) {
-	if ge.onPlayerInfoIndividualUpdated == nil {
-		ge.onPlayerInfoIndividualUpdated = make([]func(*GameEventPlayerInfoIndividualUpdated) error, 0)
-	}
 	ge.onPlayerInfoIndividualUpdated = append(ge.onPlayerInfoIndividualUpdated, fn)
 }
 
 func (ge *GameEvents) OnGameRulesStateChange(fn func(*GameEventGameRulesStateChange) error) {
-	if ge.onGameRulesStateChange == nil {
-		ge.onGameRulesStateChange = make([]func(*GameEventGameRulesStateChange) error, 0)
-	}
 	ge.onGameRulesStateChange = append(ge.onGameRulesStateChange, fn)
 }
 
 func (ge *GameEvents) OnMatchHistoryUpdated(fn func(*GameEventMatchHistoryUpdated) error) {
-	if ge.onMatchHistoryUpdated == nil {
-		ge.onMatchHistoryUpdated = make([]func(*GameEventMatchHistoryUpdated) error, 0)
-	}
 	ge.onMatchHistoryUpdated = append(ge.onMatchHistoryUpdated, fn)
 }
 
 func (ge *GameEvents) OnMatchDetailsUpdated(fn func(*GameEventMatchDetailsUpdated) error) {
-	if ge.onMatchDetailsUpdated == nil {
-		ge.onMatchDetailsUpdated = make([]func(*GameEventMatchDetailsUpdated) error, 0)
-	}
 	ge.onMatchDetailsUpdated = append(ge.onMatchDetailsUpdated, fn)
 }
 
 func (ge *GameEvents) OnLiveGamesUpdated(fn func(*GameEventLiveGamesUpdated) error) {
-	if ge.onLiveGamesUpdated == nil {
-		ge.onLiveGamesUpdated = make([]func(*GameEventLiveGamesUpdated) error, 0)
-	}
 	ge.onLiveGamesUpdated = append(ge.onLiveGamesUpdated, fn)
 }
 
 func (ge *GameEvents) OnRecentMatchesUpdated(fn func(*GameEventRecentMatchesUpdated) error) {
-	if ge.onRecentMatchesUpdated == nil {
-		ge.onRecentMatchesUpdated = make([]func(*GameEventRecentMatchesUpdated) error, 0)
-	}
 	ge.onRecentMatchesUpdated = append(ge.onRecentMatchesUpdated, fn)
 }
 
 func (ge *GameEvents) OnNewsUpdated(fn func(*GameEventNewsUpdated) error) {
-	if ge.onNewsUpdated == nil {
-		ge.onNewsUpdated = make([]func(*GameEventNewsUpdated) error, 0)
-	}
 	ge.onNewsUpdated = append(ge.onNewsUpdated, fn)
 }
 
 func (ge *GameEvents) OnPersonaUpdated(fn func(*GameEventPersonaUpdated) error) {
-	if ge.onPersonaUpdated == nil {
-		ge.onPersonaUpdated = make([]func(*GameEventPersonaUpdated) error, 0)
-	}
 	ge.onPersonaUpdated = append(ge.onPersonaUpdated, fn)
 }
 
 func (ge *GameEvents) OnTournamentStateUpdated(fn func(*GameEventTournamentStateUpdated) error) {
-	if ge.onTournamentStateUpdated == nil {
-		ge.onTournamentStateUpdated = make([]func(*GameEventTournamentStateUpdated) error, 0)
-	}
 	ge.onTournamentStateUpdated = append(ge.onTournamentStateUpdated, fn)
 }
 
 func (ge *GameEvents) OnPartyUpdated(fn func(*GameEventPartyUpdated) error) {
-	if ge.onPartyUpdated == nil {
-		ge.onPartyUpdated = make([]func(*GameEventPartyUpdated) error, 0)
-	}
 	ge.onPartyUpdated = append(ge.onPartyUpdated, fn)
 }
 
 func (ge *GameEvents) OnLobbyUpdated(fn func(*GameEventLobbyUpdated) error) {
-	if ge.onLobbyUpdated == nil {
-		ge.onLobbyUpdated = make([]func(*GameEventLobbyUpdated) error, 0)
-	}
 	ge.onLobbyUpdated = append(ge.onLobbyUpdated, fn)
 }
 
 func (ge *GameEvents) OnDashboardCachesCleared(fn func(*GameEventDashboardCachesCleared) error) {
-	if ge.onDashboardCachesCleared == nil {
-		ge.onDashboardCachesCleared = make([]func(*GameEventDashboardCachesCleared) error, 0)
-	}
 	ge.onDashboardCachesCleared = append(ge.onDashboardCachesCleared, fn)
 }
 
 func (ge *GameEvents) OnLastHit(fn func(*GameEventLastHit) error) {
-	if ge.onLastHit == nil {
-		ge.onLastHit = make([]func(*GameEventLastHit) error, 0)
-	}
 	ge.onLastHit = append(ge.onLastHit, fn)
 }
 
 func (ge *GameEvents) OnPlayerCompletedGame(fn func(*GameEventPlayerCompletedGame) error) {
-	if ge.onPlayerCompletedGame == nil {
-		ge.onPlayerCompletedGame = make([]func(*GameEventPlayerCompletedGame) error, 0)
-	}
 	ge.onPlayerCompletedGame = append(ge.onPlayerCompletedGame, fn)
 }
 
 func (ge *GameEvents) OnPlayerReconnected(fn func(*GameEventPlayerReconnected) error) {
-	if ge.onPlayerReconnected == nil {
-		ge.onPlayerReconnected = make([]func(*GameEventPlayerReconnected) error, 0)
-	}
 	ge.onPlayerReconnected = append(ge.onPlayerReconnected, fn)
 }
 
 func (ge *GameEvents) OnNommedTree(fn func(*GameEventNommedTree) error) {
-	if ge.onNommedTree == nil {
-		ge.onNommedTree = make([]func(*GameEventNommedTree) error, 0)
-	}
 	ge.onNommedTree = append(ge.onNommedTree, fn)
 }
 
 func (ge *GameEvents) OnDotaRuneActivatedServer(fn func(*GameEventDotaRuneActivatedServer) error) {
-	if ge.onDotaRuneActivatedServer == nil {
-		ge.onDotaRuneActivatedServer = make([]func(*GameEventDotaRuneActivatedServer) error, 0)
-	}
 	ge.onDotaRuneActivatedServer = append(ge.onDotaRuneActivatedServer, fn)
 }
 
 func (ge *GameEvents) OnDotaPlayerGainedLevel(fn func(*GameEventDotaPlayerGainedLevel) error) {
-	if ge.onDotaPlayerGainedLevel == nil {
-		ge.onDotaPlayerGainedLevel = make([]func(*GameEventDotaPlayerGainedLevel) error, 0)
-	}
 	ge.onDotaPlayerGainedLevel = append(ge.onDotaPlayerGainedLevel, fn)
 }
 
 func (ge *GameEvents) OnDotaPlayerLearnedAbility(fn func(*GameEventDotaPlayerLearnedAbility) error) {
-	if ge.onDotaPlayerLearnedAbility == nil {
-		ge.onDotaPlayerLearnedAbility = make([]func(*GameEventDotaPlayerLearnedAbility) error, 0)
-	}
 	ge.onDotaPlayerLearnedAbility = append(ge.onDotaPlayerLearnedAbility, fn)
 }
 
 func (ge *GameEvents) OnDotaPlayerUsedAbility(fn func(*GameEventDotaPlayerUsedAbility) error) {
-	if ge.onDotaPlayerUsedAbility == nil {
-		ge.onDotaPlayerUsedAbility = make([]func(*GameEventDotaPlayerUsedAbility) error, 0)
-	}
 	ge.onDotaPlayerUsedAbility = append(ge.onDotaPlayerUsedAbility, fn)
 }
 
 func (ge *GameEvents) OnDotaNonPlayerUsedAbility(fn func(*GameEventDotaNonPlayerUsedAbility) error) {
-	if ge.onDotaNonPlayerUsedAbility == nil {
-		ge.onDotaNonPlayerUsedAbility = make([]func(*GameEventDotaNonPlayerUsedAbility) error, 0)
-	}
 	ge.onDotaNonPlayerUsedAbility = append(ge.onDotaNonPlayerUsedAbility, fn)
 }
 
 func (ge *GameEvents) OnDotaPlayerBeginCast(fn func(*GameEventDotaPlayerBeginCast) error) {
-	if ge.onDotaPlayerBeginCast == nil {
-		ge.onDotaPlayerBeginCast = make([]func(*GameEventDotaPlayerBeginCast) error, 0)
-	}
 	ge.onDotaPlayerBeginCast = append(ge.onDotaPlayerBeginCast, fn)
 }
 
 func (ge *GameEvents) OnDotaNonPlayerBeginCast(fn func(*GameEventDotaNonPlayerBeginCast) error) {
-	if ge.onDotaNonPlayerBeginCast == nil {
-		ge.onDotaNonPlayerBeginCast = make([]func(*GameEventDotaNonPlayerBeginCast) error, 0)
-	}
 	ge.onDotaNonPlayerBeginCast = append(ge.onDotaNonPlayerBeginCast, fn)
 }
 
 func (ge *GameEvents) OnDotaAbilityChannelFinished(fn func(*GameEventDotaAbilityChannelFinished) error) {
-	if ge.onDotaAbilityChannelFinished == nil {
-		ge.onDotaAbilityChannelFinished = make([]func(*GameEventDotaAbilityChannelFinished) error, 0)
-	}
 	ge.onDotaAbilityChannelFinished = append(ge.onDotaAbilityChannelFinished, fn)
 }
 
 func (ge *GameEvents) OnDotaHoldoutReviveComplete(fn func(*GameEventDotaHoldoutReviveComplete) error) {
-	if ge.onDotaHoldoutReviveComplete == nil {
-		ge.onDotaHoldoutReviveComplete = make([]func(*GameEventDotaHoldoutReviveComplete) error, 0)
-	}
 	ge.onDotaHoldoutReviveComplete = append(ge.onDotaHoldoutReviveComplete, fn)
 }
 
 func (ge *GameEvents) OnDotaPlayerKilled(fn func(*GameEventDotaPlayerKilled) error) {
-	if ge.onDotaPlayerKilled == nil {
-		ge.onDotaPlayerKilled = make([]func(*GameEventDotaPlayerKilled) error, 0)
-	}
 	ge.onDotaPlayerKilled = append(ge.onDotaPlayerKilled, fn)
 }
 
 func (ge *GameEvents) OnBindpanelOpen(fn func(*GameEventBindpanelOpen) error) {
-	if ge.onBindpanelOpen == nil {
-		ge.onBindpanelOpen = make([]func(*GameEventBindpanelOpen) error, 0)
-	}
 	ge.onBindpanelOpen = append(ge.onBindpanelOpen, fn)
 }
 
 func (ge *GameEvents) OnBindpanelClose(fn func(*GameEventBindpanelClose) error) {
-	if ge.onBindpanelClose == nil {
-		ge.onBindpanelClose = make([]func(*GameEventBindpanelClose) error, 0)
-	}
 	ge.onBindpanelClose = append(ge.onBindpanelClose, fn)
 }
 
 func (ge *GameEvents) OnKeybindChanged(fn func(*GameEventKeybindChanged) error) {
-	if ge.onKeybindChanged == nil {
-		ge.onKeybindChanged = make([]func(*GameEventKeybindChanged) error, 0)
-	}
 	ge.onKeybindChanged = append(ge.onKeybindChanged, fn)
 }
 
 func (ge *GameEvents) OnDotaItemDragBegin(fn func(*GameEventDotaItemDragBegin) error) {
-	if ge.onDotaItemDragBegin == nil {
-		ge.onDotaItemDragBegin = make([]func(*GameEventDotaItemDragBegin) error, 0)
-	}
 	ge.onDotaItemDragBegin = append(ge.onDotaItemDragBegin, fn)
 }
 
 func (ge *GameEvents) OnDotaItemDragEnd(fn func(*GameEventDotaItemDragEnd) error) {
-	if ge.onDotaItemDragEnd == nil {
-		ge.onDotaItemDragEnd = make([]func(*GameEventDotaItemDragEnd) error, 0)
-	}
 	ge.onDotaItemDragEnd = append(ge.onDotaItemDragEnd, fn)
 }
 
 func (ge *GameEvents) OnDotaShopItemDragBegin(fn func(*GameEventDotaShopItemDragBegin) error) {
-	if ge.onDotaShopItemDragBegin == nil {
-		ge.onDotaShopItemDragBegin = make([]func(*GameEventDotaShopItemDragBegin) error, 0)
-	}
 	ge.onDotaShopItemDragBegin = append(ge.onDotaShopItemDragBegin, fn)
 }
 
 func (ge *GameEvents) OnDotaShopItemDragEnd(fn func(*GameEventDotaShopItemDragEnd) error) {
-	if ge.onDotaShopItemDragEnd == nil {
-		ge.onDotaShopItemDragEnd = make([]func(*GameEventDotaShopItemDragEnd) error, 0)
-	}
 	ge.onDotaShopItemDragEnd = append(ge.onDotaShopItemDragEnd, fn)
 }
 
 func (ge *GameEvents) OnDotaItemPurchased(fn func(*GameEventDotaItemPurchased) error) {
-	if ge.onDotaItemPurchased == nil {
-		ge.onDotaItemPurchased = make([]func(*GameEventDotaItemPurchased) error, 0)
-	}
 	ge.onDotaItemPurchased = append(ge.onDotaItemPurchased, fn)
 }
 
 func (ge *GameEvents) OnDotaItemCombined(fn func(*GameEventDotaItemCombined) error) {
-	if ge.onDotaItemCombined == nil {
-		ge.onDotaItemCombined = make([]func(*GameEventDotaItemCombined) error, 0)
-	}
 	ge.onDotaItemCombined = append(ge.onDotaItemCombined, fn)
 }
 
 func (ge *GameEvents) OnDotaItemUsed(fn func(*GameEventDotaItemUsed) error) {
-	if ge.onDotaItemUsed == nil {
-		ge.onDotaItemUsed = make([]func(*GameEventDotaItemUsed) error, 0)
-	}
 	ge.onDotaItemUsed = append(ge.onDotaItemUsed, fn)
 }
 
 func (ge *GameEvents) OnDotaItemAutoPurchase(fn func(*GameEventDotaItemAutoPurchase) error) {
-	if ge.onDotaItemAutoPurchase == nil {
-		ge.onDotaItemAutoPurchase = make([]func(*GameEventDotaItemAutoPurchase) error, 0)
-	}
 	ge.onDotaItemAutoPurchase = append(ge.onDotaItemAutoPurchase, fn)
 }
 
 func (ge *GameEvents) OnDotaUnitEvent(fn func(*GameEventDotaUnitEvent) error) {
-	if ge.onDotaUnitEvent == nil {
-		ge.onDotaUnitEvent = make([]func(*GameEventDotaUnitEvent) error, 0)
-	}
 	ge.onDotaUnitEvent = append(ge.onDotaUnitEvent, fn)
 }
 
 func (ge *GameEvents) OnDotaQuestStarted(fn func(*GameEventDotaQuestStarted) error) {
-	if ge.onDotaQuestStarted == nil {
-		ge.onDotaQuestStarted = make([]func(*GameEventDotaQuestStarted) error, 0)
-	}
 	ge.onDotaQuestStarted = append(ge.onDotaQuestStarted, fn)
 }
 
 func (ge *GameEvents) OnDotaQuestCompleted(fn func(*GameEventDotaQuestCompleted) error) {
-	if ge.onDotaQuestCompleted == nil {
-		ge.onDotaQuestCompleted = make([]func(*GameEventDotaQuestCompleted) error, 0)
-	}
 	ge.onDotaQuestCompleted = append(ge.onDotaQuestCompleted, fn)
 }
 
 func (ge *GameEvents) OnGameuiActivated(fn func(*GameEventGameuiActivated) error) {
-	if ge.onGameuiActivated == nil {
-		ge.onGameuiActivated = make([]func(*GameEventGameuiActivated) error, 0)
-	}
 	ge.onGameuiActivated = append(ge.onGameuiActivated, fn)
 }
 
 func (ge *GameEvents) OnGameuiHidden(fn func(*GameEventGameuiHidden) error) {
-	if ge.onGameuiHidden == nil {
-		ge.onGameuiHidden = make([]func(*GameEventGameuiHidden) error, 0)
-	}
 	ge.onGameuiHidden = append(ge.onGameuiHidden, fn)
 }
 
 func (ge *GameEvents) OnPlayerFullyjoined(fn func(*GameEventPlayerFullyjoined) error) {
-	if ge.onPlayerFullyjoined == nil {
-		ge.onPlayerFullyjoined = make([]func(*GameEventPlayerFullyjoined) error, 0)
-	}
 	ge.onPlayerFullyjoined = append(ge.onPlayerFullyjoined, fn)
 }
 
 func (ge *GameEvents) OnDotaSpectateHero(fn func(*GameEventDotaSpectateHero) error) {
-	if ge.onDotaSpectateHero == nil {
-		ge.onDotaSpectateHero = make([]func(*GameEventDotaSpectateHero) error, 0)
-	}
 	ge.onDotaSpectateHero = append(ge.onDotaSpectateHero, fn)
 }
 
 func (ge *GameEvents) OnDotaMatchDone(fn func(*GameEventDotaMatchDone) error) {
-	if ge.onDotaMatchDone == nil {
-		ge.onDotaMatchDone = make([]func(*GameEventDotaMatchDone) error, 0)
-	}
 	ge.onDotaMatchDone = append(ge.onDotaMatchDone, fn)
 }
 
 func (ge *GameEvents) OnDotaMatchDoneClient(fn func(*GameEventDotaMatchDoneClient) error) {
-	if ge.onDotaMatchDoneClient == nil {
-		ge.onDotaMatchDoneClient = make([]func(*GameEventDotaMatchDoneClient) error, 0)
-	}
 	ge.onDotaMatchDoneClient = append(ge.onDotaMatchDoneClient, fn)
 }
 
 func (ge *GameEvents) OnSetInstructorGroupEnabled(fn func(*GameEventSetInstructorGroupEnabled) error) {
-	if ge.onSetInstructorGroupEnabled == nil {
-		ge.onSetInstructorGroupEnabled = make([]func(*GameEventSetInstructorGroupEnabled) error, 0)
-	}
 	ge.onSetInstructorGroupEnabled = append(ge.onSetInstructorGroupEnabled, fn)
 }
 
 func (ge *GameEvents) OnJoinedChatChannel(fn func(*GameEventJoinedChatChannel) error) {
-	if ge.onJoinedChatChannel == nil {
-		ge.onJoinedChatChannel = make([]func(*GameEventJoinedChatChannel) error, 0)
-	}
 	ge.onJoinedChatChannel = append(ge.onJoinedChatChannel, fn)
 }
 
 func (ge *GameEvents) OnLeftChatChannel(fn func(*GameEventLeftChatChannel) error) {
-	if ge.onLeftChatChannel == nil {
-		ge.onLeftChatChannel = make([]func(*GameEventLeftChatChannel) error, 0)
-	}
 	ge.onLeftChatChannel = append(ge.onLeftChatChannel, fn)
 }
 
 func (ge *GameEvents) OnGcChatChannelListUpdated(fn func(*GameEventGcChatChannelListUpdated) error) {
-	if ge.onGcChatChannelListUpdated == nil {
-		ge.onGcChatChannelListUpdated = make([]func(*GameEventGcChatChannelListUpdated) error, 0)
-	}
 	ge.onGcChatChannelListUpdated = append(ge.onGcChatChannelListUpdated, fn)
 }
 
 func (ge *GameEvents) OnTodayMessagesUpdated(fn func(*GameEventTodayMessagesUpdated) error) {
-	if ge.onTodayMessagesUpdated == nil {
-		ge.onTodayMessagesUpdated = make([]func(*GameEventTodayMessagesUpdated) error, 0)
-	}
 	ge.onTodayMessagesUpdated = append(ge.onTodayMessagesUpdated, fn)
 }
 
 func (ge *GameEvents) OnFileDownloaded(fn func(*GameEventFileDownloaded) error) {
-	if ge.onFileDownloaded == nil {
-		ge.onFileDownloaded = make([]func(*GameEventFileDownloaded) error, 0)
-	}
 	ge.onFileDownloaded = append(ge.onFileDownloaded, fn)
 }
 
 func (ge *GameEvents) OnPlayerReportCountsUpdated(fn func(*GameEventPlayerReportCountsUpdated) error) {
-	if ge.onPlayerReportCountsUpdated == nil {
-		ge.onPlayerReportCountsUpdated = make([]func(*GameEventPlayerReportCountsUpdated) error, 0)
-	}
 	ge.onPlayerReportCountsUpdated = append(ge.onPlayerReportCountsUpdated, fn)
 }
 
 func (ge *GameEvents) OnScaleformFileDownloadComplete(fn func(*GameEventScaleformFileDownloadComplete) error) {
-	if ge.onScaleformFileDownloadComplete == nil {
-		ge.onScaleformFileDownloadComplete = make([]func(*GameEventScaleformFileDownloadComplete) error, 0)
-	}
 	ge.onScaleformFileDownloadComplete = append(ge.onScaleformFileDownloadComplete, fn)
 }
 
 func (ge *GameEvents) OnItemPurchased(fn func(*GameEventItemPurchased) error) {
-	if ge.onItemPurchased == nil {
-		ge.onItemPurchased = make([]func(*GameEventItemPurchased) error, 0)
-	}
 	ge.onItemPurchased = append(ge.onItemPurchased, fn)
 }
 
 func (ge *GameEvents) OnGcMismatchedVersion(fn func(*GameEventGcMismatchedVersion) error) {
-	if ge.onGcMismatchedVersion == nil {
-		ge.onGcMismatchedVersion = make([]func(*GameEventGcMismatchedVersion) error, 0)
-	}
 	ge.onGcMismatchedVersion = append(ge.onGcMismatchedVersion, fn)
 }
 
 func (ge *GameEvents) OnDemoStop(fn func(*GameEventDemoStop) error) {
-	if ge.onDemoStop == nil {
-		ge.onDemoStop = make([]func(*GameEventDemoStop) error, 0)
-	}
 	ge.onDemoStop = append(ge.onDemoStop, fn)
 }
 
 func (ge *GameEvents) OnMapShutdown(fn func(*GameEventMapShutdown) error) {
-	if ge.onMapShutdown == nil {
-		ge.onMapShutdown = make([]func(*GameEventMapShutdown) error, 0)
-	}
 	ge.onMapShutdown = append(ge.onMapShutdown, fn)
 }
 
 func (ge *GameEvents) OnDotaWorkshopFileselected(fn func(*GameEventDotaWorkshopFileselected) error) {
-	if ge.onDotaWorkshopFileselected == nil {
-		ge.onDotaWorkshopFileselected = make([]func(*GameEventDotaWorkshopFileselected) error, 0)
-	}
 	ge.onDotaWorkshopFileselected = append(ge.onDotaWorkshopFileselected, fn)
 }
 
 func (ge *GameEvents) OnDotaWorkshopFilecanceled(fn func(*GameEventDotaWorkshopFilecanceled) error) {
-	if ge.onDotaWorkshopFilecanceled == nil {
-		ge.onDotaWorkshopFilecanceled = make([]func(*GameEventDotaWorkshopFilecanceled) error, 0)
-	}
 	ge.onDotaWorkshopFilecanceled = append(ge.onDotaWorkshopFilecanceled, fn)
 }
 
 func (ge *GameEvents) OnRichPresenceUpdated(fn func(*GameEventRichPresenceUpdated) error) {
-	if ge.onRichPresenceUpdated == nil {
-		ge.onRichPresenceUpdated = make([]func(*GameEventRichPresenceUpdated) error, 0)
-	}
 	ge.onRichPresenceUpdated = append(ge.onRichPresenceUpdated, fn)
 }
 
 func (ge *GameEvents) OnDotaHeroRandom(fn func(*GameEventDotaHeroRandom) error) {
-	if ge.onDotaHeroRandom == nil {
-		ge.onDotaHeroRandom = make([]func(*GameEventDotaHeroRandom) error, 0)
-	}
 	ge.onDotaHeroRandom = append(ge.onDotaHeroRandom, fn)
 }
 
 func (ge *GameEvents) OnDotaRdChatTurn(fn func(*GameEventDotaRdChatTurn) error) {
-	if ge.onDotaRdChatTurn == nil {
-		ge.onDotaRdChatTurn = make([]func(*GameEventDotaRdChatTurn) error, 0)
-	}
 	ge.onDotaRdChatTurn = append(ge.onDotaRdChatTurn, fn)
 }
 
 func (ge *GameEvents) OnDotaFavoriteHeroesUpdated(fn func(*GameEventDotaFavoriteHeroesUpdated) error) {
-	if ge.onDotaFavoriteHeroesUpdated == nil {
-		ge.onDotaFavoriteHeroesUpdated = make([]func(*GameEventDotaFavoriteHeroesUpdated) error, 0)
-	}
 	ge.onDotaFavoriteHeroesUpdated = append(ge.onDotaFavoriteHeroesUpdated, fn)
 }
 
 func (ge *GameEvents) OnProfileOpened(fn func(*GameEventProfileOpened) error) {
-	if ge.onProfileOpened == nil {
-		ge.onProfileOpened = make([]func(*GameEventProfileOpened) error, 0)
-	}
 	ge.onProfileOpened = append(ge.onProfileOpened, fn)
 }
 
 func (ge *GameEvents) OnProfileClosed(fn func(*GameEventProfileClosed) error) {
-	if ge.onProfileClosed == nil {
-		ge.onProfileClosed = make([]func(*GameEventProfileClosed) error, 0)
-	}
 	ge.onProfileClosed = append(ge.onProfileClosed, fn)
 }
 
 func (ge *GameEvents) OnItemPreviewClosed(fn func(*GameEventItemPreviewClosed) error) {
-	if ge.onItemPreviewClosed == nil {
-		ge.onItemPreviewClosed = make([]func(*GameEventItemPreviewClosed) error, 0)
-	}
 	ge.onItemPreviewClosed = append(ge.onItemPreviewClosed, fn)
 }
 
 func (ge *GameEvents) OnDashboardSwitchedSection(fn func(*GameEventDashboardSwitchedSection) error) {
-	if ge.onDashboardSwitchedSection == nil {
-		ge.onDashboardSwitchedSection = make([]func(*GameEventDashboardSwitchedSection) error, 0)
-	}
 	ge.onDashboardSwitchedSection = append(ge.onDashboardSwitchedSection, fn)
 }
 
 func (ge *GameEvents) OnDotaTournamentItemEvent(fn func(*GameEventDotaTournamentItemEvent) error) {
-	if ge.onDotaTournamentItemEvent == nil {
-		ge.onDotaTournamentItemEvent = make([]func(*GameEventDotaTournamentItemEvent) error, 0)
-	}
 	ge.onDotaTournamentItemEvent = append(ge.onDotaTournamentItemEvent, fn)
 }
 
 func (ge *GameEvents) OnDotaHeroSwap(fn func(*GameEventDotaHeroSwap) error) {
-	if ge.onDotaHeroSwap == nil {
-		ge.onDotaHeroSwap = make([]func(*GameEventDotaHeroSwap) error, 0)
-	}
 	ge.onDotaHeroSwap = append(ge.onDotaHeroSwap, fn)
 }
 
 func (ge *GameEvents) OnDotaResetSuggestedItems(fn func(*GameEventDotaResetSuggestedItems) error) {
-	if ge.onDotaResetSuggestedItems == nil {
-		ge.onDotaResetSuggestedItems = make([]func(*GameEventDotaResetSuggestedItems) error, 0)
-	}
 	ge.onDotaResetSuggestedItems = append(ge.onDotaResetSuggestedItems, fn)
 }
 
 func (ge *GameEvents) OnHalloweenHighScoreReceived(fn func(*GameEventHalloweenHighScoreReceived) error) {
-	if ge.onHalloweenHighScoreReceived == nil {
-		ge.onHalloweenHighScoreReceived = make([]func(*GameEventHalloweenHighScoreReceived) error, 0)
-	}
 	ge.onHalloweenHighScoreReceived = append(ge.onHalloweenHighScoreReceived, fn)
 }
 
 func (ge *GameEvents) OnHalloweenPhaseEnd(fn func(*GameEventHalloweenPhaseEnd) error) {
-	if ge.onHalloweenPhaseEnd == nil {
-		ge.onHalloweenPhaseEnd = make([]func(*GameEventHalloweenPhaseEnd) error, 0)
-	}
 	ge.onHalloweenPhaseEnd = append(ge.onHalloweenPhaseEnd, fn)
 }
 
 func (ge *GameEvents) OnHalloweenHighScoreRequestFailed(fn func(*GameEventHalloweenHighScoreRequestFailed) error) {
-	if ge.onHalloweenHighScoreRequestFailed == nil {
-		ge.onHalloweenHighScoreRequestFailed = make([]func(*GameEventHalloweenHighScoreRequestFailed) error, 0)
-	}
 	ge.onHalloweenHighScoreRequestFailed = append(ge.onHalloweenHighScoreRequestFailed, fn)
 }
 
 func (ge *GameEvents) OnDotaHudSkinChanged(fn func(*GameEventDotaHudSkinChanged) error) {
-	if ge.onDotaHudSkinChanged == nil {
-		ge.onDotaHudSkinChanged = make([]func(*GameEventDotaHudSkinChanged) error, 0)
-	}
 	ge.onDotaHudSkinChanged = append(ge.onDotaHudSkinChanged, fn)
 }
 
 func (ge *GameEvents) OnDotaInventoryPlayerGotItem(fn func(*GameEventDotaInventoryPlayerGotItem) error) {
-	if ge.onDotaInventoryPlayerGotItem == nil {
-		ge.onDotaInventoryPlayerGotItem = make([]func(*GameEventDotaInventoryPlayerGotItem) error, 0)
-	}
 	ge.onDotaInventoryPlayerGotItem = append(ge.onDotaInventoryPlayerGotItem, fn)
 }
 
 func (ge *GameEvents) OnPlayerIsExperienced(fn func(*GameEventPlayerIsExperienced) error) {
-	if ge.onPlayerIsExperienced == nil {
-		ge.onPlayerIsExperienced = make([]func(*GameEventPlayerIsExperienced) error, 0)
-	}
 	ge.onPlayerIsExperienced = append(ge.onPlayerIsExperienced, fn)
 }
 
 func (ge *GameEvents) OnPlayerIsNotexperienced(fn func(*GameEventPlayerIsNotexperienced) error) {
-	if ge.onPlayerIsNotexperienced == nil {
-		ge.onPlayerIsNotexperienced = make([]func(*GameEventPlayerIsNotexperienced) error, 0)
-	}
 	ge.onPlayerIsNotexperienced = append(ge.onPlayerIsNotexperienced, fn)
 }
 
 func (ge *GameEvents) OnDotaTutorialLessonStart(fn func(*GameEventDotaTutorialLessonStart) error) {
-	if ge.onDotaTutorialLessonStart == nil {
-		ge.onDotaTutorialLessonStart = make([]func(*GameEventDotaTutorialLessonStart) error, 0)
-	}
 	ge.onDotaTutorialLessonStart = append(ge.onDotaTutorialLessonStart, fn)
 }
 
 func (ge *GameEvents) OnDotaTutorialTaskAdvance(fn func(*GameEventDotaTutorialTaskAdvance) error) {
-	if ge.onDotaTutorialTaskAdvance == nil {
-		ge.onDotaTutorialTaskAdvance = make([]func(*GameEventDotaTutorialTaskAdvance) error, 0)
-	}
 	ge.onDotaTutorialTaskAdvance = append(ge.onDotaTutorialTaskAdvance, fn)
 }
 
 func (ge *GameEvents) OnDotaTutorialShopToggled(fn func(*GameEventDotaTutorialShopToggled) error) {
-	if ge.onDotaTutorialShopToggled == nil {
-		ge.onDotaTutorialShopToggled = make([]func(*GameEventDotaTutorialShopToggled) error, 0)
-	}
 	ge.onDotaTutorialShopToggled = append(ge.onDotaTutorialShopToggled, fn)
 }
 
 func (ge *GameEvents) OnMapLocationUpdated(fn func(*GameEventMapLocationUpdated) error) {
-	if ge.onMapLocationUpdated == nil {
-		ge.onMapLocationUpdated = make([]func(*GameEventMapLocationUpdated) error, 0)
-	}
 	ge.onMapLocationUpdated = append(ge.onMapLocationUpdated, fn)
 }
 
 func (ge *GameEvents) OnRichpresenceCustomUpdated(fn func(*GameEventRichpresenceCustomUpdated) error) {
-	if ge.onRichpresenceCustomUpdated == nil {
-		ge.onRichpresenceCustomUpdated = make([]func(*GameEventRichpresenceCustomUpdated) error, 0)
-	}
 	ge.onRichpresenceCustomUpdated = append(ge.onRichpresenceCustomUpdated, fn)
 }
 
 func (ge *GameEvents) OnGameEndVisible(fn func(*GameEventGameEndVisible) error) {
-	if ge.onGameEndVisible == nil {
-		ge.onGameEndVisible = make([]func(*GameEventGameEndVisible) error, 0)
-	}
 	ge.onGameEndVisible = append(ge.onGameEndVisible, fn)
 }
 
 func (ge *GameEvents) OnAntiaddictionUpdate(fn func(*GameEventAntiaddictionUpdate) error) {
-	if ge.onAntiaddictionUpdate == nil {
-		ge.onAntiaddictionUpdate = make([]func(*GameEventAntiaddictionUpdate) error, 0)
-	}
 	ge.onAntiaddictionUpdate = append(ge.onAntiaddictionUpdate, fn)
 }
 
 func (ge *GameEvents) OnHighlightHudElement(fn func(*GameEventHighlightHudElement) error) {
-	if ge.onHighlightHudElement == nil {
-		ge.onHighlightHudElement = make([]func(*GameEventHighlightHudElement) error, 0)
-	}
 	ge.onHighlightHudElement = append(ge.onHighlightHudElement, fn)
 }
 
 func (ge *GameEvents) OnHideHighlightHudElement(fn func(*GameEventHideHighlightHudElement) error) {
-	if ge.onHideHighlightHudElement == nil {
-		ge.onHideHighlightHudElement = make([]func(*GameEventHideHighlightHudElement) error, 0)
-	}
 	ge.onHideHighlightHudElement = append(ge.onHideHighlightHudElement, fn)
 }
 
 func (ge *GameEvents) OnIntroVideoFinished(fn func(*GameEventIntroVideoFinished) error) {
-	if ge.onIntroVideoFinished == nil {
-		ge.onIntroVideoFinished = make([]func(*GameEventIntroVideoFinished) error, 0)
-	}
 	ge.onIntroVideoFinished = append(ge.onIntroVideoFinished, fn)
 }
 
 func (ge *GameEvents) OnMatchmakingStatusVisibilityChanged(fn func(*GameEventMatchmakingStatusVisibilityChanged) error) {
-	if ge.onMatchmakingStatusVisibilityChanged == nil {
-		ge.onMatchmakingStatusVisibilityChanged = make([]func(*GameEventMatchmakingStatusVisibilityChanged) error, 0)
-	}
 	ge.onMatchmakingStatusVisibilityChanged = append(ge.onMatchmakingStatusVisibilityChanged, fn)
 }
 
 func (ge *GameEvents) OnPracticeLobbyVisibilityChanged(fn func(*GameEventPracticeLobbyVisibilityChanged) error) {
-	if ge.onPracticeLobbyVisibilityChanged == nil {
-		ge.onPracticeLobbyVisibilityChanged = make([]func(*GameEventPracticeLobbyVisibilityChanged) error, 0)
-	}
 	ge.onPracticeLobbyVisibilityChanged = append(ge.onPracticeLobbyVisibilityChanged, fn)
 }
 
 func (ge *GameEvents) OnDotaCourierTransferItem(fn func(*GameEventDotaCourierTransferItem) error) {
-	if ge.onDotaCourierTransferItem == nil {
-		ge.onDotaCourierTransferItem = make([]func(*GameEventDotaCourierTransferItem) error, 0)
-	}
 	ge.onDotaCourierTransferItem = append(ge.onDotaCourierTransferItem, fn)
 }
 
 func (ge *GameEvents) OnFullUiUnlocked(fn func(*GameEventFullUiUnlocked) error) {
-	if ge.onFullUiUnlocked == nil {
-		ge.onFullUiUnlocked = make([]func(*GameEventFullUiUnlocked) error, 0)
-	}
 	ge.onFullUiUnlocked = append(ge.onFullUiUnlocked, fn)
 }
 
 func (ge *GameEvents) OnHeroSelectorPreviewSet(fn func(*GameEventHeroSelectorPreviewSet) error) {
-	if ge.onHeroSelectorPreviewSet == nil {
-		ge.onHeroSelectorPreviewSet = make([]func(*GameEventHeroSelectorPreviewSet) error, 0)
-	}
 	ge.onHeroSelectorPreviewSet = append(ge.onHeroSelectorPreviewSet, fn)
 }
 
 func (ge *GameEvents) OnAntiaddictionToast(fn func(*GameEventAntiaddictionToast) error) {
-	if ge.onAntiaddictionToast == nil {
-		ge.onAntiaddictionToast = make([]func(*GameEventAntiaddictionToast) error, 0)
-	}
 	ge.onAntiaddictionToast = append(ge.onAntiaddictionToast, fn)
 }
 
 func (ge *GameEvents) OnHeroPickerShown(fn func(*GameEventHeroPickerShown) error) {
-	if ge.onHeroPickerShown == nil {
-		ge.onHeroPickerShown = make([]func(*GameEventHeroPickerShown) error, 0)
-	}
 	ge.onHeroPickerShown = append(ge.onHeroPickerShown, fn)
 }
 
 func (ge *GameEvents) OnHeroPickerHidden(fn func(*GameEventHeroPickerHidden) error) {
-	if ge.onHeroPickerHidden == nil {
-		ge.onHeroPickerHidden = make([]func(*GameEventHeroPickerHidden) error, 0)
-	}
 	ge.onHeroPickerHidden = append(ge.onHeroPickerHidden, fn)
 }
 
 func (ge *GameEvents) OnDotaLocalQuickbuyChanged(fn func(*GameEventDotaLocalQuickbuyChanged) error) {
-	if ge.onDotaLocalQuickbuyChanged == nil {
-		ge.onDotaLocalQuickbuyChanged = make([]func(*GameEventDotaLocalQuickbuyChanged) error, 0)
-	}
 	ge.onDotaLocalQuickbuyChanged = append(ge.onDotaLocalQuickbuyChanged, fn)
 }
 
 func (ge *GameEvents) OnShowCenterMessage(fn func(*GameEventShowCenterMessage) error) {
-	if ge.onShowCenterMessage == nil {
-		ge.onShowCenterMessage = make([]func(*GameEventShowCenterMessage) error, 0)
-	}
 	ge.onShowCenterMessage = append(ge.onShowCenterMessage, fn)
 }
 
 func (ge *GameEvents) OnHudFlipChanged(fn func(*GameEventHudFlipChanged) error) {
-	if ge.onHudFlipChanged == nil {
-		ge.onHudFlipChanged = make([]func(*GameEventHudFlipChanged) error, 0)
-	}
 	ge.onHudFlipChanged = append(ge.onHudFlipChanged, fn)
 }
 
 func (ge *GameEvents) OnFrostyPointsUpdated(fn func(*GameEventFrostyPointsUpdated) error) {
-	if ge.onFrostyPointsUpdated == nil {
-		ge.onFrostyPointsUpdated = make([]func(*GameEventFrostyPointsUpdated) error, 0)
-	}
 	ge.onFrostyPointsUpdated = append(ge.onFrostyPointsUpdated, fn)
 }
 
 func (ge *GameEvents) OnDefeated(fn func(*GameEventDefeated) error) {
-	if ge.onDefeated == nil {
-		ge.onDefeated = make([]func(*GameEventDefeated) error, 0)
-	}
 	ge.onDefeated = append(ge.onDefeated, fn)
 }
 
 func (ge *GameEvents) OnResetDefeated(fn func(*GameEventResetDefeated) error) {
-	if ge.onResetDefeated == nil {
-		ge.onResetDefeated = make([]func(*GameEventResetDefeated) error, 0)
-	}
 	ge.onResetDefeated = append(ge.onResetDefeated, fn)
 }
 
 func (ge *GameEvents) OnBoosterStateUpdated(fn func(*GameEventBoosterStateUpdated) error) {
-	if ge.onBoosterStateUpdated == nil {
-		ge.onBoosterStateUpdated = make([]func(*GameEventBoosterStateUpdated) error, 0)
-	}
 	ge.onBoosterStateUpdated = append(ge.onBoosterStateUpdated, fn)
 }
 
 func (ge *GameEvents) OnEventPointsUpdated(fn func(*GameEventEventPointsUpdated) error) {
-	if ge.onEventPointsUpdated == nil {
-		ge.onEventPointsUpdated = make([]func(*GameEventEventPointsUpdated) error, 0)
-	}
 	ge.onEventPointsUpdated = append(ge.onEventPointsUpdated, fn)
 }
 
 func (ge *GameEvents) OnLocalPlayerEventPoints(fn func(*GameEventLocalPlayerEventPoints) error) {
-	if ge.onLocalPlayerEventPoints == nil {
-		ge.onLocalPlayerEventPoints = make([]func(*GameEventLocalPlayerEventPoints) error, 0)
-	}
 	ge.onLocalPlayerEventPoints = append(ge.onLocalPlayerEventPoints, fn)
 }
 
 func (ge *GameEvents) OnCustomGameDifficulty(fn func(*GameEventCustomGameDifficulty) error) {
-	if ge.onCustomGameDifficulty == nil {
-		ge.onCustomGameDifficulty = make([]func(*GameEventCustomGameDifficulty) error, 0)
-	}
 	ge.onCustomGameDifficulty = append(ge.onCustomGameDifficulty, fn)
 }
 
 func (ge *GameEvents) OnTreeCut(fn func(*GameEventTreeCut) error) {
-	if ge.onTreeCut == nil {
-		ge.onTreeCut = make([]func(*GameEventTreeCut) error, 0)
-	}
 	ge.onTreeCut = append(ge.onTreeCut, fn)
 }
 
 func (ge *GameEvents) OnUgcDetailsArrived(fn func(*GameEventUgcDetailsArrived) error) {
-	if ge.onUgcDetailsArrived == nil {
-		ge.onUgcDetailsArrived = make([]func(*GameEventUgcDetailsArrived) error, 0)
-	}
 	ge.onUgcDetailsArrived = append(ge.onUgcDetailsArrived, fn)
 }
 
 func (ge *GameEvents) OnUgcSubscribed(fn func(*GameEventUgcSubscribed) error) {
-	if ge.onUgcSubscribed == nil {
-		ge.onUgcSubscribed = make([]func(*GameEventUgcSubscribed) error, 0)
-	}
 	ge.onUgcSubscribed = append(ge.onUgcSubscribed, fn)
 }
 
 func (ge *GameEvents) OnUgcUnsubscribed(fn func(*GameEventUgcUnsubscribed) error) {
-	if ge.onUgcUnsubscribed == nil {
-		ge.onUgcUnsubscribed = make([]func(*GameEventUgcUnsubscribed) error, 0)
-	}
 	ge.onUgcUnsubscribed = append(ge.onUgcUnsubscribed, fn)
 }
 
 func (ge *GameEvents) OnUgcDownloadRequested(fn func(*GameEventUgcDownloadRequested) error) {
-	if ge.onUgcDownloadRequested == nil {
-		ge.onUgcDownloadRequested = make([]func(*GameEventUgcDownloadRequested) error, 0)
-	}
 	ge.onUgcDownloadRequested = append(ge.onUgcDownloadRequested, fn)
 }
 
 func (ge *GameEvents) OnUgcInstalled(fn func(*GameEventUgcInstalled) error) {
-	if ge.onUgcInstalled == nil {
-		ge.onUgcInstalled = make([]func(*GameEventUgcInstalled) error, 0)
-	}
 	ge.onUgcInstalled = append(ge.onUgcInstalled, fn)
 }
 
 func (ge *GameEvents) OnPrizepoolReceived(fn func(*GameEventPrizepoolReceived) error) {
-	if ge.onPrizepoolReceived == nil {
-		ge.onPrizepoolReceived = make([]func(*GameEventPrizepoolReceived) error, 0)
-	}
 	ge.onPrizepoolReceived = append(ge.onPrizepoolReceived, fn)
 }
 
 func (ge *GameEvents) OnMicrotransactionSuccess(fn func(*GameEventMicrotransactionSuccess) error) {
-	if ge.onMicrotransactionSuccess == nil {
-		ge.onMicrotransactionSuccess = make([]func(*GameEventMicrotransactionSuccess) error, 0)
-	}
 	ge.onMicrotransactionSuccess = append(ge.onMicrotransactionSuccess, fn)
 }
 
 func (ge *GameEvents) OnDotaRubickAbilitySteal(fn func(*GameEventDotaRubickAbilitySteal) error) {
-	if ge.onDotaRubickAbilitySteal == nil {
-		ge.onDotaRubickAbilitySteal = make([]func(*GameEventDotaRubickAbilitySteal) error, 0)
-	}
 	ge.onDotaRubickAbilitySteal = append(ge.onDotaRubickAbilitySteal, fn)
 }
 
 func (ge *GameEvents) OnCompendiumEventActionsLoaded(fn func(*GameEventCompendiumEventActionsLoaded) error) {
-	if ge.onCompendiumEventActionsLoaded == nil {
-		ge.onCompendiumEventActionsLoaded = make([]func(*GameEventCompendiumEventActionsLoaded) error, 0)
-	}
 	ge.onCompendiumEventActionsLoaded = append(ge.onCompendiumEventActionsLoaded, fn)
 }
 
 func (ge *GameEvents) OnCompendiumSelectionsLoaded(fn func(*GameEventCompendiumSelectionsLoaded) error) {
-	if ge.onCompendiumSelectionsLoaded == nil {
-		ge.onCompendiumSelectionsLoaded = make([]func(*GameEventCompendiumSelectionsLoaded) error, 0)
-	}
 	ge.onCompendiumSelectionsLoaded = append(ge.onCompendiumSelectionsLoaded, fn)
 }
 
 func (ge *GameEvents) OnCompendiumSetSelectionFailed(fn func(*GameEventCompendiumSetSelectionFailed) error) {
-	if ge.onCompendiumSetSelectionFailed == nil {
-		ge.onCompendiumSetSelectionFailed = make([]func(*GameEventCompendiumSetSelectionFailed) error, 0)
-	}
 	ge.onCompendiumSetSelectionFailed = append(ge.onCompendiumSetSelectionFailed, fn)
 }
 
 func (ge *GameEvents) OnCompendiumTrophiesLoaded(fn func(*GameEventCompendiumTrophiesLoaded) error) {
-	if ge.onCompendiumTrophiesLoaded == nil {
-		ge.onCompendiumTrophiesLoaded = make([]func(*GameEventCompendiumTrophiesLoaded) error, 0)
-	}
 	ge.onCompendiumTrophiesLoaded = append(ge.onCompendiumTrophiesLoaded, fn)
 }
 
 func (ge *GameEvents) OnCommunityCachedNamesUpdated(fn func(*GameEventCommunityCachedNamesUpdated) error) {
-	if ge.onCommunityCachedNamesUpdated == nil {
-		ge.onCommunityCachedNamesUpdated = make([]func(*GameEventCommunityCachedNamesUpdated) error, 0)
-	}
 	ge.onCommunityCachedNamesUpdated = append(ge.onCommunityCachedNamesUpdated, fn)
 }
 
 func (ge *GameEvents) OnSpecItemPickup(fn func(*GameEventSpecItemPickup) error) {
-	if ge.onSpecItemPickup == nil {
-		ge.onSpecItemPickup = make([]func(*GameEventSpecItemPickup) error, 0)
-	}
 	ge.onSpecItemPickup = append(ge.onSpecItemPickup, fn)
 }
 
 func (ge *GameEvents) OnSpecAegisReclaimTime(fn func(*GameEventSpecAegisReclaimTime) error) {
-	if ge.onSpecAegisReclaimTime == nil {
-		ge.onSpecAegisReclaimTime = make([]func(*GameEventSpecAegisReclaimTime) error, 0)
-	}
 	ge.onSpecAegisReclaimTime = append(ge.onSpecAegisReclaimTime, fn)
 }
 
 func (ge *GameEvents) OnAccountTrophiesChanged(fn func(*GameEventAccountTrophiesChanged) error) {
-	if ge.onAccountTrophiesChanged == nil {
-		ge.onAccountTrophiesChanged = make([]func(*GameEventAccountTrophiesChanged) error, 0)
-	}
 	ge.onAccountTrophiesChanged = append(ge.onAccountTrophiesChanged, fn)
 }
 
 func (ge *GameEvents) OnAccountAllHeroChallengeChanged(fn func(*GameEventAccountAllHeroChallengeChanged) error) {
-	if ge.onAccountAllHeroChallengeChanged == nil {
-		ge.onAccountAllHeroChallengeChanged = make([]func(*GameEventAccountAllHeroChallengeChanged) error, 0)
-	}
 	ge.onAccountAllHeroChallengeChanged = append(ge.onAccountAllHeroChallengeChanged, fn)
 }
 
 func (ge *GameEvents) OnTeamShowcaseUiUpdate(fn func(*GameEventTeamShowcaseUiUpdate) error) {
-	if ge.onTeamShowcaseUiUpdate == nil {
-		ge.onTeamShowcaseUiUpdate = make([]func(*GameEventTeamShowcaseUiUpdate) error, 0)
-	}
 	ge.onTeamShowcaseUiUpdate = append(ge.onTeamShowcaseUiUpdate, fn)
 }
 
 func (ge *GameEvents) OnIngameEventsChanged(fn func(*GameEventIngameEventsChanged) error) {
-	if ge.onIngameEventsChanged == nil {
-		ge.onIngameEventsChanged = make([]func(*GameEventIngameEventsChanged) error, 0)
-	}
 	ge.onIngameEventsChanged = append(ge.onIngameEventsChanged, fn)
 }
 
 func (ge *GameEvents) OnDotaMatchSignout(fn func(*GameEventDotaMatchSignout) error) {
-	if ge.onDotaMatchSignout == nil {
-		ge.onDotaMatchSignout = make([]func(*GameEventDotaMatchSignout) error, 0)
-	}
 	ge.onDotaMatchSignout = append(ge.onDotaMatchSignout, fn)
 }
 
 func (ge *GameEvents) OnDotaIllusionsCreated(fn func(*GameEventDotaIllusionsCreated) error) {
-	if ge.onDotaIllusionsCreated == nil {
-		ge.onDotaIllusionsCreated = make([]func(*GameEventDotaIllusionsCreated) error, 0)
-	}
 	ge.onDotaIllusionsCreated = append(ge.onDotaIllusionsCreated, fn)
 }
 
 func (ge *GameEvents) OnDotaYearBeastKilled(fn func(*GameEventDotaYearBeastKilled) error) {
-	if ge.onDotaYearBeastKilled == nil {
-		ge.onDotaYearBeastKilled = make([]func(*GameEventDotaYearBeastKilled) error, 0)
-	}
 	ge.onDotaYearBeastKilled = append(ge.onDotaYearBeastKilled, fn)
 }
 
 func (ge *GameEvents) OnDotaHeroUndoselection(fn func(*GameEventDotaHeroUndoselection) error) {
-	if ge.onDotaHeroUndoselection == nil {
-		ge.onDotaHeroUndoselection = make([]func(*GameEventDotaHeroUndoselection) error, 0)
-	}
 	ge.onDotaHeroUndoselection = append(ge.onDotaHeroUndoselection, fn)
 }
 
 func (ge *GameEvents) OnDotaChallengeSocacheUpdated(fn func(*GameEventDotaChallengeSocacheUpdated) error) {
-	if ge.onDotaChallengeSocacheUpdated == nil {
-		ge.onDotaChallengeSocacheUpdated = make([]func(*GameEventDotaChallengeSocacheUpdated) error, 0)
-	}
 	ge.onDotaChallengeSocacheUpdated = append(ge.onDotaChallengeSocacheUpdated, fn)
 }
 
 func (ge *GameEvents) OnPartyInvitesUpdated(fn func(*GameEventPartyInvitesUpdated) error) {
-	if ge.onPartyInvitesUpdated == nil {
-		ge.onPartyInvitesUpdated = make([]func(*GameEventPartyInvitesUpdated) error, 0)
-	}
 	ge.onPartyInvitesUpdated = append(ge.onPartyInvitesUpdated, fn)
 }
 
 func (ge *GameEvents) OnLobbyInvitesUpdated(fn func(*GameEventLobbyInvitesUpdated) error) {
-	if ge.onLobbyInvitesUpdated == nil {
-		ge.onLobbyInvitesUpdated = make([]func(*GameEventLobbyInvitesUpdated) error, 0)
-	}
 	ge.onLobbyInvitesUpdated = append(ge.onLobbyInvitesUpdated, fn)
 }
 
 func (ge *GameEvents) OnCustomGameModeListUpdated(fn func(*GameEventCustomGameModeListUpdated) error) {
-	if ge.onCustomGameModeListUpdated == nil {
-		ge.onCustomGameModeListUpdated = make([]func(*GameEventCustomGameModeListUpdated) error, 0)
-	}
 	ge.onCustomGameModeListUpdated = append(ge.onCustomGameModeListUpdated, fn)
 }
 
 func (ge *GameEvents) OnCustomGameLobbyListUpdated(fn func(*GameEventCustomGameLobbyListUpdated) error) {
-	if ge.onCustomGameLobbyListUpdated == nil {
-		ge.onCustomGameLobbyListUpdated = make([]func(*GameEventCustomGameLobbyListUpdated) error, 0)
-	}
 	ge.onCustomGameLobbyListUpdated = append(ge.onCustomGameLobbyListUpdated, fn)
 }
 
 func (ge *GameEvents) OnFriendLobbyListUpdated(fn func(*GameEventFriendLobbyListUpdated) error) {
-	if ge.onFriendLobbyListUpdated == nil {
-		ge.onFriendLobbyListUpdated = make([]func(*GameEventFriendLobbyListUpdated) error, 0)
-	}
 	ge.onFriendLobbyListUpdated = append(ge.onFriendLobbyListUpdated, fn)
 }
 
 func (ge *GameEvents) OnDotaTeamPlayerListChanged(fn func(*GameEventDotaTeamPlayerListChanged) error) {
-	if ge.onDotaTeamPlayerListChanged == nil {
-		ge.onDotaTeamPlayerListChanged = make([]func(*GameEventDotaTeamPlayerListChanged) error, 0)
-	}
 	ge.onDotaTeamPlayerListChanged = append(ge.onDotaTeamPlayerListChanged, fn)
 }
 
 func (ge *GameEvents) OnDotaPlayerDetailsChanged(fn func(*GameEventDotaPlayerDetailsChanged) error) {
-	if ge.onDotaPlayerDetailsChanged == nil {
-		ge.onDotaPlayerDetailsChanged = make([]func(*GameEventDotaPlayerDetailsChanged) error, 0)
-	}
 	ge.onDotaPlayerDetailsChanged = append(ge.onDotaPlayerDetailsChanged, fn)
 }
 
 func (ge *GameEvents) OnPlayerProfileStatsUpdated(fn func(*GameEventPlayerProfileStatsUpdated) error) {
-	if ge.onPlayerProfileStatsUpdated == nil {
-		ge.onPlayerProfileStatsUpdated = make([]func(*GameEventPlayerProfileStatsUpdated) error, 0)
-	}
 	ge.onPlayerProfileStatsUpdated = append(ge.onPlayerProfileStatsUpdated, fn)
 }
 
 func (ge *GameEvents) OnCustomGamePlayerCountUpdated(fn func(*GameEventCustomGamePlayerCountUpdated) error) {
-	if ge.onCustomGamePlayerCountUpdated == nil {
-		ge.onCustomGamePlayerCountUpdated = make([]func(*GameEventCustomGamePlayerCountUpdated) error, 0)
-	}
 	ge.onCustomGamePlayerCountUpdated = append(ge.onCustomGamePlayerCountUpdated, fn)
 }
 
 func (ge *GameEvents) OnCustomGameFriendsPlayedUpdated(fn func(*GameEventCustomGameFriendsPlayedUpdated) error) {
-	if ge.onCustomGameFriendsPlayedUpdated == nil {
-		ge.onCustomGameFriendsPlayedUpdated = make([]func(*GameEventCustomGameFriendsPlayedUpdated) error, 0)
-	}
 	ge.onCustomGameFriendsPlayedUpdated = append(ge.onCustomGameFriendsPlayedUpdated, fn)
 }
 
 func (ge *GameEvents) OnCustomGamesFriendsPlayUpdated(fn func(*GameEventCustomGamesFriendsPlayUpdated) error) {
-	if ge.onCustomGamesFriendsPlayUpdated == nil {
-		ge.onCustomGamesFriendsPlayUpdated = make([]func(*GameEventCustomGamesFriendsPlayUpdated) error, 0)
-	}
 	ge.onCustomGamesFriendsPlayUpdated = append(ge.onCustomGamesFriendsPlayUpdated, fn)
 }
 
 func (ge *GameEvents) OnDotaPlayerUpdateAssignedHero(fn func(*GameEventDotaPlayerUpdateAssignedHero) error) {
-	if ge.onDotaPlayerUpdateAssignedHero == nil {
-		ge.onDotaPlayerUpdateAssignedHero = make([]func(*GameEventDotaPlayerUpdateAssignedHero) error, 0)
-	}
 	ge.onDotaPlayerUpdateAssignedHero = append(ge.onDotaPlayerUpdateAssignedHero, fn)
 }
 
 func (ge *GameEvents) OnDotaPlayerHeroSelectionDirty(fn func(*GameEventDotaPlayerHeroSelectionDirty) error) {
-	if ge.onDotaPlayerHeroSelectionDirty == nil {
-		ge.onDotaPlayerHeroSelectionDirty = make([]func(*GameEventDotaPlayerHeroSelectionDirty) error, 0)
-	}
 	ge.onDotaPlayerHeroSelectionDirty = append(ge.onDotaPlayerHeroSelectionDirty, fn)
 }
 
 func (ge *GameEvents) OnDotaNpcGoalReached(fn func(*GameEventDotaNpcGoalReached) error) {
-	if ge.onDotaNpcGoalReached == nil {
-		ge.onDotaNpcGoalReached = make([]func(*GameEventDotaNpcGoalReached) error, 0)
-	}
 	ge.onDotaNpcGoalReached = append(ge.onDotaNpcGoalReached, fn)
 }
 
 func (ge *GameEvents) OnDotaPlayerSelectedCustomTeam(fn func(*GameEventDotaPlayerSelectedCustomTeam) error) {
-	if ge.onDotaPlayerSelectedCustomTeam == nil {
-		ge.onDotaPlayerSelectedCustomTeam = make([]func(*GameEventDotaPlayerSelectedCustomTeam) error, 0)
-	}
 	ge.onDotaPlayerSelectedCustomTeam = append(ge.onDotaPlayerSelectedCustomTeam, fn)
 }
 
 func (ge *GameEvents) OnHltvStatus(fn func(*GameEventHltvStatus) error) {
-	if ge.onHltvStatus == nil {
-		ge.onHltvStatus = make([]func(*GameEventHltvStatus) error, 0)
-	}
 	ge.onHltvStatus = append(ge.onHltvStatus, fn)
 }
 
 func (ge *GameEvents) OnHltvCameraman(fn func(*GameEventHltvCameraman) error) {
-	if ge.onHltvCameraman == nil {
-		ge.onHltvCameraman = make([]func(*GameEventHltvCameraman) error, 0)
-	}
 	ge.onHltvCameraman = append(ge.onHltvCameraman, fn)
 }
 
 func (ge *GameEvents) OnHltvRankCamera(fn func(*GameEventHltvRankCamera) error) {
-	if ge.onHltvRankCamera == nil {
-		ge.onHltvRankCamera = make([]func(*GameEventHltvRankCamera) error, 0)
-	}
 	ge.onHltvRankCamera = append(ge.onHltvRankCamera, fn)
 }
 
 func (ge *GameEvents) OnHltvRankEntity(fn func(*GameEventHltvRankEntity) error) {
-	if ge.onHltvRankEntity == nil {
-		ge.onHltvRankEntity = make([]func(*GameEventHltvRankEntity) error, 0)
-	}
 	ge.onHltvRankEntity = append(ge.onHltvRankEntity, fn)
 }
 
 func (ge *GameEvents) OnHltvFixed(fn func(*GameEventHltvFixed) error) {
-	if ge.onHltvFixed == nil {
-		ge.onHltvFixed = make([]func(*GameEventHltvFixed) error, 0)
-	}
 	ge.onHltvFixed = append(ge.onHltvFixed, fn)
 }
 
 func (ge *GameEvents) OnHltvChase(fn func(*GameEventHltvChase) error) {
-	if ge.onHltvChase == nil {
-		ge.onHltvChase = make([]func(*GameEventHltvChase) error, 0)
-	}
 	ge.onHltvChase = append(ge.onHltvChase, fn)
 }
 
 func (ge *GameEvents) OnHltvMessage(fn func(*GameEventHltvMessage) error) {
-	if ge.onHltvMessage == nil {
-		ge.onHltvMessage = make([]func(*GameEventHltvMessage) error, 0)
-	}
 	ge.onHltvMessage = append(ge.onHltvMessage, fn)
 }
 
 func (ge *GameEvents) OnHltvTitle(fn func(*GameEventHltvTitle) error) {
-	if ge.onHltvTitle == nil {
-		ge.onHltvTitle = make([]func(*GameEventHltvTitle) error, 0)
-	}
 	ge.onHltvTitle = append(ge.onHltvTitle, fn)
 }
 
 func (ge *GameEvents) OnHltvChat(fn func(*GameEventHltvChat) error) {
-	if ge.onHltvChat == nil {
-		ge.onHltvChat = make([]func(*GameEventHltvChat) error, 0)
-	}
 	ge.onHltvChat = append(ge.onHltvChat, fn)
 }
 
 func (ge *GameEvents) OnHltvVersioninfo(fn func(*GameEventHltvVersioninfo) error) {
-	if ge.onHltvVersioninfo == nil {
-		ge.onHltvVersioninfo = make([]func(*GameEventHltvVersioninfo) error, 0)
-	}
 	ge.onHltvVersioninfo = append(ge.onHltvVersioninfo, fn)
 }
 
 func (ge *GameEvents) OnDotaChaseHero(fn func(*GameEventDotaChaseHero) error) {
-	if ge.onDotaChaseHero == nil {
-		ge.onDotaChaseHero = make([]func(*GameEventDotaChaseHero) error, 0)
-	}
 	ge.onDotaChaseHero = append(ge.onDotaChaseHero, fn)
 }
 
 func (ge *GameEvents) OnDotaCombatlog(fn func(*GameEventDotaCombatlog) error) {
-	if ge.onDotaCombatlog == nil {
-		ge.onDotaCombatlog = make([]func(*GameEventDotaCombatlog) error, 0)
-	}
 	ge.onDotaCombatlog = append(ge.onDotaCombatlog, fn)
 }
 
 func (ge *GameEvents) OnDotaGameStateChange(fn func(*GameEventDotaGameStateChange) error) {
-	if ge.onDotaGameStateChange == nil {
-		ge.onDotaGameStateChange = make([]func(*GameEventDotaGameStateChange) error, 0)
-	}
 	ge.onDotaGameStateChange = append(ge.onDotaGameStateChange, fn)
 }
 
 func (ge *GameEvents) OnDotaPlayerPickHero(fn func(*GameEventDotaPlayerPickHero) error) {
-	if ge.onDotaPlayerPickHero == nil {
-		ge.onDotaPlayerPickHero = make([]func(*GameEventDotaPlayerPickHero) error, 0)
-	}
 	ge.onDotaPlayerPickHero = append(ge.onDotaPlayerPickHero, fn)
 }
 
 func (ge *GameEvents) OnDotaTeamKillCredit(fn func(*GameEventDotaTeamKillCredit) error) {
-	if ge.onDotaTeamKillCredit == nil {
-		ge.onDotaTeamKillCredit = make([]func(*GameEventDotaTeamKillCredit) error, 0)
-	}
 	ge.onDotaTeamKillCredit = append(ge.onDotaTeamKillCredit, fn)
 }
 
