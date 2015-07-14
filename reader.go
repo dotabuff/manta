@@ -261,14 +261,14 @@ func (r *reader) readBits(n int) uint32 {
 		nBytesToRead += 1
 	}
 
-	var val uint32
+	var val uint64
 	for i := 0; i < nBytesToRead; i++ {
 		m := r.buf[(r.pos/8)+i]
-		val += (uint32(m) << uint32(i*8))
+		val += (uint64(m) << uint32(i*8))
 	}
 	val >>= uint32(bitOffset)
 	val &= ((1 << uint32(n)) - 1)
 	r.pos += n
 
-	return val
+	return uint32(val)
 }
