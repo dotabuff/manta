@@ -165,13 +165,21 @@ func (r *reader) readUBitVar() uint32 {
 
 // Reads the next byte (8 bits) in the buffer.
 func (r *reader) readByte() byte {
-	return r.readBytes(1)[0]
+	// Fast path if our position is byte-aligned.
+	if r.pos%8 == 0 && r.pos+8 <= r.size {
+		bpos := r.pos / 8
+		r.pos += 8
+		return r.buf[bpos]
+	}
+
+	// Slow path if our position isn't byte aligned.
+	return byte(r.readBits(8))
 }
 
 // Reads the given number of bytes from the buffer.
 func (r *reader) readBytes(n int) []byte {
 	if r.remBits() < (n * 8) {
-		_panicf("read overflow: %d bits requested, only %d remaining", n*8, r.size-r.pos)
+		_panicf("read overflow: %d bits requested, only %d remaining", n*8, r.remBits())
 	}
 
 	// Fast path if our position is byte-aligned.
@@ -247,7 +255,7 @@ func (r *reader) readBitsAsBytes(n int) []byte {
 // Read bits of a given length as a uint, may or may not be byte-aligned.
 func (r *reader) readBits(n int) uint32 {
 	if r.remBits() < n {
-		_panicf("read overflow: %d bits requested, only %d remaining", n, r.size-r.pos)
+		_panicf("read overflow: %d bits requested, only %d remaining", n, r.remBits())
 	}
 
 	if n > 32 {
