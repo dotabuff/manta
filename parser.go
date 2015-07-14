@@ -3,7 +3,6 @@ package manta
 import (
 	"bytes"
 	"io/ioutil"
-	"os"
 
 	"github.com/dotabuff/manta/dota"
 	"github.com/golang/snappy/snappy"
@@ -44,12 +43,7 @@ type Parser struct {
 
 // Create a new Parser from a file on disk.
 func NewParserFromFile(path string) (*Parser, error) {
-	fd, err := os.Open(path)
-	if err != nil {
-		return nil, err
-	}
-
-	buf, err := ioutil.ReadAll(fd)
+	buf, err := ioutil.ReadFile(path)
 	if err != nil {
 		return nil, err
 	}
