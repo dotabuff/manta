@@ -47,6 +47,9 @@ type pendingMessages []*pendingMessage
 func (ms pendingMessages) Len() int      { return len(ms) }
 func (ms pendingMessages) Swap(i, j int) { ms[i], ms[j] = ms[j], ms[i] }
 func (ms pendingMessages) Less(i, j int) bool {
+	if ms[i].tick > ms[j].tick {
+		return false
+	}
 	if ms[i].tick < ms[j].tick {
 		return true
 	}
