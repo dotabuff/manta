@@ -49,7 +49,7 @@ func TestFieldpath(t *testing.T) {
 	assert.Nil(err)
 
 	// Build the huffman tree
-	huf := fieldpath_huffman()
+	huf := newFieldpathHuffman()
 
 	// Iterate over the different scenarios
 	// -! Create a new FieldPath for each scenario
@@ -72,8 +72,8 @@ func TestFieldpath(t *testing.T) {
 		debugMode = s.debug
 
 		// Initialize a field path and walk it
-		fieldPath := fieldpath_init(serializer, &huf)
-		fieldPath.fieldpath_walk(newReader(buf))
+		fieldPath := newFieldpath(serializer, &huf)
+		fieldPath.walk(newReader(buf))
 
 		// Verify field count
 		assert.Equal(len(fieldPath.fields), s.expectCount)
