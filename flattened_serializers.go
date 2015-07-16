@@ -88,7 +88,7 @@ func (sers *flattened_serializers) recurse_table(cur *dota.ProtoFlattenedSeriali
 
 			Type:       (sers.proto.GetSymbols()[pField.GetVarTypeSym()]),
 			Version:    pField.FieldSerializerVersion,
-			Serializer: sers.pst.GetPropertySerializerByName((sers.proto.GetSymbols()[pField.GetVarTypeSym()])),
+			Serializer: sers.pst.GetPropertySerializerByName(sers.proto.GetSymbols()[pField.GetVarTypeSym()]),
 		}
 
 		// Optional: Attach the serializer version for the property if applicable

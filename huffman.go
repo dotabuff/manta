@@ -9,6 +9,9 @@ import (
 type HuffmanTree interface {
 	Weight() int
 	IsLeaf() bool
+	Value() int
+	Left() HuffmanTree
+	Right() HuffmanTree
 }
 
 // A leaf, contains encoded value
@@ -34,6 +37,21 @@ func (self HuffmanLeaf) IsLeaf() bool {
 	return true
 }
 
+// Return value for leaf
+func (self HuffmanLeaf) Value() int {
+	return self.value
+}
+
+func (self HuffmanLeaf) Right() HuffmanTree {
+	_panicf("HuffmanLeaf doesn't have right node")
+	return nil
+}
+
+func (self HuffmanLeaf) Left() HuffmanTree {
+	_panicf("HuffmanLeaf doesn't have left node")
+	return nil
+}
+
 // Return weight for node
 func (self HuffmanNode) Weight() int {
 	return self.weight
@@ -42,6 +60,20 @@ func (self HuffmanNode) Weight() int {
 // Return leaf state
 func (self HuffmanNode) IsLeaf() bool {
 	return false
+}
+
+// Return value for node
+func (self HuffmanNode) Value() int {
+	_panicf("HuffmanNode doesn't have a value")
+	return 0
+}
+
+func (self HuffmanNode) Left() HuffmanTree {
+	return HuffmanTree(self.left)
+}
+
+func (self HuffmanNode) Right() HuffmanTree {
+	return HuffmanTree(self.right)
 }
 
 type treeHeap []HuffmanTree
@@ -106,30 +138,27 @@ func swapNodes(tree HuffmanTree, path uint32, len uint32) {
 
 		// switch on the type
 		if one == 1 {
-			tree = (tree.(*HuffmanNode).right)
+			tree = tree.Right()
 		} else {
-			tree = (tree.(*HuffmanNode).left)
+			tree = tree.Left()
 		}
 	}
 
 	node := tree.(*HuffmanNode)
-	tmp := node.left
-	node.left = node.right
-	node.right = tmp
+	node.left, node.right = node.right, node.left
 }
 
 // Print computed tree order
 func printCodes(tree HuffmanTree, prefix []byte) {
-	switch i := tree.(type) {
-	case *HuffmanLeaf:
-		fmt.Printf("%v\t%d\t%d\t%s\n", i.value, i.weight, len(prefix), string(prefix))
-	case *HuffmanNode:
+	if tree.IsLeaf() {
+		fmt.Printf("%v\t%d\t%d\t%s\n", tree.Value(), tree.Weight(), len(prefix), string(prefix))
+	} else {
 		prefix = append(prefix, '0')
-		printCodes(i.left, prefix)
+		printCodes(tree.Left(), prefix)
 		prefix = prefix[:len(prefix)-1]
 
 		prefix = append(prefix, '1')
-		printCodes(i.right, prefix)
+		printCodes(tree.Right(), prefix)
 		prefix = prefix[:len(prefix)-1]
 	}
 }

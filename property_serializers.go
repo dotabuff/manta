@@ -62,112 +62,112 @@ type PropertySerializerTable struct {
 // Returns a table containing all know property serializers
 func GetDefaultPropertySerializerTable() *PropertySerializerTable {
 	// Init table
-	tbl := &PropertySerializerTable{}
-	tbl.Serializers = make(map[string]*PropertySerializer)
+	tbl := &PropertySerializerTable{Serializers: map[string]*PropertySerializer{}}
+	srz := tbl.Serializers
 
 	// Append default serializers/decoders
 	// For now, only arrays are added
 
 	// CWorld
-	tbl.Serializers["float32"] = &PropertySerializer{
+	srz["float32"] = &PropertySerializer{
 		nil, nil, false, 0, nil,
 	}
 
-	tbl.Serializers["float32[24]"] = &PropertySerializer{
-		nil, nil, true, 24, tbl.Serializers["float32"],
+	srz["float32[24]"] = &PropertySerializer{
+		nil, nil, true, 24, srz["float32"],
 	}
 
-	tbl.Serializers["CStrongHandle< InfoForResourceTypeIMaterial2 >"] = &PropertySerializer{
+	srz["CStrongHandle< InfoForResourceTypeIMaterial2 >"] = &PropertySerializer{
 		nil, nil, false, 0, nil,
 	}
 
-	tbl.Serializers["CStrongHandle< InfoForResourceTypeIMaterial2 >[6]"] = &PropertySerializer{
-		nil, nil, true, 6, tbl.Serializers["CStrongHandle< InfoForResourceTypeIMaterial2 >"],
+	srz["CStrongHandle< InfoForResourceTypeIMaterial2 >[6]"] = &PropertySerializer{
+		nil, nil, true, 6, srz["CStrongHandle< InfoForResourceTypeIMaterial2 >"],
 	}
 
 	//CDOTA_PlayerResource
-	tbl.Serializers["float32[10]"] = &PropertySerializer{
-		nil, nil, true, 10, tbl.Serializers["float32"],
+	srz["float32[10]"] = &PropertySerializer{
+		nil, nil, true, 10, srz["float32"],
 	}
 
-	tbl.Serializers["int32"] = &PropertySerializer{
+	srz["int32"] = &PropertySerializer{
 		nil, nil, false, 0, nil,
 	}
 
-	tbl.Serializers["int32[10]"] = &PropertySerializer{
-		nil, nil, true, 10, tbl.Serializers["int32"],
+	srz["int32[10]"] = &PropertySerializer{
+		nil, nil, true, 10, srz["int32"],
 	}
 
-	tbl.Serializers["int32[20]"] = &PropertySerializer{
-		nil, nil, true, 20, tbl.Serializers["int32"],
+	srz["int32[20]"] = &PropertySerializer{
+		nil, nil, true, 20, srz["int32"],
 	}
 
-	tbl.Serializers["int32[64]"] = &PropertySerializer{
-		nil, nil, true, 64, tbl.Serializers["int32"],
+	srz["int32[64]"] = &PropertySerializer{
+		nil, nil, true, 64, srz["int32"],
 	}
 
-	tbl.Serializers["uint16"] = &PropertySerializer{
+	srz["uint16"] = &PropertySerializer{
 		nil, nil, false, 0, nil,
 	}
 
-	tbl.Serializers["uint16[64]"] = &PropertySerializer{
-		nil, nil, true, 64, tbl.Serializers["uint16"],
+	srz["uint16[64]"] = &PropertySerializer{
+		nil, nil, true, 64, srz["uint16"],
 	}
 
-	tbl.Serializers["uint64"] = &PropertySerializer{
+	srz["uint64"] = &PropertySerializer{
 		nil, nil, false, 0, nil,
 	}
 
-	tbl.Serializers["uint64[64]"] = &PropertySerializer{
-		nil, nil, true, 64, tbl.Serializers["uint64"],
+	srz["uint64[64]"] = &PropertySerializer{
+		nil, nil, true, 64, srz["uint64"],
 	}
 
-	tbl.Serializers["uint64[128]"] = &PropertySerializer{
-		nil, nil, true, 128, tbl.Serializers["uint64"],
+	srz["uint64[128]"] = &PropertySerializer{
+		nil, nil, true, 128, srz["uint64"],
 	}
 
-	tbl.Serializers["uint64[256]"] = &PropertySerializer{
-		nil, nil, true, 256, tbl.Serializers["uint64"],
+	srz["uint64[256]"] = &PropertySerializer{
+		nil, nil, true, 256, srz["uint64"],
 	}
 
-	tbl.Serializers["CUtlSymbolLarge"] = &PropertySerializer{
+	srz["CUtlSymbolLarge"] = &PropertySerializer{
 		nil, nil, false, 0, nil,
 	}
 
-	tbl.Serializers["CUtlSymbolLarge[64]"] = &PropertySerializer{
-		nil, nil, true, 64, tbl.Serializers["CUtlSymbolLarge"],
+	srz["CUtlSymbolLarge[64]"] = &PropertySerializer{
+		nil, nil, true, 64, srz["CUtlSymbolLarge"],
 	}
 
-	tbl.Serializers["CUtlSymbolLarge[6]"] = &PropertySerializer{
-		nil, nil, true, 6, tbl.Serializers["CUtlSymbolLarge"],
+	srz["CUtlSymbolLarge[6]"] = &PropertySerializer{
+		nil, nil, true, 6, srz["CUtlSymbolLarge"],
 	}
 
-	tbl.Serializers["bool"] = &PropertySerializer{
+	srz["bool"] = &PropertySerializer{
 		nil, nil, false, 0, nil,
 	}
 
-	tbl.Serializers["bool[64]"] = &PropertySerializer{
-		nil, nil, true, 64, tbl.Serializers["bool"],
+	srz["bool[64]"] = &PropertySerializer{
+		nil, nil, true, 64, srz["bool"],
 	}
 
-	tbl.Serializers["bool[10]"] = &PropertySerializer{
-		nil, nil, true, 10, tbl.Serializers["bool"],
+	srz["bool[10]"] = &PropertySerializer{
+		nil, nil, true, 10, srz["bool"],
 	}
 
-	tbl.Serializers["Color"] = &PropertySerializer{
+	srz["Color"] = &PropertySerializer{
 		nil, nil, false, 0, nil,
 	}
 
-	tbl.Serializers["Color[10]"] = &PropertySerializer{
-		nil, nil, true, 10, tbl.Serializers["Color"],
+	srz["Color[10]"] = &PropertySerializer{
+		nil, nil, true, 10, srz["Color"],
 	}
 
-	tbl.Serializers["CHandle< CBaseEntity >"] = &PropertySerializer{
+	srz["CHandle< CBaseEntity >"] = &PropertySerializer{
 		nil, nil, false, 0, nil,
 	}
 
-	tbl.Serializers["CHandle< CBaseEntity >[10]"] = &PropertySerializer{
-		nil, nil, true, 10, tbl.Serializers["CHandle< CBaseEntity >"],
+	srz["CHandle< CBaseEntity >[10]"] = &PropertySerializer{
+		nil, nil, true, 10, srz["CHandle< CBaseEntity >"],
 	}
 
 	return tbl
