@@ -77,6 +77,14 @@ const (
 	ENetworkDisconnectionReason_NETWORK_DISCONNECT_EXITING                     ENetworkDisconnectionReason = 59
 	ENetworkDisconnectionReason_NETWORK_DISCONNECT_REQUEST_HOSTSTATE_IDLE      ENetworkDisconnectionReason = 60
 	ENetworkDisconnectionReason_NETWORK_DISCONNECT_REQUEST_HOSTSTATE_HLTVRELAY ENetworkDisconnectionReason = 61
+	ENetworkDisconnectionReason_NETWORK_DISCONNECT_CLIENT_CONSISTENCY_FAIL     ENetworkDisconnectionReason = 62
+	ENetworkDisconnectionReason_NETWORK_DISCONNECT_CLIENT_UNABLE_TO_CRC_MAP    ENetworkDisconnectionReason = 63
+	ENetworkDisconnectionReason_NETWORK_DISCONNECT_CLIENT_NO_MAP               ENetworkDisconnectionReason = 64
+	ENetworkDisconnectionReason_NETWORK_DISCONNECT_CLIENT_DIFFERENT_MAP        ENetworkDisconnectionReason = 65
+	ENetworkDisconnectionReason_NETWORK_DISCONNECT_SERVER_REQUIRES_STEAM       ENetworkDisconnectionReason = 66
+	ENetworkDisconnectionReason_NETWORK_DISCONNECT_STEAM_DENY_MISC             ENetworkDisconnectionReason = 67
+	ENetworkDisconnectionReason_NETWORK_DISCONNECT_STEAM_DENY_BAD_ANTI_CHEAT   ENetworkDisconnectionReason = 68
+	ENetworkDisconnectionReason_NETWORK_DISCONNECT_SERVER_SHUTDOWN             ENetworkDisconnectionReason = 69
 )
 
 var ENetworkDisconnectionReason_name = map[int32]string{
@@ -142,6 +150,14 @@ var ENetworkDisconnectionReason_name = map[int32]string{
 	59: "NETWORK_DISCONNECT_EXITING",
 	60: "NETWORK_DISCONNECT_REQUEST_HOSTSTATE_IDLE",
 	61: "NETWORK_DISCONNECT_REQUEST_HOSTSTATE_HLTVRELAY",
+	62: "NETWORK_DISCONNECT_CLIENT_CONSISTENCY_FAIL",
+	63: "NETWORK_DISCONNECT_CLIENT_UNABLE_TO_CRC_MAP",
+	64: "NETWORK_DISCONNECT_CLIENT_NO_MAP",
+	65: "NETWORK_DISCONNECT_CLIENT_DIFFERENT_MAP",
+	66: "NETWORK_DISCONNECT_SERVER_REQUIRES_STEAM",
+	67: "NETWORK_DISCONNECT_STEAM_DENY_MISC",
+	68: "NETWORK_DISCONNECT_STEAM_DENY_BAD_ANTI_CHEAT",
+	69: "NETWORK_DISCONNECT_SERVER_SHUTDOWN",
 }
 var ENetworkDisconnectionReason_value = map[string]int32{
 	"NETWORK_DISCONNECT_INVALID":                     0,
@@ -206,6 +222,14 @@ var ENetworkDisconnectionReason_value = map[string]int32{
 	"NETWORK_DISCONNECT_EXITING":                     59,
 	"NETWORK_DISCONNECT_REQUEST_HOSTSTATE_IDLE":      60,
 	"NETWORK_DISCONNECT_REQUEST_HOSTSTATE_HLTVRELAY": 61,
+	"NETWORK_DISCONNECT_CLIENT_CONSISTENCY_FAIL":     62,
+	"NETWORK_DISCONNECT_CLIENT_UNABLE_TO_CRC_MAP":    63,
+	"NETWORK_DISCONNECT_CLIENT_NO_MAP":               64,
+	"NETWORK_DISCONNECT_CLIENT_DIFFERENT_MAP":        65,
+	"NETWORK_DISCONNECT_SERVER_REQUIRES_STEAM":       66,
+	"NETWORK_DISCONNECT_STEAM_DENY_MISC":             67,
+	"NETWORK_DISCONNECT_STEAM_DENY_BAD_ANTI_CHEAT":   68,
+	"NETWORK_DISCONNECT_SERVER_SHUTDOWN":             69,
 }
 
 func (x ENetworkDisconnectionReason) Enum() *ENetworkDisconnectionReason {

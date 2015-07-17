@@ -7,10 +7,14 @@ Package dota is a generated protocol buffer package.
 
 It is generated from these files:
 	base_gcmessages.proto
+	c_peer2peer_netmessages.proto
+	connectionless_netmessages.proto
 	demo.proto
 	dota_broadcastmessages.proto
 	dota_clientmessages.proto
 	dota_commonmessages.proto
+	dota_gcmessages_client.proto
+	dota_gcmessages_client_fantasy.proto
 	dota_gcmessages_common.proto
 	dota_gcmessages_server.proto
 	dota_modifiers.proto
@@ -22,7 +26,12 @@ It is generated from these files:
 	netmessages.proto
 	network_connection.proto
 	networkbasetypes.proto
+	networksystem_protomessages.proto
+	rendermessages.proto
+	steamdatagram_messages.proto
 	steammessages.proto
+	steammessages_cloud.steamworkssdk.proto
+	steammessages_unified_base.steamworkssdk.proto
 	te.proto
 	toolevents.proto
 	usermessages.proto

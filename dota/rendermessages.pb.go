@@ -12,13 +12,14 @@ var _ = proto.Marshal
 var _ = math.Inf
 
 type CMsgBeginFrame struct {
-	FramePaintTime   *float64 `protobuf:"fixed64,1,opt,name=frame_paint_time" json:"frame_paint_time,omitempty"`
-	SurfaceWidth     *uint32  `protobuf:"varint,2,opt,name=surface_width" json:"surface_width,omitempty"`
-	SurfaceHeight    *uint32  `protobuf:"varint,3,opt,name=surface_height" json:"surface_height,omitempty"`
-	RenderTarget     *uint32  `protobuf:"varint,4,opt,name=render_target" json:"render_target,omitempty"`
-	UiScaleFactor    *float64 `protobuf:"fixed64,5,opt,name=ui_scale_factor" json:"ui_scale_factor,omitempty"`
-	EmptyFrame       *bool    `protobuf:"varint,6,opt,name=empty_frame" json:"empty_frame,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	FramePaintTime               *float64 `protobuf:"fixed64,1,opt,name=frame_paint_time" json:"frame_paint_time,omitempty"`
+	SurfaceWidth                 *uint32  `protobuf:"varint,2,opt,name=surface_width" json:"surface_width,omitempty"`
+	SurfaceHeight                *uint32  `protobuf:"varint,3,opt,name=surface_height" json:"surface_height,omitempty"`
+	RenderTarget                 *uint32  `protobuf:"varint,4,opt,name=render_target" json:"render_target,omitempty"`
+	UiScaleFactor                *float64 `protobuf:"fixed64,5,opt,name=ui_scale_factor" json:"ui_scale_factor,omitempty"`
+	EmptyFrame                   *bool    `protobuf:"varint,6,opt,name=empty_frame" json:"empty_frame,omitempty"`
+	ClearGpuResourcesBeforeFrame *bool    `protobuf:"varint,7,opt,name=clear_gpu_resources_before_frame" json:"clear_gpu_resources_before_frame,omitempty"`
+	XXX_unrecognized             []byte   `json:"-"`
 }
 
 func (m *CMsgBeginFrame) Reset()         { *m = CMsgBeginFrame{} }
@@ -63,6 +64,13 @@ func (m *CMsgBeginFrame) GetUiScaleFactor() float64 {
 func (m *CMsgBeginFrame) GetEmptyFrame() bool {
 	if m != nil && m.EmptyFrame != nil {
 		return *m.EmptyFrame
+	}
+	return false
+}
+
+func (m *CMsgBeginFrame) GetClearGpuResourcesBeforeFrame() bool {
+	if m != nil && m.ClearGpuResourcesBeforeFrame != nil {
+		return *m.ClearGpuResourcesBeforeFrame
 	}
 	return false
 }
@@ -114,14 +122,6 @@ func (m *CMsgClearBackbuffer) GetClearColorRgba() uint32 {
 	}
 	return 0
 }
-
-type CMsgClearGPUResources struct {
-	XXX_unrecognized []byte `json:"-"`
-}
-
-func (m *CMsgClearGPUResources) Reset()         { *m = CMsgClearGPUResources{} }
-func (m *CMsgClearGPUResources) String() string { return proto.CompactTextString(m) }
-func (*CMsgClearGPUResources) ProtoMessage()    {}
 
 type CMsgDeleteTexture struct {
 	TexturePointer   *uint64 `protobuf:"varint,1,opt,name=texture_pointer" json:"texture_pointer,omitempty"`
@@ -3294,7 +3294,7 @@ type CMsgPushAAndTContext struct {
 	ContextId                  *uint64                           `protobuf:"varint,1,opt,name=context_id" json:"context_id,omitempty"`
 	Width                      *float64                          `protobuf:"fixed64,3,opt,name=width" json:"width,omitempty"`
 	Height                     *float64                          `protobuf:"fixed64,4,opt,name=height" json:"height,omitempty"`
-	ChilrenHaveTransforms      *bool                             `protobuf:"varint,5,opt,name=chilren_have_transforms" json:"chilren_have_transforms,omitempty"`
+	ChilrenHave_3Dtransforms   *bool                             `protobuf:"varint,5,opt,name=chilren_have_3dtransforms" json:"chilren_have_3dtransforms,omitempty"`
 	Zindex                     *float32                          `protobuf:"fixed32,6,opt,name=zindex" json:"zindex,omitempty"`
 	PanelPosition              *CMsgPanelPosition                `protobuf:"bytes,7,opt,name=panel_position" json:"panel_position,omitempty"`
 	TransformMatrix            *CMsg3DTransformMatrix            `protobuf:"bytes,8,opt,name=transform_matrix" json:"transform_matrix,omitempty"`
@@ -3347,9 +3347,9 @@ func (m *CMsgPushAAndTContext) GetHeight() float64 {
 	return 0
 }
 
-func (m *CMsgPushAAndTContext) GetChilrenHaveTransforms() bool {
-	if m != nil && m.ChilrenHaveTransforms != nil {
-		return *m.ChilrenHaveTransforms
+func (m *CMsgPushAAndTContext) GetChilrenHave_3Dtransforms() bool {
+	if m != nil && m.ChilrenHave_3Dtransforms != nil {
+		return *m.ChilrenHave_3Dtransforms
 	}
 	return false
 }

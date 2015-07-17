@@ -2,23 +2,6 @@
 // source: connectionless_netmessages.proto
 // DO NOT EDIT!
 
-/*
-Package dota is a generated protocol buffer package.
-
-It is generated from these files:
-	connectionless_netmessages.proto
-	demo.proto
-	netmessages.proto
-	network_connection.proto
-	networkbasetypes.proto
-	networksystem_protomessages.proto
-	rendermessages.proto
-	toolevents.proto
-
-It has these top-level messages:
-	C2S_CONNECT_Message
-	C2S_CONNECTION_Message
-*/
 package dota
 
 import proto "github.com/golang/protobuf/proto"

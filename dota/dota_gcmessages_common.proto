@@ -982,6 +982,13 @@ message CSODOTALobbyInvite {
 	optional fixed64 custom_game_crc = 7;
 }
 
+message CDOTAClientHardwareSpecs {
+	optional uint32 logical_processors = 1;
+	optional fixed64 cpu_cycles_per_second = 2;
+	optional fixed64 total_physical_memory = 3;
+	optional bool is_64_bit_os = 4;
+}
+
 message CDOTASaveGame {
 	message Player {
 		optional DOTA_GC_TEAM team = 1 [default = DOTA_GC_TEAM_GOOD_GUYS];
@@ -1175,6 +1182,7 @@ message CSODOTALobby {
 	optional uint32 lan_host_ping_to_server_region = 74;
 	optional DOTALobbyVisibility visibility = 75 [default = DOTALobbyVisibility_Public];
 	optional fixed64 custom_game_crc = 76;
+	optional bool custom_game_auto_created_lobby = 77;
 }
 
 message CMsgLobbyEventPoints {
@@ -1693,21 +1701,47 @@ message CMsgDOTARealtimeGameStats {
 		optional float time_of_day = 4;
 		optional bool is_nightstalker_night = 5;
 		optional int32 game_time = 6;
-		optional bool is_tournament_game = 7;
 		optional uint32 teamid_radiant = 8;
 		optional uint32 teamid_dire = 9;
 		repeated CMsgDOTARealtimeGameStats.PickBanDetails picks = 10;
 		repeated CMsgDOTARealtimeGameStats.PickBanDetails bans = 11;
 		repeated CMsgDOTARealtimeGameStats.KillDetails kills = 12;
 		repeated CMsgDOTARealtimeGameStats.BroadcasterDetails broadcasters = 13;
+		optional uint32 game_mode = 14;
+		optional uint32 league_id = 15;
 	}
 
 	message GraphData {
+		message LocationStats {
+			repeated int32 stats = 1;
+		}
+
+		message TeamLocationStats {
+			repeated CMsgDOTARealtimeGameStats.GraphData.LocationStats loc_stats = 1;
+		}
+
+		enum eStat {
+			CreepGoldEarned = 0;
+			KillGoldEarned = 1;
+			DeathAndBuybackGoldLost = 2;
+			XPEarned = 3;
+		}
+
+		enum eLocation {
+			BotLane = 0;
+			MidLane = 1;
+			TopLane = 2;
+			Jungle = 3;
+			Ancients = 4;
+			Other = 5;
+		}
+
 		repeated int32 graph_gold = 1;
 		repeated int32 graph_xp = 2;
 		repeated int32 graph_kill = 3;
 		repeated int32 graph_tower = 4;
 		repeated int32 graph_rax = 5;
+		repeated CMsgDOTARealtimeGameStats.GraphData.TeamLocationStats team_loc_stats = 6;
 	}
 
 	optional CMsgDOTARealtimeGameStats.MatchDetails match = 1;
@@ -1759,8 +1793,9 @@ message CMsgDOTARealtimeGameStatsTerse {
 		optional uint64 matchid = 2;
 		optional uint32 timestamp = 3;
 		optional int32 game_time = 4;
-		optional bool is_tournament_game = 5;
 		repeated uint32 steam_broadcaster_account_ids = 6;
+		optional uint32 game_mode = 7;
+		optional uint32 league_id = 8;
 	}
 
 	message GraphData {
