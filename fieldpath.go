@@ -148,7 +148,7 @@ func PlusOne(r *reader, fp *fieldpath) {
 	field := tbl.Properties[fp.index[len(fp.index)-1]]
 
 	if field == nil {
-		_panicf("Overflow in PlusOne")
+		_panicf("Overflow")
 	}
 
 	// It's likely that we should actually push the tables
@@ -169,14 +169,14 @@ func PlusTwo(r *reader, fp *fieldpath) {
 	field := tbl.Properties[fp.index[len(fp.index)-1]]
 
 	if field == nil {
-		_panicf("Overflow in PlusOne")
+		_panicf("Overflow")
 	}
 
 	fp.fields = append(fp.fields, field.Field)
 }
 
 func PlusThree(r *reader, fp *fieldpath) {
-	_debugf("Calling PlusThree, %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.hierarchy[0].Name)
 
 	// Increment the index
 	fp.index[len(fp.index)-1] += 3
@@ -186,14 +186,14 @@ func PlusThree(r *reader, fp *fieldpath) {
 	field := tbl.Properties[fp.index[len(fp.index)-1]]
 
 	if field == nil {
-		_panicf("Overflow in PlusOne")
+		_panicf("Overflow")
 	}
 
 	fp.fields = append(fp.fields, field.Field)
 }
 
 func PlusFour(r *reader, fp *fieldpath) {
-	_debugf("Calling PlusFour, %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.hierarchy[0].Name)
 
 	// Increment the index
 	fp.index[len(fp.index)-1] += 4
@@ -203,18 +203,18 @@ func PlusFour(r *reader, fp *fieldpath) {
 	field := tbl.Properties[fp.index[len(fp.index)-1]]
 
 	if field == nil {
-		_panicf("Overflow in PlusOne")
+		_panicf("Overflow")
 	}
 
 	fp.fields = append(fp.fields, field.Field)
 }
 
 func PlusN(r *reader, fp *fieldpath) {
-	_debugf("Calling PlusN, %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.hierarchy[0].Name)
 }
 
 func PushOneLeftDeltaZeroRightZero(r *reader, fp *fieldpath) {
-	_debugf("Calling PushOneLeftDeltaZeroRightZero, %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.hierarchy[0].Name)
 
 	// Get current field and index
 	tbl := fp.hierarchy[len(fp.index)-1]
@@ -233,11 +233,11 @@ func PushOneLeftDeltaZeroRightZero(r *reader, fp *fieldpath) {
 }
 
 func PushOneLeftDeltaZeroRightNonZero(r *reader, fp *fieldpath) {
-	_debugf("Calling PushOneLeftDeltaZeroRightNonZero, %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.hierarchy[0].Name)
 }
 
 func PushOneLeftDeltaOneRightZero(r *reader, fp *fieldpath) {
-	_debugf("Calling PushOneLeftDeltaOneRightZero, %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.hierarchy[0].Name)
 
 	// PlusOne to advance the hierarchy to the next datatable
 	fp.index[len(fp.index)-1] += 1
@@ -299,83 +299,83 @@ func PushOneLeftDeltaOneRightZero(r *reader, fp *fieldpath) {
 }
 
 func PushOneLeftDeltaOneRightNonZero(r *reader, fp *fieldpath) {
-	_debugf("Calling PushOneLeftDeltaOneRightNonZero, %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.hierarchy[0].Name)
 }
 
 func PushOneLeftDeltaNRightZero(r *reader, fp *fieldpath) {
-	_debugf("Calling PushOneLeftDeltaNRightZero, %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.hierarchy[0].Name)
 }
 
 func PushOneLeftDeltaNRightNonZero(r *reader, fp *fieldpath) {
-	_debugf("Calling PushOneLeftDeltaNRightNonZero, %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.hierarchy[0].Name)
 }
 
 func PushOneLeftDeltaNRightNonZeroPack6Bits(r *reader, fp *fieldpath) {
-	_debugf("Calling PushOneLeftDeltaNRightNonZeroPack6Bits, %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.hierarchy[0].Name)
 }
 
 func PushOneLeftDeltaNRightNonZeroPack8Bits(r *reader, fp *fieldpath) {
-	_debugf("Calling PushOneLeftDeltaNRightNonZeroPack8Bits, %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.hierarchy[0].Name)
 }
 
 func PushTwoLeftDeltaZero(r *reader, fp *fieldpath) {
-	_debugf("Calling PushTwoLeftDeltaZero, %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.hierarchy[0].Name)
 }
 
 func PushTwoLeftDeltaOne(r *reader, fp *fieldpath) {
-	_debugf("Calling PushTwoLeftDeltaOne, %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.hierarchy[0].Name)
 }
 
 func PushTwoLeftDeltaN(r *reader, fp *fieldpath) {
-	_debugf("Calling PushTwoLeftDeltaN, %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.hierarchy[0].Name)
 }
 
 func PushTwoPack5LeftDeltaZero(r *reader, fp *fieldpath) {
-	_debugf("Calling PushTwoPack5LeftDeltaZero, %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.hierarchy[0].Name)
 }
 
 func PushTwoPack5LeftDeltaOne(r *reader, fp *fieldpath) {
-	_debugf("Calling PushTwoPack5LeftDeltaOne, %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.hierarchy[0].Name)
 }
 
 func PushTwoPack5LeftDeltaN(r *reader, fp *fieldpath) {
-	_debugf("Calling PushTwoPack5LeftDeltaN, %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.hierarchy[0].Name)
 }
 
 func PushThreeLeftDeltaZero(r *reader, fp *fieldpath) {
-	_debugf("Calling PushThreeLeftDeltaZero, %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.hierarchy[0].Name)
 }
 
 func PushThreeLeftDeltaOne(r *reader, fp *fieldpath) {
-	_debugf("Calling PushThreeLeftDeltaOne, %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.hierarchy[0].Name)
 }
 
 func PushThreeLeftDeltaN(r *reader, fp *fieldpath) {
-	_debugf("Calling PushThreeLeftDeltaN, %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.hierarchy[0].Name)
 }
 
 func PushThreePack5LeftDeltaZero(r *reader, fp *fieldpath) {
-	_debugf("Calling PushThreePack5LeftDeltaZero, %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.hierarchy[0].Name)
 }
 
 func PushThreePack5LeftDeltaOne(r *reader, fp *fieldpath) {
-	_debugf("Calling PushThreePack5LeftDeltaOne, %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.hierarchy[0].Name)
 }
 
 func PushThreePack5LeftDeltaN(r *reader, fp *fieldpath) {
-	_debugf("Calling PushThreePack5LeftDeltaN, %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.hierarchy[0].Name)
 }
 
 func PushN(r *reader, fp *fieldpath) {
-	_debugf("Calling PushN, %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.hierarchy[0].Name)
 }
 
 func PushNAndNonTopological(r *reader, fp *fieldpath) {
-	_debugf("Calling PushNAndNonTopological, %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.hierarchy[0].Name)
 }
 
 func PopOnePlusOne(r *reader, fp *fieldpath) {
-	_debugf("Calling PopOnePlusOne, %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.hierarchy[0].Name)
 
 	// Check if we can pop an element
 	if len(fp.index) <= 1 {
@@ -391,11 +391,11 @@ func PopOnePlusOne(r *reader, fp *fieldpath) {
 }
 
 func PopOnePlusN(r *reader, fp *fieldpath) {
-	_debugf("Calling PopOnePlusN, %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.hierarchy[0].Name)
 }
 
 func PopAllButOnePlusOne(r *reader, fp *fieldpath) {
-	_debugf("Calling PopAllButOnePlusOne, %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.hierarchy[0].Name)
 
 	// Remove all hierarchy and index element
 	fp.hierarchy = fp.hierarchy[:1]
@@ -405,47 +405,47 @@ func PopAllButOnePlusOne(r *reader, fp *fieldpath) {
 }
 
 func PopAllButOnePlusN(r *reader, fp *fieldpath) {
-	_debugf("Calling PopAllButOnePlusN, %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.hierarchy[0].Name)
 }
 
 func PopAllButOnePlusNPackN(r *reader, fp *fieldpath) {
-	_debugf("Calling PopAllButOnePlusNPackN, %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.hierarchy[0].Name)
 }
 
 func PopAllButOnePlusNPack3Bits(r *reader, fp *fieldpath) {
-	_debugf("Calling PopAllButOnePlusNPack3Bits, %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.hierarchy[0].Name)
 }
 
 func PopAllButOnePlusNPack6Bits(r *reader, fp *fieldpath) {
-	_debugf("Calling PopAllButOnePlusNPack6Bits, %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.hierarchy[0].Name)
 }
 
 func PopNPlusOne(r *reader, fp *fieldpath) {
-	_debugf("Calling PopNPlusOne, %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.hierarchy[0].Name)
 }
 
 func PopNPlusN(r *reader, fp *fieldpath) {
-	_debugf("Calling PopNPlusN, %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.hierarchy[0].Name)
 }
 
 func PopNAndNonTopographical(r *reader, fp *fieldpath) {
-	_debugf("Calling PopNAndNonTopographical, %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.hierarchy[0].Name)
 }
 
 func NonTopoComplex(r *reader, fp *fieldpath) {
-	_debugf("Calling NonTopoComplex, %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.hierarchy[0].Name)
 }
 
 func NonTopoPenultimatePlusOne(r *reader, fp *fieldpath) {
-	_debugf("Calling NonTopoPenultimatePlusOne, %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.hierarchy[0].Name)
 }
 
 func NonTopoComplexPack4Bits(r *reader, fp *fieldpath) {
-	_debugf("Calling NonTopoComplexPack4Bits, %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.hierarchy[0].Name)
 }
 
 func FieldPathEncodeFinish(r *reader, fp *fieldpath) {
-	_debugf("Calling FieldPathEncodeFinish, %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.hierarchy[0].Name)
 
 	fp.finished = true
 }
