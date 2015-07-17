@@ -36,6 +36,36 @@ func TestFieldpath(t *testing.T) {
 			debug:       false,
 			expectCount: 139,
 		},
+		{
+			tableName:   "CDOTAPlayer",
+			run:         true,
+			debug:       false,
+			expectCount: 137,
+		},
+		{
+			tableName:   "CDOTA_PlayerResource",
+			run:         true,
+			debug:       false,
+			expectCount: 2056,
+		},
+		{
+			tableName:   "CBaseAnimating",
+			run:         true,
+			debug:       false,
+			expectCount: 110,
+		},
+		{
+			tableName:   "CBaseEntity",
+			run:         true,
+			debug:       false,
+			expectCount: 35,
+		},
+		{
+			tableName:   "CDOTAGamerulesProxy",
+			run:         true,
+			debug:       false,
+			expectCount: 389,
+		},
 	}
 
 	// Load our send tables
