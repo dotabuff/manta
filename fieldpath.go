@@ -448,6 +448,19 @@ func PopNAndNonTopographical(r *reader, fp *fieldpath) {
 
 func NonTopoComplex(r *reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.hierarchy[0].Name)
+
+	// See NonTopoComplexPack4Bits
+
+	depth := 0
+	for depth != len(fp.index) && r.readBits(1) == 1 {
+		_debugf("Apply to index %d, %d", depth, r.readVarInt32())
+		depth++
+	}
+
+	fp.hierarchy = fp.hierarchy[:len(fp.hierarchy)-1]
+	fp.index = fp.index[:len(fp.index)-1]
+
+	PushOneLeftDeltaOneRightZero(r, fp)
 }
 
 func NonTopoPenultimatePlusOne(r *reader, fp *fieldpath) {
@@ -456,6 +469,43 @@ func NonTopoPenultimatePlusOne(r *reader, fp *fieldpath) {
 
 func NonTopoComplexPack4Bits(r *reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.hierarchy[0].Name)
+
+	// NonTopological = Disregard the hierarchy, work directly on the field
+	// indizies for now
+	//
+	// Variables:
+	// v4 = 0; // Incremented by 1 each loop
+	// v3 = CFieldPath;
+	//
+	// Assumptions:
+	// - Path data (array with MaxDepth) is first element of CFieldPath
+	// - Current depth has an offset of 8 from CFieldPath
+	//
+	// Each loop does the following:
+	// - Read 1 bit, if it is set, break
+	// - Read 4 bits, substract 7 = v5
+	// - Apply the data read to the v4'th index: v3[v4] += v5
+	//
+	// End condition:
+	// - r.readBits(1) == 1
+	// - Reached current depth (see assumption)
+
+	depth := 0
+	for depth != len(fp.index) && r.readBits(1) == 1 {
+		_debugf("Todo: Apply to index %d, %d", depth, r.readBits(4)-7)
+		depth++
+	}
+
+	// HACK FOR baseline's only:
+	// --------------------------
+	// For baselines's, we should switch from current/2 to current+1/0 in 99%
+	// of the cases.
+	// (reads +1, -X, (advance index [0]+1, advance index [1]-X)
+
+	fp.hierarchy = fp.hierarchy[:len(fp.hierarchy)-1]
+	fp.index = fp.index[:len(fp.index)-1]
+
+	PushOneLeftDeltaOneRightZero(r, fp)
 }
 
 func FieldPathEncodeFinish(r *reader, fp *fieldpath) {
