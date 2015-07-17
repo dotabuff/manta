@@ -211,6 +211,20 @@ func PlusFour(r *reader, fp *fieldpath) {
 
 func PlusN(r *reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.hierarchy[0].Name)
+
+	// This one reads a variable-length header encoding the number of bits
+	// to read for N. Five is always added to the result.
+
+	rBits := []int{2, 4, 10, 17, 30}
+
+	for _, bits := range rBits {
+		if r.readBits(1) == 1 {
+			// add 4 to the result and abuse PlusOne to append the field
+			fp.index[len(fp.index)-1] += int32(r.readBits(bits)) + 4
+			PlusOne(r, fp)
+			return
+		}
+	}
 }
 
 func PushOneLeftDeltaZeroRightZero(r *reader, fp *fieldpath) {
