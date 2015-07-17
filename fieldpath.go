@@ -17,11 +17,11 @@ package manta
 
 // A fieldpath, used to walk through the flattened table hierarchy
 type fieldpath struct {
-	fields    []*dt_field
-	hierarchy []*dt
-	index     []int32
-	tree      *HuffmanTree
-	finished  bool
+	parent   *dt
+	fields   []*dt_field
+	index    []int32
+	tree     *HuffmanTree
+	finished bool
 }
 
 // Contains the weight and lookup function for a single operation
@@ -78,24 +78,20 @@ var fieldpathLookup = []fieldpathOp{
 // Initialize a fieldpath object
 func newFieldpath(parentTbl *dt, huf *HuffmanTree) *fieldpath {
 	fp := &fieldpath{
-		fields:    make([]*dt_field, 0),
-		hierarchy: make([]*dt, 0),
-		index:     make([]int32, 0),
+		parent:   parentTbl,
+		fields:   make([]*dt_field, 0),
+		index:    make([]int32, 0),
+		tree:     huf,
+		finished: false,
 	}
 
-	fp.hierarchy = append(fp.hierarchy, parentTbl)
 	fp.index = append(fp.index, -1) // Always start at -1
-	fp.tree = huf
-	fp.finished = false
 
 	return fp
 }
 
 // Walk an encoded fieldpath based on a huffman tree
 func (fp *fieldpath) walk(r *reader) {
-	// where is do-while when you need it -.-
-	// @todo: Refactor this using node.IsLeaf()
-
 	cnt := 0
 	root := HuffmanTree(*fp.tree)
 	node := root
@@ -104,8 +100,9 @@ func (fp *fieldpath) walk(r *reader) {
 		cnt++
 		if r.readBits(1) == 1 {
 			if i := node.Right(); i.IsLeaf() {
-				fieldpathLookup[i.Value()].Function(r, fp)
 				node = root
+				fieldpathLookup[i.Value()].Function(r, fp)
+				fp.addField()
 
 				_debugf("Reached in %d bits, %s", cnt, fp.fields[len(fp.fields)-1].Name)
 				cnt = 0
@@ -114,8 +111,9 @@ func (fp *fieldpath) walk(r *reader) {
 			}
 		} else {
 			if i := node.Left(); i.IsLeaf() {
-				fieldpathLookup[i.Value()].Function(r, fp)
 				node = root
+				fieldpathLookup[i.Value()].Function(r, fp)
+				fp.addField()
 
 				_debugf("Reached in %d bits, %s", cnt, fp.fields[len(fp.fields)-1].Name)
 				cnt = 0
@@ -124,6 +122,25 @@ func (fp *fieldpath) walk(r *reader) {
 			}
 		}
 	}
+
+	// Will always add one additional field for the finishEncoding operation, remove it
+	fp.fields = fp.fields[:len(fp.fields)-1]
+}
+
+// Adds a field based on the current index
+func (fp *fieldpath) addField() {
+	cDt := fp.parent
+
+	i := 0
+	for i = 0; i < len(fp.index)-1; i++ {
+		if cDt.Properties[fp.index[i]].Table != nil {
+			cDt = cDt.Properties[fp.index[i]].Table
+		} else {
+			_panicf("expected table in fp properties")
+		}
+	}
+
+	fp.fields = append(fp.fields, cDt.Properties[fp.index[i]].Field)
 }
 
 // Returns a huffman tree based on the operation weights
@@ -138,79 +155,35 @@ func newFieldpathHuffman() HuffmanTree {
 }
 
 func PlusOne(r *reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.parent.Name)
 
 	// Increment the index
 	fp.index[len(fp.index)-1] += 1
-
-	// Verify that the field exists
-	tbl := fp.hierarchy[len(fp.index)-1]
-	field := tbl.Properties[fp.index[len(fp.index)-1]]
-
-	if field == nil {
-		_panicf("Overflow")
-	}
-
-	// It's likely that we should actually push the tables
-	// CWorld baseline advances from CPhysicsComponent.m_bCollisionActivationDisabled
-	// to CRenderComponent and calls Finish without actually reading any element.
-	// @todo: Investigate data, probably a handle
-	fp.fields = append(fp.fields, field.Field)
 }
 
 func PlusTwo(r *reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.parent.Name)
 
 	// Increment the index
 	fp.index[len(fp.index)-1] += 2
-
-	// Verify that the field exists
-	tbl := fp.hierarchy[len(fp.index)-1]
-	field := tbl.Properties[fp.index[len(fp.index)-1]]
-
-	if field == nil {
-		_panicf("Overflow")
-	}
-
-	fp.fields = append(fp.fields, field.Field)
 }
 
 func PlusThree(r *reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.parent.Name)
 
 	// Increment the index
 	fp.index[len(fp.index)-1] += 3
-
-	// Verify that the field exists
-	tbl := fp.hierarchy[len(fp.index)-1]
-	field := tbl.Properties[fp.index[len(fp.index)-1]]
-
-	if field == nil {
-		_panicf("Overflow")
-	}
-
-	fp.fields = append(fp.fields, field.Field)
 }
 
 func PlusFour(r *reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.parent.Name)
 
 	// Increment the index
 	fp.index[len(fp.index)-1] += 4
-
-	// Verify that the field exists
-	tbl := fp.hierarchy[len(fp.index)-1]
-	field := tbl.Properties[fp.index[len(fp.index)-1]]
-
-	if field == nil {
-		_panicf("Overflow")
-	}
-
-	fp.fields = append(fp.fields, field.Field)
 }
 
 func PlusN(r *reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.parent.Name)
 
 	// This one reads a variable-length header encoding the number of bits
 	// to read for N. Five is always added to the result.
@@ -219,256 +192,178 @@ func PlusN(r *reader, fp *fieldpath) {
 
 	for _, bits := range rBits {
 		if r.readBits(1) == 1 {
-			// add 4 to the result and abuse PlusOne to append the field
-			fp.index[len(fp.index)-1] += int32(r.readBits(bits)) + 4
-			PlusOne(r, fp)
+			// Always add 5 to the result
+			fp.index[len(fp.index)-1] += int32(r.readBits(bits)) + 5
 			return
 		}
 	}
 }
 
 func PushOneLeftDeltaZeroRightZero(r *reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.parent.Name)
 
 	// Get current field and index
-	tbl := fp.hierarchy[len(fp.index)-1]
-	field := tbl.Properties[fp.index[len(fp.index)-1]]
-
-	if field.Table == nil {
-		_panicf("Trying to push field as table")
-	}
-
-	// Push the table, reset position to -1
-	fp.hierarchy = append(fp.hierarchy, field.Table)
-	fp.index = append(fp.index, -1)
-
-	// We abuse PlusOne instead of copying the verification code
-	PlusOne(r, fp)
+	fp.index = append(fp.index, 0)
 }
 
 func PushOneLeftDeltaZeroRightNonZero(r *reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.parent.Name)
 }
 
 func PushOneLeftDeltaOneRightZero(r *reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.parent.Name)
 
-	// PlusOne to advance the hierarchy to the next datatable
+	// Push +1, set index to 0
 	fp.index[len(fp.index)-1] += 1
-
-	// Get current field and index
-	tbl := fp.hierarchy[len(fp.index)-1]
-	field := tbl.Properties[fp.index[len(fp.index)-1]]
-
-	// Are we pushing a field?
-	if field.Table != nil {
-		fp.hierarchy = append(fp.hierarchy, field.Table)
-		fp.index = append(fp.index, -1)
-
-		// We abuse PlusOne instead of copying the verification code
-		PlusOne(r, fp)
-
-		return
-	}
-
-	// Are we pushing an array?
-	if field.Field.Serializer.IsArray {
-		_debugf("Entering array subroutine")
-
-		// Add our own temp table for the array
-		tmpDt := &dt{
-			Name:       field.Field.Name,
-			Flags:      nil,
-			Version:    0,
-			Properties: make([]*dt_property, 0),
-		}
-
-		// Add each array field to the table
-		for i := uint32(0); i < field.Field.Serializer.Length; i++ {
-			tmpDt.Properties = append(tmpDt.Properties, &dt_property{
-				Field: &dt_field{
-					Name:       field.Field.Name,
-					Type:       "",
-					Index:      int32(i),
-					Flags:      field.Field.Flags,
-					BitCount:   field.Field.BitCount,
-					LowValue:   field.Field.LowValue,
-					HighValue:  field.Field.HighValue,
-					Version:    field.Field.Version,
-					Serializer: field.Field.Serializer.ArraySerializer,
-				},
-				Table: nil,
-			})
-		}
-
-		fp.hierarchy = append(fp.hierarchy, tmpDt)
-		fp.index = append(fp.index, -1)
-
-		PlusOne(r, fp)
-
-		return
-	}
-
-	_panicf("Type: %s is neither Array not Table", field.Field.Name)
+	fp.index = append(fp.index, 0)
 }
 
 func PushOneLeftDeltaOneRightNonZero(r *reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.parent.Name)
 }
 
 func PushOneLeftDeltaNRightZero(r *reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.parent.Name)
 }
 
 func PushOneLeftDeltaNRightNonZero(r *reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.parent.Name)
 }
 
 func PushOneLeftDeltaNRightNonZeroPack6Bits(r *reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.parent.Name)
 }
 
 func PushOneLeftDeltaNRightNonZeroPack8Bits(r *reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.parent.Name)
 }
 
 func PushTwoLeftDeltaZero(r *reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.parent.Name)
 }
 
 func PushTwoLeftDeltaOne(r *reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.parent.Name)
 }
 
 func PushTwoLeftDeltaN(r *reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.parent.Name)
 }
 
 func PushTwoPack5LeftDeltaZero(r *reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.parent.Name)
 }
 
 func PushTwoPack5LeftDeltaOne(r *reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.parent.Name)
 }
 
 func PushTwoPack5LeftDeltaN(r *reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.parent.Name)
 }
 
 func PushThreeLeftDeltaZero(r *reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.parent.Name)
 }
 
 func PushThreeLeftDeltaOne(r *reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.parent.Name)
 }
 
 func PushThreeLeftDeltaN(r *reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.parent.Name)
 }
 
 func PushThreePack5LeftDeltaZero(r *reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.parent.Name)
 }
 
 func PushThreePack5LeftDeltaOne(r *reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.parent.Name)
 }
 
 func PushThreePack5LeftDeltaN(r *reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.parent.Name)
 }
 
 func PushN(r *reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.parent.Name)
 }
 
 func PushNAndNonTopological(r *reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.parent.Name)
 }
 
 func PopOnePlusOne(r *reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.parent.Name)
 
 	// Check if we can pop an element
 	if len(fp.index) <= 1 {
 		_panicf("Trying to pop last element")
 	}
 
-	// Pop last index and table
-	fp.hierarchy = fp.hierarchy[:len(fp.hierarchy)-1]
 	fp.index = fp.index[:len(fp.index)-1]
-
-	// Read next element
-	PlusOne(r, fp)
+	fp.index[len(fp.index)-1] += 1
 }
 
 func PopOnePlusN(r *reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.parent.Name)
 }
 
 func PopAllButOnePlusOne(r *reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.parent.Name)
 
 	// Remove all hierarchy and index element
-	fp.hierarchy = fp.hierarchy[:1]
 	fp.index = fp.index[:1]
-
-	PlusOne(r, fp)
+	fp.index[len(fp.index)-1] += 1
 }
 
 func PopAllButOnePlusN(r *reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.parent.Name)
 }
 
 func PopAllButOnePlusNPackN(r *reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.parent.Name)
 }
 
 func PopAllButOnePlusNPack3Bits(r *reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.parent.Name)
 }
 
 func PopAllButOnePlusNPack6Bits(r *reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.parent.Name)
 }
 
 func PopNPlusOne(r *reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.parent.Name)
 }
 
 func PopNPlusN(r *reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.parent.Name)
 }
 
 func PopNAndNonTopographical(r *reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.parent.Name)
 }
 
 func NonTopoComplex(r *reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.parent.Name)
 
 	// See NonTopoComplexPack4Bits
 
 	depth := 0
 	for depth != len(fp.index) && r.readBits(1) == 1 {
-		_debugf("Apply to index %d, %d", depth, r.readVarInt32())
+		fp.index[depth] += r.readVarInt32()
 		depth++
 	}
-
-	fp.hierarchy = fp.hierarchy[:len(fp.hierarchy)-1]
-	fp.index = fp.index[:len(fp.index)-1]
-
-	PushOneLeftDeltaOneRightZero(r, fp)
 }
 
 func NonTopoPenultimatePlusOne(r *reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.parent.Name)
 }
 
 func NonTopoComplexPack4Bits(r *reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.parent.Name)
 
 	// NonTopological = Disregard the hierarchy, work directly on the field
 	// indizies for now
@@ -492,24 +387,13 @@ func NonTopoComplexPack4Bits(r *reader, fp *fieldpath) {
 
 	depth := 0
 	for depth != len(fp.index) && r.readBits(1) == 1 {
-		_debugf("Todo: Apply to index %d, %d", depth, r.readBits(4)-7)
+		fp.index[depth] += int32(r.readBits(4)) - 7
 		depth++
 	}
-
-	// HACK FOR baseline's only:
-	// --------------------------
-	// For baselines's, we should switch from current/2 to current+1/0 in 99%
-	// of the cases.
-	// (reads +1, -X, (advance index [0]+1, advance index [1]-X)
-
-	fp.hierarchy = fp.hierarchy[:len(fp.hierarchy)-1]
-	fp.index = fp.index[:len(fp.index)-1]
-
-	PushOneLeftDeltaOneRightZero(r, fp)
 }
 
 func FieldPathEncodeFinish(r *reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.hierarchy[0].Name)
+	_debugf("Name: %s", fp.parent.Name)
 
 	fp.finished = true
 }
