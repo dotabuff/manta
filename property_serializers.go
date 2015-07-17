@@ -1,5 +1,10 @@
 package manta
 
+import (
+	"regexp"
+	"strconv"
+)
+
 // Required for CWorld to work:
 // ----------------------------
 // - CHandle< CBaseEntity >
@@ -48,7 +53,6 @@ type DecodeArrayFcn func(*reader) interface{}
 // PropertySerializer interface
 type PropertySerializer struct {
 	Decode          DecodeFcn
-	DecodeArray     DecodeArrayFcn
 	IsArray         bool
 	Length          uint32
 	ArraySerializer *PropertySerializer
@@ -61,128 +65,39 @@ type PropertySerializerTable struct {
 
 // Returns a table containing all know property serializers
 func GetDefaultPropertySerializerTable() *PropertySerializerTable {
-	// Init table
-	tbl := &PropertySerializerTable{Serializers: map[string]*PropertySerializer{}}
-	srz := tbl.Serializers
-
-	// Append default serializers/decoders
-	// For now, only arrays are added
-
-	// CWorld
-	srz["float32"] = &PropertySerializer{
-		nil, nil, false, 0, nil,
-	}
-
-	srz["float32[24]"] = &PropertySerializer{
-		nil, nil, true, 24, srz["float32"],
-	}
-
-	srz["CStrongHandle< InfoForResourceTypeIMaterial2 >"] = &PropertySerializer{
-		nil, nil, false, 0, nil,
-	}
-
-	srz["CStrongHandle< InfoForResourceTypeIMaterial2 >[6]"] = &PropertySerializer{
-		nil, nil, true, 6, srz["CStrongHandle< InfoForResourceTypeIMaterial2 >"],
-	}
-
-	//CDOTA_PlayerResource
-	srz["float32[10]"] = &PropertySerializer{
-		nil, nil, true, 10, srz["float32"],
-	}
-
-	srz["int32"] = &PropertySerializer{
-		nil, nil, false, 0, nil,
-	}
-
-	srz["int32[10]"] = &PropertySerializer{
-		nil, nil, true, 10, srz["int32"],
-	}
-
-	srz["int32[20]"] = &PropertySerializer{
-		nil, nil, true, 20, srz["int32"],
-	}
-
-	srz["int32[64]"] = &PropertySerializer{
-		nil, nil, true, 64, srz["int32"],
-	}
-
-	srz["uint16"] = &PropertySerializer{
-		nil, nil, false, 0, nil,
-	}
-
-	srz["uint16[64]"] = &PropertySerializer{
-		nil, nil, true, 64, srz["uint16"],
-	}
-
-	srz["uint64"] = &PropertySerializer{
-		nil, nil, false, 0, nil,
-	}
-
-	srz["uint64[64]"] = &PropertySerializer{
-		nil, nil, true, 64, srz["uint64"],
-	}
-
-	srz["uint64[128]"] = &PropertySerializer{
-		nil, nil, true, 128, srz["uint64"],
-	}
-
-	srz["uint64[256]"] = &PropertySerializer{
-		nil, nil, true, 256, srz["uint64"],
-	}
-
-	srz["CUtlSymbolLarge"] = &PropertySerializer{
-		nil, nil, false, 0, nil,
-	}
-
-	srz["CUtlSymbolLarge[64]"] = &PropertySerializer{
-		nil, nil, true, 64, srz["CUtlSymbolLarge"],
-	}
-
-	srz["CUtlSymbolLarge[6]"] = &PropertySerializer{
-		nil, nil, true, 6, srz["CUtlSymbolLarge"],
-	}
-
-	srz["bool"] = &PropertySerializer{
-		nil, nil, false, 0, nil,
-	}
-
-	srz["bool[64]"] = &PropertySerializer{
-		nil, nil, true, 64, srz["bool"],
-	}
-
-	srz["bool[10]"] = &PropertySerializer{
-		nil, nil, true, 10, srz["bool"],
-	}
-
-	srz["Color"] = &PropertySerializer{
-		nil, nil, false, 0, nil,
-	}
-
-	srz["Color[10]"] = &PropertySerializer{
-		nil, nil, true, 10, srz["Color"],
-	}
-
-	srz["CHandle< CBaseEntity >"] = &PropertySerializer{
-		nil, nil, false, 0, nil,
-	}
-
-	srz["CHandle< CBaseEntity >[10]"] = &PropertySerializer{
-		nil, nil, true, 10, srz["CHandle< CBaseEntity >"],
-	}
-
-	return tbl
+	return &PropertySerializerTable{Serializers: map[string]*PropertySerializer{}}
 }
+
+var matchArray = regexp.MustCompile(`([^[\]]+)\[(\d+)]`)
 
 // Returns a serializer by name
 func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *PropertySerializer {
-	ser := pst.Serializers[name]
-
-	if ser == nil {
-		// This function should panic at some point
-		return &PropertySerializer{
-			nil, nil, false, 0, nil,
-		}
+	if ser := pst.Serializers[name]; ser != nil {
+		return ser
 	}
 
-	return ser
+	if match := matchArray.FindStringSubmatch(name); match != nil {
+		typeName := match[1]
+		length, err := strconv.ParseInt(match[2], 10, 64)
+		if err != nil {
+			_panicf("Array length doesn't seem to be a number: %v", match[2])
+		}
+
+		serializer, found := pst.Serializers[typeName]
+		if !found {
+			serializer = &PropertySerializer{}
+			pst.Serializers[typeName] = serializer
+		}
+
+		ps := &PropertySerializer{
+			IsArray:         true,
+			Length:          uint32(length),
+			ArraySerializer: serializer,
+		}
+		pst.Serializers[name] = ps
+		return ps
+	}
+
+	// This function should panic at some point
+	return &PropertySerializer{}
 }
