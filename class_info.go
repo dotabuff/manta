@@ -64,7 +64,7 @@ func (p *Parser) updateInstanceBaseline() {
 		}
 
 		// Get the send table associated with the class.
-		sendTable, ok := p.sendTables.getTableByName(className)
+		serializer, ok := p.serializers[className]
 		if !ok {
 			_panicf("unable to find send table %s for instancebaseline key %d", className, classId)
 		}
@@ -75,7 +75,7 @@ func (p *Parser) updateInstanceBaseline() {
 		// Parse the properties out of the string table buffer and store
 		// them as the class baseline in the Parser.
 		if len(item.value) > 0 {
-			p.classBaseline[classId] = readProperties(newReader(item.value), sendTable)
+			p.classBaseline[classId] = readPropertiesNew(newReader(item.value), serializer)
 		}
 	}
 }

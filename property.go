@@ -1,5 +1,10 @@
 package manta
 
+func readPropertiesNew(r *reader, t map[int32]*dt) (result map[string]interface{}) {
+	result = make(map[string]interface{})
+	return result
+}
+
 // Reads properties using a reader and send table.
 // Note: this is a work in progress and is almost certainly completely wrong.
 func readProperties(r *reader, t *sendTable) (result map[string]interface{}) {
