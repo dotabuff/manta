@@ -104,6 +104,37 @@ func (sers *flattened_serializers) recurse_table(cur *dota.ProtoFlattenedSeriali
 			prop.Table = pSerializer
 		}
 
+		// Optional: Adjust array fields
+		if prop.Field.Serializer.IsArray {
+			// Add our own temp table for the array
+			tmpDt := &dt{
+				Name:       prop.Field.Name,
+				Flags:      nil,
+				Version:    0,
+				Properties: make([]*dt_property, 0),
+			}
+
+			// Add each array field to the table
+			for i := uint32(0); i < prop.Field.Serializer.Length; i++ {
+				tmpDt.Properties = append(tmpDt.Properties, &dt_property{
+					Field: &dt_field{
+						Name:       prop.Field.Name,
+						Type:       "",
+						Index:      int32(i),
+						Flags:      prop.Field.Flags,
+						BitCount:   prop.Field.BitCount,
+						LowValue:   prop.Field.LowValue,
+						HighValue:  prop.Field.HighValue,
+						Version:    prop.Field.Version,
+						Serializer: prop.Field.Serializer.ArraySerializer,
+					},
+					Table: nil,
+				})
+			}
+
+			prop.Table = tmpDt
+		}
+
 		table.Properties = append(
 			table.Properties,
 			prop,
