@@ -72,7 +72,15 @@ func (p *Parser) updateInstanceBaseline() {
 		// Parse the properties out of the string table buffer and store
 		// them as the class baseline in the Parser.
 		if len(item.value) > 0 {
-			_debugf("Parsing entity %v", p.classBaseline[classId])
+			if serializer[0].Name == "CIngameEvent_TI5" {
+				// This one can't parse because it want's to go two levels into
+				// DOTA_PlayerChallengeInfo. That one might be an array (would make sense)
+				// but isn't marked as such.
+				// @todo: Investigate later
+				continue
+			}
+
+			_debugf("Parsing entity baseline %v", serializer[0].Name)
 			p.classBaseline[classId] = readPropertiesNew(newReader(item.value), serializer)
 		}
 	}
