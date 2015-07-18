@@ -24,6 +24,7 @@ type fieldpath struct {
 	fields   []*dt_field
 	index    []int32
 	tree     *HuffmanTree
+	treeS    HuffmanTree // static version
 	finished bool
 }
 
@@ -85,6 +86,7 @@ func newFieldpath(parentTbl *dt, huf *HuffmanTree) *fieldpath {
 		fields:   make([]*dt_field, 0),
 		index:    make([]int32, 0),
 		tree:     huf,
+		treeS:    newFieldpathHuffmanStatic(),
 		finished: false,
 	}
 
@@ -96,7 +98,7 @@ func newFieldpath(parentTbl *dt, huf *HuffmanTree) *fieldpath {
 // Walk an encoded fieldpath based on a huffman tree
 func (fp *fieldpath) walk(r *reader) {
 	cnt := 0
-	root := HuffmanTree(*fp.tree)
+	root := fp.treeS
 	node := root
 
 	for fp.finished == false {
@@ -164,16 +166,17 @@ func newFieldpathHuffmanStatic() HuffmanTree {
 
 	addNode(h, 0, 1, 0)        // PlusOne
 	addNode(h, 1, 2, 1)        // EncodingFinish
-	addNode(h, 7, 4, 2)        // PlusTwo
-	addNode(h, 11, 5, 3)       // PlusN
-	addNode(h, 19, 6, 4)       // PlusThree
-	addNode(h, 51, 6, 5)       // PopAllButOnePlusOne
-	addNode(h, 91, 8, 6)       // PushOneLeftDeltaOneRightZero
-	addNode(h, 283, 10, 7)     // NonTopoComplexPack4Bits
-	addNode(h, 1819, 11, 8)    // NonTopoComplex
-	addNode(h, 2843, 12, 9)    // PushOneLeftDeltaZeroRightZero
-	addNode(h, 17179, 15, 10)  // PopOnePlusOne
-	addNode(h, 103195, 27, 11) // PushTwoLeftDeltaZero
+	addNode(h, 7, 4, 3)        // PlusTwo
+	addNode(h, 11, 5, 4)       // PlusN
+	addNode(h, 51, 6, 6)       // PopAllButOnePlusOne
+	addNode(h, 19, 6, 7)       // PlusThree
+	addNode(h, 251, 8, 8)      // PlusFour
+	addNode(h, 91, 8, 11)      // PushOneLeftDeltaOneRightZero
+	addNode(h, 283, 10, 18)    // NonTopoComplexPack4Bits
+	addNode(h, 1819, 11, 19)   // NonTopoComplex
+	addNode(h, 2843, 12, 20)   // PushOneLeftDeltaZeroRightZero
+	addNode(h, 17179, 15, 22)  // PopOnePlusOne
+	addNode(h, 103195, 27, 39) // PushTwoLeftDeltaZero
 
 	return h
 }
