@@ -69,6 +69,7 @@ func GetDefaultPropertySerializerTable() *PropertySerializerTable {
 }
 
 var matchArray = regexp.MustCompile(`([^[\]]+)\[(\d+)]`)
+var matchVector = regexp.MustCompile(`CUtlVector.*`)
 
 // Returns a serializer by name
 func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *PropertySerializer {
@@ -93,6 +94,16 @@ func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *Pr
 			IsArray:         true,
 			Length:          uint32(length),
 			ArraySerializer: serializer,
+		}
+		pst.Serializers[name] = ps
+		return ps
+	}
+
+	if match := matchVector.FindStringSubmatch(name); match != nil {
+		ps := &PropertySerializer{
+			IsArray:         true,
+			Length:          uint32(128),
+			ArraySerializer: &PropertySerializer{},
 		}
 		pst.Serializers[name] = ps
 		return ps
