@@ -69,12 +69,10 @@ func (p *Parser) updateInstanceBaseline() {
 			_panicf("unable to find send table %s for instancebaseline key %d", className, classId)
 		}
 
-		// TODO XXX: Remove once we've gotten readProperties working.
-		continue
-
 		// Parse the properties out of the string table buffer and store
 		// them as the class baseline in the Parser.
 		if len(item.value) > 0 {
+			_debugf("Parsing entity %v", p.classBaseline[classId])
 			p.classBaseline[classId] = readPropertiesNew(newReader(item.value), serializer)
 		}
 	}

@@ -1,7 +1,22 @@
 package manta
 
-func readPropertiesNew(r *reader, t map[int32]*dt) (result map[string]interface{}) {
+func readPropertiesNew(r *reader, ser map[int32]*dt) (result map[string]interface{}) {
+	// Return type
 	result = make(map[string]interface{})
+
+	// Generate the huffman tree and fieldpath
+	huf := newFieldpathHuffman()
+	fieldPath := newFieldpath(ser[0], &huf)
+
+	// Get a list of the included fields
+	fieldPath.walk(r)
+
+	// iterate all the fields and set their corresponding values
+	for i, f := range fieldPath.fields {
+		// @todo: actually parse stuff here
+		result[f.Name] = i
+	}
+
 	return result
 }
 
