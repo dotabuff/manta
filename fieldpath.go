@@ -157,6 +157,27 @@ func newFieldpathHuffman() HuffmanTree {
 	return buildTree(huffmanlist)
 }
 
+// Returns the static huffman tree based on our observed tree states
+func newFieldpathHuffmanStatic() HuffmanTree {
+	var h HuffmanTree
+	h = &HuffmanNode{0, nil, nil}
+
+	addNode(h, 0, 1, 0)        // PlusOne
+	addNode(h, 1, 2, 1)        // EncodingFinish
+	addNode(h, 7, 4, 2)        // PlusTwo
+	addNode(h, 11, 5, 3)       // PlusN
+	addNode(h, 19, 6, 4)       // PlusThree
+	addNode(h, 51, 6, 5)       // PopAllButOnePlusOne
+	addNode(h, 91, 8, 6)       // PushOneLeftDeltaOneRightZero
+	addNode(h, 283, 10, 7)     // NonTopoComplexPack4Bits
+	addNode(h, 1819, 11, 8)    // NonTopoComplex
+	addNode(h, 2843, 12, 9)    // PushOneLeftDeltaZeroRightZero
+	addNode(h, 17179, 15, 10)  // PopOnePlusOne
+	addNode(h, 103195, 27, 11) // PushTwoLeftDeltaZero
+
+	return h
+}
+
 func PlusOne(r *reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 
