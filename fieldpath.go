@@ -8,12 +8,15 @@ package manta
 //  0  PlusOne                         36271          1   0
 //  1  EncodingFinish                  25474          2   10
 //  2  PlusTwo                         10334          4   1110
-//  3  PushOneLeftDeltaZeroRightZero      35         12   110110001101
+//  3  PlusN						    4128          5   11010
 //  4  PlusThree                        1375          6   110010
-//  5  PushOneLeftDeltaOneRightZero      521          8   11011010
-//  6  PopOnePlusOne                       1     2   15   110110001100001
-//  7  PopAllButOnePlusOne              1837          6   110011
-//
+//  5  PopAllButOnePlusOne              1837          6   110011
+//  6  PushOneLeftDeltaOneRightZero      521          8   11011010
+//  7  NonTopoComplexPack4Bits            99         10   1101100010
+//  8  NonTopoComplex                     76         11   11011000111
+//  9  PushOneLeftDeltaZeroRightZero      35         12   110110001101
+// 10  PopOnePlusOne                       1     2   15   110110001100001
+// 11  PushTwoLeftDeltaZero                0         27   110110001100100110000000000
 
 // A fieldpath, used to walk through the flattened table hierarchy
 type fieldpath struct {
@@ -208,6 +211,17 @@ func PushOneLeftDeltaZeroRightZero(r *reader, fp *fieldpath) {
 
 func PushOneLeftDeltaZeroRightNonZero(r *reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
+
+	// should be correct, not encountered however
+	/*rBits := []int{2, 4, 10, 17, 30}
+
+	for _, bits := range rBits {
+		if r.readBits(1) == 1 {
+			fp.index = append(fp.index, int32(r.readBits(bits)))
+			_debugf("Index: %v, BitsL %v", fp.index, bits)
+			return
+		}
+	}*/
 }
 
 func PushOneLeftDeltaOneRightZero(r *reader, fp *fieldpath) {
@@ -228,6 +242,7 @@ func PushOneLeftDeltaNRightZero(r *reader, fp *fieldpath) {
 
 func PushOneLeftDeltaNRightNonZero(r *reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
+
 }
 
 func PushOneLeftDeltaNRightNonZeroPack6Bits(r *reader, fp *fieldpath) {
