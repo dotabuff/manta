@@ -14,7 +14,7 @@ func readPropertiesNew(r *reader, ser *dt) (result map[string]interface{}) {
 	// iterate all the fields and set their corresponding values
 	for _, f := range fieldPath.fields {
 		if f.Serializer.Decode == nil {
-			_panicf("Missing serializer for: %v", f)
+			_panicf("Missing serializer for: %v (%v)", f, f.Type)
 		}
 
 		result[f.Name] = f.Serializer.Decode(r, f)

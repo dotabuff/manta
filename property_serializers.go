@@ -56,6 +56,7 @@ type PropertySerializer struct {
 	IsArray         bool
 	Length          uint32
 	ArraySerializer *PropertySerializer
+	Name            string
 }
 
 // Contains a list of available property serializers
@@ -136,6 +137,7 @@ func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *Pr
 			IsArray:         true,
 			Length:          uint32(length),
 			ArraySerializer: serializer,
+			Name:            typeName,
 		}
 		pst.Serializers[name] = ps
 		return ps
@@ -153,5 +155,5 @@ func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *Pr
 	}
 
 	// This function should panic at some point
-	return &PropertySerializer{decoder, false, 0, nil}
+	return &PropertySerializer{decoder, false, 0, nil, "unkown"}
 }
