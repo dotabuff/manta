@@ -7,6 +7,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/davecgh/go-spew/spew"
 	"github.com/dotabuff/manta/dota"
 	"github.com/golang/protobuf/proto"
 	"github.com/stretchr/testify/assert"
@@ -48,8 +49,8 @@ func TestReadProperties(t *testing.T) {
 		*/
 		{
 			tableName:   "CDOTATeam",
-			run:         true,
-			debug:       false,
+			run:         false,
+			debug:       true,
 			expectCount: 15,
 			expectKeys: map[string]interface{}{
 				// 15 index bits, leaves 1 byte unaccounted for.
@@ -123,7 +124,7 @@ func TestReadProperties(t *testing.T) {
 		*/
 		{
 			tableName:   "CDOTAFogOfWarWasVisible",
-			run:         true,
+			run:         false,
 			debug:       false,
 			expectCount: 1024,
 			expectKeys: map[string]interface{}{
@@ -143,10 +144,10 @@ func TestReadProperties(t *testing.T) {
 		{
 			tableName:   "CRagdollManager",
 			run:         true,
-			debug:       false,
+			debug:       true,
 			expectCount: 1,
 			expectKeys: map[string]interface{}{
-				"m_iCurrentMaxRagdollCount": int8(-1),
+				"m_iCurrentMaxRagdollCount": int32(-1),
 			},
 		},
 
@@ -163,7 +164,7 @@ func TestReadProperties(t *testing.T) {
 		*/
 		{
 			tableName:   "CDOTA_DataDire",
-			run:         true,
+			run:         false,
 			debug:       false,
 			expectCount: (10 + 10 + 1 + 30 + 256),
 			expectKeys: map[string]interface{}{
@@ -215,7 +216,7 @@ func TestReadProperties(t *testing.T) {
 
 		{
 			tableName:   "CDOTA_DataRadiant",
-			run:         true,
+			run:         false,
 			debug:       false,
 			expectCount: (10 + 10 + 1 + 30 + 256),
 			expectKeys: map[string]interface{}{
@@ -235,7 +236,7 @@ func TestReadProperties(t *testing.T) {
 
 		{
 			tableName:   "CDOTA_DataSpectator",
-			run:         true,
+			run:         false,
 			debug:       false,
 			expectCount: 12,
 			expectKeys: map[string]interface{}{
@@ -252,7 +253,7 @@ func TestReadProperties(t *testing.T) {
 
 		{
 			tableName:   "CDOTA_DataCustomTeam",
-			run:         true,
+			run:         false,
 			debug:       false,
 			expectCount: (10 + 10 + 1 + 30 + 256),
 			expectKeys: map[string]interface{}{
@@ -356,7 +357,7 @@ func TestReadProperties(t *testing.T) {
 		*/
 		{
 			tableName:   "CDOTA_PlayerResource",
-			run:         true,
+			run:         false,
 			debug:       false,
 			expectCount: 2056,
 			expectKeys: map[string]interface{}{
@@ -831,15 +832,16 @@ func TestReadProperties(t *testing.T) {
 		panic(err)
 	}
 
-	st, err := parseSendTables(m)
-	assert.Nil(err)
+	// Retrieve the flattened field serializer
+	fs := parseSendTablesNew(m, GetDefaultPropertySerializerTable())
 
 	// Iterate through scenarios
 	for _, s := range scenarios {
 		// Load up a fixture
 		buf := _read_fixture(_sprintf("instancebaseline/1560315800_%s.rawbuf", s.tableName))
-		st, ok := st.getTableByName(s.tableName)
-		assert.True(ok)
+
+		serializer := fs.Serializers[s.tableName][0]
+		assert.NotNil(serializer)
 
 		// Optionally skip
 		if !s.run {
@@ -853,10 +855,15 @@ func TestReadProperties(t *testing.T) {
 
 		// Read properties
 		r := newReader(buf)
-		props := readProperties(r, st)
-		assert.Equal(s.expectCount, len(props))
+		props := readPropertiesNew(r, serializer)
+		assert.Equal(len(props), s.expectCount)
+
 		for k, v := range s.expectKeys {
-			assert.Equal(v, props[k], s.tableName+"."+k)
+			if v != props[k] {
+				spew.Dump(v)
+				spew.Dump(props[k])
+				_panicf("Variables not equal")
+			}
 		}
 
 		// Re-enable debugging
