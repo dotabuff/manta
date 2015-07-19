@@ -45,10 +45,10 @@ import (
 // - CStrongHandle< InfoForResourceTypeIMaterial2 >[6]
 
 // Type for a decoder function
-type DecodeFcn func(*reader) interface{}
+type DecodeFcn func(*reader, *dt_field) interface{}
 
 // Type for an array decoder function
-type DecodeArrayFcn func(*reader) interface{}
+type DecodeArrayFcn func(*reader, *dt_field) interface{}
 
 // PropertySerializer interface
 type PropertySerializer struct {
@@ -73,10 +73,49 @@ var matchVector = regexp.MustCompile(`CUtlVector.*`)
 
 // Returns a serializer by name
 func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *PropertySerializer {
+	// Return existing serializer
 	if ser := pst.Serializers[name]; ser != nil {
 		return ser
 	}
 
+	// Set decoder
+	var decoder DecodeFcn
+	switch name {
+	case "float32":
+		decoder = decodeFloat
+	case "int8":
+		fallthrough
+	case "int16":
+		fallthrough
+	case "int32":
+		fallthrough
+	case "int64":
+		decoder = decodeSigned
+	case "uint8":
+		fallthrough
+	case "uint16":
+		fallthrough
+	case "uint32":
+		fallthrough
+	case "uint64":
+		decoder = decodeUnsigned
+	case "char":
+		fallthrough
+	case "CUtlSymbolLarge":
+		decoder = decodeString
+	case "bool":
+		decoder = decodeBoolean
+	default:
+		// check for specific types
+		switch {
+		case hasPrefix(name, "CHandle"):
+			decoder = decodeHandle
+		default:
+			_debugf("No decoder for type %s", name)
+		}
+	}
+
+	// create a new serializer based on it's name
 	if match := matchArray.FindStringSubmatch(name); match != nil {
 		typeName := match[1]
 		length, err := strconv.ParseInt(match[2], 10, 64)
@@ -86,7 +125,7 @@ func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *Pr
 
 		serializer, found := pst.Serializers[typeName]
 		if !found {
-			serializer = &PropertySerializer{}
+			serializer = pst.GetPropertySerializerByName(typeName)
 			pst.Serializers[typeName] = serializer
 		}
 
@@ -110,5 +149,5 @@ func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *Pr
 	}
 
 	// This function should panic at some point
-	return &PropertySerializer{}
+	return &PropertySerializer{decoder, false, 0, nil}
 }
