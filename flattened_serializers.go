@@ -118,8 +118,8 @@ func (sers *flattened_serializers) recurse_table(cur *dota.ProtoFlattenedSeriali
 			for i := uint32(0); i < prop.Field.Serializer.Length; i++ {
 				tmpDt.Properties = append(tmpDt.Properties, &dt_property{
 					Field: &dt_field{
-						Name:       prop.Field.Name,
-						Type:       "",
+						Name:       _sprintf("%s.%04d", prop.Field.Name, i),
+						Type:       prop.Field.Serializer.Name,
 						Index:      int32(i),
 						Flags:      prop.Field.Flags,
 						BitCount:   prop.Field.BitCount,
