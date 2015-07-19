@@ -124,7 +124,7 @@ func TestReadProperties(t *testing.T) {
 		*/
 		{
 			tableName:   "CDOTAFogOfWarWasVisible",
-			run:         false,
+			run:         true,
 			debug:       false,
 			expectCount: 1024,
 			expectKeys: map[string]interface{}{
@@ -164,7 +164,7 @@ func TestReadProperties(t *testing.T) {
 		*/
 		{
 			tableName:   "CDOTA_DataDire",
-			run:         false,
+			run:         true,
 			debug:       false,
 			expectCount: (10 + 10 + 1 + 30 + 256),
 			expectKeys: map[string]interface{}{
@@ -191,7 +191,7 @@ func TestReadProperties(t *testing.T) {
 				"m_iUnreliableGold.0008": int32(625),
 				"m_iUnreliableGold.0009": int32(625),
 				//manta.(*reader).dumpBits: @ bit 00624 (byte 078 + 0)  | binary: 1 | uint8: 3   | var32: -2          | varu32: 3          | varu64: 3                    | bitfloat32: 2.3694284e-38 | string: -
-				"m_iTeamNum": uint8(3),
+				"m_iTeamNum": uint64(3),
 				// manta.(*reader).dumpBits: @ bit 00632 (byte 079 + 0)  | binary: 1 | uint8: 1   | var32: -1          | varu32: 1          | varu64: 1                    | uint64: 72340172838076673              | bitfloat32: 2.3694278e-38 | string: -
 				"m_iStartingPositions.0000": int32(-1),
 				// manta.(*reader).dumpBits: @ bit 00864 (byte 108 + 0)  | binary: 1 | uint8: 1   | var32: -1          | varu32: 1          | varu64: 1                    | uint64: 18446744073709551361           | bitfloat32: NaN          | string: -
@@ -216,7 +216,7 @@ func TestReadProperties(t *testing.T) {
 
 		{
 			tableName:   "CDOTA_DataRadiant",
-			run:         false,
+			run:         true,
 			debug:       false,
 			expectCount: (10 + 10 + 1 + 30 + 256),
 			expectKeys: map[string]interface{}{
@@ -224,7 +224,7 @@ func TestReadProperties(t *testing.T) {
 				"m_iReliableGold.0009":      int32(0),
 				"m_iUnreliableGold.0000":    int32(625),
 				"m_iUnreliableGold.0009":    int32(625),
-				"m_iTeamNum":                uint8(2),
+				"m_iTeamNum":                uint64(2),
 				"m_iStartingPositions.0000": int32(-1),
 				"m_iStartingPositions.0029": int32(-1),
 				"m_bWorldTreeState.0000":    uint64(18446744073709551615),
@@ -236,7 +236,7 @@ func TestReadProperties(t *testing.T) {
 
 		{
 			tableName:   "CDOTA_DataSpectator",
-			run:         false,
+			run:         true,
 			debug:       false,
 			expectCount: 12,
 			expectKeys: map[string]interface{}{
