@@ -115,6 +115,11 @@ func _caller(n int) string {
 	return "unknown"
 }
 
+// Compares string with prefix
+func hasPrefix(s, prefix string) bool {
+	return len(s) >= len(prefix) && s[:len(prefix)] == prefix
+}
+
 func log2(n int) int {
 	return int(math.Log(float64(n))/math.Log(2)) + 1
 }
