@@ -1,20 +1,24 @@
 package manta
 
-func readPropertiesNew(r *reader, ser map[int32]*dt) (result map[string]interface{}) {
+func readPropertiesNew(r *reader, ser *dt) (result map[string]interface{}) {
 	// Return type
 	result = make(map[string]interface{})
 
 	// Generate the huffman tree and fieldpath
 	huf := newFieldpathHuffman()
-	fieldPath := newFieldpath(ser[0], &huf)
+	fieldPath := newFieldpath(ser, &huf)
 
 	// Get a list of the included fields
 	fieldPath.walk(r)
 
 	// iterate all the fields and set their corresponding values
-	for i, f := range fieldPath.fields {
-		// @todo: actually parse stuff here
-		result[f.Name] = i
+	for _, f := range fieldPath.fields {
+		if f.Serializer.Decode == nil {
+			_panicf("Missing serializer for: %v", f)
+		}
+
+		result[f.Name] = f.Serializer.Decode(r, f)
+		_debugf("Decoded: %s %s %v", f.Name, f.Type, result[f.Name])
 	}
 
 	return result

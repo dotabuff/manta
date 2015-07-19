@@ -81,7 +81,7 @@ func (p *Parser) updateInstanceBaseline() {
 			}
 
 			_debugf("Parsing entity baseline %v", serializer[0].Name)
-			p.classBaseline[classId] = readPropertiesNew(newReader(item.value), serializer)
+			p.classBaseline[classId] = readPropertiesNew(newReader(item.value), serializer[0])
 		}
 	}
 }
