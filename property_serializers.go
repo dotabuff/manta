@@ -110,8 +110,10 @@ func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *Pr
 		switch {
 		case hasPrefix(name, "CHandle"):
 			decoder = decodeHandle
+		case hasPrefix(name, "CUtlVector< "):
+			decoder = pst.GetPropertySerializerByName(name[12:]).Decode
 		default:
-			_debugf("No decoder for type %s", name)
+			//_debugf("No decoder for type %s", name)
 		}
 	}
 
@@ -130,6 +132,7 @@ func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *Pr
 		}
 
 		ps := &PropertySerializer{
+			Decode:          serializer.Decode,
 			IsArray:         true,
 			Length:          uint32(length),
 			ArraySerializer: serializer,
@@ -140,6 +143,7 @@ func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *Pr
 
 	if match := matchVector.FindStringSubmatch(name); match != nil {
 		ps := &PropertySerializer{
+			Decode:          decoder,
 			IsArray:         true,
 			Length:          uint32(128),
 			ArraySerializer: &PropertySerializer{},
