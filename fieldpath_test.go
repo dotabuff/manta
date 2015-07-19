@@ -80,6 +80,9 @@ func TestFieldpath(t *testing.T) {
 	// Build the huffman tree
 	huf := newFieldpathHuffman()
 
+	//printCodes(huf, []byte{})
+	//_debugf("%s", fs.dump_json("CSpeechBubbleManager"))
+
 	// Iterate over the different scenarios
 	// -! Create a new FieldPath for each scenario
 	for _, s := range scenarios {
