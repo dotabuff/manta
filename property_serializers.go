@@ -91,6 +91,8 @@ func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *Pr
 	case "int32":
 		fallthrough
 	case "int64":
+		fallthrough
+	case "Color":
 		decoder = decodeSigned
 	case "uint8":
 		fallthrough

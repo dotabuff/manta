@@ -144,7 +144,7 @@ func TestReadProperties(t *testing.T) {
 		{
 			tableName:   "CRagdollManager",
 			run:         true,
-			debug:       true,
+			debug:       false,
 			expectCount: 1,
 			expectKeys: map[string]interface{}{
 				"m_iCurrentMaxRagdollCount": int32(-1),
@@ -357,7 +357,7 @@ func TestReadProperties(t *testing.T) {
 		*/
 		{
 			tableName:   "CDOTA_PlayerResource",
-			run:         false,
+			run:         true,
 			debug:       false,
 			expectCount: 2056,
 			expectKeys: map[string]interface{}{
@@ -509,16 +509,16 @@ func TestReadProperties(t *testing.T) {
 				"m_bIsBroadcaster.0063": false,
 
 				// manta.(*reader).dumpBits: @ bit 09706 (byte 1213 + 2)  | binary: 0 | uint8: 6   | var32: 3           | varu32: 6          | varu64: 6                    | float32: 2.5207024e-35 | string: -
-				"m_iBroadcasterChannel.0000": uint32(6),
+				"m_iBroadcasterChannel.0000": uint64(6),
 				// ... all the same ...
 				// manta.(*reader).dumpBits: @ bit 10210 (byte 1276 + 2)  | binary: 0 | uint8: 6   | var32: 3           | varu32: 6          | varu64: 6                    | float32: 2.5207024e-35 | string: -
-				"m_iBroadcasterChannel.0063": uint32(6),
+				"m_iBroadcasterChannel.0063": uint64(6),
 
 				// manta.(*reader).dumpBits: @ bit 10218 (byte 1277 + 2)  | binary: 0 | uint8: 6   | var32: 3           | varu32: 6          | varu64: 6                    | float32: 2.5207024e-35 | string: -
-				"m_iBroadcasterChannelSlot.0000": uint32(6),
+				"m_iBroadcasterChannelSlot.0000": uint64(6),
 				// ... all the same ...
 				// manta.(*reader).dumpBits: @ bit 10722 (byte 1340 + 2)  | binary: 0 | uint8: 6   | var32: 3           | varu32: 6          | varu64: 6                    | float32: 8e-45        | string: -
-				"m_iBroadcasterChannelSlot.0063": uint32(6),
+				"m_iBroadcasterChannelSlot.0063": uint64(6),
 
 				// manta.(*reader).dumpBits: @ bit 10730 (byte 1341 + 2)  | binary: 0 | uint8: 0   | var32: 0           | varu32: 0          | varu64: 0                    | float32: 0            | string: -
 				"m_bIsBroadcasterChannelCameraman.0000": false,
@@ -596,90 +596,90 @@ func TestReadProperties(t *testing.T) {
 				"m_iTimedRewardEvents.0000": int32(0),
 
 				// manta.(*reader).dumpBits: @ bit 13182 (byte 1647 + 6)  | binary: 0 | uint8: 66  | var32: 33          | varu32: 66         | varu64: 66                   | float32: 2.5220848e-32 | string: -
-				"m_iMetaLevel.0000": uint16(66), // Dota profile level
+				"m_iMetaLevel.0000": uint64(66), // Dota profile level
 				// manta.(*reader).dumpBits: @ bit 13190 (byte 1648 + 6)  | binary: 0 | uint8: 244 | var32: 186         | varu32: 372        | varu64: 372                  | float32: -1.6340727e-36 | string: -
-				"m_iMetaLevel.0001": uint16(372),
+				"m_iMetaLevel.0001": uint64(372),
 				// manta.(*reader).dumpBits: @ bit 13206 (byte 1650 + 6)  | binary: 1 | uint8: 11  | var32: -6          | varu32: 11         | varu64: 11                   | float32: 2.4359213e-35 | string: -
-				"m_iMetaLevel.0002": uint16(11),
-				"m_iMetaLevel.0003": uint16(132),
-				"m_iMetaLevel.0004": uint16(6),
-				"m_iMetaLevel.0005": uint16(53),
-				"m_iMetaLevel.0006": uint16(18),
-				"m_iMetaLevel.0007": uint16(164),
-				"m_iMetaLevel.0008": uint16(88),
-				"m_iMetaLevel.0009": uint16(46),
+				"m_iMetaLevel.0002": uint64(11),
+				"m_iMetaLevel.0003": uint64(132),
+				"m_iMetaLevel.0004": uint64(6),
+				"m_iMetaLevel.0005": uint64(53),
+				"m_iMetaLevel.0006": uint64(18),
+				"m_iMetaLevel.0007": uint64(164),
+				"m_iMetaLevel.0008": uint64(88),
+				"m_iMetaLevel.0009": uint64(46),
 
 				// manta.(*reader).dumpBits: @ bit 13286 (byte 1660 + 6)  | binary: 0 | uint8: 188 | var32: 94          | varu32: 188        | varu64: 188                  | float32: 1.2601937e-35 | string: -
-				"m_iMetaExperience.0000": uint16(188),
-				"m_iMetaExperience.0001": uint16(646),
-				"m_iMetaExperience.0002": uint16(970),
-				"m_iMetaExperience.0003": uint16(529),
-				"m_iMetaExperience.0004": uint16(268),
-				"m_iMetaExperience.0005": uint16(81),
-				"m_iMetaExperience.0006": uint16(114),
-				"m_iMetaExperience.0007": uint16(511),
-				"m_iMetaExperience.0008": uint16(232),
-				"m_iMetaExperience.0009": uint16(342),
+				"m_iMetaExperience.0000": uint64(188),
+				"m_iMetaExperience.0001": uint64(646),
+				"m_iMetaExperience.0002": uint64(970),
+				"m_iMetaExperience.0003": uint64(529),
+				"m_iMetaExperience.0004": uint64(268),
+				"m_iMetaExperience.0005": uint64(81),
+				"m_iMetaExperience.0006": uint64(114),
+				"m_iMetaExperience.0007": uint64(511),
+				"m_iMetaExperience.0008": uint64(232),
+				"m_iMetaExperience.0009": uint64(342),
 
 				// manta.(*reader).dumpBits: @ bit 13430 (byte 1678 + 6)  | binary: 0 | uint8: 0   | var32: 0           | varu32: 0          | varu64: 0                    | float32: 0            | string: -
-				"m_iMetaExperienceAwarded.0000": uint16(0),
-				"m_iMetaExperienceAwarded.0001": uint16(0),
-				"m_iMetaExperienceAwarded.0002": uint16(0),
-				"m_iMetaExperienceAwarded.0003": uint16(0),
-				"m_iMetaExperienceAwarded.0004": uint16(0),
-				"m_iMetaExperienceAwarded.0005": uint16(0),
-				"m_iMetaExperienceAwarded.0006": uint16(0),
-				"m_iMetaExperienceAwarded.0007": uint16(0),
-				"m_iMetaExperienceAwarded.0008": uint16(0),
-				"m_iMetaExperienceAwarded.0009": uint16(0),
+				"m_iMetaExperienceAwarded.0000": uint64(0),
+				"m_iMetaExperienceAwarded.0001": uint64(0),
+				"m_iMetaExperienceAwarded.0002": uint64(0),
+				"m_iMetaExperienceAwarded.0003": uint64(0),
+				"m_iMetaExperienceAwarded.0004": uint64(0),
+				"m_iMetaExperienceAwarded.0005": uint64(0),
+				"m_iMetaExperienceAwarded.0006": uint64(0),
+				"m_iMetaExperienceAwarded.0007": uint64(0),
+				"m_iMetaExperienceAwarded.0008": uint64(0),
+				"m_iMetaExperienceAwarded.0009": uint64(0),
 
 				// manta.(*reader).dumpBits: @ bit 13510 (byte 1688 + 6)  | binary: 0 | uint8: 212 | var32: 14314       | varu32: 28628      | varu64: 28628                | float32: -2.5613195e-29 | string: -
-				"m_iEventPoints.0000": uint32(28628), // compendium level 286
-				"m_iEventPoints.0001": uint32(3600),  // compendium level 36
-				"m_iEventPoints.0002": uint32(0),     // no compendium
-				"m_iEventPoints.0003": uint32(8881),  // compendium level 89
-				"m_iEventPoints.0004": uint32(0),
-				"m_iEventPoints.0005": uint32(0),
-				"m_iEventPoints.0006": uint32(0),
-				"m_iEventPoints.0007": uint32(0),
-				"m_iEventPoints.0008": uint32(0),    // no compendium
-				"m_iEventPoints.0009": uint32(7283), // compendium, unknown level
+				"m_iEventPoints.0000": uint64(28628), // compendium level 286
+				"m_iEventPoints.0001": uint64(3600),  // compendium level 36
+				"m_iEventPoints.0002": uint64(0),     // no compendium
+				"m_iEventPoints.0003": uint64(8881),  // compendium level 89
+				"m_iEventPoints.0004": uint64(0),
+				"m_iEventPoints.0005": uint64(0),
+				"m_iEventPoints.0006": uint64(0),
+				"m_iEventPoints.0007": uint64(0),
+				"m_iEventPoints.0008": uint64(0),    // no compendium
+				"m_iEventPoints.0009": uint64(7283), // compendium, unknown level
 
 				// manta.(*reader).dumpBits: @ bit 13630 (byte 1703 + 6)  | binary: 1 | uint8: 21  | var32: -11         | varu32: 21         | varu64: 21                   | float32: 3.994874e-39 | string: -
-				"m_iEventPremiumPoints.0000": uint32(21),
-				"m_iEventPremiumPoints.0001": uint32(5504),
-				"m_iEventPremiumPoints.0002": uint32(0),
-				"m_iEventPremiumPoints.0003": uint32(294),
-				"m_iEventPremiumPoints.0004": uint32(46),
-				"m_iEventPremiumPoints.0005": uint32(5),
-				"m_iEventPremiumPoints.0006": uint32(0),
-				"m_iEventPremiumPoints.0007": uint32(395),
-				"m_iEventPremiumPoints.0008": uint32(70),
-				"m_iEventPremiumPoints.0009": uint32(471),
+				"m_iEventPremiumPoints.0000": uint64(21),
+				"m_iEventPremiumPoints.0001": uint64(5504),
+				"m_iEventPremiumPoints.0002": uint64(0),
+				"m_iEventPremiumPoints.0003": uint64(294),
+				"m_iEventPremiumPoints.0004": uint64(46),
+				"m_iEventPremiumPoints.0005": uint64(5),
+				"m_iEventPremiumPoints.0006": uint64(0),
+				"m_iEventPremiumPoints.0007": uint64(395),
+				"m_iEventPremiumPoints.0008": uint64(70),
+				"m_iEventPremiumPoints.0009": uint64(471),
 
 				// manta.(*reader).dumpBits: @ bit 13742 (byte 1717 + 6)  | binary: 0 | uint8: 0   | var32: 0           | varu32: 0          | varu64: 0                    | float32: 0            | string: -
-				"m_iEventRanks.0000": uint16(0),
-				"m_iEventRanks.0001": uint16(0),
-				"m_iEventRanks.0002": uint16(0),
-				"m_iEventRanks.0003": uint16(0),
-				"m_iEventRanks.0004": uint16(0),
-				"m_iEventRanks.0005": uint16(0),
-				"m_iEventRanks.0006": uint16(0),
-				"m_iEventRanks.0007": uint16(0),
-				"m_iEventRanks.0008": uint16(0),
-				"m_iEventRanks.0009": uint16(0),
+				"m_iEventRanks.0000": uint64(0),
+				"m_iEventRanks.0001": uint64(0),
+				"m_iEventRanks.0002": uint64(0),
+				"m_iEventRanks.0003": uint64(0),
+				"m_iEventRanks.0004": uint64(0),
+				"m_iEventRanks.0005": uint64(0),
+				"m_iEventRanks.0006": uint64(0),
+				"m_iEventRanks.0007": uint64(0),
+				"m_iEventRanks.0008": uint64(0),
+				"m_iEventRanks.0009": uint64(0),
 
 				// manta.(*reader).dumpBits: @ bit 13822 (byte 1727 + 6)  | binary: 0 | uint8: 0   | var32: 0           | varu32: 0          | varu64: 0                    | float32: 0            | string: -
-				"m_unCompendiumLevel.0000": uint16(0),
-				"m_unCompendiumLevel.0001": uint16(0),
-				"m_unCompendiumLevel.0002": uint16(0),
-				"m_unCompendiumLevel.0003": uint16(0),
-				"m_unCompendiumLevel.0004": uint16(0),
-				"m_unCompendiumLevel.0005": uint16(0),
-				"m_unCompendiumLevel.0006": uint16(0),
-				"m_unCompendiumLevel.0007": uint16(0),
-				"m_unCompendiumLevel.0008": uint16(0),
-				"m_unCompendiumLevel.0009": uint16(0),
+				"m_unCompendiumLevel.0000": uint64(0),
+				"m_unCompendiumLevel.0001": uint64(0),
+				"m_unCompendiumLevel.0002": uint64(0),
+				"m_unCompendiumLevel.0003": uint64(0),
+				"m_unCompendiumLevel.0004": uint64(0),
+				"m_unCompendiumLevel.0005": uint64(0),
+				"m_unCompendiumLevel.0006": uint64(0),
+				"m_unCompendiumLevel.0007": uint64(0),
+				"m_unCompendiumLevel.0008": uint64(0),
+				"m_unCompendiumLevel.0009": uint64(0),
 
 				// manta.(*reader).dumpBits: @ bit 13902 (byte 1737 + 6)  | binary: 0 | uint8: 0   | var32: 0           | varu32: 0          | varu64: 0                    | float32: 0            | string: -
 				"m_bHasRepicked.0000": false,
@@ -694,8 +694,8 @@ func TestReadProperties(t *testing.T) {
 				"m_bBattleBonusActive.0009": false,
 
 				// manta.(*reader).dumpBits: @ bit 13932 (byte 1741 + 4)  | binary: 0 | uint8: 0   | var32: 0           | varu32: 0          | varu64: 0                    | float32: 0            | string: -
-				"m_iBattleBonusRate.0000": uint16(0),
-				"m_iBattleBonusRate.0009": uint16(0),
+				"m_iBattleBonusRate.0000": uint64(0),
+				"m_iBattleBonusRate.0009": uint64(0),
 
 				// !! read 32 bits for each float. it has a bitCount of 32.
 				// manta.(*reader).dumpBits: @ bit 14012 (byte 1751 + 4)  | binary: 0 | uint8: 0   | var32: 0           | varu32: 0          | varu64: 0                    | float32: 0            | string: -
@@ -862,7 +862,7 @@ func TestReadProperties(t *testing.T) {
 			if v != props[k] {
 				spew.Dump(v)
 				spew.Dump(props[k])
-				_panicf("Variables not equal")
+				_panicf("Variables not equal, %s", k)
 			}
 		}
 
