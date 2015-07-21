@@ -18,24 +18,23 @@ type Parser struct {
 	// when a specific message has been received and decoded.
 	Callbacks *Callbacks
 
-	// GameEvents provides a mechanism for receiving notification
-	// when a specific game event message has been received and decoded.
-	GameEvents *GameEvents
-
 	// Contains the game tick associated with the last message processed.
 	Tick uint32
 
 	// Contains the net tick associated with the last net message processed.
 	NetTick uint32
 
-	hasClassInfo   bool
-	classInfo      map[int32]string
-	classIdSize    int
-	classBaseline  map[int32]map[string]interface{}
-	packetEntities map[int32]*packetEntity
-	sendTables     *sendTables
-	stringTables   *stringTables
-	spawnGroups    map[uint32]*spawnGroup
+	hasClassInfo      bool
+	classInfo         map[int32]string
+	classIdSize       int
+	classBaseline     map[int32]map[string]interface{}
+	packetEntities    map[int32]*packetEntity
+	sendTables        *sendTables
+	stringTables      *stringTables
+	spawnGroups       map[uint32]*spawnGroup
+	gameEventNames    map[int32]string
+	gameEventTypes    map[string]*gameEventType
+	gameEventHandlers map[string][]gameEventHandler
 
 	reader     *reader
 	isStopping bool
@@ -55,8 +54,7 @@ func NewParserFromFile(path string) (*Parser, error) {
 func NewParser(buf []byte) (*Parser, error) {
 	// Create a new parser with an internal reader for the given buffer.
 	parser := &Parser{
-		Callbacks:  &Callbacks{},
-		GameEvents: &GameEvents{},
+		Callbacks: &Callbacks{},
 
 		Tick:    0,
 		NetTick: 0,
@@ -64,11 +62,14 @@ func NewParser(buf []byte) (*Parser, error) {
 		reader:     newReader(buf),
 		isStopping: false,
 
-		classInfo:      make(map[int32]string),
-		classBaseline:  make(map[int32]map[string]interface{}),
-		packetEntities: make(map[int32]*packetEntity),
-		stringTables:   newStringTables(),
-		spawnGroups:    make(map[uint32]*spawnGroup),
+		classInfo:         make(map[int32]string),
+		classBaseline:     make(map[int32]map[string]interface{}),
+		packetEntities:    make(map[int32]*packetEntity),
+		stringTables:      newStringTables(),
+		spawnGroups:       make(map[uint32]*spawnGroup),
+		gameEventNames:    make(map[int32]string),
+		gameEventTypes:    make(map[string]*gameEventType),
+		gameEventHandlers: make(map[string][]gameEventHandler),
 	}
 
 	// Parse out the header, ensuring that it's valid.
@@ -96,7 +97,8 @@ func NewParser(buf []byte) (*Parser, error) {
 	parser.Callbacks.OnCNETMsg_SpawnGroup_SetCreationTick(parser.onCNETMsg_SpawnGroup_SetCreationTick)
 	parser.Callbacks.OnCNETMsg_SpawnGroup_Unload(parser.onCNETMsg_SpawnGroup_Unload)
 	parser.Callbacks.OnCNETMsg_SpawnGroup_LoadCompleted(parser.onCNETMsg_SpawnGroup_LoadCompleted)
-	parser.Callbacks.OnCMsgSource1LegacyGameEvent(parser.GameEvents.onCMsgSource1LegacyGameEvent)
+	parser.Callbacks.OnCMsgSource1LegacyGameEventList(parser.onCMsgSource1LegacyGameEventList)
+	parser.Callbacks.OnCMsgSource1LegacyGameEvent(parser.onCMsgSource1LegacyGameEvent)
 
 	// Panic if we see any of these
 	parser.Callbacks.OnCSVCMsg_GameEvent(func(m *dota.CSVCMsg_GameEvent) error {

@@ -25,14 +25,17 @@ func TestParseOneMatch(t *testing.T) {
 func TestParseRealMatches(t *testing.T) {
 	assert := assert.New(t)
 
+	// Important: make sure to include the most recent test last. These generate fixtures to easily
+	// detect diffs in various data structures upon commit, and the latest replay should always be
+	// last to provide a most up-to-date baseline.
 	scenarios := []struct {
 		matchId                string
 		replayUrl              string
-		expectCombatLogDamage  int
-		expectCombatLogHealing int
-		expectCombatLogDeaths  int
-		expectCombatLogEvents  int
-		expectUnitOrderEvents  int
+		expectCombatLogDamage  int32
+		expectCombatLogHealing int32
+		expectCombatLogDeaths  int32
+		expectCombatLogEvents  int32
+		expectUnitOrderEvents  int32
 	}{
 		{
 			matchId:                "1560289528",
@@ -70,6 +73,15 @@ func TestParseRealMatches(t *testing.T) {
 			expectCombatLogEvents:  23800,
 			expectUnitOrderEvents:  40237,
 		},
+		{
+			matchId:                "1648457986",
+			replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1648457986.dem",
+			expectCombatLogDamage:  224773,
+			expectCombatLogHealing: 5914,
+			expectCombatLogDeaths:  466,
+			expectCombatLogEvents:  10170,
+			expectUnitOrderEvents:  17822,
+		},
 	}
 
 	for _, s := range scenarios {
@@ -80,27 +92,42 @@ func TestParseRealMatches(t *testing.T) {
 			continue
 		}
 
-		gotCombatLogDamage := 0
-		gotCombatLogHealing := 0
-		gotCombatLogDeaths := 0
-		gotCombatLogEvents := 0
-		gotUnitOrderEvents := 0
+		gotCombatLogDamage := int32(0)
+		gotCombatLogHealing := int32(0)
+		gotCombatLogDeaths := int32(0)
+		gotCombatLogEvents := int32(0)
+		gotUnitOrderEvents := int32(0)
 
 		parser.Callbacks.OnCDOTAUserMsg_SpectatorPlayerUnitOrders(func(m *dota.CDOTAUserMsg_SpectatorPlayerUnitOrders) error {
 			gotUnitOrderEvents += 1
 			return nil
 		})
 
-		parser.GameEvents.OnDotaCombatlog(func(m *GameEventDotaCombatlog) error {
+		parser.OnGameEvent("dota_combatlog", func(m *GameEvent) error {
 			gotCombatLogEvents += 1
-			switch dota.DOTA_COMBATLOG_TYPES(m.Type) {
+
+			t, err := m.GetInt32("type")
+			assert.Nil(err)
+
+			switch dota.DOTA_COMBATLOG_TYPES(t) {
 			case dota.DOTA_COMBATLOG_TYPES_DOTA_COMBATLOG_DAMAGE:
-				gotCombatLogDamage += int(m.Value)
+				v, err := m.GetInt32("value")
+				assert.Nil(err)
+				gotCombatLogDamage += v
 			case dota.DOTA_COMBATLOG_TYPES_DOTA_COMBATLOG_DEATH:
 				gotCombatLogDeaths += 1
 			case dota.DOTA_COMBATLOG_TYPES_DOTA_COMBATLOG_HEAL:
-				gotCombatLogHealing += int(m.Value)
+				v, err := m.GetInt32("value")
+				assert.Nil(err)
+				gotCombatLogHealing += v
 			}
+
+			return nil
+		})
+
+		// Writes out the source_1_legacy_game_events_list.json fixture so that we can identify changes to schema.
+		parser.Callbacks.OnCMsgSource1LegacyGameEventList(func(m *dota.CMsgSource1LegacyGameEventList) error {
+			_dump_fixture("legacy_game_events/list_latest.json", _json_marshal(m))
 			return nil
 		})
 
