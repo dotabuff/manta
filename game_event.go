@@ -69,102 +69,101 @@ func (ge *GameEvent) String() string {
 
 // Gets the string value of a named field.
 func (e *GameEvent) GetString(name string) (string, error) {
-	// Get the index of the field.
-	tf, ok := e.t.fields[name]
-	if !ok {
-		return "", _errorf("field %s: missing", name)
+	// Get the key from the message
+	k, err := e.getEventKey(name)
+	if err != nil {
+		return "", err
 	}
-
-	// Get the field.
-	f := e.m.GetKeys()[tf.i]
 
 	// Make sure it's a string.
-	if f.GetType() != gameEventTypeString {
-		return "", _errorf("field %s: expected string, got %s", gameEventTypeNames[f.GetType()])
+	if k.GetType() != gameEventTypeString {
+		return "", _errorf("field %s: expected string, got %s", gameEventTypeNames[k.GetType()])
 	}
 
-	return f.GetValString(), nil
+	return k.GetValString(), nil
 }
 
 // Gets the float value of a named field.
 func (e *GameEvent) GetFloat32(name string) (float32, error) {
-	// Get the index of the field.
-	tf, ok := e.t.fields[name]
-	if !ok {
-		return 0.0, _errorf("field %s: missing", name)
+	// Get the key from the message
+	k, err := e.getEventKey(name)
+	if err != nil {
+		return 0.0, err
 	}
-
-	// Get the field.
-	f := e.m.GetKeys()[tf.i]
 
 	// Make sure it's a bool.
-	if f.GetType() != gameEventTypeFloat {
-		return 0.0, _errorf("field %s: expected float, got %s", gameEventTypeNames[f.GetType()])
+	if k.GetType() != gameEventTypeFloat {
+		return 0.0, _errorf("field %s: expected float, got %s", gameEventTypeNames[k.GetType()])
 	}
 
-	return f.GetValFloat(), nil
+	return k.GetValFloat(), nil
 }
 
 // Gets the integer value of a named field.
 func (e *GameEvent) GetInt32(name string) (int32, error) {
-	// Get the index of the field.
-	tf, ok := e.t.fields[name]
-	if !ok {
-		return 0, _errorf("field %s: missing", name)
+	// Get the key from the message
+	k, err := e.getEventKey(name)
+	if err != nil {
+		return 0, err
 	}
-
-	// Get the field.
-	f := e.m.GetKeys()[tf.i]
 
 	// Return based on the type.
-	switch f.GetType() {
+	switch k.GetType() {
 	case gameEventTypeLong:
-		return f.GetValLong(), nil
+		return k.GetValLong(), nil
 	case gameEventTypeShort:
-		return f.GetValShort(), nil
+		return k.GetValShort(), nil
 	case gameEventTypeByte:
-		return f.GetValByte(), nil
+		return k.GetValByte(), nil
 	}
 
-	return 0, _errorf("field %s: expected int, got %s", gameEventTypeNames[f.GetType()])
+	return 0, _errorf("field %s: expected int, got %s", gameEventTypeNames[k.GetType()])
 }
 
 // Gets the bool value of a named field.
 func (e *GameEvent) GetBool(name string) (bool, error) {
-	// Get the index of the field.
-	tf, ok := e.t.fields[name]
-	if !ok {
-		return false, _errorf("field %s: missing", name)
+	// Get the key from the message
+	k, err := e.getEventKey(name)
+	if err != nil {
+		return false, err
 	}
-
-	// Get the field.
-	f := e.m.GetKeys()[tf.i]
 
 	// Make sure it's a bool.
-	if f.GetType() != gameEventTypeBool {
-		return false, _errorf("field %s: expected bool, got %s", gameEventTypeNames[f.GetType()])
+	if k.GetType() != gameEventTypeBool {
+		return false, _errorf("field %s: expected bool, got %s", gameEventTypeNames[k.GetType()])
 	}
 
-	return f.GetValBool(), nil
+	return k.GetValBool(), nil
 }
 
 // Gets the uint64 value of a named field.
 func (e *GameEvent) GetUint64(name string) (uint64, error) {
-	// Get the index of the field.
-	tf, ok := e.t.fields[name]
-	if !ok {
-		return 0, _errorf("field %s: missing", name)
+	// Get the key from the message
+	k, err := e.getEventKey(name)
+	if err != nil {
+		return 0, err
 	}
-
-	// Get the field.
-	f := e.m.GetKeys()[tf.i]
 
 	// Make sure it's a uint64.
-	if f.GetType() != gameEventTypeUint64 {
-		return 0, _errorf("field %s: expected uint64, got %s", gameEventTypeNames[f.GetType()])
+	if k.GetType() != gameEventTypeUint64 {
+		return 0, _errorf("field %s: expected uint64, got %s", gameEventTypeNames[k.GetType()])
 	}
 
-	return f.GetValUint64(), nil
+	return k.GetValUint64(), nil
+}
+
+// Finds the key in the game event which corresponds to a given name.
+func (e *GameEvent) getEventKey(name string) (*dota.CMsgSource1LegacyGameEventKeyT, error) {
+	f, ok := e.t.fields[name]
+	if !ok {
+		return nil, _errorf("field %s: missing", name)
+	}
+
+	if f.i > len(e.m.GetKeys()) {
+		return nil, _errorf("field %s: %d out of range", name, f.i)
+	}
+
+	return e.m.GetKeys()[f.i], nil
 }
 
 // A function that can handle a game event.
