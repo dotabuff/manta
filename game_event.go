@@ -1,33 +1,70 @@
 package manta
 
 import (
+	"bytes"
+	"fmt"
+
 	"github.com/dotabuff/manta/dota"
 )
 
 const (
-	gameEventTypeString = 1
-	gameEventTypeFloat  = 2
-	gameEventTypeLong   = 3
-	gameEventTypeShort  = 4
-	gameEventTypeByte   = 5
-	gameEventTypeBool   = 6
-	gameEventTypeUint64 = 7
+	gameEventTypeString = iota + 1
+	gameEventTypeFloat
+	gameEventTypeLong
+	gameEventTypeShort
+	gameEventTypeByte
+	gameEventTypeBool
+	gameEventTypeUint64
 )
 
 var gameEventTypeNames = map[int32]string{
-	1: "string",
-	2: "float",
-	3: "long",
-	4: "short",
-	5: "byte",
-	6: "bool",
-	7: "uint64",
+	gameEventTypeString: "string",
+	gameEventTypeFloat:  "float",
+	gameEventTypeLong:   "long",
+	gameEventTypeShort:  "short",
+	gameEventTypeByte:   "byte",
+	gameEventTypeBool:   "bool",
+	gameEventTypeUint64: "uint64",
 }
 
 // Represents a game event. Includes a type and the actual message.
 type GameEvent struct {
 	t *gameEventType
 	m *dota.CMsgSource1LegacyGameEvent
+}
+
+func (ge *GameEvent) TypeName() string {
+	return dota.DOTA_COMBATLOG_TYPES_name[ge.m.GetKeys()[0].GetValByte()]
+}
+
+func (ge *GameEvent) String() string {
+	keys := ge.m.GetKeys()
+	name := dota.DOTA_COMBATLOG_TYPES_name[keys[0].GetValByte()]
+	buf := bytes.NewBufferString("\n  " + name + "\n")
+
+	for name, field := range ge.t.fields {
+		key := keys[field.i]
+		switch key.GetType() {
+		case gameEventTypeString:
+			fmt.Fprintf(buf, "    %s: %s\n", name, key.GetValString())
+		case gameEventTypeFloat:
+			fmt.Fprintf(buf, "    %s: %f\n", name, key.GetValFloat())
+		case gameEventTypeLong:
+			fmt.Fprintf(buf, "    %s: %d\n", name, key.GetValLong())
+		case gameEventTypeShort:
+			fmt.Fprintf(buf, "    %s: %d\n", name, key.GetValShort())
+		case gameEventTypeByte:
+			fmt.Fprintf(buf, "    %s: %d\n", name, key.GetValByte())
+		case gameEventTypeBool:
+			fmt.Fprintf(buf, "    %s: %t\n", name, key.GetValBool())
+		case gameEventTypeUint64:
+			fmt.Fprintf(buf, "    %s: %d\n", name, key.GetValUint64())
+		default:
+			_panicf("Unknown type: %s - %d", name, field.i)
+		}
+	}
+
+	return buf.String()
 }
 
 // Gets the string value of a named field.
