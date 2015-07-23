@@ -393,10 +393,10 @@ func NonTopoComplex(r *reader, fp *fieldpath) {
 
 	// See NonTopoComplexPack4Bits
 
-	depth := 0
-	for depth != len(fp.index) && r.readBits(1) == 1 {
-		fp.index[depth] += r.readVarInt32()
-		depth++
+	for i := 0; i < len(fp.index); i++ {
+		if r.readBoolean() {
+			fp.index[i] += r.readVarInt32()
+		}
 	}
 }
 
@@ -427,10 +427,10 @@ func NonTopoComplexPack4Bits(r *reader, fp *fieldpath) {
 	// - r.readBits(1) == 1
 	// - Reached current depth (see assumption)
 
-	depth := 0
-	for depth != len(fp.index) && r.readBits(1) == 1 {
-		fp.index[depth] += int32(r.readBits(4)) - 7
-		depth++
+	for i := 0; i < len(fp.index); i++ {
+		if r.readBoolean() {
+			fp.index[i] += int32(r.readBits(4)) - 7
+		}
 	}
 }
 
