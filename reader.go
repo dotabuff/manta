@@ -239,6 +239,36 @@ func (r *reader) readFloat32Bits(b int32, lP *float32, hP *float32) float32 {
 	return (base * diff) - lV
 }
 
+// Read a coord
+func (r *reader) readCoord() float32 {
+	value := float32(0.0)
+
+	intval := r.readBits(1)
+	fractval := r.readBits(1)
+	signbit := false
+
+	if intval != 0 || fractval != 0 {
+		signbit = r.readBoolean()
+
+		if intval != 0 {
+			intval = r.readBits(14) + 1
+		}
+
+		if fractval != 0 {
+			fractval = r.readBits(5)
+		}
+
+		value = float32(intval) + float32(fractval)*(1.0/(1<<5))
+
+		// Fixup the sign if negative.
+		if signbit {
+			value = -value
+		}
+	}
+
+	return value
+}
+
 // Reads bits as bytes.
 func (r *reader) readBitsAsBytes(n int) []byte {
 	tmp := make([]byte, 0)
