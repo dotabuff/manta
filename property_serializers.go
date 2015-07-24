@@ -5,54 +5,13 @@ import (
 	"strconv"
 )
 
-// Required for CWorld to work:
-// ----------------------------
-// - CHandle< CBaseEntity >
-// - CBodyComponent
-// - CNetworkedQuantizedFloat
-// - CGameSceneNodeHandle
-// - CStrongHandle< InfoForResourceTypeCTextureBase >
-// - CStrongHandle< InfoForResourceTypeCModel >
-// - CUtlStringToken
-// - CUtlVector< CAnimationLayer >
-// - CEntityIdentity*
-// - CUtlSymbolLarge
-// - CPhysicsComponent
-// - CRenderComponent
-//
-// - Color
-// - QAngle
-// - HSequence
-// - Vector
-// - SolidType_t
-// - SurroundingBoundsType_t
-// - MoveCollide_t
-// - MoveType_t
-// - gender_t
-// - RenderMode_t
-// - RenderFx_t
-//
-// - bool
-// - uint8
-// - uint16
-// - uint32
-// - uint64
-// - int8
-// - int32
-// - float32
-//
-// - float32[24]
-// - CStrongHandle< InfoForResourceTypeIMaterial2 >[6]
-
 // Type for a decoder function
 type DecodeFcn func(*reader, *dt_field) interface{}
-
-// Type for an array decoder function
-type DecodeArrayFcn func(*reader, *dt_field) interface{}
 
 // PropertySerializer interface
 type PropertySerializer struct {
 	Decode          DecodeFcn
+	DecodeContainer DecodeFcn
 	IsArray         bool
 	Length          uint32
 	ArraySerializer *PropertySerializer
@@ -70,7 +29,7 @@ func GetDefaultPropertySerializerTable() *PropertySerializerTable {
 }
 
 var matchArray = regexp.MustCompile(`([^[\]]+)\[(\d+)]`)
-var matchVector = regexp.MustCompile(`CUtlVector.*`)
+var matchVector = regexp.MustCompile(`CUtlVector\<\s(.*)\s>$`)
 
 // Returns a serializer by name
 func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *PropertySerializer {
@@ -81,6 +40,8 @@ func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *Pr
 
 	// Set decoder
 	var decoder DecodeFcn
+	var decoderContainer DecodeFcn
+
 	switch name {
 	case "float32":
 		decoder = decodeFloat
@@ -91,30 +52,53 @@ func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *Pr
 	case "int32":
 		fallthrough
 	case "int64":
-		fallthrough
-	case "Color":
 		decoder = decodeSigned
 	case "uint8":
-		fallthrough
+		decoder = decodeByte
 	case "uint16":
 		fallthrough
 	case "uint32":
 		fallthrough
 	case "uint64":
+		fallthrough
+	case "Color":
 		decoder = decodeUnsigned
+	case "CUtlStringToken":
+		fallthrough
 	case "char":
 		fallthrough
 	case "CUtlSymbolLarge":
 		decoder = decodeString
+	case "Vector":
+		decoder = decodeFVector
 	case "bool":
 		decoder = decodeBoolean
+	case "CNetworkedQuantizedFloat":
+		decoder = decodeQuantized
+	case "CPhysicsComponent":
+		fallthrough
+	case "CRenderComponent":
+		fallthrough
+	case "CBodyComponent":
+		decoder = decodeNop
+	case "CDOTASpectatorGraphManager*":
+		fallthrough
+	case "CEntityIdentity*":
+		decoder = decodePointer
+	case "QAngle":
+		decoder = decodeQAngle
 	default:
 		// check for specific types
 		switch {
 		case hasPrefix(name, "CHandle"):
 			decoder = decodeHandle
 		case hasPrefix(name, "CUtlVector< "):
-			decoder = pst.GetPropertySerializerByName(name[12:]).Decode
+			if match := matchVector.FindStringSubmatch(name); match != nil {
+				decoderContainer = decodeVector
+				decoder = pst.GetPropertySerializerByName(match[1]).Decode
+			} else {
+				_panicf("Unable to read vector type for %s", name)
+			}
 		default:
 			//_debugf("No decoder for type %s", name)
 		}
@@ -136,6 +120,7 @@ func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *Pr
 
 		ps := &PropertySerializer{
 			Decode:          serializer.Decode,
+			DecodeContainer: decoderContainer,
 			IsArray:         true,
 			Length:          uint32(length),
 			ArraySerializer: serializer,
@@ -148,6 +133,7 @@ func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *Pr
 	if match := matchVector.FindStringSubmatch(name); match != nil {
 		ps := &PropertySerializer{
 			Decode:          decoder,
+			DecodeContainer: decoderContainer,
 			IsArray:         true,
 			Length:          uint32(128),
 			ArraySerializer: &PropertySerializer{},
@@ -157,5 +143,5 @@ func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *Pr
 	}
 
 	// This function should panic at some point
-	return &PropertySerializer{decoder, false, 0, nil, "unkown"}
+	return &PropertySerializer{decoder, decoderContainer, false, 0, nil, "unkown"}
 }

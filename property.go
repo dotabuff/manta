@@ -14,11 +14,18 @@ func readPropertiesNew(r *reader, ser *dt) (result map[string]interface{}) {
 	// iterate all the fields and set their corresponding values
 	for _, f := range fieldPath.fields {
 		if f.Serializer.Decode == nil {
-			_panicf("Missing serializer for: %v (%v)", f, f.Type)
+			result[f.Name] = r.readVarUint32()
+			_debugf("Reading %s - %s as varint %v", f.Name, f.Type, result[f.Name])
+			continue
 		}
 
-		result[f.Name] = f.Serializer.Decode(r, f)
-		_debugf("Decoded: %s %s %v", f.Name, f.Type, result[f.Name])
+		if f.Serializer.DecodeContainer != nil {
+			result[f.Name] = f.Serializer.DecodeContainer(r, f)
+		} else {
+			result[f.Name] = f.Serializer.Decode(r, f)
+		}
+
+		_debugf("Decoded: %d %s %s %v", r.pos, f.Name, f.Type, result[f.Name])
 	}
 
 	return result
