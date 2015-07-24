@@ -127,6 +127,7 @@ import (
 	rawMsg := []string{}
 	switches := []string{}
 	demSwitches := []string{}
+	subscribeAll := []string{}
 	onFns := []string{}
 	onFnNames := make(map[string]bool)
 	packetTypeIds := make([]int, 0)
@@ -216,7 +217,10 @@ import (
 			onfn := spew.Sprintf(
 				`func (c *Callbacks) %s(fn %s) {
           c.%s = append(c.%s, fn)
-          }`, cbName, fnsig, cbEnt, cbEnt)
+         }`, cbName, fnsig, cbEnt, cbEnt)
+
+			subscribeAll = append(subscribeAll, spew.Sprintf(
+				`c.%s(func (pkg *%s) error { return all(pkg) })`, cbName, cbType))
 
 			if enum.Hook == "DEM" {
 				demSwitches = append(demSwitches, swtch)
@@ -260,6 +264,12 @@ func (p *Parser) %s(t int32, raw []byte) (error) {
 
 	file.WriteString(spew.Sprintf(callTemplate, "CallByDemoType", strings.Join(demSwitches, "\n")))
 	file.WriteString(spew.Sprintf(callTemplate, "CallByPacketType", strings.Join(switches, "\n")))
+
+	file.WriteString(spew.Sprintf(`
+func (c *Callbacks) OnAny(all func(interface{}) error) {
+	%s
+}
+	`, strings.Join(subscribeAll, "\n")))
 
 	source, err := format.Source(file.Bytes())
 	if err != nil {
