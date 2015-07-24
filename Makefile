@@ -7,7 +7,7 @@ bench:
 	go test -bench=. -v
 
 cover:
-	go test -cover -coverprofile /tmp/manta.cov -v
+	go test -cover -coverpkg github.com/dotabuff/manta,github.com/dotabuff/manta/vbkv -coverprofile /tmp/manta.cov -v
 	go tool cover -html=/tmp/manta.cov
 
 update: update-game-tracking gen-dota-proto generate
