@@ -1,0 +1,1765 @@
+{
+  "Heroes": {
+    "npc_dota_hero_bloodseeker": {
+      "Abilities": {
+        "attribute_bonus": {
+          "cooldown": -82.31758,
+          "hidden": 0,
+          "level": 0,
+          "m_iTeamNum": "3"
+        },
+        "bloodseeker_blood_bath": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 0,
+          "m_iTeamNum": "3"
+        },
+        "bloodseeker_bloodrage": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_iTeamNum": "3"
+        },
+        "bloodseeker_rupture": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 0,
+          "m_iTeamNum": "3"
+        },
+        "bloodseeker_thirst": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 0,
+          "m_iTeamNum": "3"
+        }
+      },
+      "Inventory": {
+        "item_branches": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_bPurchasedWhileDead": "0",
+          "m_flAssembledTime": "141.367905",
+          "m_flPurchaseTime": "141.367905",
+          "m_iCurrentCharges": "0",
+          "m_iSecondaryCharges": "0",
+          "m_iTeamNum": "3",
+          "owner": "npc_dota_hero_bloodseeker",
+          "slot": 4
+        },
+        "item_gauntlets": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_bPurchasedWhileDead": "0",
+          "m_flAssembledTime": "139.834244",
+          "m_flPurchaseTime": "139.834244",
+          "m_iCurrentCharges": "0",
+          "m_iSecondaryCharges": "0",
+          "m_iTeamNum": "3",
+          "owner": "npc_dota_hero_bloodseeker",
+          "slot": 2
+        },
+        "item_stout_shield": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_bPurchasedWhileDead": "0",
+          "m_flAssembledTime": "137.600433",
+          "m_flPurchaseTime": "137.600433",
+          "m_iCurrentCharges": "0",
+          "m_iSecondaryCharges": "0",
+          "m_iTeamNum": "3",
+          "owner": "npc_dota_hero_bloodseeker",
+          "slot": 1
+        },
+        "item_tango": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_bPurchasedWhileDead": "0",
+          "m_flAssembledTime": "137.300369",
+          "m_flPurchaseTime": "137.300369",
+          "m_iCurrentCharges": "4",
+          "m_iSecondaryCharges": "0",
+          "m_iTeamNum": "3",
+          "owner": "npc_dota_hero_bloodseeker",
+          "slot": 0
+        }
+      },
+      "bkbcharges": 0,
+      "buybackcooldown": -212.71648,
+      "buybackgoldlimit": -212.71648,
+      "m_angRotation": "0.000000 296.203156 0.000000",
+      "m_bUseNeutralCreepBehavior": "0",
+      "m_flAccumulatedHeal": "0.000000",
+      "m_flAgility": "24.000000",
+      "m_flIntellect": "18.000000",
+      "m_flMana": "260.000000",
+      "m_flStrength": "23.000000",
+      "m_iAbilityPoints": "0",
+      "m_iCurrentLevel": "1",
+      "m_iCurrentXP": "0",
+      "m_iHealth": "682",
+      "m_iIsControllableByPlayer64": "128",
+      "m_iMultipleKillCount": "0",
+      "m_iName": "npc_dota_hero_bloodseeker",
+      "m_iTeamNum": "3",
+      "m_iszUnitName": "npc_dota_hero_bloodseeker",
+      "m_vecOrigin": "3574.468750 2889.031250 256.630463",
+      "respawntime": -212.71648
+    },
+    "npc_dota_hero_chaos_knight": {
+      "Abilities": {
+        "attribute_bonus": {
+          "cooldown": -88.61803,
+          "hidden": 0,
+          "level": 0,
+          "m_iTeamNum": "3"
+        },
+        "chaos_knight_chaos_bolt": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_iTeamNum": "3"
+        },
+        "chaos_knight_chaos_strike": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 0,
+          "m_iTeamNum": "3"
+        },
+        "chaos_knight_phantasm": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 0,
+          "m_iTeamNum": "3"
+        },
+        "chaos_knight_reality_rift": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 0,
+          "m_iTeamNum": "3"
+        }
+      },
+      "Inventory": {
+        "item_flask": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_bPurchasedWhileDead": "0",
+          "m_flAssembledTime": "171.807739",
+          "m_flPurchaseTime": "171.807739",
+          "m_iCurrentCharges": "1",
+          "m_iSecondaryCharges": "0",
+          "m_iTeamNum": "3",
+          "owner": "npc_dota_hero_chaos_knight",
+          "slot": 1
+        },
+        "item_quelling_blade": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_bPurchasedWhileDead": "0",
+          "m_flAssembledTime": "184.843857",
+          "m_flPurchaseTime": "184.843857",
+          "m_iCurrentCharges": "0",
+          "m_iSecondaryCharges": "0",
+          "m_iTeamNum": "3",
+          "owner": "npc_dota_hero_chaos_knight",
+          "slot": 2
+        },
+        "item_tango": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_bPurchasedWhileDead": "0",
+          "m_flAssembledTime": "159.971878",
+          "m_flPurchaseTime": "159.971878",
+          "m_iCurrentCharges": "4",
+          "m_iSecondaryCharges": "0",
+          "m_iTeamNum": "3",
+          "owner": "npc_dota_hero_chaos_knight",
+          "slot": 0
+        }
+      },
+      "bkbcharges": 0,
+      "buybackcooldown": -212.71648,
+      "buybackgoldlimit": -212.71648,
+      "m_angRotation": "0.000000 245.488678 0.000000",
+      "m_bUseNeutralCreepBehavior": "0",
+      "m_flAccumulatedHeal": "0.000000",
+      "m_flAgility": "14.000000",
+      "m_flIntellect": "16.000000",
+      "m_flMana": "208.000000",
+      "m_flStrength": "20.000000",
+      "m_iAbilityPoints": "0",
+      "m_iCurrentLevel": "1",
+      "m_iCurrentXP": "0",
+      "m_iHealth": "530",
+      "m_iIsControllableByPlayer64": "32",
+      "m_iMultipleKillCount": "0",
+      "m_iName": "npc_dota_hero_chaos_knight",
+      "m_iTeamNum": "3",
+      "m_iszUnitName": "npc_dota_hero_chaos_knight",
+      "m_vecOrigin": "-1071.982666 4359.117188 384.000000",
+      "respawntime": -212.71648
+    },
+    "npc_dota_hero_doom_bringer": {
+      "Abilities": {
+        "attribute_bonus": {
+          "cooldown": -87.35138,
+          "hidden": 0,
+          "level": 0,
+          "m_iTeamNum": "2"
+        },
+        "doom_bringer_devour": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 0,
+          "m_iTeamNum": "2"
+        },
+        "doom_bringer_doom": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 0,
+          "m_iTeamNum": "2"
+        },
+        "doom_bringer_empty1": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 0,
+          "m_iTeamNum": "2"
+        },
+        "doom_bringer_empty2": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 0,
+          "m_iTeamNum": "2"
+        },
+        "doom_bringer_lvl_death": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 0,
+          "m_iTeamNum": "2"
+        },
+        "doom_bringer_scorched_earth": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 0,
+          "m_iTeamNum": "2"
+        }
+      },
+      "Inventory": {
+        "item_branches": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_bPurchasedWhileDead": "0",
+          "m_flAssembledTime": "131.499130",
+          "m_flPurchaseTime": "131.499130",
+          "m_iCurrentCharges": "0",
+          "m_iSecondaryCharges": "0",
+          "m_iTeamNum": "2",
+          "owner": "npc_dota_hero_doom_bringer",
+          "slot": 4
+        },
+        "item_magic_stick": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_bPurchasedWhileDead": "0",
+          "m_flAssembledTime": "130.332214",
+          "m_flPurchaseTime": "130.332214",
+          "m_iCurrentCharges": "0",
+          "m_iSecondaryCharges": "0",
+          "m_iTeamNum": "2",
+          "owner": "npc_dota_hero_doom_bringer",
+          "slot": 1
+        },
+        "item_stout_shield": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_bPurchasedWhileDead": "0",
+          "m_flAssembledTime": "128.465149",
+          "m_flPurchaseTime": "128.465149",
+          "m_iCurrentCharges": "0",
+          "m_iSecondaryCharges": "0",
+          "m_iTeamNum": "2",
+          "owner": "npc_dota_hero_doom_bringer",
+          "slot": 2
+        },
+        "item_tango": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_bPurchasedWhileDead": "0",
+          "m_flAssembledTime": "127.965057",
+          "m_flPurchaseTime": "127.965057",
+          "m_iCurrentCharges": "4",
+          "m_iSecondaryCharges": "0",
+          "m_iTeamNum": "2",
+          "owner": "npc_dota_hero_doom_bringer",
+          "slot": 0
+        }
+      },
+      "bkbcharges": 0,
+      "buybackcooldown": -212.71648,
+      "buybackgoldlimit": -212.71648,
+      "m_angRotation": "0.000000 261.707581 0.000000",
+      "m_bUseNeutralCreepBehavior": "0",
+      "m_flAccumulatedHeal": "0.000000",
+      "m_flAgility": "11.000000",
+      "m_flIntellect": "13.000000",
+      "m_flMana": "195.000000",
+      "m_flStrength": "26.000000",
+      "m_iAbilityPoints": "1",
+      "m_iCurrentLevel": "1",
+      "m_iCurrentXP": "0",
+      "m_iHealth": "682",
+      "m_iIsControllableByPlayer64": "4",
+      "m_iMultipleKillCount": "0",
+      "m_iName": "npc_dota_hero_doom_bringer",
+      "m_iTeamNum": "2",
+      "m_iszUnitName": "npc_dota_hero_doom_bringer",
+      "m_vecOrigin": "3136.750000 -2438.562500 128.000000",
+      "respawntime": -212.71648
+    },
+    "npc_dota_hero_lina": {
+      "Abilities": {
+        "attribute_bonus": {
+          "cooldown": -88.45136,
+          "hidden": 0,
+          "level": 0,
+          "m_iTeamNum": "3"
+        },
+        "lina_dragon_slave": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_iTeamNum": "3"
+        },
+        "lina_fiery_soul": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 0,
+          "m_iTeamNum": "3"
+        },
+        "lina_laguna_blade": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 0,
+          "m_iTeamNum": "3"
+        },
+        "lina_light_strike_array": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 0,
+          "m_iTeamNum": "3"
+        }
+      },
+      "Inventory": {
+        "item_null_talisman": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_bPurchasedWhileDead": "0",
+          "m_flAssembledTime": "138.333923",
+          "m_flPurchaseTime": "138.267242",
+          "m_iCurrentCharges": "0",
+          "m_iSecondaryCharges": "0",
+          "m_iTeamNum": "3",
+          "owner": "npc_dota_hero_lina",
+          "slot": 1
+        },
+        "item_tango": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_bPurchasedWhileDead": "0",
+          "m_flAssembledTime": "137.667114",
+          "m_flPurchaseTime": "137.667114",
+          "m_iCurrentCharges": "4",
+          "m_iSecondaryCharges": "0",
+          "m_iTeamNum": "3",
+          "owner": "npc_dota_hero_lina",
+          "slot": 0
+        }
+      },
+      "bkbcharges": 0,
+      "buybackcooldown": -212.71648,
+      "buybackgoldlimit": -212.71648,
+      "m_angRotation": "0.000000 278.635437 0.000000",
+      "m_bUseNeutralCreepBehavior": "0",
+      "m_flAccumulatedHeal": "0.000000",
+      "m_flAgility": "16.000000",
+      "m_flIntellect": "27.000000",
+      "m_flMana": "429.000000",
+      "m_flStrength": "18.000000",
+      "m_iAbilityPoints": "0",
+      "m_iCurrentLevel": "1",
+      "m_iCurrentXP": "0",
+      "m_iHealth": "549",
+      "m_iIsControllableByPlayer64": "64",
+      "m_iMultipleKillCount": "0",
+      "m_iName": "npc_dota_hero_lina",
+      "m_iTeamNum": "3",
+      "m_iszUnitName": "npc_dota_hero_lina",
+      "m_vecOrigin": "6191.843750 -246.500000 384.000000",
+      "respawntime": -212.71648
+    },
+    "npc_dota_hero_lycan": {
+      "Abilities": {
+        "attribute_bonus": {
+          "cooldown": -86.0514,
+          "hidden": 0,
+          "level": 0,
+          "m_iTeamNum": "2"
+        },
+        "lycan_feral_impulse": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 0,
+          "m_iTeamNum": "2"
+        },
+        "lycan_howl": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_iTeamNum": "2"
+        },
+        "lycan_shapeshift": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 0,
+          "m_iTeamNum": "2"
+        },
+        "lycan_summon_wolves": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 0,
+          "m_iTeamNum": "2"
+        }
+      },
+      "Inventory": {
+        "item_branches": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_bPurchasedWhileDead": "0",
+          "m_flAssembledTime": "175.075104",
+          "m_flPurchaseTime": "175.075104",
+          "m_iCurrentCharges": "0",
+          "m_iSecondaryCharges": "0",
+          "m_iTeamNum": "2",
+          "owner": "npc_dota_hero_lycan",
+          "slot": 4
+        },
+        "item_flask": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_bPurchasedWhileDead": "0",
+          "m_flAssembledTime": "156.871216",
+          "m_flPurchaseTime": "156.871216",
+          "m_iCurrentCharges": "1",
+          "m_iSecondaryCharges": "0",
+          "m_iTeamNum": "2",
+          "owner": "npc_dota_hero_lycan",
+          "slot": 3
+        },
+        "item_stout_shield": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_bPurchasedWhileDead": "0",
+          "m_flAssembledTime": "155.337555",
+          "m_flPurchaseTime": "155.337555",
+          "m_iCurrentCharges": "0",
+          "m_iSecondaryCharges": "0",
+          "m_iTeamNum": "2",
+          "owner": "npc_dota_hero_lycan",
+          "slot": 0
+        },
+        "item_tango": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_bPurchasedWhileDead": "0",
+          "m_flAssembledTime": "156.204407",
+          "m_flPurchaseTime": "156.204407",
+          "m_iCurrentCharges": "4",
+          "m_iSecondaryCharges": "0",
+          "m_iTeamNum": "2",
+          "owner": "npc_dota_hero_lycan",
+          "slot": 2
+        }
+      },
+      "bkbcharges": 0,
+      "buybackcooldown": -212.71648,
+      "buybackgoldlimit": -212.71648,
+      "m_angRotation": "0.000000 9.052780 0.000000",
+      "m_bUseNeutralCreepBehavior": "0",
+      "m_flAccumulatedHeal": "0.000000",
+      "m_flAgility": "16.000000",
+      "m_flIntellect": "17.000000",
+      "m_flMana": "247.000000",
+      "m_flStrength": "22.000000",
+      "m_iAbilityPoints": "0",
+      "m_iCurrentLevel": "1",
+      "m_iCurrentXP": "0",
+      "m_iHealth": "606",
+      "m_iIsControllableByPlayer64": "16",
+      "m_iMultipleKillCount": "0",
+      "m_iName": "npc_dota_hero_lycan",
+      "m_iTeamNum": "2",
+      "m_iszUnitName": "npc_dota_hero_lycan",
+      "m_vecOrigin": "-4239.116699 1096.295288 384.000000",
+      "respawntime": -212.71648
+    },
+    "npc_dota_hero_pudge": {
+      "Abilities": {
+        "attribute_bonus": {
+          "cooldown": -84.151306,
+          "hidden": 0,
+          "level": 0,
+          "m_iTeamNum": "2"
+        },
+        "pudge_dismember": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 0,
+          "m_iTeamNum": "2"
+        },
+        "pudge_flesh_heap": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 0,
+          "m_iKills": "0",
+          "m_iTeamNum": "2"
+        },
+        "pudge_meat_hook": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 0,
+          "m_iTeamNum": "2"
+        },
+        "pudge_rot": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_iTeamNum": "2"
+        }
+      },
+      "Inventory": {
+        "item_branches": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_bPurchasedWhileDead": "0",
+          "m_flAssembledTime": "158.104813",
+          "m_flPurchaseTime": "158.104813",
+          "m_iCurrentCharges": "0",
+          "m_iSecondaryCharges": "0",
+          "m_iTeamNum": "2",
+          "owner": "npc_dota_hero_pudge",
+          "slot": 2
+        },
+        "item_gauntlets": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_bPurchasedWhileDead": "0",
+          "m_flAssembledTime": "152.770340",
+          "m_flPurchaseTime": "152.770340",
+          "m_iCurrentCharges": "0",
+          "m_iSecondaryCharges": "0",
+          "m_iTeamNum": "2",
+          "owner": "npc_dota_hero_pudge",
+          "slot": 0
+        },
+        "item_tango": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_bPurchasedWhileDead": "0",
+          "m_flAssembledTime": "160.605347",
+          "m_flPurchaseTime": "160.605347",
+          "m_iCurrentCharges": "4",
+          "m_iSecondaryCharges": "0",
+          "m_iTeamNum": "2",
+          "owner": "npc_dota_hero_pudge",
+          "slot": 3
+        }
+      },
+      "bkbcharges": 0,
+      "buybackcooldown": -212.71648,
+      "buybackgoldlimit": -212.71648,
+      "m_angRotation": "0.000000 310.143402 0.000000",
+      "m_bUseNeutralCreepBehavior": "0",
+      "m_flAccumulatedHeal": "0.000000",
+      "m_flAgility": "14.000000",
+      "m_flIntellect": "14.000000",
+      "m_flMana": "208.000000",
+      "m_flStrength": "25.000000",
+      "m_iAbilityPoints": "0",
+      "m_iCurrentLevel": "1",
+      "m_iCurrentXP": "0",
+      "m_iHealth": "720",
+      "m_iIsControllableByPlayer64": "8",
+      "m_iMultipleKillCount": "0",
+      "m_iName": "npc_dota_hero_pudge",
+      "m_iTeamNum": "2",
+      "m_iszUnitName": "npc_dota_hero_pudge",
+      "m_vecOrigin": "-2240.843750 1786.156250 128.000000",
+      "respawntime": -212.71648
+    },
+    "npc_dota_hero_shadow_demon": {
+      "Abilities": {
+        "attribute_bonus": {
+          "cooldown": -75.916214,
+          "hidden": 0,
+          "level": 0,
+          "m_iTeamNum": "2"
+        },
+        "shadow_demon_demonic_purge": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 0,
+          "m_iTeamNum": "2"
+        },
+        "shadow_demon_disruption": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_iTeamNum": "2"
+        },
+        "shadow_demon_shadow_poison": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 0,
+          "m_iTeamNum": "2"
+        },
+        "shadow_demon_shadow_poison_release": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 0,
+          "m_iTeamNum": "2"
+        },
+        "shadow_demon_soul_catcher": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 0,
+          "m_iTeamNum": "2"
+        }
+      },
+      "Inventory": {
+        "item_magic_wand": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_bPurchasedWhileDead": "0",
+          "m_flAssembledTime": "155.504257",
+          "m_flPurchaseTime": "155.337555",
+          "m_iCurrentCharges": "0",
+          "m_iSecondaryCharges": "0",
+          "m_iTeamNum": "2",
+          "owner": "npc_dota_hero_shadow_demon",
+          "slot": 0
+        },
+        "item_tango": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_bPurchasedWhileDead": "0",
+          "m_flAssembledTime": "158.971664",
+          "m_flPurchaseTime": "158.971664",
+          "m_iCurrentCharges": "4",
+          "m_iSecondaryCharges": "0",
+          "m_iTeamNum": "2",
+          "owner": "npc_dota_hero_shadow_demon",
+          "slot": 1
+        }
+      },
+      "bkbcharges": 0,
+      "buybackcooldown": -212.71648,
+      "buybackgoldlimit": -212.71648,
+      "m_angRotation": "0.000000 116.899719 0.000000",
+      "m_bUseNeutralCreepBehavior": "0",
+      "m_flAccumulatedHeal": "0.000000",
+      "m_flAgility": "18.000000",
+      "m_flIntellect": "23.000000",
+      "m_flMana": "351.000000",
+      "m_flStrength": "17.000000",
+      "m_iAbilityPoints": "0",
+      "m_iCurrentLevel": "1",
+      "m_iCurrentXP": "0",
+      "m_iHealth": "549",
+      "m_iIsControllableByPlayer64": "1",
+      "m_iMultipleKillCount": "0",
+      "m_iName": "npc_dota_hero_shadow_demon",
+      "m_iTeamNum": "2",
+      "m_iszUnitName": "npc_dota_hero_shadow_demon",
+      "m_vecOrigin": "-2420.206055 2004.371094 128.000000",
+      "respawntime": -212.71648
+    },
+    "npc_dota_hero_shredder": {
+      "Abilities": {
+        "attribute_bonus": {
+          "cooldown": -87.051384,
+          "hidden": 0,
+          "level": 0,
+          "m_iTeamNum": "3"
+        },
+        "shredder_chakram": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 0,
+          "m_iTeamNum": "3"
+        },
+        "shredder_reactive_armor": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 0,
+          "m_iTeamNum": "3"
+        },
+        "shredder_return_chakram": {
+          "cooldown": 0,
+          "hidden": 1,
+          "level": 0,
+          "m_iTeamNum": "3"
+        },
+        "shredder_timber_chain": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_iTeamNum": "3"
+        },
+        "shredder_whirling_death": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 0,
+          "m_iTeamNum": "3"
+        }
+      },
+      "Inventory": {
+        "item_branches": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_bPurchasedWhileDead": "0",
+          "m_flAssembledTime": "157.938110",
+          "m_flPurchaseTime": "157.938110",
+          "m_iCurrentCharges": "0",
+          "m_iSecondaryCharges": "0",
+          "m_iTeamNum": "3",
+          "owner": "npc_dota_hero_shredder",
+          "slot": 4
+        },
+        "item_stout_shield": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_bPurchasedWhileDead": "0",
+          "m_flAssembledTime": "153.537170",
+          "m_flPurchaseTime": "153.537170",
+          "m_iCurrentCharges": "0",
+          "m_iSecondaryCharges": "0",
+          "m_iTeamNum": "3",
+          "owner": "npc_dota_hero_shredder",
+          "slot": 0
+        },
+        "item_tango": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_bPurchasedWhileDead": "0",
+          "m_flAssembledTime": "157.638046",
+          "m_flPurchaseTime": "157.638046",
+          "m_iCurrentCharges": "4",
+          "m_iSecondaryCharges": "0",
+          "m_iTeamNum": "3",
+          "owner": "npc_dota_hero_shredder",
+          "slot": 3
+        }
+      },
+      "bkbcharges": 0,
+      "buybackcooldown": -212.71648,
+      "buybackgoldlimit": -212.71648,
+      "m_angRotation": "0.000000 314.822174 0.000000",
+      "m_bUseNeutralCreepBehavior": "0",
+      "m_flAccumulatedHeal": "0.000000",
+      "m_flAgility": "16.000000",
+      "m_flIntellect": "21.000000",
+      "m_flMana": "312.000000",
+      "m_flStrength": "22.000000",
+      "m_iAbilityPoints": "0",
+      "m_iCurrentLevel": "1",
+      "m_iCurrentXP": "0",
+      "m_iHealth": "625",
+      "m_iIsControllableByPlayer64": "256",
+      "m_iMultipleKillCount": "0",
+      "m_iName": "npc_dota_hero_shredder",
+      "m_iTeamNum": "3",
+      "m_iszUnitName": "npc_dota_hero_shredder",
+      "m_vecOrigin": "6567.218750 5.875000 384.000000",
+      "respawntime": -212.71648
+    },
+    "npc_dota_hero_venomancer": {
+      "Abilities": {
+        "attribute_bonus": {
+          "cooldown": -87.95137,
+          "hidden": 0,
+          "level": 0,
+          "m_iTeamNum": "2"
+        },
+        "venomancer_plague_ward": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 0,
+          "m_iTeamNum": "2"
+        },
+        "venomancer_poison_nova": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 0,
+          "m_iTeamNum": "2"
+        },
+        "venomancer_poison_sting": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 0,
+          "m_iTeamNum": "2"
+        },
+        "venomancer_venomous_gale": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 0,
+          "m_iTeamNum": "2"
+        }
+      },
+      "Inventory": {
+        "item_orb_of_venom": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_bPurchasedWhileDead": "0",
+          "m_flAssembledTime": "130.432236",
+          "m_flPurchaseTime": "130.432236",
+          "m_iCurrentCharges": "0",
+          "m_iSecondaryCharges": "0",
+          "m_iTeamNum": "2",
+          "owner": "npc_dota_hero_venomancer",
+          "slot": 1
+        },
+        "item_tango": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_bPurchasedWhileDead": "0",
+          "m_flAssembledTime": "141.467926",
+          "m_flPurchaseTime": "141.467926",
+          "m_iCurrentCharges": "4",
+          "m_iSecondaryCharges": "0",
+          "m_iTeamNum": "2",
+          "owner": "npc_dota_hero_venomancer",
+          "slot": 2
+        }
+      },
+      "bkbcharges": 0,
+      "buybackcooldown": -212.71648,
+      "buybackgoldlimit": -212.71648,
+      "m_angRotation": "0.000000 266.531372 0.000000",
+      "m_bUseNeutralCreepBehavior": "0",
+      "m_flAccumulatedHeal": "0.000000",
+      "m_flAgility": "22.000000",
+      "m_flIntellect": "15.000000",
+      "m_flMana": "195.000000",
+      "m_flStrength": "18.000000",
+      "m_iAbilityPoints": "1",
+      "m_iCurrentLevel": "1",
+      "m_iCurrentXP": "0",
+      "m_iHealth": "492",
+      "m_iIsControllableByPlayer64": "2",
+      "m_iMultipleKillCount": "0",
+      "m_iName": "npc_dota_hero_venomancer",
+      "m_iTeamNum": "2",
+      "m_iszUnitName": "npc_dota_hero_venomancer",
+      "m_vecOrigin": "2377.172852 -3446.882324 384.000000",
+      "respawntime": -212.71648
+    },
+    "npc_dota_hero_viper": {
+      "Abilities": {
+        "attribute_bonus": {
+          "cooldown": -87.051384,
+          "hidden": 0,
+          "level": 0,
+          "m_iTeamNum": "3"
+        },
+        "viper_corrosive_skin": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 0,
+          "m_iTeamNum": "3"
+        },
+        "viper_nethertoxin": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 0,
+          "m_iTeamNum": "3"
+        },
+        "viper_poison_attack": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 0,
+          "m_iTeamNum": "3"
+        },
+        "viper_viper_strike": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 0,
+          "m_iTeamNum": "3"
+        }
+      },
+      "bkbcharges": 0,
+      "buybackcooldown": -212.71648,
+      "buybackgoldlimit": -212.71648,
+      "m_angRotation": "0.000000 58.393600 0.000000",
+      "m_bUseNeutralCreepBehavior": "0",
+      "m_flAccumulatedHeal": "0.000000",
+      "m_flAgility": "21.000000",
+      "m_flIntellect": "15.000000",
+      "m_flMana": "195.000000",
+      "m_flStrength": "20.000000",
+      "m_iAbilityPoints": "1",
+      "m_iCurrentLevel": "1",
+      "m_iCurrentXP": "0",
+      "m_iHealth": "530",
+      "m_iIsControllableByPlayer64": "512",
+      "m_iMultipleKillCount": "0",
+      "m_iName": "npc_dota_hero_viper",
+      "m_iTeamNum": "3",
+      "m_iszUnitName": "npc_dota_hero_viper",
+      "m_vecOrigin": "6939.018066 6312.654297 512.000000",
+      "respawntime": -212.71648
+    }
+  },
+  "Players": {
+    "0": {
+      "assists": 0,
+      "deaths": 0,
+      "denies": 0,
+      "hero": "npc_dota_hero_shadow_demon",
+      "kills": 0,
+      "lasthits": 0,
+      "name": "Thias",
+      "reliablegold": 0,
+      "sharemask": 0,
+      "steamid": 76561197996062617,
+      "streak": 0,
+      "team": 2,
+      "unreliablegold": 35
+    },
+    "1": {
+      "assists": 0,
+      "deaths": 0,
+      "denies": 0,
+      "hero": "npc_dota_hero_venomancer",
+      "kills": 0,
+      "lasthits": 0,
+      "name": "Ash",
+      "reliablegold": 0,
+      "sharemask": 0,
+      "steamid": 76561198046993147,
+      "streak": 0,
+      "team": 2,
+      "unreliablegold": 30
+    },
+    "2": {
+      "assists": 0,
+      "deaths": 0,
+      "denies": 0,
+      "hero": "npc_dota_hero_doom_bringer",
+      "kills": 0,
+      "lasthits": 0,
+      "name": "kimee",
+      "reliablegold": 0,
+      "sharemask": 0,
+      "steamid": 76561197961237397,
+      "streak": 0,
+      "team": 2,
+      "unreliablegold": 0
+    },
+    "3": {
+      "assists": 0,
+      "deaths": 0,
+      "denies": 0,
+      "hero": "npc_dota_hero_pudge",
+      "kills": 0,
+      "lasthits": 0,
+      "name": "Der Baerenjurek",
+      "reliablegold": 0,
+      "sharemask": 0,
+      "steamid": 76561197973633834,
+      "streak": 0,
+      "team": 2,
+      "unreliablegold": 250
+    },
+    "4": {
+      "assists": 0,
+      "deaths": 0,
+      "denies": 0,
+      "hero": "npc_dota_hero_lycan",
+      "kills": 0,
+      "lasthits": 0,
+      "name": "makes",
+      "reliablegold": 0,
+      "sharemask": 0,
+      "steamid": 76561197977509327,
+      "streak": 0,
+      "team": 2,
+      "unreliablegold": 90
+    },
+    "5": {
+      "assists": 0,
+      "deaths": 0,
+      "denies": 0,
+      "hero": "npc_dota_hero_chaos_knight",
+      "kills": 0,
+      "lasthits": 0,
+      "name": "Анонимный геймер",
+      "reliablegold": 0,
+      "sharemask": 0,
+      "steamid": 76561198122536495,
+      "streak": 0,
+      "team": 3,
+      "unreliablegold": 165
+    },
+    "6": {
+      "assists": 0,
+      "deaths": 0,
+      "denies": 0,
+      "hero": "npc_dota_hero_lina",
+      "kills": 0,
+      "lasthits": 0,
+      "name": "ariethebeast",
+      "reliablegold": 0,
+      "sharemask": 0,
+      "steamid": 76561198065323776,
+      "streak": 0,
+      "team": 3,
+      "unreliablegold": 30
+    },
+    "7": {
+      "assists": 0,
+      "deaths": 0,
+      "denies": 0,
+      "hero": "npc_dota_hero_bloodseeker",
+      "kills": 0,
+      "lasthits": 0,
+      "name": "Officer Pacman",
+      "reliablegold": 0,
+      "sharemask": 0,
+      "steamid": 76561198054698773,
+      "streak": 0,
+      "team": 3,
+      "unreliablegold": 50
+    },
+    "8": {
+      "assists": 0,
+      "deaths": 0,
+      "denies": 0,
+      "hero": "npc_dota_hero_shredder",
+      "kills": 0,
+      "lasthits": 0,
+      "name": "[RT]FleeX",
+      "reliablegold": 0,
+      "sharemask": 0,
+      "steamid": 76561198134851521,
+      "streak": 0,
+      "team": 3,
+      "unreliablegold": 150
+    },
+    "9": {
+      "assists": 0,
+      "deaths": 0,
+      "denies": 0,
+      "hero": "npc_dota_hero_viper",
+      "kills": 0,
+      "lasthits": 0,
+      "name": "[RT]G@dget",
+      "reliablegold": 0,
+      "sharemask": 0,
+      "steamid": 76561198131533844,
+      "streak": 0,
+      "team": 3,
+      "unreliablegold": 625
+    }
+  },
+  "Roshan": {
+    "roshan_alive": 1,
+    "roshan_kills": 1,
+    "roshan_killtime": 0,
+    "roshan_respawntime": 0
+  },
+  "StockInfo": {
+    "Custom1": {
+      "0": {
+        "StockCount": 1,
+        "StockTime": -212.71648
+      },
+      "1": {
+        "StockCount": 2,
+        "StockTime": 89.98201
+      },
+      "2": {
+        "StockCount": 1,
+        "StockTime": -212.71648
+      },
+      "3": {
+        "StockCount": 0,
+        "StockTime": 179.98201
+      },
+      "4": {
+        "StockCount": 3,
+        "StockTime": -212.71648
+      },
+      "5": {
+        "StockCount": 0,
+        "StockTime": -212.71648
+      },
+      "6": {
+        "StockCount": 0,
+        "StockTime": -212.71648
+      },
+      "7": {
+        "StockCount": 0,
+        "StockTime": -212.71648
+      }
+    },
+    "Custom2": {
+      "0": {
+        "StockCount": 1,
+        "StockTime": -212.71648
+      },
+      "1": {
+        "StockCount": 2,
+        "StockTime": 89.98201
+      },
+      "2": {
+        "StockCount": 1,
+        "StockTime": -212.71648
+      },
+      "3": {
+        "StockCount": 0,
+        "StockTime": 179.98201
+      },
+      "4": {
+        "StockCount": 3,
+        "StockTime": -212.71648
+      },
+      "5": {
+        "StockCount": 0,
+        "StockTime": -212.71648
+      },
+      "6": {
+        "StockCount": 0,
+        "StockTime": -212.71648
+      },
+      "7": {
+        "StockCount": 0,
+        "StockTime": -212.71648
+      }
+    },
+    "Custom3": {
+      "0": {
+        "StockCount": 1,
+        "StockTime": -212.71648
+      },
+      "1": {
+        "StockCount": 2,
+        "StockTime": 89.98201
+      },
+      "2": {
+        "StockCount": 1,
+        "StockTime": -212.71648
+      },
+      "3": {
+        "StockCount": 0,
+        "StockTime": 179.98201
+      },
+      "4": {
+        "StockCount": 3,
+        "StockTime": -212.71648
+      },
+      "5": {
+        "StockCount": 0,
+        "StockTime": -212.71648
+      },
+      "6": {
+        "StockCount": 0,
+        "StockTime": -212.71648
+      },
+      "7": {
+        "StockCount": 0,
+        "StockTime": -212.71648
+      }
+    },
+    "Custom4": {
+      "0": {
+        "StockCount": 1,
+        "StockTime": -212.71648
+      },
+      "1": {
+        "StockCount": 2,
+        "StockTime": 89.98201
+      },
+      "2": {
+        "StockCount": 1,
+        "StockTime": -212.71648
+      },
+      "3": {
+        "StockCount": 0,
+        "StockTime": 179.98201
+      },
+      "4": {
+        "StockCount": 3,
+        "StockTime": -212.71648
+      },
+      "5": {
+        "StockCount": 0,
+        "StockTime": -212.71648
+      },
+      "6": {
+        "StockCount": 0,
+        "StockTime": -212.71648
+      },
+      "7": {
+        "StockCount": 0,
+        "StockTime": -212.71648
+      }
+    },
+    "Custom5": {
+      "0": {
+        "StockCount": 1,
+        "StockTime": -212.71648
+      },
+      "1": {
+        "StockCount": 2,
+        "StockTime": 89.98201
+      },
+      "2": {
+        "StockCount": 1,
+        "StockTime": -212.71648
+      },
+      "3": {
+        "StockCount": 0,
+        "StockTime": 179.98201
+      },
+      "4": {
+        "StockCount": 3,
+        "StockTime": -212.71648
+      },
+      "5": {
+        "StockCount": 0,
+        "StockTime": -212.71648
+      },
+      "6": {
+        "StockCount": 0,
+        "StockTime": -212.71648
+      },
+      "7": {
+        "StockCount": 0,
+        "StockTime": -212.71648
+      }
+    },
+    "Custom6": {
+      "0": {
+        "StockCount": 1,
+        "StockTime": -212.71648
+      },
+      "1": {
+        "StockCount": 2,
+        "StockTime": 89.98201
+      },
+      "2": {
+        "StockCount": 1,
+        "StockTime": -212.71648
+      },
+      "3": {
+        "StockCount": 0,
+        "StockTime": 179.98201
+      },
+      "4": {
+        "StockCount": 3,
+        "StockTime": -212.71648
+      },
+      "5": {
+        "StockCount": 0,
+        "StockTime": -212.71648
+      },
+      "6": {
+        "StockCount": 0,
+        "StockTime": -212.71648
+      },
+      "7": {
+        "StockCount": 0,
+        "StockTime": -212.71648
+      }
+    },
+    "Custom7": {
+      "0": {
+        "StockCount": 1,
+        "StockTime": -212.71648
+      },
+      "1": {
+        "StockCount": 2,
+        "StockTime": 89.98201
+      },
+      "2": {
+        "StockCount": 1,
+        "StockTime": -212.71648
+      },
+      "3": {
+        "StockCount": 0,
+        "StockTime": 179.98201
+      },
+      "4": {
+        "StockCount": 3,
+        "StockTime": -212.71648
+      },
+      "5": {
+        "StockCount": 0,
+        "StockTime": -212.71648
+      },
+      "6": {
+        "StockCount": 0,
+        "StockTime": -212.71648
+      },
+      "7": {
+        "StockCount": 0,
+        "StockTime": -212.71648
+      }
+    },
+    "Custom8": {
+      "0": {
+        "StockCount": 1,
+        "StockTime": -212.71648
+      },
+      "1": {
+        "StockCount": 2,
+        "StockTime": 89.98201
+      },
+      "2": {
+        "StockCount": 1,
+        "StockTime": -212.71648
+      },
+      "3": {
+        "StockCount": 0,
+        "StockTime": 179.98201
+      },
+      "4": {
+        "StockCount": 3,
+        "StockTime": -212.71648
+      },
+      "5": {
+        "StockCount": 0,
+        "StockTime": -212.71648
+      },
+      "6": {
+        "StockCount": 0,
+        "StockTime": -212.71648
+      },
+      "7": {
+        "StockCount": 0,
+        "StockTime": -212.71648
+      }
+    },
+    "Dire": {
+      "0": {
+        "StockCount": 1,
+        "StockTime": -212.71648
+      },
+      "1": {
+        "StockCount": 2,
+        "StockTime": 89.98201
+      },
+      "2": {
+        "StockCount": 1,
+        "StockTime": -212.71648
+      },
+      "3": {
+        "StockCount": 0,
+        "StockTime": 179.98201
+      },
+      "4": {
+        "StockCount": 3,
+        "StockTime": -212.71648
+      },
+      "5": {
+        "StockCount": 0,
+        "StockTime": -212.71648
+      },
+      "6": {
+        "StockCount": 0,
+        "StockTime": -212.71648
+      },
+      "7": {
+        "StockCount": 0,
+        "StockTime": -212.71648
+      }
+    },
+    "Radiant": {
+      "0": {
+        "StockCount": 1,
+        "StockTime": -212.71648
+      },
+      "1": {
+        "StockCount": 1,
+        "StockTime": 89.98201
+      },
+      "2": {
+        "StockCount": 1,
+        "StockTime": -77.851425
+      },
+      "3": {
+        "StockCount": 0,
+        "StockTime": 179.98201
+      },
+      "4": {
+        "StockCount": 3,
+        "StockTime": -212.71648
+      },
+      "5": {
+        "StockCount": 0,
+        "StockTime": -212.71648
+      },
+      "6": {
+        "StockCount": 0,
+        "StockTime": -212.71648
+      },
+      "7": {
+        "StockCount": 0,
+        "StockTime": -212.71648
+      }
+    }
+  },
+  "Units": {
+    "ent_dota_fountain": {
+      "bkbcharges": 0,
+      "m_angRotation": "0.000000 65.459793 0.000000",
+      "m_bUseNeutralCreepBehavior": "0",
+      "m_flAccumulatedHeal": "0.000000",
+      "m_flMana": "0.000000",
+      "m_iCurrentLevel": "1",
+      "m_iHealth": "500",
+      "m_iIsControllableByPlayer64": "0",
+      "m_iName": "ent_dota_fountain_good",
+      "m_iTeamNum": "2",
+      "m_iszUnitName": "dota_fountain",
+      "m_vecOrigin": "-7456.000000 -6938.000000 528.000000"
+    },
+    "ent_dota_shop": {
+      "bkbcharges": 0,
+      "m_angRotation": "1.214664 317.029053 -1.048625",
+      "m_bUseNeutralCreepBehavior": "0",
+      "m_flAccumulatedHeal": "0.000000",
+      "m_flMana": "0.000000",
+      "m_iCurrentLevel": "1",
+      "m_iHealth": "150",
+      "m_iIsControllableByPlayer64": "0",
+      "m_iName": "ent_dota_shop",
+      "m_iTeamNum": "5",
+      "m_iszUnitName": "",
+      "m_vecOrigin": "-7653.869629 4440.060547 394.440643"
+    },
+    "npc_dota_barracks": {
+      "Abilities": {
+        "backdoor_protection_in_base": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_iTeamNum": "3"
+        }
+      },
+      "bkbcharges": 0,
+      "m_angRotation": "0.000000 90.000000 0.000000",
+      "m_bUseNeutralCreepBehavior": "0",
+      "m_flAccumulatedHeal": "0.000000",
+      "m_flMana": "0.000000",
+      "m_iCurrentLevel": "1",
+      "m_iHealth": "1200",
+      "m_iIsControllableByPlayer64": "0",
+      "m_iName": "bad_rax_range_top",
+      "m_iTeamNum": "3",
+      "m_iszUnitName": "npc_dota_badguys_range_rax_top",
+      "m_vecOrigin": "3846.000000 6041.000000 383.999878"
+    },
+    "npc_dota_building": {
+      "Abilities": {
+        "backdoor_protection_in_base": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_iTeamNum": "3"
+        }
+      },
+      "bkbcharges": 0,
+      "m_angRotation": "0.000000 315.000000 0.000000",
+      "m_bUseNeutralCreepBehavior": "0",
+      "m_flAccumulatedHeal": "0.000000",
+      "m_flMana": "0.000000",
+      "m_iCurrentLevel": "1",
+      "m_iHealth": "500",
+      "m_iIsControllableByPlayer64": "0",
+      "m_iName": "bad_filler_6",
+      "m_iTeamNum": "3",
+      "m_iszUnitName": "npc_dota_badguys_fillers",
+      "m_vecOrigin": "3736.000000 4095.000000 383.999756"
+    },
+    "npc_dota_courier": {
+      "Abilities": {
+        "courier_burst": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 0,
+          "m_iTeamNum": "2"
+        },
+        "courier_go_to_secretshop": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_iTeamNum": "2"
+        },
+        "courier_morph": {
+          "cooldown": 0,
+          "hidden": 1,
+          "level": 1,
+          "m_iTeamNum": "2"
+        },
+        "courier_return_stash_items": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_iTeamNum": "2"
+        },
+        "courier_return_to_base": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_iTeamNum": "2"
+        },
+        "courier_take_stash_items": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_iTeamNum": "2"
+        },
+        "courier_transfer_items": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_iTeamNum": "2"
+        }
+      },
+      "bkbcharges": 0,
+      "flying": 0,
+      "m_angRotation": "0.000000 0.000000 0.000000",
+      "m_bUseNeutralCreepBehavior": "0",
+      "m_flAccumulatedHeal": "0.000000",
+      "m_flMana": "0.000000",
+      "m_iCurrentLevel": "0",
+      "m_iHealth": "75",
+      "m_iIsControllableByPlayer64": "31",
+      "m_iName": "npc_dota_courier",
+      "m_iTeamNum": "2",
+      "m_iszUnitName": "npc_dota_courier",
+      "m_vecOrigin": "-6834.115723 -6297.915039 512.000000",
+      "ownerPlayerID": 1,
+      "respawntime": -212.71648
+    },
+    "npc_dota_effigy_statue": {
+      "Abilities": {
+        "backdoor_protection_in_base": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_iTeamNum": "3"
+        }
+      },
+      "bkbcharges": 0,
+      "m_angRotation": "0.000000 224.999985 0.000000",
+      "m_bUseNeutralCreepBehavior": "0",
+      "m_flAccumulatedHeal": "0.000000",
+      "m_flMana": "0.000000",
+      "m_iCurrentLevel": "1",
+      "m_iHealth": "500",
+      "m_iIsControllableByPlayer64": "0",
+      "m_iName": "bad_filler_12",
+      "m_iTeamNum": "3",
+      "m_iszUnitName": "npc_dota_badguys_fillers",
+      "m_vecOrigin": "5732.000000 4263.419922 408.999756"
+    },
+    "npc_dota_fort": {
+      "Abilities": {
+        "backdoor_protection_in_base": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_iTeamNum": "2"
+        }
+      },
+      "bkbcharges": 0,
+      "m_angRotation": "0.000000 345.000000 0.000000",
+      "m_bUseNeutralCreepBehavior": "0",
+      "m_flAccumulatedHeal": "0.000000",
+      "m_flMana": "0.000000",
+      "m_iCurrentLevel": "1",
+      "m_iHealth": "4250",
+      "m_iIsControllableByPlayer64": "0",
+      "m_iName": "dota_goodguys_fort",
+      "m_iTeamNum": "2",
+      "m_iszUnitName": "npc_dota_goodguys_fort",
+      "m_vecOrigin": "-5931.996582 -5347.996582 383.999878"
+    },
+    "npc_dota_hero_announcer": {
+      "bkbcharges": 0,
+      "m_angRotation": "0.000000 0.000000 0.000000",
+      "m_bUseNeutralCreepBehavior": "0",
+      "m_flAccumulatedHeal": "0.000000",
+      "m_flMana": "0.000000",
+      "m_iCurrentLevel": "1",
+      "m_iHealth": "150",
+      "m_iIsControllableByPlayer64": "0",
+      "m_iName": "Announcer",
+      "m_iTeamNum": "4",
+      "m_iszUnitName": "npc_dota_hero_announcer",
+      "m_vecOrigin": "0.000000 0.000000 0.000000"
+    },
+    "npc_dota_hero_announcer_killing_spree": {
+      "bkbcharges": 0,
+      "m_angRotation": "0.000000 0.000000 0.000000",
+      "m_bUseNeutralCreepBehavior": "0",
+      "m_flAccumulatedHeal": "0.000000",
+      "m_flMana": "0.000000",
+      "m_iCurrentLevel": "1",
+      "m_iHealth": "150",
+      "m_iIsControllableByPlayer64": "0",
+      "m_iName": "Announcer",
+      "m_iTeamNum": "4",
+      "m_iszUnitName": "npc_dota_hero_announcer_killing_spree",
+      "m_vecOrigin": "0.000000 0.000000 0.000000"
+    },
+    "npc_dota_roshan": {
+      "Abilities": {
+        "roshan_bash": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_iTeamNum": "4"
+        },
+        "roshan_devotion": {
+          "cooldown": 0,
+          "hidden": 1,
+          "level": 1,
+          "m_iTeamNum": "4"
+        },
+        "roshan_inherent_buffs": {
+          "cooldown": 0,
+          "hidden": 1,
+          "level": 1,
+          "m_iTeamNum": "4"
+        },
+        "roshan_slam": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_iTeamNum": "4"
+        },
+        "roshan_spell_block": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_iTeamNum": "4"
+        }
+      },
+      "Inventory": {
+        "item_aegis": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_bPurchasedWhileDead": "0",
+          "m_flAssembledTime": "130.398895",
+          "m_flPurchaseTime": "130.398895",
+          "m_iCurrentCharges": "0",
+          "m_iSecondaryCharges": "0",
+          "m_iTeamNum": "4",
+          "owner": "npc_dota_roshan",
+          "slot": 0
+        }
+      },
+      "bkbcharges": 0,
+      "m_angRotation": "0.000000 200.000000 0.000000",
+      "m_bUseNeutralCreepBehavior": "1",
+      "m_flAccumulatedHeal": "0.000000",
+      "m_flMana": "0.000000",
+      "m_iCurrentLevel": "30",
+      "m_iHealth": "7500",
+      "m_iIsControllableByPlayer64": "0",
+      "m_iName": "npc_dota_roshan",
+      "m_iTeamNum": "4",
+      "m_iszUnitName": "npc_dota_roshan",
+      "m_vecOrigin": "4320.000000 -1824.000000 159.998047"
+    },
+    "npc_dota_tower": {
+      "Abilities": {
+        "backdoor_protection_in_base": {
+          "cooldown": 0,
+          "hidden": 0,
+          "level": 1,
+          "m_iTeamNum": "2"
+        }
+      },
+      "bkbcharges": 0,
+      "m_angRotation": "0.000000 45.000000 0.000000",
+      "m_bUseNeutralCreepBehavior": "0",
+      "m_flAccumulatedHeal": "0.000000",
+      "m_flMana": "0.000000",
+      "m_iCurrentLevel": "4",
+      "m_iHealth": "1600",
+      "m_iIsControllableByPlayer64": "0",
+      "m_iName": "dota_goodguys_tower4_bot",
+      "m_iTeamNum": "2",
+      "m_iszUnitName": "npc_dota_goodguys_tower4",
+      "m_vecOrigin": "-5392.000000 -5168.000000 383.999878"
+    },
+    "npc_dota_ward_base": {
+      "bkbcharges": 0,
+      "m_angRotation": "0.000000 -81.332275 0.000000",
+      "m_bUseNeutralCreepBehavior": "0",
+      "m_flAccumulatedHeal": "0.000000",
+      "m_flMana": "0.000000",
+      "m_iCurrentLevel": "0",
+      "m_iDuration": "390",
+      "m_iHealth": "200",
+      "m_iIsControllableByPlayer64": "0",
+      "m_iName": "npc_dota_ward_base",
+      "m_iTeamNum": "2",
+      "m_iszUnitName": "npc_dota_observer_wards",
+      "m_vecOrigin": "4042.437500 -3351.687500 384.000000"
+    }
+  },
+  "dire_deaths": 0,
+  "dire_glyph_cooldown": -212.71648,
+  "dotatime": 0,
+  "firstblood": 1,
+  "gameid": 0,
+  "gametime": 212.71648,
+  "matchid": 1560315800,
+  "radiant_deaths": 0,
+  "radiant_glyph_cooldown": -212.71648,
+  "runespawntime": 0,
+  "savetime": 1434580951,
+  "version": 1
+}
