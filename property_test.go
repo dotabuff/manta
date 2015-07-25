@@ -7,7 +7,6 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/davecgh/go-spew/spew"
 	"github.com/dotabuff/manta/dota"
 	"github.com/golang/protobuf/proto"
 	"github.com/stretchr/testify/assert"
@@ -49,8 +48,8 @@ func TestReadProperties(t *testing.T) {
 		*/
 		{
 			tableName:   "CDOTATeam",
-			run:         false,
-			debug:       true,
+			run:         true,
+			debug:       false,
 			expectCount: 15,
 			expectKeys: map[string]interface{}{
 				// 15 index bits, leaves 1 byte unaccounted for.
@@ -63,7 +62,7 @@ func TestReadProperties(t *testing.T) {
 				// manta.(*reader).dumpBits: @ bit 00029 (byte 003 + 5)  | binary: 0 | uint8: 0   | var32: 0           | varu32: 0          | varu64: 0                    | uint64: 10896237295410610176           | bitfloat32: -6.1390764e+22 | string: -
 				// manta.(*reader).dumpBits: @ bit 00030 (byte 003 + 6)  | binary: 0 | uint8: 0   | var32: 0           | varu32: 0          | varu64: 0                    | uint64: 5448118647705305088            | bitfloat32: 6.6551657e+30 | string: -
 				// manta.(*reader).dumpBits: @ bit 00031 (byte 003 + 7)  | binary: 0 | uint8: 0   | var32: 0           | varu32: 0          | varu64: 0                    | uint64: 11947431360707428352           | bitfloat32: -0.00020217896 | string: -
-				"m_iTeamNum": uint8(0),
+				"m_iTeamNum": uint64(0),
 				// Maybe a single bit to say no data / zero entries?
 				// manta.(*reader).dumpBits: @ bit 00032 (byte 004 + 0)  | binary: 0 | uint8: 0   | var32: 0           | varu32: 0          | varu64: 0                    | uint64: 15197087717208489984           | bitfloat32: -3.8280597e+17 | string: -
 				"m_aPlayers": uint32(0), // Most certainly wrong
@@ -80,7 +79,7 @@ func TestReadProperties(t *testing.T) {
 				// manta.(*reader).dumpBits: @ bit 00153 (byte 019 + 1)  | binary: 0 | uint8: 0   | var32: 0           | varu32: 0          | varu64: 0                    | uint64: ERR                            | bitfloat32: 0            | string: -
 				"m_iBarracksKills": int32(0),
 				// manta.(*reader).dumpBits: @ bit 00161 (byte 020 + 1)  | binary: 0 | uint8: 0   | var32: 0           | varu32: 0          | varu64: 0                    | uint64: ERR                            | bitfloat32: 0            | string: -
-				"m_unTournamentTeamID": uint32(0),
+				"m_unTournamentTeamID": uint64(0),
 				// manta.(*reader).dumpBits: @ bit 00169 (byte 021 + 1)  | binary: 0 | uint8: 0   | var32: 0           | varu32: 0          | varu64: 0                    | uint64: ERR                            | bitfloat32: 0            | string: -
 				"m_ulTeamLogo": uint64(0),
 				// manta.(*reader).dumpBits: @ bit 00177 (byte 022 + 1)  | binary: 0 | uint8: 0   | var32: 0           | varu32: 0          | varu64: 0                    | uint64: ERR                            | bitfloat32: 0            | string: -
@@ -813,6 +812,34 @@ func TestReadProperties(t *testing.T) {
 			},
 		},
 
+		{
+			tableName:   "CFogController",
+			run:         true,
+			debug:       false,
+			expectCount: 21,
+			expectKeys: map[string]interface{}{
+				"colorPrimary":         uint64(4294963904),
+				"colorSecondary":       uint64(33554431),
+				"colorPrimaryLerpTo":   uint64(4294963904),
+				"colorSecondaryLerpTo": uint64(33554431),
+				"enable":               true,
+				"blend":                false,
+				"m_bNoReflectionFog":   true,
+			},
+		},
+
+		{
+			tableName:   "CDOTASpectatorGraphManagerProxy",
+			run:         true,
+			debug:       false,
+			expectCount: 398,
+			expectKeys: map[string]interface{}{
+				"m_rgPlayerGraphData.0009":   uint32(2097151),
+				"m_rgDireTotalEarnedXP.0063": int32(0),
+				"m_nGoldGraphVersion":        int32(3),
+			},
+		},
+
 		/*
 			WIP:
 
@@ -859,12 +886,12 @@ func TestReadProperties(t *testing.T) {
 		assert.Equal(len(props), s.expectCount)
 
 		for k, v := range s.expectKeys {
-			if v != props[k] {
-				spew.Dump(v)
-				spew.Dump(props[k])
-				_panicf("Variables not equal, %s", k)
-			}
+			assert.EqualValues(v, props[k])
 		}
+
+		// There shouldn't be more than 8 bits left in the buffer
+		_debugf("Remaining bits %v", r.remBits())
+		assert.True(r.remBits() < 8)
 
 		// Re-enable debugging
 		debugMode = true
