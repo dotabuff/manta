@@ -49,7 +49,7 @@ func ParseCDemoSaveGame(s *dota.CDemoSaveGame) (save *SaveGame, err error) {
 }
 
 type SaveGame struct {
-	// Heroes  map[string]SaveGameHero   `json:"Heroes"`
+	Heroes               map[string]SaveGameHero                 `json:"Heroes"`
 	Players              map[string]SaveGamePlayer               `json:"Players"`
 	Roshan               SaveGameRoshan                          `json:"Roshan"`
 	StockInfo            map[string]map[string]SaveGameStockInfo `json:"StockInfo"`
