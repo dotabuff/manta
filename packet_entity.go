@@ -9,7 +9,7 @@ type packetEntity struct {
 	index      int32
 	classId    int32
 	className  string
-	sendTable  *sendTable
+	sendTable  *SendTable
 	properties map[string]interface{}
 }
 
@@ -77,7 +77,7 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 			}
 
 			// Get the associated send table.
-			if pe.sendTable, ok = p.sendTables.getTableByName(pe.className); !ok {
+			if pe.sendTable, ok = p.SendTables.GetTableByName(pe.className); !ok {
 				_panicf("unable to find sendtable for class %s", pe.className)
 			}
 

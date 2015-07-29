@@ -17,7 +17,7 @@ type stringTables struct {
 }
 
 // Retrieves a string table by its name. Check the bool.
-func (ts *stringTables) getTableByName(name string) (*stringTable, bool) {
+func (ts *stringTables) GetTableByName(name string) (*stringTable, bool) {
 	i, ok := ts.nameIndex[name]
 	if !ok {
 		return nil, false
@@ -65,7 +65,7 @@ func (p *Parser) onCDemoStringTables(m *dota.CDemoStringTables) error {
 func (p *Parser) onCSVCMsg_CreateStringTable(m *dota.CSVCMsg_CreateStringTable) error {
 	// Create a new string table at the next index position
 	t := &stringTable{
-		index:             p.stringTables.nextIndex,
+		index:             p.StringTables.nextIndex,
 		name:              m.GetName(),
 		items:             make(map[int32]*stringTableItem),
 		userDataFixedSize: m.GetUserDataFixedSize(),
@@ -73,7 +73,7 @@ func (p *Parser) onCSVCMsg_CreateStringTable(m *dota.CSVCMsg_CreateStringTable) 
 	}
 
 	// Increment the index
-	p.stringTables.nextIndex += 1
+	p.StringTables.nextIndex += 1
 
 	// Decompress the data if necessary
 	buf := m.GetStringData()
@@ -93,8 +93,8 @@ func (p *Parser) onCSVCMsg_CreateStringTable(m *dota.CSVCMsg_CreateStringTable) 
 	}
 
 	// Add the table to the parser state
-	p.stringTables.tables[t.index] = t
-	p.stringTables.nameIndex[t.name] = t.index
+	p.StringTables.tables[t.index] = t
+	p.StringTables.nameIndex[t.name] = t.index
 
 	// Apply the updates to baseline state
 	if t.name == "instancebaseline" {
@@ -107,7 +107,7 @@ func (p *Parser) onCSVCMsg_CreateStringTable(m *dota.CSVCMsg_CreateStringTable) 
 // Internal callback for CSVCMsg_UpdateStringTable.
 func (p *Parser) onCSVCMsg_UpdateStringTable(m *dota.CSVCMsg_UpdateStringTable) error {
 	// TODO: integrate
-	t, ok := p.stringTables.tables[m.GetTableId()]
+	t, ok := p.StringTables.tables[m.GetTableId()]
 	if !ok {
 		_panicf("missing string table %d", m.GetTableId())
 	}

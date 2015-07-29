@@ -17,7 +17,7 @@ func (p *Parser) onCDemoClassInfo(m *dota.CDemoClassInfo) error {
 	for _, c := range m.GetClasses() {
 		p.classInfo[c.GetClassId()] = c.GetNetworkName()
 
-		if _, ok := p.sendTables.getTableByName(c.GetNetworkName()); !ok {
+		if _, ok := p.SendTables.GetTableByName(c.GetNetworkName()); !ok {
 			_panicf("unable to find table for class %d (%s)", c.GetClassId, c.GetNetworkName())
 		}
 	}
@@ -38,7 +38,7 @@ func (p *Parser) updateInstanceBaseline() {
 		return
 	}
 
-	stringTable, ok := p.stringTables.getTableByName("instancebaseline")
+	stringTable, ok := p.StringTables.GetTableByName("instancebaseline")
 	if !ok {
 		_debugf("skipping updateInstanceBaseline: no instancebaseline string table")
 		return
@@ -64,7 +64,7 @@ func (p *Parser) updateInstanceBaseline() {
 		}
 
 		// Get the send table associated with the class.
-		sendTable, ok := p.sendTables.getTableByName(className)
+		sendTable, ok := p.SendTables.GetTableByName(className)
 		if !ok {
 			_panicf("unable to find send table %s for instancebaseline key %d", className, classId)
 		}

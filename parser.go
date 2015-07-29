@@ -29,8 +29,8 @@ type Parser struct {
 	classIdSize       int
 	classBaseline     map[int32]map[string]interface{}
 	packetEntities    map[int32]*packetEntity
-	sendTables        *sendTables
-	stringTables      *stringTables
+	SendTables        *sendTables
+	StringTables      *stringTables
 	spawnGroups       map[uint32]*spawnGroup
 	gameEventNames    map[int32]string
 	gameEventTypes    map[string]*gameEventType
@@ -65,7 +65,7 @@ func NewParser(buf []byte) (*Parser, error) {
 		classInfo:         make(map[int32]string),
 		classBaseline:     make(map[int32]map[string]interface{}),
 		packetEntities:    make(map[int32]*packetEntity),
-		stringTables:      newStringTables(),
+		StringTables:      newStringTables(),
 		spawnGroups:       make(map[uint32]*spawnGroup),
 		gameEventNames:    make(map[int32]string),
 		gameEventTypes:    make(map[string]*gameEventType),
@@ -154,7 +154,7 @@ func (p *Parser) Stop() {
 
 // Performs a lookup on a string table by an entry index.
 func (p *Parser) LookupStringByIndex(table string, index int32) (string, bool) {
-	t, ok := p.stringTables.getTableByName(table)
+	t, ok := p.StringTables.GetTableByName(table)
 	if !ok {
 		return "", false
 	}

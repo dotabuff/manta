@@ -2,7 +2,7 @@ package manta
 
 // Reads properties using a reader and send table.
 // Note: this is a work in progress and is almost certainly completely wrong.
-func readProperties(r *reader, t *sendTable) (result map[string]interface{}) {
+func readProperties(r *reader, t *SendTable) (result map[string]interface{}) {
 	defer func() {
 		if err := recover(); err != nil {
 			_debugf("recovered: %s", err)
@@ -16,11 +16,11 @@ func readProperties(r *reader, t *sendTable) (result map[string]interface{}) {
 	// We may need to calculate indexBits based on the max number of properties.
 	// So far this has not shown any better results, but it's here as a reminder
 	// that we've considered it (and continue to).
-	indexBits := log2(len(t.props))
+	indexBits := log2(len(t.Props))
 
 	// Just debugging.
 	_debugf("table %s has %d props, %d bits, indexBits=%d",
-		t.name, len(t.props), r.size, indexBits)
+		t.Name, len(t.Props), r.size, indexBits)
 
 	// If we're in debugging mode, this simply dumps analysis of the entire buffer.
 	r.dumpRemaining()
@@ -37,7 +37,7 @@ func readProperties(r *reader, t *sendTable) (result map[string]interface{}) {
 	// the magic here, but for now this lets us further our progress and learn
 	// more about the structure.
 	seekBits := 0
-	switch t.name {
+	switch t.Name {
 	case "CDOTA_DataSpectator": // 3 fields, 12 entries.
 		seekBits = 9 // 21 total header - 12 field bits
 	case "CDOTATeam": // 15 fields, 15 entries. 1 unknown/array type
@@ -53,7 +53,7 @@ func readProperties(r *reader, t *sendTable) (result map[string]interface{}) {
 		seekBits = 2218 // 4274 first pos - 2056 field bits.
 	}
 
-	throwBits := len(t.props)
+	throwBits := len(t.Props)
 	_debugf("skipping %d bits (%d for table, %d inferred field index)", seekBits+throwBits, seekBits, throwBits)
 	r.dumpBits(seekBits + throwBits)
 	r.seekBits(seekBits + throwBits)
@@ -67,12 +67,12 @@ func readProperties(r *reader, t *sendTable) (result map[string]interface{}) {
 	var v interface{}
 
 	// Iterate through the props in the sendtable.
-	for _, prop := range t.props {
+	for _, prop := range t.Props {
 		// Just debugging help.
 		_debugf("reading %s from position %d/%d", prop.Describe(), r.pos, r.size)
 		pos := r.pos
 
-		k = prop.varName
+		k = prop.VarName
 
 		// While debugging, print the next bit ahead of us.
 		r.dumpBits(1)
@@ -80,8 +80,8 @@ func readProperties(r *reader, t *sendTable) (result map[string]interface{}) {
 		// Temporary: warn if we haven't flattened something with a serializer.
 		// We'll want to pre-flatten these, but just make sure we're not overstepping
 		// any bounds for now.
-		if prop.fieldSerializerIndex != nil {
-			_panicf("field %s needs flattening!", prop.varName)
+		if prop.FieldSerializerIndex != nil {
+			_panicf("field %s needs flattening!", prop.VarName)
 		}
 
 		// Read the property off based on the type. This is hackey, and while I
@@ -89,14 +89,14 @@ func readProperties(r *reader, t *sendTable) (result map[string]interface{}) {
 		// may simply be an understanding of types mapped right in the game
 		// engine. That would mean that we need to recognize types by name (or id)
 		// which is currently what we're doing. Let's hope we can do better here.
-		switch prop.dtName {
+		switch prop.DtName {
 		case "float32":
 			// This will be tricky as floats can be encoded in oh-so-many ways.
 
 			// We haven't yet determined how to read a float with a bitcount.
-			if prop.bitCount != nil {
+			if prop.BitCount != nil {
 				// This uses the source 1 calculation using bits, lowValue, highValue.
-				v = r.readFloat32Bits(*prop.bitCount, prop.lowValue, prop.highValue)
+				v = r.readFloat32Bits(*prop.BitCount, prop.LowValue, prop.HighValue)
 			} else {
 				// This just reads a fixed length IEEE 754 float32. It might be 100%
 				// wrong, and it will at least be wrong in cases where we have
@@ -165,7 +165,7 @@ func readProperties(r *reader, t *sendTable) (result map[string]interface{}) {
 		default:
 			// Read unknown types as a varint, which seems to be the most popular
 			// way to read most entries.
-			_debugf("WARN: reading %s (%s) as varint32", k, prop.dtName)
+			_debugf("WARN: reading %s (%s) as varint32", k, prop.DtName)
 			v = r.readVarInt32()
 		}
 

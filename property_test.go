@@ -831,14 +831,14 @@ func TestReadProperties(t *testing.T) {
 		panic(err)
 	}
 
-	st, err := parseSendTables(m)
+	st, err := ParseSendTables(m)
 	assert.Nil(err)
 
 	// Iterate through scenarios
 	for _, s := range scenarios {
 		// Load up a fixture
 		buf := _read_fixture(_sprintf("instancebaseline/1560315800_%s.rawbuf", s.tableName))
-		st, ok := st.getTableByName(s.tableName)
+		st, ok := st.GetTableByName(s.tableName)
 		assert.True(ok)
 
 		// Optionally skip
@@ -876,7 +876,7 @@ func TestAnalyzeInstancebaselines(t *testing.T) {
 		panic(err)
 	}
 
-	st, err := parseSendTables(m)
+	st, err := ParseSendTables(m)
 	assert.Nil(err)
 
 	onlyFixture := os.Getenv("ONLY_FIXTURE")
@@ -886,7 +886,7 @@ func TestAnalyzeInstancebaselines(t *testing.T) {
 	for _, f := range files {
 		fileName := path.Base(f)
 		tableName := strings.Split(strings.SplitN(fileName, "_", 2)[1], ".")[0]
-		sendTable, ok := st.getTableByName(tableName)
+		sendTable, ok := st.GetTableByName(tableName)
 		assert.True(ok)
 
 		if onlyFixture != "" && onlyFixture != tableName {
@@ -908,12 +908,12 @@ func TestAnalyzeInstancebaselines(t *testing.T) {
 		if os.Getenv("ALL_BITS") != "" {
 			nDump = r.size
 		}
-		_debugf("fixture %s (%d props) has first 1 at %s", colorBold(tableName), len(sendTable.props), colorValue(first1))
-		for i := 0; i < len(sendTable.props); i++ {
+		_debugf("fixture %s (%d props) has first 1 at %s", colorBold(tableName), len(sendTable.Props), colorValue(first1))
+		for i := 0; i < len(sendTable.Props); i++ {
 			if i > 3 {
 				break
 			}
-			_debugf("prop %d: %s", i, sendTable.props[i].Describe())
+			_debugf("prop %d: %s", i, sendTable.Props[i].Describe())
 		}
 		r.dumpBits(nDump)
 
