@@ -1100,7 +1100,9 @@ const (
 	CMsgDOTAPopup_MM_LOW_PRI_ONLY_CASUAL_AR                             CMsgDOTAPopup_PopupID = 60
 	CMsgDOTAPopup_CNY2015_ONCE_PER_ROUND                                CMsgDOTAPopup_PopupID = 61
 	CMsgDOTAPopup_LOBBY_FULL                                            CMsgDOTAPopup_PopupID = 62
+	CMsgDOTAPopup_TI2015_POINTS_EARNED                                  CMsgDOTAPopup_PopupID = 63
 	CMsgDOTAPopup_CUSTOM_GAME_INCORRECT_VERSION                         CMsgDOTAPopup_PopupID = 64
+	CMsgDOTAPopup_COMPETITIVE_MM_MMR_TOO_HIGH_S2                        CMsgDOTAPopup_PopupID = 65
 )
 
 var CMsgDOTAPopup_PopupID_name = map[int32]string{
@@ -1167,7 +1169,9 @@ var CMsgDOTAPopup_PopupID_name = map[int32]string{
 	60: "MM_LOW_PRI_ONLY_CASUAL_AR",
 	61: "CNY2015_ONCE_PER_ROUND",
 	62: "LOBBY_FULL",
+	63: "TI2015_POINTS_EARNED",
 	64: "CUSTOM_GAME_INCORRECT_VERSION",
+	65: "COMPETITIVE_MM_MMR_TOO_HIGH_S2",
 }
 var CMsgDOTAPopup_PopupID_value = map[string]int32{
 	"KICKED_FROM_LOBBY":                                     0,
@@ -1233,7 +1237,9 @@ var CMsgDOTAPopup_PopupID_value = map[string]int32{
 	"MM_LOW_PRI_ONLY_CASUAL_AR":                             60,
 	"CNY2015_ONCE_PER_ROUND":                                61,
 	"LOBBY_FULL":                                            62,
+	"TI2015_POINTS_EARNED":                                  63,
 	"CUSTOM_GAME_INCORRECT_VERSION":                         64,
+	"COMPETITIVE_MM_MMR_TOO_HIGH_S2":                        65,
 }
 
 func (x CMsgDOTAPopup_PopupID) Enum() *CMsgDOTAPopup_PopupID {
@@ -2171,17 +2177,20 @@ const (
 	CMsgDOTARedeemEventPrizeResponse_Success            CMsgDOTARedeemEventPrizeResponse_ResultCode = 0
 	CMsgDOTARedeemEventPrizeResponse_ServerError        CMsgDOTARedeemEventPrizeResponse_ResultCode = 1
 	CMsgDOTARedeemEventPrizeResponse_InsufficientPoints CMsgDOTARedeemEventPrizeResponse_ResultCode = 2
+	CMsgDOTARedeemEventPrizeResponse_PointsHeld         CMsgDOTARedeemEventPrizeResponse_ResultCode = 3
 )
 
 var CMsgDOTARedeemEventPrizeResponse_ResultCode_name = map[int32]string{
 	0: "Success",
 	1: "ServerError",
 	2: "InsufficientPoints",
+	3: "PointsHeld",
 }
 var CMsgDOTARedeemEventPrizeResponse_ResultCode_value = map[string]int32{
 	"Success":            0,
 	"ServerError":        1,
 	"InsufficientPoints": 2,
+	"PointsHeld":         3,
 }
 
 func (x CMsgDOTARedeemEventPrizeResponse_ResultCode) Enum() *CMsgDOTARedeemEventPrizeResponse_ResultCode {
@@ -3355,6 +3364,7 @@ type CMsgPracticeLobbySetDetails struct {
 	LanHostPingToServerRegion *uint32              `protobuf:"varint,32,opt,name=lan_host_ping_to_server_region" json:"lan_host_ping_to_server_region,omitempty"`
 	Visibility                *DOTALobbyVisibility `protobuf:"varint,33,opt,name=visibility,enum=dota.DOTALobbyVisibility,def=0" json:"visibility,omitempty"`
 	CustomGameCrc             *uint64              `protobuf:"fixed64,34,opt,name=custom_game_crc" json:"custom_game_crc,omitempty"`
+	CustomGameTimestamp       *uint32              `protobuf:"fixed32,37,opt,name=custom_game_timestamp" json:"custom_game_timestamp,omitempty"`
 	XXX_unrecognized          []byte               `json:"-"`
 }
 
@@ -3589,6 +3599,13 @@ func (m *CMsgPracticeLobbySetDetails) GetVisibility() DOTALobbyVisibility {
 func (m *CMsgPracticeLobbySetDetails) GetCustomGameCrc() uint64 {
 	if m != nil && m.CustomGameCrc != nil {
 		return *m.CustomGameCrc
+	}
+	return 0
+}
+
+func (m *CMsgPracticeLobbySetDetails) GetCustomGameTimestamp() uint32 {
+	if m != nil && m.CustomGameTimestamp != nil {
+		return *m.CustomGameTimestamp
 	}
 	return 0
 }
@@ -4192,11 +4209,12 @@ func (m *CMsgLobbyListResponse) GetLobbies() []*CMsgPracticeLobbyListResponseEnt
 }
 
 type CMsgPracticeLobbyJoin struct {
-	LobbyId          *uint64 `protobuf:"varint,1,opt,name=lobby_id" json:"lobby_id,omitempty"`
-	ClientVersion    *uint32 `protobuf:"varint,2,opt,name=client_version" json:"client_version,omitempty"`
-	PassKey          *string `protobuf:"bytes,3,opt,name=pass_key" json:"pass_key,omitempty"`
-	CustomGameCrc    *uint64 `protobuf:"fixed64,4,opt,name=custom_game_crc" json:"custom_game_crc,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	LobbyId             *uint64 `protobuf:"varint,1,opt,name=lobby_id" json:"lobby_id,omitempty"`
+	ClientVersion       *uint32 `protobuf:"varint,2,opt,name=client_version" json:"client_version,omitempty"`
+	PassKey             *string `protobuf:"bytes,3,opt,name=pass_key" json:"pass_key,omitempty"`
+	CustomGameCrc       *uint64 `protobuf:"fixed64,4,opt,name=custom_game_crc" json:"custom_game_crc,omitempty"`
+	CustomGameTimestamp *uint32 `protobuf:"fixed32,5,opt,name=custom_game_timestamp" json:"custom_game_timestamp,omitempty"`
+	XXX_unrecognized    []byte  `json:"-"`
 }
 
 func (m *CMsgPracticeLobbyJoin) Reset()         { *m = CMsgPracticeLobbyJoin{} }
@@ -4227,6 +4245,13 @@ func (m *CMsgPracticeLobbyJoin) GetPassKey() string {
 func (m *CMsgPracticeLobbyJoin) GetCustomGameCrc() uint64 {
 	if m != nil && m.CustomGameCrc != nil {
 		return *m.CustomGameCrc
+	}
+	return 0
+}
+
+func (m *CMsgPracticeLobbyJoin) GetCustomGameTimestamp() uint32 {
+	if m != nil && m.CustomGameTimestamp != nil {
+		return *m.CustomGameTimestamp
 	}
 	return 0
 }
@@ -5300,7 +5325,6 @@ type CMsgDOTAMatch struct {
 	DireTeamTag         *string                             `protobuf:"bytes,38,opt,name=dire_team_tag" json:"dire_team_tag,omitempty"`
 	SeriesId            *uint32                             `protobuf:"varint,39,opt,name=series_id" json:"series_id,omitempty"`
 	SeriesType          *uint32                             `protobuf:"varint,40,opt,name=series_type" json:"series_type,omitempty"`
-	CustomGameId        *uint64                             `protobuf:"varint,42,opt,name=custom_game_id" json:"custom_game_id,omitempty"`
 	BroadcasterChannels []*CMsgDOTAMatch_BroadcasterChannel `protobuf:"bytes,43,rep,name=broadcaster_channels" json:"broadcaster_channels,omitempty"`
 	Engine              *uint32                             `protobuf:"varint,44,opt,name=engine" json:"engine,omitempty"`
 	CustomGameData      *CMsgDOTAMatch_CustomGameData       `protobuf:"bytes,45,opt,name=custom_game_data" json:"custom_game_data,omitempty"`
@@ -5569,13 +5593,6 @@ func (m *CMsgDOTAMatch) GetSeriesId() uint32 {
 func (m *CMsgDOTAMatch) GetSeriesType() uint32 {
 	if m != nil && m.SeriesType != nil {
 		return *m.SeriesType
-	}
-	return 0
-}
-
-func (m *CMsgDOTAMatch) GetCustomGameId() uint64 {
-	if m != nil && m.CustomGameId != nil {
-		return *m.CustomGameId
 	}
 	return 0
 }
@@ -11121,24 +11138,16 @@ func (m *CMsgSockAddrList) GetPort() []uint32 {
 }
 
 type CMsgMatchmakingGroupServerSample struct {
-	ServersByGroupLegacySwapped []*CMsgSockAddrList `protobuf:"bytes,1,rep,name=servers_by_group_legacy_swapped" json:"servers_by_group_legacy_swapped,omitempty"`
-	ServersByGroup              []*CMsgSockAddrList `protobuf:"bytes,5,rep,name=servers_by_group" json:"servers_by_group,omitempty"`
-	ServersToPing               *uint32             `protobuf:"varint,2,opt,name=servers_to_ping" json:"servers_to_ping,omitempty"`
-	ReplyOdds                   *uint32             `protobuf:"varint,3,opt,name=reply_odds" json:"reply_odds,omitempty"`
-	ReplyDetailedOdds           *uint32             `protobuf:"varint,4,opt,name=reply_detailed_odds" json:"reply_detailed_odds,omitempty"`
-	XXX_unrecognized            []byte              `json:"-"`
+	ServersByGroup    []*CMsgSockAddrList `protobuf:"bytes,5,rep,name=servers_by_group" json:"servers_by_group,omitempty"`
+	ServersToPing     *uint32             `protobuf:"varint,2,opt,name=servers_to_ping" json:"servers_to_ping,omitempty"`
+	ReplyOdds         *uint32             `protobuf:"varint,3,opt,name=reply_odds" json:"reply_odds,omitempty"`
+	ReplyDetailedOdds *uint32             `protobuf:"varint,4,opt,name=reply_detailed_odds" json:"reply_detailed_odds,omitempty"`
+	XXX_unrecognized  []byte              `json:"-"`
 }
 
 func (m *CMsgMatchmakingGroupServerSample) Reset()         { *m = CMsgMatchmakingGroupServerSample{} }
 func (m *CMsgMatchmakingGroupServerSample) String() string { return proto.CompactTextString(m) }
 func (*CMsgMatchmakingGroupServerSample) ProtoMessage()    {}
-
-func (m *CMsgMatchmakingGroupServerSample) GetServersByGroupLegacySwapped() []*CMsgSockAddrList {
-	if m != nil {
-		return m.ServersByGroupLegacySwapped
-	}
-	return nil
-}
 
 func (m *CMsgMatchmakingGroupServerSample) GetServersByGroup() []*CMsgSockAddrList {
 	if m != nil {
@@ -11236,6 +11245,7 @@ type CMsgDOTAMatchmakingStatsResponse struct {
 	SearchingPlayersByGroup        []uint32                          `protobuf:"varint,2,rep,name=searching_players_by_group" json:"searching_players_by_group,omitempty"`
 	SearchingPlayersByGroupSource2 []uint32                          `protobuf:"varint,7,rep,name=searching_players_by_group_source2" json:"searching_players_by_group_source2,omitempty"`
 	DisabledGroups                 *uint32                           `protobuf:"varint,3,opt,name=disabled_groups" json:"disabled_groups,omitempty"`
+	DisabledGroupsSource2          *uint32                           `protobuf:"varint,8,opt,name=disabled_groups_source2" json:"disabled_groups_source2,omitempty"`
 	GameserverSample               *CMsgMatchmakingGroupServerSample `protobuf:"bytes,4,opt,name=gameserver_sample" json:"gameserver_sample,omitempty"`
 	GameserverSampleSource2        *CMsgMatchmakingGroupServerSample `protobuf:"bytes,6,opt,name=gameserver_sample_source2" json:"gameserver_sample_source2,omitempty"`
 	MaintenanceAlerts              *bool                             `protobuf:"varint,5,opt,name=maintenance_alerts" json:"maintenance_alerts,omitempty"`
@@ -11263,6 +11273,13 @@ func (m *CMsgDOTAMatchmakingStatsResponse) GetSearchingPlayersByGroupSource2() [
 func (m *CMsgDOTAMatchmakingStatsResponse) GetDisabledGroups() uint32 {
 	if m != nil && m.DisabledGroups != nil {
 		return *m.DisabledGroups
+	}
+	return 0
+}
+
+func (m *CMsgDOTAMatchmakingStatsResponse) GetDisabledGroupsSource2() uint32 {
+	if m != nil && m.DisabledGroupsSource2 != nil {
+		return *m.DisabledGroupsSource2
 	}
 	return 0
 }
@@ -14683,8 +14700,7 @@ func (m *CMsgGCToClientCustomGamePlayerCountResponse) GetSpectatorCount() uint64
 }
 
 type CMsgClientToGCCustomGamesFriendsPlayedRequest struct {
-	AccountId        *uint32 `protobuf:"varint,1,opt,name=account_id" json:"account_id,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	XXX_unrecognized []byte `json:"-"`
 }
 
 func (m *CMsgClientToGCCustomGamesFriendsPlayedRequest) Reset() {
@@ -14694,13 +14710,6 @@ func (m *CMsgClientToGCCustomGamesFriendsPlayedRequest) String() string {
 	return proto.CompactTextString(m)
 }
 func (*CMsgClientToGCCustomGamesFriendsPlayedRequest) ProtoMessage() {}
-
-func (m *CMsgClientToGCCustomGamesFriendsPlayedRequest) GetAccountId() uint32 {
-	if m != nil && m.AccountId != nil {
-		return *m.AccountId
-	}
-	return 0
-}
 
 type CMsgGCToClientCustomGamesFriendsPlayedResponse struct {
 	AccountId        *uint32                                                      `protobuf:"varint,1,opt,name=account_id" json:"account_id,omitempty"`

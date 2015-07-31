@@ -483,166 +483,6 @@ func (m *CBorderData_CBorderSide) GetColor() uint32 {
 	return 0
 }
 
-type CBorderImageData struct {
-	BorderTextureId      *uint32                            `protobuf:"varint,1,opt,name=border_texture_id" json:"border_texture_id,omitempty"`
-	PreserveMiddle       *bool                              `protobuf:"varint,2,opt,name=preserve_middle" json:"preserve_middle,omitempty"`
-	TopSlicePixels       *float64                           `protobuf:"fixed64,3,opt,name=top_slice_pixels" json:"top_slice_pixels,omitempty"`
-	RightSlicePixels     *float64                           `protobuf:"fixed64,4,opt,name=right_slice_pixels" json:"right_slice_pixels,omitempty"`
-	BottomSlicePixels    *float64                           `protobuf:"fixed64,5,opt,name=bottom_slice_pixels" json:"bottom_slice_pixels,omitempty"`
-	LeftSlicePixels      *float64                           `protobuf:"fixed64,6,opt,name=left_slice_pixels" json:"left_slice_pixels,omitempty"`
-	TopWidth             *CBorderImageData_CBorderWidthData `protobuf:"bytes,7,opt,name=top_width" json:"top_width,omitempty"`
-	RightWidth           *CBorderImageData_CBorderWidthData `protobuf:"bytes,8,opt,name=right_width" json:"right_width,omitempty"`
-	BottomWidth          *CBorderImageData_CBorderWidthData `protobuf:"bytes,9,opt,name=bottom_width" json:"bottom_width,omitempty"`
-	LeftWidth            *CBorderImageData_CBorderWidthData `protobuf:"bytes,10,opt,name=left_width" json:"left_width,omitempty"`
-	TopOutsetPixels      *float64                           `protobuf:"fixed64,11,opt,name=top_outset_pixels" json:"top_outset_pixels,omitempty"`
-	RightOutsetPixels    *float64                           `protobuf:"fixed64,12,opt,name=right_outset_pixels" json:"right_outset_pixels,omitempty"`
-	BottomOutsetPixels   *float64                           `protobuf:"fixed64,13,opt,name=bottom_outset_pixels" json:"bottom_outset_pixels,omitempty"`
-	LeftOutsetPixels     *float64                           `protobuf:"fixed64,14,opt,name=left_outset_pixels" json:"left_outset_pixels,omitempty"`
-	HorizontalRepeatType *uint32                            `protobuf:"varint,15,opt,name=horizontal_repeat_type" json:"horizontal_repeat_type,omitempty"`
-	VerticalRepeatType   *uint32                            `protobuf:"varint,16,opt,name=vertical_repeat_type" json:"vertical_repeat_type,omitempty"`
-	XXX_unrecognized     []byte                             `json:"-"`
-}
-
-func (m *CBorderImageData) Reset()         { *m = CBorderImageData{} }
-func (m *CBorderImageData) String() string { return proto.CompactTextString(m) }
-func (*CBorderImageData) ProtoMessage()    {}
-
-func (m *CBorderImageData) GetBorderTextureId() uint32 {
-	if m != nil && m.BorderTextureId != nil {
-		return *m.BorderTextureId
-	}
-	return 0
-}
-
-func (m *CBorderImageData) GetPreserveMiddle() bool {
-	if m != nil && m.PreserveMiddle != nil {
-		return *m.PreserveMiddle
-	}
-	return false
-}
-
-func (m *CBorderImageData) GetTopSlicePixels() float64 {
-	if m != nil && m.TopSlicePixels != nil {
-		return *m.TopSlicePixels
-	}
-	return 0
-}
-
-func (m *CBorderImageData) GetRightSlicePixels() float64 {
-	if m != nil && m.RightSlicePixels != nil {
-		return *m.RightSlicePixels
-	}
-	return 0
-}
-
-func (m *CBorderImageData) GetBottomSlicePixels() float64 {
-	if m != nil && m.BottomSlicePixels != nil {
-		return *m.BottomSlicePixels
-	}
-	return 0
-}
-
-func (m *CBorderImageData) GetLeftSlicePixels() float64 {
-	if m != nil && m.LeftSlicePixels != nil {
-		return *m.LeftSlicePixels
-	}
-	return 0
-}
-
-func (m *CBorderImageData) GetTopWidth() *CBorderImageData_CBorderWidthData {
-	if m != nil {
-		return m.TopWidth
-	}
-	return nil
-}
-
-func (m *CBorderImageData) GetRightWidth() *CBorderImageData_CBorderWidthData {
-	if m != nil {
-		return m.RightWidth
-	}
-	return nil
-}
-
-func (m *CBorderImageData) GetBottomWidth() *CBorderImageData_CBorderWidthData {
-	if m != nil {
-		return m.BottomWidth
-	}
-	return nil
-}
-
-func (m *CBorderImageData) GetLeftWidth() *CBorderImageData_CBorderWidthData {
-	if m != nil {
-		return m.LeftWidth
-	}
-	return nil
-}
-
-func (m *CBorderImageData) GetTopOutsetPixels() float64 {
-	if m != nil && m.TopOutsetPixels != nil {
-		return *m.TopOutsetPixels
-	}
-	return 0
-}
-
-func (m *CBorderImageData) GetRightOutsetPixels() float64 {
-	if m != nil && m.RightOutsetPixels != nil {
-		return *m.RightOutsetPixels
-	}
-	return 0
-}
-
-func (m *CBorderImageData) GetBottomOutsetPixels() float64 {
-	if m != nil && m.BottomOutsetPixels != nil {
-		return *m.BottomOutsetPixels
-	}
-	return 0
-}
-
-func (m *CBorderImageData) GetLeftOutsetPixels() float64 {
-	if m != nil && m.LeftOutsetPixels != nil {
-		return *m.LeftOutsetPixels
-	}
-	return 0
-}
-
-func (m *CBorderImageData) GetHorizontalRepeatType() uint32 {
-	if m != nil && m.HorizontalRepeatType != nil {
-		return *m.HorizontalRepeatType
-	}
-	return 0
-}
-
-func (m *CBorderImageData) GetVerticalRepeatType() uint32 {
-	if m != nil && m.VerticalRepeatType != nil {
-		return *m.VerticalRepeatType
-	}
-	return 0
-}
-
-type CBorderImageData_CBorderWidthData struct {
-	WidthType        *uint32  `protobuf:"varint,1,opt,name=width_type" json:"width_type,omitempty"`
-	WidthValue       *float64 `protobuf:"fixed64,2,opt,name=width_value" json:"width_value,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
-}
-
-func (m *CBorderImageData_CBorderWidthData) Reset()         { *m = CBorderImageData_CBorderWidthData{} }
-func (m *CBorderImageData_CBorderWidthData) String() string { return proto.CompactTextString(m) }
-func (*CBorderImageData_CBorderWidthData) ProtoMessage()    {}
-
-func (m *CBorderImageData_CBorderWidthData) GetWidthType() uint32 {
-	if m != nil && m.WidthType != nil {
-		return *m.WidthType
-	}
-	return 0
-}
-
-func (m *CBorderImageData_CBorderWidthData) GetWidthValue() float64 {
-	if m != nil && m.WidthValue != nil {
-		return *m.WidthValue
-	}
-	return 0
-}
-
 type CBoxShadowData struct {
 	Inset            *bool    `protobuf:"varint,1,opt,name=inset" json:"inset,omitempty"`
 	HorizontalOffset *float64 `protobuf:"fixed64,2,opt,name=horizontal_offset" json:"horizontal_offset,omitempty"`
@@ -812,63 +652,65 @@ func (m *CMsgClipData) GetBottom() float64 {
 }
 
 type CMsgPushCompositingLayer struct {
-	LayerId               *uint64           `protobuf:"varint,1,opt,name=layer_id" json:"layer_id,omitempty"`
-	Width                 *float64          `protobuf:"fixed64,2,opt,name=width" json:"width,omitempty"`
-	Height                *float64          `protobuf:"fixed64,3,opt,name=height" json:"height,omitempty"`
-	LayerQuadTopLeftX     *float64          `protobuf:"fixed64,4,opt,name=layer_quad_top_left_x" json:"layer_quad_top_left_x,omitempty"`
-	LayerQuadTopLeftY     *float64          `protobuf:"fixed64,5,opt,name=layer_quad_top_left_y" json:"layer_quad_top_left_y,omitempty"`
-	LayerQuadTopLeftZ     *float64          `protobuf:"fixed64,6,opt,name=layer_quad_top_left_z" json:"layer_quad_top_left_z,omitempty"`
-	LayerQuadTopRightX    *float64          `protobuf:"fixed64,7,opt,name=layer_quad_top_right_x" json:"layer_quad_top_right_x,omitempty"`
-	LayerQuadTopRightY    *float64          `protobuf:"fixed64,8,opt,name=layer_quad_top_right_y" json:"layer_quad_top_right_y,omitempty"`
-	LayerQuadTopRightZ    *float64          `protobuf:"fixed64,9,opt,name=layer_quad_top_right_z" json:"layer_quad_top_right_z,omitempty"`
-	LayerQuadBottomLeftX  *float64          `protobuf:"fixed64,10,opt,name=layer_quad_bottom_left_x" json:"layer_quad_bottom_left_x,omitempty"`
-	LayerQuadBottomLeftY  *float64          `protobuf:"fixed64,11,opt,name=layer_quad_bottom_left_y" json:"layer_quad_bottom_left_y,omitempty"`
-	LayerQuadBottomLeftZ  *float64          `protobuf:"fixed64,12,opt,name=layer_quad_bottom_left_z" json:"layer_quad_bottom_left_z,omitempty"`
-	LayerQuadBottomRightX *float64          `protobuf:"fixed64,13,opt,name=layer_quad_bottom_right_x" json:"layer_quad_bottom_right_x,omitempty"`
-	LayerQuadBottomRightY *float64          `protobuf:"fixed64,14,opt,name=layer_quad_bottom_right_y" json:"layer_quad_bottom_right_y,omitempty"`
-	LayerQuadBottomRightZ *float64          `protobuf:"fixed64,15,opt,name=layer_quad_bottom_right_z" json:"layer_quad_bottom_right_z,omitempty"`
-	TransformM00          *float64          `protobuf:"fixed64,16,opt,name=transform_m00" json:"transform_m00,omitempty"`
-	TransformM01          *float64          `protobuf:"fixed64,17,opt,name=transform_m01" json:"transform_m01,omitempty"`
-	TransformM02          *float64          `protobuf:"fixed64,18,opt,name=transform_m02" json:"transform_m02,omitempty"`
-	TransformM03          *float64          `protobuf:"fixed64,19,opt,name=transform_m03" json:"transform_m03,omitempty"`
-	TransformM10          *float64          `protobuf:"fixed64,20,opt,name=transform_m10" json:"transform_m10,omitempty"`
-	TransformM11          *float64          `protobuf:"fixed64,21,opt,name=transform_m11" json:"transform_m11,omitempty"`
-	TransformM12          *float64          `protobuf:"fixed64,22,opt,name=transform_m12" json:"transform_m12,omitempty"`
-	TransformM13          *float64          `protobuf:"fixed64,23,opt,name=transform_m13" json:"transform_m13,omitempty"`
-	TransformM20          *float64          `protobuf:"fixed64,24,opt,name=transform_m20" json:"transform_m20,omitempty"`
-	TransformM21          *float64          `protobuf:"fixed64,25,opt,name=transform_m21" json:"transform_m21,omitempty"`
-	TransformM22          *float64          `protobuf:"fixed64,26,opt,name=transform_m22" json:"transform_m22,omitempty"`
-	TransformM23          *float64          `protobuf:"fixed64,27,opt,name=transform_m23" json:"transform_m23,omitempty"`
-	TransformM30          *float64          `protobuf:"fixed64,28,opt,name=transform_m30" json:"transform_m30,omitempty"`
-	TransformM31          *float64          `protobuf:"fixed64,29,opt,name=transform_m31" json:"transform_m31,omitempty"`
-	TransformM32          *float64          `protobuf:"fixed64,30,opt,name=transform_m32" json:"transform_m32,omitempty"`
-	TransformM33          *float64          `protobuf:"fixed64,31,opt,name=transform_m33" json:"transform_m33,omitempty"`
-	PerspectiveDepth      *float64          `protobuf:"fixed64,32,opt,name=perspective_depth" json:"perspective_depth,omitempty"`
-	Opacity               *float64          `protobuf:"fixed64,33,opt,name=opacity" json:"opacity,omitempty"`
-	CompositionColor      *uint32           `protobuf:"varint,34,opt,name=composition_color" json:"composition_color,omitempty"`
-	Desaturation          *float64          `protobuf:"fixed64,35,opt,name=desaturation" json:"desaturation,omitempty"`
-	OpacityMaskTextureId  *uint32           `protobuf:"varint,36,opt,name=opacity_mask_texture_id" json:"opacity_mask_texture_id,omitempty"`
-	OpacityMaskOpacity    *float64          `protobuf:"fixed64,37,opt,name=opacity_mask_opacity" json:"opacity_mask_opacity,omitempty"`
-	Border                *CBorderData      `protobuf:"bytes,38,opt,name=border" json:"border,omitempty"`
-	BorderImage           *CBorderImageData `protobuf:"bytes,39,opt,name=border_image" json:"border_image,omitempty"`
-	BorderRadius          *CRadiusData      `protobuf:"bytes,40,opt,name=border_radius" json:"border_radius,omitempty"`
-	BoxShadow             *CBoxShadowData   `protobuf:"bytes,41,opt,name=box_shadow" json:"box_shadow,omitempty"`
-	GaussianblurPasses    *float64          `protobuf:"fixed64,42,opt,name=gaussianblur_passes" json:"gaussianblur_passes,omitempty"`
-	GaussianblurStddevhor *float64          `protobuf:"fixed64,43,opt,name=gaussianblur_stddevhor" json:"gaussianblur_stddevhor,omitempty"`
-	GaussianblurStddevver *float64          `protobuf:"fixed64,44,opt,name=gaussianblur_stddevver" json:"gaussianblur_stddevver,omitempty"`
-	Scale_2DFactorsX      *float64          `protobuf:"fixed64,45,opt,name=scale_2d_factors_x" json:"scale_2d_factors_x,omitempty"`
-	Scale_2DFactorsY      *float64          `protobuf:"fixed64,46,opt,name=scale_2d_factors_y" json:"scale_2d_factors_y,omitempty"`
-	Rotate_2D             *float64          `protobuf:"fixed64,47,opt,name=rotate_2d" json:"rotate_2d,omitempty"`
-	NeedsClear            *bool             `protobuf:"varint,48,opt,name=needs_clear" json:"needs_clear,omitempty"`
-	NeedsDepth            *bool             `protobuf:"varint,49,opt,name=needs_depth" json:"needs_depth,omitempty"`
-	NeedsRedrawEveryFrame *bool             `protobuf:"varint,50,opt,name=needs_redraw_every_frame" json:"needs_redraw_every_frame,omitempty"`
-	TextShadow            *CTextShadowData  `protobuf:"bytes,51,opt,name=text_shadow" json:"text_shadow,omitempty"`
-	MixBlendMode          *uint32           `protobuf:"varint,52,opt,name=mix_blend_mode" json:"mix_blend_mode,omitempty"`
-	OccludedLeftEdge      *float64          `protobuf:"fixed64,53,opt,name=occluded_left_edge" json:"occluded_left_edge,omitempty"`
-	OccludedTopEdge       *float64          `protobuf:"fixed64,54,opt,name=occluded_top_edge" json:"occluded_top_edge,omitempty"`
-	OccludedRightEdge     *float64          `protobuf:"fixed64,55,opt,name=occluded_right_edge" json:"occluded_right_edge,omitempty"`
-	OccludedBottomEdge    *float64          `protobuf:"fixed64,56,opt,name=occluded_bottom_edge" json:"occluded_bottom_edge,omitempty"`
-	XXX_unrecognized      []byte            `json:"-"`
+	LayerId               *uint64          `protobuf:"varint,1,opt,name=layer_id" json:"layer_id,omitempty"`
+	Width                 *float64         `protobuf:"fixed64,2,opt,name=width" json:"width,omitempty"`
+	Height                *float64         `protobuf:"fixed64,3,opt,name=height" json:"height,omitempty"`
+	LayerQuadTopLeftX     *float64         `protobuf:"fixed64,4,opt,name=layer_quad_top_left_x" json:"layer_quad_top_left_x,omitempty"`
+	LayerQuadTopLeftY     *float64         `protobuf:"fixed64,5,opt,name=layer_quad_top_left_y" json:"layer_quad_top_left_y,omitempty"`
+	LayerQuadTopLeftZ     *float64         `protobuf:"fixed64,6,opt,name=layer_quad_top_left_z" json:"layer_quad_top_left_z,omitempty"`
+	LayerQuadTopRightX    *float64         `protobuf:"fixed64,7,opt,name=layer_quad_top_right_x" json:"layer_quad_top_right_x,omitempty"`
+	LayerQuadTopRightY    *float64         `protobuf:"fixed64,8,opt,name=layer_quad_top_right_y" json:"layer_quad_top_right_y,omitempty"`
+	LayerQuadTopRightZ    *float64         `protobuf:"fixed64,9,opt,name=layer_quad_top_right_z" json:"layer_quad_top_right_z,omitempty"`
+	LayerQuadBottomLeftX  *float64         `protobuf:"fixed64,10,opt,name=layer_quad_bottom_left_x" json:"layer_quad_bottom_left_x,omitempty"`
+	LayerQuadBottomLeftY  *float64         `protobuf:"fixed64,11,opt,name=layer_quad_bottom_left_y" json:"layer_quad_bottom_left_y,omitempty"`
+	LayerQuadBottomLeftZ  *float64         `protobuf:"fixed64,12,opt,name=layer_quad_bottom_left_z" json:"layer_quad_bottom_left_z,omitempty"`
+	LayerQuadBottomRightX *float64         `protobuf:"fixed64,13,opt,name=layer_quad_bottom_right_x" json:"layer_quad_bottom_right_x,omitempty"`
+	LayerQuadBottomRightY *float64         `protobuf:"fixed64,14,opt,name=layer_quad_bottom_right_y" json:"layer_quad_bottom_right_y,omitempty"`
+	LayerQuadBottomRightZ *float64         `protobuf:"fixed64,15,opt,name=layer_quad_bottom_right_z" json:"layer_quad_bottom_right_z,omitempty"`
+	TransformM00          *float64         `protobuf:"fixed64,16,opt,name=transform_m00" json:"transform_m00,omitempty"`
+	TransformM01          *float64         `protobuf:"fixed64,17,opt,name=transform_m01" json:"transform_m01,omitempty"`
+	TransformM02          *float64         `protobuf:"fixed64,18,opt,name=transform_m02" json:"transform_m02,omitempty"`
+	TransformM03          *float64         `protobuf:"fixed64,19,opt,name=transform_m03" json:"transform_m03,omitempty"`
+	TransformM10          *float64         `protobuf:"fixed64,20,opt,name=transform_m10" json:"transform_m10,omitempty"`
+	TransformM11          *float64         `protobuf:"fixed64,21,opt,name=transform_m11" json:"transform_m11,omitempty"`
+	TransformM12          *float64         `protobuf:"fixed64,22,opt,name=transform_m12" json:"transform_m12,omitempty"`
+	TransformM13          *float64         `protobuf:"fixed64,23,opt,name=transform_m13" json:"transform_m13,omitempty"`
+	TransformM20          *float64         `protobuf:"fixed64,24,opt,name=transform_m20" json:"transform_m20,omitempty"`
+	TransformM21          *float64         `protobuf:"fixed64,25,opt,name=transform_m21" json:"transform_m21,omitempty"`
+	TransformM22          *float64         `protobuf:"fixed64,26,opt,name=transform_m22" json:"transform_m22,omitempty"`
+	TransformM23          *float64         `protobuf:"fixed64,27,opt,name=transform_m23" json:"transform_m23,omitempty"`
+	TransformM30          *float64         `protobuf:"fixed64,28,opt,name=transform_m30" json:"transform_m30,omitempty"`
+	TransformM31          *float64         `protobuf:"fixed64,29,opt,name=transform_m31" json:"transform_m31,omitempty"`
+	TransformM32          *float64         `protobuf:"fixed64,30,opt,name=transform_m32" json:"transform_m32,omitempty"`
+	TransformM33          *float64         `protobuf:"fixed64,31,opt,name=transform_m33" json:"transform_m33,omitempty"`
+	PerspectiveDepth      *float64         `protobuf:"fixed64,32,opt,name=perspective_depth" json:"perspective_depth,omitempty"`
+	Opacity               *float64         `protobuf:"fixed64,33,opt,name=opacity" json:"opacity,omitempty"`
+	CompositionColor      *uint32          `protobuf:"varint,34,opt,name=composition_color" json:"composition_color,omitempty"`
+	Saturation            *float64         `protobuf:"fixed64,35,opt,name=saturation" json:"saturation,omitempty"`
+	HueShift              *float64         `protobuf:"fixed64,36,opt,name=hue_shift" json:"hue_shift,omitempty"`
+	Brightness            *float64         `protobuf:"fixed64,37,opt,name=brightness" json:"brightness,omitempty"`
+	Contrast              *float64         `protobuf:"fixed64,38,opt,name=contrast" json:"contrast,omitempty"`
+	OpacityMaskTextureId  *uint32          `protobuf:"varint,39,opt,name=opacity_mask_texture_id" json:"opacity_mask_texture_id,omitempty"`
+	OpacityMaskOpacity    *float64         `protobuf:"fixed64,40,opt,name=opacity_mask_opacity" json:"opacity_mask_opacity,omitempty"`
+	Border                *CBorderData     `protobuf:"bytes,41,opt,name=border" json:"border,omitempty"`
+	BorderRadius          *CRadiusData     `protobuf:"bytes,42,opt,name=border_radius" json:"border_radius,omitempty"`
+	BoxShadow             *CBoxShadowData  `protobuf:"bytes,43,opt,name=box_shadow" json:"box_shadow,omitempty"`
+	GaussianblurPasses    *float64         `protobuf:"fixed64,44,opt,name=gaussianblur_passes" json:"gaussianblur_passes,omitempty"`
+	GaussianblurStddevhor *float64         `protobuf:"fixed64,45,opt,name=gaussianblur_stddevhor" json:"gaussianblur_stddevhor,omitempty"`
+	GaussianblurStddevver *float64         `protobuf:"fixed64,46,opt,name=gaussianblur_stddevver" json:"gaussianblur_stddevver,omitempty"`
+	Scale_2DFactorsX      *float64         `protobuf:"fixed64,47,opt,name=scale_2d_factors_x" json:"scale_2d_factors_x,omitempty"`
+	Scale_2DFactorsY      *float64         `protobuf:"fixed64,48,opt,name=scale_2d_factors_y" json:"scale_2d_factors_y,omitempty"`
+	Rotate_2D             *float64         `protobuf:"fixed64,49,opt,name=rotate_2d" json:"rotate_2d,omitempty"`
+	NeedsClear            *bool            `protobuf:"varint,50,opt,name=needs_clear" json:"needs_clear,omitempty"`
+	NeedsDepth            *bool            `protobuf:"varint,51,opt,name=needs_depth" json:"needs_depth,omitempty"`
+	NeedsRedrawEveryFrame *bool            `protobuf:"varint,52,opt,name=needs_redraw_every_frame" json:"needs_redraw_every_frame,omitempty"`
+	TextShadow            *CTextShadowData `protobuf:"bytes,53,opt,name=text_shadow" json:"text_shadow,omitempty"`
+	MixBlendMode          *uint32          `protobuf:"varint,54,opt,name=mix_blend_mode" json:"mix_blend_mode,omitempty"`
+	OccludedLeftEdge      *float64         `protobuf:"fixed64,55,opt,name=occluded_left_edge" json:"occluded_left_edge,omitempty"`
+	OccludedTopEdge       *float64         `protobuf:"fixed64,56,opt,name=occluded_top_edge" json:"occluded_top_edge,omitempty"`
+	OccludedRightEdge     *float64         `protobuf:"fixed64,57,opt,name=occluded_right_edge" json:"occluded_right_edge,omitempty"`
+	OccludedBottomEdge    *float64         `protobuf:"fixed64,58,opt,name=occluded_bottom_edge" json:"occluded_bottom_edge,omitempty"`
+	XXX_unrecognized      []byte           `json:"-"`
 }
 
 func (m *CMsgPushCompositingLayer) Reset()         { *m = CMsgPushCompositingLayer{} }
@@ -1113,9 +955,30 @@ func (m *CMsgPushCompositingLayer) GetCompositionColor() uint32 {
 	return 0
 }
 
-func (m *CMsgPushCompositingLayer) GetDesaturation() float64 {
-	if m != nil && m.Desaturation != nil {
-		return *m.Desaturation
+func (m *CMsgPushCompositingLayer) GetSaturation() float64 {
+	if m != nil && m.Saturation != nil {
+		return *m.Saturation
+	}
+	return 0
+}
+
+func (m *CMsgPushCompositingLayer) GetHueShift() float64 {
+	if m != nil && m.HueShift != nil {
+		return *m.HueShift
+	}
+	return 0
+}
+
+func (m *CMsgPushCompositingLayer) GetBrightness() float64 {
+	if m != nil && m.Brightness != nil {
+		return *m.Brightness
+	}
+	return 0
+}
+
+func (m *CMsgPushCompositingLayer) GetContrast() float64 {
+	if m != nil && m.Contrast != nil {
+		return *m.Contrast
 	}
 	return 0
 }
@@ -1137,13 +1000,6 @@ func (m *CMsgPushCompositingLayer) GetOpacityMaskOpacity() float64 {
 func (m *CMsgPushCompositingLayer) GetBorder() *CBorderData {
 	if m != nil {
 		return m.Border
-	}
-	return nil
-}
-
-func (m *CMsgPushCompositingLayer) GetBorderImage() *CBorderImageData {
-	if m != nil {
-		return m.BorderImage
 	}
 	return nil
 }
@@ -2454,7 +2310,7 @@ func (m *CMsgOpacityMask_AnimationFrameData) GetData() *CMsgOpacityMaskData {
 	return nil
 }
 
-type CMsgDesaturation struct {
+type CMsgHueShift struct {
 	Base             *float64             `protobuf:"fixed64,1,opt,name=base" json:"base,omitempty"`
 	Transition       *float64             `protobuf:"fixed64,2,opt,name=transition" json:"transition,omitempty"`
 	TransitionData   *CMsgTransitionData  `protobuf:"bytes,3,opt,name=transition_data" json:"transition_data,omitempty"`
@@ -2462,56 +2318,248 @@ type CMsgDesaturation struct {
 	XXX_unrecognized []byte               `json:"-"`
 }
 
-func (m *CMsgDesaturation) Reset()         { *m = CMsgDesaturation{} }
-func (m *CMsgDesaturation) String() string { return proto.CompactTextString(m) }
-func (*CMsgDesaturation) ProtoMessage()    {}
+func (m *CMsgHueShift) Reset()         { *m = CMsgHueShift{} }
+func (m *CMsgHueShift) String() string { return proto.CompactTextString(m) }
+func (*CMsgHueShift) ProtoMessage()    {}
 
-func (m *CMsgDesaturation) GetBase() float64 {
+func (m *CMsgHueShift) GetBase() float64 {
 	if m != nil && m.Base != nil {
 		return *m.Base
 	}
 	return 0
 }
 
-func (m *CMsgDesaturation) GetTransition() float64 {
+func (m *CMsgHueShift) GetTransition() float64 {
 	if m != nil && m.Transition != nil {
 		return *m.Transition
 	}
 	return 0
 }
 
-func (m *CMsgDesaturation) GetTransitionData() *CMsgTransitionData {
+func (m *CMsgHueShift) GetTransitionData() *CMsgTransitionData {
 	if m != nil {
 		return m.TransitionData
 	}
 	return nil
 }
 
-func (m *CMsgDesaturation) GetAnimations() []*CMsgAnimationData {
+func (m *CMsgHueShift) GetAnimations() []*CMsgAnimationData {
 	if m != nil {
 		return m.Animations
 	}
 	return nil
 }
 
-var E_CMsgDesaturation_AnimationFrameData = &proto.ExtensionDesc{
+var E_CMsgHueShift_AnimationFrameData = &proto.ExtensionDesc{
 	ExtendedType:  (*CMsgAnimationFrameData)(nil),
-	ExtensionType: (*CMsgDesaturation_AnimationFrameData)(nil),
-	Field:         1005,
-	Name:          "dota.CMsgDesaturation.animation_frame_data",
-	Tag:           "bytes,1005,opt,name=animation_frame_data",
+	ExtensionType: (*CMsgHueShift_AnimationFrameData)(nil),
+	Field:         1019,
+	Name:          "dota.CMsgHueShift.animation_frame_data",
+	Tag:           "bytes,1019,opt,name=animation_frame_data",
 }
 
-type CMsgDesaturation_AnimationFrameData struct {
+type CMsgHueShift_AnimationFrameData struct {
 	Data             *float64 `protobuf:"fixed64,1,opt,name=data" json:"data,omitempty"`
 	XXX_unrecognized []byte   `json:"-"`
 }
 
-func (m *CMsgDesaturation_AnimationFrameData) Reset()         { *m = CMsgDesaturation_AnimationFrameData{} }
-func (m *CMsgDesaturation_AnimationFrameData) String() string { return proto.CompactTextString(m) }
-func (*CMsgDesaturation_AnimationFrameData) ProtoMessage()    {}
+func (m *CMsgHueShift_AnimationFrameData) Reset()         { *m = CMsgHueShift_AnimationFrameData{} }
+func (m *CMsgHueShift_AnimationFrameData) String() string { return proto.CompactTextString(m) }
+func (*CMsgHueShift_AnimationFrameData) ProtoMessage()    {}
 
-func (m *CMsgDesaturation_AnimationFrameData) GetData() float64 {
+func (m *CMsgHueShift_AnimationFrameData) GetData() float64 {
+	if m != nil && m.Data != nil {
+		return *m.Data
+	}
+	return 0
+}
+
+type CMsgSaturation struct {
+	Base             *float64             `protobuf:"fixed64,1,opt,name=base" json:"base,omitempty"`
+	Transition       *float64             `protobuf:"fixed64,2,opt,name=transition" json:"transition,omitempty"`
+	TransitionData   *CMsgTransitionData  `protobuf:"bytes,3,opt,name=transition_data" json:"transition_data,omitempty"`
+	Animations       []*CMsgAnimationData `protobuf:"bytes,4,rep,name=animations" json:"animations,omitempty"`
+	XXX_unrecognized []byte               `json:"-"`
+}
+
+func (m *CMsgSaturation) Reset()         { *m = CMsgSaturation{} }
+func (m *CMsgSaturation) String() string { return proto.CompactTextString(m) }
+func (*CMsgSaturation) ProtoMessage()    {}
+
+func (m *CMsgSaturation) GetBase() float64 {
+	if m != nil && m.Base != nil {
+		return *m.Base
+	}
+	return 0
+}
+
+func (m *CMsgSaturation) GetTransition() float64 {
+	if m != nil && m.Transition != nil {
+		return *m.Transition
+	}
+	return 0
+}
+
+func (m *CMsgSaturation) GetTransitionData() *CMsgTransitionData {
+	if m != nil {
+		return m.TransitionData
+	}
+	return nil
+}
+
+func (m *CMsgSaturation) GetAnimations() []*CMsgAnimationData {
+	if m != nil {
+		return m.Animations
+	}
+	return nil
+}
+
+var E_CMsgSaturation_AnimationFrameData = &proto.ExtensionDesc{
+	ExtendedType:  (*CMsgAnimationFrameData)(nil),
+	ExtensionType: (*CMsgSaturation_AnimationFrameData)(nil),
+	Field:         1005,
+	Name:          "dota.CMsgSaturation.animation_frame_data",
+	Tag:           "bytes,1005,opt,name=animation_frame_data",
+}
+
+type CMsgSaturation_AnimationFrameData struct {
+	Data             *float64 `protobuf:"fixed64,1,opt,name=data" json:"data,omitempty"`
+	XXX_unrecognized []byte   `json:"-"`
+}
+
+func (m *CMsgSaturation_AnimationFrameData) Reset()         { *m = CMsgSaturation_AnimationFrameData{} }
+func (m *CMsgSaturation_AnimationFrameData) String() string { return proto.CompactTextString(m) }
+func (*CMsgSaturation_AnimationFrameData) ProtoMessage()    {}
+
+func (m *CMsgSaturation_AnimationFrameData) GetData() float64 {
+	if m != nil && m.Data != nil {
+		return *m.Data
+	}
+	return 0
+}
+
+type CMsgBrightness struct {
+	Base             *float64             `protobuf:"fixed64,1,opt,name=base" json:"base,omitempty"`
+	Transition       *float64             `protobuf:"fixed64,2,opt,name=transition" json:"transition,omitempty"`
+	TransitionData   *CMsgTransitionData  `protobuf:"bytes,3,opt,name=transition_data" json:"transition_data,omitempty"`
+	Animations       []*CMsgAnimationData `protobuf:"bytes,4,rep,name=animations" json:"animations,omitempty"`
+	XXX_unrecognized []byte               `json:"-"`
+}
+
+func (m *CMsgBrightness) Reset()         { *m = CMsgBrightness{} }
+func (m *CMsgBrightness) String() string { return proto.CompactTextString(m) }
+func (*CMsgBrightness) ProtoMessage()    {}
+
+func (m *CMsgBrightness) GetBase() float64 {
+	if m != nil && m.Base != nil {
+		return *m.Base
+	}
+	return 0
+}
+
+func (m *CMsgBrightness) GetTransition() float64 {
+	if m != nil && m.Transition != nil {
+		return *m.Transition
+	}
+	return 0
+}
+
+func (m *CMsgBrightness) GetTransitionData() *CMsgTransitionData {
+	if m != nil {
+		return m.TransitionData
+	}
+	return nil
+}
+
+func (m *CMsgBrightness) GetAnimations() []*CMsgAnimationData {
+	if m != nil {
+		return m.Animations
+	}
+	return nil
+}
+
+var E_CMsgBrightness_AnimationFrameData = &proto.ExtensionDesc{
+	ExtendedType:  (*CMsgAnimationFrameData)(nil),
+	ExtensionType: (*CMsgBrightness_AnimationFrameData)(nil),
+	Field:         1020,
+	Name:          "dota.CMsgBrightness.animation_frame_data",
+	Tag:           "bytes,1020,opt,name=animation_frame_data",
+}
+
+type CMsgBrightness_AnimationFrameData struct {
+	Data             *float64 `protobuf:"fixed64,1,opt,name=data" json:"data,omitempty"`
+	XXX_unrecognized []byte   `json:"-"`
+}
+
+func (m *CMsgBrightness_AnimationFrameData) Reset()         { *m = CMsgBrightness_AnimationFrameData{} }
+func (m *CMsgBrightness_AnimationFrameData) String() string { return proto.CompactTextString(m) }
+func (*CMsgBrightness_AnimationFrameData) ProtoMessage()    {}
+
+func (m *CMsgBrightness_AnimationFrameData) GetData() float64 {
+	if m != nil && m.Data != nil {
+		return *m.Data
+	}
+	return 0
+}
+
+type CMsgContrast struct {
+	Base             *float64             `protobuf:"fixed64,1,opt,name=base" json:"base,omitempty"`
+	Transition       *float64             `protobuf:"fixed64,2,opt,name=transition" json:"transition,omitempty"`
+	TransitionData   *CMsgTransitionData  `protobuf:"bytes,3,opt,name=transition_data" json:"transition_data,omitempty"`
+	Animations       []*CMsgAnimationData `protobuf:"bytes,4,rep,name=animations" json:"animations,omitempty"`
+	XXX_unrecognized []byte               `json:"-"`
+}
+
+func (m *CMsgContrast) Reset()         { *m = CMsgContrast{} }
+func (m *CMsgContrast) String() string { return proto.CompactTextString(m) }
+func (*CMsgContrast) ProtoMessage()    {}
+
+func (m *CMsgContrast) GetBase() float64 {
+	if m != nil && m.Base != nil {
+		return *m.Base
+	}
+	return 0
+}
+
+func (m *CMsgContrast) GetTransition() float64 {
+	if m != nil && m.Transition != nil {
+		return *m.Transition
+	}
+	return 0
+}
+
+func (m *CMsgContrast) GetTransitionData() *CMsgTransitionData {
+	if m != nil {
+		return m.TransitionData
+	}
+	return nil
+}
+
+func (m *CMsgContrast) GetAnimations() []*CMsgAnimationData {
+	if m != nil {
+		return m.Animations
+	}
+	return nil
+}
+
+var E_CMsgContrast_AnimationFrameData = &proto.ExtensionDesc{
+	ExtendedType:  (*CMsgAnimationFrameData)(nil),
+	ExtensionType: (*CMsgContrast_AnimationFrameData)(nil),
+	Field:         1021,
+	Name:          "dota.CMsgContrast.animation_frame_data",
+	Tag:           "bytes,1021,opt,name=animation_frame_data",
+}
+
+type CMsgContrast_AnimationFrameData struct {
+	Data             *float64 `protobuf:"fixed64,1,opt,name=data" json:"data,omitempty"`
+	XXX_unrecognized []byte   `json:"-"`
+}
+
+func (m *CMsgContrast_AnimationFrameData) Reset()         { *m = CMsgContrast_AnimationFrameData{} }
+func (m *CMsgContrast_AnimationFrameData) String() string { return proto.CompactTextString(m) }
+func (*CMsgContrast_AnimationFrameData) ProtoMessage()    {}
+
+func (m *CMsgContrast_AnimationFrameData) GetData() float64 {
 	if m != nil && m.Data != nil {
 		return *m.Data
 	}
@@ -3303,22 +3351,24 @@ type CMsgPushAAndTContext struct {
 	TransformPerspectiveOrigin *CMsg3DTransformPerspectiveOrigin `protobuf:"bytes,11,opt,name=transform_perspective_origin" json:"transform_perspective_origin,omitempty"`
 	Opacity                    *CMsgOpacity                      `protobuf:"bytes,12,opt,name=opacity" json:"opacity,omitempty"`
 	WashColor                  *CMsgColor                        `protobuf:"bytes,13,opt,name=wash_color" json:"wash_color,omitempty"`
-	Desaturation               *CMsgDesaturation                 `protobuf:"bytes,14,opt,name=desaturation" json:"desaturation,omitempty"`
-	OpacityMask                *CMsgOpacityMask                  `protobuf:"bytes,15,opt,name=opacity_mask" json:"opacity_mask,omitempty"`
-	BorderRadius               *CMsgBorderRadius                 `protobuf:"bytes,16,opt,name=border_radius" json:"border_radius,omitempty"`
-	GaussianBlur               *CMsgGaussianBlur                 `protobuf:"bytes,17,opt,name=gaussian_blur" json:"gaussian_blur,omitempty"`
-	Border                     *CMsgBorder                       `protobuf:"bytes,18,opt,name=border" json:"border,omitempty"`
-	BorderImage                *CBorderImageData                 `protobuf:"bytes,19,opt,name=border_image" json:"border_image,omitempty"`
-	BoxShadow                  *CMsgBoxShadow                    `protobuf:"bytes,20,opt,name=box_shadow" json:"box_shadow,omitempty"`
-	Scale_2DCentered           *CMsgPointWithTransition          `protobuf:"bytes,21,opt,name=scale_2d_centered" json:"scale_2d_centered,omitempty"`
-	Rotate_2DCentered          *CMsgRotate2D                     `protobuf:"bytes,22,opt,name=rotate_2d_centered" json:"rotate_2d_centered,omitempty"`
-	TextShadow                 *CMsgTextShadow                   `protobuf:"bytes,23,opt,name=text_shadow" json:"text_shadow,omitempty"`
-	Clip                       *CMsgClip                         `protobuf:"bytes,24,opt,name=clip" json:"clip,omitempty"`
-	SuppressClipToBounds       *bool                             `protobuf:"varint,25,opt,name=suppress_clip_to_bounds" json:"suppress_clip_to_bounds,omitempty"`
-	NeedsFullRepaint           *int32                            `protobuf:"varint,26,opt,name=needs_full_repaint" json:"needs_full_repaint,omitempty"`
-	WantsHitTest               *bool                             `protobuf:"varint,27,opt,name=wants_hit_test" json:"wants_hit_test,omitempty"`
-	MixBlendMode               *uint32                           `protobuf:"varint,28,opt,name=mix_blend_mode" json:"mix_blend_mode,omitempty"`
-	OpaqueBackground           *bool                             `protobuf:"varint,29,opt,name=opaque_background" json:"opaque_background,omitempty"`
+	HueShift                   *CMsgHueShift                     `protobuf:"bytes,14,opt,name=hue_shift" json:"hue_shift,omitempty"`
+	Saturation                 *CMsgSaturation                   `protobuf:"bytes,15,opt,name=saturation" json:"saturation,omitempty"`
+	Brightness                 *CMsgBrightness                   `protobuf:"bytes,16,opt,name=brightness" json:"brightness,omitempty"`
+	Contrast                   *CMsgContrast                     `protobuf:"bytes,17,opt,name=contrast" json:"contrast,omitempty"`
+	OpacityMask                *CMsgOpacityMask                  `protobuf:"bytes,18,opt,name=opacity_mask" json:"opacity_mask,omitempty"`
+	BorderRadius               *CMsgBorderRadius                 `protobuf:"bytes,19,opt,name=border_radius" json:"border_radius,omitempty"`
+	GaussianBlur               *CMsgGaussianBlur                 `protobuf:"bytes,20,opt,name=gaussian_blur" json:"gaussian_blur,omitempty"`
+	Border                     *CMsgBorder                       `protobuf:"bytes,21,opt,name=border" json:"border,omitempty"`
+	BoxShadow                  *CMsgBoxShadow                    `protobuf:"bytes,22,opt,name=box_shadow" json:"box_shadow,omitempty"`
+	Scale_2DCentered           *CMsgPointWithTransition          `protobuf:"bytes,23,opt,name=scale_2d_centered" json:"scale_2d_centered,omitempty"`
+	Rotate_2DCentered          *CMsgRotate2D                     `protobuf:"bytes,24,opt,name=rotate_2d_centered" json:"rotate_2d_centered,omitempty"`
+	TextShadow                 *CMsgTextShadow                   `protobuf:"bytes,25,opt,name=text_shadow" json:"text_shadow,omitempty"`
+	Clip                       *CMsgClip                         `protobuf:"bytes,26,opt,name=clip" json:"clip,omitempty"`
+	SuppressClipToBounds       *bool                             `protobuf:"varint,27,opt,name=suppress_clip_to_bounds" json:"suppress_clip_to_bounds,omitempty"`
+	NeedsFullRepaint           *int32                            `protobuf:"varint,28,opt,name=needs_full_repaint" json:"needs_full_repaint,omitempty"`
+	WantsHitTest               *bool                             `protobuf:"varint,29,opt,name=wants_hit_test" json:"wants_hit_test,omitempty"`
+	MixBlendMode               *uint32                           `protobuf:"varint,30,opt,name=mix_blend_mode" json:"mix_blend_mode,omitempty"`
+	OpaqueBackground           *bool                             `protobuf:"varint,31,opt,name=opaque_background" json:"opaque_background,omitempty"`
 	XXX_unrecognized           []byte                            `json:"-"`
 }
 
@@ -3410,9 +3460,30 @@ func (m *CMsgPushAAndTContext) GetWashColor() *CMsgColor {
 	return nil
 }
 
-func (m *CMsgPushAAndTContext) GetDesaturation() *CMsgDesaturation {
+func (m *CMsgPushAAndTContext) GetHueShift() *CMsgHueShift {
 	if m != nil {
-		return m.Desaturation
+		return m.HueShift
+	}
+	return nil
+}
+
+func (m *CMsgPushAAndTContext) GetSaturation() *CMsgSaturation {
+	if m != nil {
+		return m.Saturation
+	}
+	return nil
+}
+
+func (m *CMsgPushAAndTContext) GetBrightness() *CMsgBrightness {
+	if m != nil {
+		return m.Brightness
+	}
+	return nil
+}
+
+func (m *CMsgPushAAndTContext) GetContrast() *CMsgContrast {
+	if m != nil {
+		return m.Contrast
 	}
 	return nil
 }
@@ -3441,13 +3512,6 @@ func (m *CMsgPushAAndTContext) GetGaussianBlur() *CMsgGaussianBlur {
 func (m *CMsgPushAAndTContext) GetBorder() *CMsgBorder {
 	if m != nil {
 		return m.Border
-	}
-	return nil
-}
-
-func (m *CMsgPushAAndTContext) GetBorderImage() *CBorderImageData {
-	if m != nil {
-		return m.BorderImage
 	}
 	return nil
 }
@@ -4394,7 +4458,10 @@ func init() {
 	proto.RegisterExtension(E_CMsgOpacity_AnimationFrameData)
 	proto.RegisterExtension(E_CMsgRotate2D_AnimationFrameData)
 	proto.RegisterExtension(E_CMsgOpacityMask_AnimationFrameData)
-	proto.RegisterExtension(E_CMsgDesaturation_AnimationFrameData)
+	proto.RegisterExtension(E_CMsgHueShift_AnimationFrameData)
+	proto.RegisterExtension(E_CMsgSaturation_AnimationFrameData)
+	proto.RegisterExtension(E_CMsgBrightness_AnimationFrameData)
+	proto.RegisterExtension(E_CMsgContrast_AnimationFrameData)
 	proto.RegisterExtension(E_CMsgGaussianBlur_AnimationFrameData)
 	proto.RegisterExtension(E_CMsg3DTransformPerspective_AnimationFrameData)
 	proto.RegisterExtension(E_CMsg3DTransformPerspectiveOrigin_AnimationFrameData)

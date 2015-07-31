@@ -178,16 +178,18 @@ message CMsgSteamDatagramClientSwitchedPrimary {
 		optional uint32 score = 1;
 		optional uint32 front_ping = 2;
 		optional uint32 back_ping = 3;
+		optional uint32 seconds_until_down = 4;
 	}
 
 	optional fixed32 client_cookie = 1;
 	optional fixed32 old_ip = 2;
 	optional uint32 old_port = 3;
-	optional string old_router_cluster = 4;
+	optional fixed32 old_router_cluster = 4;
 	optional uint32 old_active_time = 5;
-	optional uint32 old_active_packets = 6;
-	optional bool old_dropped = 7;
-	optional CMsgSteamDatagramClientSwitchedPrimary.RouterQuality old_quality = 8;
-	optional CMsgSteamDatagramClientSwitchedPrimary.RouterQuality new_quality = 9;
+	optional uint32 old_active_packets_recv = 6;
+	optional string old_dropped_reason = 7;
+	optional uint32 gap_ms = 8;
+	optional CMsgSteamDatagramClientSwitchedPrimary.RouterQuality old_quality = 9;
+	optional CMsgSteamDatagramClientSwitchedPrimary.RouterQuality new_quality = 10;
 }
 

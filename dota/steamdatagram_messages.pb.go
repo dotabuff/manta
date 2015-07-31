@@ -1021,16 +1021,17 @@ func (m *CMsgSteamDatagramClientPingSampleReply_RoutingCluster) GetE2EPingMs() u
 }
 
 type CMsgSteamDatagramClientSwitchedPrimary struct {
-	ClientCookie     *uint32                                               `protobuf:"fixed32,1,opt,name=client_cookie" json:"client_cookie,omitempty"`
-	OldIp            *uint32                                               `protobuf:"fixed32,2,opt,name=old_ip" json:"old_ip,omitempty"`
-	OldPort          *uint32                                               `protobuf:"varint,3,opt,name=old_port" json:"old_port,omitempty"`
-	OldRouterCluster *string                                               `protobuf:"bytes,4,opt,name=old_router_cluster" json:"old_router_cluster,omitempty"`
-	OldActiveTime    *uint32                                               `protobuf:"varint,5,opt,name=old_active_time" json:"old_active_time,omitempty"`
-	OldActivePackets *uint32                                               `protobuf:"varint,6,opt,name=old_active_packets" json:"old_active_packets,omitempty"`
-	OldDropped       *bool                                                 `protobuf:"varint,7,opt,name=old_dropped" json:"old_dropped,omitempty"`
-	OldQuality       *CMsgSteamDatagramClientSwitchedPrimary_RouterQuality `protobuf:"bytes,8,opt,name=old_quality" json:"old_quality,omitempty"`
-	NewQuality       *CMsgSteamDatagramClientSwitchedPrimary_RouterQuality `protobuf:"bytes,9,opt,name=new_quality" json:"new_quality,omitempty"`
-	XXX_unrecognized []byte                                                `json:"-"`
+	ClientCookie         *uint32                                               `protobuf:"fixed32,1,opt,name=client_cookie" json:"client_cookie,omitempty"`
+	OldIp                *uint32                                               `protobuf:"fixed32,2,opt,name=old_ip" json:"old_ip,omitempty"`
+	OldPort              *uint32                                               `protobuf:"varint,3,opt,name=old_port" json:"old_port,omitempty"`
+	OldRouterCluster     *uint32                                               `protobuf:"fixed32,4,opt,name=old_router_cluster" json:"old_router_cluster,omitempty"`
+	OldActiveTime        *uint32                                               `protobuf:"varint,5,opt,name=old_active_time" json:"old_active_time,omitempty"`
+	OldActivePacketsRecv *uint32                                               `protobuf:"varint,6,opt,name=old_active_packets_recv" json:"old_active_packets_recv,omitempty"`
+	OldDroppedReason     *string                                               `protobuf:"bytes,7,opt,name=old_dropped_reason" json:"old_dropped_reason,omitempty"`
+	GapMs                *uint32                                               `protobuf:"varint,8,opt,name=gap_ms" json:"gap_ms,omitempty"`
+	OldQuality           *CMsgSteamDatagramClientSwitchedPrimary_RouterQuality `protobuf:"bytes,9,opt,name=old_quality" json:"old_quality,omitempty"`
+	NewQuality           *CMsgSteamDatagramClientSwitchedPrimary_RouterQuality `protobuf:"bytes,10,opt,name=new_quality" json:"new_quality,omitempty"`
+	XXX_unrecognized     []byte                                                `json:"-"`
 }
 
 func (m *CMsgSteamDatagramClientSwitchedPrimary) Reset() {
@@ -1060,11 +1061,11 @@ func (m *CMsgSteamDatagramClientSwitchedPrimary) GetOldPort() uint32 {
 	return 0
 }
 
-func (m *CMsgSteamDatagramClientSwitchedPrimary) GetOldRouterCluster() string {
+func (m *CMsgSteamDatagramClientSwitchedPrimary) GetOldRouterCluster() uint32 {
 	if m != nil && m.OldRouterCluster != nil {
 		return *m.OldRouterCluster
 	}
-	return ""
+	return 0
 }
 
 func (m *CMsgSteamDatagramClientSwitchedPrimary) GetOldActiveTime() uint32 {
@@ -1074,18 +1075,25 @@ func (m *CMsgSteamDatagramClientSwitchedPrimary) GetOldActiveTime() uint32 {
 	return 0
 }
 
-func (m *CMsgSteamDatagramClientSwitchedPrimary) GetOldActivePackets() uint32 {
-	if m != nil && m.OldActivePackets != nil {
-		return *m.OldActivePackets
+func (m *CMsgSteamDatagramClientSwitchedPrimary) GetOldActivePacketsRecv() uint32 {
+	if m != nil && m.OldActivePacketsRecv != nil {
+		return *m.OldActivePacketsRecv
 	}
 	return 0
 }
 
-func (m *CMsgSteamDatagramClientSwitchedPrimary) GetOldDropped() bool {
-	if m != nil && m.OldDropped != nil {
-		return *m.OldDropped
+func (m *CMsgSteamDatagramClientSwitchedPrimary) GetOldDroppedReason() string {
+	if m != nil && m.OldDroppedReason != nil {
+		return *m.OldDroppedReason
 	}
-	return false
+	return ""
+}
+
+func (m *CMsgSteamDatagramClientSwitchedPrimary) GetGapMs() uint32 {
+	if m != nil && m.GapMs != nil {
+		return *m.GapMs
+	}
+	return 0
 }
 
 func (m *CMsgSteamDatagramClientSwitchedPrimary) GetOldQuality() *CMsgSteamDatagramClientSwitchedPrimary_RouterQuality {
@@ -1106,6 +1114,7 @@ type CMsgSteamDatagramClientSwitchedPrimary_RouterQuality struct {
 	Score            *uint32 `protobuf:"varint,1,opt,name=score" json:"score,omitempty"`
 	FrontPing        *uint32 `protobuf:"varint,2,opt,name=front_ping" json:"front_ping,omitempty"`
 	BackPing         *uint32 `protobuf:"varint,3,opt,name=back_ping" json:"back_ping,omitempty"`
+	SecondsUntilDown *uint32 `protobuf:"varint,4,opt,name=seconds_until_down" json:"seconds_until_down,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
@@ -1134,6 +1143,13 @@ func (m *CMsgSteamDatagramClientSwitchedPrimary_RouterQuality) GetFrontPing() ui
 func (m *CMsgSteamDatagramClientSwitchedPrimary_RouterQuality) GetBackPing() uint32 {
 	if m != nil && m.BackPing != nil {
 		return *m.BackPing
+	}
+	return 0
+}
+
+func (m *CMsgSteamDatagramClientSwitchedPrimary_RouterQuality) GetSecondsUntilDown() uint32 {
+	if m != nil && m.SecondsUntilDown != nil {
+		return *m.SecondsUntilDown
 	}
 	return 0
 }

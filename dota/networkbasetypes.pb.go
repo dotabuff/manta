@@ -16,7 +16,6 @@ type NET_Messages int32
 const (
 	NET_Messages_net_NOP                        NET_Messages = 0
 	NET_Messages_net_Disconnect                 NET_Messages = 1
-	NET_Messages_net_File                       NET_Messages = 2
 	NET_Messages_net_SplitScreenUser            NET_Messages = 3
 	NET_Messages_net_Tick                       NET_Messages = 4
 	NET_Messages_net_StringCmd                  NET_Messages = 5
@@ -27,13 +26,11 @@ const (
 	NET_Messages_net_SpawnGroup_SetCreationTick NET_Messages = 11
 	NET_Messages_net_SpawnGroup_Unload          NET_Messages = 12
 	NET_Messages_net_SpawnGroup_LoadCompleted   NET_Messages = 13
-	NET_Messages_net_ReliableMessageEndMarker   NET_Messages = 14
 )
 
 var NET_Messages_name = map[int32]string{
 	0:  "net_NOP",
 	1:  "net_Disconnect",
-	2:  "net_File",
 	3:  "net_SplitScreenUser",
 	4:  "net_Tick",
 	5:  "net_StringCmd",
@@ -44,12 +41,10 @@ var NET_Messages_name = map[int32]string{
 	11: "net_SpawnGroup_SetCreationTick",
 	12: "net_SpawnGroup_Unload",
 	13: "net_SpawnGroup_LoadCompleted",
-	14: "net_ReliableMessageEndMarker",
 }
 var NET_Messages_value = map[string]int32{
 	"net_NOP":                        0,
 	"net_Disconnect":                 1,
-	"net_File":                       2,
 	"net_SplitScreenUser":            3,
 	"net_Tick":                       4,
 	"net_StringCmd":                  5,
@@ -60,7 +55,6 @@ var NET_Messages_value = map[string]int32{
 	"net_SpawnGroup_SetCreationTick": 11,
 	"net_SpawnGroup_Unload":          12,
 	"net_SpawnGroup_LoadCompleted":   13,
-	"net_ReliableMessageEndMarker":   14,
 }
 
 func (x NET_Messages) Enum() *NET_Messages {
@@ -223,15 +217,13 @@ func (m *CMsgQAngle) GetZ() float32 {
 }
 
 type CMsgPlayerInfo struct {
-	Name             *string  `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
-	Xuid             *uint64  `protobuf:"fixed64,2,opt,name=xuid" json:"xuid,omitempty"`
-	Userid           *int32   `protobuf:"varint,3,opt,name=userid" json:"userid,omitempty"`
-	Steamid          *uint64  `protobuf:"fixed64,4,opt,name=steamid" json:"steamid,omitempty"`
-	Fakeplayer       *bool    `protobuf:"varint,5,opt,name=fakeplayer" json:"fakeplayer,omitempty"`
-	Ishltv           *bool    `protobuf:"varint,6,opt,name=ishltv" json:"ishltv,omitempty"`
-	CustomFiles      []uint32 `protobuf:"fixed32,7,rep,name=customFiles" json:"customFiles,omitempty"`
-	FilesDownloaded  *int32   `protobuf:"varint,8,opt,name=filesDownloaded" json:"filesDownloaded,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	Name             *string `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
+	Xuid             *uint64 `protobuf:"fixed64,2,opt,name=xuid" json:"xuid,omitempty"`
+	Userid           *int32  `protobuf:"varint,3,opt,name=userid" json:"userid,omitempty"`
+	Steamid          *uint64 `protobuf:"fixed64,4,opt,name=steamid" json:"steamid,omitempty"`
+	Fakeplayer       *bool   `protobuf:"varint,5,opt,name=fakeplayer" json:"fakeplayer,omitempty"`
+	Ishltv           *bool   `protobuf:"varint,6,opt,name=ishltv" json:"ishltv,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
 }
 
 func (m *CMsgPlayerInfo) Reset()         { *m = CMsgPlayerInfo{} }
@@ -278,20 +270,6 @@ func (m *CMsgPlayerInfo) GetIshltv() bool {
 		return *m.Ishltv
 	}
 	return false
-}
-
-func (m *CMsgPlayerInfo) GetCustomFiles() []uint32 {
-	if m != nil {
-		return m.CustomFiles
-	}
-	return nil
-}
-
-func (m *CMsgPlayerInfo) GetFilesDownloaded() int32 {
-	if m != nil && m.FilesDownloaded != nil {
-		return *m.FilesDownloaded
-	}
-	return 0
 }
 
 type CMsg_CVars struct {
@@ -374,54 +352,6 @@ func (m *CNETMsg_Disconnect) GetReason() ENetworkDisconnectionReason {
 		return *m.Reason
 	}
 	return Default_CNETMsg_Disconnect_Reason
-}
-
-type CNETMsg_File struct {
-	TransferId       *int32  `protobuf:"varint,1,opt,name=transfer_id" json:"transfer_id,omitempty"`
-	FileName         *string `protobuf:"bytes,2,opt,name=file_name" json:"file_name,omitempty"`
-	IsReplayDemoFile *bool   `protobuf:"varint,3,opt,name=is_replay_demo_file" json:"is_replay_demo_file,omitempty"`
-	Deny             *bool   `protobuf:"varint,4,opt,name=deny" json:"deny,omitempty"`
-	IsFileRequested  *bool   `protobuf:"varint,5,opt,name=is_file_requested" json:"is_file_requested,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
-}
-
-func (m *CNETMsg_File) Reset()         { *m = CNETMsg_File{} }
-func (m *CNETMsg_File) String() string { return proto.CompactTextString(m) }
-func (*CNETMsg_File) ProtoMessage()    {}
-
-func (m *CNETMsg_File) GetTransferId() int32 {
-	if m != nil && m.TransferId != nil {
-		return *m.TransferId
-	}
-	return 0
-}
-
-func (m *CNETMsg_File) GetFileName() string {
-	if m != nil && m.FileName != nil {
-		return *m.FileName
-	}
-	return ""
-}
-
-func (m *CNETMsg_File) GetIsReplayDemoFile() bool {
-	if m != nil && m.IsReplayDemoFile != nil {
-		return *m.IsReplayDemoFile
-	}
-	return false
-}
-
-func (m *CNETMsg_File) GetDeny() bool {
-	if m != nil && m.Deny != nil {
-		return *m.Deny
-	}
-	return false
-}
-
-func (m *CNETMsg_File) GetIsFileRequested() bool {
-	if m != nil && m.IsFileRequested != nil {
-		return *m.IsFileRequested
-	}
-	return false
 }
 
 type CNETMsg_Tick struct {
@@ -1143,14 +1073,6 @@ func (m *CSVCMsg_GameSessionConfiguration) GetIsLocalonly() bool {
 	}
 	return false
 }
-
-type CNETMsg_ReliableMessageEndMarker struct {
-	XXX_unrecognized []byte `json:"-"`
-}
-
-func (m *CNETMsg_ReliableMessageEndMarker) Reset()         { *m = CNETMsg_ReliableMessageEndMarker{} }
-func (m *CNETMsg_ReliableMessageEndMarker) String() string { return proto.CompactTextString(m) }
-func (*CNETMsg_ReliableMessageEndMarker) ProtoMessage()    {}
 
 func init() {
 	proto.RegisterEnum("dota.NET_Messages", NET_Messages_name, NET_Messages_value)
