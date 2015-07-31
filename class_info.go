@@ -15,7 +15,7 @@ func (p *Parser) onCSVCMsg_ServerInfo(m *dota.CSVCMsg_ServerInfo) error {
 func (p *Parser) onCDemoClassInfo(m *dota.CDemoClassInfo) error {
 	// Iterate through items, storing the mapping in the parser state
 	for _, c := range m.GetClasses() {
-		p.classInfo[c.GetClassId()] = c.GetNetworkName()
+		p.ClassInfo[c.GetClassId()] = c.GetNetworkName()
 
 		if _, ok := p.SendTables.GetTableByName(c.GetNetworkName()); !ok {
 			_panicf("unable to find table for class %d (%s)", c.GetClassId, c.GetNetworkName())
@@ -45,15 +45,15 @@ func (p *Parser) updateInstanceBaseline() {
 	}
 
 	// Iterate through instancebaseline table items
-	for _, item := range stringTable.items {
+	for _, item := range stringTable.Items {
 		// Get the class id for the string table item
-		classId, err := atoi32(item.key)
+		classId, err := atoi32(item.Key)
 		if err != nil {
-			_panicf("invalid instancebaseline key '%s': %s", item.key, err)
+			_panicf("invalid instancebaseline key '%s': %s", item.Key, err)
 		}
 
 		// Get the class name
-		className, ok := p.classInfo[classId]
+		className, ok := p.ClassInfo[classId]
 		if !ok {
 			_panicf("unable to find class info for instancebaseline key %d", classId)
 		}
@@ -69,13 +69,13 @@ func (p *Parser) updateInstanceBaseline() {
 			_panicf("unable to find send table %s for instancebaseline key %d", className, classId)
 		}
 
-		// TODO XXX: Remove once we've gotten readProperties working.
+		// TODO XXX: Remove once we've gotten ReadProperties working.
 		continue
 
 		// Parse the properties out of the string table buffer and store
 		// them as the class baseline in the Parser.
-		if len(item.value) > 0 {
-			p.classBaseline[classId] = readProperties(newReader(item.value), sendTable)
+		if len(item.Value) > 0 {
+			p.classBaseline[classId] = ReadProperties(NewReader(item.Value), sendTable)
 		}
 	}
 }

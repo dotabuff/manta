@@ -31,14 +31,14 @@ func (p *Parser) onCSVCMsg_SendTable(m *dota.CSVCMsg_SendTable) error {
 }
 
 // Holds and maintains send tables for an instance of Parser.
-type sendTables struct {
-	tables map[string]*SendTable
+type SendTables struct {
+	Tables map[string]*SendTable
 	props  []*SendProp
 }
 
 // Get a send table by name.
-func (ts *sendTables) GetTableByName(name string) (*SendTable, bool) {
-	t, ok := ts.tables[name]
+func (ts *SendTables) GetTableByName(name string) (*SendTable, bool) {
+	t, ok := ts.Tables[name]
 	return t, ok
 }
 
@@ -151,7 +151,7 @@ func (p *SendProp) Describe() string {
 // Dumps the json representation of the new FlattenedSerializer Packets
 func DumpSendTables(m *dota.CDemoSendTables) string {
 	// This packet just contains a single large buffer
-	r := newReader(m.GetData())
+	r := NewReader(m.GetData())
 
 	// The buffer starts with a varint encoded length
 	size := int(r.readVarUint32())
@@ -170,10 +170,10 @@ func DumpSendTables(m *dota.CDemoSendTables) string {
 	return string(str)
 }
 
-// Parses a CDemoSendTables buffer, producing a sendTables object.
-func ParseSendTables(m *dota.CDemoSendTables) (*sendTables, error) {
+// Parses a CDemoSendTables buffer, producing a SendTables object.
+func ParseSendTables(m *dota.CDemoSendTables) (*SendTables, error) {
 	// This packet just contains a single large buffer
-	r := newReader(m.GetData())
+	r := NewReader(m.GetData())
 
 	// The buffer starts with a varint encoded length
 	size := int(r.readVarUint32())
@@ -276,5 +276,5 @@ func ParseSendTables(m *dota.CDemoSendTables) (*sendTables, error) {
 	}
 
 	// Return a sendTables object
-	return &sendTables{tables: tables, props: props}, nil
+	return &SendTables{Tables: tables, props: props}, nil
 }

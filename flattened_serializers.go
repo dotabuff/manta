@@ -116,7 +116,7 @@ func (sers *flattened_serializers) recurse_table(cur *dota.ProtoFlattenedSeriali
 // Parses a CDemoSendTables packet
 func parseSendTablesNew(m *dota.CDemoSendTables, pst *PropertySerializerTable) (*flattened_serializers, error) {
 	// This packet just contains a single large buffer
-	r := newReader(m.GetData())
+	r := NewReader(m.GetData())
 
 	// The buffer starts with a varint encoded length
 	size := int(r.readVarUint32())

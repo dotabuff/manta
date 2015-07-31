@@ -15,7 +15,7 @@ type packetEntity struct {
 
 // Internal callback for CSVCMsg_PacketEntities.
 func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error {
-	// XXX: Remove once we've gotten readProperties working.
+	// XXX: Remove once we've gotten ReadProperties working.
 	return nil
 
 	defer func() {
@@ -26,7 +26,7 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 
 	_debugf("pTick=%d isDelta=%v deltaFrom=%d updatedEntries=%d maxEntries=%d baseline=%d updateBaseline=%v", p.Tick, m.GetIsDelta(), m.GetDeltaFrom(), m.GetUpdatedEntries(), m.GetMaxEntries(), m.GetBaseline(), m.GetUpdateBaseline())
 
-	r := newReader(m.GetEntityData())
+	r := NewReader(m.GetEntityData())
 	index := int32(-1)
 	ok := false
 
@@ -72,7 +72,7 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 			r.seekBits(10)
 
 			// Get the associated class.
-			if pe.className, ok = p.classInfo[pe.classId]; !ok {
+			if pe.className, ok = p.ClassInfo[pe.classId]; !ok {
 				_panicf("unable to find class %d", pe.classId)
 			}
 
@@ -87,7 +87,7 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 			_debugf("created a pe: %+v", pe)
 
 			// Read properties and set them in the packetEntity
-			pe.properties = readProperties(r, pe.sendTable)
+			pe.properties = ReadProperties(r, pe.sendTable)
 
 		case "U":
 			// Find the existing packetEntity
@@ -97,7 +97,7 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 			}
 
 			// Read properties and update the packetEntity
-			for k, v := range readProperties(r, pe.sendTable) {
+			for k, v := range ReadProperties(r, pe.sendTable) {
 				pe.properties[k] = v
 			}
 

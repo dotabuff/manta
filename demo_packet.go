@@ -66,7 +66,7 @@ func (p *Parser) onCDemoPacket(m *dota.CDemoPacket) error {
 
 	// Read all messages from the buffer. Messages are packed serially as
 	// {type, size, data}. We keep reading until until less than a byte remains.
-	r := newReader(m.GetData())
+	r := NewReader(m.GetData())
 	for r.remBytes() > 0 {
 		t := int32(r.readUBitVar())
 		size := int(r.readVarUint32())

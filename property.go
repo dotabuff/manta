@@ -2,7 +2,7 @@ package manta
 
 // Reads properties using a reader and send table.
 // Note: this is a work in progress and is almost certainly completely wrong.
-func readProperties(r *reader, t *SendTable) (result map[string]interface{}) {
+func ReadProperties(r *Reader, t *SendTable) (result map[string]interface{}) {
 	defer func() {
 		if err := recover(); err != nil {
 			_debugf("recovered: %s", err)

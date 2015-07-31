@@ -24,21 +24,21 @@ type readerDumper struct {
 	name string
 	fmt  string
 	zero interface{}
-	fn   func(r *reader) interface{}
+	fn   func(r *Reader) interface{}
 }
 
 // The list of name columns with dumpers that will be dumped.
 var readerDumpers = []readerDumper{
-	{"binary", "%-1v", "0", func(r *reader) interface{} { return r.readBits(1) }},
-	{"uint8", "%-3v", "0", func(r *reader) interface{} { return r.readBits(8) }},
-	{"handle", "%-10v", "0", func(r *reader) interface{} { return r.readBits(21) }},
-	{"var32", "%-11v", "0", func(r *reader) interface{} { return r.readVarInt32() }},
-	{"varu32", "%-10v", "0", func(r *reader) interface{} { return r.readVarUint32() }},
-	{"varu64", "%-20v", "0", func(r *reader) interface{} { return r.readVarUint64() }},
-	{"ubitvar", "%-10v", "0", func(r *reader) interface{} { return r.readUBitVar() }},
-	{"float32", "%-16v", "0", func(r *reader) interface{} { return r.readFloat32() }},
-	{"byte", "%-4s", "[]", func(r *reader) interface{} { return _sprintf("0x%02x", r.readByte()) }},
-	{"string", "%v", "-", func(r *reader) interface{} {
+	{"binary", "%-1v", "0", func(r *Reader) interface{} { return r.readBits(1) }},
+	{"uint8", "%-3v", "0", func(r *Reader) interface{} { return r.readBits(8) }},
+	{"handle", "%-10v", "0", func(r *Reader) interface{} { return r.readBits(21) }},
+	{"var32", "%-11v", "0", func(r *Reader) interface{} { return r.readVarInt32() }},
+	{"varu32", "%-10v", "0", func(r *Reader) interface{} { return r.readVarUint32() }},
+	{"varu64", "%-20v", "0", func(r *Reader) interface{} { return r.readVarUint64() }},
+	{"ubitvar", "%-10v", "0", func(r *Reader) interface{} { return r.readUBitVar() }},
+	{"float32", "%-16v", "0", func(r *Reader) interface{} { return r.readFloat32() }},
+	{"byte", "%-4s", "[]", func(r *Reader) interface{} { return _sprintf("0x%02x", r.readByte()) }},
+	{"string", "%v", "-", func(r *Reader) interface{} {
 		if s := r.readString(); isPrintable(s) {
 			return s
 		}
@@ -47,12 +47,12 @@ var readerDumpers = []readerDumper{
 }
 
 // Dumps the rest of the buffer.
-func (r *reader) dumpRemaining() {
+func (r *Reader) dumpRemaining() {
 	r.dumpBits(r.remBits())
 }
 
 // Dumps a given number of bits.
-func (r *reader) dumpBits(n int) {
+func (r *Reader) dumpBits(n int) {
 	o := r.pos
 	for i := r.pos; i < (o + n); i++ {
 		r.pos = i

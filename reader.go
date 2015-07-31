@@ -11,34 +11,34 @@ var (
 )
 
 // A reader holds a buffer and performs read operations against it.
-type reader struct {
+type Reader struct {
 	buf  []byte
 	size int
 	pos  int
 }
 
 // Creates a new reader object with a given buffer.
-func newReader(buf []byte) *reader {
-	return &reader{buf, len(buf) * 8, 0}
+func NewReader(buf []byte) *Reader {
+	return &Reader{buf, len(buf) * 8, 0}
 }
 
 // Calculates our byte position.
-func (r *reader) bytePos() int {
+func (r *Reader) bytePos() int {
 	return r.pos / 8
 }
 
 // Calculates how many bits are remaining.
-func (r *reader) remBits() int {
+func (r *Reader) remBits() int {
 	return r.size - r.pos
 }
 
 // Calculates how many bytes are remaining.
-func (r *reader) remBytes() int {
+func (r *Reader) remBytes() int {
 	return r.remBits() / 8
 }
 
 // Seeks a given number of bits (may be negative).
-func (r *reader) seekBits(n int) {
+func (r *Reader) seekBits(n int) {
 	if r.pos+n >= r.size || r.pos+n < 0 {
 		_panicf("seek overflow: %d bits requested, only %d remaining", n, r.size-r.pos)
 	}
@@ -46,42 +46,42 @@ func (r *reader) seekBits(n int) {
 }
 
 // Seeks a given number of bytes (may be negative).
-func (r *reader) seekBytes(n int) {
+func (r *Reader) seekBytes(n int) {
 	r.seekBits(n * 8)
 }
 
 // Reads a little-endian uint16.
-func (r *reader) readLeUint16() uint16 {
+func (r *Reader) readLeUint16() uint16 {
 	return littleEndian.Uint16(r.readBytes(2))
 }
 
 // Reads a little-endian uint32.
-func (r *reader) readLeUint32() uint32 {
+func (r *Reader) readLeUint32() uint32 {
 	return littleEndian.Uint32(r.readBytes(4))
 }
 
 // Reads a little-endian uint64.
-func (r *reader) readLeUint64() uint64 {
+func (r *Reader) readLeUint64() uint64 {
 	return littleEndian.Uint64(r.readBytes(8))
 }
 
 // Reads a big-endian uint16.
-func (r *reader) readBeUint16() uint16 {
+func (r *Reader) readBeUint16() uint16 {
 	return bigEndian.Uint16(r.readBytes(2))
 }
 
 // Reads a big-endian uint32.
-func (r *reader) readBeUint32() uint32 {
+func (r *Reader) readBeUint32() uint32 {
 	return bigEndian.Uint32(r.readBytes(4))
 }
 
 // Reads a big-endian uint64.
-func (r *reader) readBeUint64() uint64 {
+func (r *Reader) readBeUint64() uint64 {
 	return bigEndian.Uint64(r.readBytes(8))
 }
 
 // Reads an unsigned 32-bit varint.
-func (r *reader) readVarUint32() uint32 {
+func (r *Reader) readVarUint32() uint32 {
 	var x uint
 	var s uint
 	for {
@@ -97,7 +97,7 @@ func (r *reader) readVarUint32() uint32 {
 }
 
 // Reads a signed 32-bit varint.
-func (r *reader) readVarInt32() int32 {
+func (r *Reader) readVarInt32() int32 {
 	ux := r.readVarUint32()
 	x := int32(ux >> 1)
 	if ux&1 != 0 {
@@ -107,7 +107,7 @@ func (r *reader) readVarInt32() int32 {
 }
 
 // Reads an unsigned 64-bit varint.
-func (r *reader) readVarUint64() uint64 {
+func (r *Reader) readVarUint64() uint64 {
 	var x uint64
 	var s uint
 	for i := 0; ; i++ {
@@ -124,7 +124,7 @@ func (r *reader) readVarUint64() uint64 {
 }
 
 // Reads a signed 64-bit varint.
-func (r *reader) readVarInt64() int64 {
+func (r *Reader) readVarInt64() int64 {
 	ux := r.readVarUint64()
 	x := int64(ux >> 1)
 	if ux&1 != 0 {
@@ -134,7 +134,7 @@ func (r *reader) readVarInt64() int64 {
 }
 
 // Reads a boolean value.
-func (r *reader) readBoolean() bool {
+func (r *Reader) readBoolean() bool {
 	if r.remBits() < 1 {
 		_panicf("read overflow: no bits left")
 	}
@@ -145,26 +145,26 @@ func (r *reader) readBoolean() bool {
 }
 
 // Reads a bit varint
-func (r *reader) readUBitVar() uint32 {
+func (r *Reader) readUBitVar() uint32 {
 	ret := r.readBits(6)
 
-	switch (ret & 0x30) {
+	switch ret & 0x30 {
 	case 16:
-		ret = (ret & 15) | (r.readBits(4) << 4);
-		break;
+		ret = (ret & 15) | (r.readBits(4) << 4)
+		break
 	case 32:
-		ret = (ret & 15) | (r.readBits(8) << 4);
-		break;
+		ret = (ret & 15) | (r.readBits(8) << 4)
+		break
 	case 48:
-		ret = (ret & 15) | (r.readBits(28) << 4);
-		break;
+		ret = (ret & 15) | (r.readBits(28) << 4)
+		break
 	}
 
 	return ret
 }
 
 // Reads the next byte (8 bits) in the buffer.
-func (r *reader) readByte() byte {
+func (r *Reader) readByte() byte {
 	// Fast path if our position is byte-aligned.
 	if r.pos%8 == 0 && r.pos+8 <= r.size {
 		bpos := r.pos / 8
@@ -177,7 +177,7 @@ func (r *reader) readByte() byte {
 }
 
 // Reads the given number of bytes from the buffer.
-func (r *reader) readBytes(n int) []byte {
+func (r *Reader) readBytes(n int) []byte {
 	if r.remBits() < (n * 8) {
 		_panicf("read overflow: %d bits requested, only %d remaining", n*8, r.remBits())
 	}
@@ -198,12 +198,12 @@ func (r *reader) readBytes(n int) []byte {
 }
 
 // Reads a string of a given length.
-func (r *reader) readStringN(n int) string {
+func (r *Reader) readStringN(n int) string {
 	return string(r.readBytes(n))
 }
 
 // Read a null terminated string.
-func (r *reader) readString() string {
+func (r *Reader) readString() string {
 	buf := make([]byte, 0)
 	for {
 		b := r.readByte()
@@ -217,12 +217,12 @@ func (r *reader) readString() string {
 }
 
 // Reads a float32 as the IEEE 754 binary representation of the next 4 bytes.
-func (r *reader) readFloat32() float32 {
+func (r *Reader) readFloat32() float32 {
 	return math.Float32frombits(r.readLeUint32())
 }
 
 // Reads a float32 with props
-func (r *reader) readFloat32Bits(b int32, lP *float32, hP *float32) float32 {
+func (r *Reader) readFloat32Bits(b int32, lP *float32, hP *float32) float32 {
 	bits := int(b)
 	lV, hV := float32(0.0), float32(0.0)
 	if lP != nil {
@@ -240,7 +240,7 @@ func (r *reader) readFloat32Bits(b int32, lP *float32, hP *float32) float32 {
 }
 
 // Reads bits as bytes.
-func (r *reader) readBitsAsBytes(n int) []byte {
+func (r *Reader) readBitsAsBytes(n int) []byte {
 	tmp := make([]byte, 0)
 	for n >= 8 {
 		tmp = append(tmp, r.readByte())
@@ -253,7 +253,7 @@ func (r *reader) readBitsAsBytes(n int) []byte {
 }
 
 // Read bits of a given length as a uint, may or may not be byte-aligned.
-func (r *reader) readBits(n int) uint32 {
+func (r *Reader) readBits(n int) uint32 {
 	if r.remBits() < n {
 		_panicf("read overflow: %d bits requested, only %d remaining", n, r.remBits())
 	}

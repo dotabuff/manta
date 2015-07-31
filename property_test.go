@@ -852,8 +852,8 @@ func TestReadProperties(t *testing.T) {
 		}
 
 		// Read properties
-		r := newReader(buf)
-		props := readProperties(r, st)
+		r := NewReader(buf)
+		props := ReadProperties(r, st)
 		assert.Equal(s.expectCount, len(props))
 		for k, v := range s.expectKeys {
 			assert.Equal(v, props[k], s.tableName+"."+k)
@@ -894,7 +894,7 @@ func TestAnalyzeInstancebaselines(t *testing.T) {
 		}
 
 		buf := _read_fixture("instancebaseline/" + fileName)
-		r := newReader(buf)
+		r := NewReader(buf)
 
 		first1 := -1
 		for i := 0; i < r.size; i++ {
@@ -918,6 +918,6 @@ func TestAnalyzeInstancebaselines(t *testing.T) {
 		r.dumpBits(nDump)
 
 		r.pos = 0
-		readProperties(r, sendTable)
+		ReadProperties(r, sendTable)
 	}
 }

@@ -45,10 +45,10 @@ import (
 // - CStrongHandle< InfoForResourceTypeIMaterial2 >[6]
 
 // Type for a decoder function
-type DecodeFcn func(*reader) interface{}
+type DecodeFcn func(*Reader) interface{}
 
 // Type for an array decoder function
-type DecodeArrayFcn func(*reader) interface{}
+type DecodeArrayFcn func(*Reader) interface{}
 
 // PropertySerializer interface
 type PropertySerializer struct {
