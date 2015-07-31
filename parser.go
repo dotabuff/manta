@@ -156,7 +156,9 @@ func (p *Parser) Stop() {
 }
 
 func (p *Parser) afterStop() {
-	p.AfterStopCallback()
+	if p.AfterStopCallback != nil {
+		p.AfterStopCallback()
+	}
 }
 
 // Performs a lookup on a string table by an entry index.

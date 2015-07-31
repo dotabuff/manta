@@ -50,9 +50,9 @@ func TestSendTableParsing(t *testing.T) {
 	assert.Nil(err)
 
 	// Verify the tables
-	assert.Equal(685, len(st.tables))
-	assert.Equal("CDOTA_NPC_Observer_Ward", st.tables["CDOTA_NPC_Observer_Ward"].Name)
-	assert.Equal("CBaseAnimating", st.tables["CBaseAnimating"].Name)
+	assert.Equal(685, len(st.Tables))
+	assert.Equal("CDOTA_NPC_Observer_Ward", st.Tables["CDOTA_NPC_Observer_Ward"].Name)
+	assert.Equal("CBaseAnimating", st.Tables["CBaseAnimating"].Name)
 
 	// Verify the properties
 	assert.Equal(1303, len(st.props))
