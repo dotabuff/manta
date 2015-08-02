@@ -251,7 +251,7 @@ func (r *reader) readCoord() float32 {
 		signbit = r.readBoolean()
 
 		if intval != 0 {
-			intval = r.readBits(14) + 1
+			intval = r.readBits(13) + 1
 		}
 
 		if fractval != 0 {
