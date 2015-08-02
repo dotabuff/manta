@@ -120,6 +120,24 @@ func hasPrefix(s, prefix string) bool {
 	return len(s) >= len(prefix) && s[:len(prefix)] == prefix
 }
 
+// Prints value after checking for nil
+func saveReturnInt32(v *int32) int32 {
+	if v == nil {
+		return 0
+	} else {
+		return *v
+	}
+}
+
+// Prints value after checking for nil
+func saveReturnFloat32(v *float32, def interface{}) interface{} {
+	if v == nil {
+		return def
+	} else {
+		return *v
+	}
+}
+
 func log2(n int) int {
 	return int(math.Log(float64(n))/math.Log(2)) + 1
 }
