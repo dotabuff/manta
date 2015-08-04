@@ -1,5 +1,9 @@
 package manta
 
+import (
+	"strconv"
+)
+
 // This is a list of encoding functions that are know to resolve to a correct layout.
 // All of these have been verified
 // ----------------------------------------------------------------------------------
@@ -136,7 +140,15 @@ func (fp *fieldpath) walk(r *reader) {
 func (fp *fieldpath) addField() {
 	cDt := fp.parent
 
+	var path string
 	i := 0
+
+	for i = 0; i < len(fp.index)-1; i++ {
+		path += strconv.Itoa(int(fp.index[i])) + "/"
+	}
+
+	_debugf("Adding field with path: %s%d", path, fp.index[len(fp.index)-1])
+
 	for i = 0; i < len(fp.index)-1; i++ {
 		if cDt.Properties[fp.index[i]].Table != nil {
 			cDt = cDt.Properties[fp.index[i]].Table
