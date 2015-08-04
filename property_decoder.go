@@ -1,5 +1,9 @@
 package manta
 
+import (
+	"strconv"
+)
+
 func decodeHandle(r *reader, f *dt_field) interface{} {
 	// So far these seem to occupy 32 bits but the value is made up only
 	// out of what's present in the first 21 bits. In source 1, these only
@@ -30,22 +34,52 @@ func decodeBoolean(r *reader, f *dt_field) interface{} {
 }
 
 func decodeFloat(r *reader, f *dt_field) interface{} {
-	// This will be tricky as floats can be encoded in oh-so-many ways.
-	var value float32
+	_debugf(
+		"Bitcount: %v, Low: %v, High: %v, Flags: %v",
+		saveReturnInt32(f.BitCount),
+		saveReturnFloat32(f.LowValue, "nil"),
+		saveReturnFloat32(f.HighValue, "nil"),
+		strconv.FormatInt(int64(saveReturnInt32(f.Flags)), 2),
+	)
 
-	_debugf("s2 calc, %v, %v, %v, %v", f.BitCount, f.LowValue, f.HighValue, f.Flags)
+	// Tread all the different flags
+	//if (flags & 1) == 1 {
+	/* Old way of reading a cell cord
 
-	// We haven't yet determined how to read a float with a bitcount.
+	intval := r.readBits(1)
+	fractval := r.readBits(1)
+
+	if intval == 1 || fractval == 1 {
+		ret := float32(0.0)
+		sign := r.readBits(1)
+
+		if intval == 1 {
+			intval = r.readBits(int(bc)) + 1
+		}
+
+		if fractval == 1 {
+			fractval = r.readBits(5)
+		}
+
+		ret = float32(intval) + float32(fractval) * float32(1.0 / 5)
+
+		if sign == 1 {
+			return -ret
+		} else {
+			return ret
+		}
+	}*/
+	//}
+
+	var bc int32
+	bc = 10
 	if f.BitCount != nil {
-		value = r.readFloat32Bits(*f.BitCount, f.LowValue, f.HighValue)
-	} else {
-		dividend := r.readBits(10)
-		divisor := (1 << 10) - 1
-
-		return float32(dividend) / float32(divisor)
+		bc = *f.BitCount
 	}
 
-	return value
+	dividend := r.readBits(int(bc))
+	divisor := (1 << uint32(bc)) - 1
+	return float32(dividend) / float32(divisor)
 }
 
 func decodeString(r *reader, f *dt_field) interface{} {
@@ -68,8 +102,8 @@ func decodeClass(r *reader, f *dt_field) interface{} {
 }
 
 func decodeQuantized(r *reader, f *dt_field) interface{} {
-	_debugf("Quantized calc, %v, %v, %v, %v", f.BitCount, f.LowValue, f.HighValue, f.Flags)
-	return r.readBits(11)
+	// Lets do this for now
+	return decodeFloat(r, f)
 }
 
 func decodeFVector(r *reader, f *dt_field) interface{} {
@@ -93,9 +127,9 @@ func decodeNop(r *reader, f *dt_field) interface{} {
 
 func decodePointer(r *reader, f *dt_field) interface{} {
 	// Seems to be encoded as a single bit, not sure what to make of it
-	if !r.readBoolean() {
-		r.readBits(30)
-	}
+	//if !r.readBoolean() {
+	//_panicf("Figure out how this works")
+	//}
 
 	return 0
 }
@@ -105,8 +139,6 @@ func decodeQAngle(r *reader, f *dt_field) interface{} {
 		// There is a flag check against 0x20 in the disasembly
 		_debugf("Angle flags: %v", *f.Flags)
 	}
-
-	r.dumpBits(1024)
 
 	ret := [3]float32{0.0, 0.0, 0.0}
 
@@ -127,4 +159,31 @@ func decodeQAngle(r *reader, f *dt_field) interface{} {
 	}
 
 	return ret
+}
+
+func decodeComponent(r *reader, f *dt_field) interface{} {
+	_debugf(
+		"Bitcount: %v, Low: %v, High: %v, Flags: %v",
+		saveReturnInt32(f.BitCount),
+		saveReturnFloat32(f.LowValue, "nil"),
+		saveReturnFloat32(f.HighValue, "nil"),
+		strconv.FormatInt(int64(saveReturnInt32(f.Flags)), 2),
+	)
+
+	// might be encoded like a pointer (1 bit for set / unset, etc.)
+	//if r.readBits(1) == 1 {
+	//	return r.readBits(1)
+	//}
+
+	return 0
+}
+
+func decodeStrongHandle(r *reader, f *dt_field) interface{} {
+	// wrong, just testing
+	return r.readBits(1)
+}
+
+func decodeHSequence(r *reader, f *dt_field) interface{} {
+	// wrong, just testing
+	return r.readBits(1)
 }
