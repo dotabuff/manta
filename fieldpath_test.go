@@ -64,7 +64,7 @@ func TestFieldpath(t *testing.T) {
 			tableName:   "CDOTAGamerulesProxy",
 			run:         true,
 			debug:       false,
-			expectCount: 389,
+			expectCount: 1838,
 		},
 	}
 
