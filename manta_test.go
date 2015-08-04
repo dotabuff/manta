@@ -1,6 +1,7 @@
 package manta
 
 import (
+	"sort"
 	"testing"
 
 	"github.com/dotabuff/manta/dota"
@@ -125,27 +126,27 @@ func TestParseRealMatches(t *testing.T) {
 			return nil
 		})
 
-		// Writes out the source_1_legacy_game_events_list.json fixture so that we can identify changes to schema.
-		parser.Callbacks.OnCMsgSource1LegacyGameEventList(func(m *dota.CMsgSource1LegacyGameEventList) error {
-			_dump_fixture("legacy_game_events/list_latest.json", _json_marshal(m))
-			return nil
-		})
+		if fixturesMode {
+			// Writes out the source_1_legacy_game_events_list.json fixture so that we can identify changes to schema.
+			parser.Callbacks.OnCMsgSource1LegacyGameEventList(func(m *dota.CMsgSource1LegacyGameEventList) error {
+				_dump_fixture("legacy_game_events/list_latest.json", _json_marshal(m))
+				return nil
+			})
+		}
 
 		err = parser.Start()
 		assert.Nil(err, s.matchId)
 
-		/*
-			Use this to write out instancebaseline fixtures
+		if fixturesMode {
+			// Use this to write out instancebaseline fixtures
 			t, _ := parser.stringTables.getTableByName("instancebaseline")
 			for _, i := range t.items {
 				classId, _ := atoi32(i.key)
 				className := parser.classInfo[classId]
 				_dump_fixture(_sprintf("instancebaseline/%s_%s.rawbuf", className), s.matchId, i.value)
 			}
-		*/
 
-		/*
-				Use this to dump layout of sendtables
+			// Use this to dump layout of sendtables
 			out := _sprintf("")
 			classIds := make([]int, 0)
 			for classId, _ := range parser.classInfo {
@@ -162,7 +163,7 @@ func TestParseRealMatches(t *testing.T) {
 				}
 				out += "\n"
 			}
-		*/
+		}
 
 		assert.Equal(s.expectCombatLogDamage, gotCombatLogDamage, s.matchId)
 		assert.Equal(s.expectCombatLogHealing, gotCombatLogHealing, s.matchId)
