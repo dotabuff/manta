@@ -20,7 +20,8 @@ import (
 //  8  NonTopoComplex                     76         11   11011000111
 //  9  PushOneLeftDeltaZeroRightZero      35         12   110110001101
 // 10  PopOnePlusOne                       1     2   15   110110001100001
-// 11  PushTwoLeftDeltaZero                0         27   110110001100100110000000000
+// 11  PopNPlusOne                         0         16   1101100011000110
+// 12  PushTwoLeftDeltaZero                0         27   110110001100100110000000000
 
 // A fieldpath, used to walk through the flattened table hierarchy
 type fieldpath struct {
@@ -113,7 +114,7 @@ func (fp *fieldpath) walk(r *reader) {
 				fieldpathLookup[i.Value()].Function(r, fp)
 				fp.addField()
 
-				_debugf("Reached in %d bits, %s", cnt, fp.fields[len(fp.fields)-1].Name)
+				_debugf("Reached in %d bits, %s, %d", cnt, fp.fields[len(fp.fields)-1].Name, r.pos)
 				cnt = 0
 			} else {
 				node = i
@@ -124,7 +125,7 @@ func (fp *fieldpath) walk(r *reader) {
 				fieldpathLookup[i.Value()].Function(r, fp)
 				fp.addField()
 
-				_debugf("Reached in %d bits, %s", cnt, fp.fields[len(fp.fields)-1].Name)
+				_debugf("Reached in %d bits, %s, %d", cnt, fp.fields[len(fp.fields)-1].Name, r.pos)
 				cnt = 0
 			} else {
 				node = i
@@ -188,6 +189,7 @@ func newFieldpathHuffmanStatic() HuffmanTree {
 	addNode(h, 1819, 11, 19)   // NonTopoComplex
 	addNode(h, 2843, 12, 20)   // PushOneLeftDeltaZeroRightZero
 	addNode(h, 17179, 15, 22)  // PopOnePlusOne
+	addNode(h, 25371, 16, 25)  // PopNPlusOne
 	addNode(h, 103195, 27, 39) // PushTwoLeftDeltaZero
 
 	return h
@@ -390,6 +392,16 @@ func PopAllButOnePlusNPack6Bits(r *reader, fp *fieldpath) {
 
 func PopNPlusOne(r *reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
+
+	rBits := []int{2, 4, 10, 17, 30}
+
+	for _, bits := range rBits {
+		if r.readBits(1) == 1 {
+			fp.index = fp.index[:len(fp.index)-(int(r.readBits(bits)))]
+			fp.index[len(fp.index)-1] += 1
+			return
+		}
+	}
 }
 
 func PopNPlusN(r *reader, fp *fieldpath) {
