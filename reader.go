@@ -144,7 +144,7 @@ func (r *reader) readBoolean() bool {
 	return b
 }
 
-// Reads a bit varint
+// Reads a bit varint, encoding in last to bits of 6 bit group
 func (r *reader) readUBitVar() uint32 {
 	ret := r.readBits(6)
 
@@ -161,6 +161,19 @@ func (r *reader) readUBitVar() uint32 {
 	}
 
 	return ret
+}
+
+// Another ubitvar variant, encoding in first 2 bits of 6 bit group
+func (r *reader) readUBitVar2() uint32 {
+	ret := r.readBits(6)
+	enc := uint32(ret & 3)
+
+	if enc != 0 {
+		r.pos -= 4
+		return r.readBits(int(4 + enc*4 + (((2 - enc) >> 31) & 16)))
+	} else {
+		return (ret >> 2)
+	}
 }
 
 // Reads the next byte (8 bits) in the buffer.
