@@ -128,7 +128,7 @@ func (sers *flattened_serializers) recurse_table(cur *dota.ProtoFlattenedSeriali
 						Version:    prop.Field.Version,
 						Serializer: prop.Field.Serializer.ArraySerializer,
 					},
-					Table: nil,
+					Table: prop.Table, // This carries on the actual table instead of overriding it
 				})
 			}
 
