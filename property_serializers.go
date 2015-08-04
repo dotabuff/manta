@@ -80,17 +80,23 @@ func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *Pr
 	case "CRenderComponent":
 		fallthrough
 	case "CBodyComponent":
-		decoder = decodeNop
+		decoder = decodeComponent
 	case "CDOTASpectatorGraphManager*":
 		fallthrough
 	case "CEntityIdentity*":
 		decoder = decodePointer
 	case "QAngle":
 		decoder = decodeQAngle
+	case "CGameSceneNodeHandle":
+		decoder = decodeHandle
+	case "HSequence":
+		decoder = decodeHSequence
 	default:
 		// check for specific types
 		switch {
 		case hasPrefix(name, "CHandle"):
+			decoder = decodeHandle
+		case hasPrefix(name, "CStrongHandle"):
 			decoder = decodeHandle
 		case hasPrefix(name, "CUtlVector< "):
 			if match := matchVector.FindStringSubmatch(name); match != nil {
@@ -138,6 +144,50 @@ func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *Pr
 			Length:          uint32(128),
 			ArraySerializer: &PropertySerializer{},
 		}
+		pst.Serializers[name] = ps
+		return ps
+	}
+
+	if name == "C_DOTA_ItemStockInfo[MAX_ITEM_STOCKS]" {
+		typeName := "C_DOTA_ItemStockInfo"
+
+		serializer, found := pst.Serializers[typeName]
+		if !found {
+			serializer = pst.GetPropertySerializerByName(typeName)
+			pst.Serializers[typeName] = serializer
+		}
+
+		ps := &PropertySerializer{
+			Decode:          serializer.Decode,
+			DecodeContainer: decoderContainer,
+			IsArray:         true,
+			Length:          uint32(8),
+			ArraySerializer: serializer,
+			Name:            typeName,
+		}
+
+		pst.Serializers[name] = ps
+		return ps
+	}
+
+	if name == "CDOTA_AbilityDraftAbilityState[MAX_ABILITY_DRAFT_ABILITIES]" {
+		typeName := "CDOTA_AbilityDraftAbilityState"
+
+		serializer, found := pst.Serializers[typeName]
+		if !found {
+			serializer = pst.GetPropertySerializerByName(typeName)
+			pst.Serializers[typeName] = serializer
+		}
+
+		ps := &PropertySerializer{
+			Decode:          serializer.Decode,
+			DecodeContainer: decoderContainer,
+			IsArray:         true,
+			Length:          uint32(48),
+			ArraySerializer: serializer,
+			Name:            typeName,
+		}
+
 		pst.Serializers[name] = ps
 		return ps
 	}
