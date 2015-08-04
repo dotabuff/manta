@@ -98,7 +98,6 @@ func decodeVector(r *reader, f *dt_field) interface{} {
 
 func decodeClass(r *reader, f *dt_field) interface{} {
 	return r.readVarUint32()
-	//return r.readBits(8)
 }
 
 func decodeQuantized(r *reader, f *dt_field) interface{} {
@@ -127,9 +126,9 @@ func decodeNop(r *reader, f *dt_field) interface{} {
 
 func decodePointer(r *reader, f *dt_field) interface{} {
 	// Seems to be encoded as a single bit, not sure what to make of it
-	//if !r.readBoolean() {
-	//_panicf("Figure out how this works")
-	//}
+	if !r.readBoolean() {
+		_panicf("Figure out how this works")
+	}
 
 	return 0
 }
