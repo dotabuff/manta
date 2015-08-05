@@ -549,14 +549,13 @@ func (x *CBidirMsg_RelayInfo_OperationT) UnmarshalJSON(data []byte) error {
 }
 
 type CCLCMsg_ClientInfo struct {
-	SendTableCrc     *uint32  `protobuf:"fixed32,1,opt,name=send_table_crc" json:"send_table_crc,omitempty"`
-	ServerCount      *uint32  `protobuf:"varint,2,opt,name=server_count" json:"server_count,omitempty"`
-	IsHltv           *bool    `protobuf:"varint,3,opt,name=is_hltv" json:"is_hltv,omitempty"`
-	IsReplay         *bool    `protobuf:"varint,4,opt,name=is_replay" json:"is_replay,omitempty"`
-	FriendsId        *uint32  `protobuf:"varint,5,opt,name=friends_id" json:"friends_id,omitempty"`
-	FriendsName      *string  `protobuf:"bytes,6,opt,name=friends_name" json:"friends_name,omitempty"`
-	CustomFiles      []uint32 `protobuf:"fixed32,7,rep,name=custom_files" json:"custom_files,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	SendTableCrc     *uint32 `protobuf:"fixed32,1,opt,name=send_table_crc" json:"send_table_crc,omitempty"`
+	ServerCount      *uint32 `protobuf:"varint,2,opt,name=server_count" json:"server_count,omitempty"`
+	IsHltv           *bool   `protobuf:"varint,3,opt,name=is_hltv" json:"is_hltv,omitempty"`
+	IsReplay         *bool   `protobuf:"varint,4,opt,name=is_replay" json:"is_replay,omitempty"`
+	FriendsId        *uint32 `protobuf:"varint,5,opt,name=friends_id" json:"friends_id,omitempty"`
+	FriendsName      *string `protobuf:"bytes,6,opt,name=friends_name" json:"friends_name,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
 }
 
 func (m *CCLCMsg_ClientInfo) Reset()         { *m = CCLCMsg_ClientInfo{} }
@@ -603,13 +602,6 @@ func (m *CCLCMsg_ClientInfo) GetFriendsName() string {
 		return *m.FriendsName
 	}
 	return ""
-}
-
-func (m *CCLCMsg_ClientInfo) GetCustomFiles() []uint32 {
-	if m != nil {
-		return m.CustomFiles
-	}
-	return nil
 }
 
 type CCLCMsg_Move struct {

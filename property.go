@@ -1,6 +1,37 @@
 package manta
 
-// Reads properties using a reader and send table.
+func readPropertiesNew(r *Reader, ser *dt) (result map[string]interface{}) {
+	// Return type
+	result = make(map[string]interface{})
+
+	// Generate the huffman tree and fieldpath
+	huf := newFieldpathHuffman()
+	fieldPath := newFieldpath(ser, &huf)
+
+	// Get a list of the included fields
+	fieldPath.walk(r)
+
+	// iterate all the fields and set their corresponding values
+	for _, f := range fieldPath.fields {
+		if f.Serializer.Decode == nil {
+			result[f.Name] = r.readVarUint32()
+			_debugf("Reading %s - %s as varint %v", f.Name, f.Type, result[f.Name])
+			continue
+		}
+
+		if f.Serializer.DecodeContainer != nil {
+			result[f.Name] = f.Serializer.DecodeContainer(r, f)
+		} else {
+			result[f.Name] = f.Serializer.Decode(r, f)
+		}
+
+		_debugf("Decoded: %d %s %s %v", r.pos, f.Name, f.Type, result[f.Name])
+	}
+
+	return result
+}
+
+// Reads properties using a Reader and send table.
 // Note: this is a work in progress and is almost certainly completely wrong.
 func ReadProperties(r *Reader, t *SendTable) (result map[string]interface{}) {
 	defer func() {

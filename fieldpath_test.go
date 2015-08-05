@@ -36,6 +36,36 @@ func TestFieldpath(t *testing.T) {
 			debug:       false,
 			expectCount: 139,
 		},
+		{
+			tableName:   "CDOTAPlayer",
+			run:         true,
+			debug:       false,
+			expectCount: 137,
+		},
+		{
+			tableName:   "CDOTA_PlayerResource",
+			run:         true,
+			debug:       false,
+			expectCount: 2056,
+		},
+		{
+			tableName:   "CBaseAnimating",
+			run:         true,
+			debug:       false,
+			expectCount: 110,
+		},
+		{
+			tableName:   "CBaseEntity",
+			run:         true,
+			debug:       false,
+			expectCount: 35,
+		},
+		{
+			tableName:   "CDOTAGamerulesProxy",
+			run:         true,
+			debug:       false,
+			expectCount: 1838,
+		},
 	}
 
 	// Load our send tables
@@ -45,11 +75,13 @@ func TestFieldpath(t *testing.T) {
 	}
 
 	// Retrieve the flattened field serializer
-	fs, err := parseSendTablesNew(m, GetDefaultPropertySerializerTable())
-	assert.Nil(err)
+	fs := ParseSendTablesNew(m, GetDefaultPropertySerializerTable())
 
 	// Build the huffman tree
 	huf := newFieldpathHuffman()
+
+	//printCodes(huf, []byte{})
+	//_debugf("%s", fs.dump_json("CSpeechBubbleManager"))
 
 	// Iterate over the different scenarios
 	// -! Create a new FieldPath for each scenario

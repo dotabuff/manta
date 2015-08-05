@@ -5131,6 +5131,144 @@ func (m *CMsgServerToGCRerollPlayerChallenge) GetRerollMsg() *CMsgClientToGCRero
 	return nil
 }
 
+type CMsgServerToGCHoldEventPoints struct {
+	Holds            []*CMsgServerToGCHoldEventPoints_HoldRequest `protobuf:"bytes,1,rep,name=holds" json:"holds,omitempty"`
+	EventId          *uint32                                      `protobuf:"varint,2,opt,name=event_id" json:"event_id,omitempty"`
+	HoldKey          *uint64                                      `protobuf:"varint,3,opt,name=hold_key" json:"hold_key,omitempty"`
+	HoldUntil        *uint32                                      `protobuf:"varint,4,opt,name=hold_until" json:"hold_until,omitempty"`
+	XXX_unrecognized []byte                                       `json:"-"`
+}
+
+func (m *CMsgServerToGCHoldEventPoints) Reset()         { *m = CMsgServerToGCHoldEventPoints{} }
+func (m *CMsgServerToGCHoldEventPoints) String() string { return proto.CompactTextString(m) }
+func (*CMsgServerToGCHoldEventPoints) ProtoMessage()    {}
+
+func (m *CMsgServerToGCHoldEventPoints) GetHolds() []*CMsgServerToGCHoldEventPoints_HoldRequest {
+	if m != nil {
+		return m.Holds
+	}
+	return nil
+}
+
+func (m *CMsgServerToGCHoldEventPoints) GetEventId() uint32 {
+	if m != nil && m.EventId != nil {
+		return *m.EventId
+	}
+	return 0
+}
+
+func (m *CMsgServerToGCHoldEventPoints) GetHoldKey() uint64 {
+	if m != nil && m.HoldKey != nil {
+		return *m.HoldKey
+	}
+	return 0
+}
+
+func (m *CMsgServerToGCHoldEventPoints) GetHoldUntil() uint32 {
+	if m != nil && m.HoldUntil != nil {
+		return *m.HoldUntil
+	}
+	return 0
+}
+
+type CMsgServerToGCHoldEventPoints_HoldRequest struct {
+	AccountId        *uint32 `protobuf:"varint,1,opt,name=account_id" json:"account_id,omitempty"`
+	PointsHeld       *uint32 `protobuf:"varint,2,opt,name=points_held" json:"points_held,omitempty"`
+	PremiumHeld      *uint32 `protobuf:"varint,3,opt,name=premium_held" json:"premium_held,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CMsgServerToGCHoldEventPoints_HoldRequest) Reset() {
+	*m = CMsgServerToGCHoldEventPoints_HoldRequest{}
+}
+func (m *CMsgServerToGCHoldEventPoints_HoldRequest) String() string { return proto.CompactTextString(m) }
+func (*CMsgServerToGCHoldEventPoints_HoldRequest) ProtoMessage()    {}
+
+func (m *CMsgServerToGCHoldEventPoints_HoldRequest) GetAccountId() uint32 {
+	if m != nil && m.AccountId != nil {
+		return *m.AccountId
+	}
+	return 0
+}
+
+func (m *CMsgServerToGCHoldEventPoints_HoldRequest) GetPointsHeld() uint32 {
+	if m != nil && m.PointsHeld != nil {
+		return *m.PointsHeld
+	}
+	return 0
+}
+
+func (m *CMsgServerToGCHoldEventPoints_HoldRequest) GetPremiumHeld() uint32 {
+	if m != nil && m.PremiumHeld != nil {
+		return *m.PremiumHeld
+	}
+	return 0
+}
+
+type CMsgSignOutReleaseEventPointHolds struct {
+	AccountIds       []uint32 `protobuf:"varint,1,rep,name=account_ids" json:"account_ids,omitempty"`
+	EventId          *uint32  `protobuf:"varint,2,opt,name=event_id" json:"event_id,omitempty"`
+	HoldKey          *uint64  `protobuf:"varint,3,opt,name=hold_key" json:"hold_key,omitempty"`
+	XXX_unrecognized []byte   `json:"-"`
+}
+
+func (m *CMsgSignOutReleaseEventPointHolds) Reset()         { *m = CMsgSignOutReleaseEventPointHolds{} }
+func (m *CMsgSignOutReleaseEventPointHolds) String() string { return proto.CompactTextString(m) }
+func (*CMsgSignOutReleaseEventPointHolds) ProtoMessage()    {}
+
+func (m *CMsgSignOutReleaseEventPointHolds) GetAccountIds() []uint32 {
+	if m != nil {
+		return m.AccountIds
+	}
+	return nil
+}
+
+func (m *CMsgSignOutReleaseEventPointHolds) GetEventId() uint32 {
+	if m != nil && m.EventId != nil {
+		return *m.EventId
+	}
+	return 0
+}
+
+func (m *CMsgSignOutReleaseEventPointHolds) GetHoldKey() uint64 {
+	if m != nil && m.HoldKey != nil {
+		return *m.HoldKey
+	}
+	return 0
+}
+
+type CMsgGCToServerUpdateBroadcastCheers struct {
+	TimeStamp        *uint32 `protobuf:"varint,1,opt,name=time_stamp" json:"time_stamp,omitempty"`
+	Team_1Cheers     *uint32 `protobuf:"varint,2,opt,name=team_1_cheers" json:"team_1_cheers,omitempty"`
+	Team_2Cheers     *uint32 `protobuf:"varint,3,opt,name=team_2_cheers" json:"team_2_cheers,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CMsgGCToServerUpdateBroadcastCheers) Reset()         { *m = CMsgGCToServerUpdateBroadcastCheers{} }
+func (m *CMsgGCToServerUpdateBroadcastCheers) String() string { return proto.CompactTextString(m) }
+func (*CMsgGCToServerUpdateBroadcastCheers) ProtoMessage()    {}
+
+func (m *CMsgGCToServerUpdateBroadcastCheers) GetTimeStamp() uint32 {
+	if m != nil && m.TimeStamp != nil {
+		return *m.TimeStamp
+	}
+	return 0
+}
+
+func (m *CMsgGCToServerUpdateBroadcastCheers) GetTeam_1Cheers() uint32 {
+	if m != nil && m.Team_1Cheers != nil {
+		return *m.Team_1Cheers
+	}
+	return 0
+}
+
+func (m *CMsgGCToServerUpdateBroadcastCheers) GetTeam_2Cheers() uint32 {
+	if m != nil && m.Team_2Cheers != nil {
+		return *m.Team_2Cheers
+	}
+	return 0
+}
+
 func init() {
 	proto.RegisterEnum("dota.EPoorNetworkConditionsType", EPoorNetworkConditionsType_name, EPoorNetworkConditionsType_value)
 	proto.RegisterEnum("dota.EAbilityAbuseType", EAbilityAbuseType_name, EAbilityAbuseType_value)

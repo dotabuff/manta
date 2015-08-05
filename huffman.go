@@ -150,6 +150,10 @@ func swapNodes(tree HuffmanTree, path uint32, len uint32) {
 
 // Print computed tree order
 func printCodes(tree HuffmanTree, prefix []byte) {
+	if tree == nil {
+		return
+	}
+
 	if tree.IsLeaf() {
 		fmt.Printf("%v\t%d\t%d\t%s\n", tree.Value(), tree.Weight(), len(prefix), string(prefix))
 	} else {
@@ -161,4 +165,51 @@ func printCodes(tree HuffmanTree, prefix []byte) {
 		printCodes(tree.Right(), prefix)
 		prefix = prefix[:len(prefix)-1]
 	}
+}
+
+// Used to create a huffman tree by hand
+// path: Numeric representation of path to follow
+// value: Value for given path
+// value_default: Default value set for empty branches / leafs
+func addNode(tree HuffmanTree, path int, path_len int, value int) HuffmanTree {
+	root := tree
+	for path_len > 1 {
+		if tree.IsLeaf() {
+			_panicf("Trying to add node to leaf")
+		}
+
+		// get the current bit
+		path_len--
+		one := path & 1
+		path = path >> 1
+
+		// add node / leaf
+		if one == 1 {
+			if tree.Right() != nil {
+				tree = tree.Right()
+			} else {
+				tree.(*HuffmanNode).right = &HuffmanNode{0, nil, nil}
+				tree = tree.Right()
+			}
+		} else {
+			if tree.Left() != nil {
+				tree = tree.Left()
+			} else {
+				tree.(*HuffmanNode).left = &HuffmanNode{0, nil, nil}
+				tree = tree.Left()
+			}
+		}
+	}
+
+	// set value
+	one := path & 1
+	path = path >> 1
+
+	if one == 1 {
+		tree.(*HuffmanNode).right = HuffmanLeaf{0, value}
+	} else {
+		tree.(*HuffmanNode).left = HuffmanLeaf{0, value}
+	}
+
+	return root
 }

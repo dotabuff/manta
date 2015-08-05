@@ -2,6 +2,7 @@ package manta
 
 import (
 	"github.com/dotabuff/manta/dota"
+	"github.com/golang/snappy"
 )
 
 const (
@@ -82,9 +83,20 @@ func (p *Parser) onCSVCMsg_CreateStringTable(m *dota.CSVCMsg_CreateStringTable) 
 	// Decompress the data if necessary
 	buf := m.GetStringData()
 	if m.GetDataCompressed() {
+		// old replays = lzss
+		// new replays = snappy
+
+		r := NewReader(buf)
 		var err error
-		if buf, err = unlzss(buf); err != nil {
-			return err
+
+		if s := r.readStringN(4); s != "LZSS" {
+			if buf, err = snappy.Decode(nil, buf); err != nil {
+				return err
+			}
+		} else {
+			if buf, err = unlzss(buf); err != nil {
+				return err
+			}
 		}
 	}
 

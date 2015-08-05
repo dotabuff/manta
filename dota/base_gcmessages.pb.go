@@ -553,13 +553,14 @@ func (m *CMsgPartyInviteResponse) GetGameLanguageName() string {
 }
 
 type CMsgLobbyInviteResponse struct {
-	LobbyId          *uint64 `protobuf:"fixed64,1,opt,name=lobby_id" json:"lobby_id,omitempty"`
-	Accept           *bool   `protobuf:"varint,2,opt,name=accept" json:"accept,omitempty"`
-	ClientVersion    *uint32 `protobuf:"varint,3,opt,name=client_version" json:"client_version,omitempty"`
-	GameLanguageEnum *uint32 `protobuf:"varint,4,opt,name=game_language_enum" json:"game_language_enum,omitempty"`
-	GameLanguageName *string `protobuf:"bytes,5,opt,name=game_language_name" json:"game_language_name,omitempty"`
-	CustomGameCrc    *uint64 `protobuf:"fixed64,6,opt,name=custom_game_crc" json:"custom_game_crc,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	LobbyId             *uint64 `protobuf:"fixed64,1,opt,name=lobby_id" json:"lobby_id,omitempty"`
+	Accept              *bool   `protobuf:"varint,2,opt,name=accept" json:"accept,omitempty"`
+	ClientVersion       *uint32 `protobuf:"varint,3,opt,name=client_version" json:"client_version,omitempty"`
+	GameLanguageEnum    *uint32 `protobuf:"varint,4,opt,name=game_language_enum" json:"game_language_enum,omitempty"`
+	GameLanguageName    *string `protobuf:"bytes,5,opt,name=game_language_name" json:"game_language_name,omitempty"`
+	CustomGameCrc       *uint64 `protobuf:"fixed64,6,opt,name=custom_game_crc" json:"custom_game_crc,omitempty"`
+	CustomGameTimestamp *uint32 `protobuf:"fixed32,7,opt,name=custom_game_timestamp" json:"custom_game_timestamp,omitempty"`
+	XXX_unrecognized    []byte  `json:"-"`
 }
 
 func (m *CMsgLobbyInviteResponse) Reset()         { *m = CMsgLobbyInviteResponse{} }
@@ -604,6 +605,13 @@ func (m *CMsgLobbyInviteResponse) GetGameLanguageName() string {
 func (m *CMsgLobbyInviteResponse) GetCustomGameCrc() uint64 {
 	if m != nil && m.CustomGameCrc != nil {
 		return *m.CustomGameCrc
+	}
+	return 0
+}
+
+func (m *CMsgLobbyInviteResponse) GetCustomGameTimestamp() uint32 {
+	if m != nil && m.CustomGameTimestamp != nil {
+		return *m.CustomGameTimestamp
 	}
 	return 0
 }

@@ -11,7 +11,6 @@ import (
 var packetNames = map[int32]string{
 	0:   "NET_Messages_net_NOP",
 	1:   "NET_Messages_net_Disconnect",
-	2:   "NET_Messages_net_File",
 	3:   "NET_Messages_net_SplitScreenUser",
 	4:   "NET_Messages_net_Tick",
 	5:   "NET_Messages_net_StringCmd",
@@ -22,7 +21,6 @@ var packetNames = map[int32]string{
 	11:  "NET_Messages_net_SpawnGroup_SetCreationTick",
 	12:  "NET_Messages_net_SpawnGroup_Unload",
 	13:  "NET_Messages_net_SpawnGroup_LoadCompleted",
-	14:  "NET_Messages_net_ReliableMessageEndMarker",
 	40:  "SVC_Messages_svc_ServerInfo",
 	41:  "SVC_Messages_svc_FlattenedSerializer",
 	42:  "SVC_Messages_svc_ClassInfo",
@@ -193,6 +191,7 @@ var packetNames = map[int32]string{
 	549: "EDotaUserMessages_DOTA_UM_CustomHudElement_Modify",
 	550: "EDotaUserMessages_DOTA_UM_CustomHudElement_Destroy",
 	551: "EDotaUserMessages_DOTA_UM_CompendiumState",
+	552: "EDotaUserMessages_DOTA_UM_ProjectionAbility",
 }
 
 type Callbacks struct {
@@ -214,7 +213,6 @@ type Callbacks struct {
 	onCDemoSpawnGroups                        []func(*dota.CDemoSpawnGroups) error
 	onCNETMsg_NOP                             []func(*dota.CNETMsg_NOP) error
 	onCNETMsg_Disconnect                      []func(*dota.CNETMsg_Disconnect) error
-	onCNETMsg_File                            []func(*dota.CNETMsg_File) error
 	onCNETMsg_SplitScreenUser                 []func(*dota.CNETMsg_SplitScreenUser) error
 	onCNETMsg_Tick                            []func(*dota.CNETMsg_Tick) error
 	onCNETMsg_StringCmd                       []func(*dota.CNETMsg_StringCmd) error
@@ -225,7 +223,6 @@ type Callbacks struct {
 	onCNETMsg_SpawnGroup_SetCreationTick      []func(*dota.CNETMsg_SpawnGroup_SetCreationTick) error
 	onCNETMsg_SpawnGroup_Unload               []func(*dota.CNETMsg_SpawnGroup_Unload) error
 	onCNETMsg_SpawnGroup_LoadCompleted        []func(*dota.CNETMsg_SpawnGroup_LoadCompleted) error
-	onCNETMsg_ReliableMessageEndMarker        []func(*dota.CNETMsg_ReliableMessageEndMarker) error
 	onCSVCMsg_ServerInfo                      []func(*dota.CSVCMsg_ServerInfo) error
 	onCSVCMsg_FlattenedSerializer             []func(*dota.CSVCMsg_FlattenedSerializer) error
 	onCSVCMsg_ClassInfo                       []func(*dota.CSVCMsg_ClassInfo) error
@@ -390,6 +387,7 @@ type Callbacks struct {
 	onCDOTAUserMsg_CustomHudElement_Modify    []func(*dota.CDOTAUserMsg_CustomHudElement_Modify) error
 	onCDOTAUserMsg_CustomHudElement_Destroy   []func(*dota.CDOTAUserMsg_CustomHudElement_Destroy) error
 	onCDOTAUserMsg_CompendiumState            []func(*dota.CDOTAUserMsg_CompendiumState) error
+	onCDOTAUserMsg_ProjectionAbility          []func(*dota.CDOTAUserMsg_ProjectionAbility) error
 }
 
 func (c *Callbacks) OnCDemoStop(fn func(*dota.CDemoStop) error) {
@@ -446,9 +444,6 @@ func (c *Callbacks) OnCNETMsg_NOP(fn func(*dota.CNETMsg_NOP) error) {
 func (c *Callbacks) OnCNETMsg_Disconnect(fn func(*dota.CNETMsg_Disconnect) error) {
 	c.onCNETMsg_Disconnect = append(c.onCNETMsg_Disconnect, fn)
 }
-func (c *Callbacks) OnCNETMsg_File(fn func(*dota.CNETMsg_File) error) {
-	c.onCNETMsg_File = append(c.onCNETMsg_File, fn)
-}
 func (c *Callbacks) OnCNETMsg_SplitScreenUser(fn func(*dota.CNETMsg_SplitScreenUser) error) {
 	c.onCNETMsg_SplitScreenUser = append(c.onCNETMsg_SplitScreenUser, fn)
 }
@@ -478,9 +473,6 @@ func (c *Callbacks) OnCNETMsg_SpawnGroup_Unload(fn func(*dota.CNETMsg_SpawnGroup
 }
 func (c *Callbacks) OnCNETMsg_SpawnGroup_LoadCompleted(fn func(*dota.CNETMsg_SpawnGroup_LoadCompleted) error) {
 	c.onCNETMsg_SpawnGroup_LoadCompleted = append(c.onCNETMsg_SpawnGroup_LoadCompleted, fn)
-}
-func (c *Callbacks) OnCNETMsg_ReliableMessageEndMarker(fn func(*dota.CNETMsg_ReliableMessageEndMarker) error) {
-	c.onCNETMsg_ReliableMessageEndMarker = append(c.onCNETMsg_ReliableMessageEndMarker, fn)
 }
 func (c *Callbacks) OnCSVCMsg_ServerInfo(fn func(*dota.CSVCMsg_ServerInfo) error) {
 	c.onCSVCMsg_ServerInfo = append(c.onCSVCMsg_ServerInfo, fn)
@@ -974,6 +966,9 @@ func (c *Callbacks) OnCDOTAUserMsg_CustomHudElement_Destroy(fn func(*dota.CDOTAU
 func (c *Callbacks) OnCDOTAUserMsg_CompendiumState(fn func(*dota.CDOTAUserMsg_CompendiumState) error) {
 	c.onCDOTAUserMsg_CompendiumState = append(c.onCDOTAUserMsg_CompendiumState, fn)
 }
+func (c *Callbacks) OnCDOTAUserMsg_ProjectionAbility(fn func(*dota.CDOTAUserMsg_ProjectionAbility) error) {
+	c.onCDOTAUserMsg_ProjectionAbility = append(c.onCDOTAUserMsg_ProjectionAbility, fn)
+}
 func (p *Parser) CallByDemoType(t int32, raw []byte) error {
 	callbacks := p.Callbacks
 	switch t {
@@ -1218,19 +1213,6 @@ func (p *Parser) CallByPacketType(t int32, raw []byte) error {
 			}
 		}
 		return nil
-	case 2: // dota.NET_Messages_net_File
-		if cbs := callbacks.onCNETMsg_File; cbs != nil {
-			msg := &dota.CNETMsg_File{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			for _, fn := range cbs {
-				if err := fn(msg); err != nil {
-					return err
-				}
-			}
-		}
-		return nil
 	case 3: // dota.NET_Messages_net_SplitScreenUser
 		if cbs := callbacks.onCNETMsg_SplitScreenUser; cbs != nil {
 			msg := &dota.CNETMsg_SplitScreenUser{}
@@ -1351,19 +1333,6 @@ func (p *Parser) CallByPacketType(t int32, raw []byte) error {
 	case 13: // dota.NET_Messages_net_SpawnGroup_LoadCompleted
 		if cbs := callbacks.onCNETMsg_SpawnGroup_LoadCompleted; cbs != nil {
 			msg := &dota.CNETMsg_SpawnGroup_LoadCompleted{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			for _, fn := range cbs {
-				if err := fn(msg); err != nil {
-					return err
-				}
-			}
-		}
-		return nil
-	case 14: // dota.NET_Messages_net_ReliableMessageEndMarker
-		if cbs := callbacks.onCNETMsg_ReliableMessageEndMarker; cbs != nil {
-			msg := &dota.CNETMsg_ReliableMessageEndMarker{}
 			if err := proto.Unmarshal(raw, msg); err != nil {
 				return err
 			}
@@ -3506,6 +3475,19 @@ func (p *Parser) CallByPacketType(t int32, raw []byte) error {
 			}
 		}
 		return nil
+	case 552: // dota.EDotaUserMessages_DOTA_UM_ProjectionAbility
+		if cbs := callbacks.onCDOTAUserMsg_ProjectionAbility; cbs != nil {
+			msg := &dota.CDOTAUserMsg_ProjectionAbility{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			for _, fn := range cbs {
+				if err := fn(msg); err != nil {
+					return err
+				}
+			}
+		}
+		return nil
 	}
 	return fmt.Errorf("no type found: %d", t)
 }
@@ -3529,7 +3511,6 @@ func (c *Callbacks) OnAny(all func(interface{}) error) {
 	c.OnCDemoSpawnGroups(func(pkg *dota.CDemoSpawnGroups) error { return all(pkg) })
 	c.OnCNETMsg_NOP(func(pkg *dota.CNETMsg_NOP) error { return all(pkg) })
 	c.OnCNETMsg_Disconnect(func(pkg *dota.CNETMsg_Disconnect) error { return all(pkg) })
-	c.OnCNETMsg_File(func(pkg *dota.CNETMsg_File) error { return all(pkg) })
 	c.OnCNETMsg_SplitScreenUser(func(pkg *dota.CNETMsg_SplitScreenUser) error { return all(pkg) })
 	c.OnCNETMsg_Tick(func(pkg *dota.CNETMsg_Tick) error { return all(pkg) })
 	c.OnCNETMsg_StringCmd(func(pkg *dota.CNETMsg_StringCmd) error { return all(pkg) })
@@ -3540,7 +3521,6 @@ func (c *Callbacks) OnAny(all func(interface{}) error) {
 	c.OnCNETMsg_SpawnGroup_SetCreationTick(func(pkg *dota.CNETMsg_SpawnGroup_SetCreationTick) error { return all(pkg) })
 	c.OnCNETMsg_SpawnGroup_Unload(func(pkg *dota.CNETMsg_SpawnGroup_Unload) error { return all(pkg) })
 	c.OnCNETMsg_SpawnGroup_LoadCompleted(func(pkg *dota.CNETMsg_SpawnGroup_LoadCompleted) error { return all(pkg) })
-	c.OnCNETMsg_ReliableMessageEndMarker(func(pkg *dota.CNETMsg_ReliableMessageEndMarker) error { return all(pkg) })
 	c.OnCSVCMsg_ServerInfo(func(pkg *dota.CSVCMsg_ServerInfo) error { return all(pkg) })
 	c.OnCSVCMsg_FlattenedSerializer(func(pkg *dota.CSVCMsg_FlattenedSerializer) error { return all(pkg) })
 	c.OnCSVCMsg_ClassInfo(func(pkg *dota.CSVCMsg_ClassInfo) error { return all(pkg) })
@@ -3705,4 +3685,5 @@ func (c *Callbacks) OnAny(all func(interface{}) error) {
 	c.OnCDOTAUserMsg_CustomHudElement_Modify(func(pkg *dota.CDOTAUserMsg_CustomHudElement_Modify) error { return all(pkg) })
 	c.OnCDOTAUserMsg_CustomHudElement_Destroy(func(pkg *dota.CDOTAUserMsg_CustomHudElement_Destroy) error { return all(pkg) })
 	c.OnCDOTAUserMsg_CompendiumState(func(pkg *dota.CDOTAUserMsg_CompendiumState) error { return all(pkg) })
+	c.OnCDOTAUserMsg_ProjectionAbility(func(pkg *dota.CDOTAUserMsg_ProjectionAbility) error { return all(pkg) })
 }

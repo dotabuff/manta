@@ -101,6 +101,7 @@ const (
 	EDotaUserMessages_DOTA_UM_CustomHudElement_Modify   EDotaUserMessages = 549
 	EDotaUserMessages_DOTA_UM_CustomHudElement_Destroy  EDotaUserMessages = 550
 	EDotaUserMessages_DOTA_UM_CompendiumState           EDotaUserMessages = 551
+	EDotaUserMessages_DOTA_UM_ProjectionAbility         EDotaUserMessages = 552
 )
 
 var EDotaUserMessages_name = map[int32]string{
@@ -191,6 +192,7 @@ var EDotaUserMessages_name = map[int32]string{
 	549: "DOTA_UM_CustomHudElement_Modify",
 	550: "DOTA_UM_CustomHudElement_Destroy",
 	551: "DOTA_UM_CompendiumState",
+	552: "DOTA_UM_ProjectionAbility",
 }
 var EDotaUserMessages_value = map[string]int32{
 	"DOTA_UM_AddUnitToSelection":        464,
@@ -280,6 +282,7 @@ var EDotaUserMessages_value = map[string]int32{
 	"DOTA_UM_CustomHudElement_Modify":   549,
 	"DOTA_UM_CustomHudElement_Destroy":  550,
 	"DOTA_UM_CompendiumState":           551,
+	"DOTA_UM_ProjectionAbility":         552,
 }
 
 func (x EDotaUserMessages) Enum() *EDotaUserMessages {
@@ -1109,6 +1112,87 @@ func (x *EHeroStatType) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	*x = EHeroStatType(value)
+	return nil
+}
+
+type EPlayerVoiceListenState int32
+
+const (
+	EPlayerVoiceListenState_kPVLS_None                           EPlayerVoiceListenState = 0
+	EPlayerVoiceListenState_kPVLS_DeniedChatBanned               EPlayerVoiceListenState = 1
+	EPlayerVoiceListenState_kPVLS_DeniedPartner                  EPlayerVoiceListenState = 2
+	EPlayerVoiceListenState_kPVLS_DeniedHLTVTalkerNotSpectator   EPlayerVoiceListenState = 3
+	EPlayerVoiceListenState_kPVLS_DeniedHLTVNoTalkerPlayerID     EPlayerVoiceListenState = 4
+	EPlayerVoiceListenState_kPVLS_DeniedHLTVTalkerNotBroadcaster EPlayerVoiceListenState = 5
+	EPlayerVoiceListenState_kPVLS_DeniedTeamSpectator            EPlayerVoiceListenState = 6
+	EPlayerVoiceListenState_kPVLS_DeniedStudent                  EPlayerVoiceListenState = 8
+	EPlayerVoiceListenState_kPVLS_Denied                         EPlayerVoiceListenState = 64
+	EPlayerVoiceListenState_kPVLS_AllowHLTVTalkerIsBroadcaster   EPlayerVoiceListenState = 65
+	EPlayerVoiceListenState_kPVLS_AllowCoBroadcaster             EPlayerVoiceListenState = 66
+	EPlayerVoiceListenState_kPVLS_AllowAllChat                   EPlayerVoiceListenState = 67
+	EPlayerVoiceListenState_kPVLS_AllowStudentToCoach            EPlayerVoiceListenState = 68
+	EPlayerVoiceListenState_kPVLS_AllowFellowStudent             EPlayerVoiceListenState = 69
+	EPlayerVoiceListenState_kPVLS_AllowTalkerIsCoach             EPlayerVoiceListenState = 70
+	EPlayerVoiceListenState_kPVLS_AllowCoachHearTeam             EPlayerVoiceListenState = 71
+	EPlayerVoiceListenState_kPVLS_AllowSameTeam                  EPlayerVoiceListenState = 72
+	EPlayerVoiceListenState_kPVLS_AllowShowcase                  EPlayerVoiceListenState = 73
+)
+
+var EPlayerVoiceListenState_name = map[int32]string{
+	0:  "kPVLS_None",
+	1:  "kPVLS_DeniedChatBanned",
+	2:  "kPVLS_DeniedPartner",
+	3:  "kPVLS_DeniedHLTVTalkerNotSpectator",
+	4:  "kPVLS_DeniedHLTVNoTalkerPlayerID",
+	5:  "kPVLS_DeniedHLTVTalkerNotBroadcaster",
+	6:  "kPVLS_DeniedTeamSpectator",
+	8:  "kPVLS_DeniedStudent",
+	64: "kPVLS_Denied",
+	65: "kPVLS_AllowHLTVTalkerIsBroadcaster",
+	66: "kPVLS_AllowCoBroadcaster",
+	67: "kPVLS_AllowAllChat",
+	68: "kPVLS_AllowStudentToCoach",
+	69: "kPVLS_AllowFellowStudent",
+	70: "kPVLS_AllowTalkerIsCoach",
+	71: "kPVLS_AllowCoachHearTeam",
+	72: "kPVLS_AllowSameTeam",
+	73: "kPVLS_AllowShowcase",
+}
+var EPlayerVoiceListenState_value = map[string]int32{
+	"kPVLS_None":                           0,
+	"kPVLS_DeniedChatBanned":               1,
+	"kPVLS_DeniedPartner":                  2,
+	"kPVLS_DeniedHLTVTalkerNotSpectator":   3,
+	"kPVLS_DeniedHLTVNoTalkerPlayerID":     4,
+	"kPVLS_DeniedHLTVTalkerNotBroadcaster": 5,
+	"kPVLS_DeniedTeamSpectator":            6,
+	"kPVLS_DeniedStudent":                  8,
+	"kPVLS_Denied":                         64,
+	"kPVLS_AllowHLTVTalkerIsBroadcaster":   65,
+	"kPVLS_AllowCoBroadcaster":             66,
+	"kPVLS_AllowAllChat":                   67,
+	"kPVLS_AllowStudentToCoach":            68,
+	"kPVLS_AllowFellowStudent":             69,
+	"kPVLS_AllowTalkerIsCoach":             70,
+	"kPVLS_AllowCoachHearTeam":             71,
+	"kPVLS_AllowSameTeam":                  72,
+	"kPVLS_AllowShowcase":                  73,
+}
+
+func (x EPlayerVoiceListenState) Enum() *EPlayerVoiceListenState {
+	p := new(EPlayerVoiceListenState)
+	*p = x
+	return p
+}
+func (x EPlayerVoiceListenState) String() string {
+	return proto.EnumName(EPlayerVoiceListenState_name, int32(x))
+}
+func (x *EPlayerVoiceListenState) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(EPlayerVoiceListenState_value, data, "EPlayerVoiceListenState")
+	if err != nil {
+		return err
+	}
+	*x = EPlayerVoiceListenState(value)
 	return nil
 }
 
@@ -5449,6 +5533,70 @@ func (m *CDOTAUserMsg_CompendiumState) GetCompendiumPlayers() []*CDOTAUserMsg_Co
 	return nil
 }
 
+type CDOTAUserMsg_ProjectionAbility struct {
+	AbilityId        *uint32     `protobuf:"varint,1,opt,name=ability_id" json:"ability_id,omitempty"`
+	CasterEntIndex   *int32      `protobuf:"varint,2,opt,name=caster_ent_index" json:"caster_ent_index,omitempty"`
+	CasterTeam       *int32      `protobuf:"varint,3,opt,name=caster_team" json:"caster_team,omitempty"`
+	ChannelEnd       *bool       `protobuf:"varint,4,opt,name=channel_end" json:"channel_end,omitempty"`
+	Origin           *CMsgVector `protobuf:"bytes,5,opt,name=origin" json:"origin,omitempty"`
+	TrackCasterOnly  *bool       `protobuf:"varint,6,opt,name=track_caster_only" json:"track_caster_only,omitempty"`
+	EndTime          *float32    `protobuf:"fixed32,7,opt,name=end_time" json:"end_time,omitempty"`
+	XXX_unrecognized []byte      `json:"-"`
+}
+
+func (m *CDOTAUserMsg_ProjectionAbility) Reset()         { *m = CDOTAUserMsg_ProjectionAbility{} }
+func (m *CDOTAUserMsg_ProjectionAbility) String() string { return proto.CompactTextString(m) }
+func (*CDOTAUserMsg_ProjectionAbility) ProtoMessage()    {}
+
+func (m *CDOTAUserMsg_ProjectionAbility) GetAbilityId() uint32 {
+	if m != nil && m.AbilityId != nil {
+		return *m.AbilityId
+	}
+	return 0
+}
+
+func (m *CDOTAUserMsg_ProjectionAbility) GetCasterEntIndex() int32 {
+	if m != nil && m.CasterEntIndex != nil {
+		return *m.CasterEntIndex
+	}
+	return 0
+}
+
+func (m *CDOTAUserMsg_ProjectionAbility) GetCasterTeam() int32 {
+	if m != nil && m.CasterTeam != nil {
+		return *m.CasterTeam
+	}
+	return 0
+}
+
+func (m *CDOTAUserMsg_ProjectionAbility) GetChannelEnd() bool {
+	if m != nil && m.ChannelEnd != nil {
+		return *m.ChannelEnd
+	}
+	return false
+}
+
+func (m *CDOTAUserMsg_ProjectionAbility) GetOrigin() *CMsgVector {
+	if m != nil {
+		return m.Origin
+	}
+	return nil
+}
+
+func (m *CDOTAUserMsg_ProjectionAbility) GetTrackCasterOnly() bool {
+	if m != nil && m.TrackCasterOnly != nil {
+		return *m.TrackCasterOnly
+	}
+	return false
+}
+
+func (m *CDOTAUserMsg_ProjectionAbility) GetEndTime() float32 {
+	if m != nil && m.EndTime != nil {
+		return *m.EndTime
+	}
+	return 0
+}
+
 func init() {
 	proto.RegisterEnum("dota.EDotaUserMessages", EDotaUserMessages_name, EDotaUserMessages_value)
 	proto.RegisterEnum("dota.DOTA_CHAT_MESSAGE", DOTA_CHAT_MESSAGE_name, DOTA_CHAT_MESSAGE_value)
@@ -5461,6 +5609,7 @@ func init() {
 	proto.RegisterEnum("dota.DOTA_POSITION_CATEGORY", DOTA_POSITION_CATEGORY_name, DOTA_POSITION_CATEGORY_value)
 	proto.RegisterEnum("dota.DOTA_ABILITY_TARGET_TYPE", DOTA_ABILITY_TARGET_TYPE_name, DOTA_ABILITY_TARGET_TYPE_value)
 	proto.RegisterEnum("dota.EHeroStatType", EHeroStatType_name, EHeroStatType_value)
+	proto.RegisterEnum("dota.EPlayerVoiceListenState", EPlayerVoiceListenState_name, EPlayerVoiceListenState_value)
 	proto.RegisterEnum("dota.CDOTAUserMsg_PredictionResult_Prediction_EResult", CDOTAUserMsg_PredictionResult_Prediction_EResult_name, CDOTAUserMsg_PredictionResult_Prediction_EResult_value)
 	proto.RegisterEnum("dota.CDOTAResponseQuerySerialized_Fact_ValueType", CDOTAResponseQuerySerialized_Fact_ValueType_name, CDOTAResponseQuerySerialized_Fact_ValueType_value)
 }

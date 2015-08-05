@@ -17,7 +17,7 @@ func (p *Parser) onCDemoClassInfo(m *dota.CDemoClassInfo) error {
 	for _, c := range m.GetClasses() {
 		p.ClassInfo[c.GetClassId()] = c.GetNetworkName()
 
-		if _, ok := p.SendTables.GetTableByName(c.GetNetworkName()); !ok {
+		if _, ok := p.serializers[c.GetNetworkName()]; !ok {
 			_panicf("unable to find table for class %d (%s)", c.GetClassId, c.GetNetworkName())
 		}
 	}
@@ -64,18 +64,25 @@ func (p *Parser) updateInstanceBaseline() {
 		}
 
 		// Get the send table associated with the class.
-		sendTable, ok := p.SendTables.GetTableByName(className)
+		serializer, ok := p.serializers[className]
 		if !ok {
 			_panicf("unable to find send table %s for instancebaseline key %d", className, classId)
 		}
 
-		// TODO XXX: Remove once we've gotten ReadProperties working.
-		continue
-
 		// Parse the properties out of the string table buffer and store
 		// them as the class baseline in the Parser.
 		if len(item.Value) > 0 {
-			p.classBaseline[classId] = ReadProperties(NewReader(item.Value), sendTable)
+			if serializer[0].Name == "CIngameEvent_TI5" {
+				// This one can't parse because it want's to go two levels into
+				// DOTA_PlayerChallengeInfo. That one might be an array (would make sense)
+				// but isn't marked as such.
+				// @todo: Investigate later
+				continue
+			}
+
+			// Remove once readProperties is working
+			//_debugf("Parsing entity baseline %v", serializer[0].Name)
+			//p.classBaseline[classId] = readPropertiesNew(newReader(item.Value), serializer[0])
 		}
 	}
 }

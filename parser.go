@@ -31,6 +31,7 @@ type Parser struct {
 	packetEntities    map[int32]*packetEntity
 	SendTables        *SendTables
 	StringTables      *StringTables
+	serializers       map[string]map[int32]*dt
 	spawnGroups       map[uint32]*spawnGroup
 	gameEventNames    map[int32]string
 	gameEventTypes    map[string]*gameEventType
@@ -87,7 +88,7 @@ func NewParser(buf []byte) (*Parser, error) {
 	parser.Callbacks.OnCDemoSignonPacket(parser.onCDemoPacket)
 	parser.Callbacks.OnCDemoFullPacket(parser.onCDemoFullPacket)
 	parser.Callbacks.OnCDemoClassInfo(parser.onCDemoClassInfo)
-	parser.Callbacks.OnCDemoSendTables(parser.onCDemoSendTables)
+	parser.Callbacks.OnCDemoSendTables(parser.onCDemoSendTablesNew)
 	parser.Callbacks.OnCSVCMsg_CreateStringTable(parser.onCSVCMsg_CreateStringTable)
 	parser.Callbacks.OnCSVCMsg_PacketEntities(parser.onCSVCMsg_PacketEntities)
 	parser.Callbacks.OnCSVCMsg_SendTable(parser.onCSVCMsg_SendTable)
