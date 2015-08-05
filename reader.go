@@ -144,7 +144,7 @@ func (r *reader) readBoolean() bool {
 	return b
 }
 
-// Reads a bit varint
+// Reads a bit varint, encoding in last to bits of 6 bit group
 func (r *reader) readUBitVar() uint32 {
 	ret := r.readBits(6)
 
@@ -161,6 +161,19 @@ func (r *reader) readUBitVar() uint32 {
 	}
 
 	return ret
+}
+
+// Another ubitvar variant, encoding in first 2 bits of 6 bit group
+func (r *reader) readUBitVar2() uint32 {
+	ret := r.readBits(6)
+	enc := uint32(ret & 3)
+
+	if enc != 0 {
+		r.pos -= 4
+		return r.readBits(int(4 + enc*4 + (((2 - enc) >> 31) & 16)))
+	} else {
+		return (ret >> 2)
+	}
 }
 
 // Reads the next byte (8 bits) in the buffer.
@@ -237,6 +250,36 @@ func (r *reader) readFloat32Bits(b int32, lP *float32, hP *float32) float32 {
 	base := float32(dividend) / float32(divisor)
 	diff := hV - lV
 	return (base * diff) - lV
+}
+
+// Read a coord
+func (r *reader) readCoord() float32 {
+	value := float32(0.0)
+
+	intval := r.readBits(1)
+	fractval := r.readBits(1)
+	signbit := false
+
+	if intval != 0 || fractval != 0 {
+		signbit = r.readBoolean()
+
+		if intval != 0 {
+			intval = r.readBits(13) + 1
+		}
+
+		if fractval != 0 {
+			fractval = r.readBits(5)
+		}
+
+		value = float32(intval) + float32(fractval)*(1.0/(1<<5))
+
+		// Fixup the sign if negative.
+		if signbit {
+			value = -value
+		}
+	}
+
+	return value
 }
 
 // Reads bits as bytes.

@@ -104,6 +104,37 @@ func (sers *flattened_serializers) recurse_table(cur *dota.ProtoFlattenedSeriali
 			prop.Table = pSerializer
 		}
 
+		// Optional: Adjust array fields
+		if prop.Field.Serializer.IsArray {
+			// Add our own temp table for the array
+			tmpDt := &dt{
+				Name:       prop.Field.Name,
+				Flags:      nil,
+				Version:    0,
+				Properties: make([]*dt_property, 0),
+			}
+
+			// Add each array field to the table
+			for i := uint32(0); i < prop.Field.Serializer.Length; i++ {
+				tmpDt.Properties = append(tmpDt.Properties, &dt_property{
+					Field: &dt_field{
+						Name:       _sprintf("%s.%04d", prop.Field.Name, i),
+						Type:       prop.Field.Serializer.Name,
+						Index:      int32(i),
+						Flags:      prop.Field.Flags,
+						BitCount:   prop.Field.BitCount,
+						LowValue:   prop.Field.LowValue,
+						HighValue:  prop.Field.HighValue,
+						Version:    prop.Field.Version,
+						Serializer: prop.Field.Serializer.ArraySerializer,
+					},
+					Table: prop.Table, // This carries on the actual table instead of overriding it
+				})
+			}
+
+			prop.Table = tmpDt
+		}
+
 		table.Properties = append(
 			table.Properties,
 			prop,
@@ -114,7 +145,7 @@ func (sers *flattened_serializers) recurse_table(cur *dota.ProtoFlattenedSeriali
 }
 
 // Parses a CDemoSendTables packet
-func parseSendTablesNew(m *dota.CDemoSendTables, pst *PropertySerializerTable) (*flattened_serializers, error) {
+func parseSendTablesNew(m *dota.CDemoSendTables, pst *PropertySerializerTable) *flattened_serializers {
 	// This packet just contains a single large buffer
 	r := newReader(m.GetData())
 
@@ -150,11 +181,14 @@ func parseSendTablesNew(m *dota.CDemoSendTables, pst *PropertySerializerTable) (
 		fs.Serializers[sName][sVer] = fs.recurse_table(o)
 	}
 
-	return fs, nil
+	return fs
 }
 
 // Internal callback for OnCDemoSendTables.
 func (p *Parser) onCDemoSendTablesNew(m *dota.CDemoSendTables) error {
-	parseSendTablesNew(m, nil) // @todo: Add the table to the parser
+	// Temporary: Also parse things the old way
+	p.onCDemoSendTables(m)
+
+	p.serializers = parseSendTablesNew(m, GetDefaultPropertySerializerTable()).Serializers
 	return nil
 }

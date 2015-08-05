@@ -9,7 +9,7 @@ type packetEntity struct {
 	index      int32
 	classId    int32
 	className  string
-	sendTable  *sendTable
+	flatTbl    *dt
 	properties map[string]interface{}
 }
 
@@ -18,11 +18,11 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 	// XXX: Remove once we've gotten readProperties working.
 	return nil
 
-	defer func() {
+	/*defer func() {
 		if err := recover(); err != nil {
 			_debugf("recovered: %s", err)
 		}
-	}()
+	}()*/
 
 	_debugf("pTick=%d isDelta=%v deltaFrom=%d updatedEntries=%d maxEntries=%d baseline=%d updateBaseline=%v", p.Tick, m.GetIsDelta(), m.GetDeltaFrom(), m.GetUpdatedEntries(), m.GetMaxEntries(), m.GetBaseline(), m.GetUpdateBaseline())
 
@@ -76,9 +76,9 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 				_panicf("unable to find class %d", pe.classId)
 			}
 
-			// Get the associated send table.
-			if pe.sendTable, ok = p.sendTables.getTableByName(pe.className); !ok {
-				_panicf("unable to find sendtable for class %s", pe.className)
+			// Get the associated serializer
+			if pe.flatTbl, ok = p.serializers[pe.className][0]; !ok {
+				_panicf("unable to find serializer for class %s", pe.className)
 			}
 
 			// Register the packetEntity with the parser.
@@ -87,21 +87,24 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 			_debugf("created a pe: %+v", pe)
 
 			// Read properties and set them in the packetEntity
-			pe.properties = readProperties(r, pe.sendTable)
-
+			pe.properties = readPropertiesNew(r, pe.flatTbl)
 		case "U":
+			_panicf("End here")
 			// Find the existing packetEntity
 			pe, ok := p.packetEntities[index]
 			if !ok {
-				_panicf("unable to find packet entity %d for update", index)
+				_debugf("unable to find packet entity %d for update", index)
 			}
 
+			return nil
+
 			// Read properties and update the packetEntity
-			for k, v := range readProperties(r, pe.sendTable) {
+			for k, v := range readPropertiesNew(r, pe.flatTbl) {
 				pe.properties[k] = v
 			}
 
 		case "D":
+			return nil
 			if _, ok := p.packetEntities[index]; !ok {
 				_panicf("unable to find packet entity %d for delete", index)
 			} else {
@@ -109,6 +112,8 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 			}
 		}
 	}
+
+	_panicf("End here")
 
 	return nil
 }
