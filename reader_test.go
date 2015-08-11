@@ -28,7 +28,7 @@ func TestReaderReplayBeginning(t *testing.T) {
 		0x8C, 0x01,
 	}
 
-	r := newReader(buf)
+	r := NewReader(buf)
 
 	// Null terminated PBDEMS2 string
 	assert.Equal(magicSource2, r.readBytes(8))
@@ -60,7 +60,7 @@ func TestReaderReplayBeginning(t *testing.T) {
 func TestReaderVarints(t *testing.T) {
 	assert := assert.New(t)
 
-	r := newReader([]byte{0x01, 0xFF, 0xFF, 0xFF, 0xFF, 0x0F, 0x8C, 0x01})
+	r := NewReader([]byte{0x01, 0xFF, 0xFF, 0xFF, 0xFF, 0x0F, 0x8C, 0x01})
 
 	// Ensure that readVarUint32 works as expected
 	assert.Equal(uint32(1), r.readVarUint32())
@@ -84,7 +84,7 @@ func TestReaderBoolean(t *testing.T) {
 
 	// Start with any random mixed buffer
 	buf := _read_fixture("send_tables/1560315800.pbmsg")
-	r := newReader(buf)
+	r := NewReader(buf)
 
 	// Iterate through each bit
 	for r.pos < r.size {
@@ -106,7 +106,7 @@ func TestReaderBoolean(t *testing.T) {
 func TestReaderStrings(t *testing.T) {
 	assert := assert.New(t)
 
-	r := newReader([]byte{'P', 'B', 'D', 'E', 'M', 'S', '2', 0x0, 'E', 'X', 'T', 'R', 'A', 0x0})
+	r := NewReader([]byte{'P', 'B', 'D', 'E', 'M', 'S', '2', 0x0, 'E', 'X', 'T', 'R', 'A', 0x0})
 
 	assert.Equal("PBDEMS2", r.readStringN(7))
 	r.pos = 0
@@ -117,7 +117,7 @@ func TestReaderStrings(t *testing.T) {
 func TestReaderUnaligned(t *testing.T) {
 	assert := assert.New(t)
 
-	r := newReader([]byte{0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff})
+	r := NewReader([]byte{0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff})
 
 	assert.Equal(uint32(0x7f), r.readBits(7))
 	assert.Equal(uint32(0xff), r.readBits(8))
@@ -127,7 +127,7 @@ func TestReaderUnaligned(t *testing.T) {
 }
 
 func BenchmarkReadVarUint32(b *testing.B) {
-	r := newReader([]byte{0x01, 0xFF, 0xFF, 0xFF, 0xFF, 0x0F, 0x8C, 0x01})
+	r := NewReader([]byte{0x01, 0xFF, 0xFF, 0xFF, 0xFF, 0x0F, 0x8C, 0x01})
 	b.ResetTimer()
 
 	for n := 0; n < b.N; n++ {
@@ -140,7 +140,7 @@ func BenchmarkReadVarUint32(b *testing.B) {
 }
 
 func BenchmarkReadVarUint64(b *testing.B) {
-	r := newReader([]byte{0x01, 0xFF, 0xFF, 0xFF, 0xFF, 0x0F, 0x8C, 0x01})
+	r := NewReader([]byte{0x01, 0xFF, 0xFF, 0xFF, 0xFF, 0x0F, 0x8C, 0x01})
 	b.ResetTimer()
 
 	for n := 0; n < b.N; n++ {
@@ -153,7 +153,7 @@ func BenchmarkReadVarUint64(b *testing.B) {
 }
 
 func BenchmarkReadBytesAligned(b *testing.B) {
-	r := newReader(makeBuffer(1024))
+	r := NewReader(makeBuffer(1024))
 
 	b.ResetTimer()
 	for n := 0; n < b.N; n++ {
@@ -164,7 +164,7 @@ func BenchmarkReadBytesAligned(b *testing.B) {
 }
 
 func BenchmarkReadBytesUnaligned(b *testing.B) {
-	r := newReader(makeBuffer(1024))
+	r := NewReader(makeBuffer(1024))
 	r.seekBits(6)
 
 	b.ResetTimer()

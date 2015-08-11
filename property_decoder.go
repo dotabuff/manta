@@ -4,7 +4,7 @@ import (
 	"strconv"
 )
 
-func decodeHandle(r *reader, f *dt_field) interface{} {
+func decodeHandle(r *Reader, f *dt_field) interface{} {
 	// So far these seem to occupy 32 bits but the value is made up only
 	// out of what's present in the first 21 bits. In source 1, these only
 	// occupied 21 bits of space.
@@ -13,27 +13,27 @@ func decodeHandle(r *reader, f *dt_field) interface{} {
 	return value
 }
 
-func decodeByte(r *reader, f *dt_field) interface{} {
+func decodeByte(r *Reader, f *dt_field) interface{} {
 	return r.readBits(8)
 }
 
-func decodeShort(r *reader, f *dt_field) interface{} {
+func decodeShort(r *Reader, f *dt_field) interface{} {
 	return r.readBits(16)
 }
 
-func decodeUnsigned(r *reader, f *dt_field) interface{} {
+func decodeUnsigned(r *Reader, f *dt_field) interface{} {
 	return r.readVarUint64()
 }
 
-func decodeSigned(r *reader, f *dt_field) interface{} {
+func decodeSigned(r *Reader, f *dt_field) interface{} {
 	return r.readVarInt32()
 }
 
-func decodeBoolean(r *reader, f *dt_field) interface{} {
+func decodeBoolean(r *Reader, f *dt_field) interface{} {
 	return r.readBoolean()
 }
 
-func decodeFloat(r *reader, f *dt_field) interface{} {
+func decodeFloat(r *Reader, f *dt_field) interface{} {
 	_debugf(
 		"Bitcount: %v, Low: %v, High: %v, Flags: %v",
 		saveReturnInt32(f.BitCount),
@@ -82,11 +82,11 @@ func decodeFloat(r *reader, f *dt_field) interface{} {
 	return float32(dividend) / float32(divisor)
 }
 
-func decodeString(r *reader, f *dt_field) interface{} {
+func decodeString(r *Reader, f *dt_field) interface{} {
 	return r.readString()
 }
 
-func decodeVector(r *reader, f *dt_field) interface{} {
+func decodeVector(r *Reader, f *dt_field) interface{} {
 	size := r.readVarUint32()
 
 	if size > 0 {
@@ -96,16 +96,16 @@ func decodeVector(r *reader, f *dt_field) interface{} {
 	return 0
 }
 
-func decodeClass(r *reader, f *dt_field) interface{} {
+func decodeClass(r *Reader, f *dt_field) interface{} {
 	return r.readVarUint32()
 }
 
-func decodeQuantized(r *reader, f *dt_field) interface{} {
+func decodeQuantized(r *Reader, f *dt_field) interface{} {
 	// Lets do this for now
 	return decodeFloat(r, f)
 }
 
-func decodeFVector(r *reader, f *dt_field) interface{} {
+func decodeFVector(r *Reader, f *dt_field) interface{} {
 	var r2 [3]uint32
 
 	r2[0] = r.readBits(10) // this should probably be readFloat
@@ -120,11 +120,11 @@ func decodeFVector(r *reader, f *dt_field) interface{} {
 	return r2
 }
 
-func decodeNop(r *reader, f *dt_field) interface{} {
+func decodeNop(r *Reader, f *dt_field) interface{} {
 	return 0
 }
 
-func decodePointer(r *reader, f *dt_field) interface{} {
+func decodePointer(r *Reader, f *dt_field) interface{} {
 	// Seems to be encoded as a single bit, not sure what to make of it
 	if !r.readBoolean() {
 		_panicf("Figure out how this works")
@@ -133,7 +133,7 @@ func decodePointer(r *reader, f *dt_field) interface{} {
 	return 0
 }
 
-func decodeQAngle(r *reader, f *dt_field) interface{} {
+func decodeQAngle(r *Reader, f *dt_field) interface{} {
 	if f.Flags != nil {
 		// There is a flag check against 0x20 in the disasembly
 		_debugf("Angle flags: %v", *f.Flags)
@@ -160,7 +160,7 @@ func decodeQAngle(r *reader, f *dt_field) interface{} {
 	return ret
 }
 
-func decodeComponent(r *reader, f *dt_field) interface{} {
+func decodeComponent(r *Reader, f *dt_field) interface{} {
 	_debugf(
 		"Bitcount: %v, Low: %v, High: %v, Flags: %v",
 		saveReturnInt32(f.BitCount),
@@ -177,12 +177,12 @@ func decodeComponent(r *reader, f *dt_field) interface{} {
 	return 0
 }
 
-func decodeStrongHandle(r *reader, f *dt_field) interface{} {
+func decodeStrongHandle(r *Reader, f *dt_field) interface{} {
 	// wrong, just testing
 	return r.readBits(1)
 }
 
-func decodeHSequence(r *reader, f *dt_field) interface{} {
+func decodeHSequence(r *Reader, f *dt_field) interface{} {
 	// wrong, just testing
 	return r.readBits(1)
 }

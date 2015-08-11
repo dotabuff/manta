@@ -860,7 +860,7 @@ func TestReadProperties(t *testing.T) {
 	}
 
 	// Retrieve the flattened field serializer
-	fs := parseSendTablesNew(m, GetDefaultPropertySerializerTable())
+	fs := ParseSendTablesNew(m, GetDefaultPropertySerializerTable())
 
 	// Iterate through scenarios
 	for _, s := range scenarios {
@@ -881,7 +881,7 @@ func TestReadProperties(t *testing.T) {
 		}
 
 		// Read properties
-		r := newReader(buf)
+		r := NewReader(buf)
 		props := readPropertiesNew(r, serializer)
 		assert.Equal(len(props), s.expectCount)
 
@@ -910,7 +910,7 @@ func TestAnalyzeInstancebaselines(t *testing.T) {
 		panic(err)
 	}
 
-	st, err := parseSendTables(m)
+	st, err := ParseSendTables(m)
 	assert.Nil(err)
 
 	onlyFixture := os.Getenv("ONLY_FIXTURE")
@@ -920,7 +920,7 @@ func TestAnalyzeInstancebaselines(t *testing.T) {
 	for _, f := range files {
 		fileName := path.Base(f)
 		tableName := strings.Split(strings.SplitN(fileName, "_", 2)[1], ".")[0]
-		sendTable, ok := st.getTableByName(tableName)
+		sendTable, ok := st.GetTableByName(tableName)
 		assert.True(ok)
 
 		if onlyFixture != "" && onlyFixture != tableName {
@@ -928,7 +928,7 @@ func TestAnalyzeInstancebaselines(t *testing.T) {
 		}
 
 		buf := _read_fixture("instancebaseline/" + fileName)
-		r := newReader(buf)
+		r := NewReader(buf)
 
 		first1 := -1
 		for i := 0; i < r.size; i++ {
@@ -942,16 +942,16 @@ func TestAnalyzeInstancebaselines(t *testing.T) {
 		if os.Getenv("ALL_BITS") != "" {
 			nDump = r.size
 		}
-		_debugf("fixture %s (%d props) has first 1 at %s", colorBold(tableName), len(sendTable.props), colorValue(first1))
-		for i := 0; i < len(sendTable.props); i++ {
+		_debugf("fixture %s (%d props) has first 1 at %s", colorBold(tableName), len(sendTable.Props), colorValue(first1))
+		for i := 0; i < len(sendTable.Props); i++ {
 			if i > 3 {
 				break
 			}
-			_debugf("prop %d: %s", i, sendTable.props[i].Describe())
+			_debugf("prop %d: %s", i, sendTable.Props[i].Describe())
 		}
 		r.dumpBits(nDump)
 
 		r.pos = 0
-		readProperties(r, sendTable)
+		ReadProperties(r, sendTable)
 	}
 }

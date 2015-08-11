@@ -24,22 +24,22 @@ type Parser struct {
 	// Contains the net tick associated with the last net message processed.
 	NetTick uint32
 
-
 	hasClassInfo      bool
-	classInfo         map[int32]string
+	ClassInfo         map[int32]string
 	classIdSize       int
 	classBaseline     map[int32]map[string]interface{}
 	packetEntities    map[int32]*packetEntity
-	sendTables        *sendTables
-	stringTables      *stringTables
+	SendTables        *SendTables
+	StringTables      *StringTables
 	serializers       map[string]map[int32]*dt
 	spawnGroups       map[uint32]*spawnGroup
 	gameEventNames    map[int32]string
 	gameEventTypes    map[string]*gameEventType
 	gameEventHandlers map[string][]gameEventHandler
 
-	reader     *reader
-	isStopping bool
+	reader            *Reader
+	isStopping        bool
+	AfterStopCallback func()
 }
 
 // Create a new Parser from a file on disk.
@@ -61,13 +61,13 @@ func NewParser(buf []byte) (*Parser, error) {
 		Tick:    0,
 		NetTick: 0,
 
-		reader:     newReader(buf),
+		reader:     NewReader(buf),
 		isStopping: false,
 
-		classInfo:         make(map[int32]string),
+		ClassInfo:         make(map[int32]string),
 		classBaseline:     make(map[int32]map[string]interface{}),
 		packetEntities:    make(map[int32]*packetEntity),
-		stringTables:      newStringTables(),
+		StringTables:      newStringTables(),
 		spawnGroups:       make(map[uint32]*spawnGroup),
 		gameEventNames:    make(map[int32]string),
 		gameEventTypes:    make(map[string]*gameEventType),
@@ -128,6 +128,8 @@ func (p *Parser) Start() error {
 	var msg *outerMessage
 	var err error
 
+	defer p.afterStop()
+
 	// Loop through all outer messages until we're signaled to stop. Stopping
 	// happens when either the OnCDemoStop message is encountered or
 	// parser.Stop() is called programatically.
@@ -154,19 +156,25 @@ func (p *Parser) Stop() {
 	p.isStopping = true
 }
 
+func (p *Parser) afterStop() {
+	if p.AfterStopCallback != nil {
+		p.AfterStopCallback()
+	}
+}
+
 // Performs a lookup on a string table by an entry index.
 func (p *Parser) LookupStringByIndex(table string, index int32) (string, bool) {
-	t, ok := p.stringTables.getTableByName(table)
+	t, ok := p.StringTables.GetTableByName(table)
 	if !ok {
 		return "", false
 	}
 
-	item, ok := t.items[index]
+	item, ok := t.Items[index]
 	if !ok {
 		return "", false
 	}
 
-	return item.key, true
+	return item.Key, true
 }
 
 // Describes a demo message parsed from the replay.

@@ -36,7 +36,7 @@ type fieldpath struct {
 // Contains the weight and lookup function for a single operation
 type fieldpathOp struct {
 	Name     string
-	Function func(*reader, *fieldpath)
+	Function func(*Reader, *fieldpath)
 	Weight   int
 }
 
@@ -101,7 +101,7 @@ func newFieldpath(parentTbl *dt, huf *HuffmanTree) *fieldpath {
 }
 
 // Walk an encoded fieldpath based on a huffman tree
-func (fp *fieldpath) walk(r *reader) {
+func (fp *fieldpath) walk(r *Reader) {
 	cnt := 0
 	root := fp.treeS
 	node := root
@@ -195,35 +195,35 @@ func newFieldpathHuffmanStatic() HuffmanTree {
 	return h
 }
 
-func PlusOne(r *reader, fp *fieldpath) {
+func PlusOne(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 
 	// Increment the index
 	fp.index[len(fp.index)-1] += 1
 }
 
-func PlusTwo(r *reader, fp *fieldpath) {
+func PlusTwo(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 
 	// Increment the index
 	fp.index[len(fp.index)-1] += 2
 }
 
-func PlusThree(r *reader, fp *fieldpath) {
+func PlusThree(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 
 	// Increment the index
 	fp.index[len(fp.index)-1] += 3
 }
 
-func PlusFour(r *reader, fp *fieldpath) {
+func PlusFour(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 
 	// Increment the index
 	fp.index[len(fp.index)-1] += 4
 }
 
-func PlusN(r *reader, fp *fieldpath) {
+func PlusN(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 
 	// This one reads a variable-length header encoding the number of bits
@@ -240,14 +240,14 @@ func PlusN(r *reader, fp *fieldpath) {
 	}
 }
 
-func PushOneLeftDeltaZeroRightZero(r *reader, fp *fieldpath) {
+func PushOneLeftDeltaZeroRightZero(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 
 	// Get current field and index
 	fp.index = append(fp.index, 0)
 }
 
-func PushOneLeftDeltaZeroRightNonZero(r *reader, fp *fieldpath) {
+func PushOneLeftDeltaZeroRightNonZero(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 
 	// should be correct, not encountered however
@@ -262,7 +262,7 @@ func PushOneLeftDeltaZeroRightNonZero(r *reader, fp *fieldpath) {
 	}*/
 }
 
-func PushOneLeftDeltaOneRightZero(r *reader, fp *fieldpath) {
+func PushOneLeftDeltaOneRightZero(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 
 	// Push +1, set index to 0
@@ -270,87 +270,87 @@ func PushOneLeftDeltaOneRightZero(r *reader, fp *fieldpath) {
 	fp.index = append(fp.index, 0)
 }
 
-func PushOneLeftDeltaOneRightNonZero(r *reader, fp *fieldpath) {
+func PushOneLeftDeltaOneRightNonZero(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 }
 
-func PushOneLeftDeltaNRightZero(r *reader, fp *fieldpath) {
+func PushOneLeftDeltaNRightZero(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 }
 
-func PushOneLeftDeltaNRightNonZero(r *reader, fp *fieldpath) {
+func PushOneLeftDeltaNRightNonZero(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 
 }
 
-func PushOneLeftDeltaNRightNonZeroPack6Bits(r *reader, fp *fieldpath) {
+func PushOneLeftDeltaNRightNonZeroPack6Bits(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 }
 
-func PushOneLeftDeltaNRightNonZeroPack8Bits(r *reader, fp *fieldpath) {
+func PushOneLeftDeltaNRightNonZeroPack8Bits(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 }
 
-func PushTwoLeftDeltaZero(r *reader, fp *fieldpath) {
+func PushTwoLeftDeltaZero(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 
 	fp.index = append(fp.index, 0)
 	fp.index = append(fp.index, 0)
 }
 
-func PushTwoLeftDeltaOne(r *reader, fp *fieldpath) {
+func PushTwoLeftDeltaOne(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 }
 
-func PushTwoLeftDeltaN(r *reader, fp *fieldpath) {
+func PushTwoLeftDeltaN(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 }
 
-func PushTwoPack5LeftDeltaZero(r *reader, fp *fieldpath) {
+func PushTwoPack5LeftDeltaZero(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 }
 
-func PushTwoPack5LeftDeltaOne(r *reader, fp *fieldpath) {
+func PushTwoPack5LeftDeltaOne(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 }
 
-func PushTwoPack5LeftDeltaN(r *reader, fp *fieldpath) {
+func PushTwoPack5LeftDeltaN(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 }
 
-func PushThreeLeftDeltaZero(r *reader, fp *fieldpath) {
+func PushThreeLeftDeltaZero(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 }
 
-func PushThreeLeftDeltaOne(r *reader, fp *fieldpath) {
+func PushThreeLeftDeltaOne(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 }
 
-func PushThreeLeftDeltaN(r *reader, fp *fieldpath) {
+func PushThreeLeftDeltaN(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 }
 
-func PushThreePack5LeftDeltaZero(r *reader, fp *fieldpath) {
+func PushThreePack5LeftDeltaZero(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 }
 
-func PushThreePack5LeftDeltaOne(r *reader, fp *fieldpath) {
+func PushThreePack5LeftDeltaOne(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 }
 
-func PushThreePack5LeftDeltaN(r *reader, fp *fieldpath) {
+func PushThreePack5LeftDeltaN(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 }
 
-func PushN(r *reader, fp *fieldpath) {
+func PushN(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 }
 
-func PushNAndNonTopological(r *reader, fp *fieldpath) {
+func PushNAndNonTopological(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 }
 
-func PopOnePlusOne(r *reader, fp *fieldpath) {
+func PopOnePlusOne(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 
 	// Check if we can pop an element
@@ -362,11 +362,11 @@ func PopOnePlusOne(r *reader, fp *fieldpath) {
 	fp.index[len(fp.index)-1] += 1
 }
 
-func PopOnePlusN(r *reader, fp *fieldpath) {
+func PopOnePlusN(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 }
 
-func PopAllButOnePlusOne(r *reader, fp *fieldpath) {
+func PopAllButOnePlusOne(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 
 	// Remove all hierarchy and index element
@@ -374,23 +374,23 @@ func PopAllButOnePlusOne(r *reader, fp *fieldpath) {
 	fp.index[len(fp.index)-1] += 1
 }
 
-func PopAllButOnePlusN(r *reader, fp *fieldpath) {
+func PopAllButOnePlusN(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 }
 
-func PopAllButOnePlusNPackN(r *reader, fp *fieldpath) {
+func PopAllButOnePlusNPackN(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 }
 
-func PopAllButOnePlusNPack3Bits(r *reader, fp *fieldpath) {
+func PopAllButOnePlusNPack3Bits(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 }
 
-func PopAllButOnePlusNPack6Bits(r *reader, fp *fieldpath) {
+func PopAllButOnePlusNPack6Bits(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 }
 
-func PopNPlusOne(r *reader, fp *fieldpath) {
+func PopNPlusOne(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 
 	rBits := []int{2, 4, 10, 17, 30}
@@ -404,15 +404,15 @@ func PopNPlusOne(r *reader, fp *fieldpath) {
 	}
 }
 
-func PopNPlusN(r *reader, fp *fieldpath) {
+func PopNPlusN(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 }
 
-func PopNAndNonTopographical(r *reader, fp *fieldpath) {
+func PopNAndNonTopographical(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 }
 
-func NonTopoComplex(r *reader, fp *fieldpath) {
+func NonTopoComplex(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 
 	// See NonTopoComplexPack4Bits
@@ -424,11 +424,11 @@ func NonTopoComplex(r *reader, fp *fieldpath) {
 	}
 }
 
-func NonTopoPenultimatePlusOne(r *reader, fp *fieldpath) {
+func NonTopoPenultimatePlusOne(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 }
 
-func NonTopoComplexPack4Bits(r *reader, fp *fieldpath) {
+func NonTopoComplexPack4Bits(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 
 	// NonTopological = Disregard the hierarchy, work directly on the field
@@ -458,7 +458,7 @@ func NonTopoComplexPack4Bits(r *reader, fp *fieldpath) {
 	}
 }
 
-func FieldPathEncodeFinish(r *reader, fp *fieldpath) {
+func FieldPathEncodeFinish(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 
 	fp.finished = true

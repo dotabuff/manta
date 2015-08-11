@@ -15,7 +15,7 @@ func (p *Parser) onCSVCMsg_ServerInfo(m *dota.CSVCMsg_ServerInfo) error {
 func (p *Parser) onCDemoClassInfo(m *dota.CDemoClassInfo) error {
 	// Iterate through items, storing the mapping in the parser state
 	for _, c := range m.GetClasses() {
-		p.classInfo[c.GetClassId()] = c.GetNetworkName()
+		p.ClassInfo[c.GetClassId()] = c.GetNetworkName()
 
 		if _, ok := p.serializers[c.GetNetworkName()]; !ok {
 			_panicf("unable to find table for class %d (%s)", c.GetClassId, c.GetNetworkName())
@@ -38,22 +38,22 @@ func (p *Parser) updateInstanceBaseline() {
 		return
 	}
 
-	stringTable, ok := p.stringTables.getTableByName("instancebaseline")
+	stringTable, ok := p.StringTables.GetTableByName("instancebaseline")
 	if !ok {
 		_debugf("skipping updateInstanceBaseline: no instancebaseline string table")
 		return
 	}
 
 	// Iterate through instancebaseline table items
-	for _, item := range stringTable.items {
+	for _, item := range stringTable.Items {
 		// Get the class id for the string table item
-		classId, err := atoi32(item.key)
+		classId, err := atoi32(item.Key)
 		if err != nil {
-			_panicf("invalid instancebaseline key '%s': %s", item.key, err)
+			_panicf("invalid instancebaseline key '%s': %s", item.Key, err)
 		}
 
 		// Get the class name
-		className, ok := p.classInfo[classId]
+		className, ok := p.ClassInfo[classId]
 		if !ok {
 			_panicf("unable to find class info for instancebaseline key %d", classId)
 		}
@@ -71,7 +71,7 @@ func (p *Parser) updateInstanceBaseline() {
 
 		// Parse the properties out of the string table buffer and store
 		// them as the class baseline in the Parser.
-		if len(item.value) > 0 {
+		if len(item.Value) > 0 {
 			if serializer[0].Name == "CIngameEvent_TI5" {
 				// This one can't parse because it want's to go two levels into
 				// DOTA_PlayerChallengeInfo. That one might be an array (would make sense)
@@ -82,7 +82,7 @@ func (p *Parser) updateInstanceBaseline() {
 
 			// Remove once readProperties is working
 			//_debugf("Parsing entity baseline %v", serializer[0].Name)
-			//p.classBaseline[classId] = readPropertiesNew(newReader(item.value), serializer[0])
+			//p.classBaseline[classId] = readPropertiesNew(newReader(item.Value), serializer[0])
 		}
 	}
 }

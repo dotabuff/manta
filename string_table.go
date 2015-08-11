@@ -11,45 +11,49 @@ const (
 
 // Holds and maintains the string table information for an
 // instance of the Parser.
-type stringTables struct {
-	tables    map[int32]*stringTable
-	nameIndex map[string]int32
+type StringTables struct {
+	Tables    map[int32]*StringTable
+	NameIndex map[string]int32
 	nextIndex int32
 }
 
 // Retrieves a string table by its name. Check the bool.
-func (ts *stringTables) getTableByName(name string) (*stringTable, bool) {
-	i, ok := ts.nameIndex[name]
+func (ts *StringTables) GetTableByName(name string) (*StringTable, bool) {
+	i, ok := ts.NameIndex[name]
 	if !ok {
 		return nil, false
 	}
-	t, ok := ts.tables[i]
+	t, ok := ts.Tables[i]
 	return t, ok
 }
 
-// Creates a new empty stringTables.
-func newStringTables() *stringTables {
-	return &stringTables{
-		tables:    make(map[int32]*stringTable),
-		nameIndex: make(map[string]int32),
+// Creates a new empty StringTables.
+func newStringTables() *StringTables {
+	return &StringTables{
+		Tables:    make(map[int32]*StringTable),
+		NameIndex: make(map[string]int32),
 		nextIndex: 0,
 	}
 }
 
 // Holds and maintains the information for a string table.
-type stringTable struct {
+type StringTable struct {
 	index             int32
 	name              string
-	items             map[int32]*stringTableItem
+	Items             map[int32]*StringTableItem
 	userDataFixedSize bool
 	userDataSize      int32
 }
 
+func (st *StringTable) GetIndex() int32                      { return st.index }
+func (st *StringTable) GetName() string                      { return st.name }
+func (st *StringTable) GetItem(index int32) *StringTableItem { return st.Items[index] }
+
 // Holds and maintains a single entry in a string table.
-type stringTableItem struct {
-	index int32
-	key   string
-	value []byte
+type StringTableItem struct {
+	Index int32
+	Key   string
+	Value []byte
 }
 
 // Internal callback for CDemoStringTables.
@@ -65,16 +69,16 @@ func (p *Parser) onCDemoStringTables(m *dota.CDemoStringTables) error {
 // This should be replaced with the real message once we have updated protos.
 func (p *Parser) onCSVCMsg_CreateStringTable(m *dota.CSVCMsg_CreateStringTable) error {
 	// Create a new string table at the next index position
-	t := &stringTable{
-		index:             p.stringTables.nextIndex,
+	t := &StringTable{
+		index:             p.StringTables.nextIndex,
 		name:              m.GetName(),
-		items:             make(map[int32]*stringTableItem),
+		Items:             make(map[int32]*StringTableItem),
 		userDataFixedSize: m.GetUserDataFixedSize(),
 		userDataSize:      m.GetUserDataSize(),
 	}
 
 	// Increment the index
-	p.stringTables.nextIndex += 1
+	p.StringTables.nextIndex += 1
 
 	// Decompress the data if necessary
 	buf := m.GetStringData()
@@ -82,7 +86,7 @@ func (p *Parser) onCSVCMsg_CreateStringTable(m *dota.CSVCMsg_CreateStringTable) 
 		// old replays = lzss
 		// new replays = snappy
 
-		r := newReader(buf)
+		r := NewReader(buf)
 		var err error
 
 		if s := r.readStringN(4); s != "LZSS" {
@@ -101,12 +105,12 @@ func (p *Parser) onCSVCMsg_CreateStringTable(m *dota.CSVCMsg_CreateStringTable) 
 
 	// Insert the items into the table
 	for _, item := range items {
-		t.items[item.index] = item
+		t.Items[item.Index] = item
 	}
 
 	// Add the table to the parser state
-	p.stringTables.tables[t.index] = t
-	p.stringTables.nameIndex[t.name] = t.index
+	p.StringTables.Tables[t.index] = t
+	p.StringTables.NameIndex[t.name] = t.index
 
 	// Apply the updates to baseline state
 	if t.name == "instancebaseline" {
@@ -119,7 +123,7 @@ func (p *Parser) onCSVCMsg_CreateStringTable(m *dota.CSVCMsg_CreateStringTable) 
 // Internal callback for CSVCMsg_UpdateStringTable.
 func (p *Parser) onCSVCMsg_UpdateStringTable(m *dota.CSVCMsg_UpdateStringTable) error {
 	// TODO: integrate
-	t, ok := p.stringTables.tables[m.GetTableId()]
+	t, ok := p.StringTables.Tables[m.GetTableId()]
 	if !ok {
 		_panicf("missing string table %d", m.GetTableId())
 	}
@@ -131,19 +135,20 @@ func (p *Parser) onCSVCMsg_UpdateStringTable(m *dota.CSVCMsg_UpdateStringTable) 
 
 	// Apply the updates to the parser state
 	for _, item := range items {
-		if _, ok := t.items[item.index]; ok {
+		index := item.Index
+		if _, ok := t.Items[index]; ok {
 			// XXX TODO: Sometimes ActiveModifiers change keys, which is suspicous...
-			if item.key != "" && item.key != t.items[item.index].key {
-				_tracef("tick=%d name=%s index=%d key='%s' update key -> %s", p.Tick, t.name, item.index, t.items[item.index].key, item.key)
-				t.items[item.index].key = item.key
+			if item.Key != "" && item.Key != t.Items[index].Key {
+				_tracef("tick=%d name=%s index=%d key='%s' update key -> %s", p.Tick, t.name, index, t.Items[index].Key, item.Key)
+				t.Items[index].Key = item.Key
 			}
-			if len(item.value) > 0 {
-				_tracef("tick=%d name=%s index=%d key='%s' update value len %d -> %d", p.Tick, t.name, item.index, t.items[item.index].key, len(t.items[item.index].value), len(item.value))
-				t.items[item.index].value = item.value
+			if len(item.Value) > 0 {
+				_tracef("tick=%d name=%s index=%d key='%s' update value len %d -> %d", p.Tick, t.name, index, t.Items[index].Key, len(t.Items[index].Value), len(item.Value))
+				t.Items[index].Value = item.Value
 			}
 		} else {
-			_tracef("tick=%d name=%s inserting new item %d key '%s'", p.Tick, t.name, item.index, item.key)
-			t.items[item.index] = item
+			_tracef("tick=%d name=%s inserting new item %d key '%s'", p.Tick, t.name, index, item.Key)
+			t.Items[index] = item
 		}
 	}
 
@@ -156,11 +161,11 @@ func (p *Parser) onCSVCMsg_UpdateStringTable(m *dota.CSVCMsg_UpdateStringTable) 
 }
 
 // Parse a string table data blob, returning a list of item updates.
-func parseStringTable(buf []byte, numUpdates int32, userDataFixed bool, userDataSize int32) (items []*stringTableItem) {
-	items = make([]*stringTableItem, 0)
+func parseStringTable(buf []byte, numUpdates int32, userDataFixed bool, userDataSize int32) (items []*StringTableItem) {
+	items = make([]*StringTableItem, 0)
 
 	// Create a reader for the buffer
-	r := newReader(buf)
+	r := NewReader(buf)
 
 	// Start with an index of -1.
 	// If the first item is at index 0 it will use a incr operation.
@@ -248,7 +253,7 @@ func parseStringTable(buf []byte, numUpdates int32, userDataFixed bool, userData
 			}
 		}
 
-		items = append(items, &stringTableItem{index, key, value})
+		items = append(items, &StringTableItem{index, key, value})
 	}
 
 	return items

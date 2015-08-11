@@ -37,7 +37,7 @@ func (sg *spawnGroup) writeFixture() {
 // Format: <1 bit IsLZSSCompressed | 24 bit length | Data>
 // Data: <8 bit arrayLength | 0 | 8 bit ressourceStrings | 0 | 8 bit unkown | 0 | dataTypes * arrayLength | 0 | ... data ...>
 func (sg *spawnGroup) parse() {
-	reader := newReader(sg.manifest)
+	reader := NewReader(sg.manifest)
 
 	isCompressed := reader.readBoolean()
 	size := reader.readBits(24)
@@ -52,7 +52,7 @@ func (sg *spawnGroup) parse() {
 		data = dataUnc
 	}
 
-	reader2 := newReader(data)
+	reader2 := NewReader(data)
 	rTypes := reader2.readBits(16) // number of different ressource types in the data
 
 	if rTypes > 1 {

@@ -1,6 +1,7 @@
 package manta
 
 import (
+	"sort"
 	"testing"
 
 	"github.com/dotabuff/manta/dota"
@@ -125,44 +126,44 @@ func TestParseRealMatches(t *testing.T) {
 			return nil
 		})
 
-		// Writes out the source_1_legacy_game_events_list.json fixture so that we can identify changes to schema.
-		parser.Callbacks.OnCMsgSource1LegacyGameEventList(func(m *dota.CMsgSource1LegacyGameEventList) error {
-			_dump_fixture("legacy_game_events/list_latest.json", _json_marshal(m))
-			return nil
-		})
+		if fixturesMode {
+			// Writes out the source_1_legacy_game_events_list.json fixture so that we can identify changes to schema.
+			parser.Callbacks.OnCMsgSource1LegacyGameEventList(func(m *dota.CMsgSource1LegacyGameEventList) error {
+				_dump_fixture("legacy_game_events/list_latest.json", _json_marshal(m))
+				return nil
+			})
+		}
 
 		err = parser.Start()
 		assert.Nil(err, s.matchId)
 
-		/*
-			Use this to write out instancebaseline fixtures
-			t, _ := parser.stringTables.getTableByName("instancebaseline")
-			for _, i := range t.items {
-				classId, _ := atoi32(i.key)
-				className := parser.classInfo[classId]
-				_dump_fixture(_sprintf("instancebaseline/%s_%s.rawbuf", className), s.matchId, i.value)
+		if fixturesMode {
+			// Use this to write out instancebaseline fixtures
+			t, _ := parser.StringTables.GetTableByName("instancebaseline")
+			for _, i := range t.Items {
+				classId, _ := atoi32(i.Key)
+				className := parser.ClassInfo[classId]
+				_dump_fixture(_sprintf("instancebaseline/%s_%s.rawbuf", className, s.matchId), i.Value)
 			}
-		*/
 
-		/*
-				Use this to dump layout of sendtables
+			// Use this to dump layout of sendtables
 			out := _sprintf("")
 			classIds := make([]int, 0)
-			for classId, _ := range parser.classInfo {
+			for classId, _ := range parser.ClassInfo {
 				classIds = append(classIds, int(classId))
 			}
 			sort.Ints(classIds)
 			for _, classId := range classIds {
-				className := parser.classInfo[int32(classId)]
-				st := parser.sendTables.tables[className]
+				className := parser.ClassInfo[int32(classId)]
+				st := parser.SendTables.Tables[className]
 				out += _sprintf("class id=%d name=%s\n", classId, className)
-				out += _sprintf("table id=%d name=%s version=%d\n", st.index, st.name, st.version)
-				for i, p := range st.props {
+				out += _sprintf("table id=%d name=%s version=%d\n", st.Index, st.Name, st.Version)
+				for i, p := range st.Props {
 					out += _sprintf(" -> prop %d: %s\n", i, p.Describe())
 				}
 				out += "\n"
 			}
-		*/
+		}
 
 		assert.Equal(s.expectCombatLogDamage, gotCombatLogDamage, s.matchId)
 		assert.Equal(s.expectCombatLogHealing, gotCombatLogHealing, s.matchId)

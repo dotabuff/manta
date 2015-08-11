@@ -37,6 +37,10 @@ func (ge *GameEvent) TypeName() string {
 	return dota.DOTA_COMBATLOG_TYPES_name[ge.m.GetKeys()[0].GetValByte()]
 }
 
+func (ge *GameEvent) Type() dota.DOTA_COMBATLOG_TYPES {
+	return dota.DOTA_COMBATLOG_TYPES(ge.m.GetKeys()[0].GetValByte())
+}
+
 func (ge *GameEvent) String() string {
 	keys := ge.m.GetKeys()
 	name := dota.DOTA_COMBATLOG_TYPES_name[keys[0].GetValByte()]

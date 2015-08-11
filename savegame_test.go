@@ -18,7 +18,7 @@ func TestParseCDemoSaveGames(t *testing.T) {
 	parser, err := NewParser(buf)
 	assert.NoError(err)
 
-	saves := []map[string]interface{}{}
+	saves := []*SaveGame{}
 	parser.Callbacks.OnCDemoSaveGame(func(s *dota.CDemoSaveGame) error {
 		save, err := ParseCDemoSaveGame(s)
 		saves = append(saves, save)
@@ -29,15 +29,21 @@ func TestParseCDemoSaveGames(t *testing.T) {
 
 	assert.Equal(len(saves), 11)
 
-	assert.EqualValues(saves[0]["matchid"], 1560315800)
-	players0 := saves[0]["Players"].(map[string]interface{})
-	players02 := players0["2"].(map[string]interface{})
-	assert.EqualValues(players02["name"], "kimee")
-	assert.EqualValues(players02["hero"], "npc_dota_hero_doom_bringer")
+	unitLengths := []int{12, 15, 14, 15, 13, 15, 15, 14, 16, 14, 16}
 
-	assert.EqualValues(saves[1]["matchid"], 1560315800)
-	players1 := saves[1]["Players"].(map[string]interface{})
-	players12 := players1["2"].(map[string]interface{})
-	assert.EqualValues(players12["name"], "kimee")
-	assert.EqualValues(players12["hero"], "npc_dota_hero_doom_bringer")
+	for n, save := range saves {
+		assert.Len(save.Players, 10, "Players")
+		assert.Len(save.Units, unitLengths[n], "Units")
+		assert.Len(save.StockInfo, 10, "StockInfo")
+		assert.EqualValues(save.Gameid, 0, "Gameid")
+		assert.EqualValues(save.Matchid, 1560315800, "Matchid")
+		assert.EqualValues(save.Version, 1, "Version")
+
+		player2 := save.Players["2"]
+		assert.EqualValues(player2.Name, "kimee")
+		assert.EqualValues(player2.Hero, "npc_dota_hero_doom_bringer")
+		assert.EqualValues(player2.Sharemask, 0, "Sharemask")
+		assert.EqualValues(player2.Steamid, 76561197961237397, "Steamid")
+		assert.EqualValues(player2.Team, 2, "Team")
+	}
 }

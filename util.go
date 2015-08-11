@@ -14,11 +14,17 @@ import (
 	"github.com/golang/protobuf/proto"
 )
 
-var debugMode, traceMode bool
+var debugMode, traceMode, fixturesMode bool
 
 func init() {
 	if os.Getenv("DEBUG") != "" {
 		debugMode = true
+	}
+	if os.Getenv("TRACE") != "" {
+		traceMode = true
+	}
+	if os.Getenv("FIXTURES") != "" {
+		fixturesMode = true
 	}
 }
 
