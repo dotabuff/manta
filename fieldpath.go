@@ -21,7 +21,7 @@ import (
 //  9  PushOneLeftDeltaZeroRightZero      35         12   110110001101
 // 10  PopOnePlusOne                       1     2   15   110110001100001
 // 11  PopNPlusOne                         0         16   1101100011000110
-// 12  PushTwoLeftDeltaZero                0         27   110110001100100110000000000
+// 12  PushTwoPack5LeftDeltaZero           0         17   11011000110010011
 
 // A fieldpath, used to walk through the flattened table hierarchy
 type fieldpath struct {
@@ -190,7 +190,7 @@ func newFieldpathHuffmanStatic() HuffmanTree {
 	addNode(h, 2843, 12, 20)   // PushOneLeftDeltaZeroRightZero
 	addNode(h, 17179, 15, 22)  // PopOnePlusOne
 	addNode(h, 25371, 16, 25)  // PopNPlusOne
-	addNode(h, 103195, 27, 39) // PushTwoLeftDeltaZero
+	addNode(h, 103195, 17, 36) // PushTwoPack5LeftDeltaZero
 
 	return h
 }
@@ -294,8 +294,9 @@ func PushOneLeftDeltaNRightNonZeroPack8Bits(r *Reader, fp *fieldpath) {
 func PushTwoLeftDeltaZero(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 
-	fp.index = append(fp.index, 0)
-	fp.index = append(fp.index, 0)
+	// wrong
+	//fp.index = append(fp.index, 0)
+	//fp.index = append(fp.index, 0)
 }
 
 func PushTwoLeftDeltaOne(r *Reader, fp *fieldpath) {
@@ -308,6 +309,9 @@ func PushTwoLeftDeltaN(r *Reader, fp *fieldpath) {
 
 func PushTwoPack5LeftDeltaZero(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
+
+	fp.index = append(fp.index, int32(r.readBits(5)))
+	fp.index = append(fp.index, int32(r.readBits(5)))
 }
 
 func PushTwoPack5LeftDeltaOne(r *Reader, fp *fieldpath) {
