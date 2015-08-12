@@ -66,6 +66,12 @@ func TestFieldpath(t *testing.T) {
 			debug:       false,
 			expectCount: 1838,
 		},
+		{
+			tableName:   "CSpeechBubbleManager",
+			run:         true,
+			debug:       false,
+			expectCount: 25,
+		},
 	}
 
 	// Load our send tables
