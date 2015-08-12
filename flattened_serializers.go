@@ -189,6 +189,6 @@ func (p *Parser) onCDemoSendTablesNew(m *dota.CDemoSendTables) error {
 	// Temporary: Also parse things the old way
 	p.onCDemoSendTables(m)
 
-	p.serializers = ParseSendTablesNew(m, GetDefaultPropertySerializerTable()).Serializers
+	p.Serializers = ParseSendTablesNew(m, GetDefaultPropertySerializerTable()).Serializers
 	return nil
 }

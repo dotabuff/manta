@@ -1,6 +1,6 @@
 package manta
 
-func readPropertiesNew(r *Reader, ser *dt) (result map[string]interface{}) {
+func ReadPropertiesNew(r *Reader, ser *dt) (result map[string]interface{}) {
 	// Return type
 	result = make(map[string]interface{})
 

@@ -27,11 +27,11 @@ type Parser struct {
 	hasClassInfo      bool
 	ClassInfo         map[int32]string
 	classIdSize       int
-	classBaseline     map[int32]map[string]interface{}
+	ClassBaseline     map[int32]map[string]interface{}
 	packetEntities    map[int32]*packetEntity
 	SendTables        *SendTables
 	StringTables      *StringTables
-	serializers       map[string]map[int32]*dt
+	Serializers       map[string]map[int32]*dt
 	spawnGroups       map[uint32]*spawnGroup
 	gameEventNames    map[int32]string
 	gameEventTypes    map[string]*gameEventType
@@ -65,7 +65,7 @@ func NewParser(buf []byte) (*Parser, error) {
 		isStopping: false,
 
 		ClassInfo:         make(map[int32]string),
-		classBaseline:     make(map[int32]map[string]interface{}),
+		ClassBaseline:     make(map[int32]map[string]interface{}),
 		packetEntities:    make(map[int32]*packetEntity),
 		StringTables:      newStringTables(),
 		spawnGroups:       make(map[uint32]*spawnGroup),

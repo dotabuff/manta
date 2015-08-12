@@ -77,7 +77,7 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 			}
 
 			// Get the associated serializer
-			if pe.flatTbl, ok = p.serializers[pe.className][0]; !ok {
+			if pe.flatTbl, ok = p.Serializers[pe.className][0]; !ok {
 				_panicf("unable to find serializer for class %s", pe.className)
 			}
 
@@ -87,7 +87,7 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 			_debugf("created a pe: %+v", pe)
 
 			// Read properties and set them in the packetEntity
-			pe.properties = readPropertiesNew(r, pe.flatTbl)
+			pe.properties = ReadPropertiesNew(r, pe.flatTbl)
 		case "U":
 			_panicf("End here")
 			// Find the existing packetEntity
@@ -99,7 +99,7 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 			return nil
 
 			// Read properties and update the packetEntity
-			for k, v := range readPropertiesNew(r, pe.flatTbl) {
+			for k, v := range ReadPropertiesNew(r, pe.flatTbl) {
 				pe.properties[k] = v
 			}
 

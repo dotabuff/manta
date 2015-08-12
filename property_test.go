@@ -882,7 +882,7 @@ func TestReadProperties(t *testing.T) {
 
 		// Read properties
 		r := NewReader(buf)
-		props := readPropertiesNew(r, serializer)
+		props := ReadPropertiesNew(r, serializer)
 		assert.Equal(len(props), s.expectCount)
 
 		for k, v := range s.expectKeys {

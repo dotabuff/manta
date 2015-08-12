@@ -1,8 +1,6 @@
 package manta
 
-import (
-	"github.com/dotabuff/manta/dota"
-)
+import "github.com/dotabuff/manta/dota"
 
 // Internal callback for CSVCMsg_ServerInfo.
 func (p *Parser) onCSVCMsg_ServerInfo(m *dota.CSVCMsg_ServerInfo) error {
@@ -17,7 +15,7 @@ func (p *Parser) onCDemoClassInfo(m *dota.CDemoClassInfo) error {
 	for _, c := range m.GetClasses() {
 		p.ClassInfo[c.GetClassId()] = c.GetNetworkName()
 
-		if _, ok := p.serializers[c.GetNetworkName()]; !ok {
+		if _, ok := p.Serializers[c.GetNetworkName()]; !ok {
 			_panicf("unable to find table for class %d (%s)", c.GetClassId, c.GetNetworkName())
 		}
 	}
@@ -46,43 +44,53 @@ func (p *Parser) updateInstanceBaseline() {
 
 	// Iterate through instancebaseline table items
 	for _, item := range stringTable.Items {
-		// Get the class id for the string table item
-		classId, err := atoi32(item.Key)
-		if err != nil {
-			_panicf("invalid instancebaseline key '%s': %s", item.Key, err)
+		p.updateInstanceBaselineItem(item)
+	}
+}
+
+func (p *Parser) updateInstanceBaselineItem(item *StringTableItem) {
+	defer func() {
+		if e := recover(); e != nil {
+			_debugf("Caught error: %v", e)
 		}
+	}()
 
-		// Get the class name
-		className, ok := p.ClassInfo[classId]
-		if !ok {
-			_panicf("unable to find class info for instancebaseline key %d", classId)
-		}
+	// Get the class id for the string table item
+	classId, err := atoi32(item.Key)
+	if err != nil {
+		_panicf("invalid instancebaseline key '%s': %s", item.Key, err)
+	}
 
-		// Create an entry in the map if needed
-		if _, ok := p.classBaseline[classId]; !ok {
-			p.classBaseline[classId] = make(map[string]interface{})
-		}
+	// Get the class name
+	className, ok := p.ClassInfo[classId]
+	if !ok {
+		_panicf("unable to find class info for instancebaseline key %d", classId)
+	}
 
-		// Get the send table associated with the class.
-		serializer, ok := p.serializers[className]
-		if !ok {
-			_panicf("unable to find send table %s for instancebaseline key %d", className, classId)
-		}
+	// Create an entry in the map if needed
+	if _, ok := p.ClassBaseline[classId]; !ok {
+		p.ClassBaseline[classId] = make(map[string]interface{})
+	}
 
-		// Parse the properties out of the string table buffer and store
-		// them as the class baseline in the Parser.
-		if len(item.Value) > 0 {
-			if serializer[0].Name == "CIngameEvent_TI5" {
-				// This one can't parse because it want's to go two levels into
-				// DOTA_PlayerChallengeInfo. That one might be an array (would make sense)
-				// but isn't marked as such.
-				// @todo: Investigate later
-				continue
-			}
+	// Get the send table associated with the class.
+	serializer, ok := p.Serializers[className]
+	if !ok {
+		_panicf("unable to find send table %s for instancebaseline key %d", className, classId)
+	}
 
-			// Remove once readProperties is working
-			//_debugf("Parsing entity baseline %v", serializer[0].Name)
-			//p.classBaseline[classId] = readPropertiesNew(newReader(item.Value), serializer[0])
+	// Parse the properties out of the string table buffer and store
+	// them as the class baseline in the Parser.
+	if len(item.Value) > 0 {
+		switch serializer[0].Name {
+		case "CIngameEvent_TI5":
+			// This one can't parse because it want's to go two levels into
+			// DOTA_PlayerChallengeInfo. That one might be an array (would make sense)
+			// but isn't marked as such.
+			// @todo: Investigate later
+			return
+		default:
+			_debugf("Parsing entity baseline %v", serializer[0].Name)
+			p.ClassBaseline[classId] = ReadPropertiesNew(NewReader(item.Value), serializer[0])
 		}
 	}
 }
