@@ -48,6 +48,7 @@ It has these top-level messages:
 	CMsgLobbyInviteResponse
 	CMsgKickFromParty
 	CMsgLeaveParty
+	CMsgCustomGameInstallStatus
 	CMsgServerAvailable
 	CMsgLANServerAvailable
 	CSOEconGameAccountClient
@@ -236,6 +237,63 @@ func (x *EGCBaseProtoObjectTypes) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	*x = EGCBaseProtoObjectTypes(value)
+	return nil
+}
+
+type ECustomGameInstallStatus int32
+
+const (
+	ECustomGameInstallStatus_k_ECustomGameInstallStatus_Unknown                  ECustomGameInstallStatus = 0
+	ECustomGameInstallStatus_k_ECustomGameInstallStatus_Ready                    ECustomGameInstallStatus = 1
+	ECustomGameInstallStatus_k_ECustomGameInstallStatus_Busy                     ECustomGameInstallStatus = 2
+	ECustomGameInstallStatus_k_ECustomGameInstallStatus_FailedGeneric            ECustomGameInstallStatus = 101
+	ECustomGameInstallStatus_k_ECustomGameInstallStatus_FailedInternalError      ECustomGameInstallStatus = 102
+	ECustomGameInstallStatus_k_ECustomGameInstallStatus_RequestedTimestampTooOld ECustomGameInstallStatus = 103
+	ECustomGameInstallStatus_k_ECustomGameInstallStatus_RequestedTimestampTooNew ECustomGameInstallStatus = 104
+	ECustomGameInstallStatus_k_ECustomGameInstallStatus_CRCMismatch              ECustomGameInstallStatus = 105
+	ECustomGameInstallStatus_k_ECustomGameInstallStatus_FailedSteam              ECustomGameInstallStatus = 106
+	ECustomGameInstallStatus_k_ECustomGameInstallStatus_FailedCanceled           ECustomGameInstallStatus = 107
+)
+
+var ECustomGameInstallStatus_name = map[int32]string{
+	0:   "k_ECustomGameInstallStatus_Unknown",
+	1:   "k_ECustomGameInstallStatus_Ready",
+	2:   "k_ECustomGameInstallStatus_Busy",
+	101: "k_ECustomGameInstallStatus_FailedGeneric",
+	102: "k_ECustomGameInstallStatus_FailedInternalError",
+	103: "k_ECustomGameInstallStatus_RequestedTimestampTooOld",
+	104: "k_ECustomGameInstallStatus_RequestedTimestampTooNew",
+	105: "k_ECustomGameInstallStatus_CRCMismatch",
+	106: "k_ECustomGameInstallStatus_FailedSteam",
+	107: "k_ECustomGameInstallStatus_FailedCanceled",
+}
+var ECustomGameInstallStatus_value = map[string]int32{
+	"k_ECustomGameInstallStatus_Unknown":                  0,
+	"k_ECustomGameInstallStatus_Ready":                    1,
+	"k_ECustomGameInstallStatus_Busy":                     2,
+	"k_ECustomGameInstallStatus_FailedGeneric":            101,
+	"k_ECustomGameInstallStatus_FailedInternalError":      102,
+	"k_ECustomGameInstallStatus_RequestedTimestampTooOld": 103,
+	"k_ECustomGameInstallStatus_RequestedTimestampTooNew": 104,
+	"k_ECustomGameInstallStatus_CRCMismatch":              105,
+	"k_ECustomGameInstallStatus_FailedSteam":              106,
+	"k_ECustomGameInstallStatus_FailedCanceled":           107,
+}
+
+func (x ECustomGameInstallStatus) Enum() *ECustomGameInstallStatus {
+	p := new(ECustomGameInstallStatus)
+	*p = x
+	return p
+}
+func (x ECustomGameInstallStatus) String() string {
+	return proto.EnumName(ECustomGameInstallStatus_name, int32(x))
+}
+func (x *ECustomGameInstallStatus) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(ECustomGameInstallStatus_value, data, "ECustomGameInstallStatus")
+	if err != nil {
+		return err
+	}
+	*x = ECustomGameInstallStatus(value)
 	return nil
 }
 
@@ -640,13 +698,55 @@ func (m *CMsgLeaveParty) Reset()         { *m = CMsgLeaveParty{} }
 func (m *CMsgLeaveParty) String() string { return proto.CompactTextString(m) }
 func (*CMsgLeaveParty) ProtoMessage()    {}
 
+type CMsgCustomGameInstallStatus struct {
+	Status                   *ECustomGameInstallStatus `protobuf:"varint,1,opt,name=status,enum=dota.ECustomGameInstallStatus,def=0" json:"status,omitempty"`
+	Message                  *string                   `protobuf:"bytes,2,opt,name=message" json:"message,omitempty"`
+	LatestTimestampFromSteam *uint32                   `protobuf:"fixed32,3,opt,name=latest_timestamp_from_steam" json:"latest_timestamp_from_steam,omitempty"`
+	XXX_unrecognized         []byte                    `json:"-"`
+}
+
+func (m *CMsgCustomGameInstallStatus) Reset()         { *m = CMsgCustomGameInstallStatus{} }
+func (m *CMsgCustomGameInstallStatus) String() string { return proto.CompactTextString(m) }
+func (*CMsgCustomGameInstallStatus) ProtoMessage()    {}
+
+const Default_CMsgCustomGameInstallStatus_Status ECustomGameInstallStatus = ECustomGameInstallStatus_k_ECustomGameInstallStatus_Unknown
+
+func (m *CMsgCustomGameInstallStatus) GetStatus() ECustomGameInstallStatus {
+	if m != nil && m.Status != nil {
+		return *m.Status
+	}
+	return Default_CMsgCustomGameInstallStatus_Status
+}
+
+func (m *CMsgCustomGameInstallStatus) GetMessage() string {
+	if m != nil && m.Message != nil {
+		return *m.Message
+	}
+	return ""
+}
+
+func (m *CMsgCustomGameInstallStatus) GetLatestTimestampFromSteam() uint32 {
+	if m != nil && m.LatestTimestampFromSteam != nil {
+		return *m.LatestTimestampFromSteam
+	}
+	return 0
+}
+
 type CMsgServerAvailable struct {
-	XXX_unrecognized []byte `json:"-"`
+	CustomGameInstallStatus *CMsgCustomGameInstallStatus `protobuf:"bytes,1,opt,name=custom_game_install_status" json:"custom_game_install_status,omitempty"`
+	XXX_unrecognized        []byte                       `json:"-"`
 }
 
 func (m *CMsgServerAvailable) Reset()         { *m = CMsgServerAvailable{} }
 func (m *CMsgServerAvailable) String() string { return proto.CompactTextString(m) }
 func (*CMsgServerAvailable) ProtoMessage()    {}
+
+func (m *CMsgServerAvailable) GetCustomGameInstallStatus() *CMsgCustomGameInstallStatus {
+	if m != nil {
+		return m.CustomGameInstallStatus
+	}
+	return nil
+}
 
 type CMsgLANServerAvailable struct {
 	LobbyId          *uint64 `protobuf:"fixed64,1,opt,name=lobby_id" json:"lobby_id,omitempty"`
@@ -2996,5 +3096,6 @@ func (m *CMsgResetStrangeGemCount) GetSocketIndex() uint32 {
 func init() {
 	proto.RegisterEnum("dota.EGCBaseMsg", EGCBaseMsg_name, EGCBaseMsg_value)
 	proto.RegisterEnum("dota.EGCBaseProtoObjectTypes", EGCBaseProtoObjectTypes_name, EGCBaseProtoObjectTypes_value)
+	proto.RegisterEnum("dota.ECustomGameInstallStatus", ECustomGameInstallStatus_name, ECustomGameInstallStatus_value)
 	proto.RegisterEnum("dota.GC_BannedWordType", GC_BannedWordType_name, GC_BannedWordType_value)
 }
