@@ -876,9 +876,7 @@ func TestReadProperties(t *testing.T) {
 		}
 
 		// Optionally disable debugging
-		if !s.debug {
-			debugMode = false
-		}
+		debugMode = s.debug
 
 		// Read properties
 		r := NewReader(buf)
@@ -892,9 +890,6 @@ func TestReadProperties(t *testing.T) {
 		// There shouldn't be more than 8 bits left in the buffer
 		_debugf("Remaining bits %v", r.remBits())
 		assert.True(r.remBits() < 8)
-
-		// Re-enable debugging
-		debugMode = true
 	}
 }
 

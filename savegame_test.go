@@ -7,10 +7,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func init() {
-	debugMode = true
-}
-
 func TestParseCDemoSaveGames(t *testing.T) {
 	assert := assert.New(t)
 
