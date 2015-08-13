@@ -23,6 +23,7 @@ type HuffmanLeaf struct {
 // A node with potential left / right nodes or leafs
 type HuffmanNode struct {
 	weight int
+	value  int
 	left   HuffmanTree
 	right  HuffmanTree
 }
@@ -64,8 +65,7 @@ func (self HuffmanNode) IsLeaf() bool {
 
 // Return value for node
 func (self HuffmanNode) Value() int {
-	_panicf("HuffmanNode doesn't have a value")
-	return 0
+	return self.value
 }
 
 func (self HuffmanNode) Left() HuffmanTree {
@@ -85,7 +85,11 @@ func (th treeHeap) Len() int {
 
 // Weight compare function
 func (th treeHeap) Less(i int, j int) bool {
-	return th[i].Weight() <= th[j].Weight()
+	if th[i].Weight() == th[j].Weight() {
+		return th[i].Value() >= th[j].Value()
+	} else {
+		return th[i].Weight() < th[j].Weight()
+	}
 }
 
 // Append item, required for heap
@@ -109,15 +113,22 @@ func (th treeHeap) Swap(i, j int) {
 func buildTree(symFreqs []int) HuffmanTree {
 	var trees treeHeap
 	for v, w := range symFreqs {
+		if w == 0 {
+			w = 1
+		}
+
 		trees = append(trees, &HuffmanLeaf{w, v})
 	}
+
+	n := 40
 
 	heap.Init(&trees)
 	for trees.Len() > 1 {
 		a := heap.Pop(&trees).(HuffmanTree)
 		b := heap.Pop(&trees).(HuffmanTree)
 
-		heap.Push(&trees, &HuffmanNode{a.Weight() + b.Weight(), a, b})
+		heap.Push(&trees, &HuffmanNode{a.Weight() + b.Weight(), n, a, b})
+		n++
 	}
 
 	return heap.Pop(&trees).(HuffmanTree)
@@ -155,7 +166,8 @@ func printCodes(tree HuffmanTree, prefix []byte) {
 	}
 
 	if tree.IsLeaf() {
-		fmt.Printf("%v\t%d\t%d\t%s\n", tree.Value(), tree.Weight(), len(prefix), string(prefix))
+		node := tree.(*HuffmanLeaf)
+		fmt.Printf("%v\t%d\t%d\t%s\n", node.Value(), node.Weight(), len(prefix), string(prefix))
 	} else {
 		prefix = append(prefix, '0')
 		printCodes(tree.Left(), prefix)
@@ -188,14 +200,14 @@ func addNode(tree HuffmanTree, path int, path_len int, value int) HuffmanTree {
 			if tree.Right() != nil {
 				tree = tree.Right()
 			} else {
-				tree.(*HuffmanNode).right = &HuffmanNode{0, nil, nil}
+				tree.(*HuffmanNode).right = &HuffmanNode{0, 0, nil, nil}
 				tree = tree.Right()
 			}
 		} else {
 			if tree.Left() != nil {
 				tree = tree.Left()
 			} else {
-				tree.(*HuffmanNode).left = &HuffmanNode{0, nil, nil}
+				tree.(*HuffmanNode).left = &HuffmanNode{0, 0, nil, nil}
 				tree = tree.Left()
 			}
 		}
