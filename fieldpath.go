@@ -22,6 +22,8 @@ import (
 // 10  PopOnePlusOne                       1     2   15   110110001100001
 // 11  PopNPlusOne                         0         16   1101100011000110
 // 12  PushTwoPack5LeftDeltaZero           0         17   11011000110010011
+//
+// Thanks to @spheenik for being resilient in his efforts to figure out the rest of the tree
 
 // A fieldpath, used to walk through the flattened table hierarchy
 type fieldpath struct {
@@ -29,7 +31,6 @@ type fieldpath struct {
 	fields   []*dt_field
 	index    []int32
 	tree     *HuffmanTree
-	treeS    HuffmanTree // static version
 	finished bool
 }
 
@@ -91,7 +92,6 @@ func newFieldpath(parentTbl *dt, huf *HuffmanTree) *fieldpath {
 		fields:   make([]*dt_field, 0),
 		index:    make([]int32, 0),
 		tree:     huf,
-		treeS:    newFieldpathHuffmanStatic(),
 		finished: false,
 	}
 
