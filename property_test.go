@@ -252,7 +252,7 @@ func TestReadProperties(t *testing.T) {
 
 		{
 			tableName:   "CDOTA_DataCustomTeam",
-			run:         false,
+			run:         true,
 			debug:       false,
 			expectCount: (10 + 10 + 1 + 30 + 256),
 			expectKeys: map[string]interface{}{
@@ -837,6 +837,18 @@ func TestReadProperties(t *testing.T) {
 				"m_rgPlayerGraphData.0009":   uint32(2097151),
 				"m_rgDireTotalEarnedXP.0063": int32(0),
 				"m_nGoldGraphVersion":        int32(3),
+			},
+		},
+		{
+			tableName:   "CSpeechBubbleManager",
+			run:         true,
+			debug:       true,
+			expectCount: 7, // WRONG, should carry the array index instead of overwriting. Needs some rework
+			expectKeys: map[string]interface{}{
+				"m_hNPC":       HANDLE_NONE,
+				"m_flDuration": float32(0),
+				"m_unOffsetX":  uint32(0),
+				"m_unCount":    uint32(0),
 			},
 		},
 

@@ -21,7 +21,9 @@ import (
 //  9  PushOneLeftDeltaZeroRightZero      35         12   110110001101
 // 10  PopOnePlusOne                       1     2   15   110110001100001
 // 11  PopNPlusOne                         0         16   1101100011000110
-// 12  PushTwoLeftDeltaZero                0         27   110110001100100110000000000
+// 12  PushTwoPack5LeftDeltaZero           0         17   11011000110010011
+//
+// Thanks to @spheenik for being resilient in his efforts to figure out the rest of the tree
 
 // A fieldpath, used to walk through the flattened table hierarchy
 type fieldpath struct {
@@ -29,7 +31,6 @@ type fieldpath struct {
 	fields   []*dt_field
 	index    []int32
 	tree     *HuffmanTree
-	treeS    HuffmanTree // static version
 	finished bool
 }
 
@@ -43,45 +44,45 @@ type fieldpathOp struct {
 // Global fieldpath lookup array
 var fieldpathLookup = []fieldpathOp{
 	{"PlusOne", PlusOne, 36271},
-	{"FieldPathEncodeFinish", FieldPathEncodeFinish, 25474},
-	{"PushOneLeftDeltaNRightNonZeroPack6Bits", PushOneLeftDeltaNRightNonZeroPack6Bits, 10530},
 	{"PlusTwo", PlusTwo, 10334},
-	{"PlusN", PlusN, 4128},
-	{"PushOneLeftDeltaOneRightNonZero", PushOneLeftDeltaOneRightNonZero, 2942},
-	{"PopAllButOnePlusOne", PopAllButOnePlusOne, 1837},
 	{"PlusThree", PlusThree, 1375},
 	{"PlusFour", PlusFour, 646},
-	{"PopAllButOnePlusNPack6Bits", PopAllButOnePlusNPack6Bits, 634},
-	{"PushOneLeftDeltaNRightZero", PushOneLeftDeltaNRightZero, 560},
-	{"PushOneLeftDeltaOneRightZero", PushOneLeftDeltaOneRightZero, 521},
-	{"PushOneLeftDeltaNRightNonZero", PushOneLeftDeltaNRightNonZero, 471},
-	{"PushNAndNonTopological", PushNAndNonTopological, 310},
-	{"PopAllButOnePlusNPack3Bits", PopAllButOnePlusNPack3Bits, 300},
-	{"NonTopoPenultimatePlusOne", NonTopoPenultimatePlusOne, 271},
-	{"PushOneLeftDeltaNRightNonZeroPack8Bits", PushOneLeftDeltaNRightNonZeroPack8Bits, 251},
-	{"PopAllButOnePlusN", PopAllButOnePlusN, 149},
-	{"NonTopoComplexPack4Bits", NonTopoComplexPack4Bits, 99},
-	{"NonTopoComplex", NonTopoComplex, 76},
+	{"PlusN", PlusN, 4128},
 	{"PushOneLeftDeltaZeroRightZero", PushOneLeftDeltaZeroRightZero, 35},
 	{"PushOneLeftDeltaZeroRightNonZero", PushOneLeftDeltaZeroRightNonZero, 3},
-	{"PopOnePlusOne", PopOnePlusOne, 1},                     // should be 2 but our algorithm is wrong
-	{"PopNAndNonTopographical", PopNAndNonTopographical, 2}, // should be 1 but our algorithm is wrong
-	{"PopNPlusN", PopNPlusN, 0},
-	{"PopNPlusOne", PopNPlusOne, 0},
-	{"PopOnePlusN", PopOnePlusN, 0},
-	{"PushN", PushN, 0},
-	{"PushThreePack5LeftDeltaN", PushThreePack5LeftDeltaN, 0},
-	{"PushThreePack5LeftDeltaOne", PushThreePack5LeftDeltaOne, 0},
-	{"PushThreePack5LeftDeltaZero", PushThreePack5LeftDeltaZero, 0},
-	{"PushThreeLeftDeltaN", PushThreeLeftDeltaN, 0},
-	{"PushThreeLeftDeltaOne", PushThreeLeftDeltaOne, 0},
-	{"PushThreeLeftDeltaZero", PushThreeLeftDeltaZero, 0},
-	{"PushTwoPack5LeftDeltaN", PushTwoPack5LeftDeltaN, 0},
-	{"PushTwoPack5LeftDeltaOne", PushTwoPack5LeftDeltaOne, 0},
-	{"PushTwoPack5LeftDeltaZero", PushTwoPack5LeftDeltaZero, 0},
-	{"PushTwoLeftDeltaN", PushTwoLeftDeltaN, 0},
-	{"PushTwoLeftDeltaOne", PushTwoLeftDeltaOne, 0},
+	{"PushOneLeftDeltaOneRightZero", PushOneLeftDeltaOneRightZero, 521},
+	{"PushOneLeftDeltaOneRightNonZero", PushOneLeftDeltaOneRightNonZero, 2942},
+	{"PushOneLeftDeltaNRightZero", PushOneLeftDeltaNRightZero, 560},
+	{"PushOneLeftDeltaNRightNonZero", PushOneLeftDeltaNRightNonZero, 471},
+	{"PushOneLeftDeltaNRightNonZeroPack6Bits", PushOneLeftDeltaNRightNonZeroPack6Bits, 10530},
+	{"PushOneLeftDeltaNRightNonZeroPack8Bits", PushOneLeftDeltaNRightNonZeroPack8Bits, 251},
 	{"PushTwoLeftDeltaZero", PushTwoLeftDeltaZero, 0},
+	{"PushTwoPack5LeftDeltaZero", PushTwoPack5LeftDeltaZero, 0},
+	{"PushThreeLeftDeltaZero", PushThreeLeftDeltaZero, 0},
+	{"PushThreePack5LeftDeltaZero", PushThreePack5LeftDeltaZero, 0},
+	{"PushTwoLeftDeltaOne", PushTwoLeftDeltaOne, 0},
+	{"PushTwoPack5LeftDeltaOne", PushTwoPack5LeftDeltaOne, 0},
+	{"PushThreeLeftDeltaOne", PushThreeLeftDeltaOne, 0},
+	{"PushThreePack5LeftDeltaOne", PushThreePack5LeftDeltaOne, 0},
+	{"PushTwoLeftDeltaN", PushTwoLeftDeltaN, 0},
+	{"PushTwoPack5LeftDeltaN", PushTwoPack5LeftDeltaN, 0},
+	{"PushThreeLeftDeltaN", PushThreeLeftDeltaN, 0},
+	{"PushThreePack5LeftDeltaN", PushThreePack5LeftDeltaN, 0},
+	{"PushN", PushN, 0},
+	{"PushNAndNonTopological", PushNAndNonTopological, 310},
+	{"PopOnePlusOne", PopOnePlusOne, 2},
+	{"PopOnePlusN", PopOnePlusN, 0},
+	{"PopAllButOnePlusOne", PopAllButOnePlusOne, 1837},
+	{"PopAllButOnePlusN", PopAllButOnePlusN, 149},
+	{"PopAllButOnePlusNPack3Bits", PopAllButOnePlusNPack3Bits, 300},
+	{"PopAllButOnePlusNPack6Bits", PopAllButOnePlusNPack6Bits, 634},
+	{"PopNPlusOne", PopNPlusOne, 0},
+	{"PopNPlusN", PopNPlusN, 0},
+	{"PopNAndNonTopographical", PopNAndNonTopographical, 1},
+	{"NonTopoComplex", NonTopoComplex, 76},
+	{"NonTopoPenultimatePlusOne", NonTopoPenultimatePlusOne, 271},
+	{"NonTopoComplexPack4Bits", NonTopoComplexPack4Bits, 99},
+	{"FieldPathEncodeFinish", FieldPathEncodeFinish, 25474},
 }
 
 // Initialize a fieldpath object
@@ -91,7 +92,6 @@ func newFieldpath(parentTbl *dt, huf *HuffmanTree) *fieldpath {
 		fields:   make([]*dt_field, 0),
 		index:    make([]int32, 0),
 		tree:     huf,
-		treeS:    newFieldpathHuffmanStatic(),
 		finished: false,
 	}
 
@@ -103,13 +103,13 @@ func newFieldpath(parentTbl *dt, huf *HuffmanTree) *fieldpath {
 // Walk an encoded fieldpath based on a huffman tree
 func (fp *fieldpath) walk(r *Reader) {
 	cnt := 0
-	root := fp.treeS
+	root := fp.tree
 	node := root
 
 	for fp.finished == false {
 		cnt++
 		if r.readBits(1) == 1 {
-			if i := node.Right(); i.IsLeaf() {
+			if i := (*node).Right(); i.IsLeaf() {
 				node = root
 				fieldpathLookup[i.Value()].Function(r, fp)
 				fp.addField()
@@ -117,10 +117,10 @@ func (fp *fieldpath) walk(r *Reader) {
 				_debugf("Reached in %d bits, %s, %d", cnt, fp.fields[len(fp.fields)-1].Name, r.pos)
 				cnt = 0
 			} else {
-				node = i
+				node = &i
 			}
 		} else {
-			if i := node.Left(); i.IsLeaf() {
+			if i := (*node).Left(); i.IsLeaf() {
 				node = root
 				fieldpathLookup[i.Value()].Function(r, fp)
 				fp.addField()
@@ -128,7 +128,7 @@ func (fp *fieldpath) walk(r *Reader) {
 				_debugf("Reached in %d bits, %s, %d", cnt, fp.fields[len(fp.fields)-1].Name, r.pos)
 				cnt = 0
 			} else {
-				node = i
+				node = &i
 			}
 		}
 	}
@@ -175,7 +175,7 @@ func newFieldpathHuffman() HuffmanTree {
 // Returns the static huffman tree based on our observed tree states
 func newFieldpathHuffmanStatic() HuffmanTree {
 	var h HuffmanTree
-	h = &HuffmanNode{0, nil, nil}
+	h = &HuffmanNode{0, 0, nil, nil}
 
 	addNode(h, 0, 1, 0)        // PlusOne
 	addNode(h, 1, 2, 1)        // EncodingFinish
@@ -190,7 +190,7 @@ func newFieldpathHuffmanStatic() HuffmanTree {
 	addNode(h, 2843, 12, 20)   // PushOneLeftDeltaZeroRightZero
 	addNode(h, 17179, 15, 22)  // PopOnePlusOne
 	addNode(h, 25371, 16, 25)  // PopNPlusOne
-	addNode(h, 103195, 27, 39) // PushTwoLeftDeltaZero
+	addNode(h, 103195, 17, 36) // PushTwoPack5LeftDeltaZero
 
 	return h
 }
@@ -248,7 +248,7 @@ func PushOneLeftDeltaZeroRightZero(r *Reader, fp *fieldpath) {
 }
 
 func PushOneLeftDeltaZeroRightNonZero(r *Reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.parent.Name)
+	_panicf("Name: %s", fp.parent.Name)
 
 	// should be correct, not encountered however
 	/*rBits := []int{2, 4, 10, 17, 30}
@@ -271,83 +271,87 @@ func PushOneLeftDeltaOneRightZero(r *Reader, fp *fieldpath) {
 }
 
 func PushOneLeftDeltaOneRightNonZero(r *Reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.parent.Name)
+	_panicf("Name: %s", fp.parent.Name)
 }
 
 func PushOneLeftDeltaNRightZero(r *Reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.parent.Name)
+	_panicf("Name: %s", fp.parent.Name)
 }
 
 func PushOneLeftDeltaNRightNonZero(r *Reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.parent.Name)
+	_panicf("Name: %s", fp.parent.Name)
 
 }
 
 func PushOneLeftDeltaNRightNonZeroPack6Bits(r *Reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.parent.Name)
+	_panicf("Name: %s", fp.parent.Name)
 }
 
 func PushOneLeftDeltaNRightNonZeroPack8Bits(r *Reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.parent.Name)
+	_panicf("Name: %s", fp.parent.Name)
 }
 
 func PushTwoLeftDeltaZero(r *Reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.parent.Name)
+	_panicf("Name: %s", fp.parent.Name)
 
-	fp.index = append(fp.index, 0)
-	fp.index = append(fp.index, 0)
+	// wrong
+	//fp.index = append(fp.index, 0)
+	//fp.index = append(fp.index, 0)
 }
 
 func PushTwoLeftDeltaOne(r *Reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.parent.Name)
+	_panicf("Name: %s", fp.parent.Name)
 }
 
 func PushTwoLeftDeltaN(r *Reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.parent.Name)
+	_panicf("Name: %s", fp.parent.Name)
 }
 
 func PushTwoPack5LeftDeltaZero(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
+
+	fp.index = append(fp.index, int32(r.readBits(5)))
+	fp.index = append(fp.index, int32(r.readBits(5)))
 }
 
 func PushTwoPack5LeftDeltaOne(r *Reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.parent.Name)
+	_panicf("Name: %s", fp.parent.Name)
 }
 
 func PushTwoPack5LeftDeltaN(r *Reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.parent.Name)
+	_panicf("Name: %s", fp.parent.Name)
 }
 
 func PushThreeLeftDeltaZero(r *Reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.parent.Name)
+	_panicf("Name: %s", fp.parent.Name)
 }
 
 func PushThreeLeftDeltaOne(r *Reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.parent.Name)
+	_panicf("Name: %s", fp.parent.Name)
 }
 
 func PushThreeLeftDeltaN(r *Reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.parent.Name)
+	_panicf("Name: %s", fp.parent.Name)
 }
 
 func PushThreePack5LeftDeltaZero(r *Reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.parent.Name)
+	_panicf("Name: %s", fp.parent.Name)
 }
 
 func PushThreePack5LeftDeltaOne(r *Reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.parent.Name)
+	_panicf("Name: %s", fp.parent.Name)
 }
 
 func PushThreePack5LeftDeltaN(r *Reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.parent.Name)
+	_panicf("Name: %s", fp.parent.Name)
 }
 
 func PushN(r *Reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.parent.Name)
+	_panicf("Name: %s", fp.parent.Name)
 }
 
 func PushNAndNonTopological(r *Reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.parent.Name)
+	_panicf("Name: %s", fp.parent.Name)
 }
 
 func PopOnePlusOne(r *Reader, fp *fieldpath) {
@@ -363,7 +367,7 @@ func PopOnePlusOne(r *Reader, fp *fieldpath) {
 }
 
 func PopOnePlusN(r *Reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.parent.Name)
+	_panicf("Name: %s", fp.parent.Name)
 }
 
 func PopAllButOnePlusOne(r *Reader, fp *fieldpath) {
@@ -375,19 +379,19 @@ func PopAllButOnePlusOne(r *Reader, fp *fieldpath) {
 }
 
 func PopAllButOnePlusN(r *Reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.parent.Name)
+	_panicf("Name: %s", fp.parent.Name)
 }
 
 func PopAllButOnePlusNPackN(r *Reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.parent.Name)
+	_panicf("Name: %s", fp.parent.Name)
 }
 
 func PopAllButOnePlusNPack3Bits(r *Reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.parent.Name)
+	_panicf("Name: %s", fp.parent.Name)
 }
 
 func PopAllButOnePlusNPack6Bits(r *Reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.parent.Name)
+	_panicf("Name: %s", fp.parent.Name)
 }
 
 func PopNPlusOne(r *Reader, fp *fieldpath) {
@@ -405,11 +409,11 @@ func PopNPlusOne(r *Reader, fp *fieldpath) {
 }
 
 func PopNPlusN(r *Reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.parent.Name)
+	_panicf("Name: %s", fp.parent.Name)
 }
 
 func PopNAndNonTopographical(r *Reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.parent.Name)
+	_panicf("Name: %s", fp.parent.Name)
 }
 
 func NonTopoComplex(r *Reader, fp *fieldpath) {
@@ -425,7 +429,7 @@ func NonTopoComplex(r *Reader, fp *fieldpath) {
 }
 
 func NonTopoPenultimatePlusOne(r *Reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.parent.Name)
+	_panicf("Name: %s", fp.parent.Name)
 }
 
 func NonTopoComplexPack4Bits(r *Reader, fp *fieldpath) {

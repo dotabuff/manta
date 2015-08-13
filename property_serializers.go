@@ -192,6 +192,24 @@ func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *Pr
 		return ps
 	}
 
+	// That the type does not indicate an array is somewhat bad for the way we are
+	// parsing things at the moment :(
+	if name == "m_SpeechBubbles" {
+		typeName := "m_SpeechBubbles"
+
+		ps := &PropertySerializer{
+			Decode:          decoder,
+			DecodeContainer: decoderContainer,
+			IsArray:         true,
+			Length:          uint32(5),
+			ArraySerializer: nil,
+			Name:            typeName,
+		}
+
+		pst.Serializers[name] = ps
+		return ps
+	}
+
 	// This function should panic at some point
 	return &PropertySerializer{decoder, decoderContainer, false, 0, nil, "unkown"}
 }
