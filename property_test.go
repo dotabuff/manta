@@ -842,7 +842,7 @@ func TestReadProperties(t *testing.T) {
 		{
 			tableName:   "CSpeechBubbleManager",
 			run:         true,
-			debug:       true,
+			debug:       false,
 			expectCount: 7, // WRONG, should carry the array index instead of overwriting. Needs some rework
 			expectKeys: map[string]interface{}{
 				"m_hNPC":       HANDLE_NONE,
