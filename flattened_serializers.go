@@ -130,6 +130,13 @@ func (sers *flattened_serializers) recurse_table(cur *dota.ProtoFlattenedSeriali
 					},
 					Table: prop.Table, // This carries on the actual table instead of overriding it
 				})
+
+				// Copy parent prop to rename it's name according to the array index
+				if prop.Table != nil {
+					nTable := *prop.Table
+					nTable.Name = _sprintf("%s.%04d", nTable.Name, i)
+					tmpDt.Properties[len(tmpDt.Properties)-1].Table = &nTable
+				}
 			}
 
 			prop.Table = tmpDt
