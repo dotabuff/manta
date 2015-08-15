@@ -118,7 +118,7 @@ func (sers *flattened_serializers) recurse_table(cur *dota.ProtoFlattenedSeriali
 			for i := uint32(0); i < prop.Field.Serializer.Length; i++ {
 				tmpDt.Properties = append(tmpDt.Properties, &dt_property{
 					Field: &dt_field{
-						Name:       _sprintf("%s.%04d", prop.Field.Name, i),
+						Name:       _sprintf("%04d", i),
 						Type:       prop.Field.Serializer.Name,
 						Index:      int32(i),
 						Flags:      prop.Field.Flags,
@@ -134,7 +134,7 @@ func (sers *flattened_serializers) recurse_table(cur *dota.ProtoFlattenedSeriali
 				// Copy parent prop to rename it's name according to the array index
 				if prop.Table != nil {
 					nTable := *prop.Table
-					nTable.Name = _sprintf("%s.%04d", nTable.Name, i)
+					nTable.Name = _sprintf("%04d", i)
 					tmpDt.Properties[len(tmpDt.Properties)-1].Table = &nTable
 				}
 			}
