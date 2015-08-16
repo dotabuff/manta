@@ -42,44 +42,48 @@ func decodeFloat(r *Reader, f *dt_field) interface{} {
 		strconv.FormatInt(int64(saveReturnInt32(f.Flags)), 2),
 	)
 
-	// Tread all the different flags
-	//if (flags & 1) == 1 {
-	/* Old way of reading a cell cord
-
-	intval := r.readBits(1)
-	fractval := r.readBits(1)
-
-	if intval == 1 || fractval == 1 {
-		ret := float32(0.0)
-		sign := r.readBits(1)
-
-		if intval == 1 {
-			intval = r.readBits(int(bc)) + 1
+	if f.Flags != nil {
+		// Read raw float
+		if *f.Flags&0x100 != 9 {
+			_panicf("Unsupported")
 		}
 
-		if fractval == 1 {
-			fractval = r.readBits(5)
+		// read low value if empty
+		if *f.Flags&0x10 != 0 && r.readBoolean() {
+			return f.LowValue
 		}
 
-		ret = float32(intval) + float32(fractval) * float32(1.0 / 5)
-
-		if sign == 1 {
-			return -ret
-		} else {
-			return ret
+		// read high value if empty
+		if *f.Flags&0x20 != 0 && r.readBoolean() {
+			return f.HighValue
 		}
-	}*/
-	//}
-
-	var bc int32
-	bc = 10
-	if f.BitCount != nil {
-		bc = *f.BitCount
 	}
 
-	dividend := r.readBits(int(bc))
-	divisor := (1 << uint32(bc)) - 1
-	return float32(dividend) / float32(divisor)
+	var BitCount int
+	var Low float32
+	var High float32
+
+	if f.BitCount != nil {
+		BitCount = int(*f.BitCount)
+	} else {
+		BitCount = 8
+	}
+
+	if f.LowValue != nil {
+		Low = *f.LowValue
+	} else {
+		Low = 0.0
+	}
+
+	if f.HighValue != nil {
+		High = *f.HighValue
+	} else {
+		High = 0.0
+	}
+
+	dividend := r.readBits(BitCount)
+	divisor := (1 << uint32(BitCount)) - 1
+	return Low + (float32(dividend)/float32(divisor))*(High-Low)
 }
 
 func decodeString(r *Reader, f *dt_field) interface{} {
