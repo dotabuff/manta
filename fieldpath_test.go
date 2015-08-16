@@ -118,10 +118,10 @@ func TestFieldpath(t *testing.T) {
 
 		// Print a list of all fields read
 		for i, f := range fieldPath.fields {
-			if f.Index >= 0 {
-				_debugf("%d\t%s[%d]\t%s", i, f.Name, f.Index, f.Type)
+			if f.Field.Index >= 0 {
+				_debugf("%d\t%s[%d]\t%s", i, f.Name, f.Field.Index, f.Field.Type)
 			} else {
-				_debugf("%d\t%s\t%s", i, f.Name, f.Type)
+				_debugf("%d\t%s\t%s", i, f.Name, f.Field.Type)
 			}
 		}
 	}

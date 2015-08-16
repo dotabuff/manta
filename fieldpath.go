@@ -25,10 +25,17 @@ import (
 //
 // Thanks to @spheenik for being resilient in his efforts to figure out the rest of the tree
 
+// A single field to be read
+type fieldpath_field struct {
+	Name  string
+	Path  string
+	Field *dt_field
+}
+
 // A fieldpath, used to walk through the flattened table hierarchy
 type fieldpath struct {
 	parent   *dt
-	fields   []*dt_field
+	fields   []*fieldpath_field
 	index    []int32
 	tree     *HuffmanTree
 	finished bool
@@ -89,7 +96,7 @@ var fieldpathLookup = []fieldpathOp{
 func newFieldpath(parentTbl *dt, huf *HuffmanTree) *fieldpath {
 	fp := &fieldpath{
 		parent:   parentTbl,
-		fields:   make([]*dt_field, 0),
+		fields:   make([]*fieldpath_field, 0),
 		index:    make([]int32, 0),
 		tree:     huf,
 		finished: false,
@@ -142,6 +149,7 @@ func (fp *fieldpath) addField() {
 	cDt := fp.parent
 
 	var path string
+	var name string
 	i := 0
 
 	for i = 0; i < len(fp.index)-1; i++ {
@@ -153,12 +161,13 @@ func (fp *fieldpath) addField() {
 	for i = 0; i < len(fp.index)-1; i++ {
 		if cDt.Properties[fp.index[i]].Table != nil {
 			cDt = cDt.Properties[fp.index[i]].Table
+			name += cDt.Name + "."
 		} else {
 			_panicf("expected table in fp properties")
 		}
 	}
 
-	fp.fields = append(fp.fields, cDt.Properties[fp.index[i]].Field)
+	fp.fields = append(fp.fields, &fieldpath_field{name + cDt.Properties[fp.index[i]].Field.Name, path, cDt.Properties[fp.index[i]].Field})
 }
 
 // Returns a huffman tree based on the operation weights
