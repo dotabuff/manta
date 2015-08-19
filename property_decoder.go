@@ -42,6 +42,29 @@ func decodeFloat(r *Reader, f *dt_field) interface{} {
 		strconv.FormatInt(int64(saveReturnInt32(f.Flags)), 2),
 	)
 
+	var BitCount int
+	var Low float32
+	var High float32
+
+	if f.BitCount != nil {
+		BitCount = int(*f.BitCount)
+	} else {
+		// Maybe treated as no scale or something?
+		return r.readVarUint32()
+	}
+
+	if f.LowValue != nil {
+		Low = *f.LowValue
+	} else {
+		Low = 0.0
+	}
+
+	if f.HighValue != nil {
+		High = *f.HighValue
+	} else {
+		High = 1.0
+	}
+
 	if f.Flags != nil {
 		// Read raw float
 		if *f.Flags&0x100 != 0 {
@@ -57,28 +80,6 @@ func decodeFloat(r *Reader, f *dt_field) interface{} {
 		if *f.Flags&0x20 != 0 && r.readBoolean() {
 			return f.HighValue
 		}
-	}
-
-	var BitCount int
-	var Low float32
-	var High float32
-
-	if f.BitCount != nil {
-		BitCount = int(*f.BitCount)
-	} else {
-		BitCount = 8
-	}
-
-	if f.LowValue != nil {
-		Low = *f.LowValue
-	} else {
-		Low = 0.0
-	}
-
-	if f.HighValue != nil {
-		High = *f.HighValue
-	} else {
-		High = 1.0
 	}
 
 	dividend := r.readBits(BitCount)
