@@ -63,8 +63,6 @@ func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *Pr
 		fallthrough
 	case "Color":
 		decoder = decodeUnsigned
-	case "CUtlStringToken":
-		fallthrough
 	case "char":
 		fallthrough
 	case "CUtlSymbolLarge":
@@ -75,8 +73,6 @@ func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *Pr
 		decoder = decodeBoolean
 	case "CNetworkedQuantizedFloat":
 		decoder = decodeQuantized
-	case "CPhysicsComponent":
-		fallthrough
 	case "CRenderComponent":
 		fallthrough
 	case "CBodyComponent":
@@ -89,8 +85,6 @@ func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *Pr
 		decoder = decodeQAngle
 	case "CGameSceneNodeHandle":
 		decoder = decodeHandle
-	case "HSequence":
-		decoder = decodeHSequence
 	default:
 		// check for specific types
 		switch {
