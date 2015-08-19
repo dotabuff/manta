@@ -80,7 +80,7 @@ func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *Pr
 	case "CDOTASpectatorGraphManager*":
 		fallthrough
 	case "CEntityIdentity*":
-		decoder = decodePointer
+		decoder = decodeBoolean
 	case "QAngle":
 		decoder = decodeQAngle
 	case "CGameSceneNodeHandle":
