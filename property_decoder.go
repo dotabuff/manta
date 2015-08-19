@@ -173,12 +173,7 @@ func decodeComponent(r *Reader, f *dt_field) interface{} {
 		strconv.FormatInt(int64(saveReturnInt32(f.Flags)), 2),
 	)
 
-	// might be encoded like a pointer (1 bit for set / unset, etc.)
-	//if r.readBits(1) == 1 {
-	//	return r.readBits(1)
-	//}
-
-	return 0
+	return r.readBits(1)
 }
 
 func decodeStrongHandle(r *Reader, f *dt_field) interface{} {
