@@ -849,6 +849,19 @@ func TestReadProperties(t *testing.T) {
 			},
 		},
 
+		/**
+		 * This is different in newer replays, so taken with a grain of salt
+		 */
+		{
+			tableName:   "CBaseEntity",
+			run:         true,
+			debug:       false,
+			expectCount: 35,
+			expectKeys: map[string]interface{}{
+				"m_pEntity": 0,
+			},
+		},
+
 		/*
 			WIP:
 
