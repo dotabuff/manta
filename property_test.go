@@ -858,7 +858,7 @@ func TestReadProperties(t *testing.T) {
 			debug:       false,
 			expectCount: 35,
 			expectKeys: map[string]interface{}{
-				"m_pEntity": 0,
+				"m_pEntity": 1,
 			},
 		},
 
