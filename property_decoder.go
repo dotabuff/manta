@@ -44,7 +44,7 @@ func decodeFloat(r *Reader, f *dt_field) interface{} {
 
 	if f.Flags != nil {
 		// Read raw float
-		if *f.Flags&0x100 != 9 {
+		if *f.Flags&0x100 != 0 {
 			_panicf("Unsupported")
 		}
 
@@ -78,7 +78,7 @@ func decodeFloat(r *Reader, f *dt_field) interface{} {
 	if f.HighValue != nil {
 		High = *f.HighValue
 	} else {
-		High = 0.0
+		High = 1.0
 	}
 
 	dividend := r.readBits(BitCount)
