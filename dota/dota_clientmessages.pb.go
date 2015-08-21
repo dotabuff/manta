@@ -970,9 +970,10 @@ func (m *CDOTAClientMsg_EventCNY2015Cmd) GetData() []byte {
 
 type CDOTAClientMsg_DemoHero struct {
 	HeroId           *int32   `protobuf:"varint,1,opt,name=hero_id" json:"hero_id,omitempty"`
-	ItemDefs         []uint32 `protobuf:"varint,2,rep,name=item_defs" json:"item_defs,omitempty"`
-	ItemIds          []uint64 `protobuf:"varint,3,rep,name=item_ids" json:"item_ids,omitempty"`
-	StyleIndex       *uint32  `protobuf:"varint,4,opt,name=style_index" json:"style_index,omitempty"`
+	HeroIdToSpawn    *int32   `protobuf:"varint,2,opt,name=hero_id_to_spawn" json:"hero_id_to_spawn,omitempty"`
+	ItemDefs         []uint32 `protobuf:"varint,3,rep,name=item_defs" json:"item_defs,omitempty"`
+	ItemIds          []uint64 `protobuf:"varint,4,rep,name=item_ids" json:"item_ids,omitempty"`
+	StyleIndex       *uint32  `protobuf:"varint,5,opt,name=style_index" json:"style_index,omitempty"`
 	XXX_unrecognized []byte   `json:"-"`
 }
 
@@ -983,6 +984,13 @@ func (*CDOTAClientMsg_DemoHero) ProtoMessage()    {}
 func (m *CDOTAClientMsg_DemoHero) GetHeroId() int32 {
 	if m != nil && m.HeroId != nil {
 		return *m.HeroId
+	}
+	return 0
+}
+
+func (m *CDOTAClientMsg_DemoHero) GetHeroIdToSpawn() int32 {
+	if m != nil && m.HeroIdToSpawn != nil {
+		return *m.HeroIdToSpawn
 	}
 	return 0
 }

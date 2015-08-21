@@ -2384,6 +2384,7 @@ type ProtoFlattenedSerializerFieldT struct {
 	FieldSerializerNameSym *int32   `protobuf:"varint,7,opt,name=field_serializer_name_sym" json:"field_serializer_name_sym,omitempty"`
 	FieldSerializerVersion *int32   `protobuf:"varint,8,opt,name=field_serializer_version" json:"field_serializer_version,omitempty"`
 	SendNodeSym            *int32   `protobuf:"varint,9,opt,name=send_node_sym" json:"send_node_sym,omitempty"`
+	VarEncoderSym          *int32   `protobuf:"varint,10,opt,name=var_encoder_sym" json:"var_encoder_sym,omitempty"`
 	XXX_unrecognized       []byte   `json:"-"`
 }
 
@@ -2450,6 +2451,13 @@ func (m *ProtoFlattenedSerializerFieldT) GetFieldSerializerVersion() int32 {
 func (m *ProtoFlattenedSerializerFieldT) GetSendNodeSym() int32 {
 	if m != nil && m.SendNodeSym != nil {
 		return *m.SendNodeSym
+	}
+	return 0
+}
+
+func (m *ProtoFlattenedSerializerFieldT) GetVarEncoderSym() int32 {
+	if m != nil && m.VarEncoderSym != nil {
+		return *m.VarEncoderSym
 	}
 	return 0
 }

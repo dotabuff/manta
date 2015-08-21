@@ -85,6 +85,8 @@ const (
 	ENetworkDisconnectionReason_NETWORK_DISCONNECT_STEAM_DENY_MISC             ENetworkDisconnectionReason = 67
 	ENetworkDisconnectionReason_NETWORK_DISCONNECT_STEAM_DENY_BAD_ANTI_CHEAT   ENetworkDisconnectionReason = 68
 	ENetworkDisconnectionReason_NETWORK_DISCONNECT_SERVER_SHUTDOWN             ENetworkDisconnectionReason = 69
+	ENetworkDisconnectionReason_NETWORK_DISCONNECT_SPLITPACKET_SEND_OVERFLOW   ENetworkDisconnectionReason = 70
+	ENetworkDisconnectionReason_NETWORK_DISCONNECT_REPLAY_INCOMPATIBLE         ENetworkDisconnectionReason = 71
 )
 
 var ENetworkDisconnectionReason_name = map[int32]string{
@@ -158,6 +160,8 @@ var ENetworkDisconnectionReason_name = map[int32]string{
 	67: "NETWORK_DISCONNECT_STEAM_DENY_MISC",
 	68: "NETWORK_DISCONNECT_STEAM_DENY_BAD_ANTI_CHEAT",
 	69: "NETWORK_DISCONNECT_SERVER_SHUTDOWN",
+	70: "NETWORK_DISCONNECT_SPLITPACKET_SEND_OVERFLOW",
+	71: "NETWORK_DISCONNECT_REPLAY_INCOMPATIBLE",
 }
 var ENetworkDisconnectionReason_value = map[string]int32{
 	"NETWORK_DISCONNECT_INVALID":                     0,
@@ -230,6 +234,8 @@ var ENetworkDisconnectionReason_value = map[string]int32{
 	"NETWORK_DISCONNECT_STEAM_DENY_MISC":             67,
 	"NETWORK_DISCONNECT_STEAM_DENY_BAD_ANTI_CHEAT":   68,
 	"NETWORK_DISCONNECT_SERVER_SHUTDOWN":             69,
+	"NETWORK_DISCONNECT_SPLITPACKET_SEND_OVERFLOW":   70,
+	"NETWORK_DISCONNECT_REPLAY_INCOMPATIBLE":         71,
 }
 
 func (x ENetworkDisconnectionReason) Enum() *ENetworkDisconnectionReason {

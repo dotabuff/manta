@@ -773,6 +773,102 @@ func (x *EGCPartnerRequestResponse) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
+type EGCMsgInitiateTradeResponse int32
+
+const (
+	EGCMsgInitiateTradeResponse_k_EGCMsgInitiateTradeResponse_Accepted                          EGCMsgInitiateTradeResponse = 0
+	EGCMsgInitiateTradeResponse_k_EGCMsgInitiateTradeResponse_Declined                          EGCMsgInitiateTradeResponse = 1
+	EGCMsgInitiateTradeResponse_k_EGCMsgInitiateTradeResponse_VAC_Banned_Initiator              EGCMsgInitiateTradeResponse = 2
+	EGCMsgInitiateTradeResponse_k_EGCMsgInitiateTradeResponse_VAC_Banned_Target                 EGCMsgInitiateTradeResponse = 3
+	EGCMsgInitiateTradeResponse_k_EGCMsgInitiateTradeResponse_Target_Already_Trading            EGCMsgInitiateTradeResponse = 4
+	EGCMsgInitiateTradeResponse_k_EGCMsgInitiateTradeResponse_Disabled                          EGCMsgInitiateTradeResponse = 5
+	EGCMsgInitiateTradeResponse_k_EGCMsgInitiateTradeResponse_NotLoggedIn                       EGCMsgInitiateTradeResponse = 6
+	EGCMsgInitiateTradeResponse_k_EGCMsgInitiateTradeResponse_Cancel                            EGCMsgInitiateTradeResponse = 7
+	EGCMsgInitiateTradeResponse_k_EGCMsgInitiateTradeResponse_TooSoon                           EGCMsgInitiateTradeResponse = 8
+	EGCMsgInitiateTradeResponse_k_EGCMsgInitiateTradeResponse_TooSoonPenalty                    EGCMsgInitiateTradeResponse = 9
+	EGCMsgInitiateTradeResponse_k_EGCMsgInitiateTradeResponse_Trade_Banned_Initiator            EGCMsgInitiateTradeResponse = 10
+	EGCMsgInitiateTradeResponse_k_EGCMsgInitiateTradeResponse_Trade_Banned_Target               EGCMsgInitiateTradeResponse = 11
+	EGCMsgInitiateTradeResponse_k_EGCMsgInitiateTradeResponse_Free_Account_Initiator_DEPRECATED EGCMsgInitiateTradeResponse = 12
+	EGCMsgInitiateTradeResponse_k_EGCMsgInitiateTradeResponse_Shared_Account_Initiator          EGCMsgInitiateTradeResponse = 13
+	EGCMsgInitiateTradeResponse_k_EGCMsgInitiateTradeResponse_Service_Unavailable               EGCMsgInitiateTradeResponse = 14
+	EGCMsgInitiateTradeResponse_k_EGCMsgInitiateTradeResponse_Target_Blocked                    EGCMsgInitiateTradeResponse = 15
+	EGCMsgInitiateTradeResponse_k_EGCMsgInitiateTradeResponse_NeedVerifiedEmail                 EGCMsgInitiateTradeResponse = 16
+	EGCMsgInitiateTradeResponse_k_EGCMsgInitiateTradeResponse_NeedSteamGuard                    EGCMsgInitiateTradeResponse = 17
+	EGCMsgInitiateTradeResponse_k_EGCMsgInitiateTradeResponse_SteamGuardDuration                EGCMsgInitiateTradeResponse = 18
+	EGCMsgInitiateTradeResponse_k_EGCMsgInitiateTradeResponse_TheyCannotTrade                   EGCMsgInitiateTradeResponse = 19
+	EGCMsgInitiateTradeResponse_k_EGCMsgInitiateTradeResponse_Recent_Password_Reset             EGCMsgInitiateTradeResponse = 20
+	EGCMsgInitiateTradeResponse_k_EGCMsgInitiateTradeResponse_Using_New_Device                  EGCMsgInitiateTradeResponse = 21
+	EGCMsgInitiateTradeResponse_k_EGCMsgInitiateTradeResponse_Sent_Invalid_Cookie               EGCMsgInitiateTradeResponse = 22
+)
+
+var EGCMsgInitiateTradeResponse_name = map[int32]string{
+	0:  "k_EGCMsgInitiateTradeResponse_Accepted",
+	1:  "k_EGCMsgInitiateTradeResponse_Declined",
+	2:  "k_EGCMsgInitiateTradeResponse_VAC_Banned_Initiator",
+	3:  "k_EGCMsgInitiateTradeResponse_VAC_Banned_Target",
+	4:  "k_EGCMsgInitiateTradeResponse_Target_Already_Trading",
+	5:  "k_EGCMsgInitiateTradeResponse_Disabled",
+	6:  "k_EGCMsgInitiateTradeResponse_NotLoggedIn",
+	7:  "k_EGCMsgInitiateTradeResponse_Cancel",
+	8:  "k_EGCMsgInitiateTradeResponse_TooSoon",
+	9:  "k_EGCMsgInitiateTradeResponse_TooSoonPenalty",
+	10: "k_EGCMsgInitiateTradeResponse_Trade_Banned_Initiator",
+	11: "k_EGCMsgInitiateTradeResponse_Trade_Banned_Target",
+	12: "k_EGCMsgInitiateTradeResponse_Free_Account_Initiator_DEPRECATED",
+	13: "k_EGCMsgInitiateTradeResponse_Shared_Account_Initiator",
+	14: "k_EGCMsgInitiateTradeResponse_Service_Unavailable",
+	15: "k_EGCMsgInitiateTradeResponse_Target_Blocked",
+	16: "k_EGCMsgInitiateTradeResponse_NeedVerifiedEmail",
+	17: "k_EGCMsgInitiateTradeResponse_NeedSteamGuard",
+	18: "k_EGCMsgInitiateTradeResponse_SteamGuardDuration",
+	19: "k_EGCMsgInitiateTradeResponse_TheyCannotTrade",
+	20: "k_EGCMsgInitiateTradeResponse_Recent_Password_Reset",
+	21: "k_EGCMsgInitiateTradeResponse_Using_New_Device",
+	22: "k_EGCMsgInitiateTradeResponse_Sent_Invalid_Cookie",
+}
+var EGCMsgInitiateTradeResponse_value = map[string]int32{
+	"k_EGCMsgInitiateTradeResponse_Accepted":                          0,
+	"k_EGCMsgInitiateTradeResponse_Declined":                          1,
+	"k_EGCMsgInitiateTradeResponse_VAC_Banned_Initiator":              2,
+	"k_EGCMsgInitiateTradeResponse_VAC_Banned_Target":                 3,
+	"k_EGCMsgInitiateTradeResponse_Target_Already_Trading":            4,
+	"k_EGCMsgInitiateTradeResponse_Disabled":                          5,
+	"k_EGCMsgInitiateTradeResponse_NotLoggedIn":                       6,
+	"k_EGCMsgInitiateTradeResponse_Cancel":                            7,
+	"k_EGCMsgInitiateTradeResponse_TooSoon":                           8,
+	"k_EGCMsgInitiateTradeResponse_TooSoonPenalty":                    9,
+	"k_EGCMsgInitiateTradeResponse_Trade_Banned_Initiator":            10,
+	"k_EGCMsgInitiateTradeResponse_Trade_Banned_Target":               11,
+	"k_EGCMsgInitiateTradeResponse_Free_Account_Initiator_DEPRECATED": 12,
+	"k_EGCMsgInitiateTradeResponse_Shared_Account_Initiator":          13,
+	"k_EGCMsgInitiateTradeResponse_Service_Unavailable":               14,
+	"k_EGCMsgInitiateTradeResponse_Target_Blocked":                    15,
+	"k_EGCMsgInitiateTradeResponse_NeedVerifiedEmail":                 16,
+	"k_EGCMsgInitiateTradeResponse_NeedSteamGuard":                    17,
+	"k_EGCMsgInitiateTradeResponse_SteamGuardDuration":                18,
+	"k_EGCMsgInitiateTradeResponse_TheyCannotTrade":                   19,
+	"k_EGCMsgInitiateTradeResponse_Recent_Password_Reset":             20,
+	"k_EGCMsgInitiateTradeResponse_Using_New_Device":                  21,
+	"k_EGCMsgInitiateTradeResponse_Sent_Invalid_Cookie":               22,
+}
+
+func (x EGCMsgInitiateTradeResponse) Enum() *EGCMsgInitiateTradeResponse {
+	p := new(EGCMsgInitiateTradeResponse)
+	*p = x
+	return p
+}
+func (x EGCMsgInitiateTradeResponse) String() string {
+	return proto.EnumName(EGCMsgInitiateTradeResponse_name, int32(x))
+}
+func (x *EGCMsgInitiateTradeResponse) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(EGCMsgInitiateTradeResponse_value, data, "EGCMsgInitiateTradeResponse")
+	if err != nil {
+		return err
+	}
+	*x = EGCMsgInitiateTradeResponse(value)
+	return nil
+}
+
 type CMsgApplyAutograph struct {
 	AutographItemId  *uint64 `protobuf:"varint,1,opt,name=autograph_item_id" json:"autograph_item_id,omitempty"`
 	ItemItemId       *uint64 `protobuf:"varint,2,opt,name=item_item_id" json:"item_item_id,omitempty"`
@@ -2140,13 +2236,14 @@ func (m *CMsgClientToGCWrapAndDeliverGift) GetGiftMessage() string {
 }
 
 type CMsgClientToGCWrapAndDeliverGiftResponse struct {
-	Response           *EGCMsgResponse `protobuf:"varint,1,opt,name=response,enum=dota.EGCMsgResponse,def=0" json:"response,omitempty"`
-	GiftingChargeUses  *uint32         `protobuf:"varint,2,opt,name=gifting_charge_uses" json:"gifting_charge_uses,omitempty"`
-	GiftingChargeMax   *int32          `protobuf:"varint,3,opt,name=gifting_charge_max" json:"gifting_charge_max,omitempty"`
-	GiftingUses        *uint32         `protobuf:"varint,4,opt,name=gifting_uses" json:"gifting_uses,omitempty"`
-	GiftingMax         *int32          `protobuf:"varint,5,opt,name=gifting_max" json:"gifting_max,omitempty"`
-	GiftingWindowHours *uint32         `protobuf:"varint,6,opt,name=gifting_window_hours" json:"gifting_window_hours,omitempty"`
-	XXX_unrecognized   []byte          `json:"-"`
+	Response           *EGCMsgResponse              `protobuf:"varint,1,opt,name=response,enum=dota.EGCMsgResponse,def=0" json:"response,omitempty"`
+	GiftingChargeUses  *uint32                      `protobuf:"varint,2,opt,name=gifting_charge_uses" json:"gifting_charge_uses,omitempty"`
+	GiftingChargeMax   *int32                       `protobuf:"varint,3,opt,name=gifting_charge_max" json:"gifting_charge_max,omitempty"`
+	GiftingUses        *uint32                      `protobuf:"varint,4,opt,name=gifting_uses" json:"gifting_uses,omitempty"`
+	GiftingMax         *int32                       `protobuf:"varint,5,opt,name=gifting_max" json:"gifting_max,omitempty"`
+	GiftingWindowHours *uint32                      `protobuf:"varint,6,opt,name=gifting_window_hours" json:"gifting_window_hours,omitempty"`
+	TradeRestriction   *EGCMsgInitiateTradeResponse `protobuf:"varint,7,opt,name=trade_restriction,enum=dota.EGCMsgInitiateTradeResponse,def=0" json:"trade_restriction,omitempty"`
+	XXX_unrecognized   []byte                       `json:"-"`
 }
 
 func (m *CMsgClientToGCWrapAndDeliverGiftResponse) Reset() {
@@ -2156,6 +2253,7 @@ func (m *CMsgClientToGCWrapAndDeliverGiftResponse) String() string { return prot
 func (*CMsgClientToGCWrapAndDeliverGiftResponse) ProtoMessage()    {}
 
 const Default_CMsgClientToGCWrapAndDeliverGiftResponse_Response EGCMsgResponse = EGCMsgResponse_k_EGCMsgResponseOK
+const Default_CMsgClientToGCWrapAndDeliverGiftResponse_TradeRestriction EGCMsgInitiateTradeResponse = EGCMsgInitiateTradeResponse_k_EGCMsgInitiateTradeResponse_Accepted
 
 func (m *CMsgClientToGCWrapAndDeliverGiftResponse) GetResponse() EGCMsgResponse {
 	if m != nil && m.Response != nil {
@@ -2197,6 +2295,13 @@ func (m *CMsgClientToGCWrapAndDeliverGiftResponse) GetGiftingWindowHours() uint3
 		return *m.GiftingWindowHours
 	}
 	return 0
+}
+
+func (m *CMsgClientToGCWrapAndDeliverGiftResponse) GetTradeRestriction() EGCMsgInitiateTradeResponse {
+	if m != nil && m.TradeRestriction != nil {
+		return *m.TradeRestriction
+	}
+	return Default_CMsgClientToGCWrapAndDeliverGiftResponse_TradeRestriction
 }
 
 type CMsgClientToGCUnwrapGift struct {
@@ -2304,4 +2409,5 @@ func init() {
 	proto.RegisterEnum("dota.EItemPurgatoryResponse_Finalize", EItemPurgatoryResponse_Finalize_name, EItemPurgatoryResponse_Finalize_value)
 	proto.RegisterEnum("dota.EItemPurgatoryResponse_Refund", EItemPurgatoryResponse_Refund_name, EItemPurgatoryResponse_Refund_value)
 	proto.RegisterEnum("dota.EGCPartnerRequestResponse", EGCPartnerRequestResponse_name, EGCPartnerRequestResponse_value)
+	proto.RegisterEnum("dota.EGCMsgInitiateTradeResponse", EGCMsgInitiateTradeResponse_name, EGCMsgInitiateTradeResponse_value)
 }
