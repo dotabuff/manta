@@ -10,7 +10,7 @@ import (
 func TestParseOneMatch(t *testing.T) {
 	assert := assert.New(t)
 
-	buf := mustGetReplayData("1716444111", "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1716444111.dem")
+	buf := mustGetReplayData("1731962898", "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1731962898.dem")
 	parser, err := NewParser(buf)
 	assert.Nil(err)
 	err = parser.Start()
@@ -33,6 +33,15 @@ func TestParseRealMatches(t *testing.T) {
 		expectCombatLogEvents  int32
 		expectUnitOrderEvents  int32
 	}{
+		{
+			matchId:                "1731962898",
+			replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1731962898.dem",
+			expectCombatLogDamage:  415560,
+			expectCombatLogHealing: 20018,
+			expectCombatLogDeaths:  690,
+			expectCombatLogEvents:  24296,
+			expectUnitOrderEvents:  27525,
+		},
 		{
 			matchId:                "1560289528",
 			replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1560289528.dem",
