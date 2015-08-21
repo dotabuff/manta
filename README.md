@@ -2,21 +2,18 @@
 
 [![Build Status](https://travis-ci.org/dotabuff/manta.svg?branch=master)](https://travis-ci.org/dotabuff/manta)
 
-Manta parses Dota 2 replays based on the *currently unreleased* Source 2 game engine.
+Manta is a Dota 2 replay parser written in [Go](https://golang.org). It targets the Source 2 (Dota 2 Reborn) game engine. To parse Source 1 (original Dota 2) replays, take a look at [Yasha](https://github.com/dotabuff/yasha).
 
-If you're interested in parsing current Dota 2 replays (which are played on the Source 1 game engine), take a look at [Yasha](https://github.com/dotabuff/yasha).
+**Project Status:**
 
-*Source 2 Status:* The Dota 2 Source 2 client has been released as a beta
+- Dota 2 Reborn (Source 2) has been released as a beta.
+- Replays from Source 2 matches are widely available for download.
+- Manta is structurally feature complete and in use at Dotabuff
+- Manta currently handles nearly all packets, the major exception being packet entities.
 
-*Manta Status:* Manta is currently incomplete and unusable.
+## Getting Started
 
-## Improvements from Yasha
-
-Compared to Yasha (the Dotabuff Source 1 parser), Manta will be easier to understand and allow much more performance. In particular, Yasha wasn't able to parallelize parsing and processing, and couldn't skip any packets. With this new implementation we're planning to change that.
-
-This will make porting projects that currently use Yasha difficult, so beware.
-
-**Warning:** Please be aware that you *cannot import Manta and Yasha in the same binary*! The Protocol Buffer definitions conflict, and will panic.
+Manta is a low-level replay parser, meaning that it will provide you access to the raw data in the replay, but doesn't provide any opinion on how that data should be structured for your use case. You'll need to create callback functions, inspect the raw data, and decide how you're going to use it.
 
 ## Usage
 
@@ -46,6 +43,8 @@ func main() {
 }
 ```
 
+You cannot import Manta and Yasha in the same binary due to protocol buffer conflicts.
+
 ## License
 
 MIT, see the LICENSE file.
@@ -54,6 +53,11 @@ MIT, see the LICENSE file.
 
 If you have any questions, you can find us in the #dota2replay channel on QuakeNet.
 
-## Acknowledgements
+## Authors and Acknowledgements
 
-* [Robin Dietrich](https://github.com/invokr) worked out how the new CDemoPackets are encoded and helped a lot in other areas as well. See his [alice2](https://github.com/invokr/alice2) project for a C++ implementation (work in progress).
+Manta is maintained and development is sponsored by [Dotabuff](http://www.dotabuff.com), a leading Dota 2 community website with an emphasis on statistics. Manta wouldn't exist without the efforts of a number of people:
+
+* [Michael Fellinger](https://github.com/manveru) built Dotabuff's Source 1 parser [yasha](https://github.com/dotabuff/yasha).
+* [Robin Dietrich](https://github.com/invokr) built the C++ parser [Alice](https://github.com/AliceStats/Alice).
+* [Martin Schrodt](https://github.com/spheenik) built the Java parser [clarity](https://github.com/skadistats/clarity).
+* [Drew Schleck](https://github.com/dschleck), built an original C++ parser [edith](https://github.com/dschleck/edith).
