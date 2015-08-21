@@ -87,7 +87,7 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 			_debugf("created a pe: %+v", pe)
 
 			// Read properties and set them in the packetEntity
-			pe.properties = ReadPropertiesNew(r, pe.flatTbl)
+			pe.properties = ReadProperties(r, pe.flatTbl)
 		case "U":
 			_panicf("End here")
 			// Find the existing packetEntity
@@ -99,7 +99,7 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 			return nil
 
 			// Read properties and update the packetEntity
-			for k, v := range ReadPropertiesNew(r, pe.flatTbl) {
+			for k, v := range ReadProperties(r, pe.flatTbl) {
 				pe.properties[k] = v
 			}
 

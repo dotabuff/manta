@@ -152,7 +152,7 @@ func (sers *flattened_serializers) recurse_table(cur *dota.ProtoFlattenedSeriali
 }
 
 // Parses a CDemoSendTables packet
-func ParseSendTablesNew(m *dota.CDemoSendTables, pst *PropertySerializerTable) *flattened_serializers {
+func ParseSendTables(m *dota.CDemoSendTables, pst *PropertySerializerTable) *flattened_serializers {
 	// This packet just contains a single large buffer
 	r := NewReader(m.GetData())
 
@@ -192,10 +192,7 @@ func ParseSendTablesNew(m *dota.CDemoSendTables, pst *PropertySerializerTable) *
 }
 
 // Internal callback for OnCDemoSendTables.
-func (p *Parser) onCDemoSendTablesNew(m *dota.CDemoSendTables) error {
-	// Temporary: Also parse things the old way
-	p.onCDemoSendTables(m)
-
-	p.Serializers = ParseSendTablesNew(m, GetDefaultPropertySerializerTable()).Serializers
+func (p *Parser) onCDemoSendTables(m *dota.CDemoSendTables) error {
+	p.Serializers = ParseSendTables(m, GetDefaultPropertySerializerTable()).Serializers
 	return nil
 }

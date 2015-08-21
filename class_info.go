@@ -90,7 +90,7 @@ func (p *Parser) updateInstanceBaselineItem(item *StringTableItem) {
 			return
 		default:
 			_debugf("Parsing entity baseline %v", serializer[0].Name)
-			p.ClassBaseline[classId] = ReadPropertiesNew(NewReader(item.Value), serializer[0])
+			p.ClassBaseline[classId] = ReadProperties(NewReader(item.Value), serializer[0])
 		}
 	}
 }

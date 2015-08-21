@@ -81,7 +81,7 @@ func TestFieldpath(t *testing.T) {
 	}
 
 	// Retrieve the flattened field serializer
-	fs := ParseSendTablesNew(m, GetDefaultPropertySerializerTable())
+	fs := ParseSendTables(m, GetDefaultPropertySerializerTable())
 
 	// Build the huffman tree
 	huf := newFieldpathHuffman()
