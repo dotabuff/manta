@@ -1,10 +1,6 @@
 package manta
 
 import (
-	"os"
-	"path"
-	"path/filepath"
-	"strings"
 	"testing"
 
 	"github.com/dotabuff/manta/dota"
@@ -873,7 +869,7 @@ func TestReadProperties(t *testing.T) {
 	}
 
 	// Retrieve the flattened field serializer
-	fs := ParseSendTablesNew(m, GetDefaultPropertySerializerTable())
+	fs := ParseSendTables(m, GetDefaultPropertySerializerTable())
 
 	// Iterate through scenarios
 	for _, s := range scenarios {
@@ -893,7 +889,7 @@ func TestReadProperties(t *testing.T) {
 
 		// Read properties
 		r := NewReader(buf)
-		props := ReadPropertiesNew(r, serializer)
+		props := ReadProperties(r, serializer)
 		assert.Equal(len(props), s.expectCount)
 
 		for k, v := range s.expectKeys {
@@ -903,63 +899,5 @@ func TestReadProperties(t *testing.T) {
 		// There shouldn't be more than 8 bits left in the buffer
 		_debugf("Remaining bits %v", r.remBits())
 		assert.True(r.remBits() < 8)
-	}
-}
-
-// Run this to see the beginning of each instancebaseline for header analysis.
-func TestAnalyzeInstancebaselines(t *testing.T) {
-	t.Skip()
-
-	assert := assert.New(t)
-
-	// Load our send tables
-	m := &dota.CDemoSendTables{}
-	if err := proto.Unmarshal(_read_fixture("send_tables/1560315800.pbmsg"), m); err != nil {
-		panic(err)
-	}
-
-	st, err := ParseSendTables(m)
-	assert.Nil(err)
-
-	onlyFixture := os.Getenv("ONLY_FIXTURE")
-
-	// Iterate through fixtures
-	files, _ := filepath.Glob("fixtures/instancebaseline/*.rawbuf")
-	for _, f := range files {
-		fileName := path.Base(f)
-		tableName := strings.Split(strings.SplitN(fileName, "_", 2)[1], ".")[0]
-		sendTable, ok := st.GetTableByName(tableName)
-		assert.True(ok)
-
-		if onlyFixture != "" && onlyFixture != tableName {
-			continue
-		}
-
-		buf := _read_fixture("instancebaseline/" + fileName)
-		r := NewReader(buf)
-
-		first1 := -1
-		for i := 0; i < r.size; i++ {
-			if r.readBoolean() {
-				first1 = r.pos - 1
-				break
-			}
-		}
-		r.pos = 0
-		nDump := first1 + 1 + (8 * 4)
-		if os.Getenv("ALL_BITS") != "" {
-			nDump = r.size
-		}
-		_debugf("fixture %s (%d props) has first 1 at %s", colorBold(tableName), len(sendTable.Props), colorValue(first1))
-		for i := 0; i < len(sendTable.Props); i++ {
-			if i > 3 {
-				break
-			}
-			_debugf("prop %d: %s", i, sendTable.Props[i].Describe())
-		}
-		r.dumpBits(nDump)
-
-		r.pos = 0
-		ReadProperties(r, sendTable)
 	}
 }
