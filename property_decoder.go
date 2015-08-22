@@ -35,12 +35,19 @@ func decodeBoolean(r *Reader, f *dt_field) interface{} {
 
 func decodeFloat(r *Reader, f *dt_field) interface{} {
 	_debugf(
-		"Bitcount: %v, Low: %v, High: %v, Flags: %v",
+		"Bitcount: %v, Low: %v, High: %v, Flags: %v, Encoder: %v",
 		saveReturnInt32(f.BitCount),
 		saveReturnFloat32(f.LowValue, "nil"),
 		saveReturnFloat32(f.HighValue, "nil"),
 		strconv.FormatInt(int64(saveReturnInt32(f.Flags)), 2),
+		f.Encoder,
 	)
+
+	// Parse specific encoders
+	switch f.Encoder {
+	case "coord":
+		return r.readCoord()
+	}
 
 	var BitCount int
 	var Low float32
