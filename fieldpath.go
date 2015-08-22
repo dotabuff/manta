@@ -422,7 +422,24 @@ func PopNPlusN(r *Reader, fp *fieldpath) {
 }
 
 func PopNAndNonTopographical(r *Reader, fp *fieldpath) {
-	_panicf("Name: %s", fp.parent.Name)
+	_debugf("Name: %s", fp.parent.Name)
+
+	rBits := []int{2, 4, 10, 17, 30}
+	dropped := 0
+
+	for _, bits := range rBits {
+		if r.readBits(1) == 1 {
+			dropped = int(r.readBits(bits))
+			fp.index = fp.index[:len(fp.index)-(int(dropped))]
+			break
+		}
+	}
+
+	for i := 0; i < len(fp.index); i++ {
+		if r.readBoolean() {
+			fp.index[i] += r.readVarInt32()
+		}
+	}
 }
 
 func NonTopoComplex(r *Reader, fp *fieldpath) {
