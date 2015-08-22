@@ -177,11 +177,6 @@ func decodeComponent(r *Reader, f *dt_field) interface{} {
 	return r.readBits(1)
 }
 
-func decodeStrongHandle(r *Reader, f *dt_field) interface{} {
-	// wrong, just testing
-	return r.readBits(1)
-}
-
 func decodeHSequence(r *Reader, f *dt_field) interface{} {
 	// wrong, just testing
 	return r.readBits(1)

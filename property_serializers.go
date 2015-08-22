@@ -90,8 +90,8 @@ func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *Pr
 		switch {
 		case hasPrefix(name, "CHandle"):
 			decoder = decodeHandle
-		case hasPrefix(name, "CStrongHandle"):
-			decoder = decodeHandle
+		//case hasPrefix(name, "CStrongHandle"):
+		//	decoder = decodeHandle
 		case hasPrefix(name, "CUtlVector< "):
 			if match := matchVector.FindStringSubmatch(name); match != nil {
 				decoderContainer = decodeVector
