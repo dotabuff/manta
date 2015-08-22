@@ -75,6 +75,8 @@ func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *Pr
 		decoder = decodeQuantized
 	case "CRenderComponent":
 		fallthrough
+	case "CPhysicsComponent":
+		fallthrough
 	case "CBodyComponent":
 		decoder = decodeComponent
 	case "CDOTASpectatorGraphManager*":
