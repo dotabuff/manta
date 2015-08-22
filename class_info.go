@@ -78,6 +78,9 @@ func (p *Parser) updateInstanceBaselineItem(item *StringTableItem) {
 		_panicf("unable to find send table %s for instancebaseline key %d", className, classId)
 	}
 
+	// Uncomment to dump fixtures
+	//_dump_fixture("instancebaseline/1731962898_"+className+".rawbuf", item.Value)
+
 	// Parse the properties out of the string table buffer and store
 	// them as the class baseline in the Parser.
 	if len(item.Value) > 0 {
