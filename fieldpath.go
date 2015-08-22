@@ -238,7 +238,7 @@ func PlusN(r *Reader, fp *fieldpath) {
 	// This one reads a variable-length header encoding the number of bits
 	// to read for N. Five is always added to the result.
 
-	rBits := []int{2, 4, 10, 17, 30}
+	rBits := []int{2, 4, 10, 17, 31}
 
 	for _, bits := range rBits {
 		if r.readBits(1) == 1 {
@@ -406,7 +406,7 @@ func PopAllButOnePlusNPack6Bits(r *Reader, fp *fieldpath) {
 func PopNPlusOne(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 
-	rBits := []int{2, 4, 10, 17, 30}
+	rBits := []int{2, 4, 10, 17, 31}
 
 	for _, bits := range rBits {
 		if r.readBits(1) == 1 {
@@ -424,7 +424,7 @@ func PopNPlusN(r *Reader, fp *fieldpath) {
 func PopNAndNonTopographical(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 
-	rBits := []int{2, 4, 10, 17, 30}
+	rBits := []int{2, 4, 10, 17, 31}
 	dropped := 0
 
 	for _, bits := range rBits {
