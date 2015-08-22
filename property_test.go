@@ -154,58 +154,20 @@ func TestReadProperties(t *testing.T) {
 			 -> prop 2: type:uint8(727) name:m_iTeamNum(784) sendNode: (root)(734)
 			 -> prop 3: type:int32[30](1167) name:m_iStartingPositions(1168) sendNode: (root)(734)
 			 -> prop 4: type:uint64[256](1169) name:m_bWorldTreeState(1170) sendNode: (root)(734)
-			This structure actually has 10+10+1+30+256=307 entries.
-			The packed value data starts at bit 384 (#385), leaving 307 marker bits and the first 78 bits in the wind.
 		*/
 		{
 			tableName:   "CDOTA_DataDire",
-			run:         false,
+			run:         true,
 			debug:       false,
-			expectCount: (10 + 10 + 1 + 30 + 256),
+			expectCount: 428,
 			expectKeys: map[string]interface{}{
-				// manta.(*reader).dumpBits: @ bit 00384 (byte 048 + 0)  | binary: 0 | uint8: 0   | var32: 0           | varu32: 0          | varu64: 0                    | bitfloat32: 0            | string: -
-				"m_iReliableGold.0000": int32(0),
-				"m_iReliableGold.0001": int32(0),
-				"m_iReliableGold.0002": int32(0),
-				"m_iReliableGold.0003": int32(0),
-				"m_iReliableGold.0004": int32(0),
-				"m_iReliableGold.0005": int32(0),
-				"m_iReliableGold.0006": int32(0),
-				"m_iReliableGold.0007": int32(0),
-				"m_iReliableGold.0008": int32(0),
-				"m_iReliableGold.0009": int32(0),
-				// manta.(*reader).dumpBits: @ bit 00464 (byte 058 + 0)  | binary: 0 | uint8: 226 | var32: 625         | varu32: 1250       | varu64: 1250                 | bitfloat32: 5.4416815e-33 | string: -
-				"m_iUnreliableGold.0000": int32(625),
-				"m_iUnreliableGold.0001": int32(625),
-				"m_iUnreliableGold.0002": int32(625),
-				"m_iUnreliableGold.0003": int32(625),
-				"m_iUnreliableGold.0004": int32(625),
-				"m_iUnreliableGold.0005": int32(625),
-				"m_iUnreliableGold.0006": int32(625),
-				"m_iUnreliableGold.0007": int32(625),
-				"m_iUnreliableGold.0008": int32(625),
-				"m_iUnreliableGold.0009": int32(625),
-				//manta.(*reader).dumpBits: @ bit 00624 (byte 078 + 0)  | binary: 1 | uint8: 3   | var32: -2          | varu32: 3          | varu64: 3                    | bitfloat32: 2.3694284e-38 | string: -
-				"m_iTeamNum": uint64(3),
-				// manta.(*reader).dumpBits: @ bit 00632 (byte 079 + 0)  | binary: 1 | uint8: 1   | var32: -1          | varu32: 1          | varu64: 1                    | uint64: 72340172838076673              | bitfloat32: 2.3694278e-38 | string: -
-				"m_iStartingPositions.0000": int32(-1),
-				// manta.(*reader).dumpBits: @ bit 00864 (byte 108 + 0)  | binary: 1 | uint8: 1   | var32: -1          | varu32: 1          | varu64: 1                    | uint64: 18446744073709551361           | bitfloat32: NaN          | string: -
-				"m_iStartingPositions.0029": int32(-1),
-				// Each tree state full of (mostly) 1's takes 10 bytes.
-				// manta.(*reader).dumpBits: @ bit 00872 (byte 109 + 0)  | binary: 1 | uint8: 255 | var32: -2147483648 | varu32: 4294967295 | varu64: 18446744073709551615 | uint64: 18446744073709551615           | bitfloat32: NaN          | string: -
-				"m_bWorldTreeState.0000": uint64(18446744073709551615),
-				// manta.(*reader).dumpBits: @ bit 00952 (byte 119 + 0)  | binary: 1 | uint8: 255 | var32: -2147483648 | varu32: 4294967295 | varu64: 18446744073709551615 | uint64: 18446744073709551615           | bitfloat32: NaN          | string: -
-				"m_bWorldTreeState.0001": uint64(18446744073709551615),
-				// manta.(*reader).dumpBits: @ bit 11032 (byte 1379 + 0)  | binary: 1 | uint8: 255 | var32: -2147483648 | varu32: 4294967295 | varu64: 18446744073709551615 | uint64: 18446744073709551615           | bitfloat32: NaN          | string: -
-				"m_bWorldTreeState.0126": uint64(18446744073709551615),
-				"m_bWorldTreeState.0127": uint64(18446744073709551615),
-				// That was 1270 bytes (127 entries) worth of 10-byte varint 18446744073709551615's.
-				// Now we see 127 more bytes (127 entries) worth of 1-byte varint 0's.
-				// manta.(*reader).dumpBits: @ bit 11112 (byte 1389 + 0)  | binary: 0 | uint8: 0   | var32: 0           | varu32: 0          | varu64: 0                    | uint64: 0                              | bitfloat32: 0            | string: -
-				"m_bWorldTreeState.0128": uint64(0),
-				"m_bWorldTreeState.0129": uint64(0),
-				// manta.(*reader).dumpBits: @ bit 12128 (byte 1516 + 0)  | binary: 0 | uint8: 0   | var32: 0           | varu32: 0          | varu64: 0                    | uint64: ERR                            | bitfloat32: ERR          | string: -
-				"m_bWorldTreeState.0255": uint64(0),
+				"m_vecDataTeam.0000.m_iUnreliableGold": int32(625),
+				"m_iTeamNum":                           uint64(3),
+				"m_bWorldTreeState.0000":               uint64(18446744073709551615),
+				"m_bWorldTreeState.0110":               uint64(18446744073709551615),
+				"m_bWorldTreeState.0128":               uint64(0),
+				"m_bWorldTreeState.0129":               uint64(0),
+				"m_bWorldTreeState.0255":               uint64(0),
 			},
 		},
 
@@ -213,19 +175,15 @@ func TestReadProperties(t *testing.T) {
 			tableName:   "CDOTA_DataRadiant",
 			run:         true,
 			debug:       false,
-			expectCount: (10 + 10 + 1 + 30 + 256),
+			expectCount: 428,
 			expectKeys: map[string]interface{}{
-				"m_iReliableGold.0000":      int32(0),
-				"m_iReliableGold.0009":      int32(0),
-				"m_iUnreliableGold.0000":    int32(625),
-				"m_iUnreliableGold.0009":    int32(625),
-				"m_iTeamNum":                uint64(2),
-				"m_iStartingPositions.0000": int32(-1),
-				"m_iStartingPositions.0029": int32(-1),
-				"m_bWorldTreeState.0000":    uint64(18446744073709551615),
-				"m_bWorldTreeState.0127":    uint64(18446744073709551615),
-				"m_bWorldTreeState.0128":    uint64(0),
-				"m_bWorldTreeState.0255":    uint64(0),
+				"m_vecDataTeam.0000.m_iUnreliableGold": int32(625),
+				"m_iTeamNum":                           uint64(2),
+				"m_bWorldTreeState.0000":               uint64(18446744073709551615),
+				"m_bWorldTreeState.0110":               uint64(18446744073709551615),
+				"m_bWorldTreeState.0128":               uint64(0),
+				"m_bWorldTreeState.0129":               uint64(0),
+				"m_bWorldTreeState.0255":               uint64(0),
 			},
 		},
 
@@ -233,7 +191,7 @@ func TestReadProperties(t *testing.T) {
 			tableName:   "CDOTA_DataSpectator",
 			run:         true,
 			debug:       false,
-			expectCount: 12,
+			expectCount: 284,
 			expectKeys: map[string]interface{}{
 				// manta.(*reader).dumpBits: @ bit 00021 (byte 002 + 5)  | binary: 1 | uint8: 255 | var32: -8388608    | varu32: 16777215   | varu64: 16777215             | float32: 3.8518597e-34      | float32coord: -16384.969         | string: ERR
 				"m_hPrimaryRune": HANDLE_NONE,
@@ -250,19 +208,14 @@ func TestReadProperties(t *testing.T) {
 			tableName:   "CDOTA_DataCustomTeam",
 			run:         true,
 			debug:       false,
-			expectCount: (10 + 10 + 1 + 30 + 256),
+			expectCount: 258,
 			expectKeys: map[string]interface{}{
-				"m_iReliableGold.0000":      int32(0),
-				"m_iReliableGold.0009":      int32(0),
-				"m_iUnreliableGold.0000":    int32(625),
-				"m_iUnreliableGold.0009":    int32(625),
-				"m_iTeamNum":                uint8(6),
-				"m_iStartingPositions.0000": int32(-1),
-				"m_iStartingPositions.0029": int32(-1),
-				"m_bWorldTreeState.0000":    uint64(18446744073709551615),
-				"m_bWorldTreeState.0127":    uint64(18446744073709551615),
-				"m_bWorldTreeState.0128":    uint64(0),
-				"m_bWorldTreeState.0255":    uint64(0),
+				"m_iTeamNum":             uint64(6),
+				"m_bWorldTreeState.0000": uint64(18446744073709551615),
+				"m_bWorldTreeState.0110": uint64(18446744073709551615),
+				"m_bWorldTreeState.0128": uint64(0),
+				"m_bWorldTreeState.0129": uint64(0),
+				"m_bWorldTreeState.0255": uint64(0),
 			},
 		},
 
@@ -352,7 +305,7 @@ func TestReadProperties(t *testing.T) {
 		*/
 		{
 			tableName:   "CDOTA_PlayerResource",
-			run:         true,
+			run:         false,
 			debug:       false,
 			expectCount: 2056,
 			expectKeys: map[string]interface{}{
@@ -814,10 +767,10 @@ func TestReadProperties(t *testing.T) {
 			debug:       false,
 			expectCount: 21,
 			expectKeys: map[string]interface{}{
-				"colorPrimary":         uint64(4294963904),
-				"colorSecondary":       uint64(33554431),
-				"colorPrimaryLerpTo":   uint64(4294963904),
-				"colorSecondaryLerpTo": uint64(33554431),
+				"colorPrimary":         uint64(4294963108),
+				"colorSecondary":       uint64(4294963108),
+				"colorPrimaryLerpTo":   uint64(4294963108),
+				"colorSecondaryLerpTo": uint64(4294963108),
 				"enable":               true,
 				"blend":                false,
 				"m_bNoReflectionFog":   true,
@@ -828,7 +781,7 @@ func TestReadProperties(t *testing.T) {
 			tableName:   "CDOTASpectatorGraphManagerProxy",
 			run:         true,
 			debug:       false,
-			expectCount: 398,
+			expectCount: 412,
 			expectKeys: map[string]interface{}{
 				"CDOTASpectatorGraphManager.m_rgPlayerGraphData.0000": uint32(2097151),
 				"CDOTASpectatorGraphManager.m_rgDireNetWorth.0063":    int32(0),
@@ -877,7 +830,7 @@ func TestReadProperties(t *testing.T) {
 
 	// Load our send tables
 	m := &dota.CDemoSendTables{}
-	if err := proto.Unmarshal(_read_fixture("send_tables/1560315800.pbmsg"), m); err != nil {
+	if err := proto.Unmarshal(_read_fixture("send_tables/1731962898.pbmsg"), m); err != nil {
 		panic(err)
 	}
 
@@ -887,7 +840,7 @@ func TestReadProperties(t *testing.T) {
 	// Iterate through scenarios
 	for _, s := range scenarios {
 		// Load up a fixture
-		buf := _read_fixture(_sprintf("instancebaseline/1560315800_%s.rawbuf", s.tableName))
+		buf := _read_fixture(_sprintf("instancebaseline/1731962898_%s.rawbuf", s.tableName))
 
 		serializer := fs.Serializers[s.tableName][0]
 		assert.NotNil(serializer)
