@@ -206,6 +206,22 @@ func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *Pr
 		return ps
 	}
 
+	if name == "DOTA_PlayerChallengeInfo" {
+		typeName := "DOTA_PlayerChallengeInfo"
+
+		ps := &PropertySerializer{
+			Decode:          decoder,
+			DecodeContainer: decoderContainer,
+			IsArray:         true,
+			Length:          uint32(30),
+			ArraySerializer: nil,
+			Name:            typeName,
+		}
+
+		pst.Serializers[name] = ps
+		return ps
+	}
+
 	// This function should panic at some point
 	return &PropertySerializer{decoder, decoderContainer, false, 0, nil, "unkown"}
 }

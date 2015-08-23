@@ -245,6 +245,16 @@ func TestReadProperties(t *testing.T) {
 				"m_pEntity":                     true,
 			},
 		},
+
+		{
+			tableName:   "CIngameEvent_TI5",
+			run:         true,
+			debug:       false,
+			expectCount: 348,
+			expectKeys: map[string]interface{}{
+				"m_CompendiumChallengeInfo.0023.nType": 0,
+			},
+		},
 	}
 
 	// Load our send tables
@@ -275,7 +285,7 @@ func TestReadProperties(t *testing.T) {
 		// Read properties
 		r := NewReader(buf)
 		props := ReadProperties(r, serializer)
-		assert.Equal(len(props), s.expectCount)
+		assert.Equal(s.expectCount, len(props))
 
 		for k, v := range s.expectKeys {
 			assert.EqualValues(v, props[k])
