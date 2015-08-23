@@ -15,9 +15,10 @@ type dt_property struct {
 
 // A datatable field
 type dt_field struct {
-	Name  string
-	Type  string
-	Index int32
+	Name    string
+	Encoder string
+	Type    string
+	Index   int32
 
 	Flags     *int32
 	BitCount  *int32
@@ -91,6 +92,11 @@ func (sers *flattened_serializers) recurse_table(cur *dota.ProtoFlattenedSeriali
 			Serializer: sers.pst.GetPropertySerializerByName(sers.proto.GetSymbols()[pField.GetVarTypeSym()]),
 		}
 
+		// Optional: Attach encoder
+		if pField.VarEncoderSym != nil {
+			prop.Field.Encoder = sers.proto.GetSymbols()[pField.GetVarEncoderSym()]
+		}
+
 		// Optional: Attach the serializer version for the property if applicable
 		if pField.FieldSerializerNameSym != nil {
 			pFieldName := sers.proto.GetSymbols()[pField.GetFieldSerializerNameSym()]
@@ -119,6 +125,7 @@ func (sers *flattened_serializers) recurse_table(cur *dota.ProtoFlattenedSeriali
 				tmpDt.Properties = append(tmpDt.Properties, &dt_property{
 					Field: &dt_field{
 						Name:       _sprintf("%04d", i),
+						Encoder:    prop.Field.Encoder,
 						Type:       prop.Field.Serializer.Name,
 						Index:      int32(i),
 						Flags:      prop.Field.Flags,

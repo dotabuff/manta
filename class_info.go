@@ -78,19 +78,13 @@ func (p *Parser) updateInstanceBaselineItem(item *StringTableItem) {
 		_panicf("unable to find send table %s for instancebaseline key %d", className, classId)
 	}
 
+	// Uncomment to dump fixtures
+	//_dump_fixture("instancebaseline/1731962898_"+className+".rawbuf", item.Value)
+
 	// Parse the properties out of the string table buffer and store
 	// them as the class baseline in the Parser.
 	if len(item.Value) > 0 {
-		switch serializer[0].Name {
-		case "CIngameEvent_TI5":
-			// This one can't parse because it want's to go two levels into
-			// DOTA_PlayerChallengeInfo. That one might be an array (would make sense)
-			// but isn't marked as such.
-			// @todo: Investigate later
-			return
-		default:
-			_debugf("Parsing entity baseline %v", serializer[0].Name)
-			p.ClassBaseline[classId] = ReadProperties(NewReader(item.Value), serializer[0])
-		}
+		_debugf("Parsing entity baseline %v", serializer[0].Name)
+		p.ClassBaseline[classId] = ReadProperties(NewReader(item.Value), serializer[0])
 	}
 }

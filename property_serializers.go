@@ -54,7 +54,7 @@ func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *Pr
 	case "int64":
 		decoder = decodeSigned
 	case "uint8":
-		decoder = decodeByte
+		fallthrough
 	case "uint16":
 		fallthrough
 	case "uint32":
@@ -63,8 +63,6 @@ func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *Pr
 		fallthrough
 	case "Color":
 		decoder = decodeUnsigned
-	case "CUtlStringToken":
-		fallthrough
 	case "char":
 		fallthrough
 	case "CUtlSymbolLarge":
@@ -75,29 +73,27 @@ func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *Pr
 		decoder = decodeBoolean
 	case "CNetworkedQuantizedFloat":
 		decoder = decodeQuantized
-	case "CPhysicsComponent":
-		fallthrough
 	case "CRenderComponent":
+		fallthrough
+	case "CPhysicsComponent":
 		fallthrough
 	case "CBodyComponent":
 		decoder = decodeComponent
 	case "CDOTASpectatorGraphManager*":
 		fallthrough
 	case "CEntityIdentity*":
-		decoder = decodePointer
+		decoder = decodeBoolean
 	case "QAngle":
 		decoder = decodeQAngle
 	case "CGameSceneNodeHandle":
 		decoder = decodeHandle
-	case "HSequence":
-		decoder = decodeHSequence
 	default:
 		// check for specific types
 		switch {
 		case hasPrefix(name, "CHandle"):
 			decoder = decodeHandle
 		case hasPrefix(name, "CStrongHandle"):
-			decoder = decodeHandle
+			decoder = decodeUnsigned
 		case hasPrefix(name, "CUtlVector< "):
 			if match := matchVector.FindStringSubmatch(name); match != nil {
 				decoderContainer = decodeVector
@@ -202,6 +198,22 @@ func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *Pr
 			DecodeContainer: decoderContainer,
 			IsArray:         true,
 			Length:          uint32(5),
+			ArraySerializer: nil,
+			Name:            typeName,
+		}
+
+		pst.Serializers[name] = ps
+		return ps
+	}
+
+	if name == "DOTA_PlayerChallengeInfo" {
+		typeName := "DOTA_PlayerChallengeInfo"
+
+		ps := &PropertySerializer{
+			Decode:          decoder,
+			DecodeContainer: decoderContainer,
+			IsArray:         true,
+			Length:          uint32(30),
 			ArraySerializer: nil,
 			Name:            typeName,
 		}

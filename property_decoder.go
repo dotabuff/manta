@@ -29,34 +29,28 @@ func decodeSigned(r *Reader, f *dt_field) interface{} {
 	return r.readVarInt32()
 }
 
+func decodeSigned64(r *Reader, f *dt_field) interface{} {
+	return r.readVarInt64()
+}
+
 func decodeBoolean(r *Reader, f *dt_field) interface{} {
 	return r.readBoolean()
 }
 
 func decodeFloat(r *Reader, f *dt_field) interface{} {
 	_debugf(
-		"Bitcount: %v, Low: %v, High: %v, Flags: %v",
+		"Bitcount: %v, Low: %v, High: %v, Flags: %v, Encoder: %v",
 		saveReturnInt32(f.BitCount),
 		saveReturnFloat32(f.LowValue, "nil"),
 		saveReturnFloat32(f.HighValue, "nil"),
 		strconv.FormatInt(int64(saveReturnInt32(f.Flags)), 2),
+		f.Encoder,
 	)
 
-	if f.Flags != nil {
-		// Read raw float
-		if *f.Flags&0x100 != 9 {
-			_panicf("Unsupported")
-		}
-
-		// read low value if empty
-		if *f.Flags&0x10 != 0 && r.readBoolean() {
-			return f.LowValue
-		}
-
-		// read high value if empty
-		if *f.Flags&0x20 != 0 && r.readBoolean() {
-			return f.HighValue
-		}
+	// Parse specific encoders
+	switch f.Encoder {
+	case "coord":
+		return r.readCoord()
 	}
 
 	var BitCount int
@@ -66,7 +60,8 @@ func decodeFloat(r *Reader, f *dt_field) interface{} {
 	if f.BitCount != nil {
 		BitCount = int(*f.BitCount)
 	} else {
-		BitCount = 8
+		// Maybe treated as no scale or something?
+		return r.readVarUint32()
 	}
 
 	if f.LowValue != nil {
@@ -78,7 +73,30 @@ func decodeFloat(r *Reader, f *dt_field) interface{} {
 	if f.HighValue != nil {
 		High = *f.HighValue
 	} else {
-		High = 0.0
+		High = 1.0
+	}
+
+	if f.Flags != nil {
+		// Skip this case
+		if *f.Flags&0x4 != 0 && f.LowValue == nil {
+			// This doesn't fell right
+			return r.readBits(2)
+		}
+
+		// Read raw float
+		if *f.Flags&0x100 != 0 {
+			return r.readBits(BitCount)
+		}
+
+		// read low value if empty
+		if *f.Flags&0x10 != 0 && r.readBoolean() {
+			return f.LowValue
+		}
+
+		// read high value if empty
+		if *f.Flags&0x20 != 0 && r.readBoolean() {
+			return f.HighValue
+		}
 	}
 
 	dividend := r.readBits(BitCount)
@@ -94,7 +112,7 @@ func decodeVector(r *Reader, f *dt_field) interface{} {
 	size := r.readVarUint32()
 
 	if size > 0 {
-		_panicf("Ive been called")
+		_panicf("Ive been called, %v", size)
 	}
 
 	return 0
@@ -110,18 +128,13 @@ func decodeQuantized(r *Reader, f *dt_field) interface{} {
 }
 
 func decodeFVector(r *Reader, f *dt_field) interface{} {
-	var r2 [3]uint32
-
-	r2[0] = r.readBits(10) // this should probably be readFloat
-	r2[1] = r.readBits(10)
-
-	if r.readBits(1) == 1 {
-		r2[2] = r.readBits(10)
-	} else {
-		r2[2] = 0
+	// Parse specific encoders
+	switch f.Encoder {
+	case "normal":
+		return r.read3BitNormal()
 	}
 
-	return r2
+	return []float32{decodeFloat(r, f).(float32), decodeFloat(r, f).(float32), decodeFloat(r, f).(float32)}
 }
 
 func decodeNop(r *Reader, f *dt_field) interface{} {
@@ -173,16 +186,6 @@ func decodeComponent(r *Reader, f *dt_field) interface{} {
 		strconv.FormatInt(int64(saveReturnInt32(f.Flags)), 2),
 	)
 
-	// might be encoded like a pointer (1 bit for set / unset, etc.)
-	//if r.readBits(1) == 1 {
-	//	return r.readBits(1)
-	//}
-
-	return 0
-}
-
-func decodeStrongHandle(r *Reader, f *dt_field) interface{} {
-	// wrong, just testing
 	return r.readBits(1)
 }
 
