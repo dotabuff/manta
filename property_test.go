@@ -234,17 +234,17 @@ func TestReadProperties(t *testing.T) {
 			},
 		},
 
-		/*
-			WIP:
-
-			{
-				tableName:   "CBaseAnimating",
-				run:         false,
-				debug:       false,
-				expectCount: 0,
-				expectKeys:  map[string]interface{}{},
+		{
+			tableName:   "CWorld",
+			run:         true,
+			debug:       false,
+			expectCount: 139,
+			expectKeys: map[string]interface{}{
+				"m_iszOptimizedHeightFieldName": string(""),
+				"m_hEffectEntity":               HANDLE_NONE,
+				"m_pEntity":                     true,
 			},
-		*/
+		},
 	}
 
 	// Load our send tables
