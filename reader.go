@@ -295,6 +295,37 @@ func (r *Reader) readNormal() float32 {
 	}
 }
 
+// Read a normalized float vector
+func (r *Reader) read3BitNormal() []float32 {
+	ret := []float32{0.0, 0.0, 0.0}
+
+	hasX := r.readBoolean()
+	haxY := r.readBoolean()
+
+	if hasX {
+		ret[0] = r.readNormal()
+	}
+
+	if haxY {
+		ret[1] = r.readNormal()
+	}
+
+	negZ := r.readBoolean()
+	prodsum := ret[0]*ret[0] + ret[1]*ret[1]
+
+	if prodsum < 1.0 {
+		ret[2] = float32(math.Sqrt(float64(1.0 - prodsum)))
+	} else {
+		ret[2] = 0.0
+	}
+
+	if negZ {
+		ret[2] = -ret[2]
+	}
+
+	return ret
+}
+
 // Reads bits as bytes.
 func (r *Reader) readBitsAsBytes(n int) []byte {
 	tmp := make([]byte, 0)
