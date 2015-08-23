@@ -75,7 +75,7 @@ func decodeFloat(r *Reader, f *dt_field) interface{} {
 	if f.Flags != nil {
 		// Read raw float
 		if *f.Flags&0x100 != 0 {
-			_panicf("Unsupported")
+			return r.readBits(BitCount)
 		}
 
 		// read low value if empty
@@ -118,18 +118,13 @@ func decodeQuantized(r *Reader, f *dt_field) interface{} {
 }
 
 func decodeFVector(r *Reader, f *dt_field) interface{} {
-	var r2 [3]uint32
-
-	r2[0] = r.readBits(10) // this should probably be readFloat
-	r2[1] = r.readBits(10)
-
-	if r.readBits(1) == 1 {
-		r2[2] = r.readBits(10)
-	} else {
-		r2[2] = 0
+	// Parse specific encoders
+	switch f.Encoder {
+	case "normal":
+		return r.read3BitNormal()
 	}
 
-	return r2
+	return []float32{decodeFloat(r, f).(float32), decodeFloat(r, f).(float32), decodeFloat(r, f).(float32)}
 }
 
 func decodeNop(r *Reader, f *dt_field) interface{} {
