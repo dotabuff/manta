@@ -77,6 +77,12 @@ func decodeFloat(r *Reader, f *dt_field) interface{} {
 	}
 
 	if f.Flags != nil {
+		// Skip this case
+		if *f.Flags&0x4 != 0 && f.LowValue == nil {
+			// This doesn't fell right
+			return r.readBits(2)
+		}
+
 		// Read raw float
 		if *f.Flags&0x100 != 0 {
 			return r.readBits(BitCount)
@@ -106,7 +112,7 @@ func decodeVector(r *Reader, f *dt_field) interface{} {
 	size := r.readVarUint32()
 
 	if size > 0 {
-		_panicf("Ive been called")
+		_panicf("Ive been called, %v", size)
 	}
 
 	return 0
