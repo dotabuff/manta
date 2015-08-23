@@ -29,6 +29,10 @@ func decodeSigned(r *Reader, f *dt_field) interface{} {
 	return r.readVarInt32()
 }
 
+func decodeSigned64(r *Reader, f *dt_field) interface{} {
+	return r.readVarInt64()
+}
+
 func decodeBoolean(r *Reader, f *dt_field) interface{} {
 	return r.readBoolean()
 }
