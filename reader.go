@@ -282,6 +282,19 @@ func (r *Reader) readCoord() float32 {
 	return value
 }
 
+// Read normalized float
+func (r *Reader) readNormal() float32 {
+	isNeg := r.readBoolean()
+	len := r.readBits(11)
+	ret := float32(len) * float32(1.0/(float32(1<<11)-1.0))
+
+	if isNeg {
+		return -ret
+	} else {
+		return ret
+	}
+}
+
 // Reads bits as bytes.
 func (r *Reader) readBitsAsBytes(n int) []byte {
 	tmp := make([]byte, 0)
