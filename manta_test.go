@@ -34,6 +34,15 @@ func TestParseRealMatches(t *testing.T) {
 		expectUnitOrderEvents  int32
 	}{
 		{
+			matchId:                "1734886116",
+			replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1734886116",
+			expectCombatLogDamage:  1048805,
+			expectCombatLogHealing: 25089,
+			expectCombatLogDeaths:  1447,
+			expectCombatLogEvents:  42307,
+			expectUnitOrderEvents:  59775,
+		},
+		{
 			matchId:                "1731962898",
 			replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1731962898.dem",
 			expectCombatLogDamage:  415560,
@@ -41,6 +50,15 @@ func TestParseRealMatches(t *testing.T) {
 			expectCombatLogDeaths:  690,
 			expectCombatLogEvents:  24296,
 			expectUnitOrderEvents:  27525,
+		},
+		{
+			matchId:                "1605340040",
+			replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1605340040",
+			expectCombatLogDamage:  522367,
+			expectCombatLogHealing: 31721,
+			expectCombatLogDeaths:  795,
+			expectCombatLogEvents:  21116,
+			expectUnitOrderEvents:  40669,
 		},
 		{
 			matchId:                "1560289528",
