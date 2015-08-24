@@ -131,7 +131,7 @@ func (p *Parser) Start() error {
 	// Loop through all outer messages until we're signaled to stop. Stopping
 	// happens when either the OnCDemoStop message is encountered or
 	// parser.Stop() is called programatically.
-	for !p.isStopping {
+	for !p.isStopping && p.reader.remBytes() > 0 {
 		// Read the next outer message.
 		if msg, err = p.readOuterMessage(); err != nil {
 			return err
