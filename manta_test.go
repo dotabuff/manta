@@ -35,7 +35,7 @@ func TestParseRealMatches(t *testing.T) {
 	}{
 		{
 			matchId:                "1734886116",
-			replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1734886116",
+			replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1734886116.dem",
 			expectCombatLogDamage:  1048805,
 			expectCombatLogHealing: 25089,
 			expectCombatLogDeaths:  1447,
@@ -53,7 +53,7 @@ func TestParseRealMatches(t *testing.T) {
 		},
 		{
 			matchId:                "1605340040",
-			replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1605340040",
+			replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1605340040.dem",
 			expectCombatLogDamage:  522367,
 			expectCombatLogHealing: 31721,
 			expectCombatLogDeaths:  795,
