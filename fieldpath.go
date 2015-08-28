@@ -181,29 +181,6 @@ func newFieldpathHuffman() HuffmanTree {
 	return buildTree(huffmanlist)
 }
 
-// Returns the static huffman tree based on our observed tree states
-func newFieldpathHuffmanStatic() HuffmanTree {
-	var h HuffmanTree
-	h = &HuffmanNode{0, 0, nil, nil}
-
-	addNode(h, 0, 1, 0)        // PlusOne
-	addNode(h, 1, 2, 1)        // EncodingFinish
-	addNode(h, 7, 4, 3)        // PlusTwo
-	addNode(h, 11, 5, 4)       // PlusN
-	addNode(h, 51, 6, 6)       // PopAllButOnePlusOne
-	addNode(h, 19, 6, 7)       // PlusThree
-	addNode(h, 251, 8, 8)      // PlusFour
-	addNode(h, 91, 8, 11)      // PushOneLeftDeltaOneRightZero
-	addNode(h, 283, 10, 18)    // NonTopoComplexPack4Bits
-	addNode(h, 1819, 11, 19)   // NonTopoComplex
-	addNode(h, 2843, 12, 20)   // PushOneLeftDeltaZeroRightZero
-	addNode(h, 17179, 15, 22)  // PopOnePlusOne
-	addNode(h, 25371, 16, 25)  // PopNPlusOne
-	addNode(h, 103195, 17, 36) // PushTwoPack5LeftDeltaZero
-
-	return h
-}
-
 func PlusOne(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 
@@ -238,15 +215,7 @@ func PlusN(r *Reader, fp *fieldpath) {
 	// This one reads a variable-length header encoding the number of bits
 	// to read for N. Five is always added to the result.
 
-	rBits := []int{2, 4, 10, 17, 31}
-
-	for _, bits := range rBits {
-		if r.readBits(1) == 1 {
-			// Always add 5 to the result
-			fp.index[len(fp.index)-1] += int32(r.readBits(bits)) + 5
-			return
-		}
-	}
+	fp.index[len(fp.index)-1] += int32(r.readUBitVarFP()) + 5
 }
 
 func PushOneLeftDeltaZeroRightZero(r *Reader, fp *fieldpath) {
@@ -406,15 +375,8 @@ func PopAllButOnePlusNPack6Bits(r *Reader, fp *fieldpath) {
 func PopNPlusOne(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 
-	rBits := []int{2, 4, 10, 17, 31}
-
-	for _, bits := range rBits {
-		if r.readBits(1) == 1 {
-			fp.index = fp.index[:len(fp.index)-(int(r.readBits(bits)))]
-			fp.index[len(fp.index)-1] += 1
-			return
-		}
-	}
+	fp.index = fp.index[:len(fp.index)-(int(r.readUBitVarFP()))]
+	fp.index[len(fp.index)-1] += 1
 }
 
 func PopNPlusN(r *Reader, fp *fieldpath) {
@@ -424,16 +386,7 @@ func PopNPlusN(r *Reader, fp *fieldpath) {
 func PopNAndNonTopographical(r *Reader, fp *fieldpath) {
 	_debugf("Name: %s", fp.parent.Name)
 
-	rBits := []int{2, 4, 10, 17, 31}
-	dropped := 0
-
-	for _, bits := range rBits {
-		if r.readBits(1) == 1 {
-			dropped = int(r.readBits(bits))
-			fp.index = fp.index[:len(fp.index)-(int(dropped))]
-			break
-		}
-	}
+	fp.index = fp.index[:len(fp.index)-(int(r.readUBitVarFP()))]
 
 	for i := 0; i < len(fp.index); i++ {
 		if r.readBoolean() {
