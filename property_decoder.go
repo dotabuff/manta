@@ -151,29 +151,50 @@ func decodePointer(r *Reader, f *dt_field) interface{} {
 }
 
 func decodeQAngle(r *Reader, f *dt_field) interface{} {
-	if f.Flags != nil {
-		// There is a flag check against 0x20 in the disasembly
-		_debugf("Angle flags: %v", *f.Flags)
-	}
-
 	ret := [3]float32{0.0, 0.0, 0.0}
 
-	rX := r.readBoolean()
-	rY := r.readBoolean()
-	rZ := r.readBoolean()
+	// Parse specific encoders
+	switch f.Encoder {
+	case "qangle_pitch_yaw":
+		if f.BitCount != nil && f.Flags != nil && (*f.Flags&0x20 != 0) {
+			_panicf("Special Case: Unkown for now")
+		}
 
-	if rX {
-		ret[0] = r.readCoord()
+		ret[0] = r.readAngle(uint(*f.BitCount))
+		ret[1] = r.readAngle(uint(*f.BitCount))
+		return ret
 	}
 
-	if rY {
-		ret[1] = r.readCoord()
+	// Parse a standard angle
+	if f.BitCount != nil && *f.BitCount == 32 {
+		_panicf("Special Case: Unkown for now")
+	} else if f.BitCount != nil && *f.BitCount != 0 {
+		ret[0] = r.readAngle(uint(*f.BitCount))
+		ret[1] = r.readAngle(uint(*f.BitCount))
+		ret[2] = r.readAngle(uint(*f.BitCount))
+
+		return ret
+	} else {
+		rX := r.readBoolean()
+		rY := r.readBoolean()
+		rZ := r.readBoolean()
+
+		if rX {
+			ret[0] = r.readCoord()
+		}
+
+		if rY {
+			ret[1] = r.readCoord()
+		}
+
+		if rZ {
+			ret[2] = r.readCoord()
+		}
+
+		return ret
 	}
 
-	if rZ {
-		ret[2] = r.readCoord()
-	}
-
+	_panicf("No valid encoding determined")
 	return ret
 }
 
