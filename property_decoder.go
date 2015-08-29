@@ -57,112 +57,28 @@ func decodeFloatNoscale(r *Reader, f *dt_field) interface{} {
 	return math.Float32frombits(r.readBits(int(*f.BitCount)))
 }
 
+// A list of field -> encoder types
+var qmap map[*dt_field]*QuantizedFloatDecoder
+
 func decodeQuantized(r *Reader, f *dt_field) interface{} {
-	_debugf(
-		"Quantized, Bitcount: %v, Low: %v, High: %v, Flags: %v, Encoder: %v",
-		saveReturnInt32(f.BitCount),
-		saveReturnFloat32(f.LowValue, "nil"),
-		saveReturnFloat32(f.HighValue, "nil"),
-		strconv.FormatInt(int64(saveReturnInt32(f.Flags)), 2),
-		f.Encoder,
-	)
-
-	var BitCount int
-	var Low float32
-	var High float32
-	var Range float32
-	var Offset float32
-
-	if f.BitCount != nil {
-		BitCount = int(*f.BitCount)
+	if qmap == nil {
+		qmap = make(map[*dt_field]*QuantizedFloatDecoder, 0)
 	}
 
-	if f.LowValue != nil {
-		Low = *f.LowValue
-	} else {
-		Low = 0.0
+	// Get the correct decoder
+	q, ok := qmap[f]
+
+	if !ok {
+		qmap[f] = InitQFD(f)
+		q = qmap[f]
 	}
 
-	if f.HighValue != nil {
-		High = *f.HighValue
-	} else {
-		High = 1.0
-	}
+	// Decode value
+	return q.Decode(r)
+}
 
-	// Verify mutualy exclusive flags
-	if *f.Flags&(qf_rounddown|qf_roundup) == (qf_rounddown | qf_roundup) {
-		_panicf("Roundup / Rounddown are mutually exclusive")
-	}
-
-	// Verify min / max
-	if Low > High {
-		_panicf("Inverted min / max values")
-	}
-
-	steps := (1 << uint(BitCount))
-
-	// Set range and offset for roundup / rounddown
-	if (*f.Flags & qf_rounddown) != 0 {
-		Range = High - Low
-		Offset = (Range / float32(steps))
-		High -= Offset
-	} else if (*f.Flags & qf_roundup) != 0 {
-		Range = High - Low
-		Offset = (Range / float32(steps))
-		Low += Offset
-	}
-
-	// Handle integer encoding flag
-	if (*f.Flags & qf_encode_integers) != 0 {
-		delta := High - Low
-
-		if delta < 1 {
-			delta = 1
-		}
-
-		deltaLog2 := uint(math.Log2(float64(delta)) + 1)
-		Range2 := (1 << deltaLog2)
-		bc := BitCount
-
-		for 1 == 1 {
-			if (1 << uint(bc)) > Range2 {
-				break
-			} else {
-				bc++
-			}
-		}
-
-		if bc > BitCount {
-			_debugf("Upping bitcount for qf_encode_integers field %v -> %v", BitCount, bc)
-			BitCount = bc
-			steps = (1 << uint(BitCount))
-		}
-
-		Offset = float32(Range2) / float32(steps)
-		High = Low + float32(Range2) - Offset
-	}
-
-	if (*f.Flags & 0x100) != 0 {
-		r.seekBits(int(*f.BitCount))
-		return 0.0
-	} else {
-		if (*f.Flags&0x10) != 0 && r.readBoolean() {
-			return Low
-		}
-
-		if (*f.Flags&0x20) != 0 && r.readBoolean() {
-			return High
-		}
-
-		if (*f.Flags&0x40) != 0 && r.readBoolean() {
-			return 0.0
-		}
-
-		intVal := r.readBits(BitCount)
-		flVal := float32(intVal) * (1.0 / (float32(uint(1<<uint(BitCount))) - 1))
-		flVal = Low + (High-Low)*flVal
-		return flVal
-	}
+func decodeSimTime(r *Reader, f *dt_field) interface{} {
+	return float32(r.readVarUint32()) * (1.0 / 30)
 }
 
 func decodeString(r *Reader, f *dt_field) interface{} {
