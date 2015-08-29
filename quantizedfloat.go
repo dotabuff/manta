@@ -113,13 +113,13 @@ func (qfd *QuantizedFloatDecoder) AssignMultipliers(steps uint32) {
 // Quantize a float
 func (qfd *QuantizedFloatDecoder) Quantize(val float32) float32 {
 	if val < qfd.Low {
-		if (qfd.Flags & qff_roundup) == 0 {
+		if (uint32(*qfd.Field.Flags) & qff_roundup) == 0 {
 			_panicf("Field tried to quantize an out of range value")
 		}
 
 		return qfd.Low
 	} else if val > qfd.High {
-		if (qfd.Flags & qff_rounddown) == 0 {
+		if (uint32(*qfd.Field.Flags) & qff_rounddown) == 0 {
 			_panicf("Field tried to quantize an out of range value")
 		}
 
@@ -140,7 +140,7 @@ func (qfd *QuantizedFloatDecoder) Decode(r *Reader) float32 {
 		return qfd.High
 	}
 
-	if (qfd.Flags&qff_encode_integers) != 0 && r.readBoolean() {
+	if (qfd.Flags&qff_encode_zero) != 0 && r.readBoolean() {
 		return 0.0
 	}
 
