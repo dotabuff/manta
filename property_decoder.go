@@ -47,10 +47,14 @@ func decodeFloat(r *Reader, f *dt_field) interface{} {
 
 	if f.BitCount != nil {
 		// equivalent to the old noscale
-		return math.Float32frombits(r.readBits(int(*f.BitCount)))
+		return decodeFloatNoscale(r, f)
 	} else {
 		return r.readVarUint32()
 	}
+}
+
+func decodeFloatNoscale(r *Reader, f *dt_field) interface{} {
+	return math.Float32frombits(r.readBits(int(*f.BitCount)))
 }
 
 func decodeQuantized(r *Reader, f *dt_field) interface{} {
@@ -66,7 +70,8 @@ func decodeQuantized(r *Reader, f *dt_field) interface{} {
 	var BitCount int
 	var Low float32
 	var High float32
-	var Flags int32
+	var Range float32
+	var Offset float32
 
 	if f.BitCount != nil {
 		BitCount = int(*f.BitCount)
@@ -84,30 +89,72 @@ func decodeQuantized(r *Reader, f *dt_field) interface{} {
 		High = 1.0
 	}
 
-	if f.Flags != nil {
-		Flags = *f.Flags
-	} else {
-		Flags = 0
+	// Verify mutualy exclusive flags
+	if *f.Flags&(qf_rounddown|qf_roundup) == (qf_rounddown | qf_roundup) {
+		_panicf("Roundup / Rounddown are mutually exclusive")
 	}
 
-	// if the bitcount is 0 or > 32, treat this as a noscale with 32 bits
-	if BitCount <= 0 || BitCount >= 32 {
-		return math.Float32frombits(r.readBits(32))
+	// Verify min / max
+	if Low > High {
+		_panicf("Inverted min / max values")
 	}
 
-	if (Flags & 0x100) != 0 {
+	steps := (1 << uint(BitCount))
+
+	// Set range and offset for roundup / rounddown
+	if *f.Flags & qf_rounddown {
+		Range = High - Low
+		Offset = (Range / steps)
+		Max -= Offset
+	} else if *f.Flags & qf_roundup {
+		Range = High - Low
+		Offset = (Range / steps)
+		Min += Offset
+	}
+
+	// Handle integer encoding flag
+	if *f.Flags * qf_encode_integers {
+		delta := Max - Min
+
+		if delta < 1 {
+			delta = 1
+		}
+
+		deltaLog2 := math.log2(delta) + 1
+		Range2 := (1 << deltaLog2)
+		bc := BitCount
+
+		for 1 == 1 {
+			if (1 << bc) > Range2 {
+				break
+			} else {
+				bc++
+			}
+		}
+
+		if bc > BitCount {
+			_debugf("Upping bitcount for qf_encode_integers field %v -> %v", BitCount, bc)
+			BitCount = bc
+			steps = (1 << BitCount)
+		}
+
+		Offset = float32(Range2) / float32(steps)
+		Max = Min + Range2 - Offset
+	}
+
+	if (*f.Flags & 0x100) != 0 {
 		r.seekBits(int(*f.BitCount))
 		return 0.0
 	} else {
-		if (Flags&0x10) != 0 && r.readBoolean() {
+		if (*f.Flags&0x10) != 0 && r.readBoolean() {
 			return Low
 		}
 
-		if (Flags&0x20) != 0 && r.readBoolean() {
+		if (*f.Flags&0x20) != 0 && r.readBoolean() {
 			return High
 		}
 
-		if (Flags&0x40) != 0 && r.readBoolean() {
+		if (*f.Flags&0x40) != 0 && r.readBoolean() {
 			return 0.0
 		}
 
