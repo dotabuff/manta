@@ -74,6 +74,14 @@ func decodeQuantized(r *Reader, f *dt_field) interface{} {
 	}
 
 	// Decode value
+	_debugf(
+		"Bitcount: %v, Low: %v, High: %v, Flags: %v",
+		q.Bitcount,
+		q.Low,
+		q.High,
+		strconv.FormatInt(int64(q.Flags), 2),
+	)
+
 	return q.Decode(r)
 }
 
