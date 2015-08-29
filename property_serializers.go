@@ -33,14 +33,75 @@ var matchArray = regexp.MustCompile(`([^[\]]+)\[(\d+)]`)
 var matchVector = regexp.MustCompile(`CUtlVector\<\s(.*)\s>$`)
 
 // Flags used in the quantized decoding
-const qf_rounddown uint32 = (1 << 0)
-const qf_roundup uint32 = (1 << 1)
-const qf_encode_zero uint32 = (1 << 2)
-const qf_encode_integers uint32 = (1 << 3)
+const qf_rounddown int32 = (1 << 0)
+const qf_roundup int32 = (1 << 1)
+const qf_encode_zero int32 = (1 << 2)
+const qf_encode_integers int32 = (1 << 3)
 
 // Initializes a QuantizedFloat encoder
-func InitQuantized(field *dt_field) {
-	field.Serializer = &PropertySerializer{decodeQuantized, nil, false, 0, nil, "unkown"}
+func InitQuantized(f *dt_field) {
+	// Make sure all field have their default values
+	var BitCount int
+	var Low float32
+	var High float32
+	var Flags int32
+
+	if f.BitCount != nil {
+		BitCount = int(*f.BitCount)
+	}
+
+	if f.LowValue != nil {
+		Low = *f.LowValue
+	} else {
+		Low = 0.0
+	}
+
+	if f.HighValue != nil {
+		High = *f.HighValue
+	} else {
+		High = 1.0
+	}
+
+	if f.Flags != nil {
+		Flags = *f.Flags
+	} else {
+		Flags = 0
+	}
+
+	// if the bitcount is <= 0 or >= 32, treat this as a noscale with 32 bits
+	if BitCount <= 0 || BitCount >= 32 {
+		f.Serializer = &PropertySerializer{decodeFloatNoscale, nil, false, 0, nil, "unkown"}
+		return
+	}
+
+	// Discard zero flag when encoding min / max set to 0
+	if (Low == 0.0 && (Flags&qf_rounddown) != 0) || (High == 0.0 && (Flags&qf_roundup) != 0) {
+		Flags &= ^qf_encode_zero
+	}
+
+	// If min / max is zero when encoding zero, switch to round up / round down instead
+	if Low == 0.0 && (Flags&qf_encode_zero) != 0 {
+		Flags |= qf_rounddown
+		Flags &= ^qf_encode_zero
+	}
+
+	if High == 0.0 && (Flags&qf_encode_zero) != 0 {
+		Flags |= qf_roundup
+		Flags &= ^qf_encode_zero
+	}
+
+	// Check if the range spans zero
+	if Low > 0.0 || High < 0.0 {
+		Flags &= ^qf_encode_zero
+	}
+
+	// If we are left with encode zero, only leave integer flag
+	if (Flags & qf_encode_zero) != 0 {
+		Flags &= ^(qf_roundup | qf_rounddown | qf_encode_zero)
+	}
+
+	f.Flags = &Flags
+	f.Serializer = &PropertySerializer{decodeQuantized, nil, false, 0, nil, "unkown"}
 }
 
 // Fills serializer in dt_field
