@@ -102,30 +102,30 @@ func decodeQuantized(r *Reader, f *dt_field) interface{} {
 	steps := (1 << uint(BitCount))
 
 	// Set range and offset for roundup / rounddown
-	if *f.Flags & qf_rounddown {
+	if (*f.Flags & qf_rounddown) != 0 {
 		Range = High - Low
-		Offset = (Range / steps)
-		Max -= Offset
-	} else if *f.Flags & qf_roundup {
+		Offset = (Range / float32(steps))
+		High -= Offset
+	} else if (*f.Flags & qf_roundup) != 0 {
 		Range = High - Low
-		Offset = (Range / steps)
-		Min += Offset
+		Offset = (Range / float32(steps))
+		Low += Offset
 	}
 
 	// Handle integer encoding flag
-	if *f.Flags * qf_encode_integers {
-		delta := Max - Min
+	if (*f.Flags & qf_encode_integers) != 0 {
+		delta := High - Low
 
 		if delta < 1 {
 			delta = 1
 		}
 
-		deltaLog2 := math.log2(delta) + 1
+		deltaLog2 := uint(math.Log2(float64(delta)) + 1)
 		Range2 := (1 << deltaLog2)
 		bc := BitCount
 
 		for 1 == 1 {
-			if (1 << bc) > Range2 {
+			if (1 << uint(bc)) > Range2 {
 				break
 			} else {
 				bc++
@@ -135,11 +135,11 @@ func decodeQuantized(r *Reader, f *dt_field) interface{} {
 		if bc > BitCount {
 			_debugf("Upping bitcount for qf_encode_integers field %v -> %v", BitCount, bc)
 			BitCount = bc
-			steps = (1 << BitCount)
+			steps = (1 << uint(BitCount))
 		}
 
 		Offset = float32(Range2) / float32(steps)
-		Max = Min + Range2 - Offset
+		High = Low + float32(Range2) - Offset
 	}
 
 	if (*f.Flags & 0x100) != 0 {
