@@ -58,7 +58,7 @@ func (qfd *QuantizedFloatDecoder) ValidateFlags() {
 	}
 
 	// If we are left with encode zero, only leave integer flag
-	if (qfd.Flags & qff_encode_zero) != 0 {
+	if (qfd.Flags & qff_encode_integers) != 0 {
 		qfd.Flags &= ^(qff_roundup | qff_rounddown | qff_encode_zero)
 	}
 
