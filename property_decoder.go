@@ -1,6 +1,7 @@
 package manta
 
 import (
+	"math"
 	"strconv"
 )
 
@@ -38,8 +39,23 @@ func decodeBoolean(r *Reader, f *dt_field) interface{} {
 }
 
 func decodeFloat(r *Reader, f *dt_field) interface{} {
+	// Parse specific encoders
+	switch f.Encoder {
+	case "coord":
+		return r.readCoord()
+	}
+
+	if f.BitCount != nil {
+		// equivalent to the old noscale
+		return math.Float32frombits(r.readBits(int(*f.BitCount)))
+	} else {
+		return r.readVarUint32()
+	}
+}
+
+func decodeQuantized(r *Reader, f *dt_field) interface{} {
 	_debugf(
-		"Bitcount: %v, Low: %v, High: %v, Flags: %v, Encoder: %v",
+		"Quantized, Bitcount: %v, Low: %v, High: %v, Flags: %v, Encoder: %v",
 		saveReturnInt32(f.BitCount),
 		saveReturnFloat32(f.LowValue, "nil"),
 		saveReturnFloat32(f.HighValue, "nil"),
@@ -47,21 +63,13 @@ func decodeFloat(r *Reader, f *dt_field) interface{} {
 		f.Encoder,
 	)
 
-	// Parse specific encoders
-	switch f.Encoder {
-	case "coord":
-		return r.readCoord()
-	}
-
 	var BitCount int
 	var Low float32
 	var High float32
+	var Flags int32
 
 	if f.BitCount != nil {
 		BitCount = int(*f.BitCount)
-	} else {
-		// Maybe treated as no scale or something?
-		return r.readVarUint32()
 	}
 
 	if f.LowValue != nil {
@@ -77,31 +85,37 @@ func decodeFloat(r *Reader, f *dt_field) interface{} {
 	}
 
 	if f.Flags != nil {
-		// Skip this case
-		if *f.Flags&0x4 != 0 && f.LowValue == nil {
-			// This doesn't fell right
-			return r.readBits(2)
-		}
-
-		// Read raw float
-		if *f.Flags&0x100 != 0 {
-			return r.readBits(BitCount)
-		}
-
-		// read low value if empty
-		if *f.Flags&0x10 != 0 && r.readBoolean() {
-			return f.LowValue
-		}
-
-		// read high value if empty
-		if *f.Flags&0x20 != 0 && r.readBoolean() {
-			return f.HighValue
-		}
+		Flags = *f.Flags
+	} else {
+		Flags = 0
 	}
 
-	dividend := r.readBits(BitCount)
-	divisor := (1 << uint32(BitCount)) - 1
-	return Low + (float32(dividend)/float32(divisor))*(High-Low)
+	// if the bitcount is 0 or > 32, treat this as a noscale with 32 bits
+	if BitCount <= 0 || BitCount >= 32 {
+		return math.Float32frombits(r.readBits(32))
+	}
+
+	if (Flags & 0x100) != 0 {
+		r.seekBits(int(*f.BitCount))
+		return 0.0
+	} else {
+		if (Flags&0x10) != 0 && r.readBoolean() {
+			return Low
+		}
+
+		if (Flags&0x20) != 0 && r.readBoolean() {
+			return High
+		}
+
+		if (Flags&0x40) != 0 && r.readBoolean() {
+			return 0.0
+		}
+
+		intVal := r.readBits(BitCount)
+		flVal := float32(intVal) * (1.0 / (float32(uint(1<<uint(BitCount))) - 1))
+		flVal = Low + (High-Low)*flVal
+		return flVal
+	}
 }
 
 func decodeString(r *Reader, f *dt_field) interface{} {
@@ -120,11 +134,6 @@ func decodeVector(r *Reader, f *dt_field) interface{} {
 
 func decodeClass(r *Reader, f *dt_field) interface{} {
 	return r.readVarUint32()
-}
-
-func decodeQuantized(r *Reader, f *dt_field) interface{} {
-	// Lets do this for now
-	return decodeFloat(r, f)
 }
 
 func decodeFVector(r *Reader, f *dt_field) interface{} {
