@@ -1,6 +1,7 @@
 package manta
 
 import (
+	"math"
 	"strconv"
 )
 
@@ -38,70 +39,54 @@ func decodeBoolean(r *Reader, f *dt_field) interface{} {
 }
 
 func decodeFloat(r *Reader, f *dt_field) interface{} {
-	_debugf(
-		"Bitcount: %v, Low: %v, High: %v, Flags: %v, Encoder: %v",
-		saveReturnInt32(f.BitCount),
-		saveReturnFloat32(f.LowValue, "nil"),
-		saveReturnFloat32(f.HighValue, "nil"),
-		strconv.FormatInt(int64(saveReturnInt32(f.Flags)), 2),
-		f.Encoder,
-	)
-
 	// Parse specific encoders
 	switch f.Encoder {
 	case "coord":
 		return r.readCoord()
 	}
 
-	var BitCount int
-	var Low float32
-	var High float32
-
 	if f.BitCount != nil {
-		BitCount = int(*f.BitCount)
+		// equivalent to the old noscale
+		return decodeFloatNoscale(r, f)
 	} else {
-		// Maybe treated as no scale or something?
 		return r.readVarUint32()
 	}
+}
 
-	if f.LowValue != nil {
-		Low = *f.LowValue
-	} else {
-		Low = 0.0
+func decodeFloatNoscale(r *Reader, f *dt_field) interface{} {
+	return math.Float32frombits(r.readBits(int(*f.BitCount)))
+}
+
+// A list of field -> encoder types
+var qmap map[*dt_field]*QuantizedFloatDecoder
+
+func decodeQuantized(r *Reader, f *dt_field) interface{} {
+	if qmap == nil {
+		qmap = make(map[*dt_field]*QuantizedFloatDecoder, 0)
 	}
 
-	if f.HighValue != nil {
-		High = *f.HighValue
-	} else {
-		High = 1.0
+	// Get the correct decoder
+	q, ok := qmap[f]
+
+	if !ok {
+		qmap[f] = InitQFD(f)
+		q = qmap[f]
 	}
 
-	if f.Flags != nil {
-		// Skip this case
-		if *f.Flags&0x4 != 0 && f.LowValue == nil {
-			// This doesn't fell right
-			return r.readBits(2)
-		}
+	// Decode value
+	_debugf(
+		"Bitcount: %v, Low: %v, High: %v, Flags: %v",
+		q.Bitcount,
+		q.Low,
+		q.High,
+		strconv.FormatInt(int64(q.Flags), 2),
+	)
 
-		// Read raw float
-		if *f.Flags&0x100 != 0 {
-			return r.readBits(BitCount)
-		}
+	return q.Decode(r)
+}
 
-		// read low value if empty
-		if *f.Flags&0x10 != 0 && r.readBoolean() {
-			return f.LowValue
-		}
-
-		// read high value if empty
-		if *f.Flags&0x20 != 0 && r.readBoolean() {
-			return f.HighValue
-		}
-	}
-
-	dividend := r.readBits(BitCount)
-	divisor := (1 << uint32(BitCount)) - 1
-	return Low + (float32(dividend)/float32(divisor))*(High-Low)
+func decodeSimTime(r *Reader, f *dt_field) interface{} {
+	return float32(r.readVarUint32()) * (1.0 / 30)
 }
 
 func decodeString(r *Reader, f *dt_field) interface{} {
@@ -120,11 +105,6 @@ func decodeVector(r *Reader, f *dt_field) interface{} {
 
 func decodeClass(r *Reader, f *dt_field) interface{} {
 	return r.readVarUint32()
-}
-
-func decodeQuantized(r *Reader, f *dt_field) interface{} {
-	// Lets do this for now
-	return decodeFloat(r, f)
 }
 
 func decodeFVector(r *Reader, f *dt_field) interface{} {
@@ -151,29 +131,50 @@ func decodePointer(r *Reader, f *dt_field) interface{} {
 }
 
 func decodeQAngle(r *Reader, f *dt_field) interface{} {
-	if f.Flags != nil {
-		// There is a flag check against 0x20 in the disasembly
-		_debugf("Angle flags: %v", *f.Flags)
-	}
-
 	ret := [3]float32{0.0, 0.0, 0.0}
 
-	rX := r.readBoolean()
-	rY := r.readBoolean()
-	rZ := r.readBoolean()
+	// Parse specific encoders
+	switch f.Encoder {
+	case "qangle_pitch_yaw":
+		if f.BitCount != nil && f.Flags != nil && (*f.Flags&0x20 != 0) {
+			_panicf("Special Case: Unkown for now")
+		}
 
-	if rX {
-		ret[0] = r.readCoord()
+		ret[0] = r.readAngle(uint(*f.BitCount))
+		ret[1] = r.readAngle(uint(*f.BitCount))
+		return ret
 	}
 
-	if rY {
-		ret[1] = r.readCoord()
+	// Parse a standard angle
+	if f.BitCount != nil && *f.BitCount == 32 {
+		_panicf("Special Case: Unkown for now")
+	} else if f.BitCount != nil && *f.BitCount != 0 {
+		ret[0] = r.readAngle(uint(*f.BitCount))
+		ret[1] = r.readAngle(uint(*f.BitCount))
+		ret[2] = r.readAngle(uint(*f.BitCount))
+
+		return ret
+	} else {
+		rX := r.readBoolean()
+		rY := r.readBoolean()
+		rZ := r.readBoolean()
+
+		if rX {
+			ret[0] = r.readCoord()
+		}
+
+		if rY {
+			ret[1] = r.readCoord()
+		}
+
+		if rZ {
+			ret[2] = r.readCoord()
+		}
+
+		return ret
 	}
 
-	if rZ {
-		ret[2] = r.readCoord()
-	}
-
+	_panicf("No valid encoding determined")
 	return ret
 }
 

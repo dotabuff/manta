@@ -176,6 +176,23 @@ func (r *Reader) readUBitVar2() uint32 {
 	}
 }
 
+// Ubit variant used in the fieldpath
+func (r *Reader) readUBitVarFP() uint32 {
+	if r.readBoolean() {
+		return r.readBits(2)
+	}
+	if r.readBoolean() {
+		return r.readBits(4)
+	}
+	if r.readBoolean() {
+		return r.readBits(10)
+	}
+	if r.readBoolean() {
+		return r.readBits(17)
+	}
+	return r.readBits(31)
+}
+
 // Reads the next byte (8 bits) in the buffer.
 func (r *Reader) readByte() byte {
 	// Fast path if our position is byte-aligned.
@@ -280,6 +297,11 @@ func (r *Reader) readCoord() float32 {
 	}
 
 	return value
+}
+
+// Reads a bit angle
+func (r *Reader) readAngle(n uint) float32 {
+	return float32(r.readBits(int(n))) * 360.0 / float32(int(1<<n))
 }
 
 // Read normalized float
