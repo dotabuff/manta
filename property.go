@@ -1,11 +1,16 @@
 package manta
 
+var huf HuffmanTree
+
 func ReadProperties(r *Reader, ser *dt) (result map[string]interface{}) {
 	// Return type
 	result = make(map[string]interface{})
 
-	// Generate the huffman tree and fieldpath
-	huf := newFieldpathHuffman()
+	if huf == nil {
+		huf = newFieldpathHuffman()
+	}
+
+	// Create fieldpath
 	fieldPath := newFieldpath(ser, &huf)
 
 	// Get a list of the included fields
