@@ -15,7 +15,7 @@ func ReadProperties(r *Reader, ser *dt) (result map[string]interface{}) {
 	for _, f := range fieldPath.fields {
 		if f.Field.Serializer.Decode == nil {
 			result[f.Name] = r.readVarUint32()
-			_debugf("Reading %s - %s as varint %v", f.Name, f.Field.Type, result[f.Name])
+			_debugfl(6, "Decoded default: %d %s %s %v", r.pos, f.Name, f.Field.Type, result[f.Name])
 			continue
 		}
 
@@ -25,7 +25,7 @@ func ReadProperties(r *Reader, ser *dt) (result map[string]interface{}) {
 			result[f.Name] = f.Field.Serializer.Decode(r, f.Field)
 		}
 
-		_debugf("Decoded: %d %s %s %v", r.pos, f.Name, f.Field.Type, result[f.Name])
+		_debugfl(6, "Decoded: %d %s %s %v", r.pos, f.Name, f.Field.Type, result[f.Name])
 	}
 
 	return result
