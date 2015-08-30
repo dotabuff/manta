@@ -6,12 +6,7 @@ import (
 )
 
 func decodeHandle(r *Reader, f *dt_field) interface{} {
-	// So far these seem to occupy 32 bits but the value is made up only
-	// out of what's present in the first 21 bits. In source 1, these only
-	// occupied 21 bits of space.
-	value := r.readBits(21) // a uint32
-	r.seekBits(11)          // skip the rest of the 32 bits
-	return value
+	return r.readVarUint32()
 }
 
 func decodeByte(r *Reader, f *dt_field) interface{} {
