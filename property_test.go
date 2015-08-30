@@ -255,6 +255,16 @@ func TestReadProperties(t *testing.T) {
 				"m_CompendiumChallengeInfo.0023.nType": 0,
 			},
 		},
+
+		{
+			tableName:   "CDOTAPlayer",
+			run:         true,
+			debug:       false,
+			expectCount: 136,
+			expectKeys: map[string]interface{}{
+				"m_hViewEntity": HANDLE_NONE,
+			},
+		},
 	}
 
 	// Load our send tables
