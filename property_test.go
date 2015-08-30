@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	HANDLE_NONE = uint32(2097151)
+	HANDLE_NONE = uint32(16777215)
 )
 
 func TestReadProperties(t *testing.T) {
@@ -191,7 +191,7 @@ func TestReadProperties(t *testing.T) {
 			debug:       false,
 			expectCount: 412,
 			expectKeys: map[string]interface{}{
-				"CDOTASpectatorGraphManager.m_rgPlayerGraphData.0000": uint32(2097151),
+				"CDOTASpectatorGraphManager.m_rgPlayerGraphData.0000": HANDLE_NONE,
 				"CDOTASpectatorGraphManager.m_rgDireNetWorth.0063":    int32(0),
 				"CDOTASpectatorGraphManager.m_nGoldGraphVersion":      int32(3),
 			},
@@ -291,6 +291,11 @@ func TestReadProperties(t *testing.T) {
 
 		// Optionally disable debugging
 		debugMode = s.debug
+		if debugMode {
+			debugLevel = 10
+		} else {
+			debugLevel = 0
+		}
 
 		// Read properties
 		r := NewReader(buf)
