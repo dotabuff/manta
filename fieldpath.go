@@ -159,14 +159,14 @@ func (fp *fieldpath) addField() {
 		path += strconv.Itoa(int(fp.index[i])) + "/"
 	}
 
-	_debugfl(10, "Adding field with path: %s%d", path, fp.index[len(fp.index)-1])
+	_debugfl(6, "Adding field with path: %s%d", path, fp.index[len(fp.index)-1])
 
 	for i = 0; i < len(fp.index)-1; i++ {
 		if cDt.Properties[fp.index[i]].Table != nil {
 			cDt = cDt.Properties[fp.index[i]].Table
 			name += cDt.Name + "."
 		} else {
-			_panicf("expected table in fp properties")
+			_panicf("expected table in fp properties: %v, %v", cDt.Properties[fp.index[i]].Field.Name, cDt.Properties[fp.index[i]].Field.Type)
 		}
 	}
 
@@ -295,7 +295,7 @@ func PushTwoLeftDeltaOne(r *Reader, fp *fieldpath) {
 func PushTwoLeftDeltaN(r *Reader, fp *fieldpath) {
 	_debugfl(10, "Name: %s", fp.parent.Name)
 
-	fp.index[len(fp.index)-1] += int32(r.readUBitVar())
+	fp.index[len(fp.index)-1] += int32(r.readUBitVar()) + 2
 	fp.index = append(fp.index, int32(r.readUBitVarFP()))
 	fp.index = append(fp.index, int32(r.readUBitVarFP()))
 }
@@ -356,7 +356,7 @@ func PushNAndNonTopological(r *Reader, fp *fieldpath) {
 
 	for i := 0; i < len(fp.index); i++ {
 		if r.readBoolean() {
-			fp.index[i] += r.readVarInt32()
+			fp.index[i] += r.readVarInt32() + 1
 		}
 	}
 
@@ -426,7 +426,10 @@ func PopNPlusOne(r *Reader, fp *fieldpath) {
 }
 
 func PopNPlusN(r *Reader, fp *fieldpath) {
-	_panicf("Name: %s", fp.parent.Name)
+	_debugfl(10, "Name: %s", fp.parent.Name)
+
+	fp.index = fp.index[:len(fp.index)-(int(r.readUBitVarFP()))]
+	fp.index[len(fp.index)-1] += r.readVarInt32()
 }
 
 func PopNAndNonTopographical(r *Reader, fp *fieldpath) {
