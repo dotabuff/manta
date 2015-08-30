@@ -89,13 +89,8 @@ func decodeString(r *Reader, f *dt_field) interface{} {
 }
 
 func decodeVector(r *Reader, f *dt_field) interface{} {
-	size := r.readVarUint32()
 
-	if size > 0 {
-		_panicf("Ive been called, %v", size)
-	}
-
-	return 0
+	return r.readVarUint32()
 }
 
 func decodeClass(r *Reader, f *dt_field) interface{} {
