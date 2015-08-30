@@ -119,9 +119,12 @@ func (fp *fieldpath) walk(r *Reader) {
 			if i := (*node).Right(); i.IsLeaf() {
 				node = root
 				fieldpathLookup[i.Value()].Function(r, fp)
-				fp.addField()
 
-				_debugfl(6, "Reached in %d bits, %s, %d", cnt, fp.fields[len(fp.fields)-1].Name, r.pos)
+				if fp.finished == false {
+					fp.addField()
+					_debugfl(6, "Reached in %d bits, %s, %d", cnt, fp.fields[len(fp.fields)-1].Name, r.pos)
+				}
+
 				cnt = 0
 			} else {
 				node = &i
@@ -130,18 +133,18 @@ func (fp *fieldpath) walk(r *Reader) {
 			if i := (*node).Left(); i.IsLeaf() {
 				node = root
 				fieldpathLookup[i.Value()].Function(r, fp)
-				fp.addField()
 
-				_debugfl(6, "Reached in %d bits, %s, %d", cnt, fp.fields[len(fp.fields)-1].Name, r.pos)
+				if fp.finished == false {
+					fp.addField()
+					_debugfl(6, "Reached in %d bits, %s, %d", cnt, fp.fields[len(fp.fields)-1].Name, r.pos)
+				}
+
 				cnt = 0
 			} else {
 				node = &i
 			}
 		}
 	}
-
-	// Will always add one additional field for the finishEncoding operation, remove it
-	fp.fields = fp.fields[:len(fp.fields)-1]
 }
 
 // Adds a field based on the current index
@@ -226,22 +229,13 @@ func PushOneLeftDeltaZeroRightZero(r *Reader, fp *fieldpath) {
 }
 
 func PushOneLeftDeltaZeroRightNonZero(r *Reader, fp *fieldpath) {
-	_panicf("Name: %s", fp.parent.Name)
+	_debugfl(10, "Name: %s", fp.parent.Name)
 
-	// should be correct, not encountered however
-	/*rBits := []int{2, 4, 10, 17, 30}
-
-	for _, bits := range rBits {
-		if r.readBits(1) == 1 {
-			fp.index = append(fp.index, int32(r.readBits(bits)))
-			_debugf("Index: %v, BitsL %v", fp.index, bits)
-			return
-		}
-	}*/
+	fp.index = append(fp.index, int32(r.readUBitVarFP()))
 }
 
 func PushOneLeftDeltaOneRightZero(r *Reader, fp *fieldpath) {
-	_debugf("Name: %s", fp.parent.Name)
+	_debugfl(10, "Name: %s", fp.parent.Name)
 
 	// Push +1, set index to 0
 	fp.index[len(fp.index)-1] += 1
@@ -249,40 +243,61 @@ func PushOneLeftDeltaOneRightZero(r *Reader, fp *fieldpath) {
 }
 
 func PushOneLeftDeltaOneRightNonZero(r *Reader, fp *fieldpath) {
-	_panicf("Name: %s", fp.parent.Name)
+	_debugfl(10, "Name: %s", fp.parent.Name)
+
+	fp.index[len(fp.index)-1] += 1
+	fp.index = append(fp.index, int32(r.readUBitVarFP()))
 }
 
 func PushOneLeftDeltaNRightZero(r *Reader, fp *fieldpath) {
-	_panicf("Name: %s", fp.parent.Name)
+	_debugfl(10, "Name: %s", fp.parent.Name)
+
+	fp.index[len(fp.index)-1] += int32(r.readUBitVarFP())
+	fp.index = append(fp.index, 0)
 }
 
 func PushOneLeftDeltaNRightNonZero(r *Reader, fp *fieldpath) {
-	_panicf("Name: %s", fp.parent.Name)
+	_debugfl(10, "Name: %s", fp.parent.Name)
 
+	fp.index[len(fp.index)-1] += int32(r.readUBitVarFP()) + 2
+	fp.index = append(fp.index, int32(r.readUBitVarFP())+1)
 }
 
 func PushOneLeftDeltaNRightNonZeroPack6Bits(r *Reader, fp *fieldpath) {
-	_panicf("Name: %s", fp.parent.Name)
+	_debugfl(10, "Name: %s", fp.parent.Name)
+
+	fp.index[len(fp.index)-1] += int32(r.readBits(3)) + 2
+	fp.index = append(fp.index, int32(r.readBits(3))+1)
 }
 
 func PushOneLeftDeltaNRightNonZeroPack8Bits(r *Reader, fp *fieldpath) {
-	_panicf("Name: %s", fp.parent.Name)
+	_debugfl(10, "Name: %s", fp.parent.Name)
+
+	fp.index[len(fp.index)-1] += int32(r.readBits(4)) + 2
+	fp.index = append(fp.index, int32(r.readBits(4))+1)
 }
 
 func PushTwoLeftDeltaZero(r *Reader, fp *fieldpath) {
-	_panicf("Name: %s", fp.parent.Name)
+	_debugfl(10, "Name: %s", fp.parent.Name)
 
-	// wrong
-	//fp.index = append(fp.index, 0)
-	//fp.index = append(fp.index, 0)
+	fp.index = append(fp.index, 0)
+	fp.index = append(fp.index, 0)
 }
 
 func PushTwoLeftDeltaOne(r *Reader, fp *fieldpath) {
-	_panicf("Name: %s", fp.parent.Name)
+	_debugfl(10, "Name: %s", fp.parent.Name)
+
+	fp.index[len(fp.index)-1]++
+	fp.index = append(fp.index, int32(r.readUBitVarFP()))
+	fp.index = append(fp.index, int32(r.readUBitVarFP()))
 }
 
 func PushTwoLeftDeltaN(r *Reader, fp *fieldpath) {
-	_panicf("Name: %s", fp.parent.Name)
+	_debugfl(10, "Name: %s", fp.parent.Name)
+
+	fp.index[len(fp.index)-1] += int32(r.readUBitVar())
+	fp.index = append(fp.index, int32(r.readUBitVarFP()))
+	fp.index = append(fp.index, int32(r.readUBitVarFP()))
 }
 
 func PushTwoPack5LeftDeltaZero(r *Reader, fp *fieldpath) {
@@ -293,11 +308,19 @@ func PushTwoPack5LeftDeltaZero(r *Reader, fp *fieldpath) {
 }
 
 func PushTwoPack5LeftDeltaOne(r *Reader, fp *fieldpath) {
-	_panicf("Name: %s", fp.parent.Name)
+	_debugfl(10, "Name: %s", fp.parent.Name)
+
+	fp.index[len(fp.index)-1]++
+	fp.index = append(fp.index, int32(r.readBits(5)))
+	fp.index = append(fp.index, int32(r.readBits(5)))
 }
 
 func PushTwoPack5LeftDeltaN(r *Reader, fp *fieldpath) {
-	_panicf("Name: %s", fp.parent.Name)
+	_debugfl(10, "Name: %s", fp.parent.Name)
+
+	fp.index[len(fp.index)-1] += int32(r.readUBitVar()) + 2
+	fp.index = append(fp.index, int32(r.readBits(5)))
+	fp.index = append(fp.index, int32(r.readBits(5)))
 }
 
 func PushThreeLeftDeltaZero(r *Reader, fp *fieldpath) {
@@ -329,7 +352,18 @@ func PushN(r *Reader, fp *fieldpath) {
 }
 
 func PushNAndNonTopological(r *Reader, fp *fieldpath) {
-	_panicf("Name: %s", fp.parent.Name)
+	_debugfl(10, "Name: %s", fp.parent.Name)
+
+	for i := 0; i < len(fp.index); i++ {
+		if r.readBoolean() {
+			fp.index[i] += r.readVarInt32()
+		}
+	}
+
+	count := int(r.readUBitVar())
+	for j := 0; j < count; j++ {
+		fp.index = append(fp.index, int32(r.readUBitVarFP()))
+	}
 }
 
 func PopOnePlusOne(r *Reader, fp *fieldpath) {
@@ -345,7 +379,10 @@ func PopOnePlusOne(r *Reader, fp *fieldpath) {
 }
 
 func PopOnePlusN(r *Reader, fp *fieldpath) {
-	_panicf("Name: %s", fp.parent.Name)
+	_debugfl(10, "Name: %s", fp.parent.Name)
+
+	fp.index = fp.index[:len(fp.index)-1]
+	fp.index[len(fp.index)-1] += int32(r.readUBitVarFP()) + 1
 }
 
 func PopAllButOnePlusOne(r *Reader, fp *fieldpath) {
@@ -357,7 +394,10 @@ func PopAllButOnePlusOne(r *Reader, fp *fieldpath) {
 }
 
 func PopAllButOnePlusN(r *Reader, fp *fieldpath) {
-	_panicf("Name: %s", fp.parent.Name)
+	_debugfl(10, "Name: %s", fp.parent.Name)
+
+	fp.index = fp.index[:1]
+	fp.index[len(fp.index)-1] += int32(r.readUBitVarFP()) + 1
 }
 
 func PopAllButOnePlusNPackN(r *Reader, fp *fieldpath) {
@@ -365,11 +405,17 @@ func PopAllButOnePlusNPackN(r *Reader, fp *fieldpath) {
 }
 
 func PopAllButOnePlusNPack3Bits(r *Reader, fp *fieldpath) {
-	_panicf("Name: %s", fp.parent.Name)
+	_debugfl(10, "Name: %s", fp.parent.Name)
+
+	fp.index = fp.index[:1]
+	fp.index[len(fp.index)-1] += int32(r.readBits(3)) + 1
 }
 
 func PopAllButOnePlusNPack6Bits(r *Reader, fp *fieldpath) {
-	_panicf("Name: %s", fp.parent.Name)
+	_debugfl(10, "Name: %s", fp.parent.Name)
+
+	fp.index = fp.index[:1]
+	fp.index[len(fp.index)-1] += int32(r.readBits(6)) + 1
 }
 
 func PopNPlusOne(r *Reader, fp *fieldpath) {
@@ -408,31 +454,13 @@ func NonTopoComplex(r *Reader, fp *fieldpath) {
 }
 
 func NonTopoPenultimatePlusOne(r *Reader, fp *fieldpath) {
-	_panicf("Name: %s", fp.parent.Name)
+	_debugfl(10, "Name: %s", fp.parent.Name)
+
+	fp.index[len(fp.index)-2] += 1
 }
 
 func NonTopoComplexPack4Bits(r *Reader, fp *fieldpath) {
 	_debugfl(10, "Name: %s", fp.parent.Name)
-
-	// NonTopological = Disregard the hierarchy, work directly on the field
-	// indizies for now
-	//
-	// Variables:
-	// v4 = 0; // Incremented by 1 each loop
-	// v3 = CFieldPath;
-	//
-	// Assumptions:
-	// - Path data (array with MaxDepth) is first element of CFieldPath
-	// - Current depth has an offset of 8 from CFieldPath
-	//
-	// Each loop does the following:
-	// - Read 1 bit, if it is set, break
-	// - Read 4 bits, substract 7 = v5
-	// - Apply the data read to the v4'th index: v3[v4] += v5
-	//
-	// End condition:
-	// - r.readBits(1) == 1
-	// - Reached current depth (see assumption)
 
 	for i := 0; i < len(fp.index); i++ {
 		if r.readBoolean() {
