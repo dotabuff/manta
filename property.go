@@ -2,12 +2,21 @@ package manta
 
 var huf HuffmanTree
 
-func ReadProperties(r *Reader, ser *dt) (result map[string]interface{}) {
+func init() {
+	if huf == nil {
+		huf = newFieldpathHuffman()
+	}
+}
+
+func ReadProperties(r *Reader, ser *dt, baseline map[string]interface{}) (result map[string]interface{}) {
 	// Return type
 	result = make(map[string]interface{})
 
-	if huf == nil {
-		huf = newFieldpathHuffman()
+	// Copy baseline if any
+	if baseline != nil {
+		for k, v := range baseline {
+			result[k] = v
+		}
 	}
 
 	// Create fieldpath
