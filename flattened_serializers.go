@@ -262,6 +262,6 @@ func ParseSendTables(m *dota.CDemoSendTables, pst *PropertySerializerTable) *fla
 
 // Internal callback for OnCDemoSendTables.
 func (p *Parser) onCDemoSendTables(m *dota.CDemoSendTables) error {
-	p.Serializers = ParseSendTables(m, GetDefaultPropertySerializerTable()).Serializers
+	p.serializers = ParseSendTables(m, GetDefaultPropertySerializerTable()).Serializers
 	return nil
 }

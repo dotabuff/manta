@@ -8,16 +8,31 @@ func init() {
 	}
 }
 
-func ReadProperties(r *Reader, ser *dt, baseline map[string]interface{}) (result map[string]interface{}) {
-	// Return type
-	result = make(map[string]interface{})
+type Properties struct {
+	KV map[string]interface{}
+}
 
-	// Copy baseline if any
-	if baseline != nil {
-		for k, v := range baseline {
-			result[k] = v
-		}
+func NewProperties() *Properties {
+	return &Properties{
+		KV: map[string]interface{}{},
 	}
+}
+
+func (p *Properties) Merge(p2 *Properties) {
+	for k, v := range p2.KV {
+		p.KV[k] = v
+	}
+}
+
+func (p *Properties) Fetch(k string) (interface{}, bool) {
+	v, ok := p.KV[k]
+	return v, ok
+}
+
+// Reads properties using a given reader and serializer.
+func ReadProperties(r *Reader, ser *dt) (result *Properties) {
+	// Return type
+	result = NewProperties()
 
 	// Create fieldpath
 	fieldPath := newFieldpath(ser, &huf)
@@ -28,18 +43,18 @@ func ReadProperties(r *Reader, ser *dt, baseline map[string]interface{}) (result
 	// iterate all the fields and set their corresponding values
 	for _, f := range fieldPath.fields {
 		if f.Field.Serializer.Decode == nil {
-			result[f.Name] = r.readVarUint32()
-			_debugfl(6, "Decoded default: %d %s %s %v", r.pos, f.Name, f.Field.Type, result[f.Name])
+			result.KV[f.Name] = r.readVarUint32()
+			_debugfl(6, "Decoded default: %d %s %s %v", r.pos, f.Name, f.Field.Type, result.KV[f.Name])
 			continue
 		}
 
 		if f.Field.Serializer.DecodeContainer != nil {
-			result[f.Name] = f.Field.Serializer.DecodeContainer(r, f.Field)
+			result.KV[f.Name] = f.Field.Serializer.DecodeContainer(r, f.Field)
 		} else {
-			result[f.Name] = f.Field.Serializer.Decode(r, f.Field)
+			result.KV[f.Name] = f.Field.Serializer.Decode(r, f.Field)
 		}
 
-		_debugfl(6, "Decoded: %d %s %s %v", r.pos, f.Name, f.Field.Type, result[f.Name])
+		_debugfl(6, "Decoded: %d %s %s %v", r.pos, f.Name, f.Field.Type, result.KV[f.Name])
 	}
 
 	return result

@@ -299,11 +299,12 @@ func TestReadProperties(t *testing.T) {
 
 		// Read properties
 		r := NewReader(buf)
-		props := ReadProperties(r, serializer, nil)
-		assert.Equal(s.expectCount, len(props))
+		props := ReadProperties(r, serializer)
+		assert.Equal(s.expectCount, len(props.KV))
 
 		for k, v := range s.expectKeys {
-			assert.EqualValues(v, props[k])
+			got, _ := props.Fetch(k)
+			assert.EqualValues(v, got)
 		}
 
 		// There shouldn't be more than 8 bits left in the buffer

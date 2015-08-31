@@ -24,17 +24,18 @@ type Parser struct {
 	// Contains the net tick associated with the last net message processed.
 	NetTick uint32
 
-	hasClassInfo      bool
-	ClassInfo         map[int32]string
+	ClassBaselines map[int32]*Properties
+	ClassInfo      map[int32]string
+	PacketEntities map[int32]*PacketEntity
+	StringTables   *StringTables
+
 	classIdSize       int
-	ClassBaseline     map[int32]map[string]interface{}
-	packetEntities    map[int32]*packetEntity
-	StringTables      *StringTables
-	Serializers       map[string]map[int32]*dt
-	spawnGroups       map[uint32]*spawnGroup
+	gameEventHandlers map[string][]gameEventHandler
 	gameEventNames    map[int32]string
 	gameEventTypes    map[string]*gameEventType
-	gameEventHandlers map[string][]gameEventHandler
+	hasClassInfo      bool
+	serializers       map[string]map[int32]*dt
+	spawnGroups       map[uint32]*spawnGroup
 
 	reader            *Reader
 	isStopping        bool
@@ -56,21 +57,21 @@ func NewParser(buf []byte) (*Parser, error) {
 	// Create a new parser with an internal reader for the given buffer.
 	parser := &Parser{
 		Callbacks: &Callbacks{},
+		Tick:      0,
+		NetTick:   0,
 
-		Tick:    0,
-		NetTick: 0,
+		ClassBaselines: make(map[int32]*Properties),
+		ClassInfo:      make(map[int32]string),
+		PacketEntities: make(map[int32]*PacketEntity),
+		StringTables:   newStringTables(),
+
+		gameEventHandlers: make(map[string][]gameEventHandler),
+		gameEventNames:    make(map[int32]string),
+		gameEventTypes:    make(map[string]*gameEventType),
+		spawnGroups:       make(map[uint32]*spawnGroup),
 
 		reader:     NewReader(buf),
 		isStopping: false,
-
-		ClassInfo:         make(map[int32]string),
-		ClassBaseline:     make(map[int32]map[string]interface{}),
-		packetEntities:    make(map[int32]*packetEntity),
-		StringTables:      newStringTables(),
-		spawnGroups:       make(map[uint32]*spawnGroup),
-		gameEventNames:    make(map[int32]string),
-		gameEventTypes:    make(map[string]*gameEventType),
-		gameEventHandlers: make(map[string][]gameEventHandler),
 	}
 
 	// Parse out the header, ensuring that it's valid.
