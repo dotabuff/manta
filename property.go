@@ -27,6 +27,8 @@ func ReadProperties(r *Reader, ser *dt, baseline map[string]interface{}) (result
 
 	// iterate all the fields and set their corresponding values
 	for _, f := range fieldPath.fields {
+		_debugfl(6, "Decoding %s %s", f.Name, f.Field.Type)
+
 		if f.Field.Serializer.Decode == nil {
 			result[f.Name] = r.readVarUint32()
 			_debugfl(6, "Decoded default: %d %s %s %v", r.pos, f.Name, f.Field.Type, result[f.Name])
