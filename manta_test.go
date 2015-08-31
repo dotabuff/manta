@@ -19,6 +19,19 @@ func TestParseOneMatch(t *testing.T) {
 	assert.Nil(err)
 }
 
+func TestParseOneMatchWithoutPE(t *testing.T) {
+	assert := assert.New(t)
+	debugLevel = 0
+	testLevel = 0
+
+	buf := mustGetReplayData("1731962898", "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1731962898.dem")
+	parser, err := NewParser(buf)
+	parser.ProcessPacketEntities = false
+	assert.Nil(err)
+	err = parser.Start()
+	assert.Nil(err)
+}
+
 // Simply tests that we can read the outer structure of a real match
 func TestParseRealMatches(t *testing.T) {
 	assert := assert.New(t)

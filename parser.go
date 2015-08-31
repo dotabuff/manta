@@ -24,6 +24,9 @@ type Parser struct {
 	// Contains the net tick associated with the last net message processed.
 	NetTick uint32
 
+	// Determines whether or not PacketEntity events are processed.
+	ProcessPacketEntities bool
+
 	ClassBaselines map[int32]*Properties
 	ClassInfo      map[int32]string
 	PacketEntities map[int32]*PacketEntity
@@ -59,6 +62,8 @@ func NewParser(buf []byte) (*Parser, error) {
 		Callbacks: &Callbacks{},
 		Tick:      0,
 		NetTick:   0,
+
+		ProcessPacketEntities: true,
 
 		ClassBaselines: make(map[int32]*Properties),
 		ClassInfo:      make(map[int32]string),

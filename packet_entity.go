@@ -29,6 +29,10 @@ func (pe *PacketEntity) Fetch(key string) (interface{}, bool) {
 
 // Internal callback for CSVCMsg_PacketEntities.
 func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error {
+	if !p.ProcessPacketEntities {
+		return nil
+	}
+
 	_debugfl(5, "pTick=%d isDelta=%v deltaFrom=%d updatedEntries=%d maxEntries=%d baseline=%d updateBaseline=%v", p.Tick, m.GetIsDelta(), m.GetDeltaFrom(), m.GetUpdatedEntries(), m.GetMaxEntries(), m.GetBaseline(), m.GetUpdateBaseline())
 
 	r := NewReader(m.GetEntityData())
