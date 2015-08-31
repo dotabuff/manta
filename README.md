@@ -9,7 +9,7 @@ Manta is a Dota 2 replay parser written in [Go](https://golang.org). It targets 
 - Dota 2 Reborn (Source 2) has been released as a beta.
 - Replays from Source 2 matches are widely available for download.
 - Manta is structurally feature complete and in use at Dotabuff
-- Manta currently handles nearly all packets, the major exception being packet entities.
+- Manta currently handles nearly all packets, including the packet entities
 
 ## Getting Started
 

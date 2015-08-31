@@ -84,7 +84,13 @@ func (p *Parser) updateInstanceBaselineItem(item *StringTableItem) {
 	// Parse the properties out of the string table buffer and store
 	// them as the class baseline in the Parser.
 	if len(item.Value) > 0 {
-		_debugf("Parsing entity baseline %v", serializer[0].Name)
-		p.ClassBaseline[classId] = ReadProperties(NewReader(item.Value), serializer[0])
+		_debugfl(1, "Parsing entity baseline %v", serializer[0].Name)
+		r := NewReader(item.Value)
+		p.ClassBaseline[classId] = ReadProperties(r, serializer[0], nil)
+
+		// Inline test the baselines
+		if testLevel >= 1 && r.remBits() > 8 {
+			_panicf("Too many bits remaining in baseline %v, %v", serializer[0].Name, r.remBits())
+		}
 	}
 }

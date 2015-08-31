@@ -15,6 +15,7 @@ import (
 )
 
 var debugMode, traceMode, fixturesMode bool
+var debugLevel, testLevel uint // Test level refers to the inline-test level which runs additional checks on the data
 
 func init() {
 	if os.Getenv("DEBUG") != "" {
@@ -40,6 +41,14 @@ func atoi32(s string) (int32, error) {
 		return 0, err
 	}
 	return int32(n), nil
+}
+
+// printf with debug level
+func _debugfl(level uint, format string, args ...interface{}) {
+	if level <= debugLevel {
+		args = append([]interface{}{_caller(2)}, args...)
+		fmt.Printf("%s: "+format+"\n", args...)
+	}
 }
 
 // printf only if debugging

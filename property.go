@@ -1,11 +1,25 @@
 package manta
 
-func ReadProperties(r *Reader, ser *dt) (result map[string]interface{}) {
+var huf HuffmanTree
+
+func init() {
+	if huf == nil {
+		huf = newFieldpathHuffman()
+	}
+}
+
+func ReadProperties(r *Reader, ser *dt, baseline map[string]interface{}) (result map[string]interface{}) {
 	// Return type
 	result = make(map[string]interface{})
 
-	// Generate the huffman tree and fieldpath
-	huf := newFieldpathHuffman()
+	// Copy baseline if any
+	if baseline != nil {
+		for k, v := range baseline {
+			result[k] = v
+		}
+	}
+
+	// Create fieldpath
 	fieldPath := newFieldpath(ser, &huf)
 
 	// Get a list of the included fields
@@ -15,7 +29,7 @@ func ReadProperties(r *Reader, ser *dt) (result map[string]interface{}) {
 	for _, f := range fieldPath.fields {
 		if f.Field.Serializer.Decode == nil {
 			result[f.Name] = r.readVarUint32()
-			_debugf("Reading %s - %s as varint %v", f.Name, f.Field.Type, result[f.Name])
+			_debugfl(6, "Decoded default: %d %s %s %v", r.pos, f.Name, f.Field.Type, result[f.Name])
 			continue
 		}
 
@@ -25,7 +39,7 @@ func ReadProperties(r *Reader, ser *dt) (result map[string]interface{}) {
 			result[f.Name] = f.Field.Serializer.Decode(r, f.Field)
 		}
 
-		_debugf("Decoded: %d %s %s %v", r.pos, f.Name, f.Field.Type, result[f.Name])
+		_debugfl(6, "Decoded: %d %s %s %v", r.pos, f.Name, f.Field.Type, result[f.Name])
 	}
 
 	return result

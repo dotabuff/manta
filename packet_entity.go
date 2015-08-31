@@ -15,16 +15,7 @@ type packetEntity struct {
 
 // Internal callback for CSVCMsg_PacketEntities.
 func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error {
-	// XXX: Remove once we've gotten ReadProperties working.
-	return nil
-
-	/*defer func() {
-		if err := recover(); err != nil {
-			_debugf("recovered: %s", err)
-		}
-	}()*/
-
-	_debugf("pTick=%d isDelta=%v deltaFrom=%d updatedEntries=%d maxEntries=%d baseline=%d updateBaseline=%v", p.Tick, m.GetIsDelta(), m.GetDeltaFrom(), m.GetUpdatedEntries(), m.GetMaxEntries(), m.GetBaseline(), m.GetUpdateBaseline())
+	_debugfl(5, "pTick=%d isDelta=%v deltaFrom=%d updatedEntries=%d maxEntries=%d baseline=%d updateBaseline=%v", p.Tick, m.GetIsDelta(), m.GetDeltaFrom(), m.GetUpdatedEntries(), m.GetMaxEntries(), m.GetBaseline(), m.GetUpdateBaseline())
 
 	r := NewReader(m.GetEntityData())
 	index := int32(-1)
@@ -36,7 +27,7 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 		// from Alice. An alternate implementation from Yasha has the same result.
 		delta := r.readUBitVar()
 		index += int32(delta) + 1
-		_debugf("index delta is %d to %d", delta, index)
+		_debugfl(5, "index delta is %d to %d", delta, index)
 
 		// Read the type of update based on two booleans.
 		// This appears to be backwards from source 1:
@@ -56,7 +47,8 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 				updateType = "U"
 			}
 		}
-		_debugf("update type is %s", updateType)
+
+		_debugfl(5, "update type is %s, %v", updateType, index)
 
 		// Proceed based on the update type
 		switch updateType {
@@ -69,7 +61,8 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 			}
 
 			// Skip the 10 serial bits for now.
-			r.seekBits(10)
+			serial := r.readBits(25)
+			_debugfl(5, "Read serial: %v", serial)
 
 			// Get the associated class.
 			if pe.className, ok = p.ClassInfo[pe.classId]; !ok {
@@ -84,27 +77,25 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 			// Register the packetEntity with the parser.
 			p.packetEntities[index] = pe
 
-			_debugf("created a pe: %+v", pe)
-
-			// Read properties and set them in the packetEntity
-			pe.properties = ReadProperties(r, pe.flatTbl)
+			// Read properties, copy over the baseline if any
+			if _, ok := p.ClassBaseline[pe.classId]; ok {
+				pe.properties = ReadProperties(r, pe.flatTbl, p.ClassBaseline[pe.classId])
+			} else {
+				pe.properties = ReadProperties(r, pe.flatTbl, nil)
+			}
 		case "U":
-			_panicf("End here")
 			// Find the existing packetEntity
 			pe, ok := p.packetEntities[index]
 			if !ok {
 				_debugf("unable to find packet entity %d for update", index)
 			}
 
-			return nil
-
 			// Read properties and update the packetEntity
-			for k, v := range ReadProperties(r, pe.flatTbl) {
+			for k, v := range ReadProperties(r, pe.flatTbl, nil) {
 				pe.properties[k] = v
 			}
 
 		case "D":
-			return nil
 			if _, ok := p.packetEntities[index]; !ok {
 				_panicf("unable to find packet entity %d for delete", index)
 			} else {
@@ -112,8 +103,6 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 			}
 		}
 	}
-
-	_panicf("End here")
 
 	return nil
 }
