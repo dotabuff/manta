@@ -98,6 +98,65 @@ func (sers *flattened_serializers) recurse_table(cur *dota.ProtoFlattenedSeriali
 		// Optional: Attach encoder
 		if pField.VarEncoderSym != nil {
 			prop.Field.Encoder = sers.proto.GetSymbols()[pField.GetVarEncoderSym()]
+			// Dump decoders: _debugfl(10, "Name: %v (%v), Enc: %v, %v", prop.Field.Name, prop.Field.Type, prop.Field.Encoder, table.Name)
+		} else {
+			// set manual decoders for old replays
+			switch prop.Field.Name {
+
+			// QAngle
+			case "m_angRotation":
+				fallthrough
+			case "m_angInitialAngles":
+				fallthrough
+			case "m_vLightDirection":
+				fallthrough
+			case "m_ragAngles":
+				fallthrough
+			case "angLocalAngles":
+				fallthrough
+			case "angExtraLocalAngles":
+				if table.Name == "CBodyComponentBaseAnimatingOverlay" {
+					prop.Field.Encoder = "qangle_pitch_yaw"
+				} else {
+					prop.Field.Encoder = "QAngle"
+				}
+
+			// coord
+			case "m_flElasticity":
+				fallthrough
+			case "m_viewtarget":
+				fallthrough
+			case "dirPrimary":
+				fallthrough
+			case "origin":
+				fallthrough
+			case "localSound":
+				fallthrough
+			case "m_location":
+				fallthrough
+			case "m_poolOrigin":
+				fallthrough
+			case "m_vecLadderDir":
+				fallthrough
+			case "m_vecPlayerMountPositionTop":
+				fallthrough
+			case "m_vecPlayerMountPositionBottom":
+				fallthrough
+			case "m_ragPos":
+				fallthrough
+			case "vecLocalOrigin":
+				fallthrough
+			case "m_WorldMins":
+				fallthrough
+			case "m_WorldMaxs":
+				fallthrough
+			case "m_vecEndPos":
+				prop.Field.Encoder = "coord"
+
+			// normal
+			case "m_vecLadderNormal":
+				prop.Field.Encoder = "normal"
+			}
 		}
 
 		// Optional: Attach the serializer version for the property if applicable
