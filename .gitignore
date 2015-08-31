@@ -1,5 +1,5 @@
-fixtures/tmp
-manta
-manta-cli/manta-cli
-example/chat/chat
-replays/*.dem*
+/fixtures/tmp
+/manta
+/manta.test
+/example/chat/chat
+/replays/*.dem*

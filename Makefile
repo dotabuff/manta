@@ -10,6 +10,12 @@ cover:
 	go test -cover -coverpkg github.com/dotabuff/manta,github.com/dotabuff/manta/vbkv -coverprofile /tmp/manta.cov -v
 	go tool cover -html=/tmp/manta.cov
 
+cpuprofile:
+	go test -v -run=TestParseOneMatch -test.cpuprofile=/tmp/manta.cpuprof
+	go tool pprof -svg -output=/tmp/manta.cpuprof.svg manta.test /tmp/manta.cpuprof
+	open /tmp/manta.cpuprof.svg
+
+
 update: update-game-tracking gen-dota-proto generate
 
 game-tracking:
