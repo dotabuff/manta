@@ -77,10 +77,12 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 			// Register the packetEntity with the parser.
 			p.packetEntities[index] = pe
 
-			_debugf("created a pe: %+v", pe)
-
-			// Read properties and set them in the packetEntity
-			pe.properties = ReadProperties(r, pe.flatTbl)
+			// Read properties, copy over the baseline if any
+			if _, ok := p.ClassBaseline[pe.classId]; ok {
+				pe.properties = ReadProperties(r, pe.flatTbl, p.ClassBaseline[pe.classId])
+			} else {
+				pe.properties = ReadProperties(r, pe.flatTbl, nil)
+			}
 		case "U":
 			// Find the existing packetEntity
 			pe, ok := p.packetEntities[index]
@@ -89,7 +91,7 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 			}
 
 			// Read properties and update the packetEntity
-			for k, v := range ReadProperties(r, pe.flatTbl) {
+			for k, v := range ReadProperties(r, pe.flatTbl, nil) {
 				pe.properties[k] = v
 			}
 
