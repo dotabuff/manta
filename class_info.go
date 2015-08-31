@@ -1,6 +1,8 @@
 package manta
 
-import "github.com/dotabuff/manta/dota"
+import (
+	"github.com/dotabuff/manta/dota"
+)
 
 // Internal callback for CSVCMsg_ServerInfo.
 func (p *Parser) onCSVCMsg_ServerInfo(m *dota.CSVCMsg_ServerInfo) error {
