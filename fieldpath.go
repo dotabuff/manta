@@ -4,25 +4,6 @@ import (
 	"strconv"
 )
 
-// This is a list of encoding functions that are know to resolve to a correct layout.
-// All of these have been verified
-// ----------------------------------------------------------------------------------
-//
-// ID  NAME                           WEIGHT  ORIG  LEN  BITS
-//  0  PlusOne                         36271          1   0
-//  1  EncodingFinish                  25474          2   10
-//  2  PlusTwo                         10334          4   1110
-//  3  PlusN						    4128          5   11010
-//  4  PlusThree                        1375          6   110010
-//  5  PopAllButOnePlusOne              1837          6   110011
-//  6  PushOneLeftDeltaOneRightZero      521          8   11011010
-//  7  NonTopoComplexPack4Bits            99         10   1101100010
-//  8  NonTopoComplex                     76         11   11011000111
-//  9  PushOneLeftDeltaZeroRightZero      35         12   110110001101
-// 10  PopOnePlusOne                       1     2   15   110110001100001
-// 11  PopNPlusOne                         0         16   1101100011000110
-// 12  PushTwoPack5LeftDeltaZero           0         17   11011000110010011
-//
 // Thanks to @spheenik for being resilient in his efforts to figure out the rest of the tree
 
 // A single field to be read
@@ -166,6 +147,11 @@ func (fp *fieldpath) addField() {
 			cDt = cDt.Properties[fp.index[i]].Table
 			name += cDt.Name + "."
 		} else {
+
+			// Hint:
+			// If this panics, the property in question migh have a type that doesn't premit automatic array deduction (e.g. no CUtlVector prefix, or [] suffix).
+			// Adjust the type manualy in property_serializers.go
+
 			_panicf("expected table in fp properties: %v, %v", cDt.Properties[fp.index[i]].Field.Name, cDt.Properties[fp.index[i]].Field.Type)
 		}
 	}
@@ -184,39 +170,34 @@ func newFieldpathHuffman() HuffmanTree {
 	return buildTree(huffmanlist)
 }
 
+// All different fieldops below
+
 func PlusOne(r *Reader, fp *fieldpath) {
 	_debugfl(10, "Name: %s", fp.parent.Name)
 
-	// Increment the index
 	fp.index[len(fp.index)-1] += 1
 }
 
 func PlusTwo(r *Reader, fp *fieldpath) {
 	_debugfl(10, "Name: %s", fp.parent.Name)
 
-	// Increment the index
 	fp.index[len(fp.index)-1] += 2
 }
 
 func PlusThree(r *Reader, fp *fieldpath) {
 	_debugfl(10, "Name: %s", fp.parent.Name)
 
-	// Increment the index
 	fp.index[len(fp.index)-1] += 3
 }
 
 func PlusFour(r *Reader, fp *fieldpath) {
 	_debugfl(10, "Name: %s", fp.parent.Name)
 
-	// Increment the index
 	fp.index[len(fp.index)-1] += 4
 }
 
 func PlusN(r *Reader, fp *fieldpath) {
 	_debugfl(10, "Name: %s", fp.parent.Name)
-
-	// This one reads a variable-length header encoding the number of bits
-	// to read for N. Five is always added to the result.
 
 	fp.index[len(fp.index)-1] += int32(r.readUBitVarFP()) + 5
 }
@@ -224,7 +205,6 @@ func PlusN(r *Reader, fp *fieldpath) {
 func PushOneLeftDeltaZeroRightZero(r *Reader, fp *fieldpath) {
 	_debugfl(10, "Name: %s", fp.parent.Name)
 
-	// Get current field and index
 	fp.index = append(fp.index, 0)
 }
 
@@ -237,7 +217,6 @@ func PushOneLeftDeltaZeroRightNonZero(r *Reader, fp *fieldpath) {
 func PushOneLeftDeltaOneRightZero(r *Reader, fp *fieldpath) {
 	_debugfl(10, "Name: %s", fp.parent.Name)
 
-	// Push +1, set index to 0
 	fp.index[len(fp.index)-1] += 1
 	fp.index = append(fp.index, 0)
 }
@@ -324,31 +303,66 @@ func PushTwoPack5LeftDeltaN(r *Reader, fp *fieldpath) {
 }
 
 func PushThreeLeftDeltaZero(r *Reader, fp *fieldpath) {
-	_panicf("Name: %s", fp.parent.Name)
+	_debugfl(10, "Name: %s", fp.parent.Name)
+
+	fp.index = append(fp.index, int32(r.readUBitVarFP()))
+	fp.index = append(fp.index, int32(r.readUBitVarFP()))
+	fp.index = append(fp.index, int32(r.readUBitVarFP()))
 }
 
 func PushThreeLeftDeltaOne(r *Reader, fp *fieldpath) {
-	_panicf("Name: %s", fp.parent.Name)
+	_debugfl(10, "Name: %s", fp.parent.Name)
+
+	fp.index[len(fp.index)-1]++
+	fp.index = append(fp.index, int32(r.readUBitVarFP()))
+	fp.index = append(fp.index, int32(r.readUBitVarFP()))
+	fp.index = append(fp.index, int32(r.readUBitVarFP()))
 }
 
 func PushThreeLeftDeltaN(r *Reader, fp *fieldpath) {
-	_panicf("Name: %s", fp.parent.Name)
+	_debugfl(10, "Name: %s", fp.parent.Name)
+
+	fp.index[len(fp.index)-1] += int32(r.readUBitVar()) + 2
+	fp.index = append(fp.index, int32(r.readUBitVarFP()))
+	fp.index = append(fp.index, int32(r.readUBitVarFP()))
+	fp.index = append(fp.index, int32(r.readUBitVarFP()))
 }
 
 func PushThreePack5LeftDeltaZero(r *Reader, fp *fieldpath) {
-	_panicf("Name: %s", fp.parent.Name)
+	_debugfl(10, "Name: %s", fp.parent.Name)
+
+	fp.index = append(fp.index, int32(r.readBits(5)))
+	fp.index = append(fp.index, int32(r.readBits(5)))
+	fp.index = append(fp.index, int32(r.readBits(5)))
 }
 
 func PushThreePack5LeftDeltaOne(r *Reader, fp *fieldpath) {
-	_panicf("Name: %s", fp.parent.Name)
+	_debugfl(10, "Name: %s", fp.parent.Name)
+
+	fp.index[len(fp.index)-1]++
+	fp.index = append(fp.index, int32(r.readBits(5)))
+	fp.index = append(fp.index, int32(r.readBits(5)))
+	fp.index = append(fp.index, int32(r.readBits(5)))
 }
 
 func PushThreePack5LeftDeltaN(r *Reader, fp *fieldpath) {
-	_panicf("Name: %s", fp.parent.Name)
+	_debugfl(10, "Name: %s", fp.parent.Name)
+
+	fp.index[len(fp.index)-1] += int32(r.readUBitVar()) + 2
+	fp.index = append(fp.index, int32(r.readBits(5)))
+	fp.index = append(fp.index, int32(r.readBits(5)))
+	fp.index = append(fp.index, int32(r.readBits(5)))
 }
 
 func PushN(r *Reader, fp *fieldpath) {
-	_panicf("Name: %s", fp.parent.Name)
+	_debugfl(10, "Name: %s", fp.parent.Name)
+
+	n := int(r.readUBitVar())
+	fp.index[len(fp.index)-1] += int32(r.readUBitVar())
+
+	for i := 0; i < n; i++ {
+		fp.index = append(fp.index, int32(r.readUBitVarFP()))
+	}
 }
 
 func PushNAndNonTopological(r *Reader, fp *fieldpath) {
@@ -369,11 +383,6 @@ func PushNAndNonTopological(r *Reader, fp *fieldpath) {
 func PopOnePlusOne(r *Reader, fp *fieldpath) {
 	_debugfl(10, "Name: %s", fp.parent.Name)
 
-	// Check if we can pop an element
-	if len(fp.index) <= 1 {
-		_panicf("Trying to pop last element")
-	}
-
 	fp.index = fp.index[:len(fp.index)-1]
 	fp.index[len(fp.index)-1] += 1
 }
@@ -388,7 +397,6 @@ func PopOnePlusN(r *Reader, fp *fieldpath) {
 func PopAllButOnePlusOne(r *Reader, fp *fieldpath) {
 	_debugfl(10, "Name: %s", fp.parent.Name)
 
-	// Remove all hierarchy and index element
 	fp.index = fp.index[:1]
 	fp.index[len(fp.index)-1] += 1
 }
@@ -446,8 +454,6 @@ func PopNAndNonTopographical(r *Reader, fp *fieldpath) {
 
 func NonTopoComplex(r *Reader, fp *fieldpath) {
 	_debugfl(10, "Name: %s", fp.parent.Name)
-
-	// See NonTopoComplexPack4Bits
 
 	for i := 0; i < len(fp.index); i++ {
 		if r.readBoolean() {
