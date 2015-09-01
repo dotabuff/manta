@@ -51,12 +51,6 @@ func (p *Parser) updateInstanceBaseline() {
 }
 
 func (p *Parser) updateInstanceBaselineItem(item *StringTableItem) {
-	defer func() {
-		if e := recover(); e != nil {
-			_debugf("Caught error: %v", e)
-		}
-	}()
-
 	// Get the class id for the string table item
 	classId, err := atoi32(item.Key)
 	if err != nil {

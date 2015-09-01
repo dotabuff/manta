@@ -101,10 +101,6 @@ func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *Pr
 		fallthrough
 	case "CBodyComponent":
 		decoder = decodeComponent
-	case "CDOTASpectatorGraphManager*":
-		fallthrough
-	case "CEntityIdentity*":
-		decoder = decodeBoolean
 	case "QAngle":
 		decoder = decodeQAngle
 	case "CGameSceneNodeHandle":
@@ -126,6 +122,11 @@ func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *Pr
 		default:
 			//_debugf("No decoder for type %s", name)
 		}
+	}
+
+	// match all pointers as boolean
+	if name[len(name)-1:] == "*" {
+		decoder = decodeBoolean
 	}
 
 	// create a new serializer based on it's name
