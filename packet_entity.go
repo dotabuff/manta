@@ -5,16 +5,34 @@ import (
 )
 
 // Represents the state of an entity
-type packetEntity struct {
-	index      int32
-	classId    int32
-	className  string
-	flatTbl    *dt
-	properties map[string]interface{}
+type PacketEntity struct {
+	Index         int32
+	ClassId       int32
+	ClassName     string
+	ClassBaseline *Properties
+	Properties    *Properties
+	Serial        int32
+
+	flatTbl *dt
+}
+
+// Get a property from the entity. Prefers reading from the entity properties,
+// falling back to the baseline properties if necessary.
+func (pe *PacketEntity) Fetch(key string) (interface{}, bool) {
+	v, ok := pe.Properties.Fetch(key)
+	if !ok {
+		v, ok = pe.ClassBaseline.Fetch(key)
+	}
+
+	return v, ok
 }
 
 // Internal callback for CSVCMsg_PacketEntities.
 func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error {
+	if !p.ProcessPacketEntities {
+		return nil
+	}
+
 	_debugfl(5, "pTick=%d isDelta=%v deltaFrom=%d updatedEntries=%d maxEntries=%d baseline=%d updateBaseline=%v", p.Tick, m.GetIsDelta(), m.GetDeltaFrom(), m.GetUpdatedEntries(), m.GetMaxEntries(), m.GetBaseline(), m.GetUpdateBaseline())
 
 	r := NewReader(m.GetEntityData())
@@ -53,54 +71,51 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 		// Proceed based on the update type
 		switch updateType {
 		case "C":
-			// Create a new packetEntity.
-			pe := &packetEntity{
-				index:      index,
-				classId:    int32(r.readBits(p.classIdSize)),
-				properties: make(map[string]interface{}),
+			// Create a new PacketEntity.
+			pe := &PacketEntity{
+				Index:      index,
+				ClassId:    int32(r.readBits(p.classIdSize)),
+				Serial:     int32(r.readBits(25)),
+				Properties: NewProperties(),
 			}
 
-			// Skip the 10 serial bits for now.
-			serial := r.readBits(25)
-			_debugfl(5, "Read serial: %v", serial)
+			// Get the associated class
+			if pe.ClassName, ok = p.ClassInfo[pe.ClassId]; !ok {
+				_panicf("unable to find class %d", pe.ClassId)
+			}
 
-			// Get the associated class.
-			if pe.className, ok = p.ClassInfo[pe.classId]; !ok {
-				_panicf("unable to find class %d", pe.classId)
+			// Get the associated baseline
+			if pe.ClassBaseline, ok = p.ClassBaselines[pe.ClassId]; !ok {
+				_panicf("unable to find class baseline %d", pe.ClassId)
 			}
 
 			// Get the associated serializer
-			if pe.flatTbl, ok = p.Serializers[pe.className][0]; !ok {
-				_panicf("unable to find serializer for class %s", pe.className)
+			if pe.flatTbl, ok = p.serializers[pe.ClassName][0]; !ok {
+				_panicf("unable to find serializer for class %s", pe.ClassName)
 			}
 
 			// Register the packetEntity with the parser.
-			p.packetEntities[index] = pe
+			p.PacketEntities[index] = pe
 
-			// Read properties, copy over the baseline if any
-			if _, ok := p.ClassBaseline[pe.classId]; ok {
-				pe.properties = ReadProperties(r, pe.flatTbl, p.ClassBaseline[pe.classId])
-			} else {
-				pe.properties = ReadProperties(r, pe.flatTbl, nil)
-			}
+			// Read properties
+			pe.Properties = ReadProperties(r, pe.flatTbl)
+
 		case "U":
 			// Find the existing packetEntity
-			pe, ok := p.packetEntities[index]
+			pe, ok := p.PacketEntities[index]
 			if !ok {
-				_debugf("unable to find packet entity %d for update", index)
+				_panicf("unable to find packet entity %d for update", index)
 			}
 
 			// Read properties and update the packetEntity
-			for k, v := range ReadProperties(r, pe.flatTbl, nil) {
-				pe.properties[k] = v
-			}
+			pe.Properties.Merge(ReadProperties(r, pe.flatTbl))
 
 		case "D":
-			if _, ok := p.packetEntities[index]; !ok {
+			if _, ok := p.PacketEntities[index]; !ok {
 				_panicf("unable to find packet entity %d for delete", index)
-			} else {
-				delete(p.packetEntities, index)
 			}
+
+			delete(p.PacketEntities, index)
 		}
 	}
 

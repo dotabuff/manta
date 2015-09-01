@@ -1,6 +1,8 @@
 package manta
 
-import "github.com/dotabuff/manta/dota"
+import (
+	"github.com/dotabuff/manta/dota"
+)
 
 // Internal callback for CSVCMsg_ServerInfo.
 func (p *Parser) onCSVCMsg_ServerInfo(m *dota.CSVCMsg_ServerInfo) error {
@@ -15,7 +17,7 @@ func (p *Parser) onCDemoClassInfo(m *dota.CDemoClassInfo) error {
 	for _, c := range m.GetClasses() {
 		p.ClassInfo[c.GetClassId()] = c.GetNetworkName()
 
-		if _, ok := p.Serializers[c.GetNetworkName()]; !ok {
+		if _, ok := p.serializers[c.GetNetworkName()]; !ok {
 			_panicf("unable to find table for class %d (%s)", c.GetClassId, c.GetNetworkName())
 		}
 	}
@@ -68,12 +70,12 @@ func (p *Parser) updateInstanceBaselineItem(item *StringTableItem) {
 	}
 
 	// Create an entry in the map if needed
-	if _, ok := p.ClassBaseline[classId]; !ok {
-		p.ClassBaseline[classId] = make(map[string]interface{})
+	if _, ok := p.ClassBaselines[classId]; !ok {
+		p.ClassBaselines[classId] = NewProperties()
 	}
 
 	// Get the send table associated with the class.
-	serializer, ok := p.Serializers[className]
+	serializer, ok := p.serializers[className]
 	if !ok {
 		_panicf("unable to find send table %s for instancebaseline key %d", className, classId)
 	}
@@ -86,7 +88,7 @@ func (p *Parser) updateInstanceBaselineItem(item *StringTableItem) {
 	if len(item.Value) > 0 {
 		_debugfl(1, "Parsing entity baseline %v", serializer[0].Name)
 		r := NewReader(item.Value)
-		p.ClassBaseline[classId] = ReadProperties(r, serializer[0], nil)
+		p.ClassBaselines[classId] = ReadProperties(r, serializer[0])
 
 		// Inline test the baselines
 		if testLevel >= 1 && r.remBits() > 8 {

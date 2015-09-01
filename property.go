@@ -8,16 +8,36 @@ func init() {
 	}
 }
 
-func ReadProperties(r *Reader, ser *dt, baseline map[string]interface{}) (result map[string]interface{}) {
-	// Return type
-	result = make(map[string]interface{})
+// Properties is an instance of a set of properties containing key-value data.
+type Properties struct {
+	KV map[string]interface{}
+}
 
-	// Copy baseline if any
-	if baseline != nil {
-		for k, v := range baseline {
-			result[k] = v
-		}
+// Creates a new instance of Properties.
+func NewProperties() *Properties {
+	return &Properties{
+		KV: map[string]interface{}{},
 	}
+}
+
+// Merge another set of Properties into an existing instance. Values from the
+// other (merging) set overwrite those in the existing instance.
+func (p *Properties) Merge(p2 *Properties) {
+	for k, v := range p2.KV {
+		p.KV[k] = v
+	}
+}
+
+// Fetch a value by key.
+func (p *Properties) Fetch(k string) (interface{}, bool) {
+	v, ok := p.KV[k]
+	return v, ok
+}
+
+// Reads properties using a given reader and serializer.
+func ReadProperties(r *Reader, ser *dt) (result *Properties) {
+	// Return type
+	result = NewProperties()
 
 	// Create fieldpath
 	fieldPath := newFieldpath(ser, &huf)
@@ -27,59 +47,22 @@ func ReadProperties(r *Reader, ser *dt, baseline map[string]interface{}) (result
 
 	// iterate all the fields and set their corresponding values
 	for _, f := range fieldPath.fields {
+		_debugfl(6, "Decoding field %d %s %s", r.pos, f.Name, f.Field.Type)
+
 		if f.Field.Serializer.Decode == nil {
-			result[f.Name] = r.readVarUint32()
-			_debugfl(6, "Decoded default: %d %s %s %v", r.pos, f.Name, f.Field.Type, result[f.Name])
+			result.KV[f.Name] = r.readVarUint32()
+			_debugfl(6, "Decoded default: %d %s %s %v", r.pos, f.Name, f.Field.Type, result.KV[f.Name])
 			continue
 		}
 
 		if f.Field.Serializer.DecodeContainer != nil {
-			result[f.Name] = f.Field.Serializer.DecodeContainer(r, f.Field)
+			result.KV[f.Name] = f.Field.Serializer.DecodeContainer(r, f.Field)
 		} else {
-			result[f.Name] = f.Field.Serializer.Decode(r, f.Field)
+			result.KV[f.Name] = f.Field.Serializer.Decode(r, f.Field)
 		}
 
-		_debugfl(6, "Decoded: %d %s %s %v", r.pos, f.Name, f.Field.Type, result[f.Name])
+		_debugfl(6, "Decoded: %d %s %s %v", r.pos, f.Name, f.Field.Type, result.KV[f.Name])
 	}
 
-	return result
-}
-
-// An ordered map
-type omap struct {
-	size   int
-	keys   []string
-	values []interface{}
-}
-
-// Creates a new ordered map.
-func newOmap() *omap {
-	return &omap{
-		size:   0,
-		keys:   []string{},
-		values: []interface{}{},
-	}
-}
-
-// Adds an element to the ordered map.
-func (o *omap) add(k string, v interface{}) {
-	o.keys = append(o.keys, k)
-	o.values = append(o.values, v)
-	o.size++
-}
-
-// Prints the ordered map, in order.
-func (o *omap) print() {
-	for i := 0; i < o.size; i++ {
-		_debugf("[%d] %s = %v", i, o.keys[i], o.values[i])
-	}
-}
-
-// Converts the ordered map to map[string]interface{}
-func (o *omap) toMap() map[string]interface{} {
-	result := make(map[string]interface{})
-	for i := 0; i < o.size; i++ {
-		result[o.keys[i]] = o.values[i]
-	}
 	return result
 }
