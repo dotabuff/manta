@@ -32,13 +32,15 @@ type Parser struct {
 	PacketEntities map[int32]*PacketEntity
 	StringTables   *StringTables
 
-	classIdSize       int
-	gameEventHandlers map[string][]gameEventHandler
-	gameEventNames    map[int32]string
-	gameEventTypes    map[string]*gameEventType
-	hasClassInfo      bool
-	serializers       map[string]map[int32]*dt
-	spawnGroups       map[uint32]*spawnGroup
+	classIdSize             int
+	gameEventHandlers       map[string][]gameEventHandler
+	gameEventNames          map[int32]string
+	gameEventTypes          map[string]*gameEventType
+	hasClassInfo            bool
+	packetEntityHandlers    []packetEntityHandler
+	packetEntityFullPackets int
+	serializers             map[string]map[int32]*dt
+	spawnGroups             map[uint32]*spawnGroup
 
 	reader            *Reader
 	isStopping        bool
@@ -70,10 +72,11 @@ func NewParser(buf []byte) (*Parser, error) {
 		PacketEntities: make(map[int32]*PacketEntity),
 		StringTables:   newStringTables(),
 
-		gameEventHandlers: make(map[string][]gameEventHandler),
-		gameEventNames:    make(map[int32]string),
-		gameEventTypes:    make(map[string]*gameEventType),
-		spawnGroups:       make(map[uint32]*spawnGroup),
+		gameEventHandlers:    make(map[string][]gameEventHandler),
+		gameEventNames:       make(map[int32]string),
+		gameEventTypes:       make(map[string]*gameEventType),
+		packetEntityHandlers: make([]packetEntityHandler, 0),
+		spawnGroups:          make(map[uint32]*spawnGroup),
 
 		reader:     NewReader(buf),
 		isStopping: false,

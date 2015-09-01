@@ -15,6 +15,11 @@ func TestParseOneMatch(t *testing.T) {
 	buf := mustGetReplayData("1731962898", "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1731962898.dem")
 	parser, err := NewParser(buf)
 	assert.Nil(err)
+
+	parser.OnPacketEntity(func(pe *PacketEntity, e EntityEventType) error {
+		return nil
+	})
+
 	err = parser.Start()
 	assert.Nil(err)
 }
