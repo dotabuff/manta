@@ -9,7 +9,6 @@ import (
 // A single field to be read
 type fieldpath_field struct {
 	Name  string
-	Path  string
 	Field *dt_field
 }
 
@@ -132,15 +131,17 @@ func (fp *fieldpath) walk(r *Reader) {
 func (fp *fieldpath) addField() {
 	cDt := fp.parent
 
-	var path string
 	var name string
-	i := 0
+	var i int
 
-	for i = 0; i < len(fp.index)-1; i++ {
-		path += strconv.Itoa(int(fp.index[i])) + "/"
+	if debugLevel >= 6 {
+		var path string
+		for i := 0; i < len(fp.index)-1; i++ {
+			path += strconv.Itoa(int(fp.index[i])) + "/"
+		}
+
+		_debugfl(6, "Adding field with path: %s%d", path, fp.index[len(fp.index)-1])
 	}
-
-	_debugfl(6, "Adding field with path: %s%d", path, fp.index[len(fp.index)-1])
 
 	for i = 0; i < len(fp.index)-1; i++ {
 		if cDt.Properties[fp.index[i]].Table != nil {
@@ -156,7 +157,7 @@ func (fp *fieldpath) addField() {
 		}
 	}
 
-	fp.fields = append(fp.fields, &fieldpath_field{name + cDt.Properties[fp.index[i]].Field.Name, path, cDt.Properties[fp.index[i]].Field})
+	fp.fields = append(fp.fields, &fieldpath_field{name + cDt.Properties[fp.index[i]].Field.Name, cDt.Properties[fp.index[i]].Field})
 }
 
 // Returns a huffman tree based on the operation weights
