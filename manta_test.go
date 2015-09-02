@@ -117,6 +117,17 @@ func TestParseRealMatches(t *testing.T) {
 		expectUnitOrderEvents  int32
 	}{
 		{
+			matchId:                "1764592109",
+			replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1764592109.dem",
+			expectGameBuild:        1017,
+			expectEntityEvents:     1827933,
+			expectCombatLogDamage:  1008784,
+			expectCombatLogHealing: 33784,
+			expectCombatLogDeaths:  1631,
+			expectCombatLogEvents:  42228,
+			expectUnitOrderEvents:  36172,
+		},
+		{
 			matchId:                "1763193771",
 			replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1763193771.dem",
 			expectGameBuild:        1016,
