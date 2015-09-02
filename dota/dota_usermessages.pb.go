@@ -102,6 +102,7 @@ const (
 	EDotaUserMessages_DOTA_UM_CustomHudElement_Destroy  EDotaUserMessages = 550
 	EDotaUserMessages_DOTA_UM_CompendiumState           EDotaUserMessages = 551
 	EDotaUserMessages_DOTA_UM_ProjectionAbility         EDotaUserMessages = 552
+	EDotaUserMessages_DOTA_UM_ProjectionEvent           EDotaUserMessages = 553
 )
 
 var EDotaUserMessages_name = map[int32]string{
@@ -193,6 +194,7 @@ var EDotaUserMessages_name = map[int32]string{
 	550: "DOTA_UM_CustomHudElement_Destroy",
 	551: "DOTA_UM_CompendiumState",
 	552: "DOTA_UM_ProjectionAbility",
+	553: "DOTA_UM_ProjectionEvent",
 }
 var EDotaUserMessages_value = map[string]int32{
 	"DOTA_UM_AddUnitToSelection":        464,
@@ -283,6 +285,7 @@ var EDotaUserMessages_value = map[string]int32{
 	"DOTA_UM_CustomHudElement_Destroy":  550,
 	"DOTA_UM_CompendiumState":           551,
 	"DOTA_UM_ProjectionAbility":         552,
+	"DOTA_UM_ProjectionEvent":           553,
 }
 
 func (x EDotaUserMessages) Enum() *EDotaUserMessages {
@@ -1193,6 +1196,36 @@ func (x *EPlayerVoiceListenState) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	*x = EPlayerVoiceListenState(value)
+	return nil
+}
+
+type EProjectionEvent int32
+
+const (
+	EProjectionEvent_ePE_FirstBlood EProjectionEvent = 0
+)
+
+var EProjectionEvent_name = map[int32]string{
+	0: "ePE_FirstBlood",
+}
+var EProjectionEvent_value = map[string]int32{
+	"ePE_FirstBlood": 0,
+}
+
+func (x EProjectionEvent) Enum() *EProjectionEvent {
+	p := new(EProjectionEvent)
+	*p = x
+	return p
+}
+func (x EProjectionEvent) String() string {
+	return proto.EnumName(EProjectionEvent_name, int32(x))
+}
+func (x *EProjectionEvent) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(EProjectionEvent_value, data, "EProjectionEvent")
+	if err != nil {
+		return err
+	}
+	*x = EProjectionEvent(value)
 	return nil
 }
 
@@ -5541,6 +5574,7 @@ type CDOTAUserMsg_ProjectionAbility struct {
 	Origin           *CMsgVector `protobuf:"bytes,5,opt,name=origin" json:"origin,omitempty"`
 	TrackCasterOnly  *bool       `protobuf:"varint,6,opt,name=track_caster_only" json:"track_caster_only,omitempty"`
 	EndTime          *float32    `protobuf:"fixed32,7,opt,name=end_time" json:"end_time,omitempty"`
+	VictimEntIndex   *int32      `protobuf:"varint,8,opt,name=victim_ent_index" json:"victim_ent_index,omitempty"`
 	XXX_unrecognized []byte      `json:"-"`
 }
 
@@ -5597,6 +5631,39 @@ func (m *CDOTAUserMsg_ProjectionAbility) GetEndTime() float32 {
 	return 0
 }
 
+func (m *CDOTAUserMsg_ProjectionAbility) GetVictimEntIndex() int32 {
+	if m != nil && m.VictimEntIndex != nil {
+		return *m.VictimEntIndex
+	}
+	return 0
+}
+
+type CDOTAUserMsg_ProjectionEvent struct {
+	EventId          *EProjectionEvent `protobuf:"varint,1,opt,name=event_id,enum=dota.EProjectionEvent,def=0" json:"event_id,omitempty"`
+	Team             *uint32           `protobuf:"varint,2,opt,name=team" json:"team,omitempty"`
+	XXX_unrecognized []byte            `json:"-"`
+}
+
+func (m *CDOTAUserMsg_ProjectionEvent) Reset()         { *m = CDOTAUserMsg_ProjectionEvent{} }
+func (m *CDOTAUserMsg_ProjectionEvent) String() string { return proto.CompactTextString(m) }
+func (*CDOTAUserMsg_ProjectionEvent) ProtoMessage()    {}
+
+const Default_CDOTAUserMsg_ProjectionEvent_EventId EProjectionEvent = EProjectionEvent_ePE_FirstBlood
+
+func (m *CDOTAUserMsg_ProjectionEvent) GetEventId() EProjectionEvent {
+	if m != nil && m.EventId != nil {
+		return *m.EventId
+	}
+	return Default_CDOTAUserMsg_ProjectionEvent_EventId
+}
+
+func (m *CDOTAUserMsg_ProjectionEvent) GetTeam() uint32 {
+	if m != nil && m.Team != nil {
+		return *m.Team
+	}
+	return 0
+}
+
 func init() {
 	proto.RegisterEnum("dota.EDotaUserMessages", EDotaUserMessages_name, EDotaUserMessages_value)
 	proto.RegisterEnum("dota.DOTA_CHAT_MESSAGE", DOTA_CHAT_MESSAGE_name, DOTA_CHAT_MESSAGE_value)
@@ -5610,6 +5677,7 @@ func init() {
 	proto.RegisterEnum("dota.DOTA_ABILITY_TARGET_TYPE", DOTA_ABILITY_TARGET_TYPE_name, DOTA_ABILITY_TARGET_TYPE_value)
 	proto.RegisterEnum("dota.EHeroStatType", EHeroStatType_name, EHeroStatType_value)
 	proto.RegisterEnum("dota.EPlayerVoiceListenState", EPlayerVoiceListenState_name, EPlayerVoiceListenState_value)
+	proto.RegisterEnum("dota.EProjectionEvent", EProjectionEvent_name, EProjectionEvent_value)
 	proto.RegisterEnum("dota.CDOTAUserMsg_PredictionResult_Prediction_EResult", CDOTAUserMsg_PredictionResult_Prediction_EResult_name, CDOTAUserMsg_PredictionResult_Prediction_EResult_value)
 	proto.RegisterEnum("dota.CDOTAResponseQuerySerialized_Fact_ValueType", CDOTAResponseQuerySerialized_Fact_ValueType_name, CDOTAResponseQuerySerialized_Fact_ValueType_value)
 }

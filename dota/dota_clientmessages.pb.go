@@ -62,6 +62,7 @@ const (
 	EDotaClientMessages_DOTA_CM_ChallengeSelect                        EDotaClientMessages = 346
 	EDotaClientMessages_DOTA_CM_ChallengeReroll                        EDotaClientMessages = 347
 	EDotaClientMessages_DOTA_CM_ClickedBuff                            EDotaClientMessages = 348
+	EDotaClientMessages_DOTA_CM_CoinWager                              EDotaClientMessages = 349
 )
 
 var EDotaClientMessages_name = map[int32]string{
@@ -113,6 +114,7 @@ var EDotaClientMessages_name = map[int32]string{
 	346: "DOTA_CM_ChallengeSelect",
 	347: "DOTA_CM_ChallengeReroll",
 	348: "DOTA_CM_ClickedBuff",
+	349: "DOTA_CM_CoinWager",
 }
 var EDotaClientMessages_value = map[string]int32{
 	"DOTA_CM_MapLine":                                301,
@@ -163,6 +165,7 @@ var EDotaClientMessages_value = map[string]int32{
 	"DOTA_CM_ChallengeSelect":                        346,
 	"DOTA_CM_ChallengeReroll":                        347,
 	"DOTA_CM_ClickedBuff":                            348,
+	"DOTA_CM_CoinWager":                              349,
 }
 
 func (x EDotaClientMessages) Enum() *EDotaClientMessages {
@@ -1076,6 +1079,22 @@ func (m *CDOTAClientMsg_ChallengeReroll) GetSlotId() uint32 {
 func (m *CDOTAClientMsg_ChallengeReroll) GetSequenceId() uint32 {
 	if m != nil && m.SequenceId != nil {
 		return *m.SequenceId
+	}
+	return 0
+}
+
+type CDOTAClientMsg_CoinWager struct {
+	WagerAmount      *uint32 `protobuf:"varint,1,opt,name=wager_amount" json:"wager_amount,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CDOTAClientMsg_CoinWager) Reset()         { *m = CDOTAClientMsg_CoinWager{} }
+func (m *CDOTAClientMsg_CoinWager) String() string { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_CoinWager) ProtoMessage()    {}
+
+func (m *CDOTAClientMsg_CoinWager) GetWagerAmount() uint32 {
+	if m != nil && m.WagerAmount != nil {
+		return *m.WagerAmount
 	}
 	return 0
 }

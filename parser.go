@@ -27,6 +27,9 @@ type Parser struct {
 	// Determines whether or not PacketEntity events are processed.
 	ProcessPacketEntities bool
 
+	// Stores the game build.
+	GameBuild uint32
+
 	ClassBaselines map[int32]*Properties
 	ClassInfo      map[int32]string
 	PacketEntities map[int32]*PacketEntity

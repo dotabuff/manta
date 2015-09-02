@@ -5,6 +5,10 @@ import (
 	"strconv"
 )
 
+func decodeLeUint64(r *Reader, f *dt_field) interface{} {
+	return r.readLeUint64()
+}
+
 func decodeHandle(r *Reader, f *dt_field) interface{} {
 	return r.readVarUint32()
 }
@@ -18,6 +22,14 @@ func decodeShort(r *Reader, f *dt_field) interface{} {
 }
 
 func decodeUnsigned(r *Reader, f *dt_field) interface{} {
+	// Let's hope this get's added by valve at some point
+	switch f.Encoder {
+	case "fixed64":
+		return decodeFixed64(r, f)
+	case "le64":
+		return decodeLeUint64(r, f)
+	}
+
 	return r.readVarUint64()
 }
 
@@ -27,6 +39,17 @@ func decodeSigned(r *Reader, f *dt_field) interface{} {
 
 func decodeSigned64(r *Reader, f *dt_field) interface{} {
 	return r.readVarInt64()
+}
+
+func decodeFixed32(r *Reader, f *dt_field) interface{} {
+	return r.readBits(32)
+}
+
+func decodeFixed64(r *Reader, f *dt_field) interface{} {
+	ret := uint64(r.readBits(32))
+
+	ret = (ret << 32) | uint64(r.readBits(32))
+	return ret
 }
 
 func decodeBoolean(r *Reader, f *dt_field) interface{} {
@@ -89,7 +112,6 @@ func decodeString(r *Reader, f *dt_field) interface{} {
 }
 
 func decodeVector(r *Reader, f *dt_field) interface{} {
-
 	return r.readVarUint32()
 }
 

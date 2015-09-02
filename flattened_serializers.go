@@ -42,6 +42,7 @@ type flattened_serializers struct {
 	Serializers map[string]map[int32]*dt // serializer name -> [versions]
 	proto       *dota.CSVCMsg_FlattenedSerializer
 	pst         *PropertySerializerTable
+	build       uint32
 }
 
 // Dumps a flattened table as json
@@ -156,6 +157,24 @@ func (sers *flattened_serializers) recurse_table(cur *dota.ProtoFlattenedSeriali
 			// normal
 			case "m_vecLadderNormal":
 				prop.Field.Encoder = "normal"
+
+			// fixed
+			case "m_bItemWhiteList":
+				fallthrough
+			case "m_iPlayerIDsInControl":
+				fallthrough
+			case "m_ulTeamBaseLogo":
+				fallthrough
+			case "m_ulTeamBannerLogo":
+				fallthrough
+			case "m_CustomHealthbarColor":
+				fallthrough
+			case "m_bWorldTreeState":
+				fallthrough
+			case "m_iPlayerSteamID":
+				if sers.build >= 1016 {
+					prop.Field.Encoder = "le64"
+				}
 			}
 		}
 
@@ -221,7 +240,7 @@ func (sers *flattened_serializers) recurse_table(cur *dota.ProtoFlattenedSeriali
 }
 
 // Parses a CDemoSendTables packet
-func ParseSendTables(m *dota.CDemoSendTables, pst *PropertySerializerTable) *flattened_serializers {
+func (p *Parser) ParseSendTables(m *dota.CDemoSendTables, pst *PropertySerializerTable) *flattened_serializers {
 	// This packet just contains a single large buffer
 	r := NewReader(m.GetData())
 
@@ -243,6 +262,7 @@ func ParseSendTables(m *dota.CDemoSendTables, pst *PropertySerializerTable) *fla
 		Serializers: make(map[string]map[int32]*dt),
 		proto:       msg,
 		pst:         pst,
+		build:       p.GameBuild,
 	}
 
 	// Iterate through all flattened serializers and fill their properties
@@ -262,6 +282,6 @@ func ParseSendTables(m *dota.CDemoSendTables, pst *PropertySerializerTable) *fla
 
 // Internal callback for OnCDemoSendTables.
 func (p *Parser) onCDemoSendTables(m *dota.CDemoSendTables) error {
-	p.serializers = ParseSendTables(m, GetDefaultPropertySerializerTable()).Serializers
+	p.serializers = p.ParseSendTables(m, GetDefaultPropertySerializerTable()).Serializers
 	return nil
 }

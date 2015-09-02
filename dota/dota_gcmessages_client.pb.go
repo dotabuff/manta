@@ -11,240 +11,6 @@ import math "math"
 var _ = proto.Marshal
 var _ = math.Inf
 
-type ETournamentGameState int32
-
-const (
-	ETournamentGameState_k_ETournamentGameState_Unknown                ETournamentGameState = 0
-	ETournamentGameState_k_ETournamentGameState_Scheduled              ETournamentGameState = 1
-	ETournamentGameState_k_ETournamentGameState_WaitingForLobbyToStart ETournamentGameState = 2
-	ETournamentGameState_k_ETournamentGameState_Active                 ETournamentGameState = 3
-	ETournamentGameState_k_ETournamentGameState_DireVictory            ETournamentGameState = 4
-	ETournamentGameState_k_ETournamentGameState_RadVictory             ETournamentGameState = 5
-	ETournamentGameState_k_ETournamentGameState_Canceled               ETournamentGameState = 6
-	ETournamentGameState_k_ETournamentTeamState_NotNeeded              ETournamentGameState = 7
-)
-
-var ETournamentGameState_name = map[int32]string{
-	0: "k_ETournamentGameState_Unknown",
-	1: "k_ETournamentGameState_Scheduled",
-	2: "k_ETournamentGameState_WaitingForLobbyToStart",
-	3: "k_ETournamentGameState_Active",
-	4: "k_ETournamentGameState_DireVictory",
-	5: "k_ETournamentGameState_RadVictory",
-	6: "k_ETournamentGameState_Canceled",
-	7: "k_ETournamentTeamState_NotNeeded",
-}
-var ETournamentGameState_value = map[string]int32{
-	"k_ETournamentGameState_Unknown":                0,
-	"k_ETournamentGameState_Scheduled":              1,
-	"k_ETournamentGameState_WaitingForLobbyToStart": 2,
-	"k_ETournamentGameState_Active":                 3,
-	"k_ETournamentGameState_DireVictory":            4,
-	"k_ETournamentGameState_RadVictory":             5,
-	"k_ETournamentGameState_Canceled":               6,
-	"k_ETournamentTeamState_NotNeeded":              7,
-}
-
-func (x ETournamentGameState) Enum() *ETournamentGameState {
-	p := new(ETournamentGameState)
-	*p = x
-	return p
-}
-func (x ETournamentGameState) String() string {
-	return proto.EnumName(ETournamentGameState_name, int32(x))
-}
-func (x *ETournamentGameState) UnmarshalJSON(data []byte) error {
-	value, err := proto.UnmarshalJSONEnum(ETournamentGameState_value, data, "ETournamentGameState")
-	if err != nil {
-		return err
-	}
-	*x = ETournamentGameState(value)
-	return nil
-}
-
-type ETournamentTeamState int32
-
-const (
-	ETournamentTeamState_k_ETournamentTeamState_Unknown      ETournamentTeamState = 0
-	ETournamentTeamState_k_ETournamentTeamState_Node1        ETournamentTeamState = 1
-	ETournamentTeamState_k_ETournamentTeamState_NodeMax      ETournamentTeamState = 1024
-	ETournamentTeamState_k_ETournamentTeamState_Eliminated   ETournamentTeamState = 14003
-	ETournamentTeamState_k_ETournamentTeamState_Forfeited    ETournamentTeamState = 14004
-	ETournamentTeamState_k_ETournamentTeamState_Finished1st  ETournamentTeamState = 15001
-	ETournamentTeamState_k_ETournamentTeamState_Finished2nd  ETournamentTeamState = 15002
-	ETournamentTeamState_k_ETournamentTeamState_Finished3rd  ETournamentTeamState = 15003
-	ETournamentTeamState_k_ETournamentTeamState_Finished4th  ETournamentTeamState = 15004
-	ETournamentTeamState_k_ETournamentTeamState_Finished5th  ETournamentTeamState = 15005
-	ETournamentTeamState_k_ETournamentTeamState_Finished6th  ETournamentTeamState = 15006
-	ETournamentTeamState_k_ETournamentTeamState_Finished7th  ETournamentTeamState = 15007
-	ETournamentTeamState_k_ETournamentTeamState_Finished8th  ETournamentTeamState = 15008
-	ETournamentTeamState_k_ETournamentTeamState_Finished9th  ETournamentTeamState = 15009
-	ETournamentTeamState_k_ETournamentTeamState_Finished10th ETournamentTeamState = 15010
-	ETournamentTeamState_k_ETournamentTeamState_Finished11th ETournamentTeamState = 15011
-	ETournamentTeamState_k_ETournamentTeamState_Finished12th ETournamentTeamState = 15012
-	ETournamentTeamState_k_ETournamentTeamState_Finished13th ETournamentTeamState = 15013
-	ETournamentTeamState_k_ETournamentTeamState_Finished14th ETournamentTeamState = 15014
-	ETournamentTeamState_k_ETournamentTeamState_Finished15th ETournamentTeamState = 15015
-	ETournamentTeamState_k_ETournamentTeamState_Finished16th ETournamentTeamState = 15016
-)
-
-var ETournamentTeamState_name = map[int32]string{
-	0:     "k_ETournamentTeamState_Unknown",
-	1:     "k_ETournamentTeamState_Node1",
-	1024:  "k_ETournamentTeamState_NodeMax",
-	14003: "k_ETournamentTeamState_Eliminated",
-	14004: "k_ETournamentTeamState_Forfeited",
-	15001: "k_ETournamentTeamState_Finished1st",
-	15002: "k_ETournamentTeamState_Finished2nd",
-	15003: "k_ETournamentTeamState_Finished3rd",
-	15004: "k_ETournamentTeamState_Finished4th",
-	15005: "k_ETournamentTeamState_Finished5th",
-	15006: "k_ETournamentTeamState_Finished6th",
-	15007: "k_ETournamentTeamState_Finished7th",
-	15008: "k_ETournamentTeamState_Finished8th",
-	15009: "k_ETournamentTeamState_Finished9th",
-	15010: "k_ETournamentTeamState_Finished10th",
-	15011: "k_ETournamentTeamState_Finished11th",
-	15012: "k_ETournamentTeamState_Finished12th",
-	15013: "k_ETournamentTeamState_Finished13th",
-	15014: "k_ETournamentTeamState_Finished14th",
-	15015: "k_ETournamentTeamState_Finished15th",
-	15016: "k_ETournamentTeamState_Finished16th",
-}
-var ETournamentTeamState_value = map[string]int32{
-	"k_ETournamentTeamState_Unknown":      0,
-	"k_ETournamentTeamState_Node1":        1,
-	"k_ETournamentTeamState_NodeMax":      1024,
-	"k_ETournamentTeamState_Eliminated":   14003,
-	"k_ETournamentTeamState_Forfeited":    14004,
-	"k_ETournamentTeamState_Finished1st":  15001,
-	"k_ETournamentTeamState_Finished2nd":  15002,
-	"k_ETournamentTeamState_Finished3rd":  15003,
-	"k_ETournamentTeamState_Finished4th":  15004,
-	"k_ETournamentTeamState_Finished5th":  15005,
-	"k_ETournamentTeamState_Finished6th":  15006,
-	"k_ETournamentTeamState_Finished7th":  15007,
-	"k_ETournamentTeamState_Finished8th":  15008,
-	"k_ETournamentTeamState_Finished9th":  15009,
-	"k_ETournamentTeamState_Finished10th": 15010,
-	"k_ETournamentTeamState_Finished11th": 15011,
-	"k_ETournamentTeamState_Finished12th": 15012,
-	"k_ETournamentTeamState_Finished13th": 15013,
-	"k_ETournamentTeamState_Finished14th": 15014,
-	"k_ETournamentTeamState_Finished15th": 15015,
-	"k_ETournamentTeamState_Finished16th": 15016,
-}
-
-func (x ETournamentTeamState) Enum() *ETournamentTeamState {
-	p := new(ETournamentTeamState)
-	*p = x
-	return p
-}
-func (x ETournamentTeamState) String() string {
-	return proto.EnumName(ETournamentTeamState_name, int32(x))
-}
-func (x *ETournamentTeamState) UnmarshalJSON(data []byte) error {
-	value, err := proto.UnmarshalJSONEnum(ETournamentTeamState_value, data, "ETournamentTeamState")
-	if err != nil {
-		return err
-	}
-	*x = ETournamentTeamState(value)
-	return nil
-}
-
-type ETournamentState int32
-
-const (
-	ETournamentState_k_ETournamentState_Unknown    ETournamentState = 0
-	ETournamentState_k_ETournamentState_Setup      ETournamentState = 1
-	ETournamentState_k_ETournamentState_Scheduled  ETournamentState = 2
-	ETournamentState_k_ETournamentState_InProgress ETournamentState = 3
-	ETournamentState_k_ETournamentState_Completed  ETournamentState = 4
-	ETournamentState_k_ETournamentState_Canceled   ETournamentState = 5
-)
-
-var ETournamentState_name = map[int32]string{
-	0: "k_ETournamentState_Unknown",
-	1: "k_ETournamentState_Setup",
-	2: "k_ETournamentState_Scheduled",
-	3: "k_ETournamentState_InProgress",
-	4: "k_ETournamentState_Completed",
-	5: "k_ETournamentState_Canceled",
-}
-var ETournamentState_value = map[string]int32{
-	"k_ETournamentState_Unknown":    0,
-	"k_ETournamentState_Setup":      1,
-	"k_ETournamentState_Scheduled":  2,
-	"k_ETournamentState_InProgress": 3,
-	"k_ETournamentState_Completed":  4,
-	"k_ETournamentState_Canceled":   5,
-}
-
-func (x ETournamentState) Enum() *ETournamentState {
-	p := new(ETournamentState)
-	*p = x
-	return p
-}
-func (x ETournamentState) String() string {
-	return proto.EnumName(ETournamentState_name, int32(x))
-}
-func (x *ETournamentState) UnmarshalJSON(data []byte) error {
-	value, err := proto.UnmarshalJSONEnum(ETournamentState_value, data, "ETournamentState")
-	if err != nil {
-		return err
-	}
-	*x = ETournamentState(value)
-	return nil
-}
-
-type ETournamentNodeState int32
-
-const (
-	ETournamentNodeState_k_ETournamentNodeState_Unknown             ETournamentNodeState = 0
-	ETournamentNodeState_k_ETournamentNodeState_TeamsNotYetAssigned ETournamentNodeState = 1
-	ETournamentNodeState_k_ETournamentNodeState_InBetweenGames      ETournamentNodeState = 2
-	ETournamentNodeState_k_ETournamentNodeState_GameInProgress      ETournamentNodeState = 3
-	ETournamentNodeState_k_ETournamentNodeState_A_Won               ETournamentNodeState = 4
-	ETournamentNodeState_k_ETournamentNodeState_B_Won               ETournamentNodeState = 5
-	ETournamentNodeState_k_ETournamentNodeState_Canceled            ETournamentNodeState = 6
-)
-
-var ETournamentNodeState_name = map[int32]string{
-	0: "k_ETournamentNodeState_Unknown",
-	1: "k_ETournamentNodeState_TeamsNotYetAssigned",
-	2: "k_ETournamentNodeState_InBetweenGames",
-	3: "k_ETournamentNodeState_GameInProgress",
-	4: "k_ETournamentNodeState_A_Won",
-	5: "k_ETournamentNodeState_B_Won",
-	6: "k_ETournamentNodeState_Canceled",
-}
-var ETournamentNodeState_value = map[string]int32{
-	"k_ETournamentNodeState_Unknown":             0,
-	"k_ETournamentNodeState_TeamsNotYetAssigned": 1,
-	"k_ETournamentNodeState_InBetweenGames":      2,
-	"k_ETournamentNodeState_GameInProgress":      3,
-	"k_ETournamentNodeState_A_Won":               4,
-	"k_ETournamentNodeState_B_Won":               5,
-	"k_ETournamentNodeState_Canceled":            6,
-}
-
-func (x ETournamentNodeState) Enum() *ETournamentNodeState {
-	p := new(ETournamentNodeState)
-	*p = x
-	return p
-}
-func (x ETournamentNodeState) String() string {
-	return proto.EnumName(ETournamentNodeState_name, int32(x))
-}
-func (x *ETournamentNodeState) UnmarshalJSON(data []byte) error {
-	value, err := proto.UnmarshalJSONEnum(ETournamentNodeState_value, data, "ETournamentNodeState")
-	if err != nil {
-		return err
-	}
-	*x = ETournamentNodeState(value)
-	return nil
-}
-
 type DOTAChatChannelTypeT int32
 
 const (
@@ -263,6 +29,8 @@ const (
 	DOTAChatChannelTypeT_DOTAChannelType_GameAllies    DOTAChatChannelTypeT = 12
 	DOTAChatChannelTypeT_DOTAChannelType_GameSpectator DOTAChatChannelTypeT = 13
 	DOTAChatChannelTypeT_DOTAChannelType_GameCoaching  DOTAChatChannelTypeT = 14
+	DOTAChatChannelTypeT_DOTAChannelType_Cafe          DOTAChatChannelTypeT = 15
+	DOTAChatChannelTypeT_DOTAChannelType_CustomGame    DOTAChatChannelTypeT = 16
 )
 
 var DOTAChatChannelTypeT_name = map[int32]string{
@@ -281,6 +49,8 @@ var DOTAChatChannelTypeT_name = map[int32]string{
 	12: "DOTAChannelType_GameAllies",
 	13: "DOTAChannelType_GameSpectator",
 	14: "DOTAChannelType_GameCoaching",
+	15: "DOTAChannelType_Cafe",
+	16: "DOTAChannelType_CustomGame",
 }
 var DOTAChatChannelTypeT_value = map[string]int32{
 	"DOTAChannelType_Regional":      0,
@@ -298,6 +68,8 @@ var DOTAChatChannelTypeT_value = map[string]int32{
 	"DOTAChannelType_GameAllies":    12,
 	"DOTAChannelType_GameSpectator": 13,
 	"DOTAChannelType_GameCoaching":  14,
+	"DOTAChannelType_Cafe":          15,
+	"DOTAChannelType_CustomGame":    16,
 }
 
 func (x DOTAChatChannelTypeT) Enum() *DOTAChatChannelTypeT {
@@ -347,321 +119,6 @@ func (x *DOTA_WatchReplayType) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	*x = DOTA_WatchReplayType(value)
-	return nil
-}
-
-type DOTA_2013PassportSelectionIndices int32
-
-const (
-	DOTA_2013PassportSelectionIndices_PP13_SEL_ALLSTAR_PLAYER_0    DOTA_2013PassportSelectionIndices = 0
-	DOTA_2013PassportSelectionIndices_PP13_SEL_ALLSTAR_PLAYER_1    DOTA_2013PassportSelectionIndices = 1
-	DOTA_2013PassportSelectionIndices_PP13_SEL_ALLSTAR_PLAYER_2    DOTA_2013PassportSelectionIndices = 2
-	DOTA_2013PassportSelectionIndices_PP13_SEL_ALLSTAR_PLAYER_3    DOTA_2013PassportSelectionIndices = 3
-	DOTA_2013PassportSelectionIndices_PP13_SEL_ALLSTAR_PLAYER_4    DOTA_2013PassportSelectionIndices = 4
-	DOTA_2013PassportSelectionIndices_PP13_SEL_ALLSTAR_PLAYER_5    DOTA_2013PassportSelectionIndices = 5
-	DOTA_2013PassportSelectionIndices_PP13_SEL_ALLSTAR_PLAYER_6    DOTA_2013PassportSelectionIndices = 6
-	DOTA_2013PassportSelectionIndices_PP13_SEL_ALLSTAR_PLAYER_7    DOTA_2013PassportSelectionIndices = 7
-	DOTA_2013PassportSelectionIndices_PP13_SEL_ALLSTAR_PLAYER_8    DOTA_2013PassportSelectionIndices = 8
-	DOTA_2013PassportSelectionIndices_PP13_SEL_ALLSTAR_PLAYER_9    DOTA_2013PassportSelectionIndices = 9
-	DOTA_2013PassportSelectionIndices_PP13_SEL_QUALPRED_WEST_0     DOTA_2013PassportSelectionIndices = 10
-	DOTA_2013PassportSelectionIndices_PP13_SEL_QUALPRED_WEST_1     DOTA_2013PassportSelectionIndices = 11
-	DOTA_2013PassportSelectionIndices_PP13_SEL_QUALPRED_WEST_2     DOTA_2013PassportSelectionIndices = 12
-	DOTA_2013PassportSelectionIndices_PP13_SEL_QUALPRED_WEST_3     DOTA_2013PassportSelectionIndices = 13
-	DOTA_2013PassportSelectionIndices_PP13_SEL_QUALPRED_WEST_4     DOTA_2013PassportSelectionIndices = 14
-	DOTA_2013PassportSelectionIndices_PP13_SEL_QUALPRED_WEST_5     DOTA_2013PassportSelectionIndices = 15
-	DOTA_2013PassportSelectionIndices_PP13_SEL_QUALPRED_WEST_6     DOTA_2013PassportSelectionIndices = 16
-	DOTA_2013PassportSelectionIndices_PP13_SEL_QUALPRED_WEST_7     DOTA_2013PassportSelectionIndices = 17
-	DOTA_2013PassportSelectionIndices_PP13_SEL_QUALPRED_WEST_8     DOTA_2013PassportSelectionIndices = 18
-	DOTA_2013PassportSelectionIndices_PP13_SEL_QUALPRED_WEST_9     DOTA_2013PassportSelectionIndices = 19
-	DOTA_2013PassportSelectionIndices_PP13_SEL_QUALPRED_WEST_10    DOTA_2013PassportSelectionIndices = 20
-	DOTA_2013PassportSelectionIndices_PP13_SEL_QUALPRED_WEST_11    DOTA_2013PassportSelectionIndices = 21
-	DOTA_2013PassportSelectionIndices_PP13_SEL_QUALPRED_WEST_12    DOTA_2013PassportSelectionIndices = 22
-	DOTA_2013PassportSelectionIndices_PP13_SEL_QUALPRED_WEST_13    DOTA_2013PassportSelectionIndices = 23
-	DOTA_2013PassportSelectionIndices_PP13_SEL_QUALPRED_WEST_14    DOTA_2013PassportSelectionIndices = 24
-	DOTA_2013PassportSelectionIndices_PP13_SEL_QUALPRED_EAST_0     DOTA_2013PassportSelectionIndices = 25
-	DOTA_2013PassportSelectionIndices_PP13_SEL_QUALPRED_EAST_1     DOTA_2013PassportSelectionIndices = 26
-	DOTA_2013PassportSelectionIndices_PP13_SEL_QUALPRED_EAST_2     DOTA_2013PassportSelectionIndices = 27
-	DOTA_2013PassportSelectionIndices_PP13_SEL_QUALPRED_EAST_3     DOTA_2013PassportSelectionIndices = 28
-	DOTA_2013PassportSelectionIndices_PP13_SEL_QUALPRED_EAST_4     DOTA_2013PassportSelectionIndices = 29
-	DOTA_2013PassportSelectionIndices_PP13_SEL_QUALPRED_EAST_5     DOTA_2013PassportSelectionIndices = 30
-	DOTA_2013PassportSelectionIndices_PP13_SEL_QUALPRED_EAST_6     DOTA_2013PassportSelectionIndices = 31
-	DOTA_2013PassportSelectionIndices_PP13_SEL_QUALPRED_EAST_7     DOTA_2013PassportSelectionIndices = 32
-	DOTA_2013PassportSelectionIndices_PP13_SEL_QUALPRED_EAST_8     DOTA_2013PassportSelectionIndices = 33
-	DOTA_2013PassportSelectionIndices_PP13_SEL_QUALPRED_EAST_9     DOTA_2013PassportSelectionIndices = 34
-	DOTA_2013PassportSelectionIndices_PP13_SEL_QUALPRED_EAST_10    DOTA_2013PassportSelectionIndices = 35
-	DOTA_2013PassportSelectionIndices_PP13_SEL_QUALPRED_EAST_11    DOTA_2013PassportSelectionIndices = 36
-	DOTA_2013PassportSelectionIndices_PP13_SEL_QUALPRED_EAST_12    DOTA_2013PassportSelectionIndices = 37
-	DOTA_2013PassportSelectionIndices_PP13_SEL_QUALPRED_EAST_13    DOTA_2013PassportSelectionIndices = 38
-	DOTA_2013PassportSelectionIndices_PP13_SEL_QUALPRED_EAST_14    DOTA_2013PassportSelectionIndices = 39
-	DOTA_2013PassportSelectionIndices_PP13_SEL_TEAMCUP_TEAM        DOTA_2013PassportSelectionIndices = 40
-	DOTA_2013PassportSelectionIndices_PP13_SEL_TEAMCUP_PLAYER      DOTA_2013PassportSelectionIndices = 41
-	DOTA_2013PassportSelectionIndices_PP13_SEL_TEAMCUP_TEAM_LOCK   DOTA_2013PassportSelectionIndices = 42
-	DOTA_2013PassportSelectionIndices_PP13_SEL_TEAMCUP_PLAYER_LOCK DOTA_2013PassportSelectionIndices = 43
-	DOTA_2013PassportSelectionIndices_PP13_SEL_EVENTPRED_0         DOTA_2013PassportSelectionIndices = 44
-	DOTA_2013PassportSelectionIndices_PP13_SEL_EVENTPRED_1         DOTA_2013PassportSelectionIndices = 45
-	DOTA_2013PassportSelectionIndices_PP13_SEL_EVENTPRED_2         DOTA_2013PassportSelectionIndices = 46
-	DOTA_2013PassportSelectionIndices_PP13_SEL_EVENTPRED_3         DOTA_2013PassportSelectionIndices = 47
-	DOTA_2013PassportSelectionIndices_PP13_SEL_EVENTPRED_4         DOTA_2013PassportSelectionIndices = 48
-	DOTA_2013PassportSelectionIndices_PP13_SEL_EVENTPRED_5         DOTA_2013PassportSelectionIndices = 49
-	DOTA_2013PassportSelectionIndices_PP13_SEL_EVENTPRED_6         DOTA_2013PassportSelectionIndices = 50
-	DOTA_2013PassportSelectionIndices_PP13_SEL_EVENTPRED_7         DOTA_2013PassportSelectionIndices = 51
-	DOTA_2013PassportSelectionIndices_PP13_SEL_EVENTPRED_8         DOTA_2013PassportSelectionIndices = 52
-	DOTA_2013PassportSelectionIndices_PP13_SEL_EVENTPRED_9         DOTA_2013PassportSelectionIndices = 53
-	DOTA_2013PassportSelectionIndices_PP13_SEL_EVENTPRED_10        DOTA_2013PassportSelectionIndices = 54
-	DOTA_2013PassportSelectionIndices_PP13_SEL_EVENTPRED_11        DOTA_2013PassportSelectionIndices = 55
-	DOTA_2013PassportSelectionIndices_PP13_SEL_EVENTPRED_12        DOTA_2013PassportSelectionIndices = 56
-	DOTA_2013PassportSelectionIndices_PP13_SEL_EVENTPRED_13        DOTA_2013PassportSelectionIndices = 57
-	DOTA_2013PassportSelectionIndices_PP13_SEL_EVENTPRED_14        DOTA_2013PassportSelectionIndices = 58
-	DOTA_2013PassportSelectionIndices_PP13_SEL_EVENTPRED_15        DOTA_2013PassportSelectionIndices = 59
-	DOTA_2013PassportSelectionIndices_PP13_SEL_EVENTPRED_16        DOTA_2013PassportSelectionIndices = 60
-	DOTA_2013PassportSelectionIndices_PP13_SEL_EVENTPRED_17        DOTA_2013PassportSelectionIndices = 61
-	DOTA_2013PassportSelectionIndices_PP13_SEL_EVENTPRED_18        DOTA_2013PassportSelectionIndices = 62
-	DOTA_2013PassportSelectionIndices_PP13_SEL_EVENTPRED_19        DOTA_2013PassportSelectionIndices = 63
-	DOTA_2013PassportSelectionIndices_PP13_SEL_EVENTPRED_20        DOTA_2013PassportSelectionIndices = 64
-	DOTA_2013PassportSelectionIndices_PP13_SEL_EVENTPRED_21        DOTA_2013PassportSelectionIndices = 65
-	DOTA_2013PassportSelectionIndices_PP13_SEL_EVENTPRED_22        DOTA_2013PassportSelectionIndices = 66
-	DOTA_2013PassportSelectionIndices_PP13_SEL_EVENTPRED_23        DOTA_2013PassportSelectionIndices = 67
-	DOTA_2013PassportSelectionIndices_PP13_SEL_EVENTPRED_24        DOTA_2013PassportSelectionIndices = 68
-	DOTA_2013PassportSelectionIndices_PP13_SEL_EVENTPRED_25        DOTA_2013PassportSelectionIndices = 69
-	DOTA_2013PassportSelectionIndices_PP13_SEL_EVENTPRED_26        DOTA_2013PassportSelectionIndices = 70
-	DOTA_2013PassportSelectionIndices_PP13_SEL_EVENTPRED_27        DOTA_2013PassportSelectionIndices = 71
-	DOTA_2013PassportSelectionIndices_PP13_SEL_EVENTPRED_28        DOTA_2013PassportSelectionIndices = 72
-	DOTA_2013PassportSelectionIndices_PP13_SEL_EVENTPRED_29        DOTA_2013PassportSelectionIndices = 73
-	DOTA_2013PassportSelectionIndices_PP13_SEL_EVENTPRED_30        DOTA_2013PassportSelectionIndices = 74
-	DOTA_2013PassportSelectionIndices_PP13_SEL_EVENTPRED_31        DOTA_2013PassportSelectionIndices = 75
-	DOTA_2013PassportSelectionIndices_PP13_SEL_EVENTPRED_32        DOTA_2013PassportSelectionIndices = 76
-	DOTA_2013PassportSelectionIndices_PP13_SEL_EVENTPRED_33        DOTA_2013PassportSelectionIndices = 77
-	DOTA_2013PassportSelectionIndices_PP13_SEL_EVENTPRED_34        DOTA_2013PassportSelectionIndices = 78
-	DOTA_2013PassportSelectionIndices_PP13_SEL_EVENTPRED_35        DOTA_2013PassportSelectionIndices = 79
-	DOTA_2013PassportSelectionIndices_PP13_SEL_EVENTPRED_36        DOTA_2013PassportSelectionIndices = 80
-	DOTA_2013PassportSelectionIndices_PP13_SEL_EVENTPRED_37        DOTA_2013PassportSelectionIndices = 81
-	DOTA_2013PassportSelectionIndices_PP13_SEL_EVENTPRED_38        DOTA_2013PassportSelectionIndices = 82
-	DOTA_2013PassportSelectionIndices_PP13_SEL_EVENTPRED_39        DOTA_2013PassportSelectionIndices = 83
-	DOTA_2013PassportSelectionIndices_PP13_SEL_EVENTPRED_40        DOTA_2013PassportSelectionIndices = 84
-	DOTA_2013PassportSelectionIndices_PP13_SEL_EVENTPRED_41        DOTA_2013PassportSelectionIndices = 85
-	DOTA_2013PassportSelectionIndices_PP13_SEL_EVENTPRED_42        DOTA_2013PassportSelectionIndices = 86
-	DOTA_2013PassportSelectionIndices_PP13_SEL_EVENTPRED_43        DOTA_2013PassportSelectionIndices = 87
-	DOTA_2013PassportSelectionIndices_PP13_SEL_SOLO_0              DOTA_2013PassportSelectionIndices = 88
-	DOTA_2013PassportSelectionIndices_PP13_SEL_SOLO_1              DOTA_2013PassportSelectionIndices = 89
-	DOTA_2013PassportSelectionIndices_PP13_SEL_SOLO_2              DOTA_2013PassportSelectionIndices = 90
-	DOTA_2013PassportSelectionIndices_PP13_SEL_SOLO_3              DOTA_2013PassportSelectionIndices = 91
-	DOTA_2013PassportSelectionIndices_PP13_SEL_SOLO_4              DOTA_2013PassportSelectionIndices = 92
-	DOTA_2013PassportSelectionIndices_PP13_SEL_SOLO_5              DOTA_2013PassportSelectionIndices = 93
-	DOTA_2013PassportSelectionIndices_PP13_SEL_SOLO_6              DOTA_2013PassportSelectionIndices = 94
-	DOTA_2013PassportSelectionIndices_PP13_SEL_SOLO_7              DOTA_2013PassportSelectionIndices = 95
-)
-
-var DOTA_2013PassportSelectionIndices_name = map[int32]string{
-	0:  "PP13_SEL_ALLSTAR_PLAYER_0",
-	1:  "PP13_SEL_ALLSTAR_PLAYER_1",
-	2:  "PP13_SEL_ALLSTAR_PLAYER_2",
-	3:  "PP13_SEL_ALLSTAR_PLAYER_3",
-	4:  "PP13_SEL_ALLSTAR_PLAYER_4",
-	5:  "PP13_SEL_ALLSTAR_PLAYER_5",
-	6:  "PP13_SEL_ALLSTAR_PLAYER_6",
-	7:  "PP13_SEL_ALLSTAR_PLAYER_7",
-	8:  "PP13_SEL_ALLSTAR_PLAYER_8",
-	9:  "PP13_SEL_ALLSTAR_PLAYER_9",
-	10: "PP13_SEL_QUALPRED_WEST_0",
-	11: "PP13_SEL_QUALPRED_WEST_1",
-	12: "PP13_SEL_QUALPRED_WEST_2",
-	13: "PP13_SEL_QUALPRED_WEST_3",
-	14: "PP13_SEL_QUALPRED_WEST_4",
-	15: "PP13_SEL_QUALPRED_WEST_5",
-	16: "PP13_SEL_QUALPRED_WEST_6",
-	17: "PP13_SEL_QUALPRED_WEST_7",
-	18: "PP13_SEL_QUALPRED_WEST_8",
-	19: "PP13_SEL_QUALPRED_WEST_9",
-	20: "PP13_SEL_QUALPRED_WEST_10",
-	21: "PP13_SEL_QUALPRED_WEST_11",
-	22: "PP13_SEL_QUALPRED_WEST_12",
-	23: "PP13_SEL_QUALPRED_WEST_13",
-	24: "PP13_SEL_QUALPRED_WEST_14",
-	25: "PP13_SEL_QUALPRED_EAST_0",
-	26: "PP13_SEL_QUALPRED_EAST_1",
-	27: "PP13_SEL_QUALPRED_EAST_2",
-	28: "PP13_SEL_QUALPRED_EAST_3",
-	29: "PP13_SEL_QUALPRED_EAST_4",
-	30: "PP13_SEL_QUALPRED_EAST_5",
-	31: "PP13_SEL_QUALPRED_EAST_6",
-	32: "PP13_SEL_QUALPRED_EAST_7",
-	33: "PP13_SEL_QUALPRED_EAST_8",
-	34: "PP13_SEL_QUALPRED_EAST_9",
-	35: "PP13_SEL_QUALPRED_EAST_10",
-	36: "PP13_SEL_QUALPRED_EAST_11",
-	37: "PP13_SEL_QUALPRED_EAST_12",
-	38: "PP13_SEL_QUALPRED_EAST_13",
-	39: "PP13_SEL_QUALPRED_EAST_14",
-	40: "PP13_SEL_TEAMCUP_TEAM",
-	41: "PP13_SEL_TEAMCUP_PLAYER",
-	42: "PP13_SEL_TEAMCUP_TEAM_LOCK",
-	43: "PP13_SEL_TEAMCUP_PLAYER_LOCK",
-	44: "PP13_SEL_EVENTPRED_0",
-	45: "PP13_SEL_EVENTPRED_1",
-	46: "PP13_SEL_EVENTPRED_2",
-	47: "PP13_SEL_EVENTPRED_3",
-	48: "PP13_SEL_EVENTPRED_4",
-	49: "PP13_SEL_EVENTPRED_5",
-	50: "PP13_SEL_EVENTPRED_6",
-	51: "PP13_SEL_EVENTPRED_7",
-	52: "PP13_SEL_EVENTPRED_8",
-	53: "PP13_SEL_EVENTPRED_9",
-	54: "PP13_SEL_EVENTPRED_10",
-	55: "PP13_SEL_EVENTPRED_11",
-	56: "PP13_SEL_EVENTPRED_12",
-	57: "PP13_SEL_EVENTPRED_13",
-	58: "PP13_SEL_EVENTPRED_14",
-	59: "PP13_SEL_EVENTPRED_15",
-	60: "PP13_SEL_EVENTPRED_16",
-	61: "PP13_SEL_EVENTPRED_17",
-	62: "PP13_SEL_EVENTPRED_18",
-	63: "PP13_SEL_EVENTPRED_19",
-	64: "PP13_SEL_EVENTPRED_20",
-	65: "PP13_SEL_EVENTPRED_21",
-	66: "PP13_SEL_EVENTPRED_22",
-	67: "PP13_SEL_EVENTPRED_23",
-	68: "PP13_SEL_EVENTPRED_24",
-	69: "PP13_SEL_EVENTPRED_25",
-	70: "PP13_SEL_EVENTPRED_26",
-	71: "PP13_SEL_EVENTPRED_27",
-	72: "PP13_SEL_EVENTPRED_28",
-	73: "PP13_SEL_EVENTPRED_29",
-	74: "PP13_SEL_EVENTPRED_30",
-	75: "PP13_SEL_EVENTPRED_31",
-	76: "PP13_SEL_EVENTPRED_32",
-	77: "PP13_SEL_EVENTPRED_33",
-	78: "PP13_SEL_EVENTPRED_34",
-	79: "PP13_SEL_EVENTPRED_35",
-	80: "PP13_SEL_EVENTPRED_36",
-	81: "PP13_SEL_EVENTPRED_37",
-	82: "PP13_SEL_EVENTPRED_38",
-	83: "PP13_SEL_EVENTPRED_39",
-	84: "PP13_SEL_EVENTPRED_40",
-	85: "PP13_SEL_EVENTPRED_41",
-	86: "PP13_SEL_EVENTPRED_42",
-	87: "PP13_SEL_EVENTPRED_43",
-	88: "PP13_SEL_SOLO_0",
-	89: "PP13_SEL_SOLO_1",
-	90: "PP13_SEL_SOLO_2",
-	91: "PP13_SEL_SOLO_3",
-	92: "PP13_SEL_SOLO_4",
-	93: "PP13_SEL_SOLO_5",
-	94: "PP13_SEL_SOLO_6",
-	95: "PP13_SEL_SOLO_7",
-}
-var DOTA_2013PassportSelectionIndices_value = map[string]int32{
-	"PP13_SEL_ALLSTAR_PLAYER_0":    0,
-	"PP13_SEL_ALLSTAR_PLAYER_1":    1,
-	"PP13_SEL_ALLSTAR_PLAYER_2":    2,
-	"PP13_SEL_ALLSTAR_PLAYER_3":    3,
-	"PP13_SEL_ALLSTAR_PLAYER_4":    4,
-	"PP13_SEL_ALLSTAR_PLAYER_5":    5,
-	"PP13_SEL_ALLSTAR_PLAYER_6":    6,
-	"PP13_SEL_ALLSTAR_PLAYER_7":    7,
-	"PP13_SEL_ALLSTAR_PLAYER_8":    8,
-	"PP13_SEL_ALLSTAR_PLAYER_9":    9,
-	"PP13_SEL_QUALPRED_WEST_0":     10,
-	"PP13_SEL_QUALPRED_WEST_1":     11,
-	"PP13_SEL_QUALPRED_WEST_2":     12,
-	"PP13_SEL_QUALPRED_WEST_3":     13,
-	"PP13_SEL_QUALPRED_WEST_4":     14,
-	"PP13_SEL_QUALPRED_WEST_5":     15,
-	"PP13_SEL_QUALPRED_WEST_6":     16,
-	"PP13_SEL_QUALPRED_WEST_7":     17,
-	"PP13_SEL_QUALPRED_WEST_8":     18,
-	"PP13_SEL_QUALPRED_WEST_9":     19,
-	"PP13_SEL_QUALPRED_WEST_10":    20,
-	"PP13_SEL_QUALPRED_WEST_11":    21,
-	"PP13_SEL_QUALPRED_WEST_12":    22,
-	"PP13_SEL_QUALPRED_WEST_13":    23,
-	"PP13_SEL_QUALPRED_WEST_14":    24,
-	"PP13_SEL_QUALPRED_EAST_0":     25,
-	"PP13_SEL_QUALPRED_EAST_1":     26,
-	"PP13_SEL_QUALPRED_EAST_2":     27,
-	"PP13_SEL_QUALPRED_EAST_3":     28,
-	"PP13_SEL_QUALPRED_EAST_4":     29,
-	"PP13_SEL_QUALPRED_EAST_5":     30,
-	"PP13_SEL_QUALPRED_EAST_6":     31,
-	"PP13_SEL_QUALPRED_EAST_7":     32,
-	"PP13_SEL_QUALPRED_EAST_8":     33,
-	"PP13_SEL_QUALPRED_EAST_9":     34,
-	"PP13_SEL_QUALPRED_EAST_10":    35,
-	"PP13_SEL_QUALPRED_EAST_11":    36,
-	"PP13_SEL_QUALPRED_EAST_12":    37,
-	"PP13_SEL_QUALPRED_EAST_13":    38,
-	"PP13_SEL_QUALPRED_EAST_14":    39,
-	"PP13_SEL_TEAMCUP_TEAM":        40,
-	"PP13_SEL_TEAMCUP_PLAYER":      41,
-	"PP13_SEL_TEAMCUP_TEAM_LOCK":   42,
-	"PP13_SEL_TEAMCUP_PLAYER_LOCK": 43,
-	"PP13_SEL_EVENTPRED_0":         44,
-	"PP13_SEL_EVENTPRED_1":         45,
-	"PP13_SEL_EVENTPRED_2":         46,
-	"PP13_SEL_EVENTPRED_3":         47,
-	"PP13_SEL_EVENTPRED_4":         48,
-	"PP13_SEL_EVENTPRED_5":         49,
-	"PP13_SEL_EVENTPRED_6":         50,
-	"PP13_SEL_EVENTPRED_7":         51,
-	"PP13_SEL_EVENTPRED_8":         52,
-	"PP13_SEL_EVENTPRED_9":         53,
-	"PP13_SEL_EVENTPRED_10":        54,
-	"PP13_SEL_EVENTPRED_11":        55,
-	"PP13_SEL_EVENTPRED_12":        56,
-	"PP13_SEL_EVENTPRED_13":        57,
-	"PP13_SEL_EVENTPRED_14":        58,
-	"PP13_SEL_EVENTPRED_15":        59,
-	"PP13_SEL_EVENTPRED_16":        60,
-	"PP13_SEL_EVENTPRED_17":        61,
-	"PP13_SEL_EVENTPRED_18":        62,
-	"PP13_SEL_EVENTPRED_19":        63,
-	"PP13_SEL_EVENTPRED_20":        64,
-	"PP13_SEL_EVENTPRED_21":        65,
-	"PP13_SEL_EVENTPRED_22":        66,
-	"PP13_SEL_EVENTPRED_23":        67,
-	"PP13_SEL_EVENTPRED_24":        68,
-	"PP13_SEL_EVENTPRED_25":        69,
-	"PP13_SEL_EVENTPRED_26":        70,
-	"PP13_SEL_EVENTPRED_27":        71,
-	"PP13_SEL_EVENTPRED_28":        72,
-	"PP13_SEL_EVENTPRED_29":        73,
-	"PP13_SEL_EVENTPRED_30":        74,
-	"PP13_SEL_EVENTPRED_31":        75,
-	"PP13_SEL_EVENTPRED_32":        76,
-	"PP13_SEL_EVENTPRED_33":        77,
-	"PP13_SEL_EVENTPRED_34":        78,
-	"PP13_SEL_EVENTPRED_35":        79,
-	"PP13_SEL_EVENTPRED_36":        80,
-	"PP13_SEL_EVENTPRED_37":        81,
-	"PP13_SEL_EVENTPRED_38":        82,
-	"PP13_SEL_EVENTPRED_39":        83,
-	"PP13_SEL_EVENTPRED_40":        84,
-	"PP13_SEL_EVENTPRED_41":        85,
-	"PP13_SEL_EVENTPRED_42":        86,
-	"PP13_SEL_EVENTPRED_43":        87,
-	"PP13_SEL_SOLO_0":              88,
-	"PP13_SEL_SOLO_1":              89,
-	"PP13_SEL_SOLO_2":              90,
-	"PP13_SEL_SOLO_3":              91,
-	"PP13_SEL_SOLO_4":              92,
-	"PP13_SEL_SOLO_5":              93,
-	"PP13_SEL_SOLO_6":              94,
-	"PP13_SEL_SOLO_7":              95,
-}
-
-func (x DOTA_2013PassportSelectionIndices) Enum() *DOTA_2013PassportSelectionIndices {
-	p := new(DOTA_2013PassportSelectionIndices)
-	*p = x
-	return p
-}
-func (x DOTA_2013PassportSelectionIndices) String() string {
-	return proto.EnumName(DOTA_2013PassportSelectionIndices_name, int32(x))
-}
-func (x *DOTA_2013PassportSelectionIndices) UnmarshalJSON(data []byte) error {
-	value, err := proto.UnmarshalJSONEnum(DOTA_2013PassportSelectionIndices_value, data, "DOTA_2013PassportSelectionIndices")
-	if err != nil {
-		return err
-	}
-	*x = DOTA_2013PassportSelectionIndices(value)
 	return nil
 }
 
@@ -928,18 +385,15 @@ type CMsgGCToClientTopMatchesResponse_Type int32
 const (
 	CMsgGCToClientTopMatchesResponse_LEAGUES CMsgGCToClientTopMatchesResponse_Type = 1
 	CMsgGCToClientTopMatchesResponse_FRIENDS CMsgGCToClientTopMatchesResponse_Type = 2
-	CMsgGCToClientTopMatchesResponse_PUBS    CMsgGCToClientTopMatchesResponse_Type = 3
 )
 
 var CMsgGCToClientTopMatchesResponse_Type_name = map[int32]string{
 	1: "LEAGUES",
 	2: "FRIENDS",
-	3: "PUBS",
 }
 var CMsgGCToClientTopMatchesResponse_Type_value = map[string]int32{
 	"LEAGUES": 1,
 	"FRIENDS": 2,
-	"PUBS":    3,
 }
 
 func (x CMsgGCToClientTopMatchesResponse_Type) Enum() *CMsgGCToClientTopMatchesResponse_Type {
@@ -2318,6 +1772,48 @@ func (x *CMsgClientToGCExchangeItemsForOfferingResponse_EResponse) UnmarshalJSON
 	return nil
 }
 
+type CMsgClientToGCCreateStaticRecipeResponse_EResponse int32
+
+const (
+	CMsgClientToGCCreateStaticRecipeResponse_eResponse_Success          CMsgClientToGCCreateStaticRecipeResponse_EResponse = 0
+	CMsgClientToGCCreateStaticRecipeResponse_eResponse_OfferingDisabled CMsgClientToGCCreateStaticRecipeResponse_EResponse = 1
+	CMsgClientToGCCreateStaticRecipeResponse_eResponse_InvalidItems     CMsgClientToGCCreateStaticRecipeResponse_EResponse = 2
+	CMsgClientToGCCreateStaticRecipeResponse_eResponse_InternalError    CMsgClientToGCCreateStaticRecipeResponse_EResponse = 3
+	CMsgClientToGCCreateStaticRecipeResponse_eResponse_MissingLeague    CMsgClientToGCCreateStaticRecipeResponse_EResponse = 4
+)
+
+var CMsgClientToGCCreateStaticRecipeResponse_EResponse_name = map[int32]string{
+	0: "eResponse_Success",
+	1: "eResponse_OfferingDisabled",
+	2: "eResponse_InvalidItems",
+	3: "eResponse_InternalError",
+	4: "eResponse_MissingLeague",
+}
+var CMsgClientToGCCreateStaticRecipeResponse_EResponse_value = map[string]int32{
+	"eResponse_Success":          0,
+	"eResponse_OfferingDisabled": 1,
+	"eResponse_InvalidItems":     2,
+	"eResponse_InternalError":    3,
+	"eResponse_MissingLeague":    4,
+}
+
+func (x CMsgClientToGCCreateStaticRecipeResponse_EResponse) Enum() *CMsgClientToGCCreateStaticRecipeResponse_EResponse {
+	p := new(CMsgClientToGCCreateStaticRecipeResponse_EResponse)
+	*p = x
+	return p
+}
+func (x CMsgClientToGCCreateStaticRecipeResponse_EResponse) String() string {
+	return proto.EnumName(CMsgClientToGCCreateStaticRecipeResponse_EResponse_name, int32(x))
+}
+func (x *CMsgClientToGCCreateStaticRecipeResponse_EResponse) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(CMsgClientToGCCreateStaticRecipeResponse_EResponse_value, data, "CMsgClientToGCCreateStaticRecipeResponse_EResponse")
+	if err != nil {
+		return err
+	}
+	*x = CMsgClientToGCCreateStaticRecipeResponse_EResponse(value)
+	return nil
+}
+
 type CMsgStartFindingMatch struct {
 	Key              *string            `protobuf:"bytes,1,opt,name=key" json:"key,omitempty"`
 	Matchgroups      *uint32            `protobuf:"varint,2,opt,name=matchgroups,def=4294967295" json:"matchgroups,omitempty"`
@@ -3117,29 +2613,37 @@ func (m *CMsgGCToClientFindTopSourceTVGamesResponse) GetSpecificGames() bool {
 	return false
 }
 
-type CMsgClientToGCTopLeagueMatchesRequest struct {
-	XXX_unrecognized []byte `json:"-"`
+type CMsgClientToGCTopMatchesRequest struct {
+	HeroId           *uint32 `protobuf:"varint,1,opt,name=hero_id" json:"hero_id,omitempty"`
+	PlayerAccountId  *uint32 `protobuf:"varint,2,opt,name=player_account_id" json:"player_account_id,omitempty"`
+	TeamId           *uint32 `protobuf:"varint,3,opt,name=team_id" json:"team_id,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CMsgClientToGCTopLeagueMatchesRequest) Reset()         { *m = CMsgClientToGCTopLeagueMatchesRequest{} }
-func (m *CMsgClientToGCTopLeagueMatchesRequest) String() string { return proto.CompactTextString(m) }
-func (*CMsgClientToGCTopLeagueMatchesRequest) ProtoMessage()    {}
+func (m *CMsgClientToGCTopMatchesRequest) Reset()         { *m = CMsgClientToGCTopMatchesRequest{} }
+func (m *CMsgClientToGCTopMatchesRequest) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCTopMatchesRequest) ProtoMessage()    {}
 
-type CMsgClientToGCTopFriendMatchesRequest struct {
-	XXX_unrecognized []byte `json:"-"`
+func (m *CMsgClientToGCTopMatchesRequest) GetHeroId() uint32 {
+	if m != nil && m.HeroId != nil {
+		return *m.HeroId
+	}
+	return 0
 }
 
-func (m *CMsgClientToGCTopFriendMatchesRequest) Reset()         { *m = CMsgClientToGCTopFriendMatchesRequest{} }
-func (m *CMsgClientToGCTopFriendMatchesRequest) String() string { return proto.CompactTextString(m) }
-func (*CMsgClientToGCTopFriendMatchesRequest) ProtoMessage()    {}
-
-type CMsgClientToGCTopPubMatchesRequest struct {
-	XXX_unrecognized []byte `json:"-"`
+func (m *CMsgClientToGCTopMatchesRequest) GetPlayerAccountId() uint32 {
+	if m != nil && m.PlayerAccountId != nil {
+		return *m.PlayerAccountId
+	}
+	return 0
 }
 
-func (m *CMsgClientToGCTopPubMatchesRequest) Reset()         { *m = CMsgClientToGCTopPubMatchesRequest{} }
-func (m *CMsgClientToGCTopPubMatchesRequest) String() string { return proto.CompactTextString(m) }
-func (*CMsgClientToGCTopPubMatchesRequest) ProtoMessage()    {}
+func (m *CMsgClientToGCTopMatchesRequest) GetTeamId() uint32 {
+	if m != nil && m.TeamId != nil {
+		return *m.TeamId
+	}
+	return 0
+}
 
 type CMsgGCToClientTopMatchesResponse struct {
 	Type             *CMsgGCToClientTopMatchesResponse_Type `protobuf:"varint,1,opt,name=type,enum=dota.CMsgGCToClientTopMatchesResponse_Type,def=1" json:"type,omitempty"`
@@ -3364,6 +2868,8 @@ type CMsgPracticeLobbySetDetails struct {
 	LanHostPingToServerRegion *uint32              `protobuf:"varint,32,opt,name=lan_host_ping_to_server_region" json:"lan_host_ping_to_server_region,omitempty"`
 	Visibility                *DOTALobbyVisibility `protobuf:"varint,33,opt,name=visibility,enum=dota.DOTALobbyVisibility,def=0" json:"visibility,omitempty"`
 	CustomGameCrc             *uint64              `protobuf:"fixed64,34,opt,name=custom_game_crc" json:"custom_game_crc,omitempty"`
+	LeagueSeriesId            *uint32              `protobuf:"varint,35,opt,name=league_series_id" json:"league_series_id,omitempty"`
+	LeagueGameId              *uint32              `protobuf:"varint,36,opt,name=league_game_id" json:"league_game_id,omitempty"`
 	CustomGameTimestamp       *uint32              `protobuf:"fixed32,37,opt,name=custom_game_timestamp" json:"custom_game_timestamp,omitempty"`
 	XXX_unrecognized          []byte               `json:"-"`
 }
@@ -3599,6 +3105,20 @@ func (m *CMsgPracticeLobbySetDetails) GetVisibility() DOTALobbyVisibility {
 func (m *CMsgPracticeLobbySetDetails) GetCustomGameCrc() uint64 {
 	if m != nil && m.CustomGameCrc != nil {
 		return *m.CustomGameCrc
+	}
+	return 0
+}
+
+func (m *CMsgPracticeLobbySetDetails) GetLeagueSeriesId() uint32 {
+	if m != nil && m.LeagueSeriesId != nil {
+		return *m.LeagueSeriesId
+	}
+	return 0
+}
+
+func (m *CMsgPracticeLobbySetDetails) GetLeagueGameId() uint32 {
+	if m != nil && m.LeagueGameId != nil {
+		return *m.LeagueGameId
 	}
 	return 0
 }
@@ -4841,448 +4361,6 @@ func (*CMsgInitialQuestionnaireResponse) ProtoMessage()    {}
 func (m *CMsgInitialQuestionnaireResponse) GetInitialSkill() uint32 {
 	if m != nil && m.InitialSkill != nil {
 		return *m.InitialSkill
-	}
-	return 0
-}
-
-type CMsgDOTATournament struct {
-	Teams              []*CMsgDOTATournament_Team `protobuf:"bytes,1,rep,name=teams" json:"teams,omitempty"`
-	Games              []*CMsgDOTATournament_Game `protobuf:"bytes,2,rep,name=games" json:"games,omitempty"`
-	Gid                *uint64                    `protobuf:"varint,3,opt,name=gid" json:"gid,omitempty"`
-	TournamentId       *uint32                    `protobuf:"varint,4,opt,name=tournament_id" json:"tournament_id,omitempty"`
-	TournamentType     *ETournamentType           `protobuf:"varint,5,opt,name=tournament_type,enum=dota.ETournamentType,def=0" json:"tournament_type,omitempty"`
-	TournamentTemplate *ETournamentTemplate       `protobuf:"varint,6,opt,name=tournament_template,enum=dota.ETournamentTemplate,def=0" json:"tournament_template,omitempty"`
-	LeagueId           *uint32                    `protobuf:"varint,7,opt,name=league_id" json:"league_id,omitempty"`
-	StartTime          *uint32                    `protobuf:"varint,8,opt,name=start_time" json:"start_time,omitempty"`
-	State              *ETournamentState          `protobuf:"varint,9,opt,name=state,enum=dota.ETournamentState,def=0" json:"state,omitempty"`
-	Nodes              []*CMsgDOTATournament_Node `protobuf:"bytes,10,rep,name=nodes" json:"nodes,omitempty"`
-	XXX_unrecognized   []byte                     `json:"-"`
-}
-
-func (m *CMsgDOTATournament) Reset()         { *m = CMsgDOTATournament{} }
-func (m *CMsgDOTATournament) String() string { return proto.CompactTextString(m) }
-func (*CMsgDOTATournament) ProtoMessage()    {}
-
-const Default_CMsgDOTATournament_TournamentType ETournamentType = ETournamentType_k_ETournamentType_Unknown
-const Default_CMsgDOTATournament_TournamentTemplate ETournamentTemplate = ETournamentTemplate_k_ETournamentTemplate_None
-const Default_CMsgDOTATournament_State ETournamentState = ETournamentState_k_ETournamentState_Unknown
-
-func (m *CMsgDOTATournament) GetTeams() []*CMsgDOTATournament_Team {
-	if m != nil {
-		return m.Teams
-	}
-	return nil
-}
-
-func (m *CMsgDOTATournament) GetGames() []*CMsgDOTATournament_Game {
-	if m != nil {
-		return m.Games
-	}
-	return nil
-}
-
-func (m *CMsgDOTATournament) GetGid() uint64 {
-	if m != nil && m.Gid != nil {
-		return *m.Gid
-	}
-	return 0
-}
-
-func (m *CMsgDOTATournament) GetTournamentId() uint32 {
-	if m != nil && m.TournamentId != nil {
-		return *m.TournamentId
-	}
-	return 0
-}
-
-func (m *CMsgDOTATournament) GetTournamentType() ETournamentType {
-	if m != nil && m.TournamentType != nil {
-		return *m.TournamentType
-	}
-	return Default_CMsgDOTATournament_TournamentType
-}
-
-func (m *CMsgDOTATournament) GetTournamentTemplate() ETournamentTemplate {
-	if m != nil && m.TournamentTemplate != nil {
-		return *m.TournamentTemplate
-	}
-	return Default_CMsgDOTATournament_TournamentTemplate
-}
-
-func (m *CMsgDOTATournament) GetLeagueId() uint32 {
-	if m != nil && m.LeagueId != nil {
-		return *m.LeagueId
-	}
-	return 0
-}
-
-func (m *CMsgDOTATournament) GetStartTime() uint32 {
-	if m != nil && m.StartTime != nil {
-		return *m.StartTime
-	}
-	return 0
-}
-
-func (m *CMsgDOTATournament) GetState() ETournamentState {
-	if m != nil && m.State != nil {
-		return *m.State
-	}
-	return Default_CMsgDOTATournament_State
-}
-
-func (m *CMsgDOTATournament) GetNodes() []*CMsgDOTATournament_Node {
-	if m != nil {
-		return m.Nodes
-	}
-	return nil
-}
-
-type CMsgDOTATournament_Team struct {
-	TeamId           *uint32  `protobuf:"varint,1,opt,name=team_id" json:"team_id,omitempty"`
-	TeamName         *string  `protobuf:"bytes,2,opt,name=team_name" json:"team_name,omitempty"`
-	TeamAbbrev       *string  `protobuf:"bytes,3,opt,name=team_abbrev" json:"team_abbrev,omitempty"`
-	Players          []uint32 `protobuf:"varint,4,rep,packed,name=players" json:"players,omitempty"`
-	Seed             *uint32  `protobuf:"varint,5,opt,name=seed" json:"seed,omitempty"`
-	TeamLogo         *uint64  `protobuf:"varint,6,opt,name=team_logo" json:"team_logo,omitempty"`
-	CountryCode      *string  `protobuf:"bytes,7,opt,name=country_code" json:"country_code,omitempty"`
-	NodeOrState      *uint32  `protobuf:"varint,8,opt,name=node_or_state" json:"node_or_state,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
-}
-
-func (m *CMsgDOTATournament_Team) Reset()         { *m = CMsgDOTATournament_Team{} }
-func (m *CMsgDOTATournament_Team) String() string { return proto.CompactTextString(m) }
-func (*CMsgDOTATournament_Team) ProtoMessage()    {}
-
-func (m *CMsgDOTATournament_Team) GetTeamId() uint32 {
-	if m != nil && m.TeamId != nil {
-		return *m.TeamId
-	}
-	return 0
-}
-
-func (m *CMsgDOTATournament_Team) GetTeamName() string {
-	if m != nil && m.TeamName != nil {
-		return *m.TeamName
-	}
-	return ""
-}
-
-func (m *CMsgDOTATournament_Team) GetTeamAbbrev() string {
-	if m != nil && m.TeamAbbrev != nil {
-		return *m.TeamAbbrev
-	}
-	return ""
-}
-
-func (m *CMsgDOTATournament_Team) GetPlayers() []uint32 {
-	if m != nil {
-		return m.Players
-	}
-	return nil
-}
-
-func (m *CMsgDOTATournament_Team) GetSeed() uint32 {
-	if m != nil && m.Seed != nil {
-		return *m.Seed
-	}
-	return 0
-}
-
-func (m *CMsgDOTATournament_Team) GetTeamLogo() uint64 {
-	if m != nil && m.TeamLogo != nil {
-		return *m.TeamLogo
-	}
-	return 0
-}
-
-func (m *CMsgDOTATournament_Team) GetCountryCode() string {
-	if m != nil && m.CountryCode != nil {
-		return *m.CountryCode
-	}
-	return ""
-}
-
-func (m *CMsgDOTATournament_Team) GetNodeOrState() uint32 {
-	if m != nil && m.NodeOrState != nil {
-		return *m.NodeOrState
-	}
-	return 0
-}
-
-type CMsgDOTATournament_Game struct {
-	GameId           *uint32               `protobuf:"varint,1,opt,name=game_id" json:"game_id,omitempty"`
-	GoodTeamId       *uint32               `protobuf:"varint,2,opt,name=good_team_id" json:"good_team_id,omitempty"`
-	BadTeamId        *uint32               `protobuf:"varint,3,opt,name=bad_team_id" json:"bad_team_id,omitempty"`
-	GoodTeamSeed     *uint32               `protobuf:"varint,12,opt,name=good_team_seed" json:"good_team_seed,omitempty"`
-	BadTeamSeed      *uint32               `protobuf:"varint,13,opt,name=bad_team_seed" json:"bad_team_seed,omitempty"`
-	LobbyId          *uint64               `protobuf:"fixed64,4,opt,name=lobby_id" json:"lobby_id,omitempty"`
-	MatchId          *uint64               `protobuf:"varint,5,opt,name=match_id" json:"match_id,omitempty"`
-	GameName         *string               `protobuf:"bytes,6,opt,name=game_name" json:"game_name,omitempty"`
-	LiveStream       *bool                 `protobuf:"varint,7,opt,name=live_stream" json:"live_stream,omitempty"`
-	Message          *string               `protobuf:"bytes,9,opt,name=message" json:"message,omitempty"`
-	ResultsFinal     *bool                 `protobuf:"varint,10,opt,name=results_final" json:"results_final,omitempty"`
-	State            *ETournamentGameState `protobuf:"varint,14,opt,name=state,enum=dota.ETournamentGameState,def=0" json:"state,omitempty"`
-	NodeId           *uint32               `protobuf:"varint,15,opt,name=node_id" json:"node_id,omitempty"`
-	StartTime        *uint32               `protobuf:"varint,16,opt,name=start_time" json:"start_time,omitempty"`
-	XXX_unrecognized []byte                `json:"-"`
-}
-
-func (m *CMsgDOTATournament_Game) Reset()         { *m = CMsgDOTATournament_Game{} }
-func (m *CMsgDOTATournament_Game) String() string { return proto.CompactTextString(m) }
-func (*CMsgDOTATournament_Game) ProtoMessage()    {}
-
-const Default_CMsgDOTATournament_Game_State ETournamentGameState = ETournamentGameState_k_ETournamentGameState_Unknown
-
-func (m *CMsgDOTATournament_Game) GetGameId() uint32 {
-	if m != nil && m.GameId != nil {
-		return *m.GameId
-	}
-	return 0
-}
-
-func (m *CMsgDOTATournament_Game) GetGoodTeamId() uint32 {
-	if m != nil && m.GoodTeamId != nil {
-		return *m.GoodTeamId
-	}
-	return 0
-}
-
-func (m *CMsgDOTATournament_Game) GetBadTeamId() uint32 {
-	if m != nil && m.BadTeamId != nil {
-		return *m.BadTeamId
-	}
-	return 0
-}
-
-func (m *CMsgDOTATournament_Game) GetGoodTeamSeed() uint32 {
-	if m != nil && m.GoodTeamSeed != nil {
-		return *m.GoodTeamSeed
-	}
-	return 0
-}
-
-func (m *CMsgDOTATournament_Game) GetBadTeamSeed() uint32 {
-	if m != nil && m.BadTeamSeed != nil {
-		return *m.BadTeamSeed
-	}
-	return 0
-}
-
-func (m *CMsgDOTATournament_Game) GetLobbyId() uint64 {
-	if m != nil && m.LobbyId != nil {
-		return *m.LobbyId
-	}
-	return 0
-}
-
-func (m *CMsgDOTATournament_Game) GetMatchId() uint64 {
-	if m != nil && m.MatchId != nil {
-		return *m.MatchId
-	}
-	return 0
-}
-
-func (m *CMsgDOTATournament_Game) GetGameName() string {
-	if m != nil && m.GameName != nil {
-		return *m.GameName
-	}
-	return ""
-}
-
-func (m *CMsgDOTATournament_Game) GetLiveStream() bool {
-	if m != nil && m.LiveStream != nil {
-		return *m.LiveStream
-	}
-	return false
-}
-
-func (m *CMsgDOTATournament_Game) GetMessage() string {
-	if m != nil && m.Message != nil {
-		return *m.Message
-	}
-	return ""
-}
-
-func (m *CMsgDOTATournament_Game) GetResultsFinal() bool {
-	if m != nil && m.ResultsFinal != nil {
-		return *m.ResultsFinal
-	}
-	return false
-}
-
-func (m *CMsgDOTATournament_Game) GetState() ETournamentGameState {
-	if m != nil && m.State != nil {
-		return *m.State
-	}
-	return Default_CMsgDOTATournament_Game_State
-}
-
-func (m *CMsgDOTATournament_Game) GetNodeId() uint32 {
-	if m != nil && m.NodeId != nil {
-		return *m.NodeId
-	}
-	return 0
-}
-
-func (m *CMsgDOTATournament_Game) GetStartTime() uint32 {
-	if m != nil && m.StartTime != nil {
-		return *m.StartTime
-	}
-	return 0
-}
-
-type CMsgDOTATournament_Node struct {
-	NodeId           *uint32               `protobuf:"varint,1,opt,name=node_id" json:"node_id,omitempty"`
-	TeamSeedA        *uint32               `protobuf:"varint,2,opt,name=team_seed_a" json:"team_seed_a,omitempty"`
-	TeamSeedB        *uint32               `protobuf:"varint,3,opt,name=team_seed_b" json:"team_seed_b,omitempty"`
-	WinnerNode       *uint32               `protobuf:"varint,4,opt,name=winner_node" json:"winner_node,omitempty"`
-	LoserNode        *uint32               `protobuf:"varint,5,opt,name=loser_node" json:"loser_node,omitempty"`
-	SeriesType       *uint32               `protobuf:"varint,7,opt,name=series_type" json:"series_type,omitempty"`
-	NodeState        *ETournamentNodeState `protobuf:"varint,8,opt,name=node_state,enum=dota.ETournamentNodeState,def=0" json:"node_state,omitempty"`
-	SeriesId         *uint32               `protobuf:"varint,9,opt,name=series_id" json:"series_id,omitempty"`
-	StartTime        *uint32               `protobuf:"varint,16,opt,name=start_time" json:"start_time,omitempty"`
-	XXX_unrecognized []byte                `json:"-"`
-}
-
-func (m *CMsgDOTATournament_Node) Reset()         { *m = CMsgDOTATournament_Node{} }
-func (m *CMsgDOTATournament_Node) String() string { return proto.CompactTextString(m) }
-func (*CMsgDOTATournament_Node) ProtoMessage()    {}
-
-const Default_CMsgDOTATournament_Node_NodeState ETournamentNodeState = ETournamentNodeState_k_ETournamentNodeState_Unknown
-
-func (m *CMsgDOTATournament_Node) GetNodeId() uint32 {
-	if m != nil && m.NodeId != nil {
-		return *m.NodeId
-	}
-	return 0
-}
-
-func (m *CMsgDOTATournament_Node) GetTeamSeedA() uint32 {
-	if m != nil && m.TeamSeedA != nil {
-		return *m.TeamSeedA
-	}
-	return 0
-}
-
-func (m *CMsgDOTATournament_Node) GetTeamSeedB() uint32 {
-	if m != nil && m.TeamSeedB != nil {
-		return *m.TeamSeedB
-	}
-	return 0
-}
-
-func (m *CMsgDOTATournament_Node) GetWinnerNode() uint32 {
-	if m != nil && m.WinnerNode != nil {
-		return *m.WinnerNode
-	}
-	return 0
-}
-
-func (m *CMsgDOTATournament_Node) GetLoserNode() uint32 {
-	if m != nil && m.LoserNode != nil {
-		return *m.LoserNode
-	}
-	return 0
-}
-
-func (m *CMsgDOTATournament_Node) GetSeriesType() uint32 {
-	if m != nil && m.SeriesType != nil {
-		return *m.SeriesType
-	}
-	return 0
-}
-
-func (m *CMsgDOTATournament_Node) GetNodeState() ETournamentNodeState {
-	if m != nil && m.NodeState != nil {
-		return *m.NodeState
-	}
-	return Default_CMsgDOTATournament_Node_NodeState
-}
-
-func (m *CMsgDOTATournament_Node) GetSeriesId() uint32 {
-	if m != nil && m.SeriesId != nil {
-		return *m.SeriesId
-	}
-	return 0
-}
-
-func (m *CMsgDOTATournament_Node) GetStartTime() uint32 {
-	if m != nil && m.StartTime != nil {
-		return *m.StartTime
-	}
-	return 0
-}
-
-type CMsgDOTATournamentRequest struct {
-	TournamentId        *uint32 `protobuf:"varint,1,opt,name=tournament_id" json:"tournament_id,omitempty"`
-	ClientTournamentGid *uint64 `protobuf:"varint,2,opt,name=client_tournament_gid" json:"client_tournament_gid,omitempty"`
-	XXX_unrecognized    []byte  `json:"-"`
-}
-
-func (m *CMsgDOTATournamentRequest) Reset()         { *m = CMsgDOTATournamentRequest{} }
-func (m *CMsgDOTATournamentRequest) String() string { return proto.CompactTextString(m) }
-func (*CMsgDOTATournamentRequest) ProtoMessage()    {}
-
-func (m *CMsgDOTATournamentRequest) GetTournamentId() uint32 {
-	if m != nil && m.TournamentId != nil {
-		return *m.TournamentId
-	}
-	return 0
-}
-
-func (m *CMsgDOTATournamentRequest) GetClientTournamentGid() uint64 {
-	if m != nil && m.ClientTournamentGid != nil {
-		return *m.ClientTournamentGid
-	}
-	return 0
-}
-
-type CMsgDOTATournamentResponse struct {
-	Result           *uint32             `protobuf:"varint,1,opt,name=result,def=2" json:"result,omitempty"`
-	Tournament       *CMsgDOTATournament `protobuf:"bytes,2,opt,name=tournament" json:"tournament,omitempty"`
-	XXX_unrecognized []byte              `json:"-"`
-}
-
-func (m *CMsgDOTATournamentResponse) Reset()         { *m = CMsgDOTATournamentResponse{} }
-func (m *CMsgDOTATournamentResponse) String() string { return proto.CompactTextString(m) }
-func (*CMsgDOTATournamentResponse) ProtoMessage()    {}
-
-const Default_CMsgDOTATournamentResponse_Result uint32 = 2
-
-func (m *CMsgDOTATournamentResponse) GetResult() uint32 {
-	if m != nil && m.Result != nil {
-		return *m.Result
-	}
-	return Default_CMsgDOTATournamentResponse_Result
-}
-
-func (m *CMsgDOTATournamentResponse) GetTournament() *CMsgDOTATournament {
-	if m != nil {
-		return m.Tournament
-	}
-	return nil
-}
-
-type CMsgDOTAClearTournamentGame struct {
-	TournamentId     *uint32 `protobuf:"varint,1,opt,name=tournament_id" json:"tournament_id,omitempty"`
-	GameId           *uint32 `protobuf:"varint,2,opt,name=game_id" json:"game_id,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
-}
-
-func (m *CMsgDOTAClearTournamentGame) Reset()         { *m = CMsgDOTAClearTournamentGame{} }
-func (m *CMsgDOTAClearTournamentGame) String() string { return proto.CompactTextString(m) }
-func (*CMsgDOTAClearTournamentGame) ProtoMessage()    {}
-
-func (m *CMsgDOTAClearTournamentGame) GetTournamentId() uint32 {
-	if m != nil && m.TournamentId != nil {
-		return *m.TournamentId
-	}
-	return 0
-}
-
-func (m *CMsgDOTAClearTournamentGame) GetGameId() uint32 {
-	if m != nil && m.GameId != nil {
-		return *m.GameId
 	}
 	return 0
 }
@@ -7713,7 +6791,8 @@ type CMsgDOTAChatMessage struct {
 	EventId                     *uint32 `protobuf:"varint,10,opt,name=event_id" json:"event_id,omitempty"`
 	SuggestInviteToLobby        *bool   `protobuf:"varint,11,opt,name=suggest_invite_to_lobby" json:"suggest_invite_to_lobby,omitempty"`
 	EventPoints                 *uint32 `protobuf:"varint,12,opt,name=event_points" json:"event_points,omitempty"`
-	PlayerId                    *int32  `protobuf:"varint,13,opt,name=player_id,def=-1" json:"player_id,omitempty"`
+	CoinFlip                    *bool   `protobuf:"varint,13,opt,name=coin_flip" json:"coin_flip,omitempty"`
+	PlayerId                    *int32  `protobuf:"varint,14,opt,name=player_id,def=-1" json:"player_id,omitempty"`
 	XXX_unrecognized            []byte  `json:"-"`
 }
 
@@ -7805,6 +6884,13 @@ func (m *CMsgDOTAChatMessage) GetEventPoints() uint32 {
 		return *m.EventPoints
 	}
 	return 0
+}
+
+func (m *CMsgDOTAChatMessage) GetCoinFlip() bool {
+	if m != nil && m.CoinFlip != nil {
+		return *m.CoinFlip
+	}
+	return false
 }
 
 func (m *CMsgDOTAChatMessage) GetPlayerId() int32 {
@@ -11681,450 +10767,6 @@ func (m *CMsgDOTAFriendRecruitInviteAcceptDecline) GetAccountId() uint32 {
 	return 0
 }
 
-type CMsgDOTAPassportVoteTeamGuess struct {
-	LeagueId         *uint32 `protobuf:"varint,1,opt,name=league_id" json:"league_id,omitempty"`
-	WinnerId         *uint32 `protobuf:"varint,2,opt,name=winner_id" json:"winner_id,omitempty"`
-	RunnerupId       *uint32 `protobuf:"varint,3,opt,name=runnerup_id" json:"runnerup_id,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
-}
-
-func (m *CMsgDOTAPassportVoteTeamGuess) Reset()         { *m = CMsgDOTAPassportVoteTeamGuess{} }
-func (m *CMsgDOTAPassportVoteTeamGuess) String() string { return proto.CompactTextString(m) }
-func (*CMsgDOTAPassportVoteTeamGuess) ProtoMessage()    {}
-
-func (m *CMsgDOTAPassportVoteTeamGuess) GetLeagueId() uint32 {
-	if m != nil && m.LeagueId != nil {
-		return *m.LeagueId
-	}
-	return 0
-}
-
-func (m *CMsgDOTAPassportVoteTeamGuess) GetWinnerId() uint32 {
-	if m != nil && m.WinnerId != nil {
-		return *m.WinnerId
-	}
-	return 0
-}
-
-func (m *CMsgDOTAPassportVoteTeamGuess) GetRunnerupId() uint32 {
-	if m != nil && m.RunnerupId != nil {
-		return *m.RunnerupId
-	}
-	return 0
-}
-
-type CMsgDOTAPassportVoteGenericSelection struct {
-	SelectionIndex   *DOTA_2013PassportSelectionIndices `protobuf:"varint,1,opt,name=selection_index,enum=dota.DOTA_2013PassportSelectionIndices,def=0" json:"selection_index,omitempty"`
-	Selection        *uint32                            `protobuf:"varint,2,opt,name=selection" json:"selection,omitempty"`
-	XXX_unrecognized []byte                             `json:"-"`
-}
-
-func (m *CMsgDOTAPassportVoteGenericSelection) Reset()         { *m = CMsgDOTAPassportVoteGenericSelection{} }
-func (m *CMsgDOTAPassportVoteGenericSelection) String() string { return proto.CompactTextString(m) }
-func (*CMsgDOTAPassportVoteGenericSelection) ProtoMessage()    {}
-
-const Default_CMsgDOTAPassportVoteGenericSelection_SelectionIndex DOTA_2013PassportSelectionIndices = DOTA_2013PassportSelectionIndices_PP13_SEL_ALLSTAR_PLAYER_0
-
-func (m *CMsgDOTAPassportVoteGenericSelection) GetSelectionIndex() DOTA_2013PassportSelectionIndices {
-	if m != nil && m.SelectionIndex != nil {
-		return *m.SelectionIndex
-	}
-	return Default_CMsgDOTAPassportVoteGenericSelection_SelectionIndex
-}
-
-func (m *CMsgDOTAPassportVoteGenericSelection) GetSelection() uint32 {
-	if m != nil && m.Selection != nil {
-		return *m.Selection
-	}
-	return 0
-}
-
-type CMsgDOTAPassportStampedPlayer struct {
-	SteamId          *uint64 `protobuf:"varint,1,opt,name=steam_id" json:"steam_id,omitempty"`
-	StampLevel       *uint32 `protobuf:"varint,2,opt,name=stamp_level" json:"stamp_level,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
-}
-
-func (m *CMsgDOTAPassportStampedPlayer) Reset()         { *m = CMsgDOTAPassportStampedPlayer{} }
-func (m *CMsgDOTAPassportStampedPlayer) String() string { return proto.CompactTextString(m) }
-func (*CMsgDOTAPassportStampedPlayer) ProtoMessage()    {}
-
-func (m *CMsgDOTAPassportStampedPlayer) GetSteamId() uint64 {
-	if m != nil && m.SteamId != nil {
-		return *m.SteamId
-	}
-	return 0
-}
-
-func (m *CMsgDOTAPassportStampedPlayer) GetStampLevel() uint32 {
-	if m != nil && m.StampLevel != nil {
-		return *m.StampLevel
-	}
-	return 0
-}
-
-type CMsgDOTAPassportPlayerCardChallenge struct {
-	ChallengeId      *uint32 `protobuf:"varint,1,opt,name=challenge_id" json:"challenge_id,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
-}
-
-func (m *CMsgDOTAPassportPlayerCardChallenge) Reset()         { *m = CMsgDOTAPassportPlayerCardChallenge{} }
-func (m *CMsgDOTAPassportPlayerCardChallenge) String() string { return proto.CompactTextString(m) }
-func (*CMsgDOTAPassportPlayerCardChallenge) ProtoMessage()    {}
-
-func (m *CMsgDOTAPassportPlayerCardChallenge) GetChallengeId() uint32 {
-	if m != nil && m.ChallengeId != nil {
-		return *m.ChallengeId
-	}
-	return 0
-}
-
-type CMsgDOTAPassportVote struct {
-	TeamVotes            []*CMsgDOTAPassportVoteTeamGuess        `protobuf:"bytes,1,rep,name=team_votes" json:"team_votes,omitempty"`
-	GenericSelections    []*CMsgDOTAPassportVoteGenericSelection `protobuf:"bytes,2,rep,name=generic_selections" json:"generic_selections,omitempty"`
-	StampedPlayers       []*CMsgDOTAPassportStampedPlayer        `protobuf:"bytes,3,rep,name=stamped_players" json:"stamped_players,omitempty"`
-	PlayerCardChallenges []*CMsgDOTAPassportPlayerCardChallenge  `protobuf:"bytes,4,rep,name=player_card_challenges" json:"player_card_challenges,omitempty"`
-	XXX_unrecognized     []byte                                  `json:"-"`
-}
-
-func (m *CMsgDOTAPassportVote) Reset()         { *m = CMsgDOTAPassportVote{} }
-func (m *CMsgDOTAPassportVote) String() string { return proto.CompactTextString(m) }
-func (*CMsgDOTAPassportVote) ProtoMessage()    {}
-
-func (m *CMsgDOTAPassportVote) GetTeamVotes() []*CMsgDOTAPassportVoteTeamGuess {
-	if m != nil {
-		return m.TeamVotes
-	}
-	return nil
-}
-
-func (m *CMsgDOTAPassportVote) GetGenericSelections() []*CMsgDOTAPassportVoteGenericSelection {
-	if m != nil {
-		return m.GenericSelections
-	}
-	return nil
-}
-
-func (m *CMsgDOTAPassportVote) GetStampedPlayers() []*CMsgDOTAPassportStampedPlayer {
-	if m != nil {
-		return m.StampedPlayers
-	}
-	return nil
-}
-
-func (m *CMsgDOTAPassportVote) GetPlayerCardChallenges() []*CMsgDOTAPassportPlayerCardChallenge {
-	if m != nil {
-		return m.PlayerCardChallenges
-	}
-	return nil
-}
-
-type CMsgPassportDataRequest struct {
-	AccountId        *uint32 `protobuf:"varint,1,opt,name=account_id" json:"account_id,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
-}
-
-func (m *CMsgPassportDataRequest) Reset()         { *m = CMsgPassportDataRequest{} }
-func (m *CMsgPassportDataRequest) String() string { return proto.CompactTextString(m) }
-func (*CMsgPassportDataRequest) ProtoMessage()    {}
-
-func (m *CMsgPassportDataRequest) GetAccountId() uint32 {
-	if m != nil && m.AccountId != nil {
-		return *m.AccountId
-	}
-	return 0
-}
-
-type CMsgPassportDataResponse struct {
-	AccountId                    *uint32               `protobuf:"varint,1,opt,name=account_id" json:"account_id,omitempty"`
-	Result                       *uint32               `protobuf:"varint,2,opt,name=result,def=2" json:"result,omitempty"`
-	International                *CMsgDOTATournament   `protobuf:"bytes,5,opt,name=international" json:"international,omitempty"`
-	EastQualifiersPredictEndTime *uint32               `protobuf:"varint,7,opt,name=east_qualifiers_predict_end_time" json:"east_qualifiers_predict_end_time,omitempty"`
-	WestQualifiersPredictEndTime *uint32               `protobuf:"varint,8,opt,name=west_qualifiers_predict_end_time" json:"west_qualifiers_predict_end_time,omitempty"`
-	AllstarMatchEndTime          *uint32               `protobuf:"varint,9,opt,name=allstar_match_end_time" json:"allstar_match_end_time,omitempty"`
-	LeagueGuesses                *CMsgDOTAPassportVote `protobuf:"bytes,6,opt,name=league_guesses" json:"league_guesses,omitempty"`
-	EastQualifiersWinnerTeamId   *uint32               `protobuf:"varint,10,opt,name=east_qualifiers_winner_team_id" json:"east_qualifiers_winner_team_id,omitempty"`
-	EastQualifiersRunnerUpTeamId *uint32               `protobuf:"varint,11,opt,name=east_qualifiers_runner_up_team_id" json:"east_qualifiers_runner_up_team_id,omitempty"`
-	WestQualifiersWinnerTeamId   *uint32               `protobuf:"varint,12,opt,name=west_qualifiers_winner_team_id" json:"west_qualifiers_winner_team_id,omitempty"`
-	WestQualifiersRunnerUpTeamId *uint32               `protobuf:"varint,13,opt,name=west_qualifiers_runner_up_team_id" json:"west_qualifiers_runner_up_team_id,omitempty"`
-	PassportsBought              *uint32               `protobuf:"varint,14,opt,name=passports_bought" json:"passports_bought,omitempty"`
-	OriginalPurchaserId          *uint32               `protobuf:"varint,15,opt,name=original_purchaser_id" json:"original_purchaser_id,omitempty"`
-	FantasyTeamCount             *uint32               `protobuf:"varint,16,opt,name=fantasy_team_count" json:"fantasy_team_count,omitempty"`
-	FantasyTeamexpiration        *uint32               `protobuf:"varint,17,opt,name=fantasy_teamexpiration" json:"fantasy_teamexpiration,omitempty"`
-	FantasyTeamsWillLockAt       *uint32               `protobuf:"varint,18,opt,name=fantasy_teams_will_lock_at" json:"fantasy_teams_will_lock_at,omitempty"`
-	XXX_unrecognized             []byte                `json:"-"`
-}
-
-func (m *CMsgPassportDataResponse) Reset()         { *m = CMsgPassportDataResponse{} }
-func (m *CMsgPassportDataResponse) String() string { return proto.CompactTextString(m) }
-func (*CMsgPassportDataResponse) ProtoMessage()    {}
-
-const Default_CMsgPassportDataResponse_Result uint32 = 2
-
-func (m *CMsgPassportDataResponse) GetAccountId() uint32 {
-	if m != nil && m.AccountId != nil {
-		return *m.AccountId
-	}
-	return 0
-}
-
-func (m *CMsgPassportDataResponse) GetResult() uint32 {
-	if m != nil && m.Result != nil {
-		return *m.Result
-	}
-	return Default_CMsgPassportDataResponse_Result
-}
-
-func (m *CMsgPassportDataResponse) GetInternational() *CMsgDOTATournament {
-	if m != nil {
-		return m.International
-	}
-	return nil
-}
-
-func (m *CMsgPassportDataResponse) GetEastQualifiersPredictEndTime() uint32 {
-	if m != nil && m.EastQualifiersPredictEndTime != nil {
-		return *m.EastQualifiersPredictEndTime
-	}
-	return 0
-}
-
-func (m *CMsgPassportDataResponse) GetWestQualifiersPredictEndTime() uint32 {
-	if m != nil && m.WestQualifiersPredictEndTime != nil {
-		return *m.WestQualifiersPredictEndTime
-	}
-	return 0
-}
-
-func (m *CMsgPassportDataResponse) GetAllstarMatchEndTime() uint32 {
-	if m != nil && m.AllstarMatchEndTime != nil {
-		return *m.AllstarMatchEndTime
-	}
-	return 0
-}
-
-func (m *CMsgPassportDataResponse) GetLeagueGuesses() *CMsgDOTAPassportVote {
-	if m != nil {
-		return m.LeagueGuesses
-	}
-	return nil
-}
-
-func (m *CMsgPassportDataResponse) GetEastQualifiersWinnerTeamId() uint32 {
-	if m != nil && m.EastQualifiersWinnerTeamId != nil {
-		return *m.EastQualifiersWinnerTeamId
-	}
-	return 0
-}
-
-func (m *CMsgPassportDataResponse) GetEastQualifiersRunnerUpTeamId() uint32 {
-	if m != nil && m.EastQualifiersRunnerUpTeamId != nil {
-		return *m.EastQualifiersRunnerUpTeamId
-	}
-	return 0
-}
-
-func (m *CMsgPassportDataResponse) GetWestQualifiersWinnerTeamId() uint32 {
-	if m != nil && m.WestQualifiersWinnerTeamId != nil {
-		return *m.WestQualifiersWinnerTeamId
-	}
-	return 0
-}
-
-func (m *CMsgPassportDataResponse) GetWestQualifiersRunnerUpTeamId() uint32 {
-	if m != nil && m.WestQualifiersRunnerUpTeamId != nil {
-		return *m.WestQualifiersRunnerUpTeamId
-	}
-	return 0
-}
-
-func (m *CMsgPassportDataResponse) GetPassportsBought() uint32 {
-	if m != nil && m.PassportsBought != nil {
-		return *m.PassportsBought
-	}
-	return 0
-}
-
-func (m *CMsgPassportDataResponse) GetOriginalPurchaserId() uint32 {
-	if m != nil && m.OriginalPurchaserId != nil {
-		return *m.OriginalPurchaserId
-	}
-	return 0
-}
-
-func (m *CMsgPassportDataResponse) GetFantasyTeamCount() uint32 {
-	if m != nil && m.FantasyTeamCount != nil {
-		return *m.FantasyTeamCount
-	}
-	return 0
-}
-
-func (m *CMsgPassportDataResponse) GetFantasyTeamexpiration() uint32 {
-	if m != nil && m.FantasyTeamexpiration != nil {
-		return *m.FantasyTeamexpiration
-	}
-	return 0
-}
-
-func (m *CMsgPassportDataResponse) GetFantasyTeamsWillLockAt() uint32 {
-	if m != nil && m.FantasyTeamsWillLockAt != nil {
-		return *m.FantasyTeamsWillLockAt
-	}
-	return 0
-}
-
-type CMsgHeroPickStatsRequest struct {
-	TeamId           *uint32 `protobuf:"varint,1,opt,name=team_id" json:"team_id,omitempty"`
-	LeagueId         *uint32 `protobuf:"varint,2,opt,name=league_id" json:"league_id,omitempty"`
-	HeroId           *uint32 `protobuf:"varint,3,opt,name=hero_id" json:"hero_id,omitempty"`
-	MatchesSinceTime *uint32 `protobuf:"varint,4,opt,name=matches_since_time" json:"matches_since_time,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
-}
-
-func (m *CMsgHeroPickStatsRequest) Reset()         { *m = CMsgHeroPickStatsRequest{} }
-func (m *CMsgHeroPickStatsRequest) String() string { return proto.CompactTextString(m) }
-func (*CMsgHeroPickStatsRequest) ProtoMessage()    {}
-
-func (m *CMsgHeroPickStatsRequest) GetTeamId() uint32 {
-	if m != nil && m.TeamId != nil {
-		return *m.TeamId
-	}
-	return 0
-}
-
-func (m *CMsgHeroPickStatsRequest) GetLeagueId() uint32 {
-	if m != nil && m.LeagueId != nil {
-		return *m.LeagueId
-	}
-	return 0
-}
-
-func (m *CMsgHeroPickStatsRequest) GetHeroId() uint32 {
-	if m != nil && m.HeroId != nil {
-		return *m.HeroId
-	}
-	return 0
-}
-
-func (m *CMsgHeroPickStatsRequest) GetMatchesSinceTime() uint32 {
-	if m != nil && m.MatchesSinceTime != nil {
-		return *m.MatchesSinceTime
-	}
-	return 0
-}
-
-type CMsgHeroPickStatPlayer struct {
-	AccountId        *uint32 `protobuf:"varint,1,opt,name=account_id" json:"account_id,omitempty"`
-	Win              *bool   `protobuf:"varint,2,opt,name=win" json:"win,omitempty"`
-	Gpm              *uint32 `protobuf:"varint,3,opt,name=gpm" json:"gpm,omitempty"`
-	Kills            *uint32 `protobuf:"varint,4,opt,name=kills" json:"kills,omitempty"`
-	Deaths           *uint32 `protobuf:"varint,5,opt,name=deaths" json:"deaths,omitempty"`
-	Assists          *uint32 `protobuf:"varint,6,opt,name=assists" json:"assists,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
-}
-
-func (m *CMsgHeroPickStatPlayer) Reset()         { *m = CMsgHeroPickStatPlayer{} }
-func (m *CMsgHeroPickStatPlayer) String() string { return proto.CompactTextString(m) }
-func (*CMsgHeroPickStatPlayer) ProtoMessage()    {}
-
-func (m *CMsgHeroPickStatPlayer) GetAccountId() uint32 {
-	if m != nil && m.AccountId != nil {
-		return *m.AccountId
-	}
-	return 0
-}
-
-func (m *CMsgHeroPickStatPlayer) GetWin() bool {
-	if m != nil && m.Win != nil {
-		return *m.Win
-	}
-	return false
-}
-
-func (m *CMsgHeroPickStatPlayer) GetGpm() uint32 {
-	if m != nil && m.Gpm != nil {
-		return *m.Gpm
-	}
-	return 0
-}
-
-func (m *CMsgHeroPickStatPlayer) GetKills() uint32 {
-	if m != nil && m.Kills != nil {
-		return *m.Kills
-	}
-	return 0
-}
-
-func (m *CMsgHeroPickStatPlayer) GetDeaths() uint32 {
-	if m != nil && m.Deaths != nil {
-		return *m.Deaths
-	}
-	return 0
-}
-
-func (m *CMsgHeroPickStatPlayer) GetAssists() uint32 {
-	if m != nil && m.Assists != nil {
-		return *m.Assists
-	}
-	return 0
-}
-
-type CMsgHeroPickStatsResponse struct {
-	HeroId           *uint32                   `protobuf:"varint,1,opt,name=hero_id" json:"hero_id,omitempty"`
-	TotalPicks       *uint32                   `protobuf:"varint,2,opt,name=total_picks" json:"total_picks,omitempty"`
-	TotalWins        *uint32                   `protobuf:"varint,3,opt,name=total_wins" json:"total_wins,omitempty"`
-	TeamPicks        *uint32                   `protobuf:"varint,4,opt,name=team_picks" json:"team_picks,omitempty"`
-	TeamWins         *uint32                   `protobuf:"varint,5,opt,name=team_wins" json:"team_wins,omitempty"`
-	PlayerPick       []*CMsgHeroPickStatPlayer `protobuf:"bytes,6,rep,name=player_pick" json:"player_pick,omitempty"`
-	XXX_unrecognized []byte                    `json:"-"`
-}
-
-func (m *CMsgHeroPickStatsResponse) Reset()         { *m = CMsgHeroPickStatsResponse{} }
-func (m *CMsgHeroPickStatsResponse) String() string { return proto.CompactTextString(m) }
-func (*CMsgHeroPickStatsResponse) ProtoMessage()    {}
-
-func (m *CMsgHeroPickStatsResponse) GetHeroId() uint32 {
-	if m != nil && m.HeroId != nil {
-		return *m.HeroId
-	}
-	return 0
-}
-
-func (m *CMsgHeroPickStatsResponse) GetTotalPicks() uint32 {
-	if m != nil && m.TotalPicks != nil {
-		return *m.TotalPicks
-	}
-	return 0
-}
-
-func (m *CMsgHeroPickStatsResponse) GetTotalWins() uint32 {
-	if m != nil && m.TotalWins != nil {
-		return *m.TotalWins
-	}
-	return 0
-}
-
-func (m *CMsgHeroPickStatsResponse) GetTeamPicks() uint32 {
-	if m != nil && m.TeamPicks != nil {
-		return *m.TeamPicks
-	}
-	return 0
-}
-
-func (m *CMsgHeroPickStatsResponse) GetTeamWins() uint32 {
-	if m != nil && m.TeamWins != nil {
-		return *m.TeamWins
-	}
-	return 0
-}
-
-func (m *CMsgHeroPickStatsResponse) GetPlayerPick() []*CMsgHeroPickStatPlayer {
-	if m != nil {
-		return m.PlayerPick
-	}
-	return nil
-}
-
 type CMsgRequestLeaguePrizePool struct {
 	LeagueId         *uint32 `protobuf:"varint,1,opt,name=league_id" json:"league_id,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
@@ -13813,6 +12455,30 @@ func (m *CMsgClientToGCGetAdditionalEquipsResponse) GetEquips() []*CAdditionalEq
 	return nil
 }
 
+type CMsgClientToGCGetAllHeroOrder struct {
+	XXX_unrecognized []byte `json:"-"`
+}
+
+func (m *CMsgClientToGCGetAllHeroOrder) Reset()         { *m = CMsgClientToGCGetAllHeroOrder{} }
+func (m *CMsgClientToGCGetAllHeroOrder) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCGetAllHeroOrder) ProtoMessage()    {}
+
+type CMsgClientToGCGetAllHeroOrderResponse struct {
+	HeroIds          []uint32 `protobuf:"varint,1,rep,name=hero_ids" json:"hero_ids,omitempty"`
+	XXX_unrecognized []byte   `json:"-"`
+}
+
+func (m *CMsgClientToGCGetAllHeroOrderResponse) Reset()         { *m = CMsgClientToGCGetAllHeroOrderResponse{} }
+func (m *CMsgClientToGCGetAllHeroOrderResponse) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCGetAllHeroOrderResponse) ProtoMessage()    {}
+
+func (m *CMsgClientToGCGetAllHeroOrderResponse) GetHeroIds() []uint32 {
+	if m != nil {
+		return m.HeroIds
+	}
+	return nil
+}
+
 type CMsgClientToGCGetAllHeroProgress struct {
 	AccountId        *uint32 `protobuf:"varint,1,opt,name=account_id" json:"account_id,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
@@ -13849,6 +12515,7 @@ type CMsgClientToGCGetAllHeroProgressResponse struct {
 	FullLapAvgTries    *float32 `protobuf:"fixed32,17,opt,name=full_lap_avg_tries" json:"full_lap_avg_tries,omitempty"`
 	CurrLapAvgTries    *float32 `protobuf:"fixed32,18,opt,name=curr_lap_avg_tries" json:"curr_lap_avg_tries,omitempty"`
 	ProfileName        *string  `protobuf:"bytes,19,opt,name=profile_name" json:"profile_name,omitempty"`
+	StartHeroId        *uint32  `protobuf:"varint,20,opt,name=start_hero_id" json:"start_hero_id,omitempty"`
 	XXX_unrecognized   []byte   `json:"-"`
 }
 
@@ -13991,6 +12658,13 @@ func (m *CMsgClientToGCGetAllHeroProgressResponse) GetProfileName() string {
 	return ""
 }
 
+func (m *CMsgClientToGCGetAllHeroProgressResponse) GetStartHeroId() uint32 {
+	if m != nil && m.StartHeroId != nil {
+		return *m.StartHeroId
+	}
+	return 0
+}
+
 type CMsgClientToGCGetTrophyList struct {
 	AccountId        *uint32 `protobuf:"varint,1,opt,name=account_id" json:"account_id,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
@@ -14042,6 +12716,7 @@ func (m *CMsgClientToGCGetTrophyListResponse) GetProfileName() string {
 type CMsgClientToGCGetTrophyListResponse_Trophy struct {
 	TrophyId         *uint32 `protobuf:"varint,1,opt,name=trophy_id" json:"trophy_id,omitempty"`
 	TrophyScore      *uint32 `protobuf:"varint,2,opt,name=trophy_score" json:"trophy_score,omitempty"`
+	LastUpdated      *uint32 `protobuf:"varint,3,opt,name=last_updated" json:"last_updated,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
@@ -14067,10 +12742,18 @@ func (m *CMsgClientToGCGetTrophyListResponse_Trophy) GetTrophyScore() uint32 {
 	return 0
 }
 
+func (m *CMsgClientToGCGetTrophyListResponse_Trophy) GetLastUpdated() uint32 {
+	if m != nil && m.LastUpdated != nil {
+		return *m.LastUpdated
+	}
+	return 0
+}
+
 type CMsgGCToClientTrophyAwarded struct {
 	TrophyId         *uint32 `protobuf:"varint,1,opt,name=trophy_id" json:"trophy_id,omitempty"`
 	TrophyScore      *uint32 `protobuf:"varint,2,opt,name=trophy_score" json:"trophy_score,omitempty"`
 	TrophyOldScore   *uint32 `protobuf:"varint,3,opt,name=trophy_old_score" json:"trophy_old_score,omitempty"`
+	LastUpdated      *uint32 `protobuf:"varint,4,opt,name=last_updated" json:"last_updated,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
@@ -14095,6 +12778,13 @@ func (m *CMsgGCToClientTrophyAwarded) GetTrophyScore() uint32 {
 func (m *CMsgGCToClientTrophyAwarded) GetTrophyOldScore() uint32 {
 	if m != nil && m.TrophyOldScore != nil {
 		return *m.TrophyOldScore
+	}
+	return 0
+}
+
+func (m *CMsgGCToClientTrophyAwarded) GetLastUpdated() uint32 {
+	if m != nil && m.LastUpdated != nil {
+		return *m.LastUpdated
 	}
 	return 0
 }
@@ -15578,14 +14268,271 @@ func (m *CMsgDOTACustomGameClientFinishedLoading) GetComment() string {
 	return ""
 }
 
+type CMsgClientToGCGetLeagueSeries struct {
+	LeagueId         *uint32 `protobuf:"varint,1,opt,name=league_id" json:"league_id,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CMsgClientToGCGetLeagueSeries) Reset()         { *m = CMsgClientToGCGetLeagueSeries{} }
+func (m *CMsgClientToGCGetLeagueSeries) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCGetLeagueSeries) ProtoMessage()    {}
+
+func (m *CMsgClientToGCGetLeagueSeries) GetLeagueId() uint32 {
+	if m != nil && m.LeagueId != nil {
+		return *m.LeagueId
+	}
+	return 0
+}
+
+type CMsgClientToGCGetLeagueSeriesResponse struct {
+	Series           []*CMsgClientToGCGetLeagueSeriesResponse_Series `protobuf:"bytes,1,rep,name=series" json:"series,omitempty"`
+	XXX_unrecognized []byte                                          `json:"-"`
+}
+
+func (m *CMsgClientToGCGetLeagueSeriesResponse) Reset()         { *m = CMsgClientToGCGetLeagueSeriesResponse{} }
+func (m *CMsgClientToGCGetLeagueSeriesResponse) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCGetLeagueSeriesResponse) ProtoMessage()    {}
+
+func (m *CMsgClientToGCGetLeagueSeriesResponse) GetSeries() []*CMsgClientToGCGetLeagueSeriesResponse_Series {
+	if m != nil {
+		return m.Series
+	}
+	return nil
+}
+
+type CMsgClientToGCGetLeagueSeriesResponse_Series struct {
+	SeriesId         *uint32                                              `protobuf:"varint,1,opt,name=series_id" json:"series_id,omitempty"`
+	NumGames         *uint32                                              `protobuf:"varint,2,opt,name=num_games" json:"num_games,omitempty"`
+	Teams            []*CMsgClientToGCGetLeagueSeriesResponse_Series_Team `protobuf:"bytes,3,rep,name=teams" json:"teams,omitempty"`
+	SeriesName       *string                                              `protobuf:"bytes,4,opt,name=series_name" json:"series_name,omitempty"`
+	PhaseName        *string                                              `protobuf:"bytes,5,opt,name=phase_name" json:"phase_name,omitempty"`
+	StartTime        *uint32                                              `protobuf:"varint,6,opt,name=start_time" json:"start_time,omitempty"`
+	AfterSeriesId    *uint32                                              `protobuf:"varint,7,opt,name=after_series_id" json:"after_series_id,omitempty"`
+	XXX_unrecognized []byte                                               `json:"-"`
+}
+
+func (m *CMsgClientToGCGetLeagueSeriesResponse_Series) Reset() {
+	*m = CMsgClientToGCGetLeagueSeriesResponse_Series{}
+}
+func (m *CMsgClientToGCGetLeagueSeriesResponse_Series) String() string {
+	return proto.CompactTextString(m)
+}
+func (*CMsgClientToGCGetLeagueSeriesResponse_Series) ProtoMessage() {}
+
+func (m *CMsgClientToGCGetLeagueSeriesResponse_Series) GetSeriesId() uint32 {
+	if m != nil && m.SeriesId != nil {
+		return *m.SeriesId
+	}
+	return 0
+}
+
+func (m *CMsgClientToGCGetLeagueSeriesResponse_Series) GetNumGames() uint32 {
+	if m != nil && m.NumGames != nil {
+		return *m.NumGames
+	}
+	return 0
+}
+
+func (m *CMsgClientToGCGetLeagueSeriesResponse_Series) GetTeams() []*CMsgClientToGCGetLeagueSeriesResponse_Series_Team {
+	if m != nil {
+		return m.Teams
+	}
+	return nil
+}
+
+func (m *CMsgClientToGCGetLeagueSeriesResponse_Series) GetSeriesName() string {
+	if m != nil && m.SeriesName != nil {
+		return *m.SeriesName
+	}
+	return ""
+}
+
+func (m *CMsgClientToGCGetLeagueSeriesResponse_Series) GetPhaseName() string {
+	if m != nil && m.PhaseName != nil {
+		return *m.PhaseName
+	}
+	return ""
+}
+
+func (m *CMsgClientToGCGetLeagueSeriesResponse_Series) GetStartTime() uint32 {
+	if m != nil && m.StartTime != nil {
+		return *m.StartTime
+	}
+	return 0
+}
+
+func (m *CMsgClientToGCGetLeagueSeriesResponse_Series) GetAfterSeriesId() uint32 {
+	if m != nil && m.AfterSeriesId != nil {
+		return *m.AfterSeriesId
+	}
+	return 0
+}
+
+type CMsgClientToGCGetLeagueSeriesResponse_Series_Team struct {
+	TeamId           *uint32 `protobuf:"varint,1,opt,name=team_id" json:"team_id,omitempty"`
+	TeamName         *string `protobuf:"bytes,2,opt,name=team_name" json:"team_name,omitempty"`
+	TeamTag          *string `protobuf:"bytes,3,opt,name=team_tag" json:"team_tag,omitempty"`
+	TeamScore        *uint32 `protobuf:"varint,4,opt,name=team_score" json:"team_score,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CMsgClientToGCGetLeagueSeriesResponse_Series_Team) Reset() {
+	*m = CMsgClientToGCGetLeagueSeriesResponse_Series_Team{}
+}
+func (m *CMsgClientToGCGetLeagueSeriesResponse_Series_Team) String() string {
+	return proto.CompactTextString(m)
+}
+func (*CMsgClientToGCGetLeagueSeriesResponse_Series_Team) ProtoMessage() {}
+
+func (m *CMsgClientToGCGetLeagueSeriesResponse_Series_Team) GetTeamId() uint32 {
+	if m != nil && m.TeamId != nil {
+		return *m.TeamId
+	}
+	return 0
+}
+
+func (m *CMsgClientToGCGetLeagueSeriesResponse_Series_Team) GetTeamName() string {
+	if m != nil && m.TeamName != nil {
+		return *m.TeamName
+	}
+	return ""
+}
+
+func (m *CMsgClientToGCGetLeagueSeriesResponse_Series_Team) GetTeamTag() string {
+	if m != nil && m.TeamTag != nil {
+		return *m.TeamTag
+	}
+	return ""
+}
+
+func (m *CMsgClientToGCGetLeagueSeriesResponse_Series_Team) GetTeamScore() uint32 {
+	if m != nil && m.TeamScore != nil {
+		return *m.TeamScore
+	}
+	return 0
+}
+
+type CMsgClientToGCApplyGemCombiner struct {
+	ItemId_1         *uint64 `protobuf:"varint,1,opt,name=item_id_1" json:"item_id_1,omitempty"`
+	ItemId_2         *uint64 `protobuf:"varint,2,opt,name=item_id_2" json:"item_id_2,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CMsgClientToGCApplyGemCombiner) Reset()         { *m = CMsgClientToGCApplyGemCombiner{} }
+func (m *CMsgClientToGCApplyGemCombiner) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCApplyGemCombiner) ProtoMessage()    {}
+
+func (m *CMsgClientToGCApplyGemCombiner) GetItemId_1() uint64 {
+	if m != nil && m.ItemId_1 != nil {
+		return *m.ItemId_1
+	}
+	return 0
+}
+
+func (m *CMsgClientToGCApplyGemCombiner) GetItemId_2() uint64 {
+	if m != nil && m.ItemId_2 != nil {
+		return *m.ItemId_2
+	}
+	return 0
+}
+
+type CDummyUnbreakMessage struct {
+	DummyField        *CMsgDOTAClearTournamentGame `protobuf:"bytes,1,opt,name=dummy_field" json:"dummy_field,omitempty"`
+	AnotherDummyField *ETournamentState            `protobuf:"varint,2,opt,name=another_dummy_field,enum=dota.ETournamentState,def=0" json:"another_dummy_field,omitempty"`
+	XXX_unrecognized  []byte                       `json:"-"`
+}
+
+func (m *CDummyUnbreakMessage) Reset()         { *m = CDummyUnbreakMessage{} }
+func (m *CDummyUnbreakMessage) String() string { return proto.CompactTextString(m) }
+func (*CDummyUnbreakMessage) ProtoMessage()    {}
+
+const Default_CDummyUnbreakMessage_AnotherDummyField ETournamentState = ETournamentState_k_ETournamentState_Unknown
+
+func (m *CDummyUnbreakMessage) GetDummyField() *CMsgDOTAClearTournamentGame {
+	if m != nil {
+		return m.DummyField
+	}
+	return nil
+}
+
+func (m *CDummyUnbreakMessage) GetAnotherDummyField() ETournamentState {
+	if m != nil && m.AnotherDummyField != nil {
+		return *m.AnotherDummyField
+	}
+	return Default_CDummyUnbreakMessage_AnotherDummyField
+}
+
+type CMsgClientToGCCreateStaticRecipe struct {
+	Items            []*CMsgClientToGCCreateStaticRecipe_Item `protobuf:"bytes,1,rep,name=items" json:"items,omitempty"`
+	RecipeDefIndex   *uint32                                  `protobuf:"varint,2,opt,name=recipe_def_index" json:"recipe_def_index,omitempty"`
+	XXX_unrecognized []byte                                   `json:"-"`
+}
+
+func (m *CMsgClientToGCCreateStaticRecipe) Reset()         { *m = CMsgClientToGCCreateStaticRecipe{} }
+func (m *CMsgClientToGCCreateStaticRecipe) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCCreateStaticRecipe) ProtoMessage()    {}
+
+func (m *CMsgClientToGCCreateStaticRecipe) GetItems() []*CMsgClientToGCCreateStaticRecipe_Item {
+	if m != nil {
+		return m.Items
+	}
+	return nil
+}
+
+func (m *CMsgClientToGCCreateStaticRecipe) GetRecipeDefIndex() uint32 {
+	if m != nil && m.RecipeDefIndex != nil {
+		return *m.RecipeDefIndex
+	}
+	return 0
+}
+
+type CMsgClientToGCCreateStaticRecipe_Item struct {
+	ItemId           *uint64 `protobuf:"varint,1,opt,name=item_id" json:"item_id,omitempty"`
+	SlotId           *uint32 `protobuf:"varint,2,opt,name=slot_id" json:"slot_id,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CMsgClientToGCCreateStaticRecipe_Item) Reset()         { *m = CMsgClientToGCCreateStaticRecipe_Item{} }
+func (m *CMsgClientToGCCreateStaticRecipe_Item) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCCreateStaticRecipe_Item) ProtoMessage()    {}
+
+func (m *CMsgClientToGCCreateStaticRecipe_Item) GetItemId() uint64 {
+	if m != nil && m.ItemId != nil {
+		return *m.ItemId
+	}
+	return 0
+}
+
+func (m *CMsgClientToGCCreateStaticRecipe_Item) GetSlotId() uint32 {
+	if m != nil && m.SlotId != nil {
+		return *m.SlotId
+	}
+	return 0
+}
+
+type CMsgClientToGCCreateStaticRecipeResponse struct {
+	Response         *CMsgClientToGCCreateStaticRecipeResponse_EResponse `protobuf:"varint,1,opt,name=response,enum=dota.CMsgClientToGCCreateStaticRecipeResponse_EResponse,def=0" json:"response,omitempty"`
+	XXX_unrecognized []byte                                              `json:"-"`
+}
+
+func (m *CMsgClientToGCCreateStaticRecipeResponse) Reset() {
+	*m = CMsgClientToGCCreateStaticRecipeResponse{}
+}
+func (m *CMsgClientToGCCreateStaticRecipeResponse) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCCreateStaticRecipeResponse) ProtoMessage()    {}
+
+const Default_CMsgClientToGCCreateStaticRecipeResponse_Response CMsgClientToGCCreateStaticRecipeResponse_EResponse = CMsgClientToGCCreateStaticRecipeResponse_eResponse_Success
+
+func (m *CMsgClientToGCCreateStaticRecipeResponse) GetResponse() CMsgClientToGCCreateStaticRecipeResponse_EResponse {
+	if m != nil && m.Response != nil {
+		return *m.Response
+	}
+	return Default_CMsgClientToGCCreateStaticRecipeResponse_Response
+}
+
 func init() {
-	proto.RegisterEnum("dota.ETournamentGameState", ETournamentGameState_name, ETournamentGameState_value)
-	proto.RegisterEnum("dota.ETournamentTeamState", ETournamentTeamState_name, ETournamentTeamState_value)
-	proto.RegisterEnum("dota.ETournamentState", ETournamentState_name, ETournamentState_value)
-	proto.RegisterEnum("dota.ETournamentNodeState", ETournamentNodeState_name, ETournamentNodeState_value)
 	proto.RegisterEnum("dota.DOTAChatChannelTypeT", DOTAChatChannelTypeT_name, DOTAChatChannelTypeT_value)
 	proto.RegisterEnum("dota.DOTA_WatchReplayType", DOTA_WatchReplayType_name, DOTA_WatchReplayType_value)
-	proto.RegisterEnum("dota.DOTA_2013PassportSelectionIndices", DOTA_2013PassportSelectionIndices_name, DOTA_2013PassportSelectionIndices_value)
 	proto.RegisterEnum("dota.EItemEditorReservationResult", EItemEditorReservationResult_name, EItemEditorReservationResult_value)
 	proto.RegisterEnum("dota.EProfileCardSlotType", EProfileCardSlotType_name, EProfileCardSlotType_value)
 	proto.RegisterEnum("dota.EFeaturedHeroTextField", EFeaturedHeroTextField_name, EFeaturedHeroTextField_value)
@@ -15621,4 +14568,5 @@ func init() {
 	proto.RegisterEnum("dota.CMsgGCNotificationsResponse_EResult", CMsgGCNotificationsResponse_EResult_name, CMsgGCNotificationsResponse_EResult_value)
 	proto.RegisterEnum("dota.CMsgGCPlayerInfoSubmitResponse_EResult", CMsgGCPlayerInfoSubmitResponse_EResult_name, CMsgGCPlayerInfoSubmitResponse_EResult_value)
 	proto.RegisterEnum("dota.CMsgClientToGCExchangeItemsForOfferingResponse_EResponse", CMsgClientToGCExchangeItemsForOfferingResponse_EResponse_name, CMsgClientToGCExchangeItemsForOfferingResponse_EResponse_value)
+	proto.RegisterEnum("dota.CMsgClientToGCCreateStaticRecipeResponse_EResponse", CMsgClientToGCCreateStaticRecipeResponse_EResponse_name, CMsgClientToGCCreateStaticRecipeResponse_EResponse_value)
 }

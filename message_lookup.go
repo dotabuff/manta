@@ -92,9 +92,7 @@ var packetNames = map[int32]string{
 	144: "EBaseUserMessages_UM_AudioParameter",
 	145: "EBaseUserMessages_UM_ParticleManager",
 	146: "EBaseUserMessages_UM_HudError",
-	147: "EBaseUserMessages_UM_CustomGameEvent_ClientToServer",
-	148: "EBaseUserMessages_UM_CustomGameEvent_ServerToClient",
-	149: "EBaseUserMessages_UM_TrackedControllerInput_ClientToServer",
+	148: "EBaseUserMessages_UM_CustomGameEvent",
 	200: "EBaseGameEvents_GE_VDebugGameSessionIDEvent",
 	201: "EBaseGameEvents_GE_PlaceDecalEvent",
 	202: "EBaseGameEvents_GE_ClearWorldDecalsEvent",
@@ -192,6 +190,7 @@ var packetNames = map[int32]string{
 	550: "EDotaUserMessages_DOTA_UM_CustomHudElement_Destroy",
 	551: "EDotaUserMessages_DOTA_UM_CompendiumState",
 	552: "EDotaUserMessages_DOTA_UM_ProjectionAbility",
+	553: "EDotaUserMessages_DOTA_UM_ProjectionEvent",
 }
 
 type Callbacks struct {
@@ -388,6 +387,7 @@ type Callbacks struct {
 	onCDOTAUserMsg_CustomHudElement_Destroy   []func(*dota.CDOTAUserMsg_CustomHudElement_Destroy) error
 	onCDOTAUserMsg_CompendiumState            []func(*dota.CDOTAUserMsg_CompendiumState) error
 	onCDOTAUserMsg_ProjectionAbility          []func(*dota.CDOTAUserMsg_ProjectionAbility) error
+	onCDOTAUserMsg_ProjectionEvent            []func(*dota.CDOTAUserMsg_ProjectionEvent) error
 }
 
 func (c *Callbacks) OnCDemoStop(fn func(*dota.CDemoStop) error) {
@@ -968,6 +968,9 @@ func (c *Callbacks) OnCDOTAUserMsg_CompendiumState(fn func(*dota.CDOTAUserMsg_Co
 }
 func (c *Callbacks) OnCDOTAUserMsg_ProjectionAbility(fn func(*dota.CDOTAUserMsg_ProjectionAbility) error) {
 	c.onCDOTAUserMsg_ProjectionAbility = append(c.onCDOTAUserMsg_ProjectionAbility, fn)
+}
+func (c *Callbacks) OnCDOTAUserMsg_ProjectionEvent(fn func(*dota.CDOTAUserMsg_ProjectionEvent) error) {
+	c.onCDOTAUserMsg_ProjectionEvent = append(c.onCDOTAUserMsg_ProjectionEvent, fn)
 }
 func (p *Parser) CallByDemoType(t int32, raw []byte) error {
 	callbacks := p.Callbacks
@@ -3488,6 +3491,19 @@ func (p *Parser) CallByPacketType(t int32, raw []byte) error {
 			}
 		}
 		return nil
+	case 553: // dota.EDotaUserMessages_DOTA_UM_ProjectionEvent
+		if cbs := callbacks.onCDOTAUserMsg_ProjectionEvent; cbs != nil {
+			msg := &dota.CDOTAUserMsg_ProjectionEvent{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			for _, fn := range cbs {
+				if err := fn(msg); err != nil {
+					return err
+				}
+			}
+		}
+		return nil
 	}
 	return fmt.Errorf("no type found: %d", t)
 }
@@ -3686,4 +3702,5 @@ func (c *Callbacks) OnAny(all func(interface{}) error) {
 	c.OnCDOTAUserMsg_CustomHudElement_Destroy(func(pkg *dota.CDOTAUserMsg_CustomHudElement_Destroy) error { return all(pkg) })
 	c.OnCDOTAUserMsg_CompendiumState(func(pkg *dota.CDOTAUserMsg_CompendiumState) error { return all(pkg) })
 	c.OnCDOTAUserMsg_ProjectionAbility(func(pkg *dota.CDOTAUserMsg_ProjectionAbility) error { return all(pkg) })
+	c.OnCDOTAUserMsg_ProjectionEvent(func(pkg *dota.CDOTAUserMsg_ProjectionEvent) error { return all(pkg) })
 }
