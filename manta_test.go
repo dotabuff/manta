@@ -10,7 +10,7 @@ import (
 func TestSep01Match1763193771(t *testing.T) {
 	assert := assert.New(t)
 	debugLevel = 0
-	testLevel = 0
+	testLevel = 1
 
 	buf := mustGetReplayData("1763193771", "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1763193771.dem")
 	parser, err := NewParser(buf)
