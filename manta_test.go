@@ -14,7 +14,6 @@ func TestSep01Match1763193771(t *testing.T) {
 
 	buf := mustGetReplayData("1763193771", "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1763193771.dem")
 	parser, err := NewParser(buf)
-	parser.ProcessPacketEntities = true
 	assert.Nil(err)
 
 	err = parser.Start()
@@ -44,11 +43,10 @@ func TestSep01Match1763193771(t *testing.T) {
 func TestSep01Match1763177231(t *testing.T) {
 	assert := assert.New(t)
 	debugLevel = 0
-	testLevel = 0
+	testLevel = 1
 
 	buf := mustGetReplayData("1763177231", "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1763177231.dem")
 	parser, err := NewParser(buf)
-	parser.ProcessPacketEntities = true
 	assert.Nil(err)
 
 	err = parser.Start()
@@ -83,11 +81,6 @@ func TestParseOneMatchWithPE(t *testing.T) {
 	buf := mustGetReplayData("1731962898", "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1731962898.dem")
 	parser, err := NewParser(buf)
 	assert.Nil(err)
-
-	parser.OnPacketEntity(func(pe *PacketEntity, e EntityEventType) error {
-		return nil
-	})
-
 	err = parser.Start()
 	assert.Nil(err)
 }
@@ -115,35 +108,41 @@ func TestParseRealMatches(t *testing.T) {
 	scenarios := []struct {
 		matchId                string
 		replayUrl              string
+		expectGameBuild        uint32
+		expectEntityEvents     int32
 		expectCombatLogDamage  int32
 		expectCombatLogHealing int32
 		expectCombatLogDeaths  int32
 		expectCombatLogEvents  int32
 		expectUnitOrderEvents  int32
 	}{
-		/*
-			{
-				matchId:                "1763193771",
-				replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1763193771.dem",
-				expectCombatLogDamage:  0,
-				expectCombatLogHealing: 0,
-				expectCombatLogDeaths:  0,
-				expectCombatLogEvents:  0,
-				expectUnitOrderEvents:  0,
-			},
-			{
-				matchId:                "1763177231",
-				replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1763177231.dem",
-				expectCombatLogDamage:  0,
-				expectCombatLogHealing: 0,
-				expectCombatLogDeaths:  0,
-				expectCombatLogEvents:  0,
-				expectUnitOrderEvents:  0,
-			},
-		*/
+		{
+			matchId:                "1763193771",
+			replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1763193771.dem",
+			expectGameBuild:        1016,
+			expectEntityEvents:     1203640,
+			expectCombatLogDamage:  623594,
+			expectCombatLogHealing: 19530,
+			expectCombatLogDeaths:  1022,
+			expectCombatLogEvents:  24436,
+			expectUnitOrderEvents:  31994,
+		},
+		{
+			matchId:                "1763177231",
+			replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1763177231.dem",
+			expectGameBuild:        1016,
+			expectEntityEvents:     1221874,
+			expectCombatLogDamage:  479350,
+			expectCombatLogHealing: 22611,
+			expectCombatLogDeaths:  977,
+			expectCombatLogEvents:  20043,
+			expectUnitOrderEvents:  35975,
+		},
 		{
 			matchId:                "1734886116",
 			replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1734886116.dem",
+			expectGameBuild:        1003,
+			expectEntityEvents:     2049211,
 			expectCombatLogDamage:  1048805,
 			expectCombatLogHealing: 25089,
 			expectCombatLogDeaths:  1447,
@@ -153,6 +152,8 @@ func TestParseRealMatches(t *testing.T) {
 		{
 			matchId:                "1731962898",
 			replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1731962898.dem",
+			expectGameBuild:        1003,
+			expectEntityEvents:     1183267,
 			expectCombatLogDamage:  415560,
 			expectCombatLogHealing: 20018,
 			expectCombatLogDeaths:  690,
@@ -162,6 +163,8 @@ func TestParseRealMatches(t *testing.T) {
 		{
 			matchId:                "1605340040",
 			replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1605340040.dem",
+			expectGameBuild:        955,
+			expectEntityEvents:     1283574,
 			expectCombatLogDamage:  522367,
 			expectCombatLogHealing: 31721,
 			expectCombatLogDeaths:  795,
@@ -171,6 +174,8 @@ func TestParseRealMatches(t *testing.T) {
 		{
 			matchId:                "1560289528",
 			replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1560289528.dem",
+			expectGameBuild:        928,
+			expectEntityEvents:     2270022,
 			expectCombatLogDamage:  1180993,
 			expectCombatLogHealing: 57511,
 			expectCombatLogDeaths:  1449,
@@ -180,6 +185,8 @@ func TestParseRealMatches(t *testing.T) {
 		{
 			matchId:                "1560294294",
 			replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1560294294.dem",
+			expectGameBuild:        928,
+			expectEntityEvents:     1611898,
 			expectCombatLogDamage:  768154,
 			expectCombatLogHealing: 11565,
 			expectCombatLogDeaths:  954,
@@ -189,6 +196,8 @@ func TestParseRealMatches(t *testing.T) {
 		{
 			matchId:                "1560315800",
 			replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1560315800.dem",
+			expectGameBuild:        928,
+			expectEntityEvents:     2781076,
 			expectCombatLogDamage:  1332418,
 			expectCombatLogHealing: 57874,
 			expectCombatLogDeaths:  1645,
@@ -198,6 +207,8 @@ func TestParseRealMatches(t *testing.T) {
 		{
 			matchId:                "1582611189",
 			replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1582611189.dem",
+			expectGameBuild:        944,
+			expectEntityEvents:     1427025,
 			expectCombatLogDamage:  599388,
 			expectCombatLogHealing: 28576,
 			expectCombatLogDeaths:  930,
@@ -207,6 +218,8 @@ func TestParseRealMatches(t *testing.T) {
 		{
 			matchId:                "1648457986",
 			replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1648457986.dem",
+			expectGameBuild:        962,
+			expectEntityEvents:     742252,
 			expectCombatLogDamage:  224773,
 			expectCombatLogHealing: 5914,
 			expectCombatLogDeaths:  466,
@@ -216,6 +229,8 @@ func TestParseRealMatches(t *testing.T) {
 		{
 			matchId:                "1712853372",
 			replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1712853372.dem",
+			expectGameBuild:        991,
+			expectEntityEvents:     1708696,
 			expectCombatLogDamage:  671297,
 			expectCombatLogHealing: 23467,
 			expectCombatLogDeaths:  1099,
@@ -225,6 +240,8 @@ func TestParseRealMatches(t *testing.T) {
 		{
 			matchId:                "1716444111",
 			replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1716444111.dem",
+			expectGameBuild:        995,
+			expectEntityEvents:     2854511,
 			expectCombatLogDamage:  1398735,
 			expectCombatLogHealing: 49659,
 			expectCombatLogDeaths:  2169,
@@ -246,9 +263,15 @@ func TestParseRealMatches(t *testing.T) {
 		gotCombatLogDeaths := int32(0)
 		gotCombatLogEvents := int32(0)
 		gotUnitOrderEvents := int32(0)
+		gotEntityEvents := int32(0)
 
 		parser.Callbacks.OnCDOTAUserMsg_SpectatorPlayerUnitOrders(func(m *dota.CDOTAUserMsg_SpectatorPlayerUnitOrders) error {
 			gotUnitOrderEvents += 1
+			return nil
+		})
+
+		parser.OnPacketEntity(func(pe *PacketEntity, pet EntityEventType) error {
+			gotEntityEvents += 1
 			return nil
 		})
 
@@ -295,6 +318,8 @@ func TestParseRealMatches(t *testing.T) {
 			}
 		}
 
+		assert.Equal(s.expectGameBuild, parser.GameBuild, s.matchId)
+		assert.Equal(s.expectEntityEvents, gotEntityEvents, s.matchId)
 		assert.Equal(s.expectCombatLogDamage, gotCombatLogDamage, s.matchId)
 		assert.Equal(s.expectCombatLogHealing, gotCombatLogHealing, s.matchId)
 		assert.Equal(s.expectCombatLogDeaths, gotCombatLogDeaths, s.matchId)
