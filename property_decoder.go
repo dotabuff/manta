@@ -7,14 +7,7 @@ import (
 
 func decodeSteamId(r *Reader, f *dt_field) interface{} {
 	// Try reading as a little endian uint64
-	val := r.readLeUint64()
-	if (val > 76561197960265728) && val < (76561197960265728+4294967294) {
-		return val
-	}
-
-	// If that doesn't provide a reasonable result then read as a varuint64.
-	r.seekBytes(-8)
-	return r.readVarUint64()
+	return r.readLeUint64()
 }
 
 func decodeHandle(r *Reader, f *dt_field) interface{} {
@@ -30,6 +23,12 @@ func decodeShort(r *Reader, f *dt_field) interface{} {
 }
 
 func decodeUnsigned(r *Reader, f *dt_field) interface{} {
+	// Let's hope this get's added by valve at some point
+	switch f.Encoder {
+	case "fixed64":
+		return decodeFixed64(r, f)
+	}
+
 	return r.readVarUint64()
 }
 
@@ -39,6 +38,17 @@ func decodeSigned(r *Reader, f *dt_field) interface{} {
 
 func decodeSigned64(r *Reader, f *dt_field) interface{} {
 	return r.readVarInt64()
+}
+
+func decodeFixed32(r *Reader, f *dt_field) interface{} {
+	return r.readBits(32)
+}
+
+func decodeFixed64(r *Reader, f *dt_field) interface{} {
+	ret := uint64(r.readBits(32))
+
+	ret = (ret << 32) | uint64(r.readBits(32))
+	return ret
 }
 
 func decodeBoolean(r *Reader, f *dt_field) interface{} {
@@ -101,7 +111,6 @@ func decodeString(r *Reader, f *dt_field) interface{} {
 }
 
 func decodeVector(r *Reader, f *dt_field) interface{} {
-
 	return r.readVarUint32()
 }
 
