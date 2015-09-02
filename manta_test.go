@@ -14,26 +14,68 @@ func TestSep01Match1763193771(t *testing.T) {
 
 	buf := mustGetReplayData("1763193771", "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1763193771.dem")
 	parser, err := NewParser(buf)
+	parser.ProcessPacketEntities = false
 	assert.Nil(err)
 
 	err = parser.Start()
 	assert.Nil(err)
+
+	// Get the CDOTA_PlayerResource baseline
+	var baseline *Properties
+	for k, v := range parser.ClassBaselines {
+		if parser.ClassInfo[k] == "CDOTA_PlayerResource" {
+			baseline = v
+			break
+		}
+	}
+
+	// Test player names and steam ids
+	v, _ := baseline.Fetch("m_vecPlayerData.0000.m_iszPlayerName")
+	assert.Equal("lovely day", v.(string))
+	v, _ = baseline.Fetch("m_vecPlayerData.0000.m_iPlayerSteamID")
+	assert.Equal(uint64(76561198008716584), v.(uint64))
+
+	v, _ = baseline.Fetch("m_vecPlayerData.0002.m_iszPlayerName")
+	assert.Equal("1.6180339887498948482", v.(string))
+	v, _ = baseline.Fetch("m_vecPlayerData.0002.m_iPlayerSteamID")
+	assert.Equal(uint64(76561198167136966), v.(uint64))
 }
 
 func TestSep01Match1763177231(t *testing.T) {
 	assert := assert.New(t)
-	debugLevel = 10
+	debugLevel = 0
 	testLevel = 0
 
 	buf := mustGetReplayData("1763177231", "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1763177231.dem")
 	parser, err := NewParser(buf)
+	parser.ProcessPacketEntities = false
 	assert.Nil(err)
 
 	err = parser.Start()
 	assert.Nil(err)
+
+	// Get the CDOTA_PlayerResource baseline
+	var baseline *Properties
+	for k, v := range parser.ClassBaselines {
+		if parser.ClassInfo[k] == "CDOTA_PlayerResource" {
+			baseline = v
+			break
+		}
+	}
+
+	// Test player names and steam ids
+	v, _ := baseline.Fetch("m_vecPlayerData.0000.m_iszPlayerName")
+	assert.Equal("Ralibuna", v.(string))
+	v, _ = baseline.Fetch("m_vecPlayerData.0000.m_iPlayerSteamID")
+	assert.Equal(uint64(76561198085372517), v.(uint64))
+
+	v, _ = baseline.Fetch("m_vecPlayerData.0002.m_iszPlayerName")
+	assert.Equal("Freddy", v.(string))
+	v, _ = baseline.Fetch("m_vecPlayerData.0002.m_iPlayerSteamID")
+	assert.Equal(uint64(76561198155033610), v.(uint64))
 }
 
-func TestParseOneMatch(t *testing.T) {
+func TestParseOneMatchWithPE(t *testing.T) {
 	assert := assert.New(t)
 	debugLevel = 0
 	testLevel = 0
@@ -79,24 +121,26 @@ func TestParseRealMatches(t *testing.T) {
 		expectCombatLogEvents  int32
 		expectUnitOrderEvents  int32
 	}{
-		{
-			matchId:                "1763193771",
-			replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1763193771.dem",
-			expectCombatLogDamage:  0,
-			expectCombatLogHealing: 0,
-			expectCombatLogDeaths:  0,
-			expectCombatLogEvents:  0,
-			expectUnitOrderEvents:  0,
-		},
-		{
-			matchId:                "1763177231",
-			replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1763177231.dem",
-			expectCombatLogDamage:  0,
-			expectCombatLogHealing: 0,
-			expectCombatLogDeaths:  0,
-			expectCombatLogEvents:  0,
-			expectUnitOrderEvents:  0,
-		},
+		/*
+			{
+				matchId:                "1763193771",
+				replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1763193771.dem",
+				expectCombatLogDamage:  0,
+				expectCombatLogHealing: 0,
+				expectCombatLogDeaths:  0,
+				expectCombatLogEvents:  0,
+				expectUnitOrderEvents:  0,
+			},
+			{
+				matchId:                "1763177231",
+				replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1763177231.dem",
+				expectCombatLogDamage:  0,
+				expectCombatLogHealing: 0,
+				expectCombatLogDeaths:  0,
+				expectCombatLogEvents:  0,
+				expectUnitOrderEvents:  0,
+			},
+		*/
 		{
 			matchId:                "1734886116",
 			replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1734886116.dem",
