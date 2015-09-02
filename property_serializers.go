@@ -48,6 +48,9 @@ func (pst *PropertySerializerTable) FillSerializer(field *dt_field) {
 	case "m_flAnimTime":
 		field.Serializer = &PropertySerializer{decodeSimTime, nil, false, 0, nil, "unkown"}
 		return
+	case "m_iPlayerSteamID":
+		field.Serializer = &PropertySerializer{decodeSteamId, nil, false, 0, nil, "unknown"}
+		return
 	}
 
 	field.Serializer = pst.GetPropertySerializerByName(field.Type)

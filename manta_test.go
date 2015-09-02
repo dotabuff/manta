@@ -35,9 +35,9 @@ func TestSep01Match1763193771(t *testing.T) {
 	v, _ = baseline.Fetch("m_vecPlayerData.0000.m_iPlayerSteamID")
 	assert.Equal(uint64(76561198008716584), v.(uint64))
 
-	v, _ = baseline.Fetch("m_vecPlayerData.0002.m_iszPlayerName")
+	v, _ = baseline.Fetch("m_vecPlayerData.0001.m_iszPlayerName")
 	assert.Equal("1.6180339887498948482", v.(string))
-	v, _ = baseline.Fetch("m_vecPlayerData.0002.m_iPlayerSteamID")
+	v, _ = baseline.Fetch("m_vecPlayerData.0001.m_iPlayerSteamID")
 	assert.Equal(uint64(76561198167136966), v.(uint64))
 }
 

@@ -5,6 +5,18 @@ import (
 	"strconv"
 )
 
+func decodeSteamId(r *Reader, f *dt_field) interface{} {
+	// Try reading as a little endian uint64
+	val := r.readLeUint64()
+	if (val > 76561197960265728) && val < (76561197960265728+4294967294) {
+		return val
+	}
+
+	// If that doesn't provide a reasonable result then read as a varuint64.
+	r.seekBytes(-8)
+	return r.readVarUint64()
+}
+
 func decodeHandle(r *Reader, f *dt_field) interface{} {
 	return r.readVarUint32()
 }

@@ -12,7 +12,7 @@ var (
 	colorError  = color.New(color.FgRed).SprintFunc()
 	colorValue  = color.New(color.FgCyan).SprintFunc()
 	colorZero   = color.New(color.Faint).SprintFunc()
-	printableRe = regexp.MustCompile(`^[a-zA-Z0-9\s]+$`)
+	printableRe = regexp.MustCompile(`^[a-zA-Z0-9\.\s]+$`)
 )
 
 func isPrintable(s string) bool {
@@ -35,8 +35,8 @@ var readerDumpers = []readerDumper{
 	{"var32", "%-11v", "0", func(r *Reader) interface{} { return r.readVarInt32() }},
 	{"varu32", "%-10v", "0", func(r *Reader) interface{} { return r.readVarUint32() }},
 	{"varu64", "%-20v", "0", func(r *Reader) interface{} { return r.readVarUint64() }},
+	{"uint64", "%-20v", "0", func(r *Reader) interface{} { return r.readLeUint64() }},
 	{"ubitvar", "%-10v", "0", func(r *Reader) interface{} { return r.readUBitVar() }},
-	{"float32", "%-16v", "0", func(r *Reader) interface{} { return r.readFloat32() }},
 	{"byte", "%-4s", "[]", func(r *Reader) interface{} { return _sprintf("0x%02x", r.readByte()) }},
 	{"string", "%v", "-", func(r *Reader) interface{} {
 		if s := r.readString(); isPrintable(s) {
@@ -81,7 +81,7 @@ func (r *Reader) dumpBits(n int) {
 
 			line += _sprintf(" | %s: %s", d.name, colorFn(val))
 		}
-		_debugf(line)
+		_debugfl(10, line)
 	}
 	r.pos = o
 }

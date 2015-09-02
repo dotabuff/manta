@@ -48,6 +48,7 @@ func ReadProperties(r *Reader, ser *dt) (result *Properties) {
 	// iterate all the fields and set their corresponding values
 	for _, f := range fieldPath.fields {
 		_debugfl(6, "Decoding field %d %s %s", r.pos, f.Name, f.Field.Type)
+		// r.dumpBits(1)
 
 		if f.Field.Serializer.Decode == nil {
 			result.KV[f.Name] = r.readVarUint32()
