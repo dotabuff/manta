@@ -14,7 +14,7 @@ func TestSep01Match1763193771(t *testing.T) {
 
 	buf := mustGetReplayData("1763193771", "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1763193771.dem")
 	parser, err := NewParser(buf)
-	parser.ProcessPacketEntities = false
+	parser.ProcessPacketEntities = true
 	assert.Nil(err)
 
 	err = parser.Start()
@@ -48,7 +48,7 @@ func TestSep01Match1763177231(t *testing.T) {
 
 	buf := mustGetReplayData("1763177231", "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1763177231.dem")
 	parser, err := NewParser(buf)
-	parser.ProcessPacketEntities = false
+	parser.ProcessPacketEntities = true
 	assert.Nil(err)
 
 	err = parser.Start()
