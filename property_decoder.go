@@ -5,8 +5,7 @@ import (
 	"strconv"
 )
 
-func decodeSteamId(r *Reader, f *dt_field) interface{} {
-	// Try reading as a little endian uint64
+func decodeLeUint64(r *Reader, f *dt_field) interface{} {
 	return r.readLeUint64()
 }
 
@@ -27,6 +26,8 @@ func decodeUnsigned(r *Reader, f *dt_field) interface{} {
 	switch f.Encoder {
 	case "fixed64":
 		return decodeFixed64(r, f)
+	case "le64":
+		return decodeLeUint64(r, f)
 	}
 
 	return r.readVarUint64()

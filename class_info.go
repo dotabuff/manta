@@ -1,13 +1,31 @@
 package manta
 
 import (
+	"fmt"
+	"regexp"
+	"strconv"
+
 	"github.com/dotabuff/manta/dota"
 )
+
+var gameBuildRegexp = regexp.MustCompile(`/dota_v(\d+)/`)
 
 // Internal callback for CSVCMsg_ServerInfo.
 func (p *Parser) onCSVCMsg_ServerInfo(m *dota.CSVCMsg_ServerInfo) error {
 	// This may be needed to parse PacketEntities.
 	p.classIdSize = log2(int(m.GetMaxClasses()))
+
+	// Extract the build from the game dir.
+	matches := gameBuildRegexp.FindStringSubmatch(m.GetGameDir())
+	if len(matches) < 2 {
+		return fmt.Errorf("unable to determine game build from '%s'", m.GetGameDir())
+	}
+	build, err := strconv.ParseUint(matches[1], 10, 32)
+	if err != nil {
+		return err
+	}
+	p.GameBuild = uint32(build)
+
 	return nil
 }
 
