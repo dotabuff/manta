@@ -75,7 +75,8 @@ type CDOTAModifierBuffTableEntry struct {
 	DdAbilityIndex      *int32                    `protobuf:"varint,28,opt,name=dd_ability_index" json:"dd_ability_index,omitempty"`
 	IllusionLabel       *string                   `protobuf:"bytes,29,opt,name=illusion_label" json:"illusion_label,omitempty"`
 	Active              *bool                     `protobuf:"varint,30,opt,name=active" json:"active,omitempty"`
-	LuaName             *string                   `protobuf:"bytes,31,opt,name=lua_name" json:"lua_name,omitempty"`
+	PlayerIds           *string                   `protobuf:"bytes,31,opt,name=player_ids" json:"player_ids,omitempty"`
+	LuaName             *string                   `protobuf:"bytes,32,opt,name=lua_name" json:"lua_name,omitempty"`
 	XXX_unrecognized    []byte                    `json:"-"`
 }
 
@@ -294,6 +295,13 @@ func (m *CDOTAModifierBuffTableEntry) GetActive() bool {
 		return *m.Active
 	}
 	return false
+}
+
+func (m *CDOTAModifierBuffTableEntry) GetPlayerIds() string {
+	if m != nil && m.PlayerIds != nil {
+		return *m.PlayerIds
+	}
+	return ""
 }
 
 func (m *CDOTAModifierBuffTableEntry) GetLuaName() string {

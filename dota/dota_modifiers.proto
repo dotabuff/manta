@@ -41,7 +41,8 @@ message CDOTAModifierBuffTableEntry {
 	optional int32 dd_ability_index = 28;
 	optional string illusion_label = 29;
 	optional bool active = 30;
-	optional string lua_name = 31;
+	optional string player_ids = 31;
+	optional string lua_name = 32;
 }
 
 message CDOTALuaModifierEntry {

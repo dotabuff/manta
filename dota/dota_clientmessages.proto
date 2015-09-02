@@ -54,6 +54,7 @@ enum EDotaClientMessages {
 	DOTA_CM_ChallengeSelect = 346;
 	DOTA_CM_ChallengeReroll = 347;
 	DOTA_CM_ClickedBuff = 348;
+	DOTA_CM_CoinWager = 349;
 }
 
 message CDOTAClientMsg_MapPing {
@@ -261,5 +262,9 @@ message CDOTAClientMsg_ChallengeReroll {
 	optional uint32 event_id = 1;
 	optional uint32 slot_id = 2;
 	optional uint32 sequence_id = 3;
+}
+
+message CDOTAClientMsg_CoinWager {
+	optional uint32 wager_amount = 1;
 }
 

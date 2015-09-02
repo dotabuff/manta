@@ -14,47 +14,45 @@ var _ = math.Inf
 type EBaseUserMessages int32
 
 const (
-	EBaseUserMessages_UM_AchievementEvent                      EBaseUserMessages = 101
-	EBaseUserMessages_UM_CloseCaption                          EBaseUserMessages = 102
-	EBaseUserMessages_UM_CloseCaptionDirect                    EBaseUserMessages = 103
-	EBaseUserMessages_UM_CurrentTimescale                      EBaseUserMessages = 104
-	EBaseUserMessages_UM_DesiredTimescale                      EBaseUserMessages = 105
-	EBaseUserMessages_UM_Fade                                  EBaseUserMessages = 106
-	EBaseUserMessages_UM_GameTitle                             EBaseUserMessages = 107
-	EBaseUserMessages_UM_HintText                              EBaseUserMessages = 109
-	EBaseUserMessages_UM_HudMsg                                EBaseUserMessages = 110
-	EBaseUserMessages_UM_HudText                               EBaseUserMessages = 111
-	EBaseUserMessages_UM_KeyHintText                           EBaseUserMessages = 112
-	EBaseUserMessages_UM_ColoredText                           EBaseUserMessages = 113
-	EBaseUserMessages_UM_RequestState                          EBaseUserMessages = 114
-	EBaseUserMessages_UM_ResetHUD                              EBaseUserMessages = 115
-	EBaseUserMessages_UM_Rumble                                EBaseUserMessages = 116
-	EBaseUserMessages_UM_SayText                               EBaseUserMessages = 117
-	EBaseUserMessages_UM_SayText2                              EBaseUserMessages = 118
-	EBaseUserMessages_UM_SayTextChannel                        EBaseUserMessages = 119
-	EBaseUserMessages_UM_Shake                                 EBaseUserMessages = 120
-	EBaseUserMessages_UM_ShakeDir                              EBaseUserMessages = 121
-	EBaseUserMessages_UM_TextMsg                               EBaseUserMessages = 124
-	EBaseUserMessages_UM_ScreenTilt                            EBaseUserMessages = 125
-	EBaseUserMessages_UM_Train                                 EBaseUserMessages = 126
-	EBaseUserMessages_UM_VGUIMenu                              EBaseUserMessages = 127
-	EBaseUserMessages_UM_VoiceMask                             EBaseUserMessages = 128
-	EBaseUserMessages_UM_VoiceSubtitle                         EBaseUserMessages = 129
-	EBaseUserMessages_UM_SendAudio                             EBaseUserMessages = 130
-	EBaseUserMessages_UM_ItemPickup                            EBaseUserMessages = 131
-	EBaseUserMessages_UM_AmmoDenied                            EBaseUserMessages = 132
-	EBaseUserMessages_UM_CrosshairAngle                        EBaseUserMessages = 133
-	EBaseUserMessages_UM_ShowMenu                              EBaseUserMessages = 134
-	EBaseUserMessages_UM_CreditsMsg                            EBaseUserMessages = 135
-	EBaseUserMessages_UM_CloseCaptionPlaceholder               EBaseUserMessages = 142
-	EBaseUserMessages_UM_CameraTransition                      EBaseUserMessages = 143
-	EBaseUserMessages_UM_AudioParameter                        EBaseUserMessages = 144
-	EBaseUserMessages_UM_ParticleManager                       EBaseUserMessages = 145
-	EBaseUserMessages_UM_HudError                              EBaseUserMessages = 146
-	EBaseUserMessages_UM_CustomGameEvent_ClientToServer        EBaseUserMessages = 147
-	EBaseUserMessages_UM_CustomGameEvent_ServerToClient        EBaseUserMessages = 148
-	EBaseUserMessages_UM_TrackedControllerInput_ClientToServer EBaseUserMessages = 149
-	EBaseUserMessages_UM_MAX_BASE                              EBaseUserMessages = 200
+	EBaseUserMessages_UM_AchievementEvent        EBaseUserMessages = 101
+	EBaseUserMessages_UM_CloseCaption            EBaseUserMessages = 102
+	EBaseUserMessages_UM_CloseCaptionDirect      EBaseUserMessages = 103
+	EBaseUserMessages_UM_CurrentTimescale        EBaseUserMessages = 104
+	EBaseUserMessages_UM_DesiredTimescale        EBaseUserMessages = 105
+	EBaseUserMessages_UM_Fade                    EBaseUserMessages = 106
+	EBaseUserMessages_UM_GameTitle               EBaseUserMessages = 107
+	EBaseUserMessages_UM_HintText                EBaseUserMessages = 109
+	EBaseUserMessages_UM_HudMsg                  EBaseUserMessages = 110
+	EBaseUserMessages_UM_HudText                 EBaseUserMessages = 111
+	EBaseUserMessages_UM_KeyHintText             EBaseUserMessages = 112
+	EBaseUserMessages_UM_ColoredText             EBaseUserMessages = 113
+	EBaseUserMessages_UM_RequestState            EBaseUserMessages = 114
+	EBaseUserMessages_UM_ResetHUD                EBaseUserMessages = 115
+	EBaseUserMessages_UM_Rumble                  EBaseUserMessages = 116
+	EBaseUserMessages_UM_SayText                 EBaseUserMessages = 117
+	EBaseUserMessages_UM_SayText2                EBaseUserMessages = 118
+	EBaseUserMessages_UM_SayTextChannel          EBaseUserMessages = 119
+	EBaseUserMessages_UM_Shake                   EBaseUserMessages = 120
+	EBaseUserMessages_UM_ShakeDir                EBaseUserMessages = 121
+	EBaseUserMessages_UM_TextMsg                 EBaseUserMessages = 124
+	EBaseUserMessages_UM_ScreenTilt              EBaseUserMessages = 125
+	EBaseUserMessages_UM_Train                   EBaseUserMessages = 126
+	EBaseUserMessages_UM_VGUIMenu                EBaseUserMessages = 127
+	EBaseUserMessages_UM_VoiceMask               EBaseUserMessages = 128
+	EBaseUserMessages_UM_VoiceSubtitle           EBaseUserMessages = 129
+	EBaseUserMessages_UM_SendAudio               EBaseUserMessages = 130
+	EBaseUserMessages_UM_ItemPickup              EBaseUserMessages = 131
+	EBaseUserMessages_UM_AmmoDenied              EBaseUserMessages = 132
+	EBaseUserMessages_UM_CrosshairAngle          EBaseUserMessages = 133
+	EBaseUserMessages_UM_ShowMenu                EBaseUserMessages = 134
+	EBaseUserMessages_UM_CreditsMsg              EBaseUserMessages = 135
+	EBaseUserMessages_UM_CloseCaptionPlaceholder EBaseUserMessages = 142
+	EBaseUserMessages_UM_CameraTransition        EBaseUserMessages = 143
+	EBaseUserMessages_UM_AudioParameter          EBaseUserMessages = 144
+	EBaseUserMessages_UM_ParticleManager         EBaseUserMessages = 145
+	EBaseUserMessages_UM_HudError                EBaseUserMessages = 146
+	EBaseUserMessages_UM_CustomGameEvent         EBaseUserMessages = 148
+	EBaseUserMessages_UM_MAX_BASE                EBaseUserMessages = 200
 )
 
 var EBaseUserMessages_name = map[int32]string{
@@ -95,53 +93,49 @@ var EBaseUserMessages_name = map[int32]string{
 	144: "UM_AudioParameter",
 	145: "UM_ParticleManager",
 	146: "UM_HudError",
-	147: "UM_CustomGameEvent_ClientToServer",
-	148: "UM_CustomGameEvent_ServerToClient",
-	149: "UM_TrackedControllerInput_ClientToServer",
+	148: "UM_CustomGameEvent",
 	200: "UM_MAX_BASE",
 }
 var EBaseUserMessages_value = map[string]int32{
-	"UM_AchievementEvent":                      101,
-	"UM_CloseCaption":                          102,
-	"UM_CloseCaptionDirect":                    103,
-	"UM_CurrentTimescale":                      104,
-	"UM_DesiredTimescale":                      105,
-	"UM_Fade":                                  106,
-	"UM_GameTitle":                             107,
-	"UM_HintText":                              109,
-	"UM_HudMsg":                                110,
-	"UM_HudText":                               111,
-	"UM_KeyHintText":                           112,
-	"UM_ColoredText":                           113,
-	"UM_RequestState":                          114,
-	"UM_ResetHUD":                              115,
-	"UM_Rumble":                                116,
-	"UM_SayText":                               117,
-	"UM_SayText2":                              118,
-	"UM_SayTextChannel":                        119,
-	"UM_Shake":                                 120,
-	"UM_ShakeDir":                              121,
-	"UM_TextMsg":                               124,
-	"UM_ScreenTilt":                            125,
-	"UM_Train":                                 126,
-	"UM_VGUIMenu":                              127,
-	"UM_VoiceMask":                             128,
-	"UM_VoiceSubtitle":                         129,
-	"UM_SendAudio":                             130,
-	"UM_ItemPickup":                            131,
-	"UM_AmmoDenied":                            132,
-	"UM_CrosshairAngle":                        133,
-	"UM_ShowMenu":                              134,
-	"UM_CreditsMsg":                            135,
-	"UM_CloseCaptionPlaceholder":               142,
-	"UM_CameraTransition":                      143,
-	"UM_AudioParameter":                        144,
-	"UM_ParticleManager":                       145,
-	"UM_HudError":                              146,
-	"UM_CustomGameEvent_ClientToServer":        147,
-	"UM_CustomGameEvent_ServerToClient":        148,
-	"UM_TrackedControllerInput_ClientToServer": 149,
-	"UM_MAX_BASE":                              200,
+	"UM_AchievementEvent":        101,
+	"UM_CloseCaption":            102,
+	"UM_CloseCaptionDirect":      103,
+	"UM_CurrentTimescale":        104,
+	"UM_DesiredTimescale":        105,
+	"UM_Fade":                    106,
+	"UM_GameTitle":               107,
+	"UM_HintText":                109,
+	"UM_HudMsg":                  110,
+	"UM_HudText":                 111,
+	"UM_KeyHintText":             112,
+	"UM_ColoredText":             113,
+	"UM_RequestState":            114,
+	"UM_ResetHUD":                115,
+	"UM_Rumble":                  116,
+	"UM_SayText":                 117,
+	"UM_SayText2":                118,
+	"UM_SayTextChannel":          119,
+	"UM_Shake":                   120,
+	"UM_ShakeDir":                121,
+	"UM_TextMsg":                 124,
+	"UM_ScreenTilt":              125,
+	"UM_Train":                   126,
+	"UM_VGUIMenu":                127,
+	"UM_VoiceMask":               128,
+	"UM_VoiceSubtitle":           129,
+	"UM_SendAudio":               130,
+	"UM_ItemPickup":              131,
+	"UM_AmmoDenied":              132,
+	"UM_CrosshairAngle":          133,
+	"UM_ShowMenu":                134,
+	"UM_CreditsMsg":              135,
+	"UM_CloseCaptionPlaceholder": 142,
+	"UM_CameraTransition":        143,
+	"UM_AudioParameter":          144,
+	"UM_ParticleManager":         145,
+	"UM_HudError":                146,
+	"UM_CustomGameEvent":         148,
+	"UM_MAX_BASE":                200,
 }
 
 func (x EBaseUserMessages) Enum() *EBaseUserMessages {
@@ -2099,72 +2093,24 @@ func (m *CUserMsg_HudError) GetOrderId() int32 {
 	return 0
 }
 
-type CUserMsg_CustomGameEvent_ClientToServer struct {
+type CUserMsg_CustomGameEvent struct {
 	EventName        *string `protobuf:"bytes,1,opt,name=event_name" json:"event_name,omitempty"`
 	Data             []byte  `protobuf:"bytes,2,opt,name=data" json:"data,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CUserMsg_CustomGameEvent_ClientToServer) Reset() {
-	*m = CUserMsg_CustomGameEvent_ClientToServer{}
-}
-func (m *CUserMsg_CustomGameEvent_ClientToServer) String() string { return proto.CompactTextString(m) }
-func (*CUserMsg_CustomGameEvent_ClientToServer) ProtoMessage()    {}
+func (m *CUserMsg_CustomGameEvent) Reset()         { *m = CUserMsg_CustomGameEvent{} }
+func (m *CUserMsg_CustomGameEvent) String() string { return proto.CompactTextString(m) }
+func (*CUserMsg_CustomGameEvent) ProtoMessage()    {}
 
-func (m *CUserMsg_CustomGameEvent_ClientToServer) GetEventName() string {
+func (m *CUserMsg_CustomGameEvent) GetEventName() string {
 	if m != nil && m.EventName != nil {
 		return *m.EventName
 	}
 	return ""
 }
 
-func (m *CUserMsg_CustomGameEvent_ClientToServer) GetData() []byte {
-	if m != nil {
-		return m.Data
-	}
-	return nil
-}
-
-type CUserMsg_CustomGameEvent_ServerToClient struct {
-	EventName        *string `protobuf:"bytes,1,opt,name=event_name" json:"event_name,omitempty"`
-	Data             []byte  `protobuf:"bytes,2,opt,name=data" json:"data,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
-}
-
-func (m *CUserMsg_CustomGameEvent_ServerToClient) Reset() {
-	*m = CUserMsg_CustomGameEvent_ServerToClient{}
-}
-func (m *CUserMsg_CustomGameEvent_ServerToClient) String() string { return proto.CompactTextString(m) }
-func (*CUserMsg_CustomGameEvent_ServerToClient) ProtoMessage()    {}
-
-func (m *CUserMsg_CustomGameEvent_ServerToClient) GetEventName() string {
-	if m != nil && m.EventName != nil {
-		return *m.EventName
-	}
-	return ""
-}
-
-func (m *CUserMsg_CustomGameEvent_ServerToClient) GetData() []byte {
-	if m != nil {
-		return m.Data
-	}
-	return nil
-}
-
-type CUserMsg_TrackedControllerInput_ClientToServer struct {
-	Data             []byte `protobuf:"bytes,1,opt,name=data" json:"data,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
-}
-
-func (m *CUserMsg_TrackedControllerInput_ClientToServer) Reset() {
-	*m = CUserMsg_TrackedControllerInput_ClientToServer{}
-}
-func (m *CUserMsg_TrackedControllerInput_ClientToServer) String() string {
-	return proto.CompactTextString(m)
-}
-func (*CUserMsg_TrackedControllerInput_ClientToServer) ProtoMessage() {}
-
-func (m *CUserMsg_TrackedControllerInput_ClientToServer) GetData() []byte {
+func (m *CUserMsg_CustomGameEvent) GetData() []byte {
 	if m != nil {
 		return m.Data
 	}

@@ -95,6 +95,7 @@ enum EDotaUserMessages {
 	DOTA_UM_CustomHudElement_Destroy = 550;
 	DOTA_UM_CompendiumState = 551;
 	DOTA_UM_ProjectionAbility = 552;
+	DOTA_UM_ProjectionEvent = 553;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -327,6 +328,10 @@ enum EPlayerVoiceListenState {
 	kPVLS_AllowCoachHearTeam = 71;
 	kPVLS_AllowSameTeam = 72;
 	kPVLS_AllowShowcase = 73;
+}
+
+enum EProjectionEvent {
+	ePE_FirstBlood = 0;
 }
 
 message CDOTAUserMsg_AIDebugLine {
@@ -1111,5 +1116,11 @@ message CDOTAUserMsg_ProjectionAbility {
 	optional CMsgVector origin = 5;
 	optional bool track_caster_only = 6;
 	optional float end_time = 7;
+	optional int32 victim_ent_index = 8;
+}
+
+message CDOTAUserMsg_ProjectionEvent {
+	optional EProjectionEvent event_id = 1 [default = ePE_FirstBlood];
+	optional uint32 team = 2;
 }
 

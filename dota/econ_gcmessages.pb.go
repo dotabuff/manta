@@ -82,8 +82,6 @@ const (
 	EGCItemMsg_k_EMsgGCSetItemPositions                       EGCItemMsg = 1077
 	EGCItemMsg_k_EMsgGCApplyEggEssence                        EGCItemMsg = 1078
 	EGCItemMsg_k_EMsgGCNameEggEssenceResponse                 EGCItemMsg = 1079
-	EGCItemMsg_k_EMsgGCUnlockItemStyle                        EGCItemMsg = 1080
-	EGCItemMsg_k_EMsgGCUnlockItemStyleResponse                EGCItemMsg = 1081
 	EGCItemMsg_k_EMsgGCFulfillDynamicRecipeComponent          EGCItemMsg = 1082
 	EGCItemMsg_k_EMsgGCFulfillDynamicRecipeComponentResponse  EGCItemMsg = 1083
 	EGCItemMsg_k_EMsgGCClientRequestMarketData                EGCItemMsg = 1084
@@ -180,6 +178,11 @@ const (
 	EGCItemMsg_k_EMsgGCToClientStoreTransactionCompleted      EGCItemMsg = 2568
 	EGCItemMsg_k_EMsgClientToGCEquipItems                     EGCItemMsg = 2569
 	EGCItemMsg_k_EMsgClientToGCEquipItemsResponse             EGCItemMsg = 2570
+	EGCItemMsg_k_EMsgClientToGCUnlockItemStyle                EGCItemMsg = 2571
+	EGCItemMsg_k_EMsgClientToGCUnlockItemStyleResponse        EGCItemMsg = 2572
+	EGCItemMsg_k_EMsgClientToGCSetItemInventoryCategory       EGCItemMsg = 2573
+	EGCItemMsg_k_EMsgClientToGCUnlockCrate                    EGCItemMsg = 2574
+	EGCItemMsg_k_EMsgClientToGCUnlockCrateResponse            EGCItemMsg = 2575
 )
 
 var EGCItemMsg_name = map[int32]string{
@@ -251,8 +254,6 @@ var EGCItemMsg_name = map[int32]string{
 	1077: "k_EMsgGCSetItemPositions",
 	1078: "k_EMsgGCApplyEggEssence",
 	1079: "k_EMsgGCNameEggEssenceResponse",
-	1080: "k_EMsgGCUnlockItemStyle",
-	1081: "k_EMsgGCUnlockItemStyleResponse",
 	1082: "k_EMsgGCFulfillDynamicRecipeComponent",
 	1083: "k_EMsgGCFulfillDynamicRecipeComponentResponse",
 	1084: "k_EMsgGCClientRequestMarketData",
@@ -349,6 +350,11 @@ var EGCItemMsg_name = map[int32]string{
 	2568: "k_EMsgGCToClientStoreTransactionCompleted",
 	2569: "k_EMsgClientToGCEquipItems",
 	2570: "k_EMsgClientToGCEquipItemsResponse",
+	2571: "k_EMsgClientToGCUnlockItemStyle",
+	2572: "k_EMsgClientToGCUnlockItemStyleResponse",
+	2573: "k_EMsgClientToGCSetItemInventoryCategory",
+	2574: "k_EMsgClientToGCUnlockCrate",
+	2575: "k_EMsgClientToGCUnlockCrateResponse",
 }
 var EGCItemMsg_value = map[string]int32{
 	"k_EMsgGCBase":                                   1000,
@@ -419,8 +425,6 @@ var EGCItemMsg_value = map[string]int32{
 	"k_EMsgGCSetItemPositions":                       1077,
 	"k_EMsgGCApplyEggEssence":                        1078,
 	"k_EMsgGCNameEggEssenceResponse":                 1079,
-	"k_EMsgGCUnlockItemStyle":                        1080,
-	"k_EMsgGCUnlockItemStyleResponse":                1081,
 	"k_EMsgGCFulfillDynamicRecipeComponent":          1082,
 	"k_EMsgGCFulfillDynamicRecipeComponentResponse":  1083,
 	"k_EMsgGCClientRequestMarketData":                1084,
@@ -517,6 +521,11 @@ var EGCItemMsg_value = map[string]int32{
 	"k_EMsgGCToClientStoreTransactionCompleted":      2568,
 	"k_EMsgClientToGCEquipItems":                     2569,
 	"k_EMsgClientToGCEquipItemsResponse":             2570,
+	"k_EMsgClientToGCUnlockItemStyle":                2571,
+	"k_EMsgClientToGCUnlockItemStyleResponse":        2572,
+	"k_EMsgClientToGCSetItemInventoryCategory":       2573,
+	"k_EMsgClientToGCUnlockCrate":                    2574,
+	"k_EMsgClientToGCUnlockCrateResponse":            2575,
 }
 
 func (x EGCItemMsg) Enum() *EGCItemMsg {
@@ -587,60 +596,6 @@ func (x *EGCMsgResponse) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	*x = EGCMsgResponse(value)
-	return nil
-}
-
-type EUnlockStyle int32
-
-const (
-	EUnlockStyle_k_UnlockStyle_Succeeded                EUnlockStyle = 0
-	EUnlockStyle_k_UnlockStyle_Failed_PreReq            EUnlockStyle = 1
-	EUnlockStyle_k_UnlockStyle_Failed_CantAfford        EUnlockStyle = 2
-	EUnlockStyle_k_UnlockStyle_Failed_CantCommit        EUnlockStyle = 3
-	EUnlockStyle_k_UnlockStyle_Failed_CantLockCache     EUnlockStyle = 4
-	EUnlockStyle_k_UnlockStyle_Failed_CantAffordAttrib  EUnlockStyle = 5
-	EUnlockStyle_k_UnlockStyle_Failed_CantAffordGem     EUnlockStyle = 6
-	EUnlockStyle_k_UnlockStyle_Failed_NoCompendiumLevel EUnlockStyle = 7
-	EUnlockStyle_k_UnlockStyle_Failed_AlreadyUnlocked   EUnlockStyle = 8
-)
-
-var EUnlockStyle_name = map[int32]string{
-	0: "k_UnlockStyle_Succeeded",
-	1: "k_UnlockStyle_Failed_PreReq",
-	2: "k_UnlockStyle_Failed_CantAfford",
-	3: "k_UnlockStyle_Failed_CantCommit",
-	4: "k_UnlockStyle_Failed_CantLockCache",
-	5: "k_UnlockStyle_Failed_CantAffordAttrib",
-	6: "k_UnlockStyle_Failed_CantAffordGem",
-	7: "k_UnlockStyle_Failed_NoCompendiumLevel",
-	8: "k_UnlockStyle_Failed_AlreadyUnlocked",
-}
-var EUnlockStyle_value = map[string]int32{
-	"k_UnlockStyle_Succeeded":                0,
-	"k_UnlockStyle_Failed_PreReq":            1,
-	"k_UnlockStyle_Failed_CantAfford":        2,
-	"k_UnlockStyle_Failed_CantCommit":        3,
-	"k_UnlockStyle_Failed_CantLockCache":     4,
-	"k_UnlockStyle_Failed_CantAffordAttrib":  5,
-	"k_UnlockStyle_Failed_CantAffordGem":     6,
-	"k_UnlockStyle_Failed_NoCompendiumLevel": 7,
-	"k_UnlockStyle_Failed_AlreadyUnlocked":   8,
-}
-
-func (x EUnlockStyle) Enum() *EUnlockStyle {
-	p := new(EUnlockStyle)
-	*p = x
-	return p
-}
-func (x EUnlockStyle) String() string {
-	return proto.EnumName(EUnlockStyle_name, int32(x))
-}
-func (x *EUnlockStyle) UnmarshalJSON(data []byte) error {
-	value, err := proto.UnmarshalJSONEnum(EUnlockStyle_value, data, "EUnlockStyle")
-	if err != nil {
-		return err
-	}
-	*x = EUnlockStyle(value)
 	return nil
 }
 
@@ -866,6 +821,60 @@ func (x *EGCMsgInitiateTradeResponse) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	*x = EGCMsgInitiateTradeResponse(value)
+	return nil
+}
+
+type CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle int32
+
+const (
+	CMsgClientToGCUnlockItemStyleResponse_k_UnlockStyle_Succeeded                CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle = 0
+	CMsgClientToGCUnlockItemStyleResponse_k_UnlockStyle_Failed_PreReq            CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle = 1
+	CMsgClientToGCUnlockItemStyleResponse_k_UnlockStyle_Failed_CantAfford        CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle = 2
+	CMsgClientToGCUnlockItemStyleResponse_k_UnlockStyle_Failed_CantCommit        CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle = 3
+	CMsgClientToGCUnlockItemStyleResponse_k_UnlockStyle_Failed_CantLockCache     CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle = 4
+	CMsgClientToGCUnlockItemStyleResponse_k_UnlockStyle_Failed_CantAffordAttrib  CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle = 5
+	CMsgClientToGCUnlockItemStyleResponse_k_UnlockStyle_Failed_CantAffordGem     CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle = 6
+	CMsgClientToGCUnlockItemStyleResponse_k_UnlockStyle_Failed_NoCompendiumLevel CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle = 7
+	CMsgClientToGCUnlockItemStyleResponse_k_UnlockStyle_Failed_AlreadyUnlocked   CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle = 8
+)
+
+var CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle_name = map[int32]string{
+	0: "k_UnlockStyle_Succeeded",
+	1: "k_UnlockStyle_Failed_PreReq",
+	2: "k_UnlockStyle_Failed_CantAfford",
+	3: "k_UnlockStyle_Failed_CantCommit",
+	4: "k_UnlockStyle_Failed_CantLockCache",
+	5: "k_UnlockStyle_Failed_CantAffordAttrib",
+	6: "k_UnlockStyle_Failed_CantAffordGem",
+	7: "k_UnlockStyle_Failed_NoCompendiumLevel",
+	8: "k_UnlockStyle_Failed_AlreadyUnlocked",
+}
+var CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle_value = map[string]int32{
+	"k_UnlockStyle_Succeeded":                0,
+	"k_UnlockStyle_Failed_PreReq":            1,
+	"k_UnlockStyle_Failed_CantAfford":        2,
+	"k_UnlockStyle_Failed_CantCommit":        3,
+	"k_UnlockStyle_Failed_CantLockCache":     4,
+	"k_UnlockStyle_Failed_CantAffordAttrib":  5,
+	"k_UnlockStyle_Failed_CantAffordGem":     6,
+	"k_UnlockStyle_Failed_NoCompendiumLevel": 7,
+	"k_UnlockStyle_Failed_AlreadyUnlocked":   8,
+}
+
+func (x CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle) Enum() *CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle {
+	p := new(CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle)
+	*p = x
+	return p
+}
+func (x CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle) String() string {
+	return proto.EnumName(CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle_name, int32(x))
+}
+func (x *CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle_value, data, "CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle")
+	if err != nil {
+		return err
+	}
+	*x = CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle(value)
 	return nil
 }
 
@@ -2402,12 +2411,204 @@ func (m *CMsgClientToGCEquipItemsResponse) GetSoCacheVersionId() uint64 {
 	return 0
 }
 
+type CMsgClientToGCUnlockItemStyle struct {
+	ItemToUnlock      *uint64  `protobuf:"varint,1,opt,name=item_to_unlock" json:"item_to_unlock,omitempty"`
+	StyleIndex        *uint32  `protobuf:"varint,2,opt,name=style_index" json:"style_index,omitempty"`
+	ConsumableItemIds []uint64 `protobuf:"varint,3,rep,name=consumable_item_ids" json:"consumable_item_ids,omitempty"`
+	XXX_unrecognized  []byte   `json:"-"`
+}
+
+func (m *CMsgClientToGCUnlockItemStyle) Reset()         { *m = CMsgClientToGCUnlockItemStyle{} }
+func (m *CMsgClientToGCUnlockItemStyle) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCUnlockItemStyle) ProtoMessage()    {}
+
+func (m *CMsgClientToGCUnlockItemStyle) GetItemToUnlock() uint64 {
+	if m != nil && m.ItemToUnlock != nil {
+		return *m.ItemToUnlock
+	}
+	return 0
+}
+
+func (m *CMsgClientToGCUnlockItemStyle) GetStyleIndex() uint32 {
+	if m != nil && m.StyleIndex != nil {
+		return *m.StyleIndex
+	}
+	return 0
+}
+
+func (m *CMsgClientToGCUnlockItemStyle) GetConsumableItemIds() []uint64 {
+	if m != nil {
+		return m.ConsumableItemIds
+	}
+	return nil
+}
+
+type CMsgClientToGCUnlockItemStyleResponse struct {
+	Response         *CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle `protobuf:"varint,1,opt,name=response,enum=dota.CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle,def=0" json:"response,omitempty"`
+	ItemId           *uint64                                             `protobuf:"varint,2,opt,name=item_id" json:"item_id,omitempty"`
+	StyleIndex       *uint32                                             `protobuf:"varint,3,opt,name=style_index" json:"style_index,omitempty"`
+	StylePrereq      *uint32                                             `protobuf:"varint,4,opt,name=style_prereq" json:"style_prereq,omitempty"`
+	XXX_unrecognized []byte                                              `json:"-"`
+}
+
+func (m *CMsgClientToGCUnlockItemStyleResponse) Reset()         { *m = CMsgClientToGCUnlockItemStyleResponse{} }
+func (m *CMsgClientToGCUnlockItemStyleResponse) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCUnlockItemStyleResponse) ProtoMessage()    {}
+
+const Default_CMsgClientToGCUnlockItemStyleResponse_Response CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle = CMsgClientToGCUnlockItemStyleResponse_k_UnlockStyle_Succeeded
+
+func (m *CMsgClientToGCUnlockItemStyleResponse) GetResponse() CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle {
+	if m != nil && m.Response != nil {
+		return *m.Response
+	}
+	return Default_CMsgClientToGCUnlockItemStyleResponse_Response
+}
+
+func (m *CMsgClientToGCUnlockItemStyleResponse) GetItemId() uint64 {
+	if m != nil && m.ItemId != nil {
+		return *m.ItemId
+	}
+	return 0
+}
+
+func (m *CMsgClientToGCUnlockItemStyleResponse) GetStyleIndex() uint32 {
+	if m != nil && m.StyleIndex != nil {
+		return *m.StyleIndex
+	}
+	return 0
+}
+
+func (m *CMsgClientToGCUnlockItemStyleResponse) GetStylePrereq() uint32 {
+	if m != nil && m.StylePrereq != nil {
+		return *m.StylePrereq
+	}
+	return 0
+}
+
+type CMsgClientToGCSetItemInventoryCategory struct {
+	ItemIds          []uint64 `protobuf:"varint,1,rep,name=item_ids" json:"item_ids,omitempty"`
+	SetToValue       *uint32  `protobuf:"varint,2,opt,name=set_to_value" json:"set_to_value,omitempty"`
+	RemoveCategories *uint32  `protobuf:"varint,3,opt,name=remove_categories" json:"remove_categories,omitempty"`
+	AddCategories    *uint32  `protobuf:"varint,4,opt,name=add_categories" json:"add_categories,omitempty"`
+	XXX_unrecognized []byte   `json:"-"`
+}
+
+func (m *CMsgClientToGCSetItemInventoryCategory) Reset() {
+	*m = CMsgClientToGCSetItemInventoryCategory{}
+}
+func (m *CMsgClientToGCSetItemInventoryCategory) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCSetItemInventoryCategory) ProtoMessage()    {}
+
+func (m *CMsgClientToGCSetItemInventoryCategory) GetItemIds() []uint64 {
+	if m != nil {
+		return m.ItemIds
+	}
+	return nil
+}
+
+func (m *CMsgClientToGCSetItemInventoryCategory) GetSetToValue() uint32 {
+	if m != nil && m.SetToValue != nil {
+		return *m.SetToValue
+	}
+	return 0
+}
+
+func (m *CMsgClientToGCSetItemInventoryCategory) GetRemoveCategories() uint32 {
+	if m != nil && m.RemoveCategories != nil {
+		return *m.RemoveCategories
+	}
+	return 0
+}
+
+func (m *CMsgClientToGCSetItemInventoryCategory) GetAddCategories() uint32 {
+	if m != nil && m.AddCategories != nil {
+		return *m.AddCategories
+	}
+	return 0
+}
+
+type CMsgClientToGCUnlockCrate struct {
+	CrateItemId      *uint64 `protobuf:"varint,1,opt,name=crate_item_id" json:"crate_item_id,omitempty"`
+	KeyItemId        *uint64 `protobuf:"varint,2,opt,name=key_item_id" json:"key_item_id,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CMsgClientToGCUnlockCrate) Reset()         { *m = CMsgClientToGCUnlockCrate{} }
+func (m *CMsgClientToGCUnlockCrate) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCUnlockCrate) ProtoMessage()    {}
+
+func (m *CMsgClientToGCUnlockCrate) GetCrateItemId() uint64 {
+	if m != nil && m.CrateItemId != nil {
+		return *m.CrateItemId
+	}
+	return 0
+}
+
+func (m *CMsgClientToGCUnlockCrate) GetKeyItemId() uint64 {
+	if m != nil && m.KeyItemId != nil {
+		return *m.KeyItemId
+	}
+	return 0
+}
+
+type CMsgClientToGCUnlockCrateResponse struct {
+	Result           *EGCMsgResponse                           `protobuf:"varint,1,opt,name=result,enum=dota.EGCMsgResponse,def=0" json:"result,omitempty"`
+	GrantedItems     []*CMsgClientToGCUnlockCrateResponse_Item `protobuf:"bytes,2,rep,name=granted_items" json:"granted_items,omitempty"`
+	XXX_unrecognized []byte                                    `json:"-"`
+}
+
+func (m *CMsgClientToGCUnlockCrateResponse) Reset()         { *m = CMsgClientToGCUnlockCrateResponse{} }
+func (m *CMsgClientToGCUnlockCrateResponse) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCUnlockCrateResponse) ProtoMessage()    {}
+
+const Default_CMsgClientToGCUnlockCrateResponse_Result EGCMsgResponse = EGCMsgResponse_k_EGCMsgResponseOK
+
+func (m *CMsgClientToGCUnlockCrateResponse) GetResult() EGCMsgResponse {
+	if m != nil && m.Result != nil {
+		return *m.Result
+	}
+	return Default_CMsgClientToGCUnlockCrateResponse_Result
+}
+
+func (m *CMsgClientToGCUnlockCrateResponse) GetGrantedItems() []*CMsgClientToGCUnlockCrateResponse_Item {
+	if m != nil {
+		return m.GrantedItems
+	}
+	return nil
+}
+
+type CMsgClientToGCUnlockCrateResponse_Item struct {
+	ItemId           *uint64 `protobuf:"varint,1,opt,name=item_id" json:"item_id,omitempty"`
+	DefIndex         *uint32 `protobuf:"varint,2,opt,name=def_index" json:"def_index,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CMsgClientToGCUnlockCrateResponse_Item) Reset() {
+	*m = CMsgClientToGCUnlockCrateResponse_Item{}
+}
+func (m *CMsgClientToGCUnlockCrateResponse_Item) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCUnlockCrateResponse_Item) ProtoMessage()    {}
+
+func (m *CMsgClientToGCUnlockCrateResponse_Item) GetItemId() uint64 {
+	if m != nil && m.ItemId != nil {
+		return *m.ItemId
+	}
+	return 0
+}
+
+func (m *CMsgClientToGCUnlockCrateResponse_Item) GetDefIndex() uint32 {
+	if m != nil && m.DefIndex != nil {
+		return *m.DefIndex
+	}
+	return 0
+}
+
 func init() {
 	proto.RegisterEnum("dota.EGCItemMsg", EGCItemMsg_name, EGCItemMsg_value)
 	proto.RegisterEnum("dota.EGCMsgResponse", EGCMsgResponse_name, EGCMsgResponse_value)
-	proto.RegisterEnum("dota.EUnlockStyle", EUnlockStyle_name, EUnlockStyle_value)
 	proto.RegisterEnum("dota.EItemPurgatoryResponse_Finalize", EItemPurgatoryResponse_Finalize_name, EItemPurgatoryResponse_Finalize_value)
 	proto.RegisterEnum("dota.EItemPurgatoryResponse_Refund", EItemPurgatoryResponse_Refund_name, EItemPurgatoryResponse_Refund_value)
 	proto.RegisterEnum("dota.EGCPartnerRequestResponse", EGCPartnerRequestResponse_name, EGCPartnerRequestResponse_value)
 	proto.RegisterEnum("dota.EGCMsgInitiateTradeResponse", EGCMsgInitiateTradeResponse_name, EGCMsgInitiateTradeResponse_value)
+	proto.RegisterEnum("dota.CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle", CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle_name, CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle_value)
 }

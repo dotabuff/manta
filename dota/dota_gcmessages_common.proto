@@ -438,8 +438,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCPracticeLobbyToggleBroadcastChannelCameramanStatus = 7505;
 	k_EMsgGCToGCCreateWeekendTourneyRequest = 7506;
 	k_EMsgGCToGCCreateWeekendTourneyResponse = 7507;
-	k_EMsgGCHeroPickStatsRequest = 7508;
-	k_EMsgGCHeroPickStatsResponse = 7509;
 	k_EMsgGCToGCCreateGenericTeamsRequest = 7510;
 	k_EMsgGCToGCCreateGenericTeamsResponse = 7511;
 	k_EMsgSQLLaunchOneWeekendTourney = 7512;
@@ -527,7 +525,16 @@ enum EDOTAGCMsg {
 	k_EMsgServerToGCHoldEventPoints = 7596;
 	k_EMsgSignOutReleaseEventPointHolds = 7597;
 	k_EMsgGCToGCChatNewUserSession = 7598;
+	k_EMsgClientToGCGetLeagueSeries = 7599;
+	k_EMsgClientToGCGetLeagueSeriesResponse = 7600;
+	k_EMsgSQLGCToGCSignoutUpdateLeagueSchedule = 7601;
 	k_EMsgGCToServerUpdateBroadcastCheers = 7602;
+	k_EMsgClientToGCApplyGemCombiner = 7603;
+	k_EMsgClientToGCCreateStaticRecipe = 7604;
+	k_EMsgClientToGCCreateStaticRecipeResponse = 7605;
+	k_EMsgClientToGCGetAllHeroOrder = 7606;
+	k_EMsgClientToGCGetAllHeroOrderResponse = 7607;
+	k_EMsgSQLGCToGCGrantBadgePoints = 7608;
 	k_EMsgGCDev_GrantWarKill = 8001;
 	k_EMsgClientToGCCreateTeamShowcase = 8002;
 	k_EMsgGCToClientTeamShowcaseCreateResult = 8003;
@@ -566,7 +573,6 @@ enum EDOTAGCMsg {
 	k_EMsgClientToGCTopLeagueMatchesRequest = 8036;
 	k_EMsgClientToGCTopFriendMatchesRequest = 8037;
 	k_EMsgGCToClientTopMatchesResponse = 8038;
-	k_EMsgClientToGCTopPubMatchesRequest = 8039;
 	k_EMsgGCToClientProfileCardStatsUpdated = 8040;
 	k_EMsgServerToGCRealtimeStats = 8041;
 	k_EMsgGCToServerRealtimeStatsStartStop = 8042;
@@ -582,6 +588,9 @@ enum EDOTAGCMsg {
 	k_EMsgGCPracticeLobbyCloseBroadcastChannel = 8054;
 	k_EMsgGCStartFindingMatchResponse = 8055;
 	k_EMsgSQLGCToGCUpdateHeroMMR = 8056;
+	k_EMsgSQLGCToGCGrantAccountFlag = 8057;
+	k_EMsgGCToGCGetAccountFlags = 8058;
+	k_EMsgGCToGCGetAccountFlagsResponse = 8059;
 }
 
 enum DOTA_GameMode {
@@ -771,6 +780,7 @@ enum EIngameEvent {
 	k_EIngameEvent_CNY2015 = 1;
 	k_EIngameEvent_CNY2015_PreBeast = 2;
 	k_EIngameEvent_TI5 = 3;
+	k_EIngameEvent_FM2015 = 4;
 }
 
 enum LobbyDotaTVDelay {
@@ -912,6 +922,8 @@ message CSODOTAGameAccountClient {
 	optional uint32 casual_1v1_games_played = 65;
 	optional uint32 competitive_team_games_played = 66;
 	optional uint32 curr_all_hero_challenge_id = 67;
+	optional uint32 play_time_points = 68;
+	optional uint32 account_flags = 69;
 }
 
 message CSODOTAPartyMember {
@@ -1084,6 +1096,7 @@ message CLobbyTeamDetails {
 	optional uint64 guild_banner_logo = 14;
 	optional uint32 rank = 15;
 	optional sint32 rank_change = 16;
+	optional bool is_home_team = 17;
 }
 
 message CLobbyTimedRewardDetails {
@@ -1194,6 +1207,8 @@ message CSODOTALobby {
 	optional DOTALobbyVisibility visibility = 75 [default = DOTALobbyVisibility_Public];
 	optional fixed64 custom_game_crc = 76;
 	optional bool custom_game_auto_created_lobby = 77;
+	optional uint32 league_series_id = 78;
+	optional uint32 league_game_id = 79;
 	optional fixed32 custom_game_timestamp = 80;
 }
 
@@ -1321,6 +1336,7 @@ message CProtoItemSocket_Autograph {
 	optional CProtoItemSocket socket = 1;
 	optional string autograph = 2;
 	optional uint32 autograph_id = 3;
+	optional uint32 autograph_score = 4;
 }
 
 message CProtoItemSocket_StaticVisuals {
@@ -1521,6 +1537,7 @@ message CMsgDOTAProfileCard {
 
 		message Item {
 			optional bytes serialized_item = 1;
+			optional uint64 item_id = 2;
 		}
 
 		message Hero {
@@ -1553,6 +1570,8 @@ message CMsgDOTAProfileCard {
 	optional uint32 account_id = 1;
 	optional uint32 background_def_index = 2;
 	repeated CMsgDOTAProfileCard.Slot slots = 3;
+	optional uint32 badge_points = 4;
+	optional uint32 event_points = 5;
 }
 
 message CMsgGCToClientNewBloomTimingUpdated {
@@ -1626,6 +1645,8 @@ message CMsgDOTARealtimeGameStats {
 		optional uint32 id = 1;
 		optional string name = 2;
 		optional uint32 level = 3;
+		optional float cooldown = 4;
+		optional float cooldown_max = 5;
 	}
 
 	message HeroToHeroStats {

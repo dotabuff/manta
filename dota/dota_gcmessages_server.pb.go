@@ -821,6 +821,7 @@ type CMsgGameServerInfo struct {
 	ServerPrivateIpAddr         *uint32                        `protobuf:"fixed32,2,opt,name=server_private_ip_addr" json:"server_private_ip_addr,omitempty"`
 	ServerPort                  *uint32                        `protobuf:"varint,3,opt,name=server_port" json:"server_port,omitempty"`
 	ServerTvPort                *uint32                        `protobuf:"varint,4,opt,name=server_tv_port" json:"server_tv_port,omitempty"`
+	AssignedServerTvPort        *uint32                        `protobuf:"varint,22,opt,name=assigned_server_tv_port" json:"assigned_server_tv_port,omitempty"`
 	ServerSteamdatagramPort     *uint32                        `protobuf:"varint,21,opt,name=server_steamdatagram_port" json:"server_steamdatagram_port,omitempty"`
 	ServerKey                   *string                        `protobuf:"bytes,5,opt,name=server_key" json:"server_key,omitempty"`
 	ServerHibernation           *bool                          `protobuf:"varint,6,opt,name=server_hibernation" json:"server_hibernation,omitempty"`
@@ -871,6 +872,13 @@ func (m *CMsgGameServerInfo) GetServerPort() uint32 {
 func (m *CMsgGameServerInfo) GetServerTvPort() uint32 {
 	if m != nil && m.ServerTvPort != nil {
 		return *m.ServerTvPort
+	}
+	return 0
+}
+
+func (m *CMsgGameServerInfo) GetAssignedServerTvPort() uint32 {
+	if m != nil && m.AssignedServerTvPort != nil {
+		return *m.AssignedServerTvPort
 	}
 	return 0
 }

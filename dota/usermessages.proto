@@ -43,9 +43,7 @@ enum EBaseUserMessages {
 	UM_AudioParameter = 144;
 	UM_ParticleManager = 145;
 	UM_HudError = 146;
-	UM_CustomGameEvent_ClientToServer = 147;
-	UM_CustomGameEvent_ServerToClient = 148;
-	UM_TrackedControllerInput_ClientToServer = 149;
+	UM_CustomGameEvent = 148;
 	UM_MAX_BASE = 200;
 }
 
@@ -415,17 +413,8 @@ message CUserMsg_HudError {
 	optional int32 order_id = 1;
 }
 
-message CUserMsg_CustomGameEvent_ClientToServer {
+message CUserMsg_CustomGameEvent {
 	optional string event_name = 1;
 	optional bytes data = 2;
-}
-
-message CUserMsg_CustomGameEvent_ServerToClient {
-	optional string event_name = 1;
-	optional bytes data = 2;
-}
-
-message CUserMsg_TrackedControllerInput_ClientToServer {
-	optional bytes data = 1;
 }
 
