@@ -7,6 +7,32 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestSep01Match1763193771(t *testing.T) {
+	assert := assert.New(t)
+	debugLevel = 0
+	testLevel = 0
+
+	buf := mustGetReplayData("1763193771", "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1763193771.dem")
+	parser, err := NewParser(buf)
+	assert.Nil(err)
+
+	err = parser.Start()
+	assert.Nil(err)
+}
+
+func TestSep01Match1763177231(t *testing.T) {
+	assert := assert.New(t)
+	debugLevel = 0
+	testLevel = 0
+
+	buf := mustGetReplayData("1763177231", "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1763177231.dem")
+	parser, err := NewParser(buf)
+	assert.Nil(err)
+
+	err = parser.Start()
+	assert.Nil(err)
+}
+
 func TestParseOneMatch(t *testing.T) {
 	assert := assert.New(t)
 	debugLevel = 0
@@ -53,6 +79,24 @@ func TestParseRealMatches(t *testing.T) {
 		expectCombatLogEvents  int32
 		expectUnitOrderEvents  int32
 	}{
+		{
+			matchId:                "1763193771",
+			replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1763193771.dem",
+			expectCombatLogDamage:  0,
+			expectCombatLogHealing: 0,
+			expectCombatLogDeaths:  0,
+			expectCombatLogEvents:  0,
+			expectUnitOrderEvents:  0,
+		},
+		{
+			matchId:                "1763177231",
+			replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1763177231.dem",
+			expectCombatLogDamage:  0,
+			expectCombatLogHealing: 0,
+			expectCombatLogDeaths:  0,
+			expectCombatLogEvents:  0,
+			expectUnitOrderEvents:  0,
+		},
 		{
 			matchId:                "1734886116",
 			replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1734886116.dem",
