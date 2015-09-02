@@ -156,6 +156,20 @@ func (sers *flattened_serializers) recurse_table(cur *dota.ProtoFlattenedSeriali
 			// normal
 			case "m_vecLadderNormal":
 				prop.Field.Encoder = "normal"
+
+			// fixed
+			case "m_bItemWhiteList":
+				fallthrough
+			case "m_iPlayerIDsInControl":
+				fallthrough
+			case "m_ulTeamBaseLogo":
+				fallthrough
+			case "m_ulTeamBannerLogo":
+				fallthrough
+			case "m_CustomHealthbarColor":
+				fallthrough
+			case "m_bWorldTreeState":
+				prop.Field.Encoder = "fixed64"
 			}
 		}
 
