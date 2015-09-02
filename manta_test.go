@@ -22,7 +22,7 @@ func TestSep01Match1763193771(t *testing.T) {
 
 func TestSep01Match1763177231(t *testing.T) {
 	assert := assert.New(t)
-	debugLevel = 0
+	debugLevel = 10
 	testLevel = 0
 
 	buf := mustGetReplayData("1763177231", "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1763177231.dem")
