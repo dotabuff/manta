@@ -107,7 +107,7 @@ func (r *Reader) readVarInt32() int32 {
 }
 
 // Reads an unsigned 64-bit varint.
-func (r *Reader) readVarUint64() uint64 {
+func (r *Reader) readVarUint64Old() uint64 {
 	var x uint64
 	var s uint
 	for i := 0; ; i++ {
@@ -121,6 +121,28 @@ func (r *Reader) readVarUint64() uint64 {
 		x |= uint64(b&0x7f) << s
 		s += 7
 	}
+}
+
+// Reads an unsigned 64-bit varint.
+func (r *Reader) readVarUint64() uint64 {
+	var x, b uint64
+	var c uint
+
+	for {
+		if c == 10 {
+			break
+		}
+
+		b = uint64(r.readBits(8))
+		x |= uint64(b&0x7F) << (7 * c)
+		c++
+
+		if (b & 0x80) == 0 {
+			break
+		}
+	}
+
+	return x
 }
 
 // Reads a signed 64-bit varint.
