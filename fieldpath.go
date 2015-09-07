@@ -260,8 +260,8 @@ func PushOneLeftDeltaNRightNonZeroPack8Bits(r *Reader, fp *fieldpath) {
 func PushTwoLeftDeltaZero(r *Reader, fp *fieldpath) {
 	_debugfl(10, "Name: %s", fp.parent.Name)
 
-	fp.index = append(fp.index, 0)
-	fp.index = append(fp.index, 0)
+	fp.index = append(fp.index, int32(r.readUBitVarFP()))
+	fp.index = append(fp.index, int32(r.readUBitVarFP()))
 }
 
 func PushTwoLeftDeltaOne(r *Reader, fp *fieldpath) {
