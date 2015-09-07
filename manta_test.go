@@ -269,6 +269,7 @@ func TestParseRealMatches(t *testing.T) {
 			continue
 		}
 
+		gotFileInfo := false
 		gotCombatLogDamage := int32(0)
 		gotCombatLogHealing := int32(0)
 		gotCombatLogDeaths := int32(0)
@@ -278,6 +279,11 @@ func TestParseRealMatches(t *testing.T) {
 
 		parser.Callbacks.OnCDOTAUserMsg_SpectatorPlayerUnitOrders(func(m *dota.CDOTAUserMsg_SpectatorPlayerUnitOrders) error {
 			gotUnitOrderEvents += 1
+			return nil
+		})
+
+		parser.Callbacks.OnCDemoFileInfo(func(m *dota.CDemoFileInfo) error {
+			gotFileInfo = true
 			return nil
 		})
 
@@ -329,6 +335,7 @@ func TestParseRealMatches(t *testing.T) {
 			}
 		}
 
+		assert.True(gotFileInfo)
 		assert.Equal(s.expectGameBuild, parser.GameBuild, s.matchId)
 		assert.Equal(s.expectEntityEvents, gotEntityEvents, s.matchId)
 		assert.Equal(s.expectCombatLogDamage, gotCombatLogDamage, s.matchId)

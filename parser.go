@@ -124,12 +124,6 @@ func NewParser(buf []byte) (*Parser, error) {
 		return nil
 	})
 
-	// Stops parsing when we reach the end of the replay.
-	parser.Callbacks.OnCDemoStop(func(m *dota.CDemoStop) error {
-		parser.Stop()
-		return nil
-	})
-
 	return parser, nil
 }
 
