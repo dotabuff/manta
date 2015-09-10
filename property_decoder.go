@@ -25,8 +25,6 @@ func decodeUnsigned(r *Reader, f *dt_field) interface{} {
 	// Let's hope this get's added by valve at some point
 	switch f.Encoder {
 	case "fixed64":
-		return decodeFixed64(r, f)
-	case "le64":
 		return decodeLeUint64(r, f)
 	}
 
