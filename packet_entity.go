@@ -27,6 +27,12 @@ const (
 	EntityEventType_Other   = EntityEventType(4)
 )
 
+// Represents a packet entity update that happened this tick.
+type packetEntityUpdate struct {
+	pe *PacketEntity
+	t  EntityEventType
+}
+
 // Get a property from the entity. Prefers reading from the entity properties,
 // falling back to the baseline properties if necessary.
 func (pe *PacketEntity) Fetch(key string) (interface{}, bool) {
@@ -59,6 +65,9 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 	if !m.GetIsDelta() && p.packetEntityFullPackets > 0 {
 		return nil
 	}
+
+	// Updates pending
+	updates := []*packetEntityUpdate{}
 
 	r := NewReader(m.GetEntityData())
 	index := int32(-1)
@@ -151,17 +160,23 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 			delete(p.PacketEntities, index)
 		}
 
-		// Offer the event to callback handlers.
-		for _, h := range p.packetEntityHandlers {
-			if err := h(pe, eventType); err != nil {
-				return err
-			}
-		}
+		// Add the update to the list of pending updates.
+		updates = append(updates, &packetEntityUpdate{pe, eventType})
 	}
 
 	// Update the full packet count.
 	if !m.GetIsDelta() {
 		p.packetEntityFullPackets += 1
+	}
+
+	// Offer all packet entity updates to callback handlers. This is done
+	// only after all updates have been processed to ensure consistent state.
+	for _, u := range updates {
+		for _, h := range p.packetEntityHandlers {
+			if err := h(u.pe, u.t); err != nil {
+				return err
+			}
+		}
 	}
 
 	return nil
