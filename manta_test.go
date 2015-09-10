@@ -266,16 +266,16 @@ func (s testScenario) test(t *testing.T) {
 		gotEntityEvents += 1
 
 		if pe.ClassName == "CDOTA_PlayerResource" {
-			if v, ok := pe.Fetch("m_vecPlayerData.0006.m_iszPlayerName"); ok {
-				gotPlayer6Name = v.(string)
-			} else if v, ok := pe.Fetch("m_iszPlayerNames.0006"); ok {
-				gotPlayer6Name = v.(string)
+			if v, ok := pe.FetchString("m_vecPlayerData.0006.m_iszPlayerName"); ok {
+				gotPlayer6Name = v
+			} else if v, ok := pe.FetchString("m_iszPlayerNames.0006"); ok {
+				gotPlayer6Name = v
 			}
 
-			if v, ok := pe.Fetch("m_vecPlayerData.0006.m_iPlayerSteamID"); ok {
-				gotPlayer6Steamid = v.(uint64)
-			} else if v, ok := pe.Fetch("m_iPlayerSteamIDs.0006"); ok {
-				gotPlayer6Steamid = v.(uint64)
+			if v, ok := pe.FetchUint64("m_vecPlayerData.0006.m_iPlayerSteamID"); ok {
+				gotPlayer6Steamid = v
+			} else if v, ok := pe.FetchUint64("m_iPlayerSteamIDs.0006"); ok {
+				gotPlayer6Steamid = v
 			}
 		}
 

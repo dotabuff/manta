@@ -36,12 +36,58 @@ type packetEntityUpdate struct {
 // Get a property from the entity. Prefers reading from the entity properties,
 // falling back to the baseline properties if necessary.
 func (pe *PacketEntity) Fetch(key string) (interface{}, bool) {
-	v, ok := pe.Properties.Fetch(key)
-	if !ok {
-		v, ok = pe.ClassBaseline.Fetch(key)
+	if v, ok := pe.Properties.Fetch(key); ok {
+		return v, true
 	}
+	return pe.ClassBaseline.Fetch(key)
+}
 
-	return v, ok
+// Fetches a bool
+func (pe *PacketEntity) FetchBool(key string) (bool, bool) {
+	if v, ok := pe.Properties.FetchBool(key); ok {
+		return v, true
+	}
+	return pe.ClassBaseline.FetchBool(key)
+}
+
+// Fetches an int32
+func (pe *PacketEntity) FetchInt32(key string) (int32, bool) {
+	if v, ok := pe.Properties.FetchInt32(key); ok {
+		return v, true
+	}
+	return pe.ClassBaseline.FetchInt32(key)
+}
+
+// Fetches a uint32
+func (pe *PacketEntity) FetchUint32(key string) (uint32, bool) {
+	if v, ok := pe.Properties.FetchUint32(key); ok {
+		return v, true
+	}
+	return pe.ClassBaseline.FetchUint32(key)
+}
+
+// Fetches a uint64
+func (pe *PacketEntity) FetchUint64(key string) (uint64, bool) {
+	if v, ok := pe.Properties.FetchUint64(key); ok {
+		return v, true
+	}
+	return pe.ClassBaseline.FetchUint64(key)
+}
+
+// Fetches a float32
+func (pe *PacketEntity) FetchFloat32(key string) (float32, bool) {
+	if v, ok := pe.Properties.FetchFloat32(key); ok {
+		return v, true
+	}
+	return pe.ClassBaseline.FetchFloat32(key)
+}
+
+// Fetches a string
+func (pe *PacketEntity) FetchString(key string) (string, bool) {
+	if v, ok := pe.Properties.FetchString(key); ok {
+		return v, true
+	}
+	return pe.ClassBaseline.FetchString(key)
 }
 
 // A function that can handle a game event.
