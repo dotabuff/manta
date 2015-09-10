@@ -34,6 +34,66 @@ func (p *Properties) Fetch(k string) (interface{}, bool) {
 	return v, ok
 }
 
+// Fetch a bool by key.
+func (p *Properties) FetchBool(k string) (bool, bool) {
+	if v, ok := p.KV[k]; ok {
+		if x, ok := v.(bool); ok {
+			return x, true
+		}
+	}
+	return false, false
+}
+
+// Fetch an int32 by key.
+func (p *Properties) FetchInt32(k string) (int32, bool) {
+	if v, ok := p.KV[k]; ok {
+		if x, ok := v.(int32); ok {
+			return x, true
+		}
+	}
+	return 0, false
+}
+
+// Fetch a uint32 by key.
+func (p *Properties) FetchUint32(k string) (uint32, bool) {
+	if v, ok := p.KV[k]; ok {
+		if x, ok := v.(uint32); ok {
+			return x, true
+		}
+	}
+	return 0, false
+}
+
+// Fetch a uint64 by key.
+func (p *Properties) FetchUint64(k string) (uint64, bool) {
+	if v, ok := p.KV[k]; ok {
+		if x, ok := v.(uint64); ok {
+			return x, true
+		}
+	}
+	return 0, false
+}
+
+// Fetch a float32 by key.
+func (p *Properties) FetchFloat32(k string) (float32, bool) {
+	if v, ok := p.KV[k]; ok {
+		if x, ok := v.(float32); ok {
+			return x, true
+		}
+	}
+	return 0.0, false
+}
+
+// Fetch a string by key.
+func (p *Properties) FetchString(k string) (string, bool) {
+	if v, ok := p.KV[k]; ok {
+		if x, ok := v.(string); ok {
+			return x, true
+		}
+	}
+	return "", false
+}
+
 // Reads properties using a given reader and serializer.
 func ReadProperties(r *Reader, ser *dt) (result *Properties) {
 	// Return type
