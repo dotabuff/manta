@@ -7,343 +7,316 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestSep01Match1763193771(t *testing.T) {
+func TestMatch1781640270(t *testing.T) { testScenarios[1781640270].test(t) }
+func TestMatch1764592109(t *testing.T) { testScenarios[1764592109].test(t) }
+func TestMatch1763193771(t *testing.T) { testScenarios[1763193771].test(t) }
+func TestMatch1763177231(t *testing.T) { testScenarios[1763177231].test(t) }
+func TestMatch1734886116(t *testing.T) { testScenarios[1734886116].test(t) }
+func TestMatch1731962898(t *testing.T) { testScenarios[1731962898].test(t) }
+func TestMatch1716444111(t *testing.T) { testScenarios[1716444111].test(t) }
+func TestMatch1712853372(t *testing.T) { testScenarios[1712853372].test(t) }
+func TestMatch1648457986(t *testing.T) { testScenarios[1648457986].test(t) }
+func TestMatch1605340040(t *testing.T) { testScenarios[1605340040].test(t) }
+func TestMatch1582611189(t *testing.T) { testScenarios[1582611189].test(t) }
+func TestMatch1560315800(t *testing.T) { testScenarios[1560315800].test(t) }
+func TestMatch1560294294(t *testing.T) { testScenarios[1560294294].test(t) }
+func TestMatch1560289528(t *testing.T) { testScenarios[1560289528].test(t) }
+
+type testScenario struct {
+	matchId                string
+	replayUrl              string
+	debugLevel             uint
+	skipPacketEntities     bool
+	expectGameBuild        uint32
+	expectEntityEvents     int32
+	expectCombatLogDamage  int32
+	expectCombatLogHealing int32
+	expectCombatLogDeaths  int32
+	expectCombatLogEvents  int32
+	expectUnitOrderEvents  int32
+	expectPlayer6Name      string
+	expectPlayer6Steamid   uint64
+}
+
+var testScenarios = map[int64]testScenario{
+	1781640270: {
+		matchId:                "1781640270",
+		replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1781640270.dem",
+		expectGameBuild:        1027,
+		expectEntityEvents:     1057562,
+		expectCombatLogDamage:  345422,
+		expectCombatLogHealing: 25884,
+		expectCombatLogDeaths:  645,
+		expectCombatLogEvents:  18313,
+		expectUnitOrderEvents:  39222,
+		expectPlayer6Name:      "GGGGGGGGGG",
+		expectPlayer6Steamid:   76561198032710514,
+	},
+	1764592109: {
+		matchId:                "1764592109",
+		replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1764592109.dem",
+		expectGameBuild:        1017,
+		expectEntityEvents:     1827933,
+		expectCombatLogDamage:  1008784,
+		expectCombatLogHealing: 33784,
+		expectCombatLogDeaths:  1631,
+		expectCombatLogEvents:  42228,
+		expectUnitOrderEvents:  36172,
+		expectPlayer6Name:      "Doffo",
+		expectPlayer6Steamid:   76561198087353732,
+	},
+	1763193771: {
+		matchId:                "1763193771",
+		replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1763193771.dem",
+		expectGameBuild:        1016,
+		expectEntityEvents:     1203640,
+		expectCombatLogDamage:  623594,
+		expectCombatLogHealing: 19530,
+		expectCombatLogDeaths:  1022,
+		expectCombatLogEvents:  24436,
+		expectUnitOrderEvents:  31994,
+		expectPlayer6Name:      "Monst_er",
+		expectPlayer6Steamid:   76561198201328510,
+	},
+	1763177231: {
+		matchId:                "1763177231",
+		replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1763177231.dem",
+		expectGameBuild:        1016,
+		expectEntityEvents:     1221874,
+		expectCombatLogDamage:  479350,
+		expectCombatLogHealing: 22611,
+		expectCombatLogDeaths:  977,
+		expectCombatLogEvents:  20043,
+		expectUnitOrderEvents:  35975,
+		expectPlayer6Name:      "Supercowman",
+		expectPlayer6Steamid:   76561198013311415,
+	},
+	1734886116: {
+		matchId:                "1734886116",
+		replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1734886116.dem",
+		expectGameBuild:        1003,
+		expectEntityEvents:     2049211,
+		expectCombatLogDamage:  1048805,
+		expectCombatLogHealing: 25089,
+		expectCombatLogDeaths:  1447,
+		expectCombatLogEvents:  42307,
+		expectUnitOrderEvents:  59775,
+		expectPlayer6Name:      "Eggard",
+		expectPlayer6Steamid:   76561197972599979,
+	},
+	1731962898: {
+		matchId:                "1731962898",
+		replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1731962898.dem",
+		expectGameBuild:        1003,
+		expectEntityEvents:     1183267,
+		expectCombatLogDamage:  415560,
+		expectCombatLogHealing: 20018,
+		expectCombatLogDeaths:  690,
+		expectCombatLogEvents:  24296,
+		expectUnitOrderEvents:  27525,
+		expectPlayer6Name:      "Snayp8",
+		expectPlayer6Steamid:   76561198047587062,
+	},
+	1716444111: {
+		matchId:                "1716444111",
+		replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1716444111.dem",
+		expectGameBuild:        995,
+		expectEntityEvents:     2854511,
+		expectCombatLogDamage:  1398735,
+		expectCombatLogHealing: 49659,
+		expectCombatLogDeaths:  2169,
+		expectCombatLogEvents:  76921,
+		expectUnitOrderEvents:  48822,
+		expectPlayer6Name:      "GangBang",
+		expectPlayer6Steamid:   76561198136700681,
+	},
+	1712853372: {
+		matchId:                "1712853372",
+		replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1712853372.dem",
+		expectGameBuild:        991,
+		expectEntityEvents:     1708696,
+		expectCombatLogDamage:  671297,
+		expectCombatLogHealing: 23467,
+		expectCombatLogDeaths:  1099,
+		expectCombatLogEvents:  30381,
+		expectUnitOrderEvents:  48107,
+		expectPlayer6Name:      "BFG",
+		expectPlayer6Steamid:   76561198047707927,
+	},
+	1648457986: {
+		matchId:                "1648457986",
+		replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1648457986.dem",
+		expectGameBuild:        962,
+		expectEntityEvents:     742252,
+		expectCombatLogDamage:  224773,
+		expectCombatLogHealing: 5914,
+		expectCombatLogDeaths:  466,
+		expectCombatLogEvents:  10170,
+		expectUnitOrderEvents:  17822,
+		expectPlayer6Name:      "Grinder",
+		expectPlayer6Steamid:   76561198207988337,
+	},
+	1605340040: {
+		matchId:                "1605340040",
+		replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1605340040.dem",
+		expectGameBuild:        955,
+		expectEntityEvents:     1283574,
+		expectCombatLogDamage:  522367,
+		expectCombatLogHealing: 31721,
+		expectCombatLogDeaths:  795,
+		expectCombatLogEvents:  21116,
+		expectUnitOrderEvents:  40669,
+		expectPlayer6Name:      "Az ★ | Big A Man",
+		expectPlayer6Steamid:   76561198156504817,
+	},
+	1582611189: {
+		matchId:                "1582611189",
+		replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1582611189.dem",
+		expectGameBuild:        944,
+		expectEntityEvents:     1427025,
+		expectCombatLogDamage:  599388,
+		expectCombatLogHealing: 28576,
+		expectCombatLogDeaths:  930,
+		expectCombatLogEvents:  23800,
+		expectUnitOrderEvents:  40237,
+		expectPlayer6Name:      "The13ananaMan",
+		expectPlayer6Steamid:   76561198068424443,
+	},
+	1560315800: {
+		matchId:                "1560315800",
+		replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1560315800.dem",
+		expectGameBuild:        928,
+		expectEntityEvents:     2781076,
+		expectCombatLogDamage:  1332418,
+		expectCombatLogHealing: 57874,
+		expectCombatLogDeaths:  1645,
+		expectCombatLogEvents:  51288,
+		expectUnitOrderEvents:  63992,
+		expectPlayer6Name:      "ariethebeast",
+		expectPlayer6Steamid:   76561198065323776,
+	},
+	1560294294: {
+		matchId:                "1560294294",
+		replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1560294294.dem",
+		expectGameBuild:        928,
+		expectEntityEvents:     1611898,
+		expectCombatLogDamage:  768154,
+		expectCombatLogHealing: 11565,
+		expectCombatLogDeaths:  954,
+		expectCombatLogEvents:  24535,
+		expectUnitOrderEvents:  30657,
+		expectPlayer6Name:      "Laslo",
+		expectPlayer6Steamid:   76561198034549887,
+	},
+	1560289528: {
+		matchId:                "1560289528",
+		replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1560289528.dem",
+		expectGameBuild:        928,
+		expectEntityEvents:     2270022,
+		expectCombatLogDamage:  1180993,
+		expectCombatLogHealing: 57511,
+		expectCombatLogDeaths:  1449,
+		expectCombatLogEvents:  49146,
+		expectUnitOrderEvents:  63387,
+		expectPlayer6Name:      "It takes a tree to tango",
+		expectPlayer6Steamid:   76561197993050562,
+	},
+}
+
+func (s testScenario) test(t *testing.T) {
 	assert := assert.New(t)
-	debugLevel = 0
-	testLevel = 1
 
-	buf := mustGetReplayData("1763193771", "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1763193771.dem")
+	debugLevel = s.debugLevel
+	defer func() {
+		debugLevel = 0
+	}()
+
+	buf := mustGetReplayData(s.matchId, s.replayUrl)
 	parser, err := NewParser(buf)
-	assert.Nil(err)
-
-	err = parser.Start()
-	assert.Nil(err)
-
-	// Get the CDOTA_PlayerResource baseline
-	var baseline *Properties
-	for k, v := range parser.ClassBaselines {
-		if parser.ClassInfo[k] == "CDOTA_PlayerResource" {
-			baseline = v
-			break
-		}
+	if err != nil {
+		t.Errorf("unable to instantiate parser: %s", err)
+		return
 	}
 
-	// Test player names and steam ids
-	v, _ := baseline.Fetch("m_vecPlayerData.0000.m_iszPlayerName")
-	assert.Equal("lovely day", v.(string))
-	v, _ = baseline.Fetch("m_vecPlayerData.0000.m_iPlayerSteamID")
-	assert.Equal(uint64(76561198008716584), v.(uint64))
-
-	v, _ = baseline.Fetch("m_vecPlayerData.0001.m_iszPlayerName")
-	assert.Equal("1.6180339887498948482", v.(string))
-	v, _ = baseline.Fetch("m_vecPlayerData.0001.m_iPlayerSteamID")
-	assert.Equal(uint64(76561198167136966), v.(uint64))
-}
-
-func TestSep01Match1763177231(t *testing.T) {
-	assert := assert.New(t)
-	debugLevel = 0
-	testLevel = 1
-
-	buf := mustGetReplayData("1763177231", "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1763177231.dem")
-	parser, err := NewParser(buf)
-	assert.Nil(err)
-
-	err = parser.Start()
-	assert.Nil(err)
-
-	// Get the CDOTA_PlayerResource baseline
-	var baseline *Properties
-	for k, v := range parser.ClassBaselines {
-		if parser.ClassInfo[k] == "CDOTA_PlayerResource" {
-			baseline = v
-			break
-		}
+	if s.skipPacketEntities {
+		parser.ProcessPacketEntities = false
 	}
 
-	// Test player names and steam ids
-	v, _ := baseline.Fetch("m_vecPlayerData.0000.m_iszPlayerName")
-	assert.Equal("Ralibuna", v.(string))
-	v, _ = baseline.Fetch("m_vecPlayerData.0000.m_iPlayerSteamID")
-	assert.Equal(uint64(76561198085372517), v.(uint64))
+	gotFileInfo := false
+	gotCombatLogDamage := int32(0)
+	gotCombatLogHealing := int32(0)
+	gotCombatLogDeaths := int32(0)
+	gotCombatLogEvents := int32(0)
+	gotUnitOrderEvents := int32(0)
+	gotEntityEvents := int32(0)
+	gotPlayer6Name := "<Missing>"
+	gotPlayer6Steamid := uint64(0)
 
-	v, _ = baseline.Fetch("m_vecPlayerData.0002.m_iszPlayerName")
-	assert.Equal("Freddy", v.(string))
-	v, _ = baseline.Fetch("m_vecPlayerData.0002.m_iPlayerSteamID")
-	assert.Equal(uint64(76561198155033610), v.(uint64))
-}
+	parser.Callbacks.OnCDOTAUserMsg_SpectatorPlayerUnitOrders(func(m *dota.CDOTAUserMsg_SpectatorPlayerUnitOrders) error {
+		gotUnitOrderEvents += 1
+		return nil
+	})
 
-func TestParseOneMatchWithPE(t *testing.T) {
-	assert := assert.New(t)
-	debugLevel = 0
-	testLevel = 0
+	parser.Callbacks.OnCDemoFileInfo(func(m *dota.CDemoFileInfo) error {
+		gotFileInfo = true
+		return nil
+	})
 
-	buf := mustGetReplayData("1731962898", "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1731962898.dem")
-	parser, err := NewParser(buf)
-	assert.Nil(err)
-	err = parser.Start()
-	assert.Nil(err)
-}
+	parser.OnPacketEntity(func(pe *PacketEntity, pet EntityEventType) error {
+		gotEntityEvents += 1
 
-func TestParseOneMatchWithoutPE(t *testing.T) {
-	assert := assert.New(t)
-	debugLevel = 0
-	testLevel = 0
+		if pe.ClassName == "CDOTA_PlayerResource" {
+			if v, ok := pe.Fetch("m_vecPlayerData.0006.m_iszPlayerName"); ok {
+				gotPlayer6Name = v.(string)
+			} else if v, ok := pe.Fetch("m_iszPlayerNames.0006"); ok {
+				gotPlayer6Name = v.(string)
+			}
 
-	buf := mustGetReplayData("1731962898", "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1731962898.dem")
-	parser, err := NewParser(buf)
-	parser.ProcessPacketEntities = false
-	assert.Nil(err)
-	err = parser.Start()
-	assert.Nil(err)
-}
-
-// Simply tests that we can read the outer structure of a real match
-func TestParseRealMatches(t *testing.T) {
-	assert := assert.New(t)
-
-	// Important: make sure to include the most recent test last. These generate fixtures to easily
-	// detect diffs in various data structures upon commit, and the latest replay should always be
-	// last to provide a most up-to-date baseline.
-	scenarios := []struct {
-		matchId                string
-		replayUrl              string
-		expectGameBuild        uint32
-		expectEntityEvents     int32
-		expectCombatLogDamage  int32
-		expectCombatLogHealing int32
-		expectCombatLogDeaths  int32
-		expectCombatLogEvents  int32
-		expectUnitOrderEvents  int32
-	}{
-		{
-			matchId:                "1764592109",
-			replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1764592109.dem",
-			expectGameBuild:        1017,
-			expectEntityEvents:     1827933,
-			expectCombatLogDamage:  1008784,
-			expectCombatLogHealing: 33784,
-			expectCombatLogDeaths:  1631,
-			expectCombatLogEvents:  42228,
-			expectUnitOrderEvents:  36172,
-		},
-		{
-			matchId:                "1763193771",
-			replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1763193771.dem",
-			expectGameBuild:        1016,
-			expectEntityEvents:     1203640,
-			expectCombatLogDamage:  623594,
-			expectCombatLogHealing: 19530,
-			expectCombatLogDeaths:  1022,
-			expectCombatLogEvents:  24436,
-			expectUnitOrderEvents:  31994,
-		},
-		{
-			matchId:                "1763177231",
-			replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1763177231.dem",
-			expectGameBuild:        1016,
-			expectEntityEvents:     1221874,
-			expectCombatLogDamage:  479350,
-			expectCombatLogHealing: 22611,
-			expectCombatLogDeaths:  977,
-			expectCombatLogEvents:  20043,
-			expectUnitOrderEvents:  35975,
-		},
-		{
-			matchId:                "1734886116",
-			replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1734886116.dem",
-			expectGameBuild:        1003,
-			expectEntityEvents:     2049211,
-			expectCombatLogDamage:  1048805,
-			expectCombatLogHealing: 25089,
-			expectCombatLogDeaths:  1447,
-			expectCombatLogEvents:  42307,
-			expectUnitOrderEvents:  59775,
-		},
-		{
-			matchId:                "1731962898",
-			replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1731962898.dem",
-			expectGameBuild:        1003,
-			expectEntityEvents:     1183267,
-			expectCombatLogDamage:  415560,
-			expectCombatLogHealing: 20018,
-			expectCombatLogDeaths:  690,
-			expectCombatLogEvents:  24296,
-			expectUnitOrderEvents:  27525,
-		},
-		{
-			matchId:                "1605340040",
-			replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1605340040.dem",
-			expectGameBuild:        955,
-			expectEntityEvents:     1283574,
-			expectCombatLogDamage:  522367,
-			expectCombatLogHealing: 31721,
-			expectCombatLogDeaths:  795,
-			expectCombatLogEvents:  21116,
-			expectUnitOrderEvents:  40669,
-		},
-		{
-			matchId:                "1560289528",
-			replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1560289528.dem",
-			expectGameBuild:        928,
-			expectEntityEvents:     2270022,
-			expectCombatLogDamage:  1180993,
-			expectCombatLogHealing: 57511,
-			expectCombatLogDeaths:  1449,
-			expectCombatLogEvents:  49146,
-			expectUnitOrderEvents:  63387,
-		},
-		{
-			matchId:                "1560294294",
-			replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1560294294.dem",
-			expectGameBuild:        928,
-			expectEntityEvents:     1611898,
-			expectCombatLogDamage:  768154,
-			expectCombatLogHealing: 11565,
-			expectCombatLogDeaths:  954,
-			expectCombatLogEvents:  24535,
-			expectUnitOrderEvents:  30657,
-		},
-		{
-			matchId:                "1560315800",
-			replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1560315800.dem",
-			expectGameBuild:        928,
-			expectEntityEvents:     2781076,
-			expectCombatLogDamage:  1332418,
-			expectCombatLogHealing: 57874,
-			expectCombatLogDeaths:  1645,
-			expectCombatLogEvents:  51288,
-			expectUnitOrderEvents:  63992,
-		},
-		{
-			matchId:                "1582611189",
-			replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1582611189.dem",
-			expectGameBuild:        944,
-			expectEntityEvents:     1427025,
-			expectCombatLogDamage:  599388,
-			expectCombatLogHealing: 28576,
-			expectCombatLogDeaths:  930,
-			expectCombatLogEvents:  23800,
-			expectUnitOrderEvents:  40237,
-		},
-		{
-			matchId:                "1648457986",
-			replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1648457986.dem",
-			expectGameBuild:        962,
-			expectEntityEvents:     742252,
-			expectCombatLogDamage:  224773,
-			expectCombatLogHealing: 5914,
-			expectCombatLogDeaths:  466,
-			expectCombatLogEvents:  10170,
-			expectUnitOrderEvents:  17822,
-		},
-		{
-			matchId:                "1712853372",
-			replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1712853372.dem",
-			expectGameBuild:        991,
-			expectEntityEvents:     1708696,
-			expectCombatLogDamage:  671297,
-			expectCombatLogHealing: 23467,
-			expectCombatLogDeaths:  1099,
-			expectCombatLogEvents:  30381,
-			expectUnitOrderEvents:  48107,
-		},
-		{
-			matchId:                "1716444111",
-			replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1716444111.dem",
-			expectGameBuild:        995,
-			expectEntityEvents:     2854511,
-			expectCombatLogDamage:  1398735,
-			expectCombatLogHealing: 49659,
-			expectCombatLogDeaths:  2169,
-			expectCombatLogEvents:  76921,
-			expectUnitOrderEvents:  48822,
-		},
-	}
-
-	for _, s := range scenarios {
-		buf := mustGetReplayData(s.matchId, s.replayUrl)
-		parser, err := NewParser(buf)
-		if err != nil {
-			t.Errorf("unable to instantiate parser: %s", err)
-			continue
+			if v, ok := pe.Fetch("m_vecPlayerData.0006.m_iPlayerSteamID"); ok {
+				gotPlayer6Steamid = v.(uint64)
+			} else if v, ok := pe.Fetch("m_iPlayerSteamIDs.0006"); ok {
+				gotPlayer6Steamid = v.(uint64)
+			}
 		}
 
-		gotFileInfo := false
-		gotCombatLogDamage := int32(0)
-		gotCombatLogHealing := int32(0)
-		gotCombatLogDeaths := int32(0)
-		gotCombatLogEvents := int32(0)
-		gotUnitOrderEvents := int32(0)
-		gotEntityEvents := int32(0)
+		return nil
+	})
 
-		parser.Callbacks.OnCDOTAUserMsg_SpectatorPlayerUnitOrders(func(m *dota.CDOTAUserMsg_SpectatorPlayerUnitOrders) error {
-			gotUnitOrderEvents += 1
-			return nil
-		})
+	parser.OnGameEvent("dota_combatlog", func(m *GameEvent) error {
+		gotCombatLogEvents += 1
 
-		parser.Callbacks.OnCDemoFileInfo(func(m *dota.CDemoFileInfo) error {
-			gotFileInfo = true
-			return nil
-		})
+		t, err := m.GetInt32("type")
+		assert.Nil(err)
 
-		parser.OnPacketEntity(func(pe *PacketEntity, pet EntityEventType) error {
-			gotEntityEvents += 1
-			return nil
-		})
-
-		parser.OnGameEvent("dota_combatlog", func(m *GameEvent) error {
-			gotCombatLogEvents += 1
-
-			t, err := m.GetInt32("type")
+		switch dota.DOTA_COMBATLOG_TYPES(t) {
+		case dota.DOTA_COMBATLOG_TYPES_DOTA_COMBATLOG_DAMAGE:
+			v, err := m.GetInt32("value")
 			assert.Nil(err)
-
-			switch dota.DOTA_COMBATLOG_TYPES(t) {
-			case dota.DOTA_COMBATLOG_TYPES_DOTA_COMBATLOG_DAMAGE:
-				v, err := m.GetInt32("value")
-				assert.Nil(err)
-				gotCombatLogDamage += v
-			case dota.DOTA_COMBATLOG_TYPES_DOTA_COMBATLOG_DEATH:
-				gotCombatLogDeaths += 1
-			case dota.DOTA_COMBATLOG_TYPES_DOTA_COMBATLOG_HEAL:
-				v, err := m.GetInt32("value")
-				assert.Nil(err)
-				gotCombatLogHealing += v
-			}
-
-			return nil
-		})
-
-		if fixturesMode {
-			// Writes out the source_1_legacy_game_events_list.json fixture so that we can identify changes to schema.
-			parser.Callbacks.OnCMsgSource1LegacyGameEventList(func(m *dota.CMsgSource1LegacyGameEventList) error {
-				_dump_fixture("legacy_game_events/list_latest.json", _json_marshal(m))
-				return nil
-			})
+			gotCombatLogDamage += v
+		case dota.DOTA_COMBATLOG_TYPES_DOTA_COMBATLOG_DEATH:
+			gotCombatLogDeaths += 1
+		case dota.DOTA_COMBATLOG_TYPES_DOTA_COMBATLOG_HEAL:
+			v, err := m.GetInt32("value")
+			assert.Nil(err)
+			gotCombatLogHealing += v
 		}
 
-		err = parser.Start()
-		assert.Nil(err, s.matchId)
+		return nil
+	})
 
-		if fixturesMode {
-			// Use this to write out instancebaseline fixtures
-			t, _ := parser.StringTables.GetTableByName("instancebaseline")
-			for _, i := range t.Items {
-				classId, _ := atoi32(i.Key)
-				className := parser.ClassInfo[classId]
-				_dump_fixture(_sprintf("instancebaseline/%s_%s.rawbuf", className, s.matchId), i.Value)
-			}
-		}
+	err = parser.Start()
+	assert.Nil(err, s.matchId)
 
-		assert.True(gotFileInfo)
-		assert.Equal(s.expectGameBuild, parser.GameBuild, s.matchId)
-		assert.Equal(s.expectEntityEvents, gotEntityEvents, s.matchId)
-		assert.Equal(s.expectCombatLogDamage, gotCombatLogDamage, s.matchId)
-		assert.Equal(s.expectCombatLogHealing, gotCombatLogHealing, s.matchId)
-		assert.Equal(s.expectCombatLogDeaths, gotCombatLogDeaths, s.matchId)
-		assert.Equal(s.expectCombatLogEvents, gotCombatLogEvents, s.matchId)
-		assert.Equal(s.expectUnitOrderEvents, gotUnitOrderEvents, s.matchId)
-	}
+	assert.True(gotFileInfo)
+	assert.Equal(s.expectGameBuild, parser.GameBuild, s.matchId)
+	assert.Equal(s.expectEntityEvents, gotEntityEvents, s.matchId)
+	assert.Equal(s.expectCombatLogDamage, gotCombatLogDamage, s.matchId)
+	assert.Equal(s.expectCombatLogHealing, gotCombatLogHealing, s.matchId)
+	assert.Equal(s.expectCombatLogDeaths, gotCombatLogDeaths, s.matchId)
+	assert.Equal(s.expectCombatLogEvents, gotCombatLogEvents, s.matchId)
+	assert.Equal(s.expectUnitOrderEvents, gotUnitOrderEvents, s.matchId)
+	assert.Equal(s.expectPlayer6Name, gotPlayer6Name, s.matchId)
+	assert.Equal(s.expectPlayer6Steamid, gotPlayer6Steamid, s.matchId)
 }
 
 func BenchmarkParseMatch(b *testing.B) {

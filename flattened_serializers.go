@@ -163,17 +163,20 @@ func (sers *flattened_serializers) recurse_table(cur *dota.ProtoFlattenedSeriali
 				fallthrough
 			case "m_iPlayerIDsInControl":
 				fallthrough
+			case "m_ulTeamLogo":
+				fallthrough
 			case "m_ulTeamBaseLogo":
 				fallthrough
 			case "m_ulTeamBannerLogo":
 				fallthrough
-			case "m_CustomHealthbarColor":
-				fallthrough
 			case "m_bWorldTreeState":
 				fallthrough
 			case "m_iPlayerSteamID":
-				if sers.build >= 1016 {
-					prop.Field.Encoder = "le64"
+				// These switched from varint to fixed64 in patch 1016, but did not
+				// have an encoder type specified. The encoder is now specified as
+				// of build 1027, making this unnecessary for new replays.
+				if sers.build >= 1016 && sers.build < 1027 {
+					prop.Field.Encoder = "fixed64"
 				}
 			}
 		}
