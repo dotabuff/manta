@@ -7,6 +7,9 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestMatch1785937100(t *testing.T) { testScenarios[1785937100].test(t) }
+func TestMatch1785899023(t *testing.T) { testScenarios[1785899023].test(t) }
+func TestMatch1785874713(t *testing.T) { testScenarios[1785874713].test(t) }
 func TestMatch1781640270(t *testing.T) { testScenarios[1781640270].test(t) }
 func TestMatch1764592109(t *testing.T) { testScenarios[1764592109].test(t) }
 func TestMatch1763193771(t *testing.T) { testScenarios[1763193771].test(t) }
@@ -39,6 +42,45 @@ type testScenario struct {
 }
 
 var testScenarios = map[int64]testScenario{
+	1785937100: {
+		matchId:                "1785937100",
+		replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1785937100.dem",
+		expectGameBuild:        1033,
+		expectEntityEvents:     1965109,
+		expectCombatLogDamage:  955729,
+		expectCombatLogHealing: 33158,
+		expectCombatLogDeaths:  1345,
+		expectCombatLogEvents:  41529,
+		expectUnitOrderEvents:  52359,
+		expectPlayer6Name:      "JiimoxD",
+		expectPlayer6Steamid:   76561198203594628,
+	},
+	1785899023: {
+		matchId:                "1785899023",
+		replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1785899023.dem",
+		expectGameBuild:        1033,
+		expectEntityEvents:     2419045,
+		expectCombatLogDamage:  1803248,
+		expectCombatLogHealing: 48337,
+		expectCombatLogDeaths:  1954,
+		expectCombatLogEvents:  78804,
+		expectUnitOrderEvents:  58269,
+		expectPlayer6Name:      "+27",
+		expectPlayer6Steamid:   76561198063151170,
+	},
+	1785874713: {
+		matchId:                "1785874713",
+		replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1785874713.dem",
+		expectGameBuild:        1033,
+		expectEntityEvents:     1381012,
+		expectCombatLogDamage:  513912,
+		expectCombatLogHealing: 33359,
+		expectCombatLogDeaths:  749,
+		expectCombatLogEvents:  21840,
+		expectUnitOrderEvents:  40240,
+		expectPlayer6Name:      "San-Say",
+		expectPlayer6Steamid:   76561198020188611,
+	},
 	1781640270: {
 		matchId:                "1781640270",
 		replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1781640270.dem",
@@ -309,14 +351,30 @@ func (s testScenario) test(t *testing.T) {
 
 	assert.True(gotFileInfo)
 	assert.Equal(s.expectGameBuild, parser.GameBuild, s.matchId)
-	assert.Equal(s.expectEntityEvents, gotEntityEvents, s.matchId)
-	assert.Equal(s.expectCombatLogDamage, gotCombatLogDamage, s.matchId)
-	assert.Equal(s.expectCombatLogHealing, gotCombatLogHealing, s.matchId)
-	assert.Equal(s.expectCombatLogDeaths, gotCombatLogDeaths, s.matchId)
-	assert.Equal(s.expectCombatLogEvents, gotCombatLogEvents, s.matchId)
-	assert.Equal(s.expectUnitOrderEvents, gotUnitOrderEvents, s.matchId)
-	assert.Equal(s.expectPlayer6Name, gotPlayer6Name, s.matchId)
-	assert.Equal(s.expectPlayer6Steamid, gotPlayer6Steamid, s.matchId)
+	if s.expectEntityEvents > 0 {
+		assert.Equal(s.expectEntityEvents, gotEntityEvents, s.matchId)
+	}
+	if s.expectCombatLogDamage > 0 {
+		assert.Equal(s.expectCombatLogDamage, gotCombatLogDamage, s.matchId)
+	}
+	if s.expectCombatLogHealing > 0 {
+		assert.Equal(s.expectCombatLogHealing, gotCombatLogHealing, s.matchId)
+	}
+	if s.expectCombatLogDeaths > 0 {
+		assert.Equal(s.expectCombatLogDeaths, gotCombatLogDeaths, s.matchId)
+	}
+	if s.expectCombatLogEvents > 0 {
+		assert.Equal(s.expectCombatLogEvents, gotCombatLogEvents, s.matchId)
+	}
+	if s.expectUnitOrderEvents > 0 {
+		assert.Equal(s.expectUnitOrderEvents, gotUnitOrderEvents, s.matchId)
+	}
+	if s.expectPlayer6Name != "" {
+		assert.Equal(s.expectPlayer6Name, gotPlayer6Name, s.matchId)
+	}
+	if s.expectPlayer6Steamid > 0 {
+		assert.Equal(s.expectPlayer6Steamid, gotPlayer6Steamid, s.matchId)
+	}
 }
 
 func BenchmarkParseMatch(b *testing.B) {
