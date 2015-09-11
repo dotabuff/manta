@@ -101,81 +101,59 @@ func (sers *flattened_serializers) recurse_table(cur *dota.ProtoFlattenedSeriali
 			prop.Field.Encoder = sers.proto.GetSymbols()[pField.GetVarEncoderSym()]
 			// Dump decoders: _debugfl(10, "Name: %v (%v), Enc: %v, %v", prop.Field.Name, prop.Field.Type, prop.Field.Encoder, table.Name)
 		} else {
-			// set manual decoders for old replays
-			switch prop.Field.Name {
+			// Patch the encoder type for builds that didn't have complete encoder information
+			switch {
 
-			// QAngle
-			case "m_angRotation":
-				fallthrough
-			case "m_angInitialAngles":
-				fallthrough
-			case "m_vLightDirection":
-				fallthrough
-			case "m_ragAngles":
-				fallthrough
-			case "angLocalAngles":
-				fallthrough
-			case "angExtraLocalAngles":
-				if table.Name == "CBodyComponentBaseAnimatingOverlay" {
-					prop.Field.Encoder = "qangle_pitch_yaw"
-				} else {
-					prop.Field.Encoder = "QAngle"
+			// Builds before 990 didn't have encoder information
+			case sers.build <= 990:
+				switch prop.Field.Name {
+				case
+					"angExtraLocalAngles",
+					"angLocalAngles",
+					"m_angInitialAngles",
+					"m_angRotation",
+					"m_ragAngles",
+					"m_vLightDirection":
+					if table.Name == "CBodyComponentBaseAnimatingOverlay" {
+						prop.Field.Encoder = "qangle_pitch_yaw"
+					} else {
+						prop.Field.Encoder = "QAngle"
+					}
+
+				case
+					"dirPrimary",
+					"localSound",
+					"m_flElasticity",
+					"m_location",
+					"m_poolOrigin",
+					"m_ragPos",
+					"m_vecEndPos",
+					"m_vecLadderDir",
+					"m_vecPlayerMountPositionBottom",
+					"m_vecPlayerMountPositionTop",
+					"m_viewtarget",
+					"m_WorldMaxs",
+					"m_WorldMins",
+					"origin",
+					"vecLocalOrigin":
+					prop.Field.Encoder = "coord"
+
+				case "m_vecLadderNormal":
+					prop.Field.Encoder = "normal"
+
 				}
 
-			// coord
-			case "m_flElasticity":
-				fallthrough
-			case "m_viewtarget":
-				fallthrough
-			case "dirPrimary":
-				fallthrough
-			case "origin":
-				fallthrough
-			case "localSound":
-				fallthrough
-			case "m_location":
-				fallthrough
-			case "m_poolOrigin":
-				fallthrough
-			case "m_vecLadderDir":
-				fallthrough
-			case "m_vecPlayerMountPositionTop":
-				fallthrough
-			case "m_vecPlayerMountPositionBottom":
-				fallthrough
-			case "m_ragPos":
-				fallthrough
-			case "vecLocalOrigin":
-				fallthrough
-			case "m_WorldMins":
-				fallthrough
-			case "m_WorldMaxs":
-				fallthrough
-			case "m_vecEndPos":
-				prop.Field.Encoder = "coord"
-
-			// normal
-			case "m_vecLadderNormal":
-				prop.Field.Encoder = "normal"
-
-			// fixed
-			case "m_bItemWhiteList":
-				fallthrough
-			case "m_iPlayerIDsInControl":
-				fallthrough
-			case "m_ulTeamLogo":
-				fallthrough
-			case "m_ulTeamBaseLogo":
-				fallthrough
-			case "m_ulTeamBannerLogo":
-				fallthrough
-			case "m_bWorldTreeState":
-				fallthrough
-			case "m_iPlayerSteamID":
-				// These switched from varint to fixed64 in patch 1016, but did not
-				// have an encoder type specified. The encoder is now specified as
-				// of build 1027, making this unnecessary for new replays.
-				if sers.build >= 1016 && sers.build < 1027 {
+			// Builds between 1016 and 1027 didn't have fixed64
+			case sers.build >= 1016 && sers.build <= 1027:
+				switch prop.Field.Name {
+				case
+					"m_bItemWhiteList",
+					"m_bWorldTreeState",
+					"m_iPlayerIDsInControl",
+					"m_iPlayerSteamID",
+					"m_ulTeamBannerLogo",
+					"m_ulTeamBaseLogo",
+					"m_ulTeamLogo":
 					prop.Field.Encoder = "fixed64"
 				}
 			}
