@@ -21,10 +21,11 @@ type EntityEventType int
 
 // Possible Packet Entity Event Types
 const (
-	EntityEventType_Create  = EntityEventType(1)
-	EntityEventType_Update  = EntityEventType(2)
-	EntityEventType_Destroy = EntityEventType(3)
-	EntityEventType_Other   = EntityEventType(4)
+	EntityEventType_None   = EntityEventType(0)
+	EntityEventType_Create = EntityEventType(1)
+	EntityEventType_Update = EntityEventType(2)
+	EntityEventType_Delete = EntityEventType(3)
+	EntityEventType_Leave  = EntityEventType(4)
 )
 
 // Represents a packet entity update that happened this tick.
@@ -132,12 +133,12 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 		// This appears to be backwards from source 1:
 		// true+true used to be "create", now appears to be false+true?
 		// This seems suspcious.
-		eventType := EntityEventType_Other
+		eventType := EntityEventType_None
 		if r.readBoolean() {
 			if r.readBoolean() {
-				eventType = EntityEventType_Destroy
+				eventType = EntityEventType_Delete
 			} else {
-				eventType = EntityEventType_Other
+				eventType = EntityEventType_Leave
 			}
 		} else {
 			if r.readBoolean() {
@@ -152,38 +153,31 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 		// Proceed based on the update type
 		switch eventType {
 		case EntityEventType_Create:
-			// Sometimes we're told to create an existing entity.
-			// The data doesn't appear to ever change, so just throw it away.
-			if pe, ok = p.PacketEntities[index]; ok {
-				// We already have an existing entity here, reuse it.
-				r.seekBits(p.classIdSize + 25)
-			} else {
-				// Create a new PacketEntity.
-				pe = &PacketEntity{
-					Index:      index,
-					ClassId:    int32(r.readBits(p.classIdSize)),
-					Serial:     int32(r.readBits(25)),
-					Properties: NewProperties(),
-				}
-
-				// Get the associated class
-				if pe.ClassName, ok = p.ClassInfo[pe.ClassId]; !ok {
-					_panicf("unable to find class %d", pe.ClassId)
-				}
-
-				// Get the associated baseline
-				if pe.ClassBaseline, ok = p.ClassBaselines[pe.ClassId]; !ok {
-					_panicf("unable to find class baseline %d", pe.ClassId)
-				}
-
-				// Get the associated serializer
-				if pe.flatTbl, ok = p.serializers[pe.ClassName][0]; !ok {
-					_panicf("unable to find serializer for class %s", pe.ClassName)
-				}
-
-				// Register the packetEntity with the parser.
-				p.PacketEntities[index] = pe
+			// Create a new PacketEntity.
+			pe = &PacketEntity{
+				Index:      index,
+				ClassId:    int32(r.readBits(p.classIdSize)),
+				Serial:     int32(r.readBits(25)),
+				Properties: NewProperties(),
 			}
+
+			// Get the associated class
+			if pe.ClassName, ok = p.ClassInfo[pe.ClassId]; !ok {
+				_panicf("unable to find class %d", pe.ClassId)
+			}
+
+			// Get the associated baseline
+			if pe.ClassBaseline, ok = p.ClassBaselines[pe.ClassId]; !ok {
+				_panicf("unable to find class baseline %d", pe.ClassId)
+			}
+
+			// Get the associated serializer
+			if pe.flatTbl, ok = p.serializers[pe.ClassName][0]; !ok {
+				_panicf("unable to find serializer for class %s", pe.ClassName)
+			}
+
+			// Register the packetEntity with the parser.
+			p.PacketEntities[index] = pe
 
 			// Read properties
 			pe.Properties.Merge(ReadProperties(r, pe.flatTbl))
@@ -198,12 +192,15 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 			// Read properties and update the packetEntity
 			pe.Properties.Merge(ReadProperties(r, pe.flatTbl))
 
-		case EntityEventType_Destroy:
+		case EntityEventType_Delete:
 			if pe, ok = p.PacketEntities[index]; !ok {
 				_panicf("unable to find packet entity %d for delete", index)
 			}
 
 			delete(p.PacketEntities, index)
+
+		case EntityEventType_Leave:
+			// TODO: Decide how we want to handle this
 		}
 
 		// Add the update to the list of pending updates.
