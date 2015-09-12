@@ -31,7 +31,6 @@ It is generated from these files:
 	rendermessages.proto
 	steamdatagram_messages.proto
 	steammessages.proto
-	steammessages_cloud.steamworkssdk.proto
 	steammessages_oauth.steamworkssdk.proto
 	steammessages_unified_base.steamworkssdk.proto
 	te.proto

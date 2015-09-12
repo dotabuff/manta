@@ -92,6 +92,9 @@ enum EGCItemMsg {
 	k_EMsgGCRemoveItemGiftMessageResponse = 1106;
 	k_EMsgGCRemoveItemGifterAccountId = 1107;
 	k_EMsgGCRemoveItemGifterAccountIdResponse = 1108;
+	k_EMsgClientToGCRemoveItemGifterAttributes = 1109;
+	k_EMsgClientToGCRemoveItemName = 1110;
+	k_EMsgClientToGCRemoveItemDescription = 1111;
 	k_EMsgGCTradingBase = 1500;
 	k_EMsgGCTrading_InitiateTradeRequest = 1501;
 	k_EMsgGCTrading_InitiateTradeResponse = 1502;
@@ -583,5 +586,9 @@ message CMsgClientToGCUnlockCrateResponse {
 
 	optional EGCMsgResponse result = 1 [default = k_EGCMsgResponseOK];
 	repeated CMsgClientToGCUnlockCrateResponse.Item granted_items = 2;
+}
+
+message CMsgGCRemoveItemAttributeMsg {
+	optional uint64 item_id = 1;
 }
 

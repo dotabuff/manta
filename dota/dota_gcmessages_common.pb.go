@@ -579,7 +579,6 @@ const (
 	EDOTAGCMsg_k_EMsgClientToGCGetProfileCardStatsResponse                EDOTAGCMsg = 8035
 	EDOTAGCMsg_k_EMsgClientToGCTopLeagueMatchesRequest                    EDOTAGCMsg = 8036
 	EDOTAGCMsg_k_EMsgClientToGCTopFriendMatchesRequest                    EDOTAGCMsg = 8037
-	EDOTAGCMsg_k_EMsgGCToClientTopMatchesResponse                         EDOTAGCMsg = 8038
 	EDOTAGCMsg_k_EMsgGCToClientProfileCardStatsUpdated                    EDOTAGCMsg = 8040
 	EDOTAGCMsg_k_EMsgServerToGCRealtimeStats                              EDOTAGCMsg = 8041
 	EDOTAGCMsg_k_EMsgGCToServerRealtimeStatsStartStop                     EDOTAGCMsg = 8042
@@ -598,6 +597,9 @@ const (
 	EDOTAGCMsg_k_EMsgSQLGCToGCGrantAccountFlag                            EDOTAGCMsg = 8057
 	EDOTAGCMsg_k_EMsgGCToGCGetAccountFlags                                EDOTAGCMsg = 8058
 	EDOTAGCMsg_k_EMsgGCToGCGetAccountFlagsResponse                        EDOTAGCMsg = 8059
+	EDOTAGCMsg_k_EMsgSignOutWagerStats                                    EDOTAGCMsg = 8060
+	EDOTAGCMsg_k_EMsgGCToClientTopLeagueMatchesResponse                   EDOTAGCMsg = 8061
+	EDOTAGCMsg_k_EMsgGCToClientTopFriendMatchesResponse                   EDOTAGCMsg = 8062
 )
 
 var EDOTAGCMsg_name = map[int32]string{
@@ -1166,7 +1168,6 @@ var EDOTAGCMsg_name = map[int32]string{
 	8035: "k_EMsgClientToGCGetProfileCardStatsResponse",
 	8036: "k_EMsgClientToGCTopLeagueMatchesRequest",
 	8037: "k_EMsgClientToGCTopFriendMatchesRequest",
-	8038: "k_EMsgGCToClientTopMatchesResponse",
 	8040: "k_EMsgGCToClientProfileCardStatsUpdated",
 	8041: "k_EMsgServerToGCRealtimeStats",
 	8042: "k_EMsgGCToServerRealtimeStatsStartStop",
@@ -1185,6 +1186,9 @@ var EDOTAGCMsg_name = map[int32]string{
 	8057: "k_EMsgSQLGCToGCGrantAccountFlag",
 	8058: "k_EMsgGCToGCGetAccountFlags",
 	8059: "k_EMsgGCToGCGetAccountFlagsResponse",
+	8060: "k_EMsgSignOutWagerStats",
+	8061: "k_EMsgGCToClientTopLeagueMatchesResponse",
+	8062: "k_EMsgGCToClientTopFriendMatchesResponse",
 }
 var EDOTAGCMsg_value = map[string]int32{
 	"k_EMsgGCDOTABase":                                           7000,
@@ -1752,7 +1756,6 @@ var EDOTAGCMsg_value = map[string]int32{
 	"k_EMsgClientToGCGetProfileCardStatsResponse":                8035,
 	"k_EMsgClientToGCTopLeagueMatchesRequest":                    8036,
 	"k_EMsgClientToGCTopFriendMatchesRequest":                    8037,
-	"k_EMsgGCToClientTopMatchesResponse":                         8038,
 	"k_EMsgGCToClientProfileCardStatsUpdated":                    8040,
 	"k_EMsgServerToGCRealtimeStats":                              8041,
 	"k_EMsgGCToServerRealtimeStatsStartStop":                     8042,
@@ -1771,6 +1774,9 @@ var EDOTAGCMsg_value = map[string]int32{
 	"k_EMsgSQLGCToGCGrantAccountFlag":                            8057,
 	"k_EMsgGCToGCGetAccountFlags":                                8058,
 	"k_EMsgGCToGCGetAccountFlagsResponse":                        8059,
+	"k_EMsgSignOutWagerStats":                                    8060,
+	"k_EMsgGCToClientTopLeagueMatchesResponse":                   8061,
+	"k_EMsgGCToClientTopFriendMatchesResponse":                   8062,
 }
 
 func (x EDOTAGCMsg) Enum() *EDOTAGCMsg {
@@ -2678,45 +2684,69 @@ func (x *ETournamentType) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-type EIngameEvent int32
+type EEvent int32
 
 const (
-	EIngameEvent_k_EIngameEvent_OraclePA         EIngameEvent = 0
-	EIngameEvent_k_EIngameEvent_CNY2015          EIngameEvent = 1
-	EIngameEvent_k_EIngameEvent_CNY2015_PreBeast EIngameEvent = 2
-	EIngameEvent_k_EIngameEvent_TI5              EIngameEvent = 3
-	EIngameEvent_k_EIngameEvent_FM2015           EIngameEvent = 4
+	EEvent_EVENT_ID_NONE                    EEvent = 0
+	EEvent_EVENT_ID_DIRETIDE                EEvent = 1
+	EEvent_EVENT_ID_SPRING_FESTIVAL         EEvent = 2
+	EEvent_EVENT_ID_FROSTIVUS_2013          EEvent = 3
+	EEvent_EVENT_ID_COMPENDIUM_2014         EEvent = 4
+	EEvent_EVENT_ID_NEXON_PC_BANG           EEvent = 5
+	EEvent_EVENT_ID_PWRD_DAC_2015           EEvent = 6
+	EEvent_EVENT_ID_NEW_BLOOM_2015          EEvent = 7
+	EEvent_EVENT_ID_INTERNATIONAL_2015      EEvent = 8
+	EEvent_EVENT_ID_FALL_MAJOR_2015         EEvent = 9
+	EEvent_EVENT_ID_ORACLE_PA               EEvent = 10
+	EEvent_EVENT_ID_NEW_BLOOM_2015_PREBEAST EEvent = 11
+	EEvent_EVENT_ID_FROSTIVUS               EEvent = 12
 )
 
-var EIngameEvent_name = map[int32]string{
-	0: "k_EIngameEvent_OraclePA",
-	1: "k_EIngameEvent_CNY2015",
-	2: "k_EIngameEvent_CNY2015_PreBeast",
-	3: "k_EIngameEvent_TI5",
-	4: "k_EIngameEvent_FM2015",
+var EEvent_name = map[int32]string{
+	0:  "EVENT_ID_NONE",
+	1:  "EVENT_ID_DIRETIDE",
+	2:  "EVENT_ID_SPRING_FESTIVAL",
+	3:  "EVENT_ID_FROSTIVUS_2013",
+	4:  "EVENT_ID_COMPENDIUM_2014",
+	5:  "EVENT_ID_NEXON_PC_BANG",
+	6:  "EVENT_ID_PWRD_DAC_2015",
+	7:  "EVENT_ID_NEW_BLOOM_2015",
+	8:  "EVENT_ID_INTERNATIONAL_2015",
+	9:  "EVENT_ID_FALL_MAJOR_2015",
+	10: "EVENT_ID_ORACLE_PA",
+	11: "EVENT_ID_NEW_BLOOM_2015_PREBEAST",
+	12: "EVENT_ID_FROSTIVUS",
 }
-var EIngameEvent_value = map[string]int32{
-	"k_EIngameEvent_OraclePA":         0,
-	"k_EIngameEvent_CNY2015":          1,
-	"k_EIngameEvent_CNY2015_PreBeast": 2,
-	"k_EIngameEvent_TI5":              3,
-	"k_EIngameEvent_FM2015":           4,
+var EEvent_value = map[string]int32{
+	"EVENT_ID_NONE":                    0,
+	"EVENT_ID_DIRETIDE":                1,
+	"EVENT_ID_SPRING_FESTIVAL":         2,
+	"EVENT_ID_FROSTIVUS_2013":          3,
+	"EVENT_ID_COMPENDIUM_2014":         4,
+	"EVENT_ID_NEXON_PC_BANG":           5,
+	"EVENT_ID_PWRD_DAC_2015":           6,
+	"EVENT_ID_NEW_BLOOM_2015":          7,
+	"EVENT_ID_INTERNATIONAL_2015":      8,
+	"EVENT_ID_FALL_MAJOR_2015":         9,
+	"EVENT_ID_ORACLE_PA":               10,
+	"EVENT_ID_NEW_BLOOM_2015_PREBEAST": 11,
+	"EVENT_ID_FROSTIVUS":               12,
 }
 
-func (x EIngameEvent) Enum() *EIngameEvent {
-	p := new(EIngameEvent)
+func (x EEvent) Enum() *EEvent {
+	p := new(EEvent)
 	*p = x
 	return p
 }
-func (x EIngameEvent) String() string {
-	return proto.EnumName(EIngameEvent_name, int32(x))
+func (x EEvent) String() string {
+	return proto.EnumName(EEvent_name, int32(x))
 }
-func (x *EIngameEvent) UnmarshalJSON(data []byte) error {
-	value, err := proto.UnmarshalJSONEnum(EIngameEvent_value, data, "EIngameEvent")
+func (x *EEvent) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(EEvent_value, data, "EEvent")
 	if err != nil {
 		return err
 	}
-	*x = EIngameEvent(value)
+	*x = EEvent(value)
 	return nil
 }
 
@@ -3085,6 +3115,8 @@ const (
 	DOTA_COMBATLOG_TYPES_DOTA_COMBATLOG_TEAM_BUILDING_KILL DOTA_COMBATLOG_TYPES = 17
 	DOTA_COMBATLOG_TYPES_DOTA_COMBATLOG_FIRST_BLOOD        DOTA_COMBATLOG_TYPES = 18
 	DOTA_COMBATLOG_TYPES_DOTA_COMBATLOG_MODIFIER_REFRESH   DOTA_COMBATLOG_TYPES = 19
+	DOTA_COMBATLOG_TYPES_DOTA_COMBATLOG_NEUTRAL_CAMP_STACK DOTA_COMBATLOG_TYPES = 20
+	DOTA_COMBATLOG_TYPES_DOTA_COMBATLOG_PICKUP_RUNE        DOTA_COMBATLOG_TYPES = 21
 )
 
 var DOTA_COMBATLOG_TYPES_name = map[int32]string{
@@ -3108,6 +3140,8 @@ var DOTA_COMBATLOG_TYPES_name = map[int32]string{
 	17: "DOTA_COMBATLOG_TEAM_BUILDING_KILL",
 	18: "DOTA_COMBATLOG_FIRST_BLOOD",
 	19: "DOTA_COMBATLOG_MODIFIER_REFRESH",
+	20: "DOTA_COMBATLOG_NEUTRAL_CAMP_STACK",
+	21: "DOTA_COMBATLOG_PICKUP_RUNE",
 }
 var DOTA_COMBATLOG_TYPES_value = map[string]int32{
 	"DOTA_COMBATLOG_DAMAGE":             0,
@@ -3130,6 +3164,8 @@ var DOTA_COMBATLOG_TYPES_value = map[string]int32{
 	"DOTA_COMBATLOG_TEAM_BUILDING_KILL": 17,
 	"DOTA_COMBATLOG_FIRST_BLOOD":        18,
 	"DOTA_COMBATLOG_MODIFIER_REFRESH":   19,
+	"DOTA_COMBATLOG_NEUTRAL_CAMP_STACK": 20,
+	"DOTA_COMBATLOG_PICKUP_RUNE":        21,
 }
 
 func (x DOTA_COMBATLOG_TYPES) Enum() *DOTA_COMBATLOG_TYPES {
@@ -3582,6 +3618,7 @@ type CSODOTAGameAccountClient struct {
 	CurrAllHeroChallengeId                   *uint32             `protobuf:"varint,67,opt,name=curr_all_hero_challenge_id" json:"curr_all_hero_challenge_id,omitempty"`
 	PlayTimePoints                           *uint32             `protobuf:"varint,68,opt,name=play_time_points" json:"play_time_points,omitempty"`
 	AccountFlags                             *uint32             `protobuf:"varint,69,opt,name=account_flags" json:"account_flags,omitempty"`
+	PlayTimeLevel                            *uint32             `protobuf:"varint,70,opt,name=play_time_level" json:"play_time_level,omitempty"`
 	XXX_unrecognized                         []byte              `json:"-"`
 }
 
@@ -3906,6 +3943,13 @@ func (m *CSODOTAGameAccountClient) GetAccountFlags() uint32 {
 	return 0
 }
 
+func (m *CSODOTAGameAccountClient) GetPlayTimeLevel() uint32 {
+	if m != nil && m.PlayTimeLevel != nil {
+		return *m.PlayTimeLevel
+	}
+	return 0
+}
+
 type CSODOTAPartyMember struct {
 	PartnerType      *PartnerAccountType `protobuf:"varint,1,opt,name=partner_type,enum=dota.PartnerAccountType,def=0" json:"partner_type,omitempty"`
 	IsCoach          *bool               `protobuf:"varint,2,opt,name=is_coach" json:"is_coach,omitempty"`
@@ -3958,10 +4002,11 @@ type CSODOTAParty struct {
 	LowPriorityGamesRemaining       *uint32               `protobuf:"varint,35,opt,name=low_priority_games_remaining" json:"low_priority_games_remaining,omitempty"`
 	MinLevel                        *uint32               `protobuf:"varint,36,opt,name=min_level" json:"min_level,omitempty"`
 	MaxLevel                        *uint32               `protobuf:"varint,37,opt,name=max_level" json:"max_level,omitempty"`
-	ActiveIngameEvents              []EIngameEvent        `protobuf:"varint,39,rep,name=active_ingame_events,enum=dota.EIngameEvent" json:"active_ingame_events,omitempty"`
+	ActiveIngameEvents              []EEvent              `protobuf:"varint,39,rep,name=active_ingame_events,enum=dota.EEvent" json:"active_ingame_events,omitempty"`
 	OpenForJoinRequests             *bool                 `protobuf:"varint,40,opt,name=open_for_join_requests" json:"open_for_join_requests,omitempty"`
 	SentInvites                     []*CSODOTAPartyInvite `protobuf:"bytes,41,rep,name=sent_invites" json:"sent_invites,omitempty"`
 	RecvInvites                     []*CSODOTAPartyInvite `protobuf:"bytes,42,rep,name=recv_invites" json:"recv_invites,omitempty"`
+	AccountFlags                    *uint32               `protobuf:"varint,43,opt,name=account_flags" json:"account_flags,omitempty"`
 	XXX_unrecognized                []byte                `json:"-"`
 }
 
@@ -4148,7 +4193,7 @@ func (m *CSODOTAParty) GetMaxLevel() uint32 {
 	return 0
 }
 
-func (m *CSODOTAParty) GetActiveIngameEvents() []EIngameEvent {
+func (m *CSODOTAParty) GetActiveIngameEvents() []EEvent {
 	if m != nil {
 		return m.ActiveIngameEvents
 	}
@@ -4174,6 +4219,13 @@ func (m *CSODOTAParty) GetRecvInvites() []*CSODOTAPartyInvite {
 		return m.RecvInvites
 	}
 	return nil
+}
+
+func (m *CSODOTAParty) GetAccountFlags() uint32 {
+	if m != nil && m.AccountFlags != nil {
+		return *m.AccountFlags
+	}
+	return 0
 }
 
 type CSODOTAPartyInvite struct {
@@ -5167,7 +5219,7 @@ type CSODOTALobby struct {
 	MatchOutcome               *EMatchOutcome                `protobuf:"varint,70,opt,name=match_outcome,enum=dota.EMatchOutcome,def=0" json:"match_outcome,omitempty"`
 	MassDisconnect             *bool                         `protobuf:"varint,67,opt,name=mass_disconnect" json:"mass_disconnect,omitempty"`
 	CustomGameId               *uint64                       `protobuf:"varint,68,opt,name=custom_game_id" json:"custom_game_id,omitempty"`
-	ActiveIngameEvents         []EIngameEvent                `protobuf:"varint,69,rep,name=active_ingame_events,enum=dota.EIngameEvent" json:"active_ingame_events,omitempty"`
+	ActiveIngameEvents         []EEvent                      `protobuf:"varint,69,rep,name=active_ingame_events,enum=dota.EEvent" json:"active_ingame_events,omitempty"`
 	CustomMinPlayers           *uint32                       `protobuf:"varint,71,opt,name=custom_min_players" json:"custom_min_players,omitempty"`
 	CustomMaxPlayers           *uint32                       `protobuf:"varint,72,opt,name=custom_max_players" json:"custom_max_players,omitempty"`
 	PartnerType                *PartnerAccountType           `protobuf:"varint,73,opt,name=partner_type,enum=dota.PartnerAccountType,def=0" json:"partner_type,omitempty"`
@@ -5587,7 +5639,7 @@ func (m *CSODOTALobby) GetCustomGameId() uint64 {
 	return 0
 }
 
-func (m *CSODOTALobby) GetActiveIngameEvents() []EIngameEvent {
+func (m *CSODOTALobby) GetActiveIngameEvents() []EEvent {
 	if m != nil {
 		return m.ActiveIngameEvents
 	}
@@ -7129,6 +7181,9 @@ type CMsgDOTACombatLogEntry struct {
 	AssistPlayer3      *uint32               `protobuf:"varint,34,opt,name=assist_player3" json:"assist_player3,omitempty"`
 	StackCount         *uint32               `protobuf:"varint,35,opt,name=stack_count" json:"stack_count,omitempty"`
 	HiddenModifier     *bool                 `protobuf:"varint,36,opt,name=hidden_modifier" json:"hidden_modifier,omitempty"`
+	IsTargetBuilding   *bool                 `protobuf:"varint,37,opt,name=is_target_building" json:"is_target_building,omitempty"`
+	NeutralCampType    *uint32               `protobuf:"varint,38,opt,name=neutral_camp_type" json:"neutral_camp_type,omitempty"`
+	RuneType           *uint32               `protobuf:"varint,39,opt,name=rune_type" json:"rune_type,omitempty"`
 	XXX_unrecognized   []byte                `json:"-"`
 }
 
@@ -7390,12 +7445,34 @@ func (m *CMsgDOTACombatLogEntry) GetHiddenModifier() bool {
 	return false
 }
 
+func (m *CMsgDOTACombatLogEntry) GetIsTargetBuilding() bool {
+	if m != nil && m.IsTargetBuilding != nil {
+		return *m.IsTargetBuilding
+	}
+	return false
+}
+
+func (m *CMsgDOTACombatLogEntry) GetNeutralCampType() uint32 {
+	if m != nil && m.NeutralCampType != nil {
+		return *m.NeutralCampType
+	}
+	return 0
+}
+
+func (m *CMsgDOTACombatLogEntry) GetRuneType() uint32 {
+	if m != nil && m.RuneType != nil {
+		return *m.RuneType
+	}
+	return 0
+}
+
 type CMsgDOTAProfileCard struct {
 	AccountId          *uint32                     `protobuf:"varint,1,opt,name=account_id" json:"account_id,omitempty"`
 	BackgroundDefIndex *uint32                     `protobuf:"varint,2,opt,name=background_def_index" json:"background_def_index,omitempty"`
 	Slots              []*CMsgDOTAProfileCard_Slot `protobuf:"bytes,3,rep,name=slots" json:"slots,omitempty"`
 	BadgePoints        *uint32                     `protobuf:"varint,4,opt,name=badge_points" json:"badge_points,omitempty"`
 	EventPoints        *uint32                     `protobuf:"varint,5,opt,name=event_points" json:"event_points,omitempty"`
+	EventId            *uint32                     `protobuf:"varint,6,opt,name=event_id" json:"event_id,omitempty"`
 	XXX_unrecognized   []byte                      `json:"-"`
 }
 
@@ -7434,6 +7511,13 @@ func (m *CMsgDOTAProfileCard) GetBadgePoints() uint32 {
 func (m *CMsgDOTAProfileCard) GetEventPoints() uint32 {
 	if m != nil && m.EventPoints != nil {
 		return *m.EventPoints
+	}
+	return 0
+}
+
+func (m *CMsgDOTAProfileCard) GetEventId() uint32 {
+	if m != nil && m.EventId != nil {
+		return *m.EventId
 	}
 	return 0
 }
@@ -9289,7 +9373,7 @@ func init() {
 	proto.RegisterEnum("dota.MatchLanguages", MatchLanguages_name, MatchLanguages_value)
 	proto.RegisterEnum("dota.ETournamentTemplate", ETournamentTemplate_name, ETournamentTemplate_value)
 	proto.RegisterEnum("dota.ETournamentType", ETournamentType_name, ETournamentType_value)
-	proto.RegisterEnum("dota.EIngameEvent", EIngameEvent_name, EIngameEvent_value)
+	proto.RegisterEnum("dota.EEvent", EEvent_name, EEvent_value)
 	proto.RegisterEnum("dota.LobbyDotaTVDelay", LobbyDotaTVDelay_name, LobbyDotaTVDelay_value)
 	proto.RegisterEnum("dota.EMatchOutcome", EMatchOutcome_name, EMatchOutcome_value)
 	proto.RegisterEnum("dota.EDOTAGCSessionNeed", EDOTAGCSessionNeed_name, EDOTAGCSessionNeed_value)

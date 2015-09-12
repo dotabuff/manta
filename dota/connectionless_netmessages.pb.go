@@ -20,6 +20,7 @@ type C2S_CONNECT_Message struct {
 	EncryptedPassword []byte                        `protobuf:"bytes,6,opt,name=encrypted_password" json:"encrypted_password,omitempty"`
 	Splitplayers      []*CCLCMsg_SplitPlayerConnect `protobuf:"bytes,7,rep,name=splitplayers" json:"splitplayers,omitempty"`
 	AuthSteam         []byte                        `protobuf:"bytes,8,opt,name=auth_steam" json:"auth_steam,omitempty"`
+	ChallengeContext  *string                       `protobuf:"bytes,9,opt,name=challenge_context" json:"challenge_context,omitempty"`
 	XXX_unrecognized  []byte                        `json:"-"`
 }
 
@@ -81,6 +82,13 @@ func (m *C2S_CONNECT_Message) GetAuthSteam() []byte {
 		return m.AuthSteam
 	}
 	return nil
+}
+
+func (m *C2S_CONNECT_Message) GetChallengeContext() string {
+	if m != nil && m.ChallengeContext != nil {
+		return *m.ChallengeContext
+	}
+	return ""
 }
 
 type C2S_CONNECTION_Message struct {

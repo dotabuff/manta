@@ -952,6 +952,8 @@ type CMsgClientWelcome struct {
 	UptodateSubscribedCaches  []*CMsgSOCacheSubscriptionCheck `protobuf:"bytes,4,rep,name=uptodate_subscribed_caches" json:"uptodate_subscribed_caches,omitempty"`
 	Location                  *CMsgClientWelcome_Location     `protobuf:"bytes,5,opt,name=location" json:"location,omitempty"`
 	SaveGameKey               []byte                          `protobuf:"bytes,6,opt,name=save_game_key" json:"save_game_key,omitempty"`
+	ItemSchemaCrc             *uint32                         `protobuf:"fixed32,7,opt,name=item_schema_crc" json:"item_schema_crc,omitempty"`
+	ItemsGameUrl              *string                         `protobuf:"bytes,8,opt,name=items_game_url" json:"items_game_url,omitempty"`
 	XXX_unrecognized          []byte                          `json:"-"`
 }
 
@@ -999,6 +1001,20 @@ func (m *CMsgClientWelcome) GetSaveGameKey() []byte {
 		return m.SaveGameKey
 	}
 	return nil
+}
+
+func (m *CMsgClientWelcome) GetItemSchemaCrc() uint32 {
+	if m != nil && m.ItemSchemaCrc != nil {
+		return *m.ItemSchemaCrc
+	}
+	return 0
+}
+
+func (m *CMsgClientWelcome) GetItemsGameUrl() string {
+	if m != nil && m.ItemsGameUrl != nil {
+		return *m.ItemsGameUrl
+	}
+	return ""
 }
 
 type CMsgClientWelcome_Location struct {

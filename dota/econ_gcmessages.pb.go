@@ -100,6 +100,9 @@ const (
 	EGCItemMsg_k_EMsgGCRemoveItemGiftMessageResponse          EGCItemMsg = 1106
 	EGCItemMsg_k_EMsgGCRemoveItemGifterAccountId              EGCItemMsg = 1107
 	EGCItemMsg_k_EMsgGCRemoveItemGifterAccountIdResponse      EGCItemMsg = 1108
+	EGCItemMsg_k_EMsgClientToGCRemoveItemGifterAttributes     EGCItemMsg = 1109
+	EGCItemMsg_k_EMsgClientToGCRemoveItemName                 EGCItemMsg = 1110
+	EGCItemMsg_k_EMsgClientToGCRemoveItemDescription          EGCItemMsg = 1111
 	EGCItemMsg_k_EMsgGCTradingBase                            EGCItemMsg = 1500
 	EGCItemMsg_k_EMsgGCTrading_InitiateTradeRequest           EGCItemMsg = 1501
 	EGCItemMsg_k_EMsgGCTrading_InitiateTradeResponse          EGCItemMsg = 1502
@@ -272,6 +275,9 @@ var EGCItemMsg_name = map[int32]string{
 	1106: "k_EMsgGCRemoveItemGiftMessageResponse",
 	1107: "k_EMsgGCRemoveItemGifterAccountId",
 	1108: "k_EMsgGCRemoveItemGifterAccountIdResponse",
+	1109: "k_EMsgClientToGCRemoveItemGifterAttributes",
+	1110: "k_EMsgClientToGCRemoveItemName",
+	1111: "k_EMsgClientToGCRemoveItemDescription",
 	1500: "k_EMsgGCTradingBase",
 	1501: "k_EMsgGCTrading_InitiateTradeRequest",
 	1502: "k_EMsgGCTrading_InitiateTradeResponse",
@@ -443,6 +449,9 @@ var EGCItemMsg_value = map[string]int32{
 	"k_EMsgGCRemoveItemGiftMessageResponse":          1106,
 	"k_EMsgGCRemoveItemGifterAccountId":              1107,
 	"k_EMsgGCRemoveItemGifterAccountIdResponse":      1108,
+	"k_EMsgClientToGCRemoveItemGifterAttributes":     1109,
+	"k_EMsgClientToGCRemoveItemName":                 1110,
+	"k_EMsgClientToGCRemoveItemDescription":          1111,
 	"k_EMsgGCTradingBase":                            1500,
 	"k_EMsgGCTrading_InitiateTradeRequest":           1501,
 	"k_EMsgGCTrading_InitiateTradeResponse":          1502,
@@ -2599,6 +2608,22 @@ func (m *CMsgClientToGCUnlockCrateResponse_Item) GetItemId() uint64 {
 func (m *CMsgClientToGCUnlockCrateResponse_Item) GetDefIndex() uint32 {
 	if m != nil && m.DefIndex != nil {
 		return *m.DefIndex
+	}
+	return 0
+}
+
+type CMsgGCRemoveItemAttributeMsg struct {
+	ItemId           *uint64 `protobuf:"varint,1,opt,name=item_id" json:"item_id,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CMsgGCRemoveItemAttributeMsg) Reset()         { *m = CMsgGCRemoveItemAttributeMsg{} }
+func (m *CMsgGCRemoveItemAttributeMsg) String() string { return proto.CompactTextString(m) }
+func (*CMsgGCRemoveItemAttributeMsg) ProtoMessage()    {}
+
+func (m *CMsgGCRemoveItemAttributeMsg) GetItemId() uint64 {
+	if m != nil && m.ItemId != nil {
+		return *m.ItemId
 	}
 	return 0
 }

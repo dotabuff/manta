@@ -4798,17 +4798,17 @@ func (m *CMsgSignOutAssassinMiniGameInfo) GetPaIsRadiant() bool {
 }
 
 type CMsgServerToGCGetIngameEventData struct {
-	Event            *EIngameEvent `protobuf:"varint,1,opt,name=event,enum=dota.EIngameEvent,def=0" json:"event,omitempty"`
-	XXX_unrecognized []byte        `json:"-"`
+	Event            *EEvent `protobuf:"varint,1,opt,name=event,enum=dota.EEvent,def=0" json:"event,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
 }
 
 func (m *CMsgServerToGCGetIngameEventData) Reset()         { *m = CMsgServerToGCGetIngameEventData{} }
 func (m *CMsgServerToGCGetIngameEventData) String() string { return proto.CompactTextString(m) }
 func (*CMsgServerToGCGetIngameEventData) ProtoMessage()    {}
 
-const Default_CMsgServerToGCGetIngameEventData_Event EIngameEvent = EIngameEvent_k_EIngameEvent_OraclePA
+const Default_CMsgServerToGCGetIngameEventData_Event EEvent = EEvent_EVENT_ID_NONE
 
-func (m *CMsgServerToGCGetIngameEventData) GetEvent() EIngameEvent {
+func (m *CMsgServerToGCGetIngameEventData) GetEvent() EEvent {
 	if m != nil && m.Event != nil {
 		return *m.Event
 	}
@@ -5289,6 +5289,62 @@ func (m *CMsgGCToServerUpdateBroadcastCheers) GetTeam_1Cheers() uint32 {
 func (m *CMsgGCToServerUpdateBroadcastCheers) GetTeam_2Cheers() uint32 {
 	if m != nil && m.Team_2Cheers != nil {
 		return *m.Team_2Cheers
+	}
+	return 0
+}
+
+type CMsgSignOutWagerStats struct {
+	Players          []*CMsgSignOutWagerStats_Player `protobuf:"bytes,1,rep,name=players" json:"players,omitempty"`
+	EventId          *uint32                         `protobuf:"varint,2,opt,name=event_id" json:"event_id,omitempty"`
+	XXX_unrecognized []byte                          `json:"-"`
+}
+
+func (m *CMsgSignOutWagerStats) Reset()         { *m = CMsgSignOutWagerStats{} }
+func (m *CMsgSignOutWagerStats) String() string { return proto.CompactTextString(m) }
+func (*CMsgSignOutWagerStats) ProtoMessage()    {}
+
+func (m *CMsgSignOutWagerStats) GetPlayers() []*CMsgSignOutWagerStats_Player {
+	if m != nil {
+		return m.Players
+	}
+	return nil
+}
+
+func (m *CMsgSignOutWagerStats) GetEventId() uint32 {
+	if m != nil && m.EventId != nil {
+		return *m.EventId
+	}
+	return 0
+}
+
+type CMsgSignOutWagerStats_Player struct {
+	AccountId        *uint32 `protobuf:"varint,1,opt,name=account_id" json:"account_id,omitempty"`
+	Winnings         *int32  `protobuf:"zigzag32,2,opt,name=winnings" json:"winnings,omitempty"`
+	MaxWager         *uint32 `protobuf:"varint,3,opt,name=max_wager" json:"max_wager,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CMsgSignOutWagerStats_Player) Reset()         { *m = CMsgSignOutWagerStats_Player{} }
+func (m *CMsgSignOutWagerStats_Player) String() string { return proto.CompactTextString(m) }
+func (*CMsgSignOutWagerStats_Player) ProtoMessage()    {}
+
+func (m *CMsgSignOutWagerStats_Player) GetAccountId() uint32 {
+	if m != nil && m.AccountId != nil {
+		return *m.AccountId
+	}
+	return 0
+}
+
+func (m *CMsgSignOutWagerStats_Player) GetWinnings() int32 {
+	if m != nil && m.Winnings != nil {
+		return *m.Winnings
+	}
+	return 0
+}
+
+func (m *CMsgSignOutWagerStats_Player) GetMaxWager() uint32 {
+	if m != nil && m.MaxWager != nil {
+		return *m.MaxWager
 	}
 	return 0
 }
