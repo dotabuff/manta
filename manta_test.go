@@ -48,8 +48,6 @@ var testScenarios = map[int64]testScenario{
 		matchId:         "1786687320",
 		replayUrl:       "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1786687320.dem",
 		expectGameBuild: 1033,
-		debugLevel:      10,
-		debugTick:       72309,
 	},
 
 	1785937100: {
