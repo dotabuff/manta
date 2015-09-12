@@ -7,6 +7,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestMatch1786687320(t *testing.T) { testScenarios[1786687320].test(t) }
 func TestMatch1785937100(t *testing.T) { testScenarios[1785937100].test(t) }
 func TestMatch1785899023(t *testing.T) { testScenarios[1785899023].test(t) }
 func TestMatch1785874713(t *testing.T) { testScenarios[1785874713].test(t) }
@@ -29,6 +30,7 @@ type testScenario struct {
 	matchId                string
 	replayUrl              string
 	debugLevel             uint
+	debugTick              uint32
 	skipPacketEntities     bool
 	expectGameBuild        uint32
 	expectEntityEvents     int32
@@ -42,6 +44,14 @@ type testScenario struct {
 }
 
 var testScenarios = map[int64]testScenario{
+	1786687320: {
+		matchId:         "1786687320",
+		replayUrl:       "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1786687320.dem",
+		expectGameBuild: 1033,
+		debugLevel:      10,
+		debugTick:       72309,
+	},
+
 	1785937100: {
 		matchId:                "1785937100",
 		replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1785937100.dem",
@@ -268,7 +278,10 @@ var testScenarios = map[int64]testScenario{
 func (s testScenario) test(t *testing.T) {
 	assert := assert.New(t)
 
-	debugLevel = s.debugLevel
+	if s.debugTick == 0 {
+		debugLevel = s.debugLevel
+	}
+
 	defer func() {
 		debugLevel = 0
 	}()
@@ -293,6 +306,15 @@ func (s testScenario) test(t *testing.T) {
 	gotEntityEvents := int32(0)
 	gotPlayer6Name := "<Missing>"
 	gotPlayer6Steamid := uint64(0)
+
+	if s.debugTick > 0 {
+		parser.Callbacks.OnCNETMsg_Tick(func(m *dota.CNETMsg_Tick) error {
+			if m.GetTick() >= s.debugTick {
+				debugLevel = s.debugLevel
+			}
+			return nil
+		})
+	}
 
 	parser.Callbacks.OnCDOTAUserMsg_SpectatorPlayerUnitOrders(func(m *dota.CDOTAUserMsg_SpectatorPlayerUnitOrders) error {
 		gotUnitOrderEvents += 1
