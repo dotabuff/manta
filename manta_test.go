@@ -317,7 +317,7 @@ func (s testScenario) test(t *testing.T) {
 
 	if s.debugTick > 0 {
 		parser.Callbacks.OnCNETMsg_Tick(func(m *dota.CNETMsg_Tick) error {
-			if m.GetTick() >= s.debugTick {
+			if parser.Tick >= s.debugTick {
 				debugLevel = s.debugLevel
 			}
 			return nil
