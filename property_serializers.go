@@ -160,7 +160,7 @@ func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *Pr
 			Decode:          decoder,
 			DecodeContainer: decoderContainer,
 			IsArray:         true,
-			Length:          uint32(128),
+			Length:          uint32(1024),
 			ArraySerializer: &PropertySerializer{},
 		}
 		pst.Serializers[name] = ps
