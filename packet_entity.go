@@ -157,9 +157,12 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 			pe = &PacketEntity{
 				Index:      index,
 				ClassId:    int32(r.readBits(p.classIdSize)),
-				Serial:     int32(r.readBits(25)),
+				Serial:     int32(r.readBits(17)),
 				Properties: NewProperties(),
 			}
+
+			// We don't know what this is used for.
+			r.readVarUint32()
 
 			// Get the associated class
 			if pe.ClassName, ok = p.ClassInfo[pe.ClassId]; !ok {
