@@ -255,6 +255,8 @@ var testScenarios = map[int64]testScenario{
 		expectUnitOrderEvents:  63992,
 		expectPlayer6Name:      "ariethebeast",
 		expectPlayer6Steamid:   76561198065323776,
+		expectHeroEntityName:   "CDOTA_Unit_Hero_Pudge",
+		expectHeroEntityMana:   858.10474,
 	},
 	1560294294: {
 		matchId:                "1560294294",
@@ -281,6 +283,8 @@ var testScenarios = map[int64]testScenario{
 		expectUnitOrderEvents:  63387,
 		expectPlayer6Name:      "It takes a tree to tango",
 		expectPlayer6Steamid:   76561197993050562,
+		expectHeroEntityName:   "CDOTA_Unit_Hero_Undying",
+		expectHeroEntityMana:   1108.1353,
 	},
 }
 

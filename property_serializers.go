@@ -3,6 +3,8 @@ package manta
 import (
 	"regexp"
 	"strconv"
+
+	"github.com/golang/protobuf/proto"
 )
 
 // Type for a decoder function
@@ -42,6 +44,17 @@ func (pst *PropertySerializerTable) FillSerializer(field *dt_field) {
 	case "m_flAnimTime":
 		field.Serializer = &PropertySerializer{decodeSimTime, nil, false, 0, nil, "unkown"}
 		return
+	}
+
+	// Handle special fields in old replays where the low and high values of a
+	// quantized float were invalid.
+	if field.build < 955 {
+		switch field.Name {
+		case "m_flMana", "m_flMaxMana":
+			field.LowValue = nil
+			field.HighValue = proto.Float32(8192.0)
+		}
+
 	}
 
 	field.Serializer = pst.GetPropertySerializerByName(field.Type)
