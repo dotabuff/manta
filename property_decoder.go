@@ -60,15 +60,6 @@ func decodeFloat(r *Reader, f *dt_field) interface{} {
 		return r.readCoord()
 	}
 
-	// Old replays have troublesome quantized floats (or something),that cause
-	// issues. Simplify reads for them to get through the packet, even if wrong.
-	if f.build < 955 {
-		if f.BitCount != nil {
-			return decodeFloatNoscale(r, f)
-		}
-		return r.readVarUint32()
-	}
-
 	// Decode as noscale if it has an appropriate bitcount.
 	if f.BitCount == nil || (*f.BitCount <= 0 || *f.BitCount >= 32) {
 		return decodeFloatNoscale(r, f)
