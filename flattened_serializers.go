@@ -27,6 +27,8 @@ type dt_field struct {
 
 	Version    *int32
 	Serializer *PropertySerializer `json:"-"`
+
+	build uint32
 }
 
 // A single datatable
@@ -91,6 +93,8 @@ func (sers *flattened_serializers) recurse_table(cur *dota.ProtoFlattenedSeriali
 			Type:       (sers.proto.GetSymbols()[pField.GetVarTypeSym()]),
 			Version:    pField.FieldSerializerVersion,
 			Serializer: nil,
+
+			build: sers.build,
 		}
 
 		// Fill the serializer
