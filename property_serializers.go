@@ -32,12 +32,6 @@ func GetDefaultPropertySerializerTable() *PropertySerializerTable {
 var matchArray = regexp.MustCompile(`([^[\]]+)\[(\d+)]`)
 var matchVector = regexp.MustCompile(`CUtlVector\<\s(.*)\s>$`)
 
-// Flags used in the quantized decoding
-const qf_rounddown int32 = (1 << 0)
-const qf_roundup int32 = (1 << 1)
-const qf_encode_zero int32 = (1 << 2)
-const qf_encode_integers int32 = (1 << 3)
-
 // Fills serializer in dt_field
 func (pst *PropertySerializerTable) FillSerializer(field *dt_field) {
 	// Handle special decoders that need the complete field data here

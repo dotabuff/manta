@@ -22,7 +22,6 @@ func decodeShort(r *Reader, f *dt_field) interface{} {
 }
 
 func decodeUnsigned(r *Reader, f *dt_field) interface{} {
-	// Let's hope this get's added by valve at some point
 	switch f.Encoder {
 	case "fixed64":
 		return decodeLeUint64(r, f)
@@ -61,12 +60,22 @@ func decodeFloat(r *Reader, f *dt_field) interface{} {
 		return r.readCoord()
 	}
 
-	if f.BitCount != nil {
-		// equivalent to the old noscale
-		return decodeFloatNoscale(r, f)
-	} else {
+	// Old replays have troublesome quantized floats (or something),that cause
+	// issues. Simplify reads for them to get through the packet, even if wrong.
+	if f.build < 955 {
+		if f.BitCount != nil {
+			return decodeFloatNoscale(r, f)
+		}
 		return r.readVarUint32()
 	}
+
+	// Decode as noscale if it has an appropriate bitcount.
+	if f.BitCount == nil || (*f.BitCount <= 0 || *f.BitCount >= 32) {
+		return decodeFloatNoscale(r, f)
+	}
+
+	// Otherwise fall back to quantized decoding.
+	return decodeQuantized(r, f)
 }
 
 func decodeFloatNoscale(r *Reader, f *dt_field) interface{} {

@@ -42,13 +42,17 @@ type testScenario struct {
 	expectUnitOrderEvents  int32
 	expectPlayer6Name      string
 	expectPlayer6Steamid   uint64
+	expectHeroEntityName   string
+	expectHeroEntityMana   float32
 }
 
 var testScenarios = map[int64]testScenario{
 	1788648401: {
-		matchId:         "1788648401",
-		replayUrl:       "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1788648401.dem",
-		expectGameBuild: 1036,
+		matchId:              "1788648401",
+		replayUrl:            "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1788648401.dem",
+		expectGameBuild:      1036,
+		expectHeroEntityName: "CDOTA_Unit_Hero_Earthshaker",
+		expectHeroEntityMana: 1189.9386,
 	},
 	1786687320: {
 		matchId:         "1786687320",
@@ -223,6 +227,8 @@ var testScenarios = map[int64]testScenario{
 		expectUnitOrderEvents:  40669,
 		expectPlayer6Name:      "Az ★ | Big A Man",
 		expectPlayer6Steamid:   76561198156504817,
+		expectHeroEntityName:   "CDOTA_Unit_Hero_Chen",
+		expectHeroEntityMana:   1159.9386,
 	},
 	1582611189: {
 		matchId:                "1582611189",
@@ -309,6 +315,7 @@ func (s testScenario) test(t *testing.T) {
 	gotEntityEvents := int32(0)
 	gotPlayer6Name := "<Missing>"
 	gotPlayer6Steamid := uint64(0)
+	gotHeroEntityMana := float32(0.0)
 
 	if s.debugTick > 0 {
 		parser.Callbacks.OnCNETMsg_Tick(func(m *dota.CNETMsg_Tick) error {
@@ -331,6 +338,12 @@ func (s testScenario) test(t *testing.T) {
 
 	parser.OnPacketEntity(func(pe *PacketEntity, pet EntityEventType) error {
 		gotEntityEvents += 1
+
+		if pe.ClassName == s.expectHeroEntityName {
+			if v, ok := pe.FetchFloat32("m_flMaxMana"); ok {
+				gotHeroEntityMana = v
+			}
+		}
 
 		if pe.ClassName == "CDOTA_PlayerResource" {
 			if v, ok := pe.FetchString("m_vecPlayerData.0006.m_iszPlayerName"); ok {
@@ -399,6 +412,9 @@ func (s testScenario) test(t *testing.T) {
 	}
 	if s.expectPlayer6Steamid > 0 {
 		assert.Equal(s.expectPlayer6Steamid, gotPlayer6Steamid, s.matchId)
+	}
+	if s.expectHeroEntityMana > 0.0 {
+		assert.Equal(s.expectHeroEntityMana, gotHeroEntityMana, s.matchId)
 	}
 }
 
