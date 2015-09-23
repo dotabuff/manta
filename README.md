@@ -35,6 +35,7 @@ func main() {
   // Register a callback, this time for the OnCUserMessageSayText2 event.
   p.Callbacks.OnCUserMessageSayText2(func(m *dota.CUserMessageSayText2) error {
     fmt.Printf("%s said: %s", m.GetParam1(), m.GetParam2())
+    return nil
   })
 
   // Start parsing the replay!
