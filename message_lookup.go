@@ -43,11 +43,7 @@ var packetNames = map[int32]string{
 	59:  "SVC_Messages_svc_StopSound",
 	60:  "SVC_Messages_svc_PeerList",
 	61:  "SVC_Messages_svc_PacketReliable",
-	62:  "SVC_Messages_svc_UserMessage",
-	63:  "SVC_Messages_svc_SendTable",
-	67:  "SVC_Messages_svc_GameEvent",
-	68:  "SVC_Messages_svc_TempEntities",
-	69:  "SVC_Messages_svc_GameEventList",
+	62:  "SVC_Messages_svc_HLTVStatus",
 	70:  "SVC_Messages_svc_FullFrameSplit",
 	101: "EBaseUserMessages_UM_AchievementEvent",
 	102: "EBaseUserMessages_UM_CloseCaption",
@@ -244,11 +240,7 @@ type Callbacks struct {
 	onCSVCMsg_StopSound                       []func(*dota.CSVCMsg_StopSound) error
 	onCSVCMsg_PeerList                        []func(*dota.CSVCMsg_PeerList) error
 	onCSVCMsg_PacketReliable                  []func(*dota.CSVCMsg_PacketReliable) error
-	onCSVCMsg_UserMessage                     []func(*dota.CSVCMsg_UserMessage) error
-	onCSVCMsg_SendTable                       []func(*dota.CSVCMsg_SendTable) error
-	onCSVCMsg_GameEvent                       []func(*dota.CSVCMsg_GameEvent) error
-	onCSVCMsg_TempEntities                    []func(*dota.CSVCMsg_TempEntities) error
-	onCSVCMsg_GameEventList                   []func(*dota.CSVCMsg_GameEventList) error
+	onCSVCMsg_HLTVStatus                      []func(*dota.CSVCMsg_HLTVStatus) error
 	onCSVCMsg_FullFrameSplit                  []func(*dota.CSVCMsg_FullFrameSplit) error
 	onCUserMessageAchievementEvent            []func(*dota.CUserMessageAchievementEvent) error
 	onCUserMessageCloseCaption                []func(*dota.CUserMessageCloseCaption) error
@@ -540,20 +532,8 @@ func (c *Callbacks) OnCSVCMsg_PeerList(fn func(*dota.CSVCMsg_PeerList) error) {
 func (c *Callbacks) OnCSVCMsg_PacketReliable(fn func(*dota.CSVCMsg_PacketReliable) error) {
 	c.onCSVCMsg_PacketReliable = append(c.onCSVCMsg_PacketReliable, fn)
 }
-func (c *Callbacks) OnCSVCMsg_UserMessage(fn func(*dota.CSVCMsg_UserMessage) error) {
-	c.onCSVCMsg_UserMessage = append(c.onCSVCMsg_UserMessage, fn)
-}
-func (c *Callbacks) OnCSVCMsg_SendTable(fn func(*dota.CSVCMsg_SendTable) error) {
-	c.onCSVCMsg_SendTable = append(c.onCSVCMsg_SendTable, fn)
-}
-func (c *Callbacks) OnCSVCMsg_GameEvent(fn func(*dota.CSVCMsg_GameEvent) error) {
-	c.onCSVCMsg_GameEvent = append(c.onCSVCMsg_GameEvent, fn)
-}
-func (c *Callbacks) OnCSVCMsg_TempEntities(fn func(*dota.CSVCMsg_TempEntities) error) {
-	c.onCSVCMsg_TempEntities = append(c.onCSVCMsg_TempEntities, fn)
-}
-func (c *Callbacks) OnCSVCMsg_GameEventList(fn func(*dota.CSVCMsg_GameEventList) error) {
-	c.onCSVCMsg_GameEventList = append(c.onCSVCMsg_GameEventList, fn)
+func (c *Callbacks) OnCSVCMsg_HLTVStatus(fn func(*dota.CSVCMsg_HLTVStatus) error) {
+	c.onCSVCMsg_HLTVStatus = append(c.onCSVCMsg_HLTVStatus, fn)
 }
 func (c *Callbacks) OnCSVCMsg_FullFrameSplit(fn func(*dota.CSVCMsg_FullFrameSplit) error) {
 	c.onCSVCMsg_FullFrameSplit = append(c.onCSVCMsg_FullFrameSplit, fn)
@@ -1632,61 +1612,9 @@ func (p *Parser) CallByPacketType(t int32, raw []byte) error {
 			}
 		}
 		return nil
-	case 62: // dota.SVC_Messages_svc_UserMessage
-		if cbs := callbacks.onCSVCMsg_UserMessage; cbs != nil {
-			msg := &dota.CSVCMsg_UserMessage{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			for _, fn := range cbs {
-				if err := fn(msg); err != nil {
-					return err
-				}
-			}
-		}
-		return nil
-	case 63: // dota.SVC_Messages_svc_SendTable
-		if cbs := callbacks.onCSVCMsg_SendTable; cbs != nil {
-			msg := &dota.CSVCMsg_SendTable{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			for _, fn := range cbs {
-				if err := fn(msg); err != nil {
-					return err
-				}
-			}
-		}
-		return nil
-	case 67: // dota.SVC_Messages_svc_GameEvent
-		if cbs := callbacks.onCSVCMsg_GameEvent; cbs != nil {
-			msg := &dota.CSVCMsg_GameEvent{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			for _, fn := range cbs {
-				if err := fn(msg); err != nil {
-					return err
-				}
-			}
-		}
-		return nil
-	case 68: // dota.SVC_Messages_svc_TempEntities
-		if cbs := callbacks.onCSVCMsg_TempEntities; cbs != nil {
-			msg := &dota.CSVCMsg_TempEntities{}
-			if err := proto.Unmarshal(raw, msg); err != nil {
-				return err
-			}
-			for _, fn := range cbs {
-				if err := fn(msg); err != nil {
-					return err
-				}
-			}
-		}
-		return nil
-	case 69: // dota.SVC_Messages_svc_GameEventList
-		if cbs := callbacks.onCSVCMsg_GameEventList; cbs != nil {
-			msg := &dota.CSVCMsg_GameEventList{}
+	case 62: // dota.SVC_Messages_svc_HLTVStatus
+		if cbs := callbacks.onCSVCMsg_HLTVStatus; cbs != nil {
+			msg := &dota.CSVCMsg_HLTVStatus{}
 			if err := proto.Unmarshal(raw, msg); err != nil {
 				return err
 			}
@@ -3559,11 +3487,7 @@ func (c *Callbacks) OnAny(all func(interface{}) error) {
 	c.OnCSVCMsg_StopSound(func(pkg *dota.CSVCMsg_StopSound) error { return all(pkg) })
 	c.OnCSVCMsg_PeerList(func(pkg *dota.CSVCMsg_PeerList) error { return all(pkg) })
 	c.OnCSVCMsg_PacketReliable(func(pkg *dota.CSVCMsg_PacketReliable) error { return all(pkg) })
-	c.OnCSVCMsg_UserMessage(func(pkg *dota.CSVCMsg_UserMessage) error { return all(pkg) })
-	c.OnCSVCMsg_SendTable(func(pkg *dota.CSVCMsg_SendTable) error { return all(pkg) })
-	c.OnCSVCMsg_GameEvent(func(pkg *dota.CSVCMsg_GameEvent) error { return all(pkg) })
-	c.OnCSVCMsg_TempEntities(func(pkg *dota.CSVCMsg_TempEntities) error { return all(pkg) })
-	c.OnCSVCMsg_GameEventList(func(pkg *dota.CSVCMsg_GameEventList) error { return all(pkg) })
+	c.OnCSVCMsg_HLTVStatus(func(pkg *dota.CSVCMsg_HLTVStatus) error { return all(pkg) })
 	c.OnCSVCMsg_FullFrameSplit(func(pkg *dota.CSVCMsg_FullFrameSplit) error { return all(pkg) })
 	c.OnCUserMessageAchievementEvent(func(pkg *dota.CUserMessageAchievementEvent) error { return all(pkg) })
 	c.OnCUserMessageCloseCaption(func(pkg *dota.CUserMessageCloseCaption) error { return all(pkg) })

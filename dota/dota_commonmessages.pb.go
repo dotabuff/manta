@@ -675,6 +675,81 @@ func (m *CDOTAMsg_CoachHUDPing) GetTgtpath() string {
 	return ""
 }
 
+type CDOTAMsg_UnitOrder struct {
+	Issuer           *int32          `protobuf:"zigzag32,1,opt,name=issuer,def=-1" json:"issuer,omitempty"`
+	OrderType        *DotaunitorderT `protobuf:"varint,2,opt,name=order_type,enum=dota.DotaunitorderT,def=0" json:"order_type,omitempty"`
+	Units            []int32         `protobuf:"varint,3,rep,name=units" json:"units,omitempty"`
+	TargetIndex      *int32          `protobuf:"varint,4,opt,name=target_index" json:"target_index,omitempty"`
+	AbilityIndex     *int32          `protobuf:"varint,5,opt,name=ability_index" json:"ability_index,omitempty"`
+	Position         *CMsgVector     `protobuf:"bytes,6,opt,name=position" json:"position,omitempty"`
+	Queue            *bool           `protobuf:"varint,7,opt,name=queue" json:"queue,omitempty"`
+	SequenceNumber   *int32          `protobuf:"varint,8,opt,name=sequence_number" json:"sequence_number,omitempty"`
+	XXX_unrecognized []byte          `json:"-"`
+}
+
+func (m *CDOTAMsg_UnitOrder) Reset()         { *m = CDOTAMsg_UnitOrder{} }
+func (m *CDOTAMsg_UnitOrder) String() string { return proto.CompactTextString(m) }
+func (*CDOTAMsg_UnitOrder) ProtoMessage()    {}
+
+const Default_CDOTAMsg_UnitOrder_Issuer int32 = -1
+const Default_CDOTAMsg_UnitOrder_OrderType DotaunitorderT = DotaunitorderT_DOTA_UNIT_ORDER_NONE
+
+func (m *CDOTAMsg_UnitOrder) GetIssuer() int32 {
+	if m != nil && m.Issuer != nil {
+		return *m.Issuer
+	}
+	return Default_CDOTAMsg_UnitOrder_Issuer
+}
+
+func (m *CDOTAMsg_UnitOrder) GetOrderType() DotaunitorderT {
+	if m != nil && m.OrderType != nil {
+		return *m.OrderType
+	}
+	return Default_CDOTAMsg_UnitOrder_OrderType
+}
+
+func (m *CDOTAMsg_UnitOrder) GetUnits() []int32 {
+	if m != nil {
+		return m.Units
+	}
+	return nil
+}
+
+func (m *CDOTAMsg_UnitOrder) GetTargetIndex() int32 {
+	if m != nil && m.TargetIndex != nil {
+		return *m.TargetIndex
+	}
+	return 0
+}
+
+func (m *CDOTAMsg_UnitOrder) GetAbilityIndex() int32 {
+	if m != nil && m.AbilityIndex != nil {
+		return *m.AbilityIndex
+	}
+	return 0
+}
+
+func (m *CDOTAMsg_UnitOrder) GetPosition() *CMsgVector {
+	if m != nil {
+		return m.Position
+	}
+	return nil
+}
+
+func (m *CDOTAMsg_UnitOrder) GetQueue() bool {
+	if m != nil && m.Queue != nil {
+		return *m.Queue
+	}
+	return false
+}
+
+func (m *CDOTAMsg_UnitOrder) GetSequenceNumber() int32 {
+	if m != nil && m.SequenceNumber != nil {
+		return *m.SequenceNumber
+	}
+	return 0
+}
+
 func init() {
 	proto.RegisterEnum("dota.EDOTAChatWheelMessage", EDOTAChatWheelMessage_name, EDOTAChatWheelMessage_value)
 	proto.RegisterEnum("dota.EDOTAStatPopupTypes", EDOTAStatPopupTypes_name, EDOTAStatPopupTypes_value)

@@ -45,11 +45,7 @@ enum SVC_Messages {
 	svc_StopSound = 59;
 	svc_PeerList = 60;
 	svc_PacketReliable = 61;
-	svc_UserMessage = 62;
-	svc_SendTable = 63;
-	svc_GameEvent = 67;
-	svc_TempEntities = 68;
-	svc_GameEventList = 69;
+	svc_HLTVStatus = 62;
 	svc_FullFrameSplit = 70;
 }
 
@@ -399,6 +395,13 @@ message CSVCMsg_FullFrameSplit {
 	optional int32 section = 2;
 	optional int32 total = 3;
 	optional bytes data = 4;
+}
+
+message CSVCMsg_HLTVStatus {
+	optional string master = 1;
+	optional int32 clients = 2;
+	optional int32 slots = 3;
+	optional int32 proxies = 4;
 }
 
 message CSVCMsg_CmdKeyValues {

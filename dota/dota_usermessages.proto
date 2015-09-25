@@ -515,6 +515,7 @@ message CDOTAUserMsg_SpectatorPlayerUnitOrders {
 	optional int32 ability_index = 5;
 	optional CMsgVector position = 6;
 	optional bool queue = 7;
+	optional int32 sequence_number = 8;
 }
 
 message CDOTAUserMsg_NevermoreRequiem {

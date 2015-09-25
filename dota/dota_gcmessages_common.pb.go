@@ -600,6 +600,11 @@ const (
 	EDOTAGCMsg_k_EMsgSignOutWagerStats                                    EDOTAGCMsg = 8060
 	EDOTAGCMsg_k_EMsgGCToClientTopLeagueMatchesResponse                   EDOTAGCMsg = 8061
 	EDOTAGCMsg_k_EMsgGCToClientTopFriendMatchesResponse                   EDOTAGCMsg = 8062
+	EDOTAGCMsg_k_EMsgClientToGCMatchesMinimalRequest                      EDOTAGCMsg = 8063
+	EDOTAGCMsg_k_EMsgClientToGCMatchesMinimalResponse                     EDOTAGCMsg = 8064
+	EDOTAGCMsg_k_EMsgGCToGCGetProfileBadgePoints                          EDOTAGCMsg = 8065
+	EDOTAGCMsg_k_EMsgGCToGCGetProfileBadgePointsResponse                  EDOTAGCMsg = 8066
+	EDOTAGCMsg_k_EMsgGCToClientChatRegionsEnabled                         EDOTAGCMsg = 8067
 )
 
 var EDOTAGCMsg_name = map[int32]string{
@@ -1189,6 +1194,11 @@ var EDOTAGCMsg_name = map[int32]string{
 	8060: "k_EMsgSignOutWagerStats",
 	8061: "k_EMsgGCToClientTopLeagueMatchesResponse",
 	8062: "k_EMsgGCToClientTopFriendMatchesResponse",
+	8063: "k_EMsgClientToGCMatchesMinimalRequest",
+	8064: "k_EMsgClientToGCMatchesMinimalResponse",
+	8065: "k_EMsgGCToGCGetProfileBadgePoints",
+	8066: "k_EMsgGCToGCGetProfileBadgePointsResponse",
+	8067: "k_EMsgGCToClientChatRegionsEnabled",
 }
 var EDOTAGCMsg_value = map[string]int32{
 	"k_EMsgGCDOTABase":                                           7000,
@@ -1777,6 +1787,11 @@ var EDOTAGCMsg_value = map[string]int32{
 	"k_EMsgSignOutWagerStats":                                    8060,
 	"k_EMsgGCToClientTopLeagueMatchesResponse":                   8061,
 	"k_EMsgGCToClientTopFriendMatchesResponse":                   8062,
+	"k_EMsgClientToGCMatchesMinimalRequest":                      8063,
+	"k_EMsgClientToGCMatchesMinimalResponse":                     8064,
+	"k_EMsgGCToGCGetProfileBadgePoints":                          8065,
+	"k_EMsgGCToGCGetProfileBadgePointsResponse":                  8066,
+	"k_EMsgGCToClientChatRegionsEnabled":                         8067,
 }
 
 func (x EDOTAGCMsg) Enum() *EDOTAGCMsg {
@@ -3182,6 +3197,84 @@ func (x *DOTA_COMBATLOG_TYPES) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	*x = DOTA_COMBATLOG_TYPES(value)
+	return nil
+}
+
+type DOTAChatChannelTypeT int32
+
+const (
+	DOTAChatChannelTypeT_DOTAChannelType_Regional      DOTAChatChannelTypeT = 0
+	DOTAChatChannelTypeT_DOTAChannelType_Custom        DOTAChatChannelTypeT = 1
+	DOTAChatChannelTypeT_DOTAChannelType_Party         DOTAChatChannelTypeT = 2
+	DOTAChatChannelTypeT_DOTAChannelType_Lobby         DOTAChatChannelTypeT = 3
+	DOTAChatChannelTypeT_DOTAChannelType_Team          DOTAChatChannelTypeT = 4
+	DOTAChatChannelTypeT_DOTAChannelType_Guild         DOTAChatChannelTypeT = 5
+	DOTAChatChannelTypeT_DOTAChannelType_Fantasy       DOTAChatChannelTypeT = 6
+	DOTAChatChannelTypeT_DOTAChannelType_Whisper       DOTAChatChannelTypeT = 7
+	DOTAChatChannelTypeT_DOTAChannelType_Console       DOTAChatChannelTypeT = 8
+	DOTAChatChannelTypeT_DOTAChannelType_Tab           DOTAChatChannelTypeT = 9
+	DOTAChatChannelTypeT_DOTAChannelType_Invalid       DOTAChatChannelTypeT = 10
+	DOTAChatChannelTypeT_DOTAChannelType_GameAll       DOTAChatChannelTypeT = 11
+	DOTAChatChannelTypeT_DOTAChannelType_GameAllies    DOTAChatChannelTypeT = 12
+	DOTAChatChannelTypeT_DOTAChannelType_GameSpectator DOTAChatChannelTypeT = 13
+	DOTAChatChannelTypeT_DOTAChannelType_GameCoaching  DOTAChatChannelTypeT = 14
+	DOTAChatChannelTypeT_DOTAChannelType_Cafe          DOTAChatChannelTypeT = 15
+	DOTAChatChannelTypeT_DOTAChannelType_CustomGame    DOTAChatChannelTypeT = 16
+)
+
+var DOTAChatChannelTypeT_name = map[int32]string{
+	0:  "DOTAChannelType_Regional",
+	1:  "DOTAChannelType_Custom",
+	2:  "DOTAChannelType_Party",
+	3:  "DOTAChannelType_Lobby",
+	4:  "DOTAChannelType_Team",
+	5:  "DOTAChannelType_Guild",
+	6:  "DOTAChannelType_Fantasy",
+	7:  "DOTAChannelType_Whisper",
+	8:  "DOTAChannelType_Console",
+	9:  "DOTAChannelType_Tab",
+	10: "DOTAChannelType_Invalid",
+	11: "DOTAChannelType_GameAll",
+	12: "DOTAChannelType_GameAllies",
+	13: "DOTAChannelType_GameSpectator",
+	14: "DOTAChannelType_GameCoaching",
+	15: "DOTAChannelType_Cafe",
+	16: "DOTAChannelType_CustomGame",
+}
+var DOTAChatChannelTypeT_value = map[string]int32{
+	"DOTAChannelType_Regional":      0,
+	"DOTAChannelType_Custom":        1,
+	"DOTAChannelType_Party":         2,
+	"DOTAChannelType_Lobby":         3,
+	"DOTAChannelType_Team":          4,
+	"DOTAChannelType_Guild":         5,
+	"DOTAChannelType_Fantasy":       6,
+	"DOTAChannelType_Whisper":       7,
+	"DOTAChannelType_Console":       8,
+	"DOTAChannelType_Tab":           9,
+	"DOTAChannelType_Invalid":       10,
+	"DOTAChannelType_GameAll":       11,
+	"DOTAChannelType_GameAllies":    12,
+	"DOTAChannelType_GameSpectator": 13,
+	"DOTAChannelType_GameCoaching":  14,
+	"DOTAChannelType_Cafe":          15,
+	"DOTAChannelType_CustomGame":    16,
+}
+
+func (x DOTAChatChannelTypeT) Enum() *DOTAChatChannelTypeT {
+	p := new(DOTAChatChannelTypeT)
+	*p = x
+	return p
+}
+func (x DOTAChatChannelTypeT) String() string {
+	return proto.EnumName(DOTAChatChannelTypeT_name, int32(x))
+}
+func (x *DOTAChatChannelTypeT) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(DOTAChatChannelTypeT_value, data, "DOTAChatChannelTypeT")
+	if err != nil {
+		return err
+	}
+	*x = DOTAChatChannelTypeT(value)
 	return nil
 }
 
@@ -9382,6 +9475,7 @@ func init() {
 	proto.RegisterEnum("dota.Fantasy_Selection_Mode", Fantasy_Selection_Mode_name, Fantasy_Selection_Mode_value)
 	proto.RegisterEnum("dota.DOTA_TournamentEvents", DOTA_TournamentEvents_name, DOTA_TournamentEvents_value)
 	proto.RegisterEnum("dota.DOTA_COMBATLOG_TYPES", DOTA_COMBATLOG_TYPES_name, DOTA_COMBATLOG_TYPES_value)
+	proto.RegisterEnum("dota.DOTAChatChannelTypeT", DOTAChatChannelTypeT_name, DOTAChatChannelTypeT_value)
 	proto.RegisterEnum("dota.CSODOTAParty_State", CSODOTAParty_State_name, CSODOTAParty_State_value)
 	proto.RegisterEnum("dota.CSODOTALobby_State", CSODOTALobby_State_name, CSODOTALobby_State_value)
 	proto.RegisterEnum("dota.CSODOTALobby_LobbyType", CSODOTALobby_LobbyType_name, CSODOTALobby_LobbyType_value)

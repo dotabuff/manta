@@ -108,11 +108,7 @@ const (
 	SVC_Messages_svc_StopSound            SVC_Messages = 59
 	SVC_Messages_svc_PeerList             SVC_Messages = 60
 	SVC_Messages_svc_PacketReliable       SVC_Messages = 61
-	SVC_Messages_svc_UserMessage          SVC_Messages = 62
-	SVC_Messages_svc_SendTable            SVC_Messages = 63
-	SVC_Messages_svc_GameEvent            SVC_Messages = 67
-	SVC_Messages_svc_TempEntities         SVC_Messages = 68
-	SVC_Messages_svc_GameEventList        SVC_Messages = 69
+	SVC_Messages_svc_HLTVStatus           SVC_Messages = 62
 	SVC_Messages_svc_FullFrameSplit       SVC_Messages = 70
 )
 
@@ -139,11 +135,7 @@ var SVC_Messages_name = map[int32]string{
 	59: "svc_StopSound",
 	60: "svc_PeerList",
 	61: "svc_PacketReliable",
-	62: "svc_UserMessage",
-	63: "svc_SendTable",
-	67: "svc_GameEvent",
-	68: "svc_TempEntities",
-	69: "svc_GameEventList",
+	62: "svc_HLTVStatus",
 	70: "svc_FullFrameSplit",
 }
 var SVC_Messages_value = map[string]int32{
@@ -169,11 +161,7 @@ var SVC_Messages_value = map[string]int32{
 	"svc_StopSound":            59,
 	"svc_PeerList":             60,
 	"svc_PacketReliable":       61,
-	"svc_UserMessage":          62,
-	"svc_SendTable":            63,
-	"svc_GameEvent":            67,
-	"svc_TempEntities":         68,
-	"svc_GameEventList":        69,
+	"svc_HLTVStatus":           62,
 	"svc_FullFrameSplit":       70,
 }
 
@@ -2236,6 +2224,46 @@ func (m *CSVCMsg_FullFrameSplit) GetData() []byte {
 		return m.Data
 	}
 	return nil
+}
+
+type CSVCMsg_HLTVStatus struct {
+	Master           *string `protobuf:"bytes,1,opt,name=master" json:"master,omitempty"`
+	Clients          *int32  `protobuf:"varint,2,opt,name=clients" json:"clients,omitempty"`
+	Slots            *int32  `protobuf:"varint,3,opt,name=slots" json:"slots,omitempty"`
+	Proxies          *int32  `protobuf:"varint,4,opt,name=proxies" json:"proxies,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CSVCMsg_HLTVStatus) Reset()         { *m = CSVCMsg_HLTVStatus{} }
+func (m *CSVCMsg_HLTVStatus) String() string { return proto.CompactTextString(m) }
+func (*CSVCMsg_HLTVStatus) ProtoMessage()    {}
+
+func (m *CSVCMsg_HLTVStatus) GetMaster() string {
+	if m != nil && m.Master != nil {
+		return *m.Master
+	}
+	return ""
+}
+
+func (m *CSVCMsg_HLTVStatus) GetClients() int32 {
+	if m != nil && m.Clients != nil {
+		return *m.Clients
+	}
+	return 0
+}
+
+func (m *CSVCMsg_HLTVStatus) GetSlots() int32 {
+	if m != nil && m.Slots != nil {
+		return *m.Slots
+	}
+	return 0
+}
+
+func (m *CSVCMsg_HLTVStatus) GetProxies() int32 {
+	if m != nil && m.Proxies != nil {
+		return *m.Proxies
+	}
+	return 0
 }
 
 type CSVCMsg_CmdKeyValues struct {

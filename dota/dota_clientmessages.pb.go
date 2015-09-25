@@ -63,6 +63,7 @@ const (
 	EDotaClientMessages_DOTA_CM_ChallengeReroll                        EDotaClientMessages = 347
 	EDotaClientMessages_DOTA_CM_ClickedBuff                            EDotaClientMessages = 348
 	EDotaClientMessages_DOTA_CM_CoinWager                              EDotaClientMessages = 349
+	EDotaClientMessages_DOTA_CM_ExecuteOrders                          EDotaClientMessages = 350
 )
 
 var EDotaClientMessages_name = map[int32]string{
@@ -115,6 +116,7 @@ var EDotaClientMessages_name = map[int32]string{
 	347: "DOTA_CM_ChallengeReroll",
 	348: "DOTA_CM_ClickedBuff",
 	349: "DOTA_CM_CoinWager",
+	350: "DOTA_CM_ExecuteOrders",
 }
 var EDotaClientMessages_value = map[string]int32{
 	"DOTA_CM_MapLine":                                301,
@@ -166,6 +168,7 @@ var EDotaClientMessages_value = map[string]int32{
 	"DOTA_CM_ChallengeReroll":                        347,
 	"DOTA_CM_ClickedBuff":                            348,
 	"DOTA_CM_CoinWager":                              349,
+	"DOTA_CM_ExecuteOrders":                          350,
 }
 
 func (x EDotaClientMessages) Enum() *EDotaClientMessages {
@@ -1097,6 +1100,22 @@ func (m *CDOTAClientMsg_CoinWager) GetWagerAmount() uint32 {
 		return *m.WagerAmount
 	}
 	return 0
+}
+
+type CDOTAClientMsg_ExecuteOrders struct {
+	Orders           []*CDOTAMsg_UnitOrder `protobuf:"bytes,1,rep,name=orders" json:"orders,omitempty"`
+	XXX_unrecognized []byte                `json:"-"`
+}
+
+func (m *CDOTAClientMsg_ExecuteOrders) Reset()         { *m = CDOTAClientMsg_ExecuteOrders{} }
+func (m *CDOTAClientMsg_ExecuteOrders) String() string { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_ExecuteOrders) ProtoMessage()    {}
+
+func (m *CDOTAClientMsg_ExecuteOrders) GetOrders() []*CDOTAMsg_UnitOrder {
+	if m != nil {
+		return m.Orders
+	}
+	return nil
 }
 
 func init() {

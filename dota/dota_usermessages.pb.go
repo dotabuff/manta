@@ -2230,6 +2230,7 @@ type CDOTAUserMsg_SpectatorPlayerUnitOrders struct {
 	AbilityIndex     *int32      `protobuf:"varint,5,opt,name=ability_index" json:"ability_index,omitempty"`
 	Position         *CMsgVector `protobuf:"bytes,6,opt,name=position" json:"position,omitempty"`
 	Queue            *bool       `protobuf:"varint,7,opt,name=queue" json:"queue,omitempty"`
+	SequenceNumber   *int32      `protobuf:"varint,8,opt,name=sequence_number" json:"sequence_number,omitempty"`
 	XXX_unrecognized []byte      `json:"-"`
 }
 
@@ -2286,6 +2287,13 @@ func (m *CDOTAUserMsg_SpectatorPlayerUnitOrders) GetQueue() bool {
 		return *m.Queue
 	}
 	return false
+}
+
+func (m *CDOTAUserMsg_SpectatorPlayerUnitOrders) GetSequenceNumber() int32 {
+	if m != nil && m.SequenceNumber != nil {
+		return *m.SequenceNumber
+	}
+	return 0
 }
 
 type CDOTAUserMsg_NevermoreRequiem struct {

@@ -2628,6 +2628,62 @@ func (m *CMsgGCRemoveItemAttributeMsg) GetItemId() uint64 {
 	return 0
 }
 
+type CMsgGCNameItem struct {
+	SubjectItemId    *uint64 `protobuf:"varint,1,opt,name=subject_item_id" json:"subject_item_id,omitempty"`
+	ToolItemId       *uint64 `protobuf:"varint,2,opt,name=tool_item_id" json:"tool_item_id,omitempty"`
+	Name             *string `protobuf:"bytes,3,opt,name=name" json:"name,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CMsgGCNameItem) Reset()         { *m = CMsgGCNameItem{} }
+func (m *CMsgGCNameItem) String() string { return proto.CompactTextString(m) }
+func (*CMsgGCNameItem) ProtoMessage()    {}
+
+func (m *CMsgGCNameItem) GetSubjectItemId() uint64 {
+	if m != nil && m.SubjectItemId != nil {
+		return *m.SubjectItemId
+	}
+	return 0
+}
+
+func (m *CMsgGCNameItem) GetToolItemId() uint64 {
+	if m != nil && m.ToolItemId != nil {
+		return *m.ToolItemId
+	}
+	return 0
+}
+
+func (m *CMsgGCNameItem) GetName() string {
+	if m != nil && m.Name != nil {
+		return *m.Name
+	}
+	return ""
+}
+
+type CMsgGCSetItemPosition struct {
+	ItemId           *uint64 `protobuf:"varint,1,opt,name=item_id" json:"item_id,omitempty"`
+	NewPosition      *uint32 `protobuf:"varint,2,opt,name=new_position" json:"new_position,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CMsgGCSetItemPosition) Reset()         { *m = CMsgGCSetItemPosition{} }
+func (m *CMsgGCSetItemPosition) String() string { return proto.CompactTextString(m) }
+func (*CMsgGCSetItemPosition) ProtoMessage()    {}
+
+func (m *CMsgGCSetItemPosition) GetItemId() uint64 {
+	if m != nil && m.ItemId != nil {
+		return *m.ItemId
+	}
+	return 0
+}
+
+func (m *CMsgGCSetItemPosition) GetNewPosition() uint32 {
+	if m != nil && m.NewPosition != nil {
+		return *m.NewPosition
+	}
+	return 0
+}
+
 func init() {
 	proto.RegisterEnum("dota.EGCItemMsg", EGCItemMsg_name, EGCItemMsg_value)
 	proto.RegisterEnum("dota.EGCMsgResponse", EGCMsgResponse_name, EGCMsgResponse_value)

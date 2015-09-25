@@ -592,3 +592,14 @@ message CMsgGCRemoveItemAttributeMsg {
 	optional uint64 item_id = 1;
 }
 
+message CMsgGCNameItem {
+	optional uint64 subject_item_id = 1;
+	optional uint64 tool_item_id = 2;
+	optional string name = 3;
+}
+
+message CMsgGCSetItemPosition {
+	optional uint64 item_id = 1;
+	optional uint32 new_position = 2;
+}
+

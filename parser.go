@@ -112,12 +112,6 @@ func NewParser(buf []byte) (*Parser, error) {
 	parser.Callbacks.OnCMsgSource1LegacyGameEventList(parser.onCMsgSource1LegacyGameEventList)
 	parser.Callbacks.OnCMsgSource1LegacyGameEvent(parser.onCMsgSource1LegacyGameEvent)
 
-	// Panic if we see any of these
-	parser.Callbacks.OnCSVCMsg_GameEvent(func(m *dota.CSVCMsg_GameEvent) error {
-		_panicf("unexpected: saw a CSVCMsg_GameEvent")
-		return nil
-	})
-
 	// Maintains the value of parser.Tick
 	parser.Callbacks.OnCNETMsg_Tick(func(m *dota.CNETMsg_Tick) error {
 		parser.NetTick = m.GetTick()
