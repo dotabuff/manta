@@ -94,6 +94,7 @@ const (
 	EGCItemMsg_k_EMsgGCResetStrangeGemCount                   EGCItemMsg = 1091
 	EGCItemMsg_k_EMsgGCRequestCrateItems                      EGCItemMsg = 1092
 	EGCItemMsg_k_EMsgGCRequestCrateItemsResponse              EGCItemMsg = 1093
+	EGCItemMsg_k_EMsgGCExtractGemsResponse                    EGCItemMsg = 1094
 	EGCItemMsg_k_EMsgGCServerUseItemRequest                   EGCItemMsg = 1103
 	EGCItemMsg_k_EMsgGCAddGiftItem                            EGCItemMsg = 1104
 	EGCItemMsg_k_EMsgGCRemoveItemGiftMessage                  EGCItemMsg = 1105
@@ -269,6 +270,7 @@ var EGCItemMsg_name = map[int32]string{
 	1091: "k_EMsgGCResetStrangeGemCount",
 	1092: "k_EMsgGCRequestCrateItems",
 	1093: "k_EMsgGCRequestCrateItemsResponse",
+	1094: "k_EMsgGCExtractGemsResponse",
 	1103: "k_EMsgGCServerUseItemRequest",
 	1104: "k_EMsgGCAddGiftItem",
 	1105: "k_EMsgGCRemoveItemGiftMessage",
@@ -443,6 +445,7 @@ var EGCItemMsg_value = map[string]int32{
 	"k_EMsgGCResetStrangeGemCount":                   1091,
 	"k_EMsgGCRequestCrateItems":                      1092,
 	"k_EMsgGCRequestCrateItemsResponse":              1093,
+	"k_EMsgGCExtractGemsResponse":                    1094,
 	"k_EMsgGCServerUseItemRequest":                   1103,
 	"k_EMsgGCAddGiftItem":                            1104,
 	"k_EMsgGCRemoveItemGiftMessage":                  1105,

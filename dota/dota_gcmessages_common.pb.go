@@ -605,6 +605,7 @@ const (
 	EDOTAGCMsg_k_EMsgGCToGCGetProfileBadgePoints                          EDOTAGCMsg = 8065
 	EDOTAGCMsg_k_EMsgGCToGCGetProfileBadgePointsResponse                  EDOTAGCMsg = 8066
 	EDOTAGCMsg_k_EMsgGCToClientChatRegionsEnabled                         EDOTAGCMsg = 8067
+	EDOTAGCMsg_k_EMsgClientToGCPingData                                   EDOTAGCMsg = 8068
 )
 
 var EDOTAGCMsg_name = map[int32]string{
@@ -1199,6 +1200,7 @@ var EDOTAGCMsg_name = map[int32]string{
 	8065: "k_EMsgGCToGCGetProfileBadgePoints",
 	8066: "k_EMsgGCToGCGetProfileBadgePointsResponse",
 	8067: "k_EMsgGCToClientChatRegionsEnabled",
+	8068: "k_EMsgClientToGCPingData",
 }
 var EDOTAGCMsg_value = map[string]int32{
 	"k_EMsgGCDOTABase":                                           7000,
@@ -1792,6 +1794,7 @@ var EDOTAGCMsg_value = map[string]int32{
 	"k_EMsgGCToGCGetProfileBadgePoints":                          8065,
 	"k_EMsgGCToGCGetProfileBadgePointsResponse":                  8066,
 	"k_EMsgGCToClientChatRegionsEnabled":                         8067,
+	"k_EMsgClientToGCPingData":                                   8068,
 }
 
 func (x EDOTAGCMsg) Enum() *EDOTAGCMsg {
@@ -1808,6 +1811,39 @@ func (x *EDOTAGCMsg) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	*x = EDOTAGCMsg(value)
+	return nil
+}
+
+type ESpecialPingValue int32
+
+const (
+	ESpecialPingValue_k_ESpecialPingValue_NoData ESpecialPingValue = 16382
+	ESpecialPingValue_k_ESpecialPingValue_Failed ESpecialPingValue = 16383
+)
+
+var ESpecialPingValue_name = map[int32]string{
+	16382: "k_ESpecialPingValue_NoData",
+	16383: "k_ESpecialPingValue_Failed",
+}
+var ESpecialPingValue_value = map[string]int32{
+	"k_ESpecialPingValue_NoData": 16382,
+	"k_ESpecialPingValue_Failed": 16383,
+}
+
+func (x ESpecialPingValue) Enum() *ESpecialPingValue {
+	p := new(ESpecialPingValue)
+	*p = x
+	return p
+}
+func (x ESpecialPingValue) String() string {
+	return proto.EnumName(ESpecialPingValue_name, int32(x))
+}
+func (x *ESpecialPingValue) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(ESpecialPingValue_value, data, "ESpecialPingValue")
+	if err != nil {
+		return err
+	}
+	*x = ESpecialPingValue(value)
 	return nil
 }
 
@@ -4046,6 +4082,8 @@ func (m *CSODOTAGameAccountClient) GetPlayTimeLevel() uint32 {
 type CSODOTAPartyMember struct {
 	PartnerType      *PartnerAccountType `protobuf:"varint,1,opt,name=partner_type,enum=dota.PartnerAccountType,def=0" json:"partner_type,omitempty"`
 	IsCoach          *bool               `protobuf:"varint,2,opt,name=is_coach" json:"is_coach,omitempty"`
+	RegionPingCodes  []uint32            `protobuf:"varint,4,rep,packed,name=region_ping_codes" json:"region_ping_codes,omitempty"`
+	RegionPingTimes  []uint32            `protobuf:"varint,5,rep,packed,name=region_ping_times" json:"region_ping_times,omitempty"`
 	XXX_unrecognized []byte              `json:"-"`
 }
 
@@ -4067,6 +4105,20 @@ func (m *CSODOTAPartyMember) GetIsCoach() bool {
 		return *m.IsCoach
 	}
 	return false
+}
+
+func (m *CSODOTAPartyMember) GetRegionPingCodes() []uint32 {
+	if m != nil {
+		return m.RegionPingCodes
+	}
+	return nil
+}
+
+func (m *CSODOTAPartyMember) GetRegionPingTimes() []uint32 {
+	if m != nil {
+		return m.RegionPingTimes
+	}
+	return nil
 }
 
 type CSODOTAParty struct {
@@ -5323,6 +5375,7 @@ type CSODOTALobby struct {
 	LeagueSeriesId             *uint32                       `protobuf:"varint,78,opt,name=league_series_id" json:"league_series_id,omitempty"`
 	LeagueGameId               *uint32                       `protobuf:"varint,79,opt,name=league_game_id" json:"league_game_id,omitempty"`
 	CustomGameTimestamp        *uint32                       `protobuf:"fixed32,80,opt,name=custom_game_timestamp" json:"custom_game_timestamp,omitempty"`
+	PreviousSeriesMatches      []uint64                      `protobuf:"varint,81,rep,name=previous_series_matches" json:"previous_series_matches,omitempty"`
 	XXX_unrecognized           []byte                        `json:"-"`
 }
 
@@ -5807,6 +5860,13 @@ func (m *CSODOTALobby) GetCustomGameTimestamp() uint32 {
 		return *m.CustomGameTimestamp
 	}
 	return 0
+}
+
+func (m *CSODOTALobby) GetPreviousSeriesMatches() []uint64 {
+	if m != nil {
+		return m.PreviousSeriesMatches
+	}
+	return nil
 }
 
 type CSODOTALobby_CExtraMsg struct {
@@ -7277,6 +7337,7 @@ type CMsgDOTACombatLogEntry struct {
 	IsTargetBuilding   *bool                 `protobuf:"varint,37,opt,name=is_target_building" json:"is_target_building,omitempty"`
 	NeutralCampType    *uint32               `protobuf:"varint,38,opt,name=neutral_camp_type" json:"neutral_camp_type,omitempty"`
 	RuneType           *uint32               `protobuf:"varint,39,opt,name=rune_type" json:"rune_type,omitempty"`
+	AssistPlayers      []uint32              `protobuf:"varint,40,rep,name=assist_players" json:"assist_players,omitempty"`
 	XXX_unrecognized   []byte                `json:"-"`
 }
 
@@ -7557,6 +7618,13 @@ func (m *CMsgDOTACombatLogEntry) GetRuneType() uint32 {
 		return *m.RuneType
 	}
 	return 0
+}
+
+func (m *CMsgDOTACombatLogEntry) GetAssistPlayers() []uint32 {
+	if m != nil {
+		return m.AssistPlayers
+	}
+	return nil
 }
 
 type CMsgDOTAProfileCard struct {
@@ -9447,6 +9515,7 @@ func (m *CMsgDOTARealtimeGameStatsTerse_GraphData) GetGraphGold() []int32 {
 
 func init() {
 	proto.RegisterEnum("dota.EDOTAGCMsg", EDOTAGCMsg_name, EDOTAGCMsg_value)
+	proto.RegisterEnum("dota.ESpecialPingValue", ESpecialPingValue_name, ESpecialPingValue_value)
 	proto.RegisterEnum("dota.DOTA_GameMode", DOTA_GameMode_name, DOTA_GameMode_value)
 	proto.RegisterEnum("dota.DOTA_GameState", DOTA_GameState_name, DOTA_GameState_value)
 	proto.RegisterEnum("dota.DOTA_GC_TEAM", DOTA_GC_TEAM_name, DOTA_GC_TEAM_value)

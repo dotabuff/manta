@@ -1600,6 +1600,7 @@ type CMsgGCPlayerInfo_PlayerInfo struct {
 	TeamTag          *string `protobuf:"bytes,7,opt,name=team_tag" json:"team_tag,omitempty"`
 	Sponsor          *string `protobuf:"bytes,8,opt,name=sponsor" json:"sponsor,omitempty"`
 	IsLocked         *bool   `protobuf:"varint,9,opt,name=is_locked" json:"is_locked,omitempty"`
+	IsPro            *bool   `protobuf:"varint,10,opt,name=is_pro" json:"is_pro,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
@@ -1666,6 +1667,13 @@ func (m *CMsgGCPlayerInfo_PlayerInfo) GetSponsor() string {
 func (m *CMsgGCPlayerInfo_PlayerInfo) GetIsLocked() bool {
 	if m != nil && m.IsLocked != nil {
 		return *m.IsLocked
+	}
+	return false
+}
+
+func (m *CMsgGCPlayerInfo_PlayerInfo) GetIsPro() bool {
+	if m != nil && m.IsPro != nil {
+		return *m.IsPro
 	}
 	return false
 }

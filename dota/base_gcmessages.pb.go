@@ -42,6 +42,7 @@ It has these top-level messages:
 	CMsgGCStorePurchaseInit
 	CMsgGCStorePurchaseInitResponse
 	CMsgSystemBroadcast
+	CMsgClientPingData
 	CMsgInviteToParty
 	CMsgInviteToLobby
 	CMsgInvitationCreated
@@ -117,6 +118,7 @@ It has these top-level messages:
 	CMsgGCClientMarketDataEntry
 	CMsgGCClientMarketData
 	CMsgExtractGems
+	CMsgExtractGemsResponse
 	CMsgAddSocket
 	CMsgAddSocketResponse
 	CMsgAddItemToSocketData
@@ -331,6 +333,138 @@ func (x *GC_BannedWordType) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
+type CMsgExtractGemsResponse_EExtractGems int32
+
+const (
+	CMsgExtractGemsResponse_k_ExtractGems_Succeeded                  CMsgExtractGemsResponse_EExtractGems = 0
+	CMsgExtractGemsResponse_k_ExtractGems_Failed_ToolIsInvalid       CMsgExtractGemsResponse_EExtractGems = 1
+	CMsgExtractGemsResponse_k_ExtractGems_Failed_ItemIsInvalid       CMsgExtractGemsResponse_EExtractGems = 2
+	CMsgExtractGemsResponse_k_ExtractGems_Failed_ToolCannotRemoveGem CMsgExtractGemsResponse_EExtractGems = 3
+	CMsgExtractGemsResponse_k_ExtractGems_Failed_FailedToRemoveGem   CMsgExtractGemsResponse_EExtractGems = 4
+)
+
+var CMsgExtractGemsResponse_EExtractGems_name = map[int32]string{
+	0: "k_ExtractGems_Succeeded",
+	1: "k_ExtractGems_Failed_ToolIsInvalid",
+	2: "k_ExtractGems_Failed_ItemIsInvalid",
+	3: "k_ExtractGems_Failed_ToolCannotRemoveGem",
+	4: "k_ExtractGems_Failed_FailedToRemoveGem",
+}
+var CMsgExtractGemsResponse_EExtractGems_value = map[string]int32{
+	"k_ExtractGems_Succeeded":                  0,
+	"k_ExtractGems_Failed_ToolIsInvalid":       1,
+	"k_ExtractGems_Failed_ItemIsInvalid":       2,
+	"k_ExtractGems_Failed_ToolCannotRemoveGem": 3,
+	"k_ExtractGems_Failed_FailedToRemoveGem":   4,
+}
+
+func (x CMsgExtractGemsResponse_EExtractGems) Enum() *CMsgExtractGemsResponse_EExtractGems {
+	p := new(CMsgExtractGemsResponse_EExtractGems)
+	*p = x
+	return p
+}
+func (x CMsgExtractGemsResponse_EExtractGems) String() string {
+	return proto.EnumName(CMsgExtractGemsResponse_EExtractGems_name, int32(x))
+}
+func (x *CMsgExtractGemsResponse_EExtractGems) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(CMsgExtractGemsResponse_EExtractGems_value, data, "CMsgExtractGemsResponse_EExtractGems")
+	if err != nil {
+		return err
+	}
+	*x = CMsgExtractGemsResponse_EExtractGems(value)
+	return nil
+}
+
+type CMsgAddSocketResponse_EAddSocket int32
+
+const (
+	CMsgAddSocketResponse_k_AddSocket_Succeeded                   CMsgAddSocketResponse_EAddSocket = 0
+	CMsgAddSocketResponse_k_AddSocket_Failed_ToolIsInvalid        CMsgAddSocketResponse_EAddSocket = 1
+	CMsgAddSocketResponse_k_AddSocket_Failed_ItemCannotBeSocketed CMsgAddSocketResponse_EAddSocket = 2
+	CMsgAddSocketResponse_k_AddSocket_Failed_FailedToAddSocket    CMsgAddSocketResponse_EAddSocket = 3
+)
+
+var CMsgAddSocketResponse_EAddSocket_name = map[int32]string{
+	0: "k_AddSocket_Succeeded",
+	1: "k_AddSocket_Failed_ToolIsInvalid",
+	2: "k_AddSocket_Failed_ItemCannotBeSocketed",
+	3: "k_AddSocket_Failed_FailedToAddSocket",
+}
+var CMsgAddSocketResponse_EAddSocket_value = map[string]int32{
+	"k_AddSocket_Succeeded":                   0,
+	"k_AddSocket_Failed_ToolIsInvalid":        1,
+	"k_AddSocket_Failed_ItemCannotBeSocketed": 2,
+	"k_AddSocket_Failed_FailedToAddSocket":    3,
+}
+
+func (x CMsgAddSocketResponse_EAddSocket) Enum() *CMsgAddSocketResponse_EAddSocket {
+	p := new(CMsgAddSocketResponse_EAddSocket)
+	*p = x
+	return p
+}
+func (x CMsgAddSocketResponse_EAddSocket) String() string {
+	return proto.EnumName(CMsgAddSocketResponse_EAddSocket_name, int32(x))
+}
+func (x *CMsgAddSocketResponse_EAddSocket) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(CMsgAddSocketResponse_EAddSocket_value, data, "CMsgAddSocketResponse_EAddSocket")
+	if err != nil {
+		return err
+	}
+	*x = CMsgAddSocketResponse_EAddSocket(value)
+	return nil
+}
+
+type CMsgAddItemToSocketResponse_EAddGem int32
+
+const (
+	CMsgAddItemToSocketResponse_k_AddGem_Succeeded                           CMsgAddItemToSocketResponse_EAddGem = 0
+	CMsgAddItemToSocketResponse_k_AddGem_Failed_GemIsInvalid                 CMsgAddItemToSocketResponse_EAddGem = 1
+	CMsgAddItemToSocketResponse_k_AddGem_Failed_ItemIsInvalid                CMsgAddItemToSocketResponse_EAddGem = 2
+	CMsgAddItemToSocketResponse_k_AddGem_Failed_FailedToAddGem               CMsgAddItemToSocketResponse_EAddGem = 3
+	CMsgAddItemToSocketResponse_k_AddGem_Failed_InvalidGemTypeForSocket      CMsgAddItemToSocketResponse_EAddGem = 4
+	CMsgAddItemToSocketResponse_k_AddGem_Failed_InvalidGemTypeForHero        CMsgAddItemToSocketResponse_EAddGem = 5
+	CMsgAddItemToSocketResponse_k_AddGem_Failed_InvalidGemTypeForSlot        CMsgAddItemToSocketResponse_EAddGem = 6
+	CMsgAddItemToSocketResponse_k_AddGem_Failed_SocketContainsUnremovableGem CMsgAddItemToSocketResponse_EAddGem = 7
+)
+
+var CMsgAddItemToSocketResponse_EAddGem_name = map[int32]string{
+	0: "k_AddGem_Succeeded",
+	1: "k_AddGem_Failed_GemIsInvalid",
+	2: "k_AddGem_Failed_ItemIsInvalid",
+	3: "k_AddGem_Failed_FailedToAddGem",
+	4: "k_AddGem_Failed_InvalidGemTypeForSocket",
+	5: "k_AddGem_Failed_InvalidGemTypeForHero",
+	6: "k_AddGem_Failed_InvalidGemTypeForSlot",
+	7: "k_AddGem_Failed_SocketContainsUnremovableGem",
+}
+var CMsgAddItemToSocketResponse_EAddGem_value = map[string]int32{
+	"k_AddGem_Succeeded":                           0,
+	"k_AddGem_Failed_GemIsInvalid":                 1,
+	"k_AddGem_Failed_ItemIsInvalid":                2,
+	"k_AddGem_Failed_FailedToAddGem":               3,
+	"k_AddGem_Failed_InvalidGemTypeForSocket":      4,
+	"k_AddGem_Failed_InvalidGemTypeForHero":        5,
+	"k_AddGem_Failed_InvalidGemTypeForSlot":        6,
+	"k_AddGem_Failed_SocketContainsUnremovableGem": 7,
+}
+
+func (x CMsgAddItemToSocketResponse_EAddGem) Enum() *CMsgAddItemToSocketResponse_EAddGem {
+	p := new(CMsgAddItemToSocketResponse_EAddGem)
+	*p = x
+	return p
+}
+func (x CMsgAddItemToSocketResponse_EAddGem) String() string {
+	return proto.EnumName(CMsgAddItemToSocketResponse_EAddGem_name, int32(x))
+}
+func (x *CMsgAddItemToSocketResponse_EAddGem) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(CMsgAddItemToSocketResponse_EAddGem_value, data, "CMsgAddItemToSocketResponse_EAddGem")
+	if err != nil {
+		return err
+	}
+	*x = CMsgAddItemToSocketResponse_EAddGem(value)
+	return nil
+}
+
 type CGCStorePurchaseInit_LineItem struct {
 	ItemDefId           *uint32 `protobuf:"varint,1,opt,name=item_def_id" json:"item_def_id,omitempty"`
 	Quantity            *uint32 `protobuf:"varint,2,opt,name=quantity" json:"quantity,omitempty"`
@@ -459,12 +593,53 @@ func (m *CMsgSystemBroadcast) GetMessage() string {
 	return ""
 }
 
+type CMsgClientPingData struct {
+	RelayCodes       []uint32 `protobuf:"fixed32,4,rep,packed,name=relay_codes" json:"relay_codes,omitempty"`
+	RelayPings       []uint32 `protobuf:"varint,5,rep,packed,name=relay_pings" json:"relay_pings,omitempty"`
+	RegionCodes      []uint32 `protobuf:"varint,8,rep,packed,name=region_codes" json:"region_codes,omitempty"`
+	RegionPings      []uint32 `protobuf:"varint,9,rep,packed,name=region_pings" json:"region_pings,omitempty"`
+	XXX_unrecognized []byte   `json:"-"`
+}
+
+func (m *CMsgClientPingData) Reset()         { *m = CMsgClientPingData{} }
+func (m *CMsgClientPingData) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientPingData) ProtoMessage()    {}
+
+func (m *CMsgClientPingData) GetRelayCodes() []uint32 {
+	if m != nil {
+		return m.RelayCodes
+	}
+	return nil
+}
+
+func (m *CMsgClientPingData) GetRelayPings() []uint32 {
+	if m != nil {
+		return m.RelayPings
+	}
+	return nil
+}
+
+func (m *CMsgClientPingData) GetRegionCodes() []uint32 {
+	if m != nil {
+		return m.RegionCodes
+	}
+	return nil
+}
+
+func (m *CMsgClientPingData) GetRegionPings() []uint32 {
+	if m != nil {
+		return m.RegionPings
+	}
+	return nil
+}
+
 type CMsgInviteToParty struct {
-	SteamId          *uint64 `protobuf:"fixed64,1,opt,name=steam_id" json:"steam_id,omitempty"`
-	ClientVersion    *uint32 `protobuf:"varint,2,opt,name=client_version" json:"client_version,omitempty"`
-	TeamId           *uint32 `protobuf:"varint,3,opt,name=team_id" json:"team_id,omitempty"`
-	AsCoach          *bool   `protobuf:"varint,4,opt,name=as_coach" json:"as_coach,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	SteamId          *uint64             `protobuf:"fixed64,1,opt,name=steam_id" json:"steam_id,omitempty"`
+	ClientVersion    *uint32             `protobuf:"varint,2,opt,name=client_version" json:"client_version,omitempty"`
+	TeamId           *uint32             `protobuf:"varint,3,opt,name=team_id" json:"team_id,omitempty"`
+	AsCoach          *bool               `protobuf:"varint,4,opt,name=as_coach" json:"as_coach,omitempty"`
+	PingData         *CMsgClientPingData `protobuf:"bytes,5,opt,name=ping_data" json:"ping_data,omitempty"`
+	XXX_unrecognized []byte              `json:"-"`
 }
 
 func (m *CMsgInviteToParty) Reset()         { *m = CMsgInviteToParty{} }
@@ -497,6 +672,13 @@ func (m *CMsgInviteToParty) GetAsCoach() bool {
 		return *m.AsCoach
 	}
 	return false
+}
+
+func (m *CMsgInviteToParty) GetPingData() *CMsgClientPingData {
+	if m != nil {
+		return m.PingData
+	}
+	return nil
 }
 
 type CMsgInviteToLobby struct {
@@ -548,14 +730,15 @@ func (m *CMsgInvitationCreated) GetSteamId() uint64 {
 }
 
 type CMsgPartyInviteResponse struct {
-	PartyId          *uint64 `protobuf:"varint,1,opt,name=party_id" json:"party_id,omitempty"`
-	Accept           *bool   `protobuf:"varint,2,opt,name=accept" json:"accept,omitempty"`
-	ClientVersion    *uint32 `protobuf:"varint,3,opt,name=client_version" json:"client_version,omitempty"`
-	TeamId           *uint32 `protobuf:"varint,4,opt,name=team_id" json:"team_id,omitempty"`
-	AsCoach          *bool   `protobuf:"varint,5,opt,name=as_coach" json:"as_coach,omitempty"`
-	GameLanguageEnum *uint32 `protobuf:"varint,6,opt,name=game_language_enum" json:"game_language_enum,omitempty"`
-	GameLanguageName *string `protobuf:"bytes,7,opt,name=game_language_name" json:"game_language_name,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	PartyId          *uint64             `protobuf:"varint,1,opt,name=party_id" json:"party_id,omitempty"`
+	Accept           *bool               `protobuf:"varint,2,opt,name=accept" json:"accept,omitempty"`
+	ClientVersion    *uint32             `protobuf:"varint,3,opt,name=client_version" json:"client_version,omitempty"`
+	TeamId           *uint32             `protobuf:"varint,4,opt,name=team_id" json:"team_id,omitempty"`
+	AsCoach          *bool               `protobuf:"varint,5,opt,name=as_coach" json:"as_coach,omitempty"`
+	GameLanguageEnum *uint32             `protobuf:"varint,6,opt,name=game_language_enum" json:"game_language_enum,omitempty"`
+	GameLanguageName *string             `protobuf:"bytes,7,opt,name=game_language_name" json:"game_language_name,omitempty"`
+	PingData         *CMsgClientPingData `protobuf:"bytes,8,opt,name=ping_data" json:"ping_data,omitempty"`
+	XXX_unrecognized []byte              `json:"-"`
 }
 
 func (m *CMsgPartyInviteResponse) Reset()         { *m = CMsgPartyInviteResponse{} }
@@ -609,6 +792,13 @@ func (m *CMsgPartyInviteResponse) GetGameLanguageName() string {
 		return *m.GameLanguageName
 	}
 	return ""
+}
+
+func (m *CMsgPartyInviteResponse) GetPingData() *CMsgClientPingData {
+	if m != nil {
+		return m.PingData
+	}
+	return nil
 }
 
 type CMsgLobbyInviteResponse struct {
@@ -2921,12 +3111,15 @@ func (m *CMsgGCClientMarketData) GetEntries() []*CMsgGCClientMarketDataEntry {
 type CMsgExtractGems struct {
 	ToolItemId       *uint64 `protobuf:"varint,1,opt,name=tool_item_id" json:"tool_item_id,omitempty"`
 	ItemItemId       *uint64 `protobuf:"varint,2,opt,name=item_item_id" json:"item_item_id,omitempty"`
+	ItemSocketId     *uint32 `protobuf:"varint,3,opt,name=item_socket_id,def=65535" json:"item_socket_id,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
 func (m *CMsgExtractGems) Reset()         { *m = CMsgExtractGems{} }
 func (m *CMsgExtractGems) String() string { return proto.CompactTextString(m) }
 func (*CMsgExtractGems) ProtoMessage()    {}
+
+const Default_CMsgExtractGems_ItemSocketId uint32 = 65535
 
 func (m *CMsgExtractGems) GetToolItemId() uint64 {
 	if m != nil && m.ToolItemId != nil {
@@ -2940,6 +3133,39 @@ func (m *CMsgExtractGems) GetItemItemId() uint64 {
 		return *m.ItemItemId
 	}
 	return 0
+}
+
+func (m *CMsgExtractGems) GetItemSocketId() uint32 {
+	if m != nil && m.ItemSocketId != nil {
+		return *m.ItemSocketId
+	}
+	return Default_CMsgExtractGems_ItemSocketId
+}
+
+type CMsgExtractGemsResponse struct {
+	ItemId           *uint64                               `protobuf:"varint,1,opt,name=item_id" json:"item_id,omitempty"`
+	Response         *CMsgExtractGemsResponse_EExtractGems `protobuf:"varint,2,opt,name=response,enum=dota.CMsgExtractGemsResponse_EExtractGems,def=0" json:"response,omitempty"`
+	XXX_unrecognized []byte                                `json:"-"`
+}
+
+func (m *CMsgExtractGemsResponse) Reset()         { *m = CMsgExtractGemsResponse{} }
+func (m *CMsgExtractGemsResponse) String() string { return proto.CompactTextString(m) }
+func (*CMsgExtractGemsResponse) ProtoMessage()    {}
+
+const Default_CMsgExtractGemsResponse_Response CMsgExtractGemsResponse_EExtractGems = CMsgExtractGemsResponse_k_ExtractGems_Succeeded
+
+func (m *CMsgExtractGemsResponse) GetItemId() uint64 {
+	if m != nil && m.ItemId != nil {
+		return *m.ItemId
+	}
+	return 0
+}
+
+func (m *CMsgExtractGemsResponse) GetResponse() CMsgExtractGemsResponse_EExtractGems {
+	if m != nil && m.Response != nil {
+		return *m.Response
+	}
+	return Default_CMsgExtractGemsResponse_Response
 }
 
 type CMsgAddSocket struct {
@@ -2975,14 +3201,17 @@ func (m *CMsgAddSocket) GetUnusual() bool {
 }
 
 type CMsgAddSocketResponse struct {
-	ItemId             *uint64  `protobuf:"varint,1,opt,name=item_id" json:"item_id,omitempty"`
-	UpdatedSocketIndex []uint32 `protobuf:"varint,2,rep,name=updated_socket_index" json:"updated_socket_index,omitempty"`
-	XXX_unrecognized   []byte   `json:"-"`
+	ItemId             *uint64                           `protobuf:"varint,1,opt,name=item_id" json:"item_id,omitempty"`
+	UpdatedSocketIndex []uint32                          `protobuf:"varint,2,rep,name=updated_socket_index" json:"updated_socket_index,omitempty"`
+	Response           *CMsgAddSocketResponse_EAddSocket `protobuf:"varint,3,opt,name=response,enum=dota.CMsgAddSocketResponse_EAddSocket,def=0" json:"response,omitempty"`
+	XXX_unrecognized   []byte                            `json:"-"`
 }
 
 func (m *CMsgAddSocketResponse) Reset()         { *m = CMsgAddSocketResponse{} }
 func (m *CMsgAddSocketResponse) String() string { return proto.CompactTextString(m) }
 func (*CMsgAddSocketResponse) ProtoMessage()    {}
+
+const Default_CMsgAddSocketResponse_Response CMsgAddSocketResponse_EAddSocket = CMsgAddSocketResponse_k_AddSocket_Succeeded
 
 func (m *CMsgAddSocketResponse) GetItemId() uint64 {
 	if m != nil && m.ItemId != nil {
@@ -2996,6 +3225,13 @@ func (m *CMsgAddSocketResponse) GetUpdatedSocketIndex() []uint32 {
 		return m.UpdatedSocketIndex
 	}
 	return nil
+}
+
+func (m *CMsgAddSocketResponse) GetResponse() CMsgAddSocketResponse_EAddSocket {
+	if m != nil && m.Response != nil {
+		return *m.Response
+	}
+	return Default_CMsgAddSocketResponse_Response
 }
 
 type CMsgAddItemToSocketData struct {
@@ -3047,14 +3283,17 @@ func (m *CMsgAddItemToSocket) GetGemsToSocket() []*CMsgAddItemToSocketData {
 }
 
 type CMsgAddItemToSocketResponse struct {
-	ItemItemId         *uint64  `protobuf:"varint,1,opt,name=item_item_id" json:"item_item_id,omitempty"`
-	UpdatedSocketIndex []uint32 `protobuf:"varint,2,rep,name=updated_socket_index" json:"updated_socket_index,omitempty"`
-	XXX_unrecognized   []byte   `json:"-"`
+	ItemItemId         *uint64                              `protobuf:"varint,1,opt,name=item_item_id" json:"item_item_id,omitempty"`
+	UpdatedSocketIndex []uint32                             `protobuf:"varint,2,rep,name=updated_socket_index" json:"updated_socket_index,omitempty"`
+	Response           *CMsgAddItemToSocketResponse_EAddGem `protobuf:"varint,3,opt,name=response,enum=dota.CMsgAddItemToSocketResponse_EAddGem,def=0" json:"response,omitempty"`
+	XXX_unrecognized   []byte                               `json:"-"`
 }
 
 func (m *CMsgAddItemToSocketResponse) Reset()         { *m = CMsgAddItemToSocketResponse{} }
 func (m *CMsgAddItemToSocketResponse) String() string { return proto.CompactTextString(m) }
 func (*CMsgAddItemToSocketResponse) ProtoMessage()    {}
+
+const Default_CMsgAddItemToSocketResponse_Response CMsgAddItemToSocketResponse_EAddGem = CMsgAddItemToSocketResponse_k_AddGem_Succeeded
 
 func (m *CMsgAddItemToSocketResponse) GetItemItemId() uint64 {
 	if m != nil && m.ItemItemId != nil {
@@ -3068,6 +3307,13 @@ func (m *CMsgAddItemToSocketResponse) GetUpdatedSocketIndex() []uint32 {
 		return m.UpdatedSocketIndex
 	}
 	return nil
+}
+
+func (m *CMsgAddItemToSocketResponse) GetResponse() CMsgAddItemToSocketResponse_EAddGem {
+	if m != nil && m.Response != nil {
+		return *m.Response
+	}
+	return Default_CMsgAddItemToSocketResponse_Response
 }
 
 type CMsgResetStrangeGemCount struct {
@@ -3099,4 +3345,7 @@ func init() {
 	proto.RegisterEnum("dota.EGCBaseProtoObjectTypes", EGCBaseProtoObjectTypes_name, EGCBaseProtoObjectTypes_value)
 	proto.RegisterEnum("dota.ECustomGameInstallStatus", ECustomGameInstallStatus_name, ECustomGameInstallStatus_value)
 	proto.RegisterEnum("dota.GC_BannedWordType", GC_BannedWordType_name, GC_BannedWordType_value)
+	proto.RegisterEnum("dota.CMsgExtractGemsResponse_EExtractGems", CMsgExtractGemsResponse_EExtractGems_name, CMsgExtractGemsResponse_EExtractGems_value)
+	proto.RegisterEnum("dota.CMsgAddSocketResponse_EAddSocket", CMsgAddSocketResponse_EAddSocket_name, CMsgAddSocketResponse_EAddSocket_value)
+	proto.RegisterEnum("dota.CMsgAddItemToSocketResponse_EAddGem", CMsgAddItemToSocketResponse_EAddGem_name, CMsgAddItemToSocketResponse_EAddGem_value)
 }

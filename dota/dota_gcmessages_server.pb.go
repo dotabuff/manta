@@ -5319,8 +5319,9 @@ func (m *CMsgSignOutWagerStats) GetEventId() uint32 {
 
 type CMsgSignOutWagerStats_Player struct {
 	AccountId        *uint32 `protobuf:"varint,1,opt,name=account_id" json:"account_id,omitempty"`
-	Winnings         *int32  `protobuf:"zigzag32,2,opt,name=winnings" json:"winnings,omitempty"`
+	Winnings         *uint32 `protobuf:"varint,2,opt,name=winnings" json:"winnings,omitempty"`
 	MaxWager         *uint32 `protobuf:"varint,3,opt,name=max_wager" json:"max_wager,omitempty"`
+	Wager            *uint32 `protobuf:"varint,4,opt,name=wager" json:"wager,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
@@ -5335,7 +5336,7 @@ func (m *CMsgSignOutWagerStats_Player) GetAccountId() uint32 {
 	return 0
 }
 
-func (m *CMsgSignOutWagerStats_Player) GetWinnings() int32 {
+func (m *CMsgSignOutWagerStats_Player) GetWinnings() uint32 {
 	if m != nil && m.Winnings != nil {
 		return *m.Winnings
 	}
@@ -5345,6 +5346,13 @@ func (m *CMsgSignOutWagerStats_Player) GetWinnings() int32 {
 func (m *CMsgSignOutWagerStats_Player) GetMaxWager() uint32 {
 	if m != nil && m.MaxWager != nil {
 		return *m.MaxWager
+	}
+	return 0
+}
+
+func (m *CMsgSignOutWagerStats_Player) GetWager() uint32 {
+	if m != nil && m.Wager != nil {
+		return *m.Wager
 	}
 	return 0
 }

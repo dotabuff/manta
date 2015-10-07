@@ -598,6 +598,12 @@ enum EDOTAGCMsg {
 	k_EMsgGCToGCGetProfileBadgePoints = 8065;
 	k_EMsgGCToGCGetProfileBadgePointsResponse = 8066;
 	k_EMsgGCToClientChatRegionsEnabled = 8067;
+	k_EMsgClientToGCPingData = 8068;
+}
+
+enum ESpecialPingValue {
+	k_ESpecialPingValue_NoData = 16382;
+	k_ESpecialPingValue_Failed = 16383;
 }
 
 enum DOTA_GameMode {
@@ -967,6 +973,8 @@ message CSODOTAGameAccountClient {
 message CSODOTAPartyMember {
 	optional PartnerAccountType partner_type = 1 [default = PARTNER_NONE];
 	optional bool is_coach = 2;
+	repeated uint32 region_ping_codes = 4 [packed = true];
+	repeated uint32 region_ping_times = 5 [packed = true];
 }
 
 message CSODOTAParty {
@@ -1249,6 +1257,7 @@ message CSODOTALobby {
 	optional uint32 league_series_id = 78;
 	optional uint32 league_game_id = 79;
 	optional fixed32 custom_game_timestamp = 80;
+	repeated uint64 previous_series_matches = 81;
 }
 
 message CMsgLobbyEventPoints {
@@ -1563,6 +1572,7 @@ message CMsgDOTACombatLogEntry {
 	optional bool is_target_building = 37;
 	optional uint32 neutral_camp_type = 38;
 	optional uint32 rune_type = 39;
+	repeated uint32 assist_players = 40;
 }
 
 message CMsgDOTAProfileCard {
