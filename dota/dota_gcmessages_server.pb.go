@@ -687,6 +687,7 @@ type CMsgConnectedPlayers struct {
 	RadiantKills          *uint32                          `protobuf:"varint,11,opt,name=radiant_kills" json:"radiant_kills,omitempty"`
 	DireKills             *uint32                          `protobuf:"varint,12,opt,name=dire_kills" json:"dire_kills,omitempty"`
 	BarracksState         *uint32                          `protobuf:"varint,13,opt,name=barracks_state" json:"barracks_state,omitempty"`
+	RadiantLead           *int32                           `protobuf:"varint,14,opt,name=radiant_lead" json:"radiant_lead,omitempty"`
 	XXX_unrecognized      []byte                           `json:"-"`
 }
 
@@ -770,6 +771,13 @@ func (m *CMsgConnectedPlayers) GetDireKills() uint32 {
 func (m *CMsgConnectedPlayers) GetBarracksState() uint32 {
 	if m != nil && m.BarracksState != nil {
 		return *m.BarracksState
+	}
+	return 0
+}
+
+func (m *CMsgConnectedPlayers) GetRadiantLead() int32 {
+	if m != nil && m.RadiantLead != nil {
+		return *m.RadiantLead
 	}
 	return 0
 }

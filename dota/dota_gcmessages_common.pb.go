@@ -26,8 +26,6 @@ const (
 	EDOTAGCMsg_k_EMsgServerToGCRequestStatus                              EDOTAGCMsg = 7026
 	EDOTAGCMsg_k_EMsgGCGetRecentMatches                                   EDOTAGCMsg = 7027
 	EDOTAGCMsg_k_EMsgGCRecentMatchesResponse                              EDOTAGCMsg = 7028
-	EDOTAGCMsg_k_EMsgGCFindSourceTVGames                                  EDOTAGCMsg = 7031
-	EDOTAGCMsg_k_EMsgGCSourceTVGamesResponse                              EDOTAGCMsg = 7032
 	EDOTAGCMsg_k_EMsgGCStartFindingMatch                                  EDOTAGCMsg = 7033
 	EDOTAGCMsg_k_EMsgGCConnectedPlayers                                   EDOTAGCMsg = 7034
 	EDOTAGCMsg_k_EMsgGCAbandonCurrentGame                                 EDOTAGCMsg = 7035
@@ -606,6 +604,10 @@ const (
 	EDOTAGCMsg_k_EMsgGCToGCGetProfileBadgePointsResponse                  EDOTAGCMsg = 8066
 	EDOTAGCMsg_k_EMsgGCToClientChatRegionsEnabled                         EDOTAGCMsg = 8067
 	EDOTAGCMsg_k_EMsgClientToGCPingData                                   EDOTAGCMsg = 8068
+	EDOTAGCMsg_k_EMsgServerToGCMatchDetailsRequest                        EDOTAGCMsg = 8069
+	EDOTAGCMsg_k_EMsgGCToServerMatchDetailsResponse                       EDOTAGCMsg = 8070
+	EDOTAGCMsg_k_EMsgGCToGCEnsureAccountInParty                           EDOTAGCMsg = 8071
+	EDOTAGCMsg_k_EMsgGCToGCEnsureAccountInPartyResponse                   EDOTAGCMsg = 8072
 )
 
 var EDOTAGCMsg_name = map[int32]string{
@@ -621,8 +623,6 @@ var EDOTAGCMsg_name = map[int32]string{
 	7026: "k_EMsgServerToGCRequestStatus",
 	7027: "k_EMsgGCGetRecentMatches",
 	7028: "k_EMsgGCRecentMatchesResponse",
-	7031: "k_EMsgGCFindSourceTVGames",
-	7032: "k_EMsgGCSourceTVGamesResponse",
 	7033: "k_EMsgGCStartFindingMatch",
 	7034: "k_EMsgGCConnectedPlayers",
 	7035: "k_EMsgGCAbandonCurrentGame",
@@ -1201,6 +1201,10 @@ var EDOTAGCMsg_name = map[int32]string{
 	8066: "k_EMsgGCToGCGetProfileBadgePointsResponse",
 	8067: "k_EMsgGCToClientChatRegionsEnabled",
 	8068: "k_EMsgClientToGCPingData",
+	8069: "k_EMsgServerToGCMatchDetailsRequest",
+	8070: "k_EMsgGCToServerMatchDetailsResponse",
+	8071: "k_EMsgGCToGCEnsureAccountInParty",
+	8072: "k_EMsgGCToGCEnsureAccountInPartyResponse",
 }
 var EDOTAGCMsg_value = map[string]int32{
 	"k_EMsgGCDOTABase":                                           7000,
@@ -1215,8 +1219,6 @@ var EDOTAGCMsg_value = map[string]int32{
 	"k_EMsgServerToGCRequestStatus":                              7026,
 	"k_EMsgGCGetRecentMatches":                                   7027,
 	"k_EMsgGCRecentMatchesResponse":                              7028,
-	"k_EMsgGCFindSourceTVGames":                                  7031,
-	"k_EMsgGCSourceTVGamesResponse":                              7032,
 	"k_EMsgGCStartFindingMatch":                                  7033,
 	"k_EMsgGCConnectedPlayers":                                   7034,
 	"k_EMsgGCAbandonCurrentGame":                                 7035,
@@ -1795,6 +1797,10 @@ var EDOTAGCMsg_value = map[string]int32{
 	"k_EMsgGCToGCGetProfileBadgePointsResponse":                  8066,
 	"k_EMsgGCToClientChatRegionsEnabled":                         8067,
 	"k_EMsgClientToGCPingData":                                   8068,
+	"k_EMsgServerToGCMatchDetailsRequest":                        8069,
+	"k_EMsgGCToServerMatchDetailsResponse":                       8070,
+	"k_EMsgGCToGCEnsureAccountInParty":                           8071,
+	"k_EMsgGCToGCEnsureAccountInPartyResponse":                   8072,
 }
 
 func (x EDOTAGCMsg) Enum() *EDOTAGCMsg {
@@ -5376,6 +5382,7 @@ type CSODOTALobby struct {
 	LeagueGameId               *uint32                       `protobuf:"varint,79,opt,name=league_game_id" json:"league_game_id,omitempty"`
 	CustomGameTimestamp        *uint32                       `protobuf:"fixed32,80,opt,name=custom_game_timestamp" json:"custom_game_timestamp,omitempty"`
 	PreviousSeriesMatches      []uint64                      `protobuf:"varint,81,rep,name=previous_series_matches" json:"previous_series_matches,omitempty"`
+	PreviousMatchOverride      *uint64                       `protobuf:"varint,82,opt,name=previous_match_override" json:"previous_match_override,omitempty"`
 	XXX_unrecognized           []byte                        `json:"-"`
 }
 
@@ -5867,6 +5874,13 @@ func (m *CSODOTALobby) GetPreviousSeriesMatches() []uint64 {
 		return m.PreviousSeriesMatches
 	}
 	return nil
+}
+
+func (m *CSODOTALobby) GetPreviousMatchOverride() uint64 {
+	if m != nil && m.PreviousMatchOverride != nil {
+		return *m.PreviousMatchOverride
+	}
+	return 0
 }
 
 type CSODOTALobby_CExtraMsg struct {
@@ -8741,6 +8755,7 @@ type CMsgDOTARealtimeGameStats_BuildingDetails struct {
 	Type             *uint32  `protobuf:"varint,6,opt,name=type" json:"type,omitempty"`
 	X                *float32 `protobuf:"fixed32,7,opt,name=x" json:"x,omitempty"`
 	Y                *float32 `protobuf:"fixed32,8,opt,name=y" json:"y,omitempty"`
+	Destroyed        *bool    `protobuf:"varint,9,opt,name=destroyed" json:"destroyed,omitempty"`
 	XXX_unrecognized []byte   `json:"-"`
 }
 
@@ -8797,6 +8812,13 @@ func (m *CMsgDOTARealtimeGameStats_BuildingDetails) GetY() float32 {
 		return *m.Y
 	}
 	return 0
+}
+
+func (m *CMsgDOTARealtimeGameStats_BuildingDetails) GetDestroyed() bool {
+	if m != nil && m.Destroyed != nil {
+		return *m.Destroyed
+	}
+	return false
 }
 
 type CMsgDOTARealtimeGameStats_KillDetails struct {
@@ -9367,6 +9389,7 @@ type CMsgDOTARealtimeGameStatsTerse_BuildingDetails struct {
 	Tier             *uint32  `protobuf:"varint,5,opt,name=tier" json:"tier,omitempty"`
 	X                *float32 `protobuf:"fixed32,6,opt,name=x" json:"x,omitempty"`
 	Y                *float32 `protobuf:"fixed32,7,opt,name=y" json:"y,omitempty"`
+	Destroyed        *bool    `protobuf:"varint,8,opt,name=destroyed" json:"destroyed,omitempty"`
 	XXX_unrecognized []byte   `json:"-"`
 }
 
@@ -9425,6 +9448,13 @@ func (m *CMsgDOTARealtimeGameStatsTerse_BuildingDetails) GetY() float32 {
 		return *m.Y
 	}
 	return 0
+}
+
+func (m *CMsgDOTARealtimeGameStatsTerse_BuildingDetails) GetDestroyed() bool {
+	if m != nil && m.Destroyed != nil {
+		return *m.Destroyed
+	}
+	return false
 }
 
 type CMsgDOTARealtimeGameStatsTerse_MatchDetails struct {

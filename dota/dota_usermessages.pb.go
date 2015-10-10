@@ -103,6 +103,7 @@ const (
 	EDotaUserMessages_DOTA_UM_CompendiumState           EDotaUserMessages = 551
 	EDotaUserMessages_DOTA_UM_ProjectionAbility         EDotaUserMessages = 552
 	EDotaUserMessages_DOTA_UM_ProjectionEvent           EDotaUserMessages = 553
+	EDotaUserMessages_DOTA_UM_CombatLogDataHLTV         EDotaUserMessages = 554
 )
 
 var EDotaUserMessages_name = map[int32]string{
@@ -195,6 +196,7 @@ var EDotaUserMessages_name = map[int32]string{
 	551: "DOTA_UM_CompendiumState",
 	552: "DOTA_UM_ProjectionAbility",
 	553: "DOTA_UM_ProjectionEvent",
+	554: "DOTA_UM_CombatLogDataHLTV",
 }
 var EDotaUserMessages_value = map[string]int32{
 	"DOTA_UM_AddUnitToSelection":        464,
@@ -286,6 +288,7 @@ var EDotaUserMessages_value = map[string]int32{
 	"DOTA_UM_CompendiumState":           551,
 	"DOTA_UM_ProjectionAbility":         552,
 	"DOTA_UM_ProjectionEvent":           553,
+	"DOTA_UM_CombatLogDataHLTV":         554,
 }
 
 func (x EDotaUserMessages) Enum() *EDotaUserMessages {

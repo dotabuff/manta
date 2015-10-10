@@ -1575,8 +1575,9 @@ func (x *CMsgDOTAFantasyPlayerScoreDetailsResponse_EResult) UnmarshalJSON(data [
 }
 
 type CMsgGCPlayerInfo struct {
-	PlayerInfos      []*CMsgGCPlayerInfo_PlayerInfo `protobuf:"bytes,1,rep,name=player_infos" json:"player_infos,omitempty"`
-	XXX_unrecognized []byte                         `json:"-"`
+	PlayerInfos      []*CMsgGCPlayerInfo_PlayerInfo        `protobuf:"bytes,1,rep,name=player_infos" json:"player_infos,omitempty"`
+	Leaderboards     []*CMsgGCPlayerInfo_RegionLeaderboard `protobuf:"bytes,2,rep,name=leaderboards" json:"leaderboards,omitempty"`
+	XXX_unrecognized []byte                                `json:"-"`
 }
 
 func (m *CMsgGCPlayerInfo) Reset()         { *m = CMsgGCPlayerInfo{} }
@@ -1586,6 +1587,13 @@ func (*CMsgGCPlayerInfo) ProtoMessage()    {}
 func (m *CMsgGCPlayerInfo) GetPlayerInfos() []*CMsgGCPlayerInfo_PlayerInfo {
 	if m != nil {
 		return m.PlayerInfos
+	}
+	return nil
+}
+
+func (m *CMsgGCPlayerInfo) GetLeaderboards() []*CMsgGCPlayerInfo_RegionLeaderboard {
+	if m != nil {
+		return m.Leaderboards
 	}
 	return nil
 }
@@ -1676,6 +1684,30 @@ func (m *CMsgGCPlayerInfo_PlayerInfo) GetIsPro() bool {
 		return *m.IsPro
 	}
 	return false
+}
+
+type CMsgGCPlayerInfo_RegionLeaderboard struct {
+	Division         *uint32  `protobuf:"varint,1,opt,name=division" json:"division,omitempty"`
+	AccountIds       []uint32 `protobuf:"varint,2,rep,name=account_ids" json:"account_ids,omitempty"`
+	XXX_unrecognized []byte   `json:"-"`
+}
+
+func (m *CMsgGCPlayerInfo_RegionLeaderboard) Reset()         { *m = CMsgGCPlayerInfo_RegionLeaderboard{} }
+func (m *CMsgGCPlayerInfo_RegionLeaderboard) String() string { return proto.CompactTextString(m) }
+func (*CMsgGCPlayerInfo_RegionLeaderboard) ProtoMessage()    {}
+
+func (m *CMsgGCPlayerInfo_RegionLeaderboard) GetDivision() uint32 {
+	if m != nil && m.Division != nil {
+		return *m.Division
+	}
+	return 0
+}
+
+func (m *CMsgGCPlayerInfo_RegionLeaderboard) GetAccountIds() []uint32 {
+	if m != nil {
+		return m.AccountIds
+	}
+	return nil
 }
 
 type CMsgDOTACreateFantasyLeagueRequest struct {
