@@ -130,6 +130,7 @@ message CMsgConnectedPlayers {
 	optional uint32 radiant_kills = 11;
 	optional uint32 dire_kills = 12;
 	optional uint32 barracks_state = 13;
+	optional int32 radiant_lead = 14;
 }
 
 message CMsgGameServerInfo {

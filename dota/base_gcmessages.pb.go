@@ -125,6 +125,7 @@ It has these top-level messages:
 	CMsgAddItemToSocket
 	CMsgAddItemToSocketResponse
 	CMsgResetStrangeGemCount
+	CMsgResetStrangeGemCountResponse
 */
 package dota
 
@@ -462,6 +463,48 @@ func (x *CMsgAddItemToSocketResponse_EAddGem) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	*x = CMsgAddItemToSocketResponse_EAddGem(value)
+	return nil
+}
+
+type CMsgResetStrangeGemCountResponse_EResetGem int32
+
+const (
+	CMsgResetStrangeGemCountResponse_k_ResetGem_Succeeded                  CMsgResetStrangeGemCountResponse_EResetGem = 0
+	CMsgResetStrangeGemCountResponse_k_ResetGem_Failed_FailedToResetGem    CMsgResetStrangeGemCountResponse_EResetGem = 1
+	CMsgResetStrangeGemCountResponse_k_ResetGem_Failed_ItemIsInvalid       CMsgResetStrangeGemCountResponse_EResetGem = 2
+	CMsgResetStrangeGemCountResponse_k_ResetGem_Failed_InvalidSocketId     CMsgResetStrangeGemCountResponse_EResetGem = 3
+	CMsgResetStrangeGemCountResponse_k_ResetGem_Failed_SocketCannotBeReset CMsgResetStrangeGemCountResponse_EResetGem = 4
+)
+
+var CMsgResetStrangeGemCountResponse_EResetGem_name = map[int32]string{
+	0: "k_ResetGem_Succeeded",
+	1: "k_ResetGem_Failed_FailedToResetGem",
+	2: "k_ResetGem_Failed_ItemIsInvalid",
+	3: "k_ResetGem_Failed_InvalidSocketId",
+	4: "k_ResetGem_Failed_SocketCannotBeReset",
+}
+var CMsgResetStrangeGemCountResponse_EResetGem_value = map[string]int32{
+	"k_ResetGem_Succeeded":                  0,
+	"k_ResetGem_Failed_FailedToResetGem":    1,
+	"k_ResetGem_Failed_ItemIsInvalid":       2,
+	"k_ResetGem_Failed_InvalidSocketId":     3,
+	"k_ResetGem_Failed_SocketCannotBeReset": 4,
+}
+
+func (x CMsgResetStrangeGemCountResponse_EResetGem) Enum() *CMsgResetStrangeGemCountResponse_EResetGem {
+	p := new(CMsgResetStrangeGemCountResponse_EResetGem)
+	*p = x
+	return p
+}
+func (x CMsgResetStrangeGemCountResponse_EResetGem) String() string {
+	return proto.EnumName(CMsgResetStrangeGemCountResponse_EResetGem_name, int32(x))
+}
+func (x *CMsgResetStrangeGemCountResponse_EResetGem) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(CMsgResetStrangeGemCountResponse_EResetGem_value, data, "CMsgResetStrangeGemCountResponse_EResetGem")
+	if err != nil {
+		return err
+	}
+	*x = CMsgResetStrangeGemCountResponse_EResetGem(value)
 	return nil
 }
 
@@ -3340,6 +3383,24 @@ func (m *CMsgResetStrangeGemCount) GetSocketIndex() uint32 {
 	return 0
 }
 
+type CMsgResetStrangeGemCountResponse struct {
+	Response         *CMsgResetStrangeGemCountResponse_EResetGem `protobuf:"varint,1,opt,name=response,enum=dota.CMsgResetStrangeGemCountResponse_EResetGem,def=0" json:"response,omitempty"`
+	XXX_unrecognized []byte                                      `json:"-"`
+}
+
+func (m *CMsgResetStrangeGemCountResponse) Reset()         { *m = CMsgResetStrangeGemCountResponse{} }
+func (m *CMsgResetStrangeGemCountResponse) String() string { return proto.CompactTextString(m) }
+func (*CMsgResetStrangeGemCountResponse) ProtoMessage()    {}
+
+const Default_CMsgResetStrangeGemCountResponse_Response CMsgResetStrangeGemCountResponse_EResetGem = CMsgResetStrangeGemCountResponse_k_ResetGem_Succeeded
+
+func (m *CMsgResetStrangeGemCountResponse) GetResponse() CMsgResetStrangeGemCountResponse_EResetGem {
+	if m != nil && m.Response != nil {
+		return *m.Response
+	}
+	return Default_CMsgResetStrangeGemCountResponse_Response
+}
+
 func init() {
 	proto.RegisterEnum("dota.EGCBaseMsg", EGCBaseMsg_name, EGCBaseMsg_value)
 	proto.RegisterEnum("dota.EGCBaseProtoObjectTypes", EGCBaseProtoObjectTypes_name, EGCBaseProtoObjectTypes_value)
@@ -3348,4 +3409,5 @@ func init() {
 	proto.RegisterEnum("dota.CMsgExtractGemsResponse_EExtractGems", CMsgExtractGemsResponse_EExtractGems_name, CMsgExtractGemsResponse_EExtractGems_value)
 	proto.RegisterEnum("dota.CMsgAddSocketResponse_EAddSocket", CMsgAddSocketResponse_EAddSocket_name, CMsgAddSocketResponse_EAddSocket_value)
 	proto.RegisterEnum("dota.CMsgAddItemToSocketResponse_EAddGem", CMsgAddItemToSocketResponse_EAddGem_name, CMsgAddItemToSocketResponse_EAddGem_value)
+	proto.RegisterEnum("dota.CMsgResetStrangeGemCountResponse_EResetGem", CMsgResetStrangeGemCountResponse_EResetGem_name, CMsgResetStrangeGemCountResponse_EResetGem_value)
 }

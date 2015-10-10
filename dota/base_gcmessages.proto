@@ -604,3 +604,15 @@ message CMsgResetStrangeGemCount {
 	optional uint32 socket_index = 2;
 }
 
+message CMsgResetStrangeGemCountResponse {
+	enum EResetGem {
+		k_ResetGem_Succeeded = 0;
+		k_ResetGem_Failed_FailedToResetGem = 1;
+		k_ResetGem_Failed_ItemIsInvalid = 2;
+		k_ResetGem_Failed_InvalidSocketId = 3;
+		k_ResetGem_Failed_SocketCannotBeReset = 4;
+	}
+
+	optional CMsgResetStrangeGemCountResponse.EResetGem response = 1 [default = k_ResetGem_Succeeded];
+}
+

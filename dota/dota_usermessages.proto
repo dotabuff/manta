@@ -96,6 +96,7 @@ enum EDotaUserMessages {
 	DOTA_UM_CompendiumState = 551;
 	DOTA_UM_ProjectionAbility = 552;
 	DOTA_UM_ProjectionEvent = 553;
+	DOTA_UM_CombatLogDataHLTV = 554;
 }
 
 enum DOTA_CHAT_MESSAGE {

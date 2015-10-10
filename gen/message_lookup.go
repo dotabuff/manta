@@ -152,7 +152,6 @@ import (
 			if matching == "" {
 				switch e {
 				case "EDotaUserMessages_DOTA_UM_AddUnitToSelection",
-					"EDotaUserMessages_DOTA_UM_CombatLogData",
 					"EDotaUserMessages_DOTA_UM_CharacterSpeakConcept",
 					"EDotaUserMessages_DOTA_UM_TournamentDrop",
 					"EBaseUserMessages_UM_MAX_BASE":
@@ -161,6 +160,8 @@ import (
 					continue
 				case "EDemoCommands_DEM_SignonPacket":
 					matching = "CDemoPacket"
+				case "EDotaUserMessages_DOTA_UM_CombatLogDataHLTV":
+					matching = "CMsgDOTACombatLogEntry"
 				default:
 					//pp(e)
 				}
