@@ -382,6 +382,7 @@ type Callbacks struct {
 	onCDOTAUserMsg_CompendiumState            []func(*dota.CDOTAUserMsg_CompendiumState) error
 	onCDOTAUserMsg_ProjectionAbility          []func(*dota.CDOTAUserMsg_ProjectionAbility) error
 	onCDOTAUserMsg_ProjectionEvent            []func(*dota.CDOTAUserMsg_ProjectionEvent) error
+	onCMsgDOTACombatLogEntry                  []func(*dota.CMsgDOTACombatLogEntry) error
 }
 
 func (c *Callbacks) OnCDemoStop(fn func(*dota.CDemoStop) error) {
@@ -953,6 +954,9 @@ func (c *Callbacks) OnCDOTAUserMsg_ProjectionAbility(fn func(*dota.CDOTAUserMsg_
 }
 func (c *Callbacks) OnCDOTAUserMsg_ProjectionEvent(fn func(*dota.CDOTAUserMsg_ProjectionEvent) error) {
 	c.onCDOTAUserMsg_ProjectionEvent = append(c.onCDOTAUserMsg_ProjectionEvent, fn)
+}
+func (c *Callbacks) OnCMsgDOTACombatLogEntry(fn func(*dota.CMsgDOTACombatLogEntry) error) {
+	c.onCMsgDOTACombatLogEntry = append(c.onCMsgDOTACombatLogEntry, fn)
 }
 func (p *Parser) CallByDemoType(t int32, raw []byte) error {
 	callbacks := p.Callbacks
@@ -3434,6 +3438,19 @@ func (p *Parser) CallByPacketType(t int32, raw []byte) error {
 			}
 		}
 		return nil
+	case 554: // dota.EDotaUserMessages_DOTA_UM_CombatLogDataHLTV
+		if cbs := callbacks.onCMsgDOTACombatLogEntry; cbs != nil {
+			msg := &dota.CMsgDOTACombatLogEntry{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			for _, fn := range cbs {
+				if err := fn(msg); err != nil {
+					return err
+				}
+			}
+		}
+		return nil
 	}
 	return fmt.Errorf("no type found: %d", t)
 }
@@ -3629,4 +3646,5 @@ func (c *Callbacks) OnAny(all func(interface{}) error) {
 	c.OnCDOTAUserMsg_CompendiumState(func(pkg *dota.CDOTAUserMsg_CompendiumState) error { return all(pkg) })
 	c.OnCDOTAUserMsg_ProjectionAbility(func(pkg *dota.CDOTAUserMsg_ProjectionAbility) error { return all(pkg) })
 	c.OnCDOTAUserMsg_ProjectionEvent(func(pkg *dota.CDOTAUserMsg_ProjectionEvent) error { return all(pkg) })
+	c.OnCMsgDOTACombatLogEntry(func(pkg *dota.CMsgDOTACombatLogEntry) error { return all(pkg) })
 }

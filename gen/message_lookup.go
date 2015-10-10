@@ -160,6 +160,8 @@ import (
 					continue
 				case "EDemoCommands_DEM_SignonPacket":
 					matching = "CDemoPacket"
+				case "EDotaUserMessages_DOTA_UM_CombatLogDataHLTV":
+					matching = "CMsgDOTACombatLogEntry"
 				default:
 					//pp(e)
 				}

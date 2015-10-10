@@ -80,13 +80,9 @@ func (p *Parser) onCDemoPacket(m *dota.CDemoPacket) error {
 
 	// Dispatch messages in order.
 	for _, m := range ms {
-		if fn, ok := p.RawHandlers[m.t]; ok {
-			fn(m.t, m.buf)
-		}
-
 		// Skip message we don't have a definition for (yet)
 		// XXX TODO: remove this when we get updated protos.
-		if m.t == 400 || m.t == 554 {
+		if m.t == 400 {
 			continue
 		}
 
