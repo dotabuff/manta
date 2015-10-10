@@ -7,6 +7,10 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestMatch1855408730(t *testing.T) { testScenarios[1855408730].test(t) }
+func TestMatch1855345768(t *testing.T) { testScenarios[1855345768].test(t) }
+func TestMatch1855304265(t *testing.T) { testScenarios[1855304265].test(t) }
+
 func TestMatch1788648401(t *testing.T) { testScenarios[1788648401].test(t) }
 func TestMatch1786687320(t *testing.T) { testScenarios[1786687320].test(t) }
 func TestMatch1785937100(t *testing.T) { testScenarios[1785937100].test(t) }
@@ -47,6 +51,40 @@ type testScenario struct {
 }
 
 var testScenarios = map[int64]testScenario{
+	1855408730: {
+		matchId:                "1855408730",
+		replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1855408730.dem",
+		expectGameBuild:        1106,
+		expectEntityEvents:     1397062,
+		expectCombatLogDamage:  0,
+		expectCombatLogHealing: 0,
+		expectCombatLogDeaths:  0,
+		expectCombatLogEvents:  0,
+		expectUnitOrderEvents:  34862,
+	},
+	1855345768: {
+		matchId:                "1855345768",
+		replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1855345768.dem",
+		expectGameBuild:        1104,
+		expectEntityEvents:     1567910,
+		expectCombatLogDamage:  0,
+		expectCombatLogHealing: 0,
+		expectCombatLogDeaths:  0,
+		expectCombatLogEvents:  0,
+		expectUnitOrderEvents:  41874,
+	},
+
+	1855304265: {
+		matchId:                "1855304265",
+		replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1855304265.dem",
+		expectGameBuild:        1101,
+		expectEntityEvents:     2477532,
+		expectCombatLogDamage:  0,
+		expectCombatLogHealing: 0,
+		expectCombatLogDeaths:  0,
+		expectCombatLogEvents:  0,
+		expectUnitOrderEvents:  64823,
+	},
 	1788648401: {
 		matchId:              "1788648401",
 		replayUrl:            "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1788648401.dem",

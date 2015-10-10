@@ -44,6 +44,7 @@ type Parser struct {
 	packetEntityFullPackets int
 	serializers             map[string]map[int32]*dt
 	spawnGroups             map[uint32]*spawnGroup
+	RawHandlers             map[int32]func(int32, []byte)
 
 	reader            *Reader
 	isStopping        bool
@@ -80,6 +81,7 @@ func NewParser(buf []byte) (*Parser, error) {
 		gameEventTypes:       make(map[string]*gameEventType),
 		packetEntityHandlers: make([]packetEntityHandler, 0),
 		spawnGroups:          make(map[uint32]*spawnGroup),
+		RawHandlers:          make(map[int32]func(int32, []byte)),
 
 		reader:     NewReader(buf),
 		isStopping: false,

@@ -105,6 +105,7 @@ var packetNames = map[int32]string{
 	465: "EDotaUserMessages_DOTA_UM_AIDebugLine",
 	466: "EDotaUserMessages_DOTA_UM_ChatEvent",
 	467: "EDotaUserMessages_DOTA_UM_CombatHeroPositions",
+	468: "EDotaUserMessages_DOTA_UM_CombatLogData",
 	470: "EDotaUserMessages_DOTA_UM_CombatLogShowDeath",
 	471: "EDotaUserMessages_DOTA_UM_CreateLinearProjectile",
 	472: "EDotaUserMessages_DOTA_UM_DestroyLinearProjectile",
