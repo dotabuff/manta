@@ -259,11 +259,10 @@ const (
 	CMsgConnectedPlayers_PLAYER_HERO                        CMsgConnectedPlayers_SendReason = 5
 	CMsgConnectedPlayers_PLAYER_DISCONNECTED_CONSEQUENCES   CMsgConnectedPlayers_SendReason = 6
 	CMsgConnectedPlayers_PLAYER_DISCONNECTED_NOCONSEQUENCES CMsgConnectedPlayers_SendReason = 7
-	CMsgConnectedPlayers_TOWER_STATE                        CMsgConnectedPlayers_SendReason = 9
 	CMsgConnectedPlayers_GAMESTATE_TIMEOUT                  CMsgConnectedPlayers_SendReason = 10
 	CMsgConnectedPlayers_MASS_DISCONNECT                    CMsgConnectedPlayers_SendReason = 11
-	CMsgConnectedPlayers_BARRACKS_STATE                     CMsgConnectedPlayers_SendReason = 12
 	CMsgConnectedPlayers_KILLS                              CMsgConnectedPlayers_SendReason = 13
+	CMsgConnectedPlayers_BUILDING_STATE                     CMsgConnectedPlayers_SendReason = 14
 )
 
 var CMsgConnectedPlayers_SendReason_name = map[int32]string{
@@ -275,11 +274,10 @@ var CMsgConnectedPlayers_SendReason_name = map[int32]string{
 	5:  "PLAYER_HERO",
 	6:  "PLAYER_DISCONNECTED_CONSEQUENCES",
 	7:  "PLAYER_DISCONNECTED_NOCONSEQUENCES",
-	9:  "TOWER_STATE",
 	10: "GAMESTATE_TIMEOUT",
 	11: "MASS_DISCONNECT",
-	12: "BARRACKS_STATE",
 	13: "KILLS",
+	14: "BUILDING_STATE",
 }
 var CMsgConnectedPlayers_SendReason_value = map[string]int32{
 	"INVALID":                            0,
@@ -290,11 +288,10 @@ var CMsgConnectedPlayers_SendReason_value = map[string]int32{
 	"PLAYER_HERO":                        5,
 	"PLAYER_DISCONNECTED_CONSEQUENCES":   6,
 	"PLAYER_DISCONNECTED_NOCONSEQUENCES": 7,
-	"TOWER_STATE":                        9,
 	"GAMESTATE_TIMEOUT":                  10,
 	"MASS_DISCONNECT":                    11,
-	"BARRACKS_STATE":                     12,
 	"KILLS":                              13,
+	"BUILDING_STATE":                     14,
 }
 
 func (x CMsgConnectedPlayers_SendReason) Enum() *CMsgConnectedPlayers_SendReason {
@@ -679,15 +676,14 @@ type CMsgConnectedPlayers struct {
 	ConnectedPlayers      []*CMsgConnectedPlayers_Player   `protobuf:"bytes,1,rep,name=connected_players" json:"connected_players,omitempty"`
 	DisconnectedPlayers   []*CMsgConnectedPlayers_Player   `protobuf:"bytes,7,rep,name=disconnected_players" json:"disconnected_players,omitempty"`
 	GameState             *DOTA_GameState                  `protobuf:"varint,2,opt,name=game_state,enum=dota.DOTA_GameState,def=0" json:"game_state,omitempty"`
-	TowerState            *uint32                          `protobuf:"varint,4,opt,name=tower_state" json:"tower_state,omitempty"`
 	FirstBloodHappened    *bool                            `protobuf:"varint,6,opt,name=first_blood_happened" json:"first_blood_happened,omitempty"`
 	LegacyMassDisconnect  *bool                            `protobuf:"varint,9,opt,name=legacy_mass_disconnect" json:"legacy_mass_disconnect,omitempty"`
 	PoorNetworkConditions *CMsgPoorNetworkConditions       `protobuf:"bytes,10,opt,name=poor_network_conditions" json:"poor_network_conditions,omitempty"`
 	SendReason            *CMsgConnectedPlayers_SendReason `protobuf:"varint,8,opt,name=send_reason,enum=dota.CMsgConnectedPlayers_SendReason,def=0" json:"send_reason,omitempty"`
 	RadiantKills          *uint32                          `protobuf:"varint,11,opt,name=radiant_kills" json:"radiant_kills,omitempty"`
 	DireKills             *uint32                          `protobuf:"varint,12,opt,name=dire_kills" json:"dire_kills,omitempty"`
-	BarracksState         *uint32                          `protobuf:"varint,13,opt,name=barracks_state" json:"barracks_state,omitempty"`
 	RadiantLead           *int32                           `protobuf:"varint,14,opt,name=radiant_lead" json:"radiant_lead,omitempty"`
+	BuildingState         *uint32                          `protobuf:"varint,15,opt,name=building_state" json:"building_state,omitempty"`
 	XXX_unrecognized      []byte                           `json:"-"`
 }
 
@@ -717,13 +713,6 @@ func (m *CMsgConnectedPlayers) GetGameState() DOTA_GameState {
 		return *m.GameState
 	}
 	return Default_CMsgConnectedPlayers_GameState
-}
-
-func (m *CMsgConnectedPlayers) GetTowerState() uint32 {
-	if m != nil && m.TowerState != nil {
-		return *m.TowerState
-	}
-	return 0
 }
 
 func (m *CMsgConnectedPlayers) GetFirstBloodHappened() bool {
@@ -768,16 +757,16 @@ func (m *CMsgConnectedPlayers) GetDireKills() uint32 {
 	return 0
 }
 
-func (m *CMsgConnectedPlayers) GetBarracksState() uint32 {
-	if m != nil && m.BarracksState != nil {
-		return *m.BarracksState
+func (m *CMsgConnectedPlayers) GetRadiantLead() int32 {
+	if m != nil && m.RadiantLead != nil {
+		return *m.RadiantLead
 	}
 	return 0
 }
 
-func (m *CMsgConnectedPlayers) GetRadiantLead() int32 {
-	if m != nil && m.RadiantLead != nil {
-		return *m.RadiantLead
+func (m *CMsgConnectedPlayers) GetBuildingState() uint32 {
+	if m != nil && m.BuildingState != nil {
+		return *m.BuildingState
 	}
 	return 0
 }

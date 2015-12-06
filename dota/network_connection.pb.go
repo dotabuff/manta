@@ -87,6 +87,7 @@ const (
 	ENetworkDisconnectionReason_NETWORK_DISCONNECT_SERVER_SHUTDOWN             ENetworkDisconnectionReason = 69
 	ENetworkDisconnectionReason_NETWORK_DISCONNECT_SPLITPACKET_SEND_OVERFLOW   ENetworkDisconnectionReason = 70
 	ENetworkDisconnectionReason_NETWORK_DISCONNECT_REPLAY_INCOMPATIBLE         ENetworkDisconnectionReason = 71
+	ENetworkDisconnectionReason_NETWORK_DISCONNECT_CONNECT_REQUEST_TIMEDOUT    ENetworkDisconnectionReason = 72
 )
 
 var ENetworkDisconnectionReason_name = map[int32]string{
@@ -162,6 +163,7 @@ var ENetworkDisconnectionReason_name = map[int32]string{
 	69: "NETWORK_DISCONNECT_SERVER_SHUTDOWN",
 	70: "NETWORK_DISCONNECT_SPLITPACKET_SEND_OVERFLOW",
 	71: "NETWORK_DISCONNECT_REPLAY_INCOMPATIBLE",
+	72: "NETWORK_DISCONNECT_CONNECT_REQUEST_TIMEDOUT",
 }
 var ENetworkDisconnectionReason_value = map[string]int32{
 	"NETWORK_DISCONNECT_INVALID":                     0,
@@ -236,6 +238,7 @@ var ENetworkDisconnectionReason_value = map[string]int32{
 	"NETWORK_DISCONNECT_SERVER_SHUTDOWN":             69,
 	"NETWORK_DISCONNECT_SPLITPACKET_SEND_OVERFLOW":   70,
 	"NETWORK_DISCONNECT_REPLAY_INCOMPATIBLE":         71,
+	"NETWORK_DISCONNECT_CONNECT_REQUEST_TIMEDOUT":    72,
 }
 
 func (x ENetworkDisconnectionReason) Enum() *ENetworkDisconnectionReason {

@@ -652,65 +652,66 @@ func (m *CMsgClipData) GetBottom() float64 {
 }
 
 type CMsgPushCompositingLayer struct {
-	LayerId               *uint64          `protobuf:"varint,1,opt,name=layer_id" json:"layer_id,omitempty"`
-	Width                 *float64         `protobuf:"fixed64,2,opt,name=width" json:"width,omitempty"`
-	Height                *float64         `protobuf:"fixed64,3,opt,name=height" json:"height,omitempty"`
-	LayerQuadTopLeftX     *float64         `protobuf:"fixed64,4,opt,name=layer_quad_top_left_x" json:"layer_quad_top_left_x,omitempty"`
-	LayerQuadTopLeftY     *float64         `protobuf:"fixed64,5,opt,name=layer_quad_top_left_y" json:"layer_quad_top_left_y,omitempty"`
-	LayerQuadTopLeftZ     *float64         `protobuf:"fixed64,6,opt,name=layer_quad_top_left_z" json:"layer_quad_top_left_z,omitempty"`
-	LayerQuadTopRightX    *float64         `protobuf:"fixed64,7,opt,name=layer_quad_top_right_x" json:"layer_quad_top_right_x,omitempty"`
-	LayerQuadTopRightY    *float64         `protobuf:"fixed64,8,opt,name=layer_quad_top_right_y" json:"layer_quad_top_right_y,omitempty"`
-	LayerQuadTopRightZ    *float64         `protobuf:"fixed64,9,opt,name=layer_quad_top_right_z" json:"layer_quad_top_right_z,omitempty"`
-	LayerQuadBottomLeftX  *float64         `protobuf:"fixed64,10,opt,name=layer_quad_bottom_left_x" json:"layer_quad_bottom_left_x,omitempty"`
-	LayerQuadBottomLeftY  *float64         `protobuf:"fixed64,11,opt,name=layer_quad_bottom_left_y" json:"layer_quad_bottom_left_y,omitempty"`
-	LayerQuadBottomLeftZ  *float64         `protobuf:"fixed64,12,opt,name=layer_quad_bottom_left_z" json:"layer_quad_bottom_left_z,omitempty"`
-	LayerQuadBottomRightX *float64         `protobuf:"fixed64,13,opt,name=layer_quad_bottom_right_x" json:"layer_quad_bottom_right_x,omitempty"`
-	LayerQuadBottomRightY *float64         `protobuf:"fixed64,14,opt,name=layer_quad_bottom_right_y" json:"layer_quad_bottom_right_y,omitempty"`
-	LayerQuadBottomRightZ *float64         `protobuf:"fixed64,15,opt,name=layer_quad_bottom_right_z" json:"layer_quad_bottom_right_z,omitempty"`
-	TransformM00          *float64         `protobuf:"fixed64,16,opt,name=transform_m00" json:"transform_m00,omitempty"`
-	TransformM01          *float64         `protobuf:"fixed64,17,opt,name=transform_m01" json:"transform_m01,omitempty"`
-	TransformM02          *float64         `protobuf:"fixed64,18,opt,name=transform_m02" json:"transform_m02,omitempty"`
-	TransformM03          *float64         `protobuf:"fixed64,19,opt,name=transform_m03" json:"transform_m03,omitempty"`
-	TransformM10          *float64         `protobuf:"fixed64,20,opt,name=transform_m10" json:"transform_m10,omitempty"`
-	TransformM11          *float64         `protobuf:"fixed64,21,opt,name=transform_m11" json:"transform_m11,omitempty"`
-	TransformM12          *float64         `protobuf:"fixed64,22,opt,name=transform_m12" json:"transform_m12,omitempty"`
-	TransformM13          *float64         `protobuf:"fixed64,23,opt,name=transform_m13" json:"transform_m13,omitempty"`
-	TransformM20          *float64         `protobuf:"fixed64,24,opt,name=transform_m20" json:"transform_m20,omitempty"`
-	TransformM21          *float64         `protobuf:"fixed64,25,opt,name=transform_m21" json:"transform_m21,omitempty"`
-	TransformM22          *float64         `protobuf:"fixed64,26,opt,name=transform_m22" json:"transform_m22,omitempty"`
-	TransformM23          *float64         `protobuf:"fixed64,27,opt,name=transform_m23" json:"transform_m23,omitempty"`
-	TransformM30          *float64         `protobuf:"fixed64,28,opt,name=transform_m30" json:"transform_m30,omitempty"`
-	TransformM31          *float64         `protobuf:"fixed64,29,opt,name=transform_m31" json:"transform_m31,omitempty"`
-	TransformM32          *float64         `protobuf:"fixed64,30,opt,name=transform_m32" json:"transform_m32,omitempty"`
-	TransformM33          *float64         `protobuf:"fixed64,31,opt,name=transform_m33" json:"transform_m33,omitempty"`
-	PerspectiveDepth      *float64         `protobuf:"fixed64,32,opt,name=perspective_depth" json:"perspective_depth,omitempty"`
-	Opacity               *float64         `protobuf:"fixed64,33,opt,name=opacity" json:"opacity,omitempty"`
-	CompositionColor      *uint32          `protobuf:"varint,34,opt,name=composition_color" json:"composition_color,omitempty"`
-	Saturation            *float64         `protobuf:"fixed64,35,opt,name=saturation" json:"saturation,omitempty"`
-	HueShift              *float64         `protobuf:"fixed64,36,opt,name=hue_shift" json:"hue_shift,omitempty"`
-	Brightness            *float64         `protobuf:"fixed64,37,opt,name=brightness" json:"brightness,omitempty"`
-	Contrast              *float64         `protobuf:"fixed64,38,opt,name=contrast" json:"contrast,omitempty"`
-	OpacityMaskTextureId  *uint32          `protobuf:"varint,39,opt,name=opacity_mask_texture_id" json:"opacity_mask_texture_id,omitempty"`
-	OpacityMaskOpacity    *float64         `protobuf:"fixed64,40,opt,name=opacity_mask_opacity" json:"opacity_mask_opacity,omitempty"`
-	Border                *CBorderData     `protobuf:"bytes,41,opt,name=border" json:"border,omitempty"`
-	BorderRadius          *CRadiusData     `protobuf:"bytes,42,opt,name=border_radius" json:"border_radius,omitempty"`
-	BoxShadow             *CBoxShadowData  `protobuf:"bytes,43,opt,name=box_shadow" json:"box_shadow,omitempty"`
-	GaussianblurPasses    *float64         `protobuf:"fixed64,44,opt,name=gaussianblur_passes" json:"gaussianblur_passes,omitempty"`
-	GaussianblurStddevhor *float64         `protobuf:"fixed64,45,opt,name=gaussianblur_stddevhor" json:"gaussianblur_stddevhor,omitempty"`
-	GaussianblurStddevver *float64         `protobuf:"fixed64,46,opt,name=gaussianblur_stddevver" json:"gaussianblur_stddevver,omitempty"`
-	Scale_2DFactorsX      *float64         `protobuf:"fixed64,47,opt,name=scale_2d_factors_x" json:"scale_2d_factors_x,omitempty"`
-	Scale_2DFactorsY      *float64         `protobuf:"fixed64,48,opt,name=scale_2d_factors_y" json:"scale_2d_factors_y,omitempty"`
-	Rotate_2D             *float64         `protobuf:"fixed64,49,opt,name=rotate_2d" json:"rotate_2d,omitempty"`
-	NeedsClear            *bool            `protobuf:"varint,50,opt,name=needs_clear" json:"needs_clear,omitempty"`
-	NeedsDepth            *bool            `protobuf:"varint,51,opt,name=needs_depth" json:"needs_depth,omitempty"`
-	NeedsRedrawEveryFrame *bool            `protobuf:"varint,52,opt,name=needs_redraw_every_frame" json:"needs_redraw_every_frame,omitempty"`
-	TextShadow            *CTextShadowData `protobuf:"bytes,53,opt,name=text_shadow" json:"text_shadow,omitempty"`
-	MixBlendMode          *uint32          `protobuf:"varint,54,opt,name=mix_blend_mode" json:"mix_blend_mode,omitempty"`
-	OccludedLeftEdge      *float64         `protobuf:"fixed64,55,opt,name=occluded_left_edge" json:"occluded_left_edge,omitempty"`
-	OccludedTopEdge       *float64         `protobuf:"fixed64,56,opt,name=occluded_top_edge" json:"occluded_top_edge,omitempty"`
-	OccludedRightEdge     *float64         `protobuf:"fixed64,57,opt,name=occluded_right_edge" json:"occluded_right_edge,omitempty"`
-	OccludedBottomEdge    *float64         `protobuf:"fixed64,58,opt,name=occluded_bottom_edge" json:"occluded_bottom_edge,omitempty"`
-	XXX_unrecognized      []byte           `json:"-"`
+	LayerId                  *uint64          `protobuf:"varint,1,opt,name=layer_id" json:"layer_id,omitempty"`
+	Width                    *float64         `protobuf:"fixed64,2,opt,name=width" json:"width,omitempty"`
+	Height                   *float64         `protobuf:"fixed64,3,opt,name=height" json:"height,omitempty"`
+	LayerQuadTopLeftX        *float64         `protobuf:"fixed64,4,opt,name=layer_quad_top_left_x" json:"layer_quad_top_left_x,omitempty"`
+	LayerQuadTopLeftY        *float64         `protobuf:"fixed64,5,opt,name=layer_quad_top_left_y" json:"layer_quad_top_left_y,omitempty"`
+	LayerQuadTopLeftZ        *float64         `protobuf:"fixed64,6,opt,name=layer_quad_top_left_z" json:"layer_quad_top_left_z,omitempty"`
+	LayerQuadTopRightX       *float64         `protobuf:"fixed64,7,opt,name=layer_quad_top_right_x" json:"layer_quad_top_right_x,omitempty"`
+	LayerQuadTopRightY       *float64         `protobuf:"fixed64,8,opt,name=layer_quad_top_right_y" json:"layer_quad_top_right_y,omitempty"`
+	LayerQuadTopRightZ       *float64         `protobuf:"fixed64,9,opt,name=layer_quad_top_right_z" json:"layer_quad_top_right_z,omitempty"`
+	LayerQuadBottomLeftX     *float64         `protobuf:"fixed64,10,opt,name=layer_quad_bottom_left_x" json:"layer_quad_bottom_left_x,omitempty"`
+	LayerQuadBottomLeftY     *float64         `protobuf:"fixed64,11,opt,name=layer_quad_bottom_left_y" json:"layer_quad_bottom_left_y,omitempty"`
+	LayerQuadBottomLeftZ     *float64         `protobuf:"fixed64,12,opt,name=layer_quad_bottom_left_z" json:"layer_quad_bottom_left_z,omitempty"`
+	LayerQuadBottomRightX    *float64         `protobuf:"fixed64,13,opt,name=layer_quad_bottom_right_x" json:"layer_quad_bottom_right_x,omitempty"`
+	LayerQuadBottomRightY    *float64         `protobuf:"fixed64,14,opt,name=layer_quad_bottom_right_y" json:"layer_quad_bottom_right_y,omitempty"`
+	LayerQuadBottomRightZ    *float64         `protobuf:"fixed64,15,opt,name=layer_quad_bottom_right_z" json:"layer_quad_bottom_right_z,omitempty"`
+	TransformM00             *float64         `protobuf:"fixed64,16,opt,name=transform_m00" json:"transform_m00,omitempty"`
+	TransformM01             *float64         `protobuf:"fixed64,17,opt,name=transform_m01" json:"transform_m01,omitempty"`
+	TransformM02             *float64         `protobuf:"fixed64,18,opt,name=transform_m02" json:"transform_m02,omitempty"`
+	TransformM03             *float64         `protobuf:"fixed64,19,opt,name=transform_m03" json:"transform_m03,omitempty"`
+	TransformM10             *float64         `protobuf:"fixed64,20,opt,name=transform_m10" json:"transform_m10,omitempty"`
+	TransformM11             *float64         `protobuf:"fixed64,21,opt,name=transform_m11" json:"transform_m11,omitempty"`
+	TransformM12             *float64         `protobuf:"fixed64,22,opt,name=transform_m12" json:"transform_m12,omitempty"`
+	TransformM13             *float64         `protobuf:"fixed64,23,opt,name=transform_m13" json:"transform_m13,omitempty"`
+	TransformM20             *float64         `protobuf:"fixed64,24,opt,name=transform_m20" json:"transform_m20,omitempty"`
+	TransformM21             *float64         `protobuf:"fixed64,25,opt,name=transform_m21" json:"transform_m21,omitempty"`
+	TransformM22             *float64         `protobuf:"fixed64,26,opt,name=transform_m22" json:"transform_m22,omitempty"`
+	TransformM23             *float64         `protobuf:"fixed64,27,opt,name=transform_m23" json:"transform_m23,omitempty"`
+	TransformM30             *float64         `protobuf:"fixed64,28,opt,name=transform_m30" json:"transform_m30,omitempty"`
+	TransformM31             *float64         `protobuf:"fixed64,29,opt,name=transform_m31" json:"transform_m31,omitempty"`
+	TransformM32             *float64         `protobuf:"fixed64,30,opt,name=transform_m32" json:"transform_m32,omitempty"`
+	TransformM33             *float64         `protobuf:"fixed64,31,opt,name=transform_m33" json:"transform_m33,omitempty"`
+	PerspectiveDepth         *float64         `protobuf:"fixed64,32,opt,name=perspective_depth" json:"perspective_depth,omitempty"`
+	Opacity                  *float64         `protobuf:"fixed64,33,opt,name=opacity" json:"opacity,omitempty"`
+	CompositionColor         *uint32          `protobuf:"varint,34,opt,name=composition_color" json:"composition_color,omitempty"`
+	Saturation               *float64         `protobuf:"fixed64,35,opt,name=saturation" json:"saturation,omitempty"`
+	HueShift                 *float64         `protobuf:"fixed64,36,opt,name=hue_shift" json:"hue_shift,omitempty"`
+	Brightness               *float64         `protobuf:"fixed64,37,opt,name=brightness" json:"brightness,omitempty"`
+	Contrast                 *float64         `protobuf:"fixed64,38,opt,name=contrast" json:"contrast,omitempty"`
+	OpacityMaskTextureId     *uint32          `protobuf:"varint,39,opt,name=opacity_mask_texture_id" json:"opacity_mask_texture_id,omitempty"`
+	OpacityMaskOpacity       *float64         `protobuf:"fixed64,40,opt,name=opacity_mask_opacity" json:"opacity_mask_opacity,omitempty"`
+	Border                   *CBorderData     `protobuf:"bytes,41,opt,name=border" json:"border,omitempty"`
+	BorderRadius             *CRadiusData     `protobuf:"bytes,42,opt,name=border_radius" json:"border_radius,omitempty"`
+	BoxShadow                *CBoxShadowData  `protobuf:"bytes,43,opt,name=box_shadow" json:"box_shadow,omitempty"`
+	GaussianblurPasses       *float64         `protobuf:"fixed64,44,opt,name=gaussianblur_passes" json:"gaussianblur_passes,omitempty"`
+	GaussianblurStddevhor    *float64         `protobuf:"fixed64,45,opt,name=gaussianblur_stddevhor" json:"gaussianblur_stddevhor,omitempty"`
+	GaussianblurStddevver    *float64         `protobuf:"fixed64,46,opt,name=gaussianblur_stddevver" json:"gaussianblur_stddevver,omitempty"`
+	Scale_2DFactorsX         *float64         `protobuf:"fixed64,47,opt,name=scale_2d_factors_x" json:"scale_2d_factors_x,omitempty"`
+	Scale_2DFactorsY         *float64         `protobuf:"fixed64,48,opt,name=scale_2d_factors_y" json:"scale_2d_factors_y,omitempty"`
+	Rotate_2D                *float64         `protobuf:"fixed64,49,opt,name=rotate_2d" json:"rotate_2d,omitempty"`
+	NeedsClear               *bool            `protobuf:"varint,50,opt,name=needs_clear" json:"needs_clear,omitempty"`
+	NeedsDepth               *bool            `protobuf:"varint,51,opt,name=needs_depth" json:"needs_depth,omitempty"`
+	NeedsIntermediateTexture *bool            `protobuf:"varint,52,opt,name=needs_intermediate_texture" json:"needs_intermediate_texture,omitempty"`
+	NeedsRedrawEveryFrame    *bool            `protobuf:"varint,53,opt,name=needs_redraw_every_frame" json:"needs_redraw_every_frame,omitempty"`
+	TextShadow               *CTextShadowData `protobuf:"bytes,54,opt,name=text_shadow" json:"text_shadow,omitempty"`
+	MixBlendMode             *uint32          `protobuf:"varint,55,opt,name=mix_blend_mode" json:"mix_blend_mode,omitempty"`
+	OccludedLeftEdge         *float64         `protobuf:"fixed64,56,opt,name=occluded_left_edge" json:"occluded_left_edge,omitempty"`
+	OccludedTopEdge          *float64         `protobuf:"fixed64,57,opt,name=occluded_top_edge" json:"occluded_top_edge,omitempty"`
+	OccludedRightEdge        *float64         `protobuf:"fixed64,58,opt,name=occluded_right_edge" json:"occluded_right_edge,omitempty"`
+	OccludedBottomEdge       *float64         `protobuf:"fixed64,59,opt,name=occluded_bottom_edge" json:"occluded_bottom_edge,omitempty"`
+	XXX_unrecognized         []byte           `json:"-"`
 }
 
 func (m *CMsgPushCompositingLayer) Reset()         { *m = CMsgPushCompositingLayer{} }
@@ -1070,6 +1071,13 @@ func (m *CMsgPushCompositingLayer) GetNeedsClear() bool {
 func (m *CMsgPushCompositingLayer) GetNeedsDepth() bool {
 	if m != nil && m.NeedsDepth != nil {
 		return *m.NeedsDepth
+	}
+	return false
+}
+
+func (m *CMsgPushCompositingLayer) GetNeedsIntermediateTexture() bool {
+	if m != nil && m.NeedsIntermediateTexture != nil {
+		return *m.NeedsIntermediateTexture
 	}
 	return false
 }
@@ -3338,38 +3346,249 @@ func (m *CMsgPopClipLayer) Reset()         { *m = CMsgPopClipLayer{} }
 func (m *CMsgPopClipLayer) String() string { return proto.CompactTextString(m) }
 func (*CMsgPopClipLayer) ProtoMessage()    {}
 
+type CMsgPushPanelContextInLayer struct {
+	TransformM00     *float64        `protobuf:"fixed64,1,opt,name=transform_m00" json:"transform_m00,omitempty"`
+	TransformM01     *float64        `protobuf:"fixed64,2,opt,name=transform_m01" json:"transform_m01,omitempty"`
+	TransformM02     *float64        `protobuf:"fixed64,3,opt,name=transform_m02" json:"transform_m02,omitempty"`
+	TransformM03     *float64        `protobuf:"fixed64,4,opt,name=transform_m03" json:"transform_m03,omitempty"`
+	TransformM10     *float64        `protobuf:"fixed64,5,opt,name=transform_m10" json:"transform_m10,omitempty"`
+	TransformM11     *float64        `protobuf:"fixed64,6,opt,name=transform_m11" json:"transform_m11,omitempty"`
+	TransformM12     *float64        `protobuf:"fixed64,7,opt,name=transform_m12" json:"transform_m12,omitempty"`
+	TransformM13     *float64        `protobuf:"fixed64,8,opt,name=transform_m13" json:"transform_m13,omitempty"`
+	TransformM20     *float64        `protobuf:"fixed64,9,opt,name=transform_m20" json:"transform_m20,omitempty"`
+	TransformM21     *float64        `protobuf:"fixed64,10,opt,name=transform_m21" json:"transform_m21,omitempty"`
+	TransformM22     *float64        `protobuf:"fixed64,11,opt,name=transform_m22" json:"transform_m22,omitempty"`
+	TransformM23     *float64        `protobuf:"fixed64,12,opt,name=transform_m23" json:"transform_m23,omitempty"`
+	TransformM30     *float64        `protobuf:"fixed64,13,opt,name=transform_m30" json:"transform_m30,omitempty"`
+	TransformM31     *float64        `protobuf:"fixed64,14,opt,name=transform_m31" json:"transform_m31,omitempty"`
+	TransformM32     *float64        `protobuf:"fixed64,15,opt,name=transform_m32" json:"transform_m32,omitempty"`
+	TransformM33     *float64        `protobuf:"fixed64,16,opt,name=transform_m33" json:"transform_m33,omitempty"`
+	BoxShadow        *CBoxShadowData `protobuf:"bytes,17,opt,name=box_shadow" json:"box_shadow,omitempty"`
+	Width            *float64        `protobuf:"fixed64,18,opt,name=width" json:"width,omitempty"`
+	Height           *float64        `protobuf:"fixed64,19,opt,name=height" json:"height,omitempty"`
+	PositionX        *float64        `protobuf:"fixed64,20,opt,name=position_x" json:"position_x,omitempty"`
+	PositionY        *float64        `protobuf:"fixed64,21,opt,name=position_y" json:"position_y,omitempty"`
+	Border           *CBorderData    `protobuf:"bytes,22,opt,name=border" json:"border,omitempty"`
+	ScrollX          *float64        `protobuf:"fixed64,23,opt,name=scroll_x" json:"scroll_x,omitempty"`
+	ScrollY          *float64        `protobuf:"fixed64,24,opt,name=scroll_y" json:"scroll_y,omitempty"`
+	XXX_unrecognized []byte          `json:"-"`
+}
+
+func (m *CMsgPushPanelContextInLayer) Reset()         { *m = CMsgPushPanelContextInLayer{} }
+func (m *CMsgPushPanelContextInLayer) String() string { return proto.CompactTextString(m) }
+func (*CMsgPushPanelContextInLayer) ProtoMessage()    {}
+
+func (m *CMsgPushPanelContextInLayer) GetTransformM00() float64 {
+	if m != nil && m.TransformM00 != nil {
+		return *m.TransformM00
+	}
+	return 0
+}
+
+func (m *CMsgPushPanelContextInLayer) GetTransformM01() float64 {
+	if m != nil && m.TransformM01 != nil {
+		return *m.TransformM01
+	}
+	return 0
+}
+
+func (m *CMsgPushPanelContextInLayer) GetTransformM02() float64 {
+	if m != nil && m.TransformM02 != nil {
+		return *m.TransformM02
+	}
+	return 0
+}
+
+func (m *CMsgPushPanelContextInLayer) GetTransformM03() float64 {
+	if m != nil && m.TransformM03 != nil {
+		return *m.TransformM03
+	}
+	return 0
+}
+
+func (m *CMsgPushPanelContextInLayer) GetTransformM10() float64 {
+	if m != nil && m.TransformM10 != nil {
+		return *m.TransformM10
+	}
+	return 0
+}
+
+func (m *CMsgPushPanelContextInLayer) GetTransformM11() float64 {
+	if m != nil && m.TransformM11 != nil {
+		return *m.TransformM11
+	}
+	return 0
+}
+
+func (m *CMsgPushPanelContextInLayer) GetTransformM12() float64 {
+	if m != nil && m.TransformM12 != nil {
+		return *m.TransformM12
+	}
+	return 0
+}
+
+func (m *CMsgPushPanelContextInLayer) GetTransformM13() float64 {
+	if m != nil && m.TransformM13 != nil {
+		return *m.TransformM13
+	}
+	return 0
+}
+
+func (m *CMsgPushPanelContextInLayer) GetTransformM20() float64 {
+	if m != nil && m.TransformM20 != nil {
+		return *m.TransformM20
+	}
+	return 0
+}
+
+func (m *CMsgPushPanelContextInLayer) GetTransformM21() float64 {
+	if m != nil && m.TransformM21 != nil {
+		return *m.TransformM21
+	}
+	return 0
+}
+
+func (m *CMsgPushPanelContextInLayer) GetTransformM22() float64 {
+	if m != nil && m.TransformM22 != nil {
+		return *m.TransformM22
+	}
+	return 0
+}
+
+func (m *CMsgPushPanelContextInLayer) GetTransformM23() float64 {
+	if m != nil && m.TransformM23 != nil {
+		return *m.TransformM23
+	}
+	return 0
+}
+
+func (m *CMsgPushPanelContextInLayer) GetTransformM30() float64 {
+	if m != nil && m.TransformM30 != nil {
+		return *m.TransformM30
+	}
+	return 0
+}
+
+func (m *CMsgPushPanelContextInLayer) GetTransformM31() float64 {
+	if m != nil && m.TransformM31 != nil {
+		return *m.TransformM31
+	}
+	return 0
+}
+
+func (m *CMsgPushPanelContextInLayer) GetTransformM32() float64 {
+	if m != nil && m.TransformM32 != nil {
+		return *m.TransformM32
+	}
+	return 0
+}
+
+func (m *CMsgPushPanelContextInLayer) GetTransformM33() float64 {
+	if m != nil && m.TransformM33 != nil {
+		return *m.TransformM33
+	}
+	return 0
+}
+
+func (m *CMsgPushPanelContextInLayer) GetBoxShadow() *CBoxShadowData {
+	if m != nil {
+		return m.BoxShadow
+	}
+	return nil
+}
+
+func (m *CMsgPushPanelContextInLayer) GetWidth() float64 {
+	if m != nil && m.Width != nil {
+		return *m.Width
+	}
+	return 0
+}
+
+func (m *CMsgPushPanelContextInLayer) GetHeight() float64 {
+	if m != nil && m.Height != nil {
+		return *m.Height
+	}
+	return 0
+}
+
+func (m *CMsgPushPanelContextInLayer) GetPositionX() float64 {
+	if m != nil && m.PositionX != nil {
+		return *m.PositionX
+	}
+	return 0
+}
+
+func (m *CMsgPushPanelContextInLayer) GetPositionY() float64 {
+	if m != nil && m.PositionY != nil {
+		return *m.PositionY
+	}
+	return 0
+}
+
+func (m *CMsgPushPanelContextInLayer) GetBorder() *CBorderData {
+	if m != nil {
+		return m.Border
+	}
+	return nil
+}
+
+func (m *CMsgPushPanelContextInLayer) GetScrollX() float64 {
+	if m != nil && m.ScrollX != nil {
+		return *m.ScrollX
+	}
+	return 0
+}
+
+func (m *CMsgPushPanelContextInLayer) GetScrollY() float64 {
+	if m != nil && m.ScrollY != nil {
+		return *m.ScrollY
+	}
+	return 0
+}
+
+type CMsgPopPanelContextInLayer struct {
+	XXX_unrecognized []byte `json:"-"`
+}
+
+func (m *CMsgPopPanelContextInLayer) Reset()         { *m = CMsgPopPanelContextInLayer{} }
+func (m *CMsgPopPanelContextInLayer) String() string { return proto.CompactTextString(m) }
+func (*CMsgPopPanelContextInLayer) ProtoMessage()    {}
+
 type CMsgPushAAndTContext struct {
-	ContextId                  *uint64                           `protobuf:"varint,1,opt,name=context_id" json:"context_id,omitempty"`
-	Width                      *float64                          `protobuf:"fixed64,3,opt,name=width" json:"width,omitempty"`
-	Height                     *float64                          `protobuf:"fixed64,4,opt,name=height" json:"height,omitempty"`
-	ChilrenHave_3Dtransforms   *bool                             `protobuf:"varint,5,opt,name=chilren_have_3dtransforms" json:"chilren_have_3dtransforms,omitempty"`
-	Zindex                     *float32                          `protobuf:"fixed32,6,opt,name=zindex" json:"zindex,omitempty"`
-	PanelPosition              *CMsgPanelPosition                `protobuf:"bytes,7,opt,name=panel_position" json:"panel_position,omitempty"`
-	TransformMatrix            *CMsg3DTransformMatrix            `protobuf:"bytes,8,opt,name=transform_matrix" json:"transform_matrix,omitempty"`
-	TransformOrigin            *CMsg3DTransformOrigin            `protobuf:"bytes,9,opt,name=transform_origin" json:"transform_origin,omitempty"`
-	TransformPerspective       *CMsg3DTransformPerspective       `protobuf:"bytes,10,opt,name=transform_perspective" json:"transform_perspective,omitempty"`
-	TransformPerspectiveOrigin *CMsg3DTransformPerspectiveOrigin `protobuf:"bytes,11,opt,name=transform_perspective_origin" json:"transform_perspective_origin,omitempty"`
-	Opacity                    *CMsgOpacity                      `protobuf:"bytes,12,opt,name=opacity" json:"opacity,omitempty"`
-	WashColor                  *CMsgColor                        `protobuf:"bytes,13,opt,name=wash_color" json:"wash_color,omitempty"`
-	HueShift                   *CMsgHueShift                     `protobuf:"bytes,14,opt,name=hue_shift" json:"hue_shift,omitempty"`
-	Saturation                 *CMsgSaturation                   `protobuf:"bytes,15,opt,name=saturation" json:"saturation,omitempty"`
-	Brightness                 *CMsgBrightness                   `protobuf:"bytes,16,opt,name=brightness" json:"brightness,omitempty"`
-	Contrast                   *CMsgContrast                     `protobuf:"bytes,17,opt,name=contrast" json:"contrast,omitempty"`
-	OpacityMask                *CMsgOpacityMask                  `protobuf:"bytes,18,opt,name=opacity_mask" json:"opacity_mask,omitempty"`
-	BorderRadius               *CMsgBorderRadius                 `protobuf:"bytes,19,opt,name=border_radius" json:"border_radius,omitempty"`
-	GaussianBlur               *CMsgGaussianBlur                 `protobuf:"bytes,20,opt,name=gaussian_blur" json:"gaussian_blur,omitempty"`
-	Border                     *CMsgBorder                       `protobuf:"bytes,21,opt,name=border" json:"border,omitempty"`
-	BoxShadow                  *CMsgBoxShadow                    `protobuf:"bytes,22,opt,name=box_shadow" json:"box_shadow,omitempty"`
-	Scale_2DCentered           *CMsgPointWithTransition          `protobuf:"bytes,23,opt,name=scale_2d_centered" json:"scale_2d_centered,omitempty"`
-	Rotate_2DCentered          *CMsgRotate2D                     `protobuf:"bytes,24,opt,name=rotate_2d_centered" json:"rotate_2d_centered,omitempty"`
-	TextShadow                 *CMsgTextShadow                   `protobuf:"bytes,25,opt,name=text_shadow" json:"text_shadow,omitempty"`
-	Clip                       *CMsgClip                         `protobuf:"bytes,26,opt,name=clip" json:"clip,omitempty"`
-	SuppressClipToBounds       *bool                             `protobuf:"varint,27,opt,name=suppress_clip_to_bounds" json:"suppress_clip_to_bounds,omitempty"`
-	NeedsFullRepaint           *int32                            `protobuf:"varint,28,opt,name=needs_full_repaint" json:"needs_full_repaint,omitempty"`
-	WantsHitTest               *bool                             `protobuf:"varint,29,opt,name=wants_hit_test" json:"wants_hit_test,omitempty"`
-	MixBlendMode               *uint32                           `protobuf:"varint,30,opt,name=mix_blend_mode" json:"mix_blend_mode,omitempty"`
-	OpaqueBackground           *bool                             `protobuf:"varint,31,opt,name=opaque_background" json:"opaque_background,omitempty"`
-	XXX_unrecognized           []byte                            `json:"-"`
+	ContextId                         *uint64                           `protobuf:"varint,1,opt,name=context_id" json:"context_id,omitempty"`
+	Width                             *float64                          `protobuf:"fixed64,3,opt,name=width" json:"width,omitempty"`
+	Height                            *float64                          `protobuf:"fixed64,4,opt,name=height" json:"height,omitempty"`
+	ChilrenHave_3Dtransforms          *bool                             `protobuf:"varint,5,opt,name=chilren_have_3dtransforms" json:"chilren_have_3dtransforms,omitempty"`
+	Zindex                            *float32                          `protobuf:"fixed32,6,opt,name=zindex" json:"zindex,omitempty"`
+	PanelPosition                     *CMsgPanelPosition                `protobuf:"bytes,7,opt,name=panel_position" json:"panel_position,omitempty"`
+	TransformMatrix                   *CMsg3DTransformMatrix            `protobuf:"bytes,8,opt,name=transform_matrix" json:"transform_matrix,omitempty"`
+	TransformOrigin                   *CMsg3DTransformOrigin            `protobuf:"bytes,9,opt,name=transform_origin" json:"transform_origin,omitempty"`
+	TransformPerspective              *CMsg3DTransformPerspective       `protobuf:"bytes,10,opt,name=transform_perspective" json:"transform_perspective,omitempty"`
+	TransformPerspectiveOrigin        *CMsg3DTransformPerspectiveOrigin `protobuf:"bytes,11,opt,name=transform_perspective_origin" json:"transform_perspective_origin,omitempty"`
+	Opacity                           *CMsgOpacity                      `protobuf:"bytes,12,opt,name=opacity" json:"opacity,omitempty"`
+	WashColor                         *CMsgColor                        `protobuf:"bytes,13,opt,name=wash_color" json:"wash_color,omitempty"`
+	HueShift                          *CMsgHueShift                     `protobuf:"bytes,14,opt,name=hue_shift" json:"hue_shift,omitempty"`
+	Saturation                        *CMsgSaturation                   `protobuf:"bytes,15,opt,name=saturation" json:"saturation,omitempty"`
+	Brightness                        *CMsgBrightness                   `protobuf:"bytes,16,opt,name=brightness" json:"brightness,omitempty"`
+	Contrast                          *CMsgContrast                     `protobuf:"bytes,17,opt,name=contrast" json:"contrast,omitempty"`
+	OpacityMask                       *CMsgOpacityMask                  `protobuf:"bytes,18,opt,name=opacity_mask" json:"opacity_mask,omitempty"`
+	BorderRadius                      *CMsgBorderRadius                 `protobuf:"bytes,19,opt,name=border_radius" json:"border_radius,omitempty"`
+	GaussianBlur                      *CMsgGaussianBlur                 `protobuf:"bytes,20,opt,name=gaussian_blur" json:"gaussian_blur,omitempty"`
+	Border                            *CMsgBorder                       `protobuf:"bytes,21,opt,name=border" json:"border,omitempty"`
+	BoxShadow                         *CMsgBoxShadow                    `protobuf:"bytes,22,opt,name=box_shadow" json:"box_shadow,omitempty"`
+	Scale_2DCentered                  *CMsgPointWithTransition          `protobuf:"bytes,23,opt,name=scale_2d_centered" json:"scale_2d_centered,omitempty"`
+	Rotate_2DCentered                 *CMsgRotate2D                     `protobuf:"bytes,24,opt,name=rotate_2d_centered" json:"rotate_2d_centered,omitempty"`
+	TextShadow                        *CMsgTextShadow                   `protobuf:"bytes,25,opt,name=text_shadow" json:"text_shadow,omitempty"`
+	Clip                              *CMsgClip                         `protobuf:"bytes,26,opt,name=clip" json:"clip,omitempty"`
+	SuppressClipToBounds              *bool                             `protobuf:"varint,27,opt,name=suppress_clip_to_bounds" json:"suppress_clip_to_bounds,omitempty"`
+	NeedsFullRepaint                  *int32                            `protobuf:"varint,28,opt,name=needs_full_repaint" json:"needs_full_repaint,omitempty"`
+	NeedsIntermediateTexture          *bool                             `protobuf:"varint,29,opt,name=needs_intermediate_texture" json:"needs_intermediate_texture,omitempty"`
+	TransformRequiresCompositionLayer *bool                             `protobuf:"varint,30,opt,name=transform_requires_composition_layer" json:"transform_requires_composition_layer,omitempty"`
+	WantsHitTest                      *bool                             `protobuf:"varint,31,opt,name=wants_hit_test" json:"wants_hit_test,omitempty"`
+	MixBlendMode                      *uint32                           `protobuf:"varint,32,opt,name=mix_blend_mode" json:"mix_blend_mode,omitempty"`
+	OpaqueBackground                  *bool                             `protobuf:"varint,33,opt,name=opaque_background" json:"opaque_background,omitempty"`
+	ChildPanelCount                   *uint32                           `protobuf:"varint,34,opt,name=child_panel_count" json:"child_panel_count,omitempty"`
+	XXX_unrecognized                  []byte                            `json:"-"`
 }
 
 func (m *CMsgPushAAndTContext) Reset()         { *m = CMsgPushAAndTContext{} }
@@ -3565,6 +3784,20 @@ func (m *CMsgPushAAndTContext) GetNeedsFullRepaint() int32 {
 	return 0
 }
 
+func (m *CMsgPushAAndTContext) GetNeedsIntermediateTexture() bool {
+	if m != nil && m.NeedsIntermediateTexture != nil {
+		return *m.NeedsIntermediateTexture
+	}
+	return false
+}
+
+func (m *CMsgPushAAndTContext) GetTransformRequiresCompositionLayer() bool {
+	if m != nil && m.TransformRequiresCompositionLayer != nil {
+		return *m.TransformRequiresCompositionLayer
+	}
+	return false
+}
+
 func (m *CMsgPushAAndTContext) GetWantsHitTest() bool {
 	if m != nil && m.WantsHitTest != nil {
 		return *m.WantsHitTest
@@ -3584,6 +3817,13 @@ func (m *CMsgPushAAndTContext) GetOpaqueBackground() bool {
 		return *m.OpaqueBackground
 	}
 	return false
+}
+
+func (m *CMsgPushAAndTContext) GetChildPanelCount() uint32 {
+	if m != nil && m.ChildPanelCount != nil {
+		return *m.ChildPanelCount
+	}
+	return 0
 }
 
 type CMsgPopAAndTContext struct {
@@ -3715,14 +3955,15 @@ func (m *CMsgRenderFilledRect) GetAntialiasing() uint32 {
 }
 
 type CMsgDrawTexturedRect struct {
-	TopLeft            *CMsgPoint `protobuf:"bytes,1,opt,name=top_left" json:"top_left,omitempty"`
-	BottomRight        *CMsgPoint `protobuf:"bytes,2,opt,name=bottom_right" json:"bottom_right,omitempty"`
-	TextureId          *uint32    `protobuf:"varint,3,opt,name=texture_id" json:"texture_id,omitempty"`
-	TextureTopLeft     *CMsgPoint `protobuf:"bytes,4,opt,name=texture_top_left" json:"texture_top_left,omitempty"`
-	TextureBottomRight *CMsgPoint `protobuf:"bytes,5,opt,name=texture_bottom_right" json:"texture_bottom_right,omitempty"`
-	TextureSerial      *int32     `protobuf:"varint,6,opt,name=texture_serial,def=0" json:"texture_serial,omitempty"`
-	TextureSampleMode  *uint32    `protobuf:"varint,7,opt,name=texture_sample_mode,def=0" json:"texture_sample_mode,omitempty"`
-	XXX_unrecognized   []byte     `json:"-"`
+	TopLeft            *CMsgPoint   `protobuf:"bytes,1,opt,name=top_left" json:"top_left,omitempty"`
+	BottomRight        *CMsgPoint   `protobuf:"bytes,2,opt,name=bottom_right" json:"bottom_right,omitempty"`
+	TextureId          *uint32      `protobuf:"varint,3,opt,name=texture_id" json:"texture_id,omitempty"`
+	TextureTopLeft     *CMsgPoint   `protobuf:"bytes,4,opt,name=texture_top_left" json:"texture_top_left,omitempty"`
+	TextureBottomRight *CMsgPoint   `protobuf:"bytes,5,opt,name=texture_bottom_right" json:"texture_bottom_right,omitempty"`
+	TextureSerial      *int32       `protobuf:"varint,6,opt,name=texture_serial,def=0" json:"texture_serial,omitempty"`
+	TextureSampleMode  *uint32      `protobuf:"varint,7,opt,name=texture_sample_mode,def=0" json:"texture_sample_mode,omitempty"`
+	TextureOpacity     *CMsgOpacity `protobuf:"bytes,8,opt,name=texture_opacity" json:"texture_opacity,omitempty"`
+	XXX_unrecognized   []byte       `json:"-"`
 }
 
 func (m *CMsgDrawTexturedRect) Reset()         { *m = CMsgDrawTexturedRect{} }
@@ -3779,6 +4020,13 @@ func (m *CMsgDrawTexturedRect) GetTextureSampleMode() uint32 {
 		return *m.TextureSampleMode
 	}
 	return Default_CMsgDrawTexturedRect_TextureSampleMode
+}
+
+func (m *CMsgDrawTexturedRect) GetTextureOpacity() *CMsgOpacity {
+	if m != nil {
+		return m.TextureOpacity
+	}
+	return nil
 }
 
 type CMsgDrawDoubleBufferedRect struct {
@@ -3885,6 +4133,7 @@ type CMsgRenderTexturedRect struct {
 	TextureBottomRight *CMsgPoint `protobuf:"bytes,5,opt,name=texture_bottom_right" json:"texture_bottom_right,omitempty"`
 	TextureSerial      *int32     `protobuf:"varint,6,opt,name=texture_serial,def=0" json:"texture_serial,omitempty"`
 	TextureSampleMode  *uint32    `protobuf:"varint,7,opt,name=texture_sample_mode,def=0" json:"texture_sample_mode,omitempty"`
+	TextureOpacity     *float32   `protobuf:"fixed32,8,opt,name=texture_opacity,def=1" json:"texture_opacity,omitempty"`
 	XXX_unrecognized   []byte     `json:"-"`
 }
 
@@ -3894,6 +4143,7 @@ func (*CMsgRenderTexturedRect) ProtoMessage()    {}
 
 const Default_CMsgRenderTexturedRect_TextureSerial int32 = 0
 const Default_CMsgRenderTexturedRect_TextureSampleMode uint32 = 0
+const Default_CMsgRenderTexturedRect_TextureOpacity float32 = 1
 
 func (m *CMsgRenderTexturedRect) GetTopLeft() *CMsgPoint {
 	if m != nil {
@@ -3942,6 +4192,13 @@ func (m *CMsgRenderTexturedRect) GetTextureSampleMode() uint32 {
 		return *m.TextureSampleMode
 	}
 	return Default_CMsgRenderTexturedRect_TextureSampleMode
+}
+
+func (m *CMsgRenderTexturedRect) GetTextureOpacity() float32 {
+	if m != nil && m.TextureOpacity != nil {
+		return *m.TextureOpacity
+	}
+	return Default_CMsgRenderTexturedRect_TextureOpacity
 }
 
 type CMsgLockTexture struct {

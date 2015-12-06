@@ -31,7 +31,9 @@ It is generated from these files:
 	rendermessages.proto
 	steamdatagram_messages.proto
 	steammessages.proto
+	steammessages_cloud.steamworkssdk.proto
 	steammessages_oauth.steamworkssdk.proto
+	steammessages_publishedfile.steamworkssdk.proto
 	steammessages_unified_base.steamworkssdk.proto
 	te.proto
 	toolevents.proto
@@ -637,11 +639,12 @@ func (m *CMsgSystemBroadcast) GetMessage() string {
 }
 
 type CMsgClientPingData struct {
-	RelayCodes       []uint32 `protobuf:"fixed32,4,rep,packed,name=relay_codes" json:"relay_codes,omitempty"`
-	RelayPings       []uint32 `protobuf:"varint,5,rep,packed,name=relay_pings" json:"relay_pings,omitempty"`
-	RegionCodes      []uint32 `protobuf:"varint,8,rep,packed,name=region_codes" json:"region_codes,omitempty"`
-	RegionPings      []uint32 `protobuf:"varint,9,rep,packed,name=region_pings" json:"region_pings,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	RelayCodes              []uint32 `protobuf:"fixed32,4,rep,packed,name=relay_codes" json:"relay_codes,omitempty"`
+	RelayPings              []uint32 `protobuf:"varint,5,rep,packed,name=relay_pings" json:"relay_pings,omitempty"`
+	RegionCodes             []uint32 `protobuf:"varint,8,rep,packed,name=region_codes" json:"region_codes,omitempty"`
+	RegionPings             []uint32 `protobuf:"varint,9,rep,packed,name=region_pings" json:"region_pings,omitempty"`
+	RegionPingFailedBitmask *uint32  `protobuf:"varint,10,opt,name=region_ping_failed_bitmask" json:"region_ping_failed_bitmask,omitempty"`
+	XXX_unrecognized        []byte   `json:"-"`
 }
 
 func (m *CMsgClientPingData) Reset()         { *m = CMsgClientPingData{} }
@@ -674,6 +677,13 @@ func (m *CMsgClientPingData) GetRegionPings() []uint32 {
 		return m.RegionPings
 	}
 	return nil
+}
+
+func (m *CMsgClientPingData) GetRegionPingFailedBitmask() uint32 {
+	if m != nil && m.RegionPingFailedBitmask != nil {
+		return *m.RegionPingFailedBitmask
+	}
+	return 0
 }
 
 type CMsgInviteToParty struct {
@@ -751,6 +761,7 @@ func (m *CMsgInviteToLobby) GetClientVersion() uint32 {
 type CMsgInvitationCreated struct {
 	GroupId          *uint64 `protobuf:"varint,1,opt,name=group_id" json:"group_id,omitempty"`
 	SteamId          *uint64 `protobuf:"fixed64,2,opt,name=steam_id" json:"steam_id,omitempty"`
+	UserOffline      *bool   `protobuf:"varint,3,opt,name=user_offline" json:"user_offline,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
@@ -770,6 +781,13 @@ func (m *CMsgInvitationCreated) GetSteamId() uint64 {
 		return *m.SteamId
 	}
 	return 0
+}
+
+func (m *CMsgInvitationCreated) GetUserOffline() bool {
+	if m != nil && m.UserOffline != nil {
+		return *m.UserOffline
+	}
+	return false
 }
 
 type CMsgPartyInviteResponse struct {

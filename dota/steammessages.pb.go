@@ -1963,32 +1963,39 @@ func (m *CGCSystemMsg_GetAccountDetails) GetAppid() uint32 {
 }
 
 type CGCSystemMsg_GetAccountDetails_Response struct {
-	EresultDeprecated   *uint32 `protobuf:"varint,1,opt,name=eresult_deprecated,def=2" json:"eresult_deprecated,omitempty"`
-	AccountName         *string `protobuf:"bytes,2,opt,name=account_name" json:"account_name,omitempty"`
-	PersonaName         *string `protobuf:"bytes,3,opt,name=persona_name" json:"persona_name,omitempty"`
-	IsProfileCreated    *bool   `protobuf:"varint,26,opt,name=is_profile_created" json:"is_profile_created,omitempty"`
-	IsProfilePublic     *bool   `protobuf:"varint,4,opt,name=is_profile_public" json:"is_profile_public,omitempty"`
-	IsInventoryPublic   *bool   `protobuf:"varint,5,opt,name=is_inventory_public" json:"is_inventory_public,omitempty"`
-	IsVacBanned         *bool   `protobuf:"varint,7,opt,name=is_vac_banned" json:"is_vac_banned,omitempty"`
-	IsCyberCafe         *bool   `protobuf:"varint,8,opt,name=is_cyber_cafe" json:"is_cyber_cafe,omitempty"`
-	IsSchoolAccount     *bool   `protobuf:"varint,9,opt,name=is_school_account" json:"is_school_account,omitempty"`
-	IsLimited           *bool   `protobuf:"varint,10,opt,name=is_limited" json:"is_limited,omitempty"`
-	IsSubscribed        *bool   `protobuf:"varint,11,opt,name=is_subscribed" json:"is_subscribed,omitempty"`
-	Package             *uint32 `protobuf:"varint,12,opt,name=package" json:"package,omitempty"`
-	IsFreeTrialAccount  *bool   `protobuf:"varint,13,opt,name=is_free_trial_account" json:"is_free_trial_account,omitempty"`
-	FreeTrialExpiration *uint32 `protobuf:"varint,14,opt,name=free_trial_expiration" json:"free_trial_expiration,omitempty"`
-	IsLowViolence       *bool   `protobuf:"varint,15,opt,name=is_low_violence" json:"is_low_violence,omitempty"`
-	IsAccountLockedDown *bool   `protobuf:"varint,16,opt,name=is_account_locked_down" json:"is_account_locked_down,omitempty"`
-	IsCommunityBanned   *bool   `protobuf:"varint,17,opt,name=is_community_banned" json:"is_community_banned,omitempty"`
-	IsTradeBanned       *bool   `protobuf:"varint,18,opt,name=is_trade_banned" json:"is_trade_banned,omitempty"`
-	TradeBanExpiration  *uint32 `protobuf:"varint,19,opt,name=trade_ban_expiration" json:"trade_ban_expiration,omitempty"`
-	Accountid           *uint32 `protobuf:"varint,20,opt,name=accountid" json:"accountid,omitempty"`
-	SuspensionEndTime   *uint32 `protobuf:"varint,21,opt,name=suspension_end_time" json:"suspension_end_time,omitempty"`
-	Currency            *string `protobuf:"bytes,22,opt,name=currency" json:"currency,omitempty"`
-	SteamLevel          *uint32 `protobuf:"varint,23,opt,name=steam_level" json:"steam_level,omitempty"`
-	FriendCount         *uint32 `protobuf:"varint,24,opt,name=friend_count" json:"friend_count,omitempty"`
-	AccountCreationTime *uint32 `protobuf:"varint,25,opt,name=account_creation_time" json:"account_creation_time,omitempty"`
-	XXX_unrecognized    []byte  `json:"-"`
+	EresultDeprecated      *uint32 `protobuf:"varint,1,opt,name=eresult_deprecated,def=2" json:"eresult_deprecated,omitempty"`
+	AccountName            *string `protobuf:"bytes,2,opt,name=account_name" json:"account_name,omitempty"`
+	PersonaName            *string `protobuf:"bytes,3,opt,name=persona_name" json:"persona_name,omitempty"`
+	IsProfileCreated       *bool   `protobuf:"varint,26,opt,name=is_profile_created" json:"is_profile_created,omitempty"`
+	IsProfilePublic        *bool   `protobuf:"varint,4,opt,name=is_profile_public" json:"is_profile_public,omitempty"`
+	IsInventoryPublic      *bool   `protobuf:"varint,5,opt,name=is_inventory_public" json:"is_inventory_public,omitempty"`
+	IsVacBanned            *bool   `protobuf:"varint,7,opt,name=is_vac_banned" json:"is_vac_banned,omitempty"`
+	IsCyberCafe            *bool   `protobuf:"varint,8,opt,name=is_cyber_cafe" json:"is_cyber_cafe,omitempty"`
+	IsSchoolAccount        *bool   `protobuf:"varint,9,opt,name=is_school_account" json:"is_school_account,omitempty"`
+	IsLimited              *bool   `protobuf:"varint,10,opt,name=is_limited" json:"is_limited,omitempty"`
+	IsSubscribed           *bool   `protobuf:"varint,11,opt,name=is_subscribed" json:"is_subscribed,omitempty"`
+	Package                *uint32 `protobuf:"varint,12,opt,name=package" json:"package,omitempty"`
+	IsFreeTrialAccount     *bool   `protobuf:"varint,13,opt,name=is_free_trial_account" json:"is_free_trial_account,omitempty"`
+	FreeTrialExpiration    *uint32 `protobuf:"varint,14,opt,name=free_trial_expiration" json:"free_trial_expiration,omitempty"`
+	IsLowViolence          *bool   `protobuf:"varint,15,opt,name=is_low_violence" json:"is_low_violence,omitempty"`
+	IsAccountLockedDown    *bool   `protobuf:"varint,16,opt,name=is_account_locked_down" json:"is_account_locked_down,omitempty"`
+	IsCommunityBanned      *bool   `protobuf:"varint,17,opt,name=is_community_banned" json:"is_community_banned,omitempty"`
+	IsTradeBanned          *bool   `protobuf:"varint,18,opt,name=is_trade_banned" json:"is_trade_banned,omitempty"`
+	TradeBanExpiration     *uint32 `protobuf:"varint,19,opt,name=trade_ban_expiration" json:"trade_ban_expiration,omitempty"`
+	Accountid              *uint32 `protobuf:"varint,20,opt,name=accountid" json:"accountid,omitempty"`
+	SuspensionEndTime      *uint32 `protobuf:"varint,21,opt,name=suspension_end_time" json:"suspension_end_time,omitempty"`
+	Currency               *string `protobuf:"bytes,22,opt,name=currency" json:"currency,omitempty"`
+	SteamLevel             *uint32 `protobuf:"varint,23,opt,name=steam_level" json:"steam_level,omitempty"`
+	FriendCount            *uint32 `protobuf:"varint,24,opt,name=friend_count" json:"friend_count,omitempty"`
+	AccountCreationTime    *uint32 `protobuf:"varint,25,opt,name=account_creation_time" json:"account_creation_time,omitempty"`
+	IsSteamguardEnabled    *bool   `protobuf:"varint,27,opt,name=is_steamguard_enabled" json:"is_steamguard_enabled,omitempty"`
+	IsPhoneVerified        *bool   `protobuf:"varint,28,opt,name=is_phone_verified" json:"is_phone_verified,omitempty"`
+	IsTwoFactorAuthEnabled *bool   `protobuf:"varint,29,opt,name=is_two_factor_auth_enabled" json:"is_two_factor_auth_enabled,omitempty"`
+	TwoFactorEnabledTime   *uint32 `protobuf:"varint,30,opt,name=two_factor_enabled_time" json:"two_factor_enabled_time,omitempty"`
+	PhoneVerificationTime  *uint32 `protobuf:"varint,31,opt,name=phone_verification_time" json:"phone_verification_time,omitempty"`
+	PhoneId                *uint64 `protobuf:"varint,33,opt,name=phone_id" json:"phone_id,omitempty"`
+	IsPhoneIdentifying     *bool   `protobuf:"varint,34,opt,name=is_phone_identifying" json:"is_phone_identifying,omitempty"`
+	XXX_unrecognized       []byte  `json:"-"`
 }
 
 func (m *CGCSystemMsg_GetAccountDetails_Response) Reset() {
@@ -2172,6 +2179,55 @@ func (m *CGCSystemMsg_GetAccountDetails_Response) GetAccountCreationTime() uint3
 		return *m.AccountCreationTime
 	}
 	return 0
+}
+
+func (m *CGCSystemMsg_GetAccountDetails_Response) GetIsSteamguardEnabled() bool {
+	if m != nil && m.IsSteamguardEnabled != nil {
+		return *m.IsSteamguardEnabled
+	}
+	return false
+}
+
+func (m *CGCSystemMsg_GetAccountDetails_Response) GetIsPhoneVerified() bool {
+	if m != nil && m.IsPhoneVerified != nil {
+		return *m.IsPhoneVerified
+	}
+	return false
+}
+
+func (m *CGCSystemMsg_GetAccountDetails_Response) GetIsTwoFactorAuthEnabled() bool {
+	if m != nil && m.IsTwoFactorAuthEnabled != nil {
+		return *m.IsTwoFactorAuthEnabled
+	}
+	return false
+}
+
+func (m *CGCSystemMsg_GetAccountDetails_Response) GetTwoFactorEnabledTime() uint32 {
+	if m != nil && m.TwoFactorEnabledTime != nil {
+		return *m.TwoFactorEnabledTime
+	}
+	return 0
+}
+
+func (m *CGCSystemMsg_GetAccountDetails_Response) GetPhoneVerificationTime() uint32 {
+	if m != nil && m.PhoneVerificationTime != nil {
+		return *m.PhoneVerificationTime
+	}
+	return 0
+}
+
+func (m *CGCSystemMsg_GetAccountDetails_Response) GetPhoneId() uint64 {
+	if m != nil && m.PhoneId != nil {
+		return *m.PhoneId
+	}
+	return 0
+}
+
+func (m *CGCSystemMsg_GetAccountDetails_Response) GetIsPhoneIdentifying() bool {
+	if m != nil && m.IsPhoneIdentifying != nil {
+		return *m.IsPhoneIdentifying
+	}
+	return false
 }
 
 type CMsgGCGetPersonaNames struct {

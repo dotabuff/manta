@@ -189,6 +189,7 @@ var packetNames = map[int32]string{
 	552: "EDotaUserMessages_DOTA_UM_ProjectionAbility",
 	553: "EDotaUserMessages_DOTA_UM_ProjectionEvent",
 	554: "EDotaUserMessages_DOTA_UM_CombatLogDataHLTV",
+	555: "EDotaUserMessages_DOTA_UM_XPAlert",
 }
 
 type Callbacks struct {
@@ -383,6 +384,7 @@ type Callbacks struct {
 	onCDOTAUserMsg_ProjectionAbility          []func(*dota.CDOTAUserMsg_ProjectionAbility) error
 	onCDOTAUserMsg_ProjectionEvent            []func(*dota.CDOTAUserMsg_ProjectionEvent) error
 	onCMsgDOTACombatLogEntry                  []func(*dota.CMsgDOTACombatLogEntry) error
+	onCDOTAUserMsg_XPAlert                    []func(*dota.CDOTAUserMsg_XPAlert) error
 }
 
 func (c *Callbacks) OnCDemoStop(fn func(*dota.CDemoStop) error) {
@@ -957,6 +959,9 @@ func (c *Callbacks) OnCDOTAUserMsg_ProjectionEvent(fn func(*dota.CDOTAUserMsg_Pr
 }
 func (c *Callbacks) OnCMsgDOTACombatLogEntry(fn func(*dota.CMsgDOTACombatLogEntry) error) {
 	c.onCMsgDOTACombatLogEntry = append(c.onCMsgDOTACombatLogEntry, fn)
+}
+func (c *Callbacks) OnCDOTAUserMsg_XPAlert(fn func(*dota.CDOTAUserMsg_XPAlert) error) {
+	c.onCDOTAUserMsg_XPAlert = append(c.onCDOTAUserMsg_XPAlert, fn)
 }
 func (p *Parser) CallByDemoType(t int32, raw []byte) error {
 	callbacks := p.Callbacks
@@ -3451,6 +3456,19 @@ func (p *Parser) CallByPacketType(t int32, raw []byte) error {
 			}
 		}
 		return nil
+	case 555: // dota.EDotaUserMessages_DOTA_UM_XPAlert
+		if cbs := callbacks.onCDOTAUserMsg_XPAlert; cbs != nil {
+			msg := &dota.CDOTAUserMsg_XPAlert{}
+			if err := proto.Unmarshal(raw, msg); err != nil {
+				return err
+			}
+			for _, fn := range cbs {
+				if err := fn(msg); err != nil {
+					return err
+				}
+			}
+		}
+		return nil
 	}
 	return fmt.Errorf("no type found: %d", t)
 }
@@ -3647,4 +3665,5 @@ func (c *Callbacks) OnAny(all func(interface{}) error) {
 	c.OnCDOTAUserMsg_ProjectionAbility(func(pkg *dota.CDOTAUserMsg_ProjectionAbility) error { return all(pkg) })
 	c.OnCDOTAUserMsg_ProjectionEvent(func(pkg *dota.CDOTAUserMsg_ProjectionEvent) error { return all(pkg) })
 	c.OnCMsgDOTACombatLogEntry(func(pkg *dota.CMsgDOTACombatLogEntry) error { return all(pkg) })
+	c.OnCDOTAUserMsg_XPAlert(func(pkg *dota.CDOTAUserMsg_XPAlert) error { return all(pkg) })
 }

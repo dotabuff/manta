@@ -104,6 +104,7 @@ const (
 	EDotaUserMessages_DOTA_UM_ProjectionAbility         EDotaUserMessages = 552
 	EDotaUserMessages_DOTA_UM_ProjectionEvent           EDotaUserMessages = 553
 	EDotaUserMessages_DOTA_UM_CombatLogDataHLTV         EDotaUserMessages = 554
+	EDotaUserMessages_DOTA_UM_XPAlert                   EDotaUserMessages = 555
 )
 
 var EDotaUserMessages_name = map[int32]string{
@@ -197,6 +198,7 @@ var EDotaUserMessages_name = map[int32]string{
 	552: "DOTA_UM_ProjectionAbility",
 	553: "DOTA_UM_ProjectionEvent",
 	554: "DOTA_UM_CombatLogDataHLTV",
+	555: "DOTA_UM_XPAlert",
 }
 var EDotaUserMessages_value = map[string]int32{
 	"DOTA_UM_AddUnitToSelection":        464,
@@ -289,6 +291,7 @@ var EDotaUserMessages_value = map[string]int32{
 	"DOTA_UM_ProjectionAbility":         552,
 	"DOTA_UM_ProjectionEvent":           553,
 	"DOTA_UM_CombatLogDataHLTV":         554,
+	"DOTA_UM_XPAlert":                   555,
 }
 
 func (x EDotaUserMessages) Enum() *EDotaUserMessages {
@@ -1318,7 +1321,8 @@ func (m *CDOTAUserMsg_AIDebugLine) GetMessage() string {
 }
 
 type CDOTAUserMsg_Ping struct {
-	Message          *string `protobuf:"bytes,1,opt,name=message" json:"message,omitempty"`
+	Ping             *uint32 `protobuf:"varint,2,opt,name=ping" json:"ping,omitempty"`
+	Loss             *uint32 `protobuf:"varint,3,opt,name=loss" json:"loss,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
@@ -1326,11 +1330,18 @@ func (m *CDOTAUserMsg_Ping) Reset()         { *m = CDOTAUserMsg_Ping{} }
 func (m *CDOTAUserMsg_Ping) String() string { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_Ping) ProtoMessage()    {}
 
-func (m *CDOTAUserMsg_Ping) GetMessage() string {
-	if m != nil && m.Message != nil {
-		return *m.Message
+func (m *CDOTAUserMsg_Ping) GetPing() uint32 {
+	if m != nil && m.Ping != nil {
+		return *m.Ping
 	}
-	return ""
+	return 0
+}
+
+func (m *CDOTAUserMsg_Ping) GetLoss() uint32 {
+	if m != nil && m.Loss != nil {
+		return *m.Loss
+	}
+	return 0
 }
 
 type CDOTAUserMsg_SwapVerify struct {
@@ -2084,7 +2095,6 @@ func (m *CDOTAUserMsg_MinimapDebugPoint) GetIndex() int32 {
 type CDOTAUserMsg_CreateLinearProjectile struct {
 	Origin           *CMsgVector   `protobuf:"bytes,1,opt,name=origin" json:"origin,omitempty"`
 	Velocity         *CMsgVector2D `protobuf:"bytes,2,opt,name=velocity" json:"velocity,omitempty"`
-	Latency          *int32        `protobuf:"varint,3,opt,name=latency" json:"latency,omitempty"`
 	Entindex         *int32        `protobuf:"varint,4,opt,name=entindex" json:"entindex,omitempty"`
 	ParticleIndex    *uint64       `protobuf:"varint,5,opt,name=particle_index" json:"particle_index,omitempty"`
 	Handle           *int32        `protobuf:"varint,6,opt,name=handle" json:"handle,omitempty"`
@@ -2109,13 +2119,6 @@ func (m *CDOTAUserMsg_CreateLinearProjectile) GetVelocity() *CMsgVector2D {
 		return m.Velocity
 	}
 	return nil
-}
-
-func (m *CDOTAUserMsg_CreateLinearProjectile) GetLatency() int32 {
-	if m != nil && m.Latency != nil {
-		return *m.Latency
-	}
-	return 0
 }
 
 func (m *CDOTAUserMsg_CreateLinearProjectile) GetEntindex() int32 {
@@ -4081,6 +4084,7 @@ type CDOTAUserMsg_TE_Projectile struct {
 	IsEvaded             *bool    `protobuf:"varint,8,opt,name=isEvaded" json:"isEvaded,omitempty"`
 	ExpireTime           *float32 `protobuf:"fixed32,9,opt,name=expireTime" json:"expireTime,omitempty"`
 	Maximpacttime        *float32 `protobuf:"fixed32,10,opt,name=maximpacttime" json:"maximpacttime,omitempty"`
+	Colorgemcolor        *uint32  `protobuf:"fixed32,11,opt,name=colorgemcolor" json:"colorgemcolor,omitempty"`
 	XXX_unrecognized     []byte   `json:"-"`
 }
 
@@ -4158,6 +4162,13 @@ func (m *CDOTAUserMsg_TE_Projectile) GetMaximpacttime() float32 {
 	return 0
 }
 
+func (m *CDOTAUserMsg_TE_Projectile) GetColorgemcolor() uint32 {
+	if m != nil && m.Colorgemcolor != nil {
+		return *m.Colorgemcolor
+	}
+	return 0
+}
+
 type CDOTAUserMsg_TE_ProjectileLoc struct {
 	VSourceLoc           *CMsgVector `protobuf:"bytes,1,opt,name=vSourceLoc" json:"vSourceLoc,omitempty"`
 	HTarget              *int32      `protobuf:"varint,2,opt,name=hTarget" json:"hTarget,omitempty"`
@@ -4168,6 +4179,7 @@ type CDOTAUserMsg_TE_ProjectileLoc struct {
 	IsEvaded             *bool       `protobuf:"varint,8,opt,name=isEvaded" json:"isEvaded,omitempty"`
 	ExpireTime           *float32    `protobuf:"fixed32,9,opt,name=expireTime" json:"expireTime,omitempty"`
 	VTargetLoc           *CMsgVector `protobuf:"bytes,10,opt,name=vTargetLoc" json:"vTargetLoc,omitempty"`
+	Colorgemcolor        *uint32     `protobuf:"fixed32,11,opt,name=colorgemcolor" json:"colorgemcolor,omitempty"`
 	XXX_unrecognized     []byte      `json:"-"`
 }
 
@@ -4236,6 +4248,13 @@ func (m *CDOTAUserMsg_TE_ProjectileLoc) GetVTargetLoc() *CMsgVector {
 		return m.VTargetLoc
 	}
 	return nil
+}
+
+func (m *CDOTAUserMsg_TE_ProjectileLoc) GetColorgemcolor() uint32 {
+	if m != nil && m.Colorgemcolor != nil {
+		return *m.Colorgemcolor
+	}
+	return 0
 }
 
 type CDOTAUserMsg_TE_DotaBloodImpact struct {
@@ -5674,6 +5693,30 @@ func (m *CDOTAUserMsg_ProjectionEvent) GetEventId() EProjectionEvent {
 func (m *CDOTAUserMsg_ProjectionEvent) GetTeam() uint32 {
 	if m != nil && m.Team != nil {
 		return *m.Team
+	}
+	return 0
+}
+
+type CDOTAUserMsg_XPAlert struct {
+	PlayerId         *uint32 `protobuf:"varint,1,opt,name=player_id" json:"player_id,omitempty"`
+	TargetEntindex   *uint32 `protobuf:"varint,2,opt,name=target_entindex" json:"target_entindex,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CDOTAUserMsg_XPAlert) Reset()         { *m = CDOTAUserMsg_XPAlert{} }
+func (m *CDOTAUserMsg_XPAlert) String() string { return proto.CompactTextString(m) }
+func (*CDOTAUserMsg_XPAlert) ProtoMessage()    {}
+
+func (m *CDOTAUserMsg_XPAlert) GetPlayerId() uint32 {
+	if m != nil && m.PlayerId != nil {
+		return *m.PlayerId
+	}
+	return 0
+}
+
+func (m *CDOTAUserMsg_XPAlert) GetTargetEntindex() uint32 {
+	if m != nil && m.TargetEntindex != nil {
+		return *m.TargetEntindex
 	}
 	return 0
 }

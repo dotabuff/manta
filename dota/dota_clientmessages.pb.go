@@ -64,6 +64,7 @@ const (
 	EDotaClientMessages_DOTA_CM_ClickedBuff                            EDotaClientMessages = 348
 	EDotaClientMessages_DOTA_CM_CoinWager                              EDotaClientMessages = 349
 	EDotaClientMessages_DOTA_CM_ExecuteOrders                          EDotaClientMessages = 350
+	EDotaClientMessages_DOTA_CM_XPAlert                                EDotaClientMessages = 351
 )
 
 var EDotaClientMessages_name = map[int32]string{
@@ -117,6 +118,7 @@ var EDotaClientMessages_name = map[int32]string{
 	348: "DOTA_CM_ClickedBuff",
 	349: "DOTA_CM_CoinWager",
 	350: "DOTA_CM_ExecuteOrders",
+	351: "DOTA_CM_XPAlert",
 }
 var EDotaClientMessages_value = map[string]int32{
 	"DOTA_CM_MapLine":                                301,
@@ -169,6 +171,7 @@ var EDotaClientMessages_value = map[string]int32{
 	"DOTA_CM_ClickedBuff":                            348,
 	"DOTA_CM_CoinWager":                              349,
 	"DOTA_CM_ExecuteOrders":                          350,
+	"DOTA_CM_XPAlert":                                351,
 }
 
 func (x EDotaClientMessages) Enum() *EDotaClientMessages {
@@ -975,12 +978,13 @@ func (m *CDOTAClientMsg_EventCNY2015Cmd) GetData() []byte {
 }
 
 type CDOTAClientMsg_DemoHero struct {
-	HeroId           *int32   `protobuf:"varint,1,opt,name=hero_id" json:"hero_id,omitempty"`
-	HeroIdToSpawn    *int32   `protobuf:"varint,2,opt,name=hero_id_to_spawn" json:"hero_id_to_spawn,omitempty"`
-	ItemDefs         []uint32 `protobuf:"varint,3,rep,name=item_defs" json:"item_defs,omitempty"`
-	ItemIds          []uint64 `protobuf:"varint,4,rep,name=item_ids" json:"item_ids,omitempty"`
-	StyleIndex       *uint32  `protobuf:"varint,5,opt,name=style_index" json:"style_index,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	HeroId               *int32   `protobuf:"varint,1,opt,name=hero_id" json:"hero_id,omitempty"`
+	HeroIdToSpawn        *int32   `protobuf:"varint,2,opt,name=hero_id_to_spawn" json:"hero_id_to_spawn,omitempty"`
+	ItemDefs             []uint32 `protobuf:"varint,3,rep,name=item_defs" json:"item_defs,omitempty"`
+	ItemIds              []uint64 `protobuf:"varint,4,rep,name=item_ids" json:"item_ids,omitempty"`
+	StyleIndex           *uint32  `protobuf:"varint,5,opt,name=style_index" json:"style_index,omitempty"`
+	KeepExistingDemohero *bool    `protobuf:"varint,6,opt,name=keep_existing_demohero" json:"keep_existing_demohero,omitempty"`
+	XXX_unrecognized     []byte   `json:"-"`
 }
 
 func (m *CDOTAClientMsg_DemoHero) Reset()         { *m = CDOTAClientMsg_DemoHero{} }
@@ -1020,6 +1024,13 @@ func (m *CDOTAClientMsg_DemoHero) GetStyleIndex() uint32 {
 		return *m.StyleIndex
 	}
 	return 0
+}
+
+func (m *CDOTAClientMsg_DemoHero) GetKeepExistingDemohero() bool {
+	if m != nil && m.KeepExistingDemohero != nil {
+		return *m.KeepExistingDemohero
+	}
+	return false
 }
 
 type CDOTAClientMsg_ChallengeSelect struct {
@@ -1116,6 +1127,22 @@ func (m *CDOTAClientMsg_ExecuteOrders) GetOrders() []*CDOTAMsg_UnitOrder {
 		return m.Orders
 	}
 	return nil
+}
+
+type CDOTAClientMsg_XPAlert struct {
+	TargetEntindex   *uint32 `protobuf:"varint,1,opt,name=target_entindex" json:"target_entindex,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CDOTAClientMsg_XPAlert) Reset()         { *m = CDOTAClientMsg_XPAlert{} }
+func (m *CDOTAClientMsg_XPAlert) String() string { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_XPAlert) ProtoMessage()    {}
+
+func (m *CDOTAClientMsg_XPAlert) GetTargetEntindex() uint32 {
+	if m != nil && m.TargetEntindex != nil {
+		return *m.TargetEntindex
+	}
+	return 0
 }
 
 func init() {

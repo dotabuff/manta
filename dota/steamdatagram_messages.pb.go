@@ -881,9 +881,11 @@ func (m *CMsgSteamDatagramConnectionStatsRouterToClient) GetSeqNumS2C() uint32 {
 }
 
 type CMsgSteamDatagramConnectionStatsRouterToServer struct {
+	R2S              *CMsgSteamDatagramConnectionQuality `protobuf:"bytes,1,opt,name=r2s" json:"r2s,omitempty"`
 	C2S              *CMsgSteamDatagramConnectionQuality `protobuf:"bytes,2,opt,name=c2s" json:"c2s,omitempty"`
 	ClientTimestamp  *uint32                             `protobuf:"fixed32,3,opt,name=client_timestamp" json:"client_timestamp,omitempty"`
 	RouterTimestamp  *uint32                             `protobuf:"fixed32,4,opt,name=router_timestamp" json:"router_timestamp,omitempty"`
+	SeqNumR2S        *uint32                             `protobuf:"varint,5,opt,name=seq_num_r2s" json:"seq_num_r2s,omitempty"`
 	SeqNumC2S        *uint32                             `protobuf:"varint,6,opt,name=seq_num_c2s" json:"seq_num_c2s,omitempty"`
 	ClientSteamId    *uint64                             `protobuf:"fixed64,7,opt,name=client_steam_id" json:"client_steam_id,omitempty"`
 	ClientSessionId  *uint32                             `protobuf:"varint,8,opt,name=client_session_id" json:"client_session_id,omitempty"`
@@ -897,6 +899,13 @@ func (m *CMsgSteamDatagramConnectionStatsRouterToServer) String() string {
 	return proto.CompactTextString(m)
 }
 func (*CMsgSteamDatagramConnectionStatsRouterToServer) ProtoMessage() {}
+
+func (m *CMsgSteamDatagramConnectionStatsRouterToServer) GetR2S() *CMsgSteamDatagramConnectionQuality {
+	if m != nil {
+		return m.R2S
+	}
+	return nil
+}
 
 func (m *CMsgSteamDatagramConnectionStatsRouterToServer) GetC2S() *CMsgSteamDatagramConnectionQuality {
 	if m != nil {
@@ -919,6 +928,13 @@ func (m *CMsgSteamDatagramConnectionStatsRouterToServer) GetRouterTimestamp() ui
 	return 0
 }
 
+func (m *CMsgSteamDatagramConnectionStatsRouterToServer) GetSeqNumR2S() uint32 {
+	if m != nil && m.SeqNumR2S != nil {
+		return *m.SeqNumR2S
+	}
+	return 0
+}
+
 func (m *CMsgSteamDatagramConnectionStatsRouterToServer) GetSeqNumC2S() uint32 {
 	if m != nil && m.SeqNumC2S != nil {
 		return *m.SeqNumC2S
@@ -934,6 +950,66 @@ func (m *CMsgSteamDatagramConnectionStatsRouterToServer) GetClientSteamId() uint
 }
 
 func (m *CMsgSteamDatagramConnectionStatsRouterToServer) GetClientSessionId() uint32 {
+	if m != nil && m.ClientSessionId != nil {
+		return *m.ClientSessionId
+	}
+	return 0
+}
+
+type CMsgSteamDatagramConnectionStatsServerToRouter struct {
+	S2R              *CMsgSteamDatagramConnectionQuality `protobuf:"bytes,1,opt,name=s2r" json:"s2r,omitempty"`
+	S2C              *CMsgSteamDatagramConnectionQuality `protobuf:"bytes,2,opt,name=s2c" json:"s2c,omitempty"`
+	SeqNumS2R        *uint32                             `protobuf:"varint,3,opt,name=seq_num_s2r" json:"seq_num_s2r,omitempty"`
+	SeqNumS2C        *uint32                             `protobuf:"varint,4,opt,name=seq_num_s2c" json:"seq_num_s2c,omitempty"`
+	ClientSteamId    *uint64                             `protobuf:"fixed64,5,opt,name=client_steam_id" json:"client_steam_id,omitempty"`
+	ClientSessionId  *uint32                             `protobuf:"varint,6,opt,name=client_session_id" json:"client_session_id,omitempty"`
+	XXX_unrecognized []byte                              `json:"-"`
+}
+
+func (m *CMsgSteamDatagramConnectionStatsServerToRouter) Reset() {
+	*m = CMsgSteamDatagramConnectionStatsServerToRouter{}
+}
+func (m *CMsgSteamDatagramConnectionStatsServerToRouter) String() string {
+	return proto.CompactTextString(m)
+}
+func (*CMsgSteamDatagramConnectionStatsServerToRouter) ProtoMessage() {}
+
+func (m *CMsgSteamDatagramConnectionStatsServerToRouter) GetS2R() *CMsgSteamDatagramConnectionQuality {
+	if m != nil {
+		return m.S2R
+	}
+	return nil
+}
+
+func (m *CMsgSteamDatagramConnectionStatsServerToRouter) GetS2C() *CMsgSteamDatagramConnectionQuality {
+	if m != nil {
+		return m.S2C
+	}
+	return nil
+}
+
+func (m *CMsgSteamDatagramConnectionStatsServerToRouter) GetSeqNumS2R() uint32 {
+	if m != nil && m.SeqNumS2R != nil {
+		return *m.SeqNumS2R
+	}
+	return 0
+}
+
+func (m *CMsgSteamDatagramConnectionStatsServerToRouter) GetSeqNumS2C() uint32 {
+	if m != nil && m.SeqNumS2C != nil {
+		return *m.SeqNumS2C
+	}
+	return 0
+}
+
+func (m *CMsgSteamDatagramConnectionStatsServerToRouter) GetClientSteamId() uint64 {
+	if m != nil && m.ClientSteamId != nil {
+		return *m.ClientSteamId
+	}
+	return 0
+}
+
+func (m *CMsgSteamDatagramConnectionStatsServerToRouter) GetClientSessionId() uint32 {
 	if m != nil && m.ClientSessionId != nil {
 		return *m.ClientSessionId
 	}

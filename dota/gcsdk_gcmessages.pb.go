@@ -92,6 +92,7 @@ const (
 	GCConnectionStatus_GCConnectionStatus_NO_SESSION_IN_LOGON_QUEUE GCConnectionStatus = 3
 	GCConnectionStatus_GCConnectionStatus_NO_STEAM                  GCConnectionStatus = 4
 	GCConnectionStatus_GCConnectionStatus_SUSPENDED                 GCConnectionStatus = 5
+	GCConnectionStatus_GCConnectionStatus_STEAM_GOING_DOWN          GCConnectionStatus = 6
 )
 
 var GCConnectionStatus_name = map[int32]string{
@@ -101,6 +102,7 @@ var GCConnectionStatus_name = map[int32]string{
 	3: "GCConnectionStatus_NO_SESSION_IN_LOGON_QUEUE",
 	4: "GCConnectionStatus_NO_STEAM",
 	5: "GCConnectionStatus_SUSPENDED",
+	6: "GCConnectionStatus_STEAM_GOING_DOWN",
 }
 var GCConnectionStatus_value = map[string]int32{
 	"GCConnectionStatus_HAVE_SESSION":              0,
@@ -109,6 +111,7 @@ var GCConnectionStatus_value = map[string]int32{
 	"GCConnectionStatus_NO_SESSION_IN_LOGON_QUEUE": 3,
 	"GCConnectionStatus_NO_STEAM":                  4,
 	"GCConnectionStatus_SUSPENDED":                 5,
+	"GCConnectionStatus_STEAM_GOING_DOWN":          6,
 }
 
 func (x GCConnectionStatus) Enum() *GCConnectionStatus {

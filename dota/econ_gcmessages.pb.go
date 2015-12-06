@@ -20,9 +20,7 @@ const (
 	EGCItemMsg_k_EMsgGCCraftResponse                          EGCItemMsg = 1003
 	EGCItemMsg_k_EMsgGCDelete                                 EGCItemMsg = 1004
 	EGCItemMsg_k_EMsgGCVerifyCacheSubscription                EGCItemMsg = 1005
-	EGCItemMsg_k_EMsgGCNameItem                               EGCItemMsg = 1006
-	EGCItemMsg_k_EMsgGCUnlockCrate                            EGCItemMsg = 1007
-	EGCItemMsg_k_EMsgGCUnlockCrateResponse                    EGCItemMsg = 1008
+	EGCItemMsg_k_EMsgClientToGCNameItem                       EGCItemMsg = 1006
 	EGCItemMsg_k_EMsgGCPaintItem                              EGCItemMsg = 1009
 	EGCItemMsg_k_EMsgGCPaintItemResponse                      EGCItemMsg = 1010
 	EGCItemMsg_k_EMsgGCGoldenWrenchBroadcast                  EGCItemMsg = 1011
@@ -46,7 +44,7 @@ const (
 	EGCItemMsg_k_EMsgGCRemoveItemPaint                        EGCItemMsg = 1031
 	EGCItemMsg_k_EMsgGCUnwrapGiftRequest                      EGCItemMsg = 1037
 	EGCItemMsg_k_EMsgGCUnwrapGiftResponse                     EGCItemMsg = 1038
-	EGCItemMsg_k_EMsgGCSetItemStyle                           EGCItemMsg = 1039
+	EGCItemMsg_k_EMsgGCSetItemStyle_DEPRECATED                EGCItemMsg = 1039
 	EGCItemMsg_k_EMsgGCUsedClaimCodeItem                      EGCItemMsg = 1040
 	EGCItemMsg_k_EMsgGCSortItems                              EGCItemMsg = 1041
 	EGCItemMsg_k_EMsgGC_RevolvingLootList_DEPRECATED          EGCItemMsg = 1042
@@ -71,7 +69,7 @@ const (
 	EGCItemMsg_k_EMsgGC_ReportAbuse                           EGCItemMsg = 1065
 	EGCItemMsg_k_EMsgGC_ReportAbuseResponse                   EGCItemMsg = 1066
 	EGCItemMsg_k_EMsgGCPresets_SelectPresetForClassReply      EGCItemMsg = 1067
-	EGCItemMsg_k_EMsgGCNameItemNotification                   EGCItemMsg = 1068
+	EGCItemMsg_k_EMsgClientToGCNameItemResponse               EGCItemMsg = 1068
 	EGCItemMsg_k_EMsgGCApplyConsumableEffects                 EGCItemMsg = 1069
 	EGCItemMsg_k_EMsgGCConsumableExhausted                    EGCItemMsg = 1070
 	EGCItemMsg_k_EMsgGCShowItemsPickedUp                      EGCItemMsg = 1071
@@ -80,6 +78,7 @@ const (
 	EGCItemMsg_k_EMsgGC_IncrementKillCountResponse            EGCItemMsg = 1075
 	EGCItemMsg_k_EMsgGCApplyPennantUpgrade                    EGCItemMsg = 1076
 	EGCItemMsg_k_EMsgGCSetItemPositions                       EGCItemMsg = 1077
+	EGCItemMsg_k_EMsgGCSetItemPositions_RateLimited           EGCItemMsg = 1096
 	EGCItemMsg_k_EMsgGCApplyEggEssence                        EGCItemMsg = 1078
 	EGCItemMsg_k_EMsgGCNameEggEssenceResponse                 EGCItemMsg = 1079
 	EGCItemMsg_k_EMsgGCFulfillDynamicRecipeComponent          EGCItemMsg = 1082
@@ -105,6 +104,7 @@ const (
 	EGCItemMsg_k_EMsgClientToGCRemoveItemGifterAttributes     EGCItemMsg = 1109
 	EGCItemMsg_k_EMsgClientToGCRemoveItemName                 EGCItemMsg = 1110
 	EGCItemMsg_k_EMsgClientToGCRemoveItemDescription          EGCItemMsg = 1111
+	EGCItemMsg_k_EMsgClientToGCRemoveItemAttributeResponse    EGCItemMsg = 1112
 	EGCItemMsg_k_EMsgGCTradingBase                            EGCItemMsg = 1500
 	EGCItemMsg_k_EMsgGCTrading_InitiateTradeRequest           EGCItemMsg = 1501
 	EGCItemMsg_k_EMsgGCTrading_InitiateTradeResponse          EGCItemMsg = 1502
@@ -179,7 +179,7 @@ const (
 	EGCItemMsg_k_EMsgGCToGCItemConsumptionRollback            EGCItemMsg = 2564
 	EGCItemMsg_k_EMsgClientToGCWrapAndDeliverGift             EGCItemMsg = 2565
 	EGCItemMsg_k_EMsgClientToGCWrapAndDeliverGiftResponse     EGCItemMsg = 2566
-	EGCItemMsg_k_EMsgGCToClientBundleUnpacked                 EGCItemMsg = 2567
+	EGCItemMsg_k_EMsgClientToGCUnpackBundleResponse           EGCItemMsg = 2567
 	EGCItemMsg_k_EMsgGCToClientStoreTransactionCompleted      EGCItemMsg = 2568
 	EGCItemMsg_k_EMsgClientToGCEquipItems                     EGCItemMsg = 2569
 	EGCItemMsg_k_EMsgClientToGCEquipItemsResponse             EGCItemMsg = 2570
@@ -188,6 +188,11 @@ const (
 	EGCItemMsg_k_EMsgClientToGCSetItemInventoryCategory       EGCItemMsg = 2573
 	EGCItemMsg_k_EMsgClientToGCUnlockCrate                    EGCItemMsg = 2574
 	EGCItemMsg_k_EMsgClientToGCUnlockCrateResponse            EGCItemMsg = 2575
+	EGCItemMsg_k_EMsgClientToGCUnpackBundle                   EGCItemMsg = 2576
+	EGCItemMsg_k_EMsgClientToGCSetItemStyle                   EGCItemMsg = 2577
+	EGCItemMsg_k_EMsgClientToGCSetItemStyleResponse           EGCItemMsg = 2578
+	EGCItemMsg_k_EMsgGCGenericResult                          EGCItemMsg = 2579
+	EGCItemMsg_k_EMsgSQLGCToGCGrantBackpackSlots              EGCItemMsg = 2580
 )
 
 var EGCItemMsg_name = map[int32]string{
@@ -197,9 +202,7 @@ var EGCItemMsg_name = map[int32]string{
 	1003: "k_EMsgGCCraftResponse",
 	1004: "k_EMsgGCDelete",
 	1005: "k_EMsgGCVerifyCacheSubscription",
-	1006: "k_EMsgGCNameItem",
-	1007: "k_EMsgGCUnlockCrate",
-	1008: "k_EMsgGCUnlockCrateResponse",
+	1006: "k_EMsgClientToGCNameItem",
 	1009: "k_EMsgGCPaintItem",
 	1010: "k_EMsgGCPaintItemResponse",
 	1011: "k_EMsgGCGoldenWrenchBroadcast",
@@ -223,7 +226,7 @@ var EGCItemMsg_name = map[int32]string{
 	1031: "k_EMsgGCRemoveItemPaint",
 	1037: "k_EMsgGCUnwrapGiftRequest",
 	1038: "k_EMsgGCUnwrapGiftResponse",
-	1039: "k_EMsgGCSetItemStyle",
+	1039: "k_EMsgGCSetItemStyle_DEPRECATED",
 	1040: "k_EMsgGCUsedClaimCodeItem",
 	1041: "k_EMsgGCSortItems",
 	1042: "k_EMsgGC_RevolvingLootList_DEPRECATED",
@@ -248,7 +251,7 @@ var EGCItemMsg_name = map[int32]string{
 	1065: "k_EMsgGC_ReportAbuse",
 	1066: "k_EMsgGC_ReportAbuseResponse",
 	1067: "k_EMsgGCPresets_SelectPresetForClassReply",
-	1068: "k_EMsgGCNameItemNotification",
+	1068: "k_EMsgClientToGCNameItemResponse",
 	1069: "k_EMsgGCApplyConsumableEffects",
 	1070: "k_EMsgGCConsumableExhausted",
 	1071: "k_EMsgGCShowItemsPickedUp",
@@ -257,6 +260,7 @@ var EGCItemMsg_name = map[int32]string{
 	1075: "k_EMsgGC_IncrementKillCountResponse",
 	1076: "k_EMsgGCApplyPennantUpgrade",
 	1077: "k_EMsgGCSetItemPositions",
+	1096: "k_EMsgGCSetItemPositions_RateLimited",
 	1078: "k_EMsgGCApplyEggEssence",
 	1079: "k_EMsgGCNameEggEssenceResponse",
 	1082: "k_EMsgGCFulfillDynamicRecipeComponent",
@@ -282,6 +286,7 @@ var EGCItemMsg_name = map[int32]string{
 	1109: "k_EMsgClientToGCRemoveItemGifterAttributes",
 	1110: "k_EMsgClientToGCRemoveItemName",
 	1111: "k_EMsgClientToGCRemoveItemDescription",
+	1112: "k_EMsgClientToGCRemoveItemAttributeResponse",
 	1500: "k_EMsgGCTradingBase",
 	1501: "k_EMsgGCTrading_InitiateTradeRequest",
 	1502: "k_EMsgGCTrading_InitiateTradeResponse",
@@ -356,7 +361,7 @@ var EGCItemMsg_name = map[int32]string{
 	2564: "k_EMsgGCToGCItemConsumptionRollback",
 	2565: "k_EMsgClientToGCWrapAndDeliverGift",
 	2566: "k_EMsgClientToGCWrapAndDeliverGiftResponse",
-	2567: "k_EMsgGCToClientBundleUnpacked",
+	2567: "k_EMsgClientToGCUnpackBundleResponse",
 	2568: "k_EMsgGCToClientStoreTransactionCompleted",
 	2569: "k_EMsgClientToGCEquipItems",
 	2570: "k_EMsgClientToGCEquipItemsResponse",
@@ -365,6 +370,11 @@ var EGCItemMsg_name = map[int32]string{
 	2573: "k_EMsgClientToGCSetItemInventoryCategory",
 	2574: "k_EMsgClientToGCUnlockCrate",
 	2575: "k_EMsgClientToGCUnlockCrateResponse",
+	2576: "k_EMsgClientToGCUnpackBundle",
+	2577: "k_EMsgClientToGCSetItemStyle",
+	2578: "k_EMsgClientToGCSetItemStyleResponse",
+	2579: "k_EMsgGCGenericResult",
+	2580: "k_EMsgSQLGCToGCGrantBackpackSlots",
 }
 var EGCItemMsg_value = map[string]int32{
 	"k_EMsgGCBase":                                   1000,
@@ -373,9 +383,7 @@ var EGCItemMsg_value = map[string]int32{
 	"k_EMsgGCCraftResponse":                          1003,
 	"k_EMsgGCDelete":                                 1004,
 	"k_EMsgGCVerifyCacheSubscription":                1005,
-	"k_EMsgGCNameItem":                               1006,
-	"k_EMsgGCUnlockCrate":                            1007,
-	"k_EMsgGCUnlockCrateResponse":                    1008,
+	"k_EMsgClientToGCNameItem":                       1006,
 	"k_EMsgGCPaintItem":                              1009,
 	"k_EMsgGCPaintItemResponse":                      1010,
 	"k_EMsgGCGoldenWrenchBroadcast":                  1011,
@@ -399,7 +407,7 @@ var EGCItemMsg_value = map[string]int32{
 	"k_EMsgGCRemoveItemPaint":                        1031,
 	"k_EMsgGCUnwrapGiftRequest":                      1037,
 	"k_EMsgGCUnwrapGiftResponse":                     1038,
-	"k_EMsgGCSetItemStyle":                           1039,
+	"k_EMsgGCSetItemStyle_DEPRECATED":                1039,
 	"k_EMsgGCUsedClaimCodeItem":                      1040,
 	"k_EMsgGCSortItems":                              1041,
 	"k_EMsgGC_RevolvingLootList_DEPRECATED":          1042,
@@ -424,7 +432,7 @@ var EGCItemMsg_value = map[string]int32{
 	"k_EMsgGC_ReportAbuse":                           1065,
 	"k_EMsgGC_ReportAbuseResponse":                   1066,
 	"k_EMsgGCPresets_SelectPresetForClassReply":      1067,
-	"k_EMsgGCNameItemNotification":                   1068,
+	"k_EMsgClientToGCNameItemResponse":               1068,
 	"k_EMsgGCApplyConsumableEffects":                 1069,
 	"k_EMsgGCConsumableExhausted":                    1070,
 	"k_EMsgGCShowItemsPickedUp":                      1071,
@@ -433,6 +441,7 @@ var EGCItemMsg_value = map[string]int32{
 	"k_EMsgGC_IncrementKillCountResponse":            1075,
 	"k_EMsgGCApplyPennantUpgrade":                    1076,
 	"k_EMsgGCSetItemPositions":                       1077,
+	"k_EMsgGCSetItemPositions_RateLimited":           1096,
 	"k_EMsgGCApplyEggEssence":                        1078,
 	"k_EMsgGCNameEggEssenceResponse":                 1079,
 	"k_EMsgGCFulfillDynamicRecipeComponent":          1082,
@@ -458,6 +467,7 @@ var EGCItemMsg_value = map[string]int32{
 	"k_EMsgClientToGCRemoveItemGifterAttributes":     1109,
 	"k_EMsgClientToGCRemoveItemName":                 1110,
 	"k_EMsgClientToGCRemoveItemDescription":          1111,
+	"k_EMsgClientToGCRemoveItemAttributeResponse":    1112,
 	"k_EMsgGCTradingBase":                            1500,
 	"k_EMsgGCTrading_InitiateTradeRequest":           1501,
 	"k_EMsgGCTrading_InitiateTradeResponse":          1502,
@@ -532,7 +542,7 @@ var EGCItemMsg_value = map[string]int32{
 	"k_EMsgGCToGCItemConsumptionRollback":            2564,
 	"k_EMsgClientToGCWrapAndDeliverGift":             2565,
 	"k_EMsgClientToGCWrapAndDeliverGiftResponse":     2566,
-	"k_EMsgGCToClientBundleUnpacked":                 2567,
+	"k_EMsgClientToGCUnpackBundleResponse":           2567,
 	"k_EMsgGCToClientStoreTransactionCompleted":      2568,
 	"k_EMsgClientToGCEquipItems":                     2569,
 	"k_EMsgClientToGCEquipItemsResponse":             2570,
@@ -541,6 +551,11 @@ var EGCItemMsg_value = map[string]int32{
 	"k_EMsgClientToGCSetItemInventoryCategory":       2573,
 	"k_EMsgClientToGCUnlockCrate":                    2574,
 	"k_EMsgClientToGCUnlockCrateResponse":            2575,
+	"k_EMsgClientToGCUnpackBundle":                   2576,
+	"k_EMsgClientToGCSetItemStyle":                   2577,
+	"k_EMsgClientToGCSetItemStyleResponse":           2578,
+	"k_EMsgGCGenericResult":                          2579,
+	"k_EMsgSQLGCToGCGrantBackpackSlots":              2580,
 }
 
 func (x EGCItemMsg) Enum() *EGCItemMsg {
@@ -839,6 +854,162 @@ func (x *EGCMsgInitiateTradeResponse) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
+type CMsgRequestCrateItemsResponse_EResult int32
+
+const (
+	CMsgRequestCrateItemsResponse_k_Succeeded CMsgRequestCrateItemsResponse_EResult = 0
+	CMsgRequestCrateItemsResponse_k_Failed    CMsgRequestCrateItemsResponse_EResult = 1
+)
+
+var CMsgRequestCrateItemsResponse_EResult_name = map[int32]string{
+	0: "k_Succeeded",
+	1: "k_Failed",
+}
+var CMsgRequestCrateItemsResponse_EResult_value = map[string]int32{
+	"k_Succeeded": 0,
+	"k_Failed":    1,
+}
+
+func (x CMsgRequestCrateItemsResponse_EResult) Enum() *CMsgRequestCrateItemsResponse_EResult {
+	p := new(CMsgRequestCrateItemsResponse_EResult)
+	*p = x
+	return p
+}
+func (x CMsgRequestCrateItemsResponse_EResult) String() string {
+	return proto.EnumName(CMsgRequestCrateItemsResponse_EResult_name, int32(x))
+}
+func (x *CMsgRequestCrateItemsResponse_EResult) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(CMsgRequestCrateItemsResponse_EResult_value, data, "CMsgRequestCrateItemsResponse_EResult")
+	if err != nil {
+		return err
+	}
+	*x = CMsgRequestCrateItemsResponse_EResult(value)
+	return nil
+}
+
+type CMsgRedeemCodeResponse_EResultCode int32
+
+const (
+	CMsgRedeemCodeResponse_k_Succeeded              CMsgRedeemCodeResponse_EResultCode = 0
+	CMsgRedeemCodeResponse_k_Failed_CodeNotFound    CMsgRedeemCodeResponse_EResultCode = 1
+	CMsgRedeemCodeResponse_k_Failed_CodeAlreadyUsed CMsgRedeemCodeResponse_EResultCode = 2
+	CMsgRedeemCodeResponse_k_Failed_OtherError      CMsgRedeemCodeResponse_EResultCode = 3
+)
+
+var CMsgRedeemCodeResponse_EResultCode_name = map[int32]string{
+	0: "k_Succeeded",
+	1: "k_Failed_CodeNotFound",
+	2: "k_Failed_CodeAlreadyUsed",
+	3: "k_Failed_OtherError",
+}
+var CMsgRedeemCodeResponse_EResultCode_value = map[string]int32{
+	"k_Succeeded":              0,
+	"k_Failed_CodeNotFound":    1,
+	"k_Failed_CodeAlreadyUsed": 2,
+	"k_Failed_OtherError":      3,
+}
+
+func (x CMsgRedeemCodeResponse_EResultCode) Enum() *CMsgRedeemCodeResponse_EResultCode {
+	p := new(CMsgRedeemCodeResponse_EResultCode)
+	*p = x
+	return p
+}
+func (x CMsgRedeemCodeResponse_EResultCode) String() string {
+	return proto.EnumName(CMsgRedeemCodeResponse_EResultCode_name, int32(x))
+}
+func (x *CMsgRedeemCodeResponse_EResultCode) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(CMsgRedeemCodeResponse_EResultCode_value, data, "CMsgRedeemCodeResponse_EResultCode")
+	if err != nil {
+		return err
+	}
+	*x = CMsgRedeemCodeResponse_EResultCode(value)
+	return nil
+}
+
+type CMsgClientToGCUnpackBundleResponse_EUnpackBundle int32
+
+const (
+	CMsgClientToGCUnpackBundleResponse_k_UnpackBundle_Succeeded                          CMsgClientToGCUnpackBundleResponse_EUnpackBundle = 0
+	CMsgClientToGCUnpackBundleResponse_k_UnpackBundle_Failed_ItemIsNotBundle             CMsgClientToGCUnpackBundleResponse_EUnpackBundle = 1
+	CMsgClientToGCUnpackBundleResponse_k_UnpackBundle_Failed_UnableToCreateContainedItem CMsgClientToGCUnpackBundleResponse_EUnpackBundle = 2
+	CMsgClientToGCUnpackBundleResponse_k_UnpackBundle_Failed_SOCacheError                CMsgClientToGCUnpackBundleResponse_EUnpackBundle = 3
+	CMsgClientToGCUnpackBundleResponse_k_UnpackBundle_Failed_ItemIsInvalid               CMsgClientToGCUnpackBundleResponse_EUnpackBundle = 4
+	CMsgClientToGCUnpackBundleResponse_k_UnpackBundle_Failed_BadItemQuantity             CMsgClientToGCUnpackBundleResponse_EUnpackBundle = 5
+	CMsgClientToGCUnpackBundleResponse_k_UnpackBundle_Failed_UnableToDeleteItem          CMsgClientToGCUnpackBundleResponse_EUnpackBundle = 6
+)
+
+var CMsgClientToGCUnpackBundleResponse_EUnpackBundle_name = map[int32]string{
+	0: "k_UnpackBundle_Succeeded",
+	1: "k_UnpackBundle_Failed_ItemIsNotBundle",
+	2: "k_UnpackBundle_Failed_UnableToCreateContainedItem",
+	3: "k_UnpackBundle_Failed_SOCacheError",
+	4: "k_UnpackBundle_Failed_ItemIsInvalid",
+	5: "k_UnpackBundle_Failed_BadItemQuantity",
+	6: "k_UnpackBundle_Failed_UnableToDeleteItem",
+}
+var CMsgClientToGCUnpackBundleResponse_EUnpackBundle_value = map[string]int32{
+	"k_UnpackBundle_Succeeded":                          0,
+	"k_UnpackBundle_Failed_ItemIsNotBundle":             1,
+	"k_UnpackBundle_Failed_UnableToCreateContainedItem": 2,
+	"k_UnpackBundle_Failed_SOCacheError":                3,
+	"k_UnpackBundle_Failed_ItemIsInvalid":               4,
+	"k_UnpackBundle_Failed_BadItemQuantity":             5,
+	"k_UnpackBundle_Failed_UnableToDeleteItem":          6,
+}
+
+func (x CMsgClientToGCUnpackBundleResponse_EUnpackBundle) Enum() *CMsgClientToGCUnpackBundleResponse_EUnpackBundle {
+	p := new(CMsgClientToGCUnpackBundleResponse_EUnpackBundle)
+	*p = x
+	return p
+}
+func (x CMsgClientToGCUnpackBundleResponse_EUnpackBundle) String() string {
+	return proto.EnumName(CMsgClientToGCUnpackBundleResponse_EUnpackBundle_name, int32(x))
+}
+func (x *CMsgClientToGCUnpackBundleResponse_EUnpackBundle) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(CMsgClientToGCUnpackBundleResponse_EUnpackBundle_value, data, "CMsgClientToGCUnpackBundleResponse_EUnpackBundle")
+	if err != nil {
+		return err
+	}
+	*x = CMsgClientToGCUnpackBundleResponse_EUnpackBundle(value)
+	return nil
+}
+
+type CMsgClientToGCSetItemStyleResponse_ESetStyle int32
+
+const (
+	CMsgClientToGCSetItemStyleResponse_k_SetStyle_Succeeded            CMsgClientToGCSetItemStyleResponse_ESetStyle = 0
+	CMsgClientToGCSetItemStyleResponse_k_SetStyle_Failed               CMsgClientToGCSetItemStyleResponse_ESetStyle = 1
+	CMsgClientToGCSetItemStyleResponse_k_SetStyle_Failed_StyleIsLocked CMsgClientToGCSetItemStyleResponse_ESetStyle = 2
+)
+
+var CMsgClientToGCSetItemStyleResponse_ESetStyle_name = map[int32]string{
+	0: "k_SetStyle_Succeeded",
+	1: "k_SetStyle_Failed",
+	2: "k_SetStyle_Failed_StyleIsLocked",
+}
+var CMsgClientToGCSetItemStyleResponse_ESetStyle_value = map[string]int32{
+	"k_SetStyle_Succeeded":            0,
+	"k_SetStyle_Failed":               1,
+	"k_SetStyle_Failed_StyleIsLocked": 2,
+}
+
+func (x CMsgClientToGCSetItemStyleResponse_ESetStyle) Enum() *CMsgClientToGCSetItemStyleResponse_ESetStyle {
+	p := new(CMsgClientToGCSetItemStyleResponse_ESetStyle)
+	*p = x
+	return p
+}
+func (x CMsgClientToGCSetItemStyleResponse_ESetStyle) String() string {
+	return proto.EnumName(CMsgClientToGCSetItemStyleResponse_ESetStyle_name, int32(x))
+}
+func (x *CMsgClientToGCSetItemStyleResponse_ESetStyle) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(CMsgClientToGCSetItemStyleResponse_ESetStyle_value, data, "CMsgClientToGCSetItemStyleResponse_ESetStyle")
+	if err != nil {
+		return err
+	}
+	*x = CMsgClientToGCSetItemStyleResponse_ESetStyle(value)
+	return nil
+}
+
 type CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle int32
 
 const (
@@ -851,18 +1022,24 @@ const (
 	CMsgClientToGCUnlockItemStyleResponse_k_UnlockStyle_Failed_CantAffordGem     CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle = 6
 	CMsgClientToGCUnlockItemStyleResponse_k_UnlockStyle_Failed_NoCompendiumLevel CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle = 7
 	CMsgClientToGCUnlockItemStyleResponse_k_UnlockStyle_Failed_AlreadyUnlocked   CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle = 8
+	CMsgClientToGCUnlockItemStyleResponse_k_UnlockStyle_Failed_OtherError        CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle = 9
+	CMsgClientToGCUnlockItemStyleResponse_k_UnlockStyle_Failed_ItemIsInvalid     CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle = 10
+	CMsgClientToGCUnlockItemStyleResponse_k_UnlockStyle_Failed_ToolIsInvalid     CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle = 11
 )
 
 var CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle_name = map[int32]string{
-	0: "k_UnlockStyle_Succeeded",
-	1: "k_UnlockStyle_Failed_PreReq",
-	2: "k_UnlockStyle_Failed_CantAfford",
-	3: "k_UnlockStyle_Failed_CantCommit",
-	4: "k_UnlockStyle_Failed_CantLockCache",
-	5: "k_UnlockStyle_Failed_CantAffordAttrib",
-	6: "k_UnlockStyle_Failed_CantAffordGem",
-	7: "k_UnlockStyle_Failed_NoCompendiumLevel",
-	8: "k_UnlockStyle_Failed_AlreadyUnlocked",
+	0:  "k_UnlockStyle_Succeeded",
+	1:  "k_UnlockStyle_Failed_PreReq",
+	2:  "k_UnlockStyle_Failed_CantAfford",
+	3:  "k_UnlockStyle_Failed_CantCommit",
+	4:  "k_UnlockStyle_Failed_CantLockCache",
+	5:  "k_UnlockStyle_Failed_CantAffordAttrib",
+	6:  "k_UnlockStyle_Failed_CantAffordGem",
+	7:  "k_UnlockStyle_Failed_NoCompendiumLevel",
+	8:  "k_UnlockStyle_Failed_AlreadyUnlocked",
+	9:  "k_UnlockStyle_Failed_OtherError",
+	10: "k_UnlockStyle_Failed_ItemIsInvalid",
+	11: "k_UnlockStyle_Failed_ToolIsInvalid",
 }
 var CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle_value = map[string]int32{
 	"k_UnlockStyle_Succeeded":                0,
@@ -874,6 +1051,9 @@ var CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle_value = map[string]int32{
 	"k_UnlockStyle_Failed_CantAffordGem":     6,
 	"k_UnlockStyle_Failed_NoCompendiumLevel": 7,
 	"k_UnlockStyle_Failed_AlreadyUnlocked":   8,
+	"k_UnlockStyle_Failed_OtherError":        9,
+	"k_UnlockStyle_Failed_ItemIsInvalid":     10,
+	"k_UnlockStyle_Failed_ToolIsInvalid":     11,
 }
 
 func (x CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle) Enum() *CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle {
@@ -890,6 +1070,90 @@ func (x *CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle) UnmarshalJSON(data 
 		return err
 	}
 	*x = CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle(value)
+	return nil
+}
+
+type CMsgClientToGCRemoveItemAttributeResponse_ERemoveItemAttribute int32
+
+const (
+	CMsgClientToGCRemoveItemAttributeResponse_k_RemoveItemAttribute_Succeeded                       CMsgClientToGCRemoveItemAttributeResponse_ERemoveItemAttribute = 0
+	CMsgClientToGCRemoveItemAttributeResponse_k_RemoveItemAttribute_Failed                          CMsgClientToGCRemoveItemAttributeResponse_ERemoveItemAttribute = 1
+	CMsgClientToGCRemoveItemAttributeResponse_k_RemoveItemAttribute_Failed_ItemIsInvalid            CMsgClientToGCRemoveItemAttributeResponse_ERemoveItemAttribute = 2
+	CMsgClientToGCRemoveItemAttributeResponse_k_RemoveItemAttribute_Failed_AttributeCannotBeRemoved CMsgClientToGCRemoveItemAttributeResponse_ERemoveItemAttribute = 3
+	CMsgClientToGCRemoveItemAttributeResponse_k_RemoveItemAttribute_Failed_AttributeDoesntExist     CMsgClientToGCRemoveItemAttributeResponse_ERemoveItemAttribute = 4
+)
+
+var CMsgClientToGCRemoveItemAttributeResponse_ERemoveItemAttribute_name = map[int32]string{
+	0: "k_RemoveItemAttribute_Succeeded",
+	1: "k_RemoveItemAttribute_Failed",
+	2: "k_RemoveItemAttribute_Failed_ItemIsInvalid",
+	3: "k_RemoveItemAttribute_Failed_AttributeCannotBeRemoved",
+	4: "k_RemoveItemAttribute_Failed_AttributeDoesntExist",
+}
+var CMsgClientToGCRemoveItemAttributeResponse_ERemoveItemAttribute_value = map[string]int32{
+	"k_RemoveItemAttribute_Succeeded":                       0,
+	"k_RemoveItemAttribute_Failed":                          1,
+	"k_RemoveItemAttribute_Failed_ItemIsInvalid":            2,
+	"k_RemoveItemAttribute_Failed_AttributeCannotBeRemoved": 3,
+	"k_RemoveItemAttribute_Failed_AttributeDoesntExist":     4,
+}
+
+func (x CMsgClientToGCRemoveItemAttributeResponse_ERemoveItemAttribute) Enum() *CMsgClientToGCRemoveItemAttributeResponse_ERemoveItemAttribute {
+	p := new(CMsgClientToGCRemoveItemAttributeResponse_ERemoveItemAttribute)
+	*p = x
+	return p
+}
+func (x CMsgClientToGCRemoveItemAttributeResponse_ERemoveItemAttribute) String() string {
+	return proto.EnumName(CMsgClientToGCRemoveItemAttributeResponse_ERemoveItemAttribute_name, int32(x))
+}
+func (x *CMsgClientToGCRemoveItemAttributeResponse_ERemoveItemAttribute) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(CMsgClientToGCRemoveItemAttributeResponse_ERemoveItemAttribute_value, data, "CMsgClientToGCRemoveItemAttributeResponse_ERemoveItemAttribute")
+	if err != nil {
+		return err
+	}
+	*x = CMsgClientToGCRemoveItemAttributeResponse_ERemoveItemAttribute(value)
+	return nil
+}
+
+type CMsgClientToGCNameItemResponse_ENameItem int32
+
+const (
+	CMsgClientToGCNameItemResponse_k_NameItem_Succeeded            CMsgClientToGCNameItemResponse_ENameItem = 0
+	CMsgClientToGCNameItemResponse_k_NameItem_Failed               CMsgClientToGCNameItemResponse_ENameItem = 1
+	CMsgClientToGCNameItemResponse_k_NameItem_Failed_ToolIsInvalid CMsgClientToGCNameItemResponse_ENameItem = 2
+	CMsgClientToGCNameItemResponse_k_NameItem_Failed_ItemIsInvalid CMsgClientToGCNameItemResponse_ENameItem = 3
+	CMsgClientToGCNameItemResponse_k_NameItem_Failed_NameIsInvalid CMsgClientToGCNameItemResponse_ENameItem = 4
+)
+
+var CMsgClientToGCNameItemResponse_ENameItem_name = map[int32]string{
+	0: "k_NameItem_Succeeded",
+	1: "k_NameItem_Failed",
+	2: "k_NameItem_Failed_ToolIsInvalid",
+	3: "k_NameItem_Failed_ItemIsInvalid",
+	4: "k_NameItem_Failed_NameIsInvalid",
+}
+var CMsgClientToGCNameItemResponse_ENameItem_value = map[string]int32{
+	"k_NameItem_Succeeded":            0,
+	"k_NameItem_Failed":               1,
+	"k_NameItem_Failed_ToolIsInvalid": 2,
+	"k_NameItem_Failed_ItemIsInvalid": 3,
+	"k_NameItem_Failed_NameIsInvalid": 4,
+}
+
+func (x CMsgClientToGCNameItemResponse_ENameItem) Enum() *CMsgClientToGCNameItemResponse_ENameItem {
+	p := new(CMsgClientToGCNameItemResponse_ENameItem)
+	*p = x
+	return p
+}
+func (x CMsgClientToGCNameItemResponse_ENameItem) String() string {
+	return proto.EnumName(CMsgClientToGCNameItemResponse_ENameItem_name, int32(x))
+}
+func (x *CMsgClientToGCNameItemResponse_ENameItem) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(CMsgClientToGCNameItemResponse_ENameItem_value, data, "CMsgClientToGCNameItemResponse_ENameItem")
+	if err != nil {
+		return err
+	}
+	*x = CMsgClientToGCNameItemResponse_ENameItem(value)
 	return nil
 }
 
@@ -1036,8 +1300,9 @@ func (m *CMsgRequestItemPurgatory_FinalizePurchase) GetItemIds() []uint64 {
 }
 
 type CMsgRequestItemPurgatory_FinalizePurchaseResponse struct {
-	Result           *uint32 `protobuf:"varint,1,opt,name=result" json:"result,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Result           *uint32  `protobuf:"varint,1,opt,name=result" json:"result,omitempty"`
+	ItemIds          []uint64 `protobuf:"varint,2,rep,name=item_ids" json:"item_ids,omitempty"`
+	XXX_unrecognized []byte   `json:"-"`
 }
 
 func (m *CMsgRequestItemPurgatory_FinalizePurchaseResponse) Reset() {
@@ -1055,9 +1320,16 @@ func (m *CMsgRequestItemPurgatory_FinalizePurchaseResponse) GetResult() uint32 {
 	return 0
 }
 
+func (m *CMsgRequestItemPurgatory_FinalizePurchaseResponse) GetItemIds() []uint64 {
+	if m != nil {
+		return m.ItemIds
+	}
+	return nil
+}
+
 type CMsgRequestItemPurgatory_RefundPurchase struct {
-	ItemId           *uint64 `protobuf:"varint,1,opt,name=item_id" json:"item_id,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	ItemIds          []uint64 `protobuf:"varint,1,rep,name=item_ids" json:"item_ids,omitempty"`
+	XXX_unrecognized []byte   `json:"-"`
 }
 
 func (m *CMsgRequestItemPurgatory_RefundPurchase) Reset() {
@@ -1066,11 +1338,11 @@ func (m *CMsgRequestItemPurgatory_RefundPurchase) Reset() {
 func (m *CMsgRequestItemPurgatory_RefundPurchase) String() string { return proto.CompactTextString(m) }
 func (*CMsgRequestItemPurgatory_RefundPurchase) ProtoMessage()    {}
 
-func (m *CMsgRequestItemPurgatory_RefundPurchase) GetItemId() uint64 {
-	if m != nil && m.ItemId != nil {
-		return *m.ItemId
+func (m *CMsgRequestItemPurgatory_RefundPurchase) GetItemIds() []uint64 {
+	if m != nil {
+		return m.ItemIds
 	}
-	return 0
+	return nil
 }
 
 type CMsgRequestItemPurgatory_RefundPurchaseResponse struct {
@@ -1422,7 +1694,7 @@ func (m *CMsgRequestCrateItems) GetCrateItemDef() uint32 {
 }
 
 type CMsgRequestCrateItemsResponse struct {
-	CrateItemDef     *uint32  `protobuf:"varint,1,opt,name=crate_item_def" json:"crate_item_def,omitempty"`
+	Response         *uint32  `protobuf:"varint,1,opt,name=response" json:"response,omitempty"`
 	ItemDefs         []uint32 `protobuf:"varint,2,rep,name=item_defs" json:"item_defs,omitempty"`
 	XXX_unrecognized []byte   `json:"-"`
 }
@@ -1431,9 +1703,9 @@ func (m *CMsgRequestCrateItemsResponse) Reset()         { *m = CMsgRequestCrateI
 func (m *CMsgRequestCrateItemsResponse) String() string { return proto.CompactTextString(m) }
 func (*CMsgRequestCrateItemsResponse) ProtoMessage()    {}
 
-func (m *CMsgRequestCrateItemsResponse) GetCrateItemDef() uint32 {
-	if m != nil && m.CrateItemDef != nil {
-		return *m.CrateItemDef
+func (m *CMsgRequestCrateItemsResponse) GetResponse() uint32 {
+	if m != nil && m.Response != nil {
+		return *m.Response
 	}
 	return 0
 }
@@ -1987,9 +2259,33 @@ func (m *CMsgGCPartnerBalanceResponse) GetBalance() uint32 {
 	return 0
 }
 
-type CMsgGCPartnerRechargeRedirectURLRequest struct {
-	DefIndex         *uint32 `protobuf:"varint,1,opt,name=def_index" json:"def_index,omitempty"`
+type CGCStoreRechargeRedirect_LineItem struct {
+	ItemDefId        *uint32 `protobuf:"varint,1,opt,name=item_def_id" json:"item_def_id,omitempty"`
+	Quantity         *uint32 `protobuf:"varint,2,opt,name=quantity" json:"quantity,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CGCStoreRechargeRedirect_LineItem) Reset()         { *m = CGCStoreRechargeRedirect_LineItem{} }
+func (m *CGCStoreRechargeRedirect_LineItem) String() string { return proto.CompactTextString(m) }
+func (*CGCStoreRechargeRedirect_LineItem) ProtoMessage()    {}
+
+func (m *CGCStoreRechargeRedirect_LineItem) GetItemDefId() uint32 {
+	if m != nil && m.ItemDefId != nil {
+		return *m.ItemDefId
+	}
+	return 0
+}
+
+func (m *CGCStoreRechargeRedirect_LineItem) GetQuantity() uint32 {
+	if m != nil && m.Quantity != nil {
+		return *m.Quantity
+	}
+	return 0
+}
+
+type CMsgGCPartnerRechargeRedirectURLRequest struct {
+	LineItems        []*CGCStoreRechargeRedirect_LineItem `protobuf:"bytes,1,rep,name=line_items" json:"line_items,omitempty"`
+	XXX_unrecognized []byte                               `json:"-"`
 }
 
 func (m *CMsgGCPartnerRechargeRedirectURLRequest) Reset() {
@@ -1998,11 +2294,11 @@ func (m *CMsgGCPartnerRechargeRedirectURLRequest) Reset() {
 func (m *CMsgGCPartnerRechargeRedirectURLRequest) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCPartnerRechargeRedirectURLRequest) ProtoMessage()    {}
 
-func (m *CMsgGCPartnerRechargeRedirectURLRequest) GetDefIndex() uint32 {
-	if m != nil && m.DefIndex != nil {
-		return *m.DefIndex
+func (m *CMsgGCPartnerRechargeRedirectURLRequest) GetLineItems() []*CGCStoreRechargeRedirect_LineItem {
+	if m != nil {
+		return m.LineItems
 	}
-	return 0
+	return nil
 }
 
 type CMsgGCPartnerRechargeRedirectURLResponse struct {
@@ -2133,6 +2429,7 @@ func (m *CMsgRedeemCode) GetCode() string {
 
 type CMsgRedeemCodeResponse struct {
 	Response         *uint32 `protobuf:"varint,1,opt,name=response" json:"response,omitempty"`
+	ItemId           *uint64 `protobuf:"varint,2,opt,name=item_id" json:"item_id,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
@@ -2143,6 +2440,13 @@ func (*CMsgRedeemCodeResponse) ProtoMessage()    {}
 func (m *CMsgRedeemCodeResponse) GetResponse() uint32 {
 	if m != nil && m.Response != nil {
 		return *m.Response
+	}
+	return 0
+}
+
+func (m *CMsgRedeemCodeResponse) GetItemId() uint64 {
+	if m != nil && m.ItemId != nil {
+		return *m.ItemId
 	}
 	return 0
 }
@@ -2344,28 +2648,46 @@ func (m *CMsgClientToGCUnwrapGift) GetItemId() uint64 {
 	return 0
 }
 
-type CMsgGCToClientBundleUnpacked struct {
-	BundleItemId     *uint64  `protobuf:"varint,1,opt,name=bundle_item_id" json:"bundle_item_id,omitempty"`
-	ItemIds          []uint64 `protobuf:"varint,2,rep,name=item_ids" json:"item_ids,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+type CMsgClientToGCUnpackBundle struct {
+	ItemId           *uint64 `protobuf:"varint,1,opt,name=item_id" json:"item_id,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CMsgGCToClientBundleUnpacked) Reset()         { *m = CMsgGCToClientBundleUnpacked{} }
-func (m *CMsgGCToClientBundleUnpacked) String() string { return proto.CompactTextString(m) }
-func (*CMsgGCToClientBundleUnpacked) ProtoMessage()    {}
+func (m *CMsgClientToGCUnpackBundle) Reset()         { *m = CMsgClientToGCUnpackBundle{} }
+func (m *CMsgClientToGCUnpackBundle) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCUnpackBundle) ProtoMessage()    {}
 
-func (m *CMsgGCToClientBundleUnpacked) GetBundleItemId() uint64 {
-	if m != nil && m.BundleItemId != nil {
-		return *m.BundleItemId
+func (m *CMsgClientToGCUnpackBundle) GetItemId() uint64 {
+	if m != nil && m.ItemId != nil {
+		return *m.ItemId
 	}
 	return 0
 }
 
-func (m *CMsgGCToClientBundleUnpacked) GetItemIds() []uint64 {
+type CMsgClientToGCUnpackBundleResponse struct {
+	UnpackedItemIds  []uint64                                          `protobuf:"varint,1,rep,name=unpacked_item_ids" json:"unpacked_item_ids,omitempty"`
+	Response         *CMsgClientToGCUnpackBundleResponse_EUnpackBundle `protobuf:"varint,2,opt,name=response,enum=dota.CMsgClientToGCUnpackBundleResponse_EUnpackBundle,def=0" json:"response,omitempty"`
+	XXX_unrecognized []byte                                            `json:"-"`
+}
+
+func (m *CMsgClientToGCUnpackBundleResponse) Reset()         { *m = CMsgClientToGCUnpackBundleResponse{} }
+func (m *CMsgClientToGCUnpackBundleResponse) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCUnpackBundleResponse) ProtoMessage()    {}
+
+const Default_CMsgClientToGCUnpackBundleResponse_Response CMsgClientToGCUnpackBundleResponse_EUnpackBundle = CMsgClientToGCUnpackBundleResponse_k_UnpackBundle_Succeeded
+
+func (m *CMsgClientToGCUnpackBundleResponse) GetUnpackedItemIds() []uint64 {
 	if m != nil {
-		return m.ItemIds
+		return m.UnpackedItemIds
 	}
 	return nil
+}
+
+func (m *CMsgClientToGCUnpackBundleResponse) GetResponse() CMsgClientToGCUnpackBundleResponse_EUnpackBundle {
+	if m != nil && m.Response != nil {
+		return *m.Response
+	}
+	return Default_CMsgClientToGCUnpackBundleResponse_Response
 }
 
 type CMsgGCToClientStoreTransactionCompleted struct {
@@ -2424,6 +2746,48 @@ func (m *CMsgClientToGCEquipItemsResponse) GetSoCacheVersionId() uint64 {
 		return *m.SoCacheVersionId
 	}
 	return 0
+}
+
+type CMsgClientToGCSetItemStyle struct {
+	ItemId           *uint64 `protobuf:"varint,1,opt,name=item_id" json:"item_id,omitempty"`
+	StyleIndex       *uint32 `protobuf:"varint,2,opt,name=style_index" json:"style_index,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CMsgClientToGCSetItemStyle) Reset()         { *m = CMsgClientToGCSetItemStyle{} }
+func (m *CMsgClientToGCSetItemStyle) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCSetItemStyle) ProtoMessage()    {}
+
+func (m *CMsgClientToGCSetItemStyle) GetItemId() uint64 {
+	if m != nil && m.ItemId != nil {
+		return *m.ItemId
+	}
+	return 0
+}
+
+func (m *CMsgClientToGCSetItemStyle) GetStyleIndex() uint32 {
+	if m != nil && m.StyleIndex != nil {
+		return *m.StyleIndex
+	}
+	return 0
+}
+
+type CMsgClientToGCSetItemStyleResponse struct {
+	Response         *CMsgClientToGCSetItemStyleResponse_ESetStyle `protobuf:"varint,1,opt,name=response,enum=dota.CMsgClientToGCSetItemStyleResponse_ESetStyle,def=0" json:"response,omitempty"`
+	XXX_unrecognized []byte                                        `json:"-"`
+}
+
+func (m *CMsgClientToGCSetItemStyleResponse) Reset()         { *m = CMsgClientToGCSetItemStyleResponse{} }
+func (m *CMsgClientToGCSetItemStyleResponse) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCSetItemStyleResponse) ProtoMessage()    {}
+
+const Default_CMsgClientToGCSetItemStyleResponse_Response CMsgClientToGCSetItemStyleResponse_ESetStyle = CMsgClientToGCSetItemStyleResponse_k_SetStyle_Succeeded
+
+func (m *CMsgClientToGCSetItemStyleResponse) GetResponse() CMsgClientToGCSetItemStyleResponse_ESetStyle {
+	if m != nil && m.Response != nil {
+		return *m.Response
+	}
+	return Default_CMsgClientToGCSetItemStyleResponse_Response
 }
 
 type CMsgClientToGCUnlockItemStyle struct {
@@ -2618,52 +2982,106 @@ func (m *CMsgClientToGCUnlockCrateResponse_Item) GetDefIndex() uint32 {
 	return 0
 }
 
-type CMsgGCRemoveItemAttributeMsg struct {
+type CMsgClientToGCRemoveItemAttribute struct {
 	ItemId           *uint64 `protobuf:"varint,1,opt,name=item_id" json:"item_id,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CMsgGCRemoveItemAttributeMsg) Reset()         { *m = CMsgGCRemoveItemAttributeMsg{} }
-func (m *CMsgGCRemoveItemAttributeMsg) String() string { return proto.CompactTextString(m) }
-func (*CMsgGCRemoveItemAttributeMsg) ProtoMessage()    {}
+func (m *CMsgClientToGCRemoveItemAttribute) Reset()         { *m = CMsgClientToGCRemoveItemAttribute{} }
+func (m *CMsgClientToGCRemoveItemAttribute) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCRemoveItemAttribute) ProtoMessage()    {}
 
-func (m *CMsgGCRemoveItemAttributeMsg) GetItemId() uint64 {
+func (m *CMsgClientToGCRemoveItemAttribute) GetItemId() uint64 {
 	if m != nil && m.ItemId != nil {
 		return *m.ItemId
 	}
 	return 0
 }
 
-type CMsgGCNameItem struct {
+type CMsgClientToGCRemoveItemAttributeResponse struct {
+	Response         *CMsgClientToGCRemoveItemAttributeResponse_ERemoveItemAttribute `protobuf:"varint,1,opt,name=response,enum=dota.CMsgClientToGCRemoveItemAttributeResponse_ERemoveItemAttribute,def=0" json:"response,omitempty"`
+	ItemId           *uint64                                                         `protobuf:"varint,2,opt,name=item_id" json:"item_id,omitempty"`
+	XXX_unrecognized []byte                                                          `json:"-"`
+}
+
+func (m *CMsgClientToGCRemoveItemAttributeResponse) Reset() {
+	*m = CMsgClientToGCRemoveItemAttributeResponse{}
+}
+func (m *CMsgClientToGCRemoveItemAttributeResponse) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCRemoveItemAttributeResponse) ProtoMessage()    {}
+
+const Default_CMsgClientToGCRemoveItemAttributeResponse_Response CMsgClientToGCRemoveItemAttributeResponse_ERemoveItemAttribute = CMsgClientToGCRemoveItemAttributeResponse_k_RemoveItemAttribute_Succeeded
+
+func (m *CMsgClientToGCRemoveItemAttributeResponse) GetResponse() CMsgClientToGCRemoveItemAttributeResponse_ERemoveItemAttribute {
+	if m != nil && m.Response != nil {
+		return *m.Response
+	}
+	return Default_CMsgClientToGCRemoveItemAttributeResponse_Response
+}
+
+func (m *CMsgClientToGCRemoveItemAttributeResponse) GetItemId() uint64 {
+	if m != nil && m.ItemId != nil {
+		return *m.ItemId
+	}
+	return 0
+}
+
+type CMsgClientToGCNameItem struct {
 	SubjectItemId    *uint64 `protobuf:"varint,1,opt,name=subject_item_id" json:"subject_item_id,omitempty"`
 	ToolItemId       *uint64 `protobuf:"varint,2,opt,name=tool_item_id" json:"tool_item_id,omitempty"`
 	Name             *string `protobuf:"bytes,3,opt,name=name" json:"name,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CMsgGCNameItem) Reset()         { *m = CMsgGCNameItem{} }
-func (m *CMsgGCNameItem) String() string { return proto.CompactTextString(m) }
-func (*CMsgGCNameItem) ProtoMessage()    {}
+func (m *CMsgClientToGCNameItem) Reset()         { *m = CMsgClientToGCNameItem{} }
+func (m *CMsgClientToGCNameItem) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCNameItem) ProtoMessage()    {}
 
-func (m *CMsgGCNameItem) GetSubjectItemId() uint64 {
+func (m *CMsgClientToGCNameItem) GetSubjectItemId() uint64 {
 	if m != nil && m.SubjectItemId != nil {
 		return *m.SubjectItemId
 	}
 	return 0
 }
 
-func (m *CMsgGCNameItem) GetToolItemId() uint64 {
+func (m *CMsgClientToGCNameItem) GetToolItemId() uint64 {
 	if m != nil && m.ToolItemId != nil {
 		return *m.ToolItemId
 	}
 	return 0
 }
 
-func (m *CMsgGCNameItem) GetName() string {
+func (m *CMsgClientToGCNameItem) GetName() string {
 	if m != nil && m.Name != nil {
 		return *m.Name
 	}
 	return ""
+}
+
+type CMsgClientToGCNameItemResponse struct {
+	Response         *CMsgClientToGCNameItemResponse_ENameItem `protobuf:"varint,1,opt,name=response,enum=dota.CMsgClientToGCNameItemResponse_ENameItem,def=0" json:"response,omitempty"`
+	ItemId           *uint64                                   `protobuf:"varint,2,opt,name=item_id" json:"item_id,omitempty"`
+	XXX_unrecognized []byte                                    `json:"-"`
+}
+
+func (m *CMsgClientToGCNameItemResponse) Reset()         { *m = CMsgClientToGCNameItemResponse{} }
+func (m *CMsgClientToGCNameItemResponse) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCNameItemResponse) ProtoMessage()    {}
+
+const Default_CMsgClientToGCNameItemResponse_Response CMsgClientToGCNameItemResponse_ENameItem = CMsgClientToGCNameItemResponse_k_NameItem_Succeeded
+
+func (m *CMsgClientToGCNameItemResponse) GetResponse() CMsgClientToGCNameItemResponse_ENameItem {
+	if m != nil && m.Response != nil {
+		return *m.Response
+	}
+	return Default_CMsgClientToGCNameItemResponse_Response
+}
+
+func (m *CMsgClientToGCNameItemResponse) GetItemId() uint64 {
+	if m != nil && m.ItemId != nil {
+		return *m.ItemId
+	}
+	return 0
 }
 
 type CMsgGCSetItemPosition struct {
@@ -2690,6 +3108,594 @@ func (m *CMsgGCSetItemPosition) GetNewPosition() uint32 {
 	return 0
 }
 
+type CAttribute_ItemDynamicRecipeComponent struct {
+	ItemDef          *uint32 `protobuf:"varint,1,opt,name=item_def" json:"item_def,omitempty"`
+	ItemQuality      *uint32 `protobuf:"varint,2,opt,name=item_quality" json:"item_quality,omitempty"`
+	ItemFlags        *uint32 `protobuf:"varint,3,opt,name=item_flags" json:"item_flags,omitempty"`
+	AttributesString *string `protobuf:"bytes,4,opt,name=attributes_string" json:"attributes_string,omitempty"`
+	ItemCount        *uint32 `protobuf:"varint,5,opt,name=item_count" json:"item_count,omitempty"`
+	ItemsFulfilled   *uint32 `protobuf:"varint,6,opt,name=items_fulfilled" json:"items_fulfilled,omitempty"`
+	ItemRarity       *uint32 `protobuf:"varint,7,opt,name=item_rarity" json:"item_rarity,omitempty"`
+	Lootlist         *string `protobuf:"bytes,8,opt,name=lootlist" json:"lootlist,omitempty"`
+	FulfilledItemId  *uint64 `protobuf:"varint,9,opt,name=fulfilled_item_id" json:"fulfilled_item_id,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CAttribute_ItemDynamicRecipeComponent) Reset()         { *m = CAttribute_ItemDynamicRecipeComponent{} }
+func (m *CAttribute_ItemDynamicRecipeComponent) String() string { return proto.CompactTextString(m) }
+func (*CAttribute_ItemDynamicRecipeComponent) ProtoMessage()    {}
+
+func (m *CAttribute_ItemDynamicRecipeComponent) GetItemDef() uint32 {
+	if m != nil && m.ItemDef != nil {
+		return *m.ItemDef
+	}
+	return 0
+}
+
+func (m *CAttribute_ItemDynamicRecipeComponent) GetItemQuality() uint32 {
+	if m != nil && m.ItemQuality != nil {
+		return *m.ItemQuality
+	}
+	return 0
+}
+
+func (m *CAttribute_ItemDynamicRecipeComponent) GetItemFlags() uint32 {
+	if m != nil && m.ItemFlags != nil {
+		return *m.ItemFlags
+	}
+	return 0
+}
+
+func (m *CAttribute_ItemDynamicRecipeComponent) GetAttributesString() string {
+	if m != nil && m.AttributesString != nil {
+		return *m.AttributesString
+	}
+	return ""
+}
+
+func (m *CAttribute_ItemDynamicRecipeComponent) GetItemCount() uint32 {
+	if m != nil && m.ItemCount != nil {
+		return *m.ItemCount
+	}
+	return 0
+}
+
+func (m *CAttribute_ItemDynamicRecipeComponent) GetItemsFulfilled() uint32 {
+	if m != nil && m.ItemsFulfilled != nil {
+		return *m.ItemsFulfilled
+	}
+	return 0
+}
+
+func (m *CAttribute_ItemDynamicRecipeComponent) GetItemRarity() uint32 {
+	if m != nil && m.ItemRarity != nil {
+		return *m.ItemRarity
+	}
+	return 0
+}
+
+func (m *CAttribute_ItemDynamicRecipeComponent) GetLootlist() string {
+	if m != nil && m.Lootlist != nil {
+		return *m.Lootlist
+	}
+	return ""
+}
+
+func (m *CAttribute_ItemDynamicRecipeComponent) GetFulfilledItemId() uint64 {
+	if m != nil && m.FulfilledItemId != nil {
+		return *m.FulfilledItemId
+	}
+	return 0
+}
+
+type CProtoItemSocket struct {
+	ItemId           *uint64 `protobuf:"varint,1,opt,name=item_id" json:"item_id,omitempty"`
+	AttrDefIndex     *uint32 `protobuf:"varint,2,opt,name=attr_def_index" json:"attr_def_index,omitempty"`
+	RequiredType     *uint32 `protobuf:"varint,3,opt,name=required_type" json:"required_type,omitempty"`
+	RequiredHero     *string `protobuf:"bytes,4,opt,name=required_hero" json:"required_hero,omitempty"`
+	GemDefIndex      *uint32 `protobuf:"varint,5,opt,name=gem_def_index" json:"gem_def_index,omitempty"`
+	NotTradable      *bool   `protobuf:"varint,6,opt,name=not_tradable" json:"not_tradable,omitempty"`
+	RequiredItemSlot *string `protobuf:"bytes,7,opt,name=required_item_slot" json:"required_item_slot,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CProtoItemSocket) Reset()         { *m = CProtoItemSocket{} }
+func (m *CProtoItemSocket) String() string { return proto.CompactTextString(m) }
+func (*CProtoItemSocket) ProtoMessage()    {}
+
+func (m *CProtoItemSocket) GetItemId() uint64 {
+	if m != nil && m.ItemId != nil {
+		return *m.ItemId
+	}
+	return 0
+}
+
+func (m *CProtoItemSocket) GetAttrDefIndex() uint32 {
+	if m != nil && m.AttrDefIndex != nil {
+		return *m.AttrDefIndex
+	}
+	return 0
+}
+
+func (m *CProtoItemSocket) GetRequiredType() uint32 {
+	if m != nil && m.RequiredType != nil {
+		return *m.RequiredType
+	}
+	return 0
+}
+
+func (m *CProtoItemSocket) GetRequiredHero() string {
+	if m != nil && m.RequiredHero != nil {
+		return *m.RequiredHero
+	}
+	return ""
+}
+
+func (m *CProtoItemSocket) GetGemDefIndex() uint32 {
+	if m != nil && m.GemDefIndex != nil {
+		return *m.GemDefIndex
+	}
+	return 0
+}
+
+func (m *CProtoItemSocket) GetNotTradable() bool {
+	if m != nil && m.NotTradable != nil {
+		return *m.NotTradable
+	}
+	return false
+}
+
+func (m *CProtoItemSocket) GetRequiredItemSlot() string {
+	if m != nil && m.RequiredItemSlot != nil {
+		return *m.RequiredItemSlot
+	}
+	return ""
+}
+
+type CProtoItemSocket_Empty struct {
+	Socket           *CProtoItemSocket `protobuf:"bytes,1,opt,name=socket" json:"socket,omitempty"`
+	XXX_unrecognized []byte            `json:"-"`
+}
+
+func (m *CProtoItemSocket_Empty) Reset()         { *m = CProtoItemSocket_Empty{} }
+func (m *CProtoItemSocket_Empty) String() string { return proto.CompactTextString(m) }
+func (*CProtoItemSocket_Empty) ProtoMessage()    {}
+
+func (m *CProtoItemSocket_Empty) GetSocket() *CProtoItemSocket {
+	if m != nil {
+		return m.Socket
+	}
+	return nil
+}
+
+type CProtoItemSocket_Effect struct {
+	Socket           *CProtoItemSocket `protobuf:"bytes,1,opt,name=socket" json:"socket,omitempty"`
+	Effect           *uint32           `protobuf:"varint,2,opt,name=effect" json:"effect,omitempty"`
+	XXX_unrecognized []byte            `json:"-"`
+}
+
+func (m *CProtoItemSocket_Effect) Reset()         { *m = CProtoItemSocket_Effect{} }
+func (m *CProtoItemSocket_Effect) String() string { return proto.CompactTextString(m) }
+func (*CProtoItemSocket_Effect) ProtoMessage()    {}
+
+func (m *CProtoItemSocket_Effect) GetSocket() *CProtoItemSocket {
+	if m != nil {
+		return m.Socket
+	}
+	return nil
+}
+
+func (m *CProtoItemSocket_Effect) GetEffect() uint32 {
+	if m != nil && m.Effect != nil {
+		return *m.Effect
+	}
+	return 0
+}
+
+type CProtoItemSocket_Color struct {
+	Socket           *CProtoItemSocket `protobuf:"bytes,1,opt,name=socket" json:"socket,omitempty"`
+	Red              *uint32           `protobuf:"varint,2,opt,name=red" json:"red,omitempty"`
+	Green            *uint32           `protobuf:"varint,3,opt,name=green" json:"green,omitempty"`
+	Blue             *uint32           `protobuf:"varint,4,opt,name=blue" json:"blue,omitempty"`
+	XXX_unrecognized []byte            `json:"-"`
+}
+
+func (m *CProtoItemSocket_Color) Reset()         { *m = CProtoItemSocket_Color{} }
+func (m *CProtoItemSocket_Color) String() string { return proto.CompactTextString(m) }
+func (*CProtoItemSocket_Color) ProtoMessage()    {}
+
+func (m *CProtoItemSocket_Color) GetSocket() *CProtoItemSocket {
+	if m != nil {
+		return m.Socket
+	}
+	return nil
+}
+
+func (m *CProtoItemSocket_Color) GetRed() uint32 {
+	if m != nil && m.Red != nil {
+		return *m.Red
+	}
+	return 0
+}
+
+func (m *CProtoItemSocket_Color) GetGreen() uint32 {
+	if m != nil && m.Green != nil {
+		return *m.Green
+	}
+	return 0
+}
+
+func (m *CProtoItemSocket_Color) GetBlue() uint32 {
+	if m != nil && m.Blue != nil {
+		return *m.Blue
+	}
+	return 0
+}
+
+type CProtoItemSocket_Strange struct {
+	Socket           *CProtoItemSocket `protobuf:"bytes,1,opt,name=socket" json:"socket,omitempty"`
+	StrangeType      *uint32           `protobuf:"varint,2,opt,name=strange_type" json:"strange_type,omitempty"`
+	StrangeValue     *uint32           `protobuf:"varint,3,opt,name=strange_value" json:"strange_value,omitempty"`
+	XXX_unrecognized []byte            `json:"-"`
+}
+
+func (m *CProtoItemSocket_Strange) Reset()         { *m = CProtoItemSocket_Strange{} }
+func (m *CProtoItemSocket_Strange) String() string { return proto.CompactTextString(m) }
+func (*CProtoItemSocket_Strange) ProtoMessage()    {}
+
+func (m *CProtoItemSocket_Strange) GetSocket() *CProtoItemSocket {
+	if m != nil {
+		return m.Socket
+	}
+	return nil
+}
+
+func (m *CProtoItemSocket_Strange) GetStrangeType() uint32 {
+	if m != nil && m.StrangeType != nil {
+		return *m.StrangeType
+	}
+	return 0
+}
+
+func (m *CProtoItemSocket_Strange) GetStrangeValue() uint32 {
+	if m != nil && m.StrangeValue != nil {
+		return *m.StrangeValue
+	}
+	return 0
+}
+
+type CProtoItemSocket_Spectator struct {
+	Socket           *CProtoItemSocket `protobuf:"bytes,1,opt,name=socket" json:"socket,omitempty"`
+	GamesViewed      *uint32           `protobuf:"varint,2,opt,name=games_viewed" json:"games_viewed,omitempty"`
+	CorporationId    *uint32           `protobuf:"varint,3,opt,name=corporation_id" json:"corporation_id,omitempty"`
+	LeagueId         *uint32           `protobuf:"varint,4,opt,name=league_id" json:"league_id,omitempty"`
+	TeamId           *uint32           `protobuf:"varint,5,opt,name=team_id" json:"team_id,omitempty"`
+	XXX_unrecognized []byte            `json:"-"`
+}
+
+func (m *CProtoItemSocket_Spectator) Reset()         { *m = CProtoItemSocket_Spectator{} }
+func (m *CProtoItemSocket_Spectator) String() string { return proto.CompactTextString(m) }
+func (*CProtoItemSocket_Spectator) ProtoMessage()    {}
+
+func (m *CProtoItemSocket_Spectator) GetSocket() *CProtoItemSocket {
+	if m != nil {
+		return m.Socket
+	}
+	return nil
+}
+
+func (m *CProtoItemSocket_Spectator) GetGamesViewed() uint32 {
+	if m != nil && m.GamesViewed != nil {
+		return *m.GamesViewed
+	}
+	return 0
+}
+
+func (m *CProtoItemSocket_Spectator) GetCorporationId() uint32 {
+	if m != nil && m.CorporationId != nil {
+		return *m.CorporationId
+	}
+	return 0
+}
+
+func (m *CProtoItemSocket_Spectator) GetLeagueId() uint32 {
+	if m != nil && m.LeagueId != nil {
+		return *m.LeagueId
+	}
+	return 0
+}
+
+func (m *CProtoItemSocket_Spectator) GetTeamId() uint32 {
+	if m != nil && m.TeamId != nil {
+		return *m.TeamId
+	}
+	return 0
+}
+
+type CProtoItemSocket_AssetModifier struct {
+	Socket           *CProtoItemSocket `protobuf:"bytes,1,opt,name=socket" json:"socket,omitempty"`
+	AssetModifier    *uint32           `protobuf:"varint,2,opt,name=asset_modifier" json:"asset_modifier,omitempty"`
+	XXX_unrecognized []byte            `json:"-"`
+}
+
+func (m *CProtoItemSocket_AssetModifier) Reset()         { *m = CProtoItemSocket_AssetModifier{} }
+func (m *CProtoItemSocket_AssetModifier) String() string { return proto.CompactTextString(m) }
+func (*CProtoItemSocket_AssetModifier) ProtoMessage()    {}
+
+func (m *CProtoItemSocket_AssetModifier) GetSocket() *CProtoItemSocket {
+	if m != nil {
+		return m.Socket
+	}
+	return nil
+}
+
+func (m *CProtoItemSocket_AssetModifier) GetAssetModifier() uint32 {
+	if m != nil && m.AssetModifier != nil {
+		return *m.AssetModifier
+	}
+	return 0
+}
+
+type CProtoItemSocket_AssetModifier_DESERIALIZE_FROM_STRING_ONLY struct {
+	Socket           *CProtoItemSocket `protobuf:"bytes,1,opt,name=socket" json:"socket,omitempty"`
+	AssetModifier    *uint32           `protobuf:"varint,2,opt,name=asset_modifier" json:"asset_modifier,omitempty"`
+	AnimModifier     *uint32           `protobuf:"varint,3,opt,name=anim_modifier" json:"anim_modifier,omitempty"`
+	AbilityEffect    *uint32           `protobuf:"varint,4,opt,name=ability_effect" json:"ability_effect,omitempty"`
+	XXX_unrecognized []byte            `json:"-"`
+}
+
+func (m *CProtoItemSocket_AssetModifier_DESERIALIZE_FROM_STRING_ONLY) Reset() {
+	*m = CProtoItemSocket_AssetModifier_DESERIALIZE_FROM_STRING_ONLY{}
+}
+func (m *CProtoItemSocket_AssetModifier_DESERIALIZE_FROM_STRING_ONLY) String() string {
+	return proto.CompactTextString(m)
+}
+func (*CProtoItemSocket_AssetModifier_DESERIALIZE_FROM_STRING_ONLY) ProtoMessage() {}
+
+func (m *CProtoItemSocket_AssetModifier_DESERIALIZE_FROM_STRING_ONLY) GetSocket() *CProtoItemSocket {
+	if m != nil {
+		return m.Socket
+	}
+	return nil
+}
+
+func (m *CProtoItemSocket_AssetModifier_DESERIALIZE_FROM_STRING_ONLY) GetAssetModifier() uint32 {
+	if m != nil && m.AssetModifier != nil {
+		return *m.AssetModifier
+	}
+	return 0
+}
+
+func (m *CProtoItemSocket_AssetModifier_DESERIALIZE_FROM_STRING_ONLY) GetAnimModifier() uint32 {
+	if m != nil && m.AnimModifier != nil {
+		return *m.AnimModifier
+	}
+	return 0
+}
+
+func (m *CProtoItemSocket_AssetModifier_DESERIALIZE_FROM_STRING_ONLY) GetAbilityEffect() uint32 {
+	if m != nil && m.AbilityEffect != nil {
+		return *m.AbilityEffect
+	}
+	return 0
+}
+
+type CProtoItemSocket_Autograph struct {
+	Socket           *CProtoItemSocket `protobuf:"bytes,1,opt,name=socket" json:"socket,omitempty"`
+	Autograph        *string           `protobuf:"bytes,2,opt,name=autograph" json:"autograph,omitempty"`
+	AutographId      *uint32           `protobuf:"varint,3,opt,name=autograph_id" json:"autograph_id,omitempty"`
+	AutographScore   *uint32           `protobuf:"varint,4,opt,name=autograph_score" json:"autograph_score,omitempty"`
+	XXX_unrecognized []byte            `json:"-"`
+}
+
+func (m *CProtoItemSocket_Autograph) Reset()         { *m = CProtoItemSocket_Autograph{} }
+func (m *CProtoItemSocket_Autograph) String() string { return proto.CompactTextString(m) }
+func (*CProtoItemSocket_Autograph) ProtoMessage()    {}
+
+func (m *CProtoItemSocket_Autograph) GetSocket() *CProtoItemSocket {
+	if m != nil {
+		return m.Socket
+	}
+	return nil
+}
+
+func (m *CProtoItemSocket_Autograph) GetAutograph() string {
+	if m != nil && m.Autograph != nil {
+		return *m.Autograph
+	}
+	return ""
+}
+
+func (m *CProtoItemSocket_Autograph) GetAutographId() uint32 {
+	if m != nil && m.AutographId != nil {
+		return *m.AutographId
+	}
+	return 0
+}
+
+func (m *CProtoItemSocket_Autograph) GetAutographScore() uint32 {
+	if m != nil && m.AutographScore != nil {
+		return *m.AutographScore
+	}
+	return 0
+}
+
+type CProtoItemSocket_StaticVisuals struct {
+	Socket           *CProtoItemSocket `protobuf:"bytes,1,opt,name=socket" json:"socket,omitempty"`
+	XXX_unrecognized []byte            `json:"-"`
+}
+
+func (m *CProtoItemSocket_StaticVisuals) Reset()         { *m = CProtoItemSocket_StaticVisuals{} }
+func (m *CProtoItemSocket_StaticVisuals) String() string { return proto.CompactTextString(m) }
+func (*CProtoItemSocket_StaticVisuals) ProtoMessage()    {}
+
+func (m *CProtoItemSocket_StaticVisuals) GetSocket() *CProtoItemSocket {
+	if m != nil {
+		return m.Socket
+	}
+	return nil
+}
+
+type CAttribute_String struct {
+	Value            *string `protobuf:"bytes,1,opt,name=value" json:"value,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CAttribute_String) Reset()         { *m = CAttribute_String{} }
+func (m *CAttribute_String) String() string { return proto.CompactTextString(m) }
+func (*CAttribute_String) ProtoMessage()    {}
+
+func (m *CAttribute_String) GetValue() string {
+	if m != nil && m.Value != nil {
+		return *m.Value
+	}
+	return ""
+}
+
+type CWorkshop_GetItemDailyRevenue_Request struct {
+	Appid            *uint32 `protobuf:"varint,1,opt,name=appid" json:"appid,omitempty"`
+	ItemId           *uint32 `protobuf:"varint,2,opt,name=item_id" json:"item_id,omitempty"`
+	DateStart        *uint32 `protobuf:"varint,3,opt,name=date_start" json:"date_start,omitempty"`
+	DateEnd          *uint32 `protobuf:"varint,4,opt,name=date_end" json:"date_end,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CWorkshop_GetItemDailyRevenue_Request) Reset()         { *m = CWorkshop_GetItemDailyRevenue_Request{} }
+func (m *CWorkshop_GetItemDailyRevenue_Request) String() string { return proto.CompactTextString(m) }
+func (*CWorkshop_GetItemDailyRevenue_Request) ProtoMessage()    {}
+
+func (m *CWorkshop_GetItemDailyRevenue_Request) GetAppid() uint32 {
+	if m != nil && m.Appid != nil {
+		return *m.Appid
+	}
+	return 0
+}
+
+func (m *CWorkshop_GetItemDailyRevenue_Request) GetItemId() uint32 {
+	if m != nil && m.ItemId != nil {
+		return *m.ItemId
+	}
+	return 0
+}
+
+func (m *CWorkshop_GetItemDailyRevenue_Request) GetDateStart() uint32 {
+	if m != nil && m.DateStart != nil {
+		return *m.DateStart
+	}
+	return 0
+}
+
+func (m *CWorkshop_GetItemDailyRevenue_Request) GetDateEnd() uint32 {
+	if m != nil && m.DateEnd != nil {
+		return *m.DateEnd
+	}
+	return 0
+}
+
+type CWorkshop_GetItemDailyRevenue_Response struct {
+	CountryRevenue   []*CWorkshop_GetItemDailyRevenue_Response_CountryDailyRevenue `protobuf:"bytes,1,rep,name=country_revenue" json:"country_revenue,omitempty"`
+	XXX_unrecognized []byte                                                        `json:"-"`
+}
+
+func (m *CWorkshop_GetItemDailyRevenue_Response) Reset() {
+	*m = CWorkshop_GetItemDailyRevenue_Response{}
+}
+func (m *CWorkshop_GetItemDailyRevenue_Response) String() string { return proto.CompactTextString(m) }
+func (*CWorkshop_GetItemDailyRevenue_Response) ProtoMessage()    {}
+
+func (m *CWorkshop_GetItemDailyRevenue_Response) GetCountryRevenue() []*CWorkshop_GetItemDailyRevenue_Response_CountryDailyRevenue {
+	if m != nil {
+		return m.CountryRevenue
+	}
+	return nil
+}
+
+type CWorkshop_GetItemDailyRevenue_Response_CountryDailyRevenue struct {
+	CountryCode      *string `protobuf:"bytes,1,opt,name=country_code" json:"country_code,omitempty"`
+	Date             *uint32 `protobuf:"varint,2,opt,name=date" json:"date,omitempty"`
+	RevenueUsd       *int64  `protobuf:"varint,3,opt,name=revenue_usd" json:"revenue_usd,omitempty"`
+	Units            *int32  `protobuf:"varint,4,opt,name=units" json:"units,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CWorkshop_GetItemDailyRevenue_Response_CountryDailyRevenue) Reset() {
+	*m = CWorkshop_GetItemDailyRevenue_Response_CountryDailyRevenue{}
+}
+func (m *CWorkshop_GetItemDailyRevenue_Response_CountryDailyRevenue) String() string {
+	return proto.CompactTextString(m)
+}
+func (*CWorkshop_GetItemDailyRevenue_Response_CountryDailyRevenue) ProtoMessage() {}
+
+func (m *CWorkshop_GetItemDailyRevenue_Response_CountryDailyRevenue) GetCountryCode() string {
+	if m != nil && m.CountryCode != nil {
+		return *m.CountryCode
+	}
+	return ""
+}
+
+func (m *CWorkshop_GetItemDailyRevenue_Response_CountryDailyRevenue) GetDate() uint32 {
+	if m != nil && m.Date != nil {
+		return *m.Date
+	}
+	return 0
+}
+
+func (m *CWorkshop_GetItemDailyRevenue_Response_CountryDailyRevenue) GetRevenueUsd() int64 {
+	if m != nil && m.RevenueUsd != nil {
+		return *m.RevenueUsd
+	}
+	return 0
+}
+
+func (m *CWorkshop_GetItemDailyRevenue_Response_CountryDailyRevenue) GetUnits() int32 {
+	if m != nil && m.Units != nil {
+		return *m.Units
+	}
+	return 0
+}
+
+type CMsgGenericResult struct {
+	Eresult          *uint32 `protobuf:"varint,1,opt,name=eresult,def=2" json:"eresult,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CMsgGenericResult) Reset()         { *m = CMsgGenericResult{} }
+func (m *CMsgGenericResult) String() string { return proto.CompactTextString(m) }
+func (*CMsgGenericResult) ProtoMessage()    {}
+
+const Default_CMsgGenericResult_Eresult uint32 = 2
+
+func (m *CMsgGenericResult) GetEresult() uint32 {
+	if m != nil && m.Eresult != nil {
+		return *m.Eresult
+	}
+	return Default_CMsgGenericResult_Eresult
+}
+
+type CMsgSQLGCToGCGrantBackpackSlots struct {
+	AccountId        *uint32 `protobuf:"varint,1,opt,name=account_id" json:"account_id,omitempty"`
+	AddSlots         *uint32 `protobuf:"varint,2,opt,name=add_slots" json:"add_slots,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CMsgSQLGCToGCGrantBackpackSlots) Reset()         { *m = CMsgSQLGCToGCGrantBackpackSlots{} }
+func (m *CMsgSQLGCToGCGrantBackpackSlots) String() string { return proto.CompactTextString(m) }
+func (*CMsgSQLGCToGCGrantBackpackSlots) ProtoMessage()    {}
+
+func (m *CMsgSQLGCToGCGrantBackpackSlots) GetAccountId() uint32 {
+	if m != nil && m.AccountId != nil {
+		return *m.AccountId
+	}
+	return 0
+}
+
+func (m *CMsgSQLGCToGCGrantBackpackSlots) GetAddSlots() uint32 {
+	if m != nil && m.AddSlots != nil {
+		return *m.AddSlots
+	}
+	return 0
+}
+
 func init() {
 	proto.RegisterEnum("dota.EGCItemMsg", EGCItemMsg_name, EGCItemMsg_value)
 	proto.RegisterEnum("dota.EGCMsgResponse", EGCMsgResponse_name, EGCMsgResponse_value)
@@ -2697,5 +3703,11 @@ func init() {
 	proto.RegisterEnum("dota.EItemPurgatoryResponse_Refund", EItemPurgatoryResponse_Refund_name, EItemPurgatoryResponse_Refund_value)
 	proto.RegisterEnum("dota.EGCPartnerRequestResponse", EGCPartnerRequestResponse_name, EGCPartnerRequestResponse_value)
 	proto.RegisterEnum("dota.EGCMsgInitiateTradeResponse", EGCMsgInitiateTradeResponse_name, EGCMsgInitiateTradeResponse_value)
+	proto.RegisterEnum("dota.CMsgRequestCrateItemsResponse_EResult", CMsgRequestCrateItemsResponse_EResult_name, CMsgRequestCrateItemsResponse_EResult_value)
+	proto.RegisterEnum("dota.CMsgRedeemCodeResponse_EResultCode", CMsgRedeemCodeResponse_EResultCode_name, CMsgRedeemCodeResponse_EResultCode_value)
+	proto.RegisterEnum("dota.CMsgClientToGCUnpackBundleResponse_EUnpackBundle", CMsgClientToGCUnpackBundleResponse_EUnpackBundle_name, CMsgClientToGCUnpackBundleResponse_EUnpackBundle_value)
+	proto.RegisterEnum("dota.CMsgClientToGCSetItemStyleResponse_ESetStyle", CMsgClientToGCSetItemStyleResponse_ESetStyle_name, CMsgClientToGCSetItemStyleResponse_ESetStyle_value)
 	proto.RegisterEnum("dota.CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle", CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle_name, CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle_value)
+	proto.RegisterEnum("dota.CMsgClientToGCRemoveItemAttributeResponse_ERemoveItemAttribute", CMsgClientToGCRemoveItemAttributeResponse_ERemoveItemAttribute_name, CMsgClientToGCRemoveItemAttributeResponse_ERemoveItemAttribute_value)
+	proto.RegisterEnum("dota.CMsgClientToGCNameItemResponse_ENameItem", CMsgClientToGCNameItemResponse_ENameItem_name, CMsgClientToGCNameItemResponse_ENameItem_value)
 }
