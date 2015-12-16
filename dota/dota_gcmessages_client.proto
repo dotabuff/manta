@@ -252,6 +252,10 @@ message CMsgPracticeLobbySetDetails {
 	optional uint32 league_game_id = 36;
 	optional fixed32 custom_game_timestamp = 37;
 	optional uint64 previous_match_override = 38;
+	optional uint32 league_selection_priority_team = 39;
+	optional SelectionPriorityType league_selection_priority_choice = 40 [default = UNDEFINED];
+	optional SelectionPriorityType league_non_selection_priority_choice = 41 [default = UNDEFINED];
+	optional LobbyDotaPauseSetting pause_setting = 42 [default = LobbyDotaPauseSetting_Unlimited];
 }
 
 message CMsgPracticeLobbyCreate {
@@ -1126,12 +1130,15 @@ message CMsgDOTAChatMessage {
 	optional uint64 share_lobby_id = 19;
 	optional uint64 share_lobby_custom_game_id = 20;
 	optional string share_lobby_passkey = 21;
+	optional uint32 private_chat_channel_id = 22;
+	optional uint32 status = 23;
 }
 
 message CMsgDOTAChatMember {
 	optional fixed64 steam_id = 1;
 	optional string persona_name = 2;
 	optional uint32 channel_user_id = 3;
+	optional uint32 status = 4;
 }
 
 message CMsgDOTAJoinChatChannelResponse {
@@ -1146,6 +1153,10 @@ message CMsgDOTAJoinChatChannelResponse {
 		CHANNEL_FULL_OVERFLOWED = 7;
 		FAILED_TO_ADD_USER = 8;
 		CHANNEL_TYPE_DISABLED = 9;
+		PRIVATE_CHAT_CREATE_FAILED = 10;
+		PRIVATE_CHAT_NO_PERMISSION = 11;
+		PRIVATE_CHAT_CREATE_LOCK_FAILED = 12;
+		PRIVATE_CHAT_KICKED = 13;
 	}
 
 	optional uint32 response = 1;
@@ -1170,6 +1181,7 @@ message CMsgDOTAOtherJoinedChatChannel {
 	optional string persona_name = 2;
 	optional fixed64 steam_id = 3;
 	optional uint32 channel_user_id = 4;
+	optional uint32 status = 5;
 }
 
 message CMsgDOTAOtherLeftChatChannel {
@@ -1183,6 +1195,7 @@ message CMsgDOTAChatChannelMemberUpdate {
 		optional fixed64 steam_id = 1;
 		optional string persona_name = 2;
 		optional uint32 channel_user_id = 3;
+		optional uint32 status = 4;
 	}
 
 	optional fixed64 channel_id = 1;
@@ -1212,6 +1225,7 @@ message CMsgDOTAChatGetUserListResponse {
 		optional fixed64 steam_id = 1;
 		optional string persona_name = 2;
 		optional uint32 channel_user_id = 3;
+		optional uint32 status = 4;
 	}
 
 	optional fixed64 channel_id = 1;
@@ -2043,6 +2057,18 @@ message CMsgGCGetHeroStandingsResponse {
 		optional uint32 hero_id = 1;
 		optional uint32 wins = 2;
 		optional uint32 losses = 3;
+		optional uint32 win_streak = 4;
+		optional uint32 best_win_streak = 5;
+		optional float avg_kills = 6;
+		optional float avg_deaths = 7;
+		optional float avg_assists = 8;
+		optional float avg_gpm = 9;
+		optional float avg_xpm = 10;
+		optional uint32 best_kills = 11;
+		optional uint32 best_assists = 12;
+		optional uint32 best_gpm = 13;
+		optional uint32 best_xpm = 14;
+		optional float performance = 15;
 	}
 
 	repeated CMsgGCGetHeroStandingsResponse.Hero standings = 1;
@@ -2783,5 +2809,100 @@ message CMsgClientToGCH264Unsupported {
 }
 
 message CMsgClientToGCRequestH264Support {
+}
+
+message CMsgClientToGCGetQuestProgress {
+	repeated uint32 quest_ids = 1;
+}
+
+message CMsgClientToGCGetQuestProgressResponse {
+	message Challenge {
+		optional uint32 challenge_id = 1;
+		optional uint32 time_completed = 2;
+		optional uint32 attempts = 3;
+		optional uint32 hero_id = 4;
+	}
+
+	message Quest {
+		optional uint32 quest_id = 1;
+		repeated CMsgClientToGCGetQuestProgressResponse.Challenge completed_challenges = 2;
+	}
+
+	optional bool success = 1;
+	repeated CMsgClientToGCGetQuestProgressResponse.Quest quests = 2;
+}
+
+message CMsgGCToClientMatchSignedOut {
+	optional uint64 match_id = 1;
+}
+
+message CMsgGCGetHeroStatsHistory {
+	optional uint32 hero_id = 1;
+}
+
+message CMsgGCGetHeroStatsHistoryResponse {
+	optional uint32 hero_id = 1;
+	repeated CMsgDOTASDOHeroStatsHistory records = 2;
+}
+
+message CMsgClientToGCPrivateChatInvite {
+	optional string private_chat_channel_name = 1;
+	optional uint32 invited_account_id = 2;
+}
+
+message CMsgClientToGCPrivateChatKick {
+	optional string private_chat_channel_name = 1;
+	optional uint32 kick_account_id = 2;
+}
+
+message CMsgClientToGCPrivateChatPromote {
+	optional string private_chat_channel_name = 1;
+	optional uint32 promote_account_id = 2;
+}
+
+message CMsgClientToGCPrivateChatDemote {
+	optional string private_chat_channel_name = 1;
+	optional uint32 demote_account_id = 2;
+}
+
+message CMsgGCToClientPrivateChatResponse {
+	enum Result {
+		SUCCESS = 0;
+		FAILURE_CREATION_LOCK = 1;
+		FAILURE_SQL_TRANSACTION = 2;
+		FAILURE_SDO_LOAD = 3;
+		FAILURE_NO_PERMISSION = 4;
+		FAILURE_ALREADY_MEMBER = 5;
+		FAILURE_NOT_A_MEMBER = 7;
+		FAILURE_NO_REMAINING_ADMINS = 8;
+		FAILURE_NO_ROOM = 9;
+		FAILURE_CREATION_RATE_LIMITED = 10;
+		FAILURE_UNKNOWN_CHANNEL_NAME = 11;
+		FAILURE_UNKNOWN_USER = 12;
+		FAILURE_UNKNOWN_ERROR = 13;
+		FAILURE_CANNOT_KICK_ADMIN = 14;
+		FAILURE_ALREADY_ADMIN = 15;
+	}
+
+	optional string private_chat_channel_name = 1;
+	optional CMsgGCToClientPrivateChatResponse.Result result = 2 [default = SUCCESS];
+	optional string username = 3;
+}
+
+message CMsgClientToGCPrivateChatInfoRequest {
+	optional string private_chat_channel_name = 1;
+}
+
+message CMsgGCToClientPrivateChatInfoResponse {
+	message Member {
+		optional uint32 account_id = 1;
+		optional string name = 2;
+		optional uint32 status = 3;
+	}
+
+	optional string private_chat_channel_name = 1;
+	repeated CMsgGCToClientPrivateChatInfoResponse.Member members = 2;
+	optional uint32 creator = 3;
+	optional uint32 creation_date = 4;
 }
 

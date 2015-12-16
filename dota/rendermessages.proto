@@ -689,7 +689,7 @@ message CMsgPushAAndTContext {
 	optional bool suppress_clip_to_bounds = 27;
 	optional int32 needs_full_repaint = 28;
 	optional bool needs_intermediate_texture = 29;
-	optional bool transform_requires_composition_layer = 30;
+	optional bool clip_after_transform = 30;
 	optional bool wants_hit_test = 31;
 	optional uint32 mix_blend_mode = 32;
 	optional bool opaque_background = 33;

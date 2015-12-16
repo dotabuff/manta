@@ -604,6 +604,21 @@ enum EDOTAGCMsg {
 	k_EMsgGCToClientMatchGroupsVersion = 8075;
 	k_EMsgClientToGCH264Unsupported = 8076;
 	k_EMsgClientToGCRequestH264Support = 8077;
+	k_EMsgClientToGCGetQuestProgress = 8078;
+	k_EMsgClientToGCGetQuestProgressResponse = 8079;
+	k_EMsgSignOutXPCoins = 8080;
+	k_EMsgGCToClientMatchSignedOut = 8081;
+	k_EMsgGCGetHeroStatsHistory = 8082;
+	k_EMsgGCGetHeroStatsHistoryResponse = 8083;
+	k_EMsgClientToGCPrivateChatInvite = 8084;
+	k_EMsgClientToGCPrivateChatKick = 8088;
+	k_EMsgClientToGCPrivateChatPromote = 8089;
+	k_EMsgClientToGCPrivateChatDemote = 8090;
+	k_EMsgGCToClientPrivateChatResponse = 8091;
+	k_EMsgClientToGCPrivateChatInfoRequest = 8092;
+	k_EMsgGCToClientPrivateChatInfoResponse = 8093;
+	k_EMsgClientToGCLatestBehaviorReportRequest = 8095;
+	k_EMsgClientToGCLatestBehaviorReport = 8096;
 }
 
 enum ESpecialPingValue {
@@ -719,6 +734,14 @@ enum DOTAJoinLobbyResult {
 	DOTA_JOIN_RESULT_CUSTOM_GAME_INCORRECT_VERSION = 10;
 }
 
+enum SelectionPriorityType {
+	UNDEFINED = 0;
+	RADIANT = 1;
+	DIRE = 2;
+	FIRST_PICK = 3;
+	SECOND_PICK = 4;
+}
+
 enum DOTAMatchVote {
 	DOTAMatchVote_INVALID = 0;
 	DOTAMatchVote_POSITIVE = 1;
@@ -816,6 +839,12 @@ enum LobbyDotaTVDelay {
 	LobbyDotaTV_300 = 2;
 }
 
+enum LobbyDotaPauseSetting {
+	LobbyDotaPauseSetting_Unlimited = 0;
+	LobbyDotaPauseSetting_Limited = 1;
+	LobbyDotaPauseSetting_Disabled = 2;
+}
+
 enum EMatchOutcome {
 	k_EMatchOutcome_Unknown = 0;
 	k_EMatchOutcome_RadVictory = 2;
@@ -907,6 +936,10 @@ enum DOTA_COMBATLOG_TYPES {
 	DOTA_COMBATLOG_MODIFIER_REFRESH = 19;
 	DOTA_COMBATLOG_NEUTRAL_CAMP_STACK = 20;
 	DOTA_COMBATLOG_PICKUP_RUNE = 21;
+	DOTA_COMBATLOG_REVEALED_INVISIBLE = 22;
+	DOTA_COMBATLOG_HERO_SAVED = 23;
+	DOTA_COMBATLOG_MANA_RESTORED = 24;
+	DOTA_COMBATLOG_HERO_LEVELUP = 25;
 }
 
 enum DOTAChatChannelType_t {
@@ -927,6 +960,7 @@ enum DOTAChatChannelType_t {
 	DOTAChannelType_GameCoaching = 14;
 	DOTAChannelType_Cafe = 15;
 	DOTAChannelType_CustomGame = 16;
+	DOTAChannelType_Private = 17;
 }
 
 message CSODOTAGameAccountClient {
@@ -976,6 +1010,8 @@ message CSODOTAGameAccountClient {
 	optional uint32 play_time_points = 68;
 	optional uint32 account_flags = 69;
 	optional uint32 play_time_level = 70;
+	optional uint32 player_behavior_seq_num_last_report = 71;
+	optional uint32 player_behavior_score_last_report = 72;
 }
 
 message CSODOTAPartyMember {
@@ -1269,6 +1305,11 @@ message CSODOTALobby {
 	repeated uint64 previous_series_matches = 81;
 	optional uint64 previous_match_override = 82;
 	optional bool custom_game_uses_account_records = 83;
+	optional uint32 league_selection_priority_team = 84;
+	optional SelectionPriorityType league_selection_priority_choice = 85 [default = UNDEFINED];
+	optional SelectionPriorityType league_non_selection_priority_choice = 86 [default = UNDEFINED];
+	optional uint32 game_start_time = 87;
+	optional LobbyDotaPauseSetting pause_setting = 88 [default = LobbyDotaPauseSetting_Unlimited];
 }
 
 message CMsgLobbyEventPoints {
@@ -1507,6 +1548,14 @@ message CMsgDOTACombatLogEntry {
 	optional uint32 neutral_camp_type = 38;
 	optional uint32 rune_type = 39;
 	repeated uint32 assist_players = 40;
+	optional bool is_heal_save = 41;
+	optional bool is_ultimate_ability = 42;
+	optional uint32 attacker_hero_level = 43;
+	optional uint32 target_hero_level = 44;
+	optional uint32 xpm = 45;
+	optional uint32 gpm = 46;
+	optional uint32 event_location = 47;
+	optional bool target_is_self = 48;
 }
 
 message CMsgDOTAProfileCard {
@@ -1572,6 +1621,7 @@ message CMsgGCToClientNewBloomTimingUpdated {
 message CSODOTAPlayerChallenge {
 	enum EFlags {
 		eFlag_InstantRerollUncompleted = 1;
+		eFlag_QuestChallenge = 2;
 	}
 
 	optional uint32 account_id = 1 [(key_field) = true];
@@ -1585,6 +1635,8 @@ message CSODOTAPlayerChallenge {
 	optional uint32 sequence_id = 9;
 	optional uint32 challenge_tier = 10;
 	optional uint32 flags = 11;
+	optional uint32 attempts = 12;
+	optional uint32 complete_limit = 13;
 }
 
 message CMsgClientToGCRerollPlayerChallenge {
@@ -1847,5 +1899,18 @@ message CMsgDOTARealtimeGameStatsTerse {
 
 message CMsgGCToClientMatchGroupsVersion {
 	optional uint32 matchgroups_version = 1;
+}
+
+message CMsgDOTASDOHeroStatsHistory {
+	optional uint64 match_id = 1;
+	optional uint32 game_mode = 2;
+	optional uint32 lobby_type = 3;
+	optional uint32 start_time = 4;
+	optional bool won = 5;
+	optional uint32 gpm = 6;
+	optional uint32 xpm = 7;
+	optional uint32 kills = 8;
+	optional uint32 deaths = 9;
+	optional uint32 assists = 10;
 }
 

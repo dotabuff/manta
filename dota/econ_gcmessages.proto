@@ -40,10 +40,6 @@ enum EGCItemMsg {
 	k_EMsgGCUsedClaimCodeItem = 1040;
 	k_EMsgGCSortItems = 1041;
 	k_EMsgGC_RevolvingLootList_DEPRECATED = 1042;
-	k_EMsgGCLookupAccount = 1043;
-	k_EMsgGCLookupAccountResponse = 1044;
-	k_EMsgGCLookupAccountName = 1045;
-	k_EMsgGCLookupAccountNameResponse = 1046;
 	k_EMsgGCUpdateItemSchema = 1049;
 	k_EMsgGCRemoveCustomTexture = 1051;
 	k_EMsgGCRemoveCustomTextureResponse = 1052;
@@ -58,8 +54,6 @@ enum EGCItemMsg {
 	k_EMsgGCItemAcknowledged = 1062;
 	k_EMsgGCPresets_SelectPresetForClass = 1063;
 	k_EMsgGCPresets_SetItemPosition = 1064;
-	k_EMsgGC_ReportAbuse = 1065;
-	k_EMsgGC_ReportAbuseResponse = 1066;
 	k_EMsgGCPresets_SelectPresetForClassReply = 1067;
 	k_EMsgClientToGCNameItemResponse = 1068;
 	k_EMsgGCApplyConsumableEffects = 1069;
@@ -185,6 +179,8 @@ enum EGCItemMsg {
 	k_EMsgClientToGCSetItemStyleResponse = 2578;
 	k_EMsgGCGenericResult = 2579;
 	k_EMsgSQLGCToGCGrantBackpackSlots = 2580;
+	k_EMsgClientToGCLookupAccountName = 2581;
+	k_EMsgClientToGCLookupAccountNameResponse = 2582;
 }
 
 enum EGCMsgResponse {
@@ -791,5 +787,14 @@ message CMsgGenericResult {
 message CMsgSQLGCToGCGrantBackpackSlots {
 	optional uint32 account_id = 1;
 	optional uint32 add_slots = 2;
+}
+
+message CMsgClientToGCLookupAccountName {
+	optional uint32 account_id = 1;
+}
+
+message CMsgClientToGCLookupAccountNameResponse {
+	optional uint32 account_id = 1;
+	optional string account_name = 2;
 }
 
