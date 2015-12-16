@@ -524,6 +524,7 @@ message CDOTAUserMsg_NevermoreRequiem {
 	optional int32 entity_handle = 1;
 	optional int32 lines = 2;
 	optional CMsgVector origin = 3;
+	optional bool reverse = 4;
 }
 
 message CDOTAUserMsg_InvalidCommand {

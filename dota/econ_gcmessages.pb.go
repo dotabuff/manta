@@ -48,10 +48,6 @@ const (
 	EGCItemMsg_k_EMsgGCUsedClaimCodeItem                      EGCItemMsg = 1040
 	EGCItemMsg_k_EMsgGCSortItems                              EGCItemMsg = 1041
 	EGCItemMsg_k_EMsgGC_RevolvingLootList_DEPRECATED          EGCItemMsg = 1042
-	EGCItemMsg_k_EMsgGCLookupAccount                          EGCItemMsg = 1043
-	EGCItemMsg_k_EMsgGCLookupAccountResponse                  EGCItemMsg = 1044
-	EGCItemMsg_k_EMsgGCLookupAccountName                      EGCItemMsg = 1045
-	EGCItemMsg_k_EMsgGCLookupAccountNameResponse              EGCItemMsg = 1046
 	EGCItemMsg_k_EMsgGCUpdateItemSchema                       EGCItemMsg = 1049
 	EGCItemMsg_k_EMsgGCRemoveCustomTexture                    EGCItemMsg = 1051
 	EGCItemMsg_k_EMsgGCRemoveCustomTextureResponse            EGCItemMsg = 1052
@@ -66,8 +62,6 @@ const (
 	EGCItemMsg_k_EMsgGCItemAcknowledged                       EGCItemMsg = 1062
 	EGCItemMsg_k_EMsgGCPresets_SelectPresetForClass           EGCItemMsg = 1063
 	EGCItemMsg_k_EMsgGCPresets_SetItemPosition                EGCItemMsg = 1064
-	EGCItemMsg_k_EMsgGC_ReportAbuse                           EGCItemMsg = 1065
-	EGCItemMsg_k_EMsgGC_ReportAbuseResponse                   EGCItemMsg = 1066
 	EGCItemMsg_k_EMsgGCPresets_SelectPresetForClassReply      EGCItemMsg = 1067
 	EGCItemMsg_k_EMsgClientToGCNameItemResponse               EGCItemMsg = 1068
 	EGCItemMsg_k_EMsgGCApplyConsumableEffects                 EGCItemMsg = 1069
@@ -193,6 +187,8 @@ const (
 	EGCItemMsg_k_EMsgClientToGCSetItemStyleResponse           EGCItemMsg = 2578
 	EGCItemMsg_k_EMsgGCGenericResult                          EGCItemMsg = 2579
 	EGCItemMsg_k_EMsgSQLGCToGCGrantBackpackSlots              EGCItemMsg = 2580
+	EGCItemMsg_k_EMsgClientToGCLookupAccountName              EGCItemMsg = 2581
+	EGCItemMsg_k_EMsgClientToGCLookupAccountNameResponse      EGCItemMsg = 2582
 )
 
 var EGCItemMsg_name = map[int32]string{
@@ -230,10 +226,6 @@ var EGCItemMsg_name = map[int32]string{
 	1040: "k_EMsgGCUsedClaimCodeItem",
 	1041: "k_EMsgGCSortItems",
 	1042: "k_EMsgGC_RevolvingLootList_DEPRECATED",
-	1043: "k_EMsgGCLookupAccount",
-	1044: "k_EMsgGCLookupAccountResponse",
-	1045: "k_EMsgGCLookupAccountName",
-	1046: "k_EMsgGCLookupAccountNameResponse",
 	1049: "k_EMsgGCUpdateItemSchema",
 	1051: "k_EMsgGCRemoveCustomTexture",
 	1052: "k_EMsgGCRemoveCustomTextureResponse",
@@ -248,8 +240,6 @@ var EGCItemMsg_name = map[int32]string{
 	1062: "k_EMsgGCItemAcknowledged",
 	1063: "k_EMsgGCPresets_SelectPresetForClass",
 	1064: "k_EMsgGCPresets_SetItemPosition",
-	1065: "k_EMsgGC_ReportAbuse",
-	1066: "k_EMsgGC_ReportAbuseResponse",
 	1067: "k_EMsgGCPresets_SelectPresetForClassReply",
 	1068: "k_EMsgClientToGCNameItemResponse",
 	1069: "k_EMsgGCApplyConsumableEffects",
@@ -375,6 +365,8 @@ var EGCItemMsg_name = map[int32]string{
 	2578: "k_EMsgClientToGCSetItemStyleResponse",
 	2579: "k_EMsgGCGenericResult",
 	2580: "k_EMsgSQLGCToGCGrantBackpackSlots",
+	2581: "k_EMsgClientToGCLookupAccountName",
+	2582: "k_EMsgClientToGCLookupAccountNameResponse",
 }
 var EGCItemMsg_value = map[string]int32{
 	"k_EMsgGCBase":                                   1000,
@@ -411,10 +403,6 @@ var EGCItemMsg_value = map[string]int32{
 	"k_EMsgGCUsedClaimCodeItem":                      1040,
 	"k_EMsgGCSortItems":                              1041,
 	"k_EMsgGC_RevolvingLootList_DEPRECATED":          1042,
-	"k_EMsgGCLookupAccount":                          1043,
-	"k_EMsgGCLookupAccountResponse":                  1044,
-	"k_EMsgGCLookupAccountName":                      1045,
-	"k_EMsgGCLookupAccountNameResponse":              1046,
 	"k_EMsgGCUpdateItemSchema":                       1049,
 	"k_EMsgGCRemoveCustomTexture":                    1051,
 	"k_EMsgGCRemoveCustomTextureResponse":            1052,
@@ -429,8 +417,6 @@ var EGCItemMsg_value = map[string]int32{
 	"k_EMsgGCItemAcknowledged":                       1062,
 	"k_EMsgGCPresets_SelectPresetForClass":           1063,
 	"k_EMsgGCPresets_SetItemPosition":                1064,
-	"k_EMsgGC_ReportAbuse":                           1065,
-	"k_EMsgGC_ReportAbuseResponse":                   1066,
 	"k_EMsgGCPresets_SelectPresetForClassReply":      1067,
 	"k_EMsgClientToGCNameItemResponse":               1068,
 	"k_EMsgGCApplyConsumableEffects":                 1069,
@@ -556,6 +542,8 @@ var EGCItemMsg_value = map[string]int32{
 	"k_EMsgClientToGCSetItemStyleResponse":           2578,
 	"k_EMsgGCGenericResult":                          2579,
 	"k_EMsgSQLGCToGCGrantBackpackSlots":              2580,
+	"k_EMsgClientToGCLookupAccountName":              2581,
+	"k_EMsgClientToGCLookupAccountNameResponse":      2582,
 }
 
 func (x EGCItemMsg) Enum() *EGCItemMsg {
@@ -3694,6 +3682,48 @@ func (m *CMsgSQLGCToGCGrantBackpackSlots) GetAddSlots() uint32 {
 		return *m.AddSlots
 	}
 	return 0
+}
+
+type CMsgClientToGCLookupAccountName struct {
+	AccountId        *uint32 `protobuf:"varint,1,opt,name=account_id" json:"account_id,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CMsgClientToGCLookupAccountName) Reset()         { *m = CMsgClientToGCLookupAccountName{} }
+func (m *CMsgClientToGCLookupAccountName) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCLookupAccountName) ProtoMessage()    {}
+
+func (m *CMsgClientToGCLookupAccountName) GetAccountId() uint32 {
+	if m != nil && m.AccountId != nil {
+		return *m.AccountId
+	}
+	return 0
+}
+
+type CMsgClientToGCLookupAccountNameResponse struct {
+	AccountId        *uint32 `protobuf:"varint,1,opt,name=account_id" json:"account_id,omitempty"`
+	AccountName      *string `protobuf:"bytes,2,opt,name=account_name" json:"account_name,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CMsgClientToGCLookupAccountNameResponse) Reset() {
+	*m = CMsgClientToGCLookupAccountNameResponse{}
+}
+func (m *CMsgClientToGCLookupAccountNameResponse) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCLookupAccountNameResponse) ProtoMessage()    {}
+
+func (m *CMsgClientToGCLookupAccountNameResponse) GetAccountId() uint32 {
+	if m != nil && m.AccountId != nil {
+		return *m.AccountId
+	}
+	return 0
+}
+
+func (m *CMsgClientToGCLookupAccountNameResponse) GetAccountName() string {
+	if m != nil && m.AccountName != nil {
+		return *m.AccountName
+	}
+	return ""
 }
 
 func init() {

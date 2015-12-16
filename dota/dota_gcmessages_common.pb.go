@@ -611,6 +611,21 @@ const (
 	EDOTAGCMsg_k_EMsgGCToClientMatchGroupsVersion                         EDOTAGCMsg = 8075
 	EDOTAGCMsg_k_EMsgClientToGCH264Unsupported                            EDOTAGCMsg = 8076
 	EDOTAGCMsg_k_EMsgClientToGCRequestH264Support                         EDOTAGCMsg = 8077
+	EDOTAGCMsg_k_EMsgClientToGCGetQuestProgress                           EDOTAGCMsg = 8078
+	EDOTAGCMsg_k_EMsgClientToGCGetQuestProgressResponse                   EDOTAGCMsg = 8079
+	EDOTAGCMsg_k_EMsgSignOutXPCoins                                       EDOTAGCMsg = 8080
+	EDOTAGCMsg_k_EMsgGCToClientMatchSignedOut                             EDOTAGCMsg = 8081
+	EDOTAGCMsg_k_EMsgGCGetHeroStatsHistory                                EDOTAGCMsg = 8082
+	EDOTAGCMsg_k_EMsgGCGetHeroStatsHistoryResponse                        EDOTAGCMsg = 8083
+	EDOTAGCMsg_k_EMsgClientToGCPrivateChatInvite                          EDOTAGCMsg = 8084
+	EDOTAGCMsg_k_EMsgClientToGCPrivateChatKick                            EDOTAGCMsg = 8088
+	EDOTAGCMsg_k_EMsgClientToGCPrivateChatPromote                         EDOTAGCMsg = 8089
+	EDOTAGCMsg_k_EMsgClientToGCPrivateChatDemote                          EDOTAGCMsg = 8090
+	EDOTAGCMsg_k_EMsgGCToClientPrivateChatResponse                        EDOTAGCMsg = 8091
+	EDOTAGCMsg_k_EMsgClientToGCPrivateChatInfoRequest                     EDOTAGCMsg = 8092
+	EDOTAGCMsg_k_EMsgGCToClientPrivateChatInfoResponse                    EDOTAGCMsg = 8093
+	EDOTAGCMsg_k_EMsgClientToGCLatestBehaviorReportRequest                EDOTAGCMsg = 8095
+	EDOTAGCMsg_k_EMsgClientToGCLatestBehaviorReport                       EDOTAGCMsg = 8096
 )
 
 var EDOTAGCMsg_name = map[int32]string{
@@ -1211,6 +1226,21 @@ var EDOTAGCMsg_name = map[int32]string{
 	8075: "k_EMsgGCToClientMatchGroupsVersion",
 	8076: "k_EMsgClientToGCH264Unsupported",
 	8077: "k_EMsgClientToGCRequestH264Support",
+	8078: "k_EMsgClientToGCGetQuestProgress",
+	8079: "k_EMsgClientToGCGetQuestProgressResponse",
+	8080: "k_EMsgSignOutXPCoins",
+	8081: "k_EMsgGCToClientMatchSignedOut",
+	8082: "k_EMsgGCGetHeroStatsHistory",
+	8083: "k_EMsgGCGetHeroStatsHistoryResponse",
+	8084: "k_EMsgClientToGCPrivateChatInvite",
+	8088: "k_EMsgClientToGCPrivateChatKick",
+	8089: "k_EMsgClientToGCPrivateChatPromote",
+	8090: "k_EMsgClientToGCPrivateChatDemote",
+	8091: "k_EMsgGCToClientPrivateChatResponse",
+	8092: "k_EMsgClientToGCPrivateChatInfoRequest",
+	8093: "k_EMsgGCToClientPrivateChatInfoResponse",
+	8095: "k_EMsgClientToGCLatestBehaviorReportRequest",
+	8096: "k_EMsgClientToGCLatestBehaviorReport",
 }
 var EDOTAGCMsg_value = map[string]int32{
 	"k_EMsgGCDOTABase":                                           7000,
@@ -1810,6 +1840,21 @@ var EDOTAGCMsg_value = map[string]int32{
 	"k_EMsgGCToClientMatchGroupsVersion":                         8075,
 	"k_EMsgClientToGCH264Unsupported":                            8076,
 	"k_EMsgClientToGCRequestH264Support":                         8077,
+	"k_EMsgClientToGCGetQuestProgress":                           8078,
+	"k_EMsgClientToGCGetQuestProgressResponse":                   8079,
+	"k_EMsgSignOutXPCoins":                                       8080,
+	"k_EMsgGCToClientMatchSignedOut":                             8081,
+	"k_EMsgGCGetHeroStatsHistory":                                8082,
+	"k_EMsgGCGetHeroStatsHistoryResponse":                        8083,
+	"k_EMsgClientToGCPrivateChatInvite":                          8084,
+	"k_EMsgClientToGCPrivateChatKick":                            8088,
+	"k_EMsgClientToGCPrivateChatPromote":                         8089,
+	"k_EMsgClientToGCPrivateChatDemote":                          8090,
+	"k_EMsgGCToClientPrivateChatResponse":                        8091,
+	"k_EMsgClientToGCPrivateChatInfoRequest":                     8092,
+	"k_EMsgGCToClientPrivateChatInfoResponse":                    8093,
+	"k_EMsgClientToGCLatestBehaviorReportRequest":                8095,
+	"k_EMsgClientToGCLatestBehaviorReport":                       8096,
 }
 
 func (x EDOTAGCMsg) Enum() *EDOTAGCMsg {
@@ -2366,6 +2411,48 @@ func (x *DOTAJoinLobbyResult) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
+type SelectionPriorityType int32
+
+const (
+	SelectionPriorityType_UNDEFINED   SelectionPriorityType = 0
+	SelectionPriorityType_RADIANT     SelectionPriorityType = 1
+	SelectionPriorityType_DIRE        SelectionPriorityType = 2
+	SelectionPriorityType_FIRST_PICK  SelectionPriorityType = 3
+	SelectionPriorityType_SECOND_PICK SelectionPriorityType = 4
+)
+
+var SelectionPriorityType_name = map[int32]string{
+	0: "UNDEFINED",
+	1: "RADIANT",
+	2: "DIRE",
+	3: "FIRST_PICK",
+	4: "SECOND_PICK",
+}
+var SelectionPriorityType_value = map[string]int32{
+	"UNDEFINED":   0,
+	"RADIANT":     1,
+	"DIRE":        2,
+	"FIRST_PICK":  3,
+	"SECOND_PICK": 4,
+}
+
+func (x SelectionPriorityType) Enum() *SelectionPriorityType {
+	p := new(SelectionPriorityType)
+	*p = x
+	return p
+}
+func (x SelectionPriorityType) String() string {
+	return proto.EnumName(SelectionPriorityType_name, int32(x))
+}
+func (x *SelectionPriorityType) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(SelectionPriorityType_value, data, "SelectionPriorityType")
+	if err != nil {
+		return err
+	}
+	*x = SelectionPriorityType(value)
+	return nil
+}
+
 type DOTAMatchVote int32
 
 const (
@@ -2855,6 +2942,42 @@ func (x *LobbyDotaTVDelay) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
+type LobbyDotaPauseSetting int32
+
+const (
+	LobbyDotaPauseSetting_LobbyDotaPauseSetting_Unlimited LobbyDotaPauseSetting = 0
+	LobbyDotaPauseSetting_LobbyDotaPauseSetting_Limited   LobbyDotaPauseSetting = 1
+	LobbyDotaPauseSetting_LobbyDotaPauseSetting_Disabled  LobbyDotaPauseSetting = 2
+)
+
+var LobbyDotaPauseSetting_name = map[int32]string{
+	0: "LobbyDotaPauseSetting_Unlimited",
+	1: "LobbyDotaPauseSetting_Limited",
+	2: "LobbyDotaPauseSetting_Disabled",
+}
+var LobbyDotaPauseSetting_value = map[string]int32{
+	"LobbyDotaPauseSetting_Unlimited": 0,
+	"LobbyDotaPauseSetting_Limited":   1,
+	"LobbyDotaPauseSetting_Disabled":  2,
+}
+
+func (x LobbyDotaPauseSetting) Enum() *LobbyDotaPauseSetting {
+	p := new(LobbyDotaPauseSetting)
+	*p = x
+	return p
+}
+func (x LobbyDotaPauseSetting) String() string {
+	return proto.EnumName(LobbyDotaPauseSetting_name, int32(x))
+}
+func (x *LobbyDotaPauseSetting) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(LobbyDotaPauseSetting_value, data, "LobbyDotaPauseSetting")
+	if err != nil {
+		return err
+	}
+	*x = LobbyDotaPauseSetting(value)
+	return nil
+}
+
 type EMatchOutcome int32
 
 const (
@@ -3192,6 +3315,10 @@ const (
 	DOTA_COMBATLOG_TYPES_DOTA_COMBATLOG_MODIFIER_REFRESH   DOTA_COMBATLOG_TYPES = 19
 	DOTA_COMBATLOG_TYPES_DOTA_COMBATLOG_NEUTRAL_CAMP_STACK DOTA_COMBATLOG_TYPES = 20
 	DOTA_COMBATLOG_TYPES_DOTA_COMBATLOG_PICKUP_RUNE        DOTA_COMBATLOG_TYPES = 21
+	DOTA_COMBATLOG_TYPES_DOTA_COMBATLOG_REVEALED_INVISIBLE DOTA_COMBATLOG_TYPES = 22
+	DOTA_COMBATLOG_TYPES_DOTA_COMBATLOG_HERO_SAVED         DOTA_COMBATLOG_TYPES = 23
+	DOTA_COMBATLOG_TYPES_DOTA_COMBATLOG_MANA_RESTORED      DOTA_COMBATLOG_TYPES = 24
+	DOTA_COMBATLOG_TYPES_DOTA_COMBATLOG_HERO_LEVELUP       DOTA_COMBATLOG_TYPES = 25
 )
 
 var DOTA_COMBATLOG_TYPES_name = map[int32]string{
@@ -3217,6 +3344,10 @@ var DOTA_COMBATLOG_TYPES_name = map[int32]string{
 	19: "DOTA_COMBATLOG_MODIFIER_REFRESH",
 	20: "DOTA_COMBATLOG_NEUTRAL_CAMP_STACK",
 	21: "DOTA_COMBATLOG_PICKUP_RUNE",
+	22: "DOTA_COMBATLOG_REVEALED_INVISIBLE",
+	23: "DOTA_COMBATLOG_HERO_SAVED",
+	24: "DOTA_COMBATLOG_MANA_RESTORED",
+	25: "DOTA_COMBATLOG_HERO_LEVELUP",
 }
 var DOTA_COMBATLOG_TYPES_value = map[string]int32{
 	"DOTA_COMBATLOG_DAMAGE":             0,
@@ -3241,6 +3372,10 @@ var DOTA_COMBATLOG_TYPES_value = map[string]int32{
 	"DOTA_COMBATLOG_MODIFIER_REFRESH":   19,
 	"DOTA_COMBATLOG_NEUTRAL_CAMP_STACK": 20,
 	"DOTA_COMBATLOG_PICKUP_RUNE":        21,
+	"DOTA_COMBATLOG_REVEALED_INVISIBLE": 22,
+	"DOTA_COMBATLOG_HERO_SAVED":         23,
+	"DOTA_COMBATLOG_MANA_RESTORED":      24,
+	"DOTA_COMBATLOG_HERO_LEVELUP":       25,
 }
 
 func (x DOTA_COMBATLOG_TYPES) Enum() *DOTA_COMBATLOG_TYPES {
@@ -3280,6 +3415,7 @@ const (
 	DOTAChatChannelTypeT_DOTAChannelType_GameCoaching  DOTAChatChannelTypeT = 14
 	DOTAChatChannelTypeT_DOTAChannelType_Cafe          DOTAChatChannelTypeT = 15
 	DOTAChatChannelTypeT_DOTAChannelType_CustomGame    DOTAChatChannelTypeT = 16
+	DOTAChatChannelTypeT_DOTAChannelType_Private       DOTAChatChannelTypeT = 17
 )
 
 var DOTAChatChannelTypeT_name = map[int32]string{
@@ -3300,6 +3436,7 @@ var DOTAChatChannelTypeT_name = map[int32]string{
 	14: "DOTAChannelType_GameCoaching",
 	15: "DOTAChannelType_Cafe",
 	16: "DOTAChannelType_CustomGame",
+	17: "DOTAChannelType_Private",
 }
 var DOTAChatChannelTypeT_value = map[string]int32{
 	"DOTAChannelType_Regional":      0,
@@ -3319,6 +3456,7 @@ var DOTAChatChannelTypeT_value = map[string]int32{
 	"DOTAChannelType_GameCoaching":  14,
 	"DOTAChannelType_Cafe":          15,
 	"DOTAChannelType_CustomGame":    16,
+	"DOTAChannelType_Private":       17,
 }
 
 func (x DOTAChatChannelTypeT) Enum() *DOTAChatChannelTypeT {
@@ -3606,13 +3744,16 @@ type CSODOTAPlayerChallenge_EFlags int32
 
 const (
 	CSODOTAPlayerChallenge_eFlag_InstantRerollUncompleted CSODOTAPlayerChallenge_EFlags = 1
+	CSODOTAPlayerChallenge_eFlag_QuestChallenge           CSODOTAPlayerChallenge_EFlags = 2
 )
 
 var CSODOTAPlayerChallenge_EFlags_name = map[int32]string{
 	1: "eFlag_InstantRerollUncompleted",
+	2: "eFlag_QuestChallenge",
 }
 var CSODOTAPlayerChallenge_EFlags_value = map[string]int32{
 	"eFlag_InstantRerollUncompleted": 1,
+	"eFlag_QuestChallenge":           2,
 }
 
 func (x CSODOTAPlayerChallenge_EFlags) Enum() *CSODOTAPlayerChallenge_EFlags {
@@ -3805,6 +3946,8 @@ type CSODOTAGameAccountClient struct {
 	PlayTimePoints                           *uint32             `protobuf:"varint,68,opt,name=play_time_points" json:"play_time_points,omitempty"`
 	AccountFlags                             *uint32             `protobuf:"varint,69,opt,name=account_flags" json:"account_flags,omitempty"`
 	PlayTimeLevel                            *uint32             `protobuf:"varint,70,opt,name=play_time_level" json:"play_time_level,omitempty"`
+	PlayerBehaviorSeqNumLastReport           *uint32             `protobuf:"varint,71,opt,name=player_behavior_seq_num_last_report" json:"player_behavior_seq_num_last_report,omitempty"`
+	PlayerBehaviorScoreLastReport            *uint32             `protobuf:"varint,72,opt,name=player_behavior_score_last_report" json:"player_behavior_score_last_report,omitempty"`
 	XXX_unrecognized                         []byte              `json:"-"`
 }
 
@@ -4132,6 +4275,20 @@ func (m *CSODOTAGameAccountClient) GetAccountFlags() uint32 {
 func (m *CSODOTAGameAccountClient) GetPlayTimeLevel() uint32 {
 	if m != nil && m.PlayTimeLevel != nil {
 		return *m.PlayTimeLevel
+	}
+	return 0
+}
+
+func (m *CSODOTAGameAccountClient) GetPlayerBehaviorSeqNumLastReport() uint32 {
+	if m != nil && m.PlayerBehaviorSeqNumLastReport != nil {
+		return *m.PlayerBehaviorSeqNumLastReport
+	}
+	return 0
+}
+
+func (m *CSODOTAGameAccountClient) GetPlayerBehaviorScoreLastReport() uint32 {
+	if m != nil && m.PlayerBehaviorScoreLastReport != nil {
+		return *m.PlayerBehaviorScoreLastReport
 	}
 	return 0
 }
@@ -5374,76 +5531,81 @@ func (m *CLobbyBroadcastChannelInfo) GetLanguageCode() string {
 }
 
 type CSODOTALobby struct {
-	LobbyId                      *uint64                       `protobuf:"varint,1,opt,name=lobby_id" json:"lobby_id,omitempty"`
-	Members                      []*CDOTALobbyMember           `protobuf:"bytes,2,rep,name=members" json:"members,omitempty"`
-	LeftMembers                  []*CDOTALobbyMember           `protobuf:"bytes,7,rep,name=left_members" json:"left_members,omitempty"`
-	LeaderId                     *uint64                       `protobuf:"fixed64,11,opt,name=leader_id" json:"leader_id,omitempty"`
-	ServerId                     *uint64                       `protobuf:"fixed64,6,opt,name=server_id,def=0" json:"server_id,omitempty"`
-	GameMode                     *uint32                       `protobuf:"varint,3,opt,name=game_mode" json:"game_mode,omitempty"`
-	PendingInvites               []uint64                      `protobuf:"fixed64,10,rep,name=pending_invites" json:"pending_invites,omitempty"`
-	State                        *CSODOTALobby_State           `protobuf:"varint,4,opt,name=state,enum=dota.CSODOTALobby_State,def=0" json:"state,omitempty"`
-	Connect                      *string                       `protobuf:"bytes,5,opt,name=connect" json:"connect,omitempty"`
-	LobbyType                    *CSODOTALobby_LobbyType       `protobuf:"varint,12,opt,name=lobby_type,enum=dota.CSODOTALobby_LobbyType,def=-1" json:"lobby_type,omitempty"`
-	AllowCheats                  *bool                         `protobuf:"varint,13,opt,name=allow_cheats" json:"allow_cheats,omitempty"`
-	FillWithBots                 *bool                         `protobuf:"varint,14,opt,name=fill_with_bots" json:"fill_with_bots,omitempty"`
-	IntroMode                    *bool                         `protobuf:"varint,15,opt,name=intro_mode" json:"intro_mode,omitempty"`
-	GameName                     *string                       `protobuf:"bytes,16,opt,name=game_name" json:"game_name,omitempty"`
-	TeamDetails                  []*CLobbyTeamDetails          `protobuf:"bytes,17,rep,name=team_details" json:"team_details,omitempty"`
-	TutorialLesson               *uint32                       `protobuf:"varint,18,opt,name=tutorial_lesson" json:"tutorial_lesson,omitempty"`
-	TournamentId                 *uint32                       `protobuf:"varint,19,opt,name=tournament_id" json:"tournament_id,omitempty"`
-	TournamentGameId             *uint32                       `protobuf:"varint,20,opt,name=tournament_game_id" json:"tournament_game_id,omitempty"`
-	ServerRegion                 *uint32                       `protobuf:"varint,21,opt,name=server_region,def=0" json:"server_region,omitempty"`
-	GameState                    *DOTA_GameState               `protobuf:"varint,22,opt,name=game_state,enum=dota.DOTA_GameState,def=0" json:"game_state,omitempty"`
-	NumSpectators                *uint32                       `protobuf:"varint,23,opt,name=num_spectators" json:"num_spectators,omitempty"`
-	Matchgroup                   *uint32                       `protobuf:"varint,25,opt,name=matchgroup" json:"matchgroup,omitempty"`
-	CmPick                       *DOTA_CM_PICK                 `protobuf:"varint,28,opt,name=cm_pick,enum=dota.DOTA_CM_PICK,def=0" json:"cm_pick,omitempty"`
-	MatchId                      *uint64                       `protobuf:"varint,30,opt,name=match_id" json:"match_id,omitempty"`
-	AllowSpectating              *bool                         `protobuf:"varint,31,opt,name=allow_spectating,def=1" json:"allow_spectating,omitempty"`
-	BotDifficulty                *DOTABotDifficulty            `protobuf:"varint,36,opt,name=bot_difficulty,enum=dota.DOTABotDifficulty,def=3" json:"bot_difficulty,omitempty"`
-	GameVersion                  *DOTAGameVersion              `protobuf:"varint,37,opt,name=game_version,enum=dota.DOTAGameVersion,def=0" json:"game_version,omitempty"`
-	TimedRewardDetails           []*CLobbyTimedRewardDetails   `protobuf:"bytes,38,rep,name=timed_reward_details" json:"timed_reward_details,omitempty"`
-	PassKey                      *string                       `protobuf:"bytes,39,opt,name=pass_key" json:"pass_key,omitempty"`
-	BotSlotDifficulty            []DOTABotDifficulty           `protobuf:"varint,41,rep,name=bot_slot_difficulty,enum=dota.DOTABotDifficulty" json:"bot_slot_difficulty,omitempty"`
-	Leagueid                     *uint32                       `protobuf:"varint,42,opt,name=leagueid" json:"leagueid,omitempty"`
-	PenaltyLevelRadiant          *uint32                       `protobuf:"varint,43,opt,name=penalty_level_radiant,def=0" json:"penalty_level_radiant,omitempty"`
-	PenaltyLevelDire             *uint32                       `protobuf:"varint,44,opt,name=penalty_level_dire,def=0" json:"penalty_level_dire,omitempty"`
-	LoadGameId                   *uint32                       `protobuf:"varint,45,opt,name=load_game_id" json:"load_game_id,omitempty"`
-	SeriesType                   *uint32                       `protobuf:"varint,46,opt,name=series_type" json:"series_type,omitempty"`
-	RadiantSeriesWins            *uint32                       `protobuf:"varint,47,opt,name=radiant_series_wins" json:"radiant_series_wins,omitempty"`
-	DireSeriesWins               *uint32                       `protobuf:"varint,48,opt,name=dire_series_wins" json:"dire_series_wins,omitempty"`
-	LootGenerated                *uint32                       `protobuf:"varint,49,opt,name=loot_generated" json:"loot_generated,omitempty"`
-	LootAwarded                  *uint32                       `protobuf:"varint,50,opt,name=loot_awarded" json:"loot_awarded,omitempty"`
-	Allchat                      *bool                         `protobuf:"varint,51,opt,name=allchat,def=0" json:"allchat,omitempty"`
-	DotaTvDelay                  *LobbyDotaTVDelay             `protobuf:"varint,53,opt,name=dota_tv_delay,enum=dota.LobbyDotaTVDelay,def=0" json:"dota_tv_delay,omitempty"`
-	CustomGameMode               *string                       `protobuf:"bytes,54,opt,name=custom_game_mode" json:"custom_game_mode,omitempty"`
-	CustomMapName                *string                       `protobuf:"bytes,55,opt,name=custom_map_name" json:"custom_map_name,omitempty"`
-	CustomDifficulty             *uint32                       `protobuf:"varint,56,opt,name=custom_difficulty" json:"custom_difficulty,omitempty"`
-	Lan                          *bool                         `protobuf:"varint,57,opt,name=lan" json:"lan,omitempty"`
-	BroadcastChannelInfo         []*CLobbyBroadcastChannelInfo `protobuf:"bytes,58,rep,name=broadcast_channel_info" json:"broadcast_channel_info,omitempty"`
-	FirstLeaverAccountid         *uint32                       `protobuf:"varint,59,opt,name=first_leaver_accountid" json:"first_leaver_accountid,omitempty"`
-	SeriesId                     *uint32                       `protobuf:"varint,60,opt,name=series_id" json:"series_id,omitempty"`
-	LowPriority                  *bool                         `protobuf:"varint,61,opt,name=low_priority" json:"low_priority,omitempty"`
-	ExtraMessages                []*CSODOTALobby_CExtraMsg     `protobuf:"bytes,62,rep,name=extra_messages" json:"extra_messages,omitempty"`
-	SaveGame                     *CDOTASaveGame                `protobuf:"bytes,63,opt,name=save_game" json:"save_game,omitempty"`
-	FirstBloodHappened           *bool                         `protobuf:"varint,65,opt,name=first_blood_happened" json:"first_blood_happened,omitempty"`
-	MatchOutcome                 *EMatchOutcome                `protobuf:"varint,70,opt,name=match_outcome,enum=dota.EMatchOutcome,def=0" json:"match_outcome,omitempty"`
-	MassDisconnect               *bool                         `protobuf:"varint,67,opt,name=mass_disconnect" json:"mass_disconnect,omitempty"`
-	CustomGameId                 *uint64                       `protobuf:"varint,68,opt,name=custom_game_id" json:"custom_game_id,omitempty"`
-	ActiveIngameEvents           []EEvent                      `protobuf:"varint,69,rep,name=active_ingame_events,enum=dota.EEvent" json:"active_ingame_events,omitempty"`
-	CustomMinPlayers             *uint32                       `protobuf:"varint,71,opt,name=custom_min_players" json:"custom_min_players,omitempty"`
-	CustomMaxPlayers             *uint32                       `protobuf:"varint,72,opt,name=custom_max_players" json:"custom_max_players,omitempty"`
-	PartnerType                  *PartnerAccountType           `protobuf:"varint,73,opt,name=partner_type,enum=dota.PartnerAccountType,def=0" json:"partner_type,omitempty"`
-	LanHostPingToServerRegion    *uint32                       `protobuf:"varint,74,opt,name=lan_host_ping_to_server_region" json:"lan_host_ping_to_server_region,omitempty"`
-	Visibility                   *DOTALobbyVisibility          `protobuf:"varint,75,opt,name=visibility,enum=dota.DOTALobbyVisibility,def=0" json:"visibility,omitempty"`
-	CustomGameCrc                *uint64                       `protobuf:"fixed64,76,opt,name=custom_game_crc" json:"custom_game_crc,omitempty"`
-	CustomGameAutoCreatedLobby   *bool                         `protobuf:"varint,77,opt,name=custom_game_auto_created_lobby" json:"custom_game_auto_created_lobby,omitempty"`
-	LeagueSeriesId               *uint32                       `protobuf:"varint,78,opt,name=league_series_id" json:"league_series_id,omitempty"`
-	LeagueGameId                 *uint32                       `protobuf:"varint,79,opt,name=league_game_id" json:"league_game_id,omitempty"`
-	CustomGameTimestamp          *uint32                       `protobuf:"fixed32,80,opt,name=custom_game_timestamp" json:"custom_game_timestamp,omitempty"`
-	PreviousSeriesMatches        []uint64                      `protobuf:"varint,81,rep,name=previous_series_matches" json:"previous_series_matches,omitempty"`
-	PreviousMatchOverride        *uint64                       `protobuf:"varint,82,opt,name=previous_match_override" json:"previous_match_override,omitempty"`
-	CustomGameUsesAccountRecords *bool                         `protobuf:"varint,83,opt,name=custom_game_uses_account_records" json:"custom_game_uses_account_records,omitempty"`
-	XXX_unrecognized             []byte                        `json:"-"`
+	LobbyId                          *uint64                       `protobuf:"varint,1,opt,name=lobby_id" json:"lobby_id,omitempty"`
+	Members                          []*CDOTALobbyMember           `protobuf:"bytes,2,rep,name=members" json:"members,omitempty"`
+	LeftMembers                      []*CDOTALobbyMember           `protobuf:"bytes,7,rep,name=left_members" json:"left_members,omitempty"`
+	LeaderId                         *uint64                       `protobuf:"fixed64,11,opt,name=leader_id" json:"leader_id,omitempty"`
+	ServerId                         *uint64                       `protobuf:"fixed64,6,opt,name=server_id,def=0" json:"server_id,omitempty"`
+	GameMode                         *uint32                       `protobuf:"varint,3,opt,name=game_mode" json:"game_mode,omitempty"`
+	PendingInvites                   []uint64                      `protobuf:"fixed64,10,rep,name=pending_invites" json:"pending_invites,omitempty"`
+	State                            *CSODOTALobby_State           `protobuf:"varint,4,opt,name=state,enum=dota.CSODOTALobby_State,def=0" json:"state,omitempty"`
+	Connect                          *string                       `protobuf:"bytes,5,opt,name=connect" json:"connect,omitempty"`
+	LobbyType                        *CSODOTALobby_LobbyType       `protobuf:"varint,12,opt,name=lobby_type,enum=dota.CSODOTALobby_LobbyType,def=-1" json:"lobby_type,omitempty"`
+	AllowCheats                      *bool                         `protobuf:"varint,13,opt,name=allow_cheats" json:"allow_cheats,omitempty"`
+	FillWithBots                     *bool                         `protobuf:"varint,14,opt,name=fill_with_bots" json:"fill_with_bots,omitempty"`
+	IntroMode                        *bool                         `protobuf:"varint,15,opt,name=intro_mode" json:"intro_mode,omitempty"`
+	GameName                         *string                       `protobuf:"bytes,16,opt,name=game_name" json:"game_name,omitempty"`
+	TeamDetails                      []*CLobbyTeamDetails          `protobuf:"bytes,17,rep,name=team_details" json:"team_details,omitempty"`
+	TutorialLesson                   *uint32                       `protobuf:"varint,18,opt,name=tutorial_lesson" json:"tutorial_lesson,omitempty"`
+	TournamentId                     *uint32                       `protobuf:"varint,19,opt,name=tournament_id" json:"tournament_id,omitempty"`
+	TournamentGameId                 *uint32                       `protobuf:"varint,20,opt,name=tournament_game_id" json:"tournament_game_id,omitempty"`
+	ServerRegion                     *uint32                       `protobuf:"varint,21,opt,name=server_region,def=0" json:"server_region,omitempty"`
+	GameState                        *DOTA_GameState               `protobuf:"varint,22,opt,name=game_state,enum=dota.DOTA_GameState,def=0" json:"game_state,omitempty"`
+	NumSpectators                    *uint32                       `protobuf:"varint,23,opt,name=num_spectators" json:"num_spectators,omitempty"`
+	Matchgroup                       *uint32                       `protobuf:"varint,25,opt,name=matchgroup" json:"matchgroup,omitempty"`
+	CmPick                           *DOTA_CM_PICK                 `protobuf:"varint,28,opt,name=cm_pick,enum=dota.DOTA_CM_PICK,def=0" json:"cm_pick,omitempty"`
+	MatchId                          *uint64                       `protobuf:"varint,30,opt,name=match_id" json:"match_id,omitempty"`
+	AllowSpectating                  *bool                         `protobuf:"varint,31,opt,name=allow_spectating,def=1" json:"allow_spectating,omitempty"`
+	BotDifficulty                    *DOTABotDifficulty            `protobuf:"varint,36,opt,name=bot_difficulty,enum=dota.DOTABotDifficulty,def=3" json:"bot_difficulty,omitempty"`
+	GameVersion                      *DOTAGameVersion              `protobuf:"varint,37,opt,name=game_version,enum=dota.DOTAGameVersion,def=0" json:"game_version,omitempty"`
+	TimedRewardDetails               []*CLobbyTimedRewardDetails   `protobuf:"bytes,38,rep,name=timed_reward_details" json:"timed_reward_details,omitempty"`
+	PassKey                          *string                       `protobuf:"bytes,39,opt,name=pass_key" json:"pass_key,omitempty"`
+	BotSlotDifficulty                []DOTABotDifficulty           `protobuf:"varint,41,rep,name=bot_slot_difficulty,enum=dota.DOTABotDifficulty" json:"bot_slot_difficulty,omitempty"`
+	Leagueid                         *uint32                       `protobuf:"varint,42,opt,name=leagueid" json:"leagueid,omitempty"`
+	PenaltyLevelRadiant              *uint32                       `protobuf:"varint,43,opt,name=penalty_level_radiant,def=0" json:"penalty_level_radiant,omitempty"`
+	PenaltyLevelDire                 *uint32                       `protobuf:"varint,44,opt,name=penalty_level_dire,def=0" json:"penalty_level_dire,omitempty"`
+	LoadGameId                       *uint32                       `protobuf:"varint,45,opt,name=load_game_id" json:"load_game_id,omitempty"`
+	SeriesType                       *uint32                       `protobuf:"varint,46,opt,name=series_type" json:"series_type,omitempty"`
+	RadiantSeriesWins                *uint32                       `protobuf:"varint,47,opt,name=radiant_series_wins" json:"radiant_series_wins,omitempty"`
+	DireSeriesWins                   *uint32                       `protobuf:"varint,48,opt,name=dire_series_wins" json:"dire_series_wins,omitempty"`
+	LootGenerated                    *uint32                       `protobuf:"varint,49,opt,name=loot_generated" json:"loot_generated,omitempty"`
+	LootAwarded                      *uint32                       `protobuf:"varint,50,opt,name=loot_awarded" json:"loot_awarded,omitempty"`
+	Allchat                          *bool                         `protobuf:"varint,51,opt,name=allchat,def=0" json:"allchat,omitempty"`
+	DotaTvDelay                      *LobbyDotaTVDelay             `protobuf:"varint,53,opt,name=dota_tv_delay,enum=dota.LobbyDotaTVDelay,def=0" json:"dota_tv_delay,omitempty"`
+	CustomGameMode                   *string                       `protobuf:"bytes,54,opt,name=custom_game_mode" json:"custom_game_mode,omitempty"`
+	CustomMapName                    *string                       `protobuf:"bytes,55,opt,name=custom_map_name" json:"custom_map_name,omitempty"`
+	CustomDifficulty                 *uint32                       `protobuf:"varint,56,opt,name=custom_difficulty" json:"custom_difficulty,omitempty"`
+	Lan                              *bool                         `protobuf:"varint,57,opt,name=lan" json:"lan,omitempty"`
+	BroadcastChannelInfo             []*CLobbyBroadcastChannelInfo `protobuf:"bytes,58,rep,name=broadcast_channel_info" json:"broadcast_channel_info,omitempty"`
+	FirstLeaverAccountid             *uint32                       `protobuf:"varint,59,opt,name=first_leaver_accountid" json:"first_leaver_accountid,omitempty"`
+	SeriesId                         *uint32                       `protobuf:"varint,60,opt,name=series_id" json:"series_id,omitempty"`
+	LowPriority                      *bool                         `protobuf:"varint,61,opt,name=low_priority" json:"low_priority,omitempty"`
+	ExtraMessages                    []*CSODOTALobby_CExtraMsg     `protobuf:"bytes,62,rep,name=extra_messages" json:"extra_messages,omitempty"`
+	SaveGame                         *CDOTASaveGame                `protobuf:"bytes,63,opt,name=save_game" json:"save_game,omitempty"`
+	FirstBloodHappened               *bool                         `protobuf:"varint,65,opt,name=first_blood_happened" json:"first_blood_happened,omitempty"`
+	MatchOutcome                     *EMatchOutcome                `protobuf:"varint,70,opt,name=match_outcome,enum=dota.EMatchOutcome,def=0" json:"match_outcome,omitempty"`
+	MassDisconnect                   *bool                         `protobuf:"varint,67,opt,name=mass_disconnect" json:"mass_disconnect,omitempty"`
+	CustomGameId                     *uint64                       `protobuf:"varint,68,opt,name=custom_game_id" json:"custom_game_id,omitempty"`
+	ActiveIngameEvents               []EEvent                      `protobuf:"varint,69,rep,name=active_ingame_events,enum=dota.EEvent" json:"active_ingame_events,omitempty"`
+	CustomMinPlayers                 *uint32                       `protobuf:"varint,71,opt,name=custom_min_players" json:"custom_min_players,omitempty"`
+	CustomMaxPlayers                 *uint32                       `protobuf:"varint,72,opt,name=custom_max_players" json:"custom_max_players,omitempty"`
+	PartnerType                      *PartnerAccountType           `protobuf:"varint,73,opt,name=partner_type,enum=dota.PartnerAccountType,def=0" json:"partner_type,omitempty"`
+	LanHostPingToServerRegion        *uint32                       `protobuf:"varint,74,opt,name=lan_host_ping_to_server_region" json:"lan_host_ping_to_server_region,omitempty"`
+	Visibility                       *DOTALobbyVisibility          `protobuf:"varint,75,opt,name=visibility,enum=dota.DOTALobbyVisibility,def=0" json:"visibility,omitempty"`
+	CustomGameCrc                    *uint64                       `protobuf:"fixed64,76,opt,name=custom_game_crc" json:"custom_game_crc,omitempty"`
+	CustomGameAutoCreatedLobby       *bool                         `protobuf:"varint,77,opt,name=custom_game_auto_created_lobby" json:"custom_game_auto_created_lobby,omitempty"`
+	LeagueSeriesId                   *uint32                       `protobuf:"varint,78,opt,name=league_series_id" json:"league_series_id,omitempty"`
+	LeagueGameId                     *uint32                       `protobuf:"varint,79,opt,name=league_game_id" json:"league_game_id,omitempty"`
+	CustomGameTimestamp              *uint32                       `protobuf:"fixed32,80,opt,name=custom_game_timestamp" json:"custom_game_timestamp,omitempty"`
+	PreviousSeriesMatches            []uint64                      `protobuf:"varint,81,rep,name=previous_series_matches" json:"previous_series_matches,omitempty"`
+	PreviousMatchOverride            *uint64                       `protobuf:"varint,82,opt,name=previous_match_override" json:"previous_match_override,omitempty"`
+	CustomGameUsesAccountRecords     *bool                         `protobuf:"varint,83,opt,name=custom_game_uses_account_records" json:"custom_game_uses_account_records,omitempty"`
+	LeagueSelectionPriorityTeam      *uint32                       `protobuf:"varint,84,opt,name=league_selection_priority_team" json:"league_selection_priority_team,omitempty"`
+	LeagueSelectionPriorityChoice    *SelectionPriorityType        `protobuf:"varint,85,opt,name=league_selection_priority_choice,enum=dota.SelectionPriorityType,def=0" json:"league_selection_priority_choice,omitempty"`
+	LeagueNonSelectionPriorityChoice *SelectionPriorityType        `protobuf:"varint,86,opt,name=league_non_selection_priority_choice,enum=dota.SelectionPriorityType,def=0" json:"league_non_selection_priority_choice,omitempty"`
+	GameStartTime                    *uint32                       `protobuf:"varint,87,opt,name=game_start_time" json:"game_start_time,omitempty"`
+	PauseSetting                     *LobbyDotaPauseSetting        `protobuf:"varint,88,opt,name=pause_setting,enum=dota.LobbyDotaPauseSetting,def=0" json:"pause_setting,omitempty"`
+	XXX_unrecognized                 []byte                        `json:"-"`
 }
 
 func (m *CSODOTALobby) Reset()         { *m = CSODOTALobby{} }
@@ -5466,6 +5628,9 @@ const Default_CSODOTALobby_DotaTvDelay LobbyDotaTVDelay = LobbyDotaTVDelay_Lobby
 const Default_CSODOTALobby_MatchOutcome EMatchOutcome = EMatchOutcome_k_EMatchOutcome_Unknown
 const Default_CSODOTALobby_PartnerType PartnerAccountType = PartnerAccountType_PARTNER_NONE
 const Default_CSODOTALobby_Visibility DOTALobbyVisibility = DOTALobbyVisibility_DOTALobbyVisibility_Public
+const Default_CSODOTALobby_LeagueSelectionPriorityChoice SelectionPriorityType = SelectionPriorityType_UNDEFINED
+const Default_CSODOTALobby_LeagueNonSelectionPriorityChoice SelectionPriorityType = SelectionPriorityType_UNDEFINED
+const Default_CSODOTALobby_PauseSetting LobbyDotaPauseSetting = LobbyDotaPauseSetting_LobbyDotaPauseSetting_Unlimited
 
 func (m *CSODOTALobby) GetLobbyId() uint64 {
 	if m != nil && m.LobbyId != nil {
@@ -5948,6 +6113,41 @@ func (m *CSODOTALobby) GetCustomGameUsesAccountRecords() bool {
 		return *m.CustomGameUsesAccountRecords
 	}
 	return false
+}
+
+func (m *CSODOTALobby) GetLeagueSelectionPriorityTeam() uint32 {
+	if m != nil && m.LeagueSelectionPriorityTeam != nil {
+		return *m.LeagueSelectionPriorityTeam
+	}
+	return 0
+}
+
+func (m *CSODOTALobby) GetLeagueSelectionPriorityChoice() SelectionPriorityType {
+	if m != nil && m.LeagueSelectionPriorityChoice != nil {
+		return *m.LeagueSelectionPriorityChoice
+	}
+	return Default_CSODOTALobby_LeagueSelectionPriorityChoice
+}
+
+func (m *CSODOTALobby) GetLeagueNonSelectionPriorityChoice() SelectionPriorityType {
+	if m != nil && m.LeagueNonSelectionPriorityChoice != nil {
+		return *m.LeagueNonSelectionPriorityChoice
+	}
+	return Default_CSODOTALobby_LeagueNonSelectionPriorityChoice
+}
+
+func (m *CSODOTALobby) GetGameStartTime() uint32 {
+	if m != nil && m.GameStartTime != nil {
+		return *m.GameStartTime
+	}
+	return 0
+}
+
+func (m *CSODOTALobby) GetPauseSetting() LobbyDotaPauseSetting {
+	if m != nil && m.PauseSetting != nil {
+		return *m.PauseSetting
+	}
+	return Default_CSODOTALobby_PauseSetting
 }
 
 type CSODOTALobby_CExtraMsg struct {
@@ -6967,6 +7167,14 @@ type CMsgDOTACombatLogEntry struct {
 	NeutralCampType    *uint32               `protobuf:"varint,38,opt,name=neutral_camp_type" json:"neutral_camp_type,omitempty"`
 	RuneType           *uint32               `protobuf:"varint,39,opt,name=rune_type" json:"rune_type,omitempty"`
 	AssistPlayers      []uint32              `protobuf:"varint,40,rep,name=assist_players" json:"assist_players,omitempty"`
+	IsHealSave         *bool                 `protobuf:"varint,41,opt,name=is_heal_save" json:"is_heal_save,omitempty"`
+	IsUltimateAbility  *bool                 `protobuf:"varint,42,opt,name=is_ultimate_ability" json:"is_ultimate_ability,omitempty"`
+	AttackerHeroLevel  *uint32               `protobuf:"varint,43,opt,name=attacker_hero_level" json:"attacker_hero_level,omitempty"`
+	TargetHeroLevel    *uint32               `protobuf:"varint,44,opt,name=target_hero_level" json:"target_hero_level,omitempty"`
+	Xpm                *uint32               `protobuf:"varint,45,opt,name=xpm" json:"xpm,omitempty"`
+	Gpm                *uint32               `protobuf:"varint,46,opt,name=gpm" json:"gpm,omitempty"`
+	EventLocation      *uint32               `protobuf:"varint,47,opt,name=event_location" json:"event_location,omitempty"`
+	TargetIsSelf       *bool                 `protobuf:"varint,48,opt,name=target_is_self" json:"target_is_self,omitempty"`
 	XXX_unrecognized   []byte                `json:"-"`
 }
 
@@ -7254,6 +7462,62 @@ func (m *CMsgDOTACombatLogEntry) GetAssistPlayers() []uint32 {
 		return m.AssistPlayers
 	}
 	return nil
+}
+
+func (m *CMsgDOTACombatLogEntry) GetIsHealSave() bool {
+	if m != nil && m.IsHealSave != nil {
+		return *m.IsHealSave
+	}
+	return false
+}
+
+func (m *CMsgDOTACombatLogEntry) GetIsUltimateAbility() bool {
+	if m != nil && m.IsUltimateAbility != nil {
+		return *m.IsUltimateAbility
+	}
+	return false
+}
+
+func (m *CMsgDOTACombatLogEntry) GetAttackerHeroLevel() uint32 {
+	if m != nil && m.AttackerHeroLevel != nil {
+		return *m.AttackerHeroLevel
+	}
+	return 0
+}
+
+func (m *CMsgDOTACombatLogEntry) GetTargetHeroLevel() uint32 {
+	if m != nil && m.TargetHeroLevel != nil {
+		return *m.TargetHeroLevel
+	}
+	return 0
+}
+
+func (m *CMsgDOTACombatLogEntry) GetXpm() uint32 {
+	if m != nil && m.Xpm != nil {
+		return *m.Xpm
+	}
+	return 0
+}
+
+func (m *CMsgDOTACombatLogEntry) GetGpm() uint32 {
+	if m != nil && m.Gpm != nil {
+		return *m.Gpm
+	}
+	return 0
+}
+
+func (m *CMsgDOTACombatLogEntry) GetEventLocation() uint32 {
+	if m != nil && m.EventLocation != nil {
+		return *m.EventLocation
+	}
+	return 0
+}
+
+func (m *CMsgDOTACombatLogEntry) GetTargetIsSelf() bool {
+	if m != nil && m.TargetIsSelf != nil {
+		return *m.TargetIsSelf
+	}
+	return false
 }
 
 type CMsgDOTAProfileCard struct {
@@ -7550,6 +7814,8 @@ type CSODOTAPlayerChallenge struct {
 	SequenceId       *uint32 `protobuf:"varint,9,opt,name=sequence_id" json:"sequence_id,omitempty"`
 	ChallengeTier    *uint32 `protobuf:"varint,10,opt,name=challenge_tier" json:"challenge_tier,omitempty"`
 	Flags            *uint32 `protobuf:"varint,11,opt,name=flags" json:"flags,omitempty"`
+	Attempts         *uint32 `protobuf:"varint,12,opt,name=attempts" json:"attempts,omitempty"`
+	CompleteLimit    *uint32 `protobuf:"varint,13,opt,name=complete_limit" json:"complete_limit,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
@@ -7630,6 +7896,20 @@ func (m *CSODOTAPlayerChallenge) GetChallengeTier() uint32 {
 func (m *CSODOTAPlayerChallenge) GetFlags() uint32 {
 	if m != nil && m.Flags != nil {
 		return *m.Flags
+	}
+	return 0
+}
+
+func (m *CSODOTAPlayerChallenge) GetAttempts() uint32 {
+	if m != nil && m.Attempts != nil {
+		return *m.Attempts
+	}
+	return 0
+}
+
+func (m *CSODOTAPlayerChallenge) GetCompleteLimit() uint32 {
+	if m != nil && m.CompleteLimit != nil {
+		return *m.CompleteLimit
 	}
 	return 0
 }
@@ -9182,6 +9462,94 @@ func (m *CMsgGCToClientMatchGroupsVersion) GetMatchgroupsVersion() uint32 {
 	return 0
 }
 
+type CMsgDOTASDOHeroStatsHistory struct {
+	MatchId          *uint64 `protobuf:"varint,1,opt,name=match_id" json:"match_id,omitempty"`
+	GameMode         *uint32 `protobuf:"varint,2,opt,name=game_mode" json:"game_mode,omitempty"`
+	LobbyType        *uint32 `protobuf:"varint,3,opt,name=lobby_type" json:"lobby_type,omitempty"`
+	StartTime        *uint32 `protobuf:"varint,4,opt,name=start_time" json:"start_time,omitempty"`
+	Won              *bool   `protobuf:"varint,5,opt,name=won" json:"won,omitempty"`
+	Gpm              *uint32 `protobuf:"varint,6,opt,name=gpm" json:"gpm,omitempty"`
+	Xpm              *uint32 `protobuf:"varint,7,opt,name=xpm" json:"xpm,omitempty"`
+	Kills            *uint32 `protobuf:"varint,8,opt,name=kills" json:"kills,omitempty"`
+	Deaths           *uint32 `protobuf:"varint,9,opt,name=deaths" json:"deaths,omitempty"`
+	Assists          *uint32 `protobuf:"varint,10,opt,name=assists" json:"assists,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CMsgDOTASDOHeroStatsHistory) Reset()         { *m = CMsgDOTASDOHeroStatsHistory{} }
+func (m *CMsgDOTASDOHeroStatsHistory) String() string { return proto.CompactTextString(m) }
+func (*CMsgDOTASDOHeroStatsHistory) ProtoMessage()    {}
+
+func (m *CMsgDOTASDOHeroStatsHistory) GetMatchId() uint64 {
+	if m != nil && m.MatchId != nil {
+		return *m.MatchId
+	}
+	return 0
+}
+
+func (m *CMsgDOTASDOHeroStatsHistory) GetGameMode() uint32 {
+	if m != nil && m.GameMode != nil {
+		return *m.GameMode
+	}
+	return 0
+}
+
+func (m *CMsgDOTASDOHeroStatsHistory) GetLobbyType() uint32 {
+	if m != nil && m.LobbyType != nil {
+		return *m.LobbyType
+	}
+	return 0
+}
+
+func (m *CMsgDOTASDOHeroStatsHistory) GetStartTime() uint32 {
+	if m != nil && m.StartTime != nil {
+		return *m.StartTime
+	}
+	return 0
+}
+
+func (m *CMsgDOTASDOHeroStatsHistory) GetWon() bool {
+	if m != nil && m.Won != nil {
+		return *m.Won
+	}
+	return false
+}
+
+func (m *CMsgDOTASDOHeroStatsHistory) GetGpm() uint32 {
+	if m != nil && m.Gpm != nil {
+		return *m.Gpm
+	}
+	return 0
+}
+
+func (m *CMsgDOTASDOHeroStatsHistory) GetXpm() uint32 {
+	if m != nil && m.Xpm != nil {
+		return *m.Xpm
+	}
+	return 0
+}
+
+func (m *CMsgDOTASDOHeroStatsHistory) GetKills() uint32 {
+	if m != nil && m.Kills != nil {
+		return *m.Kills
+	}
+	return 0
+}
+
+func (m *CMsgDOTASDOHeroStatsHistory) GetDeaths() uint32 {
+	if m != nil && m.Deaths != nil {
+		return *m.Deaths
+	}
+	return 0
+}
+
+func (m *CMsgDOTASDOHeroStatsHistory) GetAssists() uint32 {
+	if m != nil && m.Assists != nil {
+		return *m.Assists
+	}
+	return 0
+}
+
 func init() {
 	proto.RegisterEnum("dota.EDOTAGCMsg", EDOTAGCMsg_name, EDOTAGCMsg_value)
 	proto.RegisterEnum("dota.ESpecialPingValue", ESpecialPingValue_name, ESpecialPingValue_value)
@@ -9195,6 +9563,7 @@ func init() {
 	proto.RegisterEnum("dota.DOTALobbyReadyState", DOTALobbyReadyState_name, DOTALobbyReadyState_value)
 	proto.RegisterEnum("dota.DOTAGameVersion", DOTAGameVersion_name, DOTAGameVersion_value)
 	proto.RegisterEnum("dota.DOTAJoinLobbyResult", DOTAJoinLobbyResult_name, DOTAJoinLobbyResult_value)
+	proto.RegisterEnum("dota.SelectionPriorityType", SelectionPriorityType_name, SelectionPriorityType_value)
 	proto.RegisterEnum("dota.DOTAMatchVote", DOTAMatchVote_name, DOTAMatchVote_value)
 	proto.RegisterEnum("dota.DOTA_LobbyMemberXPBonus", DOTA_LobbyMemberXPBonus_name, DOTA_LobbyMemberXPBonus_value)
 	proto.RegisterEnum("dota.DOTALobbyVisibility", DOTALobbyVisibility_name, DOTALobbyVisibility_value)
@@ -9206,6 +9575,7 @@ func init() {
 	proto.RegisterEnum("dota.ETournamentType", ETournamentType_name, ETournamentType_value)
 	proto.RegisterEnum("dota.EEvent", EEvent_name, EEvent_value)
 	proto.RegisterEnum("dota.LobbyDotaTVDelay", LobbyDotaTVDelay_name, LobbyDotaTVDelay_value)
+	proto.RegisterEnum("dota.LobbyDotaPauseSetting", LobbyDotaPauseSetting_name, LobbyDotaPauseSetting_value)
 	proto.RegisterEnum("dota.EMatchOutcome", EMatchOutcome_name, EMatchOutcome_value)
 	proto.RegisterEnum("dota.EDOTAGCSessionNeed", EDOTAGCSessionNeed_name, EDOTAGCSessionNeed_value)
 	proto.RegisterEnum("dota.Fantasy_Roles", Fantasy_Roles_name, Fantasy_Roles_value)

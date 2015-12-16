@@ -347,6 +347,42 @@ func (x *CMsgGameServerInfo_ServerType) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
+type CMsgGameServerInfo_CustomGames int32
+
+const (
+	CMsgGameServerInfo_BOTH CMsgGameServerInfo_CustomGames = 0
+	CMsgGameServerInfo_NONE CMsgGameServerInfo_CustomGames = 1
+	CMsgGameServerInfo_ONLY CMsgGameServerInfo_CustomGames = 2
+)
+
+var CMsgGameServerInfo_CustomGames_name = map[int32]string{
+	0: "BOTH",
+	1: "NONE",
+	2: "ONLY",
+}
+var CMsgGameServerInfo_CustomGames_value = map[string]int32{
+	"BOTH": 0,
+	"NONE": 1,
+	"ONLY": 2,
+}
+
+func (x CMsgGameServerInfo_CustomGames) Enum() *CMsgGameServerInfo_CustomGames {
+	p := new(CMsgGameServerInfo_CustomGames)
+	*p = x
+	return p
+}
+func (x CMsgGameServerInfo_CustomGames) String() string {
+	return proto.EnumName(CMsgGameServerInfo_CustomGames_name, int32(x))
+}
+func (x *CMsgGameServerInfo_CustomGames) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(CMsgGameServerInfo_CustomGames_value, data, "CMsgGameServerInfo_CustomGames")
+	if err != nil {
+		return err
+	}
+	*x = CMsgGameServerInfo_CustomGames(value)
+	return nil
+}
+
 type CMsgDOTALiveScoreboardUpdate_Team_Player_DOTAUltimateState int32
 
 const (
@@ -814,29 +850,30 @@ func (m *CMsgConnectedPlayers_Player) GetDisconnectReason() ENetworkDisconnectio
 }
 
 type CMsgGameServerInfo struct {
-	ServerPublicIpAddr          *uint32                        `protobuf:"fixed32,1,opt,name=server_public_ip_addr" json:"server_public_ip_addr,omitempty"`
-	ServerPrivateIpAddr         *uint32                        `protobuf:"fixed32,2,opt,name=server_private_ip_addr" json:"server_private_ip_addr,omitempty"`
-	ServerPort                  *uint32                        `protobuf:"varint,3,opt,name=server_port" json:"server_port,omitempty"`
-	ServerTvPort                *uint32                        `protobuf:"varint,4,opt,name=server_tv_port" json:"server_tv_port,omitempty"`
-	AssignedServerTvPort        *uint32                        `protobuf:"varint,22,opt,name=assigned_server_tv_port" json:"assigned_server_tv_port,omitempty"`
-	ServerSteamdatagramPort     *uint32                        `protobuf:"varint,21,opt,name=server_steamdatagram_port" json:"server_steamdatagram_port,omitempty"`
-	ServerKey                   *string                        `protobuf:"bytes,5,opt,name=server_key" json:"server_key,omitempty"`
-	ServerHibernation           *bool                          `protobuf:"varint,6,opt,name=server_hibernation" json:"server_hibernation,omitempty"`
-	ServerType                  *CMsgGameServerInfo_ServerType `protobuf:"varint,7,opt,name=server_type,enum=dota.CMsgGameServerInfo_ServerType,def=0" json:"server_type,omitempty"`
-	ServerRegion                *uint32                        `protobuf:"varint,8,opt,name=server_region" json:"server_region,omitempty"`
-	ServerLoadavg               *float32                       `protobuf:"fixed32,9,opt,name=server_loadavg" json:"server_loadavg,omitempty"`
-	ServerTvBroadcastTime       *float32                       `protobuf:"fixed32,10,opt,name=server_tv_broadcast_time" json:"server_tv_broadcast_time,omitempty"`
-	ServerGameTime              *float32                       `protobuf:"fixed32,11,opt,name=server_game_time" json:"server_game_time,omitempty"`
-	ServerRelayConnectedSteamId *uint64                        `protobuf:"fixed64,12,opt,name=server_relay_connected_steam_id" json:"server_relay_connected_steam_id,omitempty"`
-	RelaySlotsMax               *uint32                        `protobuf:"varint,13,opt,name=relay_slots_max" json:"relay_slots_max,omitempty"`
-	RelaysConnected             *int32                         `protobuf:"varint,14,opt,name=relays_connected" json:"relays_connected,omitempty"`
-	RelayClientsConnected       *int32                         `protobuf:"varint,15,opt,name=relay_clients_connected" json:"relay_clients_connected,omitempty"`
-	RelayedGameServerSteamId    *uint64                        `protobuf:"fixed64,16,opt,name=relayed_game_server_steam_id" json:"relayed_game_server_steam_id,omitempty"`
-	ParentRelayCount            *uint32                        `protobuf:"varint,17,opt,name=parent_relay_count" json:"parent_relay_count,omitempty"`
-	TvSecretCode                *uint64                        `protobuf:"fixed64,18,opt,name=tv_secret_code" json:"tv_secret_code,omitempty"`
-	ServerVersion               *uint32                        `protobuf:"varint,19,opt,name=server_version" json:"server_version,omitempty"`
-	ServerCluster               *uint32                        `protobuf:"varint,20,opt,name=server_cluster" json:"server_cluster,omitempty"`
-	XXX_unrecognized            []byte                         `json:"-"`
+	ServerPublicIpAddr          *uint32                         `protobuf:"fixed32,1,opt,name=server_public_ip_addr" json:"server_public_ip_addr,omitempty"`
+	ServerPrivateIpAddr         *uint32                         `protobuf:"fixed32,2,opt,name=server_private_ip_addr" json:"server_private_ip_addr,omitempty"`
+	ServerPort                  *uint32                         `protobuf:"varint,3,opt,name=server_port" json:"server_port,omitempty"`
+	ServerTvPort                *uint32                         `protobuf:"varint,4,opt,name=server_tv_port" json:"server_tv_port,omitempty"`
+	AssignedServerTvPort        *uint32                         `protobuf:"varint,22,opt,name=assigned_server_tv_port" json:"assigned_server_tv_port,omitempty"`
+	ServerSteamdatagramPort     *uint32                         `protobuf:"varint,21,opt,name=server_steamdatagram_port" json:"server_steamdatagram_port,omitempty"`
+	ServerKey                   *string                         `protobuf:"bytes,5,opt,name=server_key" json:"server_key,omitempty"`
+	ServerHibernation           *bool                           `protobuf:"varint,6,opt,name=server_hibernation" json:"server_hibernation,omitempty"`
+	ServerType                  *CMsgGameServerInfo_ServerType  `protobuf:"varint,7,opt,name=server_type,enum=dota.CMsgGameServerInfo_ServerType,def=0" json:"server_type,omitempty"`
+	ServerRegion                *uint32                         `protobuf:"varint,8,opt,name=server_region" json:"server_region,omitempty"`
+	ServerLoadavg               *float32                        `protobuf:"fixed32,9,opt,name=server_loadavg" json:"server_loadavg,omitempty"`
+	ServerTvBroadcastTime       *float32                        `protobuf:"fixed32,10,opt,name=server_tv_broadcast_time" json:"server_tv_broadcast_time,omitempty"`
+	ServerGameTime              *float32                        `protobuf:"fixed32,11,opt,name=server_game_time" json:"server_game_time,omitempty"`
+	ServerRelayConnectedSteamId *uint64                         `protobuf:"fixed64,12,opt,name=server_relay_connected_steam_id" json:"server_relay_connected_steam_id,omitempty"`
+	RelaySlotsMax               *uint32                         `protobuf:"varint,13,opt,name=relay_slots_max" json:"relay_slots_max,omitempty"`
+	RelaysConnected             *int32                          `protobuf:"varint,14,opt,name=relays_connected" json:"relays_connected,omitempty"`
+	RelayClientsConnected       *int32                          `protobuf:"varint,15,opt,name=relay_clients_connected" json:"relay_clients_connected,omitempty"`
+	RelayedGameServerSteamId    *uint64                         `protobuf:"fixed64,16,opt,name=relayed_game_server_steam_id" json:"relayed_game_server_steam_id,omitempty"`
+	ParentRelayCount            *uint32                         `protobuf:"varint,17,opt,name=parent_relay_count" json:"parent_relay_count,omitempty"`
+	TvSecretCode                *uint64                         `protobuf:"fixed64,18,opt,name=tv_secret_code" json:"tv_secret_code,omitempty"`
+	ServerVersion               *uint32                         `protobuf:"varint,19,opt,name=server_version" json:"server_version,omitempty"`
+	ServerCluster               *uint32                         `protobuf:"varint,20,opt,name=server_cluster" json:"server_cluster,omitempty"`
+	AllowCustomGames            *CMsgGameServerInfo_CustomGames `protobuf:"varint,23,opt,name=allow_custom_games,enum=dota.CMsgGameServerInfo_CustomGames,def=0" json:"allow_custom_games,omitempty"`
+	XXX_unrecognized            []byte                          `json:"-"`
 }
 
 func (m *CMsgGameServerInfo) Reset()         { *m = CMsgGameServerInfo{} }
@@ -844,6 +881,7 @@ func (m *CMsgGameServerInfo) String() string { return proto.CompactTextString(m)
 func (*CMsgGameServerInfo) ProtoMessage()    {}
 
 const Default_CMsgGameServerInfo_ServerType CMsgGameServerInfo_ServerType = CMsgGameServerInfo_UNSPECIFIED
+const Default_CMsgGameServerInfo_AllowCustomGames CMsgGameServerInfo_CustomGames = CMsgGameServerInfo_BOTH
 
 func (m *CMsgGameServerInfo) GetServerPublicIpAddr() uint32 {
 	if m != nil && m.ServerPublicIpAddr != nil {
@@ -997,6 +1035,13 @@ func (m *CMsgGameServerInfo) GetServerCluster() uint32 {
 		return *m.ServerCluster
 	}
 	return 0
+}
+
+func (m *CMsgGameServerInfo) GetAllowCustomGames() CMsgGameServerInfo_CustomGames {
+	if m != nil && m.AllowCustomGames != nil {
+		return *m.AllowCustomGames
+	}
+	return Default_CMsgGameServerInfo_AllowCustomGames
 }
 
 type CMsgLeaverDetected struct {
@@ -3810,6 +3855,7 @@ type CMsgDOTAAwardEventPoints struct {
 	AwardPoints      []*CMsgDOTAAwardEventPoints_AwardPoints `protobuf:"bytes,1,rep,name=award_points" json:"award_points,omitempty"`
 	MatchId          *uint64                                 `protobuf:"varint,2,opt,name=match_id" json:"match_id,omitempty"`
 	EventId          *uint32                                 `protobuf:"varint,4,opt,name=event_id" json:"event_id,omitempty"`
+	Timestamp        *uint32                                 `protobuf:"varint,5,opt,name=timestamp" json:"timestamp,omitempty"`
 	XXX_unrecognized []byte                                  `json:"-"`
 }
 
@@ -3834,6 +3880,13 @@ func (m *CMsgDOTAAwardEventPoints) GetMatchId() uint64 {
 func (m *CMsgDOTAAwardEventPoints) GetEventId() uint32 {
 	if m != nil && m.EventId != nil {
 		return *m.EventId
+	}
+	return 0
+}
+
+func (m *CMsgDOTAAwardEventPoints) GetTimestamp() uint32 {
+	if m != nil && m.Timestamp != nil {
+		return *m.Timestamp
 	}
 	return 0
 }
@@ -5065,6 +5118,7 @@ type CMsgSignOutUpdatePlayerChallenge struct {
 	Completed        []*CMsgSignOutUpdatePlayerChallenge_Challenge `protobuf:"bytes,2,rep,name=completed" json:"completed,omitempty"`
 	Rerolled         []*CMsgSignOutUpdatePlayerChallenge_Challenge `protobuf:"bytes,3,rep,name=rerolled" json:"rerolled,omitempty"`
 	MatchId          *uint64                                       `protobuf:"varint,4,opt,name=match_id" json:"match_id,omitempty"`
+	HeroId           *uint32                                       `protobuf:"varint,5,opt,name=hero_id" json:"hero_id,omitempty"`
 	XXX_unrecognized []byte                                        `json:"-"`
 }
 
@@ -5100,9 +5154,17 @@ func (m *CMsgSignOutUpdatePlayerChallenge) GetMatchId() uint64 {
 	return 0
 }
 
+func (m *CMsgSignOutUpdatePlayerChallenge) GetHeroId() uint32 {
+	if m != nil && m.HeroId != nil {
+		return *m.HeroId
+	}
+	return 0
+}
+
 type CMsgSignOutUpdatePlayerChallenge_Challenge struct {
 	EventId          *uint32 `protobuf:"varint,1,opt,name=event_id" json:"event_id,omitempty"`
 	SequenceId       *uint32 `protobuf:"varint,3,opt,name=sequence_id" json:"sequence_id,omitempty"`
+	Progress         *uint32 `protobuf:"varint,4,opt,name=progress" json:"progress,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
@@ -5124,6 +5186,13 @@ func (m *CMsgSignOutUpdatePlayerChallenge_Challenge) GetEventId() uint32 {
 func (m *CMsgSignOutUpdatePlayerChallenge_Challenge) GetSequenceId() uint32 {
 	if m != nil && m.SequenceId != nil {
 		return *m.SequenceId
+	}
+	return 0
+}
+
+func (m *CMsgSignOutUpdatePlayerChallenge_Challenge) GetProgress() uint32 {
+	if m != nil && m.Progress != nil {
+		return *m.Progress
 	}
 	return 0
 }
@@ -5354,6 +5423,78 @@ func (m *CMsgSignOutWagerStats_Player) GetWager() uint32 {
 	return 0
 }
 
+type CMsgSignOutXPCoins struct {
+	Players          []*CMsgSignOutXPCoins_Player `protobuf:"bytes,1,rep,name=players" json:"players,omitempty"`
+	EventId          *uint32                      `protobuf:"varint,2,opt,name=event_id" json:"event_id,omitempty"`
+	MatchId          *uint64                      `protobuf:"varint,3,opt,name=match_id" json:"match_id,omitempty"`
+	Timestamp        *uint32                      `protobuf:"varint,4,opt,name=timestamp" json:"timestamp,omitempty"`
+	XXX_unrecognized []byte                       `json:"-"`
+}
+
+func (m *CMsgSignOutXPCoins) Reset()         { *m = CMsgSignOutXPCoins{} }
+func (m *CMsgSignOutXPCoins) String() string { return proto.CompactTextString(m) }
+func (*CMsgSignOutXPCoins) ProtoMessage()    {}
+
+func (m *CMsgSignOutXPCoins) GetPlayers() []*CMsgSignOutXPCoins_Player {
+	if m != nil {
+		return m.Players
+	}
+	return nil
+}
+
+func (m *CMsgSignOutXPCoins) GetEventId() uint32 {
+	if m != nil && m.EventId != nil {
+		return *m.EventId
+	}
+	return 0
+}
+
+func (m *CMsgSignOutXPCoins) GetMatchId() uint64 {
+	if m != nil && m.MatchId != nil {
+		return *m.MatchId
+	}
+	return 0
+}
+
+func (m *CMsgSignOutXPCoins) GetTimestamp() uint32 {
+	if m != nil && m.Timestamp != nil {
+		return *m.Timestamp
+	}
+	return 0
+}
+
+type CMsgSignOutXPCoins_Player struct {
+	AccountId        *uint32 `protobuf:"varint,1,opt,name=account_id" json:"account_id,omitempty"`
+	XpGained         *uint32 `protobuf:"varint,2,opt,name=xp_gained" json:"xp_gained,omitempty"`
+	CoinsSpent       *uint32 `protobuf:"varint,3,opt,name=coins_spent" json:"coins_spent,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CMsgSignOutXPCoins_Player) Reset()         { *m = CMsgSignOutXPCoins_Player{} }
+func (m *CMsgSignOutXPCoins_Player) String() string { return proto.CompactTextString(m) }
+func (*CMsgSignOutXPCoins_Player) ProtoMessage()    {}
+
+func (m *CMsgSignOutXPCoins_Player) GetAccountId() uint32 {
+	if m != nil && m.AccountId != nil {
+		return *m.AccountId
+	}
+	return 0
+}
+
+func (m *CMsgSignOutXPCoins_Player) GetXpGained() uint32 {
+	if m != nil && m.XpGained != nil {
+		return *m.XpGained
+	}
+	return 0
+}
+
+func (m *CMsgSignOutXPCoins_Player) GetCoinsSpent() uint32 {
+	if m != nil && m.CoinsSpent != nil {
+		return *m.CoinsSpent
+	}
+	return 0
+}
+
 func init() {
 	proto.RegisterEnum("dota.EPoorNetworkConditionsType", EPoorNetworkConditionsType_name, EPoorNetworkConditionsType_value)
 	proto.RegisterEnum("dota.EAbilityAbuseType", EAbilityAbuseType_name, EAbilityAbuseType_value)
@@ -5362,6 +5503,7 @@ func init() {
 	proto.RegisterEnum("dota.ESuspiciousBuildType", ESuspiciousBuildType_name, ESuspiciousBuildType_value)
 	proto.RegisterEnum("dota.CMsgConnectedPlayers_SendReason", CMsgConnectedPlayers_SendReason_name, CMsgConnectedPlayers_SendReason_value)
 	proto.RegisterEnum("dota.CMsgGameServerInfo_ServerType", CMsgGameServerInfo_ServerType_name, CMsgGameServerInfo_ServerType_value)
+	proto.RegisterEnum("dota.CMsgGameServerInfo_CustomGames", CMsgGameServerInfo_CustomGames_name, CMsgGameServerInfo_CustomGames_value)
 	proto.RegisterEnum("dota.CMsgDOTALiveScoreboardUpdate_Team_Player_DOTAUltimateState", CMsgDOTALiveScoreboardUpdate_Team_Player_DOTAUltimateState_name, CMsgDOTALiveScoreboardUpdate_Team_Player_DOTAUltimateState_value)
 	proto.RegisterEnum("dota.CMsgGameServerSaveGameResult_Result", CMsgGameServerSaveGameResult_Result_name, CMsgGameServerSaveGameResult_Result_value)
 	proto.RegisterEnum("dota.CMsgGCToServerPredictionResult_Prediction_EResult", CMsgGCToServerPredictionResult_Prediction_EResult_name, CMsgGCToServerPredictionResult_Prediction_EResult_value)

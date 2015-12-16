@@ -83,8 +83,6 @@ It has these top-level messages:
 	CMsgSelectItemPresetForClass
 	CMsgSelectItemPresetForClassReply
 	CSOSelectedItemPreset
-	CMsgGCReportAbuse
-	CMsgGCReportAbuseResponse
 	CMsgGCNameItemNotification
 	CMsgGCClientDisplayNotification
 	CMsgGCShowItemsPickedUp
@@ -794,10 +792,6 @@ type CMsgPartyInviteResponse struct {
 	PartyId          *uint64             `protobuf:"varint,1,opt,name=party_id" json:"party_id,omitempty"`
 	Accept           *bool               `protobuf:"varint,2,opt,name=accept" json:"accept,omitempty"`
 	ClientVersion    *uint32             `protobuf:"varint,3,opt,name=client_version" json:"client_version,omitempty"`
-	TeamId           *uint32             `protobuf:"varint,4,opt,name=team_id" json:"team_id,omitempty"`
-	AsCoach          *bool               `protobuf:"varint,5,opt,name=as_coach" json:"as_coach,omitempty"`
-	GameLanguageEnum *uint32             `protobuf:"varint,6,opt,name=game_language_enum" json:"game_language_enum,omitempty"`
-	GameLanguageName *string             `protobuf:"bytes,7,opt,name=game_language_name" json:"game_language_name,omitempty"`
 	PingData         *CMsgClientPingData `protobuf:"bytes,8,opt,name=ping_data" json:"ping_data,omitempty"`
 	XXX_unrecognized []byte              `json:"-"`
 }
@@ -827,34 +821,6 @@ func (m *CMsgPartyInviteResponse) GetClientVersion() uint32 {
 	return 0
 }
 
-func (m *CMsgPartyInviteResponse) GetTeamId() uint32 {
-	if m != nil && m.TeamId != nil {
-		return *m.TeamId
-	}
-	return 0
-}
-
-func (m *CMsgPartyInviteResponse) GetAsCoach() bool {
-	if m != nil && m.AsCoach != nil {
-		return *m.AsCoach
-	}
-	return false
-}
-
-func (m *CMsgPartyInviteResponse) GetGameLanguageEnum() uint32 {
-	if m != nil && m.GameLanguageEnum != nil {
-		return *m.GameLanguageEnum
-	}
-	return 0
-}
-
-func (m *CMsgPartyInviteResponse) GetGameLanguageName() string {
-	if m != nil && m.GameLanguageName != nil {
-		return *m.GameLanguageName
-	}
-	return ""
-}
-
 func (m *CMsgPartyInviteResponse) GetPingData() *CMsgClientPingData {
 	if m != nil {
 		return m.PingData
@@ -866,8 +832,6 @@ type CMsgLobbyInviteResponse struct {
 	LobbyId             *uint64 `protobuf:"fixed64,1,opt,name=lobby_id" json:"lobby_id,omitempty"`
 	Accept              *bool   `protobuf:"varint,2,opt,name=accept" json:"accept,omitempty"`
 	ClientVersion       *uint32 `protobuf:"varint,3,opt,name=client_version" json:"client_version,omitempty"`
-	GameLanguageEnum    *uint32 `protobuf:"varint,4,opt,name=game_language_enum" json:"game_language_enum,omitempty"`
-	GameLanguageName    *string `protobuf:"bytes,5,opt,name=game_language_name" json:"game_language_name,omitempty"`
 	CustomGameCrc       *uint64 `protobuf:"fixed64,6,opt,name=custom_game_crc" json:"custom_game_crc,omitempty"`
 	CustomGameTimestamp *uint32 `protobuf:"fixed32,7,opt,name=custom_game_timestamp" json:"custom_game_timestamp,omitempty"`
 	XXX_unrecognized    []byte  `json:"-"`
@@ -896,20 +860,6 @@ func (m *CMsgLobbyInviteResponse) GetClientVersion() uint32 {
 		return *m.ClientVersion
 	}
 	return 0
-}
-
-func (m *CMsgLobbyInviteResponse) GetGameLanguageEnum() uint32 {
-	if m != nil && m.GameLanguageEnum != nil {
-		return *m.GameLanguageEnum
-	}
-	return 0
-}
-
-func (m *CMsgLobbyInviteResponse) GetGameLanguageName() string {
-	if m != nil && m.GameLanguageName != nil {
-		return *m.GameLanguageName
-	}
-	return ""
 }
 
 func (m *CMsgLobbyInviteResponse) GetCustomGameCrc() uint64 {
@@ -2209,102 +2159,6 @@ func (m *CSOSelectedItemPreset) GetPresetId() uint32 {
 		return *m.PresetId
 	}
 	return 0
-}
-
-type CMsgGCReportAbuse struct {
-	TargetSteamId        *uint64 `protobuf:"fixed64,1,opt,name=target_steam_id" json:"target_steam_id,omitempty"`
-	Description          *string `protobuf:"bytes,4,opt,name=description" json:"description,omitempty"`
-	Gid                  *uint64 `protobuf:"varint,5,opt,name=gid" json:"gid,omitempty"`
-	AbuseType            *uint32 `protobuf:"varint,2,opt,name=abuse_type" json:"abuse_type,omitempty"`
-	ContentType          *uint32 `protobuf:"varint,3,opt,name=content_type" json:"content_type,omitempty"`
-	TargetGameServerIp   *uint32 `protobuf:"fixed32,6,opt,name=target_game_server_ip" json:"target_game_server_ip,omitempty"`
-	TargetGameServerPort *uint32 `protobuf:"varint,7,opt,name=target_game_server_port" json:"target_game_server_port,omitempty"`
-	XXX_unrecognized     []byte  `json:"-"`
-}
-
-func (m *CMsgGCReportAbuse) Reset()         { *m = CMsgGCReportAbuse{} }
-func (m *CMsgGCReportAbuse) String() string { return proto.CompactTextString(m) }
-func (*CMsgGCReportAbuse) ProtoMessage()    {}
-
-func (m *CMsgGCReportAbuse) GetTargetSteamId() uint64 {
-	if m != nil && m.TargetSteamId != nil {
-		return *m.TargetSteamId
-	}
-	return 0
-}
-
-func (m *CMsgGCReportAbuse) GetDescription() string {
-	if m != nil && m.Description != nil {
-		return *m.Description
-	}
-	return ""
-}
-
-func (m *CMsgGCReportAbuse) GetGid() uint64 {
-	if m != nil && m.Gid != nil {
-		return *m.Gid
-	}
-	return 0
-}
-
-func (m *CMsgGCReportAbuse) GetAbuseType() uint32 {
-	if m != nil && m.AbuseType != nil {
-		return *m.AbuseType
-	}
-	return 0
-}
-
-func (m *CMsgGCReportAbuse) GetContentType() uint32 {
-	if m != nil && m.ContentType != nil {
-		return *m.ContentType
-	}
-	return 0
-}
-
-func (m *CMsgGCReportAbuse) GetTargetGameServerIp() uint32 {
-	if m != nil && m.TargetGameServerIp != nil {
-		return *m.TargetGameServerIp
-	}
-	return 0
-}
-
-func (m *CMsgGCReportAbuse) GetTargetGameServerPort() uint32 {
-	if m != nil && m.TargetGameServerPort != nil {
-		return *m.TargetGameServerPort
-	}
-	return 0
-}
-
-type CMsgGCReportAbuseResponse struct {
-	TargetSteamId    *uint64 `protobuf:"fixed64,1,opt,name=target_steam_id" json:"target_steam_id,omitempty"`
-	Result           *uint32 `protobuf:"varint,2,opt,name=result" json:"result,omitempty"`
-	ErrorMessage     *string `protobuf:"bytes,3,opt,name=error_message" json:"error_message,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
-}
-
-func (m *CMsgGCReportAbuseResponse) Reset()         { *m = CMsgGCReportAbuseResponse{} }
-func (m *CMsgGCReportAbuseResponse) String() string { return proto.CompactTextString(m) }
-func (*CMsgGCReportAbuseResponse) ProtoMessage()    {}
-
-func (m *CMsgGCReportAbuseResponse) GetTargetSteamId() uint64 {
-	if m != nil && m.TargetSteamId != nil {
-		return *m.TargetSteamId
-	}
-	return 0
-}
-
-func (m *CMsgGCReportAbuseResponse) GetResult() uint32 {
-	if m != nil && m.Result != nil {
-		return *m.Result
-	}
-	return 0
-}
-
-func (m *CMsgGCReportAbuseResponse) GetErrorMessage() string {
-	if m != nil && m.ErrorMessage != nil {
-		return *m.ErrorMessage
-	}
-	return ""
 }
 
 type CMsgGCNameItemNotification struct {

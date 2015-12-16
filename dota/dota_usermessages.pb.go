@@ -2306,6 +2306,7 @@ type CDOTAUserMsg_NevermoreRequiem struct {
 	EntityHandle     *int32      `protobuf:"varint,1,opt,name=entity_handle" json:"entity_handle,omitempty"`
 	Lines            *int32      `protobuf:"varint,2,opt,name=lines" json:"lines,omitempty"`
 	Origin           *CMsgVector `protobuf:"bytes,3,opt,name=origin" json:"origin,omitempty"`
+	Reverse          *bool       `protobuf:"varint,4,opt,name=reverse" json:"reverse,omitempty"`
 	XXX_unrecognized []byte      `json:"-"`
 }
 
@@ -2332,6 +2333,13 @@ func (m *CDOTAUserMsg_NevermoreRequiem) GetOrigin() *CMsgVector {
 		return m.Origin
 	}
 	return nil
+}
+
+func (m *CDOTAUserMsg_NevermoreRequiem) GetReverse() bool {
+	if m != nil && m.Reverse != nil {
+		return *m.Reverse
+	}
+	return false
 }
 
 type CDOTAUserMsg_InvalidCommand struct {

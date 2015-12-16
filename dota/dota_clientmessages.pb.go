@@ -65,6 +65,7 @@ const (
 	EDotaClientMessages_DOTA_CM_CoinWager                              EDotaClientMessages = 349
 	EDotaClientMessages_DOTA_CM_ExecuteOrders                          EDotaClientMessages = 350
 	EDotaClientMessages_DOTA_CM_XPAlert                                EDotaClientMessages = 351
+	EDotaClientMessages_DOTA_CM_GenericBooleanConvar                   EDotaClientMessages = 352
 )
 
 var EDotaClientMessages_name = map[int32]string{
@@ -119,6 +120,7 @@ var EDotaClientMessages_name = map[int32]string{
 	349: "DOTA_CM_CoinWager",
 	350: "DOTA_CM_ExecuteOrders",
 	351: "DOTA_CM_XPAlert",
+	352: "DOTA_CM_GenericBooleanConvar",
 }
 var EDotaClientMessages_value = map[string]int32{
 	"DOTA_CM_MapLine":                                301,
@@ -172,6 +174,7 @@ var EDotaClientMessages_value = map[string]int32{
 	"DOTA_CM_CoinWager":                              349,
 	"DOTA_CM_ExecuteOrders":                          350,
 	"DOTA_CM_XPAlert":                                351,
+	"DOTA_CM_GenericBooleanConvar":                   352,
 }
 
 func (x EDotaClientMessages) Enum() *EDotaClientMessages {
@@ -188,6 +191,36 @@ func (x *EDotaClientMessages) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	*x = EDotaClientMessages(value)
+	return nil
+}
+
+type CDOTAClientMsg_GenericBooleanConvar_EType int32
+
+const (
+	CDOTAClientMsg_GenericBooleanConvar_FORCE_DEFAULT_RESPAWN_STINGER CDOTAClientMsg_GenericBooleanConvar_EType = 1
+)
+
+var CDOTAClientMsg_GenericBooleanConvar_EType_name = map[int32]string{
+	1: "FORCE_DEFAULT_RESPAWN_STINGER",
+}
+var CDOTAClientMsg_GenericBooleanConvar_EType_value = map[string]int32{
+	"FORCE_DEFAULT_RESPAWN_STINGER": 1,
+}
+
+func (x CDOTAClientMsg_GenericBooleanConvar_EType) Enum() *CDOTAClientMsg_GenericBooleanConvar_EType {
+	p := new(CDOTAClientMsg_GenericBooleanConvar_EType)
+	*p = x
+	return p
+}
+func (x CDOTAClientMsg_GenericBooleanConvar_EType) String() string {
+	return proto.EnumName(CDOTAClientMsg_GenericBooleanConvar_EType_name, int32(x))
+}
+func (x *CDOTAClientMsg_GenericBooleanConvar_EType) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(CDOTAClientMsg_GenericBooleanConvar_EType_value, data, "CDOTAClientMsg_GenericBooleanConvar_EType")
+	if err != nil {
+		return err
+	}
+	*x = CDOTAClientMsg_GenericBooleanConvar_EType(value)
 	return nil
 }
 
@@ -397,6 +430,32 @@ func (*CDOTAClientMsg_TeleportRequiresHalt) ProtoMessage()    {}
 func (m *CDOTAClientMsg_TeleportRequiresHalt) GetEnabled() bool {
 	if m != nil && m.Enabled != nil {
 		return *m.Enabled
+	}
+	return false
+}
+
+type CDOTAClientMsg_GenericBooleanConvar struct {
+	Type             *CDOTAClientMsg_GenericBooleanConvar_EType `protobuf:"varint,1,opt,name=type,enum=dota.CDOTAClientMsg_GenericBooleanConvar_EType,def=1" json:"type,omitempty"`
+	Value            *bool                                      `protobuf:"varint,2,opt,name=value" json:"value,omitempty"`
+	XXX_unrecognized []byte                                     `json:"-"`
+}
+
+func (m *CDOTAClientMsg_GenericBooleanConvar) Reset()         { *m = CDOTAClientMsg_GenericBooleanConvar{} }
+func (m *CDOTAClientMsg_GenericBooleanConvar) String() string { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_GenericBooleanConvar) ProtoMessage()    {}
+
+const Default_CDOTAClientMsg_GenericBooleanConvar_Type CDOTAClientMsg_GenericBooleanConvar_EType = CDOTAClientMsg_GenericBooleanConvar_FORCE_DEFAULT_RESPAWN_STINGER
+
+func (m *CDOTAClientMsg_GenericBooleanConvar) GetType() CDOTAClientMsg_GenericBooleanConvar_EType {
+	if m != nil && m.Type != nil {
+		return *m.Type
+	}
+	return Default_CDOTAClientMsg_GenericBooleanConvar_Type
+}
+
+func (m *CDOTAClientMsg_GenericBooleanConvar) GetValue() bool {
+	if m != nil && m.Value != nil {
+		return *m.Value
 	}
 	return false
 }
@@ -1147,4 +1206,5 @@ func (m *CDOTAClientMsg_XPAlert) GetTargetEntindex() uint32 {
 
 func init() {
 	proto.RegisterEnum("dota.EDotaClientMessages", EDotaClientMessages_name, EDotaClientMessages_value)
+	proto.RegisterEnum("dota.CDOTAClientMsg_GenericBooleanConvar_EType", CDOTAClientMsg_GenericBooleanConvar_EType_name, CDOTAClientMsg_GenericBooleanConvar_EType_value)
 }
