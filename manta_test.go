@@ -1,6 +1,7 @@
 package manta
 
 import (
+	"os"
 	"testing"
 
 	"github.com/dotabuff/manta/dota"
@@ -50,6 +51,7 @@ type testScenario struct {
 	expectPlayer6Steamid   uint64
 	expectHeroEntityName   string
 	expectHeroEntityMana   float32
+	skipInCI               bool
 }
 
 var testScenarios = map[int64]testScenario{
@@ -100,16 +102,25 @@ var testScenarios = map[int64]testScenario{
 		expectUnitOrderEvents:  64823,
 	},
 	1788648401: {
-		matchId:              "1788648401",
-		replayUrl:            "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1788648401.dem",
-		expectGameBuild:      1036,
-		expectHeroEntityName: "CDOTA_Unit_Hero_Earthshaker",
-		expectHeroEntityMana: 1189.9386,
+		matchId:                "1788648401",
+		replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1788648401.dem",
+		expectGameBuild:        1036,
+		expectCombatLogDamage:  0,
+		expectCombatLogHealing: 0,
+		expectCombatLogDeaths:  0,
+		expectCombatLogEvents:  0,
+		expectHeroEntityName:   "CDOTA_Unit_Hero_Earthshaker",
+		expectHeroEntityMana:   1189.9386,
 	},
 	1786687320: {
-		matchId:         "1786687320",
-		replayUrl:       "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1786687320.dem",
-		expectGameBuild: 1033,
+		matchId:                "1786687320",
+		replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1786687320.dem",
+		expectGameBuild:        1033,
+		expectCombatLogDamage:  0,
+		expectCombatLogHealing: 0,
+		expectCombatLogDeaths:  0,
+		expectCombatLogEvents:  0,
+		skipInCI:               true,
 	},
 	1785937100: {
 		matchId:                "1785937100",
@@ -123,6 +134,7 @@ var testScenarios = map[int64]testScenario{
 		expectUnitOrderEvents:  52359,
 		expectPlayer6Name:      "JiimoxD",
 		expectPlayer6Steamid:   76561198203594628,
+		skipInCI:               true,
 	},
 	1785899023: {
 		matchId:                "1785899023",
@@ -136,6 +148,7 @@ var testScenarios = map[int64]testScenario{
 		expectUnitOrderEvents:  58269,
 		expectPlayer6Name:      "+27",
 		expectPlayer6Steamid:   76561198063151170,
+		skipInCI:               true,
 	},
 	1785874713: {
 		matchId:                "1785874713",
@@ -149,6 +162,7 @@ var testScenarios = map[int64]testScenario{
 		expectUnitOrderEvents:  40240,
 		expectPlayer6Name:      "San-Say",
 		expectPlayer6Steamid:   76561198020188611,
+		skipInCI:               true,
 	},
 	1781640270: {
 		matchId:                "1781640270",
@@ -175,6 +189,7 @@ var testScenarios = map[int64]testScenario{
 		expectUnitOrderEvents:  36172,
 		expectPlayer6Name:      "Doffo",
 		expectPlayer6Steamid:   76561198087353732,
+		skipInCI:               true,
 	},
 	1763193771: {
 		matchId:                "1763193771",
@@ -188,6 +203,7 @@ var testScenarios = map[int64]testScenario{
 		expectUnitOrderEvents:  31994,
 		expectPlayer6Name:      "Monst_er",
 		expectPlayer6Steamid:   76561198201328510,
+		skipInCI:               true,
 	},
 	1763177231: {
 		matchId:                "1763177231",
@@ -201,6 +217,7 @@ var testScenarios = map[int64]testScenario{
 		expectUnitOrderEvents:  35975,
 		expectPlayer6Name:      "Supercowman",
 		expectPlayer6Steamid:   76561198013311415,
+		skipInCI:               true,
 	},
 	1734886116: {
 		matchId:                "1734886116",
@@ -227,6 +244,7 @@ var testScenarios = map[int64]testScenario{
 		expectUnitOrderEvents:  27525,
 		expectPlayer6Name:      "Snayp8",
 		expectPlayer6Steamid:   76561198047587062,
+		skipInCI:               true,
 	},
 	1716444111: {
 		matchId:                "1716444111",
@@ -240,6 +258,7 @@ var testScenarios = map[int64]testScenario{
 		expectUnitOrderEvents:  48822,
 		expectPlayer6Name:      "GangBang",
 		expectPlayer6Steamid:   76561198136700681,
+		skipInCI:               true,
 	},
 	1712853372: {
 		matchId:                "1712853372",
@@ -253,6 +272,7 @@ var testScenarios = map[int64]testScenario{
 		expectUnitOrderEvents:  48107,
 		expectPlayer6Name:      "BFG",
 		expectPlayer6Steamid:   76561198047707927,
+		skipInCI:               true,
 	},
 	1648457986: {
 		matchId:                "1648457986",
@@ -266,6 +286,7 @@ var testScenarios = map[int64]testScenario{
 		expectUnitOrderEvents:  17822,
 		expectPlayer6Name:      "Grinder",
 		expectPlayer6Steamid:   76561198207988337,
+		skipInCI:               true,
 	},
 	1605340040: {
 		matchId:                "1605340040",
@@ -281,6 +302,7 @@ var testScenarios = map[int64]testScenario{
 		expectPlayer6Steamid:   76561198156504817,
 		expectHeroEntityName:   "CDOTA_Unit_Hero_Chen",
 		expectHeroEntityMana:   1159.9386,
+		skipInCI:               true,
 	},
 	1582611189: {
 		matchId:                "1582611189",
@@ -294,6 +316,7 @@ var testScenarios = map[int64]testScenario{
 		expectUnitOrderEvents:  40237,
 		expectPlayer6Name:      "The13ananaMan",
 		expectPlayer6Steamid:   76561198068424443,
+		skipInCI:               true,
 	},
 	1560315800: {
 		matchId:                "1560315800",
@@ -309,6 +332,7 @@ var testScenarios = map[int64]testScenario{
 		expectPlayer6Steamid:   76561198065323776,
 		expectHeroEntityName:   "CDOTA_Unit_Hero_Pudge",
 		expectHeroEntityMana:   858.10474,
+		skipInCI:               true,
 	},
 	1560294294: {
 		matchId:                "1560294294",
@@ -322,6 +346,7 @@ var testScenarios = map[int64]testScenario{
 		expectUnitOrderEvents:  30657,
 		expectPlayer6Name:      "Laslo",
 		expectPlayer6Steamid:   76561198034549887,
+		skipInCI:               true,
 	},
 	1560289528: {
 		matchId:                "1560289528",
@@ -337,6 +362,7 @@ var testScenarios = map[int64]testScenario{
 		expectPlayer6Steamid:   76561197993050562,
 		expectHeroEntityName:   "CDOTA_Unit_Hero_Undying",
 		expectHeroEntityMana:   1108.1353,
+		skipInCI:               true,
 	},
 }
 
@@ -350,6 +376,10 @@ func (s testScenario) test(t *testing.T) {
 	defer func() {
 		debugLevel = 0
 	}()
+
+	if s.skipInCI && os.Getenv("CI") != "" {
+		t.Skip("skipping scenario in CI environment")
+	}
 
 	buf := mustGetReplayData(s.matchId, s.replayUrl)
 	parser, err := NewParser(buf)
