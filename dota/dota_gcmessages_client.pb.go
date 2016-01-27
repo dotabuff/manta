@@ -1848,19 +1848,20 @@ func (x *CMsgGCToClientPrivateChatResponse_Result) UnmarshalJSON(data []byte) er
 }
 
 type CMsgStartFindingMatch struct {
-	Key              *string             `protobuf:"bytes,1,opt,name=key" json:"key,omitempty"`
-	Matchgroups      *uint32             `protobuf:"varint,2,opt,name=matchgroups,def=4294967295" json:"matchgroups,omitempty"`
-	ClientVersion    *uint32             `protobuf:"varint,3,opt,name=client_version" json:"client_version,omitempty"`
-	GameModes        *uint32             `protobuf:"varint,4,opt,name=game_modes,def=4294967295" json:"game_modes,omitempty"`
-	BotDifficulty    *DOTABotDifficulty  `protobuf:"varint,5,opt,name=bot_difficulty,enum=dota.DOTABotDifficulty,def=3" json:"bot_difficulty,omitempty"`
-	MatchType        *MatchType          `protobuf:"varint,6,opt,name=match_type,enum=dota.MatchType,def=0" json:"match_type,omitempty"`
-	Matchlanguages   *uint32             `protobuf:"varint,7,opt,name=matchlanguages,def=4294967295" json:"matchlanguages,omitempty"`
-	MapPreference    *uint32             `protobuf:"varint,9,opt,name=map_preference" json:"map_preference,omitempty"`
-	TeamId           *uint32             `protobuf:"varint,8,opt,name=team_id" json:"team_id,omitempty"`
-	GameLanguageEnum *MatchLanguages     `protobuf:"varint,10,opt,name=game_language_enum,enum=dota.MatchLanguages,def=0" json:"game_language_enum,omitempty"`
-	GameLanguageName *string             `protobuf:"bytes,11,opt,name=game_language_name" json:"game_language_name,omitempty"`
-	PingData         *CMsgClientPingData `protobuf:"bytes,12,opt,name=ping_data" json:"ping_data,omitempty"`
-	XXX_unrecognized []byte              `json:"-"`
+	Key               *string             `protobuf:"bytes,1,opt,name=key" json:"key,omitempty"`
+	Matchgroups       *uint32             `protobuf:"varint,2,opt,name=matchgroups,def=4294967295" json:"matchgroups,omitempty"`
+	ClientVersion     *uint32             `protobuf:"varint,3,opt,name=client_version" json:"client_version,omitempty"`
+	GameModes         *uint32             `protobuf:"varint,4,opt,name=game_modes,def=4294967295" json:"game_modes,omitempty"`
+	BotDifficulty     *DOTABotDifficulty  `protobuf:"varint,5,opt,name=bot_difficulty,enum=dota.DOTABotDifficulty,def=3" json:"bot_difficulty,omitempty"`
+	MatchType         *MatchType          `protobuf:"varint,6,opt,name=match_type,enum=dota.MatchType,def=0" json:"match_type,omitempty"`
+	Matchlanguages    *uint32             `protobuf:"varint,7,opt,name=matchlanguages,def=4294967295" json:"matchlanguages,omitempty"`
+	MapPreference     *uint32             `protobuf:"varint,9,opt,name=map_preference" json:"map_preference,omitempty"`
+	TeamId            *uint32             `protobuf:"varint,8,opt,name=team_id" json:"team_id,omitempty"`
+	GameLanguageEnum  *MatchLanguages     `protobuf:"varint,10,opt,name=game_language_enum,enum=dota.MatchLanguages,def=0" json:"game_language_enum,omitempty"`
+	GameLanguageName  *string             `protobuf:"bytes,11,opt,name=game_language_name" json:"game_language_name,omitempty"`
+	PingData          *CMsgClientPingData `protobuf:"bytes,12,opt,name=ping_data" json:"ping_data,omitempty"`
+	RegionSelectFlags *uint32             `protobuf:"varint,13,opt,name=region_select_flags" json:"region_select_flags,omitempty"`
+	XXX_unrecognized  []byte              `json:"-"`
 }
 
 func (m *CMsgStartFindingMatch) Reset()         { *m = CMsgStartFindingMatch{} }
@@ -1956,6 +1957,13 @@ func (m *CMsgStartFindingMatch) GetPingData() *CMsgClientPingData {
 		return m.PingData
 	}
 	return nil
+}
+
+func (m *CMsgStartFindingMatch) GetRegionSelectFlags() uint32 {
+	if m != nil && m.RegionSelectFlags != nil {
+		return *m.RegionSelectFlags
+	}
+	return 0
 }
 
 type CMsgStopFindingMatch struct {
@@ -15805,6 +15813,118 @@ func (m *CMsgGCToClientPrivateChatInfoResponse_Member) GetStatus() uint32 {
 		return *m.Status
 	}
 	return 0
+}
+
+type CMsgPlayerBehaviorReport struct {
+	AccountId          *uint32 `protobuf:"varint,1,opt,name=account_id" json:"account_id,omitempty"`
+	MatchId            *uint64 `protobuf:"varint,2,opt,name=match_id" json:"match_id,omitempty"`
+	SeqNum             *uint32 `protobuf:"varint,3,opt,name=seq_num" json:"seq_num,omitempty"`
+	Reasons            *uint32 `protobuf:"varint,4,opt,name=reasons" json:"reasons,omitempty"`
+	MatchesInReport    *uint32 `protobuf:"varint,5,opt,name=matches_in_report" json:"matches_in_report,omitempty"`
+	MatchesClean       *uint32 `protobuf:"varint,6,opt,name=matches_clean" json:"matches_clean,omitempty"`
+	MatchesReported    *uint32 `protobuf:"varint,7,opt,name=matches_reported" json:"matches_reported,omitempty"`
+	MatchesAbandoned   *uint32 `protobuf:"varint,8,opt,name=matches_abandoned" json:"matches_abandoned,omitempty"`
+	ReportsCount       *uint32 `protobuf:"varint,9,opt,name=reports_count" json:"reports_count,omitempty"`
+	ReportsParties     *uint32 `protobuf:"varint,10,opt,name=reports_parties" json:"reports_parties,omitempty"`
+	CommendCount       *uint32 `protobuf:"varint,11,opt,name=commend_count" json:"commend_count,omitempty"`
+	EndScore           *uint32 `protobuf:"varint,13,opt,name=end_score" json:"end_score,omitempty"`
+	ClientAcknowledged *bool   `protobuf:"varint,100,opt,name=client_acknowledged" json:"client_acknowledged,omitempty"`
+	XXX_unrecognized   []byte  `json:"-"`
+}
+
+func (m *CMsgPlayerBehaviorReport) Reset()         { *m = CMsgPlayerBehaviorReport{} }
+func (m *CMsgPlayerBehaviorReport) String() string { return proto.CompactTextString(m) }
+func (*CMsgPlayerBehaviorReport) ProtoMessage()    {}
+
+func (m *CMsgPlayerBehaviorReport) GetAccountId() uint32 {
+	if m != nil && m.AccountId != nil {
+		return *m.AccountId
+	}
+	return 0
+}
+
+func (m *CMsgPlayerBehaviorReport) GetMatchId() uint64 {
+	if m != nil && m.MatchId != nil {
+		return *m.MatchId
+	}
+	return 0
+}
+
+func (m *CMsgPlayerBehaviorReport) GetSeqNum() uint32 {
+	if m != nil && m.SeqNum != nil {
+		return *m.SeqNum
+	}
+	return 0
+}
+
+func (m *CMsgPlayerBehaviorReport) GetReasons() uint32 {
+	if m != nil && m.Reasons != nil {
+		return *m.Reasons
+	}
+	return 0
+}
+
+func (m *CMsgPlayerBehaviorReport) GetMatchesInReport() uint32 {
+	if m != nil && m.MatchesInReport != nil {
+		return *m.MatchesInReport
+	}
+	return 0
+}
+
+func (m *CMsgPlayerBehaviorReport) GetMatchesClean() uint32 {
+	if m != nil && m.MatchesClean != nil {
+		return *m.MatchesClean
+	}
+	return 0
+}
+
+func (m *CMsgPlayerBehaviorReport) GetMatchesReported() uint32 {
+	if m != nil && m.MatchesReported != nil {
+		return *m.MatchesReported
+	}
+	return 0
+}
+
+func (m *CMsgPlayerBehaviorReport) GetMatchesAbandoned() uint32 {
+	if m != nil && m.MatchesAbandoned != nil {
+		return *m.MatchesAbandoned
+	}
+	return 0
+}
+
+func (m *CMsgPlayerBehaviorReport) GetReportsCount() uint32 {
+	if m != nil && m.ReportsCount != nil {
+		return *m.ReportsCount
+	}
+	return 0
+}
+
+func (m *CMsgPlayerBehaviorReport) GetReportsParties() uint32 {
+	if m != nil && m.ReportsParties != nil {
+		return *m.ReportsParties
+	}
+	return 0
+}
+
+func (m *CMsgPlayerBehaviorReport) GetCommendCount() uint32 {
+	if m != nil && m.CommendCount != nil {
+		return *m.CommendCount
+	}
+	return 0
+}
+
+func (m *CMsgPlayerBehaviorReport) GetEndScore() uint32 {
+	if m != nil && m.EndScore != nil {
+		return *m.EndScore
+	}
+	return 0
+}
+
+func (m *CMsgPlayerBehaviorReport) GetClientAcknowledged() bool {
+	if m != nil && m.ClientAcknowledged != nil {
+		return *m.ClientAcknowledged
+	}
+	return false
 }
 
 func init() {

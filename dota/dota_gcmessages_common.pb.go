@@ -4374,6 +4374,7 @@ type CSODOTAParty struct {
 	SentInvites                     []*CSODOTAPartyInvite `protobuf:"bytes,41,rep,name=sent_invites" json:"sent_invites,omitempty"`
 	RecvInvites                     []*CSODOTAPartyInvite `protobuf:"bytes,42,rep,name=recv_invites" json:"recv_invites,omitempty"`
 	AccountFlags                    *uint32               `protobuf:"varint,43,opt,name=account_flags" json:"account_flags,omitempty"`
+	RegionSelectFlags               *uint32               `protobuf:"varint,44,opt,name=region_select_flags" json:"region_select_flags,omitempty"`
 	XXX_unrecognized                []byte                `json:"-"`
 }
 
@@ -4591,6 +4592,13 @@ func (m *CSODOTAParty) GetRecvInvites() []*CSODOTAPartyInvite {
 func (m *CSODOTAParty) GetAccountFlags() uint32 {
 	if m != nil && m.AccountFlags != nil {
 		return *m.AccountFlags
+	}
+	return 0
+}
+
+func (m *CSODOTAParty) GetRegionSelectFlags() uint32 {
+	if m != nil && m.RegionSelectFlags != nil {
+		return *m.RegionSelectFlags
 	}
 	return 0
 }

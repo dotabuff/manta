@@ -1059,6 +1059,7 @@ message CSODOTAParty {
 	repeated CSODOTAPartyInvite sent_invites = 41;
 	repeated CSODOTAPartyInvite recv_invites = 42;
 	optional uint32 account_flags = 43;
+	optional uint32 region_select_flags = 44;
 }
 
 message CSODOTAPartyInvite {
