@@ -58,15 +58,15 @@ var testScenarios = map[int64]testScenario{
 	2109130988: {
 		matchId:                "2109130988",
 		replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/2109130988.dem",
-		debugLevel:             10,
-		expectGameBuild:        1234,
-		expectEntityEvents:     0,
+		expectGameBuild:        1253,
+		expectEntityEvents:     1072803,
 		expectCombatLogDamage:  0,
 		expectCombatLogHealing: 0,
 		expectCombatLogDeaths:  0,
 		expectCombatLogEvents:  0,
-		expectUnitOrderEvents:  34862,
+		expectUnitOrderEvents:  40297,
 	},
+
 	1855408730: {
 		matchId:                "1855408730",
 		replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1855408730.dem",

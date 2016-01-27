@@ -153,7 +153,7 @@ func (fp *fieldpath) addField() {
 			// If this panics, the property in question migh have a type that doesn't premit automatic array deduction (e.g. no CUtlVector prefix, or [] suffix).
 			// Adjust the type manualy in property_serializers.go
 
-			_panicf("expected table in fp properties: %v, %v", cDt.Properties[fp.index[i]].Field.Name, cDt.Properties[fp.index[i]].Field.Type)
+			_panicf("expected table for type %s fp properties: %v, %v", cDt.Name, cDt.Properties[fp.index[i]].Field.Name, cDt.Properties[fp.index[i]].Field.Type)
 		}
 	}
 
