@@ -7,6 +7,8 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestMatch2109130988(t *testing.T) { testScenarios[2109130988].test(t) }
+
 func TestMatch1855408730(t *testing.T) { testScenarios[1855408730].test(t) }
 func TestMatch1855345768(t *testing.T) { testScenarios[1855345768].test(t) }
 func TestMatch1855304265(t *testing.T) { testScenarios[1855304265].test(t) }
@@ -51,6 +53,18 @@ type testScenario struct {
 }
 
 var testScenarios = map[int64]testScenario{
+	2109130988: {
+		matchId:                "2109130988",
+		replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/2109130988.dem",
+		debugLevel:             10,
+		expectGameBuild:        1234,
+		expectEntityEvents:     0,
+		expectCombatLogDamage:  0,
+		expectCombatLogHealing: 0,
+		expectCombatLogDeaths:  0,
+		expectCombatLogEvents:  0,
+		expectUnitOrderEvents:  34862,
+	},
 	1855408730: {
 		matchId:                "1855408730",
 		replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1855408730.dem",
