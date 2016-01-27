@@ -1609,6 +1609,7 @@ type CMsgGCPlayerInfo_PlayerInfo struct {
 	Sponsor          *string `protobuf:"bytes,8,opt,name=sponsor" json:"sponsor,omitempty"`
 	IsLocked         *bool   `protobuf:"varint,9,opt,name=is_locked" json:"is_locked,omitempty"`
 	IsPro            *bool   `protobuf:"varint,10,opt,name=is_pro" json:"is_pro,omitempty"`
+	LockedUntil      *uint32 `protobuf:"varint,11,opt,name=locked_until" json:"locked_until,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
@@ -1684,6 +1685,13 @@ func (m *CMsgGCPlayerInfo_PlayerInfo) GetIsPro() bool {
 		return *m.IsPro
 	}
 	return false
+}
+
+func (m *CMsgGCPlayerInfo_PlayerInfo) GetLockedUntil() uint32 {
+	if m != nil && m.LockedUntil != nil {
+		return *m.LockedUntil
+	}
+	return 0
 }
 
 type CMsgGCPlayerInfo_RegionLeaderboard struct {
