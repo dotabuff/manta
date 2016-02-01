@@ -538,6 +538,8 @@ const (
 	EDOTAGCMsg_k_EMsgSQLGCToGCGrantBadgePoints                            EDOTAGCMsg = 7608
 	EDOTAGCMsg_k_EMsgGCToGCGetAccountMatchStatus                          EDOTAGCMsg = 7609
 	EDOTAGCMsg_k_EMsgGCToGCGetAccountMatchStatusResponse                  EDOTAGCMsg = 7610
+	EDOTAGCMsg_k_EMsgGCToGCCheckOwnsEntireEmoticonRange                   EDOTAGCMsg = 7611
+	EDOTAGCMsg_k_EMsgGCToGCCheckOwnsEntireEmoticonRangeResponse           EDOTAGCMsg = 7612
 	EDOTAGCMsg_k_EMsgGCDev_GrantWarKill                                   EDOTAGCMsg = 8001
 	EDOTAGCMsg_k_EMsgClientToGCCreateTeamShowcase                         EDOTAGCMsg = 8002
 	EDOTAGCMsg_k_EMsgGCToClientTeamShowcaseCreateResult                   EDOTAGCMsg = 8003
@@ -624,8 +626,17 @@ const (
 	EDOTAGCMsg_k_EMsgGCToClientPrivateChatResponse                        EDOTAGCMsg = 8091
 	EDOTAGCMsg_k_EMsgClientToGCPrivateChatInfoRequest                     EDOTAGCMsg = 8092
 	EDOTAGCMsg_k_EMsgGCToClientPrivateChatInfoResponse                    EDOTAGCMsg = 8093
-	EDOTAGCMsg_k_EMsgClientToGCLatestBehaviorReportRequest                EDOTAGCMsg = 8095
-	EDOTAGCMsg_k_EMsgClientToGCLatestBehaviorReport                       EDOTAGCMsg = 8096
+	EDOTAGCMsg_k_EMsgClientToGCLatestConductScorecardRequest              EDOTAGCMsg = 8095
+	EDOTAGCMsg_k_EMsgClientToGCLatestConductScorecard                     EDOTAGCMsg = 8096
+	EDOTAGCMsg_k_EMsgServerToGCPostMatchTip                               EDOTAGCMsg = 8097
+	EDOTAGCMsg_k_EMsgServerToGCPostMatchTipResponse                       EDOTAGCMsg = 8098
+	EDOTAGCMsg_k_EMsgClientToGCWageringRequest                            EDOTAGCMsg = 8099
+	EDOTAGCMsg_k_EMsgGCToClientWageringResponse                           EDOTAGCMsg = 8100
+	EDOTAGCMsg_k_EMsgClientToGCMysteryItem                                EDOTAGCMsg = 8101
+	EDOTAGCMsg_k_EMsgGCToClientMysteryItemResponse                        EDOTAGCMsg = 8102
+	EDOTAGCMsg_k_EMsgClientToGCEventGoalsRequest                          EDOTAGCMsg = 8103
+	EDOTAGCMsg_k_EMsgClientToGCEventGoalsResponse                         EDOTAGCMsg = 8104
+	EDOTAGCMsg_k_EMsgGCToGCEventGoalsCacheIncrement                       EDOTAGCMsg = 8105
 )
 
 var EDOTAGCMsg_name = map[int32]string{
@@ -1153,6 +1164,8 @@ var EDOTAGCMsg_name = map[int32]string{
 	7608: "k_EMsgSQLGCToGCGrantBadgePoints",
 	7609: "k_EMsgGCToGCGetAccountMatchStatus",
 	7610: "k_EMsgGCToGCGetAccountMatchStatusResponse",
+	7611: "k_EMsgGCToGCCheckOwnsEntireEmoticonRange",
+	7612: "k_EMsgGCToGCCheckOwnsEntireEmoticonRangeResponse",
 	8001: "k_EMsgGCDev_GrantWarKill",
 	8002: "k_EMsgClientToGCCreateTeamShowcase",
 	8003: "k_EMsgGCToClientTeamShowcaseCreateResult",
@@ -1239,8 +1252,17 @@ var EDOTAGCMsg_name = map[int32]string{
 	8091: "k_EMsgGCToClientPrivateChatResponse",
 	8092: "k_EMsgClientToGCPrivateChatInfoRequest",
 	8093: "k_EMsgGCToClientPrivateChatInfoResponse",
-	8095: "k_EMsgClientToGCLatestBehaviorReportRequest",
-	8096: "k_EMsgClientToGCLatestBehaviorReport",
+	8095: "k_EMsgClientToGCLatestConductScorecardRequest",
+	8096: "k_EMsgClientToGCLatestConductScorecard",
+	8097: "k_EMsgServerToGCPostMatchTip",
+	8098: "k_EMsgServerToGCPostMatchTipResponse",
+	8099: "k_EMsgClientToGCWageringRequest",
+	8100: "k_EMsgGCToClientWageringResponse",
+	8101: "k_EMsgClientToGCMysteryItem",
+	8102: "k_EMsgGCToClientMysteryItemResponse",
+	8103: "k_EMsgClientToGCEventGoalsRequest",
+	8104: "k_EMsgClientToGCEventGoalsResponse",
+	8105: "k_EMsgGCToGCEventGoalsCacheIncrement",
 }
 var EDOTAGCMsg_value = map[string]int32{
 	"k_EMsgGCDOTABase":                                           7000,
@@ -1767,6 +1789,8 @@ var EDOTAGCMsg_value = map[string]int32{
 	"k_EMsgSQLGCToGCGrantBadgePoints":                            7608,
 	"k_EMsgGCToGCGetAccountMatchStatus":                          7609,
 	"k_EMsgGCToGCGetAccountMatchStatusResponse":                  7610,
+	"k_EMsgGCToGCCheckOwnsEntireEmoticonRange":                   7611,
+	"k_EMsgGCToGCCheckOwnsEntireEmoticonRangeResponse":           7612,
 	"k_EMsgGCDev_GrantWarKill":                                   8001,
 	"k_EMsgClientToGCCreateTeamShowcase":                         8002,
 	"k_EMsgGCToClientTeamShowcaseCreateResult":                   8003,
@@ -1853,8 +1877,17 @@ var EDOTAGCMsg_value = map[string]int32{
 	"k_EMsgGCToClientPrivateChatResponse":                        8091,
 	"k_EMsgClientToGCPrivateChatInfoRequest":                     8092,
 	"k_EMsgGCToClientPrivateChatInfoResponse":                    8093,
-	"k_EMsgClientToGCLatestBehaviorReportRequest":                8095,
-	"k_EMsgClientToGCLatestBehaviorReport":                       8096,
+	"k_EMsgClientToGCLatestConductScorecardRequest":              8095,
+	"k_EMsgClientToGCLatestConductScorecard":                     8096,
+	"k_EMsgServerToGCPostMatchTip":                               8097,
+	"k_EMsgServerToGCPostMatchTipResponse":                       8098,
+	"k_EMsgClientToGCWageringRequest":                            8099,
+	"k_EMsgGCToClientWageringResponse":                           8100,
+	"k_EMsgClientToGCMysteryItem":                                8101,
+	"k_EMsgGCToClientMysteryItemResponse":                        8102,
+	"k_EMsgClientToGCEventGoalsRequest":                          8103,
+	"k_EMsgClientToGCEventGoalsResponse":                         8104,
+	"k_EMsgGCToGCEventGoalsCacheIncrement":                       8105,
 }
 
 func (x EDOTAGCMsg) Enum() *EDOTAGCMsg {
@@ -2853,7 +2886,7 @@ const (
 	EEvent_EVENT_ID_ORACLE_PA               EEvent = 10
 	EEvent_EVENT_ID_NEW_BLOOM_2015_PREBEAST EEvent = 11
 	EEvent_EVENT_ID_FROSTIVUS               EEvent = 12
-	EEvent_EVENT_ID_WINTER_MAJOR_2015       EEvent = 13
+	EEvent_EVENT_ID_WINTER_MAJOR_2016       EEvent = 13
 )
 
 var EEvent_name = map[int32]string{
@@ -2870,7 +2903,7 @@ var EEvent_name = map[int32]string{
 	10: "EVENT_ID_ORACLE_PA",
 	11: "EVENT_ID_NEW_BLOOM_2015_PREBEAST",
 	12: "EVENT_ID_FROSTIVUS",
-	13: "EVENT_ID_WINTER_MAJOR_2015",
+	13: "EVENT_ID_WINTER_MAJOR_2016",
 }
 var EEvent_value = map[string]int32{
 	"EVENT_ID_NONE":                    0,
@@ -2886,7 +2919,7 @@ var EEvent_value = map[string]int32{
 	"EVENT_ID_ORACLE_PA":               10,
 	"EVENT_ID_NEW_BLOOM_2015_PREBEAST": 11,
 	"EVENT_ID_FROSTIVUS":               12,
-	"EVENT_ID_WINTER_MAJOR_2015":       13,
+	"EVENT_ID_WINTER_MAJOR_2016":       13,
 }
 
 func (x EEvent) Enum() *EEvent {
@@ -3319,6 +3352,9 @@ const (
 	DOTA_COMBATLOG_TYPES_DOTA_COMBATLOG_HERO_SAVED         DOTA_COMBATLOG_TYPES = 23
 	DOTA_COMBATLOG_TYPES_DOTA_COMBATLOG_MANA_RESTORED      DOTA_COMBATLOG_TYPES = 24
 	DOTA_COMBATLOG_TYPES_DOTA_COMBATLOG_HERO_LEVELUP       DOTA_COMBATLOG_TYPES = 25
+	DOTA_COMBATLOG_TYPES_DOTA_COMBATLOG_BOTTLE_HEAL_ALLY   DOTA_COMBATLOG_TYPES = 26
+	DOTA_COMBATLOG_TYPES_DOTA_COMBATLOG_ENDGAME_STATS      DOTA_COMBATLOG_TYPES = 27
+	DOTA_COMBATLOG_TYPES_DOTA_COMBATLOG_INTERRUPT_CHANNEL  DOTA_COMBATLOG_TYPES = 28
 )
 
 var DOTA_COMBATLOG_TYPES_name = map[int32]string{
@@ -3348,6 +3384,9 @@ var DOTA_COMBATLOG_TYPES_name = map[int32]string{
 	23: "DOTA_COMBATLOG_HERO_SAVED",
 	24: "DOTA_COMBATLOG_MANA_RESTORED",
 	25: "DOTA_COMBATLOG_HERO_LEVELUP",
+	26: "DOTA_COMBATLOG_BOTTLE_HEAL_ALLY",
+	27: "DOTA_COMBATLOG_ENDGAME_STATS",
+	28: "DOTA_COMBATLOG_INTERRUPT_CHANNEL",
 }
 var DOTA_COMBATLOG_TYPES_value = map[string]int32{
 	"DOTA_COMBATLOG_DAMAGE":             0,
@@ -3376,6 +3415,9 @@ var DOTA_COMBATLOG_TYPES_value = map[string]int32{
 	"DOTA_COMBATLOG_HERO_SAVED":         23,
 	"DOTA_COMBATLOG_MANA_RESTORED":      24,
 	"DOTA_COMBATLOG_HERO_LEVELUP":       25,
+	"DOTA_COMBATLOG_BOTTLE_HEAL_ALLY":   26,
+	"DOTA_COMBATLOG_ENDGAME_STATS":      27,
+	"DOTA_COMBATLOG_INTERRUPT_CHANNEL":  28,
 }
 
 func (x DOTA_COMBATLOG_TYPES) Enum() *DOTA_COMBATLOG_TYPES {
@@ -3948,6 +3990,7 @@ type CSODOTAGameAccountClient struct {
 	PlayTimeLevel                            *uint32             `protobuf:"varint,70,opt,name=play_time_level" json:"play_time_level,omitempty"`
 	PlayerBehaviorSeqNumLastReport           *uint32             `protobuf:"varint,71,opt,name=player_behavior_seq_num_last_report" json:"player_behavior_seq_num_last_report,omitempty"`
 	PlayerBehaviorScoreLastReport            *uint32             `protobuf:"varint,72,opt,name=player_behavior_score_last_report" json:"player_behavior_score_last_report,omitempty"`
+	PlayerBehaviorReportOldData              *bool               `protobuf:"varint,73,opt,name=player_behavior_report_old_data" json:"player_behavior_report_old_data,omitempty"`
 	XXX_unrecognized                         []byte              `json:"-"`
 }
 
@@ -4291,6 +4334,13 @@ func (m *CSODOTAGameAccountClient) GetPlayerBehaviorScoreLastReport() uint32 {
 		return *m.PlayerBehaviorScoreLastReport
 	}
 	return 0
+}
+
+func (m *CSODOTAGameAccountClient) GetPlayerBehaviorReportOldData() bool {
+	if m != nil && m.PlayerBehaviorReportOldData != nil {
+		return *m.PlayerBehaviorReportOldData
+	}
+	return false
 }
 
 type CSODOTAPartyMember struct {
@@ -7135,55 +7185,59 @@ func (m *CMsgDOTARedeemItemResponse) GetResponse() CMsgDOTARedeemItemResponse_ER
 }
 
 type CMsgDOTACombatLogEntry struct {
-	Type               *DOTA_COMBATLOG_TYPES `protobuf:"varint,1,opt,name=type,enum=dota.DOTA_COMBATLOG_TYPES,def=0" json:"type,omitempty"`
-	TargetName         *uint32               `protobuf:"varint,2,opt,name=target_name" json:"target_name,omitempty"`
-	TargetSourceName   *uint32               `protobuf:"varint,3,opt,name=target_source_name" json:"target_source_name,omitempty"`
-	AttackerName       *uint32               `protobuf:"varint,4,opt,name=attacker_name" json:"attacker_name,omitempty"`
-	DamageSourceName   *uint32               `protobuf:"varint,5,opt,name=damage_source_name" json:"damage_source_name,omitempty"`
-	InflictorName      *uint32               `protobuf:"varint,6,opt,name=inflictor_name" json:"inflictor_name,omitempty"`
-	IsAttackerIllusion *bool                 `protobuf:"varint,7,opt,name=is_attacker_illusion" json:"is_attacker_illusion,omitempty"`
-	IsAttackerHero     *bool                 `protobuf:"varint,8,opt,name=is_attacker_hero" json:"is_attacker_hero,omitempty"`
-	IsTargetIllusion   *bool                 `protobuf:"varint,9,opt,name=is_target_illusion" json:"is_target_illusion,omitempty"`
-	IsTargetHero       *bool                 `protobuf:"varint,10,opt,name=is_target_hero" json:"is_target_hero,omitempty"`
-	IsVisibleRadiant   *bool                 `protobuf:"varint,11,opt,name=is_visible_radiant" json:"is_visible_radiant,omitempty"`
-	IsVisibleDire      *bool                 `protobuf:"varint,12,opt,name=is_visible_dire" json:"is_visible_dire,omitempty"`
-	Value              *uint32               `protobuf:"varint,13,opt,name=value" json:"value,omitempty"`
-	Health             *int32                `protobuf:"varint,14,opt,name=health" json:"health,omitempty"`
-	Timestamp          *float32              `protobuf:"fixed32,15,opt,name=timestamp" json:"timestamp,omitempty"`
-	StunDuration       *float32              `protobuf:"fixed32,16,opt,name=stun_duration" json:"stun_duration,omitempty"`
-	SlowDuration       *float32              `protobuf:"fixed32,17,opt,name=slow_duration" json:"slow_duration,omitempty"`
-	IsAbilityToggleOn  *bool                 `protobuf:"varint,18,opt,name=is_ability_toggle_on" json:"is_ability_toggle_on,omitempty"`
-	IsAbilityToggleOff *bool                 `protobuf:"varint,19,opt,name=is_ability_toggle_off" json:"is_ability_toggle_off,omitempty"`
-	AbilityLevel       *uint32               `protobuf:"varint,20,opt,name=ability_level" json:"ability_level,omitempty"`
-	LocationX          *float32              `protobuf:"fixed32,21,opt,name=location_x" json:"location_x,omitempty"`
-	LocationY          *float32              `protobuf:"fixed32,22,opt,name=location_y" json:"location_y,omitempty"`
-	GoldReason         *uint32               `protobuf:"varint,23,opt,name=gold_reason" json:"gold_reason,omitempty"`
-	TimestampRaw       *float32              `protobuf:"fixed32,24,opt,name=timestamp_raw" json:"timestamp_raw,omitempty"`
-	ModifierDuration   *float32              `protobuf:"fixed32,25,opt,name=modifier_duration" json:"modifier_duration,omitempty"`
-	XpReason           *uint32               `protobuf:"varint,26,opt,name=xp_reason" json:"xp_reason,omitempty"`
-	LastHits           *uint32               `protobuf:"varint,27,opt,name=last_hits" json:"last_hits,omitempty"`
-	AttackerTeam       *uint32               `protobuf:"varint,28,opt,name=attacker_team" json:"attacker_team,omitempty"`
-	TargetTeam         *uint32               `protobuf:"varint,29,opt,name=target_team" json:"target_team,omitempty"`
-	ObsWardsPlaced     *uint32               `protobuf:"varint,30,opt,name=obs_wards_placed" json:"obs_wards_placed,omitempty"`
-	AssistPlayer0      *uint32               `protobuf:"varint,31,opt,name=assist_player0" json:"assist_player0,omitempty"`
-	AssistPlayer1      *uint32               `protobuf:"varint,32,opt,name=assist_player1" json:"assist_player1,omitempty"`
-	AssistPlayer2      *uint32               `protobuf:"varint,33,opt,name=assist_player2" json:"assist_player2,omitempty"`
-	AssistPlayer3      *uint32               `protobuf:"varint,34,opt,name=assist_player3" json:"assist_player3,omitempty"`
-	StackCount         *uint32               `protobuf:"varint,35,opt,name=stack_count" json:"stack_count,omitempty"`
-	HiddenModifier     *bool                 `protobuf:"varint,36,opt,name=hidden_modifier" json:"hidden_modifier,omitempty"`
-	IsTargetBuilding   *bool                 `protobuf:"varint,37,opt,name=is_target_building" json:"is_target_building,omitempty"`
-	NeutralCampType    *uint32               `protobuf:"varint,38,opt,name=neutral_camp_type" json:"neutral_camp_type,omitempty"`
-	RuneType           *uint32               `protobuf:"varint,39,opt,name=rune_type" json:"rune_type,omitempty"`
-	AssistPlayers      []uint32              `protobuf:"varint,40,rep,name=assist_players" json:"assist_players,omitempty"`
-	IsHealSave         *bool                 `protobuf:"varint,41,opt,name=is_heal_save" json:"is_heal_save,omitempty"`
-	IsUltimateAbility  *bool                 `protobuf:"varint,42,opt,name=is_ultimate_ability" json:"is_ultimate_ability,omitempty"`
-	AttackerHeroLevel  *uint32               `protobuf:"varint,43,opt,name=attacker_hero_level" json:"attacker_hero_level,omitempty"`
-	TargetHeroLevel    *uint32               `protobuf:"varint,44,opt,name=target_hero_level" json:"target_hero_level,omitempty"`
-	Xpm                *uint32               `protobuf:"varint,45,opt,name=xpm" json:"xpm,omitempty"`
-	Gpm                *uint32               `protobuf:"varint,46,opt,name=gpm" json:"gpm,omitempty"`
-	EventLocation      *uint32               `protobuf:"varint,47,opt,name=event_location" json:"event_location,omitempty"`
-	TargetIsSelf       *bool                 `protobuf:"varint,48,opt,name=target_is_self" json:"target_is_self,omitempty"`
-	XXX_unrecognized   []byte                `json:"-"`
+	Type                 *DOTA_COMBATLOG_TYPES `protobuf:"varint,1,opt,name=type,enum=dota.DOTA_COMBATLOG_TYPES,def=0" json:"type,omitempty"`
+	TargetName           *uint32               `protobuf:"varint,2,opt,name=target_name" json:"target_name,omitempty"`
+	TargetSourceName     *uint32               `protobuf:"varint,3,opt,name=target_source_name" json:"target_source_name,omitempty"`
+	AttackerName         *uint32               `protobuf:"varint,4,opt,name=attacker_name" json:"attacker_name,omitempty"`
+	DamageSourceName     *uint32               `protobuf:"varint,5,opt,name=damage_source_name" json:"damage_source_name,omitempty"`
+	InflictorName        *uint32               `protobuf:"varint,6,opt,name=inflictor_name" json:"inflictor_name,omitempty"`
+	IsAttackerIllusion   *bool                 `protobuf:"varint,7,opt,name=is_attacker_illusion" json:"is_attacker_illusion,omitempty"`
+	IsAttackerHero       *bool                 `protobuf:"varint,8,opt,name=is_attacker_hero" json:"is_attacker_hero,omitempty"`
+	IsTargetIllusion     *bool                 `protobuf:"varint,9,opt,name=is_target_illusion" json:"is_target_illusion,omitempty"`
+	IsTargetHero         *bool                 `protobuf:"varint,10,opt,name=is_target_hero" json:"is_target_hero,omitempty"`
+	IsVisibleRadiant     *bool                 `protobuf:"varint,11,opt,name=is_visible_radiant" json:"is_visible_radiant,omitempty"`
+	IsVisibleDire        *bool                 `protobuf:"varint,12,opt,name=is_visible_dire" json:"is_visible_dire,omitempty"`
+	Value                *uint32               `protobuf:"varint,13,opt,name=value" json:"value,omitempty"`
+	Health               *int32                `protobuf:"varint,14,opt,name=health" json:"health,omitempty"`
+	Timestamp            *float32              `protobuf:"fixed32,15,opt,name=timestamp" json:"timestamp,omitempty"`
+	StunDuration         *float32              `protobuf:"fixed32,16,opt,name=stun_duration" json:"stun_duration,omitempty"`
+	SlowDuration         *float32              `protobuf:"fixed32,17,opt,name=slow_duration" json:"slow_duration,omitempty"`
+	IsAbilityToggleOn    *bool                 `protobuf:"varint,18,opt,name=is_ability_toggle_on" json:"is_ability_toggle_on,omitempty"`
+	IsAbilityToggleOff   *bool                 `protobuf:"varint,19,opt,name=is_ability_toggle_off" json:"is_ability_toggle_off,omitempty"`
+	AbilityLevel         *uint32               `protobuf:"varint,20,opt,name=ability_level" json:"ability_level,omitempty"`
+	LocationX            *float32              `protobuf:"fixed32,21,opt,name=location_x" json:"location_x,omitempty"`
+	LocationY            *float32              `protobuf:"fixed32,22,opt,name=location_y" json:"location_y,omitempty"`
+	GoldReason           *uint32               `protobuf:"varint,23,opt,name=gold_reason" json:"gold_reason,omitempty"`
+	TimestampRaw         *float32              `protobuf:"fixed32,24,opt,name=timestamp_raw" json:"timestamp_raw,omitempty"`
+	ModifierDuration     *float32              `protobuf:"fixed32,25,opt,name=modifier_duration" json:"modifier_duration,omitempty"`
+	XpReason             *uint32               `protobuf:"varint,26,opt,name=xp_reason" json:"xp_reason,omitempty"`
+	LastHits             *uint32               `protobuf:"varint,27,opt,name=last_hits" json:"last_hits,omitempty"`
+	AttackerTeam         *uint32               `protobuf:"varint,28,opt,name=attacker_team" json:"attacker_team,omitempty"`
+	TargetTeam           *uint32               `protobuf:"varint,29,opt,name=target_team" json:"target_team,omitempty"`
+	ObsWardsPlaced       *uint32               `protobuf:"varint,30,opt,name=obs_wards_placed" json:"obs_wards_placed,omitempty"`
+	AssistPlayer0        *uint32               `protobuf:"varint,31,opt,name=assist_player0" json:"assist_player0,omitempty"`
+	AssistPlayer1        *uint32               `protobuf:"varint,32,opt,name=assist_player1" json:"assist_player1,omitempty"`
+	AssistPlayer2        *uint32               `protobuf:"varint,33,opt,name=assist_player2" json:"assist_player2,omitempty"`
+	AssistPlayer3        *uint32               `protobuf:"varint,34,opt,name=assist_player3" json:"assist_player3,omitempty"`
+	StackCount           *uint32               `protobuf:"varint,35,opt,name=stack_count" json:"stack_count,omitempty"`
+	HiddenModifier       *bool                 `protobuf:"varint,36,opt,name=hidden_modifier" json:"hidden_modifier,omitempty"`
+	IsTargetBuilding     *bool                 `protobuf:"varint,37,opt,name=is_target_building" json:"is_target_building,omitempty"`
+	NeutralCampType      *uint32               `protobuf:"varint,38,opt,name=neutral_camp_type" json:"neutral_camp_type,omitempty"`
+	RuneType             *uint32               `protobuf:"varint,39,opt,name=rune_type" json:"rune_type,omitempty"`
+	AssistPlayers        []uint32              `protobuf:"varint,40,rep,name=assist_players" json:"assist_players,omitempty"`
+	IsHealSave           *bool                 `protobuf:"varint,41,opt,name=is_heal_save" json:"is_heal_save,omitempty"`
+	IsUltimateAbility    *bool                 `protobuf:"varint,42,opt,name=is_ultimate_ability" json:"is_ultimate_ability,omitempty"`
+	AttackerHeroLevel    *uint32               `protobuf:"varint,43,opt,name=attacker_hero_level" json:"attacker_hero_level,omitempty"`
+	TargetHeroLevel      *uint32               `protobuf:"varint,44,opt,name=target_hero_level" json:"target_hero_level,omitempty"`
+	Xpm                  *uint32               `protobuf:"varint,45,opt,name=xpm" json:"xpm,omitempty"`
+	Gpm                  *uint32               `protobuf:"varint,46,opt,name=gpm" json:"gpm,omitempty"`
+	EventLocation        *uint32               `protobuf:"varint,47,opt,name=event_location" json:"event_location,omitempty"`
+	TargetIsSelf         *bool                 `protobuf:"varint,48,opt,name=target_is_self" json:"target_is_self,omitempty"`
+	DamageType           *uint32               `protobuf:"varint,49,opt,name=damage_type" json:"damage_type,omitempty"`
+	InvisibilityModifier *bool                 `protobuf:"varint,50,opt,name=invisibility_modifier" json:"invisibility_modifier,omitempty"`
+	DamageCategory       *uint32               `protobuf:"varint,51,opt,name=damage_category" json:"damage_category,omitempty"`
+	Networth             *uint32               `protobuf:"varint,52,opt,name=networth" json:"networth,omitempty"`
+	XXX_unrecognized     []byte                `json:"-"`
 }
 
 func (m *CMsgDOTACombatLogEntry) Reset()         { *m = CMsgDOTACombatLogEntry{} }
@@ -7526,6 +7580,34 @@ func (m *CMsgDOTACombatLogEntry) GetTargetIsSelf() bool {
 		return *m.TargetIsSelf
 	}
 	return false
+}
+
+func (m *CMsgDOTACombatLogEntry) GetDamageType() uint32 {
+	if m != nil && m.DamageType != nil {
+		return *m.DamageType
+	}
+	return 0
+}
+
+func (m *CMsgDOTACombatLogEntry) GetInvisibilityModifier() bool {
+	if m != nil && m.InvisibilityModifier != nil {
+		return *m.InvisibilityModifier
+	}
+	return false
+}
+
+func (m *CMsgDOTACombatLogEntry) GetDamageCategory() uint32 {
+	if m != nil && m.DamageCategory != nil {
+		return *m.DamageCategory
+	}
+	return 0
+}
+
+func (m *CMsgDOTACombatLogEntry) GetNetworth() uint32 {
+	if m != nil && m.Networth != nil {
+		return *m.Networth
+	}
+	return 0
 }
 
 type CMsgDOTAProfileCard struct {
@@ -9554,6 +9636,192 @@ func (m *CMsgDOTASDOHeroStatsHistory) GetDeaths() uint32 {
 func (m *CMsgDOTASDOHeroStatsHistory) GetAssists() uint32 {
 	if m != nil && m.Assists != nil {
 		return *m.Assists
+	}
+	return 0
+}
+
+type CMsgDOTASeasonRewards struct {
+	Rewards          []*CMsgDOTASeasonRewards_Reward `protobuf:"bytes,1,rep,name=rewards" json:"rewards,omitempty"`
+	XXX_unrecognized []byte                          `json:"-"`
+}
+
+func (m *CMsgDOTASeasonRewards) Reset()         { *m = CMsgDOTASeasonRewards{} }
+func (m *CMsgDOTASeasonRewards) String() string { return proto.CompactTextString(m) }
+func (*CMsgDOTASeasonRewards) ProtoMessage()    {}
+
+func (m *CMsgDOTASeasonRewards) GetRewards() []*CMsgDOTASeasonRewards_Reward {
+	if m != nil {
+		return m.Rewards
+	}
+	return nil
+}
+
+type CMsgDOTASeasonRewards_Reward struct {
+	Name             *string `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
+	Itemdef          *uint32 `protobuf:"varint,2,opt,name=itemdef" json:"itemdef,omitempty"`
+	Importance       *uint32 `protobuf:"varint,3,opt,name=importance" json:"importance,omitempty"`
+	BaseLevel        *uint32 `protobuf:"varint,4,opt,name=base_level" json:"base_level,omitempty"`
+	RepeatLevel      *uint32 `protobuf:"varint,5,opt,name=repeat_level" json:"repeat_level,omitempty"`
+	RewardType       *uint32 `protobuf:"varint,6,opt,name=reward_type" json:"reward_type,omitempty"`
+	Image            *string `protobuf:"bytes,7,opt,name=image" json:"image,omitempty"`
+	ActionId         *uint32 `protobuf:"varint,8,opt,name=action_id" json:"action_id,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CMsgDOTASeasonRewards_Reward) Reset()         { *m = CMsgDOTASeasonRewards_Reward{} }
+func (m *CMsgDOTASeasonRewards_Reward) String() string { return proto.CompactTextString(m) }
+func (*CMsgDOTASeasonRewards_Reward) ProtoMessage()    {}
+
+func (m *CMsgDOTASeasonRewards_Reward) GetName() string {
+	if m != nil && m.Name != nil {
+		return *m.Name
+	}
+	return ""
+}
+
+func (m *CMsgDOTASeasonRewards_Reward) GetItemdef() uint32 {
+	if m != nil && m.Itemdef != nil {
+		return *m.Itemdef
+	}
+	return 0
+}
+
+func (m *CMsgDOTASeasonRewards_Reward) GetImportance() uint32 {
+	if m != nil && m.Importance != nil {
+		return *m.Importance
+	}
+	return 0
+}
+
+func (m *CMsgDOTASeasonRewards_Reward) GetBaseLevel() uint32 {
+	if m != nil && m.BaseLevel != nil {
+		return *m.BaseLevel
+	}
+	return 0
+}
+
+func (m *CMsgDOTASeasonRewards_Reward) GetRepeatLevel() uint32 {
+	if m != nil && m.RepeatLevel != nil {
+		return *m.RepeatLevel
+	}
+	return 0
+}
+
+func (m *CMsgDOTASeasonRewards_Reward) GetRewardType() uint32 {
+	if m != nil && m.RewardType != nil {
+		return *m.RewardType
+	}
+	return 0
+}
+
+func (m *CMsgDOTASeasonRewards_Reward) GetImage() string {
+	if m != nil && m.Image != nil {
+		return *m.Image
+	}
+	return ""
+}
+
+func (m *CMsgDOTASeasonRewards_Reward) GetActionId() uint32 {
+	if m != nil && m.ActionId != nil {
+		return *m.ActionId
+	}
+	return 0
+}
+
+type CMsgDOTASeasonAchievements struct {
+	Achievements     []*CMsgDOTASeasonAchievements_Achievement `protobuf:"bytes,1,rep,name=achievements" json:"achievements,omitempty"`
+	XXX_unrecognized []byte                                    `json:"-"`
+}
+
+func (m *CMsgDOTASeasonAchievements) Reset()         { *m = CMsgDOTASeasonAchievements{} }
+func (m *CMsgDOTASeasonAchievements) String() string { return proto.CompactTextString(m) }
+func (*CMsgDOTASeasonAchievements) ProtoMessage()    {}
+
+func (m *CMsgDOTASeasonAchievements) GetAchievements() []*CMsgDOTASeasonAchievements_Achievement {
+	if m != nil {
+		return m.Achievements
+	}
+	return nil
+}
+
+type CMsgDOTASeasonAchievements_Achievement struct {
+	Name                *string `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
+	Description         *string `protobuf:"bytes,2,opt,name=description" json:"description,omitempty"`
+	Image               *string `protobuf:"bytes,3,opt,name=image" json:"image,omitempty"`
+	ActionId            *uint32 `protobuf:"varint,4,opt,name=action_id" json:"action_id,omitempty"`
+	MaxGrants           *uint32 `protobuf:"varint,5,opt,name=max_grants" json:"max_grants,omitempty"`
+	NormalPoints        *uint32 `protobuf:"varint,6,opt,name=normal_points" json:"normal_points,omitempty"`
+	TrackingAchievement *uint32 `protobuf:"varint,7,opt,name=tracking_achievement" json:"tracking_achievement,omitempty"`
+	AchievementGoal     *uint32 `protobuf:"varint,8,opt,name=achievement_goal" json:"achievement_goal,omitempty"`
+	AchievementLevel    *uint32 `protobuf:"varint,9,opt,name=achievement_level" json:"achievement_level,omitempty"`
+	XXX_unrecognized    []byte  `json:"-"`
+}
+
+func (m *CMsgDOTASeasonAchievements_Achievement) Reset() {
+	*m = CMsgDOTASeasonAchievements_Achievement{}
+}
+func (m *CMsgDOTASeasonAchievements_Achievement) String() string { return proto.CompactTextString(m) }
+func (*CMsgDOTASeasonAchievements_Achievement) ProtoMessage()    {}
+
+func (m *CMsgDOTASeasonAchievements_Achievement) GetName() string {
+	if m != nil && m.Name != nil {
+		return *m.Name
+	}
+	return ""
+}
+
+func (m *CMsgDOTASeasonAchievements_Achievement) GetDescription() string {
+	if m != nil && m.Description != nil {
+		return *m.Description
+	}
+	return ""
+}
+
+func (m *CMsgDOTASeasonAchievements_Achievement) GetImage() string {
+	if m != nil && m.Image != nil {
+		return *m.Image
+	}
+	return ""
+}
+
+func (m *CMsgDOTASeasonAchievements_Achievement) GetActionId() uint32 {
+	if m != nil && m.ActionId != nil {
+		return *m.ActionId
+	}
+	return 0
+}
+
+func (m *CMsgDOTASeasonAchievements_Achievement) GetMaxGrants() uint32 {
+	if m != nil && m.MaxGrants != nil {
+		return *m.MaxGrants
+	}
+	return 0
+}
+
+func (m *CMsgDOTASeasonAchievements_Achievement) GetNormalPoints() uint32 {
+	if m != nil && m.NormalPoints != nil {
+		return *m.NormalPoints
+	}
+	return 0
+}
+
+func (m *CMsgDOTASeasonAchievements_Achievement) GetTrackingAchievement() uint32 {
+	if m != nil && m.TrackingAchievement != nil {
+		return *m.TrackingAchievement
+	}
+	return 0
+}
+
+func (m *CMsgDOTASeasonAchievements_Achievement) GetAchievementGoal() uint32 {
+	if m != nil && m.AchievementGoal != nil {
+		return *m.AchievementGoal
+	}
+	return 0
+}
+
+func (m *CMsgDOTASeasonAchievements_Achievement) GetAchievementLevel() uint32 {
+	if m != nil && m.AchievementLevel != nil {
+		return *m.AchievementLevel
 	}
 	return 0
 }

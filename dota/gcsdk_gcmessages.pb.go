@@ -653,6 +653,38 @@ func (m *CGCToGCMsgMasterAck_Response) GetEresult() int32 {
 	return Default_CGCToGCMsgMasterAck_Response_Eresult
 }
 
+type CMsgGCToGCUniverseStartup struct {
+	IsInitialStartup *bool  `protobuf:"varint,1,opt,name=is_initial_startup" json:"is_initial_startup,omitempty"`
+	XXX_unrecognized []byte `json:"-"`
+}
+
+func (m *CMsgGCToGCUniverseStartup) Reset()         { *m = CMsgGCToGCUniverseStartup{} }
+func (m *CMsgGCToGCUniverseStartup) String() string { return proto.CompactTextString(m) }
+func (*CMsgGCToGCUniverseStartup) ProtoMessage()    {}
+
+func (m *CMsgGCToGCUniverseStartup) GetIsInitialStartup() bool {
+	if m != nil && m.IsInitialStartup != nil {
+		return *m.IsInitialStartup
+	}
+	return false
+}
+
+type CMsgGCToGCUniverseStartupResponse struct {
+	Eresult          *int32 `protobuf:"varint,1,opt,name=eresult" json:"eresult,omitempty"`
+	XXX_unrecognized []byte `json:"-"`
+}
+
+func (m *CMsgGCToGCUniverseStartupResponse) Reset()         { *m = CMsgGCToGCUniverseStartupResponse{} }
+func (m *CMsgGCToGCUniverseStartupResponse) String() string { return proto.CompactTextString(m) }
+func (*CMsgGCToGCUniverseStartupResponse) ProtoMessage()    {}
+
+func (m *CMsgGCToGCUniverseStartupResponse) GetEresult() int32 {
+	if m != nil && m.Eresult != nil {
+		return *m.Eresult
+	}
+	return 0
+}
+
 type CGCToGCMsgMasterStartupComplete struct {
 	GcInfo           []*CGCToGCMsgMasterStartupComplete_GCInfo `protobuf:"bytes,1,rep,name=gc_info" json:"gc_info,omitempty"`
 	XXX_unrecognized []byte                                    `json:"-"`

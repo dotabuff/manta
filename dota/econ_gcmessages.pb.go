@@ -16,8 +16,6 @@ type EGCItemMsg int32
 const (
 	EGCItemMsg_k_EMsgGCBase                                   EGCItemMsg = 1000
 	EGCItemMsg_k_EMsgGCSetItemPosition                        EGCItemMsg = 1001
-	EGCItemMsg_k_EMsgGCCraft                                  EGCItemMsg = 1002
-	EGCItemMsg_k_EMsgGCCraftResponse                          EGCItemMsg = 1003
 	EGCItemMsg_k_EMsgGCDelete                                 EGCItemMsg = 1004
 	EGCItemMsg_k_EMsgGCVerifyCacheSubscription                EGCItemMsg = 1005
 	EGCItemMsg_k_EMsgClientToGCNameItem                       EGCItemMsg = 1006
@@ -194,8 +192,6 @@ const (
 var EGCItemMsg_name = map[int32]string{
 	1000: "k_EMsgGCBase",
 	1001: "k_EMsgGCSetItemPosition",
-	1002: "k_EMsgGCCraft",
-	1003: "k_EMsgGCCraftResponse",
 	1004: "k_EMsgGCDelete",
 	1005: "k_EMsgGCVerifyCacheSubscription",
 	1006: "k_EMsgClientToGCNameItem",
@@ -371,8 +367,6 @@ var EGCItemMsg_name = map[int32]string{
 var EGCItemMsg_value = map[string]int32{
 	"k_EMsgGCBase":                                   1000,
 	"k_EMsgGCSetItemPosition":                        1001,
-	"k_EMsgGCCraft":                                  1002,
-	"k_EMsgGCCraftResponse":                          1003,
 	"k_EMsgGCDelete":                                 1004,
 	"k_EMsgGCVerifyCacheSubscription":                1005,
 	"k_EMsgClientToGCNameItem":                       1006,
@@ -1684,6 +1678,7 @@ func (m *CMsgRequestCrateItems) GetCrateItemDef() uint32 {
 type CMsgRequestCrateItemsResponse struct {
 	Response         *uint32  `protobuf:"varint,1,opt,name=response" json:"response,omitempty"`
 	ItemDefs         []uint32 `protobuf:"varint,2,rep,name=item_defs" json:"item_defs,omitempty"`
+	PeekItemDef      *uint32  `protobuf:"varint,3,opt,name=peek_item_def" json:"peek_item_def,omitempty"`
 	XXX_unrecognized []byte   `json:"-"`
 }
 
@@ -1703,6 +1698,13 @@ func (m *CMsgRequestCrateItemsResponse) GetItemDefs() []uint32 {
 		return m.ItemDefs
 	}
 	return nil
+}
+
+func (m *CMsgRequestCrateItemsResponse) GetPeekItemDef() uint32 {
+	if m != nil && m.PeekItemDef != nil {
+		return *m.PeekItemDef
+	}
+	return 0
 }
 
 type CMsgGCToGCCanUseDropRateBonus struct {
@@ -1935,7 +1937,7 @@ type CMsgGCToGCGrantAccountRolledItems struct {
 	AccountId        *uint32                                   `protobuf:"varint,1,opt,name=account_id" json:"account_id,omitempty"`
 	Items            []*CMsgGCToGCGrantAccountRolledItems_Item `protobuf:"bytes,2,rep,name=items" json:"items,omitempty"`
 	AuditAction      *uint32                                   `protobuf:"varint,3,opt,name=audit_action" json:"audit_action,omitempty"`
-	AuditData        *uint32                                   `protobuf:"varint,4,opt,name=audit_data" json:"audit_data,omitempty"`
+	AuditData        *uint64                                   `protobuf:"varint,4,opt,name=audit_data" json:"audit_data,omitempty"`
 	XXX_unrecognized []byte                                    `json:"-"`
 }
 
@@ -1964,7 +1966,7 @@ func (m *CMsgGCToGCGrantAccountRolledItems) GetAuditAction() uint32 {
 	return 0
 }
 
-func (m *CMsgGCToGCGrantAccountRolledItems) GetAuditData() uint32 {
+func (m *CMsgGCToGCGrantAccountRolledItems) GetAuditData() uint64 {
 	if m != nil && m.AuditData != nil {
 		return *m.AuditData
 	}
@@ -2076,7 +2078,7 @@ func (m *CMsgGCToGCGrantAccountRolledItems_Item_DynamicAttribute) GetValueFloat(
 type CMsgGCToGCGrantAccountRolledItems_Item_AdditionalAuditEntry struct {
 	OwnerAccountId   *uint32 `protobuf:"varint,1,opt,name=owner_account_id" json:"owner_account_id,omitempty"`
 	AuditAction      *uint32 `protobuf:"varint,2,opt,name=audit_action" json:"audit_action,omitempty"`
-	AuditData        *uint32 `protobuf:"varint,3,opt,name=audit_data" json:"audit_data,omitempty"`
+	AuditData        *uint64 `protobuf:"varint,3,opt,name=audit_data" json:"audit_data,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
@@ -2102,7 +2104,7 @@ func (m *CMsgGCToGCGrantAccountRolledItems_Item_AdditionalAuditEntry) GetAuditAc
 	return 0
 }
 
-func (m *CMsgGCToGCGrantAccountRolledItems_Item_AdditionalAuditEntry) GetAuditData() uint32 {
+func (m *CMsgGCToGCGrantAccountRolledItems_Item_AdditionalAuditEntry) GetAuditData() uint64 {
 	if m != nil && m.AuditData != nil {
 		return *m.AuditData
 	}

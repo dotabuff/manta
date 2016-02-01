@@ -494,6 +494,39 @@ func (x *CMsgGCToServerPredictionResult_Prediction_EResult) UnmarshalJSON(data [
 	return nil
 }
 
+type CMsgServerToGCPostMatchTipResponse_Result int32
+
+const (
+	CMsgServerToGCPostMatchTipResponse_SUCCESS CMsgServerToGCPostMatchTipResponse_Result = 0
+	CMsgServerToGCPostMatchTipResponse_FAILURE CMsgServerToGCPostMatchTipResponse_Result = 1
+)
+
+var CMsgServerToGCPostMatchTipResponse_Result_name = map[int32]string{
+	0: "SUCCESS",
+	1: "FAILURE",
+}
+var CMsgServerToGCPostMatchTipResponse_Result_value = map[string]int32{
+	"SUCCESS": 0,
+	"FAILURE": 1,
+}
+
+func (x CMsgServerToGCPostMatchTipResponse_Result) Enum() *CMsgServerToGCPostMatchTipResponse_Result {
+	p := new(CMsgServerToGCPostMatchTipResponse_Result)
+	*p = x
+	return p
+}
+func (x CMsgServerToGCPostMatchTipResponse_Result) String() string {
+	return proto.EnumName(CMsgServerToGCPostMatchTipResponse_Result_name, int32(x))
+}
+func (x *CMsgServerToGCPostMatchTipResponse_Result) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(CMsgServerToGCPostMatchTipResponse_Result_value, data, "CMsgServerToGCPostMatchTipResponse_Result")
+	if err != nil {
+		return err
+	}
+	*x = CMsgServerToGCPostMatchTipResponse_Result(value)
+	return nil
+}
+
 type CMsgSpawnLootGreevil struct {
 	Rare             *bool  `protobuf:"varint,1,opt,name=rare" json:"rare,omitempty"`
 	XXX_unrecognized []byte `json:"-"`
@@ -1420,6 +1453,7 @@ type CMsgGameMatchSignOut struct {
 	BonusGoldLoserMin20           *int32                                        `protobuf:"zigzag32,33,opt,name=bonus_gold_loser_min20" json:"bonus_gold_loser_min20,omitempty"`
 	BonusGoldLoserTotal           *uint32                                       `protobuf:"varint,34,opt,name=bonus_gold_loser_total" json:"bonus_gold_loser_total,omitempty"`
 	CustomGameData                *CMsgGameMatchSignOut_CCustomGameData         `protobuf:"bytes,37,opt,name=custom_game_data" json:"custom_game_data,omitempty"`
+	MatchFlags                    *uint32                                       `protobuf:"varint,38,opt,name=match_flags" json:"match_flags,omitempty"`
 	XXX_unrecognized              []byte                                        `json:"-"`
 }
 
@@ -1677,6 +1711,13 @@ func (m *CMsgGameMatchSignOut) GetCustomGameData() *CMsgGameMatchSignOut_CCustom
 		return m.CustomGameData
 	}
 	return nil
+}
+
+func (m *CMsgGameMatchSignOut) GetMatchFlags() uint32 {
+	if m != nil && m.MatchFlags != nil {
+		return *m.MatchFlags
+	}
+	return 0
 }
 
 type CMsgGameMatchSignOut_CTeam struct {
@@ -3856,6 +3897,7 @@ type CMsgDOTAAwardEventPoints struct {
 	MatchId          *uint64                                 `protobuf:"varint,2,opt,name=match_id" json:"match_id,omitempty"`
 	EventId          *uint32                                 `protobuf:"varint,4,opt,name=event_id" json:"event_id,omitempty"`
 	Timestamp        *uint32                                 `protobuf:"varint,5,opt,name=timestamp" json:"timestamp,omitempty"`
+	AuditAction      *uint32                                 `protobuf:"varint,6,opt,name=audit_action" json:"audit_action,omitempty"`
 	XXX_unrecognized []byte                                  `json:"-"`
 }
 
@@ -3887,6 +3929,13 @@ func (m *CMsgDOTAAwardEventPoints) GetEventId() uint32 {
 func (m *CMsgDOTAAwardEventPoints) GetTimestamp() uint32 {
 	if m != nil && m.Timestamp != nil {
 		return *m.Timestamp
+	}
+	return 0
+}
+
+func (m *CMsgDOTAAwardEventPoints) GetAuditAction() uint32 {
+	if m != nil && m.AuditAction != nil {
+		return *m.AuditAction
 	}
 	return 0
 }
@@ -5495,6 +5544,96 @@ func (m *CMsgSignOutXPCoins_Player) GetCoinsSpent() uint32 {
 	return 0
 }
 
+type CMsgServerToGCPostMatchTip struct {
+	EventId            *uint32 `protobuf:"varint,1,opt,name=event_id" json:"event_id,omitempty"`
+	MatchId            *uint64 `protobuf:"varint,2,opt,name=match_id" json:"match_id,omitempty"`
+	TipperAccountId    *uint32 `protobuf:"varint,3,opt,name=tipper_account_id" json:"tipper_account_id,omitempty"`
+	RecipientAccountId *uint32 `protobuf:"varint,4,opt,name=recipient_account_id" json:"recipient_account_id,omitempty"`
+	TipAmount          *uint32 `protobuf:"varint,5,opt,name=tip_amount" json:"tip_amount,omitempty"`
+	XXX_unrecognized   []byte  `json:"-"`
+}
+
+func (m *CMsgServerToGCPostMatchTip) Reset()         { *m = CMsgServerToGCPostMatchTip{} }
+func (m *CMsgServerToGCPostMatchTip) String() string { return proto.CompactTextString(m) }
+func (*CMsgServerToGCPostMatchTip) ProtoMessage()    {}
+
+func (m *CMsgServerToGCPostMatchTip) GetEventId() uint32 {
+	if m != nil && m.EventId != nil {
+		return *m.EventId
+	}
+	return 0
+}
+
+func (m *CMsgServerToGCPostMatchTip) GetMatchId() uint64 {
+	if m != nil && m.MatchId != nil {
+		return *m.MatchId
+	}
+	return 0
+}
+
+func (m *CMsgServerToGCPostMatchTip) GetTipperAccountId() uint32 {
+	if m != nil && m.TipperAccountId != nil {
+		return *m.TipperAccountId
+	}
+	return 0
+}
+
+func (m *CMsgServerToGCPostMatchTip) GetRecipientAccountId() uint32 {
+	if m != nil && m.RecipientAccountId != nil {
+		return *m.RecipientAccountId
+	}
+	return 0
+}
+
+func (m *CMsgServerToGCPostMatchTip) GetTipAmount() uint32 {
+	if m != nil && m.TipAmount != nil {
+		return *m.TipAmount
+	}
+	return 0
+}
+
+type CMsgServerToGCPostMatchTipResponse struct {
+	MatchId            *uint64                                    `protobuf:"varint,1,opt,name=match_id" json:"match_id,omitempty"`
+	TipperAccountId    *uint32                                    `protobuf:"varint,2,opt,name=tipper_account_id" json:"tipper_account_id,omitempty"`
+	RecipientAccountId *uint32                                    `protobuf:"varint,3,opt,name=recipient_account_id" json:"recipient_account_id,omitempty"`
+	Result             *CMsgServerToGCPostMatchTipResponse_Result `protobuf:"varint,4,opt,name=result,enum=dota.CMsgServerToGCPostMatchTipResponse_Result,def=0" json:"result,omitempty"`
+	XXX_unrecognized   []byte                                     `json:"-"`
+}
+
+func (m *CMsgServerToGCPostMatchTipResponse) Reset()         { *m = CMsgServerToGCPostMatchTipResponse{} }
+func (m *CMsgServerToGCPostMatchTipResponse) String() string { return proto.CompactTextString(m) }
+func (*CMsgServerToGCPostMatchTipResponse) ProtoMessage()    {}
+
+const Default_CMsgServerToGCPostMatchTipResponse_Result CMsgServerToGCPostMatchTipResponse_Result = CMsgServerToGCPostMatchTipResponse_SUCCESS
+
+func (m *CMsgServerToGCPostMatchTipResponse) GetMatchId() uint64 {
+	if m != nil && m.MatchId != nil {
+		return *m.MatchId
+	}
+	return 0
+}
+
+func (m *CMsgServerToGCPostMatchTipResponse) GetTipperAccountId() uint32 {
+	if m != nil && m.TipperAccountId != nil {
+		return *m.TipperAccountId
+	}
+	return 0
+}
+
+func (m *CMsgServerToGCPostMatchTipResponse) GetRecipientAccountId() uint32 {
+	if m != nil && m.RecipientAccountId != nil {
+		return *m.RecipientAccountId
+	}
+	return 0
+}
+
+func (m *CMsgServerToGCPostMatchTipResponse) GetResult() CMsgServerToGCPostMatchTipResponse_Result {
+	if m != nil && m.Result != nil {
+		return *m.Result
+	}
+	return Default_CMsgServerToGCPostMatchTipResponse_Result
+}
+
 func init() {
 	proto.RegisterEnum("dota.EPoorNetworkConditionsType", EPoorNetworkConditionsType_name, EPoorNetworkConditionsType_value)
 	proto.RegisterEnum("dota.EAbilityAbuseType", EAbilityAbuseType_name, EAbilityAbuseType_value)
@@ -5507,4 +5646,5 @@ func init() {
 	proto.RegisterEnum("dota.CMsgDOTALiveScoreboardUpdate_Team_Player_DOTAUltimateState", CMsgDOTALiveScoreboardUpdate_Team_Player_DOTAUltimateState_name, CMsgDOTALiveScoreboardUpdate_Team_Player_DOTAUltimateState_value)
 	proto.RegisterEnum("dota.CMsgGameServerSaveGameResult_Result", CMsgGameServerSaveGameResult_Result_name, CMsgGameServerSaveGameResult_Result_value)
 	proto.RegisterEnum("dota.CMsgGCToServerPredictionResult_Prediction_EResult", CMsgGCToServerPredictionResult_Prediction_EResult_name, CMsgGCToServerPredictionResult_Prediction_EResult_value)
+	proto.RegisterEnum("dota.CMsgServerToGCPostMatchTipResponse_Result", CMsgServerToGCPostMatchTipResponse_Result_name, CMsgServerToGCPostMatchTipResponse_Result_value)
 }
