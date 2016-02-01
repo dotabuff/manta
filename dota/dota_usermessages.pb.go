@@ -105,6 +105,7 @@ const (
 	EDotaUserMessages_DOTA_UM_ProjectionEvent           EDotaUserMessages = 553
 	EDotaUserMessages_DOTA_UM_CombatLogDataHLTV         EDotaUserMessages = 554
 	EDotaUserMessages_DOTA_UM_XPAlert                   EDotaUserMessages = 555
+	EDotaUserMessages_DOTA_UM_UpdateQuestProgress       EDotaUserMessages = 556
 )
 
 var EDotaUserMessages_name = map[int32]string{
@@ -199,6 +200,7 @@ var EDotaUserMessages_name = map[int32]string{
 	553: "DOTA_UM_ProjectionEvent",
 	554: "DOTA_UM_CombatLogDataHLTV",
 	555: "DOTA_UM_XPAlert",
+	556: "DOTA_UM_UpdateQuestProgress",
 }
 var EDotaUserMessages_value = map[string]int32{
 	"DOTA_UM_AddUnitToSelection":        464,
@@ -292,6 +294,7 @@ var EDotaUserMessages_value = map[string]int32{
 	"DOTA_UM_ProjectionEvent":           553,
 	"DOTA_UM_CombatLogDataHLTV":         554,
 	"DOTA_UM_XPAlert":                   555,
+	"DOTA_UM_UpdateQuestProgress":       556,
 }
 
 func (x EDotaUserMessages) Enum() *EDotaUserMessages {
@@ -787,6 +790,7 @@ const (
 	DOTA_PARTICLE_MESSAGE_DOTA_PARTICLE_MANAGER_EVENT_SHOULD_DRAW                     DOTA_PARTICLE_MESSAGE = 11
 	DOTA_PARTICLE_MESSAGE_DOTA_PARTICLE_MANAGER_EVENT_FROZEN                          DOTA_PARTICLE_MESSAGE = 12
 	DOTA_PARTICLE_MESSAGE_DOTA_PARTICLE_MANAGER_EVENT_CHANGE_CONTROL_POINT_ATTACHMENT DOTA_PARTICLE_MESSAGE = 13
+	DOTA_PARTICLE_MESSAGE_DOTA_PARTICLE_MANAGER_EVENT_UPDATE_ENTITY_POSITION          DOTA_PARTICLE_MESSAGE = 14
 )
 
 var DOTA_PARTICLE_MESSAGE_name = map[int32]string{
@@ -804,6 +808,7 @@ var DOTA_PARTICLE_MESSAGE_name = map[int32]string{
 	11: "DOTA_PARTICLE_MANAGER_EVENT_SHOULD_DRAW",
 	12: "DOTA_PARTICLE_MANAGER_EVENT_FROZEN",
 	13: "DOTA_PARTICLE_MANAGER_EVENT_CHANGE_CONTROL_POINT_ATTACHMENT",
+	14: "DOTA_PARTICLE_MANAGER_EVENT_UPDATE_ENTITY_POSITION",
 }
 var DOTA_PARTICLE_MESSAGE_value = map[string]int32{
 	"DOTA_PARTICLE_MANAGER_EVENT_CREATE":                          0,
@@ -820,6 +825,7 @@ var DOTA_PARTICLE_MESSAGE_value = map[string]int32{
 	"DOTA_PARTICLE_MANAGER_EVENT_SHOULD_DRAW":                     11,
 	"DOTA_PARTICLE_MANAGER_EVENT_FROZEN":                          12,
 	"DOTA_PARTICLE_MANAGER_EVENT_CHANGE_CONTROL_POINT_ATTACHMENT": 13,
+	"DOTA_PARTICLE_MANAGER_EVENT_UPDATE_ENTITY_POSITION":          14,
 }
 
 func (x DOTA_PARTICLE_MESSAGE) Enum() *DOTA_PARTICLE_MESSAGE {
@@ -2991,6 +2997,7 @@ type CDOTAUserMsg_ParticleManager struct {
 	UpdateParticleShouldDraw     *CDOTAUserMsg_ParticleManager_UpdateParticleShouldDraw     `protobuf:"bytes,14,opt,name=update_particle_should_draw" json:"update_particle_should_draw,omitempty"`
 	UpdateParticleSetFrozen      *CDOTAUserMsg_ParticleManager_UpdateParticleSetFrozen      `protobuf:"bytes,15,opt,name=update_particle_set_frozen" json:"update_particle_set_frozen,omitempty"`
 	ChangeControlPointAttachment *CDOTAUserMsg_ParticleManager_ChangeControlPointAttachment `protobuf:"bytes,16,opt,name=change_control_point_attachment" json:"change_control_point_attachment,omitempty"`
+	UpdateEntityPosition         *CDOTAUserMsg_ParticleManager_UpdateEntityPosition         `protobuf:"bytes,17,opt,name=update_entity_position" json:"update_entity_position,omitempty"`
 	XXX_unrecognized             []byte                                                     `json:"-"`
 }
 
@@ -3101,6 +3108,13 @@ func (m *CDOTAUserMsg_ParticleManager) GetUpdateParticleSetFrozen() *CDOTAUserMs
 func (m *CDOTAUserMsg_ParticleManager) GetChangeControlPointAttachment() *CDOTAUserMsg_ParticleManager_ChangeControlPointAttachment {
 	if m != nil {
 		return m.ChangeControlPointAttachment
+	}
+	return nil
+}
+
+func (m *CDOTAUserMsg_ParticleManager) GetUpdateEntityPosition() *CDOTAUserMsg_ParticleManager_UpdateEntityPosition {
+	if m != nil {
+		return m.UpdateEntityPosition
 	}
 	return nil
 }
@@ -3499,6 +3513,34 @@ func (m *CDOTAUserMsg_ParticleManager_ChangeControlPointAttachment) GetEntityHan
 		return *m.EntityHandle
 	}
 	return 0
+}
+
+type CDOTAUserMsg_ParticleManager_UpdateEntityPosition struct {
+	EntityHandle     *int32      `protobuf:"varint,1,opt,name=entity_handle" json:"entity_handle,omitempty"`
+	Position         *CMsgVector `protobuf:"bytes,2,opt,name=position" json:"position,omitempty"`
+	XXX_unrecognized []byte      `json:"-"`
+}
+
+func (m *CDOTAUserMsg_ParticleManager_UpdateEntityPosition) Reset() {
+	*m = CDOTAUserMsg_ParticleManager_UpdateEntityPosition{}
+}
+func (m *CDOTAUserMsg_ParticleManager_UpdateEntityPosition) String() string {
+	return proto.CompactTextString(m)
+}
+func (*CDOTAUserMsg_ParticleManager_UpdateEntityPosition) ProtoMessage() {}
+
+func (m *CDOTAUserMsg_ParticleManager_UpdateEntityPosition) GetEntityHandle() int32 {
+	if m != nil && m.EntityHandle != nil {
+		return *m.EntityHandle
+	}
+	return 0
+}
+
+func (m *CDOTAUserMsg_ParticleManager_UpdateEntityPosition) GetPosition() *CMsgVector {
+	if m != nil {
+		return m.Position
+	}
+	return nil
 }
 
 type CDOTAUserMsg_OverheadEvent struct {
@@ -5728,6 +5770,14 @@ func (m *CDOTAUserMsg_XPAlert) GetTargetEntindex() uint32 {
 	}
 	return 0
 }
+
+type CDOTAUserMsg_UpdateQuestProgress struct {
+	XXX_unrecognized []byte `json:"-"`
+}
+
+func (m *CDOTAUserMsg_UpdateQuestProgress) Reset()         { *m = CDOTAUserMsg_UpdateQuestProgress{} }
+func (m *CDOTAUserMsg_UpdateQuestProgress) String() string { return proto.CompactTextString(m) }
+func (*CDOTAUserMsg_UpdateQuestProgress) ProtoMessage()    {}
 
 func init() {
 	proto.RegisterEnum("dota.EDotaUserMessages", EDotaUserMessages_name, EDotaUserMessages_value)

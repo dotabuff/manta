@@ -414,6 +414,8 @@ const (
 	EGCToGCMsg_k_EMsgGCToGCLoadSessionSOCache          EGCToGCMsg = 160
 	EGCToGCMsg_k_EMsgGCToGCLoadSessionSOCacheResponse  EGCToGCMsg = 161
 	EGCToGCMsg_k_EMsgGCToGCUpdateSessionStats          EGCToGCMsg = 162
+	EGCToGCMsg_k_EMsgGCToGCUniverseStartup             EGCToGCMsg = 163
+	EGCToGCMsg_k_EMsgGCToGCUniverseStartupResponse     EGCToGCMsg = 164
 )
 
 var EGCToGCMsg_name = map[int32]string{
@@ -430,6 +432,8 @@ var EGCToGCMsg_name = map[int32]string{
 	160: "k_EMsgGCToGCLoadSessionSOCache",
 	161: "k_EMsgGCToGCLoadSessionSOCacheResponse",
 	162: "k_EMsgGCToGCUpdateSessionStats",
+	163: "k_EMsgGCToGCUniverseStartup",
+	164: "k_EMsgGCToGCUniverseStartupResponse",
 }
 var EGCToGCMsg_value = map[string]int32{
 	"k_EGCToGCMsgMasterAck":                   150,
@@ -445,6 +449,8 @@ var EGCToGCMsg_value = map[string]int32{
 	"k_EMsgGCToGCLoadSessionSOCache":          160,
 	"k_EMsgGCToGCLoadSessionSOCacheResponse":  161,
 	"k_EMsgGCToGCUpdateSessionStats":          162,
+	"k_EMsgGCToGCUniverseStartup":             163,
+	"k_EMsgGCToGCUniverseStartupResponse":     164,
 }
 
 func (x EGCToGCMsg) Enum() *EGCToGCMsg {

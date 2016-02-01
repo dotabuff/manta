@@ -611,17 +611,66 @@ func (m *CTextShadowData) GetStrength() float64 {
 	return 0
 }
 
-type CMsgClipData struct {
-	Left             *float64 `protobuf:"fixed64,1,opt,name=left" json:"left,omitempty"`
-	Top              *float64 `protobuf:"fixed64,2,opt,name=top" json:"top,omitempty"`
-	Right            *float64 `protobuf:"fixed64,3,opt,name=right" json:"right,omitempty"`
-	Bottom           *float64 `protobuf:"fixed64,4,opt,name=bottom" json:"bottom,omitempty"`
+type CRadialClipData struct {
+	CenterX          *float64 `protobuf:"fixed64,1,opt,name=center_x" json:"center_x,omitempty"`
+	CenterY          *float64 `protobuf:"fixed64,2,opt,name=center_y" json:"center_y,omitempty"`
+	StartAngle       *float64 `protobuf:"fixed64,3,opt,name=start_angle" json:"start_angle,omitempty"`
+	SectorAngle      *float64 `protobuf:"fixed64,4,opt,name=sector_angle" json:"sector_angle,omitempty"`
 	XXX_unrecognized []byte   `json:"-"`
+}
+
+func (m *CRadialClipData) Reset()         { *m = CRadialClipData{} }
+func (m *CRadialClipData) String() string { return proto.CompactTextString(m) }
+func (*CRadialClipData) ProtoMessage()    {}
+
+func (m *CRadialClipData) GetCenterX() float64 {
+	if m != nil && m.CenterX != nil {
+		return *m.CenterX
+	}
+	return 0
+}
+
+func (m *CRadialClipData) GetCenterY() float64 {
+	if m != nil && m.CenterY != nil {
+		return *m.CenterY
+	}
+	return 0
+}
+
+func (m *CRadialClipData) GetStartAngle() float64 {
+	if m != nil && m.StartAngle != nil {
+		return *m.StartAngle
+	}
+	return 0
+}
+
+func (m *CRadialClipData) GetSectorAngle() float64 {
+	if m != nil && m.SectorAngle != nil {
+		return *m.SectorAngle
+	}
+	return 0
+}
+
+type CMsgClipData struct {
+	RectClip         *bool            `protobuf:"varint,1,opt,name=rect_clip" json:"rect_clip,omitempty"`
+	Left             *float64         `protobuf:"fixed64,2,opt,name=left" json:"left,omitempty"`
+	Top              *float64         `protobuf:"fixed64,3,opt,name=top" json:"top,omitempty"`
+	Right            *float64         `protobuf:"fixed64,4,opt,name=right" json:"right,omitempty"`
+	Bottom           *float64         `protobuf:"fixed64,5,opt,name=bottom" json:"bottom,omitempty"`
+	RadialClip       *CRadialClipData `protobuf:"bytes,6,opt,name=radial_clip" json:"radial_clip,omitempty"`
+	XXX_unrecognized []byte           `json:"-"`
 }
 
 func (m *CMsgClipData) Reset()         { *m = CMsgClipData{} }
 func (m *CMsgClipData) String() string { return proto.CompactTextString(m) }
 func (*CMsgClipData) ProtoMessage()    {}
+
+func (m *CMsgClipData) GetRectClip() bool {
+	if m != nil && m.RectClip != nil {
+		return *m.RectClip
+	}
+	return false
+}
 
 func (m *CMsgClipData) GetLeft() float64 {
 	if m != nil && m.Left != nil {
@@ -649,6 +698,13 @@ func (m *CMsgClipData) GetBottom() float64 {
 		return *m.Bottom
 	}
 	return 0
+}
+
+func (m *CMsgClipData) GetRadialClip() *CRadialClipData {
+	if m != nil {
+		return m.RadialClip
+	}
+	return nil
 }
 
 type CMsgPushCompositingLayer struct {
@@ -711,6 +767,11 @@ type CMsgPushCompositingLayer struct {
 	OccludedTopEdge          *float64         `protobuf:"fixed64,57,opt,name=occluded_top_edge" json:"occluded_top_edge,omitempty"`
 	OccludedRightEdge        *float64         `protobuf:"fixed64,58,opt,name=occluded_right_edge" json:"occluded_right_edge,omitempty"`
 	OccludedBottomEdge       *float64         `protobuf:"fixed64,59,opt,name=occluded_bottom_edge" json:"occluded_bottom_edge,omitempty"`
+	RadialClip               *CRadialClipData `protobuf:"bytes,60,opt,name=radial_clip" json:"radial_clip,omitempty"`
+	MotionblurVelocity       *float64         `protobuf:"fixed64,61,opt,name=motionblur_velocity" json:"motionblur_velocity,omitempty"`
+	MotionblurDirx           *float64         `protobuf:"fixed64,62,opt,name=motionblur_dirx" json:"motionblur_dirx,omitempty"`
+	MotionblurDiry           *float64         `protobuf:"fixed64,63,opt,name=motionblur_diry" json:"motionblur_diry,omitempty"`
+	MotionblurSamplecount    *uint32          `protobuf:"varint,64,opt,name=motionblur_samplecount" json:"motionblur_samplecount,omitempty"`
 	XXX_unrecognized         []byte           `json:"-"`
 }
 
@@ -1127,6 +1188,41 @@ func (m *CMsgPushCompositingLayer) GetOccludedRightEdge() float64 {
 func (m *CMsgPushCompositingLayer) GetOccludedBottomEdge() float64 {
 	if m != nil && m.OccludedBottomEdge != nil {
 		return *m.OccludedBottomEdge
+	}
+	return 0
+}
+
+func (m *CMsgPushCompositingLayer) GetRadialClip() *CRadialClipData {
+	if m != nil {
+		return m.RadialClip
+	}
+	return nil
+}
+
+func (m *CMsgPushCompositingLayer) GetMotionblurVelocity() float64 {
+	if m != nil && m.MotionblurVelocity != nil {
+		return *m.MotionblurVelocity
+	}
+	return 0
+}
+
+func (m *CMsgPushCompositingLayer) GetMotionblurDirx() float64 {
+	if m != nil && m.MotionblurDirx != nil {
+		return *m.MotionblurDirx
+	}
+	return 0
+}
+
+func (m *CMsgPushCompositingLayer) GetMotionblurDiry() float64 {
+	if m != nil && m.MotionblurDiry != nil {
+		return *m.MotionblurDiry
+	}
+	return 0
+}
+
+func (m *CMsgPushCompositingLayer) GetMotionblurSamplecount() uint32 {
+	if m != nil && m.MotionblurSamplecount != nil {
+		return *m.MotionblurSamplecount
 	}
 	return 0
 }
@@ -2670,6 +2766,110 @@ func (m *CMsgGaussianBlur_AnimationFrameData) GetData() *CMsgGaussianValues {
 	return nil
 }
 
+type CMsgMotionBlurValues struct {
+	Velocity         *float64 `protobuf:"fixed64,1,opt,name=velocity" json:"velocity,omitempty"`
+	Dirx             *float64 `protobuf:"fixed64,2,opt,name=dirx" json:"dirx,omitempty"`
+	Diry             *float64 `protobuf:"fixed64,3,opt,name=diry" json:"diry,omitempty"`
+	SampleCount      *uint32  `protobuf:"varint,4,opt,name=sample_count" json:"sample_count,omitempty"`
+	XXX_unrecognized []byte   `json:"-"`
+}
+
+func (m *CMsgMotionBlurValues) Reset()         { *m = CMsgMotionBlurValues{} }
+func (m *CMsgMotionBlurValues) String() string { return proto.CompactTextString(m) }
+func (*CMsgMotionBlurValues) ProtoMessage()    {}
+
+func (m *CMsgMotionBlurValues) GetVelocity() float64 {
+	if m != nil && m.Velocity != nil {
+		return *m.Velocity
+	}
+	return 0
+}
+
+func (m *CMsgMotionBlurValues) GetDirx() float64 {
+	if m != nil && m.Dirx != nil {
+		return *m.Dirx
+	}
+	return 0
+}
+
+func (m *CMsgMotionBlurValues) GetDiry() float64 {
+	if m != nil && m.Diry != nil {
+		return *m.Diry
+	}
+	return 0
+}
+
+func (m *CMsgMotionBlurValues) GetSampleCount() uint32 {
+	if m != nil && m.SampleCount != nil {
+		return *m.SampleCount
+	}
+	return 0
+}
+
+type CMsgMotionBlur struct {
+	Base             *CMsgMotionBlurValues `protobuf:"bytes,1,opt,name=base" json:"base,omitempty"`
+	Transition       *CMsgMotionBlurValues `protobuf:"bytes,2,opt,name=transition" json:"transition,omitempty"`
+	TransitionData   *CMsgTransitionData   `protobuf:"bytes,3,opt,name=transition_data" json:"transition_data,omitempty"`
+	Animations       []*CMsgAnimationData  `protobuf:"bytes,4,rep,name=animations" json:"animations,omitempty"`
+	XXX_unrecognized []byte                `json:"-"`
+}
+
+func (m *CMsgMotionBlur) Reset()         { *m = CMsgMotionBlur{} }
+func (m *CMsgMotionBlur) String() string { return proto.CompactTextString(m) }
+func (*CMsgMotionBlur) ProtoMessage()    {}
+
+func (m *CMsgMotionBlur) GetBase() *CMsgMotionBlurValues {
+	if m != nil {
+		return m.Base
+	}
+	return nil
+}
+
+func (m *CMsgMotionBlur) GetTransition() *CMsgMotionBlurValues {
+	if m != nil {
+		return m.Transition
+	}
+	return nil
+}
+
+func (m *CMsgMotionBlur) GetTransitionData() *CMsgTransitionData {
+	if m != nil {
+		return m.TransitionData
+	}
+	return nil
+}
+
+func (m *CMsgMotionBlur) GetAnimations() []*CMsgAnimationData {
+	if m != nil {
+		return m.Animations
+	}
+	return nil
+}
+
+var E_CMsgMotionBlur_AnimationFrameData = &proto.ExtensionDesc{
+	ExtendedType:  (*CMsgAnimationFrameData)(nil),
+	ExtensionType: (*CMsgMotionBlur_AnimationFrameData)(nil),
+	Field:         1022,
+	Name:          "dota.CMsgMotionBlur.animation_frame_data",
+	Tag:           "bytes,1022,opt,name=animation_frame_data",
+}
+
+type CMsgMotionBlur_AnimationFrameData struct {
+	Data             *CMsgMotionBlurValues `protobuf:"bytes,1,opt,name=data" json:"data,omitempty"`
+	XXX_unrecognized []byte                `json:"-"`
+}
+
+func (m *CMsgMotionBlur_AnimationFrameData) Reset()         { *m = CMsgMotionBlur_AnimationFrameData{} }
+func (m *CMsgMotionBlur_AnimationFrameData) String() string { return proto.CompactTextString(m) }
+func (*CMsgMotionBlur_AnimationFrameData) ProtoMessage()    {}
+
+func (m *CMsgMotionBlur_AnimationFrameData) GetData() *CMsgMotionBlurValues {
+	if m != nil {
+		return m.Data
+	}
+	return nil
+}
+
 type CMsg3DTransformPerspective struct {
 	Base             *float64             `protobuf:"fixed64,1,opt,name=base" json:"base,omitempty"`
 	Transition       *float64             `protobuf:"fixed64,2,opt,name=transition" json:"transition,omitempty"`
@@ -3368,9 +3568,10 @@ type CMsgPushPanelContextInLayer struct {
 	Height           *float64        `protobuf:"fixed64,19,opt,name=height" json:"height,omitempty"`
 	PositionX        *float64        `protobuf:"fixed64,20,opt,name=position_x" json:"position_x,omitempty"`
 	PositionY        *float64        `protobuf:"fixed64,21,opt,name=position_y" json:"position_y,omitempty"`
-	Border           *CBorderData    `protobuf:"bytes,22,opt,name=border" json:"border,omitempty"`
-	ScrollX          *float64        `protobuf:"fixed64,23,opt,name=scroll_x" json:"scroll_x,omitempty"`
-	ScrollY          *float64        `protobuf:"fixed64,24,opt,name=scroll_y" json:"scroll_y,omitempty"`
+	PositionZ        *float64        `protobuf:"fixed64,22,opt,name=position_z" json:"position_z,omitempty"`
+	Border           *CBorderData    `protobuf:"bytes,23,opt,name=border" json:"border,omitempty"`
+	ScrollX          *float64        `protobuf:"fixed64,24,opt,name=scroll_x" json:"scroll_x,omitempty"`
+	ScrollY          *float64        `protobuf:"fixed64,25,opt,name=scroll_y" json:"scroll_y,omitempty"`
 	XXX_unrecognized []byte          `json:"-"`
 }
 
@@ -3525,6 +3726,13 @@ func (m *CMsgPushPanelContextInLayer) GetPositionY() float64 {
 	return 0
 }
 
+func (m *CMsgPushPanelContextInLayer) GetPositionZ() float64 {
+	if m != nil && m.PositionZ != nil {
+		return *m.PositionZ
+	}
+	return 0
+}
+
 func (m *CMsgPushPanelContextInLayer) GetBorder() *CBorderData {
 	if m != nil {
 		return m.Border
@@ -3585,9 +3793,12 @@ type CMsgPushAAndTContext struct {
 	NeedsIntermediateTexture   *bool                             `protobuf:"varint,29,opt,name=needs_intermediate_texture" json:"needs_intermediate_texture,omitempty"`
 	ClipAfterTransform         *bool                             `protobuf:"varint,30,opt,name=clip_after_transform" json:"clip_after_transform,omitempty"`
 	WantsHitTest               *bool                             `protobuf:"varint,31,opt,name=wants_hit_test" json:"wants_hit_test,omitempty"`
-	MixBlendMode               *uint32                           `protobuf:"varint,32,opt,name=mix_blend_mode" json:"mix_blend_mode,omitempty"`
-	OpaqueBackground           *bool                             `protobuf:"varint,33,opt,name=opaque_background" json:"opaque_background,omitempty"`
-	ChildPanelCount            *uint32                           `protobuf:"varint,34,opt,name=child_panel_count" json:"child_panel_count,omitempty"`
+	WantsHitTestChildren       *bool                             `protobuf:"varint,32,opt,name=wants_hit_test_children" json:"wants_hit_test_children,omitempty"`
+	MixBlendMode               *uint32                           `protobuf:"varint,33,opt,name=mix_blend_mode" json:"mix_blend_mode,omitempty"`
+	OpaqueBackground           *bool                             `protobuf:"varint,34,opt,name=opaque_background" json:"opaque_background,omitempty"`
+	ChildPanelCount            *uint32                           `protobuf:"varint,35,opt,name=child_panel_count" json:"child_panel_count,omitempty"`
+	WantsScreenspaceQuadOutput *bool                             `protobuf:"varint,36,opt,name=wants_screenspace_quad_output" json:"wants_screenspace_quad_output,omitempty"`
+	MotionBlur                 *CMsgMotionBlur                   `protobuf:"bytes,37,opt,name=motion_blur" json:"motion_blur,omitempty"`
 	XXX_unrecognized           []byte                            `json:"-"`
 }
 
@@ -3805,6 +4016,13 @@ func (m *CMsgPushAAndTContext) GetWantsHitTest() bool {
 	return false
 }
 
+func (m *CMsgPushAAndTContext) GetWantsHitTestChildren() bool {
+	if m != nil && m.WantsHitTestChildren != nil {
+		return *m.WantsHitTestChildren
+	}
+	return false
+}
+
 func (m *CMsgPushAAndTContext) GetMixBlendMode() uint32 {
 	if m != nil && m.MixBlendMode != nil {
 		return *m.MixBlendMode
@@ -3824,6 +4042,20 @@ func (m *CMsgPushAAndTContext) GetChildPanelCount() uint32 {
 		return *m.ChildPanelCount
 	}
 	return 0
+}
+
+func (m *CMsgPushAAndTContext) GetWantsScreenspaceQuadOutput() bool {
+	if m != nil && m.WantsScreenspaceQuadOutput != nil {
+		return *m.WantsScreenspaceQuadOutput
+	}
+	return false
+}
+
+func (m *CMsgPushAAndTContext) GetMotionBlur() *CMsgMotionBlur {
+	if m != nil {
+		return m.MotionBlur
+	}
+	return nil
 }
 
 type CMsgPopAAndTContext struct {
@@ -4484,7 +4716,9 @@ func (m *CMsgRenderTextRangeFormat) GetFormat() *CMsgRenderTextFormat {
 }
 
 type CMsgDrawTextRegion struct {
-	Wtext            []byte                 `protobuf:"bytes,2,opt,name=wtext" json:"wtext,omitempty"`
+	RawText          []byte                 `protobuf:"bytes,11,opt,name=raw_text" json:"raw_text,omitempty"`
+	TextChars        *int32                 `protobuf:"varint,12,opt,name=text_chars" json:"text_chars,omitempty"`
+	TextEncoding     *int32                 `protobuf:"varint,13,opt,name=text_encoding" json:"text_encoding,omitempty"`
 	DefaultFormat    *CMsgTextFormat        `protobuf:"bytes,3,opt,name=default_format" json:"default_format,omitempty"`
 	TextAlign        *uint32                `protobuf:"varint,4,opt,name=text_align" json:"text_align,omitempty"`
 	LineHeight       *uint32                `protobuf:"varint,5,opt,name=line_height" json:"line_height,omitempty"`
@@ -4500,11 +4734,25 @@ func (m *CMsgDrawTextRegion) Reset()         { *m = CMsgDrawTextRegion{} }
 func (m *CMsgDrawTextRegion) String() string { return proto.CompactTextString(m) }
 func (*CMsgDrawTextRegion) ProtoMessage()    {}
 
-func (m *CMsgDrawTextRegion) GetWtext() []byte {
+func (m *CMsgDrawTextRegion) GetRawText() []byte {
 	if m != nil {
-		return m.Wtext
+		return m.RawText
 	}
 	return nil
+}
+
+func (m *CMsgDrawTextRegion) GetTextChars() int32 {
+	if m != nil && m.TextChars != nil {
+		return *m.TextChars
+	}
+	return 0
+}
+
+func (m *CMsgDrawTextRegion) GetTextEncoding() int32 {
+	if m != nil && m.TextEncoding != nil {
+		return *m.TextEncoding
+	}
+	return 0
 }
 
 func (m *CMsgDrawTextRegion) GetDefaultFormat() *CMsgTextFormat {
@@ -4564,7 +4812,9 @@ func (m *CMsgDrawTextRegion) GetRangeFormats() []*CMsgTextRangeFormat {
 }
 
 type CMsgRenderTextRegion struct {
-	Wtext            []byte                       `protobuf:"bytes,2,opt,name=wtext" json:"wtext,omitempty"`
+	RawText          []byte                       `protobuf:"bytes,12,opt,name=raw_text" json:"raw_text,omitempty"`
+	TextChars        *int32                       `protobuf:"varint,13,opt,name=text_chars" json:"text_chars,omitempty"`
+	TextEncoding     *int32                       `protobuf:"varint,14,opt,name=text_encoding" json:"text_encoding,omitempty"`
 	DefaultFormat    *CMsgRenderTextFormat        `protobuf:"bytes,3,opt,name=default_format" json:"default_format,omitempty"`
 	TextAlign        *uint32                      `protobuf:"varint,4,opt,name=text_align" json:"text_align,omitempty"`
 	LineHeight       *uint32                      `protobuf:"varint,5,opt,name=line_height" json:"line_height,omitempty"`
@@ -4581,11 +4831,25 @@ func (m *CMsgRenderTextRegion) Reset()         { *m = CMsgRenderTextRegion{} }
 func (m *CMsgRenderTextRegion) String() string { return proto.CompactTextString(m) }
 func (*CMsgRenderTextRegion) ProtoMessage()    {}
 
-func (m *CMsgRenderTextRegion) GetWtext() []byte {
+func (m *CMsgRenderTextRegion) GetRawText() []byte {
 	if m != nil {
-		return m.Wtext
+		return m.RawText
 	}
 	return nil
+}
+
+func (m *CMsgRenderTextRegion) GetTextChars() int32 {
+	if m != nil && m.TextChars != nil {
+		return *m.TextChars
+	}
+	return 0
+}
+
+func (m *CMsgRenderTextRegion) GetTextEncoding() int32 {
+	if m != nil && m.TextEncoding != nil {
+		return *m.TextEncoding
+	}
+	return 0
 }
 
 func (m *CMsgRenderTextRegion) GetDefaultFormat() *CMsgRenderTextFormat {
@@ -4720,6 +4984,7 @@ func init() {
 	proto.RegisterExtension(E_CMsgBrightness_AnimationFrameData)
 	proto.RegisterExtension(E_CMsgContrast_AnimationFrameData)
 	proto.RegisterExtension(E_CMsgGaussianBlur_AnimationFrameData)
+	proto.RegisterExtension(E_CMsgMotionBlur_AnimationFrameData)
 	proto.RegisterExtension(E_CMsg3DTransformPerspective_AnimationFrameData)
 	proto.RegisterExtension(E_CMsg3DTransformPerspectiveOrigin_AnimationFrameData)
 	proto.RegisterExtension(E_CMsg3DTransformOrigin_AnimationFrameData)

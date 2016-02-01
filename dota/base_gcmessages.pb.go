@@ -18,6 +18,7 @@ It is generated from these files:
 	dota_gcmessages_client_fantasy.proto
 	dota_gcmessages_common.proto
 	dota_gcmessages_server.proto
+	dota_match_metadata.proto
 	dota_modifiers.proto
 	dota_usermessages.proto
 	econ_gcmessages.proto

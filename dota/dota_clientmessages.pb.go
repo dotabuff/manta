@@ -66,6 +66,7 @@ const (
 	EDotaClientMessages_DOTA_CM_ExecuteOrders                          EDotaClientMessages = 350
 	EDotaClientMessages_DOTA_CM_XPAlert                                EDotaClientMessages = 351
 	EDotaClientMessages_DOTA_CM_GenericBooleanConvar                   EDotaClientMessages = 352
+	EDotaClientMessages_DOTA_CM_EventPointsTip                         EDotaClientMessages = 353
 )
 
 var EDotaClientMessages_name = map[int32]string{
@@ -121,6 +122,7 @@ var EDotaClientMessages_name = map[int32]string{
 	350: "DOTA_CM_ExecuteOrders",
 	351: "DOTA_CM_XPAlert",
 	352: "DOTA_CM_GenericBooleanConvar",
+	353: "DOTA_CM_EventPointsTip",
 }
 var EDotaClientMessages_value = map[string]int32{
 	"DOTA_CM_MapLine":                                301,
@@ -175,6 +177,7 @@ var EDotaClientMessages_value = map[string]int32{
 	"DOTA_CM_ExecuteOrders":                          350,
 	"DOTA_CM_XPAlert":                                351,
 	"DOTA_CM_GenericBooleanConvar":                   352,
+	"DOTA_CM_EventPointsTip":                         353,
 }
 
 func (x EDotaClientMessages) Enum() *EDotaClientMessages {
@@ -1168,6 +1171,22 @@ func (*CDOTAClientMsg_CoinWager) ProtoMessage()    {}
 func (m *CDOTAClientMsg_CoinWager) GetWagerAmount() uint32 {
 	if m != nil && m.WagerAmount != nil {
 		return *m.WagerAmount
+	}
+	return 0
+}
+
+type CDOTAClientMsg_EventPointsTip struct {
+	RecipientPlayerId *uint32 `protobuf:"varint,1,opt,name=recipient_player_id" json:"recipient_player_id,omitempty"`
+	XXX_unrecognized  []byte  `json:"-"`
+}
+
+func (m *CDOTAClientMsg_EventPointsTip) Reset()         { *m = CDOTAClientMsg_EventPointsTip{} }
+func (m *CDOTAClientMsg_EventPointsTip) String() string { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_EventPointsTip) ProtoMessage()    {}
+
+func (m *CDOTAClientMsg_EventPointsTip) GetRecipientPlayerId() uint32 {
+	if m != nil && m.RecipientPlayerId != nil {
+		return *m.RecipientPlayerId
 	}
 	return 0
 }
