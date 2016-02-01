@@ -31,19 +31,17 @@ update-game-tracking: game-tracking
 	git -C game-tracking checkout master
 	git -C game-tracking pull origin master
 
-gen-dota-proto: dota/google/protobuf/descriptor.pb.go
-	rm -rf dota/*.proto dota/*.pb.go
-	cp -f game-tracking/Protobufs/dota/*.proto -t dota/ || true
+get-google-descriptor:
+	go get -d github.com/google/protobuf/src/google/protobuf || true
+
+gen-dota-proto: get-google-descriptor
+	rm -f dota/*.proto dota/*.pb.go
+	cp -f game-tracking/Protobufs/dota/*.proto dota/
 	sed -i 's/^\(\s*\)\(optional\|repeated\|required\|extend\)\s*\./\1\2 /' dota/*.proto
 	sed -i 's!^\s*rpc\s*\(\S*\)\s*(\.\([^)]*\))\s*returns\s*(\.\([^)]*\))\s*{!rpc \1 (\2) returns (\3) {!' dota/*.proto
 	sed -i '1ipackage dota;\n' dota/*.proto
-	cp -r google dota
-	protoc -Idota --go_out=dota dota/*.proto
-	sed -i 's|google/protobuf/descriptor.pb|github.com/dotabuff/manta/dota/google/protobuf|' dota/*.pb.go
-
-dota/google/protobuf/descriptor.pb.go: google/protobuf/descriptor.proto
-	mkdir -p dota/google/protobuf
-	protoc -I. --go_out=dota $<
+	protoc -I ../../google/protobuf/src -I dota --go_out=dota dota/*.proto
+	sed -i 's|google/protobuf/descriptor.pb|github.com/golang/protobuf/protoc-gen-go/descriptor|' dota/*.pb.go
 
 generate:
 	go generate
