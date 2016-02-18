@@ -19,7 +19,6 @@ const (
 	EDotaClientMessages_DOTA_CM_MapPing                                EDotaClientMessages = 303
 	EDotaClientMessages_DOTA_CM_UnitsAutoAttack                        EDotaClientMessages = 304
 	EDotaClientMessages_DOTA_CM_AutoPurchaseItems                      EDotaClientMessages = 305
-	EDotaClientMessages_DOTA_CM_TestItems                              EDotaClientMessages = 306
 	EDotaClientMessages_DOTA_CM_SearchString                           EDotaClientMessages = 307
 	EDotaClientMessages_DOTA_CM_Pause                                  EDotaClientMessages = 308
 	EDotaClientMessages_DOTA_CM_ShopViewMode                           EDotaClientMessages = 309
@@ -67,6 +66,7 @@ const (
 	EDotaClientMessages_DOTA_CM_XPAlert                                EDotaClientMessages = 351
 	EDotaClientMessages_DOTA_CM_GenericBooleanConvar                   EDotaClientMessages = 352
 	EDotaClientMessages_DOTA_CM_EventPointsTip                         EDotaClientMessages = 353
+	EDotaClientMessages_DOTA_CM_MatchMetadata                          EDotaClientMessages = 354
 )
 
 var EDotaClientMessages_name = map[int32]string{
@@ -75,7 +75,6 @@ var EDotaClientMessages_name = map[int32]string{
 	303: "DOTA_CM_MapPing",
 	304: "DOTA_CM_UnitsAutoAttack",
 	305: "DOTA_CM_AutoPurchaseItems",
-	306: "DOTA_CM_TestItems",
 	307: "DOTA_CM_SearchString",
 	308: "DOTA_CM_Pause",
 	309: "DOTA_CM_ShopViewMode",
@@ -123,6 +122,7 @@ var EDotaClientMessages_name = map[int32]string{
 	351: "DOTA_CM_XPAlert",
 	352: "DOTA_CM_GenericBooleanConvar",
 	353: "DOTA_CM_EventPointsTip",
+	354: "DOTA_CM_MatchMetadata",
 }
 var EDotaClientMessages_value = map[string]int32{
 	"DOTA_CM_MapLine":                                301,
@@ -130,7 +130,6 @@ var EDotaClientMessages_value = map[string]int32{
 	"DOTA_CM_MapPing":                                303,
 	"DOTA_CM_UnitsAutoAttack":                        304,
 	"DOTA_CM_AutoPurchaseItems":                      305,
-	"DOTA_CM_TestItems":                              306,
 	"DOTA_CM_SearchString":                           307,
 	"DOTA_CM_Pause":                                  308,
 	"DOTA_CM_ShopViewMode":                           309,
@@ -178,6 +177,7 @@ var EDotaClientMessages_value = map[string]int32{
 	"DOTA_CM_XPAlert":                                351,
 	"DOTA_CM_GenericBooleanConvar":                   352,
 	"DOTA_CM_EventPointsTip":                         353,
+	"DOTA_CM_MatchMetadata":                          354,
 }
 
 func (x EDotaClientMessages) Enum() *EDotaClientMessages {
@@ -477,22 +477,6 @@ func (m *CDOTAClientMsg_AutoPurchaseItems) GetEnabled() bool {
 		return *m.Enabled
 	}
 	return false
-}
-
-type CDOTAClientMsg_TestItems struct {
-	KeyValues        *string `protobuf:"bytes,1,opt,name=key_values" json:"key_values,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
-}
-
-func (m *CDOTAClientMsg_TestItems) Reset()         { *m = CDOTAClientMsg_TestItems{} }
-func (m *CDOTAClientMsg_TestItems) String() string { return proto.CompactTextString(m) }
-func (*CDOTAClientMsg_TestItems) ProtoMessage()    {}
-
-func (m *CDOTAClientMsg_TestItems) GetKeyValues() string {
-	if m != nil && m.KeyValues != nil {
-		return *m.KeyValues
-	}
-	return ""
 }
 
 type CDOTAClientMsg_SearchString struct {
@@ -1221,6 +1205,30 @@ func (m *CDOTAClientMsg_XPAlert) GetTargetEntindex() uint32 {
 		return *m.TargetEntindex
 	}
 	return 0
+}
+
+type CDOTAClientMsg_MatchMetadata struct {
+	MatchId          *uint64 `protobuf:"varint,1,opt,name=match_id" json:"match_id,omitempty"`
+	Metadata         []byte  `protobuf:"bytes,2,opt,name=metadata" json:"metadata,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CDOTAClientMsg_MatchMetadata) Reset()         { *m = CDOTAClientMsg_MatchMetadata{} }
+func (m *CDOTAClientMsg_MatchMetadata) String() string { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_MatchMetadata) ProtoMessage()    {}
+
+func (m *CDOTAClientMsg_MatchMetadata) GetMatchId() uint64 {
+	if m != nil && m.MatchId != nil {
+		return *m.MatchId
+	}
+	return 0
+}
+
+func (m *CDOTAClientMsg_MatchMetadata) GetMetadata() []byte {
+	if m != nil {
+		return m.Metadata
+	}
+	return nil
 }
 
 func init() {

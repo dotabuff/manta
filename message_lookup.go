@@ -191,6 +191,7 @@ var packetNames = map[int32]string{
 	554: "EDotaUserMessages_DOTA_UM_CombatLogDataHLTV",
 	555: "EDotaUserMessages_DOTA_UM_XPAlert",
 	556: "EDotaUserMessages_DOTA_UM_UpdateQuestProgress",
+	557: "EDotaUserMessages_DOTA_UM_MatchMetadata",
 }
 
 type Callbacks struct {

@@ -16,17 +16,20 @@ type EBaseClientMessages int32
 const (
 	EBaseClientMessages_CM_CustomGameEvent        EBaseClientMessages = 280
 	EBaseClientMessages_CM_TrackedControllerInput EBaseClientMessages = 281
+	EBaseClientMessages_CM_ClientUIEvent          EBaseClientMessages = 282
 	EBaseClientMessages_CM_MAX_BASE               EBaseClientMessages = 300
 )
 
 var EBaseClientMessages_name = map[int32]string{
 	280: "CM_CustomGameEvent",
 	281: "CM_TrackedControllerInput",
+	282: "CM_ClientUIEvent",
 	300: "CM_MAX_BASE",
 }
 var EBaseClientMessages_value = map[string]int32{
 	"CM_CustomGameEvent":        280,
 	"CM_TrackedControllerInput": 281,
+	"CM_ClientUIEvent":          282,
 	"CM_MAX_BASE":               300,
 }
 
@@ -44,6 +47,42 @@ func (x *EBaseClientMessages) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	*x = EBaseClientMessages(value)
+	return nil
+}
+
+type EClientUIEvent int32
+
+const (
+	EClientUIEvent_EClientUIEvent_Invalid        EClientUIEvent = 0
+	EClientUIEvent_EClientUIEvent_DialogFinished EClientUIEvent = 1
+	EClientUIEvent_EClientUIEvent_FireOutput     EClientUIEvent = 2
+)
+
+var EClientUIEvent_name = map[int32]string{
+	0: "EClientUIEvent_Invalid",
+	1: "EClientUIEvent_DialogFinished",
+	2: "EClientUIEvent_FireOutput",
+}
+var EClientUIEvent_value = map[string]int32{
+	"EClientUIEvent_Invalid":        0,
+	"EClientUIEvent_DialogFinished": 1,
+	"EClientUIEvent_FireOutput":     2,
+}
+
+func (x EClientUIEvent) Enum() *EClientUIEvent {
+	p := new(EClientUIEvent)
+	*p = x
+	return p
+}
+func (x EClientUIEvent) String() string {
+	return proto.EnumName(EClientUIEvent_name, int32(x))
+}
+func (x *EClientUIEvent) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(EClientUIEvent_value, data, "EClientUIEvent")
+	if err != nil {
+		return err
+	}
+	*x = EClientUIEvent(value)
 	return nil
 }
 
@@ -87,6 +126,57 @@ func (m *CClientMsg_TrackedControllerInput) GetData() []byte {
 	return nil
 }
 
+type CClientMsg_ClientUIEvent struct {
+	Event            *EClientUIEvent `protobuf:"varint,1,opt,name=event,enum=dota.EClientUIEvent,def=0" json:"event,omitempty"`
+	EntEhandle       *uint32         `protobuf:"varint,2,opt,name=ent_ehandle" json:"ent_ehandle,omitempty"`
+	ClientEhandle    *uint32         `protobuf:"varint,3,opt,name=client_ehandle" json:"client_ehandle,omitempty"`
+	Data1            *string         `protobuf:"bytes,4,opt,name=data1" json:"data1,omitempty"`
+	Data2            *string         `protobuf:"bytes,5,opt,name=data2" json:"data2,omitempty"`
+	XXX_unrecognized []byte          `json:"-"`
+}
+
+func (m *CClientMsg_ClientUIEvent) Reset()         { *m = CClientMsg_ClientUIEvent{} }
+func (m *CClientMsg_ClientUIEvent) String() string { return proto.CompactTextString(m) }
+func (*CClientMsg_ClientUIEvent) ProtoMessage()    {}
+
+const Default_CClientMsg_ClientUIEvent_Event EClientUIEvent = EClientUIEvent_EClientUIEvent_Invalid
+
+func (m *CClientMsg_ClientUIEvent) GetEvent() EClientUIEvent {
+	if m != nil && m.Event != nil {
+		return *m.Event
+	}
+	return Default_CClientMsg_ClientUIEvent_Event
+}
+
+func (m *CClientMsg_ClientUIEvent) GetEntEhandle() uint32 {
+	if m != nil && m.EntEhandle != nil {
+		return *m.EntEhandle
+	}
+	return 0
+}
+
+func (m *CClientMsg_ClientUIEvent) GetClientEhandle() uint32 {
+	if m != nil && m.ClientEhandle != nil {
+		return *m.ClientEhandle
+	}
+	return 0
+}
+
+func (m *CClientMsg_ClientUIEvent) GetData1() string {
+	if m != nil && m.Data1 != nil {
+		return *m.Data1
+	}
+	return ""
+}
+
+func (m *CClientMsg_ClientUIEvent) GetData2() string {
+	if m != nil && m.Data2 != nil {
+		return *m.Data2
+	}
+	return ""
+}
+
 func init() {
 	proto.RegisterEnum("dota.EBaseClientMessages", EBaseClientMessages_name, EBaseClientMessages_value)
+	proto.RegisterEnum("dota.EClientUIEvent", EClientUIEvent_name, EClientUIEvent_value)
 }

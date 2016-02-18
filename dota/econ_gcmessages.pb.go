@@ -187,6 +187,9 @@ const (
 	EGCItemMsg_k_EMsgSQLGCToGCGrantBackpackSlots              EGCItemMsg = 2580
 	EGCItemMsg_k_EMsgClientToGCLookupAccountName              EGCItemMsg = 2581
 	EGCItemMsg_k_EMsgClientToGCLookupAccountNameResponse      EGCItemMsg = 2582
+	EGCItemMsg_k_EMsgGCToGCDevRevokeUserItems                 EGCItemMsg = 2583
+	EGCItemMsg_k_EMsgClientToGCCreateStaticRecipe             EGCItemMsg = 2584
+	EGCItemMsg_k_EMsgClientToGCCreateStaticRecipeResponse     EGCItemMsg = 2585
 )
 
 var EGCItemMsg_name = map[int32]string{
@@ -363,6 +366,9 @@ var EGCItemMsg_name = map[int32]string{
 	2580: "k_EMsgSQLGCToGCGrantBackpackSlots",
 	2581: "k_EMsgClientToGCLookupAccountName",
 	2582: "k_EMsgClientToGCLookupAccountNameResponse",
+	2583: "k_EMsgGCToGCDevRevokeUserItems",
+	2584: "k_EMsgClientToGCCreateStaticRecipe",
+	2585: "k_EMsgClientToGCCreateStaticRecipeResponse",
 }
 var EGCItemMsg_value = map[string]int32{
 	"k_EMsgGCBase":                                   1000,
@@ -538,6 +544,9 @@ var EGCItemMsg_value = map[string]int32{
 	"k_EMsgSQLGCToGCGrantBackpackSlots":              2580,
 	"k_EMsgClientToGCLookupAccountName":              2581,
 	"k_EMsgClientToGCLookupAccountNameResponse":      2582,
+	"k_EMsgGCToGCDevRevokeUserItems":                 2583,
+	"k_EMsgClientToGCCreateStaticRecipe":             2584,
+	"k_EMsgClientToGCCreateStaticRecipeResponse":     2585,
 }
 
 func (x EGCItemMsg) Enum() *EGCItemMsg {
@@ -1136,6 +1145,48 @@ func (x *CMsgClientToGCNameItemResponse_ENameItem) UnmarshalJSON(data []byte) er
 		return err
 	}
 	*x = CMsgClientToGCNameItemResponse_ENameItem(value)
+	return nil
+}
+
+type CMsgClientToGCCreateStaticRecipeResponse_EResponse int32
+
+const (
+	CMsgClientToGCCreateStaticRecipeResponse_eResponse_Success          CMsgClientToGCCreateStaticRecipeResponse_EResponse = 0
+	CMsgClientToGCCreateStaticRecipeResponse_eResponse_OfferingDisabled CMsgClientToGCCreateStaticRecipeResponse_EResponse = 1
+	CMsgClientToGCCreateStaticRecipeResponse_eResponse_InvalidItems     CMsgClientToGCCreateStaticRecipeResponse_EResponse = 2
+	CMsgClientToGCCreateStaticRecipeResponse_eResponse_InternalError    CMsgClientToGCCreateStaticRecipeResponse_EResponse = 3
+	CMsgClientToGCCreateStaticRecipeResponse_eResponse_MissingLeague    CMsgClientToGCCreateStaticRecipeResponse_EResponse = 4
+)
+
+var CMsgClientToGCCreateStaticRecipeResponse_EResponse_name = map[int32]string{
+	0: "eResponse_Success",
+	1: "eResponse_OfferingDisabled",
+	2: "eResponse_InvalidItems",
+	3: "eResponse_InternalError",
+	4: "eResponse_MissingLeague",
+}
+var CMsgClientToGCCreateStaticRecipeResponse_EResponse_value = map[string]int32{
+	"eResponse_Success":          0,
+	"eResponse_OfferingDisabled": 1,
+	"eResponse_InvalidItems":     2,
+	"eResponse_InternalError":    3,
+	"eResponse_MissingLeague":    4,
+}
+
+func (x CMsgClientToGCCreateStaticRecipeResponse_EResponse) Enum() *CMsgClientToGCCreateStaticRecipeResponse_EResponse {
+	p := new(CMsgClientToGCCreateStaticRecipeResponse_EResponse)
+	*p = x
+	return p
+}
+func (x CMsgClientToGCCreateStaticRecipeResponse_EResponse) String() string {
+	return proto.EnumName(CMsgClientToGCCreateStaticRecipeResponse_EResponse_name, int32(x))
+}
+func (x *CMsgClientToGCCreateStaticRecipeResponse_EResponse) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(CMsgClientToGCCreateStaticRecipeResponse_EResponse_value, data, "CMsgClientToGCCreateStaticRecipeResponse_EResponse")
+	if err != nil {
+		return err
+	}
+	*x = CMsgClientToGCCreateStaticRecipeResponse_EResponse(value)
 	return nil
 }
 
@@ -3728,6 +3779,142 @@ func (m *CMsgClientToGCLookupAccountNameResponse) GetAccountName() string {
 	return ""
 }
 
+type CMsgGCToGCDevRevokeUserItems struct {
+	AccountId          *uint32 `protobuf:"varint,1,opt,name=account_id" json:"account_id,omitempty"`
+	AuditData          *uint64 `protobuf:"varint,2,opt,name=audit_data" json:"audit_data,omitempty"`
+	DeleteAuditHistory *bool   `protobuf:"varint,3,opt,name=delete_audit_history" json:"delete_audit_history,omitempty"`
+	XXX_unrecognized   []byte  `json:"-"`
+}
+
+func (m *CMsgGCToGCDevRevokeUserItems) Reset()         { *m = CMsgGCToGCDevRevokeUserItems{} }
+func (m *CMsgGCToGCDevRevokeUserItems) String() string { return proto.CompactTextString(m) }
+func (*CMsgGCToGCDevRevokeUserItems) ProtoMessage()    {}
+
+func (m *CMsgGCToGCDevRevokeUserItems) GetAccountId() uint32 {
+	if m != nil && m.AccountId != nil {
+		return *m.AccountId
+	}
+	return 0
+}
+
+func (m *CMsgGCToGCDevRevokeUserItems) GetAuditData() uint64 {
+	if m != nil && m.AuditData != nil {
+		return *m.AuditData
+	}
+	return 0
+}
+
+func (m *CMsgGCToGCDevRevokeUserItems) GetDeleteAuditHistory() bool {
+	if m != nil && m.DeleteAuditHistory != nil {
+		return *m.DeleteAuditHistory
+	}
+	return false
+}
+
+type CMsgClientToGCCreateStaticRecipe struct {
+	Items            []*CMsgClientToGCCreateStaticRecipe_Item `protobuf:"bytes,1,rep,name=items" json:"items,omitempty"`
+	RecipeDefIndex   *uint32                                  `protobuf:"varint,2,opt,name=recipe_def_index" json:"recipe_def_index,omitempty"`
+	XXX_unrecognized []byte                                   `json:"-"`
+}
+
+func (m *CMsgClientToGCCreateStaticRecipe) Reset()         { *m = CMsgClientToGCCreateStaticRecipe{} }
+func (m *CMsgClientToGCCreateStaticRecipe) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCCreateStaticRecipe) ProtoMessage()    {}
+
+func (m *CMsgClientToGCCreateStaticRecipe) GetItems() []*CMsgClientToGCCreateStaticRecipe_Item {
+	if m != nil {
+		return m.Items
+	}
+	return nil
+}
+
+func (m *CMsgClientToGCCreateStaticRecipe) GetRecipeDefIndex() uint32 {
+	if m != nil && m.RecipeDefIndex != nil {
+		return *m.RecipeDefIndex
+	}
+	return 0
+}
+
+type CMsgClientToGCCreateStaticRecipe_Item struct {
+	ItemId           *uint64 `protobuf:"varint,1,opt,name=item_id" json:"item_id,omitempty"`
+	SlotId           *uint32 `protobuf:"varint,2,opt,name=slot_id" json:"slot_id,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CMsgClientToGCCreateStaticRecipe_Item) Reset()         { *m = CMsgClientToGCCreateStaticRecipe_Item{} }
+func (m *CMsgClientToGCCreateStaticRecipe_Item) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCCreateStaticRecipe_Item) ProtoMessage()    {}
+
+func (m *CMsgClientToGCCreateStaticRecipe_Item) GetItemId() uint64 {
+	if m != nil && m.ItemId != nil {
+		return *m.ItemId
+	}
+	return 0
+}
+
+func (m *CMsgClientToGCCreateStaticRecipe_Item) GetSlotId() uint32 {
+	if m != nil && m.SlotId != nil {
+		return *m.SlotId
+	}
+	return 0
+}
+
+type CMsgClientToGCCreateStaticRecipeResponse struct {
+	Response         *CMsgClientToGCCreateStaticRecipeResponse_EResponse    `protobuf:"varint,1,opt,name=response,enum=dota.CMsgClientToGCCreateStaticRecipeResponse_EResponse,def=0" json:"response,omitempty"`
+	OutputItems      []*CMsgClientToGCCreateStaticRecipeResponse_OutputItem `protobuf:"bytes,2,rep,name=output_items" json:"output_items,omitempty"`
+	XXX_unrecognized []byte                                                 `json:"-"`
+}
+
+func (m *CMsgClientToGCCreateStaticRecipeResponse) Reset() {
+	*m = CMsgClientToGCCreateStaticRecipeResponse{}
+}
+func (m *CMsgClientToGCCreateStaticRecipeResponse) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCCreateStaticRecipeResponse) ProtoMessage()    {}
+
+const Default_CMsgClientToGCCreateStaticRecipeResponse_Response CMsgClientToGCCreateStaticRecipeResponse_EResponse = CMsgClientToGCCreateStaticRecipeResponse_eResponse_Success
+
+func (m *CMsgClientToGCCreateStaticRecipeResponse) GetResponse() CMsgClientToGCCreateStaticRecipeResponse_EResponse {
+	if m != nil && m.Response != nil {
+		return *m.Response
+	}
+	return Default_CMsgClientToGCCreateStaticRecipeResponse_Response
+}
+
+func (m *CMsgClientToGCCreateStaticRecipeResponse) GetOutputItems() []*CMsgClientToGCCreateStaticRecipeResponse_OutputItem {
+	if m != nil {
+		return m.OutputItems
+	}
+	return nil
+}
+
+type CMsgClientToGCCreateStaticRecipeResponse_OutputItem struct {
+	DefIndex         *uint32 `protobuf:"varint,1,opt,name=def_index" json:"def_index,omitempty"`
+	ItemId           *uint64 `protobuf:"varint,2,opt,name=item_id" json:"item_id,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CMsgClientToGCCreateStaticRecipeResponse_OutputItem) Reset() {
+	*m = CMsgClientToGCCreateStaticRecipeResponse_OutputItem{}
+}
+func (m *CMsgClientToGCCreateStaticRecipeResponse_OutputItem) String() string {
+	return proto.CompactTextString(m)
+}
+func (*CMsgClientToGCCreateStaticRecipeResponse_OutputItem) ProtoMessage() {}
+
+func (m *CMsgClientToGCCreateStaticRecipeResponse_OutputItem) GetDefIndex() uint32 {
+	if m != nil && m.DefIndex != nil {
+		return *m.DefIndex
+	}
+	return 0
+}
+
+func (m *CMsgClientToGCCreateStaticRecipeResponse_OutputItem) GetItemId() uint64 {
+	if m != nil && m.ItemId != nil {
+		return *m.ItemId
+	}
+	return 0
+}
+
 func init() {
 	proto.RegisterEnum("dota.EGCItemMsg", EGCItemMsg_name, EGCItemMsg_value)
 	proto.RegisterEnum("dota.EGCMsgResponse", EGCMsgResponse_name, EGCMsgResponse_value)
@@ -3742,4 +3929,5 @@ func init() {
 	proto.RegisterEnum("dota.CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle", CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle_name, CMsgClientToGCUnlockItemStyleResponse_EUnlockStyle_value)
 	proto.RegisterEnum("dota.CMsgClientToGCRemoveItemAttributeResponse_ERemoveItemAttribute", CMsgClientToGCRemoveItemAttributeResponse_ERemoveItemAttribute_name, CMsgClientToGCRemoveItemAttributeResponse_ERemoveItemAttribute_value)
 	proto.RegisterEnum("dota.CMsgClientToGCNameItemResponse_ENameItem", CMsgClientToGCNameItemResponse_ENameItem_name, CMsgClientToGCNameItemResponse_ENameItem_value)
+	proto.RegisterEnum("dota.CMsgClientToGCCreateStaticRecipeResponse_EResponse", CMsgClientToGCCreateStaticRecipeResponse_EResponse_name, CMsgClientToGCCreateStaticRecipeResponse_EResponse_value)
 }

@@ -200,7 +200,7 @@ func (m *CGameInfo) GetDota() *CGameInfo_CDotaGameInfo {
 }
 
 type CGameInfo_CDotaGameInfo struct {
-	MatchId          *uint32                                     `protobuf:"varint,1,opt,name=match_id" json:"match_id,omitempty"`
+	MatchId          *uint64                                     `protobuf:"varint,1,opt,name=match_id" json:"match_id,omitempty"`
 	GameMode         *int32                                      `protobuf:"varint,2,opt,name=game_mode" json:"game_mode,omitempty"`
 	GameWinner       *int32                                      `protobuf:"varint,3,opt,name=game_winner" json:"game_winner,omitempty"`
 	PlayerInfo       []*CGameInfo_CDotaGameInfo_CPlayerInfo      `protobuf:"bytes,4,rep,name=player_info" json:"player_info,omitempty"`
@@ -218,7 +218,7 @@ func (m *CGameInfo_CDotaGameInfo) Reset()         { *m = CGameInfo_CDotaGameInfo
 func (m *CGameInfo_CDotaGameInfo) String() string { return proto.CompactTextString(m) }
 func (*CGameInfo_CDotaGameInfo) ProtoMessage()    {}
 
-func (m *CGameInfo_CDotaGameInfo) GetMatchId() uint32 {
+func (m *CGameInfo_CDotaGameInfo) GetMatchId() uint64 {
 	if m != nil && m.MatchId != nil {
 		return *m.MatchId
 	}

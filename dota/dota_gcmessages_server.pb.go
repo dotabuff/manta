@@ -1769,6 +1769,7 @@ type CMsgGameMatchSignOut_CTeam_CPlayer struct {
 	AdditionalUnitsInventory []*CMatchAdditionalUnitInventory                    `protobuf:"bytes,33,rep,name=additional_units_inventory" json:"additional_units_inventory,omitempty"`
 	NetWorth                 *uint32                                             `protobuf:"varint,34,opt,name=net_worth" json:"net_worth,omitempty"`
 	CustomGameData           *CMsgGameMatchSignOut_CTeam_CPlayer_CCustomGameData `protobuf:"bytes,35,opt,name=custom_game_data" json:"custom_game_data,omitempty"`
+	MatchPlayerFlags         *uint32                                             `protobuf:"varint,36,opt,name=match_player_flags" json:"match_player_flags,omitempty"`
 	XXX_unrecognized         []byte                                              `json:"-"`
 }
 
@@ -1998,6 +1999,13 @@ func (m *CMsgGameMatchSignOut_CTeam_CPlayer) GetCustomGameData() *CMsgGameMatchS
 		return m.CustomGameData
 	}
 	return nil
+}
+
+func (m *CMsgGameMatchSignOut_CTeam_CPlayer) GetMatchPlayerFlags() uint32 {
+	if m != nil && m.MatchPlayerFlags != nil {
+		return *m.MatchPlayerFlags
+	}
+	return 0
 }
 
 type CMsgGameMatchSignOut_CTeam_CPlayer_CCustomGameData struct {
@@ -2565,6 +2573,7 @@ type CMsgGameMatchSignoutResponse struct {
 	XpRewardDetails    []*CDOTALobbyMember                                   `protobuf:"bytes,4,rep,name=xp_reward_details" json:"xp_reward_details,omitempty"`
 	Leagueid           *uint32                                               `protobuf:"varint,5,opt,name=leagueid" json:"leagueid,omitempty"`
 	AdditionalMsgs     []*CMsgGameMatchSignoutResponse_CAdditionalSignoutMsg `protobuf:"bytes,6,rep,name=additional_msgs" json:"additional_msgs,omitempty"`
+	MetadataPrivateKey *uint32                                               `protobuf:"fixed32,7,opt,name=metadata_private_key" json:"metadata_private_key,omitempty"`
 	XXX_unrecognized   []byte                                                `json:"-"`
 }
 
@@ -2612,6 +2621,13 @@ func (m *CMsgGameMatchSignoutResponse) GetAdditionalMsgs() []*CMsgGameMatchSigno
 		return m.AdditionalMsgs
 	}
 	return nil
+}
+
+func (m *CMsgGameMatchSignoutResponse) GetMetadataPrivateKey() uint32 {
+	if m != nil && m.MetadataPrivateKey != nil {
+		return *m.MetadataPrivateKey
+	}
+	return 0
 }
 
 type CMsgGameMatchSignoutResponse_CAdditionalSignoutMsg struct {

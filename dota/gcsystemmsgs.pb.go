@@ -100,6 +100,8 @@ const (
 	EGCSystemMsg_k_EGCMsgGetIPASNResponse                  EGCSystemMsg = 515
 	EGCSystemMsg_k_EGCMsgGetAppFriendsList                 EGCSystemMsg = 516
 	EGCSystemMsg_k_EGCMsgGetAppFriendsListResponse         EGCSystemMsg = 517
+	EGCSystemMsg_k_EGCMsgVacVerificationChange             EGCSystemMsg = 518
+	EGCSystemMsg_k_EGCMsgAccountPhoneNumberChange          EGCSystemMsg = 519
 )
 
 var EGCSystemMsg_name = map[int32]string{
@@ -189,6 +191,8 @@ var EGCSystemMsg_name = map[int32]string{
 	515: "k_EGCMsgGetIPASNResponse",
 	516: "k_EGCMsgGetAppFriendsList",
 	517: "k_EGCMsgGetAppFriendsListResponse",
+	518: "k_EGCMsgVacVerificationChange",
+	519: "k_EGCMsgAccountPhoneNumberChange",
 }
 var EGCSystemMsg_value = map[string]int32{
 	"k_EGCMsgInvalid":                           0,
@@ -277,6 +281,8 @@ var EGCSystemMsg_value = map[string]int32{
 	"k_EGCMsgGetIPASNResponse":                  515,
 	"k_EGCMsgGetAppFriendsList":                 516,
 	"k_EGCMsgGetAppFriendsListResponse":         517,
+	"k_EGCMsgVacVerificationChange":             518,
+	"k_EGCMsgAccountPhoneNumberChange":          519,
 }
 
 func (x EGCSystemMsg) Enum() *EGCSystemMsg {

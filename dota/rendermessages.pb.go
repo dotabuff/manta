@@ -771,7 +771,6 @@ type CMsgPushCompositingLayer struct {
 	MotionblurVelocity       *float64         `protobuf:"fixed64,61,opt,name=motionblur_velocity" json:"motionblur_velocity,omitempty"`
 	MotionblurDirx           *float64         `protobuf:"fixed64,62,opt,name=motionblur_dirx" json:"motionblur_dirx,omitempty"`
 	MotionblurDiry           *float64         `protobuf:"fixed64,63,opt,name=motionblur_diry" json:"motionblur_diry,omitempty"`
-	MotionblurSamplecount    *uint32          `protobuf:"varint,64,opt,name=motionblur_samplecount" json:"motionblur_samplecount,omitempty"`
 	XXX_unrecognized         []byte           `json:"-"`
 }
 
@@ -1216,13 +1215,6 @@ func (m *CMsgPushCompositingLayer) GetMotionblurDirx() float64 {
 func (m *CMsgPushCompositingLayer) GetMotionblurDiry() float64 {
 	if m != nil && m.MotionblurDiry != nil {
 		return *m.MotionblurDiry
-	}
-	return 0
-}
-
-func (m *CMsgPushCompositingLayer) GetMotionblurSamplecount() uint32 {
-	if m != nil && m.MotionblurSamplecount != nil {
-		return *m.MotionblurSamplecount
 	}
 	return 0
 }
@@ -2770,7 +2762,6 @@ type CMsgMotionBlurValues struct {
 	Velocity         *float64 `protobuf:"fixed64,1,opt,name=velocity" json:"velocity,omitempty"`
 	Dirx             *float64 `protobuf:"fixed64,2,opt,name=dirx" json:"dirx,omitempty"`
 	Diry             *float64 `protobuf:"fixed64,3,opt,name=diry" json:"diry,omitempty"`
-	SampleCount      *uint32  `protobuf:"varint,4,opt,name=sample_count" json:"sample_count,omitempty"`
 	XXX_unrecognized []byte   `json:"-"`
 }
 
@@ -2795,13 +2786,6 @@ func (m *CMsgMotionBlurValues) GetDirx() float64 {
 func (m *CMsgMotionBlurValues) GetDiry() float64 {
 	if m != nil && m.Diry != nil {
 		return *m.Diry
-	}
-	return 0
-}
-
-func (m *CMsgMotionBlurValues) GetSampleCount() uint32 {
-	if m != nil && m.SampleCount != nil {
-		return *m.SampleCount
 	}
 	return 0
 }

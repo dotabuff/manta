@@ -15,6 +15,7 @@ type CDOTAMatchMetadataFile struct {
 	Version          *int32              `protobuf:"varint,1,req,name=version" json:"version,omitempty"`
 	MatchId          *uint64             `protobuf:"varint,2,req,name=match_id" json:"match_id,omitempty"`
 	Metadata         *CDOTAMatchMetadata `protobuf:"bytes,3,opt,name=metadata" json:"metadata,omitempty"`
+	PrivateMetadata  []byte              `protobuf:"bytes,4,opt,name=private_metadata" json:"private_metadata,omitempty"`
 	XXX_unrecognized []byte              `json:"-"`
 }
 
@@ -39,6 +40,13 @@ func (m *CDOTAMatchMetadataFile) GetMatchId() uint64 {
 func (m *CDOTAMatchMetadataFile) GetMetadata() *CDOTAMatchMetadata {
 	if m != nil {
 		return m.Metadata
+	}
+	return nil
+}
+
+func (m *CDOTAMatchMetadataFile) GetPrivateMetadata() []byte {
+	if m != nil {
+		return m.PrivateMetadata
 	}
 	return nil
 }
@@ -108,9 +116,11 @@ func (m *CDOTAMatchMetadata_Team) GetGraphNetWorth() []float32 {
 }
 
 type CDOTAMatchMetadata_Team_Player struct {
-	AccountId        *uint32  `protobuf:"varint,1,opt,name=account_id" json:"account_id,omitempty"`
-	AbilityUpgrades  []uint32 `protobuf:"varint,2,rep,name=ability_upgrades" json:"ability_upgrades,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	AccountId         *uint32        `protobuf:"varint,1,opt,name=account_id" json:"account_id,omitempty"`
+	AbilityUpgrades   []uint32       `protobuf:"varint,2,rep,name=ability_upgrades" json:"ability_upgrades,omitempty"`
+	PlayerSlot        *uint32        `protobuf:"varint,3,opt,name=player_slot" json:"player_slot,omitempty"`
+	EquippedEconItems []*CSOEconItem `protobuf:"bytes,4,rep,name=equipped_econ_items" json:"equipped_econ_items,omitempty"`
+	XXX_unrecognized  []byte         `json:"-"`
 }
 
 func (m *CDOTAMatchMetadata_Team_Player) Reset()         { *m = CDOTAMatchMetadata_Team_Player{} }
@@ -127,6 +137,84 @@ func (m *CDOTAMatchMetadata_Team_Player) GetAccountId() uint32 {
 func (m *CDOTAMatchMetadata_Team_Player) GetAbilityUpgrades() []uint32 {
 	if m != nil {
 		return m.AbilityUpgrades
+	}
+	return nil
+}
+
+func (m *CDOTAMatchMetadata_Team_Player) GetPlayerSlot() uint32 {
+	if m != nil && m.PlayerSlot != nil {
+		return *m.PlayerSlot
+	}
+	return 0
+}
+
+func (m *CDOTAMatchMetadata_Team_Player) GetEquippedEconItems() []*CSOEconItem {
+	if m != nil {
+		return m.EquippedEconItems
+	}
+	return nil
+}
+
+type CDOTAMatchPrivateMetadata struct {
+	Kills            []*CDOTAMatchPrivateMetadata_Kill `protobuf:"bytes,1,rep,name=kills" json:"kills,omitempty"`
+	TestString       *string                           `protobuf:"bytes,100,opt,name=test_string" json:"test_string,omitempty"`
+	XXX_unrecognized []byte                            `json:"-"`
+}
+
+func (m *CDOTAMatchPrivateMetadata) Reset()         { *m = CDOTAMatchPrivateMetadata{} }
+func (m *CDOTAMatchPrivateMetadata) String() string { return proto.CompactTextString(m) }
+func (*CDOTAMatchPrivateMetadata) ProtoMessage()    {}
+
+func (m *CDOTAMatchPrivateMetadata) GetKills() []*CDOTAMatchPrivateMetadata_Kill {
+	if m != nil {
+		return m.Kills
+	}
+	return nil
+}
+
+func (m *CDOTAMatchPrivateMetadata) GetTestString() string {
+	if m != nil && m.TestString != nil {
+		return *m.TestString
+	}
+	return ""
+}
+
+type CDOTAMatchPrivateMetadata_Kill struct {
+	Timestamp        *int32   `protobuf:"varint,1,opt,name=timestamp" json:"timestamp,omitempty"`
+	KillerHeroId     *uint32  `protobuf:"varint,2,opt,name=killer_hero_id" json:"killer_hero_id,omitempty"`
+	VictimHeroId     *uint32  `protobuf:"varint,3,opt,name=victim_hero_id" json:"victim_hero_id,omitempty"`
+	AssistHeroIds    []uint32 `protobuf:"varint,4,rep,name=assist_hero_ids" json:"assist_hero_ids,omitempty"`
+	XXX_unrecognized []byte   `json:"-"`
+}
+
+func (m *CDOTAMatchPrivateMetadata_Kill) Reset()         { *m = CDOTAMatchPrivateMetadata_Kill{} }
+func (m *CDOTAMatchPrivateMetadata_Kill) String() string { return proto.CompactTextString(m) }
+func (*CDOTAMatchPrivateMetadata_Kill) ProtoMessage()    {}
+
+func (m *CDOTAMatchPrivateMetadata_Kill) GetTimestamp() int32 {
+	if m != nil && m.Timestamp != nil {
+		return *m.Timestamp
+	}
+	return 0
+}
+
+func (m *CDOTAMatchPrivateMetadata_Kill) GetKillerHeroId() uint32 {
+	if m != nil && m.KillerHeroId != nil {
+		return *m.KillerHeroId
+	}
+	return 0
+}
+
+func (m *CDOTAMatchPrivateMetadata_Kill) GetVictimHeroId() uint32 {
+	if m != nil && m.VictimHeroId != nil {
+		return *m.VictimHeroId
+	}
+	return 0
+}
+
+func (m *CDOTAMatchPrivateMetadata_Kill) GetAssistHeroIds() []uint32 {
+	if m != nil {
+		return m.AssistHeroIds
 	}
 	return nil
 }

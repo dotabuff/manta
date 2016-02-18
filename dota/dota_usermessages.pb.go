@@ -106,6 +106,7 @@ const (
 	EDotaUserMessages_DOTA_UM_CombatLogDataHLTV         EDotaUserMessages = 554
 	EDotaUserMessages_DOTA_UM_XPAlert                   EDotaUserMessages = 555
 	EDotaUserMessages_DOTA_UM_UpdateQuestProgress       EDotaUserMessages = 556
+	EDotaUserMessages_DOTA_UM_MatchMetadata             EDotaUserMessages = 557
 )
 
 var EDotaUserMessages_name = map[int32]string{
@@ -201,6 +202,7 @@ var EDotaUserMessages_name = map[int32]string{
 	554: "DOTA_UM_CombatLogDataHLTV",
 	555: "DOTA_UM_XPAlert",
 	556: "DOTA_UM_UpdateQuestProgress",
+	557: "DOTA_UM_MatchMetadata",
 }
 var EDotaUserMessages_value = map[string]int32{
 	"DOTA_UM_AddUnitToSelection":        464,
@@ -295,6 +297,7 @@ var EDotaUserMessages_value = map[string]int32{
 	"DOTA_UM_CombatLogDataHLTV":         554,
 	"DOTA_UM_XPAlert":                   555,
 	"DOTA_UM_UpdateQuestProgress":       556,
+	"DOTA_UM_MatchMetadata":             557,
 }
 
 func (x EDotaUserMessages) Enum() *EDotaUserMessages {
@@ -3805,7 +3808,7 @@ func (m *CDOTAUserMsg_ReceivedXmasGift) GetInventorySlot() int32 {
 
 type CDOTAUserMsg_ShowSurvey struct {
 	SurveyId          *int32  `protobuf:"varint,1,opt,name=survey_id" json:"survey_id,omitempty"`
-	MatchId           *uint32 `protobuf:"varint,2,opt,name=match_id" json:"match_id,omitempty"`
+	MatchId           *uint64 `protobuf:"varint,2,opt,name=match_id" json:"match_id,omitempty"`
 	ResponseStyle     *string `protobuf:"bytes,3,opt,name=response_style" json:"response_style,omitempty"`
 	TeammateHeroId    *uint32 `protobuf:"varint,4,opt,name=teammate_hero_id" json:"teammate_hero_id,omitempty"`
 	TeammateName      *string `protobuf:"bytes,5,opt,name=teammate_name" json:"teammate_name,omitempty"`
@@ -3824,7 +3827,7 @@ func (m *CDOTAUserMsg_ShowSurvey) GetSurveyId() int32 {
 	return 0
 }
 
-func (m *CDOTAUserMsg_ShowSurvey) GetMatchId() uint32 {
+func (m *CDOTAUserMsg_ShowSurvey) GetMatchId() uint64 {
 	if m != nil && m.MatchId != nil {
 		return *m.MatchId
 	}

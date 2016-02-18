@@ -3298,6 +3298,38 @@ func (m *CMsgDPPartnerMicroTxnsResponse) GetEerrorcode() CMsgDPPartnerMicroTxnsR
 	return Default_CMsgDPPartnerMicroTxnsResponse_Eerrorcode
 }
 
+type CMsgGCHVacVerificationChange struct {
+	Steamid          *uint64 `protobuf:"fixed64,1,opt,name=steamid" json:"steamid,omitempty"`
+	Appid            *uint32 `protobuf:"varint,2,opt,name=appid" json:"appid,omitempty"`
+	IsVerified       *bool   `protobuf:"varint,3,opt,name=is_verified" json:"is_verified,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CMsgGCHVacVerificationChange) Reset()         { *m = CMsgGCHVacVerificationChange{} }
+func (m *CMsgGCHVacVerificationChange) String() string { return proto.CompactTextString(m) }
+func (*CMsgGCHVacVerificationChange) ProtoMessage()    {}
+
+func (m *CMsgGCHVacVerificationChange) GetSteamid() uint64 {
+	if m != nil && m.Steamid != nil {
+		return *m.Steamid
+	}
+	return 0
+}
+
+func (m *CMsgGCHVacVerificationChange) GetAppid() uint32 {
+	if m != nil && m.Appid != nil {
+		return *m.Appid
+	}
+	return 0
+}
+
+func (m *CMsgGCHVacVerificationChange) GetIsVerified() bool {
+	if m != nil && m.IsVerified != nil {
+		return *m.IsVerified
+	}
+	return false
+}
+
 var E_KeyField = &proto.ExtensionDesc{
 	ExtendedType:  (*google_protobuf.FieldOptions)(nil),
 	ExtensionType: (*bool)(nil),
