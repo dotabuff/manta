@@ -82,7 +82,7 @@ func (p *Parser) onCDemoPacket(m *dota.CDemoPacket) error {
 	for _, m := range ms {
 		// Skip message we don't have a definition for (yet)
 		// XXX TODO: remove this when we get updated protos.
-		if m.t == 400 {
+		if m.t == 400 || m.t == 557 {
 			continue
 		}
 
