@@ -24,13 +24,18 @@ Use it to parse a replay:
 
 ```go
 import (
+  "log"
+
   "github.com/dotabuff/manta"
   "github.com/dotabuff/manta/dota"
 )
 
 func main() {
   // Create a new parser instance from a file. Alternatively see NewParser([]byte)
-  p, _ := manta.NewParserFromFile("my_replay.dem")
+  p, err := manta.NewParserFromFile("my_replay.dem")
+  if err != nil {
+    log.Fatalf("unable to create parser: %s", err)
+  }
 
   // Register a callback, this time for the OnCUserMessageSayText2 event.
   p.Callbacks.OnCUserMessageSayText2(func(m *dota.CUserMessageSayText2) error {
