@@ -2,13 +2,7 @@
 
 [![Build Status](https://travis-ci.org/dotabuff/manta.svg?branch=master)](https://travis-ci.org/dotabuff/manta)
 
-Manta is a Dota 2 replay parser written in [Go](https://golang.org). It targets the Source 2 (Dota 2 Reborn) game engine. To parse Source 1 (original Dota 2) replays, take a look at [Yasha](https://github.com/dotabuff/yasha).
-
-**Project Status:**
-
-- Dota 2 Reborn (Source 2) is now the main Dota 2 client. Yay!
-- Manta is structurally feature complete and in use serving production workloads at Dotabuff.
-- Manta currently handles nearly all packets, including the packet entities.
+Manta is a fully functional Dota 2 replay parser written in [Go](https://golang.org), targeting the Source 2 (Dota 2 Reborn) game engine.
 
 ## Getting Started
 
@@ -39,24 +33,30 @@ func main() {
 
   // Register a callback, this time for the OnCUserMessageSayText2 event.
   p.Callbacks.OnCUserMessageSayText2(func(m *dota.CUserMessageSayText2) error {
-    fmt.Printf("%s said: %s", m.GetParam1(), m.GetParam2())
+    log.Printf("%s said: %s\n", m.GetParam1(), m.GetParam2())
     return nil
   })
 
   // Start parsing the replay!
   p.Start()
+
+  log.Printf("Parse Complete!\n")
 }
 ```
 
-You cannot import Manta and Yasha in the same binary due to protocol buffer conflicts.
-
 ## License
 
-MIT, see the LICENSE file.
+Manta is distributed under the [MIT license](https://github.com/dotabuff/manta/blob/master/LICENSE).
 
-## Help
+## Code of Conduct
 
-If you have any questions, you can find us in the #dota2replay channel on QuakeNet.
+Manta has adopted the [Contributor Covenant Code of Conduct](https://github.com/dotabuff/manta/blob/master/CONDUCT.md).
+
+## Getting Help
+
+The best place to ask questions about Dota 2 replay parsing is the #dota2replay channel on QuakeNet, where we're happy to answer any questions you may have. Please only open Github issues for actual bugs in manta, not questions about usage.
+
+Looking to parse Source 1 (original Dota 2) replays? Take a look at [Yasha](https://github.com/dotabuff/yasha).
 
 ## Authors and Acknowledgements
 
