@@ -15,7 +15,6 @@ cpuprofile:
 	go tool pprof -svg -output=/tmp/manta.cpuprof.svg manta.test /tmp/manta.cpuprof
 	open /tmp/manta.cpuprof.svg
 
-
 update: update-game-tracking gen-dota-proto generate
 
 game-tracking:
