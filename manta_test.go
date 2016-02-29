@@ -394,6 +394,8 @@ func (s testScenario) test(t *testing.T) {
 		t.Skip("skipping scenario in CI environment")
 	}
 
+	t.Parallel()
+
 	buf := mustGetReplayData(s.matchId, s.replayUrl)
 	parser, err := NewParser(buf)
 	if err != nil {
