@@ -2,8 +2,6 @@
 package manta
 
 import (
-	"fmt"
-
 	"github.com/dotabuff/manta/dota"
 	"github.com/golang/protobuf/proto"
 )
@@ -1182,7 +1180,10 @@ func (p *Parser) CallByDemoType(t int32, raw []byte) error {
 		}
 		return nil
 	}
-	return fmt.Errorf("no type found: %d", t)
+
+	_debugf("warning: no type %d found", t)
+
+	return nil
 }
 
 func (p *Parser) CallByPacketType(t int32, raw []byte) error {
@@ -3490,7 +3491,10 @@ func (p *Parser) CallByPacketType(t int32, raw []byte) error {
 		}
 		return nil
 	}
-	return fmt.Errorf("no type found: %d", t)
+
+	_debugf("warning: no type %d found", t)
+
+	return nil
 }
 
 func (c *Callbacks) OnAny(all func(interface{}) error) {

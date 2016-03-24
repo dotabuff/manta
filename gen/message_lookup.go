@@ -116,8 +116,6 @@ func main() {
 		`//go:generate go run gen/message_lookup.go %s %s
 package manta
 import (
-  "fmt"
-
   "github.com/dotabuff/manta/dota"
   "github.com/golang/protobuf/proto"
 )
@@ -257,7 +255,10 @@ func (p *Parser) %s(t int32, raw []byte) (error) {
   switch t {
   %s
   }
-  return fmt.Errorf("no type found: %%d", t)
+
+  _debugf("warning: no type %%d found", t)
+
+  return nil
 }
   `
 
