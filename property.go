@@ -94,11 +94,8 @@ func (p *Properties) FetchString(k string) (string, bool) {
 	return "", false
 }
 
-// Reads properties using a given reader and serializer.
-func ReadProperties(r *Reader, ser *dt) (result *Properties) {
-	// Return type
-	result = NewProperties()
-
+// Reads properties into p using the given reader and serializer.
+func (p *Properties) readProperties(r *Reader, ser *dt) {
 	// Create fieldpath
 	fieldPath := newFieldpath(ser, &huf)
 
@@ -112,17 +109,15 @@ func ReadProperties(r *Reader, ser *dt) (result *Properties) {
 
 		if f.Field.Serializer.DecodeContainer != nil {
 			_debugfl(6, "Decoding container %v", f.Field.Name)
-			result.KV[f.Name] = f.Field.Serializer.DecodeContainer(r, f.Field)
+			p.KV[f.Name] = f.Field.Serializer.DecodeContainer(r, f.Field)
 		} else if f.Field.Serializer.Decode == nil {
-			result.KV[f.Name] = r.readVarUint32()
-			_debugfl(6, "Decoded default: %d %s %s %v", r.pos, f.Name, f.Field.Type, result.KV[f.Name])
+			p.KV[f.Name] = r.readVarUint32()
+			_debugfl(6, "Decoded default: %d %s %s %v", r.pos, f.Name, f.Field.Type, p.KV[f.Name])
 			continue
 		} else {
-			result.KV[f.Name] = f.Field.Serializer.Decode(r, f.Field)
+			p.KV[f.Name] = f.Field.Serializer.Decode(r, f.Field)
 		}
 
-		_debugfl(6, "Decoded: %d %s %s %v", r.pos, f.Name, f.Field.Type, result.KV[f.Name])
+		_debugfl(6, "Decoded: %d %s %s %v", r.pos, f.Name, f.Field.Type, p.KV[f.Name])
 	}
-
-	return result
 }

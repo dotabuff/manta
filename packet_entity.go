@@ -183,7 +183,7 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 			p.PacketEntities[index] = pe
 
 			// Read properties
-			pe.Properties.Merge(ReadProperties(r, pe.flatTbl))
+			pe.Properties.readProperties(r, pe.flatTbl)
 
 		case EntityEventType_Update:
 			// Find the existing packetEntity
@@ -192,8 +192,8 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 				_panicf("unable to find packet entity %d for update", index)
 			}
 
-			// Read properties and update the packetEntity
-			pe.Properties.Merge(ReadProperties(r, pe.flatTbl))
+			// Read properties
+			pe.Properties.readProperties(r, pe.flatTbl)
 
 		case EntityEventType_Delete:
 			if pe, ok = p.PacketEntities[index]; !ok {
