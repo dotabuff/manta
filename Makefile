@@ -4,14 +4,14 @@ test:
 	go test -cover -v
 
 bench:
-	go test -bench=. -v
+	go test -run=XXX -bench=. -v
 
 cover:
 	go test -cover -coverpkg github.com/dotabuff/manta,github.com/dotabuff/manta/vbkv -coverprofile /tmp/manta.cov -v
 	go tool cover -html=/tmp/manta.cov
 
 cpuprofile:
-	go test -v -run=TestParseOneMatch -test.cpuprofile=/tmp/manta.cpuprof
+	go test -v -run=TestMatch2159568145 -test.cpuprofile=/tmp/manta.cpuprof
 	go tool pprof -svg -output=/tmp/manta.cpuprof.svg manta.test /tmp/manta.cpuprof
 	open /tmp/manta.cpuprof.svg
 
