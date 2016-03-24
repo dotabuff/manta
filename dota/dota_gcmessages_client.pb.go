@@ -16198,6 +16198,70 @@ func (m *CMsgPredictionRankings_Prediction) GetPredictionLines() []*CMsgPredicti
 	return nil
 }
 
+type CMsgPredictionResults struct {
+	Results          []*CMsgPredictionResults_Result `protobuf:"bytes,1,rep,name=results" json:"results,omitempty"`
+	XXX_unrecognized []byte                          `json:"-"`
+}
+
+func (m *CMsgPredictionResults) Reset()         { *m = CMsgPredictionResults{} }
+func (m *CMsgPredictionResults) String() string { return proto.CompactTextString(m) }
+func (*CMsgPredictionResults) ProtoMessage()    {}
+
+func (m *CMsgPredictionResults) GetResults() []*CMsgPredictionResults_Result {
+	if m != nil {
+		return m.Results
+	}
+	return nil
+}
+
+type CMsgPredictionResults_ResultBreakdown struct {
+	AnswerSelection  *uint32  `protobuf:"varint,2,opt,name=answer_selection" json:"answer_selection,omitempty"`
+	AnswerValue      *float32 `protobuf:"fixed32,3,opt,name=answer_value" json:"answer_value,omitempty"`
+	XXX_unrecognized []byte   `json:"-"`
+}
+
+func (m *CMsgPredictionResults_ResultBreakdown) Reset()         { *m = CMsgPredictionResults_ResultBreakdown{} }
+func (m *CMsgPredictionResults_ResultBreakdown) String() string { return proto.CompactTextString(m) }
+func (*CMsgPredictionResults_ResultBreakdown) ProtoMessage()    {}
+
+func (m *CMsgPredictionResults_ResultBreakdown) GetAnswerSelection() uint32 {
+	if m != nil && m.AnswerSelection != nil {
+		return *m.AnswerSelection
+	}
+	return 0
+}
+
+func (m *CMsgPredictionResults_ResultBreakdown) GetAnswerValue() float32 {
+	if m != nil && m.AnswerValue != nil {
+		return *m.AnswerValue
+	}
+	return 0
+}
+
+type CMsgPredictionResults_Result struct {
+	SelectionId      *uint32                                  `protobuf:"varint,1,opt,name=selection_id" json:"selection_id,omitempty"`
+	ResultBreakdown  []*CMsgPredictionResults_ResultBreakdown `protobuf:"bytes,2,rep,name=result_breakdown" json:"result_breakdown,omitempty"`
+	XXX_unrecognized []byte                                   `json:"-"`
+}
+
+func (m *CMsgPredictionResults_Result) Reset()         { *m = CMsgPredictionResults_Result{} }
+func (m *CMsgPredictionResults_Result) String() string { return proto.CompactTextString(m) }
+func (*CMsgPredictionResults_Result) ProtoMessage()    {}
+
+func (m *CMsgPredictionResults_Result) GetSelectionId() uint32 {
+	if m != nil && m.SelectionId != nil {
+		return *m.SelectionId
+	}
+	return 0
+}
+
+func (m *CMsgPredictionResults_Result) GetResultBreakdown() []*CMsgPredictionResults_ResultBreakdown {
+	if m != nil {
+		return m.ResultBreakdown
+	}
+	return nil
+}
+
 type CMsgClientToGCSuspiciousActivity struct {
 	AppData          *uint64 `protobuf:"varint,1,opt,name=app_data" json:"app_data,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`

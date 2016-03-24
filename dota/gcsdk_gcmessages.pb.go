@@ -1584,6 +1584,54 @@ func (m *CBroadcast_PostGameDataFrame_Request) GetFrameData() []byte {
 	return nil
 }
 
+type CMsgGCToClientPollConvarRequest struct {
+	ConvarName       *string `protobuf:"bytes,1,opt,name=convar_name" json:"convar_name,omitempty"`
+	PollId           *uint32 `protobuf:"varint,2,opt,name=poll_id" json:"poll_id,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CMsgGCToClientPollConvarRequest) Reset()         { *m = CMsgGCToClientPollConvarRequest{} }
+func (m *CMsgGCToClientPollConvarRequest) String() string { return proto.CompactTextString(m) }
+func (*CMsgGCToClientPollConvarRequest) ProtoMessage()    {}
+
+func (m *CMsgGCToClientPollConvarRequest) GetConvarName() string {
+	if m != nil && m.ConvarName != nil {
+		return *m.ConvarName
+	}
+	return ""
+}
+
+func (m *CMsgGCToClientPollConvarRequest) GetPollId() uint32 {
+	if m != nil && m.PollId != nil {
+		return *m.PollId
+	}
+	return 0
+}
+
+type CMsgGCToClientPollConvarResponse struct {
+	PollId           *uint32 `protobuf:"varint,1,opt,name=poll_id" json:"poll_id,omitempty"`
+	ConvarValue      *string `protobuf:"bytes,2,opt,name=convar_value" json:"convar_value,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CMsgGCToClientPollConvarResponse) Reset()         { *m = CMsgGCToClientPollConvarResponse{} }
+func (m *CMsgGCToClientPollConvarResponse) String() string { return proto.CompactTextString(m) }
+func (*CMsgGCToClientPollConvarResponse) ProtoMessage()    {}
+
+func (m *CMsgGCToClientPollConvarResponse) GetPollId() uint32 {
+	if m != nil && m.PollId != nil {
+		return *m.PollId
+	}
+	return 0
+}
+
+func (m *CMsgGCToClientPollConvarResponse) GetConvarValue() string {
+	if m != nil && m.ConvarValue != nil {
+		return *m.ConvarValue
+	}
+	return ""
+}
+
 func init() {
 	proto.RegisterEnum("dota.ESourceEngine", ESourceEngine_name, ESourceEngine_value)
 	proto.RegisterEnum("dota.PartnerAccountType", PartnerAccountType_name, PartnerAccountType_value)

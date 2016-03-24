@@ -4013,6 +4013,54 @@ func (x *CMsgDOTASeasonPredictionsEPredictionType) UnmarshalJSON(data []byte) er
 	return nil
 }
 
+type CMsgDOTASeasonPredictionsEAnswerType int32
+
+const (
+	CMsgDOTASeasonPredictions_SingleInt     CMsgDOTASeasonPredictionsEAnswerType = 0
+	CMsgDOTASeasonPredictions_SingleFloat   CMsgDOTASeasonPredictionsEAnswerType = 1
+	CMsgDOTASeasonPredictions_MultipleInt   CMsgDOTASeasonPredictionsEAnswerType = 2
+	CMsgDOTASeasonPredictions_MultipleFloat CMsgDOTASeasonPredictionsEAnswerType = 3
+	CMsgDOTASeasonPredictions_AnswerTeam    CMsgDOTASeasonPredictionsEAnswerType = 4
+	CMsgDOTASeasonPredictions_SingleTime    CMsgDOTASeasonPredictionsEAnswerType = 5
+	CMsgDOTASeasonPredictions_MultipleTime  CMsgDOTASeasonPredictionsEAnswerType = 6
+)
+
+var CMsgDOTASeasonPredictionsEAnswerType_name = map[int32]string{
+	0: "SingleInt",
+	1: "SingleFloat",
+	2: "MultipleInt",
+	3: "MultipleFloat",
+	4: "AnswerTeam",
+	5: "SingleTime",
+	6: "MultipleTime",
+}
+var CMsgDOTASeasonPredictionsEAnswerType_value = map[string]int32{
+	"SingleInt":     0,
+	"SingleFloat":   1,
+	"MultipleInt":   2,
+	"MultipleFloat": 3,
+	"AnswerTeam":    4,
+	"SingleTime":    5,
+	"MultipleTime":  6,
+}
+
+func (x CMsgDOTASeasonPredictionsEAnswerType) Enum() *CMsgDOTASeasonPredictionsEAnswerType {
+	p := new(CMsgDOTASeasonPredictionsEAnswerType)
+	*p = x
+	return p
+}
+func (x CMsgDOTASeasonPredictionsEAnswerType) String() string {
+	return proto.EnumName(CMsgDOTASeasonPredictionsEAnswerType_name, int32(x))
+}
+func (x *CMsgDOTASeasonPredictionsEAnswerType) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(CMsgDOTASeasonPredictionsEAnswerType_value, data, "CMsgDOTASeasonPredictionsEAnswerType")
+	if err != nil {
+		return err
+	}
+	*x = CMsgDOTASeasonPredictionsEAnswerType(value)
+	return nil
+}
+
 type CSODOTAGameAccountClient struct {
 	AccountId                                *uint32             `protobuf:"varint,1,opt,name=account_id" json:"account_id,omitempty"`
 	Wins                                     *uint32             `protobuf:"varint,3,opt,name=wins" json:"wins,omitempty"`
@@ -9965,6 +10013,8 @@ type CMsgDOTASeasonPredictions_Prediction struct {
 	SelectionId      *uint32                             `protobuf:"varint,8,opt,name=selection_id" json:"selection_id,omitempty"`
 	LockDate         *uint32                             `protobuf:"varint,9,opt,name=lock_date" json:"lock_date,omitempty"`
 	Reward           *uint32                             `protobuf:"varint,10,opt,name=reward" json:"reward,omitempty"`
+	AnswerType       *uint32                             `protobuf:"varint,11,opt,name=answer_type" json:"answer_type,omitempty"`
+	AnswerId         *uint32                             `protobuf:"varint,12,opt,name=answer_id" json:"answer_id,omitempty"`
 	XXX_unrecognized []byte                              `json:"-"`
 }
 
@@ -10042,6 +10092,20 @@ func (m *CMsgDOTASeasonPredictions_Prediction) GetReward() uint32 {
 	return 0
 }
 
+func (m *CMsgDOTASeasonPredictions_Prediction) GetAnswerType() uint32 {
+	if m != nil && m.AnswerType != nil {
+		return *m.AnswerType
+	}
+	return 0
+}
+
+func (m *CMsgDOTASeasonPredictions_Prediction) GetAnswerId() uint32 {
+	if m != nil && m.AnswerId != nil {
+		return *m.AnswerId
+	}
+	return 0
+}
+
 func init() {
 	proto.RegisterEnum("dota.EDOTAGCMsg", EDOTAGCMsg_name, EDOTAGCMsg_value)
 	proto.RegisterEnum("dota.ESpecialPingValue", ESpecialPingValue_name, ESpecialPingValue_value)
@@ -10087,4 +10151,5 @@ func init() {
 	proto.RegisterEnum("dota.CMsgDOTARealtimeGameStats_GraphDataEStat", CMsgDOTARealtimeGameStats_GraphDataEStat_name, CMsgDOTARealtimeGameStats_GraphDataEStat_value)
 	proto.RegisterEnum("dota.CMsgDOTARealtimeGameStats_GraphDataELocation", CMsgDOTARealtimeGameStats_GraphDataELocation_name, CMsgDOTARealtimeGameStats_GraphDataELocation_value)
 	proto.RegisterEnum("dota.CMsgDOTASeasonPredictionsEPredictionType", CMsgDOTASeasonPredictionsEPredictionType_name, CMsgDOTASeasonPredictionsEPredictionType_value)
+	proto.RegisterEnum("dota.CMsgDOTASeasonPredictionsEAnswerType", CMsgDOTASeasonPredictionsEAnswerType_name, CMsgDOTASeasonPredictionsEAnswerType_value)
 }

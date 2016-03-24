@@ -356,19 +356,23 @@ func (x *ESOMsg) UnmarshalJSON(data []byte) error {
 type EGCBaseClientMsg int32
 
 const (
-	EGCBaseClientMsg_k_EMsgGCPingRequest            EGCBaseClientMsg = 3001
-	EGCBaseClientMsg_k_EMsgGCPingResponse           EGCBaseClientMsg = 3002
-	EGCBaseClientMsg_k_EMsgGCClientWelcome          EGCBaseClientMsg = 4004
-	EGCBaseClientMsg_k_EMsgGCServerWelcome          EGCBaseClientMsg = 4005
-	EGCBaseClientMsg_k_EMsgGCClientHello            EGCBaseClientMsg = 4006
-	EGCBaseClientMsg_k_EMsgGCServerHello            EGCBaseClientMsg = 4007
-	EGCBaseClientMsg_k_EMsgGCClientConnectionStatus EGCBaseClientMsg = 4009
-	EGCBaseClientMsg_k_EMsgGCServerConnectionStatus EGCBaseClientMsg = 4010
+	EGCBaseClientMsg_k_EMsgGCPingRequest                EGCBaseClientMsg = 3001
+	EGCBaseClientMsg_k_EMsgGCPingResponse               EGCBaseClientMsg = 3002
+	EGCBaseClientMsg_k_EMsgGCToClientPollConvarRequest  EGCBaseClientMsg = 3003
+	EGCBaseClientMsg_k_EMsgGCToClientPollConvarResponse EGCBaseClientMsg = 3004
+	EGCBaseClientMsg_k_EMsgGCClientWelcome              EGCBaseClientMsg = 4004
+	EGCBaseClientMsg_k_EMsgGCServerWelcome              EGCBaseClientMsg = 4005
+	EGCBaseClientMsg_k_EMsgGCClientHello                EGCBaseClientMsg = 4006
+	EGCBaseClientMsg_k_EMsgGCServerHello                EGCBaseClientMsg = 4007
+	EGCBaseClientMsg_k_EMsgGCClientConnectionStatus     EGCBaseClientMsg = 4009
+	EGCBaseClientMsg_k_EMsgGCServerConnectionStatus     EGCBaseClientMsg = 4010
 )
 
 var EGCBaseClientMsg_name = map[int32]string{
 	3001: "k_EMsgGCPingRequest",
 	3002: "k_EMsgGCPingResponse",
+	3003: "k_EMsgGCToClientPollConvarRequest",
+	3004: "k_EMsgGCToClientPollConvarResponse",
 	4004: "k_EMsgGCClientWelcome",
 	4005: "k_EMsgGCServerWelcome",
 	4006: "k_EMsgGCClientHello",
@@ -377,14 +381,16 @@ var EGCBaseClientMsg_name = map[int32]string{
 	4010: "k_EMsgGCServerConnectionStatus",
 }
 var EGCBaseClientMsg_value = map[string]int32{
-	"k_EMsgGCPingRequest":            3001,
-	"k_EMsgGCPingResponse":           3002,
-	"k_EMsgGCClientWelcome":          4004,
-	"k_EMsgGCServerWelcome":          4005,
-	"k_EMsgGCClientHello":            4006,
-	"k_EMsgGCServerHello":            4007,
-	"k_EMsgGCClientConnectionStatus": 4009,
-	"k_EMsgGCServerConnectionStatus": 4010,
+	"k_EMsgGCPingRequest":                3001,
+	"k_EMsgGCPingResponse":               3002,
+	"k_EMsgGCToClientPollConvarRequest":  3003,
+	"k_EMsgGCToClientPollConvarResponse": 3004,
+	"k_EMsgGCClientWelcome":              4004,
+	"k_EMsgGCServerWelcome":              4005,
+	"k_EMsgGCClientHello":                4006,
+	"k_EMsgGCServerHello":                4007,
+	"k_EMsgGCClientConnectionStatus":     4009,
+	"k_EMsgGCServerConnectionStatus":     4010,
 }
 
 func (x EGCBaseClientMsg) Enum() *EGCBaseClientMsg {

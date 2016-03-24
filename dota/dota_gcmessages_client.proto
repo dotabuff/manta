@@ -2978,6 +2978,20 @@ message CMsgPredictionRankings {
 	repeated CMsgPredictionRankings.Prediction predictions = 1;
 }
 
+message CMsgPredictionResults {
+	message ResultBreakdown {
+		optional uint32 answer_selection = 2;
+		optional float answer_value = 3;
+	}
+
+	message Result {
+		optional uint32 selection_id = 1;
+		repeated CMsgPredictionResults.ResultBreakdown result_breakdown = 2;
+	}
+
+	repeated CMsgPredictionResults.Result results = 1;
+}
+
 message CMsgClientToGCSuspiciousActivity {
 	optional uint64 app_data = 1;
 }

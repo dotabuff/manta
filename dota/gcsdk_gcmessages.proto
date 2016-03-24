@@ -302,3 +302,13 @@ message CBroadcast_PostGameDataFrame_Request {
 	optional bytes frame_data = 4;
 }
 
+message CMsgGCToClientPollConvarRequest {
+	optional string convar_name = 1;
+	optional uint32 poll_id = 2;
+}
+
+message CMsgGCToClientPollConvarResponse {
+	optional uint32 poll_id = 1;
+	optional string convar_value = 2;
+}
+
