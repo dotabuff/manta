@@ -1,0 +1,3 @@
+[submodule "game-tracking"]
+  path = game-tracking
+  url = https://github.com/SteamDatabase/GameTracking

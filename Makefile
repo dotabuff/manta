@@ -17,18 +17,8 @@ cpuprofile:
 
 update: update-game-tracking gen-dota-proto generate
 
-game-tracking:
-	git init game-tracking
-	cd game-tracking && \
-	git remote add -f origin https://github.com/SteamDatabase/GameTracking && \
-	git config core.sparseCheckout true && \
-	echo Protobufs/dota/ >> .git/info/sparse-checkout && \
-	echo Protobufs/dota_test/ >> .git/info/sparse-checkout && \
-	git pull --depth=1 origin master
-
-update-game-tracking: game-tracking
-	git -C game-tracking checkout master
-	git -C game-tracking pull origin master
+update-game-tracking:
+	git submodule update --init --remote
 
 gen-dota-proto: tmp/google/protobuf/descriptor.proto
 	rm -f dota/*.proto dota/*.pb.go
