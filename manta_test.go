@@ -8,6 +8,8 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func BenchmarkMatch2159568145(b *testing.B) { testScenarios[2159568145].bench(b) }
+
 func TestMatch2159568145(t *testing.T) { testScenarios[2159568145].test(t) }
 func TestMatch2109130988(t *testing.T) { testScenarios[2109130988].test(t) }
 
@@ -379,6 +381,30 @@ var testScenarios = map[int64]testScenario{
 	},
 }
 
+func (s testScenario) bench(b *testing.B) {
+	buf := mustGetReplayData(s.matchId, s.replayUrl)
+
+	b.ResetTimer()
+
+	for n := 0; n < b.N; n++ {
+		parser, err := NewParser(buf)
+		if err != nil {
+			b.Fatalf("unable to instantiate parser: %s", err)
+		}
+
+		parser.Callbacks.OnCDOTAUserMsg_SpectatorPlayerUnitOrders(func(m *dota.CDOTAUserMsg_SpectatorPlayerUnitOrders) error { return nil })
+		parser.Callbacks.OnCDemoFileInfo(func(m *dota.CDemoFileInfo) error { return nil })
+		parser.OnPacketEntity(func(pe *PacketEntity, pet EntityEventType) error { return nil })
+		parser.OnGameEvent("dota_combatlog", func(m *GameEvent) error { return nil })
+
+		if err := parser.Start(); err != nil {
+			b.Fatal(err)
+		}
+	}
+
+	b.ReportAllocs()
+}
+
 func (s testScenario) test(t *testing.T) {
 	assert := assert.New(t)
 
@@ -517,20 +543,4 @@ func (s testScenario) test(t *testing.T) {
 	if s.expectHeroEntityMana > 0.0 {
 		assert.Equal(s.expectHeroEntityMana, gotHeroEntityMana, s.matchId)
 	}
-}
-
-func BenchmarkParseMatch(b *testing.B) {
-	assert := assert.New(b)
-
-	buf := mustGetReplayData("1560315800", "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1560315800.dem")
-
-	b.ResetTimer()
-	for n := 0; n < b.N; n++ {
-		parser, err := NewParser(buf)
-		assert.Nil(err)
-		err = parser.Start()
-		assert.Nil(err)
-	}
-
-	b.ReportAllocs()
 }

@@ -100,7 +100,7 @@ func (p *Parser) updateInstanceBaselineItem(item *StringTableItem) {
 	if len(item.Value) > 0 {
 		_debugfl(1, "Parsing entity baseline %v", serializer[0].Name)
 		r := NewReader(item.Value)
-		p.ClassBaselines[classId] = ReadProperties(r, serializer[0])
+		p.ClassBaselines[classId].readProperties(r, serializer[0])
 
 		// Inline test the baselines
 		if testLevel >= 1 && r.remBits() > 8 {

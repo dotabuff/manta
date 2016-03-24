@@ -4,9 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 
-	"github.com/davecgh/go-spew/spew"
 	"github.com/dotabuff/manta/dota"
 	"github.com/dotabuff/manta/vbkv"
 )
@@ -25,12 +23,6 @@ func ParseCDemoSaveGame(s *dota.CDemoSaveGame) (save *SaveGame, err error) {
 	kv, err := vbkv.Parse(buf)
 	if err != nil {
 		return nil, err
-	}
-
-	if debugMode {
-		filename := spew.Sprintf("fixtures/savegames/savegame_%v_%v_%v.json", s.GetSignature(), s.GetSteamId(), s.GetVersion())
-		j, _ := json.MarshalIndent(kv, "", "  ")
-		ioutil.WriteFile(filename, j, 0644)
 	}
 
 	wbuf := bytes.NewBuffer([]byte{})

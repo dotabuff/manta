@@ -300,7 +300,8 @@ func TestReadProperties(t *testing.T) {
 
 		// Read properties
 		r := NewReader(buf)
-		props := ReadProperties(r, serializer)
+		props := NewProperties()
+		props.readProperties(r, serializer)
 		assert.Equal(s.expectCount, len(props.KV))
 
 		for k, v := range s.expectKeys {
