@@ -14,182 +14,188 @@ var _ = math.Inf
 type EGCItemMsg int32
 
 const (
-	EGCItemMsg_k_EMsgGCBase                                   EGCItemMsg = 1000
-	EGCItemMsg_k_EMsgGCSetItemPosition                        EGCItemMsg = 1001
-	EGCItemMsg_k_EMsgGCDelete                                 EGCItemMsg = 1004
-	EGCItemMsg_k_EMsgGCVerifyCacheSubscription                EGCItemMsg = 1005
-	EGCItemMsg_k_EMsgClientToGCNameItem                       EGCItemMsg = 1006
-	EGCItemMsg_k_EMsgGCPaintItem                              EGCItemMsg = 1009
-	EGCItemMsg_k_EMsgGCPaintItemResponse                      EGCItemMsg = 1010
-	EGCItemMsg_k_EMsgGCGoldenWrenchBroadcast                  EGCItemMsg = 1011
-	EGCItemMsg_k_EMsgGCMOTDRequest                            EGCItemMsg = 1012
-	EGCItemMsg_k_EMsgGCMOTDRequestResponse                    EGCItemMsg = 1013
-	EGCItemMsg_k_EMsgGCAddItemToSocket_DEPRECATED             EGCItemMsg = 1014
-	EGCItemMsg_k_EMsgGCAddItemToSocketResponse_DEPRECATED     EGCItemMsg = 1015
-	EGCItemMsg_k_EMsgGCAddSocketToBaseItem_DEPRECATED         EGCItemMsg = 1016
-	EGCItemMsg_k_EMsgGCAddSocketToItem_DEPRECATED             EGCItemMsg = 1017
-	EGCItemMsg_k_EMsgGCAddSocketToItemResponse_DEPRECATED     EGCItemMsg = 1018
-	EGCItemMsg_k_EMsgGCNameBaseItem                           EGCItemMsg = 1019
-	EGCItemMsg_k_EMsgGCNameBaseItemResponse                   EGCItemMsg = 1020
-	EGCItemMsg_k_EMsgGCRemoveSocketItem_DEPRECATED            EGCItemMsg = 1021
-	EGCItemMsg_k_EMsgGCRemoveSocketItemResponse_DEPRECATED    EGCItemMsg = 1022
-	EGCItemMsg_k_EMsgGCCustomizeItemTexture                   EGCItemMsg = 1023
-	EGCItemMsg_k_EMsgGCCustomizeItemTextureResponse           EGCItemMsg = 1024
-	EGCItemMsg_k_EMsgGCUseItemRequest                         EGCItemMsg = 1025
-	EGCItemMsg_k_EMsgGCUseItemResponse                        EGCItemMsg = 1026
-	EGCItemMsg_k_EMsgGCGiftedItems                            EGCItemMsg = 1027
-	EGCItemMsg_k_EMsgGCRemoveItemName                         EGCItemMsg = 1030
-	EGCItemMsg_k_EMsgGCRemoveItemPaint                        EGCItemMsg = 1031
-	EGCItemMsg_k_EMsgGCUnwrapGiftRequest                      EGCItemMsg = 1037
-	EGCItemMsg_k_EMsgGCUnwrapGiftResponse                     EGCItemMsg = 1038
-	EGCItemMsg_k_EMsgGCSetItemStyle_DEPRECATED                EGCItemMsg = 1039
-	EGCItemMsg_k_EMsgGCUsedClaimCodeItem                      EGCItemMsg = 1040
-	EGCItemMsg_k_EMsgGCSortItems                              EGCItemMsg = 1041
-	EGCItemMsg_k_EMsgGC_RevolvingLootList_DEPRECATED          EGCItemMsg = 1042
-	EGCItemMsg_k_EMsgGCUpdateItemSchema                       EGCItemMsg = 1049
-	EGCItemMsg_k_EMsgGCRemoveCustomTexture                    EGCItemMsg = 1051
-	EGCItemMsg_k_EMsgGCRemoveCustomTextureResponse            EGCItemMsg = 1052
-	EGCItemMsg_k_EMsgGCRemoveMakersMark                       EGCItemMsg = 1053
-	EGCItemMsg_k_EMsgGCRemoveMakersMarkResponse               EGCItemMsg = 1054
-	EGCItemMsg_k_EMsgGCRemoveUniqueCraftIndex                 EGCItemMsg = 1055
-	EGCItemMsg_k_EMsgGCRemoveUniqueCraftIndexResponse         EGCItemMsg = 1056
-	EGCItemMsg_k_EMsgGCSaxxyBroadcast                         EGCItemMsg = 1057
-	EGCItemMsg_k_EMsgGCBackpackSortFinished                   EGCItemMsg = 1058
-	EGCItemMsg_k_EMsgGCAdjustItemEquippedState                EGCItemMsg = 1059
-	EGCItemMsg_k_EMsgGCCollectItem                            EGCItemMsg = 1061
-	EGCItemMsg_k_EMsgGCItemAcknowledged                       EGCItemMsg = 1062
-	EGCItemMsg_k_EMsgGCPresets_SelectPresetForClass           EGCItemMsg = 1063
-	EGCItemMsg_k_EMsgGCPresets_SetItemPosition                EGCItemMsg = 1064
-	EGCItemMsg_k_EMsgGCPresets_SelectPresetForClassReply      EGCItemMsg = 1067
-	EGCItemMsg_k_EMsgClientToGCNameItemResponse               EGCItemMsg = 1068
-	EGCItemMsg_k_EMsgGCApplyConsumableEffects                 EGCItemMsg = 1069
-	EGCItemMsg_k_EMsgGCConsumableExhausted                    EGCItemMsg = 1070
-	EGCItemMsg_k_EMsgGCShowItemsPickedUp                      EGCItemMsg = 1071
-	EGCItemMsg_k_EMsgGCClientDisplayNotification              EGCItemMsg = 1072
-	EGCItemMsg_k_EMsgGCApplyStrangePart                       EGCItemMsg = 1073
-	EGCItemMsg_k_EMsgGC_IncrementKillCountResponse            EGCItemMsg = 1075
-	EGCItemMsg_k_EMsgGCApplyPennantUpgrade                    EGCItemMsg = 1076
-	EGCItemMsg_k_EMsgGCSetItemPositions                       EGCItemMsg = 1077
-	EGCItemMsg_k_EMsgGCSetItemPositions_RateLimited           EGCItemMsg = 1096
-	EGCItemMsg_k_EMsgGCApplyEggEssence                        EGCItemMsg = 1078
-	EGCItemMsg_k_EMsgGCNameEggEssenceResponse                 EGCItemMsg = 1079
-	EGCItemMsg_k_EMsgGCFulfillDynamicRecipeComponent          EGCItemMsg = 1082
-	EGCItemMsg_k_EMsgGCFulfillDynamicRecipeComponentResponse  EGCItemMsg = 1083
-	EGCItemMsg_k_EMsgGCClientRequestMarketData                EGCItemMsg = 1084
-	EGCItemMsg_k_EMsgGCClientRequestMarketDataResponse        EGCItemMsg = 1085
-	EGCItemMsg_k_EMsgGCExtractGems                            EGCItemMsg = 1086
-	EGCItemMsg_k_EMsgGCAddSocket                              EGCItemMsg = 1087
-	EGCItemMsg_k_EMsgGCAddItemToSocket                        EGCItemMsg = 1088
-	EGCItemMsg_k_EMsgGCAddItemToSocketResponse                EGCItemMsg = 1089
-	EGCItemMsg_k_EMsgGCAddSocketResponse                      EGCItemMsg = 1090
-	EGCItemMsg_k_EMsgGCResetStrangeGemCount                   EGCItemMsg = 1091
-	EGCItemMsg_k_EMsgGCRequestCrateItems                      EGCItemMsg = 1092
-	EGCItemMsg_k_EMsgGCRequestCrateItemsResponse              EGCItemMsg = 1093
-	EGCItemMsg_k_EMsgGCExtractGemsResponse                    EGCItemMsg = 1094
-	EGCItemMsg_k_EMsgGCResetStrangeGemCountResponse           EGCItemMsg = 1095
-	EGCItemMsg_k_EMsgGCServerUseItemRequest                   EGCItemMsg = 1103
-	EGCItemMsg_k_EMsgGCAddGiftItem                            EGCItemMsg = 1104
-	EGCItemMsg_k_EMsgGCRemoveItemGiftMessage                  EGCItemMsg = 1105
-	EGCItemMsg_k_EMsgGCRemoveItemGiftMessageResponse          EGCItemMsg = 1106
-	EGCItemMsg_k_EMsgGCRemoveItemGifterAccountId              EGCItemMsg = 1107
-	EGCItemMsg_k_EMsgGCRemoveItemGifterAccountIdResponse      EGCItemMsg = 1108
-	EGCItemMsg_k_EMsgClientToGCRemoveItemGifterAttributes     EGCItemMsg = 1109
-	EGCItemMsg_k_EMsgClientToGCRemoveItemName                 EGCItemMsg = 1110
-	EGCItemMsg_k_EMsgClientToGCRemoveItemDescription          EGCItemMsg = 1111
-	EGCItemMsg_k_EMsgClientToGCRemoveItemAttributeResponse    EGCItemMsg = 1112
-	EGCItemMsg_k_EMsgGCTradingBase                            EGCItemMsg = 1500
-	EGCItemMsg_k_EMsgGCTrading_InitiateTradeRequest           EGCItemMsg = 1501
-	EGCItemMsg_k_EMsgGCTrading_InitiateTradeResponse          EGCItemMsg = 1502
-	EGCItemMsg_k_EMsgGCTrading_StartSession                   EGCItemMsg = 1503
-	EGCItemMsg_k_EMsgGCTrading_SessionClosed                  EGCItemMsg = 1509
-	EGCItemMsg_k_EMsgGCTrading_InitiateTradeRequestResponse   EGCItemMsg = 1514
-	EGCItemMsg_k_EMsgGCServerBrowser_FavoriteServer           EGCItemMsg = 1601
-	EGCItemMsg_k_EMsgGCServerBrowser_BlacklistServer          EGCItemMsg = 1602
-	EGCItemMsg_k_EMsgGCServerRentalsBase                      EGCItemMsg = 1700
-	EGCItemMsg_k_EMsgGCItemPreviewCheckStatus                 EGCItemMsg = 1701
-	EGCItemMsg_k_EMsgGCItemPreviewStatusResponse              EGCItemMsg = 1702
-	EGCItemMsg_k_EMsgGCItemPreviewRequest                     EGCItemMsg = 1703
-	EGCItemMsg_k_EMsgGCItemPreviewRequestResponse             EGCItemMsg = 1704
-	EGCItemMsg_k_EMsgGCItemPreviewExpire                      EGCItemMsg = 1705
-	EGCItemMsg_k_EMsgGCItemPreviewExpireNotification          EGCItemMsg = 1706
-	EGCItemMsg_k_EMsgGCItemPreviewItemBoughtNotification      EGCItemMsg = 1707
-	EGCItemMsg_k_EMsgGCDev_NewItemRequest                     EGCItemMsg = 2001
-	EGCItemMsg_k_EMsgGCDev_NewItemRequestResponse             EGCItemMsg = 2002
-	EGCItemMsg_k_EMsgGCStoreGetUserData                       EGCItemMsg = 2500
-	EGCItemMsg_k_EMsgGCStoreGetUserDataResponse               EGCItemMsg = 2501
-	EGCItemMsg_k_EMsgGCStorePurchaseFinalize                  EGCItemMsg = 2504
-	EGCItemMsg_k_EMsgGCStorePurchaseFinalizeResponse          EGCItemMsg = 2505
-	EGCItemMsg_k_EMsgGCStorePurchaseCancel                    EGCItemMsg = 2506
-	EGCItemMsg_k_EMsgGCStorePurchaseCancelResponse            EGCItemMsg = 2507
-	EGCItemMsg_k_EMsgGCStorePurchaseInit                      EGCItemMsg = 2510
-	EGCItemMsg_k_EMsgGCStorePurchaseInitResponse              EGCItemMsg = 2511
-	EGCItemMsg_k_EMsgGCBannedWordListRequest                  EGCItemMsg = 2512
-	EGCItemMsg_k_EMsgGCBannedWordListResponse                 EGCItemMsg = 2513
-	EGCItemMsg_k_EMsgGCToGCBannedWordListBroadcast            EGCItemMsg = 2514
-	EGCItemMsg_k_EMsgGCToGCBannedWordListUpdated              EGCItemMsg = 2515
-	EGCItemMsg_k_EMsgGCToGCDirtySDOCache                      EGCItemMsg = 2516
-	EGCItemMsg_k_EMsgGCToGCDirtyMultipleSDOCache              EGCItemMsg = 2517
-	EGCItemMsg_k_EMsgGCToGCUpdateSQLKeyValue                  EGCItemMsg = 2518
-	EGCItemMsg_k_EMsgGCToGCBroadcastConsoleCommand            EGCItemMsg = 2521
-	EGCItemMsg_k_EMsgGCServerVersionUpdated                   EGCItemMsg = 2522
-	EGCItemMsg_k_EMsgGCApplyAutograph                         EGCItemMsg = 2523
-	EGCItemMsg_k_EMsgGCToGCWebAPIAccountChanged               EGCItemMsg = 2524
-	EGCItemMsg_k_EMsgGCClientVersionUpdated                   EGCItemMsg = 2528
-	EGCItemMsg_k_EMsgGCItemPurgatory_FinalizePurchase         EGCItemMsg = 2531
-	EGCItemMsg_k_EMsgGCItemPurgatory_FinalizePurchaseResponse EGCItemMsg = 2532
-	EGCItemMsg_k_EMsgGCItemPurgatory_RefundPurchase           EGCItemMsg = 2533
-	EGCItemMsg_k_EMsgGCItemPurgatory_RefundPurchaseResponse   EGCItemMsg = 2534
-	EGCItemMsg_k_EMsgGCToGCPlayerStrangeCountAdjustments      EGCItemMsg = 2535
-	EGCItemMsg_k_EMsgGCRequestStoreSalesData                  EGCItemMsg = 2536
-	EGCItemMsg_k_EMsgGCRequestStoreSalesDataResponse          EGCItemMsg = 2537
-	EGCItemMsg_k_EMsgGCRequestStoreSalesDataUpToDateResponse  EGCItemMsg = 2538
-	EGCItemMsg_k_EMsgGCToGCPingRequest                        EGCItemMsg = 2539
-	EGCItemMsg_k_EMsgGCToGCPingResponse                       EGCItemMsg = 2540
-	EGCItemMsg_k_EMsgGCToGCGetUserSessionServer               EGCItemMsg = 2541
-	EGCItemMsg_k_EMsgGCToGCGetUserSessionServerResponse       EGCItemMsg = 2542
-	EGCItemMsg_k_EMsgGCToGCGetUserServerMembers               EGCItemMsg = 2543
-	EGCItemMsg_k_EMsgGCToGCGetUserServerMembersResponse       EGCItemMsg = 2544
-	EGCItemMsg_k_EMsgGCToGCGetUserPCBangNo                    EGCItemMsg = 2545
-	EGCItemMsg_k_EMsgGCToGCGetUserPCBangNoResponse            EGCItemMsg = 2546
-	EGCItemMsg_k_EMsgGCToGCCanUseDropRateBonus                EGCItemMsg = 2547
-	EGCItemMsg_k_EMsgSQLAddDropRateBonus                      EGCItemMsg = 2548
-	EGCItemMsg_k_EMsgGCToGCRefreshSOCache                     EGCItemMsg = 2549
-	EGCItemMsg_k_EMsgGCToGCApplyLocalizationDiff              EGCItemMsg = 2550
-	EGCItemMsg_k_EMsgGCToGCApplyLocalizationDiffResponse      EGCItemMsg = 2551
-	EGCItemMsg_k_EMsgGCToGCCheckAccountTradeStatus            EGCItemMsg = 2552
-	EGCItemMsg_k_EMsgGCToGCCheckAccountTradeStatusResponse    EGCItemMsg = 2553
-	EGCItemMsg_k_EMsgGCToGCGrantAccountRolledItems            EGCItemMsg = 2554
-	EGCItemMsg_k_EMsgGCToGCGrantSelfMadeItemToAccount         EGCItemMsg = 2555
-	EGCItemMsg_k_EMsgSQLUpgradeBattleBooster                  EGCItemMsg = 2556
-	EGCItemMsg_k_EMsgGCPartnerBalanceRequest                  EGCItemMsg = 2557
-	EGCItemMsg_k_EMsgGCPartnerBalanceResponse                 EGCItemMsg = 2558
-	EGCItemMsg_k_EMsgGCPartnerRechargeRedirectURLRequest      EGCItemMsg = 2559
-	EGCItemMsg_k_EMsgGCPartnerRechargeRedirectURLResponse     EGCItemMsg = 2560
-	EGCItemMsg_k_EMsgGCStatueCraft                            EGCItemMsg = 2561
-	EGCItemMsg_k_EMsgGCRedeemCode                             EGCItemMsg = 2562
-	EGCItemMsg_k_EMsgGCRedeemCodeResponse                     EGCItemMsg = 2563
-	EGCItemMsg_k_EMsgGCToGCItemConsumptionRollback            EGCItemMsg = 2564
-	EGCItemMsg_k_EMsgClientToGCWrapAndDeliverGift             EGCItemMsg = 2565
-	EGCItemMsg_k_EMsgClientToGCWrapAndDeliverGiftResponse     EGCItemMsg = 2566
-	EGCItemMsg_k_EMsgClientToGCUnpackBundleResponse           EGCItemMsg = 2567
-	EGCItemMsg_k_EMsgGCToClientStoreTransactionCompleted      EGCItemMsg = 2568
-	EGCItemMsg_k_EMsgClientToGCEquipItems                     EGCItemMsg = 2569
-	EGCItemMsg_k_EMsgClientToGCEquipItemsResponse             EGCItemMsg = 2570
-	EGCItemMsg_k_EMsgClientToGCUnlockItemStyle                EGCItemMsg = 2571
-	EGCItemMsg_k_EMsgClientToGCUnlockItemStyleResponse        EGCItemMsg = 2572
-	EGCItemMsg_k_EMsgClientToGCSetItemInventoryCategory       EGCItemMsg = 2573
-	EGCItemMsg_k_EMsgClientToGCUnlockCrate                    EGCItemMsg = 2574
-	EGCItemMsg_k_EMsgClientToGCUnlockCrateResponse            EGCItemMsg = 2575
-	EGCItemMsg_k_EMsgClientToGCUnpackBundle                   EGCItemMsg = 2576
-	EGCItemMsg_k_EMsgClientToGCSetItemStyle                   EGCItemMsg = 2577
-	EGCItemMsg_k_EMsgClientToGCSetItemStyleResponse           EGCItemMsg = 2578
-	EGCItemMsg_k_EMsgGCGenericResult                          EGCItemMsg = 2579
-	EGCItemMsg_k_EMsgSQLGCToGCGrantBackpackSlots              EGCItemMsg = 2580
-	EGCItemMsg_k_EMsgClientToGCLookupAccountName              EGCItemMsg = 2581
-	EGCItemMsg_k_EMsgClientToGCLookupAccountNameResponse      EGCItemMsg = 2582
-	EGCItemMsg_k_EMsgGCToGCDevRevokeUserItems                 EGCItemMsg = 2583
-	EGCItemMsg_k_EMsgClientToGCCreateStaticRecipe             EGCItemMsg = 2584
-	EGCItemMsg_k_EMsgClientToGCCreateStaticRecipeResponse     EGCItemMsg = 2585
+	EGCItemMsg_k_EMsgGCBase                                     EGCItemMsg = 1000
+	EGCItemMsg_k_EMsgGCSetItemPosition                          EGCItemMsg = 1001
+	EGCItemMsg_k_EMsgGCDelete                                   EGCItemMsg = 1004
+	EGCItemMsg_k_EMsgGCVerifyCacheSubscription                  EGCItemMsg = 1005
+	EGCItemMsg_k_EMsgClientToGCNameItem                         EGCItemMsg = 1006
+	EGCItemMsg_k_EMsgGCPaintItem                                EGCItemMsg = 1009
+	EGCItemMsg_k_EMsgGCPaintItemResponse                        EGCItemMsg = 1010
+	EGCItemMsg_k_EMsgGCGoldenWrenchBroadcast                    EGCItemMsg = 1011
+	EGCItemMsg_k_EMsgGCMOTDRequest                              EGCItemMsg = 1012
+	EGCItemMsg_k_EMsgGCMOTDRequestResponse                      EGCItemMsg = 1013
+	EGCItemMsg_k_EMsgGCAddItemToSocket_DEPRECATED               EGCItemMsg = 1014
+	EGCItemMsg_k_EMsgGCAddItemToSocketResponse_DEPRECATED       EGCItemMsg = 1015
+	EGCItemMsg_k_EMsgGCAddSocketToBaseItem_DEPRECATED           EGCItemMsg = 1016
+	EGCItemMsg_k_EMsgGCAddSocketToItem_DEPRECATED               EGCItemMsg = 1017
+	EGCItemMsg_k_EMsgGCAddSocketToItemResponse_DEPRECATED       EGCItemMsg = 1018
+	EGCItemMsg_k_EMsgGCNameBaseItem                             EGCItemMsg = 1019
+	EGCItemMsg_k_EMsgGCNameBaseItemResponse                     EGCItemMsg = 1020
+	EGCItemMsg_k_EMsgGCRemoveSocketItem_DEPRECATED              EGCItemMsg = 1021
+	EGCItemMsg_k_EMsgGCRemoveSocketItemResponse_DEPRECATED      EGCItemMsg = 1022
+	EGCItemMsg_k_EMsgGCCustomizeItemTexture                     EGCItemMsg = 1023
+	EGCItemMsg_k_EMsgGCCustomizeItemTextureResponse             EGCItemMsg = 1024
+	EGCItemMsg_k_EMsgGCUseItemRequest                           EGCItemMsg = 1025
+	EGCItemMsg_k_EMsgGCUseItemResponse                          EGCItemMsg = 1026
+	EGCItemMsg_k_EMsgGCGiftedItems                              EGCItemMsg = 1027
+	EGCItemMsg_k_EMsgGCRemoveItemName                           EGCItemMsg = 1030
+	EGCItemMsg_k_EMsgGCRemoveItemPaint                          EGCItemMsg = 1031
+	EGCItemMsg_k_EMsgGCUnwrapGiftRequest                        EGCItemMsg = 1037
+	EGCItemMsg_k_EMsgGCUnwrapGiftResponse                       EGCItemMsg = 1038
+	EGCItemMsg_k_EMsgGCSetItemStyle_DEPRECATED                  EGCItemMsg = 1039
+	EGCItemMsg_k_EMsgGCUsedClaimCodeItem                        EGCItemMsg = 1040
+	EGCItemMsg_k_EMsgGCSortItems                                EGCItemMsg = 1041
+	EGCItemMsg_k_EMsgGC_RevolvingLootList_DEPRECATED            EGCItemMsg = 1042
+	EGCItemMsg_k_EMsgGCUpdateItemSchema                         EGCItemMsg = 1049
+	EGCItemMsg_k_EMsgGCRemoveCustomTexture                      EGCItemMsg = 1051
+	EGCItemMsg_k_EMsgGCRemoveCustomTextureResponse              EGCItemMsg = 1052
+	EGCItemMsg_k_EMsgGCRemoveMakersMark                         EGCItemMsg = 1053
+	EGCItemMsg_k_EMsgGCRemoveMakersMarkResponse                 EGCItemMsg = 1054
+	EGCItemMsg_k_EMsgGCRemoveUniqueCraftIndex                   EGCItemMsg = 1055
+	EGCItemMsg_k_EMsgGCRemoveUniqueCraftIndexResponse           EGCItemMsg = 1056
+	EGCItemMsg_k_EMsgGCSaxxyBroadcast                           EGCItemMsg = 1057
+	EGCItemMsg_k_EMsgGCBackpackSortFinished                     EGCItemMsg = 1058
+	EGCItemMsg_k_EMsgGCAdjustItemEquippedState                  EGCItemMsg = 1059
+	EGCItemMsg_k_EMsgGCCollectItem                              EGCItemMsg = 1061
+	EGCItemMsg_k_EMsgGCItemAcknowledged                         EGCItemMsg = 1062
+	EGCItemMsg_k_EMsgGCPresets_SelectPresetForClass             EGCItemMsg = 1063
+	EGCItemMsg_k_EMsgGCPresets_SetItemPosition                  EGCItemMsg = 1064
+	EGCItemMsg_k_EMsgGCPresets_SelectPresetForClassReply        EGCItemMsg = 1067
+	EGCItemMsg_k_EMsgClientToGCNameItemResponse                 EGCItemMsg = 1068
+	EGCItemMsg_k_EMsgGCApplyConsumableEffects                   EGCItemMsg = 1069
+	EGCItemMsg_k_EMsgGCConsumableExhausted                      EGCItemMsg = 1070
+	EGCItemMsg_k_EMsgGCShowItemsPickedUp                        EGCItemMsg = 1071
+	EGCItemMsg_k_EMsgGCClientDisplayNotification                EGCItemMsg = 1072
+	EGCItemMsg_k_EMsgGCApplyStrangePart                         EGCItemMsg = 1073
+	EGCItemMsg_k_EMsgGC_IncrementKillCountResponse              EGCItemMsg = 1075
+	EGCItemMsg_k_EMsgGCApplyPennantUpgrade                      EGCItemMsg = 1076
+	EGCItemMsg_k_EMsgGCSetItemPositions                         EGCItemMsg = 1077
+	EGCItemMsg_k_EMsgGCSetItemPositions_RateLimited             EGCItemMsg = 1096
+	EGCItemMsg_k_EMsgGCApplyEggEssence                          EGCItemMsg = 1078
+	EGCItemMsg_k_EMsgGCNameEggEssenceResponse                   EGCItemMsg = 1079
+	EGCItemMsg_k_EMsgGCFulfillDynamicRecipeComponent            EGCItemMsg = 1082
+	EGCItemMsg_k_EMsgGCFulfillDynamicRecipeComponentResponse    EGCItemMsg = 1083
+	EGCItemMsg_k_EMsgGCClientRequestMarketData                  EGCItemMsg = 1084
+	EGCItemMsg_k_EMsgGCClientRequestMarketDataResponse          EGCItemMsg = 1085
+	EGCItemMsg_k_EMsgGCExtractGems                              EGCItemMsg = 1086
+	EGCItemMsg_k_EMsgGCAddSocket                                EGCItemMsg = 1087
+	EGCItemMsg_k_EMsgGCAddItemToSocket                          EGCItemMsg = 1088
+	EGCItemMsg_k_EMsgGCAddItemToSocketResponse                  EGCItemMsg = 1089
+	EGCItemMsg_k_EMsgGCAddSocketResponse                        EGCItemMsg = 1090
+	EGCItemMsg_k_EMsgGCResetStrangeGemCount                     EGCItemMsg = 1091
+	EGCItemMsg_k_EMsgGCRequestCrateItems                        EGCItemMsg = 1092
+	EGCItemMsg_k_EMsgGCRequestCrateItemsResponse                EGCItemMsg = 1093
+	EGCItemMsg_k_EMsgGCExtractGemsResponse                      EGCItemMsg = 1094
+	EGCItemMsg_k_EMsgGCResetStrangeGemCountResponse             EGCItemMsg = 1095
+	EGCItemMsg_k_EMsgGCServerUseItemRequest                     EGCItemMsg = 1103
+	EGCItemMsg_k_EMsgGCAddGiftItem                              EGCItemMsg = 1104
+	EGCItemMsg_k_EMsgGCRemoveItemGiftMessage                    EGCItemMsg = 1105
+	EGCItemMsg_k_EMsgGCRemoveItemGiftMessageResponse            EGCItemMsg = 1106
+	EGCItemMsg_k_EMsgGCRemoveItemGifterAccountId                EGCItemMsg = 1107
+	EGCItemMsg_k_EMsgGCRemoveItemGifterAccountIdResponse        EGCItemMsg = 1108
+	EGCItemMsg_k_EMsgClientToGCRemoveItemGifterAttributes       EGCItemMsg = 1109
+	EGCItemMsg_k_EMsgClientToGCRemoveItemName                   EGCItemMsg = 1110
+	EGCItemMsg_k_EMsgClientToGCRemoveItemDescription            EGCItemMsg = 1111
+	EGCItemMsg_k_EMsgClientToGCRemoveItemAttributeResponse      EGCItemMsg = 1112
+	EGCItemMsg_k_EMsgGCTradingBase                              EGCItemMsg = 1500
+	EGCItemMsg_k_EMsgGCTrading_InitiateTradeRequest             EGCItemMsg = 1501
+	EGCItemMsg_k_EMsgGCTrading_InitiateTradeResponse            EGCItemMsg = 1502
+	EGCItemMsg_k_EMsgGCTrading_StartSession                     EGCItemMsg = 1503
+	EGCItemMsg_k_EMsgGCTrading_SessionClosed                    EGCItemMsg = 1509
+	EGCItemMsg_k_EMsgGCTrading_InitiateTradeRequestResponse     EGCItemMsg = 1514
+	EGCItemMsg_k_EMsgGCServerBrowser_FavoriteServer             EGCItemMsg = 1601
+	EGCItemMsg_k_EMsgGCServerBrowser_BlacklistServer            EGCItemMsg = 1602
+	EGCItemMsg_k_EMsgGCServerRentalsBase                        EGCItemMsg = 1700
+	EGCItemMsg_k_EMsgGCItemPreviewCheckStatus                   EGCItemMsg = 1701
+	EGCItemMsg_k_EMsgGCItemPreviewStatusResponse                EGCItemMsg = 1702
+	EGCItemMsg_k_EMsgGCItemPreviewRequest                       EGCItemMsg = 1703
+	EGCItemMsg_k_EMsgGCItemPreviewRequestResponse               EGCItemMsg = 1704
+	EGCItemMsg_k_EMsgGCItemPreviewExpire                        EGCItemMsg = 1705
+	EGCItemMsg_k_EMsgGCItemPreviewExpireNotification            EGCItemMsg = 1706
+	EGCItemMsg_k_EMsgGCItemPreviewItemBoughtNotification        EGCItemMsg = 1707
+	EGCItemMsg_k_EMsgGCDev_NewItemRequest                       EGCItemMsg = 2001
+	EGCItemMsg_k_EMsgGCDev_NewItemRequestResponse               EGCItemMsg = 2002
+	EGCItemMsg_k_EMsgGCStoreGetUserData                         EGCItemMsg = 2500
+	EGCItemMsg_k_EMsgGCStoreGetUserDataResponse                 EGCItemMsg = 2501
+	EGCItemMsg_k_EMsgGCStorePurchaseFinalize                    EGCItemMsg = 2504
+	EGCItemMsg_k_EMsgGCStorePurchaseFinalizeResponse            EGCItemMsg = 2505
+	EGCItemMsg_k_EMsgGCStorePurchaseCancel                      EGCItemMsg = 2506
+	EGCItemMsg_k_EMsgGCStorePurchaseCancelResponse              EGCItemMsg = 2507
+	EGCItemMsg_k_EMsgGCStorePurchaseInit                        EGCItemMsg = 2510
+	EGCItemMsg_k_EMsgGCStorePurchaseInitResponse                EGCItemMsg = 2511
+	EGCItemMsg_k_EMsgGCBannedWordListRequest                    EGCItemMsg = 2512
+	EGCItemMsg_k_EMsgGCBannedWordListResponse                   EGCItemMsg = 2513
+	EGCItemMsg_k_EMsgGCToGCBannedWordListBroadcast              EGCItemMsg = 2514
+	EGCItemMsg_k_EMsgGCToGCBannedWordListUpdated                EGCItemMsg = 2515
+	EGCItemMsg_k_EMsgGCToGCDirtySDOCache                        EGCItemMsg = 2516
+	EGCItemMsg_k_EMsgGCToGCDirtyMultipleSDOCache                EGCItemMsg = 2517
+	EGCItemMsg_k_EMsgGCToGCUpdateSQLKeyValue                    EGCItemMsg = 2518
+	EGCItemMsg_k_EMsgGCToGCBroadcastConsoleCommand              EGCItemMsg = 2521
+	EGCItemMsg_k_EMsgGCServerVersionUpdated                     EGCItemMsg = 2522
+	EGCItemMsg_k_EMsgGCApplyAutograph                           EGCItemMsg = 2523
+	EGCItemMsg_k_EMsgGCToGCWebAPIAccountChanged                 EGCItemMsg = 2524
+	EGCItemMsg_k_EMsgGCClientVersionUpdated                     EGCItemMsg = 2528
+	EGCItemMsg_k_EMsgGCItemPurgatory_FinalizePurchase           EGCItemMsg = 2531
+	EGCItemMsg_k_EMsgGCItemPurgatory_FinalizePurchaseResponse   EGCItemMsg = 2532
+	EGCItemMsg_k_EMsgGCItemPurgatory_RefundPurchase             EGCItemMsg = 2533
+	EGCItemMsg_k_EMsgGCItemPurgatory_RefundPurchaseResponse     EGCItemMsg = 2534
+	EGCItemMsg_k_EMsgGCToGCPlayerStrangeCountAdjustments        EGCItemMsg = 2535
+	EGCItemMsg_k_EMsgGCRequestStoreSalesData                    EGCItemMsg = 2536
+	EGCItemMsg_k_EMsgGCRequestStoreSalesDataResponse            EGCItemMsg = 2537
+	EGCItemMsg_k_EMsgGCRequestStoreSalesDataUpToDateResponse    EGCItemMsg = 2538
+	EGCItemMsg_k_EMsgGCToGCPingRequest                          EGCItemMsg = 2539
+	EGCItemMsg_k_EMsgGCToGCPingResponse                         EGCItemMsg = 2540
+	EGCItemMsg_k_EMsgGCToGCGetUserSessionServer                 EGCItemMsg = 2541
+	EGCItemMsg_k_EMsgGCToGCGetUserSessionServerResponse         EGCItemMsg = 2542
+	EGCItemMsg_k_EMsgGCToGCGetUserServerMembers                 EGCItemMsg = 2543
+	EGCItemMsg_k_EMsgGCToGCGetUserServerMembersResponse         EGCItemMsg = 2544
+	EGCItemMsg_k_EMsgGCToGCGetUserPCBangNo                      EGCItemMsg = 2545
+	EGCItemMsg_k_EMsgGCToGCGetUserPCBangNoResponse              EGCItemMsg = 2546
+	EGCItemMsg_k_EMsgGCToGCCanUseDropRateBonus                  EGCItemMsg = 2547
+	EGCItemMsg_k_EMsgSQLAddDropRateBonus                        EGCItemMsg = 2548
+	EGCItemMsg_k_EMsgGCToGCRefreshSOCache                       EGCItemMsg = 2549
+	EGCItemMsg_k_EMsgGCToGCApplyLocalizationDiff                EGCItemMsg = 2550
+	EGCItemMsg_k_EMsgGCToGCApplyLocalizationDiffResponse        EGCItemMsg = 2551
+	EGCItemMsg_k_EMsgGCToGCCheckAccountTradeStatus              EGCItemMsg = 2552
+	EGCItemMsg_k_EMsgGCToGCCheckAccountTradeStatusResponse      EGCItemMsg = 2553
+	EGCItemMsg_k_EMsgGCToGCGrantAccountRolledItems              EGCItemMsg = 2554
+	EGCItemMsg_k_EMsgGCToGCGrantSelfMadeItemToAccount           EGCItemMsg = 2555
+	EGCItemMsg_k_EMsgSQLUpgradeBattleBooster                    EGCItemMsg = 2556
+	EGCItemMsg_k_EMsgGCPartnerBalanceRequest                    EGCItemMsg = 2557
+	EGCItemMsg_k_EMsgGCPartnerBalanceResponse                   EGCItemMsg = 2558
+	EGCItemMsg_k_EMsgGCPartnerRechargeRedirectURLRequest        EGCItemMsg = 2559
+	EGCItemMsg_k_EMsgGCPartnerRechargeRedirectURLResponse       EGCItemMsg = 2560
+	EGCItemMsg_k_EMsgGCStatueCraft                              EGCItemMsg = 2561
+	EGCItemMsg_k_EMsgGCRedeemCode                               EGCItemMsg = 2562
+	EGCItemMsg_k_EMsgGCRedeemCodeResponse                       EGCItemMsg = 2563
+	EGCItemMsg_k_EMsgGCToGCItemConsumptionRollback              EGCItemMsg = 2564
+	EGCItemMsg_k_EMsgClientToGCWrapAndDeliverGift               EGCItemMsg = 2565
+	EGCItemMsg_k_EMsgClientToGCWrapAndDeliverGiftResponse       EGCItemMsg = 2566
+	EGCItemMsg_k_EMsgClientToGCUnpackBundleResponse             EGCItemMsg = 2567
+	EGCItemMsg_k_EMsgGCToClientStoreTransactionCompleted        EGCItemMsg = 2568
+	EGCItemMsg_k_EMsgClientToGCEquipItems                       EGCItemMsg = 2569
+	EGCItemMsg_k_EMsgClientToGCEquipItemsResponse               EGCItemMsg = 2570
+	EGCItemMsg_k_EMsgClientToGCUnlockItemStyle                  EGCItemMsg = 2571
+	EGCItemMsg_k_EMsgClientToGCUnlockItemStyleResponse          EGCItemMsg = 2572
+	EGCItemMsg_k_EMsgClientToGCSetItemInventoryCategory         EGCItemMsg = 2573
+	EGCItemMsg_k_EMsgClientToGCUnlockCrate                      EGCItemMsg = 2574
+	EGCItemMsg_k_EMsgClientToGCUnlockCrateResponse              EGCItemMsg = 2575
+	EGCItemMsg_k_EMsgClientToGCUnpackBundle                     EGCItemMsg = 2576
+	EGCItemMsg_k_EMsgClientToGCSetItemStyle                     EGCItemMsg = 2577
+	EGCItemMsg_k_EMsgClientToGCSetItemStyleResponse             EGCItemMsg = 2578
+	EGCItemMsg_k_EMsgGCGenericResult                            EGCItemMsg = 2579
+	EGCItemMsg_k_EMsgSQLGCToGCGrantBackpackSlots                EGCItemMsg = 2580
+	EGCItemMsg_k_EMsgClientToGCLookupAccountName                EGCItemMsg = 2581
+	EGCItemMsg_k_EMsgClientToGCLookupAccountNameResponse        EGCItemMsg = 2582
+	EGCItemMsg_k_EMsgGCToGCDevRevokeUserItems                   EGCItemMsg = 2583
+	EGCItemMsg_k_EMsgClientToGCCreateStaticRecipe               EGCItemMsg = 2584
+	EGCItemMsg_k_EMsgClientToGCCreateStaticRecipeResponse       EGCItemMsg = 2585
+	EGCItemMsg_k_EMsgGCToGCStoreProcessCDKeyTransaction         EGCItemMsg = 2586
+	EGCItemMsg_k_EMsgGCToGCStoreProcessCDKeyTransactionResponse EGCItemMsg = 2587
+	EGCItemMsg_k_EMsgGCToGCStoreProcessSettlement               EGCItemMsg = 2588
+	EGCItemMsg_k_EMsgGCToGCStoreProcessSettlementResponse       EGCItemMsg = 2589
+	EGCItemMsg_k_EMsgGCToGCConsoleOutput                        EGCItemMsg = 2590
+	EGCItemMsg_k_EMsgGCToClientItemAges                         EGCItemMsg = 2591
 )
 
 var EGCItemMsg_name = map[int32]string{
@@ -369,184 +375,196 @@ var EGCItemMsg_name = map[int32]string{
 	2583: "k_EMsgGCToGCDevRevokeUserItems",
 	2584: "k_EMsgClientToGCCreateStaticRecipe",
 	2585: "k_EMsgClientToGCCreateStaticRecipeResponse",
+	2586: "k_EMsgGCToGCStoreProcessCDKeyTransaction",
+	2587: "k_EMsgGCToGCStoreProcessCDKeyTransactionResponse",
+	2588: "k_EMsgGCToGCStoreProcessSettlement",
+	2589: "k_EMsgGCToGCStoreProcessSettlementResponse",
+	2590: "k_EMsgGCToGCConsoleOutput",
+	2591: "k_EMsgGCToClientItemAges",
 }
 var EGCItemMsg_value = map[string]int32{
-	"k_EMsgGCBase":                                   1000,
-	"k_EMsgGCSetItemPosition":                        1001,
-	"k_EMsgGCDelete":                                 1004,
-	"k_EMsgGCVerifyCacheSubscription":                1005,
-	"k_EMsgClientToGCNameItem":                       1006,
-	"k_EMsgGCPaintItem":                              1009,
-	"k_EMsgGCPaintItemResponse":                      1010,
-	"k_EMsgGCGoldenWrenchBroadcast":                  1011,
-	"k_EMsgGCMOTDRequest":                            1012,
-	"k_EMsgGCMOTDRequestResponse":                    1013,
-	"k_EMsgGCAddItemToSocket_DEPRECATED":             1014,
-	"k_EMsgGCAddItemToSocketResponse_DEPRECATED":     1015,
-	"k_EMsgGCAddSocketToBaseItem_DEPRECATED":         1016,
-	"k_EMsgGCAddSocketToItem_DEPRECATED":             1017,
-	"k_EMsgGCAddSocketToItemResponse_DEPRECATED":     1018,
-	"k_EMsgGCNameBaseItem":                           1019,
-	"k_EMsgGCNameBaseItemResponse":                   1020,
-	"k_EMsgGCRemoveSocketItem_DEPRECATED":            1021,
-	"k_EMsgGCRemoveSocketItemResponse_DEPRECATED":    1022,
-	"k_EMsgGCCustomizeItemTexture":                   1023,
-	"k_EMsgGCCustomizeItemTextureResponse":           1024,
-	"k_EMsgGCUseItemRequest":                         1025,
-	"k_EMsgGCUseItemResponse":                        1026,
-	"k_EMsgGCGiftedItems":                            1027,
-	"k_EMsgGCRemoveItemName":                         1030,
-	"k_EMsgGCRemoveItemPaint":                        1031,
-	"k_EMsgGCUnwrapGiftRequest":                      1037,
-	"k_EMsgGCUnwrapGiftResponse":                     1038,
-	"k_EMsgGCSetItemStyle_DEPRECATED":                1039,
-	"k_EMsgGCUsedClaimCodeItem":                      1040,
-	"k_EMsgGCSortItems":                              1041,
-	"k_EMsgGC_RevolvingLootList_DEPRECATED":          1042,
-	"k_EMsgGCUpdateItemSchema":                       1049,
-	"k_EMsgGCRemoveCustomTexture":                    1051,
-	"k_EMsgGCRemoveCustomTextureResponse":            1052,
-	"k_EMsgGCRemoveMakersMark":                       1053,
-	"k_EMsgGCRemoveMakersMarkResponse":               1054,
-	"k_EMsgGCRemoveUniqueCraftIndex":                 1055,
-	"k_EMsgGCRemoveUniqueCraftIndexResponse":         1056,
-	"k_EMsgGCSaxxyBroadcast":                         1057,
-	"k_EMsgGCBackpackSortFinished":                   1058,
-	"k_EMsgGCAdjustItemEquippedState":                1059,
-	"k_EMsgGCCollectItem":                            1061,
-	"k_EMsgGCItemAcknowledged":                       1062,
-	"k_EMsgGCPresets_SelectPresetForClass":           1063,
-	"k_EMsgGCPresets_SetItemPosition":                1064,
-	"k_EMsgGCPresets_SelectPresetForClassReply":      1067,
-	"k_EMsgClientToGCNameItemResponse":               1068,
-	"k_EMsgGCApplyConsumableEffects":                 1069,
-	"k_EMsgGCConsumableExhausted":                    1070,
-	"k_EMsgGCShowItemsPickedUp":                      1071,
-	"k_EMsgGCClientDisplayNotification":              1072,
-	"k_EMsgGCApplyStrangePart":                       1073,
-	"k_EMsgGC_IncrementKillCountResponse":            1075,
-	"k_EMsgGCApplyPennantUpgrade":                    1076,
-	"k_EMsgGCSetItemPositions":                       1077,
-	"k_EMsgGCSetItemPositions_RateLimited":           1096,
-	"k_EMsgGCApplyEggEssence":                        1078,
-	"k_EMsgGCNameEggEssenceResponse":                 1079,
-	"k_EMsgGCFulfillDynamicRecipeComponent":          1082,
-	"k_EMsgGCFulfillDynamicRecipeComponentResponse":  1083,
-	"k_EMsgGCClientRequestMarketData":                1084,
-	"k_EMsgGCClientRequestMarketDataResponse":        1085,
-	"k_EMsgGCExtractGems":                            1086,
-	"k_EMsgGCAddSocket":                              1087,
-	"k_EMsgGCAddItemToSocket":                        1088,
-	"k_EMsgGCAddItemToSocketResponse":                1089,
-	"k_EMsgGCAddSocketResponse":                      1090,
-	"k_EMsgGCResetStrangeGemCount":                   1091,
-	"k_EMsgGCRequestCrateItems":                      1092,
-	"k_EMsgGCRequestCrateItemsResponse":              1093,
-	"k_EMsgGCExtractGemsResponse":                    1094,
-	"k_EMsgGCResetStrangeGemCountResponse":           1095,
-	"k_EMsgGCServerUseItemRequest":                   1103,
-	"k_EMsgGCAddGiftItem":                            1104,
-	"k_EMsgGCRemoveItemGiftMessage":                  1105,
-	"k_EMsgGCRemoveItemGiftMessageResponse":          1106,
-	"k_EMsgGCRemoveItemGifterAccountId":              1107,
-	"k_EMsgGCRemoveItemGifterAccountIdResponse":      1108,
-	"k_EMsgClientToGCRemoveItemGifterAttributes":     1109,
-	"k_EMsgClientToGCRemoveItemName":                 1110,
-	"k_EMsgClientToGCRemoveItemDescription":          1111,
-	"k_EMsgClientToGCRemoveItemAttributeResponse":    1112,
-	"k_EMsgGCTradingBase":                            1500,
-	"k_EMsgGCTrading_InitiateTradeRequest":           1501,
-	"k_EMsgGCTrading_InitiateTradeResponse":          1502,
-	"k_EMsgGCTrading_StartSession":                   1503,
-	"k_EMsgGCTrading_SessionClosed":                  1509,
-	"k_EMsgGCTrading_InitiateTradeRequestResponse":   1514,
-	"k_EMsgGCServerBrowser_FavoriteServer":           1601,
-	"k_EMsgGCServerBrowser_BlacklistServer":          1602,
-	"k_EMsgGCServerRentalsBase":                      1700,
-	"k_EMsgGCItemPreviewCheckStatus":                 1701,
-	"k_EMsgGCItemPreviewStatusResponse":              1702,
-	"k_EMsgGCItemPreviewRequest":                     1703,
-	"k_EMsgGCItemPreviewRequestResponse":             1704,
-	"k_EMsgGCItemPreviewExpire":                      1705,
-	"k_EMsgGCItemPreviewExpireNotification":          1706,
-	"k_EMsgGCItemPreviewItemBoughtNotification":      1707,
-	"k_EMsgGCDev_NewItemRequest":                     2001,
-	"k_EMsgGCDev_NewItemRequestResponse":             2002,
-	"k_EMsgGCStoreGetUserData":                       2500,
-	"k_EMsgGCStoreGetUserDataResponse":               2501,
-	"k_EMsgGCStorePurchaseFinalize":                  2504,
-	"k_EMsgGCStorePurchaseFinalizeResponse":          2505,
-	"k_EMsgGCStorePurchaseCancel":                    2506,
-	"k_EMsgGCStorePurchaseCancelResponse":            2507,
-	"k_EMsgGCStorePurchaseInit":                      2510,
-	"k_EMsgGCStorePurchaseInitResponse":              2511,
-	"k_EMsgGCBannedWordListRequest":                  2512,
-	"k_EMsgGCBannedWordListResponse":                 2513,
-	"k_EMsgGCToGCBannedWordListBroadcast":            2514,
-	"k_EMsgGCToGCBannedWordListUpdated":              2515,
-	"k_EMsgGCToGCDirtySDOCache":                      2516,
-	"k_EMsgGCToGCDirtyMultipleSDOCache":              2517,
-	"k_EMsgGCToGCUpdateSQLKeyValue":                  2518,
-	"k_EMsgGCToGCBroadcastConsoleCommand":            2521,
-	"k_EMsgGCServerVersionUpdated":                   2522,
-	"k_EMsgGCApplyAutograph":                         2523,
-	"k_EMsgGCToGCWebAPIAccountChanged":               2524,
-	"k_EMsgGCClientVersionUpdated":                   2528,
-	"k_EMsgGCItemPurgatory_FinalizePurchase":         2531,
-	"k_EMsgGCItemPurgatory_FinalizePurchaseResponse": 2532,
-	"k_EMsgGCItemPurgatory_RefundPurchase":           2533,
-	"k_EMsgGCItemPurgatory_RefundPurchaseResponse":   2534,
-	"k_EMsgGCToGCPlayerStrangeCountAdjustments":      2535,
-	"k_EMsgGCRequestStoreSalesData":                  2536,
-	"k_EMsgGCRequestStoreSalesDataResponse":          2537,
-	"k_EMsgGCRequestStoreSalesDataUpToDateResponse":  2538,
-	"k_EMsgGCToGCPingRequest":                        2539,
-	"k_EMsgGCToGCPingResponse":                       2540,
-	"k_EMsgGCToGCGetUserSessionServer":               2541,
-	"k_EMsgGCToGCGetUserSessionServerResponse":       2542,
-	"k_EMsgGCToGCGetUserServerMembers":               2543,
-	"k_EMsgGCToGCGetUserServerMembersResponse":       2544,
-	"k_EMsgGCToGCGetUserPCBangNo":                    2545,
-	"k_EMsgGCToGCGetUserPCBangNoResponse":            2546,
-	"k_EMsgGCToGCCanUseDropRateBonus":                2547,
-	"k_EMsgSQLAddDropRateBonus":                      2548,
-	"k_EMsgGCToGCRefreshSOCache":                     2549,
-	"k_EMsgGCToGCApplyLocalizationDiff":              2550,
-	"k_EMsgGCToGCApplyLocalizationDiffResponse":      2551,
-	"k_EMsgGCToGCCheckAccountTradeStatus":            2552,
-	"k_EMsgGCToGCCheckAccountTradeStatusResponse":    2553,
-	"k_EMsgGCToGCGrantAccountRolledItems":            2554,
-	"k_EMsgGCToGCGrantSelfMadeItemToAccount":         2555,
-	"k_EMsgSQLUpgradeBattleBooster":                  2556,
-	"k_EMsgGCPartnerBalanceRequest":                  2557,
-	"k_EMsgGCPartnerBalanceResponse":                 2558,
-	"k_EMsgGCPartnerRechargeRedirectURLRequest":      2559,
-	"k_EMsgGCPartnerRechargeRedirectURLResponse":     2560,
-	"k_EMsgGCStatueCraft":                            2561,
-	"k_EMsgGCRedeemCode":                             2562,
-	"k_EMsgGCRedeemCodeResponse":                     2563,
-	"k_EMsgGCToGCItemConsumptionRollback":            2564,
-	"k_EMsgClientToGCWrapAndDeliverGift":             2565,
-	"k_EMsgClientToGCWrapAndDeliverGiftResponse":     2566,
-	"k_EMsgClientToGCUnpackBundleResponse":           2567,
-	"k_EMsgGCToClientStoreTransactionCompleted":      2568,
-	"k_EMsgClientToGCEquipItems":                     2569,
-	"k_EMsgClientToGCEquipItemsResponse":             2570,
-	"k_EMsgClientToGCUnlockItemStyle":                2571,
-	"k_EMsgClientToGCUnlockItemStyleResponse":        2572,
-	"k_EMsgClientToGCSetItemInventoryCategory":       2573,
-	"k_EMsgClientToGCUnlockCrate":                    2574,
-	"k_EMsgClientToGCUnlockCrateResponse":            2575,
-	"k_EMsgClientToGCUnpackBundle":                   2576,
-	"k_EMsgClientToGCSetItemStyle":                   2577,
-	"k_EMsgClientToGCSetItemStyleResponse":           2578,
-	"k_EMsgGCGenericResult":                          2579,
-	"k_EMsgSQLGCToGCGrantBackpackSlots":              2580,
-	"k_EMsgClientToGCLookupAccountName":              2581,
-	"k_EMsgClientToGCLookupAccountNameResponse":      2582,
-	"k_EMsgGCToGCDevRevokeUserItems":                 2583,
-	"k_EMsgClientToGCCreateStaticRecipe":             2584,
-	"k_EMsgClientToGCCreateStaticRecipeResponse":     2585,
+	"k_EMsgGCBase":                                     1000,
+	"k_EMsgGCSetItemPosition":                          1001,
+	"k_EMsgGCDelete":                                   1004,
+	"k_EMsgGCVerifyCacheSubscription":                  1005,
+	"k_EMsgClientToGCNameItem":                         1006,
+	"k_EMsgGCPaintItem":                                1009,
+	"k_EMsgGCPaintItemResponse":                        1010,
+	"k_EMsgGCGoldenWrenchBroadcast":                    1011,
+	"k_EMsgGCMOTDRequest":                              1012,
+	"k_EMsgGCMOTDRequestResponse":                      1013,
+	"k_EMsgGCAddItemToSocket_DEPRECATED":               1014,
+	"k_EMsgGCAddItemToSocketResponse_DEPRECATED":       1015,
+	"k_EMsgGCAddSocketToBaseItem_DEPRECATED":           1016,
+	"k_EMsgGCAddSocketToItem_DEPRECATED":               1017,
+	"k_EMsgGCAddSocketToItemResponse_DEPRECATED":       1018,
+	"k_EMsgGCNameBaseItem":                             1019,
+	"k_EMsgGCNameBaseItemResponse":                     1020,
+	"k_EMsgGCRemoveSocketItem_DEPRECATED":              1021,
+	"k_EMsgGCRemoveSocketItemResponse_DEPRECATED":      1022,
+	"k_EMsgGCCustomizeItemTexture":                     1023,
+	"k_EMsgGCCustomizeItemTextureResponse":             1024,
+	"k_EMsgGCUseItemRequest":                           1025,
+	"k_EMsgGCUseItemResponse":                          1026,
+	"k_EMsgGCGiftedItems":                              1027,
+	"k_EMsgGCRemoveItemName":                           1030,
+	"k_EMsgGCRemoveItemPaint":                          1031,
+	"k_EMsgGCUnwrapGiftRequest":                        1037,
+	"k_EMsgGCUnwrapGiftResponse":                       1038,
+	"k_EMsgGCSetItemStyle_DEPRECATED":                  1039,
+	"k_EMsgGCUsedClaimCodeItem":                        1040,
+	"k_EMsgGCSortItems":                                1041,
+	"k_EMsgGC_RevolvingLootList_DEPRECATED":            1042,
+	"k_EMsgGCUpdateItemSchema":                         1049,
+	"k_EMsgGCRemoveCustomTexture":                      1051,
+	"k_EMsgGCRemoveCustomTextureResponse":              1052,
+	"k_EMsgGCRemoveMakersMark":                         1053,
+	"k_EMsgGCRemoveMakersMarkResponse":                 1054,
+	"k_EMsgGCRemoveUniqueCraftIndex":                   1055,
+	"k_EMsgGCRemoveUniqueCraftIndexResponse":           1056,
+	"k_EMsgGCSaxxyBroadcast":                           1057,
+	"k_EMsgGCBackpackSortFinished":                     1058,
+	"k_EMsgGCAdjustItemEquippedState":                  1059,
+	"k_EMsgGCCollectItem":                              1061,
+	"k_EMsgGCItemAcknowledged":                         1062,
+	"k_EMsgGCPresets_SelectPresetForClass":             1063,
+	"k_EMsgGCPresets_SetItemPosition":                  1064,
+	"k_EMsgGCPresets_SelectPresetForClassReply":        1067,
+	"k_EMsgClientToGCNameItemResponse":                 1068,
+	"k_EMsgGCApplyConsumableEffects":                   1069,
+	"k_EMsgGCConsumableExhausted":                      1070,
+	"k_EMsgGCShowItemsPickedUp":                        1071,
+	"k_EMsgGCClientDisplayNotification":                1072,
+	"k_EMsgGCApplyStrangePart":                         1073,
+	"k_EMsgGC_IncrementKillCountResponse":              1075,
+	"k_EMsgGCApplyPennantUpgrade":                      1076,
+	"k_EMsgGCSetItemPositions":                         1077,
+	"k_EMsgGCSetItemPositions_RateLimited":             1096,
+	"k_EMsgGCApplyEggEssence":                          1078,
+	"k_EMsgGCNameEggEssenceResponse":                   1079,
+	"k_EMsgGCFulfillDynamicRecipeComponent":            1082,
+	"k_EMsgGCFulfillDynamicRecipeComponentResponse":    1083,
+	"k_EMsgGCClientRequestMarketData":                  1084,
+	"k_EMsgGCClientRequestMarketDataResponse":          1085,
+	"k_EMsgGCExtractGems":                              1086,
+	"k_EMsgGCAddSocket":                                1087,
+	"k_EMsgGCAddItemToSocket":                          1088,
+	"k_EMsgGCAddItemToSocketResponse":                  1089,
+	"k_EMsgGCAddSocketResponse":                        1090,
+	"k_EMsgGCResetStrangeGemCount":                     1091,
+	"k_EMsgGCRequestCrateItems":                        1092,
+	"k_EMsgGCRequestCrateItemsResponse":                1093,
+	"k_EMsgGCExtractGemsResponse":                      1094,
+	"k_EMsgGCResetStrangeGemCountResponse":             1095,
+	"k_EMsgGCServerUseItemRequest":                     1103,
+	"k_EMsgGCAddGiftItem":                              1104,
+	"k_EMsgGCRemoveItemGiftMessage":                    1105,
+	"k_EMsgGCRemoveItemGiftMessageResponse":            1106,
+	"k_EMsgGCRemoveItemGifterAccountId":                1107,
+	"k_EMsgGCRemoveItemGifterAccountIdResponse":        1108,
+	"k_EMsgClientToGCRemoveItemGifterAttributes":       1109,
+	"k_EMsgClientToGCRemoveItemName":                   1110,
+	"k_EMsgClientToGCRemoveItemDescription":            1111,
+	"k_EMsgClientToGCRemoveItemAttributeResponse":      1112,
+	"k_EMsgGCTradingBase":                              1500,
+	"k_EMsgGCTrading_InitiateTradeRequest":             1501,
+	"k_EMsgGCTrading_InitiateTradeResponse":            1502,
+	"k_EMsgGCTrading_StartSession":                     1503,
+	"k_EMsgGCTrading_SessionClosed":                    1509,
+	"k_EMsgGCTrading_InitiateTradeRequestResponse":     1514,
+	"k_EMsgGCServerBrowser_FavoriteServer":             1601,
+	"k_EMsgGCServerBrowser_BlacklistServer":            1602,
+	"k_EMsgGCServerRentalsBase":                        1700,
+	"k_EMsgGCItemPreviewCheckStatus":                   1701,
+	"k_EMsgGCItemPreviewStatusResponse":                1702,
+	"k_EMsgGCItemPreviewRequest":                       1703,
+	"k_EMsgGCItemPreviewRequestResponse":               1704,
+	"k_EMsgGCItemPreviewExpire":                        1705,
+	"k_EMsgGCItemPreviewExpireNotification":            1706,
+	"k_EMsgGCItemPreviewItemBoughtNotification":        1707,
+	"k_EMsgGCDev_NewItemRequest":                       2001,
+	"k_EMsgGCDev_NewItemRequestResponse":               2002,
+	"k_EMsgGCStoreGetUserData":                         2500,
+	"k_EMsgGCStoreGetUserDataResponse":                 2501,
+	"k_EMsgGCStorePurchaseFinalize":                    2504,
+	"k_EMsgGCStorePurchaseFinalizeResponse":            2505,
+	"k_EMsgGCStorePurchaseCancel":                      2506,
+	"k_EMsgGCStorePurchaseCancelResponse":              2507,
+	"k_EMsgGCStorePurchaseInit":                        2510,
+	"k_EMsgGCStorePurchaseInitResponse":                2511,
+	"k_EMsgGCBannedWordListRequest":                    2512,
+	"k_EMsgGCBannedWordListResponse":                   2513,
+	"k_EMsgGCToGCBannedWordListBroadcast":              2514,
+	"k_EMsgGCToGCBannedWordListUpdated":                2515,
+	"k_EMsgGCToGCDirtySDOCache":                        2516,
+	"k_EMsgGCToGCDirtyMultipleSDOCache":                2517,
+	"k_EMsgGCToGCUpdateSQLKeyValue":                    2518,
+	"k_EMsgGCToGCBroadcastConsoleCommand":              2521,
+	"k_EMsgGCServerVersionUpdated":                     2522,
+	"k_EMsgGCApplyAutograph":                           2523,
+	"k_EMsgGCToGCWebAPIAccountChanged":                 2524,
+	"k_EMsgGCClientVersionUpdated":                     2528,
+	"k_EMsgGCItemPurgatory_FinalizePurchase":           2531,
+	"k_EMsgGCItemPurgatory_FinalizePurchaseResponse":   2532,
+	"k_EMsgGCItemPurgatory_RefundPurchase":             2533,
+	"k_EMsgGCItemPurgatory_RefundPurchaseResponse":     2534,
+	"k_EMsgGCToGCPlayerStrangeCountAdjustments":        2535,
+	"k_EMsgGCRequestStoreSalesData":                    2536,
+	"k_EMsgGCRequestStoreSalesDataResponse":            2537,
+	"k_EMsgGCRequestStoreSalesDataUpToDateResponse":    2538,
+	"k_EMsgGCToGCPingRequest":                          2539,
+	"k_EMsgGCToGCPingResponse":                         2540,
+	"k_EMsgGCToGCGetUserSessionServer":                 2541,
+	"k_EMsgGCToGCGetUserSessionServerResponse":         2542,
+	"k_EMsgGCToGCGetUserServerMembers":                 2543,
+	"k_EMsgGCToGCGetUserServerMembersResponse":         2544,
+	"k_EMsgGCToGCGetUserPCBangNo":                      2545,
+	"k_EMsgGCToGCGetUserPCBangNoResponse":              2546,
+	"k_EMsgGCToGCCanUseDropRateBonus":                  2547,
+	"k_EMsgSQLAddDropRateBonus":                        2548,
+	"k_EMsgGCToGCRefreshSOCache":                       2549,
+	"k_EMsgGCToGCApplyLocalizationDiff":                2550,
+	"k_EMsgGCToGCApplyLocalizationDiffResponse":        2551,
+	"k_EMsgGCToGCCheckAccountTradeStatus":              2552,
+	"k_EMsgGCToGCCheckAccountTradeStatusResponse":      2553,
+	"k_EMsgGCToGCGrantAccountRolledItems":              2554,
+	"k_EMsgGCToGCGrantSelfMadeItemToAccount":           2555,
+	"k_EMsgSQLUpgradeBattleBooster":                    2556,
+	"k_EMsgGCPartnerBalanceRequest":                    2557,
+	"k_EMsgGCPartnerBalanceResponse":                   2558,
+	"k_EMsgGCPartnerRechargeRedirectURLRequest":        2559,
+	"k_EMsgGCPartnerRechargeRedirectURLResponse":       2560,
+	"k_EMsgGCStatueCraft":                              2561,
+	"k_EMsgGCRedeemCode":                               2562,
+	"k_EMsgGCRedeemCodeResponse":                       2563,
+	"k_EMsgGCToGCItemConsumptionRollback":              2564,
+	"k_EMsgClientToGCWrapAndDeliverGift":               2565,
+	"k_EMsgClientToGCWrapAndDeliverGiftResponse":       2566,
+	"k_EMsgClientToGCUnpackBundleResponse":             2567,
+	"k_EMsgGCToClientStoreTransactionCompleted":        2568,
+	"k_EMsgClientToGCEquipItems":                       2569,
+	"k_EMsgClientToGCEquipItemsResponse":               2570,
+	"k_EMsgClientToGCUnlockItemStyle":                  2571,
+	"k_EMsgClientToGCUnlockItemStyleResponse":          2572,
+	"k_EMsgClientToGCSetItemInventoryCategory":         2573,
+	"k_EMsgClientToGCUnlockCrate":                      2574,
+	"k_EMsgClientToGCUnlockCrateResponse":              2575,
+	"k_EMsgClientToGCUnpackBundle":                     2576,
+	"k_EMsgClientToGCSetItemStyle":                     2577,
+	"k_EMsgClientToGCSetItemStyleResponse":             2578,
+	"k_EMsgGCGenericResult":                            2579,
+	"k_EMsgSQLGCToGCGrantBackpackSlots":                2580,
+	"k_EMsgClientToGCLookupAccountName":                2581,
+	"k_EMsgClientToGCLookupAccountNameResponse":        2582,
+	"k_EMsgGCToGCDevRevokeUserItems":                   2583,
+	"k_EMsgClientToGCCreateStaticRecipe":               2584,
+	"k_EMsgClientToGCCreateStaticRecipeResponse":       2585,
+	"k_EMsgGCToGCStoreProcessCDKeyTransaction":         2586,
+	"k_EMsgGCToGCStoreProcessCDKeyTransactionResponse": 2587,
+	"k_EMsgGCToGCStoreProcessSettlement":               2588,
+	"k_EMsgGCToGCStoreProcessSettlementResponse":       2589,
+	"k_EMsgGCToGCConsoleOutput":                        2590,
+	"k_EMsgGCToClientItemAges":                         2591,
 }
 
 func (x EGCItemMsg) Enum() *EGCItemMsg {
@@ -3697,6 +3715,7 @@ func (m *CWorkshop_GetItemDailyRevenue_Response_CountryDailyRevenue) GetUnits() 
 
 type CMsgGenericResult struct {
 	Eresult          *uint32 `protobuf:"varint,1,opt,name=eresult,def=2" json:"eresult,omitempty"`
+	DebugMessage     *string `protobuf:"bytes,2,opt,name=debug_message" json:"debug_message,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
@@ -3711,6 +3730,13 @@ func (m *CMsgGenericResult) GetEresult() uint32 {
 		return *m.Eresult
 	}
 	return Default_CMsgGenericResult_Eresult
+}
+
+func (m *CMsgGenericResult) GetDebugMessage() string {
+	if m != nil && m.DebugMessage != nil {
+		return *m.DebugMessage
+	}
+	return ""
 }
 
 type CMsgSQLGCToGCGrantBackpackSlots struct {
@@ -3911,6 +3937,390 @@ func (m *CMsgClientToGCCreateStaticRecipeResponse_OutputItem) GetDefIndex() uint
 func (m *CMsgClientToGCCreateStaticRecipeResponse_OutputItem) GetItemId() uint64 {
 	if m != nil && m.ItemId != nil {
 		return *m.ItemId
+	}
+	return 0
+}
+
+type CMsgProcessTransactionOrder struct {
+	TxnId                *uint64                             `protobuf:"varint,1,opt,name=txn_id" json:"txn_id,omitempty"`
+	SteamTxnId           *uint64                             `protobuf:"varint,2,opt,name=steam_txn_id" json:"steam_txn_id,omitempty"`
+	PartnerTxnId         *uint64                             `protobuf:"varint,3,opt,name=partner_txn_id" json:"partner_txn_id,omitempty"`
+	SteamId              *uint64                             `protobuf:"fixed64,4,opt,name=steam_id" json:"steam_id,omitempty"`
+	TimeStamp            *uint32                             `protobuf:"varint,5,opt,name=time_stamp" json:"time_stamp,omitempty"`
+	Watermark            *uint64                             `protobuf:"varint,6,opt,name=watermark" json:"watermark,omitempty"`
+	PurchaseReportStatus *int32                              `protobuf:"varint,7,opt,name=purchase_report_status" json:"purchase_report_status,omitempty"`
+	Currency             *uint32                             `protobuf:"varint,8,opt,name=currency" json:"currency,omitempty"`
+	Items                []*CMsgProcessTransactionOrder_Item `protobuf:"bytes,9,rep,name=items" json:"items,omitempty"`
+	XXX_unrecognized     []byte                              `json:"-"`
+}
+
+func (m *CMsgProcessTransactionOrder) Reset()         { *m = CMsgProcessTransactionOrder{} }
+func (m *CMsgProcessTransactionOrder) String() string { return proto.CompactTextString(m) }
+func (*CMsgProcessTransactionOrder) ProtoMessage()    {}
+
+func (m *CMsgProcessTransactionOrder) GetTxnId() uint64 {
+	if m != nil && m.TxnId != nil {
+		return *m.TxnId
+	}
+	return 0
+}
+
+func (m *CMsgProcessTransactionOrder) GetSteamTxnId() uint64 {
+	if m != nil && m.SteamTxnId != nil {
+		return *m.SteamTxnId
+	}
+	return 0
+}
+
+func (m *CMsgProcessTransactionOrder) GetPartnerTxnId() uint64 {
+	if m != nil && m.PartnerTxnId != nil {
+		return *m.PartnerTxnId
+	}
+	return 0
+}
+
+func (m *CMsgProcessTransactionOrder) GetSteamId() uint64 {
+	if m != nil && m.SteamId != nil {
+		return *m.SteamId
+	}
+	return 0
+}
+
+func (m *CMsgProcessTransactionOrder) GetTimeStamp() uint32 {
+	if m != nil && m.TimeStamp != nil {
+		return *m.TimeStamp
+	}
+	return 0
+}
+
+func (m *CMsgProcessTransactionOrder) GetWatermark() uint64 {
+	if m != nil && m.Watermark != nil {
+		return *m.Watermark
+	}
+	return 0
+}
+
+func (m *CMsgProcessTransactionOrder) GetPurchaseReportStatus() int32 {
+	if m != nil && m.PurchaseReportStatus != nil {
+		return *m.PurchaseReportStatus
+	}
+	return 0
+}
+
+func (m *CMsgProcessTransactionOrder) GetCurrency() uint32 {
+	if m != nil && m.Currency != nil {
+		return *m.Currency
+	}
+	return 0
+}
+
+func (m *CMsgProcessTransactionOrder) GetItems() []*CMsgProcessTransactionOrder_Item {
+	if m != nil {
+		return m.Items
+	}
+	return nil
+}
+
+type CMsgProcessTransactionOrder_Item struct {
+	ItemDefIndex      *uint32 `protobuf:"varint,1,opt,name=item_def_index" json:"item_def_index,omitempty"`
+	ItemPrice         *uint32 `protobuf:"varint,2,opt,name=item_price" json:"item_price,omitempty"`
+	Quantity          *uint32 `protobuf:"varint,3,opt,name=quantity" json:"quantity,omitempty"`
+	CategoryDesc      *string `protobuf:"bytes,4,opt,name=category_desc" json:"category_desc,omitempty"`
+	StorePurchaseType *uint32 `protobuf:"varint,5,opt,name=store_purchase_type" json:"store_purchase_type,omitempty"`
+	SourceReferenceId *uint64 `protobuf:"varint,6,opt,name=source_reference_id" json:"source_reference_id,omitempty"`
+	ParentStackIndex  *int32  `protobuf:"varint,7,opt,name=parent_stack_index" json:"parent_stack_index,omitempty"`
+	DefaultPrice      *bool   `protobuf:"varint,8,opt,name=default_price" json:"default_price,omitempty"`
+	IsUserFacing      *bool   `protobuf:"varint,9,opt,name=is_user_facing" json:"is_user_facing,omitempty"`
+	XXX_unrecognized  []byte  `json:"-"`
+}
+
+func (m *CMsgProcessTransactionOrder_Item) Reset()         { *m = CMsgProcessTransactionOrder_Item{} }
+func (m *CMsgProcessTransactionOrder_Item) String() string { return proto.CompactTextString(m) }
+func (*CMsgProcessTransactionOrder_Item) ProtoMessage()    {}
+
+func (m *CMsgProcessTransactionOrder_Item) GetItemDefIndex() uint32 {
+	if m != nil && m.ItemDefIndex != nil {
+		return *m.ItemDefIndex
+	}
+	return 0
+}
+
+func (m *CMsgProcessTransactionOrder_Item) GetItemPrice() uint32 {
+	if m != nil && m.ItemPrice != nil {
+		return *m.ItemPrice
+	}
+	return 0
+}
+
+func (m *CMsgProcessTransactionOrder_Item) GetQuantity() uint32 {
+	if m != nil && m.Quantity != nil {
+		return *m.Quantity
+	}
+	return 0
+}
+
+func (m *CMsgProcessTransactionOrder_Item) GetCategoryDesc() string {
+	if m != nil && m.CategoryDesc != nil {
+		return *m.CategoryDesc
+	}
+	return ""
+}
+
+func (m *CMsgProcessTransactionOrder_Item) GetStorePurchaseType() uint32 {
+	if m != nil && m.StorePurchaseType != nil {
+		return *m.StorePurchaseType
+	}
+	return 0
+}
+
+func (m *CMsgProcessTransactionOrder_Item) GetSourceReferenceId() uint64 {
+	if m != nil && m.SourceReferenceId != nil {
+		return *m.SourceReferenceId
+	}
+	return 0
+}
+
+func (m *CMsgProcessTransactionOrder_Item) GetParentStackIndex() int32 {
+	if m != nil && m.ParentStackIndex != nil {
+		return *m.ParentStackIndex
+	}
+	return 0
+}
+
+func (m *CMsgProcessTransactionOrder_Item) GetDefaultPrice() bool {
+	if m != nil && m.DefaultPrice != nil {
+		return *m.DefaultPrice
+	}
+	return false
+}
+
+func (m *CMsgProcessTransactionOrder_Item) GetIsUserFacing() bool {
+	if m != nil && m.IsUserFacing != nil {
+		return *m.IsUserFacing
+	}
+	return false
+}
+
+type CMsgGCToGCStoreProcessCDKeyTransaction struct {
+	Order            *CMsgProcessTransactionOrder `protobuf:"bytes,1,opt,name=order" json:"order,omitempty"`
+	ReasonCode       *uint32                      `protobuf:"varint,2,opt,name=reason_code" json:"reason_code,omitempty"`
+	XXX_unrecognized []byte                       `json:"-"`
+}
+
+func (m *CMsgGCToGCStoreProcessCDKeyTransaction) Reset() {
+	*m = CMsgGCToGCStoreProcessCDKeyTransaction{}
+}
+func (m *CMsgGCToGCStoreProcessCDKeyTransaction) String() string { return proto.CompactTextString(m) }
+func (*CMsgGCToGCStoreProcessCDKeyTransaction) ProtoMessage()    {}
+
+func (m *CMsgGCToGCStoreProcessCDKeyTransaction) GetOrder() *CMsgProcessTransactionOrder {
+	if m != nil {
+		return m.Order
+	}
+	return nil
+}
+
+func (m *CMsgGCToGCStoreProcessCDKeyTransaction) GetReasonCode() uint32 {
+	if m != nil && m.ReasonCode != nil {
+		return *m.ReasonCode
+	}
+	return 0
+}
+
+type CMsgGCToGCStoreProcessCDKeyTransactionResponse struct {
+	Success          *bool  `protobuf:"varint,1,opt,name=success" json:"success,omitempty"`
+	XXX_unrecognized []byte `json:"-"`
+}
+
+func (m *CMsgGCToGCStoreProcessCDKeyTransactionResponse) Reset() {
+	*m = CMsgGCToGCStoreProcessCDKeyTransactionResponse{}
+}
+func (m *CMsgGCToGCStoreProcessCDKeyTransactionResponse) String() string {
+	return proto.CompactTextString(m)
+}
+func (*CMsgGCToGCStoreProcessCDKeyTransactionResponse) ProtoMessage() {}
+
+func (m *CMsgGCToGCStoreProcessCDKeyTransactionResponse) GetSuccess() bool {
+	if m != nil && m.Success != nil {
+		return *m.Success
+	}
+	return false
+}
+
+type CMsgGCToGCStoreProcessSettlement struct {
+	Order            *CMsgProcessTransactionOrder `protobuf:"bytes,1,opt,name=order" json:"order,omitempty"`
+	Partner          *uint32                      `protobuf:"varint,2,opt,name=partner" json:"partner,omitempty"`
+	XXX_unrecognized []byte                       `json:"-"`
+}
+
+func (m *CMsgGCToGCStoreProcessSettlement) Reset()         { *m = CMsgGCToGCStoreProcessSettlement{} }
+func (m *CMsgGCToGCStoreProcessSettlement) String() string { return proto.CompactTextString(m) }
+func (*CMsgGCToGCStoreProcessSettlement) ProtoMessage()    {}
+
+func (m *CMsgGCToGCStoreProcessSettlement) GetOrder() *CMsgProcessTransactionOrder {
+	if m != nil {
+		return m.Order
+	}
+	return nil
+}
+
+func (m *CMsgGCToGCStoreProcessSettlement) GetPartner() uint32 {
+	if m != nil && m.Partner != nil {
+		return *m.Partner
+	}
+	return 0
+}
+
+type CMsgGCToGCStoreProcessSettlementResponse struct {
+	Success          *bool  `protobuf:"varint,1,opt,name=success" json:"success,omitempty"`
+	XXX_unrecognized []byte `json:"-"`
+}
+
+func (m *CMsgGCToGCStoreProcessSettlementResponse) Reset() {
+	*m = CMsgGCToGCStoreProcessSettlementResponse{}
+}
+func (m *CMsgGCToGCStoreProcessSettlementResponse) String() string { return proto.CompactTextString(m) }
+func (*CMsgGCToGCStoreProcessSettlementResponse) ProtoMessage()    {}
+
+func (m *CMsgGCToGCStoreProcessSettlementResponse) GetSuccess() bool {
+	if m != nil && m.Success != nil {
+		return *m.Success
+	}
+	return false
+}
+
+type CMsgGCToGCBroadcastConsoleCommand struct {
+	ConCommand       *string `protobuf:"bytes,1,opt,name=con_command" json:"con_command,omitempty"`
+	ReportOutput     *bool   `protobuf:"varint,2,opt,name=report_output" json:"report_output,omitempty"`
+	SendingGc        *uint32 `protobuf:"varint,3,opt,name=sending_gc" json:"sending_gc,omitempty"`
+	OutputInitiator  *string `protobuf:"bytes,4,opt,name=output_initiator" json:"output_initiator,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CMsgGCToGCBroadcastConsoleCommand) Reset()         { *m = CMsgGCToGCBroadcastConsoleCommand{} }
+func (m *CMsgGCToGCBroadcastConsoleCommand) String() string { return proto.CompactTextString(m) }
+func (*CMsgGCToGCBroadcastConsoleCommand) ProtoMessage()    {}
+
+func (m *CMsgGCToGCBroadcastConsoleCommand) GetConCommand() string {
+	if m != nil && m.ConCommand != nil {
+		return *m.ConCommand
+	}
+	return ""
+}
+
+func (m *CMsgGCToGCBroadcastConsoleCommand) GetReportOutput() bool {
+	if m != nil && m.ReportOutput != nil {
+		return *m.ReportOutput
+	}
+	return false
+}
+
+func (m *CMsgGCToGCBroadcastConsoleCommand) GetSendingGc() uint32 {
+	if m != nil && m.SendingGc != nil {
+		return *m.SendingGc
+	}
+	return 0
+}
+
+func (m *CMsgGCToGCBroadcastConsoleCommand) GetOutputInitiator() string {
+	if m != nil && m.OutputInitiator != nil {
+		return *m.OutputInitiator
+	}
+	return ""
+}
+
+type CMsgGCToGCConsoleOutput struct {
+	Initiator        *string                               `protobuf:"bytes,1,opt,name=initiator" json:"initiator,omitempty"`
+	SendingGc        *uint32                               `protobuf:"varint,2,opt,name=sending_gc" json:"sending_gc,omitempty"`
+	Msgs             []*CMsgGCToGCConsoleOutput_OutputLine `protobuf:"bytes,3,rep,name=msgs" json:"msgs,omitempty"`
+	XXX_unrecognized []byte                                `json:"-"`
+}
+
+func (m *CMsgGCToGCConsoleOutput) Reset()         { *m = CMsgGCToGCConsoleOutput{} }
+func (m *CMsgGCToGCConsoleOutput) String() string { return proto.CompactTextString(m) }
+func (*CMsgGCToGCConsoleOutput) ProtoMessage()    {}
+
+func (m *CMsgGCToGCConsoleOutput) GetInitiator() string {
+	if m != nil && m.Initiator != nil {
+		return *m.Initiator
+	}
+	return ""
+}
+
+func (m *CMsgGCToGCConsoleOutput) GetSendingGc() uint32 {
+	if m != nil && m.SendingGc != nil {
+		return *m.SendingGc
+	}
+	return 0
+}
+
+func (m *CMsgGCToGCConsoleOutput) GetMsgs() []*CMsgGCToGCConsoleOutput_OutputLine {
+	if m != nil {
+		return m.Msgs
+	}
+	return nil
+}
+
+type CMsgGCToGCConsoleOutput_OutputLine struct {
+	Text             *string `protobuf:"bytes,1,opt,name=text" json:"text,omitempty"`
+	SpewLevel        *uint32 `protobuf:"varint,2,opt,name=spew_level" json:"spew_level,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CMsgGCToGCConsoleOutput_OutputLine) Reset()         { *m = CMsgGCToGCConsoleOutput_OutputLine{} }
+func (m *CMsgGCToGCConsoleOutput_OutputLine) String() string { return proto.CompactTextString(m) }
+func (*CMsgGCToGCConsoleOutput_OutputLine) ProtoMessage()    {}
+
+func (m *CMsgGCToGCConsoleOutput_OutputLine) GetText() string {
+	if m != nil && m.Text != nil {
+		return *m.Text
+	}
+	return ""
+}
+
+func (m *CMsgGCToGCConsoleOutput_OutputLine) GetSpewLevel() uint32 {
+	if m != nil && m.SpewLevel != nil {
+		return *m.SpewLevel
+	}
+	return 0
+}
+
+type CMsgItemAges struct {
+	MaxItemIdTimestamps []*CMsgItemAges_MaxItemIDTimestamp `protobuf:"bytes,1,rep,name=max_item_id_timestamps" json:"max_item_id_timestamps,omitempty"`
+	XXX_unrecognized    []byte                             `json:"-"`
+}
+
+func (m *CMsgItemAges) Reset()         { *m = CMsgItemAges{} }
+func (m *CMsgItemAges) String() string { return proto.CompactTextString(m) }
+func (*CMsgItemAges) ProtoMessage()    {}
+
+func (m *CMsgItemAges) GetMaxItemIdTimestamps() []*CMsgItemAges_MaxItemIDTimestamp {
+	if m != nil {
+		return m.MaxItemIdTimestamps
+	}
+	return nil
+}
+
+type CMsgItemAges_MaxItemIDTimestamp struct {
+	Timestamp        *uint32 `protobuf:"varint,1,opt,name=timestamp" json:"timestamp,omitempty"`
+	MaxItemId        *uint64 `protobuf:"varint,2,opt,name=max_item_id" json:"max_item_id,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CMsgItemAges_MaxItemIDTimestamp) Reset()         { *m = CMsgItemAges_MaxItemIDTimestamp{} }
+func (m *CMsgItemAges_MaxItemIDTimestamp) String() string { return proto.CompactTextString(m) }
+func (*CMsgItemAges_MaxItemIDTimestamp) ProtoMessage()    {}
+
+func (m *CMsgItemAges_MaxItemIDTimestamp) GetTimestamp() uint32 {
+	if m != nil && m.Timestamp != nil {
+		return *m.Timestamp
+	}
+	return 0
+}
+
+func (m *CMsgItemAges_MaxItemIDTimestamp) GetMaxItemId() uint64 {
+	if m != nil && m.MaxItemId != nil {
+		return *m.MaxItemId
 	}
 	return 0
 }

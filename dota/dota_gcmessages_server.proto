@@ -323,6 +323,7 @@ message CMsgGameMatchSignOut {
 	optional uint32 bonus_gold_loser_total = 34;
 	optional CMsgGameMatchSignOut.CCustomGameData custom_game_data = 37;
 	optional uint32 match_flags = 38;
+	repeated uint32 team_scores = 39;
 }
 
 message CMsgSignOutDraftInfo {
@@ -403,6 +404,11 @@ message CMsgGameMatchSignoutResponse {
 	optional uint32 leagueid = 5;
 	repeated CMsgGameMatchSignoutResponse.CAdditionalSignoutMsg additional_msgs = 6;
 	optional fixed32 metadata_private_key = 7;
+	optional CMsgDOTAMatch match_details = 8;
+}
+
+message CMsgTimedRewardContainer {
+	repeated CLobbyTimedRewardDetails timed_reward_details = 1;
 }
 
 message CMsgGameMatchSignOutPermissionRequest {
@@ -416,18 +422,6 @@ message CMsgGameMatchSignOutPermissionResponse {
 	optional bool permission_granted = 1 [default = false];
 	optional bool abandon_signout = 2 [default = false];
 	optional uint32 retry_delay_seconds = 3 [default = 0];
-}
-
-message CMsgGameChatLog {
-	message CChatLine {
-		optional uint32 account_id = 1;
-		optional uint32 team_only = 2;
-		optional string text = 3;
-		optional uint32 game_time = 4;
-	}
-
-	optional uint64 match_id = 1;
-	repeated CMsgGameChatLog.CChatLine lines = 2;
 }
 
 message CMsgDOTALiveScoreboardUpdate {

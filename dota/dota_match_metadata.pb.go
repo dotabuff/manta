@@ -52,8 +52,9 @@ func (m *CDOTAMatchMetadataFile) GetPrivateMetadata() []byte {
 }
 
 type CDOTAMatchMetadata struct {
-	Teams            []*CDOTAMatchMetadata_Team `protobuf:"bytes,1,rep,name=teams" json:"teams,omitempty"`
-	XXX_unrecognized []byte                     `json:"-"`
+	Teams            []*CDOTAMatchMetadata_Team  `protobuf:"bytes,1,rep,name=teams" json:"teams,omitempty"`
+	ItemRewards      []*CLobbyTimedRewardDetails `protobuf:"bytes,2,rep,name=item_rewards" json:"item_rewards,omitempty"`
+	XXX_unrecognized []byte                      `json:"-"`
 }
 
 func (m *CDOTAMatchMetadata) Reset()         { *m = CDOTAMatchMetadata{} }
@@ -67,13 +68,25 @@ func (m *CDOTAMatchMetadata) GetTeams() []*CDOTAMatchMetadata_Team {
 	return nil
 }
 
+func (m *CDOTAMatchMetadata) GetItemRewards() []*CLobbyTimedRewardDetails {
+	if m != nil {
+		return m.ItemRewards
+	}
+	return nil
+}
+
 type CDOTAMatchMetadata_Team struct {
-	DotaTeam         *uint32                           `protobuf:"varint,1,opt,name=dota_team" json:"dota_team,omitempty"`
-	Players          []*CDOTAMatchMetadata_Team_Player `protobuf:"bytes,2,rep,name=players" json:"players,omitempty"`
-	GraphExperience  []float32                         `protobuf:"fixed32,3,rep,name=graph_experience" json:"graph_experience,omitempty"`
-	GraphGoldEarned  []float32                         `protobuf:"fixed32,4,rep,name=graph_gold_earned" json:"graph_gold_earned,omitempty"`
-	GraphNetWorth    []float32                         `protobuf:"fixed32,5,rep,name=graph_net_worth" json:"graph_net_worth,omitempty"`
-	XXX_unrecognized []byte                            `json:"-"`
+	DotaTeam          *uint32                           `protobuf:"varint,1,opt,name=dota_team" json:"dota_team,omitempty"`
+	Players           []*CDOTAMatchMetadata_Team_Player `protobuf:"bytes,2,rep,name=players" json:"players,omitempty"`
+	GraphExperience   []float32                         `protobuf:"fixed32,3,rep,name=graph_experience" json:"graph_experience,omitempty"`
+	GraphGoldEarned   []float32                         `protobuf:"fixed32,4,rep,name=graph_gold_earned" json:"graph_gold_earned,omitempty"`
+	GraphNetWorth     []float32                         `protobuf:"fixed32,5,rep,name=graph_net_worth" json:"graph_net_worth,omitempty"`
+	CmFirstPick       *bool                             `protobuf:"varint,6,opt,name=cm_first_pick" json:"cm_first_pick,omitempty"`
+	CmCaptainPlayerId *uint32                           `protobuf:"varint,7,opt,name=cm_captain_player_id" json:"cm_captain_player_id,omitempty"`
+	CmBans            []uint32                          `protobuf:"varint,8,rep,name=cm_bans" json:"cm_bans,omitempty"`
+	CmPicks           []uint32                          `protobuf:"varint,9,rep,name=cm_picks" json:"cm_picks,omitempty"`
+	CmPenalty         *uint32                           `protobuf:"varint,10,opt,name=cm_penalty" json:"cm_penalty,omitempty"`
+	XXX_unrecognized  []byte                            `json:"-"`
 }
 
 func (m *CDOTAMatchMetadata_Team) Reset()         { *m = CDOTAMatchMetadata_Team{} }
@@ -115,12 +128,72 @@ func (m *CDOTAMatchMetadata_Team) GetGraphNetWorth() []float32 {
 	return nil
 }
 
+func (m *CDOTAMatchMetadata_Team) GetCmFirstPick() bool {
+	if m != nil && m.CmFirstPick != nil {
+		return *m.CmFirstPick
+	}
+	return false
+}
+
+func (m *CDOTAMatchMetadata_Team) GetCmCaptainPlayerId() uint32 {
+	if m != nil && m.CmCaptainPlayerId != nil {
+		return *m.CmCaptainPlayerId
+	}
+	return 0
+}
+
+func (m *CDOTAMatchMetadata_Team) GetCmBans() []uint32 {
+	if m != nil {
+		return m.CmBans
+	}
+	return nil
+}
+
+func (m *CDOTAMatchMetadata_Team) GetCmPicks() []uint32 {
+	if m != nil {
+		return m.CmPicks
+	}
+	return nil
+}
+
+func (m *CDOTAMatchMetadata_Team) GetCmPenalty() uint32 {
+	if m != nil && m.CmPenalty != nil {
+		return *m.CmPenalty
+	}
+	return 0
+}
+
+type CDOTAMatchMetadata_Team_PlayerKill struct {
+	VictimSlot       *uint32 `protobuf:"varint,1,opt,name=victim_slot" json:"victim_slot,omitempty"`
+	Count            *uint32 `protobuf:"varint,2,opt,name=count" json:"count,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CDOTAMatchMetadata_Team_PlayerKill) Reset()         { *m = CDOTAMatchMetadata_Team_PlayerKill{} }
+func (m *CDOTAMatchMetadata_Team_PlayerKill) String() string { return proto.CompactTextString(m) }
+func (*CDOTAMatchMetadata_Team_PlayerKill) ProtoMessage()    {}
+
+func (m *CDOTAMatchMetadata_Team_PlayerKill) GetVictimSlot() uint32 {
+	if m != nil && m.VictimSlot != nil {
+		return *m.VictimSlot
+	}
+	return 0
+}
+
+func (m *CDOTAMatchMetadata_Team_PlayerKill) GetCount() uint32 {
+	if m != nil && m.Count != nil {
+		return *m.Count
+	}
+	return 0
+}
+
 type CDOTAMatchMetadata_Team_Player struct {
-	AccountId         *uint32        `protobuf:"varint,1,opt,name=account_id" json:"account_id,omitempty"`
-	AbilityUpgrades   []uint32       `protobuf:"varint,2,rep,name=ability_upgrades" json:"ability_upgrades,omitempty"`
-	PlayerSlot        *uint32        `protobuf:"varint,3,opt,name=player_slot" json:"player_slot,omitempty"`
-	EquippedEconItems []*CSOEconItem `protobuf:"bytes,4,rep,name=equipped_econ_items" json:"equipped_econ_items,omitempty"`
-	XXX_unrecognized  []byte         `json:"-"`
+	AccountId         *uint32                               `protobuf:"varint,1,opt,name=account_id" json:"account_id,omitempty"`
+	AbilityUpgrades   []uint32                              `protobuf:"varint,2,rep,name=ability_upgrades" json:"ability_upgrades,omitempty"`
+	PlayerSlot        *uint32                               `protobuf:"varint,3,opt,name=player_slot" json:"player_slot,omitempty"`
+	EquippedEconItems []*CSOEconItem                        `protobuf:"bytes,4,rep,name=equipped_econ_items" json:"equipped_econ_items,omitempty"`
+	Kills             []*CDOTAMatchMetadata_Team_PlayerKill `protobuf:"bytes,5,rep,name=kills" json:"kills,omitempty"`
+	XXX_unrecognized  []byte                                `json:"-"`
 }
 
 func (m *CDOTAMatchMetadata_Team_Player) Reset()         { *m = CDOTAMatchMetadata_Team_Player{} }
@@ -151,6 +224,13 @@ func (m *CDOTAMatchMetadata_Team_Player) GetPlayerSlot() uint32 {
 func (m *CDOTAMatchMetadata_Team_Player) GetEquippedEconItems() []*CSOEconItem {
 	if m != nil {
 		return m.EquippedEconItems
+	}
+	return nil
+}
+
+func (m *CDOTAMatchMetadata_Team_Player) GetKills() []*CDOTAMatchMetadata_Team_PlayerKill {
+	if m != nil {
+		return m.Kills
 	}
 	return nil
 }

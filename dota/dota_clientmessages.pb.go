@@ -18,7 +18,6 @@ const (
 	EDotaClientMessages_DOTA_CM_AspectRatio                            EDotaClientMessages = 302
 	EDotaClientMessages_DOTA_CM_MapPing                                EDotaClientMessages = 303
 	EDotaClientMessages_DOTA_CM_UnitsAutoAttack                        EDotaClientMessages = 304
-	EDotaClientMessages_DOTA_CM_AutoPurchaseItems                      EDotaClientMessages = 305
 	EDotaClientMessages_DOTA_CM_SearchString                           EDotaClientMessages = 307
 	EDotaClientMessages_DOTA_CM_Pause                                  EDotaClientMessages = 308
 	EDotaClientMessages_DOTA_CM_ShopViewMode                           EDotaClientMessages = 309
@@ -74,7 +73,6 @@ var EDotaClientMessages_name = map[int32]string{
 	302: "DOTA_CM_AspectRatio",
 	303: "DOTA_CM_MapPing",
 	304: "DOTA_CM_UnitsAutoAttack",
-	305: "DOTA_CM_AutoPurchaseItems",
 	307: "DOTA_CM_SearchString",
 	308: "DOTA_CM_Pause",
 	309: "DOTA_CM_ShopViewMode",
@@ -129,7 +127,6 @@ var EDotaClientMessages_value = map[string]int32{
 	"DOTA_CM_AspectRatio":                            302,
 	"DOTA_CM_MapPing":                                303,
 	"DOTA_CM_UnitsAutoAttack":                        304,
-	"DOTA_CM_AutoPurchaseItems":                      305,
 	"DOTA_CM_SearchString":                           307,
 	"DOTA_CM_Pause":                                  308,
 	"DOTA_CM_ShopViewMode":                           309,
@@ -197,17 +194,92 @@ func (x *EDotaClientMessages) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
+type CDOTAClientMsg_UnitsAutoAttackMode_EMode int32
+
+const (
+	CDOTAClientMsg_UnitsAutoAttackMode_INVALID         CDOTAClientMsg_UnitsAutoAttackMode_EMode = -1
+	CDOTAClientMsg_UnitsAutoAttackMode_NEVER           CDOTAClientMsg_UnitsAutoAttackMode_EMode = 0
+	CDOTAClientMsg_UnitsAutoAttackMode_AFTER_SPELLCAST CDOTAClientMsg_UnitsAutoAttackMode_EMode = 1
+	CDOTAClientMsg_UnitsAutoAttackMode_ALWAYS          CDOTAClientMsg_UnitsAutoAttackMode_EMode = 2
+)
+
+var CDOTAClientMsg_UnitsAutoAttackMode_EMode_name = map[int32]string{
+	-1: "INVALID",
+	0:  "NEVER",
+	1:  "AFTER_SPELLCAST",
+	2:  "ALWAYS",
+}
+var CDOTAClientMsg_UnitsAutoAttackMode_EMode_value = map[string]int32{
+	"INVALID":         -1,
+	"NEVER":           0,
+	"AFTER_SPELLCAST": 1,
+	"ALWAYS":          2,
+}
+
+func (x CDOTAClientMsg_UnitsAutoAttackMode_EMode) Enum() *CDOTAClientMsg_UnitsAutoAttackMode_EMode {
+	p := new(CDOTAClientMsg_UnitsAutoAttackMode_EMode)
+	*p = x
+	return p
+}
+func (x CDOTAClientMsg_UnitsAutoAttackMode_EMode) String() string {
+	return proto.EnumName(CDOTAClientMsg_UnitsAutoAttackMode_EMode_name, int32(x))
+}
+func (x *CDOTAClientMsg_UnitsAutoAttackMode_EMode) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(CDOTAClientMsg_UnitsAutoAttackMode_EMode_value, data, "CDOTAClientMsg_UnitsAutoAttackMode_EMode")
+	if err != nil {
+		return err
+	}
+	*x = CDOTAClientMsg_UnitsAutoAttackMode_EMode(value)
+	return nil
+}
+
+type CDOTAClientMsg_UnitsAutoAttackMode_EUnitType int32
+
+const (
+	CDOTAClientMsg_UnitsAutoAttackMode_NORMAL   CDOTAClientMsg_UnitsAutoAttackMode_EUnitType = 0
+	CDOTAClientMsg_UnitsAutoAttackMode_SUMMONED CDOTAClientMsg_UnitsAutoAttackMode_EUnitType = 1
+)
+
+var CDOTAClientMsg_UnitsAutoAttackMode_EUnitType_name = map[int32]string{
+	0: "NORMAL",
+	1: "SUMMONED",
+}
+var CDOTAClientMsg_UnitsAutoAttackMode_EUnitType_value = map[string]int32{
+	"NORMAL":   0,
+	"SUMMONED": 1,
+}
+
+func (x CDOTAClientMsg_UnitsAutoAttackMode_EUnitType) Enum() *CDOTAClientMsg_UnitsAutoAttackMode_EUnitType {
+	p := new(CDOTAClientMsg_UnitsAutoAttackMode_EUnitType)
+	*p = x
+	return p
+}
+func (x CDOTAClientMsg_UnitsAutoAttackMode_EUnitType) String() string {
+	return proto.EnumName(CDOTAClientMsg_UnitsAutoAttackMode_EUnitType_name, int32(x))
+}
+func (x *CDOTAClientMsg_UnitsAutoAttackMode_EUnitType) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(CDOTAClientMsg_UnitsAutoAttackMode_EUnitType_value, data, "CDOTAClientMsg_UnitsAutoAttackMode_EUnitType")
+	if err != nil {
+		return err
+	}
+	*x = CDOTAClientMsg_UnitsAutoAttackMode_EUnitType(value)
+	return nil
+}
+
 type CDOTAClientMsg_GenericBooleanConvar_EType int32
 
 const (
 	CDOTAClientMsg_GenericBooleanConvar_FORCE_DEFAULT_RESPAWN_STINGER CDOTAClientMsg_GenericBooleanConvar_EType = 1
+	CDOTAClientMsg_GenericBooleanConvar_FORCE_DEFAULT_DEATH_STINGER   CDOTAClientMsg_GenericBooleanConvar_EType = 2
 )
 
 var CDOTAClientMsg_GenericBooleanConvar_EType_name = map[int32]string{
 	1: "FORCE_DEFAULT_RESPAWN_STINGER",
+	2: "FORCE_DEFAULT_DEATH_STINGER",
 }
 var CDOTAClientMsg_GenericBooleanConvar_EType_value = map[string]int32{
 	"FORCE_DEFAULT_RESPAWN_STINGER": 1,
+	"FORCE_DEFAULT_DEATH_STINGER":   2,
 }
 
 func (x CDOTAClientMsg_GenericBooleanConvar_EType) Enum() *CDOTAClientMsg_GenericBooleanConvar_EType {
@@ -387,20 +459,31 @@ func (m *CDOTAClientMsg_AspectRatio) GetRatio() float32 {
 	return 0
 }
 
-type CDOTAClientMsg_UnitsAutoAttack struct {
-	Enabled          *bool  `protobuf:"varint,1,opt,name=enabled" json:"enabled,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+type CDOTAClientMsg_UnitsAutoAttackMode struct {
+	Mode             *CDOTAClientMsg_UnitsAutoAttackMode_EMode     `protobuf:"varint,1,opt,name=mode,enum=dota.CDOTAClientMsg_UnitsAutoAttackMode_EMode,def=-1" json:"mode,omitempty"`
+	UnitType         *CDOTAClientMsg_UnitsAutoAttackMode_EUnitType `protobuf:"varint,2,opt,name=unit_type,enum=dota.CDOTAClientMsg_UnitsAutoAttackMode_EUnitType,def=0" json:"unit_type,omitempty"`
+	XXX_unrecognized []byte                                        `json:"-"`
 }
 
-func (m *CDOTAClientMsg_UnitsAutoAttack) Reset()         { *m = CDOTAClientMsg_UnitsAutoAttack{} }
-func (m *CDOTAClientMsg_UnitsAutoAttack) String() string { return proto.CompactTextString(m) }
-func (*CDOTAClientMsg_UnitsAutoAttack) ProtoMessage()    {}
+func (m *CDOTAClientMsg_UnitsAutoAttackMode) Reset()         { *m = CDOTAClientMsg_UnitsAutoAttackMode{} }
+func (m *CDOTAClientMsg_UnitsAutoAttackMode) String() string { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_UnitsAutoAttackMode) ProtoMessage()    {}
 
-func (m *CDOTAClientMsg_UnitsAutoAttack) GetEnabled() bool {
-	if m != nil && m.Enabled != nil {
-		return *m.Enabled
+const Default_CDOTAClientMsg_UnitsAutoAttackMode_Mode CDOTAClientMsg_UnitsAutoAttackMode_EMode = CDOTAClientMsg_UnitsAutoAttackMode_INVALID
+const Default_CDOTAClientMsg_UnitsAutoAttackMode_UnitType CDOTAClientMsg_UnitsAutoAttackMode_EUnitType = CDOTAClientMsg_UnitsAutoAttackMode_NORMAL
+
+func (m *CDOTAClientMsg_UnitsAutoAttackMode) GetMode() CDOTAClientMsg_UnitsAutoAttackMode_EMode {
+	if m != nil && m.Mode != nil {
+		return *m.Mode
 	}
-	return false
+	return Default_CDOTAClientMsg_UnitsAutoAttackMode_Mode
+}
+
+func (m *CDOTAClientMsg_UnitsAutoAttackMode) GetUnitType() CDOTAClientMsg_UnitsAutoAttackMode_EUnitType {
+	if m != nil && m.UnitType != nil {
+		return *m.UnitType
+	}
+	return Default_CDOTAClientMsg_UnitsAutoAttackMode_UnitType
 }
 
 type CDOTAClientMsg_UnitsAutoAttackAfterSpell struct {
@@ -459,22 +542,6 @@ func (m *CDOTAClientMsg_GenericBooleanConvar) GetType() CDOTAClientMsg_GenericBo
 func (m *CDOTAClientMsg_GenericBooleanConvar) GetValue() bool {
 	if m != nil && m.Value != nil {
 		return *m.Value
-	}
-	return false
-}
-
-type CDOTAClientMsg_AutoPurchaseItems struct {
-	Enabled          *bool  `protobuf:"varint,1,opt,name=enabled" json:"enabled,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
-}
-
-func (m *CDOTAClientMsg_AutoPurchaseItems) Reset()         { *m = CDOTAClientMsg_AutoPurchaseItems{} }
-func (m *CDOTAClientMsg_AutoPurchaseItems) String() string { return proto.CompactTextString(m) }
-func (*CDOTAClientMsg_AutoPurchaseItems) ProtoMessage()    {}
-
-func (m *CDOTAClientMsg_AutoPurchaseItems) GetEnabled() bool {
-	if m != nil && m.Enabled != nil {
-		return *m.Enabled
 	}
 	return false
 }
@@ -1233,5 +1300,7 @@ func (m *CDOTAClientMsg_MatchMetadata) GetMetadata() []byte {
 
 func init() {
 	proto.RegisterEnum("dota.EDotaClientMessages", EDotaClientMessages_name, EDotaClientMessages_value)
+	proto.RegisterEnum("dota.CDOTAClientMsg_UnitsAutoAttackMode_EMode", CDOTAClientMsg_UnitsAutoAttackMode_EMode_name, CDOTAClientMsg_UnitsAutoAttackMode_EMode_value)
+	proto.RegisterEnum("dota.CDOTAClientMsg_UnitsAutoAttackMode_EUnitType", CDOTAClientMsg_UnitsAutoAttackMode_EUnitType_name, CDOTAClientMsg_UnitsAutoAttackMode_EUnitType_value)
 	proto.RegisterEnum("dota.CDOTAClientMsg_GenericBooleanConvar_EType", CDOTAClientMsg_GenericBooleanConvar_EType_name, CDOTAClientMsg_GenericBooleanConvar_EType_value)
 }

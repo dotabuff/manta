@@ -107,6 +107,7 @@ const (
 	EDotaUserMessages_DOTA_UM_XPAlert                   EDotaUserMessages = 555
 	EDotaUserMessages_DOTA_UM_UpdateQuestProgress       EDotaUserMessages = 556
 	EDotaUserMessages_DOTA_UM_MatchMetadata             EDotaUserMessages = 557
+	EDotaUserMessages_DOTA_UM_MatchDetails              EDotaUserMessages = 558
 )
 
 var EDotaUserMessages_name = map[int32]string{
@@ -203,6 +204,7 @@ var EDotaUserMessages_name = map[int32]string{
 	555: "DOTA_UM_XPAlert",
 	556: "DOTA_UM_UpdateQuestProgress",
 	557: "DOTA_UM_MatchMetadata",
+	558: "DOTA_UM_MatchDetails",
 }
 var EDotaUserMessages_value = map[string]int32{
 	"DOTA_UM_AddUnitToSelection":        464,
@@ -298,6 +300,7 @@ var EDotaUserMessages_value = map[string]int32{
 	"DOTA_UM_XPAlert":                   555,
 	"DOTA_UM_UpdateQuestProgress":       556,
 	"DOTA_UM_MatchMetadata":             557,
+	"DOTA_UM_MatchDetails":              558,
 }
 
 func (x EDotaUserMessages) Enum() *EDotaUserMessages {
@@ -2818,6 +2821,7 @@ type CDOTAUserMsg_UnitEvent_AddGesture struct {
 	Slot             *int32   `protobuf:"varint,2,opt,name=slot" json:"slot,omitempty"`
 	FadeIn           *float32 `protobuf:"fixed32,3,opt,name=fade_in,def=0" json:"fade_in,omitempty"`
 	FadeOut          *float32 `protobuf:"fixed32,4,opt,name=fade_out,def=0.1" json:"fade_out,omitempty"`
+	PlaybackRate     *float32 `protobuf:"fixed32,5,opt,name=playback_rate,def=1" json:"playback_rate,omitempty"`
 	XXX_unrecognized []byte   `json:"-"`
 }
 
@@ -2827,6 +2831,7 @@ func (*CDOTAUserMsg_UnitEvent_AddGesture) ProtoMessage()    {}
 
 const Default_CDOTAUserMsg_UnitEvent_AddGesture_FadeIn float32 = 0
 const Default_CDOTAUserMsg_UnitEvent_AddGesture_FadeOut float32 = 0.1
+const Default_CDOTAUserMsg_UnitEvent_AddGesture_PlaybackRate float32 = 1
 
 func (m *CDOTAUserMsg_UnitEvent_AddGesture) GetActivity() int32 {
 	if m != nil && m.Activity != nil {
@@ -2854,6 +2859,13 @@ func (m *CDOTAUserMsg_UnitEvent_AddGesture) GetFadeOut() float32 {
 		return *m.FadeOut
 	}
 	return Default_CDOTAUserMsg_UnitEvent_AddGesture_FadeOut
+}
+
+func (m *CDOTAUserMsg_UnitEvent_AddGesture) GetPlaybackRate() float32 {
+	if m != nil && m.PlaybackRate != nil {
+		return *m.PlaybackRate
+	}
+	return Default_CDOTAUserMsg_UnitEvent_AddGesture_PlaybackRate
 }
 
 type CDOTAUserMsg_UnitEvent_RemoveGesture struct {

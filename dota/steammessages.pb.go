@@ -2347,8 +2347,9 @@ func (m *CMsgGCCheckFriendship_Response) GetFoundFriendship() bool {
 }
 
 type CMsgGCGetAppFriendsList struct {
-	Steamid          *uint64 `protobuf:"fixed64,1,opt,name=steamid" json:"steamid,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Steamid                     *uint64 `protobuf:"fixed64,1,opt,name=steamid" json:"steamid,omitempty"`
+	IncludeFriendshipTimestamps *bool   `protobuf:"varint,2,opt,name=include_friendship_timestamps" json:"include_friendship_timestamps,omitempty"`
+	XXX_unrecognized            []byte  `json:"-"`
 }
 
 func (m *CMsgGCGetAppFriendsList) Reset()         { *m = CMsgGCGetAppFriendsList{} }
@@ -2362,10 +2363,18 @@ func (m *CMsgGCGetAppFriendsList) GetSteamid() uint64 {
 	return 0
 }
 
+func (m *CMsgGCGetAppFriendsList) GetIncludeFriendshipTimestamps() bool {
+	if m != nil && m.IncludeFriendshipTimestamps != nil {
+		return *m.IncludeFriendshipTimestamps
+	}
+	return false
+}
+
 type CMsgGCGetAppFriendsList_Response struct {
-	Success          *bool    `protobuf:"varint,1,opt,name=success" json:"success,omitempty"`
-	Steamids         []uint64 `protobuf:"fixed64,2,rep,name=steamids" json:"steamids,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	Success              *bool    `protobuf:"varint,1,opt,name=success" json:"success,omitempty"`
+	Steamids             []uint64 `protobuf:"fixed64,2,rep,name=steamids" json:"steamids,omitempty"`
+	FriendshipTimestamps []uint32 `protobuf:"fixed32,3,rep,name=friendship_timestamps" json:"friendship_timestamps,omitempty"`
+	XXX_unrecognized     []byte   `json:"-"`
 }
 
 func (m *CMsgGCGetAppFriendsList_Response) Reset()         { *m = CMsgGCGetAppFriendsList_Response{} }
@@ -2382,6 +2391,13 @@ func (m *CMsgGCGetAppFriendsList_Response) GetSuccess() bool {
 func (m *CMsgGCGetAppFriendsList_Response) GetSteamids() []uint64 {
 	if m != nil {
 		return m.Steamids
+	}
+	return nil
+}
+
+func (m *CMsgGCGetAppFriendsList_Response) GetFriendshipTimestamps() []uint32 {
+	if m != nil {
+		return m.FriendshipTimestamps
 	}
 	return nil
 }

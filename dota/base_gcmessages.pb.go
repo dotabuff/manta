@@ -78,12 +78,7 @@ It has these top-level messages:
 	CMsgReplayUploadedToYouTube
 	CMsgConsumableExhausted
 	CMsgItemAcknowledged
-	CMsgSetPresetItemPosition
 	CMsgSetItemPositions
-	CSOEconItemPresetInstance
-	CMsgSelectItemPresetForClass
-	CMsgSelectItemPresetForClassReply
-	CSOSelectedItemPreset
 	CMsgGCNameItemNotification
 	CMsgGCClientDisplayNotification
 	CMsgGCShowItemsPickedUp
@@ -109,7 +104,6 @@ It has these top-level messages:
 	CMsgGCCollectItem
 	CMsgSDONoMemcached
 	CMsgGCToGCUpdateSQLKeyValue
-	CMsgGCToGCBroadcastConsoleCommand
 	CMsgGCServerVersionUpdated
 	CMsgGCClientVersionUpdated
 	CMsgGCToGCWebAPIAccountChanged
@@ -1970,46 +1964,6 @@ func (m *CMsgItemAcknowledged) GetOrigin() uint32 {
 	return 0
 }
 
-type CMsgSetPresetItemPosition struct {
-	ClassId          *uint32 `protobuf:"varint,1,opt,name=class_id" json:"class_id,omitempty"`
-	PresetId         *uint32 `protobuf:"varint,2,opt,name=preset_id" json:"preset_id,omitempty"`
-	SlotId           *uint32 `protobuf:"varint,3,opt,name=slot_id" json:"slot_id,omitempty"`
-	ItemId           *uint64 `protobuf:"varint,4,opt,name=item_id" json:"item_id,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
-}
-
-func (m *CMsgSetPresetItemPosition) Reset()         { *m = CMsgSetPresetItemPosition{} }
-func (m *CMsgSetPresetItemPosition) String() string { return proto.CompactTextString(m) }
-func (*CMsgSetPresetItemPosition) ProtoMessage()    {}
-
-func (m *CMsgSetPresetItemPosition) GetClassId() uint32 {
-	if m != nil && m.ClassId != nil {
-		return *m.ClassId
-	}
-	return 0
-}
-
-func (m *CMsgSetPresetItemPosition) GetPresetId() uint32 {
-	if m != nil && m.PresetId != nil {
-		return *m.PresetId
-	}
-	return 0
-}
-
-func (m *CMsgSetPresetItemPosition) GetSlotId() uint32 {
-	if m != nil && m.SlotId != nil {
-		return *m.SlotId
-	}
-	return 0
-}
-
-func (m *CMsgSetPresetItemPosition) GetItemId() uint64 {
-	if m != nil && m.ItemId != nil {
-		return *m.ItemId
-	}
-	return 0
-}
-
 type CMsgSetItemPositions struct {
 	ItemPositions    []*CMsgSetItemPositions_ItemPosition `protobuf:"bytes,1,rep,name=item_positions" json:"item_positions,omitempty"`
 	XXX_unrecognized []byte                               `json:"-"`
@@ -2046,118 +2000,6 @@ func (m *CMsgSetItemPositions_ItemPosition) GetItemId() uint64 {
 func (m *CMsgSetItemPositions_ItemPosition) GetPosition() uint32 {
 	if m != nil && m.Position != nil {
 		return *m.Position
-	}
-	return 0
-}
-
-type CSOEconItemPresetInstance struct {
-	ClassId          *uint32 `protobuf:"varint,2,opt,name=class_id" json:"class_id,omitempty"`
-	PresetId         *uint32 `protobuf:"varint,3,opt,name=preset_id" json:"preset_id,omitempty"`
-	SlotId           *uint32 `protobuf:"varint,4,opt,name=slot_id" json:"slot_id,omitempty"`
-	ItemId           *uint64 `protobuf:"varint,5,opt,name=item_id" json:"item_id,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
-}
-
-func (m *CSOEconItemPresetInstance) Reset()         { *m = CSOEconItemPresetInstance{} }
-func (m *CSOEconItemPresetInstance) String() string { return proto.CompactTextString(m) }
-func (*CSOEconItemPresetInstance) ProtoMessage()    {}
-
-func (m *CSOEconItemPresetInstance) GetClassId() uint32 {
-	if m != nil && m.ClassId != nil {
-		return *m.ClassId
-	}
-	return 0
-}
-
-func (m *CSOEconItemPresetInstance) GetPresetId() uint32 {
-	if m != nil && m.PresetId != nil {
-		return *m.PresetId
-	}
-	return 0
-}
-
-func (m *CSOEconItemPresetInstance) GetSlotId() uint32 {
-	if m != nil && m.SlotId != nil {
-		return *m.SlotId
-	}
-	return 0
-}
-
-func (m *CSOEconItemPresetInstance) GetItemId() uint64 {
-	if m != nil && m.ItemId != nil {
-		return *m.ItemId
-	}
-	return 0
-}
-
-type CMsgSelectItemPresetForClass struct {
-	ClassId          *uint32 `protobuf:"varint,1,opt,name=class_id" json:"class_id,omitempty"`
-	PresetId         *uint32 `protobuf:"varint,2,opt,name=preset_id" json:"preset_id,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
-}
-
-func (m *CMsgSelectItemPresetForClass) Reset()         { *m = CMsgSelectItemPresetForClass{} }
-func (m *CMsgSelectItemPresetForClass) String() string { return proto.CompactTextString(m) }
-func (*CMsgSelectItemPresetForClass) ProtoMessage()    {}
-
-func (m *CMsgSelectItemPresetForClass) GetClassId() uint32 {
-	if m != nil && m.ClassId != nil {
-		return *m.ClassId
-	}
-	return 0
-}
-
-func (m *CMsgSelectItemPresetForClass) GetPresetId() uint32 {
-	if m != nil && m.PresetId != nil {
-		return *m.PresetId
-	}
-	return 0
-}
-
-type CMsgSelectItemPresetForClassReply struct {
-	Success          *bool  `protobuf:"varint,1,opt,name=success" json:"success,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
-}
-
-func (m *CMsgSelectItemPresetForClassReply) Reset()         { *m = CMsgSelectItemPresetForClassReply{} }
-func (m *CMsgSelectItemPresetForClassReply) String() string { return proto.CompactTextString(m) }
-func (*CMsgSelectItemPresetForClassReply) ProtoMessage()    {}
-
-func (m *CMsgSelectItemPresetForClassReply) GetSuccess() bool {
-	if m != nil && m.Success != nil {
-		return *m.Success
-	}
-	return false
-}
-
-type CSOSelectedItemPreset struct {
-	AccountId        *uint32 `protobuf:"varint,1,opt,name=account_id" json:"account_id,omitempty"`
-	ClassId          *uint32 `protobuf:"varint,2,opt,name=class_id" json:"class_id,omitempty"`
-	PresetId         *uint32 `protobuf:"varint,3,opt,name=preset_id" json:"preset_id,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
-}
-
-func (m *CSOSelectedItemPreset) Reset()         { *m = CSOSelectedItemPreset{} }
-func (m *CSOSelectedItemPreset) String() string { return proto.CompactTextString(m) }
-func (*CSOSelectedItemPreset) ProtoMessage()    {}
-
-func (m *CSOSelectedItemPreset) GetAccountId() uint32 {
-	if m != nil && m.AccountId != nil {
-		return *m.AccountId
-	}
-	return 0
-}
-
-func (m *CSOSelectedItemPreset) GetClassId() uint32 {
-	if m != nil && m.ClassId != nil {
-		return *m.ClassId
-	}
-	return 0
-}
-
-func (m *CSOSelectedItemPreset) GetPresetId() uint32 {
-	if m != nil && m.PresetId != nil {
-		return *m.PresetId
 	}
 	return 0
 }
@@ -2844,22 +2686,6 @@ func (*CMsgGCToGCUpdateSQLKeyValue) ProtoMessage()    {}
 func (m *CMsgGCToGCUpdateSQLKeyValue) GetKeyName() string {
 	if m != nil && m.KeyName != nil {
 		return *m.KeyName
-	}
-	return ""
-}
-
-type CMsgGCToGCBroadcastConsoleCommand struct {
-	ConCommand       *string `protobuf:"bytes,1,opt,name=con_command" json:"con_command,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
-}
-
-func (m *CMsgGCToGCBroadcastConsoleCommand) Reset()         { *m = CMsgGCToGCBroadcastConsoleCommand{} }
-func (m *CMsgGCToGCBroadcastConsoleCommand) String() string { return proto.CompactTextString(m) }
-func (*CMsgGCToGCBroadcastConsoleCommand) ProtoMessage()    {}
-
-func (m *CMsgGCToGCBroadcastConsoleCommand) GetConCommand() string {
-	if m != nil && m.ConCommand != nil {
-		return *m.ConCommand
 	}
 	return ""
 }

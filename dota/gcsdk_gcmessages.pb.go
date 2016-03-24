@@ -989,6 +989,7 @@ type CMsgClientWelcome struct {
 	SaveGameKey               []byte                          `protobuf:"bytes,6,opt,name=save_game_key" json:"save_game_key,omitempty"`
 	ItemSchemaCrc             *uint32                         `protobuf:"fixed32,7,opt,name=item_schema_crc" json:"item_schema_crc,omitempty"`
 	ItemsGameUrl              *string                         `protobuf:"bytes,8,opt,name=items_game_url" json:"items_game_url,omitempty"`
+	GcSocacheFileVersion      *uint32                         `protobuf:"varint,9,opt,name=gc_socache_file_version" json:"gc_socache_file_version,omitempty"`
 	XXX_unrecognized          []byte                          `json:"-"`
 }
 
@@ -1050,6 +1051,13 @@ func (m *CMsgClientWelcome) GetItemsGameUrl() string {
 		return *m.ItemsGameUrl
 	}
 	return ""
+}
+
+func (m *CMsgClientWelcome) GetGcSocacheFileVersion() uint32 {
+	if m != nil && m.GcSocacheFileVersion != nil {
+		return *m.GcSocacheFileVersion
+	}
+	return 0
 }
 
 type CMsgClientWelcome_Location struct {
@@ -1582,6 +1590,134 @@ func (m *CBroadcast_PostGameDataFrame_Request) GetFrameData() []byte {
 		return m.FrameData
 	}
 	return nil
+}
+
+type CMsgSerializedSOCache struct {
+	FileVersion          *uint32                        `protobuf:"varint,1,opt,name=file_version" json:"file_version,omitempty"`
+	Caches               []*CMsgSerializedSOCache_Cache `protobuf:"bytes,2,rep,name=caches" json:"caches,omitempty"`
+	GcSocacheFileVersion *uint32                        `protobuf:"varint,3,opt,name=gc_socache_file_version" json:"gc_socache_file_version,omitempty"`
+	XXX_unrecognized     []byte                         `json:"-"`
+}
+
+func (m *CMsgSerializedSOCache) Reset()         { *m = CMsgSerializedSOCache{} }
+func (m *CMsgSerializedSOCache) String() string { return proto.CompactTextString(m) }
+func (*CMsgSerializedSOCache) ProtoMessage()    {}
+
+func (m *CMsgSerializedSOCache) GetFileVersion() uint32 {
+	if m != nil && m.FileVersion != nil {
+		return *m.FileVersion
+	}
+	return 0
+}
+
+func (m *CMsgSerializedSOCache) GetCaches() []*CMsgSerializedSOCache_Cache {
+	if m != nil {
+		return m.Caches
+	}
+	return nil
+}
+
+func (m *CMsgSerializedSOCache) GetGcSocacheFileVersion() uint32 {
+	if m != nil && m.GcSocacheFileVersion != nil {
+		return *m.GcSocacheFileVersion
+	}
+	return 0
+}
+
+type CMsgSerializedSOCache_TypeCache struct {
+	Type             *uint32  `protobuf:"varint,1,opt,name=type" json:"type,omitempty"`
+	Objects          [][]byte `protobuf:"bytes,2,rep,name=objects" json:"objects,omitempty"`
+	ServiceId        *uint32  `protobuf:"varint,3,opt,name=service_id" json:"service_id,omitempty"`
+	XXX_unrecognized []byte   `json:"-"`
+}
+
+func (m *CMsgSerializedSOCache_TypeCache) Reset()         { *m = CMsgSerializedSOCache_TypeCache{} }
+func (m *CMsgSerializedSOCache_TypeCache) String() string { return proto.CompactTextString(m) }
+func (*CMsgSerializedSOCache_TypeCache) ProtoMessage()    {}
+
+func (m *CMsgSerializedSOCache_TypeCache) GetType() uint32 {
+	if m != nil && m.Type != nil {
+		return *m.Type
+	}
+	return 0
+}
+
+func (m *CMsgSerializedSOCache_TypeCache) GetObjects() [][]byte {
+	if m != nil {
+		return m.Objects
+	}
+	return nil
+}
+
+func (m *CMsgSerializedSOCache_TypeCache) GetServiceId() uint32 {
+	if m != nil && m.ServiceId != nil {
+		return *m.ServiceId
+	}
+	return 0
+}
+
+type CMsgSerializedSOCache_Cache struct {
+	Type             *uint32                                `protobuf:"varint,1,opt,name=type" json:"type,omitempty"`
+	Id               *uint64                                `protobuf:"varint,2,opt,name=id" json:"id,omitempty"`
+	Versions         []*CMsgSerializedSOCache_Cache_Version `protobuf:"bytes,3,rep,name=versions" json:"versions,omitempty"`
+	TypeCaches       []*CMsgSerializedSOCache_TypeCache     `protobuf:"bytes,4,rep,name=type_caches" json:"type_caches,omitempty"`
+	XXX_unrecognized []byte                                 `json:"-"`
+}
+
+func (m *CMsgSerializedSOCache_Cache) Reset()         { *m = CMsgSerializedSOCache_Cache{} }
+func (m *CMsgSerializedSOCache_Cache) String() string { return proto.CompactTextString(m) }
+func (*CMsgSerializedSOCache_Cache) ProtoMessage()    {}
+
+func (m *CMsgSerializedSOCache_Cache) GetType() uint32 {
+	if m != nil && m.Type != nil {
+		return *m.Type
+	}
+	return 0
+}
+
+func (m *CMsgSerializedSOCache_Cache) GetId() uint64 {
+	if m != nil && m.Id != nil {
+		return *m.Id
+	}
+	return 0
+}
+
+func (m *CMsgSerializedSOCache_Cache) GetVersions() []*CMsgSerializedSOCache_Cache_Version {
+	if m != nil {
+		return m.Versions
+	}
+	return nil
+}
+
+func (m *CMsgSerializedSOCache_Cache) GetTypeCaches() []*CMsgSerializedSOCache_TypeCache {
+	if m != nil {
+		return m.TypeCaches
+	}
+	return nil
+}
+
+type CMsgSerializedSOCache_Cache_Version struct {
+	Service          *uint32 `protobuf:"varint,1,opt,name=service" json:"service,omitempty"`
+	Version          *uint64 `protobuf:"varint,2,opt,name=version" json:"version,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CMsgSerializedSOCache_Cache_Version) Reset()         { *m = CMsgSerializedSOCache_Cache_Version{} }
+func (m *CMsgSerializedSOCache_Cache_Version) String() string { return proto.CompactTextString(m) }
+func (*CMsgSerializedSOCache_Cache_Version) ProtoMessage()    {}
+
+func (m *CMsgSerializedSOCache_Cache_Version) GetService() uint32 {
+	if m != nil && m.Service != nil {
+		return *m.Service
+	}
+	return 0
+}
+
+func (m *CMsgSerializedSOCache_Cache_Version) GetVersion() uint64 {
+	if m != nil && m.Version != nil {
+		return *m.Version
+	}
+	return 0
 }
 
 type CMsgGCToClientPollConvarRequest struct {
