@@ -78,18 +78,10 @@ func (p *Parser) onCDemoPacket(m *dota.CDemoPacket) error {
 	// process string tables before game events that may reference them.
 	sort.Sort(ms)
 
-	// Dispatch messages in order.
+	// Dispatch messages in order, returning on handler error.
 	for _, m := range ms {
-		// Skip message we don't have a definition for (yet)
-		// XXX TODO: remove this when we get updated protos.
-		if m.t == 400 || m.t == 557 {
-			continue
-		}
-
-		// Call each packet, panic if we encounter an error.
-		// XXX TODO: this should return the error up the chain. Panic for debugging.
 		if err := p.CallByPacketType(m.t, m.buf); err != nil {
-			panic(err)
+			return err
 		}
 	}
 
