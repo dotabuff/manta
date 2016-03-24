@@ -1454,6 +1454,7 @@ type CMsgGameMatchSignOut struct {
 	BonusGoldLoserTotal           *uint32                                       `protobuf:"varint,34,opt,name=bonus_gold_loser_total" json:"bonus_gold_loser_total,omitempty"`
 	CustomGameData                *CMsgGameMatchSignOut_CCustomGameData         `protobuf:"bytes,37,opt,name=custom_game_data" json:"custom_game_data,omitempty"`
 	MatchFlags                    *uint32                                       `protobuf:"varint,38,opt,name=match_flags" json:"match_flags,omitempty"`
+	TeamScores                    []uint32                                      `protobuf:"varint,39,rep,name=team_scores" json:"team_scores,omitempty"`
 	XXX_unrecognized              []byte                                        `json:"-"`
 }
 
@@ -1718,6 +1719,13 @@ func (m *CMsgGameMatchSignOut) GetMatchFlags() uint32 {
 		return *m.MatchFlags
 	}
 	return 0
+}
+
+func (m *CMsgGameMatchSignOut) GetTeamScores() []uint32 {
+	if m != nil {
+		return m.TeamScores
+	}
+	return nil
 }
 
 type CMsgGameMatchSignOut_CTeam struct {
@@ -2574,6 +2582,7 @@ type CMsgGameMatchSignoutResponse struct {
 	Leagueid           *uint32                                               `protobuf:"varint,5,opt,name=leagueid" json:"leagueid,omitempty"`
 	AdditionalMsgs     []*CMsgGameMatchSignoutResponse_CAdditionalSignoutMsg `protobuf:"bytes,6,rep,name=additional_msgs" json:"additional_msgs,omitempty"`
 	MetadataPrivateKey *uint32                                               `protobuf:"fixed32,7,opt,name=metadata_private_key" json:"metadata_private_key,omitempty"`
+	MatchDetails       *CMsgDOTAMatch                                        `protobuf:"bytes,8,opt,name=match_details" json:"match_details,omitempty"`
 	XXX_unrecognized   []byte                                                `json:"-"`
 }
 
@@ -2630,6 +2639,13 @@ func (m *CMsgGameMatchSignoutResponse) GetMetadataPrivateKey() uint32 {
 	return 0
 }
 
+func (m *CMsgGameMatchSignoutResponse) GetMatchDetails() *CMsgDOTAMatch {
+	if m != nil {
+		return m.MatchDetails
+	}
+	return nil
+}
+
 type CMsgGameMatchSignoutResponse_CAdditionalSignoutMsg struct {
 	Id               *uint32 `protobuf:"varint,1,opt,name=id" json:"id,omitempty"`
 	Contents         []byte  `protobuf:"bytes,2,opt,name=contents" json:"contents,omitempty"`
@@ -2654,6 +2670,22 @@ func (m *CMsgGameMatchSignoutResponse_CAdditionalSignoutMsg) GetId() uint32 {
 func (m *CMsgGameMatchSignoutResponse_CAdditionalSignoutMsg) GetContents() []byte {
 	if m != nil {
 		return m.Contents
+	}
+	return nil
+}
+
+type CMsgTimedRewardContainer struct {
+	TimedRewardDetails []*CLobbyTimedRewardDetails `protobuf:"bytes,1,rep,name=timed_reward_details" json:"timed_reward_details,omitempty"`
+	XXX_unrecognized   []byte                      `json:"-"`
+}
+
+func (m *CMsgTimedRewardContainer) Reset()         { *m = CMsgTimedRewardContainer{} }
+func (m *CMsgTimedRewardContainer) String() string { return proto.CompactTextString(m) }
+func (*CMsgTimedRewardContainer) ProtoMessage()    {}
+
+func (m *CMsgTimedRewardContainer) GetTimedRewardDetails() []*CLobbyTimedRewardDetails {
+	if m != nil {
+		return m.TimedRewardDetails
 	}
 	return nil
 }
@@ -2734,70 +2766,6 @@ func (m *CMsgGameMatchSignOutPermissionResponse) GetRetryDelaySeconds() uint32 {
 		return *m.RetryDelaySeconds
 	}
 	return Default_CMsgGameMatchSignOutPermissionResponse_RetryDelaySeconds
-}
-
-type CMsgGameChatLog struct {
-	MatchId          *uint64                      `protobuf:"varint,1,opt,name=match_id" json:"match_id,omitempty"`
-	Lines            []*CMsgGameChatLog_CChatLine `protobuf:"bytes,2,rep,name=lines" json:"lines,omitempty"`
-	XXX_unrecognized []byte                       `json:"-"`
-}
-
-func (m *CMsgGameChatLog) Reset()         { *m = CMsgGameChatLog{} }
-func (m *CMsgGameChatLog) String() string { return proto.CompactTextString(m) }
-func (*CMsgGameChatLog) ProtoMessage()    {}
-
-func (m *CMsgGameChatLog) GetMatchId() uint64 {
-	if m != nil && m.MatchId != nil {
-		return *m.MatchId
-	}
-	return 0
-}
-
-func (m *CMsgGameChatLog) GetLines() []*CMsgGameChatLog_CChatLine {
-	if m != nil {
-		return m.Lines
-	}
-	return nil
-}
-
-type CMsgGameChatLog_CChatLine struct {
-	AccountId        *uint32 `protobuf:"varint,1,opt,name=account_id" json:"account_id,omitempty"`
-	TeamOnly         *uint32 `protobuf:"varint,2,opt,name=team_only" json:"team_only,omitempty"`
-	Text             *string `protobuf:"bytes,3,opt,name=text" json:"text,omitempty"`
-	GameTime         *uint32 `protobuf:"varint,4,opt,name=game_time" json:"game_time,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
-}
-
-func (m *CMsgGameChatLog_CChatLine) Reset()         { *m = CMsgGameChatLog_CChatLine{} }
-func (m *CMsgGameChatLog_CChatLine) String() string { return proto.CompactTextString(m) }
-func (*CMsgGameChatLog_CChatLine) ProtoMessage()    {}
-
-func (m *CMsgGameChatLog_CChatLine) GetAccountId() uint32 {
-	if m != nil && m.AccountId != nil {
-		return *m.AccountId
-	}
-	return 0
-}
-
-func (m *CMsgGameChatLog_CChatLine) GetTeamOnly() uint32 {
-	if m != nil && m.TeamOnly != nil {
-		return *m.TeamOnly
-	}
-	return 0
-}
-
-func (m *CMsgGameChatLog_CChatLine) GetText() string {
-	if m != nil && m.Text != nil {
-		return *m.Text
-	}
-	return ""
-}
-
-func (m *CMsgGameChatLog_CChatLine) GetGameTime() uint32 {
-	if m != nil && m.GameTime != nil {
-		return *m.GameTime
-	}
-	return 0
 }
 
 type CMsgDOTALiveScoreboardUpdate struct {

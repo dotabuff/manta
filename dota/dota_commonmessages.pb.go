@@ -338,36 +338,37 @@ func (x *EDOTAStatPopupTypes) UnmarshalJSON(data []byte) error {
 type DotaunitorderT int32
 
 const (
-	DotaunitorderT_DOTA_UNIT_ORDER_NONE                  DotaunitorderT = 0
-	DotaunitorderT_DOTA_UNIT_ORDER_MOVE_TO_POSITION      DotaunitorderT = 1
-	DotaunitorderT_DOTA_UNIT_ORDER_MOVE_TO_TARGET        DotaunitorderT = 2
-	DotaunitorderT_DOTA_UNIT_ORDER_ATTACK_MOVE           DotaunitorderT = 3
-	DotaunitorderT_DOTA_UNIT_ORDER_ATTACK_TARGET         DotaunitorderT = 4
-	DotaunitorderT_DOTA_UNIT_ORDER_CAST_POSITION         DotaunitorderT = 5
-	DotaunitorderT_DOTA_UNIT_ORDER_CAST_TARGET           DotaunitorderT = 6
-	DotaunitorderT_DOTA_UNIT_ORDER_CAST_TARGET_TREE      DotaunitorderT = 7
-	DotaunitorderT_DOTA_UNIT_ORDER_CAST_NO_TARGET        DotaunitorderT = 8
-	DotaunitorderT_DOTA_UNIT_ORDER_CAST_TOGGLE           DotaunitorderT = 9
-	DotaunitorderT_DOTA_UNIT_ORDER_HOLD_POSITION         DotaunitorderT = 10
-	DotaunitorderT_DOTA_UNIT_ORDER_TRAIN_ABILITY         DotaunitorderT = 11
-	DotaunitorderT_DOTA_UNIT_ORDER_DROP_ITEM             DotaunitorderT = 12
-	DotaunitorderT_DOTA_UNIT_ORDER_GIVE_ITEM             DotaunitorderT = 13
-	DotaunitorderT_DOTA_UNIT_ORDER_PICKUP_ITEM           DotaunitorderT = 14
-	DotaunitorderT_DOTA_UNIT_ORDER_PICKUP_RUNE           DotaunitorderT = 15
-	DotaunitorderT_DOTA_UNIT_ORDER_PURCHASE_ITEM         DotaunitorderT = 16
-	DotaunitorderT_DOTA_UNIT_ORDER_SELL_ITEM             DotaunitorderT = 17
-	DotaunitorderT_DOTA_UNIT_ORDER_DISASSEMBLE_ITEM      DotaunitorderT = 18
-	DotaunitorderT_DOTA_UNIT_ORDER_MOVE_ITEM             DotaunitorderT = 19
-	DotaunitorderT_DOTA_UNIT_ORDER_CAST_TOGGLE_AUTO      DotaunitorderT = 20
-	DotaunitorderT_DOTA_UNIT_ORDER_STOP                  DotaunitorderT = 21
-	DotaunitorderT_DOTA_UNIT_ORDER_TAUNT                 DotaunitorderT = 22
-	DotaunitorderT_DOTA_UNIT_ORDER_BUYBACK               DotaunitorderT = 23
-	DotaunitorderT_DOTA_UNIT_ORDER_GLYPH                 DotaunitorderT = 24
-	DotaunitorderT_DOTA_UNIT_ORDER_EJECT_ITEM_FROM_STASH DotaunitorderT = 25
-	DotaunitorderT_DOTA_UNIT_ORDER_CAST_RUNE             DotaunitorderT = 26
-	DotaunitorderT_DOTA_UNIT_ORDER_PING_ABILITY          DotaunitorderT = 27
-	DotaunitorderT_DOTA_UNIT_ORDER_MOVE_TO_DIRECTION     DotaunitorderT = 28
-	DotaunitorderT_DOTA_UNIT_ORDER_PATROL                DotaunitorderT = 29
+	DotaunitorderT_DOTA_UNIT_ORDER_NONE                   DotaunitorderT = 0
+	DotaunitorderT_DOTA_UNIT_ORDER_MOVE_TO_POSITION       DotaunitorderT = 1
+	DotaunitorderT_DOTA_UNIT_ORDER_MOVE_TO_TARGET         DotaunitorderT = 2
+	DotaunitorderT_DOTA_UNIT_ORDER_ATTACK_MOVE            DotaunitorderT = 3
+	DotaunitorderT_DOTA_UNIT_ORDER_ATTACK_TARGET          DotaunitorderT = 4
+	DotaunitorderT_DOTA_UNIT_ORDER_CAST_POSITION          DotaunitorderT = 5
+	DotaunitorderT_DOTA_UNIT_ORDER_CAST_TARGET            DotaunitorderT = 6
+	DotaunitorderT_DOTA_UNIT_ORDER_CAST_TARGET_TREE       DotaunitorderT = 7
+	DotaunitorderT_DOTA_UNIT_ORDER_CAST_NO_TARGET         DotaunitorderT = 8
+	DotaunitorderT_DOTA_UNIT_ORDER_CAST_TOGGLE            DotaunitorderT = 9
+	DotaunitorderT_DOTA_UNIT_ORDER_HOLD_POSITION          DotaunitorderT = 10
+	DotaunitorderT_DOTA_UNIT_ORDER_TRAIN_ABILITY          DotaunitorderT = 11
+	DotaunitorderT_DOTA_UNIT_ORDER_DROP_ITEM              DotaunitorderT = 12
+	DotaunitorderT_DOTA_UNIT_ORDER_GIVE_ITEM              DotaunitorderT = 13
+	DotaunitorderT_DOTA_UNIT_ORDER_PICKUP_ITEM            DotaunitorderT = 14
+	DotaunitorderT_DOTA_UNIT_ORDER_PICKUP_RUNE            DotaunitorderT = 15
+	DotaunitorderT_DOTA_UNIT_ORDER_PURCHASE_ITEM          DotaunitorderT = 16
+	DotaunitorderT_DOTA_UNIT_ORDER_SELL_ITEM              DotaunitorderT = 17
+	DotaunitorderT_DOTA_UNIT_ORDER_DISASSEMBLE_ITEM       DotaunitorderT = 18
+	DotaunitorderT_DOTA_UNIT_ORDER_MOVE_ITEM              DotaunitorderT = 19
+	DotaunitorderT_DOTA_UNIT_ORDER_CAST_TOGGLE_AUTO       DotaunitorderT = 20
+	DotaunitorderT_DOTA_UNIT_ORDER_STOP                   DotaunitorderT = 21
+	DotaunitorderT_DOTA_UNIT_ORDER_TAUNT                  DotaunitorderT = 22
+	DotaunitorderT_DOTA_UNIT_ORDER_BUYBACK                DotaunitorderT = 23
+	DotaunitorderT_DOTA_UNIT_ORDER_GLYPH                  DotaunitorderT = 24
+	DotaunitorderT_DOTA_UNIT_ORDER_EJECT_ITEM_FROM_STASH  DotaunitorderT = 25
+	DotaunitorderT_DOTA_UNIT_ORDER_CAST_RUNE              DotaunitorderT = 26
+	DotaunitorderT_DOTA_UNIT_ORDER_PING_ABILITY           DotaunitorderT = 27
+	DotaunitorderT_DOTA_UNIT_ORDER_MOVE_TO_DIRECTION      DotaunitorderT = 28
+	DotaunitorderT_DOTA_UNIT_ORDER_PATROL                 DotaunitorderT = 29
+	DotaunitorderT_DOTA_UNIT_ORDER_VECTOR_TARGET_POSITION DotaunitorderT = 30
 )
 
 var DotaunitorderT_name = map[int32]string{
@@ -401,38 +402,40 @@ var DotaunitorderT_name = map[int32]string{
 	27: "DOTA_UNIT_ORDER_PING_ABILITY",
 	28: "DOTA_UNIT_ORDER_MOVE_TO_DIRECTION",
 	29: "DOTA_UNIT_ORDER_PATROL",
+	30: "DOTA_UNIT_ORDER_VECTOR_TARGET_POSITION",
 }
 var DotaunitorderT_value = map[string]int32{
-	"DOTA_UNIT_ORDER_NONE":                  0,
-	"DOTA_UNIT_ORDER_MOVE_TO_POSITION":      1,
-	"DOTA_UNIT_ORDER_MOVE_TO_TARGET":        2,
-	"DOTA_UNIT_ORDER_ATTACK_MOVE":           3,
-	"DOTA_UNIT_ORDER_ATTACK_TARGET":         4,
-	"DOTA_UNIT_ORDER_CAST_POSITION":         5,
-	"DOTA_UNIT_ORDER_CAST_TARGET":           6,
-	"DOTA_UNIT_ORDER_CAST_TARGET_TREE":      7,
-	"DOTA_UNIT_ORDER_CAST_NO_TARGET":        8,
-	"DOTA_UNIT_ORDER_CAST_TOGGLE":           9,
-	"DOTA_UNIT_ORDER_HOLD_POSITION":         10,
-	"DOTA_UNIT_ORDER_TRAIN_ABILITY":         11,
-	"DOTA_UNIT_ORDER_DROP_ITEM":             12,
-	"DOTA_UNIT_ORDER_GIVE_ITEM":             13,
-	"DOTA_UNIT_ORDER_PICKUP_ITEM":           14,
-	"DOTA_UNIT_ORDER_PICKUP_RUNE":           15,
-	"DOTA_UNIT_ORDER_PURCHASE_ITEM":         16,
-	"DOTA_UNIT_ORDER_SELL_ITEM":             17,
-	"DOTA_UNIT_ORDER_DISASSEMBLE_ITEM":      18,
-	"DOTA_UNIT_ORDER_MOVE_ITEM":             19,
-	"DOTA_UNIT_ORDER_CAST_TOGGLE_AUTO":      20,
-	"DOTA_UNIT_ORDER_STOP":                  21,
-	"DOTA_UNIT_ORDER_TAUNT":                 22,
-	"DOTA_UNIT_ORDER_BUYBACK":               23,
-	"DOTA_UNIT_ORDER_GLYPH":                 24,
-	"DOTA_UNIT_ORDER_EJECT_ITEM_FROM_STASH": 25,
-	"DOTA_UNIT_ORDER_CAST_RUNE":             26,
-	"DOTA_UNIT_ORDER_PING_ABILITY":          27,
-	"DOTA_UNIT_ORDER_MOVE_TO_DIRECTION":     28,
-	"DOTA_UNIT_ORDER_PATROL":                29,
+	"DOTA_UNIT_ORDER_NONE":                   0,
+	"DOTA_UNIT_ORDER_MOVE_TO_POSITION":       1,
+	"DOTA_UNIT_ORDER_MOVE_TO_TARGET":         2,
+	"DOTA_UNIT_ORDER_ATTACK_MOVE":            3,
+	"DOTA_UNIT_ORDER_ATTACK_TARGET":          4,
+	"DOTA_UNIT_ORDER_CAST_POSITION":          5,
+	"DOTA_UNIT_ORDER_CAST_TARGET":            6,
+	"DOTA_UNIT_ORDER_CAST_TARGET_TREE":       7,
+	"DOTA_UNIT_ORDER_CAST_NO_TARGET":         8,
+	"DOTA_UNIT_ORDER_CAST_TOGGLE":            9,
+	"DOTA_UNIT_ORDER_HOLD_POSITION":          10,
+	"DOTA_UNIT_ORDER_TRAIN_ABILITY":          11,
+	"DOTA_UNIT_ORDER_DROP_ITEM":              12,
+	"DOTA_UNIT_ORDER_GIVE_ITEM":              13,
+	"DOTA_UNIT_ORDER_PICKUP_ITEM":            14,
+	"DOTA_UNIT_ORDER_PICKUP_RUNE":            15,
+	"DOTA_UNIT_ORDER_PURCHASE_ITEM":          16,
+	"DOTA_UNIT_ORDER_SELL_ITEM":              17,
+	"DOTA_UNIT_ORDER_DISASSEMBLE_ITEM":       18,
+	"DOTA_UNIT_ORDER_MOVE_ITEM":              19,
+	"DOTA_UNIT_ORDER_CAST_TOGGLE_AUTO":       20,
+	"DOTA_UNIT_ORDER_STOP":                   21,
+	"DOTA_UNIT_ORDER_TAUNT":                  22,
+	"DOTA_UNIT_ORDER_BUYBACK":                23,
+	"DOTA_UNIT_ORDER_GLYPH":                  24,
+	"DOTA_UNIT_ORDER_EJECT_ITEM_FROM_STASH":  25,
+	"DOTA_UNIT_ORDER_CAST_RUNE":              26,
+	"DOTA_UNIT_ORDER_PING_ABILITY":           27,
+	"DOTA_UNIT_ORDER_MOVE_TO_DIRECTION":      28,
+	"DOTA_UNIT_ORDER_PATROL":                 29,
+	"DOTA_UNIT_ORDER_VECTOR_TARGET_POSITION": 30,
 }
 
 func (x DotaunitorderT) Enum() *DotaunitorderT {

@@ -182,6 +182,12 @@ enum EGCItemMsg {
 	k_EMsgGCToGCDevRevokeUserItems = 2583;
 	k_EMsgClientToGCCreateStaticRecipe = 2584;
 	k_EMsgClientToGCCreateStaticRecipeResponse = 2585;
+	k_EMsgGCToGCStoreProcessCDKeyTransaction = 2586;
+	k_EMsgGCToGCStoreProcessCDKeyTransactionResponse = 2587;
+	k_EMsgGCToGCStoreProcessSettlement = 2588;
+	k_EMsgGCToGCStoreProcessSettlementResponse = 2589;
+	k_EMsgGCToGCConsoleOutput = 2590;
+	k_EMsgGCToClientItemAges = 2591;
 }
 
 enum EGCMsgResponse {
@@ -784,6 +790,7 @@ message CWorkshop_GetItemDailyRevenue_Response {
 
 message CMsgGenericResult {
 	optional uint32 eresult = 1 [default = 2];
+	optional string debug_message = 2;
 }
 
 message CMsgSQLGCToGCGrantBackpackSlots {
@@ -832,5 +839,74 @@ message CMsgClientToGCCreateStaticRecipeResponse {
 
 	optional CMsgClientToGCCreateStaticRecipeResponse.EResponse response = 1 [default = eResponse_Success];
 	repeated CMsgClientToGCCreateStaticRecipeResponse.OutputItem output_items = 2;
+}
+
+message CMsgProcessTransactionOrder {
+	message Item {
+		optional uint32 item_def_index = 1;
+		optional uint32 item_price = 2;
+		optional uint32 quantity = 3;
+		optional string category_desc = 4;
+		optional uint32 store_purchase_type = 5;
+		optional uint64 source_reference_id = 6;
+		optional int32 parent_stack_index = 7;
+		optional bool default_price = 8;
+		optional bool is_user_facing = 9;
+	}
+
+	optional uint64 txn_id = 1;
+	optional uint64 steam_txn_id = 2;
+	optional uint64 partner_txn_id = 3;
+	optional fixed64 steam_id = 4;
+	optional uint32 time_stamp = 5;
+	optional uint64 watermark = 6;
+	optional int32 purchase_report_status = 7;
+	optional uint32 currency = 8;
+	repeated CMsgProcessTransactionOrder.Item items = 9;
+}
+
+message CMsgGCToGCStoreProcessCDKeyTransaction {
+	optional CMsgProcessTransactionOrder order = 1;
+	optional uint32 reason_code = 2;
+}
+
+message CMsgGCToGCStoreProcessCDKeyTransactionResponse {
+	optional bool success = 1;
+}
+
+message CMsgGCToGCStoreProcessSettlement {
+	optional CMsgProcessTransactionOrder order = 1;
+	optional uint32 partner = 2;
+}
+
+message CMsgGCToGCStoreProcessSettlementResponse {
+	optional bool success = 1;
+}
+
+message CMsgGCToGCBroadcastConsoleCommand {
+	optional string con_command = 1;
+	optional bool report_output = 2;
+	optional uint32 sending_gc = 3;
+	optional string output_initiator = 4;
+}
+
+message CMsgGCToGCConsoleOutput {
+	message OutputLine {
+		optional string text = 1;
+		optional uint32 spew_level = 2;
+	}
+
+	optional string initiator = 1;
+	optional uint32 sending_gc = 2;
+	repeated CMsgGCToGCConsoleOutput.OutputLine msgs = 3;
+}
+
+message CMsgItemAges {
+	message MaxItemIDTimestamp {
+		optional uint32 timestamp = 1;
+		optional uint64 max_item_id = 2;
+	}
+
+	repeated CMsgItemAges.MaxItemIDTimestamp max_item_id_timestamps = 1;
 }
 

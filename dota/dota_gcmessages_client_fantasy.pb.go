@@ -14,35 +14,41 @@ var _ = math.Inf
 type ETournamentGameState int32
 
 const (
-	ETournamentGameState_k_ETournamentGameState_Unknown                ETournamentGameState = 0
-	ETournamentGameState_k_ETournamentGameState_Scheduled              ETournamentGameState = 1
-	ETournamentGameState_k_ETournamentGameState_WaitingForLobbyToStart ETournamentGameState = 2
-	ETournamentGameState_k_ETournamentGameState_Active                 ETournamentGameState = 3
-	ETournamentGameState_k_ETournamentGameState_DireVictory            ETournamentGameState = 4
-	ETournamentGameState_k_ETournamentGameState_RadVictory             ETournamentGameState = 5
-	ETournamentGameState_k_ETournamentGameState_Canceled               ETournamentGameState = 6
-	ETournamentGameState_k_ETournamentTeamState_NotNeeded              ETournamentGameState = 7
+	ETournamentGameState_k_ETournamentGameState_Unknown              ETournamentGameState = 0
+	ETournamentGameState_k_ETournamentGameState_Canceled             ETournamentGameState = 1
+	ETournamentGameState_k_ETournamentGameState_Scheduled            ETournamentGameState = 2
+	ETournamentGameState_k_ETournamentGameState_Active               ETournamentGameState = 3
+	ETournamentGameState_k_ETournamentGameState_RadVictory           ETournamentGameState = 20
+	ETournamentGameState_k_ETournamentGameState_DireVictory          ETournamentGameState = 21
+	ETournamentGameState_k_ETournamentGameState_RadVictoryByForfeit  ETournamentGameState = 22
+	ETournamentGameState_k_ETournamentGameState_DireVictoryByForfeit ETournamentGameState = 23
+	ETournamentGameState_k_ETournamentGameState_ServerFailure        ETournamentGameState = 40
+	ETournamentGameState_k_ETournamentGameState_NotNeeded            ETournamentGameState = 41
 )
 
 var ETournamentGameState_name = map[int32]string{
-	0: "k_ETournamentGameState_Unknown",
-	1: "k_ETournamentGameState_Scheduled",
-	2: "k_ETournamentGameState_WaitingForLobbyToStart",
-	3: "k_ETournamentGameState_Active",
-	4: "k_ETournamentGameState_DireVictory",
-	5: "k_ETournamentGameState_RadVictory",
-	6: "k_ETournamentGameState_Canceled",
-	7: "k_ETournamentTeamState_NotNeeded",
+	0:  "k_ETournamentGameState_Unknown",
+	1:  "k_ETournamentGameState_Canceled",
+	2:  "k_ETournamentGameState_Scheduled",
+	3:  "k_ETournamentGameState_Active",
+	20: "k_ETournamentGameState_RadVictory",
+	21: "k_ETournamentGameState_DireVictory",
+	22: "k_ETournamentGameState_RadVictoryByForfeit",
+	23: "k_ETournamentGameState_DireVictoryByForfeit",
+	40: "k_ETournamentGameState_ServerFailure",
+	41: "k_ETournamentGameState_NotNeeded",
 }
 var ETournamentGameState_value = map[string]int32{
-	"k_ETournamentGameState_Unknown":                0,
-	"k_ETournamentGameState_Scheduled":              1,
-	"k_ETournamentGameState_WaitingForLobbyToStart": 2,
-	"k_ETournamentGameState_Active":                 3,
-	"k_ETournamentGameState_DireVictory":            4,
-	"k_ETournamentGameState_RadVictory":             5,
-	"k_ETournamentGameState_Canceled":               6,
-	"k_ETournamentTeamState_NotNeeded":              7,
+	"k_ETournamentGameState_Unknown":              0,
+	"k_ETournamentGameState_Canceled":             1,
+	"k_ETournamentGameState_Scheduled":            2,
+	"k_ETournamentGameState_Active":               3,
+	"k_ETournamentGameState_RadVictory":           20,
+	"k_ETournamentGameState_DireVictory":          21,
+	"k_ETournamentGameState_RadVictoryByForfeit":  22,
+	"k_ETournamentGameState_DireVictoryByForfeit": 23,
+	"k_ETournamentGameState_ServerFailure":        40,
+	"k_ETournamentGameState_NotNeeded":            41,
 }
 
 func (x ETournamentGameState) Enum() *ETournamentGameState {
@@ -70,6 +76,7 @@ const (
 	ETournamentTeamState_k_ETournamentTeamState_NodeMax      ETournamentTeamState = 1024
 	ETournamentTeamState_k_ETournamentTeamState_Eliminated   ETournamentTeamState = 14003
 	ETournamentTeamState_k_ETournamentTeamState_Forfeited    ETournamentTeamState = 14004
+	ETournamentTeamState_k_ETournamentTeamState_Refunded     ETournamentTeamState = 14005
 	ETournamentTeamState_k_ETournamentTeamState_Finished1st  ETournamentTeamState = 15001
 	ETournamentTeamState_k_ETournamentTeamState_Finished2nd  ETournamentTeamState = 15002
 	ETournamentTeamState_k_ETournamentTeamState_Finished3rd  ETournamentTeamState = 15003
@@ -94,6 +101,7 @@ var ETournamentTeamState_name = map[int32]string{
 	1024:  "k_ETournamentTeamState_NodeMax",
 	14003: "k_ETournamentTeamState_Eliminated",
 	14004: "k_ETournamentTeamState_Forfeited",
+	14005: "k_ETournamentTeamState_Refunded",
 	15001: "k_ETournamentTeamState_Finished1st",
 	15002: "k_ETournamentTeamState_Finished2nd",
 	15003: "k_ETournamentTeamState_Finished3rd",
@@ -117,6 +125,7 @@ var ETournamentTeamState_value = map[string]int32{
 	"k_ETournamentTeamState_NodeMax":      1024,
 	"k_ETournamentTeamState_Eliminated":   14003,
 	"k_ETournamentTeamState_Forfeited":    14004,
+	"k_ETournamentTeamState_Refunded":     14005,
 	"k_ETournamentTeamState_Finished1st":  15001,
 	"k_ETournamentTeamState_Finished2nd":  15002,
 	"k_ETournamentTeamState_Finished3rd":  15003,
@@ -155,29 +164,32 @@ func (x *ETournamentTeamState) UnmarshalJSON(data []byte) error {
 type ETournamentState int32
 
 const (
-	ETournamentState_k_ETournamentState_Unknown    ETournamentState = 0
-	ETournamentState_k_ETournamentState_Setup      ETournamentState = 1
-	ETournamentState_k_ETournamentState_Scheduled  ETournamentState = 2
-	ETournamentState_k_ETournamentState_InProgress ETournamentState = 3
-	ETournamentState_k_ETournamentState_Completed  ETournamentState = 4
-	ETournamentState_k_ETournamentState_Canceled   ETournamentState = 5
+	ETournamentState_k_ETournamentState_Unknown        ETournamentState = 0
+	ETournamentState_k_ETournamentState_Canceled       ETournamentState = 1
+	ETournamentState_k_ETournamentState_Completed      ETournamentState = 2
+	ETournamentState_k_ETournamentState_Merged         ETournamentState = 3
+	ETournamentState_k_ETournamentState_ServerFailure  ETournamentState = 4
+	ETournamentState_k_ETournamentState_InProgress     ETournamentState = 100
+	ETournamentState_k_ETournamentState_WaitingToMerge ETournamentState = 101
 )
 
 var ETournamentState_name = map[int32]string{
-	0: "k_ETournamentState_Unknown",
-	1: "k_ETournamentState_Setup",
-	2: "k_ETournamentState_Scheduled",
-	3: "k_ETournamentState_InProgress",
-	4: "k_ETournamentState_Completed",
-	5: "k_ETournamentState_Canceled",
+	0:   "k_ETournamentState_Unknown",
+	1:   "k_ETournamentState_Canceled",
+	2:   "k_ETournamentState_Completed",
+	3:   "k_ETournamentState_Merged",
+	4:   "k_ETournamentState_ServerFailure",
+	100: "k_ETournamentState_InProgress",
+	101: "k_ETournamentState_WaitingToMerge",
 }
 var ETournamentState_value = map[string]int32{
-	"k_ETournamentState_Unknown":    0,
-	"k_ETournamentState_Setup":      1,
-	"k_ETournamentState_Scheduled":  2,
-	"k_ETournamentState_InProgress": 3,
-	"k_ETournamentState_Completed":  4,
-	"k_ETournamentState_Canceled":   5,
+	"k_ETournamentState_Unknown":        0,
+	"k_ETournamentState_Canceled":       1,
+	"k_ETournamentState_Completed":      2,
+	"k_ETournamentState_Merged":         3,
+	"k_ETournamentState_ServerFailure":  4,
+	"k_ETournamentState_InProgress":     100,
+	"k_ETournamentState_WaitingToMerge": 101,
 }
 
 func (x ETournamentState) Enum() *ETournamentState {
@@ -201,31 +213,46 @@ type ETournamentNodeState int32
 
 const (
 	ETournamentNodeState_k_ETournamentNodeState_Unknown             ETournamentNodeState = 0
-	ETournamentNodeState_k_ETournamentNodeState_TeamsNotYetAssigned ETournamentNodeState = 1
-	ETournamentNodeState_k_ETournamentNodeState_InBetweenGames      ETournamentNodeState = 2
-	ETournamentNodeState_k_ETournamentNodeState_GameInProgress      ETournamentNodeState = 3
-	ETournamentNodeState_k_ETournamentNodeState_A_Won               ETournamentNodeState = 4
-	ETournamentNodeState_k_ETournamentNodeState_B_Won               ETournamentNodeState = 5
-	ETournamentNodeState_k_ETournamentNodeState_Canceled            ETournamentNodeState = 6
+	ETournamentNodeState_k_ETournamentNodeState_Canceled            ETournamentNodeState = 1
+	ETournamentNodeState_k_ETournamentNodeState_TeamsNotYetAssigned ETournamentNodeState = 2
+	ETournamentNodeState_k_ETournamentNodeState_InBetweenGames      ETournamentNodeState = 3
+	ETournamentNodeState_k_ETournamentNodeState_GameInProgress      ETournamentNodeState = 4
+	ETournamentNodeState_k_ETournamentNodeState_A_Won               ETournamentNodeState = 5
+	ETournamentNodeState_k_ETournamentNodeState_B_Won               ETournamentNodeState = 6
+	ETournamentNodeState_k_ETournamentNodeState_A_WonByForfeit      ETournamentNodeState = 7
+	ETournamentNodeState_k_ETournamentNodeState_B_WonByForfeit      ETournamentNodeState = 8
+	ETournamentNodeState_k_ETournamentNodeState_A_Bye               ETournamentNodeState = 9
+	ETournamentNodeState_k_ETournamentNodeState_A_Forfeit           ETournamentNodeState = 10
+	ETournamentNodeState_k_ETournamentNodeState_ServerFailure       ETournamentNodeState = 11
 )
 
 var ETournamentNodeState_name = map[int32]string{
-	0: "k_ETournamentNodeState_Unknown",
-	1: "k_ETournamentNodeState_TeamsNotYetAssigned",
-	2: "k_ETournamentNodeState_InBetweenGames",
-	3: "k_ETournamentNodeState_GameInProgress",
-	4: "k_ETournamentNodeState_A_Won",
-	5: "k_ETournamentNodeState_B_Won",
-	6: "k_ETournamentNodeState_Canceled",
+	0:  "k_ETournamentNodeState_Unknown",
+	1:  "k_ETournamentNodeState_Canceled",
+	2:  "k_ETournamentNodeState_TeamsNotYetAssigned",
+	3:  "k_ETournamentNodeState_InBetweenGames",
+	4:  "k_ETournamentNodeState_GameInProgress",
+	5:  "k_ETournamentNodeState_A_Won",
+	6:  "k_ETournamentNodeState_B_Won",
+	7:  "k_ETournamentNodeState_A_WonByForfeit",
+	8:  "k_ETournamentNodeState_B_WonByForfeit",
+	9:  "k_ETournamentNodeState_A_Bye",
+	10: "k_ETournamentNodeState_A_Forfeit",
+	11: "k_ETournamentNodeState_ServerFailure",
 }
 var ETournamentNodeState_value = map[string]int32{
 	"k_ETournamentNodeState_Unknown":             0,
-	"k_ETournamentNodeState_TeamsNotYetAssigned": 1,
-	"k_ETournamentNodeState_InBetweenGames":      2,
-	"k_ETournamentNodeState_GameInProgress":      3,
-	"k_ETournamentNodeState_A_Won":               4,
-	"k_ETournamentNodeState_B_Won":               5,
-	"k_ETournamentNodeState_Canceled":            6,
+	"k_ETournamentNodeState_Canceled":            1,
+	"k_ETournamentNodeState_TeamsNotYetAssigned": 2,
+	"k_ETournamentNodeState_InBetweenGames":      3,
+	"k_ETournamentNodeState_GameInProgress":      4,
+	"k_ETournamentNodeState_A_Won":               5,
+	"k_ETournamentNodeState_B_Won":               6,
+	"k_ETournamentNodeState_A_WonByForfeit":      7,
+	"k_ETournamentNodeState_B_WonByForfeit":      8,
+	"k_ETournamentNodeState_A_Bye":               9,
+	"k_ETournamentNodeState_A_Forfeit":           10,
+	"k_ETournamentNodeState_ServerFailure":       11,
 }
 
 func (x ETournamentNodeState) Enum() *ETournamentNodeState {
@@ -242,6 +269,51 @@ func (x *ETournamentNodeState) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	*x = ETournamentNodeState(value)
+	return nil
+}
+
+type ETournamentEvent int32
+
+const (
+	ETournamentEvent_k_ETournamentEvent_None               ETournamentEvent = 0
+	ETournamentEvent_k_ETournamentEvent_TournamentCreated  ETournamentEvent = 1
+	ETournamentEvent_k_ETournamentEvent_TournamentsMerged  ETournamentEvent = 2
+	ETournamentEvent_k_ETournamentEvent_GameOutcome        ETournamentEvent = 3
+	ETournamentEvent_k_ETournamentEvent_TeamGivenBye       ETournamentEvent = 4
+	ETournamentEvent_k_ETournamentEvent_TournamentCanceled ETournamentEvent = 5
+)
+
+var ETournamentEvent_name = map[int32]string{
+	0: "k_ETournamentEvent_None",
+	1: "k_ETournamentEvent_TournamentCreated",
+	2: "k_ETournamentEvent_TournamentsMerged",
+	3: "k_ETournamentEvent_GameOutcome",
+	4: "k_ETournamentEvent_TeamGivenBye",
+	5: "k_ETournamentEvent_TournamentCanceled",
+}
+var ETournamentEvent_value = map[string]int32{
+	"k_ETournamentEvent_None":               0,
+	"k_ETournamentEvent_TournamentCreated":  1,
+	"k_ETournamentEvent_TournamentsMerged":  2,
+	"k_ETournamentEvent_GameOutcome":        3,
+	"k_ETournamentEvent_TeamGivenBye":       4,
+	"k_ETournamentEvent_TournamentCanceled": 5,
+}
+
+func (x ETournamentEvent) Enum() *ETournamentEvent {
+	p := new(ETournamentEvent)
+	*p = x
+	return p
+}
+func (x ETournamentEvent) String() string {
+	return proto.EnumName(ETournamentEvent_name, int32(x))
+}
+func (x *ETournamentEvent) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(ETournamentEvent_value, data, "ETournamentEvent")
+	if err != nil {
+		return err
+	}
+	*x = ETournamentEvent(value)
 	return nil
 }
 
@@ -4611,16 +4683,15 @@ func (m *CMsgDOTAFantasyPlayerScoreDetailsResponse_PlayerMatchData) GetBenched()
 }
 
 type CMsgDOTATournament struct {
-	Teams              []*CMsgDOTATournament_Team `protobuf:"bytes,1,rep,name=teams" json:"teams,omitempty"`
-	Games              []*CMsgDOTATournament_Game `protobuf:"bytes,2,rep,name=games" json:"games,omitempty"`
-	Gid                *uint64                    `protobuf:"varint,3,opt,name=gid" json:"gid,omitempty"`
-	TournamentId       *uint32                    `protobuf:"varint,4,opt,name=tournament_id" json:"tournament_id,omitempty"`
-	TournamentType     *ETournamentType           `protobuf:"varint,5,opt,name=tournament_type,enum=dota.ETournamentType,def=0" json:"tournament_type,omitempty"`
-	TournamentTemplate *ETournamentTemplate       `protobuf:"varint,6,opt,name=tournament_template,enum=dota.ETournamentTemplate,def=0" json:"tournament_template,omitempty"`
-	LeagueId           *uint32                    `protobuf:"varint,7,opt,name=league_id" json:"league_id,omitempty"`
-	StartTime          *uint32                    `protobuf:"varint,8,opt,name=start_time" json:"start_time,omitempty"`
-	State              *ETournamentState          `protobuf:"varint,9,opt,name=state,enum=dota.ETournamentState,def=0" json:"state,omitempty"`
-	Nodes              []*CMsgDOTATournament_Node `protobuf:"bytes,10,rep,name=nodes" json:"nodes,omitempty"`
+	TournamentId       *uint32                    `protobuf:"varint,1,opt,name=tournament_id" json:"tournament_id,omitempty"`
+	DivisionId         *uint32                    `protobuf:"varint,2,opt,name=division_id" json:"division_id,omitempty"`
+	ScheduleTime       *uint32                    `protobuf:"varint,3,opt,name=schedule_time" json:"schedule_time,omitempty"`
+	SkillLevel         *uint32                    `protobuf:"varint,4,opt,name=skill_level" json:"skill_level,omitempty"`
+	TournamentTemplate *ETournamentTemplate       `protobuf:"varint,5,opt,name=tournament_template,enum=dota.ETournamentTemplate,def=0" json:"tournament_template,omitempty"`
+	State              *ETournamentState          `protobuf:"varint,6,opt,name=state,enum=dota.ETournamentState,def=0" json:"state,omitempty"`
+	Teams              []*CMsgDOTATournament_Team `protobuf:"bytes,7,rep,name=teams" json:"teams,omitempty"`
+	Games              []*CMsgDOTATournament_Game `protobuf:"bytes,8,rep,name=games" json:"games,omitempty"`
+	Nodes              []*CMsgDOTATournament_Node `protobuf:"bytes,9,rep,name=nodes" json:"nodes,omitempty"`
 	XXX_unrecognized   []byte                     `json:"-"`
 }
 
@@ -4628,9 +4699,50 @@ func (m *CMsgDOTATournament) Reset()         { *m = CMsgDOTATournament{} }
 func (m *CMsgDOTATournament) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTATournament) ProtoMessage()    {}
 
-const Default_CMsgDOTATournament_TournamentType ETournamentType = ETournamentType_k_ETournamentType_Unknown
 const Default_CMsgDOTATournament_TournamentTemplate ETournamentTemplate = ETournamentTemplate_k_ETournamentTemplate_None
 const Default_CMsgDOTATournament_State ETournamentState = ETournamentState_k_ETournamentState_Unknown
+
+func (m *CMsgDOTATournament) GetTournamentId() uint32 {
+	if m != nil && m.TournamentId != nil {
+		return *m.TournamentId
+	}
+	return 0
+}
+
+func (m *CMsgDOTATournament) GetDivisionId() uint32 {
+	if m != nil && m.DivisionId != nil {
+		return *m.DivisionId
+	}
+	return 0
+}
+
+func (m *CMsgDOTATournament) GetScheduleTime() uint32 {
+	if m != nil && m.ScheduleTime != nil {
+		return *m.ScheduleTime
+	}
+	return 0
+}
+
+func (m *CMsgDOTATournament) GetSkillLevel() uint32 {
+	if m != nil && m.SkillLevel != nil {
+		return *m.SkillLevel
+	}
+	return 0
+}
+
+func (m *CMsgDOTATournament) GetTournamentTemplate() ETournamentTemplate {
+	if m != nil && m.TournamentTemplate != nil {
+		return *m.TournamentTemplate
+	}
+	return Default_CMsgDOTATournament_TournamentTemplate
+}
+
+func (m *CMsgDOTATournament) GetState() ETournamentState {
+	if m != nil && m.State != nil {
+		return *m.State
+	}
+	return Default_CMsgDOTATournament_State
+}
 
 func (m *CMsgDOTATournament) GetTeams() []*CMsgDOTATournament_Team {
 	if m != nil {
@@ -4646,55 +4758,6 @@ func (m *CMsgDOTATournament) GetGames() []*CMsgDOTATournament_Game {
 	return nil
 }
 
-func (m *CMsgDOTATournament) GetGid() uint64 {
-	if m != nil && m.Gid != nil {
-		return *m.Gid
-	}
-	return 0
-}
-
-func (m *CMsgDOTATournament) GetTournamentId() uint32 {
-	if m != nil && m.TournamentId != nil {
-		return *m.TournamentId
-	}
-	return 0
-}
-
-func (m *CMsgDOTATournament) GetTournamentType() ETournamentType {
-	if m != nil && m.TournamentType != nil {
-		return *m.TournamentType
-	}
-	return Default_CMsgDOTATournament_TournamentType
-}
-
-func (m *CMsgDOTATournament) GetTournamentTemplate() ETournamentTemplate {
-	if m != nil && m.TournamentTemplate != nil {
-		return *m.TournamentTemplate
-	}
-	return Default_CMsgDOTATournament_TournamentTemplate
-}
-
-func (m *CMsgDOTATournament) GetLeagueId() uint32 {
-	if m != nil && m.LeagueId != nil {
-		return *m.LeagueId
-	}
-	return 0
-}
-
-func (m *CMsgDOTATournament) GetStartTime() uint32 {
-	if m != nil && m.StartTime != nil {
-		return *m.StartTime
-	}
-	return 0
-}
-
-func (m *CMsgDOTATournament) GetState() ETournamentState {
-	if m != nil && m.State != nil {
-		return *m.State
-	}
-	return Default_CMsgDOTATournament_State
-}
-
 func (m *CMsgDOTATournament) GetNodes() []*CMsgDOTATournament_Node {
 	if m != nil {
 		return m.Nodes
@@ -4703,20 +4766,41 @@ func (m *CMsgDOTATournament) GetNodes() []*CMsgDOTATournament_Node {
 }
 
 type CMsgDOTATournament_Team struct {
-	TeamId           *uint32  `protobuf:"varint,1,opt,name=team_id" json:"team_id,omitempty"`
-	TeamName         *string  `protobuf:"bytes,2,opt,name=team_name" json:"team_name,omitempty"`
-	TeamAbbrev       *string  `protobuf:"bytes,3,opt,name=team_abbrev" json:"team_abbrev,omitempty"`
-	Players          []uint32 `protobuf:"varint,4,rep,packed,name=players" json:"players,omitempty"`
-	Seed             *uint32  `protobuf:"varint,5,opt,name=seed" json:"seed,omitempty"`
-	TeamLogo         *uint64  `protobuf:"varint,6,opt,name=team_logo" json:"team_logo,omitempty"`
-	CountryCode      *string  `protobuf:"bytes,7,opt,name=country_code" json:"country_code,omitempty"`
-	NodeOrState      *uint32  `protobuf:"varint,8,opt,name=node_or_state" json:"node_or_state,omitempty"`
+	TeamGid          *uint64  `protobuf:"fixed64,1,opt,name=team_gid" json:"team_gid,omitempty"`
+	NodeOrState      *uint32  `protobuf:"varint,2,opt,name=node_or_state" json:"node_or_state,omitempty"`
+	Players          []uint32 `protobuf:"varint,3,rep,packed,name=players" json:"players,omitempty"`
+	TeamId           *uint32  `protobuf:"varint,4,opt,name=team_id" json:"team_id,omitempty"`
+	TeamName         *string  `protobuf:"bytes,5,opt,name=team_name" json:"team_name,omitempty"`
+	TeamAbbrev       *string  `protobuf:"bytes,6,opt,name=team_abbrev" json:"team_abbrev,omitempty"`
+	TeamLogo         *uint64  `protobuf:"varint,7,opt,name=team_logo" json:"team_logo,omitempty"`
+	CountryCode      *string  `protobuf:"bytes,8,opt,name=country_code" json:"country_code,omitempty"`
 	XXX_unrecognized []byte   `json:"-"`
 }
 
 func (m *CMsgDOTATournament_Team) Reset()         { *m = CMsgDOTATournament_Team{} }
 func (m *CMsgDOTATournament_Team) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTATournament_Team) ProtoMessage()    {}
+
+func (m *CMsgDOTATournament_Team) GetTeamGid() uint64 {
+	if m != nil && m.TeamGid != nil {
+		return *m.TeamGid
+	}
+	return 0
+}
+
+func (m *CMsgDOTATournament_Team) GetNodeOrState() uint32 {
+	if m != nil && m.NodeOrState != nil {
+		return *m.NodeOrState
+	}
+	return 0
+}
+
+func (m *CMsgDOTATournament_Team) GetPlayers() []uint32 {
+	if m != nil {
+		return m.Players
+	}
+	return nil
+}
 
 func (m *CMsgDOTATournament_Team) GetTeamId() uint32 {
 	if m != nil && m.TeamId != nil {
@@ -4739,20 +4823,6 @@ func (m *CMsgDOTATournament_Team) GetTeamAbbrev() string {
 	return ""
 }
 
-func (m *CMsgDOTATournament_Team) GetPlayers() []uint32 {
-	if m != nil {
-		return m.Players
-	}
-	return nil
-}
-
-func (m *CMsgDOTATournament_Team) GetSeed() uint32 {
-	if m != nil && m.Seed != nil {
-		return *m.Seed
-	}
-	return 0
-}
-
 func (m *CMsgDOTATournament_Team) GetTeamLogo() uint64 {
 	if m != nil && m.TeamLogo != nil {
 		return *m.TeamLogo
@@ -4767,28 +4837,13 @@ func (m *CMsgDOTATournament_Team) GetCountryCode() string {
 	return ""
 }
 
-func (m *CMsgDOTATournament_Team) GetNodeOrState() uint32 {
-	if m != nil && m.NodeOrState != nil {
-		return *m.NodeOrState
-	}
-	return 0
-}
-
 type CMsgDOTATournament_Game struct {
-	GameId           *uint32               `protobuf:"varint,1,opt,name=game_id" json:"game_id,omitempty"`
-	GoodTeamId       *uint32               `protobuf:"varint,2,opt,name=good_team_id" json:"good_team_id,omitempty"`
-	BadTeamId        *uint32               `protobuf:"varint,3,opt,name=bad_team_id" json:"bad_team_id,omitempty"`
-	GoodTeamSeed     *uint32               `protobuf:"varint,12,opt,name=good_team_seed" json:"good_team_seed,omitempty"`
-	BadTeamSeed      *uint32               `protobuf:"varint,13,opt,name=bad_team_seed" json:"bad_team_seed,omitempty"`
-	LobbyId          *uint64               `protobuf:"fixed64,4,opt,name=lobby_id" json:"lobby_id,omitempty"`
-	MatchId          *uint64               `protobuf:"varint,5,opt,name=match_id" json:"match_id,omitempty"`
-	GameName         *string               `protobuf:"bytes,6,opt,name=game_name" json:"game_name,omitempty"`
-	LiveStream       *bool                 `protobuf:"varint,7,opt,name=live_stream" json:"live_stream,omitempty"`
-	Message          *string               `protobuf:"bytes,9,opt,name=message" json:"message,omitempty"`
-	ResultsFinal     *bool                 `protobuf:"varint,10,opt,name=results_final" json:"results_final,omitempty"`
-	State            *ETournamentGameState `protobuf:"varint,14,opt,name=state,enum=dota.ETournamentGameState,def=0" json:"state,omitempty"`
-	NodeId           *uint32               `protobuf:"varint,15,opt,name=node_id" json:"node_id,omitempty"`
-	StartTime        *uint32               `protobuf:"varint,16,opt,name=start_time" json:"start_time,omitempty"`
+	NodeIdx          *uint32               `protobuf:"varint,1,opt,name=node_idx" json:"node_idx,omitempty"`
+	LobbyId          *uint64               `protobuf:"fixed64,2,opt,name=lobby_id" json:"lobby_id,omitempty"`
+	MatchId          *uint64               `protobuf:"varint,3,opt,name=match_id" json:"match_id,omitempty"`
+	TeamAGood        *bool                 `protobuf:"varint,4,opt,name=team_a_good" json:"team_a_good,omitempty"`
+	State            *ETournamentGameState `protobuf:"varint,5,opt,name=state,enum=dota.ETournamentGameState,def=0" json:"state,omitempty"`
+	StartTime        *uint32               `protobuf:"varint,6,opt,name=start_time" json:"start_time,omitempty"`
 	XXX_unrecognized []byte                `json:"-"`
 }
 
@@ -4798,37 +4853,9 @@ func (*CMsgDOTATournament_Game) ProtoMessage()    {}
 
 const Default_CMsgDOTATournament_Game_State ETournamentGameState = ETournamentGameState_k_ETournamentGameState_Unknown
 
-func (m *CMsgDOTATournament_Game) GetGameId() uint32 {
-	if m != nil && m.GameId != nil {
-		return *m.GameId
-	}
-	return 0
-}
-
-func (m *CMsgDOTATournament_Game) GetGoodTeamId() uint32 {
-	if m != nil && m.GoodTeamId != nil {
-		return *m.GoodTeamId
-	}
-	return 0
-}
-
-func (m *CMsgDOTATournament_Game) GetBadTeamId() uint32 {
-	if m != nil && m.BadTeamId != nil {
-		return *m.BadTeamId
-	}
-	return 0
-}
-
-func (m *CMsgDOTATournament_Game) GetGoodTeamSeed() uint32 {
-	if m != nil && m.GoodTeamSeed != nil {
-		return *m.GoodTeamSeed
-	}
-	return 0
-}
-
-func (m *CMsgDOTATournament_Game) GetBadTeamSeed() uint32 {
-	if m != nil && m.BadTeamSeed != nil {
-		return *m.BadTeamSeed
+func (m *CMsgDOTATournament_Game) GetNodeIdx() uint32 {
+	if m != nil && m.NodeIdx != nil {
+		return *m.NodeIdx
 	}
 	return 0
 }
@@ -4847,30 +4874,9 @@ func (m *CMsgDOTATournament_Game) GetMatchId() uint64 {
 	return 0
 }
 
-func (m *CMsgDOTATournament_Game) GetGameName() string {
-	if m != nil && m.GameName != nil {
-		return *m.GameName
-	}
-	return ""
-}
-
-func (m *CMsgDOTATournament_Game) GetLiveStream() bool {
-	if m != nil && m.LiveStream != nil {
-		return *m.LiveStream
-	}
-	return false
-}
-
-func (m *CMsgDOTATournament_Game) GetMessage() string {
-	if m != nil && m.Message != nil {
-		return *m.Message
-	}
-	return ""
-}
-
-func (m *CMsgDOTATournament_Game) GetResultsFinal() bool {
-	if m != nil && m.ResultsFinal != nil {
-		return *m.ResultsFinal
+func (m *CMsgDOTATournament_Game) GetTeamAGood() bool {
+	if m != nil && m.TeamAGood != nil {
+		return *m.TeamAGood
 	}
 	return false
 }
@@ -4882,13 +4888,6 @@ func (m *CMsgDOTATournament_Game) GetState() ETournamentGameState {
 	return Default_CMsgDOTATournament_Game_State
 }
 
-func (m *CMsgDOTATournament_Game) GetNodeId() uint32 {
-	if m != nil && m.NodeId != nil {
-		return *m.NodeId
-	}
-	return 0
-}
-
 func (m *CMsgDOTATournament_Game) GetStartTime() uint32 {
 	if m != nil && m.StartTime != nil {
 		return *m.StartTime
@@ -4898,14 +4897,9 @@ func (m *CMsgDOTATournament_Game) GetStartTime() uint32 {
 
 type CMsgDOTATournament_Node struct {
 	NodeId           *uint32               `protobuf:"varint,1,opt,name=node_id" json:"node_id,omitempty"`
-	TeamSeedA        *uint32               `protobuf:"varint,2,opt,name=team_seed_a" json:"team_seed_a,omitempty"`
-	TeamSeedB        *uint32               `protobuf:"varint,3,opt,name=team_seed_b" json:"team_seed_b,omitempty"`
-	WinnerNode       *uint32               `protobuf:"varint,4,opt,name=winner_node" json:"winner_node,omitempty"`
-	LoserNode        *uint32               `protobuf:"varint,5,opt,name=loser_node" json:"loser_node,omitempty"`
-	SeriesType       *uint32               `protobuf:"varint,7,opt,name=series_type" json:"series_type,omitempty"`
-	NodeState        *ETournamentNodeState `protobuf:"varint,8,opt,name=node_state,enum=dota.ETournamentNodeState,def=0" json:"node_state,omitempty"`
-	SeriesId         *uint32               `protobuf:"varint,9,opt,name=series_id" json:"series_id,omitempty"`
-	StartTime        *uint32               `protobuf:"varint,16,opt,name=start_time" json:"start_time,omitempty"`
+	TeamIdxA         *uint32               `protobuf:"varint,2,opt,name=team_idx_a" json:"team_idx_a,omitempty"`
+	TeamIdxB         *uint32               `protobuf:"varint,3,opt,name=team_idx_b" json:"team_idx_b,omitempty"`
+	NodeState        *ETournamentNodeState `protobuf:"varint,4,opt,name=node_state,enum=dota.ETournamentNodeState,def=0" json:"node_state,omitempty"`
 	XXX_unrecognized []byte                `json:"-"`
 }
 
@@ -4922,37 +4916,16 @@ func (m *CMsgDOTATournament_Node) GetNodeId() uint32 {
 	return 0
 }
 
-func (m *CMsgDOTATournament_Node) GetTeamSeedA() uint32 {
-	if m != nil && m.TeamSeedA != nil {
-		return *m.TeamSeedA
+func (m *CMsgDOTATournament_Node) GetTeamIdxA() uint32 {
+	if m != nil && m.TeamIdxA != nil {
+		return *m.TeamIdxA
 	}
 	return 0
 }
 
-func (m *CMsgDOTATournament_Node) GetTeamSeedB() uint32 {
-	if m != nil && m.TeamSeedB != nil {
-		return *m.TeamSeedB
-	}
-	return 0
-}
-
-func (m *CMsgDOTATournament_Node) GetWinnerNode() uint32 {
-	if m != nil && m.WinnerNode != nil {
-		return *m.WinnerNode
-	}
-	return 0
-}
-
-func (m *CMsgDOTATournament_Node) GetLoserNode() uint32 {
-	if m != nil && m.LoserNode != nil {
-		return *m.LoserNode
-	}
-	return 0
-}
-
-func (m *CMsgDOTATournament_Node) GetSeriesType() uint32 {
-	if m != nil && m.SeriesType != nil {
-		return *m.SeriesType
+func (m *CMsgDOTATournament_Node) GetTeamIdxB() uint32 {
+	if m != nil && m.TeamIdxB != nil {
+		return *m.TeamIdxB
 	}
 	return 0
 }
@@ -4964,16 +4937,107 @@ func (m *CMsgDOTATournament_Node) GetNodeState() ETournamentNodeState {
 	return Default_CMsgDOTATournament_Node_NodeState
 }
 
-func (m *CMsgDOTATournament_Node) GetSeriesId() uint32 {
-	if m != nil && m.SeriesId != nil {
-		return *m.SeriesId
+type CMsgDOTATournamentStateChange struct {
+	NewTournamentId    *uint32                                     `protobuf:"varint,1,opt,name=new_tournament_id" json:"new_tournament_id,omitempty"`
+	Event              *ETournamentEvent                           `protobuf:"varint,2,opt,name=event,enum=dota.ETournamentEvent,def=0" json:"event,omitempty"`
+	NewTournamentState *ETournamentState                           `protobuf:"varint,3,opt,name=new_tournament_state,enum=dota.ETournamentState,def=0" json:"new_tournament_state,omitempty"`
+	GameChanges        []*CMsgDOTATournamentStateChange_GameChange `protobuf:"bytes,4,rep,name=game_changes" json:"game_changes,omitempty"`
+	TeamChanges        []*CMsgDOTATournamentStateChange_TeamChange `protobuf:"bytes,5,rep,name=team_changes" json:"team_changes,omitempty"`
+	XXX_unrecognized   []byte                                      `json:"-"`
+}
+
+func (m *CMsgDOTATournamentStateChange) Reset()         { *m = CMsgDOTATournamentStateChange{} }
+func (m *CMsgDOTATournamentStateChange) String() string { return proto.CompactTextString(m) }
+func (*CMsgDOTATournamentStateChange) ProtoMessage()    {}
+
+const Default_CMsgDOTATournamentStateChange_Event ETournamentEvent = ETournamentEvent_k_ETournamentEvent_None
+const Default_CMsgDOTATournamentStateChange_NewTournamentState ETournamentState = ETournamentState_k_ETournamentState_Unknown
+
+func (m *CMsgDOTATournamentStateChange) GetNewTournamentId() uint32 {
+	if m != nil && m.NewTournamentId != nil {
+		return *m.NewTournamentId
 	}
 	return 0
 }
 
-func (m *CMsgDOTATournament_Node) GetStartTime() uint32 {
-	if m != nil && m.StartTime != nil {
-		return *m.StartTime
+func (m *CMsgDOTATournamentStateChange) GetEvent() ETournamentEvent {
+	if m != nil && m.Event != nil {
+		return *m.Event
+	}
+	return Default_CMsgDOTATournamentStateChange_Event
+}
+
+func (m *CMsgDOTATournamentStateChange) GetNewTournamentState() ETournamentState {
+	if m != nil && m.NewTournamentState != nil {
+		return *m.NewTournamentState
+	}
+	return Default_CMsgDOTATournamentStateChange_NewTournamentState
+}
+
+func (m *CMsgDOTATournamentStateChange) GetGameChanges() []*CMsgDOTATournamentStateChange_GameChange {
+	if m != nil {
+		return m.GameChanges
+	}
+	return nil
+}
+
+func (m *CMsgDOTATournamentStateChange) GetTeamChanges() []*CMsgDOTATournamentStateChange_TeamChange {
+	if m != nil {
+		return m.TeamChanges
+	}
+	return nil
+}
+
+type CMsgDOTATournamentStateChange_GameChange struct {
+	MatchId          *uint64               `protobuf:"varint,1,opt,name=match_id" json:"match_id,omitempty"`
+	NewState         *ETournamentGameState `protobuf:"varint,2,opt,name=new_state,enum=dota.ETournamentGameState,def=0" json:"new_state,omitempty"`
+	XXX_unrecognized []byte                `json:"-"`
+}
+
+func (m *CMsgDOTATournamentStateChange_GameChange) Reset() {
+	*m = CMsgDOTATournamentStateChange_GameChange{}
+}
+func (m *CMsgDOTATournamentStateChange_GameChange) String() string { return proto.CompactTextString(m) }
+func (*CMsgDOTATournamentStateChange_GameChange) ProtoMessage()    {}
+
+const Default_CMsgDOTATournamentStateChange_GameChange_NewState ETournamentGameState = ETournamentGameState_k_ETournamentGameState_Unknown
+
+func (m *CMsgDOTATournamentStateChange_GameChange) GetMatchId() uint64 {
+	if m != nil && m.MatchId != nil {
+		return *m.MatchId
+	}
+	return 0
+}
+
+func (m *CMsgDOTATournamentStateChange_GameChange) GetNewState() ETournamentGameState {
+	if m != nil && m.NewState != nil {
+		return *m.NewState
+	}
+	return Default_CMsgDOTATournamentStateChange_GameChange_NewState
+}
+
+type CMsgDOTATournamentStateChange_TeamChange struct {
+	TeamGid          *uint64 `protobuf:"varint,1,opt,name=team_gid" json:"team_gid,omitempty"`
+	NewNodeOrState   *uint32 `protobuf:"varint,2,opt,name=new_node_or_state" json:"new_node_or_state,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CMsgDOTATournamentStateChange_TeamChange) Reset() {
+	*m = CMsgDOTATournamentStateChange_TeamChange{}
+}
+func (m *CMsgDOTATournamentStateChange_TeamChange) String() string { return proto.CompactTextString(m) }
+func (*CMsgDOTATournamentStateChange_TeamChange) ProtoMessage()    {}
+
+func (m *CMsgDOTATournamentStateChange_TeamChange) GetTeamGid() uint64 {
+	if m != nil && m.TeamGid != nil {
+		return *m.TeamGid
+	}
+	return 0
+}
+
+func (m *CMsgDOTATournamentStateChange_TeamChange) GetNewNodeOrState() uint32 {
+	if m != nil && m.NewNodeOrState != nil {
+		return *m.NewNodeOrState
 	}
 	return 0
 }
@@ -5190,11 +5254,492 @@ func (m *CMsgDOTAPassportVote) GetPlayerCardChallenges() []*CMsgDOTAPassportPlay
 	return nil
 }
 
+type CMsgDOTATournamentInfo struct {
+	LeagueId            *uint32                                 `protobuf:"varint,1,opt,name=league_id" json:"league_id,omitempty"`
+	PhaseList           []*CMsgDOTATournamentInfo_Phase         `protobuf:"bytes,2,rep,name=phase_list" json:"phase_list,omitempty"`
+	TeamsList           []*CMsgDOTATournamentInfo_Team          `protobuf:"bytes,3,rep,name=teams_list" json:"teams_list,omitempty"`
+	UpcomingMatchesList []*CMsgDOTATournamentInfo_UpcomingMatch `protobuf:"bytes,4,rep,name=upcoming_matches_list" json:"upcoming_matches_list,omitempty"`
+	NewsList            []*CMsgDOTATournamentInfo_News          `protobuf:"bytes,5,rep,name=news_list" json:"news_list,omitempty"`
+	XXX_unrecognized    []byte                                  `json:"-"`
+}
+
+func (m *CMsgDOTATournamentInfo) Reset()         { *m = CMsgDOTATournamentInfo{} }
+func (m *CMsgDOTATournamentInfo) String() string { return proto.CompactTextString(m) }
+func (*CMsgDOTATournamentInfo) ProtoMessage()    {}
+
+func (m *CMsgDOTATournamentInfo) GetLeagueId() uint32 {
+	if m != nil && m.LeagueId != nil {
+		return *m.LeagueId
+	}
+	return 0
+}
+
+func (m *CMsgDOTATournamentInfo) GetPhaseList() []*CMsgDOTATournamentInfo_Phase {
+	if m != nil {
+		return m.PhaseList
+	}
+	return nil
+}
+
+func (m *CMsgDOTATournamentInfo) GetTeamsList() []*CMsgDOTATournamentInfo_Team {
+	if m != nil {
+		return m.TeamsList
+	}
+	return nil
+}
+
+func (m *CMsgDOTATournamentInfo) GetUpcomingMatchesList() []*CMsgDOTATournamentInfo_UpcomingMatch {
+	if m != nil {
+		return m.UpcomingMatchesList
+	}
+	return nil
+}
+
+func (m *CMsgDOTATournamentInfo) GetNewsList() []*CMsgDOTATournamentInfo_News {
+	if m != nil {
+		return m.NewsList
+	}
+	return nil
+}
+
+type CMsgDOTATournamentInfo_PhaseGroup struct {
+	GroupId          *uint32 `protobuf:"varint,1,opt,name=group_id" json:"group_id,omitempty"`
+	GroupName        *string `protobuf:"bytes,2,opt,name=group_name" json:"group_name,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CMsgDOTATournamentInfo_PhaseGroup) Reset()         { *m = CMsgDOTATournamentInfo_PhaseGroup{} }
+func (m *CMsgDOTATournamentInfo_PhaseGroup) String() string { return proto.CompactTextString(m) }
+func (*CMsgDOTATournamentInfo_PhaseGroup) ProtoMessage()    {}
+
+func (m *CMsgDOTATournamentInfo_PhaseGroup) GetGroupId() uint32 {
+	if m != nil && m.GroupId != nil {
+		return *m.GroupId
+	}
+	return 0
+}
+
+func (m *CMsgDOTATournamentInfo_PhaseGroup) GetGroupName() string {
+	if m != nil && m.GroupName != nil {
+		return *m.GroupName
+	}
+	return ""
+}
+
+type CMsgDOTATournamentInfo_Phase struct {
+	PhaseId          *uint32                              `protobuf:"varint,1,opt,name=phase_id" json:"phase_id,omitempty"`
+	PhaseName        *string                              `protobuf:"bytes,2,opt,name=phase_name" json:"phase_name,omitempty"`
+	TypeId           *uint32                              `protobuf:"varint,3,opt,name=type_id" json:"type_id,omitempty"`
+	Iterations       *uint32                              `protobuf:"varint,4,opt,name=iterations" json:"iterations,omitempty"`
+	MinStartTime     *uint32                              `protobuf:"varint,5,opt,name=min_start_time" json:"min_start_time,omitempty"`
+	MaxStartTime     *uint32                              `protobuf:"varint,6,opt,name=max_start_time" json:"max_start_time,omitempty"`
+	GroupList        []*CMsgDOTATournamentInfo_PhaseGroup `protobuf:"bytes,7,rep,name=group_list" json:"group_list,omitempty"`
+	XXX_unrecognized []byte                               `json:"-"`
+}
+
+func (m *CMsgDOTATournamentInfo_Phase) Reset()         { *m = CMsgDOTATournamentInfo_Phase{} }
+func (m *CMsgDOTATournamentInfo_Phase) String() string { return proto.CompactTextString(m) }
+func (*CMsgDOTATournamentInfo_Phase) ProtoMessage()    {}
+
+func (m *CMsgDOTATournamentInfo_Phase) GetPhaseId() uint32 {
+	if m != nil && m.PhaseId != nil {
+		return *m.PhaseId
+	}
+	return 0
+}
+
+func (m *CMsgDOTATournamentInfo_Phase) GetPhaseName() string {
+	if m != nil && m.PhaseName != nil {
+		return *m.PhaseName
+	}
+	return ""
+}
+
+func (m *CMsgDOTATournamentInfo_Phase) GetTypeId() uint32 {
+	if m != nil && m.TypeId != nil {
+		return *m.TypeId
+	}
+	return 0
+}
+
+func (m *CMsgDOTATournamentInfo_Phase) GetIterations() uint32 {
+	if m != nil && m.Iterations != nil {
+		return *m.Iterations
+	}
+	return 0
+}
+
+func (m *CMsgDOTATournamentInfo_Phase) GetMinStartTime() uint32 {
+	if m != nil && m.MinStartTime != nil {
+		return *m.MinStartTime
+	}
+	return 0
+}
+
+func (m *CMsgDOTATournamentInfo_Phase) GetMaxStartTime() uint32 {
+	if m != nil && m.MaxStartTime != nil {
+		return *m.MaxStartTime
+	}
+	return 0
+}
+
+func (m *CMsgDOTATournamentInfo_Phase) GetGroupList() []*CMsgDOTATournamentInfo_PhaseGroup {
+	if m != nil {
+		return m.GroupList
+	}
+	return nil
+}
+
+type CMsgDOTATournamentInfo_Team struct {
+	TeamId           *uint32 `protobuf:"varint,1,opt,name=team_id" json:"team_id,omitempty"`
+	Name             *string `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
+	Tag              *string `protobuf:"bytes,3,opt,name=tag" json:"tag,omitempty"`
+	TeamLogo         *uint64 `protobuf:"varint,4,opt,name=team_logo" json:"team_logo,omitempty"`
+	Eliminated       *bool   `protobuf:"varint,5,opt,name=eliminated" json:"eliminated,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CMsgDOTATournamentInfo_Team) Reset()         { *m = CMsgDOTATournamentInfo_Team{} }
+func (m *CMsgDOTATournamentInfo_Team) String() string { return proto.CompactTextString(m) }
+func (*CMsgDOTATournamentInfo_Team) ProtoMessage()    {}
+
+func (m *CMsgDOTATournamentInfo_Team) GetTeamId() uint32 {
+	if m != nil && m.TeamId != nil {
+		return *m.TeamId
+	}
+	return 0
+}
+
+func (m *CMsgDOTATournamentInfo_Team) GetName() string {
+	if m != nil && m.Name != nil {
+		return *m.Name
+	}
+	return ""
+}
+
+func (m *CMsgDOTATournamentInfo_Team) GetTag() string {
+	if m != nil && m.Tag != nil {
+		return *m.Tag
+	}
+	return ""
+}
+
+func (m *CMsgDOTATournamentInfo_Team) GetTeamLogo() uint64 {
+	if m != nil && m.TeamLogo != nil {
+		return *m.TeamLogo
+	}
+	return 0
+}
+
+func (m *CMsgDOTATournamentInfo_Team) GetEliminated() bool {
+	if m != nil && m.Eliminated != nil {
+		return *m.Eliminated
+	}
+	return false
+}
+
+type CMsgDOTATournamentInfo_UpcomingMatch struct {
+	SeriesId                    *uint32 `protobuf:"varint,1,opt,name=series_id" json:"series_id,omitempty"`
+	Team1Id                     *uint32 `protobuf:"varint,2,opt,name=team1_id" json:"team1_id,omitempty"`
+	Team2Id                     *uint32 `protobuf:"varint,3,opt,name=team2_id" json:"team2_id,omitempty"`
+	Bo                          *uint32 `protobuf:"varint,4,opt,name=bo" json:"bo,omitempty"`
+	StageName                   *string `protobuf:"bytes,5,opt,name=stage_name" json:"stage_name,omitempty"`
+	StartTime                   *uint32 `protobuf:"varint,6,opt,name=start_time" json:"start_time,omitempty"`
+	WinnerStage                 *string `protobuf:"bytes,7,opt,name=winner_stage" json:"winner_stage,omitempty"`
+	LoserStage                  *string `protobuf:"bytes,8,opt,name=loser_stage" json:"loser_stage,omitempty"`
+	Team1Tag                    *string `protobuf:"bytes,9,opt,name=team1_tag" json:"team1_tag,omitempty"`
+	Team2Tag                    *string `protobuf:"bytes,10,opt,name=team2_tag" json:"team2_tag,omitempty"`
+	Team1PrevOpponentTag        *string `protobuf:"bytes,11,opt,name=team1_prev_opponent_tag" json:"team1_prev_opponent_tag,omitempty"`
+	Team2PrevOpponentTag        *string `protobuf:"bytes,12,opt,name=team2_prev_opponent_tag" json:"team2_prev_opponent_tag,omitempty"`
+	Team1Logo                   *uint64 `protobuf:"varint,13,opt,name=team1_logo" json:"team1_logo,omitempty"`
+	Team2Logo                   *uint64 `protobuf:"varint,14,opt,name=team2_logo" json:"team2_logo,omitempty"`
+	Team1PrevOpponentLogo       *uint64 `protobuf:"varint,15,opt,name=team1_prev_opponent_logo" json:"team1_prev_opponent_logo,omitempty"`
+	Team2PrevOpponentLogo       *uint64 `protobuf:"varint,16,opt,name=team2_prev_opponent_logo" json:"team2_prev_opponent_logo,omitempty"`
+	Team1PrevOpponentId         *uint32 `protobuf:"varint,17,opt,name=team1_prev_opponent_id" json:"team1_prev_opponent_id,omitempty"`
+	Team2PrevOpponentId         *uint32 `protobuf:"varint,18,opt,name=team2_prev_opponent_id" json:"team2_prev_opponent_id,omitempty"`
+	Team1PrevMatchScore         *uint32 `protobuf:"varint,19,opt,name=team1_prev_match_score" json:"team1_prev_match_score,omitempty"`
+	Team1PrevMatchOpponentScore *uint32 `protobuf:"varint,20,opt,name=team1_prev_match_opponent_score" json:"team1_prev_match_opponent_score,omitempty"`
+	Team2PrevMatchScore         *uint32 `protobuf:"varint,21,opt,name=team2_prev_match_score" json:"team2_prev_match_score,omitempty"`
+	Team2PrevMatchOpponentScore *uint32 `protobuf:"varint,22,opt,name=team2_prev_match_opponent_score" json:"team2_prev_match_opponent_score,omitempty"`
+	PhaseType                   *uint32 `protobuf:"varint,23,opt,name=phase_type" json:"phase_type,omitempty"`
+	Team1Score                  *uint32 `protobuf:"varint,24,opt,name=team1_score" json:"team1_score,omitempty"`
+	Team2Score                  *uint32 `protobuf:"varint,25,opt,name=team2_score" json:"team2_score,omitempty"`
+	XXX_unrecognized            []byte  `json:"-"`
+}
+
+func (m *CMsgDOTATournamentInfo_UpcomingMatch) Reset()         { *m = CMsgDOTATournamentInfo_UpcomingMatch{} }
+func (m *CMsgDOTATournamentInfo_UpcomingMatch) String() string { return proto.CompactTextString(m) }
+func (*CMsgDOTATournamentInfo_UpcomingMatch) ProtoMessage()    {}
+
+func (m *CMsgDOTATournamentInfo_UpcomingMatch) GetSeriesId() uint32 {
+	if m != nil && m.SeriesId != nil {
+		return *m.SeriesId
+	}
+	return 0
+}
+
+func (m *CMsgDOTATournamentInfo_UpcomingMatch) GetTeam1Id() uint32 {
+	if m != nil && m.Team1Id != nil {
+		return *m.Team1Id
+	}
+	return 0
+}
+
+func (m *CMsgDOTATournamentInfo_UpcomingMatch) GetTeam2Id() uint32 {
+	if m != nil && m.Team2Id != nil {
+		return *m.Team2Id
+	}
+	return 0
+}
+
+func (m *CMsgDOTATournamentInfo_UpcomingMatch) GetBo() uint32 {
+	if m != nil && m.Bo != nil {
+		return *m.Bo
+	}
+	return 0
+}
+
+func (m *CMsgDOTATournamentInfo_UpcomingMatch) GetStageName() string {
+	if m != nil && m.StageName != nil {
+		return *m.StageName
+	}
+	return ""
+}
+
+func (m *CMsgDOTATournamentInfo_UpcomingMatch) GetStartTime() uint32 {
+	if m != nil && m.StartTime != nil {
+		return *m.StartTime
+	}
+	return 0
+}
+
+func (m *CMsgDOTATournamentInfo_UpcomingMatch) GetWinnerStage() string {
+	if m != nil && m.WinnerStage != nil {
+		return *m.WinnerStage
+	}
+	return ""
+}
+
+func (m *CMsgDOTATournamentInfo_UpcomingMatch) GetLoserStage() string {
+	if m != nil && m.LoserStage != nil {
+		return *m.LoserStage
+	}
+	return ""
+}
+
+func (m *CMsgDOTATournamentInfo_UpcomingMatch) GetTeam1Tag() string {
+	if m != nil && m.Team1Tag != nil {
+		return *m.Team1Tag
+	}
+	return ""
+}
+
+func (m *CMsgDOTATournamentInfo_UpcomingMatch) GetTeam2Tag() string {
+	if m != nil && m.Team2Tag != nil {
+		return *m.Team2Tag
+	}
+	return ""
+}
+
+func (m *CMsgDOTATournamentInfo_UpcomingMatch) GetTeam1PrevOpponentTag() string {
+	if m != nil && m.Team1PrevOpponentTag != nil {
+		return *m.Team1PrevOpponentTag
+	}
+	return ""
+}
+
+func (m *CMsgDOTATournamentInfo_UpcomingMatch) GetTeam2PrevOpponentTag() string {
+	if m != nil && m.Team2PrevOpponentTag != nil {
+		return *m.Team2PrevOpponentTag
+	}
+	return ""
+}
+
+func (m *CMsgDOTATournamentInfo_UpcomingMatch) GetTeam1Logo() uint64 {
+	if m != nil && m.Team1Logo != nil {
+		return *m.Team1Logo
+	}
+	return 0
+}
+
+func (m *CMsgDOTATournamentInfo_UpcomingMatch) GetTeam2Logo() uint64 {
+	if m != nil && m.Team2Logo != nil {
+		return *m.Team2Logo
+	}
+	return 0
+}
+
+func (m *CMsgDOTATournamentInfo_UpcomingMatch) GetTeam1PrevOpponentLogo() uint64 {
+	if m != nil && m.Team1PrevOpponentLogo != nil {
+		return *m.Team1PrevOpponentLogo
+	}
+	return 0
+}
+
+func (m *CMsgDOTATournamentInfo_UpcomingMatch) GetTeam2PrevOpponentLogo() uint64 {
+	if m != nil && m.Team2PrevOpponentLogo != nil {
+		return *m.Team2PrevOpponentLogo
+	}
+	return 0
+}
+
+func (m *CMsgDOTATournamentInfo_UpcomingMatch) GetTeam1PrevOpponentId() uint32 {
+	if m != nil && m.Team1PrevOpponentId != nil {
+		return *m.Team1PrevOpponentId
+	}
+	return 0
+}
+
+func (m *CMsgDOTATournamentInfo_UpcomingMatch) GetTeam2PrevOpponentId() uint32 {
+	if m != nil && m.Team2PrevOpponentId != nil {
+		return *m.Team2PrevOpponentId
+	}
+	return 0
+}
+
+func (m *CMsgDOTATournamentInfo_UpcomingMatch) GetTeam1PrevMatchScore() uint32 {
+	if m != nil && m.Team1PrevMatchScore != nil {
+		return *m.Team1PrevMatchScore
+	}
+	return 0
+}
+
+func (m *CMsgDOTATournamentInfo_UpcomingMatch) GetTeam1PrevMatchOpponentScore() uint32 {
+	if m != nil && m.Team1PrevMatchOpponentScore != nil {
+		return *m.Team1PrevMatchOpponentScore
+	}
+	return 0
+}
+
+func (m *CMsgDOTATournamentInfo_UpcomingMatch) GetTeam2PrevMatchScore() uint32 {
+	if m != nil && m.Team2PrevMatchScore != nil {
+		return *m.Team2PrevMatchScore
+	}
+	return 0
+}
+
+func (m *CMsgDOTATournamentInfo_UpcomingMatch) GetTeam2PrevMatchOpponentScore() uint32 {
+	if m != nil && m.Team2PrevMatchOpponentScore != nil {
+		return *m.Team2PrevMatchOpponentScore
+	}
+	return 0
+}
+
+func (m *CMsgDOTATournamentInfo_UpcomingMatch) GetPhaseType() uint32 {
+	if m != nil && m.PhaseType != nil {
+		return *m.PhaseType
+	}
+	return 0
+}
+
+func (m *CMsgDOTATournamentInfo_UpcomingMatch) GetTeam1Score() uint32 {
+	if m != nil && m.Team1Score != nil {
+		return *m.Team1Score
+	}
+	return 0
+}
+
+func (m *CMsgDOTATournamentInfo_UpcomingMatch) GetTeam2Score() uint32 {
+	if m != nil && m.Team2Score != nil {
+		return *m.Team2Score
+	}
+	return 0
+}
+
+type CMsgDOTATournamentInfo_News struct {
+	Link             *string `protobuf:"bytes,1,opt,name=link" json:"link,omitempty"`
+	Title            *string `protobuf:"bytes,2,opt,name=title" json:"title,omitempty"`
+	Image            *string `protobuf:"bytes,3,opt,name=image" json:"image,omitempty"`
+	Timestamp        *uint32 `protobuf:"varint,4,opt,name=timestamp" json:"timestamp,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CMsgDOTATournamentInfo_News) Reset()         { *m = CMsgDOTATournamentInfo_News{} }
+func (m *CMsgDOTATournamentInfo_News) String() string { return proto.CompactTextString(m) }
+func (*CMsgDOTATournamentInfo_News) ProtoMessage()    {}
+
+func (m *CMsgDOTATournamentInfo_News) GetLink() string {
+	if m != nil && m.Link != nil {
+		return *m.Link
+	}
+	return ""
+}
+
+func (m *CMsgDOTATournamentInfo_News) GetTitle() string {
+	if m != nil && m.Title != nil {
+		return *m.Title
+	}
+	return ""
+}
+
+func (m *CMsgDOTATournamentInfo_News) GetImage() string {
+	if m != nil && m.Image != nil {
+		return *m.Image
+	}
+	return ""
+}
+
+func (m *CMsgDOTATournamentInfo_News) GetTimestamp() uint32 {
+	if m != nil && m.Timestamp != nil {
+		return *m.Timestamp
+	}
+	return 0
+}
+
+type CMsgWeekendTourneyOpts struct {
+	Participating    *bool   `protobuf:"varint,1,opt,name=participating" json:"participating,omitempty"`
+	DivisionId       *uint32 `protobuf:"varint,2,opt,name=division_id" json:"division_id,omitempty"`
+	Buyin            *uint32 `protobuf:"varint,3,opt,name=buyin" json:"buyin,omitempty"`
+	SkillLevel       *uint32 `protobuf:"varint,4,opt,name=skill_level" json:"skill_level,omitempty"`
+	MatchGroups      *uint32 `protobuf:"varint,5,opt,name=match_groups" json:"match_groups,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CMsgWeekendTourneyOpts) Reset()         { *m = CMsgWeekendTourneyOpts{} }
+func (m *CMsgWeekendTourneyOpts) String() string { return proto.CompactTextString(m) }
+func (*CMsgWeekendTourneyOpts) ProtoMessage()    {}
+
+func (m *CMsgWeekendTourneyOpts) GetParticipating() bool {
+	if m != nil && m.Participating != nil {
+		return *m.Participating
+	}
+	return false
+}
+
+func (m *CMsgWeekendTourneyOpts) GetDivisionId() uint32 {
+	if m != nil && m.DivisionId != nil {
+		return *m.DivisionId
+	}
+	return 0
+}
+
+func (m *CMsgWeekendTourneyOpts) GetBuyin() uint32 {
+	if m != nil && m.Buyin != nil {
+		return *m.Buyin
+	}
+	return 0
+}
+
+func (m *CMsgWeekendTourneyOpts) GetSkillLevel() uint32 {
+	if m != nil && m.SkillLevel != nil {
+		return *m.SkillLevel
+	}
+	return 0
+}
+
+func (m *CMsgWeekendTourneyOpts) GetMatchGroups() uint32 {
+	if m != nil && m.MatchGroups != nil {
+		return *m.MatchGroups
+	}
+	return 0
+}
+
 func init() {
 	proto.RegisterEnum("dota.ETournamentGameState", ETournamentGameState_name, ETournamentGameState_value)
 	proto.RegisterEnum("dota.ETournamentTeamState", ETournamentTeamState_name, ETournamentTeamState_value)
 	proto.RegisterEnum("dota.ETournamentState", ETournamentState_name, ETournamentState_value)
 	proto.RegisterEnum("dota.ETournamentNodeState", ETournamentNodeState_name, ETournamentNodeState_value)
+	proto.RegisterEnum("dota.ETournamentEvent", ETournamentEvent_name, ETournamentEvent_value)
 	proto.RegisterEnum("dota.DOTA_2013PassportSelectionIndices", DOTA_2013PassportSelectionIndices_name, DOTA_2013PassportSelectionIndices_value)
 	proto.RegisterEnum("dota.CMsgDOTACreateFantasyLeagueResponse_EResult", CMsgDOTACreateFantasyLeagueResponse_EResult_name, CMsgDOTACreateFantasyLeagueResponse_EResult_value)
 	proto.RegisterEnum("dota.CMsgDOTAFantasyLeagueEditInfoResponse_EResult", CMsgDOTAFantasyLeagueEditInfoResponse_EResult_name, CMsgDOTAFantasyLeagueEditInfoResponse_EResult_value)
