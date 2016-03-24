@@ -43,7 +43,6 @@ type Parser struct {
 	packetEntityHandlers    []packetEntityHandler
 	packetEntityFullPackets int
 	serializers             map[string]map[int32]*dt
-	spawnGroups             map[uint32]*spawnGroup
 
 	reader            *Reader
 	isStopping        bool
@@ -79,7 +78,6 @@ func NewParser(buf []byte) (*Parser, error) {
 		gameEventNames:       make(map[int32]string),
 		gameEventTypes:       make(map[string]*gameEventType),
 		packetEntityHandlers: make([]packetEntityHandler, 0),
-		spawnGroups:          make(map[uint32]*spawnGroup),
 
 		reader:     NewReader(buf),
 		isStopping: false,
@@ -104,11 +102,6 @@ func NewParser(buf []byte) (*Parser, error) {
 	parser.Callbacks.OnCSVCMsg_PacketEntities(parser.onCSVCMsg_PacketEntities)
 	parser.Callbacks.OnCSVCMsg_UpdateStringTable(parser.onCSVCMsg_UpdateStringTable)
 	parser.Callbacks.OnCSVCMsg_ServerInfo(parser.onCSVCMsg_ServerInfo)
-	parser.Callbacks.OnCNETMsg_SpawnGroup_Load(parser.onCNETMsg_SpawnGroup_Load)
-	parser.Callbacks.OnCNETMsg_SpawnGroup_ManifestUpdate(parser.onCNETMsg_SpawnGroup_ManifestUpdate)
-	parser.Callbacks.OnCNETMsg_SpawnGroup_SetCreationTick(parser.onCNETMsg_SpawnGroup_SetCreationTick)
-	parser.Callbacks.OnCNETMsg_SpawnGroup_Unload(parser.onCNETMsg_SpawnGroup_Unload)
-	parser.Callbacks.OnCNETMsg_SpawnGroup_LoadCompleted(parser.onCNETMsg_SpawnGroup_LoadCompleted)
 	parser.Callbacks.OnCMsgSource1LegacyGameEventList(parser.onCMsgSource1LegacyGameEventList)
 	parser.Callbacks.OnCMsgSource1LegacyGameEvent(parser.onCMsgSource1LegacyGameEvent)
 
