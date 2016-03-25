@@ -84,9 +84,6 @@ func TestFieldpath(t *testing.T) {
 	p := &Parser{}
 	fs := p.ParseSendTables(m, GetDefaultPropertySerializerTable())
 
-	// Build the huffman tree
-	huf := newFieldpathHuffman()
-
 	//printCodes(huf, []byte{})
 	//_debugf("%s", fs.dump_json("CSpeechBubbleManager"))
 
@@ -111,7 +108,7 @@ func TestFieldpath(t *testing.T) {
 		debugMode = s.debug
 
 		// Initialize a field path and walk it
-		fieldPath := newFieldpath(serializer, &huf)
+		fieldPath := newFieldpath(serializer)
 		fieldPath.walk(NewReader(buf))
 
 		// Verify field count

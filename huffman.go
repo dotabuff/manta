@@ -110,7 +110,7 @@ func (th treeHeap) Swap(i, j int) {
 }
 
 // Construct a tree from a map of weight -> item
-func buildTree(symFreqs []int) HuffmanTree {
+func buildHuffmanTree(symFreqs []int) HuffmanTree {
 	var trees treeHeap
 	for v, w := range symFreqs {
 		if w == 0 {

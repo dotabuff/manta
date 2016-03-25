@@ -1,13 +1,5 @@
 package manta
 
-var huf HuffmanTree
-
-func init() {
-	if huf == nil {
-		huf = newFieldpathHuffman()
-	}
-}
-
 // Properties is an instance of a set of properties containing key-value data.
 type Properties struct {
 	KV map[string]interface{}
@@ -97,7 +89,7 @@ func (p *Properties) FetchString(k string) (string, bool) {
 // Reads properties into p using the given reader and serializer.
 func (p *Properties) readProperties(r *Reader, ser *dt) {
 	// Create fieldpath
-	fieldPath := newFieldpath(ser, &huf)
+	fieldPath := newFieldpath(ser)
 
 	// Get a list of the included fields
 	fieldPath.walk(r)

@@ -4,6 +4,10 @@ import (
 	"strconv"
 )
 
+// A HuffmanTree for the fieldpath, built once at init time  based on fieldpath
+// lookup ops.
+var fpHuf HuffmanTree = newFieldpathHuffman()
+
 // Thanks to @spheenik for being resilient in his efforts to figure out the rest of the tree
 
 // A single field to be read
@@ -17,7 +21,6 @@ type fieldpath struct {
 	parent   *dt
 	fields   []*fieldpath_field
 	index    []int32
-	tree     *HuffmanTree
 	finished bool
 }
 
@@ -73,56 +76,37 @@ var fieldpathLookup = []fieldpathOp{
 }
 
 // Initialize a fieldpath object
-func newFieldpath(parentTbl *dt, huf *HuffmanTree) *fieldpath {
+func newFieldpath(parentTbl *dt) *fieldpath {
 	fp := &fieldpath{
 		parent:   parentTbl,
-		fields:   make([]*fieldpath_field, 0),
-		index:    make([]int32, 0),
-		tree:     huf,
+		fields:   []*fieldpath_field{},
+		index:    []int32{-1}, // always start at -1
 		finished: false,
 	}
-
-	fp.index = append(fp.index, -1) // Always start at -1
 
 	return fp
 }
 
 // Walk an encoded fieldpath based on a huffman tree
 func (fp *fieldpath) walk(r *Reader) {
-	cnt := 0
-	root := fp.tree
-	node := root
+	var node HuffmanTree = fpHuf
+	var next HuffmanTree
 
-	for fp.finished == false {
-		cnt++
+	for !fp.finished {
 		if r.readBits(1) == 1 {
-			if i := (*node).Right(); i.IsLeaf() {
-				node = root
-				fieldpathLookup[i.Value()].Function(r, fp)
+			next = node.Right()
+		} else {
+			next = node.Left()
+		}
 
-				if fp.finished == false {
-					fp.addField()
-					_debugfl(6, "Reached in %d bits, %s, %d", cnt, fp.fields[len(fp.fields)-1].Name, r.pos)
-				}
-
-				cnt = 0
-			} else {
-				node = &i
+		if next.IsLeaf() {
+			node = fpHuf
+			fieldpathLookup[next.Value()].Function(r, fp)
+			if !fp.finished {
+				fp.addField()
 			}
 		} else {
-			if i := (*node).Left(); i.IsLeaf() {
-				node = root
-				fieldpathLookup[i.Value()].Function(r, fp)
-
-				if fp.finished == false {
-					fp.addField()
-					_debugfl(6, "Reached in %d bits, %s, %d", cnt, fp.fields[len(fp.fields)-1].Name, r.pos)
-				}
-
-				cnt = 0
-			} else {
-				node = &i
-			}
+			node = next
 		}
 	}
 }
@@ -162,13 +146,13 @@ func (fp *fieldpath) addField() {
 
 // Returns a huffman tree based on the operation weights
 func newFieldpathHuffman() HuffmanTree {
-	// Generate feq map
+	// Generate freq map
 	huffmanlist := make([]int, 40)
 	for i, fpo := range fieldpathLookup {
 		huffmanlist[i] = fpo.Weight
 	}
 
-	return buildTree(huffmanlist)
+	return buildHuffmanTree(huffmanlist)
 }
 
 // All different fieldops below
