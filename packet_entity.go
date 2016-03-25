@@ -4,7 +4,7 @@ import (
 	"github.com/dotabuff/manta/dota"
 )
 
-// Represents the state of an entity
+// PacketEntity represents the current state of an entity
 type PacketEntity struct {
 	Index         int32
 	ClassId       int32
@@ -16,7 +16,7 @@ type PacketEntity struct {
 	flatTbl *dt
 }
 
-// Represents a Packet Entity Event Type
+// EntityEventType represents an entity operation type
 type EntityEventType int
 
 // Possible Packet Entity Event Types

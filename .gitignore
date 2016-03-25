@@ -1,6 +1,5 @@
-/fixtures/tmp
 /manta
 /manta.test
-/example/chat/chat
 /replays/*.dem*
 /tmp
+/vendor

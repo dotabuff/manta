@@ -4,9 +4,9 @@ go:
   - 1.6
 
 install:
-  - export PATH=$PATH:$HOME/gopath/bin
-  - go get golang.org/x/tools/cmd/cover
-  - go get -t
+  - mkdir $GOPATH/bin
+  - curl -s -L https://github.com/Masterminds/glide/releases/download/0.9.3/glide-0.9.3-linux-amd64.tar.gz | tar zxv -C $GOPATH/bin --strip-components=1
+  - glide install
 
 script:
   - make test

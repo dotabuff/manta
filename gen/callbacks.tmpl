@@ -1,0 +1,84 @@
+//go:generate go run gen/callbacks.go
+package manta
+
+import (
+  "github.com/dotabuff/manta/dota"
+  "github.com/golang/protobuf/proto"
+)
+
+// Callbacks decodes and routes replay events to callback functions
+type Callbacks struct {
+{{ range .DemoTypes }}  on{{ .Callback }} []func(*dota.{{ .TypeName }}) error
+{{ end }}{{ range .PacketTypes }}  on{{ .Callback }} []func(*dota.{{ .TypeName }}) error
+{{ end }}
+}
+
+{{ range .DemoTypes }}// On{{ .Callback }} registers a callback {{ .EnumName }}
+func(c *Callbacks) On{{ .Callback }}(fn func(*dota.{{ .TypeName }}) error) {
+  c.on{{ .Callback }} = append(c.on{{ .Callback }}, fn)
+}
+{{ end }}{{ range .PacketTypes }}// On{{ .Callback }} registers a callback for {{ .EnumName }}
+func(c *Callbacks) On{{ .Callback }}(fn func(*dota.{{ .TypeName }}) error) {
+  c.on{{ .Callback }} = append(c.on{{ .Callback }}, fn)
+}
+{{ end }}
+
+func (c *Callbacks) callByDemoType(t int32, buf []byte) error {
+  switch t {
+{{ range .DemoTypes }}  case {{ .Id }}: // dota.{{ .EnumName }}
+    if c.on{{ .Callback }} == nil {
+      return nil
+    }
+
+    msg := &dota.{{ .TypeName }}{}
+    if err := proto.Unmarshal(buf, msg); err != nil {
+      return err
+    }
+
+    for _, fn := range c.on{{ .Callback }} {
+      if err := fn(msg); err != nil {
+        return err
+      }
+    }
+
+    return nil
+
+{{ end }}
+  }
+
+  if v(1) {
+    _debugf("warning: no demo type %d found", t)
+  }
+
+  return nil
+}
+
+func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
+  switch t {
+{{ range .PacketTypes }}  case {{ .Id }}: // dota.{{ .EnumName }}
+    if c.on{{ .Callback }} == nil {
+      return nil
+    }
+
+    msg := &dota.{{ .TypeName }}{}
+    if err := proto.Unmarshal(buf, msg); err != nil {
+      return err
+    }
+
+    for _, fn := range c.on{{ .Callback }} {
+      if err := fn(msg); err != nil {
+        return err
+      }
+    }
+
+    return nil
+
+{{ end }}
+  }
+
+  if v(1) {
+    _debugf("warning: no packet type %d found", t)
+  }
+
+  return nil
+}

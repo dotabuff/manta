@@ -275,7 +275,7 @@ func TestReadProperties(t *testing.T) {
 
 	// Retrieve the flattened field serializer
 	p := &Parser{}
-	fs := p.ParseSendTables(m, GetDefaultPropertySerializerTable())
+	fs := p.parseSendTables(m, newPropertySerializerTable())
 
 	// Iterate through scenarios
 	for _, s := range scenarios {

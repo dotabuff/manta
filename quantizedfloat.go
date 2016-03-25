@@ -14,9 +14,9 @@ const qff_encode_zero uint32 = (1 << 2)
 const qff_encode_integers uint32 = (1 << 3)
 
 // Quantized-decoder struct containing the computed properties
-type QuantizedFloatDecoder struct {
-	Field      *dt_field // points to datatable field
-	Low        float32   // Gets recomputed for round up / down
+type quantizedFloatDecoder struct {
+	Field      *dtField // points to datatable field
+	Low        float32  // Gets recomputed for round up / down
 	High       float32
 	HighLowMul float32
 	DecMul     float32
@@ -27,7 +27,7 @@ type QuantizedFloatDecoder struct {
 }
 
 // Validates / recomputes decoder flags
-func (qfd *QuantizedFloatDecoder) ValidateFlags() {
+func (qfd *quantizedFloatDecoder) validateFlags() {
 	// Check that we have some flags set
 	if qfd.Field.Flags != nil {
 		qfd.Flags = uint32(*qfd.Field.Flags)
@@ -69,7 +69,7 @@ func (qfd *QuantizedFloatDecoder) ValidateFlags() {
 }
 
 // Assign multipliers
-func (qfd *QuantizedFloatDecoder) AssignMultipliers(steps uint32) {
+func (qfd *quantizedFloatDecoder) assignMultipliers(steps uint32) {
 	qfd.HighLowMul = 0.0
 	Range := qfd.High - qfd.Low
 
@@ -111,7 +111,7 @@ func (qfd *QuantizedFloatDecoder) AssignMultipliers(steps uint32) {
 }
 
 // Quantize a float
-func (qfd *QuantizedFloatDecoder) Quantize(val float32) float32 {
+func (qfd *quantizedFloatDecoder) quantize(val float32) float32 {
 	if val < qfd.Low {
 		if (uint32(*qfd.Field.Flags) & qff_roundup) == 0 {
 			_panicf("Field tried to quantize an out of range value")
@@ -131,7 +131,7 @@ func (qfd *QuantizedFloatDecoder) Quantize(val float32) float32 {
 }
 
 // Actual float decoding
-func (qfd *QuantizedFloatDecoder) Decode(r *Reader) float32 {
+func (qfd *quantizedFloatDecoder) decode(r *Reader) float32 {
 	if (qfd.Flags&qff_rounddown) != 0 && r.readBoolean() {
 		return qfd.Low
 	}
@@ -148,8 +148,8 @@ func (qfd *QuantizedFloatDecoder) Decode(r *Reader) float32 {
 }
 
 // Creates a new quantized float decoder based on given field
-func InitQFD(f *dt_field) *QuantizedFloatDecoder {
-	qfd := &QuantizedFloatDecoder{}
+func newQuantizedFloatDecoder(f *dtField) *quantizedFloatDecoder {
+	qfd := &quantizedFloatDecoder{}
 	qfd.Field = f
 
 	// Set common properties
@@ -176,7 +176,7 @@ func InitQFD(f *dt_field) *QuantizedFloatDecoder {
 	}
 
 	// Validate flags
-	qfd.ValidateFlags()
+	qfd.validateFlags()
 
 	// Handle Round Up, Round Down
 	steps := (1 << uint(qfd.Bitcount))
@@ -222,23 +222,23 @@ func InitQFD(f *dt_field) *QuantizedFloatDecoder {
 	}
 
 	// Assign multipliers
-	qfd.AssignMultipliers(uint32(steps))
+	qfd.assignMultipliers(uint32(steps))
 
 	// Remove unessecary flags
 	if (qfd.Flags & qff_rounddown) != 0 {
-		if qfd.Quantize(qfd.Low) == qfd.Low {
+		if qfd.quantize(qfd.Low) == qfd.Low {
 			qfd.Flags &= ^qff_rounddown
 		}
 	}
 
 	if (qfd.Flags & qff_roundup) != 0 {
-		if qfd.Quantize(qfd.High) == qfd.High {
+		if qfd.quantize(qfd.High) == qfd.High {
 			qfd.Flags &= ^qff_roundup
 		}
 	}
 
 	if (qfd.Flags & qff_encode_zero) != 0 {
-		if qfd.Quantize(0.0) == 0.0 {
+		if qfd.quantize(0.0) == 0.0 {
 			qfd.Flags &= ^qff_encode_zero
 		}
 	}

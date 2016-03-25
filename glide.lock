@@ -1,0 +1,31 @@
+hash: 2070e80a38f413a63a933adcd7da3ebd4755fed95fa9523163721d56bb9794ff
+updated: 2016-03-25T18:43:01.207986422-05:00
+imports:
+- name: github.com/davecgh/go-spew
+  version: 5215b55f46b2b919f50a1df0eaa5886afe4e3b3d
+  subpackages:
+  - spew
+- name: github.com/fatih/color
+  version: 533cd7fd8a85905f67a1753afb4deddc85ea174f
+- name: github.com/golang/protobuf
+  version: 8d92cf5fc15a4382f8964b08e1f42a75c0591aa3
+  subpackages:
+  - proto
+  - protoc-gen-go/descriptor
+- name: github.com/golang/snappy
+  version: 5f1c01d9f64b941dd9582c638279d046eda6ca31
+- name: github.com/mattn/go-colorable
+  version: 9cbef7c35391cca05f15f8181dc0b18bc9736dbb
+  repo: https://github.com/mattn/go-colorable
+- name: github.com/mattn/go-isatty
+  version: 56b76bdf51f7708750eac80fa38b952bb9f32639
+  repo: https://github.com/mattn/go-isatty
+- name: github.com/stretchr/testify
+  version: 6fe211e493929a8aac0469b93f28b1d0688a9a3a
+  subpackages:
+  - assert
+- name: golang.org/x/sys
+  version: 320cb01ddbbf0473674c2585f9b6e245721de355
+  subpackages:
+  - unix
+devImports: []

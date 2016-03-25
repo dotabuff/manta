@@ -8,41 +8,43 @@ import (
 )
 
 // Type for a decoder function
-type DecodeFcn func(*Reader, *dt_field) interface{}
+type decodeFn func(*Reader, *dtField) interface{}
 
 // PropertySerializer interface
-type PropertySerializer struct {
-	Decode          DecodeFcn
-	DecodeContainer DecodeFcn
+type propertySerializer struct {
+	Decode          decodeFn
+	DecodeContainer decodeFn
 	IsArray         bool
 	Length          uint32
-	ArraySerializer *PropertySerializer
+	ArraySerializer *propertySerializer
 	Name            string
 }
 
 // Contains a list of available property serializers
-type PropertySerializerTable struct {
-	Serializers map[string]*PropertySerializer
+type propertySerializerTable struct {
+	Serializers map[string]*propertySerializer
 }
 
 // Returns a table containing all know property serializers
-func GetDefaultPropertySerializerTable() *PropertySerializerTable {
-	return &PropertySerializerTable{Serializers: map[string]*PropertySerializer{}}
+func newPropertySerializerTable() *propertySerializerTable {
+	return &propertySerializerTable{
+		Serializers: map[string]*propertySerializer{},
+	}
 }
 
 // Regex for array and vector
 var matchArray = regexp.MustCompile(`([^[\]]+)\[(\d+)]`)
 var matchVector = regexp.MustCompile(`CUtlVector\<\s(.*)\s>$`)
 
-// Fills serializer in dt_field
-func (pst *PropertySerializerTable) FillSerializer(field *dt_field) {
+// Fills serializer in dtField
+func (pst *propertySerializerTable) FillSerializer(field *dtField) {
 	// Handle special decoders that need the complete field data here
 	switch field.Name {
 	case "m_flSimulationTime":
-		field.Serializer = &PropertySerializer{decodeSimTime, nil, false, 0, nil, "unkown"}
+		field.Serializer = &propertySerializer{decodeSimTime, nil, false, 0, nil, "unkown"}
 		return
 	case "m_flAnimTime":
-		field.Serializer = &PropertySerializer{decodeSimTime, nil, false, 0, nil, "unkown"}
+		field.Serializer = &propertySerializer{decodeSimTime, nil, false, 0, nil, "unkown"}
 		return
 	}
 
@@ -57,19 +59,19 @@ func (pst *PropertySerializerTable) FillSerializer(field *dt_field) {
 
 	}
 
-	field.Serializer = pst.GetPropertySerializerByName(field.Type)
+	field.Serializer = pst.getPropertySerializerByName(field.Type)
 }
 
 // Returns a serializer by name
-func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *PropertySerializer {
+func (pst *propertySerializerTable) getPropertySerializerByName(name string) *propertySerializer {
 	// Return existing serializer
 	if ser := pst.Serializers[name]; ser != nil {
 		return ser
 	}
 
 	// Set decoder
-	var decoder DecodeFcn
-	var decoderContainer DecodeFcn
+	var decoder decodeFn
+	var decoderContainer decodeFn
 
 	switch name {
 	case "float32":
@@ -122,7 +124,7 @@ func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *Pr
 		case hasPrefix(name, "CUtlVector< "):
 			if match := matchVector.FindStringSubmatch(name); match != nil {
 				decoderContainer = decodeVector
-				decoder = pst.GetPropertySerializerByName(match[1]).Decode
+				decoder = pst.getPropertySerializerByName(match[1]).Decode
 			} else {
 				_panicf("Unable to read vector type for %s", name)
 			}
@@ -148,11 +150,11 @@ func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *Pr
 
 		serializer, found := pst.Serializers[typeName]
 		if !found {
-			serializer = pst.GetPropertySerializerByName(typeName)
+			serializer = pst.getPropertySerializerByName(typeName)
 			pst.Serializers[typeName] = serializer
 		}
 
-		ps := &PropertySerializer{
+		ps := &propertySerializer{
 			Decode:          serializer.Decode,
 			DecodeContainer: decoderContainer,
 			IsArray:         true,
@@ -165,12 +167,12 @@ func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *Pr
 	}
 
 	if match := matchVector.FindStringSubmatch(name); match != nil {
-		ps := &PropertySerializer{
+		ps := &propertySerializer{
 			Decode:          decoder,
 			DecodeContainer: decoderContainer,
 			IsArray:         true,
 			Length:          uint32(1024),
-			ArraySerializer: &PropertySerializer{},
+			ArraySerializer: &propertySerializer{},
 		}
 		pst.Serializers[name] = ps
 		return ps
@@ -181,11 +183,11 @@ func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *Pr
 
 		serializer, found := pst.Serializers[typeName]
 		if !found {
-			serializer = pst.GetPropertySerializerByName(typeName)
+			serializer = pst.getPropertySerializerByName(typeName)
 			pst.Serializers[typeName] = serializer
 		}
 
-		ps := &PropertySerializer{
+		ps := &propertySerializer{
 			Decode:          serializer.Decode,
 			DecodeContainer: decoderContainer,
 			IsArray:         true,
@@ -203,11 +205,11 @@ func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *Pr
 
 		serializer, found := pst.Serializers[typeName]
 		if !found {
-			serializer = pst.GetPropertySerializerByName(typeName)
+			serializer = pst.getPropertySerializerByName(typeName)
 			pst.Serializers[typeName] = serializer
 		}
 
-		ps := &PropertySerializer{
+		ps := &propertySerializer{
 			Decode:          serializer.Decode,
 			DecodeContainer: decoderContainer,
 			IsArray:         true,
@@ -225,7 +227,7 @@ func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *Pr
 	if name == "m_SpeechBubbles" {
 		typeName := "m_SpeechBubbles"
 
-		ps := &PropertySerializer{
+		ps := &propertySerializer{
 			Decode:          decoder,
 			DecodeContainer: decoderContainer,
 			IsArray:         true,
@@ -239,7 +241,7 @@ func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *Pr
 	}
 
 	if name == "DOTA_PlayerChallengeInfo" || name == "DOTA_CombatLogQueryProgress" {
-		ps := &PropertySerializer{
+		ps := &propertySerializer{
 			Decode:          decoder,
 			DecodeContainer: decoderContainer,
 			IsArray:         true,
@@ -253,5 +255,5 @@ func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *Pr
 	}
 
 	// This function should panic at some point
-	return &PropertySerializer{decoder, decoderContainer, false, 0, nil, "unkown"}
+	return &propertySerializer{decoder, decoderContainer, false, 0, nil, "unkown"}
 }
