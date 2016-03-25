@@ -134,7 +134,7 @@ func (p *Parser) Start() error {
 		p.Tick = msg.tick
 
 		// Invoke callbacks for the given message type.
-		if err = p.CallByDemoType(msg.typeId, msg.data); err != nil {
+		if err = p.Callbacks.callByDemoType(msg.typeId, msg.data); err != nil {
 			return err
 		}
 	}

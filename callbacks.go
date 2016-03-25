@@ -1,0 +1,4737 @@
+//go:generate go run gen/callbacks.go
+package manta
+
+import (
+	"github.com/dotabuff/manta/dota"
+	"github.com/golang/protobuf/proto"
+)
+
+// Callbacks decodes and routes replay events to callback functions
+type Callbacks struct {
+	onCDemoStop                               []func(*dota.CDemoStop) error
+	onCDemoFileHeader                         []func(*dota.CDemoFileHeader) error
+	onCDemoFileInfo                           []func(*dota.CDemoFileInfo) error
+	onCDemoSyncTick                           []func(*dota.CDemoSyncTick) error
+	onCDemoSendTables                         []func(*dota.CDemoSendTables) error
+	onCDemoClassInfo                          []func(*dota.CDemoClassInfo) error
+	onCDemoStringTables                       []func(*dota.CDemoStringTables) error
+	onCDemoPacket                             []func(*dota.CDemoPacket) error
+	onCDemoSignonPacket                       []func(*dota.CDemoPacket) error
+	onCDemoConsoleCmd                         []func(*dota.CDemoConsoleCmd) error
+	onCDemoCustomData                         []func(*dota.CDemoCustomData) error
+	onCDemoCustomDataCallbacks                []func(*dota.CDemoCustomDataCallbacks) error
+	onCDemoUserCmd                            []func(*dota.CDemoUserCmd) error
+	onCDemoFullPacket                         []func(*dota.CDemoFullPacket) error
+	onCDemoSaveGame                           []func(*dota.CDemoSaveGame) error
+	onCDemoSpawnGroups                        []func(*dota.CDemoSpawnGroups) error
+	onCNETMsg_NOP                             []func(*dota.CNETMsg_NOP) error
+	onCNETMsg_Disconnect                      []func(*dota.CNETMsg_Disconnect) error
+	onCNETMsg_SplitScreenUser                 []func(*dota.CNETMsg_SplitScreenUser) error
+	onCNETMsg_Tick                            []func(*dota.CNETMsg_Tick) error
+	onCNETMsg_StringCmd                       []func(*dota.CNETMsg_StringCmd) error
+	onCNETMsg_SetConVar                       []func(*dota.CNETMsg_SetConVar) error
+	onCNETMsg_SignonState                     []func(*dota.CNETMsg_SignonState) error
+	onCNETMsg_SpawnGroup_Load                 []func(*dota.CNETMsg_SpawnGroup_Load) error
+	onCNETMsg_SpawnGroup_ManifestUpdate       []func(*dota.CNETMsg_SpawnGroup_ManifestUpdate) error
+	onCNETMsg_SpawnGroup_SetCreationTick      []func(*dota.CNETMsg_SpawnGroup_SetCreationTick) error
+	onCNETMsg_SpawnGroup_Unload               []func(*dota.CNETMsg_SpawnGroup_Unload) error
+	onCNETMsg_SpawnGroup_LoadCompleted        []func(*dota.CNETMsg_SpawnGroup_LoadCompleted) error
+	onCSVCMsg_ServerInfo                      []func(*dota.CSVCMsg_ServerInfo) error
+	onCSVCMsg_FlattenedSerializer             []func(*dota.CSVCMsg_FlattenedSerializer) error
+	onCSVCMsg_ClassInfo                       []func(*dota.CSVCMsg_ClassInfo) error
+	onCSVCMsg_SetPause                        []func(*dota.CSVCMsg_SetPause) error
+	onCSVCMsg_CreateStringTable               []func(*dota.CSVCMsg_CreateStringTable) error
+	onCSVCMsg_UpdateStringTable               []func(*dota.CSVCMsg_UpdateStringTable) error
+	onCSVCMsg_VoiceInit                       []func(*dota.CSVCMsg_VoiceInit) error
+	onCSVCMsg_VoiceData                       []func(*dota.CSVCMsg_VoiceData) error
+	onCSVCMsg_Print                           []func(*dota.CSVCMsg_Print) error
+	onCSVCMsg_Sounds                          []func(*dota.CSVCMsg_Sounds) error
+	onCSVCMsg_SetView                         []func(*dota.CSVCMsg_SetView) error
+	onCSVCMsg_ClearAllStringTables            []func(*dota.CSVCMsg_ClearAllStringTables) error
+	onCSVCMsg_CmdKeyValues                    []func(*dota.CSVCMsg_CmdKeyValues) error
+	onCSVCMsg_BSPDecal                        []func(*dota.CSVCMsg_BSPDecal) error
+	onCSVCMsg_SplitScreen                     []func(*dota.CSVCMsg_SplitScreen) error
+	onCSVCMsg_PacketEntities                  []func(*dota.CSVCMsg_PacketEntities) error
+	onCSVCMsg_Prefetch                        []func(*dota.CSVCMsg_Prefetch) error
+	onCSVCMsg_Menu                            []func(*dota.CSVCMsg_Menu) error
+	onCSVCMsg_GetCvarValue                    []func(*dota.CSVCMsg_GetCvarValue) error
+	onCSVCMsg_StopSound                       []func(*dota.CSVCMsg_StopSound) error
+	onCSVCMsg_PeerList                        []func(*dota.CSVCMsg_PeerList) error
+	onCSVCMsg_PacketReliable                  []func(*dota.CSVCMsg_PacketReliable) error
+	onCSVCMsg_HLTVStatus                      []func(*dota.CSVCMsg_HLTVStatus) error
+	onCSVCMsg_FullFrameSplit                  []func(*dota.CSVCMsg_FullFrameSplit) error
+	onCUserMessageAchievementEvent            []func(*dota.CUserMessageAchievementEvent) error
+	onCUserMessageCloseCaption                []func(*dota.CUserMessageCloseCaption) error
+	onCUserMessageCloseCaptionDirect          []func(*dota.CUserMessageCloseCaptionDirect) error
+	onCUserMessageCurrentTimescale            []func(*dota.CUserMessageCurrentTimescale) error
+	onCUserMessageDesiredTimescale            []func(*dota.CUserMessageDesiredTimescale) error
+	onCUserMessageFade                        []func(*dota.CUserMessageFade) error
+	onCUserMessageGameTitle                   []func(*dota.CUserMessageGameTitle) error
+	onCUserMessageHintText                    []func(*dota.CUserMessageHintText) error
+	onCUserMessageHudMsg                      []func(*dota.CUserMessageHudMsg) error
+	onCUserMessageHudText                     []func(*dota.CUserMessageHudText) error
+	onCUserMessageKeyHintText                 []func(*dota.CUserMessageKeyHintText) error
+	onCUserMessageColoredText                 []func(*dota.CUserMessageColoredText) error
+	onCUserMessageRequestState                []func(*dota.CUserMessageRequestState) error
+	onCUserMessageResetHUD                    []func(*dota.CUserMessageResetHUD) error
+	onCUserMessageRumble                      []func(*dota.CUserMessageRumble) error
+	onCUserMessageSayText                     []func(*dota.CUserMessageSayText) error
+	onCUserMessageSayText2                    []func(*dota.CUserMessageSayText2) error
+	onCUserMessageSayTextChannel              []func(*dota.CUserMessageSayTextChannel) error
+	onCUserMessageShake                       []func(*dota.CUserMessageShake) error
+	onCUserMessageShakeDir                    []func(*dota.CUserMessageShakeDir) error
+	onCUserMessageTextMsg                     []func(*dota.CUserMessageTextMsg) error
+	onCUserMessageScreenTilt                  []func(*dota.CUserMessageScreenTilt) error
+	onCUserMessageTrain                       []func(*dota.CUserMessageTrain) error
+	onCUserMessageVGUIMenu                    []func(*dota.CUserMessageVGUIMenu) error
+	onCUserMessageVoiceMask                   []func(*dota.CUserMessageVoiceMask) error
+	onCUserMessageVoiceSubtitle               []func(*dota.CUserMessageVoiceSubtitle) error
+	onCUserMessageSendAudio                   []func(*dota.CUserMessageSendAudio) error
+	onCUserMessageItemPickup                  []func(*dota.CUserMessageItemPickup) error
+	onCUserMessageAmmoDenied                  []func(*dota.CUserMessageAmmoDenied) error
+	onCUserMessageCrosshairAngle              []func(*dota.CUserMessageCrosshairAngle) error
+	onCUserMessageShowMenu                    []func(*dota.CUserMessageShowMenu) error
+	onCUserMessageCreditsMsg                  []func(*dota.CUserMessageCreditsMsg) error
+	onCEntityMessagePlayJingle                []func(*dota.CEntityMessagePlayJingle) error
+	onCEntityMessageScreenOverlay             []func(*dota.CEntityMessageScreenOverlay) error
+	onCEntityMessageRemoveAllDecals           []func(*dota.CEntityMessageRemoveAllDecals) error
+	onCEntityMessagePropagateForce            []func(*dota.CEntityMessagePropagateForce) error
+	onCEntityMessageDoSpark                   []func(*dota.CEntityMessageDoSpark) error
+	onCEntityMessageFixAngle                  []func(*dota.CEntityMessageFixAngle) error
+	onCUserMessageCloseCaptionPlaceholder     []func(*dota.CUserMessageCloseCaptionPlaceholder) error
+	onCUserMessageCameraTransition            []func(*dota.CUserMessageCameraTransition) error
+	onCUserMessageAudioParameter              []func(*dota.CUserMessageAudioParameter) error
+	onCMsgVDebugGameSessionIDEvent            []func(*dota.CMsgVDebugGameSessionIDEvent) error
+	onCMsgPlaceDecalEvent                     []func(*dota.CMsgPlaceDecalEvent) error
+	onCMsgClearWorldDecalsEvent               []func(*dota.CMsgClearWorldDecalsEvent) error
+	onCMsgClearEntityDecalsEvent              []func(*dota.CMsgClearEntityDecalsEvent) error
+	onCMsgClearDecalsForSkeletonInstanceEvent []func(*dota.CMsgClearDecalsForSkeletonInstanceEvent) error
+	onCMsgSource1LegacyGameEventList          []func(*dota.CMsgSource1LegacyGameEventList) error
+	onCMsgSource1LegacyListenEvents           []func(*dota.CMsgSource1LegacyListenEvents) error
+	onCMsgSource1LegacyGameEvent              []func(*dota.CMsgSource1LegacyGameEvent) error
+	onCMsgSosStartSoundEvent                  []func(*dota.CMsgSosStartSoundEvent) error
+	onCMsgSosStopSoundEvent                   []func(*dota.CMsgSosStopSoundEvent) error
+	onCMsgSosSetSoundEventParams              []func(*dota.CMsgSosSetSoundEventParams) error
+	onCMsgSosSetLibraryStackFields            []func(*dota.CMsgSosSetLibraryStackFields) error
+	onCMsgSosStopSoundEventHash               []func(*dota.CMsgSosStopSoundEventHash) error
+	onCDOTAUserMsg_AIDebugLine                []func(*dota.CDOTAUserMsg_AIDebugLine) error
+	onCDOTAUserMsg_ChatEvent                  []func(*dota.CDOTAUserMsg_ChatEvent) error
+	onCDOTAUserMsg_CombatHeroPositions        []func(*dota.CDOTAUserMsg_CombatHeroPositions) error
+	onCDOTAUserMsg_CombatLogShowDeath         []func(*dota.CDOTAUserMsg_CombatLogShowDeath) error
+	onCDOTAUserMsg_CreateLinearProjectile     []func(*dota.CDOTAUserMsg_CreateLinearProjectile) error
+	onCDOTAUserMsg_DestroyLinearProjectile    []func(*dota.CDOTAUserMsg_DestroyLinearProjectile) error
+	onCDOTAUserMsg_DodgeTrackingProjectiles   []func(*dota.CDOTAUserMsg_DodgeTrackingProjectiles) error
+	onCDOTAUserMsg_GlobalLightColor           []func(*dota.CDOTAUserMsg_GlobalLightColor) error
+	onCDOTAUserMsg_GlobalLightDirection       []func(*dota.CDOTAUserMsg_GlobalLightDirection) error
+	onCDOTAUserMsg_InvalidCommand             []func(*dota.CDOTAUserMsg_InvalidCommand) error
+	onCDOTAUserMsg_LocationPing               []func(*dota.CDOTAUserMsg_LocationPing) error
+	onCDOTAUserMsg_MapLine                    []func(*dota.CDOTAUserMsg_MapLine) error
+	onCDOTAUserMsg_MiniKillCamInfo            []func(*dota.CDOTAUserMsg_MiniKillCamInfo) error
+	onCDOTAUserMsg_MinimapDebugPoint          []func(*dota.CDOTAUserMsg_MinimapDebugPoint) error
+	onCDOTAUserMsg_MinimapEvent               []func(*dota.CDOTAUserMsg_MinimapEvent) error
+	onCDOTAUserMsg_NevermoreRequiem           []func(*dota.CDOTAUserMsg_NevermoreRequiem) error
+	onCDOTAUserMsg_OverheadEvent              []func(*dota.CDOTAUserMsg_OverheadEvent) error
+	onCDOTAUserMsg_SetNextAutobuyItem         []func(*dota.CDOTAUserMsg_SetNextAutobuyItem) error
+	onCDOTAUserMsg_SharedCooldown             []func(*dota.CDOTAUserMsg_SharedCooldown) error
+	onCDOTAUserMsg_SpectatorPlayerClick       []func(*dota.CDOTAUserMsg_SpectatorPlayerClick) error
+	onCDOTAUserMsg_TutorialTipInfo            []func(*dota.CDOTAUserMsg_TutorialTipInfo) error
+	onCDOTAUserMsg_UnitEvent                  []func(*dota.CDOTAUserMsg_UnitEvent) error
+	onCDOTAUserMsg_ParticleManager            []func(*dota.CDOTAUserMsg_ParticleManager) error
+	onCDOTAUserMsg_BotChat                    []func(*dota.CDOTAUserMsg_BotChat) error
+	onCDOTAUserMsg_HudError                   []func(*dota.CDOTAUserMsg_HudError) error
+	onCDOTAUserMsg_ItemPurchased              []func(*dota.CDOTAUserMsg_ItemPurchased) error
+	onCDOTAUserMsg_Ping                       []func(*dota.CDOTAUserMsg_Ping) error
+	onCDOTAUserMsg_ItemFound                  []func(*dota.CDOTAUserMsg_ItemFound) error
+	onCDOTAUserMsg_SwapVerify                 []func(*dota.CDOTAUserMsg_SwapVerify) error
+	onCDOTAUserMsg_WorldLine                  []func(*dota.CDOTAUserMsg_WorldLine) error
+	onCMsgGCToClientTournamentItemDrop        []func(*dota.CMsgGCToClientTournamentItemDrop) error
+	onCDOTAUserMsg_ItemAlert                  []func(*dota.CDOTAUserMsg_ItemAlert) error
+	onCDOTAUserMsg_HalloweenDrops             []func(*dota.CDOTAUserMsg_HalloweenDrops) error
+	onCDOTAUserMsg_ChatWheel                  []func(*dota.CDOTAUserMsg_ChatWheel) error
+	onCDOTAUserMsg_ReceivedXmasGift           []func(*dota.CDOTAUserMsg_ReceivedXmasGift) error
+	onCDOTAUserMsg_UpdateSharedContent        []func(*dota.CDOTAUserMsg_UpdateSharedContent) error
+	onCDOTAUserMsg_TutorialRequestExp         []func(*dota.CDOTAUserMsg_TutorialRequestExp) error
+	onCDOTAUserMsg_TutorialPingMinimap        []func(*dota.CDOTAUserMsg_TutorialPingMinimap) error
+	onCDOTAUserMsg_GamerulesStateChanged      []func(*dota.CDOTAUserMsg_GamerulesStateChanged) error
+	onCDOTAUserMsg_ShowSurvey                 []func(*dota.CDOTAUserMsg_ShowSurvey) error
+	onCDOTAUserMsg_TutorialFade               []func(*dota.CDOTAUserMsg_TutorialFade) error
+	onCDOTAUserMsg_AddQuestLogEntry           []func(*dota.CDOTAUserMsg_AddQuestLogEntry) error
+	onCDOTAUserMsg_SendStatPopup              []func(*dota.CDOTAUserMsg_SendStatPopup) error
+	onCDOTAUserMsg_TutorialFinish             []func(*dota.CDOTAUserMsg_TutorialFinish) error
+	onCDOTAUserMsg_SendRoshanPopup            []func(*dota.CDOTAUserMsg_SendRoshanPopup) error
+	onCDOTAUserMsg_SendGenericToolTip         []func(*dota.CDOTAUserMsg_SendGenericToolTip) error
+	onCDOTAUserMsg_SendFinalGold              []func(*dota.CDOTAUserMsg_SendFinalGold) error
+	onCDOTAUserMsg_CustomMsg                  []func(*dota.CDOTAUserMsg_CustomMsg) error
+	onCDOTAUserMsg_CoachHUDPing               []func(*dota.CDOTAUserMsg_CoachHUDPing) error
+	onCDOTAUserMsg_ClientLoadGridNav          []func(*dota.CDOTAUserMsg_ClientLoadGridNav) error
+	onCDOTAUserMsg_TE_Projectile              []func(*dota.CDOTAUserMsg_TE_Projectile) error
+	onCDOTAUserMsg_TE_ProjectileLoc           []func(*dota.CDOTAUserMsg_TE_ProjectileLoc) error
+	onCDOTAUserMsg_TE_DotaBloodImpact         []func(*dota.CDOTAUserMsg_TE_DotaBloodImpact) error
+	onCDOTAUserMsg_TE_UnitAnimation           []func(*dota.CDOTAUserMsg_TE_UnitAnimation) error
+	onCDOTAUserMsg_TE_UnitAnimationEnd        []func(*dota.CDOTAUserMsg_TE_UnitAnimationEnd) error
+	onCDOTAUserMsg_AbilityPing                []func(*dota.CDOTAUserMsg_AbilityPing) error
+	onCDOTAUserMsg_ShowGenericPopup           []func(*dota.CDOTAUserMsg_ShowGenericPopup) error
+	onCDOTAUserMsg_VoteStart                  []func(*dota.CDOTAUserMsg_VoteStart) error
+	onCDOTAUserMsg_VoteUpdate                 []func(*dota.CDOTAUserMsg_VoteUpdate) error
+	onCDOTAUserMsg_VoteEnd                    []func(*dota.CDOTAUserMsg_VoteEnd) error
+	onCDOTAUserMsg_BoosterState               []func(*dota.CDOTAUserMsg_BoosterState) error
+	onCDOTAUserMsg_WillPurchaseAlert          []func(*dota.CDOTAUserMsg_WillPurchaseAlert) error
+	onCDOTAUserMsg_TutorialMinimapPosition    []func(*dota.CDOTAUserMsg_TutorialMinimapPosition) error
+	onCDOTAUserMsg_PlayerMMR                  []func(*dota.CDOTAUserMsg_PlayerMMR) error
+	onCDOTAUserMsg_AbilitySteal               []func(*dota.CDOTAUserMsg_AbilitySteal) error
+	onCDOTAUserMsg_CourierKilledAlert         []func(*dota.CDOTAUserMsg_CourierKilledAlert) error
+	onCDOTAUserMsg_EnemyItemAlert             []func(*dota.CDOTAUserMsg_EnemyItemAlert) error
+	onCDOTAUserMsg_StatsMatchDetails          []func(*dota.CDOTAUserMsg_StatsMatchDetails) error
+	onCDOTAUserMsg_MiniTaunt                  []func(*dota.CDOTAUserMsg_MiniTaunt) error
+	onCDOTAUserMsg_BuyBackStateAlert          []func(*dota.CDOTAUserMsg_BuyBackStateAlert) error
+	onCDOTAUserMsg_SpeechBubble               []func(*dota.CDOTAUserMsg_SpeechBubble) error
+	onCDOTAUserMsg_CustomHeaderMessage        []func(*dota.CDOTAUserMsg_CustomHeaderMessage) error
+	onCDOTAUserMsg_QuickBuyAlert              []func(*dota.CDOTAUserMsg_QuickBuyAlert) error
+	onCDOTAUserMsg_StatsHeroMinuteDetails     []func(*dota.CDOTAUserMsg_StatsHeroMinuteDetails) error
+	onCDOTAUserMsg_PredictionResult           []func(*dota.CDOTAUserMsg_PredictionResult) error
+	onCDOTAUserMsg_ModifierAlert              []func(*dota.CDOTAUserMsg_ModifierAlert) error
+	onCDOTAUserMsg_HPManaAlert                []func(*dota.CDOTAUserMsg_HPManaAlert) error
+	onCDOTAUserMsg_GlyphAlert                 []func(*dota.CDOTAUserMsg_GlyphAlert) error
+	onCDOTAUserMsg_BeastChat                  []func(*dota.CDOTAUserMsg_BeastChat) error
+	onCDOTAUserMsg_SpectatorPlayerUnitOrders  []func(*dota.CDOTAUserMsg_SpectatorPlayerUnitOrders) error
+	onCDOTAUserMsg_CustomHudElement_Create    []func(*dota.CDOTAUserMsg_CustomHudElement_Create) error
+	onCDOTAUserMsg_CustomHudElement_Modify    []func(*dota.CDOTAUserMsg_CustomHudElement_Modify) error
+	onCDOTAUserMsg_CustomHudElement_Destroy   []func(*dota.CDOTAUserMsg_CustomHudElement_Destroy) error
+	onCDOTAUserMsg_CompendiumState            []func(*dota.CDOTAUserMsg_CompendiumState) error
+	onCDOTAUserMsg_ProjectionAbility          []func(*dota.CDOTAUserMsg_ProjectionAbility) error
+	onCDOTAUserMsg_ProjectionEvent            []func(*dota.CDOTAUserMsg_ProjectionEvent) error
+	onCMsgDOTACombatLogEntry                  []func(*dota.CMsgDOTACombatLogEntry) error
+	onCDOTAUserMsg_XPAlert                    []func(*dota.CDOTAUserMsg_XPAlert) error
+	onCDOTAUserMsg_UpdateQuestProgress        []func(*dota.CDOTAUserMsg_UpdateQuestProgress) error
+	onCDOTAClientMsg_MatchMetadata            []func(*dota.CDOTAClientMsg_MatchMetadata) error
+}
+
+// OnCDemoStop registers a callback EDemoCommands_DEM_Stop
+func (c *Callbacks) OnCDemoStop(fn func(*dota.CDemoStop) error) {
+	c.onCDemoStop = append(c.onCDemoStop, fn)
+}
+
+// OnCDemoFileHeader registers a callback EDemoCommands_DEM_FileHeader
+func (c *Callbacks) OnCDemoFileHeader(fn func(*dota.CDemoFileHeader) error) {
+	c.onCDemoFileHeader = append(c.onCDemoFileHeader, fn)
+}
+
+// OnCDemoFileInfo registers a callback EDemoCommands_DEM_FileInfo
+func (c *Callbacks) OnCDemoFileInfo(fn func(*dota.CDemoFileInfo) error) {
+	c.onCDemoFileInfo = append(c.onCDemoFileInfo, fn)
+}
+
+// OnCDemoSyncTick registers a callback EDemoCommands_DEM_SyncTick
+func (c *Callbacks) OnCDemoSyncTick(fn func(*dota.CDemoSyncTick) error) {
+	c.onCDemoSyncTick = append(c.onCDemoSyncTick, fn)
+}
+
+// OnCDemoSendTables registers a callback EDemoCommands_DEM_SendTables
+func (c *Callbacks) OnCDemoSendTables(fn func(*dota.CDemoSendTables) error) {
+	c.onCDemoSendTables = append(c.onCDemoSendTables, fn)
+}
+
+// OnCDemoClassInfo registers a callback EDemoCommands_DEM_ClassInfo
+func (c *Callbacks) OnCDemoClassInfo(fn func(*dota.CDemoClassInfo) error) {
+	c.onCDemoClassInfo = append(c.onCDemoClassInfo, fn)
+}
+
+// OnCDemoStringTables registers a callback EDemoCommands_DEM_StringTables
+func (c *Callbacks) OnCDemoStringTables(fn func(*dota.CDemoStringTables) error) {
+	c.onCDemoStringTables = append(c.onCDemoStringTables, fn)
+}
+
+// OnCDemoPacket registers a callback EDemoCommands_DEM_Packet
+func (c *Callbacks) OnCDemoPacket(fn func(*dota.CDemoPacket) error) {
+	c.onCDemoPacket = append(c.onCDemoPacket, fn)
+}
+
+// OnCDemoSignonPacket registers a callback EDemoCommands_DEM_SignonPacket
+func (c *Callbacks) OnCDemoSignonPacket(fn func(*dota.CDemoPacket) error) {
+	c.onCDemoSignonPacket = append(c.onCDemoSignonPacket, fn)
+}
+
+// OnCDemoConsoleCmd registers a callback EDemoCommands_DEM_ConsoleCmd
+func (c *Callbacks) OnCDemoConsoleCmd(fn func(*dota.CDemoConsoleCmd) error) {
+	c.onCDemoConsoleCmd = append(c.onCDemoConsoleCmd, fn)
+}
+
+// OnCDemoCustomData registers a callback EDemoCommands_DEM_CustomData
+func (c *Callbacks) OnCDemoCustomData(fn func(*dota.CDemoCustomData) error) {
+	c.onCDemoCustomData = append(c.onCDemoCustomData, fn)
+}
+
+// OnCDemoCustomDataCallbacks registers a callback EDemoCommands_DEM_CustomDataCallbacks
+func (c *Callbacks) OnCDemoCustomDataCallbacks(fn func(*dota.CDemoCustomDataCallbacks) error) {
+	c.onCDemoCustomDataCallbacks = append(c.onCDemoCustomDataCallbacks, fn)
+}
+
+// OnCDemoUserCmd registers a callback EDemoCommands_DEM_UserCmd
+func (c *Callbacks) OnCDemoUserCmd(fn func(*dota.CDemoUserCmd) error) {
+	c.onCDemoUserCmd = append(c.onCDemoUserCmd, fn)
+}
+
+// OnCDemoFullPacket registers a callback EDemoCommands_DEM_FullPacket
+func (c *Callbacks) OnCDemoFullPacket(fn func(*dota.CDemoFullPacket) error) {
+	c.onCDemoFullPacket = append(c.onCDemoFullPacket, fn)
+}
+
+// OnCDemoSaveGame registers a callback EDemoCommands_DEM_SaveGame
+func (c *Callbacks) OnCDemoSaveGame(fn func(*dota.CDemoSaveGame) error) {
+	c.onCDemoSaveGame = append(c.onCDemoSaveGame, fn)
+}
+
+// OnCDemoSpawnGroups registers a callback EDemoCommands_DEM_SpawnGroups
+func (c *Callbacks) OnCDemoSpawnGroups(fn func(*dota.CDemoSpawnGroups) error) {
+	c.onCDemoSpawnGroups = append(c.onCDemoSpawnGroups, fn)
+}
+
+// OnCNETMsg_NOP registers a callback for NET_Messages_net_NOP
+func (c *Callbacks) OnCNETMsg_NOP(fn func(*dota.CNETMsg_NOP) error) {
+	c.onCNETMsg_NOP = append(c.onCNETMsg_NOP, fn)
+}
+
+// OnCNETMsg_Disconnect registers a callback for NET_Messages_net_Disconnect
+func (c *Callbacks) OnCNETMsg_Disconnect(fn func(*dota.CNETMsg_Disconnect) error) {
+	c.onCNETMsg_Disconnect = append(c.onCNETMsg_Disconnect, fn)
+}
+
+// OnCNETMsg_SplitScreenUser registers a callback for NET_Messages_net_SplitScreenUser
+func (c *Callbacks) OnCNETMsg_SplitScreenUser(fn func(*dota.CNETMsg_SplitScreenUser) error) {
+	c.onCNETMsg_SplitScreenUser = append(c.onCNETMsg_SplitScreenUser, fn)
+}
+
+// OnCNETMsg_Tick registers a callback for NET_Messages_net_Tick
+func (c *Callbacks) OnCNETMsg_Tick(fn func(*dota.CNETMsg_Tick) error) {
+	c.onCNETMsg_Tick = append(c.onCNETMsg_Tick, fn)
+}
+
+// OnCNETMsg_StringCmd registers a callback for NET_Messages_net_StringCmd
+func (c *Callbacks) OnCNETMsg_StringCmd(fn func(*dota.CNETMsg_StringCmd) error) {
+	c.onCNETMsg_StringCmd = append(c.onCNETMsg_StringCmd, fn)
+}
+
+// OnCNETMsg_SetConVar registers a callback for NET_Messages_net_SetConVar
+func (c *Callbacks) OnCNETMsg_SetConVar(fn func(*dota.CNETMsg_SetConVar) error) {
+	c.onCNETMsg_SetConVar = append(c.onCNETMsg_SetConVar, fn)
+}
+
+// OnCNETMsg_SignonState registers a callback for NET_Messages_net_SignonState
+func (c *Callbacks) OnCNETMsg_SignonState(fn func(*dota.CNETMsg_SignonState) error) {
+	c.onCNETMsg_SignonState = append(c.onCNETMsg_SignonState, fn)
+}
+
+// OnCNETMsg_SpawnGroup_Load registers a callback for NET_Messages_net_SpawnGroup_Load
+func (c *Callbacks) OnCNETMsg_SpawnGroup_Load(fn func(*dota.CNETMsg_SpawnGroup_Load) error) {
+	c.onCNETMsg_SpawnGroup_Load = append(c.onCNETMsg_SpawnGroup_Load, fn)
+}
+
+// OnCNETMsg_SpawnGroup_ManifestUpdate registers a callback for NET_Messages_net_SpawnGroup_ManifestUpdate
+func (c *Callbacks) OnCNETMsg_SpawnGroup_ManifestUpdate(fn func(*dota.CNETMsg_SpawnGroup_ManifestUpdate) error) {
+	c.onCNETMsg_SpawnGroup_ManifestUpdate = append(c.onCNETMsg_SpawnGroup_ManifestUpdate, fn)
+}
+
+// OnCNETMsg_SpawnGroup_SetCreationTick registers a callback for NET_Messages_net_SpawnGroup_SetCreationTick
+func (c *Callbacks) OnCNETMsg_SpawnGroup_SetCreationTick(fn func(*dota.CNETMsg_SpawnGroup_SetCreationTick) error) {
+	c.onCNETMsg_SpawnGroup_SetCreationTick = append(c.onCNETMsg_SpawnGroup_SetCreationTick, fn)
+}
+
+// OnCNETMsg_SpawnGroup_Unload registers a callback for NET_Messages_net_SpawnGroup_Unload
+func (c *Callbacks) OnCNETMsg_SpawnGroup_Unload(fn func(*dota.CNETMsg_SpawnGroup_Unload) error) {
+	c.onCNETMsg_SpawnGroup_Unload = append(c.onCNETMsg_SpawnGroup_Unload, fn)
+}
+
+// OnCNETMsg_SpawnGroup_LoadCompleted registers a callback for NET_Messages_net_SpawnGroup_LoadCompleted
+func (c *Callbacks) OnCNETMsg_SpawnGroup_LoadCompleted(fn func(*dota.CNETMsg_SpawnGroup_LoadCompleted) error) {
+	c.onCNETMsg_SpawnGroup_LoadCompleted = append(c.onCNETMsg_SpawnGroup_LoadCompleted, fn)
+}
+
+// OnCSVCMsg_ServerInfo registers a callback for SVC_Messages_svc_ServerInfo
+func (c *Callbacks) OnCSVCMsg_ServerInfo(fn func(*dota.CSVCMsg_ServerInfo) error) {
+	c.onCSVCMsg_ServerInfo = append(c.onCSVCMsg_ServerInfo, fn)
+}
+
+// OnCSVCMsg_FlattenedSerializer registers a callback for SVC_Messages_svc_FlattenedSerializer
+func (c *Callbacks) OnCSVCMsg_FlattenedSerializer(fn func(*dota.CSVCMsg_FlattenedSerializer) error) {
+	c.onCSVCMsg_FlattenedSerializer = append(c.onCSVCMsg_FlattenedSerializer, fn)
+}
+
+// OnCSVCMsg_ClassInfo registers a callback for SVC_Messages_svc_ClassInfo
+func (c *Callbacks) OnCSVCMsg_ClassInfo(fn func(*dota.CSVCMsg_ClassInfo) error) {
+	c.onCSVCMsg_ClassInfo = append(c.onCSVCMsg_ClassInfo, fn)
+}
+
+// OnCSVCMsg_SetPause registers a callback for SVC_Messages_svc_SetPause
+func (c *Callbacks) OnCSVCMsg_SetPause(fn func(*dota.CSVCMsg_SetPause) error) {
+	c.onCSVCMsg_SetPause = append(c.onCSVCMsg_SetPause, fn)
+}
+
+// OnCSVCMsg_CreateStringTable registers a callback for SVC_Messages_svc_CreateStringTable
+func (c *Callbacks) OnCSVCMsg_CreateStringTable(fn func(*dota.CSVCMsg_CreateStringTable) error) {
+	c.onCSVCMsg_CreateStringTable = append(c.onCSVCMsg_CreateStringTable, fn)
+}
+
+// OnCSVCMsg_UpdateStringTable registers a callback for SVC_Messages_svc_UpdateStringTable
+func (c *Callbacks) OnCSVCMsg_UpdateStringTable(fn func(*dota.CSVCMsg_UpdateStringTable) error) {
+	c.onCSVCMsg_UpdateStringTable = append(c.onCSVCMsg_UpdateStringTable, fn)
+}
+
+// OnCSVCMsg_VoiceInit registers a callback for SVC_Messages_svc_VoiceInit
+func (c *Callbacks) OnCSVCMsg_VoiceInit(fn func(*dota.CSVCMsg_VoiceInit) error) {
+	c.onCSVCMsg_VoiceInit = append(c.onCSVCMsg_VoiceInit, fn)
+}
+
+// OnCSVCMsg_VoiceData registers a callback for SVC_Messages_svc_VoiceData
+func (c *Callbacks) OnCSVCMsg_VoiceData(fn func(*dota.CSVCMsg_VoiceData) error) {
+	c.onCSVCMsg_VoiceData = append(c.onCSVCMsg_VoiceData, fn)
+}
+
+// OnCSVCMsg_Print registers a callback for SVC_Messages_svc_Print
+func (c *Callbacks) OnCSVCMsg_Print(fn func(*dota.CSVCMsg_Print) error) {
+	c.onCSVCMsg_Print = append(c.onCSVCMsg_Print, fn)
+}
+
+// OnCSVCMsg_Sounds registers a callback for SVC_Messages_svc_Sounds
+func (c *Callbacks) OnCSVCMsg_Sounds(fn func(*dota.CSVCMsg_Sounds) error) {
+	c.onCSVCMsg_Sounds = append(c.onCSVCMsg_Sounds, fn)
+}
+
+// OnCSVCMsg_SetView registers a callback for SVC_Messages_svc_SetView
+func (c *Callbacks) OnCSVCMsg_SetView(fn func(*dota.CSVCMsg_SetView) error) {
+	c.onCSVCMsg_SetView = append(c.onCSVCMsg_SetView, fn)
+}
+
+// OnCSVCMsg_ClearAllStringTables registers a callback for SVC_Messages_svc_ClearAllStringTables
+func (c *Callbacks) OnCSVCMsg_ClearAllStringTables(fn func(*dota.CSVCMsg_ClearAllStringTables) error) {
+	c.onCSVCMsg_ClearAllStringTables = append(c.onCSVCMsg_ClearAllStringTables, fn)
+}
+
+// OnCSVCMsg_CmdKeyValues registers a callback for SVC_Messages_svc_CmdKeyValues
+func (c *Callbacks) OnCSVCMsg_CmdKeyValues(fn func(*dota.CSVCMsg_CmdKeyValues) error) {
+	c.onCSVCMsg_CmdKeyValues = append(c.onCSVCMsg_CmdKeyValues, fn)
+}
+
+// OnCSVCMsg_BSPDecal registers a callback for SVC_Messages_svc_BSPDecal
+func (c *Callbacks) OnCSVCMsg_BSPDecal(fn func(*dota.CSVCMsg_BSPDecal) error) {
+	c.onCSVCMsg_BSPDecal = append(c.onCSVCMsg_BSPDecal, fn)
+}
+
+// OnCSVCMsg_SplitScreen registers a callback for SVC_Messages_svc_SplitScreen
+func (c *Callbacks) OnCSVCMsg_SplitScreen(fn func(*dota.CSVCMsg_SplitScreen) error) {
+	c.onCSVCMsg_SplitScreen = append(c.onCSVCMsg_SplitScreen, fn)
+}
+
+// OnCSVCMsg_PacketEntities registers a callback for SVC_Messages_svc_PacketEntities
+func (c *Callbacks) OnCSVCMsg_PacketEntities(fn func(*dota.CSVCMsg_PacketEntities) error) {
+	c.onCSVCMsg_PacketEntities = append(c.onCSVCMsg_PacketEntities, fn)
+}
+
+// OnCSVCMsg_Prefetch registers a callback for SVC_Messages_svc_Prefetch
+func (c *Callbacks) OnCSVCMsg_Prefetch(fn func(*dota.CSVCMsg_Prefetch) error) {
+	c.onCSVCMsg_Prefetch = append(c.onCSVCMsg_Prefetch, fn)
+}
+
+// OnCSVCMsg_Menu registers a callback for SVC_Messages_svc_Menu
+func (c *Callbacks) OnCSVCMsg_Menu(fn func(*dota.CSVCMsg_Menu) error) {
+	c.onCSVCMsg_Menu = append(c.onCSVCMsg_Menu, fn)
+}
+
+// OnCSVCMsg_GetCvarValue registers a callback for SVC_Messages_svc_GetCvarValue
+func (c *Callbacks) OnCSVCMsg_GetCvarValue(fn func(*dota.CSVCMsg_GetCvarValue) error) {
+	c.onCSVCMsg_GetCvarValue = append(c.onCSVCMsg_GetCvarValue, fn)
+}
+
+// OnCSVCMsg_StopSound registers a callback for SVC_Messages_svc_StopSound
+func (c *Callbacks) OnCSVCMsg_StopSound(fn func(*dota.CSVCMsg_StopSound) error) {
+	c.onCSVCMsg_StopSound = append(c.onCSVCMsg_StopSound, fn)
+}
+
+// OnCSVCMsg_PeerList registers a callback for SVC_Messages_svc_PeerList
+func (c *Callbacks) OnCSVCMsg_PeerList(fn func(*dota.CSVCMsg_PeerList) error) {
+	c.onCSVCMsg_PeerList = append(c.onCSVCMsg_PeerList, fn)
+}
+
+// OnCSVCMsg_PacketReliable registers a callback for SVC_Messages_svc_PacketReliable
+func (c *Callbacks) OnCSVCMsg_PacketReliable(fn func(*dota.CSVCMsg_PacketReliable) error) {
+	c.onCSVCMsg_PacketReliable = append(c.onCSVCMsg_PacketReliable, fn)
+}
+
+// OnCSVCMsg_HLTVStatus registers a callback for SVC_Messages_svc_HLTVStatus
+func (c *Callbacks) OnCSVCMsg_HLTVStatus(fn func(*dota.CSVCMsg_HLTVStatus) error) {
+	c.onCSVCMsg_HLTVStatus = append(c.onCSVCMsg_HLTVStatus, fn)
+}
+
+// OnCSVCMsg_FullFrameSplit registers a callback for SVC_Messages_svc_FullFrameSplit
+func (c *Callbacks) OnCSVCMsg_FullFrameSplit(fn func(*dota.CSVCMsg_FullFrameSplit) error) {
+	c.onCSVCMsg_FullFrameSplit = append(c.onCSVCMsg_FullFrameSplit, fn)
+}
+
+// OnCUserMessageAchievementEvent registers a callback for EBaseUserMessages_UM_AchievementEvent
+func (c *Callbacks) OnCUserMessageAchievementEvent(fn func(*dota.CUserMessageAchievementEvent) error) {
+	c.onCUserMessageAchievementEvent = append(c.onCUserMessageAchievementEvent, fn)
+}
+
+// OnCUserMessageCloseCaption registers a callback for EBaseUserMessages_UM_CloseCaption
+func (c *Callbacks) OnCUserMessageCloseCaption(fn func(*dota.CUserMessageCloseCaption) error) {
+	c.onCUserMessageCloseCaption = append(c.onCUserMessageCloseCaption, fn)
+}
+
+// OnCUserMessageCloseCaptionDirect registers a callback for EBaseUserMessages_UM_CloseCaptionDirect
+func (c *Callbacks) OnCUserMessageCloseCaptionDirect(fn func(*dota.CUserMessageCloseCaptionDirect) error) {
+	c.onCUserMessageCloseCaptionDirect = append(c.onCUserMessageCloseCaptionDirect, fn)
+}
+
+// OnCUserMessageCurrentTimescale registers a callback for EBaseUserMessages_UM_CurrentTimescale
+func (c *Callbacks) OnCUserMessageCurrentTimescale(fn func(*dota.CUserMessageCurrentTimescale) error) {
+	c.onCUserMessageCurrentTimescale = append(c.onCUserMessageCurrentTimescale, fn)
+}
+
+// OnCUserMessageDesiredTimescale registers a callback for EBaseUserMessages_UM_DesiredTimescale
+func (c *Callbacks) OnCUserMessageDesiredTimescale(fn func(*dota.CUserMessageDesiredTimescale) error) {
+	c.onCUserMessageDesiredTimescale = append(c.onCUserMessageDesiredTimescale, fn)
+}
+
+// OnCUserMessageFade registers a callback for EBaseUserMessages_UM_Fade
+func (c *Callbacks) OnCUserMessageFade(fn func(*dota.CUserMessageFade) error) {
+	c.onCUserMessageFade = append(c.onCUserMessageFade, fn)
+}
+
+// OnCUserMessageGameTitle registers a callback for EBaseUserMessages_UM_GameTitle
+func (c *Callbacks) OnCUserMessageGameTitle(fn func(*dota.CUserMessageGameTitle) error) {
+	c.onCUserMessageGameTitle = append(c.onCUserMessageGameTitle, fn)
+}
+
+// OnCUserMessageHintText registers a callback for EBaseUserMessages_UM_HintText
+func (c *Callbacks) OnCUserMessageHintText(fn func(*dota.CUserMessageHintText) error) {
+	c.onCUserMessageHintText = append(c.onCUserMessageHintText, fn)
+}
+
+// OnCUserMessageHudMsg registers a callback for EBaseUserMessages_UM_HudMsg
+func (c *Callbacks) OnCUserMessageHudMsg(fn func(*dota.CUserMessageHudMsg) error) {
+	c.onCUserMessageHudMsg = append(c.onCUserMessageHudMsg, fn)
+}
+
+// OnCUserMessageHudText registers a callback for EBaseUserMessages_UM_HudText
+func (c *Callbacks) OnCUserMessageHudText(fn func(*dota.CUserMessageHudText) error) {
+	c.onCUserMessageHudText = append(c.onCUserMessageHudText, fn)
+}
+
+// OnCUserMessageKeyHintText registers a callback for EBaseUserMessages_UM_KeyHintText
+func (c *Callbacks) OnCUserMessageKeyHintText(fn func(*dota.CUserMessageKeyHintText) error) {
+	c.onCUserMessageKeyHintText = append(c.onCUserMessageKeyHintText, fn)
+}
+
+// OnCUserMessageColoredText registers a callback for EBaseUserMessages_UM_ColoredText
+func (c *Callbacks) OnCUserMessageColoredText(fn func(*dota.CUserMessageColoredText) error) {
+	c.onCUserMessageColoredText = append(c.onCUserMessageColoredText, fn)
+}
+
+// OnCUserMessageRequestState registers a callback for EBaseUserMessages_UM_RequestState
+func (c *Callbacks) OnCUserMessageRequestState(fn func(*dota.CUserMessageRequestState) error) {
+	c.onCUserMessageRequestState = append(c.onCUserMessageRequestState, fn)
+}
+
+// OnCUserMessageResetHUD registers a callback for EBaseUserMessages_UM_ResetHUD
+func (c *Callbacks) OnCUserMessageResetHUD(fn func(*dota.CUserMessageResetHUD) error) {
+	c.onCUserMessageResetHUD = append(c.onCUserMessageResetHUD, fn)
+}
+
+// OnCUserMessageRumble registers a callback for EBaseUserMessages_UM_Rumble
+func (c *Callbacks) OnCUserMessageRumble(fn func(*dota.CUserMessageRumble) error) {
+	c.onCUserMessageRumble = append(c.onCUserMessageRumble, fn)
+}
+
+// OnCUserMessageSayText registers a callback for EBaseUserMessages_UM_SayText
+func (c *Callbacks) OnCUserMessageSayText(fn func(*dota.CUserMessageSayText) error) {
+	c.onCUserMessageSayText = append(c.onCUserMessageSayText, fn)
+}
+
+// OnCUserMessageSayText2 registers a callback for EBaseUserMessages_UM_SayText2
+func (c *Callbacks) OnCUserMessageSayText2(fn func(*dota.CUserMessageSayText2) error) {
+	c.onCUserMessageSayText2 = append(c.onCUserMessageSayText2, fn)
+}
+
+// OnCUserMessageSayTextChannel registers a callback for EBaseUserMessages_UM_SayTextChannel
+func (c *Callbacks) OnCUserMessageSayTextChannel(fn func(*dota.CUserMessageSayTextChannel) error) {
+	c.onCUserMessageSayTextChannel = append(c.onCUserMessageSayTextChannel, fn)
+}
+
+// OnCUserMessageShake registers a callback for EBaseUserMessages_UM_Shake
+func (c *Callbacks) OnCUserMessageShake(fn func(*dota.CUserMessageShake) error) {
+	c.onCUserMessageShake = append(c.onCUserMessageShake, fn)
+}
+
+// OnCUserMessageShakeDir registers a callback for EBaseUserMessages_UM_ShakeDir
+func (c *Callbacks) OnCUserMessageShakeDir(fn func(*dota.CUserMessageShakeDir) error) {
+	c.onCUserMessageShakeDir = append(c.onCUserMessageShakeDir, fn)
+}
+
+// OnCUserMessageTextMsg registers a callback for EBaseUserMessages_UM_TextMsg
+func (c *Callbacks) OnCUserMessageTextMsg(fn func(*dota.CUserMessageTextMsg) error) {
+	c.onCUserMessageTextMsg = append(c.onCUserMessageTextMsg, fn)
+}
+
+// OnCUserMessageScreenTilt registers a callback for EBaseUserMessages_UM_ScreenTilt
+func (c *Callbacks) OnCUserMessageScreenTilt(fn func(*dota.CUserMessageScreenTilt) error) {
+	c.onCUserMessageScreenTilt = append(c.onCUserMessageScreenTilt, fn)
+}
+
+// OnCUserMessageTrain registers a callback for EBaseUserMessages_UM_Train
+func (c *Callbacks) OnCUserMessageTrain(fn func(*dota.CUserMessageTrain) error) {
+	c.onCUserMessageTrain = append(c.onCUserMessageTrain, fn)
+}
+
+// OnCUserMessageVGUIMenu registers a callback for EBaseUserMessages_UM_VGUIMenu
+func (c *Callbacks) OnCUserMessageVGUIMenu(fn func(*dota.CUserMessageVGUIMenu) error) {
+	c.onCUserMessageVGUIMenu = append(c.onCUserMessageVGUIMenu, fn)
+}
+
+// OnCUserMessageVoiceMask registers a callback for EBaseUserMessages_UM_VoiceMask
+func (c *Callbacks) OnCUserMessageVoiceMask(fn func(*dota.CUserMessageVoiceMask) error) {
+	c.onCUserMessageVoiceMask = append(c.onCUserMessageVoiceMask, fn)
+}
+
+// OnCUserMessageVoiceSubtitle registers a callback for EBaseUserMessages_UM_VoiceSubtitle
+func (c *Callbacks) OnCUserMessageVoiceSubtitle(fn func(*dota.CUserMessageVoiceSubtitle) error) {
+	c.onCUserMessageVoiceSubtitle = append(c.onCUserMessageVoiceSubtitle, fn)
+}
+
+// OnCUserMessageSendAudio registers a callback for EBaseUserMessages_UM_SendAudio
+func (c *Callbacks) OnCUserMessageSendAudio(fn func(*dota.CUserMessageSendAudio) error) {
+	c.onCUserMessageSendAudio = append(c.onCUserMessageSendAudio, fn)
+}
+
+// OnCUserMessageItemPickup registers a callback for EBaseUserMessages_UM_ItemPickup
+func (c *Callbacks) OnCUserMessageItemPickup(fn func(*dota.CUserMessageItemPickup) error) {
+	c.onCUserMessageItemPickup = append(c.onCUserMessageItemPickup, fn)
+}
+
+// OnCUserMessageAmmoDenied registers a callback for EBaseUserMessages_UM_AmmoDenied
+func (c *Callbacks) OnCUserMessageAmmoDenied(fn func(*dota.CUserMessageAmmoDenied) error) {
+	c.onCUserMessageAmmoDenied = append(c.onCUserMessageAmmoDenied, fn)
+}
+
+// OnCUserMessageCrosshairAngle registers a callback for EBaseUserMessages_UM_CrosshairAngle
+func (c *Callbacks) OnCUserMessageCrosshairAngle(fn func(*dota.CUserMessageCrosshairAngle) error) {
+	c.onCUserMessageCrosshairAngle = append(c.onCUserMessageCrosshairAngle, fn)
+}
+
+// OnCUserMessageShowMenu registers a callback for EBaseUserMessages_UM_ShowMenu
+func (c *Callbacks) OnCUserMessageShowMenu(fn func(*dota.CUserMessageShowMenu) error) {
+	c.onCUserMessageShowMenu = append(c.onCUserMessageShowMenu, fn)
+}
+
+// OnCUserMessageCreditsMsg registers a callback for EBaseUserMessages_UM_CreditsMsg
+func (c *Callbacks) OnCUserMessageCreditsMsg(fn func(*dota.CUserMessageCreditsMsg) error) {
+	c.onCUserMessageCreditsMsg = append(c.onCUserMessageCreditsMsg, fn)
+}
+
+// OnCEntityMessagePlayJingle registers a callback for EBaseEntityMessages_EM_PlayJingle
+func (c *Callbacks) OnCEntityMessagePlayJingle(fn func(*dota.CEntityMessagePlayJingle) error) {
+	c.onCEntityMessagePlayJingle = append(c.onCEntityMessagePlayJingle, fn)
+}
+
+// OnCEntityMessageScreenOverlay registers a callback for EBaseEntityMessages_EM_ScreenOverlay
+func (c *Callbacks) OnCEntityMessageScreenOverlay(fn func(*dota.CEntityMessageScreenOverlay) error) {
+	c.onCEntityMessageScreenOverlay = append(c.onCEntityMessageScreenOverlay, fn)
+}
+
+// OnCEntityMessageRemoveAllDecals registers a callback for EBaseEntityMessages_EM_RemoveAllDecals
+func (c *Callbacks) OnCEntityMessageRemoveAllDecals(fn func(*dota.CEntityMessageRemoveAllDecals) error) {
+	c.onCEntityMessageRemoveAllDecals = append(c.onCEntityMessageRemoveAllDecals, fn)
+}
+
+// OnCEntityMessagePropagateForce registers a callback for EBaseEntityMessages_EM_PropagateForce
+func (c *Callbacks) OnCEntityMessagePropagateForce(fn func(*dota.CEntityMessagePropagateForce) error) {
+	c.onCEntityMessagePropagateForce = append(c.onCEntityMessagePropagateForce, fn)
+}
+
+// OnCEntityMessageDoSpark registers a callback for EBaseEntityMessages_EM_DoSpark
+func (c *Callbacks) OnCEntityMessageDoSpark(fn func(*dota.CEntityMessageDoSpark) error) {
+	c.onCEntityMessageDoSpark = append(c.onCEntityMessageDoSpark, fn)
+}
+
+// OnCEntityMessageFixAngle registers a callback for EBaseEntityMessages_EM_FixAngle
+func (c *Callbacks) OnCEntityMessageFixAngle(fn func(*dota.CEntityMessageFixAngle) error) {
+	c.onCEntityMessageFixAngle = append(c.onCEntityMessageFixAngle, fn)
+}
+
+// OnCUserMessageCloseCaptionPlaceholder registers a callback for EBaseUserMessages_UM_CloseCaptionPlaceholder
+func (c *Callbacks) OnCUserMessageCloseCaptionPlaceholder(fn func(*dota.CUserMessageCloseCaptionPlaceholder) error) {
+	c.onCUserMessageCloseCaptionPlaceholder = append(c.onCUserMessageCloseCaptionPlaceholder, fn)
+}
+
+// OnCUserMessageCameraTransition registers a callback for EBaseUserMessages_UM_CameraTransition
+func (c *Callbacks) OnCUserMessageCameraTransition(fn func(*dota.CUserMessageCameraTransition) error) {
+	c.onCUserMessageCameraTransition = append(c.onCUserMessageCameraTransition, fn)
+}
+
+// OnCUserMessageAudioParameter registers a callback for EBaseUserMessages_UM_AudioParameter
+func (c *Callbacks) OnCUserMessageAudioParameter(fn func(*dota.CUserMessageAudioParameter) error) {
+	c.onCUserMessageAudioParameter = append(c.onCUserMessageAudioParameter, fn)
+}
+
+// OnCMsgVDebugGameSessionIDEvent registers a callback for EBaseGameEvents_GE_VDebugGameSessionIDEvent
+func (c *Callbacks) OnCMsgVDebugGameSessionIDEvent(fn func(*dota.CMsgVDebugGameSessionIDEvent) error) {
+	c.onCMsgVDebugGameSessionIDEvent = append(c.onCMsgVDebugGameSessionIDEvent, fn)
+}
+
+// OnCMsgPlaceDecalEvent registers a callback for EBaseGameEvents_GE_PlaceDecalEvent
+func (c *Callbacks) OnCMsgPlaceDecalEvent(fn func(*dota.CMsgPlaceDecalEvent) error) {
+	c.onCMsgPlaceDecalEvent = append(c.onCMsgPlaceDecalEvent, fn)
+}
+
+// OnCMsgClearWorldDecalsEvent registers a callback for EBaseGameEvents_GE_ClearWorldDecalsEvent
+func (c *Callbacks) OnCMsgClearWorldDecalsEvent(fn func(*dota.CMsgClearWorldDecalsEvent) error) {
+	c.onCMsgClearWorldDecalsEvent = append(c.onCMsgClearWorldDecalsEvent, fn)
+}
+
+// OnCMsgClearEntityDecalsEvent registers a callback for EBaseGameEvents_GE_ClearEntityDecalsEvent
+func (c *Callbacks) OnCMsgClearEntityDecalsEvent(fn func(*dota.CMsgClearEntityDecalsEvent) error) {
+	c.onCMsgClearEntityDecalsEvent = append(c.onCMsgClearEntityDecalsEvent, fn)
+}
+
+// OnCMsgClearDecalsForSkeletonInstanceEvent registers a callback for EBaseGameEvents_GE_ClearDecalsForSkeletonInstanceEvent
+func (c *Callbacks) OnCMsgClearDecalsForSkeletonInstanceEvent(fn func(*dota.CMsgClearDecalsForSkeletonInstanceEvent) error) {
+	c.onCMsgClearDecalsForSkeletonInstanceEvent = append(c.onCMsgClearDecalsForSkeletonInstanceEvent, fn)
+}
+
+// OnCMsgSource1LegacyGameEventList registers a callback for EBaseGameEvents_GE_Source1LegacyGameEventList
+func (c *Callbacks) OnCMsgSource1LegacyGameEventList(fn func(*dota.CMsgSource1LegacyGameEventList) error) {
+	c.onCMsgSource1LegacyGameEventList = append(c.onCMsgSource1LegacyGameEventList, fn)
+}
+
+// OnCMsgSource1LegacyListenEvents registers a callback for EBaseGameEvents_GE_Source1LegacyListenEvents
+func (c *Callbacks) OnCMsgSource1LegacyListenEvents(fn func(*dota.CMsgSource1LegacyListenEvents) error) {
+	c.onCMsgSource1LegacyListenEvents = append(c.onCMsgSource1LegacyListenEvents, fn)
+}
+
+// OnCMsgSource1LegacyGameEvent registers a callback for EBaseGameEvents_GE_Source1LegacyGameEvent
+func (c *Callbacks) OnCMsgSource1LegacyGameEvent(fn func(*dota.CMsgSource1LegacyGameEvent) error) {
+	c.onCMsgSource1LegacyGameEvent = append(c.onCMsgSource1LegacyGameEvent, fn)
+}
+
+// OnCMsgSosStartSoundEvent registers a callback for EBaseGameEvents_GE_SosStartSoundEvent
+func (c *Callbacks) OnCMsgSosStartSoundEvent(fn func(*dota.CMsgSosStartSoundEvent) error) {
+	c.onCMsgSosStartSoundEvent = append(c.onCMsgSosStartSoundEvent, fn)
+}
+
+// OnCMsgSosStopSoundEvent registers a callback for EBaseGameEvents_GE_SosStopSoundEvent
+func (c *Callbacks) OnCMsgSosStopSoundEvent(fn func(*dota.CMsgSosStopSoundEvent) error) {
+	c.onCMsgSosStopSoundEvent = append(c.onCMsgSosStopSoundEvent, fn)
+}
+
+// OnCMsgSosSetSoundEventParams registers a callback for EBaseGameEvents_GE_SosSetSoundEventParams
+func (c *Callbacks) OnCMsgSosSetSoundEventParams(fn func(*dota.CMsgSosSetSoundEventParams) error) {
+	c.onCMsgSosSetSoundEventParams = append(c.onCMsgSosSetSoundEventParams, fn)
+}
+
+// OnCMsgSosSetLibraryStackFields registers a callback for EBaseGameEvents_GE_SosSetLibraryStackFields
+func (c *Callbacks) OnCMsgSosSetLibraryStackFields(fn func(*dota.CMsgSosSetLibraryStackFields) error) {
+	c.onCMsgSosSetLibraryStackFields = append(c.onCMsgSosSetLibraryStackFields, fn)
+}
+
+// OnCMsgSosStopSoundEventHash registers a callback for EBaseGameEvents_GE_SosStopSoundEventHash
+func (c *Callbacks) OnCMsgSosStopSoundEventHash(fn func(*dota.CMsgSosStopSoundEventHash) error) {
+	c.onCMsgSosStopSoundEventHash = append(c.onCMsgSosStopSoundEventHash, fn)
+}
+
+// OnCDOTAUserMsg_AIDebugLine registers a callback for EDotaUserMessages_DOTA_UM_AIDebugLine
+func (c *Callbacks) OnCDOTAUserMsg_AIDebugLine(fn func(*dota.CDOTAUserMsg_AIDebugLine) error) {
+	c.onCDOTAUserMsg_AIDebugLine = append(c.onCDOTAUserMsg_AIDebugLine, fn)
+}
+
+// OnCDOTAUserMsg_ChatEvent registers a callback for EDotaUserMessages_DOTA_UM_ChatEvent
+func (c *Callbacks) OnCDOTAUserMsg_ChatEvent(fn func(*dota.CDOTAUserMsg_ChatEvent) error) {
+	c.onCDOTAUserMsg_ChatEvent = append(c.onCDOTAUserMsg_ChatEvent, fn)
+}
+
+// OnCDOTAUserMsg_CombatHeroPositions registers a callback for EDotaUserMessages_DOTA_UM_CombatHeroPositions
+func (c *Callbacks) OnCDOTAUserMsg_CombatHeroPositions(fn func(*dota.CDOTAUserMsg_CombatHeroPositions) error) {
+	c.onCDOTAUserMsg_CombatHeroPositions = append(c.onCDOTAUserMsg_CombatHeroPositions, fn)
+}
+
+// OnCDOTAUserMsg_CombatLogShowDeath registers a callback for EDotaUserMessages_DOTA_UM_CombatLogShowDeath
+func (c *Callbacks) OnCDOTAUserMsg_CombatLogShowDeath(fn func(*dota.CDOTAUserMsg_CombatLogShowDeath) error) {
+	c.onCDOTAUserMsg_CombatLogShowDeath = append(c.onCDOTAUserMsg_CombatLogShowDeath, fn)
+}
+
+// OnCDOTAUserMsg_CreateLinearProjectile registers a callback for EDotaUserMessages_DOTA_UM_CreateLinearProjectile
+func (c *Callbacks) OnCDOTAUserMsg_CreateLinearProjectile(fn func(*dota.CDOTAUserMsg_CreateLinearProjectile) error) {
+	c.onCDOTAUserMsg_CreateLinearProjectile = append(c.onCDOTAUserMsg_CreateLinearProjectile, fn)
+}
+
+// OnCDOTAUserMsg_DestroyLinearProjectile registers a callback for EDotaUserMessages_DOTA_UM_DestroyLinearProjectile
+func (c *Callbacks) OnCDOTAUserMsg_DestroyLinearProjectile(fn func(*dota.CDOTAUserMsg_DestroyLinearProjectile) error) {
+	c.onCDOTAUserMsg_DestroyLinearProjectile = append(c.onCDOTAUserMsg_DestroyLinearProjectile, fn)
+}
+
+// OnCDOTAUserMsg_DodgeTrackingProjectiles registers a callback for EDotaUserMessages_DOTA_UM_DodgeTrackingProjectiles
+func (c *Callbacks) OnCDOTAUserMsg_DodgeTrackingProjectiles(fn func(*dota.CDOTAUserMsg_DodgeTrackingProjectiles) error) {
+	c.onCDOTAUserMsg_DodgeTrackingProjectiles = append(c.onCDOTAUserMsg_DodgeTrackingProjectiles, fn)
+}
+
+// OnCDOTAUserMsg_GlobalLightColor registers a callback for EDotaUserMessages_DOTA_UM_GlobalLightColor
+func (c *Callbacks) OnCDOTAUserMsg_GlobalLightColor(fn func(*dota.CDOTAUserMsg_GlobalLightColor) error) {
+	c.onCDOTAUserMsg_GlobalLightColor = append(c.onCDOTAUserMsg_GlobalLightColor, fn)
+}
+
+// OnCDOTAUserMsg_GlobalLightDirection registers a callback for EDotaUserMessages_DOTA_UM_GlobalLightDirection
+func (c *Callbacks) OnCDOTAUserMsg_GlobalLightDirection(fn func(*dota.CDOTAUserMsg_GlobalLightDirection) error) {
+	c.onCDOTAUserMsg_GlobalLightDirection = append(c.onCDOTAUserMsg_GlobalLightDirection, fn)
+}
+
+// OnCDOTAUserMsg_InvalidCommand registers a callback for EDotaUserMessages_DOTA_UM_InvalidCommand
+func (c *Callbacks) OnCDOTAUserMsg_InvalidCommand(fn func(*dota.CDOTAUserMsg_InvalidCommand) error) {
+	c.onCDOTAUserMsg_InvalidCommand = append(c.onCDOTAUserMsg_InvalidCommand, fn)
+}
+
+// OnCDOTAUserMsg_LocationPing registers a callback for EDotaUserMessages_DOTA_UM_LocationPing
+func (c *Callbacks) OnCDOTAUserMsg_LocationPing(fn func(*dota.CDOTAUserMsg_LocationPing) error) {
+	c.onCDOTAUserMsg_LocationPing = append(c.onCDOTAUserMsg_LocationPing, fn)
+}
+
+// OnCDOTAUserMsg_MapLine registers a callback for EDotaUserMessages_DOTA_UM_MapLine
+func (c *Callbacks) OnCDOTAUserMsg_MapLine(fn func(*dota.CDOTAUserMsg_MapLine) error) {
+	c.onCDOTAUserMsg_MapLine = append(c.onCDOTAUserMsg_MapLine, fn)
+}
+
+// OnCDOTAUserMsg_MiniKillCamInfo registers a callback for EDotaUserMessages_DOTA_UM_MiniKillCamInfo
+func (c *Callbacks) OnCDOTAUserMsg_MiniKillCamInfo(fn func(*dota.CDOTAUserMsg_MiniKillCamInfo) error) {
+	c.onCDOTAUserMsg_MiniKillCamInfo = append(c.onCDOTAUserMsg_MiniKillCamInfo, fn)
+}
+
+// OnCDOTAUserMsg_MinimapDebugPoint registers a callback for EDotaUserMessages_DOTA_UM_MinimapDebugPoint
+func (c *Callbacks) OnCDOTAUserMsg_MinimapDebugPoint(fn func(*dota.CDOTAUserMsg_MinimapDebugPoint) error) {
+	c.onCDOTAUserMsg_MinimapDebugPoint = append(c.onCDOTAUserMsg_MinimapDebugPoint, fn)
+}
+
+// OnCDOTAUserMsg_MinimapEvent registers a callback for EDotaUserMessages_DOTA_UM_MinimapEvent
+func (c *Callbacks) OnCDOTAUserMsg_MinimapEvent(fn func(*dota.CDOTAUserMsg_MinimapEvent) error) {
+	c.onCDOTAUserMsg_MinimapEvent = append(c.onCDOTAUserMsg_MinimapEvent, fn)
+}
+
+// OnCDOTAUserMsg_NevermoreRequiem registers a callback for EDotaUserMessages_DOTA_UM_NevermoreRequiem
+func (c *Callbacks) OnCDOTAUserMsg_NevermoreRequiem(fn func(*dota.CDOTAUserMsg_NevermoreRequiem) error) {
+	c.onCDOTAUserMsg_NevermoreRequiem = append(c.onCDOTAUserMsg_NevermoreRequiem, fn)
+}
+
+// OnCDOTAUserMsg_OverheadEvent registers a callback for EDotaUserMessages_DOTA_UM_OverheadEvent
+func (c *Callbacks) OnCDOTAUserMsg_OverheadEvent(fn func(*dota.CDOTAUserMsg_OverheadEvent) error) {
+	c.onCDOTAUserMsg_OverheadEvent = append(c.onCDOTAUserMsg_OverheadEvent, fn)
+}
+
+// OnCDOTAUserMsg_SetNextAutobuyItem registers a callback for EDotaUserMessages_DOTA_UM_SetNextAutobuyItem
+func (c *Callbacks) OnCDOTAUserMsg_SetNextAutobuyItem(fn func(*dota.CDOTAUserMsg_SetNextAutobuyItem) error) {
+	c.onCDOTAUserMsg_SetNextAutobuyItem = append(c.onCDOTAUserMsg_SetNextAutobuyItem, fn)
+}
+
+// OnCDOTAUserMsg_SharedCooldown registers a callback for EDotaUserMessages_DOTA_UM_SharedCooldown
+func (c *Callbacks) OnCDOTAUserMsg_SharedCooldown(fn func(*dota.CDOTAUserMsg_SharedCooldown) error) {
+	c.onCDOTAUserMsg_SharedCooldown = append(c.onCDOTAUserMsg_SharedCooldown, fn)
+}
+
+// OnCDOTAUserMsg_SpectatorPlayerClick registers a callback for EDotaUserMessages_DOTA_UM_SpectatorPlayerClick
+func (c *Callbacks) OnCDOTAUserMsg_SpectatorPlayerClick(fn func(*dota.CDOTAUserMsg_SpectatorPlayerClick) error) {
+	c.onCDOTAUserMsg_SpectatorPlayerClick = append(c.onCDOTAUserMsg_SpectatorPlayerClick, fn)
+}
+
+// OnCDOTAUserMsg_TutorialTipInfo registers a callback for EDotaUserMessages_DOTA_UM_TutorialTipInfo
+func (c *Callbacks) OnCDOTAUserMsg_TutorialTipInfo(fn func(*dota.CDOTAUserMsg_TutorialTipInfo) error) {
+	c.onCDOTAUserMsg_TutorialTipInfo = append(c.onCDOTAUserMsg_TutorialTipInfo, fn)
+}
+
+// OnCDOTAUserMsg_UnitEvent registers a callback for EDotaUserMessages_DOTA_UM_UnitEvent
+func (c *Callbacks) OnCDOTAUserMsg_UnitEvent(fn func(*dota.CDOTAUserMsg_UnitEvent) error) {
+	c.onCDOTAUserMsg_UnitEvent = append(c.onCDOTAUserMsg_UnitEvent, fn)
+}
+
+// OnCDOTAUserMsg_ParticleManager registers a callback for EDotaUserMessages_DOTA_UM_ParticleManager
+func (c *Callbacks) OnCDOTAUserMsg_ParticleManager(fn func(*dota.CDOTAUserMsg_ParticleManager) error) {
+	c.onCDOTAUserMsg_ParticleManager = append(c.onCDOTAUserMsg_ParticleManager, fn)
+}
+
+// OnCDOTAUserMsg_BotChat registers a callback for EDotaUserMessages_DOTA_UM_BotChat
+func (c *Callbacks) OnCDOTAUserMsg_BotChat(fn func(*dota.CDOTAUserMsg_BotChat) error) {
+	c.onCDOTAUserMsg_BotChat = append(c.onCDOTAUserMsg_BotChat, fn)
+}
+
+// OnCDOTAUserMsg_HudError registers a callback for EDotaUserMessages_DOTA_UM_HudError
+func (c *Callbacks) OnCDOTAUserMsg_HudError(fn func(*dota.CDOTAUserMsg_HudError) error) {
+	c.onCDOTAUserMsg_HudError = append(c.onCDOTAUserMsg_HudError, fn)
+}
+
+// OnCDOTAUserMsg_ItemPurchased registers a callback for EDotaUserMessages_DOTA_UM_ItemPurchased
+func (c *Callbacks) OnCDOTAUserMsg_ItemPurchased(fn func(*dota.CDOTAUserMsg_ItemPurchased) error) {
+	c.onCDOTAUserMsg_ItemPurchased = append(c.onCDOTAUserMsg_ItemPurchased, fn)
+}
+
+// OnCDOTAUserMsg_Ping registers a callback for EDotaUserMessages_DOTA_UM_Ping
+func (c *Callbacks) OnCDOTAUserMsg_Ping(fn func(*dota.CDOTAUserMsg_Ping) error) {
+	c.onCDOTAUserMsg_Ping = append(c.onCDOTAUserMsg_Ping, fn)
+}
+
+// OnCDOTAUserMsg_ItemFound registers a callback for EDotaUserMessages_DOTA_UM_ItemFound
+func (c *Callbacks) OnCDOTAUserMsg_ItemFound(fn func(*dota.CDOTAUserMsg_ItemFound) error) {
+	c.onCDOTAUserMsg_ItemFound = append(c.onCDOTAUserMsg_ItemFound, fn)
+}
+
+// OnCDOTAUserMsg_SwapVerify registers a callback for EDotaUserMessages_DOTA_UM_SwapVerify
+func (c *Callbacks) OnCDOTAUserMsg_SwapVerify(fn func(*dota.CDOTAUserMsg_SwapVerify) error) {
+	c.onCDOTAUserMsg_SwapVerify = append(c.onCDOTAUserMsg_SwapVerify, fn)
+}
+
+// OnCDOTAUserMsg_WorldLine registers a callback for EDotaUserMessages_DOTA_UM_WorldLine
+func (c *Callbacks) OnCDOTAUserMsg_WorldLine(fn func(*dota.CDOTAUserMsg_WorldLine) error) {
+	c.onCDOTAUserMsg_WorldLine = append(c.onCDOTAUserMsg_WorldLine, fn)
+}
+
+// OnCMsgGCToClientTournamentItemDrop registers a callback for EDotaUserMessages_DOTA_UM_TournamentDrop
+func (c *Callbacks) OnCMsgGCToClientTournamentItemDrop(fn func(*dota.CMsgGCToClientTournamentItemDrop) error) {
+	c.onCMsgGCToClientTournamentItemDrop = append(c.onCMsgGCToClientTournamentItemDrop, fn)
+}
+
+// OnCDOTAUserMsg_ItemAlert registers a callback for EDotaUserMessages_DOTA_UM_ItemAlert
+func (c *Callbacks) OnCDOTAUserMsg_ItemAlert(fn func(*dota.CDOTAUserMsg_ItemAlert) error) {
+	c.onCDOTAUserMsg_ItemAlert = append(c.onCDOTAUserMsg_ItemAlert, fn)
+}
+
+// OnCDOTAUserMsg_HalloweenDrops registers a callback for EDotaUserMessages_DOTA_UM_HalloweenDrops
+func (c *Callbacks) OnCDOTAUserMsg_HalloweenDrops(fn func(*dota.CDOTAUserMsg_HalloweenDrops) error) {
+	c.onCDOTAUserMsg_HalloweenDrops = append(c.onCDOTAUserMsg_HalloweenDrops, fn)
+}
+
+// OnCDOTAUserMsg_ChatWheel registers a callback for EDotaUserMessages_DOTA_UM_ChatWheel
+func (c *Callbacks) OnCDOTAUserMsg_ChatWheel(fn func(*dota.CDOTAUserMsg_ChatWheel) error) {
+	c.onCDOTAUserMsg_ChatWheel = append(c.onCDOTAUserMsg_ChatWheel, fn)
+}
+
+// OnCDOTAUserMsg_ReceivedXmasGift registers a callback for EDotaUserMessages_DOTA_UM_ReceivedXmasGift
+func (c *Callbacks) OnCDOTAUserMsg_ReceivedXmasGift(fn func(*dota.CDOTAUserMsg_ReceivedXmasGift) error) {
+	c.onCDOTAUserMsg_ReceivedXmasGift = append(c.onCDOTAUserMsg_ReceivedXmasGift, fn)
+}
+
+// OnCDOTAUserMsg_UpdateSharedContent registers a callback for EDotaUserMessages_DOTA_UM_UpdateSharedContent
+func (c *Callbacks) OnCDOTAUserMsg_UpdateSharedContent(fn func(*dota.CDOTAUserMsg_UpdateSharedContent) error) {
+	c.onCDOTAUserMsg_UpdateSharedContent = append(c.onCDOTAUserMsg_UpdateSharedContent, fn)
+}
+
+// OnCDOTAUserMsg_TutorialRequestExp registers a callback for EDotaUserMessages_DOTA_UM_TutorialRequestExp
+func (c *Callbacks) OnCDOTAUserMsg_TutorialRequestExp(fn func(*dota.CDOTAUserMsg_TutorialRequestExp) error) {
+	c.onCDOTAUserMsg_TutorialRequestExp = append(c.onCDOTAUserMsg_TutorialRequestExp, fn)
+}
+
+// OnCDOTAUserMsg_TutorialPingMinimap registers a callback for EDotaUserMessages_DOTA_UM_TutorialPingMinimap
+func (c *Callbacks) OnCDOTAUserMsg_TutorialPingMinimap(fn func(*dota.CDOTAUserMsg_TutorialPingMinimap) error) {
+	c.onCDOTAUserMsg_TutorialPingMinimap = append(c.onCDOTAUserMsg_TutorialPingMinimap, fn)
+}
+
+// OnCDOTAUserMsg_GamerulesStateChanged registers a callback for EDotaUserMessages_DOTA_UM_GamerulesStateChanged
+func (c *Callbacks) OnCDOTAUserMsg_GamerulesStateChanged(fn func(*dota.CDOTAUserMsg_GamerulesStateChanged) error) {
+	c.onCDOTAUserMsg_GamerulesStateChanged = append(c.onCDOTAUserMsg_GamerulesStateChanged, fn)
+}
+
+// OnCDOTAUserMsg_ShowSurvey registers a callback for EDotaUserMessages_DOTA_UM_ShowSurvey
+func (c *Callbacks) OnCDOTAUserMsg_ShowSurvey(fn func(*dota.CDOTAUserMsg_ShowSurvey) error) {
+	c.onCDOTAUserMsg_ShowSurvey = append(c.onCDOTAUserMsg_ShowSurvey, fn)
+}
+
+// OnCDOTAUserMsg_TutorialFade registers a callback for EDotaUserMessages_DOTA_UM_TutorialFade
+func (c *Callbacks) OnCDOTAUserMsg_TutorialFade(fn func(*dota.CDOTAUserMsg_TutorialFade) error) {
+	c.onCDOTAUserMsg_TutorialFade = append(c.onCDOTAUserMsg_TutorialFade, fn)
+}
+
+// OnCDOTAUserMsg_AddQuestLogEntry registers a callback for EDotaUserMessages_DOTA_UM_AddQuestLogEntry
+func (c *Callbacks) OnCDOTAUserMsg_AddQuestLogEntry(fn func(*dota.CDOTAUserMsg_AddQuestLogEntry) error) {
+	c.onCDOTAUserMsg_AddQuestLogEntry = append(c.onCDOTAUserMsg_AddQuestLogEntry, fn)
+}
+
+// OnCDOTAUserMsg_SendStatPopup registers a callback for EDotaUserMessages_DOTA_UM_SendStatPopup
+func (c *Callbacks) OnCDOTAUserMsg_SendStatPopup(fn func(*dota.CDOTAUserMsg_SendStatPopup) error) {
+	c.onCDOTAUserMsg_SendStatPopup = append(c.onCDOTAUserMsg_SendStatPopup, fn)
+}
+
+// OnCDOTAUserMsg_TutorialFinish registers a callback for EDotaUserMessages_DOTA_UM_TutorialFinish
+func (c *Callbacks) OnCDOTAUserMsg_TutorialFinish(fn func(*dota.CDOTAUserMsg_TutorialFinish) error) {
+	c.onCDOTAUserMsg_TutorialFinish = append(c.onCDOTAUserMsg_TutorialFinish, fn)
+}
+
+// OnCDOTAUserMsg_SendRoshanPopup registers a callback for EDotaUserMessages_DOTA_UM_SendRoshanPopup
+func (c *Callbacks) OnCDOTAUserMsg_SendRoshanPopup(fn func(*dota.CDOTAUserMsg_SendRoshanPopup) error) {
+	c.onCDOTAUserMsg_SendRoshanPopup = append(c.onCDOTAUserMsg_SendRoshanPopup, fn)
+}
+
+// OnCDOTAUserMsg_SendGenericToolTip registers a callback for EDotaUserMessages_DOTA_UM_SendGenericToolTip
+func (c *Callbacks) OnCDOTAUserMsg_SendGenericToolTip(fn func(*dota.CDOTAUserMsg_SendGenericToolTip) error) {
+	c.onCDOTAUserMsg_SendGenericToolTip = append(c.onCDOTAUserMsg_SendGenericToolTip, fn)
+}
+
+// OnCDOTAUserMsg_SendFinalGold registers a callback for EDotaUserMessages_DOTA_UM_SendFinalGold
+func (c *Callbacks) OnCDOTAUserMsg_SendFinalGold(fn func(*dota.CDOTAUserMsg_SendFinalGold) error) {
+	c.onCDOTAUserMsg_SendFinalGold = append(c.onCDOTAUserMsg_SendFinalGold, fn)
+}
+
+// OnCDOTAUserMsg_CustomMsg registers a callback for EDotaUserMessages_DOTA_UM_CustomMsg
+func (c *Callbacks) OnCDOTAUserMsg_CustomMsg(fn func(*dota.CDOTAUserMsg_CustomMsg) error) {
+	c.onCDOTAUserMsg_CustomMsg = append(c.onCDOTAUserMsg_CustomMsg, fn)
+}
+
+// OnCDOTAUserMsg_CoachHUDPing registers a callback for EDotaUserMessages_DOTA_UM_CoachHUDPing
+func (c *Callbacks) OnCDOTAUserMsg_CoachHUDPing(fn func(*dota.CDOTAUserMsg_CoachHUDPing) error) {
+	c.onCDOTAUserMsg_CoachHUDPing = append(c.onCDOTAUserMsg_CoachHUDPing, fn)
+}
+
+// OnCDOTAUserMsg_ClientLoadGridNav registers a callback for EDotaUserMessages_DOTA_UM_ClientLoadGridNav
+func (c *Callbacks) OnCDOTAUserMsg_ClientLoadGridNav(fn func(*dota.CDOTAUserMsg_ClientLoadGridNav) error) {
+	c.onCDOTAUserMsg_ClientLoadGridNav = append(c.onCDOTAUserMsg_ClientLoadGridNav, fn)
+}
+
+// OnCDOTAUserMsg_TE_Projectile registers a callback for EDotaUserMessages_DOTA_UM_TE_Projectile
+func (c *Callbacks) OnCDOTAUserMsg_TE_Projectile(fn func(*dota.CDOTAUserMsg_TE_Projectile) error) {
+	c.onCDOTAUserMsg_TE_Projectile = append(c.onCDOTAUserMsg_TE_Projectile, fn)
+}
+
+// OnCDOTAUserMsg_TE_ProjectileLoc registers a callback for EDotaUserMessages_DOTA_UM_TE_ProjectileLoc
+func (c *Callbacks) OnCDOTAUserMsg_TE_ProjectileLoc(fn func(*dota.CDOTAUserMsg_TE_ProjectileLoc) error) {
+	c.onCDOTAUserMsg_TE_ProjectileLoc = append(c.onCDOTAUserMsg_TE_ProjectileLoc, fn)
+}
+
+// OnCDOTAUserMsg_TE_DotaBloodImpact registers a callback for EDotaUserMessages_DOTA_UM_TE_DotaBloodImpact
+func (c *Callbacks) OnCDOTAUserMsg_TE_DotaBloodImpact(fn func(*dota.CDOTAUserMsg_TE_DotaBloodImpact) error) {
+	c.onCDOTAUserMsg_TE_DotaBloodImpact = append(c.onCDOTAUserMsg_TE_DotaBloodImpact, fn)
+}
+
+// OnCDOTAUserMsg_TE_UnitAnimation registers a callback for EDotaUserMessages_DOTA_UM_TE_UnitAnimation
+func (c *Callbacks) OnCDOTAUserMsg_TE_UnitAnimation(fn func(*dota.CDOTAUserMsg_TE_UnitAnimation) error) {
+	c.onCDOTAUserMsg_TE_UnitAnimation = append(c.onCDOTAUserMsg_TE_UnitAnimation, fn)
+}
+
+// OnCDOTAUserMsg_TE_UnitAnimationEnd registers a callback for EDotaUserMessages_DOTA_UM_TE_UnitAnimationEnd
+func (c *Callbacks) OnCDOTAUserMsg_TE_UnitAnimationEnd(fn func(*dota.CDOTAUserMsg_TE_UnitAnimationEnd) error) {
+	c.onCDOTAUserMsg_TE_UnitAnimationEnd = append(c.onCDOTAUserMsg_TE_UnitAnimationEnd, fn)
+}
+
+// OnCDOTAUserMsg_AbilityPing registers a callback for EDotaUserMessages_DOTA_UM_AbilityPing
+func (c *Callbacks) OnCDOTAUserMsg_AbilityPing(fn func(*dota.CDOTAUserMsg_AbilityPing) error) {
+	c.onCDOTAUserMsg_AbilityPing = append(c.onCDOTAUserMsg_AbilityPing, fn)
+}
+
+// OnCDOTAUserMsg_ShowGenericPopup registers a callback for EDotaUserMessages_DOTA_UM_ShowGenericPopup
+func (c *Callbacks) OnCDOTAUserMsg_ShowGenericPopup(fn func(*dota.CDOTAUserMsg_ShowGenericPopup) error) {
+	c.onCDOTAUserMsg_ShowGenericPopup = append(c.onCDOTAUserMsg_ShowGenericPopup, fn)
+}
+
+// OnCDOTAUserMsg_VoteStart registers a callback for EDotaUserMessages_DOTA_UM_VoteStart
+func (c *Callbacks) OnCDOTAUserMsg_VoteStart(fn func(*dota.CDOTAUserMsg_VoteStart) error) {
+	c.onCDOTAUserMsg_VoteStart = append(c.onCDOTAUserMsg_VoteStart, fn)
+}
+
+// OnCDOTAUserMsg_VoteUpdate registers a callback for EDotaUserMessages_DOTA_UM_VoteUpdate
+func (c *Callbacks) OnCDOTAUserMsg_VoteUpdate(fn func(*dota.CDOTAUserMsg_VoteUpdate) error) {
+	c.onCDOTAUserMsg_VoteUpdate = append(c.onCDOTAUserMsg_VoteUpdate, fn)
+}
+
+// OnCDOTAUserMsg_VoteEnd registers a callback for EDotaUserMessages_DOTA_UM_VoteEnd
+func (c *Callbacks) OnCDOTAUserMsg_VoteEnd(fn func(*dota.CDOTAUserMsg_VoteEnd) error) {
+	c.onCDOTAUserMsg_VoteEnd = append(c.onCDOTAUserMsg_VoteEnd, fn)
+}
+
+// OnCDOTAUserMsg_BoosterState registers a callback for EDotaUserMessages_DOTA_UM_BoosterState
+func (c *Callbacks) OnCDOTAUserMsg_BoosterState(fn func(*dota.CDOTAUserMsg_BoosterState) error) {
+	c.onCDOTAUserMsg_BoosterState = append(c.onCDOTAUserMsg_BoosterState, fn)
+}
+
+// OnCDOTAUserMsg_WillPurchaseAlert registers a callback for EDotaUserMessages_DOTA_UM_WillPurchaseAlert
+func (c *Callbacks) OnCDOTAUserMsg_WillPurchaseAlert(fn func(*dota.CDOTAUserMsg_WillPurchaseAlert) error) {
+	c.onCDOTAUserMsg_WillPurchaseAlert = append(c.onCDOTAUserMsg_WillPurchaseAlert, fn)
+}
+
+// OnCDOTAUserMsg_TutorialMinimapPosition registers a callback for EDotaUserMessages_DOTA_UM_TutorialMinimapPosition
+func (c *Callbacks) OnCDOTAUserMsg_TutorialMinimapPosition(fn func(*dota.CDOTAUserMsg_TutorialMinimapPosition) error) {
+	c.onCDOTAUserMsg_TutorialMinimapPosition = append(c.onCDOTAUserMsg_TutorialMinimapPosition, fn)
+}
+
+// OnCDOTAUserMsg_PlayerMMR registers a callback for EDotaUserMessages_DOTA_UM_PlayerMMR
+func (c *Callbacks) OnCDOTAUserMsg_PlayerMMR(fn func(*dota.CDOTAUserMsg_PlayerMMR) error) {
+	c.onCDOTAUserMsg_PlayerMMR = append(c.onCDOTAUserMsg_PlayerMMR, fn)
+}
+
+// OnCDOTAUserMsg_AbilitySteal registers a callback for EDotaUserMessages_DOTA_UM_AbilitySteal
+func (c *Callbacks) OnCDOTAUserMsg_AbilitySteal(fn func(*dota.CDOTAUserMsg_AbilitySteal) error) {
+	c.onCDOTAUserMsg_AbilitySteal = append(c.onCDOTAUserMsg_AbilitySteal, fn)
+}
+
+// OnCDOTAUserMsg_CourierKilledAlert registers a callback for EDotaUserMessages_DOTA_UM_CourierKilledAlert
+func (c *Callbacks) OnCDOTAUserMsg_CourierKilledAlert(fn func(*dota.CDOTAUserMsg_CourierKilledAlert) error) {
+	c.onCDOTAUserMsg_CourierKilledAlert = append(c.onCDOTAUserMsg_CourierKilledAlert, fn)
+}
+
+// OnCDOTAUserMsg_EnemyItemAlert registers a callback for EDotaUserMessages_DOTA_UM_EnemyItemAlert
+func (c *Callbacks) OnCDOTAUserMsg_EnemyItemAlert(fn func(*dota.CDOTAUserMsg_EnemyItemAlert) error) {
+	c.onCDOTAUserMsg_EnemyItemAlert = append(c.onCDOTAUserMsg_EnemyItemAlert, fn)
+}
+
+// OnCDOTAUserMsg_StatsMatchDetails registers a callback for EDotaUserMessages_DOTA_UM_StatsMatchDetails
+func (c *Callbacks) OnCDOTAUserMsg_StatsMatchDetails(fn func(*dota.CDOTAUserMsg_StatsMatchDetails) error) {
+	c.onCDOTAUserMsg_StatsMatchDetails = append(c.onCDOTAUserMsg_StatsMatchDetails, fn)
+}
+
+// OnCDOTAUserMsg_MiniTaunt registers a callback for EDotaUserMessages_DOTA_UM_MiniTaunt
+func (c *Callbacks) OnCDOTAUserMsg_MiniTaunt(fn func(*dota.CDOTAUserMsg_MiniTaunt) error) {
+	c.onCDOTAUserMsg_MiniTaunt = append(c.onCDOTAUserMsg_MiniTaunt, fn)
+}
+
+// OnCDOTAUserMsg_BuyBackStateAlert registers a callback for EDotaUserMessages_DOTA_UM_BuyBackStateAlert
+func (c *Callbacks) OnCDOTAUserMsg_BuyBackStateAlert(fn func(*dota.CDOTAUserMsg_BuyBackStateAlert) error) {
+	c.onCDOTAUserMsg_BuyBackStateAlert = append(c.onCDOTAUserMsg_BuyBackStateAlert, fn)
+}
+
+// OnCDOTAUserMsg_SpeechBubble registers a callback for EDotaUserMessages_DOTA_UM_SpeechBubble
+func (c *Callbacks) OnCDOTAUserMsg_SpeechBubble(fn func(*dota.CDOTAUserMsg_SpeechBubble) error) {
+	c.onCDOTAUserMsg_SpeechBubble = append(c.onCDOTAUserMsg_SpeechBubble, fn)
+}
+
+// OnCDOTAUserMsg_CustomHeaderMessage registers a callback for EDotaUserMessages_DOTA_UM_CustomHeaderMessage
+func (c *Callbacks) OnCDOTAUserMsg_CustomHeaderMessage(fn func(*dota.CDOTAUserMsg_CustomHeaderMessage) error) {
+	c.onCDOTAUserMsg_CustomHeaderMessage = append(c.onCDOTAUserMsg_CustomHeaderMessage, fn)
+}
+
+// OnCDOTAUserMsg_QuickBuyAlert registers a callback for EDotaUserMessages_DOTA_UM_QuickBuyAlert
+func (c *Callbacks) OnCDOTAUserMsg_QuickBuyAlert(fn func(*dota.CDOTAUserMsg_QuickBuyAlert) error) {
+	c.onCDOTAUserMsg_QuickBuyAlert = append(c.onCDOTAUserMsg_QuickBuyAlert, fn)
+}
+
+// OnCDOTAUserMsg_StatsHeroMinuteDetails registers a callback for EDotaUserMessages_DOTA_UM_StatsHeroDetails
+func (c *Callbacks) OnCDOTAUserMsg_StatsHeroMinuteDetails(fn func(*dota.CDOTAUserMsg_StatsHeroMinuteDetails) error) {
+	c.onCDOTAUserMsg_StatsHeroMinuteDetails = append(c.onCDOTAUserMsg_StatsHeroMinuteDetails, fn)
+}
+
+// OnCDOTAUserMsg_PredictionResult registers a callback for EDotaUserMessages_DOTA_UM_PredictionResult
+func (c *Callbacks) OnCDOTAUserMsg_PredictionResult(fn func(*dota.CDOTAUserMsg_PredictionResult) error) {
+	c.onCDOTAUserMsg_PredictionResult = append(c.onCDOTAUserMsg_PredictionResult, fn)
+}
+
+// OnCDOTAUserMsg_ModifierAlert registers a callback for EDotaUserMessages_DOTA_UM_ModifierAlert
+func (c *Callbacks) OnCDOTAUserMsg_ModifierAlert(fn func(*dota.CDOTAUserMsg_ModifierAlert) error) {
+	c.onCDOTAUserMsg_ModifierAlert = append(c.onCDOTAUserMsg_ModifierAlert, fn)
+}
+
+// OnCDOTAUserMsg_HPManaAlert registers a callback for EDotaUserMessages_DOTA_UM_HPManaAlert
+func (c *Callbacks) OnCDOTAUserMsg_HPManaAlert(fn func(*dota.CDOTAUserMsg_HPManaAlert) error) {
+	c.onCDOTAUserMsg_HPManaAlert = append(c.onCDOTAUserMsg_HPManaAlert, fn)
+}
+
+// OnCDOTAUserMsg_GlyphAlert registers a callback for EDotaUserMessages_DOTA_UM_GlyphAlert
+func (c *Callbacks) OnCDOTAUserMsg_GlyphAlert(fn func(*dota.CDOTAUserMsg_GlyphAlert) error) {
+	c.onCDOTAUserMsg_GlyphAlert = append(c.onCDOTAUserMsg_GlyphAlert, fn)
+}
+
+// OnCDOTAUserMsg_BeastChat registers a callback for EDotaUserMessages_DOTA_UM_BeastChat
+func (c *Callbacks) OnCDOTAUserMsg_BeastChat(fn func(*dota.CDOTAUserMsg_BeastChat) error) {
+	c.onCDOTAUserMsg_BeastChat = append(c.onCDOTAUserMsg_BeastChat, fn)
+}
+
+// OnCDOTAUserMsg_SpectatorPlayerUnitOrders registers a callback for EDotaUserMessages_DOTA_UM_SpectatorPlayerUnitOrders
+func (c *Callbacks) OnCDOTAUserMsg_SpectatorPlayerUnitOrders(fn func(*dota.CDOTAUserMsg_SpectatorPlayerUnitOrders) error) {
+	c.onCDOTAUserMsg_SpectatorPlayerUnitOrders = append(c.onCDOTAUserMsg_SpectatorPlayerUnitOrders, fn)
+}
+
+// OnCDOTAUserMsg_CustomHudElement_Create registers a callback for EDotaUserMessages_DOTA_UM_CustomHudElement_Create
+func (c *Callbacks) OnCDOTAUserMsg_CustomHudElement_Create(fn func(*dota.CDOTAUserMsg_CustomHudElement_Create) error) {
+	c.onCDOTAUserMsg_CustomHudElement_Create = append(c.onCDOTAUserMsg_CustomHudElement_Create, fn)
+}
+
+// OnCDOTAUserMsg_CustomHudElement_Modify registers a callback for EDotaUserMessages_DOTA_UM_CustomHudElement_Modify
+func (c *Callbacks) OnCDOTAUserMsg_CustomHudElement_Modify(fn func(*dota.CDOTAUserMsg_CustomHudElement_Modify) error) {
+	c.onCDOTAUserMsg_CustomHudElement_Modify = append(c.onCDOTAUserMsg_CustomHudElement_Modify, fn)
+}
+
+// OnCDOTAUserMsg_CustomHudElement_Destroy registers a callback for EDotaUserMessages_DOTA_UM_CustomHudElement_Destroy
+func (c *Callbacks) OnCDOTAUserMsg_CustomHudElement_Destroy(fn func(*dota.CDOTAUserMsg_CustomHudElement_Destroy) error) {
+	c.onCDOTAUserMsg_CustomHudElement_Destroy = append(c.onCDOTAUserMsg_CustomHudElement_Destroy, fn)
+}
+
+// OnCDOTAUserMsg_CompendiumState registers a callback for EDotaUserMessages_DOTA_UM_CompendiumState
+func (c *Callbacks) OnCDOTAUserMsg_CompendiumState(fn func(*dota.CDOTAUserMsg_CompendiumState) error) {
+	c.onCDOTAUserMsg_CompendiumState = append(c.onCDOTAUserMsg_CompendiumState, fn)
+}
+
+// OnCDOTAUserMsg_ProjectionAbility registers a callback for EDotaUserMessages_DOTA_UM_ProjectionAbility
+func (c *Callbacks) OnCDOTAUserMsg_ProjectionAbility(fn func(*dota.CDOTAUserMsg_ProjectionAbility) error) {
+	c.onCDOTAUserMsg_ProjectionAbility = append(c.onCDOTAUserMsg_ProjectionAbility, fn)
+}
+
+// OnCDOTAUserMsg_ProjectionEvent registers a callback for EDotaUserMessages_DOTA_UM_ProjectionEvent
+func (c *Callbacks) OnCDOTAUserMsg_ProjectionEvent(fn func(*dota.CDOTAUserMsg_ProjectionEvent) error) {
+	c.onCDOTAUserMsg_ProjectionEvent = append(c.onCDOTAUserMsg_ProjectionEvent, fn)
+}
+
+// OnCMsgDOTACombatLogEntry registers a callback for EDotaUserMessages_DOTA_UM_CombatLogDataHLTV
+func (c *Callbacks) OnCMsgDOTACombatLogEntry(fn func(*dota.CMsgDOTACombatLogEntry) error) {
+	c.onCMsgDOTACombatLogEntry = append(c.onCMsgDOTACombatLogEntry, fn)
+}
+
+// OnCDOTAUserMsg_XPAlert registers a callback for EDotaUserMessages_DOTA_UM_XPAlert
+func (c *Callbacks) OnCDOTAUserMsg_XPAlert(fn func(*dota.CDOTAUserMsg_XPAlert) error) {
+	c.onCDOTAUserMsg_XPAlert = append(c.onCDOTAUserMsg_XPAlert, fn)
+}
+
+// OnCDOTAUserMsg_UpdateQuestProgress registers a callback for EDotaUserMessages_DOTA_UM_UpdateQuestProgress
+func (c *Callbacks) OnCDOTAUserMsg_UpdateQuestProgress(fn func(*dota.CDOTAUserMsg_UpdateQuestProgress) error) {
+	c.onCDOTAUserMsg_UpdateQuestProgress = append(c.onCDOTAUserMsg_UpdateQuestProgress, fn)
+}
+
+// OnCDOTAClientMsg_MatchMetadata registers a callback for EDotaUserMessages_DOTA_UM_MatchMetadata
+func (c *Callbacks) OnCDOTAClientMsg_MatchMetadata(fn func(*dota.CDOTAClientMsg_MatchMetadata) error) {
+	c.onCDOTAClientMsg_MatchMetadata = append(c.onCDOTAClientMsg_MatchMetadata, fn)
+}
+
+func (c *Callbacks) callByDemoType(t int32, buf []byte) error {
+	switch t {
+	case 0: // dota.EDemoCommands_DEM_Stop
+		if c.onCDemoStop == nil {
+			return nil
+		}
+
+		msg := &dota.CDemoStop{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDemoStop {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 1: // dota.EDemoCommands_DEM_FileHeader
+		if c.onCDemoFileHeader == nil {
+			return nil
+		}
+
+		msg := &dota.CDemoFileHeader{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDemoFileHeader {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 2: // dota.EDemoCommands_DEM_FileInfo
+		if c.onCDemoFileInfo == nil {
+			return nil
+		}
+
+		msg := &dota.CDemoFileInfo{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDemoFileInfo {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 3: // dota.EDemoCommands_DEM_SyncTick
+		if c.onCDemoSyncTick == nil {
+			return nil
+		}
+
+		msg := &dota.CDemoSyncTick{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDemoSyncTick {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 4: // dota.EDemoCommands_DEM_SendTables
+		if c.onCDemoSendTables == nil {
+			return nil
+		}
+
+		msg := &dota.CDemoSendTables{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDemoSendTables {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 5: // dota.EDemoCommands_DEM_ClassInfo
+		if c.onCDemoClassInfo == nil {
+			return nil
+		}
+
+		msg := &dota.CDemoClassInfo{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDemoClassInfo {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 6: // dota.EDemoCommands_DEM_StringTables
+		if c.onCDemoStringTables == nil {
+			return nil
+		}
+
+		msg := &dota.CDemoStringTables{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDemoStringTables {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 7: // dota.EDemoCommands_DEM_Packet
+		if c.onCDemoPacket == nil {
+			return nil
+		}
+
+		msg := &dota.CDemoPacket{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDemoPacket {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 8: // dota.EDemoCommands_DEM_SignonPacket
+		if c.onCDemoSignonPacket == nil {
+			return nil
+		}
+
+		msg := &dota.CDemoPacket{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDemoSignonPacket {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 9: // dota.EDemoCommands_DEM_ConsoleCmd
+		if c.onCDemoConsoleCmd == nil {
+			return nil
+		}
+
+		msg := &dota.CDemoConsoleCmd{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDemoConsoleCmd {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 10: // dota.EDemoCommands_DEM_CustomData
+		if c.onCDemoCustomData == nil {
+			return nil
+		}
+
+		msg := &dota.CDemoCustomData{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDemoCustomData {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 11: // dota.EDemoCommands_DEM_CustomDataCallbacks
+		if c.onCDemoCustomDataCallbacks == nil {
+			return nil
+		}
+
+		msg := &dota.CDemoCustomDataCallbacks{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDemoCustomDataCallbacks {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 12: // dota.EDemoCommands_DEM_UserCmd
+		if c.onCDemoUserCmd == nil {
+			return nil
+		}
+
+		msg := &dota.CDemoUserCmd{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDemoUserCmd {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 13: // dota.EDemoCommands_DEM_FullPacket
+		if c.onCDemoFullPacket == nil {
+			return nil
+		}
+
+		msg := &dota.CDemoFullPacket{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDemoFullPacket {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 14: // dota.EDemoCommands_DEM_SaveGame
+		if c.onCDemoSaveGame == nil {
+			return nil
+		}
+
+		msg := &dota.CDemoSaveGame{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDemoSaveGame {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 15: // dota.EDemoCommands_DEM_SpawnGroups
+		if c.onCDemoSpawnGroups == nil {
+			return nil
+		}
+
+		msg := &dota.CDemoSpawnGroups{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDemoSpawnGroups {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	}
+
+	if v(1) {
+		_debugf("warning: no demo type %d found", t)
+	}
+
+	return nil
+}
+
+func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
+	switch t {
+	case 0: // dota.NET_Messages_net_NOP
+		if c.onCNETMsg_NOP == nil {
+			return nil
+		}
+
+		msg := &dota.CNETMsg_NOP{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCNETMsg_NOP {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 1: // dota.NET_Messages_net_Disconnect
+		if c.onCNETMsg_Disconnect == nil {
+			return nil
+		}
+
+		msg := &dota.CNETMsg_Disconnect{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCNETMsg_Disconnect {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 3: // dota.NET_Messages_net_SplitScreenUser
+		if c.onCNETMsg_SplitScreenUser == nil {
+			return nil
+		}
+
+		msg := &dota.CNETMsg_SplitScreenUser{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCNETMsg_SplitScreenUser {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 4: // dota.NET_Messages_net_Tick
+		if c.onCNETMsg_Tick == nil {
+			return nil
+		}
+
+		msg := &dota.CNETMsg_Tick{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCNETMsg_Tick {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 5: // dota.NET_Messages_net_StringCmd
+		if c.onCNETMsg_StringCmd == nil {
+			return nil
+		}
+
+		msg := &dota.CNETMsg_StringCmd{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCNETMsg_StringCmd {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 6: // dota.NET_Messages_net_SetConVar
+		if c.onCNETMsg_SetConVar == nil {
+			return nil
+		}
+
+		msg := &dota.CNETMsg_SetConVar{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCNETMsg_SetConVar {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 7: // dota.NET_Messages_net_SignonState
+		if c.onCNETMsg_SignonState == nil {
+			return nil
+		}
+
+		msg := &dota.CNETMsg_SignonState{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCNETMsg_SignonState {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 8: // dota.NET_Messages_net_SpawnGroup_Load
+		if c.onCNETMsg_SpawnGroup_Load == nil {
+			return nil
+		}
+
+		msg := &dota.CNETMsg_SpawnGroup_Load{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCNETMsg_SpawnGroup_Load {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 9: // dota.NET_Messages_net_SpawnGroup_ManifestUpdate
+		if c.onCNETMsg_SpawnGroup_ManifestUpdate == nil {
+			return nil
+		}
+
+		msg := &dota.CNETMsg_SpawnGroup_ManifestUpdate{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCNETMsg_SpawnGroup_ManifestUpdate {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 11: // dota.NET_Messages_net_SpawnGroup_SetCreationTick
+		if c.onCNETMsg_SpawnGroup_SetCreationTick == nil {
+			return nil
+		}
+
+		msg := &dota.CNETMsg_SpawnGroup_SetCreationTick{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCNETMsg_SpawnGroup_SetCreationTick {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 12: // dota.NET_Messages_net_SpawnGroup_Unload
+		if c.onCNETMsg_SpawnGroup_Unload == nil {
+			return nil
+		}
+
+		msg := &dota.CNETMsg_SpawnGroup_Unload{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCNETMsg_SpawnGroup_Unload {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 13: // dota.NET_Messages_net_SpawnGroup_LoadCompleted
+		if c.onCNETMsg_SpawnGroup_LoadCompleted == nil {
+			return nil
+		}
+
+		msg := &dota.CNETMsg_SpawnGroup_LoadCompleted{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCNETMsg_SpawnGroup_LoadCompleted {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 40: // dota.SVC_Messages_svc_ServerInfo
+		if c.onCSVCMsg_ServerInfo == nil {
+			return nil
+		}
+
+		msg := &dota.CSVCMsg_ServerInfo{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCSVCMsg_ServerInfo {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 41: // dota.SVC_Messages_svc_FlattenedSerializer
+		if c.onCSVCMsg_FlattenedSerializer == nil {
+			return nil
+		}
+
+		msg := &dota.CSVCMsg_FlattenedSerializer{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCSVCMsg_FlattenedSerializer {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 42: // dota.SVC_Messages_svc_ClassInfo
+		if c.onCSVCMsg_ClassInfo == nil {
+			return nil
+		}
+
+		msg := &dota.CSVCMsg_ClassInfo{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCSVCMsg_ClassInfo {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 43: // dota.SVC_Messages_svc_SetPause
+		if c.onCSVCMsg_SetPause == nil {
+			return nil
+		}
+
+		msg := &dota.CSVCMsg_SetPause{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCSVCMsg_SetPause {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 44: // dota.SVC_Messages_svc_CreateStringTable
+		if c.onCSVCMsg_CreateStringTable == nil {
+			return nil
+		}
+
+		msg := &dota.CSVCMsg_CreateStringTable{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCSVCMsg_CreateStringTable {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 45: // dota.SVC_Messages_svc_UpdateStringTable
+		if c.onCSVCMsg_UpdateStringTable == nil {
+			return nil
+		}
+
+		msg := &dota.CSVCMsg_UpdateStringTable{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCSVCMsg_UpdateStringTable {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 46: // dota.SVC_Messages_svc_VoiceInit
+		if c.onCSVCMsg_VoiceInit == nil {
+			return nil
+		}
+
+		msg := &dota.CSVCMsg_VoiceInit{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCSVCMsg_VoiceInit {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 47: // dota.SVC_Messages_svc_VoiceData
+		if c.onCSVCMsg_VoiceData == nil {
+			return nil
+		}
+
+		msg := &dota.CSVCMsg_VoiceData{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCSVCMsg_VoiceData {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 48: // dota.SVC_Messages_svc_Print
+		if c.onCSVCMsg_Print == nil {
+			return nil
+		}
+
+		msg := &dota.CSVCMsg_Print{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCSVCMsg_Print {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 49: // dota.SVC_Messages_svc_Sounds
+		if c.onCSVCMsg_Sounds == nil {
+			return nil
+		}
+
+		msg := &dota.CSVCMsg_Sounds{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCSVCMsg_Sounds {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 50: // dota.SVC_Messages_svc_SetView
+		if c.onCSVCMsg_SetView == nil {
+			return nil
+		}
+
+		msg := &dota.CSVCMsg_SetView{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCSVCMsg_SetView {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 51: // dota.SVC_Messages_svc_ClearAllStringTables
+		if c.onCSVCMsg_ClearAllStringTables == nil {
+			return nil
+		}
+
+		msg := &dota.CSVCMsg_ClearAllStringTables{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCSVCMsg_ClearAllStringTables {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 52: // dota.SVC_Messages_svc_CmdKeyValues
+		if c.onCSVCMsg_CmdKeyValues == nil {
+			return nil
+		}
+
+		msg := &dota.CSVCMsg_CmdKeyValues{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCSVCMsg_CmdKeyValues {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 53: // dota.SVC_Messages_svc_BSPDecal
+		if c.onCSVCMsg_BSPDecal == nil {
+			return nil
+		}
+
+		msg := &dota.CSVCMsg_BSPDecal{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCSVCMsg_BSPDecal {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 54: // dota.SVC_Messages_svc_SplitScreen
+		if c.onCSVCMsg_SplitScreen == nil {
+			return nil
+		}
+
+		msg := &dota.CSVCMsg_SplitScreen{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCSVCMsg_SplitScreen {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 55: // dota.SVC_Messages_svc_PacketEntities
+		if c.onCSVCMsg_PacketEntities == nil {
+			return nil
+		}
+
+		msg := &dota.CSVCMsg_PacketEntities{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCSVCMsg_PacketEntities {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 56: // dota.SVC_Messages_svc_Prefetch
+		if c.onCSVCMsg_Prefetch == nil {
+			return nil
+		}
+
+		msg := &dota.CSVCMsg_Prefetch{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCSVCMsg_Prefetch {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 57: // dota.SVC_Messages_svc_Menu
+		if c.onCSVCMsg_Menu == nil {
+			return nil
+		}
+
+		msg := &dota.CSVCMsg_Menu{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCSVCMsg_Menu {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 58: // dota.SVC_Messages_svc_GetCvarValue
+		if c.onCSVCMsg_GetCvarValue == nil {
+			return nil
+		}
+
+		msg := &dota.CSVCMsg_GetCvarValue{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCSVCMsg_GetCvarValue {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 59: // dota.SVC_Messages_svc_StopSound
+		if c.onCSVCMsg_StopSound == nil {
+			return nil
+		}
+
+		msg := &dota.CSVCMsg_StopSound{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCSVCMsg_StopSound {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 60: // dota.SVC_Messages_svc_PeerList
+		if c.onCSVCMsg_PeerList == nil {
+			return nil
+		}
+
+		msg := &dota.CSVCMsg_PeerList{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCSVCMsg_PeerList {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 61: // dota.SVC_Messages_svc_PacketReliable
+		if c.onCSVCMsg_PacketReliable == nil {
+			return nil
+		}
+
+		msg := &dota.CSVCMsg_PacketReliable{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCSVCMsg_PacketReliable {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 62: // dota.SVC_Messages_svc_HLTVStatus
+		if c.onCSVCMsg_HLTVStatus == nil {
+			return nil
+		}
+
+		msg := &dota.CSVCMsg_HLTVStatus{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCSVCMsg_HLTVStatus {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 70: // dota.SVC_Messages_svc_FullFrameSplit
+		if c.onCSVCMsg_FullFrameSplit == nil {
+			return nil
+		}
+
+		msg := &dota.CSVCMsg_FullFrameSplit{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCSVCMsg_FullFrameSplit {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 101: // dota.EBaseUserMessages_UM_AchievementEvent
+		if c.onCUserMessageAchievementEvent == nil {
+			return nil
+		}
+
+		msg := &dota.CUserMessageAchievementEvent{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCUserMessageAchievementEvent {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 102: // dota.EBaseUserMessages_UM_CloseCaption
+		if c.onCUserMessageCloseCaption == nil {
+			return nil
+		}
+
+		msg := &dota.CUserMessageCloseCaption{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCUserMessageCloseCaption {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 103: // dota.EBaseUserMessages_UM_CloseCaptionDirect
+		if c.onCUserMessageCloseCaptionDirect == nil {
+			return nil
+		}
+
+		msg := &dota.CUserMessageCloseCaptionDirect{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCUserMessageCloseCaptionDirect {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 104: // dota.EBaseUserMessages_UM_CurrentTimescale
+		if c.onCUserMessageCurrentTimescale == nil {
+			return nil
+		}
+
+		msg := &dota.CUserMessageCurrentTimescale{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCUserMessageCurrentTimescale {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 105: // dota.EBaseUserMessages_UM_DesiredTimescale
+		if c.onCUserMessageDesiredTimescale == nil {
+			return nil
+		}
+
+		msg := &dota.CUserMessageDesiredTimescale{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCUserMessageDesiredTimescale {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 106: // dota.EBaseUserMessages_UM_Fade
+		if c.onCUserMessageFade == nil {
+			return nil
+		}
+
+		msg := &dota.CUserMessageFade{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCUserMessageFade {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 107: // dota.EBaseUserMessages_UM_GameTitle
+		if c.onCUserMessageGameTitle == nil {
+			return nil
+		}
+
+		msg := &dota.CUserMessageGameTitle{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCUserMessageGameTitle {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 109: // dota.EBaseUserMessages_UM_HintText
+		if c.onCUserMessageHintText == nil {
+			return nil
+		}
+
+		msg := &dota.CUserMessageHintText{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCUserMessageHintText {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 110: // dota.EBaseUserMessages_UM_HudMsg
+		if c.onCUserMessageHudMsg == nil {
+			return nil
+		}
+
+		msg := &dota.CUserMessageHudMsg{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCUserMessageHudMsg {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 111: // dota.EBaseUserMessages_UM_HudText
+		if c.onCUserMessageHudText == nil {
+			return nil
+		}
+
+		msg := &dota.CUserMessageHudText{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCUserMessageHudText {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 112: // dota.EBaseUserMessages_UM_KeyHintText
+		if c.onCUserMessageKeyHintText == nil {
+			return nil
+		}
+
+		msg := &dota.CUserMessageKeyHintText{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCUserMessageKeyHintText {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 113: // dota.EBaseUserMessages_UM_ColoredText
+		if c.onCUserMessageColoredText == nil {
+			return nil
+		}
+
+		msg := &dota.CUserMessageColoredText{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCUserMessageColoredText {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 114: // dota.EBaseUserMessages_UM_RequestState
+		if c.onCUserMessageRequestState == nil {
+			return nil
+		}
+
+		msg := &dota.CUserMessageRequestState{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCUserMessageRequestState {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 115: // dota.EBaseUserMessages_UM_ResetHUD
+		if c.onCUserMessageResetHUD == nil {
+			return nil
+		}
+
+		msg := &dota.CUserMessageResetHUD{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCUserMessageResetHUD {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 116: // dota.EBaseUserMessages_UM_Rumble
+		if c.onCUserMessageRumble == nil {
+			return nil
+		}
+
+		msg := &dota.CUserMessageRumble{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCUserMessageRumble {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 117: // dota.EBaseUserMessages_UM_SayText
+		if c.onCUserMessageSayText == nil {
+			return nil
+		}
+
+		msg := &dota.CUserMessageSayText{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCUserMessageSayText {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 118: // dota.EBaseUserMessages_UM_SayText2
+		if c.onCUserMessageSayText2 == nil {
+			return nil
+		}
+
+		msg := &dota.CUserMessageSayText2{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCUserMessageSayText2 {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 119: // dota.EBaseUserMessages_UM_SayTextChannel
+		if c.onCUserMessageSayTextChannel == nil {
+			return nil
+		}
+
+		msg := &dota.CUserMessageSayTextChannel{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCUserMessageSayTextChannel {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 120: // dota.EBaseUserMessages_UM_Shake
+		if c.onCUserMessageShake == nil {
+			return nil
+		}
+
+		msg := &dota.CUserMessageShake{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCUserMessageShake {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 121: // dota.EBaseUserMessages_UM_ShakeDir
+		if c.onCUserMessageShakeDir == nil {
+			return nil
+		}
+
+		msg := &dota.CUserMessageShakeDir{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCUserMessageShakeDir {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 124: // dota.EBaseUserMessages_UM_TextMsg
+		if c.onCUserMessageTextMsg == nil {
+			return nil
+		}
+
+		msg := &dota.CUserMessageTextMsg{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCUserMessageTextMsg {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 125: // dota.EBaseUserMessages_UM_ScreenTilt
+		if c.onCUserMessageScreenTilt == nil {
+			return nil
+		}
+
+		msg := &dota.CUserMessageScreenTilt{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCUserMessageScreenTilt {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 126: // dota.EBaseUserMessages_UM_Train
+		if c.onCUserMessageTrain == nil {
+			return nil
+		}
+
+		msg := &dota.CUserMessageTrain{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCUserMessageTrain {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 127: // dota.EBaseUserMessages_UM_VGUIMenu
+		if c.onCUserMessageVGUIMenu == nil {
+			return nil
+		}
+
+		msg := &dota.CUserMessageVGUIMenu{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCUserMessageVGUIMenu {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 128: // dota.EBaseUserMessages_UM_VoiceMask
+		if c.onCUserMessageVoiceMask == nil {
+			return nil
+		}
+
+		msg := &dota.CUserMessageVoiceMask{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCUserMessageVoiceMask {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 129: // dota.EBaseUserMessages_UM_VoiceSubtitle
+		if c.onCUserMessageVoiceSubtitle == nil {
+			return nil
+		}
+
+		msg := &dota.CUserMessageVoiceSubtitle{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCUserMessageVoiceSubtitle {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 130: // dota.EBaseUserMessages_UM_SendAudio
+		if c.onCUserMessageSendAudio == nil {
+			return nil
+		}
+
+		msg := &dota.CUserMessageSendAudio{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCUserMessageSendAudio {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 131: // dota.EBaseUserMessages_UM_ItemPickup
+		if c.onCUserMessageItemPickup == nil {
+			return nil
+		}
+
+		msg := &dota.CUserMessageItemPickup{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCUserMessageItemPickup {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 132: // dota.EBaseUserMessages_UM_AmmoDenied
+		if c.onCUserMessageAmmoDenied == nil {
+			return nil
+		}
+
+		msg := &dota.CUserMessageAmmoDenied{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCUserMessageAmmoDenied {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 133: // dota.EBaseUserMessages_UM_CrosshairAngle
+		if c.onCUserMessageCrosshairAngle == nil {
+			return nil
+		}
+
+		msg := &dota.CUserMessageCrosshairAngle{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCUserMessageCrosshairAngle {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 134: // dota.EBaseUserMessages_UM_ShowMenu
+		if c.onCUserMessageShowMenu == nil {
+			return nil
+		}
+
+		msg := &dota.CUserMessageShowMenu{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCUserMessageShowMenu {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 135: // dota.EBaseUserMessages_UM_CreditsMsg
+		if c.onCUserMessageCreditsMsg == nil {
+			return nil
+		}
+
+		msg := &dota.CUserMessageCreditsMsg{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCUserMessageCreditsMsg {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 136: // dota.EBaseEntityMessages_EM_PlayJingle
+		if c.onCEntityMessagePlayJingle == nil {
+			return nil
+		}
+
+		msg := &dota.CEntityMessagePlayJingle{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCEntityMessagePlayJingle {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 137: // dota.EBaseEntityMessages_EM_ScreenOverlay
+		if c.onCEntityMessageScreenOverlay == nil {
+			return nil
+		}
+
+		msg := &dota.CEntityMessageScreenOverlay{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCEntityMessageScreenOverlay {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 138: // dota.EBaseEntityMessages_EM_RemoveAllDecals
+		if c.onCEntityMessageRemoveAllDecals == nil {
+			return nil
+		}
+
+		msg := &dota.CEntityMessageRemoveAllDecals{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCEntityMessageRemoveAllDecals {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 139: // dota.EBaseEntityMessages_EM_PropagateForce
+		if c.onCEntityMessagePropagateForce == nil {
+			return nil
+		}
+
+		msg := &dota.CEntityMessagePropagateForce{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCEntityMessagePropagateForce {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 140: // dota.EBaseEntityMessages_EM_DoSpark
+		if c.onCEntityMessageDoSpark == nil {
+			return nil
+		}
+
+		msg := &dota.CEntityMessageDoSpark{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCEntityMessageDoSpark {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 141: // dota.EBaseEntityMessages_EM_FixAngle
+		if c.onCEntityMessageFixAngle == nil {
+			return nil
+		}
+
+		msg := &dota.CEntityMessageFixAngle{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCEntityMessageFixAngle {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 142: // dota.EBaseUserMessages_UM_CloseCaptionPlaceholder
+		if c.onCUserMessageCloseCaptionPlaceholder == nil {
+			return nil
+		}
+
+		msg := &dota.CUserMessageCloseCaptionPlaceholder{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCUserMessageCloseCaptionPlaceholder {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 143: // dota.EBaseUserMessages_UM_CameraTransition
+		if c.onCUserMessageCameraTransition == nil {
+			return nil
+		}
+
+		msg := &dota.CUserMessageCameraTransition{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCUserMessageCameraTransition {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 144: // dota.EBaseUserMessages_UM_AudioParameter
+		if c.onCUserMessageAudioParameter == nil {
+			return nil
+		}
+
+		msg := &dota.CUserMessageAudioParameter{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCUserMessageAudioParameter {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 200: // dota.EBaseGameEvents_GE_VDebugGameSessionIDEvent
+		if c.onCMsgVDebugGameSessionIDEvent == nil {
+			return nil
+		}
+
+		msg := &dota.CMsgVDebugGameSessionIDEvent{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCMsgVDebugGameSessionIDEvent {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 201: // dota.EBaseGameEvents_GE_PlaceDecalEvent
+		if c.onCMsgPlaceDecalEvent == nil {
+			return nil
+		}
+
+		msg := &dota.CMsgPlaceDecalEvent{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCMsgPlaceDecalEvent {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 202: // dota.EBaseGameEvents_GE_ClearWorldDecalsEvent
+		if c.onCMsgClearWorldDecalsEvent == nil {
+			return nil
+		}
+
+		msg := &dota.CMsgClearWorldDecalsEvent{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCMsgClearWorldDecalsEvent {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 203: // dota.EBaseGameEvents_GE_ClearEntityDecalsEvent
+		if c.onCMsgClearEntityDecalsEvent == nil {
+			return nil
+		}
+
+		msg := &dota.CMsgClearEntityDecalsEvent{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCMsgClearEntityDecalsEvent {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 204: // dota.EBaseGameEvents_GE_ClearDecalsForSkeletonInstanceEvent
+		if c.onCMsgClearDecalsForSkeletonInstanceEvent == nil {
+			return nil
+		}
+
+		msg := &dota.CMsgClearDecalsForSkeletonInstanceEvent{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCMsgClearDecalsForSkeletonInstanceEvent {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 205: // dota.EBaseGameEvents_GE_Source1LegacyGameEventList
+		if c.onCMsgSource1LegacyGameEventList == nil {
+			return nil
+		}
+
+		msg := &dota.CMsgSource1LegacyGameEventList{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCMsgSource1LegacyGameEventList {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 206: // dota.EBaseGameEvents_GE_Source1LegacyListenEvents
+		if c.onCMsgSource1LegacyListenEvents == nil {
+			return nil
+		}
+
+		msg := &dota.CMsgSource1LegacyListenEvents{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCMsgSource1LegacyListenEvents {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 207: // dota.EBaseGameEvents_GE_Source1LegacyGameEvent
+		if c.onCMsgSource1LegacyGameEvent == nil {
+			return nil
+		}
+
+		msg := &dota.CMsgSource1LegacyGameEvent{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCMsgSource1LegacyGameEvent {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 208: // dota.EBaseGameEvents_GE_SosStartSoundEvent
+		if c.onCMsgSosStartSoundEvent == nil {
+			return nil
+		}
+
+		msg := &dota.CMsgSosStartSoundEvent{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCMsgSosStartSoundEvent {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 209: // dota.EBaseGameEvents_GE_SosStopSoundEvent
+		if c.onCMsgSosStopSoundEvent == nil {
+			return nil
+		}
+
+		msg := &dota.CMsgSosStopSoundEvent{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCMsgSosStopSoundEvent {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 210: // dota.EBaseGameEvents_GE_SosSetSoundEventParams
+		if c.onCMsgSosSetSoundEventParams == nil {
+			return nil
+		}
+
+		msg := &dota.CMsgSosSetSoundEventParams{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCMsgSosSetSoundEventParams {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 211: // dota.EBaseGameEvents_GE_SosSetLibraryStackFields
+		if c.onCMsgSosSetLibraryStackFields == nil {
+			return nil
+		}
+
+		msg := &dota.CMsgSosSetLibraryStackFields{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCMsgSosSetLibraryStackFields {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 212: // dota.EBaseGameEvents_GE_SosStopSoundEventHash
+		if c.onCMsgSosStopSoundEventHash == nil {
+			return nil
+		}
+
+		msg := &dota.CMsgSosStopSoundEventHash{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCMsgSosStopSoundEventHash {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 465: // dota.EDotaUserMessages_DOTA_UM_AIDebugLine
+		if c.onCDOTAUserMsg_AIDebugLine == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_AIDebugLine{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_AIDebugLine {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 466: // dota.EDotaUserMessages_DOTA_UM_ChatEvent
+		if c.onCDOTAUserMsg_ChatEvent == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_ChatEvent{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_ChatEvent {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 467: // dota.EDotaUserMessages_DOTA_UM_CombatHeroPositions
+		if c.onCDOTAUserMsg_CombatHeroPositions == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_CombatHeroPositions{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_CombatHeroPositions {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 470: // dota.EDotaUserMessages_DOTA_UM_CombatLogShowDeath
+		if c.onCDOTAUserMsg_CombatLogShowDeath == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_CombatLogShowDeath{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_CombatLogShowDeath {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 471: // dota.EDotaUserMessages_DOTA_UM_CreateLinearProjectile
+		if c.onCDOTAUserMsg_CreateLinearProjectile == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_CreateLinearProjectile{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_CreateLinearProjectile {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 472: // dota.EDotaUserMessages_DOTA_UM_DestroyLinearProjectile
+		if c.onCDOTAUserMsg_DestroyLinearProjectile == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_DestroyLinearProjectile{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_DestroyLinearProjectile {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 473: // dota.EDotaUserMessages_DOTA_UM_DodgeTrackingProjectiles
+		if c.onCDOTAUserMsg_DodgeTrackingProjectiles == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_DodgeTrackingProjectiles{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_DodgeTrackingProjectiles {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 474: // dota.EDotaUserMessages_DOTA_UM_GlobalLightColor
+		if c.onCDOTAUserMsg_GlobalLightColor == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_GlobalLightColor{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_GlobalLightColor {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 475: // dota.EDotaUserMessages_DOTA_UM_GlobalLightDirection
+		if c.onCDOTAUserMsg_GlobalLightDirection == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_GlobalLightDirection{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_GlobalLightDirection {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 476: // dota.EDotaUserMessages_DOTA_UM_InvalidCommand
+		if c.onCDOTAUserMsg_InvalidCommand == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_InvalidCommand{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_InvalidCommand {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 477: // dota.EDotaUserMessages_DOTA_UM_LocationPing
+		if c.onCDOTAUserMsg_LocationPing == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_LocationPing{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_LocationPing {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 478: // dota.EDotaUserMessages_DOTA_UM_MapLine
+		if c.onCDOTAUserMsg_MapLine == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_MapLine{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_MapLine {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 479: // dota.EDotaUserMessages_DOTA_UM_MiniKillCamInfo
+		if c.onCDOTAUserMsg_MiniKillCamInfo == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_MiniKillCamInfo{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_MiniKillCamInfo {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 480: // dota.EDotaUserMessages_DOTA_UM_MinimapDebugPoint
+		if c.onCDOTAUserMsg_MinimapDebugPoint == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_MinimapDebugPoint{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_MinimapDebugPoint {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 481: // dota.EDotaUserMessages_DOTA_UM_MinimapEvent
+		if c.onCDOTAUserMsg_MinimapEvent == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_MinimapEvent{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_MinimapEvent {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 482: // dota.EDotaUserMessages_DOTA_UM_NevermoreRequiem
+		if c.onCDOTAUserMsg_NevermoreRequiem == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_NevermoreRequiem{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_NevermoreRequiem {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 483: // dota.EDotaUserMessages_DOTA_UM_OverheadEvent
+		if c.onCDOTAUserMsg_OverheadEvent == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_OverheadEvent{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_OverheadEvent {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 484: // dota.EDotaUserMessages_DOTA_UM_SetNextAutobuyItem
+		if c.onCDOTAUserMsg_SetNextAutobuyItem == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_SetNextAutobuyItem{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_SetNextAutobuyItem {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 485: // dota.EDotaUserMessages_DOTA_UM_SharedCooldown
+		if c.onCDOTAUserMsg_SharedCooldown == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_SharedCooldown{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_SharedCooldown {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 486: // dota.EDotaUserMessages_DOTA_UM_SpectatorPlayerClick
+		if c.onCDOTAUserMsg_SpectatorPlayerClick == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_SpectatorPlayerClick{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_SpectatorPlayerClick {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 487: // dota.EDotaUserMessages_DOTA_UM_TutorialTipInfo
+		if c.onCDOTAUserMsg_TutorialTipInfo == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_TutorialTipInfo{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_TutorialTipInfo {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 488: // dota.EDotaUserMessages_DOTA_UM_UnitEvent
+		if c.onCDOTAUserMsg_UnitEvent == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_UnitEvent{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_UnitEvent {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 489: // dota.EDotaUserMessages_DOTA_UM_ParticleManager
+		if c.onCDOTAUserMsg_ParticleManager == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_ParticleManager{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_ParticleManager {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 490: // dota.EDotaUserMessages_DOTA_UM_BotChat
+		if c.onCDOTAUserMsg_BotChat == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_BotChat{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_BotChat {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 491: // dota.EDotaUserMessages_DOTA_UM_HudError
+		if c.onCDOTAUserMsg_HudError == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_HudError{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_HudError {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 492: // dota.EDotaUserMessages_DOTA_UM_ItemPurchased
+		if c.onCDOTAUserMsg_ItemPurchased == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_ItemPurchased{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_ItemPurchased {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 493: // dota.EDotaUserMessages_DOTA_UM_Ping
+		if c.onCDOTAUserMsg_Ping == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_Ping{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_Ping {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 494: // dota.EDotaUserMessages_DOTA_UM_ItemFound
+		if c.onCDOTAUserMsg_ItemFound == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_ItemFound{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_ItemFound {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 496: // dota.EDotaUserMessages_DOTA_UM_SwapVerify
+		if c.onCDOTAUserMsg_SwapVerify == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_SwapVerify{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_SwapVerify {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 497: // dota.EDotaUserMessages_DOTA_UM_WorldLine
+		if c.onCDOTAUserMsg_WorldLine == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_WorldLine{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_WorldLine {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 498: // dota.EDotaUserMessages_DOTA_UM_TournamentDrop
+		if c.onCMsgGCToClientTournamentItemDrop == nil {
+			return nil
+		}
+
+		msg := &dota.CMsgGCToClientTournamentItemDrop{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCMsgGCToClientTournamentItemDrop {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 499: // dota.EDotaUserMessages_DOTA_UM_ItemAlert
+		if c.onCDOTAUserMsg_ItemAlert == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_ItemAlert{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_ItemAlert {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 500: // dota.EDotaUserMessages_DOTA_UM_HalloweenDrops
+		if c.onCDOTAUserMsg_HalloweenDrops == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_HalloweenDrops{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_HalloweenDrops {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 501: // dota.EDotaUserMessages_DOTA_UM_ChatWheel
+		if c.onCDOTAUserMsg_ChatWheel == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_ChatWheel{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_ChatWheel {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 502: // dota.EDotaUserMessages_DOTA_UM_ReceivedXmasGift
+		if c.onCDOTAUserMsg_ReceivedXmasGift == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_ReceivedXmasGift{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_ReceivedXmasGift {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 503: // dota.EDotaUserMessages_DOTA_UM_UpdateSharedContent
+		if c.onCDOTAUserMsg_UpdateSharedContent == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_UpdateSharedContent{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_UpdateSharedContent {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 504: // dota.EDotaUserMessages_DOTA_UM_TutorialRequestExp
+		if c.onCDOTAUserMsg_TutorialRequestExp == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_TutorialRequestExp{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_TutorialRequestExp {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 505: // dota.EDotaUserMessages_DOTA_UM_TutorialPingMinimap
+		if c.onCDOTAUserMsg_TutorialPingMinimap == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_TutorialPingMinimap{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_TutorialPingMinimap {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 506: // dota.EDotaUserMessages_DOTA_UM_GamerulesStateChanged
+		if c.onCDOTAUserMsg_GamerulesStateChanged == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_GamerulesStateChanged{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_GamerulesStateChanged {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 507: // dota.EDotaUserMessages_DOTA_UM_ShowSurvey
+		if c.onCDOTAUserMsg_ShowSurvey == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_ShowSurvey{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_ShowSurvey {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 508: // dota.EDotaUserMessages_DOTA_UM_TutorialFade
+		if c.onCDOTAUserMsg_TutorialFade == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_TutorialFade{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_TutorialFade {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 509: // dota.EDotaUserMessages_DOTA_UM_AddQuestLogEntry
+		if c.onCDOTAUserMsg_AddQuestLogEntry == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_AddQuestLogEntry{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_AddQuestLogEntry {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 510: // dota.EDotaUserMessages_DOTA_UM_SendStatPopup
+		if c.onCDOTAUserMsg_SendStatPopup == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_SendStatPopup{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_SendStatPopup {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 511: // dota.EDotaUserMessages_DOTA_UM_TutorialFinish
+		if c.onCDOTAUserMsg_TutorialFinish == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_TutorialFinish{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_TutorialFinish {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 512: // dota.EDotaUserMessages_DOTA_UM_SendRoshanPopup
+		if c.onCDOTAUserMsg_SendRoshanPopup == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_SendRoshanPopup{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_SendRoshanPopup {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 513: // dota.EDotaUserMessages_DOTA_UM_SendGenericToolTip
+		if c.onCDOTAUserMsg_SendGenericToolTip == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_SendGenericToolTip{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_SendGenericToolTip {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 514: // dota.EDotaUserMessages_DOTA_UM_SendFinalGold
+		if c.onCDOTAUserMsg_SendFinalGold == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_SendFinalGold{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_SendFinalGold {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 515: // dota.EDotaUserMessages_DOTA_UM_CustomMsg
+		if c.onCDOTAUserMsg_CustomMsg == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_CustomMsg{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_CustomMsg {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 516: // dota.EDotaUserMessages_DOTA_UM_CoachHUDPing
+		if c.onCDOTAUserMsg_CoachHUDPing == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_CoachHUDPing{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_CoachHUDPing {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 517: // dota.EDotaUserMessages_DOTA_UM_ClientLoadGridNav
+		if c.onCDOTAUserMsg_ClientLoadGridNav == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_ClientLoadGridNav{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_ClientLoadGridNav {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 518: // dota.EDotaUserMessages_DOTA_UM_TE_Projectile
+		if c.onCDOTAUserMsg_TE_Projectile == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_TE_Projectile{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_TE_Projectile {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 519: // dota.EDotaUserMessages_DOTA_UM_TE_ProjectileLoc
+		if c.onCDOTAUserMsg_TE_ProjectileLoc == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_TE_ProjectileLoc{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_TE_ProjectileLoc {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 520: // dota.EDotaUserMessages_DOTA_UM_TE_DotaBloodImpact
+		if c.onCDOTAUserMsg_TE_DotaBloodImpact == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_TE_DotaBloodImpact{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_TE_DotaBloodImpact {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 521: // dota.EDotaUserMessages_DOTA_UM_TE_UnitAnimation
+		if c.onCDOTAUserMsg_TE_UnitAnimation == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_TE_UnitAnimation{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_TE_UnitAnimation {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 522: // dota.EDotaUserMessages_DOTA_UM_TE_UnitAnimationEnd
+		if c.onCDOTAUserMsg_TE_UnitAnimationEnd == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_TE_UnitAnimationEnd{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_TE_UnitAnimationEnd {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 523: // dota.EDotaUserMessages_DOTA_UM_AbilityPing
+		if c.onCDOTAUserMsg_AbilityPing == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_AbilityPing{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_AbilityPing {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 524: // dota.EDotaUserMessages_DOTA_UM_ShowGenericPopup
+		if c.onCDOTAUserMsg_ShowGenericPopup == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_ShowGenericPopup{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_ShowGenericPopup {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 525: // dota.EDotaUserMessages_DOTA_UM_VoteStart
+		if c.onCDOTAUserMsg_VoteStart == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_VoteStart{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_VoteStart {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 526: // dota.EDotaUserMessages_DOTA_UM_VoteUpdate
+		if c.onCDOTAUserMsg_VoteUpdate == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_VoteUpdate{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_VoteUpdate {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 527: // dota.EDotaUserMessages_DOTA_UM_VoteEnd
+		if c.onCDOTAUserMsg_VoteEnd == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_VoteEnd{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_VoteEnd {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 528: // dota.EDotaUserMessages_DOTA_UM_BoosterState
+		if c.onCDOTAUserMsg_BoosterState == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_BoosterState{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_BoosterState {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 529: // dota.EDotaUserMessages_DOTA_UM_WillPurchaseAlert
+		if c.onCDOTAUserMsg_WillPurchaseAlert == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_WillPurchaseAlert{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_WillPurchaseAlert {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 530: // dota.EDotaUserMessages_DOTA_UM_TutorialMinimapPosition
+		if c.onCDOTAUserMsg_TutorialMinimapPosition == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_TutorialMinimapPosition{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_TutorialMinimapPosition {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 531: // dota.EDotaUserMessages_DOTA_UM_PlayerMMR
+		if c.onCDOTAUserMsg_PlayerMMR == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_PlayerMMR{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_PlayerMMR {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 532: // dota.EDotaUserMessages_DOTA_UM_AbilitySteal
+		if c.onCDOTAUserMsg_AbilitySteal == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_AbilitySteal{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_AbilitySteal {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 533: // dota.EDotaUserMessages_DOTA_UM_CourierKilledAlert
+		if c.onCDOTAUserMsg_CourierKilledAlert == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_CourierKilledAlert{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_CourierKilledAlert {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 534: // dota.EDotaUserMessages_DOTA_UM_EnemyItemAlert
+		if c.onCDOTAUserMsg_EnemyItemAlert == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_EnemyItemAlert{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_EnemyItemAlert {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 535: // dota.EDotaUserMessages_DOTA_UM_StatsMatchDetails
+		if c.onCDOTAUserMsg_StatsMatchDetails == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_StatsMatchDetails{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_StatsMatchDetails {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 536: // dota.EDotaUserMessages_DOTA_UM_MiniTaunt
+		if c.onCDOTAUserMsg_MiniTaunt == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_MiniTaunt{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_MiniTaunt {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 537: // dota.EDotaUserMessages_DOTA_UM_BuyBackStateAlert
+		if c.onCDOTAUserMsg_BuyBackStateAlert == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_BuyBackStateAlert{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_BuyBackStateAlert {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 538: // dota.EDotaUserMessages_DOTA_UM_SpeechBubble
+		if c.onCDOTAUserMsg_SpeechBubble == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_SpeechBubble{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_SpeechBubble {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 539: // dota.EDotaUserMessages_DOTA_UM_CustomHeaderMessage
+		if c.onCDOTAUserMsg_CustomHeaderMessage == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_CustomHeaderMessage{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_CustomHeaderMessage {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 540: // dota.EDotaUserMessages_DOTA_UM_QuickBuyAlert
+		if c.onCDOTAUserMsg_QuickBuyAlert == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_QuickBuyAlert{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_QuickBuyAlert {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 541: // dota.EDotaUserMessages_DOTA_UM_StatsHeroDetails
+		if c.onCDOTAUserMsg_StatsHeroMinuteDetails == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_StatsHeroMinuteDetails{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_StatsHeroMinuteDetails {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 542: // dota.EDotaUserMessages_DOTA_UM_PredictionResult
+		if c.onCDOTAUserMsg_PredictionResult == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_PredictionResult{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_PredictionResult {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 543: // dota.EDotaUserMessages_DOTA_UM_ModifierAlert
+		if c.onCDOTAUserMsg_ModifierAlert == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_ModifierAlert{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_ModifierAlert {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 544: // dota.EDotaUserMessages_DOTA_UM_HPManaAlert
+		if c.onCDOTAUserMsg_HPManaAlert == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_HPManaAlert{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_HPManaAlert {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 545: // dota.EDotaUserMessages_DOTA_UM_GlyphAlert
+		if c.onCDOTAUserMsg_GlyphAlert == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_GlyphAlert{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_GlyphAlert {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 546: // dota.EDotaUserMessages_DOTA_UM_BeastChat
+		if c.onCDOTAUserMsg_BeastChat == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_BeastChat{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_BeastChat {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 547: // dota.EDotaUserMessages_DOTA_UM_SpectatorPlayerUnitOrders
+		if c.onCDOTAUserMsg_SpectatorPlayerUnitOrders == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_SpectatorPlayerUnitOrders{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_SpectatorPlayerUnitOrders {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 548: // dota.EDotaUserMessages_DOTA_UM_CustomHudElement_Create
+		if c.onCDOTAUserMsg_CustomHudElement_Create == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_CustomHudElement_Create{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_CustomHudElement_Create {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 549: // dota.EDotaUserMessages_DOTA_UM_CustomHudElement_Modify
+		if c.onCDOTAUserMsg_CustomHudElement_Modify == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_CustomHudElement_Modify{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_CustomHudElement_Modify {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 550: // dota.EDotaUserMessages_DOTA_UM_CustomHudElement_Destroy
+		if c.onCDOTAUserMsg_CustomHudElement_Destroy == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_CustomHudElement_Destroy{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_CustomHudElement_Destroy {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 551: // dota.EDotaUserMessages_DOTA_UM_CompendiumState
+		if c.onCDOTAUserMsg_CompendiumState == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_CompendiumState{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_CompendiumState {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 552: // dota.EDotaUserMessages_DOTA_UM_ProjectionAbility
+		if c.onCDOTAUserMsg_ProjectionAbility == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_ProjectionAbility{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_ProjectionAbility {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 553: // dota.EDotaUserMessages_DOTA_UM_ProjectionEvent
+		if c.onCDOTAUserMsg_ProjectionEvent == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_ProjectionEvent{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_ProjectionEvent {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 554: // dota.EDotaUserMessages_DOTA_UM_CombatLogDataHLTV
+		if c.onCMsgDOTACombatLogEntry == nil {
+			return nil
+		}
+
+		msg := &dota.CMsgDOTACombatLogEntry{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCMsgDOTACombatLogEntry {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 555: // dota.EDotaUserMessages_DOTA_UM_XPAlert
+		if c.onCDOTAUserMsg_XPAlert == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_XPAlert{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_XPAlert {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 556: // dota.EDotaUserMessages_DOTA_UM_UpdateQuestProgress
+		if c.onCDOTAUserMsg_UpdateQuestProgress == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_UpdateQuestProgress{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_UpdateQuestProgress {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 557: // dota.EDotaUserMessages_DOTA_UM_MatchMetadata
+		if c.onCDOTAClientMsg_MatchMetadata == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAClientMsg_MatchMetadata{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAClientMsg_MatchMetadata {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	}
+
+	if v(1) {
+		_debugf("warning: no packet type %d found", t)
+	}
+
+	return nil
+}
