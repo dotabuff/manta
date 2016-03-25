@@ -106,7 +106,9 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 		return nil
 	}
 
-	_debugfl(5, "pTick=%d isDelta=%v deltaFrom=%d updatedEntries=%d maxEntries=%d baseline=%d updateBaseline=%v", p.Tick, m.GetIsDelta(), m.GetDeltaFrom(), m.GetUpdatedEntries(), m.GetMaxEntries(), m.GetBaseline(), m.GetUpdateBaseline())
+	if v(5) {
+		_debugf("pTick=%d isDelta=%v deltaFrom=%d updatedEntries=%d maxEntries=%d baseline=%d updateBaseline=%v", p.Tick, m.GetIsDelta(), m.GetDeltaFrom(), m.GetUpdatedEntries(), m.GetMaxEntries(), m.GetBaseline(), m.GetUpdateBaseline())
+	}
 
 	// Skip processing full updates after the first. We'll process deltas instead.
 	if !m.GetIsDelta() && p.packetEntityFullPackets > 0 {
@@ -127,7 +129,6 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 		// from Alice. An alternate implementation from Yasha has the same result.
 		delta := r.readUBitVar()
 		index += int32(delta) + 1
-		_debugfl(5, "index delta is %d to %d", delta, index)
 
 		// Read the type of update based on two booleans.
 		// This appears to be backwards from source 1:
@@ -147,8 +148,6 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 				eventType = EntityEventType_Update
 			}
 		}
-
-		_debugfl(5, "update type is %d, %v", eventType, index)
 
 		// Proceed based on the update type
 		switch eventType {

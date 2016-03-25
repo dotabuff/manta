@@ -84,9 +84,6 @@ func TestFieldpath(t *testing.T) {
 	p := &Parser{}
 	fs := p.ParseSendTables(m, GetDefaultPropertySerializerTable())
 
-	//printCodes(huf, []byte{})
-	//_debugf("%s", fs.dump_json("CSpeechBubbleManager"))
-
 	// Iterate over the different scenarios
 	// -! Create a new FieldPath for each scenario
 	for _, s := range scenarios {
@@ -103,9 +100,6 @@ func TestFieldpath(t *testing.T) {
 		if !s.run {
 			continue
 		}
-
-		// Set debug status
-		debugMode = s.debug
 
 		// Initialize a field path and walk it
 		fieldPath := newFieldpath(serializer)

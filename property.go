@@ -96,20 +96,21 @@ func (p *Properties) readProperties(r *Reader, ser *dt) {
 
 	// iterate all the fields and set their corresponding values
 	for _, f := range fieldPath.fields {
-		_debugfl(6, "Decoding field %d %s %s %s", r.pos, f.Name, f.Field.Type, f.Field.Encoder)
-		// r.dumpBits(1)
+		if v(6) {
+			_debugf("decoding pos=%d name=%s type=%s encoder=%d", r.pos, f.Name, f.Field.Type, f.Field.Encoder)
+		}
 
 		if f.Field.Serializer.DecodeContainer != nil {
-			_debugfl(6, "Decoding container %v", f.Field.Name)
 			p.KV[f.Name] = f.Field.Serializer.DecodeContainer(r, f.Field)
 		} else if f.Field.Serializer.Decode == nil {
 			p.KV[f.Name] = r.readVarUint32()
-			_debugfl(6, "Decoded default: %d %s %s %v", r.pos, f.Name, f.Field.Type, p.KV[f.Name])
 			continue
 		} else {
 			p.KV[f.Name] = f.Field.Serializer.Decode(r, f.Field)
 		}
 
-		_debugfl(6, "Decoded: %d %s %s %v", r.pos, f.Name, f.Field.Type, p.KV[f.Name])
+		if v(6) {
+			_debugf("decoding pos=%d name=%s type=%s value=%v", r.pos, f.Name, f.Field.Type, p.KV[f.Name])
+		}
 	}
 }

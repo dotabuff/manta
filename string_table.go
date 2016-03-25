@@ -128,7 +128,9 @@ func (p *Parser) onCSVCMsg_UpdateStringTable(m *dota.CSVCMsg_UpdateStringTable) 
 		_panicf("missing string table %d", m.GetTableId())
 	}
 
-	_tracef("tick=%d name=%s changedEntries=%d buflen=%d", p.Tick, t.name, m.GetNumChangedEntries(), len(m.GetStringData()))
+	if v(5) {
+		_debugf("tick=%d name=%s changedEntries=%d size=%d", p.Tick, t.name, m.GetNumChangedEntries(), len(m.GetStringData()))
+	}
 
 	// Parse the updates out of the string table data
 	items := parseStringTable(m.GetStringData(), m.GetNumChangedEntries(), t.userDataFixedSize, t.userDataSize)
@@ -137,17 +139,13 @@ func (p *Parser) onCSVCMsg_UpdateStringTable(m *dota.CSVCMsg_UpdateStringTable) 
 	for _, item := range items {
 		index := item.Index
 		if _, ok := t.Items[index]; ok {
-			// XXX TODO: Sometimes ActiveModifiers change keys, which is suspicous...
 			if item.Key != "" && item.Key != t.Items[index].Key {
-				_tracef("tick=%d name=%s index=%d key='%s' update key -> %s", p.Tick, t.name, index, t.Items[index].Key, item.Key)
 				t.Items[index].Key = item.Key
 			}
 			if len(item.Value) > 0 {
-				_tracef("tick=%d name=%s index=%d key='%s' update value len %d -> %d", p.Tick, t.name, index, t.Items[index].Key, len(t.Items[index].Value), len(item.Value))
 				t.Items[index].Value = item.Value
 			}
 		} else {
-			_tracef("tick=%d name=%s inserting new item %d key '%s'", p.Tick, t.name, index, item.Key)
 			t.Items[index] = item
 		}
 	}

@@ -58,7 +58,9 @@ func (p *Parser) updateInstanceBaseline() {
 
 	stringTable, ok := p.StringTables.GetTableByName("instancebaseline")
 	if !ok {
-		_debugf("skipping updateInstanceBaseline: no instancebaseline string table")
+		if v(1) {
+			_debugf("skipping updateInstanceBaseline: no instancebaseline string table")
+		}
 		return
 	}
 
@@ -98,13 +100,10 @@ func (p *Parser) updateInstanceBaselineItem(item *StringTableItem) {
 	// Parse the properties out of the string table buffer and store
 	// them as the class baseline in the Parser.
 	if len(item.Value) > 0 {
-		_debugfl(1, "Parsing entity baseline %v", serializer[0].Name)
+		if v(1) {
+			_debugf("parsing entity baseline %v", serializer[0].Name)
+		}
 		r := NewReader(item.Value)
 		p.ClassBaselines[classId].readProperties(r, serializer[0])
-
-		// Inline test the baselines
-		if testLevel >= 1 && r.remBits() > 8 {
-			_panicf("Too many bits remaining in baseline %v, %v", serializer[0].Name, r.remBits())
-		}
 	}
 }

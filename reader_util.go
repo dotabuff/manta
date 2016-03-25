@@ -81,7 +81,7 @@ func (r *Reader) dumpBits(n int) {
 
 			line += _sprintf(" | %s: %s", d.name, colorFn(val))
 		}
-		_debugfl(10, line)
+		_debugf(line)
 	}
 	r.pos = o
 }

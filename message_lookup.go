@@ -1181,7 +1181,9 @@ func (p *Parser) CallByDemoType(t int32, raw []byte) error {
 		return nil
 	}
 
-	_debugf("warning: no type %d found", t)
+	if v(1) {
+		_debugf("warning: no type %d found", t)
+	}
 
 	return nil
 }
@@ -3492,7 +3494,9 @@ func (p *Parser) CallByPacketType(t int32, raw []byte) error {
 		return nil
 	}
 
-	_debugf("warning: no type %d found", t)
+	if v(1) {
+		_debugf("warning: no type %d found", t)
+	}
 
 	return nil
 }

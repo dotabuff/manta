@@ -213,7 +213,6 @@ func InitQFD(f *dt_field) *QuantizedFloatDecoder {
 		}
 
 		if bc > qfd.Bitcount {
-			_debugf("Upping bitcount for qf_encode_integers field %v -> %v", qfd.Bitcount, bc)
 			qfd.Bitcount = bc
 			steps = (1 << uint(qfd.Bitcount))
 		}
