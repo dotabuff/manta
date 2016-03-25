@@ -290,14 +290,6 @@ func TestReadProperties(t *testing.T) {
 			continue
 		}
 
-		// Optionally disable debugging
-		debugMode = s.debug
-		if debugMode {
-			debugLevel = 10
-		} else {
-			debugLevel = 0
-		}
-
 		// Read properties
 		r := NewReader(buf)
 		props := NewProperties()

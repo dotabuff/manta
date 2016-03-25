@@ -207,7 +207,6 @@ func (p *Parser) onCMsgSource1LegacyGameEventList(m *dota.CMsgSource1LegacyGameE
 		}
 		p.gameEventNames[d.GetEventid()] = d.GetName()
 		p.gameEventTypes[d.GetName()] = t
-		_debugf("registering game event type %s: %v", d.GetName(), t)
 	}
 
 	return nil

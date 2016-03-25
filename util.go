@@ -14,24 +14,19 @@ import (
 	"github.com/golang/protobuf/proto"
 )
 
-var debugMode, traceMode, fixturesMode bool
-var debugLevel, testLevel uint // Test level refers to the inline-test level which runs additional checks on the data
+var debugLevel uint
 
 func init() {
 	if os.Getenv("DEBUG") != "" {
-		debugMode = true
+		debugLevel = 1
 	}
 	if os.Getenv("TRACE") != "" {
-		traceMode = true
-	}
-	if os.Getenv("FIXTURES") != "" {
-		fixturesMode = true
+		debugLevel = 10
 	}
 }
 
 var (
 	_sprintf = fmt.Sprintf
-	_sdump   = spew.Sdump
 )
 
 // Convert a string to an int32
@@ -43,25 +38,14 @@ func atoi32(s string) (int32, error) {
 	return int32(n), nil
 }
 
-// printf with debug level
-func _debugfl(level uint, format string, args ...interface{}) {
-	if level <= debugLevel {
-		args = append([]interface{}{_caller(2)}, args...)
-		fmt.Printf("%s: "+format+"\n", args...)
-	}
+// debugging level check
+func v(level uint) bool {
+	return level <= debugLevel
 }
 
 // printf only if debugging
 func _debugf(format string, args ...interface{}) {
-	if debugMode {
-		args = append([]interface{}{_caller(2)}, args...)
-		fmt.Printf("%s: "+format+"\n", args...)
-	}
-}
-
-// printf only if tracing
-func _tracef(format string, args ...interface{}) {
-	if traceMode {
+	if v(1) {
 		args = append([]interface{}{_caller(2)}, args...)
 		fmt.Printf("%s: "+format+"\n", args...)
 	}
@@ -77,12 +61,10 @@ func _panicf(format string, args ...interface{}) {
 	panic(fmt.Errorf(format, args...))
 }
 
-// dump named object only if debugging
+// dump named object
 func _dump(label string, args ...interface{}) {
-	if debugMode {
-		fmt.Printf("%s: %s", _caller(2), label)
-		spew.Dump(args...)
-	}
+	fmt.Printf("%s: %s", _caller(2), label)
+	spew.Dump(args...)
 }
 
 // dumps a given byte buffer to the given fixture filename

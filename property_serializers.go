@@ -127,7 +127,9 @@ func (pst *PropertySerializerTable) GetPropertySerializerByName(name string) *Pr
 				_panicf("Unable to read vector type for %s", name)
 			}
 		default:
-			//_debugf("No decoder for type %s", name)
+			if v(6) {
+				_debugf("no decoder for type %s", name)
+			}
 		}
 	}
 

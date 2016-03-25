@@ -256,7 +256,9 @@ func (p *Parser) %s(t int32, raw []byte) (error) {
   %s
   }
 
-  _debugf("warning: no type %%d found", t)
+  if v(1) {
+	  _debugf("warning: no type %%d found", t)
+	}
 
   return nil
 }

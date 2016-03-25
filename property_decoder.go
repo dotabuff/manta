@@ -2,7 +2,6 @@ package manta
 
 import (
 	"math"
-	"strconv"
 	"sync"
 )
 
@@ -88,15 +87,6 @@ func decodeQuantized(r *Reader, f *dt_field) interface{} {
 	}
 	q := qMap[f]
 	qMu.Unlock()
-
-	// Decode value
-	_debugf(
-		"Bitcount: %v, Low: %v, High: %v, Flags: %v",
-		q.Bitcount,
-		q.Low,
-		q.High,
-		strconv.FormatInt(int64(q.Flags), 2),
-	)
 
 	return q.Decode(r)
 }
@@ -189,14 +179,6 @@ func decodeQAngle(r *Reader, f *dt_field) interface{} {
 }
 
 func decodeComponent(r *Reader, f *dt_field) interface{} {
-	_debugf(
-		"Bitcount: %v, Low: %v, High: %v, Flags: %v",
-		saveReturnInt32(f.BitCount),
-		saveReturnFloat32(f.LowValue, "nil"),
-		saveReturnFloat32(f.HighValue, "nil"),
-		strconv.FormatInt(int64(saveReturnInt32(f.Flags)), 2),
-	)
-
 	return r.readBits(1)
 }
 
