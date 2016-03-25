@@ -6,19 +6,19 @@ import (
 )
 
 const (
-	STRINGTABLE_KEY_HISTORY_SIZE = 32
+	stringtableKeyHistorySize = 32
 )
 
 // Holds and maintains the string table information for an
 // instance of the Parser.
-type StringTables struct {
-	Tables    map[int32]*StringTable
+type stringTables struct {
+	Tables    map[int32]*stringTable
 	NameIndex map[string]int32
 	nextIndex int32
 }
 
 // Retrieves a string table by its name. Check the bool.
-func (ts *StringTables) GetTableByName(name string) (*StringTable, bool) {
+func (ts *stringTables) GetTableByName(name string) (*stringTable, bool) {
 	i, ok := ts.NameIndex[name]
 	if !ok {
 		return nil, false
@@ -28,29 +28,29 @@ func (ts *StringTables) GetTableByName(name string) (*StringTable, bool) {
 }
 
 // Creates a new empty StringTables.
-func newStringTables() *StringTables {
-	return &StringTables{
-		Tables:    make(map[int32]*StringTable),
+func newStringTables() *stringTables {
+	return &stringTables{
+		Tables:    make(map[int32]*stringTable),
 		NameIndex: make(map[string]int32),
 		nextIndex: 0,
 	}
 }
 
 // Holds and maintains the information for a string table.
-type StringTable struct {
+type stringTable struct {
 	index             int32
 	name              string
-	Items             map[int32]*StringTableItem
+	Items             map[int32]*stringTableItem
 	userDataFixedSize bool
 	userDataSize      int32
 }
 
-func (st *StringTable) GetIndex() int32                      { return st.index }
-func (st *StringTable) GetName() string                      { return st.name }
-func (st *StringTable) GetItem(index int32) *StringTableItem { return st.Items[index] }
+func (st *stringTable) GetIndex() int32                      { return st.index }
+func (st *stringTable) GetName() string                      { return st.name }
+func (st *stringTable) GetItem(index int32) *stringTableItem { return st.Items[index] }
 
 // Holds and maintains a single entry in a string table.
-type StringTableItem struct {
+type stringTableItem struct {
 	Index int32
 	Key   string
 	Value []byte
@@ -69,16 +69,16 @@ func (p *Parser) onCDemoStringTables(m *dota.CDemoStringTables) error {
 // This should be replaced with the real message once we have updated protos.
 func (p *Parser) onCSVCMsg_CreateStringTable(m *dota.CSVCMsg_CreateStringTable) error {
 	// Create a new string table at the next index position
-	t := &StringTable{
-		index:             p.StringTables.nextIndex,
+	t := &stringTable{
+		index:             p.stringTables.nextIndex,
 		name:              m.GetName(),
-		Items:             make(map[int32]*StringTableItem),
+		Items:             make(map[int32]*stringTableItem),
 		userDataFixedSize: m.GetUserDataFixedSize(),
 		userDataSize:      m.GetUserDataSize(),
 	}
 
 	// Increment the index
-	p.StringTables.nextIndex += 1
+	p.stringTables.nextIndex += 1
 
 	// Decompress the data if necessary
 	buf := m.GetStringData()
@@ -109,8 +109,8 @@ func (p *Parser) onCSVCMsg_CreateStringTable(m *dota.CSVCMsg_CreateStringTable) 
 	}
 
 	// Add the table to the parser state
-	p.StringTables.Tables[t.index] = t
-	p.StringTables.NameIndex[t.name] = t.index
+	p.stringTables.Tables[t.index] = t
+	p.stringTables.NameIndex[t.name] = t.index
 
 	// Apply the updates to baseline state
 	if t.name == "instancebaseline" {
@@ -123,7 +123,7 @@ func (p *Parser) onCSVCMsg_CreateStringTable(m *dota.CSVCMsg_CreateStringTable) 
 // Internal callback for CSVCMsg_UpdateStringTable.
 func (p *Parser) onCSVCMsg_UpdateStringTable(m *dota.CSVCMsg_UpdateStringTable) error {
 	// TODO: integrate
-	t, ok := p.StringTables.Tables[m.GetTableId()]
+	t, ok := p.stringTables.Tables[m.GetTableId()]
 	if !ok {
 		_panicf("missing string table %d", m.GetTableId())
 	}
@@ -159,8 +159,8 @@ func (p *Parser) onCSVCMsg_UpdateStringTable(m *dota.CSVCMsg_UpdateStringTable) 
 }
 
 // Parse a string table data blob, returning a list of item updates.
-func parseStringTable(buf []byte, numUpdates int32, userDataFixed bool, userDataSize int32) (items []*StringTableItem) {
-	items = make([]*StringTableItem, 0)
+func parseStringTable(buf []byte, numUpdates int32, userDataFixed bool, userDataSize int32) (items []*stringTableItem) {
+	items = make([]*stringTableItem, 0)
 
 	// Create a reader for the buffer
 	r := NewReader(buf)
@@ -170,7 +170,7 @@ func parseStringTable(buf []byte, numUpdates int32, userDataFixed bool, userData
 	index := int32(-1)
 
 	// Maintain a list of key history
-	keys := make([]string, 0, STRINGTABLE_KEY_HISTORY_SIZE)
+	keys := make([]string, 0, stringtableKeyHistorySize)
 
 	// Some tables have no data
 	if len(buf) == 0 {
@@ -228,7 +228,7 @@ func parseStringTable(buf []byte, numUpdates int32, userDataFixed bool, userData
 				key = r.readString()
 			}
 
-			if len(keys) >= STRINGTABLE_KEY_HISTORY_SIZE {
+			if len(keys) >= stringtableKeyHistorySize {
 				copy(keys[0:], keys[1:])
 				keys[len(keys)-1] = ""
 				keys = keys[:len(keys)-1]
@@ -251,7 +251,7 @@ func parseStringTable(buf []byte, numUpdates int32, userDataFixed bool, userData
 			}
 		}
 
-		items = append(items, &StringTableItem{index, key, value})
+		items = append(items, &stringTableItem{index, key, value})
 	}
 
 	return items

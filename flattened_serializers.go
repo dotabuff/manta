@@ -8,13 +8,13 @@ import (
 )
 
 // Field is always filled, table only for sub-tables
-type dt_property struct {
-	Field *dt_field
+type dtProperty struct {
+	Field *dtField
 	Table *dt
 }
 
 // A datatable field
-type dt_field struct {
+type dtField struct {
 	Name    string
 	Encoder string
 	Type    string
@@ -26,7 +26,7 @@ type dt_field struct {
 	HighValue *float32
 
 	Version    *int32
-	Serializer *PropertySerializer `json:"-"`
+	Serializer *propertySerializer `json:"-"`
 
 	build uint32
 }
@@ -36,19 +36,19 @@ type dt struct {
 	Name       string
 	Flags      *int32
 	Version    int32
-	Properties []*dt_property
+	Properties []*dtProperty
 }
 
 // The flattened serializers object
-type flattened_serializers struct {
+type flattenedSerializers struct {
 	Serializers map[string]map[int32]*dt // serializer name -> [versions]
 	proto       *dota.CSVCMsg_FlattenedSerializer
-	pst         *PropertySerializerTable
+	pst         *propertySerializerTable
 	build       uint32
 }
 
 // Dumps a flattened table as json
-func (sers *flattened_serializers) dump_json(name string) string {
+func (sers *flattenedSerializers) dump_json(name string) string {
 	// Can't marshal map[int32]x
 	type jContainer struct {
 		Version int32
@@ -65,12 +65,12 @@ func (sers *flattened_serializers) dump_json(name string) string {
 }
 
 // Fills properties for a data table
-func (sers *flattened_serializers) recurse_table(cur *dota.ProtoFlattenedSerializerT) *dt {
+func (sers *flattenedSerializers) recurseTable(cur *dota.ProtoFlattenedSerializerT) *dt {
 	// Basic table structure
 	table := &dt{
 		Name:       sers.proto.GetSymbols()[cur.GetSerializerNameSym()],
 		Version:    cur.GetSerializerVersion(),
-		Properties: make([]*dt_property, 0),
+		Properties: make([]*dtProperty, 0),
 	}
 
 	props := sers.proto.GetFields()
@@ -78,10 +78,10 @@ func (sers *flattened_serializers) recurse_table(cur *dota.ProtoFlattenedSeriali
 	// Append all the properties
 	for _, idx := range cur.GetFieldsIndex() {
 		pField := props[idx]
-		prop := &dt_property{nil, nil}
+		prop := &dtProperty{nil, nil}
 
 		// Field can always be set
-		prop.Field = &dt_field{
+		prop.Field = &dtField{
 			Name:  sers.proto.GetSymbols()[pField.GetVarNameSym()],
 			Index: -1,
 
@@ -183,13 +183,13 @@ func (sers *flattened_serializers) recurse_table(cur *dota.ProtoFlattenedSeriali
 				Name:       prop.Field.Name,
 				Flags:      nil,
 				Version:    0,
-				Properties: make([]*dt_property, 0),
+				Properties: make([]*dtProperty, 0),
 			}
 
 			// Add each array field to the table
 			for i := uint32(0); i < prop.Field.Serializer.Length; i++ {
-				tmpDt.Properties = append(tmpDt.Properties, &dt_property{
-					Field: &dt_field{
+				tmpDt.Properties = append(tmpDt.Properties, &dtProperty{
+					Field: &dtField{
 						Name:       _sprintf("%04d", i),
 						Encoder:    prop.Field.Encoder,
 						Type:       prop.Field.Serializer.Name,
@@ -225,7 +225,7 @@ func (sers *flattened_serializers) recurse_table(cur *dota.ProtoFlattenedSeriali
 }
 
 // Parses a CDemoSendTables packet
-func (p *Parser) ParseSendTables(m *dota.CDemoSendTables, pst *PropertySerializerTable) *flattened_serializers {
+func (p *Parser) parseSendTables(m *dota.CDemoSendTables, pst *propertySerializerTable) *flattenedSerializers {
 	// This packet just contains a single large buffer
 	r := NewReader(m.GetData())
 
@@ -242,8 +242,8 @@ func (p *Parser) ParseSendTables(m *dota.CDemoSendTables, pst *PropertySerialize
 		_panicf("cannot decode proto: %s", err)
 	}
 
-	// Create the flattened_serializers object and fill it
-	fs := &flattened_serializers{
+	// Create the flattenedSerializers object and fill it
+	fs := &flattenedSerializers{
 		Serializers: make(map[string]map[int32]*dt),
 		proto:       msg,
 		pst:         pst,
@@ -259,7 +259,7 @@ func (p *Parser) ParseSendTables(m *dota.CDemoSendTables, pst *PropertySerialize
 			fs.Serializers[sName] = make(map[int32]*dt)
 		}
 
-		fs.Serializers[sName][sVer] = fs.recurse_table(o)
+		fs.Serializers[sName][sVer] = fs.recurseTable(o)
 	}
 
 	return fs
@@ -267,6 +267,6 @@ func (p *Parser) ParseSendTables(m *dota.CDemoSendTables, pst *PropertySerialize
 
 // Internal callback for OnCDemoSendTables.
 func (p *Parser) onCDemoSendTables(m *dota.CDemoSendTables) error {
-	p.serializers = p.ParseSendTables(m, GetDefaultPropertySerializerTable()).Serializers
+	p.serializers = p.parseSendTables(m, newPropertySerializerTable()).Serializers
 	return nil
 }

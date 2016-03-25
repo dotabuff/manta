@@ -82,7 +82,7 @@ func TestFieldpath(t *testing.T) {
 
 	// Retrieve the flattened field serializer
 	p := &Parser{}
-	fs := p.ParseSendTables(m, GetDefaultPropertySerializerTable())
+	fs := p.parseSendTables(m, newPropertySerializerTable())
 
 	// Iterate over the different scenarios
 	// -! Create a new FieldPath for each scenario

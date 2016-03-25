@@ -18,16 +18,16 @@ func TestParseStringTableCreate(t *testing.T) {
 		fixturePath string
 		tableName   string
 		itemCount   int
-		firstItem   *StringTableItem
-		lastItem    *StringTableItem
+		firstItem   *stringTableItem
+		lastItem    *stringTableItem
 	}{
 		// CombatLogNames is uncompressed and has 24 entries (working)
 		{
 			"17_335_uncompressed.pbmsg",
 			"CombatLogNames",
 			24,
-			&StringTableItem{0, "dota_unknown", []byte{}},
-			&StringTableItem{23, "item_flask", []byte{}},
+			&stringTableItem{0, "dota_unknown", []byte{}},
+			&stringTableItem{23, "item_flask", []byte{}},
 		},
 
 		// downloadables is uncompressed and has no entries (working)
@@ -44,8 +44,8 @@ func TestParseStringTableCreate(t *testing.T) {
 			"18_175_uncompressed.pbmsg",
 			"ResponseKeys",
 			15,
-			&StringTableItem{0, "concept", []byte{}},
-			&StringTableItem{14, "game_start_time", []byte{}},
+			&stringTableItem{0, "concept", []byte{}},
+			&stringTableItem{14, "game_start_time", []byte{}},
 		},
 
 		// server_query_info is uncompressed and has 1 entry
@@ -53,8 +53,8 @@ func TestParseStringTableCreate(t *testing.T) {
 			"07_50_uncompressed.pbmsg",
 			"server_query_info",
 			1,
-			&StringTableItem{0, "QueryPort", []byte{0x0, 0x0, 0x0, 0x0}},
-			&StringTableItem{0, "QueryPort", []byte{0x0, 0x0, 0x0, 0x0}},
+			&stringTableItem{0, "QueryPort", []byte{0x0, 0x0, 0x0, 0x0}},
+			&stringTableItem{0, "QueryPort", []byte{0x0, 0x0, 0x0, 0x0}},
 		},
 
 		// lightstyles is compressed and has NNNNNNN entries with values
@@ -62,8 +62,8 @@ func TestParseStringTableCreate(t *testing.T) {
 			"05_590_compressed.pbmsg",
 			"lightstyles",
 			64,
-			&StringTableItem{0, "0", []byte{0x6D, 0x00}},
-			&StringTableItem{63, "63", []byte{0x61, 0x00}},
+			&stringTableItem{0, "0", []byte{0x6D, 0x00}},
+			&stringTableItem{63, "63", []byte{0x61, 0x00}},
 		},
 
 		// instancebaseline is compressed and has 75 entries with values
@@ -72,8 +72,8 @@ func TestParseStringTableCreate(t *testing.T) {
 			"04_22356_compressed.pbmsg",
 			"instancebaseline",
 			75,
-			&StringTableItem{0, "664", _read_fixture("string_tables/instancebaseline/0000_664_414")},
-			&StringTableItem{74, "387", []byte{}},
+			&stringTableItem{0, "664", _read_fixture("string_tables/instancebaseline/0000_664_414")},
+			&stringTableItem{74, "387", []byte{}},
 		},
 
 		// EntityNames is compressed and has 123 entries
@@ -81,8 +81,8 @@ func TestParseStringTableCreate(t *testing.T) {
 			"08_4162_compressed.pbmsg",
 			"EntityNames",
 			350,
-			&StringTableItem{0, "kobold_taskmaster_speed_aura", []byte{}},
-			&StringTableItem{349, "item_flask", []byte{}},
+			&stringTableItem{0, "kobold_taskmaster_speed_aura", []byte{}},
+			&stringTableItem{349, "item_flask", []byte{}},
 		},
 
 		// EntityNames is compressed and has 123 entries
@@ -90,8 +90,8 @@ func TestParseStringTableCreate(t *testing.T) {
 			"13_18726_compressed.pbmsg",
 			"ModifierNames",
 			1274,
-			&StringTableItem{0, "modifier_disabled_invulnerable", []byte{}},
-			&StringTableItem{1273, "modifier_item_yasha", []byte{}},
+			&stringTableItem{0, "modifier_disabled_invulnerable", []byte{}},
+			&stringTableItem{1273, "modifier_item_yasha", []byte{}},
 		},
 
 		// EconItems is not compressed and fails on values
@@ -100,8 +100,8 @@ func TestParseStringTableCreate(t *testing.T) {
 			"16_559_uncompressed.pbmsg",
 			"EconItems",
 			57,
-			&StringTableItem{0, "6498667144", []byte{}},
-			&StringTableItem{56, "422364528", []byte{}},
+			&stringTableItem{0, "6498667144", []byte{}},
+			&stringTableItem{56, "422364528", []byte{}},
 		},
 
 		// GenericPrecache is uncompressed with a fixed data (bit) length
@@ -109,8 +109,8 @@ func TestParseStringTableCreate(t *testing.T) {
 			"02_33_uncompressed.pbmsg",
 			"genericprecache",
 			1,
-			&StringTableItem{0, "", []byte{0x00}},
-			&StringTableItem{0, "", []byte{0x00}},
+			&stringTableItem{0, "", []byte{0x00}},
+			&stringTableItem{0, "", []byte{0x00}},
 		},
 	}
 

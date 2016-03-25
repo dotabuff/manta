@@ -56,7 +56,7 @@ func (p *Parser) updateInstanceBaseline() {
 		return
 	}
 
-	stringTable, ok := p.StringTables.GetTableByName("instancebaseline")
+	stringTable, ok := p.stringTables.GetTableByName("instancebaseline")
 	if !ok {
 		if v(1) {
 			_debugf("skipping updateInstanceBaseline: no instancebaseline string table")
@@ -70,7 +70,7 @@ func (p *Parser) updateInstanceBaseline() {
 	}
 }
 
-func (p *Parser) updateInstanceBaselineItem(item *StringTableItem) {
+func (p *Parser) updateInstanceBaselineItem(item *stringTableItem) {
 	// Get the class id for the string table item
 	classId, err := atoi32(item.Key)
 	if err != nil {

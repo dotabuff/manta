@@ -12,7 +12,7 @@ import (
 var magicSource1 = []byte{'P', 'U', 'F', 'D', 'E', 'M', 'S', '\000'}
 var magicSource2 = []byte{'P', 'B', 'D', 'E', 'M', 'S', '2', '\000'}
 
-// A replay parser capable of parsing Source 2 replays
+// Parser is an instance of the replay parser
 type Parser struct {
 	// Callbacks provide a mechanism for receiving notification
 	// when a specific message has been received and decoded.
@@ -33,16 +33,16 @@ type Parser struct {
 	ClassBaselines map[int32]*Properties
 	ClassInfo      map[int32]string
 	PacketEntities map[int32]*PacketEntity
-	StringTables   *StringTables
 
 	classIdSize             int
-	gameEventHandlers       map[string][]gameEventHandler
+	gameEventHandlers       map[string][]GameEventHandler
 	gameEventNames          map[int32]string
 	gameEventTypes          map[string]*gameEventType
 	hasClassInfo            bool
 	packetEntityHandlers    []packetEntityHandler
 	packetEntityFullPackets int
 	serializers             map[string]map[int32]*dt
+	stringTables            *stringTables
 
 	reader            *Reader
 	isStopping        bool
@@ -72,12 +72,12 @@ func NewParser(buf []byte) (*Parser, error) {
 		ClassBaselines: make(map[int32]*Properties),
 		ClassInfo:      make(map[int32]string),
 		PacketEntities: make(map[int32]*PacketEntity),
-		StringTables:   newStringTables(),
 
-		gameEventHandlers:    make(map[string][]gameEventHandler),
+		gameEventHandlers:    make(map[string][]GameEventHandler),
 		gameEventNames:       make(map[int32]string),
 		gameEventTypes:       make(map[string]*gameEventType),
 		packetEntityHandlers: make([]packetEntityHandler, 0),
+		stringTables:         newStringTables(),
 
 		reader:     NewReader(buf),
 		isStopping: false,
@@ -155,7 +155,7 @@ func (p *Parser) afterStop() {
 
 // Performs a lookup on a string table by an entry index.
 func (p *Parser) LookupStringByIndex(table string, index int32) (string, bool) {
-	t, ok := p.StringTables.GetTableByName(table)
+	t, ok := p.stringTables.GetTableByName(table)
 	if !ok {
 		return "", false
 	}

@@ -170,8 +170,8 @@ func (e *GameEvent) getEventKey(name string) (*dota.CMsgSource1LegacyGameEventKe
 	return e.m.GetKeys()[f.i], nil
 }
 
-// A function that can handle a game event.
-type gameEventHandler func(*GameEvent) error
+// GameEventHandler is a function that can receive a game event
+type GameEventHandler func(*GameEvent) error
 
 // The type of a game event.
 // Has an identifier, name, and ordered fields.
@@ -245,6 +245,6 @@ func (p *Parser) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGameEvent
 }
 
 // Registers a new game event handler.
-func (p *Parser) OnGameEvent(name string, fn gameEventHandler) {
+func (p *Parser) OnGameEvent(name string, fn GameEventHandler) {
 	p.gameEventHandlers[name] = append(p.gameEventHandlers[name], fn)
 }

@@ -5,23 +5,23 @@ import (
 	"sync"
 )
 
-func decodeLeUint64(r *Reader, f *dt_field) interface{} {
+func decodeLeUint64(r *Reader, f *dtField) interface{} {
 	return r.readLeUint64()
 }
 
-func decodeHandle(r *Reader, f *dt_field) interface{} {
+func decodeHandle(r *Reader, f *dtField) interface{} {
 	return r.readVarUint32()
 }
 
-func decodeByte(r *Reader, f *dt_field) interface{} {
+func decodeByte(r *Reader, f *dtField) interface{} {
 	return r.readBits(8)
 }
 
-func decodeShort(r *Reader, f *dt_field) interface{} {
+func decodeShort(r *Reader, f *dtField) interface{} {
 	return r.readBits(16)
 }
 
-func decodeUnsigned(r *Reader, f *dt_field) interface{} {
+func decodeUnsigned(r *Reader, f *dtField) interface{} {
 	switch f.Encoder {
 	case "fixed64":
 		return decodeLeUint64(r, f)
@@ -30,30 +30,30 @@ func decodeUnsigned(r *Reader, f *dt_field) interface{} {
 	return r.readVarUint64()
 }
 
-func decodeSigned(r *Reader, f *dt_field) interface{} {
+func decodeSigned(r *Reader, f *dtField) interface{} {
 	return r.readVarInt32()
 }
 
-func decodeSigned64(r *Reader, f *dt_field) interface{} {
+func decodeSigned64(r *Reader, f *dtField) interface{} {
 	return r.readVarInt64()
 }
 
-func decodeFixed32(r *Reader, f *dt_field) interface{} {
+func decodeFixed32(r *Reader, f *dtField) interface{} {
 	return r.readBits(32)
 }
 
-func decodeFixed64(r *Reader, f *dt_field) interface{} {
+func decodeFixed64(r *Reader, f *dtField) interface{} {
 	ret := uint64(r.readBits(32))
 
 	ret = (ret << 32) | uint64(r.readBits(32))
 	return ret
 }
 
-func decodeBoolean(r *Reader, f *dt_field) interface{} {
+func decodeBoolean(r *Reader, f *dtField) interface{} {
 	return r.readBoolean()
 }
 
-func decodeFloat(r *Reader, f *dt_field) interface{} {
+func decodeFloat(r *Reader, f *dtField) interface{} {
 	// Parse specific encoders
 	switch f.Encoder {
 	case "coord":
@@ -69,45 +69,45 @@ func decodeFloat(r *Reader, f *dt_field) interface{} {
 	return decodeQuantized(r, f)
 }
 
-func decodeFloatNoscale(r *Reader, f *dt_field) interface{} {
+func decodeFloatNoscale(r *Reader, f *dtField) interface{} {
 	return math.Float32frombits(r.readBits(int(*f.BitCount)))
 }
 
 // A list of field -> encoder types with mutex
 var (
-	qMap = map[*dt_field]*QuantizedFloatDecoder{}
+	qMap = map[*dtField]*quantizedFloatDecoder{}
 	qMu  = sync.Mutex{}
 )
 
-func decodeQuantized(r *Reader, f *dt_field) interface{} {
+func decodeQuantized(r *Reader, f *dtField) interface{} {
 	// Find or create the correct field decoder
 	qMu.Lock()
 	if _, ok := qMap[f]; !ok {
-		qMap[f] = InitQFD(f)
+		qMap[f] = newQuantizedFloatDecoder(f)
 	}
 	q := qMap[f]
 	qMu.Unlock()
 
-	return q.Decode(r)
+	return q.decode(r)
 }
 
-func decodeSimTime(r *Reader, f *dt_field) interface{} {
+func decodeSimTime(r *Reader, f *dtField) interface{} {
 	return float32(r.readVarUint32()) * (1.0 / 30)
 }
 
-func decodeString(r *Reader, f *dt_field) interface{} {
+func decodeString(r *Reader, f *dtField) interface{} {
 	return r.readString()
 }
 
-func decodeVector(r *Reader, f *dt_field) interface{} {
+func decodeVector(r *Reader, f *dtField) interface{} {
 	return r.readVarUint32()
 }
 
-func decodeClass(r *Reader, f *dt_field) interface{} {
+func decodeClass(r *Reader, f *dtField) interface{} {
 	return r.readVarUint32()
 }
 
-func decodeFVector(r *Reader, f *dt_field) interface{} {
+func decodeFVector(r *Reader, f *dtField) interface{} {
 	// Parse specific encoders
 	switch f.Encoder {
 	case "normal":
@@ -117,11 +117,11 @@ func decodeFVector(r *Reader, f *dt_field) interface{} {
 	return []float32{decodeFloat(r, f).(float32), decodeFloat(r, f).(float32), decodeFloat(r, f).(float32)}
 }
 
-func decodeNop(r *Reader, f *dt_field) interface{} {
+func decodeNop(r *Reader, f *dtField) interface{} {
 	return 0
 }
 
-func decodePointer(r *Reader, f *dt_field) interface{} {
+func decodePointer(r *Reader, f *dtField) interface{} {
 	// Seems to be encoded as a single bit, not sure what to make of it
 	if !r.readBoolean() {
 		_panicf("Figure out how this works")
@@ -130,7 +130,7 @@ func decodePointer(r *Reader, f *dt_field) interface{} {
 	return 0
 }
 
-func decodeQAngle(r *Reader, f *dt_field) interface{} {
+func decodeQAngle(r *Reader, f *dtField) interface{} {
 	ret := [3]float32{0.0, 0.0, 0.0}
 
 	// Parse specific encoders
@@ -178,11 +178,11 @@ func decodeQAngle(r *Reader, f *dt_field) interface{} {
 	return ret
 }
 
-func decodeComponent(r *Reader, f *dt_field) interface{} {
+func decodeComponent(r *Reader, f *dtField) interface{} {
 	return r.readBits(1)
 }
 
-func decodeHSequence(r *Reader, f *dt_field) interface{} {
+func decodeHSequence(r *Reader, f *dtField) interface{} {
 	// wrong, just testing
 	return r.readBits(1)
 }
