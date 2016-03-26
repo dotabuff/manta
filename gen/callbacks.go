@@ -13,8 +13,6 @@ import (
 	"strconv"
 	"strings"
 	"text/template"
-
-	"github.com/davecgh/go-spew/spew"
 )
 
 // dotaMessage provides metadata to link an enum type and value to a struct type
@@ -360,7 +358,7 @@ func discoverTypes(protoPath string) {
 // nameOfValue extracts the name of an enum value, ex. EDemoCommands_DEM_Packet
 func nameOfValue(t *ast.ValueSpec) string {
 	if len(t.Names) != 1 {
-		spew.Println("unexpected names", t.Names)
+		fmt.Println("unexpected names", t.Names)
 		panic("unexpected names")
 	}
 	return t.Names[0].Name
@@ -378,7 +376,7 @@ func typeOfValue(t *ast.ValueSpec) string {
 // valueOfValue extracts the value of an enum value, ex. 7
 func valueOfValue(t *ast.ValueSpec) int {
 	if len(t.Values) != 1 {
-		spew.Println("unexpected values", t.Values)
+		fmt.Println("unexpected values", t.Values)
 		panic("unexpected values")
 	}
 
@@ -393,7 +391,7 @@ func valueOfValue(t *ast.ValueSpec) int {
 		return n
 
 	default:
-		spew.Println("unexpected type", t)
+		fmt.Println("unexpected type", t)
 		panic("unexpected type")
 	}
 

@@ -118,7 +118,7 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 	// Updates pending
 	updates := []*packetEntityUpdate{}
 
-	r := NewReader(m.GetEntityData())
+	r := newReader(m.GetEntityData())
 	index := int32(-1)
 	pe := &PacketEntity{}
 	ok := false

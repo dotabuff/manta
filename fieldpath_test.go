@@ -103,7 +103,7 @@ func TestFieldpath(t *testing.T) {
 
 		// Initialize a field path and walk it
 		fieldPath := newFieldpath(serializer)
-		fieldPath.walk(NewReader(buf))
+		fieldPath.walk(newReader(buf))
 
 		// Verify field count
 		assert.Equal(len(fieldPath.fields), s.expectCount)

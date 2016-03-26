@@ -28,39 +28,39 @@ func TestReaderReplayBeginning(t *testing.T) {
 		0x8C, 0x01,
 	}
 
-	r := NewReader(buf)
+	r := newReader(buf)
 
 	// Null terminated PBDEMS2 string
 	assert.Equal(magicSource2, r.readBytes(8))
-	assert.Equal(8, r.bytePos())
+	assert.Equal(uint32(8), r.pos)
 
 	// Unknown int32
 	assert.Equal(uint32(46293484), r.readLeUint32())
-	assert.Equal(12, r.bytePos())
+	assert.Equal(uint32(12), r.pos)
 
 	// Unknown int32
 	assert.Equal(uint32(46291827), r.readLeUint32())
-	assert.Equal(16, r.bytePos())
+	assert.Equal(uint32(16), r.pos)
 
 	// First packet begins
 
 	// Varint message type (1 = EDemoCommands_DEM_FileHeader)
 	assert.Equal(uint32(1), r.readVarUint32())
-	assert.Equal(17, r.bytePos())
+	assert.Equal(uint32(17), r.pos)
 
 	// Varint message tick (4294967295 = before the first tick)
 	assert.Equal(uint32(4294967295), r.readVarUint32())
-	assert.Equal(22, r.bytePos())
+	assert.Equal(uint32(22), r.pos)
 
 	// Varint message size (140)
 	assert.Equal(uint32(140), r.readVarUint32())
-	assert.Equal(24, r.bytePos())
+	assert.Equal(uint32(24), r.pos)
 }
 
 func TestReaderVarints(t *testing.T) {
 	assert := assert.New(t)
 
-	r := NewReader([]byte{0x01, 0xFF, 0xFF, 0xFF, 0xFF, 0x0F, 0x8C, 0x01})
+	r := newReader([]byte{0x01, 0xFF, 0xFF, 0xFF, 0xFF, 0x0F, 0x8C, 0x01})
 
 	// Ensure that readVarUint32 works as expected
 	assert.Equal(uint32(1), r.readVarUint32())
@@ -79,34 +79,10 @@ func TestReaderVarints(t *testing.T) {
 	assert.Equal(uint64(140), r.readVarUint64())
 }
 
-func TestReaderBoolean(t *testing.T) {
-	assert := assert.New(t)
-
-	// Start with any random mixed buffer
-	buf := _read_fixture("send_tables/1560315800.pbmsg")
-	r := NewReader(buf)
-
-	// Iterate through each bit
-	for r.pos < r.size {
-		// Read it as a 1-bit uint, either 0 (false) or 1 (true)
-		expect := false
-		if n := r.readBits(1); n == 1 {
-			expect = true
-		}
-		r.pos--
-
-		// Read it as a bool
-		got := r.readBoolean()
-
-		// Check that uint 1 == true, uint 0 = false
-		assert.Equal(expect, got)
-	}
-}
-
 func TestReaderStrings(t *testing.T) {
 	assert := assert.New(t)
 
-	r := NewReader([]byte{'P', 'B', 'D', 'E', 'M', 'S', '2', 0x0, 'E', 'X', 'T', 'R', 'A', 0x0})
+	r := newReader([]byte{'P', 'B', 'D', 'E', 'M', 'S', '2', 0x0, 'E', 'X', 'T', 'R', 'A', 0x0})
 
 	assert.Equal("PBDEMS2", r.readStringN(7))
 	r.pos = 0
@@ -117,7 +93,7 @@ func TestReaderStrings(t *testing.T) {
 func TestReaderUnaligned(t *testing.T) {
 	assert := assert.New(t)
 
-	r := NewReader([]byte{0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff})
+	r := newReader([]byte{0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff})
 
 	assert.Equal(uint32(0x7f), r.readBits(7))
 	assert.Equal(uint32(0xff), r.readBits(8))
@@ -127,7 +103,7 @@ func TestReaderUnaligned(t *testing.T) {
 }
 
 func BenchmarkReadVarUint32(b *testing.B) {
-	r := NewReader([]byte{0x01, 0xFF, 0xFF, 0xFF, 0xFF, 0x0F, 0x8C, 0x01})
+	r := newReader([]byte{0x01, 0xFF, 0xFF, 0xFF, 0xFF, 0x0F, 0x8C, 0x01})
 	b.ResetTimer()
 
 	for n := 0; n < b.N; n++ {
@@ -140,7 +116,7 @@ func BenchmarkReadVarUint32(b *testing.B) {
 }
 
 func BenchmarkReadVarUint64(b *testing.B) {
-	r := NewReader([]byte{0x01, 0xFF, 0xFF, 0xFF, 0xFF, 0x0F, 0x8C, 0x01})
+	r := newReader([]byte{0x01, 0xFF, 0xFF, 0xFF, 0xFF, 0x0F, 0x8C, 0x01})
 	b.ResetTimer()
 
 	for n := 0; n < b.N; n++ {
@@ -153,24 +129,24 @@ func BenchmarkReadVarUint64(b *testing.B) {
 }
 
 func BenchmarkReadBytesAligned(b *testing.B) {
-	r := NewReader(makeBuffer(1024))
+	r := newReader(makeBuffer(1024))
 
 	b.ResetTimer()
 	for n := 0; n < b.N; n++ {
 		r.readBytes(2)
-		r.seekBytes(-2)
+		rewindBytes(r, 2)
 	}
 	b.ReportAllocs()
 }
 
 func BenchmarkReadBytesUnaligned(b *testing.B) {
-	r := NewReader(makeBuffer(1024))
-	r.seekBits(6)
+	r := newReader(makeBuffer(1024))
+	r.readBits(6)
 
 	b.ResetTimer()
 	for n := 0; n < b.N; n++ {
 		r.readBytes(2)
-		r.seekBytes(-2)
+		rewindBytes(r, 2)
 	}
 	b.ReportAllocs()
 }
@@ -181,4 +157,10 @@ func makeBuffer(n int) []byte {
 		buf[i] = byte(rand.Intn(255))
 	}
 	return buf
+}
+
+func rewindBytes(r *reader, n uint32) {
+	r.pos -= n
+	r.bitCount = 0
+	r.bitVal = 0
 }

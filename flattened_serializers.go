@@ -227,10 +227,10 @@ func (sers *flattenedSerializers) recurseTable(cur *dota.ProtoFlattenedSerialize
 // Parses a CDemoSendTables packet
 func (p *Parser) parseSendTables(m *dota.CDemoSendTables, pst *propertySerializerTable) *flattenedSerializers {
 	// This packet just contains a single large buffer
-	r := NewReader(m.GetData())
+	r := newReader(m.GetData())
 
 	// The buffer starts with a varint encoded length
-	size := int(r.readVarUint32())
+	size := r.readVarUint32()
 	if size != r.remBytes() {
 		_panicf("expected %d additional bytes, got %d", size, r.remBytes())
 	}

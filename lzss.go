@@ -2,7 +2,7 @@ package manta
 
 // Decompress a Valve LZSS compressed buffer
 func unlzss(buf []byte) ([]byte, error) {
-	r := NewReader(buf)
+	r := newReader(buf)
 
 	if s := r.readStringN(4); s != "LZSS" {
 		return nil, _errorf("expected LZSS header, got %s", s)

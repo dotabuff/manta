@@ -26,7 +26,7 @@ type fieldpath struct {
 // Contains the weight and lookup function for a single operation
 type fieldpathOp struct {
 	Name     string
-	Function func(*Reader, *fieldpath)
+	Function func(*reader, *fieldpath)
 	Weight   int
 }
 
@@ -87,7 +87,7 @@ func newFieldpath(parentTbl *dt) *fieldpath {
 }
 
 // Walk an encoded fieldpath based on a huffman tree
-func (fp *fieldpath) walk(r *Reader) {
+func (fp *fieldpath) walk(r *reader) {
 	var node huffmanTree = fpHuf
 	var next huffmanTree
 
@@ -155,139 +155,139 @@ func newFieldpathHuffman() huffmanTree {
 
 // All different fieldops below
 
-func fpPlusOne(r *Reader, fp *fieldpath) {
+func fpPlusOne(r *reader, fp *fieldpath) {
 	fp.index[len(fp.index)-1] += 1
 }
 
-func fpPlusTwo(r *Reader, fp *fieldpath) {
+func fpPlusTwo(r *reader, fp *fieldpath) {
 	fp.index[len(fp.index)-1] += 2
 }
 
-func fpPlusThree(r *Reader, fp *fieldpath) {
+func fpPlusThree(r *reader, fp *fieldpath) {
 	fp.index[len(fp.index)-1] += 3
 }
 
-func fpPlusFour(r *Reader, fp *fieldpath) {
+func fpPlusFour(r *reader, fp *fieldpath) {
 	fp.index[len(fp.index)-1] += 4
 }
 
-func fpPlusN(r *Reader, fp *fieldpath) {
+func fpPlusN(r *reader, fp *fieldpath) {
 	fp.index[len(fp.index)-1] += int32(r.readUBitVarFP()) + 5
 }
 
-func fpPushOneLeftDeltaZeroRightZero(r *Reader, fp *fieldpath) {
+func fpPushOneLeftDeltaZeroRightZero(r *reader, fp *fieldpath) {
 	fp.index = append(fp.index, 0)
 }
 
-func fpPushOneLeftDeltaZeroRightNonZero(r *Reader, fp *fieldpath) {
+func fpPushOneLeftDeltaZeroRightNonZero(r *reader, fp *fieldpath) {
 	fp.index = append(fp.index, int32(r.readUBitVarFP()))
 }
 
-func fpPushOneLeftDeltaOneRightZero(r *Reader, fp *fieldpath) {
+func fpPushOneLeftDeltaOneRightZero(r *reader, fp *fieldpath) {
 	fp.index[len(fp.index)-1] += 1
 	fp.index = append(fp.index, 0)
 }
 
-func fpPushOneLeftDeltaOneRightNonZero(r *Reader, fp *fieldpath) {
+func fpPushOneLeftDeltaOneRightNonZero(r *reader, fp *fieldpath) {
 	fp.index[len(fp.index)-1] += 1
 	fp.index = append(fp.index, int32(r.readUBitVarFP()))
 }
 
-func fpPushOneLeftDeltaNRightZero(r *Reader, fp *fieldpath) {
+func fpPushOneLeftDeltaNRightZero(r *reader, fp *fieldpath) {
 	fp.index[len(fp.index)-1] += int32(r.readUBitVarFP())
 	fp.index = append(fp.index, 0)
 }
 
-func fpPushOneLeftDeltaNRightNonZero(r *Reader, fp *fieldpath) {
+func fpPushOneLeftDeltaNRightNonZero(r *reader, fp *fieldpath) {
 	fp.index[len(fp.index)-1] += int32(r.readUBitVarFP()) + 2
 	fp.index = append(fp.index, int32(r.readUBitVarFP())+1)
 }
 
-func fpPushOneLeftDeltaNRightNonZeroPack6Bits(r *Reader, fp *fieldpath) {
+func fpPushOneLeftDeltaNRightNonZeroPack6Bits(r *reader, fp *fieldpath) {
 	fp.index[len(fp.index)-1] += int32(r.readBits(3)) + 2
 	fp.index = append(fp.index, int32(r.readBits(3))+1)
 }
 
-func fpPushOneLeftDeltaNRightNonZeroPack8Bits(r *Reader, fp *fieldpath) {
+func fpPushOneLeftDeltaNRightNonZeroPack8Bits(r *reader, fp *fieldpath) {
 	fp.index[len(fp.index)-1] += int32(r.readBits(4)) + 2
 	fp.index = append(fp.index, int32(r.readBits(4))+1)
 }
 
-func fpPushTwoLeftDeltaZero(r *Reader, fp *fieldpath) {
+func fpPushTwoLeftDeltaZero(r *reader, fp *fieldpath) {
 	fp.index = append(fp.index, int32(r.readUBitVarFP()))
 	fp.index = append(fp.index, int32(r.readUBitVarFP()))
 }
 
-func fpPushTwoLeftDeltaOne(r *Reader, fp *fieldpath) {
+func fpPushTwoLeftDeltaOne(r *reader, fp *fieldpath) {
 	fp.index[len(fp.index)-1]++
 	fp.index = append(fp.index, int32(r.readUBitVarFP()))
 	fp.index = append(fp.index, int32(r.readUBitVarFP()))
 }
 
-func fpPushTwoLeftDeltaN(r *Reader, fp *fieldpath) {
+func fpPushTwoLeftDeltaN(r *reader, fp *fieldpath) {
 	fp.index[len(fp.index)-1] += int32(r.readUBitVar()) + 2
 	fp.index = append(fp.index, int32(r.readUBitVarFP()))
 	fp.index = append(fp.index, int32(r.readUBitVarFP()))
 }
 
-func fpPushTwoPack5LeftDeltaZero(r *Reader, fp *fieldpath) {
+func fpPushTwoPack5LeftDeltaZero(r *reader, fp *fieldpath) {
 	fp.index = append(fp.index, int32(r.readBits(5)))
 	fp.index = append(fp.index, int32(r.readBits(5)))
 }
 
-func fpPushTwoPack5LeftDeltaOne(r *Reader, fp *fieldpath) {
+func fpPushTwoPack5LeftDeltaOne(r *reader, fp *fieldpath) {
 	fp.index[len(fp.index)-1]++
 	fp.index = append(fp.index, int32(r.readBits(5)))
 	fp.index = append(fp.index, int32(r.readBits(5)))
 }
 
-func fpPushTwoPack5LeftDeltaN(r *Reader, fp *fieldpath) {
+func fpPushTwoPack5LeftDeltaN(r *reader, fp *fieldpath) {
 	fp.index[len(fp.index)-1] += int32(r.readUBitVar()) + 2
 	fp.index = append(fp.index, int32(r.readBits(5)))
 	fp.index = append(fp.index, int32(r.readBits(5)))
 }
 
-func fpPushThreeLeftDeltaZero(r *Reader, fp *fieldpath) {
+func fpPushThreeLeftDeltaZero(r *reader, fp *fieldpath) {
 	fp.index = append(fp.index, int32(r.readUBitVarFP()))
 	fp.index = append(fp.index, int32(r.readUBitVarFP()))
 	fp.index = append(fp.index, int32(r.readUBitVarFP()))
 }
 
-func fpPushThreeLeftDeltaOne(r *Reader, fp *fieldpath) {
+func fpPushThreeLeftDeltaOne(r *reader, fp *fieldpath) {
 	fp.index[len(fp.index)-1]++
 	fp.index = append(fp.index, int32(r.readUBitVarFP()))
 	fp.index = append(fp.index, int32(r.readUBitVarFP()))
 	fp.index = append(fp.index, int32(r.readUBitVarFP()))
 }
 
-func fpPushThreeLeftDeltaN(r *Reader, fp *fieldpath) {
+func fpPushThreeLeftDeltaN(r *reader, fp *fieldpath) {
 	fp.index[len(fp.index)-1] += int32(r.readUBitVar()) + 2
 	fp.index = append(fp.index, int32(r.readUBitVarFP()))
 	fp.index = append(fp.index, int32(r.readUBitVarFP()))
 	fp.index = append(fp.index, int32(r.readUBitVarFP()))
 }
 
-func fpPushThreePack5LeftDeltaZero(r *Reader, fp *fieldpath) {
+func fpPushThreePack5LeftDeltaZero(r *reader, fp *fieldpath) {
 	fp.index = append(fp.index, int32(r.readBits(5)))
 	fp.index = append(fp.index, int32(r.readBits(5)))
 	fp.index = append(fp.index, int32(r.readBits(5)))
 }
 
-func fpPushThreePack5LeftDeltaOne(r *Reader, fp *fieldpath) {
+func fpPushThreePack5LeftDeltaOne(r *reader, fp *fieldpath) {
 	fp.index[len(fp.index)-1]++
 	fp.index = append(fp.index, int32(r.readBits(5)))
 	fp.index = append(fp.index, int32(r.readBits(5)))
 	fp.index = append(fp.index, int32(r.readBits(5)))
 }
 
-func fpPushThreePack5LeftDeltaN(r *Reader, fp *fieldpath) {
+func fpPushThreePack5LeftDeltaN(r *reader, fp *fieldpath) {
 	fp.index[len(fp.index)-1] += int32(r.readUBitVar()) + 2
 	fp.index = append(fp.index, int32(r.readBits(5)))
 	fp.index = append(fp.index, int32(r.readBits(5)))
 	fp.index = append(fp.index, int32(r.readBits(5)))
 }
 
-func fpPushN(r *Reader, fp *fieldpath) {
+func fpPushN(r *reader, fp *fieldpath) {
 	n := int(r.readUBitVar())
 	fp.index[len(fp.index)-1] += int32(r.readUBitVar())
 
@@ -296,7 +296,7 @@ func fpPushN(r *Reader, fp *fieldpath) {
 	}
 }
 
-func fpPushNAndNonTopological(r *Reader, fp *fieldpath) {
+func fpPushNAndNonTopological(r *reader, fp *fieldpath) {
 	for i := 0; i < len(fp.index); i++ {
 		if r.readBoolean() {
 			fp.index[i] += r.readVarInt32() + 1
@@ -309,51 +309,51 @@ func fpPushNAndNonTopological(r *Reader, fp *fieldpath) {
 	}
 }
 
-func fpPopOnePlusOne(r *Reader, fp *fieldpath) {
+func fpPopOnePlusOne(r *reader, fp *fieldpath) {
 	fp.index = fp.index[:len(fp.index)-1]
 	fp.index[len(fp.index)-1] += 1
 }
 
-func fpPopOnePlusN(r *Reader, fp *fieldpath) {
+func fpPopOnePlusN(r *reader, fp *fieldpath) {
 	fp.index = fp.index[:len(fp.index)-1]
 	fp.index[len(fp.index)-1] += int32(r.readUBitVarFP()) + 1
 }
 
-func fpPopAllButOnePlusOne(r *Reader, fp *fieldpath) {
+func fpPopAllButOnePlusOne(r *reader, fp *fieldpath) {
 	fp.index = fp.index[:1]
 	fp.index[len(fp.index)-1] += 1
 }
 
-func fpPopAllButOnePlusN(r *Reader, fp *fieldpath) {
+func fpPopAllButOnePlusN(r *reader, fp *fieldpath) {
 	fp.index = fp.index[:1]
 	fp.index[len(fp.index)-1] += int32(r.readUBitVarFP()) + 1
 }
 
-func fpPopAllButOnePlusNPackN(r *Reader, fp *fieldpath) {
+func fpPopAllButOnePlusNPackN(r *reader, fp *fieldpath) {
 	_panicf("Name: %s", fp.parent.Name)
 }
 
-func fpPopAllButOnePlusNPack3Bits(r *Reader, fp *fieldpath) {
+func fpPopAllButOnePlusNPack3Bits(r *reader, fp *fieldpath) {
 	fp.index = fp.index[:1]
 	fp.index[len(fp.index)-1] += int32(r.readBits(3)) + 1
 }
 
-func fpPopAllButOnePlusNPack6Bits(r *Reader, fp *fieldpath) {
+func fpPopAllButOnePlusNPack6Bits(r *reader, fp *fieldpath) {
 	fp.index = fp.index[:1]
 	fp.index[len(fp.index)-1] += int32(r.readBits(6)) + 1
 }
 
-func fpPopNPlusOne(r *Reader, fp *fieldpath) {
+func fpPopNPlusOne(r *reader, fp *fieldpath) {
 	fp.index = fp.index[:len(fp.index)-(int(r.readUBitVarFP()))]
 	fp.index[len(fp.index)-1] += 1
 }
 
-func fpPopNPlusN(r *Reader, fp *fieldpath) {
+func fpPopNPlusN(r *reader, fp *fieldpath) {
 	fp.index = fp.index[:len(fp.index)-(int(r.readUBitVarFP()))]
 	fp.index[len(fp.index)-1] += r.readVarInt32()
 }
 
-func fpPopNAndNonTopographical(r *Reader, fp *fieldpath) {
+func fpPopNAndNonTopographical(r *reader, fp *fieldpath) {
 	fp.index = fp.index[:len(fp.index)-(int(r.readUBitVarFP()))]
 
 	for i := 0; i < len(fp.index); i++ {
@@ -363,7 +363,7 @@ func fpPopNAndNonTopographical(r *Reader, fp *fieldpath) {
 	}
 }
 
-func fpNonTopoComplex(r *Reader, fp *fieldpath) {
+func fpNonTopoComplex(r *reader, fp *fieldpath) {
 	for i := 0; i < len(fp.index); i++ {
 		if r.readBoolean() {
 			fp.index[i] += r.readVarInt32()
@@ -371,11 +371,11 @@ func fpNonTopoComplex(r *Reader, fp *fieldpath) {
 	}
 }
 
-func fpNonTopoPenultimatePlusOne(r *Reader, fp *fieldpath) {
+func fpNonTopoPenultimatePlusOne(r *reader, fp *fieldpath) {
 	fp.index[len(fp.index)-2] += 1
 }
 
-func fpNonTopoComplexPack4Bits(r *Reader, fp *fieldpath) {
+func fpNonTopoComplexPack4Bits(r *reader, fp *fieldpath) {
 	for i := 0; i < len(fp.index); i++ {
 		if r.readBoolean() {
 			fp.index[i] += int32(r.readBits(4)) - 7
@@ -383,6 +383,6 @@ func fpNonTopoComplexPack4Bits(r *Reader, fp *fieldpath) {
 	}
 }
 
-func fpFieldPathEncodeFinish(r *Reader, fp *fieldpath) {
+func fpFieldPathEncodeFinish(r *reader, fp *fieldpath) {
 	fp.finished = true
 }

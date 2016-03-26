@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"math"
 	"os"
 	"runtime"
 	"strconv"
@@ -133,8 +132,4 @@ func saveReturnFloat32(v *float32, def interface{}) interface{} {
 	} else {
 		return *v
 	}
-}
-
-func log2(n int) int {
-	return int(math.Log(float64(n))/math.Log(2)) + 1
 }
