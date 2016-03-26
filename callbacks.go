@@ -1,4 +1,3 @@
-//go:generate go run gen/callbacks.go
 package manta
 
 import (

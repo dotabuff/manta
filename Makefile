@@ -30,7 +30,7 @@ gen-dota-proto:
 	sed -i 's|google/protobuf/descriptor.pb|github.com/golang/protobuf/protoc-gen-go/descriptor|' dota/*.pb.go
 
 generate:
-	go generate
+	go run gen/callbacks.go
 
 sync-replays:
 	s3cmd --region=us-west-2 sync ./replays/*.dem s3://manta.dotabuff/
