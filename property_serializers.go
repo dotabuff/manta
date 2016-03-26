@@ -8,7 +8,7 @@ import (
 )
 
 // Type for a decoder function
-type decodeFn func(*Reader, *dtField) interface{}
+type decodeFn func(*reader, *dtField) interface{}
 
 // PropertySerializer interface
 type propertySerializer struct {

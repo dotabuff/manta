@@ -2,6 +2,7 @@ package manta
 
 import (
 	"fmt"
+	"math"
 	"regexp"
 	"strconv"
 
@@ -13,7 +14,7 @@ var gameBuildRegexp = regexp.MustCompile(`/dota_v(\d+)/`)
 // Internal callback for CSVCMsg_ServerInfo.
 func (p *Parser) onCSVCMsg_ServerInfo(m *dota.CSVCMsg_ServerInfo) error {
 	// This may be needed to parse PacketEntities.
-	p.classIdSize = log2(int(m.GetMaxClasses()))
+	p.classIdSize = uint32(math.Log(float64(m.GetMaxClasses()))/math.Log(2)) + 1
 
 	// Extract the build from the game dir.
 	matches := gameBuildRegexp.FindStringSubmatch(m.GetGameDir())
@@ -103,7 +104,7 @@ func (p *Parser) updateInstanceBaselineItem(item *stringTableItem) {
 		if v(1) {
 			_debugf("parsing entity baseline %v", serializer[0].Name)
 		}
-		r := NewReader(item.Value)
+		r := newReader(item.Value)
 		p.ClassBaselines[classId].readProperties(r, serializer[0])
 	}
 }

@@ -131,7 +131,7 @@ func (qfd *quantizedFloatDecoder) quantize(val float32) float32 {
 }
 
 // Actual float decoding
-func (qfd *quantizedFloatDecoder) decode(r *Reader) float32 {
+func (qfd *quantizedFloatDecoder) decode(r *reader) float32 {
 	if (qfd.Flags&qff_rounddown) != 0 && r.readBoolean() {
 		return qfd.Low
 	}
@@ -144,7 +144,7 @@ func (qfd *quantizedFloatDecoder) decode(r *Reader) float32 {
 		return 0.0
 	}
 
-	return qfd.Low + (qfd.High-qfd.Low)*float32(r.readBits(int(qfd.Bitcount)))*qfd.DecMul
+	return qfd.Low + (qfd.High-qfd.Low)*float32(r.readBits(qfd.Bitcount))*qfd.DecMul
 }
 
 // Creates a new quantized float decoder based on given field

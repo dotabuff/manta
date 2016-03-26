@@ -34,7 +34,7 @@ type Parser struct {
 	ClassInfo      map[int32]string
 	PacketEntities map[int32]*PacketEntity
 
-	classIdSize             int
+	classIdSize             uint32
 	gameEventHandlers       map[string][]GameEventHandler
 	gameEventNames          map[int32]string
 	gameEventTypes          map[string]*gameEventType
@@ -44,7 +44,7 @@ type Parser struct {
 	serializers             map[string]map[int32]*dt
 	stringTables            *stringTables
 
-	reader            *Reader
+	reader            *reader
 	isStopping        bool
 	AfterStopCallback func()
 }
@@ -79,7 +79,7 @@ func NewParser(buf []byte) (*Parser, error) {
 		packetEntityHandlers: make([]packetEntityHandler, 0),
 		stringTables:         newStringTables(),
 
-		reader:     NewReader(buf),
+		reader:     newReader(buf),
 		isStopping: false,
 	}
 
@@ -90,7 +90,7 @@ func NewParser(buf []byte) (*Parser, error) {
 
 	// Skip the next 8 bytes, which appear to be two int32s related to the size
 	// of the demo file. We may need them in the future, but not so far.
-	parser.reader.seekBytes(8)
+	parser.reader.readBytes(8)
 
 	// Internal handlers
 	parser.Callbacks.OnCDemoPacket(parser.onCDemoPacket)
@@ -195,7 +195,7 @@ func (p *Parser) readOuterMessage() (*outerMessage, error) {
 	}
 
 	// Read the size and following buffer.
-	size := int(p.reader.readVarUint32())
+	size := p.reader.readVarUint32()
 	buf := p.reader.readBytes(size)
 
 	// If the buffer is compressed, decompress it with snappy.

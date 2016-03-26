@@ -87,7 +87,7 @@ func (p *Properties) FetchString(k string) (string, bool) {
 }
 
 // Reads properties into p using the given reader and serializer.
-func (p *Properties) readProperties(r *Reader, ser *dt) {
+func (p *Properties) readProperties(r *reader, ser *dt) {
 	// Create fieldpath
 	fieldPath := newFieldpath(ser)
 

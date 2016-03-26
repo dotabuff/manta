@@ -86,7 +86,7 @@ func (p *Parser) onCSVCMsg_CreateStringTable(m *dota.CSVCMsg_CreateStringTable) 
 		// old replays = lzss
 		// new replays = snappy
 
-		r := NewReader(buf)
+		r := newReader(buf)
 		var err error
 
 		if s := r.readStringN(4); s != "LZSS" {
@@ -163,7 +163,7 @@ func parseStringTable(buf []byte, numUpdates int32, userDataFixed bool, userData
 	items = make([]*stringTableItem, 0)
 
 	// Create a reader for the buffer
-	r := NewReader(buf)
+	r := newReader(buf)
 
 	// Start with an index of -1.
 	// If the first item is at index 0 it will use a incr operation.
@@ -243,9 +243,9 @@ func parseStringTable(buf []byte, numUpdates int32, userDataFixed bool, userData
 			// bits during table creation, or have a variable size with
 			// a 14-bit prefixed size.
 			if userDataFixed {
-				value = r.readBitsAsBytes(int(userDataSize))
+				value = r.readBitsAsBytes(uint32(userDataSize))
 			} else {
-				size := int(r.readBits(14))
+				size := r.readBits(14)
 				r.readBits(3) // XXX TODO: what is this?
 				value = r.readBytes(size)
 			}
