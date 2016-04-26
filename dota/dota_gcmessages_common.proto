@@ -643,6 +643,8 @@ enum EDOTAGCMsg {
 	k_EMsgSQLGCToGCWeekendTourneyRefundTickets = 8121;
 	k_EMsgGCToGCWeekendTourneyCountTickets = 8122;
 	k_EMsgGCToGCWeekendTourneyCountTicketsResponse = 8123;
+	k_EMsgClientToGCGetGiftPermissions = 8126;
+	k_EMsgClientToGCGetGiftPermissionsResponse = 8127;
 }
 
 enum ESpecialPingValue {

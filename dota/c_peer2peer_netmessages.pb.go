@@ -5,10 +5,12 @@
 package dota
 
 import proto "github.com/golang/protobuf/proto"
+import fmt "fmt"
 import math "math"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
+var _ = fmt.Errorf
 var _ = math.Inf
 
 type P2P_Messages int32
@@ -46,6 +48,7 @@ func (x *P2P_Messages) UnmarshalJSON(data []byte) error {
 	*x = P2P_Messages(value)
 	return nil
 }
+func (P2P_Messages) EnumDescriptor() ([]byte, []int) { return fileDescriptor1, []int{0} }
 
 type CP2P_Voice_Handler_Flags int32
 
@@ -76,15 +79,17 @@ func (x *CP2P_Voice_Handler_Flags) UnmarshalJSON(data []byte) error {
 	*x = CP2P_Voice_Handler_Flags(value)
 	return nil
 }
+func (CP2P_Voice_Handler_Flags) EnumDescriptor() ([]byte, []int) { return fileDescriptor1, []int{2, 0} }
 
 type CP2P_TextMessage struct {
 	Text             []byte `protobuf:"bytes,1,opt,name=text" json:"text,omitempty"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CP2P_TextMessage) Reset()         { *m = CP2P_TextMessage{} }
-func (m *CP2P_TextMessage) String() string { return proto.CompactTextString(m) }
-func (*CP2P_TextMessage) ProtoMessage()    {}
+func (m *CP2P_TextMessage) Reset()                    { *m = CP2P_TextMessage{} }
+func (m *CP2P_TextMessage) String() string            { return proto.CompactTextString(m) }
+func (*CP2P_TextMessage) ProtoMessage()               {}
+func (*CP2P_TextMessage) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{0} }
 
 func (m *CP2P_TextMessage) GetText() []byte {
 	if m != nil {
@@ -98,9 +103,10 @@ type CSteam_Voice_Encoding struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CSteam_Voice_Encoding) Reset()         { *m = CSteam_Voice_Encoding{} }
-func (m *CSteam_Voice_Encoding) String() string { return proto.CompactTextString(m) }
-func (*CSteam_Voice_Encoding) ProtoMessage()    {}
+func (m *CSteam_Voice_Encoding) Reset()                    { *m = CSteam_Voice_Encoding{} }
+func (m *CSteam_Voice_Encoding) String() string            { return proto.CompactTextString(m) }
+func (*CSteam_Voice_Encoding) ProtoMessage()               {}
+func (*CSteam_Voice_Encoding) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{1} }
 
 func (m *CSteam_Voice_Encoding) GetVoiceData() []byte {
 	if m != nil {
@@ -115,9 +121,10 @@ type CP2P_Voice struct {
 	XXX_unrecognized []byte          `json:"-"`
 }
 
-func (m *CP2P_Voice) Reset()         { *m = CP2P_Voice{} }
-func (m *CP2P_Voice) String() string { return proto.CompactTextString(m) }
-func (*CP2P_Voice) ProtoMessage()    {}
+func (m *CP2P_Voice) Reset()                    { *m = CP2P_Voice{} }
+func (m *CP2P_Voice) String() string            { return proto.CompactTextString(m) }
+func (*CP2P_Voice) ProtoMessage()               {}
+func (*CP2P_Voice) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{2} }
 
 func (m *CP2P_Voice) GetAudio() *CMsgVoiceAudio {
 	if m != nil {
@@ -139,9 +146,10 @@ type CP2P_Ping struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CP2P_Ping) Reset()         { *m = CP2P_Ping{} }
-func (m *CP2P_Ping) String() string { return proto.CompactTextString(m) }
-func (*CP2P_Ping) ProtoMessage()    {}
+func (m *CP2P_Ping) Reset()                    { *m = CP2P_Ping{} }
+func (m *CP2P_Ping) String() string            { return proto.CompactTextString(m) }
+func (*CP2P_Ping) ProtoMessage()               {}
+func (*CP2P_Ping) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{3} }
 
 func (m *CP2P_Ping) GetSendTime() uint64 {
 	if m != nil && m.SendTime != nil {
@@ -158,6 +166,32 @@ func (m *CP2P_Ping) GetIsReply() bool {
 }
 
 func init() {
+	proto.RegisterType((*CP2P_TextMessage)(nil), "dota.CP2P_TextMessage")
+	proto.RegisterType((*CSteam_Voice_Encoding)(nil), "dota.CSteam_Voice_Encoding")
+	proto.RegisterType((*CP2P_Voice)(nil), "dota.CP2P_Voice")
+	proto.RegisterType((*CP2P_Ping)(nil), "dota.CP2P_Ping")
 	proto.RegisterEnum("dota.P2P_Messages", P2P_Messages_name, P2P_Messages_value)
 	proto.RegisterEnum("dota.CP2P_Voice_Handler_Flags", CP2P_Voice_Handler_Flags_name, CP2P_Voice_Handler_Flags_value)
+}
+
+var fileDescriptor1 = []byte{
+	// 287 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x64, 0x4f, 0x4f, 0x4b, 0xf3, 0x30,
+	0x18, 0x7f, 0x9b, 0x77, 0xc2, 0xf6, 0xd8, 0xba, 0x2c, 0x4c, 0x1c, 0x82, 0x30, 0xeb, 0xa5, 0x28,
+	0x14, 0xe9, 0x37, 0xd0, 0xa2, 0x78, 0x19, 0x14, 0x14, 0xaf, 0x21, 0x36, 0x0f, 0xa5, 0xd0, 0x36,
+	0xa1, 0xc9, 0xc4, 0xdd, 0xa6, 0x9f, 0xdc, 0x24, 0xee, 0x20, 0x78, 0x09, 0xe4, 0xf9, 0xfd, 0x87,
+	0x8b, 0x9a, 0x6b, 0xc4, 0xb1, 0xf0, 0x0f, 0x1f, 0xd0, 0xf6, 0x68, 0x8c, 0x68, 0xd0, 0xe4, 0x7a,
+	0x54, 0x56, 0xb1, 0x89, 0x54, 0x56, 0x9c, 0x2f, 0xfe, 0x00, 0xe9, 0x1a, 0x68, 0x59, 0x15, 0x15,
+	0x7f, 0xc1, 0x0f, 0xbb, 0xf9, 0x81, 0x58, 0x0c, 0x13, 0xeb, 0xbe, 0xab, 0x68, 0x1d, 0x65, 0x71,
+	0x7a, 0x03, 0xa7, 0xe5, 0xb3, 0x45, 0xd1, 0xf3, 0x57, 0xd5, 0xd6, 0xc8, 0x1f, 0x86, 0x5a, 0xc9,
+	0x76, 0x68, 0x18, 0x03, 0x78, 0x0f, 0x17, 0x29, 0xac, 0x38, 0x90, 0x7b, 0x80, 0x60, 0x17, 0xa8,
+	0xec, 0x0a, 0x8e, 0xc4, 0x56, 0xb6, 0x2a, 0x80, 0xc7, 0xc5, 0x32, 0xf7, 0x2d, 0xf2, 0x72, 0x63,
+	0x9a, 0x80, 0xdf, 0x79, 0x8c, 0x9d, 0xc1, 0xfc, 0x6d, 0x54, 0x42, 0xd6, 0xc2, 0x58, 0xde, 0x8c,
+	0x6a, 0xab, 0x57, 0xc4, 0xd1, 0x93, 0xf4, 0x12, 0x92, 0x27, 0x31, 0xc8, 0xce, 0x0d, 0x7a, 0xec,
+	0x44, 0x63, 0x18, 0x85, 0xb8, 0xea, 0xc4, 0x0e, 0x25, 0x0f, 0x4a, 0x1a, 0xa5, 0xb7, 0x30, 0x0b,
+	0x71, 0x95, 0xef, 0xb3, 0x80, 0x99, 0xc1, 0x41, 0x72, 0xdb, 0xf6, 0xe8, 0x12, 0x49, 0x36, 0x71,
+	0x8a, 0x69, 0x6b, 0xf8, 0x88, 0xba, 0xdb, 0x39, 0x53, 0x92, 0x4d, 0xaf, 0x4b, 0xe7, 0xe1, 0x04,
+	0x87, 0xa9, 0x86, 0x2d, 0x61, 0xae, 0x0b, 0xfd, 0x7b, 0x3e, 0xdd, 0x13, 0x76, 0x02, 0x33, 0x7f,
+	0x0d, 0x2d, 0xe9, 0x27, 0x61, 0x09, 0x4c, 0xfd, 0xdf, 0xc7, 0xd0, 0x2f, 0x72, 0xff, 0x7f, 0x1f,
+	0xfd, 0xfb, 0x0e, 0x00, 0x00, 0xff, 0xff, 0x0b, 0xc7, 0x02, 0x21, 0x72, 0x01, 0x00, 0x00,
 }

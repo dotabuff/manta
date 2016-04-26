@@ -5,10 +5,12 @@
 package dota
 
 import proto "github.com/golang/protobuf/proto"
+import fmt "fmt"
 import math "math"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
+var _ = fmt.Errorf
 var _ = math.Inf
 
 type CLC_Messages int32
@@ -82,6 +84,7 @@ func (x *CLC_Messages) UnmarshalJSON(data []byte) error {
 	*x = CLC_Messages(value)
 	return nil
 }
+func (CLC_Messages) EnumDescriptor() ([]byte, []int) { return fileDescriptor19, []int{0} }
 
 type SVC_Messages int32
 
@@ -181,6 +184,7 @@ func (x *SVC_Messages) UnmarshalJSON(data []byte) error {
 	*x = SVC_Messages(value)
 	return nil
 }
+func (SVC_Messages) EnumDescriptor() ([]byte, []int) { return fileDescriptor19, []int{1} }
 
 type VoiceDataFormatT int32
 
@@ -214,6 +218,7 @@ func (x *VoiceDataFormatT) UnmarshalJSON(data []byte) error {
 	*x = VoiceDataFormatT(value)
 	return nil
 }
+func (VoiceDataFormatT) EnumDescriptor() ([]byte, []int) { return fileDescriptor19, []int{2} }
 
 type RequestPauseT int32
 
@@ -250,6 +255,7 @@ func (x *RequestPauseT) UnmarshalJSON(data []byte) error {
 	*x = RequestPauseT(value)
 	return nil
 }
+func (RequestPauseT) EnumDescriptor() ([]byte, []int) { return fileDescriptor19, []int{3} }
 
 type PrefetchType int32
 
@@ -280,6 +286,7 @@ func (x *PrefetchType) UnmarshalJSON(data []byte) error {
 	*x = PrefetchType(value)
 	return nil
 }
+func (PrefetchType) EnumDescriptor() ([]byte, []int) { return fileDescriptor19, []int{4} }
 
 type ESplitScreenMessageType int32
 
@@ -313,6 +320,7 @@ func (x *ESplitScreenMessageType) UnmarshalJSON(data []byte) error {
 	*x = ESplitScreenMessageType(value)
 	return nil
 }
+func (ESplitScreenMessageType) EnumDescriptor() ([]byte, []int) { return fileDescriptor19, []int{5} }
 
 type EQueryCvarValueStatus int32
 
@@ -352,6 +360,7 @@ func (x *EQueryCvarValueStatus) UnmarshalJSON(data []byte) error {
 	*x = EQueryCvarValueStatus(value)
 	return nil
 }
+func (EQueryCvarValueStatus) EnumDescriptor() ([]byte, []int) { return fileDescriptor19, []int{6} }
 
 type DIALOG_TYPE int32
 
@@ -394,6 +403,7 @@ func (x *DIALOG_TYPE) UnmarshalJSON(data []byte) error {
 	*x = DIALOG_TYPE(value)
 	return nil
 }
+func (DIALOG_TYPE) EnumDescriptor() ([]byte, []int) { return fileDescriptor19, []int{7} }
 
 type SVC_Messages_LowFrequency int32
 
@@ -424,6 +434,7 @@ func (x *SVC_Messages_LowFrequency) UnmarshalJSON(data []byte) error {
 	*x = SVC_Messages_LowFrequency(value)
 	return nil
 }
+func (SVC_Messages_LowFrequency) EnumDescriptor() ([]byte, []int) { return fileDescriptor19, []int{8} }
 
 type Bidirectional_Messages int32
 
@@ -460,6 +471,7 @@ func (x *Bidirectional_Messages) UnmarshalJSON(data []byte) error {
 	*x = Bidirectional_Messages(value)
 	return nil
 }
+func (Bidirectional_Messages) EnumDescriptor() ([]byte, []int) { return fileDescriptor19, []int{9} }
 
 type Bidirectional_Messages_LowFrequency int32
 
@@ -492,6 +504,9 @@ func (x *Bidirectional_Messages_LowFrequency) UnmarshalJSON(data []byte) error {
 	}
 	*x = Bidirectional_Messages_LowFrequency(value)
 	return nil
+}
+func (Bidirectional_Messages_LowFrequency) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor19, []int{10}
 }
 
 type CBidirMsg_RelayInfo_OperationT int32
@@ -535,6 +550,9 @@ func (x *CBidirMsg_RelayInfo_OperationT) UnmarshalJSON(data []byte) error {
 	*x = CBidirMsg_RelayInfo_OperationT(value)
 	return nil
 }
+func (CBidirMsg_RelayInfo_OperationT) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor19, []int{52, 0}
+}
 
 type CCLCMsg_ClientInfo struct {
 	SendTableCrc     *uint32 `protobuf:"fixed32,1,opt,name=send_table_crc" json:"send_table_crc,omitempty"`
@@ -546,9 +564,10 @@ type CCLCMsg_ClientInfo struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CCLCMsg_ClientInfo) Reset()         { *m = CCLCMsg_ClientInfo{} }
-func (m *CCLCMsg_ClientInfo) String() string { return proto.CompactTextString(m) }
-func (*CCLCMsg_ClientInfo) ProtoMessage()    {}
+func (m *CCLCMsg_ClientInfo) Reset()                    { *m = CCLCMsg_ClientInfo{} }
+func (m *CCLCMsg_ClientInfo) String() string            { return proto.CompactTextString(m) }
+func (*CCLCMsg_ClientInfo) ProtoMessage()               {}
+func (*CCLCMsg_ClientInfo) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{0} }
 
 func (m *CCLCMsg_ClientInfo) GetSendTableCrc() uint32 {
 	if m != nil && m.SendTableCrc != nil {
@@ -599,9 +618,10 @@ type CCLCMsg_Move struct {
 	XXX_unrecognized  []byte  `json:"-"`
 }
 
-func (m *CCLCMsg_Move) Reset()         { *m = CCLCMsg_Move{} }
-func (m *CCLCMsg_Move) String() string { return proto.CompactTextString(m) }
-func (*CCLCMsg_Move) ProtoMessage()    {}
+func (m *CCLCMsg_Move) Reset()                    { *m = CCLCMsg_Move{} }
+func (m *CCLCMsg_Move) String() string            { return proto.CompactTextString(m) }
+func (*CCLCMsg_Move) ProtoMessage()               {}
+func (*CCLCMsg_Move) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{1} }
 
 func (m *CCLCMsg_Move) GetNumBackupCommands() uint32 {
 	if m != nil && m.NumBackupCommands != nil {
@@ -634,9 +654,10 @@ type CMsgVoiceAudio struct {
 	XXX_unrecognized         []byte            `json:"-"`
 }
 
-func (m *CMsgVoiceAudio) Reset()         { *m = CMsgVoiceAudio{} }
-func (m *CMsgVoiceAudio) String() string { return proto.CompactTextString(m) }
-func (*CMsgVoiceAudio) ProtoMessage()    {}
+func (m *CMsgVoiceAudio) Reset()                    { *m = CMsgVoiceAudio{} }
+func (m *CMsgVoiceAudio) String() string            { return proto.CompactTextString(m) }
+func (*CMsgVoiceAudio) ProtoMessage()               {}
+func (*CMsgVoiceAudio) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{2} }
 
 const Default_CMsgVoiceAudio_Format VoiceDataFormatT = VoiceDataFormatT_VOICEDATA_FORMAT_STEAM
 
@@ -689,9 +710,10 @@ type CCLCMsg_VoiceData struct {
 	XXX_unrecognized []byte          `json:"-"`
 }
 
-func (m *CCLCMsg_VoiceData) Reset()         { *m = CCLCMsg_VoiceData{} }
-func (m *CCLCMsg_VoiceData) String() string { return proto.CompactTextString(m) }
-func (*CCLCMsg_VoiceData) ProtoMessage()    {}
+func (m *CCLCMsg_VoiceData) Reset()                    { *m = CCLCMsg_VoiceData{} }
+func (m *CCLCMsg_VoiceData) String() string            { return proto.CompactTextString(m) }
+func (*CCLCMsg_VoiceData) ProtoMessage()               {}
+func (*CCLCMsg_VoiceData) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{3} }
 
 func (m *CCLCMsg_VoiceData) GetAudio() *CMsgVoiceAudio {
 	if m != nil {
@@ -720,9 +742,10 @@ type CCLCMsg_BaselineAck struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CCLCMsg_BaselineAck) Reset()         { *m = CCLCMsg_BaselineAck{} }
-func (m *CCLCMsg_BaselineAck) String() string { return proto.CompactTextString(m) }
-func (*CCLCMsg_BaselineAck) ProtoMessage()    {}
+func (m *CCLCMsg_BaselineAck) Reset()                    { *m = CCLCMsg_BaselineAck{} }
+func (m *CCLCMsg_BaselineAck) String() string            { return proto.CompactTextString(m) }
+func (*CCLCMsg_BaselineAck) ProtoMessage()               {}
+func (*CCLCMsg_BaselineAck) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{4} }
 
 func (m *CCLCMsg_BaselineAck) GetBaselineTick() int32 {
 	if m != nil && m.BaselineTick != nil {
@@ -743,9 +766,10 @@ type CCLCMsg_ListenEvents struct {
 	XXX_unrecognized []byte   `json:"-"`
 }
 
-func (m *CCLCMsg_ListenEvents) Reset()         { *m = CCLCMsg_ListenEvents{} }
-func (m *CCLCMsg_ListenEvents) String() string { return proto.CompactTextString(m) }
-func (*CCLCMsg_ListenEvents) ProtoMessage()    {}
+func (m *CCLCMsg_ListenEvents) Reset()                    { *m = CCLCMsg_ListenEvents{} }
+func (m *CCLCMsg_ListenEvents) String() string            { return proto.CompactTextString(m) }
+func (*CCLCMsg_ListenEvents) ProtoMessage()               {}
+func (*CCLCMsg_ListenEvents) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{5} }
 
 func (m *CCLCMsg_ListenEvents) GetEventMask() []uint32 {
 	if m != nil {
@@ -762,9 +786,10 @@ type CCLCMsg_RespondCvarValue struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CCLCMsg_RespondCvarValue) Reset()         { *m = CCLCMsg_RespondCvarValue{} }
-func (m *CCLCMsg_RespondCvarValue) String() string { return proto.CompactTextString(m) }
-func (*CCLCMsg_RespondCvarValue) ProtoMessage()    {}
+func (m *CCLCMsg_RespondCvarValue) Reset()                    { *m = CCLCMsg_RespondCvarValue{} }
+func (m *CCLCMsg_RespondCvarValue) String() string            { return proto.CompactTextString(m) }
+func (*CCLCMsg_RespondCvarValue) ProtoMessage()               {}
+func (*CCLCMsg_RespondCvarValue) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{6} }
 
 func (m *CCLCMsg_RespondCvarValue) GetCookie() int32 {
 	if m != nil && m.Cookie != nil {
@@ -803,9 +828,10 @@ type CCLCMsg_FileCRCCheck struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CCLCMsg_FileCRCCheck) Reset()         { *m = CCLCMsg_FileCRCCheck{} }
-func (m *CCLCMsg_FileCRCCheck) String() string { return proto.CompactTextString(m) }
-func (*CCLCMsg_FileCRCCheck) ProtoMessage()    {}
+func (m *CCLCMsg_FileCRCCheck) Reset()                    { *m = CCLCMsg_FileCRCCheck{} }
+func (m *CCLCMsg_FileCRCCheck) String() string            { return proto.CompactTextString(m) }
+func (*CCLCMsg_FileCRCCheck) ProtoMessage()               {}
+func (*CCLCMsg_FileCRCCheck) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{7} }
 
 func (m *CCLCMsg_FileCRCCheck) GetCodePath() int32 {
 	if m != nil && m.CodePath != nil {
@@ -847,9 +873,10 @@ type CCLCMsg_LoadingProgress struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CCLCMsg_LoadingProgress) Reset()         { *m = CCLCMsg_LoadingProgress{} }
-func (m *CCLCMsg_LoadingProgress) String() string { return proto.CompactTextString(m) }
-func (*CCLCMsg_LoadingProgress) ProtoMessage()    {}
+func (m *CCLCMsg_LoadingProgress) Reset()                    { *m = CCLCMsg_LoadingProgress{} }
+func (m *CCLCMsg_LoadingProgress) String() string            { return proto.CompactTextString(m) }
+func (*CCLCMsg_LoadingProgress) ProtoMessage()               {}
+func (*CCLCMsg_LoadingProgress) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{8} }
 
 func (m *CCLCMsg_LoadingProgress) GetProgress() int32 {
 	if m != nil && m.Progress != nil {
@@ -863,9 +890,10 @@ type CCLCMsg_SplitPlayerConnect struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CCLCMsg_SplitPlayerConnect) Reset()         { *m = CCLCMsg_SplitPlayerConnect{} }
-func (m *CCLCMsg_SplitPlayerConnect) String() string { return proto.CompactTextString(m) }
-func (*CCLCMsg_SplitPlayerConnect) ProtoMessage()    {}
+func (m *CCLCMsg_SplitPlayerConnect) Reset()                    { *m = CCLCMsg_SplitPlayerConnect{} }
+func (m *CCLCMsg_SplitPlayerConnect) String() string            { return proto.CompactTextString(m) }
+func (*CCLCMsg_SplitPlayerConnect) ProtoMessage()               {}
+func (*CCLCMsg_SplitPlayerConnect) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{9} }
 
 func (m *CCLCMsg_SplitPlayerConnect) GetPlayername() string {
 	if m != nil && m.Playername != nil {
@@ -880,9 +908,10 @@ type CCLCMsg_ClientMessage struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CCLCMsg_ClientMessage) Reset()         { *m = CCLCMsg_ClientMessage{} }
-func (m *CCLCMsg_ClientMessage) String() string { return proto.CompactTextString(m) }
-func (*CCLCMsg_ClientMessage) ProtoMessage()    {}
+func (m *CCLCMsg_ClientMessage) Reset()                    { *m = CCLCMsg_ClientMessage{} }
+func (m *CCLCMsg_ClientMessage) String() string            { return proto.CompactTextString(m) }
+func (*CCLCMsg_ClientMessage) ProtoMessage()               {}
+func (*CCLCMsg_ClientMessage) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{10} }
 
 func (m *CCLCMsg_ClientMessage) GetMsgType() int32 {
 	if m != nil && m.MsgType != nil {
@@ -903,9 +932,10 @@ type CCLCMsg_SplitPlayerDisconnect struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CCLCMsg_SplitPlayerDisconnect) Reset()         { *m = CCLCMsg_SplitPlayerDisconnect{} }
-func (m *CCLCMsg_SplitPlayerDisconnect) String() string { return proto.CompactTextString(m) }
-func (*CCLCMsg_SplitPlayerDisconnect) ProtoMessage()    {}
+func (m *CCLCMsg_SplitPlayerDisconnect) Reset()                    { *m = CCLCMsg_SplitPlayerDisconnect{} }
+func (m *CCLCMsg_SplitPlayerDisconnect) String() string            { return proto.CompactTextString(m) }
+func (*CCLCMsg_SplitPlayerDisconnect) ProtoMessage()               {}
+func (*CCLCMsg_SplitPlayerDisconnect) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{11} }
 
 func (m *CCLCMsg_SplitPlayerDisconnect) GetSlot() int32 {
 	if m != nil && m.Slot != nil {
@@ -919,9 +949,10 @@ type CCLCMsg_ServerStatus struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CCLCMsg_ServerStatus) Reset()         { *m = CCLCMsg_ServerStatus{} }
-func (m *CCLCMsg_ServerStatus) String() string { return proto.CompactTextString(m) }
-func (*CCLCMsg_ServerStatus) ProtoMessage()    {}
+func (m *CCLCMsg_ServerStatus) Reset()                    { *m = CCLCMsg_ServerStatus{} }
+func (m *CCLCMsg_ServerStatus) String() string            { return proto.CompactTextString(m) }
+func (*CCLCMsg_ServerStatus) ProtoMessage()               {}
+func (*CCLCMsg_ServerStatus) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{12} }
 
 func (m *CCLCMsg_ServerStatus) GetSimplified() bool {
 	if m != nil && m.Simplified != nil {
@@ -934,9 +965,10 @@ type CCLCMsg_ServerPing struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CCLCMsg_ServerPing) Reset()         { *m = CCLCMsg_ServerPing{} }
-func (m *CCLCMsg_ServerPing) String() string { return proto.CompactTextString(m) }
-func (*CCLCMsg_ServerPing) ProtoMessage()    {}
+func (m *CCLCMsg_ServerPing) Reset()                    { *m = CCLCMsg_ServerPing{} }
+func (m *CCLCMsg_ServerPing) String() string            { return proto.CompactTextString(m) }
+func (*CCLCMsg_ServerPing) ProtoMessage()               {}
+func (*CCLCMsg_ServerPing) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{13} }
 
 type CCLCMsg_RequestPause struct {
 	PauseType        *RequestPauseT `protobuf:"varint,1,opt,name=pause_type,enum=dota.RequestPauseT,def=0" json:"pause_type,omitempty"`
@@ -944,9 +976,10 @@ type CCLCMsg_RequestPause struct {
 	XXX_unrecognized []byte         `json:"-"`
 }
 
-func (m *CCLCMsg_RequestPause) Reset()         { *m = CCLCMsg_RequestPause{} }
-func (m *CCLCMsg_RequestPause) String() string { return proto.CompactTextString(m) }
-func (*CCLCMsg_RequestPause) ProtoMessage()    {}
+func (m *CCLCMsg_RequestPause) Reset()                    { *m = CCLCMsg_RequestPause{} }
+func (m *CCLCMsg_RequestPause) String() string            { return proto.CompactTextString(m) }
+func (*CCLCMsg_RequestPause) ProtoMessage()               {}
+func (*CCLCMsg_RequestPause) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{14} }
 
 const Default_CCLCMsg_RequestPause_PauseType RequestPauseT = RequestPauseT_RP_PAUSE
 
@@ -969,9 +1002,10 @@ type CCLCMsg_CmdKeyValues struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CCLCMsg_CmdKeyValues) Reset()         { *m = CCLCMsg_CmdKeyValues{} }
-func (m *CCLCMsg_CmdKeyValues) String() string { return proto.CompactTextString(m) }
-func (*CCLCMsg_CmdKeyValues) ProtoMessage()    {}
+func (m *CCLCMsg_CmdKeyValues) Reset()                    { *m = CCLCMsg_CmdKeyValues{} }
+func (m *CCLCMsg_CmdKeyValues) String() string            { return proto.CompactTextString(m) }
+func (*CCLCMsg_CmdKeyValues) ProtoMessage()               {}
+func (*CCLCMsg_CmdKeyValues) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{15} }
 
 func (m *CCLCMsg_CmdKeyValues) GetData() []byte {
 	if m != nil {
@@ -1004,9 +1038,10 @@ type CSVCMsg_ServerInfo struct {
 	XXX_unrecognized    []byte                            `json:"-"`
 }
 
-func (m *CSVCMsg_ServerInfo) Reset()         { *m = CSVCMsg_ServerInfo{} }
-func (m *CSVCMsg_ServerInfo) String() string { return proto.CompactTextString(m) }
-func (*CSVCMsg_ServerInfo) ProtoMessage()    {}
+func (m *CSVCMsg_ServerInfo) Reset()                    { *m = CSVCMsg_ServerInfo{} }
+func (m *CSVCMsg_ServerInfo) String() string            { return proto.CompactTextString(m) }
+func (*CSVCMsg_ServerInfo) ProtoMessage()               {}
+func (*CSVCMsg_ServerInfo) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{16} }
 
 func (m *CSVCMsg_ServerInfo) GetProtocol() int32 {
 	if m != nil && m.Protocol != nil {
@@ -1154,9 +1189,10 @@ type CSVCMsg_ClassInfo struct {
 	XXX_unrecognized []byte                     `json:"-"`
 }
 
-func (m *CSVCMsg_ClassInfo) Reset()         { *m = CSVCMsg_ClassInfo{} }
-func (m *CSVCMsg_ClassInfo) String() string { return proto.CompactTextString(m) }
-func (*CSVCMsg_ClassInfo) ProtoMessage()    {}
+func (m *CSVCMsg_ClassInfo) Reset()                    { *m = CSVCMsg_ClassInfo{} }
+func (m *CSVCMsg_ClassInfo) String() string            { return proto.CompactTextString(m) }
+func (*CSVCMsg_ClassInfo) ProtoMessage()               {}
+func (*CSVCMsg_ClassInfo) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{17} }
 
 func (m *CSVCMsg_ClassInfo) GetCreateOnClient() bool {
 	if m != nil && m.CreateOnClient != nil {
@@ -1179,9 +1215,10 @@ type CSVCMsg_ClassInfoClassT struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CSVCMsg_ClassInfoClassT) Reset()         { *m = CSVCMsg_ClassInfoClassT{} }
-func (m *CSVCMsg_ClassInfoClassT) String() string { return proto.CompactTextString(m) }
-func (*CSVCMsg_ClassInfoClassT) ProtoMessage()    {}
+func (m *CSVCMsg_ClassInfoClassT) Reset()                    { *m = CSVCMsg_ClassInfoClassT{} }
+func (m *CSVCMsg_ClassInfoClassT) String() string            { return proto.CompactTextString(m) }
+func (*CSVCMsg_ClassInfoClassT) ProtoMessage()               {}
+func (*CSVCMsg_ClassInfoClassT) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{17, 0} }
 
 func (m *CSVCMsg_ClassInfoClassT) GetClassId() int32 {
 	if m != nil && m.ClassId != nil {
@@ -1209,9 +1246,10 @@ type CSVCMsg_SetPause struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CSVCMsg_SetPause) Reset()         { *m = CSVCMsg_SetPause{} }
-func (m *CSVCMsg_SetPause) String() string { return proto.CompactTextString(m) }
-func (*CSVCMsg_SetPause) ProtoMessage()    {}
+func (m *CSVCMsg_SetPause) Reset()                    { *m = CSVCMsg_SetPause{} }
+func (m *CSVCMsg_SetPause) String() string            { return proto.CompactTextString(m) }
+func (*CSVCMsg_SetPause) ProtoMessage()               {}
+func (*CSVCMsg_SetPause) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{18} }
 
 func (m *CSVCMsg_SetPause) GetPaused() bool {
 	if m != nil && m.Paused != nil {
@@ -1227,9 +1265,10 @@ type CSVCMsg_VoiceInit struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CSVCMsg_VoiceInit) Reset()         { *m = CSVCMsg_VoiceInit{} }
-func (m *CSVCMsg_VoiceInit) String() string { return proto.CompactTextString(m) }
-func (*CSVCMsg_VoiceInit) ProtoMessage()    {}
+func (m *CSVCMsg_VoiceInit) Reset()                    { *m = CSVCMsg_VoiceInit{} }
+func (m *CSVCMsg_VoiceInit) String() string            { return proto.CompactTextString(m) }
+func (*CSVCMsg_VoiceInit) ProtoMessage()               {}
+func (*CSVCMsg_VoiceInit) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{19} }
 
 const Default_CSVCMsg_VoiceInit_Version int32 = 0
 
@@ -1259,9 +1298,10 @@ type CSVCMsg_Print struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CSVCMsg_Print) Reset()         { *m = CSVCMsg_Print{} }
-func (m *CSVCMsg_Print) String() string { return proto.CompactTextString(m) }
-func (*CSVCMsg_Print) ProtoMessage()    {}
+func (m *CSVCMsg_Print) Reset()                    { *m = CSVCMsg_Print{} }
+func (m *CSVCMsg_Print) String() string            { return proto.CompactTextString(m) }
+func (*CSVCMsg_Print) ProtoMessage()               {}
+func (*CSVCMsg_Print) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{20} }
 
 func (m *CSVCMsg_Print) GetText() string {
 	if m != nil && m.Text != nil {
@@ -1276,9 +1316,10 @@ type CSVCMsg_Sounds struct {
 	XXX_unrecognized []byte                      `json:"-"`
 }
 
-func (m *CSVCMsg_Sounds) Reset()         { *m = CSVCMsg_Sounds{} }
-func (m *CSVCMsg_Sounds) String() string { return proto.CompactTextString(m) }
-func (*CSVCMsg_Sounds) ProtoMessage()    {}
+func (m *CSVCMsg_Sounds) Reset()                    { *m = CSVCMsg_Sounds{} }
+func (m *CSVCMsg_Sounds) String() string            { return proto.CompactTextString(m) }
+func (*CSVCMsg_Sounds) ProtoMessage()               {}
+func (*CSVCMsg_Sounds) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{21} }
 
 func (m *CSVCMsg_Sounds) GetReliableSound() bool {
 	if m != nil && m.ReliableSound != nil {
@@ -1317,9 +1358,10 @@ type CSVCMsg_SoundsSounddataT struct {
 	XXX_unrecognized []byte   `json:"-"`
 }
 
-func (m *CSVCMsg_SoundsSounddataT) Reset()         { *m = CSVCMsg_SoundsSounddataT{} }
-func (m *CSVCMsg_SoundsSounddataT) String() string { return proto.CompactTextString(m) }
-func (*CSVCMsg_SoundsSounddataT) ProtoMessage()    {}
+func (m *CSVCMsg_SoundsSounddataT) Reset()                    { *m = CSVCMsg_SoundsSounddataT{} }
+func (m *CSVCMsg_SoundsSounddataT) String() string            { return proto.CompactTextString(m) }
+func (*CSVCMsg_SoundsSounddataT) ProtoMessage()               {}
+func (*CSVCMsg_SoundsSounddataT) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{21, 0} }
 
 func (m *CSVCMsg_SoundsSounddataT) GetOriginX() int32 {
 	if m != nil && m.OriginX != nil {
@@ -1460,9 +1502,10 @@ type CSVCMsg_Prefetch struct {
 	XXX_unrecognized []byte        `json:"-"`
 }
 
-func (m *CSVCMsg_Prefetch) Reset()         { *m = CSVCMsg_Prefetch{} }
-func (m *CSVCMsg_Prefetch) String() string { return proto.CompactTextString(m) }
-func (*CSVCMsg_Prefetch) ProtoMessage()    {}
+func (m *CSVCMsg_Prefetch) Reset()                    { *m = CSVCMsg_Prefetch{} }
+func (m *CSVCMsg_Prefetch) String() string            { return proto.CompactTextString(m) }
+func (*CSVCMsg_Prefetch) ProtoMessage()               {}
+func (*CSVCMsg_Prefetch) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{22} }
 
 const Default_CSVCMsg_Prefetch_ResourceType PrefetchType = PrefetchType_PFT_SOUND
 
@@ -1486,9 +1529,10 @@ type CSVCMsg_SetView struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CSVCMsg_SetView) Reset()         { *m = CSVCMsg_SetView{} }
-func (m *CSVCMsg_SetView) String() string { return proto.CompactTextString(m) }
-func (*CSVCMsg_SetView) ProtoMessage()    {}
+func (m *CSVCMsg_SetView) Reset()                    { *m = CSVCMsg_SetView{} }
+func (m *CSVCMsg_SetView) String() string            { return proto.CompactTextString(m) }
+func (*CSVCMsg_SetView) ProtoMessage()               {}
+func (*CSVCMsg_SetView) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{23} }
 
 func (m *CSVCMsg_SetView) GetEntityIndex() int32 {
 	if m != nil && m.EntityIndex != nil {
@@ -1510,9 +1554,10 @@ type CSVCMsg_FixAngle struct {
 	XXX_unrecognized []byte      `json:"-"`
 }
 
-func (m *CSVCMsg_FixAngle) Reset()         { *m = CSVCMsg_FixAngle{} }
-func (m *CSVCMsg_FixAngle) String() string { return proto.CompactTextString(m) }
-func (*CSVCMsg_FixAngle) ProtoMessage()    {}
+func (m *CSVCMsg_FixAngle) Reset()                    { *m = CSVCMsg_FixAngle{} }
+func (m *CSVCMsg_FixAngle) String() string            { return proto.CompactTextString(m) }
+func (*CSVCMsg_FixAngle) ProtoMessage()               {}
+func (*CSVCMsg_FixAngle) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{24} }
 
 func (m *CSVCMsg_FixAngle) GetRelative() bool {
 	if m != nil && m.Relative != nil {
@@ -1533,9 +1578,10 @@ type CSVCMsg_CrosshairAngle struct {
 	XXX_unrecognized []byte      `json:"-"`
 }
 
-func (m *CSVCMsg_CrosshairAngle) Reset()         { *m = CSVCMsg_CrosshairAngle{} }
-func (m *CSVCMsg_CrosshairAngle) String() string { return proto.CompactTextString(m) }
-func (*CSVCMsg_CrosshairAngle) ProtoMessage()    {}
+func (m *CSVCMsg_CrosshairAngle) Reset()                    { *m = CSVCMsg_CrosshairAngle{} }
+func (m *CSVCMsg_CrosshairAngle) String() string            { return proto.CompactTextString(m) }
+func (*CSVCMsg_CrosshairAngle) ProtoMessage()               {}
+func (*CSVCMsg_CrosshairAngle) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{25} }
 
 func (m *CSVCMsg_CrosshairAngle) GetAngle() *CMsgQAngle {
 	if m != nil {
@@ -1553,9 +1599,10 @@ type CSVCMsg_BSPDecal struct {
 	XXX_unrecognized  []byte      `json:"-"`
 }
 
-func (m *CSVCMsg_BSPDecal) Reset()         { *m = CSVCMsg_BSPDecal{} }
-func (m *CSVCMsg_BSPDecal) String() string { return proto.CompactTextString(m) }
-func (*CSVCMsg_BSPDecal) ProtoMessage()    {}
+func (m *CSVCMsg_BSPDecal) Reset()                    { *m = CSVCMsg_BSPDecal{} }
+func (m *CSVCMsg_BSPDecal) String() string            { return proto.CompactTextString(m) }
+func (*CSVCMsg_BSPDecal) ProtoMessage()               {}
+func (*CSVCMsg_BSPDecal) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{26} }
 
 func (m *CSVCMsg_BSPDecal) GetPos() *CMsgVector {
 	if m != nil {
@@ -1599,9 +1646,10 @@ type CSVCMsg_SplitScreen struct {
 	XXX_unrecognized []byte                   `json:"-"`
 }
 
-func (m *CSVCMsg_SplitScreen) Reset()         { *m = CSVCMsg_SplitScreen{} }
-func (m *CSVCMsg_SplitScreen) String() string { return proto.CompactTextString(m) }
-func (*CSVCMsg_SplitScreen) ProtoMessage()    {}
+func (m *CSVCMsg_SplitScreen) Reset()                    { *m = CSVCMsg_SplitScreen{} }
+func (m *CSVCMsg_SplitScreen) String() string            { return proto.CompactTextString(m) }
+func (*CSVCMsg_SplitScreen) ProtoMessage()               {}
+func (*CSVCMsg_SplitScreen) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{27} }
 
 const Default_CSVCMsg_SplitScreen_Type ESplitScreenMessageType = ESplitScreenMessageType_MSG_SPLITSCREEN_ADDUSER
 
@@ -1632,9 +1680,10 @@ type CSVCMsg_GetCvarValue struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CSVCMsg_GetCvarValue) Reset()         { *m = CSVCMsg_GetCvarValue{} }
-func (m *CSVCMsg_GetCvarValue) String() string { return proto.CompactTextString(m) }
-func (*CSVCMsg_GetCvarValue) ProtoMessage()    {}
+func (m *CSVCMsg_GetCvarValue) Reset()                    { *m = CSVCMsg_GetCvarValue{} }
+func (m *CSVCMsg_GetCvarValue) String() string            { return proto.CompactTextString(m) }
+func (*CSVCMsg_GetCvarValue) ProtoMessage()               {}
+func (*CSVCMsg_GetCvarValue) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{28} }
 
 func (m *CSVCMsg_GetCvarValue) GetCookie() int32 {
 	if m != nil && m.Cookie != nil {
@@ -1656,9 +1705,10 @@ type CSVCMsg_Menu struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CSVCMsg_Menu) Reset()         { *m = CSVCMsg_Menu{} }
-func (m *CSVCMsg_Menu) String() string { return proto.CompactTextString(m) }
-func (*CSVCMsg_Menu) ProtoMessage()    {}
+func (m *CSVCMsg_Menu) Reset()                    { *m = CSVCMsg_Menu{} }
+func (m *CSVCMsg_Menu) String() string            { return proto.CompactTextString(m) }
+func (*CSVCMsg_Menu) ProtoMessage()               {}
+func (*CSVCMsg_Menu) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{29} }
 
 func (m *CSVCMsg_Menu) GetDialogType() int32 {
 	if m != nil && m.DialogType != nil {
@@ -1682,9 +1732,10 @@ type CSVCMsg_SendTable struct {
 	XXX_unrecognized []byte                        `json:"-"`
 }
 
-func (m *CSVCMsg_SendTable) Reset()         { *m = CSVCMsg_SendTable{} }
-func (m *CSVCMsg_SendTable) String() string { return proto.CompactTextString(m) }
-func (*CSVCMsg_SendTable) ProtoMessage()    {}
+func (m *CSVCMsg_SendTable) Reset()                    { *m = CSVCMsg_SendTable{} }
+func (m *CSVCMsg_SendTable) String() string            { return proto.CompactTextString(m) }
+func (*CSVCMsg_SendTable) ProtoMessage()               {}
+func (*CSVCMsg_SendTable) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{30} }
 
 func (m *CSVCMsg_SendTable) GetIsEnd() bool {
 	if m != nil && m.IsEnd != nil {
@@ -1727,9 +1778,10 @@ type CSVCMsg_SendTableSendpropT struct {
 	XXX_unrecognized []byte   `json:"-"`
 }
 
-func (m *CSVCMsg_SendTableSendpropT) Reset()         { *m = CSVCMsg_SendTableSendpropT{} }
-func (m *CSVCMsg_SendTableSendpropT) String() string { return proto.CompactTextString(m) }
-func (*CSVCMsg_SendTableSendpropT) ProtoMessage()    {}
+func (m *CSVCMsg_SendTableSendpropT) Reset()                    { *m = CSVCMsg_SendTableSendpropT{} }
+func (m *CSVCMsg_SendTableSendpropT) String() string            { return proto.CompactTextString(m) }
+func (*CSVCMsg_SendTableSendpropT) ProtoMessage()               {}
+func (*CSVCMsg_SendTableSendpropT) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{30, 0} }
 
 func (m *CSVCMsg_SendTableSendpropT) GetType() int32 {
 	if m != nil && m.Type != nil {
@@ -1799,9 +1851,10 @@ type CSVCMsg_GameEventList struct {
 	XXX_unrecognized []byte                              `json:"-"`
 }
 
-func (m *CSVCMsg_GameEventList) Reset()         { *m = CSVCMsg_GameEventList{} }
-func (m *CSVCMsg_GameEventList) String() string { return proto.CompactTextString(m) }
-func (*CSVCMsg_GameEventList) ProtoMessage()    {}
+func (m *CSVCMsg_GameEventList) Reset()                    { *m = CSVCMsg_GameEventList{} }
+func (m *CSVCMsg_GameEventList) String() string            { return proto.CompactTextString(m) }
+func (*CSVCMsg_GameEventList) ProtoMessage()               {}
+func (*CSVCMsg_GameEventList) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{31} }
 
 func (m *CSVCMsg_GameEventList) GetDescriptors() []*CSVCMsg_GameEventListDescriptorT {
 	if m != nil {
@@ -1816,9 +1869,10 @@ type CSVCMsg_GameEventListKeyT struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CSVCMsg_GameEventListKeyT) Reset()         { *m = CSVCMsg_GameEventListKeyT{} }
-func (m *CSVCMsg_GameEventListKeyT) String() string { return proto.CompactTextString(m) }
-func (*CSVCMsg_GameEventListKeyT) ProtoMessage()    {}
+func (m *CSVCMsg_GameEventListKeyT) Reset()                    { *m = CSVCMsg_GameEventListKeyT{} }
+func (m *CSVCMsg_GameEventListKeyT) String() string            { return proto.CompactTextString(m) }
+func (*CSVCMsg_GameEventListKeyT) ProtoMessage()               {}
+func (*CSVCMsg_GameEventListKeyT) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{31, 0} }
 
 func (m *CSVCMsg_GameEventListKeyT) GetType() int32 {
 	if m != nil && m.Type != nil {
@@ -1844,6 +1898,9 @@ type CSVCMsg_GameEventListDescriptorT struct {
 func (m *CSVCMsg_GameEventListDescriptorT) Reset()         { *m = CSVCMsg_GameEventListDescriptorT{} }
 func (m *CSVCMsg_GameEventListDescriptorT) String() string { return proto.CompactTextString(m) }
 func (*CSVCMsg_GameEventListDescriptorT) ProtoMessage()    {}
+func (*CSVCMsg_GameEventListDescriptorT) Descriptor() ([]byte, []int) {
+	return fileDescriptor19, []int{31, 1}
+}
 
 func (m *CSVCMsg_GameEventListDescriptorT) GetEventid() int32 {
 	if m != nil && m.Eventid != nil {
@@ -1880,9 +1937,10 @@ type CSVCMsg_PacketEntities struct {
 	XXX_unrecognized              []byte  `json:"-"`
 }
 
-func (m *CSVCMsg_PacketEntities) Reset()         { *m = CSVCMsg_PacketEntities{} }
-func (m *CSVCMsg_PacketEntities) String() string { return proto.CompactTextString(m) }
-func (*CSVCMsg_PacketEntities) ProtoMessage()    {}
+func (m *CSVCMsg_PacketEntities) Reset()                    { *m = CSVCMsg_PacketEntities{} }
+func (m *CSVCMsg_PacketEntities) String() string            { return proto.CompactTextString(m) }
+func (*CSVCMsg_PacketEntities) ProtoMessage()               {}
+func (*CSVCMsg_PacketEntities) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{32} }
 
 func (m *CSVCMsg_PacketEntities) GetMaxEntries() int32 {
 	if m != nil && m.MaxEntries != nil {
@@ -1961,9 +2019,10 @@ type CSVCMsg_TempEntities struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CSVCMsg_TempEntities) Reset()         { *m = CSVCMsg_TempEntities{} }
-func (m *CSVCMsg_TempEntities) String() string { return proto.CompactTextString(m) }
-func (*CSVCMsg_TempEntities) ProtoMessage()    {}
+func (m *CSVCMsg_TempEntities) Reset()                    { *m = CSVCMsg_TempEntities{} }
+func (m *CSVCMsg_TempEntities) String() string            { return proto.CompactTextString(m) }
+func (*CSVCMsg_TempEntities) ProtoMessage()               {}
+func (*CSVCMsg_TempEntities) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{33} }
 
 func (m *CSVCMsg_TempEntities) GetReliable() bool {
 	if m != nil && m.Reliable != nil {
@@ -1999,9 +2058,10 @@ type CSVCMsg_CreateStringTable struct {
 	XXX_unrecognized  []byte  `json:"-"`
 }
 
-func (m *CSVCMsg_CreateStringTable) Reset()         { *m = CSVCMsg_CreateStringTable{} }
-func (m *CSVCMsg_CreateStringTable) String() string { return proto.CompactTextString(m) }
-func (*CSVCMsg_CreateStringTable) ProtoMessage()    {}
+func (m *CSVCMsg_CreateStringTable) Reset()                    { *m = CSVCMsg_CreateStringTable{} }
+func (m *CSVCMsg_CreateStringTable) String() string            { return proto.CompactTextString(m) }
+func (*CSVCMsg_CreateStringTable) ProtoMessage()               {}
+func (*CSVCMsg_CreateStringTable) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{34} }
 
 func (m *CSVCMsg_CreateStringTable) GetName() string {
 	if m != nil && m.Name != nil {
@@ -2073,9 +2133,10 @@ type CSVCMsg_UpdateStringTable struct {
 	XXX_unrecognized  []byte `json:"-"`
 }
 
-func (m *CSVCMsg_UpdateStringTable) Reset()         { *m = CSVCMsg_UpdateStringTable{} }
-func (m *CSVCMsg_UpdateStringTable) String() string { return proto.CompactTextString(m) }
-func (*CSVCMsg_UpdateStringTable) ProtoMessage()    {}
+func (m *CSVCMsg_UpdateStringTable) Reset()                    { *m = CSVCMsg_UpdateStringTable{} }
+func (m *CSVCMsg_UpdateStringTable) String() string            { return proto.CompactTextString(m) }
+func (*CSVCMsg_UpdateStringTable) ProtoMessage()               {}
+func (*CSVCMsg_UpdateStringTable) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{35} }
 
 func (m *CSVCMsg_UpdateStringTable) GetTableId() int32 {
 	if m != nil && m.TableId != nil {
@@ -2108,9 +2169,10 @@ type CSVCMsg_VoiceData struct {
 	XXX_unrecognized []byte          `json:"-"`
 }
 
-func (m *CSVCMsg_VoiceData) Reset()         { *m = CSVCMsg_VoiceData{} }
-func (m *CSVCMsg_VoiceData) String() string { return proto.CompactTextString(m) }
-func (*CSVCMsg_VoiceData) ProtoMessage()    {}
+func (m *CSVCMsg_VoiceData) Reset()                    { *m = CSVCMsg_VoiceData{} }
+func (m *CSVCMsg_VoiceData) String() string            { return proto.CompactTextString(m) }
+func (*CSVCMsg_VoiceData) ProtoMessage()               {}
+func (*CSVCMsg_VoiceData) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{36} }
 
 func (m *CSVCMsg_VoiceData) GetAudio() *CMsgVoiceAudio {
 	if m != nil {
@@ -2161,9 +2223,10 @@ type CSVCMsg_PacketReliable struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CSVCMsg_PacketReliable) Reset()         { *m = CSVCMsg_PacketReliable{} }
-func (m *CSVCMsg_PacketReliable) String() string { return proto.CompactTextString(m) }
-func (*CSVCMsg_PacketReliable) ProtoMessage()    {}
+func (m *CSVCMsg_PacketReliable) Reset()                    { *m = CSVCMsg_PacketReliable{} }
+func (m *CSVCMsg_PacketReliable) String() string            { return proto.CompactTextString(m) }
+func (*CSVCMsg_PacketReliable) ProtoMessage()               {}
+func (*CSVCMsg_PacketReliable) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{37} }
 
 func (m *CSVCMsg_PacketReliable) GetTick() int32 {
 	if m != nil && m.Tick != nil {
@@ -2194,9 +2257,10 @@ type CSVCMsg_FullFrameSplit struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CSVCMsg_FullFrameSplit) Reset()         { *m = CSVCMsg_FullFrameSplit{} }
-func (m *CSVCMsg_FullFrameSplit) String() string { return proto.CompactTextString(m) }
-func (*CSVCMsg_FullFrameSplit) ProtoMessage()    {}
+func (m *CSVCMsg_FullFrameSplit) Reset()                    { *m = CSVCMsg_FullFrameSplit{} }
+func (m *CSVCMsg_FullFrameSplit) String() string            { return proto.CompactTextString(m) }
+func (*CSVCMsg_FullFrameSplit) ProtoMessage()               {}
+func (*CSVCMsg_FullFrameSplit) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{38} }
 
 func (m *CSVCMsg_FullFrameSplit) GetTick() int32 {
 	if m != nil && m.Tick != nil {
@@ -2234,9 +2298,10 @@ type CSVCMsg_HLTVStatus struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CSVCMsg_HLTVStatus) Reset()         { *m = CSVCMsg_HLTVStatus{} }
-func (m *CSVCMsg_HLTVStatus) String() string { return proto.CompactTextString(m) }
-func (*CSVCMsg_HLTVStatus) ProtoMessage()    {}
+func (m *CSVCMsg_HLTVStatus) Reset()                    { *m = CSVCMsg_HLTVStatus{} }
+func (m *CSVCMsg_HLTVStatus) String() string            { return proto.CompactTextString(m) }
+func (*CSVCMsg_HLTVStatus) ProtoMessage()               {}
+func (*CSVCMsg_HLTVStatus) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{39} }
 
 func (m *CSVCMsg_HLTVStatus) GetMaster() string {
 	if m != nil && m.Master != nil {
@@ -2271,9 +2336,10 @@ type CSVCMsg_CmdKeyValues struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CSVCMsg_CmdKeyValues) Reset()         { *m = CSVCMsg_CmdKeyValues{} }
-func (m *CSVCMsg_CmdKeyValues) String() string { return proto.CompactTextString(m) }
-func (*CSVCMsg_CmdKeyValues) ProtoMessage()    {}
+func (m *CSVCMsg_CmdKeyValues) Reset()                    { *m = CSVCMsg_CmdKeyValues{} }
+func (m *CSVCMsg_CmdKeyValues) String() string            { return proto.CompactTextString(m) }
+func (*CSVCMsg_CmdKeyValues) ProtoMessage()               {}
+func (*CSVCMsg_CmdKeyValues) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{40} }
 
 func (m *CSVCMsg_CmdKeyValues) GetData() []byte {
 	if m != nil {
@@ -2288,9 +2354,10 @@ type CMsgIPCAddress struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CMsgIPCAddress) Reset()         { *m = CMsgIPCAddress{} }
-func (m *CMsgIPCAddress) String() string { return proto.CompactTextString(m) }
-func (*CMsgIPCAddress) ProtoMessage()    {}
+func (m *CMsgIPCAddress) Reset()                    { *m = CMsgIPCAddress{} }
+func (m *CMsgIPCAddress) String() string            { return proto.CompactTextString(m) }
+func (*CMsgIPCAddress) ProtoMessage()               {}
+func (*CMsgIPCAddress) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{41} }
 
 func (m *CMsgIPCAddress) GetComputerGuid() uint64 {
 	if m != nil && m.ComputerGuid != nil {
@@ -2316,9 +2383,10 @@ type CMsgServerPeer struct {
 	XXX_unrecognized   []byte          `json:"-"`
 }
 
-func (m *CMsgServerPeer) Reset()         { *m = CMsgServerPeer{} }
-func (m *CMsgServerPeer) String() string { return proto.CompactTextString(m) }
-func (*CMsgServerPeer) ProtoMessage()    {}
+func (m *CMsgServerPeer) Reset()                    { *m = CMsgServerPeer{} }
+func (m *CMsgServerPeer) String() string            { return proto.CompactTextString(m) }
+func (*CMsgServerPeer) ProtoMessage()               {}
+func (*CMsgServerPeer) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{42} }
 
 func (m *CMsgServerPeer) GetPlayerSlot() int32 {
 	if m != nil && m.PlayerSlot != nil {
@@ -2367,9 +2435,10 @@ type CSVCMsg_PeerList struct {
 	XXX_unrecognized []byte            `json:"-"`
 }
 
-func (m *CSVCMsg_PeerList) Reset()         { *m = CSVCMsg_PeerList{} }
-func (m *CSVCMsg_PeerList) String() string { return proto.CompactTextString(m) }
-func (*CSVCMsg_PeerList) ProtoMessage()    {}
+func (m *CSVCMsg_PeerList) Reset()                    { *m = CSVCMsg_PeerList{} }
+func (m *CSVCMsg_PeerList) String() string            { return proto.CompactTextString(m) }
+func (*CSVCMsg_PeerList) ProtoMessage()               {}
+func (*CSVCMsg_PeerList) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{43} }
 
 func (m *CSVCMsg_PeerList) GetPeer() []*CMsgServerPeer {
 	if m != nil {
@@ -2384,9 +2453,10 @@ type CSVCMsg_ClearAllStringTables struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CSVCMsg_ClearAllStringTables) Reset()         { *m = CSVCMsg_ClearAllStringTables{} }
-func (m *CSVCMsg_ClearAllStringTables) String() string { return proto.CompactTextString(m) }
-func (*CSVCMsg_ClearAllStringTables) ProtoMessage()    {}
+func (m *CSVCMsg_ClearAllStringTables) Reset()                    { *m = CSVCMsg_ClearAllStringTables{} }
+func (m *CSVCMsg_ClearAllStringTables) String() string            { return proto.CompactTextString(m) }
+func (*CSVCMsg_ClearAllStringTables) ProtoMessage()               {}
+func (*CSVCMsg_ClearAllStringTables) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{44} }
 
 func (m *CSVCMsg_ClearAllStringTables) GetMapname() string {
 	if m != nil && m.Mapname != nil {
@@ -2419,6 +2489,9 @@ type ProtoFlattenedSerializerFieldT struct {
 func (m *ProtoFlattenedSerializerFieldT) Reset()         { *m = ProtoFlattenedSerializerFieldT{} }
 func (m *ProtoFlattenedSerializerFieldT) String() string { return proto.CompactTextString(m) }
 func (*ProtoFlattenedSerializerFieldT) ProtoMessage()    {}
+func (*ProtoFlattenedSerializerFieldT) Descriptor() ([]byte, []int) {
+	return fileDescriptor19, []int{45}
+}
 
 func (m *ProtoFlattenedSerializerFieldT) GetVarTypeSym() int32 {
 	if m != nil && m.VarTypeSym != nil {
@@ -2497,9 +2570,10 @@ type ProtoFlattenedSerializerT struct {
 	XXX_unrecognized  []byte  `json:"-"`
 }
 
-func (m *ProtoFlattenedSerializerT) Reset()         { *m = ProtoFlattenedSerializerT{} }
-func (m *ProtoFlattenedSerializerT) String() string { return proto.CompactTextString(m) }
-func (*ProtoFlattenedSerializerT) ProtoMessage()    {}
+func (m *ProtoFlattenedSerializerT) Reset()                    { *m = ProtoFlattenedSerializerT{} }
+func (m *ProtoFlattenedSerializerT) String() string            { return proto.CompactTextString(m) }
+func (*ProtoFlattenedSerializerT) ProtoMessage()               {}
+func (*ProtoFlattenedSerializerT) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{46} }
 
 func (m *ProtoFlattenedSerializerT) GetSerializerNameSym() int32 {
 	if m != nil && m.SerializerNameSym != nil {
@@ -2529,9 +2603,10 @@ type CSVCMsg_FlattenedSerializer struct {
 	XXX_unrecognized []byte                            `json:"-"`
 }
 
-func (m *CSVCMsg_FlattenedSerializer) Reset()         { *m = CSVCMsg_FlattenedSerializer{} }
-func (m *CSVCMsg_FlattenedSerializer) String() string { return proto.CompactTextString(m) }
-func (*CSVCMsg_FlattenedSerializer) ProtoMessage()    {}
+func (m *CSVCMsg_FlattenedSerializer) Reset()                    { *m = CSVCMsg_FlattenedSerializer{} }
+func (m *CSVCMsg_FlattenedSerializer) String() string            { return proto.CompactTextString(m) }
+func (*CSVCMsg_FlattenedSerializer) ProtoMessage()               {}
+func (*CSVCMsg_FlattenedSerializer) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{47} }
 
 func (m *CSVCMsg_FlattenedSerializer) GetSerializers() []*ProtoFlattenedSerializerT {
 	if m != nil {
@@ -2559,9 +2634,10 @@ type CSVCMsg_StopSound struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CSVCMsg_StopSound) Reset()         { *m = CSVCMsg_StopSound{} }
-func (m *CSVCMsg_StopSound) String() string { return proto.CompactTextString(m) }
-func (*CSVCMsg_StopSound) ProtoMessage()    {}
+func (m *CSVCMsg_StopSound) Reset()                    { *m = CSVCMsg_StopSound{} }
+func (m *CSVCMsg_StopSound) String() string            { return proto.CompactTextString(m) }
+func (*CSVCMsg_StopSound) ProtoMessage()               {}
+func (*CSVCMsg_StopSound) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{48} }
 
 func (m *CSVCMsg_StopSound) GetGuid() uint32 {
 	if m != nil && m.Guid != nil {
@@ -2581,6 +2657,9 @@ type CBidirMsg_RebroadcastGameEvent struct {
 func (m *CBidirMsg_RebroadcastGameEvent) Reset()         { *m = CBidirMsg_RebroadcastGameEvent{} }
 func (m *CBidirMsg_RebroadcastGameEvent) String() string { return proto.CompactTextString(m) }
 func (*CBidirMsg_RebroadcastGameEvent) ProtoMessage()    {}
+func (*CBidirMsg_RebroadcastGameEvent) Descriptor() ([]byte, []int) {
+	return fileDescriptor19, []int{49}
+}
 
 func (m *CBidirMsg_RebroadcastGameEvent) GetPosttoserver() bool {
 	if m != nil && m.Posttoserver != nil {
@@ -2615,9 +2694,10 @@ type CBidirMsg_RebroadcastSource struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CBidirMsg_RebroadcastSource) Reset()         { *m = CBidirMsg_RebroadcastSource{} }
-func (m *CBidirMsg_RebroadcastSource) String() string { return proto.CompactTextString(m) }
-func (*CBidirMsg_RebroadcastSource) ProtoMessage()    {}
+func (m *CBidirMsg_RebroadcastSource) Reset()                    { *m = CBidirMsg_RebroadcastSource{} }
+func (m *CBidirMsg_RebroadcastSource) String() string            { return proto.CompactTextString(m) }
+func (*CBidirMsg_RebroadcastSource) ProtoMessage()               {}
+func (*CBidirMsg_RebroadcastSource) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{50} }
 
 func (m *CBidirMsg_RebroadcastSource) GetEventsource() int32 {
 	if m != nil && m.Eventsource != nil {
@@ -2631,9 +2711,10 @@ type SerializedNetAddressT struct {
 	XXX_unrecognized  []byte `json:"-"`
 }
 
-func (m *SerializedNetAddressT) Reset()         { *m = SerializedNetAddressT{} }
-func (m *SerializedNetAddressT) String() string { return proto.CompactTextString(m) }
-func (*SerializedNetAddressT) ProtoMessage()    {}
+func (m *SerializedNetAddressT) Reset()                    { *m = SerializedNetAddressT{} }
+func (m *SerializedNetAddressT) String() string            { return proto.CompactTextString(m) }
+func (*SerializedNetAddressT) ProtoMessage()               {}
+func (*SerializedNetAddressT) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{51} }
 
 func (m *SerializedNetAddressT) GetSerializedAddress() []byte {
 	if m != nil {
@@ -2649,9 +2730,10 @@ type CBidirMsg_RelayInfo struct {
 	XXX_unrecognized        []byte                          `json:"-"`
 }
 
-func (m *CBidirMsg_RelayInfo) Reset()         { *m = CBidirMsg_RelayInfo{} }
-func (m *CBidirMsg_RelayInfo) String() string { return proto.CompactTextString(m) }
-func (*CBidirMsg_RelayInfo) ProtoMessage()    {}
+func (m *CBidirMsg_RelayInfo) Reset()                    { *m = CBidirMsg_RelayInfo{} }
+func (m *CBidirMsg_RelayInfo) String() string            { return proto.CompactTextString(m) }
+func (*CBidirMsg_RelayInfo) ProtoMessage()               {}
+func (*CBidirMsg_RelayInfo) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{52} }
 
 const Default_CBidirMsg_RelayInfo_Operation CBidirMsg_RelayInfo_OperationT = CBidirMsg_RelayInfo_RIO_REQUEST_RELAY
 
@@ -2683,9 +2765,10 @@ type SignedPayloadT struct {
 	XXX_unrecognized  []byte  `json:"-"`
 }
 
-func (m *SignedPayloadT) Reset()         { *m = SignedPayloadT{} }
-func (m *SignedPayloadT) String() string { return proto.CompactTextString(m) }
-func (*SignedPayloadT) ProtoMessage()    {}
+func (m *SignedPayloadT) Reset()                    { *m = SignedPayloadT{} }
+func (m *SignedPayloadT) String() string            { return proto.CompactTextString(m) }
+func (*SignedPayloadT) ProtoMessage()               {}
+func (*SignedPayloadT) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{53} }
 
 func (m *SignedPayloadT) GetPayloadData() []byte {
 	if m != nil {
@@ -2716,9 +2799,10 @@ type CBidirMsg_RelayPacket struct {
 	XXX_unrecognized []byte                                             `json:"-"`
 }
 
-func (m *CBidirMsg_RelayPacket) Reset()         { *m = CBidirMsg_RelayPacket{} }
-func (m *CBidirMsg_RelayPacket) String() string { return proto.CompactTextString(m) }
-func (*CBidirMsg_RelayPacket) ProtoMessage()    {}
+func (m *CBidirMsg_RelayPacket) Reset()                    { *m = CBidirMsg_RelayPacket{} }
+func (m *CBidirMsg_RelayPacket) String() string            { return proto.CompactTextString(m) }
+func (*CBidirMsg_RelayPacket) ProtoMessage()               {}
+func (*CBidirMsg_RelayPacket) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{54} }
 
 func (m *CBidirMsg_RelayPacket) GetPrevhopcount() uint32 {
 	if m != nil && m.Prevhopcount != nil {
@@ -2762,6 +2846,9 @@ func (m *CBidirMsg_RelayPacket_SignedDestinationAddressT) String() string {
 	return proto.CompactTextString(m)
 }
 func (*CBidirMsg_RelayPacket_SignedDestinationAddressT) ProtoMessage() {}
+func (*CBidirMsg_RelayPacket_SignedDestinationAddressT) Descriptor() ([]byte, []int) {
+	return fileDescriptor19, []int{54, 0}
+}
 
 func (m *CBidirMsg_RelayPacket_SignedDestinationAddressT) GetSerializedAddr() *SerializedNetAddressT {
 	if m != nil {
@@ -2785,6 +2872,67 @@ func (m *CBidirMsg_RelayPacket_SignedDestinationAddressT) GetEncryptedPayloadKey
 }
 
 func init() {
+	proto.RegisterType((*CCLCMsg_ClientInfo)(nil), "dota.CCLCMsg_ClientInfo")
+	proto.RegisterType((*CCLCMsg_Move)(nil), "dota.CCLCMsg_Move")
+	proto.RegisterType((*CMsgVoiceAudio)(nil), "dota.CMsgVoiceAudio")
+	proto.RegisterType((*CCLCMsg_VoiceData)(nil), "dota.CCLCMsg_VoiceData")
+	proto.RegisterType((*CCLCMsg_BaselineAck)(nil), "dota.CCLCMsg_BaselineAck")
+	proto.RegisterType((*CCLCMsg_ListenEvents)(nil), "dota.CCLCMsg_ListenEvents")
+	proto.RegisterType((*CCLCMsg_RespondCvarValue)(nil), "dota.CCLCMsg_RespondCvarValue")
+	proto.RegisterType((*CCLCMsg_FileCRCCheck)(nil), "dota.CCLCMsg_FileCRCCheck")
+	proto.RegisterType((*CCLCMsg_LoadingProgress)(nil), "dota.CCLCMsg_LoadingProgress")
+	proto.RegisterType((*CCLCMsg_SplitPlayerConnect)(nil), "dota.CCLCMsg_SplitPlayerConnect")
+	proto.RegisterType((*CCLCMsg_ClientMessage)(nil), "dota.CCLCMsg_ClientMessage")
+	proto.RegisterType((*CCLCMsg_SplitPlayerDisconnect)(nil), "dota.CCLCMsg_SplitPlayerDisconnect")
+	proto.RegisterType((*CCLCMsg_ServerStatus)(nil), "dota.CCLCMsg_ServerStatus")
+	proto.RegisterType((*CCLCMsg_ServerPing)(nil), "dota.CCLCMsg_ServerPing")
+	proto.RegisterType((*CCLCMsg_RequestPause)(nil), "dota.CCLCMsg_RequestPause")
+	proto.RegisterType((*CCLCMsg_CmdKeyValues)(nil), "dota.CCLCMsg_CmdKeyValues")
+	proto.RegisterType((*CSVCMsg_ServerInfo)(nil), "dota.CSVCMsg_ServerInfo")
+	proto.RegisterType((*CSVCMsg_ClassInfo)(nil), "dota.CSVCMsg_ClassInfo")
+	proto.RegisterType((*CSVCMsg_ClassInfoClassT)(nil), "dota.CSVCMsg_ClassInfo.class_t")
+	proto.RegisterType((*CSVCMsg_SetPause)(nil), "dota.CSVCMsg_SetPause")
+	proto.RegisterType((*CSVCMsg_VoiceInit)(nil), "dota.CSVCMsg_VoiceInit")
+	proto.RegisterType((*CSVCMsg_Print)(nil), "dota.CSVCMsg_Print")
+	proto.RegisterType((*CSVCMsg_Sounds)(nil), "dota.CSVCMsg_Sounds")
+	proto.RegisterType((*CSVCMsg_SoundsSounddataT)(nil), "dota.CSVCMsg_Sounds.sounddata_t")
+	proto.RegisterType((*CSVCMsg_Prefetch)(nil), "dota.CSVCMsg_Prefetch")
+	proto.RegisterType((*CSVCMsg_SetView)(nil), "dota.CSVCMsg_SetView")
+	proto.RegisterType((*CSVCMsg_FixAngle)(nil), "dota.CSVCMsg_FixAngle")
+	proto.RegisterType((*CSVCMsg_CrosshairAngle)(nil), "dota.CSVCMsg_CrosshairAngle")
+	proto.RegisterType((*CSVCMsg_BSPDecal)(nil), "dota.CSVCMsg_BSPDecal")
+	proto.RegisterType((*CSVCMsg_SplitScreen)(nil), "dota.CSVCMsg_SplitScreen")
+	proto.RegisterType((*CSVCMsg_GetCvarValue)(nil), "dota.CSVCMsg_GetCvarValue")
+	proto.RegisterType((*CSVCMsg_Menu)(nil), "dota.CSVCMsg_Menu")
+	proto.RegisterType((*CSVCMsg_SendTable)(nil), "dota.CSVCMsg_SendTable")
+	proto.RegisterType((*CSVCMsg_SendTableSendpropT)(nil), "dota.CSVCMsg_SendTable.sendprop_t")
+	proto.RegisterType((*CSVCMsg_GameEventList)(nil), "dota.CSVCMsg_GameEventList")
+	proto.RegisterType((*CSVCMsg_GameEventListKeyT)(nil), "dota.CSVCMsg_GameEventList.key_t")
+	proto.RegisterType((*CSVCMsg_GameEventListDescriptorT)(nil), "dota.CSVCMsg_GameEventList.descriptor_t")
+	proto.RegisterType((*CSVCMsg_PacketEntities)(nil), "dota.CSVCMsg_PacketEntities")
+	proto.RegisterType((*CSVCMsg_TempEntities)(nil), "dota.CSVCMsg_TempEntities")
+	proto.RegisterType((*CSVCMsg_CreateStringTable)(nil), "dota.CSVCMsg_CreateStringTable")
+	proto.RegisterType((*CSVCMsg_UpdateStringTable)(nil), "dota.CSVCMsg_UpdateStringTable")
+	proto.RegisterType((*CSVCMsg_VoiceData)(nil), "dota.CSVCMsg_VoiceData")
+	proto.RegisterType((*CSVCMsg_PacketReliable)(nil), "dota.CSVCMsg_PacketReliable")
+	proto.RegisterType((*CSVCMsg_FullFrameSplit)(nil), "dota.CSVCMsg_FullFrameSplit")
+	proto.RegisterType((*CSVCMsg_HLTVStatus)(nil), "dota.CSVCMsg_HLTVStatus")
+	proto.RegisterType((*CSVCMsg_CmdKeyValues)(nil), "dota.CSVCMsg_CmdKeyValues")
+	proto.RegisterType((*CMsgIPCAddress)(nil), "dota.CMsgIPCAddress")
+	proto.RegisterType((*CMsgServerPeer)(nil), "dota.CMsgServerPeer")
+	proto.RegisterType((*CSVCMsg_PeerList)(nil), "dota.CSVCMsg_PeerList")
+	proto.RegisterType((*CSVCMsg_ClearAllStringTables)(nil), "dota.CSVCMsg_ClearAllStringTables")
+	proto.RegisterType((*ProtoFlattenedSerializerFieldT)(nil), "dota.ProtoFlattenedSerializerField_t")
+	proto.RegisterType((*ProtoFlattenedSerializerT)(nil), "dota.ProtoFlattenedSerializer_t")
+	proto.RegisterType((*CSVCMsg_FlattenedSerializer)(nil), "dota.CSVCMsg_FlattenedSerializer")
+	proto.RegisterType((*CSVCMsg_StopSound)(nil), "dota.CSVCMsg_StopSound")
+	proto.RegisterType((*CBidirMsg_RebroadcastGameEvent)(nil), "dota.CBidirMsg_RebroadcastGameEvent")
+	proto.RegisterType((*CBidirMsg_RebroadcastSource)(nil), "dota.CBidirMsg_RebroadcastSource")
+	proto.RegisterType((*SerializedNetAddressT)(nil), "dota.SerializedNetAddress_t")
+	proto.RegisterType((*CBidirMsg_RelayInfo)(nil), "dota.CBidirMsg_RelayInfo")
+	proto.RegisterType((*SignedPayloadT)(nil), "dota.SignedPayload_t")
+	proto.RegisterType((*CBidirMsg_RelayPacket)(nil), "dota.CBidirMsg_RelayPacket")
+	proto.RegisterType((*CBidirMsg_RelayPacket_SignedDestinationAddressT)(nil), "dota.CBidirMsg_RelayPacket.SignedDestinationAddress_t")
 	proto.RegisterEnum("dota.CLC_Messages", CLC_Messages_name, CLC_Messages_value)
 	proto.RegisterEnum("dota.SVC_Messages", SVC_Messages_name, SVC_Messages_value)
 	proto.RegisterEnum("dota.VoiceDataFormatT", VoiceDataFormatT_name, VoiceDataFormatT_value)
@@ -2797,4 +2945,235 @@ func init() {
 	proto.RegisterEnum("dota.Bidirectional_Messages", Bidirectional_Messages_name, Bidirectional_Messages_value)
 	proto.RegisterEnum("dota.Bidirectional_Messages_LowFrequency", Bidirectional_Messages_LowFrequency_name, Bidirectional_Messages_LowFrequency_value)
 	proto.RegisterEnum("dota.CBidirMsg_RelayInfo_OperationT", CBidirMsg_RelayInfo_OperationT_name, CBidirMsg_RelayInfo_OperationT_value)
+}
+
+var fileDescriptor19 = []byte{
+	// 3628 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x8c, 0x59, 0x4b, 0x73, 0x23, 0x47,
+	0x72, 0x16, 0x1e, 0x7c, 0x15, 0x1f, 0xd3, 0xc4, 0x70, 0x48, 0x0c, 0x35, 0xcf, 0x96, 0x25, 0x8d,
+	0x29, 0x89, 0x1a, 0x51, 0x2f, 0x6b, 0x24, 0xd9, 0xc6, 0x80, 0xe0, 0x0c, 0x3d, 0x7c, 0x40, 0x04,
+	0x48, 0x5b, 0x11, 0xb6, 0x3b, 0x9a, 0xe8, 0x22, 0xd9, 0xc1, 0x06, 0x1a, 0xea, 0x6e, 0x70, 0x08,
+	0x1d, 0x6c, 0x87, 0x2e, 0x3e, 0x39, 0xec, 0xb0, 0xaf, 0xbe, 0xfa, 0xe0, 0x83, 0x4f, 0x0e, 0x1f,
+	0x1c, 0xb1, 0xfb, 0x17, 0xf6, 0xbc, 0xb1, 0x7b, 0xd8, 0xcb, 0xee, 0x61, 0xff, 0xc5, 0x7e, 0x99,
+	0x55, 0xd5, 0xdd, 0x20, 0x41, 0x69, 0x4f, 0x64, 0x67, 0x55, 0x65, 0x65, 0x66, 0x65, 0x7e, 0xf9,
+	0x80, 0x58, 0xec, 0xc9, 0xa4, 0x2b, 0xe3, 0xd8, 0x3d, 0x95, 0xf1, 0x7a, 0x3f, 0x0a, 0x93, 0xb0,
+	0x52, 0xf6, 0xc2, 0xc4, 0x5d, 0x5d, 0xc6, 0xc2, 0xeb, 0x30, 0x3a, 0x3f, 0x76, 0x63, 0x99, 0x0c,
+	0xfb, 0x66, 0xd5, 0xfe, 0xb7, 0x82, 0xa8, 0xd4, 0xeb, 0x3b, 0xf5, 0xdd, 0xf8, 0xd4, 0xa9, 0x07,
+	0xbe, 0xec, 0x25, 0xdb, 0xbd, 0x93, 0xb0, 0xb2, 0x2c, 0x16, 0x62, 0xd9, 0xf3, 0x9c, 0xc4, 0x3d,
+	0x0e, 0xa4, 0xd3, 0x89, 0x3a, 0xd5, 0xc2, 0xa3, 0xc2, 0x93, 0xa9, 0xca, 0x92, 0x98, 0x8b, 0x65,
+	0x74, 0x21, 0x23, 0xa7, 0x13, 0x0e, 0x7a, 0x49, 0xb5, 0x08, 0xea, 0x7c, 0xe5, 0x96, 0x98, 0xf2,
+	0x63, 0xe7, 0x2c, 0x48, 0x2e, 0xaa, 0x25, 0x10, 0xa6, 0x2b, 0x8b, 0x62, 0x06, 0x84, 0x48, 0xf6,
+	0x03, 0x77, 0x58, 0x2d, 0x33, 0xa9, 0x22, 0xc4, 0x49, 0x04, 0xfe, 0x5e, 0xec, 0xf8, 0x5e, 0x75,
+	0x82, 0xcf, 0x81, 0x9b, 0xa1, 0xf5, 0xdc, 0xae, 0xac, 0x4e, 0x82, 0x3a, 0x63, 0xb7, 0xc4, 0x9c,
+	0x91, 0x68, 0x37, 0xbc, 0x90, 0x95, 0x37, 0xc5, 0xed, 0xde, 0xa0, 0xeb, 0x1c, 0xbb, 0x9d, 0xf3,
+	0x41, 0x1f, 0xf7, 0x76, 0xbb, 0x2e, 0x4e, 0xb0, 0x40, 0xf3, 0x95, 0xaa, 0xb0, 0x68, 0xb1, 0x27,
+	0x5f, 0x67, 0x2b, 0x4a, 0xa8, 0x39, 0x51, 0xf6, 0xdc, 0xc4, 0x65, 0x89, 0xe6, 0xec, 0x5f, 0x14,
+	0xc4, 0x02, 0xb1, 0x3c, 0x0a, 0xfd, 0x8e, 0xac, 0x0d, 0x3c, 0x3f, 0xac, 0xfc, 0x85, 0x98, 0x3c,
+	0x09, 0xa3, 0xae, 0x9b, 0x30, 0xab, 0x85, 0x8d, 0x95, 0x75, 0xb2, 0xd4, 0x3a, 0xef, 0xd8, 0xc4,
+	0xc9, 0x2d, 0x5e, 0x74, 0x92, 0x67, 0xcb, 0x47, 0xfb, 0xdb, 0xf5, 0xc6, 0x66, 0xad, 0x5d, 0x73,
+	0xb6, 0xf6, 0x0f, 0x76, 0x6b, 0x6d, 0xa7, 0xd5, 0x6e, 0xd4, 0x76, 0x49, 0xa5, 0x0b, 0xda, 0xec,
+	0xf0, 0x3d, 0x74, 0xeb, 0x9c, 0x32, 0xdc, 0x77, 0x03, 0xd9, 0x03, 0xf9, 0x78, 0x98, 0xc8, 0x98,
+	0xef, 0x9f, 0x50, 0xf4, 0x4e, 0xe2, 0x87, 0x3d, 0x07, 0xf2, 0x1e, 0xcb, 0x88, 0xcd, 0x32, 0x5f,
+	0xb9, 0x2d, 0x66, 0x63, 0xb7, 0xdb, 0x87, 0x91, 0x23, 0x37, 0x91, 0xda, 0x2e, 0xb6, 0x58, 0x1d,
+	0xf4, 0xa0, 0x4e, 0x3f, 0xc2, 0x53, 0x4a, 0xcf, 0xd1, 0x3b, 0xc2, 0x93, 0x13, 0x3c, 0x1e, 0x5b,
+	0x69, 0xde, 0x6e, 0x8b, 0x45, 0x63, 0xa5, 0x54, 0xe2, 0xca, 0x5b, 0x62, 0xc2, 0x25, 0xdd, 0x58,
+	0xa3, 0xd9, 0x8d, 0x25, 0xa5, 0xd1, 0x15, 0xbd, 0x61, 0x98, 0xcb, 0x01, 0xde, 0x80, 0x04, 0x9e,
+	0xa4, 0xaf, 0xc4, 0xef, 0x9c, 0xb3, 0x98, 0xf3, 0x76, 0x4d, 0xdc, 0x36, 0x5c, 0x9f, 0xc3, 0x53,
+	0x02, 0xbf, 0x27, 0x6b, 0x9d, 0xf3, 0xca, 0x1d, 0x31, 0x7f, 0xac, 0x3f, 0x1d, 0xde, 0x5d, 0x60,
+	0xa5, 0x20, 0x7c, 0x4a, 0xee, 0x45, 0xcc, 0x70, 0xc2, 0x5e, 0x13, 0x4b, 0x86, 0xc5, 0x8e, 0x1f,
+	0x27, 0xb2, 0xd7, 0xb8, 0x80, 0x57, 0xc5, 0x64, 0x2d, 0x49, 0xff, 0x39, 0x5d, 0x37, 0x26, 0x06,
+	0xa5, 0x27, 0x53, 0xf6, 0xdf, 0x8a, 0xaa, 0xd9, 0x7b, 0x20, 0xe3, 0x7e, 0xd8, 0xf3, 0xea, 0x17,
+	0x6e, 0x74, 0xe4, 0x06, 0x03, 0x59, 0x59, 0x10, 0x93, 0x9d, 0x30, 0x3c, 0xf7, 0x65, 0x76, 0x59,
+	0x9c, 0xb8, 0xc9, 0x20, 0xc6, 0x43, 0x7b, 0x52, 0x5d, 0x46, 0xd2, 0xb3, 0xe7, 0x90, 0xf4, 0x33,
+	0x95, 0x79, 0x31, 0x71, 0x41, 0x67, 0xd9, 0xb6, 0x33, 0x76, 0x37, 0x93, 0x64, 0xcb, 0x0f, 0x64,
+	0xfd, 0xa0, 0x5e, 0x3f, 0x93, 0xd0, 0x06, 0xde, 0x49, 0x2c, 0x9c, 0xbe, 0x9b, 0x9c, 0x69, 0xe6,
+	0xe0, 0xc3, 0x5f, 0x45, 0xe6, 0x03, 0x75, 0x79, 0xc3, 0x09, 0x4e, 0xa5, 0xec, 0x27, 0x2a, 0x96,
+	0x98, 0x4e, 0x29, 0x7c, 0x43, 0x65, 0x56, 0x94, 0x28, 0x36, 0xe8, 0xd5, 0xa6, 0xec, 0xf7, 0xc4,
+	0x4a, 0xaa, 0x78, 0xe8, 0x7a, 0x7e, 0xef, 0xb4, 0x19, 0x85, 0xa7, 0xf4, 0x84, 0x74, 0xb2, 0xaf,
+	0xff, 0x57, 0x17, 0xda, 0x4f, 0xc5, 0xaa, 0xd9, 0xdc, 0xea, 0x07, 0x7e, 0xd2, 0x44, 0xa4, 0xc8,
+	0xa8, 0x1e, 0xf6, 0x7a, 0xf0, 0x12, 0xb2, 0x55, 0x9f, 0x09, 0x7c, 0x57, 0x81, 0xb5, 0xf9, 0x5c,
+	0xdc, 0x19, 0x0d, 0xd4, 0x5d, 0x15, 0xe7, 0xc4, 0xbc, 0x0b, 0x22, 0x45, 0x75, 0xa6, 0x4d, 0xe6,
+	0x92, 0xf6, 0x07, 0xe2, 0xfe, 0x98, 0xab, 0x36, 0xfd, 0xb8, 0xa3, 0x6f, 0xc3, 0xf6, 0x38, 0x08,
+	0x13, 0x2d, 0x59, 0xee, 0xfd, 0x5a, 0x1c, 0xea, 0x2d, 0xb6, 0x3a, 0xc9, 0x14, 0xfb, 0xf0, 0x43,
+	0xff, 0xc4, 0x97, 0x1e, 0xef, 0x9d, 0xb6, 0x97, 0x32, 0xf0, 0x50, 0x7b, 0x9b, 0xd0, 0xda, 0x76,
+	0x32, 0x0e, 0x07, 0x14, 0x0b, 0x71, 0xd2, 0x74, 0x07, 0xb1, 0xac, 0x6c, 0x40, 0x2b, 0xfa, 0x27,
+	0x13, 0x75, 0xc1, 0xb8, 0x68, 0x7e, 0x1f, 0x22, 0x6e, 0xfa, 0xa0, 0xe9, 0x34, 0x6b, 0x87, 0xad,
+	0x06, 0xbd, 0xba, 0x3a, 0x73, 0x1a, 0x85, 0x83, 0xbe, 0x76, 0xb1, 0x3f, 0xc9, 0x2e, 0xa8, 0x77,
+	0xbd, 0x57, 0x72, 0xc8, 0x1e, 0x13, 0xa7, 0x7a, 0x17, 0x58, 0xef, 0x5f, 0x95, 0x20, 0x5d, 0xeb,
+	0x28, 0x27, 0x1d, 0x43, 0x9b, 0x7a, 0x8b, 0x24, 0xec, 0x84, 0x81, 0x36, 0xd7, 0x38, 0x50, 0x63,
+	0x2a, 0x30, 0xcc, 0x93, 0x9e, 0xdf, 0x41, 0x64, 0x7a, 0x1a, 0xd9, 0x72, 0x50, 0x57, 0xbe, 0x0e,
+	0x75, 0x13, 0x4c, 0x82, 0x18, 0x1d, 0x27, 0x8c, 0x39, 0x50, 0x27, 0xe8, 0x44, 0xd7, 0xed, 0x33,
+	0x86, 0x4e, 0x31, 0x86, 0xc2, 0x90, 0x1d, 0x7e, 0x40, 0xa6, 0x4d, 0x33, 0x0d, 0x30, 0x16, 0x27,
+	0x11, 0x8c, 0x97, 0x43, 0xdc, 0x19, 0x5e, 0x81, 0x01, 0xba, 0xee, 0xa5, 0xa3, 0x4e, 0xc4, 0x55,
+	0x61, 0x62, 0x41, 0x11, 0x5d, 0xe0, 0x43, 0x5c, 0x9d, 0x35, 0x44, 0xe5, 0x34, 0x0e, 0xbf, 0xe6,
+	0x1c, 0x13, 0xe1, 0xca, 0x14, 0xb0, 0x8e, 0xdf, 0x4b, 0xa0, 0xa2, 0x1b, 0x54, 0xe7, 0x41, 0x2e,
+	0x92, 0x11, 0x4e, 0xe1, 0x5a, 0x8e, 0xe7, 0x47, 0xd5, 0x05, 0x76, 0x65, 0xf2, 0x22, 0x88, 0xc9,
+	0x0e, 0x77, 0xcb, 0x50, 0xe2, 0xf3, 0xa1, 0xa2, 0x58, 0x4c, 0x81, 0xae, 0x67, 0x61, 0x9c, 0x28,
+	0xd2, 0x22, 0x93, 0xa0, 0x8c, 0xeb, 0x79, 0x84, 0x6a, 0x44, 0xab, 0x30, 0xad, 0x2e, 0x6e, 0x33,
+	0x73, 0x88, 0x16, 0x13, 0xe0, 0xc1, 0xcf, 0x4e, 0xfc, 0xd3, 0xea, 0x6d, 0xc6, 0xa4, 0x77, 0x34,
+	0x26, 0xe9, 0x87, 0x79, 0x81, 0x8d, 0x2d, 0xb5, 0xaf, 0xce, 0xdb, 0x06, 0xc0, 0x41, 0x7c, 0x54,
+	0xee, 0x8b, 0x3b, 0x23, 0x4c, 0x00, 0xed, 0xfe, 0x09, 0x5c, 0xa4, 0xba, 0xc4, 0x8f, 0xfb, 0xdf,
+	0x05, 0xe0, 0x9f, 0xe6, 0x51, 0x27, 0x33, 0xf0, 0xdb, 0xc2, 0x8c, 0x9d, 0x48, 0xe2, 0xb9, 0x1c,
+	0xba, 0x96, 0x4d, 0xa6, 0x3c, 0xb5, 0xf2, 0x54, 0x4c, 0x19, 0x6b, 0x15, 0x01, 0x3d, 0xb3, 0x1b,
+	0x0f, 0x47, 0xe5, 0x48, 0x79, 0xac, 0xf3, 0x36, 0x27, 0x59, 0x7d, 0xa9, 0x4f, 0x38, 0x09, 0x59,
+	0x42, 0xfd, 0xeb, 0x7b, 0xda, 0x65, 0x56, 0xc4, 0x2d, 0xf2, 0x34, 0xfd, 0x5a, 0xac, 0x7b, 0xd1,
+	0xd8, 0x43, 0x6d, 0xcd, 0x60, 0xc9, 0xb6, 0x85, 0x95, 0xf9, 0xa1, 0x8e, 0x05, 0xa0, 0x1b, 0xfb,
+	0xb5, 0x89, 0xa4, 0x17, 0x99, 0x3a, 0x0c, 0xd5, 0xdb, 0x3d, 0x3f, 0x21, 0xd7, 0xf9, 0x6e, 0xe0,
+	0x22, 0x64, 0x87, 0xfa, 0x5a, 0x00, 0x1c, 0x01, 0x53, 0x27, 0xbd, 0x6c, 0x0a, 0x5e, 0x4b, 0xe6,
+	0x51, 0x08, 0xf5, 0xac, 0xf0, 0xd4, 0xbe, 0x2f, 0xe6, 0x0d, 0xa3, 0x26, 0x1c, 0x8a, 0xa3, 0x3b,
+	0x91, 0x97, 0x89, 0x46, 0x91, 0xdf, 0x96, 0x90, 0x07, 0x8d, 0x30, 0xf0, 0x76, 0x2f, 0xa6, 0xd4,
+	0x14, 0x01, 0xc3, 0x59, 0x93, 0x98, 0x48, 0xa9, 0xc9, 0x26, 0xf9, 0xd3, 0x58, 0xec, 0xd1, 0xa8,
+	0xc5, 0xd4, 0xe9, 0x75, 0xde, 0xa2, 0x6c, 0xb1, 0xfa, 0xcf, 0x25, 0x60, 0x74, 0xf6, 0x4d, 0x76,
+	0x0b, 0x23, 0xff, 0xd4, 0xef, 0x39, 0x97, 0xcc, 0x73, 0x31, 0x47, 0x19, 0xb2, 0x0e, 0x79, 0xca,
+	0xf7, 0xac, 0xc4, 0x22, 0x99, 0xe6, 0x22, 0x0c, 0x06, 0x1a, 0x64, 0x39, 0x45, 0x7a, 0x12, 0x8e,
+	0xed, 0x28, 0x6c, 0x9f, 0x60, 0x07, 0xc6, 0x03, 0xa4, 0x79, 0x56, 0x27, 0xd4, 0x49, 0x13, 0xb6,
+	0x78, 0x75, 0x98, 0x0c, 0x2e, 0xef, 0xc9, 0x4b, 0x8e, 0x39, 0x0e, 0xc2, 0xce, 0x99, 0x0b, 0xb8,
+	0x0b, 0x38, 0xe0, 0xd8, 0x92, 0x7d, 0x3f, 0xe9, 0x9c, 0x71, 0x94, 0xf1, 0xe7, 0x49, 0xe0, 0x9e,
+	0x9a, 0xf8, 0x82, 0xa3, 0xb3, 0x1e, 0xc4, 0x9a, 0xa3, 0x8b, 0x0b, 0x8d, 0x94, 0xe4, 0x80, 0x95,
+	0x17, 0x48, 0x0e, 0xb1, 0x29, 0x4e, 0xed, 0x7d, 0xe9, 0x9e, 0x23, 0xf0, 0xd4, 0xcd, 0x1c, 0x63,
+	0x1c, 0x8f, 0x11, 0xf6, 0x85, 0x5d, 0xf8, 0x30, 0xde, 0x79, 0x21, 0xcd, 0x62, 0xcc, 0x26, 0x40,
+	0x32, 0x0c, 0x38, 0xd2, 0x98, 0x08, 0x0c, 0x41, 0xc1, 0x95, 0x90, 0x3e, 0x1c, 0x6c, 0x5c, 0x30,
+	0x81, 0xe8, 0x76, 0x8f, 0xd9, 0x8b, 0x17, 0x0d, 0xb2, 0x9c, 0x52, 0xea, 0xae, 0xb0, 0x48, 0x77,
+	0xc5, 0xa2, 0xe2, 0x85, 0xbc, 0x12, 0x0e, 0x22, 0x58, 0x02, 0x4b, 0x14, 0x65, 0x93, 0xf6, 0xdf,
+	0x65, 0x2e, 0xd7, 0x8c, 0xe4, 0x89, 0x84, 0xa6, 0xd9, 0xd5, 0xca, 0x30, 0xca, 0xa3, 0x3e, 0x11,
+	0xf3, 0xe9, 0x69, 0x86, 0xe5, 0x22, 0xc3, 0x72, 0x45, 0xbd, 0xb5, 0x39, 0xdb, 0xc6, 0xca, 0xb3,
+	0x99, 0xe6, 0x16, 0x2a, 0x9f, 0xfd, 0xc3, 0xbd, 0x4d, 0xfb, 0x53, 0x71, 0x2b, 0xe7, 0xd1, 0x47,
+	0xbe, 0x7c, 0x7d, 0xcd, 0xee, 0x69, 0x26, 0x62, 0x30, 0x52, 0xb8, 0xdd, 0xc8, 0xa4, 0xda, 0xf2,
+	0x2f, 0x6b, 0xbd, 0xd3, 0x80, 0xb3, 0x17, 0xbc, 0x0f, 0x31, 0x7f, 0x21, 0xb5, 0xdf, 0x3d, 0x44,
+	0x11, 0x43, 0x4b, 0x7c, 0x68, 0x76, 0xc3, 0xca, 0x8a, 0x98, 0x6f, 0xf8, 0x88, 0xfd, 0x85, 0x58,
+	0x4e, 0xc3, 0x36, 0x0a, 0xe3, 0xf8, 0xcc, 0xf5, 0x23, 0xc5, 0x2c, 0x3d, 0x5a, 0xb8, 0xe1, 0xe8,
+	0xbf, 0x16, 0x32, 0x11, 0x9e, 0xb7, 0x9a, 0x9b, 0xb2, 0xe3, 0x06, 0x80, 0x9a, 0x52, 0x3f, 0x8c,
+	0xaf, 0x9f, 0x39, 0x42, 0x72, 0x0c, 0x23, 0xaa, 0x3f, 0x3d, 0xda, 0xe7, 0x50, 0x18, 0x0d, 0x22,
+	0xa9, 0x15, 0x2c, 0x8e, 0x75, 0xb7, 0x52, 0x8a, 0xcf, 0x88, 0xd3, 0x40, 0x13, 0xcb, 0x66, 0x6b,
+	0x10, 0xbe, 0x76, 0xfa, 0x91, 0x0f, 0x87, 0x4f, 0x74, 0xb2, 0xb0, 0xff, 0x11, 0x15, 0x97, 0x31,
+	0x25, 0x65, 0xe7, 0x16, 0x00, 0x4c, 0xf6, 0x2a, 0x9b, 0x88, 0xda, 0x2c, 0x4b, 0xde, 0x57, 0x42,
+	0x35, 0x72, 0x3b, 0x74, 0xf6, 0xe7, 0x97, 0x59, 0xd9, 0x6d, 0xbd, 0x70, 0x5a, 0xcd, 0x9d, 0xed,
+	0x76, 0xab, 0x7e, 0xd0, 0x68, 0xec, 0x39, 0xb5, 0xcd, 0x4d, 0x24, 0xcf, 0x83, 0x51, 0xf3, 0x93,
+	0x00, 0x3a, 0x41, 0xe4, 0x64, 0x85, 0x35, 0x97, 0x52, 0x30, 0x96, 0xc9, 0xcd, 0xf5, 0x17, 0x55,
+	0x4d, 0x58, 0xcc, 0x81, 0x9d, 0xfd, 0x15, 0x2a, 0x75, 0x7d, 0x74, 0x57, 0xf6, 0x06, 0x1c, 0xa9,
+	0xbe, 0x1b, 0x84, 0x23, 0xc5, 0x08, 0x22, 0xb5, 0x8b, 0x45, 0xe7, 0x5c, 0xea, 0x08, 0x8e, 0x75,
+	0x5d, 0xf2, 0x7f, 0xc5, 0x0c, 0xf3, 0x5a, 0x68, 0x02, 0xda, 0x84, 0x40, 0x74, 0x2d, 0xdc, 0x5e,
+	0xa6, 0x28, 0x84, 0xe8, 0x42, 0xeb, 0x72, 0x1d, 0x68, 0x91, 0xd8, 0x7a, 0x08, 0x2b, 0xca, 0xd0,
+	0x04, 0x89, 0x91, 0xce, 0xcf, 0x1f, 0x21, 0xae, 0xa3, 0xb0, 0x1f, 0xc3, 0xe6, 0x84, 0x59, 0xf6,
+	0x15, 0xcc, 0x32, 0xd7, 0xac, 0x53, 0x77, 0x43, 0x1b, 0x81, 0x5a, 0xff, 0x53, 0x40, 0x65, 0x93,
+	0x7e, 0x32, 0x5e, 0x66, 0xd2, 0xc3, 0x3d, 0x47, 0x95, 0xce, 0xa0, 0x22, 0x2d, 0x0a, 0xd3, 0x17,
+	0x2d, 0x1b, 0xac, 0xf1, 0x74, 0x8e, 0x9c, 0xe0, 0x13, 0xb0, 0x3b, 0x81, 0x86, 0x0c, 0x64, 0x97,
+	0x73, 0xf8, 0xa4, 0xb1, 0x27, 0xb9, 0x83, 0x02, 0xb5, 0x29, 0x06, 0x35, 0x84, 0xfc, 0x99, 0x7f,
+	0x7a, 0xa6, 0x69, 0xd3, 0x26, 0x53, 0x73, 0xf7, 0xe3, 0xe3, 0x20, 0x63, 0x95, 0xfd, 0xeb, 0x02,
+	0x2a, 0xc1, 0x5c, 0xfa, 0xe4, 0xfa, 0x9a, 0x4a, 0xed, 0xca, 0xd7, 0x84, 0x94, 0x71, 0x27, 0xf2,
+	0xfb, 0xf0, 0xdb, 0x98, 0x6b, 0xec, 0xd9, 0x8d, 0x27, 0xd7, 0x13, 0x6e, 0x7a, 0x62, 0x3d, 0xdb,
+	0x0e, 0x43, 0xa0, 0x7b, 0xa0, 0x47, 0xba, 0x6a, 0x02, 0x53, 0x63, 0xb3, 0xfa, 0xab, 0x7f, 0x2f,
+	0xe6, 0xf2, 0x87, 0x48, 0x5b, 0x2e, 0xeb, 0xd3, 0xd4, 0x38, 0xb2, 0xbd, 0xf2, 0xa1, 0x28, 0x83,
+	0x27, 0x19, 0x8b, 0x64, 0x79, 0xfc, 0x63, 0xb2, 0xf0, 0xdd, 0xf6, 0x7f, 0x14, 0xb3, 0xe8, 0x6e,
+	0xa2, 0xe5, 0x93, 0x49, 0x83, 0xe2, 0xcb, 0x47, 0x79, 0xa7, 0xab, 0x1e, 0xec, 0x47, 0xd3, 0x18,
+	0x67, 0xee, 0x35, 0xe8, 0x7b, 0x54, 0xa1, 0xa5, 0x0b, 0x45, 0xf3, 0x30, 0x5c, 0xbf, 0x05, 0xba,
+	0x07, 0x9c, 0xce, 0xb6, 0x3a, 0xa6, 0x6b, 0xd1, 0x35, 0x1c, 0xb6, 0xa6, 0x94, 0x09, 0x3e, 0x8c,
+	0x97, 0xe0, 0x93, 0xce, 0x49, 0x14, 0x76, 0xf5, 0x83, 0xe1, 0x7a, 0x1d, 0xea, 0x5c, 0x64, 0x4e,
+	0x71, 0xbf, 0xb7, 0x2a, 0x2a, 0x7d, 0xf8, 0x0e, 0x55, 0x6e, 0x27, 0x83, 0x20, 0xc0, 0x7e, 0xd2,
+	0x7d, 0x9a, 0xd9, 0x3e, 0x12, 0x55, 0xb7, 0x43, 0xc0, 0xe6, 0xc4, 0x7d, 0xf7, 0x75, 0x8f, 0x2b,
+	0x58, 0x93, 0x3a, 0x66, 0x18, 0xc1, 0xdf, 0x15, 0x0f, 0x49, 0xa3, 0xdc, 0x32, 0x97, 0x2f, 0x48,
+	0xe8, 0x26, 0xb9, 0x71, 0x42, 0x9a, 0xb7, 0x0f, 0xb2, 0x20, 0x6d, 0xcb, 0x6e, 0x3f, 0x35, 0x89,
+	0x42, 0x4f, 0xce, 0xdd, 0x3a, 0x5e, 0x20, 0x25, 0x3b, 0xdb, 0x88, 0x2d, 0xae, 0x88, 0xae, 0x5a,
+	0xe2, 0xdf, 0x17, 0xc4, 0xdd, 0x0c, 0x47, 0xa9, 0x6a, 0x6a, 0x71, 0x09, 0xaa, 0xe2, 0xd0, 0x3c,
+	0x23, 0x97, 0x0d, 0xe3, 0xb9, 0xde, 0x13, 0x4b, 0xa8, 0x60, 0x22, 0xe6, 0x89, 0x5e, 0xe9, 0x92,
+	0x3a, 0x55, 0xff, 0x7b, 0xa9, 0xad, 0x8d, 0xc0, 0xcd, 0x56, 0x99, 0xae, 0xc2, 0x03, 0x70, 0x3a,
+	0x4a, 0x57, 0xbe, 0x3d, 0x31, 0x9a, 0x87, 0x27, 0xb3, 0x9e, 0x8f, 0xcb, 0xe2, 0x9c, 0xc9, 0x91,
+	0xf6, 0x46, 0xbb, 0x63, 0xe2, 0x3d, 0x3d, 0x52, 0x96, 0x65, 0xab, 0x6c, 0xe8, 0x69, 0xb4, 0x24,
+	0xa9, 0xaa, 0x87, 0xec, 0x02, 0x79, 0x55, 0x61, 0x44, 0x05, 0x2f, 0xa9, 0x0f, 0xeb, 0x91, 0x03,
+	0x95, 0x0c, 0xa7, 0xd7, 0x1c, 0xeb, 0x8a, 0x50, 0xca, 0x98, 0xff, 0x52, 0xb8, 0x52, 0xc0, 0xfd,
+	0xf1, 0xfd, 0x38, 0x01, 0xad, 0x2a, 0x55, 0x8b, 0x06, 0x18, 0x00, 0x45, 0x97, 0x7e, 0x97, 0x20,
+	0xa5, 0x64, 0xf2, 0x3e, 0xb7, 0xec, 0x65, 0x6e, 0xd9, 0x81, 0x27, 0xc4, 0x95, 0x24, 0xe6, 0x5e,
+	0x7a, 0xc2, 0xc4, 0x1d, 0xb7, 0xe6, 0x6a, 0x3c, 0xf0, 0xea, 0x6a, 0x14, 0x1d, 0x68, 0x37, 0x49,
+	0xf7, 0xa5, 0xbd, 0x8f, 0x99, 0x17, 0xb1, 0x1d, 0x8b, 0xe6, 0x19, 0xa8, 0xd7, 0xd6, 0x4f, 0x69,
+	0xb7, 0x33, 0x66, 0x5b, 0x70, 0xf2, 0x2d, 0xf2, 0x71, 0x4e, 0x45, 0x57, 0x98, 0x01, 0x0b, 0xf4,
+	0x90, 0x23, 0xe3, 0x93, 0x40, 0xe3, 0x40, 0x63, 0xa5, 0xe9, 0xcf, 0xca, 0x6c, 0xb2, 0xc3, 0xac,
+	0x3d, 0x7b, 0xb9, 0xd3, 0x3e, 0xd2, 0x6d, 0x26, 0xac, 0x01, 0xa5, 0xd0, 0xac, 0x68, 0xcf, 0xa3,
+	0xca, 0x4d, 0xf7, 0x3e, 0x99, 0x6c, 0xc8, 0x69, 0x06, 0x7f, 0xb1, 0xce, 0xd6, 0x92, 0xb1, 0xf2,
+	0x2f, 0x6e, 0x0e, 0x8d, 0x57, 0xdf, 0xdc, 0x1c, 0x7e, 0xa9, 0xc6, 0x41, 0xdb, 0xcd, 0x7a, 0xcd,
+	0xf3, 0xb8, 0x47, 0xe7, 0xa6, 0xbf, 0xdb, 0x1f, 0xe0, 0x6a, 0x87, 0x8b, 0xac, 0x02, 0x1b, 0x9b,
+	0x5a, 0xf1, 0x28, 0xec, 0x48, 0x55, 0xfd, 0xf3, 0x68, 0xc9, 0xfe, 0x2f, 0x3d, 0x4c, 0xd2, 0x3d,
+	0xaf, 0x94, 0xd1, 0xd5, 0xe6, 0x2b, 0xb3, 0x47, 0x22, 0xdd, 0x6e, 0x3a, 0x6c, 0x79, 0x2c, 0x4a,
+	0x7e, 0xbf, 0xc3, 0x92, 0x8f, 0x78, 0xc3, 0xa8, 0x18, 0xc9, 0x19, 0x90, 0xf0, 0x4c, 0x22, 0xed,
+	0x0c, 0xc3, 0x81, 0x86, 0x28, 0x90, 0xf1, 0xa1, 0xa8, 0x58, 0xef, 0xea, 0x56, 0x13, 0x21, 0x08,
+	0x90, 0x0b, 0x78, 0xce, 0xa2, 0x7b, 0x58, 0xea, 0xd0, 0xd8, 0x09, 0xa6, 0xed, 0xcf, 0x72, 0x55,
+	0x20, 0x84, 0xe4, 0x1c, 0x61, 0x8b, 0x72, 0x5f, 0xb2, 0x75, 0x4b, 0xa3, 0x32, 0x64, 0xca, 0xd8,
+	0x7f, 0x29, 0xee, 0x65, 0x7d, 0x11, 0x6e, 0xac, 0x05, 0x41, 0x2e, 0x5e, 0x62, 0xdd, 0xd2, 0xe6,
+	0xe0, 0x21, 0xd7, 0xe3, 0x2a, 0x0b, 0xfd, 0x7b, 0x51, 0x3c, 0x6c, 0x52, 0x97, 0xbd, 0x85, 0xd2,
+	0x0e, 0xb2, 0x49, 0x0f, 0xec, 0x51, 0x1a, 0xc0, 0xc5, 0xa2, 0x2d, 0x5f, 0x06, 0x1e, 0x32, 0x07,
+	0x5c, 0x8f, 0x52, 0x2b, 0x65, 0x1a, 0x27, 0x1e, 0x76, 0x33, 0x87, 0x34, 0x09, 0x97, 0xa9, 0x69,
+	0x4c, 0x00, 0x25, 0x74, 0x7f, 0x5e, 0xba, 0x9e, 0x3f, 0xcb, 0x63, 0xf2, 0xa7, 0x6a, 0x14, 0xb8,
+	0x40, 0x53, 0xd3, 0x9c, 0x1c, 0xb0, 0x3c, 0x16, 0x77, 0x4f, 0x58, 0x8c, 0x38, 0x15, 0x2b, 0xbb,
+	0x52, 0xb5, 0x0c, 0x40, 0xef, 0x6b, 0x5b, 0x4c, 0xb7, 0x35, 0x6d, 0x7a, 0x6b, 0x1e, 0x92, 0xf6,
+	0x88, 0x3b, 0x1d, 0x9c, 0x31, 0x20, 0x44, 0x1a, 0xa8, 0x5b, 0x23, 0x5e, 0xe0, 0xae, 0xc2, 0x3e,
+	0x17, 0xab, 0x37, 0xd9, 0x04, 0xe6, 0x00, 0xe6, 0x8c, 0x13, 0x46, 0x59, 0x05, 0x69, 0x66, 0x8c,
+	0x18, 0x69, 0x59, 0xc7, 0x82, 0xc6, 0x69, 0x59, 0x57, 0xc2, 0x65, 0xff, 0x59, 0x10, 0x6f, 0xa6,
+	0x41, 0x7b, 0xfd, 0xc2, 0xca, 0xa7, 0x40, 0xb1, 0xf4, 0xcb, 0xd4, 0x0a, 0x8f, 0x4c, 0xd9, 0x7f,
+	0xa3, 0x94, 0xe4, 0xd2, 0xc3, 0xee, 0x71, 0x18, 0xa8, 0xae, 0x70, 0x06, 0x7c, 0x26, 0xd5, 0xed,
+	0x3a, 0xc5, 0xbf, 0xfd, 0xe3, 0x2c, 0xf4, 0xe3, 0xdb, 0x8f, 0x73, 0xb5, 0x5f, 0x12, 0xf6, 0xb9,
+	0x99, 0x4c, 0xdb, 0x1b, 0x9e, 0x35, 0xdb, 0x43, 0xf1, 0xa0, 0xfe, 0xdc, 0xf7, 0xfc, 0x48, 0x0d,
+	0x92, 0x8e, 0xa3, 0xd0, 0xf5, 0x3a, 0x80, 0x86, 0xb4, 0x6a, 0xe0, 0x82, 0x16, 0xde, 0x9e, 0x84,
+	0xca, 0xf5, 0x75, 0x06, 0x84, 0x88, 0xc7, 0x83, 0x93, 0xb4, 0x99, 0xe1, 0xd9, 0xab, 0x82, 0x10,
+	0xb8, 0x50, 0xe6, 0x41, 0xdc, 0xd2, 0x45, 0xb2, 0x23, 0xfd, 0x0b, 0x78, 0xb6, 0xc1, 0x18, 0x72,
+	0xa4, 0xb2, 0xbd, 0x01, 0xdb, 0x8d, 0xbb, 0xba, 0xc5, 0x8d, 0x12, 0xa7, 0x53, 0x1e, 0x6a, 0xf2,
+	0xa7, 0x9e, 0x9b, 0x7d, 0x2c, 0x96, 0x53, 0x35, 0xbd, 0x3d, 0x99, 0xe8, 0x80, 0x86, 0xcd, 0xa8,
+	0x4f, 0x4b, 0x57, 0x34, 0x19, 0x87, 0x8a, 0x80, 0xa1, 0xff, 0x2f, 0xa2, 0xfc, 0xcf, 0xdd, 0x04,
+	0x08, 0xe1, 0x41, 0xc6, 0x2b, 0x31, 0x13, 0xf6, 0xa5, 0x1a, 0x85, 0xf0, 0xd6, 0x05, 0x63, 0xd8,
+	0x31, 0xbb, 0xd7, 0xf7, 0xcd, 0x56, 0x27, 0x79, 0xb6, 0x78, 0xb0, 0xbd, 0xef, 0x1c, 0x34, 0xbe,
+	0x39, 0x6c, 0xb4, 0xda, 0xf8, 0xbb, 0x53, 0xfb, 0x16, 0x65, 0xe1, 0x4a, 0x76, 0x7f, 0xdb, 0x8d,
+	0x4e, 0x53, 0xe1, 0x74, 0x8b, 0x75, 0x4f, 0xb1, 0xbe, 0x41, 0x7c, 0x98, 0xcf, 0xf5, 0x3c, 0x9f,
+	0xf8, 0xbb, 0xc1, 0x4b, 0xaa, 0xad, 0xd5, 0xac, 0xf8, 0x1f, 0xc4, 0x6c, 0xee, 0x62, 0x44, 0xc3,
+	0xf5, 0xab, 0xad, 0x37, 0x10, 0x93, 0x0b, 0x44, 0xfe, 0xeb, 0xed, 0x9d, 0x1d, 0x4d, 0x2b, 0x20,
+	0xe1, 0xce, 0x11, 0x6d, 0x0f, 0xbb, 0xf7, 0x0f, 0xdb, 0x0d, 0x8b, 0xa2, 0xd4, 0x52, 0x87, 0xff,
+	0xaa, 0x51, 0x37, 0x67, 0x4b, 0x40, 0xb7, 0x2a, 0x51, 0xc1, 0xae, 0xf6, 0x7c, 0x67, 0xbb, 0xf5,
+	0xd2, 0xa9, 0xef, 0xef, 0xed, 0x61, 0xc3, 0xf6, 0xfe, 0x9e, 0x55, 0x46, 0x56, 0xba, 0xd5, 0xf2,
+	0x4f, 0xe1, 0x5d, 0x4d, 0x77, 0x18, 0xe0, 0x81, 0x20, 0x03, 0x4f, 0x0b, 0xf9, 0x63, 0x53, 0x41,
+	0x3d, 0x6c, 0xcc, 0xcd, 0x3c, 0xf6, 0xb9, 0xd4, 0xbb, 0x41, 0xe1, 0xa2, 0xea, 0x9c, 0x8f, 0xf5,
+	0xa9, 0x46, 0xaf, 0x13, 0x0d, 0xfb, 0x6a, 0xc0, 0x57, 0x04, 0x66, 0xfe, 0xae, 0x88, 0xea, 0x7a,
+	0xd4, 0xc6, 0x2a, 0x81, 0xb2, 0xb7, 0x45, 0xf2, 0xe2, 0x2c, 0xec, 0x2b, 0x27, 0x2a, 0x30, 0xab,
+	0x4f, 0xc4, 0x82, 0x9a, 0x5f, 0xb8, 0x01, 0x75, 0x17, 0x32, 0xe2, 0x2b, 0x7e, 0xca, 0xa6, 0xef,
+	0x03, 0x3a, 0xf2, 0xb2, 0xf3, 0xe5, 0xb3, 0x1b, 0x77, 0xf4, 0xa1, 0x2b, 0x6a, 0xed, 0x52, 0x93,
+	0xde, 0xf1, 0xfb, 0xbe, 0x2e, 0x95, 0x75, 0x73, 0xf3, 0xd9, 0x58, 0x8f, 0x50, 0xd2, 0x6a, 0x1e,
+	0x9b, 0x32, 0x4e, 0x20, 0x1a, 0x3d, 0x51, 0x7a, 0xf9, 0xea, 0x0f, 0x05, 0xb1, 0x7a, 0xf3, 0x32,
+	0x69, 0x34, 0xea, 0xae, 0xac, 0xe9, 0x4f, 0x69, 0x34, 0xc6, 0xca, 0x40, 0x34, 0x69, 0xac, 0xab,
+	0x95, 0x41, 0x3a, 0x56, 0x05, 0xd3, 0xda, 0x6f, 0x8a, 0x68, 0x1e, 0x77, 0xea, 0x8e, 0xee, 0x63,
+	0x69, 0xbe, 0x8c, 0x28, 0xed, 0xe4, 0x7e, 0x84, 0xb2, 0x96, 0x00, 0x08, 0xd3, 0x44, 0xa3, 0x9f,
+	0x81, 0xac, 0x3b, 0xb8, 0x62, 0x9e, 0xbe, 0xd2, 0xf2, 0xca, 0x5a, 0xc6, 0x83, 0xdf, 0x22, 0x52,
+	0xee, 0xb7, 0x0a, 0x6b, 0x85, 0x9c, 0x89, 0x88, 0xf9, 0x5f, 0x1f, 0xac, 0x2a, 0xa2, 0x7d, 0x89,
+	0xa8, 0x57, 0x7f, 0x67, 0xb0, 0xee, 0x9a, 0xfd, 0xf9, 0xdf, 0x08, 0xac, 0x55, 0xc0, 0xf8, 0x6d,
+	0xe6, 0x32, 0x3a, 0xca, 0xb7, 0xde, 0x04, 0x16, 0x2f, 0xd3, 0xc2, 0xf5, 0xb1, 0xbd, 0x75, 0x8f,
+	0x82, 0x20, 0x53, 0x42, 0xab, 0x66, 0xdd, 0xaf, 0xdc, 0x17, 0x77, 0xaf, 0x1c, 0xc9, 0xc6, 0xef,
+	0xd6, 0x03, 0x23, 0x40, 0x7e, 0xdc, 0x6e, 0x3d, 0x34, 0x06, 0xc9, 0x06, 0xeb, 0xd6, 0x23, 0xb3,
+	0x33, 0x3f, 0x2e, 0xb7, 0x1e, 0x1b, 0x6a, 0xbe, 0xdc, 0xb1, 0xec, 0xb5, 0x1f, 0xca, 0x62, 0x0e,
+	0x10, 0x3b, 0x62, 0xe1, 0xf8, 0xa2, 0x93, 0x9b, 0x85, 0x5b, 0x4f, 0xf0, 0x46, 0x2b, 0x44, 0x1b,
+	0x83, 0xd4, 0xd6, 0x9f, 0x92, 0xc1, 0x69, 0x31, 0x9d, 0x8d, 0x5a, 0x6b, 0x14, 0xba, 0x8a, 0x87,
+	0xbe, 0xfc, 0x3d, 0xc4, 0xd2, 0x1d, 0xde, 0x74, 0xb5, 0x83, 0xb0, 0xde, 0x37, 0x4b, 0xd7, 0x2a,
+	0x6e, 0xeb, 0x03, 0xc3, 0x3a, 0x9d, 0x75, 0x5a, 0xeb, 0x23, 0x24, 0x7e, 0xde, 0x0f, 0x51, 0xeb,
+	0xcd, 0x10, 0x89, 0x07, 0x99, 0xd6, 0x53, 0xd4, 0x86, 0x82, 0x2f, 0xe7, 0xc9, 0xa3, 0xf5, 0x11,
+	0x90, 0x7e, 0x56, 0x0b, 0x43, 0x23, 0x28, 0x6b, 0x83, 0x00, 0x43, 0x09, 0x7c, 0xbd, 0x68, 0xb1,
+	0x3e, 0x26, 0x33, 0xf1, 0x6a, 0xde, 0x4c, 0x9f, 0x18, 0x8d, 0xcc, 0x34, 0xc8, 0xfa, 0x94, 0x9c,
+	0x8a, 0xd9, 0x66, 0xc3, 0x16, 0xeb, 0x33, 0xa0, 0x60, 0x85, 0x45, 0x19, 0x69, 0x49, 0xad, 0xcf,
+	0xcd, 0x71, 0x33, 0x29, 0xb3, 0xfe, 0x8c, 0x9c, 0x96, 0x28, 0x34, 0x11, 0xb1, 0xbe, 0x30, 0x97,
+	0xe6, 0x47, 0x2b, 0xd6, 0x33, 0xa3, 0x6b, 0x9a, 0xfa, 0xac, 0x2f, 0x53, 0x46, 0xba, 0x50, 0xb3,
+	0xbe, 0x1a, 0xbd, 0xd2, 0xd4, 0xef, 0xd6, 0xd7, 0xe6, 0x1d, 0xb3, 0xa2, 0xd9, 0xfa, 0x73, 0xb3,
+	0x77, 0xb4, 0x3c, 0xb7, 0xb6, 0xd6, 0x76, 0xc4, 0xe2, 0xb5, 0x1f, 0x34, 0xc9, 0x83, 0xc7, 0xff,
+	0xa4, 0x09, 0xbc, 0x86, 0x43, 0x5c, 0x5b, 0x6b, 0xec, 0xbd, 0xd8, 0xde, 0x6b, 0x58, 0x85, 0xb5,
+	0xe7, 0x00, 0xf3, 0x91, 0x5f, 0x6a, 0x48, 0x59, 0xf3, 0x5b, 0x0d, 0x0e, 0xe3, 0x81, 0xf0, 0x75,
+	0xb8, 0xa7, 0xbe, 0x0b, 0x0c, 0xfe, 0x4d, 0xa7, 0xbd, 0xff, 0xe2, 0xc5, 0x4e, 0x43, 0xd1, 0x8a,
+	0x6b, 0xf7, 0xc5, 0x5c, 0x7e, 0xac, 0x48, 0x6f, 0x9c, 0x0e, 0x16, 0xad, 0x37, 0xd6, 0x8e, 0xc4,
+	0xca, 0x0d, 0x63, 0x2e, 0x12, 0xed, 0x86, 0x41, 0x17, 0xae, 0x7e, 0x20, 0x56, 0xaf, 0x2e, 0x1e,
+	0x34, 0x76, 0xf7, 0x8f, 0x1a, 0xbc, 0x5e, 0x58, 0xfb, 0xdf, 0x82, 0xb8, 0xd3, 0xf8, 0x66, 0x20,
+	0xa3, 0x61, 0xfa, 0x0e, 0xba, 0xe3, 0x78, 0x5b, 0x3c, 0x96, 0xe3, 0x16, 0x1c, 0xfe, 0x7f, 0xbb,
+	0x97, 0xa0, 0x89, 0xc7, 0x05, 0xef, 0x08, 0x7b, 0xfc, 0x36, 0xfa, 0xde, 0x0b, 0x93, 0x2d, 0x7e,
+	0xc7, 0x02, 0x0a, 0xec, 0x07, 0xe3, 0xf7, 0x61, 0x4f, 0x8d, 0x68, 0x48, 0x77, 0xef, 0x8a, 0xb7,
+	0x6e, 0xe6, 0x45, 0xa5, 0x13, 0x70, 0x41, 0x7a, 0x56, 0x69, 0xed, 0x4c, 0xcc, 0x6e, 0x6e, 0xd7,
+	0x76, 0xf6, 0x5f, 0x38, 0xed, 0x6f, 0x9b, 0x0d, 0xb2, 0xaf, 0xfe, 0x84, 0xae, 0x90, 0xe9, 0x56,
+	0xba, 0xbc, 0xdb, 0xd8, 0x3b, 0xc4, 0xe5, 0x19, 0xa1, 0xdd, 0xf8, 0x9b, 0xb6, 0x45, 0xe3, 0xa3,
+	0x39, 0x4d, 0x68, 0xec, 0xb5, 0x0f, 0x28, 0xa9, 0x02, 0xa2, 0x34, 0xa5, 0xd6, 0x7a, 0xa5, 0x13,
+	0xaa, 0x55, 0x5e, 0x7b, 0x4f, 0xdc, 0xcd, 0x83, 0x05, 0x70, 0xef, 0xf5, 0x56, 0xa4, 0x86, 0x10,
+	0x43, 0xdc, 0xcb, 0x71, 0xe8, 0x0d, 0xba, 0xdd, 0xa1, 0xf5, 0xcb, 0xf2, 0x9a, 0x2b, 0x96, 0x39,
+	0xe9, 0xa8, 0x66, 0xcf, 0x0d, 0x32, 0x8c, 0xc1, 0x1b, 0x1d, 0xfb, 0x63, 0xab, 0x35, 0xcb, 0x22,
+	0x08, 0x1e, 0x5d, 0x54, 0xf5, 0x94, 0x45, 0xbf, 0x02, 0xcc, 0x61, 0x25, 0xdb, 0x5b, 0x59, 0xdb,
+	0x15, 0x6f, 0x8d, 0xbf, 0x62, 0x54, 0xb2, 0x45, 0x3e, 0x98, 0x96, 0x42, 0xd6, 0xcf, 0xa8, 0x3f,
+	0x5f, 0x30, 0x24, 0x15, 0x3a, 0xd6, 0xcf, 0x27, 0x9e, 0x97, 0xfe, 0xa9, 0xf0, 0xc6, 0x1f, 0x02,
+	0x00, 0x00, 0xff, 0xff, 0xc8, 0x51, 0x29, 0xa9, 0x1e, 0x21, 0x00, 0x00,
 }
