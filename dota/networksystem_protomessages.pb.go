@@ -5,10 +5,12 @@
 package dota
 
 import proto "github.com/golang/protobuf/proto"
+import fmt "fmt"
 import math "math"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
+var _ = fmt.Errorf
 var _ = math.Inf
 
 type NetMessageSplitscreenUserChanged struct {
@@ -19,6 +21,9 @@ type NetMessageSplitscreenUserChanged struct {
 func (m *NetMessageSplitscreenUserChanged) Reset()         { *m = NetMessageSplitscreenUserChanged{} }
 func (m *NetMessageSplitscreenUserChanged) String() string { return proto.CompactTextString(m) }
 func (*NetMessageSplitscreenUserChanged) ProtoMessage()    {}
+func (*NetMessageSplitscreenUserChanged) Descriptor() ([]byte, []int) {
+	return fileDescriptor22, []int{0}
+}
 
 func (m *NetMessageSplitscreenUserChanged) GetSlot() uint32 {
 	if m != nil && m.Slot != nil {
@@ -32,9 +37,10 @@ type NetMessageConnectionClosed struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *NetMessageConnectionClosed) Reset()         { *m = NetMessageConnectionClosed{} }
-func (m *NetMessageConnectionClosed) String() string { return proto.CompactTextString(m) }
-func (*NetMessageConnectionClosed) ProtoMessage()    {}
+func (m *NetMessageConnectionClosed) Reset()                    { *m = NetMessageConnectionClosed{} }
+func (m *NetMessageConnectionClosed) String() string            { return proto.CompactTextString(m) }
+func (*NetMessageConnectionClosed) ProtoMessage()               {}
+func (*NetMessageConnectionClosed) Descriptor() ([]byte, []int) { return fileDescriptor22, []int{1} }
 
 func (m *NetMessageConnectionClosed) GetReason() uint32 {
 	if m != nil && m.Reason != nil {
@@ -48,9 +54,10 @@ type NetMessageConnectionCrashed struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *NetMessageConnectionCrashed) Reset()         { *m = NetMessageConnectionCrashed{} }
-func (m *NetMessageConnectionCrashed) String() string { return proto.CompactTextString(m) }
-func (*NetMessageConnectionCrashed) ProtoMessage()    {}
+func (m *NetMessageConnectionCrashed) Reset()                    { *m = NetMessageConnectionCrashed{} }
+func (m *NetMessageConnectionCrashed) String() string            { return proto.CompactTextString(m) }
+func (*NetMessageConnectionCrashed) ProtoMessage()               {}
+func (*NetMessageConnectionCrashed) Descriptor() ([]byte, []int) { return fileDescriptor22, []int{2} }
 
 func (m *NetMessageConnectionCrashed) GetReason() uint32 {
 	if m != nil && m.Reason != nil {
@@ -65,9 +72,10 @@ type NetMessagePacketStart struct {
 	XXX_unrecognized     []byte  `json:"-"`
 }
 
-func (m *NetMessagePacketStart) Reset()         { *m = NetMessagePacketStart{} }
-func (m *NetMessagePacketStart) String() string { return proto.CompactTextString(m) }
-func (*NetMessagePacketStart) ProtoMessage()    {}
+func (m *NetMessagePacketStart) Reset()                    { *m = NetMessagePacketStart{} }
+func (m *NetMessagePacketStart) String() string            { return proto.CompactTextString(m) }
+func (*NetMessagePacketStart) ProtoMessage()               {}
+func (*NetMessagePacketStart) Descriptor() ([]byte, []int) { return fileDescriptor22, []int{3} }
 
 func (m *NetMessagePacketStart) GetIncomingSequence() uint32 {
 	if m != nil && m.IncomingSequence != nil {
@@ -87,9 +95,33 @@ type NetMessagePacketEnd struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *NetMessagePacketEnd) Reset()         { *m = NetMessagePacketEnd{} }
-func (m *NetMessagePacketEnd) String() string { return proto.CompactTextString(m) }
-func (*NetMessagePacketEnd) ProtoMessage()    {}
+func (m *NetMessagePacketEnd) Reset()                    { *m = NetMessagePacketEnd{} }
+func (m *NetMessagePacketEnd) String() string            { return proto.CompactTextString(m) }
+func (*NetMessagePacketEnd) ProtoMessage()               {}
+func (*NetMessagePacketEnd) Descriptor() ([]byte, []int) { return fileDescriptor22, []int{4} }
 
 func init() {
+	proto.RegisterType((*NetMessageSplitscreenUserChanged)(nil), "dota.NetMessageSplitscreenUserChanged")
+	proto.RegisterType((*NetMessageConnectionClosed)(nil), "dota.NetMessageConnectionClosed")
+	proto.RegisterType((*NetMessageConnectionCrashed)(nil), "dota.NetMessageConnectionCrashed")
+	proto.RegisterType((*NetMessagePacketStart)(nil), "dota.NetMessagePacketStart")
+	proto.RegisterType((*NetMessagePacketEnd)(nil), "dota.NetMessagePacketEnd")
+}
+
+var fileDescriptor22 = []byte{
+	// 217 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x6c, 0xce, 0x31, 0x4b, 0x03, 0x41,
+	0x10, 0x05, 0x60, 0x4f, 0x83, 0xc5, 0xa0, 0x82, 0x27, 0x07, 0x51, 0x11, 0x62, 0x2a, 0x0b, 0x15,
+	0x7f, 0x83, 0x87, 0xa5, 0xa2, 0x04, 0xeb, 0xb0, 0xec, 0x3e, 0x36, 0x4b, 0xf6, 0x66, 0xe2, 0xce,
+	0x84, 0x60, 0xe7, 0x4f, 0xf7, 0x4c, 0x84, 0x40, 0x48, 0x39, 0xbc, 0xef, 0x3d, 0x86, 0x6e, 0x19,
+	0xb6, 0x92, 0x32, 0xd7, 0x6f, 0x35, 0x74, 0xd3, 0x45, 0x11, 0x93, 0x0e, 0xaa, 0x2e, 0x42, 0x1f,
+	0xd7, 0x57, 0x3d, 0x08, 0x62, 0x6e, 0xfc, 0x44, 0xa3, 0x37, 0xd8, 0xeb, 0x26, 0x9a, 0x2c, 0x72,
+	0x32, 0xf5, 0x05, 0xe0, 0x4f, 0x45, 0x69, 0x67, 0x8e, 0x23, 0x42, 0x7d, 0x42, 0x03, 0xcd, 0x62,
+	0xc3, 0x6a, 0x54, 0xdd, 0x9d, 0x8e, 0xef, 0xe9, 0x6a, 0xdb, 0x68, 0x85, 0x19, 0xde, 0x92, 0x70,
+	0x9b, 0x45, 0x7b, 0x7b, 0x46, 0xc7, 0x05, 0x4e, 0x85, 0xff, 0xf5, 0x03, 0x5d, 0xef, 0xd5, 0xc5,
+	0xe9, 0x6c, 0x0f, 0xff, 0xa0, 0x66, 0xcb, 0xdf, 0x9d, 0x9f, 0xc3, 0x26, 0xe6, 0x8a, 0xd5, 0x97,
+	0x74, 0x9e, 0xd8, 0x4b, 0x97, 0x38, 0x4e, 0x15, 0x5f, 0x4b, 0xb0, 0xc7, 0xa6, 0x53, 0xdf, 0x50,
+	0x23, 0x4b, 0x8b, 0xf2, 0x17, 0xf5, 0x0d, 0x96, 0x55, 0x46, 0xe8, 0xff, 0x1e, 0x1e, 0xae, 0x27,
+	0x1b, 0xba, 0xd8, 0x9d, 0x7c, 0xe1, 0xf0, 0x7c, 0xf4, 0x53, 0x1d, 0xfc, 0x06, 0x00, 0x00, 0xff,
+	0xff, 0x71, 0x7e, 0x7a, 0x0f, 0x27, 0x01, 0x00, 0x00,
 }

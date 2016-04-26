@@ -5,10 +5,12 @@
 package dota
 
 import proto "github.com/golang/protobuf/proto"
+import fmt "fmt"
 import math "math"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
+var _ = fmt.Errorf
 var _ = math.Inf
 
 type EDotaClientMessages int32
@@ -193,6 +195,7 @@ func (x *EDotaClientMessages) UnmarshalJSON(data []byte) error {
 	*x = EDotaClientMessages(value)
 	return nil
 }
+func (EDotaClientMessages) EnumDescriptor() ([]byte, []int) { return fileDescriptor6, []int{0} }
 
 type CDOTAClientMsg_UnitsAutoAttackMode_EMode int32
 
@@ -232,6 +235,9 @@ func (x *CDOTAClientMsg_UnitsAutoAttackMode_EMode) UnmarshalJSON(data []byte) er
 	*x = CDOTAClientMsg_UnitsAutoAttackMode_EMode(value)
 	return nil
 }
+func (CDOTAClientMsg_UnitsAutoAttackMode_EMode) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor6, []int{9, 0}
+}
 
 type CDOTAClientMsg_UnitsAutoAttackMode_EUnitType int32
 
@@ -264,6 +270,9 @@ func (x *CDOTAClientMsg_UnitsAutoAttackMode_EUnitType) UnmarshalJSON(data []byte
 	}
 	*x = CDOTAClientMsg_UnitsAutoAttackMode_EUnitType(value)
 	return nil
+}
+func (CDOTAClientMsg_UnitsAutoAttackMode_EUnitType) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor6, []int{9, 1}
 }
 
 type CDOTAClientMsg_GenericBooleanConvar_EType int32
@@ -298,15 +307,19 @@ func (x *CDOTAClientMsg_GenericBooleanConvar_EType) UnmarshalJSON(data []byte) e
 	*x = CDOTAClientMsg_GenericBooleanConvar_EType(value)
 	return nil
 }
+func (CDOTAClientMsg_GenericBooleanConvar_EType) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor6, []int{12, 0}
+}
 
 type CDOTAClientMsg_MapPing struct {
 	LocationPing     *CDOTAMsg_LocationPing `protobuf:"bytes,1,opt,name=location_ping" json:"location_ping,omitempty"`
 	XXX_unrecognized []byte                 `json:"-"`
 }
 
-func (m *CDOTAClientMsg_MapPing) Reset()         { *m = CDOTAClientMsg_MapPing{} }
-func (m *CDOTAClientMsg_MapPing) String() string { return proto.CompactTextString(m) }
-func (*CDOTAClientMsg_MapPing) ProtoMessage()    {}
+func (m *CDOTAClientMsg_MapPing) Reset()                    { *m = CDOTAClientMsg_MapPing{} }
+func (m *CDOTAClientMsg_MapPing) String() string            { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_MapPing) ProtoMessage()               {}
+func (*CDOTAClientMsg_MapPing) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{0} }
 
 func (m *CDOTAClientMsg_MapPing) GetLocationPing() *CDOTAMsg_LocationPing {
 	if m != nil {
@@ -320,9 +333,10 @@ type CDOTAClientMsg_ItemAlert struct {
 	XXX_unrecognized []byte              `json:"-"`
 }
 
-func (m *CDOTAClientMsg_ItemAlert) Reset()         { *m = CDOTAClientMsg_ItemAlert{} }
-func (m *CDOTAClientMsg_ItemAlert) String() string { return proto.CompactTextString(m) }
-func (*CDOTAClientMsg_ItemAlert) ProtoMessage()    {}
+func (m *CDOTAClientMsg_ItemAlert) Reset()                    { *m = CDOTAClientMsg_ItemAlert{} }
+func (m *CDOTAClientMsg_ItemAlert) String() string            { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_ItemAlert) ProtoMessage()               {}
+func (*CDOTAClientMsg_ItemAlert) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{1} }
 
 func (m *CDOTAClientMsg_ItemAlert) GetItemAlert() *CDOTAMsg_ItemAlert {
 	if m != nil {
@@ -336,9 +350,10 @@ type CDOTAClientMsg_EnemyItemAlert struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CDOTAClientMsg_EnemyItemAlert) Reset()         { *m = CDOTAClientMsg_EnemyItemAlert{} }
-func (m *CDOTAClientMsg_EnemyItemAlert) String() string { return proto.CompactTextString(m) }
-func (*CDOTAClientMsg_EnemyItemAlert) ProtoMessage()    {}
+func (m *CDOTAClientMsg_EnemyItemAlert) Reset()                    { *m = CDOTAClientMsg_EnemyItemAlert{} }
+func (m *CDOTAClientMsg_EnemyItemAlert) String() string            { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_EnemyItemAlert) ProtoMessage()               {}
+func (*CDOTAClientMsg_EnemyItemAlert) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{2} }
 
 func (m *CDOTAClientMsg_EnemyItemAlert) GetItemEntindex() uint32 {
 	if m != nil && m.ItemEntindex != nil {
@@ -353,9 +368,10 @@ type CDOTAClientMsg_ModifierAlert struct {
 	XXX_unrecognized  []byte  `json:"-"`
 }
 
-func (m *CDOTAClientMsg_ModifierAlert) Reset()         { *m = CDOTAClientMsg_ModifierAlert{} }
-func (m *CDOTAClientMsg_ModifierAlert) String() string { return proto.CompactTextString(m) }
-func (*CDOTAClientMsg_ModifierAlert) ProtoMessage()    {}
+func (m *CDOTAClientMsg_ModifierAlert) Reset()                    { *m = CDOTAClientMsg_ModifierAlert{} }
+func (m *CDOTAClientMsg_ModifierAlert) String() string            { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_ModifierAlert) ProtoMessage()               {}
+func (*CDOTAClientMsg_ModifierAlert) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{3} }
 
 func (m *CDOTAClientMsg_ModifierAlert) GetBuffInternalIndex() int32 {
 	if m != nil && m.BuffInternalIndex != nil {
@@ -377,9 +393,10 @@ type CDOTAClientMsg_ClickedBuff struct {
 	XXX_unrecognized  []byte  `json:"-"`
 }
 
-func (m *CDOTAClientMsg_ClickedBuff) Reset()         { *m = CDOTAClientMsg_ClickedBuff{} }
-func (m *CDOTAClientMsg_ClickedBuff) String() string { return proto.CompactTextString(m) }
-func (*CDOTAClientMsg_ClickedBuff) ProtoMessage()    {}
+func (m *CDOTAClientMsg_ClickedBuff) Reset()                    { *m = CDOTAClientMsg_ClickedBuff{} }
+func (m *CDOTAClientMsg_ClickedBuff) String() string            { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_ClickedBuff) ProtoMessage()               {}
+func (*CDOTAClientMsg_ClickedBuff) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{4} }
 
 func (m *CDOTAClientMsg_ClickedBuff) GetBuffInternalIndex() int32 {
 	if m != nil && m.BuffInternalIndex != nil {
@@ -400,9 +417,10 @@ type CDOTAClientMsg_HPManaAlert struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CDOTAClientMsg_HPManaAlert) Reset()         { *m = CDOTAClientMsg_HPManaAlert{} }
-func (m *CDOTAClientMsg_HPManaAlert) String() string { return proto.CompactTextString(m) }
-func (*CDOTAClientMsg_HPManaAlert) ProtoMessage()    {}
+func (m *CDOTAClientMsg_HPManaAlert) Reset()                    { *m = CDOTAClientMsg_HPManaAlert{} }
+func (m *CDOTAClientMsg_HPManaAlert) String() string            { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_HPManaAlert) ProtoMessage()               {}
+func (*CDOTAClientMsg_HPManaAlert) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{5} }
 
 func (m *CDOTAClientMsg_HPManaAlert) GetTargetEntindex() uint32 {
 	if m != nil && m.TargetEntindex != nil {
@@ -416,9 +434,10 @@ type CDOTAClientMsg_GlyphAlert struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CDOTAClientMsg_GlyphAlert) Reset()         { *m = CDOTAClientMsg_GlyphAlert{} }
-func (m *CDOTAClientMsg_GlyphAlert) String() string { return proto.CompactTextString(m) }
-func (*CDOTAClientMsg_GlyphAlert) ProtoMessage()    {}
+func (m *CDOTAClientMsg_GlyphAlert) Reset()                    { *m = CDOTAClientMsg_GlyphAlert{} }
+func (m *CDOTAClientMsg_GlyphAlert) String() string            { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_GlyphAlert) ProtoMessage()               {}
+func (*CDOTAClientMsg_GlyphAlert) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{6} }
 
 func (m *CDOTAClientMsg_GlyphAlert) GetNegative() bool {
 	if m != nil && m.Negative != nil {
@@ -432,9 +451,10 @@ type CDOTAClientMsg_MapLine struct {
 	XXX_unrecognized []byte            `json:"-"`
 }
 
-func (m *CDOTAClientMsg_MapLine) Reset()         { *m = CDOTAClientMsg_MapLine{} }
-func (m *CDOTAClientMsg_MapLine) String() string { return proto.CompactTextString(m) }
-func (*CDOTAClientMsg_MapLine) ProtoMessage()    {}
+func (m *CDOTAClientMsg_MapLine) Reset()                    { *m = CDOTAClientMsg_MapLine{} }
+func (m *CDOTAClientMsg_MapLine) String() string            { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_MapLine) ProtoMessage()               {}
+func (*CDOTAClientMsg_MapLine) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{7} }
 
 func (m *CDOTAClientMsg_MapLine) GetMapline() *CDOTAMsg_MapLine {
 	if m != nil {
@@ -448,9 +468,10 @@ type CDOTAClientMsg_AspectRatio struct {
 	XXX_unrecognized []byte   `json:"-"`
 }
 
-func (m *CDOTAClientMsg_AspectRatio) Reset()         { *m = CDOTAClientMsg_AspectRatio{} }
-func (m *CDOTAClientMsg_AspectRatio) String() string { return proto.CompactTextString(m) }
-func (*CDOTAClientMsg_AspectRatio) ProtoMessage()    {}
+func (m *CDOTAClientMsg_AspectRatio) Reset()                    { *m = CDOTAClientMsg_AspectRatio{} }
+func (m *CDOTAClientMsg_AspectRatio) String() string            { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_AspectRatio) ProtoMessage()               {}
+func (*CDOTAClientMsg_AspectRatio) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{8} }
 
 func (m *CDOTAClientMsg_AspectRatio) GetRatio() float32 {
 	if m != nil && m.Ratio != nil {
@@ -468,6 +489,9 @@ type CDOTAClientMsg_UnitsAutoAttackMode struct {
 func (m *CDOTAClientMsg_UnitsAutoAttackMode) Reset()         { *m = CDOTAClientMsg_UnitsAutoAttackMode{} }
 func (m *CDOTAClientMsg_UnitsAutoAttackMode) String() string { return proto.CompactTextString(m) }
 func (*CDOTAClientMsg_UnitsAutoAttackMode) ProtoMessage()    {}
+func (*CDOTAClientMsg_UnitsAutoAttackMode) Descriptor() ([]byte, []int) {
+	return fileDescriptor6, []int{9}
+}
 
 const Default_CDOTAClientMsg_UnitsAutoAttackMode_Mode CDOTAClientMsg_UnitsAutoAttackMode_EMode = CDOTAClientMsg_UnitsAutoAttackMode_INVALID
 const Default_CDOTAClientMsg_UnitsAutoAttackMode_UnitType CDOTAClientMsg_UnitsAutoAttackMode_EUnitType = CDOTAClientMsg_UnitsAutoAttackMode_NORMAL
@@ -496,6 +520,9 @@ func (m *CDOTAClientMsg_UnitsAutoAttackAfterSpell) Reset() {
 }
 func (m *CDOTAClientMsg_UnitsAutoAttackAfterSpell) String() string { return proto.CompactTextString(m) }
 func (*CDOTAClientMsg_UnitsAutoAttackAfterSpell) ProtoMessage()    {}
+func (*CDOTAClientMsg_UnitsAutoAttackAfterSpell) Descriptor() ([]byte, []int) {
+	return fileDescriptor6, []int{10}
+}
 
 func (m *CDOTAClientMsg_UnitsAutoAttackAfterSpell) GetEnabled() bool {
 	if m != nil && m.Enabled != nil {
@@ -512,6 +539,9 @@ type CDOTAClientMsg_TeleportRequiresHalt struct {
 func (m *CDOTAClientMsg_TeleportRequiresHalt) Reset()         { *m = CDOTAClientMsg_TeleportRequiresHalt{} }
 func (m *CDOTAClientMsg_TeleportRequiresHalt) String() string { return proto.CompactTextString(m) }
 func (*CDOTAClientMsg_TeleportRequiresHalt) ProtoMessage()    {}
+func (*CDOTAClientMsg_TeleportRequiresHalt) Descriptor() ([]byte, []int) {
+	return fileDescriptor6, []int{11}
+}
 
 func (m *CDOTAClientMsg_TeleportRequiresHalt) GetEnabled() bool {
 	if m != nil && m.Enabled != nil {
@@ -529,6 +559,9 @@ type CDOTAClientMsg_GenericBooleanConvar struct {
 func (m *CDOTAClientMsg_GenericBooleanConvar) Reset()         { *m = CDOTAClientMsg_GenericBooleanConvar{} }
 func (m *CDOTAClientMsg_GenericBooleanConvar) String() string { return proto.CompactTextString(m) }
 func (*CDOTAClientMsg_GenericBooleanConvar) ProtoMessage()    {}
+func (*CDOTAClientMsg_GenericBooleanConvar) Descriptor() ([]byte, []int) {
+	return fileDescriptor6, []int{12}
+}
 
 const Default_CDOTAClientMsg_GenericBooleanConvar_Type CDOTAClientMsg_GenericBooleanConvar_EType = CDOTAClientMsg_GenericBooleanConvar_FORCE_DEFAULT_RESPAWN_STINGER
 
@@ -551,9 +584,10 @@ type CDOTAClientMsg_SearchString struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CDOTAClientMsg_SearchString) Reset()         { *m = CDOTAClientMsg_SearchString{} }
-func (m *CDOTAClientMsg_SearchString) String() string { return proto.CompactTextString(m) }
-func (*CDOTAClientMsg_SearchString) ProtoMessage()    {}
+func (m *CDOTAClientMsg_SearchString) Reset()                    { *m = CDOTAClientMsg_SearchString{} }
+func (m *CDOTAClientMsg_SearchString) String() string            { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_SearchString) ProtoMessage()               {}
+func (*CDOTAClientMsg_SearchString) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{13} }
 
 func (m *CDOTAClientMsg_SearchString) GetSearch() string {
 	if m != nil && m.Search != nil {
@@ -566,18 +600,20 @@ type CDOTAClientMsg_Pause struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CDOTAClientMsg_Pause) Reset()         { *m = CDOTAClientMsg_Pause{} }
-func (m *CDOTAClientMsg_Pause) String() string { return proto.CompactTextString(m) }
-func (*CDOTAClientMsg_Pause) ProtoMessage()    {}
+func (m *CDOTAClientMsg_Pause) Reset()                    { *m = CDOTAClientMsg_Pause{} }
+func (m *CDOTAClientMsg_Pause) String() string            { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_Pause) ProtoMessage()               {}
+func (*CDOTAClientMsg_Pause) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{14} }
 
 type CDOTAClientMsg_ShopViewMode struct {
 	Mode             *uint32 `protobuf:"varint,1,opt,name=mode" json:"mode,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CDOTAClientMsg_ShopViewMode) Reset()         { *m = CDOTAClientMsg_ShopViewMode{} }
-func (m *CDOTAClientMsg_ShopViewMode) String() string { return proto.CompactTextString(m) }
-func (*CDOTAClientMsg_ShopViewMode) ProtoMessage()    {}
+func (m *CDOTAClientMsg_ShopViewMode) Reset()                    { *m = CDOTAClientMsg_ShopViewMode{} }
+func (m *CDOTAClientMsg_ShopViewMode) String() string            { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_ShopViewMode) ProtoMessage()               {}
+func (*CDOTAClientMsg_ShopViewMode) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{15} }
 
 func (m *CDOTAClientMsg_ShopViewMode) GetMode() uint32 {
 	if m != nil && m.Mode != nil {
@@ -596,6 +632,9 @@ type CDOTAClientMsg_SetUnitShareFlag struct {
 func (m *CDOTAClientMsg_SetUnitShareFlag) Reset()         { *m = CDOTAClientMsg_SetUnitShareFlag{} }
 func (m *CDOTAClientMsg_SetUnitShareFlag) String() string { return proto.CompactTextString(m) }
 func (*CDOTAClientMsg_SetUnitShareFlag) ProtoMessage()    {}
+func (*CDOTAClientMsg_SetUnitShareFlag) Descriptor() ([]byte, []int) {
+	return fileDescriptor6, []int{16}
+}
 
 func (m *CDOTAClientMsg_SetUnitShareFlag) GetPlayerID() uint32 {
 	if m != nil && m.PlayerID != nil {
@@ -623,9 +662,10 @@ type CDOTAClientMsg_SwapRequest struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CDOTAClientMsg_SwapRequest) Reset()         { *m = CDOTAClientMsg_SwapRequest{} }
-func (m *CDOTAClientMsg_SwapRequest) String() string { return proto.CompactTextString(m) }
-func (*CDOTAClientMsg_SwapRequest) ProtoMessage()    {}
+func (m *CDOTAClientMsg_SwapRequest) Reset()                    { *m = CDOTAClientMsg_SwapRequest{} }
+func (m *CDOTAClientMsg_SwapRequest) String() string            { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_SwapRequest) ProtoMessage()               {}
+func (*CDOTAClientMsg_SwapRequest) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{17} }
 
 func (m *CDOTAClientMsg_SwapRequest) GetPlayerId() uint32 {
 	if m != nil && m.PlayerId != nil {
@@ -639,9 +679,10 @@ type CDOTAClientMsg_SwapAccept struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CDOTAClientMsg_SwapAccept) Reset()         { *m = CDOTAClientMsg_SwapAccept{} }
-func (m *CDOTAClientMsg_SwapAccept) String() string { return proto.CompactTextString(m) }
-func (*CDOTAClientMsg_SwapAccept) ProtoMessage()    {}
+func (m *CDOTAClientMsg_SwapAccept) Reset()                    { *m = CDOTAClientMsg_SwapAccept{} }
+func (m *CDOTAClientMsg_SwapAccept) String() string            { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_SwapAccept) ProtoMessage()               {}
+func (*CDOTAClientMsg_SwapAccept) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{18} }
 
 func (m *CDOTAClientMsg_SwapAccept) GetPlayerId() uint32 {
 	if m != nil && m.PlayerId != nil {
@@ -655,9 +696,10 @@ type CDOTAClientMsg_WorldLine struct {
 	XXX_unrecognized []byte              `json:"-"`
 }
 
-func (m *CDOTAClientMsg_WorldLine) Reset()         { *m = CDOTAClientMsg_WorldLine{} }
-func (m *CDOTAClientMsg_WorldLine) String() string { return proto.CompactTextString(m) }
-func (*CDOTAClientMsg_WorldLine) ProtoMessage()    {}
+func (m *CDOTAClientMsg_WorldLine) Reset()                    { *m = CDOTAClientMsg_WorldLine{} }
+func (m *CDOTAClientMsg_WorldLine) String() string            { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_WorldLine) ProtoMessage()               {}
+func (*CDOTAClientMsg_WorldLine) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{19} }
 
 func (m *CDOTAClientMsg_WorldLine) GetWorldline() *CDOTAMsg_WorldLine {
 	if m != nil {
@@ -673,6 +715,9 @@ type CDOTAClientMsg_RequestGraphUpdate struct {
 func (m *CDOTAClientMsg_RequestGraphUpdate) Reset()         { *m = CDOTAClientMsg_RequestGraphUpdate{} }
 func (m *CDOTAClientMsg_RequestGraphUpdate) String() string { return proto.CompactTextString(m) }
 func (*CDOTAClientMsg_RequestGraphUpdate) ProtoMessage()    {}
+func (*CDOTAClientMsg_RequestGraphUpdate) Descriptor() ([]byte, []int) {
+	return fileDescriptor6, []int{20}
+}
 
 type CDOTAClientMsg_ChatWheel struct {
 	ChatMessage      *EDOTAChatWheelMessage `protobuf:"varint,1,opt,name=chat_message,enum=dota.EDOTAChatWheelMessage,def=0" json:"chat_message,omitempty"`
@@ -680,9 +725,10 @@ type CDOTAClientMsg_ChatWheel struct {
 	XXX_unrecognized []byte                 `json:"-"`
 }
 
-func (m *CDOTAClientMsg_ChatWheel) Reset()         { *m = CDOTAClientMsg_ChatWheel{} }
-func (m *CDOTAClientMsg_ChatWheel) String() string { return proto.CompactTextString(m) }
-func (*CDOTAClientMsg_ChatWheel) ProtoMessage()    {}
+func (m *CDOTAClientMsg_ChatWheel) Reset()                    { *m = CDOTAClientMsg_ChatWheel{} }
+func (m *CDOTAClientMsg_ChatWheel) String() string            { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_ChatWheel) ProtoMessage()               {}
+func (*CDOTAClientMsg_ChatWheel) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{21} }
 
 const Default_CDOTAClientMsg_ChatWheel_ChatMessage EDOTAChatWheelMessage = EDOTAChatWheelMessage_k_EDOTA_CW_Ok
 
@@ -705,9 +751,10 @@ type CDOTAClientMsg_SendStatPopup struct {
 	XXX_unrecognized []byte                  `json:"-"`
 }
 
-func (m *CDOTAClientMsg_SendStatPopup) Reset()         { *m = CDOTAClientMsg_SendStatPopup{} }
-func (m *CDOTAClientMsg_SendStatPopup) String() string { return proto.CompactTextString(m) }
-func (*CDOTAClientMsg_SendStatPopup) ProtoMessage()    {}
+func (m *CDOTAClientMsg_SendStatPopup) Reset()                    { *m = CDOTAClientMsg_SendStatPopup{} }
+func (m *CDOTAClientMsg_SendStatPopup) String() string            { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_SendStatPopup) ProtoMessage()               {}
+func (*CDOTAClientMsg_SendStatPopup) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{22} }
 
 func (m *CDOTAClientMsg_SendStatPopup) GetStatpopup() *CDOTAMsg_SendStatPopup {
 	if m != nil {
@@ -725,6 +772,9 @@ type CDOTAClientMsg_BeginLastHitChallenge struct {
 func (m *CDOTAClientMsg_BeginLastHitChallenge) Reset()         { *m = CDOTAClientMsg_BeginLastHitChallenge{} }
 func (m *CDOTAClientMsg_BeginLastHitChallenge) String() string { return proto.CompactTextString(m) }
 func (*CDOTAClientMsg_BeginLastHitChallenge) ProtoMessage()    {}
+func (*CDOTAClientMsg_BeginLastHitChallenge) Descriptor() ([]byte, []int) {
+	return fileDescriptor6, []int{23}
+}
 
 func (m *CDOTAClientMsg_BeginLastHitChallenge) GetChosenLane() uint32 {
 	if m != nil && m.ChosenLane != nil {
@@ -749,6 +799,9 @@ type CDOTAClientMsg_UpdateQuickBuyItem struct {
 func (m *CDOTAClientMsg_UpdateQuickBuyItem) Reset()         { *m = CDOTAClientMsg_UpdateQuickBuyItem{} }
 func (m *CDOTAClientMsg_UpdateQuickBuyItem) String() string { return proto.CompactTextString(m) }
 func (*CDOTAClientMsg_UpdateQuickBuyItem) ProtoMessage()    {}
+func (*CDOTAClientMsg_UpdateQuickBuyItem) Descriptor() ([]byte, []int) {
+	return fileDescriptor6, []int{24}
+}
 
 func (m *CDOTAClientMsg_UpdateQuickBuyItem) GetItemType() int32 {
 	if m != nil && m.ItemType != nil {
@@ -769,9 +822,10 @@ type CDOTAClientMsg_UpdateQuickBuy struct {
 	XXX_unrecognized []byte                               `json:"-"`
 }
 
-func (m *CDOTAClientMsg_UpdateQuickBuy) Reset()         { *m = CDOTAClientMsg_UpdateQuickBuy{} }
-func (m *CDOTAClientMsg_UpdateQuickBuy) String() string { return proto.CompactTextString(m) }
-func (*CDOTAClientMsg_UpdateQuickBuy) ProtoMessage()    {}
+func (m *CDOTAClientMsg_UpdateQuickBuy) Reset()                    { *m = CDOTAClientMsg_UpdateQuickBuy{} }
+func (m *CDOTAClientMsg_UpdateQuickBuy) String() string            { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_UpdateQuickBuy) ProtoMessage()               {}
+func (*CDOTAClientMsg_UpdateQuickBuy) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{25} }
 
 func (m *CDOTAClientMsg_UpdateQuickBuy) GetItems() []*CDOTAClientMsg_UpdateQuickBuyItem {
 	if m != nil {
@@ -788,6 +842,9 @@ type CDOTAClientMsg_UpdateCoachListen struct {
 func (m *CDOTAClientMsg_UpdateCoachListen) Reset()         { *m = CDOTAClientMsg_UpdateCoachListen{} }
 func (m *CDOTAClientMsg_UpdateCoachListen) String() string { return proto.CompactTextString(m) }
 func (*CDOTAClientMsg_UpdateCoachListen) ProtoMessage()    {}
+func (*CDOTAClientMsg_UpdateCoachListen) Descriptor() ([]byte, []int) {
+	return fileDescriptor6, []int{26}
+}
 
 func (m *CDOTAClientMsg_UpdateCoachListen) GetPlayerMask() uint32 {
 	if m != nil && m.PlayerMask != nil {
@@ -801,9 +858,10 @@ type CDOTAClientMsg_CoachHUDPing struct {
 	XXX_unrecognized []byte                 `json:"-"`
 }
 
-func (m *CDOTAClientMsg_CoachHUDPing) Reset()         { *m = CDOTAClientMsg_CoachHUDPing{} }
-func (m *CDOTAClientMsg_CoachHUDPing) String() string { return proto.CompactTextString(m) }
-func (*CDOTAClientMsg_CoachHUDPing) ProtoMessage()    {}
+func (m *CDOTAClientMsg_CoachHUDPing) Reset()                    { *m = CDOTAClientMsg_CoachHUDPing{} }
+func (m *CDOTAClientMsg_CoachHUDPing) String() string            { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_CoachHUDPing) ProtoMessage()               {}
+func (*CDOTAClientMsg_CoachHUDPing) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{27} }
 
 func (m *CDOTAClientMsg_CoachHUDPing) GetHudPing() *CDOTAMsg_CoachHUDPing {
 	if m != nil {
@@ -817,9 +875,10 @@ type CDOTAClientMsg_RecordVote struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CDOTAClientMsg_RecordVote) Reset()         { *m = CDOTAClientMsg_RecordVote{} }
-func (m *CDOTAClientMsg_RecordVote) String() string { return proto.CompactTextString(m) }
-func (*CDOTAClientMsg_RecordVote) ProtoMessage()    {}
+func (m *CDOTAClientMsg_RecordVote) Reset()                    { *m = CDOTAClientMsg_RecordVote{} }
+func (m *CDOTAClientMsg_RecordVote) String() string            { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_RecordVote) ProtoMessage()               {}
+func (*CDOTAClientMsg_RecordVote) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{28} }
 
 func (m *CDOTAClientMsg_RecordVote) GetChoiceIndex() int32 {
 	if m != nil && m.ChoiceIndex != nil {
@@ -837,6 +896,9 @@ type CDOTAClientMsg_WillPurchaseAlert struct {
 func (m *CDOTAClientMsg_WillPurchaseAlert) Reset()         { *m = CDOTAClientMsg_WillPurchaseAlert{} }
 func (m *CDOTAClientMsg_WillPurchaseAlert) String() string { return proto.CompactTextString(m) }
 func (*CDOTAClientMsg_WillPurchaseAlert) ProtoMessage()    {}
+func (*CDOTAClientMsg_WillPurchaseAlert) Descriptor() ([]byte, []int) {
+	return fileDescriptor6, []int{29}
+}
 
 func (m *CDOTAClientMsg_WillPurchaseAlert) GetItemid() int32 {
 	if m != nil && m.Itemid != nil {
@@ -859,6 +921,9 @@ type CDOTAClientMsg_BuyBackStateAlert struct {
 func (m *CDOTAClientMsg_BuyBackStateAlert) Reset()         { *m = CDOTAClientMsg_BuyBackStateAlert{} }
 func (m *CDOTAClientMsg_BuyBackStateAlert) String() string { return proto.CompactTextString(m) }
 func (*CDOTAClientMsg_BuyBackStateAlert) ProtoMessage()    {}
+func (*CDOTAClientMsg_BuyBackStateAlert) Descriptor() ([]byte, []int) {
+	return fileDescriptor6, []int{30}
+}
 
 type CDOTAClientMsg_QuickBuyAlert struct {
 	Itemid           *int32 `protobuf:"varint,1,opt,name=itemid" json:"itemid,omitempty"`
@@ -866,9 +931,10 @@ type CDOTAClientMsg_QuickBuyAlert struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CDOTAClientMsg_QuickBuyAlert) Reset()         { *m = CDOTAClientMsg_QuickBuyAlert{} }
-func (m *CDOTAClientMsg_QuickBuyAlert) String() string { return proto.CompactTextString(m) }
-func (*CDOTAClientMsg_QuickBuyAlert) ProtoMessage()    {}
+func (m *CDOTAClientMsg_QuickBuyAlert) Reset()                    { *m = CDOTAClientMsg_QuickBuyAlert{} }
+func (m *CDOTAClientMsg_QuickBuyAlert) String() string            { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_QuickBuyAlert) ProtoMessage()               {}
+func (*CDOTAClientMsg_QuickBuyAlert) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{31} }
 
 func (m *CDOTAClientMsg_QuickBuyAlert) GetItemid() int32 {
 	if m != nil && m.Itemid != nil {
@@ -889,9 +955,10 @@ type CDOTAClientMsg_PlayerShowCase struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CDOTAClientMsg_PlayerShowCase) Reset()         { *m = CDOTAClientMsg_PlayerShowCase{} }
-func (m *CDOTAClientMsg_PlayerShowCase) String() string { return proto.CompactTextString(m) }
-func (*CDOTAClientMsg_PlayerShowCase) ProtoMessage()    {}
+func (m *CDOTAClientMsg_PlayerShowCase) Reset()                    { *m = CDOTAClientMsg_PlayerShowCase{} }
+func (m *CDOTAClientMsg_PlayerShowCase) String() string            { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_PlayerShowCase) ProtoMessage()               {}
+func (*CDOTAClientMsg_PlayerShowCase) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{32} }
 
 func (m *CDOTAClientMsg_PlayerShowCase) GetShowcase() bool {
 	if m != nil && m.Showcase != nil {
@@ -908,6 +975,9 @@ type CDOTAClientMsg_CameraZoomAmount struct {
 func (m *CDOTAClientMsg_CameraZoomAmount) Reset()         { *m = CDOTAClientMsg_CameraZoomAmount{} }
 func (m *CDOTAClientMsg_CameraZoomAmount) String() string { return proto.CompactTextString(m) }
 func (*CDOTAClientMsg_CameraZoomAmount) ProtoMessage()    {}
+func (*CDOTAClientMsg_CameraZoomAmount) Descriptor() ([]byte, []int) {
+	return fileDescriptor6, []int{33}
+}
 
 func (m *CDOTAClientMsg_CameraZoomAmount) GetZoomAmount() float32 {
 	if m != nil && m.ZoomAmount != nil {
@@ -926,6 +996,9 @@ func (m *CDOTAClientMsg_BroadcasterUsingCameraman) Reset() {
 }
 func (m *CDOTAClientMsg_BroadcasterUsingCameraman) String() string { return proto.CompactTextString(m) }
 func (*CDOTAClientMsg_BroadcasterUsingCameraman) ProtoMessage()    {}
+func (*CDOTAClientMsg_BroadcasterUsingCameraman) Descriptor() ([]byte, []int) {
+	return fileDescriptor6, []int{34}
+}
 
 func (m *CDOTAClientMsg_BroadcasterUsingCameraman) GetCameraman() bool {
 	if m != nil && m.Cameraman != nil {
@@ -946,6 +1019,9 @@ func (m *CDOTAClientMsg_BroadcasterUsingAssistedCameraOperator) String() string 
 	return proto.CompactTextString(m)
 }
 func (*CDOTAClientMsg_BroadcasterUsingAssistedCameraOperator) ProtoMessage() {}
+func (*CDOTAClientMsg_BroadcasterUsingAssistedCameraOperator) Descriptor() ([]byte, []int) {
+	return fileDescriptor6, []int{35}
+}
 
 func (m *CDOTAClientMsg_BroadcasterUsingAssistedCameraOperator) GetEnabled() bool {
 	if m != nil && m.Enabled != nil {
@@ -961,9 +1037,10 @@ type CAdditionalEquipSlotClientMsg struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CAdditionalEquipSlotClientMsg) Reset()         { *m = CAdditionalEquipSlotClientMsg{} }
-func (m *CAdditionalEquipSlotClientMsg) String() string { return proto.CompactTextString(m) }
-func (*CAdditionalEquipSlotClientMsg) ProtoMessage()    {}
+func (m *CAdditionalEquipSlotClientMsg) Reset()                    { *m = CAdditionalEquipSlotClientMsg{} }
+func (m *CAdditionalEquipSlotClientMsg) String() string            { return proto.CompactTextString(m) }
+func (*CAdditionalEquipSlotClientMsg) ProtoMessage()               {}
+func (*CAdditionalEquipSlotClientMsg) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{36} }
 
 func (m *CAdditionalEquipSlotClientMsg) GetClassId() uint32 {
 	if m != nil && m.ClassId != nil {
@@ -991,9 +1068,10 @@ type CDOTAClientMsg_FreeInventory struct {
 	XXX_unrecognized []byte                           `json:"-"`
 }
 
-func (m *CDOTAClientMsg_FreeInventory) Reset()         { *m = CDOTAClientMsg_FreeInventory{} }
-func (m *CDOTAClientMsg_FreeInventory) String() string { return proto.CompactTextString(m) }
-func (*CDOTAClientMsg_FreeInventory) ProtoMessage()    {}
+func (m *CDOTAClientMsg_FreeInventory) Reset()                    { *m = CDOTAClientMsg_FreeInventory{} }
+func (m *CDOTAClientMsg_FreeInventory) String() string            { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_FreeInventory) ProtoMessage()               {}
+func (*CDOTAClientMsg_FreeInventory) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{37} }
 
 func (m *CDOTAClientMsg_FreeInventory) GetEquips() []*CAdditionalEquipSlotClientMsg {
 	if m != nil {
@@ -1010,6 +1088,9 @@ type CDOTAClientMsg_FillEmptySlotsWithBots struct {
 func (m *CDOTAClientMsg_FillEmptySlotsWithBots) Reset()         { *m = CDOTAClientMsg_FillEmptySlotsWithBots{} }
 func (m *CDOTAClientMsg_FillEmptySlotsWithBots) String() string { return proto.CompactTextString(m) }
 func (*CDOTAClientMsg_FillEmptySlotsWithBots) ProtoMessage()    {}
+func (*CDOTAClientMsg_FillEmptySlotsWithBots) Descriptor() ([]byte, []int) {
+	return fileDescriptor6, []int{38}
+}
 
 func (m *CDOTAClientMsg_FillEmptySlotsWithBots) GetFillwithbots() bool {
 	if m != nil && m.Fillwithbots != nil {
@@ -1023,9 +1104,10 @@ type CDOTAClientMsg_HeroStatueLike struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CDOTAClientMsg_HeroStatueLike) Reset()         { *m = CDOTAClientMsg_HeroStatueLike{} }
-func (m *CDOTAClientMsg_HeroStatueLike) String() string { return proto.CompactTextString(m) }
-func (*CDOTAClientMsg_HeroStatueLike) ProtoMessage()    {}
+func (m *CDOTAClientMsg_HeroStatueLike) Reset()                    { *m = CDOTAClientMsg_HeroStatueLike{} }
+func (m *CDOTAClientMsg_HeroStatueLike) String() string            { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_HeroStatueLike) ProtoMessage()               {}
+func (*CDOTAClientMsg_HeroStatueLike) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{39} }
 
 func (m *CDOTAClientMsg_HeroStatueLike) GetOwnerPlayerId() uint32 {
 	if m != nil && m.OwnerPlayerId != nil {
@@ -1042,6 +1124,9 @@ type CDOTAClientMsg_TeamShowcaseEditor struct {
 func (m *CDOTAClientMsg_TeamShowcaseEditor) Reset()         { *m = CDOTAClientMsg_TeamShowcaseEditor{} }
 func (m *CDOTAClientMsg_TeamShowcaseEditor) String() string { return proto.CompactTextString(m) }
 func (*CDOTAClientMsg_TeamShowcaseEditor) ProtoMessage()    {}
+func (*CDOTAClientMsg_TeamShowcaseEditor) Descriptor() ([]byte, []int) {
+	return fileDescriptor6, []int{40}
+}
 
 func (m *CDOTAClientMsg_TeamShowcaseEditor) GetData() []byte {
 	if m != nil {
@@ -1058,6 +1143,9 @@ type CDOTAClientMsg_TeamShowcaseClientData struct {
 func (m *CDOTAClientMsg_TeamShowcaseClientData) Reset()         { *m = CDOTAClientMsg_TeamShowcaseClientData{} }
 func (m *CDOTAClientMsg_TeamShowcaseClientData) String() string { return proto.CompactTextString(m) }
 func (*CDOTAClientMsg_TeamShowcaseClientData) ProtoMessage()    {}
+func (*CDOTAClientMsg_TeamShowcaseClientData) Descriptor() ([]byte, []int) {
+	return fileDescriptor6, []int{41}
+}
 
 func (m *CDOTAClientMsg_TeamShowcaseClientData) GetData() []byte {
 	if m != nil {
@@ -1073,15 +1161,19 @@ type CDOTAClientMsg_PlayTeamShowcase struct {
 func (m *CDOTAClientMsg_PlayTeamShowcase) Reset()         { *m = CDOTAClientMsg_PlayTeamShowcase{} }
 func (m *CDOTAClientMsg_PlayTeamShowcase) String() string { return proto.CompactTextString(m) }
 func (*CDOTAClientMsg_PlayTeamShowcase) ProtoMessage()    {}
+func (*CDOTAClientMsg_PlayTeamShowcase) Descriptor() ([]byte, []int) {
+	return fileDescriptor6, []int{42}
+}
 
 type CDOTAClientMsg_EventCNY2015Cmd struct {
 	Data             []byte `protobuf:"bytes,1,opt,name=data" json:"data,omitempty"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CDOTAClientMsg_EventCNY2015Cmd) Reset()         { *m = CDOTAClientMsg_EventCNY2015Cmd{} }
-func (m *CDOTAClientMsg_EventCNY2015Cmd) String() string { return proto.CompactTextString(m) }
-func (*CDOTAClientMsg_EventCNY2015Cmd) ProtoMessage()    {}
+func (m *CDOTAClientMsg_EventCNY2015Cmd) Reset()                    { *m = CDOTAClientMsg_EventCNY2015Cmd{} }
+func (m *CDOTAClientMsg_EventCNY2015Cmd) String() string            { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_EventCNY2015Cmd) ProtoMessage()               {}
+func (*CDOTAClientMsg_EventCNY2015Cmd) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{43} }
 
 func (m *CDOTAClientMsg_EventCNY2015Cmd) GetData() []byte {
 	if m != nil {
@@ -1100,9 +1192,10 @@ type CDOTAClientMsg_DemoHero struct {
 	XXX_unrecognized     []byte   `json:"-"`
 }
 
-func (m *CDOTAClientMsg_DemoHero) Reset()         { *m = CDOTAClientMsg_DemoHero{} }
-func (m *CDOTAClientMsg_DemoHero) String() string { return proto.CompactTextString(m) }
-func (*CDOTAClientMsg_DemoHero) ProtoMessage()    {}
+func (m *CDOTAClientMsg_DemoHero) Reset()                    { *m = CDOTAClientMsg_DemoHero{} }
+func (m *CDOTAClientMsg_DemoHero) String() string            { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_DemoHero) ProtoMessage()               {}
+func (*CDOTAClientMsg_DemoHero) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{44} }
 
 func (m *CDOTAClientMsg_DemoHero) GetHeroId() int32 {
 	if m != nil && m.HeroId != nil {
@@ -1153,9 +1246,10 @@ type CDOTAClientMsg_ChallengeSelect struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CDOTAClientMsg_ChallengeSelect) Reset()         { *m = CDOTAClientMsg_ChallengeSelect{} }
-func (m *CDOTAClientMsg_ChallengeSelect) String() string { return proto.CompactTextString(m) }
-func (*CDOTAClientMsg_ChallengeSelect) ProtoMessage()    {}
+func (m *CDOTAClientMsg_ChallengeSelect) Reset()                    { *m = CDOTAClientMsg_ChallengeSelect{} }
+func (m *CDOTAClientMsg_ChallengeSelect) String() string            { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_ChallengeSelect) ProtoMessage()               {}
+func (*CDOTAClientMsg_ChallengeSelect) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{45} }
 
 func (m *CDOTAClientMsg_ChallengeSelect) GetEventId() uint32 {
 	if m != nil && m.EventId != nil {
@@ -1185,9 +1279,10 @@ type CDOTAClientMsg_ChallengeReroll struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CDOTAClientMsg_ChallengeReroll) Reset()         { *m = CDOTAClientMsg_ChallengeReroll{} }
-func (m *CDOTAClientMsg_ChallengeReroll) String() string { return proto.CompactTextString(m) }
-func (*CDOTAClientMsg_ChallengeReroll) ProtoMessage()    {}
+func (m *CDOTAClientMsg_ChallengeReroll) Reset()                    { *m = CDOTAClientMsg_ChallengeReroll{} }
+func (m *CDOTAClientMsg_ChallengeReroll) String() string            { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_ChallengeReroll) ProtoMessage()               {}
+func (*CDOTAClientMsg_ChallengeReroll) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{46} }
 
 func (m *CDOTAClientMsg_ChallengeReroll) GetEventId() uint32 {
 	if m != nil && m.EventId != nil {
@@ -1215,9 +1310,10 @@ type CDOTAClientMsg_CoinWager struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CDOTAClientMsg_CoinWager) Reset()         { *m = CDOTAClientMsg_CoinWager{} }
-func (m *CDOTAClientMsg_CoinWager) String() string { return proto.CompactTextString(m) }
-func (*CDOTAClientMsg_CoinWager) ProtoMessage()    {}
+func (m *CDOTAClientMsg_CoinWager) Reset()                    { *m = CDOTAClientMsg_CoinWager{} }
+func (m *CDOTAClientMsg_CoinWager) String() string            { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_CoinWager) ProtoMessage()               {}
+func (*CDOTAClientMsg_CoinWager) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{47} }
 
 func (m *CDOTAClientMsg_CoinWager) GetWagerAmount() uint32 {
 	if m != nil && m.WagerAmount != nil {
@@ -1231,9 +1327,10 @@ type CDOTAClientMsg_EventPointsTip struct {
 	XXX_unrecognized  []byte  `json:"-"`
 }
 
-func (m *CDOTAClientMsg_EventPointsTip) Reset()         { *m = CDOTAClientMsg_EventPointsTip{} }
-func (m *CDOTAClientMsg_EventPointsTip) String() string { return proto.CompactTextString(m) }
-func (*CDOTAClientMsg_EventPointsTip) ProtoMessage()    {}
+func (m *CDOTAClientMsg_EventPointsTip) Reset()                    { *m = CDOTAClientMsg_EventPointsTip{} }
+func (m *CDOTAClientMsg_EventPointsTip) String() string            { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_EventPointsTip) ProtoMessage()               {}
+func (*CDOTAClientMsg_EventPointsTip) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{48} }
 
 func (m *CDOTAClientMsg_EventPointsTip) GetRecipientPlayerId() uint32 {
 	if m != nil && m.RecipientPlayerId != nil {
@@ -1247,9 +1344,10 @@ type CDOTAClientMsg_ExecuteOrders struct {
 	XXX_unrecognized []byte                `json:"-"`
 }
 
-func (m *CDOTAClientMsg_ExecuteOrders) Reset()         { *m = CDOTAClientMsg_ExecuteOrders{} }
-func (m *CDOTAClientMsg_ExecuteOrders) String() string { return proto.CompactTextString(m) }
-func (*CDOTAClientMsg_ExecuteOrders) ProtoMessage()    {}
+func (m *CDOTAClientMsg_ExecuteOrders) Reset()                    { *m = CDOTAClientMsg_ExecuteOrders{} }
+func (m *CDOTAClientMsg_ExecuteOrders) String() string            { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_ExecuteOrders) ProtoMessage()               {}
+func (*CDOTAClientMsg_ExecuteOrders) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{49} }
 
 func (m *CDOTAClientMsg_ExecuteOrders) GetOrders() []*CDOTAMsg_UnitOrder {
 	if m != nil {
@@ -1263,9 +1361,10 @@ type CDOTAClientMsg_XPAlert struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CDOTAClientMsg_XPAlert) Reset()         { *m = CDOTAClientMsg_XPAlert{} }
-func (m *CDOTAClientMsg_XPAlert) String() string { return proto.CompactTextString(m) }
-func (*CDOTAClientMsg_XPAlert) ProtoMessage()    {}
+func (m *CDOTAClientMsg_XPAlert) Reset()                    { *m = CDOTAClientMsg_XPAlert{} }
+func (m *CDOTAClientMsg_XPAlert) String() string            { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_XPAlert) ProtoMessage()               {}
+func (*CDOTAClientMsg_XPAlert) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{50} }
 
 func (m *CDOTAClientMsg_XPAlert) GetTargetEntindex() uint32 {
 	if m != nil && m.TargetEntindex != nil {
@@ -1280,9 +1379,10 @@ type CDOTAClientMsg_MatchMetadata struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CDOTAClientMsg_MatchMetadata) Reset()         { *m = CDOTAClientMsg_MatchMetadata{} }
-func (m *CDOTAClientMsg_MatchMetadata) String() string { return proto.CompactTextString(m) }
-func (*CDOTAClientMsg_MatchMetadata) ProtoMessage()    {}
+func (m *CDOTAClientMsg_MatchMetadata) Reset()                    { *m = CDOTAClientMsg_MatchMetadata{} }
+func (m *CDOTAClientMsg_MatchMetadata) String() string            { return proto.CompactTextString(m) }
+func (*CDOTAClientMsg_MatchMetadata) ProtoMessage()               {}
+func (*CDOTAClientMsg_MatchMetadata) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{51} }
 
 func (m *CDOTAClientMsg_MatchMetadata) GetMatchId() uint64 {
 	if m != nil && m.MatchId != nil {
@@ -1299,8 +1399,196 @@ func (m *CDOTAClientMsg_MatchMetadata) GetMetadata() []byte {
 }
 
 func init() {
+	proto.RegisterType((*CDOTAClientMsg_MapPing)(nil), "dota.CDOTAClientMsg_MapPing")
+	proto.RegisterType((*CDOTAClientMsg_ItemAlert)(nil), "dota.CDOTAClientMsg_ItemAlert")
+	proto.RegisterType((*CDOTAClientMsg_EnemyItemAlert)(nil), "dota.CDOTAClientMsg_EnemyItemAlert")
+	proto.RegisterType((*CDOTAClientMsg_ModifierAlert)(nil), "dota.CDOTAClientMsg_ModifierAlert")
+	proto.RegisterType((*CDOTAClientMsg_ClickedBuff)(nil), "dota.CDOTAClientMsg_ClickedBuff")
+	proto.RegisterType((*CDOTAClientMsg_HPManaAlert)(nil), "dota.CDOTAClientMsg_HPManaAlert")
+	proto.RegisterType((*CDOTAClientMsg_GlyphAlert)(nil), "dota.CDOTAClientMsg_GlyphAlert")
+	proto.RegisterType((*CDOTAClientMsg_MapLine)(nil), "dota.CDOTAClientMsg_MapLine")
+	proto.RegisterType((*CDOTAClientMsg_AspectRatio)(nil), "dota.CDOTAClientMsg_AspectRatio")
+	proto.RegisterType((*CDOTAClientMsg_UnitsAutoAttackMode)(nil), "dota.CDOTAClientMsg_UnitsAutoAttackMode")
+	proto.RegisterType((*CDOTAClientMsg_UnitsAutoAttackAfterSpell)(nil), "dota.CDOTAClientMsg_UnitsAutoAttackAfterSpell")
+	proto.RegisterType((*CDOTAClientMsg_TeleportRequiresHalt)(nil), "dota.CDOTAClientMsg_TeleportRequiresHalt")
+	proto.RegisterType((*CDOTAClientMsg_GenericBooleanConvar)(nil), "dota.CDOTAClientMsg_GenericBooleanConvar")
+	proto.RegisterType((*CDOTAClientMsg_SearchString)(nil), "dota.CDOTAClientMsg_SearchString")
+	proto.RegisterType((*CDOTAClientMsg_Pause)(nil), "dota.CDOTAClientMsg_Pause")
+	proto.RegisterType((*CDOTAClientMsg_ShopViewMode)(nil), "dota.CDOTAClientMsg_ShopViewMode")
+	proto.RegisterType((*CDOTAClientMsg_SetUnitShareFlag)(nil), "dota.CDOTAClientMsg_SetUnitShareFlag")
+	proto.RegisterType((*CDOTAClientMsg_SwapRequest)(nil), "dota.CDOTAClientMsg_SwapRequest")
+	proto.RegisterType((*CDOTAClientMsg_SwapAccept)(nil), "dota.CDOTAClientMsg_SwapAccept")
+	proto.RegisterType((*CDOTAClientMsg_WorldLine)(nil), "dota.CDOTAClientMsg_WorldLine")
+	proto.RegisterType((*CDOTAClientMsg_RequestGraphUpdate)(nil), "dota.CDOTAClientMsg_RequestGraphUpdate")
+	proto.RegisterType((*CDOTAClientMsg_ChatWheel)(nil), "dota.CDOTAClientMsg_ChatWheel")
+	proto.RegisterType((*CDOTAClientMsg_SendStatPopup)(nil), "dota.CDOTAClientMsg_SendStatPopup")
+	proto.RegisterType((*CDOTAClientMsg_BeginLastHitChallenge)(nil), "dota.CDOTAClientMsg_BeginLastHitChallenge")
+	proto.RegisterType((*CDOTAClientMsg_UpdateQuickBuyItem)(nil), "dota.CDOTAClientMsg_UpdateQuickBuyItem")
+	proto.RegisterType((*CDOTAClientMsg_UpdateQuickBuy)(nil), "dota.CDOTAClientMsg_UpdateQuickBuy")
+	proto.RegisterType((*CDOTAClientMsg_UpdateCoachListen)(nil), "dota.CDOTAClientMsg_UpdateCoachListen")
+	proto.RegisterType((*CDOTAClientMsg_CoachHUDPing)(nil), "dota.CDOTAClientMsg_CoachHUDPing")
+	proto.RegisterType((*CDOTAClientMsg_RecordVote)(nil), "dota.CDOTAClientMsg_RecordVote")
+	proto.RegisterType((*CDOTAClientMsg_WillPurchaseAlert)(nil), "dota.CDOTAClientMsg_WillPurchaseAlert")
+	proto.RegisterType((*CDOTAClientMsg_BuyBackStateAlert)(nil), "dota.CDOTAClientMsg_BuyBackStateAlert")
+	proto.RegisterType((*CDOTAClientMsg_QuickBuyAlert)(nil), "dota.CDOTAClientMsg_QuickBuyAlert")
+	proto.RegisterType((*CDOTAClientMsg_PlayerShowCase)(nil), "dota.CDOTAClientMsg_PlayerShowCase")
+	proto.RegisterType((*CDOTAClientMsg_CameraZoomAmount)(nil), "dota.CDOTAClientMsg_CameraZoomAmount")
+	proto.RegisterType((*CDOTAClientMsg_BroadcasterUsingCameraman)(nil), "dota.CDOTAClientMsg_BroadcasterUsingCameraman")
+	proto.RegisterType((*CDOTAClientMsg_BroadcasterUsingAssistedCameraOperator)(nil), "dota.CDOTAClientMsg_BroadcasterUsingAssistedCameraOperator")
+	proto.RegisterType((*CAdditionalEquipSlotClientMsg)(nil), "dota.CAdditionalEquipSlotClientMsg")
+	proto.RegisterType((*CDOTAClientMsg_FreeInventory)(nil), "dota.CDOTAClientMsg_FreeInventory")
+	proto.RegisterType((*CDOTAClientMsg_FillEmptySlotsWithBots)(nil), "dota.CDOTAClientMsg_FillEmptySlotsWithBots")
+	proto.RegisterType((*CDOTAClientMsg_HeroStatueLike)(nil), "dota.CDOTAClientMsg_HeroStatueLike")
+	proto.RegisterType((*CDOTAClientMsg_TeamShowcaseEditor)(nil), "dota.CDOTAClientMsg_TeamShowcaseEditor")
+	proto.RegisterType((*CDOTAClientMsg_TeamShowcaseClientData)(nil), "dota.CDOTAClientMsg_TeamShowcaseClientData")
+	proto.RegisterType((*CDOTAClientMsg_PlayTeamShowcase)(nil), "dota.CDOTAClientMsg_PlayTeamShowcase")
+	proto.RegisterType((*CDOTAClientMsg_EventCNY2015Cmd)(nil), "dota.CDOTAClientMsg_EventCNY2015Cmd")
+	proto.RegisterType((*CDOTAClientMsg_DemoHero)(nil), "dota.CDOTAClientMsg_DemoHero")
+	proto.RegisterType((*CDOTAClientMsg_ChallengeSelect)(nil), "dota.CDOTAClientMsg_ChallengeSelect")
+	proto.RegisterType((*CDOTAClientMsg_ChallengeReroll)(nil), "dota.CDOTAClientMsg_ChallengeReroll")
+	proto.RegisterType((*CDOTAClientMsg_CoinWager)(nil), "dota.CDOTAClientMsg_CoinWager")
+	proto.RegisterType((*CDOTAClientMsg_EventPointsTip)(nil), "dota.CDOTAClientMsg_EventPointsTip")
+	proto.RegisterType((*CDOTAClientMsg_ExecuteOrders)(nil), "dota.CDOTAClientMsg_ExecuteOrders")
+	proto.RegisterType((*CDOTAClientMsg_XPAlert)(nil), "dota.CDOTAClientMsg_XPAlert")
+	proto.RegisterType((*CDOTAClientMsg_MatchMetadata)(nil), "dota.CDOTAClientMsg_MatchMetadata")
 	proto.RegisterEnum("dota.EDotaClientMessages", EDotaClientMessages_name, EDotaClientMessages_value)
 	proto.RegisterEnum("dota.CDOTAClientMsg_UnitsAutoAttackMode_EMode", CDOTAClientMsg_UnitsAutoAttackMode_EMode_name, CDOTAClientMsg_UnitsAutoAttackMode_EMode_value)
 	proto.RegisterEnum("dota.CDOTAClientMsg_UnitsAutoAttackMode_EUnitType", CDOTAClientMsg_UnitsAutoAttackMode_EUnitType_name, CDOTAClientMsg_UnitsAutoAttackMode_EUnitType_value)
 	proto.RegisterEnum("dota.CDOTAClientMsg_GenericBooleanConvar_EType", CDOTAClientMsg_GenericBooleanConvar_EType_name, CDOTAClientMsg_GenericBooleanConvar_EType_value)
+}
+
+var fileDescriptor6 = []byte{
+	// 2110 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x9c, 0x58, 0xe9, 0x72, 0xdc, 0xb8,
+	0xf1, 0x5f, 0xd1, 0x1a, 0x59, 0xc2, 0x4a, 0x36, 0x96, 0xf6, 0xca, 0xf2, 0x6d, 0xd3, 0xeb, 0xff,
+	0xba, 0xfe, 0x9b, 0x95, 0xd7, 0x4a, 0xd9, 0x49, 0x39, 0x49, 0x55, 0xa8, 0x19, 0x4a, 0xa3, 0x64,
+	0x46, 0x9a, 0x0c, 0x47, 0xd6, 0x6e, 0x2a, 0x55, 0x2c, 0x98, 0x84, 0x66, 0x58, 0x22, 0x09, 0x86,
+	0xc4, 0x58, 0x56, 0x3e, 0xe5, 0x19, 0xf2, 0x00, 0x79, 0x82, 0x5c, 0x55, 0xb9, 0xef, 0xfb, 0xbe,
+	0xef, 0x3b, 0x9b, 0xe4, 0x45, 0x92, 0x06, 0x48, 0x8e, 0x08, 0x72, 0x56, 0x9b, 0x5a, 0x7f, 0xb0,
+	0x08, 0xa0, 0xbb, 0xd1, 0xe8, 0xfe, 0xa1, 0x7f, 0x8d, 0x41, 0x17, 0x3d, 0xc6, 0x89, 0xe3, 0x06,
+	0x3e, 0x8d, 0x78, 0x48, 0xd3, 0x94, 0x0c, 0x69, 0xba, 0x1a, 0x27, 0x8c, 0x33, 0x7d, 0x56, 0x2c,
+	0x5d, 0xca, 0x05, 0x58, 0x18, 0xb2, 0x48, 0x15, 0x30, 0x3a, 0x68, 0xb9, 0xd9, 0xda, 0x19, 0x98,
+	0x4d, 0xa9, 0xdd, 0x4d, 0x87, 0x4e, 0x97, 0xc4, 0x3d, 0x3f, 0x1a, 0xea, 0x6b, 0x68, 0x29, 0x60,
+	0x2e, 0xe1, 0x3e, 0x8b, 0x9c, 0x18, 0x26, 0x56, 0x66, 0x6e, 0xcc, 0xdc, 0x79, 0x76, 0xed, 0xf2,
+	0xaa, 0x30, 0xb6, 0x2a, 0x95, 0x84, 0x78, 0x27, 0x97, 0x11, 0x3a, 0x46, 0x1b, 0xad, 0x54, 0xac,
+	0x6d, 0x71, 0x1a, 0x9a, 0x01, 0x4d, 0xb8, 0xfe, 0x36, 0x84, 0x7c, 0x18, 0x38, 0x44, 0x8c, 0x72,
+	0x63, 0x2b, 0x15, 0x63, 0x13, 0x69, 0xe3, 0x01, 0xba, 0x5a, 0xb1, 0x64, 0x45, 0x34, 0x3c, 0x3a,
+	0x36, 0xf7, 0x3c, 0x5a, 0x92, 0xe6, 0x60, 0xd5, 0x8f, 0x3c, 0xfa, 0x54, 0x5a, 0x5c, 0x32, 0x06,
+	0xe8, 0x4a, 0xf5, 0x3c, 0xcc, 0xf3, 0xf7, 0x7d, 0x9a, 0x64, 0x6a, 0x97, 0xd1, 0xb9, 0xc7, 0xe3,
+	0xfd, 0x7d, 0xc7, 0x8f, 0x38, 0x4d, 0x22, 0x12, 0x38, 0xc7, 0xca, 0x0d, 0xfd, 0x02, 0x3a, 0xcb,
+	0x49, 0x32, 0xa4, 0xfc, 0xd8, 0xaa, 0x26, 0xad, 0xf6, 0xd1, 0xa5, 0x8a, 0x55, 0xf8, 0x72, 0x0f,
+	0xa8, 0xb7, 0x0e, 0xb6, 0xde, 0xa2, 0xcd, 0xfb, 0x35, 0x9b, 0xed, 0x5e, 0x97, 0x44, 0x24, 0xf3,
+	0x73, 0x8a, 0x5a, 0x76, 0xc0, 0x97, 0xd1, 0xc5, 0x8a, 0xda, 0x66, 0x70, 0x14, 0x8f, 0x32, 0x2d,
+	0x8c, 0xe6, 0x23, 0x3a, 0x84, 0x7c, 0x3c, 0xa1, 0x52, 0x7c, 0xde, 0x30, 0xa7, 0xe5, 0xb7, 0xe3,
+	0x47, 0x54, 0x7f, 0x11, 0x9d, 0x0e, 0x49, 0x1c, 0xc0, 0x67, 0x9e, 0x8c, 0xe5, 0x4a, 0x32, 0x72,
+	0x41, 0xe3, 0xa5, 0x9a, 0xa3, 0x66, 0x1a, 0x53, 0x97, 0xf7, 0x45, 0xde, 0xf5, 0x25, 0xd4, 0x48,
+	0xc4, 0x87, 0x34, 0xa2, 0x19, 0x9f, 0xd0, 0x90, 0x51, 0x91, 0xde, 0x8d, 0x7c, 0x9e, 0x9a, 0x63,
+	0xce, 0x4c, 0xce, 0x89, 0x7b, 0x00, 0xf9, 0xa0, 0xba, 0x85, 0x66, 0x43, 0xf8, 0x2b, 0x95, 0xce,
+	0xac, 0xad, 0x96, 0x76, 0x3e, 0x51, 0x6f, 0xd5, 0x12, 0xff, 0x3f, 0x3c, 0xbd, 0xb5, 0xfd, 0xc8,
+	0xec, 0x6c, 0xb5, 0xf4, 0x2e, 0x5a, 0x18, 0x83, 0x94, 0xc3, 0x8f, 0x62, 0x2a, 0xc3, 0x7a, 0x66,
+	0x6d, 0xed, 0x7f, 0xb7, 0x25, 0x26, 0x07, 0xa0, 0xf9, 0x70, 0x6e, 0x7b, 0xa7, 0xdf, 0x35, 0x3b,
+	0xc6, 0x16, 0x6a, 0xc8, 0x0d, 0xf4, 0xf3, 0xa8, 0xd8, 0x02, 0xff, 0xa7, 0xf8, 0x37, 0xa3, 0x2f,
+	0xa0, 0xc6, 0xb6, 0xf5, 0xc8, 0xea, 0xe3, 0x67, 0xf4, 0x73, 0xe8, 0xac, 0xb9, 0x31, 0xb0, 0xfa,
+	0x8e, 0xdd, 0xb3, 0x3a, 0x9d, 0xa6, 0x69, 0x0f, 0xf0, 0x8c, 0x8e, 0xd0, 0x9c, 0xd9, 0xd9, 0x33,
+	0x5f, 0xb3, 0xb1, 0x66, 0xdc, 0x46, 0x0b, 0x13, 0xfb, 0x62, 0x21, 0xdb, 0x01, 0x34, 0x17, 0xd1,
+	0xbc, 0xbd, 0xdb, 0xed, 0xee, 0x6c, 0x5b, 0x2d, 0x3c, 0x63, 0xbc, 0x0b, 0xdd, 0x39, 0xd9, 0x53,
+	0x73, 0x1f, 0x30, 0x65, 0xc7, 0x34, 0x08, 0xf4, 0xb3, 0xe8, 0x34, 0x8d, 0xc8, 0xe3, 0x80, 0x7a,
+	0x79, 0x6e, 0x1f, 0xa0, 0x5b, 0x15, 0xe5, 0x01, 0x0d, 0x68, 0xcc, 0x12, 0xde, 0xa7, 0x1f, 0x1e,
+	0xfb, 0x09, 0x4d, 0xdb, 0x24, 0xe0, 0x75, 0xbd, 0xd7, 0x67, 0x6a, 0x8a, 0x9b, 0x34, 0xa2, 0x89,
+	0xef, 0xae, 0x33, 0x16, 0x50, 0x12, 0x35, 0x59, 0xf4, 0x84, 0x24, 0xfa, 0x87, 0xd0, 0xac, 0x0c,
+	0x6c, 0x96, 0xa4, 0xbb, 0x53, 0x03, 0x3b, 0x4d, 0x71, 0xd5, 0x92, 0x51, 0xbd, 0xba, 0xb1, 0xd3,
+	0x6f, 0x5a, 0x4e, 0xcb, 0xda, 0x30, 0x77, 0x3b, 0x03, 0xa7, 0x6f, 0xd9, 0x3d, 0x73, 0x6f, 0xdb,
+	0xb1, 0x07, 0x5b, 0xdb, 0x9b, 0x56, 0x5f, 0x00, 0xe7, 0x09, 0x09, 0xc6, 0x59, 0xde, 0xe6, 0x8d,
+	0xf7, 0x43, 0xec, 0x65, 0xb0, 0x6e, 0xa2, 0x93, 0x15, 0x21, 0xd0, 0xd7, 0xd1, 0x65, 0x55, 0xa4,
+	0x65, 0x99, 0x83, 0xf6, 0x44, 0x40, 0x83, 0x4b, 0x72, 0xb9, 0xe2, 0xa7, 0x4d, 0x49, 0xe2, 0x8e,
+	0x6c, 0x9e, 0x88, 0xd2, 0x76, 0x06, 0xcd, 0xa5, 0x72, 0x2c, 0x8f, 0xb6, 0x60, 0x2c, 0xa3, 0xf3,
+	0x15, 0xf1, 0x1e, 0x19, 0xa7, 0x02, 0xf9, 0x35, 0x33, 0x23, 0x16, 0x3f, 0xf2, 0xe9, 0xa1, 0x44,
+	0xc9, 0x62, 0x09, 0xc4, 0x4b, 0x46, 0x0f, 0x5d, 0xaf, 0xed, 0xc9, 0x45, 0x36, 0xed, 0x11, 0x49,
+	0xe8, 0x46, 0x40, 0x86, 0xe2, 0x7a, 0xc6, 0x01, 0x39, 0xa2, 0xc9, 0x56, 0x2b, 0x53, 0x12, 0x26,
+	0xf6, 0x61, 0x25, 0x2b, 0x09, 0x22, 0x24, 0x29, 0x27, 0x9c, 0xae, 0x9c, 0x92, 0x21, 0xb9, 0x5b,
+	0xbb, 0x78, 0xf6, 0x21, 0x89, 0x45, 0x6e, 0x69, 0xca, 0xf5, 0xe7, 0xd0, 0x42, 0x66, 0xcc, 0xf1,
+	0xbd, 0xdc, 0x85, 0xd5, 0x5a, 0x6d, 0x10, 0x0a, 0xa6, 0xeb, 0xd2, 0x78, 0xaa, 0xfc, 0x66, 0xad,
+	0x5c, 0xef, 0xb1, 0x24, 0xf0, 0x64, 0x79, 0x78, 0x09, 0x2d, 0x1c, 0x8a, 0x41, 0xa9, 0x40, 0x54,
+	0xab, 0xf5, 0x44, 0xd8, 0xb8, 0x85, 0x6e, 0x56, 0x0c, 0xe5, 0x5e, 0x6e, 0x26, 0x24, 0x1e, 0xed,
+	0xc6, 0x1e, 0x1c, 0xca, 0x48, 0x6b, 0xbb, 0x35, 0x47, 0x84, 0xef, 0x8d, 0x28, 0x0d, 0xf4, 0xf7,
+	0xa2, 0x45, 0x17, 0x06, 0x4e, 0xce, 0x4e, 0x39, 0xe4, 0x72, 0xae, 0xb1, 0xa4, 0x56, 0x21, 0xdb,
+	0xcd, 0x44, 0x1e, 0x2e, 0x1d, 0x38, 0x72, 0xc1, 0x69, 0xee, 0x39, 0x3b, 0x07, 0x82, 0x0f, 0x62,
+	0x92, 0x90, 0xd0, 0x19, 0xd1, 0x84, 0x89, 0x23, 0x66, 0x55, 0x76, 0xa7, 0xc6, 0x07, 0x36, 0x8d,
+	0x3c, 0x1b, 0xa2, 0xdc, 0x63, 0xf1, 0x38, 0xd6, 0xef, 0xa2, 0x05, 0x11, 0xf2, 0x58, 0x0c, 0xf2,
+	0x63, 0x5e, 0xa9, 0x1c, 0x53, 0x51, 0x30, 0x6c, 0xf4, 0x42, 0xc5, 0xe0, 0x3a, 0x1d, 0xfa, 0x51,
+	0x87, 0xa4, 0xbc, 0xed, 0x73, 0xf0, 0x32, 0x08, 0x68, 0x34, 0xa4, 0x50, 0x21, 0x9e, 0x75, 0x47,
+	0x2c, 0xa5, 0x91, 0x13, 0x90, 0x3c, 0x82, 0x4b, 0xfa, 0x32, 0x3a, 0x33, 0xa2, 0x41, 0x0c, 0x39,
+	0x28, 0x6e, 0x64, 0x01, 0xfe, 0x6a, 0xfc, 0xb2, 0x98, 0x7d, 0x60, 0x0c, 0x2c, 0xb3, 0x3e, 0x96,
+	0xb4, 0x27, 0x12, 0x28, 0x19, 0x6f, 0x72, 0x27, 0x1b, 0x62, 0x93, 0x78, 0x0c, 0x38, 0x26, 0xa9,
+	0xb0, 0x96, 0x1b, 0xdb, 0xab, 0x51, 0xa7, 0x6a, 0x4c, 0x7f, 0x80, 0x1a, 0xc2, 0x50, 0x0a, 0x46,
+	0x4e, 0xc1, 0x79, 0x5f, 0x9c, 0x5e, 0x31, 0x6b, 0x0e, 0x18, 0xef, 0x40, 0x37, 0xa6, 0x0a, 0x35,
+	0x19, 0x71, 0x47, 0x1d, 0x3f, 0xe5, 0x34, 0x92, 0x1e, 0x65, 0x28, 0x0b, 0x49, 0x7a, 0x90, 0xe3,
+	0xac, 0x53, 0xbb, 0x47, 0x52, 0xa5, 0xbd, 0xdb, 0x92, 0x9d, 0xc6, 0xcb, 0x68, 0x7e, 0x34, 0xf6,
+	0x4e, 0x6a, 0x32, 0xca, 0xe2, 0xc6, 0xbd, 0x1a, 0xca, 0xfb, 0xd4, 0x65, 0x89, 0xf7, 0x88, 0x71,
+	0x51, 0xb9, 0x01, 0x48, 0xcc, 0x77, 0x69, 0x99, 0x84, 0x8d, 0xf7, 0xd5, 0x3c, 0xdf, 0xf3, 0x83,
+	0xa0, 0x97, 0x85, 0x8e, 0x66, 0xdc, 0x09, 0x45, 0x41, 0x44, 0x25, 0xbf, 0x1c, 0x0d, 0x91, 0xab,
+	0x21, 0x0b, 0x3c, 0x27, 0xa1, 0x21, 0xf1, 0x23, 0xe1, 0x5b, 0x86, 0x28, 0xa3, 0x66, 0x0b, 0xe2,
+	0xb3, 0x0e, 0xa5, 0x5a, 0x60, 0x24, 0xb3, 0x65, 0x58, 0x35, 0xd4, 0x15, 0x81, 0x9c, 0xbe, 0x17,
+	0x80, 0x37, 0xdf, 0x4b, 0xd6, 0xed, 0x0c, 0x16, 0x0d, 0x38, 0x69, 0x35, 0x93, 0x3d, 0x19, 0x5b,
+	0xa8, 0x42, 0x87, 0x4d, 0x70, 0x5c, 0x14, 0x94, 0x14, 0xbe, 0x5d, 0xf8, 0x9e, 0x70, 0x42, 0xb5,
+	0x0a, 0x35, 0x49, 0x48, 0x13, 0xf2, 0x41, 0xc6, 0x42, 0x33, 0x64, 0xe3, 0x88, 0x8b, 0x14, 0x7d,
+	0x04, 0x46, 0x0e, 0x91, 0xc3, 0x9c, 0xb7, 0xdf, 0x53, 0x23, 0xa2, 0xf5, 0x84, 0x11, 0x0f, 0x2c,
+	0x03, 0xff, 0xec, 0xa6, 0x70, 0xfc, 0xcc, 0x4e, 0x48, 0x22, 0x01, 0x44, 0xb7, 0x18, 0xe4, 0xdb,
+	0xb6, 0xd1, 0xfd, 0x37, 0x51, 0x37, 0xd3, 0x54, 0x20, 0xc4, 0xcb, 0xcc, 0xec, 0xc0, 0x1d, 0x20,
+	0x9c, 0x25, 0x75, 0x72, 0xda, 0x85, 0x33, 0x9b, 0x9e, 0xe7, 0x8b, 0x9e, 0x92, 0x04, 0x16, 0xc4,
+	0x23, 0xb6, 0x03, 0xc6, 0x27, 0x86, 0xc5, 0x99, 0xdd, 0x80, 0xa4, 0xe9, 0xa4, 0x8c, 0x09, 0x1b,
+	0x29, 0x88, 0x4c, 0x2e, 0xbd, 0x70, 0xd0, 0xa3, 0xfb, 0x39, 0x02, 0x4e, 0xc9, 0xac, 0xd9, 0xb5,
+	0x8c, 0x6c, 0x24, 0x94, 0x6e, 0x45, 0x4f, 0x60, 0xc4, 0x92, 0x23, 0xfd, 0xed, 0x68, 0x4e, 0xc4,
+	0x3e, 0x2e, 0x2e, 0xc5, 0xad, 0x1c, 0x81, 0x27, 0xb9, 0x02, 0x41, 0xbb, 0x5d, 0x35, 0x0a, 0xb0,
+	0xb2, 0xc2, 0x98, 0x1f, 0x09, 0xc1, 0x74, 0xcf, 0xe7, 0xa3, 0x75, 0xf8, 0x2b, 0x50, 0xb9, 0x0f,
+	0x2b, 0x87, 0x30, 0x7e, 0x0c, 0xe3, 0xfc, 0xa8, 0xef, 0xac, 0xa5, 0xb7, 0x0d, 0xb5, 0x4b, 0xc0,
+	0x68, 0x4c, 0x3b, 0xfe, 0x01, 0x15, 0x4d, 0x20, 0x3b, 0x04, 0x7e, 0x75, 0xaa, 0x85, 0xfb, 0x5e,
+	0xad, 0x5e, 0x0c, 0x28, 0x09, 0xed, 0x1c, 0x0a, 0x16, 0xb8, 0x0c, 0xa1, 0x05, 0x6e, 0x81, 0xdb,
+	0x49, 0xa4, 0xca, 0x22, 0xb4, 0x9b, 0xb7, 0x4f, 0x50, 0xc9, 0x66, 0x5b, 0x20, 0x5e, 0x51, 0xbb,
+	0x59, 0xc3, 0x93, 0x80, 0x60, 0x59, 0x15, 0x58, 0xe7, 0x5a, 0xb5, 0x55, 0x17, 0x51, 0x6d, 0x6e,
+	0xbf, 0xb6, 0xf6, 0xca, 0xbd, 0xfb, 0xcd, 0xd0, 0xab, 0x98, 0xfc, 0xf8, 0x0c, 0xba, 0x50, 0x51,
+	0x68, 0xd1, 0x90, 0x89, 0xb3, 0x8b, 0x54, 0x16, 0xf5, 0x3b, 0xbb, 0x19, 0x2b, 0x08, 0xe7, 0x13,
+	0x0e, 0x67, 0x4e, 0x1a, 0x93, 0xc3, 0x28, 0xbb, 0x1c, 0x93, 0x72, 0x08, 0x99, 0x4e, 0x21, 0xc9,
+	0xa7, 0x20, 0xef, 0x00, 0x0d, 0x39, 0xe5, 0x7b, 0xe9, 0xca, 0x2c, 0xcc, 0xcc, 0x0a, 0xac, 0xa7,
+	0xfc, 0x28, 0x28, 0xaa, 0x41, 0x43, 0xc2, 0xe3, 0x1a, 0x5a, 0x3e, 0xa0, 0x34, 0x76, 0xe8, 0x53,
+	0x40, 0x24, 0x40, 0x13, 0x4c, 0x84, 0x4c, 0xec, 0xb2, 0x32, 0x27, 0xf3, 0xf2, 0x6a, 0xed, 0x40,
+	0x93, 0xb2, 0x6e, 0x43, 0x83, 0xe5, 0xca, 0x3e, 0x9b, 0x8a, 0x33, 0x9e, 0x80, 0x41, 0xb1, 0xb3,
+	0xe0, 0xc0, 0x48, 0x94, 0x22, 0x2f, 0x47, 0xe1, 0x09, 0x96, 0xfb, 0xb0, 0x3f, 0x34, 0x79, 0x6f,
+	0xd5, 0xf2, 0x2b, 0x75, 0x72, 0x65, 0x7e, 0xb4, 0x07, 0x44, 0x99, 0x08, 0xf4, 0x1d, 0x8a, 0x8f,
+	0xf2, 0x8d, 0x5f, 0x32, 0xde, 0x5d, 0x7f, 0x61, 0x89, 0x8d, 0x7b, 0xa0, 0xc6, 0xd3, 0x81, 0x1f,
+	0x8b, 0x67, 0x4d, 0x42, 0x5d, 0x3f, 0x16, 0xcb, 0x35, 0x04, 0xb6, 0x6b, 0xf7, 0xc9, 0x7a, 0x4a,
+	0xdd, 0x31, 0xa7, 0x3b, 0x89, 0x47, 0x93, 0x54, 0xbf, 0x83, 0xe6, 0x98, 0xfc, 0xca, 0xef, 0x53,
+	0xb5, 0x77, 0x10, 0x8d, 0x91, 0x14, 0x05, 0x2c, 0x57, 0x5f, 0x28, 0xaf, 0xf6, 0xde, 0xe4, 0x0d,
+	0xb4, 0x5e, 0x7f, 0xe4, 0x11, 0xee, 0x8e, 0xba, 0x94, 0x13, 0x81, 0x33, 0x11, 0xc4, 0x50, 0x4c,
+	0x14, 0xee, 0xce, 0xca, 0x99, 0x7c, 0x55, 0x46, 0x71, 0xf1, 0xff, 0x3f, 0xb6, 0x88, 0xce, 0x59,
+	0x2d, 0xf0, 0x29, 0x37, 0x92, 0x3f, 0x8b, 0x21, 0x58, 0x67, 0xb3, 0xae, 0xa2, 0x5b, 0x3c, 0x80,
+	0xf0, 0x27, 0x35, 0x80, 0xe1, 0xb9, 0x62, 0xb6, 0xf4, 0xf8, 0xc1, 0x9f, 0xd2, 0x2a, 0xf2, 0x82,
+	0xa0, 0xf0, 0xa7, 0x35, 0xfd, 0x0a, 0xba, 0x50, 0xcc, 0x56, 0x1a, 0x7a, 0xfc, 0x19, 0x4d, 0xbf,
+	0x88, 0xce, 0x17, 0xab, 0xe5, 0xbe, 0x14, 0x7f, 0x56, 0xd3, 0x75, 0xb4, 0x54, 0x2c, 0xc9, 0x1e,
+	0x14, 0x7f, 0x4e, 0x15, 0x2f, 0xf5, 0x9f, 0xf8, 0xf3, 0x9a, 0x7e, 0x15, 0xad, 0x1c, 0x5b, 0x52,
+	0xbb, 0x4d, 0xfc, 0x05, 0xc5, 0xed, 0x52, 0xeb, 0x88, 0xbf, 0xa8, 0x41, 0x6c, 0xf5, 0xf2, 0x4a,
+	0xd6, 0x23, 0xe2, 0x2f, 0x69, 0x40, 0x7b, 0xcf, 0x15, 0x0b, 0x93, 0xfe, 0x0e, 0x7f, 0x59, 0x83,
+	0x9e, 0xfb, 0x52, 0x31, 0x5f, 0xef, 0xed, 0xf0, 0x57, 0x14, 0xc5, 0xc9, 0x2b, 0x1d, 0x7f, 0x55,
+	0x99, 0x9f, 0xf4, 0x70, 0xf8, 0x6b, 0x9a, 0x7e, 0x09, 0x3d, 0x7f, 0xec, 0x7a, 0xa9, 0xc3, 0xc2,
+	0x5f, 0xd7, 0x74, 0x03, 0x5d, 0x2d, 0xd6, 0xa6, 0x76, 0x57, 0xf8, 0x1b, 0x1a, 0xc0, 0x73, 0x79,
+	0x12, 0x62, 0xa5, 0x57, 0xc1, 0xdf, 0xd4, 0xe0, 0x8a, 0x5f, 0x54, 0x17, 0x4b, 0x3d, 0x0a, 0xfe,
+	0x96, 0x12, 0xd2, 0x72, 0x6f, 0x81, 0xbf, 0xad, 0x44, 0xe6, 0xb8, 0xaf, 0xc0, 0xdf, 0xd1, 0xf4,
+	0xff, 0x43, 0x37, 0xdf, 0x20, 0xa7, 0xc7, 0x8f, 0x34, 0xfc, 0x5d, 0x65, 0xef, 0x5a, 0x97, 0x81,
+	0xbf, 0xa7, 0x38, 0xae, 0xd2, 0x39, 0xfe, 0xbe, 0x06, 0xaf, 0x9f, 0x2b, 0xc5, 0xe2, 0xb4, 0xc7,
+	0x1c, 0xfe, 0x81, 0x92, 0xf3, 0x2a, 0xb7, 0xe3, 0x1f, 0x6a, 0xfa, 0x6d, 0x74, 0x63, 0x12, 0xbb,
+	0x69, 0x14, 0x0e, 0xa4, 0x8d, 0x7f, 0xa4, 0x01, 0xe1, 0xad, 0xbe, 0x91, 0xd8, 0x74, 0xaa, 0xc6,
+	0x3f, 0x56, 0x5c, 0x57, 0x7f, 0x8e, 0xc1, 0x3f, 0x51, 0x12, 0xaa, 0x70, 0x2b, 0xfe, 0xa9, 0x12,
+	0x93, 0x5a, 0xb7, 0x84, 0x7f, 0xa6, 0xe8, 0x2a, 0x9d, 0x12, 0xfe, 0xb9, 0xb2, 0xa9, 0xca, 0x8f,
+	0xf8, 0x17, 0x8a, 0xa2, 0xf2, 0x43, 0x0f, 0xfe, 0xa5, 0x02, 0xd9, 0x3a, 0x3d, 0xe2, 0x5f, 0x29,
+	0xd7, 0xa3, 0xf4, 0xdb, 0x0b, 0xfe, 0xb5, 0x02, 0x82, 0xe3, 0x9f, 0x57, 0xf0, 0x6f, 0x34, 0xfd,
+	0x16, 0xba, 0x36, 0xcd, 0xe6, 0x31, 0x7f, 0xe2, 0xdf, 0x2a, 0x19, 0xaa, 0xb2, 0x25, 0xfe, 0x9d,
+	0x52, 0x1c, 0x2a, 0x4c, 0x89, 0x7f, 0xaf, 0xec, 0x30, 0xbd, 0x9b, 0xc0, 0x7f, 0xd0, 0xa0, 0x61,
+	0xc4, 0x85, 0x50, 0xc1, 0x9d, 0xf8, 0x8f, 0x9a, 0xfe, 0x02, 0xba, 0x3e, 0x29, 0x53, 0x8f, 0xfd,
+	0xc0, 0xe7, 0x47, 0x1d, 0xa8, 0x2f, 0x91, 0xa8, 0x16, 0x03, 0x36, 0x1c, 0x42, 0x97, 0x85, 0xff,
+	0xa4, 0xec, 0x9f, 0x4b, 0x41, 0x4c, 0x13, 0xbe, 0x0b, 0xde, 0xfd, 0x59, 0x59, 0xad, 0xd0, 0x1e,
+	0xfe, 0xcb, 0xf4, 0xd5, 0x8c, 0xba, 0xf0, 0x5f, 0x95, 0x80, 0x96, 0x7e, 0x20, 0xc3, 0x7f, 0x53,
+	0xab, 0x40, 0x41, 0x4c, 0xf8, 0xef, 0x4a, 0xfe, 0x14, 0x02, 0xc1, 0xff, 0x50, 0x4a, 0x6b, 0x4e,
+	0x09, 0xf8, 0x75, 0xe5, 0x86, 0x4c, 0xfb, 0xf1, 0x01, 0xff, 0x53, 0x85, 0xa9, 0xc2, 0x69, 0xf8,
+	0x5f, 0x2a, 0x62, 0xca, 0xac, 0x81, 0xff, 0xad, 0xad, 0x37, 0xda, 0x33, 0x1f, 0x9d, 0x79, 0xe6,
+	0xbf, 0x01, 0x00, 0x00, 0xff, 0xff, 0x80, 0x75, 0x2a, 0xb1, 0x51, 0x15, 0x00, 0x00,
 }
