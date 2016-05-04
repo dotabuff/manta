@@ -2895,3 +2895,8 @@ message CMsgClientToGCGetGiftPermissionsResponse {
 	repeated uint32 allowed_account_ids = 2;
 }
 
+message CMsgClientToGCPublishUserStat {
+	optional uint32 user_stats_event = 1;
+	optional uint64 reference_data = 2;
+}
+

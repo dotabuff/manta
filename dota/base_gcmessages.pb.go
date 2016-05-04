@@ -569,6 +569,7 @@ It has these top-level messages:
 	CMsgMVPVotesForMatch
 	CMsgClientToGCGetGiftPermissions
 	CMsgClientToGCGetGiftPermissionsResponse
+	CMsgClientToGCPublishUserStat
 	CMsgGCPlayerInfo
 	CMsgDOTACreateFantasyLeagueRequest
 	CMsgDOTACreateFantasyLeagueResponse
