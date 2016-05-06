@@ -97,7 +97,7 @@ func (p *Properties) readProperties(r *reader, ser *dt) {
 	// iterate all the fields and set their corresponding values
 	for _, f := range fieldPath.fields {
 		if v(6) {
-			_debugf("decoding pos=%d name=%s type=%s encoder=%d", r.pos, f.Name, f.Field.Type, f.Field.Encoder)
+			_debugf("decoding pos=%d name=%s type=%s encoder=%s", r.pos, f.Name, f.Field.Type, f.Field.Encoder)
 		}
 
 		if f.Field.Serializer.DecodeContainer != nil {
