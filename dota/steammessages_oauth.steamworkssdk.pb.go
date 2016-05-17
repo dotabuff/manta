@@ -24,7 +24,7 @@ func (m *COAuthToken_ImplicitGrantNoPrompt_Request) Reset() {
 func (m *COAuthToken_ImplicitGrantNoPrompt_Request) String() string { return proto.CompactTextString(m) }
 func (*COAuthToken_ImplicitGrantNoPrompt_Request) ProtoMessage()    {}
 func (*COAuthToken_ImplicitGrantNoPrompt_Request) Descriptor() ([]byte, []int) {
-	return fileDescriptor27, []int{0}
+	return fileDescriptor29, []int{0}
 }
 
 func (m *COAuthToken_ImplicitGrantNoPrompt_Request) GetClientid() string {
@@ -48,7 +48,7 @@ func (m *COAuthToken_ImplicitGrantNoPrompt_Response) String() string {
 }
 func (*COAuthToken_ImplicitGrantNoPrompt_Response) ProtoMessage() {}
 func (*COAuthToken_ImplicitGrantNoPrompt_Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor27, []int{1}
+	return fileDescriptor29, []int{1}
 }
 
 func (m *COAuthToken_ImplicitGrantNoPrompt_Response) GetAccessToken() string {
@@ -70,7 +70,7 @@ func init() {
 	proto.RegisterType((*COAuthToken_ImplicitGrantNoPrompt_Response)(nil), "dota.COAuthToken_ImplicitGrantNoPrompt_Response")
 }
 
-var fileDescriptor27 = []byte{
+var fileDescriptor29 = []byte{
 	// 419 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x8c, 0x52, 0x4d, 0x8b, 0x13, 0x41,
 	0x10, 0x25, 0x8b, 0x07, 0x1d, 0xf6, 0x34, 0x20, 0x84, 0x5c, 0x2c, 0xe2, 0x21, 0xbb, 0x22, 0xe3,

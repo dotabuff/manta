@@ -1,6 +1,7 @@
 package dota;
 
 import "steammessages.proto";
+import "dota_shared_enums.proto";
 import "dota_gcmessages_common.proto";
 import "econ_gcmessages.proto";
 import "network_connection.proto";
@@ -87,6 +88,7 @@ message CMsgGameserverCrash {
 	optional DOTA_GameState game_state = 3 [default = DOTA_GAMERULES_STATE_INIT];
 	optional fixed32 sentinel_save_time = 4;
 	optional fixed64 custom_game_id = 11;
+	optional uint32 tournament_id = 12;
 	optional fixed64 server_steam_id = 5;
 	optional fixed32 server_public_ip_addr = 6;
 	optional uint32 server_port = 7;
@@ -397,6 +399,21 @@ message CMsgGameMatchSignoutResponse {
 		optional bytes contents = 2;
 	}
 
+	message PlayerMetadata {
+		optional uint32 hero_id = 1;
+		optional uint32 avg_kills_x16 = 2;
+		optional uint32 avg_deaths_x16 = 3;
+		optional uint32 avg_assists_x16 = 4;
+		optional uint32 avg_gpm_x16 = 5;
+		optional uint32 avg_xpm_x16 = 6;
+		optional uint32 best_kills_x16 = 7;
+		optional uint32 best_assists_x16 = 8;
+		optional uint32 best_gpm_x16 = 9;
+		optional uint32 best_xpm_x16 = 10;
+		optional uint32 win_streak = 11;
+		optional uint32 best_win_streak = 12;
+	}
+
 	optional uint64 match_id = 1;
 	optional fixed32 replay_salt = 2;
 	repeated CLobbyTimedRewardDetails timed_reward_details = 3;
@@ -405,6 +422,7 @@ message CMsgGameMatchSignoutResponse {
 	repeated CMsgGameMatchSignoutResponse.CAdditionalSignoutMsg additional_msgs = 6;
 	optional fixed32 metadata_private_key = 7;
 	optional CMsgDOTAMatch match_details = 8;
+	repeated CMsgGameMatchSignoutResponse.PlayerMetadata players_metadata = 9;
 }
 
 message CMsgTimedRewardContainer {
@@ -877,6 +895,7 @@ message CMsgSignOutUpdatePlayerChallenge {
 		optional uint32 event_id = 1;
 		optional uint32 sequence_id = 3;
 		optional uint32 progress = 4;
+		optional uint32 challenge_rank = 5;
 	}
 
 	optional uint32 account_id = 1;
@@ -939,6 +958,16 @@ message CMsgSignOutXPCoins {
 	optional uint32 event_id = 2;
 	optional uint64 match_id = 3;
 	optional uint32 timestamp = 4;
+}
+
+message CMsgSignOutCommunityGoalProgress {
+	message EventGoalIncrement {
+		optional uint32 event_goal_id = 1;
+		optional uint32 increment_amount = 2;
+	}
+
+	optional uint32 event_id = 1;
+	repeated CMsgSignOutCommunityGoalProgress.EventGoalIncrement event_increments = 2;
 }
 
 message CMsgServerToGCPostMatchTip {

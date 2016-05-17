@@ -22,7 +22,7 @@ func (m *CCloud_GetUploadServerInfo_Request) Reset()         { *m = CCloud_GetUp
 func (m *CCloud_GetUploadServerInfo_Request) String() string { return proto.CompactTextString(m) }
 func (*CCloud_GetUploadServerInfo_Request) ProtoMessage()    {}
 func (*CCloud_GetUploadServerInfo_Request) Descriptor() ([]byte, []int) {
-	return fileDescriptor26, []int{0}
+	return fileDescriptor28, []int{0}
 }
 
 func (m *CCloud_GetUploadServerInfo_Request) GetAppid() uint32 {
@@ -41,7 +41,7 @@ func (m *CCloud_GetUploadServerInfo_Response) Reset()         { *m = CCloud_GetU
 func (m *CCloud_GetUploadServerInfo_Response) String() string { return proto.CompactTextString(m) }
 func (*CCloud_GetUploadServerInfo_Response) ProtoMessage()    {}
 func (*CCloud_GetUploadServerInfo_Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor26, []int{1}
+	return fileDescriptor28, []int{1}
 }
 
 func (m *CCloud_GetUploadServerInfo_Response) GetServerUrl() string {
@@ -60,7 +60,7 @@ type CCloud_GetFileDetails_Request struct {
 func (m *CCloud_GetFileDetails_Request) Reset()                    { *m = CCloud_GetFileDetails_Request{} }
 func (m *CCloud_GetFileDetails_Request) String() string            { return proto.CompactTextString(m) }
 func (*CCloud_GetFileDetails_Request) ProtoMessage()               {}
-func (*CCloud_GetFileDetails_Request) Descriptor() ([]byte, []int) { return fileDescriptor26, []int{2} }
+func (*CCloud_GetFileDetails_Request) Descriptor() ([]byte, []int) { return fileDescriptor28, []int{2} }
 
 func (m *CCloud_GetFileDetails_Request) GetUgcid() uint64 {
 	if m != nil && m.Ugcid != nil {
@@ -90,7 +90,7 @@ type CCloud_UserFile struct {
 func (m *CCloud_UserFile) Reset()                    { *m = CCloud_UserFile{} }
 func (m *CCloud_UserFile) String() string            { return proto.CompactTextString(m) }
 func (*CCloud_UserFile) ProtoMessage()               {}
-func (*CCloud_UserFile) Descriptor() ([]byte, []int) { return fileDescriptor26, []int{3} }
+func (*CCloud_UserFile) Descriptor() ([]byte, []int) { return fileDescriptor28, []int{3} }
 
 func (m *CCloud_UserFile) GetAppid() uint32 {
 	if m != nil && m.Appid != nil {
@@ -149,7 +149,7 @@ type CCloud_GetFileDetails_Response struct {
 func (m *CCloud_GetFileDetails_Response) Reset()                    { *m = CCloud_GetFileDetails_Response{} }
 func (m *CCloud_GetFileDetails_Response) String() string            { return proto.CompactTextString(m) }
 func (*CCloud_GetFileDetails_Response) ProtoMessage()               {}
-func (*CCloud_GetFileDetails_Response) Descriptor() ([]byte, []int) { return fileDescriptor26, []int{4} }
+func (*CCloud_GetFileDetails_Response) Descriptor() ([]byte, []int) { return fileDescriptor28, []int{4} }
 
 func (m *CCloud_GetFileDetails_Response) GetDetails() *CCloud_UserFile {
 	if m != nil {
@@ -170,7 +170,7 @@ func (m *CCloud_EnumerateUserFiles_Request) Reset()         { *m = CCloud_Enumer
 func (m *CCloud_EnumerateUserFiles_Request) String() string { return proto.CompactTextString(m) }
 func (*CCloud_EnumerateUserFiles_Request) ProtoMessage()    {}
 func (*CCloud_EnumerateUserFiles_Request) Descriptor() ([]byte, []int) {
-	return fileDescriptor26, []int{5}
+	return fileDescriptor28, []int{5}
 }
 
 func (m *CCloud_EnumerateUserFiles_Request) GetAppid() uint32 {
@@ -211,7 +211,7 @@ func (m *CCloud_EnumerateUserFiles_Response) Reset()         { *m = CCloud_Enume
 func (m *CCloud_EnumerateUserFiles_Response) String() string { return proto.CompactTextString(m) }
 func (*CCloud_EnumerateUserFiles_Response) ProtoMessage()    {}
 func (*CCloud_EnumerateUserFiles_Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor26, []int{6}
+	return fileDescriptor28, []int{6}
 }
 
 func (m *CCloud_EnumerateUserFiles_Response) GetFiles() []*CCloud_UserFile {
@@ -237,7 +237,7 @@ type CCloud_Delete_Request struct {
 func (m *CCloud_Delete_Request) Reset()                    { *m = CCloud_Delete_Request{} }
 func (m *CCloud_Delete_Request) String() string            { return proto.CompactTextString(m) }
 func (*CCloud_Delete_Request) ProtoMessage()               {}
-func (*CCloud_Delete_Request) Descriptor() ([]byte, []int) { return fileDescriptor26, []int{7} }
+func (*CCloud_Delete_Request) Descriptor() ([]byte, []int) { return fileDescriptor28, []int{7} }
 
 func (m *CCloud_Delete_Request) GetFilename() string {
 	if m != nil && m.Filename != nil {
@@ -260,7 +260,7 @@ type CCloud_Delete_Response struct {
 func (m *CCloud_Delete_Response) Reset()                    { *m = CCloud_Delete_Response{} }
 func (m *CCloud_Delete_Response) String() string            { return proto.CompactTextString(m) }
 func (*CCloud_Delete_Response) ProtoMessage()               {}
-func (*CCloud_Delete_Response) Descriptor() ([]byte, []int) { return fileDescriptor26, []int{8} }
+func (*CCloud_Delete_Response) Descriptor() ([]byte, []int) { return fileDescriptor28, []int{8} }
 
 func init() {
 	proto.RegisterType((*CCloud_GetUploadServerInfo_Request)(nil), "dota.CCloud_GetUploadServerInfo_Request")
@@ -274,7 +274,7 @@ func init() {
 	proto.RegisterType((*CCloud_Delete_Response)(nil), "dota.CCloud_Delete_Response")
 }
 
-var fileDescriptor26 = []byte{
+var fileDescriptor28 = []byte{
 	// 898 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x94, 0x95, 0xdd, 0x6e, 0x1c, 0x35,
 	0x14, 0xc7, 0x35, 0x24, 0x9b, 0xb6, 0x8e, 0x42, 0x8b, 0xab, 0xc2, 0x6a, 0xcb, 0x87, 0x3b, 0x4d,

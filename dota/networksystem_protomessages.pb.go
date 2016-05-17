@@ -22,7 +22,7 @@ func (m *NetMessageSplitscreenUserChanged) Reset()         { *m = NetMessageSpli
 func (m *NetMessageSplitscreenUserChanged) String() string { return proto.CompactTextString(m) }
 func (*NetMessageSplitscreenUserChanged) ProtoMessage()    {}
 func (*NetMessageSplitscreenUserChanged) Descriptor() ([]byte, []int) {
-	return fileDescriptor22, []int{0}
+	return fileDescriptor24, []int{0}
 }
 
 func (m *NetMessageSplitscreenUserChanged) GetSlot() uint32 {
@@ -40,7 +40,7 @@ type NetMessageConnectionClosed struct {
 func (m *NetMessageConnectionClosed) Reset()                    { *m = NetMessageConnectionClosed{} }
 func (m *NetMessageConnectionClosed) String() string            { return proto.CompactTextString(m) }
 func (*NetMessageConnectionClosed) ProtoMessage()               {}
-func (*NetMessageConnectionClosed) Descriptor() ([]byte, []int) { return fileDescriptor22, []int{1} }
+func (*NetMessageConnectionClosed) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{1} }
 
 func (m *NetMessageConnectionClosed) GetReason() uint32 {
 	if m != nil && m.Reason != nil {
@@ -57,7 +57,7 @@ type NetMessageConnectionCrashed struct {
 func (m *NetMessageConnectionCrashed) Reset()                    { *m = NetMessageConnectionCrashed{} }
 func (m *NetMessageConnectionCrashed) String() string            { return proto.CompactTextString(m) }
 func (*NetMessageConnectionCrashed) ProtoMessage()               {}
-func (*NetMessageConnectionCrashed) Descriptor() ([]byte, []int) { return fileDescriptor22, []int{2} }
+func (*NetMessageConnectionCrashed) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{2} }
 
 func (m *NetMessageConnectionCrashed) GetReason() uint32 {
 	if m != nil && m.Reason != nil {
@@ -75,7 +75,7 @@ type NetMessagePacketStart struct {
 func (m *NetMessagePacketStart) Reset()                    { *m = NetMessagePacketStart{} }
 func (m *NetMessagePacketStart) String() string            { return proto.CompactTextString(m) }
 func (*NetMessagePacketStart) ProtoMessage()               {}
-func (*NetMessagePacketStart) Descriptor() ([]byte, []int) { return fileDescriptor22, []int{3} }
+func (*NetMessagePacketStart) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{3} }
 
 func (m *NetMessagePacketStart) GetIncomingSequence() uint32 {
 	if m != nil && m.IncomingSequence != nil {
@@ -98,7 +98,7 @@ type NetMessagePacketEnd struct {
 func (m *NetMessagePacketEnd) Reset()                    { *m = NetMessagePacketEnd{} }
 func (m *NetMessagePacketEnd) String() string            { return proto.CompactTextString(m) }
 func (*NetMessagePacketEnd) ProtoMessage()               {}
-func (*NetMessagePacketEnd) Descriptor() ([]byte, []int) { return fileDescriptor22, []int{4} }
+func (*NetMessagePacketEnd) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{4} }
 
 func init() {
 	proto.RegisterType((*NetMessageSplitscreenUserChanged)(nil), "dota.NetMessageSplitscreenUserChanged")
@@ -108,7 +108,7 @@ func init() {
 	proto.RegisterType((*NetMessagePacketEnd)(nil), "dota.NetMessagePacketEnd")
 }
 
-var fileDescriptor22 = []byte{
+var fileDescriptor24 = []byte{
 	// 217 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x6c, 0xce, 0x31, 0x4b, 0x03, 0x41,
 	0x10, 0x05, 0x60, 0x4f, 0x83, 0xc5, 0xa0, 0x82, 0x27, 0x07, 0x51, 0x11, 0x62, 0x2a, 0x0b, 0x15,

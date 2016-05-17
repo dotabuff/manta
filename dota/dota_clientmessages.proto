@@ -58,6 +58,8 @@ enum EDotaClientMessages {
 	DOTA_CM_GenericBooleanConvar = 352;
 	DOTA_CM_EventPointsTip = 353;
 	DOTA_CM_MatchMetadata = 354;
+	DOTA_CM_KillMyHero = 355;
+	DOTA_CM_QuestStatus = 356;
 }
 
 message CDOTAClientMsg_MapPing {
@@ -302,5 +304,18 @@ message CDOTAClientMsg_XPAlert {
 message CDOTAClientMsg_MatchMetadata {
 	optional uint64 match_id = 1;
 	optional bytes metadata = 2;
+}
+
+message CDOTAClientMsg_KillMyHero {
+}
+
+message CDOTAClientMsg_QuestStatus {
+	optional uint32 quest_id = 1;
+	optional uint32 challenge_id = 2;
+	optional uint32 progress = 3;
+	optional uint32 goal = 4;
+	optional uint32 query = 5;
+	optional float fail_gametime = 6;
+	optional uint32 item_id = 7;
 }
 

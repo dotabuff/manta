@@ -20,8 +20,10 @@ It is generated from these files:
 	dota_gcmessages_server.proto
 	dota_match_metadata.proto
 	dota_modifiers.proto
+	dota_shared_enums.proto
 	dota_usermessages.proto
 	econ_gcmessages.proto
+	econ_shared_enums.proto
 	gameevents.proto
 	gcsdk_gcmessages.proto
 	gcsystemmsgs.proto
@@ -201,6 +203,8 @@ It has these top-level messages:
 	CDOTAClientMsg_ExecuteOrders
 	CDOTAClientMsg_XPAlert
 	CDOTAClientMsg_MatchMetadata
+	CDOTAClientMsg_KillMyHero
+	CDOTAClientMsg_QuestStatus
 	CDOTAMsg_LocationPing
 	CDOTAMsg_ItemAlert
 	CDOTAMsg_MapLine
@@ -277,23 +281,13 @@ It has these top-level messages:
 	CMsgDOTATeamAdminSDO
 	CMsgDOTATeamMember
 	CMsgDOTATeam
+	CMsgDOTATeamInfo
 	CMsgDOTATeamsInfo
+	CMsgDOTAMyTeamInfoRequest
 	CMsgDOTACreateTeam
 	CMsgDOTACreateTeamResponse
-	CMsgDOTAEditTeam
-	CMsgDOTAEditTeamLogo
-	CMsgDOTAEditTeamLogoResponse
 	CMsgDOTAEditTeamDetails
 	CMsgDOTAEditTeamDetailsResponse
-	CMsgDOTADisbandTeam
-	CMsgDOTADisbandTeamResponse
-	CMsgDOTARequestTeamData
-	CMsgDOTARequestTeamDataResponse
-	CMsgDOTATeamData
-	CMsgDOTATeamProfileRequest
-	CMsgDOTATeamMemberProfileRequest
-	CMsgDOTATeamIDByNameRequest
-	CMsgDOTATeamIDByNameResponse
 	CMsgDOTATeamProfileResponse
 	CMsgDOTAProTeamListRequest
 	CMsgDOTAProTeamListResponse
@@ -303,11 +297,12 @@ It has these top-level messages:
 	CMsgDOTATeamInvite_InviteeResponseToGC
 	CMsgDOTATeamInvite_GCResponseToInviter
 	CMsgDOTATeamInvite_GCResponseToInvitee
-	CMsgDOTATeamOnProfile
 	CMsgDOTAKickTeamMember
 	CMsgDOTAKickTeamMemberResponse
 	CMsgDOTATransferTeamAdmin
 	CMsgDOTATransferTeamAdminResponse
+	CMsgDOTAChangeTeamSub
+	CMsgDOTAChangeTeamSubResponse
 	CMsgDOTALeaveTeam
 	CMsgDOTALeaveTeamResponse
 	CMsgDOTABetaParticipation
@@ -361,6 +356,10 @@ It has these top-level messages:
 	CMsgDOTASubmitPlayerReportResponse
 	CMsgDOTAReportCountsRequest
 	CMsgDOTAReportCountsResponse
+	CMsgDOTASubmitLobbyMVPVote
+	CMsgDOTASubmitLobbyMVPVoteResponse
+	CMsgDOTALobbyMVPNotifyRecipient
+	CMsgDOTALobbyMVPAwarded
 	CMsgDOTAKickedFromMatchmakingQueue
 	CMsgDOTARequestSaveGames
 	CMsgDOTARequestSaveGamesResponse
@@ -554,6 +553,8 @@ It has these top-level messages:
 	CMsgPlayerConductScorecard
 	CMsgClientToGCWageringRequest
 	CMsgGCToClientWageringResponse
+	CMsgGCToClientWageringUpdate
+	CMsgGCToClientArcanaVotesUpdate
 	CMsgClientToGCMysteryItem
 	CMsgGCToClientMysteryItemResponse
 	CMsgClientToGCGetEventGoals
@@ -567,9 +568,26 @@ It has these top-level messages:
 	CMsgClientToGCVoteForMVP
 	CMsgClientToGCVoteForMVPResponse
 	CMsgMVPVotesForMatch
+	CMsgLeaguePrizePool
+	CMsgClientToGCTeammateStatsRequest
+	CMsgClientToGCTeammateStatsResponse
 	CMsgClientToGCGetGiftPermissions
 	CMsgClientToGCGetGiftPermissionsResponse
+	CMsgClientToGCVoteForArcana
+	CMsgClientToGCVoteForArcanaResponse
+	CMsgArcanaVotes
+	CMsgClientToGCRequestArcanaVotesRemaining
+	CMsgClientToGCRequestArcanaVotesRemainingResponse
+	CMsgClientToGCRequestEventPointLog
+	CMsgClientToGCRequestEventPointLogResponse
 	CMsgClientToGCPublishUserStat
+	CMsgClientToGCRedeemReward
+	CMsgGCToClientRedeemRewardResponse
+	CMsgClientToGCRequestLinaPlaysRemaining
+	CMsgClientToGCRequestLinaPlaysRemainingResponse
+	CMsgClientToGCRequestLinaGameResult
+	CMsgClientToGCRequestLinaGameResultResponse
+	CMsgGCToClientQuestProgressUpdated
 	CMsgGCPlayerInfo
 	CMsgDOTACreateFantasyLeagueRequest
 	CMsgDOTACreateFantasyLeagueResponse
@@ -644,6 +662,7 @@ It has these top-level messages:
 	CMsgDOTAPassportVote
 	CMsgDOTATournamentInfo
 	CMsgWeekendTourneyOpts
+	CMsgWeekendTourneyLeave
 	CSODOTAGameAccountClient
 	CSODOTAPartyMember
 	CSODOTAParty
@@ -689,7 +708,6 @@ It has these top-level messages:
 	CMsgDOTARedeemItemResponse
 	CMsgDOTACombatLogEntry
 	CMsgDOTAProfileCard
-	CMsgGCToClientNewBloomTimingUpdated
 	CSODOTAPlayerChallenge
 	CMsgClientToGCRerollPlayerChallenge
 	CMsgGCRerollPlayerChallengeResponse
@@ -783,6 +801,7 @@ It has these top-level messages:
 	CMsgGCToServerUpdateBroadcastCheers
 	CMsgSignOutWagerStats
 	CMsgSignOutXPCoins
+	CMsgSignOutCommunityGoalProgress
 	CMsgServerToGCPostMatchTip
 	CMsgServerToGCPostMatchTipResponse
 	CDOTAMatchMetadataFile
@@ -889,6 +908,7 @@ It has these top-level messages:
 	CDOTAUserMsg_ProjectionEvent
 	CDOTAUserMsg_XPAlert
 	CDOTAUserMsg_UpdateQuestProgress
+	CDOTAUserMsg_QuestStatus
 	CMsgApplyAutograph
 	CMsgAdjustItemEquippedState
 	CMsgEconPlayerStrangeCountAdjustment
@@ -922,6 +942,7 @@ It has these top-level messages:
 	CMsgGCToGCGrantSelfMadeItemToAccount
 	CMsgUseItem
 	CMsgServerUseItem
+	CMsgUseMultipleItems
 	CMsgGCPartnerBalanceRequest
 	CMsgGCPartnerBalanceResponse
 	CGCStoreRechargeRedirect_LineItem
@@ -968,7 +989,6 @@ It has these top-level messages:
 	CAttribute_String
 	CWorkshop_GetItemDailyRevenue_Request
 	CWorkshop_GetItemDailyRevenue_Response
-	CMsgGenericResult
 	CMsgSQLGCToGCGrantBackpackSlots
 	CMsgClientToGCLookupAccountName
 	CMsgClientToGCLookupAccountNameResponse
@@ -983,6 +1003,9 @@ It has these top-level messages:
 	CMsgGCToGCBroadcastConsoleCommand
 	CMsgGCToGCConsoleOutput
 	CMsgItemAges
+	CMsgGCToGCInternalTestMsg
+	CMsgGCToGCClientServerVersionsUpdated
+	CMsgGenericResult
 	CMsgVDebugGameSessionIDEvent
 	CMsgPlaceDecalEvent
 	CMsgClearWorldDecalsEvent
@@ -1395,6 +1418,7 @@ It has these top-level messages:
 	CUserMsg_ParticleManager
 	CUserMsg_HudError
 	CUserMsg_CustomGameEvent
+	CUserMessageHapticPulse
 */
 package dota
 

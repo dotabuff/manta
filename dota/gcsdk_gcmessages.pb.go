@@ -45,7 +45,7 @@ func (x *ESourceEngine) UnmarshalJSON(data []byte) error {
 	*x = ESourceEngine(value)
 	return nil
 }
-func (ESourceEngine) EnumDescriptor() ([]byte, []int) { return fileDescriptor17, []int{0} }
+func (ESourceEngine) EnumDescriptor() ([]byte, []int) { return fileDescriptor19, []int{0} }
 
 type PartnerAccountType int32
 
@@ -85,7 +85,7 @@ func (x *PartnerAccountType) UnmarshalJSON(data []byte) error {
 	*x = PartnerAccountType(value)
 	return nil
 }
-func (PartnerAccountType) EnumDescriptor() ([]byte, []int) { return fileDescriptor17, []int{1} }
+func (PartnerAccountType) EnumDescriptor() ([]byte, []int) { return fileDescriptor19, []int{1} }
 
 type GCConnectionStatus int32
 
@@ -134,7 +134,7 @@ func (x *GCConnectionStatus) UnmarshalJSON(data []byte) error {
 	*x = GCConnectionStatus(value)
 	return nil
 }
-func (GCConnectionStatus) EnumDescriptor() ([]byte, []int) { return fileDescriptor17, []int{2} }
+func (GCConnectionStatus) EnumDescriptor() ([]byte, []int) { return fileDescriptor19, []int{2} }
 
 type CMsgSHA1Digest struct {
 	Block1           *uint64 `protobuf:"fixed64,1,req,name=block1" json:"block1,omitempty"`
@@ -146,7 +146,7 @@ type CMsgSHA1Digest struct {
 func (m *CMsgSHA1Digest) Reset()                    { *m = CMsgSHA1Digest{} }
 func (m *CMsgSHA1Digest) String() string            { return proto.CompactTextString(m) }
 func (*CMsgSHA1Digest) ProtoMessage()               {}
-func (*CMsgSHA1Digest) Descriptor() ([]byte, []int) { return fileDescriptor17, []int{0} }
+func (*CMsgSHA1Digest) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{0} }
 
 func (m *CMsgSHA1Digest) GetBlock1() uint64 {
 	if m != nil && m.Block1 != nil {
@@ -178,7 +178,7 @@ type CMsgSOIDOwner struct {
 func (m *CMsgSOIDOwner) Reset()                    { *m = CMsgSOIDOwner{} }
 func (m *CMsgSOIDOwner) String() string            { return proto.CompactTextString(m) }
 func (*CMsgSOIDOwner) ProtoMessage()               {}
-func (*CMsgSOIDOwner) Descriptor() ([]byte, []int) { return fileDescriptor17, []int{1} }
+func (*CMsgSOIDOwner) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{1} }
 
 func (m *CMsgSOIDOwner) GetType() uint32 {
 	if m != nil && m.Type != nil {
@@ -206,7 +206,7 @@ type CMsgSOSingleObject struct {
 func (m *CMsgSOSingleObject) Reset()                    { *m = CMsgSOSingleObject{} }
 func (m *CMsgSOSingleObject) String() string            { return proto.CompactTextString(m) }
 func (*CMsgSOSingleObject) ProtoMessage()               {}
-func (*CMsgSOSingleObject) Descriptor() ([]byte, []int) { return fileDescriptor17, []int{2} }
+func (*CMsgSOSingleObject) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{2} }
 
 func (m *CMsgSOSingleObject) GetTypeId() int32 {
 	if m != nil && m.TypeId != nil {
@@ -256,7 +256,7 @@ type CMsgSOMultipleObjects struct {
 func (m *CMsgSOMultipleObjects) Reset()                    { *m = CMsgSOMultipleObjects{} }
 func (m *CMsgSOMultipleObjects) String() string            { return proto.CompactTextString(m) }
 func (*CMsgSOMultipleObjects) ProtoMessage()               {}
-func (*CMsgSOMultipleObjects) Descriptor() ([]byte, []int) { return fileDescriptor17, []int{3} }
+func (*CMsgSOMultipleObjects) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{3} }
 
 func (m *CMsgSOMultipleObjects) GetObjectsModified() []*CMsgSOMultipleObjects_SingleObject {
 	if m != nil {
@@ -310,7 +310,7 @@ func (m *CMsgSOMultipleObjects_SingleObject) Reset()         { *m = CMsgSOMultip
 func (m *CMsgSOMultipleObjects_SingleObject) String() string { return proto.CompactTextString(m) }
 func (*CMsgSOMultipleObjects_SingleObject) ProtoMessage()    {}
 func (*CMsgSOMultipleObjects_SingleObject) Descriptor() ([]byte, []int) {
-	return fileDescriptor17, []int{3, 0}
+	return fileDescriptor19, []int{3, 0}
 }
 
 func (m *CMsgSOMultipleObjects_SingleObject) GetTypeId() int32 {
@@ -340,7 +340,7 @@ type CMsgSOCacheSubscribed struct {
 func (m *CMsgSOCacheSubscribed) Reset()                    { *m = CMsgSOCacheSubscribed{} }
 func (m *CMsgSOCacheSubscribed) String() string            { return proto.CompactTextString(m) }
 func (*CMsgSOCacheSubscribed) ProtoMessage()               {}
-func (*CMsgSOCacheSubscribed) Descriptor() ([]byte, []int) { return fileDescriptor17, []int{4} }
+func (*CMsgSOCacheSubscribed) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{4} }
 
 func (m *CMsgSOCacheSubscribed) GetObjects() []*CMsgSOCacheSubscribed_SubscribedType {
 	if m != nil {
@@ -394,7 +394,7 @@ func (m *CMsgSOCacheSubscribed_SubscribedType) Reset()         { *m = CMsgSOCach
 func (m *CMsgSOCacheSubscribed_SubscribedType) String() string { return proto.CompactTextString(m) }
 func (*CMsgSOCacheSubscribed_SubscribedType) ProtoMessage()    {}
 func (*CMsgSOCacheSubscribed_SubscribedType) Descriptor() ([]byte, []int) {
-	return fileDescriptor17, []int{4, 0}
+	return fileDescriptor19, []int{4, 0}
 }
 
 func (m *CMsgSOCacheSubscribed_SubscribedType) GetTypeId() int32 {
@@ -423,7 +423,7 @@ type CMsgSOCacheSubscribedUpToDate struct {
 func (m *CMsgSOCacheSubscribedUpToDate) Reset()                    { *m = CMsgSOCacheSubscribedUpToDate{} }
 func (m *CMsgSOCacheSubscribedUpToDate) String() string            { return proto.CompactTextString(m) }
 func (*CMsgSOCacheSubscribedUpToDate) ProtoMessage()               {}
-func (*CMsgSOCacheSubscribedUpToDate) Descriptor() ([]byte, []int) { return fileDescriptor17, []int{5} }
+func (*CMsgSOCacheSubscribedUpToDate) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{5} }
 
 func (m *CMsgSOCacheSubscribedUpToDate) GetVersion() uint64 {
 	if m != nil && m.Version != nil {
@@ -468,7 +468,7 @@ type CMsgSOCacheUnsubscribed struct {
 func (m *CMsgSOCacheUnsubscribed) Reset()                    { *m = CMsgSOCacheUnsubscribed{} }
 func (m *CMsgSOCacheUnsubscribed) String() string            { return proto.CompactTextString(m) }
 func (*CMsgSOCacheUnsubscribed) ProtoMessage()               {}
-func (*CMsgSOCacheUnsubscribed) Descriptor() ([]byte, []int) { return fileDescriptor17, []int{6} }
+func (*CMsgSOCacheUnsubscribed) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{6} }
 
 func (m *CMsgSOCacheUnsubscribed) GetOwnerSoid() *CMsgSOIDOwner {
 	if m != nil {
@@ -489,7 +489,7 @@ type CMsgSOCacheSubscriptionCheck struct {
 func (m *CMsgSOCacheSubscriptionCheck) Reset()                    { *m = CMsgSOCacheSubscriptionCheck{} }
 func (m *CMsgSOCacheSubscriptionCheck) String() string            { return proto.CompactTextString(m) }
 func (*CMsgSOCacheSubscriptionCheck) ProtoMessage()               {}
-func (*CMsgSOCacheSubscriptionCheck) Descriptor() ([]byte, []int) { return fileDescriptor17, []int{7} }
+func (*CMsgSOCacheSubscriptionCheck) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{7} }
 
 func (m *CMsgSOCacheSubscriptionCheck) GetVersion() uint64 {
 	if m != nil && m.Version != nil {
@@ -534,7 +534,7 @@ type CMsgSOCacheSubscriptionRefresh struct {
 func (m *CMsgSOCacheSubscriptionRefresh) Reset()                    { *m = CMsgSOCacheSubscriptionRefresh{} }
 func (m *CMsgSOCacheSubscriptionRefresh) String() string            { return proto.CompactTextString(m) }
 func (*CMsgSOCacheSubscriptionRefresh) ProtoMessage()               {}
-func (*CMsgSOCacheSubscriptionRefresh) Descriptor() ([]byte, []int) { return fileDescriptor17, []int{8} }
+func (*CMsgSOCacheSubscriptionRefresh) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{8} }
 
 func (m *CMsgSOCacheSubscriptionRefresh) GetOwnerSoid() *CMsgSOIDOwner {
 	if m != nil {
@@ -551,7 +551,7 @@ type CMsgSOCacheVersion struct {
 func (m *CMsgSOCacheVersion) Reset()                    { *m = CMsgSOCacheVersion{} }
 func (m *CMsgSOCacheVersion) String() string            { return proto.CompactTextString(m) }
 func (*CMsgSOCacheVersion) ProtoMessage()               {}
-func (*CMsgSOCacheVersion) Descriptor() ([]byte, []int) { return fileDescriptor17, []int{9} }
+func (*CMsgSOCacheVersion) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{9} }
 
 func (m *CMsgSOCacheVersion) GetVersion() uint64 {
 	if m != nil && m.Version != nil {
@@ -570,7 +570,7 @@ type CMsgGCMultiplexMessage struct {
 func (m *CMsgGCMultiplexMessage) Reset()                    { *m = CMsgGCMultiplexMessage{} }
 func (m *CMsgGCMultiplexMessage) String() string            { return proto.CompactTextString(m) }
 func (*CMsgGCMultiplexMessage) ProtoMessage()               {}
-func (*CMsgGCMultiplexMessage) Descriptor() ([]byte, []int) { return fileDescriptor17, []int{10} }
+func (*CMsgGCMultiplexMessage) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{10} }
 
 func (m *CMsgGCMultiplexMessage) GetMsgtype() uint32 {
 	if m != nil && m.Msgtype != nil {
@@ -604,7 +604,7 @@ type CGCToGCMsgMasterAck struct {
 func (m *CGCToGCMsgMasterAck) Reset()                    { *m = CGCToGCMsgMasterAck{} }
 func (m *CGCToGCMsgMasterAck) String() string            { return proto.CompactTextString(m) }
 func (*CGCToGCMsgMasterAck) ProtoMessage()               {}
-func (*CGCToGCMsgMasterAck) Descriptor() ([]byte, []int) { return fileDescriptor17, []int{11} }
+func (*CGCToGCMsgMasterAck) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{11} }
 
 func (m *CGCToGCMsgMasterAck) GetDirIndex() uint32 {
 	if m != nil && m.DirIndex != nil {
@@ -644,7 +644,7 @@ func (m *CGCToGCMsgMasterAck_Process) Reset()         { *m = CGCToGCMsgMasterAck
 func (m *CGCToGCMsgMasterAck_Process) String() string { return proto.CompactTextString(m) }
 func (*CGCToGCMsgMasterAck_Process) ProtoMessage()    {}
 func (*CGCToGCMsgMasterAck_Process) Descriptor() ([]byte, []int) {
-	return fileDescriptor17, []int{11, 0}
+	return fileDescriptor19, []int{11, 0}
 }
 
 func (m *CGCToGCMsgMasterAck_Process) GetDirIndex() uint32 {
@@ -669,7 +669,7 @@ type CGCToGCMsgMasterAck_Response struct {
 func (m *CGCToGCMsgMasterAck_Response) Reset()                    { *m = CGCToGCMsgMasterAck_Response{} }
 func (m *CGCToGCMsgMasterAck_Response) String() string            { return proto.CompactTextString(m) }
 func (*CGCToGCMsgMasterAck_Response) ProtoMessage()               {}
-func (*CGCToGCMsgMasterAck_Response) Descriptor() ([]byte, []int) { return fileDescriptor17, []int{12} }
+func (*CGCToGCMsgMasterAck_Response) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{12} }
 
 const Default_CGCToGCMsgMasterAck_Response_Eresult int32 = 2
 
@@ -688,7 +688,7 @@ type CMsgGCToGCUniverseStartup struct {
 func (m *CMsgGCToGCUniverseStartup) Reset()                    { *m = CMsgGCToGCUniverseStartup{} }
 func (m *CMsgGCToGCUniverseStartup) String() string            { return proto.CompactTextString(m) }
 func (*CMsgGCToGCUniverseStartup) ProtoMessage()               {}
-func (*CMsgGCToGCUniverseStartup) Descriptor() ([]byte, []int) { return fileDescriptor17, []int{13} }
+func (*CMsgGCToGCUniverseStartup) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{13} }
 
 func (m *CMsgGCToGCUniverseStartup) GetIsInitialStartup() bool {
 	if m != nil && m.IsInitialStartup != nil {
@@ -706,7 +706,7 @@ func (m *CMsgGCToGCUniverseStartupResponse) Reset()         { *m = CMsgGCToGCUni
 func (m *CMsgGCToGCUniverseStartupResponse) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCToGCUniverseStartupResponse) ProtoMessage()    {}
 func (*CMsgGCToGCUniverseStartupResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor17, []int{14}
+	return fileDescriptor19, []int{14}
 }
 
 func (m *CMsgGCToGCUniverseStartupResponse) GetEresult() int32 {
@@ -725,7 +725,7 @@ func (m *CGCToGCMsgMasterStartupComplete) Reset()         { *m = CGCToGCMsgMaste
 func (m *CGCToGCMsgMasterStartupComplete) String() string { return proto.CompactTextString(m) }
 func (*CGCToGCMsgMasterStartupComplete) ProtoMessage()    {}
 func (*CGCToGCMsgMasterStartupComplete) Descriptor() ([]byte, []int) {
-	return fileDescriptor17, []int{15}
+	return fileDescriptor19, []int{15}
 }
 
 func (m *CGCToGCMsgMasterStartupComplete) GetGcInfo() []*CGCToGCMsgMasterStartupComplete_GCInfo {
@@ -747,7 +747,7 @@ func (m *CGCToGCMsgMasterStartupComplete_GCInfo) Reset() {
 func (m *CGCToGCMsgMasterStartupComplete_GCInfo) String() string { return proto.CompactTextString(m) }
 func (*CGCToGCMsgMasterStartupComplete_GCInfo) ProtoMessage()    {}
 func (*CGCToGCMsgMasterStartupComplete_GCInfo) Descriptor() ([]byte, []int) {
-	return fileDescriptor17, []int{15, 0}
+	return fileDescriptor19, []int{15, 0}
 }
 
 func (m *CGCToGCMsgMasterStartupComplete_GCInfo) GetDirIndex() uint32 {
@@ -774,7 +774,7 @@ type CGCToGCMsgRouted struct {
 func (m *CGCToGCMsgRouted) Reset()                    { *m = CGCToGCMsgRouted{} }
 func (m *CGCToGCMsgRouted) String() string            { return proto.CompactTextString(m) }
 func (*CGCToGCMsgRouted) ProtoMessage()               {}
-func (*CGCToGCMsgRouted) Descriptor() ([]byte, []int) { return fileDescriptor17, []int{16} }
+func (*CGCToGCMsgRouted) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{16} }
 
 func (m *CGCToGCMsgRouted) GetMsgType() uint32 {
 	if m != nil && m.MsgType != nil {
@@ -806,7 +806,7 @@ type CGCToGCMsgRoutedReply struct {
 func (m *CGCToGCMsgRoutedReply) Reset()                    { *m = CGCToGCMsgRoutedReply{} }
 func (m *CGCToGCMsgRoutedReply) String() string            { return proto.CompactTextString(m) }
 func (*CGCToGCMsgRoutedReply) ProtoMessage()               {}
-func (*CGCToGCMsgRoutedReply) Descriptor() ([]byte, []int) { return fileDescriptor17, []int{17} }
+func (*CGCToGCMsgRoutedReply) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{17} }
 
 func (m *CGCToGCMsgRoutedReply) GetMsgType() uint32 {
 	if m != nil && m.MsgType != nil {
@@ -830,7 +830,7 @@ type CMsgGCUpdateSubGCSessionInfo struct {
 func (m *CMsgGCUpdateSubGCSessionInfo) Reset()                    { *m = CMsgGCUpdateSubGCSessionInfo{} }
 func (m *CMsgGCUpdateSubGCSessionInfo) String() string            { return proto.CompactTextString(m) }
 func (*CMsgGCUpdateSubGCSessionInfo) ProtoMessage()               {}
-func (*CMsgGCUpdateSubGCSessionInfo) Descriptor() ([]byte, []int) { return fileDescriptor17, []int{18} }
+func (*CMsgGCUpdateSubGCSessionInfo) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{18} }
 
 func (m *CMsgGCUpdateSubGCSessionInfo) GetUpdates() []*CMsgGCUpdateSubGCSessionInfo_CMsgUpdate {
 	if m != nil {
@@ -852,7 +852,7 @@ func (m *CMsgGCUpdateSubGCSessionInfo_CMsgUpdate) Reset() {
 func (m *CMsgGCUpdateSubGCSessionInfo_CMsgUpdate) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCUpdateSubGCSessionInfo_CMsgUpdate) ProtoMessage()    {}
 func (*CMsgGCUpdateSubGCSessionInfo_CMsgUpdate) Descriptor() ([]byte, []int) {
-	return fileDescriptor17, []int{18, 0}
+	return fileDescriptor19, []int{18, 0}
 }
 
 func (m *CMsgGCUpdateSubGCSessionInfo_CMsgUpdate) GetSteamid() uint64 {
@@ -884,7 +884,7 @@ type CMsgGCRequestSubGCSessionInfo struct {
 func (m *CMsgGCRequestSubGCSessionInfo) Reset()                    { *m = CMsgGCRequestSubGCSessionInfo{} }
 func (m *CMsgGCRequestSubGCSessionInfo) String() string            { return proto.CompactTextString(m) }
 func (*CMsgGCRequestSubGCSessionInfo) ProtoMessage()               {}
-func (*CMsgGCRequestSubGCSessionInfo) Descriptor() ([]byte, []int) { return fileDescriptor17, []int{19} }
+func (*CMsgGCRequestSubGCSessionInfo) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{19} }
 
 func (m *CMsgGCRequestSubGCSessionInfo) GetSteamid() uint64 {
 	if m != nil && m.Steamid != nil {
@@ -903,7 +903,7 @@ func (m *CMsgGCRequestSubGCSessionInfoResponse) Reset()         { *m = CMsgGCReq
 func (m *CMsgGCRequestSubGCSessionInfoResponse) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCRequestSubGCSessionInfoResponse) ProtoMessage()    {}
 func (*CMsgGCRequestSubGCSessionInfoResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor17, []int{20}
+	return fileDescriptor19, []int{20}
 }
 
 func (m *CMsgGCRequestSubGCSessionInfoResponse) GetIp() uint32 {
@@ -931,7 +931,7 @@ type CMsgSOCacheHaveVersion struct {
 func (m *CMsgSOCacheHaveVersion) Reset()                    { *m = CMsgSOCacheHaveVersion{} }
 func (m *CMsgSOCacheHaveVersion) String() string            { return proto.CompactTextString(m) }
 func (*CMsgSOCacheHaveVersion) ProtoMessage()               {}
-func (*CMsgSOCacheHaveVersion) Descriptor() ([]byte, []int) { return fileDescriptor17, []int{21} }
+func (*CMsgSOCacheHaveVersion) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{21} }
 
 func (m *CMsgSOCacheHaveVersion) GetSoid() *CMsgSOIDOwner {
 	if m != nil {
@@ -975,7 +975,7 @@ type CMsgClientHello struct {
 func (m *CMsgClientHello) Reset()                    { *m = CMsgClientHello{} }
 func (m *CMsgClientHello) String() string            { return proto.CompactTextString(m) }
 func (*CMsgClientHello) ProtoMessage()               {}
-func (*CMsgClientHello) Descriptor() ([]byte, []int) { return fileDescriptor17, []int{22} }
+func (*CMsgClientHello) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{22} }
 
 const Default_CMsgClientHello_ClientLauncher PartnerAccountType = PartnerAccountType_PARTNER_NONE
 const Default_CMsgClientHello_Engine ESourceEngine = ESourceEngine_k_ESE_Source1
@@ -1045,7 +1045,7 @@ type CMsgClientWelcome struct {
 func (m *CMsgClientWelcome) Reset()                    { *m = CMsgClientWelcome{} }
 func (m *CMsgClientWelcome) String() string            { return proto.CompactTextString(m) }
 func (*CMsgClientWelcome) ProtoMessage()               {}
-func (*CMsgClientWelcome) Descriptor() ([]byte, []int) { return fileDescriptor17, []int{23} }
+func (*CMsgClientWelcome) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{23} }
 
 func (m *CMsgClientWelcome) GetVersion() uint32 {
 	if m != nil && m.Version != nil {
@@ -1120,7 +1120,7 @@ type CMsgClientWelcome_Location struct {
 func (m *CMsgClientWelcome_Location) Reset()                    { *m = CMsgClientWelcome_Location{} }
 func (m *CMsgClientWelcome_Location) String() string            { return proto.CompactTextString(m) }
 func (*CMsgClientWelcome_Location) ProtoMessage()               {}
-func (*CMsgClientWelcome_Location) Descriptor() ([]byte, []int) { return fileDescriptor17, []int{23, 0} }
+func (*CMsgClientWelcome_Location) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{23, 0} }
 
 func (m *CMsgClientWelcome_Location) GetLatitude() float32 {
 	if m != nil && m.Latitude != nil {
@@ -1156,7 +1156,7 @@ type CMsgConnectionStatus struct {
 func (m *CMsgConnectionStatus) Reset()                    { *m = CMsgConnectionStatus{} }
 func (m *CMsgConnectionStatus) String() string            { return proto.CompactTextString(m) }
 func (*CMsgConnectionStatus) ProtoMessage()               {}
-func (*CMsgConnectionStatus) Descriptor() ([]byte, []int) { return fileDescriptor17, []int{24} }
+func (*CMsgConnectionStatus) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{24} }
 
 const Default_CMsgConnectionStatus_Status GCConnectionStatus = GCConnectionStatus_GCConnectionStatus_HAVE_SESSION
 
@@ -1213,7 +1213,7 @@ type CMsgGCToGCSOCacheSubscribe struct {
 func (m *CMsgGCToGCSOCacheSubscribe) Reset()                    { *m = CMsgGCToGCSOCacheSubscribe{} }
 func (m *CMsgGCToGCSOCacheSubscribe) String() string            { return proto.CompactTextString(m) }
 func (*CMsgGCToGCSOCacheSubscribe) ProtoMessage()               {}
-func (*CMsgGCToGCSOCacheSubscribe) Descriptor() ([]byte, []int) { return fileDescriptor17, []int{25} }
+func (*CMsgGCToGCSOCacheSubscribe) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{25} }
 
 func (m *CMsgGCToGCSOCacheSubscribe) GetSubscriber() uint64 {
 	if m != nil && m.Subscriber != nil {
@@ -1257,7 +1257,7 @@ func (m *CMsgGCToGCSOCacheSubscribe_CMsgHaveVersions) String() string {
 }
 func (*CMsgGCToGCSOCacheSubscribe_CMsgHaveVersions) ProtoMessage() {}
 func (*CMsgGCToGCSOCacheSubscribe_CMsgHaveVersions) Descriptor() ([]byte, []int) {
-	return fileDescriptor17, []int{25, 0}
+	return fileDescriptor19, []int{25, 0}
 }
 
 func (m *CMsgGCToGCSOCacheSubscribe_CMsgHaveVersions) GetServiceId() uint32 {
@@ -1283,7 +1283,7 @@ type CMsgGCToGCSOCacheUnsubscribe struct {
 func (m *CMsgGCToGCSOCacheUnsubscribe) Reset()                    { *m = CMsgGCToGCSOCacheUnsubscribe{} }
 func (m *CMsgGCToGCSOCacheUnsubscribe) String() string            { return proto.CompactTextString(m) }
 func (*CMsgGCToGCSOCacheUnsubscribe) ProtoMessage()               {}
-func (*CMsgGCToGCSOCacheUnsubscribe) Descriptor() ([]byte, []int) { return fileDescriptor17, []int{26} }
+func (*CMsgGCToGCSOCacheUnsubscribe) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{26} }
 
 func (m *CMsgGCToGCSOCacheUnsubscribe) GetSubscriber() uint64 {
 	if m != nil && m.Subscriber != nil {
@@ -1306,7 +1306,7 @@ type CMsgGCClientPing struct {
 func (m *CMsgGCClientPing) Reset()                    { *m = CMsgGCClientPing{} }
 func (m *CMsgGCClientPing) String() string            { return proto.CompactTextString(m) }
 func (*CMsgGCClientPing) ProtoMessage()               {}
-func (*CMsgGCClientPing) Descriptor() ([]byte, []int) { return fileDescriptor17, []int{27} }
+func (*CMsgGCClientPing) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{27} }
 
 type CMsgGCToGCLoadSessionSOCache struct {
 	AccountId        *uint32 `protobuf:"varint,1,opt,name=account_id" json:"account_id,omitempty"`
@@ -1316,7 +1316,7 @@ type CMsgGCToGCLoadSessionSOCache struct {
 func (m *CMsgGCToGCLoadSessionSOCache) Reset()                    { *m = CMsgGCToGCLoadSessionSOCache{} }
 func (m *CMsgGCToGCLoadSessionSOCache) String() string            { return proto.CompactTextString(m) }
 func (*CMsgGCToGCLoadSessionSOCache) ProtoMessage()               {}
-func (*CMsgGCToGCLoadSessionSOCache) Descriptor() ([]byte, []int) { return fileDescriptor17, []int{28} }
+func (*CMsgGCToGCLoadSessionSOCache) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{28} }
 
 func (m *CMsgGCToGCLoadSessionSOCache) GetAccountId() uint32 {
 	if m != nil && m.AccountId != nil {
@@ -1333,7 +1333,7 @@ func (m *CMsgGCToGCLoadSessionSOCacheResponse) Reset()         { *m = CMsgGCToGC
 func (m *CMsgGCToGCLoadSessionSOCacheResponse) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCToGCLoadSessionSOCacheResponse) ProtoMessage()    {}
 func (*CMsgGCToGCLoadSessionSOCacheResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor17, []int{29}
+	return fileDescriptor19, []int{29}
 }
 
 type CMsgGCToGCUpdateSessionStats struct {
@@ -1346,7 +1346,7 @@ type CMsgGCToGCUpdateSessionStats struct {
 func (m *CMsgGCToGCUpdateSessionStats) Reset()                    { *m = CMsgGCToGCUpdateSessionStats{} }
 func (m *CMsgGCToGCUpdateSessionStats) String() string            { return proto.CompactTextString(m) }
 func (*CMsgGCToGCUpdateSessionStats) ProtoMessage()               {}
-func (*CMsgGCToGCUpdateSessionStats) Descriptor() ([]byte, []int) { return fileDescriptor17, []int{30} }
+func (*CMsgGCToGCUpdateSessionStats) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{30} }
 
 func (m *CMsgGCToGCUpdateSessionStats) GetUserSessions() uint32 {
 	if m != nil && m.UserSessions != nil {
@@ -1383,7 +1383,7 @@ func (m *CWorkshop_PopulateItemDescriptions_Request) String() string {
 }
 func (*CWorkshop_PopulateItemDescriptions_Request) ProtoMessage() {}
 func (*CWorkshop_PopulateItemDescriptions_Request) Descriptor() ([]byte, []int) {
-	return fileDescriptor17, []int{31}
+	return fileDescriptor19, []int{31}
 }
 
 func (m *CWorkshop_PopulateItemDescriptions_Request) GetAppid() uint32 {
@@ -1414,7 +1414,7 @@ func (m *CWorkshop_PopulateItemDescriptions_Request_SingleItemDescription) Strin
 }
 func (*CWorkshop_PopulateItemDescriptions_Request_SingleItemDescription) ProtoMessage() {}
 func (*CWorkshop_PopulateItemDescriptions_Request_SingleItemDescription) Descriptor() ([]byte, []int) {
-	return fileDescriptor17, []int{31, 0}
+	return fileDescriptor19, []int{31, 0}
 }
 
 func (m *CWorkshop_PopulateItemDescriptions_Request_SingleItemDescription) GetGameitemid() uint32 {
@@ -1445,7 +1445,7 @@ func (m *CWorkshop_PopulateItemDescriptions_Request_ItemDescriptionsLanguageBloc
 }
 func (*CWorkshop_PopulateItemDescriptions_Request_ItemDescriptionsLanguageBlock) ProtoMessage() {}
 func (*CWorkshop_PopulateItemDescriptions_Request_ItemDescriptionsLanguageBlock) Descriptor() ([]byte, []int) {
-	return fileDescriptor17, []int{31, 1}
+	return fileDescriptor19, []int{31, 1}
 }
 
 func (m *CWorkshop_PopulateItemDescriptions_Request_ItemDescriptionsLanguageBlock) GetLanguage() string {
@@ -1472,7 +1472,7 @@ func (m *CWorkshop_GetContributors_Request) Reset()         { *m = CWorkshop_Get
 func (m *CWorkshop_GetContributors_Request) String() string { return proto.CompactTextString(m) }
 func (*CWorkshop_GetContributors_Request) ProtoMessage()    {}
 func (*CWorkshop_GetContributors_Request) Descriptor() ([]byte, []int) {
-	return fileDescriptor17, []int{32}
+	return fileDescriptor19, []int{32}
 }
 
 func (m *CWorkshop_GetContributors_Request) GetAppid() uint32 {
@@ -1498,7 +1498,7 @@ func (m *CWorkshop_GetContributors_Response) Reset()         { *m = CWorkshop_Ge
 func (m *CWorkshop_GetContributors_Response) String() string { return proto.CompactTextString(m) }
 func (*CWorkshop_GetContributors_Response) ProtoMessage()    {}
 func (*CWorkshop_GetContributors_Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor17, []int{33}
+	return fileDescriptor19, []int{33}
 }
 
 func (m *CWorkshop_GetContributors_Response) GetContributors() []uint64 {
@@ -1520,7 +1520,7 @@ func (m *CWorkshop_SetItemPaymentRules_Request) Reset()         { *m = CWorkshop
 func (m *CWorkshop_SetItemPaymentRules_Request) String() string { return proto.CompactTextString(m) }
 func (*CWorkshop_SetItemPaymentRules_Request) ProtoMessage()    {}
 func (*CWorkshop_SetItemPaymentRules_Request) Descriptor() ([]byte, []int) {
-	return fileDescriptor17, []int{34}
+	return fileDescriptor19, []int{34}
 }
 
 func (m *CWorkshop_SetItemPaymentRules_Request) GetAppid() uint32 {
@@ -1566,7 +1566,7 @@ func (m *CWorkshop_SetItemPaymentRules_Request_WorkshopItemPaymentRule) String()
 }
 func (*CWorkshop_SetItemPaymentRules_Request_WorkshopItemPaymentRule) ProtoMessage() {}
 func (*CWorkshop_SetItemPaymentRules_Request_WorkshopItemPaymentRule) Descriptor() ([]byte, []int) {
-	return fileDescriptor17, []int{34, 0}
+	return fileDescriptor19, []int{34, 0}
 }
 
 func (m *CWorkshop_SetItemPaymentRules_Request_WorkshopItemPaymentRule) GetWorkshopFileId() uint64 {
@@ -1605,7 +1605,7 @@ func (m *CWorkshop_SetItemPaymentRules_Request_PartnerItemPaymentRule) String() 
 }
 func (*CWorkshop_SetItemPaymentRules_Request_PartnerItemPaymentRule) ProtoMessage() {}
 func (*CWorkshop_SetItemPaymentRules_Request_PartnerItemPaymentRule) Descriptor() ([]byte, []int) {
-	return fileDescriptor17, []int{34, 1}
+	return fileDescriptor19, []int{34, 1}
 }
 
 func (m *CWorkshop_SetItemPaymentRules_Request_PartnerItemPaymentRule) GetAccountId() uint32 {
@@ -1639,7 +1639,7 @@ func (m *CWorkshop_SetItemPaymentRules_Response) Reset() {
 func (m *CWorkshop_SetItemPaymentRules_Response) String() string { return proto.CompactTextString(m) }
 func (*CWorkshop_SetItemPaymentRules_Response) ProtoMessage()    {}
 func (*CWorkshop_SetItemPaymentRules_Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor17, []int{35}
+	return fileDescriptor19, []int{35}
 }
 
 type CBroadcast_PostGameDataFrame_Request struct {
@@ -1654,7 +1654,7 @@ func (m *CBroadcast_PostGameDataFrame_Request) Reset()         { *m = CBroadcast
 func (m *CBroadcast_PostGameDataFrame_Request) String() string { return proto.CompactTextString(m) }
 func (*CBroadcast_PostGameDataFrame_Request) ProtoMessage()    {}
 func (*CBroadcast_PostGameDataFrame_Request) Descriptor() ([]byte, []int) {
-	return fileDescriptor17, []int{36}
+	return fileDescriptor19, []int{36}
 }
 
 func (m *CBroadcast_PostGameDataFrame_Request) GetAppid() uint32 {
@@ -1695,7 +1695,7 @@ type CMsgSerializedSOCache struct {
 func (m *CMsgSerializedSOCache) Reset()                    { *m = CMsgSerializedSOCache{} }
 func (m *CMsgSerializedSOCache) String() string            { return proto.CompactTextString(m) }
 func (*CMsgSerializedSOCache) ProtoMessage()               {}
-func (*CMsgSerializedSOCache) Descriptor() ([]byte, []int) { return fileDescriptor17, []int{37} }
+func (*CMsgSerializedSOCache) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{37} }
 
 func (m *CMsgSerializedSOCache) GetFileVersion() uint32 {
 	if m != nil && m.FileVersion != nil {
@@ -1729,7 +1729,7 @@ func (m *CMsgSerializedSOCache_TypeCache) Reset()         { *m = CMsgSerializedS
 func (m *CMsgSerializedSOCache_TypeCache) String() string { return proto.CompactTextString(m) }
 func (*CMsgSerializedSOCache_TypeCache) ProtoMessage()    {}
 func (*CMsgSerializedSOCache_TypeCache) Descriptor() ([]byte, []int) {
-	return fileDescriptor17, []int{37, 0}
+	return fileDescriptor19, []int{37, 0}
 }
 
 func (m *CMsgSerializedSOCache_TypeCache) GetType() uint32 {
@@ -1765,7 +1765,7 @@ func (m *CMsgSerializedSOCache_Cache) Reset()         { *m = CMsgSerializedSOCac
 func (m *CMsgSerializedSOCache_Cache) String() string { return proto.CompactTextString(m) }
 func (*CMsgSerializedSOCache_Cache) ProtoMessage()    {}
 func (*CMsgSerializedSOCache_Cache) Descriptor() ([]byte, []int) {
-	return fileDescriptor17, []int{37, 1}
+	return fileDescriptor19, []int{37, 1}
 }
 
 func (m *CMsgSerializedSOCache_Cache) GetType() uint32 {
@@ -1806,7 +1806,7 @@ func (m *CMsgSerializedSOCache_Cache_Version) Reset()         { *m = CMsgSeriali
 func (m *CMsgSerializedSOCache_Cache_Version) String() string { return proto.CompactTextString(m) }
 func (*CMsgSerializedSOCache_Cache_Version) ProtoMessage()    {}
 func (*CMsgSerializedSOCache_Cache_Version) Descriptor() ([]byte, []int) {
-	return fileDescriptor17, []int{37, 1, 0}
+	return fileDescriptor19, []int{37, 1, 0}
 }
 
 func (m *CMsgSerializedSOCache_Cache_Version) GetService() uint32 {
@@ -1833,7 +1833,7 @@ func (m *CMsgGCToClientPollConvarRequest) Reset()         { *m = CMsgGCToClientP
 func (m *CMsgGCToClientPollConvarRequest) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCToClientPollConvarRequest) ProtoMessage()    {}
 func (*CMsgGCToClientPollConvarRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor17, []int{38}
+	return fileDescriptor19, []int{38}
 }
 
 func (m *CMsgGCToClientPollConvarRequest) GetConvarName() string {
@@ -1860,7 +1860,7 @@ func (m *CMsgGCToClientPollConvarResponse) Reset()         { *m = CMsgGCToClient
 func (m *CMsgGCToClientPollConvarResponse) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCToClientPollConvarResponse) ProtoMessage()    {}
 func (*CMsgGCToClientPollConvarResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor17, []int{39}
+	return fileDescriptor19, []int{39}
 }
 
 func (m *CMsgGCToClientPollConvarResponse) GetPollId() uint32 {
@@ -1937,7 +1937,7 @@ func init() {
 	proto.RegisterEnum("dota.GCConnectionStatus", GCConnectionStatus_name, GCConnectionStatus_value)
 }
 
-var fileDescriptor17 = []byte{
+var fileDescriptor19 = []byte{
 	// 2235 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x9c, 0x58, 0x4d, 0x6f, 0xdb, 0xd8,
 	0xd5, 0x1e, 0xea, 0xd3, 0x3e, 0x96, 0x6c, 0x0d, 0x33, 0x49, 0x1c, 0x25, 0x79, 0xe3, 0x70, 0x26,

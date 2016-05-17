@@ -262,7 +262,7 @@ func (x *ENetworkDisconnectionReason) UnmarshalJSON(data []byte) error {
 	*x = ENetworkDisconnectionReason(value)
 	return nil
 }
-func (ENetworkDisconnectionReason) EnumDescriptor() ([]byte, []int) { return fileDescriptor20, []int{0} }
+func (ENetworkDisconnectionReason) EnumDescriptor() ([]byte, []int) { return fileDescriptor22, []int{0} }
 
 var E_NetworkConnectionToken = &proto.ExtensionDesc{
 	ExtendedType:  (*google_protobuf.EnumValueOptions)(nil),
@@ -277,7 +277,7 @@ func init() {
 	proto.RegisterExtension(E_NetworkConnectionToken)
 }
 
-var fileDescriptor20 = []byte{
+var fileDescriptor22 = []byte{
 	// 1903 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x8c, 0x98, 0xeb, 0x76, 0xdb, 0xc6,
 	0x11, 0xc7, 0xe3, 0x3a, 0xbd, 0x04, 0xbd, 0x6d, 0x91, 0xb6, 0xb6, 0xa1, 0x58, 0x57, 0x5f, 0x24,
