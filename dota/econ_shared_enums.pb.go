@@ -42,7 +42,7 @@ func (x *EGCEconBaseMsg) UnmarshalJSON(data []byte) error {
 	*x = EGCEconBaseMsg(value)
 	return nil
 }
-func (EGCEconBaseMsg) EnumDescriptor() ([]byte, []int) { return fileDescriptor17, []int{0} }
+func (EGCEconBaseMsg) EnumDescriptor() ([]byte, []int) { return fileDescriptor26, []int{0} }
 
 type EGCMsgResponse int32
 
@@ -97,7 +97,7 @@ func (x *EGCMsgResponse) UnmarshalJSON(data []byte) error {
 	*x = EGCMsgResponse(value)
 	return nil
 }
-func (EGCMsgResponse) EnumDescriptor() ([]byte, []int) { return fileDescriptor17, []int{1} }
+func (EGCMsgResponse) EnumDescriptor() ([]byte, []int) { return fileDescriptor26, []int{1} }
 
 type EGCPartnerRequestResponse int32
 
@@ -137,7 +137,7 @@ func (x *EGCPartnerRequestResponse) UnmarshalJSON(data []byte) error {
 	*x = EGCPartnerRequestResponse(value)
 	return nil
 }
-func (EGCPartnerRequestResponse) EnumDescriptor() ([]byte, []int) { return fileDescriptor17, []int{2} }
+func (EGCPartnerRequestResponse) EnumDescriptor() ([]byte, []int) { return fileDescriptor26, []int{2} }
 
 type EGCMsgUseItemResponse int32
 
@@ -207,7 +207,7 @@ func (x *EGCMsgUseItemResponse) UnmarshalJSON(data []byte) error {
 	*x = EGCMsgUseItemResponse(value)
 	return nil
 }
-func (EGCMsgUseItemResponse) EnumDescriptor() ([]byte, []int) { return fileDescriptor17, []int{3} }
+func (EGCMsgUseItemResponse) EnumDescriptor() ([]byte, []int) { return fileDescriptor26, []int{3} }
 
 type CMsgGenericResult struct {
 	Eresult          *uint32 `protobuf:"varint,1,opt,name=eresult,def=2" json:"eresult,omitempty"`
@@ -218,7 +218,7 @@ type CMsgGenericResult struct {
 func (m *CMsgGenericResult) Reset()                    { *m = CMsgGenericResult{} }
 func (m *CMsgGenericResult) String() string            { return proto.CompactTextString(m) }
 func (*CMsgGenericResult) ProtoMessage()               {}
-func (*CMsgGenericResult) Descriptor() ([]byte, []int) { return fileDescriptor17, []int{0} }
+func (*CMsgGenericResult) Descriptor() ([]byte, []int) { return fileDescriptor26, []int{0} }
 
 const Default_CMsgGenericResult_Eresult uint32 = 2
 
@@ -244,7 +244,7 @@ func init() {
 	proto.RegisterEnum("dota.EGCMsgUseItemResponse", EGCMsgUseItemResponse_name, EGCMsgUseItemResponse_value)
 }
 
-var fileDescriptor17 = []byte{
+var fileDescriptor26 = []byte{
 	// 607 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x8c, 0x54, 0x5d, 0x4f, 0x13, 0x41,
 	0x14, 0x65, 0xa1, 0x15, 0xb9, 0x8a, 0x19, 0x47, 0xf9, 0x10, 0x8c, 0x12, 0x35, 0x62, 0x0a, 0x82,

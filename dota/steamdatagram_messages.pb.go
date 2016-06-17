@@ -87,7 +87,7 @@ func (x *ESteamDatagramMsgID) UnmarshalJSON(data []byte) error {
 	*x = ESteamDatagramMsgID(value)
 	return nil
 }
-func (ESteamDatagramMsgID) EnumDescriptor() ([]byte, []int) { return fileDescriptor26, []int{0} }
+func (ESteamDatagramMsgID) EnumDescriptor() ([]byte, []int) { return fileDescriptor35, []int{0} }
 
 type CMsgSteamDatagramRouterPingReply struct {
 	ClientTimestamp      *uint32  `protobuf:"fixed32,1,opt,name=client_timestamp" json:"client_timestamp,omitempty"`
@@ -105,7 +105,7 @@ func (m *CMsgSteamDatagramRouterPingReply) Reset()         { *m = CMsgSteamDatag
 func (m *CMsgSteamDatagramRouterPingReply) String() string { return proto.CompactTextString(m) }
 func (*CMsgSteamDatagramRouterPingReply) ProtoMessage()    {}
 func (*CMsgSteamDatagramRouterPingReply) Descriptor() ([]byte, []int) {
-	return fileDescriptor26, []int{0}
+	return fileDescriptor35, []int{0}
 }
 
 func (m *CMsgSteamDatagramRouterPingReply) GetClientTimestamp() uint32 {
@@ -179,7 +179,7 @@ func (m *CMsgSteamDatagramGameserverPing) Reset()         { *m = CMsgSteamDatagr
 func (m *CMsgSteamDatagramGameserverPing) String() string { return proto.CompactTextString(m) }
 func (*CMsgSteamDatagramGameserverPing) ProtoMessage()    {}
 func (*CMsgSteamDatagramGameserverPing) Descriptor() ([]byte, []int) {
-	return fileDescriptor26, []int{1}
+	return fileDescriptor35, []int{1}
 }
 
 func (m *CMsgSteamDatagramGameserverPing) GetClientSession() uint32 {
@@ -247,7 +247,7 @@ func (m *CMsgSteamDatagramGameServerAuthTicket) Reset()         { *m = CMsgSteam
 func (m *CMsgSteamDatagramGameServerAuthTicket) String() string { return proto.CompactTextString(m) }
 func (*CMsgSteamDatagramGameServerAuthTicket) ProtoMessage()    {}
 func (*CMsgSteamDatagramGameServerAuthTicket) Descriptor() ([]byte, []int) {
-	return fileDescriptor26, []int{2}
+	return fileDescriptor35, []int{2}
 }
 
 func (m *CMsgSteamDatagramGameServerAuthTicket) GetTimeExpiry() uint32 {
@@ -323,7 +323,7 @@ func (m *CMsgSteamDatagramGameServerAuthTicket_ExtraField) String() string {
 }
 func (*CMsgSteamDatagramGameServerAuthTicket_ExtraField) ProtoMessage() {}
 func (*CMsgSteamDatagramGameServerAuthTicket_ExtraField) Descriptor() ([]byte, []int) {
-	return fileDescriptor26, []int{2, 0}
+	return fileDescriptor35, []int{2, 0}
 }
 
 func (m *CMsgSteamDatagramGameServerAuthTicket_ExtraField) GetName() string {
@@ -375,7 +375,7 @@ func (m *CMsgSteamDatagramGameserverSessionRequest) Reset() {
 func (m *CMsgSteamDatagramGameserverSessionRequest) String() string { return proto.CompactTextString(m) }
 func (*CMsgSteamDatagramGameserverSessionRequest) ProtoMessage()    {}
 func (*CMsgSteamDatagramGameserverSessionRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor26, []int{3}
+	return fileDescriptor35, []int{3}
 }
 
 func (m *CMsgSteamDatagramGameserverSessionRequest) GetTicket() *CMsgSteamDatagramGameServerAuthTicket {
@@ -421,7 +421,7 @@ func (m *CMsgSteamDatagramGameserverSessionEstablished) String() string {
 }
 func (*CMsgSteamDatagramGameserverSessionEstablished) ProtoMessage() {}
 func (*CMsgSteamDatagramGameserverSessionEstablished) Descriptor() ([]byte, []int) {
-	return fileDescriptor26, []int{4}
+	return fileDescriptor35, []int{4}
 }
 
 func (m *CMsgSteamDatagramGameserverSessionEstablished) GetClientCookie() uint32 {
@@ -457,7 +457,7 @@ type CMsgSteamDatagramNoSession struct {
 func (m *CMsgSteamDatagramNoSession) Reset()                    { *m = CMsgSteamDatagramNoSession{} }
 func (m *CMsgSteamDatagramNoSession) String() string            { return proto.CompactTextString(m) }
 func (*CMsgSteamDatagramNoSession) ProtoMessage()               {}
-func (*CMsgSteamDatagramNoSession) Descriptor() ([]byte, []int) { return fileDescriptor26, []int{5} }
+func (*CMsgSteamDatagramNoSession) Descriptor() ([]byte, []int) { return fileDescriptor35, []int{5} }
 
 func (m *CMsgSteamDatagramNoSession) GetClientCookie() uint32 {
 	if m != nil && m.ClientCookie != nil {
@@ -503,7 +503,7 @@ type CMsgSteamDatagramDiagnostic struct {
 func (m *CMsgSteamDatagramDiagnostic) Reset()                    { *m = CMsgSteamDatagramDiagnostic{} }
 func (m *CMsgSteamDatagramDiagnostic) String() string            { return proto.CompactTextString(m) }
 func (*CMsgSteamDatagramDiagnostic) ProtoMessage()               {}
-func (*CMsgSteamDatagramDiagnostic) Descriptor() ([]byte, []int) { return fileDescriptor26, []int{6} }
+func (*CMsgSteamDatagramDiagnostic) Descriptor() ([]byte, []int) { return fileDescriptor35, []int{6} }
 
 func (m *CMsgSteamDatagramDiagnostic) GetSeverity() uint32 {
 	if m != nil && m.Severity != nil {
@@ -528,7 +528,7 @@ func (m *CMsgSteamDatagramDataCenterState) Reset()         { *m = CMsgSteamDatag
 func (m *CMsgSteamDatagramDataCenterState) String() string { return proto.CompactTextString(m) }
 func (*CMsgSteamDatagramDataCenterState) ProtoMessage()    {}
 func (*CMsgSteamDatagramDataCenterState) Descriptor() ([]byte, []int) {
-	return fileDescriptor26, []int{7}
+	return fileDescriptor35, []int{7}
 }
 
 func (m *CMsgSteamDatagramDataCenterState) GetDataCenters() []*CMsgSteamDatagramDataCenterState_DataCenter {
@@ -550,7 +550,7 @@ func (m *CMsgSteamDatagramDataCenterState_Server) Reset() {
 func (m *CMsgSteamDatagramDataCenterState_Server) String() string { return proto.CompactTextString(m) }
 func (*CMsgSteamDatagramDataCenterState_Server) ProtoMessage()    {}
 func (*CMsgSteamDatagramDataCenterState_Server) Descriptor() ([]byte, []int) {
-	return fileDescriptor26, []int{7, 0}
+	return fileDescriptor35, []int{7, 0}
 }
 
 func (m *CMsgSteamDatagramDataCenterState_Server) GetAddress() string {
@@ -581,7 +581,7 @@ func (m *CMsgSteamDatagramDataCenterState_DataCenter) String() string {
 }
 func (*CMsgSteamDatagramDataCenterState_DataCenter) ProtoMessage() {}
 func (*CMsgSteamDatagramDataCenterState_DataCenter) Descriptor() ([]byte, []int) {
-	return fileDescriptor26, []int{7, 1}
+	return fileDescriptor35, []int{7, 1}
 }
 
 func (m *CMsgSteamDatagramDataCenterState_DataCenter) GetCode() string {
@@ -615,7 +615,7 @@ func (m *CMsgSteamDatagramLinkInstantaneousStats) Reset() {
 func (m *CMsgSteamDatagramLinkInstantaneousStats) String() string { return proto.CompactTextString(m) }
 func (*CMsgSteamDatagramLinkInstantaneousStats) ProtoMessage()    {}
 func (*CMsgSteamDatagramLinkInstantaneousStats) Descriptor() ([]byte, []int) {
-	return fileDescriptor26, []int{8}
+	return fileDescriptor35, []int{8}
 }
 
 func (m *CMsgSteamDatagramLinkInstantaneousStats) GetOutPacketsPerSecX10() uint32 {
@@ -684,7 +684,7 @@ func (m *CMsgSteamDatagramLinkLifetimeStats) Reset()         { *m = CMsgSteamDat
 func (m *CMsgSteamDatagramLinkLifetimeStats) String() string { return proto.CompactTextString(m) }
 func (*CMsgSteamDatagramLinkLifetimeStats) ProtoMessage()    {}
 func (*CMsgSteamDatagramLinkLifetimeStats) Descriptor() ([]byte, []int) {
-	return fileDescriptor26, []int{9}
+	return fileDescriptor35, []int{9}
 }
 
 func (m *CMsgSteamDatagramLinkLifetimeStats) GetPacketsSent() uint64 {
@@ -760,7 +760,7 @@ func (m *CMsgSteamDatagramConnectionQuality) Reset()         { *m = CMsgSteamDat
 func (m *CMsgSteamDatagramConnectionQuality) String() string { return proto.CompactTextString(m) }
 func (*CMsgSteamDatagramConnectionQuality) ProtoMessage()    {}
 func (*CMsgSteamDatagramConnectionQuality) Descriptor() ([]byte, []int) {
-	return fileDescriptor26, []int{10}
+	return fileDescriptor35, []int{10}
 }
 
 func (m *CMsgSteamDatagramConnectionQuality) GetInstantaneous() *CMsgSteamDatagramLinkInstantaneousStats {
@@ -795,7 +795,7 @@ func (m *CMsgSteamDatagramConnectionStatsClientToRouter) String() string {
 }
 func (*CMsgSteamDatagramConnectionStatsClientToRouter) ProtoMessage() {}
 func (*CMsgSteamDatagramConnectionStatsClientToRouter) Descriptor() ([]byte, []int) {
-	return fileDescriptor26, []int{11}
+	return fileDescriptor35, []int{11}
 }
 
 func (m *CMsgSteamDatagramConnectionStatsClientToRouter) GetC2R() *CMsgSteamDatagramConnectionQuality {
@@ -861,7 +861,7 @@ func (m *CMsgSteamDatagramConnectionStatsRouterToClient) String() string {
 }
 func (*CMsgSteamDatagramConnectionStatsRouterToClient) ProtoMessage() {}
 func (*CMsgSteamDatagramConnectionStatsRouterToClient) Descriptor() ([]byte, []int) {
-	return fileDescriptor26, []int{12}
+	return fileDescriptor35, []int{12}
 }
 
 func (m *CMsgSteamDatagramConnectionStatsRouterToClient) GetR2C() *CMsgSteamDatagramConnectionQuality {
@@ -947,7 +947,7 @@ func (m *CMsgSteamDatagramConnectionStatsRouterToServer) String() string {
 }
 func (*CMsgSteamDatagramConnectionStatsRouterToServer) ProtoMessage() {}
 func (*CMsgSteamDatagramConnectionStatsRouterToServer) Descriptor() ([]byte, []int) {
-	return fileDescriptor26, []int{13}
+	return fileDescriptor35, []int{13}
 }
 
 func (m *CMsgSteamDatagramConnectionStatsRouterToServer) GetR2S() *CMsgSteamDatagramConnectionQuality {
@@ -1024,7 +1024,7 @@ func (m *CMsgSteamDatagramConnectionStatsServerToRouter) String() string {
 }
 func (*CMsgSteamDatagramConnectionStatsServerToRouter) ProtoMessage() {}
 func (*CMsgSteamDatagramConnectionStatsServerToRouter) Descriptor() ([]byte, []int) {
-	return fileDescriptor26, []int{14}
+	return fileDescriptor35, []int{14}
 }
 
 func (m *CMsgSteamDatagramConnectionStatsServerToRouter) GetS2R() *CMsgSteamDatagramConnectionQuality {
@@ -1080,7 +1080,7 @@ func (m *CMsgSteamDatagramClientPingSampleRequest) Reset() {
 func (m *CMsgSteamDatagramClientPingSampleRequest) String() string { return proto.CompactTextString(m) }
 func (*CMsgSteamDatagramClientPingSampleRequest) ProtoMessage()    {}
 func (*CMsgSteamDatagramClientPingSampleRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor26, []int{15}
+	return fileDescriptor35, []int{15}
 }
 
 func (m *CMsgSteamDatagramClientPingSampleRequest) GetClientCookie() uint32 {
@@ -1102,7 +1102,7 @@ func (m *CMsgSteamDatagramClientPingSampleReply) Reset() {
 func (m *CMsgSteamDatagramClientPingSampleReply) String() string { return proto.CompactTextString(m) }
 func (*CMsgSteamDatagramClientPingSampleReply) ProtoMessage()    {}
 func (*CMsgSteamDatagramClientPingSampleReply) Descriptor() ([]byte, []int) {
-	return fileDescriptor26, []int{16}
+	return fileDescriptor35, []int{16}
 }
 
 func (m *CMsgSteamDatagramClientPingSampleReply) GetClientCookie() uint32 {
@@ -1134,7 +1134,7 @@ func (m *CMsgSteamDatagramClientPingSampleReply_RoutingCluster) String() string 
 }
 func (*CMsgSteamDatagramClientPingSampleReply_RoutingCluster) ProtoMessage() {}
 func (*CMsgSteamDatagramClientPingSampleReply_RoutingCluster) Descriptor() ([]byte, []int) {
-	return fileDescriptor26, []int{16, 0}
+	return fileDescriptor35, []int{16, 0}
 }
 
 func (m *CMsgSteamDatagramClientPingSampleReply_RoutingCluster) GetId() uint32 {
@@ -1180,7 +1180,7 @@ func (m *CMsgSteamDatagramClientSwitchedPrimary) Reset() {
 func (m *CMsgSteamDatagramClientSwitchedPrimary) String() string { return proto.CompactTextString(m) }
 func (*CMsgSteamDatagramClientSwitchedPrimary) ProtoMessage()    {}
 func (*CMsgSteamDatagramClientSwitchedPrimary) Descriptor() ([]byte, []int) {
-	return fileDescriptor26, []int{17}
+	return fileDescriptor35, []int{17}
 }
 
 func (m *CMsgSteamDatagramClientSwitchedPrimary) GetClientCookie() uint32 {
@@ -1283,7 +1283,7 @@ func (m *CMsgSteamDatagramClientSwitchedPrimary_RouterQuality) String() string {
 }
 func (*CMsgSteamDatagramClientSwitchedPrimary_RouterQuality) ProtoMessage() {}
 func (*CMsgSteamDatagramClientSwitchedPrimary_RouterQuality) Descriptor() ([]byte, []int) {
-	return fileDescriptor26, []int{17, 0}
+	return fileDescriptor35, []int{17, 0}
 }
 
 func (m *CMsgSteamDatagramClientSwitchedPrimary_RouterQuality) GetScore() uint32 {
@@ -1341,7 +1341,7 @@ func init() {
 	proto.RegisterEnum("dota.ESteamDatagramMsgID", ESteamDatagramMsgID_name, ESteamDatagramMsgID_value)
 }
 
-var fileDescriptor26 = []byte{
+var fileDescriptor35 = []byte{
 	// 1641 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xc4, 0x58, 0xcf, 0x6e, 0xdb, 0x46,
 	0x13, 0xff, 0x68, 0xc9, 0xb2, 0x3d, 0xb2, 0x6c, 0x7a, 0x93, 0x2f, 0x51, 0x94, 0x7f, 0xfe, 0xf8,

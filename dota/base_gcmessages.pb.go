@@ -12,11 +12,20 @@ It is generated from these files:
 	connectionless_netmessages.proto
 	demo.proto
 	dota_broadcastmessages.proto
+	dota_client_enums.proto
 	dota_clientmessages.proto
 	dota_commonmessages.proto
 	dota_gcmessages_client.proto
+	dota_gcmessages_client_chat.proto
 	dota_gcmessages_client_fantasy.proto
+	dota_gcmessages_client_guild.proto
+	dota_gcmessages_client_match_management.proto
+	dota_gcmessages_client_team.proto
+	dota_gcmessages_client_tournament.proto
+	dota_gcmessages_client_watch.proto
 	dota_gcmessages_common.proto
+	dota_gcmessages_common_match_management.proto
+	dota_gcmessages_msgid.proto
 	dota_gcmessages_server.proto
 	dota_match_metadata.proto
 	dota_modifiers.proto
@@ -205,6 +214,7 @@ It has these top-level messages:
 	CDOTAClientMsg_MatchMetadata
 	CDOTAClientMsg_KillMyHero
 	CDOTAClientMsg_QuestStatus
+	CDOTAClientMsg_ToggleAutoattack
 	CDOTAMsg_LocationPing
 	CDOTAMsg_ItemAlert
 	CDOTAMsg_MapLine
@@ -212,144 +222,15 @@ It has these top-level messages:
 	CDOTAMsg_SendStatPopup
 	CDOTAMsg_CoachHUDPing
 	CDOTAMsg_UnitOrder
-	CMsgStartFindingMatch
-	CMsgStartFindingMatchResult
-	CMsgStopFindingMatch
-	CMsgReadyUp
-	CMsgReadyUpStatus
-	CSourceTVGameSmall
-	CMsgClientToGCFindTopSourceTVGames
-	CMsgGCToClientFindTopSourceTVGamesResponse
-	CMsgClientToGCTopMatchesRequest
-	CMsgClientToGCTopLeagueMatchesRequest
-	CMsgClientToGCTopFriendMatchesRequest
-	CMsgClientToGCMatchesMinimalRequest
-	CMsgClientToGCMatchesMinimalResponse
-	CMsgGCToClientTopLeagueMatchesResponse
-	CMsgGCToClientTopFriendMatchesResponse
-	CMsgClientToGCFindTopMatches
-	CMsgGCToClientFindTopLeagueMatchesResponse
-	CMsgSpectateFriendGame
-	CMsgSpectateFriendGameResponse
-	CMsgAbandonCurrentGame
 	CMsgClientSuspended
-	CMsgPracticeLobbySetDetails
-	CMsgPracticeLobbyCreate
-	CMsgPracticeLobbySetTeamSlot
-	CMsgPracticeLobbySetCoach
-	CMsgPracticeLobbyJoinBroadcastChannel
-	CMsgPracticeLobbyCloseBroadcastChannel
-	CMsgPracticeLobbyToggleBroadcastChannelCameramanStatus
-	CMsgPracticeLobbyKick
-	CMsgPracticeLobbyKickFromTeam
-	CMsgPracticeLobbyLeave
-	CMsgPracticeLobbyLaunch
-	CMsgApplyTeamToPracticeLobby
-	CMsgClearPracticeLobbyTeam
-	CMsgPracticeLobbyList
-	CMsgPracticeLobbyListResponseEntry
-	CMsgPracticeLobbyListResponse
-	CMsgLobbyList
-	CMsgLobbyListResponse
-	CMsgPracticeLobbyJoin
-	CMsgPracticeLobbyJoinResponse
-	CMsgFriendPracticeLobbyListRequest
-	CMsgFriendPracticeLobbyListResponse
-	CMsgGuildmatePracticeLobbyListRequest
-	CMsgGuildmatePracticeLobbyListResponse
-	CMsgJoinableCustomGameModesRequest
-	CMsgJoinableCustomGameModesResponseEntry
-	CMsgJoinableCustomGameModesResponse
-	CMsgJoinableCustomLobbiesRequest
-	CMsgJoinableCustomLobbiesResponseEntry
-	CMsgJoinableCustomLobbiesResponse
-	CMsgQuickJoinCustomLobby
-	CMsgQuickJoinCustomLobbyResponse
-	CMsgBotGameCreate
-	CMsgCustomGameCreate
-	CMsgEventGameCreate
 	CMsgRequestInternationalTicket
 	CMsgBalancedShuffleLobby
 	CMsgInitialQuestionnaireResponse
 	CMsgDOTAPlayerMatchHistory
-	CMsgDOTAMatchMinimal
 	CMsgDOTAMatchHistoryFilter
 	CMsgDOTARequestMatches
 	CMsgDOTARequestMatchesResponse
 	CMsgDOTAPopup
-	CMsgDOTATeamMemberSDO
-	CMsgDOTATeamAdminSDO
-	CMsgDOTATeamMember
-	CMsgDOTATeam
-	CMsgDOTATeamInfo
-	CMsgDOTATeamsInfo
-	CMsgDOTAMyTeamInfoRequest
-	CMsgDOTACreateTeam
-	CMsgDOTACreateTeamResponse
-	CMsgDOTAEditTeamDetails
-	CMsgDOTAEditTeamDetailsResponse
-	CMsgDOTATeamProfileResponse
-	CMsgDOTAProTeamListRequest
-	CMsgDOTAProTeamListResponse
-	CMsgDOTATeamInvite_InviterToGC
-	CMsgDOTATeamInvite_GCImmediateResponseToInviter
-	CMsgDOTATeamInvite_GCRequestToInvitee
-	CMsgDOTATeamInvite_InviteeResponseToGC
-	CMsgDOTATeamInvite_GCResponseToInviter
-	CMsgDOTATeamInvite_GCResponseToInvitee
-	CMsgDOTAKickTeamMember
-	CMsgDOTAKickTeamMemberResponse
-	CMsgDOTATransferTeamAdmin
-	CMsgDOTATransferTeamAdminResponse
-	CMsgDOTAChangeTeamSub
-	CMsgDOTAChangeTeamSubResponse
-	CMsgDOTALeaveTeam
-	CMsgDOTALeaveTeamResponse
-	CMsgDOTABetaParticipation
-	CMsgDOTAJoinChatChannel
-	CMsgDOTALeaveChatChannel
-	CMsgDOTAClientIgnoredUser
-	CMsgDOTAChatMessage
-	CMsgDOTAChatMember
-	CMsgDOTAJoinChatChannelResponse
-	CMsgDOTAChatChannelFullUpdate
-	CMsgDOTAOtherJoinedChatChannel
-	CMsgDOTAOtherLeftChatChannel
-	CMsgDOTAChatChannelMemberUpdate
-	CMsgDOTARequestChatChannelList
-	CMsgDOTARequestChatChannelListResponse
-	CMsgDOTAChatGetUserList
-	CMsgDOTAChatGetUserListResponse
-	CMsgDOTAChatGetMemberCount
-	CMsgDOTAChatGetMemberCountResponse
-	CMsgDOTAChatRegionsEnabled
-	CMsgDOTAGuildSDO
-	CMsgDOTAGuildAuditSDO
-	CMsgDOTAAccountGuildMembershipsSDO
-	CMsgDOTAGuildCreateRequest
-	CMsgDOTAGuildCreateResponse
-	CMsgDOTAGuildSetAccountRoleRequest
-	CMsgDOTAGuildSetAccountRoleResponse
-	CMsgDOTAGuildInviteAccountRequest
-	CMsgDOTAGuildInviteAccountResponse
-	CMsgDOTAGuildCancelInviteRequest
-	CMsgDOTAGuildCancelInviteResponse
-	CMsgDOTAGuildUpdateDetailsRequest
-	CMsgDOTAGuildUpdateDetailsResponse
-	CMsgDOTAGCToGCUpdateOpenGuildPartyRequest
-	CMsgDOTAGCToGCUpdateOpenGuildPartyResponse
-	CMsgDOTAGCToGCDestroyOpenGuildPartyRequest
-	CMsgDOTAGCToGCDestroyOpenGuildPartyResponse
-	CMsgDOTAPartySetOpenGuildRequest
-	CMsgDOTAPartySetOpenGuildResponse
-	CMsgDOTAJoinOpenGuildPartyRequest
-	CMsgDOTAJoinOpenGuildPartyResponse
-	CMsgDOTAGuildOpenPartyRefresh
-	CMsgDOTARequestGuildData
-	CMsgDOTAGuildInviteData
-	CMsgDOTAGuildUpdateMessage
-	CMsgDOTAGuildEditLogoRequest
-	CMsgDOTAGuildEditLogoResponse
 	CMsgDOTAReportsRemainingRequest
 	CMsgDOTAReportsRemainingResponse
 	CMsgDOTASubmitPlayerReport
@@ -363,10 +244,6 @@ It has these top-level messages:
 	CMsgDOTAKickedFromMatchmakingQueue
 	CMsgDOTARequestSaveGames
 	CMsgDOTARequestSaveGamesResponse
-	CMsgWatchGame
-	CMsgCancelWatchGame
-	CMsgWatchGameResponse
-	CMsgPartyLeaderWatchGamePrompt
 	CMsgGCMatchDetailsRequest
 	CMsgGCMatchDetailsResponse
 	CMsgServerToGCMatchDetailsRequest
@@ -472,8 +349,6 @@ It has these top-level messages:
 	CMsgGCPlayerInfoRequest
 	CMsgGCPlayerInfoSubmit
 	CMsgGCPlayerInfoSubmitResponse
-	CMsgRequestWeekendTourneySchedule
-	CMsgWeekendTourneySchedule
 	CMsgClientProvideSurveyResult
 	CMsgDOTAEmoticonAccessSDO
 	CMsgClientToGCEmoticonDataRequest
@@ -518,13 +393,6 @@ It has these top-level messages:
 	CMsgGCToClientSocialMatchPostCommentResponse
 	CMsgClientToGCSocialMatchDetailsRequest
 	CMsgGCToClientSocialMatchDetailsResponse
-	CMsgDOTAPartyMemberSetCoach
-	CMsgDOTASetGroupLeader
-	CMsgDOTACancelGroupInvites
-	CMsgDOTASetGroupOpenStatus
-	CMsgDOTAGroupMergeInvite
-	CMsgDOTAGroupMergeResponse
-	CMsgDOTAGroupMergeReply
 	CMsgDOTAPartyRichPresence
 	CMsgDOTALobbyRichPresence
 	CMsgDOTACustomGameListenServerStartedLoading
@@ -532,9 +400,6 @@ It has these top-level messages:
 	CMsgClientToGCGetLeagueSeries
 	CMsgClientToGCGetLeagueSeriesResponse
 	CMsgClientToGCApplyGemCombiner
-	CDummyUnbreakMessage
-	CDOTAReplayDownloadInfo
-	CDOTABroadcasterInfo
 	CMsgClientToGCH264Unsupported
 	CMsgClientToGCRequestH264Support
 	CMsgClientToGCGetQuestProgress
@@ -542,13 +407,6 @@ It has these top-level messages:
 	CMsgGCToClientMatchSignedOut
 	CMsgGCGetHeroStatsHistory
 	CMsgGCGetHeroStatsHistoryResponse
-	CMsgClientToGCPrivateChatInvite
-	CMsgClientToGCPrivateChatKick
-	CMsgClientToGCPrivateChatPromote
-	CMsgClientToGCPrivateChatDemote
-	CMsgGCToClientPrivateChatResponse
-	CMsgClientToGCPrivateChatInfoRequest
-	CMsgGCToClientPrivateChatInfoResponse
 	CMsgPlayerConductScorecardRequest
 	CMsgPlayerConductScorecard
 	CMsgClientToGCWageringRequest
@@ -571,8 +429,6 @@ It has these top-level messages:
 	CMsgLeaguePrizePool
 	CMsgClientToGCTeammateStatsRequest
 	CMsgClientToGCTeammateStatsResponse
-	CMsgClientToGCGetGiftPermissions
-	CMsgClientToGCGetGiftPermissionsResponse
 	CMsgClientToGCVoteForArcana
 	CMsgClientToGCVoteForArcanaResponse
 	CMsgArcanaVotes
@@ -581,6 +437,7 @@ It has these top-level messages:
 	CMsgClientToGCRequestEventPointLog
 	CMsgClientToGCRequestEventPointLogResponse
 	CMsgClientToGCPublishUserStat
+	CMsgClientToGCAddTI6TreeProgress
 	CMsgClientToGCRedeemReward
 	CMsgGCToClientRedeemRewardResponse
 	CMsgClientToGCRequestLinaPlaysRemaining
@@ -588,6 +445,39 @@ It has these top-level messages:
 	CMsgClientToGCRequestLinaGameResult
 	CMsgClientToGCRequestLinaGameResultResponse
 	CMsgGCToClientQuestProgressUpdated
+	CMsgDOTARedeemItem
+	CMsgDOTARedeemItemResponse
+	CMsgPerfectWorldUserLookupRequest
+	CMsgPerfectWorldUserLookupResponse
+	CMsgNexonPartnerUpdate
+	CMsgMakeOffering
+	CMsgRequestOfferings
+	CMsgRequestOfferingsResponse
+	CMsgDOTAPCBangTimedReward
+	CMsgClientToGCPrivateChatInvite
+	CMsgClientToGCPrivateChatKick
+	CMsgClientToGCPrivateChatPromote
+	CMsgClientToGCPrivateChatDemote
+	CMsgGCToClientPrivateChatResponse
+	CMsgClientToGCPrivateChatInfoRequest
+	CMsgGCToClientPrivateChatInfoResponse
+	CMsgDOTAJoinChatChannel
+	CMsgDOTALeaveChatChannel
+	CMsgDOTAClientIgnoredUser
+	CMsgDOTAChatMessage
+	CMsgDOTAChatMember
+	CMsgDOTAJoinChatChannelResponse
+	CMsgDOTAChatChannelFullUpdate
+	CMsgDOTAOtherJoinedChatChannel
+	CMsgDOTAOtherLeftChatChannel
+	CMsgDOTAChatChannelMemberUpdate
+	CMsgDOTARequestChatChannelList
+	CMsgDOTARequestChatChannelListResponse
+	CMsgDOTAChatGetUserList
+	CMsgDOTAChatGetUserListResponse
+	CMsgDOTAChatGetMemberCount
+	CMsgDOTAChatGetMemberCountResponse
+	CMsgDOTAChatRegionsEnabled
 	CMsgGCPlayerInfo
 	CMsgDOTACreateFantasyLeagueRequest
 	CMsgDOTACreateFantasyLeagueResponse
@@ -650,35 +540,149 @@ It has these top-level messages:
 	CMsgDOTAFantasyLeaveLeagueResponse
 	CMsgDOTAFantasyPlayerScoreDetailsRequest
 	CMsgDOTAFantasyPlayerScoreDetailsResponse
-	CMsgDOTATournament
-	CMsgDOTATournamentStateChange
-	CMsgDOTATournamentRequest
-	CMsgDOTATournamentResponse
-	CMsgDOTAClearTournamentGame
 	CMsgDOTAPassportVoteTeamGuess
 	CMsgDOTAPassportVoteGenericSelection
 	CMsgDOTAPassportStampedPlayer
 	CMsgDOTAPassportPlayerCardChallenge
 	CMsgDOTAPassportVote
+	CMsgDOTAGuildSDO
+	CMsgDOTAGuildAuditSDO
+	CMsgDOTAAccountGuildMembershipsSDO
+	CMsgDOTAGuildCreateRequest
+	CMsgDOTAGuildCreateResponse
+	CMsgDOTAGuildSetAccountRoleRequest
+	CMsgDOTAGuildSetAccountRoleResponse
+	CMsgDOTAGuildInviteAccountRequest
+	CMsgDOTAGuildInviteAccountResponse
+	CMsgDOTAGuildCancelInviteRequest
+	CMsgDOTAGuildCancelInviteResponse
+	CMsgDOTAGuildUpdateDetailsRequest
+	CMsgDOTAGuildUpdateDetailsResponse
+	CMsgDOTAGCToGCUpdateOpenGuildPartyRequest
+	CMsgDOTAGCToGCUpdateOpenGuildPartyResponse
+	CMsgDOTAGCToGCDestroyOpenGuildPartyRequest
+	CMsgDOTAGCToGCDestroyOpenGuildPartyResponse
+	CMsgDOTAPartySetOpenGuildRequest
+	CMsgDOTAPartySetOpenGuildResponse
+	CMsgDOTAJoinOpenGuildPartyRequest
+	CMsgDOTAJoinOpenGuildPartyResponse
+	CMsgDOTAGuildOpenPartyRefresh
+	CMsgDOTARequestGuildData
+	CMsgDOTAGuildInviteData
+	CMsgDOTAGuildUpdateMessage
+	CMsgDOTAGuildEditLogoRequest
+	CMsgDOTAGuildEditLogoResponse
+	CMsgStartFindingMatch
+	CMsgStartFindingMatchResult
+	CMsgStopFindingMatch
+	CMsgReadyUp
+	CMsgReadyUpStatus
+	CMsgAbandonCurrentGame
+	CMsgPracticeLobbySetDetails
+	CMsgPracticeLobbyCreate
+	CMsgPracticeLobbySetTeamSlot
+	CMsgPracticeLobbySetCoach
+	CMsgPracticeLobbyJoinBroadcastChannel
+	CMsgPracticeLobbyCloseBroadcastChannel
+	CMsgPracticeLobbyToggleBroadcastChannelCameramanStatus
+	CMsgPracticeLobbyKick
+	CMsgPracticeLobbyKickFromTeam
+	CMsgPracticeLobbyLeave
+	CMsgPracticeLobbyLaunch
+	CMsgApplyTeamToPracticeLobby
+	CMsgClearPracticeLobbyTeam
+	CMsgPracticeLobbyList
+	CMsgPracticeLobbyListResponseEntry
+	CMsgPracticeLobbyListResponse
+	CMsgLobbyList
+	CMsgLobbyListResponse
+	CMsgPracticeLobbyJoin
+	CMsgPracticeLobbyJoinResponse
+	CMsgFriendPracticeLobbyListRequest
+	CMsgFriendPracticeLobbyListResponse
+	CMsgGuildmatePracticeLobbyListRequest
+	CMsgGuildmatePracticeLobbyListResponse
+	CMsgJoinableCustomGameModesRequest
+	CMsgJoinableCustomGameModesResponseEntry
+	CMsgJoinableCustomGameModesResponse
+	CMsgJoinableCustomLobbiesRequest
+	CMsgJoinableCustomLobbiesResponseEntry
+	CMsgJoinableCustomLobbiesResponse
+	CMsgQuickJoinCustomLobby
+	CMsgQuickJoinCustomLobbyResponse
+	CMsgBotGameCreate
+	CMsgCustomGameCreate
+	CMsgEventGameCreate
+	CMsgDOTAPartyMemberSetCoach
+	CMsgDOTASetGroupLeader
+	CMsgDOTACancelGroupInvites
+	CMsgDOTASetGroupOpenStatus
+	CMsgDOTAGroupMergeInvite
+	CMsgDOTAGroupMergeResponse
+	CMsgDOTAGroupMergeReply
+	CMsgDOTATeamMemberSDO
+	CMsgDOTATeamAdminSDO
+	CMsgDOTATeamMember
+	CMsgDOTATeam
+	CMsgDOTATeamInfo
+	CMsgDOTATeamsInfo
+	CMsgDOTAMyTeamInfoRequest
+	CMsgDOTACreateTeam
+	CMsgDOTACreateTeamResponse
+	CMsgDOTAEditTeamDetails
+	CMsgDOTAEditTeamDetailsResponse
+	CMsgDOTATeamProfileResponse
+	CMsgDOTAProTeamListRequest
+	CMsgDOTAProTeamListResponse
+	CMsgDOTATeamInvite_InviterToGC
+	CMsgDOTATeamInvite_GCImmediateResponseToInviter
+	CMsgDOTATeamInvite_GCRequestToInvitee
+	CMsgDOTATeamInvite_InviteeResponseToGC
+	CMsgDOTATeamInvite_GCResponseToInviter
+	CMsgDOTATeamInvite_GCResponseToInvitee
+	CMsgDOTAKickTeamMember
+	CMsgDOTAKickTeamMemberResponse
+	CMsgDOTATransferTeamAdmin
+	CMsgDOTATransferTeamAdminResponse
+	CMsgDOTAChangeTeamSub
+	CMsgDOTAChangeTeamSubResponse
+	CMsgDOTALeaveTeam
+	CMsgDOTALeaveTeamResponse
+	CMsgDOTABetaParticipation
 	CMsgDOTATournamentInfo
+	CMsgRequestWeekendTourneySchedule
+	CMsgWeekendTourneySchedule
 	CMsgWeekendTourneyOpts
 	CMsgWeekendTourneyLeave
+	CMsgDOTATournament
+	CMsgDOTATournamentStateChange
+	CMsgDOTATournamentRequest
+	CMsgDOTATournamentResponse
+	CMsgDOTAClearTournamentGame
+	CSourceTVGameSmall
+	CMsgClientToGCFindTopSourceTVGames
+	CMsgGCToClientFindTopSourceTVGamesResponse
+	CMsgClientToGCTopMatchesRequest
+	CMsgClientToGCTopLeagueMatchesRequest
+	CMsgClientToGCTopFriendMatchesRequest
+	CMsgClientToGCMatchesMinimalRequest
+	CMsgClientToGCMatchesMinimalResponse
+	CMsgGCToClientTopLeagueMatchesResponse
+	CMsgGCToClientTopFriendMatchesResponse
+	CMsgClientToGCFindTopMatches
+	CMsgGCToClientFindTopLeagueMatchesResponse
+	CMsgSpectateFriendGame
+	CMsgSpectateFriendGameResponse
+	CMsgDOTAMatchMinimal
+	CDOTAReplayDownloadInfo
+	CMsgWatchGame
+	CMsgCancelWatchGame
+	CMsgWatchGameResponse
+	CMsgPartyLeaderWatchGamePrompt
+	CDOTABroadcasterInfo
 	CSODOTAGameAccountClient
-	CSODOTAPartyMember
-	CSODOTAParty
-	CSODOTAPartyInvite
-	CSODOTALobbyInvite
-	CDOTAClientHardwareSpecs
-	CDOTASaveGame
-	CMsgLeaverState
-	CDOTALobbyMember
-	CLobbyTeamDetails
-	CLobbyTimedRewardDetails
-	CLobbyBroadcastChannelInfo
-	CSODOTALobby
 	CMsgLobbyEventPoints
 	CMsgDOTABroadcastNotification
-	CMsgDOTAPCBangTimedReward
 	CProtoItemHeroStatue
 	CProtoItemTeamShowcase
 	CMatchPlayerAbilityUpgrade
@@ -689,23 +693,13 @@ It has these top-level messages:
 	CMsgDOTAHasItemResponse
 	CMsgDOTAHasItemDefsQuery
 	CMsgDOTAHasItemDefsResponse
-	CMsgDOTAConsumeFantasyTicket
-	CMsgDOTAConsumeFantasyTicketFailure
 	CMsgGCToGCFantasySetMatchLeague
 	CSODOTAMapLocationState
-	CMsgNexonPartnerUpdate
-	CMsgMakeOffering
-	CMsgRequestOfferings
-	CMsgRequestOfferingsResponse
 	CMsgLeagueAdminList
-	CMsgPerfectWorldUserLookupRequest
-	CMsgPerfectWorldUserLookupResponse
 	CCompendiumTimestampedData
 	CCompendiumGameTimeline
 	CCompendiumGameList
 	CAdditionalEquipSlot
-	CMsgDOTARedeemItem
-	CMsgDOTARedeemItemResponse
 	CMsgDOTACombatLogEntry
 	CMsgDOTAProfileCard
 	CSODOTAPlayerChallenge
@@ -720,6 +714,16 @@ It has these top-level messages:
 	CMsgDOTASeasonAchievements
 	CMsgDOTASeasonPredictions
 	CMsgDOTAMatch
+	CSODOTAPartyMember
+	CSODOTAParty
+	CSODOTAPartyInvite
+	CSODOTALobbyInvite
+	CMsgLeaverState
+	CDOTALobbyMember
+	CLobbyTeamDetails
+	CLobbyTimedRewardDetails
+	CLobbyBroadcastChannelInfo
+	CSODOTALobby
 	CMsgSpawnLootGreevil
 	CMsgDismissLootGreevil
 	CMsgDismissLootGreevilResponse
@@ -809,6 +813,8 @@ It has these top-level messages:
 	CDOTAMatchPrivateMetadata
 	CDOTAModifierBuffTableEntry
 	CDOTALuaModifierEntry
+	CDOTAClientHardwareSpecs
+	CDOTASaveGame
 	CDOTAUserMsg_AIDebugLine
 	CDOTAUserMsg_Ping
 	CDOTAUserMsg_SwapVerify
@@ -958,6 +964,8 @@ It has these top-level messages:
 	CMsgClientToGCWrapAndDeliverGift
 	CMsgClientToGCWrapAndDeliverGiftResponse
 	CMsgClientToGCUnwrapGift
+	CMsgClientToGCGetGiftPermissions
+	CMsgClientToGCGetGiftPermissionsResponse
 	CMsgClientToGCUnpackBundle
 	CMsgClientToGCUnpackBundleResponse
 	CMsgGCToClientStoreTransactionCompleted

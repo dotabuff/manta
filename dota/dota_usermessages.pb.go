@@ -324,7 +324,7 @@ func (x *EDotaUserMessages) UnmarshalJSON(data []byte) error {
 	*x = EDotaUserMessages(value)
 	return nil
 }
-func (EDotaUserMessages) EnumDescriptor() ([]byte, []int) { return fileDescriptor15, []int{0} }
+func (EDotaUserMessages) EnumDescriptor() ([]byte, []int) { return fileDescriptor24, []int{0} }
 
 type DOTA_CHAT_MESSAGE int32
 
@@ -631,7 +631,7 @@ func (x *DOTA_CHAT_MESSAGE) UnmarshalJSON(data []byte) error {
 	*x = DOTA_CHAT_MESSAGE(value)
 	return nil
 }
-func (DOTA_CHAT_MESSAGE) EnumDescriptor() ([]byte, []int) { return fileDescriptor15, []int{1} }
+func (DOTA_CHAT_MESSAGE) EnumDescriptor() ([]byte, []int) { return fileDescriptor24, []int{1} }
 
 type DOTA_NO_BATTLE_POINTS_REASONS int32
 
@@ -672,7 +672,7 @@ func (x *DOTA_NO_BATTLE_POINTS_REASONS) UnmarshalJSON(data []byte) error {
 	return nil
 }
 func (DOTA_NO_BATTLE_POINTS_REASONS) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{2}
+	return fileDescriptor24, []int{2}
 }
 
 type DOTA_CHAT_INFORMATIONAL int32
@@ -713,7 +713,7 @@ func (x *DOTA_CHAT_INFORMATIONAL) UnmarshalJSON(data []byte) error {
 	*x = DOTA_CHAT_INFORMATIONAL(value)
 	return nil
 }
-func (DOTA_CHAT_INFORMATIONAL) EnumDescriptor() ([]byte, []int) { return fileDescriptor15, []int{3} }
+func (DOTA_CHAT_INFORMATIONAL) EnumDescriptor() ([]byte, []int) { return fileDescriptor24, []int{3} }
 
 type DOTA_ABILITY_PING_TYPE int32
 
@@ -756,7 +756,7 @@ func (x *DOTA_ABILITY_PING_TYPE) UnmarshalJSON(data []byte) error {
 	*x = DOTA_ABILITY_PING_TYPE(value)
 	return nil
 }
-func (DOTA_ABILITY_PING_TYPE) EnumDescriptor() ([]byte, []int) { return fileDescriptor15, []int{4} }
+func (DOTA_ABILITY_PING_TYPE) EnumDescriptor() ([]byte, []int) { return fileDescriptor24, []int{4} }
 
 type EDotaEntityMessages int32
 
@@ -805,7 +805,7 @@ func (x *EDotaEntityMessages) UnmarshalJSON(data []byte) error {
 	*x = EDotaEntityMessages(value)
 	return nil
 }
-func (EDotaEntityMessages) EnumDescriptor() ([]byte, []int) { return fileDescriptor15, []int{5} }
+func (EDotaEntityMessages) EnumDescriptor() ([]byte, []int) { return fileDescriptor24, []int{5} }
 
 type DOTA_PARTICLE_MESSAGE int32
 
@@ -878,7 +878,7 @@ func (x *DOTA_PARTICLE_MESSAGE) UnmarshalJSON(data []byte) error {
 	*x = DOTA_PARTICLE_MESSAGE(value)
 	return nil
 }
-func (DOTA_PARTICLE_MESSAGE) EnumDescriptor() ([]byte, []int) { return fileDescriptor15, []int{6} }
+func (DOTA_PARTICLE_MESSAGE) EnumDescriptor() ([]byte, []int) { return fileDescriptor24, []int{6} }
 
 type DOTA_OVERHEAD_ALERT int32
 
@@ -957,7 +957,7 @@ func (x *DOTA_OVERHEAD_ALERT) UnmarshalJSON(data []byte) error {
 	*x = DOTA_OVERHEAD_ALERT(value)
 	return nil
 }
-func (DOTA_OVERHEAD_ALERT) EnumDescriptor() ([]byte, []int) { return fileDescriptor15, []int{7} }
+func (DOTA_OVERHEAD_ALERT) EnumDescriptor() ([]byte, []int) { return fileDescriptor24, []int{7} }
 
 type DOTA_POSITION_CATEGORY int32
 
@@ -1033,7 +1033,7 @@ func (x *DOTA_POSITION_CATEGORY) UnmarshalJSON(data []byte) error {
 	*x = DOTA_POSITION_CATEGORY(value)
 	return nil
 }
-func (DOTA_POSITION_CATEGORY) EnumDescriptor() ([]byte, []int) { return fileDescriptor15, []int{8} }
+func (DOTA_POSITION_CATEGORY) EnumDescriptor() ([]byte, []int) { return fileDescriptor24, []int{8} }
 
 type DOTA_ABILITY_TARGET_TYPE int32
 
@@ -1079,7 +1079,7 @@ func (x *DOTA_ABILITY_TARGET_TYPE) UnmarshalJSON(data []byte) error {
 	*x = DOTA_ABILITY_TARGET_TYPE(value)
 	return nil
 }
-func (DOTA_ABILITY_TARGET_TYPE) EnumDescriptor() ([]byte, []int) { return fileDescriptor15, []int{9} }
+func (DOTA_ABILITY_TARGET_TYPE) EnumDescriptor() ([]byte, []int) { return fileDescriptor24, []int{9} }
 
 type EHeroStatType int32
 
@@ -1173,7 +1173,7 @@ func (x *EHeroStatType) UnmarshalJSON(data []byte) error {
 	*x = EHeroStatType(value)
 	return nil
 }
-func (EHeroStatType) EnumDescriptor() ([]byte, []int) { return fileDescriptor15, []int{10} }
+func (EHeroStatType) EnumDescriptor() ([]byte, []int) { return fileDescriptor24, []int{10} }
 
 type EPlayerVoiceListenState int32
 
@@ -1255,7 +1255,7 @@ func (x *EPlayerVoiceListenState) UnmarshalJSON(data []byte) error {
 	*x = EPlayerVoiceListenState(value)
 	return nil
 }
-func (EPlayerVoiceListenState) EnumDescriptor() ([]byte, []int) { return fileDescriptor15, []int{11} }
+func (EPlayerVoiceListenState) EnumDescriptor() ([]byte, []int) { return fileDescriptor24, []int{11} }
 
 type EProjectionEvent int32
 
@@ -1286,7 +1286,7 @@ func (x *EProjectionEvent) UnmarshalJSON(data []byte) error {
 	*x = EProjectionEvent(value)
 	return nil
 }
-func (EProjectionEvent) EnumDescriptor() ([]byte, []int) { return fileDescriptor15, []int{12} }
+func (EProjectionEvent) EnumDescriptor() ([]byte, []int) { return fileDescriptor24, []int{12} }
 
 type CDOTAUserMsg_PredictionResult_Prediction_EResult int32
 
@@ -1321,7 +1321,7 @@ func (x *CDOTAUserMsg_PredictionResult_Prediction_EResult) UnmarshalJSON(data []
 	return nil
 }
 func (CDOTAUserMsg_PredictionResult_Prediction_EResult) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{34, 0, 0}
+	return fileDescriptor24, []int{34, 0, 0}
 }
 
 type CDOTAResponseQuerySerialized_Fact_ValueType int32
@@ -1357,7 +1357,7 @@ func (x *CDOTAResponseQuerySerialized_Fact_ValueType) UnmarshalJSON(data []byte)
 	return nil
 }
 func (CDOTAResponseQuerySerialized_Fact_ValueType) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{35, 0, 0}
+	return fileDescriptor24, []int{35, 0, 0}
 }
 
 type CDOTAUserMsg_AIDebugLine struct {
@@ -1368,7 +1368,7 @@ type CDOTAUserMsg_AIDebugLine struct {
 func (m *CDOTAUserMsg_AIDebugLine) Reset()                    { *m = CDOTAUserMsg_AIDebugLine{} }
 func (m *CDOTAUserMsg_AIDebugLine) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_AIDebugLine) ProtoMessage()               {}
-func (*CDOTAUserMsg_AIDebugLine) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{0} }
+func (*CDOTAUserMsg_AIDebugLine) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{0} }
 
 func (m *CDOTAUserMsg_AIDebugLine) GetMessage() string {
 	if m != nil && m.Message != nil {
@@ -1386,7 +1386,7 @@ type CDOTAUserMsg_Ping struct {
 func (m *CDOTAUserMsg_Ping) Reset()                    { *m = CDOTAUserMsg_Ping{} }
 func (m *CDOTAUserMsg_Ping) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_Ping) ProtoMessage()               {}
-func (*CDOTAUserMsg_Ping) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{1} }
+func (*CDOTAUserMsg_Ping) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{1} }
 
 func (m *CDOTAUserMsg_Ping) GetPing() uint32 {
 	if m != nil && m.Ping != nil {
@@ -1410,7 +1410,7 @@ type CDOTAUserMsg_SwapVerify struct {
 func (m *CDOTAUserMsg_SwapVerify) Reset()                    { *m = CDOTAUserMsg_SwapVerify{} }
 func (m *CDOTAUserMsg_SwapVerify) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_SwapVerify) ProtoMessage()               {}
-func (*CDOTAUserMsg_SwapVerify) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{2} }
+func (*CDOTAUserMsg_SwapVerify) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{2} }
 
 func (m *CDOTAUserMsg_SwapVerify) GetPlayerId() uint32 {
 	if m != nil && m.PlayerId != nil {
@@ -1436,7 +1436,7 @@ type CDOTAUserMsg_ChatEvent struct {
 func (m *CDOTAUserMsg_ChatEvent) Reset()                    { *m = CDOTAUserMsg_ChatEvent{} }
 func (m *CDOTAUserMsg_ChatEvent) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_ChatEvent) ProtoMessage()               {}
-func (*CDOTAUserMsg_ChatEvent) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{3} }
+func (*CDOTAUserMsg_ChatEvent) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{3} }
 
 const Default_CDOTAUserMsg_ChatEvent_Type DOTA_CHAT_MESSAGE = DOTA_CHAT_MESSAGE_CHAT_MESSAGE_INVALID
 const Default_CDOTAUserMsg_ChatEvent_Playerid_1 int32 = -1
@@ -1524,7 +1524,7 @@ func (m *CDOTAUserMsg_CombatLogShowDeath) Reset()         { *m = CDOTAUserMsg_Co
 func (m *CDOTAUserMsg_CombatLogShowDeath) String() string { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_CombatLogShowDeath) ProtoMessage()    {}
 func (*CDOTAUserMsg_CombatLogShowDeath) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{4}
+	return fileDescriptor24, []int{4}
 }
 
 type CDOTAUserMsg_BotChat struct {
@@ -1538,7 +1538,7 @@ type CDOTAUserMsg_BotChat struct {
 func (m *CDOTAUserMsg_BotChat) Reset()                    { *m = CDOTAUserMsg_BotChat{} }
 func (m *CDOTAUserMsg_BotChat) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_BotChat) ProtoMessage()               {}
-func (*CDOTAUserMsg_BotChat) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{5} }
+func (*CDOTAUserMsg_BotChat) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{5} }
 
 func (m *CDOTAUserMsg_BotChat) GetPlayerId() uint32 {
 	if m != nil && m.PlayerId != nil {
@@ -1580,7 +1580,7 @@ func (m *CDOTAUserMsg_CombatHeroPositions) Reset()         { *m = CDOTAUserMsg_C
 func (m *CDOTAUserMsg_CombatHeroPositions) String() string { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_CombatHeroPositions) ProtoMessage()    {}
 func (*CDOTAUserMsg_CombatHeroPositions) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{6}
+	return fileDescriptor24, []int{6}
 }
 
 func (m *CDOTAUserMsg_CombatHeroPositions) GetIndex() uint32 {
@@ -1619,7 +1619,7 @@ type CDOTAUserMsg_MiniKillCamInfo struct {
 func (m *CDOTAUserMsg_MiniKillCamInfo) Reset()                    { *m = CDOTAUserMsg_MiniKillCamInfo{} }
 func (m *CDOTAUserMsg_MiniKillCamInfo) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_MiniKillCamInfo) ProtoMessage()               {}
-func (*CDOTAUserMsg_MiniKillCamInfo) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{7} }
+func (*CDOTAUserMsg_MiniKillCamInfo) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{7} }
 
 func (m *CDOTAUserMsg_MiniKillCamInfo) GetAttackers() []*CDOTAUserMsg_MiniKillCamInfo_Attacker {
 	if m != nil {
@@ -1639,7 +1639,7 @@ func (m *CDOTAUserMsg_MiniKillCamInfo_Attacker) Reset()         { *m = CDOTAUser
 func (m *CDOTAUserMsg_MiniKillCamInfo_Attacker) String() string { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_MiniKillCamInfo_Attacker) ProtoMessage()    {}
 func (*CDOTAUserMsg_MiniKillCamInfo_Attacker) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{7, 0}
+	return fileDescriptor24, []int{7, 0}
 }
 
 func (m *CDOTAUserMsg_MiniKillCamInfo_Attacker) GetAttacker() uint32 {
@@ -1677,7 +1677,7 @@ func (m *CDOTAUserMsg_MiniKillCamInfo_Attacker_Ability) String() string {
 }
 func (*CDOTAUserMsg_MiniKillCamInfo_Attacker_Ability) ProtoMessage() {}
 func (*CDOTAUserMsg_MiniKillCamInfo_Attacker_Ability) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{7, 0, 0}
+	return fileDescriptor24, []int{7, 0, 0}
 }
 
 func (m *CDOTAUserMsg_MiniKillCamInfo_Attacker_Ability) GetAbility() uint32 {
@@ -1703,7 +1703,7 @@ type CDOTAUserMsg_GlobalLightColor struct {
 func (m *CDOTAUserMsg_GlobalLightColor) Reset()                    { *m = CDOTAUserMsg_GlobalLightColor{} }
 func (m *CDOTAUserMsg_GlobalLightColor) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_GlobalLightColor) ProtoMessage()               {}
-func (*CDOTAUserMsg_GlobalLightColor) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{8} }
+func (*CDOTAUserMsg_GlobalLightColor) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{8} }
 
 func (m *CDOTAUserMsg_GlobalLightColor) GetColor() uint32 {
 	if m != nil && m.Color != nil {
@@ -1729,7 +1729,7 @@ func (m *CDOTAUserMsg_GlobalLightDirection) Reset()         { *m = CDOTAUserMsg_
 func (m *CDOTAUserMsg_GlobalLightDirection) String() string { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_GlobalLightDirection) ProtoMessage()    {}
 func (*CDOTAUserMsg_GlobalLightDirection) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{9}
+	return fileDescriptor24, []int{9}
 }
 
 func (m *CDOTAUserMsg_GlobalLightDirection) GetDirection() *CMsgVector {
@@ -1755,7 +1755,7 @@ type CDOTAUserMsg_LocationPing struct {
 func (m *CDOTAUserMsg_LocationPing) Reset()                    { *m = CDOTAUserMsg_LocationPing{} }
 func (m *CDOTAUserMsg_LocationPing) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_LocationPing) ProtoMessage()               {}
-func (*CDOTAUserMsg_LocationPing) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{10} }
+func (*CDOTAUserMsg_LocationPing) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{10} }
 
 func (m *CDOTAUserMsg_LocationPing) GetPlayerId() uint32 {
 	if m != nil && m.PlayerId != nil {
@@ -1780,7 +1780,7 @@ type CDOTAUserMsg_ItemAlert struct {
 func (m *CDOTAUserMsg_ItemAlert) Reset()                    { *m = CDOTAUserMsg_ItemAlert{} }
 func (m *CDOTAUserMsg_ItemAlert) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_ItemAlert) ProtoMessage()               {}
-func (*CDOTAUserMsg_ItemAlert) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{11} }
+func (*CDOTAUserMsg_ItemAlert) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{11} }
 
 func (m *CDOTAUserMsg_ItemAlert) GetPlayerId() uint32 {
 	if m != nil && m.PlayerId != nil {
@@ -1807,7 +1807,7 @@ type CDOTAUserMsg_EnemyItemAlert struct {
 func (m *CDOTAUserMsg_EnemyItemAlert) Reset()                    { *m = CDOTAUserMsg_EnemyItemAlert{} }
 func (m *CDOTAUserMsg_EnemyItemAlert) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_EnemyItemAlert) ProtoMessage()               {}
-func (*CDOTAUserMsg_EnemyItemAlert) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{12} }
+func (*CDOTAUserMsg_EnemyItemAlert) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{12} }
 
 func (m *CDOTAUserMsg_EnemyItemAlert) GetPlayerId() uint32 {
 	if m != nil && m.PlayerId != nil {
@@ -1849,7 +1849,7 @@ type CDOTAUserMsg_ModifierAlert struct {
 func (m *CDOTAUserMsg_ModifierAlert) Reset()                    { *m = CDOTAUserMsg_ModifierAlert{} }
 func (m *CDOTAUserMsg_ModifierAlert) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_ModifierAlert) ProtoMessage()               {}
-func (*CDOTAUserMsg_ModifierAlert) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{13} }
+func (*CDOTAUserMsg_ModifierAlert) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{13} }
 
 func (m *CDOTAUserMsg_ModifierAlert) GetPlayerId() uint32 {
 	if m != nil && m.PlayerId != nil {
@@ -1895,7 +1895,7 @@ type CDOTAUserMsg_HPManaAlert struct {
 func (m *CDOTAUserMsg_HPManaAlert) Reset()                    { *m = CDOTAUserMsg_HPManaAlert{} }
 func (m *CDOTAUserMsg_HPManaAlert) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_HPManaAlert) ProtoMessage()               {}
-func (*CDOTAUserMsg_HPManaAlert) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{14} }
+func (*CDOTAUserMsg_HPManaAlert) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{14} }
 
 func (m *CDOTAUserMsg_HPManaAlert) GetPlayerId() uint32 {
 	if m != nil && m.PlayerId != nil {
@@ -1920,7 +1920,7 @@ type CDOTAUserMsg_GlyphAlert struct {
 func (m *CDOTAUserMsg_GlyphAlert) Reset()                    { *m = CDOTAUserMsg_GlyphAlert{} }
 func (m *CDOTAUserMsg_GlyphAlert) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_GlyphAlert) ProtoMessage()               {}
-func (*CDOTAUserMsg_GlyphAlert) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{15} }
+func (*CDOTAUserMsg_GlyphAlert) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{15} }
 
 func (m *CDOTAUserMsg_GlyphAlert) GetPlayerId() uint32 {
 	if m != nil && m.PlayerId != nil {
@@ -1947,7 +1947,7 @@ func (m *CDOTAUserMsg_WillPurchaseAlert) Reset()         { *m = CDOTAUserMsg_Wil
 func (m *CDOTAUserMsg_WillPurchaseAlert) String() string { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_WillPurchaseAlert) ProtoMessage()    {}
 func (*CDOTAUserMsg_WillPurchaseAlert) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{16}
+	return fileDescriptor24, []int{16}
 }
 
 func (m *CDOTAUserMsg_WillPurchaseAlert) GetItemid() int32 {
@@ -1980,7 +1980,7 @@ func (m *CDOTAUserMsg_BuyBackStateAlert) Reset()         { *m = CDOTAUserMsg_Buy
 func (m *CDOTAUserMsg_BuyBackStateAlert) String() string { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_BuyBackStateAlert) ProtoMessage()    {}
 func (*CDOTAUserMsg_BuyBackStateAlert) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{17}
+	return fileDescriptor24, []int{17}
 }
 
 func (m *CDOTAUserMsg_BuyBackStateAlert) GetPlayerId() int32 {
@@ -2000,7 +2000,7 @@ type CDOTAUserMsg_QuickBuyAlert struct {
 func (m *CDOTAUserMsg_QuickBuyAlert) Reset()                    { *m = CDOTAUserMsg_QuickBuyAlert{} }
 func (m *CDOTAUserMsg_QuickBuyAlert) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_QuickBuyAlert) ProtoMessage()               {}
-func (*CDOTAUserMsg_QuickBuyAlert) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{18} }
+func (*CDOTAUserMsg_QuickBuyAlert) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{18} }
 
 func (m *CDOTAUserMsg_QuickBuyAlert) GetPlayerId() int32 {
 	if m != nil && m.PlayerId != nil {
@@ -2035,7 +2035,7 @@ func (m *CDOTAUserMsg_CourierKilledAlert) Reset()         { *m = CDOTAUserMsg_Co
 func (m *CDOTAUserMsg_CourierKilledAlert) String() string { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_CourierKilledAlert) ProtoMessage()    {}
 func (*CDOTAUserMsg_CourierKilledAlert) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{19}
+	return fileDescriptor24, []int{19}
 }
 
 func (m *CDOTAUserMsg_CourierKilledAlert) GetTeam() uint32 {
@@ -2078,7 +2078,7 @@ type CDOTAUserMsg_MinimapEvent struct {
 func (m *CDOTAUserMsg_MinimapEvent) Reset()                    { *m = CDOTAUserMsg_MinimapEvent{} }
 func (m *CDOTAUserMsg_MinimapEvent) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_MinimapEvent) ProtoMessage()               {}
-func (*CDOTAUserMsg_MinimapEvent) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{20} }
+func (*CDOTAUserMsg_MinimapEvent) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{20} }
 
 func (m *CDOTAUserMsg_MinimapEvent) GetEventType() int32 {
 	if m != nil && m.EventType != nil {
@@ -2124,7 +2124,7 @@ type CDOTAUserMsg_MapLine struct {
 func (m *CDOTAUserMsg_MapLine) Reset()                    { *m = CDOTAUserMsg_MapLine{} }
 func (m *CDOTAUserMsg_MapLine) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_MapLine) ProtoMessage()               {}
-func (*CDOTAUserMsg_MapLine) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{21} }
+func (*CDOTAUserMsg_MapLine) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{21} }
 
 func (m *CDOTAUserMsg_MapLine) GetPlayerId() int32 {
 	if m != nil && m.PlayerId != nil {
@@ -2153,7 +2153,7 @@ func (m *CDOTAUserMsg_MinimapDebugPoint) Reset()         { *m = CDOTAUserMsg_Min
 func (m *CDOTAUserMsg_MinimapDebugPoint) String() string { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_MinimapDebugPoint) ProtoMessage()    {}
 func (*CDOTAUserMsg_MinimapDebugPoint) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{22}
+	return fileDescriptor24, []int{22}
 }
 
 func (m *CDOTAUserMsg_MinimapDebugPoint) GetLocation() *CMsgVector {
@@ -2206,7 +2206,7 @@ func (m *CDOTAUserMsg_CreateLinearProjectile) Reset()         { *m = CDOTAUserMs
 func (m *CDOTAUserMsg_CreateLinearProjectile) String() string { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_CreateLinearProjectile) ProtoMessage()    {}
 func (*CDOTAUserMsg_CreateLinearProjectile) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{23}
+	return fileDescriptor24, []int{23}
 }
 
 func (m *CDOTAUserMsg_CreateLinearProjectile) GetOrigin() *CMsgVector {
@@ -2267,7 +2267,7 @@ func (m *CDOTAUserMsg_DestroyLinearProjectile) Reset()         { *m = CDOTAUserM
 func (m *CDOTAUserMsg_DestroyLinearProjectile) String() string { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_DestroyLinearProjectile) ProtoMessage()    {}
 func (*CDOTAUserMsg_DestroyLinearProjectile) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{24}
+	return fileDescriptor24, []int{24}
 }
 
 func (m *CDOTAUserMsg_DestroyLinearProjectile) GetHandle() int32 {
@@ -2287,7 +2287,7 @@ func (m *CDOTAUserMsg_DodgeTrackingProjectiles) Reset()         { *m = CDOTAUser
 func (m *CDOTAUserMsg_DodgeTrackingProjectiles) String() string { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_DodgeTrackingProjectiles) ProtoMessage()    {}
 func (*CDOTAUserMsg_DodgeTrackingProjectiles) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{25}
+	return fileDescriptor24, []int{25}
 }
 
 func (m *CDOTAUserMsg_DodgeTrackingProjectiles) GetEntindex() int32 {
@@ -2315,7 +2315,7 @@ func (m *CDOTAUserMsg_SpectatorPlayerClick) Reset()         { *m = CDOTAUserMsg_
 func (m *CDOTAUserMsg_SpectatorPlayerClick) String() string { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_SpectatorPlayerClick) ProtoMessage()    {}
 func (*CDOTAUserMsg_SpectatorPlayerClick) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{26}
+	return fileDescriptor24, []int{26}
 }
 
 func (m *CDOTAUserMsg_SpectatorPlayerClick) GetEntindex() int32 {
@@ -2357,7 +2357,7 @@ func (m *CDOTAUserMsg_SpectatorPlayerUnitOrders) Reset() {
 func (m *CDOTAUserMsg_SpectatorPlayerUnitOrders) String() string { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_SpectatorPlayerUnitOrders) ProtoMessage()    {}
 func (*CDOTAUserMsg_SpectatorPlayerUnitOrders) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{27}
+	return fileDescriptor24, []int{27}
 }
 
 func (m *CDOTAUserMsg_SpectatorPlayerUnitOrders) GetEntindex() int32 {
@@ -2427,7 +2427,7 @@ type CDOTAUserMsg_NevermoreRequiem struct {
 func (m *CDOTAUserMsg_NevermoreRequiem) Reset()                    { *m = CDOTAUserMsg_NevermoreRequiem{} }
 func (m *CDOTAUserMsg_NevermoreRequiem) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_NevermoreRequiem) ProtoMessage()               {}
-func (*CDOTAUserMsg_NevermoreRequiem) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{28} }
+func (*CDOTAUserMsg_NevermoreRequiem) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{28} }
 
 func (m *CDOTAUserMsg_NevermoreRequiem) GetEntityHandle() int32 {
 	if m != nil && m.EntityHandle != nil {
@@ -2465,7 +2465,7 @@ type CDOTAUserMsg_InvalidCommand struct {
 func (m *CDOTAUserMsg_InvalidCommand) Reset()                    { *m = CDOTAUserMsg_InvalidCommand{} }
 func (m *CDOTAUserMsg_InvalidCommand) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_InvalidCommand) ProtoMessage()               {}
-func (*CDOTAUserMsg_InvalidCommand) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{29} }
+func (*CDOTAUserMsg_InvalidCommand) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{29} }
 
 func (m *CDOTAUserMsg_InvalidCommand) GetMessage() string {
 	if m != nil && m.Message != nil {
@@ -2482,7 +2482,7 @@ type CDOTAUserMsg_HudError struct {
 func (m *CDOTAUserMsg_HudError) Reset()                    { *m = CDOTAUserMsg_HudError{} }
 func (m *CDOTAUserMsg_HudError) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_HudError) ProtoMessage()               {}
-func (*CDOTAUserMsg_HudError) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{30} }
+func (*CDOTAUserMsg_HudError) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{30} }
 
 func (m *CDOTAUserMsg_HudError) GetOrderId() int32 {
 	if m != nil && m.OrderId != nil {
@@ -2502,7 +2502,7 @@ type CDOTAUserMsg_SharedCooldown struct {
 func (m *CDOTAUserMsg_SharedCooldown) Reset()                    { *m = CDOTAUserMsg_SharedCooldown{} }
 func (m *CDOTAUserMsg_SharedCooldown) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_SharedCooldown) ProtoMessage()               {}
-func (*CDOTAUserMsg_SharedCooldown) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{31} }
+func (*CDOTAUserMsg_SharedCooldown) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{31} }
 
 func (m *CDOTAUserMsg_SharedCooldown) GetEntindex() int32 {
 	if m != nil && m.Entindex != nil {
@@ -2541,7 +2541,7 @@ func (m *CDOTAUserMsg_SetNextAutobuyItem) Reset()         { *m = CDOTAUserMsg_Se
 func (m *CDOTAUserMsg_SetNextAutobuyItem) String() string { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_SetNextAutobuyItem) ProtoMessage()    {}
 func (*CDOTAUserMsg_SetNextAutobuyItem) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{32}
+	return fileDescriptor24, []int{32}
 }
 
 func (m *CDOTAUserMsg_SetNextAutobuyItem) GetName() string {
@@ -2561,7 +2561,7 @@ type CDOTAUserMsg_HalloweenDrops struct {
 func (m *CDOTAUserMsg_HalloweenDrops) Reset()                    { *m = CDOTAUserMsg_HalloweenDrops{} }
 func (m *CDOTAUserMsg_HalloweenDrops) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_HalloweenDrops) ProtoMessage()               {}
-func (*CDOTAUserMsg_HalloweenDrops) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{33} }
+func (*CDOTAUserMsg_HalloweenDrops) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{33} }
 
 func (m *CDOTAUserMsg_HalloweenDrops) GetItemDefs() []uint32 {
 	if m != nil {
@@ -2595,7 +2595,7 @@ type CDOTAUserMsg_PredictionResult struct {
 func (m *CDOTAUserMsg_PredictionResult) Reset()                    { *m = CDOTAUserMsg_PredictionResult{} }
 func (m *CDOTAUserMsg_PredictionResult) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_PredictionResult) ProtoMessage()               {}
-func (*CDOTAUserMsg_PredictionResult) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{34} }
+func (*CDOTAUserMsg_PredictionResult) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{34} }
 
 func (m *CDOTAUserMsg_PredictionResult) GetAccountId() uint32 {
 	if m != nil && m.AccountId != nil {
@@ -2640,7 +2640,7 @@ func (m *CDOTAUserMsg_PredictionResult_Prediction) Reset() {
 func (m *CDOTAUserMsg_PredictionResult_Prediction) String() string { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_PredictionResult_Prediction) ProtoMessage()    {}
 func (*CDOTAUserMsg_PredictionResult_Prediction) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{34, 0}
+	return fileDescriptor24, []int{34, 0}
 }
 
 const Default_CDOTAUserMsg_PredictionResult_Prediction_Result CDOTAUserMsg_PredictionResult_Prediction_EResult = CDOTAUserMsg_PredictionResult_Prediction_k_eResult_ItemGranted
@@ -2688,7 +2688,7 @@ type CDOTAResponseQuerySerialized struct {
 func (m *CDOTAResponseQuerySerialized) Reset()                    { *m = CDOTAResponseQuerySerialized{} }
 func (m *CDOTAResponseQuerySerialized) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAResponseQuerySerialized) ProtoMessage()               {}
-func (*CDOTAResponseQuerySerialized) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{35} }
+func (*CDOTAResponseQuerySerialized) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{35} }
 
 func (m *CDOTAResponseQuerySerialized) GetFacts() []*CDOTAResponseQuerySerialized_Fact {
 	if m != nil {
@@ -2709,7 +2709,7 @@ func (m *CDOTAResponseQuerySerialized_Fact) Reset()         { *m = CDOTAResponse
 func (m *CDOTAResponseQuerySerialized_Fact) String() string { return proto.CompactTextString(m) }
 func (*CDOTAResponseQuerySerialized_Fact) ProtoMessage()    {}
 func (*CDOTAResponseQuerySerialized_Fact) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{35, 0}
+	return fileDescriptor24, []int{35, 0}
 }
 
 const Default_CDOTAResponseQuerySerialized_Fact_Valtype CDOTAResponseQuerySerialized_Fact_ValueType = CDOTAResponseQuerySerialized_Fact_NUMERIC
@@ -2753,7 +2753,7 @@ type CDOTASpeechMatchOnClient struct {
 func (m *CDOTASpeechMatchOnClient) Reset()                    { *m = CDOTASpeechMatchOnClient{} }
 func (m *CDOTASpeechMatchOnClient) String() string            { return proto.CompactTextString(m) }
 func (*CDOTASpeechMatchOnClient) ProtoMessage()               {}
-func (*CDOTASpeechMatchOnClient) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{36} }
+func (*CDOTASpeechMatchOnClient) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{36} }
 
 const Default_CDOTASpeechMatchOnClient_Randomseed int32 = 0
 
@@ -2801,7 +2801,7 @@ type CDOTAUserMsg_UnitEvent struct {
 func (m *CDOTAUserMsg_UnitEvent) Reset()                    { *m = CDOTAUserMsg_UnitEvent{} }
 func (m *CDOTAUserMsg_UnitEvent) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_UnitEvent) ProtoMessage()               {}
-func (*CDOTAUserMsg_UnitEvent) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{37} }
+func (*CDOTAUserMsg_UnitEvent) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{37} }
 
 const Default_CDOTAUserMsg_UnitEvent_MsgType EDotaEntityMessages = EDotaEntityMessages_DOTA_UNIT_SPEECH
 
@@ -2881,7 +2881,7 @@ func (m *CDOTAUserMsg_UnitEvent_Speech) Reset()         { *m = CDOTAUserMsg_Unit
 func (m *CDOTAUserMsg_UnitEvent_Speech) String() string { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_UnitEvent_Speech) ProtoMessage()    {}
 func (*CDOTAUserMsg_UnitEvent_Speech) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{37, 0}
+	return fileDescriptor24, []int{37, 0}
 }
 
 const Default_CDOTAUserMsg_UnitEvent_Speech_Muteable bool = false
@@ -2930,7 +2930,7 @@ func (m *CDOTAUserMsg_UnitEvent_SpeechMute) Reset()         { *m = CDOTAUserMsg_
 func (m *CDOTAUserMsg_UnitEvent_SpeechMute) String() string { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_UnitEvent_SpeechMute) ProtoMessage()    {}
 func (*CDOTAUserMsg_UnitEvent_SpeechMute) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{37, 1}
+	return fileDescriptor24, []int{37, 1}
 }
 
 const Default_CDOTAUserMsg_UnitEvent_SpeechMute_Delay float32 = 0.5
@@ -2955,7 +2955,7 @@ func (m *CDOTAUserMsg_UnitEvent_AddGesture) Reset()         { *m = CDOTAUserMsg_
 func (m *CDOTAUserMsg_UnitEvent_AddGesture) String() string { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_UnitEvent_AddGesture) ProtoMessage()    {}
 func (*CDOTAUserMsg_UnitEvent_AddGesture) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{37, 2}
+	return fileDescriptor24, []int{37, 2}
 }
 
 const Default_CDOTAUserMsg_UnitEvent_AddGesture_FadeIn float32 = 0
@@ -3006,7 +3006,7 @@ func (m *CDOTAUserMsg_UnitEvent_RemoveGesture) Reset()         { *m = CDOTAUserM
 func (m *CDOTAUserMsg_UnitEvent_RemoveGesture) String() string { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_UnitEvent_RemoveGesture) ProtoMessage()    {}
 func (*CDOTAUserMsg_UnitEvent_RemoveGesture) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{37, 3}
+	return fileDescriptor24, []int{37, 3}
 }
 
 func (m *CDOTAUserMsg_UnitEvent_RemoveGesture) GetActivity() int32 {
@@ -3027,7 +3027,7 @@ func (m *CDOTAUserMsg_UnitEvent_BloodImpact) Reset()         { *m = CDOTAUserMsg
 func (m *CDOTAUserMsg_UnitEvent_BloodImpact) String() string { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_UnitEvent_BloodImpact) ProtoMessage()    {}
 func (*CDOTAUserMsg_UnitEvent_BloodImpact) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{37, 4}
+	return fileDescriptor24, []int{37, 4}
 }
 
 func (m *CDOTAUserMsg_UnitEvent_BloodImpact) GetScale() int32 {
@@ -3060,7 +3060,7 @@ func (m *CDOTAUserMsg_UnitEvent_FadeGesture) Reset()         { *m = CDOTAUserMsg
 func (m *CDOTAUserMsg_UnitEvent_FadeGesture) String() string { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_UnitEvent_FadeGesture) ProtoMessage()    {}
 func (*CDOTAUserMsg_UnitEvent_FadeGesture) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{37, 5}
+	return fileDescriptor24, []int{37, 5}
 }
 
 func (m *CDOTAUserMsg_UnitEvent_FadeGesture) GetActivity() int32 {
@@ -3078,7 +3078,7 @@ type CDOTAUserMsg_ItemPurchased struct {
 func (m *CDOTAUserMsg_ItemPurchased) Reset()                    { *m = CDOTAUserMsg_ItemPurchased{} }
 func (m *CDOTAUserMsg_ItemPurchased) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_ItemPurchased) ProtoMessage()               {}
-func (*CDOTAUserMsg_ItemPurchased) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{38} }
+func (*CDOTAUserMsg_ItemPurchased) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{38} }
 
 func (m *CDOTAUserMsg_ItemPurchased) GetItemIndex() int32 {
 	if m != nil && m.ItemIndex != nil {
@@ -3099,7 +3099,7 @@ type CDOTAUserMsg_ItemFound struct {
 func (m *CDOTAUserMsg_ItemFound) Reset()                    { *m = CDOTAUserMsg_ItemFound{} }
 func (m *CDOTAUserMsg_ItemFound) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_ItemFound) ProtoMessage()               {}
-func (*CDOTAUserMsg_ItemFound) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{39} }
+func (*CDOTAUserMsg_ItemFound) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{39} }
 
 func (m *CDOTAUserMsg_ItemFound) GetPlayer() int32 {
 	if m != nil && m.Player != nil {
@@ -3159,7 +3159,7 @@ type CDOTAUserMsg_ParticleManager struct {
 func (m *CDOTAUserMsg_ParticleManager) Reset()                    { *m = CDOTAUserMsg_ParticleManager{} }
 func (m *CDOTAUserMsg_ParticleManager) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_ParticleManager) ProtoMessage()               {}
-func (*CDOTAUserMsg_ParticleManager) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{40} }
+func (*CDOTAUserMsg_ParticleManager) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{40} }
 
 const Default_CDOTAUserMsg_ParticleManager_Type DOTA_PARTICLE_MESSAGE = DOTA_PARTICLE_MESSAGE_DOTA_PARTICLE_MANAGER_EVENT_CREATE
 
@@ -3287,7 +3287,7 @@ func (m *CDOTAUserMsg_ParticleManager_ReleaseParticleIndex) String() string {
 }
 func (*CDOTAUserMsg_ParticleManager_ReleaseParticleIndex) ProtoMessage() {}
 func (*CDOTAUserMsg_ParticleManager_ReleaseParticleIndex) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{40, 0}
+	return fileDescriptor24, []int{40, 0}
 }
 
 type CDOTAUserMsg_ParticleManager_CreateParticle struct {
@@ -3306,7 +3306,7 @@ func (m *CDOTAUserMsg_ParticleManager_CreateParticle) String() string {
 }
 func (*CDOTAUserMsg_ParticleManager_CreateParticle) ProtoMessage() {}
 func (*CDOTAUserMsg_ParticleManager_CreateParticle) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{40, 1}
+	return fileDescriptor24, []int{40, 1}
 }
 
 func (m *CDOTAUserMsg_ParticleManager_CreateParticle) GetParticleNameIndex() uint64 {
@@ -3350,7 +3350,7 @@ func (m *CDOTAUserMsg_ParticleManager_DestroyParticle) String() string {
 }
 func (*CDOTAUserMsg_ParticleManager_DestroyParticle) ProtoMessage() {}
 func (*CDOTAUserMsg_ParticleManager_DestroyParticle) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{40, 2}
+	return fileDescriptor24, []int{40, 2}
 }
 
 func (m *CDOTAUserMsg_ParticleManager_DestroyParticle) GetDestroyImmediately() bool {
@@ -3374,7 +3374,7 @@ func (m *CDOTAUserMsg_ParticleManager_DestroyParticleInvolving) String() string 
 }
 func (*CDOTAUserMsg_ParticleManager_DestroyParticleInvolving) ProtoMessage() {}
 func (*CDOTAUserMsg_ParticleManager_DestroyParticleInvolving) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{40, 3}
+	return fileDescriptor24, []int{40, 3}
 }
 
 func (m *CDOTAUserMsg_ParticleManager_DestroyParticleInvolving) GetDestroyImmediately() bool {
@@ -3405,7 +3405,7 @@ func (m *CDOTAUserMsg_ParticleManager_UpdateParticle) String() string {
 }
 func (*CDOTAUserMsg_ParticleManager_UpdateParticle) ProtoMessage() {}
 func (*CDOTAUserMsg_ParticleManager_UpdateParticle) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{40, 4}
+	return fileDescriptor24, []int{40, 4}
 }
 
 func (m *CDOTAUserMsg_ParticleManager_UpdateParticle) GetControlPoint() int32 {
@@ -3436,7 +3436,7 @@ func (m *CDOTAUserMsg_ParticleManager_UpdateParticleFwd) String() string {
 }
 func (*CDOTAUserMsg_ParticleManager_UpdateParticleFwd) ProtoMessage() {}
 func (*CDOTAUserMsg_ParticleManager_UpdateParticleFwd) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{40, 5}
+	return fileDescriptor24, []int{40, 5}
 }
 
 func (m *CDOTAUserMsg_ParticleManager_UpdateParticleFwd) GetControlPoint() int32 {
@@ -3469,7 +3469,7 @@ func (m *CDOTAUserMsg_ParticleManager_UpdateParticleOrient) String() string {
 }
 func (*CDOTAUserMsg_ParticleManager_UpdateParticleOrient) ProtoMessage() {}
 func (*CDOTAUserMsg_ParticleManager_UpdateParticleOrient) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{40, 6}
+	return fileDescriptor24, []int{40, 6}
 }
 
 func (m *CDOTAUserMsg_ParticleManager_UpdateParticleOrient) GetControlPoint() int32 {
@@ -3514,7 +3514,7 @@ func (m *CDOTAUserMsg_ParticleManager_UpdateParticleFallback) String() string {
 }
 func (*CDOTAUserMsg_ParticleManager_UpdateParticleFallback) ProtoMessage() {}
 func (*CDOTAUserMsg_ParticleManager_UpdateParticleFallback) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{40, 7}
+	return fileDescriptor24, []int{40, 7}
 }
 
 func (m *CDOTAUserMsg_ParticleManager_UpdateParticleFallback) GetControlPoint() int32 {
@@ -3545,7 +3545,7 @@ func (m *CDOTAUserMsg_ParticleManager_UpdateParticleOffset) String() string {
 }
 func (*CDOTAUserMsg_ParticleManager_UpdateParticleOffset) ProtoMessage() {}
 func (*CDOTAUserMsg_ParticleManager_UpdateParticleOffset) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{40, 8}
+	return fileDescriptor24, []int{40, 8}
 }
 
 func (m *CDOTAUserMsg_ParticleManager_UpdateParticleOffset) GetControlPoint() int32 {
@@ -3580,7 +3580,7 @@ func (m *CDOTAUserMsg_ParticleManager_UpdateParticleEnt) String() string {
 }
 func (*CDOTAUserMsg_ParticleManager_UpdateParticleEnt) ProtoMessage() {}
 func (*CDOTAUserMsg_ParticleManager_UpdateParticleEnt) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{40, 9}
+	return fileDescriptor24, []int{40, 9}
 }
 
 func (m *CDOTAUserMsg_ParticleManager_UpdateParticleEnt) GetControlPoint() int32 {
@@ -3638,7 +3638,7 @@ func (m *CDOTAUserMsg_ParticleManager_UpdateParticleSetFrozen) String() string {
 }
 func (*CDOTAUserMsg_ParticleManager_UpdateParticleSetFrozen) ProtoMessage() {}
 func (*CDOTAUserMsg_ParticleManager_UpdateParticleSetFrozen) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{40, 10}
+	return fileDescriptor24, []int{40, 10}
 }
 
 func (m *CDOTAUserMsg_ParticleManager_UpdateParticleSetFrozen) GetSetFrozen() bool {
@@ -3661,7 +3661,7 @@ func (m *CDOTAUserMsg_ParticleManager_UpdateParticleShouldDraw) String() string 
 }
 func (*CDOTAUserMsg_ParticleManager_UpdateParticleShouldDraw) ProtoMessage() {}
 func (*CDOTAUserMsg_ParticleManager_UpdateParticleShouldDraw) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{40, 11}
+	return fileDescriptor24, []int{40, 11}
 }
 
 func (m *CDOTAUserMsg_ParticleManager_UpdateParticleShouldDraw) GetShouldDraw() bool {
@@ -3686,7 +3686,7 @@ func (m *CDOTAUserMsg_ParticleManager_ChangeControlPointAttachment) String() str
 }
 func (*CDOTAUserMsg_ParticleManager_ChangeControlPointAttachment) ProtoMessage() {}
 func (*CDOTAUserMsg_ParticleManager_ChangeControlPointAttachment) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{40, 12}
+	return fileDescriptor24, []int{40, 12}
 }
 
 func (m *CDOTAUserMsg_ParticleManager_ChangeControlPointAttachment) GetAttachmentOld() int32 {
@@ -3724,7 +3724,7 @@ func (m *CDOTAUserMsg_ParticleManager_UpdateEntityPosition) String() string {
 }
 func (*CDOTAUserMsg_ParticleManager_UpdateEntityPosition) ProtoMessage() {}
 func (*CDOTAUserMsg_ParticleManager_UpdateEntityPosition) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{40, 13}
+	return fileDescriptor24, []int{40, 13}
 }
 
 func (m *CDOTAUserMsg_ParticleManager_UpdateEntityPosition) GetEntityHandle() int32 {
@@ -3753,7 +3753,7 @@ type CDOTAUserMsg_OverheadEvent struct {
 func (m *CDOTAUserMsg_OverheadEvent) Reset()                    { *m = CDOTAUserMsg_OverheadEvent{} }
 func (m *CDOTAUserMsg_OverheadEvent) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_OverheadEvent) ProtoMessage()               {}
-func (*CDOTAUserMsg_OverheadEvent) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{41} }
+func (*CDOTAUserMsg_OverheadEvent) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{41} }
 
 const Default_CDOTAUserMsg_OverheadEvent_MessageType DOTA_OVERHEAD_ALERT = DOTA_OVERHEAD_ALERT_OVERHEAD_ALERT_GOLD
 
@@ -3801,7 +3801,7 @@ type CDOTAUserMsg_TutorialTipInfo struct {
 func (m *CDOTAUserMsg_TutorialTipInfo) Reset()                    { *m = CDOTAUserMsg_TutorialTipInfo{} }
 func (m *CDOTAUserMsg_TutorialTipInfo) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_TutorialTipInfo) ProtoMessage()               {}
-func (*CDOTAUserMsg_TutorialTipInfo) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{42} }
+func (*CDOTAUserMsg_TutorialTipInfo) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{42} }
 
 func (m *CDOTAUserMsg_TutorialTipInfo) GetName() string {
 	if m != nil && m.Name != nil {
@@ -3828,7 +3828,7 @@ type CDOTAUserMsg_TutorialFinish struct {
 func (m *CDOTAUserMsg_TutorialFinish) Reset()                    { *m = CDOTAUserMsg_TutorialFinish{} }
 func (m *CDOTAUserMsg_TutorialFinish) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_TutorialFinish) ProtoMessage()               {}
-func (*CDOTAUserMsg_TutorialFinish) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{43} }
+func (*CDOTAUserMsg_TutorialFinish) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{43} }
 
 func (m *CDOTAUserMsg_TutorialFinish) GetHeading() string {
 	if m != nil && m.Heading != nil {
@@ -3866,7 +3866,7 @@ func (m *CDOTAUserMsg_TutorialMinimapPosition) Reset()         { *m = CDOTAUserM
 func (m *CDOTAUserMsg_TutorialMinimapPosition) String() string { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_TutorialMinimapPosition) ProtoMessage()    {}
 func (*CDOTAUserMsg_TutorialMinimapPosition) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{44}
+	return fileDescriptor24, []int{44}
 }
 
 type CDOTAUserMsg_SendGenericToolTip struct {
@@ -3881,7 +3881,7 @@ func (m *CDOTAUserMsg_SendGenericToolTip) Reset()         { *m = CDOTAUserMsg_Se
 func (m *CDOTAUserMsg_SendGenericToolTip) String() string { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_SendGenericToolTip) ProtoMessage()    {}
 func (*CDOTAUserMsg_SendGenericToolTip) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{45}
+	return fileDescriptor24, []int{45}
 }
 
 func (m *CDOTAUserMsg_SendGenericToolTip) GetTitle() string {
@@ -3921,7 +3921,7 @@ type CDOTAUserMsg_WorldLine struct {
 func (m *CDOTAUserMsg_WorldLine) Reset()                    { *m = CDOTAUserMsg_WorldLine{} }
 func (m *CDOTAUserMsg_WorldLine) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_WorldLine) ProtoMessage()               {}
-func (*CDOTAUserMsg_WorldLine) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{46} }
+func (*CDOTAUserMsg_WorldLine) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{46} }
 
 func (m *CDOTAUserMsg_WorldLine) GetPlayerId() int32 {
 	if m != nil && m.PlayerId != nil {
@@ -3948,7 +3948,7 @@ type CDOTAUserMsg_ChatWheel struct {
 func (m *CDOTAUserMsg_ChatWheel) Reset()                    { *m = CDOTAUserMsg_ChatWheel{} }
 func (m *CDOTAUserMsg_ChatWheel) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_ChatWheel) ProtoMessage()               {}
-func (*CDOTAUserMsg_ChatWheel) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{47} }
+func (*CDOTAUserMsg_ChatWheel) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{47} }
 
 const Default_CDOTAUserMsg_ChatWheel_ChatMessage EDOTAChatWheelMessage = EDOTAChatWheelMessage_k_EDOTA_CW_Ok
 
@@ -3990,7 +3990,7 @@ type CDOTAUserMsg_ReceivedXmasGift struct {
 func (m *CDOTAUserMsg_ReceivedXmasGift) Reset()                    { *m = CDOTAUserMsg_ReceivedXmasGift{} }
 func (m *CDOTAUserMsg_ReceivedXmasGift) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_ReceivedXmasGift) ProtoMessage()               {}
-func (*CDOTAUserMsg_ReceivedXmasGift) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{48} }
+func (*CDOTAUserMsg_ReceivedXmasGift) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{48} }
 
 func (m *CDOTAUserMsg_ReceivedXmasGift) GetPlayerId() int32 {
 	if m != nil && m.PlayerId != nil {
@@ -4026,7 +4026,7 @@ type CDOTAUserMsg_ShowSurvey struct {
 func (m *CDOTAUserMsg_ShowSurvey) Reset()                    { *m = CDOTAUserMsg_ShowSurvey{} }
 func (m *CDOTAUserMsg_ShowSurvey) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_ShowSurvey) ProtoMessage()               {}
-func (*CDOTAUserMsg_ShowSurvey) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{49} }
+func (*CDOTAUserMsg_ShowSurvey) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{49} }
 
 func (m *CDOTAUserMsg_ShowSurvey) GetSurveyId() int32 {
 	if m != nil && m.SurveyId != nil {
@@ -4079,7 +4079,7 @@ func (m *CDOTAUserMsg_UpdateSharedContent) Reset()         { *m = CDOTAUserMsg_U
 func (m *CDOTAUserMsg_UpdateSharedContent) String() string { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_UpdateSharedContent) ProtoMessage()    {}
 func (*CDOTAUserMsg_UpdateSharedContent) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{50}
+	return fileDescriptor24, []int{50}
 }
 
 func (m *CDOTAUserMsg_UpdateSharedContent) GetSlotType() int32 {
@@ -4097,7 +4097,7 @@ func (m *CDOTAUserMsg_TutorialRequestExp) Reset()         { *m = CDOTAUserMsg_Tu
 func (m *CDOTAUserMsg_TutorialRequestExp) String() string { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_TutorialRequestExp) ProtoMessage()    {}
 func (*CDOTAUserMsg_TutorialRequestExp) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{51}
+	return fileDescriptor24, []int{51}
 }
 
 type CDOTAUserMsg_TutorialFade struct {
@@ -4108,7 +4108,7 @@ type CDOTAUserMsg_TutorialFade struct {
 func (m *CDOTAUserMsg_TutorialFade) Reset()                    { *m = CDOTAUserMsg_TutorialFade{} }
 func (m *CDOTAUserMsg_TutorialFade) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_TutorialFade) ProtoMessage()               {}
-func (*CDOTAUserMsg_TutorialFade) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{52} }
+func (*CDOTAUserMsg_TutorialFade) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{52} }
 
 func (m *CDOTAUserMsg_TutorialFade) GetTgtAlpha() int32 {
 	if m != nil && m.TgtAlpha != nil {
@@ -4130,7 +4130,7 @@ func (m *CDOTAUserMsg_TutorialPingMinimap) Reset()         { *m = CDOTAUserMsg_T
 func (m *CDOTAUserMsg_TutorialPingMinimap) String() string { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_TutorialPingMinimap) ProtoMessage()    {}
 func (*CDOTAUserMsg_TutorialPingMinimap) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{53}
+	return fileDescriptor24, []int{53}
 }
 
 func (m *CDOTAUserMsg_TutorialPingMinimap) GetPlayerId() uint32 {
@@ -4177,7 +4177,7 @@ func (m *CDOTAUserMsg_GamerulesStateChanged) Reset()         { *m = CDOTAUserMsg
 func (m *CDOTAUserMsg_GamerulesStateChanged) String() string { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_GamerulesStateChanged) ProtoMessage()    {}
 func (*CDOTAUserMsg_GamerulesStateChanged) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{54}
+	return fileDescriptor24, []int{54}
 }
 
 func (m *CDOTAUserMsg_GamerulesStateChanged) GetState() uint32 {
@@ -4196,7 +4196,7 @@ type CDOTAUserMsg_AddQuestLogEntry struct {
 func (m *CDOTAUserMsg_AddQuestLogEntry) Reset()                    { *m = CDOTAUserMsg_AddQuestLogEntry{} }
 func (m *CDOTAUserMsg_AddQuestLogEntry) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_AddQuestLogEntry) ProtoMessage()               {}
-func (*CDOTAUserMsg_AddQuestLogEntry) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{55} }
+func (*CDOTAUserMsg_AddQuestLogEntry) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{55} }
 
 func (m *CDOTAUserMsg_AddQuestLogEntry) GetNpcName() string {
 	if m != nil && m.NpcName != nil {
@@ -4221,7 +4221,7 @@ type CDOTAUserMsg_SendStatPopup struct {
 func (m *CDOTAUserMsg_SendStatPopup) Reset()                    { *m = CDOTAUserMsg_SendStatPopup{} }
 func (m *CDOTAUserMsg_SendStatPopup) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_SendStatPopup) ProtoMessage()               {}
-func (*CDOTAUserMsg_SendStatPopup) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{56} }
+func (*CDOTAUserMsg_SendStatPopup) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{56} }
 
 func (m *CDOTAUserMsg_SendStatPopup) GetPlayerId() int32 {
 	if m != nil && m.PlayerId != nil {
@@ -4246,7 +4246,7 @@ type CDOTAUserMsg_SendRoshanPopup struct {
 func (m *CDOTAUserMsg_SendRoshanPopup) Reset()                    { *m = CDOTAUserMsg_SendRoshanPopup{} }
 func (m *CDOTAUserMsg_SendRoshanPopup) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_SendRoshanPopup) ProtoMessage()               {}
-func (*CDOTAUserMsg_SendRoshanPopup) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{57} }
+func (*CDOTAUserMsg_SendRoshanPopup) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{57} }
 
 func (m *CDOTAUserMsg_SendRoshanPopup) GetReclaimed() bool {
 	if m != nil && m.Reclaimed != nil {
@@ -4271,7 +4271,7 @@ type CDOTAUserMsg_SendFinalGold struct {
 func (m *CDOTAUserMsg_SendFinalGold) Reset()                    { *m = CDOTAUserMsg_SendFinalGold{} }
 func (m *CDOTAUserMsg_SendFinalGold) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_SendFinalGold) ProtoMessage()               {}
-func (*CDOTAUserMsg_SendFinalGold) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{58} }
+func (*CDOTAUserMsg_SendFinalGold) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{58} }
 
 func (m *CDOTAUserMsg_SendFinalGold) GetReliableGold() []uint32 {
 	if m != nil {
@@ -4297,7 +4297,7 @@ type CDOTAUserMsg_CustomMsg struct {
 func (m *CDOTAUserMsg_CustomMsg) Reset()                    { *m = CDOTAUserMsg_CustomMsg{} }
 func (m *CDOTAUserMsg_CustomMsg) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_CustomMsg) ProtoMessage()               {}
-func (*CDOTAUserMsg_CustomMsg) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{59} }
+func (*CDOTAUserMsg_CustomMsg) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{59} }
 
 func (m *CDOTAUserMsg_CustomMsg) GetMessage() string {
 	if m != nil && m.Message != nil {
@@ -4329,7 +4329,7 @@ type CDOTAUserMsg_CoachHUDPing struct {
 func (m *CDOTAUserMsg_CoachHUDPing) Reset()                    { *m = CDOTAUserMsg_CoachHUDPing{} }
 func (m *CDOTAUserMsg_CoachHUDPing) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_CoachHUDPing) ProtoMessage()               {}
-func (*CDOTAUserMsg_CoachHUDPing) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{60} }
+func (*CDOTAUserMsg_CoachHUDPing) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{60} }
 
 func (m *CDOTAUserMsg_CoachHUDPing) GetPlayerId() uint32 {
 	if m != nil && m.PlayerId != nil {
@@ -4353,7 +4353,7 @@ func (m *CDOTAUserMsg_ClientLoadGridNav) Reset()         { *m = CDOTAUserMsg_Cli
 func (m *CDOTAUserMsg_ClientLoadGridNav) String() string { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_ClientLoadGridNav) ProtoMessage()    {}
 func (*CDOTAUserMsg_ClientLoadGridNav) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{61}
+	return fileDescriptor24, []int{61}
 }
 
 type CDOTAUserMsg_TE_Projectile struct {
@@ -4374,7 +4374,7 @@ type CDOTAUserMsg_TE_Projectile struct {
 func (m *CDOTAUserMsg_TE_Projectile) Reset()                    { *m = CDOTAUserMsg_TE_Projectile{} }
 func (m *CDOTAUserMsg_TE_Projectile) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_TE_Projectile) ProtoMessage()               {}
-func (*CDOTAUserMsg_TE_Projectile) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{62} }
+func (*CDOTAUserMsg_TE_Projectile) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{62} }
 
 func (m *CDOTAUserMsg_TE_Projectile) GetHSource() int32 {
 	if m != nil && m.HSource != nil {
@@ -4470,7 +4470,7 @@ type CDOTAUserMsg_TE_ProjectileLoc struct {
 func (m *CDOTAUserMsg_TE_ProjectileLoc) Reset()                    { *m = CDOTAUserMsg_TE_ProjectileLoc{} }
 func (m *CDOTAUserMsg_TE_ProjectileLoc) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_TE_ProjectileLoc) ProtoMessage()               {}
-func (*CDOTAUserMsg_TE_ProjectileLoc) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{63} }
+func (*CDOTAUserMsg_TE_ProjectileLoc) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{63} }
 
 func (m *CDOTAUserMsg_TE_ProjectileLoc) GetVSourceLoc() *CMsgVector {
 	if m != nil {
@@ -4554,7 +4554,7 @@ func (m *CDOTAUserMsg_TE_DotaBloodImpact) Reset()         { *m = CDOTAUserMsg_TE
 func (m *CDOTAUserMsg_TE_DotaBloodImpact) String() string { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_TE_DotaBloodImpact) ProtoMessage()    {}
 func (*CDOTAUserMsg_TE_DotaBloodImpact) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{64}
+	return fileDescriptor24, []int{64}
 }
 
 func (m *CDOTAUserMsg_TE_DotaBloodImpact) GetEntity() int32 {
@@ -4599,7 +4599,7 @@ type CDOTAUserMsg_AbilityPing struct {
 func (m *CDOTAUserMsg_AbilityPing) Reset()                    { *m = CDOTAUserMsg_AbilityPing{} }
 func (m *CDOTAUserMsg_AbilityPing) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_AbilityPing) ProtoMessage()               {}
-func (*CDOTAUserMsg_AbilityPing) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{65} }
+func (*CDOTAUserMsg_AbilityPing) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{65} }
 
 const Default_CDOTAUserMsg_AbilityPing_Type DOTA_ABILITY_PING_TYPE = DOTA_ABILITY_PING_TYPE_ABILITY_PING_READY
 
@@ -4665,7 +4665,7 @@ type CDOTAUserMsg_TE_UnitAnimation struct {
 func (m *CDOTAUserMsg_TE_UnitAnimation) Reset()                    { *m = CDOTAUserMsg_TE_UnitAnimation{} }
 func (m *CDOTAUserMsg_TE_UnitAnimation) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_TE_UnitAnimation) ProtoMessage()               {}
-func (*CDOTAUserMsg_TE_UnitAnimation) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{66} }
+func (*CDOTAUserMsg_TE_UnitAnimation) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{66} }
 
 func (m *CDOTAUserMsg_TE_UnitAnimation) GetEntity() int32 {
 	if m != nil && m.Entity != nil {
@@ -4719,7 +4719,7 @@ func (m *CDOTAUserMsg_TE_UnitAnimationEnd) Reset()         { *m = CDOTAUserMsg_T
 func (m *CDOTAUserMsg_TE_UnitAnimationEnd) String() string { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_TE_UnitAnimationEnd) ProtoMessage()    {}
 func (*CDOTAUserMsg_TE_UnitAnimationEnd) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{67}
+	return fileDescriptor24, []int{67}
 }
 
 func (m *CDOTAUserMsg_TE_UnitAnimationEnd) GetEntity() int32 {
@@ -4749,7 +4749,7 @@ type CDOTAUserMsg_ShowGenericPopup struct {
 func (m *CDOTAUserMsg_ShowGenericPopup) Reset()                    { *m = CDOTAUserMsg_ShowGenericPopup{} }
 func (m *CDOTAUserMsg_ShowGenericPopup) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_ShowGenericPopup) ProtoMessage()               {}
-func (*CDOTAUserMsg_ShowGenericPopup) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{68} }
+func (*CDOTAUserMsg_ShowGenericPopup) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{68} }
 
 func (m *CDOTAUserMsg_ShowGenericPopup) GetHeader() string {
 	if m != nil && m.Header != nil {
@@ -4804,7 +4804,7 @@ type CDOTAUserMsg_VoteStart struct {
 func (m *CDOTAUserMsg_VoteStart) Reset()                    { *m = CDOTAUserMsg_VoteStart{} }
 func (m *CDOTAUserMsg_VoteStart) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_VoteStart) ProtoMessage()               {}
-func (*CDOTAUserMsg_VoteStart) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{69} }
+func (*CDOTAUserMsg_VoteStart) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{69} }
 
 func (m *CDOTAUserMsg_VoteStart) GetTitle() string {
 	if m != nil && m.Title != nil {
@@ -4842,7 +4842,7 @@ type CDOTAUserMsg_VoteUpdate struct {
 func (m *CDOTAUserMsg_VoteUpdate) Reset()                    { *m = CDOTAUserMsg_VoteUpdate{} }
 func (m *CDOTAUserMsg_VoteUpdate) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_VoteUpdate) ProtoMessage()               {}
-func (*CDOTAUserMsg_VoteUpdate) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{70} }
+func (*CDOTAUserMsg_VoteUpdate) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{70} }
 
 func (m *CDOTAUserMsg_VoteUpdate) GetChoiceCounts() []int32 {
 	if m != nil {
@@ -4859,7 +4859,7 @@ type CDOTAUserMsg_VoteEnd struct {
 func (m *CDOTAUserMsg_VoteEnd) Reset()                    { *m = CDOTAUserMsg_VoteEnd{} }
 func (m *CDOTAUserMsg_VoteEnd) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_VoteEnd) ProtoMessage()               {}
-func (*CDOTAUserMsg_VoteEnd) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{71} }
+func (*CDOTAUserMsg_VoteEnd) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{71} }
 
 func (m *CDOTAUserMsg_VoteEnd) GetSelectedChoice() int32 {
 	if m != nil && m.SelectedChoice != nil {
@@ -4881,7 +4881,7 @@ func (m *CDOTAUserMsg_BoosterStatePlayer) Reset()         { *m = CDOTAUserMsg_Bo
 func (m *CDOTAUserMsg_BoosterStatePlayer) String() string { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_BoosterStatePlayer) ProtoMessage()    {}
 func (*CDOTAUserMsg_BoosterStatePlayer) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{72}
+	return fileDescriptor24, []int{72}
 }
 
 func (m *CDOTAUserMsg_BoosterStatePlayer) GetPlayerId() uint32 {
@@ -4927,7 +4927,7 @@ type CDOTAUserMsg_BoosterState struct {
 func (m *CDOTAUserMsg_BoosterState) Reset()                    { *m = CDOTAUserMsg_BoosterState{} }
 func (m *CDOTAUserMsg_BoosterState) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_BoosterState) ProtoMessage()               {}
-func (*CDOTAUserMsg_BoosterState) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{73} }
+func (*CDOTAUserMsg_BoosterState) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{73} }
 
 func (m *CDOTAUserMsg_BoosterState) GetBoostedPlayers() []*CDOTAUserMsg_BoosterStatePlayer {
 	if m != nil {
@@ -4944,7 +4944,7 @@ type CDOTAUserMsg_PlayerMMR struct {
 func (m *CDOTAUserMsg_PlayerMMR) Reset()                    { *m = CDOTAUserMsg_PlayerMMR{} }
 func (m *CDOTAUserMsg_PlayerMMR) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_PlayerMMR) ProtoMessage()               {}
-func (*CDOTAUserMsg_PlayerMMR) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{74} }
+func (*CDOTAUserMsg_PlayerMMR) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{74} }
 
 func (m *CDOTAUserMsg_PlayerMMR) GetMmr() []int32 {
 	if m != nil {
@@ -4963,7 +4963,7 @@ type CDOTAUserMsg_AbilitySteal struct {
 func (m *CDOTAUserMsg_AbilitySteal) Reset()                    { *m = CDOTAUserMsg_AbilitySteal{} }
 func (m *CDOTAUserMsg_AbilitySteal) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_AbilitySteal) ProtoMessage()               {}
-func (*CDOTAUserMsg_AbilitySteal) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{75} }
+func (*CDOTAUserMsg_AbilitySteal) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{75} }
 
 func (m *CDOTAUserMsg_AbilitySteal) GetPlayerId() uint32 {
 	if m != nil && m.PlayerId != nil {
@@ -4997,7 +4997,7 @@ type CDOTAUserMsg_StatsHeroLookup struct {
 func (m *CDOTAUserMsg_StatsHeroLookup) Reset()                    { *m = CDOTAUserMsg_StatsHeroLookup{} }
 func (m *CDOTAUserMsg_StatsHeroLookup) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_StatsHeroLookup) ProtoMessage()               {}
-func (*CDOTAUserMsg_StatsHeroLookup) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{76} }
+func (*CDOTAUserMsg_StatsHeroLookup) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{76} }
 
 func (m *CDOTAUserMsg_StatsHeroLookup) GetPlayerId() int32 {
 	if m != nil && m.PlayerId != nil {
@@ -5037,7 +5037,7 @@ func (m *CDOTAUserMsg_StatsHeroPositionInfo) Reset()         { *m = CDOTAUserMsg
 func (m *CDOTAUserMsg_StatsHeroPositionInfo) String() string { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_StatsHeroPositionInfo) ProtoMessage()    {}
 func (*CDOTAUserMsg_StatsHeroPositionInfo) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{77}
+	return fileDescriptor24, []int{77}
 }
 
 func (m *CDOTAUserMsg_StatsHeroPositionInfo) GetAveragePosition() float32 {
@@ -5068,7 +5068,7 @@ func (m *CDOTAUserMsg_StatsHeroPositionInfo_PositionPair) String() string {
 }
 func (*CDOTAUserMsg_StatsHeroPositionInfo_PositionPair) ProtoMessage() {}
 func (*CDOTAUserMsg_StatsHeroPositionInfo_PositionPair) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{77, 0}
+	return fileDescriptor24, []int{77, 0}
 }
 
 const Default_CDOTAUserMsg_StatsHeroPositionInfo_PositionPair_PositionCategory DOTA_POSITION_CATEGORY = DOTA_POSITION_CATEGORY_DOTA_POSITION_NONE
@@ -5110,7 +5110,7 @@ func (m *CDOTAUserMsg_StatsHeroMinuteDetails) Reset()         { *m = CDOTAUserMs
 func (m *CDOTAUserMsg_StatsHeroMinuteDetails) String() string { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_StatsHeroMinuteDetails) ProtoMessage()    {}
 func (*CDOTAUserMsg_StatsHeroMinuteDetails) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{78}
+	return fileDescriptor24, []int{78}
 }
 
 func (m *CDOTAUserMsg_StatsHeroMinuteDetails) GetLastHits() uint32 {
@@ -5236,7 +5236,7 @@ func (m *CDOTAUserMsg_StatsTeamMinuteDetails) Reset()         { *m = CDOTAUserMs
 func (m *CDOTAUserMsg_StatsTeamMinuteDetails) String() string { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_StatsTeamMinuteDetails) ProtoMessage()    {}
 func (*CDOTAUserMsg_StatsTeamMinuteDetails) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{79}
+	return fileDescriptor24, []int{79}
 }
 
 func (m *CDOTAUserMsg_StatsTeamMinuteDetails) GetPlayerStats() []*CDOTAUserMsg_StatsHeroMinuteDetails {
@@ -5324,7 +5324,7 @@ func (m *CDOTAUserMsg_StatsTeamMinuteDetails_LocationPerformance) String() strin
 }
 func (*CDOTAUserMsg_StatsTeamMinuteDetails_LocationPerformance) ProtoMessage() {}
 func (*CDOTAUserMsg_StatsTeamMinuteDetails_LocationPerformance) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{79, 0}
+	return fileDescriptor24, []int{79, 0}
 }
 
 func (m *CDOTAUserMsg_StatsTeamMinuteDetails_LocationPerformance) GetLocationCategory() uint32 {
@@ -5362,7 +5362,7 @@ func (m *CDOTAUserMsg_StatsPlayerKillShare) Reset()         { *m = CDOTAUserMsg_
 func (m *CDOTAUserMsg_StatsPlayerKillShare) String() string { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_StatsPlayerKillShare) ProtoMessage()    {}
 func (*CDOTAUserMsg_StatsPlayerKillShare) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{80}
+	return fileDescriptor24, []int{80}
 }
 
 func (m *CDOTAUserMsg_StatsPlayerKillShare) GetPlayerId() int32 {
@@ -5420,7 +5420,7 @@ type CDOTAUserMsg_StatsKillDetails struct {
 func (m *CDOTAUserMsg_StatsKillDetails) Reset()                    { *m = CDOTAUserMsg_StatsKillDetails{} }
 func (m *CDOTAUserMsg_StatsKillDetails) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_StatsKillDetails) ProtoMessage()               {}
-func (*CDOTAUserMsg_StatsKillDetails) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{81} }
+func (*CDOTAUserMsg_StatsKillDetails) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{81} }
 
 func (m *CDOTAUserMsg_StatsKillDetails) GetVictimId() uint32 {
 	if m != nil && m.VictimId != nil {
@@ -5478,7 +5478,7 @@ func (m *CDOTAUserMsg_StatsMatchDetails) Reset()         { *m = CDOTAUserMsg_Sta
 func (m *CDOTAUserMsg_StatsMatchDetails) String() string { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_StatsMatchDetails) ProtoMessage()    {}
 func (*CDOTAUserMsg_StatsMatchDetails) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{82}
+	return fileDescriptor24, []int{82}
 }
 
 func (m *CDOTAUserMsg_StatsMatchDetails) GetHeroLookup() []*CDOTAUserMsg_StatsHeroLookup {
@@ -5539,7 +5539,7 @@ func (m *CDOTAUserMsg_StatsMatchDetails_CDOTAUserMsg_StatsFightTeamDetails) Stri
 }
 func (*CDOTAUserMsg_StatsMatchDetails_CDOTAUserMsg_StatsFightTeamDetails) ProtoMessage() {}
 func (*CDOTAUserMsg_StatsMatchDetails_CDOTAUserMsg_StatsFightTeamDetails) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{82, 0}
+	return fileDescriptor24, []int{82, 0}
 }
 
 func (m *CDOTAUserMsg_StatsMatchDetails_CDOTAUserMsg_StatsFightTeamDetails) GetParticipants() []uint32 {
@@ -5586,7 +5586,7 @@ func (m *CDOTAUserMsg_StatsMatchDetails_CDOTAUserMsg_StatsFightDetails) String()
 }
 func (*CDOTAUserMsg_StatsMatchDetails_CDOTAUserMsg_StatsFightDetails) ProtoMessage() {}
 func (*CDOTAUserMsg_StatsMatchDetails_CDOTAUserMsg_StatsFightDetails) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{82, 1}
+	return fileDescriptor24, []int{82, 1}
 }
 
 func (m *CDOTAUserMsg_StatsMatchDetails_CDOTAUserMsg_StatsFightDetails) GetStartTime() float32 {
@@ -5625,7 +5625,7 @@ type CDOTAUserMsg_MiniTaunt struct {
 func (m *CDOTAUserMsg_MiniTaunt) Reset()                    { *m = CDOTAUserMsg_MiniTaunt{} }
 func (m *CDOTAUserMsg_MiniTaunt) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_MiniTaunt) ProtoMessage()               {}
-func (*CDOTAUserMsg_MiniTaunt) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{83} }
+func (*CDOTAUserMsg_MiniTaunt) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{83} }
 
 func (m *CDOTAUserMsg_MiniTaunt) GetTauntingPlayerId() uint32 {
 	if m != nil && m.TauntingPlayerId != nil {
@@ -5642,7 +5642,7 @@ type CDOTAUserMsg_SpeechBubble struct {
 func (m *CDOTAUserMsg_SpeechBubble) Reset()                    { *m = CDOTAUserMsg_SpeechBubble{} }
 func (m *CDOTAUserMsg_SpeechBubble) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_SpeechBubble) ProtoMessage()               {}
-func (*CDOTAUserMsg_SpeechBubble) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{84} }
+func (*CDOTAUserMsg_SpeechBubble) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{84} }
 
 func (m *CDOTAUserMsg_SpeechBubble) GetDestroyAll() bool {
 	if m != nil && m.DestroyAll != nil {
@@ -5663,7 +5663,7 @@ func (m *CDOTAUserMsg_CustomHeaderMessage) Reset()         { *m = CDOTAUserMsg_C
 func (m *CDOTAUserMsg_CustomHeaderMessage) String() string { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_CustomHeaderMessage) ProtoMessage()    {}
 func (*CDOTAUserMsg_CustomHeaderMessage) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{85}
+	return fileDescriptor24, []int{85}
 }
 
 func (m *CDOTAUserMsg_CustomHeaderMessage) GetPlayerId() uint32 {
@@ -5704,7 +5704,7 @@ type CMsgHeroAbilityStat struct {
 func (m *CMsgHeroAbilityStat) Reset()                    { *m = CMsgHeroAbilityStat{} }
 func (m *CMsgHeroAbilityStat) String() string            { return proto.CompactTextString(m) }
 func (*CMsgHeroAbilityStat) ProtoMessage()               {}
-func (*CMsgHeroAbilityStat) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{86} }
+func (*CMsgHeroAbilityStat) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{86} }
 
 const Default_CMsgHeroAbilityStat_StatType EHeroStatType = EHeroStatType_k_EHeroStatType_None
 
@@ -5738,7 +5738,7 @@ type CMsgCombatAnalyzerPlayerStat struct {
 func (m *CMsgCombatAnalyzerPlayerStat) Reset()                    { *m = CMsgCombatAnalyzerPlayerStat{} }
 func (m *CMsgCombatAnalyzerPlayerStat) String() string            { return proto.CompactTextString(m) }
 func (*CMsgCombatAnalyzerPlayerStat) ProtoMessage()               {}
-func (*CMsgCombatAnalyzerPlayerStat) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{87} }
+func (*CMsgCombatAnalyzerPlayerStat) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{87} }
 
 func (m *CMsgCombatAnalyzerPlayerStat) GetAccountId() uint32 {
 	if m != nil && m.AccountId != nil {
@@ -5763,7 +5763,7 @@ type CMsgCombatAnalyzerStats struct {
 func (m *CMsgCombatAnalyzerStats) Reset()                    { *m = CMsgCombatAnalyzerStats{} }
 func (m *CMsgCombatAnalyzerStats) String() string            { return proto.CompactTextString(m) }
 func (*CMsgCombatAnalyzerStats) ProtoMessage()               {}
-func (*CMsgCombatAnalyzerStats) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{88} }
+func (*CMsgCombatAnalyzerStats) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{88} }
 
 func (m *CMsgCombatAnalyzerStats) GetMatchId() uint64 {
 	if m != nil && m.MatchId != nil {
@@ -5790,7 +5790,7 @@ type CDOTAUserMsg_BeastChat struct {
 func (m *CDOTAUserMsg_BeastChat) Reset()                    { *m = CDOTAUserMsg_BeastChat{} }
 func (m *CDOTAUserMsg_BeastChat) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_BeastChat) ProtoMessage()               {}
-func (*CDOTAUserMsg_BeastChat) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{89} }
+func (*CDOTAUserMsg_BeastChat) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{89} }
 
 func (m *CDOTAUserMsg_BeastChat) GetTeam() uint32 {
 	if m != nil && m.Team != nil {
@@ -5831,7 +5831,7 @@ func (m *CDOTAUserMsg_CustomHudElement_Create) Reset()         { *m = CDOTAUserM
 func (m *CDOTAUserMsg_CustomHudElement_Create) String() string { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_CustomHudElement_Create) ProtoMessage()    {}
 func (*CDOTAUserMsg_CustomHudElement_Create) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{90}
+	return fileDescriptor24, []int{90}
 }
 
 func (m *CDOTAUserMsg_CustomHudElement_Create) GetElementId() string {
@@ -5866,7 +5866,7 @@ func (m *CDOTAUserMsg_CustomHudElement_Modify) Reset()         { *m = CDOTAUserM
 func (m *CDOTAUserMsg_CustomHudElement_Modify) String() string { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_CustomHudElement_Modify) ProtoMessage()    {}
 func (*CDOTAUserMsg_CustomHudElement_Modify) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{91}
+	return fileDescriptor24, []int{91}
 }
 
 func (m *CDOTAUserMsg_CustomHudElement_Modify) GetElementId() string {
@@ -5899,7 +5899,7 @@ func (m *CDOTAUserMsg_CustomHudElement_Destroy) Reset()         { *m = CDOTAUser
 func (m *CDOTAUserMsg_CustomHudElement_Destroy) String() string { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_CustomHudElement_Destroy) ProtoMessage()    {}
 func (*CDOTAUserMsg_CustomHudElement_Destroy) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{92}
+	return fileDescriptor24, []int{92}
 }
 
 func (m *CDOTAUserMsg_CustomHudElement_Destroy) GetElementId() string {
@@ -5919,7 +5919,7 @@ func (m *CDOTAUserMsg_CompendiumStatePlayer) Reset()         { *m = CDOTAUserMsg
 func (m *CDOTAUserMsg_CompendiumStatePlayer) String() string { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_CompendiumStatePlayer) ProtoMessage()    {}
 func (*CDOTAUserMsg_CompendiumStatePlayer) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{93}
+	return fileDescriptor24, []int{93}
 }
 
 func (m *CDOTAUserMsg_CompendiumStatePlayer) GetPlayerId() uint32 {
@@ -5944,7 +5944,7 @@ type CDOTAUserMsg_CompendiumState struct {
 func (m *CDOTAUserMsg_CompendiumState) Reset()                    { *m = CDOTAUserMsg_CompendiumState{} }
 func (m *CDOTAUserMsg_CompendiumState) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_CompendiumState) ProtoMessage()               {}
-func (*CDOTAUserMsg_CompendiumState) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{94} }
+func (*CDOTAUserMsg_CompendiumState) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{94} }
 
 func (m *CDOTAUserMsg_CompendiumState) GetCompendiumPlayers() []*CDOTAUserMsg_CompendiumStatePlayer {
 	if m != nil {
@@ -5969,7 +5969,7 @@ func (m *CDOTAUserMsg_ProjectionAbility) Reset()         { *m = CDOTAUserMsg_Pro
 func (m *CDOTAUserMsg_ProjectionAbility) String() string { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_ProjectionAbility) ProtoMessage()    {}
 func (*CDOTAUserMsg_ProjectionAbility) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{95}
+	return fileDescriptor24, []int{95}
 }
 
 func (m *CDOTAUserMsg_ProjectionAbility) GetAbilityId() uint32 {
@@ -6037,7 +6037,7 @@ type CDOTAUserMsg_ProjectionEvent struct {
 func (m *CDOTAUserMsg_ProjectionEvent) Reset()                    { *m = CDOTAUserMsg_ProjectionEvent{} }
 func (m *CDOTAUserMsg_ProjectionEvent) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_ProjectionEvent) ProtoMessage()               {}
-func (*CDOTAUserMsg_ProjectionEvent) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{96} }
+func (*CDOTAUserMsg_ProjectionEvent) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{96} }
 
 const Default_CDOTAUserMsg_ProjectionEvent_EventId EProjectionEvent = EProjectionEvent_ePE_FirstBlood
 
@@ -6064,7 +6064,7 @@ type CDOTAUserMsg_XPAlert struct {
 func (m *CDOTAUserMsg_XPAlert) Reset()                    { *m = CDOTAUserMsg_XPAlert{} }
 func (m *CDOTAUserMsg_XPAlert) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_XPAlert) ProtoMessage()               {}
-func (*CDOTAUserMsg_XPAlert) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{97} }
+func (*CDOTAUserMsg_XPAlert) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{97} }
 
 func (m *CDOTAUserMsg_XPAlert) GetPlayerId() uint32 {
 	if m != nil && m.PlayerId != nil {
@@ -6088,7 +6088,7 @@ func (m *CDOTAUserMsg_UpdateQuestProgress) Reset()         { *m = CDOTAUserMsg_U
 func (m *CDOTAUserMsg_UpdateQuestProgress) String() string { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_UpdateQuestProgress) ProtoMessage()    {}
 func (*CDOTAUserMsg_UpdateQuestProgress) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{98}
+	return fileDescriptor24, []int{98}
 }
 
 type CDOTAUserMsg_QuestStatus struct {
@@ -6106,7 +6106,7 @@ type CDOTAUserMsg_QuestStatus struct {
 func (m *CDOTAUserMsg_QuestStatus) Reset()                    { *m = CDOTAUserMsg_QuestStatus{} }
 func (m *CDOTAUserMsg_QuestStatus) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAUserMsg_QuestStatus) ProtoMessage()               {}
-func (*CDOTAUserMsg_QuestStatus) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{99} }
+func (*CDOTAUserMsg_QuestStatus) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{99} }
 
 func (m *CDOTAUserMsg_QuestStatus) GetPlayerId() uint32 {
 	if m != nil && m.PlayerId != nil {
@@ -6310,7 +6310,7 @@ func init() {
 	proto.RegisterEnum("dota.CDOTAResponseQuerySerialized_Fact_ValueType", CDOTAResponseQuerySerialized_Fact_ValueType_name, CDOTAResponseQuerySerialized_Fact_ValueType_value)
 }
 
-var fileDescriptor15 = []byte{
+var fileDescriptor24 = []byte{
 	// 8944 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xac, 0x7c, 0xf9, 0x7b, 0x1b, 0x49,
 	0x76, 0xd8, 0x82, 0x00, 0xaf, 0x92, 0x28, 0x96, 0x5a, 0x1a, 0x89, 0xe2, 0x68, 0x74, 0x40, 0x73,

@@ -45,7 +45,7 @@ func (x *DOTA_MODIFIER_ENTRY_TYPE) UnmarshalJSON(data []byte) error {
 	*x = DOTA_MODIFIER_ENTRY_TYPE(value)
 	return nil
 }
-func (DOTA_MODIFIER_ENTRY_TYPE) EnumDescriptor() ([]byte, []int) { return fileDescriptor13, []int{0} }
+func (DOTA_MODIFIER_ENTRY_TYPE) EnumDescriptor() ([]byte, []int) { return fileDescriptor22, []int{0} }
 
 type CDOTAModifierBuffTableEntry struct {
 	EntryType           *DOTA_MODIFIER_ENTRY_TYPE `protobuf:"varint,1,req,name=entry_type,enum=dota.DOTA_MODIFIER_ENTRY_TYPE,def=1" json:"entry_type,omitempty"`
@@ -86,7 +86,7 @@ type CDOTAModifierBuffTableEntry struct {
 func (m *CDOTAModifierBuffTableEntry) Reset()                    { *m = CDOTAModifierBuffTableEntry{} }
 func (m *CDOTAModifierBuffTableEntry) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAModifierBuffTableEntry) ProtoMessage()               {}
-func (*CDOTAModifierBuffTableEntry) Descriptor() ([]byte, []int) { return fileDescriptor13, []int{0} }
+func (*CDOTAModifierBuffTableEntry) Descriptor() ([]byte, []int) { return fileDescriptor22, []int{0} }
 
 const Default_CDOTAModifierBuffTableEntry_EntryType DOTA_MODIFIER_ENTRY_TYPE = DOTA_MODIFIER_ENTRY_TYPE_DOTA_MODIFIER_ENTRY_TYPE_ACTIVE
 const Default_CDOTAModifierBuffTableEntry_Duration float32 = -1
@@ -324,7 +324,7 @@ type CDOTALuaModifierEntry struct {
 func (m *CDOTALuaModifierEntry) Reset()                    { *m = CDOTALuaModifierEntry{} }
 func (m *CDOTALuaModifierEntry) String() string            { return proto.CompactTextString(m) }
 func (*CDOTALuaModifierEntry) ProtoMessage()               {}
-func (*CDOTALuaModifierEntry) Descriptor() ([]byte, []int) { return fileDescriptor13, []int{1} }
+func (*CDOTALuaModifierEntry) Descriptor() ([]byte, []int) { return fileDescriptor22, []int{1} }
 
 func (m *CDOTALuaModifierEntry) GetModifierType() int32 {
 	if m != nil && m.ModifierType != nil {
@@ -346,7 +346,7 @@ func init() {
 	proto.RegisterEnum("dota.DOTA_MODIFIER_ENTRY_TYPE", DOTA_MODIFIER_ENTRY_TYPE_name, DOTA_MODIFIER_ENTRY_TYPE_value)
 }
 
-var fileDescriptor13 = []byte{
+var fileDescriptor22 = []byte{
 	// 598 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x84, 0x53, 0x4f, 0x4f, 0xdb, 0x4e,
 	0x10, 0xfd, 0x25, 0x3f, 0x02, 0xc9, 0x00, 0x21, 0x18, 0x42, 0x17, 0x28, 0x90, 0xd2, 0x1e, 0xaa,

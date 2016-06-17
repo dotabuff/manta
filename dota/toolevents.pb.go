@@ -21,7 +21,7 @@ type ChangeMapToolEvent struct {
 func (m *ChangeMapToolEvent) Reset()                    { *m = ChangeMapToolEvent{} }
 func (m *ChangeMapToolEvent) String() string            { return proto.CompactTextString(m) }
 func (*ChangeMapToolEvent) ProtoMessage()               {}
-func (*ChangeMapToolEvent) Descriptor() ([]byte, []int) { return fileDescriptor33, []int{0} }
+func (*ChangeMapToolEvent) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{0} }
 
 func (m *ChangeMapToolEvent) GetMapname() string {
 	if m != nil && m.Mapname != nil {
@@ -39,7 +39,7 @@ type TraceRayServerToolEvent struct {
 func (m *TraceRayServerToolEvent) Reset()                    { *m = TraceRayServerToolEvent{} }
 func (m *TraceRayServerToolEvent) String() string            { return proto.CompactTextString(m) }
 func (*TraceRayServerToolEvent) ProtoMessage()               {}
-func (*TraceRayServerToolEvent) Descriptor() ([]byte, []int) { return fileDescriptor33, []int{1} }
+func (*TraceRayServerToolEvent) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{1} }
 
 func (m *TraceRayServerToolEvent) GetStart() *CMsgVector {
 	if m != nil {
@@ -68,7 +68,7 @@ type ToolTraceRayResult struct {
 func (m *ToolTraceRayResult) Reset()                    { *m = ToolTraceRayResult{} }
 func (m *ToolTraceRayResult) String() string            { return proto.CompactTextString(m) }
 func (*ToolTraceRayResult) ProtoMessage()               {}
-func (*ToolTraceRayResult) Descriptor() ([]byte, []int) { return fileDescriptor33, []int{2} }
+func (*ToolTraceRayResult) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{2} }
 
 func (m *ToolTraceRayResult) GetHit() bool {
 	if m != nil && m.Hit != nil {
@@ -121,7 +121,7 @@ type SpawnEntityToolEvent struct {
 func (m *SpawnEntityToolEvent) Reset()                    { *m = SpawnEntityToolEvent{} }
 func (m *SpawnEntityToolEvent) String() string            { return proto.CompactTextString(m) }
 func (*SpawnEntityToolEvent) ProtoMessage()               {}
-func (*SpawnEntityToolEvent) Descriptor() ([]byte, []int) { return fileDescriptor33, []int{3} }
+func (*SpawnEntityToolEvent) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{3} }
 
 func (m *SpawnEntityToolEvent) GetEntityKeyvalues() []byte {
 	if m != nil {
@@ -145,7 +145,7 @@ type SpawnEntityToolEventResult struct {
 func (m *SpawnEntityToolEventResult) Reset()                    { *m = SpawnEntityToolEventResult{} }
 func (m *SpawnEntityToolEventResult) String() string            { return proto.CompactTextString(m) }
 func (*SpawnEntityToolEventResult) ProtoMessage()               {}
-func (*SpawnEntityToolEventResult) Descriptor() ([]byte, []int) { return fileDescriptor33, []int{4} }
+func (*SpawnEntityToolEventResult) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{4} }
 
 func (m *SpawnEntityToolEventResult) GetEhandle() int32 {
 	if m != nil && m.Ehandle != nil {
@@ -162,7 +162,7 @@ type DestroyEntityToolEvent struct {
 func (m *DestroyEntityToolEvent) Reset()                    { *m = DestroyEntityToolEvent{} }
 func (m *DestroyEntityToolEvent) String() string            { return proto.CompactTextString(m) }
 func (*DestroyEntityToolEvent) ProtoMessage()               {}
-func (*DestroyEntityToolEvent) Descriptor() ([]byte, []int) { return fileDescriptor33, []int{5} }
+func (*DestroyEntityToolEvent) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{5} }
 
 func (m *DestroyEntityToolEvent) GetEhandle() int32 {
 	if m != nil && m.Ehandle != nil {
@@ -178,7 +178,7 @@ type DestroyAllEntitiesToolEvent struct {
 func (m *DestroyAllEntitiesToolEvent) Reset()                    { *m = DestroyAllEntitiesToolEvent{} }
 func (m *DestroyAllEntitiesToolEvent) String() string            { return proto.CompactTextString(m) }
 func (*DestroyAllEntitiesToolEvent) ProtoMessage()               {}
-func (*DestroyAllEntitiesToolEvent) Descriptor() ([]byte, []int) { return fileDescriptor33, []int{6} }
+func (*DestroyAllEntitiesToolEvent) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{6} }
 
 type RestartMapToolEvent struct {
 	XXX_unrecognized []byte `json:"-"`
@@ -187,7 +187,7 @@ type RestartMapToolEvent struct {
 func (m *RestartMapToolEvent) Reset()                    { *m = RestartMapToolEvent{} }
 func (m *RestartMapToolEvent) String() string            { return proto.CompactTextString(m) }
 func (*RestartMapToolEvent) ProtoMessage()               {}
-func (*RestartMapToolEvent) Descriptor() ([]byte, []int) { return fileDescriptor33, []int{7} }
+func (*RestartMapToolEvent) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{7} }
 
 type ToolEvent_GetEntityInfo struct {
 	Ehandle          *int32 `protobuf:"varint,1,opt,name=ehandle" json:"ehandle,omitempty"`
@@ -198,7 +198,7 @@ type ToolEvent_GetEntityInfo struct {
 func (m *ToolEvent_GetEntityInfo) Reset()                    { *m = ToolEvent_GetEntityInfo{} }
 func (m *ToolEvent_GetEntityInfo) String() string            { return proto.CompactTextString(m) }
 func (*ToolEvent_GetEntityInfo) ProtoMessage()               {}
-func (*ToolEvent_GetEntityInfo) Descriptor() ([]byte, []int) { return fileDescriptor33, []int{8} }
+func (*ToolEvent_GetEntityInfo) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{8} }
 
 func (m *ToolEvent_GetEntityInfo) GetEhandle() int32 {
 	if m != nil && m.Ehandle != nil {
@@ -227,7 +227,7 @@ type ToolEvent_GetEntityInfoResult struct {
 func (m *ToolEvent_GetEntityInfoResult) Reset()                    { *m = ToolEvent_GetEntityInfoResult{} }
 func (m *ToolEvent_GetEntityInfoResult) String() string            { return proto.CompactTextString(m) }
 func (*ToolEvent_GetEntityInfoResult) ProtoMessage()               {}
-func (*ToolEvent_GetEntityInfoResult) Descriptor() ([]byte, []int) { return fileDescriptor33, []int{9} }
+func (*ToolEvent_GetEntityInfoResult) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{9} }
 
 const Default_ToolEvent_GetEntityInfoResult_Cppclass string = "shithead"
 
@@ -282,7 +282,7 @@ type ToolEvent_GetEntityInputs struct {
 func (m *ToolEvent_GetEntityInputs) Reset()                    { *m = ToolEvent_GetEntityInputs{} }
 func (m *ToolEvent_GetEntityInputs) String() string            { return proto.CompactTextString(m) }
 func (*ToolEvent_GetEntityInputs) ProtoMessage()               {}
-func (*ToolEvent_GetEntityInputs) Descriptor() ([]byte, []int) { return fileDescriptor33, []int{10} }
+func (*ToolEvent_GetEntityInputs) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{10} }
 
 func (m *ToolEvent_GetEntityInputs) GetEhandle() int32 {
 	if m != nil && m.Ehandle != nil {
@@ -307,7 +307,7 @@ func (m *ToolEvent_GetEntityInputsResult) Reset()         { *m = ToolEvent_GetEn
 func (m *ToolEvent_GetEntityInputsResult) String() string { return proto.CompactTextString(m) }
 func (*ToolEvent_GetEntityInputsResult) ProtoMessage()    {}
 func (*ToolEvent_GetEntityInputsResult) Descriptor() ([]byte, []int) {
-	return fileDescriptor33, []int{11}
+	return fileDescriptor42, []int{11}
 }
 
 func (m *ToolEvent_GetEntityInputsResult) GetInputList() []string {
@@ -328,7 +328,7 @@ type ToolEvent_FireEntityInput struct {
 func (m *ToolEvent_FireEntityInput) Reset()                    { *m = ToolEvent_FireEntityInput{} }
 func (m *ToolEvent_FireEntityInput) String() string            { return proto.CompactTextString(m) }
 func (*ToolEvent_FireEntityInput) ProtoMessage()               {}
-func (*ToolEvent_FireEntityInput) Descriptor() ([]byte, []int) { return fileDescriptor33, []int{12} }
+func (*ToolEvent_FireEntityInput) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{12} }
 
 func (m *ToolEvent_FireEntityInput) GetEhandle() int32 {
 	if m != nil && m.Ehandle != nil {
@@ -367,7 +367,7 @@ func (m *ToolEvent_SFMRecordingStateChanged) Reset()         { *m = ToolEvent_SF
 func (m *ToolEvent_SFMRecordingStateChanged) String() string { return proto.CompactTextString(m) }
 func (*ToolEvent_SFMRecordingStateChanged) ProtoMessage()    {}
 func (*ToolEvent_SFMRecordingStateChanged) Descriptor() ([]byte, []int) {
-	return fileDescriptor33, []int{13}
+	return fileDescriptor42, []int{13}
 }
 
 func (m *ToolEvent_SFMRecordingStateChanged) GetIsrecording() bool {
@@ -386,7 +386,7 @@ func (m *ToolEvent_SFMToolActiveStateChanged) Reset()         { *m = ToolEvent_S
 func (m *ToolEvent_SFMToolActiveStateChanged) String() string { return proto.CompactTextString(m) }
 func (*ToolEvent_SFMToolActiveStateChanged) ProtoMessage()    {}
 func (*ToolEvent_SFMToolActiveStateChanged) Descriptor() ([]byte, []int) {
-	return fileDescriptor33, []int{14}
+	return fileDescriptor42, []int{14}
 }
 
 func (m *ToolEvent_SFMToolActiveStateChanged) GetIsactive() bool {
@@ -414,7 +414,7 @@ func init() {
 	proto.RegisterType((*ToolEvent_SFMToolActiveStateChanged)(nil), "dota.ToolEvent_SFMToolActiveStateChanged")
 }
 
-var fileDescriptor33 = []byte{
+var fileDescriptor42 = []byte{
 	// 539 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x94, 0x54, 0xc1, 0x6e, 0xd3, 0x40,
 	0x10, 0xc5, 0x75, 0x52, 0x92, 0x49, 0x25, 0x82, 0x0b, 0xc5, 0x04, 0x85, 0x56, 0x46, 0x48, 0x70,

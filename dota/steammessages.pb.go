@@ -58,7 +58,7 @@ func (x *GCProtoBufMsgSrc) UnmarshalJSON(data []byte) error {
 	*x = GCProtoBufMsgSrc(value)
 	return nil
 }
-func (GCProtoBufMsgSrc) EnumDescriptor() ([]byte, []int) { return fileDescriptor27, []int{0} }
+func (GCProtoBufMsgSrc) EnumDescriptor() ([]byte, []int) { return fileDescriptor36, []int{0} }
 
 type CMsgGCRoutingInfo_RoutingMethod int32
 
@@ -102,7 +102,7 @@ func (x *CMsgGCRoutingInfo_RoutingMethod) UnmarshalJSON(data []byte) error {
 	return nil
 }
 func (CMsgGCRoutingInfo_RoutingMethod) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor27, []int{56, 0}
+	return fileDescriptor36, []int{56, 0}
 }
 
 type CMsgGCMsgSetOptions_Option int32
@@ -144,7 +144,7 @@ func (x *CMsgGCMsgSetOptions_Option) UnmarshalJSON(data []byte) error {
 	return nil
 }
 func (CMsgGCMsgSetOptions_Option) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor27, []int{61, 0}
+	return fileDescriptor36, []int{61, 0}
 }
 
 type CMsgGCMsgSetOptions_GCSQLVersion int32
@@ -180,7 +180,7 @@ func (x *CMsgGCMsgSetOptions_GCSQLVersion) UnmarshalJSON(data []byte) error {
 	return nil
 }
 func (CMsgGCMsgSetOptions_GCSQLVersion) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor27, []int{61, 1}
+	return fileDescriptor36, []int{61, 1}
 }
 
 type CMsgDPPartnerMicroTxnsResponse_EErrorCode int32
@@ -237,7 +237,7 @@ func (x *CMsgDPPartnerMicroTxnsResponse_EErrorCode) UnmarshalJSON(data []byte) e
 	return nil
 }
 func (CMsgDPPartnerMicroTxnsResponse_EErrorCode) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor27, []int{65, 0}
+	return fileDescriptor36, []int{65, 0}
 }
 
 type CMsgProtoBufHeader struct {
@@ -257,7 +257,7 @@ type CMsgProtoBufHeader struct {
 func (m *CMsgProtoBufHeader) Reset()                    { *m = CMsgProtoBufHeader{} }
 func (m *CMsgProtoBufHeader) String() string            { return proto.CompactTextString(m) }
 func (*CMsgProtoBufHeader) ProtoMessage()               {}
-func (*CMsgProtoBufHeader) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{0} }
+func (*CMsgProtoBufHeader) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{0} }
 
 const Default_CMsgProtoBufHeader_JobIdSource uint64 = 18446744073709551615
 const Default_CMsgProtoBufHeader_JobIdTarget uint64 = 18446744073709551615
@@ -346,7 +346,7 @@ type CMsgWebAPIKey struct {
 func (m *CMsgWebAPIKey) Reset()                    { *m = CMsgWebAPIKey{} }
 func (m *CMsgWebAPIKey) String() string            { return proto.CompactTextString(m) }
 func (*CMsgWebAPIKey) ProtoMessage()               {}
-func (*CMsgWebAPIKey) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{1} }
+func (*CMsgWebAPIKey) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{1} }
 
 const Default_CMsgWebAPIKey_Status uint32 = 255
 const Default_CMsgWebAPIKey_AccountId uint32 = 0
@@ -402,7 +402,7 @@ type CMsgHttpRequest struct {
 func (m *CMsgHttpRequest) Reset()                    { *m = CMsgHttpRequest{} }
 func (m *CMsgHttpRequest) String() string            { return proto.CompactTextString(m) }
 func (*CMsgHttpRequest) ProtoMessage()               {}
-func (*CMsgHttpRequest) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{2} }
+func (*CMsgHttpRequest) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{2} }
 
 func (m *CMsgHttpRequest) GetRequestMethod() uint32 {
 	if m != nil && m.RequestMethod != nil {
@@ -470,7 +470,7 @@ func (m *CMsgHttpRequest_RequestHeader) Reset()         { *m = CMsgHttpRequest_R
 func (m *CMsgHttpRequest_RequestHeader) String() string { return proto.CompactTextString(m) }
 func (*CMsgHttpRequest_RequestHeader) ProtoMessage()    {}
 func (*CMsgHttpRequest_RequestHeader) Descriptor() ([]byte, []int) {
-	return fileDescriptor27, []int{2, 0}
+	return fileDescriptor36, []int{2, 0}
 }
 
 func (m *CMsgHttpRequest_RequestHeader) GetName() string {
@@ -496,7 +496,7 @@ type CMsgHttpRequest_QueryParam struct {
 func (m *CMsgHttpRequest_QueryParam) Reset()                    { *m = CMsgHttpRequest_QueryParam{} }
 func (m *CMsgHttpRequest_QueryParam) String() string            { return proto.CompactTextString(m) }
 func (*CMsgHttpRequest_QueryParam) ProtoMessage()               {}
-func (*CMsgHttpRequest_QueryParam) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{2, 1} }
+func (*CMsgHttpRequest_QueryParam) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{2, 1} }
 
 func (m *CMsgHttpRequest_QueryParam) GetName() string {
 	if m != nil && m.Name != nil {
@@ -526,7 +526,7 @@ type CMsgWebAPIRequest struct {
 func (m *CMsgWebAPIRequest) Reset()                    { *m = CMsgWebAPIRequest{} }
 func (m *CMsgWebAPIRequest) String() string            { return proto.CompactTextString(m) }
 func (*CMsgWebAPIRequest) ProtoMessage()               {}
-func (*CMsgWebAPIRequest) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{3} }
+func (*CMsgWebAPIRequest) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{3} }
 
 func (m *CMsgWebAPIRequest) GetUNUSEDJobName() string {
 	if m != nil && m.UNUSEDJobName != nil {
@@ -587,7 +587,7 @@ type CMsgHttpResponse struct {
 func (m *CMsgHttpResponse) Reset()                    { *m = CMsgHttpResponse{} }
 func (m *CMsgHttpResponse) String() string            { return proto.CompactTextString(m) }
 func (*CMsgHttpResponse) ProtoMessage()               {}
-func (*CMsgHttpResponse) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{4} }
+func (*CMsgHttpResponse) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{4} }
 
 func (m *CMsgHttpResponse) GetStatusCode() uint32 {
 	if m != nil && m.StatusCode != nil {
@@ -620,7 +620,7 @@ func (m *CMsgHttpResponse_ResponseHeader) Reset()         { *m = CMsgHttpRespons
 func (m *CMsgHttpResponse_ResponseHeader) String() string { return proto.CompactTextString(m) }
 func (*CMsgHttpResponse_ResponseHeader) ProtoMessage()    {}
 func (*CMsgHttpResponse_ResponseHeader) Descriptor() ([]byte, []int) {
-	return fileDescriptor27, []int{4, 0}
+	return fileDescriptor36, []int{4, 0}
 }
 
 func (m *CMsgHttpResponse_ResponseHeader) GetName() string {
@@ -646,7 +646,7 @@ type CMsgAMFindAccounts struct {
 func (m *CMsgAMFindAccounts) Reset()                    { *m = CMsgAMFindAccounts{} }
 func (m *CMsgAMFindAccounts) String() string            { return proto.CompactTextString(m) }
 func (*CMsgAMFindAccounts) ProtoMessage()               {}
-func (*CMsgAMFindAccounts) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{5} }
+func (*CMsgAMFindAccounts) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{5} }
 
 func (m *CMsgAMFindAccounts) GetSearchType() uint32 {
 	if m != nil && m.SearchType != nil {
@@ -670,7 +670,7 @@ type CMsgAMFindAccountsResponse struct {
 func (m *CMsgAMFindAccountsResponse) Reset()                    { *m = CMsgAMFindAccountsResponse{} }
 func (m *CMsgAMFindAccountsResponse) String() string            { return proto.CompactTextString(m) }
 func (*CMsgAMFindAccountsResponse) ProtoMessage()               {}
-func (*CMsgAMFindAccountsResponse) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{6} }
+func (*CMsgAMFindAccountsResponse) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{6} }
 
 func (m *CMsgAMFindAccountsResponse) GetSteamId() []uint64 {
 	if m != nil {
@@ -693,7 +693,7 @@ type CMsgNotifyWatchdog struct {
 func (m *CMsgNotifyWatchdog) Reset()                    { *m = CMsgNotifyWatchdog{} }
 func (m *CMsgNotifyWatchdog) String() string            { return proto.CompactTextString(m) }
 func (*CMsgNotifyWatchdog) ProtoMessage()               {}
-func (*CMsgNotifyWatchdog) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{7} }
+func (*CMsgNotifyWatchdog) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{7} }
 
 func (m *CMsgNotifyWatchdog) GetSource() uint32 {
 	if m != nil && m.Source != nil {
@@ -752,7 +752,7 @@ type CMsgAMGetLicenses struct {
 func (m *CMsgAMGetLicenses) Reset()                    { *m = CMsgAMGetLicenses{} }
 func (m *CMsgAMGetLicenses) String() string            { return proto.CompactTextString(m) }
 func (*CMsgAMGetLicenses) ProtoMessage()               {}
-func (*CMsgAMGetLicenses) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{8} }
+func (*CMsgAMGetLicenses) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{8} }
 
 func (m *CMsgAMGetLicenses) GetSteamid() uint64 {
 	if m != nil && m.Steamid != nil {
@@ -771,7 +771,7 @@ type CMsgPackageLicense struct {
 func (m *CMsgPackageLicense) Reset()                    { *m = CMsgPackageLicense{} }
 func (m *CMsgPackageLicense) String() string            { return proto.CompactTextString(m) }
 func (*CMsgPackageLicense) ProtoMessage()               {}
-func (*CMsgPackageLicense) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{9} }
+func (*CMsgPackageLicense) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{9} }
 
 func (m *CMsgPackageLicense) GetPackageId() uint32 {
 	if m != nil && m.PackageId != nil {
@@ -803,7 +803,7 @@ type CMsgAMGetLicensesResponse struct {
 func (m *CMsgAMGetLicensesResponse) Reset()                    { *m = CMsgAMGetLicensesResponse{} }
 func (m *CMsgAMGetLicensesResponse) String() string            { return proto.CompactTextString(m) }
 func (*CMsgAMGetLicensesResponse) ProtoMessage()               {}
-func (*CMsgAMGetLicensesResponse) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{10} }
+func (*CMsgAMGetLicensesResponse) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{10} }
 
 func (m *CMsgAMGetLicensesResponse) GetLicense() []*CMsgPackageLicense {
 	if m != nil {
@@ -829,7 +829,7 @@ type CMsgAMGetUserGameStats struct {
 func (m *CMsgAMGetUserGameStats) Reset()                    { *m = CMsgAMGetUserGameStats{} }
 func (m *CMsgAMGetUserGameStats) String() string            { return proto.CompactTextString(m) }
 func (*CMsgAMGetUserGameStats) ProtoMessage()               {}
-func (*CMsgAMGetUserGameStats) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{11} }
+func (*CMsgAMGetUserGameStats) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{11} }
 
 func (m *CMsgAMGetUserGameStats) GetSteamId() uint64 {
 	if m != nil && m.SteamId != nil {
@@ -865,7 +865,7 @@ func (m *CMsgAMGetUserGameStatsResponse) Reset()         { *m = CMsgAMGetUserGam
 func (m *CMsgAMGetUserGameStatsResponse) String() string { return proto.CompactTextString(m) }
 func (*CMsgAMGetUserGameStatsResponse) ProtoMessage()    {}
 func (*CMsgAMGetUserGameStatsResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor27, []int{12}
+	return fileDescriptor36, []int{12}
 }
 
 const Default_CMsgAMGetUserGameStatsResponse_Eresult int32 = 2
@@ -915,7 +915,7 @@ func (m *CMsgAMGetUserGameStatsResponse_Stats) Reset()         { *m = CMsgAMGetU
 func (m *CMsgAMGetUserGameStatsResponse_Stats) String() string { return proto.CompactTextString(m) }
 func (*CMsgAMGetUserGameStatsResponse_Stats) ProtoMessage()    {}
 func (*CMsgAMGetUserGameStatsResponse_Stats) Descriptor() ([]byte, []int) {
-	return fileDescriptor27, []int{12, 0}
+	return fileDescriptor36, []int{12, 0}
 }
 
 func (m *CMsgAMGetUserGameStatsResponse_Stats) GetStatId() uint32 {
@@ -947,7 +947,7 @@ func (m *CMsgAMGetUserGameStatsResponse_Achievement_Blocks) String() string {
 }
 func (*CMsgAMGetUserGameStatsResponse_Achievement_Blocks) ProtoMessage() {}
 func (*CMsgAMGetUserGameStatsResponse_Achievement_Blocks) Descriptor() ([]byte, []int) {
-	return fileDescriptor27, []int{12, 1}
+	return fileDescriptor36, []int{12, 1}
 }
 
 func (m *CMsgAMGetUserGameStatsResponse_Achievement_Blocks) GetAchievementId() uint32 {
@@ -980,7 +980,7 @@ type CMsgGCGetCommandList struct {
 func (m *CMsgGCGetCommandList) Reset()                    { *m = CMsgGCGetCommandList{} }
 func (m *CMsgGCGetCommandList) String() string            { return proto.CompactTextString(m) }
 func (*CMsgGCGetCommandList) ProtoMessage()               {}
-func (*CMsgGCGetCommandList) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{13} }
+func (*CMsgGCGetCommandList) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{13} }
 
 func (m *CMsgGCGetCommandList) GetAppId() uint32 {
 	if m != nil && m.AppId != nil {
@@ -1004,7 +1004,7 @@ type CMsgGCGetCommandListResponse struct {
 func (m *CMsgGCGetCommandListResponse) Reset()                    { *m = CMsgGCGetCommandListResponse{} }
 func (m *CMsgGCGetCommandListResponse) String() string            { return proto.CompactTextString(m) }
 func (*CMsgGCGetCommandListResponse) ProtoMessage()               {}
-func (*CMsgGCGetCommandListResponse) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{14} }
+func (*CMsgGCGetCommandListResponse) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{14} }
 
 func (m *CMsgGCGetCommandListResponse) GetCommandName() []string {
 	if m != nil {
@@ -1021,7 +1021,7 @@ type CGCMsgMemCachedGet struct {
 func (m *CGCMsgMemCachedGet) Reset()                    { *m = CGCMsgMemCachedGet{} }
 func (m *CGCMsgMemCachedGet) String() string            { return proto.CompactTextString(m) }
 func (*CGCMsgMemCachedGet) ProtoMessage()               {}
-func (*CGCMsgMemCachedGet) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{15} }
+func (*CGCMsgMemCachedGet) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{15} }
 
 func (m *CGCMsgMemCachedGet) GetKeys() []string {
 	if m != nil {
@@ -1038,7 +1038,7 @@ type CGCMsgMemCachedGetResponse struct {
 func (m *CGCMsgMemCachedGetResponse) Reset()                    { *m = CGCMsgMemCachedGetResponse{} }
 func (m *CGCMsgMemCachedGetResponse) String() string            { return proto.CompactTextString(m) }
 func (*CGCMsgMemCachedGetResponse) ProtoMessage()               {}
-func (*CGCMsgMemCachedGetResponse) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{16} }
+func (*CGCMsgMemCachedGetResponse) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{16} }
 
 func (m *CGCMsgMemCachedGetResponse) GetValues() []*CGCMsgMemCachedGetResponse_ValueTag {
 	if m != nil {
@@ -1057,7 +1057,7 @@ func (m *CGCMsgMemCachedGetResponse_ValueTag) Reset()         { *m = CGCMsgMemCa
 func (m *CGCMsgMemCachedGetResponse_ValueTag) String() string { return proto.CompactTextString(m) }
 func (*CGCMsgMemCachedGetResponse_ValueTag) ProtoMessage()    {}
 func (*CGCMsgMemCachedGetResponse_ValueTag) Descriptor() ([]byte, []int) {
-	return fileDescriptor27, []int{16, 0}
+	return fileDescriptor36, []int{16, 0}
 }
 
 func (m *CGCMsgMemCachedGetResponse_ValueTag) GetFound() bool {
@@ -1082,7 +1082,7 @@ type CGCMsgMemCachedSet struct {
 func (m *CGCMsgMemCachedSet) Reset()                    { *m = CGCMsgMemCachedSet{} }
 func (m *CGCMsgMemCachedSet) String() string            { return proto.CompactTextString(m) }
 func (*CGCMsgMemCachedSet) ProtoMessage()               {}
-func (*CGCMsgMemCachedSet) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{17} }
+func (*CGCMsgMemCachedSet) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{17} }
 
 func (m *CGCMsgMemCachedSet) GetKeys() []*CGCMsgMemCachedSet_KeyPair {
 	if m != nil {
@@ -1100,7 +1100,7 @@ type CGCMsgMemCachedSet_KeyPair struct {
 func (m *CGCMsgMemCachedSet_KeyPair) Reset()                    { *m = CGCMsgMemCachedSet_KeyPair{} }
 func (m *CGCMsgMemCachedSet_KeyPair) String() string            { return proto.CompactTextString(m) }
 func (*CGCMsgMemCachedSet_KeyPair) ProtoMessage()               {}
-func (*CGCMsgMemCachedSet_KeyPair) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{17, 0} }
+func (*CGCMsgMemCachedSet_KeyPair) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{17, 0} }
 
 func (m *CGCMsgMemCachedSet_KeyPair) GetName() string {
 	if m != nil && m.Name != nil {
@@ -1124,7 +1124,7 @@ type CGCMsgMemCachedDelete struct {
 func (m *CGCMsgMemCachedDelete) Reset()                    { *m = CGCMsgMemCachedDelete{} }
 func (m *CGCMsgMemCachedDelete) String() string            { return proto.CompactTextString(m) }
 func (*CGCMsgMemCachedDelete) ProtoMessage()               {}
-func (*CGCMsgMemCachedDelete) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{18} }
+func (*CGCMsgMemCachedDelete) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{18} }
 
 func (m *CGCMsgMemCachedDelete) GetKeys() []string {
 	if m != nil {
@@ -1140,7 +1140,7 @@ type CGCMsgMemCachedStats struct {
 func (m *CGCMsgMemCachedStats) Reset()                    { *m = CGCMsgMemCachedStats{} }
 func (m *CGCMsgMemCachedStats) String() string            { return proto.CompactTextString(m) }
 func (*CGCMsgMemCachedStats) ProtoMessage()               {}
-func (*CGCMsgMemCachedStats) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{19} }
+func (*CGCMsgMemCachedStats) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{19} }
 
 type CGCMsgMemCachedStatsResponse struct {
 	CurrConnections  *uint64 `protobuf:"varint,1,opt,name=curr_connections" json:"curr_connections,omitempty"`
@@ -1163,7 +1163,7 @@ type CGCMsgMemCachedStatsResponse struct {
 func (m *CGCMsgMemCachedStatsResponse) Reset()                    { *m = CGCMsgMemCachedStatsResponse{} }
 func (m *CGCMsgMemCachedStatsResponse) String() string            { return proto.CompactTextString(m) }
 func (*CGCMsgMemCachedStatsResponse) ProtoMessage()               {}
-func (*CGCMsgMemCachedStatsResponse) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{20} }
+func (*CGCMsgMemCachedStatsResponse) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{20} }
 
 func (m *CGCMsgMemCachedStatsResponse) GetCurrConnections() uint64 {
 	if m != nil && m.CurrConnections != nil {
@@ -1271,7 +1271,7 @@ type CGCMsgSQLStats struct {
 func (m *CGCMsgSQLStats) Reset()                    { *m = CGCMsgSQLStats{} }
 func (m *CGCMsgSQLStats) String() string            { return proto.CompactTextString(m) }
 func (*CGCMsgSQLStats) ProtoMessage()               {}
-func (*CGCMsgSQLStats) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{21} }
+func (*CGCMsgSQLStats) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{21} }
 
 func (m *CGCMsgSQLStats) GetSchemaCatalog() uint32 {
 	if m != nil && m.SchemaCatalog != nil {
@@ -1296,7 +1296,7 @@ type CGCMsgSQLStatsResponse struct {
 func (m *CGCMsgSQLStatsResponse) Reset()                    { *m = CGCMsgSQLStatsResponse{} }
 func (m *CGCMsgSQLStatsResponse) String() string            { return proto.CompactTextString(m) }
 func (*CGCMsgSQLStatsResponse) ProtoMessage()               {}
-func (*CGCMsgSQLStatsResponse) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{22} }
+func (*CGCMsgSQLStatsResponse) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{22} }
 
 func (m *CGCMsgSQLStatsResponse) GetThreads() uint32 {
 	if m != nil && m.Threads != nil {
@@ -1372,7 +1372,7 @@ type CMsgAMAddFreeLicense struct {
 func (m *CMsgAMAddFreeLicense) Reset()                    { *m = CMsgAMAddFreeLicense{} }
 func (m *CMsgAMAddFreeLicense) String() string            { return proto.CompactTextString(m) }
 func (*CMsgAMAddFreeLicense) ProtoMessage()               {}
-func (*CMsgAMAddFreeLicense) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{23} }
+func (*CMsgAMAddFreeLicense) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{23} }
 
 func (m *CMsgAMAddFreeLicense) GetSteamid() uint64 {
 	if m != nil && m.Steamid != nil {
@@ -1412,7 +1412,7 @@ type CMsgAMAddFreeLicenseResponse struct {
 func (m *CMsgAMAddFreeLicenseResponse) Reset()                    { *m = CMsgAMAddFreeLicenseResponse{} }
 func (m *CMsgAMAddFreeLicenseResponse) String() string            { return proto.CompactTextString(m) }
 func (*CMsgAMAddFreeLicenseResponse) ProtoMessage()               {}
-func (*CMsgAMAddFreeLicenseResponse) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{24} }
+func (*CMsgAMAddFreeLicenseResponse) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{24} }
 
 const Default_CMsgAMAddFreeLicenseResponse_Eresult int32 = 2
 
@@ -1445,7 +1445,7 @@ type CGCMsgGetIPLocation struct {
 func (m *CGCMsgGetIPLocation) Reset()                    { *m = CGCMsgGetIPLocation{} }
 func (m *CGCMsgGetIPLocation) String() string            { return proto.CompactTextString(m) }
 func (*CGCMsgGetIPLocation) ProtoMessage()               {}
-func (*CGCMsgGetIPLocation) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{25} }
+func (*CGCMsgGetIPLocation) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{25} }
 
 func (m *CGCMsgGetIPLocation) GetIps() []uint32 {
 	if m != nil {
@@ -1467,7 +1467,7 @@ type CIPLocationInfo struct {
 func (m *CIPLocationInfo) Reset()                    { *m = CIPLocationInfo{} }
 func (m *CIPLocationInfo) String() string            { return proto.CompactTextString(m) }
 func (*CIPLocationInfo) ProtoMessage()               {}
-func (*CIPLocationInfo) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{26} }
+func (*CIPLocationInfo) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{26} }
 
 func (m *CIPLocationInfo) GetIp() uint32 {
 	if m != nil && m.Ip != nil {
@@ -1519,7 +1519,7 @@ type CGCMsgGetIPLocationResponse struct {
 func (m *CGCMsgGetIPLocationResponse) Reset()                    { *m = CGCMsgGetIPLocationResponse{} }
 func (m *CGCMsgGetIPLocationResponse) String() string            { return proto.CompactTextString(m) }
 func (*CGCMsgGetIPLocationResponse) ProtoMessage()               {}
-func (*CGCMsgGetIPLocationResponse) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{27} }
+func (*CGCMsgGetIPLocationResponse) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{27} }
 
 func (m *CGCMsgGetIPLocationResponse) GetInfos() []*CIPLocationInfo {
 	if m != nil {
@@ -1536,7 +1536,7 @@ type CGCMsgGetIPASN struct {
 func (m *CGCMsgGetIPASN) Reset()                    { *m = CGCMsgGetIPASN{} }
 func (m *CGCMsgGetIPASN) String() string            { return proto.CompactTextString(m) }
 func (*CGCMsgGetIPASN) ProtoMessage()               {}
-func (*CGCMsgGetIPASN) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{28} }
+func (*CGCMsgGetIPASN) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{28} }
 
 func (m *CGCMsgGetIPASN) GetIps() []uint32 {
 	if m != nil {
@@ -1554,7 +1554,7 @@ type CIPASNInfo struct {
 func (m *CIPASNInfo) Reset()                    { *m = CIPASNInfo{} }
 func (m *CIPASNInfo) String() string            { return proto.CompactTextString(m) }
 func (*CIPASNInfo) ProtoMessage()               {}
-func (*CIPASNInfo) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{29} }
+func (*CIPASNInfo) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{29} }
 
 func (m *CIPASNInfo) GetIp() uint32 {
 	if m != nil && m.Ip != nil {
@@ -1578,7 +1578,7 @@ type CGCMsgGetIPASNResponse struct {
 func (m *CGCMsgGetIPASNResponse) Reset()                    { *m = CGCMsgGetIPASNResponse{} }
 func (m *CGCMsgGetIPASNResponse) String() string            { return proto.CompactTextString(m) }
 func (*CGCMsgGetIPASNResponse) ProtoMessage()               {}
-func (*CGCMsgGetIPASNResponse) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{30} }
+func (*CGCMsgGetIPASNResponse) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{30} }
 
 func (m *CGCMsgGetIPASNResponse) GetInfos() []*CIPASNInfo {
 	if m != nil {
@@ -1596,7 +1596,7 @@ type CGCMsgSystemStatsSchema struct {
 func (m *CGCMsgSystemStatsSchema) Reset()                    { *m = CGCMsgSystemStatsSchema{} }
 func (m *CGCMsgSystemStatsSchema) String() string            { return proto.CompactTextString(m) }
 func (*CGCMsgSystemStatsSchema) ProtoMessage()               {}
-func (*CGCMsgSystemStatsSchema) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{31} }
+func (*CGCMsgSystemStatsSchema) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{31} }
 
 func (m *CGCMsgSystemStatsSchema) GetGcAppId() uint32 {
 	if m != nil && m.GcAppId != nil {
@@ -1619,7 +1619,7 @@ type CGCMsgGetSystemStats struct {
 func (m *CGCMsgGetSystemStats) Reset()                    { *m = CGCMsgGetSystemStats{} }
 func (m *CGCMsgGetSystemStats) String() string            { return proto.CompactTextString(m) }
 func (*CGCMsgGetSystemStats) ProtoMessage()               {}
-func (*CGCMsgGetSystemStats) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{32} }
+func (*CGCMsgGetSystemStats) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{32} }
 
 type CGCMsgGetSystemStatsResponse struct {
 	GcAppId            *uint32 `protobuf:"varint,1,opt,name=gc_app_id" json:"gc_app_id,omitempty"`
@@ -1641,7 +1641,7 @@ type CGCMsgGetSystemStatsResponse struct {
 func (m *CGCMsgGetSystemStatsResponse) Reset()                    { *m = CGCMsgGetSystemStatsResponse{} }
 func (m *CGCMsgGetSystemStatsResponse) String() string            { return proto.CompactTextString(m) }
 func (*CGCMsgGetSystemStatsResponse) ProtoMessage()               {}
-func (*CGCMsgGetSystemStatsResponse) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{33} }
+func (*CGCMsgGetSystemStatsResponse) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{33} }
 
 func (m *CGCMsgGetSystemStatsResponse) GetGcAppId() uint32 {
 	if m != nil && m.GcAppId != nil {
@@ -1747,7 +1747,7 @@ type CMsgAMSendEmail struct {
 func (m *CMsgAMSendEmail) Reset()                    { *m = CMsgAMSendEmail{} }
 func (m *CMsgAMSendEmail) String() string            { return proto.CompactTextString(m) }
 func (*CMsgAMSendEmail) ProtoMessage()               {}
-func (*CMsgAMSendEmail) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{34} }
+func (*CMsgAMSendEmail) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{34} }
 
 func (m *CMsgAMSendEmail) GetSteamid() uint64 {
 	if m != nil && m.Steamid != nil {
@@ -1801,7 +1801,7 @@ func (m *CMsgAMSendEmail_ReplacementToken) Reset()         { *m = CMsgAMSendEmai
 func (m *CMsgAMSendEmail_ReplacementToken) String() string { return proto.CompactTextString(m) }
 func (*CMsgAMSendEmail_ReplacementToken) ProtoMessage()    {}
 func (*CMsgAMSendEmail_ReplacementToken) Descriptor() ([]byte, []int) {
-	return fileDescriptor27, []int{34, 0}
+	return fileDescriptor36, []int{34, 0}
 }
 
 func (m *CMsgAMSendEmail_ReplacementToken) GetTokenName() string {
@@ -1832,7 +1832,7 @@ func (m *CMsgAMSendEmail_PersonaNameReplacementToken) String() string {
 }
 func (*CMsgAMSendEmail_PersonaNameReplacementToken) ProtoMessage() {}
 func (*CMsgAMSendEmail_PersonaNameReplacementToken) Descriptor() ([]byte, []int) {
-	return fileDescriptor27, []int{34, 1}
+	return fileDescriptor36, []int{34, 1}
 }
 
 func (m *CMsgAMSendEmail_PersonaNameReplacementToken) GetSteamid() uint64 {
@@ -1857,7 +1857,7 @@ type CMsgAMSendEmailResponse struct {
 func (m *CMsgAMSendEmailResponse) Reset()                    { *m = CMsgAMSendEmailResponse{} }
 func (m *CMsgAMSendEmailResponse) String() string            { return proto.CompactTextString(m) }
 func (*CMsgAMSendEmailResponse) ProtoMessage()               {}
-func (*CMsgAMSendEmailResponse) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{35} }
+func (*CMsgAMSendEmailResponse) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{35} }
 
 const Default_CMsgAMSendEmailResponse_Eresult uint32 = 2
 
@@ -1879,7 +1879,7 @@ type CMsgGCGetEmailTemplate struct {
 func (m *CMsgGCGetEmailTemplate) Reset()                    { *m = CMsgGCGetEmailTemplate{} }
 func (m *CMsgGCGetEmailTemplate) String() string            { return proto.CompactTextString(m) }
 func (*CMsgGCGetEmailTemplate) ProtoMessage()               {}
-func (*CMsgGCGetEmailTemplate) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{36} }
+func (*CMsgGCGetEmailTemplate) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{36} }
 
 func (m *CMsgGCGetEmailTemplate) GetAppId() uint32 {
 	if m != nil && m.AppId != nil {
@@ -1920,7 +1920,7 @@ func (m *CMsgGCGetEmailTemplateResponse) Reset()         { *m = CMsgGCGetEmailTe
 func (m *CMsgGCGetEmailTemplateResponse) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCGetEmailTemplateResponse) ProtoMessage()    {}
 func (*CMsgGCGetEmailTemplateResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor27, []int{37}
+	return fileDescriptor36, []int{37}
 }
 
 const Default_CMsgGCGetEmailTemplateResponse_Eresult uint32 = 2
@@ -1958,7 +1958,7 @@ type CMsgAMGrantGuestPasses2 struct {
 func (m *CMsgAMGrantGuestPasses2) Reset()                    { *m = CMsgAMGrantGuestPasses2{} }
 func (m *CMsgAMGrantGuestPasses2) String() string            { return proto.CompactTextString(m) }
 func (*CMsgAMGrantGuestPasses2) ProtoMessage()               {}
-func (*CMsgAMGrantGuestPasses2) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{38} }
+func (*CMsgAMGrantGuestPasses2) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{38} }
 
 func (m *CMsgAMGrantGuestPasses2) GetSteamId() uint64 {
 	if m != nil && m.SteamId != nil {
@@ -2005,7 +2005,7 @@ func (m *CMsgAMGrantGuestPasses2Response) Reset()         { *m = CMsgAMGrantGues
 func (m *CMsgAMGrantGuestPasses2Response) String() string { return proto.CompactTextString(m) }
 func (*CMsgAMGrantGuestPasses2Response) ProtoMessage()    {}
 func (*CMsgAMGrantGuestPasses2Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor27, []int{39}
+	return fileDescriptor36, []int{39}
 }
 
 const Default_CMsgAMGrantGuestPasses2Response_Eresult int32 = 2
@@ -2035,7 +2035,7 @@ func (m *CGCSystemMsg_GetAccountDetails) Reset()         { *m = CGCSystemMsg_Get
 func (m *CGCSystemMsg_GetAccountDetails) String() string { return proto.CompactTextString(m) }
 func (*CGCSystemMsg_GetAccountDetails) ProtoMessage()    {}
 func (*CGCSystemMsg_GetAccountDetails) Descriptor() ([]byte, []int) {
-	return fileDescriptor27, []int{40}
+	return fileDescriptor36, []int{40}
 }
 
 func (m *CGCSystemMsg_GetAccountDetails) GetSteamid() uint64 {
@@ -2094,7 +2094,7 @@ func (m *CGCSystemMsg_GetAccountDetails_Response) Reset() {
 func (m *CGCSystemMsg_GetAccountDetails_Response) String() string { return proto.CompactTextString(m) }
 func (*CGCSystemMsg_GetAccountDetails_Response) ProtoMessage()    {}
 func (*CGCSystemMsg_GetAccountDetails_Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor27, []int{41}
+	return fileDescriptor36, []int{41}
 }
 
 const Default_CGCSystemMsg_GetAccountDetails_Response_EresultDeprecated uint32 = 2
@@ -2331,7 +2331,7 @@ type CMsgGCGetPersonaNames struct {
 func (m *CMsgGCGetPersonaNames) Reset()                    { *m = CMsgGCGetPersonaNames{} }
 func (m *CMsgGCGetPersonaNames) String() string            { return proto.CompactTextString(m) }
 func (*CMsgGCGetPersonaNames) ProtoMessage()               {}
-func (*CMsgGCGetPersonaNames) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{42} }
+func (*CMsgGCGetPersonaNames) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{42} }
 
 func (m *CMsgGCGetPersonaNames) GetSteamids() []uint64 {
 	if m != nil {
@@ -2350,7 +2350,7 @@ func (m *CMsgGCGetPersonaNames_Response) Reset()         { *m = CMsgGCGetPersona
 func (m *CMsgGCGetPersonaNames_Response) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCGetPersonaNames_Response) ProtoMessage()    {}
 func (*CMsgGCGetPersonaNames_Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor27, []int{43}
+	return fileDescriptor36, []int{43}
 }
 
 func (m *CMsgGCGetPersonaNames_Response) GetSucceededLookups() []*CMsgGCGetPersonaNames_Response_PersonaName {
@@ -2381,7 +2381,7 @@ func (m *CMsgGCGetPersonaNames_Response_PersonaName) String() string {
 }
 func (*CMsgGCGetPersonaNames_Response_PersonaName) ProtoMessage() {}
 func (*CMsgGCGetPersonaNames_Response_PersonaName) Descriptor() ([]byte, []int) {
-	return fileDescriptor27, []int{43, 0}
+	return fileDescriptor36, []int{43, 0}
 }
 
 func (m *CMsgGCGetPersonaNames_Response_PersonaName) GetSteamid() uint64 {
@@ -2407,7 +2407,7 @@ type CMsgGCCheckFriendship struct {
 func (m *CMsgGCCheckFriendship) Reset()                    { *m = CMsgGCCheckFriendship{} }
 func (m *CMsgGCCheckFriendship) String() string            { return proto.CompactTextString(m) }
 func (*CMsgGCCheckFriendship) ProtoMessage()               {}
-func (*CMsgGCCheckFriendship) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{44} }
+func (*CMsgGCCheckFriendship) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{44} }
 
 func (m *CMsgGCCheckFriendship) GetSteamidLeft() uint64 {
 	if m != nil && m.SteamidLeft != nil {
@@ -2433,7 +2433,7 @@ func (m *CMsgGCCheckFriendship_Response) Reset()         { *m = CMsgGCCheckFrien
 func (m *CMsgGCCheckFriendship_Response) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCCheckFriendship_Response) ProtoMessage()    {}
 func (*CMsgGCCheckFriendship_Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor27, []int{45}
+	return fileDescriptor36, []int{45}
 }
 
 func (m *CMsgGCCheckFriendship_Response) GetSuccess() bool {
@@ -2459,7 +2459,7 @@ type CMsgGCGetAppFriendsList struct {
 func (m *CMsgGCGetAppFriendsList) Reset()                    { *m = CMsgGCGetAppFriendsList{} }
 func (m *CMsgGCGetAppFriendsList) String() string            { return proto.CompactTextString(m) }
 func (*CMsgGCGetAppFriendsList) ProtoMessage()               {}
-func (*CMsgGCGetAppFriendsList) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{46} }
+func (*CMsgGCGetAppFriendsList) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{46} }
 
 func (m *CMsgGCGetAppFriendsList) GetSteamid() uint64 {
 	if m != nil && m.Steamid != nil {
@@ -2486,7 +2486,7 @@ func (m *CMsgGCGetAppFriendsList_Response) Reset()         { *m = CMsgGCGetAppFr
 func (m *CMsgGCGetAppFriendsList_Response) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCGetAppFriendsList_Response) ProtoMessage()    {}
 func (*CMsgGCGetAppFriendsList_Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor27, []int{47}
+	return fileDescriptor36, []int{47}
 }
 
 func (m *CMsgGCGetAppFriendsList_Response) GetSuccess() bool {
@@ -2519,7 +2519,7 @@ type CMsgGCMsgMasterSetDirectory struct {
 func (m *CMsgGCMsgMasterSetDirectory) Reset()                    { *m = CMsgGCMsgMasterSetDirectory{} }
 func (m *CMsgGCMsgMasterSetDirectory) String() string            { return proto.CompactTextString(m) }
 func (*CMsgGCMsgMasterSetDirectory) ProtoMessage()               {}
-func (*CMsgGCMsgMasterSetDirectory) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{48} }
+func (*CMsgGCMsgMasterSetDirectory) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{48} }
 
 func (m *CMsgGCMsgMasterSetDirectory) GetMasterDirIndex() uint32 {
 	if m != nil && m.MasterDirIndex != nil {
@@ -2548,7 +2548,7 @@ func (m *CMsgGCMsgMasterSetDirectory_SubGC) Reset()         { *m = CMsgGCMsgMast
 func (m *CMsgGCMsgMasterSetDirectory_SubGC) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCMsgMasterSetDirectory_SubGC) ProtoMessage()    {}
 func (*CMsgGCMsgMasterSetDirectory_SubGC) Descriptor() ([]byte, []int) {
-	return fileDescriptor27, []int{48, 0}
+	return fileDescriptor36, []int{48, 0}
 }
 
 func (m *CMsgGCMsgMasterSetDirectory_SubGC) GetDirIndex() uint32 {
@@ -2595,7 +2595,7 @@ func (m *CMsgGCMsgMasterSetDirectory_Response) Reset()         { *m = CMsgGCMsgM
 func (m *CMsgGCMsgMasterSetDirectory_Response) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCMsgMasterSetDirectory_Response) ProtoMessage()    {}
 func (*CMsgGCMsgMasterSetDirectory_Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor27, []int{49}
+	return fileDescriptor36, []int{49}
 }
 
 const Default_CMsgGCMsgMasterSetDirectory_Response_Eresult int32 = 2
@@ -2618,7 +2618,7 @@ func (m *CMsgGCMsgWebAPIJobRequestForwardResponse) Reset() {
 func (m *CMsgGCMsgWebAPIJobRequestForwardResponse) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCMsgWebAPIJobRequestForwardResponse) ProtoMessage()    {}
 func (*CMsgGCMsgWebAPIJobRequestForwardResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor27, []int{50}
+	return fileDescriptor36, []int{50}
 }
 
 func (m *CMsgGCMsgWebAPIJobRequestForwardResponse) GetDirIndex() uint32 {
@@ -2637,7 +2637,7 @@ func (m *CGCSystemMsg_GetPurchaseTrust_Request) Reset()         { *m = CGCSystem
 func (m *CGCSystemMsg_GetPurchaseTrust_Request) String() string { return proto.CompactTextString(m) }
 func (*CGCSystemMsg_GetPurchaseTrust_Request) ProtoMessage()    {}
 func (*CGCSystemMsg_GetPurchaseTrust_Request) Descriptor() ([]byte, []int) {
-	return fileDescriptor27, []int{51}
+	return fileDescriptor36, []int{51}
 }
 
 func (m *CGCSystemMsg_GetPurchaseTrust_Request) GetSteamid() uint64 {
@@ -2661,7 +2661,7 @@ func (m *CGCSystemMsg_GetPurchaseTrust_Response) Reset() {
 func (m *CGCSystemMsg_GetPurchaseTrust_Response) String() string { return proto.CompactTextString(m) }
 func (*CGCSystemMsg_GetPurchaseTrust_Response) ProtoMessage()    {}
 func (*CGCSystemMsg_GetPurchaseTrust_Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor27, []int{52}
+	return fileDescriptor36, []int{52}
 }
 
 func (m *CGCSystemMsg_GetPurchaseTrust_Response) GetHasPriorPurchaseHistory() bool {
@@ -2704,7 +2704,7 @@ type CMsgGCHAccountVacStatusChange struct {
 func (m *CMsgGCHAccountVacStatusChange) Reset()                    { *m = CMsgGCHAccountVacStatusChange{} }
 func (m *CMsgGCHAccountVacStatusChange) String() string            { return proto.CompactTextString(m) }
 func (*CMsgGCHAccountVacStatusChange) ProtoMessage()               {}
-func (*CMsgGCHAccountVacStatusChange) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{53} }
+func (*CMsgGCHAccountVacStatusChange) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{53} }
 
 func (m *CMsgGCHAccountVacStatusChange) GetSteamId() uint64 {
 	if m != nil && m.SteamId != nil {
@@ -2749,7 +2749,7 @@ type CMsgGCGetPartnerAccountLink struct {
 func (m *CMsgGCGetPartnerAccountLink) Reset()                    { *m = CMsgGCGetPartnerAccountLink{} }
 func (m *CMsgGCGetPartnerAccountLink) String() string            { return proto.CompactTextString(m) }
 func (*CMsgGCGetPartnerAccountLink) ProtoMessage()               {}
-func (*CMsgGCGetPartnerAccountLink) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{54} }
+func (*CMsgGCGetPartnerAccountLink) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{54} }
 
 func (m *CMsgGCGetPartnerAccountLink) GetSteamid() uint64 {
 	if m != nil && m.Steamid != nil {
@@ -2768,7 +2768,7 @@ func (m *CMsgGCGetPartnerAccountLink_Response) Reset()         { *m = CMsgGCGetP
 func (m *CMsgGCGetPartnerAccountLink_Response) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCGetPartnerAccountLink_Response) ProtoMessage()    {}
 func (*CMsgGCGetPartnerAccountLink_Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor27, []int{55}
+	return fileDescriptor36, []int{55}
 }
 
 func (m *CMsgGCGetPartnerAccountLink_Response) GetPwid() uint32 {
@@ -2797,7 +2797,7 @@ type CMsgGCRoutingInfo struct {
 func (m *CMsgGCRoutingInfo) Reset()                    { *m = CMsgGCRoutingInfo{} }
 func (m *CMsgGCRoutingInfo) String() string            { return proto.CompactTextString(m) }
 func (*CMsgGCRoutingInfo) ProtoMessage()               {}
-func (*CMsgGCRoutingInfo) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{56} }
+func (*CMsgGCRoutingInfo) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{56} }
 
 const Default_CMsgGCRoutingInfo_Method CMsgGCRoutingInfo_RoutingMethod = CMsgGCRoutingInfo_RANDOM
 const Default_CMsgGCRoutingInfo_Fallback CMsgGCRoutingInfo_RoutingMethod = CMsgGCRoutingInfo_DISCARD
@@ -2846,7 +2846,7 @@ func (m *CMsgGCMsgMasterSetWebAPIRouting) Reset()         { *m = CMsgGCMsgMaster
 func (m *CMsgGCMsgMasterSetWebAPIRouting) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCMsgMasterSetWebAPIRouting) ProtoMessage()    {}
 func (*CMsgGCMsgMasterSetWebAPIRouting) Descriptor() ([]byte, []int) {
-	return fileDescriptor27, []int{57}
+	return fileDescriptor36, []int{57}
 }
 
 func (m *CMsgGCMsgMasterSetWebAPIRouting) GetEntries() []*CMsgGCMsgMasterSetWebAPIRouting_Entry {
@@ -2867,7 +2867,7 @@ func (m *CMsgGCMsgMasterSetWebAPIRouting_Entry) Reset()         { *m = CMsgGCMsg
 func (m *CMsgGCMsgMasterSetWebAPIRouting_Entry) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCMsgMasterSetWebAPIRouting_Entry) ProtoMessage()    {}
 func (*CMsgGCMsgMasterSetWebAPIRouting_Entry) Descriptor() ([]byte, []int) {
-	return fileDescriptor27, []int{57, 0}
+	return fileDescriptor36, []int{57, 0}
 }
 
 func (m *CMsgGCMsgMasterSetWebAPIRouting_Entry) GetInterfaceName() string {
@@ -2900,7 +2900,7 @@ func (m *CMsgGCMsgMasterSetClientMsgRouting) Reset()         { *m = CMsgGCMsgMas
 func (m *CMsgGCMsgMasterSetClientMsgRouting) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCMsgMasterSetClientMsgRouting) ProtoMessage()    {}
 func (*CMsgGCMsgMasterSetClientMsgRouting) Descriptor() ([]byte, []int) {
-	return fileDescriptor27, []int{58}
+	return fileDescriptor36, []int{58}
 }
 
 func (m *CMsgGCMsgMasterSetClientMsgRouting) GetEntries() []*CMsgGCMsgMasterSetClientMsgRouting_Entry {
@@ -2922,7 +2922,7 @@ func (m *CMsgGCMsgMasterSetClientMsgRouting_Entry) Reset() {
 func (m *CMsgGCMsgMasterSetClientMsgRouting_Entry) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCMsgMasterSetClientMsgRouting_Entry) ProtoMessage()    {}
 func (*CMsgGCMsgMasterSetClientMsgRouting_Entry) Descriptor() ([]byte, []int) {
-	return fileDescriptor27, []int{58, 0}
+	return fileDescriptor36, []int{58, 0}
 }
 
 func (m *CMsgGCMsgMasterSetClientMsgRouting_Entry) GetMsgType() uint32 {
@@ -2950,7 +2950,7 @@ func (m *CMsgGCMsgMasterSetWebAPIRouting_Response) Reset() {
 func (m *CMsgGCMsgMasterSetWebAPIRouting_Response) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCMsgMasterSetWebAPIRouting_Response) ProtoMessage()    {}
 func (*CMsgGCMsgMasterSetWebAPIRouting_Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor27, []int{59}
+	return fileDescriptor36, []int{59}
 }
 
 const Default_CMsgGCMsgMasterSetWebAPIRouting_Response_Eresult int32 = 2
@@ -2975,7 +2975,7 @@ func (m *CMsgGCMsgMasterSetClientMsgRouting_Response) String() string {
 }
 func (*CMsgGCMsgMasterSetClientMsgRouting_Response) ProtoMessage() {}
 func (*CMsgGCMsgMasterSetClientMsgRouting_Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor27, []int{60}
+	return fileDescriptor36, []int{60}
 }
 
 const Default_CMsgGCMsgMasterSetClientMsgRouting_Response_Eresult int32 = 2
@@ -2997,7 +2997,7 @@ type CMsgGCMsgSetOptions struct {
 func (m *CMsgGCMsgSetOptions) Reset()                    { *m = CMsgGCMsgSetOptions{} }
 func (m *CMsgGCMsgSetOptions) String() string            { return proto.CompactTextString(m) }
 func (*CMsgGCMsgSetOptions) ProtoMessage()               {}
-func (*CMsgGCMsgSetOptions) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{61} }
+func (*CMsgGCMsgSetOptions) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{61} }
 
 const Default_CMsgGCMsgSetOptions_GcsqlVersion CMsgGCMsgSetOptions_GCSQLVersion = CMsgGCMsgSetOptions_GCSQL_VERSION_BASELINE
 
@@ -3032,7 +3032,7 @@ func (m *CMsgGCMsgSetOptions_MessageRange) Reset()         { *m = CMsgGCMsgSetOp
 func (m *CMsgGCMsgSetOptions_MessageRange) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCMsgSetOptions_MessageRange) ProtoMessage()    {}
 func (*CMsgGCMsgSetOptions_MessageRange) Descriptor() ([]byte, []int) {
-	return fileDescriptor27, []int{61, 0}
+	return fileDescriptor36, []int{61, 0}
 }
 
 func (m *CMsgGCMsgSetOptions_MessageRange) GetLow() uint32 {
@@ -3065,7 +3065,7 @@ type CMsgGCHUpdateSession struct {
 func (m *CMsgGCHUpdateSession) Reset()                    { *m = CMsgGCHUpdateSession{} }
 func (m *CMsgGCHUpdateSession) String() string            { return proto.CompactTextString(m) }
 func (*CMsgGCHUpdateSession) ProtoMessage()               {}
-func (*CMsgGCHUpdateSession) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{62} }
+func (*CMsgGCHUpdateSession) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{62} }
 
 func (m *CMsgGCHUpdateSession) GetSteamId() uint64 {
 	if m != nil && m.SteamId != nil {
@@ -3140,7 +3140,7 @@ func (m *CMsgGCHUpdateSession_ExtraField) Reset()         { *m = CMsgGCHUpdateSe
 func (m *CMsgGCHUpdateSession_ExtraField) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCHUpdateSession_ExtraField) ProtoMessage()    {}
 func (*CMsgGCHUpdateSession_ExtraField) Descriptor() ([]byte, []int) {
-	return fileDescriptor27, []int{62, 0}
+	return fileDescriptor36, []int{62, 0}
 }
 
 func (m *CMsgGCHUpdateSession_ExtraField) GetName() string {
@@ -3168,7 +3168,7 @@ func (m *CMsgNotificationOfSuspiciousActivity) Reset()         { *m = CMsgNotifi
 func (m *CMsgNotificationOfSuspiciousActivity) String() string { return proto.CompactTextString(m) }
 func (*CMsgNotificationOfSuspiciousActivity) ProtoMessage()    {}
 func (*CMsgNotificationOfSuspiciousActivity) Descriptor() ([]byte, []int) {
-	return fileDescriptor27, []int{63}
+	return fileDescriptor36, []int{63}
 }
 
 func (m *CMsgNotificationOfSuspiciousActivity) GetSteamid() uint64 {
@@ -3206,7 +3206,7 @@ func (m *CMsgNotificationOfSuspiciousActivity_MultipleGameInstances) String() st
 }
 func (*CMsgNotificationOfSuspiciousActivity_MultipleGameInstances) ProtoMessage() {}
 func (*CMsgNotificationOfSuspiciousActivity_MultipleGameInstances) Descriptor() ([]byte, []int) {
-	return fileDescriptor27, []int{63, 0}
+	return fileDescriptor36, []int{63, 0}
 }
 
 func (m *CMsgNotificationOfSuspiciousActivity_MultipleGameInstances) GetAppInstanceCount() uint32 {
@@ -3234,7 +3234,7 @@ type CMsgDPPartnerMicroTxns struct {
 func (m *CMsgDPPartnerMicroTxns) Reset()                    { *m = CMsgDPPartnerMicroTxns{} }
 func (m *CMsgDPPartnerMicroTxns) String() string            { return proto.CompactTextString(m) }
 func (*CMsgDPPartnerMicroTxns) ProtoMessage()               {}
-func (*CMsgDPPartnerMicroTxns) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{64} }
+func (*CMsgDPPartnerMicroTxns) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{64} }
 
 func (m *CMsgDPPartnerMicroTxns) GetAppid() uint32 {
 	if m != nil && m.Appid != nil {
@@ -3291,7 +3291,7 @@ func (m *CMsgDPPartnerMicroTxns_PartnerMicroTxn) Reset() {
 func (m *CMsgDPPartnerMicroTxns_PartnerMicroTxn) String() string { return proto.CompactTextString(m) }
 func (*CMsgDPPartnerMicroTxns_PartnerMicroTxn) ProtoMessage()    {}
 func (*CMsgDPPartnerMicroTxns_PartnerMicroTxn) Descriptor() ([]byte, []int) {
-	return fileDescriptor27, []int{64, 0}
+	return fileDescriptor36, []int{64, 0}
 }
 
 func (m *CMsgDPPartnerMicroTxns_PartnerMicroTxn) GetInitTime() uint32 {
@@ -3425,7 +3425,7 @@ func (m *CMsgDPPartnerMicroTxns_PartnerInfo) Reset()         { *m = CMsgDPPartne
 func (m *CMsgDPPartnerMicroTxns_PartnerInfo) String() string { return proto.CompactTextString(m) }
 func (*CMsgDPPartnerMicroTxns_PartnerInfo) ProtoMessage()    {}
 func (*CMsgDPPartnerMicroTxns_PartnerInfo) Descriptor() ([]byte, []int) {
-	return fileDescriptor27, []int{64, 1}
+	return fileDescriptor36, []int{64, 1}
 }
 
 func (m *CMsgDPPartnerMicroTxns_PartnerInfo) GetPartnerId() uint32 {
@@ -3466,7 +3466,7 @@ func (m *CMsgDPPartnerMicroTxnsResponse) Reset()         { *m = CMsgDPPartnerMic
 func (m *CMsgDPPartnerMicroTxnsResponse) String() string { return proto.CompactTextString(m) }
 func (*CMsgDPPartnerMicroTxnsResponse) ProtoMessage()    {}
 func (*CMsgDPPartnerMicroTxnsResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor27, []int{65}
+	return fileDescriptor36, []int{65}
 }
 
 const Default_CMsgDPPartnerMicroTxnsResponse_Eresult uint32 = 2
@@ -3496,7 +3496,7 @@ type CMsgGCHVacVerificationChange struct {
 func (m *CMsgGCHVacVerificationChange) Reset()                    { *m = CMsgGCHVacVerificationChange{} }
 func (m *CMsgGCHVacVerificationChange) String() string            { return proto.CompactTextString(m) }
 func (*CMsgGCHVacVerificationChange) ProtoMessage()               {}
-func (*CMsgGCHVacVerificationChange) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{66} }
+func (*CMsgGCHVacVerificationChange) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{66} }
 
 func (m *CMsgGCHVacVerificationChange) GetSteamid() uint64 {
 	if m != nil && m.Steamid != nil {
@@ -3639,7 +3639,7 @@ func init() {
 	proto.RegisterExtension(E_MsgpoolHardLimit)
 }
 
-var fileDescriptor27 = []byte{
+var fileDescriptor36 = []byte{
 	// 4376 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x8c, 0x5a, 0x3b, 0x70, 0x1b, 0x49,
 	0x7a, 0x3e, 0x3c, 0xf8, 0x50, 0x93, 0xa0, 0x28, 0x50, 0x0f, 0x2c, 0x25, 0x9d, 0xe4, 0xb9, 0xd5,

@@ -27,7 +27,7 @@ type CMsgBeginFrame struct {
 func (m *CMsgBeginFrame) Reset()                    { *m = CMsgBeginFrame{} }
 func (m *CMsgBeginFrame) String() string            { return proto.CompactTextString(m) }
 func (*CMsgBeginFrame) ProtoMessage()               {}
-func (*CMsgBeginFrame) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{0} }
+func (*CMsgBeginFrame) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{0} }
 
 func (m *CMsgBeginFrame) GetFramePaintTime() float64 {
 	if m != nil && m.FramePaintTime != nil {
@@ -88,7 +88,7 @@ type CMsgEndFrame struct {
 func (m *CMsgEndFrame) Reset()                    { *m = CMsgEndFrame{} }
 func (m *CMsgEndFrame) String() string            { return proto.CompactTextString(m) }
 func (*CMsgEndFrame) ProtoMessage()               {}
-func (*CMsgEndFrame) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{1} }
+func (*CMsgEndFrame) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{1} }
 
 func (m *CMsgEndFrame) GetMouseCursorTextureId() uint32 {
 	if m != nil && m.MouseCursorTextureId != nil {
@@ -119,7 +119,7 @@ type CMsgClearBackbuffer struct {
 func (m *CMsgClearBackbuffer) Reset()                    { *m = CMsgClearBackbuffer{} }
 func (m *CMsgClearBackbuffer) String() string            { return proto.CompactTextString(m) }
 func (*CMsgClearBackbuffer) ProtoMessage()               {}
-func (*CMsgClearBackbuffer) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{2} }
+func (*CMsgClearBackbuffer) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{2} }
 
 func (m *CMsgClearBackbuffer) GetClearColorRgba() uint32 {
 	if m != nil && m.ClearColorRgba != nil {
@@ -136,7 +136,7 @@ type CMsgDeleteTexture struct {
 func (m *CMsgDeleteTexture) Reset()                    { *m = CMsgDeleteTexture{} }
 func (m *CMsgDeleteTexture) String() string            { return proto.CompactTextString(m) }
 func (*CMsgDeleteTexture) ProtoMessage()               {}
-func (*CMsgDeleteTexture) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{3} }
+func (*CMsgDeleteTexture) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{3} }
 
 func (m *CMsgDeleteTexture) GetTexturePointer() uint64 {
 	if m != nil && m.TexturePointer != nil {
@@ -153,7 +153,7 @@ type CMsgDeletePanel struct {
 func (m *CMsgDeletePanel) Reset()                    { *m = CMsgDeletePanel{} }
 func (m *CMsgDeletePanel) String() string            { return proto.CompactTextString(m) }
 func (*CMsgDeletePanel) ProtoMessage()               {}
-func (*CMsgDeletePanel) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{4} }
+func (*CMsgDeletePanel) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{4} }
 
 func (m *CMsgDeletePanel) GetContextId() uint64 {
 	if m != nil && m.ContextId != nil {
@@ -171,7 +171,7 @@ type CMsgDeleteParticleSystem struct {
 func (m *CMsgDeleteParticleSystem) Reset()                    { *m = CMsgDeleteParticleSystem{} }
 func (m *CMsgDeleteParticleSystem) String() string            { return proto.CompactTextString(m) }
 func (*CMsgDeleteParticleSystem) ProtoMessage()               {}
-func (*CMsgDeleteParticleSystem) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{5} }
+func (*CMsgDeleteParticleSystem) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{5} }
 
 func (m *CMsgDeleteParticleSystem) GetPanelHandle() uint64 {
 	if m != nil && m.PanelHandle != nil {
@@ -197,7 +197,7 @@ type CMsgPoint struct {
 func (m *CMsgPoint) Reset()                    { *m = CMsgPoint{} }
 func (m *CMsgPoint) String() string            { return proto.CompactTextString(m) }
 func (*CMsgPoint) ProtoMessage()               {}
-func (*CMsgPoint) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{6} }
+func (*CMsgPoint) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{6} }
 
 func (m *CMsgPoint) GetX() float64 {
 	if m != nil && m.X != nil {
@@ -243,7 +243,7 @@ type CMsgMatrix4X4 struct {
 func (m *CMsgMatrix4X4) Reset()                    { *m = CMsgMatrix4X4{} }
 func (m *CMsgMatrix4X4) String() string            { return proto.CompactTextString(m) }
 func (*CMsgMatrix4X4) ProtoMessage()               {}
-func (*CMsgMatrix4X4) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{7} }
+func (*CMsgMatrix4X4) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{7} }
 
 func (m *CMsgMatrix4X4) GetM00() float64 {
 	if m != nil && m.M00 != nil {
@@ -368,7 +368,7 @@ type CRadiusData struct {
 func (m *CRadiusData) Reset()                    { *m = CRadiusData{} }
 func (m *CRadiusData) String() string            { return proto.CompactTextString(m) }
 func (*CRadiusData) ProtoMessage()               {}
-func (*CRadiusData) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{8} }
+func (*CRadiusData) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{8} }
 
 func (m *CRadiusData) GetTopLeft() *CRadiusData_CCornerRadius {
 	if m != nil {
@@ -407,7 +407,7 @@ type CRadiusData_CCornerRadius struct {
 func (m *CRadiusData_CCornerRadius) Reset()                    { *m = CRadiusData_CCornerRadius{} }
 func (m *CRadiusData_CCornerRadius) String() string            { return proto.CompactTextString(m) }
 func (*CRadiusData_CCornerRadius) ProtoMessage()               {}
-func (*CRadiusData_CCornerRadius) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{8, 0} }
+func (*CRadiusData_CCornerRadius) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{8, 0} }
 
 func (m *CRadiusData_CCornerRadius) GetHorizontal() float64 {
 	if m != nil && m.Horizontal != nil {
@@ -434,7 +434,7 @@ type CBorderData struct {
 func (m *CBorderData) Reset()                    { *m = CBorderData{} }
 func (m *CBorderData) String() string            { return proto.CompactTextString(m) }
 func (*CBorderData) ProtoMessage()               {}
-func (*CBorderData) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{9} }
+func (*CBorderData) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{9} }
 
 func (m *CBorderData) GetTop() *CBorderData_CBorderSide {
 	if m != nil {
@@ -474,7 +474,7 @@ type CBorderData_CBorderSide struct {
 func (m *CBorderData_CBorderSide) Reset()                    { *m = CBorderData_CBorderSide{} }
 func (m *CBorderData_CBorderSide) String() string            { return proto.CompactTextString(m) }
 func (*CBorderData_CBorderSide) ProtoMessage()               {}
-func (*CBorderData_CBorderSide) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{9, 0} }
+func (*CBorderData_CBorderSide) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{9, 0} }
 
 func (m *CBorderData_CBorderSide) GetStyle() uint32 {
 	if m != nil && m.Style != nil {
@@ -512,7 +512,7 @@ type CBoxShadowData struct {
 func (m *CBoxShadowData) Reset()                    { *m = CBoxShadowData{} }
 func (m *CBoxShadowData) String() string            { return proto.CompactTextString(m) }
 func (*CBoxShadowData) ProtoMessage()               {}
-func (*CBoxShadowData) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{10} }
+func (*CBoxShadowData) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{10} }
 
 func (m *CBoxShadowData) GetInset() bool {
 	if m != nil && m.Inset != nil {
@@ -583,7 +583,7 @@ type CTextShadowData struct {
 func (m *CTextShadowData) Reset()                    { *m = CTextShadowData{} }
 func (m *CTextShadowData) String() string            { return proto.CompactTextString(m) }
 func (*CTextShadowData) ProtoMessage()               {}
-func (*CTextShadowData) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{11} }
+func (*CTextShadowData) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{11} }
 
 func (m *CTextShadowData) GetHorizontalOffset() float64 {
 	if m != nil && m.HorizontalOffset != nil {
@@ -638,7 +638,7 @@ type CRadialClipData struct {
 func (m *CRadialClipData) Reset()                    { *m = CRadialClipData{} }
 func (m *CRadialClipData) String() string            { return proto.CompactTextString(m) }
 func (*CRadialClipData) ProtoMessage()               {}
-func (*CRadialClipData) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{12} }
+func (*CRadialClipData) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{12} }
 
 func (m *CRadialClipData) GetCenterX() float64 {
 	if m != nil && m.CenterX != nil {
@@ -681,7 +681,7 @@ type CMsgClipData struct {
 func (m *CMsgClipData) Reset()                    { *m = CMsgClipData{} }
 func (m *CMsgClipData) String() string            { return proto.CompactTextString(m) }
 func (*CMsgClipData) ProtoMessage()               {}
-func (*CMsgClipData) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{13} }
+func (*CMsgClipData) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{13} }
 
 func (m *CMsgClipData) GetRectClip() bool {
 	if m != nil && m.RectClip != nil {
@@ -795,7 +795,7 @@ type CMsgPushCompositingLayer struct {
 func (m *CMsgPushCompositingLayer) Reset()                    { *m = CMsgPushCompositingLayer{} }
 func (m *CMsgPushCompositingLayer) String() string            { return proto.CompactTextString(m) }
 func (*CMsgPushCompositingLayer) ProtoMessage()               {}
-func (*CMsgPushCompositingLayer) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{14} }
+func (*CMsgPushCompositingLayer) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{14} }
 
 func (m *CMsgPushCompositingLayer) GetLayerId() uint64 {
 	if m != nil && m.LayerId != nil {
@@ -1245,7 +1245,7 @@ type CMsgPopCompositingLayer struct {
 func (m *CMsgPopCompositingLayer) Reset()                    { *m = CMsgPopCompositingLayer{} }
 func (m *CMsgPopCompositingLayer) String() string            { return proto.CompactTextString(m) }
 func (*CMsgPopCompositingLayer) ProtoMessage()               {}
-func (*CMsgPopCompositingLayer) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{15} }
+func (*CMsgPopCompositingLayer) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{15} }
 
 type CMsgFreeCompositingLayer struct {
 	LayerId          *uint64 `protobuf:"varint,1,opt,name=layer_id" json:"layer_id,omitempty"`
@@ -1255,7 +1255,7 @@ type CMsgFreeCompositingLayer struct {
 func (m *CMsgFreeCompositingLayer) Reset()                    { *m = CMsgFreeCompositingLayer{} }
 func (m *CMsgFreeCompositingLayer) String() string            { return proto.CompactTextString(m) }
 func (*CMsgFreeCompositingLayer) ProtoMessage()               {}
-func (*CMsgFreeCompositingLayer) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{16} }
+func (*CMsgFreeCompositingLayer) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{16} }
 
 func (m *CMsgFreeCompositingLayer) GetLayerId() uint64 {
 	if m != nil && m.LayerId != nil {
@@ -1279,7 +1279,7 @@ type CMsgTransitionData struct {
 func (m *CMsgTransitionData) Reset()                    { *m = CMsgTransitionData{} }
 func (m *CMsgTransitionData) String() string            { return proto.CompactTextString(m) }
 func (*CMsgTransitionData) ProtoMessage()               {}
-func (*CMsgTransitionData) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{17} }
+func (*CMsgTransitionData) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{17} }
 
 const Default_CMsgTransitionData_TimingFunc uint32 = 0
 
@@ -1357,7 +1357,7 @@ type CMsgAnimationData struct {
 func (m *CMsgAnimationData) Reset()                    { *m = CMsgAnimationData{} }
 func (m *CMsgAnimationData) String() string            { return proto.CompactTextString(m) }
 func (*CMsgAnimationData) ProtoMessage()               {}
-func (*CMsgAnimationData) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{18} }
+func (*CMsgAnimationData) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{18} }
 
 func (m *CMsgAnimationData) GetStartTime() float64 {
 	if m != nil && m.StartTime != nil {
@@ -1450,7 +1450,7 @@ type CMsgAnimationFrameData struct {
 func (m *CMsgAnimationFrameData) Reset()                    { *m = CMsgAnimationFrameData{} }
 func (m *CMsgAnimationFrameData) String() string            { return proto.CompactTextString(m) }
 func (*CMsgAnimationFrameData) ProtoMessage()               {}
-func (*CMsgAnimationFrameData) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{19} }
+func (*CMsgAnimationFrameData) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{19} }
 
 var extRange_CMsgAnimationFrameData = []proto.ExtensionRange{
 	{1000, 536870911},
@@ -1521,7 +1521,7 @@ type CMsgPointWithTransition struct {
 func (m *CMsgPointWithTransition) Reset()                    { *m = CMsgPointWithTransition{} }
 func (m *CMsgPointWithTransition) String() string            { return proto.CompactTextString(m) }
 func (*CMsgPointWithTransition) ProtoMessage()               {}
-func (*CMsgPointWithTransition) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{20} }
+func (*CMsgPointWithTransition) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{20} }
 
 func (m *CMsgPointWithTransition) GetBase() *CMsgPoint {
 	if m != nil {
@@ -1572,7 +1572,7 @@ func (m *CMsgPointWithTransition_AnimationFrameData) String() string {
 }
 func (*CMsgPointWithTransition_AnimationFrameData) ProtoMessage() {}
 func (*CMsgPointWithTransition_AnimationFrameData) Descriptor() ([]byte, []int) {
-	return fileDescriptor25, []int{20, 0}
+	return fileDescriptor34, []int{20, 0}
 }
 
 func (m *CMsgPointWithTransition_AnimationFrameData) GetData() *CMsgPoint {
@@ -1593,7 +1593,7 @@ type CMsgColor struct {
 func (m *CMsgColor) Reset()                    { *m = CMsgColor{} }
 func (m *CMsgColor) String() string            { return proto.CompactTextString(m) }
 func (*CMsgColor) ProtoMessage()               {}
-func (*CMsgColor) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{21} }
+func (*CMsgColor) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{21} }
 
 func (m *CMsgColor) GetBase() uint32 {
 	if m != nil && m.Base != nil {
@@ -1640,7 +1640,7 @@ func (m *CMsgColor_AnimationFrameData) Reset()         { *m = CMsgColor_Animatio
 func (m *CMsgColor_AnimationFrameData) String() string { return proto.CompactTextString(m) }
 func (*CMsgColor_AnimationFrameData) ProtoMessage()    {}
 func (*CMsgColor_AnimationFrameData) Descriptor() ([]byte, []int) {
-	return fileDescriptor25, []int{21, 0}
+	return fileDescriptor34, []int{21, 0}
 }
 
 func (m *CMsgColor_AnimationFrameData) GetData() uint32 {
@@ -1659,7 +1659,7 @@ type CMsgColorStop struct {
 func (m *CMsgColorStop) Reset()                    { *m = CMsgColorStop{} }
 func (m *CMsgColorStop) String() string            { return proto.CompactTextString(m) }
 func (*CMsgColorStop) ProtoMessage()               {}
-func (*CMsgColorStop) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{22} }
+func (*CMsgColorStop) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{22} }
 
 func (m *CMsgColorStop) GetPosition() float64 {
 	if m != nil && m.Position != nil {
@@ -1685,7 +1685,7 @@ type CMsgLinearGradient struct {
 func (m *CMsgLinearGradient) Reset()                    { *m = CMsgLinearGradient{} }
 func (m *CMsgLinearGradient) String() string            { return proto.CompactTextString(m) }
 func (*CMsgLinearGradient) ProtoMessage()               {}
-func (*CMsgLinearGradient) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{23} }
+func (*CMsgLinearGradient) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{23} }
 
 func (m *CMsgLinearGradient) GetStartPosition() *CMsgPoint {
 	if m != nil {
@@ -1719,7 +1719,7 @@ type CMsgRadialGradient struct {
 func (m *CMsgRadialGradient) Reset()                    { *m = CMsgRadialGradient{} }
 func (m *CMsgRadialGradient) String() string            { return proto.CompactTextString(m) }
 func (*CMsgRadialGradient) ProtoMessage()               {}
-func (*CMsgRadialGradient) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{24} }
+func (*CMsgRadialGradient) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{24} }
 
 func (m *CMsgRadialGradient) GetCenterPosition() *CMsgPoint {
 	if m != nil {
@@ -1760,7 +1760,7 @@ type CMsgParticle struct {
 func (m *CMsgParticle) Reset()                    { *m = CMsgParticle{} }
 func (m *CMsgParticle) String() string            { return proto.CompactTextString(m) }
 func (*CMsgParticle) ProtoMessage()               {}
-func (*CMsgParticle) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{25} }
+func (*CMsgParticle) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{25} }
 
 func (m *CMsgParticle) GetParticlePosition() *CMsgPoint {
 	if m != nil {
@@ -1822,7 +1822,7 @@ type CMsgParticleSystem struct {
 func (m *CMsgParticleSystem) Reset()                    { *m = CMsgParticleSystem{} }
 func (m *CMsgParticleSystem) String() string            { return proto.CompactTextString(m) }
 func (*CMsgParticleSystem) ProtoMessage()               {}
-func (*CMsgParticleSystem) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{26} }
+func (*CMsgParticleSystem) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{26} }
 
 func (m *CMsgParticleSystem) GetBasePosition() *CMsgPoint {
 	if m != nil {
@@ -2011,7 +2011,7 @@ type CMsgFillBrush struct {
 func (m *CMsgFillBrush) Reset()                    { *m = CMsgFillBrush{} }
 func (m *CMsgFillBrush) String() string            { return proto.CompactTextString(m) }
 func (*CMsgFillBrush) ProtoMessage()               {}
-func (*CMsgFillBrush) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{27} }
+func (*CMsgFillBrush) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{27} }
 
 func (m *CMsgFillBrush) GetOpacity() float64 {
 	if m != nil && m.Opacity != nil {
@@ -2059,7 +2059,7 @@ type CMsgFillBrushCollection struct {
 func (m *CMsgFillBrushCollection) Reset()                    { *m = CMsgFillBrushCollection{} }
 func (m *CMsgFillBrushCollection) String() string            { return proto.CompactTextString(m) }
 func (*CMsgFillBrushCollection) ProtoMessage()               {}
-func (*CMsgFillBrushCollection) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{28} }
+func (*CMsgFillBrushCollection) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{28} }
 
 func (m *CMsgFillBrushCollection) GetBase() []*CMsgFillBrush {
 	if m != nil {
@@ -2110,7 +2110,7 @@ func (m *CMsgFillBrushCollection_AnimationFrameData) String() string {
 }
 func (*CMsgFillBrushCollection_AnimationFrameData) ProtoMessage() {}
 func (*CMsgFillBrushCollection_AnimationFrameData) Descriptor() ([]byte, []int) {
-	return fileDescriptor25, []int{28, 0}
+	return fileDescriptor34, []int{28, 0}
 }
 
 func (m *CMsgFillBrushCollection_AnimationFrameData) GetData() []*CMsgFillBrush {
@@ -2128,7 +2128,7 @@ type CMsgRenderFillBrushCollection struct {
 func (m *CMsgRenderFillBrushCollection) Reset()                    { *m = CMsgRenderFillBrushCollection{} }
 func (m *CMsgRenderFillBrushCollection) String() string            { return proto.CompactTextString(m) }
 func (*CMsgRenderFillBrushCollection) ProtoMessage()               {}
-func (*CMsgRenderFillBrushCollection) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{29} }
+func (*CMsgRenderFillBrushCollection) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{29} }
 
 func (m *CMsgRenderFillBrushCollection) GetFillBrush() []*CMsgFillBrush {
 	if m != nil {
@@ -2152,7 +2152,7 @@ type CMsgPanelPosition struct {
 func (m *CMsgPanelPosition) Reset()                    { *m = CMsgPanelPosition{} }
 func (m *CMsgPanelPosition) String() string            { return proto.CompactTextString(m) }
 func (*CMsgPanelPosition) ProtoMessage()               {}
-func (*CMsgPanelPosition) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{30} }
+func (*CMsgPanelPosition) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{30} }
 
 func (m *CMsgPanelPosition) GetBase() *CMsgPoint {
 	if m != nil {
@@ -2227,7 +2227,7 @@ func (m *CMsgPanelPosition_AnimationFrameData) Reset()         { *m = CMsgPanelP
 func (m *CMsgPanelPosition_AnimationFrameData) String() string { return proto.CompactTextString(m) }
 func (*CMsgPanelPosition_AnimationFrameData) ProtoMessage()    {}
 func (*CMsgPanelPosition_AnimationFrameData) Descriptor() ([]byte, []int) {
-	return fileDescriptor25, []int{30, 0}
+	return fileDescriptor34, []int{30, 0}
 }
 
 func (m *CMsgPanelPosition_AnimationFrameData) GetData() *CMsgPoint {
@@ -2248,7 +2248,7 @@ type CMsgOpacity struct {
 func (m *CMsgOpacity) Reset()                    { *m = CMsgOpacity{} }
 func (m *CMsgOpacity) String() string            { return proto.CompactTextString(m) }
 func (*CMsgOpacity) ProtoMessage()               {}
-func (*CMsgOpacity) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{31} }
+func (*CMsgOpacity) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{31} }
 
 func (m *CMsgOpacity) GetBase() float64 {
 	if m != nil && m.Base != nil {
@@ -2295,7 +2295,7 @@ func (m *CMsgOpacity_AnimationFrameData) Reset()         { *m = CMsgOpacity_Anim
 func (m *CMsgOpacity_AnimationFrameData) String() string { return proto.CompactTextString(m) }
 func (*CMsgOpacity_AnimationFrameData) ProtoMessage()    {}
 func (*CMsgOpacity_AnimationFrameData) Descriptor() ([]byte, []int) {
-	return fileDescriptor25, []int{31, 0}
+	return fileDescriptor34, []int{31, 0}
 }
 
 func (m *CMsgOpacity_AnimationFrameData) GetData() float64 {
@@ -2316,7 +2316,7 @@ type CMsgRotate2D struct {
 func (m *CMsgRotate2D) Reset()                    { *m = CMsgRotate2D{} }
 func (m *CMsgRotate2D) String() string            { return proto.CompactTextString(m) }
 func (*CMsgRotate2D) ProtoMessage()               {}
-func (*CMsgRotate2D) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{32} }
+func (*CMsgRotate2D) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{32} }
 
 func (m *CMsgRotate2D) GetBase() float64 {
 	if m != nil && m.Base != nil {
@@ -2363,7 +2363,7 @@ func (m *CMsgRotate2D_AnimationFrameData) Reset()         { *m = CMsgRotate2D_An
 func (m *CMsgRotate2D_AnimationFrameData) String() string { return proto.CompactTextString(m) }
 func (*CMsgRotate2D_AnimationFrameData) ProtoMessage()    {}
 func (*CMsgRotate2D_AnimationFrameData) Descriptor() ([]byte, []int) {
-	return fileDescriptor25, []int{32, 0}
+	return fileDescriptor34, []int{32, 0}
 }
 
 func (m *CMsgRotate2D_AnimationFrameData) GetData() float64 {
@@ -2382,7 +2382,7 @@ type CMsgOpacityMaskData struct {
 func (m *CMsgOpacityMaskData) Reset()                    { *m = CMsgOpacityMaskData{} }
 func (m *CMsgOpacityMaskData) String() string            { return proto.CompactTextString(m) }
 func (*CMsgOpacityMaskData) ProtoMessage()               {}
-func (*CMsgOpacityMaskData) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{33} }
+func (*CMsgOpacityMaskData) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{33} }
 
 func (m *CMsgOpacityMaskData) GetOpacityMaskTextureId() uint32 {
 	if m != nil && m.OpacityMaskTextureId != nil {
@@ -2409,7 +2409,7 @@ type CMsgOpacityMask struct {
 func (m *CMsgOpacityMask) Reset()                    { *m = CMsgOpacityMask{} }
 func (m *CMsgOpacityMask) String() string            { return proto.CompactTextString(m) }
 func (*CMsgOpacityMask) ProtoMessage()               {}
-func (*CMsgOpacityMask) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{34} }
+func (*CMsgOpacityMask) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{34} }
 
 func (m *CMsgOpacityMask) GetBase() *CMsgOpacityMaskData {
 	if m != nil {
@@ -2456,7 +2456,7 @@ func (m *CMsgOpacityMask_AnimationFrameData) Reset()         { *m = CMsgOpacityM
 func (m *CMsgOpacityMask_AnimationFrameData) String() string { return proto.CompactTextString(m) }
 func (*CMsgOpacityMask_AnimationFrameData) ProtoMessage()    {}
 func (*CMsgOpacityMask_AnimationFrameData) Descriptor() ([]byte, []int) {
-	return fileDescriptor25, []int{34, 0}
+	return fileDescriptor34, []int{34, 0}
 }
 
 func (m *CMsgOpacityMask_AnimationFrameData) GetData() *CMsgOpacityMaskData {
@@ -2477,7 +2477,7 @@ type CMsgHueShift struct {
 func (m *CMsgHueShift) Reset()                    { *m = CMsgHueShift{} }
 func (m *CMsgHueShift) String() string            { return proto.CompactTextString(m) }
 func (*CMsgHueShift) ProtoMessage()               {}
-func (*CMsgHueShift) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{35} }
+func (*CMsgHueShift) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{35} }
 
 func (m *CMsgHueShift) GetBase() float64 {
 	if m != nil && m.Base != nil {
@@ -2524,7 +2524,7 @@ func (m *CMsgHueShift_AnimationFrameData) Reset()         { *m = CMsgHueShift_An
 func (m *CMsgHueShift_AnimationFrameData) String() string { return proto.CompactTextString(m) }
 func (*CMsgHueShift_AnimationFrameData) ProtoMessage()    {}
 func (*CMsgHueShift_AnimationFrameData) Descriptor() ([]byte, []int) {
-	return fileDescriptor25, []int{35, 0}
+	return fileDescriptor34, []int{35, 0}
 }
 
 func (m *CMsgHueShift_AnimationFrameData) GetData() float64 {
@@ -2545,7 +2545,7 @@ type CMsgSaturation struct {
 func (m *CMsgSaturation) Reset()                    { *m = CMsgSaturation{} }
 func (m *CMsgSaturation) String() string            { return proto.CompactTextString(m) }
 func (*CMsgSaturation) ProtoMessage()               {}
-func (*CMsgSaturation) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{36} }
+func (*CMsgSaturation) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{36} }
 
 func (m *CMsgSaturation) GetBase() float64 {
 	if m != nil && m.Base != nil {
@@ -2592,7 +2592,7 @@ func (m *CMsgSaturation_AnimationFrameData) Reset()         { *m = CMsgSaturatio
 func (m *CMsgSaturation_AnimationFrameData) String() string { return proto.CompactTextString(m) }
 func (*CMsgSaturation_AnimationFrameData) ProtoMessage()    {}
 func (*CMsgSaturation_AnimationFrameData) Descriptor() ([]byte, []int) {
-	return fileDescriptor25, []int{36, 0}
+	return fileDescriptor34, []int{36, 0}
 }
 
 func (m *CMsgSaturation_AnimationFrameData) GetData() float64 {
@@ -2613,7 +2613,7 @@ type CMsgBrightness struct {
 func (m *CMsgBrightness) Reset()                    { *m = CMsgBrightness{} }
 func (m *CMsgBrightness) String() string            { return proto.CompactTextString(m) }
 func (*CMsgBrightness) ProtoMessage()               {}
-func (*CMsgBrightness) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{37} }
+func (*CMsgBrightness) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{37} }
 
 func (m *CMsgBrightness) GetBase() float64 {
 	if m != nil && m.Base != nil {
@@ -2660,7 +2660,7 @@ func (m *CMsgBrightness_AnimationFrameData) Reset()         { *m = CMsgBrightnes
 func (m *CMsgBrightness_AnimationFrameData) String() string { return proto.CompactTextString(m) }
 func (*CMsgBrightness_AnimationFrameData) ProtoMessage()    {}
 func (*CMsgBrightness_AnimationFrameData) Descriptor() ([]byte, []int) {
-	return fileDescriptor25, []int{37, 0}
+	return fileDescriptor34, []int{37, 0}
 }
 
 func (m *CMsgBrightness_AnimationFrameData) GetData() float64 {
@@ -2681,7 +2681,7 @@ type CMsgContrast struct {
 func (m *CMsgContrast) Reset()                    { *m = CMsgContrast{} }
 func (m *CMsgContrast) String() string            { return proto.CompactTextString(m) }
 func (*CMsgContrast) ProtoMessage()               {}
-func (*CMsgContrast) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{38} }
+func (*CMsgContrast) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{38} }
 
 func (m *CMsgContrast) GetBase() float64 {
 	if m != nil && m.Base != nil {
@@ -2728,7 +2728,7 @@ func (m *CMsgContrast_AnimationFrameData) Reset()         { *m = CMsgContrast_An
 func (m *CMsgContrast_AnimationFrameData) String() string { return proto.CompactTextString(m) }
 func (*CMsgContrast_AnimationFrameData) ProtoMessage()    {}
 func (*CMsgContrast_AnimationFrameData) Descriptor() ([]byte, []int) {
-	return fileDescriptor25, []int{38, 0}
+	return fileDescriptor34, []int{38, 0}
 }
 
 func (m *CMsgContrast_AnimationFrameData) GetData() float64 {
@@ -2748,7 +2748,7 @@ type CMsgGaussianValues struct {
 func (m *CMsgGaussianValues) Reset()                    { *m = CMsgGaussianValues{} }
 func (m *CMsgGaussianValues) String() string            { return proto.CompactTextString(m) }
 func (*CMsgGaussianValues) ProtoMessage()               {}
-func (*CMsgGaussianValues) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{39} }
+func (*CMsgGaussianValues) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{39} }
 
 func (m *CMsgGaussianValues) GetPasses() float64 {
 	if m != nil && m.Passes != nil {
@@ -2782,7 +2782,7 @@ type CMsgGaussianBlur struct {
 func (m *CMsgGaussianBlur) Reset()                    { *m = CMsgGaussianBlur{} }
 func (m *CMsgGaussianBlur) String() string            { return proto.CompactTextString(m) }
 func (*CMsgGaussianBlur) ProtoMessage()               {}
-func (*CMsgGaussianBlur) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{40} }
+func (*CMsgGaussianBlur) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{40} }
 
 func (m *CMsgGaussianBlur) GetBase() *CMsgGaussianValues {
 	if m != nil {
@@ -2829,7 +2829,7 @@ func (m *CMsgGaussianBlur_AnimationFrameData) Reset()         { *m = CMsgGaussia
 func (m *CMsgGaussianBlur_AnimationFrameData) String() string { return proto.CompactTextString(m) }
 func (*CMsgGaussianBlur_AnimationFrameData) ProtoMessage()    {}
 func (*CMsgGaussianBlur_AnimationFrameData) Descriptor() ([]byte, []int) {
-	return fileDescriptor25, []int{40, 0}
+	return fileDescriptor34, []int{40, 0}
 }
 
 func (m *CMsgGaussianBlur_AnimationFrameData) GetData() *CMsgGaussianValues {
@@ -2849,7 +2849,7 @@ type CMsgMotionBlurValues struct {
 func (m *CMsgMotionBlurValues) Reset()                    { *m = CMsgMotionBlurValues{} }
 func (m *CMsgMotionBlurValues) String() string            { return proto.CompactTextString(m) }
 func (*CMsgMotionBlurValues) ProtoMessage()               {}
-func (*CMsgMotionBlurValues) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{41} }
+func (*CMsgMotionBlurValues) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{41} }
 
 func (m *CMsgMotionBlurValues) GetVelocity() float64 {
 	if m != nil && m.Velocity != nil {
@@ -2883,7 +2883,7 @@ type CMsgMotionBlur struct {
 func (m *CMsgMotionBlur) Reset()                    { *m = CMsgMotionBlur{} }
 func (m *CMsgMotionBlur) String() string            { return proto.CompactTextString(m) }
 func (*CMsgMotionBlur) ProtoMessage()               {}
-func (*CMsgMotionBlur) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{42} }
+func (*CMsgMotionBlur) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{42} }
 
 func (m *CMsgMotionBlur) GetBase() *CMsgMotionBlurValues {
 	if m != nil {
@@ -2930,7 +2930,7 @@ func (m *CMsgMotionBlur_AnimationFrameData) Reset()         { *m = CMsgMotionBlu
 func (m *CMsgMotionBlur_AnimationFrameData) String() string { return proto.CompactTextString(m) }
 func (*CMsgMotionBlur_AnimationFrameData) ProtoMessage()    {}
 func (*CMsgMotionBlur_AnimationFrameData) Descriptor() ([]byte, []int) {
-	return fileDescriptor25, []int{42, 0}
+	return fileDescriptor34, []int{42, 0}
 }
 
 func (m *CMsgMotionBlur_AnimationFrameData) GetData() *CMsgMotionBlurValues {
@@ -2951,7 +2951,7 @@ type CMsg3DTransformPerspective struct {
 func (m *CMsg3DTransformPerspective) Reset()                    { *m = CMsg3DTransformPerspective{} }
 func (m *CMsg3DTransformPerspective) String() string            { return proto.CompactTextString(m) }
 func (*CMsg3DTransformPerspective) ProtoMessage()               {}
-func (*CMsg3DTransformPerspective) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{43} }
+func (*CMsg3DTransformPerspective) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{43} }
 
 func (m *CMsg3DTransformPerspective) GetBase() float64 {
 	if m != nil && m.Base != nil {
@@ -3002,7 +3002,7 @@ func (m *CMsg3DTransformPerspective_AnimationFrameData) String() string {
 }
 func (*CMsg3DTransformPerspective_AnimationFrameData) ProtoMessage() {}
 func (*CMsg3DTransformPerspective_AnimationFrameData) Descriptor() ([]byte, []int) {
-	return fileDescriptor25, []int{43, 0}
+	return fileDescriptor34, []int{43, 0}
 }
 
 func (m *CMsg3DTransformPerspective_AnimationFrameData) GetData() float64 {
@@ -3024,7 +3024,7 @@ func (m *CMsg3DTransformPerspectiveOrigin) Reset()         { *m = CMsg3DTransfor
 func (m *CMsg3DTransformPerspectiveOrigin) String() string { return proto.CompactTextString(m) }
 func (*CMsg3DTransformPerspectiveOrigin) ProtoMessage()    {}
 func (*CMsg3DTransformPerspectiveOrigin) Descriptor() ([]byte, []int) {
-	return fileDescriptor25, []int{44}
+	return fileDescriptor34, []int{44}
 }
 
 func (m *CMsg3DTransformPerspectiveOrigin) GetBase() *CMsgPoint {
@@ -3076,7 +3076,7 @@ func (m *CMsg3DTransformPerspectiveOrigin_AnimationFrameData) String() string {
 }
 func (*CMsg3DTransformPerspectiveOrigin_AnimationFrameData) ProtoMessage() {}
 func (*CMsg3DTransformPerspectiveOrigin_AnimationFrameData) Descriptor() ([]byte, []int) {
-	return fileDescriptor25, []int{44, 0}
+	return fileDescriptor34, []int{44, 0}
 }
 
 func (m *CMsg3DTransformPerspectiveOrigin_AnimationFrameData) GetData() *CMsgPoint {
@@ -3098,7 +3098,7 @@ type CMsgTransformOriginData struct {
 func (m *CMsgTransformOriginData) Reset()                    { *m = CMsgTransformOriginData{} }
 func (m *CMsgTransformOriginData) String() string            { return proto.CompactTextString(m) }
 func (*CMsgTransformOriginData) ProtoMessage()               {}
-func (*CMsgTransformOriginData) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{45} }
+func (*CMsgTransformOriginData) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{45} }
 
 func (m *CMsgTransformOriginData) GetX() float64 {
 	if m != nil && m.X != nil {
@@ -3146,7 +3146,7 @@ type CMsg3DTransformOrigin struct {
 func (m *CMsg3DTransformOrigin) Reset()                    { *m = CMsg3DTransformOrigin{} }
 func (m *CMsg3DTransformOrigin) String() string            { return proto.CompactTextString(m) }
 func (*CMsg3DTransformOrigin) ProtoMessage()               {}
-func (*CMsg3DTransformOrigin) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{46} }
+func (*CMsg3DTransformOrigin) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{46} }
 
 func (m *CMsg3DTransformOrigin) GetBase() *CMsgTransformOriginData {
 	if m != nil {
@@ -3195,7 +3195,7 @@ func (m *CMsg3DTransformOrigin_AnimationFrameData) Reset() {
 func (m *CMsg3DTransformOrigin_AnimationFrameData) String() string { return proto.CompactTextString(m) }
 func (*CMsg3DTransformOrigin_AnimationFrameData) ProtoMessage()    {}
 func (*CMsg3DTransformOrigin_AnimationFrameData) Descriptor() ([]byte, []int) {
-	return fileDescriptor25, []int{46, 0}
+	return fileDescriptor34, []int{46, 0}
 }
 
 func (m *CMsg3DTransformOrigin_AnimationFrameData) GetData() *CMsgTransformOriginData {
@@ -3216,7 +3216,7 @@ type CMsg3DTransformMatrix struct {
 func (m *CMsg3DTransformMatrix) Reset()                    { *m = CMsg3DTransformMatrix{} }
 func (m *CMsg3DTransformMatrix) String() string            { return proto.CompactTextString(m) }
 func (*CMsg3DTransformMatrix) ProtoMessage()               {}
-func (*CMsg3DTransformMatrix) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{47} }
+func (*CMsg3DTransformMatrix) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{47} }
 
 func (m *CMsg3DTransformMatrix) GetBase() *CMsgMatrix4X4 {
 	if m != nil {
@@ -3265,7 +3265,7 @@ func (m *CMsg3DTransformMatrix_AnimationFrameData) Reset() {
 func (m *CMsg3DTransformMatrix_AnimationFrameData) String() string { return proto.CompactTextString(m) }
 func (*CMsg3DTransformMatrix_AnimationFrameData) ProtoMessage()    {}
 func (*CMsg3DTransformMatrix_AnimationFrameData) Descriptor() ([]byte, []int) {
-	return fileDescriptor25, []int{47, 0}
+	return fileDescriptor34, []int{47, 0}
 }
 
 func (m *CMsg3DTransformMatrix_AnimationFrameData) GetData() *CMsgMatrix4X4 {
@@ -3286,7 +3286,7 @@ type CMsgBorderRadius struct {
 func (m *CMsgBorderRadius) Reset()                    { *m = CMsgBorderRadius{} }
 func (m *CMsgBorderRadius) String() string            { return proto.CompactTextString(m) }
 func (*CMsgBorderRadius) ProtoMessage()               {}
-func (*CMsgBorderRadius) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{48} }
+func (*CMsgBorderRadius) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{48} }
 
 func (m *CMsgBorderRadius) GetBase() *CRadiusData {
 	if m != nil {
@@ -3333,7 +3333,7 @@ func (m *CMsgBorderRadius_AnimationFrameData) Reset()         { *m = CMsgBorderR
 func (m *CMsgBorderRadius_AnimationFrameData) String() string { return proto.CompactTextString(m) }
 func (*CMsgBorderRadius_AnimationFrameData) ProtoMessage()    {}
 func (*CMsgBorderRadius_AnimationFrameData) Descriptor() ([]byte, []int) {
-	return fileDescriptor25, []int{48, 0}
+	return fileDescriptor34, []int{48, 0}
 }
 
 func (m *CMsgBorderRadius_AnimationFrameData) GetData() *CRadiusData {
@@ -3354,7 +3354,7 @@ type CMsgBorder struct {
 func (m *CMsgBorder) Reset()                    { *m = CMsgBorder{} }
 func (m *CMsgBorder) String() string            { return proto.CompactTextString(m) }
 func (*CMsgBorder) ProtoMessage()               {}
-func (*CMsgBorder) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{49} }
+func (*CMsgBorder) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{49} }
 
 func (m *CMsgBorder) GetBase() *CBorderData {
 	if m != nil {
@@ -3401,7 +3401,7 @@ func (m *CMsgBorder_AnimationFrameData) Reset()         { *m = CMsgBorder_Animat
 func (m *CMsgBorder_AnimationFrameData) String() string { return proto.CompactTextString(m) }
 func (*CMsgBorder_AnimationFrameData) ProtoMessage()    {}
 func (*CMsgBorder_AnimationFrameData) Descriptor() ([]byte, []int) {
-	return fileDescriptor25, []int{49, 0}
+	return fileDescriptor34, []int{49, 0}
 }
 
 func (m *CMsgBorder_AnimationFrameData) GetData() *CBorderData {
@@ -3422,7 +3422,7 @@ type CMsgBoxShadow struct {
 func (m *CMsgBoxShadow) Reset()                    { *m = CMsgBoxShadow{} }
 func (m *CMsgBoxShadow) String() string            { return proto.CompactTextString(m) }
 func (*CMsgBoxShadow) ProtoMessage()               {}
-func (*CMsgBoxShadow) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{50} }
+func (*CMsgBoxShadow) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{50} }
 
 func (m *CMsgBoxShadow) GetBase() *CBoxShadowData {
 	if m != nil {
@@ -3469,7 +3469,7 @@ func (m *CMsgBoxShadow_AnimationFrameData) Reset()         { *m = CMsgBoxShadow_
 func (m *CMsgBoxShadow_AnimationFrameData) String() string { return proto.CompactTextString(m) }
 func (*CMsgBoxShadow_AnimationFrameData) ProtoMessage()    {}
 func (*CMsgBoxShadow_AnimationFrameData) Descriptor() ([]byte, []int) {
-	return fileDescriptor25, []int{50, 0}
+	return fileDescriptor34, []int{50, 0}
 }
 
 func (m *CMsgBoxShadow_AnimationFrameData) GetData() *CBoxShadowData {
@@ -3490,7 +3490,7 @@ type CMsgTextShadow struct {
 func (m *CMsgTextShadow) Reset()                    { *m = CMsgTextShadow{} }
 func (m *CMsgTextShadow) String() string            { return proto.CompactTextString(m) }
 func (*CMsgTextShadow) ProtoMessage()               {}
-func (*CMsgTextShadow) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{51} }
+func (*CMsgTextShadow) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{51} }
 
 func (m *CMsgTextShadow) GetBase() *CTextShadowData {
 	if m != nil {
@@ -3537,7 +3537,7 @@ func (m *CMsgTextShadow_AnimationFrameData) Reset()         { *m = CMsgTextShado
 func (m *CMsgTextShadow_AnimationFrameData) String() string { return proto.CompactTextString(m) }
 func (*CMsgTextShadow_AnimationFrameData) ProtoMessage()    {}
 func (*CMsgTextShadow_AnimationFrameData) Descriptor() ([]byte, []int) {
-	return fileDescriptor25, []int{51, 0}
+	return fileDescriptor34, []int{51, 0}
 }
 
 func (m *CMsgTextShadow_AnimationFrameData) GetData() *CTextShadowData {
@@ -3558,7 +3558,7 @@ type CMsgClip struct {
 func (m *CMsgClip) Reset()                    { *m = CMsgClip{} }
 func (m *CMsgClip) String() string            { return proto.CompactTextString(m) }
 func (*CMsgClip) ProtoMessage()               {}
-func (*CMsgClip) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{52} }
+func (*CMsgClip) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{52} }
 
 func (m *CMsgClip) GetBase() *CMsgClipData {
 	if m != nil {
@@ -3605,7 +3605,7 @@ func (m *CMsgClip_AnimationFrameData) Reset()         { *m = CMsgClip_AnimationF
 func (m *CMsgClip_AnimationFrameData) String() string { return proto.CompactTextString(m) }
 func (*CMsgClip_AnimationFrameData) ProtoMessage()    {}
 func (*CMsgClip_AnimationFrameData) Descriptor() ([]byte, []int) {
-	return fileDescriptor25, []int{52, 0}
+	return fileDescriptor34, []int{52, 0}
 }
 
 func (m *CMsgClip_AnimationFrameData) GetData() *CMsgClipData {
@@ -3625,7 +3625,7 @@ type CMsgPushClipLayer struct {
 func (m *CMsgPushClipLayer) Reset()                    { *m = CMsgPushClipLayer{} }
 func (m *CMsgPushClipLayer) String() string            { return proto.CompactTextString(m) }
 func (*CMsgPushClipLayer) ProtoMessage()               {}
-func (*CMsgPushClipLayer) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{53} }
+func (*CMsgPushClipLayer) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{53} }
 
 func (m *CMsgPushClipLayer) GetTopLeft() *CMsgPoint {
 	if m != nil {
@@ -3655,7 +3655,7 @@ type CMsgPopClipLayer struct {
 func (m *CMsgPopClipLayer) Reset()                    { *m = CMsgPopClipLayer{} }
 func (m *CMsgPopClipLayer) String() string            { return proto.CompactTextString(m) }
 func (*CMsgPopClipLayer) ProtoMessage()               {}
-func (*CMsgPopClipLayer) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{54} }
+func (*CMsgPopClipLayer) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{54} }
 
 type CMsgPushPanelContextInLayer struct {
 	TransformM00     *float64        `protobuf:"fixed64,1,opt,name=transform_m00" json:"transform_m00,omitempty"`
@@ -3689,7 +3689,7 @@ type CMsgPushPanelContextInLayer struct {
 func (m *CMsgPushPanelContextInLayer) Reset()                    { *m = CMsgPushPanelContextInLayer{} }
 func (m *CMsgPushPanelContextInLayer) String() string            { return proto.CompactTextString(m) }
 func (*CMsgPushPanelContextInLayer) ProtoMessage()               {}
-func (*CMsgPushPanelContextInLayer) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{55} }
+func (*CMsgPushPanelContextInLayer) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{55} }
 
 func (m *CMsgPushPanelContextInLayer) GetTransformM00() float64 {
 	if m != nil && m.TransformM00 != nil {
@@ -3873,7 +3873,7 @@ type CMsgPopPanelContextInLayer struct {
 func (m *CMsgPopPanelContextInLayer) Reset()                    { *m = CMsgPopPanelContextInLayer{} }
 func (m *CMsgPopPanelContextInLayer) String() string            { return proto.CompactTextString(m) }
 func (*CMsgPopPanelContextInLayer) ProtoMessage()               {}
-func (*CMsgPopPanelContextInLayer) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{56} }
+func (*CMsgPopPanelContextInLayer) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{56} }
 
 type CMsgPushAAndTContext struct {
 	ContextId                  *uint64                           `protobuf:"varint,1,opt,name=context_id" json:"context_id,omitempty"`
@@ -3918,7 +3918,7 @@ type CMsgPushAAndTContext struct {
 func (m *CMsgPushAAndTContext) Reset()                    { *m = CMsgPushAAndTContext{} }
 func (m *CMsgPushAAndTContext) String() string            { return proto.CompactTextString(m) }
 func (*CMsgPushAAndTContext) ProtoMessage()               {}
-func (*CMsgPushAAndTContext) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{57} }
+func (*CMsgPushAAndTContext) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{57} }
 
 func (m *CMsgPushAAndTContext) GetContextId() uint64 {
 	if m != nil && m.ContextId != nil {
@@ -4180,7 +4180,7 @@ type CMsgPopAAndTContext struct {
 func (m *CMsgPopAAndTContext) Reset()                    { *m = CMsgPopAAndTContext{} }
 func (m *CMsgPopAAndTContext) String() string            { return proto.CompactTextString(m) }
 func (*CMsgPopAAndTContext) ProtoMessage()               {}
-func (*CMsgPopAAndTContext) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{58} }
+func (*CMsgPopAAndTContext) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{58} }
 
 func (m *CMsgPopAAndTContext) GetContextId() uint64 {
 	if m != nil && m.ContextId != nil {
@@ -4196,7 +4196,7 @@ type CMsgBeginPaintBackground struct {
 func (m *CMsgBeginPaintBackground) Reset()                    { *m = CMsgBeginPaintBackground{} }
 func (m *CMsgBeginPaintBackground) String() string            { return proto.CompactTextString(m) }
 func (*CMsgBeginPaintBackground) ProtoMessage()               {}
-func (*CMsgBeginPaintBackground) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{59} }
+func (*CMsgBeginPaintBackground) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{59} }
 
 type CMsgEndPaintBackground struct {
 	XXX_unrecognized []byte `json:"-"`
@@ -4205,7 +4205,7 @@ type CMsgEndPaintBackground struct {
 func (m *CMsgEndPaintBackground) Reset()                    { *m = CMsgEndPaintBackground{} }
 func (m *CMsgEndPaintBackground) String() string            { return proto.CompactTextString(m) }
 func (*CMsgEndPaintBackground) ProtoMessage()               {}
-func (*CMsgEndPaintBackground) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{60} }
+func (*CMsgEndPaintBackground) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{60} }
 
 type CMsgBeginPaintLast struct {
 	XXX_unrecognized []byte `json:"-"`
@@ -4214,7 +4214,7 @@ type CMsgBeginPaintLast struct {
 func (m *CMsgBeginPaintLast) Reset()                    { *m = CMsgBeginPaintLast{} }
 func (m *CMsgBeginPaintLast) String() string            { return proto.CompactTextString(m) }
 func (*CMsgBeginPaintLast) ProtoMessage()               {}
-func (*CMsgBeginPaintLast) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{61} }
+func (*CMsgBeginPaintLast) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{61} }
 
 type CMsgEndPaintLast struct {
 	XXX_unrecognized []byte `json:"-"`
@@ -4223,7 +4223,7 @@ type CMsgEndPaintLast struct {
 func (m *CMsgEndPaintLast) Reset()                    { *m = CMsgEndPaintLast{} }
 func (m *CMsgEndPaintLast) String() string            { return proto.CompactTextString(m) }
 func (*CMsgEndPaintLast) ProtoMessage()               {}
-func (*CMsgEndPaintLast) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{62} }
+func (*CMsgEndPaintLast) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{62} }
 
 type CMsgDrawFilledRect struct {
 	TopLeft             *CMsgPoint               `protobuf:"bytes,1,opt,name=top_left" json:"top_left,omitempty"`
@@ -4236,7 +4236,7 @@ type CMsgDrawFilledRect struct {
 func (m *CMsgDrawFilledRect) Reset()                    { *m = CMsgDrawFilledRect{} }
 func (m *CMsgDrawFilledRect) String() string            { return proto.CompactTextString(m) }
 func (*CMsgDrawFilledRect) ProtoMessage()               {}
-func (*CMsgDrawFilledRect) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{63} }
+func (*CMsgDrawFilledRect) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{63} }
 
 func (m *CMsgDrawFilledRect) GetTopLeft() *CMsgPoint {
 	if m != nil {
@@ -4277,7 +4277,7 @@ type CMsgRenderFilledRect struct {
 func (m *CMsgRenderFilledRect) Reset()                    { *m = CMsgRenderFilledRect{} }
 func (m *CMsgRenderFilledRect) String() string            { return proto.CompactTextString(m) }
 func (*CMsgRenderFilledRect) ProtoMessage()               {}
-func (*CMsgRenderFilledRect) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{64} }
+func (*CMsgRenderFilledRect) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{64} }
 
 func (m *CMsgRenderFilledRect) GetTopLeft() *CMsgPoint {
 	if m != nil {
@@ -4322,7 +4322,7 @@ type CMsgDrawTexturedRect struct {
 func (m *CMsgDrawTexturedRect) Reset()                    { *m = CMsgDrawTexturedRect{} }
 func (m *CMsgDrawTexturedRect) String() string            { return proto.CompactTextString(m) }
 func (*CMsgDrawTexturedRect) ProtoMessage()               {}
-func (*CMsgDrawTexturedRect) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{65} }
+func (*CMsgDrawTexturedRect) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{65} }
 
 const Default_CMsgDrawTexturedRect_TextureSerial int32 = 0
 const Default_CMsgDrawTexturedRect_TextureSampleMode uint32 = 0
@@ -4395,7 +4395,7 @@ type CMsgDrawDoubleBufferedRect struct {
 func (m *CMsgDrawDoubleBufferedRect) Reset()                    { *m = CMsgDrawDoubleBufferedRect{} }
 func (m *CMsgDrawDoubleBufferedRect) String() string            { return proto.CompactTextString(m) }
 func (*CMsgDrawDoubleBufferedRect) ProtoMessage()               {}
-func (*CMsgDrawDoubleBufferedRect) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{66} }
+func (*CMsgDrawDoubleBufferedRect) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{66} }
 
 func (m *CMsgDrawDoubleBufferedRect) GetTopLeft() *CMsgPoint {
 	if m != nil {
@@ -4445,7 +4445,7 @@ func (m *CMsgDrawYUV420DoubleBufferedRect) Reset()         { *m = CMsgDrawYUV420
 func (m *CMsgDrawYUV420DoubleBufferedRect) String() string { return proto.CompactTextString(m) }
 func (*CMsgDrawYUV420DoubleBufferedRect) ProtoMessage()    {}
 func (*CMsgDrawYUV420DoubleBufferedRect) Descriptor() ([]byte, []int) {
-	return fileDescriptor25, []int{67}
+	return fileDescriptor34, []int{67}
 }
 
 func (m *CMsgDrawYUV420DoubleBufferedRect) GetTopLeft() *CMsgPoint {
@@ -4498,7 +4498,7 @@ type CMsgRenderTexturedRect struct {
 func (m *CMsgRenderTexturedRect) Reset()                    { *m = CMsgRenderTexturedRect{} }
 func (m *CMsgRenderTexturedRect) String() string            { return proto.CompactTextString(m) }
 func (*CMsgRenderTexturedRect) ProtoMessage()               {}
-func (*CMsgRenderTexturedRect) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{68} }
+func (*CMsgRenderTexturedRect) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{68} }
 
 const Default_CMsgRenderTexturedRect_TextureSerial int32 = 0
 const Default_CMsgRenderTexturedRect_TextureSampleMode uint32 = 0
@@ -4569,7 +4569,7 @@ type CMsgLockTexture struct {
 func (m *CMsgLockTexture) Reset()                    { *m = CMsgLockTexture{} }
 func (m *CMsgLockTexture) String() string            { return proto.CompactTextString(m) }
 func (*CMsgLockTexture) ProtoMessage()               {}
-func (*CMsgLockTexture) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{69} }
+func (*CMsgLockTexture) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{69} }
 
 const Default_CMsgLockTexture_TextureSerial int32 = 0
 
@@ -4596,7 +4596,7 @@ type CMsgTextInlineObject struct {
 func (m *CMsgTextInlineObject) Reset()                    { *m = CMsgTextInlineObject{} }
 func (m *CMsgTextInlineObject) String() string            { return proto.CompactTextString(m) }
 func (*CMsgTextInlineObject) ProtoMessage()               {}
-func (*CMsgTextInlineObject) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{70} }
+func (*CMsgTextInlineObject) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{70} }
 
 func (m *CMsgTextInlineObject) GetWidth() float32 {
 	if m != nil && m.Width != nil {
@@ -4628,7 +4628,7 @@ type CMsgTextFormat struct {
 func (m *CMsgTextFormat) Reset()                    { *m = CMsgTextFormat{} }
 func (m *CMsgTextFormat) String() string            { return proto.CompactTextString(m) }
 func (*CMsgTextFormat) ProtoMessage()               {}
-func (*CMsgTextFormat) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{71} }
+func (*CMsgTextFormat) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{71} }
 
 const Default_CMsgTextFormat_FontWeight int32 = -1
 const Default_CMsgTextFormat_FontStyle int32 = -1
@@ -4707,7 +4707,7 @@ type CMsgTextRangeFormat struct {
 func (m *CMsgTextRangeFormat) Reset()                    { *m = CMsgTextRangeFormat{} }
 func (m *CMsgTextRangeFormat) String() string            { return proto.CompactTextString(m) }
 func (*CMsgTextRangeFormat) ProtoMessage()               {}
-func (*CMsgTextRangeFormat) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{72} }
+func (*CMsgTextRangeFormat) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{72} }
 
 func (m *CMsgTextRangeFormat) GetStartIndex() uint32 {
 	if m != nil && m.StartIndex != nil {
@@ -4746,7 +4746,7 @@ type CMsgRenderTextFormat struct {
 func (m *CMsgRenderTextFormat) Reset()                    { *m = CMsgRenderTextFormat{} }
 func (m *CMsgRenderTextFormat) String() string            { return proto.CompactTextString(m) }
 func (*CMsgRenderTextFormat) ProtoMessage()               {}
-func (*CMsgRenderTextFormat) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{73} }
+func (*CMsgRenderTextFormat) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{73} }
 
 const Default_CMsgRenderTextFormat_FontWeight int32 = -1
 const Default_CMsgRenderTextFormat_FontStyle int32 = -1
@@ -4825,7 +4825,7 @@ type CMsgRenderTextRangeFormat struct {
 func (m *CMsgRenderTextRangeFormat) Reset()                    { *m = CMsgRenderTextRangeFormat{} }
 func (m *CMsgRenderTextRangeFormat) String() string            { return proto.CompactTextString(m) }
 func (*CMsgRenderTextRangeFormat) ProtoMessage()               {}
-func (*CMsgRenderTextRangeFormat) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{74} }
+func (*CMsgRenderTextRangeFormat) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{74} }
 
 func (m *CMsgRenderTextRangeFormat) GetStartIndex() uint32 {
 	if m != nil && m.StartIndex != nil {
@@ -4866,7 +4866,7 @@ type CMsgDrawTextRegion struct {
 func (m *CMsgDrawTextRegion) Reset()                    { *m = CMsgDrawTextRegion{} }
 func (m *CMsgDrawTextRegion) String() string            { return proto.CompactTextString(m) }
 func (*CMsgDrawTextRegion) ProtoMessage()               {}
-func (*CMsgDrawTextRegion) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{75} }
+func (*CMsgDrawTextRegion) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{75} }
 
 func (m *CMsgDrawTextRegion) GetRawText() []byte {
 	if m != nil {
@@ -4964,7 +4964,7 @@ type CMsgRenderTextRegion struct {
 func (m *CMsgRenderTextRegion) Reset()                    { *m = CMsgRenderTextRegion{} }
 func (m *CMsgRenderTextRegion) String() string            { return proto.CompactTextString(m) }
 func (*CMsgRenderTextRegion) ProtoMessage()               {}
-func (*CMsgRenderTextRegion) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{76} }
+func (*CMsgRenderTextRegion) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{76} }
 
 func (m *CMsgRenderTextRegion) GetRawText() []byte {
 	if m != nil {
@@ -5063,7 +5063,7 @@ type CMsgRequestRenderCallback struct {
 func (m *CMsgRequestRenderCallback) Reset()                    { *m = CMsgRequestRenderCallback{} }
 func (m *CMsgRequestRenderCallback) String() string            { return proto.CompactTextString(m) }
 func (*CMsgRequestRenderCallback) ProtoMessage()               {}
-func (*CMsgRequestRenderCallback) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{77} }
+func (*CMsgRequestRenderCallback) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{77} }
 
 func (m *CMsgRequestRenderCallback) GetCallbackObj() []byte {
 	if m != nil {
@@ -5234,7 +5234,7 @@ func init() {
 	proto.RegisterExtension(E_CMsgClip_AnimationFrameData)
 }
 
-var fileDescriptor25 = []byte{
+var fileDescriptor34 = []byte{
 	// 4660 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xe4, 0x7c, 0xcb, 0x6f, 0x1c, 0x49,
 	0x72, 0xf7, 0xd7, 0xc5, 0xe6, 0x2b, 0xc9, 0xe6, 0xa3, 0xf8, 0x50, 0x89, 0x92, 0x46, 0x54, 0x69,

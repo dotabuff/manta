@@ -46,7 +46,7 @@ func (x *EProtoExecutionSite) UnmarshalJSON(data []byte) error {
 	*x = EProtoExecutionSite(value)
 	return nil
 }
-func (EProtoExecutionSite) EnumDescriptor() ([]byte, []int) { return fileDescriptor31, []int{0} }
+func (EProtoExecutionSite) EnumDescriptor() ([]byte, []int) { return fileDescriptor40, []int{0} }
 
 var E_Description = &proto.ExtensionDesc{
 	ExtendedType:  (*google_protobuf.FieldOptions)(nil),
@@ -106,7 +106,7 @@ func init() {
 	proto.RegisterExtension(E_EnumValueDescription)
 }
 
-var fileDescriptor31 = []byte{
+var fileDescriptor40 = []byte{
 	// 307 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x84, 0x90, 0x4f, 0x4b, 0xc3, 0x40,
 	0x10, 0xc5, 0x5b, 0xaa, 0x07, 0x57, 0x90, 0x90, 0x42, 0x51, 0xa9, 0x1a, 0xc1, 0x83, 0x78, 0xd8,

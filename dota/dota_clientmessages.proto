@@ -60,6 +60,7 @@ enum EDotaClientMessages {
 	DOTA_CM_MatchMetadata = 354;
 	DOTA_CM_KillMyHero = 355;
 	DOTA_CM_QuestStatus = 356;
+	DOTA_CM_ToggleAutoattack = 357;
 }
 
 message CDOTAClientMsg_MapPing {
@@ -317,5 +318,10 @@ message CDOTAClientMsg_QuestStatus {
 	optional uint32 query = 5;
 	optional float fail_gametime = 6;
 	optional uint32 item_id = 7;
+}
+
+message CDOTAClientMsg_ToggleAutoattack {
+	optional int32 mode = 1;
+	optional bool show_message = 2;
 }
 
