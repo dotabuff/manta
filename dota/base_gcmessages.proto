@@ -18,7 +18,6 @@ enum EGCBaseMsg {
 	k_EMsgGCClientConnectToServer = 4507;
 	k_EMsgGCGameServerInfo = 4508;
 	k_EMsgGCError = 4509;
-	k_EMsgGCReplay_UploadedToYouTube = 4510;
 	k_EMsgGCLANServerAvailable = 4511;
 	k_EMsgGCInviteToLobby = 4512;
 	k_EMsgGCLobbyInviteResponse = 4513;
@@ -280,12 +279,6 @@ message CMsgConVarValue {
 
 message CMsgReplicateConVars {
 	repeated CMsgConVarValue convars = 1;
-}
-
-message CMsgReplayUploadedToYouTube {
-	optional string youtube_url = 1;
-	optional string youtube_account_name = 2;
-	optional uint64 session_id = 3;
 }
 
 message CMsgConsumableExhausted {

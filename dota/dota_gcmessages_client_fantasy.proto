@@ -794,7 +794,6 @@ message CMsgDOTAFantasyPlayerScoreDetailsResponse {
 		optional uint32 opposing_team_id = 7;
 		optional uint64 opposing_team_logo = 8;
 		optional string opposing_team_name = 9;
-		optional CMsgFantasyLeagueScoring stats = 10;
 		optional uint32 owned_by = 11;
 		optional bool benched = 12;
 	}
@@ -834,5 +833,47 @@ message CMsgDOTAPassportVote {
 	repeated CMsgDOTAPassportVoteGenericSelection generic_selections = 2;
 	repeated CMsgDOTAPassportStampedPlayer stamped_players = 3;
 	repeated CMsgDOTAPassportPlayerCardChallenge player_card_challenges = 4;
+}
+
+message CMsgClientToGCGetPlayerCardRosterRequest {
+	optional uint32 league_id = 1;
+	optional uint32 timestamp = 2;
+}
+
+message CMsgClientToGCGetPlayerCardRosterResponse {
+	enum Result {
+		SUCCESS = 0;
+		ERROR_UNSPECIFIED = 1;
+		ERROR_INVALID_LEAGUE_ID = 2;
+		ERROR_INVALID_TIMESTAMP = 3;
+	}
+
+	optional CMsgClientToGCGetPlayerCardRosterResponse.Result result = 1 [default = SUCCESS];
+	repeated uint64 player_card_item_id = 2;
+	optional float score = 3;
+	optional bool finalized = 4;
+}
+
+message CMsgClientToGCSetPlayerCardRosterRequest {
+	optional uint32 league_id = 1;
+	optional uint32 timestamp = 2;
+	optional uint32 slot = 3;
+	optional uint64 player_card_item_id = 4;
+}
+
+message CMsgClientToGCSetPlayerCardRosterResponse {
+	enum Result {
+		SUCCESS = 0;
+		ERROR_UNSPECIFIED = 1;
+		ERROR_INVALID_LEAGUE_ID = 2;
+		ERROR_INVALID_TIMESTAMP = 3;
+		ERROR_PLAYER_CARD_NOT_OWNED = 4;
+		ERROR_INVALID_SLOT = 5;
+		ERROR_FAILED_CARD_INFO = 6;
+		ERROR_ACCOUNT_DUPLICATE = 7;
+		ERROR_LOCKED_TIMESTAMP = 8;
+	}
+
+	optional CMsgClientToGCSetPlayerCardRosterResponse.Result result = 1 [default = SUCCESS];
 }
 

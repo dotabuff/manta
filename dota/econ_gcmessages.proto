@@ -153,7 +153,6 @@ enum EGCItemMsg {
 	k_EMsgGCToGCCheckAccountTradeStatusResponse = 2553;
 	k_EMsgGCToGCGrantAccountRolledItems = 2554;
 	k_EMsgGCToGCGrantSelfMadeItemToAccount = 2555;
-	k_EMsgSQLUpgradeBattleBooster = 2556;
 	k_EMsgGCPartnerBalanceRequest = 2557;
 	k_EMsgGCPartnerBalanceResponse = 2558;
 	k_EMsgGCPartnerRechargeRedirectURLRequest = 2559;

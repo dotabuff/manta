@@ -23,6 +23,7 @@ update-game-tracking:
 gen-dota-proto:
 	rm -f dota/*.proto dota/*.pb.go
 	cp -f game-tracking/Protobufs/dota/*.proto dota/
+	rm -f dota/gametoolevents.proto
 	sed -i 's/^\(\s*\)\(optional\|repeated\|required\|extend\)\s*\./\1\2 /' dota/*.proto
 	sed -i 's!^\s*rpc\s*\(\S*\)\s*(\.\([^)]*\))\s*returns\s*(\.\([^)]*\))\s*{!rpc \1 (\2) returns (\3) {!' dota/*.proto
 	sed -i '1ipackage dota;\n' dota/*.proto
