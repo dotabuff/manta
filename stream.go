@@ -6,24 +6,33 @@ import (
 	"github.com/dotabuff/manta/dota"
 )
 
+const buffer = 1024 * 100
+
 // stream wraps an io.Reader to provide functions necessary for reading the
 // outer replay structure.
 type stream struct {
-	r io.Reader
+	io.Reader
+	buf  []byte
+	size uint32
 }
 
 // newStream creates a new stream from a given io.Reader
 func newStream(r io.Reader) *stream {
-	return &stream{r}
+	return &stream{r, make([]byte, buffer), buffer}
 }
 
 // readBytes reads the given number of bytes from the reader
 func (s *stream) readBytes(n uint32) ([]byte, error) {
-	buf := make([]byte, n)
-	if _, err := io.ReadFull(s.r, buf); err != nil {
+	if n > s.size {
+		s.buf = make([]byte, n)
+		s.size = n
+	}
+
+	if _, err := io.ReadFull(s.Reader, s.buf[:n]); err != nil {
 		return nil, err
 	}
-	return buf, nil
+
+	return s.buf[:n], nil
 }
 
 // readByte reads a single byte from the reader
