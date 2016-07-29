@@ -417,7 +417,7 @@ func (s testScenario) bench(b *testing.B) {
 	b.ResetTimer()
 
 	for n := 0; n < b.N; n++ {
-		parser, err := NewParserFromReader(r)
+		parser, err := NewStreamParser(r)
 		if err != nil {
 			b.Fatalf("unable to instantiate parser: %s", err)
 		}
@@ -455,7 +455,7 @@ func (s testScenario) test(t *testing.T) {
 	r := mustGetReplayReader(s.matchId, s.replayUrl)
 	defer r.Close()
 
-	parser, err := NewParserFromReader(r)
+	parser, err := NewStreamParser(r)
 	if err != nil {
 		t.Errorf("unable to instantiate parser: %s", err)
 		return

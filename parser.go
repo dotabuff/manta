@@ -52,11 +52,11 @@ type Parser struct {
 // Create a new parser from a byte slice.
 func NewParser(buf []byte) (*Parser, error) {
 	r := bytes.NewReader(buf)
-	return NewParserFromReader(r)
+	return NewStreamParser(r)
 }
 
 // Create a new Parser from an io.Reader
-func NewParserFromReader(r io.Reader) (*Parser, error) {
+func NewStreamParser(r io.Reader) (*Parser, error) {
 	// Create a new parser with an internal reader for the given buffer.
 	parser := &Parser{
 		Callbacks: &Callbacks{},
