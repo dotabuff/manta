@@ -3,8 +3,10 @@ package manta
 import (
 	"compress/bzip2"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"net/http"
+	"os"
 )
 
 func mustGetReplayData(name string, url string) []byte {
@@ -13,6 +15,22 @@ func mustGetReplayData(name string, url string) []byte {
 		panic(err)
 	}
 	return buf
+}
+
+func mustGetReplayReader(name string, url string) io.ReadCloser {
+	for {
+		path := fmt.Sprintf("replays/%s.dem", name)
+		r, err := os.Open(path)
+		if err == nil {
+			return r
+		}
+
+		fmt.Printf("unable to find replay %s at %s, attemping repair...", name, path)
+		if _, err := getReplayData(name, url); err != nil {
+			panic(err)
+		}
+	}
+
 }
 
 func getReplayData(name string, url string) ([]byte, error) {

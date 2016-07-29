@@ -19,6 +19,7 @@ Use it to parse a replay:
 ```go
 import (
   "log"
+  "os"
 
   "github.com/dotabuff/manta"
   "github.com/dotabuff/manta/dota"
@@ -26,7 +27,13 @@ import (
 
 func main() {
   // Create a new parser instance from a file. Alternatively see NewParser([]byte)
-  p, err := manta.NewParserFromFile("my_replay.dem")
+  f, err := os.Open("my_replay.dem")
+  if err != nil {
+    log.Fatalf("unable to open file: %s", err)
+  }
+  defer f.Close()
+
+  p, err := manta.NewStreamParser(f)
   if err != nil {
     log.Fatalf("unable to create parser: %s", err)
   }

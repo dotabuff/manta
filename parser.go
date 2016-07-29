@@ -2,7 +2,7 @@ package manta
 
 import (
 	"bytes"
-	"io/ioutil"
+	"io"
 
 	"github.com/dotabuff/manta/dota"
 	"github.com/golang/snappy"
@@ -44,23 +44,19 @@ type Parser struct {
 	serializers             map[string]map[int32]*dt
 	stringTables            *stringTables
 
-	reader            *reader
+	stream            *stream
 	isStopping        bool
 	AfterStopCallback func()
 }
 
-// Create a new Parser from a file on disk.
-func NewParserFromFile(path string) (*Parser, error) {
-	buf, err := ioutil.ReadFile(path)
-	if err != nil {
-		return nil, err
-	}
-
-	return NewParser(buf)
-}
-
 // Create a new parser from a byte slice.
 func NewParser(buf []byte) (*Parser, error) {
+	r := bytes.NewReader(buf)
+	return NewStreamParser(r)
+}
+
+// Create a new Parser from an io.Reader
+func NewStreamParser(r io.Reader) (*Parser, error) {
 	// Create a new parser with an internal reader for the given buffer.
 	parser := &Parser{
 		Callbacks: &Callbacks{},
@@ -79,18 +75,22 @@ func NewParser(buf []byte) (*Parser, error) {
 		packetEntityHandlers: make([]packetEntityHandler, 0),
 		stringTables:         newStringTables(),
 
-		reader:     newReader(buf),
+		stream:     newStream(r),
 		isStopping: false,
 	}
 
 	// Parse out the header, ensuring that it's valid.
-	if magic := parser.reader.readBytes(8); !bytes.Equal(magic, magicSource2) {
+	magic, err := parser.stream.readBytes(8)
+	if err != nil {
+		return nil, err
+	}
+	if !bytes.Equal(magic, magicSource2) {
 		return nil, _errorf("unexpected magic: expected %s, got %s", magicSource2, magic)
 	}
 
 	// Skip the next 8 bytes, which appear to be two int32s related to the size
 	// of the demo file. We may need them in the future, but not so far.
-	parser.reader.readBytes(8)
+	parser.stream.readBytes(8)
 
 	// Internal handlers
 	parser.Callbacks.OnCDemoPacket(parser.onCDemoPacket)
@@ -124,16 +124,17 @@ func (p *Parser) Start() error {
 	// Loop through all outer messages until we're signaled to stop. Stopping
 	// happens when either the OnCDemoStop message is encountered or
 	// parser.Stop() is called programatically.
-	for !p.isStopping && p.reader.remBytes() > 0 {
-		// Read the next outer message.
-		if msg, err = p.readOuterMessage(); err != nil {
+	for !p.isStopping {
+		msg, err = p.readOuterMessage()
+		if err != nil {
+			if err == io.EOF {
+				return nil
+			}
 			return err
 		}
 
-		// Update the parser tick
 		p.Tick = msg.tick
 
-		// Invoke callbacks for the given message type.
 		if err = p.Callbacks.callByDemoType(msg.typeId, msg.data); err != nil {
 			return err
 		}
@@ -180,14 +181,20 @@ func (p *Parser) readOuterMessage() (*outerMessage, error) {
 	// Read a command header, which includes both the message type
 	// well as a flag to determine whether or not whether or not the
 	// message is compressed with snappy.
-	command := dota.EDemoCommands(p.reader.readVarUint32())
+	command, err := p.stream.readCommand()
+	if err != nil {
+		return nil, err
+	}
 
 	// Extract the type and compressed flag out of the command
 	msgType := int32(command & ^dota.EDemoCommands_DEM_IsCompressed)
 	msgCompressed := (command & dota.EDemoCommands_DEM_IsCompressed) == dota.EDemoCommands_DEM_IsCompressed
 
 	// Read the tick that the message corresponds with.
-	tick := p.reader.readVarUint32()
+	tick, err := p.stream.readVarUint32()
+	if err != nil {
+		return nil, err
+	}
 
 	// This appears to actually be an int32, where a -1 means pre-game.
 	if tick == 4294967295 {
@@ -195,8 +202,15 @@ func (p *Parser) readOuterMessage() (*outerMessage, error) {
 	}
 
 	// Read the size and following buffer.
-	size := p.reader.readVarUint32()
-	buf := p.reader.readBytes(size)
+	size, err := p.stream.readVarUint32()
+	if err != nil {
+		return nil, err
+	}
+
+	buf, err := p.stream.readBytes(size)
+	if err != nil {
+		return nil, err
+	}
 
 	// If the buffer is compressed, decompress it with snappy.
 	if msgCompressed {
