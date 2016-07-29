@@ -1,9 +1,11 @@
 package dota;
 
 import "steammessages.proto";
+import "dota_shared_enums.proto";
 import "dota_gcmessages_common.proto";
 import "econ_gcmessages.proto";
 import "network_connection.proto";
+import "dota_gcmessages_common_match_management.proto";
 
 option optimize_for = SPEED;
 option cc_generic_services = false;
@@ -57,18 +59,6 @@ enum ESuspiciousBuildType {
 	k_ESuspiciousBuildType_Bot5 = 105;
 }
 
-message CMsgSpawnLootGreevil {
-	optional bool rare = 1;
-}
-
-message CMsgDismissLootGreevil {
-	optional bool killed = 2;
-	optional bool rare = 3;
-}
-
-message CMsgDismissLootGreevilResponse {
-}
-
 message CMsgPoorNetworkConditions {
 	message Player {
 		optional uint32 account_id = 1;
@@ -87,6 +77,7 @@ message CMsgGameserverCrash {
 	optional DOTA_GameState game_state = 3 [default = DOTA_GAMERULES_STATE_INIT];
 	optional fixed32 sentinel_save_time = 4;
 	optional fixed64 custom_game_id = 11;
+	optional uint32 tournament_id = 12;
 	optional fixed64 server_steam_id = 5;
 	optional fixed32 server_public_ip_addr = 6;
 	optional uint32 server_port = 7;
@@ -182,25 +173,12 @@ message CMsgLeaverDetectedResponse {
 	optional uint32 result = 1;
 }
 
-message CMsgDOTAFantasyPlayerStats {
-	optional uint32 player_account_id = 1;
-	optional uint64 match_id = 2;
-	optional bool match_completed = 3;
-	optional uint32 level = 4;
-	optional uint32 kills = 5;
-	optional uint32 deaths = 6;
-	optional uint32 assists = 7;
-	optional uint32 last_hits = 8;
-	optional uint32 denies = 9;
-	optional float gpm = 10;
-	optional float xppm = 11;
-	optional float stuns = 12;
-	optional float healing = 13;
-	optional uint32 tower_kills = 14;
-	optional uint32 roshan_kills = 15;
-	optional uint32 team_id = 16;
-	optional uint32 league_id = 17;
-	optional uint32 delay = 18;
+message CMsgDOTAFantasyFinalPlayerStats {
+	repeated CMsgDOTAFantasyPlayerStats stats = 2;
+}
+
+message CMsgDOTAFantasyLivePlayerStats {
+	repeated CMsgDOTAFantasyPlayerStats stats = 2;
 }
 
 message CMsgDOTAFantasyMatch {
@@ -300,7 +278,7 @@ message CMsgGameMatchSignOut {
 	optional float game_balance = 13;
 	optional uint32 event_score = 14;
 	repeated CMatchHeroSelectEvent picks_bans = 15;
-	repeated CMsgDOTAFantasyPlayerStats fantasy_stats = 16;
+	repeated CMsgDOTAFantasyPlayerStats fantasy_stats = 41;
 	repeated CMsgEconPlayerStrangeCountAdjustment player_strange_count_adjustments = 17;
 	optional bool automatic_surrender = 18;
 	optional uint32 server_version = 19;
@@ -324,6 +302,7 @@ message CMsgGameMatchSignOut {
 	optional CMsgGameMatchSignOut.CCustomGameData custom_game_data = 37;
 	optional uint32 match_flags = 38;
 	repeated uint32 team_scores = 39;
+	optional uint32 pre_game_duration = 40;
 }
 
 message CMsgSignOutDraftInfo {
@@ -397,6 +376,21 @@ message CMsgGameMatchSignoutResponse {
 		optional bytes contents = 2;
 	}
 
+	message PlayerMetadata {
+		optional uint32 hero_id = 1;
+		optional uint32 avg_kills_x16 = 2;
+		optional uint32 avg_deaths_x16 = 3;
+		optional uint32 avg_assists_x16 = 4;
+		optional uint32 avg_gpm_x16 = 5;
+		optional uint32 avg_xpm_x16 = 6;
+		optional uint32 best_kills_x16 = 7;
+		optional uint32 best_assists_x16 = 8;
+		optional uint32 best_gpm_x16 = 9;
+		optional uint32 best_xpm_x16 = 10;
+		optional uint32 win_streak = 11;
+		optional uint32 best_win_streak = 12;
+	}
+
 	optional uint64 match_id = 1;
 	optional fixed32 replay_salt = 2;
 	repeated CLobbyTimedRewardDetails timed_reward_details = 3;
@@ -405,6 +399,7 @@ message CMsgGameMatchSignoutResponse {
 	repeated CMsgGameMatchSignoutResponse.CAdditionalSignoutMsg additional_msgs = 6;
 	optional fixed32 metadata_private_key = 7;
 	optional CMsgDOTAMatch match_details = 8;
+	repeated CMsgGameMatchSignoutResponse.PlayerMetadata players_metadata = 9;
 }
 
 message CMsgTimedRewardContainer {
@@ -654,17 +649,6 @@ message CMsgServerToGCSignoutAwardAdditionalDrops {
 	optional uint64 match_id = 2;
 }
 
-message CMsgDOTAUpdateTI4HeroQuest {
-	message Player {
-		optional uint32 account_id = 1;
-		optional uint32 hero_id = 2;
-	}
-
-	repeated CMsgDOTAUpdateTI4HeroQuest.Player players = 1;
-	optional fixed32 match_start_time = 2;
-	optional uint64 match_id = 3;
-}
-
 message CMsgDOTAFrostivusTimeElapsed {
 	message User {
 		optional uint32 account_id = 1;
@@ -861,22 +845,12 @@ message CMsgServerToGCLockCharmTrading {
 	optional uint64 item_id = 2;
 }
 
-message CMsgDOTACNY2015EventPointUsage {
-	message PointUsage {
-		repeated uint32 path = 1;
-		repeated uint32 path_level = 2;
-		repeated uint32 ability_points_spent = 3;
-	}
-
-	optional CMsgDOTACNY2015EventPointUsage.PointUsage winning_team_usage = 1;
-	optional CMsgDOTACNY2015EventPointUsage.PointUsage losing_team_usage = 2;
-}
-
 message CMsgSignOutUpdatePlayerChallenge {
 	message Challenge {
 		optional uint32 event_id = 1;
 		optional uint32 sequence_id = 3;
 		optional uint32 progress = 4;
+		optional uint32 challenge_rank = 5;
 	}
 
 	optional uint32 account_id = 1;
@@ -941,6 +915,16 @@ message CMsgSignOutXPCoins {
 	optional uint32 timestamp = 4;
 }
 
+message CMsgSignOutCommunityGoalProgress {
+	message EventGoalIncrement {
+		optional uint32 event_goal_id = 1;
+		optional uint32 increment_amount = 2;
+	}
+
+	optional uint32 event_id = 1;
+	repeated CMsgSignOutCommunityGoalProgress.EventGoalIncrement event_increments = 2;
+}
+
 message CMsgServerToGCPostMatchTip {
 	optional uint32 event_id = 1;
 	optional uint64 match_id = 2;
@@ -959,5 +943,47 @@ message CMsgServerToGCPostMatchTipResponse {
 	optional uint32 tipper_account_id = 2;
 	optional uint32 recipient_account_id = 3;
 	optional CMsgServerToGCPostMatchTipResponse.Result result = 4 [default = SUCCESS];
+}
+
+message CMsgServerToGCStartCompendiumInGamePredictions {
+	optional uint32 league_id = 1;
+	optional uint64 match_id = 2;
+	optional float hltv_delay = 3;
+	repeated uint32 prediction_ids = 4;
+}
+
+message CMsgServerToGCStartCompendiumInGamePredictionsResponse {
+	optional bool result = 1;
+}
+
+message CMsgServerToGCCloseCompendiumInGamePredictionVoting {
+	optional uint64 match_id = 1;
+}
+
+message CMsgServerToGCCloseCompendiumInGamePredictionVotingResponse {
+	optional bool result = 1;
+}
+
+message CMsgServerToGCEndCompendiumInGamePredictions {
+	optional uint64 match_id = 1;
+}
+
+message CMsgServerToGCEndCompendiumInGamePredictionsResponse {
+	optional bool result = 1;
+}
+
+message CMsgServerToGCCompendiumInGamePredictionResults {
+	message PredictionResult {
+		optional uint32 prediction_id = 1;
+		optional uint32 prediction_value = 2;
+		optional bool prediction_value_is_mask = 3;
+	}
+
+	optional uint64 match_id = 1;
+	repeated CMsgServerToGCCompendiumInGamePredictionResults.PredictionResult results = 2;
+}
+
+message CMsgServerToGCCompendiumInGamePredictionResultsResponse {
+	optional bool result = 1;
 }
 

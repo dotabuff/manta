@@ -5,10 +5,12 @@
 package dota
 
 import proto "github.com/golang/protobuf/proto"
+import fmt "fmt"
 import math "math"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
+var _ = fmt.Errorf
 var _ = math.Inf
 
 type EBaseUserMessages int32
@@ -52,6 +54,7 @@ const (
 	EBaseUserMessages_UM_ParticleManager         EBaseUserMessages = 145
 	EBaseUserMessages_UM_HudError                EBaseUserMessages = 146
 	EBaseUserMessages_UM_CustomGameEvent         EBaseUserMessages = 148
+	EBaseUserMessages_UM_HandHapticPulse         EBaseUserMessages = 149
 	EBaseUserMessages_UM_MAX_BASE                EBaseUserMessages = 200
 )
 
@@ -94,6 +97,7 @@ var EBaseUserMessages_name = map[int32]string{
 	145: "UM_ParticleManager",
 	146: "UM_HudError",
 	148: "UM_CustomGameEvent",
+	149: "UM_HandHapticPulse",
 	200: "UM_MAX_BASE",
 }
 var EBaseUserMessages_value = map[string]int32{
@@ -135,6 +139,7 @@ var EBaseUserMessages_value = map[string]int32{
 	"UM_ParticleManager":         145,
 	"UM_HudError":                146,
 	"UM_CustomGameEvent":         148,
+	"UM_HandHapticPulse":         149,
 	"UM_MAX_BASE":                200,
 }
 
@@ -154,6 +159,7 @@ func (x *EBaseUserMessages) UnmarshalJSON(data []byte) error {
 	*x = EBaseUserMessages(value)
 	return nil
 }
+func (EBaseUserMessages) EnumDescriptor() ([]byte, []int) { return fileDescriptor43, []int{0} }
 
 type EBaseEntityMessages int32
 
@@ -199,6 +205,7 @@ func (x *EBaseEntityMessages) UnmarshalJSON(data []byte) error {
 	*x = EBaseEntityMessages(value)
 	return nil
 }
+func (EBaseEntityMessages) EnumDescriptor() ([]byte, []int) { return fileDescriptor43, []int{1} }
 
 type ERollType int32
 
@@ -241,6 +248,7 @@ func (x *ERollType) UnmarshalJSON(data []byte) error {
 	*x = ERollType(value)
 	return nil
 }
+func (ERollType) EnumDescriptor() ([]byte, []int) { return fileDescriptor43, []int{2} }
 
 type PARTICLE_MESSAGE int32
 
@@ -310,15 +318,54 @@ func (x *PARTICLE_MESSAGE) UnmarshalJSON(data []byte) error {
 	*x = PARTICLE_MESSAGE(value)
 	return nil
 }
+func (PARTICLE_MESSAGE) EnumDescriptor() ([]byte, []int) { return fileDescriptor43, []int{3} }
+
+type EHapticPulseType int32
+
+const (
+	EHapticPulseType_VR_HAND_HAPTIC_PULSE_LIGHT  EHapticPulseType = 0
+	EHapticPulseType_VR_HAND_HAPTIC_PULSE_MEDIUM EHapticPulseType = 1
+	EHapticPulseType_VR_HAND_HAPTIC_PULSE_STRONG EHapticPulseType = 2
+)
+
+var EHapticPulseType_name = map[int32]string{
+	0: "VR_HAND_HAPTIC_PULSE_LIGHT",
+	1: "VR_HAND_HAPTIC_PULSE_MEDIUM",
+	2: "VR_HAND_HAPTIC_PULSE_STRONG",
+}
+var EHapticPulseType_value = map[string]int32{
+	"VR_HAND_HAPTIC_PULSE_LIGHT":  0,
+	"VR_HAND_HAPTIC_PULSE_MEDIUM": 1,
+	"VR_HAND_HAPTIC_PULSE_STRONG": 2,
+}
+
+func (x EHapticPulseType) Enum() *EHapticPulseType {
+	p := new(EHapticPulseType)
+	*p = x
+	return p
+}
+func (x EHapticPulseType) String() string {
+	return proto.EnumName(EHapticPulseType_name, int32(x))
+}
+func (x *EHapticPulseType) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(EHapticPulseType_value, data, "EHapticPulseType")
+	if err != nil {
+		return err
+	}
+	*x = EHapticPulseType(value)
+	return nil
+}
+func (EHapticPulseType) EnumDescriptor() ([]byte, []int) { return fileDescriptor43, []int{4} }
 
 type CUserMessageAchievementEvent struct {
 	Achievement      *uint32 `protobuf:"varint,1,opt,name=achievement" json:"achievement,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CUserMessageAchievementEvent) Reset()         { *m = CUserMessageAchievementEvent{} }
-func (m *CUserMessageAchievementEvent) String() string { return proto.CompactTextString(m) }
-func (*CUserMessageAchievementEvent) ProtoMessage()    {}
+func (m *CUserMessageAchievementEvent) Reset()                    { *m = CUserMessageAchievementEvent{} }
+func (m *CUserMessageAchievementEvent) String() string            { return proto.CompactTextString(m) }
+func (*CUserMessageAchievementEvent) ProtoMessage()               {}
+func (*CUserMessageAchievementEvent) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{0} }
 
 func (m *CUserMessageAchievementEvent) GetAchievement() uint32 {
 	if m != nil && m.Achievement != nil {
@@ -335,9 +382,10 @@ type CUserMessageCloseCaption struct {
 	XXX_unrecognized []byte   `json:"-"`
 }
 
-func (m *CUserMessageCloseCaption) Reset()         { *m = CUserMessageCloseCaption{} }
-func (m *CUserMessageCloseCaption) String() string { return proto.CompactTextString(m) }
-func (*CUserMessageCloseCaption) ProtoMessage()    {}
+func (m *CUserMessageCloseCaption) Reset()                    { *m = CUserMessageCloseCaption{} }
+func (m *CUserMessageCloseCaption) String() string            { return proto.CompactTextString(m) }
+func (*CUserMessageCloseCaption) ProtoMessage()               {}
+func (*CUserMessageCloseCaption) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{1} }
 
 func (m *CUserMessageCloseCaption) GetHash() uint32 {
 	if m != nil && m.Hash != nil {
@@ -375,9 +423,10 @@ type CUserMessageCloseCaptionDirect struct {
 	XXX_unrecognized []byte   `json:"-"`
 }
 
-func (m *CUserMessageCloseCaptionDirect) Reset()         { *m = CUserMessageCloseCaptionDirect{} }
-func (m *CUserMessageCloseCaptionDirect) String() string { return proto.CompactTextString(m) }
-func (*CUserMessageCloseCaptionDirect) ProtoMessage()    {}
+func (m *CUserMessageCloseCaptionDirect) Reset()                    { *m = CUserMessageCloseCaptionDirect{} }
+func (m *CUserMessageCloseCaptionDirect) String() string            { return proto.CompactTextString(m) }
+func (*CUserMessageCloseCaptionDirect) ProtoMessage()               {}
+func (*CUserMessageCloseCaptionDirect) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{2} }
 
 func (m *CUserMessageCloseCaptionDirect) GetHash() uint32 {
 	if m != nil && m.Hash != nil {
@@ -418,6 +467,9 @@ type CUserMessageCloseCaptionPlaceholder struct {
 func (m *CUserMessageCloseCaptionPlaceholder) Reset()         { *m = CUserMessageCloseCaptionPlaceholder{} }
 func (m *CUserMessageCloseCaptionPlaceholder) String() string { return proto.CompactTextString(m) }
 func (*CUserMessageCloseCaptionPlaceholder) ProtoMessage()    {}
+func (*CUserMessageCloseCaptionPlaceholder) Descriptor() ([]byte, []int) {
+	return fileDescriptor43, []int{3}
+}
 
 func (m *CUserMessageCloseCaptionPlaceholder) GetString_() string {
 	if m != nil && m.String_ != nil {
@@ -452,9 +504,10 @@ type CUserMessageCurrentTimescale struct {
 	XXX_unrecognized []byte   `json:"-"`
 }
 
-func (m *CUserMessageCurrentTimescale) Reset()         { *m = CUserMessageCurrentTimescale{} }
-func (m *CUserMessageCurrentTimescale) String() string { return proto.CompactTextString(m) }
-func (*CUserMessageCurrentTimescale) ProtoMessage()    {}
+func (m *CUserMessageCurrentTimescale) Reset()                    { *m = CUserMessageCurrentTimescale{} }
+func (m *CUserMessageCurrentTimescale) String() string            { return proto.CompactTextString(m) }
+func (*CUserMessageCurrentTimescale) ProtoMessage()               {}
+func (*CUserMessageCurrentTimescale) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{4} }
 
 func (m *CUserMessageCurrentTimescale) GetCurrent() float32 {
 	if m != nil && m.Current != nil {
@@ -471,9 +524,10 @@ type CUserMessageDesiredTimescale struct {
 	XXX_unrecognized     []byte   `json:"-"`
 }
 
-func (m *CUserMessageDesiredTimescale) Reset()         { *m = CUserMessageDesiredTimescale{} }
-func (m *CUserMessageDesiredTimescale) String() string { return proto.CompactTextString(m) }
-func (*CUserMessageDesiredTimescale) ProtoMessage()    {}
+func (m *CUserMessageDesiredTimescale) Reset()                    { *m = CUserMessageDesiredTimescale{} }
+func (m *CUserMessageDesiredTimescale) String() string            { return proto.CompactTextString(m) }
+func (*CUserMessageDesiredTimescale) ProtoMessage()               {}
+func (*CUserMessageDesiredTimescale) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{5} }
 
 func (m *CUserMessageDesiredTimescale) GetDesired() float32 {
 	if m != nil && m.Desired != nil {
@@ -511,9 +565,10 @@ type CUserMessageFade struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CUserMessageFade) Reset()         { *m = CUserMessageFade{} }
-func (m *CUserMessageFade) String() string { return proto.CompactTextString(m) }
-func (*CUserMessageFade) ProtoMessage()    {}
+func (m *CUserMessageFade) Reset()                    { *m = CUserMessageFade{} }
+func (m *CUserMessageFade) String() string            { return proto.CompactTextString(m) }
+func (*CUserMessageFade) ProtoMessage()               {}
+func (*CUserMessageFade) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{6} }
 
 func (m *CUserMessageFade) GetDuration() uint32 {
 	if m != nil && m.Duration != nil {
@@ -551,9 +606,10 @@ type CUserMessageShake struct {
 	XXX_unrecognized []byte   `json:"-"`
 }
 
-func (m *CUserMessageShake) Reset()         { *m = CUserMessageShake{} }
-func (m *CUserMessageShake) String() string { return proto.CompactTextString(m) }
-func (*CUserMessageShake) ProtoMessage()    {}
+func (m *CUserMessageShake) Reset()                    { *m = CUserMessageShake{} }
+func (m *CUserMessageShake) String() string            { return proto.CompactTextString(m) }
+func (*CUserMessageShake) ProtoMessage()               {}
+func (*CUserMessageShake) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{7} }
 
 func (m *CUserMessageShake) GetCommand() uint32 {
 	if m != nil && m.Command != nil {
@@ -589,9 +645,10 @@ type CUserMessageShakeDir struct {
 	XXX_unrecognized []byte             `json:"-"`
 }
 
-func (m *CUserMessageShakeDir) Reset()         { *m = CUserMessageShakeDir{} }
-func (m *CUserMessageShakeDir) String() string { return proto.CompactTextString(m) }
-func (*CUserMessageShakeDir) ProtoMessage()    {}
+func (m *CUserMessageShakeDir) Reset()                    { *m = CUserMessageShakeDir{} }
+func (m *CUserMessageShakeDir) String() string            { return proto.CompactTextString(m) }
+func (*CUserMessageShakeDir) ProtoMessage()               {}
+func (*CUserMessageShakeDir) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{8} }
 
 func (m *CUserMessageShakeDir) GetShake() *CUserMessageShake {
 	if m != nil {
@@ -616,9 +673,10 @@ type CUserMessageScreenTilt struct {
 	XXX_unrecognized []byte      `json:"-"`
 }
 
-func (m *CUserMessageScreenTilt) Reset()         { *m = CUserMessageScreenTilt{} }
-func (m *CUserMessageScreenTilt) String() string { return proto.CompactTextString(m) }
-func (*CUserMessageScreenTilt) ProtoMessage()    {}
+func (m *CUserMessageScreenTilt) Reset()                    { *m = CUserMessageScreenTilt{} }
+func (m *CUserMessageScreenTilt) String() string            { return proto.CompactTextString(m) }
+func (*CUserMessageScreenTilt) ProtoMessage()               {}
+func (*CUserMessageScreenTilt) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{9} }
 
 func (m *CUserMessageScreenTilt) GetCommand() uint32 {
 	if m != nil && m.Command != nil {
@@ -662,9 +720,10 @@ type CUserMessageSayText struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CUserMessageSayText) Reset()         { *m = CUserMessageSayText{} }
-func (m *CUserMessageSayText) String() string { return proto.CompactTextString(m) }
-func (*CUserMessageSayText) ProtoMessage()    {}
+func (m *CUserMessageSayText) Reset()                    { *m = CUserMessageSayText{} }
+func (m *CUserMessageSayText) String() string            { return proto.CompactTextString(m) }
+func (*CUserMessageSayText) ProtoMessage()               {}
+func (*CUserMessageSayText) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{10} }
 
 func (m *CUserMessageSayText) GetPlayerindex() uint32 {
 	if m != nil && m.Playerindex != nil {
@@ -698,9 +757,10 @@ type CUserMessageSayText2 struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CUserMessageSayText2) Reset()         { *m = CUserMessageSayText2{} }
-func (m *CUserMessageSayText2) String() string { return proto.CompactTextString(m) }
-func (*CUserMessageSayText2) ProtoMessage()    {}
+func (m *CUserMessageSayText2) Reset()                    { *m = CUserMessageSayText2{} }
+func (m *CUserMessageSayText2) String() string            { return proto.CompactTextString(m) }
+func (*CUserMessageSayText2) ProtoMessage()               {}
+func (*CUserMessageSayText2) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{11} }
 
 func (m *CUserMessageSayText2) GetEntityindex() uint32 {
 	if m != nil && m.Entityindex != nil {
@@ -766,9 +826,10 @@ type CUserMessageHudMsg struct {
 	XXX_unrecognized []byte   `json:"-"`
 }
 
-func (m *CUserMessageHudMsg) Reset()         { *m = CUserMessageHudMsg{} }
-func (m *CUserMessageHudMsg) String() string { return proto.CompactTextString(m) }
-func (*CUserMessageHudMsg) ProtoMessage()    {}
+func (m *CUserMessageHudMsg) Reset()                    { *m = CUserMessageHudMsg{} }
+func (m *CUserMessageHudMsg) String() string            { return proto.CompactTextString(m) }
+func (*CUserMessageHudMsg) ProtoMessage()               {}
+func (*CUserMessageHudMsg) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{12} }
 
 func (m *CUserMessageHudMsg) GetChannel() uint32 {
 	if m != nil && m.Channel != nil {
@@ -852,9 +913,10 @@ type CUserMessageHudText struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CUserMessageHudText) Reset()         { *m = CUserMessageHudText{} }
-func (m *CUserMessageHudText) String() string { return proto.CompactTextString(m) }
-func (*CUserMessageHudText) ProtoMessage()    {}
+func (m *CUserMessageHudText) Reset()                    { *m = CUserMessageHudText{} }
+func (m *CUserMessageHudText) String() string            { return proto.CompactTextString(m) }
+func (*CUserMessageHudText) ProtoMessage()               {}
+func (*CUserMessageHudText) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{13} }
 
 func (m *CUserMessageHudText) GetMessage() string {
 	if m != nil && m.Message != nil {
@@ -869,9 +931,10 @@ type CUserMessageTextMsg struct {
 	XXX_unrecognized []byte   `json:"-"`
 }
 
-func (m *CUserMessageTextMsg) Reset()         { *m = CUserMessageTextMsg{} }
-func (m *CUserMessageTextMsg) String() string { return proto.CompactTextString(m) }
-func (*CUserMessageTextMsg) ProtoMessage()    {}
+func (m *CUserMessageTextMsg) Reset()                    { *m = CUserMessageTextMsg{} }
+func (m *CUserMessageTextMsg) String() string            { return proto.CompactTextString(m) }
+func (*CUserMessageTextMsg) ProtoMessage()               {}
+func (*CUserMessageTextMsg) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{14} }
 
 func (m *CUserMessageTextMsg) GetDest() uint32 {
 	if m != nil && m.Dest != nil {
@@ -891,17 +954,19 @@ type CUserMessageGameTitle struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CUserMessageGameTitle) Reset()         { *m = CUserMessageGameTitle{} }
-func (m *CUserMessageGameTitle) String() string { return proto.CompactTextString(m) }
-func (*CUserMessageGameTitle) ProtoMessage()    {}
+func (m *CUserMessageGameTitle) Reset()                    { *m = CUserMessageGameTitle{} }
+func (m *CUserMessageGameTitle) String() string            { return proto.CompactTextString(m) }
+func (*CUserMessageGameTitle) ProtoMessage()               {}
+func (*CUserMessageGameTitle) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{15} }
 
 type CUserMessageResetHUD struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CUserMessageResetHUD) Reset()         { *m = CUserMessageResetHUD{} }
-func (m *CUserMessageResetHUD) String() string { return proto.CompactTextString(m) }
-func (*CUserMessageResetHUD) ProtoMessage()    {}
+func (m *CUserMessageResetHUD) Reset()                    { *m = CUserMessageResetHUD{} }
+func (m *CUserMessageResetHUD) String() string            { return proto.CompactTextString(m) }
+func (*CUserMessageResetHUD) ProtoMessage()               {}
+func (*CUserMessageResetHUD) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{16} }
 
 type CUserMessageSendAudio struct {
 	Soundname        *string `protobuf:"bytes,1,opt,name=soundname" json:"soundname,omitempty"`
@@ -909,9 +974,10 @@ type CUserMessageSendAudio struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CUserMessageSendAudio) Reset()         { *m = CUserMessageSendAudio{} }
-func (m *CUserMessageSendAudio) String() string { return proto.CompactTextString(m) }
-func (*CUserMessageSendAudio) ProtoMessage()    {}
+func (m *CUserMessageSendAudio) Reset()                    { *m = CUserMessageSendAudio{} }
+func (m *CUserMessageSendAudio) String() string            { return proto.CompactTextString(m) }
+func (*CUserMessageSendAudio) ProtoMessage()               {}
+func (*CUserMessageSendAudio) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{17} }
 
 func (m *CUserMessageSendAudio) GetSoundname() string {
 	if m != nil && m.Soundname != nil {
@@ -931,12 +997,14 @@ type CUserMessageAudioParameter struct {
 	ParameterType    *uint32  `protobuf:"varint,1,opt,name=parameter_type" json:"parameter_type,omitempty"`
 	NameHashCode     *uint32  `protobuf:"varint,2,opt,name=name_hash_code" json:"name_hash_code,omitempty"`
 	Value            *float32 `protobuf:"fixed32,3,opt,name=value" json:"value,omitempty"`
+	IntValue         *uint32  `protobuf:"varint,4,opt,name=int_value" json:"int_value,omitempty"`
 	XXX_unrecognized []byte   `json:"-"`
 }
 
-func (m *CUserMessageAudioParameter) Reset()         { *m = CUserMessageAudioParameter{} }
-func (m *CUserMessageAudioParameter) String() string { return proto.CompactTextString(m) }
-func (*CUserMessageAudioParameter) ProtoMessage()    {}
+func (m *CUserMessageAudioParameter) Reset()                    { *m = CUserMessageAudioParameter{} }
+func (m *CUserMessageAudioParameter) String() string            { return proto.CompactTextString(m) }
+func (*CUserMessageAudioParameter) ProtoMessage()               {}
+func (*CUserMessageAudioParameter) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{18} }
 
 func (m *CUserMessageAudioParameter) GetParameterType() uint32 {
 	if m != nil && m.ParameterType != nil {
@@ -959,6 +1027,13 @@ func (m *CUserMessageAudioParameter) GetValue() float32 {
 	return 0
 }
 
+func (m *CUserMessageAudioParameter) GetIntValue() uint32 {
+	if m != nil && m.IntValue != nil {
+		return *m.IntValue
+	}
+	return 0
+}
+
 type CUserMessageVoiceMask struct {
 	GamerulesMasks   []uint32 `protobuf:"varint,1,rep,name=gamerules_masks" json:"gamerules_masks,omitempty"`
 	BanMasks         []uint32 `protobuf:"varint,2,rep,name=ban_masks" json:"ban_masks,omitempty"`
@@ -966,9 +1041,10 @@ type CUserMessageVoiceMask struct {
 	XXX_unrecognized []byte   `json:"-"`
 }
 
-func (m *CUserMessageVoiceMask) Reset()         { *m = CUserMessageVoiceMask{} }
-func (m *CUserMessageVoiceMask) String() string { return proto.CompactTextString(m) }
-func (*CUserMessageVoiceMask) ProtoMessage()    {}
+func (m *CUserMessageVoiceMask) Reset()                    { *m = CUserMessageVoiceMask{} }
+func (m *CUserMessageVoiceMask) String() string            { return proto.CompactTextString(m) }
+func (*CUserMessageVoiceMask) ProtoMessage()               {}
+func (*CUserMessageVoiceMask) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{19} }
 
 func (m *CUserMessageVoiceMask) GetGamerulesMasks() []uint32 {
 	if m != nil {
@@ -995,18 +1071,20 @@ type CUserMessageRequestState struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CUserMessageRequestState) Reset()         { *m = CUserMessageRequestState{} }
-func (m *CUserMessageRequestState) String() string { return proto.CompactTextString(m) }
-func (*CUserMessageRequestState) ProtoMessage()    {}
+func (m *CUserMessageRequestState) Reset()                    { *m = CUserMessageRequestState{} }
+func (m *CUserMessageRequestState) String() string            { return proto.CompactTextString(m) }
+func (*CUserMessageRequestState) ProtoMessage()               {}
+func (*CUserMessageRequestState) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{20} }
 
 type CUserMessageHintText struct {
 	Message          *string `protobuf:"bytes,1,opt,name=message" json:"message,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CUserMessageHintText) Reset()         { *m = CUserMessageHintText{} }
-func (m *CUserMessageHintText) String() string { return proto.CompactTextString(m) }
-func (*CUserMessageHintText) ProtoMessage()    {}
+func (m *CUserMessageHintText) Reset()                    { *m = CUserMessageHintText{} }
+func (m *CUserMessageHintText) String() string            { return proto.CompactTextString(m) }
+func (*CUserMessageHintText) ProtoMessage()               {}
+func (*CUserMessageHintText) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{21} }
 
 func (m *CUserMessageHintText) GetMessage() string {
 	if m != nil && m.Message != nil {
@@ -1020,9 +1098,10 @@ type CUserMessageKeyHintText struct {
 	XXX_unrecognized []byte   `json:"-"`
 }
 
-func (m *CUserMessageKeyHintText) Reset()         { *m = CUserMessageKeyHintText{} }
-func (m *CUserMessageKeyHintText) String() string { return proto.CompactTextString(m) }
-func (*CUserMessageKeyHintText) ProtoMessage()    {}
+func (m *CUserMessageKeyHintText) Reset()                    { *m = CUserMessageKeyHintText{} }
+func (m *CUserMessageKeyHintText) String() string            { return proto.CompactTextString(m) }
+func (*CUserMessageKeyHintText) ProtoMessage()               {}
+func (*CUserMessageKeyHintText) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{22} }
 
 func (m *CUserMessageKeyHintText) GetMessages() []string {
 	if m != nil {
@@ -1038,9 +1117,10 @@ type CUserMessageVoiceSubtitle struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CUserMessageVoiceSubtitle) Reset()         { *m = CUserMessageVoiceSubtitle{} }
-func (m *CUserMessageVoiceSubtitle) String() string { return proto.CompactTextString(m) }
-func (*CUserMessageVoiceSubtitle) ProtoMessage()    {}
+func (m *CUserMessageVoiceSubtitle) Reset()                    { *m = CUserMessageVoiceSubtitle{} }
+func (m *CUserMessageVoiceSubtitle) String() string            { return proto.CompactTextString(m) }
+func (*CUserMessageVoiceSubtitle) ProtoMessage()               {}
+func (*CUserMessageVoiceSubtitle) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{23} }
 
 func (m *CUserMessageVoiceSubtitle) GetPlayer() int32 {
 	if m != nil && m.Player != nil {
@@ -1070,9 +1150,10 @@ type CUserMessageVGUIMenu struct {
 	XXX_unrecognized []byte                       `json:"-"`
 }
 
-func (m *CUserMessageVGUIMenu) Reset()         { *m = CUserMessageVGUIMenu{} }
-func (m *CUserMessageVGUIMenu) String() string { return proto.CompactTextString(m) }
-func (*CUserMessageVGUIMenu) ProtoMessage()    {}
+func (m *CUserMessageVGUIMenu) Reset()                    { *m = CUserMessageVGUIMenu{} }
+func (m *CUserMessageVGUIMenu) String() string            { return proto.CompactTextString(m) }
+func (*CUserMessageVGUIMenu) ProtoMessage()               {}
+func (*CUserMessageVGUIMenu) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{24} }
 
 func (m *CUserMessageVGUIMenu) GetName() string {
 	if m != nil && m.Name != nil {
@@ -1101,9 +1182,10 @@ type CUserMessageVGUIMenu_Keys struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CUserMessageVGUIMenu_Keys) Reset()         { *m = CUserMessageVGUIMenu_Keys{} }
-func (m *CUserMessageVGUIMenu_Keys) String() string { return proto.CompactTextString(m) }
-func (*CUserMessageVGUIMenu_Keys) ProtoMessage()    {}
+func (m *CUserMessageVGUIMenu_Keys) Reset()                    { *m = CUserMessageVGUIMenu_Keys{} }
+func (m *CUserMessageVGUIMenu_Keys) String() string            { return proto.CompactTextString(m) }
+func (*CUserMessageVGUIMenu_Keys) ProtoMessage()               {}
+func (*CUserMessageVGUIMenu_Keys) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{24, 0} }
 
 func (m *CUserMessageVGUIMenu_Keys) GetName() string {
 	if m != nil && m.Name != nil {
@@ -1126,9 +1208,10 @@ type CUserMessageRumble struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CUserMessageRumble) Reset()         { *m = CUserMessageRumble{} }
-func (m *CUserMessageRumble) String() string { return proto.CompactTextString(m) }
-func (*CUserMessageRumble) ProtoMessage()    {}
+func (m *CUserMessageRumble) Reset()                    { *m = CUserMessageRumble{} }
+func (m *CUserMessageRumble) String() string            { return proto.CompactTextString(m) }
+func (*CUserMessageRumble) ProtoMessage()               {}
+func (*CUserMessageRumble) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{25} }
 
 func (m *CUserMessageRumble) GetIndex() int32 {
 	if m != nil && m.Index != nil {
@@ -1156,9 +1239,10 @@ type CUserMessageTrain struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CUserMessageTrain) Reset()         { *m = CUserMessageTrain{} }
-func (m *CUserMessageTrain) String() string { return proto.CompactTextString(m) }
-func (*CUserMessageTrain) ProtoMessage()    {}
+func (m *CUserMessageTrain) Reset()                    { *m = CUserMessageTrain{} }
+func (m *CUserMessageTrain) String() string            { return proto.CompactTextString(m) }
+func (*CUserMessageTrain) ProtoMessage()               {}
+func (*CUserMessageTrain) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{26} }
 
 func (m *CUserMessageTrain) GetPosition() uint32 {
 	if m != nil && m.Position != nil {
@@ -1174,9 +1258,10 @@ type CUserMessageSayTextChannel struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CUserMessageSayTextChannel) Reset()         { *m = CUserMessageSayTextChannel{} }
-func (m *CUserMessageSayTextChannel) String() string { return proto.CompactTextString(m) }
-func (*CUserMessageSayTextChannel) ProtoMessage()    {}
+func (m *CUserMessageSayTextChannel) Reset()                    { *m = CUserMessageSayTextChannel{} }
+func (m *CUserMessageSayTextChannel) String() string            { return proto.CompactTextString(m) }
+func (*CUserMessageSayTextChannel) ProtoMessage()               {}
+func (*CUserMessageSayTextChannel) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{27} }
 
 func (m *CUserMessageSayTextChannel) GetPlayer() int32 {
 	if m != nil && m.Player != nil {
@@ -1209,9 +1294,10 @@ type CUserMessageColoredText struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CUserMessageColoredText) Reset()         { *m = CUserMessageColoredText{} }
-func (m *CUserMessageColoredText) String() string { return proto.CompactTextString(m) }
-func (*CUserMessageColoredText) ProtoMessage()    {}
+func (m *CUserMessageColoredText) Reset()                    { *m = CUserMessageColoredText{} }
+func (m *CUserMessageColoredText) String() string            { return proto.CompactTextString(m) }
+func (*CUserMessageColoredText) ProtoMessage()               {}
+func (*CUserMessageColoredText) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{28} }
 
 func (m *CUserMessageColoredText) GetColor() uint32 {
 	if m != nil && m.Color != nil {
@@ -1260,9 +1346,10 @@ type CUserMessageItemPickup struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CUserMessageItemPickup) Reset()         { *m = CUserMessageItemPickup{} }
-func (m *CUserMessageItemPickup) String() string { return proto.CompactTextString(m) }
-func (*CUserMessageItemPickup) ProtoMessage()    {}
+func (m *CUserMessageItemPickup) Reset()                    { *m = CUserMessageItemPickup{} }
+func (m *CUserMessageItemPickup) String() string            { return proto.CompactTextString(m) }
+func (*CUserMessageItemPickup) ProtoMessage()               {}
+func (*CUserMessageItemPickup) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{29} }
 
 func (m *CUserMessageItemPickup) GetItemname() string {
 	if m != nil && m.Itemname != nil {
@@ -1276,9 +1363,10 @@ type CUserMessageAmmoDenied struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CUserMessageAmmoDenied) Reset()         { *m = CUserMessageAmmoDenied{} }
-func (m *CUserMessageAmmoDenied) String() string { return proto.CompactTextString(m) }
-func (*CUserMessageAmmoDenied) ProtoMessage()    {}
+func (m *CUserMessageAmmoDenied) Reset()                    { *m = CUserMessageAmmoDenied{} }
+func (m *CUserMessageAmmoDenied) String() string            { return proto.CompactTextString(m) }
+func (*CUserMessageAmmoDenied) ProtoMessage()               {}
+func (*CUserMessageAmmoDenied) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{30} }
 
 func (m *CUserMessageAmmoDenied) GetAmmoId() uint32 {
 	if m != nil && m.AmmoId != nil {
@@ -1292,9 +1380,10 @@ type CUserMessageCrosshairAngle struct {
 	XXX_unrecognized []byte      `json:"-"`
 }
 
-func (m *CUserMessageCrosshairAngle) Reset()         { *m = CUserMessageCrosshairAngle{} }
-func (m *CUserMessageCrosshairAngle) String() string { return proto.CompactTextString(m) }
-func (*CUserMessageCrosshairAngle) ProtoMessage()    {}
+func (m *CUserMessageCrosshairAngle) Reset()                    { *m = CUserMessageCrosshairAngle{} }
+func (m *CUserMessageCrosshairAngle) String() string            { return proto.CompactTextString(m) }
+func (*CUserMessageCrosshairAngle) ProtoMessage()               {}
+func (*CUserMessageCrosshairAngle) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{31} }
 
 func (m *CUserMessageCrosshairAngle) GetAngcrosshair() *CMsgQAngle {
 	if m != nil {
@@ -1311,9 +1400,10 @@ type CUserMessageShowMenu struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CUserMessageShowMenu) Reset()         { *m = CUserMessageShowMenu{} }
-func (m *CUserMessageShowMenu) String() string { return proto.CompactTextString(m) }
-func (*CUserMessageShowMenu) ProtoMessage()    {}
+func (m *CUserMessageShowMenu) Reset()                    { *m = CUserMessageShowMenu{} }
+func (m *CUserMessageShowMenu) String() string            { return proto.CompactTextString(m) }
+func (*CUserMessageShowMenu) ProtoMessage()               {}
+func (*CUserMessageShowMenu) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{32} }
 
 func (m *CUserMessageShowMenu) GetValidslots() uint32 {
 	if m != nil && m.Validslots != nil {
@@ -1345,12 +1435,14 @@ func (m *CUserMessageShowMenu) GetMenustring() string {
 
 type CUserMessageCreditsMsg struct {
 	Rolltype         *ERollType `protobuf:"varint,1,opt,name=rolltype,enum=dota.ERollType,def=-1" json:"rolltype,omitempty"`
+	LogoLength       *float32   `protobuf:"fixed32,2,opt,name=logo_length" json:"logo_length,omitempty"`
 	XXX_unrecognized []byte     `json:"-"`
 }
 
-func (m *CUserMessageCreditsMsg) Reset()         { *m = CUserMessageCreditsMsg{} }
-func (m *CUserMessageCreditsMsg) String() string { return proto.CompactTextString(m) }
-func (*CUserMessageCreditsMsg) ProtoMessage()    {}
+func (m *CUserMessageCreditsMsg) Reset()                    { *m = CUserMessageCreditsMsg{} }
+func (m *CUserMessageCreditsMsg) String() string            { return proto.CompactTextString(m) }
+func (*CUserMessageCreditsMsg) ProtoMessage()               {}
+func (*CUserMessageCreditsMsg) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{33} }
 
 const Default_CUserMessageCreditsMsg_Rolltype ERollType = ERollType_ROLL_NONE
 
@@ -1361,22 +1453,31 @@ func (m *CUserMessageCreditsMsg) GetRolltype() ERollType {
 	return Default_CUserMessageCreditsMsg_Rolltype
 }
 
+func (m *CUserMessageCreditsMsg) GetLogoLength() float32 {
+	if m != nil && m.LogoLength != nil {
+		return *m.LogoLength
+	}
+	return 0
+}
+
 type CEntityMessagePlayJingle struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CEntityMessagePlayJingle) Reset()         { *m = CEntityMessagePlayJingle{} }
-func (m *CEntityMessagePlayJingle) String() string { return proto.CompactTextString(m) }
-func (*CEntityMessagePlayJingle) ProtoMessage()    {}
+func (m *CEntityMessagePlayJingle) Reset()                    { *m = CEntityMessagePlayJingle{} }
+func (m *CEntityMessagePlayJingle) String() string            { return proto.CompactTextString(m) }
+func (*CEntityMessagePlayJingle) ProtoMessage()               {}
+func (*CEntityMessagePlayJingle) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{34} }
 
 type CEntityMessageScreenOverlay struct {
 	StartEffect      *bool  `protobuf:"varint,1,opt,name=start_effect" json:"start_effect,omitempty"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CEntityMessageScreenOverlay) Reset()         { *m = CEntityMessageScreenOverlay{} }
-func (m *CEntityMessageScreenOverlay) String() string { return proto.CompactTextString(m) }
-func (*CEntityMessageScreenOverlay) ProtoMessage()    {}
+func (m *CEntityMessageScreenOverlay) Reset()                    { *m = CEntityMessageScreenOverlay{} }
+func (m *CEntityMessageScreenOverlay) String() string            { return proto.CompactTextString(m) }
+func (*CEntityMessageScreenOverlay) ProtoMessage()               {}
+func (*CEntityMessageScreenOverlay) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{35} }
 
 func (m *CEntityMessageScreenOverlay) GetStartEffect() bool {
 	if m != nil && m.StartEffect != nil {
@@ -1390,9 +1491,10 @@ type CEntityMessageRemoveAllDecals struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CEntityMessageRemoveAllDecals) Reset()         { *m = CEntityMessageRemoveAllDecals{} }
-func (m *CEntityMessageRemoveAllDecals) String() string { return proto.CompactTextString(m) }
-func (*CEntityMessageRemoveAllDecals) ProtoMessage()    {}
+func (m *CEntityMessageRemoveAllDecals) Reset()                    { *m = CEntityMessageRemoveAllDecals{} }
+func (m *CEntityMessageRemoveAllDecals) String() string            { return proto.CompactTextString(m) }
+func (*CEntityMessageRemoveAllDecals) ProtoMessage()               {}
+func (*CEntityMessageRemoveAllDecals) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{36} }
 
 func (m *CEntityMessageRemoveAllDecals) GetRemoveDecals() bool {
 	if m != nil && m.RemoveDecals != nil {
@@ -1406,9 +1508,10 @@ type CEntityMessagePropagateForce struct {
 	XXX_unrecognized []byte      `json:"-"`
 }
 
-func (m *CEntityMessagePropagateForce) Reset()         { *m = CEntityMessagePropagateForce{} }
-func (m *CEntityMessagePropagateForce) String() string { return proto.CompactTextString(m) }
-func (*CEntityMessagePropagateForce) ProtoMessage()    {}
+func (m *CEntityMessagePropagateForce) Reset()                    { *m = CEntityMessagePropagateForce{} }
+func (m *CEntityMessagePropagateForce) String() string            { return proto.CompactTextString(m) }
+func (*CEntityMessagePropagateForce) ProtoMessage()               {}
+func (*CEntityMessagePropagateForce) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{37} }
 
 func (m *CEntityMessagePropagateForce) GetImpulse() *CMsgVector {
 	if m != nil {
@@ -1428,9 +1531,10 @@ type CEntityMessageDoSpark struct {
 	XXX_unrecognized []byte      `json:"-"`
 }
 
-func (m *CEntityMessageDoSpark) Reset()         { *m = CEntityMessageDoSpark{} }
-func (m *CEntityMessageDoSpark) String() string { return proto.CompactTextString(m) }
-func (*CEntityMessageDoSpark) ProtoMessage()    {}
+func (m *CEntityMessageDoSpark) Reset()                    { *m = CEntityMessageDoSpark{} }
+func (m *CEntityMessageDoSpark) String() string            { return proto.CompactTextString(m) }
+func (*CEntityMessageDoSpark) ProtoMessage()               {}
+func (*CEntityMessageDoSpark) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{38} }
 
 func (m *CEntityMessageDoSpark) GetOrigin() *CMsgVector {
 	if m != nil {
@@ -1487,9 +1591,10 @@ type CEntityMessageFixAngle struct {
 	XXX_unrecognized []byte      `json:"-"`
 }
 
-func (m *CEntityMessageFixAngle) Reset()         { *m = CEntityMessageFixAngle{} }
-func (m *CEntityMessageFixAngle) String() string { return proto.CompactTextString(m) }
-func (*CEntityMessageFixAngle) ProtoMessage()    {}
+func (m *CEntityMessageFixAngle) Reset()                    { *m = CEntityMessageFixAngle{} }
+func (m *CEntityMessageFixAngle) String() string            { return proto.CompactTextString(m) }
+func (*CEntityMessageFixAngle) ProtoMessage()               {}
+func (*CEntityMessageFixAngle) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{39} }
 
 func (m *CEntityMessageFixAngle) GetRelative() bool {
 	if m != nil && m.Relative != nil {
@@ -1512,9 +1617,10 @@ type CUserMessageCameraTransition struct {
 	XXX_unrecognized []byte                                              `json:"-"`
 }
 
-func (m *CUserMessageCameraTransition) Reset()         { *m = CUserMessageCameraTransition{} }
-func (m *CUserMessageCameraTransition) String() string { return proto.CompactTextString(m) }
-func (*CUserMessageCameraTransition) ProtoMessage()    {}
+func (m *CUserMessageCameraTransition) Reset()                    { *m = CUserMessageCameraTransition{} }
+func (m *CUserMessageCameraTransition) String() string            { return proto.CompactTextString(m) }
+func (*CUserMessageCameraTransition) ProtoMessage()               {}
+func (*CUserMessageCameraTransition) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{40} }
 
 func (m *CUserMessageCameraTransition) GetCameraType() uint32 {
 	if m != nil && m.CameraType != nil {
@@ -1550,6 +1656,9 @@ func (m *CUserMessageCameraTransition_Transition_DataDriven) String() string {
 	return proto.CompactTextString(m)
 }
 func (*CUserMessageCameraTransition_Transition_DataDriven) ProtoMessage() {}
+func (*CUserMessageCameraTransition_Transition_DataDriven) Descriptor() ([]byte, []int) {
+	return fileDescriptor43, []int{40, 0}
+}
 
 func (m *CUserMessageCameraTransition_Transition_DataDriven) GetFilename() string {
 	if m != nil && m.Filename != nil {
@@ -1584,9 +1693,10 @@ type CUserMsg_ParticleManager struct {
 	XXX_unrecognized             []byte                                                 `json:"-"`
 }
 
-func (m *CUserMsg_ParticleManager) Reset()         { *m = CUserMsg_ParticleManager{} }
-func (m *CUserMsg_ParticleManager) String() string { return proto.CompactTextString(m) }
-func (*CUserMsg_ParticleManager) ProtoMessage()    {}
+func (m *CUserMsg_ParticleManager) Reset()                    { *m = CUserMsg_ParticleManager{} }
+func (m *CUserMsg_ParticleManager) String() string            { return proto.CompactTextString(m) }
+func (*CUserMsg_ParticleManager) ProtoMessage()               {}
+func (*CUserMsg_ParticleManager) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{41} }
 
 const Default_CUserMsg_ParticleManager_Type PARTICLE_MESSAGE = PARTICLE_MESSAGE_GAME_PARTICLE_MANAGER_EVENT_CREATE
 
@@ -1706,6 +1816,9 @@ func (m *CUserMsg_ParticleManager_ReleaseParticleIndex) String() string {
 	return proto.CompactTextString(m)
 }
 func (*CUserMsg_ParticleManager_ReleaseParticleIndex) ProtoMessage() {}
+func (*CUserMsg_ParticleManager_ReleaseParticleIndex) Descriptor() ([]byte, []int) {
+	return fileDescriptor43, []int{41, 0}
+}
 
 type CUserMsg_ParticleManager_CreateParticle struct {
 	ParticleNameIndex *uint64 `protobuf:"fixed64,1,opt,name=particle_name_index" json:"particle_name_index,omitempty"`
@@ -1719,6 +1832,9 @@ func (m *CUserMsg_ParticleManager_CreateParticle) Reset() {
 }
 func (m *CUserMsg_ParticleManager_CreateParticle) String() string { return proto.CompactTextString(m) }
 func (*CUserMsg_ParticleManager_CreateParticle) ProtoMessage()    {}
+func (*CUserMsg_ParticleManager_CreateParticle) Descriptor() ([]byte, []int) {
+	return fileDescriptor43, []int{41, 1}
+}
 
 func (m *CUserMsg_ParticleManager_CreateParticle) GetParticleNameIndex() uint64 {
 	if m != nil && m.ParticleNameIndex != nil {
@@ -1751,6 +1867,9 @@ func (m *CUserMsg_ParticleManager_DestroyParticle) Reset() {
 }
 func (m *CUserMsg_ParticleManager_DestroyParticle) String() string { return proto.CompactTextString(m) }
 func (*CUserMsg_ParticleManager_DestroyParticle) ProtoMessage()    {}
+func (*CUserMsg_ParticleManager_DestroyParticle) Descriptor() ([]byte, []int) {
+	return fileDescriptor43, []int{41, 2}
+}
 
 func (m *CUserMsg_ParticleManager_DestroyParticle) GetDestroyImmediately() bool {
 	if m != nil && m.DestroyImmediately != nil {
@@ -1772,6 +1891,9 @@ func (m *CUserMsg_ParticleManager_DestroyParticleInvolving) String() string {
 	return proto.CompactTextString(m)
 }
 func (*CUserMsg_ParticleManager_DestroyParticleInvolving) ProtoMessage() {}
+func (*CUserMsg_ParticleManager_DestroyParticleInvolving) Descriptor() ([]byte, []int) {
+	return fileDescriptor43, []int{41, 3}
+}
 
 func (m *CUserMsg_ParticleManager_DestroyParticleInvolving) GetDestroyImmediately() bool {
 	if m != nil && m.DestroyImmediately != nil {
@@ -1798,6 +1920,9 @@ func (m *CUserMsg_ParticleManager_UpdateParticle) Reset() {
 }
 func (m *CUserMsg_ParticleManager_UpdateParticle) String() string { return proto.CompactTextString(m) }
 func (*CUserMsg_ParticleManager_UpdateParticle) ProtoMessage()    {}
+func (*CUserMsg_ParticleManager_UpdateParticle) Descriptor() ([]byte, []int) {
+	return fileDescriptor43, []int{41, 4}
+}
 
 func (m *CUserMsg_ParticleManager_UpdateParticle) GetControlPoint() int32 {
 	if m != nil && m.ControlPoint != nil {
@@ -1826,6 +1951,9 @@ func (m *CUserMsg_ParticleManager_UpdateParticleFwd) String() string {
 	return proto.CompactTextString(m)
 }
 func (*CUserMsg_ParticleManager_UpdateParticleFwd) ProtoMessage() {}
+func (*CUserMsg_ParticleManager_UpdateParticleFwd) Descriptor() ([]byte, []int) {
+	return fileDescriptor43, []int{41, 5}
+}
 
 func (m *CUserMsg_ParticleManager_UpdateParticleFwd) GetControlPoint() int32 {
 	if m != nil && m.ControlPoint != nil {
@@ -1856,6 +1984,9 @@ func (m *CUserMsg_ParticleManager_UpdateParticleOrient) String() string {
 	return proto.CompactTextString(m)
 }
 func (*CUserMsg_ParticleManager_UpdateParticleOrient) ProtoMessage() {}
+func (*CUserMsg_ParticleManager_UpdateParticleOrient) Descriptor() ([]byte, []int) {
+	return fileDescriptor43, []int{41, 6}
+}
 
 func (m *CUserMsg_ParticleManager_UpdateParticleOrient) GetControlPoint() int32 {
 	if m != nil && m.ControlPoint != nil {
@@ -1898,6 +2029,9 @@ func (m *CUserMsg_ParticleManager_UpdateParticleFallback) String() string {
 	return proto.CompactTextString(m)
 }
 func (*CUserMsg_ParticleManager_UpdateParticleFallback) ProtoMessage() {}
+func (*CUserMsg_ParticleManager_UpdateParticleFallback) Descriptor() ([]byte, []int) {
+	return fileDescriptor43, []int{41, 7}
+}
 
 func (m *CUserMsg_ParticleManager_UpdateParticleFallback) GetControlPoint() int32 {
 	if m != nil && m.ControlPoint != nil {
@@ -1926,6 +2060,9 @@ func (m *CUserMsg_ParticleManager_UpdateParticleOffset) String() string {
 	return proto.CompactTextString(m)
 }
 func (*CUserMsg_ParticleManager_UpdateParticleOffset) ProtoMessage() {}
+func (*CUserMsg_ParticleManager_UpdateParticleOffset) Descriptor() ([]byte, []int) {
+	return fileDescriptor43, []int{41, 8}
+}
 
 func (m *CUserMsg_ParticleManager_UpdateParticleOffset) GetControlPoint() int32 {
 	if m != nil && m.ControlPoint != nil {
@@ -1958,6 +2095,9 @@ func (m *CUserMsg_ParticleManager_UpdateParticleEnt) String() string {
 	return proto.CompactTextString(m)
 }
 func (*CUserMsg_ParticleManager_UpdateParticleEnt) ProtoMessage() {}
+func (*CUserMsg_ParticleManager_UpdateParticleEnt) Descriptor() ([]byte, []int) {
+	return fileDescriptor43, []int{41, 9}
+}
 
 func (m *CUserMsg_ParticleManager_UpdateParticleEnt) GetControlPoint() int32 {
 	if m != nil && m.ControlPoint != nil {
@@ -2013,6 +2153,9 @@ func (m *CUserMsg_ParticleManager_UpdateParticleSetFrozen) String() string {
 	return proto.CompactTextString(m)
 }
 func (*CUserMsg_ParticleManager_UpdateParticleSetFrozen) ProtoMessage() {}
+func (*CUserMsg_ParticleManager_UpdateParticleSetFrozen) Descriptor() ([]byte, []int) {
+	return fileDescriptor43, []int{41, 10}
+}
 
 func (m *CUserMsg_ParticleManager_UpdateParticleSetFrozen) GetSetFrozen() bool {
 	if m != nil && m.SetFrozen != nil {
@@ -2033,6 +2176,9 @@ func (m *CUserMsg_ParticleManager_UpdateParticleShouldDraw) String() string {
 	return proto.CompactTextString(m)
 }
 func (*CUserMsg_ParticleManager_UpdateParticleShouldDraw) ProtoMessage() {}
+func (*CUserMsg_ParticleManager_UpdateParticleShouldDraw) Descriptor() ([]byte, []int) {
+	return fileDescriptor43, []int{41, 11}
+}
 
 func (m *CUserMsg_ParticleManager_UpdateParticleShouldDraw) GetShouldDraw() bool {
 	if m != nil && m.ShouldDraw != nil {
@@ -2055,6 +2201,9 @@ func (m *CUserMsg_ParticleManager_ChangeControlPointAttachment) String() string 
 	return proto.CompactTextString(m)
 }
 func (*CUserMsg_ParticleManager_ChangeControlPointAttachment) ProtoMessage() {}
+func (*CUserMsg_ParticleManager_ChangeControlPointAttachment) Descriptor() ([]byte, []int) {
+	return fileDescriptor43, []int{41, 12}
+}
 
 func (m *CUserMsg_ParticleManager_ChangeControlPointAttachment) GetAttachmentOld() int32 {
 	if m != nil && m.AttachmentOld != nil {
@@ -2082,9 +2231,10 @@ type CUserMsg_HudError struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CUserMsg_HudError) Reset()         { *m = CUserMsg_HudError{} }
-func (m *CUserMsg_HudError) String() string { return proto.CompactTextString(m) }
-func (*CUserMsg_HudError) ProtoMessage()    {}
+func (m *CUserMsg_HudError) Reset()                    { *m = CUserMsg_HudError{} }
+func (m *CUserMsg_HudError) String() string            { return proto.CompactTextString(m) }
+func (*CUserMsg_HudError) ProtoMessage()               {}
+func (*CUserMsg_HudError) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{42} }
 
 func (m *CUserMsg_HudError) GetOrderId() int32 {
 	if m != nil && m.OrderId != nil {
@@ -2099,9 +2249,10 @@ type CUserMsg_CustomGameEvent struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CUserMsg_CustomGameEvent) Reset()         { *m = CUserMsg_CustomGameEvent{} }
-func (m *CUserMsg_CustomGameEvent) String() string { return proto.CompactTextString(m) }
-func (*CUserMsg_CustomGameEvent) ProtoMessage()    {}
+func (m *CUserMsg_CustomGameEvent) Reset()                    { *m = CUserMsg_CustomGameEvent{} }
+func (m *CUserMsg_CustomGameEvent) String() string            { return proto.CompactTextString(m) }
+func (*CUserMsg_CustomGameEvent) ProtoMessage()               {}
+func (*CUserMsg_CustomGameEvent) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{43} }
 
 func (m *CUserMsg_CustomGameEvent) GetEventName() string {
 	if m != nil && m.EventName != nil {
@@ -2117,9 +2268,284 @@ func (m *CUserMsg_CustomGameEvent) GetData() []byte {
 	return nil
 }
 
+type CUserMessageHapticPulse struct {
+	HandId           *int32            `protobuf:"varint,1,opt,name=hand_id" json:"hand_id,omitempty"`
+	PulseType        *EHapticPulseType `protobuf:"varint,2,opt,name=pulse_type,enum=dota.EHapticPulseType,def=0" json:"pulse_type,omitempty"`
+	XXX_unrecognized []byte            `json:"-"`
+}
+
+func (m *CUserMessageHapticPulse) Reset()                    { *m = CUserMessageHapticPulse{} }
+func (m *CUserMessageHapticPulse) String() string            { return proto.CompactTextString(m) }
+func (*CUserMessageHapticPulse) ProtoMessage()               {}
+func (*CUserMessageHapticPulse) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{44} }
+
+const Default_CUserMessageHapticPulse_PulseType EHapticPulseType = EHapticPulseType_VR_HAND_HAPTIC_PULSE_LIGHT
+
+func (m *CUserMessageHapticPulse) GetHandId() int32 {
+	if m != nil && m.HandId != nil {
+		return *m.HandId
+	}
+	return 0
+}
+
+func (m *CUserMessageHapticPulse) GetPulseType() EHapticPulseType {
+	if m != nil && m.PulseType != nil {
+		return *m.PulseType
+	}
+	return Default_CUserMessageHapticPulse_PulseType
+}
+
 func init() {
+	proto.RegisterType((*CUserMessageAchievementEvent)(nil), "dota.CUserMessageAchievementEvent")
+	proto.RegisterType((*CUserMessageCloseCaption)(nil), "dota.CUserMessageCloseCaption")
+	proto.RegisterType((*CUserMessageCloseCaptionDirect)(nil), "dota.CUserMessageCloseCaptionDirect")
+	proto.RegisterType((*CUserMessageCloseCaptionPlaceholder)(nil), "dota.CUserMessageCloseCaptionPlaceholder")
+	proto.RegisterType((*CUserMessageCurrentTimescale)(nil), "dota.CUserMessageCurrentTimescale")
+	proto.RegisterType((*CUserMessageDesiredTimescale)(nil), "dota.CUserMessageDesiredTimescale")
+	proto.RegisterType((*CUserMessageFade)(nil), "dota.CUserMessageFade")
+	proto.RegisterType((*CUserMessageShake)(nil), "dota.CUserMessageShake")
+	proto.RegisterType((*CUserMessageShakeDir)(nil), "dota.CUserMessageShakeDir")
+	proto.RegisterType((*CUserMessageScreenTilt)(nil), "dota.CUserMessageScreenTilt")
+	proto.RegisterType((*CUserMessageSayText)(nil), "dota.CUserMessageSayText")
+	proto.RegisterType((*CUserMessageSayText2)(nil), "dota.CUserMessageSayText2")
+	proto.RegisterType((*CUserMessageHudMsg)(nil), "dota.CUserMessageHudMsg")
+	proto.RegisterType((*CUserMessageHudText)(nil), "dota.CUserMessageHudText")
+	proto.RegisterType((*CUserMessageTextMsg)(nil), "dota.CUserMessageTextMsg")
+	proto.RegisterType((*CUserMessageGameTitle)(nil), "dota.CUserMessageGameTitle")
+	proto.RegisterType((*CUserMessageResetHUD)(nil), "dota.CUserMessageResetHUD")
+	proto.RegisterType((*CUserMessageSendAudio)(nil), "dota.CUserMessageSendAudio")
+	proto.RegisterType((*CUserMessageAudioParameter)(nil), "dota.CUserMessageAudioParameter")
+	proto.RegisterType((*CUserMessageVoiceMask)(nil), "dota.CUserMessageVoiceMask")
+	proto.RegisterType((*CUserMessageRequestState)(nil), "dota.CUserMessageRequestState")
+	proto.RegisterType((*CUserMessageHintText)(nil), "dota.CUserMessageHintText")
+	proto.RegisterType((*CUserMessageKeyHintText)(nil), "dota.CUserMessageKeyHintText")
+	proto.RegisterType((*CUserMessageVoiceSubtitle)(nil), "dota.CUserMessageVoiceSubtitle")
+	proto.RegisterType((*CUserMessageVGUIMenu)(nil), "dota.CUserMessageVGUIMenu")
+	proto.RegisterType((*CUserMessageVGUIMenu_Keys)(nil), "dota.CUserMessageVGUIMenu.Keys")
+	proto.RegisterType((*CUserMessageRumble)(nil), "dota.CUserMessageRumble")
+	proto.RegisterType((*CUserMessageTrain)(nil), "dota.CUserMessageTrain")
+	proto.RegisterType((*CUserMessageSayTextChannel)(nil), "dota.CUserMessageSayTextChannel")
+	proto.RegisterType((*CUserMessageColoredText)(nil), "dota.CUserMessageColoredText")
+	proto.RegisterType((*CUserMessageItemPickup)(nil), "dota.CUserMessageItemPickup")
+	proto.RegisterType((*CUserMessageAmmoDenied)(nil), "dota.CUserMessageAmmoDenied")
+	proto.RegisterType((*CUserMessageCrosshairAngle)(nil), "dota.CUserMessageCrosshairAngle")
+	proto.RegisterType((*CUserMessageShowMenu)(nil), "dota.CUserMessageShowMenu")
+	proto.RegisterType((*CUserMessageCreditsMsg)(nil), "dota.CUserMessageCreditsMsg")
+	proto.RegisterType((*CEntityMessagePlayJingle)(nil), "dota.CEntityMessagePlayJingle")
+	proto.RegisterType((*CEntityMessageScreenOverlay)(nil), "dota.CEntityMessageScreenOverlay")
+	proto.RegisterType((*CEntityMessageRemoveAllDecals)(nil), "dota.CEntityMessageRemoveAllDecals")
+	proto.RegisterType((*CEntityMessagePropagateForce)(nil), "dota.CEntityMessagePropagateForce")
+	proto.RegisterType((*CEntityMessageDoSpark)(nil), "dota.CEntityMessageDoSpark")
+	proto.RegisterType((*CEntityMessageFixAngle)(nil), "dota.CEntityMessageFixAngle")
+	proto.RegisterType((*CUserMessageCameraTransition)(nil), "dota.CUserMessageCameraTransition")
+	proto.RegisterType((*CUserMessageCameraTransition_Transition_DataDriven)(nil), "dota.CUserMessageCameraTransition.Transition_DataDriven")
+	proto.RegisterType((*CUserMsg_ParticleManager)(nil), "dota.CUserMsg_ParticleManager")
+	proto.RegisterType((*CUserMsg_ParticleManager_ReleaseParticleIndex)(nil), "dota.CUserMsg_ParticleManager.ReleaseParticleIndex")
+	proto.RegisterType((*CUserMsg_ParticleManager_CreateParticle)(nil), "dota.CUserMsg_ParticleManager.CreateParticle")
+	proto.RegisterType((*CUserMsg_ParticleManager_DestroyParticle)(nil), "dota.CUserMsg_ParticleManager.DestroyParticle")
+	proto.RegisterType((*CUserMsg_ParticleManager_DestroyParticleInvolving)(nil), "dota.CUserMsg_ParticleManager.DestroyParticleInvolving")
+	proto.RegisterType((*CUserMsg_ParticleManager_UpdateParticle)(nil), "dota.CUserMsg_ParticleManager.UpdateParticle")
+	proto.RegisterType((*CUserMsg_ParticleManager_UpdateParticleFwd)(nil), "dota.CUserMsg_ParticleManager.UpdateParticleFwd")
+	proto.RegisterType((*CUserMsg_ParticleManager_UpdateParticleOrient)(nil), "dota.CUserMsg_ParticleManager.UpdateParticleOrient")
+	proto.RegisterType((*CUserMsg_ParticleManager_UpdateParticleFallback)(nil), "dota.CUserMsg_ParticleManager.UpdateParticleFallback")
+	proto.RegisterType((*CUserMsg_ParticleManager_UpdateParticleOffset)(nil), "dota.CUserMsg_ParticleManager.UpdateParticleOffset")
+	proto.RegisterType((*CUserMsg_ParticleManager_UpdateParticleEnt)(nil), "dota.CUserMsg_ParticleManager.UpdateParticleEnt")
+	proto.RegisterType((*CUserMsg_ParticleManager_UpdateParticleSetFrozen)(nil), "dota.CUserMsg_ParticleManager.UpdateParticleSetFrozen")
+	proto.RegisterType((*CUserMsg_ParticleManager_UpdateParticleShouldDraw)(nil), "dota.CUserMsg_ParticleManager.UpdateParticleShouldDraw")
+	proto.RegisterType((*CUserMsg_ParticleManager_ChangeControlPointAttachment)(nil), "dota.CUserMsg_ParticleManager.ChangeControlPointAttachment")
+	proto.RegisterType((*CUserMsg_HudError)(nil), "dota.CUserMsg_HudError")
+	proto.RegisterType((*CUserMsg_CustomGameEvent)(nil), "dota.CUserMsg_CustomGameEvent")
+	proto.RegisterType((*CUserMessageHapticPulse)(nil), "dota.CUserMessageHapticPulse")
 	proto.RegisterEnum("dota.EBaseUserMessages", EBaseUserMessages_name, EBaseUserMessages_value)
 	proto.RegisterEnum("dota.EBaseEntityMessages", EBaseEntityMessages_name, EBaseEntityMessages_value)
 	proto.RegisterEnum("dota.ERollType", ERollType_name, ERollType_value)
 	proto.RegisterEnum("dota.PARTICLE_MESSAGE", PARTICLE_MESSAGE_name, PARTICLE_MESSAGE_value)
+	proto.RegisterEnum("dota.EHapticPulseType", EHapticPulseType_name, EHapticPulseType_value)
+}
+
+var fileDescriptor43 = []byte{
+	// 2926 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xac, 0x39, 0x69, 0x73, 0x23, 0x47,
+	0xd9, 0x19, 0xaf, 0x65, 0x5b, 0xed, 0x63, 0xdb, 0xe3, 0xac, 0x57, 0xd1, 0xe6, 0xcd, 0xe6, 0x9d,
+	0x2d, 0x36, 0xc4, 0x61, 0x1d, 0xe2, 0x85, 0x90, 0x4a, 0xa8, 0x02, 0xad, 0x34, 0x3e, 0xb2, 0x3a,
+	0x8c, 0x24, 0x7b, 0xc9, 0x51, 0x35, 0x35, 0xd6, 0xb4, 0xa4, 0xc1, 0xa3, 0x19, 0x65, 0x0e, 0x1f,
+	0x14, 0x90, 0x70, 0x05, 0x08, 0x90, 0x04, 0x2a, 0xf0, 0x8d, 0x3f, 0xc1, 0x27, 0x7e, 0x02, 0x5f,
+	0xf8, 0x0f, 0xfc, 0x13, 0x78, 0xfa, 0xe9, 0x1e, 0x69, 0x66, 0x64, 0xd9, 0xde, 0x84, 0x7c, 0x70,
+	0xd4, 0xcf, 0xf4, 0x73, 0xf6, 0x73, 0x2f, 0x51, 0xa3, 0x80, 0xf9, 0x03, 0x16, 0x04, 0x66, 0x8f,
+	0x05, 0x9b, 0x43, 0xdf, 0x0b, 0x3d, 0x75, 0xd6, 0xf2, 0x42, 0xb3, 0xb8, 0xee, 0xb2, 0xf0, 0xd4,
+	0xf3, 0x8f, 0x8f, 0xcc, 0x80, 0x85, 0xe7, 0xc3, 0xf8, 0xab, 0xf6, 0x90, 0x3c, 0x5f, 0x3e, 0x00,
+	0xa4, 0x9a, 0x40, 0x2a, 0x75, 0xfa, 0x36, 0x3b, 0x61, 0x03, 0xe6, 0x86, 0xfa, 0x09, 0xfc, 0x51,
+	0xd7, 0xc8, 0xa2, 0x39, 0x86, 0x15, 0x94, 0x17, 0x95, 0xaf, 0x2f, 0x6b, 0x47, 0xa4, 0x90, 0x44,
+	0x2a, 0x3b, 0x5e, 0xc0, 0xca, 0xe6, 0x30, 0xb4, 0x3d, 0x57, 0x5d, 0x22, 0xb3, 0x7d, 0x33, 0xe8,
+	0xe3, 0xcd, 0x79, 0x95, 0x92, 0x05, 0x2b, 0xf2, 0x4d, 0xfe, 0xa5, 0x30, 0x03, 0x90, 0x19, 0x4e,
+	0xb0, 0xeb, 0x7b, 0x03, 0x63, 0xe8, 0x98, 0xe7, 0xcc, 0x2f, 0xdc, 0x00, 0xe0, 0x82, 0xba, 0x4a,
+	0xf2, 0x40, 0xdd, 0xb0, 0x5d, 0x8b, 0x9d, 0x15, 0x66, 0x01, 0x94, 0xd3, 0xfa, 0xe4, 0x85, 0x69,
+	0x3c, 0x2a, 0xb6, 0xcf, 0x3a, 0xe1, 0xff, 0x8c, 0x93, 0x47, 0xee, 0x4d, 0xe3, 0xb4, 0xef, 0x98,
+	0x1d, 0xd6, 0xf7, 0x1c, 0x8b, 0xf9, 0xea, 0x0a, 0x99, 0x0b, 0x42, 0xdf, 0x76, 0x7b, 0xc8, 0x30,
+	0xff, 0x15, 0x18, 0xbe, 0x9a, 0xb6, 0x79, 0x39, 0xf2, 0x7d, 0xb8, 0xd2, 0xb6, 0xe1, 0xe1, 0x3a,
+	0xa6, 0xc3, 0xd4, 0x9b, 0x64, 0xbe, 0x23, 0x60, 0xc8, 0x6a, 0x46, 0x3b, 0x4f, 0x23, 0x54, 0x58,
+	0x00, 0x16, 0xb0, 0x52, 0x08, 0x96, 0x80, 0x09, 0x04, 0xf5, 0x59, 0xb2, 0x64, 0x76, 0x3a, 0xcc,
+	0x61, 0x29, 0xf9, 0x00, 0x3a, 0xb0, 0xdd, 0x23, 0x87, 0xb9, 0x16, 0xc0, 0x19, 0x0a, 0x38, 0xa3,
+	0x3e, 0x4f, 0x9e, 0x45, 0x90, 0xc5, 0x9c, 0xd0, 0x1c, 0x44, 0x4e, 0x68, 0x0f, 0x1d, 0x1b, 0xc4,
+	0x9f, 0x45, 0xd6, 0x07, 0x84, 0x26, 0x59, 0x6f, 0x9b, 0x16, 0x4b, 0x69, 0x8e, 0x0e, 0xc1, 0x95,
+	0xe4, 0x56, 0x32, 0x42, 0x10, 0x09, 0x99, 0x2d, 0xab, 0xcb, 0x24, 0xd7, 0x75, 0xcc, 0x5e, 0x80,
+	0x5c, 0xf0, 0xd8, 0xf1, 0x1c, 0x4f, 0x90, 0x9d, 0xd7, 0xde, 0x27, 0xab, 0x49, 0xb2, 0xad, 0xbe,
+	0x79, 0x2c, 0xf4, 0xf6, 0x06, 0x03, 0xd3, 0xb5, 0xc6, 0x64, 0xcd, 0x01, 0x48, 0x13, 0x46, 0x16,
+	0x93, 0x3a, 0x00, 0xa8, 0xeb, 0xb3, 0x0f, 0x22, 0xe6, 0x76, 0xce, 0xa5, 0x02, 0x49, 0x71, 0x84,
+	0xd0, 0x1d, 0xf2, 0xec, 0x04, 0x75, 0x70, 0x1a, 0xf5, 0x3e, 0xc9, 0x05, 0xfc, 0x37, 0x92, 0x5f,
+	0xdc, 0xba, 0xbd, 0xc9, 0x43, 0x63, 0x73, 0x52, 0x90, 0x7b, 0x24, 0x6f, 0xa1, 0x8f, 0xc5, 0xb6,
+	0x5b, 0xdc, 0xa2, 0xf2, 0x6e, 0x2d, 0xe8, 0x1d, 0xc2, 0x07, 0xcf, 0xd7, 0x3e, 0x24, 0xeb, 0x29,
+	0xcc, 0x8e, 0xcf, 0x98, 0xdb, 0xb6, 0x9d, 0x70, 0x52, 0x0f, 0x70, 0x0c, 0x06, 0x71, 0x07, 0x4e,
+	0x60, 0x78, 0x51, 0x88, 0x14, 0x17, 0xd4, 0xbb, 0x24, 0x67, 0xba, 0x3d, 0x47, 0x3c, 0xc3, 0x05,
+	0x0c, 0x26, 0xf5, 0xe2, 0x1e, 0x8f, 0x16, 0xce, 0xa1, 0x96, 0xdb, 0x64, 0x2d, 0x25, 0x80, 0x79,
+	0xde, 0x66, 0x67, 0x18, 0xb1, 0xc2, 0x01, 0x85, 0xcb, 0x09, 0x09, 0x38, 0x26, 0x7c, 0x44, 0xd6,
+	0x79, 0x7e, 0xea, 0xf4, 0xcd, 0x50, 0x78, 0xa8, 0xf6, 0xa9, 0x92, 0x31, 0x97, 0x20, 0xb4, 0x85,
+	0x62, 0xbb, 0xa1, 0x1d, 0x9e, 0x67, 0x28, 0x21, 0xae, 0x50, 0x02, 0xae, 0xc8, 0x74, 0xe3, 0x9a,
+	0x03, 0xa1, 0x4a, 0x9e, 0x47, 0xca, 0xd0, 0xf4, 0xcd, 0xc1, 0x6b, 0x28, 0xf6, 0xf8, 0xbc, 0x85,
+	0x82, 0x8f, 0xcf, 0x0f, 0x0b, 0x73, 0xa9, 0xf3, 0xb7, 0x0a, 0xf3, 0xfc, 0xac, 0xfd, 0x4b, 0x21,
+	0x6a, 0x52, 0xa0, 0xdd, 0xc8, 0x02, 0xab, 0xa0, 0x59, 0xfb, 0xa6, 0xeb, 0x32, 0x47, 0x8a, 0x92,
+	0x27, 0xca, 0x99, 0x74, 0x0b, 0xf8, 0x19, 0xbb, 0x03, 0x50, 0x43, 0x4f, 0x13, 0xdc, 0xe7, 0x47,
+	0x67, 0xc1, 0x1d, 0xcf, 0xac, 0xdb, 0x05, 0x13, 0x23, 0xf7, 0x65, 0x1e, 0x15, 0x5d, 0xf0, 0x6a,
+	0xfe, 0x38, 0x68, 0xdc, 0x79, 0xa4, 0x72, 0x8b, 0x2c, 0x23, 0x14, 0xde, 0x4b, 0x80, 0x17, 0x62,
+	0xf7, 0x1b, 0x3b, 0x7a, 0x1e, 0x41, 0x20, 0x56, 0xf7, 0x4c, 0x00, 0x48, 0x0c, 0x90, 0x36, 0x29,
+	0x2c, 0xa2, 0x3e, 0xf7, 0xd3, 0x0f, 0x05, 0xea, 0xe0, 0x43, 0x25, 0xee, 0x61, 0x46, 0xd1, 0xb6,
+	0xd2, 0xf7, 0xf8, 0x25, 0xae, 0x37, 0x58, 0x1c, 0xa2, 0x5b, 0xe6, 0x5e, 0x1e, 0x48, 0x68, 0x2c,
+	0x50, 0xfc, 0x06, 0xe0, 0xdc, 0x26, 0xb7, 0x92, 0x38, 0x3b, 0xf0, 0x0a, 0x6d, 0x3b, 0x74, 0x98,
+	0xb6, 0x9e, 0x7e, 0xd4, 0x26, 0x83, 0xbc, 0xbf, 0x7b, 0x50, 0xd1, 0xde, 0x48, 0x23, 0xb4, 0x20,
+	0xf2, 0x4b, 0x91, 0x65, 0x7b, 0x5c, 0xb5, 0xc0, 0x8b, 0x5c, 0x0b, 0x1f, 0x52, 0x89, 0xfd, 0x24,
+	0x08, 0xbd, 0xa1, 0x78, 0x6b, 0xcd, 0x25, 0xc5, 0x54, 0xa9, 0xe0, 0x58, 0xfb, 0x5c, 0x14, 0x16,
+	0x42, 0x7a, 0x5c, 0x27, 0x2b, 0xc3, 0xf8, 0x60, 0xf0, 0x0a, 0x23, 0xe5, 0x05, 0x38, 0xa7, 0x68,
+	0xf0, 0x54, 0x6d, 0x74, 0x3c, 0x2b, 0x91, 0x1f, 0x4e, 0x4c, 0x27, 0x8a, 0xb3, 0x10, 0x70, 0xb7,
+	0x21, 0x4d, 0x0a, 0xd0, 0x2c, 0x56, 0x99, 0x27, 0x69, 0x49, 0x0f, 0x3d, 0xbb, 0xc3, 0x6a, 0x66,
+	0x70, 0xac, 0xde, 0x26, 0x37, 0x7b, 0x40, 0xd2, 0x8f, 0x1c, 0x16, 0x18, 0x03, 0x80, 0x04, 0xc0,
+	0xeb, 0x86, 0xc8, 0x17, 0x47, 0xa6, 0x2b, 0x41, 0x33, 0x08, 0x52, 0x09, 0x19, 0x78, 0x96, 0x01,
+	0xee, 0x79, 0x24, 0x43, 0x6d, 0x41, 0x2b, 0xa6, 0xcb, 0x57, 0x93, 0xa7, 0x93, 0x20, 0x6c, 0x85,
+	0x90, 0x13, 0xb5, 0x97, 0xd2, 0x66, 0xdb, 0x05, 0xa1, 0x2e, 0x7e, 0xac, 0x57, 0xc8, 0xed, 0xe4,
+	0xc5, 0xc7, 0xec, 0x7c, 0x74, 0x17, 0x02, 0x37, 0xae, 0xc1, 0x28, 0x58, 0x5e, 0xdb, 0x21, 0xcf,
+	0x4d, 0xa8, 0xd2, 0x8a, 0x8e, 0x42, 0xfe, 0x52, 0xe8, 0xfe, 0xa2, 0x62, 0x70, 0xca, 0x39, 0x6e,
+	0x75, 0xa8, 0xb5, 0x11, 0xda, 0x09, 0x4f, 0x76, 0xc8, 0x06, 0x28, 0x7a, 0x4e, 0xfb, 0x38, 0x13,
+	0xab, 0x87, 0x3b, 0x07, 0x7b, 0x35, 0xb8, 0xcc, 0xaf, 0x65, 0x1e, 0xae, 0xef, 0x9d, 0xca, 0x20,
+	0x7d, 0x40, 0x66, 0x8f, 0xd9, 0x39, 0xcf, 0xc4, 0x37, 0x20, 0xd1, 0xdc, 0x9d, 0xcc, 0x7a, 0x31,
+	0x95, 0x4d, 0xd0, 0x22, 0x28, 0xde, 0x23, 0xb3, 0xfc, 0xff, 0x19, 0x92, 0xa3, 0xf7, 0xc2, 0x14,
+	0xa2, 0x7d, 0x3f, 0x1d, 0xa2, 0xcd, 0x68, 0x00, 0xf6, 0xe5, 0x97, 0xc6, 0xb9, 0x02, 0x65, 0xb7,
+	0xcc, 0xd0, 0x94, 0x9a, 0xa4, 0x2a, 0x42, 0x4e, 0xfb, 0x5a, 0xba, 0x04, 0xb4, 0x7d, 0xd3, 0x76,
+	0xb9, 0xe9, 0x86, 0x5e, 0x60, 0x8f, 0x4b, 0x8b, 0xf6, 0x38, 0xed, 0x75, 0x32, 0x39, 0x95, 0x45,
+	0x22, 0x98, 0xb0, 0x5d, 0x22, 0x47, 0x8c, 0xcc, 0x87, 0x89, 0x0f, 0x33, 0x93, 0xf6, 0xb9, 0x92,
+	0x7e, 0xb5, 0x32, 0x4f, 0x0c, 0x4c, 0x84, 0xe3, 0xa8, 0x42, 0x5d, 0x94, 0x31, 0xe1, 0xa3, 0xcf,
+	0x23, 0x48, 0x16, 0xf5, 0xe7, 0xc8, 0x6a, 0xc7, 0x73, 0xf9, 0x77, 0x59, 0xec, 0x0d, 0xdb, 0x12,
+	0xc5, 0x9d, 0x27, 0x8e, 0xf8, 0x93, 0xb0, 0x57, 0x0e, 0xc1, 0xe0, 0xb3, 0x31, 0x38, 0x64, 0xe6,
+	0x80, 0xdf, 0x9f, 0x43, 0x33, 0x6c, 0xa4, 0xcb, 0xc8, 0x1e, 0xbc, 0xf5, 0xbe, 0xdd, 0x39, 0x8e,
+	0x86, 0xdc, 0x16, 0xfc, 0xe5, 0xc7, 0x6f, 0xa0, 0xbd, 0x9c, 0xbe, 0x5b, 0x1a, 0x0c, 0xbc, 0x0a,
+	0x73, 0x6d, 0x66, 0x71, 0xbd, 0x4d, 0x38, 0x71, 0xb2, 0xc2, 0x6c, 0x95, 0xb4, 0xd9, 0xca, 0xbe,
+	0x17, 0x40, 0xe9, 0xb3, 0xfd, 0x12, 0x2f, 0x39, 0x50, 0x08, 0x97, 0xa0, 0xf6, 0x74, 0x62, 0xa0,
+	0xac, 0x87, 0x89, 0x12, 0xf4, 0x03, 0xbc, 0xa7, 0xb1, 0x6c, 0x21, 0xf5, 0x4e, 0xd1, 0xdb, 0x20,
+	0xaa, 0x40, 0x39, 0xdb, 0x0a, 0x1c, 0x2f, 0x0c, 0xc6, 0x45, 0xce, 0xb2, 0x03, 0x6e, 0x8e, 0x44,
+	0x17, 0x00, 0x3a, 0xb8, 0x8c, 0x59, 0x03, 0xb0, 0xb2, 0x34, 0x1d, 0x0f, 0x48, 0x20, 0x21, 0x5b,
+	0x29, 0x2c, 0x10, 0xda, 0x7b, 0x69, 0xbd, 0xca, 0xf0, 0x24, 0x76, 0x18, 0xf0, 0xdc, 0xf7, 0x0d,
+	0xb2, 0xe0, 0x7b, 0x8e, 0x33, 0xca, 0x27, 0x2b, 0x5b, 0x37, 0x85, 0x90, 0xac, 0x09, 0xe0, 0x36,
+	0x80, 0xdf, 0xcc, 0x37, 0x1b, 0xd5, 0xaa, 0x51, 0x6f, 0xd4, 0x75, 0x2e, 0x82, 0xe3, 0xf5, 0x3c,
+	0x03, 0xda, 0x99, 0x5e, 0xd8, 0x17, 0xa5, 0x01, 0xa3, 0x5d, 0xc7, 0x32, 0x26, 0xc9, 0x43, 0x53,
+	0x77, 0xfe, 0xb6, 0x8d, 0xfa, 0x3d, 0x24, 0x77, 0xd2, 0xdf, 0x44, 0x15, 0x6f, 0x9c, 0x30, 0x1f,
+	0x2e, 0xf1, 0xd2, 0x10, 0x84, 0xa6, 0x1f, 0x1a, 0xb2, 0x60, 0x28, 0x98, 0x3e, 0x5e, 0x27, 0xff,
+	0x97, 0x46, 0x6a, 0xb2, 0x81, 0x77, 0xc2, 0x4a, 0x8e, 0x53, 0x61, 0xd0, 0x8e, 0x05, 0xdc, 0x05,
+	0x7c, 0x04, 0x19, 0x16, 0x02, 0x24, 0x5e, 0x09, 0xba, 0xb8, 0xb4, 0x20, 0xbe, 0x37, 0x34, 0x7b,
+	0x90, 0x75, 0xb6, 0x3d, 0xbf, 0xc3, 0xd4, 0xff, 0x27, 0xf3, 0xf6, 0x60, 0x18, 0x39, 0x01, 0x9b,
+	0x7c, 0x0f, 0xd9, 0x73, 0xfc, 0x4d, 0x81, 0x9c, 0x98, 0xa2, 0x51, 0xf1, 0x5a, 0x90, 0x76, 0x8f,
+	0xd5, 0x17, 0xc9, 0x9c, 0xe7, 0xdb, 0x3d, 0xdb, 0x9d, 0x86, 0x9b, 0xad, 0xe6, 0xe2, 0x7d, 0x20,
+	0x7e, 0x7c, 0xd3, 0xb2, 0xa3, 0x40, 0xa6, 0xe1, 0x74, 0x9b, 0xc6, 0x8f, 0x47, 0xe0, 0xad, 0x01,
+	0x3a, 0x31, 0xe6, 0xec, 0xb0, 0x0f, 0xce, 0x89, 0xae, 0x9b, 0x6e, 0xbc, 0xb0, 0x6a, 0x42, 0xb0,
+	0xae, 0xa7, 0xc5, 0xdb, 0xb6, 0xcf, 0x84, 0xc7, 0xc1, 0x5d, 0x9f, 0x39, 0x70, 0xf7, 0x44, 0x68,
+	0x97, 0xe8, 0x7f, 0x66, 0xa6, 0x38, 0xdf, 0xbf, 0x95, 0x4c, 0x9f, 0xcc, 0x73, 0xbe, 0x09, 0x79,
+	0xc2, 0x15, 0x09, 0x82, 0x6b, 0xd4, 0x41, 0x58, 0xb2, 0xde, 0x4c, 0xb6, 0xe5, 0x6d, 0xa2, 0x62,
+	0x65, 0x0a, 0x0c, 0x9e, 0x8c, 0x0c, 0xcb, 0x07, 0x19, 0x5c, 0xd9, 0x75, 0xbd, 0x31, 0x99, 0x0c,
+	0xb3, 0x6c, 0x36, 0xc7, 0x3f, 0x8d, 0x0a, 0x10, 0xa8, 0x20, 0x7e, 0xb1, 0x4c, 0x6e, 0x5d, 0xf8,
+	0x81, 0x0b, 0xd0, 0xb5, 0x1d, 0x96, 0x48, 0x9d, 0x05, 0x42, 0xcd, 0x30, 0x84, 0x31, 0xca, 0x18,
+	0x4f, 0x02, 0x98, 0x9d, 0xb4, 0x4f, 0xd4, 0xb8, 0x14, 0x05, 0x3d, 0x03, 0x6a, 0x69, 0x68, 0x77,
+	0x1c, 0xa8, 0x71, 0x2e, 0x88, 0xe1, 0xab, 0xbb, 0x90, 0x81, 0x84, 0x5e, 0x33, 0xe0, 0xf7, 0xeb,
+	0x42, 0xd2, 0xfd, 0x52, 0xb3, 0xbd, 0x57, 0xae, 0xea, 0x46, 0x4d, 0x6f, 0xb5, 0x4a, 0x3b, 0xfa,
+	0x9b, 0xda, 0x4e, 0xa9, 0xa6, 0x1b, 0x63, 0x70, 0xa9, 0x0e, 0xd0, 0xa6, 0xa1, 0x1f, 0xea, 0xf5,
+	0xb6, 0x51, 0x6e, 0xea, 0xa5, 0xb6, 0x3e, 0x4e, 0xcb, 0x33, 0x40, 0x6a, 0x59, 0x6d, 0x91, 0x75,
+	0x78, 0x0b, 0xec, 0x48, 0x87, 0x92, 0xa7, 0x94, 0x4a, 0x18, 0xe5, 0x61, 0xd2, 0x28, 0x93, 0x82,
+	0x6d, 0x36, 0x05, 0x72, 0x0c, 0xde, 0xe3, 0xa8, 0xea, 0x36, 0x24, 0x38, 0x9f, 0x81, 0x33, 0x8f,
+	0x68, 0xa2, 0x0f, 0x2d, 0x6e, 0x3d, 0xb8, 0x82, 0x5a, 0x19, 0xb1, 0x62, 0x28, 0x68, 0x4d, 0x79,
+	0xb7, 0xe3, 0x7b, 0xe7, 0x63, 0x42, 0x39, 0x24, 0xb4, 0x79, 0x05, 0xa1, 0x8a, 0x40, 0x1b, 0x51,
+	0x7a, 0x8f, 0x14, 0xb3, 0x94, 0x40, 0xcd, 0x13, 0xcf, 0x39, 0xe1, 0x99, 0x67, 0x0e, 0x69, 0x7e,
+	0xe7, 0xe9, 0x68, 0xee, 0xc5, 0xe8, 0x5c, 0xdd, 0x68, 0x68, 0xa5, 0xd4, 0x9d, 0xbf, 0x96, 0xba,
+	0x07, 0x88, 0x35, 0x12, 0xb2, 0x46, 0xd6, 0x32, 0x74, 0x8c, 0xee, 0xa9, 0x85, 0xdd, 0xe6, 0xe2,
+	0xd6, 0x37, 0x9f, 0x8a, 0xd6, 0xf6, 0xa9, 0xc5, 0x9f, 0x36, 0x4b, 0x0e, 0xd2, 0x02, 0x9f, 0x24,
+	0xf3, 0xd7, 0x7a, 0xda, 0x34, 0xc5, 0x06, 0xa2, 0xaa, 0x4f, 0x48, 0x61, 0x42, 0x46, 0xd3, 0x71,
+	0x8e, 0x4c, 0xc8, 0x04, 0x04, 0xc9, 0x7e, 0xfb, 0xe9, 0x04, 0x95, 0xc8, 0x17, 0x4a, 0xdb, 0xed,
+	0xf2, 0x32, 0xbb, 0xf8, 0x65, 0xa4, 0x45, 0xd4, 0x8b, 0x2c, 0xca, 0xf5, 0x5f, 0xfa, 0x12, 0x16,
+	0x85, 0x54, 0xa6, 0xbe, 0x4f, 0xee, 0x64, 0xc9, 0x41, 0x6b, 0x15, 0xc1, 0x0c, 0x00, 0x43, 0xf4,
+	0x69, 0x61, 0xe5, 0x5a, 0x6e, 0x94, 0x26, 0xdb, 0x42, 0xfc, 0x0a, 0xa0, 0xab, 0xef, 0x92, 0xe2,
+	0x04, 0x75, 0x16, 0x1a, 0x5d, 0xdf, 0xfb, 0x31, 0xe4, 0xa8, 0x9b, 0x48, 0xfc, 0xf5, 0xa7, 0x23,
+	0xce, 0xc2, 0x6d, 0xc4, 0x56, 0x2d, 0x72, 0x97, 0xf7, 0x42, 0x3d, 0x66, 0xf0, 0xce, 0x03, 0xca,
+	0xa8, 0x31, 0xf4, 0x78, 0x8f, 0x2d, 0x72, 0x11, 0xae, 0x73, 0x28, 0x32, 0x78, 0xeb, 0xaa, 0x08,
+	0x45, 0x2a, 0x65, 0x41, 0x64, 0x9f, 0xd3, 0x28, 0x8d, 0x48, 0x14, 0x61, 0xce, 0xb8, 0x28, 0x1f,
+	0x14, 0xdf, 0x21, 0x2b, 0x99, 0xc8, 0xbe, 0x43, 0xd6, 0x46, 0x4a, 0xe2, 0x48, 0x30, 0x6e, 0x15,
+	0xe7, 0x70, 0xcf, 0x24, 0x72, 0x24, 0xe6, 0xbc, 0x99, 0xb8, 0x97, 0x12, 0x25, 0x0b, 0xa6, 0x07,
+	0xd7, 0x92, 0xfd, 0x7b, 0xae, 0xb8, 0x49, 0x6e, 0x66, 0x63, 0x1d, 0x68, 0xc7, 0xb1, 0x6e, 0x0f,
+	0x06, 0xd0, 0x3e, 0x00, 0x63, 0xe7, 0x5c, 0x54, 0x9a, 0x62, 0x9d, 0x14, 0xa6, 0xc6, 0xf1, 0x65,
+	0x88, 0xd3, 0xf8, 0x3f, 0x26, 0x2b, 0x99, 0x28, 0x96, 0x4d, 0xdf, 0xc8, 0xc6, 0xb2, 0x1b, 0xd5,
+	0x12, 0xdd, 0xec, 0x94, 0x35, 0x42, 0xb1, 0x46, 0x56, 0x27, 0xc3, 0x78, 0x0a, 0x3d, 0xe8, 0x10,
+	0xba, 0x9e, 0x7f, 0x6a, 0xfa, 0xd6, 0x54, 0x72, 0x9f, 0xc1, 0x80, 0x70, 0x61, 0x10, 0x7f, 0x69,
+	0x92, 0xbc, 0x50, 0x43, 0x67, 0xd1, 0x0f, 0xa7, 0x2e, 0x2a, 0x9e, 0x27, 0x33, 0xd1, 0x50, 0x66,
+	0xfb, 0x49, 0x89, 0x20, 0xc8, 0xa7, 0x84, 0xff, 0x57, 0xb0, 0xda, 0xe1, 0x84, 0x96, 0x22, 0xf8,
+	0xa7, 0x90, 0x7c, 0x89, 0x2c, 0x8b, 0xee, 0x28, 0xce, 0x2f, 0xd3, 0xe8, 0xfe, 0x5d, 0xc9, 0x3e,
+	0x87, 0x3e, 0xdd, 0x76, 0x13, 0xee, 0x21, 0xbc, 0x36, 0xe3, 0xca, 0xe8, 0x33, 0xbc, 0xed, 0x4d,
+	0xc4, 0x9d, 0x18, 0x15, 0x5e, 0x21, 0xab, 0x71, 0x1e, 0x35, 0x46, 0x1a, 0xe7, 0xa6, 0x18, 0x19,
+	0x46, 0x0e, 0xdb, 0xed, 0x38, 0x91, 0xc5, 0x8c, 0x53, 0x06, 0xed, 0x0c, 0x8c, 0x5b, 0x01, 0x16,
+	0xb1, 0x85, 0xe2, 0x03, 0x72, 0x7b, 0x5a, 0x0e, 0x00, 0xb6, 0x89, 0x7c, 0x22, 0xc2, 0xe1, 0x55,
+	0x52, 0x98, 0x9a, 0x8f, 0x40, 0xf6, 0x64, 0x76, 0x13, 0x08, 0x0c, 0xfa, 0xb0, 0x4b, 0x52, 0x00,
+	0x1f, 0xf1, 0xc7, 0xba, 0x19, 0x9e, 0x63, 0x49, 0xfb, 0xa4, 0xe1, 0x2e, 0x3b, 0xbd, 0x34, 0xac,
+	0xc7, 0x03, 0x21, 0xa4, 0xa0, 0xdd, 0xc8, 0xd2, 0x7d, 0x5f, 0x2c, 0xc1, 0x3c, 0xdf, 0x12, 0x03,
+	0x16, 0x52, 0xd5, 0xbe, 0x9b, 0x68, 0x99, 0xca, 0x30, 0x47, 0x78, 0x03, 0xbe, 0xf4, 0x10, 0xdb,
+	0x6a, 0x50, 0x97, 0x9d, 0x20, 0xb3, 0xd4, 0x2c, 0x3c, 0x1a, 0x42, 0x97, 0x34, 0x3f, 0x3d, 0x00,
+	0xee, 0xf2, 0x3d, 0x6f, 0x67, 0x9f, 0x37, 0xdd, 0x7c, 0x86, 0xe2, 0xf2, 0x8c, 0x38, 0x41, 0x8d,
+	0x27, 0xd8, 0x8e, 0x8f, 0x53, 0xd2, 0xa8, 0x0d, 0xd3, 0x13, 0x88, 0x38, 0x85, 0x14, 0x0f, 0x9b,
+	0xc6, 0x6e, 0xa9, 0x5e, 0x81, 0x3f, 0xfb, 0xd0, 0x89, 0x19, 0xfb, 0x07, 0xd5, 0x96, 0x6e, 0x54,
+	0xf7, 0x76, 0x76, 0xdb, 0x1b, 0xff, 0x98, 0x23, 0xab, 0xfa, 0x23, 0xc8, 0x90, 0x09, 0xc6, 0x01,
+	0x4c, 0x84, 0x6b, 0x07, 0x35, 0x23, 0xbb, 0x70, 0xa7, 0x0c, 0xde, 0xe0, 0x26, 0x7c, 0x48, 0xae,
+	0xa1, 0x69, 0x17, 0x9e, 0xff, 0x56, 0x06, 0x28, 0xb6, 0xe0, 0xb4, 0x27, 0x09, 0x65, 0xb7, 0xc8,
+	0xb4, 0x2f, 0x3f, 0x64, 0xb7, 0xc5, 0xd4, 0x56, 0x17, 0xc9, 0x3c, 0x7c, 0xe0, 0xbb, 0x5c, 0xfa,
+	0x23, 0xb0, 0xf0, 0x12, 0x1c, 0x46, 0x8b, 0x23, 0x7a, 0x0c, 0x86, 0x58, 0x04, 0x48, 0xbc, 0xce,
+	0xa0, 0x03, 0xe8, 0x1f, 0xf3, 0x1c, 0x80, 0x6b, 0x38, 0xea, 0xc2, 0xd0, 0x40, 0xc4, 0x11, 0x3f,
+	0x7b, 0x60, 0xf5, 0x15, 0x38, 0x27, 0x36, 0x20, 0x74, 0x28, 0x61, 0x89, 0xf9, 0x9a, 0x7e, 0x20,
+	0x15, 0x4b, 0xae, 0x5b, 0xa8, 0x2f, 0x99, 0xc5, 0xeb, 0x29, 0x1a, 0x48, 0x66, 0x62, 0xa1, 0x40,
+	0x43, 0xc9, 0x4c, 0x8e, 0xfd, 0x34, 0x92, 0xf7, 0xe3, 0x1d, 0x25, 0x3d, 0x01, 0x6f, 0x5a, 0x1d,
+	0x03, 0xe4, 0x5e, 0x80, 0x9e, 0xc2, 0xb3, 0x2f, 0x70, 0x30, 0xdf, 0xe7, 0xd2, 0xb3, 0x18, 0x4b,
+	0x2e, 0x82, 0xe9, 0xb9, 0x24, 0x2b, 0x57, 0x6c, 0xf4, 0x27, 0xea, 0x2a, 0x59, 0xe6, 0x17, 0x46,
+	0x4b, 0x5c, 0xfa, 0x53, 0x49, 0x01, 0xf7, 0x12, 0xf4, 0x67, 0x92, 0x42, 0xbc, 0x29, 0xa1, 0x1f,
+	0x02, 0x06, 0xb7, 0xdb, 0x68, 0x2b, 0x45, 0x3f, 0x52, 0x40, 0x14, 0x1a, 0x83, 0xe2, 0xed, 0x0e,
+	0xfd, 0xb9, 0x22, 0x6f, 0x8e, 0x36, 0x6d, 0xf4, 0x17, 0x0a, 0x98, 0x87, 0xb3, 0x1b, 0x0f, 0xfb,
+	0xf4, 0x97, 0x31, 0x6c, 0x3c, 0xd4, 0xd3, 0x5f, 0x29, 0x10, 0x42, 0x5c, 0xb9, 0xf4, 0xf4, 0x4e,
+	0x7f, 0xad, 0xc0, 0xa3, 0x09, 0x7d, 0xc4, 0x3c, 0x4e, 0x3f, 0x8e, 0xb1, 0xc7, 0xa3, 0x33, 0xfd,
+	0x8d, 0x02, 0x99, 0xbb, 0x98, 0x71, 0x9a, 0xc4, 0x3f, 0x68, 0xd0, 0x4f, 0x15, 0x98, 0x4c, 0xd0,
+	0x75, 0x32, 0x13, 0x0f, 0xfd, 0x2c, 0x66, 0x9c, 0xde, 0xf1, 0xd1, 0xcf, 0x15, 0xf0, 0x29, 0x15,
+	0xe0, 0x99, 0x0e, 0x81, 0xfe, 0x29, 0x96, 0x28, 0x8e, 0x5b, 0xfa, 0xe7, 0xf8, 0x6a, 0x26, 0x44,
+	0xe9, 0x17, 0xf1, 0x87, 0x5d, 0x88, 0xb5, 0x44, 0x14, 0xd1, 0xbf, 0xc4, 0x34, 0x6a, 0xa5, 0x1f,
+	0x1a, 0x8f, 0x4a, 0x2d, 0x9d, 0xfe, 0x53, 0xd9, 0xf8, 0x42, 0x21, 0x6b, 0x18, 0x3a, 0xa9, 0xa9,
+	0x32, 0xe0, 0xda, 0xea, 0x20, 0xc6, 0x68, 0x92, 0xa7, 0xbf, 0x45, 0xeb, 0xeb, 0xf1, 0x13, 0xca,
+	0x09, 0x9e, 0xfe, 0x0e, 0xb9, 0xe9, 0xdc, 0xc1, 0x52, 0x33, 0x3a, 0xfd, 0x04, 0x55, 0xe4, 0x34,
+	0x52, 0x43, 0x38, 0xfd, 0xbd, 0x02, 0x2f, 0x4d, 0x00, 0x2e, 0x07, 0x6b, 0xfa, 0x07, 0x14, 0x0b,
+	0x00, 0xf1, 0x28, 0x4b, 0xff, 0xa8, 0x6c, 0x78, 0x24, 0x3f, 0x5a, 0x40, 0x00, 0x9d, 0xf1, 0x0a,
+	0x82, 0xfe, 0x27, 0xfe, 0x4f, 0xe1, 0x2e, 0x86, 0xf0, 0x56, 0xbb, 0xd4, 0x6e, 0xd1, 0x67, 0x78,
+	0xa0, 0xe1, 0x19, 0x86, 0xb2, 0xca, 0x1e, 0x40, 0xb8, 0x68, 0x6b, 0x08, 0xa9, 0xc2, 0x90, 0x66,
+	0xbc, 0xdd, 0xd8, 0xab, 0x1b, 0xd5, 0xc6, 0x4e, 0x83, 0xf2, 0x15, 0xf2, 0x22, 0x7e, 0x68, 0x1c,
+	0xb4, 0xdb, 0xcd, 0x06, 0xbd, 0xb1, 0xf1, 0xd7, 0x1c, 0xa1, 0xd9, 0xd1, 0x4f, 0xbd, 0x4f, 0xae,
+	0x31, 0xfc, 0x01, 0xe3, 0x2b, 0xee, 0x1d, 0xec, 0x57, 0xf8, 0x3d, 0x45, 0xdd, 0x24, 0x1b, 0x57,
+	0xdf, 0x33, 0xb6, 0x1b, 0xcd, 0x27, 0xa5, 0x66, 0x05, 0xa4, 0xdc, 0x22, 0x9b, 0xd7, 0xb8, 0xdf,
+	0x68, 0xee, 0xc1, 0xa9, 0xd4, 0xde, 0x6b, 0xd4, 0xe9, 0x0d, 0xf5, 0x55, 0xf2, 0xca, 0x75, 0x78,
+	0x94, 0xaa, 0xd5, 0x47, 0xa5, 0xf2, 0x63, 0x3a, 0xab, 0x6e, 0x90, 0xfb, 0xd7, 0x40, 0x80, 0x9f,
+	0x34, 0xa7, 0x3e, 0x20, 0x2f, 0x5f, 0x47, 0xa0, 0xed, 0xed, 0x96, 0xde, 0xa6, 0x73, 0xd0, 0x15,
+	0xdc, 0xbb, 0xec, 0x7a, 0x45, 0x6f, 0x81, 0xf1, 0xdf, 0xa1, 0xf3, 0xea, 0x6b, 0xe4, 0xc1, 0x35,
+	0x2e, 0x1a, 0x7b, 0xf5, 0xc3, 0x46, 0xf5, 0x70, 0xaf, 0xbe, 0x43, 0x17, 0xae, 0xa2, 0xdd, 0xd4,
+	0xab, 0x3a, 0x77, 0xf1, 0xfc, 0x55, 0x17, 0xb9, 0x6b, 0xd4, 0xcb, 0xef, 0x50, 0x02, 0xdd, 0xc2,
+	0x4b, 0x97, 0x5d, 0x6c, 0xed, 0x36, 0x0e, 0xaa, 0x15, 0xa3, 0xd2, 0x2c, 0x3d, 0xa1, 0x8b, 0x57,
+	0x3d, 0xf9, 0x76, 0xb3, 0xf1, 0xae, 0x5e, 0xa7, 0x4b, 0xea, 0xf7, 0xc8, 0x5b, 0x97, 0xba, 0x10,
+	0x94, 0xb4, 0x1d, 0xdd, 0x28, 0x37, 0xea, 0xa0, 0x60, 0xd5, 0xd8, 0x07, 0x17, 0x6d, 0x1b, 0xa5,
+	0x76, 0xbb, 0x54, 0xde, 0xad, 0x71, 0x93, 0x2f, 0x6f, 0x84, 0x10, 0x74, 0x99, 0x5a, 0xa8, 0xbe,
+	0x40, 0x2e, 0xa9, 0x86, 0xe0, 0x8f, 0x77, 0xc9, 0x9d, 0x0b, 0xbf, 0xd7, 0x20, 0x2e, 0x0e, 0x6a,
+	0x54, 0x99, 0x7a, 0x81, 0x9b, 0x19, 0xac, 0x3b, 0xf3, 0x28, 0xb7, 0xab, 0x7c, 0xa4, 0x3c, 0xf3,
+	0xdf, 0x00, 0x00, 0x00, 0xff, 0xff, 0x77, 0x07, 0x32, 0xad, 0xef, 0x1e, 0x00, 0x00,
 }

@@ -5,10 +5,12 @@
 package dota
 
 import proto "github.com/golang/protobuf/proto"
+import fmt "fmt"
 import math "math"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
+var _ = fmt.Errorf
 var _ = math.Inf
 
 type EDemoCommands int32
@@ -94,6 +96,7 @@ func (x *EDemoCommands) UnmarshalJSON(data []byte) error {
 	*x = EDemoCommands(value)
 	return nil
 }
+func (EDemoCommands) EnumDescriptor() ([]byte, []int) { return fileDescriptor4, []int{0} }
 
 type CDemoFileHeader struct {
 	DemoFileStamp            *string `protobuf:"bytes,1,req,name=demo_file_stamp" json:"demo_file_stamp,omitempty"`
@@ -109,9 +112,10 @@ type CDemoFileHeader struct {
 	XXX_unrecognized         []byte  `json:"-"`
 }
 
-func (m *CDemoFileHeader) Reset()         { *m = CDemoFileHeader{} }
-func (m *CDemoFileHeader) String() string { return proto.CompactTextString(m) }
-func (*CDemoFileHeader) ProtoMessage()    {}
+func (m *CDemoFileHeader) Reset()                    { *m = CDemoFileHeader{} }
+func (m *CDemoFileHeader) String() string            { return proto.CompactTextString(m) }
+func (*CDemoFileHeader) ProtoMessage()               {}
+func (*CDemoFileHeader) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{0} }
 
 func (m *CDemoFileHeader) GetDemoFileStamp() string {
 	if m != nil && m.DemoFileStamp != nil {
@@ -188,9 +192,10 @@ type CGameInfo struct {
 	XXX_unrecognized []byte                   `json:"-"`
 }
 
-func (m *CGameInfo) Reset()         { *m = CGameInfo{} }
-func (m *CGameInfo) String() string { return proto.CompactTextString(m) }
-func (*CGameInfo) ProtoMessage()    {}
+func (m *CGameInfo) Reset()                    { *m = CGameInfo{} }
+func (m *CGameInfo) String() string            { return proto.CompactTextString(m) }
+func (*CGameInfo) ProtoMessage()               {}
+func (*CGameInfo) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{1} }
 
 func (m *CGameInfo) GetDota() *CGameInfo_CDotaGameInfo {
 	if m != nil {
@@ -214,9 +219,10 @@ type CGameInfo_CDotaGameInfo struct {
 	XXX_unrecognized []byte                                      `json:"-"`
 }
 
-func (m *CGameInfo_CDotaGameInfo) Reset()         { *m = CGameInfo_CDotaGameInfo{} }
-func (m *CGameInfo_CDotaGameInfo) String() string { return proto.CompactTextString(m) }
-func (*CGameInfo_CDotaGameInfo) ProtoMessage()    {}
+func (m *CGameInfo_CDotaGameInfo) Reset()                    { *m = CGameInfo_CDotaGameInfo{} }
+func (m *CGameInfo_CDotaGameInfo) String() string            { return proto.CompactTextString(m) }
+func (*CGameInfo_CDotaGameInfo) ProtoMessage()               {}
+func (*CGameInfo_CDotaGameInfo) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{1, 0} }
 
 func (m *CGameInfo_CDotaGameInfo) GetMatchId() uint64 {
 	if m != nil && m.MatchId != nil {
@@ -307,6 +313,9 @@ type CGameInfo_CDotaGameInfo_CPlayerInfo struct {
 func (m *CGameInfo_CDotaGameInfo_CPlayerInfo) Reset()         { *m = CGameInfo_CDotaGameInfo_CPlayerInfo{} }
 func (m *CGameInfo_CDotaGameInfo_CPlayerInfo) String() string { return proto.CompactTextString(m) }
 func (*CGameInfo_CDotaGameInfo_CPlayerInfo) ProtoMessage()    {}
+func (*CGameInfo_CDotaGameInfo_CPlayerInfo) Descriptor() ([]byte, []int) {
+	return fileDescriptor4, []int{1, 0, 0}
+}
 
 func (m *CGameInfo_CDotaGameInfo_CPlayerInfo) GetHeroName() string {
 	if m != nil && m.HeroName != nil {
@@ -355,6 +364,9 @@ func (m *CGameInfo_CDotaGameInfo_CHeroSelectEvent) Reset() {
 }
 func (m *CGameInfo_CDotaGameInfo_CHeroSelectEvent) String() string { return proto.CompactTextString(m) }
 func (*CGameInfo_CDotaGameInfo_CHeroSelectEvent) ProtoMessage()    {}
+func (*CGameInfo_CDotaGameInfo_CHeroSelectEvent) Descriptor() ([]byte, []int) {
+	return fileDescriptor4, []int{1, 0, 1}
+}
 
 func (m *CGameInfo_CDotaGameInfo_CHeroSelectEvent) GetIsPick() bool {
 	if m != nil && m.IsPick != nil {
@@ -385,9 +397,10 @@ type CDemoFileInfo struct {
 	XXX_unrecognized []byte     `json:"-"`
 }
 
-func (m *CDemoFileInfo) Reset()         { *m = CDemoFileInfo{} }
-func (m *CDemoFileInfo) String() string { return proto.CompactTextString(m) }
-func (*CDemoFileInfo) ProtoMessage()    {}
+func (m *CDemoFileInfo) Reset()                    { *m = CDemoFileInfo{} }
+func (m *CDemoFileInfo) String() string            { return proto.CompactTextString(m) }
+func (*CDemoFileInfo) ProtoMessage()               {}
+func (*CDemoFileInfo) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{2} }
 
 func (m *CDemoFileInfo) GetPlaybackTime() float32 {
 	if m != nil && m.PlaybackTime != nil {
@@ -424,9 +437,10 @@ type CDemoPacket struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CDemoPacket) Reset()         { *m = CDemoPacket{} }
-func (m *CDemoPacket) String() string { return proto.CompactTextString(m) }
-func (*CDemoPacket) ProtoMessage()    {}
+func (m *CDemoPacket) Reset()                    { *m = CDemoPacket{} }
+func (m *CDemoPacket) String() string            { return proto.CompactTextString(m) }
+func (*CDemoPacket) ProtoMessage()               {}
+func (*CDemoPacket) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{3} }
 
 func (m *CDemoPacket) GetSequenceIn() int32 {
 	if m != nil && m.SequenceIn != nil {
@@ -455,9 +469,10 @@ type CDemoFullPacket struct {
 	XXX_unrecognized []byte             `json:"-"`
 }
 
-func (m *CDemoFullPacket) Reset()         { *m = CDemoFullPacket{} }
-func (m *CDemoFullPacket) String() string { return proto.CompactTextString(m) }
-func (*CDemoFullPacket) ProtoMessage()    {}
+func (m *CDemoFullPacket) Reset()                    { *m = CDemoFullPacket{} }
+func (m *CDemoFullPacket) String() string            { return proto.CompactTextString(m) }
+func (*CDemoFullPacket) ProtoMessage()               {}
+func (*CDemoFullPacket) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{4} }
 
 func (m *CDemoFullPacket) GetStringTable() *CDemoStringTables {
 	if m != nil {
@@ -481,9 +496,10 @@ type CDemoSaveGame struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CDemoSaveGame) Reset()         { *m = CDemoSaveGame{} }
-func (m *CDemoSaveGame) String() string { return proto.CompactTextString(m) }
-func (*CDemoSaveGame) ProtoMessage()    {}
+func (m *CDemoSaveGame) Reset()                    { *m = CDemoSaveGame{} }
+func (m *CDemoSaveGame) String() string            { return proto.CompactTextString(m) }
+func (*CDemoSaveGame) ProtoMessage()               {}
+func (*CDemoSaveGame) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{5} }
 
 func (m *CDemoSaveGame) GetData() []byte {
 	if m != nil {
@@ -517,18 +533,20 @@ type CDemoSyncTick struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CDemoSyncTick) Reset()         { *m = CDemoSyncTick{} }
-func (m *CDemoSyncTick) String() string { return proto.CompactTextString(m) }
-func (*CDemoSyncTick) ProtoMessage()    {}
+func (m *CDemoSyncTick) Reset()                    { *m = CDemoSyncTick{} }
+func (m *CDemoSyncTick) String() string            { return proto.CompactTextString(m) }
+func (*CDemoSyncTick) ProtoMessage()               {}
+func (*CDemoSyncTick) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{6} }
 
 type CDemoConsoleCmd struct {
 	Cmdstring        *string `protobuf:"bytes,1,opt,name=cmdstring" json:"cmdstring,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CDemoConsoleCmd) Reset()         { *m = CDemoConsoleCmd{} }
-func (m *CDemoConsoleCmd) String() string { return proto.CompactTextString(m) }
-func (*CDemoConsoleCmd) ProtoMessage()    {}
+func (m *CDemoConsoleCmd) Reset()                    { *m = CDemoConsoleCmd{} }
+func (m *CDemoConsoleCmd) String() string            { return proto.CompactTextString(m) }
+func (*CDemoConsoleCmd) ProtoMessage()               {}
+func (*CDemoConsoleCmd) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{7} }
 
 func (m *CDemoConsoleCmd) GetCmdstring() string {
 	if m != nil && m.Cmdstring != nil {
@@ -542,9 +560,10 @@ type CDemoSendTables struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CDemoSendTables) Reset()         { *m = CDemoSendTables{} }
-func (m *CDemoSendTables) String() string { return proto.CompactTextString(m) }
-func (*CDemoSendTables) ProtoMessage()    {}
+func (m *CDemoSendTables) Reset()                    { *m = CDemoSendTables{} }
+func (m *CDemoSendTables) String() string            { return proto.CompactTextString(m) }
+func (*CDemoSendTables) ProtoMessage()               {}
+func (*CDemoSendTables) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{8} }
 
 func (m *CDemoSendTables) GetData() []byte {
 	if m != nil {
@@ -558,9 +577,10 @@ type CDemoClassInfo struct {
 	XXX_unrecognized []byte                  `json:"-"`
 }
 
-func (m *CDemoClassInfo) Reset()         { *m = CDemoClassInfo{} }
-func (m *CDemoClassInfo) String() string { return proto.CompactTextString(m) }
-func (*CDemoClassInfo) ProtoMessage()    {}
+func (m *CDemoClassInfo) Reset()                    { *m = CDemoClassInfo{} }
+func (m *CDemoClassInfo) String() string            { return proto.CompactTextString(m) }
+func (*CDemoClassInfo) ProtoMessage()               {}
+func (*CDemoClassInfo) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{9} }
 
 func (m *CDemoClassInfo) GetClasses() []*CDemoClassInfoClassT {
 	if m != nil {
@@ -576,9 +596,10 @@ type CDemoClassInfoClassT struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CDemoClassInfoClassT) Reset()         { *m = CDemoClassInfoClassT{} }
-func (m *CDemoClassInfoClassT) String() string { return proto.CompactTextString(m) }
-func (*CDemoClassInfoClassT) ProtoMessage()    {}
+func (m *CDemoClassInfoClassT) Reset()                    { *m = CDemoClassInfoClassT{} }
+func (m *CDemoClassInfoClassT) String() string            { return proto.CompactTextString(m) }
+func (*CDemoClassInfoClassT) ProtoMessage()               {}
+func (*CDemoClassInfoClassT) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{9, 0} }
 
 func (m *CDemoClassInfoClassT) GetClassId() int32 {
 	if m != nil && m.ClassId != nil {
@@ -607,9 +628,10 @@ type CDemoCustomData struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CDemoCustomData) Reset()         { *m = CDemoCustomData{} }
-func (m *CDemoCustomData) String() string { return proto.CompactTextString(m) }
-func (*CDemoCustomData) ProtoMessage()    {}
+func (m *CDemoCustomData) Reset()                    { *m = CDemoCustomData{} }
+func (m *CDemoCustomData) String() string            { return proto.CompactTextString(m) }
+func (*CDemoCustomData) ProtoMessage()               {}
+func (*CDemoCustomData) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{10} }
 
 func (m *CDemoCustomData) GetCallbackIndex() int32 {
 	if m != nil && m.CallbackIndex != nil {
@@ -630,9 +652,10 @@ type CDemoCustomDataCallbacks struct {
 	XXX_unrecognized []byte   `json:"-"`
 }
 
-func (m *CDemoCustomDataCallbacks) Reset()         { *m = CDemoCustomDataCallbacks{} }
-func (m *CDemoCustomDataCallbacks) String() string { return proto.CompactTextString(m) }
-func (*CDemoCustomDataCallbacks) ProtoMessage()    {}
+func (m *CDemoCustomDataCallbacks) Reset()                    { *m = CDemoCustomDataCallbacks{} }
+func (m *CDemoCustomDataCallbacks) String() string            { return proto.CompactTextString(m) }
+func (*CDemoCustomDataCallbacks) ProtoMessage()               {}
+func (*CDemoCustomDataCallbacks) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{11} }
 
 func (m *CDemoCustomDataCallbacks) GetSaveId() []string {
 	if m != nil {
@@ -646,9 +669,10 @@ type CDemoStringTables struct {
 	XXX_unrecognized []byte                     `json:"-"`
 }
 
-func (m *CDemoStringTables) Reset()         { *m = CDemoStringTables{} }
-func (m *CDemoStringTables) String() string { return proto.CompactTextString(m) }
-func (*CDemoStringTables) ProtoMessage()    {}
+func (m *CDemoStringTables) Reset()                    { *m = CDemoStringTables{} }
+func (m *CDemoStringTables) String() string            { return proto.CompactTextString(m) }
+func (*CDemoStringTables) ProtoMessage()               {}
+func (*CDemoStringTables) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{12} }
 
 func (m *CDemoStringTables) GetTables() []*CDemoStringTablesTableT {
 	if m != nil {
@@ -663,9 +687,10 @@ type CDemoStringTablesItemsT struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CDemoStringTablesItemsT) Reset()         { *m = CDemoStringTablesItemsT{} }
-func (m *CDemoStringTablesItemsT) String() string { return proto.CompactTextString(m) }
-func (*CDemoStringTablesItemsT) ProtoMessage()    {}
+func (m *CDemoStringTablesItemsT) Reset()                    { *m = CDemoStringTablesItemsT{} }
+func (m *CDemoStringTablesItemsT) String() string            { return proto.CompactTextString(m) }
+func (*CDemoStringTablesItemsT) ProtoMessage()               {}
+func (*CDemoStringTablesItemsT) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{12, 0} }
 
 func (m *CDemoStringTablesItemsT) GetStr() string {
 	if m != nil && m.Str != nil {
@@ -689,9 +714,10 @@ type CDemoStringTablesTableT struct {
 	XXX_unrecognized []byte                     `json:"-"`
 }
 
-func (m *CDemoStringTablesTableT) Reset()         { *m = CDemoStringTablesTableT{} }
-func (m *CDemoStringTablesTableT) String() string { return proto.CompactTextString(m) }
-func (*CDemoStringTablesTableT) ProtoMessage()    {}
+func (m *CDemoStringTablesTableT) Reset()                    { *m = CDemoStringTablesTableT{} }
+func (m *CDemoStringTablesTableT) String() string            { return proto.CompactTextString(m) }
+func (*CDemoStringTablesTableT) ProtoMessage()               {}
+func (*CDemoStringTablesTableT) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{12, 1} }
 
 func (m *CDemoStringTablesTableT) GetTableName() string {
 	if m != nil && m.TableName != nil {
@@ -725,9 +751,10 @@ type CDemoStop struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CDemoStop) Reset()         { *m = CDemoStop{} }
-func (m *CDemoStop) String() string { return proto.CompactTextString(m) }
-func (*CDemoStop) ProtoMessage()    {}
+func (m *CDemoStop) Reset()                    { *m = CDemoStop{} }
+func (m *CDemoStop) String() string            { return proto.CompactTextString(m) }
+func (*CDemoStop) ProtoMessage()               {}
+func (*CDemoStop) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{13} }
 
 type CDemoUserCmd struct {
 	CmdNumber        *int32 `protobuf:"varint,1,opt,name=cmd_number" json:"cmd_number,omitempty"`
@@ -735,9 +762,10 @@ type CDemoUserCmd struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CDemoUserCmd) Reset()         { *m = CDemoUserCmd{} }
-func (m *CDemoUserCmd) String() string { return proto.CompactTextString(m) }
-func (*CDemoUserCmd) ProtoMessage()    {}
+func (m *CDemoUserCmd) Reset()                    { *m = CDemoUserCmd{} }
+func (m *CDemoUserCmd) String() string            { return proto.CompactTextString(m) }
+func (*CDemoUserCmd) ProtoMessage()               {}
+func (*CDemoUserCmd) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{14} }
 
 func (m *CDemoUserCmd) GetCmdNumber() int32 {
 	if m != nil && m.CmdNumber != nil {
@@ -758,9 +786,10 @@ type CDemoSpawnGroups struct {
 	XXX_unrecognized []byte   `json:"-"`
 }
 
-func (m *CDemoSpawnGroups) Reset()         { *m = CDemoSpawnGroups{} }
-func (m *CDemoSpawnGroups) String() string { return proto.CompactTextString(m) }
-func (*CDemoSpawnGroups) ProtoMessage()    {}
+func (m *CDemoSpawnGroups) Reset()                    { *m = CDemoSpawnGroups{} }
+func (m *CDemoSpawnGroups) String() string            { return proto.CompactTextString(m) }
+func (*CDemoSpawnGroups) ProtoMessage()               {}
+func (*CDemoSpawnGroups) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{15} }
 
 func (m *CDemoSpawnGroups) GetMsgs() [][]byte {
 	if m != nil {
@@ -770,5 +799,101 @@ func (m *CDemoSpawnGroups) GetMsgs() [][]byte {
 }
 
 func init() {
+	proto.RegisterType((*CDemoFileHeader)(nil), "dota.CDemoFileHeader")
+	proto.RegisterType((*CGameInfo)(nil), "dota.CGameInfo")
+	proto.RegisterType((*CGameInfo_CDotaGameInfo)(nil), "dota.CGameInfo.CDotaGameInfo")
+	proto.RegisterType((*CGameInfo_CDotaGameInfo_CPlayerInfo)(nil), "dota.CGameInfo.CDotaGameInfo.CPlayerInfo")
+	proto.RegisterType((*CGameInfo_CDotaGameInfo_CHeroSelectEvent)(nil), "dota.CGameInfo.CDotaGameInfo.CHeroSelectEvent")
+	proto.RegisterType((*CDemoFileInfo)(nil), "dota.CDemoFileInfo")
+	proto.RegisterType((*CDemoPacket)(nil), "dota.CDemoPacket")
+	proto.RegisterType((*CDemoFullPacket)(nil), "dota.CDemoFullPacket")
+	proto.RegisterType((*CDemoSaveGame)(nil), "dota.CDemoSaveGame")
+	proto.RegisterType((*CDemoSyncTick)(nil), "dota.CDemoSyncTick")
+	proto.RegisterType((*CDemoConsoleCmd)(nil), "dota.CDemoConsoleCmd")
+	proto.RegisterType((*CDemoSendTables)(nil), "dota.CDemoSendTables")
+	proto.RegisterType((*CDemoClassInfo)(nil), "dota.CDemoClassInfo")
+	proto.RegisterType((*CDemoClassInfoClassT)(nil), "dota.CDemoClassInfo.class_t")
+	proto.RegisterType((*CDemoCustomData)(nil), "dota.CDemoCustomData")
+	proto.RegisterType((*CDemoCustomDataCallbacks)(nil), "dota.CDemoCustomDataCallbacks")
+	proto.RegisterType((*CDemoStringTables)(nil), "dota.CDemoStringTables")
+	proto.RegisterType((*CDemoStringTablesItemsT)(nil), "dota.CDemoStringTables.items_t")
+	proto.RegisterType((*CDemoStringTablesTableT)(nil), "dota.CDemoStringTables.table_t")
+	proto.RegisterType((*CDemoStop)(nil), "dota.CDemoStop")
+	proto.RegisterType((*CDemoUserCmd)(nil), "dota.CDemoUserCmd")
+	proto.RegisterType((*CDemoSpawnGroups)(nil), "dota.CDemoSpawnGroups")
 	proto.RegisterEnum("dota.EDemoCommands", EDemoCommands_name, EDemoCommands_value)
+}
+
+var fileDescriptor4 = []byte{
+	// 1113 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x8c, 0x55, 0xdf, 0x6f, 0x1b, 0x45,
+	0x10, 0xae, 0x7f, 0xdb, 0x73, 0x76, 0xbc, 0xbd, 0x02, 0x35, 0x06, 0xd4, 0x72, 0xea, 0x43, 0xa0,
+	0xaa, 0x41, 0x79, 0x41, 0xbc, 0x20, 0x14, 0x27, 0xb4, 0x45, 0xaa, 0x54, 0x29, 0xe5, 0xf9, 0xb4,
+	0xb9, 0x5b, 0xbb, 0xa7, 0xdc, 0xaf, 0xde, 0x9e, 0x93, 0x46, 0xbc, 0xf0, 0x80, 0x10, 0x42, 0xfc,
+	0x0b, 0xfc, 0x35, 0xfc, 0x61, 0x30, 0x33, 0xbb, 0x7b, 0xb6, 0x13, 0x28, 0xe4, 0x25, 0xbe, 0xef,
+	0x66, 0x67, 0xe6, 0xfb, 0xe6, 0x9b, 0x3d, 0x80, 0x58, 0x65, 0xc5, 0xa2, 0xac, 0x8a, 0xba, 0xf0,
+	0xbb, 0x71, 0x51, 0xcb, 0xe0, 0xf7, 0x36, 0x4c, 0x97, 0x27, 0x88, 0x7e, 0x97, 0xa4, 0xea, 0x99,
+	0x92, 0xb1, 0xaa, 0xfc, 0xfb, 0x30, 0xa5, 0xb8, 0x70, 0x85, 0x50, 0xa8, 0x6b, 0x99, 0x95, 0xb3,
+	0xd6, 0xc3, 0xf6, 0xe1, 0xc8, 0x9f, 0x81, 0xc8, 0x55, 0x7d, 0x55, 0x54, 0x17, 0x21, 0xe7, 0x88,
+	0x8a, 0x74, 0xd6, 0x7e, 0xd8, 0x3a, 0xec, 0xf9, 0xf7, 0xc0, 0xd3, 0xaa, 0xba, 0x54, 0x55, 0x98,
+	0xcb, 0x4c, 0xcd, 0x3a, 0x08, 0x8e, 0x08, 0x8c, 0xd2, 0x44, 0xe5, 0xb5, 0x01, 0xbb, 0x0c, 0x0a,
+	0x18, 0x66, 0xb2, 0x34, 0x48, 0x8f, 0x91, 0x0f, 0xe0, 0x60, 0x8d, 0x4f, 0x61, 0x9c, 0x54, 0x2a,
+	0xaa, 0x8b, 0xea, 0x7a, 0xd6, 0x67, 0xfc, 0x23, 0xb8, 0xb7, 0xda, 0xa4, 0x69, 0x29, 0xa3, 0x0b,
+	0x55, 0xeb, 0x10, 0x93, 0xeb, 0xa4, 0xc8, 0x67, 0x03, 0x2e, 0xf8, 0x29, 0x7c, 0x28, 0xd3, 0xb4,
+	0xb8, 0x0a, 0x4d, 0x05, 0x9d, 0xc4, 0x2a, 0xc4, 0xff, 0x49, 0x9d, 0x28, 0x3d, 0x1b, 0x62, 0xc8,
+	0xd0, 0x0f, 0x60, 0x7e, 0x2b, 0xa4, 0x94, 0x55, 0x9d, 0x44, 0x29, 0xc6, 0x8c, 0x38, 0xe6, 0x00,
+	0xfa, 0x32, 0x8e, 0x8b, 0x5c, 0xcf, 0x80, 0x6a, 0x06, 0x7f, 0x76, 0x61, 0xb4, 0x7c, 0x8a, 0xdd,
+	0x3c, 0xcf, 0x57, 0x85, 0xff, 0x18, 0x58, 0x24, 0xee, 0xdc, 0x3b, 0xfa, 0x64, 0x41, 0x0f, 0x8b,
+	0xe6, 0xf5, 0x62, 0x79, 0x82, 0xcf, 0xee, 0x69, 0xfe, 0x6b, 0x17, 0x26, 0x7b, 0x88, 0xa1, 0x5a,
+	0x47, 0xaf, 0xc3, 0x24, 0x46, 0x01, 0x5b, 0x87, 0x5d, 0xff, 0x2e, 0x8c, 0x98, 0x6a, 0x56, 0xc4,
+	0x6a, 0xab, 0x1c, 0x43, 0x57, 0x49, 0x9e, 0xab, 0x8a, 0x95, 0xeb, 0xf9, 0xdf, 0x80, 0x57, 0xa6,
+	0xf2, 0x1a, 0xe5, 0x4c, 0x30, 0x11, 0xd6, 0xef, 0x60, 0xfd, 0xcf, 0xde, 0x59, 0x7f, 0xb1, 0x7c,
+	0xc9, 0x27, 0x5c, 0xe5, 0x54, 0xc9, 0xf5, 0x46, 0x61, 0x65, 0x12, 0x79, 0xe2, 0x1f, 0x03, 0x94,
+	0x49, 0x74, 0xa1, 0xc3, 0x73, 0x89, 0x64, 0xfb, 0x9c, 0x70, 0xf1, 0x1f, 0x09, 0x9f, 0xa9, 0xaa,
+	0x38, 0x53, 0x29, 0x0e, 0xe5, 0xf4, 0x12, 0x05, 0x24, 0x5f, 0x54, 0x32, 0x4e, 0x24, 0x0e, 0xb4,
+	0x56, 0x32, 0x23, 0x5a, 0x03, 0x4e, 0xfe, 0x1e, 0x8c, 0x69, 0x78, 0x0d, 0x3a, 0x64, 0x14, 0xdd,
+	0xb2, 0x17, 0x5e, 0xcb, 0x35, 0xab, 0x3e, 0xf2, 0xdf, 0x87, 0xc9, 0x36, 0x9e, 0x60, 0x70, 0xd6,
+	0x50, 0x79, 0x1c, 0xd6, 0x09, 0x5a, 0xc3, 0xa3, 0x14, 0xf3, 0x37, 0xe0, 0xed, 0xd2, 0x42, 0xf9,
+	0x5e, 0x63, 0x4f, 0xc6, 0x3c, 0x2d, 0xe7, 0x31, 0xab, 0x14, 0x83, 0x6d, 0xe7, 0xa8, 0x44, 0x87,
+	0x2b, 0x79, 0xa1, 0xec, 0xec, 0x59, 0xd6, 0xa1, 0x3f, 0x85, 0x81, 0xa6, 0x9a, 0xd8, 0x62, 0x77,
+	0x6f, 0x1e, 0x04, 0xb2, 0x50, 0xbd, 0xf9, 0x31, 0x88, 0x5b, 0xc4, 0xf1, 0x1c, 0xe6, 0x23, 0xfd,
+	0xb8, 0xea, 0xd0, 0x1f, 0x43, 0x97, 0x8f, 0xb4, 0x99, 0x28, 0xbe, 0xe6, 0xb6, 0x30, 0x2d, 0xd5,
+	0x99, 0x04, 0x3f, 0x92, 0x13, 0xec, 0x4e, 0x71, 0xe3, 0x48, 0x98, 0xba, 0x3c, 0x47, 0x2b, 0x1b,
+	0x7a, 0x94, 0xa6, 0x4d, 0x7d, 0xee, 0xc0, 0x38, 0x1d, 0xeb, 0x09, 0x14, 0xba, 0xc1, 0x57, 0x15,
+	0x36, 0xa8, 0xad, 0x2f, 0x02, 0xdb, 0xaf, 0x75, 0x05, 0xb9, 0x72, 0x7a, 0x63, 0x88, 0xc1, 0xf7,
+	0xa8, 0x19, 0x15, 0x7f, 0xc9, 0x7b, 0x63, 0x36, 0xf3, 0xcd, 0x46, 0xe5, 0x11, 0x1d, 0xe3, 0xc2,
+	0x3d, 0x1a, 0x4d, 0x03, 0x16, 0x9b, 0x3a, 0xc4, 0x50, 0x5b, 0x1a, 0x99, 0xc5, 0x12, 0x2d, 0x4f,
+	0xf5, 0xc6, 0x41, 0xe4, 0x2e, 0x07, 0xdc, 0x43, 0x9b, 0xef, 0x09, 0x8c, 0x75, 0x5d, 0x25, 0xf9,
+	0x1a, 0x07, 0x77, 0x9e, 0x1a, 0x26, 0xde, 0xd1, 0x7d, 0xdb, 0x05, 0x05, 0x9f, 0xf1, 0xeb, 0x57,
+	0xf4, 0x56, 0xe3, 0x9e, 0xf6, 0xcd, 0x02, 0x73, 0x7e, 0xef, 0xe8, 0xee, 0x4e, 0xa0, 0xc9, 0x18,
+	0x9c, 0x59, 0xb5, 0xce, 0xe4, 0xa5, 0x22, 0x16, 0x4d, 0x0f, 0x94, 0x7a, 0x4c, 0xae, 0xd0, 0xce,
+	0x58, 0x94, 0xa3, 0x4f, 0x53, 0xd3, 0xc9, 0x3a, 0x97, 0xf5, 0xa6, 0x32, 0x57, 0x4d, 0x9f, 0x46,
+	0xe0, 0xee, 0x07, 0x92, 0xa5, 0x17, 0x4c, 0x5d, 0xd2, 0xeb, 0x3c, 0x7a, 0x85, 0xd2, 0x06, 0x8f,
+	0x2c, 0x95, 0x25, 0x2e, 0x7b, 0x91, 0xaa, 0x65, 0x16, 0x53, 0x9e, 0x28, 0x8b, 0x0d, 0x1b, 0x63,
+	0xa7, 0xe0, 0x81, 0x8d, 0x3a, 0x43, 0x23, 0x5a, 0x06, 0x7b, 0xdd, 0x04, 0xbf, 0xb4, 0xe0, 0xc0,
+	0xe4, 0x49, 0xa5, 0xd6, 0x3c, 0xdc, 0x27, 0x30, 0x88, 0xe8, 0x01, 0xa7, 0xd4, 0xe2, 0xbd, 0xfa,
+	0x78, 0x87, 0x63, 0x13, 0xb6, 0xe0, 0x98, 0xb0, 0x9e, 0x9f, 0xda, 0xf0, 0xb0, 0x26, 0x6a, 0xe6,
+	0xa7, 0xbd, 0x20, 0x7a, 0xb4, 0x49, 0xee, 0x86, 0xdd, 0xf1, 0xb3, 0x0f, 0xc0, 0x62, 0xef, 0x5c,
+	0xae, 0xc1, 0x57, 0x8e, 0xcf, 0x46, 0xd7, 0x45, 0x76, 0x82, 0x1d, 0x92, 0x9d, 0x22, 0xbc, 0xf1,
+	0xd8, 0x36, 0x49, 0x1e, 0xab, 0xb7, 0x36, 0xa9, 0x63, 0xd0, 0x66, 0x06, 0x8f, 0x61, 0x76, 0xe3,
+	0xe0, 0xd2, 0x1e, 0xd2, 0xbc, 0x20, 0x38, 0x05, 0xd3, 0x4f, 0x07, 0xab, 0xfc, 0xd6, 0x86, 0xbb,
+	0xb7, 0x87, 0xfa, 0x05, 0xf4, 0xb9, 0x1f, 0x47, 0xf8, 0xc1, 0xbf, 0x4c, 0x7f, 0x61, 0xba, 0xae,
+	0xe7, 0x8f, 0x70, 0x81, 0x6a, 0x95, 0x11, 0x67, 0x0f, 0x3a, 0xa8, 0xb8, 0xdd, 0xde, 0xbd, 0xce,
+	0xe6, 0x7f, 0xb4, 0x60, 0x60, 0x4f, 0xdc, 0xa0, 0x6c, 0xa2, 0x17, 0xd0, 0xe3, 0x2c, 0x18, 0xfe,
+	0xce, 0xaa, 0xae, 0xd4, 0xd7, 0x20, 0xcc, 0xcf, 0xed, 0x07, 0x00, 0xc5, 0xfb, 0x5f, 0x47, 0x71,
+	0x6b, 0x4c, 0xf9, 0x55, 0x2a, 0xd7, 0xda, 0x7a, 0xca, 0xc3, 0x6f, 0x83, 0x39, 0x51, 0x94, 0xc1,
+	0x97, 0x30, 0xe6, 0x87, 0x1f, 0xf0, 0xbb, 0x47, 0x66, 0xc2, 0x86, 0xd1, 0x4c, 0x61, 0xbe, 0xc9,
+	0xce, 0x55, 0xf5, 0x8f, 0xc2, 0x3f, 0xc4, 0x9b, 0x85, 0x8f, 0x97, 0xf2, 0x2a, 0x7f, 0x5a, 0x15,
+	0x9b, 0x92, 0xcd, 0x95, 0xe9, 0xb5, 0xe6, 0xb6, 0xc6, 0x9f, 0xff, 0xdc, 0x81, 0xc9, 0xa9, 0x31,
+	0x69, 0x96, 0xc9, 0x3c, 0xd6, 0x38, 0xd2, 0xd1, 0xc9, 0xe9, 0x8b, 0xf0, 0xb4, 0xaa, 0x8a, 0x4a,
+	0xfc, 0xe5, 0xfe, 0x5a, 0x78, 0x6e, 0x48, 0x38, 0x75, 0x22, 0xee, 0x60, 0xed, 0x03, 0x7a, 0xda,
+	0x7e, 0xc2, 0x45, 0x0b, 0xbd, 0x35, 0x76, 0x18, 0xd9, 0x4f, 0xb4, 0x1d, 0xe2, 0x36, 0x42, 0x74,
+	0xdc, 0xb9, 0xad, 0xd9, 0x05, 0x5d, 0x89, 0x13, 0xc2, 0x1a, 0xdf, 0x0a, 0x32, 0xa5, 0x30, 0xc5,
+	0xb6, 0x42, 0x89, 0x3e, 0x7e, 0x3a, 0x81, 0x50, 0xb3, 0xc4, 0x62, 0xd0, 0x44, 0xe1, 0x66, 0x16,
+	0xb9, 0x45, 0x87, 0xae, 0xc4, 0x76, 0xeb, 0xc4, 0xa8, 0xc1, 0x1a, 0x03, 0x0a, 0xc0, 0x8f, 0xfd,
+	0xfd, 0x7d, 0xac, 0x31, 0xa5, 0xf0, 0xd0, 0x96, 0x1e, 0xbd, 0xb4, 0x52, 0x8b, 0x71, 0x43, 0xb8,
+	0xb9, 0x96, 0xc4, 0xa4, 0xa1, 0x67, 0x6f, 0x11, 0x71, 0x80, 0x43, 0x9c, 0x32, 0xb2, 0xd5, 0x5b,
+	0x4c, 0xd1, 0x7f, 0x03, 0x02, 0x5f, 0xc8, 0xb7, 0x42, 0xb8, 0x9e, 0x9f, 0x6b, 0x14, 0xbc, 0xac,
+	0x14, 0xee, 0x70, 0x2c, 0xbe, 0x3d, 0xee, 0xfc, 0xd4, 0xba, 0xf3, 0x77, 0x00, 0x00, 0x00, 0xff,
+	0xff, 0x0f, 0xc5, 0x8c, 0x76, 0x2b, 0x09, 0x00, 0x00,
 }

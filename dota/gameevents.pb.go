@@ -5,10 +5,12 @@
 package dota
 
 import proto "github.com/golang/protobuf/proto"
+import fmt "fmt"
 import math "math"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
+var _ = fmt.Errorf
 var _ = math.Inf
 
 type EBaseGameEvents int32
@@ -76,6 +78,7 @@ func (x *EBaseGameEvents) UnmarshalJSON(data []byte) error {
 	*x = EBaseGameEvents(value)
 	return nil
 }
+func (EBaseGameEvents) EnumDescriptor() ([]byte, []int) { return fileDescriptor27, []int{0} }
 
 type CMsgVDebugGameSessionIDEvent struct {
 	Clientid         *int32  `protobuf:"varint,1,opt,name=clientid" json:"clientid,omitempty"`
@@ -83,9 +86,10 @@ type CMsgVDebugGameSessionIDEvent struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CMsgVDebugGameSessionIDEvent) Reset()         { *m = CMsgVDebugGameSessionIDEvent{} }
-func (m *CMsgVDebugGameSessionIDEvent) String() string { return proto.CompactTextString(m) }
-func (*CMsgVDebugGameSessionIDEvent) ProtoMessage()    {}
+func (m *CMsgVDebugGameSessionIDEvent) Reset()                    { *m = CMsgVDebugGameSessionIDEvent{} }
+func (m *CMsgVDebugGameSessionIDEvent) String() string            { return proto.CompactTextString(m) }
+func (*CMsgVDebugGameSessionIDEvent) ProtoMessage()               {}
+func (*CMsgVDebugGameSessionIDEvent) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{0} }
 
 func (m *CMsgVDebugGameSessionIDEvent) GetClientid() int32 {
 	if m != nil && m.Clientid != nil {
@@ -118,9 +122,10 @@ type CMsgPlaceDecalEvent struct {
 	XXX_unrecognized     []byte      `json:"-"`
 }
 
-func (m *CMsgPlaceDecalEvent) Reset()         { *m = CMsgPlaceDecalEvent{} }
-func (m *CMsgPlaceDecalEvent) String() string { return proto.CompactTextString(m) }
-func (*CMsgPlaceDecalEvent) ProtoMessage()    {}
+func (m *CMsgPlaceDecalEvent) Reset()                    { *m = CMsgPlaceDecalEvent{} }
+func (m *CMsgPlaceDecalEvent) String() string            { return proto.CompactTextString(m) }
+func (*CMsgPlaceDecalEvent) ProtoMessage()               {}
+func (*CMsgPlaceDecalEvent) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{1} }
 
 func (m *CMsgPlaceDecalEvent) GetPosition() *CMsgVector {
 	if m != nil {
@@ -218,9 +223,10 @@ type CMsgClearWorldDecalsEvent struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CMsgClearWorldDecalsEvent) Reset()         { *m = CMsgClearWorldDecalsEvent{} }
-func (m *CMsgClearWorldDecalsEvent) String() string { return proto.CompactTextString(m) }
-func (*CMsgClearWorldDecalsEvent) ProtoMessage()    {}
+func (m *CMsgClearWorldDecalsEvent) Reset()                    { *m = CMsgClearWorldDecalsEvent{} }
+func (m *CMsgClearWorldDecalsEvent) String() string            { return proto.CompactTextString(m) }
+func (*CMsgClearWorldDecalsEvent) ProtoMessage()               {}
+func (*CMsgClearWorldDecalsEvent) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{2} }
 
 func (m *CMsgClearWorldDecalsEvent) GetFlagstoclear() uint32 {
 	if m != nil && m.Flagstoclear != nil {
@@ -234,9 +240,10 @@ type CMsgClearEntityDecalsEvent struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CMsgClearEntityDecalsEvent) Reset()         { *m = CMsgClearEntityDecalsEvent{} }
-func (m *CMsgClearEntityDecalsEvent) String() string { return proto.CompactTextString(m) }
-func (*CMsgClearEntityDecalsEvent) ProtoMessage()    {}
+func (m *CMsgClearEntityDecalsEvent) Reset()                    { *m = CMsgClearEntityDecalsEvent{} }
+func (m *CMsgClearEntityDecalsEvent) String() string            { return proto.CompactTextString(m) }
+func (*CMsgClearEntityDecalsEvent) ProtoMessage()               {}
+func (*CMsgClearEntityDecalsEvent) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{3} }
 
 func (m *CMsgClearEntityDecalsEvent) GetFlagstoclear() uint32 {
 	if m != nil && m.Flagstoclear != nil {
@@ -257,6 +264,9 @@ func (m *CMsgClearDecalsForSkeletonInstanceEvent) Reset() {
 }
 func (m *CMsgClearDecalsForSkeletonInstanceEvent) String() string { return proto.CompactTextString(m) }
 func (*CMsgClearDecalsForSkeletonInstanceEvent) ProtoMessage()    {}
+func (*CMsgClearDecalsForSkeletonInstanceEvent) Descriptor() ([]byte, []int) {
+	return fileDescriptor27, []int{4}
+}
 
 func (m *CMsgClearDecalsForSkeletonInstanceEvent) GetFlagstoclear() uint32 {
 	if m != nil && m.Flagstoclear != nil {
@@ -284,9 +294,10 @@ type CMsgSource1LegacyGameEventList struct {
 	XXX_unrecognized []byte                                       `json:"-"`
 }
 
-func (m *CMsgSource1LegacyGameEventList) Reset()         { *m = CMsgSource1LegacyGameEventList{} }
-func (m *CMsgSource1LegacyGameEventList) String() string { return proto.CompactTextString(m) }
-func (*CMsgSource1LegacyGameEventList) ProtoMessage()    {}
+func (m *CMsgSource1LegacyGameEventList) Reset()                    { *m = CMsgSource1LegacyGameEventList{} }
+func (m *CMsgSource1LegacyGameEventList) String() string            { return proto.CompactTextString(m) }
+func (*CMsgSource1LegacyGameEventList) ProtoMessage()               {}
+func (*CMsgSource1LegacyGameEventList) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{5} }
 
 func (m *CMsgSource1LegacyGameEventList) GetDescriptors() []*CMsgSource1LegacyGameEventListDescriptorT {
 	if m != nil {
@@ -304,6 +315,9 @@ type CMsgSource1LegacyGameEventListKeyT struct {
 func (m *CMsgSource1LegacyGameEventListKeyT) Reset()         { *m = CMsgSource1LegacyGameEventListKeyT{} }
 func (m *CMsgSource1LegacyGameEventListKeyT) String() string { return proto.CompactTextString(m) }
 func (*CMsgSource1LegacyGameEventListKeyT) ProtoMessage()    {}
+func (*CMsgSource1LegacyGameEventListKeyT) Descriptor() ([]byte, []int) {
+	return fileDescriptor27, []int{5, 0}
+}
 
 func (m *CMsgSource1LegacyGameEventListKeyT) GetType() int32 {
 	if m != nil && m.Type != nil {
@@ -331,6 +345,9 @@ func (m *CMsgSource1LegacyGameEventListDescriptorT) Reset() {
 }
 func (m *CMsgSource1LegacyGameEventListDescriptorT) String() string { return proto.CompactTextString(m) }
 func (*CMsgSource1LegacyGameEventListDescriptorT) ProtoMessage()    {}
+func (*CMsgSource1LegacyGameEventListDescriptorT) Descriptor() ([]byte, []int) {
+	return fileDescriptor27, []int{5, 1}
+}
 
 func (m *CMsgSource1LegacyGameEventListDescriptorT) GetEventid() int32 {
 	if m != nil && m.Eventid != nil {
@@ -359,9 +376,10 @@ type CMsgSource1LegacyListenEvents struct {
 	XXX_unrecognized []byte   `json:"-"`
 }
 
-func (m *CMsgSource1LegacyListenEvents) Reset()         { *m = CMsgSource1LegacyListenEvents{} }
-func (m *CMsgSource1LegacyListenEvents) String() string { return proto.CompactTextString(m) }
-func (*CMsgSource1LegacyListenEvents) ProtoMessage()    {}
+func (m *CMsgSource1LegacyListenEvents) Reset()                    { *m = CMsgSource1LegacyListenEvents{} }
+func (m *CMsgSource1LegacyListenEvents) String() string            { return proto.CompactTextString(m) }
+func (*CMsgSource1LegacyListenEvents) ProtoMessage()               {}
+func (*CMsgSource1LegacyListenEvents) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{6} }
 
 func (m *CMsgSource1LegacyListenEvents) GetPlayerslot() int32 {
 	if m != nil && m.Playerslot != nil {
@@ -384,9 +402,10 @@ type CMsgSource1LegacyGameEvent struct {
 	XXX_unrecognized []byte                            `json:"-"`
 }
 
-func (m *CMsgSource1LegacyGameEvent) Reset()         { *m = CMsgSource1LegacyGameEvent{} }
-func (m *CMsgSource1LegacyGameEvent) String() string { return proto.CompactTextString(m) }
-func (*CMsgSource1LegacyGameEvent) ProtoMessage()    {}
+func (m *CMsgSource1LegacyGameEvent) Reset()                    { *m = CMsgSource1LegacyGameEvent{} }
+func (m *CMsgSource1LegacyGameEvent) String() string            { return proto.CompactTextString(m) }
+func (*CMsgSource1LegacyGameEvent) ProtoMessage()               {}
+func (*CMsgSource1LegacyGameEvent) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{7} }
 
 func (m *CMsgSource1LegacyGameEvent) GetEventName() string {
 	if m != nil && m.EventName != nil {
@@ -424,6 +443,9 @@ type CMsgSource1LegacyGameEventKeyT struct {
 func (m *CMsgSource1LegacyGameEventKeyT) Reset()         { *m = CMsgSource1LegacyGameEventKeyT{} }
 func (m *CMsgSource1LegacyGameEventKeyT) String() string { return proto.CompactTextString(m) }
 func (*CMsgSource1LegacyGameEventKeyT) ProtoMessage()    {}
+func (*CMsgSource1LegacyGameEventKeyT) Descriptor() ([]byte, []int) {
+	return fileDescriptor27, []int{7, 0}
+}
 
 func (m *CMsgSource1LegacyGameEventKeyT) GetType() int32 {
 	if m != nil && m.Type != nil {
@@ -482,17 +504,19 @@ func (m *CMsgSource1LegacyGameEventKeyT) GetValUint64() uint64 {
 }
 
 type CMsgSosStartSoundEvent struct {
-	SoundeventGuid    *int32  `protobuf:"varint,1,opt,name=soundevent_guid" json:"soundevent_guid,omitempty"`
-	SoundeventHash    *uint32 `protobuf:"fixed32,2,opt,name=soundevent_hash" json:"soundevent_hash,omitempty"`
-	SourceEntityIndex *int32  `protobuf:"varint,3,opt,name=source_entity_index" json:"source_entity_index,omitempty"`
-	Seed              *int32  `protobuf:"varint,4,opt,name=seed" json:"seed,omitempty"`
-	PackedParams      []byte  `protobuf:"bytes,5,opt,name=packed_params" json:"packed_params,omitempty"`
-	XXX_unrecognized  []byte  `json:"-"`
+	SoundeventGuid    *int32   `protobuf:"varint,1,opt,name=soundevent_guid" json:"soundevent_guid,omitempty"`
+	SoundeventHash    *uint32  `protobuf:"fixed32,2,opt,name=soundevent_hash" json:"soundevent_hash,omitempty"`
+	SourceEntityIndex *int32   `protobuf:"varint,3,opt,name=source_entity_index" json:"source_entity_index,omitempty"`
+	Seed              *int32   `protobuf:"varint,4,opt,name=seed" json:"seed,omitempty"`
+	PackedParams      []byte   `protobuf:"bytes,5,opt,name=packed_params" json:"packed_params,omitempty"`
+	StartTime         *float32 `protobuf:"fixed32,6,opt,name=start_time" json:"start_time,omitempty"`
+	XXX_unrecognized  []byte   `json:"-"`
 }
 
-func (m *CMsgSosStartSoundEvent) Reset()         { *m = CMsgSosStartSoundEvent{} }
-func (m *CMsgSosStartSoundEvent) String() string { return proto.CompactTextString(m) }
-func (*CMsgSosStartSoundEvent) ProtoMessage()    {}
+func (m *CMsgSosStartSoundEvent) Reset()                    { *m = CMsgSosStartSoundEvent{} }
+func (m *CMsgSosStartSoundEvent) String() string            { return proto.CompactTextString(m) }
+func (*CMsgSosStartSoundEvent) ProtoMessage()               {}
+func (*CMsgSosStartSoundEvent) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{8} }
 
 func (m *CMsgSosStartSoundEvent) GetSoundeventGuid() int32 {
 	if m != nil && m.SoundeventGuid != nil {
@@ -529,14 +553,22 @@ func (m *CMsgSosStartSoundEvent) GetPackedParams() []byte {
 	return nil
 }
 
+func (m *CMsgSosStartSoundEvent) GetStartTime() float32 {
+	if m != nil && m.StartTime != nil {
+		return *m.StartTime
+	}
+	return 0
+}
+
 type CMsgSosStopSoundEvent struct {
 	SoundeventGuid   *int32 `protobuf:"varint,1,opt,name=soundevent_guid" json:"soundevent_guid,omitempty"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CMsgSosStopSoundEvent) Reset()         { *m = CMsgSosStopSoundEvent{} }
-func (m *CMsgSosStopSoundEvent) String() string { return proto.CompactTextString(m) }
-func (*CMsgSosStopSoundEvent) ProtoMessage()    {}
+func (m *CMsgSosStopSoundEvent) Reset()                    { *m = CMsgSosStopSoundEvent{} }
+func (m *CMsgSosStopSoundEvent) String() string            { return proto.CompactTextString(m) }
+func (*CMsgSosStopSoundEvent) ProtoMessage()               {}
+func (*CMsgSosStopSoundEvent) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{9} }
 
 func (m *CMsgSosStopSoundEvent) GetSoundeventGuid() int32 {
 	if m != nil && m.SoundeventGuid != nil {
@@ -551,9 +583,10 @@ type CMsgSosStopSoundEventHash struct {
 	XXX_unrecognized  []byte  `json:"-"`
 }
 
-func (m *CMsgSosStopSoundEventHash) Reset()         { *m = CMsgSosStopSoundEventHash{} }
-func (m *CMsgSosStopSoundEventHash) String() string { return proto.CompactTextString(m) }
-func (*CMsgSosStopSoundEventHash) ProtoMessage()    {}
+func (m *CMsgSosStopSoundEventHash) Reset()                    { *m = CMsgSosStopSoundEventHash{} }
+func (m *CMsgSosStopSoundEventHash) String() string            { return proto.CompactTextString(m) }
+func (*CMsgSosStopSoundEventHash) ProtoMessage()               {}
+func (*CMsgSosStopSoundEventHash) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{10} }
 
 func (m *CMsgSosStopSoundEventHash) GetSoundeventHash() uint32 {
 	if m != nil && m.SoundeventHash != nil {
@@ -575,9 +608,10 @@ type CMsgSosSetSoundEventParams struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CMsgSosSetSoundEventParams) Reset()         { *m = CMsgSosSetSoundEventParams{} }
-func (m *CMsgSosSetSoundEventParams) String() string { return proto.CompactTextString(m) }
-func (*CMsgSosSetSoundEventParams) ProtoMessage()    {}
+func (m *CMsgSosSetSoundEventParams) Reset()                    { *m = CMsgSosSetSoundEventParams{} }
+func (m *CMsgSosSetSoundEventParams) String() string            { return proto.CompactTextString(m) }
+func (*CMsgSosSetSoundEventParams) ProtoMessage()               {}
+func (*CMsgSosSetSoundEventParams) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{11} }
 
 func (m *CMsgSosSetSoundEventParams) GetSoundeventGuid() int32 {
 	if m != nil && m.SoundeventGuid != nil {
@@ -599,9 +633,10 @@ type CMsgSosSetLibraryStackFields struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CMsgSosSetLibraryStackFields) Reset()         { *m = CMsgSosSetLibraryStackFields{} }
-func (m *CMsgSosSetLibraryStackFields) String() string { return proto.CompactTextString(m) }
-func (*CMsgSosSetLibraryStackFields) ProtoMessage()    {}
+func (m *CMsgSosSetLibraryStackFields) Reset()                    { *m = CMsgSosSetLibraryStackFields{} }
+func (m *CMsgSosSetLibraryStackFields) String() string            { return proto.CompactTextString(m) }
+func (*CMsgSosSetLibraryStackFields) ProtoMessage()               {}
+func (*CMsgSosSetLibraryStackFields) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{12} }
 
 func (m *CMsgSosSetLibraryStackFields) GetStackHash() uint32 {
 	if m != nil && m.StackHash != nil {
@@ -618,5 +653,84 @@ func (m *CMsgSosSetLibraryStackFields) GetPackedFields() []byte {
 }
 
 func init() {
+	proto.RegisterType((*CMsgVDebugGameSessionIDEvent)(nil), "dota.CMsgVDebugGameSessionIDEvent")
+	proto.RegisterType((*CMsgPlaceDecalEvent)(nil), "dota.CMsgPlaceDecalEvent")
+	proto.RegisterType((*CMsgClearWorldDecalsEvent)(nil), "dota.CMsgClearWorldDecalsEvent")
+	proto.RegisterType((*CMsgClearEntityDecalsEvent)(nil), "dota.CMsgClearEntityDecalsEvent")
+	proto.RegisterType((*CMsgClearDecalsForSkeletonInstanceEvent)(nil), "dota.CMsgClearDecalsForSkeletonInstanceEvent")
+	proto.RegisterType((*CMsgSource1LegacyGameEventList)(nil), "dota.CMsgSource1LegacyGameEventList")
+	proto.RegisterType((*CMsgSource1LegacyGameEventListKeyT)(nil), "dota.CMsgSource1LegacyGameEventList.key_t")
+	proto.RegisterType((*CMsgSource1LegacyGameEventListDescriptorT)(nil), "dota.CMsgSource1LegacyGameEventList.descriptor_t")
+	proto.RegisterType((*CMsgSource1LegacyListenEvents)(nil), "dota.CMsgSource1LegacyListenEvents")
+	proto.RegisterType((*CMsgSource1LegacyGameEvent)(nil), "dota.CMsgSource1LegacyGameEvent")
+	proto.RegisterType((*CMsgSource1LegacyGameEventKeyT)(nil), "dota.CMsgSource1LegacyGameEvent.key_t")
+	proto.RegisterType((*CMsgSosStartSoundEvent)(nil), "dota.CMsgSosStartSoundEvent")
+	proto.RegisterType((*CMsgSosStopSoundEvent)(nil), "dota.CMsgSosStopSoundEvent")
+	proto.RegisterType((*CMsgSosStopSoundEventHash)(nil), "dota.CMsgSosStopSoundEventHash")
+	proto.RegisterType((*CMsgSosSetSoundEventParams)(nil), "dota.CMsgSosSetSoundEventParams")
+	proto.RegisterType((*CMsgSosSetLibraryStackFields)(nil), "dota.CMsgSosSetLibraryStackFields")
 	proto.RegisterEnum("dota.EBaseGameEvents", EBaseGameEvents_name, EBaseGameEvents_value)
+}
+
+var fileDescriptor27 = []byte{
+	// 940 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x8c, 0x55, 0xcb, 0x6e, 0x1b, 0x37,
+	0x14, 0x2d, 0xf5, 0xb0, 0xe5, 0x6b, 0x29, 0x9e, 0x4c, 0x6c, 0x77, 0xac, 0xd8, 0x69, 0x3a, 0x05,
+	0xd2, 0x22, 0x05, 0x8c, 0x3a, 0x08, 0x8a, 0xae, 0x13, 0x3f, 0x62, 0xd4, 0x05, 0x52, 0x08, 0x68,
+	0x97, 0x02, 0x35, 0x43, 0x4b, 0x84, 0xa8, 0xa1, 0x40, 0x52, 0x89, 0xb5, 0xeb, 0x3f, 0x74, 0xd5,
+	0x5d, 0xff, 0xa2, 0xbf, 0x90, 0xbe, 0x9f, 0xdf, 0xd2, 0x75, 0x2e, 0xc9, 0x19, 0x49, 0xb6, 0x47,
+	0x8e, 0x77, 0xc3, 0xb9, 0xaf, 0x73, 0xcf, 0x3d, 0xbc, 0x84, 0xa0, 0x4f, 0x47, 0x8c, 0xbd, 0x62,
+	0x99, 0xd1, 0xfb, 0x63, 0x25, 0x8d, 0x0c, 0x6b, 0xa9, 0x34, 0xb4, 0xbd, 0x9d, 0x31, 0xf3, 0x5a,
+	0xaa, 0x61, 0x8f, 0x6a, 0x66, 0xa6, 0x63, 0x96, 0x5b, 0xe3, 0x13, 0xd8, 0x7d, 0xfe, 0x95, 0xee,
+	0x7f, 0x73, 0xc8, 0x7a, 0x93, 0xfe, 0x09, 0xc6, 0x76, 0x98, 0xd6, 0x5c, 0x66, 0xa7, 0x87, 0x47,
+	0x36, 0x49, 0x18, 0x40, 0x23, 0x11, 0x1c, 0xbf, 0x78, 0x1a, 0x91, 0x87, 0xe4, 0x93, 0x7a, 0xb8,
+	0x05, 0x2d, 0x5b, 0x43, 0x7b, 0x3f, 0xfc, 0x5d, 0xc1, 0xdf, 0x6b, 0xf1, 0x9b, 0x0a, 0xdc, 0xb3,
+	0x99, 0x5e, 0x0a, 0x9a, 0xb0, 0x43, 0x96, 0x50, 0xe1, 0x13, 0xc4, 0xd0, 0x18, 0x4b, 0xcd, 0x0d,
+	0xfa, 0xba, 0x04, 0xeb, 0x4f, 0x82, 0x7d, 0x8b, 0x68, 0xdf, 0x95, 0x65, 0x89, 0x91, 0x2a, 0x7c,
+	0x08, 0x2b, 0x99, 0x54, 0x23, 0x2a, 0x5c, 0xae, 0x32, 0x8f, 0x0f, 0xa0, 0xae, 0xe9, 0x05, 0xd7,
+	0x51, 0x75, 0x89, 0x43, 0x1b, 0xc2, 0xd4, 0x16, 0x1d, 0x51, 0xc3, 0x14, 0xa7, 0x82, 0x67, 0x29,
+	0xbb, 0x88, 0x6a, 0xe8, 0xdd, 0x0a, 0x5b, 0x50, 0x3f, 0x17, 0xb4, 0xaf, 0xa3, 0x7a, 0x71, 0x4c,
+	0xa4, 0x90, 0x2a, 0x5a, 0xc1, 0xe3, 0xaa, 0x3d, 0xbe, 0xe6, 0xa9, 0x19, 0x44, 0xab, 0x78, 0xac,
+	0x84, 0x77, 0x60, 0x65, 0xc0, 0x78, 0x7f, 0x60, 0xa2, 0x86, 0x3b, 0xa3, 0x39, 0x65, 0x63, 0x34,
+	0xaf, 0xb9, 0xe3, 0x0e, 0xdc, 0xb5, 0x64, 0x98, 0xe9, 0x80, 0x66, 0xa9, 0x60, 0xbe, 0x0c, 0xb8,
+	0xbc, 0xbb, 0xb0, 0xa9, 0x87, 0x4c, 0x30, 0x83, 0xac, 0x64, 0xda, 0xd0, 0x2c, 0x61, 0x03, 0xaa,
+	0x07, 0xd1, 0xba, 0x2b, 0x73, 0x17, 0xd6, 0x7a, 0x32, 0xcb, 0x03, 0x9a, 0x8e, 0xc9, 0x6d, 0xb8,
+	0x63, 0x14, 0xcd, 0xb4, 0x98, 0x24, 0x98, 0x73, 0xc0, 0x4d, 0xd4, 0xc2, 0xff, 0x8d, 0xf8, 0x00,
+	0x76, 0x6c, 0x67, 0xcf, 0x05, 0xa3, 0xea, 0x5b, 0xa9, 0x44, 0xea, 0xe8, 0xd4, 0x9e, 0xcf, 0x4d,
+	0x68, 0xba, 0x66, 0x8c, 0x4c, 0xac, 0xdd, 0x71, 0xda, 0x8a, 0x9f, 0x40, 0x7b, 0x16, 0x72, 0xe4,
+	0xf0, 0xbd, 0x3b, 0xe6, 0x02, 0x3e, 0x9e, 0xc5, 0x78, 0xef, 0x63, 0xa9, 0x3a, 0x79, 0x07, 0xa7,
+	0x79, 0x07, 0x37, 0x24, 0x28, 0xe7, 0xa2, 0x72, 0x23, 0x17, 0x55, 0x57, 0xf9, 0x7f, 0x02, 0x0f,
+	0x6c, 0xe9, 0x8e, 0x9c, 0xa8, 0x84, 0x1d, 0x9c, 0xb1, 0x3e, 0x4d, 0xa6, 0x56, 0x7c, 0xae, 0xda,
+	0x19, 0xd7, 0x26, 0x3c, 0x86, 0xf5, 0x94, 0xe9, 0x44, 0xf1, 0x31, 0x4e, 0x57, 0x63, 0xc1, 0x2a,
+	0x8e, 0xfd, 0x60, 0x3e, 0xf6, 0xe5, 0xa1, 0xfb, 0xf3, 0xb8, 0xae, 0x69, 0x7f, 0x04, 0xf5, 0x21,
+	0x9b, 0x76, 0x4d, 0xd8, 0x84, 0x9a, 0xd5, 0x7d, 0x2e, 0x62, 0x3c, 0x65, 0x18, 0xe4, 0xb5, 0xdb,
+	0xee, 0x43, 0x73, 0x31, 0x28, 0xdc, 0x80, 0x55, 0x77, 0x85, 0x66, 0x9a, 0xbf, 0xe4, 0x1e, 0x7e,
+	0x01, 0x35, 0xcc, 0x69, 0xb5, 0x68, 0x41, 0x3d, 0xbe, 0x15, 0x28, 0x07, 0x22, 0xfe, 0x12, 0xf6,
+	0xae, 0xf9, 0x59, 0x33, 0xcb, 0x9c, 0xa7, 0x0e, 0x43, 0x80, 0xb1, 0xa0, 0x53, 0xa6, 0xb4, 0x90,
+	0x26, 0x2f, 0x8e, 0x32, 0x71, 0x68, 0xa8, 0x52, 0x74, 0xda, 0xe3, 0x46, 0x23, 0x8c, 0x2a, 0xb2,
+	0xf8, 0x7d, 0xc5, 0x0f, 0xbd, 0xbc, 0xaa, 0x4d, 0xe5, 0xc2, 0xba, 0x0e, 0x39, 0x71, 0xc8, 0x17,
+	0x1a, 0xab, 0xb8, 0xdc, 0x4f, 0x2f, 0xb5, 0xf2, 0xe8, 0x5d, 0xad, 0xf8, 0x36, 0xda, 0x3f, 0x90,
+	0x72, 0x56, 0xb1, 0xe4, 0x2b, 0x2a, 0xba, 0xda, 0x28, 0x9e, 0xf5, 0x73, 0xb2, 0x50, 0xf7, 0xf6,
+	0xdf, 0xb9, 0x90, 0xd4, 0xb8, 0xf1, 0x57, 0xec, 0x4e, 0xb1, 0xbf, 0x84, 0x44, 0xa7, 0x9a, 0x0b,
+	0xcc, 0x9d, 0xf4, 0x40, 0x2a, 0xe3, 0x6e, 0x69, 0xbd, 0x70, 0xea, 0x4d, 0x0d, 0x73, 0x17, 0x75,
+	0xfe, 0x47, 0x4a, 0xe1, 0xee, 0x6a, 0xa3, 0xa8, 0x37, 0xe1, 0x99, 0xf9, 0xfc, 0xa9, 0xbb, 0xaf,
+	0xb5, 0xf8, 0x47, 0x02, 0xdb, 0xbe, 0x01, 0xdd, 0x41, 0xca, 0x0c, 0x36, 0x92, 0xa5, 0x9e, 0x91,
+	0xf7, 0x61, 0x43, 0xdb, 0x93, 0xa7, 0xa5, 0x3f, 0x99, 0x8d, 0xf7, 0xb2, 0xc1, 0x09, 0xb5, 0xe2,
+	0x2e, 0xed, 0x7d, 0xb8, 0xa7, 0x1d, 0x11, 0x5d, 0x2f, 0xf4, 0xae, 0xd7, 0x78, 0xb5, 0x10, 0x85,
+	0x66, 0x2c, 0xcd, 0x5b, 0xc0, 0xb5, 0x38, 0xa6, 0xc9, 0x90, 0xa5, 0xdd, 0x31, 0x55, 0x74, 0xe4,
+	0x97, 0x4d, 0xd3, 0x42, 0xd4, 0x16, 0x46, 0xd7, 0xf0, 0x91, 0x6f, 0xa4, 0x12, 0x7f, 0x06, 0x5b,
+	0x33, 0x84, 0x72, 0x7c, 0x0b, 0x80, 0xf1, 0xd7, 0x7e, 0x23, 0x5c, 0x8b, 0x78, 0x81, 0x50, 0xcb,
+	0xd0, 0x93, 0x9b, 0xd0, 0xbb, 0xc9, 0xc7, 0x67, 0x85, 0x78, 0x74, 0x87, 0x2d, 0x90, 0xf4, 0xd2,
+	0x81, 0x5f, 0x4e, 0x55, 0x79, 0x9b, 0xf1, 0xa9, 0x7f, 0x46, 0x7c, 0xb6, 0x33, 0xde, 0x53, 0x54,
+	0x4d, 0x91, 0xfe, 0x64, 0x78, 0xcc, 0x99, 0x48, 0x75, 0x4e, 0x43, 0x32, 0x5c, 0x84, 0x37, 0x4f,
+	0x75, 0xee, 0x9c, 0x7c, 0xaa, 0xc7, 0x3f, 0x55, 0x61, 0xe3, 0xe8, 0x19, 0x3e, 0x53, 0x33, 0xd5,
+	0x69, 0x7c, 0x20, 0xee, 0x9f, 0x1c, 0x75, 0x97, 0x3d, 0x52, 0xc1, 0x1b, 0x82, 0x80, 0x43, 0xf4,
+	0xb8, 0xf2, 0xf8, 0x04, 0x3f, 0x93, 0x70, 0x0f, 0x22, 0x34, 0x94, 0xee, 0xd2, 0xe0, 0x17, 0x12,
+	0x3e, 0x80, 0x9d, 0xc2, 0x7c, 0x6d, 0x6f, 0x06, 0xbf, 0x92, 0xf0, 0x53, 0x78, 0x54, 0xd8, 0x6f,
+	0xde, 0x91, 0xc1, 0x6f, 0x04, 0xdf, 0xba, 0x3d, 0x74, 0x5e, 0xbe, 0x05, 0x82, 0xdf, 0x49, 0xf8,
+	0x21, 0xec, 0x5e, 0xf5, 0x59, 0xdc, 0x00, 0xc1, 0x1f, 0x05, 0xa6, 0xf2, 0x34, 0xc1, 0x9f, 0x04,
+	0xdf, 0xba, 0x2d, 0x67, 0xbf, 0x2a, 0xf0, 0xe0, 0x2f, 0x82, 0x3b, 0x79, 0xb3, 0xb0, 0x2d, 0x0a,
+	0x25, 0xf8, 0x7b, 0x9e, 0xb6, 0x6c, 0xe0, 0xc1, 0x3f, 0x24, 0x27, 0x79, 0xd9, 0x08, 0x83, 0x7f,
+	0x0b, 0x2e, 0x4b, 0x55, 0x18, 0xfc, 0x47, 0x9e, 0xd5, 0x5f, 0x90, 0xef, 0xc8, 0x7b, 0x6f, 0x03,
+	0x00, 0x00, 0xff, 0xff, 0x5b, 0xc5, 0x93, 0xe1, 0x83, 0x08, 0x00, 0x00,
 }

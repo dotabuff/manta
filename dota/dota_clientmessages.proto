@@ -55,9 +55,11 @@ enum EDotaClientMessages {
 	DOTA_CM_CoinWager = 349;
 	DOTA_CM_ExecuteOrders = 350;
 	DOTA_CM_XPAlert = 351;
-	DOTA_CM_GenericBooleanConvar = 352;
 	DOTA_CM_EventPointsTip = 353;
 	DOTA_CM_MatchMetadata = 354;
+	DOTA_CM_KillMyHero = 355;
+	DOTA_CM_QuestStatus = 356;
+	DOTA_CM_ToggleAutoattack = 357;
 }
 
 message CDOTAClientMsg_MapPing {
@@ -121,16 +123,6 @@ message CDOTAClientMsg_UnitsAutoAttackAfterSpell {
 
 message CDOTAClientMsg_TeleportRequiresHalt {
 	optional bool enabled = 1;
-}
-
-message CDOTAClientMsg_GenericBooleanConvar {
-	enum EType {
-		FORCE_DEFAULT_RESPAWN_STINGER = 1;
-		FORCE_DEFAULT_DEATH_STINGER = 2;
-	}
-
-	optional CDOTAClientMsg_GenericBooleanConvar.EType type = 1 [default = FORCE_DEFAULT_RESPAWN_STINGER];
-	optional bool value = 2;
 }
 
 message CDOTAClientMsg_SearchString {
@@ -247,17 +239,6 @@ message CDOTAClientMsg_HeroStatueLike {
 	optional uint32 owner_player_id = 1;
 }
 
-message CDOTAClientMsg_TeamShowcaseEditor {
-	optional bytes data = 1;
-}
-
-message CDOTAClientMsg_TeamShowcaseClientData {
-	optional bytes data = 1;
-}
-
-message CDOTAClientMsg_PlayTeamShowcase {
-}
-
 message CDOTAClientMsg_EventCNY2015Cmd {
 	optional bytes data = 1;
 }
@@ -302,5 +283,23 @@ message CDOTAClientMsg_XPAlert {
 message CDOTAClientMsg_MatchMetadata {
 	optional uint64 match_id = 1;
 	optional bytes metadata = 2;
+}
+
+message CDOTAClientMsg_KillMyHero {
+}
+
+message CDOTAClientMsg_QuestStatus {
+	optional uint32 quest_id = 1;
+	optional uint32 challenge_id = 2;
+	optional uint32 progress = 3;
+	optional uint32 goal = 4;
+	optional uint32 query = 5;
+	optional float fail_gametime = 6;
+	optional uint32 item_id = 7;
+}
+
+message CDOTAClientMsg_ToggleAutoattack {
+	optional int32 mode = 1;
+	optional bool show_message = 2;
 }
 

@@ -1,6 +1,7 @@
 package dota;
 
 import "steammessages.proto";
+import "econ_shared_enums.proto";
 
 option optimize_for = SPEED;
 option cc_generic_services = false;
@@ -152,7 +153,6 @@ enum EGCItemMsg {
 	k_EMsgGCToGCCheckAccountTradeStatusResponse = 2553;
 	k_EMsgGCToGCGrantAccountRolledItems = 2554;
 	k_EMsgGCToGCGrantSelfMadeItemToAccount = 2555;
-	k_EMsgSQLUpgradeBattleBooster = 2556;
 	k_EMsgGCPartnerBalanceRequest = 2557;
 	k_EMsgGCPartnerBalanceResponse = 2558;
 	k_EMsgGCPartnerRechargeRedirectURLRequest = 2559;
@@ -175,7 +175,6 @@ enum EGCItemMsg {
 	k_EMsgClientToGCUnpackBundle = 2576;
 	k_EMsgClientToGCSetItemStyle = 2577;
 	k_EMsgClientToGCSetItemStyleResponse = 2578;
-	k_EMsgGCGenericResult = 2579;
 	k_EMsgSQLGCToGCGrantBackpackSlots = 2580;
 	k_EMsgClientToGCLookupAccountName = 2581;
 	k_EMsgClientToGCLookupAccountNameResponse = 2582;
@@ -188,18 +187,9 @@ enum EGCItemMsg {
 	k_EMsgGCToGCStoreProcessSettlementResponse = 2589;
 	k_EMsgGCToGCConsoleOutput = 2590;
 	k_EMsgGCToClientItemAges = 2591;
-}
-
-enum EGCMsgResponse {
-	k_EGCMsgResponseOK = 0;
-	k_EGCMsgResponseDenied = 1;
-	k_EGCMsgResponseServerError = 2;
-	k_EGCMsgResponseTimeout = 3;
-	k_EGCMsgResponseInvalid = 4;
-	k_EGCMsgResponseNoMatch = 5;
-	k_EGCMsgResponseUnknownError = 6;
-	k_EGCMsgResponseNotLoggedOn = 7;
-	k_EGCMsgFailedToCreate = 8;
+	k_EMsgGCToGCInternalTestMsg = 2592;
+	k_EMsgGCToGCClientServerVersionsUpdated = 2593;
+	k_EMsgGCUseMultipleItemsRequest = 2594;
 }
 
 enum EItemPurgatoryResponse_Finalize {
@@ -218,13 +208,6 @@ enum EItemPurgatoryResponse_Refund {
 	k_ItemPurgatoryResponse_Refund_Failed_NoSOCache = 3;
 	k_ItemPurgatoryResponse_Refund_Failed_NoDetail = 4;
 	k_ItemPurgatoryResponse_Refund_Failed_NexonWebAPI = 5;
-}
-
-enum EGCPartnerRequestResponse {
-	k_EPartnerRequestOK = 1;
-	k_EPartnerRequestBadAccount = 2;
-	k_EPartnerRequestNotLinked = 3;
-	k_EPartnerRequestUnsupportedPartnerType = 4;
 }
 
 enum EGCMsgInitiateTradeResponse {
@@ -251,6 +234,7 @@ enum EGCMsgInitiateTradeResponse {
 	k_EGCMsgInitiateTradeResponse_Recent_Password_Reset = 20;
 	k_EGCMsgInitiateTradeResponse_Using_New_Device = 21;
 	k_EGCMsgInitiateTradeResponse_Sent_Invalid_Cookie = 22;
+	k_EGCMsgInitiateTradeResponse_TooRecentFriend = 23;
 }
 
 message CMsgApplyAutograph {
@@ -465,6 +449,10 @@ message CMsgServerUseItem {
 	optional CMsgUseItem use_item_msg = 2;
 }
 
+message CMsgUseMultipleItems {
+	repeated uint64 item_ids = 1;
+}
+
 message CMsgGCPartnerBalanceRequest {
 }
 
@@ -551,6 +539,23 @@ message CMsgClientToGCWrapAndDeliverGiftResponse {
 
 message CMsgClientToGCUnwrapGift {
 	optional uint64 item_id = 1;
+}
+
+message CMsgClientToGCGetGiftPermissions {
+}
+
+message CMsgClientToGCGetGiftPermissionsResponse {
+	message FriendPermission {
+		optional uint32 account_id = 1;
+		optional EGCMsgInitiateTradeResponse permission = 2 [default = k_EGCMsgInitiateTradeResponse_Accepted];
+	}
+
+	optional bool is_unlimited = 1;
+	optional bool has_two_factor = 3;
+	optional EGCMsgInitiateTradeResponse sender_permission = 6 [default = k_EGCMsgInitiateTradeResponse_Accepted];
+	optional uint32 friendship_age_requirement = 7;
+	optional uint32 friendship_age_requirement_two_factor = 8;
+	repeated CMsgClientToGCGetGiftPermissionsResponse.FriendPermission friend_permissions = 9;
 }
 
 message CMsgClientToGCUnpackBundle {
@@ -788,11 +793,6 @@ message CWorkshop_GetItemDailyRevenue_Response {
 	repeated CWorkshop_GetItemDailyRevenue_Response.CountryDailyRevenue country_revenue = 1;
 }
 
-message CMsgGenericResult {
-	optional uint32 eresult = 1 [default = 2];
-	optional string debug_message = 2;
-}
-
 message CMsgSQLGCToGCGrantBackpackSlots {
 	optional uint32 account_id = 1;
 	optional uint32 add_slots = 2;
@@ -908,5 +908,22 @@ message CMsgItemAges {
 	}
 
 	repeated CMsgItemAges.MaxItemIDTimestamp max_item_id_timestamps = 1;
+}
+
+message CMsgGCToGCInternalTestMsg {
+	optional uint32 sending_gc = 1;
+	optional fixed64 sender_id = 2;
+	optional uint32 context = 3;
+	optional uint32 message_id = 4;
+	optional bytes message_body = 5;
+	optional fixed64 job_id_source = 6;
+	optional fixed64 job_id_target = 7;
+}
+
+message CMsgGCToGCClientServerVersionsUpdated {
+	optional uint32 client_min_allowed_version = 1;
+	optional uint32 client_active_version = 2;
+	optional uint32 server_active_version = 3;
+	optional uint32 server_deployed_version = 4;
 }
 

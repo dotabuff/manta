@@ -58,6 +58,7 @@ type Callbacks struct {
 	onCSVCMsg_PeerList                        []func(*dota.CSVCMsg_PeerList) error
 	onCSVCMsg_PacketReliable                  []func(*dota.CSVCMsg_PacketReliable) error
 	onCSVCMsg_HLTVStatus                      []func(*dota.CSVCMsg_HLTVStatus) error
+	onCSVCMsg_ServerSteamID                   []func(*dota.CSVCMsg_ServerSteamID) error
 	onCSVCMsg_FullFrameSplit                  []func(*dota.CSVCMsg_FullFrameSplit) error
 	onCUserMessageAchievementEvent            []func(*dota.CUserMessageAchievementEvent) error
 	onCUserMessageCloseCaption                []func(*dota.CUserMessageCloseCaption) error
@@ -203,6 +204,7 @@ type Callbacks struct {
 	onCDOTAUserMsg_XPAlert                    []func(*dota.CDOTAUserMsg_XPAlert) error
 	onCDOTAUserMsg_UpdateQuestProgress        []func(*dota.CDOTAUserMsg_UpdateQuestProgress) error
 	onCDOTAClientMsg_MatchMetadata            []func(*dota.CDOTAClientMsg_MatchMetadata) error
+	onCDOTAUserMsg_QuestStatus                []func(*dota.CDOTAUserMsg_QuestStatus) error
 }
 
 // OnCDemoStop registers a callback EDemoCommands_DEM_Stop
@@ -458,6 +460,11 @@ func (c *Callbacks) OnCSVCMsg_PacketReliable(fn func(*dota.CSVCMsg_PacketReliabl
 // OnCSVCMsg_HLTVStatus registers a callback for SVC_Messages_svc_HLTVStatus
 func (c *Callbacks) OnCSVCMsg_HLTVStatus(fn func(*dota.CSVCMsg_HLTVStatus) error) {
 	c.onCSVCMsg_HLTVStatus = append(c.onCSVCMsg_HLTVStatus, fn)
+}
+
+// OnCSVCMsg_ServerSteamID registers a callback for SVC_Messages_svc_ServerSteamID
+func (c *Callbacks) OnCSVCMsg_ServerSteamID(fn func(*dota.CSVCMsg_ServerSteamID) error) {
+	c.onCSVCMsg_ServerSteamID = append(c.onCSVCMsg_ServerSteamID, fn)
 }
 
 // OnCSVCMsg_FullFrameSplit registers a callback for SVC_Messages_svc_FullFrameSplit
@@ -1183,6 +1190,11 @@ func (c *Callbacks) OnCDOTAUserMsg_UpdateQuestProgress(fn func(*dota.CDOTAUserMs
 // OnCDOTAClientMsg_MatchMetadata registers a callback for EDotaUserMessages_DOTA_UM_MatchMetadata
 func (c *Callbacks) OnCDOTAClientMsg_MatchMetadata(fn func(*dota.CDOTAClientMsg_MatchMetadata) error) {
 	c.onCDOTAClientMsg_MatchMetadata = append(c.onCDOTAClientMsg_MatchMetadata, fn)
+}
+
+// OnCDOTAUserMsg_QuestStatus registers a callback for EDotaUserMessages_DOTA_UM_QuestStatus
+func (c *Callbacks) OnCDOTAUserMsg_QuestStatus(fn func(*dota.CDOTAUserMsg_QuestStatus) error) {
+	c.onCDOTAUserMsg_QuestStatus = append(c.onCDOTAUserMsg_QuestStatus, fn)
 }
 
 func (c *Callbacks) callByDemoType(t int32, buf []byte) error {
@@ -2109,6 +2121,24 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		for _, fn := range c.onCSVCMsg_HLTVStatus {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 63: // dota.SVC_Messages_svc_ServerSteamID
+		if c.onCSVCMsg_ServerSteamID == nil {
+			return nil
+		}
+
+		msg := &dota.CSVCMsg_ServerSteamID{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCSVCMsg_ServerSteamID {
 			if err := fn(msg); err != nil {
 				return err
 			}
@@ -4719,6 +4749,24 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		for _, fn := range c.onCDOTAClientMsg_MatchMetadata {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 559: // dota.EDotaUserMessages_DOTA_UM_QuestStatus
+		if c.onCDOTAUserMsg_QuestStatus == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_QuestStatus{}
+		if err := proto.Unmarshal(buf, msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_QuestStatus {
 			if err := fn(msg); err != nil {
 				return err
 			}

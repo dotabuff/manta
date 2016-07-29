@@ -5,32 +5,31 @@
 package dota
 
 import proto "github.com/golang/protobuf/proto"
+import fmt "fmt"
 import math "math"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
+var _ = fmt.Errorf
 var _ = math.Inf
 
 type EBaseClientMessages int32
 
 const (
-	EBaseClientMessages_CM_CustomGameEvent        EBaseClientMessages = 280
-	EBaseClientMessages_CM_TrackedControllerInput EBaseClientMessages = 281
-	EBaseClientMessages_CM_ClientUIEvent          EBaseClientMessages = 282
-	EBaseClientMessages_CM_MAX_BASE               EBaseClientMessages = 300
+	EBaseClientMessages_CM_CustomGameEvent EBaseClientMessages = 280
+	EBaseClientMessages_CM_ClientUIEvent   EBaseClientMessages = 282
+	EBaseClientMessages_CM_MAX_BASE        EBaseClientMessages = 300
 )
 
 var EBaseClientMessages_name = map[int32]string{
 	280: "CM_CustomGameEvent",
-	281: "CM_TrackedControllerInput",
 	282: "CM_ClientUIEvent",
 	300: "CM_MAX_BASE",
 }
 var EBaseClientMessages_value = map[string]int32{
-	"CM_CustomGameEvent":        280,
-	"CM_TrackedControllerInput": 281,
-	"CM_ClientUIEvent":          282,
-	"CM_MAX_BASE":               300,
+	"CM_CustomGameEvent": 280,
+	"CM_ClientUIEvent":   282,
+	"CM_MAX_BASE":        300,
 }
 
 func (x EBaseClientMessages) Enum() *EBaseClientMessages {
@@ -49,6 +48,7 @@ func (x *EBaseClientMessages) UnmarshalJSON(data []byte) error {
 	*x = EBaseClientMessages(value)
 	return nil
 }
+func (EBaseClientMessages) EnumDescriptor() ([]byte, []int) { return fileDescriptor2, []int{0} }
 
 type EClientUIEvent int32
 
@@ -85,6 +85,7 @@ func (x *EClientUIEvent) UnmarshalJSON(data []byte) error {
 	*x = EClientUIEvent(value)
 	return nil
 }
+func (EClientUIEvent) EnumDescriptor() ([]byte, []int) { return fileDescriptor2, []int{1} }
 
 type CClientMsg_CustomGameEvent struct {
 	EventName        *string `protobuf:"bytes,1,opt,name=event_name" json:"event_name,omitempty"`
@@ -92,9 +93,10 @@ type CClientMsg_CustomGameEvent struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CClientMsg_CustomGameEvent) Reset()         { *m = CClientMsg_CustomGameEvent{} }
-func (m *CClientMsg_CustomGameEvent) String() string { return proto.CompactTextString(m) }
-func (*CClientMsg_CustomGameEvent) ProtoMessage()    {}
+func (m *CClientMsg_CustomGameEvent) Reset()                    { *m = CClientMsg_CustomGameEvent{} }
+func (m *CClientMsg_CustomGameEvent) String() string            { return proto.CompactTextString(m) }
+func (*CClientMsg_CustomGameEvent) ProtoMessage()               {}
+func (*CClientMsg_CustomGameEvent) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{0} }
 
 func (m *CClientMsg_CustomGameEvent) GetEventName() string {
 	if m != nil && m.EventName != nil {
@@ -110,22 +112,6 @@ func (m *CClientMsg_CustomGameEvent) GetData() []byte {
 	return nil
 }
 
-type CClientMsg_TrackedControllerInput struct {
-	Data             []byte `protobuf:"bytes,1,opt,name=data" json:"data,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
-}
-
-func (m *CClientMsg_TrackedControllerInput) Reset()         { *m = CClientMsg_TrackedControllerInput{} }
-func (m *CClientMsg_TrackedControllerInput) String() string { return proto.CompactTextString(m) }
-func (*CClientMsg_TrackedControllerInput) ProtoMessage()    {}
-
-func (m *CClientMsg_TrackedControllerInput) GetData() []byte {
-	if m != nil {
-		return m.Data
-	}
-	return nil
-}
-
 type CClientMsg_ClientUIEvent struct {
 	Event            *EClientUIEvent `protobuf:"varint,1,opt,name=event,enum=dota.EClientUIEvent,def=0" json:"event,omitempty"`
 	EntEhandle       *uint32         `protobuf:"varint,2,opt,name=ent_ehandle" json:"ent_ehandle,omitempty"`
@@ -135,9 +121,10 @@ type CClientMsg_ClientUIEvent struct {
 	XXX_unrecognized []byte          `json:"-"`
 }
 
-func (m *CClientMsg_ClientUIEvent) Reset()         { *m = CClientMsg_ClientUIEvent{} }
-func (m *CClientMsg_ClientUIEvent) String() string { return proto.CompactTextString(m) }
-func (*CClientMsg_ClientUIEvent) ProtoMessage()    {}
+func (m *CClientMsg_ClientUIEvent) Reset()                    { *m = CClientMsg_ClientUIEvent{} }
+func (m *CClientMsg_ClientUIEvent) String() string            { return proto.CompactTextString(m) }
+func (*CClientMsg_ClientUIEvent) ProtoMessage()               {}
+func (*CClientMsg_ClientUIEvent) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{1} }
 
 const Default_CClientMsg_ClientUIEvent_Event EClientUIEvent = EClientUIEvent_EClientUIEvent_Invalid
 
@@ -177,6 +164,31 @@ func (m *CClientMsg_ClientUIEvent) GetData2() string {
 }
 
 func init() {
+	proto.RegisterType((*CClientMsg_CustomGameEvent)(nil), "dota.CClientMsg_CustomGameEvent")
+	proto.RegisterType((*CClientMsg_ClientUIEvent)(nil), "dota.CClientMsg_ClientUIEvent")
 	proto.RegisterEnum("dota.EBaseClientMessages", EBaseClientMessages_name, EBaseClientMessages_value)
 	proto.RegisterEnum("dota.EClientUIEvent", EClientUIEvent_name, EClientUIEvent_value)
+}
+
+var fileDescriptor2 = []byte{
+	// 303 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x74, 0x50, 0x4f, 0x4b, 0xfb, 0x40,
+	0x14, 0xec, 0xe6, 0xd7, 0x1c, 0x7e, 0xaf, 0x7f, 0x58, 0x5e, 0x6b, 0x8d, 0x85, 0x82, 0xf6, 0x24,
+	0x3d, 0x14, 0xec, 0x51, 0x41, 0x68, 0x63, 0xaa, 0x3d, 0x14, 0x0f, 0x22, 0x7a, 0x0b, 0x8b, 0x59,
+	0xd2, 0x85, 0x64, 0x53, 0xba, 0x9b, 0x9e, 0xfd, 0x18, 0xe2, 0xd1, 0xb3, 0x1f, 0xd2, 0xec, 0x36,
+	0x48, 0x13, 0xf0, 0xf6, 0x66, 0xe6, 0xcd, 0xbe, 0x99, 0x85, 0xfe, 0x5b, 0x22, 0xb8, 0xd4, 0x29,
+	0x57, 0x8a, 0xc5, 0x5c, 0x4d, 0xb7, 0xbb, 0x4c, 0x67, 0xd8, 0x8c, 0x32, 0xcd, 0xc6, 0xb7, 0x30,
+	0xf4, 0x7d, 0x2b, 0xaf, 0x55, 0x1c, 0xfa, 0xb9, 0xd2, 0x59, 0x7a, 0xcf, 0x52, 0x1e, 0xec, 0x0b,
+	0x0a, 0x11, 0x80, 0x9b, 0x21, 0x94, 0x05, 0xe5, 0x91, 0x73, 0x72, 0xf9, 0x1f, 0xdb, 0xd0, 0x8c,
+	0x98, 0x66, 0x9e, 0x53, 0xa0, 0xf6, 0xf8, 0x8b, 0x80, 0x77, 0xfc, 0x80, 0x9d, 0x9e, 0x57, 0x07,
+	0xfb, 0x0d, 0xb8, 0xd6, 0x6e, 0x9d, 0xdd, 0x59, 0x7f, 0x6a, 0x4e, 0x4e, 0x83, 0xca, 0xd2, 0xf5,
+	0xa0, 0x8a, 0xc3, 0x95, 0xdc, 0xb3, 0x44, 0x44, 0xd8, 0x83, 0x96, 0x81, 0x7c, 0xc3, 0x64, 0x94,
+	0x70, 0x7b, 0xae, 0x83, 0x03, 0xe8, 0x1e, 0xca, 0xfc, 0xf2, 0xff, 0x2c, 0xdf, 0x01, 0xd7, 0x84,
+	0xba, 0xf2, 0x9a, 0x36, 0x63, 0x09, 0x67, 0x9e, 0x6b, 0xe0, 0xe4, 0x05, 0x7a, 0xc1, 0x82, 0x29,
+	0x5e, 0xe6, 0x2c, 0xff, 0x01, 0x4f, 0x01, 0xfd, 0x75, 0xbd, 0x33, 0xfd, 0x70, 0xf0, 0x04, 0xa8,
+	0x11, 0x8e, 0x63, 0xd1, 0x4f, 0x07, 0x29, 0xb4, 0x0a, 0x7a, 0x3d, 0x7f, 0x0d, 0x17, 0xf3, 0xa7,
+	0x80, 0x7e, 0x3b, 0x13, 0x09, 0xdd, 0x6a, 0x7a, 0x1c, 0xc2, 0x1f, 0x7d, 0x68, 0x03, 0x2f, 0x60,
+	0x54, 0xd3, 0xee, 0x04, 0x4b, 0xb2, 0x78, 0x29, 0xa4, 0x50, 0x1b, 0x1e, 0x51, 0x82, 0x23, 0x38,
+	0xab, 0xad, 0x2c, 0xc5, 0x8e, 0x3f, 0xe6, 0x7a, 0x9b, 0x6b, 0xea, 0x2c, 0xdc, 0x07, 0xf2, 0x4e,
+	0x1a, 0x3f, 0x01, 0x00, 0x00, 0xff, 0xff, 0x59, 0x7a, 0xac, 0xac, 0xd1, 0x01, 0x00, 0x00,
 }

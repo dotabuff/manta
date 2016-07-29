@@ -245,7 +245,7 @@ func (pst *propertySerializerTable) getPropertySerializerByName(name string) *pr
 			Decode:          decoder,
 			DecodeContainer: decoderContainer,
 			IsArray:         true,
-			Length:          uint32(30),
+			Length:          uint32(1024),
 			ArraySerializer: nil,
 			Name:            name,
 		}

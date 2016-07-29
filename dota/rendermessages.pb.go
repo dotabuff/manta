@@ -5,10 +5,12 @@
 package dota
 
 import proto "github.com/golang/protobuf/proto"
+import fmt "fmt"
 import math "math"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
+var _ = fmt.Errorf
 var _ = math.Inf
 
 type CMsgBeginFrame struct {
@@ -22,9 +24,10 @@ type CMsgBeginFrame struct {
 	XXX_unrecognized             []byte   `json:"-"`
 }
 
-func (m *CMsgBeginFrame) Reset()         { *m = CMsgBeginFrame{} }
-func (m *CMsgBeginFrame) String() string { return proto.CompactTextString(m) }
-func (*CMsgBeginFrame) ProtoMessage()    {}
+func (m *CMsgBeginFrame) Reset()                    { *m = CMsgBeginFrame{} }
+func (m *CMsgBeginFrame) String() string            { return proto.CompactTextString(m) }
+func (*CMsgBeginFrame) ProtoMessage()               {}
+func (*CMsgBeginFrame) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{0} }
 
 func (m *CMsgBeginFrame) GetFramePaintTime() float64 {
 	if m != nil && m.FramePaintTime != nil {
@@ -82,9 +85,10 @@ type CMsgEndFrame struct {
 	XXX_unrecognized     []byte   `json:"-"`
 }
 
-func (m *CMsgEndFrame) Reset()         { *m = CMsgEndFrame{} }
-func (m *CMsgEndFrame) String() string { return proto.CompactTextString(m) }
-func (*CMsgEndFrame) ProtoMessage()    {}
+func (m *CMsgEndFrame) Reset()                    { *m = CMsgEndFrame{} }
+func (m *CMsgEndFrame) String() string            { return proto.CompactTextString(m) }
+func (*CMsgEndFrame) ProtoMessage()               {}
+func (*CMsgEndFrame) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{1} }
 
 func (m *CMsgEndFrame) GetMouseCursorTextureId() uint32 {
 	if m != nil && m.MouseCursorTextureId != nil {
@@ -112,9 +116,10 @@ type CMsgClearBackbuffer struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CMsgClearBackbuffer) Reset()         { *m = CMsgClearBackbuffer{} }
-func (m *CMsgClearBackbuffer) String() string { return proto.CompactTextString(m) }
-func (*CMsgClearBackbuffer) ProtoMessage()    {}
+func (m *CMsgClearBackbuffer) Reset()                    { *m = CMsgClearBackbuffer{} }
+func (m *CMsgClearBackbuffer) String() string            { return proto.CompactTextString(m) }
+func (*CMsgClearBackbuffer) ProtoMessage()               {}
+func (*CMsgClearBackbuffer) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{2} }
 
 func (m *CMsgClearBackbuffer) GetClearColorRgba() uint32 {
 	if m != nil && m.ClearColorRgba != nil {
@@ -128,9 +133,10 @@ type CMsgDeleteTexture struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CMsgDeleteTexture) Reset()         { *m = CMsgDeleteTexture{} }
-func (m *CMsgDeleteTexture) String() string { return proto.CompactTextString(m) }
-func (*CMsgDeleteTexture) ProtoMessage()    {}
+func (m *CMsgDeleteTexture) Reset()                    { *m = CMsgDeleteTexture{} }
+func (m *CMsgDeleteTexture) String() string            { return proto.CompactTextString(m) }
+func (*CMsgDeleteTexture) ProtoMessage()               {}
+func (*CMsgDeleteTexture) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{3} }
 
 func (m *CMsgDeleteTexture) GetTexturePointer() uint64 {
 	if m != nil && m.TexturePointer != nil {
@@ -144,9 +150,10 @@ type CMsgDeletePanel struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CMsgDeletePanel) Reset()         { *m = CMsgDeletePanel{} }
-func (m *CMsgDeletePanel) String() string { return proto.CompactTextString(m) }
-func (*CMsgDeletePanel) ProtoMessage()    {}
+func (m *CMsgDeletePanel) Reset()                    { *m = CMsgDeletePanel{} }
+func (m *CMsgDeletePanel) String() string            { return proto.CompactTextString(m) }
+func (*CMsgDeletePanel) ProtoMessage()               {}
+func (*CMsgDeletePanel) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{4} }
 
 func (m *CMsgDeletePanel) GetContextId() uint64 {
 	if m != nil && m.ContextId != nil {
@@ -161,9 +168,10 @@ type CMsgDeleteParticleSystem struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CMsgDeleteParticleSystem) Reset()         { *m = CMsgDeleteParticleSystem{} }
-func (m *CMsgDeleteParticleSystem) String() string { return proto.CompactTextString(m) }
-func (*CMsgDeleteParticleSystem) ProtoMessage()    {}
+func (m *CMsgDeleteParticleSystem) Reset()                    { *m = CMsgDeleteParticleSystem{} }
+func (m *CMsgDeleteParticleSystem) String() string            { return proto.CompactTextString(m) }
+func (*CMsgDeleteParticleSystem) ProtoMessage()               {}
+func (*CMsgDeleteParticleSystem) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{5} }
 
 func (m *CMsgDeleteParticleSystem) GetPanelHandle() uint64 {
 	if m != nil && m.PanelHandle != nil {
@@ -186,9 +194,10 @@ type CMsgPoint struct {
 	XXX_unrecognized []byte   `json:"-"`
 }
 
-func (m *CMsgPoint) Reset()         { *m = CMsgPoint{} }
-func (m *CMsgPoint) String() string { return proto.CompactTextString(m) }
-func (*CMsgPoint) ProtoMessage()    {}
+func (m *CMsgPoint) Reset()                    { *m = CMsgPoint{} }
+func (m *CMsgPoint) String() string            { return proto.CompactTextString(m) }
+func (*CMsgPoint) ProtoMessage()               {}
+func (*CMsgPoint) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{6} }
 
 func (m *CMsgPoint) GetX() float64 {
 	if m != nil && m.X != nil {
@@ -231,9 +240,10 @@ type CMsgMatrix4X4 struct {
 	XXX_unrecognized []byte   `json:"-"`
 }
 
-func (m *CMsgMatrix4X4) Reset()         { *m = CMsgMatrix4X4{} }
-func (m *CMsgMatrix4X4) String() string { return proto.CompactTextString(m) }
-func (*CMsgMatrix4X4) ProtoMessage()    {}
+func (m *CMsgMatrix4X4) Reset()                    { *m = CMsgMatrix4X4{} }
+func (m *CMsgMatrix4X4) String() string            { return proto.CompactTextString(m) }
+func (*CMsgMatrix4X4) ProtoMessage()               {}
+func (*CMsgMatrix4X4) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{7} }
 
 func (m *CMsgMatrix4X4) GetM00() float64 {
 	if m != nil && m.M00 != nil {
@@ -355,9 +365,10 @@ type CRadiusData struct {
 	XXX_unrecognized []byte                     `json:"-"`
 }
 
-func (m *CRadiusData) Reset()         { *m = CRadiusData{} }
-func (m *CRadiusData) String() string { return proto.CompactTextString(m) }
-func (*CRadiusData) ProtoMessage()    {}
+func (m *CRadiusData) Reset()                    { *m = CRadiusData{} }
+func (m *CRadiusData) String() string            { return proto.CompactTextString(m) }
+func (*CRadiusData) ProtoMessage()               {}
+func (*CRadiusData) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{8} }
 
 func (m *CRadiusData) GetTopLeft() *CRadiusData_CCornerRadius {
 	if m != nil {
@@ -393,9 +404,10 @@ type CRadiusData_CCornerRadius struct {
 	XXX_unrecognized []byte   `json:"-"`
 }
 
-func (m *CRadiusData_CCornerRadius) Reset()         { *m = CRadiusData_CCornerRadius{} }
-func (m *CRadiusData_CCornerRadius) String() string { return proto.CompactTextString(m) }
-func (*CRadiusData_CCornerRadius) ProtoMessage()    {}
+func (m *CRadiusData_CCornerRadius) Reset()                    { *m = CRadiusData_CCornerRadius{} }
+func (m *CRadiusData_CCornerRadius) String() string            { return proto.CompactTextString(m) }
+func (*CRadiusData_CCornerRadius) ProtoMessage()               {}
+func (*CRadiusData_CCornerRadius) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{8, 0} }
 
 func (m *CRadiusData_CCornerRadius) GetHorizontal() float64 {
 	if m != nil && m.Horizontal != nil {
@@ -419,9 +431,10 @@ type CBorderData struct {
 	XXX_unrecognized []byte                   `json:"-"`
 }
 
-func (m *CBorderData) Reset()         { *m = CBorderData{} }
-func (m *CBorderData) String() string { return proto.CompactTextString(m) }
-func (*CBorderData) ProtoMessage()    {}
+func (m *CBorderData) Reset()                    { *m = CBorderData{} }
+func (m *CBorderData) String() string            { return proto.CompactTextString(m) }
+func (*CBorderData) ProtoMessage()               {}
+func (*CBorderData) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{9} }
 
 func (m *CBorderData) GetTop() *CBorderData_CBorderSide {
 	if m != nil {
@@ -458,9 +471,10 @@ type CBorderData_CBorderSide struct {
 	XXX_unrecognized []byte   `json:"-"`
 }
 
-func (m *CBorderData_CBorderSide) Reset()         { *m = CBorderData_CBorderSide{} }
-func (m *CBorderData_CBorderSide) String() string { return proto.CompactTextString(m) }
-func (*CBorderData_CBorderSide) ProtoMessage()    {}
+func (m *CBorderData_CBorderSide) Reset()                    { *m = CBorderData_CBorderSide{} }
+func (m *CBorderData_CBorderSide) String() string            { return proto.CompactTextString(m) }
+func (*CBorderData_CBorderSide) ProtoMessage()               {}
+func (*CBorderData_CBorderSide) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{9, 0} }
 
 func (m *CBorderData_CBorderSide) GetStyle() uint32 {
 	if m != nil && m.Style != nil {
@@ -495,9 +509,10 @@ type CBoxShadowData struct {
 	XXX_unrecognized []byte   `json:"-"`
 }
 
-func (m *CBoxShadowData) Reset()         { *m = CBoxShadowData{} }
-func (m *CBoxShadowData) String() string { return proto.CompactTextString(m) }
-func (*CBoxShadowData) ProtoMessage()    {}
+func (m *CBoxShadowData) Reset()                    { *m = CBoxShadowData{} }
+func (m *CBoxShadowData) String() string            { return proto.CompactTextString(m) }
+func (*CBoxShadowData) ProtoMessage()               {}
+func (*CBoxShadowData) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{10} }
 
 func (m *CBoxShadowData) GetInset() bool {
 	if m != nil && m.Inset != nil {
@@ -565,9 +580,10 @@ type CTextShadowData struct {
 	XXX_unrecognized []byte   `json:"-"`
 }
 
-func (m *CTextShadowData) Reset()         { *m = CTextShadowData{} }
-func (m *CTextShadowData) String() string { return proto.CompactTextString(m) }
-func (*CTextShadowData) ProtoMessage()    {}
+func (m *CTextShadowData) Reset()                    { *m = CTextShadowData{} }
+func (m *CTextShadowData) String() string            { return proto.CompactTextString(m) }
+func (*CTextShadowData) ProtoMessage()               {}
+func (*CTextShadowData) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{11} }
 
 func (m *CTextShadowData) GetHorizontalOffset() float64 {
 	if m != nil && m.HorizontalOffset != nil {
@@ -619,9 +635,10 @@ type CRadialClipData struct {
 	XXX_unrecognized []byte   `json:"-"`
 }
 
-func (m *CRadialClipData) Reset()         { *m = CRadialClipData{} }
-func (m *CRadialClipData) String() string { return proto.CompactTextString(m) }
-func (*CRadialClipData) ProtoMessage()    {}
+func (m *CRadialClipData) Reset()                    { *m = CRadialClipData{} }
+func (m *CRadialClipData) String() string            { return proto.CompactTextString(m) }
+func (*CRadialClipData) ProtoMessage()               {}
+func (*CRadialClipData) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{12} }
 
 func (m *CRadialClipData) GetCenterX() float64 {
 	if m != nil && m.CenterX != nil {
@@ -661,9 +678,10 @@ type CMsgClipData struct {
 	XXX_unrecognized []byte           `json:"-"`
 }
 
-func (m *CMsgClipData) Reset()         { *m = CMsgClipData{} }
-func (m *CMsgClipData) String() string { return proto.CompactTextString(m) }
-func (*CMsgClipData) ProtoMessage()    {}
+func (m *CMsgClipData) Reset()                    { *m = CMsgClipData{} }
+func (m *CMsgClipData) String() string            { return proto.CompactTextString(m) }
+func (*CMsgClipData) ProtoMessage()               {}
+func (*CMsgClipData) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{13} }
 
 func (m *CMsgClipData) GetRectClip() bool {
 	if m != nil && m.RectClip != nil {
@@ -708,75 +726,77 @@ func (m *CMsgClipData) GetRadialClip() *CRadialClipData {
 }
 
 type CMsgPushCompositingLayer struct {
-	LayerId                  *uint64          `protobuf:"varint,1,opt,name=layer_id" json:"layer_id,omitempty"`
-	Width                    *float64         `protobuf:"fixed64,2,opt,name=width" json:"width,omitempty"`
-	Height                   *float64         `protobuf:"fixed64,3,opt,name=height" json:"height,omitempty"`
-	LayerQuadTopLeftX        *float64         `protobuf:"fixed64,4,opt,name=layer_quad_top_left_x" json:"layer_quad_top_left_x,omitempty"`
-	LayerQuadTopLeftY        *float64         `protobuf:"fixed64,5,opt,name=layer_quad_top_left_y" json:"layer_quad_top_left_y,omitempty"`
-	LayerQuadTopLeftZ        *float64         `protobuf:"fixed64,6,opt,name=layer_quad_top_left_z" json:"layer_quad_top_left_z,omitempty"`
-	LayerQuadTopRightX       *float64         `protobuf:"fixed64,7,opt,name=layer_quad_top_right_x" json:"layer_quad_top_right_x,omitempty"`
-	LayerQuadTopRightY       *float64         `protobuf:"fixed64,8,opt,name=layer_quad_top_right_y" json:"layer_quad_top_right_y,omitempty"`
-	LayerQuadTopRightZ       *float64         `protobuf:"fixed64,9,opt,name=layer_quad_top_right_z" json:"layer_quad_top_right_z,omitempty"`
-	LayerQuadBottomLeftX     *float64         `protobuf:"fixed64,10,opt,name=layer_quad_bottom_left_x" json:"layer_quad_bottom_left_x,omitempty"`
-	LayerQuadBottomLeftY     *float64         `protobuf:"fixed64,11,opt,name=layer_quad_bottom_left_y" json:"layer_quad_bottom_left_y,omitempty"`
-	LayerQuadBottomLeftZ     *float64         `protobuf:"fixed64,12,opt,name=layer_quad_bottom_left_z" json:"layer_quad_bottom_left_z,omitempty"`
-	LayerQuadBottomRightX    *float64         `protobuf:"fixed64,13,opt,name=layer_quad_bottom_right_x" json:"layer_quad_bottom_right_x,omitempty"`
-	LayerQuadBottomRightY    *float64         `protobuf:"fixed64,14,opt,name=layer_quad_bottom_right_y" json:"layer_quad_bottom_right_y,omitempty"`
-	LayerQuadBottomRightZ    *float64         `protobuf:"fixed64,15,opt,name=layer_quad_bottom_right_z" json:"layer_quad_bottom_right_z,omitempty"`
-	TransformM00             *float64         `protobuf:"fixed64,16,opt,name=transform_m00" json:"transform_m00,omitempty"`
-	TransformM01             *float64         `protobuf:"fixed64,17,opt,name=transform_m01" json:"transform_m01,omitempty"`
-	TransformM02             *float64         `protobuf:"fixed64,18,opt,name=transform_m02" json:"transform_m02,omitempty"`
-	TransformM03             *float64         `protobuf:"fixed64,19,opt,name=transform_m03" json:"transform_m03,omitempty"`
-	TransformM10             *float64         `protobuf:"fixed64,20,opt,name=transform_m10" json:"transform_m10,omitempty"`
-	TransformM11             *float64         `protobuf:"fixed64,21,opt,name=transform_m11" json:"transform_m11,omitempty"`
-	TransformM12             *float64         `protobuf:"fixed64,22,opt,name=transform_m12" json:"transform_m12,omitempty"`
-	TransformM13             *float64         `protobuf:"fixed64,23,opt,name=transform_m13" json:"transform_m13,omitempty"`
-	TransformM20             *float64         `protobuf:"fixed64,24,opt,name=transform_m20" json:"transform_m20,omitempty"`
-	TransformM21             *float64         `protobuf:"fixed64,25,opt,name=transform_m21" json:"transform_m21,omitempty"`
-	TransformM22             *float64         `protobuf:"fixed64,26,opt,name=transform_m22" json:"transform_m22,omitempty"`
-	TransformM23             *float64         `protobuf:"fixed64,27,opt,name=transform_m23" json:"transform_m23,omitempty"`
-	TransformM30             *float64         `protobuf:"fixed64,28,opt,name=transform_m30" json:"transform_m30,omitempty"`
-	TransformM31             *float64         `protobuf:"fixed64,29,opt,name=transform_m31" json:"transform_m31,omitempty"`
-	TransformM32             *float64         `protobuf:"fixed64,30,opt,name=transform_m32" json:"transform_m32,omitempty"`
-	TransformM33             *float64         `protobuf:"fixed64,31,opt,name=transform_m33" json:"transform_m33,omitempty"`
-	PerspectiveDepth         *float64         `protobuf:"fixed64,32,opt,name=perspective_depth" json:"perspective_depth,omitempty"`
-	Opacity                  *float64         `protobuf:"fixed64,33,opt,name=opacity" json:"opacity,omitempty"`
-	CompositionColor         *uint32          `protobuf:"varint,34,opt,name=composition_color" json:"composition_color,omitempty"`
-	Saturation               *float64         `protobuf:"fixed64,35,opt,name=saturation" json:"saturation,omitempty"`
-	HueShift                 *float64         `protobuf:"fixed64,36,opt,name=hue_shift" json:"hue_shift,omitempty"`
-	Brightness               *float64         `protobuf:"fixed64,37,opt,name=brightness" json:"brightness,omitempty"`
-	Contrast                 *float64         `protobuf:"fixed64,38,opt,name=contrast" json:"contrast,omitempty"`
-	OpacityMaskTextureId     *uint32          `protobuf:"varint,39,opt,name=opacity_mask_texture_id" json:"opacity_mask_texture_id,omitempty"`
-	OpacityMaskOpacity       *float64         `protobuf:"fixed64,40,opt,name=opacity_mask_opacity" json:"opacity_mask_opacity,omitempty"`
-	Border                   *CBorderData     `protobuf:"bytes,41,opt,name=border" json:"border,omitempty"`
-	BorderRadius             *CRadiusData     `protobuf:"bytes,42,opt,name=border_radius" json:"border_radius,omitempty"`
-	BoxShadow                *CBoxShadowData  `protobuf:"bytes,43,opt,name=box_shadow" json:"box_shadow,omitempty"`
-	GaussianblurPasses       *float64         `protobuf:"fixed64,44,opt,name=gaussianblur_passes" json:"gaussianblur_passes,omitempty"`
-	GaussianblurStddevhor    *float64         `protobuf:"fixed64,45,opt,name=gaussianblur_stddevhor" json:"gaussianblur_stddevhor,omitempty"`
-	GaussianblurStddevver    *float64         `protobuf:"fixed64,46,opt,name=gaussianblur_stddevver" json:"gaussianblur_stddevver,omitempty"`
-	Scale_2DFactorsX         *float64         `protobuf:"fixed64,47,opt,name=scale_2d_factors_x" json:"scale_2d_factors_x,omitempty"`
-	Scale_2DFactorsY         *float64         `protobuf:"fixed64,48,opt,name=scale_2d_factors_y" json:"scale_2d_factors_y,omitempty"`
-	Rotate_2D                *float64         `protobuf:"fixed64,49,opt,name=rotate_2d" json:"rotate_2d,omitempty"`
-	NeedsClear               *bool            `protobuf:"varint,50,opt,name=needs_clear" json:"needs_clear,omitempty"`
-	NeedsDepth               *bool            `protobuf:"varint,51,opt,name=needs_depth" json:"needs_depth,omitempty"`
-	NeedsIntermediateTexture *bool            `protobuf:"varint,52,opt,name=needs_intermediate_texture" json:"needs_intermediate_texture,omitempty"`
-	NeedsRedrawEveryFrame    *bool            `protobuf:"varint,53,opt,name=needs_redraw_every_frame" json:"needs_redraw_every_frame,omitempty"`
-	TextShadow               *CTextShadowData `protobuf:"bytes,54,opt,name=text_shadow" json:"text_shadow,omitempty"`
-	MixBlendMode             *uint32          `protobuf:"varint,55,opt,name=mix_blend_mode" json:"mix_blend_mode,omitempty"`
-	OccludedLeftEdge         *float64         `protobuf:"fixed64,56,opt,name=occluded_left_edge" json:"occluded_left_edge,omitempty"`
-	OccludedTopEdge          *float64         `protobuf:"fixed64,57,opt,name=occluded_top_edge" json:"occluded_top_edge,omitempty"`
-	OccludedRightEdge        *float64         `protobuf:"fixed64,58,opt,name=occluded_right_edge" json:"occluded_right_edge,omitempty"`
-	OccludedBottomEdge       *float64         `protobuf:"fixed64,59,opt,name=occluded_bottom_edge" json:"occluded_bottom_edge,omitempty"`
-	RadialClip               *CRadialClipData `protobuf:"bytes,60,opt,name=radial_clip" json:"radial_clip,omitempty"`
-	MotionblurVelocity       *float64         `protobuf:"fixed64,61,opt,name=motionblur_velocity" json:"motionblur_velocity,omitempty"`
-	MotionblurDirx           *float64         `protobuf:"fixed64,62,opt,name=motionblur_dirx" json:"motionblur_dirx,omitempty"`
-	MotionblurDiry           *float64         `protobuf:"fixed64,63,opt,name=motionblur_diry" json:"motionblur_diry,omitempty"`
-	XXX_unrecognized         []byte           `json:"-"`
+	LayerId                     *uint64          `protobuf:"varint,1,opt,name=layer_id" json:"layer_id,omitempty"`
+	Width                       *float64         `protobuf:"fixed64,2,opt,name=width" json:"width,omitempty"`
+	Height                      *float64         `protobuf:"fixed64,3,opt,name=height" json:"height,omitempty"`
+	LayerQuadTopLeftX           *float64         `protobuf:"fixed64,4,opt,name=layer_quad_top_left_x" json:"layer_quad_top_left_x,omitempty"`
+	LayerQuadTopLeftY           *float64         `protobuf:"fixed64,5,opt,name=layer_quad_top_left_y" json:"layer_quad_top_left_y,omitempty"`
+	LayerQuadTopLeftZ           *float64         `protobuf:"fixed64,6,opt,name=layer_quad_top_left_z" json:"layer_quad_top_left_z,omitempty"`
+	LayerQuadTopRightX          *float64         `protobuf:"fixed64,7,opt,name=layer_quad_top_right_x" json:"layer_quad_top_right_x,omitempty"`
+	LayerQuadTopRightY          *float64         `protobuf:"fixed64,8,opt,name=layer_quad_top_right_y" json:"layer_quad_top_right_y,omitempty"`
+	LayerQuadTopRightZ          *float64         `protobuf:"fixed64,9,opt,name=layer_quad_top_right_z" json:"layer_quad_top_right_z,omitempty"`
+	LayerQuadBottomLeftX        *float64         `protobuf:"fixed64,10,opt,name=layer_quad_bottom_left_x" json:"layer_quad_bottom_left_x,omitempty"`
+	LayerQuadBottomLeftY        *float64         `protobuf:"fixed64,11,opt,name=layer_quad_bottom_left_y" json:"layer_quad_bottom_left_y,omitempty"`
+	LayerQuadBottomLeftZ        *float64         `protobuf:"fixed64,12,opt,name=layer_quad_bottom_left_z" json:"layer_quad_bottom_left_z,omitempty"`
+	LayerQuadBottomRightX       *float64         `protobuf:"fixed64,13,opt,name=layer_quad_bottom_right_x" json:"layer_quad_bottom_right_x,omitempty"`
+	LayerQuadBottomRightY       *float64         `protobuf:"fixed64,14,opt,name=layer_quad_bottom_right_y" json:"layer_quad_bottom_right_y,omitempty"`
+	LayerQuadBottomRightZ       *float64         `protobuf:"fixed64,15,opt,name=layer_quad_bottom_right_z" json:"layer_quad_bottom_right_z,omitempty"`
+	TransformM00                *float64         `protobuf:"fixed64,16,opt,name=transform_m00" json:"transform_m00,omitempty"`
+	TransformM01                *float64         `protobuf:"fixed64,17,opt,name=transform_m01" json:"transform_m01,omitempty"`
+	TransformM02                *float64         `protobuf:"fixed64,18,opt,name=transform_m02" json:"transform_m02,omitempty"`
+	TransformM03                *float64         `protobuf:"fixed64,19,opt,name=transform_m03" json:"transform_m03,omitempty"`
+	TransformM10                *float64         `protobuf:"fixed64,20,opt,name=transform_m10" json:"transform_m10,omitempty"`
+	TransformM11                *float64         `protobuf:"fixed64,21,opt,name=transform_m11" json:"transform_m11,omitempty"`
+	TransformM12                *float64         `protobuf:"fixed64,22,opt,name=transform_m12" json:"transform_m12,omitempty"`
+	TransformM13                *float64         `protobuf:"fixed64,23,opt,name=transform_m13" json:"transform_m13,omitempty"`
+	TransformM20                *float64         `protobuf:"fixed64,24,opt,name=transform_m20" json:"transform_m20,omitempty"`
+	TransformM21                *float64         `protobuf:"fixed64,25,opt,name=transform_m21" json:"transform_m21,omitempty"`
+	TransformM22                *float64         `protobuf:"fixed64,26,opt,name=transform_m22" json:"transform_m22,omitempty"`
+	TransformM23                *float64         `protobuf:"fixed64,27,opt,name=transform_m23" json:"transform_m23,omitempty"`
+	TransformM30                *float64         `protobuf:"fixed64,28,opt,name=transform_m30" json:"transform_m30,omitempty"`
+	TransformM31                *float64         `protobuf:"fixed64,29,opt,name=transform_m31" json:"transform_m31,omitempty"`
+	TransformM32                *float64         `protobuf:"fixed64,30,opt,name=transform_m32" json:"transform_m32,omitempty"`
+	TransformM33                *float64         `protobuf:"fixed64,31,opt,name=transform_m33" json:"transform_m33,omitempty"`
+	PerspectiveDepth            *float64         `protobuf:"fixed64,32,opt,name=perspective_depth" json:"perspective_depth,omitempty"`
+	Opacity                     *float64         `protobuf:"fixed64,33,opt,name=opacity" json:"opacity,omitempty"`
+	CompositionColor            *uint32          `protobuf:"varint,34,opt,name=composition_color" json:"composition_color,omitempty"`
+	Saturation                  *float64         `protobuf:"fixed64,35,opt,name=saturation" json:"saturation,omitempty"`
+	HueShift                    *float64         `protobuf:"fixed64,36,opt,name=hue_shift" json:"hue_shift,omitempty"`
+	Brightness                  *float64         `protobuf:"fixed64,37,opt,name=brightness" json:"brightness,omitempty"`
+	Contrast                    *float64         `protobuf:"fixed64,38,opt,name=contrast" json:"contrast,omitempty"`
+	OpacityMaskTextureId        *uint32          `protobuf:"varint,39,opt,name=opacity_mask_texture_id" json:"opacity_mask_texture_id,omitempty"`
+	OpacityMaskOpacity          *float64         `protobuf:"fixed64,40,opt,name=opacity_mask_opacity" json:"opacity_mask_opacity,omitempty"`
+	Border                      *CBorderData     `protobuf:"bytes,41,opt,name=border" json:"border,omitempty"`
+	BorderRadius                *CRadiusData     `protobuf:"bytes,42,opt,name=border_radius" json:"border_radius,omitempty"`
+	BoxShadow                   *CBoxShadowData  `protobuf:"bytes,43,opt,name=box_shadow" json:"box_shadow,omitempty"`
+	GaussianblurPasses          *float64         `protobuf:"fixed64,44,opt,name=gaussianblur_passes" json:"gaussianblur_passes,omitempty"`
+	GaussianblurStddevhor       *float64         `protobuf:"fixed64,45,opt,name=gaussianblur_stddevhor" json:"gaussianblur_stddevhor,omitempty"`
+	GaussianblurStddevver       *float64         `protobuf:"fixed64,46,opt,name=gaussianblur_stddevver" json:"gaussianblur_stddevver,omitempty"`
+	Scale_2DFactorsX            *float64         `protobuf:"fixed64,47,opt,name=scale_2d_factors_x" json:"scale_2d_factors_x,omitempty"`
+	Scale_2DFactorsY            *float64         `protobuf:"fixed64,48,opt,name=scale_2d_factors_y" json:"scale_2d_factors_y,omitempty"`
+	Rotate_2D                   *float64         `protobuf:"fixed64,49,opt,name=rotate_2d" json:"rotate_2d,omitempty"`
+	NeedsClear                  *bool            `protobuf:"varint,50,opt,name=needs_clear" json:"needs_clear,omitempty"`
+	NeedsDepth                  *bool            `protobuf:"varint,51,opt,name=needs_depth" json:"needs_depth,omitempty"`
+	NeedsIntermediateTexture    *bool            `protobuf:"varint,52,opt,name=needs_intermediate_texture" json:"needs_intermediate_texture,omitempty"`
+	NeedsRedrawEveryFrame       *bool            `protobuf:"varint,53,opt,name=needs_redraw_every_frame" json:"needs_redraw_every_frame,omitempty"`
+	TextShadow                  *CTextShadowData `protobuf:"bytes,54,opt,name=text_shadow" json:"text_shadow,omitempty"`
+	MixBlendMode                *uint32          `protobuf:"varint,55,opt,name=mix_blend_mode" json:"mix_blend_mode,omitempty"`
+	OccludedLeftEdge            *float64         `protobuf:"fixed64,56,opt,name=occluded_left_edge" json:"occluded_left_edge,omitempty"`
+	OccludedTopEdge             *float64         `protobuf:"fixed64,57,opt,name=occluded_top_edge" json:"occluded_top_edge,omitempty"`
+	OccludedRightEdge           *float64         `protobuf:"fixed64,58,opt,name=occluded_right_edge" json:"occluded_right_edge,omitempty"`
+	OccludedBottomEdge          *float64         `protobuf:"fixed64,59,opt,name=occluded_bottom_edge" json:"occluded_bottom_edge,omitempty"`
+	RadialClip                  *CRadialClipData `protobuf:"bytes,60,opt,name=radial_clip" json:"radial_clip,omitempty"`
+	MotionblurVelocity          *float64         `protobuf:"fixed64,61,opt,name=motionblur_velocity" json:"motionblur_velocity,omitempty"`
+	MotionblurDirx              *float64         `protobuf:"fixed64,62,opt,name=motionblur_dirx" json:"motionblur_dirx,omitempty"`
+	MotionblurDiry              *float64         `protobuf:"fixed64,63,opt,name=motionblur_diry" json:"motionblur_diry,omitempty"`
+	CompositionLayerTextureName *string          `protobuf:"bytes,64,opt,name=composition_layer_texture_name" json:"composition_layer_texture_name,omitempty"`
+	XXX_unrecognized            []byte           `json:"-"`
 }
 
-func (m *CMsgPushCompositingLayer) Reset()         { *m = CMsgPushCompositingLayer{} }
-func (m *CMsgPushCompositingLayer) String() string { return proto.CompactTextString(m) }
-func (*CMsgPushCompositingLayer) ProtoMessage()    {}
+func (m *CMsgPushCompositingLayer) Reset()                    { *m = CMsgPushCompositingLayer{} }
+func (m *CMsgPushCompositingLayer) String() string            { return proto.CompactTextString(m) }
+func (*CMsgPushCompositingLayer) ProtoMessage()               {}
+func (*CMsgPushCompositingLayer) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{14} }
 
 func (m *CMsgPushCompositingLayer) GetLayerId() uint64 {
 	if m != nil && m.LayerId != nil {
@@ -1219,22 +1239,31 @@ func (m *CMsgPushCompositingLayer) GetMotionblurDiry() float64 {
 	return 0
 }
 
+func (m *CMsgPushCompositingLayer) GetCompositionLayerTextureName() string {
+	if m != nil && m.CompositionLayerTextureName != nil {
+		return *m.CompositionLayerTextureName
+	}
+	return ""
+}
+
 type CMsgPopCompositingLayer struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CMsgPopCompositingLayer) Reset()         { *m = CMsgPopCompositingLayer{} }
-func (m *CMsgPopCompositingLayer) String() string { return proto.CompactTextString(m) }
-func (*CMsgPopCompositingLayer) ProtoMessage()    {}
+func (m *CMsgPopCompositingLayer) Reset()                    { *m = CMsgPopCompositingLayer{} }
+func (m *CMsgPopCompositingLayer) String() string            { return proto.CompactTextString(m) }
+func (*CMsgPopCompositingLayer) ProtoMessage()               {}
+func (*CMsgPopCompositingLayer) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{15} }
 
 type CMsgFreeCompositingLayer struct {
 	LayerId          *uint64 `protobuf:"varint,1,opt,name=layer_id" json:"layer_id,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CMsgFreeCompositingLayer) Reset()         { *m = CMsgFreeCompositingLayer{} }
-func (m *CMsgFreeCompositingLayer) String() string { return proto.CompactTextString(m) }
-func (*CMsgFreeCompositingLayer) ProtoMessage()    {}
+func (m *CMsgFreeCompositingLayer) Reset()                    { *m = CMsgFreeCompositingLayer{} }
+func (m *CMsgFreeCompositingLayer) String() string            { return proto.CompactTextString(m) }
+func (*CMsgFreeCompositingLayer) ProtoMessage()               {}
+func (*CMsgFreeCompositingLayer) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{16} }
 
 func (m *CMsgFreeCompositingLayer) GetLayerId() uint64 {
 	if m != nil && m.LayerId != nil {
@@ -1255,9 +1284,10 @@ type CMsgTransitionData struct {
 	XXX_unrecognized []byte   `json:"-"`
 }
 
-func (m *CMsgTransitionData) Reset()         { *m = CMsgTransitionData{} }
-func (m *CMsgTransitionData) String() string { return proto.CompactTextString(m) }
-func (*CMsgTransitionData) ProtoMessage()    {}
+func (m *CMsgTransitionData) Reset()                    { *m = CMsgTransitionData{} }
+func (m *CMsgTransitionData) String() string            { return proto.CompactTextString(m) }
+func (*CMsgTransitionData) ProtoMessage()               {}
+func (*CMsgTransitionData) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{17} }
 
 const Default_CMsgTransitionData_TimingFunc uint32 = 0
 
@@ -1332,9 +1362,10 @@ type CMsgAnimationData struct {
 	XXX_unrecognized []byte                    `json:"-"`
 }
 
-func (m *CMsgAnimationData) Reset()         { *m = CMsgAnimationData{} }
-func (m *CMsgAnimationData) String() string { return proto.CompactTextString(m) }
-func (*CMsgAnimationData) ProtoMessage()    {}
+func (m *CMsgAnimationData) Reset()                    { *m = CMsgAnimationData{} }
+func (m *CMsgAnimationData) String() string            { return proto.CompactTextString(m) }
+func (*CMsgAnimationData) ProtoMessage()               {}
+func (*CMsgAnimationData) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{18} }
 
 func (m *CMsgAnimationData) GetStartTime() float64 {
 	if m != nil && m.StartTime != nil {
@@ -1424,9 +1455,10 @@ type CMsgAnimationFrameData struct {
 	XXX_unrecognized []byte                    `json:"-"`
 }
 
-func (m *CMsgAnimationFrameData) Reset()         { *m = CMsgAnimationFrameData{} }
-func (m *CMsgAnimationFrameData) String() string { return proto.CompactTextString(m) }
-func (*CMsgAnimationFrameData) ProtoMessage()    {}
+func (m *CMsgAnimationFrameData) Reset()                    { *m = CMsgAnimationFrameData{} }
+func (m *CMsgAnimationFrameData) String() string            { return proto.CompactTextString(m) }
+func (*CMsgAnimationFrameData) ProtoMessage()               {}
+func (*CMsgAnimationFrameData) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{19} }
 
 var extRange_CMsgAnimationFrameData = []proto.ExtensionRange{
 	{1000, 536870911},
@@ -1490,13 +1522,15 @@ type CMsgPointWithTransition struct {
 	Base             *CMsgPoint           `protobuf:"bytes,1,opt,name=base" json:"base,omitempty"`
 	Transition       *CMsgPoint           `protobuf:"bytes,2,opt,name=transition" json:"transition,omitempty"`
 	TransitionData   *CMsgTransitionData  `protobuf:"bytes,3,opt,name=transition_data" json:"transition_data,omitempty"`
-	Animations       []*CMsgAnimationData `protobuf:"bytes,4,rep,name=animations" json:"animations,omitempty"`
+	StyleSymbol      *uint32              `protobuf:"varint,4,opt,name=style_symbol" json:"style_symbol,omitempty"`
+	Animations       []*CMsgAnimationData `protobuf:"bytes,5,rep,name=animations" json:"animations,omitempty"`
 	XXX_unrecognized []byte               `json:"-"`
 }
 
-func (m *CMsgPointWithTransition) Reset()         { *m = CMsgPointWithTransition{} }
-func (m *CMsgPointWithTransition) String() string { return proto.CompactTextString(m) }
-func (*CMsgPointWithTransition) ProtoMessage()    {}
+func (m *CMsgPointWithTransition) Reset()                    { *m = CMsgPointWithTransition{} }
+func (m *CMsgPointWithTransition) String() string            { return proto.CompactTextString(m) }
+func (*CMsgPointWithTransition) ProtoMessage()               {}
+func (*CMsgPointWithTransition) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{20} }
 
 func (m *CMsgPointWithTransition) GetBase() *CMsgPoint {
 	if m != nil {
@@ -1517,6 +1551,13 @@ func (m *CMsgPointWithTransition) GetTransitionData() *CMsgTransitionData {
 		return m.TransitionData
 	}
 	return nil
+}
+
+func (m *CMsgPointWithTransition) GetStyleSymbol() uint32 {
+	if m != nil && m.StyleSymbol != nil {
+		return *m.StyleSymbol
+	}
+	return 0
 }
 
 func (m *CMsgPointWithTransition) GetAnimations() []*CMsgAnimationData {
@@ -1546,6 +1587,9 @@ func (m *CMsgPointWithTransition_AnimationFrameData) String() string {
 	return proto.CompactTextString(m)
 }
 func (*CMsgPointWithTransition_AnimationFrameData) ProtoMessage() {}
+func (*CMsgPointWithTransition_AnimationFrameData) Descriptor() ([]byte, []int) {
+	return fileDescriptor34, []int{20, 0}
+}
 
 func (m *CMsgPointWithTransition_AnimationFrameData) GetData() *CMsgPoint {
 	if m != nil {
@@ -1558,13 +1602,15 @@ type CMsgColor struct {
 	Base             *uint32              `protobuf:"varint,1,opt,name=base" json:"base,omitempty"`
 	Transition       *uint32              `protobuf:"varint,2,opt,name=transition" json:"transition,omitempty"`
 	TransitionData   *CMsgTransitionData  `protobuf:"bytes,3,opt,name=transition_data" json:"transition_data,omitempty"`
-	Animations       []*CMsgAnimationData `protobuf:"bytes,4,rep,name=animations" json:"animations,omitempty"`
+	StyleSymbol      *uint32              `protobuf:"varint,4,opt,name=style_symbol" json:"style_symbol,omitempty"`
+	Animations       []*CMsgAnimationData `protobuf:"bytes,5,rep,name=animations" json:"animations,omitempty"`
 	XXX_unrecognized []byte               `json:"-"`
 }
 
-func (m *CMsgColor) Reset()         { *m = CMsgColor{} }
-func (m *CMsgColor) String() string { return proto.CompactTextString(m) }
-func (*CMsgColor) ProtoMessage()    {}
+func (m *CMsgColor) Reset()                    { *m = CMsgColor{} }
+func (m *CMsgColor) String() string            { return proto.CompactTextString(m) }
+func (*CMsgColor) ProtoMessage()               {}
+func (*CMsgColor) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{21} }
 
 func (m *CMsgColor) GetBase() uint32 {
 	if m != nil && m.Base != nil {
@@ -1585,6 +1631,13 @@ func (m *CMsgColor) GetTransitionData() *CMsgTransitionData {
 		return m.TransitionData
 	}
 	return nil
+}
+
+func (m *CMsgColor) GetStyleSymbol() uint32 {
+	if m != nil && m.StyleSymbol != nil {
+		return *m.StyleSymbol
+	}
+	return 0
 }
 
 func (m *CMsgColor) GetAnimations() []*CMsgAnimationData {
@@ -1610,6 +1663,9 @@ type CMsgColor_AnimationFrameData struct {
 func (m *CMsgColor_AnimationFrameData) Reset()         { *m = CMsgColor_AnimationFrameData{} }
 func (m *CMsgColor_AnimationFrameData) String() string { return proto.CompactTextString(m) }
 func (*CMsgColor_AnimationFrameData) ProtoMessage()    {}
+func (*CMsgColor_AnimationFrameData) Descriptor() ([]byte, []int) {
+	return fileDescriptor34, []int{21, 0}
+}
 
 func (m *CMsgColor_AnimationFrameData) GetData() uint32 {
 	if m != nil && m.Data != nil {
@@ -1624,9 +1680,10 @@ type CMsgColorStop struct {
 	XXX_unrecognized []byte   `json:"-"`
 }
 
-func (m *CMsgColorStop) Reset()         { *m = CMsgColorStop{} }
-func (m *CMsgColorStop) String() string { return proto.CompactTextString(m) }
-func (*CMsgColorStop) ProtoMessage()    {}
+func (m *CMsgColorStop) Reset()                    { *m = CMsgColorStop{} }
+func (m *CMsgColorStop) String() string            { return proto.CompactTextString(m) }
+func (*CMsgColorStop) ProtoMessage()               {}
+func (*CMsgColorStop) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{22} }
 
 func (m *CMsgColorStop) GetPosition() float64 {
 	if m != nil && m.Position != nil {
@@ -1649,9 +1706,10 @@ type CMsgLinearGradient struct {
 	XXX_unrecognized []byte           `json:"-"`
 }
 
-func (m *CMsgLinearGradient) Reset()         { *m = CMsgLinearGradient{} }
-func (m *CMsgLinearGradient) String() string { return proto.CompactTextString(m) }
-func (*CMsgLinearGradient) ProtoMessage()    {}
+func (m *CMsgLinearGradient) Reset()                    { *m = CMsgLinearGradient{} }
+func (m *CMsgLinearGradient) String() string            { return proto.CompactTextString(m) }
+func (*CMsgLinearGradient) ProtoMessage()               {}
+func (*CMsgLinearGradient) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{23} }
 
 func (m *CMsgLinearGradient) GetStartPosition() *CMsgPoint {
 	if m != nil {
@@ -1682,9 +1740,10 @@ type CMsgRadialGradient struct {
 	XXX_unrecognized []byte           `json:"-"`
 }
 
-func (m *CMsgRadialGradient) Reset()         { *m = CMsgRadialGradient{} }
-func (m *CMsgRadialGradient) String() string { return proto.CompactTextString(m) }
-func (*CMsgRadialGradient) ProtoMessage()    {}
+func (m *CMsgRadialGradient) Reset()                    { *m = CMsgRadialGradient{} }
+func (m *CMsgRadialGradient) String() string            { return proto.CompactTextString(m) }
+func (*CMsgRadialGradient) ProtoMessage()               {}
+func (*CMsgRadialGradient) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{24} }
 
 func (m *CMsgRadialGradient) GetCenterPosition() *CMsgPoint {
 	if m != nil {
@@ -1722,9 +1781,10 @@ type CMsgParticle struct {
 	XXX_unrecognized  []byte     `json:"-"`
 }
 
-func (m *CMsgParticle) Reset()         { *m = CMsgParticle{} }
-func (m *CMsgParticle) String() string { return proto.CompactTextString(m) }
-func (*CMsgParticle) ProtoMessage()    {}
+func (m *CMsgParticle) Reset()                    { *m = CMsgParticle{} }
+func (m *CMsgParticle) String() string            { return proto.CompactTextString(m) }
+func (*CMsgParticle) ProtoMessage()               {}
+func (*CMsgParticle) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{25} }
 
 func (m *CMsgParticle) GetParticlePosition() *CMsgPoint {
 	if m != nil {
@@ -1783,9 +1843,10 @@ type CMsgParticleSystem struct {
 	XXX_unrecognized                    []byte          `json:"-"`
 }
 
-func (m *CMsgParticleSystem) Reset()         { *m = CMsgParticleSystem{} }
-func (m *CMsgParticleSystem) String() string { return proto.CompactTextString(m) }
-func (*CMsgParticleSystem) ProtoMessage()    {}
+func (m *CMsgParticleSystem) Reset()                    { *m = CMsgParticleSystem{} }
+func (m *CMsgParticleSystem) String() string            { return proto.CompactTextString(m) }
+func (*CMsgParticleSystem) ProtoMessage()               {}
+func (*CMsgParticleSystem) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{26} }
 
 func (m *CMsgParticleSystem) GetBasePosition() *CMsgPoint {
 	if m != nil {
@@ -1971,9 +2032,10 @@ type CMsgFillBrush struct {
 	XXX_unrecognized []byte              `json:"-"`
 }
 
-func (m *CMsgFillBrush) Reset()         { *m = CMsgFillBrush{} }
-func (m *CMsgFillBrush) String() string { return proto.CompactTextString(m) }
-func (*CMsgFillBrush) ProtoMessage()    {}
+func (m *CMsgFillBrush) Reset()                    { *m = CMsgFillBrush{} }
+func (m *CMsgFillBrush) String() string            { return proto.CompactTextString(m) }
+func (*CMsgFillBrush) ProtoMessage()               {}
+func (*CMsgFillBrush) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{27} }
 
 func (m *CMsgFillBrush) GetOpacity() float64 {
 	if m != nil && m.Opacity != nil {
@@ -2014,13 +2076,15 @@ type CMsgFillBrushCollection struct {
 	Base             []*CMsgFillBrush     `protobuf:"bytes,1,rep,name=base" json:"base,omitempty"`
 	Transition       []*CMsgFillBrush     `protobuf:"bytes,2,rep,name=transition" json:"transition,omitempty"`
 	TransitionData   *CMsgTransitionData  `protobuf:"bytes,3,opt,name=transition_data" json:"transition_data,omitempty"`
-	Animations       []*CMsgAnimationData `protobuf:"bytes,4,rep,name=animations" json:"animations,omitempty"`
+	StyleSymbol      *uint32              `protobuf:"varint,4,opt,name=style_symbol" json:"style_symbol,omitempty"`
+	Animations       []*CMsgAnimationData `protobuf:"bytes,5,rep,name=animations" json:"animations,omitempty"`
 	XXX_unrecognized []byte               `json:"-"`
 }
 
-func (m *CMsgFillBrushCollection) Reset()         { *m = CMsgFillBrushCollection{} }
-func (m *CMsgFillBrushCollection) String() string { return proto.CompactTextString(m) }
-func (*CMsgFillBrushCollection) ProtoMessage()    {}
+func (m *CMsgFillBrushCollection) Reset()                    { *m = CMsgFillBrushCollection{} }
+func (m *CMsgFillBrushCollection) String() string            { return proto.CompactTextString(m) }
+func (*CMsgFillBrushCollection) ProtoMessage()               {}
+func (*CMsgFillBrushCollection) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{28} }
 
 func (m *CMsgFillBrushCollection) GetBase() []*CMsgFillBrush {
 	if m != nil {
@@ -2041,6 +2105,13 @@ func (m *CMsgFillBrushCollection) GetTransitionData() *CMsgTransitionData {
 		return m.TransitionData
 	}
 	return nil
+}
+
+func (m *CMsgFillBrushCollection) GetStyleSymbol() uint32 {
+	if m != nil && m.StyleSymbol != nil {
+		return *m.StyleSymbol
+	}
+	return 0
 }
 
 func (m *CMsgFillBrushCollection) GetAnimations() []*CMsgAnimationData {
@@ -2070,6 +2141,9 @@ func (m *CMsgFillBrushCollection_AnimationFrameData) String() string {
 	return proto.CompactTextString(m)
 }
 func (*CMsgFillBrushCollection_AnimationFrameData) ProtoMessage() {}
+func (*CMsgFillBrushCollection_AnimationFrameData) Descriptor() ([]byte, []int) {
+	return fileDescriptor34, []int{28, 0}
+}
 
 func (m *CMsgFillBrushCollection_AnimationFrameData) GetData() []*CMsgFillBrush {
 	if m != nil {
@@ -2083,9 +2157,10 @@ type CMsgRenderFillBrushCollection struct {
 	XXX_unrecognized []byte           `json:"-"`
 }
 
-func (m *CMsgRenderFillBrushCollection) Reset()         { *m = CMsgRenderFillBrushCollection{} }
-func (m *CMsgRenderFillBrushCollection) String() string { return proto.CompactTextString(m) }
-func (*CMsgRenderFillBrushCollection) ProtoMessage()    {}
+func (m *CMsgRenderFillBrushCollection) Reset()                    { *m = CMsgRenderFillBrushCollection{} }
+func (m *CMsgRenderFillBrushCollection) String() string            { return proto.CompactTextString(m) }
+func (*CMsgRenderFillBrushCollection) ProtoMessage()               {}
+func (*CMsgRenderFillBrushCollection) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{29} }
 
 func (m *CMsgRenderFillBrushCollection) GetFillBrush() []*CMsgFillBrush {
 	if m != nil {
@@ -2098,17 +2173,19 @@ type CMsgPanelPosition struct {
 	Base               *CMsgPoint           `protobuf:"bytes,1,opt,name=base" json:"base,omitempty"`
 	Transition         *CMsgPoint           `protobuf:"bytes,2,opt,name=transition" json:"transition,omitempty"`
 	TransitionData     *CMsgTransitionData  `protobuf:"bytes,3,opt,name=transition_data" json:"transition_data,omitempty"`
-	Animations         []*CMsgAnimationData `protobuf:"bytes,4,rep,name=animations" json:"animations,omitempty"`
-	ScrollOffset       *CMsgPoint           `protobuf:"bytes,5,opt,name=scroll_offset" json:"scroll_offset,omitempty"`
-	ScrollOffsetTarget *CMsgPoint           `protobuf:"bytes,6,opt,name=scroll_offset_target" json:"scroll_offset_target,omitempty"`
-	ScrollTransitionX  *CMsgTransitionData  `protobuf:"bytes,7,opt,name=scroll_transition_x" json:"scroll_transition_x,omitempty"`
-	ScrollTransitionY  *CMsgTransitionData  `protobuf:"bytes,8,opt,name=scroll_transition_y" json:"scroll_transition_y,omitempty"`
+	StyleSymbol        *uint32              `protobuf:"varint,4,opt,name=style_symbol" json:"style_symbol,omitempty"`
+	Animations         []*CMsgAnimationData `protobuf:"bytes,5,rep,name=animations" json:"animations,omitempty"`
+	ScrollOffset       *CMsgPoint           `protobuf:"bytes,6,opt,name=scroll_offset" json:"scroll_offset,omitempty"`
+	ScrollOffsetTarget *CMsgPoint           `protobuf:"bytes,7,opt,name=scroll_offset_target" json:"scroll_offset_target,omitempty"`
+	ScrollTransitionX  *CMsgTransitionData  `protobuf:"bytes,8,opt,name=scroll_transition_x" json:"scroll_transition_x,omitempty"`
+	ScrollTransitionY  *CMsgTransitionData  `protobuf:"bytes,9,opt,name=scroll_transition_y" json:"scroll_transition_y,omitempty"`
 	XXX_unrecognized   []byte               `json:"-"`
 }
 
-func (m *CMsgPanelPosition) Reset()         { *m = CMsgPanelPosition{} }
-func (m *CMsgPanelPosition) String() string { return proto.CompactTextString(m) }
-func (*CMsgPanelPosition) ProtoMessage()    {}
+func (m *CMsgPanelPosition) Reset()                    { *m = CMsgPanelPosition{} }
+func (m *CMsgPanelPosition) String() string            { return proto.CompactTextString(m) }
+func (*CMsgPanelPosition) ProtoMessage()               {}
+func (*CMsgPanelPosition) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{30} }
 
 func (m *CMsgPanelPosition) GetBase() *CMsgPoint {
 	if m != nil {
@@ -2129,6 +2206,13 @@ func (m *CMsgPanelPosition) GetTransitionData() *CMsgTransitionData {
 		return m.TransitionData
 	}
 	return nil
+}
+
+func (m *CMsgPanelPosition) GetStyleSymbol() uint32 {
+	if m != nil && m.StyleSymbol != nil {
+		return *m.StyleSymbol
+	}
+	return 0
 }
 
 func (m *CMsgPanelPosition) GetAnimations() []*CMsgAnimationData {
@@ -2182,6 +2266,9 @@ type CMsgPanelPosition_AnimationFrameData struct {
 func (m *CMsgPanelPosition_AnimationFrameData) Reset()         { *m = CMsgPanelPosition_AnimationFrameData{} }
 func (m *CMsgPanelPosition_AnimationFrameData) String() string { return proto.CompactTextString(m) }
 func (*CMsgPanelPosition_AnimationFrameData) ProtoMessage()    {}
+func (*CMsgPanelPosition_AnimationFrameData) Descriptor() ([]byte, []int) {
+	return fileDescriptor34, []int{30, 0}
+}
 
 func (m *CMsgPanelPosition_AnimationFrameData) GetData() *CMsgPoint {
 	if m != nil {
@@ -2194,13 +2281,15 @@ type CMsgOpacity struct {
 	Base             *float64             `protobuf:"fixed64,1,opt,name=base" json:"base,omitempty"`
 	Transition       *float64             `protobuf:"fixed64,2,opt,name=transition" json:"transition,omitempty"`
 	TransitionData   *CMsgTransitionData  `protobuf:"bytes,3,opt,name=transition_data" json:"transition_data,omitempty"`
-	Animations       []*CMsgAnimationData `protobuf:"bytes,4,rep,name=animations" json:"animations,omitempty"`
+	StyleSymbol      *uint32              `protobuf:"varint,4,opt,name=style_symbol" json:"style_symbol,omitempty"`
+	Animations       []*CMsgAnimationData `protobuf:"bytes,5,rep,name=animations" json:"animations,omitempty"`
 	XXX_unrecognized []byte               `json:"-"`
 }
 
-func (m *CMsgOpacity) Reset()         { *m = CMsgOpacity{} }
-func (m *CMsgOpacity) String() string { return proto.CompactTextString(m) }
-func (*CMsgOpacity) ProtoMessage()    {}
+func (m *CMsgOpacity) Reset()                    { *m = CMsgOpacity{} }
+func (m *CMsgOpacity) String() string            { return proto.CompactTextString(m) }
+func (*CMsgOpacity) ProtoMessage()               {}
+func (*CMsgOpacity) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{31} }
 
 func (m *CMsgOpacity) GetBase() float64 {
 	if m != nil && m.Base != nil {
@@ -2221,6 +2310,13 @@ func (m *CMsgOpacity) GetTransitionData() *CMsgTransitionData {
 		return m.TransitionData
 	}
 	return nil
+}
+
+func (m *CMsgOpacity) GetStyleSymbol() uint32 {
+	if m != nil && m.StyleSymbol != nil {
+		return *m.StyleSymbol
+	}
+	return 0
 }
 
 func (m *CMsgOpacity) GetAnimations() []*CMsgAnimationData {
@@ -2246,6 +2342,9 @@ type CMsgOpacity_AnimationFrameData struct {
 func (m *CMsgOpacity_AnimationFrameData) Reset()         { *m = CMsgOpacity_AnimationFrameData{} }
 func (m *CMsgOpacity_AnimationFrameData) String() string { return proto.CompactTextString(m) }
 func (*CMsgOpacity_AnimationFrameData) ProtoMessage()    {}
+func (*CMsgOpacity_AnimationFrameData) Descriptor() ([]byte, []int) {
+	return fileDescriptor34, []int{31, 0}
+}
 
 func (m *CMsgOpacity_AnimationFrameData) GetData() float64 {
 	if m != nil && m.Data != nil {
@@ -2258,13 +2357,15 @@ type CMsgRotate2D struct {
 	Base             *float64             `protobuf:"fixed64,1,opt,name=base" json:"base,omitempty"`
 	Transition       *float64             `protobuf:"fixed64,2,opt,name=transition" json:"transition,omitempty"`
 	TransitionData   *CMsgTransitionData  `protobuf:"bytes,3,opt,name=transition_data" json:"transition_data,omitempty"`
-	Animations       []*CMsgAnimationData `protobuf:"bytes,4,rep,name=animations" json:"animations,omitempty"`
+	StyleSymbol      *uint32              `protobuf:"varint,4,opt,name=style_symbol" json:"style_symbol,omitempty"`
+	Animations       []*CMsgAnimationData `protobuf:"bytes,5,rep,name=animations" json:"animations,omitempty"`
 	XXX_unrecognized []byte               `json:"-"`
 }
 
-func (m *CMsgRotate2D) Reset()         { *m = CMsgRotate2D{} }
-func (m *CMsgRotate2D) String() string { return proto.CompactTextString(m) }
-func (*CMsgRotate2D) ProtoMessage()    {}
+func (m *CMsgRotate2D) Reset()                    { *m = CMsgRotate2D{} }
+func (m *CMsgRotate2D) String() string            { return proto.CompactTextString(m) }
+func (*CMsgRotate2D) ProtoMessage()               {}
+func (*CMsgRotate2D) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{32} }
 
 func (m *CMsgRotate2D) GetBase() float64 {
 	if m != nil && m.Base != nil {
@@ -2285,6 +2386,13 @@ func (m *CMsgRotate2D) GetTransitionData() *CMsgTransitionData {
 		return m.TransitionData
 	}
 	return nil
+}
+
+func (m *CMsgRotate2D) GetStyleSymbol() uint32 {
+	if m != nil && m.StyleSymbol != nil {
+		return *m.StyleSymbol
+	}
+	return 0
 }
 
 func (m *CMsgRotate2D) GetAnimations() []*CMsgAnimationData {
@@ -2310,6 +2418,9 @@ type CMsgRotate2D_AnimationFrameData struct {
 func (m *CMsgRotate2D_AnimationFrameData) Reset()         { *m = CMsgRotate2D_AnimationFrameData{} }
 func (m *CMsgRotate2D_AnimationFrameData) String() string { return proto.CompactTextString(m) }
 func (*CMsgRotate2D_AnimationFrameData) ProtoMessage()    {}
+func (*CMsgRotate2D_AnimationFrameData) Descriptor() ([]byte, []int) {
+	return fileDescriptor34, []int{32, 0}
+}
 
 func (m *CMsgRotate2D_AnimationFrameData) GetData() float64 {
 	if m != nil && m.Data != nil {
@@ -2324,9 +2435,10 @@ type CMsgOpacityMaskData struct {
 	XXX_unrecognized     []byte   `json:"-"`
 }
 
-func (m *CMsgOpacityMaskData) Reset()         { *m = CMsgOpacityMaskData{} }
-func (m *CMsgOpacityMaskData) String() string { return proto.CompactTextString(m) }
-func (*CMsgOpacityMaskData) ProtoMessage()    {}
+func (m *CMsgOpacityMaskData) Reset()                    { *m = CMsgOpacityMaskData{} }
+func (m *CMsgOpacityMaskData) String() string            { return proto.CompactTextString(m) }
+func (*CMsgOpacityMaskData) ProtoMessage()               {}
+func (*CMsgOpacityMaskData) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{33} }
 
 func (m *CMsgOpacityMaskData) GetOpacityMaskTextureId() uint32 {
 	if m != nil && m.OpacityMaskTextureId != nil {
@@ -2346,13 +2458,15 @@ type CMsgOpacityMask struct {
 	Base             *CMsgOpacityMaskData `protobuf:"bytes,1,opt,name=base" json:"base,omitempty"`
 	Transition       *CMsgOpacityMaskData `protobuf:"bytes,2,opt,name=transition" json:"transition,omitempty"`
 	TransitionData   *CMsgTransitionData  `protobuf:"bytes,3,opt,name=transition_data" json:"transition_data,omitempty"`
-	Animations       []*CMsgAnimationData `protobuf:"bytes,4,rep,name=animations" json:"animations,omitempty"`
+	StyleSymbol      *uint32              `protobuf:"varint,4,opt,name=style_symbol" json:"style_symbol,omitempty"`
+	Animations       []*CMsgAnimationData `protobuf:"bytes,5,rep,name=animations" json:"animations,omitempty"`
 	XXX_unrecognized []byte               `json:"-"`
 }
 
-func (m *CMsgOpacityMask) Reset()         { *m = CMsgOpacityMask{} }
-func (m *CMsgOpacityMask) String() string { return proto.CompactTextString(m) }
-func (*CMsgOpacityMask) ProtoMessage()    {}
+func (m *CMsgOpacityMask) Reset()                    { *m = CMsgOpacityMask{} }
+func (m *CMsgOpacityMask) String() string            { return proto.CompactTextString(m) }
+func (*CMsgOpacityMask) ProtoMessage()               {}
+func (*CMsgOpacityMask) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{34} }
 
 func (m *CMsgOpacityMask) GetBase() *CMsgOpacityMaskData {
 	if m != nil {
@@ -2373,6 +2487,13 @@ func (m *CMsgOpacityMask) GetTransitionData() *CMsgTransitionData {
 		return m.TransitionData
 	}
 	return nil
+}
+
+func (m *CMsgOpacityMask) GetStyleSymbol() uint32 {
+	if m != nil && m.StyleSymbol != nil {
+		return *m.StyleSymbol
+	}
+	return 0
 }
 
 func (m *CMsgOpacityMask) GetAnimations() []*CMsgAnimationData {
@@ -2398,6 +2519,9 @@ type CMsgOpacityMask_AnimationFrameData struct {
 func (m *CMsgOpacityMask_AnimationFrameData) Reset()         { *m = CMsgOpacityMask_AnimationFrameData{} }
 func (m *CMsgOpacityMask_AnimationFrameData) String() string { return proto.CompactTextString(m) }
 func (*CMsgOpacityMask_AnimationFrameData) ProtoMessage()    {}
+func (*CMsgOpacityMask_AnimationFrameData) Descriptor() ([]byte, []int) {
+	return fileDescriptor34, []int{34, 0}
+}
 
 func (m *CMsgOpacityMask_AnimationFrameData) GetData() *CMsgOpacityMaskData {
 	if m != nil {
@@ -2410,13 +2534,15 @@ type CMsgHueShift struct {
 	Base             *float64             `protobuf:"fixed64,1,opt,name=base" json:"base,omitempty"`
 	Transition       *float64             `protobuf:"fixed64,2,opt,name=transition" json:"transition,omitempty"`
 	TransitionData   *CMsgTransitionData  `protobuf:"bytes,3,opt,name=transition_data" json:"transition_data,omitempty"`
-	Animations       []*CMsgAnimationData `protobuf:"bytes,4,rep,name=animations" json:"animations,omitempty"`
+	StyleSymbol      *uint32              `protobuf:"varint,4,opt,name=style_symbol" json:"style_symbol,omitempty"`
+	Animations       []*CMsgAnimationData `protobuf:"bytes,5,rep,name=animations" json:"animations,omitempty"`
 	XXX_unrecognized []byte               `json:"-"`
 }
 
-func (m *CMsgHueShift) Reset()         { *m = CMsgHueShift{} }
-func (m *CMsgHueShift) String() string { return proto.CompactTextString(m) }
-func (*CMsgHueShift) ProtoMessage()    {}
+func (m *CMsgHueShift) Reset()                    { *m = CMsgHueShift{} }
+func (m *CMsgHueShift) String() string            { return proto.CompactTextString(m) }
+func (*CMsgHueShift) ProtoMessage()               {}
+func (*CMsgHueShift) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{35} }
 
 func (m *CMsgHueShift) GetBase() float64 {
 	if m != nil && m.Base != nil {
@@ -2437,6 +2563,13 @@ func (m *CMsgHueShift) GetTransitionData() *CMsgTransitionData {
 		return m.TransitionData
 	}
 	return nil
+}
+
+func (m *CMsgHueShift) GetStyleSymbol() uint32 {
+	if m != nil && m.StyleSymbol != nil {
+		return *m.StyleSymbol
+	}
+	return 0
 }
 
 func (m *CMsgHueShift) GetAnimations() []*CMsgAnimationData {
@@ -2462,6 +2595,9 @@ type CMsgHueShift_AnimationFrameData struct {
 func (m *CMsgHueShift_AnimationFrameData) Reset()         { *m = CMsgHueShift_AnimationFrameData{} }
 func (m *CMsgHueShift_AnimationFrameData) String() string { return proto.CompactTextString(m) }
 func (*CMsgHueShift_AnimationFrameData) ProtoMessage()    {}
+func (*CMsgHueShift_AnimationFrameData) Descriptor() ([]byte, []int) {
+	return fileDescriptor34, []int{35, 0}
+}
 
 func (m *CMsgHueShift_AnimationFrameData) GetData() float64 {
 	if m != nil && m.Data != nil {
@@ -2474,13 +2610,15 @@ type CMsgSaturation struct {
 	Base             *float64             `protobuf:"fixed64,1,opt,name=base" json:"base,omitempty"`
 	Transition       *float64             `protobuf:"fixed64,2,opt,name=transition" json:"transition,omitempty"`
 	TransitionData   *CMsgTransitionData  `protobuf:"bytes,3,opt,name=transition_data" json:"transition_data,omitempty"`
-	Animations       []*CMsgAnimationData `protobuf:"bytes,4,rep,name=animations" json:"animations,omitempty"`
+	StyleSymbol      *uint32              `protobuf:"varint,4,opt,name=style_symbol" json:"style_symbol,omitempty"`
+	Animations       []*CMsgAnimationData `protobuf:"bytes,5,rep,name=animations" json:"animations,omitempty"`
 	XXX_unrecognized []byte               `json:"-"`
 }
 
-func (m *CMsgSaturation) Reset()         { *m = CMsgSaturation{} }
-func (m *CMsgSaturation) String() string { return proto.CompactTextString(m) }
-func (*CMsgSaturation) ProtoMessage()    {}
+func (m *CMsgSaturation) Reset()                    { *m = CMsgSaturation{} }
+func (m *CMsgSaturation) String() string            { return proto.CompactTextString(m) }
+func (*CMsgSaturation) ProtoMessage()               {}
+func (*CMsgSaturation) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{36} }
 
 func (m *CMsgSaturation) GetBase() float64 {
 	if m != nil && m.Base != nil {
@@ -2501,6 +2639,13 @@ func (m *CMsgSaturation) GetTransitionData() *CMsgTransitionData {
 		return m.TransitionData
 	}
 	return nil
+}
+
+func (m *CMsgSaturation) GetStyleSymbol() uint32 {
+	if m != nil && m.StyleSymbol != nil {
+		return *m.StyleSymbol
+	}
+	return 0
 }
 
 func (m *CMsgSaturation) GetAnimations() []*CMsgAnimationData {
@@ -2526,6 +2671,9 @@ type CMsgSaturation_AnimationFrameData struct {
 func (m *CMsgSaturation_AnimationFrameData) Reset()         { *m = CMsgSaturation_AnimationFrameData{} }
 func (m *CMsgSaturation_AnimationFrameData) String() string { return proto.CompactTextString(m) }
 func (*CMsgSaturation_AnimationFrameData) ProtoMessage()    {}
+func (*CMsgSaturation_AnimationFrameData) Descriptor() ([]byte, []int) {
+	return fileDescriptor34, []int{36, 0}
+}
 
 func (m *CMsgSaturation_AnimationFrameData) GetData() float64 {
 	if m != nil && m.Data != nil {
@@ -2538,13 +2686,15 @@ type CMsgBrightness struct {
 	Base             *float64             `protobuf:"fixed64,1,opt,name=base" json:"base,omitempty"`
 	Transition       *float64             `protobuf:"fixed64,2,opt,name=transition" json:"transition,omitempty"`
 	TransitionData   *CMsgTransitionData  `protobuf:"bytes,3,opt,name=transition_data" json:"transition_data,omitempty"`
-	Animations       []*CMsgAnimationData `protobuf:"bytes,4,rep,name=animations" json:"animations,omitempty"`
+	StyleSymbol      *uint32              `protobuf:"varint,4,opt,name=style_symbol" json:"style_symbol,omitempty"`
+	Animations       []*CMsgAnimationData `protobuf:"bytes,5,rep,name=animations" json:"animations,omitempty"`
 	XXX_unrecognized []byte               `json:"-"`
 }
 
-func (m *CMsgBrightness) Reset()         { *m = CMsgBrightness{} }
-func (m *CMsgBrightness) String() string { return proto.CompactTextString(m) }
-func (*CMsgBrightness) ProtoMessage()    {}
+func (m *CMsgBrightness) Reset()                    { *m = CMsgBrightness{} }
+func (m *CMsgBrightness) String() string            { return proto.CompactTextString(m) }
+func (*CMsgBrightness) ProtoMessage()               {}
+func (*CMsgBrightness) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{37} }
 
 func (m *CMsgBrightness) GetBase() float64 {
 	if m != nil && m.Base != nil {
@@ -2565,6 +2715,13 @@ func (m *CMsgBrightness) GetTransitionData() *CMsgTransitionData {
 		return m.TransitionData
 	}
 	return nil
+}
+
+func (m *CMsgBrightness) GetStyleSymbol() uint32 {
+	if m != nil && m.StyleSymbol != nil {
+		return *m.StyleSymbol
+	}
+	return 0
 }
 
 func (m *CMsgBrightness) GetAnimations() []*CMsgAnimationData {
@@ -2590,6 +2747,9 @@ type CMsgBrightness_AnimationFrameData struct {
 func (m *CMsgBrightness_AnimationFrameData) Reset()         { *m = CMsgBrightness_AnimationFrameData{} }
 func (m *CMsgBrightness_AnimationFrameData) String() string { return proto.CompactTextString(m) }
 func (*CMsgBrightness_AnimationFrameData) ProtoMessage()    {}
+func (*CMsgBrightness_AnimationFrameData) Descriptor() ([]byte, []int) {
+	return fileDescriptor34, []int{37, 0}
+}
 
 func (m *CMsgBrightness_AnimationFrameData) GetData() float64 {
 	if m != nil && m.Data != nil {
@@ -2602,13 +2762,15 @@ type CMsgContrast struct {
 	Base             *float64             `protobuf:"fixed64,1,opt,name=base" json:"base,omitempty"`
 	Transition       *float64             `protobuf:"fixed64,2,opt,name=transition" json:"transition,omitempty"`
 	TransitionData   *CMsgTransitionData  `protobuf:"bytes,3,opt,name=transition_data" json:"transition_data,omitempty"`
-	Animations       []*CMsgAnimationData `protobuf:"bytes,4,rep,name=animations" json:"animations,omitempty"`
+	StyleSymbol      *uint32              `protobuf:"varint,4,opt,name=style_symbol" json:"style_symbol,omitempty"`
+	Animations       []*CMsgAnimationData `protobuf:"bytes,5,rep,name=animations" json:"animations,omitempty"`
 	XXX_unrecognized []byte               `json:"-"`
 }
 
-func (m *CMsgContrast) Reset()         { *m = CMsgContrast{} }
-func (m *CMsgContrast) String() string { return proto.CompactTextString(m) }
-func (*CMsgContrast) ProtoMessage()    {}
+func (m *CMsgContrast) Reset()                    { *m = CMsgContrast{} }
+func (m *CMsgContrast) String() string            { return proto.CompactTextString(m) }
+func (*CMsgContrast) ProtoMessage()               {}
+func (*CMsgContrast) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{38} }
 
 func (m *CMsgContrast) GetBase() float64 {
 	if m != nil && m.Base != nil {
@@ -2629,6 +2791,13 @@ func (m *CMsgContrast) GetTransitionData() *CMsgTransitionData {
 		return m.TransitionData
 	}
 	return nil
+}
+
+func (m *CMsgContrast) GetStyleSymbol() uint32 {
+	if m != nil && m.StyleSymbol != nil {
+		return *m.StyleSymbol
+	}
+	return 0
 }
 
 func (m *CMsgContrast) GetAnimations() []*CMsgAnimationData {
@@ -2654,6 +2823,9 @@ type CMsgContrast_AnimationFrameData struct {
 func (m *CMsgContrast_AnimationFrameData) Reset()         { *m = CMsgContrast_AnimationFrameData{} }
 func (m *CMsgContrast_AnimationFrameData) String() string { return proto.CompactTextString(m) }
 func (*CMsgContrast_AnimationFrameData) ProtoMessage()    {}
+func (*CMsgContrast_AnimationFrameData) Descriptor() ([]byte, []int) {
+	return fileDescriptor34, []int{38, 0}
+}
 
 func (m *CMsgContrast_AnimationFrameData) GetData() float64 {
 	if m != nil && m.Data != nil {
@@ -2669,9 +2841,10 @@ type CMsgGaussianValues struct {
 	XXX_unrecognized []byte   `json:"-"`
 }
 
-func (m *CMsgGaussianValues) Reset()         { *m = CMsgGaussianValues{} }
-func (m *CMsgGaussianValues) String() string { return proto.CompactTextString(m) }
-func (*CMsgGaussianValues) ProtoMessage()    {}
+func (m *CMsgGaussianValues) Reset()                    { *m = CMsgGaussianValues{} }
+func (m *CMsgGaussianValues) String() string            { return proto.CompactTextString(m) }
+func (*CMsgGaussianValues) ProtoMessage()               {}
+func (*CMsgGaussianValues) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{39} }
 
 func (m *CMsgGaussianValues) GetPasses() float64 {
 	if m != nil && m.Passes != nil {
@@ -2698,13 +2871,15 @@ type CMsgGaussianBlur struct {
 	Base             *CMsgGaussianValues  `protobuf:"bytes,1,opt,name=base" json:"base,omitempty"`
 	Transition       *CMsgGaussianValues  `protobuf:"bytes,2,opt,name=transition" json:"transition,omitempty"`
 	TransitionData   *CMsgTransitionData  `protobuf:"bytes,3,opt,name=transition_data" json:"transition_data,omitempty"`
-	Animations       []*CMsgAnimationData `protobuf:"bytes,4,rep,name=animations" json:"animations,omitempty"`
+	StyleSymbol      *uint32              `protobuf:"varint,4,opt,name=style_symbol" json:"style_symbol,omitempty"`
+	Animations       []*CMsgAnimationData `protobuf:"bytes,5,rep,name=animations" json:"animations,omitempty"`
 	XXX_unrecognized []byte               `json:"-"`
 }
 
-func (m *CMsgGaussianBlur) Reset()         { *m = CMsgGaussianBlur{} }
-func (m *CMsgGaussianBlur) String() string { return proto.CompactTextString(m) }
-func (*CMsgGaussianBlur) ProtoMessage()    {}
+func (m *CMsgGaussianBlur) Reset()                    { *m = CMsgGaussianBlur{} }
+func (m *CMsgGaussianBlur) String() string            { return proto.CompactTextString(m) }
+func (*CMsgGaussianBlur) ProtoMessage()               {}
+func (*CMsgGaussianBlur) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{40} }
 
 func (m *CMsgGaussianBlur) GetBase() *CMsgGaussianValues {
 	if m != nil {
@@ -2725,6 +2900,13 @@ func (m *CMsgGaussianBlur) GetTransitionData() *CMsgTransitionData {
 		return m.TransitionData
 	}
 	return nil
+}
+
+func (m *CMsgGaussianBlur) GetStyleSymbol() uint32 {
+	if m != nil && m.StyleSymbol != nil {
+		return *m.StyleSymbol
+	}
+	return 0
 }
 
 func (m *CMsgGaussianBlur) GetAnimations() []*CMsgAnimationData {
@@ -2750,6 +2932,9 @@ type CMsgGaussianBlur_AnimationFrameData struct {
 func (m *CMsgGaussianBlur_AnimationFrameData) Reset()         { *m = CMsgGaussianBlur_AnimationFrameData{} }
 func (m *CMsgGaussianBlur_AnimationFrameData) String() string { return proto.CompactTextString(m) }
 func (*CMsgGaussianBlur_AnimationFrameData) ProtoMessage()    {}
+func (*CMsgGaussianBlur_AnimationFrameData) Descriptor() ([]byte, []int) {
+	return fileDescriptor34, []int{40, 0}
+}
 
 func (m *CMsgGaussianBlur_AnimationFrameData) GetData() *CMsgGaussianValues {
 	if m != nil {
@@ -2765,9 +2950,10 @@ type CMsgMotionBlurValues struct {
 	XXX_unrecognized []byte   `json:"-"`
 }
 
-func (m *CMsgMotionBlurValues) Reset()         { *m = CMsgMotionBlurValues{} }
-func (m *CMsgMotionBlurValues) String() string { return proto.CompactTextString(m) }
-func (*CMsgMotionBlurValues) ProtoMessage()    {}
+func (m *CMsgMotionBlurValues) Reset()                    { *m = CMsgMotionBlurValues{} }
+func (m *CMsgMotionBlurValues) String() string            { return proto.CompactTextString(m) }
+func (*CMsgMotionBlurValues) ProtoMessage()               {}
+func (*CMsgMotionBlurValues) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{41} }
 
 func (m *CMsgMotionBlurValues) GetVelocity() float64 {
 	if m != nil && m.Velocity != nil {
@@ -2795,12 +2981,14 @@ type CMsgMotionBlur struct {
 	Transition       *CMsgMotionBlurValues `protobuf:"bytes,2,opt,name=transition" json:"transition,omitempty"`
 	TransitionData   *CMsgTransitionData   `protobuf:"bytes,3,opt,name=transition_data" json:"transition_data,omitempty"`
 	Animations       []*CMsgAnimationData  `protobuf:"bytes,4,rep,name=animations" json:"animations,omitempty"`
+	StyleSymbol      *uint32               `protobuf:"varint,5,opt,name=style_symbol" json:"style_symbol,omitempty"`
 	XXX_unrecognized []byte                `json:"-"`
 }
 
-func (m *CMsgMotionBlur) Reset()         { *m = CMsgMotionBlur{} }
-func (m *CMsgMotionBlur) String() string { return proto.CompactTextString(m) }
-func (*CMsgMotionBlur) ProtoMessage()    {}
+func (m *CMsgMotionBlur) Reset()                    { *m = CMsgMotionBlur{} }
+func (m *CMsgMotionBlur) String() string            { return proto.CompactTextString(m) }
+func (*CMsgMotionBlur) ProtoMessage()               {}
+func (*CMsgMotionBlur) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{42} }
 
 func (m *CMsgMotionBlur) GetBase() *CMsgMotionBlurValues {
 	if m != nil {
@@ -2830,6 +3018,13 @@ func (m *CMsgMotionBlur) GetAnimations() []*CMsgAnimationData {
 	return nil
 }
 
+func (m *CMsgMotionBlur) GetStyleSymbol() uint32 {
+	if m != nil && m.StyleSymbol != nil {
+		return *m.StyleSymbol
+	}
+	return 0
+}
+
 var E_CMsgMotionBlur_AnimationFrameData = &proto.ExtensionDesc{
 	ExtendedType:  (*CMsgAnimationFrameData)(nil),
 	ExtensionType: (*CMsgMotionBlur_AnimationFrameData)(nil),
@@ -2846,6 +3041,9 @@ type CMsgMotionBlur_AnimationFrameData struct {
 func (m *CMsgMotionBlur_AnimationFrameData) Reset()         { *m = CMsgMotionBlur_AnimationFrameData{} }
 func (m *CMsgMotionBlur_AnimationFrameData) String() string { return proto.CompactTextString(m) }
 func (*CMsgMotionBlur_AnimationFrameData) ProtoMessage()    {}
+func (*CMsgMotionBlur_AnimationFrameData) Descriptor() ([]byte, []int) {
+	return fileDescriptor34, []int{42, 0}
+}
 
 func (m *CMsgMotionBlur_AnimationFrameData) GetData() *CMsgMotionBlurValues {
 	if m != nil {
@@ -2858,13 +3056,15 @@ type CMsg3DTransformPerspective struct {
 	Base             *float64             `protobuf:"fixed64,1,opt,name=base" json:"base,omitempty"`
 	Transition       *float64             `protobuf:"fixed64,2,opt,name=transition" json:"transition,omitempty"`
 	TransitionData   *CMsgTransitionData  `protobuf:"bytes,3,opt,name=transition_data" json:"transition_data,omitempty"`
-	Animations       []*CMsgAnimationData `protobuf:"bytes,4,rep,name=animations" json:"animations,omitempty"`
+	StyleSymbol      *uint32              `protobuf:"varint,4,opt,name=style_symbol" json:"style_symbol,omitempty"`
+	Animations       []*CMsgAnimationData `protobuf:"bytes,5,rep,name=animations" json:"animations,omitempty"`
 	XXX_unrecognized []byte               `json:"-"`
 }
 
-func (m *CMsg3DTransformPerspective) Reset()         { *m = CMsg3DTransformPerspective{} }
-func (m *CMsg3DTransformPerspective) String() string { return proto.CompactTextString(m) }
-func (*CMsg3DTransformPerspective) ProtoMessage()    {}
+func (m *CMsg3DTransformPerspective) Reset()                    { *m = CMsg3DTransformPerspective{} }
+func (m *CMsg3DTransformPerspective) String() string            { return proto.CompactTextString(m) }
+func (*CMsg3DTransformPerspective) ProtoMessage()               {}
+func (*CMsg3DTransformPerspective) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{43} }
 
 func (m *CMsg3DTransformPerspective) GetBase() float64 {
 	if m != nil && m.Base != nil {
@@ -2885,6 +3085,13 @@ func (m *CMsg3DTransformPerspective) GetTransitionData() *CMsgTransitionData {
 		return m.TransitionData
 	}
 	return nil
+}
+
+func (m *CMsg3DTransformPerspective) GetStyleSymbol() uint32 {
+	if m != nil && m.StyleSymbol != nil {
+		return *m.StyleSymbol
+	}
+	return 0
 }
 
 func (m *CMsg3DTransformPerspective) GetAnimations() []*CMsgAnimationData {
@@ -2914,6 +3121,9 @@ func (m *CMsg3DTransformPerspective_AnimationFrameData) String() string {
 	return proto.CompactTextString(m)
 }
 func (*CMsg3DTransformPerspective_AnimationFrameData) ProtoMessage() {}
+func (*CMsg3DTransformPerspective_AnimationFrameData) Descriptor() ([]byte, []int) {
+	return fileDescriptor34, []int{43, 0}
+}
 
 func (m *CMsg3DTransformPerspective_AnimationFrameData) GetData() float64 {
 	if m != nil && m.Data != nil {
@@ -2926,13 +3136,17 @@ type CMsg3DTransformPerspectiveOrigin struct {
 	Base             *CMsgPoint           `protobuf:"bytes,1,opt,name=base" json:"base,omitempty"`
 	Transition       *CMsgPoint           `protobuf:"bytes,2,opt,name=transition" json:"transition,omitempty"`
 	TransitionData   *CMsgTransitionData  `protobuf:"bytes,3,opt,name=transition_data" json:"transition_data,omitempty"`
-	Animations       []*CMsgAnimationData `protobuf:"bytes,4,rep,name=animations" json:"animations,omitempty"`
+	StyleSymbol      *uint32              `protobuf:"varint,4,opt,name=style_symbol" json:"style_symbol,omitempty"`
+	Animations       []*CMsgAnimationData `protobuf:"bytes,5,rep,name=animations" json:"animations,omitempty"`
 	XXX_unrecognized []byte               `json:"-"`
 }
 
 func (m *CMsg3DTransformPerspectiveOrigin) Reset()         { *m = CMsg3DTransformPerspectiveOrigin{} }
 func (m *CMsg3DTransformPerspectiveOrigin) String() string { return proto.CompactTextString(m) }
 func (*CMsg3DTransformPerspectiveOrigin) ProtoMessage()    {}
+func (*CMsg3DTransformPerspectiveOrigin) Descriptor() ([]byte, []int) {
+	return fileDescriptor34, []int{44}
+}
 
 func (m *CMsg3DTransformPerspectiveOrigin) GetBase() *CMsgPoint {
 	if m != nil {
@@ -2953,6 +3167,13 @@ func (m *CMsg3DTransformPerspectiveOrigin) GetTransitionData() *CMsgTransitionDa
 		return m.TransitionData
 	}
 	return nil
+}
+
+func (m *CMsg3DTransformPerspectiveOrigin) GetStyleSymbol() uint32 {
+	if m != nil && m.StyleSymbol != nil {
+		return *m.StyleSymbol
+	}
+	return 0
 }
 
 func (m *CMsg3DTransformPerspectiveOrigin) GetAnimations() []*CMsgAnimationData {
@@ -2982,6 +3203,9 @@ func (m *CMsg3DTransformPerspectiveOrigin_AnimationFrameData) String() string {
 	return proto.CompactTextString(m)
 }
 func (*CMsg3DTransformPerspectiveOrigin_AnimationFrameData) ProtoMessage() {}
+func (*CMsg3DTransformPerspectiveOrigin_AnimationFrameData) Descriptor() ([]byte, []int) {
+	return fileDescriptor34, []int{44, 0}
+}
 
 func (m *CMsg3DTransformPerspectiveOrigin_AnimationFrameData) GetData() *CMsgPoint {
 	if m != nil {
@@ -2999,9 +3223,10 @@ type CMsgTransformOriginData struct {
 	XXX_unrecognized []byte   `json:"-"`
 }
 
-func (m *CMsgTransformOriginData) Reset()         { *m = CMsgTransformOriginData{} }
-func (m *CMsgTransformOriginData) String() string { return proto.CompactTextString(m) }
-func (*CMsgTransformOriginData) ProtoMessage()    {}
+func (m *CMsgTransformOriginData) Reset()                    { *m = CMsgTransformOriginData{} }
+func (m *CMsgTransformOriginData) String() string            { return proto.CompactTextString(m) }
+func (*CMsgTransformOriginData) ProtoMessage()               {}
+func (*CMsgTransformOriginData) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{45} }
 
 func (m *CMsgTransformOriginData) GetX() float64 {
 	if m != nil && m.X != nil {
@@ -3042,13 +3267,15 @@ type CMsg3DTransformOrigin struct {
 	Base             *CMsgTransformOriginData `protobuf:"bytes,1,opt,name=base" json:"base,omitempty"`
 	Transition       *CMsgTransformOriginData `protobuf:"bytes,2,opt,name=transition" json:"transition,omitempty"`
 	TransitionData   *CMsgTransitionData      `protobuf:"bytes,3,opt,name=transition_data" json:"transition_data,omitempty"`
-	Animations       []*CMsgAnimationData     `protobuf:"bytes,4,rep,name=animations" json:"animations,omitempty"`
+	StyleSymbol      *uint32                  `protobuf:"varint,4,opt,name=style_symbol" json:"style_symbol,omitempty"`
+	Animations       []*CMsgAnimationData     `protobuf:"bytes,5,rep,name=animations" json:"animations,omitempty"`
 	XXX_unrecognized []byte                   `json:"-"`
 }
 
-func (m *CMsg3DTransformOrigin) Reset()         { *m = CMsg3DTransformOrigin{} }
-func (m *CMsg3DTransformOrigin) String() string { return proto.CompactTextString(m) }
-func (*CMsg3DTransformOrigin) ProtoMessage()    {}
+func (m *CMsg3DTransformOrigin) Reset()                    { *m = CMsg3DTransformOrigin{} }
+func (m *CMsg3DTransformOrigin) String() string            { return proto.CompactTextString(m) }
+func (*CMsg3DTransformOrigin) ProtoMessage()               {}
+func (*CMsg3DTransformOrigin) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{46} }
 
 func (m *CMsg3DTransformOrigin) GetBase() *CMsgTransformOriginData {
 	if m != nil {
@@ -3069,6 +3296,13 @@ func (m *CMsg3DTransformOrigin) GetTransitionData() *CMsgTransitionData {
 		return m.TransitionData
 	}
 	return nil
+}
+
+func (m *CMsg3DTransformOrigin) GetStyleSymbol() uint32 {
+	if m != nil && m.StyleSymbol != nil {
+		return *m.StyleSymbol
+	}
+	return 0
 }
 
 func (m *CMsg3DTransformOrigin) GetAnimations() []*CMsgAnimationData {
@@ -3096,6 +3330,9 @@ func (m *CMsg3DTransformOrigin_AnimationFrameData) Reset() {
 }
 func (m *CMsg3DTransformOrigin_AnimationFrameData) String() string { return proto.CompactTextString(m) }
 func (*CMsg3DTransformOrigin_AnimationFrameData) ProtoMessage()    {}
+func (*CMsg3DTransformOrigin_AnimationFrameData) Descriptor() ([]byte, []int) {
+	return fileDescriptor34, []int{46, 0}
+}
 
 func (m *CMsg3DTransformOrigin_AnimationFrameData) GetData() *CMsgTransformOriginData {
 	if m != nil {
@@ -3108,13 +3345,15 @@ type CMsg3DTransformMatrix struct {
 	Base             *CMsgMatrix4X4       `protobuf:"bytes,1,opt,name=base" json:"base,omitempty"`
 	TransitionData   *CMsgTransitionData  `protobuf:"bytes,2,opt,name=transition_data" json:"transition_data,omitempty"`
 	Transition       *CMsgMatrix4X4       `protobuf:"bytes,3,opt,name=transition" json:"transition,omitempty"`
-	Animations       []*CMsgAnimationData `protobuf:"bytes,4,rep,name=animations" json:"animations,omitempty"`
+	StyleSymbol      *uint32              `protobuf:"varint,4,opt,name=style_symbol" json:"style_symbol,omitempty"`
+	Animations       []*CMsgAnimationData `protobuf:"bytes,5,rep,name=animations" json:"animations,omitempty"`
 	XXX_unrecognized []byte               `json:"-"`
 }
 
-func (m *CMsg3DTransformMatrix) Reset()         { *m = CMsg3DTransformMatrix{} }
-func (m *CMsg3DTransformMatrix) String() string { return proto.CompactTextString(m) }
-func (*CMsg3DTransformMatrix) ProtoMessage()    {}
+func (m *CMsg3DTransformMatrix) Reset()                    { *m = CMsg3DTransformMatrix{} }
+func (m *CMsg3DTransformMatrix) String() string            { return proto.CompactTextString(m) }
+func (*CMsg3DTransformMatrix) ProtoMessage()               {}
+func (*CMsg3DTransformMatrix) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{47} }
 
 func (m *CMsg3DTransformMatrix) GetBase() *CMsgMatrix4X4 {
 	if m != nil {
@@ -3135,6 +3374,13 @@ func (m *CMsg3DTransformMatrix) GetTransition() *CMsgMatrix4X4 {
 		return m.Transition
 	}
 	return nil
+}
+
+func (m *CMsg3DTransformMatrix) GetStyleSymbol() uint32 {
+	if m != nil && m.StyleSymbol != nil {
+		return *m.StyleSymbol
+	}
+	return 0
 }
 
 func (m *CMsg3DTransformMatrix) GetAnimations() []*CMsgAnimationData {
@@ -3162,6 +3408,9 @@ func (m *CMsg3DTransformMatrix_AnimationFrameData) Reset() {
 }
 func (m *CMsg3DTransformMatrix_AnimationFrameData) String() string { return proto.CompactTextString(m) }
 func (*CMsg3DTransformMatrix_AnimationFrameData) ProtoMessage()    {}
+func (*CMsg3DTransformMatrix_AnimationFrameData) Descriptor() ([]byte, []int) {
+	return fileDescriptor34, []int{47, 0}
+}
 
 func (m *CMsg3DTransformMatrix_AnimationFrameData) GetData() *CMsgMatrix4X4 {
 	if m != nil {
@@ -3174,13 +3423,15 @@ type CMsgBorderRadius struct {
 	Base             *CRadiusData         `protobuf:"bytes,1,opt,name=base" json:"base,omitempty"`
 	TransitionData   *CMsgTransitionData  `protobuf:"bytes,2,opt,name=transition_data" json:"transition_data,omitempty"`
 	Transition       *CRadiusData         `protobuf:"bytes,3,opt,name=transition" json:"transition,omitempty"`
-	Animations       []*CMsgAnimationData `protobuf:"bytes,4,rep,name=animations" json:"animations,omitempty"`
+	StyleSymbol      *uint32              `protobuf:"varint,4,opt,name=style_symbol" json:"style_symbol,omitempty"`
+	Animations       []*CMsgAnimationData `protobuf:"bytes,5,rep,name=animations" json:"animations,omitempty"`
 	XXX_unrecognized []byte               `json:"-"`
 }
 
-func (m *CMsgBorderRadius) Reset()         { *m = CMsgBorderRadius{} }
-func (m *CMsgBorderRadius) String() string { return proto.CompactTextString(m) }
-func (*CMsgBorderRadius) ProtoMessage()    {}
+func (m *CMsgBorderRadius) Reset()                    { *m = CMsgBorderRadius{} }
+func (m *CMsgBorderRadius) String() string            { return proto.CompactTextString(m) }
+func (*CMsgBorderRadius) ProtoMessage()               {}
+func (*CMsgBorderRadius) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{48} }
 
 func (m *CMsgBorderRadius) GetBase() *CRadiusData {
 	if m != nil {
@@ -3201,6 +3452,13 @@ func (m *CMsgBorderRadius) GetTransition() *CRadiusData {
 		return m.Transition
 	}
 	return nil
+}
+
+func (m *CMsgBorderRadius) GetStyleSymbol() uint32 {
+	if m != nil && m.StyleSymbol != nil {
+		return *m.StyleSymbol
+	}
+	return 0
 }
 
 func (m *CMsgBorderRadius) GetAnimations() []*CMsgAnimationData {
@@ -3226,6 +3484,9 @@ type CMsgBorderRadius_AnimationFrameData struct {
 func (m *CMsgBorderRadius_AnimationFrameData) Reset()         { *m = CMsgBorderRadius_AnimationFrameData{} }
 func (m *CMsgBorderRadius_AnimationFrameData) String() string { return proto.CompactTextString(m) }
 func (*CMsgBorderRadius_AnimationFrameData) ProtoMessage()    {}
+func (*CMsgBorderRadius_AnimationFrameData) Descriptor() ([]byte, []int) {
+	return fileDescriptor34, []int{48, 0}
+}
 
 func (m *CMsgBorderRadius_AnimationFrameData) GetData() *CRadiusData {
 	if m != nil {
@@ -3238,13 +3499,15 @@ type CMsgBorder struct {
 	Base             *CBorderData         `protobuf:"bytes,1,opt,name=base" json:"base,omitempty"`
 	TransitionData   *CMsgTransitionData  `protobuf:"bytes,2,opt,name=transition_data" json:"transition_data,omitempty"`
 	Transition       *CBorderData         `protobuf:"bytes,3,opt,name=transition" json:"transition,omitempty"`
-	Animations       []*CMsgAnimationData `protobuf:"bytes,4,rep,name=animations" json:"animations,omitempty"`
+	StyleSymbol      *uint32              `protobuf:"varint,4,opt,name=style_symbol" json:"style_symbol,omitempty"`
+	Animations       []*CMsgAnimationData `protobuf:"bytes,5,rep,name=animations" json:"animations,omitempty"`
 	XXX_unrecognized []byte               `json:"-"`
 }
 
-func (m *CMsgBorder) Reset()         { *m = CMsgBorder{} }
-func (m *CMsgBorder) String() string { return proto.CompactTextString(m) }
-func (*CMsgBorder) ProtoMessage()    {}
+func (m *CMsgBorder) Reset()                    { *m = CMsgBorder{} }
+func (m *CMsgBorder) String() string            { return proto.CompactTextString(m) }
+func (*CMsgBorder) ProtoMessage()               {}
+func (*CMsgBorder) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{49} }
 
 func (m *CMsgBorder) GetBase() *CBorderData {
 	if m != nil {
@@ -3265,6 +3528,13 @@ func (m *CMsgBorder) GetTransition() *CBorderData {
 		return m.Transition
 	}
 	return nil
+}
+
+func (m *CMsgBorder) GetStyleSymbol() uint32 {
+	if m != nil && m.StyleSymbol != nil {
+		return *m.StyleSymbol
+	}
+	return 0
 }
 
 func (m *CMsgBorder) GetAnimations() []*CMsgAnimationData {
@@ -3290,6 +3560,9 @@ type CMsgBorder_AnimationFrameData struct {
 func (m *CMsgBorder_AnimationFrameData) Reset()         { *m = CMsgBorder_AnimationFrameData{} }
 func (m *CMsgBorder_AnimationFrameData) String() string { return proto.CompactTextString(m) }
 func (*CMsgBorder_AnimationFrameData) ProtoMessage()    {}
+func (*CMsgBorder_AnimationFrameData) Descriptor() ([]byte, []int) {
+	return fileDescriptor34, []int{49, 0}
+}
 
 func (m *CMsgBorder_AnimationFrameData) GetData() *CBorderData {
 	if m != nil {
@@ -3302,13 +3575,15 @@ type CMsgBoxShadow struct {
 	Base             *CBoxShadowData      `protobuf:"bytes,1,opt,name=base" json:"base,omitempty"`
 	TransitionData   *CMsgTransitionData  `protobuf:"bytes,2,opt,name=transition_data" json:"transition_data,omitempty"`
 	Transition       *CBoxShadowData      `protobuf:"bytes,3,opt,name=transition" json:"transition,omitempty"`
-	Animations       []*CMsgAnimationData `protobuf:"bytes,4,rep,name=animations" json:"animations,omitempty"`
+	StyleSymbol      *uint32              `protobuf:"varint,4,opt,name=style_symbol" json:"style_symbol,omitempty"`
+	Animations       []*CMsgAnimationData `protobuf:"bytes,5,rep,name=animations" json:"animations,omitempty"`
 	XXX_unrecognized []byte               `json:"-"`
 }
 
-func (m *CMsgBoxShadow) Reset()         { *m = CMsgBoxShadow{} }
-func (m *CMsgBoxShadow) String() string { return proto.CompactTextString(m) }
-func (*CMsgBoxShadow) ProtoMessage()    {}
+func (m *CMsgBoxShadow) Reset()                    { *m = CMsgBoxShadow{} }
+func (m *CMsgBoxShadow) String() string            { return proto.CompactTextString(m) }
+func (*CMsgBoxShadow) ProtoMessage()               {}
+func (*CMsgBoxShadow) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{50} }
 
 func (m *CMsgBoxShadow) GetBase() *CBoxShadowData {
 	if m != nil {
@@ -3329,6 +3604,13 @@ func (m *CMsgBoxShadow) GetTransition() *CBoxShadowData {
 		return m.Transition
 	}
 	return nil
+}
+
+func (m *CMsgBoxShadow) GetStyleSymbol() uint32 {
+	if m != nil && m.StyleSymbol != nil {
+		return *m.StyleSymbol
+	}
+	return 0
 }
 
 func (m *CMsgBoxShadow) GetAnimations() []*CMsgAnimationData {
@@ -3354,6 +3636,9 @@ type CMsgBoxShadow_AnimationFrameData struct {
 func (m *CMsgBoxShadow_AnimationFrameData) Reset()         { *m = CMsgBoxShadow_AnimationFrameData{} }
 func (m *CMsgBoxShadow_AnimationFrameData) String() string { return proto.CompactTextString(m) }
 func (*CMsgBoxShadow_AnimationFrameData) ProtoMessage()    {}
+func (*CMsgBoxShadow_AnimationFrameData) Descriptor() ([]byte, []int) {
+	return fileDescriptor34, []int{50, 0}
+}
 
 func (m *CMsgBoxShadow_AnimationFrameData) GetData() *CBoxShadowData {
 	if m != nil {
@@ -3366,13 +3651,15 @@ type CMsgTextShadow struct {
 	Base             *CTextShadowData     `protobuf:"bytes,1,opt,name=base" json:"base,omitempty"`
 	TransitionData   *CMsgTransitionData  `protobuf:"bytes,2,opt,name=transition_data" json:"transition_data,omitempty"`
 	Transition       *CTextShadowData     `protobuf:"bytes,3,opt,name=transition" json:"transition,omitempty"`
-	Animations       []*CMsgAnimationData `protobuf:"bytes,4,rep,name=animations" json:"animations,omitempty"`
+	StyleSymbol      *uint32              `protobuf:"varint,4,opt,name=style_symbol" json:"style_symbol,omitempty"`
+	Animations       []*CMsgAnimationData `protobuf:"bytes,5,rep,name=animations" json:"animations,omitempty"`
 	XXX_unrecognized []byte               `json:"-"`
 }
 
-func (m *CMsgTextShadow) Reset()         { *m = CMsgTextShadow{} }
-func (m *CMsgTextShadow) String() string { return proto.CompactTextString(m) }
-func (*CMsgTextShadow) ProtoMessage()    {}
+func (m *CMsgTextShadow) Reset()                    { *m = CMsgTextShadow{} }
+func (m *CMsgTextShadow) String() string            { return proto.CompactTextString(m) }
+func (*CMsgTextShadow) ProtoMessage()               {}
+func (*CMsgTextShadow) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{51} }
 
 func (m *CMsgTextShadow) GetBase() *CTextShadowData {
 	if m != nil {
@@ -3393,6 +3680,13 @@ func (m *CMsgTextShadow) GetTransition() *CTextShadowData {
 		return m.Transition
 	}
 	return nil
+}
+
+func (m *CMsgTextShadow) GetStyleSymbol() uint32 {
+	if m != nil && m.StyleSymbol != nil {
+		return *m.StyleSymbol
+	}
+	return 0
 }
 
 func (m *CMsgTextShadow) GetAnimations() []*CMsgAnimationData {
@@ -3418,6 +3712,9 @@ type CMsgTextShadow_AnimationFrameData struct {
 func (m *CMsgTextShadow_AnimationFrameData) Reset()         { *m = CMsgTextShadow_AnimationFrameData{} }
 func (m *CMsgTextShadow_AnimationFrameData) String() string { return proto.CompactTextString(m) }
 func (*CMsgTextShadow_AnimationFrameData) ProtoMessage()    {}
+func (*CMsgTextShadow_AnimationFrameData) Descriptor() ([]byte, []int) {
+	return fileDescriptor34, []int{51, 0}
+}
 
 func (m *CMsgTextShadow_AnimationFrameData) GetData() *CTextShadowData {
 	if m != nil {
@@ -3430,13 +3727,15 @@ type CMsgClip struct {
 	Base             *CMsgClipData        `protobuf:"bytes,1,opt,name=base" json:"base,omitempty"`
 	TransitionData   *CMsgTransitionData  `protobuf:"bytes,2,opt,name=transition_data" json:"transition_data,omitempty"`
 	Transition       *CMsgClipData        `protobuf:"bytes,3,opt,name=transition" json:"transition,omitempty"`
-	Animations       []*CMsgAnimationData `protobuf:"bytes,4,rep,name=animations" json:"animations,omitempty"`
+	StyleSymbol      *uint32              `protobuf:"varint,4,opt,name=style_symbol" json:"style_symbol,omitempty"`
+	Animations       []*CMsgAnimationData `protobuf:"bytes,5,rep,name=animations" json:"animations,omitempty"`
 	XXX_unrecognized []byte               `json:"-"`
 }
 
-func (m *CMsgClip) Reset()         { *m = CMsgClip{} }
-func (m *CMsgClip) String() string { return proto.CompactTextString(m) }
-func (*CMsgClip) ProtoMessage()    {}
+func (m *CMsgClip) Reset()                    { *m = CMsgClip{} }
+func (m *CMsgClip) String() string            { return proto.CompactTextString(m) }
+func (*CMsgClip) ProtoMessage()               {}
+func (*CMsgClip) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{52} }
 
 func (m *CMsgClip) GetBase() *CMsgClipData {
 	if m != nil {
@@ -3457,6 +3756,13 @@ func (m *CMsgClip) GetTransition() *CMsgClipData {
 		return m.Transition
 	}
 	return nil
+}
+
+func (m *CMsgClip) GetStyleSymbol() uint32 {
+	if m != nil && m.StyleSymbol != nil {
+		return *m.StyleSymbol
+	}
+	return 0
 }
 
 func (m *CMsgClip) GetAnimations() []*CMsgAnimationData {
@@ -3482,6 +3788,9 @@ type CMsgClip_AnimationFrameData struct {
 func (m *CMsgClip_AnimationFrameData) Reset()         { *m = CMsgClip_AnimationFrameData{} }
 func (m *CMsgClip_AnimationFrameData) String() string { return proto.CompactTextString(m) }
 func (*CMsgClip_AnimationFrameData) ProtoMessage()    {}
+func (*CMsgClip_AnimationFrameData) Descriptor() ([]byte, []int) {
+	return fileDescriptor34, []int{52, 0}
+}
 
 func (m *CMsgClip_AnimationFrameData) GetData() *CMsgClipData {
 	if m != nil {
@@ -3497,9 +3806,10 @@ type CMsgPushClipLayer struct {
 	XXX_unrecognized []byte       `json:"-"`
 }
 
-func (m *CMsgPushClipLayer) Reset()         { *m = CMsgPushClipLayer{} }
-func (m *CMsgPushClipLayer) String() string { return proto.CompactTextString(m) }
-func (*CMsgPushClipLayer) ProtoMessage()    {}
+func (m *CMsgPushClipLayer) Reset()                    { *m = CMsgPushClipLayer{} }
+func (m *CMsgPushClipLayer) String() string            { return proto.CompactTextString(m) }
+func (*CMsgPushClipLayer) ProtoMessage()               {}
+func (*CMsgPushClipLayer) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{53} }
 
 func (m *CMsgPushClipLayer) GetTopLeft() *CMsgPoint {
 	if m != nil {
@@ -3526,9 +3836,10 @@ type CMsgPopClipLayer struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CMsgPopClipLayer) Reset()         { *m = CMsgPopClipLayer{} }
-func (m *CMsgPopClipLayer) String() string { return proto.CompactTextString(m) }
-func (*CMsgPopClipLayer) ProtoMessage()    {}
+func (m *CMsgPopClipLayer) Reset()                    { *m = CMsgPopClipLayer{} }
+func (m *CMsgPopClipLayer) String() string            { return proto.CompactTextString(m) }
+func (*CMsgPopClipLayer) ProtoMessage()               {}
+func (*CMsgPopClipLayer) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{54} }
 
 type CMsgPushPanelContextInLayer struct {
 	TransformM00     *float64        `protobuf:"fixed64,1,opt,name=transform_m00" json:"transform_m00,omitempty"`
@@ -3559,9 +3870,10 @@ type CMsgPushPanelContextInLayer struct {
 	XXX_unrecognized []byte          `json:"-"`
 }
 
-func (m *CMsgPushPanelContextInLayer) Reset()         { *m = CMsgPushPanelContextInLayer{} }
-func (m *CMsgPushPanelContextInLayer) String() string { return proto.CompactTextString(m) }
-func (*CMsgPushPanelContextInLayer) ProtoMessage()    {}
+func (m *CMsgPushPanelContextInLayer) Reset()                    { *m = CMsgPushPanelContextInLayer{} }
+func (m *CMsgPushPanelContextInLayer) String() string            { return proto.CompactTextString(m) }
+func (*CMsgPushPanelContextInLayer) ProtoMessage()               {}
+func (*CMsgPushPanelContextInLayer) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{55} }
 
 func (m *CMsgPushPanelContextInLayer) GetTransformM00() float64 {
 	if m != nil && m.TransformM00 != nil {
@@ -3742,53 +4054,56 @@ type CMsgPopPanelContextInLayer struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CMsgPopPanelContextInLayer) Reset()         { *m = CMsgPopPanelContextInLayer{} }
-func (m *CMsgPopPanelContextInLayer) String() string { return proto.CompactTextString(m) }
-func (*CMsgPopPanelContextInLayer) ProtoMessage()    {}
+func (m *CMsgPopPanelContextInLayer) Reset()                    { *m = CMsgPopPanelContextInLayer{} }
+func (m *CMsgPopPanelContextInLayer) String() string            { return proto.CompactTextString(m) }
+func (*CMsgPopPanelContextInLayer) ProtoMessage()               {}
+func (*CMsgPopPanelContextInLayer) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{56} }
 
 type CMsgPushAAndTContext struct {
-	ContextId                  *uint64                           `protobuf:"varint,1,opt,name=context_id" json:"context_id,omitempty"`
-	Width                      *float64                          `protobuf:"fixed64,3,opt,name=width" json:"width,omitempty"`
-	Height                     *float64                          `protobuf:"fixed64,4,opt,name=height" json:"height,omitempty"`
-	ChilrenHave_3Dtransforms   *bool                             `protobuf:"varint,5,opt,name=chilren_have_3dtransforms" json:"chilren_have_3dtransforms,omitempty"`
-	Zindex                     *float32                          `protobuf:"fixed32,6,opt,name=zindex" json:"zindex,omitempty"`
-	PanelPosition              *CMsgPanelPosition                `protobuf:"bytes,7,opt,name=panel_position" json:"panel_position,omitempty"`
-	TransformMatrix            *CMsg3DTransformMatrix            `protobuf:"bytes,8,opt,name=transform_matrix" json:"transform_matrix,omitempty"`
-	TransformOrigin            *CMsg3DTransformOrigin            `protobuf:"bytes,9,opt,name=transform_origin" json:"transform_origin,omitempty"`
-	TransformPerspective       *CMsg3DTransformPerspective       `protobuf:"bytes,10,opt,name=transform_perspective" json:"transform_perspective,omitempty"`
-	TransformPerspectiveOrigin *CMsg3DTransformPerspectiveOrigin `protobuf:"bytes,11,opt,name=transform_perspective_origin" json:"transform_perspective_origin,omitempty"`
-	Opacity                    *CMsgOpacity                      `protobuf:"bytes,12,opt,name=opacity" json:"opacity,omitempty"`
-	WashColor                  *CMsgColor                        `protobuf:"bytes,13,opt,name=wash_color" json:"wash_color,omitempty"`
-	HueShift                   *CMsgHueShift                     `protobuf:"bytes,14,opt,name=hue_shift" json:"hue_shift,omitempty"`
-	Saturation                 *CMsgSaturation                   `protobuf:"bytes,15,opt,name=saturation" json:"saturation,omitempty"`
-	Brightness                 *CMsgBrightness                   `protobuf:"bytes,16,opt,name=brightness" json:"brightness,omitempty"`
-	Contrast                   *CMsgContrast                     `protobuf:"bytes,17,opt,name=contrast" json:"contrast,omitempty"`
-	OpacityMask                *CMsgOpacityMask                  `protobuf:"bytes,18,opt,name=opacity_mask" json:"opacity_mask,omitempty"`
-	BorderRadius               *CMsgBorderRadius                 `protobuf:"bytes,19,opt,name=border_radius" json:"border_radius,omitempty"`
-	GaussianBlur               *CMsgGaussianBlur                 `protobuf:"bytes,20,opt,name=gaussian_blur" json:"gaussian_blur,omitempty"`
-	Border                     *CMsgBorder                       `protobuf:"bytes,21,opt,name=border" json:"border,omitempty"`
-	BoxShadow                  *CMsgBoxShadow                    `protobuf:"bytes,22,opt,name=box_shadow" json:"box_shadow,omitempty"`
-	Scale_2DCentered           *CMsgPointWithTransition          `protobuf:"bytes,23,opt,name=scale_2d_centered" json:"scale_2d_centered,omitempty"`
-	Rotate_2DCentered          *CMsgRotate2D                     `protobuf:"bytes,24,opt,name=rotate_2d_centered" json:"rotate_2d_centered,omitempty"`
-	TextShadow                 *CMsgTextShadow                   `protobuf:"bytes,25,opt,name=text_shadow" json:"text_shadow,omitempty"`
-	Clip                       *CMsgClip                         `protobuf:"bytes,26,opt,name=clip" json:"clip,omitempty"`
-	SuppressClipToBounds       *bool                             `protobuf:"varint,27,opt,name=suppress_clip_to_bounds" json:"suppress_clip_to_bounds,omitempty"`
-	NeedsFullRepaint           *int32                            `protobuf:"varint,28,opt,name=needs_full_repaint" json:"needs_full_repaint,omitempty"`
-	NeedsIntermediateTexture   *bool                             `protobuf:"varint,29,opt,name=needs_intermediate_texture" json:"needs_intermediate_texture,omitempty"`
-	ClipAfterTransform         *bool                             `protobuf:"varint,30,opt,name=clip_after_transform" json:"clip_after_transform,omitempty"`
-	WantsHitTest               *bool                             `protobuf:"varint,31,opt,name=wants_hit_test" json:"wants_hit_test,omitempty"`
-	WantsHitTestChildren       *bool                             `protobuf:"varint,32,opt,name=wants_hit_test_children" json:"wants_hit_test_children,omitempty"`
-	MixBlendMode               *uint32                           `protobuf:"varint,33,opt,name=mix_blend_mode" json:"mix_blend_mode,omitempty"`
-	OpaqueBackground           *bool                             `protobuf:"varint,34,opt,name=opaque_background" json:"opaque_background,omitempty"`
-	ChildPanelCount            *uint32                           `protobuf:"varint,35,opt,name=child_panel_count" json:"child_panel_count,omitempty"`
-	WantsScreenspaceQuadOutput *bool                             `protobuf:"varint,36,opt,name=wants_screenspace_quad_output" json:"wants_screenspace_quad_output,omitempty"`
-	MotionBlur                 *CMsgMotionBlur                   `protobuf:"bytes,37,opt,name=motion_blur" json:"motion_blur,omitempty"`
-	XXX_unrecognized           []byte                            `json:"-"`
+	ContextId                   *uint64                           `protobuf:"varint,1,opt,name=context_id" json:"context_id,omitempty"`
+	Width                       *float64                          `protobuf:"fixed64,3,opt,name=width" json:"width,omitempty"`
+	Height                      *float64                          `protobuf:"fixed64,4,opt,name=height" json:"height,omitempty"`
+	ChilrenHave_3Dtransforms    *bool                             `protobuf:"varint,5,opt,name=chilren_have_3dtransforms" json:"chilren_have_3dtransforms,omitempty"`
+	Zindex                      *float32                          `protobuf:"fixed32,6,opt,name=zindex" json:"zindex,omitempty"`
+	PanelPosition               *CMsgPanelPosition                `protobuf:"bytes,7,opt,name=panel_position" json:"panel_position,omitempty"`
+	TransformMatrix             *CMsg3DTransformMatrix            `protobuf:"bytes,8,opt,name=transform_matrix" json:"transform_matrix,omitempty"`
+	TransformOrigin             *CMsg3DTransformOrigin            `protobuf:"bytes,9,opt,name=transform_origin" json:"transform_origin,omitempty"`
+	TransformPerspective        *CMsg3DTransformPerspective       `protobuf:"bytes,10,opt,name=transform_perspective" json:"transform_perspective,omitempty"`
+	TransformPerspectiveOrigin  *CMsg3DTransformPerspectiveOrigin `protobuf:"bytes,11,opt,name=transform_perspective_origin" json:"transform_perspective_origin,omitempty"`
+	Opacity                     *CMsgOpacity                      `protobuf:"bytes,12,opt,name=opacity" json:"opacity,omitempty"`
+	WashColor                   *CMsgColor                        `protobuf:"bytes,13,opt,name=wash_color" json:"wash_color,omitempty"`
+	HueShift                    *CMsgHueShift                     `protobuf:"bytes,14,opt,name=hue_shift" json:"hue_shift,omitempty"`
+	Saturation                  *CMsgSaturation                   `protobuf:"bytes,15,opt,name=saturation" json:"saturation,omitempty"`
+	Brightness                  *CMsgBrightness                   `protobuf:"bytes,16,opt,name=brightness" json:"brightness,omitempty"`
+	Contrast                    *CMsgContrast                     `protobuf:"bytes,17,opt,name=contrast" json:"contrast,omitempty"`
+	OpacityMask                 *CMsgOpacityMask                  `protobuf:"bytes,18,opt,name=opacity_mask" json:"opacity_mask,omitempty"`
+	BorderRadius                *CMsgBorderRadius                 `protobuf:"bytes,19,opt,name=border_radius" json:"border_radius,omitempty"`
+	GaussianBlur                *CMsgGaussianBlur                 `protobuf:"bytes,20,opt,name=gaussian_blur" json:"gaussian_blur,omitempty"`
+	Border                      *CMsgBorder                       `protobuf:"bytes,21,opt,name=border" json:"border,omitempty"`
+	BoxShadow                   *CMsgBoxShadow                    `protobuf:"bytes,22,opt,name=box_shadow" json:"box_shadow,omitempty"`
+	Scale_2DCentered            *CMsgPointWithTransition          `protobuf:"bytes,23,opt,name=scale_2d_centered" json:"scale_2d_centered,omitempty"`
+	Rotate_2DCentered           *CMsgRotate2D                     `protobuf:"bytes,24,opt,name=rotate_2d_centered" json:"rotate_2d_centered,omitempty"`
+	TextShadow                  *CMsgTextShadow                   `protobuf:"bytes,25,opt,name=text_shadow" json:"text_shadow,omitempty"`
+	Clip                        *CMsgClip                         `protobuf:"bytes,26,opt,name=clip" json:"clip,omitempty"`
+	SuppressClipToBounds        *bool                             `protobuf:"varint,27,opt,name=suppress_clip_to_bounds" json:"suppress_clip_to_bounds,omitempty"`
+	NeedsFullRepaint            *int32                            `protobuf:"varint,28,opt,name=needs_full_repaint" json:"needs_full_repaint,omitempty"`
+	NeedsIntermediateTexture    *bool                             `protobuf:"varint,29,opt,name=needs_intermediate_texture" json:"needs_intermediate_texture,omitempty"`
+	ClipAfterTransform          *bool                             `protobuf:"varint,30,opt,name=clip_after_transform" json:"clip_after_transform,omitempty"`
+	WantsHitTest                *bool                             `protobuf:"varint,31,opt,name=wants_hit_test" json:"wants_hit_test,omitempty"`
+	WantsHitTestChildren        *bool                             `protobuf:"varint,32,opt,name=wants_hit_test_children" json:"wants_hit_test_children,omitempty"`
+	MixBlendMode                *uint32                           `protobuf:"varint,33,opt,name=mix_blend_mode" json:"mix_blend_mode,omitempty"`
+	OpaqueBackground            *bool                             `protobuf:"varint,34,opt,name=opaque_background" json:"opaque_background,omitempty"`
+	ChildPanelCount             *uint32                           `protobuf:"varint,35,opt,name=child_panel_count" json:"child_panel_count,omitempty"`
+	WantsScreenspaceQuadOutput  *bool                             `protobuf:"varint,36,opt,name=wants_screenspace_quad_output" json:"wants_screenspace_quad_output,omitempty"`
+	MotionBlur                  *CMsgMotionBlur                   `protobuf:"bytes,37,opt,name=motion_blur" json:"motion_blur,omitempty"`
+	CompositionLayerTextureName *string                           `protobuf:"bytes,38,opt,name=composition_layer_texture_name" json:"composition_layer_texture_name,omitempty"`
+	XXX_unrecognized            []byte                            `json:"-"`
 }
 
-func (m *CMsgPushAAndTContext) Reset()         { *m = CMsgPushAAndTContext{} }
-func (m *CMsgPushAAndTContext) String() string { return proto.CompactTextString(m) }
-func (*CMsgPushAAndTContext) ProtoMessage()    {}
+func (m *CMsgPushAAndTContext) Reset()                    { *m = CMsgPushAAndTContext{} }
+func (m *CMsgPushAAndTContext) String() string            { return proto.CompactTextString(m) }
+func (*CMsgPushAAndTContext) ProtoMessage()               {}
+func (*CMsgPushAAndTContext) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{57} }
 
 func (m *CMsgPushAAndTContext) GetContextId() uint64 {
 	if m != nil && m.ContextId != nil {
@@ -4042,14 +4357,22 @@ func (m *CMsgPushAAndTContext) GetMotionBlur() *CMsgMotionBlur {
 	return nil
 }
 
+func (m *CMsgPushAAndTContext) GetCompositionLayerTextureName() string {
+	if m != nil && m.CompositionLayerTextureName != nil {
+		return *m.CompositionLayerTextureName
+	}
+	return ""
+}
+
 type CMsgPopAAndTContext struct {
 	ContextId        *uint64 `protobuf:"varint,1,opt,name=context_id" json:"context_id,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CMsgPopAAndTContext) Reset()         { *m = CMsgPopAAndTContext{} }
-func (m *CMsgPopAAndTContext) String() string { return proto.CompactTextString(m) }
-func (*CMsgPopAAndTContext) ProtoMessage()    {}
+func (m *CMsgPopAAndTContext) Reset()                    { *m = CMsgPopAAndTContext{} }
+func (m *CMsgPopAAndTContext) String() string            { return proto.CompactTextString(m) }
+func (*CMsgPopAAndTContext) ProtoMessage()               {}
+func (*CMsgPopAAndTContext) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{58} }
 
 func (m *CMsgPopAAndTContext) GetContextId() uint64 {
 	if m != nil && m.ContextId != nil {
@@ -4062,33 +4385,37 @@ type CMsgBeginPaintBackground struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CMsgBeginPaintBackground) Reset()         { *m = CMsgBeginPaintBackground{} }
-func (m *CMsgBeginPaintBackground) String() string { return proto.CompactTextString(m) }
-func (*CMsgBeginPaintBackground) ProtoMessage()    {}
+func (m *CMsgBeginPaintBackground) Reset()                    { *m = CMsgBeginPaintBackground{} }
+func (m *CMsgBeginPaintBackground) String() string            { return proto.CompactTextString(m) }
+func (*CMsgBeginPaintBackground) ProtoMessage()               {}
+func (*CMsgBeginPaintBackground) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{59} }
 
 type CMsgEndPaintBackground struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CMsgEndPaintBackground) Reset()         { *m = CMsgEndPaintBackground{} }
-func (m *CMsgEndPaintBackground) String() string { return proto.CompactTextString(m) }
-func (*CMsgEndPaintBackground) ProtoMessage()    {}
+func (m *CMsgEndPaintBackground) Reset()                    { *m = CMsgEndPaintBackground{} }
+func (m *CMsgEndPaintBackground) String() string            { return proto.CompactTextString(m) }
+func (*CMsgEndPaintBackground) ProtoMessage()               {}
+func (*CMsgEndPaintBackground) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{60} }
 
 type CMsgBeginPaintLast struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CMsgBeginPaintLast) Reset()         { *m = CMsgBeginPaintLast{} }
-func (m *CMsgBeginPaintLast) String() string { return proto.CompactTextString(m) }
-func (*CMsgBeginPaintLast) ProtoMessage()    {}
+func (m *CMsgBeginPaintLast) Reset()                    { *m = CMsgBeginPaintLast{} }
+func (m *CMsgBeginPaintLast) String() string            { return proto.CompactTextString(m) }
+func (*CMsgBeginPaintLast) ProtoMessage()               {}
+func (*CMsgBeginPaintLast) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{61} }
 
 type CMsgEndPaintLast struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *CMsgEndPaintLast) Reset()         { *m = CMsgEndPaintLast{} }
-func (m *CMsgEndPaintLast) String() string { return proto.CompactTextString(m) }
-func (*CMsgEndPaintLast) ProtoMessage()    {}
+func (m *CMsgEndPaintLast) Reset()                    { *m = CMsgEndPaintLast{} }
+func (m *CMsgEndPaintLast) String() string            { return proto.CompactTextString(m) }
+func (*CMsgEndPaintLast) ProtoMessage()               {}
+func (*CMsgEndPaintLast) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{62} }
 
 type CMsgDrawFilledRect struct {
 	TopLeft             *CMsgPoint               `protobuf:"bytes,1,opt,name=top_left" json:"top_left,omitempty"`
@@ -4098,9 +4425,10 @@ type CMsgDrawFilledRect struct {
 	XXX_unrecognized    []byte                   `json:"-"`
 }
 
-func (m *CMsgDrawFilledRect) Reset()         { *m = CMsgDrawFilledRect{} }
-func (m *CMsgDrawFilledRect) String() string { return proto.CompactTextString(m) }
-func (*CMsgDrawFilledRect) ProtoMessage()    {}
+func (m *CMsgDrawFilledRect) Reset()                    { *m = CMsgDrawFilledRect{} }
+func (m *CMsgDrawFilledRect) String() string            { return proto.CompactTextString(m) }
+func (*CMsgDrawFilledRect) ProtoMessage()               {}
+func (*CMsgDrawFilledRect) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{63} }
 
 func (m *CMsgDrawFilledRect) GetTopLeft() *CMsgPoint {
 	if m != nil {
@@ -4138,9 +4466,10 @@ type CMsgRenderFilledRect struct {
 	XXX_unrecognized    []byte                         `json:"-"`
 }
 
-func (m *CMsgRenderFilledRect) Reset()         { *m = CMsgRenderFilledRect{} }
-func (m *CMsgRenderFilledRect) String() string { return proto.CompactTextString(m) }
-func (*CMsgRenderFilledRect) ProtoMessage()    {}
+func (m *CMsgRenderFilledRect) Reset()                    { *m = CMsgRenderFilledRect{} }
+func (m *CMsgRenderFilledRect) String() string            { return proto.CompactTextString(m) }
+func (*CMsgRenderFilledRect) ProtoMessage()               {}
+func (*CMsgRenderFilledRect) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{64} }
 
 func (m *CMsgRenderFilledRect) GetTopLeft() *CMsgPoint {
 	if m != nil {
@@ -4182,9 +4511,10 @@ type CMsgDrawTexturedRect struct {
 	XXX_unrecognized   []byte       `json:"-"`
 }
 
-func (m *CMsgDrawTexturedRect) Reset()         { *m = CMsgDrawTexturedRect{} }
-func (m *CMsgDrawTexturedRect) String() string { return proto.CompactTextString(m) }
-func (*CMsgDrawTexturedRect) ProtoMessage()    {}
+func (m *CMsgDrawTexturedRect) Reset()                    { *m = CMsgDrawTexturedRect{} }
+func (m *CMsgDrawTexturedRect) String() string            { return proto.CompactTextString(m) }
+func (*CMsgDrawTexturedRect) ProtoMessage()               {}
+func (*CMsgDrawTexturedRect) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{65} }
 
 const Default_CMsgDrawTexturedRect_TextureSerial int32 = 0
 const Default_CMsgDrawTexturedRect_TextureSampleMode uint32 = 0
@@ -4245,102 +4575,6 @@ func (m *CMsgDrawTexturedRect) GetTextureOpacity() *CMsgOpacity {
 	return nil
 }
 
-type CMsgDrawDoubleBufferedRect struct {
-	TopLeft            *CMsgPoint `protobuf:"bytes,1,opt,name=top_left" json:"top_left,omitempty"`
-	BottomRight        *CMsgPoint `protobuf:"bytes,2,opt,name=bottom_right" json:"bottom_right,omitempty"`
-	TextureId          *uint32    `protobuf:"varint,3,opt,name=texture_id" json:"texture_id,omitempty"`
-	TextureTopLeft     *CMsgPoint `protobuf:"bytes,4,opt,name=texture_top_left" json:"texture_top_left,omitempty"`
-	TextureBottomRight *CMsgPoint `protobuf:"bytes,5,opt,name=texture_bottom_right" json:"texture_bottom_right,omitempty"`
-	XXX_unrecognized   []byte     `json:"-"`
-}
-
-func (m *CMsgDrawDoubleBufferedRect) Reset()         { *m = CMsgDrawDoubleBufferedRect{} }
-func (m *CMsgDrawDoubleBufferedRect) String() string { return proto.CompactTextString(m) }
-func (*CMsgDrawDoubleBufferedRect) ProtoMessage()    {}
-
-func (m *CMsgDrawDoubleBufferedRect) GetTopLeft() *CMsgPoint {
-	if m != nil {
-		return m.TopLeft
-	}
-	return nil
-}
-
-func (m *CMsgDrawDoubleBufferedRect) GetBottomRight() *CMsgPoint {
-	if m != nil {
-		return m.BottomRight
-	}
-	return nil
-}
-
-func (m *CMsgDrawDoubleBufferedRect) GetTextureId() uint32 {
-	if m != nil && m.TextureId != nil {
-		return *m.TextureId
-	}
-	return 0
-}
-
-func (m *CMsgDrawDoubleBufferedRect) GetTextureTopLeft() *CMsgPoint {
-	if m != nil {
-		return m.TextureTopLeft
-	}
-	return nil
-}
-
-func (m *CMsgDrawDoubleBufferedRect) GetTextureBottomRight() *CMsgPoint {
-	if m != nil {
-		return m.TextureBottomRight
-	}
-	return nil
-}
-
-type CMsgDrawYUV420DoubleBufferedRect struct {
-	TopLeft            *CMsgPoint `protobuf:"bytes,1,opt,name=top_left" json:"top_left,omitempty"`
-	BottomRight        *CMsgPoint `protobuf:"bytes,2,opt,name=bottom_right" json:"bottom_right,omitempty"`
-	TextureId          *uint32    `protobuf:"varint,3,opt,name=texture_id" json:"texture_id,omitempty"`
-	TextureTopLeft     *CMsgPoint `protobuf:"bytes,4,opt,name=texture_top_left" json:"texture_top_left,omitempty"`
-	TextureBottomRight *CMsgPoint `protobuf:"bytes,5,opt,name=texture_bottom_right" json:"texture_bottom_right,omitempty"`
-	XXX_unrecognized   []byte     `json:"-"`
-}
-
-func (m *CMsgDrawYUV420DoubleBufferedRect) Reset()         { *m = CMsgDrawYUV420DoubleBufferedRect{} }
-func (m *CMsgDrawYUV420DoubleBufferedRect) String() string { return proto.CompactTextString(m) }
-func (*CMsgDrawYUV420DoubleBufferedRect) ProtoMessage()    {}
-
-func (m *CMsgDrawYUV420DoubleBufferedRect) GetTopLeft() *CMsgPoint {
-	if m != nil {
-		return m.TopLeft
-	}
-	return nil
-}
-
-func (m *CMsgDrawYUV420DoubleBufferedRect) GetBottomRight() *CMsgPoint {
-	if m != nil {
-		return m.BottomRight
-	}
-	return nil
-}
-
-func (m *CMsgDrawYUV420DoubleBufferedRect) GetTextureId() uint32 {
-	if m != nil && m.TextureId != nil {
-		return *m.TextureId
-	}
-	return 0
-}
-
-func (m *CMsgDrawYUV420DoubleBufferedRect) GetTextureTopLeft() *CMsgPoint {
-	if m != nil {
-		return m.TextureTopLeft
-	}
-	return nil
-}
-
-func (m *CMsgDrawYUV420DoubleBufferedRect) GetTextureBottomRight() *CMsgPoint {
-	if m != nil {
-		return m.TextureBottomRight
-	}
-	return nil
-}
-
 type CMsgRenderTexturedRect struct {
 	TopLeft            *CMsgPoint `protobuf:"bytes,1,opt,name=top_left" json:"top_left,omitempty"`
 	BottomRight        *CMsgPoint `protobuf:"bytes,2,opt,name=bottom_right" json:"bottom_right,omitempty"`
@@ -4353,9 +4587,10 @@ type CMsgRenderTexturedRect struct {
 	XXX_unrecognized   []byte     `json:"-"`
 }
 
-func (m *CMsgRenderTexturedRect) Reset()         { *m = CMsgRenderTexturedRect{} }
-func (m *CMsgRenderTexturedRect) String() string { return proto.CompactTextString(m) }
-func (*CMsgRenderTexturedRect) ProtoMessage()    {}
+func (m *CMsgRenderTexturedRect) Reset()                    { *m = CMsgRenderTexturedRect{} }
+func (m *CMsgRenderTexturedRect) String() string            { return proto.CompactTextString(m) }
+func (*CMsgRenderTexturedRect) ProtoMessage()               {}
+func (*CMsgRenderTexturedRect) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{66} }
 
 const Default_CMsgRenderTexturedRect_TextureSerial int32 = 0
 const Default_CMsgRenderTexturedRect_TextureSampleMode uint32 = 0
@@ -4423,9 +4658,10 @@ type CMsgLockTexture struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *CMsgLockTexture) Reset()         { *m = CMsgLockTexture{} }
-func (m *CMsgLockTexture) String() string { return proto.CompactTextString(m) }
-func (*CMsgLockTexture) ProtoMessage()    {}
+func (m *CMsgLockTexture) Reset()                    { *m = CMsgLockTexture{} }
+func (m *CMsgLockTexture) String() string            { return proto.CompactTextString(m) }
+func (*CMsgLockTexture) ProtoMessage()               {}
+func (*CMsgLockTexture) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{67} }
 
 const Default_CMsgLockTexture_TextureSerial int32 = 0
 
@@ -4449,9 +4685,10 @@ type CMsgTextInlineObject struct {
 	XXX_unrecognized []byte   `json:"-"`
 }
 
-func (m *CMsgTextInlineObject) Reset()         { *m = CMsgTextInlineObject{} }
-func (m *CMsgTextInlineObject) String() string { return proto.CompactTextString(m) }
-func (*CMsgTextInlineObject) ProtoMessage()    {}
+func (m *CMsgTextInlineObject) Reset()                    { *m = CMsgTextInlineObject{} }
+func (m *CMsgTextInlineObject) String() string            { return proto.CompactTextString(m) }
+func (*CMsgTextInlineObject) ProtoMessage()               {}
+func (*CMsgTextInlineObject) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{68} }
 
 func (m *CMsgTextInlineObject) GetWidth() float32 {
 	if m != nil && m.Width != nil {
@@ -4480,9 +4717,10 @@ type CMsgTextFormat struct {
 	XXX_unrecognized    []byte                   `json:"-"`
 }
 
-func (m *CMsgTextFormat) Reset()         { *m = CMsgTextFormat{} }
-func (m *CMsgTextFormat) String() string { return proto.CompactTextString(m) }
-func (*CMsgTextFormat) ProtoMessage()    {}
+func (m *CMsgTextFormat) Reset()                    { *m = CMsgTextFormat{} }
+func (m *CMsgTextFormat) String() string            { return proto.CompactTextString(m) }
+func (*CMsgTextFormat) ProtoMessage()               {}
+func (*CMsgTextFormat) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{69} }
 
 const Default_CMsgTextFormat_FontWeight int32 = -1
 const Default_CMsgTextFormat_FontStyle int32 = -1
@@ -4558,9 +4796,10 @@ type CMsgTextRangeFormat struct {
 	XXX_unrecognized []byte          `json:"-"`
 }
 
-func (m *CMsgTextRangeFormat) Reset()         { *m = CMsgTextRangeFormat{} }
-func (m *CMsgTextRangeFormat) String() string { return proto.CompactTextString(m) }
-func (*CMsgTextRangeFormat) ProtoMessage()    {}
+func (m *CMsgTextRangeFormat) Reset()                    { *m = CMsgTextRangeFormat{} }
+func (m *CMsgTextRangeFormat) String() string            { return proto.CompactTextString(m) }
+func (*CMsgTextRangeFormat) ProtoMessage()               {}
+func (*CMsgTextRangeFormat) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{70} }
 
 func (m *CMsgTextRangeFormat) GetStartIndex() uint32 {
 	if m != nil && m.StartIndex != nil {
@@ -4596,9 +4835,10 @@ type CMsgRenderTextFormat struct {
 	XXX_unrecognized    []byte                         `json:"-"`
 }
 
-func (m *CMsgRenderTextFormat) Reset()         { *m = CMsgRenderTextFormat{} }
-func (m *CMsgRenderTextFormat) String() string { return proto.CompactTextString(m) }
-func (*CMsgRenderTextFormat) ProtoMessage()    {}
+func (m *CMsgRenderTextFormat) Reset()                    { *m = CMsgRenderTextFormat{} }
+func (m *CMsgRenderTextFormat) String() string            { return proto.CompactTextString(m) }
+func (*CMsgRenderTextFormat) ProtoMessage()               {}
+func (*CMsgRenderTextFormat) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{71} }
 
 const Default_CMsgRenderTextFormat_FontWeight int32 = -1
 const Default_CMsgRenderTextFormat_FontStyle int32 = -1
@@ -4674,9 +4914,10 @@ type CMsgRenderTextRangeFormat struct {
 	XXX_unrecognized []byte                `json:"-"`
 }
 
-func (m *CMsgRenderTextRangeFormat) Reset()         { *m = CMsgRenderTextRangeFormat{} }
-func (m *CMsgRenderTextRangeFormat) String() string { return proto.CompactTextString(m) }
-func (*CMsgRenderTextRangeFormat) ProtoMessage()    {}
+func (m *CMsgRenderTextRangeFormat) Reset()                    { *m = CMsgRenderTextRangeFormat{} }
+func (m *CMsgRenderTextRangeFormat) String() string            { return proto.CompactTextString(m) }
+func (*CMsgRenderTextRangeFormat) ProtoMessage()               {}
+func (*CMsgRenderTextRangeFormat) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{72} }
 
 func (m *CMsgRenderTextRangeFormat) GetStartIndex() uint32 {
 	if m != nil && m.StartIndex != nil {
@@ -4714,9 +4955,10 @@ type CMsgDrawTextRegion struct {
 	XXX_unrecognized []byte                 `json:"-"`
 }
 
-func (m *CMsgDrawTextRegion) Reset()         { *m = CMsgDrawTextRegion{} }
-func (m *CMsgDrawTextRegion) String() string { return proto.CompactTextString(m) }
-func (*CMsgDrawTextRegion) ProtoMessage()    {}
+func (m *CMsgDrawTextRegion) Reset()                    { *m = CMsgDrawTextRegion{} }
+func (m *CMsgDrawTextRegion) String() string            { return proto.CompactTextString(m) }
+func (*CMsgDrawTextRegion) ProtoMessage()               {}
+func (*CMsgDrawTextRegion) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{73} }
 
 func (m *CMsgDrawTextRegion) GetRawText() []byte {
 	if m != nil {
@@ -4811,9 +5053,10 @@ type CMsgRenderTextRegion struct {
 	XXX_unrecognized []byte                       `json:"-"`
 }
 
-func (m *CMsgRenderTextRegion) Reset()         { *m = CMsgRenderTextRegion{} }
-func (m *CMsgRenderTextRegion) String() string { return proto.CompactTextString(m) }
-func (*CMsgRenderTextRegion) ProtoMessage()    {}
+func (m *CMsgRenderTextRegion) Reset()                    { *m = CMsgRenderTextRegion{} }
+func (m *CMsgRenderTextRegion) String() string            { return proto.CompactTextString(m) }
+func (*CMsgRenderTextRegion) ProtoMessage()               {}
+func (*CMsgRenderTextRegion) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{74} }
 
 func (m *CMsgRenderTextRegion) GetRawText() []byte {
 	if m != nil {
@@ -4909,9 +5152,10 @@ type CMsgRequestRenderCallback struct {
 	XXX_unrecognized      []byte     `json:"-"`
 }
 
-func (m *CMsgRequestRenderCallback) Reset()         { *m = CMsgRequestRenderCallback{} }
-func (m *CMsgRequestRenderCallback) String() string { return proto.CompactTextString(m) }
-func (*CMsgRequestRenderCallback) ProtoMessage()    {}
+func (m *CMsgRequestRenderCallback) Reset()                    { *m = CMsgRequestRenderCallback{} }
+func (m *CMsgRequestRenderCallback) String() string            { return proto.CompactTextString(m) }
+func (*CMsgRequestRenderCallback) ProtoMessage()               {}
+func (*CMsgRequestRenderCallback) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{75} }
 
 func (m *CMsgRequestRenderCallback) GetCallbackObj() []byte {
 	if m != nil {
@@ -4956,6 +5200,106 @@ func (m *CMsgRequestRenderCallback) GetNeedsRedrawEveryFrame() bool {
 }
 
 func init() {
+	proto.RegisterType((*CMsgBeginFrame)(nil), "dota.CMsgBeginFrame")
+	proto.RegisterType((*CMsgEndFrame)(nil), "dota.CMsgEndFrame")
+	proto.RegisterType((*CMsgClearBackbuffer)(nil), "dota.CMsgClearBackbuffer")
+	proto.RegisterType((*CMsgDeleteTexture)(nil), "dota.CMsgDeleteTexture")
+	proto.RegisterType((*CMsgDeletePanel)(nil), "dota.CMsgDeletePanel")
+	proto.RegisterType((*CMsgDeleteParticleSystem)(nil), "dota.CMsgDeleteParticleSystem")
+	proto.RegisterType((*CMsgPoint)(nil), "dota.CMsgPoint")
+	proto.RegisterType((*CMsgMatrix4X4)(nil), "dota.CMsgMatrix4x4")
+	proto.RegisterType((*CRadiusData)(nil), "dota.CRadiusData")
+	proto.RegisterType((*CRadiusData_CCornerRadius)(nil), "dota.CRadiusData.CCornerRadius")
+	proto.RegisterType((*CBorderData)(nil), "dota.CBorderData")
+	proto.RegisterType((*CBorderData_CBorderSide)(nil), "dota.CBorderData.CBorderSide")
+	proto.RegisterType((*CBoxShadowData)(nil), "dota.CBoxShadowData")
+	proto.RegisterType((*CTextShadowData)(nil), "dota.CTextShadowData")
+	proto.RegisterType((*CRadialClipData)(nil), "dota.CRadialClipData")
+	proto.RegisterType((*CMsgClipData)(nil), "dota.CMsgClipData")
+	proto.RegisterType((*CMsgPushCompositingLayer)(nil), "dota.CMsgPushCompositingLayer")
+	proto.RegisterType((*CMsgPopCompositingLayer)(nil), "dota.CMsgPopCompositingLayer")
+	proto.RegisterType((*CMsgFreeCompositingLayer)(nil), "dota.CMsgFreeCompositingLayer")
+	proto.RegisterType((*CMsgTransitionData)(nil), "dota.CMsgTransitionData")
+	proto.RegisterType((*CMsgAnimationData)(nil), "dota.CMsgAnimationData")
+	proto.RegisterType((*CMsgAnimationFrameData)(nil), "dota.CMsgAnimationFrameData")
+	proto.RegisterType((*CMsgPointWithTransition)(nil), "dota.CMsgPointWithTransition")
+	proto.RegisterType((*CMsgPointWithTransition_AnimationFrameData)(nil), "dota.CMsgPointWithTransition.AnimationFrameData")
+	proto.RegisterType((*CMsgColor)(nil), "dota.CMsgColor")
+	proto.RegisterType((*CMsgColor_AnimationFrameData)(nil), "dota.CMsgColor.AnimationFrameData")
+	proto.RegisterType((*CMsgColorStop)(nil), "dota.CMsgColorStop")
+	proto.RegisterType((*CMsgLinearGradient)(nil), "dota.CMsgLinearGradient")
+	proto.RegisterType((*CMsgRadialGradient)(nil), "dota.CMsgRadialGradient")
+	proto.RegisterType((*CMsgParticle)(nil), "dota.CMsgParticle")
+	proto.RegisterType((*CMsgParticleSystem)(nil), "dota.CMsgParticleSystem")
+	proto.RegisterType((*CMsgFillBrush)(nil), "dota.CMsgFillBrush")
+	proto.RegisterType((*CMsgFillBrushCollection)(nil), "dota.CMsgFillBrushCollection")
+	proto.RegisterType((*CMsgFillBrushCollection_AnimationFrameData)(nil), "dota.CMsgFillBrushCollection.AnimationFrameData")
+	proto.RegisterType((*CMsgRenderFillBrushCollection)(nil), "dota.CMsgRenderFillBrushCollection")
+	proto.RegisterType((*CMsgPanelPosition)(nil), "dota.CMsgPanelPosition")
+	proto.RegisterType((*CMsgPanelPosition_AnimationFrameData)(nil), "dota.CMsgPanelPosition.AnimationFrameData")
+	proto.RegisterType((*CMsgOpacity)(nil), "dota.CMsgOpacity")
+	proto.RegisterType((*CMsgOpacity_AnimationFrameData)(nil), "dota.CMsgOpacity.AnimationFrameData")
+	proto.RegisterType((*CMsgRotate2D)(nil), "dota.CMsgRotate2D")
+	proto.RegisterType((*CMsgRotate2D_AnimationFrameData)(nil), "dota.CMsgRotate2D.AnimationFrameData")
+	proto.RegisterType((*CMsgOpacityMaskData)(nil), "dota.CMsgOpacityMaskData")
+	proto.RegisterType((*CMsgOpacityMask)(nil), "dota.CMsgOpacityMask")
+	proto.RegisterType((*CMsgOpacityMask_AnimationFrameData)(nil), "dota.CMsgOpacityMask.AnimationFrameData")
+	proto.RegisterType((*CMsgHueShift)(nil), "dota.CMsgHueShift")
+	proto.RegisterType((*CMsgHueShift_AnimationFrameData)(nil), "dota.CMsgHueShift.AnimationFrameData")
+	proto.RegisterType((*CMsgSaturation)(nil), "dota.CMsgSaturation")
+	proto.RegisterType((*CMsgSaturation_AnimationFrameData)(nil), "dota.CMsgSaturation.AnimationFrameData")
+	proto.RegisterType((*CMsgBrightness)(nil), "dota.CMsgBrightness")
+	proto.RegisterType((*CMsgBrightness_AnimationFrameData)(nil), "dota.CMsgBrightness.AnimationFrameData")
+	proto.RegisterType((*CMsgContrast)(nil), "dota.CMsgContrast")
+	proto.RegisterType((*CMsgContrast_AnimationFrameData)(nil), "dota.CMsgContrast.AnimationFrameData")
+	proto.RegisterType((*CMsgGaussianValues)(nil), "dota.CMsgGaussianValues")
+	proto.RegisterType((*CMsgGaussianBlur)(nil), "dota.CMsgGaussianBlur")
+	proto.RegisterType((*CMsgGaussianBlur_AnimationFrameData)(nil), "dota.CMsgGaussianBlur.AnimationFrameData")
+	proto.RegisterType((*CMsgMotionBlurValues)(nil), "dota.CMsgMotionBlurValues")
+	proto.RegisterType((*CMsgMotionBlur)(nil), "dota.CMsgMotionBlur")
+	proto.RegisterType((*CMsgMotionBlur_AnimationFrameData)(nil), "dota.CMsgMotionBlur.AnimationFrameData")
+	proto.RegisterType((*CMsg3DTransformPerspective)(nil), "dota.CMsg3DTransformPerspective")
+	proto.RegisterType((*CMsg3DTransformPerspective_AnimationFrameData)(nil), "dota.CMsg3DTransformPerspective.AnimationFrameData")
+	proto.RegisterType((*CMsg3DTransformPerspectiveOrigin)(nil), "dota.CMsg3DTransformPerspectiveOrigin")
+	proto.RegisterType((*CMsg3DTransformPerspectiveOrigin_AnimationFrameData)(nil), "dota.CMsg3DTransformPerspectiveOrigin.AnimationFrameData")
+	proto.RegisterType((*CMsgTransformOriginData)(nil), "dota.CMsgTransformOriginData")
+	proto.RegisterType((*CMsg3DTransformOrigin)(nil), "dota.CMsg3DTransformOrigin")
+	proto.RegisterType((*CMsg3DTransformOrigin_AnimationFrameData)(nil), "dota.CMsg3DTransformOrigin.AnimationFrameData")
+	proto.RegisterType((*CMsg3DTransformMatrix)(nil), "dota.CMsg3DTransformMatrix")
+	proto.RegisterType((*CMsg3DTransformMatrix_AnimationFrameData)(nil), "dota.CMsg3DTransformMatrix.AnimationFrameData")
+	proto.RegisterType((*CMsgBorderRadius)(nil), "dota.CMsgBorderRadius")
+	proto.RegisterType((*CMsgBorderRadius_AnimationFrameData)(nil), "dota.CMsgBorderRadius.AnimationFrameData")
+	proto.RegisterType((*CMsgBorder)(nil), "dota.CMsgBorder")
+	proto.RegisterType((*CMsgBorder_AnimationFrameData)(nil), "dota.CMsgBorder.AnimationFrameData")
+	proto.RegisterType((*CMsgBoxShadow)(nil), "dota.CMsgBoxShadow")
+	proto.RegisterType((*CMsgBoxShadow_AnimationFrameData)(nil), "dota.CMsgBoxShadow.AnimationFrameData")
+	proto.RegisterType((*CMsgTextShadow)(nil), "dota.CMsgTextShadow")
+	proto.RegisterType((*CMsgTextShadow_AnimationFrameData)(nil), "dota.CMsgTextShadow.AnimationFrameData")
+	proto.RegisterType((*CMsgClip)(nil), "dota.CMsgClip")
+	proto.RegisterType((*CMsgClip_AnimationFrameData)(nil), "dota.CMsgClip.AnimationFrameData")
+	proto.RegisterType((*CMsgPushClipLayer)(nil), "dota.CMsgPushClipLayer")
+	proto.RegisterType((*CMsgPopClipLayer)(nil), "dota.CMsgPopClipLayer")
+	proto.RegisterType((*CMsgPushPanelContextInLayer)(nil), "dota.CMsgPushPanelContextInLayer")
+	proto.RegisterType((*CMsgPopPanelContextInLayer)(nil), "dota.CMsgPopPanelContextInLayer")
+	proto.RegisterType((*CMsgPushAAndTContext)(nil), "dota.CMsgPushAAndTContext")
+	proto.RegisterType((*CMsgPopAAndTContext)(nil), "dota.CMsgPopAAndTContext")
+	proto.RegisterType((*CMsgBeginPaintBackground)(nil), "dota.CMsgBeginPaintBackground")
+	proto.RegisterType((*CMsgEndPaintBackground)(nil), "dota.CMsgEndPaintBackground")
+	proto.RegisterType((*CMsgBeginPaintLast)(nil), "dota.CMsgBeginPaintLast")
+	proto.RegisterType((*CMsgEndPaintLast)(nil), "dota.CMsgEndPaintLast")
+	proto.RegisterType((*CMsgDrawFilledRect)(nil), "dota.CMsgDrawFilledRect")
+	proto.RegisterType((*CMsgRenderFilledRect)(nil), "dota.CMsgRenderFilledRect")
+	proto.RegisterType((*CMsgDrawTexturedRect)(nil), "dota.CMsgDrawTexturedRect")
+	proto.RegisterType((*CMsgRenderTexturedRect)(nil), "dota.CMsgRenderTexturedRect")
+	proto.RegisterType((*CMsgLockTexture)(nil), "dota.CMsgLockTexture")
+	proto.RegisterType((*CMsgTextInlineObject)(nil), "dota.CMsgTextInlineObject")
+	proto.RegisterType((*CMsgTextFormat)(nil), "dota.CMsgTextFormat")
+	proto.RegisterType((*CMsgTextRangeFormat)(nil), "dota.CMsgTextRangeFormat")
+	proto.RegisterType((*CMsgRenderTextFormat)(nil), "dota.CMsgRenderTextFormat")
+	proto.RegisterType((*CMsgRenderTextRangeFormat)(nil), "dota.CMsgRenderTextRangeFormat")
+	proto.RegisterType((*CMsgDrawTextRegion)(nil), "dota.CMsgDrawTextRegion")
+	proto.RegisterType((*CMsgRenderTextRegion)(nil), "dota.CMsgRenderTextRegion")
+	proto.RegisterType((*CMsgRequestRenderCallback)(nil), "dota.CMsgRequestRenderCallback")
 	proto.RegisterExtension(E_CMsgPointWithTransition_AnimationFrameData)
 	proto.RegisterExtension(E_CMsgColor_AnimationFrameData)
 	proto.RegisterExtension(E_CMsgFillBrushCollection_AnimationFrameData)
@@ -4978,4 +5322,300 @@ func init() {
 	proto.RegisterExtension(E_CMsgBoxShadow_AnimationFrameData)
 	proto.RegisterExtension(E_CMsgTextShadow_AnimationFrameData)
 	proto.RegisterExtension(E_CMsgClip_AnimationFrameData)
+}
+
+var fileDescriptor34 = []byte{
+	// 4670 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xe4, 0x5c, 0x49, 0x6f, 0x1c, 0x49,
+	0x76, 0x76, 0x2d, 0xdc, 0x82, 0x2c, 0x2e, 0xc9, 0x45, 0x29, 0x6a, 0xa3, 0x52, 0x2d, 0x89, 0xda,
+	0xd8, 0x64, 0xb1, 0xd5, 0xd3, 0xad, 0xe9, 0x99, 0x9e, 0x26, 0xd5, 0x3d, 0x6d, 0x40, 0x8d, 0x16,
+	0x5a, 0x82, 0x7d, 0x73, 0x4e, 0xb2, 0x32, 0xaa, 0x2a, 0xad, 0xac, 0xca, 0x9a, 0xcc, 0x2c, 0x91,
+	0xc5, 0xd3, 0x78, 0xbc, 0x0c, 0x7c, 0xb0, 0xcf, 0xbe, 0xf4, 0xc1, 0x27, 0xdb, 0xc0, 0xc0, 0xb0,
+	0x07, 0xf0, 0xc5, 0xbf, 0x60, 0x60, 0x60, 0x0e, 0x3e, 0xfa, 0x64, 0xc0, 0xbe, 0x8c, 0xd7, 0xb1,
+	0xc7, 0x4b, 0xc3, 0xeb, 0xf8, 0xc5, 0x7b, 0x91, 0x6b, 0x45, 0x56, 0x09, 0x05, 0xba, 0xd5, 0x0d,
+	0xf1, 0xc4, 0x8c, 0x78, 0x11, 0xf1, 0xe2, 0x7b, 0x2f, 0xde, 0x7b, 0xb1, 0xbc, 0x62, 0x6b, 0x3e,
+	0xef, 0xda, 0xdc, 0xef, 0xf0, 0x20, 0xb0, 0x5a, 0x3c, 0xd8, 0xe9, 0xf9, 0x5e, 0xe8, 0x69, 0x55,
+	0xdb, 0x0b, 0x2d, 0xe3, 0x87, 0x25, 0xb6, 0x78, 0xf8, 0x51, 0xd0, 0x3a, 0xe0, 0x2d, 0xa7, 0xfb,
+	0x81, 0x6f, 0x75, 0xb8, 0xa6, 0xb3, 0xe5, 0xa6, 0xf8, 0xc7, 0xec, 0x59, 0x4e, 0x37, 0x34, 0x43,
+	0xa7, 0xc3, 0xf5, 0xd2, 0x56, 0x69, 0xbb, 0xa4, 0xad, 0xb3, 0x5a, 0xd0, 0xf7, 0x9b, 0x56, 0x83,
+	0x9b, 0xc7, 0x8e, 0x1d, 0xb6, 0xf5, 0x32, 0x14, 0xd7, 0xb4, 0x0d, 0xb6, 0x18, 0x15, 0xb7, 0xb9,
+	0xd3, 0x6a, 0x87, 0x7a, 0x05, 0xcb, 0x81, 0x9c, 0x46, 0x36, 0x43, 0xcb, 0x6f, 0xf1, 0x50, 0xaf,
+	0x62, 0xf1, 0x39, 0xb6, 0xd4, 0x77, 0xcc, 0xa0, 0x61, 0xb9, 0xdc, 0x84, 0x46, 0xa1, 0xe7, 0xeb,
+	0x53, 0xd8, 0xfd, 0x2a, 0x9b, 0xe7, 0x9d, 0x5e, 0x38, 0x30, 0x71, 0x78, 0x7d, 0x1a, 0x0a, 0x67,
+	0xb5, 0x6d, 0xb6, 0xd5, 0x70, 0xb9, 0xe5, 0x9b, 0xad, 0x5e, 0xdf, 0xf4, 0x79, 0xe0, 0xf5, 0xfd,
+	0x06, 0x0f, 0xcc, 0x23, 0xde, 0xf4, 0x7c, 0x2e, 0x29, 0x67, 0x04, 0xa5, 0xe1, 0xb1, 0x05, 0x31,
+	0x93, 0xf7, 0xbb, 0x36, 0xcd, 0xe3, 0x0a, 0x3b, 0xd7, 0xf1, 0xfa, 0x01, 0x37, 0x1b, 0x7d, 0x3f,
+	0xf0, 0x80, 0x09, 0x7e, 0x12, 0xf6, 0xa1, 0x8d, 0x63, 0xe3, 0x74, 0x6a, 0xda, 0x65, 0xb6, 0x91,
+	0x21, 0x68, 0x7b, 0x61, 0xd0, 0xf3, 0x42, 0xf3, 0x04, 0xe7, 0x55, 0x2e, 0xac, 0x1f, 0xe0, 0xfc,
+	0xca, 0xc6, 0xeb, 0x6c, 0x55, 0x0c, 0x78, 0x28, 0xd8, 0x3b, 0xb0, 0x1a, 0xcf, 0x8e, 0xfa, 0xcd,
+	0x26, 0xf7, 0x05, 0x7e, 0xc4, 0x71, 0xc3, 0x73, 0xa1, 0x95, 0xdf, 0x3a, 0xb2, 0x68, 0x40, 0xe3,
+	0x2e, 0x5b, 0x11, 0x0d, 0x1e, 0x72, 0x97, 0x87, 0xfc, 0x29, 0xb1, 0x23, 0xe0, 0x88, 0x38, 0xeb,
+	0x79, 0x00, 0x38, 0xf7, 0x91, 0xba, 0x6a, 0x5c, 0x67, 0x4b, 0x09, 0xf5, 0x63, 0xab, 0xcb, 0x5d,
+	0x4d, 0x63, 0xac, 0xe1, 0x75, 0x05, 0x79, 0x34, 0x8b, 0xaa, 0xf1, 0x3e, 0xd3, 0xd3, 0x64, 0x7e,
+	0xe8, 0xc0, 0xe8, 0x4f, 0x06, 0x41, 0xc8, 0x3b, 0xda, 0x1a, 0x5b, 0xe8, 0x89, 0x86, 0x66, 0xdb,
+	0xea, 0xda, 0x2e, 0x89, 0xb1, 0x2a, 0x70, 0x3e, 0xf2, 0xfb, 0x41, 0xdb, 0x74, 0x40, 0x38, 0x34,
+	0x59, 0xc1, 0xdb, 0x9c, 0xe8, 0xe6, 0xb1, 0x60, 0x41, 0x9b, 0x63, 0xa5, 0x13, 0x29, 0x73, 0xf8,
+	0x77, 0x80, 0x24, 0xf8, 0xef, 0x29, 0x4e, 0xbd, 0x64, 0xfc, 0x65, 0x89, 0xd5, 0x04, 0xf9, 0x47,
+	0x56, 0xe8, 0x3b, 0x27, 0x6f, 0x9c, 0xbc, 0xa1, 0xcd, 0xb3, 0x4a, 0x67, 0x77, 0x57, 0x36, 0xc2,
+	0x8f, 0x3d, 0xd9, 0x0c, 0x3f, 0xea, 0xd4, 0x90, 0x3e, 0xf6, 0x51, 0x13, 0xe8, 0x63, 0x6f, 0x57,
+	0x4a, 0x1f, 0x3f, 0xf6, 0x50, 0xea, 0xf2, 0xa3, 0x8e, 0x82, 0x95, 0x1f, 0xfb, 0xfa, 0x6c, 0xfc,
+	0x51, 0xdf, 0xd5, 0xe7, 0x92, 0x8f, 0x3d, 0x9d, 0x25, 0x1f, 0x75, 0x7d, 0x3e, 0xf9, 0xd8, 0xd7,
+	0x17, 0xe2, 0x8f, 0xfd, 0x5d, 0xbd, 0x96, 0x7c, 0xec, 0xe9, 0x8b, 0xc9, 0x47, 0x5d, 0x5f, 0x4a,
+	0x3e, 0xf6, 0xf5, 0x65, 0x9c, 0xe1, 0xef, 0x94, 0xd9, 0xfc, 0xe1, 0x27, 0x96, 0xed, 0xf4, 0x83,
+	0x87, 0x56, 0x68, 0x69, 0x7b, 0x6c, 0x36, 0xf4, 0x7a, 0xa6, 0xcb, 0x9b, 0x21, 0x4e, 0x72, 0xbe,
+	0x7e, 0x65, 0x47, 0xac, 0xa0, 0x9d, 0x14, 0xd1, 0xce, 0xe1, 0xa1, 0xe7, 0x77, 0xb9, 0x4f, 0x25,
+	0x5a, 0x9d, 0xcd, 0x89, 0x26, 0x3e, 0x2e, 0x89, 0xf2, 0x8b, 0xb5, 0xb9, 0xcf, 0x16, 0x8e, 0xbc,
+	0x30, 0xf4, 0x3a, 0xb2, 0x59, 0xe5, 0xc5, 0x9a, 0xbd, 0x01, 0x22, 0xa5, 0x66, 0xc8, 0x60, 0xf5,
+	0x85, 0x5a, 0x6d, 0xde, 0x07, 0x21, 0x66, 0xba, 0x01, 0xfd, 0x6a, 0x7b, 0xbe, 0x73, 0x0a, 0x3a,
+	0x66, 0xb9, 0x52, 0x96, 0xcb, 0x6c, 0xf6, 0x39, 0x17, 0x5a, 0x05, 0x25, 0x28, 0x50, 0xe3, 0x67,
+	0x25, 0x80, 0xe6, 0xc0, 0xf3, 0x61, 0x65, 0x23, 0x34, 0xb7, 0x59, 0x05, 0xe6, 0x29, 0x51, 0xb9,
+	0x24, 0x07, 0x4d, 0xea, 0xa3, 0xff, 0x9f, 0x38, 0x36, 0xd7, 0xee, 0xb2, 0xa9, 0x34, 0x1e, 0x63,
+	0xa8, 0xef, 0xb1, 0x69, 0x9a, 0x96, 0xc4, 0x61, 0x0c, 0xf9, 0x1d, 0x56, 0x4d, 0x4d, 0x7f, 0x34,
+	0xf1, 0xe6, 0x83, 0x78, 0x12, 0xd8, 0xb6, 0xc6, 0xa6, 0x82, 0x70, 0x20, 0xd7, 0x48, 0x4d, 0x7c,
+	0x26, 0x26, 0xae, 0x24, 0x3e, 0x71, 0x35, 0x93, 0x65, 0x33, 0xfe, 0x58, 0x58, 0xcd, 0x03, 0xef,
+	0xe4, 0x49, 0xdb, 0xb2, 0xbd, 0x63, 0x04, 0x01, 0x28, 0x9c, 0x6e, 0xc0, 0x49, 0x39, 0x66, 0xb5,
+	0xf3, 0x6c, 0x25, 0x41, 0xd2, 0xf4, 0x9a, 0x4d, 0x51, 0x45, 0x7d, 0xc1, 0x82, 0x8f, 0x00, 0x8d,
+	0x2a, 0x2a, 0x91, 0xfd, 0x3b, 0x72, 0xfb, 0x60, 0x31, 0x50, 0x18, 0x72, 0x8d, 0x00, 0x75, 0xd0,
+	0xf3, 0xb9, 0x65, 0x9b, 0xb6, 0x13, 0x84, 0x56, 0xb7, 0xc1, 0xe5, 0x7a, 0x89, 0x59, 0x9a, 0x46,
+	0x86, 0x17, 0x58, 0xb5, 0xe9, 0xb8, 0x2e, 0xd9, 0x42, 0x6d, 0x85, 0xcd, 0x59, 0x5d, 0xa7, 0x63,
+	0x85, 0x4e, 0xb7, 0x85, 0x0b, 0x67, 0xd6, 0xf8, 0xed, 0x12, 0xd8, 0x13, 0x61, 0x74, 0x52, 0x4c,
+	0x9f, 0x19, 0x97, 0x39, 0x66, 0x86, 0x87, 0x17, 0x6a, 0x14, 0x84, 0xe0, 0x0e, 0x5a, 0x80, 0x29,
+	0x2e, 0x5e, 0xe3, 0x5b, 0xc0, 0x8f, 0xd0, 0x3b, 0xcb, 0x3d, 0x74, 0x9d, 0x1e, 0xf2, 0x03, 0x44,
+	0x0d, 0x2e, 0x4c, 0xa0, 0x79, 0x92, 0x68, 0x9f, 0x2c, 0x89, 0xac, 0x10, 0x8c, 0x0f, 0x38, 0xf8,
+	0xa1, 0x69, 0x75, 0x5b, 0x20, 0x2e, 0x62, 0x0a, 0x0c, 0x5d, 0xc0, 0x85, 0x2b, 0x91, 0xa5, 0xc8,
+	0x95, 0xf1, 0xbd, 0x12, 0xb9, 0x84, 0xb8, 0x7f, 0xe0, 0xcb, 0x07, 0x32, 0xb3, 0x01, 0x05, 0x52,
+	0x50, 0x0b, 0x52, 0x67, 0x62, 0x5b, 0x25, 0x54, 0xb9, 0x12, 0x4d, 0x8a, 0x74, 0x95, 0xe6, 0xb8,
+	0x18, 0x2b, 0x23, 0x09, 0xe0, 0x36, 0x9b, 0xf7, 0x91, 0x7d, 0xea, 0x6e, 0x1a, 0x95, 0x6e, 0x3d,
+	0xb5, 0xe6, 0x92, 0x89, 0x19, 0xdf, 0x5d, 0x24, 0x2b, 0xfd, 0x18, 0xcc, 0xee, 0xa1, 0xd7, 0xe9,
+	0x79, 0x81, 0x23, 0xb0, 0x79, 0x64, 0x0d, 0xc0, 0x61, 0xc0, 0x1c, 0x5d, 0xf1, 0x4f, 0x6c, 0xd3,
+	0xf3, 0xda, 0x07, 0x23, 0xa7, 0x1c, 0x6b, 0x49, 0xbb, 0xc4, 0xd6, 0xa9, 0xc1, 0xb7, 0xfb, 0xa0,
+	0x17, 0x91, 0x59, 0x02, 0xcc, 0xaa, 0xa3, 0xaa, 0x07, 0x92, 0xef, 0x82, 0xea, 0x53, 0x69, 0x7a,
+	0xc1, 0xeb, 0xe5, 0xaa, 0x11, 0x04, 0xe8, 0x7d, 0x66, 0x64, 0xfd, 0x40, 0x1a, 0xe8, 0xa2, 0xfa,
+	0x53, 0x69, 0xb3, 0xb7, 0x98, 0x9e, 0xaa, 0x4f, 0x59, 0x2d, 0x18, 0x81, 0x8d, 0xa1, 0x18, 0x48,
+	0xeb, 0x5e, 0x4c, 0x71, 0x2a, 0x4d, 0xfe, 0x55, 0x76, 0x7e, 0x98, 0x22, 0x9a, 0x48, 0x6d, 0x1c,
+	0xc9, 0x40, 0xba, 0x87, 0x11, 0x24, 0xa7, 0xd2, 0x69, 0x40, 0x90, 0x13, 0xfa, 0x56, 0x37, 0x80,
+	0x70, 0xa4, 0x63, 0x0a, 0x0f, 0xb8, 0xac, 0x2a, 0xde, 0xd3, 0x57, 0x54, 0xc5, 0x75, 0x5d, 0x53,
+	0x15, 0xef, 0xeb, 0xab, 0x8a, 0x62, 0xf0, 0x94, 0x6b, 0xaa, 0xe2, 0x3d, 0x7d, 0x5d, 0x55, 0x5c,
+	0xd7, 0x37, 0x54, 0xc5, 0xfb, 0xfa, 0x39, 0x45, 0x31, 0x78, 0x54, 0x5d, 0x55, 0xbc, 0xa7, 0x9f,
+	0x57, 0x15, 0xd7, 0xf5, 0x4d, 0x55, 0xf1, 0xbe, 0x7e, 0x41, 0x51, 0x0c, 0x9e, 0xf7, 0xa2, 0xaa,
+	0x78, 0x4f, 0xbf, 0xa4, 0x2a, 0xae, 0xeb, 0x97, 0x55, 0xc5, 0xfb, 0xfa, 0x15, 0x2c, 0x06, 0x93,
+	0xd5, 0xe3, 0x7e, 0xd0, 0x83, 0x65, 0xec, 0x3c, 0xe7, 0xa6, 0xcd, 0x7b, 0xb0, 0x4c, 0xb6, 0xb0,
+	0x6a, 0x89, 0xcd, 0x78, 0x3d, 0xab, 0xe1, 0x84, 0x03, 0xfd, 0x6a, 0x44, 0xdb, 0x88, 0x16, 0x9b,
+	0xd7, 0xa5, 0x78, 0x4c, 0x37, 0xd0, 0x42, 0x81, 0xa7, 0x0b, 0x2c, 0x08, 0xba, 0x2c, 0x51, 0xa3,
+	0x5f, 0x43, 0x72, 0xb0, 0x0e, 0xed, 0x3e, 0x37, 0x83, 0xb6, 0x03, 0xf6, 0xe0, 0x35, 0x2c, 0x02,
+	0xb2, 0x23, 0x94, 0x77, 0x17, 0x82, 0x67, 0xfd, 0x7a, 0x6c, 0x92, 0xc0, 0x60, 0xfa, 0x56, 0x10,
+	0xea, 0x37, 0xb0, 0x04, 0x22, 0x4d, 0x39, 0xb0, 0xd9, 0xb1, 0x82, 0x67, 0xe9, 0x48, 0xf3, 0x26,
+	0x8e, 0x76, 0x91, 0xad, 0x65, 0x08, 0x22, 0x36, 0xb7, 0xa5, 0x96, 0x81, 0x61, 0x11, 0x8e, 0x48,
+	0xbf, 0x85, 0x36, 0x64, 0x65, 0xc8, 0x71, 0x41, 0x14, 0x5c, 0x23, 0x92, 0xc8, 0xec, 0xde, 0xce,
+	0x50, 0xa6, 0xe2, 0x94, 0x6d, 0xe0, 0xd8, 0x3b, 0x81, 0x49, 0x08, 0x23, 0xaf, 0xdf, 0x41, 0xb2,
+	0xb5, 0xb8, 0xc3, 0xb4, 0xc7, 0xba, 0xc0, 0x56, 0x5b, 0x56, 0x3f, 0x08, 0x1c, 0xab, 0x8b, 0x06,
+	0xbd, 0x67, 0x05, 0x01, 0x0f, 0xf4, 0xbb, 0xd1, 0x2a, 0xce, 0x54, 0x06, 0xa1, 0x6d, 0xf3, 0xe7,
+	0xe0, 0x2c, 0xf4, 0x7b, 0x23, 0xea, 0xc1, 0x63, 0xe8, 0x3b, 0x58, 0xbf, 0xc9, 0x34, 0x8a, 0xf0,
+	0xeb, 0xb6, 0x0c, 0xf2, 0x03, 0x58, 0x78, 0xaf, 0x17, 0xd6, 0x0d, 0xf4, 0xdd, 0x48, 0x06, 0xb0,
+	0x3b, 0xb1, 0x42, 0x51, 0xa9, 0xef, 0x45, 0x06, 0xbf, 0xcb, 0xb9, 0x1d, 0x98, 0x18, 0x55, 0xeb,
+	0x75, 0x34, 0xdb, 0x71, 0x21, 0x29, 0xc0, 0x3e, 0x16, 0x1a, 0x6c, 0x93, 0x0a, 0x31, 0x8c, 0xee,
+	0x70, 0x30, 0xc1, 0xd0, 0x91, 0x94, 0x86, 0xfe, 0x06, 0xd2, 0x80, 0xe9, 0x20, 0x1a, 0x9f, 0xdb,
+	0xbe, 0x75, 0x6c, 0x72, 0xe0, 0x39, 0xda, 0x71, 0xdc, 0x47, 0x0a, 0xb0, 0xeb, 0x18, 0x61, 0x4b,
+	0x08, 0xdf, 0xcc, 0xd8, 0xf5, 0x9c, 0x03, 0x85, 0xad, 0x4f, 0xc7, 0x39, 0x31, 0x8f, 0x5c, 0xd8,
+	0xe7, 0x98, 0x1d, 0xcf, 0xe6, 0xfa, 0x57, 0x50, 0xe0, 0x30, 0x45, 0xaf, 0xd1, 0x70, 0xfb, 0x36,
+	0xb7, 0xc9, 0x2e, 0x71, 0xbb, 0xc5, 0xf5, 0xb7, 0x22, 0xad, 0x8c, 0xeb, 0x84, 0x79, 0xc4, 0xaa,
+	0xb7, 0xb1, 0x0a, 0x44, 0x12, 0x57, 0x91, 0x99, 0xc1, 0xca, 0x07, 0x58, 0x29, 0x94, 0x28, 0xaa,
+	0x94, 0xa6, 0x08, 0x6b, 0xbf, 0xaa, 0xf2, 0x46, 0xef, 0x8c, 0xf0, 0x46, 0x62, 0x98, 0x8e, 0x27,
+	0x14, 0x1f, 0x45, 0xf7, 0x9c, 0xbb, 0x1e, 0x6a, 0xe3, 0xd7, 0x22, 0xc7, 0x9f, 0xaa, 0xb4, 0x1d,
+	0xff, 0x44, 0xff, 0xba, 0xba, 0x62, 0xa0, 0xbf, 0x8b, 0x15, 0x37, 0xd8, 0xe5, 0xf4, 0x32, 0x23,
+	0x8b, 0x19, 0xad, 0x81, 0xae, 0x00, 0xf6, 0x1b, 0x40, 0x37, 0x67, 0x9c, 0x67, 0xe7, 0x68, 0x8b,
+	0xd1, 0xcb, 0xbb, 0x40, 0xd8, 0x7d, 0xa0, 0x7b, 0xfc, 0xc0, 0xe7, 0x7c, 0xbc, 0x7b, 0x34, 0xfe,
+	0xbc, 0xc4, 0x34, 0x41, 0xfe, 0x54, 0xd8, 0x07, 0x1c, 0x14, 0xa7, 0x25, 0xd6, 0x34, 0x46, 0x06,
+	0xd9, 0x2d, 0xab, 0xcd, 0xa1, 0xb9, 0x09, 0xe1, 0x81, 0xd7, 0xb5, 0x03, 0xe9, 0x51, 0x61, 0x8f,
+	0x66, 0xcb, 0xc5, 0x1f, 0xd7, 0x90, 0x6f, 0xdd, 0x00, 0xe9, 0x3b, 0x1d, 0x18, 0xdc, 0x6c, 0xf6,
+	0xbb, 0x0d, 0xda, 0xb2, 0x3e, 0x28, 0xed, 0x0a, 0x49, 0x37, 0xfa, 0x47, 0x4e, 0x03, 0x76, 0x9e,
+	0xa7, 0x0e, 0x30, 0x43, 0xdb, 0x96, 0xf2, 0x50, 0x39, 0xed, 0x60, 0x86, 0xcb, 0x69, 0x33, 0x33,
+	0x5c, 0x4e, 0xfb, 0x9a, 0xb2, 0xf1, 0xbb, 0x65, 0xda, 0x1c, 0xbe, 0x47, 0x71, 0xd3, 0x59, 0x4e,
+	0x69, 0x55, 0x31, 0xa5, 0xff, 0xef, 0xf9, 0x88, 0x85, 0x0c, 0x2a, 0x22, 0xac, 0x34, 0xd8, 0xd7,
+	0xb9, 0x28, 0x2a, 0x74, 0x60, 0x5d, 0x92, 0xc9, 0x65, 0x48, 0x75, 0x97, 0x4d, 0xe3, 0xd2, 0x0b,
+	0xc0, 0xb1, 0x57, 0x40, 0x61, 0x2f, 0x4a, 0x85, 0x4d, 0x03, 0x81, 0xbb, 0x79, 0x8c, 0xa2, 0xbe,
+	0x5f, 0x62, 0x1b, 0xea, 0x2a, 0x61, 0xfb, 0xc1, 0x2d, 0x88, 0x50, 0x11, 0x51, 0x2a, 0xe7, 0xe5,
+	0x58, 0x2e, 0x96, 0x63, 0xa5, 0x60, 0xde, 0xd5, 0x82, 0x79, 0x4f, 0x15, 0xcc, 0x1b, 0x71, 0xba,
+	0x3d, 0x37, 0xfb, 0xe3, 0x99, 0xe5, 0xef, 0xc0, 0x5f, 0xd9, 0xf8, 0xac, 0x1c, 0x29, 0x3c, 0xd8,
+	0xa3, 0x5f, 0x74, 0xc2, 0x76, 0xa2, 0xaf, 0x10, 0x84, 0x55, 0x8f, 0xac, 0x80, 0xcb, 0x4d, 0xd3,
+	0x52, 0x32, 0x6d, 0xda, 0x80, 0x5f, 0x63, 0x2c, 0x8c, 0x89, 0xe5, 0x5e, 0x69, 0x88, 0x68, 0x8f,
+	0x2d, 0x25, 0x44, 0xa6, 0x0d, 0x30, 0xc8, 0x6d, 0x92, 0x9e, 0x50, 0xe6, 0x96, 0x88, 0x88, 0x93,
+	0xc5, 0x2e, 0xc7, 0x0c, 0x06, 0x9d, 0x23, 0xcf, 0x95, 0xba, 0x70, 0x87, 0x31, 0x2b, 0x82, 0x34,
+	0x80, 0xf9, 0x09, 0x49, 0x9c, 0x53, 0x48, 0x42, 0x74, 0xb1, 0xb9, 0xcf, 0x34, 0x05, 0xfe, 0x30,
+	0x1f, 0x64, 0x40, 0x3d, 0x9f, 0x7a, 0x87, 0xad, 0xc5, 0x23, 0x90, 0xb1, 0x45, 0x7e, 0xb5, 0x91,
+	0xf2, 0xd6, 0xff, 0x75, 0x06, 0x7b, 0xdb, 0xcd, 0xf5, 0x96, 0x85, 0x72, 0x47, 0xa1, 0x28, 0xbf,
+	0x5f, 0xa6, 0xd3, 0x8c, 0x43, 0xe1, 0xf1, 0x45, 0x88, 0x1f, 0x63, 0x8d, 0x9e, 0x3f, 0x07, 0x6d,
+	0xed, 0x25, 0x21, 0x69, 0x28, 0x91, 0x5c, 0x48, 0x21, 0x59, 0xab, 0x9b, 0x13, 0x01, 0xf7, 0x37,
+	0x04, 0x9c, 0x91, 0x10, 0x21, 0x12, 0x2a, 0xa8, 0xee, 0xd3, 0x41, 0x0e, 0xd6, 0x3f, 0x01, 0x77,
+	0x24, 0xcc, 0x6d, 0x64, 0xca, 0xa5, 0xc1, 0xc1, 0x53, 0xa7, 0xf8, 0x28, 0x8b, 0x8e, 0x8b, 0x7e,
+	0x4b, 0x9a, 0xe0, 0x47, 0x4e, 0x17, 0x9c, 0xf2, 0x37, 0x85, 0xeb, 0x81, 0xb5, 0xa7, 0xdd, 0x64,
+	0x8b, 0x64, 0xaf, 0x32, 0x5d, 0x28, 0x74, 0xf7, 0x3a, 0x5b, 0x10, 0x2e, 0x33, 0x26, 0x2b, 0x50,
+	0xf1, 0x9b, 0xd1, 0xd0, 0x01, 0x6d, 0xcb, 0x04, 0x9e, 0xab, 0xb9, 0x59, 0x09, 0xae, 0xc5, 0x8e,
+	0x1c, 0xf9, 0x21, 0x4f, 0x17, 0xf3, 0xb3, 0xcd, 0x96, 0xe4, 0xf6, 0x71, 0x1c, 0x43, 0x40, 0x49,
+	0xdb, 0xdc, 0x64, 0x9f, 0x5d, 0xc0, 0xd3, 0x65, 0xd8, 0x16, 0x42, 0xf7, 0x8e, 0x54, 0x91, 0x31,
+	0x3c, 0x57, 0x8b, 0x79, 0xfe, 0x15, 0xb9, 0x3d, 0x8d, 0x0e, 0xed, 0xc0, 0x87, 0xaf, 0xf4, 0xe4,
+	0xff, 0x63, 0xf9, 0x05, 0x2f, 0x10, 0xd3, 0x06, 0xce, 0x29, 0x97, 0x67, 0x96, 0x10, 0x78, 0x24,
+	0xc5, 0x6d, 0xcb, 0xef, 0x61, 0xe0, 0x4a, 0x26, 0x2e, 0x2b, 0x47, 0x54, 0x58, 0xe3, 0x47, 0x33,
+	0x84, 0x5b, 0xee, 0xe0, 0xf0, 0x06, 0xc4, 0x9b, 0xb0, 0x64, 0xc6, 0x72, 0xf1, 0x3a, 0xdb, 0xc8,
+	0xd0, 0x99, 0xcf, 0x2d, 0xdf, 0x19, 0x05, 0xde, 0x10, 0xdb, 0x95, 0x28, 0x9c, 0xcc, 0x14, 0x27,
+	0xfd, 0x54, 0xa3, 0xd8, 0x27, 0xaa, 0x0f, 0x4c, 0x30, 0xf4, 0xd2, 0xc3, 0xc9, 0x1d, 0xed, 0x75,
+	0x76, 0x49, 0x55, 0x9b, 0x74, 0x32, 0x1d, 0xed, 0xe6, 0xe2, 0x41, 0x5c, 0xa7, 0xc9, 0x83, 0x9e,
+	0x95, 0xb8, 0xca, 0x19, 0x19, 0x45, 0x19, 0x85, 0x24, 0x49, 0x77, 0xb4, 0xd1, 0xad, 0xa7, 0xba,
+	0x73, 0xba, 0x30, 0x7d, 0x88, 0xbd, 0xe2, 0x58, 0x6a, 0x4e, 0x3d, 0xfd, 0xaf, 0xa6, 0xfa, 0xcf,
+	0xb7, 0x49, 0xfa, 0x67, 0xea, 0xc6, 0xf7, 0xd8, 0x5a, 0xcb, 0xb7, 0x9e, 0x0b, 0x52, 0xab, 0xd1,
+	0xe0, 0x6e, 0xe4, 0x4a, 0xe7, 0xd5, 0xe4, 0xef, 0xb2, 0x1b, 0x2a, 0x72, 0x33, 0x66, 0x20, 0x1e,
+	0x6f, 0x41, 0xdd, 0x81, 0x38, 0xc8, 0x96, 0x8a, 0x2c, 0x96, 0x34, 0x6a, 0x4d, 0x0d, 0xcd, 0x1c,
+	0x20, 0x99, 0xaf, 0x49, 0x7a, 0x5b, 0x8c, 0xe3, 0x0b, 0x24, 0x11, 0xcb, 0x1c, 0x9b, 0x2e, 0x61,
+	0x39, 0xec, 0x95, 0xb2, 0xe5, 0x49, 0xc3, 0x65, 0x24, 0x80, 0xe0, 0x14, 0x38, 0x84, 0x45, 0x6b,
+	0x66, 0x8e, 0xae, 0x57, 0xf0, 0x60, 0x84, 0xd4, 0x5b, 0x54, 0xa6, 0x4f, 0xb0, 0xb5, 0x28, 0xe6,
+	0x56, 0xa8, 0xfe, 0x2a, 0xaa, 0xfe, 0x35, 0x76, 0x61, 0xb8, 0x2e, 0x19, 0x79, 0x0d, 0x89, 0x60,
+	0xbe, 0x31, 0x51, 0xd3, 0x75, 0x1a, 0xcf, 0x60, 0x37, 0xb3, 0x8e, 0x35, 0x69, 0xcd, 0x91, 0x35,
+	0x49, 0xe3, 0x0d, 0x24, 0xd9, 0x61, 0xeb, 0x09, 0xb0, 0x91, 0x44, 0x21, 0xfe, 0xc0, 0xed, 0xb6,
+	0x02, 0x5c, 0x35, 0xbd, 0x75, 0x82, 0xfb, 0x70, 0xa5, 0xc1, 0x9c, 0x8b, 0x75, 0x1c, 0xf6, 0x40,
+	0xc2, 0xa8, 0x68, 0x29, 0x1a, 0x59, 0x65, 0xfc, 0x48, 0x1e, 0xcc, 0x7f, 0xe0, 0xb8, 0xee, 0x81,
+	0x80, 0x28, 0xbd, 0x2b, 0x2e, 0x34, 0xe7, 0xc2, 0x01, 0xba, 0x68, 0xc9, 0xcd, 0x96, 0x34, 0x9d,
+	0xc3, 0x0e, 0x30, 0x67, 0xea, 0xa1, 0x89, 0xdc, 0x70, 0xc4, 0x4d, 0xaa, 0xf9, 0x26, 0x39, 0x6b,
+	0x0c, 0x4d, 0x12, 0x29, 0xa0, 0xa1, 0xc1, 0x05, 0x9c, 0x69, 0x92, 0x35, 0x44, 0xc6, 0xaf, 0x56,
+	0x28, 0x86, 0x8a, 0xe7, 0x03, 0xe6, 0xd3, 0xa5, 0xa8, 0x12, 0xa4, 0x12, 0xf9, 0xf5, 0x9c, 0x89,
+	0x4d, 0x26, 0x7f, 0x33, 0xe7, 0xec, 0x0b, 0x09, 0x5f, 0x4e, 0x04, 0xf0, 0x15, 0x65, 0x04, 0x70,
+	0x35, 0x8e, 0x00, 0x8a, 0xd8, 0x9d, 0x30, 0x9e, 0xfa, 0xc9, 0x50, 0x3c, 0xa5, 0x80, 0x55, 0x15,
+	0x24, 0x7c, 0xc8, 0x2e, 0xa1, 0x38, 0xf1, 0x36, 0x4f, 0x25, 0x0a, 0xc0, 0x59, 0x9c, 0x3e, 0xd3,
+	0xaa, 0x1c, 0xc1, 0xb8, 0xf1, 0x47, 0x55, 0xda, 0xe6, 0xe0, 0x7d, 0xd6, 0x63, 0xef, 0xcb, 0x1e,
+	0x0d, 0x0b, 0x47, 0x19, 0x34, 0x7c, 0x00, 0x22, 0x3a, 0x24, 0x9f, 0x2e, 0xb4, 0xdd, 0x19, 0xba,
+	0xe8, 0x4a, 0x74, 0x46, 0x4d, 0x7e, 0x9f, 0xad, 0x4a, 0xf2, 0xd4, 0x9c, 0x4e, 0xd0, 0xf1, 0x8c,
+	0x9a, 0x90, 0xb2, 0x59, 0xe4, 0x8c, 0x0a, 0x9b, 0x4d, 0x16, 0xd2, 0xb7, 0x26, 0x52, 0xc1, 0x7f,
+	0xa1, 0x09, 0xdf, 0x4e, 0x2f, 0xf8, 0x94, 0x26, 0xa8, 0x94, 0xef, 0xfb, 0xe2, 0x26, 0x0e, 0x08,
+	0x3f, 0x26, 0x2b, 0x96, 0x09, 0xe7, 0x4b, 0x8a, 0x70, 0xbe, 0xf4, 0x85, 0x0d, 0xe7, 0x4b, 0x75,
+	0x6b, 0x22, 0xd0, 0xfe, 0x9e, 0x40, 0x7b, 0x2d, 0x21, 0x92, 0x58, 0xa8, 0xe0, 0xfa, 0xc3, 0x32,
+	0x45, 0x95, 0x9f, 0xe0, 0x31, 0x5a, 0xfd, 0xe1, 0x97, 0x1a, 0xaf, 0xa3, 0x89, 0xf0, 0xfa, 0x77,
+	0xc2, 0xeb, 0x7a, 0xca, 0x11, 0x49, 0x30, 0x54, 0x80, 0x3d, 0xa5, 0x6b, 0x7c, 0x09, 0xe9, 0x47,
+	0x56, 0xf0, 0x0c, 0x19, 0x19, 0x71, 0xa8, 0x5b, 0x1a, 0x79, 0xa8, 0x4b, 0x97, 0xa4, 0xbf, 0x5e,
+	0xa1, 0xeb, 0xfb, 0x54, 0xb7, 0x60, 0x25, 0xd3, 0x66, 0xee, 0xfc, 0x90, 0x38, 0xe3, 0xb1, 0xef,
+	0x29, 0x0c, 0xde, 0x08, 0xf2, 0x97, 0x23, 0xbf, 0xaf, 0x29, 0xe5, 0x77, 0x33, 0x63, 0x35, 0x8a,
+	0x99, 0xae, 0xf3, 0x89, 0x44, 0xfb, 0x6f, 0x24, 0xda, 0x6d, 0x65, 0xbf, 0xa3, 0x96, 0xc3, 0x87,
+	0x7d, 0xfe, 0x44, 0x1c, 0xec, 0xbf, 0x82, 0xcb, 0xe1, 0xbf, 0x86, 0x96, 0x43, 0x04, 0x86, 0x0a,
+	0xb0, 0x1f, 0x94, 0xe9, 0x45, 0xd0, 0x93, 0xf8, 0x7a, 0xe4, 0x4b, 0x0d, 0x99, 0x3d, 0x11, 0x64,
+	0xff, 0x40, 0x90, 0xdd, 0x4c, 0x88, 0x12, 0x38, 0x46, 0x81, 0x76, 0x10, 0x5f, 0x16, 0xbd, 0x82,
+	0xa0, 0xfd, 0xf7, 0x10, 0x68, 0x09, 0x1c, 0xa3, 0x96, 0xe6, 0xa1, 0xbc, 0x4d, 0x7b, 0x05, 0x97,
+	0xe6, 0xff, 0x0c, 0x2d, 0xcd, 0x08, 0x0c, 0x15, 0x60, 0x8f, 0xe8, 0xac, 0xe6, 0x9b, 0xf2, 0xe2,
+	0xed, 0x17, 0x2c, 0xb7, 0xcf, 0x03, 0xf1, 0x3a, 0x40, 0x5e, 0xdd, 0xc5, 0xb8, 0xd1, 0x6d, 0x9c,
+	0x29, 0xae, 0xeb, 0xca, 0xb9, 0x32, 0x71, 0x45, 0x47, 0x6f, 0xb8, 0x7e, 0xad, 0xc2, 0x96, 0xd3,
+	0xdd, 0x1d, 0xb8, 0x7d, 0x1f, 0xe2, 0xd9, 0xb4, 0x8b, 0x4a, 0xa1, 0x9a, 0x1b, 0xf4, 0xae, 0xc2,
+	0x43, 0x15, 0x53, 0xbf, 0x1c, 0xb1, 0xbd, 0xa3, 0x14, 0xdb, 0x8d, 0x8c, 0x83, 0x2a, 0xe4, 0xb9,
+	0xde, 0x9c, 0x48, 0xa0, 0xff, 0x44, 0x02, 0xbd, 0x35, 0xdc, 0xad, 0x80, 0x57, 0x25, 0xd4, 0x87,
+	0x6c, 0x0d, 0x5f, 0xd2, 0xe1, 0xd5, 0x9a, 0x20, 0x92, 0x98, 0xe1, 0xbb, 0x2b, 0x79, 0x9a, 0x44,
+	0x82, 0x15, 0x0a, 0x27, 0xae, 0xe3, 0xca, 0xa9, 0xaf, 0x81, 0x14, 0xe6, 0x6f, 0x54, 0xc8, 0x00,
+	0x25, 0xdd, 0x68, 0xdb, 0x19, 0x51, 0x6e, 0x26, 0x1c, 0x0d, 0x0d, 0xb5, 0xa3, 0x10, 0xe6, 0x28,
+	0xfa, 0x09, 0xc4, 0x99, 0x15, 0x5c, 0x75, 0xf4, 0xa6, 0x2a, 0x2f, 0x7b, 0x71, 0x48, 0x50, 0xdb,
+	0xfc, 0xba, 0x52, 0x9c, 0xdb, 0x19, 0x71, 0x8e, 0xe0, 0x7a, 0x42, 0xa3, 0xf6, 0xbf, 0x43, 0x46,
+	0x2d, 0xe9, 0x58, 0x25, 0xce, 0x3f, 0x2b, 0xb3, 0x4d, 0x41, 0xb5, 0xff, 0xf0, 0x69, 0xf4, 0x7a,
+	0xe1, 0x71, 0xf2, 0x5e, 0xe1, 0x4b, 0x6d, 0xe2, 0x7a, 0x13, 0x01, 0xf8, 0x77, 0x04, 0xe0, 0x7e,
+	0x42, 0xa4, 0x86, 0x46, 0x05, 0xe6, 0x6f, 0x56, 0xd8, 0x56, 0x71, 0x8b, 0x8f, 0xc1, 0xbb, 0x38,
+	0xaf, 0xdc, 0x55, 0xda, 0xf3, 0x89, 0xa4, 0xf0, 0xb7, 0x24, 0x85, 0xb7, 0xc7, 0x49, 0x81, 0x30,
+	0x55, 0xc9, 0xe2, 0x98, 0x0e, 0xe2, 0xe2, 0x46, 0x44, 0x89, 0x1c, 0xab, 0x9f, 0x0b, 0x03, 0x40,
+	0x27, 0xa6, 0x83, 0x07, 0xf2, 0x8d, 0xe8, 0x40, 0x71, 0x56, 0x94, 0x0e, 0xd2, 0xa5, 0x55, 0x2c,
+	0xdd, 0x64, 0x9a, 0x28, 0xa3, 0xa3, 0x5d, 0x9f, 0xbb, 0x96, 0xe0, 0x05, 0xd7, 0xfd, 0xac, 0xf1,
+	0x69, 0x85, 0xad, 0xe7, 0x18, 0x96, 0x92, 0xbf, 0x93, 0x91, 0xfc, 0xa5, 0x9c, 0xa8, 0x72, 0x4c,
+	0xee, 0x29, 0xf4, 0x60, 0x6c, 0x93, 0x97, 0xa1, 0x15, 0xef, 0x29, 0xb5, 0xe2, 0x4e, 0x46, 0x2b,
+	0x46, 0x33, 0x5e, 0x7f, 0x36, 0x91, 0x8e, 0x7c, 0x46, 0x3a, 0xb2, 0xa3, 0xd4, 0x91, 0x62, 0xc5,
+	0xf8, 0x59, 0x79, 0x48, 0x3e, 0xf4, 0x2c, 0x3c, 0x75, 0x40, 0x5b, 0xca, 0x9e, 0x07, 0x26, 0xcf,
+	0xc6, 0x15, 0x10, 0x97, 0xc7, 0x40, 0x9c, 0x3d, 0xd3, 0xad, 0x14, 0xf7, 0xfd, 0x39, 0x1c, 0xd0,
+	0x16, 0x8d, 0x3d, 0xa1, 0x04, 0x7e, 0x3c, 0x4a, 0x02, 0xd4, 0xb9, 0x4a, 0x02, 0x3f, 0x29, 0x53,
+	0x24, 0x47, 0x0f, 0xc6, 0xe4, 0x5b, 0xee, 0x2b, 0x19, 0xf0, 0x15, 0x2f, 0xc5, 0x26, 0x80, 0xfe,
+	0xba, 0x02, 0x7a, 0x45, 0xcf, 0x67, 0x00, 0xfc, 0x7d, 0x25, 0xf0, 0x57, 0x32, 0xc0, 0x0f, 0x8f,
+	0x3c, 0x61, 0xd0, 0xf6, 0x8f, 0x43, 0x41, 0x5b, 0x1a, 0x49, 0x15, 0xe2, 0x7f, 0x5d, 0x66, 0x2c,
+	0xa1, 0x2b, 0xc0, 0x3a, 0xf5, 0x7e, 0xef, 0x8c, 0xb1, 0x4e, 0xf5, 0xfc, 0x39, 0x63, 0x9d, 0x8c,
+	0x5c, 0xff, 0xd6, 0x44, 0x58, 0xff, 0x33, 0x61, 0x7d, 0x2d, 0x8f, 0xb5, 0x0a, 0xe5, 0x9f, 0x96,
+	0xe9, 0x32, 0x2b, 0x7e, 0xb7, 0xa8, 0x19, 0x19, 0xa0, 0xd5, 0xef, 0x1a, 0x27, 0xc0, 0x7a, 0x5b,
+	0x81, 0xb5, 0xba, 0xf3, 0x33, 0x80, 0xfb, 0x2d, 0x25, 0xdc, 0x46, 0x06, 0x6e, 0xe5, 0xe0, 0xf5,
+	0xc6, 0x44, 0x88, 0xff, 0x94, 0x10, 0xbf, 0x91, 0x46, 0x5c, 0xf6, 0xaa, 0x02, 0xfd, 0x33, 0x79,
+	0x94, 0x91, 0xbc, 0x74, 0x84, 0x10, 0x2a, 0x8d, 0x7a, 0xc1, 0x53, 0xc8, 0x09, 0x60, 0xbf, 0xa5,
+	0x80, 0xbd, 0xa0, 0xf7, 0x33, 0xc0, 0xfd, 0x6d, 0x25, 0xee, 0xd7, 0x32, 0xb8, 0xab, 0x47, 0x9f,
+	0x70, 0xeb, 0xf0, 0x1f, 0x43, 0x5b, 0x87, 0xa4, 0x5b, 0x15, 0xf2, 0x7f, 0x55, 0x66, 0xb3, 0x51,
+	0xba, 0x82, 0xb6, 0x95, 0xc1, 0x3c, 0x75, 0xd5, 0x1b, 0xbf, 0xe2, 0x9c, 0x00, 0xf0, 0x1b, 0x0a,
+	0xc0, 0x55, 0x5d, 0x9f, 0x01, 0xda, 0x6f, 0x2a, 0xd1, 0xde, 0xca, 0xa0, 0xad, 0x18, 0xba, 0xfe,
+	0x4b, 0x13, 0x41, 0xfd, 0x9f, 0x04, 0xf5, 0xd5, 0x6c, 0x87, 0x2a, 0x90, 0xbf, 0x57, 0x92, 0x17,
+	0x90, 0xe2, 0x02, 0x13, 0x68, 0xe8, 0x8d, 0xe9, 0xd5, 0xa1, 0xec, 0x2e, 0xd5, 0x8b, 0xa5, 0x4c,
+	0x66, 0x56, 0xb9, 0xe8, 0x1d, 0x51, 0xee, 0xa5, 0x76, 0x91, 0x97, 0x34, 0x34, 0x72, 0xda, 0xe2,
+	0x39, 0x6c, 0xc4, 0x87, 0xf1, 0x17, 0x55, 0x76, 0x21, 0xe2, 0x0e, 0x2f, 0xc6, 0x0e, 0x29, 0xdd,
+	0xef, 0xe7, 0xbb, 0xc4, 0xe7, 0x50, 0xb6, 0x41, 0x49, 0x9d, 0x6d, 0x50, 0x56, 0x67, 0x1b, 0x54,
+	0xd4, 0xd9, 0x06, 0x55, 0x75, 0xb6, 0xc1, 0x94, 0x3a, 0xdb, 0x60, 0x5a, 0x9d, 0x6d, 0x30, 0xa3,
+	0xce, 0x36, 0x98, 0x55, 0x67, 0x1b, 0xcc, 0xa9, 0xb3, 0x0d, 0x98, 0x3a, 0xdb, 0x60, 0x5e, 0x9d,
+	0x6d, 0xb0, 0xa0, 0xce, 0x36, 0xa8, 0xa9, 0xb3, 0x0d, 0x16, 0xd5, 0xd9, 0x06, 0x4b, 0xea, 0x6c,
+	0x03, 0x4a, 0xe3, 0xc8, 0xbe, 0xa6, 0x5f, 0x19, 0xe1, 0x18, 0xe2, 0x94, 0x1d, 0x2d, 0x97, 0xb2,
+	0xb3, 0x1a, 0xed, 0xf4, 0xe3, 0x37, 0x52, 0x27, 0x32, 0x8f, 0x23, 0x5d, 0x36, 0x90, 0x49, 0x1c,
+	0xe9, 0xb2, 0x53, 0x99, 0xc1, 0x91, 0xe4, 0x07, 0x9c, 0x2b, 0x8a, 0x02, 0x44, 0x76, 0x15, 0x5d,
+	0xfc, 0x9e, 0xc8, 0x44, 0x8e, 0xa4, 0x64, 0x40, 0x39, 0x1c, 0xc6, 0x45, 0x3a, 0x98, 0x00, 0x7d,
+	0x53, 0x68, 0x96, 0xf1, 0xe9, 0x3c, 0x9d, 0x43, 0x09, 0xcd, 0x7b, 0xef, 0xbd, 0xae, 0xfd, 0x54,
+	0xd6, 0xab, 0x72, 0x4e, 0x93, 0xc9, 0x56, 0x72, 0x93, 0xad, 0x46, 0x0f, 0xad, 0x1a, 0x6d, 0xc7,
+	0x85, 0xcd, 0x9c, 0xd9, 0xb6, 0x9e, 0x73, 0x73, 0xdf, 0x8e, 0xb1, 0x0d, 0x68, 0x53, 0x27, 0x9a,
+	0x9c, 0xd2, 0xe3, 0x1d, 0x7a, 0x5e, 0xfc, 0x3a, 0x5b, 0xa4, 0xe7, 0x3e, 0xf1, 0x8b, 0x33, 0x5a,
+	0xd1, 0xe7, 0x0a, 0x2e, 0x8a, 0xb5, 0xfb, 0x6c, 0x39, 0x25, 0x30, 0x0c, 0x8d, 0xe5, 0xf5, 0xf8,
+	0x85, 0x11, 0xd1, 0x73, 0xb6, 0x99, 0x87, 0x7b, 0x1a, 0x79, 0x3d, 0x7e, 0x61, 0xc4, 0xb6, 0x47,
+	0x7b, 0x97, 0xad, 0x27, 0xcd, 0x52, 0xf9, 0x27, 0xf2, 0xa9, 0xd6, 0xd6, 0xb8, 0x6d, 0xb5, 0xf6,
+	0x88, 0x5d, 0x54, 0x76, 0x10, 0xf1, 0x30, 0x9f, 0xf7, 0xd1, 0x23, 0x8f, 0x3c, 0x8c, 0xe4, 0x4d,
+	0xcf, 0x42, 0x46, 0x25, 0x52, 0xd7, 0xe4, 0xd7, 0x18, 0x3b, 0xb6, 0x82, 0xb6, 0xcc, 0x7a, 0xa9,
+	0xe5, 0xad, 0x15, 0x3d, 0x8d, 0xbd, 0x9e, 0x4e, 0x79, 0x59, 0xcc, 0x1b, 0xe5, 0xf8, 0xce, 0x6c,
+	0x3b, 0x93, 0x2d, 0xb3, 0x94, 0x59, 0x06, 0xd9, 0xab, 0xa2, 0xed, 0x4c, 0xc2, 0xcc, 0x72, 0x9e,
+	0x32, 0x75, 0x3f, 0xf2, 0x5a, 0x2a, 0x8d, 0x66, 0x65, 0xc8, 0x1d, 0x44, 0x57, 0x02, 0x77, 0xd8,
+	0x42, 0xfa, 0x92, 0x15, 0x57, 0x57, 0xe2, 0xa6, 0x73, 0xf7, 0xab, 0xf7, 0xf2, 0xb6, 0x77, 0x15,
+	0xa9, 0x37, 0xd4, 0x71, 0xbd, 0x20, 0x8f, 0x72, 0x58, 0x4c, 0x91, 0xd3, 0x80, 0xcb, 0x32, 0x43,
+	0x9e, 0x39, 0x1a, 0xdf, 0x8a, 0x97, 0xe1, 0x3a, 0xd2, 0x2d, 0xe7, 0xbb, 0x15, 0x3b, 0xd3, 0x94,
+	0xb5, 0xd8, 0xc8, 0xef, 0x0e, 0x93, 0x30, 0xf6, 0x2d, 0xb6, 0x12, 0x67, 0xc0, 0xd0, 0xfb, 0x54,
+	0x6e, 0xcb, 0xc5, 0x7d, 0x69, 0xe4, 0x63, 0x67, 0x6d, 0x87, 0x69, 0x71, 0x7e, 0x4c, 0xd2, 0x54,
+	0xcf, 0xe3, 0x17, 0x5f, 0xfe, 0xdf, 0xca, 0x26, 0xb3, 0x9c, 0xcf, 0x0b, 0x24, 0x15, 0xe5, 0x5d,
+	0x64, 0x55, 0x4c, 0x1d, 0xd9, 0x44, 0x9a, 0xc5, 0xac, 0x2b, 0x15, 0xd7, 0xe1, 0x41, 0xbf, 0xd7,
+	0xf3, 0xc5, 0xbb, 0x39, 0x41, 0x66, 0x86, 0x9e, 0x79, 0xe4, 0xf5, 0xc5, 0xd3, 0xc9, 0x0b, 0xd1,
+	0x11, 0x0e, 0x25, 0xd6, 0x34, 0xfb, 0x60, 0x74, 0x7c, 0x8e, 0xbf, 0x1e, 0x80, 0x99, 0x5f, 0x53,
+	0x63, 0x12, 0x73, 0x2e, 0x61, 0xfb, 0x8b, 0x6c, 0x0d, 0xfb, 0xb5, 0x9a, 0xe2, 0xb9, 0x6e, 0xbc,
+	0x58, 0x30, 0x1b, 0x6c, 0x56, 0x3c, 0x27, 0x3c, 0xb6, 0xba, 0x61, 0x60, 0xb6, 0x9d, 0x10, 0x1a,
+	0x82, 0xce, 0x5c, 0xc1, 0x72, 0x60, 0x2b, 0x5b, 0x6e, 0x0a, 0xcb, 0x63, 0x83, 0xe9, 0xc1, 0xa4,
+	0xb0, 0x59, 0x45, 0x86, 0xce, 0x55, 0x0c, 0x66, 0x44, 0x16, 0x4e, 0xcf, 0xfa, 0x36, 0x28, 0xff,
+	0x91, 0xd5, 0x78, 0xd6, 0xf2, 0xc5, 0x54, 0x30, 0x37, 0x0c, 0x73, 0x77, 0xb1, 0x13, 0xf9, 0x00,
+	0xb1, 0x01, 0x55, 0x21, 0xa6, 0x88, 0xd5, 0xc4, 0x4b, 0x53, 0x1a, 0x0e, 0x6c, 0x2b, 0xe7, 0xdd,
+	0xa0, 0x27, 0x7e, 0xf4, 0x00, 0x93, 0x03, 0xbd, 0x7e, 0xd8, 0xeb, 0x53, 0xda, 0xd8, 0xac, 0x40,
+	0x9d, 0x52, 0x65, 0x48, 0xaf, 0xae, 0xe7, 0x51, 0x4f, 0x9d, 0xd2, 0x8f, 0x4f, 0x9e, 0xb9, 0x81,
+	0xc9, 0x33, 0xb7, 0xe8, 0x95, 0x02, 0x58, 0xef, 0x71, 0xd6, 0xd9, 0xd8, 0xa4, 0x64, 0x1a, 0xfc,
+	0x49, 0x87, 0xc7, 0x42, 0x0a, 0x07, 0xf1, 0x0c, 0x0d, 0x9d, 0x32, 0x28, 0xde, 0xef, 0xda, 0xf9,
+	0x9a, 0x35, 0xba, 0x5c, 0x4a, 0x5a, 0x3d, 0x82, 0xf5, 0x17, 0x05, 0x29, 0x11, 0x3d, 0x96, 0xfd,
+	0x40, 0xbe, 0xb5, 0x7e, 0xe8, 0x5b, 0xc7, 0xe2, 0x65, 0x17, 0xb7, 0x3f, 0x01, 0xeb, 0x74, 0x86,
+	0x31, 0xd4, 0x3b, 0x6c, 0x3d, 0x79, 0x4d, 0x26, 0x0c, 0x98, 0x7c, 0x66, 0x96, 0xcb, 0x02, 0x2f,
+	0x78, 0x16, 0x08, 0xc1, 0x2b, 0x88, 0xc8, 0xb1, 0x5c, 0xc7, 0x0a, 0x44, 0xfe, 0x31, 0x3d, 0x74,
+	0xfe, 0xd3, 0x12, 0xf9, 0xb7, 0xe4, 0x0d, 0xdb, 0x99, 0xb3, 0x7d, 0x30, 0x9a, 0xed, 0xd4, 0x96,
+	0xb7, 0xf8, 0x21, 0x9d, 0x9a, 0xf9, 0x3f, 0x29, 0x13, 0xf3, 0x02, 0x71, 0xf9, 0xbb, 0x11, 0x67,
+	0xcd, 0xbc, 0xb8, 0x8a, 0x48, 0x5e, 0xb8, 0xd0, 0x0f, 0x78, 0xdc, 0x02, 0x67, 0x29, 0xcb, 0xe2,
+	0x51, 0xaa, 0x85, 0xef, 0xdb, 0x22, 0xd2, 0xcc, 0x68, 0x53, 0x6a, 0xf2, 0xf3, 0x6c, 0x31, 0x22,
+	0x0f, 0xb8, 0x0f, 0xd3, 0xc5, 0x30, 0x60, 0x4a, 0x24, 0xe8, 0x5c, 0x66, 0xab, 0x71, 0x95, 0xd5,
+	0xe9, 0x81, 0x91, 0xc4, 0x55, 0x3b, 0x13, 0x25, 0xf0, 0xdc, 0x4e, 0x7e, 0x2f, 0x23, 0xf2, 0x81,
+	0xb3, 0x05, 0x3e, 0xd0, 0xf8, 0xbd, 0x32, 0xa9, 0x3b, 0xe1, 0xfd, 0xaa, 0x23, 0xb7, 0xa9, 0x46,
+	0xae, 0xfc, 0xa0, 0xb4, 0x67, 0x7c, 0x83, 0x5e, 0x2b, 0x3d, 0xf2, 0x1a, 0xcf, 0xa2, 0x1f, 0x26,
+	0xc9, 0xce, 0xab, 0x24, 0xad, 0x66, 0x7e, 0xf4, 0xb2, 0x1c, 0xdd, 0xb8, 0x4f, 0x2a, 0xfa, 0x14,
+	0x63, 0x4a, 0xf1, 0x98, 0xf8, 0xe3, 0xa3, 0x5f, 0x16, 0x40, 0xc7, 0xb1, 0x22, 0xe5, 0x65, 0x25,
+	0xb1, 0x22, 0x26, 0x2c, 0x18, 0x9f, 0xa6, 0x8e, 0x1b, 0x3e, 0x00, 0x7b, 0x6f, 0x85, 0x22, 0x4f,
+	0xac, 0x09, 0x36, 0x8d, 0xac, 0x9f, 0x68, 0x35, 0x17, 0x17, 0xc5, 0x99, 0x0e, 0x22, 0x1d, 0x71,
+	0x1e, 0x8b, 0x8e, 0x93, 0xcc, 0xf8, 0xa9, 0x07, 0xe5, 0x7b, 0x7b, 0x60, 0xf1, 0x19, 0xd1, 0xe2,
+	0xcf, 0x39, 0x54, 0xe3, 0x72, 0xe8, 0xa3, 0x2f, 0xd4, 0x40, 0xf0, 0x26, 0xa3, 0x50, 0xf1, 0x83,
+	0x36, 0x10, 0x16, 0x3e, 0xe3, 0x61, 0x1b, 0x8c, 0x60, 0xab, 0x2d, 0x7f, 0x73, 0xa6, 0xd0, 0xfe,
+	0xcc, 0xbc, 0x88, 0xfd, 0x01, 0x8c, 0x5c, 0x1e, 0x0a, 0x27, 0x26, 0xdc, 0x43, 0xf4, 0x0b, 0x08,
+	0x28, 0xa1, 0x3d, 0x56, 0x73, 0x10, 0x1b, 0xd3, 0x43, 0x70, 0x64, 0xe8, 0xb9, 0x99, 0xf5, 0xc7,
+	0x69, 0xf8, 0x8c, 0x06, 0xd9, 0x7d, 0x51, 0xfe, 0x89, 0xd5, 0x6d, 0x71, 0x89, 0x51, 0xfc, 0x2b,
+	0x08, 0x14, 0x44, 0x97, 0xa2, 0x04, 0x3b, 0xe1, 0xe5, 0x52, 0x3f, 0xeb, 0x02, 0x51, 0xd6, 0x74,
+	0x13, 0x5b, 0xe4, 0x4e, 0xb5, 0x32, 0x88, 0x1b, 0x7f, 0x50, 0x4e, 0x1b, 0xc7, 0x2f, 0x92, 0x28,
+	0x0e, 0x46, 0x8b, 0xe2, 0x85, 0x6c, 0xea, 0xd9, 0x0a, 0xc4, 0x63, 0xe7, 0xb3, 0x50, 0x4d, 0x22,
+	0x96, 0xdb, 0x39, 0xb1, 0x6c, 0xe6, 0xe7, 0x91, 0x12, 0xce, 0x0f, 0xcb, 0x89, 0xbb, 0xc5, 0xf1,
+	0xc0, 0x43, 0xc3, 0xac, 0x60, 0x83, 0x27, 0xf2, 0x97, 0xc5, 0x72, 0xc4, 0xdd, 0xc3, 0x42, 0xb4,
+	0x60, 0x21, 0x02, 0xb2, 0xfc, 0x00, 0x37, 0x06, 0x53, 0xb8, 0xaf, 0x15, 0x65, 0xbc, 0xdb, 0xf0,
+	0x6c, 0x31, 0xf5, 0x1a, 0x16, 0xdf, 0x65, 0x8b, 0x36, 0x6f, 0x5a, 0x7d, 0x37, 0x34, 0xc7, 0xab,
+	0x47, 0xdc, 0x31, 0x78, 0xa5, 0x56, 0x57, 0x1e, 0x06, 0xc1, 0x4c, 0x11, 0x37, 0xb9, 0x98, 0xa7,
+	0x64, 0x5e, 0x48, 0x62, 0x54, 0xa7, 0x5f, 0xcc, 0xa8, 0x16, 0x3c, 0x80, 0x86, 0xd9, 0x1d, 0xfb,
+	0x56, 0xaf, 0x97, 0xf9, 0x01, 0x11, 0xee, 0x42, 0x80, 0x18, 0x38, 0x01, 0x4a, 0x69, 0x56, 0xdb,
+	0x65, 0x35, 0x5f, 0x60, 0x2f, 0xa7, 0x10, 0xc0, 0x66, 0xac, 0x92, 0x7d, 0x73, 0x98, 0x13, 0x8f,
+	0xf1, 0xdd, 0x4a, 0x5e, 0xcf, 0x15, 0x60, 0x2e, 0x28, 0xc0, 0xac, 0xa9, 0xc1, 0x5c, 0xc4, 0xe2,
+	0x7a, 0x01, 0x98, 0x23, 0x84, 0xfa, 0x45, 0x85, 0xf4, 0x4d, 0x35, 0xa4, 0x57, 0x54, 0x33, 0x49,
+	0xeb, 0x7d, 0x2e, 0x67, 0x7e, 0x7e, 0xc4, 0x61, 0xaa, 0xf1, 0x59, 0x29, 0x5a, 0x41, 0x10, 0x7d,
+	0x07, 0x21, 0x75, 0x78, 0x68, 0xb9, 0xae, 0x08, 0xc4, 0x45, 0x00, 0xd4, 0x90, 0xff, 0x8b, 0x35,
+	0x89, 0x4b, 0x68, 0x21, 0x83, 0x42, 0xf9, 0xc5, 0x50, 0x28, 0xc8, 0xce, 0x13, 0x9e, 0x39, 0xfa,
+	0xc9, 0x93, 0x9e, 0x65, 0xdb, 0x51, 0x90, 0xa5, 0xf6, 0xcc, 0x99, 0x9f, 0xfc, 0x88, 0xc8, 0x0b,
+	0x3c, 0xf3, 0xa8, 0x5f, 0x16, 0x40, 0x63, 0x76, 0x30, 0xf5, 0x61, 0xe9, 0x3b, 0xa5, 0x9f, 0xfb,
+	0xbf, 0x00, 0x00, 0x00, 0xff, 0xff, 0xd4, 0xda, 0xf9, 0xd3, 0x90, 0x4d, 0x00, 0x00,
 }

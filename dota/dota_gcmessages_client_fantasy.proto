@@ -1,81 +1,9 @@
 package dota;
 
-import "dota_gcmessages_common.proto";
+import "dota_shared_enums.proto";
 
 option optimize_for = SPEED;
 option cc_generic_services = false;
-
-enum ETournamentGameState {
-	k_ETournamentGameState_Unknown = 0;
-	k_ETournamentGameState_Canceled = 1;
-	k_ETournamentGameState_Scheduled = 2;
-	k_ETournamentGameState_Active = 3;
-	k_ETournamentGameState_RadVictory = 20;
-	k_ETournamentGameState_DireVictory = 21;
-	k_ETournamentGameState_RadVictoryByForfeit = 22;
-	k_ETournamentGameState_DireVictoryByForfeit = 23;
-	k_ETournamentGameState_ServerFailure = 40;
-	k_ETournamentGameState_NotNeeded = 41;
-}
-
-enum ETournamentTeamState {
-	k_ETournamentTeamState_Unknown = 0;
-	k_ETournamentTeamState_Node1 = 1;
-	k_ETournamentTeamState_NodeMax = 1024;
-	k_ETournamentTeamState_Eliminated = 14003;
-	k_ETournamentTeamState_Forfeited = 14004;
-	k_ETournamentTeamState_Refunded = 14005;
-	k_ETournamentTeamState_Finished1st = 15001;
-	k_ETournamentTeamState_Finished2nd = 15002;
-	k_ETournamentTeamState_Finished3rd = 15003;
-	k_ETournamentTeamState_Finished4th = 15004;
-	k_ETournamentTeamState_Finished5th = 15005;
-	k_ETournamentTeamState_Finished6th = 15006;
-	k_ETournamentTeamState_Finished7th = 15007;
-	k_ETournamentTeamState_Finished8th = 15008;
-	k_ETournamentTeamState_Finished9th = 15009;
-	k_ETournamentTeamState_Finished10th = 15010;
-	k_ETournamentTeamState_Finished11th = 15011;
-	k_ETournamentTeamState_Finished12th = 15012;
-	k_ETournamentTeamState_Finished13th = 15013;
-	k_ETournamentTeamState_Finished14th = 15014;
-	k_ETournamentTeamState_Finished15th = 15015;
-	k_ETournamentTeamState_Finished16th = 15016;
-}
-
-enum ETournamentState {
-	k_ETournamentState_Unknown = 0;
-	k_ETournamentState_Canceled = 1;
-	k_ETournamentState_Completed = 2;
-	k_ETournamentState_Merged = 3;
-	k_ETournamentState_ServerFailure = 4;
-	k_ETournamentState_InProgress = 100;
-	k_ETournamentState_WaitingToMerge = 101;
-}
-
-enum ETournamentNodeState {
-	k_ETournamentNodeState_Unknown = 0;
-	k_ETournamentNodeState_Canceled = 1;
-	k_ETournamentNodeState_TeamsNotYetAssigned = 2;
-	k_ETournamentNodeState_InBetweenGames = 3;
-	k_ETournamentNodeState_GameInProgress = 4;
-	k_ETournamentNodeState_A_Won = 5;
-	k_ETournamentNodeState_B_Won = 6;
-	k_ETournamentNodeState_A_WonByForfeit = 7;
-	k_ETournamentNodeState_B_WonByForfeit = 8;
-	k_ETournamentNodeState_A_Bye = 9;
-	k_ETournamentNodeState_A_Forfeit = 10;
-	k_ETournamentNodeState_ServerFailure = 11;
-}
-
-enum ETournamentEvent {
-	k_ETournamentEvent_None = 0;
-	k_ETournamentEvent_TournamentCreated = 1;
-	k_ETournamentEvent_TournamentsMerged = 2;
-	k_ETournamentEvent_GameOutcome = 3;
-	k_ETournamentEvent_TeamGivenBye = 4;
-	k_ETournamentEvent_TournamentCanceled = 5;
-}
 
 enum DOTA_2013PassportSelectionIndices {
 	PP13_SEL_ALLSTAR_PLAYER_0 = 0;
@@ -189,6 +117,7 @@ message CMsgGCPlayerInfo {
 		optional bool is_locked = 9;
 		optional bool is_pro = 10;
 		optional uint32 locked_until = 11;
+		optional uint32 timestamp = 12;
 	}
 
 	message RegionLeaderboard {
@@ -865,7 +794,6 @@ message CMsgDOTAFantasyPlayerScoreDetailsResponse {
 		optional uint32 opposing_team_id = 7;
 		optional uint64 opposing_team_logo = 8;
 		optional string opposing_team_name = 9;
-		optional CMsgFantasyLeagueScoring stats = 10;
 		optional uint32 owned_by = 11;
 		optional bool benched = 12;
 	}
@@ -878,78 +806,6 @@ message CMsgDOTAFantasyPlayerScoreDetailsResponse {
 
 	optional CMsgDOTAFantasyPlayerScoreDetailsResponse.EResult result = 1 [default = SUCCESS];
 	repeated CMsgDOTAFantasyPlayerScoreDetailsResponse.PlayerMatchData data = 2;
-}
-
-message CMsgDOTATournament {
-	message Team {
-		optional fixed64 team_gid = 1;
-		optional uint32 node_or_state = 2;
-		repeated uint32 players = 3 [packed = true];
-		optional uint32 team_id = 4;
-		optional string team_name = 5;
-		optional string team_abbrev = 6;
-		optional uint64 team_logo = 7;
-		optional string country_code = 8;
-	}
-
-	message Game {
-		optional uint32 node_idx = 1;
-		optional fixed64 lobby_id = 2;
-		optional uint64 match_id = 3;
-		optional bool team_a_good = 4;
-		optional ETournamentGameState state = 5 [default = k_ETournamentGameState_Unknown];
-		optional uint32 start_time = 6;
-	}
-
-	message Node {
-		optional uint32 node_id = 1;
-		optional uint32 team_idx_a = 2;
-		optional uint32 team_idx_b = 3;
-		optional ETournamentNodeState node_state = 4 [default = k_ETournamentNodeState_Unknown];
-	}
-
-	optional uint32 tournament_id = 1;
-	optional uint32 division_id = 2;
-	optional uint32 schedule_time = 3;
-	optional uint32 skill_level = 4;
-	optional ETournamentTemplate tournament_template = 5 [default = k_ETournamentTemplate_None];
-	optional ETournamentState state = 6 [default = k_ETournamentState_Unknown];
-	repeated CMsgDOTATournament.Team teams = 7;
-	repeated CMsgDOTATournament.Game games = 8;
-	repeated CMsgDOTATournament.Node nodes = 9;
-}
-
-message CMsgDOTATournamentStateChange {
-	message GameChange {
-		optional uint64 match_id = 1;
-		optional ETournamentGameState new_state = 2 [default = k_ETournamentGameState_Unknown];
-	}
-
-	message TeamChange {
-		optional uint64 team_gid = 1;
-		optional uint32 new_node_or_state = 2;
-	}
-
-	optional uint32 new_tournament_id = 1;
-	optional ETournamentEvent event = 2 [default = k_ETournamentEvent_None];
-	optional ETournamentState new_tournament_state = 3 [default = k_ETournamentState_Unknown];
-	repeated CMsgDOTATournamentStateChange.GameChange game_changes = 4;
-	repeated CMsgDOTATournamentStateChange.TeamChange team_changes = 5;
-}
-
-message CMsgDOTATournamentRequest {
-	optional uint32 tournament_id = 1;
-	optional uint64 client_tournament_gid = 2;
-}
-
-message CMsgDOTATournamentResponse {
-	optional uint32 result = 1 [default = 2];
-	optional CMsgDOTATournament tournament = 2;
-}
-
-message CMsgDOTAClearTournamentGame {
-	optional uint32 tournament_id = 1;
-	optional uint32 game_id = 2;
 }
 
 message CMsgDOTAPassportVoteTeamGuess {
@@ -979,77 +835,45 @@ message CMsgDOTAPassportVote {
 	repeated CMsgDOTAPassportPlayerCardChallenge player_card_challenges = 4;
 }
 
-message CMsgDOTATournamentInfo {
-	message PhaseGroup {
-		optional uint32 group_id = 1;
-		optional string group_name = 2;
-	}
-
-	message Phase {
-		optional uint32 phase_id = 1;
-		optional string phase_name = 2;
-		optional uint32 type_id = 3;
-		optional uint32 iterations = 4;
-		optional uint32 min_start_time = 5;
-		optional uint32 max_start_time = 6;
-		repeated CMsgDOTATournamentInfo.PhaseGroup group_list = 7;
-	}
-
-	message Team {
-		optional uint32 team_id = 1;
-		optional string name = 2;
-		optional string tag = 3;
-		optional uint64 team_logo = 4;
-		optional bool eliminated = 5;
-	}
-
-	message UpcomingMatch {
-		optional uint32 series_id = 1;
-		optional uint32 team1_id = 2;
-		optional uint32 team2_id = 3;
-		optional uint32 bo = 4;
-		optional string stage_name = 5;
-		optional uint32 start_time = 6;
-		optional string winner_stage = 7;
-		optional string loser_stage = 8;
-		optional string team1_tag = 9;
-		optional string team2_tag = 10;
-		optional string team1_prev_opponent_tag = 11;
-		optional string team2_prev_opponent_tag = 12;
-		optional uint64 team1_logo = 13;
-		optional uint64 team2_logo = 14;
-		optional uint64 team1_prev_opponent_logo = 15;
-		optional uint64 team2_prev_opponent_logo = 16;
-		optional uint32 team1_prev_opponent_id = 17;
-		optional uint32 team2_prev_opponent_id = 18;
-		optional uint32 team1_prev_match_score = 19;
-		optional uint32 team1_prev_match_opponent_score = 20;
-		optional uint32 team2_prev_match_score = 21;
-		optional uint32 team2_prev_match_opponent_score = 22;
-		optional uint32 phase_type = 23;
-		optional uint32 team1_score = 24;
-		optional uint32 team2_score = 25;
-	}
-
-	message News {
-		optional string link = 1;
-		optional string title = 2;
-		optional string image = 3;
-		optional uint32 timestamp = 4;
-	}
-
+message CMsgClientToGCGetPlayerCardRosterRequest {
 	optional uint32 league_id = 1;
-	repeated CMsgDOTATournamentInfo.Phase phase_list = 2;
-	repeated CMsgDOTATournamentInfo.Team teams_list = 3;
-	repeated CMsgDOTATournamentInfo.UpcomingMatch upcoming_matches_list = 4;
-	repeated CMsgDOTATournamentInfo.News news_list = 5;
+	optional uint32 timestamp = 2;
 }
 
-message CMsgWeekendTourneyOpts {
-	optional bool participating = 1;
-	optional uint32 division_id = 2;
-	optional uint32 buyin = 3;
-	optional uint32 skill_level = 4;
-	optional uint32 match_groups = 5;
+message CMsgClientToGCGetPlayerCardRosterResponse {
+	enum Result {
+		SUCCESS = 0;
+		ERROR_UNSPECIFIED = 1;
+		ERROR_INVALID_LEAGUE_ID = 2;
+		ERROR_INVALID_TIMESTAMP = 3;
+	}
+
+	optional CMsgClientToGCGetPlayerCardRosterResponse.Result result = 1 [default = SUCCESS];
+	repeated uint64 player_card_item_id = 2;
+	optional float score = 3;
+	optional bool finalized = 4;
+}
+
+message CMsgClientToGCSetPlayerCardRosterRequest {
+	optional uint32 league_id = 1;
+	optional uint32 timestamp = 2;
+	optional uint32 slot = 3;
+	optional uint64 player_card_item_id = 4;
+}
+
+message CMsgClientToGCSetPlayerCardRosterResponse {
+	enum Result {
+		SUCCESS = 0;
+		ERROR_UNSPECIFIED = 1;
+		ERROR_INVALID_LEAGUE_ID = 2;
+		ERROR_INVALID_TIMESTAMP = 3;
+		ERROR_PLAYER_CARD_NOT_OWNED = 4;
+		ERROR_INVALID_SLOT = 5;
+		ERROR_FAILED_CARD_INFO = 6;
+		ERROR_ACCOUNT_DUPLICATE = 7;
+		ERROR_LOCKED_TIMESTAMP = 8;
+	}
+
+	optional CMsgClientToGCSetPlayerCardRosterResponse.Result result = 1 [default = SUCCESS];
 }
 
