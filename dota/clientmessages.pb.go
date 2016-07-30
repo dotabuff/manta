@@ -170,6 +170,8 @@ func init() {
 	proto.RegisterEnum("dota.EClientUIEvent", EClientUIEvent_name, EClientUIEvent_value)
 }
 
+func init() { proto.RegisterFile("clientmessages.proto", fileDescriptor2) }
+
 var fileDescriptor2 = []byte{
 	// 303 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x74, 0x50, 0x4f, 0x4b, 0xfb, 0x40,

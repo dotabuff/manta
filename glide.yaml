@@ -4,6 +4,7 @@ import:
   subpackages:
   - spew
 - package: github.com/golang/protobuf
+  version: c3cefd437628a0b7d31b34fe44b3a7a540e98527
   subpackages:
   - proto
   - protoc-gen-go/descriptor

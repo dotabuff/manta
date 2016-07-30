@@ -1448,6 +1448,8 @@ func init() {
 	proto.RegisterEnum("dota.CDOTAClientMsg_UnitsAutoAttackMode_EUnitType", CDOTAClientMsg_UnitsAutoAttackMode_EUnitType_name, CDOTAClientMsg_UnitsAutoAttackMode_EUnitType_value)
 }
 
+func init() { proto.RegisterFile("dota_clientmessages.proto", fileDescriptor7) }
+
 var fileDescriptor7 = []byte{
 	// 2106 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x9c, 0x58, 0x79, 0x73, 0xdb, 0xc6,

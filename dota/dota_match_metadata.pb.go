@@ -578,6 +578,8 @@ func init() {
 	proto.RegisterType((*CDOTAMatchPrivateMetadata_Team_Building)(nil), "dota.CDOTAMatchPrivateMetadata.Team.Building")
 }
 
+func init() { proto.RegisterFile("dota_match_metadata.proto", fileDescriptor21) }
+
 var fileDescriptor21 = []byte{
 	// 873 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x8c, 0x55, 0xdb, 0x6e, 0x23, 0x45,

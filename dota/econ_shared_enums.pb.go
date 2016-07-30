@@ -244,6 +244,8 @@ func init() {
 	proto.RegisterEnum("dota.EGCMsgUseItemResponse", EGCMsgUseItemResponse_name, EGCMsgUseItemResponse_value)
 }
 
+func init() { proto.RegisterFile("econ_shared_enums.proto", fileDescriptor26) }
+
 var fileDescriptor26 = []byte{
 	// 607 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x8c, 0x54, 0x5d, 0x4f, 0x13, 0x41,

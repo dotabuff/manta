@@ -1474,7 +1474,9 @@ var _ = math.Inf
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the proto package it is being compiled against.
-const _ = proto.ProtoPackageIsVersion1
+// A compilation error at this line likely means your copy of the
+// proto package needs to be updated.
+const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
 type EGCBaseMsg int32
 
@@ -4622,6 +4624,8 @@ func init() {
 	proto.RegisterEnum("dota.CMsgAddItemToSocketResponse_EAddGem", CMsgAddItemToSocketResponse_EAddGem_name, CMsgAddItemToSocketResponse_EAddGem_value)
 	proto.RegisterEnum("dota.CMsgResetStrangeGemCountResponse_EResetGem", CMsgResetStrangeGemCountResponse_EResetGem_name, CMsgResetStrangeGemCountResponse_EResetGem_value)
 }
+
+func init() { proto.RegisterFile("base_gcmessages.proto", fileDescriptor0) }
 
 var fileDescriptor0 = []byte{
 	// 3997 bytes of a gzipped FileDescriptorProto

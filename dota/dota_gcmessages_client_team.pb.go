@@ -1753,6 +1753,8 @@ func init() {
 	proto.RegisterEnum("dota.CMsgDOTALeaveTeamResponse_Result", CMsgDOTALeaveTeamResponse_Result_name, CMsgDOTALeaveTeamResponse_Result_value)
 }
 
+func init() { proto.RegisterFile("dota_gcmessages_client_team.proto", fileDescriptor14) }
+
 var fileDescriptor14 = []byte{
 	// 1973 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xbc, 0x58, 0x4f, 0x6f, 0xdb, 0xc8,

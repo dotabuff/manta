@@ -827,6 +827,17 @@ message CMsgClientToGCCreateStaticRecipeResponse {
 	message OutputItem {
 		optional uint32 def_index = 1;
 		optional uint64 item_id = 2;
+		optional uint32 slot_id = 3;
+	}
+
+	message InputError {
+		optional uint32 slot_id = 1;
+		optional CMsgClientToGCCreateStaticRecipeResponse.EResponse error = 2 [default = eResponse_Success];
+	}
+
+	message AdditionalOutput {
+		optional uint32 slot_id = 1;
+		optional uint64 value = 2;
 	}
 
 	enum EResponse {
@@ -839,6 +850,8 @@ message CMsgClientToGCCreateStaticRecipeResponse {
 
 	optional CMsgClientToGCCreateStaticRecipeResponse.EResponse response = 1 [default = eResponse_Success];
 	repeated CMsgClientToGCCreateStaticRecipeResponse.OutputItem output_items = 2;
+	repeated CMsgClientToGCCreateStaticRecipeResponse.InputError input_errors = 3;
+	repeated CMsgClientToGCCreateStaticRecipeResponse.AdditionalOutput additional_outputs = 4;
 }
 
 message CMsgProcessTransactionOrder {

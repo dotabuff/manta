@@ -277,6 +277,8 @@ func init() {
 	proto.RegisterExtension(E_NetworkConnectionToken)
 }
 
+func init() { proto.RegisterFile("network_connection.proto", fileDescriptor31) }
+
 var fileDescriptor31 = []byte{
 	// 1903 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x8c, 0x98, 0xeb, 0x76, 0xdb, 0xc6,

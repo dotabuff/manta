@@ -790,6 +790,8 @@ func init() {
 	proto.RegisterEnum("dota.DotaunitorderT", DotaunitorderT_name, DotaunitorderT_value)
 }
 
+func init() { proto.RegisterFile("dota_commonmessages.proto", fileDescriptor8) }
+
 var fileDescriptor8 = []byte{
 	// 1749 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x7c, 0x56, 0x5b, 0x77, 0xdb, 0xc6,

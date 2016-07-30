@@ -414,6 +414,8 @@ func init() {
 	proto.RegisterType((*ToolEvent_SFMToolActiveStateChanged)(nil), "dota.ToolEvent_SFMToolActiveStateChanged")
 }
 
+func init() { proto.RegisterFile("toolevents.proto", fileDescriptor42) }
+
 var fileDescriptor42 = []byte{
 	// 539 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x94, 0x54, 0xc1, 0x6e, 0xd3, 0x40,

@@ -6195,6 +6195,8 @@ func init() {
 	proto.RegisterEnum("dota.CMsgServerToGCPostMatchTipResponse_Result", CMsgServerToGCPostMatchTipResponse_Result_name, CMsgServerToGCPostMatchTipResponse_Result_value)
 }
 
+func init() { proto.RegisterFile("dota_gcmessages_server.proto", fileDescriptor20) }
+
 var fileDescriptor20 = []byte{
 	// 7307 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xac, 0x7c, 0xdb, 0x6f, 0x1b, 0x49,

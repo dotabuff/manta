@@ -352,6 +352,7 @@ enum EPlayerVoiceListenState {
 
 enum EProjectionEvent {
 	ePE_FirstBlood = 0;
+	ePE_Killstreak_godlike = 1;
 }
 
 message CDOTAUserMsg_AIDebugLine {

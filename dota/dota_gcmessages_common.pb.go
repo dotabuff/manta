@@ -6654,6 +6654,8 @@ func init() {
 	proto.RegisterEnum("dota.CMsgDOTAMatch_ReplayState", CMsgDOTAMatch_ReplayState_name, CMsgDOTAMatch_ReplayState_value)
 }
 
+func init() { proto.RegisterFile("dota_gcmessages_common.proto", fileDescriptor17) }
+
 var fileDescriptor17 = []byte{
 	// 7926 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xcc, 0x7c, 0x59, 0x6f, 0x23, 0xd9,

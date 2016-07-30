@@ -1341,6 +1341,8 @@ func init() {
 	proto.RegisterEnum("dota.ESteamDatagramMsgID", ESteamDatagramMsgID_name, ESteamDatagramMsgID_value)
 }
 
+func init() { proto.RegisterFile("steamdatagram_messages.proto", fileDescriptor35) }
+
 var fileDescriptor35 = []byte{
 	// 1641 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xc4, 0x58, 0xcf, 0x6e, 0xdb, 0x46,

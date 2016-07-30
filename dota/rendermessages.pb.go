@@ -1445,14 +1445,14 @@ func (m *CMsgAnimationData) GetFrames() []*CMsgAnimationFrameData {
 }
 
 type CMsgAnimationFrameData struct {
-	Percent          *float32                  `protobuf:"fixed32,1,opt,name=percent" json:"percent,omitempty"`
-	TimingFunc       *uint32                   `protobuf:"varint,2,opt,name=timing_func,def=0" json:"timing_func,omitempty"`
-	CubicBezier_0    *float32                  `protobuf:"fixed32,3,opt,name=cubic_bezier_0" json:"cubic_bezier_0,omitempty"`
-	CubicBezier_1    *float32                  `protobuf:"fixed32,4,opt,name=cubic_bezier_1" json:"cubic_bezier_1,omitempty"`
-	CubicBezier_2    *float32                  `protobuf:"fixed32,5,opt,name=cubic_bezier_2" json:"cubic_bezier_2,omitempty"`
-	CubicBezier_3    *float32                  `protobuf:"fixed32,6,opt,name=cubic_bezier_3" json:"cubic_bezier_3,omitempty"`
-	XXX_extensions   map[int32]proto.Extension `json:"-"`
-	XXX_unrecognized []byte                    `json:"-"`
+	Percent                      *float32 `protobuf:"fixed32,1,opt,name=percent" json:"percent,omitempty"`
+	TimingFunc                   *uint32  `protobuf:"varint,2,opt,name=timing_func,def=0" json:"timing_func,omitempty"`
+	CubicBezier_0                *float32 `protobuf:"fixed32,3,opt,name=cubic_bezier_0" json:"cubic_bezier_0,omitempty"`
+	CubicBezier_1                *float32 `protobuf:"fixed32,4,opt,name=cubic_bezier_1" json:"cubic_bezier_1,omitempty"`
+	CubicBezier_2                *float32 `protobuf:"fixed32,5,opt,name=cubic_bezier_2" json:"cubic_bezier_2,omitempty"`
+	CubicBezier_3                *float32 `protobuf:"fixed32,6,opt,name=cubic_bezier_3" json:"cubic_bezier_3,omitempty"`
+	proto.XXX_InternalExtensions `json:"-"`
+	XXX_unrecognized             []byte `json:"-"`
 }
 
 func (m *CMsgAnimationFrameData) Reset()                    { *m = CMsgAnimationFrameData{} }
@@ -1466,12 +1466,6 @@ var extRange_CMsgAnimationFrameData = []proto.ExtensionRange{
 
 func (*CMsgAnimationFrameData) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_CMsgAnimationFrameData
-}
-func (m *CMsgAnimationFrameData) ExtensionMap() map[int32]proto.Extension {
-	if m.XXX_extensions == nil {
-		m.XXX_extensions = make(map[int32]proto.Extension)
-	}
-	return m.XXX_extensions
 }
 
 const Default_CMsgAnimationFrameData_TimingFunc uint32 = 0
@@ -5323,6 +5317,8 @@ func init() {
 	proto.RegisterExtension(E_CMsgTextShadow_AnimationFrameData)
 	proto.RegisterExtension(E_CMsgClip_AnimationFrameData)
 }
+
+func init() { proto.RegisterFile("rendermessages.proto", fileDescriptor34) }
 
 var fileDescriptor34 = []byte{
 	// 4670 bytes of a gzipped FileDescriptorProto

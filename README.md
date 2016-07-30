@@ -51,6 +51,12 @@ func main() {
 }
 ```
 
+## Developing
+
+To run `make update` you will need the latest version of the `protobuf` package:
+
+`go get -u github.com/golang/protobuf/...`
+
 ## License
 
 Manta is distributed under the [MIT license](https://github.com/dotabuff/manta/blob/master/LICENSE).

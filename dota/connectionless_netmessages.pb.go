@@ -116,6 +116,8 @@ func init() {
 	proto.RegisterType((*C2S_CONNECTION_Message)(nil), "dota.C2S_CONNECTION_Message")
 }
 
+func init() { proto.RegisterFile("connectionless_netmessages.proto", fileDescriptor3) }
+
 var fileDescriptor3 = []byte{
 	// 301 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x64, 0x90, 0xcd, 0x4e, 0x02, 0x31,

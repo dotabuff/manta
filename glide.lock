@@ -1,19 +1,19 @@
-hash: 034fb63f6ae4b90784a8035f18f7b3181821e887f4e8ac57357d77e1f0303ee9
-updated: 2016-03-26T12:03:37.694384772-05:00
+hash: 9b417d168a26b63f8f8499f69a044fb3f84909459dc4f5ecc00fb87c604b8764
+updated: 2016-07-30T09:23:36.106330544-05:00
 imports:
 - name: github.com/davecgh/go-spew
   version: 5215b55f46b2b919f50a1df0eaa5886afe4e3b3d
   subpackages:
   - spew
 - name: github.com/golang/protobuf
-  version: 8d92cf5fc15a4382f8964b08e1f42a75c0591aa3
+  version: c3cefd437628a0b7d31b34fe44b3a7a540e98527
   subpackages:
   - proto
   - protoc-gen-go/descriptor
 - name: github.com/golang/snappy
-  version: 5f1c01d9f64b941dd9582c638279d046eda6ca31
+  version: d9eb7a3d35ec988b8585d4a0068e462c27d28380
 - name: github.com/stretchr/testify
-  version: 6fe211e493929a8aac0469b93f28b1d0688a9a3a
+  version: d77da356e56a7428ad25149ca77381849a6a5232
   subpackages:
   - assert
 devImports: []

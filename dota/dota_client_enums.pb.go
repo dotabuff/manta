@@ -391,6 +391,8 @@ func init() {
 	proto.RegisterEnum("dota.EDOTAGroupMergeResult", EDOTAGroupMergeResult_name, EDOTAGroupMergeResult_value)
 }
 
+func init() { proto.RegisterFile("dota_client_enums.proto", fileDescriptor6) }
+
 var fileDescriptor6 = []byte{
 	// 882 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x8c, 0xd6, 0xcb, 0x6e, 0xdb, 0x46,

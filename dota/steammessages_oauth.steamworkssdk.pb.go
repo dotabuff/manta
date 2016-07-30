@@ -70,6 +70,8 @@ func init() {
 	proto.RegisterType((*COAuthToken_ImplicitGrantNoPrompt_Response)(nil), "dota.COAuthToken_ImplicitGrantNoPrompt_Response")
 }
 
+func init() { proto.RegisterFile("steammessages_oauth.steamworkssdk.proto", fileDescriptor38) }
+
 var fileDescriptor38 = []byte{
 	// 419 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x8c, 0x52, 0x4d, 0x8b, 0x13, 0x41,

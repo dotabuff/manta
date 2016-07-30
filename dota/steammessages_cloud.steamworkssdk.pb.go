@@ -274,6 +274,8 @@ func init() {
 	proto.RegisterType((*CCloud_Delete_Response)(nil), "dota.CCloud_Delete_Response")
 }
 
+func init() { proto.RegisterFile("steammessages_cloud.steamworkssdk.proto", fileDescriptor37) }
+
 var fileDescriptor37 = []byte{
 	// 898 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x94, 0x95, 0xdd, 0x6e, 0x1c, 0x35,

@@ -324,6 +324,8 @@ func init() {
 	proto.RegisterEnum("dota.CP2P_Voice_Handler_Flags", CP2P_Voice_Handler_Flags_name, CP2P_Voice_Handler_Flags_value)
 }
 
+func init() { proto.RegisterFile("c_peer2peer_netmessages.proto", fileDescriptor1) }
+
 var fileDescriptor1 = []byte{
 	// 576 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x6c, 0x52, 0x4f, 0x6f, 0x13, 0x3f,

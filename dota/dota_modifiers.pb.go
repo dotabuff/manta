@@ -346,6 +346,8 @@ func init() {
 	proto.RegisterEnum("dota.DOTA_MODIFIER_ENTRY_TYPE", DOTA_MODIFIER_ENTRY_TYPE_name, DOTA_MODIFIER_ENTRY_TYPE_value)
 }
 
+func init() { proto.RegisterFile("dota_modifiers.proto", fileDescriptor22) }
+
 var fileDescriptor22 = []byte{
 	// 598 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x84, 0x53, 0x4f, 0x4f, 0xdb, 0x4e,

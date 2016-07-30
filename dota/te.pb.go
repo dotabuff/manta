@@ -1608,6 +1608,8 @@ func init() {
 	proto.RegisterEnum("dota.ETEProtobufIds", ETEProtobufIds_name, ETEProtobufIds_value)
 }
 
+func init() { proto.RegisterFile("te.proto", fileDescriptor41) }
+
 var fileDescriptor41 = []byte{
 	// 1541 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xac, 0x58, 0x49, 0x8f, 0x1b, 0x45,

@@ -2076,6 +2076,8 @@ func init() {
 	proto.RegisterEnum("dota.CSODOTALobby_LobbyType", CSODOTALobby_LobbyType_name, CSODOTALobby_LobbyType_value)
 }
 
+func init() { proto.RegisterFile("dota_gcmessages_common_match_management.proto", fileDescriptor18) }
+
 var fileDescriptor18 = []byte{
 	// 3255 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xbc, 0x59, 0x5b, 0x73, 0x1b, 0xc7,

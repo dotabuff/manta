@@ -2511,6 +2511,8 @@ func init() {
 	proto.RegisterEnum("dota.EStartFindingMatchResult", EStartFindingMatchResult_name, EStartFindingMatchResult_value)
 }
 
+func init() { proto.RegisterFile("dota_gcmessages_client_match_management.proto", fileDescriptor13) }
+
 var fileDescriptor13 = []byte{
 	// 3407 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xc4, 0x59, 0xcb, 0x77, 0xdb, 0xc6,

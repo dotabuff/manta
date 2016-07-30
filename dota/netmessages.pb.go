@@ -3266,6 +3266,8 @@ func init() {
 	proto.RegisterEnum("dota.CBidirMsg_RelayInfo_OperationT", CBidirMsg_RelayInfo_OperationT_name, CBidirMsg_RelayInfo_OperationT_value)
 }
 
+func init() { proto.RegisterFile("netmessages.proto", fileDescriptor30) }
+
 var fileDescriptor30 = []byte{
 	// 3986 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x8c, 0x5a, 0xcd, 0x73, 0x24, 0xd9,

@@ -205,6 +205,8 @@ func init() {
 	proto.RegisterEnum("dota.EDotaBroadcastMessages", EDotaBroadcastMessages_name, EDotaBroadcastMessages_value)
 }
 
+func init() { proto.RegisterFile("dota_broadcastmessages.proto", fileDescriptor5) }
+
 var fileDescriptor5 = []byte{
 	// 346 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x84, 0x51, 0xcd, 0x4f, 0xc2, 0x30,

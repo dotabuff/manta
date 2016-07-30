@@ -1358,6 +1358,8 @@ func init() {
 	proto.RegisterEnum("dota.CMsgDOTAJoinChatChannelResponse_Result", CMsgDOTAJoinChatChannelResponse_Result_name, CMsgDOTAJoinChatChannelResponse_Result_value)
 }
 
+func init() { proto.RegisterFile("dota_gcmessages_client_chat.proto", fileDescriptor10) }
+
 var fileDescriptor10 = []byte{
 	// 1750 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xb4, 0x57, 0x5d, 0x6f, 0xdb, 0x5e,

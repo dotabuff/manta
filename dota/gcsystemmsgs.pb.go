@@ -495,6 +495,8 @@ func init() {
 	proto.RegisterEnum("dota.EGCToGCMsg", EGCToGCMsg_name, EGCToGCMsg_value)
 }
 
+func init() { proto.RegisterFile("gcsystemmsgs.proto", fileDescriptor29) }
+
 var fileDescriptor29 = []byte{
 	// 1563 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x84, 0x57, 0x49, 0x77, 0xdc, 0xc4,
