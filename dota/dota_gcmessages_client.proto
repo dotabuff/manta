@@ -1315,6 +1315,7 @@ message CMsgDOTALobbyRichPresence {
 	optional uint32 max_member_count = 6;
 	optional fixed64 custom_game_id = 7;
 	optional string name = 8;
+	optional uint32 lobby_type = 9;
 }
 
 message CMsgDOTACustomGameListenServerStartedLoading {
