@@ -205,6 +205,14 @@ type Callbacks struct {
 	onCDOTAUserMsg_UpdateQuestProgress        []func(*dota.CDOTAUserMsg_UpdateQuestProgress) error
 	onCDOTAClientMsg_MatchMetadata            []func(*dota.CDOTAClientMsg_MatchMetadata) error
 	onCDOTAUserMsg_QuestStatus                []func(*dota.CDOTAUserMsg_QuestStatus) error
+
+	pb *proto.Buffer
+}
+
+func newCallbacks() *Callbacks {
+	return &Callbacks{
+		pb: &proto.Buffer{},
+	}
 }
 
 // OnCDemoStop registers a callback EDemoCommands_DEM_Stop
@@ -1205,7 +1213,8 @@ func (c *Callbacks) callByDemoType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDemoStop{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -1223,7 +1232,8 @@ func (c *Callbacks) callByDemoType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDemoFileHeader{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -1241,7 +1251,8 @@ func (c *Callbacks) callByDemoType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDemoFileInfo{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -1259,7 +1270,8 @@ func (c *Callbacks) callByDemoType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDemoSyncTick{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -1277,7 +1289,8 @@ func (c *Callbacks) callByDemoType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDemoSendTables{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -1295,7 +1308,8 @@ func (c *Callbacks) callByDemoType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDemoClassInfo{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -1313,7 +1327,8 @@ func (c *Callbacks) callByDemoType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDemoStringTables{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -1331,7 +1346,8 @@ func (c *Callbacks) callByDemoType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDemoPacket{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -1349,7 +1365,8 @@ func (c *Callbacks) callByDemoType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDemoPacket{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -1367,7 +1384,8 @@ func (c *Callbacks) callByDemoType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDemoConsoleCmd{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -1385,7 +1403,8 @@ func (c *Callbacks) callByDemoType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDemoCustomData{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -1403,7 +1422,8 @@ func (c *Callbacks) callByDemoType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDemoCustomDataCallbacks{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -1421,7 +1441,8 @@ func (c *Callbacks) callByDemoType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDemoUserCmd{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -1439,7 +1460,8 @@ func (c *Callbacks) callByDemoType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDemoFullPacket{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -1457,7 +1479,8 @@ func (c *Callbacks) callByDemoType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDemoSaveGame{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -1475,7 +1498,8 @@ func (c *Callbacks) callByDemoType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDemoSpawnGroups{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -1504,7 +1528,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CNETMsg_NOP{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -1522,7 +1547,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CNETMsg_Disconnect{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -1540,7 +1566,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CNETMsg_SplitScreenUser{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -1558,7 +1585,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CNETMsg_Tick{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -1576,7 +1604,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CNETMsg_StringCmd{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -1594,7 +1623,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CNETMsg_SetConVar{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -1612,7 +1642,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CNETMsg_SignonState{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -1630,7 +1661,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CNETMsg_SpawnGroup_Load{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -1648,7 +1680,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CNETMsg_SpawnGroup_ManifestUpdate{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -1666,7 +1699,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CNETMsg_SpawnGroup_SetCreationTick{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -1684,7 +1718,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CNETMsg_SpawnGroup_Unload{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -1702,7 +1737,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CNETMsg_SpawnGroup_LoadCompleted{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -1720,7 +1756,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CSVCMsg_ServerInfo{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -1738,7 +1775,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CSVCMsg_FlattenedSerializer{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -1756,7 +1794,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CSVCMsg_ClassInfo{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -1774,7 +1813,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CSVCMsg_SetPause{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -1792,7 +1832,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CSVCMsg_CreateStringTable{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -1810,7 +1851,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CSVCMsg_UpdateStringTable{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -1828,7 +1870,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CSVCMsg_VoiceInit{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -1846,7 +1889,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CSVCMsg_VoiceData{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -1864,7 +1908,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CSVCMsg_Print{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -1882,7 +1927,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CSVCMsg_Sounds{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -1900,7 +1946,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CSVCMsg_SetView{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -1918,7 +1965,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CSVCMsg_ClearAllStringTables{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -1936,7 +1984,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CSVCMsg_CmdKeyValues{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -1954,7 +2003,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CSVCMsg_BSPDecal{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -1972,7 +2022,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CSVCMsg_SplitScreen{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -1990,7 +2041,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CSVCMsg_PacketEntities{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2008,7 +2060,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CSVCMsg_Prefetch{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2026,7 +2079,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CSVCMsg_Menu{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2044,7 +2098,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CSVCMsg_GetCvarValue{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2062,7 +2117,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CSVCMsg_StopSound{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2080,7 +2136,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CSVCMsg_PeerList{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2098,7 +2155,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CSVCMsg_PacketReliable{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2116,7 +2174,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CSVCMsg_HLTVStatus{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2134,7 +2193,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CSVCMsg_ServerSteamID{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2152,7 +2212,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CSVCMsg_FullFrameSplit{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2170,7 +2231,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CUserMessageAchievementEvent{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2188,7 +2250,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CUserMessageCloseCaption{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2206,7 +2269,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CUserMessageCloseCaptionDirect{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2224,7 +2288,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CUserMessageCurrentTimescale{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2242,7 +2307,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CUserMessageDesiredTimescale{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2260,7 +2326,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CUserMessageFade{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2278,7 +2345,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CUserMessageGameTitle{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2296,7 +2364,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CUserMessageHintText{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2314,7 +2383,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CUserMessageHudMsg{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2332,7 +2402,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CUserMessageHudText{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2350,7 +2421,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CUserMessageKeyHintText{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2368,7 +2440,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CUserMessageColoredText{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2386,7 +2459,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CUserMessageRequestState{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2404,7 +2478,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CUserMessageResetHUD{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2422,7 +2497,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CUserMessageRumble{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2440,7 +2516,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CUserMessageSayText{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2458,7 +2535,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CUserMessageSayText2{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2476,7 +2554,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CUserMessageSayTextChannel{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2494,7 +2573,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CUserMessageShake{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2512,7 +2592,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CUserMessageShakeDir{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2530,7 +2611,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CUserMessageTextMsg{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2548,7 +2630,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CUserMessageScreenTilt{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2566,7 +2649,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CUserMessageTrain{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2584,7 +2668,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CUserMessageVGUIMenu{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2602,7 +2687,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CUserMessageVoiceMask{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2620,7 +2706,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CUserMessageVoiceSubtitle{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2638,7 +2725,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CUserMessageSendAudio{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2656,7 +2744,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CUserMessageItemPickup{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2674,7 +2763,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CUserMessageAmmoDenied{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2692,7 +2782,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CUserMessageCrosshairAngle{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2710,7 +2801,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CUserMessageShowMenu{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2728,7 +2820,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CUserMessageCreditsMsg{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2746,7 +2839,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CEntityMessagePlayJingle{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2764,7 +2858,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CEntityMessageScreenOverlay{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2782,7 +2877,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CEntityMessageRemoveAllDecals{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2800,7 +2896,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CEntityMessagePropagateForce{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2818,7 +2915,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CEntityMessageDoSpark{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2836,7 +2934,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CEntityMessageFixAngle{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2854,7 +2953,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CUserMessageCloseCaptionPlaceholder{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2872,7 +2972,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CUserMessageCameraTransition{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2890,7 +2991,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CUserMessageAudioParameter{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2908,7 +3010,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CMsgVDebugGameSessionIDEvent{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2926,7 +3029,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CMsgPlaceDecalEvent{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2944,7 +3048,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CMsgClearWorldDecalsEvent{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2962,7 +3067,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CMsgClearEntityDecalsEvent{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2980,7 +3086,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CMsgClearDecalsForSkeletonInstanceEvent{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -2998,7 +3105,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CMsgSource1LegacyGameEventList{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3016,7 +3124,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CMsgSource1LegacyListenEvents{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3034,7 +3143,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CMsgSource1LegacyGameEvent{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3052,7 +3162,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CMsgSosStartSoundEvent{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3070,7 +3181,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CMsgSosStopSoundEvent{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3088,7 +3200,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CMsgSosSetSoundEventParams{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3106,7 +3219,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CMsgSosSetLibraryStackFields{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3124,7 +3238,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CMsgSosStopSoundEventHash{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3142,7 +3257,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_AIDebugLine{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3160,7 +3276,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_ChatEvent{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3178,7 +3295,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_CombatHeroPositions{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3196,7 +3314,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_CombatLogShowDeath{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3214,7 +3333,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_CreateLinearProjectile{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3232,7 +3352,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_DestroyLinearProjectile{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3250,7 +3371,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_DodgeTrackingProjectiles{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3268,7 +3390,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_GlobalLightColor{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3286,7 +3409,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_GlobalLightDirection{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3304,7 +3428,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_InvalidCommand{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3322,7 +3447,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_LocationPing{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3340,7 +3466,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_MapLine{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3358,7 +3485,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_MiniKillCamInfo{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3376,7 +3504,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_MinimapDebugPoint{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3394,7 +3523,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_MinimapEvent{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3412,7 +3542,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_NevermoreRequiem{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3430,7 +3561,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_OverheadEvent{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3448,7 +3580,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_SetNextAutobuyItem{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3466,7 +3599,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_SharedCooldown{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3484,7 +3618,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_SpectatorPlayerClick{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3502,7 +3637,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_TutorialTipInfo{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3520,7 +3656,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_UnitEvent{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3538,7 +3675,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_ParticleManager{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3556,7 +3694,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_BotChat{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3574,7 +3713,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_HudError{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3592,7 +3732,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_ItemPurchased{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3610,7 +3751,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_Ping{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3628,7 +3770,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_ItemFound{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3646,7 +3789,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_SwapVerify{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3664,7 +3808,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_WorldLine{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3682,7 +3827,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CMsgGCToClientTournamentItemDrop{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3700,7 +3846,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_ItemAlert{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3718,7 +3865,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_HalloweenDrops{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3736,7 +3884,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_ChatWheel{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3754,7 +3903,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_ReceivedXmasGift{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3772,7 +3922,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_UpdateSharedContent{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3790,7 +3941,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_TutorialRequestExp{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3808,7 +3960,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_TutorialPingMinimap{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3826,7 +3979,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_GamerulesStateChanged{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3844,7 +3998,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_ShowSurvey{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3862,7 +4017,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_TutorialFade{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3880,7 +4036,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_AddQuestLogEntry{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3898,7 +4055,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_SendStatPopup{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3916,7 +4074,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_TutorialFinish{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3934,7 +4093,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_SendRoshanPopup{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3952,7 +4112,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_SendGenericToolTip{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3970,7 +4131,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_SendFinalGold{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -3988,7 +4150,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_CustomMsg{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -4006,7 +4169,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_CoachHUDPing{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -4024,7 +4188,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_ClientLoadGridNav{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -4042,7 +4207,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_TE_Projectile{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -4060,7 +4226,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_TE_ProjectileLoc{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -4078,7 +4245,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_TE_DotaBloodImpact{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -4096,7 +4264,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_TE_UnitAnimation{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -4114,7 +4283,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_TE_UnitAnimationEnd{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -4132,7 +4302,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_AbilityPing{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -4150,7 +4321,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_ShowGenericPopup{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -4168,7 +4340,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_VoteStart{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -4186,7 +4359,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_VoteUpdate{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -4204,7 +4378,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_VoteEnd{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -4222,7 +4397,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_BoosterState{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -4240,7 +4416,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_WillPurchaseAlert{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -4258,7 +4435,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_TutorialMinimapPosition{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -4276,7 +4454,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_PlayerMMR{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -4294,7 +4473,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_AbilitySteal{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -4312,7 +4492,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_CourierKilledAlert{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -4330,7 +4511,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_EnemyItemAlert{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -4348,7 +4530,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_StatsMatchDetails{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -4366,7 +4549,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_MiniTaunt{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -4384,7 +4568,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_BuyBackStateAlert{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -4402,7 +4587,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_SpeechBubble{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -4420,7 +4606,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_CustomHeaderMessage{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -4438,7 +4625,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_QuickBuyAlert{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -4456,7 +4644,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_StatsHeroMinuteDetails{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -4474,7 +4663,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_PredictionResult{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -4492,7 +4682,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_ModifierAlert{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -4510,7 +4701,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_HPManaAlert{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -4528,7 +4720,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_GlyphAlert{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -4546,7 +4739,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_BeastChat{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -4564,7 +4758,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_SpectatorPlayerUnitOrders{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -4582,7 +4777,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_CustomHudElement_Create{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -4600,7 +4796,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_CustomHudElement_Modify{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -4618,7 +4815,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_CustomHudElement_Destroy{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -4636,7 +4834,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_CompendiumState{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -4654,7 +4853,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_ProjectionAbility{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -4672,7 +4872,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_ProjectionEvent{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -4690,7 +4891,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CMsgDOTACombatLogEntry{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -4708,7 +4910,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_XPAlert{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -4726,7 +4929,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_UpdateQuestProgress{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -4744,7 +4948,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAClientMsg_MatchMetadata{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
@@ -4762,7 +4967,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		msg := &dota.CDOTAUserMsg_QuestStatus{}
-		if err := proto.Unmarshal(buf, msg); err != nil {
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 

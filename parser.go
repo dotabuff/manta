@@ -59,7 +59,7 @@ func NewParser(buf []byte) (*Parser, error) {
 func NewStreamParser(r io.Reader) (*Parser, error) {
 	// Create a new parser with an internal reader for the given buffer.
 	parser := &Parser{
-		Callbacks: &Callbacks{},
+		Callbacks: newCallbacks(),
 		Tick:      0,
 		NetTick:   0,
 
