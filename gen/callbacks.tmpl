@@ -10,6 +10,13 @@ type Callbacks struct {
 {{ range .DemoTypes }}  on{{ .Callback }} []func(*dota.{{ .TypeName }}) error
 {{ end }}{{ range .PacketTypes }}  on{{ .Callback }} []func(*dota.{{ .TypeName }}) error
 {{ end }}
+  pb *proto.Buffer
+}
+
+func newCallbacks() *Callbacks {
+  return &Callbacks{
+    pb: &proto.Buffer{},
+  }
 }
 
 {{ range .DemoTypes }}// On{{ .Callback }} registers a callback {{ .EnumName }}
@@ -30,7 +37,8 @@ func (c *Callbacks) callByDemoType(t int32, buf []byte) error {
     }
 
     msg := &dota.{{ .TypeName }}{}
-    if err := proto.Unmarshal(buf, msg); err != nil {
+    c.pb.SetBuf(buf)
+    if err := c.pb.Unmarshal(msg); err != nil {
       return err
     }
 
@@ -60,7 +68,8 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
     }
 
     msg := &dota.{{ .TypeName }}{}
-    if err := proto.Unmarshal(buf, msg); err != nil {
+    c.pb.SetBuf(buf)
+    if err := c.pb.Unmarshal(msg); err != nil {
       return err
     }
 
