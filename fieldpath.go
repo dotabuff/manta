@@ -78,10 +78,11 @@ var fieldpathLookup = []fieldpathOp{
 func newFieldpath(parentTbl *dt) *fieldpath {
 	fp := &fieldpath{
 		parent:   parentTbl,
-		fields:   []*fieldpathField{},
-		index:    []int32{-1}, // always start at -1
+		fields:   make([]*fieldpathField, 0, 2),
+		index:    make([]int32, 1, 2),
 		finished: false,
 	}
+	fp.index[0] = -1 // always start at -1
 
 	return fp
 }
