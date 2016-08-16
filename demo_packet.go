@@ -62,7 +62,7 @@ func (ms pendingMessages) Less(i, j int) bool {
 func (p *Parser) onCDemoPacket(m *dota.CDemoPacket) error {
 	// Create a slice to store pending mesages. Messages are read first as
 	// pending messages then sorted before dispatch.
-	ms := make(pendingMessages, 0)
+	ms := make(pendingMessages, 0, 2)
 
 	// Read all messages from the buffer. Messages are packed serially as
 	// {type, size, data}. We keep reading until until less than a byte remains.

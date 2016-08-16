@@ -50,6 +50,11 @@ func _debugf(format string, args ...interface{}) {
 	}
 }
 
+func _printf(format string, args ...interface{}) {
+	args = append([]interface{}{_caller(2)}, args...)
+	fmt.Printf("%s: "+format+"\n", args...)
+}
+
 // error with printf syntax
 func _errorf(format string, args ...interface{}) error {
 	return fmt.Errorf(format, args...)
