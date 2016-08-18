@@ -468,7 +468,8 @@ message CMsgGCRoutingInfo {
 		DISCARD = 1;
 		CLIENT_STEAMID = 2;
 		PROTOBUF_FIELD_UINT64 = 3;
-		WEBAPI_PARAM_UINT64 = 4;
+		WEBAPI_PARAM = 4;
+		WEBAPI_PARAM_STEAMID_ACCOUNTID = 5;
 	}
 
 	repeated uint32 dir_index = 1;

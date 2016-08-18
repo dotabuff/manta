@@ -24,6 +24,11 @@ message CDOTAMatchMetadata {
 			optional int32 purchase_time = 2;
 		}
 
+		message InventorySnapshot {
+			repeated uint32 item_id = 1;
+			optional int32 game_time = 2;
+		}
+
 		message Player {
 			optional uint32 account_id = 1;
 			repeated uint32 ability_upgrades = 2;
@@ -48,6 +53,7 @@ message CDOTAMatchMetadata {
 			optional float push_score = 21;
 			repeated uint32 level_up_times = 22;
 			repeated float graph_net_worth = 23;
+			repeated CDOTAMatchMetadata.Team.InventorySnapshot inventory_snapshot = 24;
 		}
 
 		optional uint32 dota_team = 1;
