@@ -411,12 +411,9 @@ var testScenarios = map[int64]testScenario{
 }
 
 func (s testScenario) bench(b *testing.B) {
-	r := mustGetReplayReader(s.matchId, s.replayUrl)
-	defer r.Close()
-
-	b.ResetTimer()
-
 	for n := 0; n < b.N; n++ {
+		r := mustGetReplayReader(s.matchId, s.replayUrl)
+
 		parser, err := NewStreamParser(r)
 		if err != nil {
 			b.Fatalf("unable to instantiate parser: %s", err)

@@ -4,7 +4,7 @@ test:
 	go test -cover -v
 
 bench:
-	go test -run=XXX -bench=. -v
+	go test -run=XXX -bench=BenchmarkMatch -benchtime=1m -v
 
 cover:
 	go test -cover -coverpkg github.com/dotabuff/manta,github.com/dotabuff/manta/vbkv -coverprofile /tmp/manta.cov -v
