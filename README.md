@@ -57,6 +57,18 @@ To run `make update` you will need the latest version of the `protobuf` package:
 
 `go get -u github.com/golang/protobuf/...`
 
+You will also need GNU sed. To install GNU sed on Mac OS X:
+
+```
+# Install GNU sed
+brew install gnused
+# Create a symlink in /usr/local/bin
+ln -s /usr/local/bin/gsed /usr/local/bin/sed
+# Ensure that /usr/local/bin is foremost in your PATH
+export PATH=""/usr/local/bin:$PATH"
+```
+
+
 ## License
 
 Manta is distributed under the [MIT license](https://github.com/dotabuff/manta/blob/master/LICENSE).
