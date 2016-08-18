@@ -61,11 +61,11 @@ You will also need GNU sed. To install GNU sed on Mac OS X:
 
 ```
 # Install GNU sed
-brew install gnused
+brew install gnu-sed
 # Create a symlink in /usr/local/bin
 ln -s /usr/local/bin/gsed /usr/local/bin/sed
 # Ensure that /usr/local/bin is foremost in your PATH
-export PATH=""/usr/local/bin:$PATH"
+export PATH="/usr/local/bin:$PATH"
 ```
 
 
