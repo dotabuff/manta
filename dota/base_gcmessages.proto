@@ -362,10 +362,6 @@ message CSOEconItemTournamentPassport {
 	optional uint32 reward_flags = 8;
 }
 
-message CMsgGCItemPreviewItemBoughtNotification {
-	optional uint32 item_def_index = 1;
-}
-
 message CMsgGCStorePurchaseCancel {
 	optional uint64 txn_id = 1;
 }

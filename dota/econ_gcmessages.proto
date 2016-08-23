@@ -99,13 +99,6 @@ enum EGCItemMsg {
 	k_EMsgGCServerBrowser_FavoriteServer = 1601;
 	k_EMsgGCServerBrowser_BlacklistServer = 1602;
 	k_EMsgGCServerRentalsBase = 1700;
-	k_EMsgGCItemPreviewCheckStatus = 1701;
-	k_EMsgGCItemPreviewStatusResponse = 1702;
-	k_EMsgGCItemPreviewRequest = 1703;
-	k_EMsgGCItemPreviewRequestResponse = 1704;
-	k_EMsgGCItemPreviewExpire = 1705;
-	k_EMsgGCItemPreviewExpireNotification = 1706;
-	k_EMsgGCItemPreviewItemBoughtNotification = 1707;
 	k_EMsgGCDev_NewItemRequest = 2001;
 	k_EMsgGCDev_NewItemRequestResponse = 2002;
 	k_EMsgGCStoreGetUserData = 2500;

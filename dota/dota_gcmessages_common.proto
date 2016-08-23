@@ -872,7 +872,7 @@ message CMsgDOTAMatch {
 		optional float expected_team_contribution = 10;
 		optional float scaled_metric = 11;
 		optional uint32 previous_rank = 12;
-		optional uint32 rank_change = 13;
+		optional sint32 rank_change = 13;
 		optional bool solo_rank = 49;
 		optional bool seasonal_rank = 53;
 		optional uint32 kills = 14;

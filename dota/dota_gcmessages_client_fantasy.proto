@@ -852,6 +852,7 @@ message CMsgClientToGCGetPlayerCardRosterResponse {
 	repeated uint64 player_card_item_id = 2;
 	optional float score = 3;
 	optional bool finalized = 4;
+	optional float percentile = 5;
 }
 
 message CMsgClientToGCSetPlayerCardRosterRequest {

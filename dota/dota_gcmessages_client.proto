@@ -1689,6 +1689,14 @@ message CMsgClientToGCRequestEventPointLogResponse {
 		optional uint64 team_gid = 1;
 	}
 
+	message FantasyRewardEvent {
+		optional uint32 percentile = 1;
+	}
+
+	message BracketRewardEvent {
+		optional uint32 correct_answers = 1;
+	}
+
 	message EventPointTransaction {
 		optional uint32 time = 1;
 		optional int32 event_points = 2;
@@ -1704,6 +1712,8 @@ message CMsgClientToGCRequestEventPointLogResponse {
 		optional CMsgClientToGCRequestEventPointLogResponse.InGamePredictionCorrectEvent in_game_prediction_event = 12;
 		optional CMsgClientToGCRequestEventPointLogResponse.CorrectPredictionEvent prediction_event = 13;
 		optional CMsgClientToGCRequestEventPointLogResponse.WeekendTourneyPayoutEvent weekend_tourney_payout_event = 14;
+		optional CMsgClientToGCRequestEventPointLogResponse.FantasyRewardEvent fantasy_reward_event = 15;
+		optional CMsgClientToGCRequestEventPointLogResponse.BracketRewardEvent bracket_reward_event = 16;
 	}
 
 	optional bool result = 1;
