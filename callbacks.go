@@ -203,7 +203,7 @@ type Callbacks struct {
 	onCMsgDOTACombatLogEntry                  []func(*dota.CMsgDOTACombatLogEntry) error
 	onCDOTAUserMsg_XPAlert                    []func(*dota.CDOTAUserMsg_XPAlert) error
 	onCDOTAUserMsg_UpdateQuestProgress        []func(*dota.CDOTAUserMsg_UpdateQuestProgress) error
-	onCDOTAClientMsg_MatchMetadata            []func(*dota.CDOTAClientMsg_MatchMetadata) error
+	onCDOTAMatchMetadataFile                  []func(*dota.CDOTAMatchMetadataFile) error
 	onCDOTAUserMsg_QuestStatus                []func(*dota.CDOTAUserMsg_QuestStatus) error
 
 	pb *proto.Buffer
@@ -1195,9 +1195,9 @@ func (c *Callbacks) OnCDOTAUserMsg_UpdateQuestProgress(fn func(*dota.CDOTAUserMs
 	c.onCDOTAUserMsg_UpdateQuestProgress = append(c.onCDOTAUserMsg_UpdateQuestProgress, fn)
 }
 
-// OnCDOTAClientMsg_MatchMetadata registers a callback for EDotaUserMessages_DOTA_UM_MatchMetadata
-func (c *Callbacks) OnCDOTAClientMsg_MatchMetadata(fn func(*dota.CDOTAClientMsg_MatchMetadata) error) {
-	c.onCDOTAClientMsg_MatchMetadata = append(c.onCDOTAClientMsg_MatchMetadata, fn)
+// OnCDOTAMatchMetadataFile registers a callback for EDotaUserMessages_DOTA_UM_MatchMetadata
+func (c *Callbacks) OnCDOTAMatchMetadataFile(fn func(*dota.CDOTAMatchMetadataFile) error) {
+	c.onCDOTAMatchMetadataFile = append(c.onCDOTAMatchMetadataFile, fn)
 }
 
 // OnCDOTAUserMsg_QuestStatus registers a callback for EDotaUserMessages_DOTA_UM_QuestStatus
@@ -4943,17 +4943,17 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		return nil
 
 	case 557: // dota.EDotaUserMessages_DOTA_UM_MatchMetadata
-		if c.onCDOTAClientMsg_MatchMetadata == nil {
+		if c.onCDOTAMatchMetadataFile == nil {
 			return nil
 		}
 
-		msg := &dota.CDOTAClientMsg_MatchMetadata{}
+		msg := &dota.CDOTAMatchMetadataFile{}
 		c.pb.SetBuf(buf)
 		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
-		for _, fn := range c.onCDOTAClientMsg_MatchMetadata {
+		for _, fn := range c.onCDOTAMatchMetadataFile {
 			if err := fn(msg); err != nil {
 				return err
 			}
