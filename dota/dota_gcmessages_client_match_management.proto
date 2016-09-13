@@ -33,6 +33,7 @@ enum EStartFindingMatchResult {
 	k_EStartFindingMatchResult_WeekendTourneyTeamBuyInTooLarge = 117;
 	k_EStartFindingMatchResult_MemberMissingEventOwnership = 118;
 	k_EStartFindingMatchResult_WeekendTourneyNotUnlocked = 119;
+	k_EStartFindingMatchResult_WeekendTourneyRecentParticipation = 120;
 }
 
 message CMsgStartFindingMatch {

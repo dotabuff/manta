@@ -96,6 +96,7 @@ message CSODOTAGameAccountClient {
 	optional uint32 low_priority_until_date = 18;
 	optional uint32 prevent_text_chat_until_date = 20;
 	optional uint32 prevent_voice_until_date = 21;
+	optional uint32 prevent_public_text_chat_until_date = 86;
 	optional uint32 last_abandoned_game_date = 22;
 	optional uint32 last_secondary_abandoned_game_date = 59;
 	optional uint32 leaver_penalty_count = 23;
@@ -117,16 +118,16 @@ message CSODOTAGameAccountClient {
 	optional uint32 calibration_games_remaining = 51;
 	optional uint32 solo_competitive_rank = 52;
 	optional uint32 solo_calibration_games_remaining = 54;
-	optional uint32 competitive_1v1_rank = 63;
-	optional uint32 competitive_1v1_calibration_games_remaining = 64;
 	optional uint32 general_seasonal_ranked_rank = 75;
 	optional uint32 general_seasonal_ranked_calibration_games_remaining = 76;
 	optional uint32 general_seasonal_ranked_games_played = 80;
 	optional uint32 general_seasonal_ranked_rank_peak = 81;
+	optional bool general_seasonal_rank_transferred = 83;
 	optional uint32 solo_seasonal_ranked_rank = 77;
 	optional uint32 solo_seasonal_ranked_calibration_games_remaining = 78;
 	optional uint32 solo_seasonal_ranked_games_played = 79;
 	optional uint32 solo_seasonal_ranked_rank_peak = 82;
+	optional bool solo_seasonal_rank_transferred = 84;
 	optional uint32 recruitment_level = 55;
 	optional bool has_new_notifications = 56;
 	optional bool is_league_admin = 57;
@@ -143,6 +144,7 @@ message CSODOTAGameAccountClient {
 	optional uint32 player_behavior_score_last_report = 72;
 	optional bool player_behavior_report_old_data = 73;
 	optional uint32 tourney_skill_level = 74;
+	optional uint32 tourney_recent_participation_date = 85;
 }
 
 message CMsgLobbyEventPoints {
@@ -760,7 +762,7 @@ message CMsgDOTASeasonPredictions {
 	}
 
 	message Answers {
-		repeated uint32 answer_id = 1;
+		optional uint32 answer_id = 1;
 	}
 
 	message QueryKeyValues {
@@ -898,6 +900,9 @@ message CMsgDOTAMatch {
 		optional int32 rank_uncertainty_change = 36;
 		optional uint32 hero_play_count = 37;
 		optional fixed64 party_id = 38;
+		optional uint32 scaled_hero_damage = 54;
+		optional uint32 scaled_tower_damage = 55;
+		optional uint32 scaled_hero_healing = 56;
 		optional float scaled_kills = 39;
 		optional float scaled_deaths = 40;
 		optional float scaled_assists = 41;

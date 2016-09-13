@@ -458,6 +458,11 @@ It has these top-level messages:
 	CMsgClientToGCRecyclePlayerCardResponse
 	CMsgClientToGCCreatePlayerCardPack
 	CMsgClientToGCCreatePlayerCardPackResponse
+	CMsgGCToClientBattlePassRollup_International2016
+	CMsgGCToClientBattlePassRollupRequest
+	CMsgGCToClientBattlePassRollupResponse
+	CMsgClientToGCTransferSeasonalMMRRequest
+	CMsgClientToGCTransferSeasonalMMRResponse
 	CMsgClientToGCPrivateChatInvite
 	CMsgClientToGCPrivateChatKick
 	CMsgClientToGCPrivateChatPromote
@@ -467,6 +472,7 @@ It has these top-level messages:
 	CMsgGCToClientPrivateChatInfoResponse
 	CMsgDOTAJoinChatChannel
 	CMsgDOTALeaveChatChannel
+	CMsgGCChatReportPublicSpam
 	CMsgDOTAClientIgnoredUser
 	CMsgDOTAChatMessage
 	CMsgDOTAChatMember
@@ -1087,6 +1093,7 @@ It has these top-level messages:
 	CMsgGCToGCSOCacheSubscribe
 	CMsgGCToGCSOCacheUnsubscribe
 	CMsgGCClientPing
+	CMsgGCToGCForwardAccountDetails
 	CMsgGCToGCLoadSessionSOCache
 	CMsgGCToGCLoadSessionSOCacheResponse
 	CMsgGCToGCUpdateSessionStats

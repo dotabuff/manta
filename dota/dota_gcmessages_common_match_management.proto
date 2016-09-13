@@ -27,6 +27,7 @@ message CSODOTAPartyMember {
 	optional uint32 region_ping_failed_bitmask = 6;
 	optional uint32 tourney_skill_level = 7;
 	optional uint32 tourney_buyin = 8;
+	optional uint32 tourney_prevent_until = 9;
 }
 
 message CSODOTAParty {

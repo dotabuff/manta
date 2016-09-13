@@ -232,7 +232,7 @@ enum EDOTAPlayerMMRType {
 	k_EDOTAPlayerMMRType_SoloHidden = 2;
 	k_EDOTAPlayerMMRType_GeneralCompetitive = 3;
 	k_EDOTAPlayerMMRType_SoloCompetitive = 4;
-	k_EDOTAPlayerMMRType_1v1Competitive = 5;
+	k_EDOTAPlayerMMRType_1v1Competitive_UNUSED = 5;
 	k_EDOTAPlayerMMRType_GeneralSeasonalRanked = 6;
 	k_EDOTAPlayerMMRType_SoloSeasonalRanked = 7;
 }
