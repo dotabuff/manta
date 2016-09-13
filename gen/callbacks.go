@@ -163,7 +163,7 @@ var messageTypes = []*dotaMessage{
 			case "EDotaUserMessages_DOTA_UM_CombatLogDataHLTV":
 				return "CMsgDOTACombatLogEntry", true
 			case "EDotaUserMessages_DOTA_UM_MatchMetadata":
-				return "CDOTAClientMsg_MatchMetadata", true
+				return "CDOTAMatchMetadataFile", true
 			case "EDotaUserMessages_DOTA_UM_MatchDetails":
 				return "", false
 			}
