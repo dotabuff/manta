@@ -716,6 +716,7 @@ It has these top-level messages:
 	CProtoItemTeamShowcase
 	CMatchPlayerAbilityUpgrade
 	CMatchAdditionalUnitInventory
+	CMatchPlayerPermanentBuff
 	CMatchHeroSelectEvent
 	CMsgDOTAProcessFantasyScheduledEvent
 	CMsgDOTAHasItemQuery

@@ -143,7 +143,7 @@ message CDOTALobbyMember {
 	repeated uint32 disabled_hero_id = 20;
 	optional PartnerAccountType partner_account_type = 21 [default = PARTNER_NONE];
 	repeated uint32 enabled_hero_id = 22;
-	optional DOTA_GC_TEAM coach_team = 23 [default = DOTA_GC_TEAM_GOOD_GUYS];
+	optional DOTA_GC_TEAM coach_team = 23 [default = DOTA_GC_TEAM_NOTEAM];
 	optional uint32 nexon_pc_bang_no = 24;
 	optional string nexon_pc_bang_name = 25;
 	repeated CDOTALobbyMember.CDOTALobbyMemberXPBonus xp_bonuses = 27;

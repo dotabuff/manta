@@ -100,11 +100,11 @@ message CMsgAMFindAccountsResponse {
 message CMsgNotifyWatchdog {
 	optional uint32 source = 1;
 	optional uint32 alert_type = 2;
-	optional uint32 alert_destination = 3;
 	optional bool critical = 4;
 	optional uint32 time = 5;
 	optional uint32 appid = 6;
 	optional string text = 7;
+	optional string recipient = 12;
 }
 
 message CMsgAMGetLicenses {

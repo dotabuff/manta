@@ -27,6 +27,10 @@ message CDOTAMatchMetadata {
 		message InventorySnapshot {
 			repeated uint32 item_id = 1;
 			optional int32 game_time = 2;
+			optional uint32 kills = 3;
+			optional uint32 deaths = 4;
+			optional uint32 assists = 5;
+			optional uint32 level = 6;
 		}
 
 		message Player {
@@ -54,6 +58,7 @@ message CDOTAMatchMetadata {
 			repeated uint32 level_up_times = 22;
 			repeated float graph_net_worth = 23;
 			repeated CDOTAMatchMetadata.Team.InventorySnapshot inventory_snapshot = 24;
+			optional bool avg_stats_calibrated = 25;
 		}
 
 		optional uint32 dota_team = 1;

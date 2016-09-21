@@ -217,6 +217,11 @@ message CMatchAdditionalUnitInventory {
 	repeated uint32 items = 2;
 }
 
+message CMatchPlayerPermanentBuff {
+	optional uint32 permanent_buff = 1;
+	optional uint32 stack_count = 2;
+}
+
 message CMatchHeroSelectEvent {
 	optional bool is_pick = 1;
 	optional uint32 team = 2;
@@ -913,9 +918,11 @@ message CMsgDOTAMatch {
 		optional uint32 misses = 46;
 		repeated CMatchPlayerAbilityUpgrade ability_upgrades = 47;
 		repeated CMatchAdditionalUnitInventory additional_units_inventory = 48;
+		repeated CMatchPlayerPermanentBuff permanent_buffs = 57;
 		optional CMsgDOTAMatch.Player.CustomGameData custom_game_data = 50;
 		optional bool active_battle_pass = 51;
 		optional uint32 net_worth = 52;
+		optional uint32 bot_difficulty = 58;
 	}
 
 	message BroadcasterInfo {
