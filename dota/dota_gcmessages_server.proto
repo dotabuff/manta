@@ -316,15 +316,10 @@ message CMsgSignOutDraftInfo {
 }
 
 message CMsgSignOutBotInfo {
-	message CMsgBotSlotDifficulty {
-		optional uint32 slot = 1;
-		optional DOTABotDifficulty bot_difficulty = 2 [default = BOT_DIFFICULTY_PASSIVE];
-	}
-
 	optional bool allow_cheats = 1;
-	optional DOTABotDifficulty bot_difficulty = 2 [default = BOT_DIFFICULTY_PASSIVE];
+	optional DOTABotDifficulty bot_difficulty_radiant = 2 [default = BOT_DIFFICULTY_PASSIVE];
 	optional bool created_lobby = 3;
-	repeated CMsgSignOutBotInfo.CMsgBotSlotDifficulty bot_slot_difficulties = 4;
+	optional DOTABotDifficulty bot_difficulty_dire = 5 [default = BOT_DIFFICULTY_PASSIVE];
 }
 
 message CMsgSignOutPlayerStats {

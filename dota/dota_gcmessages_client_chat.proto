@@ -116,6 +116,8 @@ message CMsgDOTAChatMessage {
 	optional uint32 status = 23;
 	optional bool battle_cup_victory = 24;
 	optional uint32 badge_level = 25;
+	optional uint32 suggest_pick_hero_id = 26;
+	optional string suggest_pick_hero_role = 27;
 }
 
 message CMsgDOTAChatMember {

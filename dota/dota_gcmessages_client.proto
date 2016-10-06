@@ -450,6 +450,7 @@ message CStaticLeagueData {
 	optional string location = 18;
 	optional string inventory_image = 19;
 	optional string square_image = 20;
+	optional bool battle_pass_rollup = 21;
 }
 
 message CLeagueData {

@@ -683,5 +683,7 @@ enum EDOTAGCMsg {
 	k_EMsgGCToGCPublicChatCommunicationBan = 8195;
 	k_EMsgGCToGCUpdateAccountPublicChatBan = 8196;
 	k_EMsgGCChatReportPublicSpam = 8197;
+	k_EMsgClientToGCSetPartyBuilderOptions = 8198;
+	k_EMsgClientToGCSetPartyBuilderOptionsResponse = 8199;
 }
 

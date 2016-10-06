@@ -102,6 +102,8 @@ enum EDotaUserMessages {
 	DOTA_UM_MatchMetadata = 557;
 	DOTA_UM_MatchDetails = 558;
 	DOTA_UM_QuestStatus = 559;
+	DOTA_UM_SuggestHeroPick = 560;
+	DOTA_UM_SuggestHeroRole = 561;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -1183,5 +1185,15 @@ message CDOTAUserMsg_QuestStatus {
 	optional uint32 query = 6;
 	optional float fail_gametime = 7;
 	optional uint32 item_id = 8;
+}
+
+message CDOTAUserMsg_SuggestHeroPick {
+	required uint32 player_id = 1;
+	optional uint32 hero_id = 2;
+}
+
+message CDOTAUserMsg_SuggestHeroRole {
+	required uint32 player_id = 1;
+	optional string hero_role = 2;
 }
 

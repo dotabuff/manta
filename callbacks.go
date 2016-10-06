@@ -205,6 +205,8 @@ type Callbacks struct {
 	onCDOTAUserMsg_UpdateQuestProgress        []func(*dota.CDOTAUserMsg_UpdateQuestProgress) error
 	onCDOTAMatchMetadataFile                  []func(*dota.CDOTAMatchMetadataFile) error
 	onCDOTAUserMsg_QuestStatus                []func(*dota.CDOTAUserMsg_QuestStatus) error
+	onCDOTAUserMsg_SuggestHeroPick            []func(*dota.CDOTAUserMsg_SuggestHeroPick) error
+	onCDOTAUserMsg_SuggestHeroRole            []func(*dota.CDOTAUserMsg_SuggestHeroRole) error
 
 	pb *proto.Buffer
 }
@@ -1203,6 +1205,16 @@ func (c *Callbacks) OnCDOTAMatchMetadataFile(fn func(*dota.CDOTAMatchMetadataFil
 // OnCDOTAUserMsg_QuestStatus registers a callback for EDotaUserMessages_DOTA_UM_QuestStatus
 func (c *Callbacks) OnCDOTAUserMsg_QuestStatus(fn func(*dota.CDOTAUserMsg_QuestStatus) error) {
 	c.onCDOTAUserMsg_QuestStatus = append(c.onCDOTAUserMsg_QuestStatus, fn)
+}
+
+// OnCDOTAUserMsg_SuggestHeroPick registers a callback for EDotaUserMessages_DOTA_UM_SuggestHeroPick
+func (c *Callbacks) OnCDOTAUserMsg_SuggestHeroPick(fn func(*dota.CDOTAUserMsg_SuggestHeroPick) error) {
+	c.onCDOTAUserMsg_SuggestHeroPick = append(c.onCDOTAUserMsg_SuggestHeroPick, fn)
+}
+
+// OnCDOTAUserMsg_SuggestHeroRole registers a callback for EDotaUserMessages_DOTA_UM_SuggestHeroRole
+func (c *Callbacks) OnCDOTAUserMsg_SuggestHeroRole(fn func(*dota.CDOTAUserMsg_SuggestHeroRole) error) {
+	c.onCDOTAUserMsg_SuggestHeroRole = append(c.onCDOTAUserMsg_SuggestHeroRole, fn)
 }
 
 func (c *Callbacks) callByDemoType(t int32, buf []byte) error {
@@ -4973,6 +4985,44 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		for _, fn := range c.onCDOTAUserMsg_QuestStatus {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 560: // dota.EDotaUserMessages_DOTA_UM_SuggestHeroPick
+		if c.onCDOTAUserMsg_SuggestHeroPick == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_SuggestHeroPick{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_SuggestHeroPick {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 561: // dota.EDotaUserMessages_DOTA_UM_SuggestHeroRole
+		if c.onCDOTAUserMsg_SuggestHeroRole == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_SuggestHeroRole{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_SuggestHeroRole {
 			if err := fn(msg); err != nil {
 				return err
 			}
