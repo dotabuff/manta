@@ -1932,8 +1932,10 @@ message CMsgClientToGCCreatePlayerCardPackResponse {
 message CMsgGCToClientBattlePassRollup_International2016 {
 	message Questlines {
 		optional string name = 1;
-		optional uint32 completed = 2;
-		optional uint32 total = 3;
+		optional uint32 onestar = 2;
+		optional uint32 twostar = 3;
+		optional uint32 threestar = 4;
+		optional uint32 total = 5;
 	}
 
 	message Wagering {
@@ -1989,10 +1991,19 @@ message CMsgGCToClientBattlePassRollup_International2016 {
 
 message CMsgGCToClientBattlePassRollupRequest {
 	optional uint32 event_id = 1;
+	optional uint32 account_id = 2;
 }
 
 message CMsgGCToClientBattlePassRollupResponse {
 	optional CMsgGCToClientBattlePassRollup_International2016 event_ti6 = 1;
+}
+
+message CMsgGCToClientBattlePassRollupListRequest {
+	optional uint32 account_id = 1;
+}
+
+message CMsgGCToClientBattlePassRollupListResponse {
+	repeated uint32 event_id = 1;
 }
 
 message CMsgClientToGCTransferSeasonalMMRRequest {
@@ -2001,5 +2012,20 @@ message CMsgClientToGCTransferSeasonalMMRRequest {
 
 message CMsgClientToGCTransferSeasonalMMRResponse {
 	optional bool success = 1;
+}
+
+message CMsgDOTAEventInvite {
+	message Team {
+		optional uint32 team_id = 1;
+		optional uint32 announcement_date = 2;
+		optional string team_name = 3;
+		optional uint32 invite_type = 4;
+	}
+
+	repeated CMsgDOTAEventInvite.Team teams = 1;
+}
+
+message CMsgDOTASetFavoriteTeam {
+	optional uint32 team_id = 1;
 }
 

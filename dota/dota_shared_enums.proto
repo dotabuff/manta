@@ -98,6 +98,7 @@ enum Fantasy_Roles {
 	FANTASY_ROLE_UNDEFINED = 0;
 	FANTASY_ROLE_CORE = 1;
 	FANTASY_ROLE_SUPPORT = 2;
+	FANTASY_ROLE_OFFLANE = 3;
 }
 
 enum Fantasy_Team_Slots {

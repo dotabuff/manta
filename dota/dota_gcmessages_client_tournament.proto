@@ -232,10 +232,10 @@ message CMsgDOTAWeekendTourneyPlayerHistory {
 		optional uint32 team_result = 6;
 		repeated uint32 account_id = 7;
 		optional string team_name = 8;
+		optional uint32 season_trophy_id = 9;
 	}
 
 	optional uint32 account_id = 1;
-	optional uint32 season_trophy_id = 2;
 	repeated CMsgDOTAWeekendTourneyPlayerHistory.Tournament tournaments = 3;
 }
 

@@ -463,8 +463,12 @@ It has these top-level messages:
 	CMsgGCToClientBattlePassRollup_International2016
 	CMsgGCToClientBattlePassRollupRequest
 	CMsgGCToClientBattlePassRollupResponse
+	CMsgGCToClientBattlePassRollupListRequest
+	CMsgGCToClientBattlePassRollupListResponse
 	CMsgClientToGCTransferSeasonalMMRRequest
 	CMsgClientToGCTransferSeasonalMMRResponse
+	CMsgDOTAEventInvite
+	CMsgDOTASetFavoriteTeam
 	CMsgClientToGCPrivateChatInvite
 	CMsgClientToGCPrivateChatKick
 	CMsgClientToGCPrivateChatPromote
@@ -692,6 +696,7 @@ It has these top-level messages:
 	CSourceTVGameSmall
 	CMsgClientToGCFindTopSourceTVGames
 	CMsgGCToClientFindTopSourceTVGamesResponse
+	CMsgGCToClientTopWeekendTourneyGames
 	CMsgClientToGCTopMatchesRequest
 	CMsgClientToGCTopLeagueMatchesRequest
 	CMsgClientToGCTopFriendMatchesRequest
@@ -1289,6 +1294,7 @@ It has these top-level messages:
 	CMsgSteamDatagramClientPingSampleRequest
 	CMsgSteamDatagramClientPingSampleReply
 	CMsgSteamDatagramClientSwitchedPrimary
+	CMsgSteamDatagramRouterHealth
 	CMsgProtoBufHeader
 	CMsgWebAPIKey
 	CMsgHttpRequest
