@@ -34,6 +34,25 @@ type packetEntityUpdate struct {
 	t  EntityEventType
 }
 
+// Returns all available property keys that can be fetched at this time.
+func (pe *PacketEntity) Keys() []string {
+	// More efficient than copying ClassBaseline, merging Properties into it
+	// and then copying all keys into a slince.
+
+	// First, get all keys of the baseline (it's usually the larger one, by ~4-5x).
+	keys, i := make([]string, len(pe.ClassBaseline.KV)), 0
+	for k := range pe.ClassBaseline.KV { keys[i] = k ; i++ }
+
+	// Then, append all extra keys in the Properties that aren't in the baseline.
+	for k := range pe.Properties.KV {
+		if _, ok := pe.ClassBaseline.KV[k]; !ok {
+			keys = append(keys, k)
+		}
+	}
+
+	return keys
+}
+
 // Get a property from the entity. Prefers reading from the entity properties,
 // falling back to the baseline properties if necessary.
 func (pe *PacketEntity) Fetch(key string) (interface{}, bool) {
