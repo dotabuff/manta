@@ -307,3 +307,7 @@ message CSODOTALobby {
 	optional uint64 bot_dire = 95;
 }
 
+message CMsgLobbyPlaytestDetails {
+	optional string json = 1;
+}
+

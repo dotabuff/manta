@@ -46,7 +46,7 @@ func (x *EProtoExecutionSite) UnmarshalJSON(data []byte) error {
 	*x = EProtoExecutionSite(value)
 	return nil
 }
-func (EProtoExecutionSite) EnumDescriptor() ([]byte, []int) { return fileDescriptor39, []int{0} }
+func (EProtoExecutionSite) EnumDescriptor() ([]byte, []int) { return fileDescriptor41, []int{0} }
 
 var E_Description = &proto.ExtensionDesc{
 	ExtendedType:  (*google_protobuf.FieldOptions)(nil),
@@ -106,9 +106,9 @@ func init() {
 	proto.RegisterExtension(E_EnumValueDescription)
 }
 
-func init() { proto.RegisterFile("steammessages_unified_base.steamworkssdk.proto", fileDescriptor39) }
+func init() { proto.RegisterFile("steammessages_unified_base.steamworkssdk.proto", fileDescriptor41) }
 
-var fileDescriptor39 = []byte{
+var fileDescriptor41 = []byte{
 	// 339 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x84, 0x91, 0x4d, 0x4b, 0xf3, 0x40,
 	0x14, 0x85, 0x1b, 0xfa, 0xbe, 0x0b, 0x47, 0xd0, 0x3a, 0x2d, 0x45, 0xa5, 0x6a, 0x04, 0x17, 0xe2,
