@@ -1,3 +1,5 @@
+syntax = "proto2";
+
 package dota;
 
 option cc_generic_services = false;
@@ -78,6 +80,7 @@ message CMsgSteamDatagramGameserverSessionEstablished {
 	optional fixed32 client_cookie = 1;
 	optional fixed64 gameserver_steam_id = 3;
 	optional uint32 seconds_until_shutdown = 4;
+	optional uint32 session_id = 5;
 }
 
 message CMsgSteamDatagramNoSession {
@@ -260,6 +263,8 @@ message CMsgSteamDatagramRouterHealth {
 	optional uint32 data_pkts_sec = 3;
 	optional uint32 other_pkts_sec = 4;
 	optional uint32 seconds_until_shutdown = 5;
+	optional float cpu_cost_per_user = 8;
+	optional float cpu_cost_per_packet = 9;
 	repeated CMsgSteamDatagramRouterHealth.DataCenter data_centers = 6;
 	optional fixed64 magic = 7;
 }

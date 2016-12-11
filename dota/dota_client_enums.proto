@@ -1,3 +1,5 @@
+syntax = "proto2";
+
 package dota;
 
 option optimize_for = SPEED;
