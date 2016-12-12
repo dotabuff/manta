@@ -186,3 +186,7 @@ func decodeHSequence(r *reader, f *dtField) interface{} {
 	// wrong, just testing
 	return r.readBits(1)
 }
+
+func decodeVector2D(r *reader, f *dtField) interface{} {
+	return []float32{r.readFloat(), r.readFloat()}
+}

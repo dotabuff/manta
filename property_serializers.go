@@ -114,6 +114,8 @@ func (pst *propertySerializerTable) getPropertySerializerByName(name string) *pr
 		decoder = decodeQAngle
 	case "CGameSceneNodeHandle":
 		decoder = decodeHandle
+	case "Vector2D":
+		decoder = decodeVector2D
 	default:
 		// check for specific types
 		switch {
