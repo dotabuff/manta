@@ -45,7 +45,7 @@ func (x *DOTA_MODIFIER_ENTRY_TYPE) UnmarshalJSON(data []byte) error {
 	*x = DOTA_MODIFIER_ENTRY_TYPE(value)
 	return nil
 }
-func (DOTA_MODIFIER_ENTRY_TYPE) EnumDescriptor() ([]byte, []int) { return fileDescriptor22, []int{0} }
+func (DOTA_MODIFIER_ENTRY_TYPE) EnumDescriptor() ([]byte, []int) { return fileDescriptor23, []int{0} }
 
 type CDOTAModifierBuffTableEntry struct {
 	EntryType           *DOTA_MODIFIER_ENTRY_TYPE `protobuf:"varint,1,req,name=entry_type,json=entryType,enum=dota.DOTA_MODIFIER_ENTRY_TYPE,def=1" json:"entry_type,omitempty"`
@@ -86,7 +86,7 @@ type CDOTAModifierBuffTableEntry struct {
 func (m *CDOTAModifierBuffTableEntry) Reset()                    { *m = CDOTAModifierBuffTableEntry{} }
 func (m *CDOTAModifierBuffTableEntry) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAModifierBuffTableEntry) ProtoMessage()               {}
-func (*CDOTAModifierBuffTableEntry) Descriptor() ([]byte, []int) { return fileDescriptor22, []int{0} }
+func (*CDOTAModifierBuffTableEntry) Descriptor() ([]byte, []int) { return fileDescriptor23, []int{0} }
 
 const Default_CDOTAModifierBuffTableEntry_EntryType DOTA_MODIFIER_ENTRY_TYPE = DOTA_MODIFIER_ENTRY_TYPE_DOTA_MODIFIER_ENTRY_TYPE_ACTIVE
 const Default_CDOTAModifierBuffTableEntry_Duration float32 = -1
@@ -324,7 +324,7 @@ type CDOTALuaModifierEntry struct {
 func (m *CDOTALuaModifierEntry) Reset()                    { *m = CDOTALuaModifierEntry{} }
 func (m *CDOTALuaModifierEntry) String() string            { return proto.CompactTextString(m) }
 func (*CDOTALuaModifierEntry) ProtoMessage()               {}
-func (*CDOTALuaModifierEntry) Descriptor() ([]byte, []int) { return fileDescriptor22, []int{1} }
+func (*CDOTALuaModifierEntry) Descriptor() ([]byte, []int) { return fileDescriptor23, []int{1} }
 
 func (m *CDOTALuaModifierEntry) GetModifierType() int32 {
 	if m != nil && m.ModifierType != nil {
@@ -346,9 +346,9 @@ func init() {
 	proto.RegisterEnum("dota.DOTA_MODIFIER_ENTRY_TYPE", DOTA_MODIFIER_ENTRY_TYPE_name, DOTA_MODIFIER_ENTRY_TYPE_value)
 }
 
-func init() { proto.RegisterFile("dota_modifiers.proto", fileDescriptor22) }
+func init() { proto.RegisterFile("dota_modifiers.proto", fileDescriptor23) }
 
-var fileDescriptor22 = []byte{
+var fileDescriptor23 = []byte{
 	// 766 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x84, 0x94, 0xcb, 0x6f, 0xdb, 0x46,
 	0x10, 0xc6, 0x4b, 0xd5, 0xb2, 0xa5, 0xb1, 0xac, 0xc8, 0xeb, 0x47, 0x37, 0x76, 0x63, 0xb3, 0x71,

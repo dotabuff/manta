@@ -207,6 +207,10 @@ type Callbacks struct {
 	onCDOTAUserMsg_QuestStatus                []func(*dota.CDOTAUserMsg_QuestStatus) error
 	onCDOTAUserMsg_SuggestHeroPick            []func(*dota.CDOTAUserMsg_SuggestHeroPick) error
 	onCDOTAUserMsg_SuggestHeroRole            []func(*dota.CDOTAUserMsg_SuggestHeroRole) error
+	onCDOTAUserMsg_KillcamDamageTaken         []func(*dota.CDOTAUserMsg_KillcamDamageTaken) error
+	onCDOTAUserMsg_SelectPenaltyGold          []func(*dota.CDOTAUserMsg_SelectPenaltyGold) error
+	onCDOTAUserMsg_RollDiceResult             []func(*dota.CDOTAUserMsg_RollDiceResult) error
+	onCDOTAUserMsg_FlipCoinResult             []func(*dota.CDOTAUserMsg_FlipCoinResult) error
 
 	pb *proto.Buffer
 }
@@ -1215,6 +1219,26 @@ func (c *Callbacks) OnCDOTAUserMsg_SuggestHeroPick(fn func(*dota.CDOTAUserMsg_Su
 // OnCDOTAUserMsg_SuggestHeroRole registers a callback for EDotaUserMessages_DOTA_UM_SuggestHeroRole
 func (c *Callbacks) OnCDOTAUserMsg_SuggestHeroRole(fn func(*dota.CDOTAUserMsg_SuggestHeroRole) error) {
 	c.onCDOTAUserMsg_SuggestHeroRole = append(c.onCDOTAUserMsg_SuggestHeroRole, fn)
+}
+
+// OnCDOTAUserMsg_KillcamDamageTaken registers a callback for EDotaUserMessages_DOTA_UM_KillcamDamageTaken
+func (c *Callbacks) OnCDOTAUserMsg_KillcamDamageTaken(fn func(*dota.CDOTAUserMsg_KillcamDamageTaken) error) {
+	c.onCDOTAUserMsg_KillcamDamageTaken = append(c.onCDOTAUserMsg_KillcamDamageTaken, fn)
+}
+
+// OnCDOTAUserMsg_SelectPenaltyGold registers a callback for EDotaUserMessages_DOTA_UM_SelectPenaltyGold
+func (c *Callbacks) OnCDOTAUserMsg_SelectPenaltyGold(fn func(*dota.CDOTAUserMsg_SelectPenaltyGold) error) {
+	c.onCDOTAUserMsg_SelectPenaltyGold = append(c.onCDOTAUserMsg_SelectPenaltyGold, fn)
+}
+
+// OnCDOTAUserMsg_RollDiceResult registers a callback for EDotaUserMessages_DOTA_UM_RollDiceResult
+func (c *Callbacks) OnCDOTAUserMsg_RollDiceResult(fn func(*dota.CDOTAUserMsg_RollDiceResult) error) {
+	c.onCDOTAUserMsg_RollDiceResult = append(c.onCDOTAUserMsg_RollDiceResult, fn)
+}
+
+// OnCDOTAUserMsg_FlipCoinResult registers a callback for EDotaUserMessages_DOTA_UM_FlipCoinResult
+func (c *Callbacks) OnCDOTAUserMsg_FlipCoinResult(fn func(*dota.CDOTAUserMsg_FlipCoinResult) error) {
+	c.onCDOTAUserMsg_FlipCoinResult = append(c.onCDOTAUserMsg_FlipCoinResult, fn)
 }
 
 func (c *Callbacks) callByDemoType(t int32, buf []byte) error {
@@ -5023,6 +5047,82 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		for _, fn := range c.onCDOTAUserMsg_SuggestHeroRole {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 562: // dota.EDotaUserMessages_DOTA_UM_KillcamDamageTaken
+		if c.onCDOTAUserMsg_KillcamDamageTaken == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_KillcamDamageTaken{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_KillcamDamageTaken {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 563: // dota.EDotaUserMessages_DOTA_UM_SelectPenaltyGold
+		if c.onCDOTAUserMsg_SelectPenaltyGold == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_SelectPenaltyGold{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_SelectPenaltyGold {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 564: // dota.EDotaUserMessages_DOTA_UM_RollDiceResult
+		if c.onCDOTAUserMsg_RollDiceResult == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_RollDiceResult{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_RollDiceResult {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 565: // dota.EDotaUserMessages_DOTA_UM_FlipCoinResult
+		if c.onCDOTAUserMsg_FlipCoinResult == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_FlipCoinResult{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_FlipCoinResult {
 			if err := fn(msg); err != nil {
 				return err
 			}
