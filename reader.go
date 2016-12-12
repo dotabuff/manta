@@ -140,6 +140,11 @@ func (r *reader) readBoolean() bool {
 	return r.readBits(1) == 1
 }
 
+// readFloat reads an IEEE 754 float
+func (r *reader) readFloat() float32 {
+	return math.Float32frombits(r.readLeUint32())
+}
+
 // readUBitVar reads a variable length uint32 with encoding in last to bits of 6 bit group
 func (r *reader) readUBitVar() uint32 {
 	ret := r.readBits(6)
