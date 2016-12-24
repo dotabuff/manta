@@ -22,7 +22,7 @@ type CUIFontFilePB struct {
 func (m *CUIFontFilePB) Reset()                    { *m = CUIFontFilePB{} }
 func (m *CUIFontFilePB) String() string            { return proto.CompactTextString(m) }
 func (*CUIFontFilePB) ProtoMessage()               {}
-func (*CUIFontFilePB) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{0} }
+func (*CUIFontFilePB) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{0} }
 
 func (m *CUIFontFilePB) GetFontFileName() string {
 	if m != nil && m.FontFileName != nil {
@@ -47,7 +47,7 @@ type CUIFontFilePackagePB struct {
 func (m *CUIFontFilePackagePB) Reset()                    { *m = CUIFontFilePackagePB{} }
 func (m *CUIFontFilePackagePB) String() string            { return proto.CompactTextString(m) }
 func (*CUIFontFilePackagePB) ProtoMessage()               {}
-func (*CUIFontFilePackagePB) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{1} }
+func (*CUIFontFilePackagePB) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{1} }
 
 func (m *CUIFontFilePackagePB) GetPackageVersion() uint32 {
 	if m != nil && m.PackageVersion != nil {
@@ -76,7 +76,7 @@ func (m *CUIFontFilePackagePB_CUIEncryptedFontFilePB) String() string {
 }
 func (*CUIFontFilePackagePB_CUIEncryptedFontFilePB) ProtoMessage() {}
 func (*CUIFontFilePackagePB_CUIEncryptedFontFilePB) Descriptor() ([]byte, []int) {
-	return fileDescriptor43, []int{1, 0}
+	return fileDescriptor42, []int{1, 0}
 }
 
 func (m *CUIFontFilePackagePB_CUIEncryptedFontFilePB) GetEncryptedContents() []byte {
@@ -92,9 +92,9 @@ func init() {
 	proto.RegisterType((*CUIFontFilePackagePB_CUIEncryptedFontFilePB)(nil), "dota.CUIFontFilePackagePB.CUIEncryptedFontFilePB")
 }
 
-func init() { proto.RegisterFile("uifontfile_format.proto", fileDescriptor43) }
+func init() { proto.RegisterFile("uifontfile_format.proto", fileDescriptor42) }
 
-var fileDescriptor43 = []byte{
+var fileDescriptor42 = []byte{
 	// 255 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x6c, 0x90, 0x41, 0x4b, 0xc3, 0x40,
 	0x10, 0x85, 0xdd, 0xa8, 0x07, 0xd7, 0xb4, 0xea, 0x52, 0x34, 0x78, 0x0a, 0x45, 0x30, 0x07, 0x0d,

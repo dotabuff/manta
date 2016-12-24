@@ -120,7 +120,7 @@ func (x *ETEProtobufIds) UnmarshalJSON(data []byte) error {
 	*x = ETEProtobufIds(value)
 	return nil
 }
-func (ETEProtobufIds) EnumDescriptor() ([]byte, []int) { return fileDescriptor42, []int{0} }
+func (ETEProtobufIds) EnumDescriptor() ([]byte, []int) { return fileDescriptor41, []int{0} }
 
 type CMsgTEArmorRicochet struct {
 	Pos              *CMsgVector `protobuf:"bytes,1,opt,name=pos" json:"pos,omitempty"`
@@ -131,7 +131,7 @@ type CMsgTEArmorRicochet struct {
 func (m *CMsgTEArmorRicochet) Reset()                    { *m = CMsgTEArmorRicochet{} }
 func (m *CMsgTEArmorRicochet) String() string            { return proto.CompactTextString(m) }
 func (*CMsgTEArmorRicochet) ProtoMessage()               {}
-func (*CMsgTEArmorRicochet) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{0} }
+func (*CMsgTEArmorRicochet) Descriptor() ([]byte, []int) { return fileDescriptor41, []int{0} }
 
 func (m *CMsgTEArmorRicochet) GetPos() *CMsgVector {
 	if m != nil {
@@ -166,7 +166,7 @@ type CMsgTEBaseBeam struct {
 func (m *CMsgTEBaseBeam) Reset()                    { *m = CMsgTEBaseBeam{} }
 func (m *CMsgTEBaseBeam) String() string            { return proto.CompactTextString(m) }
 func (*CMsgTEBaseBeam) ProtoMessage()               {}
-func (*CMsgTEBaseBeam) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{1} }
+func (*CMsgTEBaseBeam) Descriptor() ([]byte, []int) { return fileDescriptor41, []int{1} }
 
 func (m *CMsgTEBaseBeam) GetModelindex() uint64 {
 	if m != nil && m.Modelindex != nil {
@@ -264,7 +264,7 @@ type CMsgTEBeamEntPoint struct {
 func (m *CMsgTEBeamEntPoint) Reset()                    { *m = CMsgTEBeamEntPoint{} }
 func (m *CMsgTEBeamEntPoint) String() string            { return proto.CompactTextString(m) }
 func (*CMsgTEBeamEntPoint) ProtoMessage()               {}
-func (*CMsgTEBeamEntPoint) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{2} }
+func (*CMsgTEBeamEntPoint) Descriptor() ([]byte, []int) { return fileDescriptor41, []int{2} }
 
 func (m *CMsgTEBeamEntPoint) GetBase() *CMsgTEBaseBeam {
 	if m != nil {
@@ -311,7 +311,7 @@ type CMsgTEBeamEnts struct {
 func (m *CMsgTEBeamEnts) Reset()                    { *m = CMsgTEBeamEnts{} }
 func (m *CMsgTEBeamEnts) String() string            { return proto.CompactTextString(m) }
 func (*CMsgTEBeamEnts) ProtoMessage()               {}
-func (*CMsgTEBeamEnts) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{3} }
+func (*CMsgTEBeamEnts) Descriptor() ([]byte, []int) { return fileDescriptor41, []int{3} }
 
 func (m *CMsgTEBeamEnts) GetBase() *CMsgTEBaseBeam {
 	if m != nil {
@@ -344,7 +344,7 @@ type CMsgTEBeamPoints struct {
 func (m *CMsgTEBeamPoints) Reset()                    { *m = CMsgTEBeamPoints{} }
 func (m *CMsgTEBeamPoints) String() string            { return proto.CompactTextString(m) }
 func (*CMsgTEBeamPoints) ProtoMessage()               {}
-func (*CMsgTEBeamPoints) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{4} }
+func (*CMsgTEBeamPoints) Descriptor() ([]byte, []int) { return fileDescriptor41, []int{4} }
 
 func (m *CMsgTEBeamPoints) GetBase() *CMsgTEBaseBeam {
 	if m != nil {
@@ -377,7 +377,7 @@ type CMsgTEBeamRing struct {
 func (m *CMsgTEBeamRing) Reset()                    { *m = CMsgTEBeamRing{} }
 func (m *CMsgTEBeamRing) String() string            { return proto.CompactTextString(m) }
 func (*CMsgTEBeamRing) ProtoMessage()               {}
-func (*CMsgTEBeamRing) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{5} }
+func (*CMsgTEBeamRing) Descriptor() ([]byte, []int) { return fileDescriptor41, []int{5} }
 
 func (m *CMsgTEBeamRing) GetBase() *CMsgTEBaseBeam {
 	if m != nil {
@@ -416,7 +416,7 @@ type CMsgTEBreakModel struct {
 func (m *CMsgTEBreakModel) Reset()                    { *m = CMsgTEBreakModel{} }
 func (m *CMsgTEBreakModel) String() string            { return proto.CompactTextString(m) }
 func (*CMsgTEBreakModel) ProtoMessage()               {}
-func (*CMsgTEBreakModel) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{6} }
+func (*CMsgTEBreakModel) Descriptor() ([]byte, []int) { return fileDescriptor41, []int{6} }
 
 func (m *CMsgTEBreakModel) GetOrigin() *CMsgVector {
 	if m != nil {
@@ -493,7 +493,7 @@ type CMsgTEBSPDecal struct {
 func (m *CMsgTEBSPDecal) Reset()                    { *m = CMsgTEBSPDecal{} }
 func (m *CMsgTEBSPDecal) String() string            { return proto.CompactTextString(m) }
 func (*CMsgTEBSPDecal) ProtoMessage()               {}
-func (*CMsgTEBSPDecal) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{7} }
+func (*CMsgTEBSPDecal) Descriptor() ([]byte, []int) { return fileDescriptor41, []int{7} }
 
 func (m *CMsgTEBSPDecal) GetOrigin() *CMsgVector {
 	if m != nil {
@@ -542,7 +542,7 @@ type CMsgTEBubbles struct {
 func (m *CMsgTEBubbles) Reset()                    { *m = CMsgTEBubbles{} }
 func (m *CMsgTEBubbles) String() string            { return proto.CompactTextString(m) }
 func (*CMsgTEBubbles) ProtoMessage()               {}
-func (*CMsgTEBubbles) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{8} }
+func (*CMsgTEBubbles) Descriptor() ([]byte, []int) { return fileDescriptor41, []int{8} }
 
 func (m *CMsgTEBubbles) GetMins() *CMsgVector {
 	if m != nil {
@@ -591,7 +591,7 @@ type CMsgTEBubbleTrail struct {
 func (m *CMsgTEBubbleTrail) Reset()                    { *m = CMsgTEBubbleTrail{} }
 func (m *CMsgTEBubbleTrail) String() string            { return proto.CompactTextString(m) }
 func (*CMsgTEBubbleTrail) ProtoMessage()               {}
-func (*CMsgTEBubbleTrail) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{9} }
+func (*CMsgTEBubbleTrail) Descriptor() ([]byte, []int) { return fileDescriptor41, []int{9} }
 
 func (m *CMsgTEBubbleTrail) GetMins() *CMsgVector {
 	if m != nil {
@@ -640,7 +640,7 @@ type CMsgTEDecal struct {
 func (m *CMsgTEDecal) Reset()                    { *m = CMsgTEDecal{} }
 func (m *CMsgTEDecal) String() string            { return proto.CompactTextString(m) }
 func (*CMsgTEDecal) ProtoMessage()               {}
-func (*CMsgTEDecal) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{10} }
+func (*CMsgTEDecal) Descriptor() ([]byte, []int) { return fileDescriptor41, []int{10} }
 
 func (m *CMsgTEDecal) GetOrigin() *CMsgVector {
 	if m != nil {
@@ -703,7 +703,7 @@ type CMsgEffectData struct {
 func (m *CMsgEffectData) Reset()                    { *m = CMsgEffectData{} }
 func (m *CMsgEffectData) String() string            { return proto.CompactTextString(m) }
 func (*CMsgEffectData) ProtoMessage()               {}
-func (*CMsgEffectData) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{11} }
+func (*CMsgEffectData) Descriptor() ([]byte, []int) { return fileDescriptor41, []int{11} }
 
 func (m *CMsgEffectData) GetOrigin() *CMsgVector {
 	if m != nil {
@@ -846,7 +846,7 @@ type CMsgTEEffectDispatch struct {
 func (m *CMsgTEEffectDispatch) Reset()                    { *m = CMsgTEEffectDispatch{} }
 func (m *CMsgTEEffectDispatch) String() string            { return proto.CompactTextString(m) }
 func (*CMsgTEEffectDispatch) ProtoMessage()               {}
-func (*CMsgTEEffectDispatch) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{12} }
+func (*CMsgTEEffectDispatch) Descriptor() ([]byte, []int) { return fileDescriptor41, []int{12} }
 
 func (m *CMsgTEEffectDispatch) GetEffectdata() *CMsgEffectData {
 	if m != nil {
@@ -865,7 +865,7 @@ type CMsgTEEnergySplash struct {
 func (m *CMsgTEEnergySplash) Reset()                    { *m = CMsgTEEnergySplash{} }
 func (m *CMsgTEEnergySplash) String() string            { return proto.CompactTextString(m) }
 func (*CMsgTEEnergySplash) ProtoMessage()               {}
-func (*CMsgTEEnergySplash) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{13} }
+func (*CMsgTEEnergySplash) Descriptor() ([]byte, []int) { return fileDescriptor41, []int{13} }
 
 func (m *CMsgTEEnergySplash) GetPos() *CMsgVector {
 	if m != nil {
@@ -898,7 +898,7 @@ type CMsgTEFizz struct {
 func (m *CMsgTEFizz) Reset()                    { *m = CMsgTEFizz{} }
 func (m *CMsgTEFizz) String() string            { return proto.CompactTextString(m) }
 func (*CMsgTEFizz) ProtoMessage()               {}
-func (*CMsgTEFizz) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{14} }
+func (*CMsgTEFizz) Descriptor() ([]byte, []int) { return fileDescriptor41, []int{14} }
 
 func (m *CMsgTEFizz) GetEntity() uint32 {
 	if m != nil && m.Entity != nil {
@@ -938,7 +938,7 @@ type CMsgTEShatterSurface struct {
 func (m *CMsgTEShatterSurface) Reset()                    { *m = CMsgTEShatterSurface{} }
 func (m *CMsgTEShatterSurface) String() string            { return proto.CompactTextString(m) }
 func (*CMsgTEShatterSurface) ProtoMessage()               {}
-func (*CMsgTEShatterSurface) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{15} }
+func (*CMsgTEShatterSurface) Descriptor() ([]byte, []int) { return fileDescriptor41, []int{15} }
 
 func (m *CMsgTEShatterSurface) GetOrigin() *CMsgVector {
 	if m != nil {
@@ -1021,7 +1021,7 @@ type CMsgTEGlowSprite struct {
 func (m *CMsgTEGlowSprite) Reset()                    { *m = CMsgTEGlowSprite{} }
 func (m *CMsgTEGlowSprite) String() string            { return proto.CompactTextString(m) }
 func (*CMsgTEGlowSprite) ProtoMessage()               {}
-func (*CMsgTEGlowSprite) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{16} }
+func (*CMsgTEGlowSprite) Descriptor() ([]byte, []int) { return fileDescriptor41, []int{16} }
 
 func (m *CMsgTEGlowSprite) GetOrigin() *CMsgVector {
 	if m != nil {
@@ -1061,7 +1061,7 @@ type CMsgTEImpact struct {
 func (m *CMsgTEImpact) Reset()                    { *m = CMsgTEImpact{} }
 func (m *CMsgTEImpact) String() string            { return proto.CompactTextString(m) }
 func (*CMsgTEImpact) ProtoMessage()               {}
-func (*CMsgTEImpact) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{17} }
+func (*CMsgTEImpact) Descriptor() ([]byte, []int) { return fileDescriptor41, []int{17} }
 
 func (m *CMsgTEImpact) GetOrigin() *CMsgVector {
 	if m != nil {
@@ -1095,7 +1095,7 @@ type CMsgTEMuzzleFlash struct {
 func (m *CMsgTEMuzzleFlash) Reset()                    { *m = CMsgTEMuzzleFlash{} }
 func (m *CMsgTEMuzzleFlash) String() string            { return proto.CompactTextString(m) }
 func (*CMsgTEMuzzleFlash) ProtoMessage()               {}
-func (*CMsgTEMuzzleFlash) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{18} }
+func (*CMsgTEMuzzleFlash) Descriptor() ([]byte, []int) { return fileDescriptor41, []int{18} }
 
 func (m *CMsgTEMuzzleFlash) GetOrigin() *CMsgVector {
 	if m != nil {
@@ -1136,7 +1136,7 @@ type CMsgTEBloodStream struct {
 func (m *CMsgTEBloodStream) Reset()                    { *m = CMsgTEBloodStream{} }
 func (m *CMsgTEBloodStream) String() string            { return proto.CompactTextString(m) }
 func (*CMsgTEBloodStream) ProtoMessage()               {}
-func (*CMsgTEBloodStream) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{19} }
+func (*CMsgTEBloodStream) Descriptor() ([]byte, []int) { return fileDescriptor41, []int{19} }
 
 func (m *CMsgTEBloodStream) GetOrigin() *CMsgVector {
 	if m != nil {
@@ -1182,7 +1182,7 @@ type CMsgTEExplosion struct {
 func (m *CMsgTEExplosion) Reset()                    { *m = CMsgTEExplosion{} }
 func (m *CMsgTEExplosion) String() string            { return proto.CompactTextString(m) }
 func (*CMsgTEExplosion) ProtoMessage()               {}
-func (*CMsgTEExplosion) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{20} }
+func (*CMsgTEExplosion) Descriptor() ([]byte, []int) { return fileDescriptor41, []int{20} }
 
 func (m *CMsgTEExplosion) GetOrigin() *CMsgVector {
 	if m != nil {
@@ -1258,7 +1258,7 @@ type CMsgTEDust struct {
 func (m *CMsgTEDust) Reset()                    { *m = CMsgTEDust{} }
 func (m *CMsgTEDust) String() string            { return proto.CompactTextString(m) }
 func (*CMsgTEDust) ProtoMessage()               {}
-func (*CMsgTEDust) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{21} }
+func (*CMsgTEDust) Descriptor() ([]byte, []int) { return fileDescriptor41, []int{21} }
 
 func (m *CMsgTEDust) GetOrigin() *CMsgVector {
 	if m != nil {
@@ -1297,7 +1297,7 @@ type CMsgTELargeFunnel struct {
 func (m *CMsgTELargeFunnel) Reset()                    { *m = CMsgTELargeFunnel{} }
 func (m *CMsgTELargeFunnel) String() string            { return proto.CompactTextString(m) }
 func (*CMsgTELargeFunnel) ProtoMessage()               {}
-func (*CMsgTELargeFunnel) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{22} }
+func (*CMsgTELargeFunnel) Descriptor() ([]byte, []int) { return fileDescriptor41, []int{22} }
 
 func (m *CMsgTELargeFunnel) GetOrigin() *CMsgVector {
 	if m != nil {
@@ -1324,7 +1324,7 @@ type CMsgTESparks struct {
 func (m *CMsgTESparks) Reset()                    { *m = CMsgTESparks{} }
 func (m *CMsgTESparks) String() string            { return proto.CompactTextString(m) }
 func (*CMsgTESparks) ProtoMessage()               {}
-func (*CMsgTESparks) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{23} }
+func (*CMsgTESparks) Descriptor() ([]byte, []int) { return fileDescriptor41, []int{23} }
 
 func (m *CMsgTESparks) GetOrigin() *CMsgVector {
 	if m != nil {
@@ -1371,7 +1371,7 @@ type CMsgTEPhysicsProp struct {
 func (m *CMsgTEPhysicsProp) Reset()                    { *m = CMsgTEPhysicsProp{} }
 func (m *CMsgTEPhysicsProp) String() string            { return proto.CompactTextString(m) }
 func (*CMsgTEPhysicsProp) ProtoMessage()               {}
-func (*CMsgTEPhysicsProp) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{24} }
+func (*CMsgTEPhysicsProp) Descriptor() ([]byte, []int) { return fileDescriptor41, []int{24} }
 
 func (m *CMsgTEPhysicsProp) GetOrigin() *CMsgVector {
 	if m != nil {
@@ -1453,7 +1453,7 @@ type CMsgTEPlayerDecal struct {
 func (m *CMsgTEPlayerDecal) Reset()                    { *m = CMsgTEPlayerDecal{} }
 func (m *CMsgTEPlayerDecal) String() string            { return proto.CompactTextString(m) }
 func (*CMsgTEPlayerDecal) ProtoMessage()               {}
-func (*CMsgTEPlayerDecal) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{25} }
+func (*CMsgTEPlayerDecal) Descriptor() ([]byte, []int) { return fileDescriptor41, []int{25} }
 
 func (m *CMsgTEPlayerDecal) GetOrigin() *CMsgVector {
 	if m != nil {
@@ -1487,7 +1487,7 @@ type CMsgTEProjectedDecal struct {
 func (m *CMsgTEProjectedDecal) Reset()                    { *m = CMsgTEProjectedDecal{} }
 func (m *CMsgTEProjectedDecal) String() string            { return proto.CompactTextString(m) }
 func (*CMsgTEProjectedDecal) ProtoMessage()               {}
-func (*CMsgTEProjectedDecal) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{26} }
+func (*CMsgTEProjectedDecal) Descriptor() ([]byte, []int) { return fileDescriptor41, []int{26} }
 
 func (m *CMsgTEProjectedDecal) GetOrigin() *CMsgVector {
 	if m != nil {
@@ -1526,7 +1526,7 @@ type CMsgTESmoke struct {
 func (m *CMsgTESmoke) Reset()                    { *m = CMsgTESmoke{} }
 func (m *CMsgTESmoke) String() string            { return proto.CompactTextString(m) }
 func (*CMsgTESmoke) ProtoMessage()               {}
-func (*CMsgTESmoke) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{27} }
+func (*CMsgTESmoke) Descriptor() ([]byte, []int) { return fileDescriptor41, []int{27} }
 
 func (m *CMsgTESmoke) GetOrigin() *CMsgVector {
 	if m != nil {
@@ -1552,7 +1552,7 @@ type CMsgTEWorldDecal struct {
 func (m *CMsgTEWorldDecal) Reset()                    { *m = CMsgTEWorldDecal{} }
 func (m *CMsgTEWorldDecal) String() string            { return proto.CompactTextString(m) }
 func (*CMsgTEWorldDecal) ProtoMessage()               {}
-func (*CMsgTEWorldDecal) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{28} }
+func (*CMsgTEWorldDecal) Descriptor() ([]byte, []int) { return fileDescriptor41, []int{28} }
 
 func (m *CMsgTEWorldDecal) GetOrigin() *CMsgVector {
 	if m != nil {
@@ -1608,9 +1608,9 @@ func init() {
 	proto.RegisterEnum("dota.ETEProtobufIds", ETEProtobufIds_name, ETEProtobufIds_value)
 }
 
-func init() { proto.RegisterFile("te.proto", fileDescriptor42) }
+func init() { proto.RegisterFile("te.proto", fileDescriptor41) }
 
-var fileDescriptor42 = []byte{
+var fileDescriptor41 = []byte{
 	// 1823 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xbc, 0x58, 0x4b, 0x6f, 0x23, 0x49,
 	0x1d, 0xa7, 0xbb, 0x6d, 0xc7, 0xa9, 0x8c, 0x93, 0x9e, 0x9a, 0x10, 0xac, 0xd1, 0x6a, 0x15, 0xb5,

@@ -24,7 +24,7 @@ func (m *COAuthToken_ImplicitGrantNoPrompt_Request) Reset() {
 func (m *COAuthToken_ImplicitGrantNoPrompt_Request) String() string { return proto.CompactTextString(m) }
 func (*COAuthToken_ImplicitGrantNoPrompt_Request) ProtoMessage()    {}
 func (*COAuthToken_ImplicitGrantNoPrompt_Request) Descriptor() ([]byte, []int) {
-	return fileDescriptor39, []int{0}
+	return fileDescriptor38, []int{0}
 }
 
 func (m *COAuthToken_ImplicitGrantNoPrompt_Request) GetClientid() string {
@@ -48,7 +48,7 @@ func (m *COAuthToken_ImplicitGrantNoPrompt_Response) String() string {
 }
 func (*COAuthToken_ImplicitGrantNoPrompt_Response) ProtoMessage() {}
 func (*COAuthToken_ImplicitGrantNoPrompt_Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor39, []int{1}
+	return fileDescriptor38, []int{1}
 }
 
 func (m *COAuthToken_ImplicitGrantNoPrompt_Response) GetAccessToken() string {
@@ -70,9 +70,9 @@ func init() {
 	proto.RegisterType((*COAuthToken_ImplicitGrantNoPrompt_Response)(nil), "dota.COAuthToken_ImplicitGrantNoPrompt_Response")
 }
 
-func init() { proto.RegisterFile("steammessages_oauth.steamworkssdk.proto", fileDescriptor39) }
+func init() { proto.RegisterFile("steammessages_oauth.steamworkssdk.proto", fileDescriptor38) }
 
-var fileDescriptor39 = []byte{
+var fileDescriptor38 = []byte{
 	// 443 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x8c, 0x52, 0x4d, 0x6b, 0x14, 0x41,
 	0x14, 0x64, 0x83, 0x07, 0x9d, 0xe4, 0x34, 0x20, 0x0c, 0xb9, 0xf8, 0x58, 0x0f, 0x9b, 0x88, 0x8c,

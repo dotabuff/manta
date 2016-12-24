@@ -41,7 +41,6 @@ It is generated from these files:
 	network_connection.proto
 	networkbasetypes.proto
 	networksystem_protomessages.proto
-	rendermessages.proto
 	steamdatagram_messages.proto
 	steammessages.proto
 	steammessages_cloud.steamworkssdk.proto
@@ -188,8 +187,6 @@ It has these top-level messages:
 	CDOTAClientMsg_BeginLastHitChallenge
 	CDOTAClientMsg_UpdateQuickBuyItem
 	CDOTAClientMsg_UpdateQuickBuy
-	CDOTAClientMsg_UpdateCoachListen
-	CDOTAClientMsg_CoachHUDPing
 	CDOTAClientMsg_RecordVote
 	CDOTAClientMsg_WillPurchaseAlert
 	CDOTAClientMsg_BuyBackStateAlert
@@ -1218,84 +1215,6 @@ It has these top-level messages:
 	NetMessageConnectionCrashed
 	NetMessagePacketStart
 	NetMessagePacketEnd
-	CMsgBeginFrame
-	CMsgEndFrame
-	CMsgClearBackbuffer
-	CMsgDeleteTexture
-	CMsgDeletePanel
-	CMsgDeleteParticleSystem
-	CMsgPoint
-	CMsgMatrix4X4
-	CRadiusData
-	CBorderData
-	CBoxShadowData
-	CTextShadowData
-	CRadialClipData
-	CMsgClipData
-	CMsgPushCompositingLayer
-	CMsgPopCompositingLayer
-	CMsgFreeCompositingLayer
-	CMsgTransitionData
-	CMsgAnimationData
-	CMsgAnimationFrameData
-	CMsgPointWithTransition
-	CMsgColor
-	CMsgColorStop
-	CMsgLinearGradient
-	CMsgRadialGradient
-	CMsgParticle
-	CMsgParticleSystem
-	CMsgFillBrush
-	CMsgFillBrushCollection
-	CMsgRenderFillBrushCollection
-	CMsgPanelPosition
-	CMsgOpacity
-	CMsgRotate2D
-	CMsgOpacityMaskData
-	CMsgOpacityMask
-	CMsgHueShift
-	CMsgSaturation
-	CMsgBrightness
-	CMsgContrast
-	CMsgGaussianValues
-	CMsgGaussianBlur
-	CMsgMotionBlurValues
-	CMsgMotionBlur
-	CMsg3DTransformPerspective
-	CMsg3DTransformPerspectiveOrigin
-	CMsgTransformOriginData
-	CMsg3DTransformOrigin
-	CMsg3DTransformMatrix
-	CMsgBorderRadius
-	CMsgBorder
-	CMsgBoxShadow
-	CMsgTextShadow
-	CMsgClip
-	CMsgPushClipLayer
-	CMsgPopClipLayer
-	CMsgPushPanelContextInLayer
-	CMsgPopPanelContextInLayer
-	CMsgPushAAndTContext
-	CMsgPopAAndTContext
-	CMsgBeginPaintBackground
-	CMsgEndPaintBackground
-	CMsgBeginPaintLast
-	CMsgEndPaintLast
-	CMsgDrawFilledRect
-	CMsgRenderFilledRect
-	CMsgDrawTexturedRect
-	CMsgDrawDoubleBufferedRect
-	CMsgDrawYUV420DoubleBufferedRect
-	CMsgRenderTexturedRect
-	CMsgLockTexture
-	CMsgTextInlineObject
-	CMsgTextFormat
-	CMsgTextRangeFormat
-	CMsgRenderTextFormat
-	CMsgRenderTextRangeFormat
-	CMsgDrawTextRegion
-	CMsgRenderTextRegion
-	CMsgRequestRenderCallback
 	CMsgSteamDatagramRouterPingReply
 	CMsgSteamDatagramGameserverPing
 	CMsgSteamDatagramGameServerAuthTicket
