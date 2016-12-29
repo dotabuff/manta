@@ -30,16 +30,17 @@ var fieldTypeDecoders = map[string]fieldDecoder{
 	"uint8":   unsignedDecoder,
 
 	"CBodyComponent":       componentDecoder,
-	"CEntityHandle":        unsignedDecoder,
 	"CGameSceneNodeHandle": unsignedDecoder,
-	"CHandle":              handleDecoder,
 	"Color":                unsignedDecoder,
 	"CPhysicsComponent":    componentDecoder,
 	"CRenderComponent":     componentDecoder,
-	"CStrongHandle":        unsignedDecoder,
 	"CUtlStringToken":      unsignedDecoder,
 	"CUtlSymbolLarge":      stringDecoder,
 	"Vector2D":             vector2Decoder,
+
+	"CHandle":       handleDecoder,
+	"CStrongHandle": handleDecoder,
+	"CEntityHandle": handleDecoder,
 }
 
 func unsignedFactory(f *field) fieldDecoder {

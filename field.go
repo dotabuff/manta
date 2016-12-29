@@ -3,6 +3,7 @@ package manta
 import (
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/dotabuff/manta/dota"
 )
@@ -38,12 +39,6 @@ type field struct {
 	value             interface{}
 	model             int
 
-	fixedSubTable  bool
-	varSubTable    bool
-	fixedArray     bool
-	varArray       bool
-	fixedArraySize int
-
 	decoder      fieldDecoder
 	baseDecoder  fieldDecoder
 	childDecoder fieldDecoder
@@ -78,30 +73,25 @@ func newField(ser *dota.CSVCMsg_FlattenedSerializer, f *dota.ProtoFlattenedSeria
 	return x
 }
 
-func (f *field) isFixedSubtable() {
-	f.fixedSubTable = true
-}
-
-func (f *field) isVarSubtable() {
-	f.varSubTable = true
-}
-
 func (f *field) setModel(model int) {
 	f.model = model
+
 	switch model {
 	case fieldModelFixedArray:
-		f.fixedArray = true
+		f.childDecoder = findDecoder(f)
+
 	case fieldModelFixedTable:
-		f.fixedSubTable = true
-		f.baseDecoder = unsignedDecoder
+		f.baseDecoder = booleanDecoder
+
 	case fieldModelVariableArray:
-		f.varArray = true
-		f.baseDecoder = unsignedDecoder
-		if f.fieldType.genericType != nil {
-			f.childDecoder = findDecoderByBaseType(f.fieldType.genericType.baseType)
+		if f.fieldType.genericType == nil {
+			_panicf("no generic type for variable array field %#v", f)
 		}
+		f.baseDecoder = unsignedDecoder
+		f.childDecoder = findDecoderByBaseType(f.fieldType.genericType.baseType)
+
 	case fieldModelVariableTable:
-		f.varSubTable = true
+		f.baseDecoder = unsignedDecoder
 	}
 }
 
@@ -110,11 +100,22 @@ func (f *field) getName() string {
 }
 
 func (f *field) getFieldForFieldPath(fp *fieldPath, pos int) *field {
-	if f.fixedSubTable {
-		if fp.last == pos-1 {
-			return f
+	switch f.model {
+	case fieldModelFixedArray:
+		return f
+
+	case fieldModelFixedTable:
+		if fp.last != pos-1 {
+			return f.serializer.getFieldForFieldPath(fp, pos)
 		}
-		return f.serializer.getFieldForFieldPath(fp, pos)
+
+	case fieldModelVariableArray:
+		return f
+
+	case fieldModelVariableTable:
+		if fp.last >= pos+1 {
+			return f.serializer.getFieldForFieldPath(fp, pos+1)
+		}
 	}
 
 	return f
@@ -123,21 +124,28 @@ func (f *field) getFieldForFieldPath(fp *fieldPath, pos int) *field {
 func (f *field) getNameForFieldPath(fp *fieldPath, pos int) []string {
 	x := []string{f.varName}
 
-	if f.fixedSubTable {
-		// _printf("getNameForFieldPath fixed last=%d pos=%d", fp.last, pos)
+	switch f.model {
+	case fieldModelFixedArray:
+		if fp.last == pos {
+			x = append(x, fmt.Sprintf("%04d", fp.path[pos]))
+		}
+
+	case fieldModelFixedTable:
 		if fp.last >= pos {
 			x = append(x, f.serializer.getNameForFieldPath(fp, pos)...)
 		}
-	} else if f.varSubTable {
+
+	case fieldModelVariableArray:
+		if fp.last == pos {
+			x = append(x, fmt.Sprintf("%04d", fp.path[pos]))
+		}
+
+	case fieldModelVariableTable:
 		if fp.last != pos-1 {
 			x = append(x, fmt.Sprintf("%04d", fp.path[pos]))
 			if fp.last != pos {
 				x = append(x, f.serializer.getNameForFieldPath(fp, pos+1)...)
 			}
-		}
-	} else if f.fixedArray || f.varArray {
-		if fp.last == pos {
-			x = append(x, fmt.Sprintf("%04d", fp.path[pos]))
 		}
 	}
 
@@ -145,24 +153,51 @@ func (f *field) getNameForFieldPath(fp *fieldPath, pos int) []string {
 }
 
 func (f *field) getTypeForFieldPath(fp *fieldPath, pos int) *fieldType {
-	if f.fixedSubTable {
-		if fp.last == pos-1 {
-			return f.fieldType
+	switch f.model {
+	case fieldModelFixedArray:
+		return f.fieldType
+
+	case fieldModelFixedTable:
+		if fp.last != pos-1 {
+			return f.serializer.getTypeForFieldPath(fp, pos)
 		}
-		return f.serializer.getTypeForFieldPath(fp, pos)
+
+	case fieldModelVariableArray:
+		if fp.last == pos {
+			return f.fieldType.genericType
+		}
+
+	case fieldModelVariableTable:
+		if fp.last >= pos+1 {
+			return f.serializer.getTypeForFieldPath(fp, pos+1)
+		}
 	}
+
 	return f.fieldType
 }
 
 func (f *field) getDecoderForFieldPath(fp *fieldPath, pos int) fieldDecoder {
-	if f.fixedSubTable {
-		// _printf("getDecoderForFieldPath fixed last=%d pos=%d", fp.last, pos)
+	switch f.model {
+	case fieldModelFixedArray:
+		return f.decoder
+
+	case fieldModelFixedTable:
 		if fp.last == pos-1 {
-			// _printf("getDecoderForFieldPath fixed last=%d pos=%d BOOLEAN DEFAULT", fp.last, pos)
-			return booleanDecoder
+			return f.baseDecoder
 		}
-		// _printf("getDecoderForFieldPath fixed last=%d pos=%d PUSHING IT OUT", fp.last, pos)
 		return f.serializer.getDecoderForFieldPath(fp, pos)
+
+	case fieldModelVariableArray:
+		if fp.last == pos {
+			return f.childDecoder
+		}
+		return f.baseDecoder
+
+	case fieldModelVariableTable:
+		if fp.last >= pos+1 {
+			return f.serializer.getDecoderForFieldPath(fp, pos+1)
+		}
+		return f.baseDecoder
 	}
 
 	return f.decoder
@@ -181,7 +216,7 @@ func readFields(r *reader, s *serializer) []interface{} {
 
 	values := make([]interface{}, len(fps))
 	for i, fp := range fps {
-		name := s.getNameForFieldPath(fp, 0)
+		name := strings.Join(s.getNameForFieldPath(fp, 0), ".")
 		typ := s.getTypeForFieldPath(fp, 0)
 		decoder := s.getDecoderForFieldPath(fp, 0)
 

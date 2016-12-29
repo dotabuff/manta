@@ -1,8 +1,6 @@
 package manta
 
 import (
-	"fmt"
-
 	"github.com/dotabuff/manta/dota"
 	"github.com/golang/protobuf/proto"
 )
@@ -66,29 +64,19 @@ func (p *Parser) onCDemoSendTablesNew(m *dota.CDemoSendTables) error {
 				// find associated serializer
 				if field.serializerName != "" {
 					field.serializer = p.newSerializers[field.serializerName]
-					fmt.Println("serializer", field.serializerName, "now", field.serializer)
 				}
 
 				// set fixed sub-table flag
 				if field.serializer != nil {
 					if pointerTypes[field.fieldType.baseType] {
 						field.setModel(fieldModelFixedTable)
-						fmt.Println(field.varName, field.fieldType.baseType, "is a fixed sub-table")
-						field.fixedSubTable = true
 					} else {
-						// fmt.Println(field.varName, field.fieldType.baseType, "is a variable sub-table")
 						field.setModel(fieldModelVariableTable)
-						field.varSubTable = true
 					}
 				} else if field.fieldType.count > 0 && field.fieldType.baseType != "char" {
-					// fmt.Println(field.varName, field.fieldType.baseType, "is a fixed array")
 					field.setModel(fieldModelFixedArray)
-					field.fixedArray = true
-					field.fixedArraySize = field.fieldType.count
 				} else if field.fieldType.baseType == "CUtlVector" {
-					// fmt.Println(field.varName, field.fieldType.baseType, "is a var array")
 					field.setModel(fieldModelVariableArray)
-					field.varArray = true
 				}
 
 				// apply any build-specific patches to the field

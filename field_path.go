@@ -1,7 +1,6 @@
 package manta
 
 import (
-	"fmt"
 	"strconv"
 	"strings"
 )
@@ -295,8 +294,6 @@ func readFieldPaths(r *reader) []*fieldPath {
 			node = next
 		}
 	}
-
-	fmt.Printf(" DONE AT %d\n", r.pos)
 
 	return paths
 }

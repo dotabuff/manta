@@ -101,8 +101,6 @@ func (p *Parser) OnPacketEntity(fn packetEntityHandler) {
 
 // Internal callback for CSVCMsg_PacketEntities.
 func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error {
-	_printf("onCSVCMsg_PacketEntities")
-
 	var pe *PacketEntity
 
 	// Skip processing if we're configured not to.
