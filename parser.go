@@ -3,6 +3,7 @@ package manta
 import (
 	"bytes"
 	"io"
+	"os"
 
 	"github.com/dotabuff/manta/dota"
 	"github.com/golang/snappy"
@@ -108,15 +109,21 @@ func NewStreamParser(r io.Reader) (*Parser, error) {
 	parser.Callbacks.OnCDemoPacket(parser.onCDemoPacket)
 	parser.Callbacks.OnCDemoSignonPacket(parser.onCDemoPacket)
 	parser.Callbacks.OnCDemoFullPacket(parser.onCDemoFullPacket)
-	parser.Callbacks.OnCDemoClassInfo(parser.onCDemoClassInfo)
-	parser.Callbacks.OnCDemoSendTables(parser.onCDemoSendTables)
-	parser.Callbacks.OnCDemoSendTables(parser.onCDemoSendTablesNew)
 	parser.Callbacks.OnCSVCMsg_CreateStringTable(parser.onCSVCMsg_CreateStringTable)
-	parser.Callbacks.OnCSVCMsg_PacketEntities(parser.onCSVCMsg_PacketEntities)
 	parser.Callbacks.OnCSVCMsg_UpdateStringTable(parser.onCSVCMsg_UpdateStringTable)
 	parser.Callbacks.OnCSVCMsg_ServerInfo(parser.onCSVCMsg_ServerInfo)
 	parser.Callbacks.OnCMsgSource1LegacyGameEventList(parser.onCMsgSource1LegacyGameEventList)
 	parser.Callbacks.OnCMsgSource1LegacyGameEvent(parser.onCMsgSource1LegacyGameEvent)
+
+	if newStuff {
+		parser.Callbacks.OnCDemoClassInfo(parser.onCDemoClassInfoNew)
+		parser.Callbacks.OnCDemoSendTables(parser.onCDemoSendTablesNew)
+		parser.Callbacks.OnCSVCMsg_PacketEntities(parser.onCSVCMsg_PacketEntitiesNew)
+	} else {
+		parser.Callbacks.OnCDemoClassInfo(parser.onCDemoClassInfo)
+		parser.Callbacks.OnCDemoSendTables(parser.onCDemoSendTables)
+		parser.Callbacks.OnCSVCMsg_PacketEntities(parser.onCSVCMsg_PacketEntities)
+	}
 
 	// Maintains the value of parser.Tick
 	parser.Callbacks.OnCNETMsg_Tick(func(m *dota.CNETMsg_Tick) error {
@@ -240,4 +247,12 @@ func (p *Parser) readOuterMessage() (*outerMessage, error) {
 		data:   buf,
 	}
 	return msg, nil
+}
+
+var newStuff bool
+
+func init() {
+	if os.Getenv("NEW") != "" {
+		newStuff = true
+	}
 }

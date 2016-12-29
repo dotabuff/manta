@@ -2,7 +2,6 @@ package manta
 
 import (
 	"fmt"
-	"os"
 	"strings"
 
 	"github.com/dotabuff/manta/dota"
@@ -15,13 +14,6 @@ const (
 	fieldModelVariableArray
 	fieldModelVariableTable
 )
-
-type fielder interface {
-	getName() string
-	getNameForFieldPath(*fieldPath, int) []string
-	getTypeForFieldPath(*fieldPath, int) *fieldType
-	getDecoderForFieldPath(*fieldPath, int) fieldDecoder
-}
 
 type field struct {
 	varName           string
@@ -206,6 +198,34 @@ func (f *field) getDecoderForFieldPath(fp *fieldPath, pos int) fieldDecoder {
 	return f.decoder
 }
 
+func (f *field) getValueForFieldPath(fp *fieldPath, pos int, state *fieldState) interface{} {
+	switch f.model {
+	case fieldModelFixedArray:
+		// TODO
+	case fieldModelFixedTable:
+		// TODO
+	case fieldModelVariableArray:
+		// TODO
+	case fieldModelVariableTable:
+		// TODO
+	}
+	return state.get(fp.path[pos-1])
+}
+
+func (f *field) setValueForFieldPath(fp *fieldPath, pos int, state *fieldState, v interface{}) {
+	switch f.model {
+	case fieldModelFixedArray:
+		// TODO
+	case fieldModelFixedTable:
+		// TODO
+	case fieldModelVariableArray:
+		// TODO
+	case fieldModelVariableTable:
+		// TODO
+	}
+	state.set(v, fp.path[pos-1])
+}
+
 func (f *field) String() string {
 	x := f.varName + " = " + f.fieldType.String()
 	if f.serializer != nil {
@@ -214,37 +234,25 @@ func (f *field) String() string {
 	return x
 }
 
-func readFields(r *reader, s *serializer) []interface{} {
+func readFields(r *reader, s *serializer, state *fieldState) {
 	fps := readFieldPaths(r)
 
-	values := make([]interface{}, len(fps))
-	for i, fp := range fps {
+	for _, fp := range fps {
 		decoder := s.getDecoderForFieldPath(fp, 0)
 
-		if waldnew {
+		if v(6) {
 			name := strings.Join(s.getNameForFieldPath(fp, 0), ".")
 			typ := s.getTypeForFieldPath(fp, 0)
-			_printf("NEW reading ser=%s path=%s pos=%s name=%s type=%s decoder=%s", s.name, fp.String(), r.position(), name, typ, nameOf(decoder))
+			_debugf("NEW reading ser=%s path=%s pos=%s name=%s type=%s decoder=%s", s.name, fp.String(), r.position(), name, typ, nameOf(decoder))
 		}
 
-		values[i] = decoder(r)
+		val := decoder(r)
 
-		if waldnew {
-			_printf(" => %v", values[i])
+		if v(6) {
+			_debugf(" => %v", v)
 		}
-	}
 
-	return values
-}
-
-var waldold bool
-var waldnew bool
-
-func init() {
-	if os.Getenv("WALDOLD") != "" {
-		waldold = true
-	}
-	if os.Getenv("WALDNEW") != "" {
-		waldnew = true
+		s.setValueForFieldPath(fp, 0, state, val)
+		fp.release()
 	}
 }

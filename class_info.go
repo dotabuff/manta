@@ -86,6 +86,11 @@ func (p *Parser) updateInstanceBaselineItem(item *stringTableItem) {
 		_panicf("invalid instancebaseline key '%s': %s", item.Key, err)
 	}
 
+	if newStuff {
+		p.newClassBaselines[classId] = item.Value
+		return
+	}
+
 	// Get the class name
 	className, ok := p.ClassInfo[classId]
 	if !ok {

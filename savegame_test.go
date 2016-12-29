@@ -8,6 +8,10 @@ import (
 )
 
 func TestParseCDemoSaveGames(t *testing.T) {
+	if newStuff {
+		t.Skip()
+	}
+
 	assert := assert.New(t)
 
 	buf := mustGetReplayData("1560315800", "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1560315800.dem")

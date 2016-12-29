@@ -3,6 +3,7 @@ package manta
 import (
 	"strconv"
 	"strings"
+	"sync"
 )
 
 var huffTree = newHuffmanTree()
@@ -172,7 +173,6 @@ var fieldPathTable = []fieldPathOp{
 			fp.last++
 			fp.path[fp.last] += r.readUBitVarFieldPath()
 		}
-
 	}},
 	fieldPathOp{"PushNAndNonTopological", 310, func(r *reader, fp *fieldPath) {
 		for i := 0; i <= fp.last; i++ {
@@ -197,7 +197,6 @@ var fieldPathTable = []fieldPathOp{
 	fieldPathOp{"PopAllButOnePlusOne", 1837, func(r *reader, fp *fieldPath) {
 		fp.last = 0
 		fp.path[0] += 1
-
 	}},
 	fieldPathOp{"PopAllButOnePlusN", 149, func(r *reader, fp *fieldPath) {
 		fp.last = 0
@@ -250,11 +249,9 @@ var fieldPathTable = []fieldPathOp{
 }
 
 func (fp *fieldPath) copy() *fieldPath {
-	x := &fieldPath{
-		path: make([]int, fp.last+1),
-		last: fp.last,
-	}
-	copy(x.path, fp.path[:fp.last+1])
+	x := fpPool.Get().(*fieldPath)
+	copy(x.path, fp.path)
+	x.last = fp.last
 	x.done = fp.done
 	return x
 }
@@ -267,12 +264,31 @@ func (fp *fieldPath) String() string {
 	return strings.Join(ss, "/")
 }
 
+var fpPool = &sync.Pool{
+	New: func() interface{} {
+		return &fieldPath{
+			path: make([]int, 6),
+			last: 0,
+			done: false,
+		}
+	},
+}
+
+var fpReset = []int{-1, 0, 0, 0, 0, 0}
+
+func (fp *fieldPath) reset() {
+	copy(fp.path, fpReset)
+	fp.last = 0
+	fp.done = false
+}
+
+func (fp *fieldPath) release() {
+	fpPool.Put(fp)
+}
+
 func readFieldPaths(r *reader) []*fieldPath {
-	fp := &fieldPath{
-		path: []int{-1, 0, 0, 0, 0, 0},
-		last: 0,
-		done: false,
-	}
+	fp := fpPool.Get().(*fieldPath)
+	fp.reset()
 
 	node, next := huffTree, huffTree
 
@@ -287,18 +303,7 @@ func readFieldPaths(r *reader) []*fieldPath {
 
 		if next.IsLeaf() {
 			node = huffTree
-			op := fieldPathTable[next.Value()]
-
-			if waldnew {
-				_printf("NEW FP BEFORE: %s (%s) pos=%s", fp.copy().String(), op.name, r.position())
-			}
-
-			op.fn(r, fp)
-
-			if waldnew {
-				_printf("NEW FP AFTER: %s (%s) pos=%s", fp.copy().String(), op.name, r.position())
-			}
-
+			fieldPathTable[next.Value()].fn(r, fp)
 			if !fp.done {
 				paths = append(paths, fp.copy())
 			}
@@ -306,6 +311,8 @@ func readFieldPaths(r *reader) []*fieldPath {
 			node = next
 		}
 	}
+
+	fp.release()
 
 	return paths
 }
