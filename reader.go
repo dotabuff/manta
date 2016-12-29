@@ -2,6 +2,7 @@ package manta
 
 import (
 	"encoding/binary"
+	"fmt"
 	"math"
 )
 
@@ -22,6 +23,13 @@ func newReader(buf []byte) *reader {
 // remBits calculates the number of unread bits in the buffer
 func (r *reader) remBits() uint32 {
 	return r.remBytes() + r.bitCount
+}
+
+func (r *reader) position() string {
+	if r.bitCount > 0 {
+		return fmt.Sprintf("%d.%d", r.pos-1, 8-r.bitCount)
+	}
+	return fmt.Sprintf("%d", r.pos)
 }
 
 // remBytes calculates the number of unread bytes in the buffer

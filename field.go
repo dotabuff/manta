@@ -78,7 +78,7 @@ func (f *field) setModel(model int) {
 
 	switch model {
 	case fieldModelFixedArray:
-		f.childDecoder = findDecoder(f)
+		f.decoder = findDecoder(f)
 
 	case fieldModelFixedTable:
 		f.baseDecoder = booleanDecoder
@@ -92,6 +92,9 @@ func (f *field) setModel(model int) {
 
 	case fieldModelVariableTable:
 		f.baseDecoder = unsignedDecoder
+
+	case fieldModelSimple:
+		f.decoder = findDecoder(f)
 	}
 }
 
@@ -216,19 +219,18 @@ func readFields(r *reader, s *serializer) []interface{} {
 
 	values := make([]interface{}, len(fps))
 	for i, fp := range fps {
-		name := strings.Join(s.getNameForFieldPath(fp, 0), ".")
-		typ := s.getTypeForFieldPath(fp, 0)
 		decoder := s.getDecoderForFieldPath(fp, 0)
 
 		if waldnew {
-			_printf("NEW reading ser=%s path=%s pos=%d name=%s type=%s decoder=%s", s.name, fp.String(), r.pos, name, typ, nameOf(decoder))
+			name := strings.Join(s.getNameForFieldPath(fp, 0), ".")
+			typ := s.getTypeForFieldPath(fp, 0)
+			_printf("NEW reading ser=%s path=%s pos=%s name=%s type=%s decoder=%s", s.name, fp.String(), r.position(), name, typ, nameOf(decoder))
 		}
 
-		value := decoder(r)
-		values[i] = value
+		values[i] = decoder(r)
 
 		if waldnew {
-			_printf(" => %v", value)
+			_printf(" => %v", values[i])
 		}
 	}
 

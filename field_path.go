@@ -56,6 +56,7 @@ var fieldPathTable = []fieldPathOp{
 	fieldPathOp{"PushOneLeftDeltaNRightZero", 560, func(r *reader, fp *fieldPath) {
 		fp.path[fp.last] += r.readUBitVarFieldPath()
 		fp.last++
+		fp.path[fp.last] = 0
 	}},
 	fieldPathOp{"PushOneLeftDeltaNRightNonZero", 471, func(r *reader, fp *fieldPath) {
 		fp.path[fp.last] += r.readUBitVarFieldPath() + 2
@@ -254,6 +255,7 @@ func (fp *fieldPath) copy() *fieldPath {
 		last: fp.last,
 	}
 	copy(x.path, fp.path[:fp.last+1])
+	x.done = fp.done
 	return x
 }
 
@@ -267,9 +269,10 @@ func (fp *fieldPath) String() string {
 
 func readFieldPaths(r *reader) []*fieldPath {
 	fp := &fieldPath{
-		path: make([]int, 6),
+		path: []int{-1, 0, 0, 0, 0, 0},
+		last: 0,
+		done: false,
 	}
-	fp.path[0] = -1
 
 	node, next := huffTree, huffTree
 
@@ -285,8 +288,17 @@ func readFieldPaths(r *reader) []*fieldPath {
 		if next.IsLeaf() {
 			node = huffTree
 			op := fieldPathTable[next.Value()]
-			// fmt.Println("NEW FP", fp.copy().String(), op.name)
+
+			if waldnew {
+				_printf("NEW FP BEFORE: %s (%s) pos=%s", fp.copy().String(), op.name, r.position())
+			}
+
 			op.fn(r, fp)
+
+			if waldnew {
+				_printf("NEW FP AFTER: %s (%s) pos=%s", fp.copy().String(), op.name, r.position())
+			}
+
 			if !fp.done {
 				paths = append(paths, fp.copy())
 			}

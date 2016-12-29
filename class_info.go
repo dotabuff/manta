@@ -32,7 +32,6 @@ func (p *Parser) onCSVCMsg_ServerInfo(m *dota.CSVCMsg_ServerInfo) error {
 
 // Internal callback for CDemoClassInfo.
 func (p *Parser) onCDemoClassInfo(m *dota.CDemoClassInfo) error {
-	_printf("onCDemoClassInfo")
 	// Iterate through items, storing the mapping in the parser state
 	for _, c := range m.GetClasses() {
 		p.ClassInfo[c.GetClassId()] = c.GetNetworkName()

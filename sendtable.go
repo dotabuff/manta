@@ -23,7 +23,7 @@ var itemCounts = map[string]int{
 
 // Internal callback for OnCDemoSendTables.
 func (p *Parser) onCDemoSendTablesNew(m *dota.CDemoSendTables) error {
-	_printf("onCDemoSendTables build %d", p.GameBuild)
+	// _printf("onCDemoSendTables build %d", p.GameBuild)
 
 	r := newReader(m.GetData())
 	buf := r.readBytes(r.readVarUint32())
@@ -66,7 +66,12 @@ func (p *Parser) onCDemoSendTablesNew(m *dota.CDemoSendTables) error {
 					field.serializer = p.newSerializers[field.serializerName]
 				}
 
-				// set fixed sub-table flag
+				// apply any build-specific patches to the field
+				for _, h := range patches {
+					h.patch(field)
+				}
+
+				// determine field model
 				if field.serializer != nil {
 					if pointerTypes[field.fieldType.baseType] {
 						field.setModel(fieldModelFixedTable)
@@ -77,14 +82,9 @@ func (p *Parser) onCDemoSendTablesNew(m *dota.CDemoSendTables) error {
 					field.setModel(fieldModelFixedArray)
 				} else if field.fieldType.baseType == "CUtlVector" {
 					field.setModel(fieldModelVariableArray)
+				} else {
+					field.setModel(fieldModelSimple)
 				}
-
-				// apply any build-specific patches to the field
-				for _, h := range patches {
-					h.patch(field)
-				}
-
-				field.decoder = findDecoder(field)
 
 				// store the field
 				fields[i] = field

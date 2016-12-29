@@ -15,9 +15,6 @@ func (s *serializer) id() string {
 }
 
 func (s *serializer) getNameForFieldPath(fp *fieldPath, pos int) []string {
-	// x := fp.path[pos]
-	// fmt.Println("s getNameForFieldPath", s.name, fp.String(), "pos=", pos, "in=", in, "lenFields=", len(s.fields), "x=", x)
-
 	return s.fields[fp.path[pos]].getNameForFieldPath(fp, pos+1)
 }
 
