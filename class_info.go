@@ -92,10 +92,6 @@ func (p *Parser) updateInstanceBaselineItem(item *stringTableItem) {
 		_panicf("unable to find class info for instancebaseline key %d", classId)
 	}
 
-	// _printf("updateInstanceBaselineItem %d %s", item.Index, item.Key)
-
-	p.newClassBaselines[classId] = item.Value
-
 	// Create an entry in the map if needed
 	if _, ok := p.ClassBaselines[classId]; !ok {
 		p.ClassBaselines[classId] = NewProperties()

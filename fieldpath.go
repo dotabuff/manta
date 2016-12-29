@@ -1,7 +1,6 @@
 package manta
 
 import (
-	"fmt"
 	"strconv"
 )
 
@@ -85,11 +84,6 @@ func newFieldpath(parentTbl *dt) *fieldpath {
 	}
 	fp.index[0] = -1 // always start at -1
 
-	// fmt.Println("OLD PROPS " + parentTbl.Name)
-	// for i, p := range parentTbl.Properties {
-	// 	// fmt.Println("  ->", i, p.Field.Name, p.Field.Type)
-	// }
-	// _dump("OLD PROPS "+parentTbl.Name, parentTbl.Properties)
 	return fp
 }
 
@@ -107,10 +101,7 @@ func (fp *fieldpath) walk(r *reader) {
 
 		if next.IsLeaf() {
 			node = fpHuf
-			op := fieldpathLookup[next.Value()]
-			// fmt.Println("OLD FP", fp.index, op.Name)
-			// _debugf("old running op %s", op.Name)
-			op.Function(r, fp)
+			fieldpathLookup[next.Value()].Function(r, fp)
 			if !fp.finished {
 				fp.addField()
 			}
@@ -127,11 +118,13 @@ func (fp *fieldpath) addField() {
 	var name string
 	var i int
 
-	var path string
-	for i := 0; i < len(fp.index)-1; i++ {
-		path += strconv.Itoa(int(fp.index[i])) + "/"
+	if v(6) {
+		var path string
+		for i := 0; i < len(fp.index)-1; i++ {
+			path += strconv.Itoa(int(fp.index[i])) + "/"
+		}
+		_debugf("adding field with path: %s%d", path, fp.index[len(fp.index)-1])
 	}
-	path += strconv.Itoa(int(fp.index[len(fp.index)-1]))
 
 	for i = 0; i < len(fp.index)-1; i++ {
 		if cDt.Properties[fp.index[i]].Table != nil {
@@ -147,15 +140,7 @@ func (fp *fieldpath) addField() {
 		}
 	}
 
-	fullName := name + cDt.Properties[fp.index[i]].Field.Name
-
-	if v(6) {
-		fmt.Println("  => naming path=", path, "name=", fullName)
-	}
-
 	fp.fields = append(fp.fields, &fieldpathField{name + cDt.Properties[fp.index[i]].Field.Name, cDt.Properties[fp.index[i]].Field})
-
-	// _debugf("fields len %d", len(fp.fields))
 }
 
 // Returns a huffman tree based on the operation weights

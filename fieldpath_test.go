@@ -9,6 +9,10 @@ import (
 )
 
 func TestFieldpath(t *testing.T) {
+	if newStuff {
+		t.Skip()
+	}
+
 	assert := assert.New(t)
 
 	// roughly the same format used in property_test.go
@@ -83,7 +87,6 @@ func TestFieldpath(t *testing.T) {
 	// Retrieve the flattened field serializer
 	p := &Parser{}
 	fs := p.parseSendTables(m, newPropertySerializerTable())
-	p.onCDemoSendTablesNew(m)
 
 	// Iterate over the different scenarios
 	// -! Create a new FieldPath for each scenario
@@ -117,8 +120,5 @@ func TestFieldpath(t *testing.T) {
 				_debugf("%d\t%s\t%s", i, f.Name, f.Field.Type)
 			}
 		}
-
-		readFields(newReader(buf), p.newSerializers[s.tableName])
-
 	}
 }
