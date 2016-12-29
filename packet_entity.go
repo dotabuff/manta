@@ -101,6 +101,8 @@ func (p *Parser) OnPacketEntity(fn packetEntityHandler) {
 
 // Internal callback for CSVCMsg_PacketEntities.
 func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error {
+	_printf("onCSVCMsg_PacketEntities")
+
 	var pe *PacketEntity
 
 	// Skip processing if we're configured not to.
@@ -153,16 +155,33 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 		// Proceed based on the update type
 		switch eventType {
 		case EntityEventType_Create:
+			classId := int32(r.readBits(p.classIdSize))
+			serial := int32(r.readBits(17))
+			r.readVarUint32()
+
+			if true {
+				class := p.newClassesById[classId]
+				if class == nil {
+					_panicf("unable to find new class %d", classId)
+				}
+
+				baseline := p.newClassBaselines[classId]
+				if baseline == nil {
+					_panicf("unable to find new baseline %d", classId)
+				}
+				values := readFields(newReader(baseline), class.serializer)
+				e := newEntity(index, serial, class, values)
+				p.newEntities[index] = e
+				_debugf("creating new entity %d (%s)", index, class.name)
+			}
+
 			// Create a new PacketEntity.
 			pe = &PacketEntity{
 				Index:      index,
-				ClassId:    int32(r.readBits(p.classIdSize)),
-				Serial:     int32(r.readBits(17)),
+				ClassId:    classId,
+				Serial:     serial,
 				Properties: NewProperties(),
 			}
-
-			// We don't know what this is used for.
-			r.readVarUint32()
 
 			// Get the associated class
 			if pe.ClassName, ok = p.ClassInfo[pe.ClassId]; !ok {

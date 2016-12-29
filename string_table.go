@@ -61,6 +61,7 @@ type stringTableItem struct {
 // XXX TODO: decide if we want to at all integrate these updates,
 // or trust create/update entirely. Let's ignore them for now.
 func (p *Parser) onCDemoStringTables(m *dota.CDemoStringTables) error {
+	_printf("onCDemoStringTables")
 	return nil
 }
 
@@ -68,6 +69,8 @@ func (p *Parser) onCDemoStringTables(m *dota.CDemoStringTables) error {
 // XXX TODO: This is currently using an artificial, internally crafted message.
 // This should be replaced with the real message once we have updated protos.
 func (p *Parser) onCSVCMsg_CreateStringTable(m *dota.CSVCMsg_CreateStringTable) error {
+	_printf("onCSVCMsg_CreateStringTable")
+
 	// Create a new string table at the next index position
 	t := &stringTable{
 		index:             p.stringTables.nextIndex,
@@ -122,6 +125,8 @@ func (p *Parser) onCSVCMsg_CreateStringTable(m *dota.CSVCMsg_CreateStringTable) 
 
 // Internal callback for CSVCMsg_UpdateStringTable.
 func (p *Parser) onCSVCMsg_UpdateStringTable(m *dota.CSVCMsg_UpdateStringTable) error {
+	_printf("CSVCMsg_UpdateStringTable")
+
 	// TODO: integrate
 	t, ok := p.stringTables.Tables[m.GetTableId()]
 	if !ok {

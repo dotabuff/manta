@@ -132,7 +132,7 @@ func (pst *propertySerializerTable) getPropertySerializerByName(name string) *pr
 			}
 		default:
 			if v(6) {
-				_debugf("no decoder for type %s", name)
+				// _debugf("no decoder for type %s", name)
 			}
 		}
 	}

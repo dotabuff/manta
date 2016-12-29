@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"reflect"
 	"runtime"
 	"strconv"
 	"strings"
@@ -137,4 +138,9 @@ func saveReturnFloat32(v *float32, def interface{}) interface{} {
 	} else {
 		return *v
 	}
+}
+
+func nameOf(i interface{}) string {
+	ss := strings.Split(strings.Replace(runtime.FuncForPC(reflect.ValueOf(i).Pointer()).Name(), ".", "/", -1), "/")
+	return ss[len(ss)-1]
 }

@@ -181,6 +181,10 @@ func (r *reader) readUBitVarFP() uint32 {
 	return r.readBits(31)
 }
 
+func (r *reader) readUBitVarFieldPath() int {
+	return int(r.readUBitVarFP())
+}
+
 // readStringN reads a string of a given length
 func (r *reader) readStringN(n uint32) string {
 	return string(r.readBytes(n))

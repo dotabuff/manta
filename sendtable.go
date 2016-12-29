@@ -1,0 +1,118 @@
+package manta
+
+import (
+	"fmt"
+
+	"github.com/dotabuff/manta/dota"
+	"github.com/golang/protobuf/proto"
+)
+
+var pointerTypes = map[string]bool{
+	"CBodyComponent":             true,
+	"CEntityIdentity":            true,
+	"CPhysicsComponent":          true,
+	"CRenderComponent":           true,
+	"CDOTAGamerules":             true,
+	"CDOTAGameManager":           true,
+	"CDOTASpectatorGraphManager": true,
+	"CPlayerLocalData":           true,
+}
+
+var itemCounts = map[string]int{
+	"MAX_ITEM_STOCKS":             8,
+	"MAX_ABILITY_DRAFT_ABILITIES": 48,
+}
+
+// Internal callback for OnCDemoSendTables.
+func (p *Parser) onCDemoSendTablesNew(m *dota.CDemoSendTables) error {
+	_printf("onCDemoSendTables build %d", p.GameBuild)
+
+	r := newReader(m.GetData())
+	buf := r.readBytes(r.readVarUint32())
+
+	msg := &dota.CSVCMsg_FlattenedSerializer{}
+	if err := proto.Unmarshal(buf, msg); err != nil {
+		return err
+	}
+
+	patches := []fieldPatch{}
+	for _, h := range fieldPatches {
+		if h.shouldApply(p.GameBuild) {
+			patches = append(patches, h)
+		}
+	}
+
+	fields := map[int32]*field{}
+	fieldTypes := map[string]*fieldType{}
+
+	for _, s := range msg.GetSerializers() {
+		serializer := &serializer{
+			name:    msg.GetSymbols()[s.GetSerializerNameSym()],
+			version: s.GetSerializerVersion(),
+			fields:  []*field{},
+		}
+
+		for _, i := range s.GetFieldsIndex() {
+			if _, ok := fields[i]; !ok {
+				// create a new field
+				field := newField(msg, msg.GetFields()[i])
+
+				// find or create a field type
+				if _, ok := fieldTypes[field.varType]; !ok {
+					fieldTypes[field.varType] = newFieldType(field.varType)
+				}
+				field.fieldType = fieldTypes[field.varType]
+
+				// find associated serializer
+				if field.serializerName != "" {
+					field.serializer = p.newSerializers[field.serializerName]
+					fmt.Println("serializer", field.serializerName, "now", field.serializer)
+				}
+
+				// set fixed sub-table flag
+				if field.serializer != nil {
+					if pointerTypes[field.fieldType.baseType] {
+						field.setModel(fieldModelFixedTable)
+						fmt.Println(field.varName, field.fieldType.baseType, "is a fixed sub-table")
+						field.fixedSubTable = true
+					} else {
+						// fmt.Println(field.varName, field.fieldType.baseType, "is a variable sub-table")
+						field.setModel(fieldModelVariableTable)
+						field.varSubTable = true
+					}
+				} else if field.fieldType.count > 0 && field.fieldType.baseType != "char" {
+					// fmt.Println(field.varName, field.fieldType.baseType, "is a fixed array")
+					field.setModel(fieldModelFixedArray)
+					field.fixedArray = true
+					field.fixedArraySize = field.fieldType.count
+				} else if field.fieldType.baseType == "CUtlVector" {
+					// fmt.Println(field.varName, field.fieldType.baseType, "is a var array")
+					field.setModel(fieldModelVariableArray)
+					field.varArray = true
+				}
+
+				// apply any build-specific patches to the field
+				for _, h := range patches {
+					h.patch(field)
+				}
+
+				field.decoder = findDecoder(field)
+
+				// store the field
+				fields[i] = field
+			}
+
+			// add the field to the serializer
+			serializer.fields = append(serializer.fields, fields[i])
+		}
+
+		// store the serializer for field reference
+		p.newSerializers[serializer.name] = serializer
+
+		if _, ok := p.newClassesByName[serializer.name]; ok {
+			p.newClassesByName[serializer.name].serializer = serializer
+		}
+	}
+
+	return nil
+}

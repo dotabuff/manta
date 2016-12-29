@@ -44,6 +44,12 @@ type Parser struct {
 	serializers             map[string]map[int32]*dt
 	stringTables            *stringTables
 
+	newEntities       map[int32]*entity
+	newClassesById    map[int32]*class
+	newClassesByName  map[string]*class
+	newClassBaselines map[int32][]byte
+	newSerializers    map[string]*serializer
+
 	stream            *stream
 	isStopping        bool
 	AfterStopCallback func()
@@ -75,6 +81,12 @@ func NewStreamParser(r io.Reader) (*Parser, error) {
 		packetEntityHandlers: make([]packetEntityHandler, 0),
 		stringTables:         newStringTables(),
 
+		newClassesById:    make(map[int32]*class),
+		newClassesByName:  make(map[string]*class),
+		newClassBaselines: make(map[int32][]byte),
+		newEntities:       make(map[int32]*entity),
+		newSerializers:    make(map[string]*serializer),
+
 		stream:     newStream(r),
 		isStopping: false,
 	}
@@ -98,6 +110,7 @@ func NewStreamParser(r io.Reader) (*Parser, error) {
 	parser.Callbacks.OnCDemoFullPacket(parser.onCDemoFullPacket)
 	parser.Callbacks.OnCDemoClassInfo(parser.onCDemoClassInfo)
 	parser.Callbacks.OnCDemoSendTables(parser.onCDemoSendTables)
+	parser.Callbacks.OnCDemoSendTables(parser.onCDemoSendTablesNew)
 	parser.Callbacks.OnCSVCMsg_CreateStringTable(parser.onCSVCMsg_CreateStringTable)
 	parser.Callbacks.OnCSVCMsg_PacketEntities(parser.onCSVCMsg_PacketEntities)
 	parser.Callbacks.OnCSVCMsg_UpdateStringTable(parser.onCSVCMsg_UpdateStringTable)

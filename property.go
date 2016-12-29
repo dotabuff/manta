@@ -88,16 +88,20 @@ func (p *Properties) FetchString(k string) (string, bool) {
 
 // Reads properties into p using the given reader and serializer.
 func (p *Properties) readProperties(r *reader, ser *dt) {
+	// _printf("OLD readProperties %s", ser.Name)
+
 	// Create fieldpath
 	fieldPath := newFieldpath(ser)
 
 	// Get a list of the included fields
 	fieldPath.walk(r)
 
+	//_debugf("reading with %s", ser.Name)
+
 	// iterate all the fields and set their corresponding values
 	for _, f := range fieldPath.fields {
-		if v(6) {
-			_debugf("decoding pos=%d name=%s type=%s encoder=%s", r.pos, f.Name, f.Field.Type, f.Field.Encoder)
+		if waldold {
+			_printf("OLD reading ser=%s pos=%d name=%s type=%s encoder=%s", ser.Name, r.pos, f.Name, f.Field.Type, f.Field.Encoder)
 		}
 
 		if f.Field.Serializer.DecodeContainer != nil {
@@ -108,9 +112,10 @@ func (p *Properties) readProperties(r *reader, ser *dt) {
 		} else {
 			p.KV[f.Name] = f.Field.Serializer.Decode(r, f.Field)
 		}
-
-		if v(6) {
-			_debugf("decoding pos=%d name=%s type=%s value=%v", r.pos, f.Name, f.Field.Type, p.KV[f.Name])
+		if waldold {
+			_printf(" => %v", p.KV[f.Name])
 		}
+
+		// _printf("decoding pos=%d name=%s type=%s value=%v", r.pos, f.Name, f.Field.Type, p.KV[f.Name])
 	}
 }

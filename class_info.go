@@ -32,9 +32,18 @@ func (p *Parser) onCSVCMsg_ServerInfo(m *dota.CSVCMsg_ServerInfo) error {
 
 // Internal callback for CDemoClassInfo.
 func (p *Parser) onCDemoClassInfo(m *dota.CDemoClassInfo) error {
+	_printf("onCDemoClassInfo")
 	// Iterate through items, storing the mapping in the parser state
 	for _, c := range m.GetClasses() {
 		p.ClassInfo[c.GetClassId()] = c.GetNetworkName()
+
+		class := &class{
+			classId:    c.GetClassId(),
+			name:       c.GetNetworkName(),
+			serializer: p.newSerializers[c.GetNetworkName()],
+		}
+		p.newClassesById[class.classId] = class
+		p.newClassesByName[class.name] = class
 
 		if _, ok := p.serializers[c.GetNetworkName()]; !ok {
 			_panicf("unable to find table for class %d (%s)", c.GetClassId, c.GetNetworkName())
@@ -83,6 +92,10 @@ func (p *Parser) updateInstanceBaselineItem(item *stringTableItem) {
 	if !ok {
 		_panicf("unable to find class info for instancebaseline key %d", classId)
 	}
+
+	// _printf("updateInstanceBaselineItem %d %s", item.Index, item.Key)
+
+	p.newClassBaselines[classId] = item.Value
 
 	// Create an entry in the map if needed
 	if _, ok := p.ClassBaselines[classId]; !ok {
