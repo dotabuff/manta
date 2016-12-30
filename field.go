@@ -2,6 +2,7 @@ package manta
 
 import (
 	"fmt"
+	"strconv"
 
 	"github.com/dotabuff/manta/dota"
 )
@@ -195,4 +196,52 @@ func (f *field) getDecoderForFieldPath(fp *fieldPath, pos int) fieldDecoder {
 	}
 
 	return f.decoder
+}
+
+func (f *field) getFieldPathForName(fp *fieldPath, name string) bool {
+	switch f.model {
+	case fieldModelFixedArray:
+		assertLen(name, 4)
+		fp.path[fp.last] = mustAtoi(name)
+		return true
+
+	case fieldModelFixedTable:
+		return f.serializer.getFieldPathForName(fp, name)
+
+	case fieldModelVariableArray:
+		assertLen(name, 4)
+		fp.path[fp.last] = mustAtoi(name)
+		return true
+
+	case fieldModelVariableTable:
+		assertLenMin(name, 6)
+		fp.path[fp.last] = mustAtoi(name[:4])
+		fp.last++
+		return f.serializer.getFieldPathForName(fp, name[5:])
+
+	case fieldModelSimple:
+		_panicf("not supported")
+	}
+
+	return false
+}
+
+func mustAtoi(s string) int {
+	n, err := strconv.Atoi(s)
+	if err != nil {
+		_panicf("assertion failed: '%s' not a number", s)
+	}
+	return n
+}
+
+func assertLen(s string, n int) {
+	if len(s) != n {
+		_panicf("assertion failed: '%s' is not %d long", s, n)
+	}
+}
+
+func assertLenMin(s string, n int) {
+	if len(s) < n {
+		_panicf("assertion failed: '%s' is less than %d long", s, n)
+	}
 }

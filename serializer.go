@@ -2,6 +2,7 @@ package manta
 
 import (
 	"fmt"
+	"strings"
 )
 
 type serializer struct {
@@ -28,6 +29,23 @@ func (s *serializer) getDecoderForFieldPath(fp *fieldPath, pos int) fieldDecoder
 
 func (s *serializer) getFieldForFieldPath(fp *fieldPath, pos int) *field {
 	return s.fields[fp.path[pos]].getFieldForFieldPath(fp, pos+1)
+}
+
+func (s *serializer) getFieldPathForName(fp *fieldPath, name string) bool {
+	for i, f := range s.fields {
+		if name == f.varName {
+			fp.path[fp.last] = i
+			return true
+		}
+
+		if strings.HasPrefix(name, f.varName+".") {
+			fp.path[fp.last] = i
+			fp.last++
+			return f.getFieldPathForName(fp, name[len(f.varName)+1:])
+		}
+	}
+
+	return false
 }
 
 func serializerId(name string, version int32) string {

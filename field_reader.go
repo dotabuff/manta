@@ -25,6 +25,21 @@ func readFields(r *reader, s *serializer, state *fieldState) {
 				_panicf("WRONG READ: %#v != %#v", val, val2)
 			}
 
+			name := strings.Join(s.getNameForFieldPath(fp, 0), ".")
+			fp2 := fpPool.Get().(*fieldPath)
+			fp2.reset()
+			b := s.getFieldPathForName(fp2, name)
+
+			if !b {
+				_panicf("GOT NO FP: name=%s fp2=%#vv", name, fp2)
+			}
+
+			if fp2.String() != fp.String() {
+				_panicf("GOT FP MISMATCH: fp=%s fp2=%s", fp, fp2)
+			}
+
+			fp2.release()
+
 			_debugf(" => %#v", val)
 		}
 
