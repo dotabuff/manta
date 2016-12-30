@@ -257,9 +257,9 @@ func (fp *fieldPath) copy() *fieldPath {
 }
 
 func (fp *fieldPath) String() string {
-	ss := make([]string, len(fp.path))
-	for i, n := range fp.path {
-		ss[i] = strconv.Itoa(n)
+	ss := make([]string, fp.last+1)
+	for i := 0; i <= fp.last; i++ {
+		ss[i] = strconv.Itoa(fp.path[i])
 	}
 	return strings.Join(ss, "/")
 }

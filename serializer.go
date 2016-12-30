@@ -30,14 +30,6 @@ func (s *serializer) getFieldForFieldPath(fp *fieldPath, pos int) *field {
 	return s.fields[fp.path[pos]].getFieldForFieldPath(fp, pos+1)
 }
 
-func (s *serializer) getValueForFieldPath(fp *fieldPath, pos int, state *fieldState) interface{} {
-	return s.fields[fp.path[pos]].getValueForFieldPath(fp, pos+1, state)
-}
-
-func (s *serializer) setValueForFieldPath(fp *fieldPath, pos int, state *fieldState, v interface{}) {
-	s.fields[fp.path[pos]].setValueForFieldPath(fp, pos+1, state, v)
-}
-
 func serializerId(name string, version int32) string {
 	return fmt.Sprintf("%s(%d)", name, version)
 }

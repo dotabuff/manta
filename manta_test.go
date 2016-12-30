@@ -446,13 +446,15 @@ func (s testScenario) bench(b *testing.B) {
 func (s testScenario) test(t *testing.T) {
 	assert := assert.New(t)
 
-	if s.debugTick == 0 {
-		debugLevel = s.debugLevel
-	}
+	if s.debugLevel > 0 {
+		if s.debugTick == 0 {
+			debugLevel = s.debugLevel
+		}
 
-	defer func() {
-		debugLevel = 0
-	}()
+		defer func() {
+			debugLevel = 0
+		}()
+	}
 
 	if s.skipInCI && os.Getenv("CI") != "" {
 		t.Skip("skipping scenario in CI environment")

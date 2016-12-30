@@ -2,7 +2,6 @@ package manta
 
 import (
 	"fmt"
-	"strings"
 
 	"github.com/dotabuff/manta/dota"
 )
@@ -58,7 +57,7 @@ func newField(ser *dota.CSVCMsg_FlattenedSerializer, f *dota.ProtoFlattenedSeria
 		model:             fieldModelSimple,
 	}
 
-	if x.sendNode == "(root" {
+	if x.sendNode == "(root)" {
 		x.sendNode = ""
 	}
 
@@ -196,63 +195,4 @@ func (f *field) getDecoderForFieldPath(fp *fieldPath, pos int) fieldDecoder {
 	}
 
 	return f.decoder
-}
-
-func (f *field) getValueForFieldPath(fp *fieldPath, pos int, state *fieldState) interface{} {
-	switch f.model {
-	case fieldModelFixedArray:
-		// TODO
-	case fieldModelFixedTable:
-		// TODO
-	case fieldModelVariableArray:
-		// TODO
-	case fieldModelVariableTable:
-		// TODO
-	}
-	return state.get(fp.path[pos-1])
-}
-
-func (f *field) setValueForFieldPath(fp *fieldPath, pos int, state *fieldState, v interface{}) {
-	switch f.model {
-	case fieldModelFixedArray:
-		// TODO
-	case fieldModelFixedTable:
-		// TODO
-	case fieldModelVariableArray:
-		// TODO
-	case fieldModelVariableTable:
-		// TODO
-	}
-	state.set(v, fp.path[pos-1])
-}
-
-func (f *field) String() string {
-	x := f.varName + " = " + f.fieldType.String()
-	if f.serializer != nil {
-		x += "(" + f.serializer.id() + ")"
-	}
-	return x
-}
-
-func readFields(r *reader, s *serializer, state *fieldState) {
-	fps := readFieldPaths(r)
-
-	for _, fp := range fps {
-		decoder := s.getDecoderForFieldPath(fp, 0)
-
-		if v(6) {
-			name := strings.Join(s.getNameForFieldPath(fp, 0), ".")
-			typ := s.getTypeForFieldPath(fp, 0)
-			_debugf("NEW reading ser=%s path=%s pos=%s name=%s type=%s decoder=%s", s.name, fp.String(), r.position(), name, typ, nameOf(decoder))
-		}
-
-		val := decoder(r)
-
-		if v(6) {
-			_debugf(" => %v", v)
-		}
-
-		s.setValueForFieldPath(fp, 0, state, val)
-		fp.release()
-	}
 }
