@@ -96,6 +96,10 @@ func (p *Properties) readProperties(r *reader, ser *dt) {
 
 	// iterate all the fields and set their corresponding values
 	for _, f := range fieldPath.fields {
+		if v(6) {
+			_debugf("OLD reading ser=%s pos=%s name=%s type=%s encoder=%s", ser.Name, r.position(), f.Name, f.Field.Type, f.Field.Encoder)
+		}
+
 		if f.Field.Serializer.DecodeContainer != nil {
 			p.KV[f.Name] = f.Field.Serializer.DecodeContainer(r, f.Field)
 		} else if f.Field.Serializer.Decode == nil {
@@ -103,5 +107,10 @@ func (p *Properties) readProperties(r *reader, ser *dt) {
 		} else {
 			p.KV[f.Name] = f.Field.Serializer.Decode(r, f.Field)
 		}
+
+		if v(6) {
+			_debugf(" => %#v", p.KV[f.Name])
+		}
 	}
+
 }

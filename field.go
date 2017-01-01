@@ -16,6 +16,7 @@ const (
 )
 
 type field struct {
+	parentName        string
 	varName           string
 	varType           string
 	sendNode          string

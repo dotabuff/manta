@@ -55,6 +55,11 @@ func (p *Parser) onCDemoSendTablesNew(m *dota.CDemoSendTables) error {
 				// create a new field
 				field := newField(msg, msg.GetFields()[i])
 
+				// patch parent name in builds <= 990
+				if p.GameBuild <= 990 {
+					field.parentName = serializer.name
+				}
+
 				// find or create a field type
 				if _, ok := fieldTypes[field.varType]; !ok {
 					fieldTypes[field.varType] = newFieldType(field.varType)

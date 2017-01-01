@@ -1,5 +1,9 @@
 package manta
 
+import (
+	"github.com/golang/protobuf/proto"
+)
+
 type fieldPatch struct {
 	minBuild uint32
 	maxBuild uint32
@@ -16,7 +20,7 @@ var fieldPatches = []fieldPatch{
 			"m_angRotation",
 			"m_ragAngles",
 			"m_vLightDirection":
-			if f.serializerName == "CBodyComponentBaseAnimatingOverlay" {
+			if f.parentName == "CBodyComponentBaseAnimatingOverlay" {
 				f.encoder = "qangle_pitch_yaw"
 			} else {
 				f.encoder = "QAngle"
@@ -39,6 +43,16 @@ var fieldPatches = []fieldPatch{
 			"origin",
 			"vecLocalOrigin":
 			f.encoder = "coord"
+
+		case "m_vecLadderNormal":
+			f.encoder = "normal"
+		}
+	}},
+	fieldPatch{0, 954, func(f *field) {
+		switch f.varName {
+		case "m_flMana", "m_flMaxMana":
+			f.lowValue = nil
+			f.highValue = proto.Float32(8192.0)
 		}
 	}},
 	fieldPatch{1016, 1027, func(f *field) {
