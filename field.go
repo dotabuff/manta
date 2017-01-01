@@ -227,6 +227,58 @@ func (f *field) getFieldPathForName(fp *fieldPath, name string) bool {
 	return false
 }
 
+func (f *field) getFieldPaths(fp *fieldPath, state *fieldState) []*fieldPath {
+	x := make([]*fieldPath, 0, 1)
+
+	switch f.model {
+	case fieldModelFixedArray:
+		if sub, ok := state.get(fp).(*fieldState); ok {
+			fp.last++
+			for i, v := range sub.state {
+				if v != nil {
+					fp.path[fp.last] = i
+					x = append(x, fp.copy())
+				}
+			}
+			fp.last--
+		}
+
+	case fieldModelFixedTable:
+		if sub, ok := state.get(fp).(*fieldState); ok {
+			fp.last++
+			x = append(x, f.serializer.getFieldPaths(fp, sub)...)
+			fp.last--
+		}
+
+	case fieldModelVariableArray:
+		if sub, ok := state.get(fp).(*fieldState); ok {
+			fp.last++
+			for i, v := range sub.state {
+				if v != nil {
+					fp.path[fp.last] = i
+					x = append(x, fp.copy())
+				}
+			}
+			fp.last--
+		}
+
+	case fieldModelVariableTable:
+		if sub, ok := state.get(fp).(*fieldState); ok {
+			fp.last++
+			for i, _ := range sub.state {
+				fp.path[fp.last] = i
+				x = append(x, f.serializer.getFieldPaths(fp, sub)...)
+			}
+			fp.last--
+		}
+
+	case fieldModelSimple:
+		x = append(x, fp.copy())
+	}
+
+	return x
+}
+
 func mustAtoi(s string) int {
 	n, err := strconv.Atoi(s)
 	if err != nil {

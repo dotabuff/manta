@@ -68,6 +68,20 @@ func (e *Entity) String() string {
 	return fmt.Sprintf("%d <%s>", e.index, e.class.name)
 }
 
+// Map returns a map of current entity state as key-value pairs
+func (e *Entity) Map() map[string]interface{} {
+	values := make(map[string]interface{})
+	for _, fp := range e.class.getFieldPaths(newFieldPath(), e.state) {
+		values[e.class.getNameForFieldPath(fp)] = e.state.get(fp)
+	}
+	return values
+}
+
+// Dump prints the current entity state to standard output
+func (e *Entity) Dump() {
+	_dump(e.String(), e.Map())
+}
+
 // Get returns the current value of the Entity state for the given key
 func (e *Entity) Get(name string) interface{} {
 	if fp, ok := e.fpCache[name]; ok {

@@ -14,6 +14,10 @@ import (
 	"github.com/golang/protobuf/proto"
 )
 
+func init() {
+	spew.Config.SortKeys = true
+}
+
 var debugLevel uint
 
 func init() {

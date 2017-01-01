@@ -293,8 +293,7 @@ func (fp *fieldPath) release() {
 }
 
 func readFieldPaths(r *reader) []*fieldPath {
-	fp := fpPool.Get().(*fieldPath)
-	fp.reset()
+	fp := newFieldPath()
 
 	node, next := huffTree, huffTree
 

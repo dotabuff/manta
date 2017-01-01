@@ -48,6 +48,15 @@ func (s *serializer) getFieldPathForName(fp *fieldPath, name string) bool {
 	return false
 }
 
+func (s *serializer) getFieldPaths(fp *fieldPath, state *fieldState) []*fieldPath {
+	results := make([]*fieldPath, 0, 4)
+	for i, f := range s.fields {
+		fp.path[fp.last] = i
+		results = append(results, f.getFieldPaths(fp, state)...)
+	}
+	return results
+}
+
 func serializerId(name string, version int32) string {
 	return fmt.Sprintf("%s(%d)", name, version)
 }
