@@ -26,8 +26,7 @@ func readFields(r *reader, s *serializer, state *fieldState) {
 			}
 
 			name := strings.Join(s.getNameForFieldPath(fp, 0), ".")
-			fp2 := fpPool.Get().(*fieldPath)
-			fp2.reset()
+			fp2 := newFieldPath()
 			b := s.getFieldPathForName(fp2, name)
 
 			if !b {

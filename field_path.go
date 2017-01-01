@@ -264,6 +264,12 @@ func (fp *fieldPath) String() string {
 	return strings.Join(ss, "/")
 }
 
+func newFieldPath() *fieldPath {
+	fp := fpPool.Get().(*fieldPath)
+	fp.reset()
+	return fp
+}
+
 var fpPool = &sync.Pool{
 	New: func() interface{} {
 		return &fieldPath{

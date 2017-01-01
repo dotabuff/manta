@@ -45,11 +45,13 @@ type Parser struct {
 	serializers             map[string]map[int32]*dt
 	stringTables            *stringTables
 
-	newEntities       map[int32]*entity
-	newClassesById    map[int32]*class
-	newClassesByName  map[string]*class
-	newClassBaselines map[int32][]byte
-	newSerializers    map[string]*serializer
+	newEntities          map[int32]*Entity
+	newClassesById       map[int32]*class
+	newClassesByName     map[string]*class
+	newClassBaselines    map[int32][]byte
+	newSerializers       map[string]*serializer
+	newEntityHandlers    []EntityHandler
+	newEntityFullPackets int
 
 	stream            *stream
 	isStopping        bool
@@ -85,7 +87,8 @@ func NewStreamParser(r io.Reader) (*Parser, error) {
 		newClassesById:    make(map[int32]*class),
 		newClassesByName:  make(map[string]*class),
 		newClassBaselines: make(map[int32][]byte),
-		newEntities:       make(map[int32]*entity),
+		newEntities:       make(map[int32]*Entity),
+		newEntityHandlers: make([]EntityHandler, 0),
 		newSerializers:    make(map[string]*serializer),
 
 		stream:     newStream(r),

@@ -24,6 +24,10 @@ func (c *class) getDecoderForFieldPath(fp *fieldPath) fieldDecoder {
 	return c.serializer.getDecoderForFieldPath(fp, 0)
 }
 
+func (c *class) getFieldPathForName(fp *fieldPath, name string) bool {
+	return c.serializer.getFieldPathForName(fp, name)
+}
+
 func (p *Parser) onCDemoClassInfoNew(m *dota.CDemoClassInfo) error {
 	for _, c := range m.GetClasses() {
 		classId := c.GetClassId()
