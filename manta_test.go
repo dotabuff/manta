@@ -100,7 +100,7 @@ var testScenarios = map[int64]testScenario{
 		matchId:                "2159568145",
 		replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/2159568145.dem",
 		expectGameBuild:        1295,
-		expectEntityEvents:     0,
+		expectEntityEvents:     1831423,
 		expectCombatLogDamage:  0,
 		expectCombatLogHealing: 0,
 		expectCombatLogDeaths:  0,
@@ -160,6 +160,7 @@ var testScenarios = map[int64]testScenario{
 		matchId:                "1788648401",
 		replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1788648401.dem",
 		expectGameBuild:        1036,
+		expectEntityEvents:     2357365,
 		expectCombatLogDamage:  0,
 		expectCombatLogHealing: 0,
 		expectCombatLogDeaths:  0,
@@ -502,6 +503,32 @@ func (s testScenario) test(t *testing.T) {
 
 	parser.Callbacks.OnCDemoFileInfo(func(m *dota.CDemoFileInfo) error {
 		gotFileInfo = true
+		return nil
+	})
+
+	parser.OnEntity(func(e *Entity, op EntityOp) error {
+		gotEntityEvents += 1
+
+		if e.class.name == s.expectHeroEntityName {
+			if v, ok := e.Get("m_flMaxMana").(float32); ok {
+				gotHeroEntityMana = v
+			}
+		}
+
+		if e.class.name == "CDOTA_PlayerResource" {
+			if v, ok := e.Get("m_vecPlayerData.0006.m_iszPlayerName").(string); ok {
+				gotPlayer6Name = v
+			} else if v, ok := e.Get("m_iszPlayerNames.0006").(string); ok {
+				gotPlayer6Name = v
+			}
+
+			if v, ok := e.Get("m_vecPlayerData.0006.m_iPlayerSteamID").(uint64); ok {
+				gotPlayer6Steamid = v
+			} else if v, ok := e.Get("m_iPlayerSteamIDs.0006").(uint64); ok {
+				gotPlayer6Steamid = v
+			}
+		}
+
 		return nil
 	})
 
