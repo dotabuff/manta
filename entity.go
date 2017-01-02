@@ -6,7 +6,7 @@ import (
 	"github.com/dotabuff/manta/dota"
 )
 
-// EntityOp represents the type of operation performed on an Entity
+// EntityOp is a bitmask representing the type of operation performed on an Entity
 type EntityOp int
 
 const (
@@ -96,6 +96,57 @@ func (e *Entity) Get(name string) interface{} {
 	e.fpCache[name] = fp
 
 	return e.state.get(fp)
+}
+
+// GetInt32 gets given key as an int32
+func (e *Entity) GetInt32(name string) (int32, bool) {
+	x, ok := e.Get(name).(int32)
+	return x, ok
+}
+
+// GetUint32 gets given key as a uint32
+func (e *Entity) GetUint32(name string) (uint32, bool) {
+	x, ok := e.Get(name).(uint32)
+	return x, ok
+}
+
+// GetUint64 gets given key as a uint64
+func (e *Entity) GetUint64(name string) (uint64, bool) {
+	x, ok := e.Get(name).(uint64)
+	return x, ok
+}
+
+// GetFloat32 gets given key as an float32
+func (e *Entity) GetFloat32(name string) (float32, bool) {
+	x, ok := e.Get(name).(float32)
+	return x, ok
+}
+
+// GetString gets given key as a string
+func (e *Entity) GetString(name string) (string, bool) {
+	x, ok := e.Get(name).(string)
+	return x, ok
+}
+
+// GetBool gets given key as a bool
+func (e *Entity) GetBool(name string) (bool, bool) {
+	x, ok := e.Get(name).(bool)
+	return x, ok
+}
+
+// GetClassId returns the id of the class associated with this Entity
+func (e *Entity) GetClassId() int32 {
+	return e.class.classId
+}
+
+// GetClassName returns the name of the class associated with this Entity
+func (e *Entity) GetClassName() string {
+	return e.class.name
+}
+
+// GetIndex returns the index of this Entity
+func (e *Entity) GetIndex() int32 {
+	return e.index
 }
 
 func (p *Parser) onCSVCMsg_PacketEntitiesNew(m *dota.CSVCMsg_PacketEntities) error {
