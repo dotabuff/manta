@@ -36,14 +36,6 @@ func (p *Parser) onCDemoClassInfo(m *dota.CDemoClassInfo) error {
 	for _, c := range m.GetClasses() {
 		p.ClassInfo[c.GetClassId()] = c.GetNetworkName()
 
-		class := &class{
-			classId:    c.GetClassId(),
-			name:       c.GetNetworkName(),
-			serializer: p.newSerializers[c.GetNetworkName()],
-		}
-		p.newClassesById[class.classId] = class
-		p.newClassesByName[class.name] = class
-
 		if _, ok := p.serializers[c.GetNetworkName()]; !ok {
 			_panicf("unable to find table for class %d (%s)", c.GetClassId, c.GetNetworkName())
 		}
