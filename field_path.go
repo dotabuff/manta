@@ -323,7 +323,7 @@ func readFieldPaths(r *reader) []*fieldPath {
 }
 
 func newHuffmanTree() huffmanTree {
-	freqs := make([]int, len(fieldpathLookup))
+	freqs := make([]int, len(fieldPathTable))
 	for i, op := range fieldPathTable {
 		freqs[i] = op.weight
 	}

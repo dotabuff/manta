@@ -10,7 +10,6 @@ install:
 
 script:
   - make test
-  - NEW=1 make test
 
 cache:
   directories:

@@ -1,10 +1,16 @@
 package manta
 
 import (
+	"fmt"
+	"math"
+	"regexp"
+	"strconv"
 	"strings"
 
 	"github.com/dotabuff/manta/dota"
 )
+
+var gameBuildRegexp = regexp.MustCompile(`/dota_v(\d+)/`)
 
 type class struct {
 	classId    int32
@@ -32,6 +38,24 @@ func (c *class) getFieldPaths(fp *fieldPath, state *fieldState) []*fieldPath {
 	return c.serializer.getFieldPaths(fp, state)
 }
 
+func (p *Parser) onCSVCMsg_ServerInfo(m *dota.CSVCMsg_ServerInfo) error {
+	// This may be needed to parse PacketEntities.
+	p.classIdSize = uint32(math.Log(float64(m.GetMaxClasses()))/math.Log(2)) + 1
+
+	// Extract the build from the game dir.
+	matches := gameBuildRegexp.FindStringSubmatch(m.GetGameDir())
+	if len(matches) < 2 {
+		return fmt.Errorf("unable to determine game build from '%s'", m.GetGameDir())
+	}
+	build, err := strconv.ParseUint(matches[1], 10, 32)
+	if err != nil {
+		return err
+	}
+	p.GameBuild = uint32(build)
+
+	return nil
+}
+
 func (p *Parser) onCDemoClassInfoNew(m *dota.CDemoClassInfo) error {
 	for _, c := range m.GetClasses() {
 		classId := c.GetClassId()
@@ -46,9 +70,39 @@ func (p *Parser) onCDemoClassInfoNew(m *dota.CDemoClassInfo) error {
 		p.newClassesByName[class.name] = class
 	}
 
-	p.hasClassInfo = true
+	p.classInfo = true
 
 	p.updateInstanceBaseline()
 
 	return nil
+}
+
+func (p *Parser) updateInstanceBaseline() {
+	// We can't update the instancebaseline until we have class info.
+	if !p.classInfo {
+		return
+	}
+
+	stringTable, ok := p.stringTables.GetTableByName("instancebaseline")
+	if !ok {
+		if v(1) {
+			_debugf("skipping updateInstanceBaseline: no instancebaseline string table")
+		}
+		return
+	}
+
+	// Iterate through instancebaseline table items
+	for _, item := range stringTable.Items {
+		p.updateInstanceBaselineItem(item)
+	}
+}
+
+func (p *Parser) updateInstanceBaselineItem(item *stringTableItem) {
+	// Get the class id for the string table item
+	classId, err := atoi32(item.Key)
+	if err != nil {
+		_panicf("invalid instancebaseline key '%s': %s", item.Key, err)
+	}
+
+	p.newClassBaselines[classId] = item.Value
 }

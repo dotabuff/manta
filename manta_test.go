@@ -433,7 +433,7 @@ func (s testScenario) bench(b *testing.B) {
 
 		parser.Callbacks.OnCDOTAUserMsg_SpectatorPlayerUnitOrders(func(m *dota.CDOTAUserMsg_SpectatorPlayerUnitOrders) error { return nil })
 		parser.Callbacks.OnCDemoFileInfo(func(m *dota.CDemoFileInfo) error { return nil })
-		parser.OnPacketEntity(func(pe *PacketEntity, pet EntityEventType) error { return nil })
+		parser.OnEntity(func(e *Entity, op EntityOp) error { return nil })
 		parser.OnGameEvent("dota_combatlog", func(m *GameEvent) error { return nil })
 
 		if err := parser.Start(); err != nil {
@@ -470,10 +470,6 @@ func (s testScenario) test(t *testing.T) {
 	if err != nil {
 		t.Errorf("unable to instantiate parser: %s", err)
 		return
-	}
-
-	if s.skipPacketEntities {
-		parser.ProcessPacketEntities = false
 	}
 
 	gotFileInfo := false
@@ -525,32 +521,6 @@ func (s testScenario) test(t *testing.T) {
 			if v, ok := e.Get("m_vecPlayerData.0006.m_iPlayerSteamID").(uint64); ok {
 				gotPlayer6Steamid = v
 			} else if v, ok := e.Get("m_iPlayerSteamIDs.0006").(uint64); ok {
-				gotPlayer6Steamid = v
-			}
-		}
-
-		return nil
-	})
-
-	parser.OnPacketEntity(func(pe *PacketEntity, pet EntityEventType) error {
-		gotEntityEvents += 1
-
-		if pe.ClassName == s.expectHeroEntityName {
-			if v, ok := pe.FetchFloat32("m_flMaxMana"); ok {
-				gotHeroEntityMana = v
-			}
-		}
-
-		if pe.ClassName == "CDOTA_PlayerResource" {
-			if v, ok := pe.FetchString("m_vecPlayerData.0006.m_iszPlayerName"); ok {
-				gotPlayer6Name = v
-			} else if v, ok := pe.FetchString("m_iszPlayerNames.0006"); ok {
-				gotPlayer6Name = v
-			}
-
-			if v, ok := pe.FetchUint64("m_vecPlayerData.0006.m_iPlayerSteamID"); ok {
-				gotPlayer6Steamid = v
-			} else if v, ok := pe.FetchUint64("m_iPlayerSteamIDs.0006"); ok {
 				gotPlayer6Steamid = v
 			}
 		}

@@ -121,30 +121,7 @@ func _caller(n int) string {
 	return "unknown"
 }
 
-// Compares string with prefix
-func hasPrefix(s, prefix string) bool {
-	return len(s) >= len(prefix) && s[:len(prefix)] == prefix
-}
-
-// Prints value after checking for nil
-func saveReturnInt32(v *int32) int32 {
-	if v == nil {
-		return 0
-	} else {
-		return *v
-	}
-}
-
-// Prints value after checking for nil
-func saveReturnFloat32(v *float32, def interface{}) interface{} {
-	if v == nil {
-		return def
-	} else {
-		return *v
-	}
-}
-
-func nameOf(i interface{}) string {
+func _nameof(i interface{}) string {
 	ss := strings.Split(strings.Replace(runtime.FuncForPC(reflect.ValueOf(i).Pointer()).Name(), ".", "/", -1), "/")
 	return ss[len(ss)-1]
 }

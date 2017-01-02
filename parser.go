@@ -3,7 +3,6 @@ package manta
 import (
 	"bytes"
 	"io"
-	"os"
 
 	"github.com/dotabuff/manta/dota"
 	"github.com/golang/snappy"
@@ -25,33 +24,24 @@ type Parser struct {
 	// Contains the net tick associated with the last net message processed.
 	NetTick uint32
 
-	// Determines whether or not PacketEntity events are processed.
-	ProcessPacketEntities bool
-
 	// Stores the game build.
 	GameBuild uint32
 
-	ClassBaselines map[int32]*Properties
-	ClassInfo      map[int32]string
-	PacketEntities map[int32]*PacketEntity
+	gameEventHandlers map[string][]GameEventHandler
+	gameEventNames    map[int32]string
+	gameEventTypes    map[string]*gameEventType
 
-	classIdSize             uint32
-	gameEventHandlers       map[string][]GameEventHandler
-	gameEventNames          map[int32]string
-	gameEventTypes          map[string]*gameEventType
-	hasClassInfo            bool
-	packetEntityHandlers    []packetEntityHandler
-	packetEntityFullPackets int
-	serializers             map[string]map[int32]*dt
-	stringTables            *stringTables
+	newEntities map[int32]*Entity
 
-	newEntities          map[int32]*Entity
+	classIdSize          uint32
+	classInfo            bool
 	newClassesById       map[int32]*class
 	newClassesByName     map[string]*class
 	newClassBaselines    map[int32][]byte
 	newSerializers       map[string]*serializer
 	newEntityHandlers    []EntityHandler
 	newEntityFullPackets int
+	stringTables         *stringTables
 
 	stream            *stream
 	isStopping        bool
@@ -72,17 +62,10 @@ func NewStreamParser(r io.Reader) (*Parser, error) {
 		Tick:      0,
 		NetTick:   0,
 
-		ProcessPacketEntities: true,
-
-		ClassBaselines: make(map[int32]*Properties),
-		ClassInfo:      make(map[int32]string),
-		PacketEntities: make(map[int32]*PacketEntity),
-
-		gameEventHandlers:    make(map[string][]GameEventHandler),
-		gameEventNames:       make(map[int32]string),
-		gameEventTypes:       make(map[string]*gameEventType),
-		packetEntityHandlers: make([]packetEntityHandler, 0),
-		stringTables:         newStringTables(),
+		gameEventHandlers: make(map[string][]GameEventHandler),
+		gameEventNames:    make(map[int32]string),
+		gameEventTypes:    make(map[string]*gameEventType),
+		stringTables:      newStringTables(),
 
 		newClassesById:    make(map[int32]*class),
 		newClassesByName:  make(map[string]*class),
@@ -118,15 +101,9 @@ func NewStreamParser(r io.Reader) (*Parser, error) {
 	parser.Callbacks.OnCMsgSource1LegacyGameEventList(parser.onCMsgSource1LegacyGameEventList)
 	parser.Callbacks.OnCMsgSource1LegacyGameEvent(parser.onCMsgSource1LegacyGameEvent)
 
-	if newStuff {
-		parser.Callbacks.OnCDemoClassInfo(parser.onCDemoClassInfoNew)
-		parser.Callbacks.OnCDemoSendTables(parser.onCDemoSendTablesNew)
-		parser.Callbacks.OnCSVCMsg_PacketEntities(parser.onCSVCMsg_PacketEntitiesNew)
-	} else {
-		parser.Callbacks.OnCDemoClassInfo(parser.onCDemoClassInfo)
-		parser.Callbacks.OnCDemoSendTables(parser.onCDemoSendTables)
-		parser.Callbacks.OnCSVCMsg_PacketEntities(parser.onCSVCMsg_PacketEntities)
-	}
+	parser.Callbacks.OnCDemoClassInfo(parser.onCDemoClassInfoNew)
+	parser.Callbacks.OnCDemoSendTables(parser.onCDemoSendTablesNew)
+	parser.Callbacks.OnCSVCMsg_PacketEntities(parser.onCSVCMsg_PacketEntitiesNew)
 
 	// Maintains the value of parser.Tick
 	parser.Callbacks.OnCNETMsg_Tick(func(m *dota.CNETMsg_Tick) error {
@@ -250,12 +227,4 @@ func (p *Parser) readOuterMessage() (*outerMessage, error) {
 		data:   buf,
 	}
 	return msg, nil
-}
-
-var newStuff bool
-
-func init() {
-	if os.Getenv("NEW") != "" {
-		newStuff = true
-	}
 }

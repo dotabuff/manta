@@ -66,19 +66,9 @@ func floatFactory(f *field) fieldDecoder {
 }
 
 func quantizedFactory(f *field) fieldDecoder {
-	dt := &dtField{
-		BitCount:  f.bitCount,
-		Encoder:   f.encoder,
-		Flags:     f.encodeFlags,
-		HighValue: f.highValue,
-		LowValue:  f.lowValue,
-		Name:      f.varName,
-		Type:      f.varType,
-	}
-
+	qfd := newQuantizedFloatDecoder(f.bitCount, f.encodeFlags, f.lowValue, f.highValue)
 	return func(r *reader) interface{} {
-		// _printf(" dt: %+v", dt)
-		return newQuantizedFloatDecoder(dt).decode(r)
+		return qfd.decode(r)
 	}
 }
 

@@ -14,7 +14,7 @@ func readFields(r *reader, s *serializer, state *fieldState) {
 		if v(6) {
 			name := strings.Join(s.getNameForFieldPath(fp, 0), ".")
 			typ := s.getTypeForFieldPath(fp, 0)
-			_debugf("NEW reading ser=%s path=%s pos=%s name=%s type=%s decoder=%s", s.name, fp.String(), r.position(), name, typ, nameOf(decoder))
+			_debugf("NEW reading ser=%s path=%s pos=%s name=%s type=%s decoder=%s", s.name, fp.String(), r.position(), name, typ, _nameof(decoder))
 		}
 
 		val := decoder(r)
