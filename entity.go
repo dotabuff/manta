@@ -106,8 +106,15 @@ func (e *Entity) GetInt32(name string) (int32, bool) {
 
 // GetUint32 gets given key as a uint32
 func (e *Entity) GetUint32(name string) (uint32, bool) {
-	x, ok := e.Get(name).(uint32)
-	return x, ok
+	if v := e.Get(name); v != nil {
+		switch x := v.(type) {
+		case uint32:
+			return x, true
+		case uint64:
+			return uint32(x), true
+		}
+	}
+	return 0, false
 }
 
 // GetUint64 gets given key as a uint64
