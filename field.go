@@ -37,6 +37,23 @@ type field struct {
 	childDecoder fieldDecoder
 }
 
+func (f *field) modelString() string {
+	switch f.model {
+	case fieldModelFixedArray:
+		return "fixed-array"
+	case fieldModelFixedTable:
+		return "fixed-table"
+	case fieldModelVariableArray:
+		return "variable-array"
+	case fieldModelVariableTable:
+		return "variable-table"
+	case fieldModelSimple:
+		return "simple"
+	default:
+		return "other"
+	}
+}
+
 func newField(ser *dota.CSVCMsg_FlattenedSerializer, f *dota.ProtoFlattenedSerializerFieldT) *field {
 	resolve := func(p *int32) string {
 		if p == nil {
@@ -264,12 +281,14 @@ func (f *field) getFieldPaths(fp *fieldPath, state *fieldState) []*fieldPath {
 
 	case fieldModelVariableTable:
 		if sub, ok := state.get(fp).(*fieldState); ok {
-			fp.last++
-			for i, _ := range sub.state {
-				fp.path[fp.last] = i
-				x = append(x, f.serializer.getFieldPaths(fp, sub)...)
+			fp.last += 2
+			for i, v := range sub.state {
+				if vv, ok := v.(*fieldState); ok {
+					fp.path[fp.last-1] = i
+					x = append(x, f.serializer.getFieldPaths(fp, vv)...)
+				}
 			}
-			fp.last--
+			fp.last -= 2
 		}
 
 	case fieldModelSimple:

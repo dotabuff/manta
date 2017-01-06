@@ -125,3 +125,10 @@ func _nameof(i interface{}) string {
 	ss := strings.Split(strings.Replace(runtime.FuncForPC(reflect.ValueOf(i).Pointer()).Name(), ".", "/", -1), "/")
 	return ss[len(ss)-1]
 }
+
+func _typeof(i interface{}) string {
+	if i == nil {
+		return "nil"
+	}
+	return reflect.TypeOf(i).String()
+}
