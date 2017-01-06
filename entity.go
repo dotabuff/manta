@@ -49,6 +49,7 @@ type Entity struct {
 	active  bool
 	state   *fieldState
 	fpCache map[string]*fieldPath
+	fpNoop  map[string]bool
 }
 
 // newEntity returns a new entity for the given index, serial and class
@@ -60,6 +61,7 @@ func newEntity(index, serial int32, class *class) *Entity {
 		active:  true,
 		state:   newFieldState(),
 		fpCache: make(map[string]*fieldPath),
+		fpNoop:  make(map[string]bool),
 	}
 }
 
@@ -87,9 +89,13 @@ func (e *Entity) Get(name string) interface{} {
 	if fp, ok := e.fpCache[name]; ok {
 		return e.state.get(fp)
 	}
+	if e.fpNoop[name] {
+		return nil
+	}
 
 	fp := newFieldPath()
 	if !e.class.getFieldPathForName(fp, name) {
+		e.fpNoop[name] = true
 		fp.release()
 		return nil
 	}
