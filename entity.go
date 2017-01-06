@@ -104,6 +104,11 @@ func (e *Entity) Get(name string) interface{} {
 	return e.state.get(fp)
 }
 
+// Exists returns true if the given key exists in the Entity state
+func (e *Entity) Exists(name string) bool {
+	return e.Get(name) != nil
+}
+
 // GetInt32 gets given key as an int32
 func (e *Entity) GetInt32(name string) (int32, bool) {
 	x, ok := e.Get(name).(int32)
@@ -160,6 +165,11 @@ func (e *Entity) GetClassName() string {
 // GetIndex returns the index of this Entity
 func (e *Entity) GetIndex() int32 {
 	return e.index
+}
+
+// FindEntity finds a given Entity by index
+func (p *Parser) FindEntity(index int32) *Entity {
+	return p.newEntities[index]
 }
 
 func (p *Parser) onCSVCMsg_PacketEntitiesNew(m *dota.CSVCMsg_PacketEntities) error {
