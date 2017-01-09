@@ -2,7 +2,6 @@ package manta
 
 import (
 	"math"
-	"sync"
 )
 
 func decodeLeUint64(r *reader, f *dtField) interface{} {
@@ -73,22 +72,8 @@ func decodeFloatNoscale(r *reader, f *dtField) interface{} {
 	return math.Float32frombits(r.readBits(uint32(*f.BitCount)))
 }
 
-// A list of field -> encoder types with mutex
-var (
-	qMap = map[*dtField]*quantizedFloatDecoder{}
-	qMu  = sync.Mutex{}
-)
-
 func decodeQuantized(r *reader, f *dtField) interface{} {
-	// Find or create the correct field decoder
-	qMu.Lock()
-	if _, ok := qMap[f]; !ok {
-		qMap[f] = newQuantizedFloatDecoder(f)
-	}
-	q := qMap[f]
-	qMu.Unlock()
-
-	return q.decode(r)
+	return newQuantizedFloatDecoder(f).decode(r)
 }
 
 func decodeSimTime(r *reader, f *dtField) interface{} {
