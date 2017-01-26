@@ -2,6 +2,7 @@ package manta
 
 import (
 	"encoding/binary"
+	"io"
 	"math"
 )
 
@@ -29,8 +30,15 @@ func (r *reader) remBytes() uint32 {
 	return r.size - r.pos
 }
 
+func (r *reader) verifyRead(n uint32) {
+	if r.pos+n > r.size {
+		panic(io.ErrUnexpectedEOF)
+	}
+}
+
 // nextByte reads the next byte from the buffer
 func (r *reader) nextByte() byte {
+	r.verifyRead(1)
 	r.pos += 1
 	return r.buf[r.pos-1]
 }
@@ -63,6 +71,7 @@ func (r *reader) readByte() byte {
 func (r *reader) readBytes(n uint32) []byte {
 	// Fast path if we're byte aligned
 	if r.bitCount == 0 {
+		r.verifyRead(n)
 		r.pos += n
 		return r.buf[r.pos-n : r.pos]
 	}

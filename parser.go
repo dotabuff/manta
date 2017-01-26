@@ -115,11 +115,16 @@ func NewStreamParser(r io.Reader) (*Parser, error) {
 }
 
 // Start parsing the replay. Will stop processing new events after Stop() is called.
-func (p *Parser) Start() error {
+func (p *Parser) Start() (err error) {
 	var msg *outerMessage
-	var err error
 
 	defer p.afterStop()
+
+	defer func() {
+		if x, ok := recover().(error); ok {
+			err = x
+		}
+	}()
 
 	// Loop through all outer messages until we're signaled to stop. Stopping
 	// happens when either the OnCDemoStop message is encountered or
@@ -128,19 +133,19 @@ func (p *Parser) Start() error {
 		msg, err = p.readOuterMessage()
 		if err != nil {
 			if err == io.EOF {
-				return nil
+				err = nil
 			}
-			return err
+			return
 		}
 
 		p.Tick = msg.tick
 
 		if err = p.Callbacks.callByDemoType(msg.typeId, msg.data); err != nil {
-			return err
+			return
 		}
 	}
 
-	return nil
+	return
 }
 
 // Stop parsing the replay, causing the parser to stop processing new events.
