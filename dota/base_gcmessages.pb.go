@@ -334,8 +334,8 @@ It has these top-level messages:
 	CMsgFlipLobbyTeams
 	CMsgPresentedClientTerminateDlg
 	CMsgGCLobbyUpdateBroadcastChannelInfo
-	CMsgDOTARedeemEventPrize
-	CMsgDOTARedeemEventPrizeResponse
+	CMsgDOTAClaimEventAction
+	CMsgDOTAClaimEventActionResponse
 	CMsgDOTAGetEventPoints
 	CMsgDOTAGetEventPointsResponse
 	CMsgDOTALiveLeagueGameUpdate
@@ -417,8 +417,6 @@ It has these top-level messages:
 	CMsgGCToClientWageringResponse
 	CMsgGCToClientWageringUpdate
 	CMsgGCToClientArcanaVotesUpdate
-	CMsgClientToGCMysteryItem
-	CMsgGCToClientMysteryItemResponse
 	CMsgClientToGCGetEventGoals
 	CMsgEventGoals
 	CMsgGCToGCLeaguePredictions
@@ -442,8 +440,6 @@ It has these top-level messages:
 	CMsgClientToGCRequestEventPointLogResponse
 	CMsgClientToGCPublishUserStat
 	CMsgClientToGCAddTI6TreeProgress
-	CMsgClientToGCRedeemReward
-	CMsgGCToClientRedeemRewardResponse
 	CMsgClientToGCRequestLinaPlaysRemaining
 	CMsgClientToGCRequestLinaPlaysRemainingResponse
 	CMsgClientToGCRequestLinaGameResult
@@ -739,6 +735,8 @@ It has these top-level messages:
 	CMsgDOTAProcessFantasyScheduledEvent
 	CMsgDOTAHasItemQuery
 	CMsgDOTAHasItemResponse
+	CMsgGCIsProQuery
+	CMsgGCIsProResponse
 	CMsgDOTAHasItemDefsQuery
 	CMsgDOTAHasItemDefsResponse
 	CMsgGCGetPlayerCardItemInfo

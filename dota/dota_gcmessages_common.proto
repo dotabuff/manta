@@ -251,6 +251,14 @@ message CMsgDOTAHasItemResponse {
 	optional bool has_item = 1;
 }
 
+message CMsgGCIsProQuery {
+	optional uint32 account_id = 1;
+}
+
+message CMsgGCIsProResponse {
+	optional bool is_pro = 1;
+}
+
 message CMsgDOTAHasItemDefsQuery {
 	optional uint32 account_id = 1;
 	repeated uint32 itemdef_ids = 2;
@@ -747,6 +755,7 @@ message CMsgDOTASeasonRewards {
 		MysteryWheel = 1;
 		AbilityEffect = 2;
 		Other = 3;
+		MysteryWheelPointsBased = 4;
 	}
 
 	repeated CMsgDOTASeasonRewards.Reward rewards = 1;
@@ -1089,5 +1098,6 @@ message CMsgDOTABotDebugInfo {
 	optional float desire_farm_lane_bot = 10;
 	optional float desire_farm_roshan = 11;
 	optional float execution_time = 12;
+	repeated uint32 rune_status = 13;
 }
 
