@@ -219,6 +219,8 @@ It has these top-level messages:
 	CDOTAClientMsg_SetDesiredWardPlacement
 	CDOTAClientMsg_RollDice
 	CDOTAClientMsg_FlipCoin
+	CDOTAClientMsg_RequestItemSuggestions
+	CDOTAClientMsg_MakeTeamCaptain
 	CDOTAMsg_LocationPing
 	CDOTAMsg_ItemAlert
 	CDOTAMsg_MapLine
@@ -338,6 +340,9 @@ It has these top-level messages:
 	CMsgDOTAClaimEventActionResponse
 	CMsgDOTAGetEventPoints
 	CMsgDOTAGetEventPointsResponse
+	CMsgDOTAGetPeriodicResource
+	CMsgDOTAGetPeriodicResourceResponse
+	CMsgDOTAPeriodicResourceUpdated
 	CMsgDOTALiveLeagueGameUpdate
 	CMsgDOTACompendiumSelection
 	CMsgDOTACompendiumSelectionResponse
@@ -464,6 +469,7 @@ It has these top-level messages:
 	CMsgClientToGCCreatePlayerCardPack
 	CMsgClientToGCCreatePlayerCardPackResponse
 	CMsgGCToClientBattlePassRollup_International2016
+	CMsgGCToClientBattlePassRollup_Fall2016
 	CMsgGCToClientBattlePassRollupRequest
 	CMsgGCToClientBattlePassRollupResponse
 	CMsgGCToClientBattlePassRollupListRequest
@@ -853,6 +859,7 @@ It has these top-level messages:
 	CMsgSignOutReleaseEventPointHolds
 	CMsgGCToServerUpdateBroadcastCheers
 	CMsgSignOutWagerStats
+	CMsgSpendWager
 	CMsgSignOutXPCoins
 	CMsgSignOutCommunityGoalProgress
 	CMsgServerToGCPostMatchTip
@@ -978,6 +985,8 @@ It has these top-level messages:
 	CDOTAUserMsg_SelectPenaltyGold
 	CDOTAUserMsg_RollDiceResult
 	CDOTAUserMsg_FlipCoinResult
+	CDOTAUserMessage_RequestItemSuggestions
+	CDOTAUserMessage_TeamCaptainChanged
 	CMsgApplyAutograph
 	CMsgAdjustItemEquippedState
 	CMsgEconPlayerStrangeCountAdjustment
@@ -1234,6 +1243,12 @@ It has these top-level messages:
 	CMsgSteamDatagramClientPingSampleReply
 	CMsgSteamDatagramClientSwitchedPrimary
 	CMsgSteamDatagramRouterHealth
+	CMsgSteamSockets_UDP_ConnectRequest1
+	CMsgSteamSockets_UDP_ConnectReply1
+	CMsgSteamSockets_UDP_ConnectRequest2
+	CMsgSteamSockets_UDP_ConnectOK
+	CMsgSteamSockets_UDP_ConnectionClosed
+	CMsgSteamSockets_UDP_NoConnection
 	CMsgProtoBufHeader
 	CMsgWebAPIKey
 	CMsgHttpRequest
@@ -1403,6 +1418,7 @@ It has these top-level messages:
 	CUserMsg_HudError
 	CUserMsg_CustomGameEvent
 	CUserMessageHapticPulse
+	CUserMessageAnimStateGraphState
 */
 package dota
 

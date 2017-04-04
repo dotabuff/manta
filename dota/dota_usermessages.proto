@@ -110,6 +110,8 @@ enum EDotaUserMessages {
 	DOTA_UM_SelectPenaltyGold = 563;
 	DOTA_UM_RollDiceResult = 564;
 	DOTA_UM_FlipCoinResult = 565;
+	DOTA_UM_RequestItemSuggestions = 566;
+	DOTA_UM_TeamCaptainChanged = 567;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -476,6 +478,7 @@ message CDOTAUserMsg_WillPurchaseAlert {
 	optional int32 itemid = 1;
 	optional int32 player_id = 2;
 	optional uint32 gold_remaining = 3;
+	optional int32 suggestion_player_id = 4;
 }
 
 message CDOTAUserMsg_BuyBackStateAlert {
@@ -501,6 +504,7 @@ message CDOTAUserMsg_MinimapEvent {
 	optional int32 x = 3;
 	optional int32 y = 4;
 	optional int32 duration = 5;
+	optional int32 target_entity_handle = 6;
 }
 
 message CDOTAUserMsg_MapLine {
@@ -823,7 +827,7 @@ message CDOTAUserMsg_WorldLine {
 }
 
 message CDOTAUserMsg_ChatWheel {
-	optional EDOTAChatWheelMessage chat_message = 1 [default = k_EDOTA_CW_Ok];
+	optional uint32 chat_message_id = 1;
 	optional uint32 player_id = 2;
 	optional uint32 account_id = 3;
 	optional uint32 param_hero_id = 4;
@@ -1201,6 +1205,7 @@ message CDOTAUserMsg_QuestStatus {
 message CDOTAUserMsg_SuggestHeroPick {
 	required uint32 player_id = 1;
 	optional uint32 hero_id = 2;
+	optional bool ban = 3;
 }
 
 message CDOTAUserMsg_SuggestHeroRole {
@@ -1234,5 +1239,14 @@ message CDOTAUserMsg_FlipCoinResult {
 	optional uint32 player_id = 1;
 	optional uint32 channel_type = 2;
 	optional bool result = 3;
+}
+
+message CDOTAUserMessage_RequestItemSuggestions {
+	optional uint32 player_id = 1;
+}
+
+message CDOTAUserMessage_TeamCaptainChanged {
+	optional uint32 team = 1;
+	optional uint32 captain_player_id = 2;
 }
 
