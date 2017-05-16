@@ -139,6 +139,7 @@ It has these top-level messages:
 	CP2P_VRAvatarPosition
 	CP2P_WatchSynchronization
 	CClientMsg_CustomGameEvent
+	CClientMsg_CustomGameEventBounce
 	CClientMsg_ClientUIEvent
 	CClientMsg_DevPaletteVisibilityChangedEvent
 	CClientMsg_WorldUIControllerHasPanelChangedEvent
@@ -206,6 +207,8 @@ It has these top-level messages:
 	CDOTAClientMsg_ChallengeSelect
 	CDOTAClientMsg_ChallengeReroll
 	CDOTAClientMsg_CoinWager
+	CDOTAClientMsg_CoinWagerToken
+	CDOTAClientMsg_RankWager
 	CDOTAClientMsg_EventPointsTip
 	CDOTAClientMsg_ExecuteOrders
 	CDOTAClientMsg_XPAlert
@@ -449,6 +452,8 @@ It has these top-level messages:
 	CMsgClientToGCRequestLinaPlaysRemainingResponse
 	CMsgClientToGCRequestLinaGameResult
 	CMsgClientToGCRequestLinaGameResultResponse
+	CMsgClientToGCRequestSlarkGameResult
+	CMsgClientToGCRequestSlarkGameResultResponse
 	CMsgGCToClientQuestProgressUpdated
 	CMsgDOTARedeemItem
 	CMsgDOTARedeemItemResponse
@@ -481,6 +486,20 @@ It has these top-level messages:
 	CMsgClientToGCJoinPlaytestResponse
 	CMsgDOTAEventInvite
 	CMsgDOTASetFavoriteTeam
+	CMsgDOTATriviaQuestion
+	CMsgDOTATriviaCurrentQuestions
+	CMsgDOTATriviaQuestionAnswersSummary
+	CMsgDOTASubmitTriviaQuestionAnswer
+	CMsgDOTASubmitTriviaQuestionAnswerResponse
+	CMsgDOTAStartTriviaSession
+	CMsgDOTAStartTriviaSessionResponse
+	CMsgClientToGCGiveTip
+	CMsgClientToGCGiveTipResponse
+	CMsgDOTAAnchorPhoneNumberRequest
+	CMsgDOTAAnchorPhoneNumberResponse
+	CMsgDOTAUnanchorPhoneNumberRequest
+	CMsgDOTAUnanchorPhoneNumberResponse
+	CMsgGCToClientTipNotification
 	CMsgClientToGCPrivateChatInvite
 	CMsgClientToGCPrivateChatKick
 	CMsgClientToGCPrivateChatPromote
@@ -660,6 +679,7 @@ It has these top-level messages:
 	CMsgSpectatorLobbyListResponse
 	CMsgClientToGCRequestSteamDatagramTicket
 	CMsgClientToGCRequestSteamDatagramTicketResponse
+	CMsgGCToClientSteamDatagramTicket
 	CMsgDOTATeamMemberSDO
 	CMsgDOTATeamAdminSDO
 	CMsgDOTATeamMember
@@ -936,6 +956,7 @@ It has these top-level messages:
 	CDOTAUserMsg_GamerulesStateChanged
 	CDOTAUserMsg_AddQuestLogEntry
 	CDOTAUserMsg_SendStatPopup
+	CDOTAUserMsg_SendRoshanSpectatorPhase
 	CDOTAUserMsg_SendRoshanPopup
 	CDOTAUserMsg_SendFinalGold
 	CDOTAUserMsg_CustomMsg
@@ -987,6 +1008,7 @@ It has these top-level messages:
 	CDOTAUserMsg_FlipCoinResult
 	CDOTAUserMessage_RequestItemSuggestions
 	CDOTAUserMessage_TeamCaptainChanged
+	CDOTAUserMsg_ChatWheelCooldown
 	CMsgApplyAutograph
 	CMsgAdjustItemEquippedState
 	CMsgEconPlayerStrangeCountAdjustment
@@ -4623,7 +4645,7 @@ func init() { proto.RegisterFile("base_gcmessages.proto", fileDescriptor0) }
 
 var fileDescriptor0 = []byte{
 	// 5064 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x3a, 0xdb, 0x6e, 0x24, 0x49,
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xac, 0x3a, 0xdb, 0x6e, 0x24, 0x49,
 	0x56, 0x53, 0xbe, 0x95, 0xeb, 0xd8, 0xe5, 0x2e, 0x87, 0xed, 0x76, 0xb9, 0x7b, 0xba, 0xdb, 0x9d,
 	0x9e, 0x9e, 0xe9, 0xe9, 0x9d, 0xf5, 0xce, 0xf6, 0x6c, 0x2f, 0x4b, 0x0f, 0x8b, 0xd6, 0x2e, 0xbb,
 	0x3d, 0xa5, 0xe9, 0xdb, 0x64, 0xb9, 0x67, 0x59, 0x2e, 0x9b, 0x8a, 0xca, 0x3c, 0x55, 0xce, 0x75,

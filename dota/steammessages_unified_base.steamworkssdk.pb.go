@@ -54,6 +54,7 @@ var E_Description = &proto.ExtensionDesc{
 	Field:         50000,
 	Name:          "dota.description",
 	Tag:           "bytes,50000,opt,name=description",
+	Filename:      "steammessages_unified_base.steamworkssdk.proto",
 }
 
 var E_ServiceDescription = &proto.ExtensionDesc{
@@ -62,6 +63,7 @@ var E_ServiceDescription = &proto.ExtensionDesc{
 	Field:         50000,
 	Name:          "dota.service_description",
 	Tag:           "bytes,50000,opt,name=service_description,json=serviceDescription",
+	Filename:      "steammessages_unified_base.steamworkssdk.proto",
 }
 
 var E_ServiceExecutionSite = &proto.ExtensionDesc{
@@ -70,6 +72,7 @@ var E_ServiceExecutionSite = &proto.ExtensionDesc{
 	Field:         50008,
 	Name:          "dota.service_execution_site",
 	Tag:           "varint,50008,opt,name=service_execution_site,json=serviceExecutionSite,enum=dota.EProtoExecutionSite,def=0",
+	Filename:      "steammessages_unified_base.steamworkssdk.proto",
 }
 
 var E_MethodDescription = &proto.ExtensionDesc{
@@ -78,6 +81,7 @@ var E_MethodDescription = &proto.ExtensionDesc{
 	Field:         50000,
 	Name:          "dota.method_description",
 	Tag:           "bytes,50000,opt,name=method_description,json=methodDescription",
+	Filename:      "steammessages_unified_base.steamworkssdk.proto",
 }
 
 var E_EnumDescription = &proto.ExtensionDesc{
@@ -86,6 +90,7 @@ var E_EnumDescription = &proto.ExtensionDesc{
 	Field:         50000,
 	Name:          "dota.enum_description",
 	Tag:           "bytes,50000,opt,name=enum_description,json=enumDescription",
+	Filename:      "steammessages_unified_base.steamworkssdk.proto",
 }
 
 var E_EnumValueDescription = &proto.ExtensionDesc{
@@ -94,6 +99,7 @@ var E_EnumValueDescription = &proto.ExtensionDesc{
 	Field:         50000,
 	Name:          "dota.enum_value_description",
 	Tag:           "bytes,50000,opt,name=enum_value_description,json=enumValueDescription",
+	Filename:      "steammessages_unified_base.steamworkssdk.proto",
 }
 
 func init() {
@@ -110,7 +116,7 @@ func init() { proto.RegisterFile("steammessages_unified_base.steamworkssdk.proto
 
 var fileDescriptor40 = []byte{
 	// 339 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x84, 0x91, 0x4d, 0x4b, 0xf3, 0x40,
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x84, 0x91, 0x4d, 0x4b, 0xf3, 0x40,
 	0x14, 0x85, 0x1b, 0xfa, 0xbe, 0x0b, 0x47, 0xd0, 0x3a, 0x2d, 0x45, 0xa5, 0x6a, 0x04, 0x17, 0xe2,
 	0x62, 0x0a, 0x2e, 0xbb, 0xf3, 0xa3, 0xa2, 0x0b, 0xa9, 0xb4, 0x28, 0xb8, 0x90, 0x90, 0x76, 0x6e,
 	0xe3, 0x90, 0x64, 0xa6, 0x64, 0x66, 0x5a, 0x97, 0xae, 0x5c, 0xfb, 0xd3, 0x5c, 0xfa, 0x73, 0x64,
