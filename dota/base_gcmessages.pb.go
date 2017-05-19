@@ -139,6 +139,7 @@ It has these top-level messages:
 	CP2P_VRAvatarPosition
 	CP2P_WatchSynchronization
 	CClientMsg_CustomGameEvent
+	CClientMsg_CustomGameEventBounce
 	CClientMsg_ClientUIEvent
 	CClientMsg_DevPaletteVisibilityChangedEvent
 	CClientMsg_WorldUIControllerHasPanelChangedEvent
@@ -206,6 +207,8 @@ It has these top-level messages:
 	CDOTAClientMsg_ChallengeSelect
 	CDOTAClientMsg_ChallengeReroll
 	CDOTAClientMsg_CoinWager
+	CDOTAClientMsg_CoinWagerToken
+	CDOTAClientMsg_RankWager
 	CDOTAClientMsg_EventPointsTip
 	CDOTAClientMsg_ExecuteOrders
 	CDOTAClientMsg_XPAlert
@@ -449,6 +452,8 @@ It has these top-level messages:
 	CMsgClientToGCRequestLinaPlaysRemainingResponse
 	CMsgClientToGCRequestLinaGameResult
 	CMsgClientToGCRequestLinaGameResultResponse
+	CMsgClientToGCRequestSlarkGameResult
+	CMsgClientToGCRequestSlarkGameResultResponse
 	CMsgGCToClientQuestProgressUpdated
 	CMsgDOTARedeemItem
 	CMsgDOTARedeemItemResponse
@@ -481,6 +486,20 @@ It has these top-level messages:
 	CMsgClientToGCJoinPlaytestResponse
 	CMsgDOTAEventInvite
 	CMsgDOTASetFavoriteTeam
+	CMsgDOTATriviaQuestion
+	CMsgDOTATriviaCurrentQuestions
+	CMsgDOTATriviaQuestionAnswersSummary
+	CMsgDOTASubmitTriviaQuestionAnswer
+	CMsgDOTASubmitTriviaQuestionAnswerResponse
+	CMsgDOTAStartTriviaSession
+	CMsgDOTAStartTriviaSessionResponse
+	CMsgClientToGCGiveTip
+	CMsgClientToGCGiveTipResponse
+	CMsgDOTAAnchorPhoneNumberRequest
+	CMsgDOTAAnchorPhoneNumberResponse
+	CMsgDOTAUnanchorPhoneNumberRequest
+	CMsgDOTAUnanchorPhoneNumberResponse
+	CMsgGCToClientTipNotification
 	CMsgClientToGCPrivateChatInvite
 	CMsgClientToGCPrivateChatKick
 	CMsgClientToGCPrivateChatPromote
@@ -660,6 +679,7 @@ It has these top-level messages:
 	CMsgSpectatorLobbyListResponse
 	CMsgClientToGCRequestSteamDatagramTicket
 	CMsgClientToGCRequestSteamDatagramTicketResponse
+	CMsgGCToClientSteamDatagramTicket
 	CMsgDOTATeamMemberSDO
 	CMsgDOTATeamAdminSDO
 	CMsgDOTATeamMember
@@ -936,6 +956,7 @@ It has these top-level messages:
 	CDOTAUserMsg_GamerulesStateChanged
 	CDOTAUserMsg_AddQuestLogEntry
 	CDOTAUserMsg_SendStatPopup
+	CDOTAUserMsg_SendRoshanSpectatorPhase
 	CDOTAUserMsg_SendRoshanPopup
 	CDOTAUserMsg_SendFinalGold
 	CDOTAUserMsg_CustomMsg
@@ -987,6 +1008,7 @@ It has these top-level messages:
 	CDOTAUserMsg_FlipCoinResult
 	CDOTAUserMessage_RequestItemSuggestions
 	CDOTAUserMessage_TeamCaptainChanged
+	CDOTAUserMsg_ChatWheelCooldown
 	CMsgApplyAutograph
 	CMsgAdjustItemEquippedState
 	CMsgEconPlayerStrangeCountAdjustment
@@ -1069,6 +1091,8 @@ It has these top-level messages:
 	CAttribute_String
 	CWorkshop_GetItemDailyRevenue_Request
 	CWorkshop_GetItemDailyRevenue_Response
+	CWorkshop_GetPackageDailyRevenue_Request
+	CWorkshop_GetPackageDailyRevenue_Response
 	CMsgSQLGCToGCGrantBackpackSlots
 	CMsgClientToGCLookupAccountName
 	CMsgClientToGCLookupAccountNameResponse
