@@ -40,6 +40,9 @@ func (r *reader) remBytes() uint32 {
 // nextByte reads the next byte from the buffer
 func (r *reader) nextByte() byte {
 	r.pos += 1
+	if r.pos > r.size {
+		_panicf("nextByte: insufficient buffer (%d of %d)", r.pos, r.size)
+	}
 	return r.buf[r.pos-1]
 }
 
@@ -72,6 +75,9 @@ func (r *reader) readBytes(n uint32) []byte {
 	// Fast path if we're byte aligned
 	if r.bitCount == 0 {
 		r.pos += n
+		if r.pos > r.size {
+			_panicf("readBytes: insufficient buffer (%d of %d)", r.pos, r.size)
+		}
 		return r.buf[r.pos-n : r.pos]
 	}
 

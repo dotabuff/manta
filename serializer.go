@@ -24,7 +24,11 @@ func (s *serializer) getTypeForFieldPath(fp *fieldPath, pos int) *fieldType {
 }
 
 func (s *serializer) getDecoderForFieldPath(fp *fieldPath, pos int) fieldDecoder {
-	return s.fields[fp.path[pos]].getDecoderForFieldPath(fp, pos+1)
+	index := fp.path[pos]
+	if len(s.fields) <= index {
+		_panicf("serializer %s: field path %s has no field (%d)", s.name, fp, index)
+	}
+	return s.fields[index].getDecoderForFieldPath(fp, pos+1)
 }
 
 func (s *serializer) getFieldForFieldPath(fp *fieldPath, pos int) *field {
