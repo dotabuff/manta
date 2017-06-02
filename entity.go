@@ -33,6 +33,12 @@ var entityOpNames = map[EntityOp]string{
 	EntityOpDeletedLeft:    "Deleted+Left",
 }
 
+// Flag determines whether an EntityOp includes another. This is primarily
+// offered to prevent bit flag errors in downstream clients.
+func (o EntityOp) Flag(p EntityOp) bool {
+	return o&p != 0
+}
+
 // String returns a human identifiable string for the EntityOp
 func (o EntityOp) String() string {
 	return entityOpNames[o]
