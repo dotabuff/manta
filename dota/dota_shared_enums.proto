@@ -72,7 +72,10 @@ enum EEvent {
 	EVENT_ID_WINTER_MAJOR_2016 = 13;
 	EVENT_ID_INTERNATIONAL_2016 = 14;
 	EVENT_ID_FALL_MAJOR_2016 = 15;
-	EVENT_ID_COUNT = 16;
+	EVENT_ID_WINTER_MAJOR_2017 = 16;
+	EVENT_ID_NEW_BLOOM_2017 = 17;
+	EVENT_ID_INTERNATIONAL_2017 = 18;
+	EVENT_ID_COUNT = 19;
 }
 
 enum DOTALeaverStatus_t {
@@ -147,6 +150,7 @@ enum DOTAChatChannelType_t {
 	DOTAChannelType_BattleCup = 19;
 	DOTAChannelType_HLTVSpectator = 20;
 	DOTAChannelType_GameEvents = 21;
+	DOTAChannelType_Trivia = 22;
 }
 
 enum EProfileCardSlotType {
@@ -156,6 +160,7 @@ enum EProfileCardSlotType {
 	k_EProfileCardSlotType_Item = 3;
 	k_EProfileCardSlotType_Hero = 4;
 	k_EProfileCardSlotType_Emoticon = 5;
+	k_EProfileCardSlotType_Team = 6;
 }
 
 enum EMatchGroupServerStatus {
@@ -292,6 +297,7 @@ enum DOTA_BOT_MODE {
 	DOTA_BOT_MODE_WARD = 22;
 	DOTA_BOT_MODE_COMPANION = 23;
 	DOTA_BOT_MODE_TUTORIAL_BOSS = 24;
+	DOTA_BOT_MODE_MINION = 25;
 }
 
 enum MatchLanguages {

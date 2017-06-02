@@ -211,6 +211,8 @@ type Callbacks struct {
 	onCDOTAUserMsg_SelectPenaltyGold          []func(*dota.CDOTAUserMsg_SelectPenaltyGold) error
 	onCDOTAUserMsg_RollDiceResult             []func(*dota.CDOTAUserMsg_RollDiceResult) error
 	onCDOTAUserMsg_FlipCoinResult             []func(*dota.CDOTAUserMsg_FlipCoinResult) error
+	onCDOTAUserMsg_SendRoshanSpectatorPhase   []func(*dota.CDOTAUserMsg_SendRoshanSpectatorPhase) error
+	onCDOTAUserMsg_ChatWheelCooldown          []func(*dota.CDOTAUserMsg_ChatWheelCooldown) error
 
 	pb *proto.Buffer
 }
@@ -1239,6 +1241,16 @@ func (c *Callbacks) OnCDOTAUserMsg_RollDiceResult(fn func(*dota.CDOTAUserMsg_Rol
 // OnCDOTAUserMsg_FlipCoinResult registers a callback for EDotaUserMessages_DOTA_UM_FlipCoinResult
 func (c *Callbacks) OnCDOTAUserMsg_FlipCoinResult(fn func(*dota.CDOTAUserMsg_FlipCoinResult) error) {
 	c.onCDOTAUserMsg_FlipCoinResult = append(c.onCDOTAUserMsg_FlipCoinResult, fn)
+}
+
+// OnCDOTAUserMsg_SendRoshanSpectatorPhase registers a callback for EDotaUserMessages_DOTA_UM_SendRoshanSpectatorPhase
+func (c *Callbacks) OnCDOTAUserMsg_SendRoshanSpectatorPhase(fn func(*dota.CDOTAUserMsg_SendRoshanSpectatorPhase) error) {
+	c.onCDOTAUserMsg_SendRoshanSpectatorPhase = append(c.onCDOTAUserMsg_SendRoshanSpectatorPhase, fn)
+}
+
+// OnCDOTAUserMsg_ChatWheelCooldown registers a callback for EDotaUserMessages_DOTA_UM_ChatWheelCooldown
+func (c *Callbacks) OnCDOTAUserMsg_ChatWheelCooldown(fn func(*dota.CDOTAUserMsg_ChatWheelCooldown) error) {
+	c.onCDOTAUserMsg_ChatWheelCooldown = append(c.onCDOTAUserMsg_ChatWheelCooldown, fn)
 }
 
 func (c *Callbacks) callByDemoType(t int32, buf []byte) error {
@@ -5123,6 +5135,44 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		for _, fn := range c.onCDOTAUserMsg_FlipCoinResult {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 568: // dota.EDotaUserMessages_DOTA_UM_SendRoshanSpectatorPhase
+		if c.onCDOTAUserMsg_SendRoshanSpectatorPhase == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_SendRoshanSpectatorPhase{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_SendRoshanSpectatorPhase {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 569: // dota.EDotaUserMessages_DOTA_UM_ChatWheelCooldown
+		if c.onCDOTAUserMsg_ChatWheelCooldown == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_ChatWheelCooldown{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_ChatWheelCooldown {
 			if err := fn(msg); err != nil {
 				return err
 			}

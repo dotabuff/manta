@@ -301,8 +301,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCGameMatchSignOutPermissionResponse = 7382;
 	k_EMsgDOTAChatChannelMemberUpdate = 7383;
 	k_EMsgDOTAAwardEventPoints = 7384;
-	k_EMsgDOTARedeemEventPrize = 7385;
-	k_EMsgDOTARedeemEventPrizeResponse = 7386;
 	k_EMsgDOTAGetEventPoints = 7387;
 	k_EMsgDOTAGetEventPointsResponse = 7388;
 	k_EMsgGCToGCSignoutAwardEventPoints = 7390;
@@ -591,8 +589,6 @@ enum EDOTAGCMsg {
 	k_EMsgServerToGCPostMatchTipResponse = 8098;
 	k_EMsgClientToGCWageringRequest = 8099;
 	k_EMsgGCToClientWageringResponse = 8100;
-	k_EMsgClientToGCMysteryItem = 8101;
-	k_EMsgGCToClientMysteryItemResponse = 8102;
 	k_EMsgClientToGCEventGoalsRequest = 8103;
 	k_EMsgClientToGCEventGoalsResponse = 8104;
 	k_EMsgClientToGCLeaguePredictions = 8106;
@@ -629,8 +625,6 @@ enum EDOTAGCMsg {
 	k_EMsgClientToGCRequestEventPointLogResponse = 8139;
 	k_EMsgClientToGCPublishUserStat = 8140;
 	k_EMsgGCToGCSignoutSpendWager = 8141;
-	k_EMsgClientToGCRedeemReward = 8142;
-	k_EMsgGCToClientRedeemRewardResponse = 8143;
 	k_EMsgGCSubmitLobbyMVPVote = 8144;
 	k_EMsgGCSubmitLobbyMVPVoteResponse = 8145;
 	k_EMsgClientToGCRequestLinaPlaysRemaining = 8146;
@@ -694,5 +688,30 @@ enum EDOTAGCMsg {
 	k_EMsgDOTASetFavoriteTeam = 8204;
 	k_EMsgGCToClientBattlePassRollupListRequest = 8205;
 	k_EMsgGCToClientBattlePassRollupListResponse = 8206;
+	k_EMsgGCIsProQuery = 8207;
+	k_EMsgGCIsProResponse = 8208;
+	k_EMsgDOTAClaimEventAction = 8209;
+	k_EMsgDOTAClaimEventActionResponse = 8210;
+	k_EMsgDOTAGetPeriodicResource = 8211;
+	k_EMsgDOTAGetPeriodicResourceResponse = 8212;
+	k_EMsgDOTAPeriodicResourceUpdated = 8213;
+	k_EMsgServerToGCSpendWager = 8214;
+	k_EMsgGCToGCSignoutSpendWagerToken = 8215;
+	k_EMsgSubmitTriviaQuestionAnswer = 8216;
+	k_EMsgSubmitTriviaQuestionAnswerResponse = 8217;
+	k_EMsgClientToGCGiveTip = 8218;
+	k_EMsgClientToGCGiveTipResponse = 8219;
+	k_EMsgStartTriviaSession = 8220;
+	k_EMsgStartTriviaSessionResponse = 8221;
+	k_EMsgAnchorPhoneNumberRequest = 8222;
+	k_EMsgAnchorPhoneNumberResponse = 8223;
+	k_EMsgUnanchorPhoneNumberRequest = 8224;
+	k_EMsgUnanchorPhoneNumberResponse = 8225;
+	k_EMsgGCToClientTipNotification = 8226;
+	k_EMsgClientToGCRequestSlarkGameResult = 8227;
+	k_EMsgClientToGCRequestSlarkGameResultResponse = 8228;
+	k_EMsgGCToGCSignoutSpendRankWager = 8229;
+	k_EMsgGCToGCGetFavoriteTeam = 8230;
+	k_EMsgGCToGCGetFavoriteTeamResponse = 8231;
 }
 

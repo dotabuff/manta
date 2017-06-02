@@ -57,6 +57,38 @@ enum EWeekendTourneyRichPresenceEvent {
 	k_EWeekendTourneyRichPresenceEvent_Eliminated = 3;
 }
 
+enum EDOTAEventInviteType {
+	k_EDOTAEventInviteType_Direct = 0;
+	k_EDOTAEventInviteType_OpenQualifier = 1;
+	k_EDOTAEventInviteType_ChampionsCup = 2;
+}
+
+enum EDOTATriviaQuestionCategory {
+	k_EDOTATriviaQuestionCategory_AbilityIcon = 0;
+	k_EDOTATriviaQuestionCategory_AbilityCooldown = 1;
+	k_EDOTATriviaQuestionCategory_HeroAttributes = 2;
+	k_EDOTATriviaQuestionCategory_HeroMovementSpeed = 3;
+	k_EDOTATriviaQuestionCategory_TalentTree = 4;
+	k_EDOTATriviaQuestionCategory_HeroStats = 5;
+	k_EDOTATriviaQuestionCategory_ItemPrice = 6;
+	k_EDOTATriviaQuestionCategory_AbilitySound = 7;
+	k_EDOTATriviaQuestionCategory_InvokerSpells = 8;
+	k_EDOTATriviaQuestionCategory_AbilityManaCost = 9;
+	k_EDOTATriviaQuestionCategory_HeroAttackSound = 10;
+	k_EDOTATriviaQuestionCategory_AbilityName = 11;
+	k_EDOTATriviaQuestionCategory_ItemComponents = 12;
+	k_EDOTATriviaQuestionCategory_ItemLore = 13;
+}
+
+enum EDOTATriviaAnswerResult {
+	k_EDOTATriviaAnswerResult_Success = 0;
+	k_EDOTATriviaAnswerResult_InvalidQuestion = 1;
+	k_EDOTATriviaAnswerResult_InvalidAnswer = 2;
+	k_EDOTATriviaAnswerResult_QuestionLocked = 3;
+	k_EDOTATriviaAnswerResult_AlreadyAnswered = 4;
+	k_EDOTATriviaAnswerResult_TriviaDisabled = 5;
+}
+
 message CMsgClientSuspended {
 	optional uint32 time_end = 1;
 }
@@ -176,6 +208,7 @@ message CMsgDOTAPopup {
 		LOBBY_MVP_AWARDED = 68;
 		LOW_BADGE_LEVEL_CHAT = 71;
 		LOW_WINS_CHAT = 72;
+		UNVERIFIED_USER_CHAT = 73;
 		GENERIC_INFO = 69;
 		GENERIC_ERROR = 70;
 	}
@@ -823,24 +856,46 @@ message CMsgGCLobbyUpdateBroadcastChannelInfo {
 	optional string language_code = 4;
 }
 
-message CMsgDOTARedeemEventPrize {
-	optional uint32 prize_id = 1;
-	optional uint32 event_id = 2;
-	optional uint32 quantity = 3 [default = 1];
+message CMsgDOTAClaimEventAction {
+	optional uint32 event_id = 1;
+	optional uint32 action_id = 2;
+	optional uint32 quantity = 3;
 }
 
-message CMsgDOTARedeemEventPrizeResponse {
-	enum ResultCode {
-		Success = 0;
-		ServerError = 1;
-		InsufficientPoints = 2;
-		PointsHeld = 3;
+message CMsgDOTAClaimEventActionResponse {
+	message MysteryItemRewardData {
+		optional uint32 item_def = 1;
+		optional uint32 item_category = 2;
 	}
 
-	optional CMsgDOTARedeemEventPrizeResponse.ResultCode result = 1 [default = Success];
-	optional uint32 remaining_points = 2;
-	optional uint32 remaining_premium_points = 3;
-	optional uint32 event_id = 4;
+	message LootListRewardData {
+		repeated uint32 item_def = 1;
+	}
+
+	message GrantedRewardData {
+		optional uint32 grant_index = 1;
+		optional uint32 score_index = 2;
+		optional uint32 reward_index = 3;
+		optional bytes reward_data = 4;
+	}
+
+	enum ResultCode {
+		Success = 0;
+		InvalidEvent = 1;
+		EventNotActive = 2;
+		InvalidAction = 3;
+		ServerError = 4;
+		InsufficientPoints = 5;
+		InsufficentLevel = 6;
+		AlreadyClaimed = 7;
+		SDOLockFailure = 8;
+		SDOLoadFailure = 9;
+		EventNotOwned = 10;
+		Timeout = 11;
+	}
+
+	optional CMsgDOTAClaimEventActionResponse.ResultCode result = 1 [default = Success];
+	repeated CMsgDOTAClaimEventActionResponse.GrantedRewardData reward_results = 2;
 }
 
 message CMsgDOTAGetEventPoints {
@@ -863,7 +918,22 @@ message CMsgDOTAGetEventPointsResponse {
 	optional uint32 account_id = 7;
 	optional bool owned = 8;
 	optional uint32 audit_action = 9;
-	optional uint32 wager_tokens_remaining = 10;
+}
+
+message CMsgDOTAGetPeriodicResource {
+	optional uint32 account_id = 1;
+	optional uint32 periodic_resource_id = 2;
+	optional uint32 timestamp = 3;
+}
+
+message CMsgDOTAGetPeriodicResourceResponse {
+	optional uint32 periodic_resource_max = 1;
+	optional uint32 periodic_resource_used = 2;
+}
+
+message CMsgDOTAPeriodicResourceUpdated {
+	optional CMsgDOTAGetPeriodicResource periodic_resource_key = 1;
+	optional CMsgDOTAGetPeriodicResourceResponse periodic_resource_value = 2;
 }
 
 message CMsgDOTALiveLeagueGameUpdate {
@@ -905,6 +975,7 @@ message CMsgDOTAGetPlayerMatchHistory {
 	optional uint32 request_id = 5;
 	optional bool include_practice_matches = 7;
 	optional bool include_custom_games = 8;
+	optional bool include_event_games = 9;
 }
 
 message CMsgDOTAGetPlayerMatchHistoryResponse {
@@ -1443,6 +1514,8 @@ message CMsgGCToClientWageringResponse {
 	optional uint32 success_rate = 5;
 	optional uint32 total_games_wagered = 6;
 	optional uint32 coins_max = 7;
+	optional uint32 rank_wagers_remaining = 8;
+	optional uint32 rank_wagers_max = 9;
 }
 
 message CMsgGCToClientWageringUpdate {
@@ -1453,30 +1526,6 @@ message CMsgGCToClientWageringUpdate {
 message CMsgGCToClientArcanaVotesUpdate {
 	optional uint32 event_id = 1;
 	optional CMsgClientToGCRequestArcanaVotesRemainingResponse arcana_votes = 2;
-}
-
-message CMsgClientToGCMysteryItem {
-	optional uint32 event_id = 1;
-	optional uint32 action_id = 2;
-}
-
-message CMsgGCToClientMysteryItemResponse {
-	enum Result {
-		SUCCESS = 0;
-		FAILURE_SDO_LOAD = 1;
-		FAILURE_NO_ACTIONS = 2;
-		FAILURE_NO_LOOTLIST = 3;
-		FAILURE_EMPTY_LOOTLIST = 4;
-		FAILURE_NO_ITEM_GENERATED = 5;
-		FAILURE_SQL_COMMIT = 6;
-		FAILURE_EVENT_NOT_OWNED = 7;
-		FAILURE_INVALID_ACTION = 8;
-		FAILURE_ALREADY_GRANTED = 9;
-	}
-
-	optional CMsgGCToClientMysteryItemResponse.Result result = 1 [default = SUCCESS];
-	optional uint32 reward_type = 2;
-	optional uint32 itemdef = 3;
 }
 
 message CMsgClientToGCGetEventGoals {
@@ -1626,6 +1675,7 @@ message CMsgArcanaVotes {
 	optional uint32 voting_state = 4;
 	optional bool is_current_round_calibrating = 5;
 	optional uint32 closest_active_match_id = 6;
+	optional uint32 event_id = 7;
 }
 
 message CMsgClientToGCRequestArcanaVotesRemaining {
@@ -1673,8 +1723,9 @@ message CMsgClientToGCRequestEventPointLogResponse {
 		optional uint32 recipe_item_def_index = 1;
 	}
 
-	message AchievementEvent {
+	message ActionRewardEvent {
 		optional uint32 action_id = 1;
+		optional uint32 action_score = 2;
 	}
 
 	message MysteryItemReceivedEvent {
@@ -1701,6 +1752,14 @@ message CMsgClientToGCRequestEventPointLogResponse {
 		optional uint32 correct_answers = 1;
 	}
 
+	message WeeklyGameEvent {
+		optional uint32 points_won = 1;
+	}
+
+	message ExploitCorrectionEvent {
+		optional uint32 points_corrected = 1;
+	}
+
 	message EventPointTransaction {
 		optional uint32 time = 1;
 		optional int32 event_points = 2;
@@ -1712,12 +1771,13 @@ message CMsgClientToGCRequestEventPointLogResponse {
 		optional CMsgClientToGCRequestEventPointLogResponse.TipGivenEvent tip_given_event = 8;
 		optional CMsgClientToGCRequestEventPointLogResponse.TipReceivedEvent tip_received_event = 9;
 		optional CMsgClientToGCRequestEventPointLogResponse.RecycledItemEvent recycled_item_event = 10;
-		optional CMsgClientToGCRequestEventPointLogResponse.AchievementEvent achievement_event = 11;
+		optional CMsgClientToGCRequestEventPointLogResponse.ActionRewardEvent action_reward_event = 11;
 		optional CMsgClientToGCRequestEventPointLogResponse.InGamePredictionCorrectEvent in_game_prediction_event = 12;
 		optional CMsgClientToGCRequestEventPointLogResponse.CorrectPredictionEvent prediction_event = 13;
-		optional CMsgClientToGCRequestEventPointLogResponse.WeekendTourneyPayoutEvent weekend_tourney_payout_event = 14;
 		optional CMsgClientToGCRequestEventPointLogResponse.FantasyRewardEvent fantasy_reward_event = 15;
 		optional CMsgClientToGCRequestEventPointLogResponse.BracketRewardEvent bracket_reward_event = 16;
+		optional CMsgClientToGCRequestEventPointLogResponse.WeeklyGameEvent weekly_game_event = 19;
+		optional CMsgClientToGCRequestEventPointLogResponse.ExploitCorrectionEvent exploit_correction_event = 20;
 	}
 
 	optional bool result = 1;
@@ -1732,28 +1792,6 @@ message CMsgClientToGCPublishUserStat {
 
 message CMsgClientToGCAddTI6TreeProgress {
 	optional uint32 trees = 1;
-}
-
-message CMsgClientToGCRedeemReward {
-	optional uint32 event_id = 1;
-	optional uint32 action_id = 2;
-	optional uint32 base_action_id = 3;
-}
-
-message CMsgGCToClientRedeemRewardResponse {
-	enum Result {
-		SUCCESS = 0;
-		FAILURE_SDO_LOCK = 1;
-		FAILURE_SDO_LOAD = 2;
-		FAILURE_EVENT_NOT_OWNED = 3;
-		FAILURE_EVENT_NOT_ACTIVE = 4;
-		FAILURE_INVALID_ACTION = 5;
-		FAILURE_REQUIREMENTS_NOT_MET = 6;
-		FAILURE_ALREADY_GRANTED = 7;
-		FAILURE_TIMEOUT = 8;
-	}
-
-	optional CMsgGCToClientRedeemRewardResponse.Result result = 1 [default = SUCCESS];
 }
 
 message CMsgClientToGCRequestLinaPlaysRemaining {
@@ -1772,6 +1810,17 @@ message CMsgClientToGCRequestLinaGameResult {
 
 message CMsgClientToGCRequestLinaGameResultResponse {
 	optional uint32 result = 1;
+}
+
+message CMsgClientToGCRequestSlarkGameResult {
+	optional EEvent event_id = 1 [default = EVENT_ID_NONE];
+	optional uint32 slot_chosen = 2;
+	optional uint32 week = 3;
+}
+
+message CMsgClientToGCRequestSlarkGameResultResponse {
+	optional uint32 points_won = 1;
+	optional bool aura_won = 2;
 }
 
 message CMsgGCToClientQuestProgressUpdated {
@@ -1899,6 +1948,7 @@ message CMsgClientToGCOpenPlayerCardPackResponse {
 
 message CMsgClientToGCRecyclePlayerCard {
 	optional uint64 player_card_item_id = 1;
+	optional uint32 event_id = 2;
 }
 
 message CMsgClientToGCRecyclePlayerCardResponse {
@@ -1917,6 +1967,7 @@ message CMsgClientToGCRecyclePlayerCardResponse {
 
 message CMsgClientToGCCreatePlayerCardPack {
 	optional uint64 card_dust_item_id = 1;
+	optional uint32 event_id = 2;
 }
 
 message CMsgClientToGCCreatePlayerCardPackResponse {
@@ -1991,6 +2042,66 @@ message CMsgGCToClientBattlePassRollup_International2016 {
 	optional CMsgGCToClientBattlePassRollup_International2016.FantasyChallenge fantasy_challenge = 9;
 }
 
+message CMsgGCToClientBattlePassRollup_Fall2016 {
+	message Questlines {
+		optional string name = 1;
+		optional uint32 onestar = 2;
+		optional uint32 twostar = 3;
+		optional uint32 threestar = 4;
+		optional uint32 total = 5;
+	}
+
+	message Wagering {
+		optional uint32 total_wagered = 1;
+		optional uint32 total_won = 2;
+		optional uint32 average_won = 3;
+		optional uint32 success_rate = 4;
+		optional uint32 total_tips = 5;
+	}
+
+	message Achievements {
+		optional uint32 completed = 1;
+		optional uint32 total = 2;
+		optional uint32 points = 3;
+	}
+
+	message BattleCup {
+		optional uint32 wins = 1;
+		optional uint32 score = 2;
+	}
+
+	message Predictions {
+		optional uint32 correct = 1;
+		optional uint32 total = 2;
+		optional uint32 points = 3;
+	}
+
+	message Bracket {
+		optional uint32 correct = 1;
+		optional uint32 points = 2;
+	}
+
+	message PlayerCard {
+		optional uint32 account_id = 1;
+		optional uint32 quality = 2;
+	}
+
+	message FantasyChallenge {
+		optional float total_score = 1;
+		optional float percentile = 2;
+	}
+
+	optional uint32 battle_pass_level = 1;
+	repeated CMsgGCToClientBattlePassRollup_Fall2016.Questlines questlines = 2;
+	optional CMsgGCToClientBattlePassRollup_Fall2016.Wagering wagering = 3;
+	optional CMsgGCToClientBattlePassRollup_Fall2016.Achievements achievements = 4;
+	optional CMsgGCToClientBattlePassRollup_Fall2016.BattleCup battle_cup = 5;
+	optional CMsgGCToClientBattlePassRollup_Fall2016.Predictions predictions = 6;
+	optional CMsgGCToClientBattlePassRollup_Fall2016.Bracket bracket = 7;
+	repeated CMsgGCToClientBattlePassRollup_Fall2016.PlayerCard player_cards = 8;
+	optional CMsgGCToClientBattlePassRollup_Fall2016.FantasyChallenge fantasy_challenge = 9;
+}
+
 message CMsgGCToClientBattlePassRollupRequest {
 	optional uint32 event_id = 1;
 	optional uint32 account_id = 2;
@@ -1998,6 +2109,7 @@ message CMsgGCToClientBattlePassRollupRequest {
 
 message CMsgGCToClientBattlePassRollupResponse {
 	optional CMsgGCToClientBattlePassRollup_International2016 event_ti6 = 1;
+	optional CMsgGCToClientBattlePassRollup_Fall2016 event_fall2016 = 2;
 }
 
 message CMsgGCToClientBattlePassRollupListRequest {
@@ -2033,7 +2145,9 @@ message CMsgDOTAEventInvite {
 		optional uint32 team_id = 1;
 		optional uint32 announcement_date = 2;
 		optional string team_name = 3;
-		optional uint32 invite_type = 4;
+		optional EDOTAEventInviteType invite_type = 4 [default = k_EDOTAEventInviteType_Direct];
+		optional uint32 region = 5;
+		optional bool qualifier_winner = 6;
 	}
 
 	repeated CMsgDOTAEventInvite.Team teams = 1;
@@ -2041,5 +2155,99 @@ message CMsgDOTAEventInvite {
 
 message CMsgDOTASetFavoriteTeam {
 	optional uint32 team_id = 1;
+	optional uint32 event_id = 2;
+}
+
+message CMsgDOTATriviaQuestion {
+	optional uint32 question_id = 1;
+	optional EDOTATriviaQuestionCategory category = 2 [default = k_EDOTATriviaQuestionCategory_AbilityIcon];
+	optional uint32 timestamp = 3;
+	optional string question_value = 4;
+	repeated string answer_values = 5;
+	optional uint32 correct_answer_index = 6;
+}
+
+message CMsgDOTATriviaCurrentQuestions {
+	repeated CMsgDOTATriviaQuestion questions = 1;
+	optional bool trivia_enabled = 2;
+}
+
+message CMsgDOTATriviaQuestionAnswersSummary {
+	optional bool summary_available = 1;
+	repeated uint32 picked_count = 2;
+}
+
+message CMsgDOTASubmitTriviaQuestionAnswer {
+	optional uint32 question_id = 1;
+	optional uint32 answer_index = 2;
+}
+
+message CMsgDOTASubmitTriviaQuestionAnswerResponse {
+	optional EDOTATriviaAnswerResult result = 1 [default = k_EDOTATriviaAnswerResult_Success];
+}
+
+message CMsgDOTAStartTriviaSession {
+}
+
+message CMsgDOTAStartTriviaSessionResponse {
+	optional bool trivia_enabled = 1;
+	optional uint32 current_timestamp = 2;
+}
+
+message CMsgClientToGCGiveTip {
+	optional uint32 recipient_account_id = 1;
+	optional uint64 match_id = 2;
+	optional uint32 event_id = 3;
+}
+
+message CMsgClientToGCGiveTipResponse {
+	enum Result {
+		SUCCESS = 0;
+		ERROR_ALREADY_TIPPED = 1;
+		ERROR_INVALID_MATCH_ID = 2;
+		ERROR_INVALID_EVENT_ID = 3;
+		ERROR_INVALID_MATCH_TIME = 4;
+		ERROR_NOT_WINNER = 5;
+		ERROR_UNOWNED_EVENT = 6;
+		ERROR_INVALID_LOBBY_TYPE = 7;
+		ERROR_UNKNOWN = 8;
+	}
+
+	optional CMsgClientToGCGiveTipResponse.Result result = 1 [default = SUCCESS];
+}
+
+message CMsgDOTAAnchorPhoneNumberRequest {
+}
+
+message CMsgDOTAAnchorPhoneNumberResponse {
+	enum Result {
+		SUCCESS = 0;
+		ERROR_UNKNOWN = 1;
+		ERROR_NO_STEAM_PHONE = 2;
+		ERROR_ALREADY_IN_USE = 3;
+		ERROR_COOLDOWN_ACTIVE = 4;
+	}
+
+	optional CMsgDOTAAnchorPhoneNumberResponse.Result result = 1 [default = SUCCESS];
+}
+
+message CMsgDOTAUnanchorPhoneNumberRequest {
+}
+
+message CMsgDOTAUnanchorPhoneNumberResponse {
+	enum Result {
+		SUCCESS = 0;
+		ERROR_UNKNOWN = 1;
+	}
+
+	optional CMsgDOTAUnanchorPhoneNumberResponse.Result result = 1 [default = SUCCESS];
+}
+
+message CMsgGCToClientTipNotification {
+	optional uint32 tipper_account_id = 1;
+	optional string tipper_name = 2;
+	optional uint32 recipient_account_id = 3;
+	optional string recipient_name = 4;
+	optional uint32 event_id = 5;
 }
 

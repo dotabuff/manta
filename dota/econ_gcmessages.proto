@@ -309,6 +309,7 @@ message CMsgGCToGCGetUserSessionServer {
 
 message CMsgGCToGCGetUserSessionServerResponse {
 	optional fixed64 server_steam_id = 1;
+	optional bool is_online = 2;
 }
 
 message CMsgGCToGCGetUserServerMembers {
@@ -786,6 +787,23 @@ message CWorkshop_GetItemDailyRevenue_Response {
 	}
 
 	repeated CWorkshop_GetItemDailyRevenue_Response.CountryDailyRevenue country_revenue = 1;
+}
+
+message CWorkshop_GetPackageDailyRevenue_Request {
+	optional uint32 packageid = 1;
+	optional uint32 date_start = 2;
+	optional uint32 date_end = 3;
+}
+
+message CWorkshop_GetPackageDailyRevenue_Response {
+	message CountryDailyRevenue {
+		optional string country_code = 1;
+		optional uint32 date = 2;
+		optional int64 revenue_usd = 3;
+		optional int32 units = 4;
+	}
+
+	repeated CWorkshop_GetPackageDailyRevenue_Response.CountryDailyRevenue country_revenue = 1;
 }
 
 message CMsgSQLGCToGCGrantBackpackSlots {
