@@ -38,6 +38,7 @@ func (c *class) getFieldPaths(fp *fieldPath, state *fieldState) []*fieldPath {
 	return c.serializer.getFieldPaths(fp, state)
 }
 
+// Internal callback for OnCSVCMsg_ServerInfo.
 func (p *Parser) onCSVCMsg_ServerInfo(m *dota.CSVCMsg_ServerInfo) error {
 	// This may be needed to parse PacketEntities.
 	p.classIdSize = uint32(math.Log(float64(m.GetMaxClasses()))/math.Log(2)) + 1
@@ -56,7 +57,8 @@ func (p *Parser) onCSVCMsg_ServerInfo(m *dota.CSVCMsg_ServerInfo) error {
 	return nil
 }
 
-func (p *Parser) onCDemoClassInfoNew(m *dota.CDemoClassInfo) error {
+// Internal callback for OnCDemoClassInfo.
+func (p *Parser) onCDemoClassInfo(m *dota.CDemoClassInfo) error {
 	for _, c := range m.GetClasses() {
 		classId := c.GetClassId()
 		networkName := c.GetNetworkName()
@@ -64,10 +66,10 @@ func (p *Parser) onCDemoClassInfoNew(m *dota.CDemoClassInfo) error {
 		class := &class{
 			classId:    classId,
 			name:       networkName,
-			serializer: p.newSerializers[networkName],
+			serializer: p.serializers[networkName],
 		}
-		p.newClassesById[class.classId] = class
-		p.newClassesByName[class.name] = class
+		p.classesById[class.classId] = class
+		p.classesByName[class.name] = class
 	}
 
 	p.classInfo = true
@@ -93,16 +95,10 @@ func (p *Parser) updateInstanceBaseline() {
 
 	// Iterate through instancebaseline table items
 	for _, item := range stringTable.Items {
-		p.updateInstanceBaselineItem(item)
+		classId, err := atoi32(item.Key)
+		if err != nil {
+			_panicf("invalid instancebaseline key '%s': %s", item.Key, err)
+		}
+		p.classBaselines[classId] = item.Value
 	}
-}
-
-func (p *Parser) updateInstanceBaselineItem(item *stringTableItem) {
-	// Get the class id for the string table item
-	classId, err := atoi32(item.Key)
-	if err != nil {
-		_panicf("invalid instancebaseline key '%s': %s", item.Key, err)
-	}
-
-	p.newClassBaselines[classId] = item.Value
 }

@@ -244,7 +244,8 @@ func (p *Parser) onCMsgSource1LegacyGameEvent(m *dota.CMsgSource1LegacyGameEvent
 	return nil
 }
 
-// Registers a new game event handler.
+// OnGameEvent registers an GameEventHandler that will be called when a
+// named GameEvent occurs.
 func (p *Parser) OnGameEvent(name string, fn GameEventHandler) {
 	p.gameEventHandlers[name] = append(p.gameEventHandlers[name], fn)
 }

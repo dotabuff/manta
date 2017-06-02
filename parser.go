@@ -27,25 +27,24 @@ type Parser struct {
 	// Stores the game build.
 	GameBuild uint32
 
+	// AfterStopCallback is a function to be called when the parser stops.
+	AfterStopCallback func()
+
+	classBaselines    map[int32][]byte
+	classesById       map[int32]*class
+	classesByName     map[string]*class
+	classIdSize       uint32
+	classInfo         bool
+	entities          map[int32]*Entity
+	entityFullPackets int
+	entityHandlers    []EntityHandler
 	gameEventHandlers map[string][]GameEventHandler
 	gameEventNames    map[int32]string
 	gameEventTypes    map[string]*gameEventType
-
-	newEntities map[int32]*Entity
-
-	classIdSize          uint32
-	classInfo            bool
-	newClassesById       map[int32]*class
-	newClassesByName     map[string]*class
-	newClassBaselines    map[int32][]byte
-	newSerializers       map[string]*serializer
-	newEntityHandlers    []EntityHandler
-	newEntityFullPackets int
-	stringTables         *stringTables
-
-	stream            *stream
 	isStopping        bool
-	AfterStopCallback func()
+	serializers       map[string]*serializer
+	stream            *stream
+	stringTables      *stringTables
 }
 
 // Create a new parser from a byte slice.
@@ -61,21 +60,20 @@ func NewStreamParser(r io.Reader) (*Parser, error) {
 		Callbacks: newCallbacks(),
 		Tick:      0,
 		NetTick:   0,
+		GameBuild: 0,
 
+		classBaselines:    make(map[int32][]byte),
+		classesById:       make(map[int32]*class),
+		classesByName:     make(map[string]*class),
+		entities:          make(map[int32]*Entity),
+		entityHandlers:    make([]EntityHandler, 0),
 		gameEventHandlers: make(map[string][]GameEventHandler),
 		gameEventNames:    make(map[int32]string),
 		gameEventTypes:    make(map[string]*gameEventType),
+		isStopping:        false,
+		serializers:       make(map[string]*serializer),
+		stream:            newStream(r),
 		stringTables:      newStringTables(),
-
-		newClassesById:    make(map[int32]*class),
-		newClassesByName:  make(map[string]*class),
-		newClassBaselines: make(map[int32][]byte),
-		newEntities:       make(map[int32]*Entity),
-		newEntityHandlers: make([]EntityHandler, 0),
-		newSerializers:    make(map[string]*serializer),
-
-		stream:     newStream(r),
-		isStopping: false,
 	}
 
 	// Parse out the header, ensuring that it's valid.
@@ -101,9 +99,9 @@ func NewStreamParser(r io.Reader) (*Parser, error) {
 	parser.Callbacks.OnCMsgSource1LegacyGameEventList(parser.onCMsgSource1LegacyGameEventList)
 	parser.Callbacks.OnCMsgSource1LegacyGameEvent(parser.onCMsgSource1LegacyGameEvent)
 
-	parser.Callbacks.OnCDemoClassInfo(parser.onCDemoClassInfoNew)
-	parser.Callbacks.OnCDemoSendTables(parser.onCDemoSendTablesNew)
-	parser.Callbacks.OnCSVCMsg_PacketEntities(parser.onCSVCMsg_PacketEntitiesNew)
+	parser.Callbacks.OnCDemoClassInfo(parser.onCDemoClassInfo)
+	parser.Callbacks.OnCDemoSendTables(parser.onCDemoSendTables)
+	parser.Callbacks.OnCSVCMsg_PacketEntities(parser.onCSVCMsg_PacketEntities)
 
 	// Maintains the value of parser.Tick
 	parser.Callbacks.OnCNETMsg_Tick(func(m *dota.CNETMsg_Tick) error {

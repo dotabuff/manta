@@ -22,9 +22,7 @@ var itemCounts = map[string]int{
 }
 
 // Internal callback for OnCDemoSendTables.
-func (p *Parser) onCDemoSendTablesNew(m *dota.CDemoSendTables) error {
-	// _printf("onCDemoSendTables build %d", p.GameBuild)
-
+func (p *Parser) onCDemoSendTables(m *dota.CDemoSendTables) error {
 	r := newReader(m.GetData())
 	buf := r.readBytes(r.readVarUint32())
 
@@ -68,7 +66,7 @@ func (p *Parser) onCDemoSendTablesNew(m *dota.CDemoSendTables) error {
 
 				// find associated serializer
 				if field.serializerName != "" {
-					field.serializer = p.newSerializers[field.serializerName]
+					field.serializer = p.serializers[field.serializerName]
 				}
 
 				// apply any build-specific patches to the field
@@ -100,10 +98,10 @@ func (p *Parser) onCDemoSendTablesNew(m *dota.CDemoSendTables) error {
 		}
 
 		// store the serializer for field reference
-		p.newSerializers[serializer.name] = serializer
+		p.serializers[serializer.name] = serializer
 
-		if _, ok := p.newClassesByName[serializer.name]; ok {
-			p.newClassesByName[serializer.name].serializer = serializer
+		if _, ok := p.classesByName[serializer.name]; ok {
+			p.classesByName[serializer.name].serializer = serializer
 		}
 	}
 

@@ -175,10 +175,11 @@ func (e *Entity) GetIndex() int32 {
 
 // FindEntity finds a given Entity by index
 func (p *Parser) FindEntity(index int32) *Entity {
-	return p.newEntities[index]
+	return p.entities[index]
 }
 
-func (p *Parser) onCSVCMsg_PacketEntitiesNew(m *dota.CSVCMsg_PacketEntities) error {
+// Internal Callback for OnCSVCMsg_PacketEntities.
+func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error {
 	r := newReader(m.GetEntityData())
 
 	var index = int32(-1)
@@ -190,10 +191,10 @@ func (p *Parser) onCSVCMsg_PacketEntitiesNew(m *dota.CSVCMsg_PacketEntities) err
 	var op EntityOp
 
 	if !m.GetIsDelta() {
-		if p.newEntityFullPackets > 0 {
+		if p.entityFullPackets > 0 {
 			return nil
 		}
-		p.newEntityFullPackets++
+		p.entityFullPackets++
 	}
 
 	type tuple struct {
@@ -213,24 +214,24 @@ func (p *Parser) onCSVCMsg_PacketEntitiesNew(m *dota.CSVCMsg_PacketEntities) err
 				serial = int32(r.readBits(17))
 				r.readVarUint32()
 
-				class := p.newClassesById[classId]
+				class := p.classesById[classId]
 				if class == nil {
 					_panicf("unable to find new class %d", classId)
 				}
 
-				baseline := p.newClassBaselines[classId]
+				baseline := p.classBaselines[classId]
 				if baseline == nil {
 					_panicf("unable to find new baseline %d", classId)
 				}
 
 				e = newEntity(index, serial, class)
-				p.newEntities[index] = e
+				p.entities[index] = e
 				readFields(newReader(baseline), class.serializer, e.state)
 				readFields(r, class.serializer, e.state)
 				op = EntityOpCreated | EntityOpEntered
 
 			} else {
-				if e = p.newEntities[index]; e == nil {
+				if e = p.entities[index]; e == nil {
 					_panicf("unable to find existing entity %d", index)
 				}
 
@@ -244,7 +245,7 @@ func (p *Parser) onCSVCMsg_PacketEntitiesNew(m *dota.CSVCMsg_PacketEntities) err
 			}
 
 		} else {
-			if e = p.newEntities[index]; e == nil {
+			if e = p.entities[index]; e == nil {
 				_panicf("unable to find existing entity %d", index)
 			}
 
@@ -255,14 +256,14 @@ func (p *Parser) onCSVCMsg_PacketEntitiesNew(m *dota.CSVCMsg_PacketEntities) err
 			op = EntityOpLeft
 			if cmd&0x02 != 0 {
 				op |= EntityOpDeleted
-				p.newEntities[index] = nil
+				p.entities[index] = nil
 			}
 		}
 
 		tuples = append(tuples, tuple{e, op})
 	}
 
-	for _, h := range p.newEntityHandlers {
+	for _, h := range p.entityHandlers {
 		for _, t := range tuples {
 			if err := h(t.e, t.op); err != nil {
 				return err
@@ -273,6 +274,8 @@ func (p *Parser) onCSVCMsg_PacketEntitiesNew(m *dota.CSVCMsg_PacketEntities) err
 	return nil
 }
 
+// OnEntity registers an EntityHandler that will be called when an entity
+// is created, updated, deleted, etc.
 func (p *Parser) OnEntity(h EntityHandler) {
-	p.newEntityHandlers = append(p.newEntityHandlers, h)
+	p.entityHandlers = append(p.entityHandlers, h)
 }
