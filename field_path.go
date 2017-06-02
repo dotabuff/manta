@@ -187,39 +187,39 @@ var fieldPathTable = []fieldPathOp{
 		}
 	}},
 	fieldPathOp{"PopOnePlusOne", 2, func(r *reader, fp *fieldPath) {
-		fp.last--
+		fp.pop(1)
 		fp.path[fp.last] += 1
 	}},
 	fieldPathOp{"PopOnePlusN", 0, func(r *reader, fp *fieldPath) {
-		fp.last--
+		fp.pop(1)
 		fp.path[fp.last] += r.readUBitVarFieldPath() + 1
 	}},
 	fieldPathOp{"PopAllButOnePlusOne", 1837, func(r *reader, fp *fieldPath) {
-		fp.last = 0
+		fp.pop(fp.last)
 		fp.path[0] += 1
 	}},
 	fieldPathOp{"PopAllButOnePlusN", 149, func(r *reader, fp *fieldPath) {
-		fp.last = 0
+		fp.pop(fp.last)
 		fp.path[0] += r.readUBitVarFieldPath() + 1
 	}},
 	fieldPathOp{"PopAllButOnePlusNPack3Bits", 300, func(r *reader, fp *fieldPath) {
-		fp.last = 0
+		fp.pop(fp.last)
 		fp.path[0] += int(r.readBits(3)) + 1
 	}},
 	fieldPathOp{"PopAllButOnePlusNPack6Bits", 634, func(r *reader, fp *fieldPath) {
-		fp.last = 0
+		fp.pop(fp.last)
 		fp.path[0] += int(r.readBits(6)) + 1
 	}},
 	fieldPathOp{"PopNPlusOne", 0, func(r *reader, fp *fieldPath) {
-		fp.last -= r.readUBitVarFieldPath()
+		fp.pop(r.readUBitVarFieldPath())
 		fp.path[fp.last] += 1
 	}},
 	fieldPathOp{"PopNPlusN", 0, func(r *reader, fp *fieldPath) {
-		fp.last -= r.readUBitVarFieldPath()
+		fp.pop(r.readUBitVarFieldPath())
 		fp.path[fp.last] += int(r.readVarInt32())
 	}},
 	fieldPathOp{"PopNAndNonTopographical", 1, func(r *reader, fp *fieldPath) {
-		fp.last -= r.readUBitVarFieldPath()
+		fp.pop(r.readUBitVarFieldPath())
 		for i := 0; i <= fp.last; i++ {
 			if r.readBoolean() {
 				fp.path[i] += int(r.readVarInt32())
@@ -248,6 +248,15 @@ var fieldPathTable = []fieldPathOp{
 	}},
 }
 
+// pop reduces the last element by n, zeroing values in the popped path
+func (fp *fieldPath) pop(n int) {
+	for i := 0; i < n; i++ {
+		fp.path[fp.last] = 0
+		fp.last--
+	}
+}
+
+// copy returns a copy of the fieldPath
 func (fp *fieldPath) copy() *fieldPath {
 	x := fpPool.Get().(*fieldPath)
 	copy(x.path, fp.path)
@@ -256,6 +265,7 @@ func (fp *fieldPath) copy() *fieldPath {
 	return x
 }
 
+// String returns a string representing the fieldPath
 func (fp *fieldPath) String() string {
 	ss := make([]string, fp.last+1)
 	for i := 0; i <= fp.last; i++ {
@@ -264,6 +274,7 @@ func (fp *fieldPath) String() string {
 	return strings.Join(ss, "/")
 }
 
+// newFieldPath returns a new fieldPath ready for use
 func newFieldPath() *fieldPath {
 	fp := fpPool.Get().(*fieldPath)
 	fp.reset()
@@ -282,16 +293,19 @@ var fpPool = &sync.Pool{
 
 var fpReset = []int{-1, 0, 0, 0, 0, 0}
 
+// reset resets the fieldPath to the empty value
 func (fp *fieldPath) reset() {
 	copy(fp.path, fpReset)
 	fp.last = 0
 	fp.done = false
 }
 
+// release returns the fieldPath to the pool for re-use
 func (fp *fieldPath) release() {
 	fpPool.Put(fp)
 }
 
+// readFieldPaths reads a new slice of fieldPath values from the given reader
 func readFieldPaths(r *reader) []*fieldPath {
 	fp := newFieldPath()
 
@@ -322,6 +336,7 @@ func readFieldPaths(r *reader) []*fieldPath {
 	return paths
 }
 
+// newHuffmanTree creates a new huffmanTree from the field path table
 func newHuffmanTree() huffmanTree {
 	freqs := make([]int, len(fieldPathTable))
 	for i, op := range fieldPathTable {
