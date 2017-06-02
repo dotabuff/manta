@@ -190,6 +190,12 @@ func (p *Parser) onCSVCMsg_PacketEntitiesNew(m *dota.CSVCMsg_PacketEntities) err
 		p.newEntityFullPackets++
 	}
 
+	type tuple struct {
+		e  *Entity
+		op EntityOp
+	}
+	tuples := make([]tuple, 0, updates)
+
 	for ; updates > 0; updates-- {
 		index += int32(r.readUBitVar()) + 1
 		op = EntityOpNone
@@ -247,8 +253,12 @@ func (p *Parser) onCSVCMsg_PacketEntitiesNew(m *dota.CSVCMsg_PacketEntities) err
 			}
 		}
 
-		for _, h := range p.newEntityHandlers {
-			if err := h(e, op); err != nil {
+		tuples = append(tuples, tuple{e, op})
+	}
+
+	for _, h := range p.newEntityHandlers {
+		for _, t := range tuples {
+			if err := h(t.e, t.op); err != nil {
 				return err
 			}
 		}
