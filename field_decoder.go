@@ -37,6 +37,7 @@ var fieldTypeDecoders = map[string]fieldDecoder{
 	"Color":                unsignedDecoder,
 	"CPhysicsComponent":    componentDecoder,
 	"CRenderComponent":     componentDecoder,
+	"CUtlString":           stringDecoder,
 	"CUtlStringToken":      unsignedDecoder,
 	"CUtlSymbolLarge":      stringDecoder,
 	"Vector2D":             vector2Decoder,
