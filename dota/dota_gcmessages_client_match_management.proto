@@ -36,6 +36,8 @@ enum EStartFindingMatchResult {
 	k_EStartFindingMatchResult_MemberMissingEventOwnership = 118;
 	k_EStartFindingMatchResult_WeekendTourneyNotUnlocked = 119;
 	k_EStartFindingMatchResult_WeekendTourneyRecentParticipation = 120;
+	k_EStartFindingMatchResult_MemberMissingAnchoredPhoneNumber = 121;
+	k_EStartFindingMatchResult_NotMemberOfClan = 122;
 }
 
 message CMsgStartFindingMatch {
@@ -46,13 +48,14 @@ message CMsgStartFindingMatch {
 	optional DOTABotDifficulty bot_difficulty = 5 [default = BOT_DIFFICULTY_HARD];
 	optional MatchType match_type = 6 [default = MATCH_TYPE_CASUAL];
 	optional uint32 matchlanguages = 7 [default = 4294967295];
-	optional uint32 map_preference = 9;
 	optional uint32 team_id = 8;
 	optional MatchLanguages game_language_enum = 10 [default = MATCH_LANGUAGE_INVALID];
 	optional string game_language_name = 11;
 	optional CMsgClientPingData ping_data = 12;
 	optional uint32 region_select_flags = 13;
 	optional bool solo_queue = 14;
+	optional uint32 bot_script_index = 15;
+	optional uint32 steam_clan_account_id = 16;
 }
 
 message CMsgStartFindingMatchResult {
@@ -126,13 +129,11 @@ message CMsgPracticeLobbySetDetails {
 	optional uint32 league_game_id = 36;
 	optional fixed32 custom_game_timestamp = 37;
 	optional uint64 previous_match_override = 38;
-	optional uint32 league_selection_priority_team = 39;
-	optional SelectionPriorityType league_selection_priority_choice = 40 [default = UNDEFINED];
-	optional SelectionPriorityType league_non_selection_priority_choice = 41 [default = UNDEFINED];
 	optional LobbyDotaPauseSetting pause_setting = 42 [default = LobbyDotaPauseSetting_Unlimited];
 	optional DOTABotDifficulty bot_difficulty_dire = 43 [default = BOT_DIFFICULTY_PASSIVE];
 	optional uint64 bot_radiant = 44;
 	optional uint64 bot_dire = 45;
+	optional DOTASelectionPriorityRules selection_priority_rules = 46 [default = k_DOTASelectionPriorityRules_Manual];
 }
 
 message CMsgPracticeLobbyCreate {
