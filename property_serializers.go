@@ -96,6 +96,8 @@ func (pst *propertySerializerTable) getPropertySerializerByName(name string) *pr
 		decoder = decodeUnsigned
 	case "char":
 		fallthrough
+	case "CUtlString":
+		fallthrough
 	case "CUtlSymbolLarge":
 		decoder = decodeString
 	case "Vector":
