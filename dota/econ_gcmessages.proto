@@ -58,7 +58,6 @@ enum EGCItemMsg {
 	k_EMsgGCPresets_SelectPresetForClassReply = 1067;
 	k_EMsgClientToGCNameItemResponse = 1068;
 	k_EMsgGCApplyConsumableEffects = 1069;
-	k_EMsgGCConsumableExhausted = 1070;
 	k_EMsgGCShowItemsPickedUp = 1071;
 	k_EMsgGCClientDisplayNotification = 1072;
 	k_EMsgGCApplyStrangePart = 1073;
@@ -185,6 +184,9 @@ enum EGCItemMsg {
 	k_EMsgGCToGCInternalTestMsg = 2592;
 	k_EMsgGCToGCClientServerVersionsUpdated = 2593;
 	k_EMsgGCUseMultipleItemsRequest = 2594;
+	k_EMsgGCCheckAccountSubscription = 2595;
+	k_EMsgGCCheckAccountSubscriptionResponse = 2596;
+	k_EMsgGCToGCAccountSubscriptionChange = 2597;
 }
 
 enum EItemPurgatoryResponse_Finalize {
@@ -230,6 +232,7 @@ enum EGCMsgInitiateTradeResponse {
 	k_EGCMsgInitiateTradeResponse_Using_New_Device = 21;
 	k_EGCMsgInitiateTradeResponse_Sent_Invalid_Cookie = 22;
 	k_EGCMsgInitiateTradeResponse_TooRecentFriend = 23;
+	k_EGCMsgInitiateTradeResponse_WalledFundsNotTrusted = 24;
 }
 
 message CMsgApplyAutograph {
@@ -510,6 +513,28 @@ message CMsgDevNewItemRequest {
 
 message CMsgDevNewItemRequestResponse {
 	optional bool success = 1;
+}
+
+message CMsgGCCheckAccountSubscription {
+	optional uint32 account_id = 1;
+	optional uint32 def_index = 2;
+}
+
+message CMsgGCCheckAccountSubscriptionResponse {
+	enum ESubscriptionState {
+		STATE_UNKNOWN = 0;
+		STATE_INACTIVE = 1;
+		STATE_ACTIVE = 2;
+	}
+
+	optional CMsgGCCheckAccountSubscriptionResponse.ESubscriptionState state = 1 [default = STATE_UNKNOWN];
+	optional uint32 cache_until = 2;
+}
+
+message CMsgGCToGCAccountSubscriptionChange {
+	optional uint32 account_id = 1;
+	optional uint32 item_definition_index = 2;
+	optional bool is_subscription_active = 3;
 }
 
 message CMsgGCAddGiftItem {
@@ -818,12 +843,6 @@ message CMsgClientToGCLookupAccountName {
 message CMsgClientToGCLookupAccountNameResponse {
 	optional uint32 account_id = 1;
 	optional string account_name = 2;
-}
-
-message CMsgGCToGCDevRevokeUserItems {
-	optional uint32 account_id = 1;
-	optional uint64 audit_data = 2;
-	optional bool delete_audit_history = 3;
 }
 
 message CMsgClientToGCCreateStaticRecipe {

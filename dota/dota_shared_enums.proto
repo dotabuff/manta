@@ -29,6 +29,7 @@ enum DOTA_GameMode {
 	DOTA_GAMEMODE_ARDM = 20;
 	DOTA_GAMEMODE_1V1MID = 21;
 	DOTA_GAMEMODE_ALL_DRAFT = 22;
+	DOTA_GAMEMODE_TURBO = 23;
 }
 
 enum DOTA_GameState {
@@ -75,7 +76,8 @@ enum EEvent {
 	EVENT_ID_WINTER_MAJOR_2017 = 16;
 	EVENT_ID_NEW_BLOOM_2017 = 17;
 	EVENT_ID_INTERNATIONAL_2017 = 18;
-	EVENT_ID_COUNT = 19;
+	EVENT_ID_BATTLE_PASS_REWORK = 19;
+	EVENT_ID_COUNT = 20;
 }
 
 enum DOTALeaverStatus_t {
@@ -207,12 +209,17 @@ enum DOTAJoinLobbyResult {
 	DOTA_JOIN_RESULT_TIMEOUT = 11;
 }
 
-enum SelectionPriorityType {
-	UNDEFINED = 0;
-	RADIANT = 1;
-	DIRE = 2;
-	FIRST_PICK = 3;
-	SECOND_PICK = 4;
+enum DOTASelectionPriorityRules {
+	k_DOTASelectionPriorityRules_Manual = 0;
+	k_DOTASelectionPriorityRules_Automatic = 1;
+}
+
+enum DOTASelectionPriorityChoice {
+	k_DOTASelectionPriorityChoice_Invalid = 0;
+	k_DOTASelectionPriorityChoice_FirstPick = 1;
+	k_DOTASelectionPriorityChoice_SecondPick = 2;
+	k_DOTASelectionPriorityChoice_Radiant = 3;
+	k_DOTASelectionPriorityChoice_Dire = 4;
 }
 
 enum DOTAMatchVote {
@@ -257,6 +264,8 @@ enum MatchType {
 	MATCH_TYPE_CASUAL_1V1 = 6;
 	MATCH_TYPE_EVENT = 7;
 	MATCH_TYPE_SEASONAL_RANKED = 8;
+	MATCH_TYPE_LOWPRI_DEPRECATED = 9;
+	MATCH_TYPE_LOWPRI_DEPRECATED2 = 10;
 }
 
 enum DOTABotDifficulty {
@@ -330,6 +339,12 @@ enum EMatchOutcome {
 	k_EMatchOutcome_NotScored_ServerCrash = 66;
 	k_EMatchOutcome_NotScored_NeverStarted = 67;
 	k_EMatchOutcome_NotScored_Canceled = 68;
+}
+
+enum EBadgeType {
+	k_EBadgeType_TI7_Midweek = 1;
+	k_EBadgeType_TI7_Finals = 2;
+	k_EBadgeType_TI7_AllEvent = 3;
 }
 
 message CDOTAClientHardwareSpecs {

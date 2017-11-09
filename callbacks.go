@@ -213,6 +213,7 @@ type Callbacks struct {
 	onCDOTAUserMsg_FlipCoinResult             []func(*dota.CDOTAUserMsg_FlipCoinResult) error
 	onCDOTAUserMsg_SendRoshanSpectatorPhase   []func(*dota.CDOTAUserMsg_SendRoshanSpectatorPhase) error
 	onCDOTAUserMsg_ChatWheelCooldown          []func(*dota.CDOTAUserMsg_ChatWheelCooldown) error
+	onCDOTAUserMsg_DismissAllStatPopups       []func(*dota.CDOTAUserMsg_DismissAllStatPopups) error
 
 	pb *proto.Buffer
 }
@@ -1251,6 +1252,11 @@ func (c *Callbacks) OnCDOTAUserMsg_SendRoshanSpectatorPhase(fn func(*dota.CDOTAU
 // OnCDOTAUserMsg_ChatWheelCooldown registers a callback for EDotaUserMessages_DOTA_UM_ChatWheelCooldown
 func (c *Callbacks) OnCDOTAUserMsg_ChatWheelCooldown(fn func(*dota.CDOTAUserMsg_ChatWheelCooldown) error) {
 	c.onCDOTAUserMsg_ChatWheelCooldown = append(c.onCDOTAUserMsg_ChatWheelCooldown, fn)
+}
+
+// OnCDOTAUserMsg_DismissAllStatPopups registers a callback for EDotaUserMessages_DOTA_UM_DismissAllStatPopups
+func (c *Callbacks) OnCDOTAUserMsg_DismissAllStatPopups(fn func(*dota.CDOTAUserMsg_DismissAllStatPopups) error) {
+	c.onCDOTAUserMsg_DismissAllStatPopups = append(c.onCDOTAUserMsg_DismissAllStatPopups, fn)
 }
 
 func (c *Callbacks) callByDemoType(t int32, buf []byte) error {
@@ -5173,6 +5179,25 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		for _, fn := range c.onCDOTAUserMsg_ChatWheelCooldown {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 570: // dota.EDotaUserMessages_DOTA_UM_DismissAllStatPopups
+		if c.onCDOTAUserMsg_DismissAllStatPopups == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_DismissAllStatPopups{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_DismissAllStatPopups {
 			if err := fn(msg); err != nil {
 				return err
 			}
