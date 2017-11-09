@@ -1,7 +1,7 @@
 language: go
 
 go:
-  - 1.8.3
+  - 1.9.2
 
 install:
   - curl -s -L https://github.com/Masterminds/glide/releases/download/v0.12.3/glide-v0.12.3-linux-amd64.tar.gz | tar zxv -C $GOPATH/bin --strip-components=1
