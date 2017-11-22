@@ -1275,6 +1275,7 @@ It has these top-level messages:
 	CMsgSteamDatagramCertificateSigned
 	CMsgSteamDatagramRouterPingReply
 	CMsgSteamDatagramGameserverPing
+	CMsgSteamDatagramRelayToRelayPing
 	CMsgSteamDatagramSessionCryptInfo
 	CMsgSteamDatagramSessionCryptInfoSigned
 	CMsgSteamDatagramGameserverSessionRequest
@@ -1298,6 +1299,13 @@ It has these top-level messages:
 	CMsgSteamDatagramConnectOK
 	CMsgSteamDatagramConnectionClosed
 	CMsgSteamDatagramNoConnection
+	CMsgSteamDatagramP2PSessionRequestBody
+	CMsgSteamDatagramP2PSessionRequest
+	CMsgSteamDatagramP2PSessionEstablished
+	CMsgSteamDatagramP2PRoutes
+	CMsgSteamDatagramP2PRendezvous
+	CMsgSteamDatagramConnectionStatsP2PClientToRouter
+	CMsgSteamDatagramConnectionStatsP2PRouterToClient
 	CMsgSteamSockets_UDP_ChallengeRequest
 	CMsgSteamSockets_UDP_ChallengeReply
 	CMsgSteamSockets_UDP_ConnectRequest
