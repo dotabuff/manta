@@ -45,6 +45,7 @@ type Parser struct {
 	serializers       map[string]*serializer
 	stream            *stream
 	stringTables      *stringTables
+	stopAtTick        uint32
 }
 
 // Create a new parser from a byte slice.
@@ -128,6 +129,10 @@ func (p *Parser) Start() (err error) {
 	// happens when either the OnCDemoStop message is encountered or
 	// parser.Stop() is called programatically.
 	for !p.isStopping {
+		if p.stopAtTick > 0 && p.Tick > p.stopAtTick {
+			return
+		}
+
 		msg, err = p.readOuterMessage()
 		if err != nil {
 			if err == io.EOF {
@@ -230,4 +235,9 @@ func (p *Parser) readOuterMessage() (*outerMessage, error) {
 		data:   buf,
 	}
 	return msg, nil
+}
+
+// parseToTick configures this Parser to stop once it has parsed the given tick.
+func (p *Parser) parseToTick(n uint32) {
+	p.stopAtTick = n
 }
