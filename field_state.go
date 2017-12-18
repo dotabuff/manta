@@ -40,7 +40,9 @@ func (s *fieldState) set(fp *fieldPath, v interface{}) {
 			x.state = z
 		}
 		if i == fp.last {
-			x.state[z] = v
+			if _, ok := x.state[z].(*fieldState); !ok {
+				x.state[z] = v
+			}
 			return
 		}
 		if _, ok := x.state[z].(*fieldState); !ok {
