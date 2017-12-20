@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"reflect"
 	"runtime"
 	"strconv"
 	"strings"
@@ -12,6 +13,10 @@ import (
 	"github.com/davecgh/go-spew/spew"
 	"github.com/golang/protobuf/proto"
 )
+
+func init() {
+	spew.Config.SortKeys = true
+}
 
 var debugLevel uint
 
@@ -116,25 +121,14 @@ func _caller(n int) string {
 	return "unknown"
 }
 
-// Compares string with prefix
-func hasPrefix(s, prefix string) bool {
-	return len(s) >= len(prefix) && s[:len(prefix)] == prefix
+func _nameof(i interface{}) string {
+	ss := strings.Split(strings.Replace(runtime.FuncForPC(reflect.ValueOf(i).Pointer()).Name(), ".", "/", -1), "/")
+	return ss[len(ss)-1]
 }
 
-// Prints value after checking for nil
-func saveReturnInt32(v *int32) int32 {
-	if v == nil {
-		return 0
-	} else {
-		return *v
+func _typeof(i interface{}) string {
+	if i == nil {
+		return "nil"
 	}
-}
-
-// Prints value after checking for nil
-func saveReturnFloat32(v *float32, def interface{}) interface{} {
-	if v == nil {
-		return def
-	} else {
-		return *v
-	}
+	return reflect.TypeOf(i).String()
 }

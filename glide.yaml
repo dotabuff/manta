@@ -4,11 +4,11 @@ import:
   subpackages:
   - spew
 - package: github.com/golang/protobuf
-  version: master
   subpackages:
   - proto
   - protoc-gen-go/descriptor
 - package: github.com/golang/snappy
+testImport:
 - package: github.com/stretchr/testify
   subpackages:
   - assert

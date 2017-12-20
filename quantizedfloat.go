@@ -15,8 +15,7 @@ const qff_encode_integers uint32 = (1 << 3)
 
 // Quantized-decoder struct containing the computed properties
 type quantizedFloatDecoder struct {
-	Field      *dtField // points to datatable field
-	Low        float32  // Gets recomputed for round up / down
+	Low        float32 // Gets recomputed for round up / down
 	High       float32
 	HighLowMul float32
 	DecMul     float32
@@ -29,10 +28,7 @@ type quantizedFloatDecoder struct {
 // Validates / recomputes decoder flags
 func (qfd *quantizedFloatDecoder) validateFlags() {
 	// Check that we have some flags set
-	if qfd.Field.Flags != nil {
-		qfd.Flags = uint32(*qfd.Field.Flags)
-	} else {
-		qfd.Flags = 0
+	if qfd.Flags == 0 {
 		return
 	}
 
@@ -113,13 +109,13 @@ func (qfd *quantizedFloatDecoder) assignMultipliers(steps uint32) {
 // Quantize a float
 func (qfd *quantizedFloatDecoder) quantize(val float32) float32 {
 	if val < qfd.Low {
-		if (uint32(*qfd.Field.Flags) & qff_roundup) == 0 {
+		if (qfd.Flags & qff_roundup) == 0 {
 			_panicf("Field tried to quantize an out of range value")
 		}
 
 		return qfd.Low
 	} else if val > qfd.High {
-		if (uint32(*qfd.Field.Flags) & qff_rounddown) == 0 {
+		if (qfd.Flags & qff_rounddown) == 0 {
 			_panicf("Field tried to quantize an out of range value")
 		}
 
@@ -148,31 +144,35 @@ func (qfd *quantizedFloatDecoder) decode(r *reader) float32 {
 }
 
 // Creates a new quantized float decoder based on given field
-func newQuantizedFloatDecoder(f *dtField) *quantizedFloatDecoder {
+func newQuantizedFloatDecoder(bitCount, flags *int32, lowValue, highValue *float32) *quantizedFloatDecoder {
 	qfd := &quantizedFloatDecoder{}
-	qfd.Field = f
 
 	// Set common properties
-	if *f.BitCount == 0 || *f.BitCount >= 32 {
+	if *bitCount == 0 || *bitCount >= 32 {
 		qfd.NoScale = true
 		qfd.Bitcount = 32
 		return qfd
 	} else {
 		qfd.NoScale = false
-		qfd.Bitcount = uint32(*f.BitCount)
+		qfd.Bitcount = uint32(*bitCount)
 		qfd.Offset = 0.0
 
-		if f.LowValue != nil {
-			qfd.Low = *f.LowValue
+		if lowValue != nil {
+			qfd.Low = *lowValue
 		} else {
 			qfd.Low = 0.0
 		}
 
-		if f.HighValue != nil {
-			qfd.High = *f.HighValue
+		if highValue != nil {
+			qfd.High = *highValue
 		} else {
 			qfd.High = 1.0
 		}
+	}
+	if flags != nil {
+		qfd.Flags = uint32(*flags)
+	} else {
+		qfd.Flags = 0
 	}
 
 	// Validate flags

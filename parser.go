@@ -24,29 +24,28 @@ type Parser struct {
 	// Contains the net tick associated with the last net message processed.
 	NetTick uint32
 
-	// Determines whether or not PacketEntity events are processed.
-	ProcessPacketEntities bool
-
 	// Stores the game build.
 	GameBuild uint32
 
-	ClassBaselines map[int32]*Properties
-	ClassInfo      map[int32]string
-	PacketEntities map[int32]*PacketEntity
-
-	classIdSize             uint32
-	gameEventHandlers       map[string][]GameEventHandler
-	gameEventNames          map[int32]string
-	gameEventTypes          map[string]*gameEventType
-	hasClassInfo            bool
-	packetEntityHandlers    []packetEntityHandler
-	packetEntityFullPackets int
-	serializers             map[string]map[int32]*dt
-	stringTables            *stringTables
-
-	stream            *stream
-	isStopping        bool
+	// AfterStopCallback is a function to be called when the parser stops.
 	AfterStopCallback func()
+
+	classBaselines    map[int32][]byte
+	classesById       map[int32]*class
+	classesByName     map[string]*class
+	classIdSize       uint32
+	classInfo         bool
+	entities          map[int32]*Entity
+	entityFullPackets int
+	entityHandlers    []EntityHandler
+	gameEventHandlers map[string][]GameEventHandler
+	gameEventNames    map[int32]string
+	gameEventTypes    map[string]*gameEventType
+	isStopping        bool
+	serializers       map[string]*serializer
+	stream            *stream
+	stringTables      *stringTables
+	stopAtTick        uint32
 }
 
 // Create a new parser from a byte slice.
@@ -62,21 +61,20 @@ func NewStreamParser(r io.Reader) (*Parser, error) {
 		Callbacks: newCallbacks(),
 		Tick:      0,
 		NetTick:   0,
+		GameBuild: 0,
 
-		ProcessPacketEntities: true,
-
-		ClassBaselines: make(map[int32]*Properties),
-		ClassInfo:      make(map[int32]string),
-		PacketEntities: make(map[int32]*PacketEntity),
-
-		gameEventHandlers:    make(map[string][]GameEventHandler),
-		gameEventNames:       make(map[int32]string),
-		gameEventTypes:       make(map[string]*gameEventType),
-		packetEntityHandlers: make([]packetEntityHandler, 0),
-		stringTables:         newStringTables(),
-
-		stream:     newStream(r),
-		isStopping: false,
+		classBaselines:    make(map[int32][]byte),
+		classesById:       make(map[int32]*class),
+		classesByName:     make(map[string]*class),
+		entities:          make(map[int32]*Entity),
+		entityHandlers:    make([]EntityHandler, 0),
+		gameEventHandlers: make(map[string][]GameEventHandler),
+		gameEventNames:    make(map[int32]string),
+		gameEventTypes:    make(map[string]*gameEventType),
+		isStopping:        false,
+		serializers:       make(map[string]*serializer),
+		stream:            newStream(r),
+		stringTables:      newStringTables(),
 	}
 
 	// Parse out the header, ensuring that it's valid.
@@ -96,14 +94,15 @@ func NewStreamParser(r io.Reader) (*Parser, error) {
 	parser.Callbacks.OnCDemoPacket(parser.onCDemoPacket)
 	parser.Callbacks.OnCDemoSignonPacket(parser.onCDemoPacket)
 	parser.Callbacks.OnCDemoFullPacket(parser.onCDemoFullPacket)
-	parser.Callbacks.OnCDemoClassInfo(parser.onCDemoClassInfo)
-	parser.Callbacks.OnCDemoSendTables(parser.onCDemoSendTables)
 	parser.Callbacks.OnCSVCMsg_CreateStringTable(parser.onCSVCMsg_CreateStringTable)
-	parser.Callbacks.OnCSVCMsg_PacketEntities(parser.onCSVCMsg_PacketEntities)
 	parser.Callbacks.OnCSVCMsg_UpdateStringTable(parser.onCSVCMsg_UpdateStringTable)
 	parser.Callbacks.OnCSVCMsg_ServerInfo(parser.onCSVCMsg_ServerInfo)
 	parser.Callbacks.OnCMsgSource1LegacyGameEventList(parser.onCMsgSource1LegacyGameEventList)
 	parser.Callbacks.OnCMsgSource1LegacyGameEvent(parser.onCMsgSource1LegacyGameEvent)
+
+	parser.Callbacks.OnCDemoClassInfo(parser.onCDemoClassInfo)
+	parser.Callbacks.OnCDemoSendTables(parser.onCDemoSendTables)
+	parser.Callbacks.OnCSVCMsg_PacketEntities(parser.onCSVCMsg_PacketEntities)
 
 	// Maintains the value of parser.Tick
 	parser.Callbacks.OnCNETMsg_Tick(func(m *dota.CNETMsg_Tick) error {
@@ -130,6 +129,10 @@ func (p *Parser) Start() (err error) {
 	// happens when either the OnCDemoStop message is encountered or
 	// parser.Stop() is called programatically.
 	for !p.isStopping {
+		if p.stopAtTick > 0 && p.Tick > p.stopAtTick {
+			return
+		}
+
 		msg, err = p.readOuterMessage()
 		if err != nil {
 			if err == io.EOF {
@@ -232,4 +235,9 @@ func (p *Parser) readOuterMessage() (*outerMessage, error) {
 		data:   buf,
 	}
 	return msg, nil
+}
+
+// parseToTick configures this Parser to stop once it has parsed the given tick.
+func (p *Parser) parseToTick(n uint32) {
+	p.stopAtTick = n
 }

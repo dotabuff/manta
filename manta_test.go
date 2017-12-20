@@ -15,6 +15,8 @@ func TestMatch6682694(t *testing.T) { testScenarios[6682694].test(t) }
 
 func TestMatch3534483793(t *testing.T) { testScenarios[3534483793].test(t) }
 
+func TestMatch3220517753(t *testing.T) { testScenarios[3220517753].test(t) }
+
 func TestMatch2369359192(t *testing.T) { testScenarios[2369359192].test(t) }
 
 func TestMatch2246960647(t *testing.T) { testScenarios[2246960647].test(t) }
@@ -80,6 +82,18 @@ var testScenarios = map[int64]testScenario{
 		expectGameBuild:       1083,
 		expectEntityEvents:    3586579,
 		expectUnitOrderEvents: 67817,
+	},
+
+	3220517753: {
+		matchId:                "3220517753",
+		replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/3220517753.dem",
+		expectGameBuild:        2163,
+		expectEntityEvents:     4624363,
+		expectCombatLogDamage:  0,
+		expectCombatLogHealing: 0,
+		expectCombatLogDeaths:  0,
+		expectCombatLogEvents:  0,
+		expectUnitOrderEvents:  108879,
 	},
 
 	2369359192: {
@@ -170,6 +184,7 @@ var testScenarios = map[int64]testScenario{
 		matchId:                "1788648401",
 		replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1788648401.dem",
 		expectGameBuild:        1036,
+		expectEntityEvents:     2357365,
 		expectCombatLogDamage:  0,
 		expectCombatLogHealing: 0,
 		expectCombatLogDeaths:  0,
@@ -442,7 +457,7 @@ func (s testScenario) bench(b *testing.B) {
 
 		parser.Callbacks.OnCDOTAUserMsg_SpectatorPlayerUnitOrders(func(m *dota.CDOTAUserMsg_SpectatorPlayerUnitOrders) error { return nil })
 		parser.Callbacks.OnCDemoFileInfo(func(m *dota.CDemoFileInfo) error { return nil })
-		parser.OnPacketEntity(func(pe *PacketEntity, pet EntityEventType) error { return nil })
+		parser.OnEntity(func(e *Entity, op EntityOp) error { return nil })
 		parser.OnGameEvent("dota_combatlog", func(m *GameEvent) error { return nil })
 
 		if err := parser.Start(); err != nil {
@@ -456,13 +471,15 @@ func (s testScenario) bench(b *testing.B) {
 func (s testScenario) test(t *testing.T) {
 	assert := assert.New(t)
 
-	if s.debugTick == 0 {
-		debugLevel = s.debugLevel
-	}
+	if s.debugLevel > 0 {
+		if s.debugTick == 0 {
+			debugLevel = s.debugLevel
+		}
 
-	defer func() {
-		debugLevel = 0
-	}()
+		defer func() {
+			debugLevel = 0
+		}()
+	}
 
 	if s.skipInCI && os.Getenv("CI") != "" {
 		t.Skip("skipping scenario in CI environment")
@@ -477,10 +494,6 @@ func (s testScenario) test(t *testing.T) {
 	if err != nil {
 		t.Errorf("unable to instantiate parser: %s", err)
 		return
-	}
-
-	if s.skipPacketEntities {
-		parser.ProcessPacketEntities = false
 	}
 
 	gotFileInfo := false
@@ -513,25 +526,25 @@ func (s testScenario) test(t *testing.T) {
 		return nil
 	})
 
-	parser.OnPacketEntity(func(pe *PacketEntity, pet EntityEventType) error {
+	parser.OnEntity(func(e *Entity, op EntityOp) error {
 		gotEntityEvents += 1
 
-		if pe.ClassName == s.expectHeroEntityName {
-			if v, ok := pe.FetchFloat32("m_flMaxMana"); ok {
+		if e.class.name == s.expectHeroEntityName {
+			if v, ok := e.Get("m_flMaxMana").(float32); ok {
 				gotHeroEntityMana = v
 			}
 		}
 
-		if pe.ClassName == "CDOTA_PlayerResource" {
-			if v, ok := pe.FetchString("m_vecPlayerData.0006.m_iszPlayerName"); ok {
+		if e.class.name == "CDOTA_PlayerResource" {
+			if v, ok := e.Get("m_vecPlayerData.0006.m_iszPlayerName").(string); ok {
 				gotPlayer6Name = v
-			} else if v, ok := pe.FetchString("m_iszPlayerNames.0006"); ok {
+			} else if v, ok := e.Get("m_iszPlayerNames.0006").(string); ok {
 				gotPlayer6Name = v
 			}
 
-			if v, ok := pe.FetchUint64("m_vecPlayerData.0006.m_iPlayerSteamID"); ok {
+			if v, ok := e.Get("m_vecPlayerData.0006.m_iPlayerSteamID").(uint64); ok {
 				gotPlayer6Steamid = v
-			} else if v, ok := pe.FetchUint64("m_iPlayerSteamIDs.0006"); ok {
+			} else if v, ok := e.Get("m_iPlayerSteamIDs.0006").(uint64); ok {
 				gotPlayer6Steamid = v
 			}
 		}

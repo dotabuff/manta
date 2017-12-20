@@ -15,6 +15,10 @@ cpuprofile:
 	go tool pprof -svg -output=/tmp/manta.cpuprof.svg manta.test /tmp/manta.cpuprof
 	open /tmp/manta.cpuprof.svg
 
+memprofile:
+	go test -v -run=TestMatch2159568145 -test.memprofile=/tmp/manta.memprof -test.memprofilerate=1
+	go tool pprof --alloc_space manta.test /tmp/manta.memprof
+
 update: update-game-tracking gen-dota-proto generate
 
 update-game-tracking:

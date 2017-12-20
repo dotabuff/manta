@@ -1,8 +1,8 @@
-hash: 93346229a0952b954015a60fd5d2fa786af3dd14c1465652ff5c67fbd5e760fc
-updated: 2017-11-09T17:20:26.198029166Z
+hash: c28516c36df6e8255ecd2f60c184a2c35a8ac2c818f9eea088c26f63fc78ec84
+updated: 2017-11-09T13:41:26.901012-06:00
 imports:
 - name: github.com/davecgh/go-spew
-  version: 5215b55f46b2b919f50a1df0eaa5886afe4e3b3d
+  version: ecdeabc65495df2dec95d7c4a4c3e021903035e5
   subpackages:
   - spew
 - name: github.com/golang/protobuf
@@ -11,9 +11,13 @@ imports:
   - proto
   - protoc-gen-go/descriptor
 - name: github.com/golang/snappy
-  version: d9eb7a3d35ec988b8585d4a0068e462c27d28380
+  version: 553a641470496b2327abcac10b36396bd98e45c9
+testImports:
+- name: github.com/pmezard/go-difflib
+  version: d8ed2627bdf02c080bf22230dbb337003b7aba2d
+  subpackages:
+  - difflib
 - name: github.com/stretchr/testify
-  version: d77da356e56a7428ad25149ca77381849a6a5232
+  version: 2aa2c176b9dab406a6970f6a55f513e8a8c8b18f
   subpackages:
   - assert
-devImports: []
