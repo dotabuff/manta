@@ -670,7 +670,7 @@ func (m *CMsgSteamDatagramSessionCryptInfo) GetNonce() uint64 {
 	if m != nil && m.Nonce != nil {
 		return *m.Nonce
 	}
-	return 0
+	return Default_CMsgSteamDatagramSessionCryptInfo_KeyType
 }
 
 func (m *CMsgSteamDatagramSessionCryptInfo) GetIsSnp() bool {
@@ -1015,6 +1015,7 @@ func (m *CMsgSteamDatagramDataCenterState_Server) GetPingMs() uint32 {
 type CMsgSteamDatagramDataCenterState_DataCenter struct {
 	Code             *string                                    `protobuf:"bytes,1,opt,name=code" json:"code,omitempty"`
 	ServerSample     []*CMsgSteamDatagramDataCenterState_Server `protobuf:"bytes,2,rep,name=server_sample,json=serverSample" json:"server_sample,omitempty"`
+	RelaySample      []*CMsgSteamDatagramDataCenterState_Server `protobuf:"bytes,3,rep,name=relay_sample,json=relaySample" json:"relay_sample,omitempty"`
 	XXX_unrecognized []byte                                     `json:"-"`
 }
 
@@ -1039,6 +1040,13 @@ func (m *CMsgSteamDatagramDataCenterState_DataCenter) GetCode() string {
 func (m *CMsgSteamDatagramDataCenterState_DataCenter) GetServerSample() []*CMsgSteamDatagramDataCenterState_Server {
 	if m != nil {
 		return m.ServerSample
+	}
+	return nil
+}
+
+func (m *CMsgSteamDatagramDataCenterState_DataCenter) GetRelaySample() []*CMsgSteamDatagramDataCenterState_Server {
+	if m != nil {
+		return m.RelaySample
 	}
 	return nil
 }
@@ -1163,6 +1171,34 @@ type CMsgSteamDatagramLinkLifetimeStats struct {
 	JitterHistogram_5         *uint32 `protobuf:"varint,64,opt,name=jitter_histogram_5,json=jitterHistogram5" json:"jitter_histogram_5,omitempty"`
 	JitterHistogram_10        *uint32 `protobuf:"varint,65,opt,name=jitter_histogram_10,json=jitterHistogram10" json:"jitter_histogram_10,omitempty"`
 	JitterHistogram_20        *uint32 `protobuf:"varint,66,opt,name=jitter_histogram_20,json=jitterHistogram20" json:"jitter_histogram_20,omitempty"`
+	TxspeedMax                *uint32 `protobuf:"varint,67,opt,name=txspeed_max,json=txspeedMax" json:"txspeed_max,omitempty"`
+	TxspeedHistogram_16       *uint32 `protobuf:"varint,68,opt,name=txspeed_histogram_16,json=txspeedHistogram16" json:"txspeed_histogram_16,omitempty"`
+	TxspeedHistogram_32       *uint32 `protobuf:"varint,69,opt,name=txspeed_histogram_32,json=txspeedHistogram32" json:"txspeed_histogram_32,omitempty"`
+	TxspeedHistogram_64       *uint32 `protobuf:"varint,70,opt,name=txspeed_histogram_64,json=txspeedHistogram64" json:"txspeed_histogram_64,omitempty"`
+	TxspeedHistogram_128      *uint32 `protobuf:"varint,71,opt,name=txspeed_histogram_128,json=txspeedHistogram128" json:"txspeed_histogram_128,omitempty"`
+	TxspeedHistogram_256      *uint32 `protobuf:"varint,72,opt,name=txspeed_histogram_256,json=txspeedHistogram256" json:"txspeed_histogram_256,omitempty"`
+	TxspeedHistogram_512      *uint32 `protobuf:"varint,73,opt,name=txspeed_histogram_512,json=txspeedHistogram512" json:"txspeed_histogram_512,omitempty"`
+	TxspeedHistogram_1024     *uint32 `protobuf:"varint,74,opt,name=txspeed_histogram_1024,json=txspeedHistogram1024" json:"txspeed_histogram_1024,omitempty"`
+	TxspeedHistogramMax       *uint32 `protobuf:"varint,75,opt,name=txspeed_histogram_max,json=txspeedHistogramMax" json:"txspeed_histogram_max,omitempty"`
+	TxspeedNtile_5Th          *uint32 `protobuf:"varint,76,opt,name=txspeed_ntile_5th,json=txspeedNtile5th" json:"txspeed_ntile_5th,omitempty"`
+	TxspeedNtile_50Th         *uint32 `protobuf:"varint,77,opt,name=txspeed_ntile_50th,json=txspeedNtile50th" json:"txspeed_ntile_50th,omitempty"`
+	TxspeedNtile_75Th         *uint32 `protobuf:"varint,78,opt,name=txspeed_ntile_75th,json=txspeedNtile75th" json:"txspeed_ntile_75th,omitempty"`
+	TxspeedNtile_95Th         *uint32 `protobuf:"varint,79,opt,name=txspeed_ntile_95th,json=txspeedNtile95th" json:"txspeed_ntile_95th,omitempty"`
+	TxspeedNtile_98Th         *uint32 `protobuf:"varint,80,opt,name=txspeed_ntile_98th,json=txspeedNtile98th" json:"txspeed_ntile_98th,omitempty"`
+	RxspeedMax                *uint32 `protobuf:"varint,81,opt,name=rxspeed_max,json=rxspeedMax" json:"rxspeed_max,omitempty"`
+	RxspeedHistogram_16       *uint32 `protobuf:"varint,82,opt,name=rxspeed_histogram_16,json=rxspeedHistogram16" json:"rxspeed_histogram_16,omitempty"`
+	RxspeedHistogram_32       *uint32 `protobuf:"varint,83,opt,name=rxspeed_histogram_32,json=rxspeedHistogram32" json:"rxspeed_histogram_32,omitempty"`
+	RxspeedHistogram_64       *uint32 `protobuf:"varint,84,opt,name=rxspeed_histogram_64,json=rxspeedHistogram64" json:"rxspeed_histogram_64,omitempty"`
+	RxspeedHistogram_128      *uint32 `protobuf:"varint,85,opt,name=rxspeed_histogram_128,json=rxspeedHistogram128" json:"rxspeed_histogram_128,omitempty"`
+	RxspeedHistogram_256      *uint32 `protobuf:"varint,86,opt,name=rxspeed_histogram_256,json=rxspeedHistogram256" json:"rxspeed_histogram_256,omitempty"`
+	RxspeedHistogram_512      *uint32 `protobuf:"varint,87,opt,name=rxspeed_histogram_512,json=rxspeedHistogram512" json:"rxspeed_histogram_512,omitempty"`
+	RxspeedHistogram_1024     *uint32 `protobuf:"varint,88,opt,name=rxspeed_histogram_1024,json=rxspeedHistogram1024" json:"rxspeed_histogram_1024,omitempty"`
+	RxspeedHistogramMax       *uint32 `protobuf:"varint,89,opt,name=rxspeed_histogram_max,json=rxspeedHistogramMax" json:"rxspeed_histogram_max,omitempty"`
+	RxspeedNtile_5Th          *uint32 `protobuf:"varint,90,opt,name=rxspeed_ntile_5th,json=rxspeedNtile5th" json:"rxspeed_ntile_5th,omitempty"`
+	RxspeedNtile_50Th         *uint32 `protobuf:"varint,91,opt,name=rxspeed_ntile_50th,json=rxspeedNtile50th" json:"rxspeed_ntile_50th,omitempty"`
+	RxspeedNtile_75Th         *uint32 `protobuf:"varint,92,opt,name=rxspeed_ntile_75th,json=rxspeedNtile75th" json:"rxspeed_ntile_75th,omitempty"`
+	RxspeedNtile_95Th         *uint32 `protobuf:"varint,93,opt,name=rxspeed_ntile_95th,json=rxspeedNtile95th" json:"rxspeed_ntile_95th,omitempty"`
+	RxspeedNtile_98Th         *uint32 `protobuf:"varint,94,opt,name=rxspeed_ntile_98th,json=rxspeedNtile98th" json:"rxspeed_ntile_98th,omitempty"`
 	XXX_unrecognized          []byte  `json:"-"`
 }
 
@@ -1463,6 +1499,202 @@ func (m *CMsgSteamDatagramLinkLifetimeStats) GetJitterHistogram_10() uint32 {
 func (m *CMsgSteamDatagramLinkLifetimeStats) GetJitterHistogram_20() uint32 {
 	if m != nil && m.JitterHistogram_20 != nil {
 		return *m.JitterHistogram_20
+	}
+	return 0
+}
+
+func (m *CMsgSteamDatagramLinkLifetimeStats) GetTxspeedMax() uint32 {
+	if m != nil && m.TxspeedMax != nil {
+		return *m.TxspeedMax
+	}
+	return 0
+}
+
+func (m *CMsgSteamDatagramLinkLifetimeStats) GetTxspeedHistogram_16() uint32 {
+	if m != nil && m.TxspeedHistogram_16 != nil {
+		return *m.TxspeedHistogram_16
+	}
+	return 0
+}
+
+func (m *CMsgSteamDatagramLinkLifetimeStats) GetTxspeedHistogram_32() uint32 {
+	if m != nil && m.TxspeedHistogram_32 != nil {
+		return *m.TxspeedHistogram_32
+	}
+	return 0
+}
+
+func (m *CMsgSteamDatagramLinkLifetimeStats) GetTxspeedHistogram_64() uint32 {
+	if m != nil && m.TxspeedHistogram_64 != nil {
+		return *m.TxspeedHistogram_64
+	}
+	return 0
+}
+
+func (m *CMsgSteamDatagramLinkLifetimeStats) GetTxspeedHistogram_128() uint32 {
+	if m != nil && m.TxspeedHistogram_128 != nil {
+		return *m.TxspeedHistogram_128
+	}
+	return 0
+}
+
+func (m *CMsgSteamDatagramLinkLifetimeStats) GetTxspeedHistogram_256() uint32 {
+	if m != nil && m.TxspeedHistogram_256 != nil {
+		return *m.TxspeedHistogram_256
+	}
+	return 0
+}
+
+func (m *CMsgSteamDatagramLinkLifetimeStats) GetTxspeedHistogram_512() uint32 {
+	if m != nil && m.TxspeedHistogram_512 != nil {
+		return *m.TxspeedHistogram_512
+	}
+	return 0
+}
+
+func (m *CMsgSteamDatagramLinkLifetimeStats) GetTxspeedHistogram_1024() uint32 {
+	if m != nil && m.TxspeedHistogram_1024 != nil {
+		return *m.TxspeedHistogram_1024
+	}
+	return 0
+}
+
+func (m *CMsgSteamDatagramLinkLifetimeStats) GetTxspeedHistogramMax() uint32 {
+	if m != nil && m.TxspeedHistogramMax != nil {
+		return *m.TxspeedHistogramMax
+	}
+	return 0
+}
+
+func (m *CMsgSteamDatagramLinkLifetimeStats) GetTxspeedNtile_5Th() uint32 {
+	if m != nil && m.TxspeedNtile_5Th != nil {
+		return *m.TxspeedNtile_5Th
+	}
+	return 0
+}
+
+func (m *CMsgSteamDatagramLinkLifetimeStats) GetTxspeedNtile_50Th() uint32 {
+	if m != nil && m.TxspeedNtile_50Th != nil {
+		return *m.TxspeedNtile_50Th
+	}
+	return 0
+}
+
+func (m *CMsgSteamDatagramLinkLifetimeStats) GetTxspeedNtile_75Th() uint32 {
+	if m != nil && m.TxspeedNtile_75Th != nil {
+		return *m.TxspeedNtile_75Th
+	}
+	return 0
+}
+
+func (m *CMsgSteamDatagramLinkLifetimeStats) GetTxspeedNtile_95Th() uint32 {
+	if m != nil && m.TxspeedNtile_95Th != nil {
+		return *m.TxspeedNtile_95Th
+	}
+	return 0
+}
+
+func (m *CMsgSteamDatagramLinkLifetimeStats) GetTxspeedNtile_98Th() uint32 {
+	if m != nil && m.TxspeedNtile_98Th != nil {
+		return *m.TxspeedNtile_98Th
+	}
+	return 0
+}
+
+func (m *CMsgSteamDatagramLinkLifetimeStats) GetRxspeedMax() uint32 {
+	if m != nil && m.RxspeedMax != nil {
+		return *m.RxspeedMax
+	}
+	return 0
+}
+
+func (m *CMsgSteamDatagramLinkLifetimeStats) GetRxspeedHistogram_16() uint32 {
+	if m != nil && m.RxspeedHistogram_16 != nil {
+		return *m.RxspeedHistogram_16
+	}
+	return 0
+}
+
+func (m *CMsgSteamDatagramLinkLifetimeStats) GetRxspeedHistogram_32() uint32 {
+	if m != nil && m.RxspeedHistogram_32 != nil {
+		return *m.RxspeedHistogram_32
+	}
+	return 0
+}
+
+func (m *CMsgSteamDatagramLinkLifetimeStats) GetRxspeedHistogram_64() uint32 {
+	if m != nil && m.RxspeedHistogram_64 != nil {
+		return *m.RxspeedHistogram_64
+	}
+	return 0
+}
+
+func (m *CMsgSteamDatagramLinkLifetimeStats) GetRxspeedHistogram_128() uint32 {
+	if m != nil && m.RxspeedHistogram_128 != nil {
+		return *m.RxspeedHistogram_128
+	}
+	return 0
+}
+
+func (m *CMsgSteamDatagramLinkLifetimeStats) GetRxspeedHistogram_256() uint32 {
+	if m != nil && m.RxspeedHistogram_256 != nil {
+		return *m.RxspeedHistogram_256
+	}
+	return 0
+}
+
+func (m *CMsgSteamDatagramLinkLifetimeStats) GetRxspeedHistogram_512() uint32 {
+	if m != nil && m.RxspeedHistogram_512 != nil {
+		return *m.RxspeedHistogram_512
+	}
+	return 0
+}
+
+func (m *CMsgSteamDatagramLinkLifetimeStats) GetRxspeedHistogram_1024() uint32 {
+	if m != nil && m.RxspeedHistogram_1024 != nil {
+		return *m.RxspeedHistogram_1024
+	}
+	return 0
+}
+
+func (m *CMsgSteamDatagramLinkLifetimeStats) GetRxspeedHistogramMax() uint32 {
+	if m != nil && m.RxspeedHistogramMax != nil {
+		return *m.RxspeedHistogramMax
+	}
+	return 0
+}
+
+func (m *CMsgSteamDatagramLinkLifetimeStats) GetRxspeedNtile_5Th() uint32 {
+	if m != nil && m.RxspeedNtile_5Th != nil {
+		return *m.RxspeedNtile_5Th
+	}
+	return 0
+}
+
+func (m *CMsgSteamDatagramLinkLifetimeStats) GetRxspeedNtile_50Th() uint32 {
+	if m != nil && m.RxspeedNtile_50Th != nil {
+		return *m.RxspeedNtile_50Th
+	}
+	return 0
+}
+
+func (m *CMsgSteamDatagramLinkLifetimeStats) GetRxspeedNtile_75Th() uint32 {
+	if m != nil && m.RxspeedNtile_75Th != nil {
+		return *m.RxspeedNtile_75Th
+	}
+	return 0
+}
+
+func (m *CMsgSteamDatagramLinkLifetimeStats) GetRxspeedNtile_95Th() uint32 {
+	if m != nil && m.RxspeedNtile_95Th != nil {
+		return *m.RxspeedNtile_95Th
+	}
+	return 0
+}
+
+func (m *CMsgSteamDatagramLinkLifetimeStats) GetRxspeedNtile_98Th() uint32 {
+	if m != nil && m.RxspeedNtile_98Th != nil {
+		return *m.RxspeedNtile_98Th
 	}
 	return 0
 }
@@ -2725,6 +2957,128 @@ func (m *CMsgSteamSockets_UDP_ConnectRequest) String() string { return proto.Com
 func (*CMsgSteamSockets_UDP_ConnectRequest) ProtoMessage()    {}
 func (*CMsgSteamSockets_UDP_ConnectRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor37, []int{27}
+}
+
+func (m *CMsgSteamSockets_UDP_ConnectRequest) GetClientConnectionId() uint32 {
+	if m != nil && m.ClientConnectionId != nil {
+		return *m.ClientConnectionId
+	}
+	return 0
+}
+
+func (m *CMsgSteamSockets_UDP_ConnectRequest) GetChallenge() uint64 {
+	if m != nil && m.Challenge != nil {
+		return *m.Challenge
+	}
+	return 0
+}
+
+func (m *CMsgSteamSockets_UDP_ConnectRequest) GetClientSteamId() uint64 {
+	if m != nil && m.ClientSteamId != nil {
+		return *m.ClientSteamId
+	}
+	return 0
+}
+
+func (m *CMsgSteamSockets_UDP_ConnectRequest) GetMyTimestamp() uint64 {
+	if m != nil && m.MyTimestamp != nil {
+		return *m.MyTimestamp
+	}
+	return 0
+}
+
+func (m *CMsgSteamSockets_UDP_ConnectRequest) GetPingEstMs() uint32 {
+	if m != nil && m.PingEstMs != nil {
+		return *m.PingEstMs
+	}
+	return 0
+}
+
+func (m *CMsgSteamSockets_UDP_ConnectRequest) GetCrypt() *CMsgSteamDatagramSessionCryptInfoSigned {
+	if m != nil {
+		return m.Crypt
+	}
+	return nil
+}
+
+func (m *CMsgSteamSockets_UDP_ConnectRequest) GetCert() *CMsgSteamDatagramCertificateSigned {
+	if m != nil {
+		return m.Cert
+	}
+	return nil
+}
+
+func (m *CMsgSteamSockets_UDP_ConnectRequest) GetProtocolVersion() uint32 {
+	if m != nil && m.ProtocolVersion != nil {
+		return *m.ProtocolVersion
+	}
+	return 0
+}
+
+type CMsgSteamSockets_UDP_ConnectOK struct {
+	ClientConnectionId *uint32                                  `protobuf:"fixed32,1,opt,name=client_connection_id,json=clientConnectionId" json:"client_connection_id,omitempty"`
+	ServerConnectionId *uint32                                  `protobuf:"fixed32,5,opt,name=server_connection_id,json=serverConnectionId" json:"server_connection_id,omitempty"`
+	ServerSteamId      *uint64                                  `protobuf:"fixed64,2,opt,name=server_steam_id,json=serverSteamId" json:"server_steam_id,omitempty"`
+	YourTimestamp      *uint64                                  `protobuf:"fixed64,3,opt,name=your_timestamp,json=yourTimestamp" json:"your_timestamp,omitempty"`
+	DelayTimeUsec      *uint32                                  `protobuf:"varint,4,opt,name=delay_time_usec,json=delayTimeUsec" json:"delay_time_usec,omitempty"`
+	Crypt              *CMsgSteamDatagramSessionCryptInfoSigned `protobuf:"bytes,7,opt,name=crypt" json:"crypt,omitempty"`
+	Cert               *CMsgSteamDatagramCertificateSigned      `protobuf:"bytes,8,opt,name=cert" json:"cert,omitempty"`
+	ProtocolVersion    *uint32                                  `protobuf:"varint,9,opt,name=protocol_version,json=protocolVersion" json:"protocol_version,omitempty"`
+	XXX_unrecognized   []byte                                   `json:"-"`
+}
+
+func (m *CMsgSteamSockets_UDP_ChallengeReply) Reset()         { *m = CMsgSteamSockets_UDP_ChallengeReply{} }
+func (m *CMsgSteamSockets_UDP_ChallengeReply) String() string { return proto.CompactTextString(m) }
+func (*CMsgSteamSockets_UDP_ChallengeReply) ProtoMessage()    {}
+func (*CMsgSteamSockets_UDP_ChallengeReply) Descriptor() ([]byte, []int) {
+	return fileDescriptor37, []int{34}
+}
+
+func (m *CMsgSteamSockets_UDP_ChallengeReply) GetConnectionId() uint32 {
+	if m != nil && m.ConnectionId != nil {
+		return *m.ConnectionId
+	}
+	return 0
+}
+
+func (m *CMsgSteamSockets_UDP_ChallengeReply) GetChallenge() uint64 {
+	if m != nil && m.Challenge != nil {
+		return *m.Challenge
+	}
+	return 0
+}
+
+func (m *CMsgSteamSockets_UDP_ChallengeReply) GetYourTimestamp() uint64 {
+	if m != nil && m.YourTimestamp != nil {
+		return *m.YourTimestamp
+	}
+	return 0
+}
+
+func (m *CMsgSteamSockets_UDP_ChallengeReply) GetProtocolVersion() uint32 {
+	if m != nil && m.ProtocolVersion != nil {
+		return *m.ProtocolVersion
+	}
+	return 0
+}
+
+type CMsgSteamSockets_UDP_ConnectRequest struct {
+	ClientConnectionId *uint32                                  `protobuf:"fixed32,1,opt,name=client_connection_id,json=clientConnectionId" json:"client_connection_id,omitempty"`
+	Challenge          *uint64                                  `protobuf:"fixed64,2,opt,name=challenge" json:"challenge,omitempty"`
+	ClientSteamId      *uint64                                  `protobuf:"fixed64,3,opt,name=client_steam_id,json=clientSteamId" json:"client_steam_id,omitempty"`
+	MyTimestamp        *uint64                                  `protobuf:"fixed64,5,opt,name=my_timestamp,json=myTimestamp" json:"my_timestamp,omitempty"`
+	PingEstMs          *uint32                                  `protobuf:"varint,6,opt,name=ping_est_ms,json=pingEstMs" json:"ping_est_ms,omitempty"`
+	Crypt              *CMsgSteamDatagramSessionCryptInfoSigned `protobuf:"bytes,7,opt,name=crypt" json:"crypt,omitempty"`
+	Cert               *CMsgSteamDatagramCertificateSigned      `protobuf:"bytes,4,opt,name=cert" json:"cert,omitempty"`
+	ProtocolVersion    *uint32                                  `protobuf:"varint,8,opt,name=protocol_version,json=protocolVersion" json:"protocol_version,omitempty"`
+	XXX_unrecognized   []byte                                   `json:"-"`
+}
+
+func (m *CMsgSteamSockets_UDP_ConnectRequest) Reset()         { *m = CMsgSteamSockets_UDP_ConnectRequest{} }
+func (m *CMsgSteamSockets_UDP_ConnectRequest) String() string { return proto.CompactTextString(m) }
+func (*CMsgSteamSockets_UDP_ConnectRequest) ProtoMessage()    {}
+func (*CMsgSteamSockets_UDP_ConnectRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor37, []int{35}
 }
 
 func (m *CMsgSteamSockets_UDP_ConnectRequest) GetClientConnectionId() uint32 {

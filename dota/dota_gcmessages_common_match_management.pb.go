@@ -1175,6 +1175,20 @@ func (m *CDOTALobbyMember) GetRankTier() int32 {
 	return 0
 }
 
+func (m *CDOTALobbyMember) GetIsPrimeSubscriber() bool {
+	if m != nil && m.IsPrimeSubscriber != nil {
+		return *m.IsPrimeSubscriber
+	}
+	return false
+}
+
+func (m *CDOTALobbyMember) GetRankTierUpdated() bool {
+	if m != nil && m.RankTierUpdated != nil {
+		return *m.RankTierUpdated
+	}
+	return false
+}
+
 type CDOTALobbyMember_CDOTALobbyMemberXPBonus struct {
 	Type             *uint32  `protobuf:"varint,1,opt,name=type" json:"type,omitempty"`
 	XpBonus          *float32 `protobuf:"fixed32,2,opt,name=xp_bonus,json=xpBonus" json:"xp_bonus,omitempty"`

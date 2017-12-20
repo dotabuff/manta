@@ -504,6 +504,7 @@ const (
 	CMsgDOTAPopup_PARTY_STARTED_FINDING_EVENT_MATCH                     CMsgDOTAPopup_PopupID = 74
 	CMsgDOTAPopup_GENERIC_INFO                                          CMsgDOTAPopup_PopupID = 69
 	CMsgDOTAPopup_GENERIC_ERROR                                         CMsgDOTAPopup_PopupID = 70
+	CMsgDOTAPopup_RANK_TIER_UPDATED                                     CMsgDOTAPopup_PopupID = 75
 )
 
 var CMsgDOTAPopup_PopupID_name = map[int32]string{
@@ -566,6 +567,7 @@ var CMsgDOTAPopup_PopupID_name = map[int32]string{
 	74: "PARTY_STARTED_FINDING_EVENT_MATCH",
 	69: "GENERIC_INFO",
 	70: "GENERIC_ERROR",
+	75: "RANK_TIER_UPDATED",
 }
 var CMsgDOTAPopup_PopupID_value = map[string]int32{
 	"NONE":                                                  -1,
@@ -627,6 +629,7 @@ var CMsgDOTAPopup_PopupID_value = map[string]int32{
 	"PARTY_STARTED_FINDING_EVENT_MATCH":                     74,
 	"GENERIC_INFO":                                          69,
 	"GENERIC_ERROR":                                         70,
+	"RANK_TIER_UPDATED":                                     75,
 }
 
 func (x CMsgDOTAPopup_PopupID) Enum() *CMsgDOTAPopup_PopupID {
