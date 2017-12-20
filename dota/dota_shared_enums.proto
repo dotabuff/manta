@@ -77,7 +77,9 @@ enum EEvent {
 	EVENT_ID_NEW_BLOOM_2017 = 17;
 	EVENT_ID_INTERNATIONAL_2017 = 18;
 	EVENT_ID_BATTLE_PASS_REWORK = 19;
-	EVENT_ID_COUNT = 20;
+	EVENT_ID_SINGLES_DAY_2017 = 20;
+	EVENT_ID_FROSTIVUS_2017 = 21;
+	EVENT_ID_COUNT = 22;
 }
 
 enum DOTALeaverStatus_t {
@@ -339,6 +341,15 @@ enum EMatchOutcome {
 	k_EMatchOutcome_NotScored_ServerCrash = 66;
 	k_EMatchOutcome_NotScored_NeverStarted = 67;
 	k_EMatchOutcome_NotScored_Canceled = 68;
+}
+
+enum ELaneType {
+	LANE_TYPE_UNKNOWN = 0;
+	LANE_TYPE_SAFE = 1;
+	LANE_TYPE_OFF = 2;
+	LANE_TYPE_MID = 3;
+	LANE_TYPE_JUNGLE = 4;
+	LANE_TYPE_ROAM = 5;
 }
 
 enum EBadgeType {

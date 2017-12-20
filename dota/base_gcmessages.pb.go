@@ -319,6 +319,8 @@ It has these top-level messages:
 	CMsgRequestLeaguePrizePoolResponse
 	CMsgGCGetHeroStandings
 	CMsgGCGetHeroStandingsResponse
+	CMsgGCGetHeroTimedStats
+	CMsgGCGetHeroTimedStatsResponse
 	CMsgGCItemEditorReservationsRequest
 	CMsgGCItemEditorReservation
 	CMsgGCItemEditorReservationsResponse
@@ -473,6 +475,7 @@ It has these top-level messages:
 	CMsgGCToClientBattlePassRollup_International2016
 	CMsgGCToClientBattlePassRollup_Fall2016
 	CMsgGCToClientBattlePassRollup_Winter2017
+	CMsgGCToClientBattlePassRollup_TI7
 	CMsgGCToClientBattlePassRollupRequest
 	CMsgGCToClientBattlePassRollupResponse
 	CMsgGCToClientBattlePassRollupListRequest
@@ -771,6 +774,7 @@ It has these top-level messages:
 	CProtoItemHeroStatue
 	CProtoItemTeamShowcase
 	CMatchPlayerAbilityUpgrade
+	CMatchPlayerTimedStats
 	CMatchAdditionalUnitInventory
 	CMatchPlayerPermanentBuff
 	CMatchHeroSelectEvent
@@ -1275,6 +1279,7 @@ It has these top-level messages:
 	CMsgSteamDatagramCertificateSigned
 	CMsgSteamDatagramRouterPingReply
 	CMsgSteamDatagramGameserverPing
+	CMsgSteamDatagramRelayToRelayPing
 	CMsgSteamDatagramSessionCryptInfo
 	CMsgSteamDatagramSessionCryptInfoSigned
 	CMsgSteamDatagramGameserverSessionRequest
@@ -1298,6 +1303,13 @@ It has these top-level messages:
 	CMsgSteamDatagramConnectOK
 	CMsgSteamDatagramConnectionClosed
 	CMsgSteamDatagramNoConnection
+	CMsgSteamDatagramP2PSessionRequestBody
+	CMsgSteamDatagramP2PSessionRequest
+	CMsgSteamDatagramP2PSessionEstablished
+	CMsgSteamDatagramP2PRoutes
+	CMsgSteamDatagramP2PRendezvous
+	CMsgSteamDatagramConnectionStatsP2PClientToRouter
+	CMsgSteamDatagramConnectionStatsP2PRouterToClient
 	CMsgSteamSockets_UDP_ChallengeRequest
 	CMsgSteamSockets_UDP_ChallengeReply
 	CMsgSteamSockets_UDP_ConnectRequest
