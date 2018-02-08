@@ -227,6 +227,8 @@ It has these top-level messages:
 	CDOTAClientMsg_RequestItemSuggestions
 	CDOTAClientMsg_MakeTeamCaptain
 	CDOTAClientMsg_HelpTipSystemStateChanged
+	CDOTAClientMsg_RequestBulkCombatLog
+	CDOTAClientMsg_AbilityDraftRequestAbility
 	CDOTAMsg_LocationPing
 	CDOTAMsg_ItemAlert
 	CDOTAMsg_MapLine
@@ -501,6 +503,7 @@ It has these top-level messages:
 	CMsgDOTAUnanchorPhoneNumberRequest
 	CMsgDOTAUnanchorPhoneNumberResponse
 	CMsgGCToClientTipNotification
+	CMsgGCToClientCommendNotification
 	CMsgGCToClientAllStarVotesRequest
 	CMsgGCToClientAllStarVotesReply
 	CMsgGCToClientAllStarVotesSubmit
@@ -513,10 +516,18 @@ It has these top-level messages:
 	CMsgDOTAGameAutographRewardResponse
 	CMsgDOTADestroyLobbyRequest
 	CMsgDOTADestroyLobbyResponse
+	CMsgDOTAGetRecentPlayTimeFriendsRequest
+	CMsgDOTAGetRecentPlayTimeFriendsResponse
 	CMsgPurchaseItemWithEventPoints
 	CMsgPurchaseItemWithEventPointsResponse
 	CMsgGCRequestItemRecommendations
 	CMsgGCRequestItemRecommendationsResponse
+	CMsgGCRequestSkillUpRecommendations
+	CMsgGCRequestSkillUpRecommendationsResponse
+	CMsgProfileRequest
+	CMsgProfileResponse
+	CMsgProfileUpdate
+	CMsgProfileUpdateResponse
 	CMsgClientToGCPrivateChatInvite
 	CMsgClientToGCPrivateChatKick
 	CMsgClientToGCPrivateChatPromote
@@ -813,6 +824,8 @@ It has these top-level messages:
 	CMsgDOTAFantasyPlayerMatchStats
 	CMsgDOTABotDebugInfo
 	CMsgDOTALeagueTournament
+	CMsgSuccessfulHero
+	CMsgRecentMatchInfo
 	CMsgBotWorldState
 	CSODOTAPartyMember
 	CSODOTAParty
@@ -825,6 +838,10 @@ It has these top-level messages:
 	CLobbyBroadcastChannelInfo
 	CSODOTALobby
 	CMsgLobbyPlaytestDetails
+	CMsgReadyCheckStatus
+	CMsgPartyReadyCheckRequest
+	CMsgPartyReadyCheckResponse
+	CMsgPartyReadyCheckAcknowledge
 	CMsgPoorNetworkConditions
 	CMsgGameserverCrash
 	CMsgConnectedPlayers
@@ -914,6 +931,7 @@ It has these top-level messages:
 	CMsgServerToGCCompendiumInGamePredictionResultsResponse
 	CMsgGCToGCCompendiumInGamePredictionResults
 	CMsgServerToGCMatchPlayerItemPurchaseHistory
+	CMsgServerToGCMatchStateHistory
 	CDOTAMatchMetadataFile
 	CDOTAMatchMetadata
 	CDOTAMatchPrivateMetadata
@@ -987,6 +1005,7 @@ It has these top-level messages:
 	CDOTAUserMsg_ClientLoadGridNav
 	CDOTAUserMsg_TE_Projectile
 	CDOTAUserMsg_TE_ProjectileLoc
+	CDOTAUserMsg_TE_DestroyProjectile
 	CDOTAUserMsg_TE_DotaBloodImpact
 	CDOTAUserMsg_AbilityPing
 	CDOTAUserMsg_TE_UnitAnimation
@@ -1032,6 +1051,7 @@ It has these top-level messages:
 	CDOTAUserMessage_RequestItemSuggestions
 	CDOTAUserMessage_TeamCaptainChanged
 	CDOTAUserMsg_ChatWheelCooldown
+	CDOTAUserMsg_AbilityDraftRequestAbility
 	CMsgApplyAutograph
 	CMsgAdjustItemEquippedState
 	CMsgEconPlayerStrangeCountAdjustment
@@ -1277,6 +1297,7 @@ It has these top-level messages:
 	CMsgSteamDatagramSignedRelayAuthTicket
 	CMsgSteamDatagramCertificate
 	CMsgSteamDatagramCertificateSigned
+	CMsgSteamDatagramCachedCredentialsForApp
 	CMsgSteamDatagramRouterPingReply
 	CMsgSteamDatagramGameserverPing
 	CMsgSteamDatagramRelayToRelayPing

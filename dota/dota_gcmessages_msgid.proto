@@ -497,8 +497,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCToGCCheckOwnsEntireEmoticonRangeResponse = 7612;
 	k_EMsgGCUpdateClippy = 7613;
 	k_EMsgGCUpdateClientClippy = 7614;
-	k_EMsgGCRequestItemRecommendations = 7615;
-	k_EMsgGCRequestItemRecommendationsResponse = 7616;
 	k_EMsgGCDev_GrantWarKill = 8001;
 	k_EMsgServerToGCLockCharmTrading = 8004;
 	k_EMsgClientToGCPlayerStatsRequest = 8006;
@@ -727,5 +725,17 @@ enum EDOTAGCMsg {
 	k_EMsgServerToGCMatchPlayerItemPurchaseHistory = 8250;
 	k_EMsgGCGetHeroTimedStats = 8252;
 	k_EMsgGCGetHeroTimedStatsResponse = 8253;
+	k_EMsgServerToGCMatchStateHistory = 8255;
+	k_EMsgGetRecentPlayTimeFriendsRequest = 8265;
+	k_EMsgGetRecentPlayTimeFriendsResponse = 8266;
+	k_EMsgPartyReadyCheckRequest = 8262;
+	k_EMsgPartyReadyCheckResponse = 8263;
+	k_EMsgPartyReadyCheckAcknowledge = 8264;
+	k_EMsgGCToClientCommendNotification = 8267;
+	k_EMsgProfileRequest = 8268;
+	k_EMsgProfileResponse = 8269;
+	k_EMsgProfileUpdate = 8270;
+	k_EMsgProfileUpdateResponse = 8271;
+	k_EMsgSuccessfulHero = 8273;
 }
 

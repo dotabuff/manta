@@ -115,6 +115,8 @@ enum EDotaUserMessages {
 	DOTA_UM_SendRoshanSpectatorPhase = 568;
 	DOTA_UM_ChatWheelCooldown = 569;
 	DOTA_UM_DismissAllStatPopups = 570;
+	DOTA_UM_TE_DestroyProjectile = 571;
+	DOTA_UM_AbilityDraftRequestAbility = 573;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -227,6 +229,7 @@ enum DOTA_CHAT_INFORMATIONAL {
 	INFO_FROSTIVUS_ABANDON_REMINDER = 2;
 	INFO_RANKED_REMINDER = 3;
 	INFO_COOP_LOW_PRIORITY_PASSIVE_REMINDER = 4;
+	INFO_CUSTOM_GAME_PENALTY_REMINDER = 5;
 }
 
 enum DOTA_ABILITY_PING_TYPE {
@@ -236,6 +239,9 @@ enum DOTA_ABILITY_PING_TYPE {
 	ABILITY_PING_ENEMY = 4;
 	ABILITY_PING_UNLEARNED = 5;
 	ABILITY_PING_INBACKPACK = 6;
+	ABILITY_PING_INSTASH = 7;
+	ABILITY_PING_ONCOURIER = 8;
+	ABILITY_PING_ALLY = 9;
 }
 
 enum DOTA_REPLAY_STATE_EVENT {
@@ -430,7 +436,7 @@ message CDOTAUserMsg_CombatHeroPositions {
 message CDOTAUserMsg_MiniKillCamInfo {
 	message Attacker {
 		message Ability {
-			optional uint32 ability = 1;
+			optional uint32 ability_id = 1;
 			optional int32 damage = 2;
 		}
 
@@ -466,8 +472,12 @@ message CDOTAUserMsg_ItemAlert {
 message CDOTAUserMsg_EnemyItemAlert {
 	optional uint32 player_id = 1;
 	optional uint32 target_player_id = 2;
-	optional int32 itemid = 3;
+	optional int32 item_ability_id = 3;
 	optional uint32 rune_type = 4;
+	optional int32 entity_id = 5;
+	optional int32 item_level = 6 [default = -1];
+	optional int32 primary_charges = 7 [default = -1];
+	optional int32 secondary_charges = 8 [default = -1];
 }
 
 message CDOTAUserMsg_ModifierAlert {
@@ -476,6 +486,7 @@ message CDOTAUserMsg_ModifierAlert {
 	optional uint32 stack_count = 3;
 	optional bool is_debuff = 4;
 	optional uint32 target_entindex = 5;
+	optional float seconds_remaining = 6;
 }
 
 message CDOTAUserMsg_HPManaAlert {
@@ -489,7 +500,7 @@ message CDOTAUserMsg_GlyphAlert {
 }
 
 message CDOTAUserMsg_WillPurchaseAlert {
-	optional int32 itemid = 1;
+	optional int32 item_ability_id = 1;
 	optional int32 player_id = 2;
 	optional uint32 gold_remaining = 3;
 	optional int32 suggestion_player_id = 4;
@@ -501,13 +512,14 @@ message CDOTAUserMsg_BuyBackStateAlert {
 
 message CDOTAUserMsg_QuickBuyAlert {
 	optional int32 player_id = 1;
-	optional int32 itemid = 2;
+	optional int32 item_ability_id = 2;
 	optional int32 gold_required = 3;
+	optional int32 item_cooldown_seconds = 4;
 }
 
 message CDOTAUserMsg_CourierKilledAlert {
 	message LostItem {
-		optional int32 item = 1;
+		optional int32 item_ability_id = 1;
 		optional uint32 quantity = 2;
 	}
 
@@ -573,7 +585,7 @@ message CDOTAUserMsg_SpectatorPlayerUnitOrders {
 	optional int32 order_type = 2;
 	repeated int32 units = 3;
 	optional int32 target_index = 4;
-	optional int32 ability_index = 5;
+	optional int32 ability_id = 5;
 	optional CMsgVector position = 6;
 	optional bool queue = 7;
 	optional int32 sequence_number = 8;
@@ -701,7 +713,7 @@ message CDOTAUserMsg_UnitEvent {
 }
 
 message CDOTAUserMsg_ItemPurchased {
-	optional int32 item_index = 1;
+	optional int32 item_ability_id = 1;
 }
 
 message CDOTAUserMsg_ItemFound {
@@ -954,6 +966,8 @@ message CDOTAUserMsg_TE_Projectile {
 	optional float maximpacttime = 10;
 	optional fixed32 colorgemcolor = 11;
 	optional int32 launch_tick = 12;
+	optional int32 handle = 13;
+	optional CMsgVector vTargetLoc = 14;
 }
 
 message CDOTAUserMsg_TE_ProjectileLoc {
@@ -968,6 +982,11 @@ message CDOTAUserMsg_TE_ProjectileLoc {
 	optional CMsgVector vTargetLoc = 10;
 	optional fixed32 colorgemcolor = 11;
 	optional int32 launch_tick = 12;
+	optional int32 handle = 13;
+}
+
+message CDOTAUserMsg_TE_DestroyProjectile {
+	optional int32 handle = 1;
 }
 
 message CDOTAUserMsg_TE_DotaBloodImpact {
@@ -985,6 +1004,10 @@ message CDOTAUserMsg_AbilityPing {
 	optional uint32 level = 5;
 	optional bool passive = 6;
 	optional uint32 mana_needed = 7;
+	optional uint32 entity_id = 8;
+	optional int32 primary_charges = 9;
+	optional int32 secondary_charges = 10;
+	optional uint32 caster_id = 11;
 }
 
 message CDOTAUserMsg_TE_UnitAnimation {
@@ -1237,7 +1260,7 @@ message CDOTAUserMsg_QuestStatus {
 	optional uint32 goal = 5;
 	optional uint32 query = 6;
 	optional float fail_gametime = 7;
-	optional uint32 item_id = 8;
+	optional uint32 item_ability_id = 8;
 }
 
 message CDOTAUserMsg_SuggestHeroPick {
@@ -1255,7 +1278,7 @@ message CDOTAUserMsg_KillcamDamageTaken {
 	required uint32 player_id = 1;
 	optional uint32 damage_taken = 2;
 	optional uint32 item_type = 3;
-	optional uint32 item_id = 4;
+	optional uint32 item_ability_id = 4;
 	optional string hero_name = 5;
 	optional string damage_color = 6;
 }
@@ -1291,5 +1314,10 @@ message CDOTAUserMessage_TeamCaptainChanged {
 message CDOTAUserMsg_ChatWheelCooldown {
 	optional uint32 message_id = 1;
 	optional float cooldown_remaining = 2;
+}
+
+message CDOTAUserMsg_AbilityDraftRequestAbility {
+	optional uint32 player_id = 1;
+	optional uint32 requested_ability_id = 2;
 }
 

@@ -214,6 +214,8 @@ type Callbacks struct {
 	onCDOTAUserMsg_SendRoshanSpectatorPhase   []func(*dota.CDOTAUserMsg_SendRoshanSpectatorPhase) error
 	onCDOTAUserMsg_ChatWheelCooldown          []func(*dota.CDOTAUserMsg_ChatWheelCooldown) error
 	onCDOTAUserMsg_DismissAllStatPopups       []func(*dota.CDOTAUserMsg_DismissAllStatPopups) error
+	onCDOTAUserMsg_TE_DestroyProjectile       []func(*dota.CDOTAUserMsg_TE_DestroyProjectile) error
+	onCDOTAUserMsg_AbilityDraftRequestAbility []func(*dota.CDOTAUserMsg_AbilityDraftRequestAbility) error
 
 	pb *proto.Buffer
 }
@@ -1257,6 +1259,16 @@ func (c *Callbacks) OnCDOTAUserMsg_ChatWheelCooldown(fn func(*dota.CDOTAUserMsg_
 // OnCDOTAUserMsg_DismissAllStatPopups registers a callback for EDotaUserMessages_DOTA_UM_DismissAllStatPopups
 func (c *Callbacks) OnCDOTAUserMsg_DismissAllStatPopups(fn func(*dota.CDOTAUserMsg_DismissAllStatPopups) error) {
 	c.onCDOTAUserMsg_DismissAllStatPopups = append(c.onCDOTAUserMsg_DismissAllStatPopups, fn)
+}
+
+// OnCDOTAUserMsg_TE_DestroyProjectile registers a callback for EDotaUserMessages_DOTA_UM_TE_DestroyProjectile
+func (c *Callbacks) OnCDOTAUserMsg_TE_DestroyProjectile(fn func(*dota.CDOTAUserMsg_TE_DestroyProjectile) error) {
+	c.onCDOTAUserMsg_TE_DestroyProjectile = append(c.onCDOTAUserMsg_TE_DestroyProjectile, fn)
+}
+
+// OnCDOTAUserMsg_AbilityDraftRequestAbility registers a callback for EDotaUserMessages_DOTA_UM_AbilityDraftRequestAbility
+func (c *Callbacks) OnCDOTAUserMsg_AbilityDraftRequestAbility(fn func(*dota.CDOTAUserMsg_AbilityDraftRequestAbility) error) {
+	c.onCDOTAUserMsg_AbilityDraftRequestAbility = append(c.onCDOTAUserMsg_AbilityDraftRequestAbility, fn)
 }
 
 func (c *Callbacks) callByDemoType(t int32, buf []byte) error {
@@ -5198,6 +5210,44 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		for _, fn := range c.onCDOTAUserMsg_DismissAllStatPopups {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 571: // dota.EDotaUserMessages_DOTA_UM_TE_DestroyProjectile
+		if c.onCDOTAUserMsg_TE_DestroyProjectile == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_TE_DestroyProjectile{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_TE_DestroyProjectile {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 573: // dota.EDotaUserMessages_DOTA_UM_AbilityDraftRequestAbility
+		if c.onCDOTAUserMsg_AbilityDraftRequestAbility == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_AbilityDraftRequestAbility{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_AbilityDraftRequestAbility {
 			if err := fn(msg); err != nil {
 				return err
 			}
