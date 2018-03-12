@@ -13,20 +13,16 @@ func BenchmarkMatch2159568145(b *testing.B) { testScenarios[2159568145].bench(b)
 // Test client
 func TestMatch6682694(t *testing.T) { testScenarios[6682694].test(t) }
 
+func TestMatch3777736409(t *testing.T) { testScenarios[3777736409].test(t) }
 func TestMatch3534483793(t *testing.T) { testScenarios[3534483793].test(t) }
-
 func TestMatch3220517753(t *testing.T) { testScenarios[3220517753].test(t) }
-
 func TestMatch2369359192(t *testing.T) { testScenarios[2369359192].test(t) }
-
 func TestMatch2246960647(t *testing.T) { testScenarios[2246960647].test(t) }
 func TestMatch2159568145(t *testing.T) { testScenarios[2159568145].test(t) }
 func TestMatch2109130988(t *testing.T) { testScenarios[2109130988].test(t) }
-
 func TestMatch1855408730(t *testing.T) { testScenarios[1855408730].test(t) }
 func TestMatch1855345768(t *testing.T) { testScenarios[1855345768].test(t) }
 func TestMatch1855304265(t *testing.T) { testScenarios[1855304265].test(t) }
-
 func TestMatch1788648401(t *testing.T) { testScenarios[1788648401].test(t) }
 func TestMatch1786687320(t *testing.T) { testScenarios[1786687320].test(t) }
 func TestMatch1785937100(t *testing.T) { testScenarios[1785937100].test(t) }
@@ -68,6 +64,14 @@ type testScenario struct {
 }
 
 var testScenarios = map[int64]testScenario{
+	3777736409: {
+		matchId:               "3777736409",
+		replayUrl:             "https://s3-us-west-2.amazonaws.com/manta.dotabuff/3777736409.dem",
+		expectGameBuild:       2735,
+		expectEntityEvents:    2263283,
+		expectUnitOrderEvents: 58814,
+	},
+
 	3534483793: {
 		matchId:               "3534483793",
 		replayUrl:             "https://s3-us-west-2.amazonaws.com/manta.dotabuff/3534483793.dem",

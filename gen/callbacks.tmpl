@@ -84,9 +84,5 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 {{ end }}
   }
 
-  if v(1) {
-    _debugf("warning: no packet type %d found", t)
-  }
-
   return nil
 }

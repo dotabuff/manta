@@ -117,7 +117,7 @@ type Callbacks struct {
 	onCDOTAUserMsg_AIDebugLine                []func(*dota.CDOTAUserMsg_AIDebugLine) error
 	onCDOTAUserMsg_ChatEvent                  []func(*dota.CDOTAUserMsg_ChatEvent) error
 	onCDOTAUserMsg_CombatHeroPositions        []func(*dota.CDOTAUserMsg_CombatHeroPositions) error
-	onCDOTAUserMsg_CombatLogShowDeath         []func(*dota.CDOTAUserMsg_CombatLogShowDeath) error
+	onCDOTAUserMsg_CombatLogBulkData          []func(*dota.CDOTAUserMsg_CombatLogBulkData) error
 	onCDOTAUserMsg_CreateLinearProjectile     []func(*dota.CDOTAUserMsg_CreateLinearProjectile) error
 	onCDOTAUserMsg_DestroyLinearProjectile    []func(*dota.CDOTAUserMsg_DestroyLinearProjectile) error
 	onCDOTAUserMsg_DodgeTrackingProjectiles   []func(*dota.CDOTAUserMsg_DodgeTrackingProjectiles) error
@@ -136,7 +136,6 @@ type Callbacks struct {
 	onCDOTAUserMsg_SpectatorPlayerClick       []func(*dota.CDOTAUserMsg_SpectatorPlayerClick) error
 	onCDOTAUserMsg_TutorialTipInfo            []func(*dota.CDOTAUserMsg_TutorialTipInfo) error
 	onCDOTAUserMsg_UnitEvent                  []func(*dota.CDOTAUserMsg_UnitEvent) error
-	onCDOTAUserMsg_ParticleManager            []func(*dota.CDOTAUserMsg_ParticleManager) error
 	onCDOTAUserMsg_BotChat                    []func(*dota.CDOTAUserMsg_BotChat) error
 	onCDOTAUserMsg_HudError                   []func(*dota.CDOTAUserMsg_HudError) error
 	onCDOTAUserMsg_ItemPurchased              []func(*dota.CDOTAUserMsg_ItemPurchased) error
@@ -215,7 +214,10 @@ type Callbacks struct {
 	onCDOTAUserMsg_ChatWheelCooldown          []func(*dota.CDOTAUserMsg_ChatWheelCooldown) error
 	onCDOTAUserMsg_DismissAllStatPopups       []func(*dota.CDOTAUserMsg_DismissAllStatPopups) error
 	onCDOTAUserMsg_TE_DestroyProjectile       []func(*dota.CDOTAUserMsg_TE_DestroyProjectile) error
+	onCDOTAUserMsg_HeroRelicProgress          []func(*dota.CDOTAUserMsg_HeroRelicProgress) error
 	onCDOTAUserMsg_AbilityDraftRequestAbility []func(*dota.CDOTAUserMsg_AbilityDraftRequestAbility) error
+	onCDOTAUserMsg_ItemSold                   []func(*dota.CDOTAUserMsg_ItemSold) error
+	onCDOTAUserMsg_DamageReport               []func(*dota.CDOTAUserMsg_DamageReport) error
 
 	pb *proto.Buffer
 }
@@ -776,9 +778,9 @@ func (c *Callbacks) OnCDOTAUserMsg_CombatHeroPositions(fn func(*dota.CDOTAUserMs
 	c.onCDOTAUserMsg_CombatHeroPositions = append(c.onCDOTAUserMsg_CombatHeroPositions, fn)
 }
 
-// OnCDOTAUserMsg_CombatLogShowDeath registers a callback for EDotaUserMessages_DOTA_UM_CombatLogShowDeath
-func (c *Callbacks) OnCDOTAUserMsg_CombatLogShowDeath(fn func(*dota.CDOTAUserMsg_CombatLogShowDeath) error) {
-	c.onCDOTAUserMsg_CombatLogShowDeath = append(c.onCDOTAUserMsg_CombatLogShowDeath, fn)
+// OnCDOTAUserMsg_CombatLogBulkData registers a callback for EDotaUserMessages_DOTA_UM_CombatLogBulkData
+func (c *Callbacks) OnCDOTAUserMsg_CombatLogBulkData(fn func(*dota.CDOTAUserMsg_CombatLogBulkData) error) {
+	c.onCDOTAUserMsg_CombatLogBulkData = append(c.onCDOTAUserMsg_CombatLogBulkData, fn)
 }
 
 // OnCDOTAUserMsg_CreateLinearProjectile registers a callback for EDotaUserMessages_DOTA_UM_CreateLinearProjectile
@@ -869,11 +871,6 @@ func (c *Callbacks) OnCDOTAUserMsg_TutorialTipInfo(fn func(*dota.CDOTAUserMsg_Tu
 // OnCDOTAUserMsg_UnitEvent registers a callback for EDotaUserMessages_DOTA_UM_UnitEvent
 func (c *Callbacks) OnCDOTAUserMsg_UnitEvent(fn func(*dota.CDOTAUserMsg_UnitEvent) error) {
 	c.onCDOTAUserMsg_UnitEvent = append(c.onCDOTAUserMsg_UnitEvent, fn)
-}
-
-// OnCDOTAUserMsg_ParticleManager registers a callback for EDotaUserMessages_DOTA_UM_ParticleManager
-func (c *Callbacks) OnCDOTAUserMsg_ParticleManager(fn func(*dota.CDOTAUserMsg_ParticleManager) error) {
-	c.onCDOTAUserMsg_ParticleManager = append(c.onCDOTAUserMsg_ParticleManager, fn)
 }
 
 // OnCDOTAUserMsg_BotChat registers a callback for EDotaUserMessages_DOTA_UM_BotChat
@@ -1266,9 +1263,24 @@ func (c *Callbacks) OnCDOTAUserMsg_TE_DestroyProjectile(fn func(*dota.CDOTAUserM
 	c.onCDOTAUserMsg_TE_DestroyProjectile = append(c.onCDOTAUserMsg_TE_DestroyProjectile, fn)
 }
 
+// OnCDOTAUserMsg_HeroRelicProgress registers a callback for EDotaUserMessages_DOTA_UM_HeroRelicProgress
+func (c *Callbacks) OnCDOTAUserMsg_HeroRelicProgress(fn func(*dota.CDOTAUserMsg_HeroRelicProgress) error) {
+	c.onCDOTAUserMsg_HeroRelicProgress = append(c.onCDOTAUserMsg_HeroRelicProgress, fn)
+}
+
 // OnCDOTAUserMsg_AbilityDraftRequestAbility registers a callback for EDotaUserMessages_DOTA_UM_AbilityDraftRequestAbility
 func (c *Callbacks) OnCDOTAUserMsg_AbilityDraftRequestAbility(fn func(*dota.CDOTAUserMsg_AbilityDraftRequestAbility) error) {
 	c.onCDOTAUserMsg_AbilityDraftRequestAbility = append(c.onCDOTAUserMsg_AbilityDraftRequestAbility, fn)
+}
+
+// OnCDOTAUserMsg_ItemSold registers a callback for EDotaUserMessages_DOTA_UM_ItemSold
+func (c *Callbacks) OnCDOTAUserMsg_ItemSold(fn func(*dota.CDOTAUserMsg_ItemSold) error) {
+	c.onCDOTAUserMsg_ItemSold = append(c.onCDOTAUserMsg_ItemSold, fn)
+}
+
+// OnCDOTAUserMsg_DamageReport registers a callback for EDotaUserMessages_DOTA_UM_DamageReport
+func (c *Callbacks) OnCDOTAUserMsg_DamageReport(fn func(*dota.CDOTAUserMsg_DamageReport) error) {
+	c.onCDOTAUserMsg_DamageReport = append(c.onCDOTAUserMsg_DamageReport, fn)
 }
 
 func (c *Callbacks) callByDemoType(t int32, buf []byte) error {
@@ -3374,18 +3386,18 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 
 		return nil
 
-	case 470: // dota.EDotaUserMessages_DOTA_UM_CombatLogShowDeath
-		if c.onCDOTAUserMsg_CombatLogShowDeath == nil {
+	case 470: // dota.EDotaUserMessages_DOTA_UM_CombatLogBulkData
+		if c.onCDOTAUserMsg_CombatLogBulkData == nil {
 			return nil
 		}
 
-		msg := &dota.CDOTAUserMsg_CombatLogShowDeath{}
+		msg := &dota.CDOTAUserMsg_CombatLogBulkData{}
 		c.pb.SetBuf(buf)
 		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
-		for _, fn := range c.onCDOTAUserMsg_CombatLogShowDeath {
+		for _, fn := range c.onCDOTAUserMsg_CombatLogBulkData {
 			if err := fn(msg); err != nil {
 				return err
 			}
@@ -3728,25 +3740,6 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		for _, fn := range c.onCDOTAUserMsg_UnitEvent {
-			if err := fn(msg); err != nil {
-				return err
-			}
-		}
-
-		return nil
-
-	case 489: // dota.EDotaUserMessages_DOTA_UM_ParticleManager
-		if c.onCDOTAUserMsg_ParticleManager == nil {
-			return nil
-		}
-
-		msg := &dota.CDOTAUserMsg_ParticleManager{}
-		c.pb.SetBuf(buf)
-		if err := c.pb.Unmarshal(msg); err != nil {
-			return err
-		}
-
-		for _, fn := range c.onCDOTAUserMsg_ParticleManager {
 			if err := fn(msg); err != nil {
 				return err
 			}
@@ -5236,6 +5229,25 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 
 		return nil
 
+	case 572: // dota.EDotaUserMessages_DOTA_UM_HeroRelicProgress
+		if c.onCDOTAUserMsg_HeroRelicProgress == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_HeroRelicProgress{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_HeroRelicProgress {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
 	case 573: // dota.EDotaUserMessages_DOTA_UM_AbilityDraftRequestAbility
 		if c.onCDOTAUserMsg_AbilityDraftRequestAbility == nil {
 			return nil
@@ -5255,10 +5267,44 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 
 		return nil
 
-	}
+	case 574: // dota.EDotaUserMessages_DOTA_UM_ItemSold
+		if c.onCDOTAUserMsg_ItemSold == nil {
+			return nil
+		}
 
-	if v(1) {
-		_debugf("warning: no packet type %d found", t)
+		msg := &dota.CDOTAUserMsg_ItemSold{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_ItemSold {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 575: // dota.EDotaUserMessages_DOTA_UM_DamageReport
+		if c.onCDOTAUserMsg_DamageReport == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_DamageReport{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_DamageReport {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
 	}
 
 	return nil
