@@ -158,6 +158,11 @@ func (e *Entity) GetBool(name string) (bool, bool) {
 	return x, ok
 }
 
+// GetSerial return the serial of the class associated with this Entity
+func (e *Entity) GetSerial() int32 {
+	return e.serial
+}
+
 // GetClassId returns the id of the class associated with this Entity
 func (e *Entity) GetClassId() int32 {
 	return e.class.classId
@@ -176,6 +181,41 @@ func (e *Entity) GetIndex() int32 {
 // FindEntity finds a given Entity by index
 func (p *Parser) FindEntity(index int32) *Entity {
 	return p.entities[index]
+}
+
+const (
+	// SOURCE2
+	indexBits  uint64 = 14
+	handleMask uint64 = (1 << indexBits) - 1
+)
+
+func handle2idx(handle uint64) int32 {
+	return int32(handle & handleMask)
+}
+
+func serialForHandle(handle uint64) int32 {
+	return int32(handle >> indexBits)
+}
+
+// FindEntityByHandle finds a given Entity by handle
+func (p *Parser) FindEntityByHandle(handle uint64) *Entity {
+	idx := handle2idx(handle)
+	e := p.FindEntity(idx)
+	if e != nil && e.GetSerial() != serialForHandle(handle) {
+		return nil
+	}
+	return e
+}
+
+// FilterEntity finds entities by callback
+func (p *Parser) FilterEntity(fb func(*Entity) bool) []*Entity {
+	entities := make([]*Entity, 0, 0)
+	for _, et := range p.entities {
+		if fb(et) {
+			entities = append(entities, et)
+		}
+	}
+	return entities
 }
 
 // Internal Callback for OnCSVCMsg_PacketEntities.
