@@ -121,6 +121,7 @@ enum EDotaUserMessages {
 	DOTA_UM_AbilityDraftRequestAbility = 573;
 	DOTA_UM_ItemSold = 574;
 	DOTA_UM_DamageReport = 575;
+	DOTA_UM_SalutePlayer = 576;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -850,7 +851,6 @@ message CDOTAUserMsg_TE_Projectile {
 	optional int64 particleSystemHandle = 5;
 	optional bool dodgeable = 6;
 	optional bool isAttack = 7;
-	optional bool isEvaded = 8;
 	optional float expireTime = 9;
 	optional float maximpacttime = 10;
 	optional fixed32 colorgemcolor = 11;
@@ -866,7 +866,6 @@ message CDOTAUserMsg_TE_ProjectileLoc {
 	optional int64 particleSystemHandle = 4;
 	optional bool dodgeable = 5;
 	optional bool isAttack = 6;
-	optional bool isEvaded = 8;
 	optional float expireTime = 9;
 	optional CMsgVector vTargetLoc = 10;
 	optional fixed32 colorgemcolor = 11;
@@ -1223,5 +1222,11 @@ message CDOTAUserMsg_DamageReport {
 	optional uint32 source_hero_id = 3;
 	optional int32 damage_amount = 4;
 	optional bool broadcast = 5;
+}
+
+message CDOTAUserMsg_SalutePlayer {
+	optional int32 source_player_id = 1;
+	optional int32 target_player_id = 2;
+	optional uint32 tip_amount = 3;
 }
 
