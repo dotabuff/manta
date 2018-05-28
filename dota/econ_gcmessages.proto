@@ -102,6 +102,8 @@ enum EGCItemMsg {
 	k_EMsgGCServerRentalsBase = 1700;
 	k_EMsgGCDev_NewItemRequest = 2001;
 	k_EMsgGCDev_NewItemRequestResponse = 2002;
+	k_EMsgGCDev_UnlockAllItemStylesRequest = 2003;
+	k_EMsgGCDev_UnlockAllItemStylesResponse = 2004;
 	k_EMsgGCStorePurchaseFinalize = 2504;
 	k_EMsgGCStorePurchaseFinalizeResponse = 2505;
 	k_EMsgGCStorePurchaseCancel = 2506;
@@ -110,7 +112,6 @@ enum EGCItemMsg {
 	k_EMsgGCStorePurchaseInitResponse = 2511;
 	k_EMsgGCBannedWordListRequest = 2512;
 	k_EMsgGCBannedWordListResponse = 2513;
-	k_EMsgGCToGCBannedWordListBroadcast = 2514;
 	k_EMsgGCToGCBannedWordListUpdated = 2515;
 	k_EMsgGCToGCDirtySDOCache = 2516;
 	k_EMsgGCToGCDirtyMultipleSDOCache = 2517;
@@ -186,6 +187,7 @@ enum EGCItemMsg {
 	k_EMsgGCGetAccountSubscriptionItemResponse = 2596;
 	k_EMsgGCToGCBroadcastMessageFromSub = 2598;
 	k_EMsgGCToClientCurrencyPricePoints = 2599;
+	k_EMsgGCToGCAddSubscriptionTime = 2600;
 }
 
 enum EItemPurgatoryResponse_Finalize {
@@ -399,6 +401,12 @@ message CMsgGCToGCCheckAccountTradeStatusResponse {
 	optional uint32 error_code = 2;
 }
 
+message CMsgGCToGCAddSubscriptionTime {
+	optional uint32 account_id = 1;
+	repeated uint32 matching_subscription_def_indexes = 2;
+	optional uint32 additional_seconds = 3;
+}
+
 message CMsgGCToGCGrantAccountRolledItems {
 	message Item {
 		message DynamicAttribute {
@@ -511,6 +519,14 @@ message CMsgDevNewItemRequest {
 }
 
 message CMsgDevNewItemRequestResponse {
+	optional bool success = 1;
+}
+
+message CMsgDevUnlockAllItemStyles {
+	optional uint64 item_id = 1;
+}
+
+message CMsgDevUnlockAllItemStylesResponse {
 	optional bool success = 1;
 }
 

@@ -435,7 +435,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCToGCReportKillSummaries = 7555;
 	k_EMsgGCToGCUpdateAssassinMinigame = 7556;
 	k_EMsgGCToGCFantasySetMatchLeague = 7557;
-	k_EMsgClientToGCRecordCompendiumStats = 7558;
 	k_EMsgGCItemEditorRequestLeagueInfo = 7559;
 	k_EMsgGCItemEditorLeagueInfoResponse = 7560;
 	k_EMsgGCToGCUpdatePlayerPredictions = 7561;
@@ -489,6 +488,10 @@ enum EDOTAGCMsg {
 	k_EMsgClientToGCRecycleHeroRelicResponse = 7620;
 	k_EMsgGCToGCRevokeEventOwnership = 7621;
 	k_EMsgGCToGCUnlockEventPointSpending = 7622;
+	k_EMsgGCToClientRequestLaneSelection = 7623;
+	k_EMsgGCToClientRequestLaneSelectionResponse = 7624;
+	k_EMsgServerToGCCavernCrawlIsHeroActive = 7625;
+	k_EMsgServerToGCCavernCrawlIsHeroActiveResponse = 7626;
 	k_EMsgGCDev_GrantWarKill = 8001;
 	k_EMsgServerToGCLockCharmTrading = 8004;
 	k_EMsgClientToGCPlayerStatsRequest = 8006;
@@ -609,8 +612,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCToClientTeamInfo = 8135;
 	k_EMsgGCToClientTeamsInfo = 8136;
 	k_EMsgClientToGCMyTeamInfoRequest = 8137;
-	k_EMsgClientToGCRequestEventPointLog = 8138;
-	k_EMsgClientToGCRequestEventPointLogResponse = 8139;
 	k_EMsgClientToGCPublishUserStat = 8140;
 	k_EMsgGCToGCSignoutSpendWager = 8141;
 	k_EMsgGCSubmitLobbyMVPVote = 8144;
@@ -724,8 +725,6 @@ enum EDOTAGCMsg {
 	k_EMsgPurchaseHeroRelicResponse = 8257;
 	k_EMsgPurchaseHeroRandomRelic = 8258;
 	k_EMsgPurchaseHeroRandomRelicResponse = 8259;
-	k_EMsgLaneSuggestRequest = 8260;
-	k_EMsgLaneSuggestResponse = 8261;
 	k_EMsgPartyReadyCheckRequest = 8262;
 	k_EMsgPartyReadyCheckResponse = 8263;
 	k_EMsgPartyReadyCheckAcknowledge = 8264;
@@ -751,5 +750,23 @@ enum EDOTAGCMsg {
 	k_EMsgGCToGCReconcilePlusStatusUnreliable = 8285;
 	k_EMsgActivatePlusFreeTrialRequest = 8286;
 	k_EMsgActivatePlusFreeTrialResponse = 8287;
+	k_EMsgGCToClientCavernCrawlMapPathCompleted = 8288;
+	k_EMsgClientToGCCavernCrawlClaimRoom = 8289;
+	k_EMsgClientToGCCavernCrawlClaimRoomResponse = 8290;
+	k_EMsgClientToGCCavernCrawlUseItemOnRoom = 8291;
+	k_EMsgClientToGCCavernCrawlUseItemOnRoomResponse = 8292;
+	k_EMsgClientToGCCavernCrawlUseItemOnPath = 8293;
+	k_EMsgClientToGCCavernCrawlUseItemOnPathResponse = 8294;
+	k_EMsgClientToGCCavernCrawlRequestMapState = 8295;
+	k_EMsgClientToGCCavernCrawlRequestMapStateResponse = 8296;
+	k_EMsgSignOutTips = 8297;
+	k_EMsgClientToGCRequestEventPointLogV2 = 8298;
+	k_EMsgClientToGCRequestEventPointLogResponseV2 = 8299;
+	k_EMsgClientToGCRequestEventTipsSummary = 8300;
+	k_EMsgClientToGCRequestEventTipsSummaryResponse = 8301;
+	k_EMsgClientToGCRequestSocialFeed = 8303;
+	k_EMsgClientToGCRequestSocialFeedResponse = 8304;
+	k_EMsgClientToGCRequestSocialFeedComments = 8305;
+	k_EMsgClientToGCRequestSocialFeedCommentsResponse = 8306;
 }
 

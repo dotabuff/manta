@@ -4,6 +4,7 @@ package dota;
 
 import "base_gcmessages.proto";
 import "dota_gcmessages_common_match_management.proto";
+import "dota_gcmessages_common.proto";
 
 option cc_generic_services = false;
 
@@ -60,6 +61,8 @@ message CDOTAMatchMetadata {
 			optional uint32 challenge_rank_completed = 7;
 			optional uint32 challenge_rank_previously_completed = 8;
 			optional bool event_owned = 9;
+			optional bool cavern_challenge_active = 12;
+			optional uint32 cavern_challenge_winnings = 13;
 		}
 
 		message Player {
@@ -113,6 +116,7 @@ message CDOTAMatchMetadata {
 	optional fixed64 report_until_time = 4;
 	optional bytes event_game_custom_table = 5;
 	optional uint32 primary_event_id = 6;
+	repeated CMsgMatchTips match_tips = 7;
 }
 
 message CDOTAMatchPrivateMetadata {
