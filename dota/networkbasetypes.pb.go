@@ -74,7 +74,7 @@ func (x *NET_Messages) UnmarshalJSON(data []byte) error {
 	*x = NET_Messages(value)
 	return nil
 }
-func (NET_Messages) EnumDescriptor() ([]byte, []int) { return fileDescriptor34, []int{0} }
+func (NET_Messages) EnumDescriptor() ([]byte, []int) { return fileDescriptor33, []int{0} }
 
 type SpawnGroupFlagsT int32
 
@@ -126,7 +126,7 @@ func (x *SpawnGroupFlagsT) UnmarshalJSON(data []byte) error {
 	*x = SpawnGroupFlagsT(value)
 	return nil
 }
-func (SpawnGroupFlagsT) EnumDescriptor() ([]byte, []int) { return fileDescriptor34, []int{1} }
+func (SpawnGroupFlagsT) EnumDescriptor() ([]byte, []int) { return fileDescriptor33, []int{1} }
 
 type CMsgVector struct {
 	X                *float32 `protobuf:"fixed32,1,opt,name=x" json:"x,omitempty"`
@@ -138,7 +138,7 @@ type CMsgVector struct {
 func (m *CMsgVector) Reset()                    { *m = CMsgVector{} }
 func (m *CMsgVector) String() string            { return proto.CompactTextString(m) }
 func (*CMsgVector) ProtoMessage()               {}
-func (*CMsgVector) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{0} }
+func (*CMsgVector) Descriptor() ([]byte, []int) { return fileDescriptor33, []int{0} }
 
 func (m *CMsgVector) GetX() float32 {
 	if m != nil && m.X != nil {
@@ -170,7 +170,7 @@ type CMsgVector2D struct {
 func (m *CMsgVector2D) Reset()                    { *m = CMsgVector2D{} }
 func (m *CMsgVector2D) String() string            { return proto.CompactTextString(m) }
 func (*CMsgVector2D) ProtoMessage()               {}
-func (*CMsgVector2D) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{1} }
+func (*CMsgVector2D) Descriptor() ([]byte, []int) { return fileDescriptor33, []int{1} }
 
 func (m *CMsgVector2D) GetX() float32 {
 	if m != nil && m.X != nil {
@@ -196,7 +196,7 @@ type CMsgQAngle struct {
 func (m *CMsgQAngle) Reset()                    { *m = CMsgQAngle{} }
 func (m *CMsgQAngle) String() string            { return proto.CompactTextString(m) }
 func (*CMsgQAngle) ProtoMessage()               {}
-func (*CMsgQAngle) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{2} }
+func (*CMsgQAngle) Descriptor() ([]byte, []int) { return fileDescriptor33, []int{2} }
 
 func (m *CMsgQAngle) GetX() float32 {
 	if m != nil && m.X != nil {
@@ -232,7 +232,7 @@ type CMsgPlayerInfo struct {
 func (m *CMsgPlayerInfo) Reset()                    { *m = CMsgPlayerInfo{} }
 func (m *CMsgPlayerInfo) String() string            { return proto.CompactTextString(m) }
 func (*CMsgPlayerInfo) ProtoMessage()               {}
-func (*CMsgPlayerInfo) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{3} }
+func (*CMsgPlayerInfo) Descriptor() ([]byte, []int) { return fileDescriptor33, []int{3} }
 
 func (m *CMsgPlayerInfo) GetName() string {
 	if m != nil && m.Name != nil {
@@ -284,7 +284,7 @@ type CMsg_CVars struct {
 func (m *CMsg_CVars) Reset()                    { *m = CMsg_CVars{} }
 func (m *CMsg_CVars) String() string            { return proto.CompactTextString(m) }
 func (*CMsg_CVars) ProtoMessage()               {}
-func (*CMsg_CVars) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{4} }
+func (*CMsg_CVars) Descriptor() ([]byte, []int) { return fileDescriptor33, []int{4} }
 
 func (m *CMsg_CVars) GetCvars() []*CMsg_CVars_CVar {
 	if m != nil {
@@ -302,7 +302,7 @@ type CMsg_CVars_CVar struct {
 func (m *CMsg_CVars_CVar) Reset()                    { *m = CMsg_CVars_CVar{} }
 func (m *CMsg_CVars_CVar) String() string            { return proto.CompactTextString(m) }
 func (*CMsg_CVars_CVar) ProtoMessage()               {}
-func (*CMsg_CVars_CVar) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{4, 0} }
+func (*CMsg_CVars_CVar) Descriptor() ([]byte, []int) { return fileDescriptor33, []int{4, 0} }
 
 func (m *CMsg_CVars_CVar) GetName() string {
 	if m != nil && m.Name != nil {
@@ -325,7 +325,7 @@ type CNETMsg_NOP struct {
 func (m *CNETMsg_NOP) Reset()                    { *m = CNETMsg_NOP{} }
 func (m *CNETMsg_NOP) String() string            { return proto.CompactTextString(m) }
 func (*CNETMsg_NOP) ProtoMessage()               {}
-func (*CNETMsg_NOP) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{5} }
+func (*CNETMsg_NOP) Descriptor() ([]byte, []int) { return fileDescriptor33, []int{5} }
 
 type CNETMsg_SplitScreenUser struct {
 	Slot             *int32 `protobuf:"varint,1,opt,name=slot" json:"slot,omitempty"`
@@ -335,7 +335,7 @@ type CNETMsg_SplitScreenUser struct {
 func (m *CNETMsg_SplitScreenUser) Reset()                    { *m = CNETMsg_SplitScreenUser{} }
 func (m *CNETMsg_SplitScreenUser) String() string            { return proto.CompactTextString(m) }
 func (*CNETMsg_SplitScreenUser) ProtoMessage()               {}
-func (*CNETMsg_SplitScreenUser) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{6} }
+func (*CNETMsg_SplitScreenUser) Descriptor() ([]byte, []int) { return fileDescriptor33, []int{6} }
 
 func (m *CNETMsg_SplitScreenUser) GetSlot() int32 {
 	if m != nil && m.Slot != nil {
@@ -352,7 +352,7 @@ type CNETMsg_Disconnect struct {
 func (m *CNETMsg_Disconnect) Reset()                    { *m = CNETMsg_Disconnect{} }
 func (m *CNETMsg_Disconnect) String() string            { return proto.CompactTextString(m) }
 func (*CNETMsg_Disconnect) ProtoMessage()               {}
-func (*CNETMsg_Disconnect) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{7} }
+func (*CNETMsg_Disconnect) Descriptor() ([]byte, []int) { return fileDescriptor33, []int{7} }
 
 const Default_CNETMsg_Disconnect_Reason ENetworkDisconnectionReason = ENetworkDisconnectionReason_NETWORK_DISCONNECT_INVALID
 
@@ -377,7 +377,7 @@ type CNETMsg_Tick struct {
 func (m *CNETMsg_Tick) Reset()                    { *m = CNETMsg_Tick{} }
 func (m *CNETMsg_Tick) String() string            { return proto.CompactTextString(m) }
 func (*CNETMsg_Tick) ProtoMessage()               {}
-func (*CNETMsg_Tick) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{8} }
+func (*CNETMsg_Tick) Descriptor() ([]byte, []int) { return fileDescriptor33, []int{8} }
 
 func (m *CNETMsg_Tick) GetTick() uint32 {
 	if m != nil && m.Tick != nil {
@@ -436,7 +436,7 @@ type CNETMsg_StringCmd struct {
 func (m *CNETMsg_StringCmd) Reset()                    { *m = CNETMsg_StringCmd{} }
 func (m *CNETMsg_StringCmd) String() string            { return proto.CompactTextString(m) }
 func (*CNETMsg_StringCmd) ProtoMessage()               {}
-func (*CNETMsg_StringCmd) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{9} }
+func (*CNETMsg_StringCmd) Descriptor() ([]byte, []int) { return fileDescriptor33, []int{9} }
 
 func (m *CNETMsg_StringCmd) GetCommand() string {
 	if m != nil && m.Command != nil {
@@ -453,7 +453,7 @@ type CNETMsg_SetConVar struct {
 func (m *CNETMsg_SetConVar) Reset()                    { *m = CNETMsg_SetConVar{} }
 func (m *CNETMsg_SetConVar) String() string            { return proto.CompactTextString(m) }
 func (*CNETMsg_SetConVar) ProtoMessage()               {}
-func (*CNETMsg_SetConVar) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{10} }
+func (*CNETMsg_SetConVar) Descriptor() ([]byte, []int) { return fileDescriptor33, []int{10} }
 
 func (m *CNETMsg_SetConVar) GetConvars() *CMsg_CVars {
 	if m != nil {
@@ -475,7 +475,7 @@ type CNETMsg_SignonState struct {
 func (m *CNETMsg_SignonState) Reset()                    { *m = CNETMsg_SignonState{} }
 func (m *CNETMsg_SignonState) String() string            { return proto.CompactTextString(m) }
 func (*CNETMsg_SignonState) ProtoMessage()               {}
-func (*CNETMsg_SignonState) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{11} }
+func (*CNETMsg_SignonState) Descriptor() ([]byte, []int) { return fileDescriptor33, []int{11} }
 
 func (m *CNETMsg_SignonState) GetSignonState() uint32 {
 	if m != nil && m.SignonState != nil {
@@ -529,7 +529,7 @@ type CSVCMsg_GameEvent struct {
 func (m *CSVCMsg_GameEvent) Reset()                    { *m = CSVCMsg_GameEvent{} }
 func (m *CSVCMsg_GameEvent) String() string            { return proto.CompactTextString(m) }
 func (*CSVCMsg_GameEvent) ProtoMessage()               {}
-func (*CSVCMsg_GameEvent) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{12} }
+func (*CSVCMsg_GameEvent) Descriptor() ([]byte, []int) { return fileDescriptor33, []int{12} }
 
 func (m *CSVCMsg_GameEvent) GetEventName() string {
 	if m != nil && m.EventName != nil {
@@ -567,7 +567,7 @@ type CSVCMsg_GameEventKeyT struct {
 func (m *CSVCMsg_GameEventKeyT) Reset()                    { *m = CSVCMsg_GameEventKeyT{} }
 func (m *CSVCMsg_GameEventKeyT) String() string            { return proto.CompactTextString(m) }
 func (*CSVCMsg_GameEventKeyT) ProtoMessage()               {}
-func (*CSVCMsg_GameEventKeyT) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{12, 0} }
+func (*CSVCMsg_GameEventKeyT) Descriptor() ([]byte, []int) { return fileDescriptor33, []int{12, 0} }
 
 func (m *CSVCMsg_GameEventKeyT) GetType() int32 {
 	if m != nil && m.Type != nil {
@@ -633,7 +633,7 @@ type CSVCMsgList_GameEvents struct {
 func (m *CSVCMsgList_GameEvents) Reset()                    { *m = CSVCMsgList_GameEvents{} }
 func (m *CSVCMsgList_GameEvents) String() string            { return proto.CompactTextString(m) }
 func (*CSVCMsgList_GameEvents) ProtoMessage()               {}
-func (*CSVCMsgList_GameEvents) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{13} }
+func (*CSVCMsgList_GameEvents) Descriptor() ([]byte, []int) { return fileDescriptor33, []int{13} }
 
 func (m *CSVCMsgList_GameEvents) GetEvents() []*CSVCMsgList_GameEventsEventT {
 	if m != nil {
@@ -652,7 +652,7 @@ func (m *CSVCMsgList_GameEventsEventT) Reset()         { *m = CSVCMsgList_GameEv
 func (m *CSVCMsgList_GameEventsEventT) String() string { return proto.CompactTextString(m) }
 func (*CSVCMsgList_GameEventsEventT) ProtoMessage()    {}
 func (*CSVCMsgList_GameEventsEventT) Descriptor() ([]byte, []int) {
-	return fileDescriptor34, []int{13, 0}
+	return fileDescriptor33, []int{13, 0}
 }
 
 func (m *CSVCMsgList_GameEventsEventT) GetTick() int32 {
@@ -678,7 +678,7 @@ type CSVCMsg_UserMessage struct {
 func (m *CSVCMsg_UserMessage) Reset()                    { *m = CSVCMsg_UserMessage{} }
 func (m *CSVCMsg_UserMessage) String() string            { return proto.CompactTextString(m) }
 func (*CSVCMsg_UserMessage) ProtoMessage()               {}
-func (*CSVCMsg_UserMessage) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{14} }
+func (*CSVCMsg_UserMessage) Descriptor() ([]byte, []int) { return fileDescriptor33, []int{14} }
 
 func (m *CSVCMsg_UserMessage) GetMsgType() int32 {
 	if m != nil && m.MsgType != nil {
@@ -702,7 +702,7 @@ type CSVCMsgList_UserMessages struct {
 func (m *CSVCMsgList_UserMessages) Reset()                    { *m = CSVCMsgList_UserMessages{} }
 func (m *CSVCMsgList_UserMessages) String() string            { return proto.CompactTextString(m) }
 func (*CSVCMsgList_UserMessages) ProtoMessage()               {}
-func (*CSVCMsgList_UserMessages) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{15} }
+func (*CSVCMsgList_UserMessages) Descriptor() ([]byte, []int) { return fileDescriptor33, []int{15} }
 
 func (m *CSVCMsgList_UserMessages) GetUsermsgs() []*CSVCMsgList_UserMessagesUsermsgT {
 	if m != nil {
@@ -721,7 +721,7 @@ func (m *CSVCMsgList_UserMessagesUsermsgT) Reset()         { *m = CSVCMsgList_Us
 func (m *CSVCMsgList_UserMessagesUsermsgT) String() string { return proto.CompactTextString(m) }
 func (*CSVCMsgList_UserMessagesUsermsgT) ProtoMessage()    {}
 func (*CSVCMsgList_UserMessagesUsermsgT) Descriptor() ([]byte, []int) {
-	return fileDescriptor34, []int{15, 0}
+	return fileDescriptor33, []int{15, 0}
 }
 
 func (m *CSVCMsgList_UserMessagesUsermsgT) GetTick() int32 {
@@ -763,7 +763,7 @@ type CNETMsg_SpawnGroup_Load struct {
 func (m *CNETMsg_SpawnGroup_Load) Reset()                    { *m = CNETMsg_SpawnGroup_Load{} }
 func (m *CNETMsg_SpawnGroup_Load) String() string            { return proto.CompactTextString(m) }
 func (*CNETMsg_SpawnGroup_Load) ProtoMessage()               {}
-func (*CNETMsg_SpawnGroup_Load) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{16} }
+func (*CNETMsg_SpawnGroup_Load) Descriptor() ([]byte, []int) { return fileDescriptor33, []int{16} }
 
 func (m *CNETMsg_SpawnGroup_Load) GetWorldname() string {
 	if m != nil && m.Worldname != nil {
@@ -902,7 +902,7 @@ func (m *CNETMsg_SpawnGroup_ManifestUpdate) Reset()         { *m = CNETMsg_Spawn
 func (m *CNETMsg_SpawnGroup_ManifestUpdate) String() string { return proto.CompactTextString(m) }
 func (*CNETMsg_SpawnGroup_ManifestUpdate) ProtoMessage()    {}
 func (*CNETMsg_SpawnGroup_ManifestUpdate) Descriptor() ([]byte, []int) {
-	return fileDescriptor34, []int{17}
+	return fileDescriptor33, []int{17}
 }
 
 func (m *CNETMsg_SpawnGroup_ManifestUpdate) GetSpawngrouphandle() uint32 {
@@ -937,7 +937,7 @@ func (m *CNETMsg_SpawnGroup_SetCreationTick) Reset()         { *m = CNETMsg_Spaw
 func (m *CNETMsg_SpawnGroup_SetCreationTick) String() string { return proto.CompactTextString(m) }
 func (*CNETMsg_SpawnGroup_SetCreationTick) ProtoMessage()    {}
 func (*CNETMsg_SpawnGroup_SetCreationTick) Descriptor() ([]byte, []int) {
-	return fileDescriptor34, []int{18}
+	return fileDescriptor33, []int{18}
 }
 
 func (m *CNETMsg_SpawnGroup_SetCreationTick) GetSpawngrouphandle() uint32 {
@@ -971,7 +971,7 @@ type CNETMsg_SpawnGroup_Unload struct {
 func (m *CNETMsg_SpawnGroup_Unload) Reset()                    { *m = CNETMsg_SpawnGroup_Unload{} }
 func (m *CNETMsg_SpawnGroup_Unload) String() string            { return proto.CompactTextString(m) }
 func (*CNETMsg_SpawnGroup_Unload) ProtoMessage()               {}
-func (*CNETMsg_SpawnGroup_Unload) Descriptor() ([]byte, []int) { return fileDescriptor34, []int{19} }
+func (*CNETMsg_SpawnGroup_Unload) Descriptor() ([]byte, []int) { return fileDescriptor33, []int{19} }
 
 func (m *CNETMsg_SpawnGroup_Unload) GetSpawngrouphandle() uint32 {
 	if m != nil && m.Spawngrouphandle != nil {
@@ -1003,7 +1003,7 @@ func (m *CNETMsg_SpawnGroup_LoadCompleted) Reset()         { *m = CNETMsg_SpawnG
 func (m *CNETMsg_SpawnGroup_LoadCompleted) String() string { return proto.CompactTextString(m) }
 func (*CNETMsg_SpawnGroup_LoadCompleted) ProtoMessage()    {}
 func (*CNETMsg_SpawnGroup_LoadCompleted) Descriptor() ([]byte, []int) {
-	return fileDescriptor34, []int{20}
+	return fileDescriptor33, []int{20}
 }
 
 func (m *CNETMsg_SpawnGroup_LoadCompleted) GetSpawngrouphandle() uint32 {
@@ -1039,7 +1039,7 @@ func (m *CSVCMsg_GameSessionConfiguration) Reset()         { *m = CSVCMsg_GameSe
 func (m *CSVCMsg_GameSessionConfiguration) String() string { return proto.CompactTextString(m) }
 func (*CSVCMsg_GameSessionConfiguration) ProtoMessage()    {}
 func (*CSVCMsg_GameSessionConfiguration) Descriptor() ([]byte, []int) {
-	return fileDescriptor34, []int{21}
+	return fileDescriptor33, []int{21}
 }
 
 func (m *CSVCMsg_GameSessionConfiguration) GetIsMultiplayer() bool {
@@ -1199,9 +1199,9 @@ func init() {
 	proto.RegisterEnum("dota.SpawnGroupFlagsT", SpawnGroupFlagsT_name, SpawnGroupFlagsT_value)
 }
 
-func init() { proto.RegisterFile("networkbasetypes.proto", fileDescriptor34) }
+func init() { proto.RegisterFile("networkbasetypes.proto", fileDescriptor33) }
 
-var fileDescriptor34 = []byte{
+var fileDescriptor33 = []byte{
 	// 2056 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x57, 0xcd, 0x6e, 0x1b, 0xc9,
 	0x11, 0x5e, 0x4a, 0xa2, 0x44, 0x16, 0x29, 0x79, 0xd4, 0x5e, 0xdb, 0xb4, 0xe2, 0x1f, 0x79, 0xec,

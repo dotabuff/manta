@@ -2324,15 +2324,15 @@ func (x *EDOTAGCMsg) UnmarshalJSON(data []byte) error {
 	*x = EDOTAGCMsg(value)
 	return nil
 }
-func (EDOTAGCMsg) EnumDescriptor() ([]byte, []int) { return fileDescriptor20, []int{0} }
+func (EDOTAGCMsg) EnumDescriptor() ([]byte, []int) { return fileDescriptor19, []int{0} }
 
 func init() {
 	proto.RegisterEnum("dota.EDOTAGCMsg", EDOTAGCMsg_name, EDOTAGCMsg_value)
 }
 
-func init() { proto.RegisterFile("dota_gcmessages_msgid.proto", fileDescriptor20) }
+func init() { proto.RegisterFile("dota_gcmessages_msgid.proto", fileDescriptor19) }
 
-var fileDescriptor20 = []byte{
+var fileDescriptor19 = []byte{
 	// 8544 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x7d, 0x79, 0x94, 0x6c, 0x45,
 	0x99, 0xe7, 0x78, 0xce, 0xcc, 0x3f, 0x79, 0xce, 0x9c, 0x89, 0xc9, 0xe9, 0xdd, 0xde, 0xf7, 0xb6,

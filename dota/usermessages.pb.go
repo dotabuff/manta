@@ -164,7 +164,7 @@ func (x *EBaseUserMessages) UnmarshalJSON(data []byte) error {
 	*x = EBaseUserMessages(value)
 	return nil
 }
-func (EBaseUserMessages) EnumDescriptor() ([]byte, []int) { return fileDescriptor43, []int{0} }
+func (EBaseUserMessages) EnumDescriptor() ([]byte, []int) { return fileDescriptor42, []int{0} }
 
 type EBaseEntityMessages int32
 
@@ -210,7 +210,7 @@ func (x *EBaseEntityMessages) UnmarshalJSON(data []byte) error {
 	*x = EBaseEntityMessages(value)
 	return nil
 }
-func (EBaseEntityMessages) EnumDescriptor() ([]byte, []int) { return fileDescriptor43, []int{1} }
+func (EBaseEntityMessages) EnumDescriptor() ([]byte, []int) { return fileDescriptor42, []int{1} }
 
 type ERollType int32
 
@@ -253,7 +253,7 @@ func (x *ERollType) UnmarshalJSON(data []byte) error {
 	*x = ERollType(value)
 	return nil
 }
-func (ERollType) EnumDescriptor() ([]byte, []int) { return fileDescriptor43, []int{2} }
+func (ERollType) EnumDescriptor() ([]byte, []int) { return fileDescriptor42, []int{2} }
 
 type PARTICLE_MESSAGE int32
 
@@ -335,7 +335,7 @@ func (x *PARTICLE_MESSAGE) UnmarshalJSON(data []byte) error {
 	*x = PARTICLE_MESSAGE(value)
 	return nil
 }
-func (PARTICLE_MESSAGE) EnumDescriptor() ([]byte, []int) { return fileDescriptor43, []int{3} }
+func (PARTICLE_MESSAGE) EnumDescriptor() ([]byte, []int) { return fileDescriptor42, []int{3} }
 
 type EHapticPulseType int32
 
@@ -372,7 +372,7 @@ func (x *EHapticPulseType) UnmarshalJSON(data []byte) error {
 	*x = EHapticPulseType(value)
 	return nil
 }
-func (EHapticPulseType) EnumDescriptor() ([]byte, []int) { return fileDescriptor43, []int{4} }
+func (EHapticPulseType) EnumDescriptor() ([]byte, []int) { return fileDescriptor42, []int{4} }
 
 type CUserMessageAchievementEvent struct {
 	Achievement      *uint32 `protobuf:"varint,1,opt,name=achievement" json:"achievement,omitempty"`
@@ -382,7 +382,7 @@ type CUserMessageAchievementEvent struct {
 func (m *CUserMessageAchievementEvent) Reset()                    { *m = CUserMessageAchievementEvent{} }
 func (m *CUserMessageAchievementEvent) String() string            { return proto.CompactTextString(m) }
 func (*CUserMessageAchievementEvent) ProtoMessage()               {}
-func (*CUserMessageAchievementEvent) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{0} }
+func (*CUserMessageAchievementEvent) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{0} }
 
 func (m *CUserMessageAchievementEvent) GetAchievement() uint32 {
 	if m != nil && m.Achievement != nil {
@@ -402,7 +402,7 @@ type CUserMessageCloseCaption struct {
 func (m *CUserMessageCloseCaption) Reset()                    { *m = CUserMessageCloseCaption{} }
 func (m *CUserMessageCloseCaption) String() string            { return proto.CompactTextString(m) }
 func (*CUserMessageCloseCaption) ProtoMessage()               {}
-func (*CUserMessageCloseCaption) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{1} }
+func (*CUserMessageCloseCaption) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{1} }
 
 func (m *CUserMessageCloseCaption) GetHash() uint32 {
 	if m != nil && m.Hash != nil {
@@ -443,7 +443,7 @@ type CUserMessageCloseCaptionDirect struct {
 func (m *CUserMessageCloseCaptionDirect) Reset()                    { *m = CUserMessageCloseCaptionDirect{} }
 func (m *CUserMessageCloseCaptionDirect) String() string            { return proto.CompactTextString(m) }
 func (*CUserMessageCloseCaptionDirect) ProtoMessage()               {}
-func (*CUserMessageCloseCaptionDirect) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{2} }
+func (*CUserMessageCloseCaptionDirect) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{2} }
 
 func (m *CUserMessageCloseCaptionDirect) GetHash() uint32 {
 	if m != nil && m.Hash != nil {
@@ -485,7 +485,7 @@ func (m *CUserMessageCloseCaptionPlaceholder) Reset()         { *m = CUserMessag
 func (m *CUserMessageCloseCaptionPlaceholder) String() string { return proto.CompactTextString(m) }
 func (*CUserMessageCloseCaptionPlaceholder) ProtoMessage()    {}
 func (*CUserMessageCloseCaptionPlaceholder) Descriptor() ([]byte, []int) {
-	return fileDescriptor43, []int{3}
+	return fileDescriptor42, []int{3}
 }
 
 func (m *CUserMessageCloseCaptionPlaceholder) GetString_() string {
@@ -524,7 +524,7 @@ type CUserMessageCurrentTimescale struct {
 func (m *CUserMessageCurrentTimescale) Reset()                    { *m = CUserMessageCurrentTimescale{} }
 func (m *CUserMessageCurrentTimescale) String() string            { return proto.CompactTextString(m) }
 func (*CUserMessageCurrentTimescale) ProtoMessage()               {}
-func (*CUserMessageCurrentTimescale) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{4} }
+func (*CUserMessageCurrentTimescale) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{4} }
 
 func (m *CUserMessageCurrentTimescale) GetCurrent() float32 {
 	if m != nil && m.Current != nil {
@@ -544,7 +544,7 @@ type CUserMessageDesiredTimescale struct {
 func (m *CUserMessageDesiredTimescale) Reset()                    { *m = CUserMessageDesiredTimescale{} }
 func (m *CUserMessageDesiredTimescale) String() string            { return proto.CompactTextString(m) }
 func (*CUserMessageDesiredTimescale) ProtoMessage()               {}
-func (*CUserMessageDesiredTimescale) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{5} }
+func (*CUserMessageDesiredTimescale) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{5} }
 
 func (m *CUserMessageDesiredTimescale) GetDesired() float32 {
 	if m != nil && m.Desired != nil {
@@ -585,7 +585,7 @@ type CUserMessageFade struct {
 func (m *CUserMessageFade) Reset()                    { *m = CUserMessageFade{} }
 func (m *CUserMessageFade) String() string            { return proto.CompactTextString(m) }
 func (*CUserMessageFade) ProtoMessage()               {}
-func (*CUserMessageFade) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{6} }
+func (*CUserMessageFade) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{6} }
 
 func (m *CUserMessageFade) GetDuration() uint32 {
 	if m != nil && m.Duration != nil {
@@ -626,7 +626,7 @@ type CUserMessageShake struct {
 func (m *CUserMessageShake) Reset()                    { *m = CUserMessageShake{} }
 func (m *CUserMessageShake) String() string            { return proto.CompactTextString(m) }
 func (*CUserMessageShake) ProtoMessage()               {}
-func (*CUserMessageShake) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{7} }
+func (*CUserMessageShake) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{7} }
 
 func (m *CUserMessageShake) GetCommand() uint32 {
 	if m != nil && m.Command != nil {
@@ -665,7 +665,7 @@ type CUserMessageShakeDir struct {
 func (m *CUserMessageShakeDir) Reset()                    { *m = CUserMessageShakeDir{} }
 func (m *CUserMessageShakeDir) String() string            { return proto.CompactTextString(m) }
 func (*CUserMessageShakeDir) ProtoMessage()               {}
-func (*CUserMessageShakeDir) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{8} }
+func (*CUserMessageShakeDir) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{8} }
 
 func (m *CUserMessageShakeDir) GetShake() *CUserMessageShake {
 	if m != nil {
@@ -693,7 +693,7 @@ type CUserMessageScreenTilt struct {
 func (m *CUserMessageScreenTilt) Reset()                    { *m = CUserMessageScreenTilt{} }
 func (m *CUserMessageScreenTilt) String() string            { return proto.CompactTextString(m) }
 func (*CUserMessageScreenTilt) ProtoMessage()               {}
-func (*CUserMessageScreenTilt) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{9} }
+func (*CUserMessageScreenTilt) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{9} }
 
 func (m *CUserMessageScreenTilt) GetCommand() uint32 {
 	if m != nil && m.Command != nil {
@@ -740,7 +740,7 @@ type CUserMessageSayText struct {
 func (m *CUserMessageSayText) Reset()                    { *m = CUserMessageSayText{} }
 func (m *CUserMessageSayText) String() string            { return proto.CompactTextString(m) }
 func (*CUserMessageSayText) ProtoMessage()               {}
-func (*CUserMessageSayText) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{10} }
+func (*CUserMessageSayText) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{10} }
 
 func (m *CUserMessageSayText) GetPlayerindex() uint32 {
 	if m != nil && m.Playerindex != nil {
@@ -777,7 +777,7 @@ type CUserMessageSayText2 struct {
 func (m *CUserMessageSayText2) Reset()                    { *m = CUserMessageSayText2{} }
 func (m *CUserMessageSayText2) String() string            { return proto.CompactTextString(m) }
 func (*CUserMessageSayText2) ProtoMessage()               {}
-func (*CUserMessageSayText2) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{11} }
+func (*CUserMessageSayText2) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{11} }
 
 func (m *CUserMessageSayText2) GetEntityindex() uint32 {
 	if m != nil && m.Entityindex != nil {
@@ -846,7 +846,7 @@ type CUserMessageHudMsg struct {
 func (m *CUserMessageHudMsg) Reset()                    { *m = CUserMessageHudMsg{} }
 func (m *CUserMessageHudMsg) String() string            { return proto.CompactTextString(m) }
 func (*CUserMessageHudMsg) ProtoMessage()               {}
-func (*CUserMessageHudMsg) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{12} }
+func (*CUserMessageHudMsg) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{12} }
 
 func (m *CUserMessageHudMsg) GetChannel() uint32 {
 	if m != nil && m.Channel != nil {
@@ -933,7 +933,7 @@ type CUserMessageHudText struct {
 func (m *CUserMessageHudText) Reset()                    { *m = CUserMessageHudText{} }
 func (m *CUserMessageHudText) String() string            { return proto.CompactTextString(m) }
 func (*CUserMessageHudText) ProtoMessage()               {}
-func (*CUserMessageHudText) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{13} }
+func (*CUserMessageHudText) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{13} }
 
 func (m *CUserMessageHudText) GetMessage() string {
 	if m != nil && m.Message != nil {
@@ -951,7 +951,7 @@ type CUserMessageTextMsg struct {
 func (m *CUserMessageTextMsg) Reset()                    { *m = CUserMessageTextMsg{} }
 func (m *CUserMessageTextMsg) String() string            { return proto.CompactTextString(m) }
 func (*CUserMessageTextMsg) ProtoMessage()               {}
-func (*CUserMessageTextMsg) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{14} }
+func (*CUserMessageTextMsg) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{14} }
 
 func (m *CUserMessageTextMsg) GetDest() uint32 {
 	if m != nil && m.Dest != nil {
@@ -974,7 +974,7 @@ type CUserMessageGameTitle struct {
 func (m *CUserMessageGameTitle) Reset()                    { *m = CUserMessageGameTitle{} }
 func (m *CUserMessageGameTitle) String() string            { return proto.CompactTextString(m) }
 func (*CUserMessageGameTitle) ProtoMessage()               {}
-func (*CUserMessageGameTitle) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{15} }
+func (*CUserMessageGameTitle) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{15} }
 
 type CUserMessageResetHUD struct {
 	XXX_unrecognized []byte `json:"-"`
@@ -983,7 +983,7 @@ type CUserMessageResetHUD struct {
 func (m *CUserMessageResetHUD) Reset()                    { *m = CUserMessageResetHUD{} }
 func (m *CUserMessageResetHUD) String() string            { return proto.CompactTextString(m) }
 func (*CUserMessageResetHUD) ProtoMessage()               {}
-func (*CUserMessageResetHUD) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{16} }
+func (*CUserMessageResetHUD) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{16} }
 
 type CUserMessageSendAudio struct {
 	Soundname        *string `protobuf:"bytes,1,opt,name=soundname" json:"soundname,omitempty"`
@@ -994,7 +994,7 @@ type CUserMessageSendAudio struct {
 func (m *CUserMessageSendAudio) Reset()                    { *m = CUserMessageSendAudio{} }
 func (m *CUserMessageSendAudio) String() string            { return proto.CompactTextString(m) }
 func (*CUserMessageSendAudio) ProtoMessage()               {}
-func (*CUserMessageSendAudio) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{17} }
+func (*CUserMessageSendAudio) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{17} }
 
 func (m *CUserMessageSendAudio) GetSoundname() string {
 	if m != nil && m.Soundname != nil {
@@ -1021,7 +1021,7 @@ type CUserMessageAudioParameter struct {
 func (m *CUserMessageAudioParameter) Reset()                    { *m = CUserMessageAudioParameter{} }
 func (m *CUserMessageAudioParameter) String() string            { return proto.CompactTextString(m) }
 func (*CUserMessageAudioParameter) ProtoMessage()               {}
-func (*CUserMessageAudioParameter) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{18} }
+func (*CUserMessageAudioParameter) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{18} }
 
 func (m *CUserMessageAudioParameter) GetParameterType() uint32 {
 	if m != nil && m.ParameterType != nil {
@@ -1061,7 +1061,7 @@ type CUserMessageVoiceMask struct {
 func (m *CUserMessageVoiceMask) Reset()                    { *m = CUserMessageVoiceMask{} }
 func (m *CUserMessageVoiceMask) String() string            { return proto.CompactTextString(m) }
 func (*CUserMessageVoiceMask) ProtoMessage()               {}
-func (*CUserMessageVoiceMask) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{19} }
+func (*CUserMessageVoiceMask) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{19} }
 
 func (m *CUserMessageVoiceMask) GetGamerulesMasks() []uint32 {
 	if m != nil {
@@ -1091,7 +1091,7 @@ type CUserMessageRequestState struct {
 func (m *CUserMessageRequestState) Reset()                    { *m = CUserMessageRequestState{} }
 func (m *CUserMessageRequestState) String() string            { return proto.CompactTextString(m) }
 func (*CUserMessageRequestState) ProtoMessage()               {}
-func (*CUserMessageRequestState) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{20} }
+func (*CUserMessageRequestState) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{20} }
 
 type CUserMessageHintText struct {
 	Message          *string `protobuf:"bytes,1,opt,name=message" json:"message,omitempty"`
@@ -1101,7 +1101,7 @@ type CUserMessageHintText struct {
 func (m *CUserMessageHintText) Reset()                    { *m = CUserMessageHintText{} }
 func (m *CUserMessageHintText) String() string            { return proto.CompactTextString(m) }
 func (*CUserMessageHintText) ProtoMessage()               {}
-func (*CUserMessageHintText) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{21} }
+func (*CUserMessageHintText) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{21} }
 
 func (m *CUserMessageHintText) GetMessage() string {
 	if m != nil && m.Message != nil {
@@ -1118,7 +1118,7 @@ type CUserMessageKeyHintText struct {
 func (m *CUserMessageKeyHintText) Reset()                    { *m = CUserMessageKeyHintText{} }
 func (m *CUserMessageKeyHintText) String() string            { return proto.CompactTextString(m) }
 func (*CUserMessageKeyHintText) ProtoMessage()               {}
-func (*CUserMessageKeyHintText) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{22} }
+func (*CUserMessageKeyHintText) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{22} }
 
 func (m *CUserMessageKeyHintText) GetMessages() []string {
 	if m != nil {
@@ -1137,7 +1137,7 @@ type CUserMessageVoiceSubtitle struct {
 func (m *CUserMessageVoiceSubtitle) Reset()                    { *m = CUserMessageVoiceSubtitle{} }
 func (m *CUserMessageVoiceSubtitle) String() string            { return proto.CompactTextString(m) }
 func (*CUserMessageVoiceSubtitle) ProtoMessage()               {}
-func (*CUserMessageVoiceSubtitle) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{23} }
+func (*CUserMessageVoiceSubtitle) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{23} }
 
 func (m *CUserMessageVoiceSubtitle) GetPlayer() int32 {
 	if m != nil && m.Player != nil {
@@ -1170,7 +1170,7 @@ type CUserMessageVGUIMenu struct {
 func (m *CUserMessageVGUIMenu) Reset()                    { *m = CUserMessageVGUIMenu{} }
 func (m *CUserMessageVGUIMenu) String() string            { return proto.CompactTextString(m) }
 func (*CUserMessageVGUIMenu) ProtoMessage()               {}
-func (*CUserMessageVGUIMenu) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{24} }
+func (*CUserMessageVGUIMenu) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{24} }
 
 func (m *CUserMessageVGUIMenu) GetName() string {
 	if m != nil && m.Name != nil {
@@ -1202,7 +1202,7 @@ type CUserMessageVGUIMenu_Keys struct {
 func (m *CUserMessageVGUIMenu_Keys) Reset()                    { *m = CUserMessageVGUIMenu_Keys{} }
 func (m *CUserMessageVGUIMenu_Keys) String() string            { return proto.CompactTextString(m) }
 func (*CUserMessageVGUIMenu_Keys) ProtoMessage()               {}
-func (*CUserMessageVGUIMenu_Keys) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{24, 0} }
+func (*CUserMessageVGUIMenu_Keys) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{24, 0} }
 
 func (m *CUserMessageVGUIMenu_Keys) GetName() string {
 	if m != nil && m.Name != nil {
@@ -1228,7 +1228,7 @@ type CUserMessageRumble struct {
 func (m *CUserMessageRumble) Reset()                    { *m = CUserMessageRumble{} }
 func (m *CUserMessageRumble) String() string            { return proto.CompactTextString(m) }
 func (*CUserMessageRumble) ProtoMessage()               {}
-func (*CUserMessageRumble) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{25} }
+func (*CUserMessageRumble) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{25} }
 
 func (m *CUserMessageRumble) GetIndex() int32 {
 	if m != nil && m.Index != nil {
@@ -1259,7 +1259,7 @@ type CUserMessageTrain struct {
 func (m *CUserMessageTrain) Reset()                    { *m = CUserMessageTrain{} }
 func (m *CUserMessageTrain) String() string            { return proto.CompactTextString(m) }
 func (*CUserMessageTrain) ProtoMessage()               {}
-func (*CUserMessageTrain) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{26} }
+func (*CUserMessageTrain) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{26} }
 
 func (m *CUserMessageTrain) GetPosition() uint32 {
 	if m != nil && m.Position != nil {
@@ -1278,7 +1278,7 @@ type CUserMessageSayTextChannel struct {
 func (m *CUserMessageSayTextChannel) Reset()                    { *m = CUserMessageSayTextChannel{} }
 func (m *CUserMessageSayTextChannel) String() string            { return proto.CompactTextString(m) }
 func (*CUserMessageSayTextChannel) ProtoMessage()               {}
-func (*CUserMessageSayTextChannel) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{27} }
+func (*CUserMessageSayTextChannel) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{27} }
 
 func (m *CUserMessageSayTextChannel) GetPlayer() int32 {
 	if m != nil && m.Player != nil {
@@ -1314,7 +1314,7 @@ type CUserMessageColoredText struct {
 func (m *CUserMessageColoredText) Reset()                    { *m = CUserMessageColoredText{} }
 func (m *CUserMessageColoredText) String() string            { return proto.CompactTextString(m) }
 func (*CUserMessageColoredText) ProtoMessage()               {}
-func (*CUserMessageColoredText) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{28} }
+func (*CUserMessageColoredText) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{28} }
 
 func (m *CUserMessageColoredText) GetColor() uint32 {
 	if m != nil && m.Color != nil {
@@ -1366,7 +1366,7 @@ type CUserMessageItemPickup struct {
 func (m *CUserMessageItemPickup) Reset()                    { *m = CUserMessageItemPickup{} }
 func (m *CUserMessageItemPickup) String() string            { return proto.CompactTextString(m) }
 func (*CUserMessageItemPickup) ProtoMessage()               {}
-func (*CUserMessageItemPickup) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{29} }
+func (*CUserMessageItemPickup) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{29} }
 
 func (m *CUserMessageItemPickup) GetItemname() string {
 	if m != nil && m.Itemname != nil {
@@ -1383,7 +1383,7 @@ type CUserMessageAmmoDenied struct {
 func (m *CUserMessageAmmoDenied) Reset()                    { *m = CUserMessageAmmoDenied{} }
 func (m *CUserMessageAmmoDenied) String() string            { return proto.CompactTextString(m) }
 func (*CUserMessageAmmoDenied) ProtoMessage()               {}
-func (*CUserMessageAmmoDenied) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{30} }
+func (*CUserMessageAmmoDenied) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{30} }
 
 func (m *CUserMessageAmmoDenied) GetAmmoId() uint32 {
 	if m != nil && m.AmmoId != nil {
@@ -1400,7 +1400,7 @@ type CUserMessageCrosshairAngle struct {
 func (m *CUserMessageCrosshairAngle) Reset()                    { *m = CUserMessageCrosshairAngle{} }
 func (m *CUserMessageCrosshairAngle) String() string            { return proto.CompactTextString(m) }
 func (*CUserMessageCrosshairAngle) ProtoMessage()               {}
-func (*CUserMessageCrosshairAngle) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{31} }
+func (*CUserMessageCrosshairAngle) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{31} }
 
 func (m *CUserMessageCrosshairAngle) GetAngcrosshair() *CMsgQAngle {
 	if m != nil {
@@ -1420,7 +1420,7 @@ type CUserMessageShowMenu struct {
 func (m *CUserMessageShowMenu) Reset()                    { *m = CUserMessageShowMenu{} }
 func (m *CUserMessageShowMenu) String() string            { return proto.CompactTextString(m) }
 func (*CUserMessageShowMenu) ProtoMessage()               {}
-func (*CUserMessageShowMenu) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{32} }
+func (*CUserMessageShowMenu) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{32} }
 
 func (m *CUserMessageShowMenu) GetValidslots() uint32 {
 	if m != nil && m.Validslots != nil {
@@ -1459,7 +1459,7 @@ type CUserMessageCreditsMsg struct {
 func (m *CUserMessageCreditsMsg) Reset()                    { *m = CUserMessageCreditsMsg{} }
 func (m *CUserMessageCreditsMsg) String() string            { return proto.CompactTextString(m) }
 func (*CUserMessageCreditsMsg) ProtoMessage()               {}
-func (*CUserMessageCreditsMsg) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{33} }
+func (*CUserMessageCreditsMsg) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{33} }
 
 const Default_CUserMessageCreditsMsg_Rolltype ERollType = ERollType_ROLL_NONE
 
@@ -1484,7 +1484,7 @@ type CEntityMessagePlayJingle struct {
 func (m *CEntityMessagePlayJingle) Reset()                    { *m = CEntityMessagePlayJingle{} }
 func (m *CEntityMessagePlayJingle) String() string            { return proto.CompactTextString(m) }
 func (*CEntityMessagePlayJingle) ProtoMessage()               {}
-func (*CEntityMessagePlayJingle) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{34} }
+func (*CEntityMessagePlayJingle) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{34} }
 
 type CEntityMessageScreenOverlay struct {
 	StartEffect      *bool  `protobuf:"varint,1,opt,name=start_effect,json=startEffect" json:"start_effect,omitempty"`
@@ -1494,7 +1494,7 @@ type CEntityMessageScreenOverlay struct {
 func (m *CEntityMessageScreenOverlay) Reset()                    { *m = CEntityMessageScreenOverlay{} }
 func (m *CEntityMessageScreenOverlay) String() string            { return proto.CompactTextString(m) }
 func (*CEntityMessageScreenOverlay) ProtoMessage()               {}
-func (*CEntityMessageScreenOverlay) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{35} }
+func (*CEntityMessageScreenOverlay) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{35} }
 
 func (m *CEntityMessageScreenOverlay) GetStartEffect() bool {
 	if m != nil && m.StartEffect != nil {
@@ -1511,7 +1511,7 @@ type CEntityMessageRemoveAllDecals struct {
 func (m *CEntityMessageRemoveAllDecals) Reset()                    { *m = CEntityMessageRemoveAllDecals{} }
 func (m *CEntityMessageRemoveAllDecals) String() string            { return proto.CompactTextString(m) }
 func (*CEntityMessageRemoveAllDecals) ProtoMessage()               {}
-func (*CEntityMessageRemoveAllDecals) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{36} }
+func (*CEntityMessageRemoveAllDecals) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{36} }
 
 func (m *CEntityMessageRemoveAllDecals) GetRemoveDecals() bool {
 	if m != nil && m.RemoveDecals != nil {
@@ -1528,7 +1528,7 @@ type CEntityMessagePropagateForce struct {
 func (m *CEntityMessagePropagateForce) Reset()                    { *m = CEntityMessagePropagateForce{} }
 func (m *CEntityMessagePropagateForce) String() string            { return proto.CompactTextString(m) }
 func (*CEntityMessagePropagateForce) ProtoMessage()               {}
-func (*CEntityMessagePropagateForce) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{37} }
+func (*CEntityMessagePropagateForce) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{37} }
 
 func (m *CEntityMessagePropagateForce) GetImpulse() *CMsgVector {
 	if m != nil {
@@ -1551,7 +1551,7 @@ type CEntityMessageDoSpark struct {
 func (m *CEntityMessageDoSpark) Reset()                    { *m = CEntityMessageDoSpark{} }
 func (m *CEntityMessageDoSpark) String() string            { return proto.CompactTextString(m) }
 func (*CEntityMessageDoSpark) ProtoMessage()               {}
-func (*CEntityMessageDoSpark) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{38} }
+func (*CEntityMessageDoSpark) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{38} }
 
 func (m *CEntityMessageDoSpark) GetOrigin() *CMsgVector {
 	if m != nil {
@@ -1611,7 +1611,7 @@ type CEntityMessageFixAngle struct {
 func (m *CEntityMessageFixAngle) Reset()                    { *m = CEntityMessageFixAngle{} }
 func (m *CEntityMessageFixAngle) String() string            { return proto.CompactTextString(m) }
 func (*CEntityMessageFixAngle) ProtoMessage()               {}
-func (*CEntityMessageFixAngle) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{39} }
+func (*CEntityMessageFixAngle) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{39} }
 
 func (m *CEntityMessageFixAngle) GetRelative() bool {
 	if m != nil && m.Relative != nil {
@@ -1637,7 +1637,7 @@ type CUserMessageCameraTransition struct {
 func (m *CUserMessageCameraTransition) Reset()                    { *m = CUserMessageCameraTransition{} }
 func (m *CUserMessageCameraTransition) String() string            { return proto.CompactTextString(m) }
 func (*CUserMessageCameraTransition) ProtoMessage()               {}
-func (*CUserMessageCameraTransition) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{40} }
+func (*CUserMessageCameraTransition) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{40} }
 
 func (m *CUserMessageCameraTransition) GetCameraType() uint32 {
 	if m != nil && m.CameraType != nil {
@@ -1674,7 +1674,7 @@ func (m *CUserMessageCameraTransition_Transition_DataDriven) String() string {
 }
 func (*CUserMessageCameraTransition_Transition_DataDriven) ProtoMessage() {}
 func (*CUserMessageCameraTransition_Transition_DataDriven) Descriptor() ([]byte, []int) {
-	return fileDescriptor43, []int{40, 0}
+	return fileDescriptor42, []int{40, 0}
 }
 
 func (m *CUserMessageCameraTransition_Transition_DataDriven) GetFilename() string {
@@ -1717,7 +1717,7 @@ type CUserMsg_ParticleManager struct {
 func (m *CUserMsg_ParticleManager) Reset()                    { *m = CUserMsg_ParticleManager{} }
 func (m *CUserMsg_ParticleManager) String() string            { return proto.CompactTextString(m) }
 func (*CUserMsg_ParticleManager) ProtoMessage()               {}
-func (*CUserMsg_ParticleManager) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{41} }
+func (*CUserMsg_ParticleManager) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{41} }
 
 const Default_CUserMsg_ParticleManager_Type PARTICLE_MESSAGE = PARTICLE_MESSAGE_GAME_PARTICLE_MANAGER_EVENT_CREATE
 
@@ -1866,7 +1866,7 @@ func (m *CUserMsg_ParticleManager_ReleaseParticleIndex) String() string {
 }
 func (*CUserMsg_ParticleManager_ReleaseParticleIndex) ProtoMessage() {}
 func (*CUserMsg_ParticleManager_ReleaseParticleIndex) Descriptor() ([]byte, []int) {
-	return fileDescriptor43, []int{41, 0}
+	return fileDescriptor42, []int{41, 0}
 }
 
 type CUserMsg_ParticleManager_CreateParticle struct {
@@ -1883,7 +1883,7 @@ func (m *CUserMsg_ParticleManager_CreateParticle) Reset() {
 func (m *CUserMsg_ParticleManager_CreateParticle) String() string { return proto.CompactTextString(m) }
 func (*CUserMsg_ParticleManager_CreateParticle) ProtoMessage()    {}
 func (*CUserMsg_ParticleManager_CreateParticle) Descriptor() ([]byte, []int) {
-	return fileDescriptor43, []int{41, 1}
+	return fileDescriptor42, []int{41, 1}
 }
 
 func (m *CUserMsg_ParticleManager_CreateParticle) GetParticleNameIndex() uint64 {
@@ -1925,7 +1925,7 @@ func (m *CUserMsg_ParticleManager_DestroyParticle) Reset() {
 func (m *CUserMsg_ParticleManager_DestroyParticle) String() string { return proto.CompactTextString(m) }
 func (*CUserMsg_ParticleManager_DestroyParticle) ProtoMessage()    {}
 func (*CUserMsg_ParticleManager_DestroyParticle) Descriptor() ([]byte, []int) {
-	return fileDescriptor43, []int{41, 2}
+	return fileDescriptor42, []int{41, 2}
 }
 
 func (m *CUserMsg_ParticleManager_DestroyParticle) GetDestroyImmediately() bool {
@@ -1949,7 +1949,7 @@ func (m *CUserMsg_ParticleManager_DestroyParticleInvolving) String() string {
 }
 func (*CUserMsg_ParticleManager_DestroyParticleInvolving) ProtoMessage() {}
 func (*CUserMsg_ParticleManager_DestroyParticleInvolving) Descriptor() ([]byte, []int) {
-	return fileDescriptor43, []int{41, 3}
+	return fileDescriptor42, []int{41, 3}
 }
 
 func (m *CUserMsg_ParticleManager_DestroyParticleInvolving) GetDestroyImmediately() bool {
@@ -1978,7 +1978,7 @@ func (m *CUserMsg_ParticleManager_UpdateParticle) Reset() {
 func (m *CUserMsg_ParticleManager_UpdateParticle) String() string { return proto.CompactTextString(m) }
 func (*CUserMsg_ParticleManager_UpdateParticle) ProtoMessage()    {}
 func (*CUserMsg_ParticleManager_UpdateParticle) Descriptor() ([]byte, []int) {
-	return fileDescriptor43, []int{41, 4}
+	return fileDescriptor42, []int{41, 4}
 }
 
 func (m *CUserMsg_ParticleManager_UpdateParticle) GetControlPoint() int32 {
@@ -2009,7 +2009,7 @@ func (m *CUserMsg_ParticleManager_UpdateParticleFwd) String() string {
 }
 func (*CUserMsg_ParticleManager_UpdateParticleFwd) ProtoMessage() {}
 func (*CUserMsg_ParticleManager_UpdateParticleFwd) Descriptor() ([]byte, []int) {
-	return fileDescriptor43, []int{41, 5}
+	return fileDescriptor42, []int{41, 5}
 }
 
 func (m *CUserMsg_ParticleManager_UpdateParticleFwd) GetControlPoint() int32 {
@@ -2042,7 +2042,7 @@ func (m *CUserMsg_ParticleManager_UpdateParticleOrient) String() string {
 }
 func (*CUserMsg_ParticleManager_UpdateParticleOrient) ProtoMessage() {}
 func (*CUserMsg_ParticleManager_UpdateParticleOrient) Descriptor() ([]byte, []int) {
-	return fileDescriptor43, []int{41, 6}
+	return fileDescriptor42, []int{41, 6}
 }
 
 func (m *CUserMsg_ParticleManager_UpdateParticleOrient) GetControlPoint() int32 {
@@ -2087,7 +2087,7 @@ func (m *CUserMsg_ParticleManager_UpdateParticleFallback) String() string {
 }
 func (*CUserMsg_ParticleManager_UpdateParticleFallback) ProtoMessage() {}
 func (*CUserMsg_ParticleManager_UpdateParticleFallback) Descriptor() ([]byte, []int) {
-	return fileDescriptor43, []int{41, 7}
+	return fileDescriptor42, []int{41, 7}
 }
 
 func (m *CUserMsg_ParticleManager_UpdateParticleFallback) GetControlPoint() int32 {
@@ -2118,7 +2118,7 @@ func (m *CUserMsg_ParticleManager_UpdateParticleOffset) String() string {
 }
 func (*CUserMsg_ParticleManager_UpdateParticleOffset) ProtoMessage() {}
 func (*CUserMsg_ParticleManager_UpdateParticleOffset) Descriptor() ([]byte, []int) {
-	return fileDescriptor43, []int{41, 8}
+	return fileDescriptor42, []int{41, 8}
 }
 
 func (m *CUserMsg_ParticleManager_UpdateParticleOffset) GetControlPoint() int32 {
@@ -2153,7 +2153,7 @@ func (m *CUserMsg_ParticleManager_UpdateParticleEnt) String() string {
 }
 func (*CUserMsg_ParticleManager_UpdateParticleEnt) ProtoMessage() {}
 func (*CUserMsg_ParticleManager_UpdateParticleEnt) Descriptor() ([]byte, []int) {
-	return fileDescriptor43, []int{41, 9}
+	return fileDescriptor42, []int{41, 9}
 }
 
 func (m *CUserMsg_ParticleManager_UpdateParticleEnt) GetControlPoint() int32 {
@@ -2211,7 +2211,7 @@ func (m *CUserMsg_ParticleManager_UpdateParticleSetFrozen) String() string {
 }
 func (*CUserMsg_ParticleManager_UpdateParticleSetFrozen) ProtoMessage() {}
 func (*CUserMsg_ParticleManager_UpdateParticleSetFrozen) Descriptor() ([]byte, []int) {
-	return fileDescriptor43, []int{41, 10}
+	return fileDescriptor42, []int{41, 10}
 }
 
 func (m *CUserMsg_ParticleManager_UpdateParticleSetFrozen) GetSetFrozen() bool {
@@ -2234,7 +2234,7 @@ func (m *CUserMsg_ParticleManager_UpdateParticleShouldDraw) String() string {
 }
 func (*CUserMsg_ParticleManager_UpdateParticleShouldDraw) ProtoMessage() {}
 func (*CUserMsg_ParticleManager_UpdateParticleShouldDraw) Descriptor() ([]byte, []int) {
-	return fileDescriptor43, []int{41, 11}
+	return fileDescriptor42, []int{41, 11}
 }
 
 func (m *CUserMsg_ParticleManager_UpdateParticleShouldDraw) GetShouldDraw() bool {
@@ -2259,7 +2259,7 @@ func (m *CUserMsg_ParticleManager_ChangeControlPointAttachment) String() string 
 }
 func (*CUserMsg_ParticleManager_ChangeControlPointAttachment) ProtoMessage() {}
 func (*CUserMsg_ParticleManager_ChangeControlPointAttachment) Descriptor() ([]byte, []int) {
-	return fileDescriptor43, []int{41, 12}
+	return fileDescriptor42, []int{41, 12}
 }
 
 func (m *CUserMsg_ParticleManager_ChangeControlPointAttachment) GetAttachmentOld() int32 {
@@ -2297,7 +2297,7 @@ func (m *CUserMsg_ParticleManager_UpdateEntityPosition) String() string {
 }
 func (*CUserMsg_ParticleManager_UpdateEntityPosition) ProtoMessage() {}
 func (*CUserMsg_ParticleManager_UpdateEntityPosition) Descriptor() ([]byte, []int) {
-	return fileDescriptor43, []int{41, 13}
+	return fileDescriptor42, []int{41, 13}
 }
 
 func (m *CUserMsg_ParticleManager_UpdateEntityPosition) GetEntityHandle() int32 {
@@ -2329,7 +2329,7 @@ func (m *CUserMsg_ParticleManager_SetParticleFoWProperties) String() string {
 }
 func (*CUserMsg_ParticleManager_SetParticleFoWProperties) ProtoMessage() {}
 func (*CUserMsg_ParticleManager_SetParticleFoWProperties) Descriptor() ([]byte, []int) {
-	return fileDescriptor43, []int{41, 14}
+	return fileDescriptor42, []int{41, 14}
 }
 
 func (m *CUserMsg_ParticleManager_SetParticleFoWProperties) GetFowControlPoint() int32 {
@@ -2366,7 +2366,7 @@ func (m *CUserMsg_ParticleManager_SetParticleShouldCheckFoW) String() string {
 }
 func (*CUserMsg_ParticleManager_SetParticleShouldCheckFoW) ProtoMessage() {}
 func (*CUserMsg_ParticleManager_SetParticleShouldCheckFoW) Descriptor() ([]byte, []int) {
-	return fileDescriptor43, []int{41, 15}
+	return fileDescriptor42, []int{41, 15}
 }
 
 func (m *CUserMsg_ParticleManager_SetParticleShouldCheckFoW) GetCheckFow() bool {
@@ -2387,7 +2387,7 @@ func (m *CUserMsg_ParticleManager_SetParticleText) Reset() {
 func (m *CUserMsg_ParticleManager_SetParticleText) String() string { return proto.CompactTextString(m) }
 func (*CUserMsg_ParticleManager_SetParticleText) ProtoMessage()    {}
 func (*CUserMsg_ParticleManager_SetParticleText) Descriptor() ([]byte, []int) {
-	return fileDescriptor43, []int{41, 16}
+	return fileDescriptor42, []int{41, 16}
 }
 
 func (m *CUserMsg_ParticleManager_SetParticleText) GetText() string {
@@ -2405,7 +2405,7 @@ type CUserMsg_HudError struct {
 func (m *CUserMsg_HudError) Reset()                    { *m = CUserMsg_HudError{} }
 func (m *CUserMsg_HudError) String() string            { return proto.CompactTextString(m) }
 func (*CUserMsg_HudError) ProtoMessage()               {}
-func (*CUserMsg_HudError) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{42} }
+func (*CUserMsg_HudError) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{42} }
 
 func (m *CUserMsg_HudError) GetOrderId() int32 {
 	if m != nil && m.OrderId != nil {
@@ -2423,7 +2423,7 @@ type CUserMsg_CustomGameEvent struct {
 func (m *CUserMsg_CustomGameEvent) Reset()                    { *m = CUserMsg_CustomGameEvent{} }
 func (m *CUserMsg_CustomGameEvent) String() string            { return proto.CompactTextString(m) }
 func (*CUserMsg_CustomGameEvent) ProtoMessage()               {}
-func (*CUserMsg_CustomGameEvent) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{43} }
+func (*CUserMsg_CustomGameEvent) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{43} }
 
 func (m *CUserMsg_CustomGameEvent) GetEventName() string {
 	if m != nil && m.EventName != nil {
@@ -2448,7 +2448,7 @@ type CUserMessageHapticPulse struct {
 func (m *CUserMessageHapticPulse) Reset()                    { *m = CUserMessageHapticPulse{} }
 func (m *CUserMessageHapticPulse) String() string            { return proto.CompactTextString(m) }
 func (*CUserMessageHapticPulse) ProtoMessage()               {}
-func (*CUserMessageHapticPulse) Descriptor() ([]byte, []int) { return fileDescriptor43, []int{44} }
+func (*CUserMessageHapticPulse) Descriptor() ([]byte, []int) { return fileDescriptor42, []int{44} }
 
 const Default_CUserMessageHapticPulse_PulseType EHapticPulseType = EHapticPulseType_VR_HAND_HAPTIC_PULSE_LIGHT
 
@@ -2476,7 +2476,7 @@ func (m *CUserMessageHapticPulsePrecise) Reset()         { *m = CUserMessageHapt
 func (m *CUserMessageHapticPulsePrecise) String() string { return proto.CompactTextString(m) }
 func (*CUserMessageHapticPulsePrecise) ProtoMessage()    {}
 func (*CUserMessageHapticPulsePrecise) Descriptor() ([]byte, []int) {
-	return fileDescriptor43, []int{45}
+	return fileDescriptor42, []int{45}
 }
 
 func (m *CUserMessageHapticPulsePrecise) GetHandId() int32 {
@@ -2503,7 +2503,7 @@ func (m *CUserMessageAnimStateGraphState) Reset()         { *m = CUserMessageAni
 func (m *CUserMessageAnimStateGraphState) String() string { return proto.CompactTextString(m) }
 func (*CUserMessageAnimStateGraphState) ProtoMessage()    {}
 func (*CUserMessageAnimStateGraphState) Descriptor() ([]byte, []int) {
-	return fileDescriptor43, []int{46}
+	return fileDescriptor42, []int{46}
 }
 
 func (m *CUserMessageAnimStateGraphState) GetEntityIndex() int32 {
@@ -2594,9 +2594,9 @@ func init() {
 	proto.RegisterEnum("dota.EHapticPulseType", EHapticPulseType_name, EHapticPulseType_value)
 }
 
-func init() { proto.RegisterFile("usermessages.proto", fileDescriptor43) }
+func init() { proto.RegisterFile("usermessages.proto", fileDescriptor42) }
 
-var fileDescriptor43 = []byte{
+var fileDescriptor42 = []byte{
 	// 3889 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xbc, 0x5a, 0x5b, 0x73, 0x23, 0xc7,
 	0x75, 0xd6, 0x60, 0x79, 0xc3, 0xe1, 0xad, 0xd9, 0xbb, 0xcb, 0xc5, 0x62, 0xb5, 0xbb, 0xf4, 0xc8,

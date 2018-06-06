@@ -24,7 +24,7 @@ func (m *CPublishedFile_Subscribe_Request) Reset()         { *m = CPublishedFile
 func (m *CPublishedFile_Subscribe_Request) String() string { return proto.CompactTextString(m) }
 func (*CPublishedFile_Subscribe_Request) ProtoMessage()    {}
 func (*CPublishedFile_Subscribe_Request) Descriptor() ([]byte, []int) {
-	return fileDescriptor39, []int{0}
+	return fileDescriptor38, []int{0}
 }
 
 func (m *CPublishedFile_Subscribe_Request) GetPublishedfileid() uint64 {
@@ -63,7 +63,7 @@ func (m *CPublishedFile_Subscribe_Response) Reset()         { *m = CPublishedFil
 func (m *CPublishedFile_Subscribe_Response) String() string { return proto.CompactTextString(m) }
 func (*CPublishedFile_Subscribe_Response) ProtoMessage()    {}
 func (*CPublishedFile_Subscribe_Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor39, []int{1}
+	return fileDescriptor38, []int{1}
 }
 
 type CPublishedFile_Unsubscribe_Request struct {
@@ -78,7 +78,7 @@ func (m *CPublishedFile_Unsubscribe_Request) Reset()         { *m = CPublishedFi
 func (m *CPublishedFile_Unsubscribe_Request) String() string { return proto.CompactTextString(m) }
 func (*CPublishedFile_Unsubscribe_Request) ProtoMessage()    {}
 func (*CPublishedFile_Unsubscribe_Request) Descriptor() ([]byte, []int) {
-	return fileDescriptor39, []int{2}
+	return fileDescriptor38, []int{2}
 }
 
 func (m *CPublishedFile_Unsubscribe_Request) GetPublishedfileid() uint64 {
@@ -117,7 +117,7 @@ func (m *CPublishedFile_Unsubscribe_Response) Reset()         { *m = CPublishedF
 func (m *CPublishedFile_Unsubscribe_Response) String() string { return proto.CompactTextString(m) }
 func (*CPublishedFile_Unsubscribe_Response) ProtoMessage()    {}
 func (*CPublishedFile_Unsubscribe_Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor39, []int{3}
+	return fileDescriptor38, []int{3}
 }
 
 type CPublishedFile_Publish_Request struct {
@@ -143,7 +143,7 @@ type CPublishedFile_Publish_Request struct {
 func (m *CPublishedFile_Publish_Request) Reset()                    { *m = CPublishedFile_Publish_Request{} }
 func (m *CPublishedFile_Publish_Request) String() string            { return proto.CompactTextString(m) }
 func (*CPublishedFile_Publish_Request) ProtoMessage()               {}
-func (*CPublishedFile_Publish_Request) Descriptor() ([]byte, []int) { return fileDescriptor39, []int{4} }
+func (*CPublishedFile_Publish_Request) Descriptor() ([]byte, []int) { return fileDescriptor38, []int{4} }
 
 func (m *CPublishedFile_Publish_Request) GetAppid() uint32 {
 	if m != nil && m.Appid != nil {
@@ -267,7 +267,7 @@ func (m *CPublishedFile_Publish_Response) Reset()         { *m = CPublishedFile_
 func (m *CPublishedFile_Publish_Response) String() string { return proto.CompactTextString(m) }
 func (*CPublishedFile_Publish_Response) ProtoMessage()    {}
 func (*CPublishedFile_Publish_Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor39, []int{5}
+	return fileDescriptor38, []int{5}
 }
 
 func (m *CPublishedFile_Publish_Response) GetPublishedfileid() uint64 {
@@ -299,7 +299,7 @@ func (m *CPublishedFile_GetDetails_Request) Reset()         { *m = CPublishedFil
 func (m *CPublishedFile_GetDetails_Request) String() string { return proto.CompactTextString(m) }
 func (*CPublishedFile_GetDetails_Request) ProtoMessage()    {}
 func (*CPublishedFile_GetDetails_Request) Descriptor() ([]byte, []int) {
-	return fileDescriptor39, []int{6}
+	return fileDescriptor38, []int{6}
 }
 
 func (m *CPublishedFile_GetDetails_Request) GetPublishedfileids() []uint64 {
@@ -414,7 +414,7 @@ type PublishedFileDetails struct {
 func (m *PublishedFileDetails) Reset()                    { *m = PublishedFileDetails{} }
 func (m *PublishedFileDetails) String() string            { return proto.CompactTextString(m) }
 func (*PublishedFileDetails) ProtoMessage()               {}
-func (*PublishedFileDetails) Descriptor() ([]byte, []int) { return fileDescriptor39, []int{7} }
+func (*PublishedFileDetails) Descriptor() ([]byte, []int) { return fileDescriptor38, []int{7} }
 
 func (m *PublishedFileDetails) GetResult() uint32 {
 	if m != nil && m.Result != nil {
@@ -817,7 +817,7 @@ type PublishedFileDetails_Tag struct {
 func (m *PublishedFileDetails_Tag) Reset()                    { *m = PublishedFileDetails_Tag{} }
 func (m *PublishedFileDetails_Tag) String() string            { return proto.CompactTextString(m) }
 func (*PublishedFileDetails_Tag) ProtoMessage()               {}
-func (*PublishedFileDetails_Tag) Descriptor() ([]byte, []int) { return fileDescriptor39, []int{7, 0} }
+func (*PublishedFileDetails_Tag) Descriptor() ([]byte, []int) { return fileDescriptor38, []int{7, 0} }
 
 func (m *PublishedFileDetails_Tag) GetTag() string {
 	if m != nil && m.Tag != nil {
@@ -847,7 +847,7 @@ func (m *PublishedFileDetails_Preview) Reset()         { *m = PublishedFileDetai
 func (m *PublishedFileDetails_Preview) String() string { return proto.CompactTextString(m) }
 func (*PublishedFileDetails_Preview) ProtoMessage()    {}
 func (*PublishedFileDetails_Preview) Descriptor() ([]byte, []int) {
-	return fileDescriptor39, []int{7, 1}
+	return fileDescriptor38, []int{7, 1}
 }
 
 func (m *PublishedFileDetails_Preview) GetPreviewid() uint64 {
@@ -902,7 +902,7 @@ type PublishedFileDetails_Child struct {
 func (m *PublishedFileDetails_Child) Reset()                    { *m = PublishedFileDetails_Child{} }
 func (m *PublishedFileDetails_Child) String() string            { return proto.CompactTextString(m) }
 func (*PublishedFileDetails_Child) ProtoMessage()               {}
-func (*PublishedFileDetails_Child) Descriptor() ([]byte, []int) { return fileDescriptor39, []int{7, 2} }
+func (*PublishedFileDetails_Child) Descriptor() ([]byte, []int) { return fileDescriptor38, []int{7, 2} }
 
 func (m *PublishedFileDetails_Child) GetPublishedfileid() uint64 {
 	if m != nil && m.Publishedfileid != nil {
@@ -934,7 +934,7 @@ type PublishedFileDetails_KVTag struct {
 func (m *PublishedFileDetails_KVTag) Reset()                    { *m = PublishedFileDetails_KVTag{} }
 func (m *PublishedFileDetails_KVTag) String() string            { return proto.CompactTextString(m) }
 func (*PublishedFileDetails_KVTag) ProtoMessage()               {}
-func (*PublishedFileDetails_KVTag) Descriptor() ([]byte, []int) { return fileDescriptor39, []int{7, 3} }
+func (*PublishedFileDetails_KVTag) Descriptor() ([]byte, []int) { return fileDescriptor38, []int{7, 3} }
 
 func (m *PublishedFileDetails_KVTag) GetKey() string {
 	if m != nil && m.Key != nil {
@@ -961,7 +961,7 @@ func (m *PublishedFileDetails_VoteData) Reset()         { *m = PublishedFileDeta
 func (m *PublishedFileDetails_VoteData) String() string { return proto.CompactTextString(m) }
 func (*PublishedFileDetails_VoteData) ProtoMessage()    {}
 func (*PublishedFileDetails_VoteData) Descriptor() ([]byte, []int) {
-	return fileDescriptor39, []int{7, 4}
+	return fileDescriptor38, []int{7, 4}
 }
 
 func (m *PublishedFileDetails_VoteData) GetScore() float32 {
@@ -994,7 +994,7 @@ func (m *CPublishedFile_GetDetails_Response) Reset()         { *m = CPublishedFi
 func (m *CPublishedFile_GetDetails_Response) String() string { return proto.CompactTextString(m) }
 func (*CPublishedFile_GetDetails_Response) ProtoMessage()    {}
 func (*CPublishedFile_GetDetails_Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor39, []int{8}
+	return fileDescriptor38, []int{8}
 }
 
 func (m *CPublishedFile_GetDetails_Response) GetPublishedfiledetails() []*PublishedFileDetails {
@@ -1021,7 +1021,7 @@ func (m *CPublishedFile_GetUserFiles_Request) Reset()         { *m = CPublishedF
 func (m *CPublishedFile_GetUserFiles_Request) String() string { return proto.CompactTextString(m) }
 func (*CPublishedFile_GetUserFiles_Request) ProtoMessage()    {}
 func (*CPublishedFile_GetUserFiles_Request) Descriptor() ([]byte, []int) {
-	return fileDescriptor39, []int{9}
+	return fileDescriptor38, []int{9}
 }
 
 const Default_CPublishedFile_GetUserFiles_Request_Page uint32 = 1
@@ -1103,7 +1103,7 @@ func (m *CPublishedFile_GetUserFiles_Response) Reset()         { *m = CPublished
 func (m *CPublishedFile_GetUserFiles_Response) String() string { return proto.CompactTextString(m) }
 func (*CPublishedFile_GetUserFiles_Response) ProtoMessage()    {}
 func (*CPublishedFile_GetUserFiles_Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor39, []int{10}
+	return fileDescriptor38, []int{10}
 }
 
 func (m *CPublishedFile_GetUserFiles_Response) GetTotal() uint32 {
@@ -1148,7 +1148,7 @@ func (m *CPublishedFile_GetUserFiles_Response_App) Reset() {
 func (m *CPublishedFile_GetUserFiles_Response_App) String() string { return proto.CompactTextString(m) }
 func (*CPublishedFile_GetUserFiles_Response_App) ProtoMessage()    {}
 func (*CPublishedFile_GetUserFiles_Response_App) Descriptor() ([]byte, []int) {
-	return fileDescriptor39, []int{10, 0}
+	return fileDescriptor38, []int{10, 0}
 }
 
 func (m *CPublishedFile_GetUserFiles_Response_App) GetAppid() uint32 {
@@ -1194,7 +1194,7 @@ type CPublishedFile_Update_Request struct {
 func (m *CPublishedFile_Update_Request) Reset()                    { *m = CPublishedFile_Update_Request{} }
 func (m *CPublishedFile_Update_Request) String() string            { return proto.CompactTextString(m) }
 func (*CPublishedFile_Update_Request) ProtoMessage()               {}
-func (*CPublishedFile_Update_Request) Descriptor() ([]byte, []int) { return fileDescriptor39, []int{11} }
+func (*CPublishedFile_Update_Request) Descriptor() ([]byte, []int) { return fileDescriptor38, []int{11} }
 
 func (m *CPublishedFile_Update_Request) GetAppid() uint32 {
 	if m != nil && m.Appid != nil {
@@ -1260,7 +1260,7 @@ func (m *CPublishedFile_Update_Response) Reset()         { *m = CPublishedFile_U
 func (m *CPublishedFile_Update_Response) String() string { return proto.CompactTextString(m) }
 func (*CPublishedFile_Update_Response) ProtoMessage()    {}
 func (*CPublishedFile_Update_Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor39, []int{12}
+	return fileDescriptor38, []int{12}
 }
 
 type CPublishedFile_RefreshVotingQueue_Request struct {
@@ -1279,7 +1279,7 @@ func (m *CPublishedFile_RefreshVotingQueue_Request) Reset() {
 func (m *CPublishedFile_RefreshVotingQueue_Request) String() string { return proto.CompactTextString(m) }
 func (*CPublishedFile_RefreshVotingQueue_Request) ProtoMessage()    {}
 func (*CPublishedFile_RefreshVotingQueue_Request) Descriptor() ([]byte, []int) {
-	return fileDescriptor39, []int{13}
+	return fileDescriptor38, []int{13}
 }
 
 const Default_CPublishedFile_RefreshVotingQueue_Request_MatchAllTags bool = true
@@ -1338,7 +1338,7 @@ func (m *CPublishedFile_RefreshVotingQueue_Response) String() string {
 }
 func (*CPublishedFile_RefreshVotingQueue_Response) ProtoMessage() {}
 func (*CPublishedFile_RefreshVotingQueue_Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor39, []int{14}
+	return fileDescriptor38, []int{14}
 }
 
 func init() {
@@ -1365,9 +1365,9 @@ func init() {
 	proto.RegisterType((*CPublishedFile_RefreshVotingQueue_Response)(nil), "dota.CPublishedFile_RefreshVotingQueue_Response")
 }
 
-func init() { proto.RegisterFile("steammessages_publishedfile.steamworkssdk.proto", fileDescriptor39) }
+func init() { proto.RegisterFile("steammessages_publishedfile.steamworkssdk.proto", fileDescriptor38) }
 
-var fileDescriptor39 = []byte{
+var fileDescriptor38 = []byte{
 	// 3471 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xcc, 0x3a, 0x4b, 0x73, 0xdc, 0x46,
 	0x7a, 0x35, 0xe6, 0x6b, 0xd8, 0x24, 0x25, 0xaa, 0x4d, 0x2b, 0xed, 0x59, 0xdb, 0x6a, 0x8f, 0x5e,

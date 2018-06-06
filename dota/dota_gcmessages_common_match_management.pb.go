@@ -50,7 +50,7 @@ func (x *ELaneSelectionFlags) UnmarshalJSON(data []byte) error {
 	*x = ELaneSelectionFlags(value)
 	return nil
 }
-func (ELaneSelectionFlags) EnumDescriptor() ([]byte, []int) { return fileDescriptor19, []int{0} }
+func (ELaneSelectionFlags) EnumDescriptor() ([]byte, []int) { return fileDescriptor18, []int{0} }
 
 type LobbyDotaTVDelay int32
 
@@ -87,7 +87,7 @@ func (x *LobbyDotaTVDelay) UnmarshalJSON(data []byte) error {
 	*x = LobbyDotaTVDelay(value)
 	return nil
 }
-func (LobbyDotaTVDelay) EnumDescriptor() ([]byte, []int) { return fileDescriptor19, []int{1} }
+func (LobbyDotaTVDelay) EnumDescriptor() ([]byte, []int) { return fileDescriptor18, []int{1} }
 
 type LobbyDotaPauseSetting int32
 
@@ -124,7 +124,7 @@ func (x *LobbyDotaPauseSetting) UnmarshalJSON(data []byte) error {
 	*x = LobbyDotaPauseSetting(value)
 	return nil
 }
-func (LobbyDotaPauseSetting) EnumDescriptor() ([]byte, []int) { return fileDescriptor19, []int{2} }
+func (LobbyDotaPauseSetting) EnumDescriptor() ([]byte, []int) { return fileDescriptor18, []int{2} }
 
 type EReadyCheckStatus int32
 
@@ -161,7 +161,7 @@ func (x *EReadyCheckStatus) UnmarshalJSON(data []byte) error {
 	*x = EReadyCheckStatus(value)
 	return nil
 }
-func (EReadyCheckStatus) EnumDescriptor() ([]byte, []int) { return fileDescriptor19, []int{3} }
+func (EReadyCheckStatus) EnumDescriptor() ([]byte, []int) { return fileDescriptor18, []int{3} }
 
 type EReadyCheckRequestResult int32
 
@@ -204,7 +204,7 @@ func (x *EReadyCheckRequestResult) UnmarshalJSON(data []byte) error {
 	*x = EReadyCheckRequestResult(value)
 	return nil
 }
-func (EReadyCheckRequestResult) EnumDescriptor() ([]byte, []int) { return fileDescriptor19, []int{4} }
+func (EReadyCheckRequestResult) EnumDescriptor() ([]byte, []int) { return fileDescriptor18, []int{4} }
 
 type CSODOTAParty_State int32
 
@@ -241,7 +241,7 @@ func (x *CSODOTAParty_State) UnmarshalJSON(data []byte) error {
 	*x = CSODOTAParty_State(value)
 	return nil
 }
-func (CSODOTAParty_State) EnumDescriptor() ([]byte, []int) { return fileDescriptor19, []int{1, 0} }
+func (CSODOTAParty_State) EnumDescriptor() ([]byte, []int) { return fileDescriptor18, []int{1, 0} }
 
 type CSODOTALobby_State int32
 
@@ -290,7 +290,7 @@ func (x *CSODOTALobby_State) UnmarshalJSON(data []byte) error {
 	*x = CSODOTALobby_State(value)
 	return nil
 }
-func (CSODOTALobby_State) EnumDescriptor() ([]byte, []int) { return fileDescriptor19, []int{9, 0} }
+func (CSODOTALobby_State) EnumDescriptor() ([]byte, []int) { return fileDescriptor18, []int{9, 0} }
 
 type CSODOTALobby_LobbyType int32
 
@@ -351,7 +351,7 @@ func (x *CSODOTALobby_LobbyType) UnmarshalJSON(data []byte) error {
 	*x = CSODOTALobby_LobbyType(value)
 	return nil
 }
-func (CSODOTALobby_LobbyType) EnumDescriptor() ([]byte, []int) { return fileDescriptor19, []int{9, 1} }
+func (CSODOTALobby_LobbyType) EnumDescriptor() ([]byte, []int) { return fileDescriptor18, []int{9, 1} }
 
 type CSODOTAPartyMember struct {
 	PartnerType             *PartnerAccountType `protobuf:"varint,1,opt,name=partner_type,json=partnerType,enum=dota.PartnerAccountType,def=0" json:"partner_type,omitempty"`
@@ -370,7 +370,7 @@ type CSODOTAPartyMember struct {
 func (m *CSODOTAPartyMember) Reset()                    { *m = CSODOTAPartyMember{} }
 func (m *CSODOTAPartyMember) String() string            { return proto.CompactTextString(m) }
 func (*CSODOTAPartyMember) ProtoMessage()               {}
-func (*CSODOTAPartyMember) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{0} }
+func (*CSODOTAPartyMember) Descriptor() ([]byte, []int) { return fileDescriptor18, []int{0} }
 
 const Default_CSODOTAPartyMember_PartnerType PartnerAccountType = PartnerAccountType_PARTNER_NONE
 
@@ -498,7 +498,7 @@ type CSODOTAParty struct {
 func (m *CSODOTAParty) Reset()                    { *m = CSODOTAParty{} }
 func (m *CSODOTAParty) String() string            { return proto.CompactTextString(m) }
 func (*CSODOTAParty) ProtoMessage()               {}
-func (*CSODOTAParty) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{1} }
+func (*CSODOTAParty) Descriptor() ([]byte, []int) { return fileDescriptor18, []int{1} }
 
 const Default_CSODOTAParty_State CSODOTAParty_State = CSODOTAParty_UI
 const Default_CSODOTAParty_MatchType MatchType = MatchType_MATCH_TYPE_CASUAL
@@ -849,7 +849,7 @@ type CSODOTAPartyInvite struct {
 func (m *CSODOTAPartyInvite) Reset()                    { *m = CSODOTAPartyInvite{} }
 func (m *CSODOTAPartyInvite) String() string            { return proto.CompactTextString(m) }
 func (*CSODOTAPartyInvite) ProtoMessage()               {}
-func (*CSODOTAPartyInvite) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{2} }
+func (*CSODOTAPartyInvite) Descriptor() ([]byte, []int) { return fileDescriptor18, []int{2} }
 
 func (m *CSODOTAPartyInvite) GetGroupId() uint64 {
 	if m != nil && m.GroupId != nil {
@@ -918,7 +918,7 @@ func (m *CSODOTAPartyInvite_PartyMember) Reset()         { *m = CSODOTAPartyInvi
 func (m *CSODOTAPartyInvite_PartyMember) String() string { return proto.CompactTextString(m) }
 func (*CSODOTAPartyInvite_PartyMember) ProtoMessage()    {}
 func (*CSODOTAPartyInvite_PartyMember) Descriptor() ([]byte, []int) {
-	return fileDescriptor19, []int{2, 0}
+	return fileDescriptor18, []int{2, 0}
 }
 
 func (m *CSODOTAPartyInvite_PartyMember) GetName() string {
@@ -957,7 +957,7 @@ type CSODOTALobbyInvite struct {
 func (m *CSODOTALobbyInvite) Reset()                    { *m = CSODOTALobbyInvite{} }
 func (m *CSODOTALobbyInvite) String() string            { return proto.CompactTextString(m) }
 func (*CSODOTALobbyInvite) ProtoMessage()               {}
-func (*CSODOTALobbyInvite) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{3} }
+func (*CSODOTALobbyInvite) Descriptor() ([]byte, []int) { return fileDescriptor18, []int{3} }
 
 func (m *CSODOTALobbyInvite) GetGroupId() uint64 {
 	if m != nil && m.GroupId != nil {
@@ -1025,7 +1025,7 @@ func (m *CSODOTALobbyInvite_LobbyMember) Reset()         { *m = CSODOTALobbyInvi
 func (m *CSODOTALobbyInvite_LobbyMember) String() string { return proto.CompactTextString(m) }
 func (*CSODOTALobbyInvite_LobbyMember) ProtoMessage()    {}
 func (*CSODOTALobbyInvite_LobbyMember) Descriptor() ([]byte, []int) {
-	return fileDescriptor19, []int{3, 0}
+	return fileDescriptor18, []int{3, 0}
 }
 
 func (m *CSODOTALobbyInvite_LobbyMember) GetName() string {
@@ -1055,7 +1055,7 @@ type CMsgLeaverState struct {
 func (m *CMsgLeaverState) Reset()                    { *m = CMsgLeaverState{} }
 func (m *CMsgLeaverState) String() string            { return proto.CompactTextString(m) }
 func (*CMsgLeaverState) ProtoMessage()               {}
-func (*CMsgLeaverState) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{4} }
+func (*CMsgLeaverState) Descriptor() ([]byte, []int) { return fileDescriptor18, []int{4} }
 
 const Default_CMsgLeaverState_GameState DOTA_GameState = DOTA_GameState_DOTA_GAMERULES_STATE_INIT
 
@@ -1138,7 +1138,7 @@ type CDOTALobbyMember struct {
 func (m *CDOTALobbyMember) Reset()                    { *m = CDOTALobbyMember{} }
 func (m *CDOTALobbyMember) String() string            { return proto.CompactTextString(m) }
 func (*CDOTALobbyMember) ProtoMessage()               {}
-func (*CDOTALobbyMember) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{5} }
+func (*CDOTALobbyMember) Descriptor() ([]byte, []int) { return fileDescriptor18, []int{5} }
 
 const Default_CDOTALobbyMember_Team DOTA_GC_TEAM = DOTA_GC_TEAM_DOTA_GC_TEAM_GOOD_GUYS
 const Default_CDOTALobbyMember_LeaverStatus DOTALeaverStatusT = DOTALeaverStatusT_DOTA_LEAVER_NONE
@@ -1369,7 +1369,7 @@ func (m *CDOTALobbyMember_CDOTALobbyMemberXPBonus) Reset() {
 func (m *CDOTALobbyMember_CDOTALobbyMemberXPBonus) String() string { return proto.CompactTextString(m) }
 func (*CDOTALobbyMember_CDOTALobbyMemberXPBonus) ProtoMessage()    {}
 func (*CDOTALobbyMember_CDOTALobbyMemberXPBonus) Descriptor() ([]byte, []int) {
-	return fileDescriptor19, []int{5, 0}
+	return fileDescriptor18, []int{5, 0}
 }
 
 func (m *CDOTALobbyMember_CDOTALobbyMemberXPBonus) GetType() uint32 {
@@ -1418,7 +1418,7 @@ type CLobbyTeamDetails struct {
 func (m *CLobbyTeamDetails) Reset()                    { *m = CLobbyTeamDetails{} }
 func (m *CLobbyTeamDetails) String() string            { return proto.CompactTextString(m) }
 func (*CLobbyTeamDetails) ProtoMessage()               {}
-func (*CLobbyTeamDetails) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{6} }
+func (*CLobbyTeamDetails) Descriptor() ([]byte, []int) { return fileDescriptor18, []int{6} }
 
 func (m *CLobbyTeamDetails) GetTeamName() string {
 	if m != nil && m.TeamName != nil {
@@ -1558,7 +1558,7 @@ type CLobbyTimedRewardDetails struct {
 func (m *CLobbyTimedRewardDetails) Reset()                    { *m = CLobbyTimedRewardDetails{} }
 func (m *CLobbyTimedRewardDetails) String() string            { return proto.CompactTextString(m) }
 func (*CLobbyTimedRewardDetails) ProtoMessage()               {}
-func (*CLobbyTimedRewardDetails) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{7} }
+func (*CLobbyTimedRewardDetails) Descriptor() ([]byte, []int) { return fileDescriptor18, []int{7} }
 
 func (m *CLobbyTimedRewardDetails) GetItemDefIndex() uint32 {
 	if m != nil && m.ItemDefIndex != nil {
@@ -1606,7 +1606,7 @@ type CLobbyBroadcastChannelInfo struct {
 func (m *CLobbyBroadcastChannelInfo) Reset()                    { *m = CLobbyBroadcastChannelInfo{} }
 func (m *CLobbyBroadcastChannelInfo) String() string            { return proto.CompactTextString(m) }
 func (*CLobbyBroadcastChannelInfo) ProtoMessage()               {}
-func (*CLobbyBroadcastChannelInfo) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{8} }
+func (*CLobbyBroadcastChannelInfo) Descriptor() ([]byte, []int) { return fileDescriptor18, []int{8} }
 
 func (m *CLobbyBroadcastChannelInfo) GetChannelId() uint32 {
 	if m != nil && m.ChannelId != nil {
@@ -1732,7 +1732,7 @@ type CSODOTALobby struct {
 func (m *CSODOTALobby) Reset()                    { *m = CSODOTALobby{} }
 func (m *CSODOTALobby) String() string            { return proto.CompactTextString(m) }
 func (*CSODOTALobby) ProtoMessage()               {}
-func (*CSODOTALobby) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{9} }
+func (*CSODOTALobby) Descriptor() ([]byte, []int) { return fileDescriptor18, []int{9} }
 
 const Default_CSODOTALobby_ServerId uint64 = 0
 const Default_CSODOTALobby_State CSODOTALobby_State = CSODOTALobby_UI
@@ -2389,7 +2389,7 @@ type CSODOTALobby_CExtraMsg struct {
 func (m *CSODOTALobby_CExtraMsg) Reset()                    { *m = CSODOTALobby_CExtraMsg{} }
 func (m *CSODOTALobby_CExtraMsg) String() string            { return proto.CompactTextString(m) }
 func (*CSODOTALobby_CExtraMsg) ProtoMessage()               {}
-func (*CSODOTALobby_CExtraMsg) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{9, 0} }
+func (*CSODOTALobby_CExtraMsg) Descriptor() ([]byte, []int) { return fileDescriptor18, []int{9, 0} }
 
 func (m *CSODOTALobby_CExtraMsg) GetId() uint32 {
 	if m != nil && m.Id != nil {
@@ -2413,7 +2413,7 @@ type CMsgLobbyPlaytestDetails struct {
 func (m *CMsgLobbyPlaytestDetails) Reset()                    { *m = CMsgLobbyPlaytestDetails{} }
 func (m *CMsgLobbyPlaytestDetails) String() string            { return proto.CompactTextString(m) }
 func (*CMsgLobbyPlaytestDetails) ProtoMessage()               {}
-func (*CMsgLobbyPlaytestDetails) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{10} }
+func (*CMsgLobbyPlaytestDetails) Descriptor() ([]byte, []int) { return fileDescriptor18, []int{10} }
 
 func (m *CMsgLobbyPlaytestDetails) GetJson() string {
 	if m != nil && m.Json != nil {
@@ -2433,7 +2433,7 @@ type CMsgReadyCheckStatus struct {
 func (m *CMsgReadyCheckStatus) Reset()                    { *m = CMsgReadyCheckStatus{} }
 func (m *CMsgReadyCheckStatus) String() string            { return proto.CompactTextString(m) }
 func (*CMsgReadyCheckStatus) ProtoMessage()               {}
-func (*CMsgReadyCheckStatus) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{11} }
+func (*CMsgReadyCheckStatus) Descriptor() ([]byte, []int) { return fileDescriptor18, []int{11} }
 
 func (m *CMsgReadyCheckStatus) GetStartTimestamp() uint32 {
 	if m != nil && m.StartTimestamp != nil {
@@ -2473,7 +2473,7 @@ func (m *CMsgReadyCheckStatus_ReadyMember) Reset()         { *m = CMsgReadyCheck
 func (m *CMsgReadyCheckStatus_ReadyMember) String() string { return proto.CompactTextString(m) }
 func (*CMsgReadyCheckStatus_ReadyMember) ProtoMessage()    {}
 func (*CMsgReadyCheckStatus_ReadyMember) Descriptor() ([]byte, []int) {
-	return fileDescriptor19, []int{11, 0}
+	return fileDescriptor18, []int{11, 0}
 }
 
 const Default_CMsgReadyCheckStatus_ReadyMember_ReadyStatus EReadyCheckStatus = EReadyCheckStatus_k_EReadyCheckStatus_Unknown
@@ -2499,7 +2499,7 @@ type CMsgPartyReadyCheckRequest struct {
 func (m *CMsgPartyReadyCheckRequest) Reset()                    { *m = CMsgPartyReadyCheckRequest{} }
 func (m *CMsgPartyReadyCheckRequest) String() string            { return proto.CompactTextString(m) }
 func (*CMsgPartyReadyCheckRequest) ProtoMessage()               {}
-func (*CMsgPartyReadyCheckRequest) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{12} }
+func (*CMsgPartyReadyCheckRequest) Descriptor() ([]byte, []int) { return fileDescriptor18, []int{12} }
 
 type CMsgPartyReadyCheckResponse struct {
 	Result           *EReadyCheckRequestResult `protobuf:"varint,1,opt,name=result,enum=dota.EReadyCheckRequestResult,def=0" json:"result,omitempty"`
@@ -2509,7 +2509,7 @@ type CMsgPartyReadyCheckResponse struct {
 func (m *CMsgPartyReadyCheckResponse) Reset()                    { *m = CMsgPartyReadyCheckResponse{} }
 func (m *CMsgPartyReadyCheckResponse) String() string            { return proto.CompactTextString(m) }
 func (*CMsgPartyReadyCheckResponse) ProtoMessage()               {}
-func (*CMsgPartyReadyCheckResponse) Descriptor() ([]byte, []int) { return fileDescriptor19, []int{13} }
+func (*CMsgPartyReadyCheckResponse) Descriptor() ([]byte, []int) { return fileDescriptor18, []int{13} }
 
 const Default_CMsgPartyReadyCheckResponse_Result EReadyCheckRequestResult = EReadyCheckRequestResult_k_EReadyCheckRequestResult_Success
 
@@ -2529,7 +2529,7 @@ func (m *CMsgPartyReadyCheckAcknowledge) Reset()         { *m = CMsgPartyReadyCh
 func (m *CMsgPartyReadyCheckAcknowledge) String() string { return proto.CompactTextString(m) }
 func (*CMsgPartyReadyCheckAcknowledge) ProtoMessage()    {}
 func (*CMsgPartyReadyCheckAcknowledge) Descriptor() ([]byte, []int) {
-	return fileDescriptor19, []int{14}
+	return fileDescriptor18, []int{14}
 }
 
 const Default_CMsgPartyReadyCheckAcknowledge_ReadyStatus EReadyCheckStatus = EReadyCheckStatus_k_EReadyCheckStatus_Unknown
@@ -2572,9 +2572,9 @@ func init() {
 	proto.RegisterEnum("dota.CSODOTALobby_LobbyType", CSODOTALobby_LobbyType_name, CSODOTALobby_LobbyType_value)
 }
 
-func init() { proto.RegisterFile("dota_gcmessages_common_match_management.proto", fileDescriptor19) }
+func init() { proto.RegisterFile("dota_gcmessages_common_match_management.proto", fileDescriptor18) }
 
-var fileDescriptor19 = []byte{
+var fileDescriptor18 = []byte{
 	// 5381 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xcc, 0x7b, 0x4b, 0x77, 0xdb, 0x48,
 	0x76, 0xbf, 0x29, 0xd3, 0x12, 0x75, 0xf9, 0x10, 0x55, 0x92, 0x25, 0x48, 0x7e, 0xa9, 0xe9, 0x97,

@@ -83,7 +83,7 @@ func (x *CLC_Messages) UnmarshalJSON(data []byte) error {
 	*x = CLC_Messages(value)
 	return nil
 }
-func (CLC_Messages) EnumDescriptor() ([]byte, []int) { return fileDescriptor32, []int{0} }
+func (CLC_Messages) EnumDescriptor() ([]byte, []int) { return fileDescriptor31, []int{0} }
 
 type SVC_Messages int32
 
@@ -186,7 +186,7 @@ func (x *SVC_Messages) UnmarshalJSON(data []byte) error {
 	*x = SVC_Messages(value)
 	return nil
 }
-func (SVC_Messages) EnumDescriptor() ([]byte, []int) { return fileDescriptor32, []int{1} }
+func (SVC_Messages) EnumDescriptor() ([]byte, []int) { return fileDescriptor31, []int{1} }
 
 type VoiceDataFormatT int32
 
@@ -220,7 +220,7 @@ func (x *VoiceDataFormatT) UnmarshalJSON(data []byte) error {
 	*x = VoiceDataFormatT(value)
 	return nil
 }
-func (VoiceDataFormatT) EnumDescriptor() ([]byte, []int) { return fileDescriptor32, []int{2} }
+func (VoiceDataFormatT) EnumDescriptor() ([]byte, []int) { return fileDescriptor31, []int{2} }
 
 type RequestPauseT int32
 
@@ -257,7 +257,7 @@ func (x *RequestPauseT) UnmarshalJSON(data []byte) error {
 	*x = RequestPauseT(value)
 	return nil
 }
-func (RequestPauseT) EnumDescriptor() ([]byte, []int) { return fileDescriptor32, []int{3} }
+func (RequestPauseT) EnumDescriptor() ([]byte, []int) { return fileDescriptor31, []int{3} }
 
 type PrefetchType int32
 
@@ -288,7 +288,7 @@ func (x *PrefetchType) UnmarshalJSON(data []byte) error {
 	*x = PrefetchType(value)
 	return nil
 }
-func (PrefetchType) EnumDescriptor() ([]byte, []int) { return fileDescriptor32, []int{4} }
+func (PrefetchType) EnumDescriptor() ([]byte, []int) { return fileDescriptor31, []int{4} }
 
 type ESplitScreenMessageType int32
 
@@ -322,7 +322,7 @@ func (x *ESplitScreenMessageType) UnmarshalJSON(data []byte) error {
 	*x = ESplitScreenMessageType(value)
 	return nil
 }
-func (ESplitScreenMessageType) EnumDescriptor() ([]byte, []int) { return fileDescriptor32, []int{5} }
+func (ESplitScreenMessageType) EnumDescriptor() ([]byte, []int) { return fileDescriptor31, []int{5} }
 
 type EQueryCvarValueStatus int32
 
@@ -362,7 +362,7 @@ func (x *EQueryCvarValueStatus) UnmarshalJSON(data []byte) error {
 	*x = EQueryCvarValueStatus(value)
 	return nil
 }
-func (EQueryCvarValueStatus) EnumDescriptor() ([]byte, []int) { return fileDescriptor32, []int{6} }
+func (EQueryCvarValueStatus) EnumDescriptor() ([]byte, []int) { return fileDescriptor31, []int{6} }
 
 type DIALOG_TYPE int32
 
@@ -405,7 +405,7 @@ func (x *DIALOG_TYPE) UnmarshalJSON(data []byte) error {
 	*x = DIALOG_TYPE(value)
 	return nil
 }
-func (DIALOG_TYPE) EnumDescriptor() ([]byte, []int) { return fileDescriptor32, []int{7} }
+func (DIALOG_TYPE) EnumDescriptor() ([]byte, []int) { return fileDescriptor31, []int{7} }
 
 type SVC_Messages_LowFrequency int32
 
@@ -436,7 +436,7 @@ func (x *SVC_Messages_LowFrequency) UnmarshalJSON(data []byte) error {
 	*x = SVC_Messages_LowFrequency(value)
 	return nil
 }
-func (SVC_Messages_LowFrequency) EnumDescriptor() ([]byte, []int) { return fileDescriptor32, []int{8} }
+func (SVC_Messages_LowFrequency) EnumDescriptor() ([]byte, []int) { return fileDescriptor31, []int{8} }
 
 type Bidirectional_Messages int32
 
@@ -473,7 +473,7 @@ func (x *Bidirectional_Messages) UnmarshalJSON(data []byte) error {
 	*x = Bidirectional_Messages(value)
 	return nil
 }
-func (Bidirectional_Messages) EnumDescriptor() ([]byte, []int) { return fileDescriptor32, []int{9} }
+func (Bidirectional_Messages) EnumDescriptor() ([]byte, []int) { return fileDescriptor31, []int{9} }
 
 type Bidirectional_Messages_LowFrequency int32
 
@@ -508,7 +508,7 @@ func (x *Bidirectional_Messages_LowFrequency) UnmarshalJSON(data []byte) error {
 	return nil
 }
 func (Bidirectional_Messages_LowFrequency) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor32, []int{10}
+	return fileDescriptor31, []int{10}
 }
 
 type CBidirMsg_RelayInfo_OperationT int32
@@ -553,7 +553,7 @@ func (x *CBidirMsg_RelayInfo_OperationT) UnmarshalJSON(data []byte) error {
 	return nil
 }
 func (CBidirMsg_RelayInfo_OperationT) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor32, []int{53, 0}
+	return fileDescriptor31, []int{53, 0}
 }
 
 type CCLCMsg_ClientInfo struct {
@@ -569,7 +569,7 @@ type CCLCMsg_ClientInfo struct {
 func (m *CCLCMsg_ClientInfo) Reset()                    { *m = CCLCMsg_ClientInfo{} }
 func (m *CCLCMsg_ClientInfo) String() string            { return proto.CompactTextString(m) }
 func (*CCLCMsg_ClientInfo) ProtoMessage()               {}
-func (*CCLCMsg_ClientInfo) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{0} }
+func (*CCLCMsg_ClientInfo) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{0} }
 
 func (m *CCLCMsg_ClientInfo) GetSendTableCrc() uint32 {
 	if m != nil && m.SendTableCrc != nil {
@@ -623,7 +623,7 @@ type CCLCMsg_Move struct {
 func (m *CCLCMsg_Move) Reset()                    { *m = CCLCMsg_Move{} }
 func (m *CCLCMsg_Move) String() string            { return proto.CompactTextString(m) }
 func (*CCLCMsg_Move) ProtoMessage()               {}
-func (*CCLCMsg_Move) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{1} }
+func (*CCLCMsg_Move) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{1} }
 
 func (m *CCLCMsg_Move) GetData() []byte {
 	if m != nil {
@@ -659,7 +659,7 @@ type CMsgVoiceAudio struct {
 func (m *CMsgVoiceAudio) Reset()                    { *m = CMsgVoiceAudio{} }
 func (m *CMsgVoiceAudio) String() string            { return proto.CompactTextString(m) }
 func (*CMsgVoiceAudio) ProtoMessage()               {}
-func (*CMsgVoiceAudio) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{2} }
+func (*CMsgVoiceAudio) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{2} }
 
 const Default_CMsgVoiceAudio_Format VoiceDataFormatT = VoiceDataFormatT_VOICEDATA_FORMAT_STEAM
 
@@ -715,7 +715,7 @@ type CCLCMsg_VoiceData struct {
 func (m *CCLCMsg_VoiceData) Reset()                    { *m = CCLCMsg_VoiceData{} }
 func (m *CCLCMsg_VoiceData) String() string            { return proto.CompactTextString(m) }
 func (*CCLCMsg_VoiceData) ProtoMessage()               {}
-func (*CCLCMsg_VoiceData) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{3} }
+func (*CCLCMsg_VoiceData) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{3} }
 
 func (m *CCLCMsg_VoiceData) GetAudio() *CMsgVoiceAudio {
 	if m != nil {
@@ -747,7 +747,7 @@ type CCLCMsg_BaselineAck struct {
 func (m *CCLCMsg_BaselineAck) Reset()                    { *m = CCLCMsg_BaselineAck{} }
 func (m *CCLCMsg_BaselineAck) String() string            { return proto.CompactTextString(m) }
 func (*CCLCMsg_BaselineAck) ProtoMessage()               {}
-func (*CCLCMsg_BaselineAck) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{4} }
+func (*CCLCMsg_BaselineAck) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{4} }
 
 func (m *CCLCMsg_BaselineAck) GetBaselineTick() int32 {
 	if m != nil && m.BaselineTick != nil {
@@ -771,7 +771,7 @@ type CCLCMsg_ListenEvents struct {
 func (m *CCLCMsg_ListenEvents) Reset()                    { *m = CCLCMsg_ListenEvents{} }
 func (m *CCLCMsg_ListenEvents) String() string            { return proto.CompactTextString(m) }
 func (*CCLCMsg_ListenEvents) ProtoMessage()               {}
-func (*CCLCMsg_ListenEvents) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{5} }
+func (*CCLCMsg_ListenEvents) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{5} }
 
 func (m *CCLCMsg_ListenEvents) GetEventMask() []uint32 {
 	if m != nil {
@@ -791,7 +791,7 @@ type CCLCMsg_RespondCvarValue struct {
 func (m *CCLCMsg_RespondCvarValue) Reset()                    { *m = CCLCMsg_RespondCvarValue{} }
 func (m *CCLCMsg_RespondCvarValue) String() string            { return proto.CompactTextString(m) }
 func (*CCLCMsg_RespondCvarValue) ProtoMessage()               {}
-func (*CCLCMsg_RespondCvarValue) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{6} }
+func (*CCLCMsg_RespondCvarValue) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{6} }
 
 func (m *CCLCMsg_RespondCvarValue) GetCookie() int32 {
 	if m != nil && m.Cookie != nil {
@@ -833,7 +833,7 @@ type CCLCMsg_FileCRCCheck struct {
 func (m *CCLCMsg_FileCRCCheck) Reset()                    { *m = CCLCMsg_FileCRCCheck{} }
 func (m *CCLCMsg_FileCRCCheck) String() string            { return proto.CompactTextString(m) }
 func (*CCLCMsg_FileCRCCheck) ProtoMessage()               {}
-func (*CCLCMsg_FileCRCCheck) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{7} }
+func (*CCLCMsg_FileCRCCheck) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{7} }
 
 func (m *CCLCMsg_FileCRCCheck) GetCodePath() int32 {
 	if m != nil && m.CodePath != nil {
@@ -878,7 +878,7 @@ type CCLCMsg_LoadingProgress struct {
 func (m *CCLCMsg_LoadingProgress) Reset()                    { *m = CCLCMsg_LoadingProgress{} }
 func (m *CCLCMsg_LoadingProgress) String() string            { return proto.CompactTextString(m) }
 func (*CCLCMsg_LoadingProgress) ProtoMessage()               {}
-func (*CCLCMsg_LoadingProgress) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{8} }
+func (*CCLCMsg_LoadingProgress) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{8} }
 
 func (m *CCLCMsg_LoadingProgress) GetProgress() int32 {
 	if m != nil && m.Progress != nil {
@@ -895,7 +895,7 @@ type CCLCMsg_SplitPlayerConnect struct {
 func (m *CCLCMsg_SplitPlayerConnect) Reset()                    { *m = CCLCMsg_SplitPlayerConnect{} }
 func (m *CCLCMsg_SplitPlayerConnect) String() string            { return proto.CompactTextString(m) }
 func (*CCLCMsg_SplitPlayerConnect) ProtoMessage()               {}
-func (*CCLCMsg_SplitPlayerConnect) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{9} }
+func (*CCLCMsg_SplitPlayerConnect) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{9} }
 
 func (m *CCLCMsg_SplitPlayerConnect) GetPlayername() string {
 	if m != nil && m.Playername != nil {
@@ -913,7 +913,7 @@ type CCLCMsg_ClientMessage struct {
 func (m *CCLCMsg_ClientMessage) Reset()                    { *m = CCLCMsg_ClientMessage{} }
 func (m *CCLCMsg_ClientMessage) String() string            { return proto.CompactTextString(m) }
 func (*CCLCMsg_ClientMessage) ProtoMessage()               {}
-func (*CCLCMsg_ClientMessage) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{10} }
+func (*CCLCMsg_ClientMessage) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{10} }
 
 func (m *CCLCMsg_ClientMessage) GetMsgType() int32 {
 	if m != nil && m.MsgType != nil {
@@ -937,7 +937,7 @@ type CCLCMsg_SplitPlayerDisconnect struct {
 func (m *CCLCMsg_SplitPlayerDisconnect) Reset()                    { *m = CCLCMsg_SplitPlayerDisconnect{} }
 func (m *CCLCMsg_SplitPlayerDisconnect) String() string            { return proto.CompactTextString(m) }
 func (*CCLCMsg_SplitPlayerDisconnect) ProtoMessage()               {}
-func (*CCLCMsg_SplitPlayerDisconnect) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{11} }
+func (*CCLCMsg_SplitPlayerDisconnect) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{11} }
 
 func (m *CCLCMsg_SplitPlayerDisconnect) GetSlot() int32 {
 	if m != nil && m.Slot != nil {
@@ -954,7 +954,7 @@ type CCLCMsg_ServerStatus struct {
 func (m *CCLCMsg_ServerStatus) Reset()                    { *m = CCLCMsg_ServerStatus{} }
 func (m *CCLCMsg_ServerStatus) String() string            { return proto.CompactTextString(m) }
 func (*CCLCMsg_ServerStatus) ProtoMessage()               {}
-func (*CCLCMsg_ServerStatus) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{12} }
+func (*CCLCMsg_ServerStatus) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{12} }
 
 func (m *CCLCMsg_ServerStatus) GetSimplified() bool {
 	if m != nil && m.Simplified != nil {
@@ -970,7 +970,7 @@ type CCLCMsg_ServerPing struct {
 func (m *CCLCMsg_ServerPing) Reset()                    { *m = CCLCMsg_ServerPing{} }
 func (m *CCLCMsg_ServerPing) String() string            { return proto.CompactTextString(m) }
 func (*CCLCMsg_ServerPing) ProtoMessage()               {}
-func (*CCLCMsg_ServerPing) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{13} }
+func (*CCLCMsg_ServerPing) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{13} }
 
 type CCLCMsg_RequestPause struct {
 	PauseType        *RequestPauseT `protobuf:"varint,1,opt,name=pause_type,json=pauseType,enum=dota.RequestPauseT,def=0" json:"pause_type,omitempty"`
@@ -981,7 +981,7 @@ type CCLCMsg_RequestPause struct {
 func (m *CCLCMsg_RequestPause) Reset()                    { *m = CCLCMsg_RequestPause{} }
 func (m *CCLCMsg_RequestPause) String() string            { return proto.CompactTextString(m) }
 func (*CCLCMsg_RequestPause) ProtoMessage()               {}
-func (*CCLCMsg_RequestPause) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{14} }
+func (*CCLCMsg_RequestPause) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{14} }
 
 const Default_CCLCMsg_RequestPause_PauseType RequestPauseT = RequestPauseT_RP_PAUSE
 
@@ -1007,7 +1007,7 @@ type CCLCMsg_CmdKeyValues struct {
 func (m *CCLCMsg_CmdKeyValues) Reset()                    { *m = CCLCMsg_CmdKeyValues{} }
 func (m *CCLCMsg_CmdKeyValues) String() string            { return proto.CompactTextString(m) }
 func (*CCLCMsg_CmdKeyValues) ProtoMessage()               {}
-func (*CCLCMsg_CmdKeyValues) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{15} }
+func (*CCLCMsg_CmdKeyValues) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{15} }
 
 func (m *CCLCMsg_CmdKeyValues) GetData() []byte {
 	if m != nil {
@@ -1040,7 +1040,7 @@ type CSVCMsg_ServerInfo struct {
 func (m *CSVCMsg_ServerInfo) Reset()                    { *m = CSVCMsg_ServerInfo{} }
 func (m *CSVCMsg_ServerInfo) String() string            { return proto.CompactTextString(m) }
 func (*CSVCMsg_ServerInfo) ProtoMessage()               {}
-func (*CSVCMsg_ServerInfo) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{16} }
+func (*CSVCMsg_ServerInfo) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{16} }
 
 func (m *CSVCMsg_ServerInfo) GetProtocol() int32 {
 	if m != nil && m.Protocol != nil {
@@ -1170,7 +1170,7 @@ type CSVCMsg_ClassInfo struct {
 func (m *CSVCMsg_ClassInfo) Reset()                    { *m = CSVCMsg_ClassInfo{} }
 func (m *CSVCMsg_ClassInfo) String() string            { return proto.CompactTextString(m) }
 func (*CSVCMsg_ClassInfo) ProtoMessage()               {}
-func (*CSVCMsg_ClassInfo) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{17} }
+func (*CSVCMsg_ClassInfo) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{17} }
 
 func (m *CSVCMsg_ClassInfo) GetCreateOnClient() bool {
 	if m != nil && m.CreateOnClient != nil {
@@ -1196,7 +1196,7 @@ type CSVCMsg_ClassInfoClassT struct {
 func (m *CSVCMsg_ClassInfoClassT) Reset()                    { *m = CSVCMsg_ClassInfoClassT{} }
 func (m *CSVCMsg_ClassInfoClassT) String() string            { return proto.CompactTextString(m) }
 func (*CSVCMsg_ClassInfoClassT) ProtoMessage()               {}
-func (*CSVCMsg_ClassInfoClassT) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{17, 0} }
+func (*CSVCMsg_ClassInfoClassT) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{17, 0} }
 
 func (m *CSVCMsg_ClassInfoClassT) GetClassId() int32 {
 	if m != nil && m.ClassId != nil {
@@ -1227,7 +1227,7 @@ type CSVCMsg_SetPause struct {
 func (m *CSVCMsg_SetPause) Reset()                    { *m = CSVCMsg_SetPause{} }
 func (m *CSVCMsg_SetPause) String() string            { return proto.CompactTextString(m) }
 func (*CSVCMsg_SetPause) ProtoMessage()               {}
-func (*CSVCMsg_SetPause) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{18} }
+func (*CSVCMsg_SetPause) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{18} }
 
 func (m *CSVCMsg_SetPause) GetPaused() bool {
 	if m != nil && m.Paused != nil {
@@ -1246,7 +1246,7 @@ type CSVCMsg_VoiceInit struct {
 func (m *CSVCMsg_VoiceInit) Reset()                    { *m = CSVCMsg_VoiceInit{} }
 func (m *CSVCMsg_VoiceInit) String() string            { return proto.CompactTextString(m) }
 func (*CSVCMsg_VoiceInit) ProtoMessage()               {}
-func (*CSVCMsg_VoiceInit) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{19} }
+func (*CSVCMsg_VoiceInit) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{19} }
 
 const Default_CSVCMsg_VoiceInit_Version int32 = 0
 
@@ -1279,7 +1279,7 @@ type CSVCMsg_Print struct {
 func (m *CSVCMsg_Print) Reset()                    { *m = CSVCMsg_Print{} }
 func (m *CSVCMsg_Print) String() string            { return proto.CompactTextString(m) }
 func (*CSVCMsg_Print) ProtoMessage()               {}
-func (*CSVCMsg_Print) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{20} }
+func (*CSVCMsg_Print) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{20} }
 
 func (m *CSVCMsg_Print) GetText() string {
 	if m != nil && m.Text != nil {
@@ -1297,7 +1297,7 @@ type CSVCMsg_Sounds struct {
 func (m *CSVCMsg_Sounds) Reset()                    { *m = CSVCMsg_Sounds{} }
 func (m *CSVCMsg_Sounds) String() string            { return proto.CompactTextString(m) }
 func (*CSVCMsg_Sounds) ProtoMessage()               {}
-func (*CSVCMsg_Sounds) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{21} }
+func (*CSVCMsg_Sounds) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{21} }
 
 func (m *CSVCMsg_Sounds) GetReliableSound() bool {
 	if m != nil && m.ReliableSound != nil {
@@ -1339,7 +1339,7 @@ type CSVCMsg_SoundsSounddataT struct {
 func (m *CSVCMsg_SoundsSounddataT) Reset()                    { *m = CSVCMsg_SoundsSounddataT{} }
 func (m *CSVCMsg_SoundsSounddataT) String() string            { return proto.CompactTextString(m) }
 func (*CSVCMsg_SoundsSounddataT) ProtoMessage()               {}
-func (*CSVCMsg_SoundsSounddataT) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{21, 0} }
+func (*CSVCMsg_SoundsSounddataT) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{21, 0} }
 
 func (m *CSVCMsg_SoundsSounddataT) GetOriginX() int32 {
 	if m != nil && m.OriginX != nil {
@@ -1483,7 +1483,7 @@ type CSVCMsg_Prefetch struct {
 func (m *CSVCMsg_Prefetch) Reset()                    { *m = CSVCMsg_Prefetch{} }
 func (m *CSVCMsg_Prefetch) String() string            { return proto.CompactTextString(m) }
 func (*CSVCMsg_Prefetch) ProtoMessage()               {}
-func (*CSVCMsg_Prefetch) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{22} }
+func (*CSVCMsg_Prefetch) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{22} }
 
 const Default_CSVCMsg_Prefetch_ResourceType PrefetchType = PrefetchType_PFT_SOUND
 
@@ -1510,7 +1510,7 @@ type CSVCMsg_SetView struct {
 func (m *CSVCMsg_SetView) Reset()                    { *m = CSVCMsg_SetView{} }
 func (m *CSVCMsg_SetView) String() string            { return proto.CompactTextString(m) }
 func (*CSVCMsg_SetView) ProtoMessage()               {}
-func (*CSVCMsg_SetView) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{23} }
+func (*CSVCMsg_SetView) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{23} }
 
 func (m *CSVCMsg_SetView) GetEntityIndex() int32 {
 	if m != nil && m.EntityIndex != nil {
@@ -1535,7 +1535,7 @@ type CSVCMsg_FixAngle struct {
 func (m *CSVCMsg_FixAngle) Reset()                    { *m = CSVCMsg_FixAngle{} }
 func (m *CSVCMsg_FixAngle) String() string            { return proto.CompactTextString(m) }
 func (*CSVCMsg_FixAngle) ProtoMessage()               {}
-func (*CSVCMsg_FixAngle) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{24} }
+func (*CSVCMsg_FixAngle) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{24} }
 
 func (m *CSVCMsg_FixAngle) GetRelative() bool {
 	if m != nil && m.Relative != nil {
@@ -1559,7 +1559,7 @@ type CSVCMsg_CrosshairAngle struct {
 func (m *CSVCMsg_CrosshairAngle) Reset()                    { *m = CSVCMsg_CrosshairAngle{} }
 func (m *CSVCMsg_CrosshairAngle) String() string            { return proto.CompactTextString(m) }
 func (*CSVCMsg_CrosshairAngle) ProtoMessage()               {}
-func (*CSVCMsg_CrosshairAngle) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{25} }
+func (*CSVCMsg_CrosshairAngle) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{25} }
 
 func (m *CSVCMsg_CrosshairAngle) GetAngle() *CMsgQAngle {
 	if m != nil {
@@ -1580,7 +1580,7 @@ type CSVCMsg_BSPDecal struct {
 func (m *CSVCMsg_BSPDecal) Reset()                    { *m = CSVCMsg_BSPDecal{} }
 func (m *CSVCMsg_BSPDecal) String() string            { return proto.CompactTextString(m) }
 func (*CSVCMsg_BSPDecal) ProtoMessage()               {}
-func (*CSVCMsg_BSPDecal) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{26} }
+func (*CSVCMsg_BSPDecal) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{26} }
 
 func (m *CSVCMsg_BSPDecal) GetPos() *CMsgVector {
 	if m != nil {
@@ -1627,7 +1627,7 @@ type CSVCMsg_SplitScreen struct {
 func (m *CSVCMsg_SplitScreen) Reset()                    { *m = CSVCMsg_SplitScreen{} }
 func (m *CSVCMsg_SplitScreen) String() string            { return proto.CompactTextString(m) }
 func (*CSVCMsg_SplitScreen) ProtoMessage()               {}
-func (*CSVCMsg_SplitScreen) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{27} }
+func (*CSVCMsg_SplitScreen) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{27} }
 
 const Default_CSVCMsg_SplitScreen_Type ESplitScreenMessageType = ESplitScreenMessageType_MSG_SPLITSCREEN_ADDUSER
 
@@ -1661,7 +1661,7 @@ type CSVCMsg_GetCvarValue struct {
 func (m *CSVCMsg_GetCvarValue) Reset()                    { *m = CSVCMsg_GetCvarValue{} }
 func (m *CSVCMsg_GetCvarValue) String() string            { return proto.CompactTextString(m) }
 func (*CSVCMsg_GetCvarValue) ProtoMessage()               {}
-func (*CSVCMsg_GetCvarValue) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{28} }
+func (*CSVCMsg_GetCvarValue) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{28} }
 
 func (m *CSVCMsg_GetCvarValue) GetCookie() int32 {
 	if m != nil && m.Cookie != nil {
@@ -1686,7 +1686,7 @@ type CSVCMsg_Menu struct {
 func (m *CSVCMsg_Menu) Reset()                    { *m = CSVCMsg_Menu{} }
 func (m *CSVCMsg_Menu) String() string            { return proto.CompactTextString(m) }
 func (*CSVCMsg_Menu) ProtoMessage()               {}
-func (*CSVCMsg_Menu) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{29} }
+func (*CSVCMsg_Menu) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{29} }
 
 func (m *CSVCMsg_Menu) GetDialogType() int32 {
 	if m != nil && m.DialogType != nil {
@@ -1713,7 +1713,7 @@ type CSVCMsg_SendTable struct {
 func (m *CSVCMsg_SendTable) Reset()                    { *m = CSVCMsg_SendTable{} }
 func (m *CSVCMsg_SendTable) String() string            { return proto.CompactTextString(m) }
 func (*CSVCMsg_SendTable) ProtoMessage()               {}
-func (*CSVCMsg_SendTable) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{30} }
+func (*CSVCMsg_SendTable) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{30} }
 
 func (m *CSVCMsg_SendTable) GetIsEnd() bool {
 	if m != nil && m.IsEnd != nil {
@@ -1759,7 +1759,7 @@ type CSVCMsg_SendTableSendpropT struct {
 func (m *CSVCMsg_SendTableSendpropT) Reset()                    { *m = CSVCMsg_SendTableSendpropT{} }
 func (m *CSVCMsg_SendTableSendpropT) String() string            { return proto.CompactTextString(m) }
 func (*CSVCMsg_SendTableSendpropT) ProtoMessage()               {}
-func (*CSVCMsg_SendTableSendpropT) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{30, 0} }
+func (*CSVCMsg_SendTableSendpropT) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{30, 0} }
 
 func (m *CSVCMsg_SendTableSendpropT) GetType() int32 {
 	if m != nil && m.Type != nil {
@@ -1832,7 +1832,7 @@ type CSVCMsg_GameEventList struct {
 func (m *CSVCMsg_GameEventList) Reset()                    { *m = CSVCMsg_GameEventList{} }
 func (m *CSVCMsg_GameEventList) String() string            { return proto.CompactTextString(m) }
 func (*CSVCMsg_GameEventList) ProtoMessage()               {}
-func (*CSVCMsg_GameEventList) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{31} }
+func (*CSVCMsg_GameEventList) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{31} }
 
 func (m *CSVCMsg_GameEventList) GetDescriptors() []*CSVCMsg_GameEventListDescriptorT {
 	if m != nil {
@@ -1850,7 +1850,7 @@ type CSVCMsg_GameEventListKeyT struct {
 func (m *CSVCMsg_GameEventListKeyT) Reset()                    { *m = CSVCMsg_GameEventListKeyT{} }
 func (m *CSVCMsg_GameEventListKeyT) String() string            { return proto.CompactTextString(m) }
 func (*CSVCMsg_GameEventListKeyT) ProtoMessage()               {}
-func (*CSVCMsg_GameEventListKeyT) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{31, 0} }
+func (*CSVCMsg_GameEventListKeyT) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{31, 0} }
 
 func (m *CSVCMsg_GameEventListKeyT) GetType() int32 {
 	if m != nil && m.Type != nil {
@@ -1877,7 +1877,7 @@ func (m *CSVCMsg_GameEventListDescriptorT) Reset()         { *m = CSVCMsg_GameEv
 func (m *CSVCMsg_GameEventListDescriptorT) String() string { return proto.CompactTextString(m) }
 func (*CSVCMsg_GameEventListDescriptorT) ProtoMessage()    {}
 func (*CSVCMsg_GameEventListDescriptorT) Descriptor() ([]byte, []int) {
-	return fileDescriptor32, []int{31, 1}
+	return fileDescriptor31, []int{31, 1}
 }
 
 func (m *CSVCMsg_GameEventListDescriptorT) GetEventid() int32 {
@@ -1919,7 +1919,7 @@ type CSVCMsg_PacketEntities struct {
 func (m *CSVCMsg_PacketEntities) Reset()                    { *m = CSVCMsg_PacketEntities{} }
 func (m *CSVCMsg_PacketEntities) String() string            { return proto.CompactTextString(m) }
 func (*CSVCMsg_PacketEntities) ProtoMessage()               {}
-func (*CSVCMsg_PacketEntities) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{32} }
+func (*CSVCMsg_PacketEntities) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{32} }
 
 func (m *CSVCMsg_PacketEntities) GetMaxEntries() int32 {
 	if m != nil && m.MaxEntries != nil {
@@ -2008,7 +2008,7 @@ type CSVCMsg_TempEntities struct {
 func (m *CSVCMsg_TempEntities) Reset()                    { *m = CSVCMsg_TempEntities{} }
 func (m *CSVCMsg_TempEntities) String() string            { return proto.CompactTextString(m) }
 func (*CSVCMsg_TempEntities) ProtoMessage()               {}
-func (*CSVCMsg_TempEntities) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{33} }
+func (*CSVCMsg_TempEntities) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{33} }
 
 func (m *CSVCMsg_TempEntities) GetReliable() bool {
 	if m != nil && m.Reliable != nil {
@@ -2047,7 +2047,7 @@ type CSVCMsg_CreateStringTable struct {
 func (m *CSVCMsg_CreateStringTable) Reset()                    { *m = CSVCMsg_CreateStringTable{} }
 func (m *CSVCMsg_CreateStringTable) String() string            { return proto.CompactTextString(m) }
 func (*CSVCMsg_CreateStringTable) ProtoMessage()               {}
-func (*CSVCMsg_CreateStringTable) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{34} }
+func (*CSVCMsg_CreateStringTable) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{34} }
 
 func (m *CSVCMsg_CreateStringTable) GetName() string {
 	if m != nil && m.Name != nil {
@@ -2122,7 +2122,7 @@ type CSVCMsg_UpdateStringTable struct {
 func (m *CSVCMsg_UpdateStringTable) Reset()                    { *m = CSVCMsg_UpdateStringTable{} }
 func (m *CSVCMsg_UpdateStringTable) String() string            { return proto.CompactTextString(m) }
 func (*CSVCMsg_UpdateStringTable) ProtoMessage()               {}
-func (*CSVCMsg_UpdateStringTable) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{35} }
+func (*CSVCMsg_UpdateStringTable) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{35} }
 
 func (m *CSVCMsg_UpdateStringTable) GetTableId() int32 {
 	if m != nil && m.TableId != nil {
@@ -2158,7 +2158,7 @@ type CSVCMsg_VoiceData struct {
 func (m *CSVCMsg_VoiceData) Reset()                    { *m = CSVCMsg_VoiceData{} }
 func (m *CSVCMsg_VoiceData) String() string            { return proto.CompactTextString(m) }
 func (*CSVCMsg_VoiceData) ProtoMessage()               {}
-func (*CSVCMsg_VoiceData) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{36} }
+func (*CSVCMsg_VoiceData) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{36} }
 
 func (m *CSVCMsg_VoiceData) GetAudio() *CMsgVoiceAudio {
 	if m != nil {
@@ -2212,7 +2212,7 @@ type CSVCMsg_PacketReliable struct {
 func (m *CSVCMsg_PacketReliable) Reset()                    { *m = CSVCMsg_PacketReliable{} }
 func (m *CSVCMsg_PacketReliable) String() string            { return proto.CompactTextString(m) }
 func (*CSVCMsg_PacketReliable) ProtoMessage()               {}
-func (*CSVCMsg_PacketReliable) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{37} }
+func (*CSVCMsg_PacketReliable) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{37} }
 
 func (m *CSVCMsg_PacketReliable) GetTick() int32 {
 	if m != nil && m.Tick != nil {
@@ -2246,7 +2246,7 @@ type CSVCMsg_FullFrameSplit struct {
 func (m *CSVCMsg_FullFrameSplit) Reset()                    { *m = CSVCMsg_FullFrameSplit{} }
 func (m *CSVCMsg_FullFrameSplit) String() string            { return proto.CompactTextString(m) }
 func (*CSVCMsg_FullFrameSplit) ProtoMessage()               {}
-func (*CSVCMsg_FullFrameSplit) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{38} }
+func (*CSVCMsg_FullFrameSplit) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{38} }
 
 func (m *CSVCMsg_FullFrameSplit) GetTick() int32 {
 	if m != nil && m.Tick != nil {
@@ -2287,7 +2287,7 @@ type CSVCMsg_HLTVStatus struct {
 func (m *CSVCMsg_HLTVStatus) Reset()                    { *m = CSVCMsg_HLTVStatus{} }
 func (m *CSVCMsg_HLTVStatus) String() string            { return proto.CompactTextString(m) }
 func (*CSVCMsg_HLTVStatus) ProtoMessage()               {}
-func (*CSVCMsg_HLTVStatus) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{39} }
+func (*CSVCMsg_HLTVStatus) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{39} }
 
 func (m *CSVCMsg_HLTVStatus) GetMaster() string {
 	if m != nil && m.Master != nil {
@@ -2325,7 +2325,7 @@ type CSVCMsg_ServerSteamID struct {
 func (m *CSVCMsg_ServerSteamID) Reset()                    { *m = CSVCMsg_ServerSteamID{} }
 func (m *CSVCMsg_ServerSteamID) String() string            { return proto.CompactTextString(m) }
 func (*CSVCMsg_ServerSteamID) ProtoMessage()               {}
-func (*CSVCMsg_ServerSteamID) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{40} }
+func (*CSVCMsg_ServerSteamID) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{40} }
 
 func (m *CSVCMsg_ServerSteamID) GetSteamId() uint64 {
 	if m != nil && m.SteamId != nil {
@@ -2342,7 +2342,7 @@ type CSVCMsg_CmdKeyValues struct {
 func (m *CSVCMsg_CmdKeyValues) Reset()                    { *m = CSVCMsg_CmdKeyValues{} }
 func (m *CSVCMsg_CmdKeyValues) String() string            { return proto.CompactTextString(m) }
 func (*CSVCMsg_CmdKeyValues) ProtoMessage()               {}
-func (*CSVCMsg_CmdKeyValues) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{41} }
+func (*CSVCMsg_CmdKeyValues) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{41} }
 
 func (m *CSVCMsg_CmdKeyValues) GetData() []byte {
 	if m != nil {
@@ -2360,7 +2360,7 @@ type CMsgIPCAddress struct {
 func (m *CMsgIPCAddress) Reset()                    { *m = CMsgIPCAddress{} }
 func (m *CMsgIPCAddress) String() string            { return proto.CompactTextString(m) }
 func (*CMsgIPCAddress) ProtoMessage()               {}
-func (*CMsgIPCAddress) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{42} }
+func (*CMsgIPCAddress) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{42} }
 
 func (m *CMsgIPCAddress) GetComputerGuid() uint64 {
 	if m != nil && m.ComputerGuid != nil {
@@ -2389,7 +2389,7 @@ type CMsgServerPeer struct {
 func (m *CMsgServerPeer) Reset()                    { *m = CMsgServerPeer{} }
 func (m *CMsgServerPeer) String() string            { return proto.CompactTextString(m) }
 func (*CMsgServerPeer) ProtoMessage()               {}
-func (*CMsgServerPeer) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{43} }
+func (*CMsgServerPeer) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{43} }
 
 func (m *CMsgServerPeer) GetPlayerSlot() int32 {
 	if m != nil && m.PlayerSlot != nil {
@@ -2441,7 +2441,7 @@ type CSVCMsg_PeerList struct {
 func (m *CSVCMsg_PeerList) Reset()                    { *m = CSVCMsg_PeerList{} }
 func (m *CSVCMsg_PeerList) String() string            { return proto.CompactTextString(m) }
 func (*CSVCMsg_PeerList) ProtoMessage()               {}
-func (*CSVCMsg_PeerList) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{44} }
+func (*CSVCMsg_PeerList) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{44} }
 
 func (m *CSVCMsg_PeerList) GetPeer() []*CMsgServerPeer {
 	if m != nil {
@@ -2458,7 +2458,7 @@ type CSVCMsg_ClearAllStringTables struct {
 func (m *CSVCMsg_ClearAllStringTables) Reset()                    { *m = CSVCMsg_ClearAllStringTables{} }
 func (m *CSVCMsg_ClearAllStringTables) String() string            { return proto.CompactTextString(m) }
 func (*CSVCMsg_ClearAllStringTables) ProtoMessage()               {}
-func (*CSVCMsg_ClearAllStringTables) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{45} }
+func (*CSVCMsg_ClearAllStringTables) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{45} }
 
 func (m *CSVCMsg_ClearAllStringTables) GetMapname() string {
 	if m != nil && m.Mapname != nil {
@@ -2485,7 +2485,7 @@ func (m *ProtoFlattenedSerializerFieldT) Reset()         { *m = ProtoFlattenedSe
 func (m *ProtoFlattenedSerializerFieldT) String() string { return proto.CompactTextString(m) }
 func (*ProtoFlattenedSerializerFieldT) ProtoMessage()    {}
 func (*ProtoFlattenedSerializerFieldT) Descriptor() ([]byte, []int) {
-	return fileDescriptor32, []int{46}
+	return fileDescriptor31, []int{46}
 }
 
 func (m *ProtoFlattenedSerializerFieldT) GetVarTypeSym() int32 {
@@ -2568,7 +2568,7 @@ type ProtoFlattenedSerializerT struct {
 func (m *ProtoFlattenedSerializerT) Reset()                    { *m = ProtoFlattenedSerializerT{} }
 func (m *ProtoFlattenedSerializerT) String() string            { return proto.CompactTextString(m) }
 func (*ProtoFlattenedSerializerT) ProtoMessage()               {}
-func (*ProtoFlattenedSerializerT) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{47} }
+func (*ProtoFlattenedSerializerT) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{47} }
 
 func (m *ProtoFlattenedSerializerT) GetSerializerNameSym() int32 {
 	if m != nil && m.SerializerNameSym != nil {
@@ -2601,7 +2601,7 @@ type CSVCMsg_FlattenedSerializer struct {
 func (m *CSVCMsg_FlattenedSerializer) Reset()                    { *m = CSVCMsg_FlattenedSerializer{} }
 func (m *CSVCMsg_FlattenedSerializer) String() string            { return proto.CompactTextString(m) }
 func (*CSVCMsg_FlattenedSerializer) ProtoMessage()               {}
-func (*CSVCMsg_FlattenedSerializer) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{48} }
+func (*CSVCMsg_FlattenedSerializer) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{48} }
 
 func (m *CSVCMsg_FlattenedSerializer) GetSerializers() []*ProtoFlattenedSerializerT {
 	if m != nil {
@@ -2632,7 +2632,7 @@ type CSVCMsg_StopSound struct {
 func (m *CSVCMsg_StopSound) Reset()                    { *m = CSVCMsg_StopSound{} }
 func (m *CSVCMsg_StopSound) String() string            { return proto.CompactTextString(m) }
 func (*CSVCMsg_StopSound) ProtoMessage()               {}
-func (*CSVCMsg_StopSound) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{49} }
+func (*CSVCMsg_StopSound) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{49} }
 
 func (m *CSVCMsg_StopSound) GetGuid() uint32 {
 	if m != nil && m.Guid != nil {
@@ -2653,7 +2653,7 @@ func (m *CBidirMsg_RebroadcastGameEvent) Reset()         { *m = CBidirMsg_Rebroa
 func (m *CBidirMsg_RebroadcastGameEvent) String() string { return proto.CompactTextString(m) }
 func (*CBidirMsg_RebroadcastGameEvent) ProtoMessage()    {}
 func (*CBidirMsg_RebroadcastGameEvent) Descriptor() ([]byte, []int) {
-	return fileDescriptor32, []int{50}
+	return fileDescriptor31, []int{50}
 }
 
 func (m *CBidirMsg_RebroadcastGameEvent) GetPosttoserver() bool {
@@ -2692,7 +2692,7 @@ type CBidirMsg_RebroadcastSource struct {
 func (m *CBidirMsg_RebroadcastSource) Reset()                    { *m = CBidirMsg_RebroadcastSource{} }
 func (m *CBidirMsg_RebroadcastSource) String() string            { return proto.CompactTextString(m) }
 func (*CBidirMsg_RebroadcastSource) ProtoMessage()               {}
-func (*CBidirMsg_RebroadcastSource) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{51} }
+func (*CBidirMsg_RebroadcastSource) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{51} }
 
 func (m *CBidirMsg_RebroadcastSource) GetEventsource() int32 {
 	if m != nil && m.Eventsource != nil {
@@ -2709,7 +2709,7 @@ type SerializedNetAddressT struct {
 func (m *SerializedNetAddressT) Reset()                    { *m = SerializedNetAddressT{} }
 func (m *SerializedNetAddressT) String() string            { return proto.CompactTextString(m) }
 func (*SerializedNetAddressT) ProtoMessage()               {}
-func (*SerializedNetAddressT) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{52} }
+func (*SerializedNetAddressT) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{52} }
 
 func (m *SerializedNetAddressT) GetSerializedAddress() []byte {
 	if m != nil {
@@ -2728,7 +2728,7 @@ type CBidirMsg_RelayInfo struct {
 func (m *CBidirMsg_RelayInfo) Reset()                    { *m = CBidirMsg_RelayInfo{} }
 func (m *CBidirMsg_RelayInfo) String() string            { return proto.CompactTextString(m) }
 func (*CBidirMsg_RelayInfo) ProtoMessage()               {}
-func (*CBidirMsg_RelayInfo) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{53} }
+func (*CBidirMsg_RelayInfo) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{53} }
 
 const Default_CBidirMsg_RelayInfo_Operation CBidirMsg_RelayInfo_OperationT = CBidirMsg_RelayInfo_RIO_REQUEST_RELAY
 
@@ -2763,7 +2763,7 @@ type SignedPayloadT struct {
 func (m *SignedPayloadT) Reset()                    { *m = SignedPayloadT{} }
 func (m *SignedPayloadT) String() string            { return proto.CompactTextString(m) }
 func (*SignedPayloadT) ProtoMessage()               {}
-func (*SignedPayloadT) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{54} }
+func (*SignedPayloadT) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{54} }
 
 func (m *SignedPayloadT) GetPayloadData() []byte {
 	if m != nil {
@@ -2797,7 +2797,7 @@ type CBidirMsg_RelayPacket struct {
 func (m *CBidirMsg_RelayPacket) Reset()                    { *m = CBidirMsg_RelayPacket{} }
 func (m *CBidirMsg_RelayPacket) String() string            { return proto.CompactTextString(m) }
 func (*CBidirMsg_RelayPacket) ProtoMessage()               {}
-func (*CBidirMsg_RelayPacket) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{55} }
+func (*CBidirMsg_RelayPacket) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{55} }
 
 func (m *CBidirMsg_RelayPacket) GetPrevhopcount() uint32 {
 	if m != nil && m.Prevhopcount != nil {
@@ -2842,7 +2842,7 @@ func (m *CBidirMsg_RelayPacket_SignedDestinationAddressT) String() string {
 }
 func (*CBidirMsg_RelayPacket_SignedDestinationAddressT) ProtoMessage() {}
 func (*CBidirMsg_RelayPacket_SignedDestinationAddressT) Descriptor() ([]byte, []int) {
-	return fileDescriptor32, []int{55, 0}
+	return fileDescriptor31, []int{55, 0}
 }
 
 func (m *CBidirMsg_RelayPacket_SignedDestinationAddressT) GetSerializedAddr() *SerializedNetAddressT {
@@ -2898,7 +2898,7 @@ type CMsgServerNetworkStats struct {
 func (m *CMsgServerNetworkStats) Reset()                    { *m = CMsgServerNetworkStats{} }
 func (m *CMsgServerNetworkStats) String() string            { return proto.CompactTextString(m) }
 func (*CMsgServerNetworkStats) ProtoMessage()               {}
-func (*CMsgServerNetworkStats) Descriptor() ([]byte, []int) { return fileDescriptor32, []int{56} }
+func (*CMsgServerNetworkStats) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{56} }
 
 func (m *CMsgServerNetworkStats) GetDedicated() bool {
 	if m != nil && m.Dedicated != nil {
@@ -3085,7 +3085,7 @@ func (m *CMsgServerNetworkStats_Port) Reset()         { *m = CMsgServerNetworkSt
 func (m *CMsgServerNetworkStats_Port) String() string { return proto.CompactTextString(m) }
 func (*CMsgServerNetworkStats_Port) ProtoMessage()    {}
 func (*CMsgServerNetworkStats_Port) Descriptor() ([]byte, []int) {
-	return fileDescriptor32, []int{56, 0}
+	return fileDescriptor31, []int{56, 0}
 }
 
 func (m *CMsgServerNetworkStats_Port) GetPort() int32 {
@@ -3116,7 +3116,7 @@ func (m *CMsgServerNetworkStats_Player) Reset()         { *m = CMsgServerNetwork
 func (m *CMsgServerNetworkStats_Player) String() string { return proto.CompactTextString(m) }
 func (*CMsgServerNetworkStats_Player) ProtoMessage()    {}
 func (*CMsgServerNetworkStats_Player) Descriptor() ([]byte, []int) {
-	return fileDescriptor32, []int{56, 1}
+	return fileDescriptor31, []int{56, 1}
 }
 
 func (m *CMsgServerNetworkStats_Player) GetSteamid() uint64 {
@@ -3241,9 +3241,9 @@ func init() {
 	proto.RegisterEnum("dota.CBidirMsg_RelayInfo_OperationT", CBidirMsg_RelayInfo_OperationT_name, CBidirMsg_RelayInfo_OperationT_value)
 }
 
-func init() { proto.RegisterFile("netmessages.proto", fileDescriptor32) }
+func init() { proto.RegisterFile("netmessages.proto", fileDescriptor31) }
 
-var fileDescriptor32 = []byte{
+var fileDescriptor31 = []byte{
 	// 5051 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x5a, 0x5f, 0x73, 0x1c, 0x49,
 	0x52, 0xf7, 0x8c, 0x66, 0xa4, 0x99, 0x9c, 0x3f, 0x6e, 0xb5, 0x6d, 0x79, 0x2c, 0xaf, 0xbd, 0x76,

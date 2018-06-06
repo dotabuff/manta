@@ -23,7 +23,7 @@ type CDOTAMatchMetadataFile struct {
 func (m *CDOTAMatchMetadataFile) Reset()                    { *m = CDOTAMatchMetadataFile{} }
 func (m *CDOTAMatchMetadataFile) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAMatchMetadataFile) ProtoMessage()               {}
-func (*CDOTAMatchMetadataFile) Descriptor() ([]byte, []int) { return fileDescriptor23, []int{0} }
+func (*CDOTAMatchMetadataFile) Descriptor() ([]byte, []int) { return fileDescriptor22, []int{0} }
 
 func (m *CDOTAMatchMetadataFile) GetVersion() int32 {
 	if m != nil && m.Version != nil {
@@ -67,7 +67,7 @@ type CDOTAMatchMetadata struct {
 func (m *CDOTAMatchMetadata) Reset()                    { *m = CDOTAMatchMetadata{} }
 func (m *CDOTAMatchMetadata) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAMatchMetadata) ProtoMessage()               {}
-func (*CDOTAMatchMetadata) Descriptor() ([]byte, []int) { return fileDescriptor23, []int{1} }
+func (*CDOTAMatchMetadata) Descriptor() ([]byte, []int) { return fileDescriptor22, []int{1} }
 
 func (m *CDOTAMatchMetadata) GetTeams() []*CDOTAMatchMetadata_Team {
 	if m != nil {
@@ -135,7 +135,7 @@ type CDOTAMatchMetadata_Team struct {
 func (m *CDOTAMatchMetadata_Team) Reset()                    { *m = CDOTAMatchMetadata_Team{} }
 func (m *CDOTAMatchMetadata_Team) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAMatchMetadata_Team) ProtoMessage()               {}
-func (*CDOTAMatchMetadata_Team) Descriptor() ([]byte, []int) { return fileDescriptor23, []int{1, 0} }
+func (*CDOTAMatchMetadata_Team) Descriptor() ([]byte, []int) { return fileDescriptor22, []int{1, 0} }
 
 func (m *CDOTAMatchMetadata_Team) GetDotaTeam() uint32 {
 	if m != nil && m.DotaTeam != nil {
@@ -217,7 +217,7 @@ func (m *CDOTAMatchMetadata_Team_PlayerKill) Reset()         { *m = CDOTAMatchMe
 func (m *CDOTAMatchMetadata_Team_PlayerKill) String() string { return proto.CompactTextString(m) }
 func (*CDOTAMatchMetadata_Team_PlayerKill) ProtoMessage()    {}
 func (*CDOTAMatchMetadata_Team_PlayerKill) Descriptor() ([]byte, []int) {
-	return fileDescriptor23, []int{1, 0, 0}
+	return fileDescriptor22, []int{1, 0, 0}
 }
 
 func (m *CDOTAMatchMetadata_Team_PlayerKill) GetVictimSlot() uint32 {
@@ -244,7 +244,7 @@ func (m *CDOTAMatchMetadata_Team_ItemPurchase) Reset()         { *m = CDOTAMatch
 func (m *CDOTAMatchMetadata_Team_ItemPurchase) String() string { return proto.CompactTextString(m) }
 func (*CDOTAMatchMetadata_Team_ItemPurchase) ProtoMessage()    {}
 func (*CDOTAMatchMetadata_Team_ItemPurchase) Descriptor() ([]byte, []int) {
-	return fileDescriptor23, []int{1, 0, 1}
+	return fileDescriptor22, []int{1, 0, 1}
 }
 
 func (m *CDOTAMatchMetadata_Team_ItemPurchase) GetItemId() uint32 {
@@ -277,7 +277,7 @@ func (m *CDOTAMatchMetadata_Team_InventorySnapshot) Reset() {
 func (m *CDOTAMatchMetadata_Team_InventorySnapshot) String() string { return proto.CompactTextString(m) }
 func (*CDOTAMatchMetadata_Team_InventorySnapshot) ProtoMessage()    {}
 func (*CDOTAMatchMetadata_Team_InventorySnapshot) Descriptor() ([]byte, []int) {
-	return fileDescriptor23, []int{1, 0, 2}
+	return fileDescriptor22, []int{1, 0, 2}
 }
 
 func (m *CDOTAMatchMetadata_Team_InventorySnapshot) GetItemId() []uint32 {
@@ -334,7 +334,7 @@ func (m *CDOTAMatchMetadata_Team_AutoStyleCriteria) Reset() {
 func (m *CDOTAMatchMetadata_Team_AutoStyleCriteria) String() string { return proto.CompactTextString(m) }
 func (*CDOTAMatchMetadata_Team_AutoStyleCriteria) ProtoMessage()    {}
 func (*CDOTAMatchMetadata_Team_AutoStyleCriteria) Descriptor() ([]byte, []int) {
-	return fileDescriptor23, []int{1, 0, 3}
+	return fileDescriptor22, []int{1, 0, 3}
 }
 
 func (m *CDOTAMatchMetadata_Team_AutoStyleCriteria) GetNameToken() uint32 {
@@ -370,7 +370,7 @@ func (m *CDOTAMatchMetadata_Team_StrangeGemProgress) String() string {
 }
 func (*CDOTAMatchMetadata_Team_StrangeGemProgress) ProtoMessage() {}
 func (*CDOTAMatchMetadata_Team_StrangeGemProgress) Descriptor() ([]byte, []int) {
-	return fileDescriptor23, []int{1, 0, 4}
+	return fileDescriptor22, []int{1, 0, 4}
 }
 
 func (m *CDOTAMatchMetadata_Team_StrangeGemProgress) GetKillEaterType() uint32 {
@@ -441,7 +441,7 @@ func (m *CDOTAMatchMetadata_Team_EventData) Reset()         { *m = CDOTAMatchMet
 func (m *CDOTAMatchMetadata_Team_EventData) String() string { return proto.CompactTextString(m) }
 func (*CDOTAMatchMetadata_Team_EventData) ProtoMessage()    {}
 func (*CDOTAMatchMetadata_Team_EventData) Descriptor() ([]byte, []int) {
-	return fileDescriptor23, []int{1, 0, 5}
+	return fileDescriptor22, []int{1, 0, 5}
 }
 
 func (m *CDOTAMatchMetadata_Team_EventData) GetEventId() uint32 {
@@ -559,7 +559,7 @@ func (m *CDOTAMatchMetadata_Team_Player) Reset()         { *m = CDOTAMatchMetada
 func (m *CDOTAMatchMetadata_Team_Player) String() string { return proto.CompactTextString(m) }
 func (*CDOTAMatchMetadata_Team_Player) ProtoMessage()    {}
 func (*CDOTAMatchMetadata_Team_Player) Descriptor() ([]byte, []int) {
-	return fileDescriptor23, []int{1, 0, 6}
+	return fileDescriptor22, []int{1, 0, 6}
 }
 
 func (m *CDOTAMatchMetadata_Team_Player) GetAccountId() uint32 {
@@ -781,7 +781,7 @@ type CDOTAMatchPrivateMetadata struct {
 func (m *CDOTAMatchPrivateMetadata) Reset()                    { *m = CDOTAMatchPrivateMetadata{} }
 func (m *CDOTAMatchPrivateMetadata) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAMatchPrivateMetadata) ProtoMessage()               {}
-func (*CDOTAMatchPrivateMetadata) Descriptor() ([]byte, []int) { return fileDescriptor23, []int{2} }
+func (*CDOTAMatchPrivateMetadata) Descriptor() ([]byte, []int) { return fileDescriptor22, []int{2} }
 
 func (m *CDOTAMatchPrivateMetadata) GetTeams() []*CDOTAMatchPrivateMetadata_Team {
 	if m != nil {
@@ -808,7 +808,7 @@ func (m *CDOTAMatchPrivateMetadata_Team) Reset()         { *m = CDOTAMatchPrivat
 func (m *CDOTAMatchPrivateMetadata_Team) String() string { return proto.CompactTextString(m) }
 func (*CDOTAMatchPrivateMetadata_Team) ProtoMessage()    {}
 func (*CDOTAMatchPrivateMetadata_Team) Descriptor() ([]byte, []int) {
-	return fileDescriptor23, []int{2, 0}
+	return fileDescriptor22, []int{2, 0}
 }
 
 func (m *CDOTAMatchPrivateMetadata_Team) GetDotaTeam() uint32 {
@@ -851,7 +851,7 @@ func (m *CDOTAMatchPrivateMetadata_Team_Player) Reset()         { *m = CDOTAMatc
 func (m *CDOTAMatchPrivateMetadata_Team_Player) String() string { return proto.CompactTextString(m) }
 func (*CDOTAMatchPrivateMetadata_Team_Player) ProtoMessage()    {}
 func (*CDOTAMatchPrivateMetadata_Team_Player) Descriptor() ([]byte, []int) {
-	return fileDescriptor23, []int{2, 0, 0}
+	return fileDescriptor22, []int{2, 0, 0}
 }
 
 func (m *CDOTAMatchPrivateMetadata_Team_Player) GetAccountId() uint32 {
@@ -945,7 +945,7 @@ func (m *CDOTAMatchPrivateMetadata_Team_Player_CombatSegment) String() string {
 }
 func (*CDOTAMatchPrivateMetadata_Team_Player_CombatSegment) ProtoMessage() {}
 func (*CDOTAMatchPrivateMetadata_Team_Player_CombatSegment) Descriptor() ([]byte, []int) {
-	return fileDescriptor23, []int{2, 0, 0, 0}
+	return fileDescriptor22, []int{2, 0, 0, 0}
 }
 
 func (m *CDOTAMatchPrivateMetadata_Team_Player_CombatSegment) GetGameTime() int32 {
@@ -977,7 +977,7 @@ func (m *CDOTAMatchPrivateMetadata_Team_Player_CombatSegment_DamageByAbility) St
 }
 func (*CDOTAMatchPrivateMetadata_Team_Player_CombatSegment_DamageByAbility) ProtoMessage() {}
 func (*CDOTAMatchPrivateMetadata_Team_Player_CombatSegment_DamageByAbility) Descriptor() ([]byte, []int) {
-	return fileDescriptor23, []int{2, 0, 0, 0, 0}
+	return fileDescriptor22, []int{2, 0, 0, 0, 0}
 }
 
 func (m *CDOTAMatchPrivateMetadata_Team_Player_CombatSegment_DamageByAbility) GetSourceUnitIndex() uint32 {
@@ -1016,7 +1016,7 @@ func (m *CDOTAMatchPrivateMetadata_Team_Player_CombatSegment_DamageByAbility_ByH
 func (*CDOTAMatchPrivateMetadata_Team_Player_CombatSegment_DamageByAbility_ByHeroTarget) ProtoMessage() {
 }
 func (*CDOTAMatchPrivateMetadata_Team_Player_CombatSegment_DamageByAbility_ByHeroTarget) Descriptor() ([]byte, []int) {
-	return fileDescriptor23, []int{2, 0, 0, 0, 0, 0}
+	return fileDescriptor22, []int{2, 0, 0, 0, 0, 0}
 }
 
 func (m *CDOTAMatchPrivateMetadata_Team_Player_CombatSegment_DamageByAbility_ByHeroTarget) GetHeroId() uint32 {
@@ -1048,7 +1048,7 @@ func (m *CDOTAMatchPrivateMetadata_Team_Player_BuffRecord) String() string {
 }
 func (*CDOTAMatchPrivateMetadata_Team_Player_BuffRecord) ProtoMessage() {}
 func (*CDOTAMatchPrivateMetadata_Team_Player_BuffRecord) Descriptor() ([]byte, []int) {
-	return fileDescriptor23, []int{2, 0, 0, 1}
+	return fileDescriptor22, []int{2, 0, 0, 1}
 }
 
 func (m *CDOTAMatchPrivateMetadata_Team_Player_BuffRecord) GetBuffAbilityId() uint32 {
@@ -1087,7 +1087,7 @@ func (m *CDOTAMatchPrivateMetadata_Team_Player_BuffRecord_ByHeroTarget) String()
 }
 func (*CDOTAMatchPrivateMetadata_Team_Player_BuffRecord_ByHeroTarget) ProtoMessage() {}
 func (*CDOTAMatchPrivateMetadata_Team_Player_BuffRecord_ByHeroTarget) Descriptor() ([]byte, []int) {
-	return fileDescriptor23, []int{2, 0, 0, 1, 0}
+	return fileDescriptor22, []int{2, 0, 0, 1, 0}
 }
 
 func (m *CDOTAMatchPrivateMetadata_Team_Player_BuffRecord_ByHeroTarget) GetHeroId() uint32 {
@@ -1125,7 +1125,7 @@ func (m *CDOTAMatchPrivateMetadata_Team_Building) Reset() {
 func (m *CDOTAMatchPrivateMetadata_Team_Building) String() string { return proto.CompactTextString(m) }
 func (*CDOTAMatchPrivateMetadata_Team_Building) ProtoMessage()    {}
 func (*CDOTAMatchPrivateMetadata_Team_Building) Descriptor() ([]byte, []int) {
-	return fileDescriptor23, []int{2, 0, 1}
+	return fileDescriptor22, []int{2, 0, 1}
 }
 
 func (m *CDOTAMatchPrivateMetadata_Team_Building) GetUnitName() string {
@@ -1178,9 +1178,9 @@ func init() {
 	proto.RegisterType((*CDOTAMatchPrivateMetadata_Team_Building)(nil), "dota.CDOTAMatchPrivateMetadata.Team.Building")
 }
 
-func init() { proto.RegisterFile("dota_match_metadata.proto", fileDescriptor23) }
+func init() { proto.RegisterFile("dota_match_metadata.proto", fileDescriptor22) }
 
-var fileDescriptor23 = []byte{
+var fileDescriptor22 = []byte{
 	// 2285 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x58, 0x4b, 0x73, 0x1b, 0xc7,
 	0xf1, 0xff, 0x13, 0x7c, 0x01, 0x0d, 0x80, 0x10, 0x47, 0x94, 0xb8, 0x84, 0x2d, 0x8b, 0x7f, 0x59,

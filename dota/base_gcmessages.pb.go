@@ -23,7 +23,6 @@ It is generated from these files:
 	dota_gcmessages_client_tournament.proto
 	dota_gcmessages_client_watch.proto
 	dota_gcmessages_common.proto
-	dota_gcmessages_common_bot_script.proto
 	dota_gcmessages_common_match_management.proto
 	dota_gcmessages_msgid.proto
 	dota_gcmessages_server.proto
@@ -853,7 +852,6 @@ It has these top-level messages:
 	CMsgSuccessfulHero
 	CMsgRecentMatchInfo
 	CMsgMatchTips
-	CMsgBotWorldState
 	CSODOTAPartyMember
 	CSODOTAParty
 	CSODOTAPartyInvite

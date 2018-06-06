@@ -93,7 +93,7 @@ func (x *EHeroSelectionText) UnmarshalJSON(data []byte) error {
 	*x = EHeroSelectionText(value)
 	return nil
 }
-func (EHeroSelectionText) EnumDescriptor() ([]byte, []int) { return fileDescriptor22, []int{0} }
+func (EHeroSelectionText) EnumDescriptor() ([]byte, []int) { return fileDescriptor21, []int{0} }
 
 var E_HudLocalizeToken = &proto.ExtensionDesc{
 	ExtendedType:  (*google_protobuf.EnumValueOptions)(nil),
@@ -109,9 +109,9 @@ func init() {
 	proto.RegisterExtension(E_HudLocalizeToken)
 }
 
-func init() { proto.RegisterFile("dota_hud_types.proto", fileDescriptor22) }
+func init() { proto.RegisterFile("dota_hud_types.proto", fileDescriptor21) }
 
-var fileDescriptor22 = []byte{
+var fileDescriptor21 = []byte{
 	// 583 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x95, 0xcb, 0x6e, 0x13, 0x3f,
 	0x14, 0xc6, 0x9b, 0x7f, 0xfb, 0x07, 0x6a, 0x28, 0x58, 0x16, 0x0b, 0x63, 0x81, 0x5a, 0xd4, 0x4d,

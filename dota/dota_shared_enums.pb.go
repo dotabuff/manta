@@ -113,7 +113,7 @@ func (x *DOTA_GameMode) UnmarshalJSON(data []byte) error {
 	*x = DOTA_GameMode(value)
 	return nil
 }
-func (DOTA_GameMode) EnumDescriptor() ([]byte, []int) { return fileDescriptor25, []int{0} }
+func (DOTA_GameMode) EnumDescriptor() ([]byte, []int) { return fileDescriptor24, []int{0} }
 
 type DOTA_GameState int32
 
@@ -177,7 +177,7 @@ func (x *DOTA_GameState) UnmarshalJSON(data []byte) error {
 	*x = DOTA_GameState(value)
 	return nil
 }
-func (DOTA_GameState) EnumDescriptor() ([]byte, []int) { return fileDescriptor25, []int{1} }
+func (DOTA_GameState) EnumDescriptor() ([]byte, []int) { return fileDescriptor24, []int{1} }
 
 type DOTA_GC_TEAM int32
 
@@ -223,7 +223,7 @@ func (x *DOTA_GC_TEAM) UnmarshalJSON(data []byte) error {
 	*x = DOTA_GC_TEAM(value)
 	return nil
 }
-func (DOTA_GC_TEAM) EnumDescriptor() ([]byte, []int) { return fileDescriptor25, []int{2} }
+func (DOTA_GC_TEAM) EnumDescriptor() ([]byte, []int) { return fileDescriptor24, []int{2} }
 
 type EEvent int32
 
@@ -323,7 +323,7 @@ func (x *EEvent) UnmarshalJSON(data []byte) error {
 	*x = EEvent(value)
 	return nil
 }
-func (EEvent) EnumDescriptor() ([]byte, []int) { return fileDescriptor25, []int{3} }
+func (EEvent) EnumDescriptor() ([]byte, []int) { return fileDescriptor24, []int{3} }
 
 type DOTALeaverStatusT int32
 
@@ -378,7 +378,7 @@ func (x *DOTALeaverStatusT) UnmarshalJSON(data []byte) error {
 	*x = DOTALeaverStatusT(value)
 	return nil
 }
-func (DOTALeaverStatusT) EnumDescriptor() ([]byte, []int) { return fileDescriptor25, []int{4} }
+func (DOTALeaverStatusT) EnumDescriptor() ([]byte, []int) { return fileDescriptor24, []int{4} }
 
 type DOTAConnectionStateT int32
 
@@ -427,7 +427,7 @@ func (x *DOTAConnectionStateT) UnmarshalJSON(data []byte) error {
 	*x = DOTAConnectionStateT(value)
 	return nil
 }
-func (DOTAConnectionStateT) EnumDescriptor() ([]byte, []int) { return fileDescriptor25, []int{5} }
+func (DOTAConnectionStateT) EnumDescriptor() ([]byte, []int) { return fileDescriptor24, []int{5} }
 
 type Fantasy_Roles int32
 
@@ -467,7 +467,7 @@ func (x *Fantasy_Roles) UnmarshalJSON(data []byte) error {
 	*x = Fantasy_Roles(value)
 	return nil
 }
-func (Fantasy_Roles) EnumDescriptor() ([]byte, []int) { return fileDescriptor25, []int{6} }
+func (Fantasy_Roles) EnumDescriptor() ([]byte, []int) { return fileDescriptor24, []int{6} }
 
 type Fantasy_Team_Slots int32
 
@@ -510,7 +510,7 @@ func (x *Fantasy_Team_Slots) UnmarshalJSON(data []byte) error {
 	*x = Fantasy_Team_Slots(value)
 	return nil
 }
-func (Fantasy_Team_Slots) EnumDescriptor() ([]byte, []int) { return fileDescriptor25, []int{7} }
+func (Fantasy_Team_Slots) EnumDescriptor() ([]byte, []int) { return fileDescriptor24, []int{7} }
 
 type Fantasy_Selection_Mode int32
 
@@ -568,7 +568,7 @@ func (x *Fantasy_Selection_Mode) UnmarshalJSON(data []byte) error {
 	*x = Fantasy_Selection_Mode(value)
 	return nil
 }
-func (Fantasy_Selection_Mode) EnumDescriptor() ([]byte, []int) { return fileDescriptor25, []int{8} }
+func (Fantasy_Selection_Mode) EnumDescriptor() ([]byte, []int) { return fileDescriptor24, []int{8} }
 
 type DOTAChatChannelTypeT int32
 
@@ -662,7 +662,7 @@ func (x *DOTAChatChannelTypeT) UnmarshalJSON(data []byte) error {
 	*x = DOTAChatChannelTypeT(value)
 	return nil
 }
-func (DOTAChatChannelTypeT) EnumDescriptor() ([]byte, []int) { return fileDescriptor25, []int{9} }
+func (DOTAChatChannelTypeT) EnumDescriptor() ([]byte, []int) { return fileDescriptor24, []int{9} }
 
 type EProfileCardSlotType int32
 
@@ -711,7 +711,7 @@ func (x *EProfileCardSlotType) UnmarshalJSON(data []byte) error {
 	*x = EProfileCardSlotType(value)
 	return nil
 }
-func (EProfileCardSlotType) EnumDescriptor() ([]byte, []int) { return fileDescriptor25, []int{10} }
+func (EProfileCardSlotType) EnumDescriptor() ([]byte, []int) { return fileDescriptor24, []int{10} }
 
 type EMatchGroupServerStatus int32
 
@@ -748,7 +748,7 @@ func (x *EMatchGroupServerStatus) UnmarshalJSON(data []byte) error {
 	*x = EMatchGroupServerStatus(value)
 	return nil
 }
-func (EMatchGroupServerStatus) EnumDescriptor() ([]byte, []int) { return fileDescriptor25, []int{11} }
+func (EMatchGroupServerStatus) EnumDescriptor() ([]byte, []int) { return fileDescriptor24, []int{11} }
 
 type DOTA_CM_PICK int32
 
@@ -785,7 +785,7 @@ func (x *DOTA_CM_PICK) UnmarshalJSON(data []byte) error {
 	*x = DOTA_CM_PICK(value)
 	return nil
 }
-func (DOTA_CM_PICK) EnumDescriptor() ([]byte, []int) { return fileDescriptor25, []int{12} }
+func (DOTA_CM_PICK) EnumDescriptor() ([]byte, []int) { return fileDescriptor24, []int{12} }
 
 type DOTALowPriorityBanType int32
 
@@ -822,7 +822,7 @@ func (x *DOTALowPriorityBanType) UnmarshalJSON(data []byte) error {
 	*x = DOTALowPriorityBanType(value)
 	return nil
 }
-func (DOTALowPriorityBanType) EnumDescriptor() ([]byte, []int) { return fileDescriptor25, []int{13} }
+func (DOTALowPriorityBanType) EnumDescriptor() ([]byte, []int) { return fileDescriptor24, []int{13} }
 
 type DOTALobbyReadyState int32
 
@@ -859,7 +859,7 @@ func (x *DOTALobbyReadyState) UnmarshalJSON(data []byte) error {
 	*x = DOTALobbyReadyState(value)
 	return nil
 }
-func (DOTALobbyReadyState) EnumDescriptor() ([]byte, []int) { return fileDescriptor25, []int{14} }
+func (DOTALobbyReadyState) EnumDescriptor() ([]byte, []int) { return fileDescriptor24, []int{14} }
 
 type DOTAGameVersion int32
 
@@ -893,7 +893,7 @@ func (x *DOTAGameVersion) UnmarshalJSON(data []byte) error {
 	*x = DOTAGameVersion(value)
 	return nil
 }
-func (DOTAGameVersion) EnumDescriptor() ([]byte, []int) { return fileDescriptor25, []int{15} }
+func (DOTAGameVersion) EnumDescriptor() ([]byte, []int) { return fileDescriptor24, []int{15} }
 
 type DOTAJoinLobbyResult int32
 
@@ -960,7 +960,7 @@ func (x *DOTAJoinLobbyResult) UnmarshalJSON(data []byte) error {
 	*x = DOTAJoinLobbyResult(value)
 	return nil
 }
-func (DOTAJoinLobbyResult) EnumDescriptor() ([]byte, []int) { return fileDescriptor25, []int{16} }
+func (DOTAJoinLobbyResult) EnumDescriptor() ([]byte, []int) { return fileDescriptor24, []int{16} }
 
 type DOTASelectionPriorityRules int32
 
@@ -994,7 +994,7 @@ func (x *DOTASelectionPriorityRules) UnmarshalJSON(data []byte) error {
 	*x = DOTASelectionPriorityRules(value)
 	return nil
 }
-func (DOTASelectionPriorityRules) EnumDescriptor() ([]byte, []int) { return fileDescriptor25, []int{17} }
+func (DOTASelectionPriorityRules) EnumDescriptor() ([]byte, []int) { return fileDescriptor24, []int{17} }
 
 type DOTASelectionPriorityChoice int32
 
@@ -1038,7 +1038,7 @@ func (x *DOTASelectionPriorityChoice) UnmarshalJSON(data []byte) error {
 	return nil
 }
 func (DOTASelectionPriorityChoice) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor25, []int{18}
+	return fileDescriptor24, []int{18}
 }
 
 type DOTAMatchVote int32
@@ -1076,7 +1076,7 @@ func (x *DOTAMatchVote) UnmarshalJSON(data []byte) error {
 	*x = DOTAMatchVote(value)
 	return nil
 }
-func (DOTAMatchVote) EnumDescriptor() ([]byte, []int) { return fileDescriptor25, []int{19} }
+func (DOTAMatchVote) EnumDescriptor() ([]byte, []int) { return fileDescriptor24, []int{19} }
 
 type DOTA_LobbyMemberXPBonus int32
 
@@ -1122,7 +1122,7 @@ func (x *DOTA_LobbyMemberXPBonus) UnmarshalJSON(data []byte) error {
 	*x = DOTA_LobbyMemberXPBonus(value)
 	return nil
 }
-func (DOTA_LobbyMemberXPBonus) EnumDescriptor() ([]byte, []int) { return fileDescriptor25, []int{20} }
+func (DOTA_LobbyMemberXPBonus) EnumDescriptor() ([]byte, []int) { return fileDescriptor24, []int{20} }
 
 type DOTALobbyVisibility int32
 
@@ -1159,7 +1159,7 @@ func (x *DOTALobbyVisibility) UnmarshalJSON(data []byte) error {
 	*x = DOTALobbyVisibility(value)
 	return nil
 }
-func (DOTALobbyVisibility) EnumDescriptor() ([]byte, []int) { return fileDescriptor25, []int{21} }
+func (DOTALobbyVisibility) EnumDescriptor() ([]byte, []int) { return fileDescriptor24, []int{21} }
 
 type EDOTAPlayerMMRType int32
 
@@ -1211,7 +1211,7 @@ func (x *EDOTAPlayerMMRType) UnmarshalJSON(data []byte) error {
 	*x = EDOTAPlayerMMRType(value)
 	return nil
 }
-func (EDOTAPlayerMMRType) EnumDescriptor() ([]byte, []int) { return fileDescriptor25, []int{22} }
+func (EDOTAPlayerMMRType) EnumDescriptor() ([]byte, []int) { return fileDescriptor24, []int{22} }
 
 type MatchType int32
 
@@ -1275,7 +1275,7 @@ func (x *MatchType) UnmarshalJSON(data []byte) error {
 	*x = MatchType(value)
 	return nil
 }
-func (MatchType) EnumDescriptor() ([]byte, []int) { return fileDescriptor25, []int{23} }
+func (MatchType) EnumDescriptor() ([]byte, []int) { return fileDescriptor24, []int{23} }
 
 type DOTABotDifficulty int32
 
@@ -1330,7 +1330,7 @@ func (x *DOTABotDifficulty) UnmarshalJSON(data []byte) error {
 	*x = DOTABotDifficulty(value)
 	return nil
 }
-func (DOTABotDifficulty) EnumDescriptor() ([]byte, []int) { return fileDescriptor25, []int{24} }
+func (DOTABotDifficulty) EnumDescriptor() ([]byte, []int) { return fileDescriptor24, []int{24} }
 
 type DOTA_BOT_MODE int32
 
@@ -1436,7 +1436,7 @@ func (x *DOTA_BOT_MODE) UnmarshalJSON(data []byte) error {
 	*x = DOTA_BOT_MODE(value)
 	return nil
 }
-func (DOTA_BOT_MODE) EnumDescriptor() ([]byte, []int) { return fileDescriptor25, []int{25} }
+func (DOTA_BOT_MODE) EnumDescriptor() ([]byte, []int) { return fileDescriptor24, []int{25} }
 
 type MatchLanguages int32
 
@@ -1488,7 +1488,7 @@ func (x *MatchLanguages) UnmarshalJSON(data []byte) error {
 	*x = MatchLanguages(value)
 	return nil
 }
-func (MatchLanguages) EnumDescriptor() ([]byte, []int) { return fileDescriptor25, []int{26} }
+func (MatchLanguages) EnumDescriptor() ([]byte, []int) { return fileDescriptor24, []int{26} }
 
 type ETourneyQueueDeadlineState int32
 
@@ -1537,7 +1537,7 @@ func (x *ETourneyQueueDeadlineState) UnmarshalJSON(data []byte) error {
 	*x = ETourneyQueueDeadlineState(value)
 	return nil
 }
-func (ETourneyQueueDeadlineState) EnumDescriptor() ([]byte, []int) { return fileDescriptor25, []int{27} }
+func (ETourneyQueueDeadlineState) EnumDescriptor() ([]byte, []int) { return fileDescriptor24, []int{27} }
 
 type EMatchOutcome int32
 
@@ -1589,7 +1589,7 @@ func (x *EMatchOutcome) UnmarshalJSON(data []byte) error {
 	*x = EMatchOutcome(value)
 	return nil
 }
-func (EMatchOutcome) EnumDescriptor() ([]byte, []int) { return fileDescriptor25, []int{28} }
+func (EMatchOutcome) EnumDescriptor() ([]byte, []int) { return fileDescriptor24, []int{28} }
 
 type ELaneType int32
 
@@ -1635,7 +1635,7 @@ func (x *ELaneType) UnmarshalJSON(data []byte) error {
 	*x = ELaneType(value)
 	return nil
 }
-func (ELaneType) EnumDescriptor() ([]byte, []int) { return fileDescriptor25, []int{29} }
+func (ELaneType) EnumDescriptor() ([]byte, []int) { return fileDescriptor24, []int{29} }
 
 type EBadgeType int32
 
@@ -1672,7 +1672,7 @@ func (x *EBadgeType) UnmarshalJSON(data []byte) error {
 	*x = EBadgeType(value)
 	return nil
 }
-func (EBadgeType) EnumDescriptor() ([]byte, []int) { return fileDescriptor25, []int{30} }
+func (EBadgeType) EnumDescriptor() ([]byte, []int) { return fileDescriptor24, []int{30} }
 
 type DOTA_COMBATLOG_TYPES int32
 
@@ -1832,7 +1832,7 @@ func (x *DOTA_COMBATLOG_TYPES) UnmarshalJSON(data []byte) error {
 	*x = DOTA_COMBATLOG_TYPES(value)
 	return nil
 }
-func (DOTA_COMBATLOG_TYPES) EnumDescriptor() ([]byte, []int) { return fileDescriptor25, []int{31} }
+func (DOTA_COMBATLOG_TYPES) EnumDescriptor() ([]byte, []int) { return fileDescriptor24, []int{31} }
 
 type CDOTAClientHardwareSpecs struct {
 	LogicalProcessors   *uint32 `protobuf:"varint,1,opt,name=logical_processors,json=logicalProcessors" json:"logical_processors,omitempty"`
@@ -1847,7 +1847,7 @@ type CDOTAClientHardwareSpecs struct {
 func (m *CDOTAClientHardwareSpecs) Reset()                    { *m = CDOTAClientHardwareSpecs{} }
 func (m *CDOTAClientHardwareSpecs) String() string            { return proto.CompactTextString(m) }
 func (*CDOTAClientHardwareSpecs) ProtoMessage()               {}
-func (*CDOTAClientHardwareSpecs) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{0} }
+func (*CDOTAClientHardwareSpecs) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{0} }
 
 func (m *CDOTAClientHardwareSpecs) GetLogicalProcessors() uint32 {
 	if m != nil && m.LogicalProcessors != nil {
@@ -1902,7 +1902,7 @@ type CDOTASaveGame struct {
 func (m *CDOTASaveGame) Reset()                    { *m = CDOTASaveGame{} }
 func (m *CDOTASaveGame) String() string            { return proto.CompactTextString(m) }
 func (*CDOTASaveGame) ProtoMessage()               {}
-func (*CDOTASaveGame) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{1} }
+func (*CDOTASaveGame) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{1} }
 
 func (m *CDOTASaveGame) GetMatchId() uint64 {
 	if m != nil && m.MatchId != nil {
@@ -1942,7 +1942,7 @@ type CDOTASaveGame_Player struct {
 func (m *CDOTASaveGame_Player) Reset()                    { *m = CDOTASaveGame_Player{} }
 func (m *CDOTASaveGame_Player) String() string            { return proto.CompactTextString(m) }
 func (*CDOTASaveGame_Player) ProtoMessage()               {}
-func (*CDOTASaveGame_Player) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{1, 0} }
+func (*CDOTASaveGame_Player) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{1, 0} }
 
 const Default_CDOTASaveGame_Player_Team DOTA_GC_TEAM = DOTA_GC_TEAM_DOTA_GC_TEAM_GOOD_GUYS
 
@@ -1980,7 +1980,7 @@ type CDOTASaveGame_SaveInstance struct {
 func (m *CDOTASaveGame_SaveInstance) Reset()                    { *m = CDOTASaveGame_SaveInstance{} }
 func (m *CDOTASaveGame_SaveInstance) String() string            { return proto.CompactTextString(m) }
 func (*CDOTASaveGame_SaveInstance) ProtoMessage()               {}
-func (*CDOTASaveGame_SaveInstance) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{1, 1} }
+func (*CDOTASaveGame_SaveInstance) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{1, 1} }
 
 func (m *CDOTASaveGame_SaveInstance) GetGameTime() uint32 {
 	if m != nil && m.GameTime != nil {
@@ -2038,7 +2038,7 @@ func (m *CDOTASaveGame_SaveInstance_PlayerPositions) String() string {
 }
 func (*CDOTASaveGame_SaveInstance_PlayerPositions) ProtoMessage() {}
 func (*CDOTASaveGame_SaveInstance_PlayerPositions) Descriptor() ([]byte, []int) {
-	return fileDescriptor25, []int{1, 1, 0}
+	return fileDescriptor24, []int{1, 1, 0}
 }
 
 func (m *CDOTASaveGame_SaveInstance_PlayerPositions) GetX() float32 {
@@ -2134,7 +2134,7 @@ type CMsgDOTACombatLogEntry struct {
 func (m *CMsgDOTACombatLogEntry) Reset()                    { *m = CMsgDOTACombatLogEntry{} }
 func (m *CMsgDOTACombatLogEntry) String() string            { return proto.CompactTextString(m) }
 func (*CMsgDOTACombatLogEntry) ProtoMessage()               {}
-func (*CMsgDOTACombatLogEntry) Descriptor() ([]byte, []int) { return fileDescriptor25, []int{2} }
+func (*CMsgDOTACombatLogEntry) Descriptor() ([]byte, []int) { return fileDescriptor24, []int{2} }
 
 const Default_CMsgDOTACombatLogEntry_Type DOTA_COMBATLOG_TYPES = DOTA_COMBATLOG_TYPES_DOTA_COMBATLOG_INVALID
 
@@ -2683,9 +2683,9 @@ func init() {
 	proto.RegisterEnum("dota.DOTA_COMBATLOG_TYPES", DOTA_COMBATLOG_TYPES_name, DOTA_COMBATLOG_TYPES_value)
 }
 
-func init() { proto.RegisterFile("dota_shared_enums.proto", fileDescriptor25) }
+func init() { proto.RegisterFile("dota_shared_enums.proto", fileDescriptor24) }
 
-var fileDescriptor25 = []byte{
+var fileDescriptor24 = []byte{
 	// 5518 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x84, 0x5a, 0xcd, 0x73, 0xdb, 0x48,
 	0x76, 0x37, 0xa9, 0xef, 0xb6, 0x64, 0xb7, 0x60, 0xd9, 0xa6, 0x3f, 0x66, 0x46, 0xf3, 0xed, 0xe1,

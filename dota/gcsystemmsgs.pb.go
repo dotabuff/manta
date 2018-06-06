@@ -332,7 +332,7 @@ func (x *EGCSystemMsg) UnmarshalJSON(data []byte) error {
 	*x = EGCSystemMsg(value)
 	return nil
 }
-func (EGCSystemMsg) EnumDescriptor() ([]byte, []int) { return fileDescriptor31, []int{0} }
+func (EGCSystemMsg) EnumDescriptor() ([]byte, []int) { return fileDescriptor30, []int{0} }
 
 type ESOMsg int32
 
@@ -384,7 +384,7 @@ func (x *ESOMsg) UnmarshalJSON(data []byte) error {
 	*x = ESOMsg(value)
 	return nil
 }
-func (ESOMsg) EnumDescriptor() ([]byte, []int) { return fileDescriptor31, []int{1} }
+func (ESOMsg) EnumDescriptor() ([]byte, []int) { return fileDescriptor30, []int{1} }
 
 type EGCBaseClientMsg int32
 
@@ -442,7 +442,7 @@ func (x *EGCBaseClientMsg) UnmarshalJSON(data []byte) error {
 	*x = EGCBaseClientMsg(value)
 	return nil
 }
-func (EGCBaseClientMsg) EnumDescriptor() ([]byte, []int) { return fileDescriptor31, []int{2} }
+func (EGCBaseClientMsg) EnumDescriptor() ([]byte, []int) { return fileDescriptor30, []int{2} }
 
 type EGCToGCMsg int32
 
@@ -533,7 +533,7 @@ func (x *EGCToGCMsg) UnmarshalJSON(data []byte) error {
 	*x = EGCToGCMsg(value)
 	return nil
 }
-func (EGCToGCMsg) EnumDescriptor() ([]byte, []int) { return fileDescriptor31, []int{3} }
+func (EGCToGCMsg) EnumDescriptor() ([]byte, []int) { return fileDescriptor30, []int{3} }
 
 type CCommunity_GamePersonalDataCategoryInfo struct {
 	Type                      *string `protobuf:"bytes,1,opt,name=type" json:"type,omitempty"`
@@ -550,7 +550,7 @@ func (m *CCommunity_GamePersonalDataCategoryInfo) Reset() {
 func (m *CCommunity_GamePersonalDataCategoryInfo) String() string { return proto.CompactTextString(m) }
 func (*CCommunity_GamePersonalDataCategoryInfo) ProtoMessage()    {}
 func (*CCommunity_GamePersonalDataCategoryInfo) Descriptor() ([]byte, []int) {
-	return fileDescriptor31, []int{0}
+	return fileDescriptor30, []int{0}
 }
 
 func (m *CCommunity_GamePersonalDataCategoryInfo) GetType() string {
@@ -601,7 +601,7 @@ func (m *CCommunity_GetGamePersonalDataCategories_Request) String() string {
 }
 func (*CCommunity_GetGamePersonalDataCategories_Request) ProtoMessage() {}
 func (*CCommunity_GetGamePersonalDataCategories_Request) Descriptor() ([]byte, []int) {
-	return fileDescriptor31, []int{1}
+	return fileDescriptor30, []int{1}
 }
 
 func (m *CCommunity_GetGamePersonalDataCategories_Request) GetAppid() uint32 {
@@ -625,7 +625,7 @@ func (m *CCommunity_GetGamePersonalDataCategories_Response) String() string {
 }
 func (*CCommunity_GetGamePersonalDataCategories_Response) ProtoMessage() {}
 func (*CCommunity_GetGamePersonalDataCategories_Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor31, []int{2}
+	return fileDescriptor30, []int{2}
 }
 
 func (m *CCommunity_GetGamePersonalDataCategories_Response) GetCategories() []*CCommunity_GamePersonalDataCategoryInfo {
@@ -658,7 +658,7 @@ func (m *CCommunity_GetGamePersonalDataEntries_Request) String() string {
 }
 func (*CCommunity_GetGamePersonalDataEntries_Request) ProtoMessage() {}
 func (*CCommunity_GetGamePersonalDataEntries_Request) Descriptor() ([]byte, []int) {
-	return fileDescriptor31, []int{3}
+	return fileDescriptor30, []int{3}
 }
 
 func (m *CCommunity_GetGamePersonalDataEntries_Request) GetAppid() uint32 {
@@ -704,7 +704,7 @@ func (m *CCommunity_GetGamePersonalDataEntries_Response) String() string {
 }
 func (*CCommunity_GetGamePersonalDataEntries_Response) ProtoMessage() {}
 func (*CCommunity_GetGamePersonalDataEntries_Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor31, []int{4}
+	return fileDescriptor30, []int{4}
 }
 
 func (m *CCommunity_GetGamePersonalDataEntries_Response) GetGceresult() uint32 {
@@ -742,7 +742,7 @@ func (m *CCommunity_TerminateGamePersonalDataEntries_Request) String() string {
 }
 func (*CCommunity_TerminateGamePersonalDataEntries_Request) ProtoMessage() {}
 func (*CCommunity_TerminateGamePersonalDataEntries_Request) Descriptor() ([]byte, []int) {
-	return fileDescriptor31, []int{5}
+	return fileDescriptor30, []int{5}
 }
 
 func (m *CCommunity_TerminateGamePersonalDataEntries_Request) GetAppid() uint32 {
@@ -772,7 +772,7 @@ func (m *CCommunity_TerminateGamePersonalDataEntries_Response) String() string {
 }
 func (*CCommunity_TerminateGamePersonalDataEntries_Response) ProtoMessage() {}
 func (*CCommunity_TerminateGamePersonalDataEntries_Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor31, []int{6}
+	return fileDescriptor30, []int{6}
 }
 
 func (m *CCommunity_TerminateGamePersonalDataEntries_Response) GetGceresult() uint32 {
@@ -796,9 +796,9 @@ func init() {
 	proto.RegisterEnum("dota.EGCToGCMsg", EGCToGCMsg_name, EGCToGCMsg_value)
 }
 
-func init() { proto.RegisterFile("gcsystemmsgs.proto", fileDescriptor31) }
+func init() { proto.RegisterFile("gcsystemmsgs.proto", fileDescriptor30) }
 
-var fileDescriptor31 = []byte{
+var fileDescriptor30 = []byte{
 	// 2087 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x57, 0x59, 0x77, 0xdb, 0xc6,
 	0x15, 0x0e, 0x4c, 0x38, 0xad, 0xa7, 0x71, 0x3b, 0x1e, 0x5b, 0x16, 0x25, 0xcb, 0x96, 0x2c, 0xdb,

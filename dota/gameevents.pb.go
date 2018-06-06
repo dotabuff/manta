@@ -77,7 +77,7 @@ func (x *EBaseGameEvents) UnmarshalJSON(data []byte) error {
 	*x = EBaseGameEvents(value)
 	return nil
 }
-func (EBaseGameEvents) EnumDescriptor() ([]byte, []int) { return fileDescriptor29, []int{0} }
+func (EBaseGameEvents) EnumDescriptor() ([]byte, []int) { return fileDescriptor28, []int{0} }
 
 type CMsgVDebugGameSessionIDEvent struct {
 	Clientid         *int32  `protobuf:"varint,1,opt,name=clientid" json:"clientid,omitempty"`
@@ -88,7 +88,7 @@ type CMsgVDebugGameSessionIDEvent struct {
 func (m *CMsgVDebugGameSessionIDEvent) Reset()                    { *m = CMsgVDebugGameSessionIDEvent{} }
 func (m *CMsgVDebugGameSessionIDEvent) String() string            { return proto.CompactTextString(m) }
 func (*CMsgVDebugGameSessionIDEvent) ProtoMessage()               {}
-func (*CMsgVDebugGameSessionIDEvent) Descriptor() ([]byte, []int) { return fileDescriptor29, []int{0} }
+func (*CMsgVDebugGameSessionIDEvent) Descriptor() ([]byte, []int) { return fileDescriptor28, []int{0} }
 
 func (m *CMsgVDebugGameSessionIDEvent) GetClientid() int32 {
 	if m != nil && m.Clientid != nil {
@@ -125,7 +125,7 @@ type CMsgPlaceDecalEvent struct {
 func (m *CMsgPlaceDecalEvent) Reset()                    { *m = CMsgPlaceDecalEvent{} }
 func (m *CMsgPlaceDecalEvent) String() string            { return proto.CompactTextString(m) }
 func (*CMsgPlaceDecalEvent) ProtoMessage()               {}
-func (*CMsgPlaceDecalEvent) Descriptor() ([]byte, []int) { return fileDescriptor29, []int{1} }
+func (*CMsgPlaceDecalEvent) Descriptor() ([]byte, []int) { return fileDescriptor28, []int{1} }
 
 func (m *CMsgPlaceDecalEvent) GetPosition() *CMsgVector {
 	if m != nil {
@@ -233,7 +233,7 @@ type CMsgClearWorldDecalsEvent struct {
 func (m *CMsgClearWorldDecalsEvent) Reset()                    { *m = CMsgClearWorldDecalsEvent{} }
 func (m *CMsgClearWorldDecalsEvent) String() string            { return proto.CompactTextString(m) }
 func (*CMsgClearWorldDecalsEvent) ProtoMessage()               {}
-func (*CMsgClearWorldDecalsEvent) Descriptor() ([]byte, []int) { return fileDescriptor29, []int{2} }
+func (*CMsgClearWorldDecalsEvent) Descriptor() ([]byte, []int) { return fileDescriptor28, []int{2} }
 
 func (m *CMsgClearWorldDecalsEvent) GetFlagstoclear() uint32 {
 	if m != nil && m.Flagstoclear != nil {
@@ -250,7 +250,7 @@ type CMsgClearEntityDecalsEvent struct {
 func (m *CMsgClearEntityDecalsEvent) Reset()                    { *m = CMsgClearEntityDecalsEvent{} }
 func (m *CMsgClearEntityDecalsEvent) String() string            { return proto.CompactTextString(m) }
 func (*CMsgClearEntityDecalsEvent) ProtoMessage()               {}
-func (*CMsgClearEntityDecalsEvent) Descriptor() ([]byte, []int) { return fileDescriptor29, []int{3} }
+func (*CMsgClearEntityDecalsEvent) Descriptor() ([]byte, []int) { return fileDescriptor28, []int{3} }
 
 func (m *CMsgClearEntityDecalsEvent) GetFlagstoclear() uint32 {
 	if m != nil && m.Flagstoclear != nil {
@@ -272,7 +272,7 @@ func (m *CMsgClearDecalsForSkeletonInstanceEvent) Reset() {
 func (m *CMsgClearDecalsForSkeletonInstanceEvent) String() string { return proto.CompactTextString(m) }
 func (*CMsgClearDecalsForSkeletonInstanceEvent) ProtoMessage()    {}
 func (*CMsgClearDecalsForSkeletonInstanceEvent) Descriptor() ([]byte, []int) {
-	return fileDescriptor29, []int{4}
+	return fileDescriptor28, []int{4}
 }
 
 func (m *CMsgClearDecalsForSkeletonInstanceEvent) GetFlagstoclear() uint32 {
@@ -304,7 +304,7 @@ type CMsgSource1LegacyGameEventList struct {
 func (m *CMsgSource1LegacyGameEventList) Reset()                    { *m = CMsgSource1LegacyGameEventList{} }
 func (m *CMsgSource1LegacyGameEventList) String() string            { return proto.CompactTextString(m) }
 func (*CMsgSource1LegacyGameEventList) ProtoMessage()               {}
-func (*CMsgSource1LegacyGameEventList) Descriptor() ([]byte, []int) { return fileDescriptor29, []int{5} }
+func (*CMsgSource1LegacyGameEventList) Descriptor() ([]byte, []int) { return fileDescriptor28, []int{5} }
 
 func (m *CMsgSource1LegacyGameEventList) GetDescriptors() []*CMsgSource1LegacyGameEventListDescriptorT {
 	if m != nil {
@@ -323,7 +323,7 @@ func (m *CMsgSource1LegacyGameEventListKeyT) Reset()         { *m = CMsgSource1L
 func (m *CMsgSource1LegacyGameEventListKeyT) String() string { return proto.CompactTextString(m) }
 func (*CMsgSource1LegacyGameEventListKeyT) ProtoMessage()    {}
 func (*CMsgSource1LegacyGameEventListKeyT) Descriptor() ([]byte, []int) {
-	return fileDescriptor29, []int{5, 0}
+	return fileDescriptor28, []int{5, 0}
 }
 
 func (m *CMsgSource1LegacyGameEventListKeyT) GetType() int32 {
@@ -353,7 +353,7 @@ func (m *CMsgSource1LegacyGameEventListDescriptorT) Reset() {
 func (m *CMsgSource1LegacyGameEventListDescriptorT) String() string { return proto.CompactTextString(m) }
 func (*CMsgSource1LegacyGameEventListDescriptorT) ProtoMessage()    {}
 func (*CMsgSource1LegacyGameEventListDescriptorT) Descriptor() ([]byte, []int) {
-	return fileDescriptor29, []int{5, 1}
+	return fileDescriptor28, []int{5, 1}
 }
 
 func (m *CMsgSource1LegacyGameEventListDescriptorT) GetEventid() int32 {
@@ -386,7 +386,7 @@ type CMsgSource1LegacyListenEvents struct {
 func (m *CMsgSource1LegacyListenEvents) Reset()                    { *m = CMsgSource1LegacyListenEvents{} }
 func (m *CMsgSource1LegacyListenEvents) String() string            { return proto.CompactTextString(m) }
 func (*CMsgSource1LegacyListenEvents) ProtoMessage()               {}
-func (*CMsgSource1LegacyListenEvents) Descriptor() ([]byte, []int) { return fileDescriptor29, []int{6} }
+func (*CMsgSource1LegacyListenEvents) Descriptor() ([]byte, []int) { return fileDescriptor28, []int{6} }
 
 func (m *CMsgSource1LegacyListenEvents) GetPlayerslot() int32 {
 	if m != nil && m.Playerslot != nil {
@@ -412,7 +412,7 @@ type CMsgSource1LegacyGameEvent struct {
 func (m *CMsgSource1LegacyGameEvent) Reset()                    { *m = CMsgSource1LegacyGameEvent{} }
 func (m *CMsgSource1LegacyGameEvent) String() string            { return proto.CompactTextString(m) }
 func (*CMsgSource1LegacyGameEvent) ProtoMessage()               {}
-func (*CMsgSource1LegacyGameEvent) Descriptor() ([]byte, []int) { return fileDescriptor29, []int{7} }
+func (*CMsgSource1LegacyGameEvent) Descriptor() ([]byte, []int) { return fileDescriptor28, []int{7} }
 
 func (m *CMsgSource1LegacyGameEvent) GetEventName() string {
 	if m != nil && m.EventName != nil {
@@ -451,7 +451,7 @@ func (m *CMsgSource1LegacyGameEventKeyT) Reset()         { *m = CMsgSource1Legac
 func (m *CMsgSource1LegacyGameEventKeyT) String() string { return proto.CompactTextString(m) }
 func (*CMsgSource1LegacyGameEventKeyT) ProtoMessage()    {}
 func (*CMsgSource1LegacyGameEventKeyT) Descriptor() ([]byte, []int) {
-	return fileDescriptor29, []int{7, 0}
+	return fileDescriptor28, []int{7, 0}
 }
 
 func (m *CMsgSource1LegacyGameEventKeyT) GetType() int32 {
@@ -523,7 +523,7 @@ type CMsgSosStartSoundEvent struct {
 func (m *CMsgSosStartSoundEvent) Reset()                    { *m = CMsgSosStartSoundEvent{} }
 func (m *CMsgSosStartSoundEvent) String() string            { return proto.CompactTextString(m) }
 func (*CMsgSosStartSoundEvent) ProtoMessage()               {}
-func (*CMsgSosStartSoundEvent) Descriptor() ([]byte, []int) { return fileDescriptor29, []int{8} }
+func (*CMsgSosStartSoundEvent) Descriptor() ([]byte, []int) { return fileDescriptor28, []int{8} }
 
 func (m *CMsgSosStartSoundEvent) GetSoundeventGuid() int32 {
 	if m != nil && m.SoundeventGuid != nil {
@@ -575,7 +575,7 @@ type CMsgSosStopSoundEvent struct {
 func (m *CMsgSosStopSoundEvent) Reset()                    { *m = CMsgSosStopSoundEvent{} }
 func (m *CMsgSosStopSoundEvent) String() string            { return proto.CompactTextString(m) }
 func (*CMsgSosStopSoundEvent) ProtoMessage()               {}
-func (*CMsgSosStopSoundEvent) Descriptor() ([]byte, []int) { return fileDescriptor29, []int{9} }
+func (*CMsgSosStopSoundEvent) Descriptor() ([]byte, []int) { return fileDescriptor28, []int{9} }
 
 func (m *CMsgSosStopSoundEvent) GetSoundeventGuid() int32 {
 	if m != nil && m.SoundeventGuid != nil {
@@ -593,7 +593,7 @@ type CMsgSosStopSoundEventHash struct {
 func (m *CMsgSosStopSoundEventHash) Reset()                    { *m = CMsgSosStopSoundEventHash{} }
 func (m *CMsgSosStopSoundEventHash) String() string            { return proto.CompactTextString(m) }
 func (*CMsgSosStopSoundEventHash) ProtoMessage()               {}
-func (*CMsgSosStopSoundEventHash) Descriptor() ([]byte, []int) { return fileDescriptor29, []int{10} }
+func (*CMsgSosStopSoundEventHash) Descriptor() ([]byte, []int) { return fileDescriptor28, []int{10} }
 
 func (m *CMsgSosStopSoundEventHash) GetSoundeventHash() uint32 {
 	if m != nil && m.SoundeventHash != nil {
@@ -618,7 +618,7 @@ type CMsgSosSetSoundEventParams struct {
 func (m *CMsgSosSetSoundEventParams) Reset()                    { *m = CMsgSosSetSoundEventParams{} }
 func (m *CMsgSosSetSoundEventParams) String() string            { return proto.CompactTextString(m) }
 func (*CMsgSosSetSoundEventParams) ProtoMessage()               {}
-func (*CMsgSosSetSoundEventParams) Descriptor() ([]byte, []int) { return fileDescriptor29, []int{11} }
+func (*CMsgSosSetSoundEventParams) Descriptor() ([]byte, []int) { return fileDescriptor28, []int{11} }
 
 func (m *CMsgSosSetSoundEventParams) GetSoundeventGuid() int32 {
 	if m != nil && m.SoundeventGuid != nil {
@@ -643,7 +643,7 @@ type CMsgSosSetLibraryStackFields struct {
 func (m *CMsgSosSetLibraryStackFields) Reset()                    { *m = CMsgSosSetLibraryStackFields{} }
 func (m *CMsgSosSetLibraryStackFields) String() string            { return proto.CompactTextString(m) }
 func (*CMsgSosSetLibraryStackFields) ProtoMessage()               {}
-func (*CMsgSosSetLibraryStackFields) Descriptor() ([]byte, []int) { return fileDescriptor29, []int{12} }
+func (*CMsgSosSetLibraryStackFields) Descriptor() ([]byte, []int) { return fileDescriptor28, []int{12} }
 
 func (m *CMsgSosSetLibraryStackFields) GetStackHash() uint32 {
 	if m != nil && m.StackHash != nil {
@@ -679,9 +679,9 @@ func init() {
 	proto.RegisterEnum("dota.EBaseGameEvents", EBaseGameEvents_name, EBaseGameEvents_value)
 }
 
-func init() { proto.RegisterFile("gameevents.proto", fileDescriptor29) }
+func init() { proto.RegisterFile("gameevents.proto", fileDescriptor28) }
 
-var fileDescriptor29 = []byte{
+var fileDescriptor28 = []byte{
 	// 1130 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x56, 0x4b, 0x73, 0x1b, 0x45,
 	0x10, 0x66, 0xf4, 0x88, 0xa5, 0xb6, 0x95, 0x6c, 0x26, 0x0f, 0xd6, 0x4a, 0x1c, 0xc4, 0x42, 0x39,
