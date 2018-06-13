@@ -43,6 +43,7 @@ type stringTable struct {
 	Items             map[int32]*stringTableItem
 	userDataFixedSize bool
 	userDataSize      int32
+	flags             int32
 }
 
 func (st *stringTable) GetIndex() int32                      { return st.index }
@@ -75,6 +76,7 @@ func (p *Parser) onCSVCMsg_CreateStringTable(m *dota.CSVCMsg_CreateStringTable) 
 		Items:             make(map[int32]*stringTableItem),
 		userDataFixedSize: m.GetUserDataFixedSize(),
 		userDataSize:      m.GetUserDataSize(),
+		flags:             m.GetFlags(),
 	}
 
 	// Increment the index
@@ -101,7 +103,7 @@ func (p *Parser) onCSVCMsg_CreateStringTable(m *dota.CSVCMsg_CreateStringTable) 
 	}
 
 	// Parse the items out of the string table data
-	items := parseStringTable(buf, m.GetNumEntries(), t.userDataFixedSize, t.userDataSize)
+	items := parseStringTable(buf, m.GetNumEntries(), t.name, t.userDataFixedSize, t.userDataSize, t.flags)
 
 	// Insert the items into the table
 	for _, item := range items {
@@ -133,7 +135,7 @@ func (p *Parser) onCSVCMsg_UpdateStringTable(m *dota.CSVCMsg_UpdateStringTable) 
 	}
 
 	// Parse the updates out of the string table data
-	items := parseStringTable(m.GetStringData(), m.GetNumChangedEntries(), t.userDataFixedSize, t.userDataSize)
+	items := parseStringTable(m.GetStringData(), m.GetNumChangedEntries(), t.name, t.userDataFixedSize, t.userDataSize, t.flags)
 
 	// Apply the updates to the parser state
 	for _, item := range items {
@@ -159,7 +161,14 @@ func (p *Parser) onCSVCMsg_UpdateStringTable(m *dota.CSVCMsg_UpdateStringTable) 
 }
 
 // Parse a string table data blob, returning a list of item updates.
-func parseStringTable(buf []byte, numUpdates int32, userDataFixed bool, userDataSize int32) (items []*stringTableItem) {
+func parseStringTable(buf []byte, numUpdates int32, name string, userDataFixed bool, userDataSize int32, flags int32) (items []*stringTableItem) {
+	defer func() {
+		if err := recover(); err != nil {
+			_printf("warning: unable to parse string table %s: %s", name, err)
+			return
+		}
+	}()
+
 	items = make([]*stringTableItem, 0)
 
 	// Create a reader for the buffer
@@ -239,16 +248,16 @@ func parseStringTable(buf []byte, numUpdates int32, userDataFixed bool, userData
 		// Some entries have a value.
 		hasValue := r.readBoolean()
 		if hasValue {
-			// Values can be either fixed size (with a size specified in
-			// bits during table creation, or have a variable size with
-			// a 14-bit prefixed size.
+			bitSize := uint32(0)
 			if userDataFixed {
-				value = r.readBitsAsBytes(uint32(userDataSize))
+				bitSize = uint32(userDataSize)
 			} else {
-				size := r.readBits(14)
-				r.readBits(3) // XXX TODO: what is this?
-				value = r.readBytes(size)
+				if (flags & 0x1) != 0 {
+					r.readBoolean()
+				}
+				bitSize = r.readBits(17) * 8
 			}
+			value = r.readBitsAsBytes(bitSize)
 		}
 
 		items = append(items, &stringTableItem{index, key, value})

@@ -138,7 +138,7 @@ func TestParseStringTableCreate(t *testing.T) {
 		assert.Equal(s.tableName, m.GetName(), s.tableName)
 
 		// Parse the table data
-		items := parseStringTable(buf, m.GetNumEntries(), m.GetUserDataFixedSize(), m.GetUserDataSize())
+		items := parseStringTable(buf, m.GetNumEntries(), "", m.GetUserDataFixedSize(), m.GetUserDataSize(), m.GetFlags())
 
 		// Make sure we have the correct number of entries
 		assert.Equal(s.itemCount, len(items), s.tableName)
@@ -157,7 +157,7 @@ func TestParseStringTableUpdate(t *testing.T) {
 	assert := assert.New(t)
 	buf := _read_fixture("string_tables/updates/tick_03960_table_7_items_13_size_208")
 
-	items := parseStringTable(buf, 13, false, 0)
+	items := parseStringTable(buf, 13, "", false, 0, 0)
 
 	assert.Equal(int32(261), items[0].Index)
 	assert.Equal("broodmother_spawn_spiderlings", items[0].Key)
