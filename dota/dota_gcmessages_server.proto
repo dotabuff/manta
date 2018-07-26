@@ -132,6 +132,7 @@ message CMsgGameServerInfo {
 		UNSPECIFIED = 0;
 		GAME = 1;
 		PROXY = 2;
+		TENSORFLOW = 3;
 	}
 
 	enum CustomGames {
@@ -163,6 +164,9 @@ message CMsgGameServerInfo {
 	optional uint32 server_version = 19;
 	optional uint32 server_cluster = 20;
 	optional CMsgGameServerInfo.CustomGames allow_custom_games = 23 [default = BOTH];
+	optional uint32 build_version = 24;
+	optional uint32 tf_server_count = 25;
+	optional uint32 srcds_instance = 26;
 }
 
 message CMsgLeaverDetected {
@@ -349,6 +353,8 @@ message CMsgGameMatchSignOut {
 	repeated CMsgGameMatchSignOut.WardPlacement ward_placements = 43;
 	optional uint32 bounty_rune_gold_winners = 44;
 	optional uint32 bounty_rune_gold_losers = 45;
+	optional uint32 range_creep_upgrade_gold_winners = 46;
+	optional uint32 range_creep_upgrade_gold_losers = 47;
 }
 
 message CMsgSignOutDraftInfo {
@@ -464,6 +470,7 @@ message CMsgGameMatchSignOutEventGameData {
 	optional string game_name = 2;
 	optional string map_name = 3;
 	optional bytes event_game_data = 4;
+	optional uint32 start_time = 5;
 }
 
 message CMsgDOTALiveScoreboardUpdate {
@@ -1110,5 +1117,9 @@ message CMsgServerToGCCavernCrawlIsHeroActive {
 message CMsgServerToGCCavernCrawlIsHeroActiveResponse {
 	optional bool result = 1;
 	optional uint32 potential_winnings = 2;
+}
+
+message CMsgGCtoServerTensorflowInstance {
+	optional uint32 server_instance = 1;
 }
 

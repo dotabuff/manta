@@ -219,6 +219,7 @@ type Callbacks struct {
 	onCDOTAUserMsg_ItemSold                   []func(*dota.CDOTAUserMsg_ItemSold) error
 	onCDOTAUserMsg_DamageReport               []func(*dota.CDOTAUserMsg_DamageReport) error
 	onCDOTAUserMsg_SalutePlayer               []func(*dota.CDOTAUserMsg_SalutePlayer) error
+	onCDOTAUserMsg_TipAlert                   []func(*dota.CDOTAUserMsg_TipAlert) error
 
 	pb *proto.Buffer
 }
@@ -1287,6 +1288,11 @@ func (c *Callbacks) OnCDOTAUserMsg_DamageReport(fn func(*dota.CDOTAUserMsg_Damag
 // OnCDOTAUserMsg_SalutePlayer registers a callback for EDotaUserMessages_DOTA_UM_SalutePlayer
 func (c *Callbacks) OnCDOTAUserMsg_SalutePlayer(fn func(*dota.CDOTAUserMsg_SalutePlayer) error) {
 	c.onCDOTAUserMsg_SalutePlayer = append(c.onCDOTAUserMsg_SalutePlayer, fn)
+}
+
+// OnCDOTAUserMsg_TipAlert registers a callback for EDotaUserMessages_DOTA_UM_TipAlert
+func (c *Callbacks) OnCDOTAUserMsg_TipAlert(fn func(*dota.CDOTAUserMsg_TipAlert) error) {
+	c.onCDOTAUserMsg_TipAlert = append(c.onCDOTAUserMsg_TipAlert, fn)
 }
 
 func (c *Callbacks) callByDemoType(t int32, buf []byte) error {
@@ -5323,6 +5329,25 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		for _, fn := range c.onCDOTAUserMsg_SalutePlayer {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 577: // dota.EDotaUserMessages_DOTA_UM_TipAlert
+		if c.onCDOTAUserMsg_TipAlert == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_TipAlert{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_TipAlert {
 			if err := fn(msg); err != nil {
 				return err
 			}

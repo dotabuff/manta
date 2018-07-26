@@ -122,6 +122,7 @@ enum EDotaUserMessages {
 	DOTA_UM_ItemSold = 574;
 	DOTA_UM_DamageReport = 575;
 	DOTA_UM_SalutePlayer = 576;
+	DOTA_UM_TipAlert = 577;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -483,6 +484,7 @@ message CDOTAUserMsg_ModifierAlert {
 message CDOTAUserMsg_HPManaAlert {
 	optional uint32 player_id = 1;
 	optional uint32 target_entindex = 2;
+	optional bool show_raw_values = 3;
 }
 
 message CDOTAUserMsg_GlyphAlert {
@@ -1229,5 +1231,10 @@ message CDOTAUserMsg_SalutePlayer {
 	optional int32 source_player_id = 1;
 	optional int32 target_player_id = 2;
 	optional uint32 tip_amount = 3;
+}
+
+message CDOTAUserMsg_TipAlert {
+	optional uint32 player_id = 1;
+	optional string tip_text = 2;
 }
 

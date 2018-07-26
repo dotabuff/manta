@@ -51,6 +51,20 @@ message CDOTAMatchMetadata {
 			optional uint64 owner_item_id = 7;
 		}
 
+		message VictoryPrediction {
+			optional uint64 item_id = 1;
+			optional uint32 item_def_index = 2;
+			optional uint32 starting_value = 3;
+			optional bool is_victory = 4;
+		}
+
+		message SubChallenge {
+			optional uint32 slot_id = 1;
+			optional uint32 start_value = 2;
+			optional uint32 end_value = 3;
+			optional bool completed = 4;
+		}
+
 		message EventData {
 			optional uint32 event_id = 1;
 			optional uint32 event_points = 2;
@@ -61,8 +75,12 @@ message CDOTAMatchMetadata {
 			optional uint32 challenge_rank_completed = 7;
 			optional uint32 challenge_rank_previously_completed = 8;
 			optional bool event_owned = 9;
+			repeated CDOTAMatchMetadata.Team.SubChallenge sub_challenges_with_progress = 10;
+			optional uint32 wager_winnings = 11;
 			optional bool cavern_challenge_active = 12;
 			optional uint32 cavern_challenge_winnings = 13;
+			optional uint32 amount_wagered = 14;
+			optional uint32 team_wager_amount = 15;
 		}
 
 		message Player {
@@ -96,6 +114,8 @@ message CDOTAMatchMetadata {
 			repeated CDOTAMatchMetadata.Team.StrangeGemProgress strange_gem_progress = 30;
 			optional uint32 hero_xp = 31;
 			optional uint32 camps_stacked = 32;
+			repeated CDOTAMatchMetadata.Team.VictoryPrediction victory_prediction = 33;
+			optional uint32 lane_selection_flags = 34;
 		}
 
 		optional uint32 dota_team = 1;
