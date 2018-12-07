@@ -11,10 +11,10 @@ var fieldTypeFactories = map[string]fieldFactory{
 	"float32":                  floatFactory,
 	"CNetworkedQuantizedFloat": quantizedFactory,
 	"Vector":                   vectorFactory,
-	"uint64":                   unsignedFactory,
+	"uint64":                   unsigned64Factory,
 	"QAngle":                   qangleFactory,
 	"CHandle":                  unsignedFactory,
-	"CStrongHandle":            unsignedFactory,
+	"CStrongHandle":            unsigned64Factory,
 	"CEntityHandle":            unsignedFactory,
 }
 
@@ -44,11 +44,15 @@ var fieldTypeDecoders = map[string]fieldDecoder{
 }
 
 func unsignedFactory(f *field) fieldDecoder {
-	if f.encoder == "fixed64" {
-		return fixedDecoder
-	}
-
 	return unsignedDecoder
+}
+
+func unsigned64Factory(f *field) fieldDecoder {
+	switch f.encoder {
+	case "fixed64":
+		return fixed64Decoder
+	}
+	return unsigned64Decoder
 }
 
 func floatFactory(f *field) fieldDecoder {
@@ -103,7 +107,7 @@ func vectorCoordDecoder(r *reader) interface{} {
 	}
 }
 
-func fixedDecoder(r *reader) interface{} {
+func fixed64Decoder(r *reader) interface{} {
 	return r.readLeUint64()
 }
 
@@ -114,12 +118,15 @@ func handleDecoder(r *reader) interface{} {
 func booleanDecoder(r *reader) interface{} {
 	return r.readBoolean()
 }
+
 func stringDecoder(r *reader) interface{} {
 	return r.readString()
 }
+
 func defaultDecoder(r *reader) interface{} {
 	return r.readVarUint32()
 }
+
 func signedDecoder(r *reader) interface{} {
 	return r.readVarInt32()
 }
@@ -182,6 +189,10 @@ func vector2Decoder(r *reader) interface{} {
 }
 
 func unsignedDecoder(r *reader) interface{} {
+	return uint64(r.readVarUint32())
+}
+
+func unsigned64Decoder(r *reader) interface{} {
 	return r.readVarUint64()
 }
 
