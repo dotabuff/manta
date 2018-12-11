@@ -2,7 +2,9 @@ package manta
 
 import (
 	"bytes"
+	"fmt"
 	"io"
+	"runtime/debug"
 
 	"github.com/dotabuff/manta/dota"
 	"github.com/golang/snappy"
@@ -120,8 +122,8 @@ func (p *Parser) Start() (err error) {
 	defer p.afterStop()
 
 	defer func() {
-		if x, ok := recover().(error); ok {
-			err = x
+		if r := recover(); r != nil {
+			err = fmt.Errorf("%s\n%s", r, debug.Stack())
 		}
 	}()
 
