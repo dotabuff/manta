@@ -3,6 +3,7 @@ syntax = "proto2";
 package dota;
 
 import "dota_commonmessages.proto";
+import "dota_shared_enums.proto";
 
 option optimize_for = SPEED;
 option cc_generic_services = false;
@@ -83,6 +84,7 @@ enum EDotaClientMessages {
 	DOTA_CM_SalutePlayer = 376;
 	DOTA_CM_SprayWheel = 377;
 	DOTA_CM_TipAlert = 378;
+	DOTA_CM_EmptyTeleportAlert = 379;
 }
 
 message CDOTAClientMsg_MapPing {
@@ -290,7 +292,7 @@ message CDOTAClientMsg_ChallengeSelect {
 }
 
 message CDOTAClientMsg_ChallengeReroll {
-	optional uint32 event_id = 1;
+	optional EEvent event_id = 1 [default = EVENT_ID_NONE];
 	optional uint32 slot_id = 2;
 	optional uint32 sequence_id = 3;
 	optional uint32 hero_id = 4;
@@ -420,9 +422,14 @@ message CDOTAClientMsg_DamageReport {
 
 message CDOTAClientMsg_SalutePlayer {
 	optional int32 target_player_id = 1;
+	optional int32 event_id = 2;
 }
 
 message CDOTAClientMsg_TipAlert {
 	optional string tip_text = 1;
+}
+
+message CDOTAClientMsg_EmptyTeleportAlert {
+	optional int32 target_entindex = 1;
 }
 

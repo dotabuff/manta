@@ -91,8 +91,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCPlayerHeroesFavoritesRemove = 7134;
 	k_EMsgGCApplyTeamToPracticeLobby = 7142;
 	k_EMsgGCTransferTeamAdmin = 7144;
-	k_EMsgRequestLeagueInfo = 7147;
-	k_EMsgResponseLeagueInfo = 7148;
 	k_EMsgGCPracticeLobbyJoinBroadcastChannel = 7149;
 	k_EMsgGC_TournamentItemEvent = 7150;
 	k_EMsgGC_TournamentItemEventResponse = 7151;
@@ -226,8 +224,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCFantasyPlayerStandingsResponse = 7319;
 	k_EMsgGCFlipLobbyTeams = 7320;
 	k_EMsgGCCustomGameCreate = 7321;
-	k_EMsgGCFantasyPlayerInfoRequest = 7322;
-	k_EMsgGCFantasyPlayerInfoResponse = 7323;
 	k_EMsgGCToGCProcessPlayerReportForTarget = 7324;
 	k_EMsgGCToGCProcessReportSuccess = 7325;
 	k_EMsgGCNotifyAccountFlagsChange = 7326;
@@ -261,8 +257,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCFantasyTeamRosterSwapResponse = 7356;
 	k_EMsgGCFantasyTeamRosterRequest = 7357;
 	k_EMsgGCFantasyTeamRosterResponse = 7358;
-	k_EMsgGCNexonPartnerUpdate = 7359;
-	k_EMsgGCToGCProcessPCBangRewardPoints = 7360;
 	k_EMsgGCFantasyTeamRosterAddDropRequest = 7361;
 	k_EMsgGCFantasyTeamRosterAddDropResponse = 7362;
 	k_EMsgPresentedClientTerminateDlg = 7363;
@@ -276,7 +270,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCFantasyTeamTradeCancelResponse = 7371;
 	k_EMsgGCToGCGrantTournamentItem = 7372;
 	k_EMsgGCProcessFantasyScheduledEvent = 7373;
-	k_EMsgGCToGCGrantPCBangRewardItem = 7374;
 	k_EMsgGCToGCUpgradeTwitchViewerItems = 7375;
 	k_EMsgGCToGCGetLiveMatchAffiliates = 7376;
 	k_EMsgGCToGCGetLiveMatchAffiliatesResponse = 7377;
@@ -313,7 +306,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCToServerPingRequest = 7416;
 	k_EMsgGCToServerPingResponse = 7417;
 	k_EMsgGCToServerConsoleCommand = 7418;
-	k_EMsgGCToGCUpdateLiveLeagueGameInfo = 7420;
 	k_EMsgGCMakeOffering = 7423;
 	k_EMsgGCRequestOfferings = 7424;
 	k_EMsgGCRequestOfferingsResponse = 7425;
@@ -322,8 +314,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCNotificationsResponse = 7428;
 	k_EMsgGCToGCModifyNotification = 7429;
 	k_EMsgGCToGCSetNewNotifications = 7430;
-	k_EMsgGCLeagueAdminState = 7432;
-	k_EMsgGCToGCSendLeagueAdminState = 7433;
 	k_EMsgGCLeagueAdminList = 7434;
 	k_EMsgGCNotificationsMarkReadRequest = 7435;
 	k_EMsgGCFantasyMessageAdd = 7436;
@@ -331,7 +321,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCFantasyMessagesResponse = 7438;
 	k_EMsgGCFantasyScheduledMatchesRequest = 7439;
 	k_EMsgGCFantasyScheduledMatchesResponse = 7440;
-	k_EMsgGCToGCGrantLeagueAccess = 7441;
 	k_EMsgGCEventGameCreate = 7443;
 	k_EMsgGCPerfectWorldUserLookupRequest = 7444;
 	k_EMsgGCPerfectWorldUserLookupResponse = 7445;
@@ -434,8 +423,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCToGCReportKillSummaries = 7555;
 	k_EMsgGCToGCUpdateAssassinMinigame = 7556;
 	k_EMsgGCToGCFantasySetMatchLeague = 7557;
-	k_EMsgGCItemEditorRequestLeagueInfo = 7559;
-	k_EMsgGCItemEditorLeagueInfoResponse = 7560;
 	k_EMsgGCToGCUpdatePlayerPredictions = 7561;
 	k_EMsgGCToServerPredictionResult = 7562;
 	k_EMsgServerToGCSignoutAwardAdditionalDrops = 7563;
@@ -469,9 +456,6 @@ enum EDOTAGCMsg {
 	k_EMsgServerToGCHoldEventPoints = 7596;
 	k_EMsgSignOutReleaseEventPointHolds = 7597;
 	k_EMsgGCToGCChatNewUserSession = 7598;
-	k_EMsgClientToGCGetLeagueSeries = 7599;
-	k_EMsgClientToGCGetLeagueSeriesResponse = 7600;
-	k_EMsgGCToServerUpdateBroadcastCheers = 7602;
 	k_EMsgClientToGCApplyGemCombiner = 7603;
 	k_EMsgClientToGCDOTACreateStaticRecipe = 7604;
 	k_EMsgClientToGCDOTACreateStaticRecipeResponse = 7605;
@@ -498,6 +482,23 @@ enum EDOTAGCMsg {
 	k_EMsgGCToGCGetLiveLeagueMatchesResponse = 7632;
 	k_EMsgDOTALeagueInfoListAdminsRequest = 7633;
 	k_EMsgDOTALeagueInfoListAdminsReponse = 7634;
+	k_EMsgGCToGCLeagueMatchStarted = 7645;
+	k_EMsgGCToGCLeagueMatchCompleted = 7646;
+	k_EMsgGCToGCLeagueMatchStartedResponse = 7647;
+	k_EMsgDOTALeagueNodeRequest = 7648;
+	k_EMsgDOTALeagueNodeResponse = 7649;
+	k_EMsgDOTALeagueAvailableLobbyNodesRequest = 7650;
+	k_EMsgDOTALeagueAvailableLobbyNodes = 7651;
+	k_EMsgGCToGCLeagueRequest = 7652;
+	k_EMsgGCToGCLeagueResponse = 7653;
+	k_EMsgGCToGCLeagueNodeGroupRequest = 7654;
+	k_EMsgGCToGCLeagueNodeGroupResponse = 7655;
+	k_EMsgGCToGCLeagueNodeRequest = 7656;
+	k_EMsgGCToGCLeagueNodeResponse = 7657;
+	k_EMsgGCToGCRealtimeStatsTerseRequest = 7658;
+	k_EMsgGCToGCRealtimeStatsTerseResponse = 7659;
+	k_EMsgGCToGCGetTopMatchesRequest = 7660;
+	k_EMsgGCToGCGetTopMatchesResponse = 7661;
 	k_EMsgGCDev_GrantWarKill = 8001;
 	k_EMsgServerToGCLockCharmTrading = 8004;
 	k_EMsgClientToGCPlayerStatsRequest = 8006;
@@ -611,8 +612,6 @@ enum EDOTAGCMsg {
 	k_EMsgClientToGCRequestArcanaVotesRemaining = 8130;
 	k_EMsgClientToGCRequestArcanaVotesRemainingResponse = 8131;
 	k_EMsgGCTransferTeamAdminResponse = 8132;
-	k_EMsgGCChangeTeamSub = 8133;
-	k_EMsgGCChangeTeamSubResponse = 8134;
 	k_EMsgGCToClientTeamInfo = 8135;
 	k_EMsgGCToClientTeamsInfo = 8136;
 	k_EMsgClientToGCMyTeamInfoRequest = 8137;
@@ -729,6 +728,8 @@ enum EDOTAGCMsg {
 	k_EMsgPurchaseHeroRelicResponse = 8257;
 	k_EMsgPurchaseHeroRandomRelic = 8258;
 	k_EMsgPurchaseHeroRandomRelicResponse = 8259;
+	k_EMsgClientToGCClaimEventActionUsingItem = 8260;
+	k_EMsgClientToGCClaimEventActionUsingItemResponse = 8261;
 	k_EMsgPartyReadyCheckRequest = 8262;
 	k_EMsgPartyReadyCheckResponse = 8263;
 	k_EMsgPartyReadyCheckAcknowledge = 8264;
@@ -777,5 +778,14 @@ enum EDOTAGCMsg {
 	k_EMsgClientToGCCavernCrawlGetClaimedRoomCount = 8308;
 	k_EMsgClientToGCCavernCrawlGetClaimedRoomCountResponse = 8309;
 	k_EMsgGCToGCReconcilePlusAutoGrantItemsUnreliable = 8310;
+	k_EMsgServerToGCAddBroadcastTimelineEvent = 8311;
+	k_EMsgGCToServerUpdateSteamBroadcasting = 8312;
+	k_EMsgClientToGCRecordContestVote = 8313;
+	k_EMsgGCToClientRecordContestVoteResponse = 8314;
+	k_EMsgGCToGCGrantAutograph = 8315;
+	k_EMsgGCToGCGrantAutographResponse = 8316;
+	k_EMsgSignOutConsumableUsage = 8317;
+	k_EMsgLobbyEventGameDetails = 8318;
+	k_EMsgGCToGCReconcileEventOwnership = 8325;
 }
 

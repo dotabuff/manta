@@ -12,6 +12,12 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the proto package it is being compiled against.
+// A compilation error at this line likely means your copy of the
+// proto package needs to be updated.
+const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+
 type CMsgGCToClientPrivateChatResponse_Result int32
 
 const (
@@ -84,7 +90,7 @@ func (x *CMsgGCToClientPrivateChatResponse_Result) UnmarshalJSON(data []byte) er
 	return nil
 }
 func (CMsgGCToClientPrivateChatResponse_Result) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor10, []int{4, 0}
+	return fileDescriptor_dota_gcmessages_client_chat_7f300d91dfb2de59, []int{4, 0}
 }
 
 type CMsgDOTAJoinChatChannelResponse_Result int32
@@ -159,21 +165,40 @@ func (x *CMsgDOTAJoinChatChannelResponse_Result) UnmarshalJSON(data []byte) erro
 	return nil
 }
 func (CMsgDOTAJoinChatChannelResponse_Result) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor10, []int{13, 0}
+	return fileDescriptor_dota_gcmessages_client_chat_7f300d91dfb2de59, []int{13, 0}
 }
 
 type CMsgClientToGCPrivateChatInvite struct {
-	PrivateChatChannelName *string `protobuf:"bytes,1,opt,name=private_chat_channel_name,json=privateChatChannelName" json:"private_chat_channel_name,omitempty"`
-	InvitedAccountId       *uint32 `protobuf:"varint,2,opt,name=invited_account_id,json=invitedAccountId" json:"invited_account_id,omitempty"`
-	XXX_unrecognized       []byte  `json:"-"`
+	PrivateChatChannelName *string  `protobuf:"bytes,1,opt,name=private_chat_channel_name,json=privateChatChannelName" json:"private_chat_channel_name,omitempty"`
+	InvitedAccountId       *uint32  `protobuf:"varint,2,opt,name=invited_account_id,json=invitedAccountId" json:"invited_account_id,omitempty"`
+	XXX_NoUnkeyedLiteral   struct{} `json:"-"`
+	XXX_unrecognized       []byte   `json:"-"`
+	XXX_sizecache          int32    `json:"-"`
 }
 
 func (m *CMsgClientToGCPrivateChatInvite) Reset()         { *m = CMsgClientToGCPrivateChatInvite{} }
 func (m *CMsgClientToGCPrivateChatInvite) String() string { return proto.CompactTextString(m) }
 func (*CMsgClientToGCPrivateChatInvite) ProtoMessage()    {}
 func (*CMsgClientToGCPrivateChatInvite) Descriptor() ([]byte, []int) {
-	return fileDescriptor10, []int{0}
+	return fileDescriptor_dota_gcmessages_client_chat_7f300d91dfb2de59, []int{0}
 }
+func (m *CMsgClientToGCPrivateChatInvite) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCPrivateChatInvite.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCPrivateChatInvite) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCPrivateChatInvite.Marshal(b, m, deterministic)
+}
+func (dst *CMsgClientToGCPrivateChatInvite) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCPrivateChatInvite.Merge(dst, src)
+}
+func (m *CMsgClientToGCPrivateChatInvite) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCPrivateChatInvite.Size(m)
+}
+func (m *CMsgClientToGCPrivateChatInvite) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCPrivateChatInvite.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCPrivateChatInvite proto.InternalMessageInfo
 
 func (m *CMsgClientToGCPrivateChatInvite) GetPrivateChatChannelName() string {
 	if m != nil && m.PrivateChatChannelName != nil {
@@ -190,15 +215,36 @@ func (m *CMsgClientToGCPrivateChatInvite) GetInvitedAccountId() uint32 {
 }
 
 type CMsgClientToGCPrivateChatKick struct {
-	PrivateChatChannelName *string `protobuf:"bytes,1,opt,name=private_chat_channel_name,json=privateChatChannelName" json:"private_chat_channel_name,omitempty"`
-	KickAccountId          *uint32 `protobuf:"varint,2,opt,name=kick_account_id,json=kickAccountId" json:"kick_account_id,omitempty"`
-	XXX_unrecognized       []byte  `json:"-"`
+	PrivateChatChannelName *string  `protobuf:"bytes,1,opt,name=private_chat_channel_name,json=privateChatChannelName" json:"private_chat_channel_name,omitempty"`
+	KickAccountId          *uint32  `protobuf:"varint,2,opt,name=kick_account_id,json=kickAccountId" json:"kick_account_id,omitempty"`
+	XXX_NoUnkeyedLiteral   struct{} `json:"-"`
+	XXX_unrecognized       []byte   `json:"-"`
+	XXX_sizecache          int32    `json:"-"`
 }
 
-func (m *CMsgClientToGCPrivateChatKick) Reset()                    { *m = CMsgClientToGCPrivateChatKick{} }
-func (m *CMsgClientToGCPrivateChatKick) String() string            { return proto.CompactTextString(m) }
-func (*CMsgClientToGCPrivateChatKick) ProtoMessage()               {}
-func (*CMsgClientToGCPrivateChatKick) Descriptor() ([]byte, []int) { return fileDescriptor10, []int{1} }
+func (m *CMsgClientToGCPrivateChatKick) Reset()         { *m = CMsgClientToGCPrivateChatKick{} }
+func (m *CMsgClientToGCPrivateChatKick) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCPrivateChatKick) ProtoMessage()    {}
+func (*CMsgClientToGCPrivateChatKick) Descriptor() ([]byte, []int) {
+	return fileDescriptor_dota_gcmessages_client_chat_7f300d91dfb2de59, []int{1}
+}
+func (m *CMsgClientToGCPrivateChatKick) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCPrivateChatKick.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCPrivateChatKick) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCPrivateChatKick.Marshal(b, m, deterministic)
+}
+func (dst *CMsgClientToGCPrivateChatKick) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCPrivateChatKick.Merge(dst, src)
+}
+func (m *CMsgClientToGCPrivateChatKick) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCPrivateChatKick.Size(m)
+}
+func (m *CMsgClientToGCPrivateChatKick) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCPrivateChatKick.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCPrivateChatKick proto.InternalMessageInfo
 
 func (m *CMsgClientToGCPrivateChatKick) GetPrivateChatChannelName() string {
 	if m != nil && m.PrivateChatChannelName != nil {
@@ -215,17 +261,36 @@ func (m *CMsgClientToGCPrivateChatKick) GetKickAccountId() uint32 {
 }
 
 type CMsgClientToGCPrivateChatPromote struct {
-	PrivateChatChannelName *string `protobuf:"bytes,1,opt,name=private_chat_channel_name,json=privateChatChannelName" json:"private_chat_channel_name,omitempty"`
-	PromoteAccountId       *uint32 `protobuf:"varint,2,opt,name=promote_account_id,json=promoteAccountId" json:"promote_account_id,omitempty"`
-	XXX_unrecognized       []byte  `json:"-"`
+	PrivateChatChannelName *string  `protobuf:"bytes,1,opt,name=private_chat_channel_name,json=privateChatChannelName" json:"private_chat_channel_name,omitempty"`
+	PromoteAccountId       *uint32  `protobuf:"varint,2,opt,name=promote_account_id,json=promoteAccountId" json:"promote_account_id,omitempty"`
+	XXX_NoUnkeyedLiteral   struct{} `json:"-"`
+	XXX_unrecognized       []byte   `json:"-"`
+	XXX_sizecache          int32    `json:"-"`
 }
 
 func (m *CMsgClientToGCPrivateChatPromote) Reset()         { *m = CMsgClientToGCPrivateChatPromote{} }
 func (m *CMsgClientToGCPrivateChatPromote) String() string { return proto.CompactTextString(m) }
 func (*CMsgClientToGCPrivateChatPromote) ProtoMessage()    {}
 func (*CMsgClientToGCPrivateChatPromote) Descriptor() ([]byte, []int) {
-	return fileDescriptor10, []int{2}
+	return fileDescriptor_dota_gcmessages_client_chat_7f300d91dfb2de59, []int{2}
 }
+func (m *CMsgClientToGCPrivateChatPromote) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCPrivateChatPromote.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCPrivateChatPromote) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCPrivateChatPromote.Marshal(b, m, deterministic)
+}
+func (dst *CMsgClientToGCPrivateChatPromote) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCPrivateChatPromote.Merge(dst, src)
+}
+func (m *CMsgClientToGCPrivateChatPromote) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCPrivateChatPromote.Size(m)
+}
+func (m *CMsgClientToGCPrivateChatPromote) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCPrivateChatPromote.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCPrivateChatPromote proto.InternalMessageInfo
 
 func (m *CMsgClientToGCPrivateChatPromote) GetPrivateChatChannelName() string {
 	if m != nil && m.PrivateChatChannelName != nil {
@@ -242,17 +307,36 @@ func (m *CMsgClientToGCPrivateChatPromote) GetPromoteAccountId() uint32 {
 }
 
 type CMsgClientToGCPrivateChatDemote struct {
-	PrivateChatChannelName *string `protobuf:"bytes,1,opt,name=private_chat_channel_name,json=privateChatChannelName" json:"private_chat_channel_name,omitempty"`
-	DemoteAccountId        *uint32 `protobuf:"varint,2,opt,name=demote_account_id,json=demoteAccountId" json:"demote_account_id,omitempty"`
-	XXX_unrecognized       []byte  `json:"-"`
+	PrivateChatChannelName *string  `protobuf:"bytes,1,opt,name=private_chat_channel_name,json=privateChatChannelName" json:"private_chat_channel_name,omitempty"`
+	DemoteAccountId        *uint32  `protobuf:"varint,2,opt,name=demote_account_id,json=demoteAccountId" json:"demote_account_id,omitempty"`
+	XXX_NoUnkeyedLiteral   struct{} `json:"-"`
+	XXX_unrecognized       []byte   `json:"-"`
+	XXX_sizecache          int32    `json:"-"`
 }
 
 func (m *CMsgClientToGCPrivateChatDemote) Reset()         { *m = CMsgClientToGCPrivateChatDemote{} }
 func (m *CMsgClientToGCPrivateChatDemote) String() string { return proto.CompactTextString(m) }
 func (*CMsgClientToGCPrivateChatDemote) ProtoMessage()    {}
 func (*CMsgClientToGCPrivateChatDemote) Descriptor() ([]byte, []int) {
-	return fileDescriptor10, []int{3}
+	return fileDescriptor_dota_gcmessages_client_chat_7f300d91dfb2de59, []int{3}
 }
+func (m *CMsgClientToGCPrivateChatDemote) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCPrivateChatDemote.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCPrivateChatDemote) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCPrivateChatDemote.Marshal(b, m, deterministic)
+}
+func (dst *CMsgClientToGCPrivateChatDemote) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCPrivateChatDemote.Merge(dst, src)
+}
+func (m *CMsgClientToGCPrivateChatDemote) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCPrivateChatDemote.Size(m)
+}
+func (m *CMsgClientToGCPrivateChatDemote) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCPrivateChatDemote.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCPrivateChatDemote proto.InternalMessageInfo
 
 func (m *CMsgClientToGCPrivateChatDemote) GetPrivateChatChannelName() string {
 	if m != nil && m.PrivateChatChannelName != nil {
@@ -272,15 +356,34 @@ type CMsgGCToClientPrivateChatResponse struct {
 	PrivateChatChannelName *string                                   `protobuf:"bytes,1,opt,name=private_chat_channel_name,json=privateChatChannelName" json:"private_chat_channel_name,omitempty"`
 	Result                 *CMsgGCToClientPrivateChatResponse_Result `protobuf:"varint,2,opt,name=result,enum=dota.CMsgGCToClientPrivateChatResponse_Result,def=0" json:"result,omitempty"`
 	Username               *string                                   `protobuf:"bytes,3,opt,name=username" json:"username,omitempty"`
+	XXX_NoUnkeyedLiteral   struct{}                                  `json:"-"`
 	XXX_unrecognized       []byte                                    `json:"-"`
+	XXX_sizecache          int32                                     `json:"-"`
 }
 
 func (m *CMsgGCToClientPrivateChatResponse) Reset()         { *m = CMsgGCToClientPrivateChatResponse{} }
 func (m *CMsgGCToClientPrivateChatResponse) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCToClientPrivateChatResponse) ProtoMessage()    {}
 func (*CMsgGCToClientPrivateChatResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor10, []int{4}
+	return fileDescriptor_dota_gcmessages_client_chat_7f300d91dfb2de59, []int{4}
 }
+func (m *CMsgGCToClientPrivateChatResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgGCToClientPrivateChatResponse.Unmarshal(m, b)
+}
+func (m *CMsgGCToClientPrivateChatResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgGCToClientPrivateChatResponse.Marshal(b, m, deterministic)
+}
+func (dst *CMsgGCToClientPrivateChatResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGCToClientPrivateChatResponse.Merge(dst, src)
+}
+func (m *CMsgGCToClientPrivateChatResponse) XXX_Size() int {
+	return xxx_messageInfo_CMsgGCToClientPrivateChatResponse.Size(m)
+}
+func (m *CMsgGCToClientPrivateChatResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgGCToClientPrivateChatResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgGCToClientPrivateChatResponse proto.InternalMessageInfo
 
 const Default_CMsgGCToClientPrivateChatResponse_Result CMsgGCToClientPrivateChatResponse_Result = CMsgGCToClientPrivateChatResponse_SUCCESS
 
@@ -306,16 +409,35 @@ func (m *CMsgGCToClientPrivateChatResponse) GetUsername() string {
 }
 
 type CMsgClientToGCPrivateChatInfoRequest struct {
-	PrivateChatChannelName *string `protobuf:"bytes,1,opt,name=private_chat_channel_name,json=privateChatChannelName" json:"private_chat_channel_name,omitempty"`
-	XXX_unrecognized       []byte  `json:"-"`
+	PrivateChatChannelName *string  `protobuf:"bytes,1,opt,name=private_chat_channel_name,json=privateChatChannelName" json:"private_chat_channel_name,omitempty"`
+	XXX_NoUnkeyedLiteral   struct{} `json:"-"`
+	XXX_unrecognized       []byte   `json:"-"`
+	XXX_sizecache          int32    `json:"-"`
 }
 
 func (m *CMsgClientToGCPrivateChatInfoRequest) Reset()         { *m = CMsgClientToGCPrivateChatInfoRequest{} }
 func (m *CMsgClientToGCPrivateChatInfoRequest) String() string { return proto.CompactTextString(m) }
 func (*CMsgClientToGCPrivateChatInfoRequest) ProtoMessage()    {}
 func (*CMsgClientToGCPrivateChatInfoRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor10, []int{5}
+	return fileDescriptor_dota_gcmessages_client_chat_7f300d91dfb2de59, []int{5}
 }
+func (m *CMsgClientToGCPrivateChatInfoRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCPrivateChatInfoRequest.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCPrivateChatInfoRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCPrivateChatInfoRequest.Marshal(b, m, deterministic)
+}
+func (dst *CMsgClientToGCPrivateChatInfoRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCPrivateChatInfoRequest.Merge(dst, src)
+}
+func (m *CMsgClientToGCPrivateChatInfoRequest) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCPrivateChatInfoRequest.Size(m)
+}
+func (m *CMsgClientToGCPrivateChatInfoRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCPrivateChatInfoRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCPrivateChatInfoRequest proto.InternalMessageInfo
 
 func (m *CMsgClientToGCPrivateChatInfoRequest) GetPrivateChatChannelName() string {
 	if m != nil && m.PrivateChatChannelName != nil {
@@ -329,15 +451,34 @@ type CMsgGCToClientPrivateChatInfoResponse struct {
 	Members                []*CMsgGCToClientPrivateChatInfoResponse_Member `protobuf:"bytes,2,rep,name=members" json:"members,omitempty"`
 	Creator                *uint32                                         `protobuf:"varint,3,opt,name=creator" json:"creator,omitempty"`
 	CreationDate           *uint32                                         `protobuf:"varint,4,opt,name=creation_date,json=creationDate" json:"creation_date,omitempty"`
+	XXX_NoUnkeyedLiteral   struct{}                                        `json:"-"`
 	XXX_unrecognized       []byte                                          `json:"-"`
+	XXX_sizecache          int32                                           `json:"-"`
 }
 
 func (m *CMsgGCToClientPrivateChatInfoResponse) Reset()         { *m = CMsgGCToClientPrivateChatInfoResponse{} }
 func (m *CMsgGCToClientPrivateChatInfoResponse) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCToClientPrivateChatInfoResponse) ProtoMessage()    {}
 func (*CMsgGCToClientPrivateChatInfoResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor10, []int{6}
+	return fileDescriptor_dota_gcmessages_client_chat_7f300d91dfb2de59, []int{6}
 }
+func (m *CMsgGCToClientPrivateChatInfoResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgGCToClientPrivateChatInfoResponse.Unmarshal(m, b)
+}
+func (m *CMsgGCToClientPrivateChatInfoResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgGCToClientPrivateChatInfoResponse.Marshal(b, m, deterministic)
+}
+func (dst *CMsgGCToClientPrivateChatInfoResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGCToClientPrivateChatInfoResponse.Merge(dst, src)
+}
+func (m *CMsgGCToClientPrivateChatInfoResponse) XXX_Size() int {
+	return xxx_messageInfo_CMsgGCToClientPrivateChatInfoResponse.Size(m)
+}
+func (m *CMsgGCToClientPrivateChatInfoResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgGCToClientPrivateChatInfoResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgGCToClientPrivateChatInfoResponse proto.InternalMessageInfo
 
 func (m *CMsgGCToClientPrivateChatInfoResponse) GetPrivateChatChannelName() string {
 	if m != nil && m.PrivateChatChannelName != nil {
@@ -368,10 +509,12 @@ func (m *CMsgGCToClientPrivateChatInfoResponse) GetCreationDate() uint32 {
 }
 
 type CMsgGCToClientPrivateChatInfoResponse_Member struct {
-	AccountId        *uint32 `protobuf:"varint,1,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
-	Name             *string `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
-	Status           *uint32 `protobuf:"varint,3,opt,name=status" json:"status,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	AccountId            *uint32  `protobuf:"varint,1,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	Name                 *string  `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
+	Status               *uint32  `protobuf:"varint,3,opt,name=status" json:"status,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *CMsgGCToClientPrivateChatInfoResponse_Member) Reset() {
@@ -382,8 +525,25 @@ func (m *CMsgGCToClientPrivateChatInfoResponse_Member) String() string {
 }
 func (*CMsgGCToClientPrivateChatInfoResponse_Member) ProtoMessage() {}
 func (*CMsgGCToClientPrivateChatInfoResponse_Member) Descriptor() ([]byte, []int) {
-	return fileDescriptor10, []int{6, 0}
+	return fileDescriptor_dota_gcmessages_client_chat_7f300d91dfb2de59, []int{6, 0}
 }
+func (m *CMsgGCToClientPrivateChatInfoResponse_Member) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgGCToClientPrivateChatInfoResponse_Member.Unmarshal(m, b)
+}
+func (m *CMsgGCToClientPrivateChatInfoResponse_Member) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgGCToClientPrivateChatInfoResponse_Member.Marshal(b, m, deterministic)
+}
+func (dst *CMsgGCToClientPrivateChatInfoResponse_Member) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGCToClientPrivateChatInfoResponse_Member.Merge(dst, src)
+}
+func (m *CMsgGCToClientPrivateChatInfoResponse_Member) XXX_Size() int {
+	return xxx_messageInfo_CMsgGCToClientPrivateChatInfoResponse_Member.Size(m)
+}
+func (m *CMsgGCToClientPrivateChatInfoResponse_Member) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgGCToClientPrivateChatInfoResponse_Member.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgGCToClientPrivateChatInfoResponse_Member proto.InternalMessageInfo
 
 func (m *CMsgGCToClientPrivateChatInfoResponse_Member) GetAccountId() uint32 {
 	if m != nil && m.AccountId != nil {
@@ -407,15 +567,36 @@ func (m *CMsgGCToClientPrivateChatInfoResponse_Member) GetStatus() uint32 {
 }
 
 type CMsgDOTAJoinChatChannel struct {
-	ChannelName      *string               `protobuf:"bytes,2,opt,name=channel_name,json=channelName" json:"channel_name,omitempty"`
-	ChannelType      *DOTAChatChannelTypeT `protobuf:"varint,4,opt,name=channel_type,json=channelType,enum=dota.DOTAChatChannelTypeT,def=0" json:"channel_type,omitempty"`
-	XXX_unrecognized []byte                `json:"-"`
+	ChannelName          *string               `protobuf:"bytes,2,opt,name=channel_name,json=channelName" json:"channel_name,omitempty"`
+	ChannelType          *DOTAChatChannelTypeT `protobuf:"varint,4,opt,name=channel_type,json=channelType,enum=dota.DOTAChatChannelTypeT,def=0" json:"channel_type,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}              `json:"-"`
+	XXX_unrecognized     []byte                `json:"-"`
+	XXX_sizecache        int32                 `json:"-"`
 }
 
-func (m *CMsgDOTAJoinChatChannel) Reset()                    { *m = CMsgDOTAJoinChatChannel{} }
-func (m *CMsgDOTAJoinChatChannel) String() string            { return proto.CompactTextString(m) }
-func (*CMsgDOTAJoinChatChannel) ProtoMessage()               {}
-func (*CMsgDOTAJoinChatChannel) Descriptor() ([]byte, []int) { return fileDescriptor10, []int{7} }
+func (m *CMsgDOTAJoinChatChannel) Reset()         { *m = CMsgDOTAJoinChatChannel{} }
+func (m *CMsgDOTAJoinChatChannel) String() string { return proto.CompactTextString(m) }
+func (*CMsgDOTAJoinChatChannel) ProtoMessage()    {}
+func (*CMsgDOTAJoinChatChannel) Descriptor() ([]byte, []int) {
+	return fileDescriptor_dota_gcmessages_client_chat_7f300d91dfb2de59, []int{7}
+}
+func (m *CMsgDOTAJoinChatChannel) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTAJoinChatChannel.Unmarshal(m, b)
+}
+func (m *CMsgDOTAJoinChatChannel) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTAJoinChatChannel.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTAJoinChatChannel) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAJoinChatChannel.Merge(dst, src)
+}
+func (m *CMsgDOTAJoinChatChannel) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTAJoinChatChannel.Size(m)
+}
+func (m *CMsgDOTAJoinChatChannel) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTAJoinChatChannel.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTAJoinChatChannel proto.InternalMessageInfo
 
 const Default_CMsgDOTAJoinChatChannel_ChannelType DOTAChatChannelTypeT = DOTAChatChannelTypeT_DOTAChannelType_Regional
 
@@ -434,14 +615,35 @@ func (m *CMsgDOTAJoinChatChannel) GetChannelType() DOTAChatChannelTypeT {
 }
 
 type CMsgDOTALeaveChatChannel struct {
-	ChannelId        *uint64 `protobuf:"varint,1,opt,name=channel_id,json=channelId" json:"channel_id,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	ChannelId            *uint64  `protobuf:"varint,1,opt,name=channel_id,json=channelId" json:"channel_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CMsgDOTALeaveChatChannel) Reset()                    { *m = CMsgDOTALeaveChatChannel{} }
-func (m *CMsgDOTALeaveChatChannel) String() string            { return proto.CompactTextString(m) }
-func (*CMsgDOTALeaveChatChannel) ProtoMessage()               {}
-func (*CMsgDOTALeaveChatChannel) Descriptor() ([]byte, []int) { return fileDescriptor10, []int{8} }
+func (m *CMsgDOTALeaveChatChannel) Reset()         { *m = CMsgDOTALeaveChatChannel{} }
+func (m *CMsgDOTALeaveChatChannel) String() string { return proto.CompactTextString(m) }
+func (*CMsgDOTALeaveChatChannel) ProtoMessage()    {}
+func (*CMsgDOTALeaveChatChannel) Descriptor() ([]byte, []int) {
+	return fileDescriptor_dota_gcmessages_client_chat_7f300d91dfb2de59, []int{8}
+}
+func (m *CMsgDOTALeaveChatChannel) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTALeaveChatChannel.Unmarshal(m, b)
+}
+func (m *CMsgDOTALeaveChatChannel) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTALeaveChatChannel.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTALeaveChatChannel) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTALeaveChatChannel.Merge(dst, src)
+}
+func (m *CMsgDOTALeaveChatChannel) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTALeaveChatChannel.Size(m)
+}
+func (m *CMsgDOTALeaveChatChannel) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTALeaveChatChannel.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTALeaveChatChannel proto.InternalMessageInfo
 
 func (m *CMsgDOTALeaveChatChannel) GetChannelId() uint64 {
 	if m != nil && m.ChannelId != nil {
@@ -451,15 +653,36 @@ func (m *CMsgDOTALeaveChatChannel) GetChannelId() uint64 {
 }
 
 type CMsgGCChatReportPublicSpam struct {
-	ChannelId        *uint64 `protobuf:"varint,1,opt,name=channel_id,json=channelId" json:"channel_id,omitempty"`
-	ChannelUserId    *uint32 `protobuf:"varint,2,opt,name=channel_user_id,json=channelUserId" json:"channel_user_id,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	ChannelId            *uint64  `protobuf:"varint,1,opt,name=channel_id,json=channelId" json:"channel_id,omitempty"`
+	ChannelUserId        *uint32  `protobuf:"varint,2,opt,name=channel_user_id,json=channelUserId" json:"channel_user_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CMsgGCChatReportPublicSpam) Reset()                    { *m = CMsgGCChatReportPublicSpam{} }
-func (m *CMsgGCChatReportPublicSpam) String() string            { return proto.CompactTextString(m) }
-func (*CMsgGCChatReportPublicSpam) ProtoMessage()               {}
-func (*CMsgGCChatReportPublicSpam) Descriptor() ([]byte, []int) { return fileDescriptor10, []int{9} }
+func (m *CMsgGCChatReportPublicSpam) Reset()         { *m = CMsgGCChatReportPublicSpam{} }
+func (m *CMsgGCChatReportPublicSpam) String() string { return proto.CompactTextString(m) }
+func (*CMsgGCChatReportPublicSpam) ProtoMessage()    {}
+func (*CMsgGCChatReportPublicSpam) Descriptor() ([]byte, []int) {
+	return fileDescriptor_dota_gcmessages_client_chat_7f300d91dfb2de59, []int{9}
+}
+func (m *CMsgGCChatReportPublicSpam) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgGCChatReportPublicSpam.Unmarshal(m, b)
+}
+func (m *CMsgGCChatReportPublicSpam) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgGCChatReportPublicSpam.Marshal(b, m, deterministic)
+}
+func (dst *CMsgGCChatReportPublicSpam) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGCChatReportPublicSpam.Merge(dst, src)
+}
+func (m *CMsgGCChatReportPublicSpam) XXX_Size() int {
+	return xxx_messageInfo_CMsgGCChatReportPublicSpam.Size(m)
+}
+func (m *CMsgGCChatReportPublicSpam) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgGCChatReportPublicSpam.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgGCChatReportPublicSpam proto.InternalMessageInfo
 
 func (m *CMsgGCChatReportPublicSpam) GetChannelId() uint64 {
 	if m != nil && m.ChannelId != nil {
@@ -476,14 +699,35 @@ func (m *CMsgGCChatReportPublicSpam) GetChannelUserId() uint32 {
 }
 
 type CMsgDOTAClientIgnoredUser struct {
-	IgnoredAccountId *uint32 `protobuf:"varint,1,opt,name=ignored_account_id,json=ignoredAccountId" json:"ignored_account_id,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	IgnoredAccountId     *uint32  `protobuf:"varint,1,opt,name=ignored_account_id,json=ignoredAccountId" json:"ignored_account_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CMsgDOTAClientIgnoredUser) Reset()                    { *m = CMsgDOTAClientIgnoredUser{} }
-func (m *CMsgDOTAClientIgnoredUser) String() string            { return proto.CompactTextString(m) }
-func (*CMsgDOTAClientIgnoredUser) ProtoMessage()               {}
-func (*CMsgDOTAClientIgnoredUser) Descriptor() ([]byte, []int) { return fileDescriptor10, []int{10} }
+func (m *CMsgDOTAClientIgnoredUser) Reset()         { *m = CMsgDOTAClientIgnoredUser{} }
+func (m *CMsgDOTAClientIgnoredUser) String() string { return proto.CompactTextString(m) }
+func (*CMsgDOTAClientIgnoredUser) ProtoMessage()    {}
+func (*CMsgDOTAClientIgnoredUser) Descriptor() ([]byte, []int) {
+	return fileDescriptor_dota_gcmessages_client_chat_7f300d91dfb2de59, []int{10}
+}
+func (m *CMsgDOTAClientIgnoredUser) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTAClientIgnoredUser.Unmarshal(m, b)
+}
+func (m *CMsgDOTAClientIgnoredUser) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTAClientIgnoredUser.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTAClientIgnoredUser) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAClientIgnoredUser.Merge(dst, src)
+}
+func (m *CMsgDOTAClientIgnoredUser) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTAClientIgnoredUser.Size(m)
+}
+func (m *CMsgDOTAClientIgnoredUser) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTAClientIgnoredUser.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTAClientIgnoredUser proto.InternalMessageInfo
 
 func (m *CMsgDOTAClientIgnoredUser) GetIgnoredAccountId() uint32 {
 	if m != nil && m.IgnoredAccountId != nil {
@@ -525,13 +769,34 @@ type CMsgDOTAChatMessage struct {
 	TriviaAnswer                *CMsgDOTAChatMessage_TriviaAnswered `protobuf:"bytes,32,opt,name=trivia_answer,json=triviaAnswer" json:"trivia_answer,omitempty"`
 	RequestedAbilityId          *uint32                             `protobuf:"varint,33,opt,name=requested_ability_id,json=requestedAbilityId" json:"requested_ability_id,omitempty"`
 	ChatFlags                   *uint32                             `protobuf:"varint,34,opt,name=chat_flags,json=chatFlags" json:"chat_flags,omitempty"`
+	XXX_NoUnkeyedLiteral        struct{}                            `json:"-"`
 	XXX_unrecognized            []byte                              `json:"-"`
+	XXX_sizecache               int32                               `json:"-"`
 }
 
-func (m *CMsgDOTAChatMessage) Reset()                    { *m = CMsgDOTAChatMessage{} }
-func (m *CMsgDOTAChatMessage) String() string            { return proto.CompactTextString(m) }
-func (*CMsgDOTAChatMessage) ProtoMessage()               {}
-func (*CMsgDOTAChatMessage) Descriptor() ([]byte, []int) { return fileDescriptor10, []int{11} }
+func (m *CMsgDOTAChatMessage) Reset()         { *m = CMsgDOTAChatMessage{} }
+func (m *CMsgDOTAChatMessage) String() string { return proto.CompactTextString(m) }
+func (*CMsgDOTAChatMessage) ProtoMessage()    {}
+func (*CMsgDOTAChatMessage) Descriptor() ([]byte, []int) {
+	return fileDescriptor_dota_gcmessages_client_chat_7f300d91dfb2de59, []int{11}
+}
+func (m *CMsgDOTAChatMessage) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTAChatMessage.Unmarshal(m, b)
+}
+func (m *CMsgDOTAChatMessage) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTAChatMessage.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTAChatMessage) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAChatMessage.Merge(dst, src)
+}
+func (m *CMsgDOTAChatMessage) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTAChatMessage.Size(m)
+}
+func (m *CMsgDOTAChatMessage) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTAChatMessage.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTAChatMessage proto.InternalMessageInfo
 
 const Default_CMsgDOTAChatMessage_PlayerId int32 = -1
 
@@ -760,18 +1025,37 @@ func (m *CMsgDOTAChatMessage) GetChatFlags() uint32 {
 }
 
 type CMsgDOTAChatMessage_DiceRoll struct {
-	RollMin          *int32 `protobuf:"varint,1,opt,name=roll_min,json=rollMin" json:"roll_min,omitempty"`
-	RollMax          *int32 `protobuf:"varint,2,opt,name=roll_max,json=rollMax" json:"roll_max,omitempty"`
-	Result           *int32 `protobuf:"varint,3,opt,name=result" json:"result,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	RollMin              *int32   `protobuf:"varint,1,opt,name=roll_min,json=rollMin" json:"roll_min,omitempty"`
+	RollMax              *int32   `protobuf:"varint,2,opt,name=roll_max,json=rollMax" json:"roll_max,omitempty"`
+	Result               *int32   `protobuf:"varint,3,opt,name=result" json:"result,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *CMsgDOTAChatMessage_DiceRoll) Reset()         { *m = CMsgDOTAChatMessage_DiceRoll{} }
 func (m *CMsgDOTAChatMessage_DiceRoll) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTAChatMessage_DiceRoll) ProtoMessage()    {}
 func (*CMsgDOTAChatMessage_DiceRoll) Descriptor() ([]byte, []int) {
-	return fileDescriptor10, []int{11, 0}
+	return fileDescriptor_dota_gcmessages_client_chat_7f300d91dfb2de59, []int{11, 0}
 }
+func (m *CMsgDOTAChatMessage_DiceRoll) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTAChatMessage_DiceRoll.Unmarshal(m, b)
+}
+func (m *CMsgDOTAChatMessage_DiceRoll) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTAChatMessage_DiceRoll.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTAChatMessage_DiceRoll) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAChatMessage_DiceRoll.Merge(dst, src)
+}
+func (m *CMsgDOTAChatMessage_DiceRoll) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTAChatMessage_DiceRoll.Size(m)
+}
+func (m *CMsgDOTAChatMessage_DiceRoll) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTAChatMessage_DiceRoll.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTAChatMessage_DiceRoll proto.InternalMessageInfo
 
 func (m *CMsgDOTAChatMessage_DiceRoll) GetRollMin() int32 {
 	if m != nil && m.RollMin != nil {
@@ -795,20 +1079,39 @@ func (m *CMsgDOTAChatMessage_DiceRoll) GetResult() int32 {
 }
 
 type CMsgDOTAChatMessage_TriviaAnswered struct {
-	QuestionId            *uint32 `protobuf:"varint,1,opt,name=question_id,json=questionId" json:"question_id,omitempty"`
-	AnswerIndex           *uint32 `protobuf:"varint,2,opt,name=answer_index,json=answerIndex" json:"answer_index,omitempty"`
-	PartyQuestionsCorrect *uint32 `protobuf:"varint,3,opt,name=party_questions_correct,json=partyQuestionsCorrect" json:"party_questions_correct,omitempty"`
-	PartyQuestionsViewed  *uint32 `protobuf:"varint,4,opt,name=party_questions_viewed,json=partyQuestionsViewed" json:"party_questions_viewed,omitempty"`
-	PartyTriviaPoints     *uint32 `protobuf:"varint,5,opt,name=party_trivia_points,json=partyTriviaPoints" json:"party_trivia_points,omitempty"`
-	XXX_unrecognized      []byte  `json:"-"`
+	QuestionId            *uint32  `protobuf:"varint,1,opt,name=question_id,json=questionId" json:"question_id,omitempty"`
+	AnswerIndex           *uint32  `protobuf:"varint,2,opt,name=answer_index,json=answerIndex" json:"answer_index,omitempty"`
+	PartyQuestionsCorrect *uint32  `protobuf:"varint,3,opt,name=party_questions_correct,json=partyQuestionsCorrect" json:"party_questions_correct,omitempty"`
+	PartyQuestionsViewed  *uint32  `protobuf:"varint,4,opt,name=party_questions_viewed,json=partyQuestionsViewed" json:"party_questions_viewed,omitempty"`
+	PartyTriviaPoints     *uint32  `protobuf:"varint,5,opt,name=party_trivia_points,json=partyTriviaPoints" json:"party_trivia_points,omitempty"`
+	XXX_NoUnkeyedLiteral  struct{} `json:"-"`
+	XXX_unrecognized      []byte   `json:"-"`
+	XXX_sizecache         int32    `json:"-"`
 }
 
 func (m *CMsgDOTAChatMessage_TriviaAnswered) Reset()         { *m = CMsgDOTAChatMessage_TriviaAnswered{} }
 func (m *CMsgDOTAChatMessage_TriviaAnswered) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTAChatMessage_TriviaAnswered) ProtoMessage()    {}
 func (*CMsgDOTAChatMessage_TriviaAnswered) Descriptor() ([]byte, []int) {
-	return fileDescriptor10, []int{11, 1}
+	return fileDescriptor_dota_gcmessages_client_chat_7f300d91dfb2de59, []int{11, 1}
 }
+func (m *CMsgDOTAChatMessage_TriviaAnswered) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTAChatMessage_TriviaAnswered.Unmarshal(m, b)
+}
+func (m *CMsgDOTAChatMessage_TriviaAnswered) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTAChatMessage_TriviaAnswered.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTAChatMessage_TriviaAnswered) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAChatMessage_TriviaAnswered.Merge(dst, src)
+}
+func (m *CMsgDOTAChatMessage_TriviaAnswered) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTAChatMessage_TriviaAnswered.Size(m)
+}
+func (m *CMsgDOTAChatMessage_TriviaAnswered) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTAChatMessage_TriviaAnswered.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTAChatMessage_TriviaAnswered proto.InternalMessageInfo
 
 func (m *CMsgDOTAChatMessage_TriviaAnswered) GetQuestionId() uint32 {
 	if m != nil && m.QuestionId != nil {
@@ -846,17 +1149,38 @@ func (m *CMsgDOTAChatMessage_TriviaAnswered) GetPartyTriviaPoints() uint32 {
 }
 
 type CMsgDOTAChatMember struct {
-	SteamId          *uint64 `protobuf:"fixed64,1,opt,name=steam_id,json=steamId" json:"steam_id,omitempty"`
-	PersonaName      *string `protobuf:"bytes,2,opt,name=persona_name,json=personaName" json:"persona_name,omitempty"`
-	ChannelUserId    *uint32 `protobuf:"varint,3,opt,name=channel_user_id,json=channelUserId" json:"channel_user_id,omitempty"`
-	Status           *uint32 `protobuf:"varint,4,opt,name=status" json:"status,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	SteamId              *uint64  `protobuf:"fixed64,1,opt,name=steam_id,json=steamId" json:"steam_id,omitempty"`
+	PersonaName          *string  `protobuf:"bytes,2,opt,name=persona_name,json=personaName" json:"persona_name,omitempty"`
+	ChannelUserId        *uint32  `protobuf:"varint,3,opt,name=channel_user_id,json=channelUserId" json:"channel_user_id,omitempty"`
+	Status               *uint32  `protobuf:"varint,4,opt,name=status" json:"status,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CMsgDOTAChatMember) Reset()                    { *m = CMsgDOTAChatMember{} }
-func (m *CMsgDOTAChatMember) String() string            { return proto.CompactTextString(m) }
-func (*CMsgDOTAChatMember) ProtoMessage()               {}
-func (*CMsgDOTAChatMember) Descriptor() ([]byte, []int) { return fileDescriptor10, []int{12} }
+func (m *CMsgDOTAChatMember) Reset()         { *m = CMsgDOTAChatMember{} }
+func (m *CMsgDOTAChatMember) String() string { return proto.CompactTextString(m) }
+func (*CMsgDOTAChatMember) ProtoMessage()    {}
+func (*CMsgDOTAChatMember) Descriptor() ([]byte, []int) {
+	return fileDescriptor_dota_gcmessages_client_chat_7f300d91dfb2de59, []int{12}
+}
+func (m *CMsgDOTAChatMember) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTAChatMember.Unmarshal(m, b)
+}
+func (m *CMsgDOTAChatMember) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTAChatMember.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTAChatMember) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAChatMember.Merge(dst, src)
+}
+func (m *CMsgDOTAChatMember) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTAChatMember.Size(m)
+}
+func (m *CMsgDOTAChatMember) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTAChatMember.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTAChatMember proto.InternalMessageInfo
 
 func (m *CMsgDOTAChatMember) GetSteamId() uint64 {
 	if m != nil && m.SteamId != nil {
@@ -887,25 +1211,44 @@ func (m *CMsgDOTAChatMember) GetStatus() uint32 {
 }
 
 type CMsgDOTAJoinChatChannelResponse struct {
-	Response         *uint32                                 `protobuf:"varint,1,opt,name=response" json:"response,omitempty"`
-	ChannelName      *string                                 `protobuf:"bytes,2,opt,name=channel_name,json=channelName" json:"channel_name,omitempty"`
-	ChannelId        *uint64                                 `protobuf:"fixed64,3,opt,name=channel_id,json=channelId" json:"channel_id,omitempty"`
-	MaxMembers       *uint32                                 `protobuf:"varint,4,opt,name=max_members,json=maxMembers" json:"max_members,omitempty"`
-	Members          []*CMsgDOTAChatMember                   `protobuf:"bytes,5,rep,name=members" json:"members,omitempty"`
-	ChannelType      *DOTAChatChannelTypeT                   `protobuf:"varint,6,opt,name=channel_type,json=channelType,enum=dota.DOTAChatChannelTypeT,def=0" json:"channel_type,omitempty"`
-	Result           *CMsgDOTAJoinChatChannelResponse_Result `protobuf:"varint,7,opt,name=result,enum=dota.CMsgDOTAJoinChatChannelResponse_Result,def=0" json:"result,omitempty"`
-	GcInitiatedJoin  *bool                                   `protobuf:"varint,8,opt,name=gc_initiated_join,json=gcInitiatedJoin" json:"gc_initiated_join,omitempty"`
-	ChannelUserId    *uint32                                 `protobuf:"varint,9,opt,name=channel_user_id,json=channelUserId" json:"channel_user_id,omitempty"`
-	WelcomeMessage   *string                                 `protobuf:"bytes,10,opt,name=welcome_message,json=welcomeMessage" json:"welcome_message,omitempty"`
-	XXX_unrecognized []byte                                  `json:"-"`
+	Response             *uint32                                 `protobuf:"varint,1,opt,name=response" json:"response,omitempty"`
+	ChannelName          *string                                 `protobuf:"bytes,2,opt,name=channel_name,json=channelName" json:"channel_name,omitempty"`
+	ChannelId            *uint64                                 `protobuf:"fixed64,3,opt,name=channel_id,json=channelId" json:"channel_id,omitempty"`
+	MaxMembers           *uint32                                 `protobuf:"varint,4,opt,name=max_members,json=maxMembers" json:"max_members,omitempty"`
+	Members              []*CMsgDOTAChatMember                   `protobuf:"bytes,5,rep,name=members" json:"members,omitempty"`
+	ChannelType          *DOTAChatChannelTypeT                   `protobuf:"varint,6,opt,name=channel_type,json=channelType,enum=dota.DOTAChatChannelTypeT,def=0" json:"channel_type,omitempty"`
+	Result               *CMsgDOTAJoinChatChannelResponse_Result `protobuf:"varint,7,opt,name=result,enum=dota.CMsgDOTAJoinChatChannelResponse_Result,def=0" json:"result,omitempty"`
+	GcInitiatedJoin      *bool                                   `protobuf:"varint,8,opt,name=gc_initiated_join,json=gcInitiatedJoin" json:"gc_initiated_join,omitempty"`
+	ChannelUserId        *uint32                                 `protobuf:"varint,9,opt,name=channel_user_id,json=channelUserId" json:"channel_user_id,omitempty"`
+	WelcomeMessage       *string                                 `protobuf:"bytes,10,opt,name=welcome_message,json=welcomeMessage" json:"welcome_message,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                `json:"-"`
+	XXX_unrecognized     []byte                                  `json:"-"`
+	XXX_sizecache        int32                                   `json:"-"`
 }
 
 func (m *CMsgDOTAJoinChatChannelResponse) Reset()         { *m = CMsgDOTAJoinChatChannelResponse{} }
 func (m *CMsgDOTAJoinChatChannelResponse) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTAJoinChatChannelResponse) ProtoMessage()    {}
 func (*CMsgDOTAJoinChatChannelResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor10, []int{13}
+	return fileDescriptor_dota_gcmessages_client_chat_7f300d91dfb2de59, []int{13}
 }
+func (m *CMsgDOTAJoinChatChannelResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTAJoinChatChannelResponse.Unmarshal(m, b)
+}
+func (m *CMsgDOTAJoinChatChannelResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTAJoinChatChannelResponse.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTAJoinChatChannelResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAJoinChatChannelResponse.Merge(dst, src)
+}
+func (m *CMsgDOTAJoinChatChannelResponse) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTAJoinChatChannelResponse.Size(m)
+}
+func (m *CMsgDOTAJoinChatChannelResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTAJoinChatChannelResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTAJoinChatChannelResponse proto.InternalMessageInfo
 
 const Default_CMsgDOTAJoinChatChannelResponse_ChannelType DOTAChatChannelTypeT = DOTAChatChannelTypeT_DOTAChannelType_Regional
 const Default_CMsgDOTAJoinChatChannelResponse_Result CMsgDOTAJoinChatChannelResponse_Result = CMsgDOTAJoinChatChannelResponse_JOIN_SUCCESS
@@ -981,15 +1324,36 @@ func (m *CMsgDOTAJoinChatChannelResponse) GetWelcomeMessage() string {
 }
 
 type CMsgDOTAChatChannelFullUpdate struct {
-	ChannelId        *uint64               `protobuf:"fixed64,1,opt,name=channel_id,json=channelId" json:"channel_id,omitempty"`
-	Members          []*CMsgDOTAChatMember `protobuf:"bytes,2,rep,name=members" json:"members,omitempty"`
-	XXX_unrecognized []byte                `json:"-"`
+	ChannelId            *uint64               `protobuf:"fixed64,1,opt,name=channel_id,json=channelId" json:"channel_id,omitempty"`
+	Members              []*CMsgDOTAChatMember `protobuf:"bytes,2,rep,name=members" json:"members,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}              `json:"-"`
+	XXX_unrecognized     []byte                `json:"-"`
+	XXX_sizecache        int32                 `json:"-"`
 }
 
-func (m *CMsgDOTAChatChannelFullUpdate) Reset()                    { *m = CMsgDOTAChatChannelFullUpdate{} }
-func (m *CMsgDOTAChatChannelFullUpdate) String() string            { return proto.CompactTextString(m) }
-func (*CMsgDOTAChatChannelFullUpdate) ProtoMessage()               {}
-func (*CMsgDOTAChatChannelFullUpdate) Descriptor() ([]byte, []int) { return fileDescriptor10, []int{14} }
+func (m *CMsgDOTAChatChannelFullUpdate) Reset()         { *m = CMsgDOTAChatChannelFullUpdate{} }
+func (m *CMsgDOTAChatChannelFullUpdate) String() string { return proto.CompactTextString(m) }
+func (*CMsgDOTAChatChannelFullUpdate) ProtoMessage()    {}
+func (*CMsgDOTAChatChannelFullUpdate) Descriptor() ([]byte, []int) {
+	return fileDescriptor_dota_gcmessages_client_chat_7f300d91dfb2de59, []int{14}
+}
+func (m *CMsgDOTAChatChannelFullUpdate) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTAChatChannelFullUpdate.Unmarshal(m, b)
+}
+func (m *CMsgDOTAChatChannelFullUpdate) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTAChatChannelFullUpdate.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTAChatChannelFullUpdate) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAChatChannelFullUpdate.Merge(dst, src)
+}
+func (m *CMsgDOTAChatChannelFullUpdate) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTAChatChannelFullUpdate.Size(m)
+}
+func (m *CMsgDOTAChatChannelFullUpdate) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTAChatChannelFullUpdate.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTAChatChannelFullUpdate proto.InternalMessageInfo
 
 func (m *CMsgDOTAChatChannelFullUpdate) GetChannelId() uint64 {
 	if m != nil && m.ChannelId != nil {
@@ -1006,20 +1370,39 @@ func (m *CMsgDOTAChatChannelFullUpdate) GetMembers() []*CMsgDOTAChatMember {
 }
 
 type CMsgDOTAOtherJoinedChatChannel struct {
-	ChannelId        *uint64 `protobuf:"fixed64,1,opt,name=channel_id,json=channelId" json:"channel_id,omitempty"`
-	PersonaName      *string `protobuf:"bytes,2,opt,name=persona_name,json=personaName" json:"persona_name,omitempty"`
-	SteamId          *uint64 `protobuf:"fixed64,3,opt,name=steam_id,json=steamId" json:"steam_id,omitempty"`
-	ChannelUserId    *uint32 `protobuf:"varint,4,opt,name=channel_user_id,json=channelUserId" json:"channel_user_id,omitempty"`
-	Status           *uint32 `protobuf:"varint,5,opt,name=status" json:"status,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	ChannelId            *uint64  `protobuf:"fixed64,1,opt,name=channel_id,json=channelId" json:"channel_id,omitempty"`
+	PersonaName          *string  `protobuf:"bytes,2,opt,name=persona_name,json=personaName" json:"persona_name,omitempty"`
+	SteamId              *uint64  `protobuf:"fixed64,3,opt,name=steam_id,json=steamId" json:"steam_id,omitempty"`
+	ChannelUserId        *uint32  `protobuf:"varint,4,opt,name=channel_user_id,json=channelUserId" json:"channel_user_id,omitempty"`
+	Status               *uint32  `protobuf:"varint,5,opt,name=status" json:"status,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *CMsgDOTAOtherJoinedChatChannel) Reset()         { *m = CMsgDOTAOtherJoinedChatChannel{} }
 func (m *CMsgDOTAOtherJoinedChatChannel) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTAOtherJoinedChatChannel) ProtoMessage()    {}
 func (*CMsgDOTAOtherJoinedChatChannel) Descriptor() ([]byte, []int) {
-	return fileDescriptor10, []int{15}
+	return fileDescriptor_dota_gcmessages_client_chat_7f300d91dfb2de59, []int{15}
 }
+func (m *CMsgDOTAOtherJoinedChatChannel) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTAOtherJoinedChatChannel.Unmarshal(m, b)
+}
+func (m *CMsgDOTAOtherJoinedChatChannel) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTAOtherJoinedChatChannel.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTAOtherJoinedChatChannel) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAOtherJoinedChatChannel.Merge(dst, src)
+}
+func (m *CMsgDOTAOtherJoinedChatChannel) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTAOtherJoinedChatChannel.Size(m)
+}
+func (m *CMsgDOTAOtherJoinedChatChannel) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTAOtherJoinedChatChannel.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTAOtherJoinedChatChannel proto.InternalMessageInfo
 
 func (m *CMsgDOTAOtherJoinedChatChannel) GetChannelId() uint64 {
 	if m != nil && m.ChannelId != nil {
@@ -1057,16 +1440,37 @@ func (m *CMsgDOTAOtherJoinedChatChannel) GetStatus() uint32 {
 }
 
 type CMsgDOTAOtherLeftChatChannel struct {
-	ChannelId        *uint64 `protobuf:"fixed64,1,opt,name=channel_id,json=channelId" json:"channel_id,omitempty"`
-	SteamId          *uint64 `protobuf:"fixed64,2,opt,name=steam_id,json=steamId" json:"steam_id,omitempty"`
-	ChannelUserId    *uint32 `protobuf:"varint,3,opt,name=channel_user_id,json=channelUserId" json:"channel_user_id,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	ChannelId            *uint64  `protobuf:"fixed64,1,opt,name=channel_id,json=channelId" json:"channel_id,omitempty"`
+	SteamId              *uint64  `protobuf:"fixed64,2,opt,name=steam_id,json=steamId" json:"steam_id,omitempty"`
+	ChannelUserId        *uint32  `protobuf:"varint,3,opt,name=channel_user_id,json=channelUserId" json:"channel_user_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CMsgDOTAOtherLeftChatChannel) Reset()                    { *m = CMsgDOTAOtherLeftChatChannel{} }
-func (m *CMsgDOTAOtherLeftChatChannel) String() string            { return proto.CompactTextString(m) }
-func (*CMsgDOTAOtherLeftChatChannel) ProtoMessage()               {}
-func (*CMsgDOTAOtherLeftChatChannel) Descriptor() ([]byte, []int) { return fileDescriptor10, []int{16} }
+func (m *CMsgDOTAOtherLeftChatChannel) Reset()         { *m = CMsgDOTAOtherLeftChatChannel{} }
+func (m *CMsgDOTAOtherLeftChatChannel) String() string { return proto.CompactTextString(m) }
+func (*CMsgDOTAOtherLeftChatChannel) ProtoMessage()    {}
+func (*CMsgDOTAOtherLeftChatChannel) Descriptor() ([]byte, []int) {
+	return fileDescriptor_dota_gcmessages_client_chat_7f300d91dfb2de59, []int{16}
+}
+func (m *CMsgDOTAOtherLeftChatChannel) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTAOtherLeftChatChannel.Unmarshal(m, b)
+}
+func (m *CMsgDOTAOtherLeftChatChannel) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTAOtherLeftChatChannel.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTAOtherLeftChatChannel) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAOtherLeftChatChannel.Merge(dst, src)
+}
+func (m *CMsgDOTAOtherLeftChatChannel) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTAOtherLeftChatChannel.Size(m)
+}
+func (m *CMsgDOTAOtherLeftChatChannel) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTAOtherLeftChatChannel.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTAOtherLeftChatChannel proto.InternalMessageInfo
 
 func (m *CMsgDOTAOtherLeftChatChannel) GetChannelId() uint64 {
 	if m != nil && m.ChannelId != nil {
@@ -1090,18 +1494,37 @@ func (m *CMsgDOTAOtherLeftChatChannel) GetChannelUserId() uint32 {
 }
 
 type CMsgDOTAChatChannelMemberUpdate struct {
-	ChannelId        *uint64                                         `protobuf:"fixed64,1,opt,name=channel_id,json=channelId" json:"channel_id,omitempty"`
-	LeftSteamIds     []uint64                                        `protobuf:"fixed64,2,rep,name=left_steam_ids,json=leftSteamIds" json:"left_steam_ids,omitempty"`
-	JoinedMembers    []*CMsgDOTAChatChannelMemberUpdate_JoinedMember `protobuf:"bytes,3,rep,name=joined_members,json=joinedMembers" json:"joined_members,omitempty"`
-	XXX_unrecognized []byte                                          `json:"-"`
+	ChannelId            *uint64                                         `protobuf:"fixed64,1,opt,name=channel_id,json=channelId" json:"channel_id,omitempty"`
+	LeftSteamIds         []uint64                                        `protobuf:"fixed64,2,rep,name=left_steam_ids,json=leftSteamIds" json:"left_steam_ids,omitempty"`
+	JoinedMembers        []*CMsgDOTAChatChannelMemberUpdate_JoinedMember `protobuf:"bytes,3,rep,name=joined_members,json=joinedMembers" json:"joined_members,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                        `json:"-"`
+	XXX_unrecognized     []byte                                          `json:"-"`
+	XXX_sizecache        int32                                           `json:"-"`
 }
 
 func (m *CMsgDOTAChatChannelMemberUpdate) Reset()         { *m = CMsgDOTAChatChannelMemberUpdate{} }
 func (m *CMsgDOTAChatChannelMemberUpdate) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTAChatChannelMemberUpdate) ProtoMessage()    {}
 func (*CMsgDOTAChatChannelMemberUpdate) Descriptor() ([]byte, []int) {
-	return fileDescriptor10, []int{17}
+	return fileDescriptor_dota_gcmessages_client_chat_7f300d91dfb2de59, []int{17}
 }
+func (m *CMsgDOTAChatChannelMemberUpdate) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTAChatChannelMemberUpdate.Unmarshal(m, b)
+}
+func (m *CMsgDOTAChatChannelMemberUpdate) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTAChatChannelMemberUpdate.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTAChatChannelMemberUpdate) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAChatChannelMemberUpdate.Merge(dst, src)
+}
+func (m *CMsgDOTAChatChannelMemberUpdate) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTAChatChannelMemberUpdate.Size(m)
+}
+func (m *CMsgDOTAChatChannelMemberUpdate) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTAChatChannelMemberUpdate.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTAChatChannelMemberUpdate proto.InternalMessageInfo
 
 func (m *CMsgDOTAChatChannelMemberUpdate) GetChannelId() uint64 {
 	if m != nil && m.ChannelId != nil {
@@ -1125,11 +1548,13 @@ func (m *CMsgDOTAChatChannelMemberUpdate) GetJoinedMembers() []*CMsgDOTAChatChan
 }
 
 type CMsgDOTAChatChannelMemberUpdate_JoinedMember struct {
-	SteamId          *uint64 `protobuf:"fixed64,1,opt,name=steam_id,json=steamId" json:"steam_id,omitempty"`
-	PersonaName      *string `protobuf:"bytes,2,opt,name=persona_name,json=personaName" json:"persona_name,omitempty"`
-	ChannelUserId    *uint32 `protobuf:"varint,3,opt,name=channel_user_id,json=channelUserId" json:"channel_user_id,omitempty"`
-	Status           *uint32 `protobuf:"varint,4,opt,name=status" json:"status,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	SteamId              *uint64  `protobuf:"fixed64,1,opt,name=steam_id,json=steamId" json:"steam_id,omitempty"`
+	PersonaName          *string  `protobuf:"bytes,2,opt,name=persona_name,json=personaName" json:"persona_name,omitempty"`
+	ChannelUserId        *uint32  `protobuf:"varint,3,opt,name=channel_user_id,json=channelUserId" json:"channel_user_id,omitempty"`
+	Status               *uint32  `protobuf:"varint,4,opt,name=status" json:"status,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *CMsgDOTAChatChannelMemberUpdate_JoinedMember) Reset() {
@@ -1140,8 +1565,25 @@ func (m *CMsgDOTAChatChannelMemberUpdate_JoinedMember) String() string {
 }
 func (*CMsgDOTAChatChannelMemberUpdate_JoinedMember) ProtoMessage() {}
 func (*CMsgDOTAChatChannelMemberUpdate_JoinedMember) Descriptor() ([]byte, []int) {
-	return fileDescriptor10, []int{17, 0}
+	return fileDescriptor_dota_gcmessages_client_chat_7f300d91dfb2de59, []int{17, 0}
 }
+func (m *CMsgDOTAChatChannelMemberUpdate_JoinedMember) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTAChatChannelMemberUpdate_JoinedMember.Unmarshal(m, b)
+}
+func (m *CMsgDOTAChatChannelMemberUpdate_JoinedMember) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTAChatChannelMemberUpdate_JoinedMember.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTAChatChannelMemberUpdate_JoinedMember) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAChatChannelMemberUpdate_JoinedMember.Merge(dst, src)
+}
+func (m *CMsgDOTAChatChannelMemberUpdate_JoinedMember) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTAChatChannelMemberUpdate_JoinedMember.Size(m)
+}
+func (m *CMsgDOTAChatChannelMemberUpdate_JoinedMember) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTAChatChannelMemberUpdate_JoinedMember.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTAChatChannelMemberUpdate_JoinedMember proto.InternalMessageInfo
 
 func (m *CMsgDOTAChatChannelMemberUpdate_JoinedMember) GetSteamId() uint64 {
 	if m != nil && m.SteamId != nil {
@@ -1172,19 +1614,40 @@ func (m *CMsgDOTAChatChannelMemberUpdate_JoinedMember) GetStatus() uint32 {
 }
 
 type CMsgDOTARequestChatChannelList struct {
-	XXX_unrecognized []byte `json:"-"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *CMsgDOTARequestChatChannelList) Reset()         { *m = CMsgDOTARequestChatChannelList{} }
 func (m *CMsgDOTARequestChatChannelList) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTARequestChatChannelList) ProtoMessage()    {}
 func (*CMsgDOTARequestChatChannelList) Descriptor() ([]byte, []int) {
-	return fileDescriptor10, []int{18}
+	return fileDescriptor_dota_gcmessages_client_chat_7f300d91dfb2de59, []int{18}
+}
+func (m *CMsgDOTARequestChatChannelList) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTARequestChatChannelList.Unmarshal(m, b)
+}
+func (m *CMsgDOTARequestChatChannelList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTARequestChatChannelList.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTARequestChatChannelList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTARequestChatChannelList.Merge(dst, src)
+}
+func (m *CMsgDOTARequestChatChannelList) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTARequestChatChannelList.Size(m)
+}
+func (m *CMsgDOTARequestChatChannelList) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTARequestChatChannelList.DiscardUnknown(m)
 }
 
+var xxx_messageInfo_CMsgDOTARequestChatChannelList proto.InternalMessageInfo
+
 type CMsgDOTARequestChatChannelListResponse struct {
-	Channels         []*CMsgDOTARequestChatChannelListResponse_ChatChannel `protobuf:"bytes,1,rep,name=channels" json:"channels,omitempty"`
-	XXX_unrecognized []byte                                                `json:"-"`
+	Channels             []*CMsgDOTARequestChatChannelListResponse_ChatChannel `protobuf:"bytes,1,rep,name=channels" json:"channels,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                              `json:"-"`
+	XXX_unrecognized     []byte                                                `json:"-"`
+	XXX_sizecache        int32                                                 `json:"-"`
 }
 
 func (m *CMsgDOTARequestChatChannelListResponse) Reset() {
@@ -1193,8 +1656,25 @@ func (m *CMsgDOTARequestChatChannelListResponse) Reset() {
 func (m *CMsgDOTARequestChatChannelListResponse) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTARequestChatChannelListResponse) ProtoMessage()    {}
 func (*CMsgDOTARequestChatChannelListResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor10, []int{19}
+	return fileDescriptor_dota_gcmessages_client_chat_7f300d91dfb2de59, []int{19}
 }
+func (m *CMsgDOTARequestChatChannelListResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTARequestChatChannelListResponse.Unmarshal(m, b)
+}
+func (m *CMsgDOTARequestChatChannelListResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTARequestChatChannelListResponse.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTARequestChatChannelListResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTARequestChatChannelListResponse.Merge(dst, src)
+}
+func (m *CMsgDOTARequestChatChannelListResponse) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTARequestChatChannelListResponse.Size(m)
+}
+func (m *CMsgDOTARequestChatChannelListResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTARequestChatChannelListResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTARequestChatChannelListResponse proto.InternalMessageInfo
 
 func (m *CMsgDOTARequestChatChannelListResponse) GetChannels() []*CMsgDOTARequestChatChannelListResponse_ChatChannel {
 	if m != nil {
@@ -1204,10 +1684,12 @@ func (m *CMsgDOTARequestChatChannelListResponse) GetChannels() []*CMsgDOTAReques
 }
 
 type CMsgDOTARequestChatChannelListResponse_ChatChannel struct {
-	ChannelName      *string               `protobuf:"bytes,1,opt,name=channel_name,json=channelName" json:"channel_name,omitempty"`
-	NumMembers       *uint32               `protobuf:"varint,2,opt,name=num_members,json=numMembers" json:"num_members,omitempty"`
-	ChannelType      *DOTAChatChannelTypeT `protobuf:"varint,3,opt,name=channel_type,json=channelType,enum=dota.DOTAChatChannelTypeT,def=0" json:"channel_type,omitempty"`
-	XXX_unrecognized []byte                `json:"-"`
+	ChannelName          *string               `protobuf:"bytes,1,opt,name=channel_name,json=channelName" json:"channel_name,omitempty"`
+	NumMembers           *uint32               `protobuf:"varint,2,opt,name=num_members,json=numMembers" json:"num_members,omitempty"`
+	ChannelType          *DOTAChatChannelTypeT `protobuf:"varint,3,opt,name=channel_type,json=channelType,enum=dota.DOTAChatChannelTypeT,def=0" json:"channel_type,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}              `json:"-"`
+	XXX_unrecognized     []byte                `json:"-"`
+	XXX_sizecache        int32                 `json:"-"`
 }
 
 func (m *CMsgDOTARequestChatChannelListResponse_ChatChannel) Reset() {
@@ -1218,8 +1700,25 @@ func (m *CMsgDOTARequestChatChannelListResponse_ChatChannel) String() string {
 }
 func (*CMsgDOTARequestChatChannelListResponse_ChatChannel) ProtoMessage() {}
 func (*CMsgDOTARequestChatChannelListResponse_ChatChannel) Descriptor() ([]byte, []int) {
-	return fileDescriptor10, []int{19, 0}
+	return fileDescriptor_dota_gcmessages_client_chat_7f300d91dfb2de59, []int{19, 0}
 }
+func (m *CMsgDOTARequestChatChannelListResponse_ChatChannel) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTARequestChatChannelListResponse_ChatChannel.Unmarshal(m, b)
+}
+func (m *CMsgDOTARequestChatChannelListResponse_ChatChannel) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTARequestChatChannelListResponse_ChatChannel.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTARequestChatChannelListResponse_ChatChannel) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTARequestChatChannelListResponse_ChatChannel.Merge(dst, src)
+}
+func (m *CMsgDOTARequestChatChannelListResponse_ChatChannel) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTARequestChatChannelListResponse_ChatChannel.Size(m)
+}
+func (m *CMsgDOTARequestChatChannelListResponse_ChatChannel) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTARequestChatChannelListResponse_ChatChannel.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTARequestChatChannelListResponse_ChatChannel proto.InternalMessageInfo
 
 const Default_CMsgDOTARequestChatChannelListResponse_ChatChannel_ChannelType DOTAChatChannelTypeT = DOTAChatChannelTypeT_DOTAChannelType_Regional
 
@@ -1245,14 +1744,35 @@ func (m *CMsgDOTARequestChatChannelListResponse_ChatChannel) GetChannelType() DO
 }
 
 type CMsgDOTAChatGetUserList struct {
-	ChannelId        *uint64 `protobuf:"fixed64,1,opt,name=channel_id,json=channelId" json:"channel_id,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	ChannelId            *uint64  `protobuf:"fixed64,1,opt,name=channel_id,json=channelId" json:"channel_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CMsgDOTAChatGetUserList) Reset()                    { *m = CMsgDOTAChatGetUserList{} }
-func (m *CMsgDOTAChatGetUserList) String() string            { return proto.CompactTextString(m) }
-func (*CMsgDOTAChatGetUserList) ProtoMessage()               {}
-func (*CMsgDOTAChatGetUserList) Descriptor() ([]byte, []int) { return fileDescriptor10, []int{20} }
+func (m *CMsgDOTAChatGetUserList) Reset()         { *m = CMsgDOTAChatGetUserList{} }
+func (m *CMsgDOTAChatGetUserList) String() string { return proto.CompactTextString(m) }
+func (*CMsgDOTAChatGetUserList) ProtoMessage()    {}
+func (*CMsgDOTAChatGetUserList) Descriptor() ([]byte, []int) {
+	return fileDescriptor_dota_gcmessages_client_chat_7f300d91dfb2de59, []int{20}
+}
+func (m *CMsgDOTAChatGetUserList) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTAChatGetUserList.Unmarshal(m, b)
+}
+func (m *CMsgDOTAChatGetUserList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTAChatGetUserList.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTAChatGetUserList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAChatGetUserList.Merge(dst, src)
+}
+func (m *CMsgDOTAChatGetUserList) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTAChatGetUserList.Size(m)
+}
+func (m *CMsgDOTAChatGetUserList) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTAChatGetUserList.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTAChatGetUserList proto.InternalMessageInfo
 
 func (m *CMsgDOTAChatGetUserList) GetChannelId() uint64 {
 	if m != nil && m.ChannelId != nil {
@@ -1262,17 +1782,36 @@ func (m *CMsgDOTAChatGetUserList) GetChannelId() uint64 {
 }
 
 type CMsgDOTAChatGetUserListResponse struct {
-	ChannelId        *uint64                                   `protobuf:"fixed64,1,opt,name=channel_id,json=channelId" json:"channel_id,omitempty"`
-	Members          []*CMsgDOTAChatGetUserListResponse_Member `protobuf:"bytes,2,rep,name=members" json:"members,omitempty"`
-	XXX_unrecognized []byte                                    `json:"-"`
+	ChannelId            *uint64                                   `protobuf:"fixed64,1,opt,name=channel_id,json=channelId" json:"channel_id,omitempty"`
+	Members              []*CMsgDOTAChatGetUserListResponse_Member `protobuf:"bytes,2,rep,name=members" json:"members,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                  `json:"-"`
+	XXX_unrecognized     []byte                                    `json:"-"`
+	XXX_sizecache        int32                                     `json:"-"`
 }
 
 func (m *CMsgDOTAChatGetUserListResponse) Reset()         { *m = CMsgDOTAChatGetUserListResponse{} }
 func (m *CMsgDOTAChatGetUserListResponse) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTAChatGetUserListResponse) ProtoMessage()    {}
 func (*CMsgDOTAChatGetUserListResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor10, []int{21}
+	return fileDescriptor_dota_gcmessages_client_chat_7f300d91dfb2de59, []int{21}
 }
+func (m *CMsgDOTAChatGetUserListResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTAChatGetUserListResponse.Unmarshal(m, b)
+}
+func (m *CMsgDOTAChatGetUserListResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTAChatGetUserListResponse.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTAChatGetUserListResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAChatGetUserListResponse.Merge(dst, src)
+}
+func (m *CMsgDOTAChatGetUserListResponse) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTAChatGetUserListResponse.Size(m)
+}
+func (m *CMsgDOTAChatGetUserListResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTAChatGetUserListResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTAChatGetUserListResponse proto.InternalMessageInfo
 
 func (m *CMsgDOTAChatGetUserListResponse) GetChannelId() uint64 {
 	if m != nil && m.ChannelId != nil {
@@ -1289,11 +1828,13 @@ func (m *CMsgDOTAChatGetUserListResponse) GetMembers() []*CMsgDOTAChatGetUserLis
 }
 
 type CMsgDOTAChatGetUserListResponse_Member struct {
-	SteamId          *uint64 `protobuf:"fixed64,1,opt,name=steam_id,json=steamId" json:"steam_id,omitempty"`
-	PersonaName      *string `protobuf:"bytes,2,opt,name=persona_name,json=personaName" json:"persona_name,omitempty"`
-	ChannelUserId    *uint32 `protobuf:"varint,3,opt,name=channel_user_id,json=channelUserId" json:"channel_user_id,omitempty"`
-	Status           *uint32 `protobuf:"varint,4,opt,name=status" json:"status,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	SteamId              *uint64  `protobuf:"fixed64,1,opt,name=steam_id,json=steamId" json:"steam_id,omitempty"`
+	PersonaName          *string  `protobuf:"bytes,2,opt,name=persona_name,json=personaName" json:"persona_name,omitempty"`
+	ChannelUserId        *uint32  `protobuf:"varint,3,opt,name=channel_user_id,json=channelUserId" json:"channel_user_id,omitempty"`
+	Status               *uint32  `protobuf:"varint,4,opt,name=status" json:"status,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *CMsgDOTAChatGetUserListResponse_Member) Reset() {
@@ -1302,8 +1843,25 @@ func (m *CMsgDOTAChatGetUserListResponse_Member) Reset() {
 func (m *CMsgDOTAChatGetUserListResponse_Member) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTAChatGetUserListResponse_Member) ProtoMessage()    {}
 func (*CMsgDOTAChatGetUserListResponse_Member) Descriptor() ([]byte, []int) {
-	return fileDescriptor10, []int{21, 0}
+	return fileDescriptor_dota_gcmessages_client_chat_7f300d91dfb2de59, []int{21, 0}
 }
+func (m *CMsgDOTAChatGetUserListResponse_Member) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTAChatGetUserListResponse_Member.Unmarshal(m, b)
+}
+func (m *CMsgDOTAChatGetUserListResponse_Member) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTAChatGetUserListResponse_Member.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTAChatGetUserListResponse_Member) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAChatGetUserListResponse_Member.Merge(dst, src)
+}
+func (m *CMsgDOTAChatGetUserListResponse_Member) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTAChatGetUserListResponse_Member.Size(m)
+}
+func (m *CMsgDOTAChatGetUserListResponse_Member) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTAChatGetUserListResponse_Member.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTAChatGetUserListResponse_Member proto.InternalMessageInfo
 
 func (m *CMsgDOTAChatGetUserListResponse_Member) GetSteamId() uint64 {
 	if m != nil && m.SteamId != nil {
@@ -1334,15 +1892,36 @@ func (m *CMsgDOTAChatGetUserListResponse_Member) GetStatus() uint32 {
 }
 
 type CMsgDOTAChatGetMemberCount struct {
-	ChannelName      *string               `protobuf:"bytes,1,opt,name=channel_name,json=channelName" json:"channel_name,omitempty"`
-	ChannelType      *DOTAChatChannelTypeT `protobuf:"varint,2,opt,name=channel_type,json=channelType,enum=dota.DOTAChatChannelTypeT,def=0" json:"channel_type,omitempty"`
-	XXX_unrecognized []byte                `json:"-"`
+	ChannelName          *string               `protobuf:"bytes,1,opt,name=channel_name,json=channelName" json:"channel_name,omitempty"`
+	ChannelType          *DOTAChatChannelTypeT `protobuf:"varint,2,opt,name=channel_type,json=channelType,enum=dota.DOTAChatChannelTypeT,def=0" json:"channel_type,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}              `json:"-"`
+	XXX_unrecognized     []byte                `json:"-"`
+	XXX_sizecache        int32                 `json:"-"`
 }
 
-func (m *CMsgDOTAChatGetMemberCount) Reset()                    { *m = CMsgDOTAChatGetMemberCount{} }
-func (m *CMsgDOTAChatGetMemberCount) String() string            { return proto.CompactTextString(m) }
-func (*CMsgDOTAChatGetMemberCount) ProtoMessage()               {}
-func (*CMsgDOTAChatGetMemberCount) Descriptor() ([]byte, []int) { return fileDescriptor10, []int{22} }
+func (m *CMsgDOTAChatGetMemberCount) Reset()         { *m = CMsgDOTAChatGetMemberCount{} }
+func (m *CMsgDOTAChatGetMemberCount) String() string { return proto.CompactTextString(m) }
+func (*CMsgDOTAChatGetMemberCount) ProtoMessage()    {}
+func (*CMsgDOTAChatGetMemberCount) Descriptor() ([]byte, []int) {
+	return fileDescriptor_dota_gcmessages_client_chat_7f300d91dfb2de59, []int{22}
+}
+func (m *CMsgDOTAChatGetMemberCount) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTAChatGetMemberCount.Unmarshal(m, b)
+}
+func (m *CMsgDOTAChatGetMemberCount) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTAChatGetMemberCount.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTAChatGetMemberCount) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAChatGetMemberCount.Merge(dst, src)
+}
+func (m *CMsgDOTAChatGetMemberCount) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTAChatGetMemberCount.Size(m)
+}
+func (m *CMsgDOTAChatGetMemberCount) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTAChatGetMemberCount.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTAChatGetMemberCount proto.InternalMessageInfo
 
 const Default_CMsgDOTAChatGetMemberCount_ChannelType DOTAChatChannelTypeT = DOTAChatChannelTypeT_DOTAChannelType_Regional
 
@@ -1361,18 +1940,37 @@ func (m *CMsgDOTAChatGetMemberCount) GetChannelType() DOTAChatChannelTypeT {
 }
 
 type CMsgDOTAChatGetMemberCountResponse struct {
-	ChannelName      *string               `protobuf:"bytes,1,opt,name=channel_name,json=channelName" json:"channel_name,omitempty"`
-	ChannelType      *DOTAChatChannelTypeT `protobuf:"varint,2,opt,name=channel_type,json=channelType,enum=dota.DOTAChatChannelTypeT,def=0" json:"channel_type,omitempty"`
-	MemberCount      *uint32               `protobuf:"varint,3,opt,name=member_count,json=memberCount" json:"member_count,omitempty"`
-	XXX_unrecognized []byte                `json:"-"`
+	ChannelName          *string               `protobuf:"bytes,1,opt,name=channel_name,json=channelName" json:"channel_name,omitempty"`
+	ChannelType          *DOTAChatChannelTypeT `protobuf:"varint,2,opt,name=channel_type,json=channelType,enum=dota.DOTAChatChannelTypeT,def=0" json:"channel_type,omitempty"`
+	MemberCount          *uint32               `protobuf:"varint,3,opt,name=member_count,json=memberCount" json:"member_count,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}              `json:"-"`
+	XXX_unrecognized     []byte                `json:"-"`
+	XXX_sizecache        int32                 `json:"-"`
 }
 
 func (m *CMsgDOTAChatGetMemberCountResponse) Reset()         { *m = CMsgDOTAChatGetMemberCountResponse{} }
 func (m *CMsgDOTAChatGetMemberCountResponse) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTAChatGetMemberCountResponse) ProtoMessage()    {}
 func (*CMsgDOTAChatGetMemberCountResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor10, []int{23}
+	return fileDescriptor_dota_gcmessages_client_chat_7f300d91dfb2de59, []int{23}
 }
+func (m *CMsgDOTAChatGetMemberCountResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTAChatGetMemberCountResponse.Unmarshal(m, b)
+}
+func (m *CMsgDOTAChatGetMemberCountResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTAChatGetMemberCountResponse.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTAChatGetMemberCountResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAChatGetMemberCountResponse.Merge(dst, src)
+}
+func (m *CMsgDOTAChatGetMemberCountResponse) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTAChatGetMemberCountResponse.Size(m)
+}
+func (m *CMsgDOTAChatGetMemberCountResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTAChatGetMemberCountResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTAChatGetMemberCountResponse proto.InternalMessageInfo
 
 const Default_CMsgDOTAChatGetMemberCountResponse_ChannelType DOTAChatChannelTypeT = DOTAChatChannelTypeT_DOTAChannelType_Regional
 
@@ -1398,15 +1996,36 @@ func (m *CMsgDOTAChatGetMemberCountResponse) GetMemberCount() uint32 {
 }
 
 type CMsgDOTAChatRegionsEnabled struct {
-	EnableAllRegions *bool                                `protobuf:"varint,1,opt,name=enable_all_regions,json=enableAllRegions" json:"enable_all_regions,omitempty"`
-	EnabledRegions   []*CMsgDOTAChatRegionsEnabled_Region `protobuf:"bytes,2,rep,name=enabled_regions,json=enabledRegions" json:"enabled_regions,omitempty"`
-	XXX_unrecognized []byte                               `json:"-"`
+	EnableAllRegions     *bool                                `protobuf:"varint,1,opt,name=enable_all_regions,json=enableAllRegions" json:"enable_all_regions,omitempty"`
+	EnabledRegions       []*CMsgDOTAChatRegionsEnabled_Region `protobuf:"bytes,2,rep,name=enabled_regions,json=enabledRegions" json:"enabled_regions,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                             `json:"-"`
+	XXX_unrecognized     []byte                               `json:"-"`
+	XXX_sizecache        int32                                `json:"-"`
 }
 
-func (m *CMsgDOTAChatRegionsEnabled) Reset()                    { *m = CMsgDOTAChatRegionsEnabled{} }
-func (m *CMsgDOTAChatRegionsEnabled) String() string            { return proto.CompactTextString(m) }
-func (*CMsgDOTAChatRegionsEnabled) ProtoMessage()               {}
-func (*CMsgDOTAChatRegionsEnabled) Descriptor() ([]byte, []int) { return fileDescriptor10, []int{24} }
+func (m *CMsgDOTAChatRegionsEnabled) Reset()         { *m = CMsgDOTAChatRegionsEnabled{} }
+func (m *CMsgDOTAChatRegionsEnabled) String() string { return proto.CompactTextString(m) }
+func (*CMsgDOTAChatRegionsEnabled) ProtoMessage()    {}
+func (*CMsgDOTAChatRegionsEnabled) Descriptor() ([]byte, []int) {
+	return fileDescriptor_dota_gcmessages_client_chat_7f300d91dfb2de59, []int{24}
+}
+func (m *CMsgDOTAChatRegionsEnabled) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTAChatRegionsEnabled.Unmarshal(m, b)
+}
+func (m *CMsgDOTAChatRegionsEnabled) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTAChatRegionsEnabled.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTAChatRegionsEnabled) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAChatRegionsEnabled.Merge(dst, src)
+}
+func (m *CMsgDOTAChatRegionsEnabled) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTAChatRegionsEnabled.Size(m)
+}
+func (m *CMsgDOTAChatRegionsEnabled) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTAChatRegionsEnabled.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTAChatRegionsEnabled proto.InternalMessageInfo
 
 func (m *CMsgDOTAChatRegionsEnabled) GetEnableAllRegions() bool {
 	if m != nil && m.EnableAllRegions != nil {
@@ -1423,19 +2042,38 @@ func (m *CMsgDOTAChatRegionsEnabled) GetEnabledRegions() []*CMsgDOTAChatRegionsE
 }
 
 type CMsgDOTAChatRegionsEnabled_Region struct {
-	MinLatitude      *float32 `protobuf:"fixed32,1,opt,name=min_latitude,json=minLatitude" json:"min_latitude,omitempty"`
-	MaxLatitude      *float32 `protobuf:"fixed32,2,opt,name=max_latitude,json=maxLatitude" json:"max_latitude,omitempty"`
-	MinLongitude     *float32 `protobuf:"fixed32,3,opt,name=min_longitude,json=minLongitude" json:"min_longitude,omitempty"`
-	MaxLongitude     *float32 `protobuf:"fixed32,4,opt,name=max_longitude,json=maxLongitude" json:"max_longitude,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	MinLatitude          *float32 `protobuf:"fixed32,1,opt,name=min_latitude,json=minLatitude" json:"min_latitude,omitempty"`
+	MaxLatitude          *float32 `protobuf:"fixed32,2,opt,name=max_latitude,json=maxLatitude" json:"max_latitude,omitempty"`
+	MinLongitude         *float32 `protobuf:"fixed32,3,opt,name=min_longitude,json=minLongitude" json:"min_longitude,omitempty"`
+	MaxLongitude         *float32 `protobuf:"fixed32,4,opt,name=max_longitude,json=maxLongitude" json:"max_longitude,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *CMsgDOTAChatRegionsEnabled_Region) Reset()         { *m = CMsgDOTAChatRegionsEnabled_Region{} }
 func (m *CMsgDOTAChatRegionsEnabled_Region) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTAChatRegionsEnabled_Region) ProtoMessage()    {}
 func (*CMsgDOTAChatRegionsEnabled_Region) Descriptor() ([]byte, []int) {
-	return fileDescriptor10, []int{24, 0}
+	return fileDescriptor_dota_gcmessages_client_chat_7f300d91dfb2de59, []int{24, 0}
 }
+func (m *CMsgDOTAChatRegionsEnabled_Region) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTAChatRegionsEnabled_Region.Unmarshal(m, b)
+}
+func (m *CMsgDOTAChatRegionsEnabled_Region) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTAChatRegionsEnabled_Region.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTAChatRegionsEnabled_Region) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAChatRegionsEnabled_Region.Merge(dst, src)
+}
+func (m *CMsgDOTAChatRegionsEnabled_Region) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTAChatRegionsEnabled_Region.Size(m)
+}
+func (m *CMsgDOTAChatRegionsEnabled_Region) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTAChatRegionsEnabled_Region.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTAChatRegionsEnabled_Region proto.InternalMessageInfo
 
 func (m *CMsgDOTAChatRegionsEnabled_Region) GetMinLatitude() float32 {
 	if m != nil && m.MinLatitude != nil {
@@ -1502,9 +2140,11 @@ func init() {
 	proto.RegisterEnum("dota.CMsgDOTAJoinChatChannelResponse_Result", CMsgDOTAJoinChatChannelResponse_Result_name, CMsgDOTAJoinChatChannelResponse_Result_value)
 }
 
-func init() { proto.RegisterFile("dota_gcmessages_client_chat.proto", fileDescriptor10) }
+func init() {
+	proto.RegisterFile("dota_gcmessages_client_chat.proto", fileDescriptor_dota_gcmessages_client_chat_7f300d91dfb2de59)
+}
 
-var fileDescriptor10 = []byte{
+var fileDescriptor_dota_gcmessages_client_chat_7f300d91dfb2de59 = []byte{
 	// 2420 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xc4, 0x18, 0x4b, 0x53, 0x23, 0xc7,
 	0xd9, 0x23, 0x5e, 0xd2, 0x27, 0x10, 0x43, 0xc3, 0xc2, 0x20, 0xcc, 0x02, 0xb2, 0x63, 0x53, 0xae,

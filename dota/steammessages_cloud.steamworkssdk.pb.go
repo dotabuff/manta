@@ -12,17 +12,42 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the proto package it is being compiled against.
+// A compilation error at this line likely means your copy of the
+// proto package needs to be updated.
+const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+
 type CCloud_GetUploadServerInfo_Request struct {
-	Appid            *uint32 `protobuf:"varint,1,opt,name=appid" json:"appid,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Appid                *uint32  `protobuf:"varint,1,opt,name=appid" json:"appid,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *CCloud_GetUploadServerInfo_Request) Reset()         { *m = CCloud_GetUploadServerInfo_Request{} }
 func (m *CCloud_GetUploadServerInfo_Request) String() string { return proto.CompactTextString(m) }
 func (*CCloud_GetUploadServerInfo_Request) ProtoMessage()    {}
 func (*CCloud_GetUploadServerInfo_Request) Descriptor() ([]byte, []int) {
-	return fileDescriptor36, []int{0}
+	return fileDescriptor_steammessages_cloud_steamworkssdk_d7e08337cd0a63c3, []int{0}
 }
+func (m *CCloud_GetUploadServerInfo_Request) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CCloud_GetUploadServerInfo_Request.Unmarshal(m, b)
+}
+func (m *CCloud_GetUploadServerInfo_Request) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CCloud_GetUploadServerInfo_Request.Marshal(b, m, deterministic)
+}
+func (dst *CCloud_GetUploadServerInfo_Request) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCloud_GetUploadServerInfo_Request.Merge(dst, src)
+}
+func (m *CCloud_GetUploadServerInfo_Request) XXX_Size() int {
+	return xxx_messageInfo_CCloud_GetUploadServerInfo_Request.Size(m)
+}
+func (m *CCloud_GetUploadServerInfo_Request) XXX_DiscardUnknown() {
+	xxx_messageInfo_CCloud_GetUploadServerInfo_Request.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CCloud_GetUploadServerInfo_Request proto.InternalMessageInfo
 
 func (m *CCloud_GetUploadServerInfo_Request) GetAppid() uint32 {
 	if m != nil && m.Appid != nil {
@@ -32,16 +57,35 @@ func (m *CCloud_GetUploadServerInfo_Request) GetAppid() uint32 {
 }
 
 type CCloud_GetUploadServerInfo_Response struct {
-	ServerUrl        *string `protobuf:"bytes,1,opt,name=server_url,json=serverUrl" json:"server_url,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	ServerUrl            *string  `protobuf:"bytes,1,opt,name=server_url,json=serverUrl" json:"server_url,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *CCloud_GetUploadServerInfo_Response) Reset()         { *m = CCloud_GetUploadServerInfo_Response{} }
 func (m *CCloud_GetUploadServerInfo_Response) String() string { return proto.CompactTextString(m) }
 func (*CCloud_GetUploadServerInfo_Response) ProtoMessage()    {}
 func (*CCloud_GetUploadServerInfo_Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor36, []int{1}
+	return fileDescriptor_steammessages_cloud_steamworkssdk_d7e08337cd0a63c3, []int{1}
 }
+func (m *CCloud_GetUploadServerInfo_Response) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CCloud_GetUploadServerInfo_Response.Unmarshal(m, b)
+}
+func (m *CCloud_GetUploadServerInfo_Response) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CCloud_GetUploadServerInfo_Response.Marshal(b, m, deterministic)
+}
+func (dst *CCloud_GetUploadServerInfo_Response) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCloud_GetUploadServerInfo_Response.Merge(dst, src)
+}
+func (m *CCloud_GetUploadServerInfo_Response) XXX_Size() int {
+	return xxx_messageInfo_CCloud_GetUploadServerInfo_Response.Size(m)
+}
+func (m *CCloud_GetUploadServerInfo_Response) XXX_DiscardUnknown() {
+	xxx_messageInfo_CCloud_GetUploadServerInfo_Response.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CCloud_GetUploadServerInfo_Response proto.InternalMessageInfo
 
 func (m *CCloud_GetUploadServerInfo_Response) GetServerUrl() string {
 	if m != nil && m.ServerUrl != nil {
@@ -51,15 +95,36 @@ func (m *CCloud_GetUploadServerInfo_Response) GetServerUrl() string {
 }
 
 type CCloud_GetFileDetails_Request struct {
-	Ugcid            *uint64 `protobuf:"varint,1,opt,name=ugcid" json:"ugcid,omitempty"`
-	Appid            *uint32 `protobuf:"varint,2,opt,name=appid" json:"appid,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Ugcid                *uint64  `protobuf:"varint,1,opt,name=ugcid" json:"ugcid,omitempty"`
+	Appid                *uint32  `protobuf:"varint,2,opt,name=appid" json:"appid,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CCloud_GetFileDetails_Request) Reset()                    { *m = CCloud_GetFileDetails_Request{} }
-func (m *CCloud_GetFileDetails_Request) String() string            { return proto.CompactTextString(m) }
-func (*CCloud_GetFileDetails_Request) ProtoMessage()               {}
-func (*CCloud_GetFileDetails_Request) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{2} }
+func (m *CCloud_GetFileDetails_Request) Reset()         { *m = CCloud_GetFileDetails_Request{} }
+func (m *CCloud_GetFileDetails_Request) String() string { return proto.CompactTextString(m) }
+func (*CCloud_GetFileDetails_Request) ProtoMessage()    {}
+func (*CCloud_GetFileDetails_Request) Descriptor() ([]byte, []int) {
+	return fileDescriptor_steammessages_cloud_steamworkssdk_d7e08337cd0a63c3, []int{2}
+}
+func (m *CCloud_GetFileDetails_Request) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CCloud_GetFileDetails_Request.Unmarshal(m, b)
+}
+func (m *CCloud_GetFileDetails_Request) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CCloud_GetFileDetails_Request.Marshal(b, m, deterministic)
+}
+func (dst *CCloud_GetFileDetails_Request) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCloud_GetFileDetails_Request.Merge(dst, src)
+}
+func (m *CCloud_GetFileDetails_Request) XXX_Size() int {
+	return xxx_messageInfo_CCloud_GetFileDetails_Request.Size(m)
+}
+func (m *CCloud_GetFileDetails_Request) XXX_DiscardUnknown() {
+	xxx_messageInfo_CCloud_GetFileDetails_Request.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CCloud_GetFileDetails_Request proto.InternalMessageInfo
 
 func (m *CCloud_GetFileDetails_Request) GetUgcid() uint64 {
 	if m != nil && m.Ugcid != nil {
@@ -76,20 +141,41 @@ func (m *CCloud_GetFileDetails_Request) GetAppid() uint32 {
 }
 
 type CCloud_UserFile struct {
-	Appid            *uint32 `protobuf:"varint,1,opt,name=appid" json:"appid,omitempty"`
-	Ugcid            *uint64 `protobuf:"varint,2,opt,name=ugcid" json:"ugcid,omitempty"`
-	Filename         *string `protobuf:"bytes,3,opt,name=filename" json:"filename,omitempty"`
-	Timestamp        *uint64 `protobuf:"varint,4,opt,name=timestamp" json:"timestamp,omitempty"`
-	FileSize         *uint32 `protobuf:"varint,5,opt,name=file_size,json=fileSize" json:"file_size,omitempty"`
-	Url              *string `protobuf:"bytes,6,opt,name=url" json:"url,omitempty"`
-	SteamidCreator   *uint64 `protobuf:"fixed64,7,opt,name=steamid_creator,json=steamidCreator" json:"steamid_creator,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Appid                *uint32  `protobuf:"varint,1,opt,name=appid" json:"appid,omitempty"`
+	Ugcid                *uint64  `protobuf:"varint,2,opt,name=ugcid" json:"ugcid,omitempty"`
+	Filename             *string  `protobuf:"bytes,3,opt,name=filename" json:"filename,omitempty"`
+	Timestamp            *uint64  `protobuf:"varint,4,opt,name=timestamp" json:"timestamp,omitempty"`
+	FileSize             *uint32  `protobuf:"varint,5,opt,name=file_size,json=fileSize" json:"file_size,omitempty"`
+	Url                  *string  `protobuf:"bytes,6,opt,name=url" json:"url,omitempty"`
+	SteamidCreator       *uint64  `protobuf:"fixed64,7,opt,name=steamid_creator,json=steamidCreator" json:"steamid_creator,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CCloud_UserFile) Reset()                    { *m = CCloud_UserFile{} }
-func (m *CCloud_UserFile) String() string            { return proto.CompactTextString(m) }
-func (*CCloud_UserFile) ProtoMessage()               {}
-func (*CCloud_UserFile) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{3} }
+func (m *CCloud_UserFile) Reset()         { *m = CCloud_UserFile{} }
+func (m *CCloud_UserFile) String() string { return proto.CompactTextString(m) }
+func (*CCloud_UserFile) ProtoMessage()    {}
+func (*CCloud_UserFile) Descriptor() ([]byte, []int) {
+	return fileDescriptor_steammessages_cloud_steamworkssdk_d7e08337cd0a63c3, []int{3}
+}
+func (m *CCloud_UserFile) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CCloud_UserFile.Unmarshal(m, b)
+}
+func (m *CCloud_UserFile) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CCloud_UserFile.Marshal(b, m, deterministic)
+}
+func (dst *CCloud_UserFile) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCloud_UserFile.Merge(dst, src)
+}
+func (m *CCloud_UserFile) XXX_Size() int {
+	return xxx_messageInfo_CCloud_UserFile.Size(m)
+}
+func (m *CCloud_UserFile) XXX_DiscardUnknown() {
+	xxx_messageInfo_CCloud_UserFile.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CCloud_UserFile proto.InternalMessageInfo
 
 func (m *CCloud_UserFile) GetAppid() uint32 {
 	if m != nil && m.Appid != nil {
@@ -141,14 +227,35 @@ func (m *CCloud_UserFile) GetSteamidCreator() uint64 {
 }
 
 type CCloud_GetFileDetails_Response struct {
-	Details          *CCloud_UserFile `protobuf:"bytes,1,opt,name=details" json:"details,omitempty"`
-	XXX_unrecognized []byte           `json:"-"`
+	Details              *CCloud_UserFile `protobuf:"bytes,1,opt,name=details" json:"details,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}         `json:"-"`
+	XXX_unrecognized     []byte           `json:"-"`
+	XXX_sizecache        int32            `json:"-"`
 }
 
-func (m *CCloud_GetFileDetails_Response) Reset()                    { *m = CCloud_GetFileDetails_Response{} }
-func (m *CCloud_GetFileDetails_Response) String() string            { return proto.CompactTextString(m) }
-func (*CCloud_GetFileDetails_Response) ProtoMessage()               {}
-func (*CCloud_GetFileDetails_Response) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{4} }
+func (m *CCloud_GetFileDetails_Response) Reset()         { *m = CCloud_GetFileDetails_Response{} }
+func (m *CCloud_GetFileDetails_Response) String() string { return proto.CompactTextString(m) }
+func (*CCloud_GetFileDetails_Response) ProtoMessage()    {}
+func (*CCloud_GetFileDetails_Response) Descriptor() ([]byte, []int) {
+	return fileDescriptor_steammessages_cloud_steamworkssdk_d7e08337cd0a63c3, []int{4}
+}
+func (m *CCloud_GetFileDetails_Response) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CCloud_GetFileDetails_Response.Unmarshal(m, b)
+}
+func (m *CCloud_GetFileDetails_Response) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CCloud_GetFileDetails_Response.Marshal(b, m, deterministic)
+}
+func (dst *CCloud_GetFileDetails_Response) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCloud_GetFileDetails_Response.Merge(dst, src)
+}
+func (m *CCloud_GetFileDetails_Response) XXX_Size() int {
+	return xxx_messageInfo_CCloud_GetFileDetails_Response.Size(m)
+}
+func (m *CCloud_GetFileDetails_Response) XXX_DiscardUnknown() {
+	xxx_messageInfo_CCloud_GetFileDetails_Response.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CCloud_GetFileDetails_Response proto.InternalMessageInfo
 
 func (m *CCloud_GetFileDetails_Response) GetDetails() *CCloud_UserFile {
 	if m != nil {
@@ -158,19 +265,38 @@ func (m *CCloud_GetFileDetails_Response) GetDetails() *CCloud_UserFile {
 }
 
 type CCloud_EnumerateUserFiles_Request struct {
-	Appid            *uint32 `protobuf:"varint,1,opt,name=appid" json:"appid,omitempty"`
-	ExtendedDetails  *bool   `protobuf:"varint,2,opt,name=extended_details,json=extendedDetails" json:"extended_details,omitempty"`
-	Count            *uint32 `protobuf:"varint,3,opt,name=count" json:"count,omitempty"`
-	StartIndex       *uint32 `protobuf:"varint,4,opt,name=start_index,json=startIndex" json:"start_index,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Appid                *uint32  `protobuf:"varint,1,opt,name=appid" json:"appid,omitempty"`
+	ExtendedDetails      *bool    `protobuf:"varint,2,opt,name=extended_details,json=extendedDetails" json:"extended_details,omitempty"`
+	Count                *uint32  `protobuf:"varint,3,opt,name=count" json:"count,omitempty"`
+	StartIndex           *uint32  `protobuf:"varint,4,opt,name=start_index,json=startIndex" json:"start_index,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *CCloud_EnumerateUserFiles_Request) Reset()         { *m = CCloud_EnumerateUserFiles_Request{} }
 func (m *CCloud_EnumerateUserFiles_Request) String() string { return proto.CompactTextString(m) }
 func (*CCloud_EnumerateUserFiles_Request) ProtoMessage()    {}
 func (*CCloud_EnumerateUserFiles_Request) Descriptor() ([]byte, []int) {
-	return fileDescriptor36, []int{5}
+	return fileDescriptor_steammessages_cloud_steamworkssdk_d7e08337cd0a63c3, []int{5}
 }
+func (m *CCloud_EnumerateUserFiles_Request) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CCloud_EnumerateUserFiles_Request.Unmarshal(m, b)
+}
+func (m *CCloud_EnumerateUserFiles_Request) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CCloud_EnumerateUserFiles_Request.Marshal(b, m, deterministic)
+}
+func (dst *CCloud_EnumerateUserFiles_Request) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCloud_EnumerateUserFiles_Request.Merge(dst, src)
+}
+func (m *CCloud_EnumerateUserFiles_Request) XXX_Size() int {
+	return xxx_messageInfo_CCloud_EnumerateUserFiles_Request.Size(m)
+}
+func (m *CCloud_EnumerateUserFiles_Request) XXX_DiscardUnknown() {
+	xxx_messageInfo_CCloud_EnumerateUserFiles_Request.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CCloud_EnumerateUserFiles_Request proto.InternalMessageInfo
 
 func (m *CCloud_EnumerateUserFiles_Request) GetAppid() uint32 {
 	if m != nil && m.Appid != nil {
@@ -201,17 +327,36 @@ func (m *CCloud_EnumerateUserFiles_Request) GetStartIndex() uint32 {
 }
 
 type CCloud_EnumerateUserFiles_Response struct {
-	Files            []*CCloud_UserFile `protobuf:"bytes,1,rep,name=files" json:"files,omitempty"`
-	TotalFiles       *uint32            `protobuf:"varint,2,opt,name=total_files,json=totalFiles" json:"total_files,omitempty"`
-	XXX_unrecognized []byte             `json:"-"`
+	Files                []*CCloud_UserFile `protobuf:"bytes,1,rep,name=files" json:"files,omitempty"`
+	TotalFiles           *uint32            `protobuf:"varint,2,opt,name=total_files,json=totalFiles" json:"total_files,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}           `json:"-"`
+	XXX_unrecognized     []byte             `json:"-"`
+	XXX_sizecache        int32              `json:"-"`
 }
 
 func (m *CCloud_EnumerateUserFiles_Response) Reset()         { *m = CCloud_EnumerateUserFiles_Response{} }
 func (m *CCloud_EnumerateUserFiles_Response) String() string { return proto.CompactTextString(m) }
 func (*CCloud_EnumerateUserFiles_Response) ProtoMessage()    {}
 func (*CCloud_EnumerateUserFiles_Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor36, []int{6}
+	return fileDescriptor_steammessages_cloud_steamworkssdk_d7e08337cd0a63c3, []int{6}
 }
+func (m *CCloud_EnumerateUserFiles_Response) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CCloud_EnumerateUserFiles_Response.Unmarshal(m, b)
+}
+func (m *CCloud_EnumerateUserFiles_Response) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CCloud_EnumerateUserFiles_Response.Marshal(b, m, deterministic)
+}
+func (dst *CCloud_EnumerateUserFiles_Response) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCloud_EnumerateUserFiles_Response.Merge(dst, src)
+}
+func (m *CCloud_EnumerateUserFiles_Response) XXX_Size() int {
+	return xxx_messageInfo_CCloud_EnumerateUserFiles_Response.Size(m)
+}
+func (m *CCloud_EnumerateUserFiles_Response) XXX_DiscardUnknown() {
+	xxx_messageInfo_CCloud_EnumerateUserFiles_Response.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CCloud_EnumerateUserFiles_Response proto.InternalMessageInfo
 
 func (m *CCloud_EnumerateUserFiles_Response) GetFiles() []*CCloud_UserFile {
 	if m != nil {
@@ -228,15 +373,36 @@ func (m *CCloud_EnumerateUserFiles_Response) GetTotalFiles() uint32 {
 }
 
 type CCloud_Delete_Request struct {
-	Filename         *string `protobuf:"bytes,1,opt,name=filename" json:"filename,omitempty"`
-	Appid            *uint32 `protobuf:"varint,2,opt,name=appid" json:"appid,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Filename             *string  `protobuf:"bytes,1,opt,name=filename" json:"filename,omitempty"`
+	Appid                *uint32  `protobuf:"varint,2,opt,name=appid" json:"appid,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CCloud_Delete_Request) Reset()                    { *m = CCloud_Delete_Request{} }
-func (m *CCloud_Delete_Request) String() string            { return proto.CompactTextString(m) }
-func (*CCloud_Delete_Request) ProtoMessage()               {}
-func (*CCloud_Delete_Request) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{7} }
+func (m *CCloud_Delete_Request) Reset()         { *m = CCloud_Delete_Request{} }
+func (m *CCloud_Delete_Request) String() string { return proto.CompactTextString(m) }
+func (*CCloud_Delete_Request) ProtoMessage()    {}
+func (*CCloud_Delete_Request) Descriptor() ([]byte, []int) {
+	return fileDescriptor_steammessages_cloud_steamworkssdk_d7e08337cd0a63c3, []int{7}
+}
+func (m *CCloud_Delete_Request) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CCloud_Delete_Request.Unmarshal(m, b)
+}
+func (m *CCloud_Delete_Request) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CCloud_Delete_Request.Marshal(b, m, deterministic)
+}
+func (dst *CCloud_Delete_Request) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCloud_Delete_Request.Merge(dst, src)
+}
+func (m *CCloud_Delete_Request) XXX_Size() int {
+	return xxx_messageInfo_CCloud_Delete_Request.Size(m)
+}
+func (m *CCloud_Delete_Request) XXX_DiscardUnknown() {
+	xxx_messageInfo_CCloud_Delete_Request.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CCloud_Delete_Request proto.InternalMessageInfo
 
 func (m *CCloud_Delete_Request) GetFilename() string {
 	if m != nil && m.Filename != nil {
@@ -253,13 +419,34 @@ func (m *CCloud_Delete_Request) GetAppid() uint32 {
 }
 
 type CCloud_Delete_Response struct {
-	XXX_unrecognized []byte `json:"-"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CCloud_Delete_Response) Reset()                    { *m = CCloud_Delete_Response{} }
-func (m *CCloud_Delete_Response) String() string            { return proto.CompactTextString(m) }
-func (*CCloud_Delete_Response) ProtoMessage()               {}
-func (*CCloud_Delete_Response) Descriptor() ([]byte, []int) { return fileDescriptor36, []int{8} }
+func (m *CCloud_Delete_Response) Reset()         { *m = CCloud_Delete_Response{} }
+func (m *CCloud_Delete_Response) String() string { return proto.CompactTextString(m) }
+func (*CCloud_Delete_Response) ProtoMessage()    {}
+func (*CCloud_Delete_Response) Descriptor() ([]byte, []int) {
+	return fileDescriptor_steammessages_cloud_steamworkssdk_d7e08337cd0a63c3, []int{8}
+}
+func (m *CCloud_Delete_Response) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CCloud_Delete_Response.Unmarshal(m, b)
+}
+func (m *CCloud_Delete_Response) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CCloud_Delete_Response.Marshal(b, m, deterministic)
+}
+func (dst *CCloud_Delete_Response) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCloud_Delete_Response.Merge(dst, src)
+}
+func (m *CCloud_Delete_Response) XXX_Size() int {
+	return xxx_messageInfo_CCloud_Delete_Response.Size(m)
+}
+func (m *CCloud_Delete_Response) XXX_DiscardUnknown() {
+	xxx_messageInfo_CCloud_Delete_Response.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CCloud_Delete_Response proto.InternalMessageInfo
 
 func init() {
 	proto.RegisterType((*CCloud_GetUploadServerInfo_Request)(nil), "dota.CCloud_GetUploadServerInfo_Request")
@@ -273,9 +460,11 @@ func init() {
 	proto.RegisterType((*CCloud_Delete_Response)(nil), "dota.CCloud_Delete_Response")
 }
 
-func init() { proto.RegisterFile("steammessages_cloud.steamworkssdk.proto", fileDescriptor36) }
+func init() {
+	proto.RegisterFile("steammessages_cloud.steamworkssdk.proto", fileDescriptor_steammessages_cloud_steamworkssdk_d7e08337cd0a63c3)
+}
 
-var fileDescriptor36 = []byte{
+var fileDescriptor_steammessages_cloud_steamworkssdk_d7e08337cd0a63c3 = []byte{
 	// 970 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x55, 0x51, 0x6f, 0xdc, 0x44,
 	0x10, 0x96, 0x49, 0x2e, 0x6d, 0x36, 0x4a, 0x53, 0x2d, 0x14, 0x59, 0x97, 0x96, 0x4e, 0xaf, 0xad,

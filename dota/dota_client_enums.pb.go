@@ -12,6 +12,12 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the proto package it is being compiled against.
+// A compilation error at this line likely means your copy of the
+// proto package needs to be updated.
+const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+
 type ETournamentTemplate int32
 
 const (
@@ -44,7 +50,9 @@ func (x *ETournamentTemplate) UnmarshalJSON(data []byte) error {
 	*x = ETournamentTemplate(value)
 	return nil
 }
-func (ETournamentTemplate) EnumDescriptor() ([]byte, []int) { return fileDescriptor6, []int{0} }
+func (ETournamentTemplate) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_dota_client_enums_f1a3398e0181cb55, []int{0}
+}
 
 type ETournamentGameState int32
 
@@ -102,7 +110,9 @@ func (x *ETournamentGameState) UnmarshalJSON(data []byte) error {
 	*x = ETournamentGameState(value)
 	return nil
 }
-func (ETournamentGameState) EnumDescriptor() ([]byte, []int) { return fileDescriptor6, []int{1} }
+func (ETournamentGameState) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_dota_client_enums_f1a3398e0181cb55, []int{1}
+}
 
 type ETournamentTeamState int32
 
@@ -193,7 +203,9 @@ func (x *ETournamentTeamState) UnmarshalJSON(data []byte) error {
 	*x = ETournamentTeamState(value)
 	return nil
 }
-func (ETournamentTeamState) EnumDescriptor() ([]byte, []int) { return fileDescriptor6, []int{2} }
+func (ETournamentTeamState) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_dota_client_enums_f1a3398e0181cb55, []int{2}
+}
 
 type ETournamentState int32
 
@@ -257,7 +269,9 @@ func (x *ETournamentState) UnmarshalJSON(data []byte) error {
 	*x = ETournamentState(value)
 	return nil
 }
-func (ETournamentState) EnumDescriptor() ([]byte, []int) { return fileDescriptor6, []int{3} }
+func (ETournamentState) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_dota_client_enums_f1a3398e0181cb55, []int{3}
+}
 
 type ETournamentNodeState int32
 
@@ -327,7 +341,9 @@ func (x *ETournamentNodeState) UnmarshalJSON(data []byte) error {
 	*x = ETournamentNodeState(value)
 	return nil
 }
-func (ETournamentNodeState) EnumDescriptor() ([]byte, []int) { return fileDescriptor6, []int{4} }
+func (ETournamentNodeState) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_dota_client_enums_f1a3398e0181cb55, []int{4}
+}
 
 type EDOTAGroupMergeResult int32
 
@@ -385,7 +401,9 @@ func (x *EDOTAGroupMergeResult) UnmarshalJSON(data []byte) error {
 	*x = EDOTAGroupMergeResult(value)
 	return nil
 }
-func (EDOTAGroupMergeResult) EnumDescriptor() ([]byte, []int) { return fileDescriptor6, []int{5} }
+func (EDOTAGroupMergeResult) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_dota_client_enums_f1a3398e0181cb55, []int{5}
+}
 
 func init() {
 	proto.RegisterEnum("dota.ETournamentTemplate", ETournamentTemplate_name, ETournamentTemplate_value)
@@ -396,9 +414,11 @@ func init() {
 	proto.RegisterEnum("dota.EDOTAGroupMergeResult", EDOTAGroupMergeResult_name, EDOTAGroupMergeResult_value)
 }
 
-func init() { proto.RegisterFile("dota_client_enums.proto", fileDescriptor6) }
+func init() {
+	proto.RegisterFile("dota_client_enums.proto", fileDescriptor_dota_client_enums_f1a3398e0181cb55)
+}
 
-var fileDescriptor6 = []byte{
+var fileDescriptor_dota_client_enums_f1a3398e0181cb55 = []byte{
 	// 906 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0xd6, 0xdb, 0x6e, 0xdb, 0x36,
 	0x18, 0x07, 0xf0, 0xb8, 0x76, 0x4e, 0xdc, 0x06, 0x7c, 0xe0, 0xda, 0x15, 0x1b, 0xd6, 0xae, 0x6d,

@@ -12,6 +12,12 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the proto package it is being compiled against.
+// A compilation error at this line likely means your copy of the
+// proto package needs to be updated.
+const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+
 type EDotaBroadcastMessages int32
 
 const (
@@ -44,18 +50,41 @@ func (x *EDotaBroadcastMessages) UnmarshalJSON(data []byte) error {
 	*x = EDotaBroadcastMessages(value)
 	return nil
 }
-func (EDotaBroadcastMessages) EnumDescriptor() ([]byte, []int) { return fileDescriptor5, []int{0} }
-
-type CDOTABroadcastMsg struct {
-	Type             *EDotaBroadcastMessages `protobuf:"varint,1,req,name=type,enum=dota.EDotaBroadcastMessages,def=1" json:"type,omitempty"`
-	Msg              []byte                  `protobuf:"bytes,2,opt,name=msg" json:"msg,omitempty"`
-	XXX_unrecognized []byte                  `json:"-"`
+func (EDotaBroadcastMessages) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_dota_broadcastmessages_0ccfdc30430c0047, []int{0}
 }
 
-func (m *CDOTABroadcastMsg) Reset()                    { *m = CDOTABroadcastMsg{} }
-func (m *CDOTABroadcastMsg) String() string            { return proto.CompactTextString(m) }
-func (*CDOTABroadcastMsg) ProtoMessage()               {}
-func (*CDOTABroadcastMsg) Descriptor() ([]byte, []int) { return fileDescriptor5, []int{0} }
+type CDOTABroadcastMsg struct {
+	Type                 *EDotaBroadcastMessages `protobuf:"varint,1,req,name=type,enum=dota.EDotaBroadcastMessages,def=1" json:"type,omitempty"`
+	Msg                  []byte                  `protobuf:"bytes,2,opt,name=msg" json:"msg,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                `json:"-"`
+	XXX_unrecognized     []byte                  `json:"-"`
+	XXX_sizecache        int32                   `json:"-"`
+}
+
+func (m *CDOTABroadcastMsg) Reset()         { *m = CDOTABroadcastMsg{} }
+func (m *CDOTABroadcastMsg) String() string { return proto.CompactTextString(m) }
+func (*CDOTABroadcastMsg) ProtoMessage()    {}
+func (*CDOTABroadcastMsg) Descriptor() ([]byte, []int) {
+	return fileDescriptor_dota_broadcastmessages_0ccfdc30430c0047, []int{0}
+}
+func (m *CDOTABroadcastMsg) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CDOTABroadcastMsg.Unmarshal(m, b)
+}
+func (m *CDOTABroadcastMsg) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CDOTABroadcastMsg.Marshal(b, m, deterministic)
+}
+func (dst *CDOTABroadcastMsg) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CDOTABroadcastMsg.Merge(dst, src)
+}
+func (m *CDOTABroadcastMsg) XXX_Size() int {
+	return xxx_messageInfo_CDOTABroadcastMsg.Size(m)
+}
+func (m *CDOTABroadcastMsg) XXX_DiscardUnknown() {
+	xxx_messageInfo_CDOTABroadcastMsg.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CDOTABroadcastMsg proto.InternalMessageInfo
 
 const Default_CDOTABroadcastMsg_Type EDotaBroadcastMessages = EDotaBroadcastMessages_DOTA_BM_LANLobbyRequest
 
@@ -74,33 +103,73 @@ func (m *CDOTABroadcastMsg) GetMsg() []byte {
 }
 
 type CDOTABroadcastMsg_LANLobbyRequest struct {
-	XXX_unrecognized []byte `json:"-"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *CDOTABroadcastMsg_LANLobbyRequest) Reset()         { *m = CDOTABroadcastMsg_LANLobbyRequest{} }
 func (m *CDOTABroadcastMsg_LANLobbyRequest) String() string { return proto.CompactTextString(m) }
 func (*CDOTABroadcastMsg_LANLobbyRequest) ProtoMessage()    {}
 func (*CDOTABroadcastMsg_LANLobbyRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor5, []int{1}
+	return fileDescriptor_dota_broadcastmessages_0ccfdc30430c0047, []int{1}
 }
+func (m *CDOTABroadcastMsg_LANLobbyRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CDOTABroadcastMsg_LANLobbyRequest.Unmarshal(m, b)
+}
+func (m *CDOTABroadcastMsg_LANLobbyRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CDOTABroadcastMsg_LANLobbyRequest.Marshal(b, m, deterministic)
+}
+func (dst *CDOTABroadcastMsg_LANLobbyRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CDOTABroadcastMsg_LANLobbyRequest.Merge(dst, src)
+}
+func (m *CDOTABroadcastMsg_LANLobbyRequest) XXX_Size() int {
+	return xxx_messageInfo_CDOTABroadcastMsg_LANLobbyRequest.Size(m)
+}
+func (m *CDOTABroadcastMsg_LANLobbyRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_CDOTABroadcastMsg_LANLobbyRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CDOTABroadcastMsg_LANLobbyRequest proto.InternalMessageInfo
 
 type CDOTABroadcastMsg_LANLobbyReply struct {
-	Id               *uint64                                         `protobuf:"varint,1,opt,name=id" json:"id,omitempty"`
-	TournamentId     *uint32                                         `protobuf:"varint,2,opt,name=tournament_id,json=tournamentId" json:"tournament_id,omitempty"`
-	TournamentGameId *uint32                                         `protobuf:"varint,3,opt,name=tournament_game_id,json=tournamentGameId" json:"tournament_game_id,omitempty"`
-	Members          []*CDOTABroadcastMsg_LANLobbyReply_CLobbyMember `protobuf:"bytes,4,rep,name=members" json:"members,omitempty"`
-	RequiresPassKey  *bool                                           `protobuf:"varint,5,opt,name=requires_pass_key,json=requiresPassKey" json:"requires_pass_key,omitempty"`
-	LeaderAccountId  *uint32                                         `protobuf:"varint,6,opt,name=leader_account_id,json=leaderAccountId" json:"leader_account_id,omitempty"`
-	GameMode         *uint32                                         `protobuf:"varint,7,opt,name=game_mode,json=gameMode" json:"game_mode,omitempty"`
-	Name             *string                                         `protobuf:"bytes,8,opt,name=name" json:"name,omitempty"`
-	Players          *uint32                                         `protobuf:"varint,9,opt,name=players" json:"players,omitempty"`
-	XXX_unrecognized []byte                                          `json:"-"`
+	Id                   *uint64                                         `protobuf:"varint,1,opt,name=id" json:"id,omitempty"`
+	TournamentId         *uint32                                         `protobuf:"varint,2,opt,name=tournament_id,json=tournamentId" json:"tournament_id,omitempty"`
+	TournamentGameId     *uint32                                         `protobuf:"varint,3,opt,name=tournament_game_id,json=tournamentGameId" json:"tournament_game_id,omitempty"`
+	Members              []*CDOTABroadcastMsg_LANLobbyReply_CLobbyMember `protobuf:"bytes,4,rep,name=members" json:"members,omitempty"`
+	RequiresPassKey      *bool                                           `protobuf:"varint,5,opt,name=requires_pass_key,json=requiresPassKey" json:"requires_pass_key,omitempty"`
+	LeaderAccountId      *uint32                                         `protobuf:"varint,6,opt,name=leader_account_id,json=leaderAccountId" json:"leader_account_id,omitempty"`
+	GameMode             *uint32                                         `protobuf:"varint,7,opt,name=game_mode,json=gameMode" json:"game_mode,omitempty"`
+	Name                 *string                                         `protobuf:"bytes,8,opt,name=name" json:"name,omitempty"`
+	Players              *uint32                                         `protobuf:"varint,9,opt,name=players" json:"players,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                        `json:"-"`
+	XXX_unrecognized     []byte                                          `json:"-"`
+	XXX_sizecache        int32                                           `json:"-"`
 }
 
-func (m *CDOTABroadcastMsg_LANLobbyReply) Reset()                    { *m = CDOTABroadcastMsg_LANLobbyReply{} }
-func (m *CDOTABroadcastMsg_LANLobbyReply) String() string            { return proto.CompactTextString(m) }
-func (*CDOTABroadcastMsg_LANLobbyReply) ProtoMessage()               {}
-func (*CDOTABroadcastMsg_LANLobbyReply) Descriptor() ([]byte, []int) { return fileDescriptor5, []int{2} }
+func (m *CDOTABroadcastMsg_LANLobbyReply) Reset()         { *m = CDOTABroadcastMsg_LANLobbyReply{} }
+func (m *CDOTABroadcastMsg_LANLobbyReply) String() string { return proto.CompactTextString(m) }
+func (*CDOTABroadcastMsg_LANLobbyReply) ProtoMessage()    {}
+func (*CDOTABroadcastMsg_LANLobbyReply) Descriptor() ([]byte, []int) {
+	return fileDescriptor_dota_broadcastmessages_0ccfdc30430c0047, []int{2}
+}
+func (m *CDOTABroadcastMsg_LANLobbyReply) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CDOTABroadcastMsg_LANLobbyReply.Unmarshal(m, b)
+}
+func (m *CDOTABroadcastMsg_LANLobbyReply) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CDOTABroadcastMsg_LANLobbyReply.Marshal(b, m, deterministic)
+}
+func (dst *CDOTABroadcastMsg_LANLobbyReply) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CDOTABroadcastMsg_LANLobbyReply.Merge(dst, src)
+}
+func (m *CDOTABroadcastMsg_LANLobbyReply) XXX_Size() int {
+	return xxx_messageInfo_CDOTABroadcastMsg_LANLobbyReply.Size(m)
+}
+func (m *CDOTABroadcastMsg_LANLobbyReply) XXX_DiscardUnknown() {
+	xxx_messageInfo_CDOTABroadcastMsg_LANLobbyReply.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CDOTABroadcastMsg_LANLobbyReply proto.InternalMessageInfo
 
 func (m *CDOTABroadcastMsg_LANLobbyReply) GetId() uint64 {
 	if m != nil && m.Id != nil {
@@ -166,9 +235,11 @@ func (m *CDOTABroadcastMsg_LANLobbyReply) GetPlayers() uint32 {
 }
 
 type CDOTABroadcastMsg_LANLobbyReply_CLobbyMember struct {
-	AccountId        *uint32 `protobuf:"varint,1,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
-	PlayerName       *string `protobuf:"bytes,2,opt,name=player_name,json=playerName" json:"player_name,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	AccountId            *uint32  `protobuf:"varint,1,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	PlayerName           *string  `protobuf:"bytes,2,opt,name=player_name,json=playerName" json:"player_name,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *CDOTABroadcastMsg_LANLobbyReply_CLobbyMember) Reset() {
@@ -179,8 +250,25 @@ func (m *CDOTABroadcastMsg_LANLobbyReply_CLobbyMember) String() string {
 }
 func (*CDOTABroadcastMsg_LANLobbyReply_CLobbyMember) ProtoMessage() {}
 func (*CDOTABroadcastMsg_LANLobbyReply_CLobbyMember) Descriptor() ([]byte, []int) {
-	return fileDescriptor5, []int{2, 0}
+	return fileDescriptor_dota_broadcastmessages_0ccfdc30430c0047, []int{2, 0}
 }
+func (m *CDOTABroadcastMsg_LANLobbyReply_CLobbyMember) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CDOTABroadcastMsg_LANLobbyReply_CLobbyMember.Unmarshal(m, b)
+}
+func (m *CDOTABroadcastMsg_LANLobbyReply_CLobbyMember) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CDOTABroadcastMsg_LANLobbyReply_CLobbyMember.Marshal(b, m, deterministic)
+}
+func (dst *CDOTABroadcastMsg_LANLobbyReply_CLobbyMember) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CDOTABroadcastMsg_LANLobbyReply_CLobbyMember.Merge(dst, src)
+}
+func (m *CDOTABroadcastMsg_LANLobbyReply_CLobbyMember) XXX_Size() int {
+	return xxx_messageInfo_CDOTABroadcastMsg_LANLobbyReply_CLobbyMember.Size(m)
+}
+func (m *CDOTABroadcastMsg_LANLobbyReply_CLobbyMember) XXX_DiscardUnknown() {
+	xxx_messageInfo_CDOTABroadcastMsg_LANLobbyReply_CLobbyMember.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CDOTABroadcastMsg_LANLobbyReply_CLobbyMember proto.InternalMessageInfo
 
 func (m *CDOTABroadcastMsg_LANLobbyReply_CLobbyMember) GetAccountId() uint32 {
 	if m != nil && m.AccountId != nil {
@@ -204,9 +292,11 @@ func init() {
 	proto.RegisterEnum("dota.EDotaBroadcastMessages", EDotaBroadcastMessages_name, EDotaBroadcastMessages_value)
 }
 
-func init() { proto.RegisterFile("dota_broadcastmessages.proto", fileDescriptor5) }
+func init() {
+	proto.RegisterFile("dota_broadcastmessages.proto", fileDescriptor_dota_broadcastmessages_0ccfdc30430c0047)
+}
 
-var fileDescriptor5 = []byte{
+var fileDescriptor_dota_broadcastmessages_0ccfdc30430c0047 = []byte{
 	// 415 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x84, 0x92, 0x4f, 0x6f, 0x13, 0x31,
 	0x10, 0xc5, 0xf1, 0x66, 0x4b, 0x92, 0x69, 0xda, 0xa6, 0x23, 0x01, 0x86, 0x16, 0x75, 0x49, 0x2f,

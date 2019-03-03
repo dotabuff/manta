@@ -12,6 +12,12 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the proto package it is being compiled against.
+// A compilation error at this line likely means your copy of the
+// proto package needs to be updated.
+const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+
 type ETournamentEvent int32
 
 const (
@@ -74,21 +80,44 @@ func (x *ETournamentEvent) UnmarshalJSON(data []byte) error {
 	*x = ETournamentEvent(value)
 	return nil
 }
-func (ETournamentEvent) EnumDescriptor() ([]byte, []int) { return fileDescriptor15, []int{0} }
-
-type CMsgDOTATournamentInfo struct {
-	LeagueId            *uint32                                 `protobuf:"varint,1,opt,name=league_id,json=leagueId" json:"league_id,omitempty"`
-	PhaseList           []*CMsgDOTATournamentInfo_Phase         `protobuf:"bytes,2,rep,name=phase_list,json=phaseList" json:"phase_list,omitempty"`
-	TeamsList           []*CMsgDOTATournamentInfo_Team          `protobuf:"bytes,3,rep,name=teams_list,json=teamsList" json:"teams_list,omitempty"`
-	UpcomingMatchesList []*CMsgDOTATournamentInfo_UpcomingMatch `protobuf:"bytes,4,rep,name=upcoming_matches_list,json=upcomingMatchesList" json:"upcoming_matches_list,omitempty"`
-	NewsList            []*CMsgDOTATournamentInfo_News          `protobuf:"bytes,5,rep,name=news_list,json=newsList" json:"news_list,omitempty"`
-	XXX_unrecognized    []byte                                  `json:"-"`
+func (ETournamentEvent) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_dota_gcmessages_client_tournament_341d4112d2cb7bde, []int{0}
 }
 
-func (m *CMsgDOTATournamentInfo) Reset()                    { *m = CMsgDOTATournamentInfo{} }
-func (m *CMsgDOTATournamentInfo) String() string            { return proto.CompactTextString(m) }
-func (*CMsgDOTATournamentInfo) ProtoMessage()               {}
-func (*CMsgDOTATournamentInfo) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{0} }
+type CMsgDOTATournamentInfo struct {
+	LeagueId             *uint32                                 `protobuf:"varint,1,opt,name=league_id,json=leagueId" json:"league_id,omitempty"`
+	PhaseList            []*CMsgDOTATournamentInfo_Phase         `protobuf:"bytes,2,rep,name=phase_list,json=phaseList" json:"phase_list,omitempty"`
+	TeamsList            []*CMsgDOTATournamentInfo_Team          `protobuf:"bytes,3,rep,name=teams_list,json=teamsList" json:"teams_list,omitempty"`
+	UpcomingMatchesList  []*CMsgDOTATournamentInfo_UpcomingMatch `protobuf:"bytes,4,rep,name=upcoming_matches_list,json=upcomingMatchesList" json:"upcoming_matches_list,omitempty"`
+	NewsList             []*CMsgDOTATournamentInfo_News          `protobuf:"bytes,5,rep,name=news_list,json=newsList" json:"news_list,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                `json:"-"`
+	XXX_unrecognized     []byte                                  `json:"-"`
+	XXX_sizecache        int32                                   `json:"-"`
+}
+
+func (m *CMsgDOTATournamentInfo) Reset()         { *m = CMsgDOTATournamentInfo{} }
+func (m *CMsgDOTATournamentInfo) String() string { return proto.CompactTextString(m) }
+func (*CMsgDOTATournamentInfo) ProtoMessage()    {}
+func (*CMsgDOTATournamentInfo) Descriptor() ([]byte, []int) {
+	return fileDescriptor_dota_gcmessages_client_tournament_341d4112d2cb7bde, []int{0}
+}
+func (m *CMsgDOTATournamentInfo) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTATournamentInfo.Unmarshal(m, b)
+}
+func (m *CMsgDOTATournamentInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTATournamentInfo.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTATournamentInfo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTATournamentInfo.Merge(dst, src)
+}
+func (m *CMsgDOTATournamentInfo) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTATournamentInfo.Size(m)
+}
+func (m *CMsgDOTATournamentInfo) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTATournamentInfo.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTATournamentInfo proto.InternalMessageInfo
 
 func (m *CMsgDOTATournamentInfo) GetLeagueId() uint32 {
 	if m != nil && m.LeagueId != nil {
@@ -126,17 +155,36 @@ func (m *CMsgDOTATournamentInfo) GetNewsList() []*CMsgDOTATournamentInfo_News {
 }
 
 type CMsgDOTATournamentInfo_PhaseGroup struct {
-	GroupId          *uint32 `protobuf:"varint,1,opt,name=group_id,json=groupId" json:"group_id,omitempty"`
-	GroupName        *string `protobuf:"bytes,2,opt,name=group_name,json=groupName" json:"group_name,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	GroupId              *uint32  `protobuf:"varint,1,opt,name=group_id,json=groupId" json:"group_id,omitempty"`
+	GroupName            *string  `protobuf:"bytes,2,opt,name=group_name,json=groupName" json:"group_name,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *CMsgDOTATournamentInfo_PhaseGroup) Reset()         { *m = CMsgDOTATournamentInfo_PhaseGroup{} }
 func (m *CMsgDOTATournamentInfo_PhaseGroup) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTATournamentInfo_PhaseGroup) ProtoMessage()    {}
 func (*CMsgDOTATournamentInfo_PhaseGroup) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{0, 0}
+	return fileDescriptor_dota_gcmessages_client_tournament_341d4112d2cb7bde, []int{0, 0}
 }
+func (m *CMsgDOTATournamentInfo_PhaseGroup) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTATournamentInfo_PhaseGroup.Unmarshal(m, b)
+}
+func (m *CMsgDOTATournamentInfo_PhaseGroup) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTATournamentInfo_PhaseGroup.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTATournamentInfo_PhaseGroup) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTATournamentInfo_PhaseGroup.Merge(dst, src)
+}
+func (m *CMsgDOTATournamentInfo_PhaseGroup) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTATournamentInfo_PhaseGroup.Size(m)
+}
+func (m *CMsgDOTATournamentInfo_PhaseGroup) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTATournamentInfo_PhaseGroup.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTATournamentInfo_PhaseGroup proto.InternalMessageInfo
 
 func (m *CMsgDOTATournamentInfo_PhaseGroup) GetGroupId() uint32 {
 	if m != nil && m.GroupId != nil {
@@ -153,22 +201,41 @@ func (m *CMsgDOTATournamentInfo_PhaseGroup) GetGroupName() string {
 }
 
 type CMsgDOTATournamentInfo_Phase struct {
-	PhaseId          *uint32                              `protobuf:"varint,1,opt,name=phase_id,json=phaseId" json:"phase_id,omitempty"`
-	PhaseName        *string                              `protobuf:"bytes,2,opt,name=phase_name,json=phaseName" json:"phase_name,omitempty"`
-	TypeId           *uint32                              `protobuf:"varint,3,opt,name=type_id,json=typeId" json:"type_id,omitempty"`
-	Iterations       *uint32                              `protobuf:"varint,4,opt,name=iterations" json:"iterations,omitempty"`
-	MinStartTime     *uint32                              `protobuf:"varint,5,opt,name=min_start_time,json=minStartTime" json:"min_start_time,omitempty"`
-	MaxStartTime     *uint32                              `protobuf:"varint,6,opt,name=max_start_time,json=maxStartTime" json:"max_start_time,omitempty"`
-	GroupList        []*CMsgDOTATournamentInfo_PhaseGroup `protobuf:"bytes,7,rep,name=group_list,json=groupList" json:"group_list,omitempty"`
-	XXX_unrecognized []byte                               `json:"-"`
+	PhaseId              *uint32                              `protobuf:"varint,1,opt,name=phase_id,json=phaseId" json:"phase_id,omitempty"`
+	PhaseName            *string                              `protobuf:"bytes,2,opt,name=phase_name,json=phaseName" json:"phase_name,omitempty"`
+	TypeId               *uint32                              `protobuf:"varint,3,opt,name=type_id,json=typeId" json:"type_id,omitempty"`
+	Iterations           *uint32                              `protobuf:"varint,4,opt,name=iterations" json:"iterations,omitempty"`
+	MinStartTime         *uint32                              `protobuf:"varint,5,opt,name=min_start_time,json=minStartTime" json:"min_start_time,omitempty"`
+	MaxStartTime         *uint32                              `protobuf:"varint,6,opt,name=max_start_time,json=maxStartTime" json:"max_start_time,omitempty"`
+	GroupList            []*CMsgDOTATournamentInfo_PhaseGroup `protobuf:"bytes,7,rep,name=group_list,json=groupList" json:"group_list,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                             `json:"-"`
+	XXX_unrecognized     []byte                               `json:"-"`
+	XXX_sizecache        int32                                `json:"-"`
 }
 
 func (m *CMsgDOTATournamentInfo_Phase) Reset()         { *m = CMsgDOTATournamentInfo_Phase{} }
 func (m *CMsgDOTATournamentInfo_Phase) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTATournamentInfo_Phase) ProtoMessage()    {}
 func (*CMsgDOTATournamentInfo_Phase) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{0, 1}
+	return fileDescriptor_dota_gcmessages_client_tournament_341d4112d2cb7bde, []int{0, 1}
 }
+func (m *CMsgDOTATournamentInfo_Phase) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTATournamentInfo_Phase.Unmarshal(m, b)
+}
+func (m *CMsgDOTATournamentInfo_Phase) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTATournamentInfo_Phase.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTATournamentInfo_Phase) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTATournamentInfo_Phase.Merge(dst, src)
+}
+func (m *CMsgDOTATournamentInfo_Phase) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTATournamentInfo_Phase.Size(m)
+}
+func (m *CMsgDOTATournamentInfo_Phase) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTATournamentInfo_Phase.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTATournamentInfo_Phase proto.InternalMessageInfo
 
 func (m *CMsgDOTATournamentInfo_Phase) GetPhaseId() uint32 {
 	if m != nil && m.PhaseId != nil {
@@ -220,18 +287,39 @@ func (m *CMsgDOTATournamentInfo_Phase) GetGroupList() []*CMsgDOTATournamentInfo_
 }
 
 type CMsgDOTATournamentInfo_Team struct {
-	TeamId           *uint32 `protobuf:"varint,1,opt,name=team_id,json=teamId" json:"team_id,omitempty"`
-	Name             *string `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
-	Tag              *string `protobuf:"bytes,3,opt,name=tag" json:"tag,omitempty"`
-	TeamLogo         *uint64 `protobuf:"varint,4,opt,name=team_logo,json=teamLogo" json:"team_logo,omitempty"`
-	Eliminated       *bool   `protobuf:"varint,5,opt,name=eliminated" json:"eliminated,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	TeamId               *uint32  `protobuf:"varint,1,opt,name=team_id,json=teamId" json:"team_id,omitempty"`
+	Name                 *string  `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
+	Tag                  *string  `protobuf:"bytes,3,opt,name=tag" json:"tag,omitempty"`
+	TeamLogo             *uint64  `protobuf:"varint,4,opt,name=team_logo,json=teamLogo" json:"team_logo,omitempty"`
+	Eliminated           *bool    `protobuf:"varint,5,opt,name=eliminated" json:"eliminated,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CMsgDOTATournamentInfo_Team) Reset()                    { *m = CMsgDOTATournamentInfo_Team{} }
-func (m *CMsgDOTATournamentInfo_Team) String() string            { return proto.CompactTextString(m) }
-func (*CMsgDOTATournamentInfo_Team) ProtoMessage()               {}
-func (*CMsgDOTATournamentInfo_Team) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{0, 2} }
+func (m *CMsgDOTATournamentInfo_Team) Reset()         { *m = CMsgDOTATournamentInfo_Team{} }
+func (m *CMsgDOTATournamentInfo_Team) String() string { return proto.CompactTextString(m) }
+func (*CMsgDOTATournamentInfo_Team) ProtoMessage()    {}
+func (*CMsgDOTATournamentInfo_Team) Descriptor() ([]byte, []int) {
+	return fileDescriptor_dota_gcmessages_client_tournament_341d4112d2cb7bde, []int{0, 2}
+}
+func (m *CMsgDOTATournamentInfo_Team) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTATournamentInfo_Team.Unmarshal(m, b)
+}
+func (m *CMsgDOTATournamentInfo_Team) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTATournamentInfo_Team.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTATournamentInfo_Team) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTATournamentInfo_Team.Merge(dst, src)
+}
+func (m *CMsgDOTATournamentInfo_Team) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTATournamentInfo_Team.Size(m)
+}
+func (m *CMsgDOTATournamentInfo_Team) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTATournamentInfo_Team.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTATournamentInfo_Team proto.InternalMessageInfo
 
 func (m *CMsgDOTATournamentInfo_Team) GetTeamId() uint32 {
 	if m != nil && m.TeamId != nil {
@@ -269,41 +357,60 @@ func (m *CMsgDOTATournamentInfo_Team) GetEliminated() bool {
 }
 
 type CMsgDOTATournamentInfo_UpcomingMatch struct {
-	SeriesId                    *uint32 `protobuf:"varint,1,opt,name=series_id,json=seriesId" json:"series_id,omitempty"`
-	Team1Id                     *uint32 `protobuf:"varint,2,opt,name=team1_id,json=team1Id" json:"team1_id,omitempty"`
-	Team2Id                     *uint32 `protobuf:"varint,3,opt,name=team2_id,json=team2Id" json:"team2_id,omitempty"`
-	Bo                          *uint32 `protobuf:"varint,4,opt,name=bo" json:"bo,omitempty"`
-	StageName                   *string `protobuf:"bytes,5,opt,name=stage_name,json=stageName" json:"stage_name,omitempty"`
-	StartTime                   *uint32 `protobuf:"varint,6,opt,name=start_time,json=startTime" json:"start_time,omitempty"`
-	WinnerStage                 *string `protobuf:"bytes,7,opt,name=winner_stage,json=winnerStage" json:"winner_stage,omitempty"`
-	LoserStage                  *string `protobuf:"bytes,8,opt,name=loser_stage,json=loserStage" json:"loser_stage,omitempty"`
-	Team1Tag                    *string `protobuf:"bytes,9,opt,name=team1_tag,json=team1Tag" json:"team1_tag,omitempty"`
-	Team2Tag                    *string `protobuf:"bytes,10,opt,name=team2_tag,json=team2Tag" json:"team2_tag,omitempty"`
-	Team1PrevOpponentTag        *string `protobuf:"bytes,11,opt,name=team1_prev_opponent_tag,json=team1PrevOpponentTag" json:"team1_prev_opponent_tag,omitempty"`
-	Team2PrevOpponentTag        *string `protobuf:"bytes,12,opt,name=team2_prev_opponent_tag,json=team2PrevOpponentTag" json:"team2_prev_opponent_tag,omitempty"`
-	Team1Logo                   *uint64 `protobuf:"varint,13,opt,name=team1_logo,json=team1Logo" json:"team1_logo,omitempty"`
-	Team2Logo                   *uint64 `protobuf:"varint,14,opt,name=team2_logo,json=team2Logo" json:"team2_logo,omitempty"`
-	Team1PrevOpponentLogo       *uint64 `protobuf:"varint,15,opt,name=team1_prev_opponent_logo,json=team1PrevOpponentLogo" json:"team1_prev_opponent_logo,omitempty"`
-	Team2PrevOpponentLogo       *uint64 `protobuf:"varint,16,opt,name=team2_prev_opponent_logo,json=team2PrevOpponentLogo" json:"team2_prev_opponent_logo,omitempty"`
-	Team1PrevOpponentId         *uint32 `protobuf:"varint,17,opt,name=team1_prev_opponent_id,json=team1PrevOpponentId" json:"team1_prev_opponent_id,omitempty"`
-	Team2PrevOpponentId         *uint32 `protobuf:"varint,18,opt,name=team2_prev_opponent_id,json=team2PrevOpponentId" json:"team2_prev_opponent_id,omitempty"`
-	Team1PrevMatchScore         *uint32 `protobuf:"varint,19,opt,name=team1_prev_match_score,json=team1PrevMatchScore" json:"team1_prev_match_score,omitempty"`
-	Team1PrevMatchOpponentScore *uint32 `protobuf:"varint,20,opt,name=team1_prev_match_opponent_score,json=team1PrevMatchOpponentScore" json:"team1_prev_match_opponent_score,omitempty"`
-	Team2PrevMatchScore         *uint32 `protobuf:"varint,21,opt,name=team2_prev_match_score,json=team2PrevMatchScore" json:"team2_prev_match_score,omitempty"`
-	Team2PrevMatchOpponentScore *uint32 `protobuf:"varint,22,opt,name=team2_prev_match_opponent_score,json=team2PrevMatchOpponentScore" json:"team2_prev_match_opponent_score,omitempty"`
-	PhaseType                   *uint32 `protobuf:"varint,23,opt,name=phase_type,json=phaseType" json:"phase_type,omitempty"`
-	Team1Score                  *uint32 `protobuf:"varint,24,opt,name=team1_score,json=team1Score" json:"team1_score,omitempty"`
-	Team2Score                  *uint32 `protobuf:"varint,25,opt,name=team2_score,json=team2Score" json:"team2_score,omitempty"`
-	PhaseId                     *uint32 `protobuf:"varint,26,opt,name=phase_id,json=phaseId" json:"phase_id,omitempty"`
-	XXX_unrecognized            []byte  `json:"-"`
+	SeriesId                    *uint32  `protobuf:"varint,1,opt,name=series_id,json=seriesId" json:"series_id,omitempty"`
+	Team1Id                     *uint32  `protobuf:"varint,2,opt,name=team1_id,json=team1Id" json:"team1_id,omitempty"`
+	Team2Id                     *uint32  `protobuf:"varint,3,opt,name=team2_id,json=team2Id" json:"team2_id,omitempty"`
+	Bo                          *uint32  `protobuf:"varint,4,opt,name=bo" json:"bo,omitempty"`
+	StageName                   *string  `protobuf:"bytes,5,opt,name=stage_name,json=stageName" json:"stage_name,omitempty"`
+	StartTime                   *uint32  `protobuf:"varint,6,opt,name=start_time,json=startTime" json:"start_time,omitempty"`
+	WinnerStage                 *string  `protobuf:"bytes,7,opt,name=winner_stage,json=winnerStage" json:"winner_stage,omitempty"`
+	LoserStage                  *string  `protobuf:"bytes,8,opt,name=loser_stage,json=loserStage" json:"loser_stage,omitempty"`
+	Team1Tag                    *string  `protobuf:"bytes,9,opt,name=team1_tag,json=team1Tag" json:"team1_tag,omitempty"`
+	Team2Tag                    *string  `protobuf:"bytes,10,opt,name=team2_tag,json=team2Tag" json:"team2_tag,omitempty"`
+	Team1PrevOpponentTag        *string  `protobuf:"bytes,11,opt,name=team1_prev_opponent_tag,json=team1PrevOpponentTag" json:"team1_prev_opponent_tag,omitempty"`
+	Team2PrevOpponentTag        *string  `protobuf:"bytes,12,opt,name=team2_prev_opponent_tag,json=team2PrevOpponentTag" json:"team2_prev_opponent_tag,omitempty"`
+	Team1Logo                   *uint64  `protobuf:"varint,13,opt,name=team1_logo,json=team1Logo" json:"team1_logo,omitempty"`
+	Team2Logo                   *uint64  `protobuf:"varint,14,opt,name=team2_logo,json=team2Logo" json:"team2_logo,omitempty"`
+	Team1PrevOpponentLogo       *uint64  `protobuf:"varint,15,opt,name=team1_prev_opponent_logo,json=team1PrevOpponentLogo" json:"team1_prev_opponent_logo,omitempty"`
+	Team2PrevOpponentLogo       *uint64  `protobuf:"varint,16,opt,name=team2_prev_opponent_logo,json=team2PrevOpponentLogo" json:"team2_prev_opponent_logo,omitempty"`
+	Team1PrevOpponentId         *uint32  `protobuf:"varint,17,opt,name=team1_prev_opponent_id,json=team1PrevOpponentId" json:"team1_prev_opponent_id,omitempty"`
+	Team2PrevOpponentId         *uint32  `protobuf:"varint,18,opt,name=team2_prev_opponent_id,json=team2PrevOpponentId" json:"team2_prev_opponent_id,omitempty"`
+	Team1PrevMatchScore         *uint32  `protobuf:"varint,19,opt,name=team1_prev_match_score,json=team1PrevMatchScore" json:"team1_prev_match_score,omitempty"`
+	Team1PrevMatchOpponentScore *uint32  `protobuf:"varint,20,opt,name=team1_prev_match_opponent_score,json=team1PrevMatchOpponentScore" json:"team1_prev_match_opponent_score,omitempty"`
+	Team2PrevMatchScore         *uint32  `protobuf:"varint,21,opt,name=team2_prev_match_score,json=team2PrevMatchScore" json:"team2_prev_match_score,omitempty"`
+	Team2PrevMatchOpponentScore *uint32  `protobuf:"varint,22,opt,name=team2_prev_match_opponent_score,json=team2PrevMatchOpponentScore" json:"team2_prev_match_opponent_score,omitempty"`
+	PhaseType                   *uint32  `protobuf:"varint,23,opt,name=phase_type,json=phaseType" json:"phase_type,omitempty"`
+	Team1Score                  *uint32  `protobuf:"varint,24,opt,name=team1_score,json=team1Score" json:"team1_score,omitempty"`
+	Team2Score                  *uint32  `protobuf:"varint,25,opt,name=team2_score,json=team2Score" json:"team2_score,omitempty"`
+	PhaseId                     *uint32  `protobuf:"varint,26,opt,name=phase_id,json=phaseId" json:"phase_id,omitempty"`
+	XXX_NoUnkeyedLiteral        struct{} `json:"-"`
+	XXX_unrecognized            []byte   `json:"-"`
+	XXX_sizecache               int32    `json:"-"`
 }
 
 func (m *CMsgDOTATournamentInfo_UpcomingMatch) Reset()         { *m = CMsgDOTATournamentInfo_UpcomingMatch{} }
 func (m *CMsgDOTATournamentInfo_UpcomingMatch) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTATournamentInfo_UpcomingMatch) ProtoMessage()    {}
 func (*CMsgDOTATournamentInfo_UpcomingMatch) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{0, 3}
+	return fileDescriptor_dota_gcmessages_client_tournament_341d4112d2cb7bde, []int{0, 3}
 }
+func (m *CMsgDOTATournamentInfo_UpcomingMatch) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTATournamentInfo_UpcomingMatch.Unmarshal(m, b)
+}
+func (m *CMsgDOTATournamentInfo_UpcomingMatch) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTATournamentInfo_UpcomingMatch.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTATournamentInfo_UpcomingMatch) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTATournamentInfo_UpcomingMatch.Merge(dst, src)
+}
+func (m *CMsgDOTATournamentInfo_UpcomingMatch) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTATournamentInfo_UpcomingMatch.Size(m)
+}
+func (m *CMsgDOTATournamentInfo_UpcomingMatch) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTATournamentInfo_UpcomingMatch.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTATournamentInfo_UpcomingMatch proto.InternalMessageInfo
 
 func (m *CMsgDOTATournamentInfo_UpcomingMatch) GetSeriesId() uint32 {
 	if m != nil && m.SeriesId != nil {
@@ -488,17 +595,38 @@ func (m *CMsgDOTATournamentInfo_UpcomingMatch) GetPhaseId() uint32 {
 }
 
 type CMsgDOTATournamentInfo_News struct {
-	Link             *string `protobuf:"bytes,1,opt,name=link" json:"link,omitempty"`
-	Title            *string `protobuf:"bytes,2,opt,name=title" json:"title,omitempty"`
-	Image            *string `protobuf:"bytes,3,opt,name=image" json:"image,omitempty"`
-	Timestamp        *uint32 `protobuf:"varint,4,opt,name=timestamp" json:"timestamp,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Link                 *string  `protobuf:"bytes,1,opt,name=link" json:"link,omitempty"`
+	Title                *string  `protobuf:"bytes,2,opt,name=title" json:"title,omitempty"`
+	Image                *string  `protobuf:"bytes,3,opt,name=image" json:"image,omitempty"`
+	Timestamp            *uint32  `protobuf:"varint,4,opt,name=timestamp" json:"timestamp,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CMsgDOTATournamentInfo_News) Reset()                    { *m = CMsgDOTATournamentInfo_News{} }
-func (m *CMsgDOTATournamentInfo_News) String() string            { return proto.CompactTextString(m) }
-func (*CMsgDOTATournamentInfo_News) ProtoMessage()               {}
-func (*CMsgDOTATournamentInfo_News) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{0, 4} }
+func (m *CMsgDOTATournamentInfo_News) Reset()         { *m = CMsgDOTATournamentInfo_News{} }
+func (m *CMsgDOTATournamentInfo_News) String() string { return proto.CompactTextString(m) }
+func (*CMsgDOTATournamentInfo_News) ProtoMessage()    {}
+func (*CMsgDOTATournamentInfo_News) Descriptor() ([]byte, []int) {
+	return fileDescriptor_dota_gcmessages_client_tournament_341d4112d2cb7bde, []int{0, 4}
+}
+func (m *CMsgDOTATournamentInfo_News) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTATournamentInfo_News.Unmarshal(m, b)
+}
+func (m *CMsgDOTATournamentInfo_News) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTATournamentInfo_News.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTATournamentInfo_News) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTATournamentInfo_News.Merge(dst, src)
+}
+func (m *CMsgDOTATournamentInfo_News) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTATournamentInfo_News.Size(m)
+}
+func (m *CMsgDOTATournamentInfo_News) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTATournamentInfo_News.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTATournamentInfo_News proto.InternalMessageInfo
 
 func (m *CMsgDOTATournamentInfo_News) GetLink() string {
 	if m != nil && m.Link != nil {
@@ -529,25 +657,65 @@ func (m *CMsgDOTATournamentInfo_News) GetTimestamp() uint32 {
 }
 
 type CMsgRequestWeekendTourneySchedule struct {
-	XXX_unrecognized []byte `json:"-"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *CMsgRequestWeekendTourneySchedule) Reset()         { *m = CMsgRequestWeekendTourneySchedule{} }
 func (m *CMsgRequestWeekendTourneySchedule) String() string { return proto.CompactTextString(m) }
 func (*CMsgRequestWeekendTourneySchedule) ProtoMessage()    {}
 func (*CMsgRequestWeekendTourneySchedule) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{1}
+	return fileDescriptor_dota_gcmessages_client_tournament_341d4112d2cb7bde, []int{1}
 }
+func (m *CMsgRequestWeekendTourneySchedule) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgRequestWeekendTourneySchedule.Unmarshal(m, b)
+}
+func (m *CMsgRequestWeekendTourneySchedule) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgRequestWeekendTourneySchedule.Marshal(b, m, deterministic)
+}
+func (dst *CMsgRequestWeekendTourneySchedule) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgRequestWeekendTourneySchedule.Merge(dst, src)
+}
+func (m *CMsgRequestWeekendTourneySchedule) XXX_Size() int {
+	return xxx_messageInfo_CMsgRequestWeekendTourneySchedule.Size(m)
+}
+func (m *CMsgRequestWeekendTourneySchedule) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgRequestWeekendTourneySchedule.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgRequestWeekendTourneySchedule proto.InternalMessageInfo
 
 type CMsgWeekendTourneySchedule struct {
-	Divisions        []*CMsgWeekendTourneySchedule_Division `protobuf:"bytes,1,rep,name=divisions" json:"divisions,omitempty"`
-	XXX_unrecognized []byte                                 `json:"-"`
+	Divisions            []*CMsgWeekendTourneySchedule_Division `protobuf:"bytes,1,rep,name=divisions" json:"divisions,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                               `json:"-"`
+	XXX_unrecognized     []byte                                 `json:"-"`
+	XXX_sizecache        int32                                  `json:"-"`
 }
 
-func (m *CMsgWeekendTourneySchedule) Reset()                    { *m = CMsgWeekendTourneySchedule{} }
-func (m *CMsgWeekendTourneySchedule) String() string            { return proto.CompactTextString(m) }
-func (*CMsgWeekendTourneySchedule) ProtoMessage()               {}
-func (*CMsgWeekendTourneySchedule) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{2} }
+func (m *CMsgWeekendTourneySchedule) Reset()         { *m = CMsgWeekendTourneySchedule{} }
+func (m *CMsgWeekendTourneySchedule) String() string { return proto.CompactTextString(m) }
+func (*CMsgWeekendTourneySchedule) ProtoMessage()    {}
+func (*CMsgWeekendTourneySchedule) Descriptor() ([]byte, []int) {
+	return fileDescriptor_dota_gcmessages_client_tournament_341d4112d2cb7bde, []int{2}
+}
+func (m *CMsgWeekendTourneySchedule) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgWeekendTourneySchedule.Unmarshal(m, b)
+}
+func (m *CMsgWeekendTourneySchedule) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgWeekendTourneySchedule.Marshal(b, m, deterministic)
+}
+func (dst *CMsgWeekendTourneySchedule) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgWeekendTourneySchedule.Merge(dst, src)
+}
+func (m *CMsgWeekendTourneySchedule) XXX_Size() int {
+	return xxx_messageInfo_CMsgWeekendTourneySchedule.Size(m)
+}
+func (m *CMsgWeekendTourneySchedule) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgWeekendTourneySchedule.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgWeekendTourneySchedule proto.InternalMessageInfo
 
 func (m *CMsgWeekendTourneySchedule) GetDivisions() []*CMsgWeekendTourneySchedule_Division {
 	if m != nil {
@@ -557,21 +725,40 @@ func (m *CMsgWeekendTourneySchedule) GetDivisions() []*CMsgWeekendTourneySchedul
 }
 
 type CMsgWeekendTourneySchedule_Division struct {
-	DivisionCode       *uint32 `protobuf:"varint,1,opt,name=division_code,json=divisionCode" json:"division_code,omitempty"`
-	TimeWindowOpen     *uint32 `protobuf:"varint,2,opt,name=time_window_open,json=timeWindowOpen" json:"time_window_open,omitempty"`
-	TimeWindowClose    *uint32 `protobuf:"varint,3,opt,name=time_window_close,json=timeWindowClose" json:"time_window_close,omitempty"`
-	TimeWindowOpenNext *uint32 `protobuf:"varint,4,opt,name=time_window_open_next,json=timeWindowOpenNext" json:"time_window_open_next,omitempty"`
-	TrophyId           *uint32 `protobuf:"varint,5,opt,name=trophy_id,json=trophyId" json:"trophy_id,omitempty"`
-	FreeWeekend        *bool   `protobuf:"varint,6,opt,name=free_weekend,json=freeWeekend" json:"free_weekend,omitempty"`
-	XXX_unrecognized   []byte  `json:"-"`
+	DivisionCode         *uint32  `protobuf:"varint,1,opt,name=division_code,json=divisionCode" json:"division_code,omitempty"`
+	TimeWindowOpen       *uint32  `protobuf:"varint,2,opt,name=time_window_open,json=timeWindowOpen" json:"time_window_open,omitempty"`
+	TimeWindowClose      *uint32  `protobuf:"varint,3,opt,name=time_window_close,json=timeWindowClose" json:"time_window_close,omitempty"`
+	TimeWindowOpenNext   *uint32  `protobuf:"varint,4,opt,name=time_window_open_next,json=timeWindowOpenNext" json:"time_window_open_next,omitempty"`
+	TrophyId             *uint32  `protobuf:"varint,5,opt,name=trophy_id,json=trophyId" json:"trophy_id,omitempty"`
+	FreeWeekend          *bool    `protobuf:"varint,6,opt,name=free_weekend,json=freeWeekend" json:"free_weekend,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *CMsgWeekendTourneySchedule_Division) Reset()         { *m = CMsgWeekendTourneySchedule_Division{} }
 func (m *CMsgWeekendTourneySchedule_Division) String() string { return proto.CompactTextString(m) }
 func (*CMsgWeekendTourneySchedule_Division) ProtoMessage()    {}
 func (*CMsgWeekendTourneySchedule_Division) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{2, 0}
+	return fileDescriptor_dota_gcmessages_client_tournament_341d4112d2cb7bde, []int{2, 0}
 }
+func (m *CMsgWeekendTourneySchedule_Division) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgWeekendTourneySchedule_Division.Unmarshal(m, b)
+}
+func (m *CMsgWeekendTourneySchedule_Division) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgWeekendTourneySchedule_Division.Marshal(b, m, deterministic)
+}
+func (dst *CMsgWeekendTourneySchedule_Division) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgWeekendTourneySchedule_Division.Merge(dst, src)
+}
+func (m *CMsgWeekendTourneySchedule_Division) XXX_Size() int {
+	return xxx_messageInfo_CMsgWeekendTourneySchedule_Division.Size(m)
+}
+func (m *CMsgWeekendTourneySchedule_Division) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgWeekendTourneySchedule_Division.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgWeekendTourneySchedule_Division proto.InternalMessageInfo
 
 func (m *CMsgWeekendTourneySchedule_Division) GetDivisionCode() uint32 {
 	if m != nil && m.DivisionCode != nil {
@@ -616,21 +803,42 @@ func (m *CMsgWeekendTourneySchedule_Division) GetFreeWeekend() bool {
 }
 
 type CMsgWeekendTourneyOpts struct {
-	Participating    *bool   `protobuf:"varint,1,opt,name=participating" json:"participating,omitempty"`
-	DivisionId       *uint32 `protobuf:"varint,2,opt,name=division_id,json=divisionId" json:"division_id,omitempty"`
-	Buyin            *uint32 `protobuf:"varint,3,opt,name=buyin" json:"buyin,omitempty"`
-	SkillLevel       *uint32 `protobuf:"varint,4,opt,name=skill_level,json=skillLevel" json:"skill_level,omitempty"`
-	MatchGroups      *uint32 `protobuf:"varint,5,opt,name=match_groups,json=matchGroups" json:"match_groups,omitempty"`
-	TeamId           *uint32 `protobuf:"varint,6,opt,name=team_id,json=teamId" json:"team_id,omitempty"`
-	PickupTeamName   *string `protobuf:"bytes,7,opt,name=pickup_team_name,json=pickupTeamName" json:"pickup_team_name,omitempty"`
-	PickupTeamLogo   *uint64 `protobuf:"varint,8,opt,name=pickup_team_logo,json=pickupTeamLogo" json:"pickup_team_logo,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Participating        *bool    `protobuf:"varint,1,opt,name=participating" json:"participating,omitempty"`
+	DivisionId           *uint32  `protobuf:"varint,2,opt,name=division_id,json=divisionId" json:"division_id,omitempty"`
+	Buyin                *uint32  `protobuf:"varint,3,opt,name=buyin" json:"buyin,omitempty"`
+	SkillLevel           *uint32  `protobuf:"varint,4,opt,name=skill_level,json=skillLevel" json:"skill_level,omitempty"`
+	MatchGroups          *uint32  `protobuf:"varint,5,opt,name=match_groups,json=matchGroups" json:"match_groups,omitempty"`
+	TeamId               *uint32  `protobuf:"varint,6,opt,name=team_id,json=teamId" json:"team_id,omitempty"`
+	PickupTeamName       *string  `protobuf:"bytes,7,opt,name=pickup_team_name,json=pickupTeamName" json:"pickup_team_name,omitempty"`
+	PickupTeamLogo       *uint64  `protobuf:"varint,8,opt,name=pickup_team_logo,json=pickupTeamLogo" json:"pickup_team_logo,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CMsgWeekendTourneyOpts) Reset()                    { *m = CMsgWeekendTourneyOpts{} }
-func (m *CMsgWeekendTourneyOpts) String() string            { return proto.CompactTextString(m) }
-func (*CMsgWeekendTourneyOpts) ProtoMessage()               {}
-func (*CMsgWeekendTourneyOpts) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{3} }
+func (m *CMsgWeekendTourneyOpts) Reset()         { *m = CMsgWeekendTourneyOpts{} }
+func (m *CMsgWeekendTourneyOpts) String() string { return proto.CompactTextString(m) }
+func (*CMsgWeekendTourneyOpts) ProtoMessage()    {}
+func (*CMsgWeekendTourneyOpts) Descriptor() ([]byte, []int) {
+	return fileDescriptor_dota_gcmessages_client_tournament_341d4112d2cb7bde, []int{3}
+}
+func (m *CMsgWeekendTourneyOpts) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgWeekendTourneyOpts.Unmarshal(m, b)
+}
+func (m *CMsgWeekendTourneyOpts) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgWeekendTourneyOpts.Marshal(b, m, deterministic)
+}
+func (dst *CMsgWeekendTourneyOpts) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgWeekendTourneyOpts.Merge(dst, src)
+}
+func (m *CMsgWeekendTourneyOpts) XXX_Size() int {
+	return xxx_messageInfo_CMsgWeekendTourneyOpts.Size(m)
+}
+func (m *CMsgWeekendTourneyOpts) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgWeekendTourneyOpts.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgWeekendTourneyOpts proto.InternalMessageInfo
 
 func (m *CMsgWeekendTourneyOpts) GetParticipating() bool {
 	if m != nil && m.Participating != nil {
@@ -689,33 +897,75 @@ func (m *CMsgWeekendTourneyOpts) GetPickupTeamLogo() uint64 {
 }
 
 type CMsgWeekendTourneyLeave struct {
-	XXX_unrecognized []byte `json:"-"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CMsgWeekendTourneyLeave) Reset()                    { *m = CMsgWeekendTourneyLeave{} }
-func (m *CMsgWeekendTourneyLeave) String() string            { return proto.CompactTextString(m) }
-func (*CMsgWeekendTourneyLeave) ProtoMessage()               {}
-func (*CMsgWeekendTourneyLeave) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{4} }
+func (m *CMsgWeekendTourneyLeave) Reset()         { *m = CMsgWeekendTourneyLeave{} }
+func (m *CMsgWeekendTourneyLeave) String() string { return proto.CompactTextString(m) }
+func (*CMsgWeekendTourneyLeave) ProtoMessage()    {}
+func (*CMsgWeekendTourneyLeave) Descriptor() ([]byte, []int) {
+	return fileDescriptor_dota_gcmessages_client_tournament_341d4112d2cb7bde, []int{4}
+}
+func (m *CMsgWeekendTourneyLeave) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgWeekendTourneyLeave.Unmarshal(m, b)
+}
+func (m *CMsgWeekendTourneyLeave) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgWeekendTourneyLeave.Marshal(b, m, deterministic)
+}
+func (dst *CMsgWeekendTourneyLeave) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgWeekendTourneyLeave.Merge(dst, src)
+}
+func (m *CMsgWeekendTourneyLeave) XXX_Size() int {
+	return xxx_messageInfo_CMsgWeekendTourneyLeave.Size(m)
+}
+func (m *CMsgWeekendTourneyLeave) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgWeekendTourneyLeave.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgWeekendTourneyLeave proto.InternalMessageInfo
 
 type CMsgDOTATournament struct {
-	TournamentId       *uint32                    `protobuf:"varint,1,opt,name=tournament_id,json=tournamentId" json:"tournament_id,omitempty"`
-	DivisionId         *uint32                    `protobuf:"varint,2,opt,name=division_id,json=divisionId" json:"division_id,omitempty"`
-	ScheduleTime       *uint32                    `protobuf:"varint,3,opt,name=schedule_time,json=scheduleTime" json:"schedule_time,omitempty"`
-	SkillLevel         *uint32                    `protobuf:"varint,4,opt,name=skill_level,json=skillLevel" json:"skill_level,omitempty"`
-	TournamentTemplate *ETournamentTemplate       `protobuf:"varint,5,opt,name=tournament_template,json=tournamentTemplate,enum=dota.ETournamentTemplate,def=0" json:"tournament_template,omitempty"`
-	State              *ETournamentState          `protobuf:"varint,6,opt,name=state,enum=dota.ETournamentState,def=0" json:"state,omitempty"`
-	StateSeqNum        *uint32                    `protobuf:"varint,10,opt,name=state_seq_num,json=stateSeqNum" json:"state_seq_num,omitempty"`
-	SeasonTrophyId     *uint32                    `protobuf:"varint,11,opt,name=season_trophy_id,json=seasonTrophyId" json:"season_trophy_id,omitempty"`
-	Teams              []*CMsgDOTATournament_Team `protobuf:"bytes,7,rep,name=teams" json:"teams,omitempty"`
-	Games              []*CMsgDOTATournament_Game `protobuf:"bytes,8,rep,name=games" json:"games,omitempty"`
-	Nodes              []*CMsgDOTATournament_Node `protobuf:"bytes,9,rep,name=nodes" json:"nodes,omitempty"`
-	XXX_unrecognized   []byte                     `json:"-"`
+	TournamentId         *uint32                    `protobuf:"varint,1,opt,name=tournament_id,json=tournamentId" json:"tournament_id,omitempty"`
+	DivisionId           *uint32                    `protobuf:"varint,2,opt,name=division_id,json=divisionId" json:"division_id,omitempty"`
+	ScheduleTime         *uint32                    `protobuf:"varint,3,opt,name=schedule_time,json=scheduleTime" json:"schedule_time,omitempty"`
+	SkillLevel           *uint32                    `protobuf:"varint,4,opt,name=skill_level,json=skillLevel" json:"skill_level,omitempty"`
+	TournamentTemplate   *ETournamentTemplate       `protobuf:"varint,5,opt,name=tournament_template,json=tournamentTemplate,enum=dota.ETournamentTemplate,def=0" json:"tournament_template,omitempty"`
+	State                *ETournamentState          `protobuf:"varint,6,opt,name=state,enum=dota.ETournamentState,def=0" json:"state,omitempty"`
+	StateSeqNum          *uint32                    `protobuf:"varint,10,opt,name=state_seq_num,json=stateSeqNum" json:"state_seq_num,omitempty"`
+	SeasonTrophyId       *uint32                    `protobuf:"varint,11,opt,name=season_trophy_id,json=seasonTrophyId" json:"season_trophy_id,omitempty"`
+	Teams                []*CMsgDOTATournament_Team `protobuf:"bytes,7,rep,name=teams" json:"teams,omitempty"`
+	Games                []*CMsgDOTATournament_Game `protobuf:"bytes,8,rep,name=games" json:"games,omitempty"`
+	Nodes                []*CMsgDOTATournament_Node `protobuf:"bytes,9,rep,name=nodes" json:"nodes,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                   `json:"-"`
+	XXX_unrecognized     []byte                     `json:"-"`
+	XXX_sizecache        int32                      `json:"-"`
 }
 
-func (m *CMsgDOTATournament) Reset()                    { *m = CMsgDOTATournament{} }
-func (m *CMsgDOTATournament) String() string            { return proto.CompactTextString(m) }
-func (*CMsgDOTATournament) ProtoMessage()               {}
-func (*CMsgDOTATournament) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{5} }
+func (m *CMsgDOTATournament) Reset()         { *m = CMsgDOTATournament{} }
+func (m *CMsgDOTATournament) String() string { return proto.CompactTextString(m) }
+func (*CMsgDOTATournament) ProtoMessage()    {}
+func (*CMsgDOTATournament) Descriptor() ([]byte, []int) {
+	return fileDescriptor_dota_gcmessages_client_tournament_341d4112d2cb7bde, []int{5}
+}
+func (m *CMsgDOTATournament) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTATournament.Unmarshal(m, b)
+}
+func (m *CMsgDOTATournament) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTATournament.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTATournament) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTATournament.Merge(dst, src)
+}
+func (m *CMsgDOTATournament) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTATournament.Size(m)
+}
+func (m *CMsgDOTATournament) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTATournament.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTATournament proto.InternalMessageInfo
 
 const Default_CMsgDOTATournament_TournamentTemplate ETournamentTemplate = ETournamentTemplate_k_ETournamentTemplate_None
 const Default_CMsgDOTATournament_State ETournamentState = ETournamentState_k_ETournamentState_Unknown
@@ -798,24 +1048,44 @@ func (m *CMsgDOTATournament) GetNodes() []*CMsgDOTATournament_Node {
 }
 
 type CMsgDOTATournament_Team struct {
-	TeamGid          *uint64  `protobuf:"fixed64,1,opt,name=team_gid,json=teamGid" json:"team_gid,omitempty"`
-	NodeOrState      *uint32  `protobuf:"varint,2,opt,name=node_or_state,json=nodeOrState" json:"node_or_state,omitempty"`
-	Players          []uint32 `protobuf:"varint,3,rep,packed,name=players" json:"players,omitempty"`
-	PlayerBuyin      []uint32 `protobuf:"varint,9,rep,packed,name=player_buyin,json=playerBuyin" json:"player_buyin,omitempty"`
-	PlayerSkillLevel []uint32 `protobuf:"varint,10,rep,packed,name=player_skill_level,json=playerSkillLevel" json:"player_skill_level,omitempty"`
-	MatchGroupMask   *uint32  `protobuf:"varint,12,opt,name=match_group_mask,json=matchGroupMask" json:"match_group_mask,omitempty"`
-	TeamId           *uint32  `protobuf:"varint,4,opt,name=team_id,json=teamId" json:"team_id,omitempty"`
-	TeamName         *string  `protobuf:"bytes,5,opt,name=team_name,json=teamName" json:"team_name,omitempty"`
-	TeamBaseLogo     *uint64  `protobuf:"varint,7,opt,name=team_base_logo,json=teamBaseLogo" json:"team_base_logo,omitempty"`
-	TeamUiLogo       *uint64  `protobuf:"varint,8,opt,name=team_ui_logo,json=teamUiLogo" json:"team_ui_logo,omitempty"`
-	TeamDate         *uint32  `protobuf:"varint,11,opt,name=team_date,json=teamDate" json:"team_date,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	TeamGid              *uint64  `protobuf:"fixed64,1,opt,name=team_gid,json=teamGid" json:"team_gid,omitempty"`
+	NodeOrState          *uint32  `protobuf:"varint,2,opt,name=node_or_state,json=nodeOrState" json:"node_or_state,omitempty"`
+	Players              []uint32 `protobuf:"varint,3,rep,packed,name=players" json:"players,omitempty"`
+	PlayerBuyin          []uint32 `protobuf:"varint,9,rep,packed,name=player_buyin,json=playerBuyin" json:"player_buyin,omitempty"`
+	PlayerSkillLevel     []uint32 `protobuf:"varint,10,rep,packed,name=player_skill_level,json=playerSkillLevel" json:"player_skill_level,omitempty"`
+	MatchGroupMask       *uint32  `protobuf:"varint,12,opt,name=match_group_mask,json=matchGroupMask" json:"match_group_mask,omitempty"`
+	TeamId               *uint32  `protobuf:"varint,4,opt,name=team_id,json=teamId" json:"team_id,omitempty"`
+	TeamName             *string  `protobuf:"bytes,5,opt,name=team_name,json=teamName" json:"team_name,omitempty"`
+	TeamBaseLogo         *uint64  `protobuf:"varint,7,opt,name=team_base_logo,json=teamBaseLogo" json:"team_base_logo,omitempty"`
+	TeamUiLogo           *uint64  `protobuf:"varint,8,opt,name=team_ui_logo,json=teamUiLogo" json:"team_ui_logo,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CMsgDOTATournament_Team) Reset()                    { *m = CMsgDOTATournament_Team{} }
-func (m *CMsgDOTATournament_Team) String() string            { return proto.CompactTextString(m) }
-func (*CMsgDOTATournament_Team) ProtoMessage()               {}
-func (*CMsgDOTATournament_Team) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{5, 0} }
+func (m *CMsgDOTATournament_Team) Reset()         { *m = CMsgDOTATournament_Team{} }
+func (m *CMsgDOTATournament_Team) String() string { return proto.CompactTextString(m) }
+func (*CMsgDOTATournament_Team) ProtoMessage()    {}
+func (*CMsgDOTATournament_Team) Descriptor() ([]byte, []int) {
+	return fileDescriptor_dota_gcmessages_client_tournament_341d4112d2cb7bde, []int{5, 0}
+}
+func (m *CMsgDOTATournament_Team) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTATournament_Team.Unmarshal(m, b)
+}
+func (m *CMsgDOTATournament_Team) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTATournament_Team.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTATournament_Team) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTATournament_Team.Merge(dst, src)
+}
+func (m *CMsgDOTATournament_Team) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTATournament_Team.Size(m)
+}
+func (m *CMsgDOTATournament_Team) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTATournament_Team.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTATournament_Team proto.InternalMessageInfo
 
 func (m *CMsgDOTATournament_Team) GetTeamGid() uint64 {
 	if m != nil && m.TeamGid != nil {
@@ -887,27 +1157,41 @@ func (m *CMsgDOTATournament_Team) GetTeamUiLogo() uint64 {
 	return 0
 }
 
-func (m *CMsgDOTATournament_Team) GetTeamDate() uint32 {
-	if m != nil && m.TeamDate != nil {
-		return *m.TeamDate
-	}
-	return 0
-}
-
 type CMsgDOTATournament_Game struct {
-	NodeIdx          *uint32               `protobuf:"varint,1,opt,name=node_idx,json=nodeIdx" json:"node_idx,omitempty"`
-	LobbyId          *uint64               `protobuf:"fixed64,2,opt,name=lobby_id,json=lobbyId" json:"lobby_id,omitempty"`
-	MatchId          *uint64               `protobuf:"varint,3,opt,name=match_id,json=matchId" json:"match_id,omitempty"`
-	TeamAGood        *bool                 `protobuf:"varint,4,opt,name=team_a_good,json=teamAGood" json:"team_a_good,omitempty"`
-	State            *ETournamentGameState `protobuf:"varint,5,opt,name=state,enum=dota.ETournamentGameState,def=0" json:"state,omitempty"`
-	StartTime        *uint32               `protobuf:"varint,6,opt,name=start_time,json=startTime" json:"start_time,omitempty"`
-	XXX_unrecognized []byte                `json:"-"`
+	NodeIdx              *uint32               `protobuf:"varint,1,opt,name=node_idx,json=nodeIdx" json:"node_idx,omitempty"`
+	LobbyId              *uint64               `protobuf:"fixed64,2,opt,name=lobby_id,json=lobbyId" json:"lobby_id,omitempty"`
+	MatchId              *uint64               `protobuf:"varint,3,opt,name=match_id,json=matchId" json:"match_id,omitempty"`
+	TeamAGood            *bool                 `protobuf:"varint,4,opt,name=team_a_good,json=teamAGood" json:"team_a_good,omitempty"`
+	State                *ETournamentGameState `protobuf:"varint,5,opt,name=state,enum=dota.ETournamentGameState,def=0" json:"state,omitempty"`
+	StartTime            *uint32               `protobuf:"varint,6,opt,name=start_time,json=startTime" json:"start_time,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}              `json:"-"`
+	XXX_unrecognized     []byte                `json:"-"`
+	XXX_sizecache        int32                 `json:"-"`
 }
 
-func (m *CMsgDOTATournament_Game) Reset()                    { *m = CMsgDOTATournament_Game{} }
-func (m *CMsgDOTATournament_Game) String() string            { return proto.CompactTextString(m) }
-func (*CMsgDOTATournament_Game) ProtoMessage()               {}
-func (*CMsgDOTATournament_Game) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{5, 1} }
+func (m *CMsgDOTATournament_Game) Reset()         { *m = CMsgDOTATournament_Game{} }
+func (m *CMsgDOTATournament_Game) String() string { return proto.CompactTextString(m) }
+func (*CMsgDOTATournament_Game) ProtoMessage()    {}
+func (*CMsgDOTATournament_Game) Descriptor() ([]byte, []int) {
+	return fileDescriptor_dota_gcmessages_client_tournament_341d4112d2cb7bde, []int{5, 1}
+}
+func (m *CMsgDOTATournament_Game) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTATournament_Game.Unmarshal(m, b)
+}
+func (m *CMsgDOTATournament_Game) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTATournament_Game.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTATournament_Game) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTATournament_Game.Merge(dst, src)
+}
+func (m *CMsgDOTATournament_Game) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTATournament_Game.Size(m)
+}
+func (m *CMsgDOTATournament_Game) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTATournament_Game.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTATournament_Game proto.InternalMessageInfo
 
 const Default_CMsgDOTATournament_Game_State ETournamentGameState = ETournamentGameState_k_ETournamentGameState_Unknown
 
@@ -954,17 +1238,38 @@ func (m *CMsgDOTATournament_Game) GetStartTime() uint32 {
 }
 
 type CMsgDOTATournament_Node struct {
-	NodeId           *uint32               `protobuf:"varint,1,opt,name=node_id,json=nodeId" json:"node_id,omitempty"`
-	TeamIdxA         *uint32               `protobuf:"varint,2,opt,name=team_idx_a,json=teamIdxA" json:"team_idx_a,omitempty"`
-	TeamIdxB         *uint32               `protobuf:"varint,3,opt,name=team_idx_b,json=teamIdxB" json:"team_idx_b,omitempty"`
-	NodeState        *ETournamentNodeState `protobuf:"varint,4,opt,name=node_state,json=nodeState,enum=dota.ETournamentNodeState,def=0" json:"node_state,omitempty"`
-	XXX_unrecognized []byte                `json:"-"`
+	NodeId               *uint32               `protobuf:"varint,1,opt,name=node_id,json=nodeId" json:"node_id,omitempty"`
+	TeamIdxA             *uint32               `protobuf:"varint,2,opt,name=team_idx_a,json=teamIdxA" json:"team_idx_a,omitempty"`
+	TeamIdxB             *uint32               `protobuf:"varint,3,opt,name=team_idx_b,json=teamIdxB" json:"team_idx_b,omitempty"`
+	NodeState            *ETournamentNodeState `protobuf:"varint,4,opt,name=node_state,json=nodeState,enum=dota.ETournamentNodeState,def=0" json:"node_state,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}              `json:"-"`
+	XXX_unrecognized     []byte                `json:"-"`
+	XXX_sizecache        int32                 `json:"-"`
 }
 
-func (m *CMsgDOTATournament_Node) Reset()                    { *m = CMsgDOTATournament_Node{} }
-func (m *CMsgDOTATournament_Node) String() string            { return proto.CompactTextString(m) }
-func (*CMsgDOTATournament_Node) ProtoMessage()               {}
-func (*CMsgDOTATournament_Node) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{5, 2} }
+func (m *CMsgDOTATournament_Node) Reset()         { *m = CMsgDOTATournament_Node{} }
+func (m *CMsgDOTATournament_Node) String() string { return proto.CompactTextString(m) }
+func (*CMsgDOTATournament_Node) ProtoMessage()    {}
+func (*CMsgDOTATournament_Node) Descriptor() ([]byte, []int) {
+	return fileDescriptor_dota_gcmessages_client_tournament_341d4112d2cb7bde, []int{5, 2}
+}
+func (m *CMsgDOTATournament_Node) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTATournament_Node.Unmarshal(m, b)
+}
+func (m *CMsgDOTATournament_Node) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTATournament_Node.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTATournament_Node) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTATournament_Node.Merge(dst, src)
+}
+func (m *CMsgDOTATournament_Node) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTATournament_Node.Size(m)
+}
+func (m *CMsgDOTATournament_Node) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTATournament_Node.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTATournament_Node proto.InternalMessageInfo
 
 const Default_CMsgDOTATournament_Node_NodeState ETournamentNodeState = ETournamentNodeState_k_ETournamentNodeState_Unknown
 
@@ -997,20 +1302,41 @@ func (m *CMsgDOTATournament_Node) GetNodeState() ETournamentNodeState {
 }
 
 type CMsgDOTATournamentStateChange struct {
-	NewTournamentId     *uint32                                     `protobuf:"varint,1,opt,name=new_tournament_id,json=newTournamentId" json:"new_tournament_id,omitempty"`
-	Event               *ETournamentEvent                           `protobuf:"varint,2,opt,name=event,enum=dota.ETournamentEvent,def=0" json:"event,omitempty"`
-	NewTournamentState  *ETournamentState                           `protobuf:"varint,3,opt,name=new_tournament_state,json=newTournamentState,enum=dota.ETournamentState,def=0" json:"new_tournament_state,omitempty"`
-	GameChanges         []*CMsgDOTATournamentStateChange_GameChange `protobuf:"bytes,4,rep,name=game_changes,json=gameChanges" json:"game_changes,omitempty"`
-	TeamChanges         []*CMsgDOTATournamentStateChange_TeamChange `protobuf:"bytes,5,rep,name=team_changes,json=teamChanges" json:"team_changes,omitempty"`
-	MergedTournamentIds []uint32                                    `protobuf:"varint,6,rep,packed,name=merged_tournament_ids,json=mergedTournamentIds" json:"merged_tournament_ids,omitempty"`
-	StateSeqNum         *uint32                                     `protobuf:"varint,7,opt,name=state_seq_num,json=stateSeqNum" json:"state_seq_num,omitempty"`
-	XXX_unrecognized    []byte                                      `json:"-"`
+	NewTournamentId      *uint32                                     `protobuf:"varint,1,opt,name=new_tournament_id,json=newTournamentId" json:"new_tournament_id,omitempty"`
+	Event                *ETournamentEvent                           `protobuf:"varint,2,opt,name=event,enum=dota.ETournamentEvent,def=0" json:"event,omitempty"`
+	NewTournamentState   *ETournamentState                           `protobuf:"varint,3,opt,name=new_tournament_state,json=newTournamentState,enum=dota.ETournamentState,def=0" json:"new_tournament_state,omitempty"`
+	GameChanges          []*CMsgDOTATournamentStateChange_GameChange `protobuf:"bytes,4,rep,name=game_changes,json=gameChanges" json:"game_changes,omitempty"`
+	TeamChanges          []*CMsgDOTATournamentStateChange_TeamChange `protobuf:"bytes,5,rep,name=team_changes,json=teamChanges" json:"team_changes,omitempty"`
+	MergedTournamentIds  []uint32                                    `protobuf:"varint,6,rep,packed,name=merged_tournament_ids,json=mergedTournamentIds" json:"merged_tournament_ids,omitempty"`
+	StateSeqNum          *uint32                                     `protobuf:"varint,7,opt,name=state_seq_num,json=stateSeqNum" json:"state_seq_num,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                    `json:"-"`
+	XXX_unrecognized     []byte                                      `json:"-"`
+	XXX_sizecache        int32                                       `json:"-"`
 }
 
-func (m *CMsgDOTATournamentStateChange) Reset()                    { *m = CMsgDOTATournamentStateChange{} }
-func (m *CMsgDOTATournamentStateChange) String() string            { return proto.CompactTextString(m) }
-func (*CMsgDOTATournamentStateChange) ProtoMessage()               {}
-func (*CMsgDOTATournamentStateChange) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{6} }
+func (m *CMsgDOTATournamentStateChange) Reset()         { *m = CMsgDOTATournamentStateChange{} }
+func (m *CMsgDOTATournamentStateChange) String() string { return proto.CompactTextString(m) }
+func (*CMsgDOTATournamentStateChange) ProtoMessage()    {}
+func (*CMsgDOTATournamentStateChange) Descriptor() ([]byte, []int) {
+	return fileDescriptor_dota_gcmessages_client_tournament_341d4112d2cb7bde, []int{6}
+}
+func (m *CMsgDOTATournamentStateChange) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTATournamentStateChange.Unmarshal(m, b)
+}
+func (m *CMsgDOTATournamentStateChange) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTATournamentStateChange.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTATournamentStateChange) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTATournamentStateChange.Merge(dst, src)
+}
+func (m *CMsgDOTATournamentStateChange) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTATournamentStateChange.Size(m)
+}
+func (m *CMsgDOTATournamentStateChange) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTATournamentStateChange.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTATournamentStateChange proto.InternalMessageInfo
 
 const Default_CMsgDOTATournamentStateChange_Event ETournamentEvent = ETournamentEvent_k_ETournamentEvent_None
 const Default_CMsgDOTATournamentStateChange_NewTournamentState ETournamentState = ETournamentState_k_ETournamentState_Unknown
@@ -1065,9 +1391,11 @@ func (m *CMsgDOTATournamentStateChange) GetStateSeqNum() uint32 {
 }
 
 type CMsgDOTATournamentStateChange_GameChange struct {
-	MatchId          *uint64               `protobuf:"varint,1,opt,name=match_id,json=matchId" json:"match_id,omitempty"`
-	NewState         *ETournamentGameState `protobuf:"varint,2,opt,name=new_state,json=newState,enum=dota.ETournamentGameState,def=0" json:"new_state,omitempty"`
-	XXX_unrecognized []byte                `json:"-"`
+	MatchId              *uint64               `protobuf:"varint,1,opt,name=match_id,json=matchId" json:"match_id,omitempty"`
+	NewState             *ETournamentGameState `protobuf:"varint,2,opt,name=new_state,json=newState,enum=dota.ETournamentGameState,def=0" json:"new_state,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}              `json:"-"`
+	XXX_unrecognized     []byte                `json:"-"`
+	XXX_sizecache        int32                 `json:"-"`
 }
 
 func (m *CMsgDOTATournamentStateChange_GameChange) Reset() {
@@ -1076,8 +1404,25 @@ func (m *CMsgDOTATournamentStateChange_GameChange) Reset() {
 func (m *CMsgDOTATournamentStateChange_GameChange) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTATournamentStateChange_GameChange) ProtoMessage()    {}
 func (*CMsgDOTATournamentStateChange_GameChange) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{6, 0}
+	return fileDescriptor_dota_gcmessages_client_tournament_341d4112d2cb7bde, []int{6, 0}
 }
+func (m *CMsgDOTATournamentStateChange_GameChange) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTATournamentStateChange_GameChange.Unmarshal(m, b)
+}
+func (m *CMsgDOTATournamentStateChange_GameChange) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTATournamentStateChange_GameChange.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTATournamentStateChange_GameChange) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTATournamentStateChange_GameChange.Merge(dst, src)
+}
+func (m *CMsgDOTATournamentStateChange_GameChange) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTATournamentStateChange_GameChange.Size(m)
+}
+func (m *CMsgDOTATournamentStateChange_GameChange) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTATournamentStateChange_GameChange.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTATournamentStateChange_GameChange proto.InternalMessageInfo
 
 const Default_CMsgDOTATournamentStateChange_GameChange_NewState ETournamentGameState = ETournamentGameState_k_ETournamentGameState_Unknown
 
@@ -1096,10 +1441,12 @@ func (m *CMsgDOTATournamentStateChange_GameChange) GetNewState() ETournamentGame
 }
 
 type CMsgDOTATournamentStateChange_TeamChange struct {
-	TeamGid          *uint64 `protobuf:"varint,1,opt,name=team_gid,json=teamGid" json:"team_gid,omitempty"`
-	NewNodeOrState   *uint32 `protobuf:"varint,2,opt,name=new_node_or_state,json=newNodeOrState" json:"new_node_or_state,omitempty"`
-	OldNodeOrState   *uint32 `protobuf:"varint,3,opt,name=old_node_or_state,json=oldNodeOrState" json:"old_node_or_state,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	TeamGid              *uint64  `protobuf:"varint,1,opt,name=team_gid,json=teamGid" json:"team_gid,omitempty"`
+	NewNodeOrState       *uint32  `protobuf:"varint,2,opt,name=new_node_or_state,json=newNodeOrState" json:"new_node_or_state,omitempty"`
+	OldNodeOrState       *uint32  `protobuf:"varint,3,opt,name=old_node_or_state,json=oldNodeOrState" json:"old_node_or_state,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *CMsgDOTATournamentStateChange_TeamChange) Reset() {
@@ -1108,8 +1455,25 @@ func (m *CMsgDOTATournamentStateChange_TeamChange) Reset() {
 func (m *CMsgDOTATournamentStateChange_TeamChange) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTATournamentStateChange_TeamChange) ProtoMessage()    {}
 func (*CMsgDOTATournamentStateChange_TeamChange) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{6, 1}
+	return fileDescriptor_dota_gcmessages_client_tournament_341d4112d2cb7bde, []int{6, 1}
 }
+func (m *CMsgDOTATournamentStateChange_TeamChange) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTATournamentStateChange_TeamChange.Unmarshal(m, b)
+}
+func (m *CMsgDOTATournamentStateChange_TeamChange) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTATournamentStateChange_TeamChange.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTATournamentStateChange_TeamChange) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTATournamentStateChange_TeamChange.Merge(dst, src)
+}
+func (m *CMsgDOTATournamentStateChange_TeamChange) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTATournamentStateChange_TeamChange.Size(m)
+}
+func (m *CMsgDOTATournamentStateChange_TeamChange) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTATournamentStateChange_TeamChange.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTATournamentStateChange_TeamChange proto.InternalMessageInfo
 
 func (m *CMsgDOTATournamentStateChange_TeamChange) GetTeamGid() uint64 {
 	if m != nil && m.TeamGid != nil {
@@ -1133,15 +1497,36 @@ func (m *CMsgDOTATournamentStateChange_TeamChange) GetOldNodeOrState() uint32 {
 }
 
 type CMsgDOTATournamentRequest struct {
-	TournamentId        *uint32 `protobuf:"varint,1,opt,name=tournament_id,json=tournamentId" json:"tournament_id,omitempty"`
-	ClientTournamentGid *uint64 `protobuf:"varint,2,opt,name=client_tournament_gid,json=clientTournamentGid" json:"client_tournament_gid,omitempty"`
-	XXX_unrecognized    []byte  `json:"-"`
+	TournamentId         *uint32  `protobuf:"varint,1,opt,name=tournament_id,json=tournamentId" json:"tournament_id,omitempty"`
+	ClientTournamentGid  *uint64  `protobuf:"varint,2,opt,name=client_tournament_gid,json=clientTournamentGid" json:"client_tournament_gid,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CMsgDOTATournamentRequest) Reset()                    { *m = CMsgDOTATournamentRequest{} }
-func (m *CMsgDOTATournamentRequest) String() string            { return proto.CompactTextString(m) }
-func (*CMsgDOTATournamentRequest) ProtoMessage()               {}
-func (*CMsgDOTATournamentRequest) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{7} }
+func (m *CMsgDOTATournamentRequest) Reset()         { *m = CMsgDOTATournamentRequest{} }
+func (m *CMsgDOTATournamentRequest) String() string { return proto.CompactTextString(m) }
+func (*CMsgDOTATournamentRequest) ProtoMessage()    {}
+func (*CMsgDOTATournamentRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_dota_gcmessages_client_tournament_341d4112d2cb7bde, []int{7}
+}
+func (m *CMsgDOTATournamentRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTATournamentRequest.Unmarshal(m, b)
+}
+func (m *CMsgDOTATournamentRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTATournamentRequest.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTATournamentRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTATournamentRequest.Merge(dst, src)
+}
+func (m *CMsgDOTATournamentRequest) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTATournamentRequest.Size(m)
+}
+func (m *CMsgDOTATournamentRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTATournamentRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTATournamentRequest proto.InternalMessageInfo
 
 func (m *CMsgDOTATournamentRequest) GetTournamentId() uint32 {
 	if m != nil && m.TournamentId != nil {
@@ -1158,15 +1543,36 @@ func (m *CMsgDOTATournamentRequest) GetClientTournamentGid() uint64 {
 }
 
 type CMsgDOTATournamentResponse struct {
-	Result           *uint32             `protobuf:"varint,1,opt,name=result,def=2" json:"result,omitempty"`
-	Tournament       *CMsgDOTATournament `protobuf:"bytes,2,opt,name=tournament" json:"tournament,omitempty"`
-	XXX_unrecognized []byte              `json:"-"`
+	Result               *uint32             `protobuf:"varint,1,opt,name=result,def=2" json:"result,omitempty"`
+	Tournament           *CMsgDOTATournament `protobuf:"bytes,2,opt,name=tournament" json:"tournament,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}            `json:"-"`
+	XXX_unrecognized     []byte              `json:"-"`
+	XXX_sizecache        int32               `json:"-"`
 }
 
-func (m *CMsgDOTATournamentResponse) Reset()                    { *m = CMsgDOTATournamentResponse{} }
-func (m *CMsgDOTATournamentResponse) String() string            { return proto.CompactTextString(m) }
-func (*CMsgDOTATournamentResponse) ProtoMessage()               {}
-func (*CMsgDOTATournamentResponse) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{8} }
+func (m *CMsgDOTATournamentResponse) Reset()         { *m = CMsgDOTATournamentResponse{} }
+func (m *CMsgDOTATournamentResponse) String() string { return proto.CompactTextString(m) }
+func (*CMsgDOTATournamentResponse) ProtoMessage()    {}
+func (*CMsgDOTATournamentResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_dota_gcmessages_client_tournament_341d4112d2cb7bde, []int{8}
+}
+func (m *CMsgDOTATournamentResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTATournamentResponse.Unmarshal(m, b)
+}
+func (m *CMsgDOTATournamentResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTATournamentResponse.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTATournamentResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTATournamentResponse.Merge(dst, src)
+}
+func (m *CMsgDOTATournamentResponse) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTATournamentResponse.Size(m)
+}
+func (m *CMsgDOTATournamentResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTATournamentResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTATournamentResponse proto.InternalMessageInfo
 
 const Default_CMsgDOTATournamentResponse_Result uint32 = 2
 
@@ -1185,15 +1591,36 @@ func (m *CMsgDOTATournamentResponse) GetTournament() *CMsgDOTATournament {
 }
 
 type CMsgDOTAClearTournamentGame struct {
-	TournamentId     *uint32 `protobuf:"varint,1,opt,name=tournament_id,json=tournamentId" json:"tournament_id,omitempty"`
-	GameId           *uint32 `protobuf:"varint,2,opt,name=game_id,json=gameId" json:"game_id,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	TournamentId         *uint32  `protobuf:"varint,1,opt,name=tournament_id,json=tournamentId" json:"tournament_id,omitempty"`
+	GameId               *uint32  `protobuf:"varint,2,opt,name=game_id,json=gameId" json:"game_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CMsgDOTAClearTournamentGame) Reset()                    { *m = CMsgDOTAClearTournamentGame{} }
-func (m *CMsgDOTAClearTournamentGame) String() string            { return proto.CompactTextString(m) }
-func (*CMsgDOTAClearTournamentGame) ProtoMessage()               {}
-func (*CMsgDOTAClearTournamentGame) Descriptor() ([]byte, []int) { return fileDescriptor15, []int{9} }
+func (m *CMsgDOTAClearTournamentGame) Reset()         { *m = CMsgDOTAClearTournamentGame{} }
+func (m *CMsgDOTAClearTournamentGame) String() string { return proto.CompactTextString(m) }
+func (*CMsgDOTAClearTournamentGame) ProtoMessage()    {}
+func (*CMsgDOTAClearTournamentGame) Descriptor() ([]byte, []int) {
+	return fileDescriptor_dota_gcmessages_client_tournament_341d4112d2cb7bde, []int{9}
+}
+func (m *CMsgDOTAClearTournamentGame) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTAClearTournamentGame.Unmarshal(m, b)
+}
+func (m *CMsgDOTAClearTournamentGame) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTAClearTournamentGame.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTAClearTournamentGame) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAClearTournamentGame.Merge(dst, src)
+}
+func (m *CMsgDOTAClearTournamentGame) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTAClearTournamentGame.Size(m)
+}
+func (m *CMsgDOTAClearTournamentGame) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTAClearTournamentGame.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTAClearTournamentGame proto.InternalMessageInfo
 
 func (m *CMsgDOTAClearTournamentGame) GetTournamentId() uint32 {
 	if m != nil && m.TournamentId != nil {
@@ -1210,17 +1637,19 @@ func (m *CMsgDOTAClearTournamentGame) GetGameId() uint32 {
 }
 
 type CMsgDOTAWeekendTourneyPlayerSkillLevelStats struct {
-	SkillLevel        *uint32 `protobuf:"varint,1,opt,name=skill_level,json=skillLevel" json:"skill_level,omitempty"`
-	TimesWon_0        *uint32 `protobuf:"varint,2,opt,name=times_won_0,json=timesWon0" json:"times_won_0,omitempty"`
-	TimesWon_1        *uint32 `protobuf:"varint,3,opt,name=times_won_1,json=timesWon1" json:"times_won_1,omitempty"`
-	TimesWon_2        *uint32 `protobuf:"varint,4,opt,name=times_won_2,json=timesWon2" json:"times_won_2,omitempty"`
-	TimesWon_3        *uint32 `protobuf:"varint,5,opt,name=times_won_3,json=timesWon3" json:"times_won_3,omitempty"`
-	TimesByeAndLost   *uint32 `protobuf:"varint,6,opt,name=times_bye_and_lost,json=timesByeAndLost" json:"times_bye_and_lost,omitempty"`
-	TimesByeAndWon    *uint32 `protobuf:"varint,7,opt,name=times_bye_and_won,json=timesByeAndWon" json:"times_bye_and_won,omitempty"`
-	TimesUnusualChamp *uint32 `protobuf:"varint,10,opt,name=times_unusual_champ,json=timesUnusualChamp" json:"times_unusual_champ,omitempty"`
-	TotalGamesWon     *uint32 `protobuf:"varint,8,opt,name=total_games_won,json=totalGamesWon" json:"total_games_won,omitempty"`
-	Score             *uint32 `protobuf:"varint,9,opt,name=score" json:"score,omitempty"`
-	XXX_unrecognized  []byte  `json:"-"`
+	SkillLevel           *uint32  `protobuf:"varint,1,opt,name=skill_level,json=skillLevel" json:"skill_level,omitempty"`
+	TimesWon_0           *uint32  `protobuf:"varint,2,opt,name=times_won_0,json=timesWon0" json:"times_won_0,omitempty"`
+	TimesWon_1           *uint32  `protobuf:"varint,3,opt,name=times_won_1,json=timesWon1" json:"times_won_1,omitempty"`
+	TimesWon_2           *uint32  `protobuf:"varint,4,opt,name=times_won_2,json=timesWon2" json:"times_won_2,omitempty"`
+	TimesWon_3           *uint32  `protobuf:"varint,5,opt,name=times_won_3,json=timesWon3" json:"times_won_3,omitempty"`
+	TimesByeAndLost      *uint32  `protobuf:"varint,6,opt,name=times_bye_and_lost,json=timesByeAndLost" json:"times_bye_and_lost,omitempty"`
+	TimesByeAndWon       *uint32  `protobuf:"varint,7,opt,name=times_bye_and_won,json=timesByeAndWon" json:"times_bye_and_won,omitempty"`
+	TimesUnusualChamp    *uint32  `protobuf:"varint,10,opt,name=times_unusual_champ,json=timesUnusualChamp" json:"times_unusual_champ,omitempty"`
+	TotalGamesWon        *uint32  `protobuf:"varint,8,opt,name=total_games_won,json=totalGamesWon" json:"total_games_won,omitempty"`
+	Score                *uint32  `protobuf:"varint,9,opt,name=score" json:"score,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *CMsgDOTAWeekendTourneyPlayerSkillLevelStats) Reset() {
@@ -1231,8 +1660,25 @@ func (m *CMsgDOTAWeekendTourneyPlayerSkillLevelStats) String() string {
 }
 func (*CMsgDOTAWeekendTourneyPlayerSkillLevelStats) ProtoMessage() {}
 func (*CMsgDOTAWeekendTourneyPlayerSkillLevelStats) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{10}
+	return fileDescriptor_dota_gcmessages_client_tournament_341d4112d2cb7bde, []int{10}
 }
+func (m *CMsgDOTAWeekendTourneyPlayerSkillLevelStats) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTAWeekendTourneyPlayerSkillLevelStats.Unmarshal(m, b)
+}
+func (m *CMsgDOTAWeekendTourneyPlayerSkillLevelStats) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTAWeekendTourneyPlayerSkillLevelStats.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTAWeekendTourneyPlayerSkillLevelStats) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAWeekendTourneyPlayerSkillLevelStats.Merge(dst, src)
+}
+func (m *CMsgDOTAWeekendTourneyPlayerSkillLevelStats) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTAWeekendTourneyPlayerSkillLevelStats.Size(m)
+}
+func (m *CMsgDOTAWeekendTourneyPlayerSkillLevelStats) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTAWeekendTourneyPlayerSkillLevelStats.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTAWeekendTourneyPlayerSkillLevelStats proto.InternalMessageInfo
 
 func (m *CMsgDOTAWeekendTourneyPlayerSkillLevelStats) GetSkillLevel() uint32 {
 	if m != nil && m.SkillLevel != nil {
@@ -1305,19 +1751,38 @@ func (m *CMsgDOTAWeekendTourneyPlayerSkillLevelStats) GetScore() uint32 {
 }
 
 type CMsgDOTAWeekendTourneyPlayerStats struct {
-	AccountId        *uint32                                        `protobuf:"varint,1,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
-	SeasonTrophyId   *uint32                                        `protobuf:"varint,2,opt,name=season_trophy_id,json=seasonTrophyId" json:"season_trophy_id,omitempty"`
-	SkillLevels      []*CMsgDOTAWeekendTourneyPlayerSkillLevelStats `protobuf:"bytes,3,rep,name=skill_levels,json=skillLevels" json:"skill_levels,omitempty"`
-	CurrentTier      *uint32                                        `protobuf:"varint,4,opt,name=current_tier,json=currentTier" json:"current_tier,omitempty"`
-	XXX_unrecognized []byte                                         `json:"-"`
+	AccountId            *uint32                                        `protobuf:"varint,1,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	SeasonTrophyId       *uint32                                        `protobuf:"varint,2,opt,name=season_trophy_id,json=seasonTrophyId" json:"season_trophy_id,omitempty"`
+	SkillLevels          []*CMsgDOTAWeekendTourneyPlayerSkillLevelStats `protobuf:"bytes,3,rep,name=skill_levels,json=skillLevels" json:"skill_levels,omitempty"`
+	CurrentTier          *uint32                                        `protobuf:"varint,4,opt,name=current_tier,json=currentTier" json:"current_tier,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                       `json:"-"`
+	XXX_unrecognized     []byte                                         `json:"-"`
+	XXX_sizecache        int32                                          `json:"-"`
 }
 
 func (m *CMsgDOTAWeekendTourneyPlayerStats) Reset()         { *m = CMsgDOTAWeekendTourneyPlayerStats{} }
 func (m *CMsgDOTAWeekendTourneyPlayerStats) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTAWeekendTourneyPlayerStats) ProtoMessage()    {}
 func (*CMsgDOTAWeekendTourneyPlayerStats) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{11}
+	return fileDescriptor_dota_gcmessages_client_tournament_341d4112d2cb7bde, []int{11}
 }
+func (m *CMsgDOTAWeekendTourneyPlayerStats) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTAWeekendTourneyPlayerStats.Unmarshal(m, b)
+}
+func (m *CMsgDOTAWeekendTourneyPlayerStats) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTAWeekendTourneyPlayerStats.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTAWeekendTourneyPlayerStats) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAWeekendTourneyPlayerStats.Merge(dst, src)
+}
+func (m *CMsgDOTAWeekendTourneyPlayerStats) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTAWeekendTourneyPlayerStats.Size(m)
+}
+func (m *CMsgDOTAWeekendTourneyPlayerStats) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTAWeekendTourneyPlayerStats.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTAWeekendTourneyPlayerStats proto.InternalMessageInfo
 
 func (m *CMsgDOTAWeekendTourneyPlayerStats) GetAccountId() uint32 {
 	if m != nil && m.AccountId != nil {
@@ -1348,9 +1813,11 @@ func (m *CMsgDOTAWeekendTourneyPlayerStats) GetCurrentTier() uint32 {
 }
 
 type CMsgDOTAWeekendTourneyPlayerStatsRequest struct {
-	AccountId        *uint32 `protobuf:"varint,1,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
-	SeasonTrophyId   *uint32 `protobuf:"varint,2,opt,name=season_trophy_id,json=seasonTrophyId" json:"season_trophy_id,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	AccountId            *uint32  `protobuf:"varint,1,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	SeasonTrophyId       *uint32  `protobuf:"varint,2,opt,name=season_trophy_id,json=seasonTrophyId" json:"season_trophy_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *CMsgDOTAWeekendTourneyPlayerStatsRequest) Reset() {
@@ -1359,8 +1826,25 @@ func (m *CMsgDOTAWeekendTourneyPlayerStatsRequest) Reset() {
 func (m *CMsgDOTAWeekendTourneyPlayerStatsRequest) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTAWeekendTourneyPlayerStatsRequest) ProtoMessage()    {}
 func (*CMsgDOTAWeekendTourneyPlayerStatsRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{12}
+	return fileDescriptor_dota_gcmessages_client_tournament_341d4112d2cb7bde, []int{12}
 }
+func (m *CMsgDOTAWeekendTourneyPlayerStatsRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTAWeekendTourneyPlayerStatsRequest.Unmarshal(m, b)
+}
+func (m *CMsgDOTAWeekendTourneyPlayerStatsRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTAWeekendTourneyPlayerStatsRequest.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTAWeekendTourneyPlayerStatsRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAWeekendTourneyPlayerStatsRequest.Merge(dst, src)
+}
+func (m *CMsgDOTAWeekendTourneyPlayerStatsRequest) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTAWeekendTourneyPlayerStatsRequest.Size(m)
+}
+func (m *CMsgDOTAWeekendTourneyPlayerStatsRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTAWeekendTourneyPlayerStatsRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTAWeekendTourneyPlayerStatsRequest proto.InternalMessageInfo
 
 func (m *CMsgDOTAWeekendTourneyPlayerStatsRequest) GetAccountId() uint32 {
 	if m != nil && m.AccountId != nil {
@@ -1377,9 +1861,11 @@ func (m *CMsgDOTAWeekendTourneyPlayerStatsRequest) GetSeasonTrophyId() uint32 {
 }
 
 type CMsgDOTAWeekendTourneyPlayerHistoryRequest struct {
-	AccountId        *uint32 `protobuf:"varint,1,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
-	SeasonTrophyId   *uint32 `protobuf:"varint,2,opt,name=season_trophy_id,json=seasonTrophyId" json:"season_trophy_id,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	AccountId            *uint32  `protobuf:"varint,1,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	SeasonTrophyId       *uint32  `protobuf:"varint,2,opt,name=season_trophy_id,json=seasonTrophyId" json:"season_trophy_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *CMsgDOTAWeekendTourneyPlayerHistoryRequest) Reset() {
@@ -1390,8 +1876,25 @@ func (m *CMsgDOTAWeekendTourneyPlayerHistoryRequest) String() string {
 }
 func (*CMsgDOTAWeekendTourneyPlayerHistoryRequest) ProtoMessage() {}
 func (*CMsgDOTAWeekendTourneyPlayerHistoryRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{13}
+	return fileDescriptor_dota_gcmessages_client_tournament_341d4112d2cb7bde, []int{13}
 }
+func (m *CMsgDOTAWeekendTourneyPlayerHistoryRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTAWeekendTourneyPlayerHistoryRequest.Unmarshal(m, b)
+}
+func (m *CMsgDOTAWeekendTourneyPlayerHistoryRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTAWeekendTourneyPlayerHistoryRequest.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTAWeekendTourneyPlayerHistoryRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAWeekendTourneyPlayerHistoryRequest.Merge(dst, src)
+}
+func (m *CMsgDOTAWeekendTourneyPlayerHistoryRequest) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTAWeekendTourneyPlayerHistoryRequest.Size(m)
+}
+func (m *CMsgDOTAWeekendTourneyPlayerHistoryRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTAWeekendTourneyPlayerHistoryRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTAWeekendTourneyPlayerHistoryRequest proto.InternalMessageInfo
 
 func (m *CMsgDOTAWeekendTourneyPlayerHistoryRequest) GetAccountId() uint32 {
 	if m != nil && m.AccountId != nil {
@@ -1408,17 +1911,36 @@ func (m *CMsgDOTAWeekendTourneyPlayerHistoryRequest) GetSeasonTrophyId() uint32 
 }
 
 type CMsgDOTAWeekendTourneyPlayerHistory struct {
-	AccountId        *uint32                                           `protobuf:"varint,1,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
-	Tournaments      []*CMsgDOTAWeekendTourneyPlayerHistory_Tournament `protobuf:"bytes,3,rep,name=tournaments" json:"tournaments,omitempty"`
-	XXX_unrecognized []byte                                            `json:"-"`
+	AccountId            *uint32                                           `protobuf:"varint,1,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	Tournaments          []*CMsgDOTAWeekendTourneyPlayerHistory_Tournament `protobuf:"bytes,3,rep,name=tournaments" json:"tournaments,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                          `json:"-"`
+	XXX_unrecognized     []byte                                            `json:"-"`
+	XXX_sizecache        int32                                             `json:"-"`
 }
 
 func (m *CMsgDOTAWeekendTourneyPlayerHistory) Reset()         { *m = CMsgDOTAWeekendTourneyPlayerHistory{} }
 func (m *CMsgDOTAWeekendTourneyPlayerHistory) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTAWeekendTourneyPlayerHistory) ProtoMessage()    {}
 func (*CMsgDOTAWeekendTourneyPlayerHistory) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{14}
+	return fileDescriptor_dota_gcmessages_client_tournament_341d4112d2cb7bde, []int{14}
 }
+func (m *CMsgDOTAWeekendTourneyPlayerHistory) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTAWeekendTourneyPlayerHistory.Unmarshal(m, b)
+}
+func (m *CMsgDOTAWeekendTourneyPlayerHistory) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTAWeekendTourneyPlayerHistory.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTAWeekendTourneyPlayerHistory) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAWeekendTourneyPlayerHistory.Merge(dst, src)
+}
+func (m *CMsgDOTAWeekendTourneyPlayerHistory) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTAWeekendTourneyPlayerHistory.Size(m)
+}
+func (m *CMsgDOTAWeekendTourneyPlayerHistory) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTAWeekendTourneyPlayerHistory.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTAWeekendTourneyPlayerHistory proto.InternalMessageInfo
 
 func (m *CMsgDOTAWeekendTourneyPlayerHistory) GetAccountId() uint32 {
 	if m != nil && m.AccountId != nil {
@@ -1435,16 +1957,18 @@ func (m *CMsgDOTAWeekendTourneyPlayerHistory) GetTournaments() []*CMsgDOTAWeeken
 }
 
 type CMsgDOTAWeekendTourneyPlayerHistory_Tournament struct {
-	TournamentId     *uint32  `protobuf:"varint,1,opt,name=tournament_id,json=tournamentId" json:"tournament_id,omitempty"`
-	StartTime        *uint32  `protobuf:"varint,2,opt,name=start_time,json=startTime" json:"start_time,omitempty"`
-	TournamentTier   *uint32  `protobuf:"varint,3,opt,name=tournament_tier,json=tournamentTier" json:"tournament_tier,omitempty"`
-	TeamId           *uint32  `protobuf:"varint,4,opt,name=team_id,json=teamId" json:"team_id,omitempty"`
-	TeamDate         *uint32  `protobuf:"varint,5,opt,name=team_date,json=teamDate" json:"team_date,omitempty"`
-	TeamResult       *uint32  `protobuf:"varint,6,opt,name=team_result,json=teamResult" json:"team_result,omitempty"`
-	AccountId        []uint32 `protobuf:"varint,7,rep,name=account_id,json=accountId" json:"account_id,omitempty"`
-	TeamName         *string  `protobuf:"bytes,8,opt,name=team_name,json=teamName" json:"team_name,omitempty"`
-	SeasonTrophyId   *uint32  `protobuf:"varint,9,opt,name=season_trophy_id,json=seasonTrophyId" json:"season_trophy_id,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	TournamentId         *uint32  `protobuf:"varint,1,opt,name=tournament_id,json=tournamentId" json:"tournament_id,omitempty"`
+	StartTime            *uint32  `protobuf:"varint,2,opt,name=start_time,json=startTime" json:"start_time,omitempty"`
+	TournamentTier       *uint32  `protobuf:"varint,3,opt,name=tournament_tier,json=tournamentTier" json:"tournament_tier,omitempty"`
+	TeamId               *uint32  `protobuf:"varint,4,opt,name=team_id,json=teamId" json:"team_id,omitempty"`
+	TeamDate             *uint32  `protobuf:"varint,5,opt,name=team_date,json=teamDate" json:"team_date,omitempty"`
+	TeamResult           *uint32  `protobuf:"varint,6,opt,name=team_result,json=teamResult" json:"team_result,omitempty"`
+	AccountId            []uint32 `protobuf:"varint,7,rep,name=account_id,json=accountId" json:"account_id,omitempty"`
+	TeamName             *string  `protobuf:"bytes,8,opt,name=team_name,json=teamName" json:"team_name,omitempty"`
+	SeasonTrophyId       *uint32  `protobuf:"varint,9,opt,name=season_trophy_id,json=seasonTrophyId" json:"season_trophy_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *CMsgDOTAWeekendTourneyPlayerHistory_Tournament) Reset() {
@@ -1455,8 +1979,25 @@ func (m *CMsgDOTAWeekendTourneyPlayerHistory_Tournament) String() string {
 }
 func (*CMsgDOTAWeekendTourneyPlayerHistory_Tournament) ProtoMessage() {}
 func (*CMsgDOTAWeekendTourneyPlayerHistory_Tournament) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{14, 0}
+	return fileDescriptor_dota_gcmessages_client_tournament_341d4112d2cb7bde, []int{14, 0}
 }
+func (m *CMsgDOTAWeekendTourneyPlayerHistory_Tournament) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTAWeekendTourneyPlayerHistory_Tournament.Unmarshal(m, b)
+}
+func (m *CMsgDOTAWeekendTourneyPlayerHistory_Tournament) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTAWeekendTourneyPlayerHistory_Tournament.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTAWeekendTourneyPlayerHistory_Tournament) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAWeekendTourneyPlayerHistory_Tournament.Merge(dst, src)
+}
+func (m *CMsgDOTAWeekendTourneyPlayerHistory_Tournament) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTAWeekendTourneyPlayerHistory_Tournament.Size(m)
+}
+func (m *CMsgDOTAWeekendTourneyPlayerHistory_Tournament) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTAWeekendTourneyPlayerHistory_Tournament.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTAWeekendTourneyPlayerHistory_Tournament proto.InternalMessageInfo
 
 func (m *CMsgDOTAWeekendTourneyPlayerHistory_Tournament) GetTournamentId() uint32 {
 	if m != nil && m.TournamentId != nil {
@@ -1522,8 +2063,10 @@ func (m *CMsgDOTAWeekendTourneyPlayerHistory_Tournament) GetSeasonTrophyId() uin
 }
 
 type CMsgDOTAWeekendTourneyParticipationDetails struct {
-	Divisions        []*CMsgDOTAWeekendTourneyParticipationDetails_Division `protobuf:"bytes,1,rep,name=divisions" json:"divisions,omitempty"`
-	XXX_unrecognized []byte                                                 `json:"-"`
+	Divisions            []*CMsgDOTAWeekendTourneyParticipationDetails_Division `protobuf:"bytes,1,rep,name=divisions" json:"divisions,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                               `json:"-"`
+	XXX_unrecognized     []byte                                                 `json:"-"`
+	XXX_sizecache        int32                                                  `json:"-"`
 }
 
 func (m *CMsgDOTAWeekendTourneyParticipationDetails) Reset() {
@@ -1534,8 +2077,25 @@ func (m *CMsgDOTAWeekendTourneyParticipationDetails) String() string {
 }
 func (*CMsgDOTAWeekendTourneyParticipationDetails) ProtoMessage() {}
 func (*CMsgDOTAWeekendTourneyParticipationDetails) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{15}
+	return fileDescriptor_dota_gcmessages_client_tournament_341d4112d2cb7bde, []int{15}
 }
+func (m *CMsgDOTAWeekendTourneyParticipationDetails) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTAWeekendTourneyParticipationDetails.Unmarshal(m, b)
+}
+func (m *CMsgDOTAWeekendTourneyParticipationDetails) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTAWeekendTourneyParticipationDetails.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTAWeekendTourneyParticipationDetails) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAWeekendTourneyParticipationDetails.Merge(dst, src)
+}
+func (m *CMsgDOTAWeekendTourneyParticipationDetails) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTAWeekendTourneyParticipationDetails.Size(m)
+}
+func (m *CMsgDOTAWeekendTourneyParticipationDetails) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTAWeekendTourneyParticipationDetails.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTAWeekendTourneyParticipationDetails proto.InternalMessageInfo
 
 func (m *CMsgDOTAWeekendTourneyParticipationDetails) GetDivisions() []*CMsgDOTAWeekendTourneyParticipationDetails_Division {
 	if m != nil {
@@ -1545,15 +2105,17 @@ func (m *CMsgDOTAWeekendTourneyParticipationDetails) GetDivisions() []*CMsgDOTAW
 }
 
 type CMsgDOTAWeekendTourneyParticipationDetails_Tier struct {
-	Tier             *uint32 `protobuf:"varint,1,opt,name=tier" json:"tier,omitempty"`
-	Players          *uint32 `protobuf:"varint,2,opt,name=players" json:"players,omitempty"`
-	Teams            *uint32 `protobuf:"varint,3,opt,name=teams" json:"teams,omitempty"`
-	WinningTeams     *uint32 `protobuf:"varint,4,opt,name=winning_teams,json=winningTeams" json:"winning_teams,omitempty"`
-	PlayersStreak_2  *uint32 `protobuf:"varint,5,opt,name=players_streak_2,json=playersStreak2" json:"players_streak_2,omitempty"`
-	PlayersStreak_3  *uint32 `protobuf:"varint,6,opt,name=players_streak_3,json=playersStreak3" json:"players_streak_3,omitempty"`
-	PlayersStreak_4  *uint32 `protobuf:"varint,7,opt,name=players_streak_4,json=playersStreak4" json:"players_streak_4,omitempty"`
-	PlayersStreak_5  *uint32 `protobuf:"varint,8,opt,name=players_streak_5,json=playersStreak5" json:"players_streak_5,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Tier                 *uint32  `protobuf:"varint,1,opt,name=tier" json:"tier,omitempty"`
+	Players              *uint32  `protobuf:"varint,2,opt,name=players" json:"players,omitempty"`
+	Teams                *uint32  `protobuf:"varint,3,opt,name=teams" json:"teams,omitempty"`
+	WinningTeams         *uint32  `protobuf:"varint,4,opt,name=winning_teams,json=winningTeams" json:"winning_teams,omitempty"`
+	PlayersStreak_2      *uint32  `protobuf:"varint,5,opt,name=players_streak_2,json=playersStreak2" json:"players_streak_2,omitempty"`
+	PlayersStreak_3      *uint32  `protobuf:"varint,6,opt,name=players_streak_3,json=playersStreak3" json:"players_streak_3,omitempty"`
+	PlayersStreak_4      *uint32  `protobuf:"varint,7,opt,name=players_streak_4,json=playersStreak4" json:"players_streak_4,omitempty"`
+	PlayersStreak_5      *uint32  `protobuf:"varint,8,opt,name=players_streak_5,json=playersStreak5" json:"players_streak_5,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *CMsgDOTAWeekendTourneyParticipationDetails_Tier) Reset() {
@@ -1564,8 +2126,25 @@ func (m *CMsgDOTAWeekendTourneyParticipationDetails_Tier) String() string {
 }
 func (*CMsgDOTAWeekendTourneyParticipationDetails_Tier) ProtoMessage() {}
 func (*CMsgDOTAWeekendTourneyParticipationDetails_Tier) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{15, 0}
+	return fileDescriptor_dota_gcmessages_client_tournament_341d4112d2cb7bde, []int{15, 0}
 }
+func (m *CMsgDOTAWeekendTourneyParticipationDetails_Tier) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTAWeekendTourneyParticipationDetails_Tier.Unmarshal(m, b)
+}
+func (m *CMsgDOTAWeekendTourneyParticipationDetails_Tier) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTAWeekendTourneyParticipationDetails_Tier.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTAWeekendTourneyParticipationDetails_Tier) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAWeekendTourneyParticipationDetails_Tier.Merge(dst, src)
+}
+func (m *CMsgDOTAWeekendTourneyParticipationDetails_Tier) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTAWeekendTourneyParticipationDetails_Tier.Size(m)
+}
+func (m *CMsgDOTAWeekendTourneyParticipationDetails_Tier) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTAWeekendTourneyParticipationDetails_Tier.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTAWeekendTourneyParticipationDetails_Tier proto.InternalMessageInfo
 
 func (m *CMsgDOTAWeekendTourneyParticipationDetails_Tier) GetTier() uint32 {
 	if m != nil && m.Tier != nil {
@@ -1624,10 +2203,12 @@ func (m *CMsgDOTAWeekendTourneyParticipationDetails_Tier) GetPlayersStreak_5() u
 }
 
 type CMsgDOTAWeekendTourneyParticipationDetails_Division struct {
-	DivisionId       *uint32                                            `protobuf:"varint,1,opt,name=division_id,json=divisionId" json:"division_id,omitempty"`
-	ScheduleTime     *uint32                                            `protobuf:"varint,2,opt,name=schedule_time,json=scheduleTime" json:"schedule_time,omitempty"`
-	Tiers            []*CMsgDOTAWeekendTourneyParticipationDetails_Tier `protobuf:"bytes,3,rep,name=tiers" json:"tiers,omitempty"`
-	XXX_unrecognized []byte                                             `json:"-"`
+	DivisionId           *uint32                                            `protobuf:"varint,1,opt,name=division_id,json=divisionId" json:"division_id,omitempty"`
+	ScheduleTime         *uint32                                            `protobuf:"varint,2,opt,name=schedule_time,json=scheduleTime" json:"schedule_time,omitempty"`
+	Tiers                []*CMsgDOTAWeekendTourneyParticipationDetails_Tier `protobuf:"bytes,3,rep,name=tiers" json:"tiers,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                           `json:"-"`
+	XXX_unrecognized     []byte                                             `json:"-"`
+	XXX_sizecache        int32                                              `json:"-"`
 }
 
 func (m *CMsgDOTAWeekendTourneyParticipationDetails_Division) Reset() {
@@ -1638,8 +2219,25 @@ func (m *CMsgDOTAWeekendTourneyParticipationDetails_Division) String() string {
 }
 func (*CMsgDOTAWeekendTourneyParticipationDetails_Division) ProtoMessage() {}
 func (*CMsgDOTAWeekendTourneyParticipationDetails_Division) Descriptor() ([]byte, []int) {
-	return fileDescriptor15, []int{15, 1}
+	return fileDescriptor_dota_gcmessages_client_tournament_341d4112d2cb7bde, []int{15, 1}
 }
+func (m *CMsgDOTAWeekendTourneyParticipationDetails_Division) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgDOTAWeekendTourneyParticipationDetails_Division.Unmarshal(m, b)
+}
+func (m *CMsgDOTAWeekendTourneyParticipationDetails_Division) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgDOTAWeekendTourneyParticipationDetails_Division.Marshal(b, m, deterministic)
+}
+func (dst *CMsgDOTAWeekendTourneyParticipationDetails_Division) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAWeekendTourneyParticipationDetails_Division.Merge(dst, src)
+}
+func (m *CMsgDOTAWeekendTourneyParticipationDetails_Division) XXX_Size() int {
+	return xxx_messageInfo_CMsgDOTAWeekendTourneyParticipationDetails_Division.Size(m)
+}
+func (m *CMsgDOTAWeekendTourneyParticipationDetails_Division) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgDOTAWeekendTourneyParticipationDetails_Division.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgDOTAWeekendTourneyParticipationDetails_Division proto.InternalMessageInfo
 
 func (m *CMsgDOTAWeekendTourneyParticipationDetails_Division) GetDivisionId() uint32 {
 	if m != nil && m.DivisionId != nil {
@@ -1696,174 +2294,175 @@ func init() {
 	proto.RegisterEnum("dota.ETournamentEvent", ETournamentEvent_name, ETournamentEvent_value)
 }
 
-func init() { proto.RegisterFile("dota_gcmessages_client_tournament.proto", fileDescriptor15) }
+func init() {
+	proto.RegisterFile("dota_gcmessages_client_tournament.proto", fileDescriptor_dota_gcmessages_client_tournament_341d4112d2cb7bde)
+}
 
-var fileDescriptor15 = []byte{
-	// 2641 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x58, 0xcf, 0x72, 0x1b, 0xc7,
-	0xd1, 0x37, 0x40, 0x80, 0x04, 0x1a, 0x24, 0x05, 0x0f, 0x25, 0x11, 0x82, 0x2c, 0x4b, 0x86, 0xf4,
-	0x7d, 0xa2, 0xe5, 0xaf, 0x58, 0x22, 0x64, 0x7d, 0x49, 0x9c, 0x54, 0x62, 0x92, 0xfa, 0x63, 0x54,
-	0x24, 0x52, 0x59, 0x52, 0x56, 0xa5, 0x52, 0x95, 0xad, 0x25, 0x76, 0x04, 0x6d, 0x71, 0x77, 0x06,
-	0xda, 0x19, 0x10, 0xc4, 0x21, 0x55, 0x4e, 0x1e, 0x20, 0xa7, 0x54, 0xe5, 0x94, 0x6b, 0x2a, 0x4f,
-	0xe0, 0x6b, 0xce, 0x79, 0x80, 0xdc, 0x73, 0x49, 0x25, 0x8f, 0x90, 0x43, 0x0e, 0xa9, 0xee, 0x99,
-	0xc5, 0xee, 0x02, 0x4b, 0x52, 0x76, 0x7c, 0xdb, 0xed, 0xfe, 0x75, 0xcf, 0x4c, 0xf7, 0xf4, 0x6f,
-	0x7a, 0x06, 0xee, 0xfa, 0x52, 0x7b, 0xee, 0xa0, 0x1f, 0x71, 0xa5, 0xbc, 0x01, 0x57, 0x6e, 0x3f,
-	0x0c, 0xb8, 0xd0, 0xae, 0x96, 0xa3, 0x58, 0x78, 0x11, 0x17, 0x7a, 0x73, 0x18, 0x4b, 0x2d, 0x59,
-	0x05, 0x81, 0xed, 0x75, 0x82, 0x5b, 0x0c, 0x17, 0xa3, 0x48, 0x19, 0x75, 0xe7, 0x2f, 0x97, 0xe0,
-	0xea, 0xee, 0x73, 0x35, 0x78, 0xb4, 0x7f, 0xb8, 0x7d, 0x38, 0xb5, 0xed, 0x89, 0xd7, 0x92, 0x5d,
-	0x87, 0x7a, 0xc8, 0xbd, 0xc1, 0x88, 0xbb, 0x81, 0xdf, 0x2a, 0xdd, 0x2a, 0x6d, 0xac, 0x38, 0x35,
-	0x23, 0xe8, 0xf9, 0x6c, 0x1b, 0x60, 0xf8, 0xc6, 0x53, 0xdc, 0x0d, 0x03, 0xa5, 0x5b, 0xe5, 0x5b,
-	0x0b, 0x1b, 0x8d, 0x6e, 0x67, 0x13, 0x47, 0xd9, 0x2c, 0x76, 0xb7, 0xf9, 0x02, 0xe1, 0x4e, 0x9d,
-	0xac, 0x9e, 0x05, 0x4a, 0xb3, 0xcf, 0x01, 0x34, 0xf7, 0x22, 0x65, 0x5c, 0x2c, 0x90, 0x8b, 0x8f,
-	0xce, 0x75, 0x71, 0xc8, 0xbd, 0xc8, 0xa9, 0x93, 0x11, 0x79, 0xf8, 0x25, 0x5c, 0x19, 0x0d, 0xfb,
-	0x32, 0x0a, 0xc4, 0xc0, 0x8d, 0x3c, 0xdd, 0x7f, 0xc3, 0xad, 0xb3, 0x0a, 0x39, 0xbb, 0x77, 0xae,
-	0xb3, 0x97, 0xd6, 0xf2, 0x39, 0x1a, 0x3a, 0x6b, 0xa3, 0xec, 0x2f, 0x37, 0xfe, 0x7f, 0x0c, 0x75,
-	0xc1, 0xc7, 0xd6, 0x67, 0xf5, 0x1d, 0x26, 0xb8, 0xc7, 0xc7, 0xca, 0xa9, 0xa1, 0x0d, 0xda, 0xb7,
-	0x9f, 0x00, 0xd0, 0xaa, 0x9f, 0xc6, 0x72, 0x34, 0x64, 0xd7, 0xa0, 0x36, 0xc0, 0x8f, 0x34, 0x9c,
-	0x4b, 0xf4, 0xdf, 0xf3, 0xd9, 0x0d, 0x00, 0xa3, 0x42, 0x5f, 0xad, 0xf2, 0xad, 0xd2, 0x46, 0xdd,
-	0xa9, 0x93, 0x64, 0xcf, 0x8b, 0x78, 0xfb, 0xb7, 0x65, 0xa8, 0x92, 0x23, 0xf4, 0x61, 0xc2, 0x9e,
-	0xfa, 0xa0, 0x7f, 0xe3, 0xc3, 0xa8, 0xb2, 0x3e, 0x48, 0x82, 0x3e, 0xd8, 0x3a, 0x2c, 0xe9, 0xc9,
-	0x90, 0x0c, 0x17, 0xc8, 0x70, 0x11, 0x7f, 0x7b, 0x3e, 0xfb, 0x10, 0x20, 0xd0, 0x3c, 0xf6, 0x74,
-	0x20, 0x85, 0x6a, 0x55, 0x48, 0x97, 0x91, 0xb0, 0x3b, 0xb0, 0x1a, 0x05, 0xc2, 0x55, 0xda, 0x8b,
-	0xb5, 0xab, 0x83, 0x88, 0xb7, 0xaa, 0x84, 0x59, 0x8e, 0x02, 0x71, 0x80, 0xc2, 0xc3, 0x20, 0xe2,
-	0x84, 0xf2, 0x4e, 0xb3, 0xa8, 0x45, 0x8b, 0xf2, 0x4e, 0x53, 0xd4, 0x93, 0x64, 0x9d, 0x14, 0xd1,
-	0x25, 0x8a, 0xe8, 0xdd, 0x8b, 0x77, 0x0d, 0xc5, 0xcf, 0x06, 0x84, 0x02, 0xfb, 0x9b, 0x12, 0x54,
-	0x70, 0x33, 0xd0, 0xaa, 0xb8, 0x17, 0xa5, 0xe1, 0x58, 0xc4, 0xdf, 0x9e, 0xcf, 0x18, 0x54, 0x32,
-	0x71, 0xa0, 0x6f, 0xd6, 0x84, 0x05, 0xed, 0x0d, 0x68, 0xf9, 0x75, 0x07, 0x3f, 0x71, 0x8b, 0x93,
-	0x79, 0x28, 0x07, 0x92, 0x96, 0x5e, 0x71, 0x6a, 0x28, 0x78, 0x26, 0x07, 0x12, 0x03, 0xc3, 0xc3,
-	0x20, 0x0a, 0x84, 0xa7, 0xb9, 0x4f, 0x8b, 0xae, 0x39, 0x19, 0x49, 0xfb, 0x4f, 0x35, 0x58, 0xc9,
-	0x6d, 0x22, 0x74, 0xa7, 0x78, 0x1c, 0x70, 0x95, 0xa9, 0x18, 0x23, 0xe8, 0xf9, 0x98, 0x3a, 0x74,
-	0xbd, 0x85, 0xba, 0xb2, 0x49, 0x1d, 0xfd, 0xa7, 0xaa, 0x6e, 0x9a, 0x1c, 0x52, 0x75, 0x7b, 0x3e,
-	0x5b, 0x85, 0xf2, 0x91, 0xb4, 0x59, 0x29, 0x1f, 0x49, 0xcc, 0xb2, 0xd2, 0xde, 0xc0, 0x66, 0xb9,
-	0x6a, 0xb2, 0x4c, 0x12, 0xca, 0xb2, 0x51, 0xe7, 0x53, 0x50, 0x57, 0xd3, 0xf8, 0x7f, 0x04, 0xcb,
-	0xe3, 0x40, 0x08, 0x1e, 0xbb, 0x64, 0xd2, 0x5a, 0x22, 0xfb, 0x86, 0x91, 0x1d, 0xa0, 0x88, 0xdd,
-	0x84, 0x46, 0x28, 0xd5, 0x14, 0x51, 0x23, 0x04, 0x90, 0xc8, 0x00, 0x6c, 0xcc, 0xb6, 0x5c, 0x8c,
-	0x65, 0x9d, 0xd4, 0x66, 0x61, 0x87, 0x69, 0x40, 0xbb, 0xa4, 0x84, 0x54, 0xd9, 0x45, 0xe5, 0x43,
-	0x58, 0x37, 0x96, 0xc3, 0x98, 0x9f, 0xb8, 0x72, 0x38, 0x94, 0x82, 0x28, 0xcb, 0x1b, 0xb4, 0x1a,
-	0x04, 0xbd, 0x4c, 0xea, 0x17, 0x31, 0x3f, 0xd9, 0xb7, 0xca, 0x8c, 0x59, 0xb7, 0xc0, 0x6c, 0x39,
-	0x35, 0xeb, 0xce, 0x9a, 0xdd, 0x30, 0xf4, 0xb2, 0x65, 0x92, 0xbb, 0x42, 0xc9, 0x35, 0x33, 0xa7,
-	0xec, 0x5a, 0x75, 0xd7, 0xa8, 0x57, 0x53, 0x75, 0x97, 0xd4, 0xdf, 0x83, 0x56, 0xd1, 0x5c, 0x09,
-	0x7c, 0x89, 0xc0, 0x57, 0xe6, 0x26, 0x9b, 0x35, 0xec, 0x16, 0x19, 0x36, 0x53, 0xc3, 0xee, 0x9c,
-	0xe1, 0x03, 0xb8, 0x5a, 0x34, 0x62, 0xe0, 0xb7, 0xde, 0xa7, 0x34, 0xae, 0xcd, 0x8d, 0xd7, 0xf3,
-	0x13, 0xa3, 0xee, 0xbc, 0x11, 0x4b, 0x8d, 0xba, 0xc5, 0x46, 0x76, 0x24, 0x22, 0x4e, 0x57, 0xf5,
-	0x65, 0xcc, 0x5b, 0x6b, 0x33, 0x23, 0xd1, 0xb6, 0x3e, 0x40, 0x15, 0x7b, 0x04, 0x37, 0xe7, 0x8c,
-	0xa6, 0xe3, 0x19, 0xeb, 0xcb, 0x64, 0x7d, 0x3d, 0x6f, 0x9d, 0x8c, 0x6b, 0xbc, 0xe4, 0xe7, 0x9b,
-	0x1d, 0xfa, 0xca, 0xcc, 0x7c, 0xe7, 0x87, 0xee, 0x9e, 0x33, 0xf4, 0xd5, 0x74, 0xe8, 0xee, 0x19,
-	0x43, 0x4f, 0xf9, 0x11, 0x79, 0xaf, 0xb5, 0x6e, 0x4a, 0x83, 0x24, 0x87, 0x93, 0x21, 0xed, 0x7b,
-	0xb3, 0x3e, 0xe3, 0xb0, 0x65, 0x78, 0x90, 0x44, 0xc6, 0xde, 0x02, 0xba, 0x16, 0x70, 0x2d, 0x05,
-	0x74, 0x0d, 0x20, 0xcb, 0xcd, 0xed, 0x1c, 0x37, 0xb7, 0x7d, 0xa8, 0xe0, 0xd1, 0x80, 0xac, 0x14,
-	0x06, 0xe2, 0x98, 0xb8, 0xa1, 0xee, 0xd0, 0x37, 0xbb, 0x0c, 0x55, 0x1d, 0xe8, 0x30, 0xa1, 0x2a,
-	0xf3, 0x83, 0xd2, 0x20, 0xc2, 0x02, 0x34, 0x6c, 0x65, 0x7e, 0xd8, 0x07, 0x50, 0xc7, 0xc2, 0x56,
-	0xda, 0x8b, 0x86, 0x96, 0x14, 0x52, 0x41, 0xe7, 0x36, 0x7c, 0x84, 0x2c, 0xea, 0xf0, 0xb7, 0x23,
-	0xae, 0xf4, 0x2b, 0xce, 0x8f, 0xb9, 0xf0, 0x89, 0x4f, 0xf9, 0xe4, 0xa0, 0xff, 0x86, 0xfb, 0xa3,
-	0x90, 0x77, 0xfe, 0x56, 0x86, 0x36, 0xa2, 0x8a, 0xd5, 0xec, 0x29, 0xd4, 0xfd, 0xe0, 0x24, 0x50,
-	0x74, 0x18, 0x94, 0x88, 0xa0, 0x3f, 0x4e, 0x09, 0xba, 0xd8, 0x68, 0xf3, 0x91, 0xb5, 0x70, 0x52,
-	0xdb, 0xf6, 0xbf, 0x4a, 0x50, 0x4b, 0xe4, 0xec, 0x36, 0xac, 0x24, 0x1a, 0xb7, 0x2f, 0x7d, 0x6e,
-	0xc9, 0x71, 0x39, 0x11, 0xee, 0x4a, 0x9f, 0xb3, 0x0d, 0x68, 0xe2, 0x5a, 0xdc, 0x71, 0x20, 0x7c,
-	0x39, 0x76, 0xe5, 0x90, 0x0b, 0x4b, 0x94, 0xab, 0x28, 0x7f, 0x45, 0xe2, 0xfd, 0x21, 0x17, 0xec,
-	0x1e, 0xbc, 0x9f, 0x45, 0xf6, 0x91, 0x9d, 0x2c, 0x71, 0x5e, 0x4a, 0xa1, 0xbb, 0x28, 0x66, 0x5b,
-	0x70, 0x65, 0xd6, 0xab, 0x2b, 0xf8, 0xa9, 0xb6, 0xe1, 0x63, 0x79, 0xd7, 0x7b, 0xfc, 0x54, 0x13,
-	0x89, 0xc5, 0x72, 0xf8, 0x66, 0x82, 0x99, 0x34, 0x87, 0x5d, 0xcd, 0x08, 0x7a, 0x3e, 0x52, 0xe8,
-	0xeb, 0x98, 0x73, 0x77, 0x6c, 0x42, 0x41, 0x1c, 0x5b, 0x73, 0x1a, 0x28, 0xb3, 0xd1, 0xe9, 0xfc,
-	0xb1, 0x6c, 0x7a, 0xaa, 0x7c, 0xb4, 0xf6, 0x87, 0x1a, 0x0f, 0xd3, 0x95, 0xa1, 0x17, 0xeb, 0xa0,
-	0x1f, 0x0c, 0x3d, 0x1d, 0x88, 0x01, 0x05, 0xa2, 0xe6, 0xe4, 0x85, 0xb8, 0xd5, 0xa6, 0xe1, 0x9a,
-	0x9e, 0x16, 0x90, 0x88, 0x7a, 0x3e, 0xee, 0x8e, 0xa3, 0xd1, 0x24, 0x10, 0x76, 0xd1, 0xe6, 0x07,
-	0xcd, 0xd4, 0x71, 0x10, 0x86, 0x6e, 0xc8, 0x4f, 0x78, 0x98, 0x1c, 0xe5, 0x24, 0x7a, 0x86, 0x12,
-	0x9c, 0xbb, 0xa9, 0x1e, 0x3a, 0x49, 0x95, 0x5d, 0x5b, 0x83, 0x64, 0x74, 0xc6, 0xaa, 0xec, 0x81,
-	0xba, 0x98, 0x3b, 0x50, 0x37, 0xa0, 0x39, 0x0c, 0xfa, 0xc7, 0xa3, 0xa1, 0x4b, 0x7a, 0x3a, 0x7e,
-	0xcc, 0xf1, 0xb1, 0x6a, 0xe4, 0x78, 0x1e, 0xd3, 0x19, 0x34, 0x83, 0x24, 0xe6, 0xab, 0x11, 0xf3,
-	0x65, 0x90, 0x48, 0x79, 0x9d, 0x6b, 0xb0, 0x3e, 0x1f, 0xa7, 0x67, 0xdc, 0x3b, 0xe1, 0x9d, 0x7f,
-	0x00, 0xb0, 0xf9, 0x96, 0x00, 0x37, 0x52, 0xda, 0xe1, 0xa6, 0xa7, 0xec, 0x72, 0x2a, 0xec, 0xf9,
-	0x17, 0x87, 0xef, 0x36, 0xac, 0x28, 0xbb, 0x77, 0xcd, 0x41, 0x69, 0xc2, 0xb8, 0x9c, 0x08, 0xe9,
-	0xac, 0xbc, 0x30, 0x9a, 0xaf, 0x61, 0x2d, 0x33, 0x17, 0xcd, 0xa3, 0x61, 0xe8, 0x69, 0x73, 0x26,
-	0xaf, 0x76, 0xaf, 0x99, 0xa2, 0x79, 0x9c, 0xce, 0xfd, 0xd0, 0x02, 0x3e, 0x6b, 0x1f, 0xbb, 0x05,
-	0x62, 0x77, 0x4f, 0x0a, 0xee, 0x30, 0x3d, 0xa7, 0x60, 0x5f, 0x40, 0x55, 0x69, 0xf4, 0xbc, 0x48,
-	0x9e, 0xaf, 0xce, 0x79, 0x3e, 0xd0, 0xf3, 0x6e, 0x49, 0xe6, 0xbe, 0x14, 0xc7, 0x42, 0x8e, 0x85,
-	0x63, 0x1c, 0xb0, 0x0e, 0xac, 0xd0, 0x87, 0xab, 0xf8, 0x5b, 0x57, 0x8c, 0x22, 0x3a, 0xa1, 0x57,
-	0x9c, 0x06, 0x09, 0x0f, 0xf8, 0xdb, 0xbd, 0x51, 0x84, 0xd9, 0x53, 0xdc, 0x53, 0x52, 0xb8, 0x69,
-	0x0d, 0x34, 0x4c, 0x15, 0x1a, 0xf9, 0x61, 0x52, 0x09, 0x0f, 0xa0, 0x4a, 0xad, 0xb8, 0xed, 0xe3,
-	0x6e, 0x9c, 0xd5, 0xc7, 0x99, 0xb6, 0xdd, 0x60, 0xd1, 0x68, 0xe0, 0x45, 0x5c, 0xb5, 0x6a, 0x17,
-	0x18, 0x3d, 0xf5, 0x22, 0xee, 0x18, 0x2c, 0x1a, 0x09, 0xe9, 0x73, 0xd5, 0xaa, 0x5f, 0x60, 0xb4,
-	0x27, 0x7d, 0xee, 0x18, 0x6c, 0xfb, 0xd7, 0x0b, 0xb6, 0x47, 0xb4, 0xdd, 0x95, 0x3b, 0xb0, 0xdb,
-	0x65, 0xd1, 0x74, 0x57, 0x4f, 0x03, 0x1f, 0x03, 0x82, 0x60, 0x57, 0x52, 0xbb, 0xa3, 0xb9, 0xdd,
-	0x2b, 0x0d, 0x14, 0xee, 0xc7, 0x14, 0x43, 0xf6, 0x01, 0x2c, 0x0d, 0x43, 0x6f, 0xc2, 0x63, 0x45,
-	0x77, 0x94, 0x95, 0x9d, 0x72, 0xb3, 0xe4, 0x24, 0x22, 0xf6, 0x3f, 0xb0, 0x6c, 0x3e, 0x5d, 0x53,
-	0x90, 0xf5, 0x29, 0xa4, 0x61, 0xe4, 0x3b, 0x54, 0x9a, 0xf7, 0x81, 0x59, 0x58, 0x76, 0x4f, 0xc1,
-	0x14, 0xdc, 0x34, 0xda, 0x83, 0x74, 0x77, 0x6d, 0x40, 0x33, 0x53, 0xab, 0x6e, 0xe4, 0xa9, 0x63,
-	0x6a, 0x77, 0x56, 0x9c, 0xd5, 0xb4, 0x5e, 0x9f, 0x7b, 0xea, 0x38, 0x5b, 0xb2, 0x95, 0x5c, 0xc9,
-	0x26, 0xdd, 0x6d, 0xa6, 0x55, 0xa4, 0x48, 0x50, 0x95, 0xde, 0x81, 0x55, 0x52, 0x1e, 0xd1, 0x25,
-	0x0e, 0x6b, 0x74, 0x89, 0x6a, 0x74, 0x19, 0xa5, 0x3b, 0x78, 0x47, 0xc3, 0xa6, 0xe4, 0x16, 0xd0,
-	0xbf, 0x3b, 0x0a, 0xb2, 0x75, 0x4c, 0xa7, 0xde, 0xcb, 0x80, 0x10, 0xc9, 0x20, 0x3e, 0x86, 0xaf,
-	0x61, 0xc9, 0x92, 0x7b, 0xd1, 0x23, 0x4f, 0xf3, 0xf6, 0x3f, 0x4b, 0x50, 0xc1, 0x44, 0x62, 0x0e,
-	0x28, 0xd0, 0x81, 0x7f, 0x9a, 0xdc, 0x5b, 0xf0, 0xbf, 0xe7, 0x9f, 0xa2, 0x2a, 0x94, 0x47, 0x47,
-	0x93, 0xa4, 0x54, 0x17, 0x9d, 0x25, 0xfa, 0x37, 0x7d, 0xb1, 0x89, 0x81, 0xed, 0x8b, 0x2b, 0xce,
-	0x12, 0xfd, 0xd3, 0xad, 0x85, 0x4e, 0x63, 0xd7, 0x73, 0x07, 0x52, 0x9a, 0x85, 0xd7, 0x4c, 0xff,
-	0xb6, 0xfd, 0x54, 0x4a, 0x9f, 0xbd, 0x48, 0x8a, 0xc6, 0x94, 0x63, 0x7b, 0xae, 0x68, 0x70, 0x5a,
-	0xa6, 0x70, 0x3e, 0xcc, 0x15, 0xce, 0x54, 0x3e, 0x5b, 0x3c, 0xe7, 0xb7, 0xd6, 0xed, 0xaf, 0x4b,
-	0x50, 0xc1, 0xed, 0x87, 0xe9, 0xb0, 0x4b, 0x4d, 0xae, 0x24, 0x66, 0xa5, 0xec, 0x03, 0xd3, 0x71,
-	0x62, 0x0c, 0x5c, 0xcf, 0xee, 0xb4, 0x9a, 0x49, 0xd5, 0xe9, 0x76, 0x4e, 0x7b, 0x64, 0x09, 0x29,
-	0xd1, 0xee, 0xb0, 0x9f, 0x03, 0x90, 0x53, 0xb3, 0xa6, 0xca, 0x19, 0x6b, 0xc2, 0xf1, 0x8b, 0xd6,
-	0x34, 0x95, 0x4f, 0xd7, 0x54, 0x17, 0x89, 0xa8, 0xf3, 0xef, 0x2a, 0xdc, 0x98, 0x2f, 0x25, 0xd2,
-	0xed, 0xbe, 0xf1, 0xc4, 0x80, 0xe3, 0x71, 0x2b, 0xf8, 0xd8, 0x2d, 0x22, 0xde, 0x4b, 0x82, 0x8f,
-	0x0f, 0xb3, 0xdc, 0xfb, 0x18, 0xaa, 0xfc, 0x84, 0x0b, 0x4d, 0xeb, 0x2b, 0x22, 0xab, 0xc7, 0xa8,
-	0xfd, 0x6c, 0x3d, 0x37, 0x3f, 0x92, 0x19, 0x02, 0x34, 0xd6, 0xcc, 0x87, 0xcb, 0x33, 0x43, 0x9a,
-	0x95, 0x2f, 0x7c, 0x6b, 0x0a, 0x64, 0xb9, 0x99, 0x9a, 0xd2, 0xfe, 0x19, 0x2c, 0x23, 0xc1, 0xb8,
-	0x7d, 0x5a, 0xa7, 0xb2, 0xcf, 0x06, 0x9b, 0x67, 0xd1, 0x4b, 0x26, 0x26, 0x44, 0x4f, 0xe6, 0xd3,
-	0x69, 0x0c, 0xa6, 0xdf, 0x0a, 0x5d, 0x52, 0x1a, 0x13, 0x97, 0xd5, 0x77, 0x77, 0x89, 0x64, 0x95,
-	0xb8, 0xd4, 0xd3, 0x6f, 0xc5, 0xfe, 0x1f, 0xae, 0x44, 0x3c, 0x1e, 0x70, 0x3f, 0x9f, 0x01, 0xd5,
-	0x5a, 0x9c, 0xd2, 0xc7, 0x9a, 0x01, 0x64, 0x33, 0xa1, 0xe6, 0xd9, 0x7e, 0x69, 0x8e, 0xed, 0xdb,
-	0x5f, 0x95, 0x00, 0xd2, 0xa5, 0xe4, 0x0a, 0xae, 0x94, 0x2f, 0xb8, 0x57, 0xf4, 0x16, 0x92, 0xa1,
-	0xc9, 0xff, 0xae, 0xa8, 0x6a, 0x82, 0x8f, 0x49, 0xd2, 0xfe, 0x15, 0x40, 0xba, 0xf2, 0x39, 0xb2,
-	0xae, 0xa4, 0x64, 0xfd, 0xb1, 0xd9, 0x86, 0x45, 0x84, 0xbd, 0x2a, 0xf8, 0x78, 0x2f, 0xc3, 0xd9,
-	0x1f, 0xc3, 0xfb, 0x32, 0xf4, 0x67, 0xa0, 0xa6, 0xa6, 0x56, 0x65, 0xe8, 0x67, 0xa0, 0x1d, 0x0d,
-	0xd7, 0xe6, 0xd3, 0x62, 0x5b, 0xe8, 0x77, 0x6b, 0x37, 0xba, 0x70, 0x65, 0xee, 0xf1, 0x8d, 0xe6,
-	0x5f, 0xa6, 0xf9, 0xaf, 0x19, 0x65, 0x26, 0x18, 0x81, 0xdf, 0x79, 0x6b, 0x9a, 0xf0, 0xd9, 0x51,
-	0xd5, 0x50, 0x0a, 0x7a, 0xe5, 0x59, 0x8c, 0xb9, 0x1a, 0x85, 0xda, 0x8c, 0xf7, 0x59, 0xa9, 0xeb,
-	0x58, 0x01, 0xfb, 0x3e, 0x40, 0x3a, 0x0a, 0x8d, 0xd0, 0xe8, 0xb6, 0xce, 0xda, 0x5d, 0x4e, 0x06,
-	0xdb, 0xf9, 0x05, 0x5c, 0x4f, 0x10, 0xbb, 0x21, 0xf7, 0xe2, 0x7c, 0x76, 0xde, 0x6d, 0xa9, 0xeb,
-	0xb0, 0x44, 0x05, 0x33, 0xed, 0xaa, 0x16, 0xf1, 0xb7, 0xe7, 0x77, 0x7e, 0xb7, 0x00, 0x9f, 0x24,
-	0xde, 0xf3, 0xed, 0xdc, 0x8b, 0x99, 0x83, 0x0d, 0xa3, 0xae, 0x66, 0x9b, 0xab, 0xd2, 0x5c, 0x73,
-	0x85, 0xfc, 0x8e, 0x17, 0x1b, 0x77, 0x2c, 0x85, 0x7b, 0xdf, 0x8e, 0x66, 0xee, 0x3a, 0xaf, 0xa4,
-	0xb8, 0x9f, 0xd7, 0x6f, 0xd9, 0xdc, 0x4e, 0xf5, 0x5b, 0x79, 0x7d, 0x37, 0x77, 0x57, 0x7a, 0x25,
-	0x45, 0x37, 0xaf, 0x7f, 0x60, 0x3b, 0xe1, 0xa9, 0xfe, 0x01, 0xfb, 0x04, 0x98, 0xd1, 0x1f, 0x4d,
-	0xb8, 0xeb, 0x09, 0xdf, 0x0d, 0xa5, 0xd2, 0x96, 0xf5, 0xe9, 0x8e, 0xa1, 0x76, 0x26, 0x7c, 0x5b,
-	0xf8, 0xcf, 0xa4, 0xd2, 0xb8, 0xdd, 0xf2, 0xe0, 0xb1, 0x14, 0xb6, 0xda, 0x56, 0x33, 0xd8, 0x57,
-	0x52, 0xb0, 0x4d, 0x58, 0x33, 0xd0, 0x91, 0x18, 0xa9, 0x91, 0x17, 0x22, 0x51, 0x44, 0x43, 0xdb,
-	0x88, 0x19, 0x2f, 0x2f, 0x8d, 0x66, 0x17, 0x15, 0xec, 0x7f, 0xe1, 0x92, 0x96, 0xda, 0x0b, 0x5d,
-	0xea, 0x84, 0xc8, 0x71, 0x8d, 0xb0, 0x2b, 0x24, 0xc6, 0xd4, 0xe1, 0x84, 0xf1, 0x46, 0x60, 0xee,
-	0xa5, 0x75, 0x73, 0x23, 0xa0, 0x9f, 0xce, 0xdf, 0x4b, 0xe6, 0x4a, 0x78, 0x66, 0x5a, 0x28, 0x19,
-	0x37, 0x00, 0xbc, 0x7e, 0x5f, 0x8e, 0xb2, 0x79, 0xaf, 0x5b, 0x89, 0xe9, 0xfc, 0xe7, 0x3a, 0xc2,
-	0x72, 0x61, 0x47, 0x78, 0x08, 0xcb, 0x99, 0xac, 0x2a, 0xfb, 0xa6, 0xbb, 0x95, 0xdf, 0x9e, 0xef,
-	0xb0, 0x3d, 0x9c, 0x46, 0xba, 0x13, 0x14, 0xde, 0x5a, 0xfa, 0xa3, 0x38, 0xa6, 0x02, 0x0b, 0x78,
-	0x6c, 0x73, 0xd9, 0xb0, 0xb2, 0xc3, 0x80, 0xc7, 0x1d, 0x05, 0x1b, 0x17, 0x2e, 0x33, 0xa9, 0xe9,
-	0xef, 0x6a, 0xb5, 0x9d, 0x11, 0xdc, 0x3b, 0x6f, 0xd0, 0x2f, 0x02, 0xa5, 0x65, 0x3c, 0xf9, 0xce,
-	0x87, 0xfd, 0xeb, 0x02, 0xdc, 0x7e, 0x87, 0x71, 0x2f, 0x1a, 0xf0, 0x4b, 0x68, 0xa4, 0xa5, 0x9d,
-	0xa4, 0xea, 0xd3, 0x8b, 0x53, 0x65, 0xdd, 0x6f, 0x66, 0x58, 0x26, 0xeb, 0xa8, 0xfd, 0x75, 0x19,
-	0xe0, 0x9b, 0x5e, 0xd8, 0xf2, 0xad, 0x55, 0x79, 0xf6, 0xd5, 0xf2, 0x2e, 0xd6, 0x40, 0x7a, 0xd1,
-	0xc2, 0x3d, 0x60, 0xb9, 0x3c, 0x73, 0x5b, 0x0a, 0x78, 0x7c, 0x71, 0x27, 0xec, 0x27, 0x1d, 0x61,
-	0xa6, 0x49, 0x4d, 0x1e, 0x76, 0x5c, 0x4b, 0xb9, 0x8b, 0xe9, 0xc3, 0x8e, 0x63, 0x38, 0x37, 0x1f,
-	0x49, 0xbc, 0xed, 0xe4, 0x22, 0x99, 0x6b, 0xb3, 0x6b, 0x33, 0x6d, 0x76, 0x51, 0x5e, 0xeb, 0x85,
-	0x79, 0xfd, 0x73, 0xe5, 0xcc, 0xfd, 0x94, 0x3e, 0x0e, 0x48, 0xf1, 0x88, 0x6b, 0x2f, 0x08, 0x15,
-	0x9e, 0xc7, 0xb3, 0x0f, 0x35, 0x3f, 0x38, 0x37, 0x7b, 0x05, 0x4e, 0x0a, 0x1f, 0x6e, 0x7e, 0x5f,
-	0x86, 0x0a, 0x45, 0x93, 0x41, 0x85, 0x62, 0x6d, 0x32, 0x46, 0xdf, 0xac, 0x95, 0x5e, 0x86, 0xec,
-	0x1b, 0x76, 0x72, 0x11, 0xba, 0x9c, 0xdc, 0x06, 0xed, 0x93, 0x84, 0xb9, 0xee, 0xdd, 0x86, 0x95,
-	0x71, 0x20, 0x44, 0x20, 0x06, 0xae, 0xd1, 0x9a, 0xbc, 0x2c, 0x5b, 0xe1, 0x21, 0x81, 0x36, 0xc0,
-	0x5e, 0x7f, 0x94, 0xab, 0x74, 0xcc, 0xbd, 0x63, 0xb7, 0x6b, 0x93, 0xb4, 0x6a, 0xe5, 0x07, 0x24,
-	0xee, 0x16, 0x20, 0x1f, 0xd8, 0x7c, 0xe5, 0x91, 0x0f, 0x0a, 0x90, 0x9f, 0x26, 0x8c, 0x9c, 0x43,
-	0x7e, 0x5a, 0x80, 0x7c, 0x68, 0x29, 0x36, 0x8f, 0x7c, 0xd8, 0xfe, 0x43, 0xf6, 0x49, 0x6b, 0xe6,
-	0x91, 0xa1, 0x74, 0xf1, 0x23, 0x43, 0xb9, 0xe0, 0x91, 0xe1, 0xa7, 0x50, 0xc5, 0xb8, 0x26, 0xf5,
-	0xf7, 0xf0, 0x1b, 0x67, 0x10, 0x33, 0xe5, 0x18, 0x1f, 0xf7, 0xbe, 0xae, 0x40, 0x73, 0xb6, 0xab,
-	0x66, 0xd7, 0xe1, 0xac, 0x5e, 0xbb, 0xf9, 0x1e, 0xdb, 0x80, 0x3b, 0x05, 0xca, 0xf4, 0x7f, 0x37,
-	0xe6, 0x9e, 0xe6, 0x7e, 0xb3, 0x74, 0x21, 0x52, 0x3d, 0xa7, 0x0e, 0xb4, 0x59, 0x66, 0x1d, 0xf8,
-	0xb0, 0x00, 0x89, 0x07, 0xd5, 0xfe, 0x48, 0xf7, 0x65, 0xc4, 0x9b, 0x0b, 0xec, 0x36, 0xdc, 0x2c,
-	0xf2, 0x46, 0x8d, 0xde, 0x09, 0x17, 0x3b, 0x13, 0xde, 0xac, 0xb0, 0xfb, 0xf0, 0x7f, 0xe7, 0x4f,
-	0xce, 0x13, 0x7d, 0x1e, 0x72, 0x7f, 0x67, 0xb2, 0xed, 0x47, 0x81, 0x68, 0x56, 0xd9, 0x1d, 0xb8,
-	0x75, 0x86, 0xdb, 0xed, 0x23, 0x4f, 0xf8, 0x52, 0x70, 0xbf, 0xb9, 0xc8, 0x3e, 0x81, 0xbb, 0x05,
-	0xa8, 0xe4, 0x31, 0xd3, 0xb7, 0xbd, 0x6a, 0x8c, 0xeb, 0x5e, 0x62, 0x37, 0xe1, 0x7a, 0x01, 0x38,
-	0x19, 0xba, 0x59, 0x63, 0x3f, 0x81, 0x1f, 0x9e, 0x31, 0x66, 0x2e, 0x5f, 0x98, 0x6d, 0x7f, 0x7f,
-	0xa4, 0xdd, 0xc7, 0x42, 0xc7, 0x93, 0x27, 0x9c, 0x3b, 0xfc, 0xf5, 0x48, 0xf8, 0xcd, 0x3a, 0xfb,
-	0x1c, 0x7e, 0xf4, 0xad, 0x1c, 0x3c, 0x91, 0xf1, 0x6b, 0x1e, 0xe8, 0x26, 0x7c, 0xe3, 0x29, 0x3c,
-	0x8d, 0x3d, 0xa1, 0xb9, 0xff, 0x65, 0xd0, 0x47, 0x26, 0x6f, 0x36, 0x76, 0xaa, 0x5f, 0x94, 0xbe,
-	0x2a, 0xbd, 0xf7, 0x9f, 0x00, 0x00, 0x00, 0xff, 0xff, 0xc7, 0x8a, 0x6c, 0xb7, 0x54, 0x1e, 0x00,
-	0x00,
+var fileDescriptor_dota_gcmessages_client_tournament_341d4112d2cb7bde = []byte{
+	// 2629 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x58, 0x4f, 0x6f, 0x1b, 0xc9,
+	0xb1, 0x5f, 0x52, 0xa4, 0x44, 0x16, 0x25, 0x99, 0xdb, 0xb2, 0x2d, 0x9a, 0x5e, 0xaf, 0xbd, 0xb4,
+	0xdf, 0xb3, 0xd6, 0xfb, 0x20, 0x58, 0xf4, 0xfa, 0x25, 0xd9, 0x04, 0xc9, 0x4a, 0xf2, 0x9f, 0x25,
+	0x62, 0x4b, 0xce, 0x48, 0x5e, 0x23, 0x08, 0x90, 0xc1, 0x88, 0xd3, 0xa6, 0x07, 0x9a, 0xe9, 0xa6,
+	0xa7, 0x9b, 0xa2, 0x78, 0x08, 0xb0, 0xc8, 0x07, 0xc8, 0x29, 0x40, 0x4e, 0xb9, 0x06, 0xf9, 0x04,
+	0x7b, 0xcd, 0x39, 0xb9, 0xe7, 0x9e, 0x43, 0x02, 0xe4, 0x23, 0xe4, 0x90, 0x43, 0x50, 0xd5, 0x3d,
+	0x9c, 0x19, 0x72, 0x24, 0x79, 0x37, 0x7b, 0x9b, 0xa9, 0x7f, 0xdd, 0x55, 0xd5, 0xf5, 0xab, 0xea,
+	0x86, 0xbb, 0xbe, 0xd4, 0x9e, 0x3b, 0xe8, 0x47, 0x5c, 0x29, 0x6f, 0xc0, 0x95, 0xdb, 0x0f, 0x03,
+	0x2e, 0xb4, 0xab, 0xe5, 0x28, 0x16, 0x5e, 0xc4, 0x85, 0xde, 0x1c, 0xc6, 0x52, 0x4b, 0x56, 0x41,
+	0xc1, 0xf6, 0x3a, 0x89, 0x5b, 0x19, 0x2e, 0x46, 0x91, 0x32, 0xec, 0xce, 0x9f, 0x2f, 0xc1, 0xd5,
+	0xdd, 0xe7, 0x6a, 0xf0, 0x68, 0xff, 0x70, 0xfb, 0x70, 0xaa, 0xdb, 0x13, 0xaf, 0x25, 0xbb, 0x0e,
+	0xf5, 0x90, 0x7b, 0x83, 0x11, 0x77, 0x03, 0xbf, 0x55, 0xba, 0x55, 0xda, 0x58, 0x71, 0x6a, 0x86,
+	0xd0, 0xf3, 0xd9, 0x36, 0xc0, 0xf0, 0x8d, 0xa7, 0xb8, 0x1b, 0x06, 0x4a, 0xb7, 0xca, 0xb7, 0x16,
+	0x36, 0x1a, 0xdd, 0xce, 0x26, 0xae, 0xb2, 0x59, 0x6c, 0x6e, 0xf3, 0x05, 0x8a, 0x3b, 0x75, 0xd2,
+	0x7a, 0x16, 0x28, 0xcd, 0x3e, 0x07, 0xd0, 0xdc, 0x8b, 0x94, 0x31, 0xb1, 0x40, 0x26, 0x3e, 0x3a,
+	0xd7, 0xc4, 0x21, 0xf7, 0x22, 0xa7, 0x4e, 0x4a, 0x64, 0xe1, 0x97, 0x70, 0x65, 0x34, 0xec, 0xcb,
+	0x28, 0x10, 0x03, 0x37, 0xf2, 0x74, 0xff, 0x0d, 0xb7, 0xc6, 0x2a, 0x64, 0xec, 0xde, 0xb9, 0xc6,
+	0x5e, 0x5a, 0xcd, 0xe7, 0xa8, 0xe8, 0xac, 0x8d, 0xb2, 0xbf, 0xdc, 0xd8, 0xff, 0x31, 0xd4, 0x05,
+	0x1f, 0x5b, 0x9b, 0xd5, 0x77, 0xd8, 0xe0, 0x1e, 0x1f, 0x2b, 0xa7, 0x86, 0x3a, 0xa8, 0xdf, 0x7e,
+	0x02, 0x40, 0x5e, 0x3f, 0x8d, 0xe5, 0x68, 0xc8, 0xae, 0x41, 0x6d, 0x80, 0x1f, 0x69, 0x38, 0x97,
+	0xe8, 0xbf, 0xe7, 0xb3, 0x1b, 0x00, 0x86, 0x85, 0xb6, 0x5a, 0xe5, 0x5b, 0xa5, 0x8d, 0xba, 0x53,
+	0x27, 0xca, 0x9e, 0x17, 0xf1, 0xf6, 0x6f, 0xca, 0x50, 0x25, 0x43, 0x68, 0xc3, 0x84, 0x3d, 0xb5,
+	0x41, 0xff, 0xc6, 0x86, 0x61, 0x65, 0x6d, 0x10, 0x05, 0x6d, 0xb0, 0x75, 0x58, 0xd2, 0x93, 0x21,
+	0x29, 0x2e, 0x90, 0xe2, 0x22, 0xfe, 0xf6, 0x7c, 0xf6, 0x21, 0x40, 0xa0, 0x79, 0xec, 0xe9, 0x40,
+	0x0a, 0xd5, 0xaa, 0x10, 0x2f, 0x43, 0x61, 0x77, 0x60, 0x35, 0x0a, 0x84, 0xab, 0xb4, 0x17, 0x6b,
+	0x57, 0x07, 0x11, 0x6f, 0x55, 0x49, 0x66, 0x39, 0x0a, 0xc4, 0x01, 0x12, 0x0f, 0x83, 0x88, 0x93,
+	0x94, 0x77, 0x9a, 0x95, 0x5a, 0xb4, 0x52, 0xde, 0x69, 0x2a, 0xf5, 0x24, 0xf1, 0x93, 0x22, 0xba,
+	0x44, 0x11, 0xbd, 0x7b, 0xf1, 0xa9, 0xa1, 0xf8, 0xd9, 0x80, 0x50, 0x60, 0x7f, 0x5d, 0x82, 0x0a,
+	0x1e, 0x06, 0xf2, 0x8a, 0x7b, 0x51, 0x1a, 0x8e, 0x45, 0xfc, 0xed, 0xf9, 0x8c, 0x41, 0x25, 0x13,
+	0x07, 0xfa, 0x66, 0x4d, 0x58, 0xd0, 0xde, 0x80, 0xdc, 0xaf, 0x3b, 0xf8, 0x89, 0x47, 0x9c, 0xd4,
+	0x43, 0x39, 0x90, 0xe4, 0x7a, 0xc5, 0xa9, 0x21, 0xe1, 0x99, 0x1c, 0x48, 0x0c, 0x0c, 0x0f, 0x83,
+	0x28, 0x10, 0x9e, 0xe6, 0x3e, 0x39, 0x5d, 0x73, 0x32, 0x94, 0xf6, 0x1f, 0x6b, 0xb0, 0x92, 0x3b,
+	0x44, 0x68, 0x4e, 0xf1, 0x38, 0xe0, 0x2a, 0x53, 0x31, 0x86, 0xd0, 0xf3, 0x31, 0x75, 0x68, 0x7a,
+	0x0b, 0x79, 0x65, 0x93, 0x3a, 0xfa, 0x4f, 0x59, 0xdd, 0x34, 0x39, 0xc4, 0xea, 0xf6, 0x7c, 0xb6,
+	0x0a, 0xe5, 0x23, 0x69, 0xb3, 0x52, 0x3e, 0x92, 0x98, 0x65, 0xa5, 0xbd, 0x81, 0xcd, 0x72, 0xd5,
+	0x64, 0x99, 0x28, 0x94, 0x65, 0xc3, 0xce, 0xa7, 0xa0, 0xae, 0xa6, 0xf1, 0xff, 0x08, 0x96, 0xc7,
+	0x81, 0x10, 0x3c, 0x76, 0x49, 0xa5, 0xb5, 0x44, 0xfa, 0x0d, 0x43, 0x3b, 0x40, 0x12, 0xbb, 0x09,
+	0x8d, 0x50, 0xaa, 0xa9, 0x44, 0x8d, 0x24, 0x80, 0x48, 0x46, 0xc0, 0xc6, 0x6c, 0xcb, 0xc5, 0x58,
+	0xd6, 0x89, 0x6d, 0x1c, 0x3b, 0x4c, 0x03, 0xda, 0x25, 0x26, 0xa4, 0xcc, 0x2e, 0x32, 0x1f, 0xc2,
+	0xba, 0xd1, 0x1c, 0xc6, 0xfc, 0xc4, 0x95, 0xc3, 0xa1, 0x14, 0x04, 0x59, 0xde, 0xa0, 0xd5, 0x20,
+	0xd1, 0xcb, 0xc4, 0x7e, 0x11, 0xf3, 0x93, 0x7d, 0xcb, 0xcc, 0xa8, 0x75, 0x0b, 0xd4, 0x96, 0x53,
+	0xb5, 0xee, 0xac, 0xda, 0x0d, 0x03, 0x2f, 0x5b, 0x26, 0xb9, 0x2b, 0x94, 0x5c, 0xb3, 0x73, 0xca,
+	0xae, 0x65, 0x77, 0x0d, 0x7b, 0x35, 0x65, 0x77, 0x89, 0xfd, 0x3d, 0x68, 0x15, 0xed, 0x95, 0x84,
+	0x2f, 0x91, 0xf0, 0x95, 0xb9, 0xcd, 0x66, 0x15, 0xbb, 0x45, 0x8a, 0xcd, 0x54, 0xb1, 0x3b, 0xa7,
+	0xf8, 0x00, 0xae, 0x16, 0xad, 0x18, 0xf8, 0xad, 0xf7, 0x29, 0x8d, 0x6b, 0x73, 0xeb, 0xf5, 0xfc,
+	0x44, 0xa9, 0x3b, 0xaf, 0xc4, 0x52, 0xa5, 0x6e, 0xb1, 0x92, 0x5d, 0x89, 0x80, 0xd3, 0x55, 0x7d,
+	0x19, 0xf3, 0xd6, 0xda, 0xcc, 0x4a, 0x74, 0xac, 0x0f, 0x90, 0xc5, 0x1e, 0xc1, 0xcd, 0x39, 0xa5,
+	0xe9, 0x7a, 0x46, 0xfb, 0x32, 0x69, 0x5f, 0xcf, 0x6b, 0x27, 0xeb, 0x1a, 0x2b, 0xf9, 0xfd, 0x66,
+	0x97, 0xbe, 0x32, 0xb3, 0xdf, 0xf9, 0xa5, 0xbb, 0xe7, 0x2c, 0x7d, 0x35, 0x5d, 0xba, 0x7b, 0xc6,
+	0xd2, 0x53, 0x7c, 0x44, 0xdc, 0x6b, 0xad, 0x9b, 0xd2, 0x20, 0xca, 0xe1, 0x64, 0x48, 0xe7, 0xde,
+	0xf8, 0x67, 0x0c, 0xb6, 0x0c, 0x0e, 0x12, 0xc9, 0xe8, 0x5b, 0x81, 0xae, 0x15, 0xb8, 0x96, 0x0a,
+	0x74, 0x8d, 0x40, 0x16, 0x9b, 0xdb, 0x39, 0x6c, 0x6e, 0xfb, 0x50, 0xc1, 0xd6, 0x80, 0xa8, 0x14,
+	0x06, 0xe2, 0x98, 0xb0, 0xa1, 0xee, 0xd0, 0x37, 0xbb, 0x0c, 0x55, 0x1d, 0xe8, 0x30, 0x81, 0x2a,
+	0xf3, 0x83, 0xd4, 0x20, 0xc2, 0x02, 0x34, 0x68, 0x65, 0x7e, 0xd8, 0x07, 0x50, 0xc7, 0xc2, 0x56,
+	0xda, 0x8b, 0x86, 0x16, 0x14, 0x52, 0x42, 0xe7, 0x36, 0x7c, 0x84, 0x28, 0xea, 0xf0, 0xb7, 0x23,
+	0xae, 0xf4, 0x2b, 0xce, 0x8f, 0xb9, 0xf0, 0x09, 0x4f, 0xf9, 0xe4, 0xa0, 0xff, 0x86, 0xfb, 0xa3,
+	0x90, 0x77, 0xfe, 0x56, 0x86, 0x36, 0x4a, 0x15, 0xb3, 0xd9, 0x53, 0xa8, 0xfb, 0xc1, 0x49, 0xa0,
+	0xa8, 0x19, 0x94, 0x08, 0xa0, 0x3f, 0x4e, 0x01, 0xba, 0x58, 0x69, 0xf3, 0x91, 0xd5, 0x70, 0x52,
+	0xdd, 0xf6, 0xbf, 0x4a, 0x50, 0x4b, 0xe8, 0xec, 0x36, 0xac, 0x24, 0x1c, 0xb7, 0x2f, 0x7d, 0x6e,
+	0xc1, 0x71, 0x39, 0x21, 0xee, 0x4a, 0x9f, 0xb3, 0x0d, 0x68, 0xa2, 0x2f, 0xee, 0x38, 0x10, 0xbe,
+	0x1c, 0xbb, 0x72, 0xc8, 0x85, 0x05, 0xca, 0x55, 0xa4, 0xbf, 0x22, 0xf2, 0xfe, 0x90, 0x0b, 0x76,
+	0x0f, 0xde, 0xcf, 0x4a, 0xf6, 0x11, 0x9d, 0x2c, 0x70, 0x5e, 0x4a, 0x45, 0x77, 0x91, 0xcc, 0xb6,
+	0xe0, 0xca, 0xac, 0x55, 0x57, 0xf0, 0x53, 0x6d, 0xc3, 0xc7, 0xf2, 0xa6, 0xf7, 0xf8, 0xa9, 0x26,
+	0x10, 0x8b, 0xe5, 0xf0, 0xcd, 0x04, 0x33, 0x69, 0x9a, 0x5d, 0xcd, 0x10, 0x7a, 0x3e, 0x42, 0xe8,
+	0xeb, 0x98, 0x73, 0x77, 0x6c, 0x42, 0x41, 0x18, 0x5b, 0x73, 0x1a, 0x48, 0xb3, 0xd1, 0xe9, 0xfc,
+	0xa1, 0x6c, 0x66, 0xaa, 0x7c, 0xb4, 0xf6, 0x87, 0x1a, 0x9b, 0xe9, 0xca, 0xd0, 0x8b, 0x75, 0xd0,
+	0x0f, 0x86, 0x9e, 0x0e, 0xc4, 0x80, 0x02, 0x51, 0x73, 0xf2, 0x44, 0x3c, 0x6a, 0xd3, 0x70, 0x4d,
+	0xbb, 0x05, 0x24, 0xa4, 0x9e, 0x8f, 0xa7, 0xe3, 0x68, 0x34, 0x09, 0x84, 0x75, 0xda, 0xfc, 0xa0,
+	0x9a, 0x3a, 0x0e, 0xc2, 0xd0, 0x0d, 0xf9, 0x09, 0x0f, 0x93, 0x56, 0x4e, 0xa4, 0x67, 0x48, 0xc1,
+	0xbd, 0x9b, 0xea, 0xa1, 0x4e, 0xaa, 0xac, 0x6f, 0x0d, 0xa2, 0x51, 0x8f, 0x55, 0xd9, 0x86, 0xba,
+	0x98, 0x6b, 0xa8, 0x1b, 0xd0, 0x1c, 0x06, 0xfd, 0xe3, 0xd1, 0xd0, 0x25, 0x3e, 0xb5, 0x1f, 0xd3,
+	0x3e, 0x56, 0x0d, 0x1d, 0xfb, 0x31, 0xf5, 0xa0, 0x19, 0x49, 0x42, 0xbe, 0x1a, 0x21, 0x5f, 0x46,
+	0x12, 0x21, 0xaf, 0x73, 0x0d, 0xd6, 0xe7, 0xe3, 0xf4, 0x8c, 0x7b, 0x27, 0xbc, 0xf3, 0x17, 0x00,
+	0x36, 0x3f, 0x12, 0xe0, 0x41, 0x4a, 0x27, 0xdc, 0xb4, 0xcb, 0x2e, 0xa7, 0xc4, 0x9e, 0x7f, 0x71,
+	0xf8, 0x6e, 0xc3, 0x8a, 0xb2, 0x67, 0xd7, 0x34, 0x4a, 0x13, 0xc6, 0xe5, 0x84, 0x48, 0xbd, 0xf2,
+	0xc2, 0x68, 0xbe, 0x86, 0xb5, 0xcc, 0x5e, 0x34, 0x8f, 0x86, 0xa1, 0xa7, 0x4d, 0x4f, 0x5e, 0xed,
+	0x5e, 0x33, 0x45, 0xf3, 0x38, 0xdd, 0xfb, 0xa1, 0x15, 0xf8, 0xac, 0x7d, 0xec, 0x16, 0x90, 0xdd,
+	0x3d, 0x29, 0xb8, 0xc3, 0xf4, 0x1c, 0x83, 0x7d, 0x01, 0x55, 0xa5, 0xd1, 0xf2, 0x22, 0x59, 0xbe,
+	0x3a, 0x67, 0xf9, 0x40, 0xcf, 0x9b, 0x25, 0x9a, 0xfb, 0x52, 0x1c, 0x0b, 0x39, 0x16, 0x8e, 0x31,
+	0xc0, 0x3a, 0xb0, 0x42, 0x1f, 0xae, 0xe2, 0x6f, 0x5d, 0x31, 0x8a, 0xa8, 0x43, 0xaf, 0x38, 0x0d,
+	0x22, 0x1e, 0xf0, 0xb7, 0x7b, 0xa3, 0x08, 0xb3, 0xa7, 0xb8, 0xa7, 0xa4, 0x70, 0xd3, 0x1a, 0x68,
+	0x98, 0x2a, 0x34, 0xf4, 0xc3, 0xa4, 0x12, 0x1e, 0x40, 0x95, 0x46, 0x71, 0x3b, 0xc7, 0xdd, 0x38,
+	0x6b, 0x8e, 0x33, 0x63, 0xbb, 0x91, 0x45, 0xa5, 0x81, 0x17, 0x71, 0xd5, 0xaa, 0x5d, 0xa0, 0xf4,
+	0xd4, 0x8b, 0xb8, 0x63, 0x64, 0x51, 0x49, 0x48, 0x9f, 0xab, 0x56, 0xfd, 0x02, 0xa5, 0x3d, 0xe9,
+	0x73, 0xc7, 0xc8, 0xb6, 0xff, 0x5e, 0xb6, 0x33, 0xa2, 0x9d, 0xae, 0xdc, 0x81, 0x3d, 0x2e, 0x8b,
+	0x66, 0xba, 0x7a, 0x1a, 0xf8, 0x18, 0x10, 0x14, 0x76, 0x25, 0x8d, 0x3b, 0x9a, 0xdb, 0xb3, 0xd2,
+	0x40, 0xe2, 0x7e, 0x4c, 0x31, 0x64, 0x1f, 0xc0, 0xd2, 0x30, 0xf4, 0x26, 0x3c, 0x56, 0x74, 0x47,
+	0x59, 0xd9, 0x29, 0x37, 0x4b, 0x4e, 0x42, 0x62, 0xff, 0x03, 0xcb, 0xe6, 0xd3, 0x35, 0x05, 0x59,
+	0x9f, 0x8a, 0x34, 0x0c, 0x7d, 0x87, 0x4a, 0xf3, 0x3e, 0x30, 0x2b, 0x96, 0x3d, 0x53, 0x30, 0x15,
+	0x6e, 0x1a, 0xee, 0x41, 0x7a, 0xba, 0x36, 0xa0, 0x99, 0xa9, 0x55, 0x37, 0xf2, 0xd4, 0x31, 0x8d,
+	0x3b, 0x2b, 0xce, 0x6a, 0x5a, 0xaf, 0xcf, 0x3d, 0x75, 0x9c, 0x2d, 0xd9, 0x4a, 0xae, 0x64, 0x93,
+	0xe9, 0x36, 0x33, 0x2a, 0x52, 0x24, 0xa8, 0x4a, 0xef, 0xc0, 0x2a, 0x31, 0x8f, 0xe8, 0x12, 0x87,
+	0x35, 0xba, 0x44, 0x35, 0xba, 0x8c, 0xd4, 0x1d, 0xbc, 0xa3, 0xe1, 0x50, 0x72, 0x0b, 0xe8, 0xdf,
+	0x1d, 0x05, 0xd9, 0x3a, 0xa6, 0xae, 0xf7, 0x32, 0x40, 0x89, 0xf6, 0x3f, 0x4b, 0x50, 0xc1, 0x5c,
+	0x61, 0x98, 0x29, 0x96, 0x81, 0x7f, 0x9a, 0x5c, 0x4d, 0xf0, 0xbf, 0xe7, 0x9f, 0x22, 0x2b, 0x94,
+	0x47, 0x47, 0x93, 0xa4, 0x1a, 0x17, 0x9d, 0x25, 0xfa, 0x37, 0xa3, 0xaf, 0x71, 0xd3, 0x8e, 0xbe,
+	0x15, 0x67, 0x89, 0xfe, 0xe9, 0x62, 0x42, 0x0d, 0xd7, 0xf5, 0xdc, 0x81, 0x94, 0xc6, 0xb7, 0x9a,
+	0x19, 0xd1, 0xb6, 0x9f, 0x4a, 0xe9, 0xb3, 0x17, 0x49, 0x5d, 0x98, 0x8a, 0x6b, 0xcf, 0xd5, 0x05,
+	0x6e, 0xcb, 0xd4, 0xc6, 0x87, 0xb9, 0xda, 0x98, 0xd2, 0x67, 0xeb, 0xe3, 0xfc, 0xe9, 0xb9, 0xfd,
+	0x75, 0x09, 0x2a, 0x78, 0xc2, 0x30, 0xe2, 0xd6, 0xd5, 0xe4, 0xd6, 0x61, 0x3c, 0x65, 0x1f, 0x98,
+	0xa1, 0x12, 0x63, 0xe0, 0x7a, 0xf6, 0x30, 0xd5, 0x4c, 0x36, 0x4e, 0xb7, 0x73, 0xdc, 0x23, 0x8b,
+	0x39, 0x09, 0x77, 0x87, 0xfd, 0x1c, 0x80, 0x8c, 0x1a, 0x9f, 0x2a, 0x67, 0xf8, 0x84, 0xeb, 0x17,
+	0xf9, 0x34, 0xa5, 0x4f, 0x7d, 0xaa, 0x8b, 0x84, 0xd4, 0xf9, 0x77, 0x15, 0x6e, 0xcc, 0x57, 0x0b,
+	0xf1, 0x76, 0xdf, 0x78, 0x62, 0xc0, 0xb1, 0xa3, 0x0a, 0x3e, 0x76, 0x8b, 0xb0, 0xf5, 0x92, 0xe0,
+	0xe3, 0xc3, 0x2c, 0xbc, 0x3e, 0x86, 0x2a, 0x3f, 0xe1, 0x42, 0x93, 0x7f, 0x45, 0x78, 0xf4, 0x18,
+	0xb9, 0x9f, 0xad, 0xe7, 0xf6, 0x47, 0x34, 0x83, 0x71, 0x46, 0x9b, 0xf9, 0x70, 0x79, 0x66, 0x49,
+	0xe3, 0xf9, 0xc2, 0xb7, 0x46, 0x39, 0x96, 0xdb, 0xa9, 0xa9, 0xde, 0x9f, 0xc1, 0x32, 0x62, 0x88,
+	0xdb, 0x27, 0x3f, 0x95, 0x7d, 0x19, 0xd8, 0x3c, 0x0b, 0x41, 0x32, 0x31, 0x21, 0x04, 0x32, 0x9f,
+	0x4e, 0x63, 0x30, 0xfd, 0x56, 0x68, 0x92, 0xd2, 0x98, 0x98, 0xac, 0xbe, 0xbb, 0x49, 0xc4, 0xa3,
+	0xc4, 0xa4, 0x9e, 0x7e, 0x2b, 0xf6, 0xff, 0x70, 0x25, 0xe2, 0xf1, 0x80, 0xfb, 0xf9, 0x0c, 0xa8,
+	0xd6, 0xe2, 0x14, 0x21, 0xd6, 0x8c, 0x40, 0x36, 0x13, 0x6a, 0x1e, 0xd0, 0x97, 0xe6, 0x00, 0xbd,
+	0xfd, 0x55, 0x09, 0x20, 0x75, 0x25, 0x57, 0x70, 0xa5, 0x7c, 0xc1, 0xbd, 0xa2, 0xe7, 0x8e, 0x0c,
+	0x12, 0xfe, 0x77, 0x45, 0x55, 0x13, 0x7c, 0x4c, 0x94, 0xf6, 0xaf, 0x00, 0x52, 0xcf, 0xe7, 0xf0,
+	0xb8, 0x92, 0xe2, 0xf1, 0xc7, 0xe6, 0x18, 0x16, 0x61, 0xf2, 0xaa, 0xe0, 0xe3, 0xbd, 0x0c, 0x2c,
+	0x7f, 0x0c, 0xef, 0xcb, 0xd0, 0x9f, 0x11, 0x35, 0x35, 0xb5, 0x2a, 0x43, 0x3f, 0x23, 0xda, 0xd1,
+	0x70, 0x6d, 0x3e, 0x2d, 0x76, 0x4a, 0x7e, 0xb7, 0x89, 0xa2, 0x0b, 0x57, 0xe6, 0xde, 0xd7, 0x68,
+	0xff, 0x65, 0xda, 0xff, 0x9a, 0x61, 0x66, 0x82, 0x11, 0xf8, 0x9d, 0xb7, 0x66, 0xce, 0x9e, 0x5d,
+	0x55, 0x0d, 0xa5, 0xa0, 0x87, 0x9c, 0xc5, 0x98, 0xab, 0x51, 0xa8, 0xcd, 0x7a, 0x9f, 0x95, 0xba,
+	0x8e, 0x25, 0xb0, 0xef, 0x03, 0xa4, 0xab, 0xd0, 0x0a, 0x8d, 0x6e, 0xeb, 0xac, 0xd3, 0xe5, 0x64,
+	0x64, 0x3b, 0xbf, 0x80, 0xeb, 0x89, 0xc4, 0x6e, 0xc8, 0xbd, 0x38, 0x9f, 0x9d, 0x77, 0x73, 0x75,
+	0x1d, 0x96, 0xa8, 0x60, 0xa6, 0x83, 0xd3, 0x22, 0xfe, 0xf6, 0xfc, 0xce, 0x6f, 0x17, 0xe0, 0x93,
+	0xc4, 0x7a, 0x7e, 0x62, 0x7b, 0x31, 0xd3, 0xbb, 0x30, 0xea, 0x6a, 0x76, 0x7e, 0x2a, 0xcd, 0xcd,
+	0x4f, 0x88, 0xef, 0x78, 0x77, 0x71, 0xc7, 0x52, 0xb8, 0xf7, 0xed, 0x6a, 0xe6, 0x3a, 0xf3, 0x4a,
+	0x8a, 0xfb, 0x79, 0xfe, 0x96, 0xcd, 0xed, 0x94, 0xbf, 0x95, 0xe7, 0x77, 0x73, 0xd7, 0xa1, 0x57,
+	0x52, 0x74, 0xf3, 0xfc, 0x07, 0x76, 0xd8, 0x9d, 0xf2, 0x1f, 0xb0, 0x4f, 0x80, 0x19, 0xfe, 0xd1,
+	0x84, 0xbb, 0x9e, 0xf0, 0xdd, 0x50, 0x2a, 0x6d, 0x51, 0x9f, 0xae, 0x11, 0x6a, 0x67, 0xc2, 0xb7,
+	0x85, 0xff, 0x4c, 0x2a, 0x8d, 0xc7, 0x2d, 0x2f, 0x3c, 0x96, 0xc2, 0x56, 0xdb, 0x6a, 0x46, 0xf6,
+	0x95, 0x14, 0x6c, 0x13, 0xd6, 0x8c, 0xe8, 0x48, 0x8c, 0xd4, 0xc8, 0x0b, 0x11, 0x28, 0xa2, 0xa1,
+	0x9d, 0xb5, 0x8c, 0x95, 0x97, 0x86, 0xb3, 0x8b, 0x0c, 0xf6, 0xbf, 0x70, 0x49, 0x4b, 0xed, 0x85,
+	0x2e, 0x0d, 0x3b, 0x64, 0xb8, 0x46, 0xb2, 0x2b, 0x44, 0xc6, 0xd4, 0xe1, 0x86, 0x71, 0xe8, 0x37,
+	0x57, 0xcf, 0xba, 0x19, 0xfa, 0xe9, 0xa7, 0xf3, 0x8f, 0x92, 0xb9, 0xf5, 0x9d, 0x99, 0x16, 0x4a,
+	0xc6, 0x0d, 0x00, 0xaf, 0xdf, 0x97, 0xa3, 0x6c, 0xde, 0xeb, 0x96, 0x62, 0x86, 0xfb, 0xb9, 0xa1,
+	0xaf, 0x5c, 0x38, 0xf4, 0x1d, 0xc2, 0x72, 0x26, 0xab, 0xca, 0x3e, 0xdb, 0x6e, 0xe5, 0x8f, 0xe7,
+	0x3b, 0x1c, 0x0f, 0xa7, 0x91, 0x9e, 0x04, 0x85, 0x17, 0x93, 0xfe, 0x28, 0x8e, 0xa9, 0xc0, 0x02,
+	0x1e, 0xdb, 0x5c, 0x36, 0x2c, 0xed, 0x30, 0xe0, 0x71, 0x47, 0xc1, 0xc6, 0x85, 0x6e, 0x26, 0x35,
+	0xfd, 0x5d, 0x79, 0xdb, 0x19, 0xc1, 0xbd, 0xf3, 0x16, 0xfd, 0x22, 0x50, 0x5a, 0xc6, 0x93, 0xef,
+	0x7c, 0xd9, 0xbf, 0x2e, 0xc0, 0xed, 0x77, 0x58, 0xf7, 0xa2, 0x05, 0xbf, 0x84, 0x46, 0x5a, 0xda,
+	0x49, 0xaa, 0x3e, 0xbd, 0x38, 0x55, 0xd6, 0xfc, 0x66, 0x06, 0x65, 0xb2, 0x86, 0xda, 0x5f, 0x97,
+	0x01, 0xbe, 0xe9, 0x9d, 0x2c, 0x3f, 0x5a, 0x95, 0x67, 0x1f, 0x26, 0xef, 0x62, 0x0d, 0xa4, 0x77,
+	0x29, 0x3c, 0x03, 0x16, 0xcb, 0x33, 0x17, 0xa2, 0x80, 0xc7, 0x17, 0x0f, 0xbb, 0x7e, 0x32, 0x11,
+	0xda, 0xd9, 0xea, 0x11, 0x36, 0x0b, 0xfb, 0x76, 0xe3, 0x5a, 0xc8, 0x5d, 0x4c, 0xdf, 0x6e, 0x1c,
+	0x83, 0xb9, 0xf9, 0x48, 0xe2, 0x85, 0x26, 0x17, 0xc9, 0xdc, 0x24, 0x5d, 0x9b, 0x99, 0xa4, 0x8b,
+	0xf2, 0x5a, 0x2f, 0xcc, 0xeb, 0x9f, 0x2a, 0x67, 0x9e, 0xa7, 0xf4, 0xfe, 0x2f, 0xc5, 0x23, 0xae,
+	0xbd, 0x20, 0x54, 0xd8, 0x8f, 0x67, 0xdf, 0x62, 0x7e, 0x70, 0x6e, 0xf6, 0x0a, 0x8c, 0x14, 0xbe,
+	0xcd, 0xfc, 0x0e, 0xaf, 0x46, 0x18, 0x4d, 0x06, 0x15, 0x8a, 0xb5, 0xc9, 0x18, 0x7d, 0xb3, 0x56,
+	0x7a, 0xdf, 0xb1, 0xcf, 0xd4, 0xc9, 0x5d, 0xe7, 0x72, 0x72, 0xe1, 0xb3, 0xaf, 0x0e, 0xe6, 0x46,
+	0x77, 0x1b, 0x56, 0xc6, 0x81, 0x10, 0x81, 0x18, 0xb8, 0x86, 0x6b, 0xf2, 0xb2, 0x6c, 0x89, 0x87,
+	0x24, 0xb4, 0x01, 0xf6, 0x86, 0xa3, 0x5c, 0xa5, 0x63, 0xee, 0x1d, 0xbb, 0x5d, 0x9b, 0xa4, 0x55,
+	0x4b, 0x3f, 0x20, 0x72, 0xb7, 0x40, 0xf2, 0x81, 0xcd, 0x57, 0x5e, 0xf2, 0x41, 0x81, 0xe4, 0xa7,
+	0x09, 0x22, 0xe7, 0x24, 0x3f, 0x2d, 0x90, 0x7c, 0x68, 0x21, 0x36, 0x2f, 0xf9, 0xb0, 0xfd, 0xfb,
+	0xec, 0xab, 0xd5, 0xcc, 0x3b, 0x42, 0xe9, 0xe2, 0x77, 0x84, 0x72, 0xc1, 0x3b, 0xc2, 0x4f, 0xa1,
+	0x8a, 0x71, 0x4d, 0xea, 0xef, 0xe1, 0x37, 0xce, 0x20, 0x66, 0xca, 0x31, 0x36, 0xee, 0x7d, 0x5d,
+	0x81, 0xe6, 0xec, 0x54, 0xcd, 0xae, 0xc3, 0x59, 0xb3, 0x76, 0xf3, 0x3d, 0xb6, 0x01, 0x77, 0x0a,
+	0x98, 0xe9, 0xff, 0x6e, 0xcc, 0x3d, 0xcd, 0xfd, 0x66, 0xe9, 0x42, 0x49, 0xf5, 0x9c, 0x26, 0xd0,
+	0x66, 0x99, 0x75, 0xe0, 0xc3, 0x02, 0x49, 0x6c, 0x54, 0xfb, 0x23, 0xdd, 0x97, 0x11, 0x6f, 0x2e,
+	0xb0, 0xdb, 0x70, 0xb3, 0xc8, 0x1a, 0x0d, 0x7a, 0x27, 0x5c, 0xec, 0x4c, 0x78, 0xb3, 0xc2, 0xee,
+	0xc3, 0xff, 0x9d, 0xbf, 0x39, 0x4f, 0xf4, 0x79, 0xc8, 0xfd, 0x9d, 0xc9, 0xb6, 0x1f, 0x05, 0xa2,
+	0x59, 0x65, 0x77, 0xe0, 0xd6, 0x19, 0x66, 0xb7, 0x8f, 0x3c, 0xe1, 0x4b, 0xc1, 0xfd, 0xe6, 0x22,
+	0xfb, 0x04, 0xee, 0x16, 0x48, 0x25, 0xef, 0x95, 0xbe, 0x9d, 0x55, 0x63, 0xf4, 0x7b, 0x89, 0xdd,
+	0x84, 0xeb, 0x05, 0xc2, 0xc9, 0xd2, 0xcd, 0x1a, 0xfb, 0x09, 0xfc, 0xf0, 0x8c, 0x35, 0x73, 0xf9,
+	0xc2, 0x6c, 0xfb, 0xfb, 0x23, 0xed, 0x3e, 0x16, 0x3a, 0x9e, 0x3c, 0xe1, 0xdc, 0xe1, 0xaf, 0x47,
+	0xc2, 0x6f, 0xd6, 0xd9, 0xe7, 0xf0, 0xa3, 0x6f, 0x65, 0xe0, 0x89, 0x8c, 0x5f, 0xf3, 0x40, 0x37,
+	0xe1, 0x1b, 0x6f, 0xe1, 0x69, 0xec, 0x09, 0xcd, 0xfd, 0x2f, 0x83, 0x3e, 0x22, 0x79, 0xb3, 0xb1,
+	0x53, 0xfd, 0xa2, 0xf4, 0x55, 0xe9, 0xbd, 0xff, 0x04, 0x00, 0x00, 0xff, 0xff, 0xfa, 0x94, 0x8f,
+	0xec, 0x37, 0x1e, 0x00, 0x00,
 }

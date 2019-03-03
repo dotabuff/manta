@@ -12,6 +12,12 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the proto package it is being compiled against.
+// A compilation error at this line likely means your copy of the
+// proto package needs to be updated.
+const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+
 type EDemoCommands int32
 
 const (
@@ -95,26 +101,49 @@ func (x *EDemoCommands) UnmarshalJSON(data []byte) error {
 	*x = EDemoCommands(value)
 	return nil
 }
-func (EDemoCommands) EnumDescriptor() ([]byte, []int) { return fileDescriptor4, []int{0} }
-
-type CDemoFileHeader struct {
-	DemoFileStamp            *string `protobuf:"bytes,1,req,name=demo_file_stamp,json=demoFileStamp" json:"demo_file_stamp,omitempty"`
-	NetworkProtocol          *int32  `protobuf:"varint,2,opt,name=network_protocol,json=networkProtocol" json:"network_protocol,omitempty"`
-	ServerName               *string `protobuf:"bytes,3,opt,name=server_name,json=serverName" json:"server_name,omitempty"`
-	ClientName               *string `protobuf:"bytes,4,opt,name=client_name,json=clientName" json:"client_name,omitempty"`
-	MapName                  *string `protobuf:"bytes,5,opt,name=map_name,json=mapName" json:"map_name,omitempty"`
-	GameDirectory            *string `protobuf:"bytes,6,opt,name=game_directory,json=gameDirectory" json:"game_directory,omitempty"`
-	FullpacketsVersion       *int32  `protobuf:"varint,7,opt,name=fullpackets_version,json=fullpacketsVersion" json:"fullpackets_version,omitempty"`
-	AllowClientsideEntities  *bool   `protobuf:"varint,8,opt,name=allow_clientside_entities,json=allowClientsideEntities" json:"allow_clientside_entities,omitempty"`
-	AllowClientsideParticles *bool   `protobuf:"varint,9,opt,name=allow_clientside_particles,json=allowClientsideParticles" json:"allow_clientside_particles,omitempty"`
-	Addons                   *string `protobuf:"bytes,10,opt,name=addons" json:"addons,omitempty"`
-	XXX_unrecognized         []byte  `json:"-"`
+func (EDemoCommands) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_demo_090e5815818aa9c8, []int{0}
 }
 
-func (m *CDemoFileHeader) Reset()                    { *m = CDemoFileHeader{} }
-func (m *CDemoFileHeader) String() string            { return proto.CompactTextString(m) }
-func (*CDemoFileHeader) ProtoMessage()               {}
-func (*CDemoFileHeader) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{0} }
+type CDemoFileHeader struct {
+	DemoFileStamp            *string  `protobuf:"bytes,1,req,name=demo_file_stamp,json=demoFileStamp" json:"demo_file_stamp,omitempty"`
+	NetworkProtocol          *int32   `protobuf:"varint,2,opt,name=network_protocol,json=networkProtocol" json:"network_protocol,omitempty"`
+	ServerName               *string  `protobuf:"bytes,3,opt,name=server_name,json=serverName" json:"server_name,omitempty"`
+	ClientName               *string  `protobuf:"bytes,4,opt,name=client_name,json=clientName" json:"client_name,omitempty"`
+	MapName                  *string  `protobuf:"bytes,5,opt,name=map_name,json=mapName" json:"map_name,omitempty"`
+	GameDirectory            *string  `protobuf:"bytes,6,opt,name=game_directory,json=gameDirectory" json:"game_directory,omitempty"`
+	FullpacketsVersion       *int32   `protobuf:"varint,7,opt,name=fullpackets_version,json=fullpacketsVersion" json:"fullpackets_version,omitempty"`
+	AllowClientsideEntities  *bool    `protobuf:"varint,8,opt,name=allow_clientside_entities,json=allowClientsideEntities" json:"allow_clientside_entities,omitempty"`
+	AllowClientsideParticles *bool    `protobuf:"varint,9,opt,name=allow_clientside_particles,json=allowClientsideParticles" json:"allow_clientside_particles,omitempty"`
+	Addons                   *string  `protobuf:"bytes,10,opt,name=addons" json:"addons,omitempty"`
+	XXX_NoUnkeyedLiteral     struct{} `json:"-"`
+	XXX_unrecognized         []byte   `json:"-"`
+	XXX_sizecache            int32    `json:"-"`
+}
+
+func (m *CDemoFileHeader) Reset()         { *m = CDemoFileHeader{} }
+func (m *CDemoFileHeader) String() string { return proto.CompactTextString(m) }
+func (*CDemoFileHeader) ProtoMessage()    {}
+func (*CDemoFileHeader) Descriptor() ([]byte, []int) {
+	return fileDescriptor_demo_090e5815818aa9c8, []int{0}
+}
+func (m *CDemoFileHeader) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CDemoFileHeader.Unmarshal(m, b)
+}
+func (m *CDemoFileHeader) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CDemoFileHeader.Marshal(b, m, deterministic)
+}
+func (dst *CDemoFileHeader) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CDemoFileHeader.Merge(dst, src)
+}
+func (m *CDemoFileHeader) XXX_Size() int {
+	return xxx_messageInfo_CDemoFileHeader.Size(m)
+}
+func (m *CDemoFileHeader) XXX_DiscardUnknown() {
+	xxx_messageInfo_CDemoFileHeader.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CDemoFileHeader proto.InternalMessageInfo
 
 func (m *CDemoFileHeader) GetDemoFileStamp() string {
 	if m != nil && m.DemoFileStamp != nil {
@@ -187,14 +216,35 @@ func (m *CDemoFileHeader) GetAddons() string {
 }
 
 type CGameInfo struct {
-	Dota             *CGameInfo_CDotaGameInfo `protobuf:"bytes,4,opt,name=dota" json:"dota,omitempty"`
-	XXX_unrecognized []byte                   `json:"-"`
+	Dota                 *CGameInfo_CDotaGameInfo `protobuf:"bytes,4,opt,name=dota" json:"dota,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                 `json:"-"`
+	XXX_unrecognized     []byte                   `json:"-"`
+	XXX_sizecache        int32                    `json:"-"`
 }
 
-func (m *CGameInfo) Reset()                    { *m = CGameInfo{} }
-func (m *CGameInfo) String() string            { return proto.CompactTextString(m) }
-func (*CGameInfo) ProtoMessage()               {}
-func (*CGameInfo) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{1} }
+func (m *CGameInfo) Reset()         { *m = CGameInfo{} }
+func (m *CGameInfo) String() string { return proto.CompactTextString(m) }
+func (*CGameInfo) ProtoMessage()    {}
+func (*CGameInfo) Descriptor() ([]byte, []int) {
+	return fileDescriptor_demo_090e5815818aa9c8, []int{1}
+}
+func (m *CGameInfo) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CGameInfo.Unmarshal(m, b)
+}
+func (m *CGameInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CGameInfo.Marshal(b, m, deterministic)
+}
+func (dst *CGameInfo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CGameInfo.Merge(dst, src)
+}
+func (m *CGameInfo) XXX_Size() int {
+	return xxx_messageInfo_CGameInfo.Size(m)
+}
+func (m *CGameInfo) XXX_DiscardUnknown() {
+	xxx_messageInfo_CGameInfo.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CGameInfo proto.InternalMessageInfo
 
 func (m *CGameInfo) GetDota() *CGameInfo_CDotaGameInfo {
 	if m != nil {
@@ -204,24 +254,45 @@ func (m *CGameInfo) GetDota() *CGameInfo_CDotaGameInfo {
 }
 
 type CGameInfo_CDotaGameInfo struct {
-	MatchId          *uint64                                     `protobuf:"varint,1,opt,name=match_id,json=matchId" json:"match_id,omitempty"`
-	GameMode         *int32                                      `protobuf:"varint,2,opt,name=game_mode,json=gameMode" json:"game_mode,omitempty"`
-	GameWinner       *int32                                      `protobuf:"varint,3,opt,name=game_winner,json=gameWinner" json:"game_winner,omitempty"`
-	PlayerInfo       []*CGameInfo_CDotaGameInfo_CPlayerInfo      `protobuf:"bytes,4,rep,name=player_info,json=playerInfo" json:"player_info,omitempty"`
-	Leagueid         *uint32                                     `protobuf:"varint,5,opt,name=leagueid" json:"leagueid,omitempty"`
-	PicksBans        []*CGameInfo_CDotaGameInfo_CHeroSelectEvent `protobuf:"bytes,6,rep,name=picks_bans,json=picksBans" json:"picks_bans,omitempty"`
-	RadiantTeamId    *uint32                                     `protobuf:"varint,7,opt,name=radiant_team_id,json=radiantTeamId" json:"radiant_team_id,omitempty"`
-	DireTeamId       *uint32                                     `protobuf:"varint,8,opt,name=dire_team_id,json=direTeamId" json:"dire_team_id,omitempty"`
-	RadiantTeamTag   *string                                     `protobuf:"bytes,9,opt,name=radiant_team_tag,json=radiantTeamTag" json:"radiant_team_tag,omitempty"`
-	DireTeamTag      *string                                     `protobuf:"bytes,10,opt,name=dire_team_tag,json=direTeamTag" json:"dire_team_tag,omitempty"`
-	EndTime          *uint32                                     `protobuf:"varint,11,opt,name=end_time,json=endTime" json:"end_time,omitempty"`
-	XXX_unrecognized []byte                                      `json:"-"`
+	MatchId              *uint64                                     `protobuf:"varint,1,opt,name=match_id,json=matchId" json:"match_id,omitempty"`
+	GameMode             *int32                                      `protobuf:"varint,2,opt,name=game_mode,json=gameMode" json:"game_mode,omitempty"`
+	GameWinner           *int32                                      `protobuf:"varint,3,opt,name=game_winner,json=gameWinner" json:"game_winner,omitempty"`
+	PlayerInfo           []*CGameInfo_CDotaGameInfo_CPlayerInfo      `protobuf:"bytes,4,rep,name=player_info,json=playerInfo" json:"player_info,omitempty"`
+	Leagueid             *uint32                                     `protobuf:"varint,5,opt,name=leagueid" json:"leagueid,omitempty"`
+	PicksBans            []*CGameInfo_CDotaGameInfo_CHeroSelectEvent `protobuf:"bytes,6,rep,name=picks_bans,json=picksBans" json:"picks_bans,omitempty"`
+	RadiantTeamId        *uint32                                     `protobuf:"varint,7,opt,name=radiant_team_id,json=radiantTeamId" json:"radiant_team_id,omitempty"`
+	DireTeamId           *uint32                                     `protobuf:"varint,8,opt,name=dire_team_id,json=direTeamId" json:"dire_team_id,omitempty"`
+	RadiantTeamTag       *string                                     `protobuf:"bytes,9,opt,name=radiant_team_tag,json=radiantTeamTag" json:"radiant_team_tag,omitempty"`
+	DireTeamTag          *string                                     `protobuf:"bytes,10,opt,name=dire_team_tag,json=direTeamTag" json:"dire_team_tag,omitempty"`
+	EndTime              *uint32                                     `protobuf:"varint,11,opt,name=end_time,json=endTime" json:"end_time,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                    `json:"-"`
+	XXX_unrecognized     []byte                                      `json:"-"`
+	XXX_sizecache        int32                                       `json:"-"`
 }
 
-func (m *CGameInfo_CDotaGameInfo) Reset()                    { *m = CGameInfo_CDotaGameInfo{} }
-func (m *CGameInfo_CDotaGameInfo) String() string            { return proto.CompactTextString(m) }
-func (*CGameInfo_CDotaGameInfo) ProtoMessage()               {}
-func (*CGameInfo_CDotaGameInfo) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{1, 0} }
+func (m *CGameInfo_CDotaGameInfo) Reset()         { *m = CGameInfo_CDotaGameInfo{} }
+func (m *CGameInfo_CDotaGameInfo) String() string { return proto.CompactTextString(m) }
+func (*CGameInfo_CDotaGameInfo) ProtoMessage()    {}
+func (*CGameInfo_CDotaGameInfo) Descriptor() ([]byte, []int) {
+	return fileDescriptor_demo_090e5815818aa9c8, []int{1, 0}
+}
+func (m *CGameInfo_CDotaGameInfo) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CGameInfo_CDotaGameInfo.Unmarshal(m, b)
+}
+func (m *CGameInfo_CDotaGameInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CGameInfo_CDotaGameInfo.Marshal(b, m, deterministic)
+}
+func (dst *CGameInfo_CDotaGameInfo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CGameInfo_CDotaGameInfo.Merge(dst, src)
+}
+func (m *CGameInfo_CDotaGameInfo) XXX_Size() int {
+	return xxx_messageInfo_CGameInfo_CDotaGameInfo.Size(m)
+}
+func (m *CGameInfo_CDotaGameInfo) XXX_DiscardUnknown() {
+	xxx_messageInfo_CGameInfo_CDotaGameInfo.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CGameInfo_CDotaGameInfo proto.InternalMessageInfo
 
 func (m *CGameInfo_CDotaGameInfo) GetMatchId() uint64 {
 	if m != nil && m.MatchId != nil {
@@ -301,20 +372,39 @@ func (m *CGameInfo_CDotaGameInfo) GetEndTime() uint32 {
 }
 
 type CGameInfo_CDotaGameInfo_CPlayerInfo struct {
-	HeroName         *string `protobuf:"bytes,1,opt,name=hero_name,json=heroName" json:"hero_name,omitempty"`
-	PlayerName       *string `protobuf:"bytes,2,opt,name=player_name,json=playerName" json:"player_name,omitempty"`
-	IsFakeClient     *bool   `protobuf:"varint,3,opt,name=is_fake_client,json=isFakeClient" json:"is_fake_client,omitempty"`
-	Steamid          *uint64 `protobuf:"varint,4,opt,name=steamid" json:"steamid,omitempty"`
-	GameTeam         *int32  `protobuf:"varint,5,opt,name=game_team,json=gameTeam" json:"game_team,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	HeroName             *string  `protobuf:"bytes,1,opt,name=hero_name,json=heroName" json:"hero_name,omitempty"`
+	PlayerName           *string  `protobuf:"bytes,2,opt,name=player_name,json=playerName" json:"player_name,omitempty"`
+	IsFakeClient         *bool    `protobuf:"varint,3,opt,name=is_fake_client,json=isFakeClient" json:"is_fake_client,omitempty"`
+	Steamid              *uint64  `protobuf:"varint,4,opt,name=steamid" json:"steamid,omitempty"`
+	GameTeam             *int32   `protobuf:"varint,5,opt,name=game_team,json=gameTeam" json:"game_team,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *CGameInfo_CDotaGameInfo_CPlayerInfo) Reset()         { *m = CGameInfo_CDotaGameInfo_CPlayerInfo{} }
 func (m *CGameInfo_CDotaGameInfo_CPlayerInfo) String() string { return proto.CompactTextString(m) }
 func (*CGameInfo_CDotaGameInfo_CPlayerInfo) ProtoMessage()    {}
 func (*CGameInfo_CDotaGameInfo_CPlayerInfo) Descriptor() ([]byte, []int) {
-	return fileDescriptor4, []int{1, 0, 0}
+	return fileDescriptor_demo_090e5815818aa9c8, []int{1, 0, 0}
 }
+func (m *CGameInfo_CDotaGameInfo_CPlayerInfo) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CGameInfo_CDotaGameInfo_CPlayerInfo.Unmarshal(m, b)
+}
+func (m *CGameInfo_CDotaGameInfo_CPlayerInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CGameInfo_CDotaGameInfo_CPlayerInfo.Marshal(b, m, deterministic)
+}
+func (dst *CGameInfo_CDotaGameInfo_CPlayerInfo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CGameInfo_CDotaGameInfo_CPlayerInfo.Merge(dst, src)
+}
+func (m *CGameInfo_CDotaGameInfo_CPlayerInfo) XXX_Size() int {
+	return xxx_messageInfo_CGameInfo_CDotaGameInfo_CPlayerInfo.Size(m)
+}
+func (m *CGameInfo_CDotaGameInfo_CPlayerInfo) XXX_DiscardUnknown() {
+	xxx_messageInfo_CGameInfo_CDotaGameInfo_CPlayerInfo.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CGameInfo_CDotaGameInfo_CPlayerInfo proto.InternalMessageInfo
 
 func (m *CGameInfo_CDotaGameInfo_CPlayerInfo) GetHeroName() string {
 	if m != nil && m.HeroName != nil {
@@ -352,10 +442,12 @@ func (m *CGameInfo_CDotaGameInfo_CPlayerInfo) GetGameTeam() int32 {
 }
 
 type CGameInfo_CDotaGameInfo_CHeroSelectEvent struct {
-	IsPick           *bool   `protobuf:"varint,1,opt,name=is_pick,json=isPick" json:"is_pick,omitempty"`
-	Team             *uint32 `protobuf:"varint,2,opt,name=team" json:"team,omitempty"`
-	HeroId           *uint32 `protobuf:"varint,3,opt,name=hero_id,json=heroId" json:"hero_id,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	IsPick               *bool    `protobuf:"varint,1,opt,name=is_pick,json=isPick" json:"is_pick,omitempty"`
+	Team                 *uint32  `protobuf:"varint,2,opt,name=team" json:"team,omitempty"`
+	HeroId               *uint32  `protobuf:"varint,3,opt,name=hero_id,json=heroId" json:"hero_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *CGameInfo_CDotaGameInfo_CHeroSelectEvent) Reset() {
@@ -364,8 +456,25 @@ func (m *CGameInfo_CDotaGameInfo_CHeroSelectEvent) Reset() {
 func (m *CGameInfo_CDotaGameInfo_CHeroSelectEvent) String() string { return proto.CompactTextString(m) }
 func (*CGameInfo_CDotaGameInfo_CHeroSelectEvent) ProtoMessage()    {}
 func (*CGameInfo_CDotaGameInfo_CHeroSelectEvent) Descriptor() ([]byte, []int) {
-	return fileDescriptor4, []int{1, 0, 1}
+	return fileDescriptor_demo_090e5815818aa9c8, []int{1, 0, 1}
 }
+func (m *CGameInfo_CDotaGameInfo_CHeroSelectEvent) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CGameInfo_CDotaGameInfo_CHeroSelectEvent.Unmarshal(m, b)
+}
+func (m *CGameInfo_CDotaGameInfo_CHeroSelectEvent) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CGameInfo_CDotaGameInfo_CHeroSelectEvent.Marshal(b, m, deterministic)
+}
+func (dst *CGameInfo_CDotaGameInfo_CHeroSelectEvent) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CGameInfo_CDotaGameInfo_CHeroSelectEvent.Merge(dst, src)
+}
+func (m *CGameInfo_CDotaGameInfo_CHeroSelectEvent) XXX_Size() int {
+	return xxx_messageInfo_CGameInfo_CDotaGameInfo_CHeroSelectEvent.Size(m)
+}
+func (m *CGameInfo_CDotaGameInfo_CHeroSelectEvent) XXX_DiscardUnknown() {
+	xxx_messageInfo_CGameInfo_CDotaGameInfo_CHeroSelectEvent.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CGameInfo_CDotaGameInfo_CHeroSelectEvent proto.InternalMessageInfo
 
 func (m *CGameInfo_CDotaGameInfo_CHeroSelectEvent) GetIsPick() bool {
 	if m != nil && m.IsPick != nil {
@@ -389,17 +498,38 @@ func (m *CGameInfo_CDotaGameInfo_CHeroSelectEvent) GetHeroId() uint32 {
 }
 
 type CDemoFileInfo struct {
-	PlaybackTime     *float32   `protobuf:"fixed32,1,opt,name=playback_time,json=playbackTime" json:"playback_time,omitempty"`
-	PlaybackTicks    *int32     `protobuf:"varint,2,opt,name=playback_ticks,json=playbackTicks" json:"playback_ticks,omitempty"`
-	PlaybackFrames   *int32     `protobuf:"varint,3,opt,name=playback_frames,json=playbackFrames" json:"playback_frames,omitempty"`
-	GameInfo         *CGameInfo `protobuf:"bytes,4,opt,name=game_info,json=gameInfo" json:"game_info,omitempty"`
-	XXX_unrecognized []byte     `json:"-"`
+	PlaybackTime         *float32   `protobuf:"fixed32,1,opt,name=playback_time,json=playbackTime" json:"playback_time,omitempty"`
+	PlaybackTicks        *int32     `protobuf:"varint,2,opt,name=playback_ticks,json=playbackTicks" json:"playback_ticks,omitempty"`
+	PlaybackFrames       *int32     `protobuf:"varint,3,opt,name=playback_frames,json=playbackFrames" json:"playback_frames,omitempty"`
+	GameInfo             *CGameInfo `protobuf:"bytes,4,opt,name=game_info,json=gameInfo" json:"game_info,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
+	XXX_unrecognized     []byte     `json:"-"`
+	XXX_sizecache        int32      `json:"-"`
 }
 
-func (m *CDemoFileInfo) Reset()                    { *m = CDemoFileInfo{} }
-func (m *CDemoFileInfo) String() string            { return proto.CompactTextString(m) }
-func (*CDemoFileInfo) ProtoMessage()               {}
-func (*CDemoFileInfo) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{2} }
+func (m *CDemoFileInfo) Reset()         { *m = CDemoFileInfo{} }
+func (m *CDemoFileInfo) String() string { return proto.CompactTextString(m) }
+func (*CDemoFileInfo) ProtoMessage()    {}
+func (*CDemoFileInfo) Descriptor() ([]byte, []int) {
+	return fileDescriptor_demo_090e5815818aa9c8, []int{2}
+}
+func (m *CDemoFileInfo) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CDemoFileInfo.Unmarshal(m, b)
+}
+func (m *CDemoFileInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CDemoFileInfo.Marshal(b, m, deterministic)
+}
+func (dst *CDemoFileInfo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CDemoFileInfo.Merge(dst, src)
+}
+func (m *CDemoFileInfo) XXX_Size() int {
+	return xxx_messageInfo_CDemoFileInfo.Size(m)
+}
+func (m *CDemoFileInfo) XXX_DiscardUnknown() {
+	xxx_messageInfo_CDemoFileInfo.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CDemoFileInfo proto.InternalMessageInfo
 
 func (m *CDemoFileInfo) GetPlaybackTime() float32 {
 	if m != nil && m.PlaybackTime != nil {
@@ -430,14 +560,35 @@ func (m *CDemoFileInfo) GetGameInfo() *CGameInfo {
 }
 
 type CDemoPacket struct {
-	Data             []byte `protobuf:"bytes,3,opt,name=data" json:"data,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	Data                 []byte   `protobuf:"bytes,3,opt,name=data" json:"data,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CDemoPacket) Reset()                    { *m = CDemoPacket{} }
-func (m *CDemoPacket) String() string            { return proto.CompactTextString(m) }
-func (*CDemoPacket) ProtoMessage()               {}
-func (*CDemoPacket) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{3} }
+func (m *CDemoPacket) Reset()         { *m = CDemoPacket{} }
+func (m *CDemoPacket) String() string { return proto.CompactTextString(m) }
+func (*CDemoPacket) ProtoMessage()    {}
+func (*CDemoPacket) Descriptor() ([]byte, []int) {
+	return fileDescriptor_demo_090e5815818aa9c8, []int{3}
+}
+func (m *CDemoPacket) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CDemoPacket.Unmarshal(m, b)
+}
+func (m *CDemoPacket) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CDemoPacket.Marshal(b, m, deterministic)
+}
+func (dst *CDemoPacket) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CDemoPacket.Merge(dst, src)
+}
+func (m *CDemoPacket) XXX_Size() int {
+	return xxx_messageInfo_CDemoPacket.Size(m)
+}
+func (m *CDemoPacket) XXX_DiscardUnknown() {
+	xxx_messageInfo_CDemoPacket.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CDemoPacket proto.InternalMessageInfo
 
 func (m *CDemoPacket) GetData() []byte {
 	if m != nil {
@@ -447,15 +598,36 @@ func (m *CDemoPacket) GetData() []byte {
 }
 
 type CDemoFullPacket struct {
-	StringTable      *CDemoStringTables `protobuf:"bytes,1,opt,name=string_table,json=stringTable" json:"string_table,omitempty"`
-	Packet           *CDemoPacket       `protobuf:"bytes,2,opt,name=packet" json:"packet,omitempty"`
-	XXX_unrecognized []byte             `json:"-"`
+	StringTable          *CDemoStringTables `protobuf:"bytes,1,opt,name=string_table,json=stringTable" json:"string_table,omitempty"`
+	Packet               *CDemoPacket       `protobuf:"bytes,2,opt,name=packet" json:"packet,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}           `json:"-"`
+	XXX_unrecognized     []byte             `json:"-"`
+	XXX_sizecache        int32              `json:"-"`
 }
 
-func (m *CDemoFullPacket) Reset()                    { *m = CDemoFullPacket{} }
-func (m *CDemoFullPacket) String() string            { return proto.CompactTextString(m) }
-func (*CDemoFullPacket) ProtoMessage()               {}
-func (*CDemoFullPacket) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{4} }
+func (m *CDemoFullPacket) Reset()         { *m = CDemoFullPacket{} }
+func (m *CDemoFullPacket) String() string { return proto.CompactTextString(m) }
+func (*CDemoFullPacket) ProtoMessage()    {}
+func (*CDemoFullPacket) Descriptor() ([]byte, []int) {
+	return fileDescriptor_demo_090e5815818aa9c8, []int{4}
+}
+func (m *CDemoFullPacket) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CDemoFullPacket.Unmarshal(m, b)
+}
+func (m *CDemoFullPacket) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CDemoFullPacket.Marshal(b, m, deterministic)
+}
+func (dst *CDemoFullPacket) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CDemoFullPacket.Merge(dst, src)
+}
+func (m *CDemoFullPacket) XXX_Size() int {
+	return xxx_messageInfo_CDemoFullPacket.Size(m)
+}
+func (m *CDemoFullPacket) XXX_DiscardUnknown() {
+	xxx_messageInfo_CDemoFullPacket.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CDemoFullPacket proto.InternalMessageInfo
 
 func (m *CDemoFullPacket) GetStringTable() *CDemoStringTables {
 	if m != nil {
@@ -472,17 +644,38 @@ func (m *CDemoFullPacket) GetPacket() *CDemoPacket {
 }
 
 type CDemoSaveGame struct {
-	Data             []byte  `protobuf:"bytes,1,opt,name=data" json:"data,omitempty"`
-	SteamId          *uint64 `protobuf:"fixed64,2,opt,name=steam_id,json=steamId" json:"steam_id,omitempty"`
-	Signature        *uint64 `protobuf:"fixed64,3,opt,name=signature" json:"signature,omitempty"`
-	Version          *int32  `protobuf:"varint,4,opt,name=version" json:"version,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Data                 []byte   `protobuf:"bytes,1,opt,name=data" json:"data,omitempty"`
+	SteamId              *uint64  `protobuf:"fixed64,2,opt,name=steam_id,json=steamId" json:"steam_id,omitempty"`
+	Signature            *uint64  `protobuf:"fixed64,3,opt,name=signature" json:"signature,omitempty"`
+	Version              *int32   `protobuf:"varint,4,opt,name=version" json:"version,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CDemoSaveGame) Reset()                    { *m = CDemoSaveGame{} }
-func (m *CDemoSaveGame) String() string            { return proto.CompactTextString(m) }
-func (*CDemoSaveGame) ProtoMessage()               {}
-func (*CDemoSaveGame) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{5} }
+func (m *CDemoSaveGame) Reset()         { *m = CDemoSaveGame{} }
+func (m *CDemoSaveGame) String() string { return proto.CompactTextString(m) }
+func (*CDemoSaveGame) ProtoMessage()    {}
+func (*CDemoSaveGame) Descriptor() ([]byte, []int) {
+	return fileDescriptor_demo_090e5815818aa9c8, []int{5}
+}
+func (m *CDemoSaveGame) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CDemoSaveGame.Unmarshal(m, b)
+}
+func (m *CDemoSaveGame) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CDemoSaveGame.Marshal(b, m, deterministic)
+}
+func (dst *CDemoSaveGame) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CDemoSaveGame.Merge(dst, src)
+}
+func (m *CDemoSaveGame) XXX_Size() int {
+	return xxx_messageInfo_CDemoSaveGame.Size(m)
+}
+func (m *CDemoSaveGame) XXX_DiscardUnknown() {
+	xxx_messageInfo_CDemoSaveGame.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CDemoSaveGame proto.InternalMessageInfo
 
 func (m *CDemoSaveGame) GetData() []byte {
 	if m != nil {
@@ -513,23 +706,65 @@ func (m *CDemoSaveGame) GetVersion() int32 {
 }
 
 type CDemoSyncTick struct {
-	XXX_unrecognized []byte `json:"-"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CDemoSyncTick) Reset()                    { *m = CDemoSyncTick{} }
-func (m *CDemoSyncTick) String() string            { return proto.CompactTextString(m) }
-func (*CDemoSyncTick) ProtoMessage()               {}
-func (*CDemoSyncTick) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{6} }
+func (m *CDemoSyncTick) Reset()         { *m = CDemoSyncTick{} }
+func (m *CDemoSyncTick) String() string { return proto.CompactTextString(m) }
+func (*CDemoSyncTick) ProtoMessage()    {}
+func (*CDemoSyncTick) Descriptor() ([]byte, []int) {
+	return fileDescriptor_demo_090e5815818aa9c8, []int{6}
+}
+func (m *CDemoSyncTick) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CDemoSyncTick.Unmarshal(m, b)
+}
+func (m *CDemoSyncTick) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CDemoSyncTick.Marshal(b, m, deterministic)
+}
+func (dst *CDemoSyncTick) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CDemoSyncTick.Merge(dst, src)
+}
+func (m *CDemoSyncTick) XXX_Size() int {
+	return xxx_messageInfo_CDemoSyncTick.Size(m)
+}
+func (m *CDemoSyncTick) XXX_DiscardUnknown() {
+	xxx_messageInfo_CDemoSyncTick.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CDemoSyncTick proto.InternalMessageInfo
 
 type CDemoConsoleCmd struct {
-	Cmdstring        *string `protobuf:"bytes,1,opt,name=cmdstring" json:"cmdstring,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Cmdstring            *string  `protobuf:"bytes,1,opt,name=cmdstring" json:"cmdstring,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CDemoConsoleCmd) Reset()                    { *m = CDemoConsoleCmd{} }
-func (m *CDemoConsoleCmd) String() string            { return proto.CompactTextString(m) }
-func (*CDemoConsoleCmd) ProtoMessage()               {}
-func (*CDemoConsoleCmd) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{7} }
+func (m *CDemoConsoleCmd) Reset()         { *m = CDemoConsoleCmd{} }
+func (m *CDemoConsoleCmd) String() string { return proto.CompactTextString(m) }
+func (*CDemoConsoleCmd) ProtoMessage()    {}
+func (*CDemoConsoleCmd) Descriptor() ([]byte, []int) {
+	return fileDescriptor_demo_090e5815818aa9c8, []int{7}
+}
+func (m *CDemoConsoleCmd) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CDemoConsoleCmd.Unmarshal(m, b)
+}
+func (m *CDemoConsoleCmd) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CDemoConsoleCmd.Marshal(b, m, deterministic)
+}
+func (dst *CDemoConsoleCmd) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CDemoConsoleCmd.Merge(dst, src)
+}
+func (m *CDemoConsoleCmd) XXX_Size() int {
+	return xxx_messageInfo_CDemoConsoleCmd.Size(m)
+}
+func (m *CDemoConsoleCmd) XXX_DiscardUnknown() {
+	xxx_messageInfo_CDemoConsoleCmd.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CDemoConsoleCmd proto.InternalMessageInfo
 
 func (m *CDemoConsoleCmd) GetCmdstring() string {
 	if m != nil && m.Cmdstring != nil {
@@ -539,14 +774,35 @@ func (m *CDemoConsoleCmd) GetCmdstring() string {
 }
 
 type CDemoSendTables struct {
-	Data             []byte `protobuf:"bytes,1,opt,name=data" json:"data,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	Data                 []byte   `protobuf:"bytes,1,opt,name=data" json:"data,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CDemoSendTables) Reset()                    { *m = CDemoSendTables{} }
-func (m *CDemoSendTables) String() string            { return proto.CompactTextString(m) }
-func (*CDemoSendTables) ProtoMessage()               {}
-func (*CDemoSendTables) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{8} }
+func (m *CDemoSendTables) Reset()         { *m = CDemoSendTables{} }
+func (m *CDemoSendTables) String() string { return proto.CompactTextString(m) }
+func (*CDemoSendTables) ProtoMessage()    {}
+func (*CDemoSendTables) Descriptor() ([]byte, []int) {
+	return fileDescriptor_demo_090e5815818aa9c8, []int{8}
+}
+func (m *CDemoSendTables) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CDemoSendTables.Unmarshal(m, b)
+}
+func (m *CDemoSendTables) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CDemoSendTables.Marshal(b, m, deterministic)
+}
+func (dst *CDemoSendTables) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CDemoSendTables.Merge(dst, src)
+}
+func (m *CDemoSendTables) XXX_Size() int {
+	return xxx_messageInfo_CDemoSendTables.Size(m)
+}
+func (m *CDemoSendTables) XXX_DiscardUnknown() {
+	xxx_messageInfo_CDemoSendTables.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CDemoSendTables proto.InternalMessageInfo
 
 func (m *CDemoSendTables) GetData() []byte {
 	if m != nil {
@@ -556,14 +812,35 @@ func (m *CDemoSendTables) GetData() []byte {
 }
 
 type CDemoClassInfo struct {
-	Classes          []*CDemoClassInfoClassT `protobuf:"bytes,1,rep,name=classes" json:"classes,omitempty"`
-	XXX_unrecognized []byte                  `json:"-"`
+	Classes              []*CDemoClassInfoClassT `protobuf:"bytes,1,rep,name=classes" json:"classes,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                `json:"-"`
+	XXX_unrecognized     []byte                  `json:"-"`
+	XXX_sizecache        int32                   `json:"-"`
 }
 
-func (m *CDemoClassInfo) Reset()                    { *m = CDemoClassInfo{} }
-func (m *CDemoClassInfo) String() string            { return proto.CompactTextString(m) }
-func (*CDemoClassInfo) ProtoMessage()               {}
-func (*CDemoClassInfo) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{9} }
+func (m *CDemoClassInfo) Reset()         { *m = CDemoClassInfo{} }
+func (m *CDemoClassInfo) String() string { return proto.CompactTextString(m) }
+func (*CDemoClassInfo) ProtoMessage()    {}
+func (*CDemoClassInfo) Descriptor() ([]byte, []int) {
+	return fileDescriptor_demo_090e5815818aa9c8, []int{9}
+}
+func (m *CDemoClassInfo) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CDemoClassInfo.Unmarshal(m, b)
+}
+func (m *CDemoClassInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CDemoClassInfo.Marshal(b, m, deterministic)
+}
+func (dst *CDemoClassInfo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CDemoClassInfo.Merge(dst, src)
+}
+func (m *CDemoClassInfo) XXX_Size() int {
+	return xxx_messageInfo_CDemoClassInfo.Size(m)
+}
+func (m *CDemoClassInfo) XXX_DiscardUnknown() {
+	xxx_messageInfo_CDemoClassInfo.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CDemoClassInfo proto.InternalMessageInfo
 
 func (m *CDemoClassInfo) GetClasses() []*CDemoClassInfoClassT {
 	if m != nil {
@@ -573,16 +850,37 @@ func (m *CDemoClassInfo) GetClasses() []*CDemoClassInfoClassT {
 }
 
 type CDemoClassInfoClassT struct {
-	ClassId          *int32  `protobuf:"varint,1,opt,name=class_id,json=classId" json:"class_id,omitempty"`
-	NetworkName      *string `protobuf:"bytes,2,opt,name=network_name,json=networkName" json:"network_name,omitempty"`
-	TableName        *string `protobuf:"bytes,3,opt,name=table_name,json=tableName" json:"table_name,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	ClassId              *int32   `protobuf:"varint,1,opt,name=class_id,json=classId" json:"class_id,omitempty"`
+	NetworkName          *string  `protobuf:"bytes,2,opt,name=network_name,json=networkName" json:"network_name,omitempty"`
+	TableName            *string  `protobuf:"bytes,3,opt,name=table_name,json=tableName" json:"table_name,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CDemoClassInfoClassT) Reset()                    { *m = CDemoClassInfoClassT{} }
-func (m *CDemoClassInfoClassT) String() string            { return proto.CompactTextString(m) }
-func (*CDemoClassInfoClassT) ProtoMessage()               {}
-func (*CDemoClassInfoClassT) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{9, 0} }
+func (m *CDemoClassInfoClassT) Reset()         { *m = CDemoClassInfoClassT{} }
+func (m *CDemoClassInfoClassT) String() string { return proto.CompactTextString(m) }
+func (*CDemoClassInfoClassT) ProtoMessage()    {}
+func (*CDemoClassInfoClassT) Descriptor() ([]byte, []int) {
+	return fileDescriptor_demo_090e5815818aa9c8, []int{9, 0}
+}
+func (m *CDemoClassInfoClassT) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CDemoClassInfoClassT.Unmarshal(m, b)
+}
+func (m *CDemoClassInfoClassT) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CDemoClassInfoClassT.Marshal(b, m, deterministic)
+}
+func (dst *CDemoClassInfoClassT) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CDemoClassInfoClassT.Merge(dst, src)
+}
+func (m *CDemoClassInfoClassT) XXX_Size() int {
+	return xxx_messageInfo_CDemoClassInfoClassT.Size(m)
+}
+func (m *CDemoClassInfoClassT) XXX_DiscardUnknown() {
+	xxx_messageInfo_CDemoClassInfoClassT.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CDemoClassInfoClassT proto.InternalMessageInfo
 
 func (m *CDemoClassInfoClassT) GetClassId() int32 {
 	if m != nil && m.ClassId != nil {
@@ -606,15 +904,36 @@ func (m *CDemoClassInfoClassT) GetTableName() string {
 }
 
 type CDemoCustomData struct {
-	CallbackIndex    *int32 `protobuf:"varint,1,opt,name=callback_index,json=callbackIndex" json:"callback_index,omitempty"`
-	Data             []byte `protobuf:"bytes,2,opt,name=data" json:"data,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	CallbackIndex        *int32   `protobuf:"varint,1,opt,name=callback_index,json=callbackIndex" json:"callback_index,omitempty"`
+	Data                 []byte   `protobuf:"bytes,2,opt,name=data" json:"data,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CDemoCustomData) Reset()                    { *m = CDemoCustomData{} }
-func (m *CDemoCustomData) String() string            { return proto.CompactTextString(m) }
-func (*CDemoCustomData) ProtoMessage()               {}
-func (*CDemoCustomData) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{10} }
+func (m *CDemoCustomData) Reset()         { *m = CDemoCustomData{} }
+func (m *CDemoCustomData) String() string { return proto.CompactTextString(m) }
+func (*CDemoCustomData) ProtoMessage()    {}
+func (*CDemoCustomData) Descriptor() ([]byte, []int) {
+	return fileDescriptor_demo_090e5815818aa9c8, []int{10}
+}
+func (m *CDemoCustomData) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CDemoCustomData.Unmarshal(m, b)
+}
+func (m *CDemoCustomData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CDemoCustomData.Marshal(b, m, deterministic)
+}
+func (dst *CDemoCustomData) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CDemoCustomData.Merge(dst, src)
+}
+func (m *CDemoCustomData) XXX_Size() int {
+	return xxx_messageInfo_CDemoCustomData.Size(m)
+}
+func (m *CDemoCustomData) XXX_DiscardUnknown() {
+	xxx_messageInfo_CDemoCustomData.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CDemoCustomData proto.InternalMessageInfo
 
 func (m *CDemoCustomData) GetCallbackIndex() int32 {
 	if m != nil && m.CallbackIndex != nil {
@@ -631,14 +950,35 @@ func (m *CDemoCustomData) GetData() []byte {
 }
 
 type CDemoCustomDataCallbacks struct {
-	SaveId           []string `protobuf:"bytes,1,rep,name=save_id,json=saveId" json:"save_id,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	SaveId               []string `protobuf:"bytes,1,rep,name=save_id,json=saveId" json:"save_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CDemoCustomDataCallbacks) Reset()                    { *m = CDemoCustomDataCallbacks{} }
-func (m *CDemoCustomDataCallbacks) String() string            { return proto.CompactTextString(m) }
-func (*CDemoCustomDataCallbacks) ProtoMessage()               {}
-func (*CDemoCustomDataCallbacks) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{11} }
+func (m *CDemoCustomDataCallbacks) Reset()         { *m = CDemoCustomDataCallbacks{} }
+func (m *CDemoCustomDataCallbacks) String() string { return proto.CompactTextString(m) }
+func (*CDemoCustomDataCallbacks) ProtoMessage()    {}
+func (*CDemoCustomDataCallbacks) Descriptor() ([]byte, []int) {
+	return fileDescriptor_demo_090e5815818aa9c8, []int{11}
+}
+func (m *CDemoCustomDataCallbacks) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CDemoCustomDataCallbacks.Unmarshal(m, b)
+}
+func (m *CDemoCustomDataCallbacks) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CDemoCustomDataCallbacks.Marshal(b, m, deterministic)
+}
+func (dst *CDemoCustomDataCallbacks) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CDemoCustomDataCallbacks.Merge(dst, src)
+}
+func (m *CDemoCustomDataCallbacks) XXX_Size() int {
+	return xxx_messageInfo_CDemoCustomDataCallbacks.Size(m)
+}
+func (m *CDemoCustomDataCallbacks) XXX_DiscardUnknown() {
+	xxx_messageInfo_CDemoCustomDataCallbacks.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CDemoCustomDataCallbacks proto.InternalMessageInfo
 
 func (m *CDemoCustomDataCallbacks) GetSaveId() []string {
 	if m != nil {
@@ -648,14 +988,35 @@ func (m *CDemoCustomDataCallbacks) GetSaveId() []string {
 }
 
 type CDemoStringTables struct {
-	Tables           []*CDemoStringTablesTableT `protobuf:"bytes,1,rep,name=tables" json:"tables,omitempty"`
-	XXX_unrecognized []byte                     `json:"-"`
+	Tables               []*CDemoStringTablesTableT `protobuf:"bytes,1,rep,name=tables" json:"tables,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                   `json:"-"`
+	XXX_unrecognized     []byte                     `json:"-"`
+	XXX_sizecache        int32                      `json:"-"`
 }
 
-func (m *CDemoStringTables) Reset()                    { *m = CDemoStringTables{} }
-func (m *CDemoStringTables) String() string            { return proto.CompactTextString(m) }
-func (*CDemoStringTables) ProtoMessage()               {}
-func (*CDemoStringTables) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{12} }
+func (m *CDemoStringTables) Reset()         { *m = CDemoStringTables{} }
+func (m *CDemoStringTables) String() string { return proto.CompactTextString(m) }
+func (*CDemoStringTables) ProtoMessage()    {}
+func (*CDemoStringTables) Descriptor() ([]byte, []int) {
+	return fileDescriptor_demo_090e5815818aa9c8, []int{12}
+}
+func (m *CDemoStringTables) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CDemoStringTables.Unmarshal(m, b)
+}
+func (m *CDemoStringTables) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CDemoStringTables.Marshal(b, m, deterministic)
+}
+func (dst *CDemoStringTables) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CDemoStringTables.Merge(dst, src)
+}
+func (m *CDemoStringTables) XXX_Size() int {
+	return xxx_messageInfo_CDemoStringTables.Size(m)
+}
+func (m *CDemoStringTables) XXX_DiscardUnknown() {
+	xxx_messageInfo_CDemoStringTables.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CDemoStringTables proto.InternalMessageInfo
 
 func (m *CDemoStringTables) GetTables() []*CDemoStringTablesTableT {
 	if m != nil {
@@ -665,15 +1026,36 @@ func (m *CDemoStringTables) GetTables() []*CDemoStringTablesTableT {
 }
 
 type CDemoStringTablesItemsT struct {
-	Str              *string `protobuf:"bytes,1,opt,name=str" json:"str,omitempty"`
-	Data             []byte  `protobuf:"bytes,2,opt,name=data" json:"data,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Str                  *string  `protobuf:"bytes,1,opt,name=str" json:"str,omitempty"`
+	Data                 []byte   `protobuf:"bytes,2,opt,name=data" json:"data,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CDemoStringTablesItemsT) Reset()                    { *m = CDemoStringTablesItemsT{} }
-func (m *CDemoStringTablesItemsT) String() string            { return proto.CompactTextString(m) }
-func (*CDemoStringTablesItemsT) ProtoMessage()               {}
-func (*CDemoStringTablesItemsT) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{12, 0} }
+func (m *CDemoStringTablesItemsT) Reset()         { *m = CDemoStringTablesItemsT{} }
+func (m *CDemoStringTablesItemsT) String() string { return proto.CompactTextString(m) }
+func (*CDemoStringTablesItemsT) ProtoMessage()    {}
+func (*CDemoStringTablesItemsT) Descriptor() ([]byte, []int) {
+	return fileDescriptor_demo_090e5815818aa9c8, []int{12, 0}
+}
+func (m *CDemoStringTablesItemsT) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CDemoStringTablesItemsT.Unmarshal(m, b)
+}
+func (m *CDemoStringTablesItemsT) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CDemoStringTablesItemsT.Marshal(b, m, deterministic)
+}
+func (dst *CDemoStringTablesItemsT) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CDemoStringTablesItemsT.Merge(dst, src)
+}
+func (m *CDemoStringTablesItemsT) XXX_Size() int {
+	return xxx_messageInfo_CDemoStringTablesItemsT.Size(m)
+}
+func (m *CDemoStringTablesItemsT) XXX_DiscardUnknown() {
+	xxx_messageInfo_CDemoStringTablesItemsT.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CDemoStringTablesItemsT proto.InternalMessageInfo
 
 func (m *CDemoStringTablesItemsT) GetStr() string {
 	if m != nil && m.Str != nil {
@@ -690,17 +1072,38 @@ func (m *CDemoStringTablesItemsT) GetData() []byte {
 }
 
 type CDemoStringTablesTableT struct {
-	TableName        *string                    `protobuf:"bytes,1,opt,name=table_name,json=tableName" json:"table_name,omitempty"`
-	Items            []*CDemoStringTablesItemsT `protobuf:"bytes,2,rep,name=items" json:"items,omitempty"`
-	ItemsClientside  []*CDemoStringTablesItemsT `protobuf:"bytes,3,rep,name=items_clientside,json=itemsClientside" json:"items_clientside,omitempty"`
-	TableFlags       *int32                     `protobuf:"varint,4,opt,name=table_flags,json=tableFlags" json:"table_flags,omitempty"`
-	XXX_unrecognized []byte                     `json:"-"`
+	TableName            *string                    `protobuf:"bytes,1,opt,name=table_name,json=tableName" json:"table_name,omitempty"`
+	Items                []*CDemoStringTablesItemsT `protobuf:"bytes,2,rep,name=items" json:"items,omitempty"`
+	ItemsClientside      []*CDemoStringTablesItemsT `protobuf:"bytes,3,rep,name=items_clientside,json=itemsClientside" json:"items_clientside,omitempty"`
+	TableFlags           *int32                     `protobuf:"varint,4,opt,name=table_flags,json=tableFlags" json:"table_flags,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                   `json:"-"`
+	XXX_unrecognized     []byte                     `json:"-"`
+	XXX_sizecache        int32                      `json:"-"`
 }
 
-func (m *CDemoStringTablesTableT) Reset()                    { *m = CDemoStringTablesTableT{} }
-func (m *CDemoStringTablesTableT) String() string            { return proto.CompactTextString(m) }
-func (*CDemoStringTablesTableT) ProtoMessage()               {}
-func (*CDemoStringTablesTableT) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{12, 1} }
+func (m *CDemoStringTablesTableT) Reset()         { *m = CDemoStringTablesTableT{} }
+func (m *CDemoStringTablesTableT) String() string { return proto.CompactTextString(m) }
+func (*CDemoStringTablesTableT) ProtoMessage()    {}
+func (*CDemoStringTablesTableT) Descriptor() ([]byte, []int) {
+	return fileDescriptor_demo_090e5815818aa9c8, []int{12, 1}
+}
+func (m *CDemoStringTablesTableT) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CDemoStringTablesTableT.Unmarshal(m, b)
+}
+func (m *CDemoStringTablesTableT) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CDemoStringTablesTableT.Marshal(b, m, deterministic)
+}
+func (dst *CDemoStringTablesTableT) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CDemoStringTablesTableT.Merge(dst, src)
+}
+func (m *CDemoStringTablesTableT) XXX_Size() int {
+	return xxx_messageInfo_CDemoStringTablesTableT.Size(m)
+}
+func (m *CDemoStringTablesTableT) XXX_DiscardUnknown() {
+	xxx_messageInfo_CDemoStringTablesTableT.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CDemoStringTablesTableT proto.InternalMessageInfo
 
 func (m *CDemoStringTablesTableT) GetTableName() string {
 	if m != nil && m.TableName != nil {
@@ -731,24 +1134,66 @@ func (m *CDemoStringTablesTableT) GetTableFlags() int32 {
 }
 
 type CDemoStop struct {
-	XXX_unrecognized []byte `json:"-"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CDemoStop) Reset()                    { *m = CDemoStop{} }
-func (m *CDemoStop) String() string            { return proto.CompactTextString(m) }
-func (*CDemoStop) ProtoMessage()               {}
-func (*CDemoStop) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{13} }
+func (m *CDemoStop) Reset()         { *m = CDemoStop{} }
+func (m *CDemoStop) String() string { return proto.CompactTextString(m) }
+func (*CDemoStop) ProtoMessage()    {}
+func (*CDemoStop) Descriptor() ([]byte, []int) {
+	return fileDescriptor_demo_090e5815818aa9c8, []int{13}
+}
+func (m *CDemoStop) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CDemoStop.Unmarshal(m, b)
+}
+func (m *CDemoStop) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CDemoStop.Marshal(b, m, deterministic)
+}
+func (dst *CDemoStop) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CDemoStop.Merge(dst, src)
+}
+func (m *CDemoStop) XXX_Size() int {
+	return xxx_messageInfo_CDemoStop.Size(m)
+}
+func (m *CDemoStop) XXX_DiscardUnknown() {
+	xxx_messageInfo_CDemoStop.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CDemoStop proto.InternalMessageInfo
 
 type CDemoUserCmd struct {
-	CmdNumber        *int32 `protobuf:"varint,1,opt,name=cmd_number,json=cmdNumber" json:"cmd_number,omitempty"`
-	Data             []byte `protobuf:"bytes,2,opt,name=data" json:"data,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	CmdNumber            *int32   `protobuf:"varint,1,opt,name=cmd_number,json=cmdNumber" json:"cmd_number,omitempty"`
+	Data                 []byte   `protobuf:"bytes,2,opt,name=data" json:"data,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CDemoUserCmd) Reset()                    { *m = CDemoUserCmd{} }
-func (m *CDemoUserCmd) String() string            { return proto.CompactTextString(m) }
-func (*CDemoUserCmd) ProtoMessage()               {}
-func (*CDemoUserCmd) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{14} }
+func (m *CDemoUserCmd) Reset()         { *m = CDemoUserCmd{} }
+func (m *CDemoUserCmd) String() string { return proto.CompactTextString(m) }
+func (*CDemoUserCmd) ProtoMessage()    {}
+func (*CDemoUserCmd) Descriptor() ([]byte, []int) {
+	return fileDescriptor_demo_090e5815818aa9c8, []int{14}
+}
+func (m *CDemoUserCmd) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CDemoUserCmd.Unmarshal(m, b)
+}
+func (m *CDemoUserCmd) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CDemoUserCmd.Marshal(b, m, deterministic)
+}
+func (dst *CDemoUserCmd) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CDemoUserCmd.Merge(dst, src)
+}
+func (m *CDemoUserCmd) XXX_Size() int {
+	return xxx_messageInfo_CDemoUserCmd.Size(m)
+}
+func (m *CDemoUserCmd) XXX_DiscardUnknown() {
+	xxx_messageInfo_CDemoUserCmd.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CDemoUserCmd proto.InternalMessageInfo
 
 func (m *CDemoUserCmd) GetCmdNumber() int32 {
 	if m != nil && m.CmdNumber != nil {
@@ -765,14 +1210,35 @@ func (m *CDemoUserCmd) GetData() []byte {
 }
 
 type CDemoSpawnGroups struct {
-	Msgs             [][]byte `protobuf:"bytes,3,rep,name=msgs" json:"msgs,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	Msgs                 [][]byte `protobuf:"bytes,3,rep,name=msgs" json:"msgs,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CDemoSpawnGroups) Reset()                    { *m = CDemoSpawnGroups{} }
-func (m *CDemoSpawnGroups) String() string            { return proto.CompactTextString(m) }
-func (*CDemoSpawnGroups) ProtoMessage()               {}
-func (*CDemoSpawnGroups) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{15} }
+func (m *CDemoSpawnGroups) Reset()         { *m = CDemoSpawnGroups{} }
+func (m *CDemoSpawnGroups) String() string { return proto.CompactTextString(m) }
+func (*CDemoSpawnGroups) ProtoMessage()    {}
+func (*CDemoSpawnGroups) Descriptor() ([]byte, []int) {
+	return fileDescriptor_demo_090e5815818aa9c8, []int{15}
+}
+func (m *CDemoSpawnGroups) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CDemoSpawnGroups.Unmarshal(m, b)
+}
+func (m *CDemoSpawnGroups) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CDemoSpawnGroups.Marshal(b, m, deterministic)
+}
+func (dst *CDemoSpawnGroups) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CDemoSpawnGroups.Merge(dst, src)
+}
+func (m *CDemoSpawnGroups) XXX_Size() int {
+	return xxx_messageInfo_CDemoSpawnGroups.Size(m)
+}
+func (m *CDemoSpawnGroups) XXX_DiscardUnknown() {
+	xxx_messageInfo_CDemoSpawnGroups.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CDemoSpawnGroups proto.InternalMessageInfo
 
 func (m *CDemoSpawnGroups) GetMsgs() [][]byte {
 	if m != nil {
@@ -807,9 +1273,9 @@ func init() {
 	proto.RegisterEnum("dota.EDemoCommands", EDemoCommands_name, EDemoCommands_value)
 }
 
-func init() { proto.RegisterFile("demo.proto", fileDescriptor4) }
+func init() { proto.RegisterFile("demo.proto", fileDescriptor_demo_090e5815818aa9c8) }
 
-var fileDescriptor4 = []byte{
+var fileDescriptor_demo_090e5815818aa9c8 = []byte{
 	// 1376 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x56, 0xdd, 0x6e, 0xdb, 0xc6,
 	0x12, 0x0e, 0x25, 0x59, 0x3f, 0x43, 0xfd, 0x30, 0x9b, 0x83, 0x63, 0x46, 0x49, 0x10, 0x87, 0xe7,

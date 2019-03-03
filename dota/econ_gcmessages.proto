@@ -186,6 +186,10 @@ enum EGCItemMsg {
 	k_EMsgGCToGCBroadcastMessageFromSub = 2598;
 	k_EMsgGCToClientCurrencyPricePoints = 2599;
 	k_EMsgGCToGCAddSubscriptionTime = 2600;
+	k_EMsgGCToGCFlushSteamInventoryCache = 2601;
+	k_EMsgGCRequestCrateEscalationLevel = 2602;
+	k_EMsgGCRequestCrateEscalationLevelResponse = 2603;
+	k_EMsgGCToGCUpdateSubscriptionItems = 2604;
 }
 
 enum EItemPurgatoryResponse_Finalize {
@@ -203,7 +207,6 @@ enum EItemPurgatoryResponse_Refund {
 	k_ItemPurgatoryResponse_Refund_Failed_CouldNotFindItem = 2;
 	k_ItemPurgatoryResponse_Refund_Failed_NoSOCache = 3;
 	k_ItemPurgatoryResponse_Refund_Failed_NoDetail = 4;
-	k_ItemPurgatoryResponse_Refund_Failed_NexonWebAPI = 5;
 }
 
 enum EGCMsgInitiateTradeResponse {
@@ -255,6 +258,7 @@ message CMsgEconPlayerStrangeCountAdjustment {
 
 	optional uint32 account_id = 1;
 	repeated CMsgEconPlayerStrangeCountAdjustment.CStrangeCountAdjustment strange_count_adjustments = 2;
+	optional bool turbo_mode = 3;
 }
 
 message CMsgRequestItemPurgatory_FinalizePurchase {
@@ -336,14 +340,6 @@ message CMsgLookupMultipleAccountNamesResponse {
 	repeated CMsgLookupMultipleAccountNamesResponse.Account accounts = 1;
 }
 
-message CMsgGCToGCGetUserPCBangNo {
-	optional uint32 account_id = 1;
-}
-
-message CMsgGCToGCGetUserPCBangNoResponse {
-	optional uint32 pc_bang_no = 1;
-}
-
 message CMsgRequestCrateItems {
 	optional uint32 crate_item_def = 1;
 }
@@ -357,6 +353,23 @@ message CMsgRequestCrateItemsResponse {
 	optional uint32 response = 1;
 	repeated uint32 item_defs = 2;
 	repeated uint32 peek_item_defs = 3;
+}
+
+message CMsgRequestCrateEscalationLevel {
+	optional uint32 crate_item_def = 1;
+}
+
+message CMsgRequestCrateEscalationLevelResponse {
+	enum EResult {
+		k_Succeeded = 0;
+		k_Failed = 1;
+	}
+
+	optional uint32 response = 1;
+	optional uint32 escalation_level0 = 2;
+	optional uint32 escalation_level1 = 3;
+	optional uint32 escalation_level2 = 4;
+	optional uint32 escalation_level3 = 5;
 }
 
 message CMsgGCToGCCanUseDropRateBonus {
@@ -411,6 +424,7 @@ message CMsgGCToGCGrantAccountRolledItems {
 			optional string name = 1;
 			optional uint32 value_uint32 = 2;
 			optional float value_float = 3;
+			optional string value_string = 4;
 		}
 
 		message AdditionalAuditEntry {
@@ -482,6 +496,9 @@ message CMsgGCPartnerRechargeRedirectURLResponse {
 message CMsgGCEconSQLWorkItemEmbeddedRollbackData {
 	optional uint32 account_id = 1;
 	optional uint64 deleted_item_id = 2;
+	optional uint32 old_audit_action = 3;
+	optional uint32 new_audit_action = 4;
+	optional uint32 expected_audit_action = 5;
 }
 
 message CMsgCraftStatue {
@@ -595,6 +612,7 @@ message CMsgClientToGCUnpackBundleResponse {
 
 	repeated uint64 unpacked_item_ids = 1;
 	optional CMsgClientToGCUnpackBundleResponse.EUnpackBundle response = 2 [default = k_UnpackBundle_Succeeded];
+	repeated uint32 unpacked_item_def_indexes = 3;
 }
 
 message CMsgGCToClientStoreTransactionCompleted {
@@ -992,5 +1010,29 @@ message CMsgGCToClientCurrencyPricePoints {
 message CMsgBannedWordList {
 	optional uint32 version = 1;
 	repeated string banned_words = 2;
+}
+
+message CEcon_FlushInventoryCache_Request {
+	optional uint64 steamid = 1;
+	optional uint32 appid = 2;
+	optional uint64 contextid = 3;
+}
+
+message CEcon_FlushInventoryCache_Response {
+	optional bool success = 1;
+}
+
+message CMsgGCToGCFlushSteamInventoryCache {
+	message Key {
+		optional uint64 steamid = 1;
+		optional uint64 contextid = 2;
+	}
+
+	repeated CMsgGCToGCFlushSteamInventoryCache.Key keys = 1;
+}
+
+message CMsgGCToGCUpdateSubscriptionItems {
+	optional uint32 account_id = 1;
+	optional bool always_notify = 2;
 }
 

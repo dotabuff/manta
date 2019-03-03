@@ -12,6 +12,12 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the proto package it is being compiled against.
+// A compilation error at this line likely means your copy of the
+// proto package needs to be updated.
+const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+
 type EBaseGameEvents int32
 
 const (
@@ -77,18 +83,41 @@ func (x *EBaseGameEvents) UnmarshalJSON(data []byte) error {
 	*x = EBaseGameEvents(value)
 	return nil
 }
-func (EBaseGameEvents) EnumDescriptor() ([]byte, []int) { return fileDescriptor28, []int{0} }
-
-type CMsgVDebugGameSessionIDEvent struct {
-	Clientid         *int32  `protobuf:"varint,1,opt,name=clientid" json:"clientid,omitempty"`
-	Gamesessionid    *string `protobuf:"bytes,2,opt,name=gamesessionid" json:"gamesessionid,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+func (EBaseGameEvents) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_gameevents_38625ccca8ceab8d, []int{0}
 }
 
-func (m *CMsgVDebugGameSessionIDEvent) Reset()                    { *m = CMsgVDebugGameSessionIDEvent{} }
-func (m *CMsgVDebugGameSessionIDEvent) String() string            { return proto.CompactTextString(m) }
-func (*CMsgVDebugGameSessionIDEvent) ProtoMessage()               {}
-func (*CMsgVDebugGameSessionIDEvent) Descriptor() ([]byte, []int) { return fileDescriptor28, []int{0} }
+type CMsgVDebugGameSessionIDEvent struct {
+	Clientid             *int32   `protobuf:"varint,1,opt,name=clientid" json:"clientid,omitempty"`
+	Gamesessionid        *string  `protobuf:"bytes,2,opt,name=gamesessionid" json:"gamesessionid,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CMsgVDebugGameSessionIDEvent) Reset()         { *m = CMsgVDebugGameSessionIDEvent{} }
+func (m *CMsgVDebugGameSessionIDEvent) String() string { return proto.CompactTextString(m) }
+func (*CMsgVDebugGameSessionIDEvent) ProtoMessage()    {}
+func (*CMsgVDebugGameSessionIDEvent) Descriptor() ([]byte, []int) {
+	return fileDescriptor_gameevents_38625ccca8ceab8d, []int{0}
+}
+func (m *CMsgVDebugGameSessionIDEvent) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgVDebugGameSessionIDEvent.Unmarshal(m, b)
+}
+func (m *CMsgVDebugGameSessionIDEvent) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgVDebugGameSessionIDEvent.Marshal(b, m, deterministic)
+}
+func (dst *CMsgVDebugGameSessionIDEvent) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgVDebugGameSessionIDEvent.Merge(dst, src)
+}
+func (m *CMsgVDebugGameSessionIDEvent) XXX_Size() int {
+	return xxx_messageInfo_CMsgVDebugGameSessionIDEvent.Size(m)
+}
+func (m *CMsgVDebugGameSessionIDEvent) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgVDebugGameSessionIDEvent.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgVDebugGameSessionIDEvent proto.InternalMessageInfo
 
 func (m *CMsgVDebugGameSessionIDEvent) GetClientid() int32 {
 	if m != nil && m.Clientid != nil {
@@ -119,13 +148,34 @@ type CMsgPlaceDecalEvent struct {
 	Boneindex            *int32      `protobuf:"varint,12,opt,name=boneindex" json:"boneindex,omitempty"`
 	Translucenthit       *bool       `protobuf:"varint,13,opt,name=translucenthit" json:"translucenthit,omitempty"`
 	IsAdjacent           *bool       `protobuf:"varint,14,opt,name=is_adjacent,json=isAdjacent" json:"is_adjacent,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
 	XXX_unrecognized     []byte      `json:"-"`
+	XXX_sizecache        int32       `json:"-"`
 }
 
-func (m *CMsgPlaceDecalEvent) Reset()                    { *m = CMsgPlaceDecalEvent{} }
-func (m *CMsgPlaceDecalEvent) String() string            { return proto.CompactTextString(m) }
-func (*CMsgPlaceDecalEvent) ProtoMessage()               {}
-func (*CMsgPlaceDecalEvent) Descriptor() ([]byte, []int) { return fileDescriptor28, []int{1} }
+func (m *CMsgPlaceDecalEvent) Reset()         { *m = CMsgPlaceDecalEvent{} }
+func (m *CMsgPlaceDecalEvent) String() string { return proto.CompactTextString(m) }
+func (*CMsgPlaceDecalEvent) ProtoMessage()    {}
+func (*CMsgPlaceDecalEvent) Descriptor() ([]byte, []int) {
+	return fileDescriptor_gameevents_38625ccca8ceab8d, []int{1}
+}
+func (m *CMsgPlaceDecalEvent) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgPlaceDecalEvent.Unmarshal(m, b)
+}
+func (m *CMsgPlaceDecalEvent) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgPlaceDecalEvent.Marshal(b, m, deterministic)
+}
+func (dst *CMsgPlaceDecalEvent) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgPlaceDecalEvent.Merge(dst, src)
+}
+func (m *CMsgPlaceDecalEvent) XXX_Size() int {
+	return xxx_messageInfo_CMsgPlaceDecalEvent.Size(m)
+}
+func (m *CMsgPlaceDecalEvent) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgPlaceDecalEvent.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgPlaceDecalEvent proto.InternalMessageInfo
 
 func (m *CMsgPlaceDecalEvent) GetPosition() *CMsgVector {
 	if m != nil {
@@ -226,14 +276,35 @@ func (m *CMsgPlaceDecalEvent) GetIsAdjacent() bool {
 }
 
 type CMsgClearWorldDecalsEvent struct {
-	Flagstoclear     *uint32 `protobuf:"varint,1,opt,name=flagstoclear" json:"flagstoclear,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Flagstoclear         *uint32  `protobuf:"varint,1,opt,name=flagstoclear" json:"flagstoclear,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CMsgClearWorldDecalsEvent) Reset()                    { *m = CMsgClearWorldDecalsEvent{} }
-func (m *CMsgClearWorldDecalsEvent) String() string            { return proto.CompactTextString(m) }
-func (*CMsgClearWorldDecalsEvent) ProtoMessage()               {}
-func (*CMsgClearWorldDecalsEvent) Descriptor() ([]byte, []int) { return fileDescriptor28, []int{2} }
+func (m *CMsgClearWorldDecalsEvent) Reset()         { *m = CMsgClearWorldDecalsEvent{} }
+func (m *CMsgClearWorldDecalsEvent) String() string { return proto.CompactTextString(m) }
+func (*CMsgClearWorldDecalsEvent) ProtoMessage()    {}
+func (*CMsgClearWorldDecalsEvent) Descriptor() ([]byte, []int) {
+	return fileDescriptor_gameevents_38625ccca8ceab8d, []int{2}
+}
+func (m *CMsgClearWorldDecalsEvent) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClearWorldDecalsEvent.Unmarshal(m, b)
+}
+func (m *CMsgClearWorldDecalsEvent) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClearWorldDecalsEvent.Marshal(b, m, deterministic)
+}
+func (dst *CMsgClearWorldDecalsEvent) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClearWorldDecalsEvent.Merge(dst, src)
+}
+func (m *CMsgClearWorldDecalsEvent) XXX_Size() int {
+	return xxx_messageInfo_CMsgClearWorldDecalsEvent.Size(m)
+}
+func (m *CMsgClearWorldDecalsEvent) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClearWorldDecalsEvent.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClearWorldDecalsEvent proto.InternalMessageInfo
 
 func (m *CMsgClearWorldDecalsEvent) GetFlagstoclear() uint32 {
 	if m != nil && m.Flagstoclear != nil {
@@ -243,14 +314,35 @@ func (m *CMsgClearWorldDecalsEvent) GetFlagstoclear() uint32 {
 }
 
 type CMsgClearEntityDecalsEvent struct {
-	Flagstoclear     *uint32 `protobuf:"varint,1,opt,name=flagstoclear" json:"flagstoclear,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Flagstoclear         *uint32  `protobuf:"varint,1,opt,name=flagstoclear" json:"flagstoclear,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CMsgClearEntityDecalsEvent) Reset()                    { *m = CMsgClearEntityDecalsEvent{} }
-func (m *CMsgClearEntityDecalsEvent) String() string            { return proto.CompactTextString(m) }
-func (*CMsgClearEntityDecalsEvent) ProtoMessage()               {}
-func (*CMsgClearEntityDecalsEvent) Descriptor() ([]byte, []int) { return fileDescriptor28, []int{3} }
+func (m *CMsgClearEntityDecalsEvent) Reset()         { *m = CMsgClearEntityDecalsEvent{} }
+func (m *CMsgClearEntityDecalsEvent) String() string { return proto.CompactTextString(m) }
+func (*CMsgClearEntityDecalsEvent) ProtoMessage()    {}
+func (*CMsgClearEntityDecalsEvent) Descriptor() ([]byte, []int) {
+	return fileDescriptor_gameevents_38625ccca8ceab8d, []int{3}
+}
+func (m *CMsgClearEntityDecalsEvent) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClearEntityDecalsEvent.Unmarshal(m, b)
+}
+func (m *CMsgClearEntityDecalsEvent) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClearEntityDecalsEvent.Marshal(b, m, deterministic)
+}
+func (dst *CMsgClearEntityDecalsEvent) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClearEntityDecalsEvent.Merge(dst, src)
+}
+func (m *CMsgClearEntityDecalsEvent) XXX_Size() int {
+	return xxx_messageInfo_CMsgClearEntityDecalsEvent.Size(m)
+}
+func (m *CMsgClearEntityDecalsEvent) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClearEntityDecalsEvent.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClearEntityDecalsEvent proto.InternalMessageInfo
 
 func (m *CMsgClearEntityDecalsEvent) GetFlagstoclear() uint32 {
 	if m != nil && m.Flagstoclear != nil {
@@ -260,10 +352,12 @@ func (m *CMsgClearEntityDecalsEvent) GetFlagstoclear() uint32 {
 }
 
 type CMsgClearDecalsForSkeletonInstanceEvent struct {
-	Flagstoclear         *uint32 `protobuf:"varint,1,opt,name=flagstoclear" json:"flagstoclear,omitempty"`
-	Entityhandleindex    *uint32 `protobuf:"varint,2,opt,name=entityhandleindex" json:"entityhandleindex,omitempty"`
-	Skeletoninstancehash *uint32 `protobuf:"varint,3,opt,name=skeletoninstancehash" json:"skeletoninstancehash,omitempty"`
-	XXX_unrecognized     []byte  `json:"-"`
+	Flagstoclear         *uint32  `protobuf:"varint,1,opt,name=flagstoclear" json:"flagstoclear,omitempty"`
+	Entityhandleindex    *uint32  `protobuf:"varint,2,opt,name=entityhandleindex" json:"entityhandleindex,omitempty"`
+	Skeletoninstancehash *uint32  `protobuf:"varint,3,opt,name=skeletoninstancehash" json:"skeletoninstancehash,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *CMsgClearDecalsForSkeletonInstanceEvent) Reset() {
@@ -272,8 +366,25 @@ func (m *CMsgClearDecalsForSkeletonInstanceEvent) Reset() {
 func (m *CMsgClearDecalsForSkeletonInstanceEvent) String() string { return proto.CompactTextString(m) }
 func (*CMsgClearDecalsForSkeletonInstanceEvent) ProtoMessage()    {}
 func (*CMsgClearDecalsForSkeletonInstanceEvent) Descriptor() ([]byte, []int) {
-	return fileDescriptor28, []int{4}
+	return fileDescriptor_gameevents_38625ccca8ceab8d, []int{4}
 }
+func (m *CMsgClearDecalsForSkeletonInstanceEvent) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClearDecalsForSkeletonInstanceEvent.Unmarshal(m, b)
+}
+func (m *CMsgClearDecalsForSkeletonInstanceEvent) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClearDecalsForSkeletonInstanceEvent.Marshal(b, m, deterministic)
+}
+func (dst *CMsgClearDecalsForSkeletonInstanceEvent) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClearDecalsForSkeletonInstanceEvent.Merge(dst, src)
+}
+func (m *CMsgClearDecalsForSkeletonInstanceEvent) XXX_Size() int {
+	return xxx_messageInfo_CMsgClearDecalsForSkeletonInstanceEvent.Size(m)
+}
+func (m *CMsgClearDecalsForSkeletonInstanceEvent) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClearDecalsForSkeletonInstanceEvent.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClearDecalsForSkeletonInstanceEvent proto.InternalMessageInfo
 
 func (m *CMsgClearDecalsForSkeletonInstanceEvent) GetFlagstoclear() uint32 {
 	if m != nil && m.Flagstoclear != nil {
@@ -297,14 +408,35 @@ func (m *CMsgClearDecalsForSkeletonInstanceEvent) GetSkeletoninstancehash() uint
 }
 
 type CMsgSource1LegacyGameEventList struct {
-	Descriptors      []*CMsgSource1LegacyGameEventListDescriptorT `protobuf:"bytes,1,rep,name=descriptors" json:"descriptors,omitempty"`
-	XXX_unrecognized []byte                                       `json:"-"`
+	Descriptors          []*CMsgSource1LegacyGameEventListDescriptorT `protobuf:"bytes,1,rep,name=descriptors" json:"descriptors,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                     `json:"-"`
+	XXX_unrecognized     []byte                                       `json:"-"`
+	XXX_sizecache        int32                                        `json:"-"`
 }
 
-func (m *CMsgSource1LegacyGameEventList) Reset()                    { *m = CMsgSource1LegacyGameEventList{} }
-func (m *CMsgSource1LegacyGameEventList) String() string            { return proto.CompactTextString(m) }
-func (*CMsgSource1LegacyGameEventList) ProtoMessage()               {}
-func (*CMsgSource1LegacyGameEventList) Descriptor() ([]byte, []int) { return fileDescriptor28, []int{5} }
+func (m *CMsgSource1LegacyGameEventList) Reset()         { *m = CMsgSource1LegacyGameEventList{} }
+func (m *CMsgSource1LegacyGameEventList) String() string { return proto.CompactTextString(m) }
+func (*CMsgSource1LegacyGameEventList) ProtoMessage()    {}
+func (*CMsgSource1LegacyGameEventList) Descriptor() ([]byte, []int) {
+	return fileDescriptor_gameevents_38625ccca8ceab8d, []int{5}
+}
+func (m *CMsgSource1LegacyGameEventList) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgSource1LegacyGameEventList.Unmarshal(m, b)
+}
+func (m *CMsgSource1LegacyGameEventList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgSource1LegacyGameEventList.Marshal(b, m, deterministic)
+}
+func (dst *CMsgSource1LegacyGameEventList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgSource1LegacyGameEventList.Merge(dst, src)
+}
+func (m *CMsgSource1LegacyGameEventList) XXX_Size() int {
+	return xxx_messageInfo_CMsgSource1LegacyGameEventList.Size(m)
+}
+func (m *CMsgSource1LegacyGameEventList) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgSource1LegacyGameEventList.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgSource1LegacyGameEventList proto.InternalMessageInfo
 
 func (m *CMsgSource1LegacyGameEventList) GetDescriptors() []*CMsgSource1LegacyGameEventListDescriptorT {
 	if m != nil {
@@ -314,17 +446,36 @@ func (m *CMsgSource1LegacyGameEventList) GetDescriptors() []*CMsgSource1LegacyGa
 }
 
 type CMsgSource1LegacyGameEventListKeyT struct {
-	Type             *int32  `protobuf:"varint,1,opt,name=type" json:"type,omitempty"`
-	Name             *string `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Type                 *int32   `protobuf:"varint,1,opt,name=type" json:"type,omitempty"`
+	Name                 *string  `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *CMsgSource1LegacyGameEventListKeyT) Reset()         { *m = CMsgSource1LegacyGameEventListKeyT{} }
 func (m *CMsgSource1LegacyGameEventListKeyT) String() string { return proto.CompactTextString(m) }
 func (*CMsgSource1LegacyGameEventListKeyT) ProtoMessage()    {}
 func (*CMsgSource1LegacyGameEventListKeyT) Descriptor() ([]byte, []int) {
-	return fileDescriptor28, []int{5, 0}
+	return fileDescriptor_gameevents_38625ccca8ceab8d, []int{5, 0}
 }
+func (m *CMsgSource1LegacyGameEventListKeyT) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgSource1LegacyGameEventListKeyT.Unmarshal(m, b)
+}
+func (m *CMsgSource1LegacyGameEventListKeyT) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgSource1LegacyGameEventListKeyT.Marshal(b, m, deterministic)
+}
+func (dst *CMsgSource1LegacyGameEventListKeyT) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgSource1LegacyGameEventListKeyT.Merge(dst, src)
+}
+func (m *CMsgSource1LegacyGameEventListKeyT) XXX_Size() int {
+	return xxx_messageInfo_CMsgSource1LegacyGameEventListKeyT.Size(m)
+}
+func (m *CMsgSource1LegacyGameEventListKeyT) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgSource1LegacyGameEventListKeyT.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgSource1LegacyGameEventListKeyT proto.InternalMessageInfo
 
 func (m *CMsgSource1LegacyGameEventListKeyT) GetType() int32 {
 	if m != nil && m.Type != nil {
@@ -341,10 +492,12 @@ func (m *CMsgSource1LegacyGameEventListKeyT) GetName() string {
 }
 
 type CMsgSource1LegacyGameEventListDescriptorT struct {
-	Eventid          *int32                                `protobuf:"varint,1,opt,name=eventid" json:"eventid,omitempty"`
-	Name             *string                               `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
-	Keys             []*CMsgSource1LegacyGameEventListKeyT `protobuf:"bytes,3,rep,name=keys" json:"keys,omitempty"`
-	XXX_unrecognized []byte                                `json:"-"`
+	Eventid              *int32                                `protobuf:"varint,1,opt,name=eventid" json:"eventid,omitempty"`
+	Name                 *string                               `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
+	Keys                 []*CMsgSource1LegacyGameEventListKeyT `protobuf:"bytes,3,rep,name=keys" json:"keys,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                              `json:"-"`
+	XXX_unrecognized     []byte                                `json:"-"`
+	XXX_sizecache        int32                                 `json:"-"`
 }
 
 func (m *CMsgSource1LegacyGameEventListDescriptorT) Reset() {
@@ -353,8 +506,25 @@ func (m *CMsgSource1LegacyGameEventListDescriptorT) Reset() {
 func (m *CMsgSource1LegacyGameEventListDescriptorT) String() string { return proto.CompactTextString(m) }
 func (*CMsgSource1LegacyGameEventListDescriptorT) ProtoMessage()    {}
 func (*CMsgSource1LegacyGameEventListDescriptorT) Descriptor() ([]byte, []int) {
-	return fileDescriptor28, []int{5, 1}
+	return fileDescriptor_gameevents_38625ccca8ceab8d, []int{5, 1}
 }
+func (m *CMsgSource1LegacyGameEventListDescriptorT) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgSource1LegacyGameEventListDescriptorT.Unmarshal(m, b)
+}
+func (m *CMsgSource1LegacyGameEventListDescriptorT) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgSource1LegacyGameEventListDescriptorT.Marshal(b, m, deterministic)
+}
+func (dst *CMsgSource1LegacyGameEventListDescriptorT) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgSource1LegacyGameEventListDescriptorT.Merge(dst, src)
+}
+func (m *CMsgSource1LegacyGameEventListDescriptorT) XXX_Size() int {
+	return xxx_messageInfo_CMsgSource1LegacyGameEventListDescriptorT.Size(m)
+}
+func (m *CMsgSource1LegacyGameEventListDescriptorT) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgSource1LegacyGameEventListDescriptorT.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgSource1LegacyGameEventListDescriptorT proto.InternalMessageInfo
 
 func (m *CMsgSource1LegacyGameEventListDescriptorT) GetEventid() int32 {
 	if m != nil && m.Eventid != nil {
@@ -378,15 +548,36 @@ func (m *CMsgSource1LegacyGameEventListDescriptorT) GetKeys() []*CMsgSource1Lega
 }
 
 type CMsgSource1LegacyListenEvents struct {
-	Playerslot       *int32   `protobuf:"varint,1,opt,name=playerslot" json:"playerslot,omitempty"`
-	Eventarraybits   []uint32 `protobuf:"varint,2,rep,name=eventarraybits" json:"eventarraybits,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	Playerslot           *int32   `protobuf:"varint,1,opt,name=playerslot" json:"playerslot,omitempty"`
+	Eventarraybits       []uint32 `protobuf:"varint,2,rep,name=eventarraybits" json:"eventarraybits,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CMsgSource1LegacyListenEvents) Reset()                    { *m = CMsgSource1LegacyListenEvents{} }
-func (m *CMsgSource1LegacyListenEvents) String() string            { return proto.CompactTextString(m) }
-func (*CMsgSource1LegacyListenEvents) ProtoMessage()               {}
-func (*CMsgSource1LegacyListenEvents) Descriptor() ([]byte, []int) { return fileDescriptor28, []int{6} }
+func (m *CMsgSource1LegacyListenEvents) Reset()         { *m = CMsgSource1LegacyListenEvents{} }
+func (m *CMsgSource1LegacyListenEvents) String() string { return proto.CompactTextString(m) }
+func (*CMsgSource1LegacyListenEvents) ProtoMessage()    {}
+func (*CMsgSource1LegacyListenEvents) Descriptor() ([]byte, []int) {
+	return fileDescriptor_gameevents_38625ccca8ceab8d, []int{6}
+}
+func (m *CMsgSource1LegacyListenEvents) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgSource1LegacyListenEvents.Unmarshal(m, b)
+}
+func (m *CMsgSource1LegacyListenEvents) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgSource1LegacyListenEvents.Marshal(b, m, deterministic)
+}
+func (dst *CMsgSource1LegacyListenEvents) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgSource1LegacyListenEvents.Merge(dst, src)
+}
+func (m *CMsgSource1LegacyListenEvents) XXX_Size() int {
+	return xxx_messageInfo_CMsgSource1LegacyListenEvents.Size(m)
+}
+func (m *CMsgSource1LegacyListenEvents) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgSource1LegacyListenEvents.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgSource1LegacyListenEvents proto.InternalMessageInfo
 
 func (m *CMsgSource1LegacyListenEvents) GetPlayerslot() int32 {
 	if m != nil && m.Playerslot != nil {
@@ -403,16 +594,37 @@ func (m *CMsgSource1LegacyListenEvents) GetEventarraybits() []uint32 {
 }
 
 type CMsgSource1LegacyGameEvent struct {
-	EventName        *string                           `protobuf:"bytes,1,opt,name=event_name,json=eventName" json:"event_name,omitempty"`
-	Eventid          *int32                            `protobuf:"varint,2,opt,name=eventid" json:"eventid,omitempty"`
-	Keys             []*CMsgSource1LegacyGameEventKeyT `protobuf:"bytes,3,rep,name=keys" json:"keys,omitempty"`
-	XXX_unrecognized []byte                            `json:"-"`
+	EventName            *string                           `protobuf:"bytes,1,opt,name=event_name,json=eventName" json:"event_name,omitempty"`
+	Eventid              *int32                            `protobuf:"varint,2,opt,name=eventid" json:"eventid,omitempty"`
+	Keys                 []*CMsgSource1LegacyGameEventKeyT `protobuf:"bytes,3,rep,name=keys" json:"keys,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                          `json:"-"`
+	XXX_unrecognized     []byte                            `json:"-"`
+	XXX_sizecache        int32                             `json:"-"`
 }
 
-func (m *CMsgSource1LegacyGameEvent) Reset()                    { *m = CMsgSource1LegacyGameEvent{} }
-func (m *CMsgSource1LegacyGameEvent) String() string            { return proto.CompactTextString(m) }
-func (*CMsgSource1LegacyGameEvent) ProtoMessage()               {}
-func (*CMsgSource1LegacyGameEvent) Descriptor() ([]byte, []int) { return fileDescriptor28, []int{7} }
+func (m *CMsgSource1LegacyGameEvent) Reset()         { *m = CMsgSource1LegacyGameEvent{} }
+func (m *CMsgSource1LegacyGameEvent) String() string { return proto.CompactTextString(m) }
+func (*CMsgSource1LegacyGameEvent) ProtoMessage()    {}
+func (*CMsgSource1LegacyGameEvent) Descriptor() ([]byte, []int) {
+	return fileDescriptor_gameevents_38625ccca8ceab8d, []int{7}
+}
+func (m *CMsgSource1LegacyGameEvent) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgSource1LegacyGameEvent.Unmarshal(m, b)
+}
+func (m *CMsgSource1LegacyGameEvent) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgSource1LegacyGameEvent.Marshal(b, m, deterministic)
+}
+func (dst *CMsgSource1LegacyGameEvent) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgSource1LegacyGameEvent.Merge(dst, src)
+}
+func (m *CMsgSource1LegacyGameEvent) XXX_Size() int {
+	return xxx_messageInfo_CMsgSource1LegacyGameEvent.Size(m)
+}
+func (m *CMsgSource1LegacyGameEvent) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgSource1LegacyGameEvent.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgSource1LegacyGameEvent proto.InternalMessageInfo
 
 func (m *CMsgSource1LegacyGameEvent) GetEventName() string {
 	if m != nil && m.EventName != nil {
@@ -436,23 +648,42 @@ func (m *CMsgSource1LegacyGameEvent) GetKeys() []*CMsgSource1LegacyGameEventKeyT
 }
 
 type CMsgSource1LegacyGameEventKeyT struct {
-	Type             *int32   `protobuf:"varint,1,opt,name=type" json:"type,omitempty"`
-	ValString        *string  `protobuf:"bytes,2,opt,name=val_string,json=valString" json:"val_string,omitempty"`
-	ValFloat         *float32 `protobuf:"fixed32,3,opt,name=val_float,json=valFloat" json:"val_float,omitempty"`
-	ValLong          *int32   `protobuf:"varint,4,opt,name=val_long,json=valLong" json:"val_long,omitempty"`
-	ValShort         *int32   `protobuf:"varint,5,opt,name=val_short,json=valShort" json:"val_short,omitempty"`
-	ValByte          *int32   `protobuf:"varint,6,opt,name=val_byte,json=valByte" json:"val_byte,omitempty"`
-	ValBool          *bool    `protobuf:"varint,7,opt,name=val_bool,json=valBool" json:"val_bool,omitempty"`
-	ValUint64        *uint64  `protobuf:"varint,8,opt,name=val_uint64,json=valUint64" json:"val_uint64,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	Type                 *int32   `protobuf:"varint,1,opt,name=type" json:"type,omitempty"`
+	ValString            *string  `protobuf:"bytes,2,opt,name=val_string,json=valString" json:"val_string,omitempty"`
+	ValFloat             *float32 `protobuf:"fixed32,3,opt,name=val_float,json=valFloat" json:"val_float,omitempty"`
+	ValLong              *int32   `protobuf:"varint,4,opt,name=val_long,json=valLong" json:"val_long,omitempty"`
+	ValShort             *int32   `protobuf:"varint,5,opt,name=val_short,json=valShort" json:"val_short,omitempty"`
+	ValByte              *int32   `protobuf:"varint,6,opt,name=val_byte,json=valByte" json:"val_byte,omitempty"`
+	ValBool              *bool    `protobuf:"varint,7,opt,name=val_bool,json=valBool" json:"val_bool,omitempty"`
+	ValUint64            *uint64  `protobuf:"varint,8,opt,name=val_uint64,json=valUint64" json:"val_uint64,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *CMsgSource1LegacyGameEventKeyT) Reset()         { *m = CMsgSource1LegacyGameEventKeyT{} }
 func (m *CMsgSource1LegacyGameEventKeyT) String() string { return proto.CompactTextString(m) }
 func (*CMsgSource1LegacyGameEventKeyT) ProtoMessage()    {}
 func (*CMsgSource1LegacyGameEventKeyT) Descriptor() ([]byte, []int) {
-	return fileDescriptor28, []int{7, 0}
+	return fileDescriptor_gameevents_38625ccca8ceab8d, []int{7, 0}
 }
+func (m *CMsgSource1LegacyGameEventKeyT) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgSource1LegacyGameEventKeyT.Unmarshal(m, b)
+}
+func (m *CMsgSource1LegacyGameEventKeyT) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgSource1LegacyGameEventKeyT.Marshal(b, m, deterministic)
+}
+func (dst *CMsgSource1LegacyGameEventKeyT) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgSource1LegacyGameEventKeyT.Merge(dst, src)
+}
+func (m *CMsgSource1LegacyGameEventKeyT) XXX_Size() int {
+	return xxx_messageInfo_CMsgSource1LegacyGameEventKeyT.Size(m)
+}
+func (m *CMsgSource1LegacyGameEventKeyT) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgSource1LegacyGameEventKeyT.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgSource1LegacyGameEventKeyT proto.InternalMessageInfo
 
 func (m *CMsgSource1LegacyGameEventKeyT) GetType() int32 {
 	if m != nil && m.Type != nil {
@@ -511,19 +742,40 @@ func (m *CMsgSource1LegacyGameEventKeyT) GetValUint64() uint64 {
 }
 
 type CMsgSosStartSoundEvent struct {
-	SoundeventGuid    *int32   `protobuf:"varint,1,opt,name=soundevent_guid,json=soundeventGuid" json:"soundevent_guid,omitempty"`
-	SoundeventHash    *uint32  `protobuf:"fixed32,2,opt,name=soundevent_hash,json=soundeventHash" json:"soundevent_hash,omitempty"`
-	SourceEntityIndex *int32   `protobuf:"varint,3,opt,name=source_entity_index,json=sourceEntityIndex" json:"source_entity_index,omitempty"`
-	Seed              *int32   `protobuf:"varint,4,opt,name=seed" json:"seed,omitempty"`
-	PackedParams      []byte   `protobuf:"bytes,5,opt,name=packed_params,json=packedParams" json:"packed_params,omitempty"`
-	StartTime         *float32 `protobuf:"fixed32,6,opt,name=start_time,json=startTime" json:"start_time,omitempty"`
-	XXX_unrecognized  []byte   `json:"-"`
+	SoundeventGuid       *int32   `protobuf:"varint,1,opt,name=soundevent_guid,json=soundeventGuid" json:"soundevent_guid,omitempty"`
+	SoundeventHash       *uint32  `protobuf:"fixed32,2,opt,name=soundevent_hash,json=soundeventHash" json:"soundevent_hash,omitempty"`
+	SourceEntityIndex    *int32   `protobuf:"varint,3,opt,name=source_entity_index,json=sourceEntityIndex" json:"source_entity_index,omitempty"`
+	Seed                 *int32   `protobuf:"varint,4,opt,name=seed" json:"seed,omitempty"`
+	PackedParams         []byte   `protobuf:"bytes,5,opt,name=packed_params,json=packedParams" json:"packed_params,omitempty"`
+	StartTime            *float32 `protobuf:"fixed32,6,opt,name=start_time,json=startTime" json:"start_time,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CMsgSosStartSoundEvent) Reset()                    { *m = CMsgSosStartSoundEvent{} }
-func (m *CMsgSosStartSoundEvent) String() string            { return proto.CompactTextString(m) }
-func (*CMsgSosStartSoundEvent) ProtoMessage()               {}
-func (*CMsgSosStartSoundEvent) Descriptor() ([]byte, []int) { return fileDescriptor28, []int{8} }
+func (m *CMsgSosStartSoundEvent) Reset()         { *m = CMsgSosStartSoundEvent{} }
+func (m *CMsgSosStartSoundEvent) String() string { return proto.CompactTextString(m) }
+func (*CMsgSosStartSoundEvent) ProtoMessage()    {}
+func (*CMsgSosStartSoundEvent) Descriptor() ([]byte, []int) {
+	return fileDescriptor_gameevents_38625ccca8ceab8d, []int{8}
+}
+func (m *CMsgSosStartSoundEvent) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgSosStartSoundEvent.Unmarshal(m, b)
+}
+func (m *CMsgSosStartSoundEvent) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgSosStartSoundEvent.Marshal(b, m, deterministic)
+}
+func (dst *CMsgSosStartSoundEvent) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgSosStartSoundEvent.Merge(dst, src)
+}
+func (m *CMsgSosStartSoundEvent) XXX_Size() int {
+	return xxx_messageInfo_CMsgSosStartSoundEvent.Size(m)
+}
+func (m *CMsgSosStartSoundEvent) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgSosStartSoundEvent.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgSosStartSoundEvent proto.InternalMessageInfo
 
 func (m *CMsgSosStartSoundEvent) GetSoundeventGuid() int32 {
 	if m != nil && m.SoundeventGuid != nil {
@@ -568,14 +820,35 @@ func (m *CMsgSosStartSoundEvent) GetStartTime() float32 {
 }
 
 type CMsgSosStopSoundEvent struct {
-	SoundeventGuid   *int32 `protobuf:"varint,1,opt,name=soundevent_guid,json=soundeventGuid" json:"soundevent_guid,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	SoundeventGuid       *int32   `protobuf:"varint,1,opt,name=soundevent_guid,json=soundeventGuid" json:"soundevent_guid,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CMsgSosStopSoundEvent) Reset()                    { *m = CMsgSosStopSoundEvent{} }
-func (m *CMsgSosStopSoundEvent) String() string            { return proto.CompactTextString(m) }
-func (*CMsgSosStopSoundEvent) ProtoMessage()               {}
-func (*CMsgSosStopSoundEvent) Descriptor() ([]byte, []int) { return fileDescriptor28, []int{9} }
+func (m *CMsgSosStopSoundEvent) Reset()         { *m = CMsgSosStopSoundEvent{} }
+func (m *CMsgSosStopSoundEvent) String() string { return proto.CompactTextString(m) }
+func (*CMsgSosStopSoundEvent) ProtoMessage()    {}
+func (*CMsgSosStopSoundEvent) Descriptor() ([]byte, []int) {
+	return fileDescriptor_gameevents_38625ccca8ceab8d, []int{9}
+}
+func (m *CMsgSosStopSoundEvent) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgSosStopSoundEvent.Unmarshal(m, b)
+}
+func (m *CMsgSosStopSoundEvent) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgSosStopSoundEvent.Marshal(b, m, deterministic)
+}
+func (dst *CMsgSosStopSoundEvent) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgSosStopSoundEvent.Merge(dst, src)
+}
+func (m *CMsgSosStopSoundEvent) XXX_Size() int {
+	return xxx_messageInfo_CMsgSosStopSoundEvent.Size(m)
+}
+func (m *CMsgSosStopSoundEvent) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgSosStopSoundEvent.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgSosStopSoundEvent proto.InternalMessageInfo
 
 func (m *CMsgSosStopSoundEvent) GetSoundeventGuid() int32 {
 	if m != nil && m.SoundeventGuid != nil {
@@ -585,15 +858,36 @@ func (m *CMsgSosStopSoundEvent) GetSoundeventGuid() int32 {
 }
 
 type CMsgSosStopSoundEventHash struct {
-	SoundeventHash    *uint32 `protobuf:"fixed32,1,opt,name=soundevent_hash,json=soundeventHash" json:"soundevent_hash,omitempty"`
-	SourceEntityIndex *int32  `protobuf:"varint,2,opt,name=source_entity_index,json=sourceEntityIndex" json:"source_entity_index,omitempty"`
-	XXX_unrecognized  []byte  `json:"-"`
+	SoundeventHash       *uint32  `protobuf:"fixed32,1,opt,name=soundevent_hash,json=soundeventHash" json:"soundevent_hash,omitempty"`
+	SourceEntityIndex    *int32   `protobuf:"varint,2,opt,name=source_entity_index,json=sourceEntityIndex" json:"source_entity_index,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CMsgSosStopSoundEventHash) Reset()                    { *m = CMsgSosStopSoundEventHash{} }
-func (m *CMsgSosStopSoundEventHash) String() string            { return proto.CompactTextString(m) }
-func (*CMsgSosStopSoundEventHash) ProtoMessage()               {}
-func (*CMsgSosStopSoundEventHash) Descriptor() ([]byte, []int) { return fileDescriptor28, []int{10} }
+func (m *CMsgSosStopSoundEventHash) Reset()         { *m = CMsgSosStopSoundEventHash{} }
+func (m *CMsgSosStopSoundEventHash) String() string { return proto.CompactTextString(m) }
+func (*CMsgSosStopSoundEventHash) ProtoMessage()    {}
+func (*CMsgSosStopSoundEventHash) Descriptor() ([]byte, []int) {
+	return fileDescriptor_gameevents_38625ccca8ceab8d, []int{10}
+}
+func (m *CMsgSosStopSoundEventHash) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgSosStopSoundEventHash.Unmarshal(m, b)
+}
+func (m *CMsgSosStopSoundEventHash) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgSosStopSoundEventHash.Marshal(b, m, deterministic)
+}
+func (dst *CMsgSosStopSoundEventHash) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgSosStopSoundEventHash.Merge(dst, src)
+}
+func (m *CMsgSosStopSoundEventHash) XXX_Size() int {
+	return xxx_messageInfo_CMsgSosStopSoundEventHash.Size(m)
+}
+func (m *CMsgSosStopSoundEventHash) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgSosStopSoundEventHash.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgSosStopSoundEventHash proto.InternalMessageInfo
 
 func (m *CMsgSosStopSoundEventHash) GetSoundeventHash() uint32 {
 	if m != nil && m.SoundeventHash != nil {
@@ -610,15 +904,36 @@ func (m *CMsgSosStopSoundEventHash) GetSourceEntityIndex() int32 {
 }
 
 type CMsgSosSetSoundEventParams struct {
-	SoundeventGuid   *int32 `protobuf:"varint,1,opt,name=soundevent_guid,json=soundeventGuid" json:"soundevent_guid,omitempty"`
-	PackedParams     []byte `protobuf:"bytes,5,opt,name=packed_params,json=packedParams" json:"packed_params,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	SoundeventGuid       *int32   `protobuf:"varint,1,opt,name=soundevent_guid,json=soundeventGuid" json:"soundevent_guid,omitempty"`
+	PackedParams         []byte   `protobuf:"bytes,5,opt,name=packed_params,json=packedParams" json:"packed_params,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CMsgSosSetSoundEventParams) Reset()                    { *m = CMsgSosSetSoundEventParams{} }
-func (m *CMsgSosSetSoundEventParams) String() string            { return proto.CompactTextString(m) }
-func (*CMsgSosSetSoundEventParams) ProtoMessage()               {}
-func (*CMsgSosSetSoundEventParams) Descriptor() ([]byte, []int) { return fileDescriptor28, []int{11} }
+func (m *CMsgSosSetSoundEventParams) Reset()         { *m = CMsgSosSetSoundEventParams{} }
+func (m *CMsgSosSetSoundEventParams) String() string { return proto.CompactTextString(m) }
+func (*CMsgSosSetSoundEventParams) ProtoMessage()    {}
+func (*CMsgSosSetSoundEventParams) Descriptor() ([]byte, []int) {
+	return fileDescriptor_gameevents_38625ccca8ceab8d, []int{11}
+}
+func (m *CMsgSosSetSoundEventParams) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgSosSetSoundEventParams.Unmarshal(m, b)
+}
+func (m *CMsgSosSetSoundEventParams) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgSosSetSoundEventParams.Marshal(b, m, deterministic)
+}
+func (dst *CMsgSosSetSoundEventParams) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgSosSetSoundEventParams.Merge(dst, src)
+}
+func (m *CMsgSosSetSoundEventParams) XXX_Size() int {
+	return xxx_messageInfo_CMsgSosSetSoundEventParams.Size(m)
+}
+func (m *CMsgSosSetSoundEventParams) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgSosSetSoundEventParams.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgSosSetSoundEventParams proto.InternalMessageInfo
 
 func (m *CMsgSosSetSoundEventParams) GetSoundeventGuid() int32 {
 	if m != nil && m.SoundeventGuid != nil {
@@ -635,15 +950,36 @@ func (m *CMsgSosSetSoundEventParams) GetPackedParams() []byte {
 }
 
 type CMsgSosSetLibraryStackFields struct {
-	StackHash        *uint32 `protobuf:"fixed32,1,opt,name=stack_hash,json=stackHash" json:"stack_hash,omitempty"`
-	PackedFields     []byte  `protobuf:"bytes,5,opt,name=packed_fields,json=packedFields" json:"packed_fields,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	StackHash            *uint32  `protobuf:"fixed32,1,opt,name=stack_hash,json=stackHash" json:"stack_hash,omitempty"`
+	PackedFields         []byte   `protobuf:"bytes,5,opt,name=packed_fields,json=packedFields" json:"packed_fields,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CMsgSosSetLibraryStackFields) Reset()                    { *m = CMsgSosSetLibraryStackFields{} }
-func (m *CMsgSosSetLibraryStackFields) String() string            { return proto.CompactTextString(m) }
-func (*CMsgSosSetLibraryStackFields) ProtoMessage()               {}
-func (*CMsgSosSetLibraryStackFields) Descriptor() ([]byte, []int) { return fileDescriptor28, []int{12} }
+func (m *CMsgSosSetLibraryStackFields) Reset()         { *m = CMsgSosSetLibraryStackFields{} }
+func (m *CMsgSosSetLibraryStackFields) String() string { return proto.CompactTextString(m) }
+func (*CMsgSosSetLibraryStackFields) ProtoMessage()    {}
+func (*CMsgSosSetLibraryStackFields) Descriptor() ([]byte, []int) {
+	return fileDescriptor_gameevents_38625ccca8ceab8d, []int{12}
+}
+func (m *CMsgSosSetLibraryStackFields) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgSosSetLibraryStackFields.Unmarshal(m, b)
+}
+func (m *CMsgSosSetLibraryStackFields) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgSosSetLibraryStackFields.Marshal(b, m, deterministic)
+}
+func (dst *CMsgSosSetLibraryStackFields) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgSosSetLibraryStackFields.Merge(dst, src)
+}
+func (m *CMsgSosSetLibraryStackFields) XXX_Size() int {
+	return xxx_messageInfo_CMsgSosSetLibraryStackFields.Size(m)
+}
+func (m *CMsgSosSetLibraryStackFields) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgSosSetLibraryStackFields.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgSosSetLibraryStackFields proto.InternalMessageInfo
 
 func (m *CMsgSosSetLibraryStackFields) GetStackHash() uint32 {
 	if m != nil && m.StackHash != nil {
@@ -679,9 +1015,9 @@ func init() {
 	proto.RegisterEnum("dota.EBaseGameEvents", EBaseGameEvents_name, EBaseGameEvents_value)
 }
 
-func init() { proto.RegisterFile("gameevents.proto", fileDescriptor28) }
+func init() { proto.RegisterFile("gameevents.proto", fileDescriptor_gameevents_38625ccca8ceab8d) }
 
-var fileDescriptor28 = []byte{
+var fileDescriptor_gameevents_38625ccca8ceab8d = []byte{
 	// 1130 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x56, 0x4b, 0x73, 0x1b, 0x45,
 	0x10, 0x66, 0xf4, 0x88, 0xa5, 0xb6, 0x95, 0x6c, 0x26, 0x0f, 0xd6, 0x4a, 0x1c, 0xc4, 0x42, 0x39,

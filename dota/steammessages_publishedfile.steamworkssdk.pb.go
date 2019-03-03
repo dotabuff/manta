@@ -12,20 +12,45 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the proto package it is being compiled against.
+// A compilation error at this line likely means your copy of the
+// proto package needs to be updated.
+const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+
 type CPublishedFile_Subscribe_Request struct {
-	Publishedfileid  *uint64 `protobuf:"varint,1,opt,name=publishedfileid" json:"publishedfileid,omitempty"`
-	ListType         *uint32 `protobuf:"varint,2,opt,name=list_type,json=listType" json:"list_type,omitempty"`
-	Appid            *int32  `protobuf:"varint,3,opt,name=appid" json:"appid,omitempty"`
-	NotifyClient     *bool   `protobuf:"varint,4,opt,name=notify_client,json=notifyClient" json:"notify_client,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Publishedfileid      *uint64  `protobuf:"varint,1,opt,name=publishedfileid" json:"publishedfileid,omitempty"`
+	ListType             *uint32  `protobuf:"varint,2,opt,name=list_type,json=listType" json:"list_type,omitempty"`
+	Appid                *int32   `protobuf:"varint,3,opt,name=appid" json:"appid,omitempty"`
+	NotifyClient         *bool    `protobuf:"varint,4,opt,name=notify_client,json=notifyClient" json:"notify_client,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *CPublishedFile_Subscribe_Request) Reset()         { *m = CPublishedFile_Subscribe_Request{} }
 func (m *CPublishedFile_Subscribe_Request) String() string { return proto.CompactTextString(m) }
 func (*CPublishedFile_Subscribe_Request) ProtoMessage()    {}
 func (*CPublishedFile_Subscribe_Request) Descriptor() ([]byte, []int) {
-	return fileDescriptor38, []int{0}
+	return fileDescriptor_steammessages_publishedfile_steamworkssdk_64a9567990aa6744, []int{0}
 }
+func (m *CPublishedFile_Subscribe_Request) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CPublishedFile_Subscribe_Request.Unmarshal(m, b)
+}
+func (m *CPublishedFile_Subscribe_Request) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CPublishedFile_Subscribe_Request.Marshal(b, m, deterministic)
+}
+func (dst *CPublishedFile_Subscribe_Request) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CPublishedFile_Subscribe_Request.Merge(dst, src)
+}
+func (m *CPublishedFile_Subscribe_Request) XXX_Size() int {
+	return xxx_messageInfo_CPublishedFile_Subscribe_Request.Size(m)
+}
+func (m *CPublishedFile_Subscribe_Request) XXX_DiscardUnknown() {
+	xxx_messageInfo_CPublishedFile_Subscribe_Request.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CPublishedFile_Subscribe_Request proto.InternalMessageInfo
 
 func (m *CPublishedFile_Subscribe_Request) GetPublishedfileid() uint64 {
 	if m != nil && m.Publishedfileid != nil {
@@ -56,30 +81,68 @@ func (m *CPublishedFile_Subscribe_Request) GetNotifyClient() bool {
 }
 
 type CPublishedFile_Subscribe_Response struct {
-	XXX_unrecognized []byte `json:"-"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *CPublishedFile_Subscribe_Response) Reset()         { *m = CPublishedFile_Subscribe_Response{} }
 func (m *CPublishedFile_Subscribe_Response) String() string { return proto.CompactTextString(m) }
 func (*CPublishedFile_Subscribe_Response) ProtoMessage()    {}
 func (*CPublishedFile_Subscribe_Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor38, []int{1}
+	return fileDescriptor_steammessages_publishedfile_steamworkssdk_64a9567990aa6744, []int{1}
+}
+func (m *CPublishedFile_Subscribe_Response) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CPublishedFile_Subscribe_Response.Unmarshal(m, b)
+}
+func (m *CPublishedFile_Subscribe_Response) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CPublishedFile_Subscribe_Response.Marshal(b, m, deterministic)
+}
+func (dst *CPublishedFile_Subscribe_Response) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CPublishedFile_Subscribe_Response.Merge(dst, src)
+}
+func (m *CPublishedFile_Subscribe_Response) XXX_Size() int {
+	return xxx_messageInfo_CPublishedFile_Subscribe_Response.Size(m)
+}
+func (m *CPublishedFile_Subscribe_Response) XXX_DiscardUnknown() {
+	xxx_messageInfo_CPublishedFile_Subscribe_Response.DiscardUnknown(m)
 }
 
+var xxx_messageInfo_CPublishedFile_Subscribe_Response proto.InternalMessageInfo
+
 type CPublishedFile_Unsubscribe_Request struct {
-	Publishedfileid  *uint64 `protobuf:"varint,1,opt,name=publishedfileid" json:"publishedfileid,omitempty"`
-	ListType         *uint32 `protobuf:"varint,2,opt,name=list_type,json=listType" json:"list_type,omitempty"`
-	Appid            *int32  `protobuf:"varint,3,opt,name=appid" json:"appid,omitempty"`
-	NotifyClient     *bool   `protobuf:"varint,4,opt,name=notify_client,json=notifyClient" json:"notify_client,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Publishedfileid      *uint64  `protobuf:"varint,1,opt,name=publishedfileid" json:"publishedfileid,omitempty"`
+	ListType             *uint32  `protobuf:"varint,2,opt,name=list_type,json=listType" json:"list_type,omitempty"`
+	Appid                *int32   `protobuf:"varint,3,opt,name=appid" json:"appid,omitempty"`
+	NotifyClient         *bool    `protobuf:"varint,4,opt,name=notify_client,json=notifyClient" json:"notify_client,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *CPublishedFile_Unsubscribe_Request) Reset()         { *m = CPublishedFile_Unsubscribe_Request{} }
 func (m *CPublishedFile_Unsubscribe_Request) String() string { return proto.CompactTextString(m) }
 func (*CPublishedFile_Unsubscribe_Request) ProtoMessage()    {}
 func (*CPublishedFile_Unsubscribe_Request) Descriptor() ([]byte, []int) {
-	return fileDescriptor38, []int{2}
+	return fileDescriptor_steammessages_publishedfile_steamworkssdk_64a9567990aa6744, []int{2}
 }
+func (m *CPublishedFile_Unsubscribe_Request) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CPublishedFile_Unsubscribe_Request.Unmarshal(m, b)
+}
+func (m *CPublishedFile_Unsubscribe_Request) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CPublishedFile_Unsubscribe_Request.Marshal(b, m, deterministic)
+}
+func (dst *CPublishedFile_Unsubscribe_Request) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CPublishedFile_Unsubscribe_Request.Merge(dst, src)
+}
+func (m *CPublishedFile_Unsubscribe_Request) XXX_Size() int {
+	return xxx_messageInfo_CPublishedFile_Unsubscribe_Request.Size(m)
+}
+func (m *CPublishedFile_Unsubscribe_Request) XXX_DiscardUnknown() {
+	xxx_messageInfo_CPublishedFile_Unsubscribe_Request.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CPublishedFile_Unsubscribe_Request proto.InternalMessageInfo
 
 func (m *CPublishedFile_Unsubscribe_Request) GetPublishedfileid() uint64 {
 	if m != nil && m.Publishedfileid != nil {
@@ -110,15 +173,34 @@ func (m *CPublishedFile_Unsubscribe_Request) GetNotifyClient() bool {
 }
 
 type CPublishedFile_Unsubscribe_Response struct {
-	XXX_unrecognized []byte `json:"-"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *CPublishedFile_Unsubscribe_Response) Reset()         { *m = CPublishedFile_Unsubscribe_Response{} }
 func (m *CPublishedFile_Unsubscribe_Response) String() string { return proto.CompactTextString(m) }
 func (*CPublishedFile_Unsubscribe_Response) ProtoMessage()    {}
 func (*CPublishedFile_Unsubscribe_Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor38, []int{3}
+	return fileDescriptor_steammessages_publishedfile_steamworkssdk_64a9567990aa6744, []int{3}
 }
+func (m *CPublishedFile_Unsubscribe_Response) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CPublishedFile_Unsubscribe_Response.Unmarshal(m, b)
+}
+func (m *CPublishedFile_Unsubscribe_Response) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CPublishedFile_Unsubscribe_Response.Marshal(b, m, deterministic)
+}
+func (dst *CPublishedFile_Unsubscribe_Response) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CPublishedFile_Unsubscribe_Response.Merge(dst, src)
+}
+func (m *CPublishedFile_Unsubscribe_Response) XXX_Size() int {
+	return xxx_messageInfo_CPublishedFile_Unsubscribe_Response.Size(m)
+}
+func (m *CPublishedFile_Unsubscribe_Response) XXX_DiscardUnknown() {
+	xxx_messageInfo_CPublishedFile_Unsubscribe_Response.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CPublishedFile_Unsubscribe_Response proto.InternalMessageInfo
 
 type CPublishedFile_Publish_Request struct {
 	Appid                *uint32  `protobuf:"varint,1,opt,name=appid" json:"appid,omitempty"`
@@ -137,13 +219,34 @@ type CPublishedFile_Publish_Request struct {
 	CollectionType       *string  `protobuf:"bytes,14,opt,name=collection_type,json=collectionType" json:"collection_type,omitempty"`
 	GameType             *string  `protobuf:"bytes,15,opt,name=game_type,json=gameType" json:"game_type,omitempty"`
 	Url                  *string  `protobuf:"bytes,16,opt,name=url" json:"url,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CPublishedFile_Publish_Request) Reset()                    { *m = CPublishedFile_Publish_Request{} }
-func (m *CPublishedFile_Publish_Request) String() string            { return proto.CompactTextString(m) }
-func (*CPublishedFile_Publish_Request) ProtoMessage()               {}
-func (*CPublishedFile_Publish_Request) Descriptor() ([]byte, []int) { return fileDescriptor38, []int{4} }
+func (m *CPublishedFile_Publish_Request) Reset()         { *m = CPublishedFile_Publish_Request{} }
+func (m *CPublishedFile_Publish_Request) String() string { return proto.CompactTextString(m) }
+func (*CPublishedFile_Publish_Request) ProtoMessage()    {}
+func (*CPublishedFile_Publish_Request) Descriptor() ([]byte, []int) {
+	return fileDescriptor_steammessages_publishedfile_steamworkssdk_64a9567990aa6744, []int{4}
+}
+func (m *CPublishedFile_Publish_Request) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CPublishedFile_Publish_Request.Unmarshal(m, b)
+}
+func (m *CPublishedFile_Publish_Request) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CPublishedFile_Publish_Request.Marshal(b, m, deterministic)
+}
+func (dst *CPublishedFile_Publish_Request) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CPublishedFile_Publish_Request.Merge(dst, src)
+}
+func (m *CPublishedFile_Publish_Request) XXX_Size() int {
+	return xxx_messageInfo_CPublishedFile_Publish_Request.Size(m)
+}
+func (m *CPublishedFile_Publish_Request) XXX_DiscardUnknown() {
+	xxx_messageInfo_CPublishedFile_Publish_Request.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CPublishedFile_Publish_Request proto.InternalMessageInfo
 
 func (m *CPublishedFile_Publish_Request) GetAppid() uint32 {
 	if m != nil && m.Appid != nil {
@@ -258,17 +361,36 @@ func (m *CPublishedFile_Publish_Request) GetUrl() string {
 }
 
 type CPublishedFile_Publish_Response struct {
-	Publishedfileid  *uint64 `protobuf:"varint,1,opt,name=publishedfileid" json:"publishedfileid,omitempty"`
-	RedirectUri      *string `protobuf:"bytes,2,opt,name=redirect_uri,json=redirectUri" json:"redirect_uri,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Publishedfileid      *uint64  `protobuf:"varint,1,opt,name=publishedfileid" json:"publishedfileid,omitempty"`
+	RedirectUri          *string  `protobuf:"bytes,2,opt,name=redirect_uri,json=redirectUri" json:"redirect_uri,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *CPublishedFile_Publish_Response) Reset()         { *m = CPublishedFile_Publish_Response{} }
 func (m *CPublishedFile_Publish_Response) String() string { return proto.CompactTextString(m) }
 func (*CPublishedFile_Publish_Response) ProtoMessage()    {}
 func (*CPublishedFile_Publish_Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor38, []int{5}
+	return fileDescriptor_steammessages_publishedfile_steamworkssdk_64a9567990aa6744, []int{5}
 }
+func (m *CPublishedFile_Publish_Response) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CPublishedFile_Publish_Response.Unmarshal(m, b)
+}
+func (m *CPublishedFile_Publish_Response) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CPublishedFile_Publish_Response.Marshal(b, m, deterministic)
+}
+func (dst *CPublishedFile_Publish_Response) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CPublishedFile_Publish_Response.Merge(dst, src)
+}
+func (m *CPublishedFile_Publish_Response) XXX_Size() int {
+	return xxx_messageInfo_CPublishedFile_Publish_Response.Size(m)
+}
+func (m *CPublishedFile_Publish_Response) XXX_DiscardUnknown() {
+	xxx_messageInfo_CPublishedFile_Publish_Response.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CPublishedFile_Publish_Response proto.InternalMessageInfo
 
 func (m *CPublishedFile_Publish_Response) GetPublishedfileid() uint64 {
 	if m != nil && m.Publishedfileid != nil {
@@ -292,15 +414,34 @@ type CPublishedFile_GetDetails_Request struct {
 	Includekvtags             *bool    `protobuf:"varint,5,opt,name=includekvtags" json:"includekvtags,omitempty"`
 	Includevotes              *bool    `protobuf:"varint,6,opt,name=includevotes" json:"includevotes,omitempty"`
 	ShortDescription          *bool    `protobuf:"varint,8,opt,name=short_description,json=shortDescription" json:"short_description,omitempty"`
+	XXX_NoUnkeyedLiteral      struct{} `json:"-"`
 	XXX_unrecognized          []byte   `json:"-"`
+	XXX_sizecache             int32    `json:"-"`
 }
 
 func (m *CPublishedFile_GetDetails_Request) Reset()         { *m = CPublishedFile_GetDetails_Request{} }
 func (m *CPublishedFile_GetDetails_Request) String() string { return proto.CompactTextString(m) }
 func (*CPublishedFile_GetDetails_Request) ProtoMessage()    {}
 func (*CPublishedFile_GetDetails_Request) Descriptor() ([]byte, []int) {
-	return fileDescriptor38, []int{6}
+	return fileDescriptor_steammessages_publishedfile_steamworkssdk_64a9567990aa6744, []int{6}
 }
+func (m *CPublishedFile_GetDetails_Request) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CPublishedFile_GetDetails_Request.Unmarshal(m, b)
+}
+func (m *CPublishedFile_GetDetails_Request) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CPublishedFile_GetDetails_Request.Marshal(b, m, deterministic)
+}
+func (dst *CPublishedFile_GetDetails_Request) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CPublishedFile_GetDetails_Request.Merge(dst, src)
+}
+func (m *CPublishedFile_GetDetails_Request) XXX_Size() int {
+	return xxx_messageInfo_CPublishedFile_GetDetails_Request.Size(m)
+}
+func (m *CPublishedFile_GetDetails_Request) XXX_DiscardUnknown() {
+	xxx_messageInfo_CPublishedFile_GetDetails_Request.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CPublishedFile_GetDetails_Request proto.InternalMessageInfo
 
 func (m *CPublishedFile_GetDetails_Request) GetPublishedfileids() []uint64 {
 	if m != nil {
@@ -408,13 +549,34 @@ type PublishedFileDetails struct {
 	Kvtags                []*PublishedFileDetails_KVTag   `protobuf:"bytes,54,rep,name=kvtags" json:"kvtags,omitempty"`
 	VoteData              *PublishedFileDetails_VoteData  `protobuf:"bytes,55,opt,name=vote_data,json=voteData" json:"vote_data,omitempty"`
 	TimeSubscribed        *uint32                         `protobuf:"varint,56,opt,name=time_subscribed,json=timeSubscribed" json:"time_subscribed,omitempty"`
+	XXX_NoUnkeyedLiteral  struct{}                        `json:"-"`
 	XXX_unrecognized      []byte                          `json:"-"`
+	XXX_sizecache         int32                           `json:"-"`
 }
 
-func (m *PublishedFileDetails) Reset()                    { *m = PublishedFileDetails{} }
-func (m *PublishedFileDetails) String() string            { return proto.CompactTextString(m) }
-func (*PublishedFileDetails) ProtoMessage()               {}
-func (*PublishedFileDetails) Descriptor() ([]byte, []int) { return fileDescriptor38, []int{7} }
+func (m *PublishedFileDetails) Reset()         { *m = PublishedFileDetails{} }
+func (m *PublishedFileDetails) String() string { return proto.CompactTextString(m) }
+func (*PublishedFileDetails) ProtoMessage()    {}
+func (*PublishedFileDetails) Descriptor() ([]byte, []int) {
+	return fileDescriptor_steammessages_publishedfile_steamworkssdk_64a9567990aa6744, []int{7}
+}
+func (m *PublishedFileDetails) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_PublishedFileDetails.Unmarshal(m, b)
+}
+func (m *PublishedFileDetails) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_PublishedFileDetails.Marshal(b, m, deterministic)
+}
+func (dst *PublishedFileDetails) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PublishedFileDetails.Merge(dst, src)
+}
+func (m *PublishedFileDetails) XXX_Size() int {
+	return xxx_messageInfo_PublishedFileDetails.Size(m)
+}
+func (m *PublishedFileDetails) XXX_DiscardUnknown() {
+	xxx_messageInfo_PublishedFileDetails.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_PublishedFileDetails proto.InternalMessageInfo
 
 func (m *PublishedFileDetails) GetResult() uint32 {
 	if m != nil && m.Result != nil {
@@ -809,15 +971,36 @@ func (m *PublishedFileDetails) GetTimeSubscribed() uint32 {
 }
 
 type PublishedFileDetails_Tag struct {
-	Tag              *string `protobuf:"bytes,1,opt,name=tag" json:"tag,omitempty"`
-	Adminonly        *bool   `protobuf:"varint,2,opt,name=adminonly" json:"adminonly,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Tag                  *string  `protobuf:"bytes,1,opt,name=tag" json:"tag,omitempty"`
+	Adminonly            *bool    `protobuf:"varint,2,opt,name=adminonly" json:"adminonly,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *PublishedFileDetails_Tag) Reset()                    { *m = PublishedFileDetails_Tag{} }
-func (m *PublishedFileDetails_Tag) String() string            { return proto.CompactTextString(m) }
-func (*PublishedFileDetails_Tag) ProtoMessage()               {}
-func (*PublishedFileDetails_Tag) Descriptor() ([]byte, []int) { return fileDescriptor38, []int{7, 0} }
+func (m *PublishedFileDetails_Tag) Reset()         { *m = PublishedFileDetails_Tag{} }
+func (m *PublishedFileDetails_Tag) String() string { return proto.CompactTextString(m) }
+func (*PublishedFileDetails_Tag) ProtoMessage()    {}
+func (*PublishedFileDetails_Tag) Descriptor() ([]byte, []int) {
+	return fileDescriptor_steammessages_publishedfile_steamworkssdk_64a9567990aa6744, []int{7, 0}
+}
+func (m *PublishedFileDetails_Tag) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_PublishedFileDetails_Tag.Unmarshal(m, b)
+}
+func (m *PublishedFileDetails_Tag) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_PublishedFileDetails_Tag.Marshal(b, m, deterministic)
+}
+func (dst *PublishedFileDetails_Tag) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PublishedFileDetails_Tag.Merge(dst, src)
+}
+func (m *PublishedFileDetails_Tag) XXX_Size() int {
+	return xxx_messageInfo_PublishedFileDetails_Tag.Size(m)
+}
+func (m *PublishedFileDetails_Tag) XXX_DiscardUnknown() {
+	xxx_messageInfo_PublishedFileDetails_Tag.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_PublishedFileDetails_Tag proto.InternalMessageInfo
 
 func (m *PublishedFileDetails_Tag) GetTag() string {
 	if m != nil && m.Tag != nil {
@@ -834,21 +1017,40 @@ func (m *PublishedFileDetails_Tag) GetAdminonly() bool {
 }
 
 type PublishedFileDetails_Preview struct {
-	Previewid        *uint64 `protobuf:"varint,1,opt,name=previewid" json:"previewid,omitempty"`
-	Sortorder        *uint32 `protobuf:"varint,2,opt,name=sortorder" json:"sortorder,omitempty"`
-	Url              *string `protobuf:"bytes,3,opt,name=url" json:"url,omitempty"`
-	Size             *uint32 `protobuf:"varint,4,opt,name=size" json:"size,omitempty"`
-	Filename         *string `protobuf:"bytes,5,opt,name=filename" json:"filename,omitempty"`
-	Youtubevideoid   *string `protobuf:"bytes,6,opt,name=youtubevideoid" json:"youtubevideoid,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Previewid            *uint64  `protobuf:"varint,1,opt,name=previewid" json:"previewid,omitempty"`
+	Sortorder            *uint32  `protobuf:"varint,2,opt,name=sortorder" json:"sortorder,omitempty"`
+	Url                  *string  `protobuf:"bytes,3,opt,name=url" json:"url,omitempty"`
+	Size                 *uint32  `protobuf:"varint,4,opt,name=size" json:"size,omitempty"`
+	Filename             *string  `protobuf:"bytes,5,opt,name=filename" json:"filename,omitempty"`
+	Youtubevideoid       *string  `protobuf:"bytes,6,opt,name=youtubevideoid" json:"youtubevideoid,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *PublishedFileDetails_Preview) Reset()         { *m = PublishedFileDetails_Preview{} }
 func (m *PublishedFileDetails_Preview) String() string { return proto.CompactTextString(m) }
 func (*PublishedFileDetails_Preview) ProtoMessage()    {}
 func (*PublishedFileDetails_Preview) Descriptor() ([]byte, []int) {
-	return fileDescriptor38, []int{7, 1}
+	return fileDescriptor_steammessages_publishedfile_steamworkssdk_64a9567990aa6744, []int{7, 1}
 }
+func (m *PublishedFileDetails_Preview) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_PublishedFileDetails_Preview.Unmarshal(m, b)
+}
+func (m *PublishedFileDetails_Preview) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_PublishedFileDetails_Preview.Marshal(b, m, deterministic)
+}
+func (dst *PublishedFileDetails_Preview) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PublishedFileDetails_Preview.Merge(dst, src)
+}
+func (m *PublishedFileDetails_Preview) XXX_Size() int {
+	return xxx_messageInfo_PublishedFileDetails_Preview.Size(m)
+}
+func (m *PublishedFileDetails_Preview) XXX_DiscardUnknown() {
+	xxx_messageInfo_PublishedFileDetails_Preview.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_PublishedFileDetails_Preview proto.InternalMessageInfo
 
 func (m *PublishedFileDetails_Preview) GetPreviewid() uint64 {
 	if m != nil && m.Previewid != nil {
@@ -893,16 +1095,37 @@ func (m *PublishedFileDetails_Preview) GetYoutubevideoid() string {
 }
 
 type PublishedFileDetails_Child struct {
-	Publishedfileid  *uint64 `protobuf:"varint,1,opt,name=publishedfileid" json:"publishedfileid,omitempty"`
-	Sortorder        *uint32 `protobuf:"varint,2,opt,name=sortorder" json:"sortorder,omitempty"`
-	FileType         *uint32 `protobuf:"varint,3,opt,name=file_type,json=fileType" json:"file_type,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Publishedfileid      *uint64  `protobuf:"varint,1,opt,name=publishedfileid" json:"publishedfileid,omitempty"`
+	Sortorder            *uint32  `protobuf:"varint,2,opt,name=sortorder" json:"sortorder,omitempty"`
+	FileType             *uint32  `protobuf:"varint,3,opt,name=file_type,json=fileType" json:"file_type,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *PublishedFileDetails_Child) Reset()                    { *m = PublishedFileDetails_Child{} }
-func (m *PublishedFileDetails_Child) String() string            { return proto.CompactTextString(m) }
-func (*PublishedFileDetails_Child) ProtoMessage()               {}
-func (*PublishedFileDetails_Child) Descriptor() ([]byte, []int) { return fileDescriptor38, []int{7, 2} }
+func (m *PublishedFileDetails_Child) Reset()         { *m = PublishedFileDetails_Child{} }
+func (m *PublishedFileDetails_Child) String() string { return proto.CompactTextString(m) }
+func (*PublishedFileDetails_Child) ProtoMessage()    {}
+func (*PublishedFileDetails_Child) Descriptor() ([]byte, []int) {
+	return fileDescriptor_steammessages_publishedfile_steamworkssdk_64a9567990aa6744, []int{7, 2}
+}
+func (m *PublishedFileDetails_Child) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_PublishedFileDetails_Child.Unmarshal(m, b)
+}
+func (m *PublishedFileDetails_Child) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_PublishedFileDetails_Child.Marshal(b, m, deterministic)
+}
+func (dst *PublishedFileDetails_Child) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PublishedFileDetails_Child.Merge(dst, src)
+}
+func (m *PublishedFileDetails_Child) XXX_Size() int {
+	return xxx_messageInfo_PublishedFileDetails_Child.Size(m)
+}
+func (m *PublishedFileDetails_Child) XXX_DiscardUnknown() {
+	xxx_messageInfo_PublishedFileDetails_Child.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_PublishedFileDetails_Child proto.InternalMessageInfo
 
 func (m *PublishedFileDetails_Child) GetPublishedfileid() uint64 {
 	if m != nil && m.Publishedfileid != nil {
@@ -926,15 +1149,36 @@ func (m *PublishedFileDetails_Child) GetFileType() uint32 {
 }
 
 type PublishedFileDetails_KVTag struct {
-	Key              *string `protobuf:"bytes,1,opt,name=key" json:"key,omitempty"`
-	Value            *string `protobuf:"bytes,2,opt,name=value" json:"value,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Key                  *string  `protobuf:"bytes,1,opt,name=key" json:"key,omitempty"`
+	Value                *string  `protobuf:"bytes,2,opt,name=value" json:"value,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *PublishedFileDetails_KVTag) Reset()                    { *m = PublishedFileDetails_KVTag{} }
-func (m *PublishedFileDetails_KVTag) String() string            { return proto.CompactTextString(m) }
-func (*PublishedFileDetails_KVTag) ProtoMessage()               {}
-func (*PublishedFileDetails_KVTag) Descriptor() ([]byte, []int) { return fileDescriptor38, []int{7, 3} }
+func (m *PublishedFileDetails_KVTag) Reset()         { *m = PublishedFileDetails_KVTag{} }
+func (m *PublishedFileDetails_KVTag) String() string { return proto.CompactTextString(m) }
+func (*PublishedFileDetails_KVTag) ProtoMessage()    {}
+func (*PublishedFileDetails_KVTag) Descriptor() ([]byte, []int) {
+	return fileDescriptor_steammessages_publishedfile_steamworkssdk_64a9567990aa6744, []int{7, 3}
+}
+func (m *PublishedFileDetails_KVTag) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_PublishedFileDetails_KVTag.Unmarshal(m, b)
+}
+func (m *PublishedFileDetails_KVTag) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_PublishedFileDetails_KVTag.Marshal(b, m, deterministic)
+}
+func (dst *PublishedFileDetails_KVTag) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PublishedFileDetails_KVTag.Merge(dst, src)
+}
+func (m *PublishedFileDetails_KVTag) XXX_Size() int {
+	return xxx_messageInfo_PublishedFileDetails_KVTag.Size(m)
+}
+func (m *PublishedFileDetails_KVTag) XXX_DiscardUnknown() {
+	xxx_messageInfo_PublishedFileDetails_KVTag.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_PublishedFileDetails_KVTag proto.InternalMessageInfo
 
 func (m *PublishedFileDetails_KVTag) GetKey() string {
 	if m != nil && m.Key != nil {
@@ -951,18 +1195,37 @@ func (m *PublishedFileDetails_KVTag) GetValue() string {
 }
 
 type PublishedFileDetails_VoteData struct {
-	Score            *float32 `protobuf:"fixed32,1,opt,name=score" json:"score,omitempty"`
-	VotesUp          *uint32  `protobuf:"varint,2,opt,name=votes_up,json=votesUp" json:"votes_up,omitempty"`
-	VotesDown        *uint32  `protobuf:"varint,3,opt,name=votes_down,json=votesDown" json:"votes_down,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	Score                *float32 `protobuf:"fixed32,1,opt,name=score" json:"score,omitempty"`
+	VotesUp              *uint32  `protobuf:"varint,2,opt,name=votes_up,json=votesUp" json:"votes_up,omitempty"`
+	VotesDown            *uint32  `protobuf:"varint,3,opt,name=votes_down,json=votesDown" json:"votes_down,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *PublishedFileDetails_VoteData) Reset()         { *m = PublishedFileDetails_VoteData{} }
 func (m *PublishedFileDetails_VoteData) String() string { return proto.CompactTextString(m) }
 func (*PublishedFileDetails_VoteData) ProtoMessage()    {}
 func (*PublishedFileDetails_VoteData) Descriptor() ([]byte, []int) {
-	return fileDescriptor38, []int{7, 4}
+	return fileDescriptor_steammessages_publishedfile_steamworkssdk_64a9567990aa6744, []int{7, 4}
 }
+func (m *PublishedFileDetails_VoteData) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_PublishedFileDetails_VoteData.Unmarshal(m, b)
+}
+func (m *PublishedFileDetails_VoteData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_PublishedFileDetails_VoteData.Marshal(b, m, deterministic)
+}
+func (dst *PublishedFileDetails_VoteData) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PublishedFileDetails_VoteData.Merge(dst, src)
+}
+func (m *PublishedFileDetails_VoteData) XXX_Size() int {
+	return xxx_messageInfo_PublishedFileDetails_VoteData.Size(m)
+}
+func (m *PublishedFileDetails_VoteData) XXX_DiscardUnknown() {
+	xxx_messageInfo_PublishedFileDetails_VoteData.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_PublishedFileDetails_VoteData proto.InternalMessageInfo
 
 func (m *PublishedFileDetails_VoteData) GetScore() float32 {
 	if m != nil && m.Score != nil {
@@ -987,15 +1250,34 @@ func (m *PublishedFileDetails_VoteData) GetVotesDown() uint32 {
 
 type CPublishedFile_GetDetails_Response struct {
 	Publishedfiledetails []*PublishedFileDetails `protobuf:"bytes,1,rep,name=publishedfiledetails" json:"publishedfiledetails,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                `json:"-"`
 	XXX_unrecognized     []byte                  `json:"-"`
+	XXX_sizecache        int32                   `json:"-"`
 }
 
 func (m *CPublishedFile_GetDetails_Response) Reset()         { *m = CPublishedFile_GetDetails_Response{} }
 func (m *CPublishedFile_GetDetails_Response) String() string { return proto.CompactTextString(m) }
 func (*CPublishedFile_GetDetails_Response) ProtoMessage()    {}
 func (*CPublishedFile_GetDetails_Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor38, []int{8}
+	return fileDescriptor_steammessages_publishedfile_steamworkssdk_64a9567990aa6744, []int{8}
 }
+func (m *CPublishedFile_GetDetails_Response) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CPublishedFile_GetDetails_Response.Unmarshal(m, b)
+}
+func (m *CPublishedFile_GetDetails_Response) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CPublishedFile_GetDetails_Response.Marshal(b, m, deterministic)
+}
+func (dst *CPublishedFile_GetDetails_Response) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CPublishedFile_GetDetails_Response.Merge(dst, src)
+}
+func (m *CPublishedFile_GetDetails_Response) XXX_Size() int {
+	return xxx_messageInfo_CPublishedFile_GetDetails_Response.Size(m)
+}
+func (m *CPublishedFile_GetDetails_Response) XXX_DiscardUnknown() {
+	xxx_messageInfo_CPublishedFile_GetDetails_Response.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CPublishedFile_GetDetails_Response proto.InternalMessageInfo
 
 func (m *CPublishedFile_GetDetails_Response) GetPublishedfiledetails() []*PublishedFileDetails {
 	if m != nil {
@@ -1005,24 +1287,43 @@ func (m *CPublishedFile_GetDetails_Response) GetPublishedfiledetails() []*Publis
 }
 
 type CPublishedFile_GetUserFiles_Request struct {
-	Appid            *uint32  `protobuf:"varint,1,opt,name=appid" json:"appid,omitempty"`
-	Page             *uint32  `protobuf:"varint,3,opt,name=page,def=1" json:"page,omitempty"`
-	Numperpage       *uint32  `protobuf:"varint,4,opt,name=numperpage,def=1" json:"numperpage,omitempty"`
-	Sortmethod       *string  `protobuf:"bytes,6,opt,name=sortmethod,def=lastupdated" json:"sortmethod,omitempty"`
-	Totalonly        *bool    `protobuf:"varint,7,opt,name=totalonly" json:"totalonly,omitempty"`
-	Privacy          *uint32  `protobuf:"varint,9,opt,name=privacy" json:"privacy,omitempty"`
-	IdsOnly          *bool    `protobuf:"varint,10,opt,name=ids_only,json=idsOnly" json:"ids_only,omitempty"`
-	Requiredtags     []string `protobuf:"bytes,11,rep,name=requiredtags" json:"requiredtags,omitempty"`
-	Excludedtags     []string `protobuf:"bytes,12,rep,name=excludedtags" json:"excludedtags,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	Appid                *uint32  `protobuf:"varint,1,opt,name=appid" json:"appid,omitempty"`
+	Page                 *uint32  `protobuf:"varint,3,opt,name=page,def=1" json:"page,omitempty"`
+	Numperpage           *uint32  `protobuf:"varint,4,opt,name=numperpage,def=1" json:"numperpage,omitempty"`
+	Sortmethod           *string  `protobuf:"bytes,6,opt,name=sortmethod,def=lastupdated" json:"sortmethod,omitempty"`
+	Totalonly            *bool    `protobuf:"varint,7,opt,name=totalonly" json:"totalonly,omitempty"`
+	Privacy              *uint32  `protobuf:"varint,9,opt,name=privacy" json:"privacy,omitempty"`
+	IdsOnly              *bool    `protobuf:"varint,10,opt,name=ids_only,json=idsOnly" json:"ids_only,omitempty"`
+	Requiredtags         []string `protobuf:"bytes,11,rep,name=requiredtags" json:"requiredtags,omitempty"`
+	Excludedtags         []string `protobuf:"bytes,12,rep,name=excludedtags" json:"excludedtags,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *CPublishedFile_GetUserFiles_Request) Reset()         { *m = CPublishedFile_GetUserFiles_Request{} }
 func (m *CPublishedFile_GetUserFiles_Request) String() string { return proto.CompactTextString(m) }
 func (*CPublishedFile_GetUserFiles_Request) ProtoMessage()    {}
 func (*CPublishedFile_GetUserFiles_Request) Descriptor() ([]byte, []int) {
-	return fileDescriptor38, []int{9}
+	return fileDescriptor_steammessages_publishedfile_steamworkssdk_64a9567990aa6744, []int{9}
 }
+func (m *CPublishedFile_GetUserFiles_Request) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CPublishedFile_GetUserFiles_Request.Unmarshal(m, b)
+}
+func (m *CPublishedFile_GetUserFiles_Request) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CPublishedFile_GetUserFiles_Request.Marshal(b, m, deterministic)
+}
+func (dst *CPublishedFile_GetUserFiles_Request) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CPublishedFile_GetUserFiles_Request.Merge(dst, src)
+}
+func (m *CPublishedFile_GetUserFiles_Request) XXX_Size() int {
+	return xxx_messageInfo_CPublishedFile_GetUserFiles_Request.Size(m)
+}
+func (m *CPublishedFile_GetUserFiles_Request) XXX_DiscardUnknown() {
+	xxx_messageInfo_CPublishedFile_GetUserFiles_Request.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CPublishedFile_GetUserFiles_Request proto.InternalMessageInfo
 
 const Default_CPublishedFile_GetUserFiles_Request_Page uint32 = 1
 const Default_CPublishedFile_GetUserFiles_Request_Numperpage uint32 = 1
@@ -1096,15 +1397,34 @@ type CPublishedFile_GetUserFiles_Response struct {
 	Startindex           *uint32                                     `protobuf:"varint,2,opt,name=startindex" json:"startindex,omitempty"`
 	Publishedfiledetails []*PublishedFileDetails                     `protobuf:"bytes,3,rep,name=publishedfiledetails" json:"publishedfiledetails,omitempty"`
 	Apps                 []*CPublishedFile_GetUserFiles_Response_App `protobuf:"bytes,4,rep,name=apps" json:"apps,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                    `json:"-"`
 	XXX_unrecognized     []byte                                      `json:"-"`
+	XXX_sizecache        int32                                       `json:"-"`
 }
 
 func (m *CPublishedFile_GetUserFiles_Response) Reset()         { *m = CPublishedFile_GetUserFiles_Response{} }
 func (m *CPublishedFile_GetUserFiles_Response) String() string { return proto.CompactTextString(m) }
 func (*CPublishedFile_GetUserFiles_Response) ProtoMessage()    {}
 func (*CPublishedFile_GetUserFiles_Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor38, []int{10}
+	return fileDescriptor_steammessages_publishedfile_steamworkssdk_64a9567990aa6744, []int{10}
 }
+func (m *CPublishedFile_GetUserFiles_Response) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CPublishedFile_GetUserFiles_Response.Unmarshal(m, b)
+}
+func (m *CPublishedFile_GetUserFiles_Response) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CPublishedFile_GetUserFiles_Response.Marshal(b, m, deterministic)
+}
+func (dst *CPublishedFile_GetUserFiles_Response) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CPublishedFile_GetUserFiles_Response.Merge(dst, src)
+}
+func (m *CPublishedFile_GetUserFiles_Response) XXX_Size() int {
+	return xxx_messageInfo_CPublishedFile_GetUserFiles_Response.Size(m)
+}
+func (m *CPublishedFile_GetUserFiles_Response) XXX_DiscardUnknown() {
+	xxx_messageInfo_CPublishedFile_GetUserFiles_Response.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CPublishedFile_GetUserFiles_Response proto.InternalMessageInfo
 
 func (m *CPublishedFile_GetUserFiles_Response) GetTotal() uint32 {
 	if m != nil && m.Total != nil {
@@ -1135,11 +1455,13 @@ func (m *CPublishedFile_GetUserFiles_Response) GetApps() []*CPublishedFile_GetUs
 }
 
 type CPublishedFile_GetUserFiles_Response_App struct {
-	Appid            *uint32 `protobuf:"varint,1,opt,name=appid" json:"appid,omitempty"`
-	Name             *string `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
-	Shortcutid       *uint32 `protobuf:"varint,3,opt,name=shortcutid" json:"shortcutid,omitempty"`
-	Private          *bool   `protobuf:"varint,4,opt,name=private" json:"private,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Appid                *uint32  `protobuf:"varint,1,opt,name=appid" json:"appid,omitempty"`
+	Name                 *string  `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
+	Shortcutid           *uint32  `protobuf:"varint,3,opt,name=shortcutid" json:"shortcutid,omitempty"`
+	Private              *bool    `protobuf:"varint,4,opt,name=private" json:"private,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *CPublishedFile_GetUserFiles_Response_App) Reset() {
@@ -1148,8 +1470,25 @@ func (m *CPublishedFile_GetUserFiles_Response_App) Reset() {
 func (m *CPublishedFile_GetUserFiles_Response_App) String() string { return proto.CompactTextString(m) }
 func (*CPublishedFile_GetUserFiles_Response_App) ProtoMessage()    {}
 func (*CPublishedFile_GetUserFiles_Response_App) Descriptor() ([]byte, []int) {
-	return fileDescriptor38, []int{10, 0}
+	return fileDescriptor_steammessages_publishedfile_steamworkssdk_64a9567990aa6744, []int{10, 0}
 }
+func (m *CPublishedFile_GetUserFiles_Response_App) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CPublishedFile_GetUserFiles_Response_App.Unmarshal(m, b)
+}
+func (m *CPublishedFile_GetUserFiles_Response_App) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CPublishedFile_GetUserFiles_Response_App.Marshal(b, m, deterministic)
+}
+func (dst *CPublishedFile_GetUserFiles_Response_App) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CPublishedFile_GetUserFiles_Response_App.Merge(dst, src)
+}
+func (m *CPublishedFile_GetUserFiles_Response_App) XXX_Size() int {
+	return xxx_messageInfo_CPublishedFile_GetUserFiles_Response_App.Size(m)
+}
+func (m *CPublishedFile_GetUserFiles_Response_App) XXX_DiscardUnknown() {
+	xxx_messageInfo_CPublishedFile_GetUserFiles_Response_App.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CPublishedFile_GetUserFiles_Response_App proto.InternalMessageInfo
 
 func (m *CPublishedFile_GetUserFiles_Response_App) GetAppid() uint32 {
 	if m != nil && m.Appid != nil {
@@ -1180,21 +1519,42 @@ func (m *CPublishedFile_GetUserFiles_Response_App) GetPrivate() bool {
 }
 
 type CPublishedFile_Update_Request struct {
-	Appid            *uint32  `protobuf:"varint,1,opt,name=appid" json:"appid,omitempty"`
-	Publishedfileid  *uint64  `protobuf:"fixed64,2,opt,name=publishedfileid" json:"publishedfileid,omitempty"`
-	Title            *string  `protobuf:"bytes,3,opt,name=title" json:"title,omitempty"`
-	FileDescription  *string  `protobuf:"bytes,4,opt,name=file_description,json=fileDescription" json:"file_description,omitempty"`
-	Visibility       *uint32  `protobuf:"varint,5,opt,name=visibility" json:"visibility,omitempty"`
-	Tags             []string `protobuf:"bytes,6,rep,name=tags" json:"tags,omitempty"`
-	Filename         *string  `protobuf:"bytes,7,opt,name=filename" json:"filename,omitempty"`
-	PreviewFilename  *string  `protobuf:"bytes,8,opt,name=preview_filename,json=previewFilename" json:"preview_filename,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	Appid                *uint32  `protobuf:"varint,1,opt,name=appid" json:"appid,omitempty"`
+	Publishedfileid      *uint64  `protobuf:"fixed64,2,opt,name=publishedfileid" json:"publishedfileid,omitempty"`
+	Title                *string  `protobuf:"bytes,3,opt,name=title" json:"title,omitempty"`
+	FileDescription      *string  `protobuf:"bytes,4,opt,name=file_description,json=fileDescription" json:"file_description,omitempty"`
+	Visibility           *uint32  `protobuf:"varint,5,opt,name=visibility" json:"visibility,omitempty"`
+	Tags                 []string `protobuf:"bytes,6,rep,name=tags" json:"tags,omitempty"`
+	Filename             *string  `protobuf:"bytes,7,opt,name=filename" json:"filename,omitempty"`
+	PreviewFilename      *string  `protobuf:"bytes,8,opt,name=preview_filename,json=previewFilename" json:"preview_filename,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CPublishedFile_Update_Request) Reset()                    { *m = CPublishedFile_Update_Request{} }
-func (m *CPublishedFile_Update_Request) String() string            { return proto.CompactTextString(m) }
-func (*CPublishedFile_Update_Request) ProtoMessage()               {}
-func (*CPublishedFile_Update_Request) Descriptor() ([]byte, []int) { return fileDescriptor38, []int{11} }
+func (m *CPublishedFile_Update_Request) Reset()         { *m = CPublishedFile_Update_Request{} }
+func (m *CPublishedFile_Update_Request) String() string { return proto.CompactTextString(m) }
+func (*CPublishedFile_Update_Request) ProtoMessage()    {}
+func (*CPublishedFile_Update_Request) Descriptor() ([]byte, []int) {
+	return fileDescriptor_steammessages_publishedfile_steamworkssdk_64a9567990aa6744, []int{11}
+}
+func (m *CPublishedFile_Update_Request) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CPublishedFile_Update_Request.Unmarshal(m, b)
+}
+func (m *CPublishedFile_Update_Request) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CPublishedFile_Update_Request.Marshal(b, m, deterministic)
+}
+func (dst *CPublishedFile_Update_Request) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CPublishedFile_Update_Request.Merge(dst, src)
+}
+func (m *CPublishedFile_Update_Request) XXX_Size() int {
+	return xxx_messageInfo_CPublishedFile_Update_Request.Size(m)
+}
+func (m *CPublishedFile_Update_Request) XXX_DiscardUnknown() {
+	xxx_messageInfo_CPublishedFile_Update_Request.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CPublishedFile_Update_Request proto.InternalMessageInfo
 
 func (m *CPublishedFile_Update_Request) GetAppid() uint32 {
 	if m != nil && m.Appid != nil {
@@ -1253,24 +1613,45 @@ func (m *CPublishedFile_Update_Request) GetPreviewFilename() string {
 }
 
 type CPublishedFile_Update_Response struct {
-	XXX_unrecognized []byte `json:"-"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *CPublishedFile_Update_Response) Reset()         { *m = CPublishedFile_Update_Response{} }
 func (m *CPublishedFile_Update_Response) String() string { return proto.CompactTextString(m) }
 func (*CPublishedFile_Update_Response) ProtoMessage()    {}
 func (*CPublishedFile_Update_Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor38, []int{12}
+	return fileDescriptor_steammessages_publishedfile_steamworkssdk_64a9567990aa6744, []int{12}
+}
+func (m *CPublishedFile_Update_Response) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CPublishedFile_Update_Response.Unmarshal(m, b)
+}
+func (m *CPublishedFile_Update_Response) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CPublishedFile_Update_Response.Marshal(b, m, deterministic)
+}
+func (dst *CPublishedFile_Update_Response) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CPublishedFile_Update_Response.Merge(dst, src)
+}
+func (m *CPublishedFile_Update_Response) XXX_Size() int {
+	return xxx_messageInfo_CPublishedFile_Update_Response.Size(m)
+}
+func (m *CPublishedFile_Update_Response) XXX_DiscardUnknown() {
+	xxx_messageInfo_CPublishedFile_Update_Response.DiscardUnknown(m)
 }
 
+var xxx_messageInfo_CPublishedFile_Update_Response proto.InternalMessageInfo
+
 type CPublishedFile_RefreshVotingQueue_Request struct {
-	Appid            *uint32  `protobuf:"varint,1,opt,name=appid" json:"appid,omitempty"`
-	MatchingFileType *uint32  `protobuf:"varint,2,opt,name=matching_file_type,json=matchingFileType" json:"matching_file_type,omitempty"`
-	Tags             []string `protobuf:"bytes,3,rep,name=tags" json:"tags,omitempty"`
-	MatchAllTags     *bool    `protobuf:"varint,4,opt,name=match_all_tags,json=matchAllTags,def=1" json:"match_all_tags,omitempty"`
-	ExcludedTags     []string `protobuf:"bytes,5,rep,name=excluded_tags,json=excludedTags" json:"excluded_tags,omitempty"`
-	DesiredQueueSize *uint32  `protobuf:"varint,6,opt,name=desired_queue_size,json=desiredQueueSize" json:"desired_queue_size,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	Appid                *uint32  `protobuf:"varint,1,opt,name=appid" json:"appid,omitempty"`
+	MatchingFileType     *uint32  `protobuf:"varint,2,opt,name=matching_file_type,json=matchingFileType" json:"matching_file_type,omitempty"`
+	Tags                 []string `protobuf:"bytes,3,rep,name=tags" json:"tags,omitempty"`
+	MatchAllTags         *bool    `protobuf:"varint,4,opt,name=match_all_tags,json=matchAllTags,def=1" json:"match_all_tags,omitempty"`
+	ExcludedTags         []string `protobuf:"bytes,5,rep,name=excluded_tags,json=excludedTags" json:"excluded_tags,omitempty"`
+	DesiredQueueSize     *uint32  `protobuf:"varint,6,opt,name=desired_queue_size,json=desiredQueueSize" json:"desired_queue_size,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *CPublishedFile_RefreshVotingQueue_Request) Reset() {
@@ -1279,8 +1660,25 @@ func (m *CPublishedFile_RefreshVotingQueue_Request) Reset() {
 func (m *CPublishedFile_RefreshVotingQueue_Request) String() string { return proto.CompactTextString(m) }
 func (*CPublishedFile_RefreshVotingQueue_Request) ProtoMessage()    {}
 func (*CPublishedFile_RefreshVotingQueue_Request) Descriptor() ([]byte, []int) {
-	return fileDescriptor38, []int{13}
+	return fileDescriptor_steammessages_publishedfile_steamworkssdk_64a9567990aa6744, []int{13}
 }
+func (m *CPublishedFile_RefreshVotingQueue_Request) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CPublishedFile_RefreshVotingQueue_Request.Unmarshal(m, b)
+}
+func (m *CPublishedFile_RefreshVotingQueue_Request) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CPublishedFile_RefreshVotingQueue_Request.Marshal(b, m, deterministic)
+}
+func (dst *CPublishedFile_RefreshVotingQueue_Request) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CPublishedFile_RefreshVotingQueue_Request.Merge(dst, src)
+}
+func (m *CPublishedFile_RefreshVotingQueue_Request) XXX_Size() int {
+	return xxx_messageInfo_CPublishedFile_RefreshVotingQueue_Request.Size(m)
+}
+func (m *CPublishedFile_RefreshVotingQueue_Request) XXX_DiscardUnknown() {
+	xxx_messageInfo_CPublishedFile_RefreshVotingQueue_Request.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CPublishedFile_RefreshVotingQueue_Request proto.InternalMessageInfo
 
 const Default_CPublishedFile_RefreshVotingQueue_Request_MatchAllTags bool = true
 
@@ -1327,7 +1725,9 @@ func (m *CPublishedFile_RefreshVotingQueue_Request) GetDesiredQueueSize() uint32
 }
 
 type CPublishedFile_RefreshVotingQueue_Response struct {
-	XXX_unrecognized []byte `json:"-"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *CPublishedFile_RefreshVotingQueue_Response) Reset() {
@@ -1338,8 +1738,25 @@ func (m *CPublishedFile_RefreshVotingQueue_Response) String() string {
 }
 func (*CPublishedFile_RefreshVotingQueue_Response) ProtoMessage() {}
 func (*CPublishedFile_RefreshVotingQueue_Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor38, []int{14}
+	return fileDescriptor_steammessages_publishedfile_steamworkssdk_64a9567990aa6744, []int{14}
 }
+func (m *CPublishedFile_RefreshVotingQueue_Response) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CPublishedFile_RefreshVotingQueue_Response.Unmarshal(m, b)
+}
+func (m *CPublishedFile_RefreshVotingQueue_Response) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CPublishedFile_RefreshVotingQueue_Response.Marshal(b, m, deterministic)
+}
+func (dst *CPublishedFile_RefreshVotingQueue_Response) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CPublishedFile_RefreshVotingQueue_Response.Merge(dst, src)
+}
+func (m *CPublishedFile_RefreshVotingQueue_Response) XXX_Size() int {
+	return xxx_messageInfo_CPublishedFile_RefreshVotingQueue_Response.Size(m)
+}
+func (m *CPublishedFile_RefreshVotingQueue_Response) XXX_DiscardUnknown() {
+	xxx_messageInfo_CPublishedFile_RefreshVotingQueue_Response.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CPublishedFile_RefreshVotingQueue_Response proto.InternalMessageInfo
 
 func init() {
 	proto.RegisterType((*CPublishedFile_Subscribe_Request)(nil), "dota.CPublishedFile_Subscribe_Request")
@@ -1365,9 +1782,11 @@ func init() {
 	proto.RegisterType((*CPublishedFile_RefreshVotingQueue_Response)(nil), "dota.CPublishedFile_RefreshVotingQueue_Response")
 }
 
-func init() { proto.RegisterFile("steammessages_publishedfile.steamworkssdk.proto", fileDescriptor38) }
+func init() {
+	proto.RegisterFile("steammessages_publishedfile.steamworkssdk.proto", fileDescriptor_steammessages_publishedfile_steamworkssdk_64a9567990aa6744)
+}
 
-var fileDescriptor38 = []byte{
+var fileDescriptor_steammessages_publishedfile_steamworkssdk_64a9567990aa6744 = []byte{
 	// 3471 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xcc, 0x3a, 0x4b, 0x73, 0xdc, 0x46,
 	0x7a, 0x35, 0xe6, 0x6b, 0xd8, 0x24, 0x25, 0xaa, 0x4d, 0x2b, 0xed, 0x59, 0xdb, 0x6a, 0x8f, 0x5e,

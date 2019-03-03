@@ -12,6 +12,12 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the proto package it is being compiled against.
+// A compilation error at this line likely means your copy of the
+// proto package needs to be updated.
+const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+
 type CLC_Messages int32
 
 const (
@@ -83,7 +89,9 @@ func (x *CLC_Messages) UnmarshalJSON(data []byte) error {
 	*x = CLC_Messages(value)
 	return nil
 }
-func (CLC_Messages) EnumDescriptor() ([]byte, []int) { return fileDescriptor31, []int{0} }
+func (CLC_Messages) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{0}
+}
 
 type SVC_Messages int32
 
@@ -186,7 +194,9 @@ func (x *SVC_Messages) UnmarshalJSON(data []byte) error {
 	*x = SVC_Messages(value)
 	return nil
 }
-func (SVC_Messages) EnumDescriptor() ([]byte, []int) { return fileDescriptor31, []int{1} }
+func (SVC_Messages) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{1}
+}
 
 type VoiceDataFormatT int32
 
@@ -220,7 +230,9 @@ func (x *VoiceDataFormatT) UnmarshalJSON(data []byte) error {
 	*x = VoiceDataFormatT(value)
 	return nil
 }
-func (VoiceDataFormatT) EnumDescriptor() ([]byte, []int) { return fileDescriptor31, []int{2} }
+func (VoiceDataFormatT) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{2}
+}
 
 type RequestPauseT int32
 
@@ -257,7 +269,9 @@ func (x *RequestPauseT) UnmarshalJSON(data []byte) error {
 	*x = RequestPauseT(value)
 	return nil
 }
-func (RequestPauseT) EnumDescriptor() ([]byte, []int) { return fileDescriptor31, []int{3} }
+func (RequestPauseT) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{3}
+}
 
 type PrefetchType int32
 
@@ -288,7 +302,9 @@ func (x *PrefetchType) UnmarshalJSON(data []byte) error {
 	*x = PrefetchType(value)
 	return nil
 }
-func (PrefetchType) EnumDescriptor() ([]byte, []int) { return fileDescriptor31, []int{4} }
+func (PrefetchType) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{4}
+}
 
 type ESplitScreenMessageType int32
 
@@ -322,7 +338,9 @@ func (x *ESplitScreenMessageType) UnmarshalJSON(data []byte) error {
 	*x = ESplitScreenMessageType(value)
 	return nil
 }
-func (ESplitScreenMessageType) EnumDescriptor() ([]byte, []int) { return fileDescriptor31, []int{5} }
+func (ESplitScreenMessageType) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{5}
+}
 
 type EQueryCvarValueStatus int32
 
@@ -362,7 +380,9 @@ func (x *EQueryCvarValueStatus) UnmarshalJSON(data []byte) error {
 	*x = EQueryCvarValueStatus(value)
 	return nil
 }
-func (EQueryCvarValueStatus) EnumDescriptor() ([]byte, []int) { return fileDescriptor31, []int{6} }
+func (EQueryCvarValueStatus) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{6}
+}
 
 type DIALOG_TYPE int32
 
@@ -405,7 +425,9 @@ func (x *DIALOG_TYPE) UnmarshalJSON(data []byte) error {
 	*x = DIALOG_TYPE(value)
 	return nil
 }
-func (DIALOG_TYPE) EnumDescriptor() ([]byte, []int) { return fileDescriptor31, []int{7} }
+func (DIALOG_TYPE) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{7}
+}
 
 type SVC_Messages_LowFrequency int32
 
@@ -436,7 +458,9 @@ func (x *SVC_Messages_LowFrequency) UnmarshalJSON(data []byte) error {
 	*x = SVC_Messages_LowFrequency(value)
 	return nil
 }
-func (SVC_Messages_LowFrequency) EnumDescriptor() ([]byte, []int) { return fileDescriptor31, []int{8} }
+func (SVC_Messages_LowFrequency) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{8}
+}
 
 type Bidirectional_Messages int32
 
@@ -473,7 +497,9 @@ func (x *Bidirectional_Messages) UnmarshalJSON(data []byte) error {
 	*x = Bidirectional_Messages(value)
 	return nil
 }
-func (Bidirectional_Messages) EnumDescriptor() ([]byte, []int) { return fileDescriptor31, []int{9} }
+func (Bidirectional_Messages) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{9}
+}
 
 type Bidirectional_Messages_LowFrequency int32
 
@@ -508,7 +534,7 @@ func (x *Bidirectional_Messages_LowFrequency) UnmarshalJSON(data []byte) error {
 	return nil
 }
 func (Bidirectional_Messages_LowFrequency) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor31, []int{10}
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{10}
 }
 
 type CBidirMsg_RelayInfo_OperationT int32
@@ -553,23 +579,44 @@ func (x *CBidirMsg_RelayInfo_OperationT) UnmarshalJSON(data []byte) error {
 	return nil
 }
 func (CBidirMsg_RelayInfo_OperationT) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor31, []int{53, 0}
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{53, 0}
 }
 
 type CCLCMsg_ClientInfo struct {
-	SendTableCrc     *uint32 `protobuf:"fixed32,1,opt,name=send_table_crc,json=sendTableCrc" json:"send_table_crc,omitempty"`
-	ServerCount      *uint32 `protobuf:"varint,2,opt,name=server_count,json=serverCount" json:"server_count,omitempty"`
-	IsHltv           *bool   `protobuf:"varint,3,opt,name=is_hltv,json=isHltv" json:"is_hltv,omitempty"`
-	IsReplay         *bool   `protobuf:"varint,4,opt,name=is_replay,json=isReplay" json:"is_replay,omitempty"`
-	FriendsId        *uint32 `protobuf:"varint,5,opt,name=friends_id,json=friendsId" json:"friends_id,omitempty"`
-	FriendsName      *string `protobuf:"bytes,6,opt,name=friends_name,json=friendsName" json:"friends_name,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	SendTableCrc         *uint32  `protobuf:"fixed32,1,opt,name=send_table_crc,json=sendTableCrc" json:"send_table_crc,omitempty"`
+	ServerCount          *uint32  `protobuf:"varint,2,opt,name=server_count,json=serverCount" json:"server_count,omitempty"`
+	IsHltv               *bool    `protobuf:"varint,3,opt,name=is_hltv,json=isHltv" json:"is_hltv,omitempty"`
+	IsReplay             *bool    `protobuf:"varint,4,opt,name=is_replay,json=isReplay" json:"is_replay,omitempty"`
+	FriendsId            *uint32  `protobuf:"varint,5,opt,name=friends_id,json=friendsId" json:"friends_id,omitempty"`
+	FriendsName          *string  `protobuf:"bytes,6,opt,name=friends_name,json=friendsName" json:"friends_name,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CCLCMsg_ClientInfo) Reset()                    { *m = CCLCMsg_ClientInfo{} }
-func (m *CCLCMsg_ClientInfo) String() string            { return proto.CompactTextString(m) }
-func (*CCLCMsg_ClientInfo) ProtoMessage()               {}
-func (*CCLCMsg_ClientInfo) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{0} }
+func (m *CCLCMsg_ClientInfo) Reset()         { *m = CCLCMsg_ClientInfo{} }
+func (m *CCLCMsg_ClientInfo) String() string { return proto.CompactTextString(m) }
+func (*CCLCMsg_ClientInfo) ProtoMessage()    {}
+func (*CCLCMsg_ClientInfo) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{0}
+}
+func (m *CCLCMsg_ClientInfo) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CCLCMsg_ClientInfo.Unmarshal(m, b)
+}
+func (m *CCLCMsg_ClientInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CCLCMsg_ClientInfo.Marshal(b, m, deterministic)
+}
+func (dst *CCLCMsg_ClientInfo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCLCMsg_ClientInfo.Merge(dst, src)
+}
+func (m *CCLCMsg_ClientInfo) XXX_Size() int {
+	return xxx_messageInfo_CCLCMsg_ClientInfo.Size(m)
+}
+func (m *CCLCMsg_ClientInfo) XXX_DiscardUnknown() {
+	xxx_messageInfo_CCLCMsg_ClientInfo.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CCLCMsg_ClientInfo proto.InternalMessageInfo
 
 func (m *CCLCMsg_ClientInfo) GetSendTableCrc() uint32 {
 	if m != nil && m.SendTableCrc != nil {
@@ -614,16 +661,37 @@ func (m *CCLCMsg_ClientInfo) GetFriendsName() string {
 }
 
 type CCLCMsg_Move struct {
-	Data             []byte  `protobuf:"bytes,3,opt,name=data" json:"data,omitempty"`
-	CommandNumber    *uint32 `protobuf:"varint,4,opt,name=command_number,json=commandNumber" json:"command_number,omitempty"`
-	NumCommands      *uint32 `protobuf:"varint,5,opt,name=num_commands,json=numCommands" json:"num_commands,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Data                 []byte   `protobuf:"bytes,3,opt,name=data" json:"data,omitempty"`
+	CommandNumber        *uint32  `protobuf:"varint,4,opt,name=command_number,json=commandNumber" json:"command_number,omitempty"`
+	NumCommands          *uint32  `protobuf:"varint,5,opt,name=num_commands,json=numCommands" json:"num_commands,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CCLCMsg_Move) Reset()                    { *m = CCLCMsg_Move{} }
-func (m *CCLCMsg_Move) String() string            { return proto.CompactTextString(m) }
-func (*CCLCMsg_Move) ProtoMessage()               {}
-func (*CCLCMsg_Move) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{1} }
+func (m *CCLCMsg_Move) Reset()         { *m = CCLCMsg_Move{} }
+func (m *CCLCMsg_Move) String() string { return proto.CompactTextString(m) }
+func (*CCLCMsg_Move) ProtoMessage()    {}
+func (*CCLCMsg_Move) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{1}
+}
+func (m *CCLCMsg_Move) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CCLCMsg_Move.Unmarshal(m, b)
+}
+func (m *CCLCMsg_Move) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CCLCMsg_Move.Marshal(b, m, deterministic)
+}
+func (dst *CCLCMsg_Move) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCLCMsg_Move.Merge(dst, src)
+}
+func (m *CCLCMsg_Move) XXX_Size() int {
+	return xxx_messageInfo_CCLCMsg_Move.Size(m)
+}
+func (m *CCLCMsg_Move) XXX_DiscardUnknown() {
+	xxx_messageInfo_CCLCMsg_Move.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CCLCMsg_Move proto.InternalMessageInfo
 
 func (m *CCLCMsg_Move) GetData() []byte {
 	if m != nil {
@@ -653,13 +721,34 @@ type CMsgVoiceAudio struct {
 	SectionNumber            *uint32           `protobuf:"varint,4,opt,name=section_number,json=sectionNumber" json:"section_number,omitempty"`
 	SampleRate               *uint32           `protobuf:"varint,5,opt,name=sample_rate,json=sampleRate" json:"sample_rate,omitempty"`
 	UncompressedSampleOffset *uint32           `protobuf:"varint,6,opt,name=uncompressed_sample_offset,json=uncompressedSampleOffset" json:"uncompressed_sample_offset,omitempty"`
+	XXX_NoUnkeyedLiteral     struct{}          `json:"-"`
 	XXX_unrecognized         []byte            `json:"-"`
+	XXX_sizecache            int32             `json:"-"`
 }
 
-func (m *CMsgVoiceAudio) Reset()                    { *m = CMsgVoiceAudio{} }
-func (m *CMsgVoiceAudio) String() string            { return proto.CompactTextString(m) }
-func (*CMsgVoiceAudio) ProtoMessage()               {}
-func (*CMsgVoiceAudio) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{2} }
+func (m *CMsgVoiceAudio) Reset()         { *m = CMsgVoiceAudio{} }
+func (m *CMsgVoiceAudio) String() string { return proto.CompactTextString(m) }
+func (*CMsgVoiceAudio) ProtoMessage()    {}
+func (*CMsgVoiceAudio) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{2}
+}
+func (m *CMsgVoiceAudio) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgVoiceAudio.Unmarshal(m, b)
+}
+func (m *CMsgVoiceAudio) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgVoiceAudio.Marshal(b, m, deterministic)
+}
+func (dst *CMsgVoiceAudio) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgVoiceAudio.Merge(dst, src)
+}
+func (m *CMsgVoiceAudio) XXX_Size() int {
+	return xxx_messageInfo_CMsgVoiceAudio.Size(m)
+}
+func (m *CMsgVoiceAudio) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgVoiceAudio.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgVoiceAudio proto.InternalMessageInfo
 
 const Default_CMsgVoiceAudio_Format VoiceDataFormatT = VoiceDataFormatT_VOICEDATA_FORMAT_STEAM
 
@@ -706,16 +795,37 @@ func (m *CMsgVoiceAudio) GetUncompressedSampleOffset() uint32 {
 }
 
 type CCLCMsg_VoiceData struct {
-	Audio            *CMsgVoiceAudio `protobuf:"bytes,1,opt,name=audio" json:"audio,omitempty"`
-	Xuid             *uint64         `protobuf:"fixed64,2,opt,name=xuid" json:"xuid,omitempty"`
-	Tick             *uint32         `protobuf:"varint,3,opt,name=tick" json:"tick,omitempty"`
-	XXX_unrecognized []byte          `json:"-"`
+	Audio                *CMsgVoiceAudio `protobuf:"bytes,1,opt,name=audio" json:"audio,omitempty"`
+	Xuid                 *uint64         `protobuf:"fixed64,2,opt,name=xuid" json:"xuid,omitempty"`
+	Tick                 *uint32         `protobuf:"varint,3,opt,name=tick" json:"tick,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
+	XXX_unrecognized     []byte          `json:"-"`
+	XXX_sizecache        int32           `json:"-"`
 }
 
-func (m *CCLCMsg_VoiceData) Reset()                    { *m = CCLCMsg_VoiceData{} }
-func (m *CCLCMsg_VoiceData) String() string            { return proto.CompactTextString(m) }
-func (*CCLCMsg_VoiceData) ProtoMessage()               {}
-func (*CCLCMsg_VoiceData) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{3} }
+func (m *CCLCMsg_VoiceData) Reset()         { *m = CCLCMsg_VoiceData{} }
+func (m *CCLCMsg_VoiceData) String() string { return proto.CompactTextString(m) }
+func (*CCLCMsg_VoiceData) ProtoMessage()    {}
+func (*CCLCMsg_VoiceData) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{3}
+}
+func (m *CCLCMsg_VoiceData) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CCLCMsg_VoiceData.Unmarshal(m, b)
+}
+func (m *CCLCMsg_VoiceData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CCLCMsg_VoiceData.Marshal(b, m, deterministic)
+}
+func (dst *CCLCMsg_VoiceData) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCLCMsg_VoiceData.Merge(dst, src)
+}
+func (m *CCLCMsg_VoiceData) XXX_Size() int {
+	return xxx_messageInfo_CCLCMsg_VoiceData.Size(m)
+}
+func (m *CCLCMsg_VoiceData) XXX_DiscardUnknown() {
+	xxx_messageInfo_CCLCMsg_VoiceData.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CCLCMsg_VoiceData proto.InternalMessageInfo
 
 func (m *CCLCMsg_VoiceData) GetAudio() *CMsgVoiceAudio {
 	if m != nil {
@@ -739,15 +849,36 @@ func (m *CCLCMsg_VoiceData) GetTick() uint32 {
 }
 
 type CCLCMsg_BaselineAck struct {
-	BaselineTick     *int32 `protobuf:"varint,1,opt,name=baseline_tick,json=baselineTick" json:"baseline_tick,omitempty"`
-	BaselineNr       *int32 `protobuf:"varint,2,opt,name=baseline_nr,json=baselineNr" json:"baseline_nr,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	BaselineTick         *int32   `protobuf:"varint,1,opt,name=baseline_tick,json=baselineTick" json:"baseline_tick,omitempty"`
+	BaselineNr           *int32   `protobuf:"varint,2,opt,name=baseline_nr,json=baselineNr" json:"baseline_nr,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CCLCMsg_BaselineAck) Reset()                    { *m = CCLCMsg_BaselineAck{} }
-func (m *CCLCMsg_BaselineAck) String() string            { return proto.CompactTextString(m) }
-func (*CCLCMsg_BaselineAck) ProtoMessage()               {}
-func (*CCLCMsg_BaselineAck) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{4} }
+func (m *CCLCMsg_BaselineAck) Reset()         { *m = CCLCMsg_BaselineAck{} }
+func (m *CCLCMsg_BaselineAck) String() string { return proto.CompactTextString(m) }
+func (*CCLCMsg_BaselineAck) ProtoMessage()    {}
+func (*CCLCMsg_BaselineAck) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{4}
+}
+func (m *CCLCMsg_BaselineAck) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CCLCMsg_BaselineAck.Unmarshal(m, b)
+}
+func (m *CCLCMsg_BaselineAck) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CCLCMsg_BaselineAck.Marshal(b, m, deterministic)
+}
+func (dst *CCLCMsg_BaselineAck) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCLCMsg_BaselineAck.Merge(dst, src)
+}
+func (m *CCLCMsg_BaselineAck) XXX_Size() int {
+	return xxx_messageInfo_CCLCMsg_BaselineAck.Size(m)
+}
+func (m *CCLCMsg_BaselineAck) XXX_DiscardUnknown() {
+	xxx_messageInfo_CCLCMsg_BaselineAck.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CCLCMsg_BaselineAck proto.InternalMessageInfo
 
 func (m *CCLCMsg_BaselineAck) GetBaselineTick() int32 {
 	if m != nil && m.BaselineTick != nil {
@@ -764,14 +895,35 @@ func (m *CCLCMsg_BaselineAck) GetBaselineNr() int32 {
 }
 
 type CCLCMsg_ListenEvents struct {
-	EventMask        []uint32 `protobuf:"fixed32,1,rep,name=event_mask,json=eventMask" json:"event_mask,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	EventMask            []uint32 `protobuf:"fixed32,1,rep,name=event_mask,json=eventMask" json:"event_mask,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CCLCMsg_ListenEvents) Reset()                    { *m = CCLCMsg_ListenEvents{} }
-func (m *CCLCMsg_ListenEvents) String() string            { return proto.CompactTextString(m) }
-func (*CCLCMsg_ListenEvents) ProtoMessage()               {}
-func (*CCLCMsg_ListenEvents) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{5} }
+func (m *CCLCMsg_ListenEvents) Reset()         { *m = CCLCMsg_ListenEvents{} }
+func (m *CCLCMsg_ListenEvents) String() string { return proto.CompactTextString(m) }
+func (*CCLCMsg_ListenEvents) ProtoMessage()    {}
+func (*CCLCMsg_ListenEvents) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{5}
+}
+func (m *CCLCMsg_ListenEvents) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CCLCMsg_ListenEvents.Unmarshal(m, b)
+}
+func (m *CCLCMsg_ListenEvents) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CCLCMsg_ListenEvents.Marshal(b, m, deterministic)
+}
+func (dst *CCLCMsg_ListenEvents) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCLCMsg_ListenEvents.Merge(dst, src)
+}
+func (m *CCLCMsg_ListenEvents) XXX_Size() int {
+	return xxx_messageInfo_CCLCMsg_ListenEvents.Size(m)
+}
+func (m *CCLCMsg_ListenEvents) XXX_DiscardUnknown() {
+	xxx_messageInfo_CCLCMsg_ListenEvents.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CCLCMsg_ListenEvents proto.InternalMessageInfo
 
 func (m *CCLCMsg_ListenEvents) GetEventMask() []uint32 {
 	if m != nil {
@@ -781,17 +933,38 @@ func (m *CCLCMsg_ListenEvents) GetEventMask() []uint32 {
 }
 
 type CCLCMsg_RespondCvarValue struct {
-	Cookie           *int32  `protobuf:"varint,1,opt,name=cookie" json:"cookie,omitempty"`
-	StatusCode       *int32  `protobuf:"varint,2,opt,name=status_code,json=statusCode" json:"status_code,omitempty"`
-	Name             *string `protobuf:"bytes,3,opt,name=name" json:"name,omitempty"`
-	Value            *string `protobuf:"bytes,4,opt,name=value" json:"value,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Cookie               *int32   `protobuf:"varint,1,opt,name=cookie" json:"cookie,omitempty"`
+	StatusCode           *int32   `protobuf:"varint,2,opt,name=status_code,json=statusCode" json:"status_code,omitempty"`
+	Name                 *string  `protobuf:"bytes,3,opt,name=name" json:"name,omitempty"`
+	Value                *string  `protobuf:"bytes,4,opt,name=value" json:"value,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CCLCMsg_RespondCvarValue) Reset()                    { *m = CCLCMsg_RespondCvarValue{} }
-func (m *CCLCMsg_RespondCvarValue) String() string            { return proto.CompactTextString(m) }
-func (*CCLCMsg_RespondCvarValue) ProtoMessage()               {}
-func (*CCLCMsg_RespondCvarValue) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{6} }
+func (m *CCLCMsg_RespondCvarValue) Reset()         { *m = CCLCMsg_RespondCvarValue{} }
+func (m *CCLCMsg_RespondCvarValue) String() string { return proto.CompactTextString(m) }
+func (*CCLCMsg_RespondCvarValue) ProtoMessage()    {}
+func (*CCLCMsg_RespondCvarValue) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{6}
+}
+func (m *CCLCMsg_RespondCvarValue) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CCLCMsg_RespondCvarValue.Unmarshal(m, b)
+}
+func (m *CCLCMsg_RespondCvarValue) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CCLCMsg_RespondCvarValue.Marshal(b, m, deterministic)
+}
+func (dst *CCLCMsg_RespondCvarValue) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCLCMsg_RespondCvarValue.Merge(dst, src)
+}
+func (m *CCLCMsg_RespondCvarValue) XXX_Size() int {
+	return xxx_messageInfo_CCLCMsg_RespondCvarValue.Size(m)
+}
+func (m *CCLCMsg_RespondCvarValue) XXX_DiscardUnknown() {
+	xxx_messageInfo_CCLCMsg_RespondCvarValue.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CCLCMsg_RespondCvarValue proto.InternalMessageInfo
 
 func (m *CCLCMsg_RespondCvarValue) GetCookie() int32 {
 	if m != nil && m.Cookie != nil {
@@ -822,18 +995,39 @@ func (m *CCLCMsg_RespondCvarValue) GetValue() string {
 }
 
 type CCLCMsg_FileCRCCheck struct {
-	CodePath         *int32  `protobuf:"varint,1,opt,name=code_path,json=codePath" json:"code_path,omitempty"`
-	Path             *string `protobuf:"bytes,2,opt,name=path" json:"path,omitempty"`
-	CodeFilename     *int32  `protobuf:"varint,3,opt,name=code_filename,json=codeFilename" json:"code_filename,omitempty"`
-	Filename         *string `protobuf:"bytes,4,opt,name=filename" json:"filename,omitempty"`
-	Crc              *uint32 `protobuf:"fixed32,5,opt,name=crc" json:"crc,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	CodePath             *int32   `protobuf:"varint,1,opt,name=code_path,json=codePath" json:"code_path,omitempty"`
+	Path                 *string  `protobuf:"bytes,2,opt,name=path" json:"path,omitempty"`
+	CodeFilename         *int32   `protobuf:"varint,3,opt,name=code_filename,json=codeFilename" json:"code_filename,omitempty"`
+	Filename             *string  `protobuf:"bytes,4,opt,name=filename" json:"filename,omitempty"`
+	Crc                  *uint32  `protobuf:"fixed32,5,opt,name=crc" json:"crc,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CCLCMsg_FileCRCCheck) Reset()                    { *m = CCLCMsg_FileCRCCheck{} }
-func (m *CCLCMsg_FileCRCCheck) String() string            { return proto.CompactTextString(m) }
-func (*CCLCMsg_FileCRCCheck) ProtoMessage()               {}
-func (*CCLCMsg_FileCRCCheck) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{7} }
+func (m *CCLCMsg_FileCRCCheck) Reset()         { *m = CCLCMsg_FileCRCCheck{} }
+func (m *CCLCMsg_FileCRCCheck) String() string { return proto.CompactTextString(m) }
+func (*CCLCMsg_FileCRCCheck) ProtoMessage()    {}
+func (*CCLCMsg_FileCRCCheck) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{7}
+}
+func (m *CCLCMsg_FileCRCCheck) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CCLCMsg_FileCRCCheck.Unmarshal(m, b)
+}
+func (m *CCLCMsg_FileCRCCheck) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CCLCMsg_FileCRCCheck.Marshal(b, m, deterministic)
+}
+func (dst *CCLCMsg_FileCRCCheck) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCLCMsg_FileCRCCheck.Merge(dst, src)
+}
+func (m *CCLCMsg_FileCRCCheck) XXX_Size() int {
+	return xxx_messageInfo_CCLCMsg_FileCRCCheck.Size(m)
+}
+func (m *CCLCMsg_FileCRCCheck) XXX_DiscardUnknown() {
+	xxx_messageInfo_CCLCMsg_FileCRCCheck.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CCLCMsg_FileCRCCheck proto.InternalMessageInfo
 
 func (m *CCLCMsg_FileCRCCheck) GetCodePath() int32 {
 	if m != nil && m.CodePath != nil {
@@ -871,14 +1065,35 @@ func (m *CCLCMsg_FileCRCCheck) GetCrc() uint32 {
 }
 
 type CCLCMsg_LoadingProgress struct {
-	Progress         *int32 `protobuf:"varint,1,opt,name=progress" json:"progress,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	Progress             *int32   `protobuf:"varint,1,opt,name=progress" json:"progress,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CCLCMsg_LoadingProgress) Reset()                    { *m = CCLCMsg_LoadingProgress{} }
-func (m *CCLCMsg_LoadingProgress) String() string            { return proto.CompactTextString(m) }
-func (*CCLCMsg_LoadingProgress) ProtoMessage()               {}
-func (*CCLCMsg_LoadingProgress) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{8} }
+func (m *CCLCMsg_LoadingProgress) Reset()         { *m = CCLCMsg_LoadingProgress{} }
+func (m *CCLCMsg_LoadingProgress) String() string { return proto.CompactTextString(m) }
+func (*CCLCMsg_LoadingProgress) ProtoMessage()    {}
+func (*CCLCMsg_LoadingProgress) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{8}
+}
+func (m *CCLCMsg_LoadingProgress) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CCLCMsg_LoadingProgress.Unmarshal(m, b)
+}
+func (m *CCLCMsg_LoadingProgress) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CCLCMsg_LoadingProgress.Marshal(b, m, deterministic)
+}
+func (dst *CCLCMsg_LoadingProgress) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCLCMsg_LoadingProgress.Merge(dst, src)
+}
+func (m *CCLCMsg_LoadingProgress) XXX_Size() int {
+	return xxx_messageInfo_CCLCMsg_LoadingProgress.Size(m)
+}
+func (m *CCLCMsg_LoadingProgress) XXX_DiscardUnknown() {
+	xxx_messageInfo_CCLCMsg_LoadingProgress.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CCLCMsg_LoadingProgress proto.InternalMessageInfo
 
 func (m *CCLCMsg_LoadingProgress) GetProgress() int32 {
 	if m != nil && m.Progress != nil {
@@ -888,14 +1103,35 @@ func (m *CCLCMsg_LoadingProgress) GetProgress() int32 {
 }
 
 type CCLCMsg_SplitPlayerConnect struct {
-	Playername       *string `protobuf:"bytes,1,opt,name=playername" json:"playername,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Playername           *string  `protobuf:"bytes,1,opt,name=playername" json:"playername,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CCLCMsg_SplitPlayerConnect) Reset()                    { *m = CCLCMsg_SplitPlayerConnect{} }
-func (m *CCLCMsg_SplitPlayerConnect) String() string            { return proto.CompactTextString(m) }
-func (*CCLCMsg_SplitPlayerConnect) ProtoMessage()               {}
-func (*CCLCMsg_SplitPlayerConnect) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{9} }
+func (m *CCLCMsg_SplitPlayerConnect) Reset()         { *m = CCLCMsg_SplitPlayerConnect{} }
+func (m *CCLCMsg_SplitPlayerConnect) String() string { return proto.CompactTextString(m) }
+func (*CCLCMsg_SplitPlayerConnect) ProtoMessage()    {}
+func (*CCLCMsg_SplitPlayerConnect) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{9}
+}
+func (m *CCLCMsg_SplitPlayerConnect) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CCLCMsg_SplitPlayerConnect.Unmarshal(m, b)
+}
+func (m *CCLCMsg_SplitPlayerConnect) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CCLCMsg_SplitPlayerConnect.Marshal(b, m, deterministic)
+}
+func (dst *CCLCMsg_SplitPlayerConnect) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCLCMsg_SplitPlayerConnect.Merge(dst, src)
+}
+func (m *CCLCMsg_SplitPlayerConnect) XXX_Size() int {
+	return xxx_messageInfo_CCLCMsg_SplitPlayerConnect.Size(m)
+}
+func (m *CCLCMsg_SplitPlayerConnect) XXX_DiscardUnknown() {
+	xxx_messageInfo_CCLCMsg_SplitPlayerConnect.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CCLCMsg_SplitPlayerConnect proto.InternalMessageInfo
 
 func (m *CCLCMsg_SplitPlayerConnect) GetPlayername() string {
 	if m != nil && m.Playername != nil {
@@ -905,15 +1141,36 @@ func (m *CCLCMsg_SplitPlayerConnect) GetPlayername() string {
 }
 
 type CCLCMsg_ClientMessage struct {
-	MsgType          *int32 `protobuf:"varint,1,opt,name=msg_type,json=msgType" json:"msg_type,omitempty"`
-	Data             []byte `protobuf:"bytes,2,opt,name=data" json:"data,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	MsgType              *int32   `protobuf:"varint,1,opt,name=msg_type,json=msgType" json:"msg_type,omitempty"`
+	Data                 []byte   `protobuf:"bytes,2,opt,name=data" json:"data,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CCLCMsg_ClientMessage) Reset()                    { *m = CCLCMsg_ClientMessage{} }
-func (m *CCLCMsg_ClientMessage) String() string            { return proto.CompactTextString(m) }
-func (*CCLCMsg_ClientMessage) ProtoMessage()               {}
-func (*CCLCMsg_ClientMessage) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{10} }
+func (m *CCLCMsg_ClientMessage) Reset()         { *m = CCLCMsg_ClientMessage{} }
+func (m *CCLCMsg_ClientMessage) String() string { return proto.CompactTextString(m) }
+func (*CCLCMsg_ClientMessage) ProtoMessage()    {}
+func (*CCLCMsg_ClientMessage) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{10}
+}
+func (m *CCLCMsg_ClientMessage) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CCLCMsg_ClientMessage.Unmarshal(m, b)
+}
+func (m *CCLCMsg_ClientMessage) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CCLCMsg_ClientMessage.Marshal(b, m, deterministic)
+}
+func (dst *CCLCMsg_ClientMessage) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCLCMsg_ClientMessage.Merge(dst, src)
+}
+func (m *CCLCMsg_ClientMessage) XXX_Size() int {
+	return xxx_messageInfo_CCLCMsg_ClientMessage.Size(m)
+}
+func (m *CCLCMsg_ClientMessage) XXX_DiscardUnknown() {
+	xxx_messageInfo_CCLCMsg_ClientMessage.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CCLCMsg_ClientMessage proto.InternalMessageInfo
 
 func (m *CCLCMsg_ClientMessage) GetMsgType() int32 {
 	if m != nil && m.MsgType != nil {
@@ -930,14 +1187,35 @@ func (m *CCLCMsg_ClientMessage) GetData() []byte {
 }
 
 type CCLCMsg_SplitPlayerDisconnect struct {
-	Slot             *int32 `protobuf:"varint,1,opt,name=slot" json:"slot,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	Slot                 *int32   `protobuf:"varint,1,opt,name=slot" json:"slot,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CCLCMsg_SplitPlayerDisconnect) Reset()                    { *m = CCLCMsg_SplitPlayerDisconnect{} }
-func (m *CCLCMsg_SplitPlayerDisconnect) String() string            { return proto.CompactTextString(m) }
-func (*CCLCMsg_SplitPlayerDisconnect) ProtoMessage()               {}
-func (*CCLCMsg_SplitPlayerDisconnect) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{11} }
+func (m *CCLCMsg_SplitPlayerDisconnect) Reset()         { *m = CCLCMsg_SplitPlayerDisconnect{} }
+func (m *CCLCMsg_SplitPlayerDisconnect) String() string { return proto.CompactTextString(m) }
+func (*CCLCMsg_SplitPlayerDisconnect) ProtoMessage()    {}
+func (*CCLCMsg_SplitPlayerDisconnect) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{11}
+}
+func (m *CCLCMsg_SplitPlayerDisconnect) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CCLCMsg_SplitPlayerDisconnect.Unmarshal(m, b)
+}
+func (m *CCLCMsg_SplitPlayerDisconnect) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CCLCMsg_SplitPlayerDisconnect.Marshal(b, m, deterministic)
+}
+func (dst *CCLCMsg_SplitPlayerDisconnect) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCLCMsg_SplitPlayerDisconnect.Merge(dst, src)
+}
+func (m *CCLCMsg_SplitPlayerDisconnect) XXX_Size() int {
+	return xxx_messageInfo_CCLCMsg_SplitPlayerDisconnect.Size(m)
+}
+func (m *CCLCMsg_SplitPlayerDisconnect) XXX_DiscardUnknown() {
+	xxx_messageInfo_CCLCMsg_SplitPlayerDisconnect.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CCLCMsg_SplitPlayerDisconnect proto.InternalMessageInfo
 
 func (m *CCLCMsg_SplitPlayerDisconnect) GetSlot() int32 {
 	if m != nil && m.Slot != nil {
@@ -947,14 +1225,35 @@ func (m *CCLCMsg_SplitPlayerDisconnect) GetSlot() int32 {
 }
 
 type CCLCMsg_ServerStatus struct {
-	Simplified       *bool  `protobuf:"varint,1,opt,name=simplified" json:"simplified,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	Simplified           *bool    `protobuf:"varint,1,opt,name=simplified" json:"simplified,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CCLCMsg_ServerStatus) Reset()                    { *m = CCLCMsg_ServerStatus{} }
-func (m *CCLCMsg_ServerStatus) String() string            { return proto.CompactTextString(m) }
-func (*CCLCMsg_ServerStatus) ProtoMessage()               {}
-func (*CCLCMsg_ServerStatus) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{12} }
+func (m *CCLCMsg_ServerStatus) Reset()         { *m = CCLCMsg_ServerStatus{} }
+func (m *CCLCMsg_ServerStatus) String() string { return proto.CompactTextString(m) }
+func (*CCLCMsg_ServerStatus) ProtoMessage()    {}
+func (*CCLCMsg_ServerStatus) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{12}
+}
+func (m *CCLCMsg_ServerStatus) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CCLCMsg_ServerStatus.Unmarshal(m, b)
+}
+func (m *CCLCMsg_ServerStatus) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CCLCMsg_ServerStatus.Marshal(b, m, deterministic)
+}
+func (dst *CCLCMsg_ServerStatus) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCLCMsg_ServerStatus.Merge(dst, src)
+}
+func (m *CCLCMsg_ServerStatus) XXX_Size() int {
+	return xxx_messageInfo_CCLCMsg_ServerStatus.Size(m)
+}
+func (m *CCLCMsg_ServerStatus) XXX_DiscardUnknown() {
+	xxx_messageInfo_CCLCMsg_ServerStatus.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CCLCMsg_ServerStatus proto.InternalMessageInfo
 
 func (m *CCLCMsg_ServerStatus) GetSimplified() bool {
 	if m != nil && m.Simplified != nil {
@@ -964,24 +1263,66 @@ func (m *CCLCMsg_ServerStatus) GetSimplified() bool {
 }
 
 type CCLCMsg_ServerPing struct {
-	XXX_unrecognized []byte `json:"-"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CCLCMsg_ServerPing) Reset()                    { *m = CCLCMsg_ServerPing{} }
-func (m *CCLCMsg_ServerPing) String() string            { return proto.CompactTextString(m) }
-func (*CCLCMsg_ServerPing) ProtoMessage()               {}
-func (*CCLCMsg_ServerPing) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{13} }
+func (m *CCLCMsg_ServerPing) Reset()         { *m = CCLCMsg_ServerPing{} }
+func (m *CCLCMsg_ServerPing) String() string { return proto.CompactTextString(m) }
+func (*CCLCMsg_ServerPing) ProtoMessage()    {}
+func (*CCLCMsg_ServerPing) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{13}
+}
+func (m *CCLCMsg_ServerPing) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CCLCMsg_ServerPing.Unmarshal(m, b)
+}
+func (m *CCLCMsg_ServerPing) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CCLCMsg_ServerPing.Marshal(b, m, deterministic)
+}
+func (dst *CCLCMsg_ServerPing) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCLCMsg_ServerPing.Merge(dst, src)
+}
+func (m *CCLCMsg_ServerPing) XXX_Size() int {
+	return xxx_messageInfo_CCLCMsg_ServerPing.Size(m)
+}
+func (m *CCLCMsg_ServerPing) XXX_DiscardUnknown() {
+	xxx_messageInfo_CCLCMsg_ServerPing.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CCLCMsg_ServerPing proto.InternalMessageInfo
 
 type CCLCMsg_RequestPause struct {
-	PauseType        *RequestPauseT `protobuf:"varint,1,opt,name=pause_type,json=pauseType,enum=dota.RequestPauseT,def=0" json:"pause_type,omitempty"`
-	PauseGroup       *int32         `protobuf:"varint,2,opt,name=pause_group,json=pauseGroup" json:"pause_group,omitempty"`
-	XXX_unrecognized []byte         `json:"-"`
+	PauseType            *RequestPauseT `protobuf:"varint,1,opt,name=pause_type,json=pauseType,enum=dota.RequestPauseT,def=0" json:"pause_type,omitempty"`
+	PauseGroup           *int32         `protobuf:"varint,2,opt,name=pause_group,json=pauseGroup" json:"pause_group,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
+	XXX_unrecognized     []byte         `json:"-"`
+	XXX_sizecache        int32          `json:"-"`
 }
 
-func (m *CCLCMsg_RequestPause) Reset()                    { *m = CCLCMsg_RequestPause{} }
-func (m *CCLCMsg_RequestPause) String() string            { return proto.CompactTextString(m) }
-func (*CCLCMsg_RequestPause) ProtoMessage()               {}
-func (*CCLCMsg_RequestPause) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{14} }
+func (m *CCLCMsg_RequestPause) Reset()         { *m = CCLCMsg_RequestPause{} }
+func (m *CCLCMsg_RequestPause) String() string { return proto.CompactTextString(m) }
+func (*CCLCMsg_RequestPause) ProtoMessage()    {}
+func (*CCLCMsg_RequestPause) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{14}
+}
+func (m *CCLCMsg_RequestPause) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CCLCMsg_RequestPause.Unmarshal(m, b)
+}
+func (m *CCLCMsg_RequestPause) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CCLCMsg_RequestPause.Marshal(b, m, deterministic)
+}
+func (dst *CCLCMsg_RequestPause) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCLCMsg_RequestPause.Merge(dst, src)
+}
+func (m *CCLCMsg_RequestPause) XXX_Size() int {
+	return xxx_messageInfo_CCLCMsg_RequestPause.Size(m)
+}
+func (m *CCLCMsg_RequestPause) XXX_DiscardUnknown() {
+	xxx_messageInfo_CCLCMsg_RequestPause.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CCLCMsg_RequestPause proto.InternalMessageInfo
 
 const Default_CCLCMsg_RequestPause_PauseType RequestPauseT = RequestPauseT_RP_PAUSE
 
@@ -1000,14 +1341,35 @@ func (m *CCLCMsg_RequestPause) GetPauseGroup() int32 {
 }
 
 type CCLCMsg_CmdKeyValues struct {
-	Data             []byte `protobuf:"bytes,1,opt,name=data" json:"data,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	Data                 []byte   `protobuf:"bytes,1,opt,name=data" json:"data,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CCLCMsg_CmdKeyValues) Reset()                    { *m = CCLCMsg_CmdKeyValues{} }
-func (m *CCLCMsg_CmdKeyValues) String() string            { return proto.CompactTextString(m) }
-func (*CCLCMsg_CmdKeyValues) ProtoMessage()               {}
-func (*CCLCMsg_CmdKeyValues) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{15} }
+func (m *CCLCMsg_CmdKeyValues) Reset()         { *m = CCLCMsg_CmdKeyValues{} }
+func (m *CCLCMsg_CmdKeyValues) String() string { return proto.CompactTextString(m) }
+func (*CCLCMsg_CmdKeyValues) ProtoMessage()    {}
+func (*CCLCMsg_CmdKeyValues) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{15}
+}
+func (m *CCLCMsg_CmdKeyValues) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CCLCMsg_CmdKeyValues.Unmarshal(m, b)
+}
+func (m *CCLCMsg_CmdKeyValues) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CCLCMsg_CmdKeyValues.Marshal(b, m, deterministic)
+}
+func (dst *CCLCMsg_CmdKeyValues) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCLCMsg_CmdKeyValues.Merge(dst, src)
+}
+func (m *CCLCMsg_CmdKeyValues) XXX_Size() int {
+	return xxx_messageInfo_CCLCMsg_CmdKeyValues.Size(m)
+}
+func (m *CCLCMsg_CmdKeyValues) XXX_DiscardUnknown() {
+	xxx_messageInfo_CCLCMsg_CmdKeyValues.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CCLCMsg_CmdKeyValues proto.InternalMessageInfo
 
 func (m *CCLCMsg_CmdKeyValues) GetData() []byte {
 	if m != nil {
@@ -1017,30 +1379,51 @@ func (m *CCLCMsg_CmdKeyValues) GetData() []byte {
 }
 
 type CSVCMsg_ServerInfo struct {
-	Protocol            *int32                            `protobuf:"varint,1,opt,name=protocol" json:"protocol,omitempty"`
-	ServerCount         *int32                            `protobuf:"varint,2,opt,name=server_count,json=serverCount" json:"server_count,omitempty"`
-	IsDedicated         *bool                             `protobuf:"varint,3,opt,name=is_dedicated,json=isDedicated" json:"is_dedicated,omitempty"`
-	IsHltv              *bool                             `protobuf:"varint,4,opt,name=is_hltv,json=isHltv" json:"is_hltv,omitempty"`
-	IsReplay            *bool                             `protobuf:"varint,5,opt,name=is_replay,json=isReplay" json:"is_replay,omitempty"`
-	COs                 *int32                            `protobuf:"varint,6,opt,name=c_os,json=cOs" json:"c_os,omitempty"`
-	MaxClients          *int32                            `protobuf:"varint,10,opt,name=max_clients,json=maxClients" json:"max_clients,omitempty"`
-	MaxClasses          *int32                            `protobuf:"varint,11,opt,name=max_classes,json=maxClasses" json:"max_classes,omitempty"`
-	PlayerSlot          *int32                            `protobuf:"varint,12,opt,name=player_slot,json=playerSlot" json:"player_slot,omitempty"`
-	TickInterval        *float32                          `protobuf:"fixed32,13,opt,name=tick_interval,json=tickInterval" json:"tick_interval,omitempty"`
-	GameDir             *string                           `protobuf:"bytes,14,opt,name=game_dir,json=gameDir" json:"game_dir,omitempty"`
-	MapName             *string                           `protobuf:"bytes,15,opt,name=map_name,json=mapName" json:"map_name,omitempty"`
-	SkyName             *string                           `protobuf:"bytes,16,opt,name=sky_name,json=skyName" json:"sky_name,omitempty"`
-	HostName            *string                           `protobuf:"bytes,17,opt,name=host_name,json=hostName" json:"host_name,omitempty"`
-	AddonName           *string                           `protobuf:"bytes,18,opt,name=addon_name,json=addonName" json:"addon_name,omitempty"`
-	GameSessionConfig   *CSVCMsg_GameSessionConfiguration `protobuf:"bytes,19,opt,name=game_session_config,json=gameSessionConfig" json:"game_session_config,omitempty"`
-	GameSessionManifest []byte                            `protobuf:"bytes,20,opt,name=game_session_manifest,json=gameSessionManifest" json:"game_session_manifest,omitempty"`
-	XXX_unrecognized    []byte                            `json:"-"`
+	Protocol             *int32                            `protobuf:"varint,1,opt,name=protocol" json:"protocol,omitempty"`
+	ServerCount          *int32                            `protobuf:"varint,2,opt,name=server_count,json=serverCount" json:"server_count,omitempty"`
+	IsDedicated          *bool                             `protobuf:"varint,3,opt,name=is_dedicated,json=isDedicated" json:"is_dedicated,omitempty"`
+	IsHltv               *bool                             `protobuf:"varint,4,opt,name=is_hltv,json=isHltv" json:"is_hltv,omitempty"`
+	IsReplay             *bool                             `protobuf:"varint,5,opt,name=is_replay,json=isReplay" json:"is_replay,omitempty"`
+	COs                  *int32                            `protobuf:"varint,6,opt,name=c_os,json=cOs" json:"c_os,omitempty"`
+	MaxClients           *int32                            `protobuf:"varint,10,opt,name=max_clients,json=maxClients" json:"max_clients,omitempty"`
+	MaxClasses           *int32                            `protobuf:"varint,11,opt,name=max_classes,json=maxClasses" json:"max_classes,omitempty"`
+	PlayerSlot           *int32                            `protobuf:"varint,12,opt,name=player_slot,json=playerSlot" json:"player_slot,omitempty"`
+	TickInterval         *float32                          `protobuf:"fixed32,13,opt,name=tick_interval,json=tickInterval" json:"tick_interval,omitempty"`
+	GameDir              *string                           `protobuf:"bytes,14,opt,name=game_dir,json=gameDir" json:"game_dir,omitempty"`
+	MapName              *string                           `protobuf:"bytes,15,opt,name=map_name,json=mapName" json:"map_name,omitempty"`
+	SkyName              *string                           `protobuf:"bytes,16,opt,name=sky_name,json=skyName" json:"sky_name,omitempty"`
+	HostName             *string                           `protobuf:"bytes,17,opt,name=host_name,json=hostName" json:"host_name,omitempty"`
+	AddonName            *string                           `protobuf:"bytes,18,opt,name=addon_name,json=addonName" json:"addon_name,omitempty"`
+	GameSessionConfig    *CSVCMsg_GameSessionConfiguration `protobuf:"bytes,19,opt,name=game_session_config,json=gameSessionConfig" json:"game_session_config,omitempty"`
+	GameSessionManifest  []byte                            `protobuf:"bytes,20,opt,name=game_session_manifest,json=gameSessionManifest" json:"game_session_manifest,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                          `json:"-"`
+	XXX_unrecognized     []byte                            `json:"-"`
+	XXX_sizecache        int32                             `json:"-"`
 }
 
-func (m *CSVCMsg_ServerInfo) Reset()                    { *m = CSVCMsg_ServerInfo{} }
-func (m *CSVCMsg_ServerInfo) String() string            { return proto.CompactTextString(m) }
-func (*CSVCMsg_ServerInfo) ProtoMessage()               {}
-func (*CSVCMsg_ServerInfo) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{16} }
+func (m *CSVCMsg_ServerInfo) Reset()         { *m = CSVCMsg_ServerInfo{} }
+func (m *CSVCMsg_ServerInfo) String() string { return proto.CompactTextString(m) }
+func (*CSVCMsg_ServerInfo) ProtoMessage()    {}
+func (*CSVCMsg_ServerInfo) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{16}
+}
+func (m *CSVCMsg_ServerInfo) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CSVCMsg_ServerInfo.Unmarshal(m, b)
+}
+func (m *CSVCMsg_ServerInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CSVCMsg_ServerInfo.Marshal(b, m, deterministic)
+}
+func (dst *CSVCMsg_ServerInfo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_ServerInfo.Merge(dst, src)
+}
+func (m *CSVCMsg_ServerInfo) XXX_Size() int {
+	return xxx_messageInfo_CSVCMsg_ServerInfo.Size(m)
+}
+func (m *CSVCMsg_ServerInfo) XXX_DiscardUnknown() {
+	xxx_messageInfo_CSVCMsg_ServerInfo.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CSVCMsg_ServerInfo proto.InternalMessageInfo
 
 func (m *CSVCMsg_ServerInfo) GetProtocol() int32 {
 	if m != nil && m.Protocol != nil {
@@ -1162,15 +1545,36 @@ func (m *CSVCMsg_ServerInfo) GetGameSessionManifest() []byte {
 }
 
 type CSVCMsg_ClassInfo struct {
-	CreateOnClient   *bool                      `protobuf:"varint,1,opt,name=create_on_client,json=createOnClient" json:"create_on_client,omitempty"`
-	Classes          []*CSVCMsg_ClassInfoClassT `protobuf:"bytes,2,rep,name=classes" json:"classes,omitempty"`
-	XXX_unrecognized []byte                     `json:"-"`
+	CreateOnClient       *bool                      `protobuf:"varint,1,opt,name=create_on_client,json=createOnClient" json:"create_on_client,omitempty"`
+	Classes              []*CSVCMsg_ClassInfoClassT `protobuf:"bytes,2,rep,name=classes" json:"classes,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                   `json:"-"`
+	XXX_unrecognized     []byte                     `json:"-"`
+	XXX_sizecache        int32                      `json:"-"`
 }
 
-func (m *CSVCMsg_ClassInfo) Reset()                    { *m = CSVCMsg_ClassInfo{} }
-func (m *CSVCMsg_ClassInfo) String() string            { return proto.CompactTextString(m) }
-func (*CSVCMsg_ClassInfo) ProtoMessage()               {}
-func (*CSVCMsg_ClassInfo) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{17} }
+func (m *CSVCMsg_ClassInfo) Reset()         { *m = CSVCMsg_ClassInfo{} }
+func (m *CSVCMsg_ClassInfo) String() string { return proto.CompactTextString(m) }
+func (*CSVCMsg_ClassInfo) ProtoMessage()    {}
+func (*CSVCMsg_ClassInfo) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{17}
+}
+func (m *CSVCMsg_ClassInfo) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CSVCMsg_ClassInfo.Unmarshal(m, b)
+}
+func (m *CSVCMsg_ClassInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CSVCMsg_ClassInfo.Marshal(b, m, deterministic)
+}
+func (dst *CSVCMsg_ClassInfo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_ClassInfo.Merge(dst, src)
+}
+func (m *CSVCMsg_ClassInfo) XXX_Size() int {
+	return xxx_messageInfo_CSVCMsg_ClassInfo.Size(m)
+}
+func (m *CSVCMsg_ClassInfo) XXX_DiscardUnknown() {
+	xxx_messageInfo_CSVCMsg_ClassInfo.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CSVCMsg_ClassInfo proto.InternalMessageInfo
 
 func (m *CSVCMsg_ClassInfo) GetCreateOnClient() bool {
 	if m != nil && m.CreateOnClient != nil {
@@ -1187,16 +1591,37 @@ func (m *CSVCMsg_ClassInfo) GetClasses() []*CSVCMsg_ClassInfoClassT {
 }
 
 type CSVCMsg_ClassInfoClassT struct {
-	ClassId          *int32  `protobuf:"varint,1,opt,name=class_id,json=classId" json:"class_id,omitempty"`
-	DataTableName    *string `protobuf:"bytes,2,opt,name=data_table_name,json=dataTableName" json:"data_table_name,omitempty"`
-	ClassName        *string `protobuf:"bytes,3,opt,name=class_name,json=className" json:"class_name,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	ClassId              *int32   `protobuf:"varint,1,opt,name=class_id,json=classId" json:"class_id,omitempty"`
+	DataTableName        *string  `protobuf:"bytes,2,opt,name=data_table_name,json=dataTableName" json:"data_table_name,omitempty"`
+	ClassName            *string  `protobuf:"bytes,3,opt,name=class_name,json=className" json:"class_name,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CSVCMsg_ClassInfoClassT) Reset()                    { *m = CSVCMsg_ClassInfoClassT{} }
-func (m *CSVCMsg_ClassInfoClassT) String() string            { return proto.CompactTextString(m) }
-func (*CSVCMsg_ClassInfoClassT) ProtoMessage()               {}
-func (*CSVCMsg_ClassInfoClassT) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{17, 0} }
+func (m *CSVCMsg_ClassInfoClassT) Reset()         { *m = CSVCMsg_ClassInfoClassT{} }
+func (m *CSVCMsg_ClassInfoClassT) String() string { return proto.CompactTextString(m) }
+func (*CSVCMsg_ClassInfoClassT) ProtoMessage()    {}
+func (*CSVCMsg_ClassInfoClassT) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{17, 0}
+}
+func (m *CSVCMsg_ClassInfoClassT) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CSVCMsg_ClassInfoClassT.Unmarshal(m, b)
+}
+func (m *CSVCMsg_ClassInfoClassT) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CSVCMsg_ClassInfoClassT.Marshal(b, m, deterministic)
+}
+func (dst *CSVCMsg_ClassInfoClassT) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_ClassInfoClassT.Merge(dst, src)
+}
+func (m *CSVCMsg_ClassInfoClassT) XXX_Size() int {
+	return xxx_messageInfo_CSVCMsg_ClassInfoClassT.Size(m)
+}
+func (m *CSVCMsg_ClassInfoClassT) XXX_DiscardUnknown() {
+	xxx_messageInfo_CSVCMsg_ClassInfoClassT.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CSVCMsg_ClassInfoClassT proto.InternalMessageInfo
 
 func (m *CSVCMsg_ClassInfoClassT) GetClassId() int32 {
 	if m != nil && m.ClassId != nil {
@@ -1220,14 +1645,35 @@ func (m *CSVCMsg_ClassInfoClassT) GetClassName() string {
 }
 
 type CSVCMsg_SetPause struct {
-	Paused           *bool  `protobuf:"varint,1,opt,name=paused" json:"paused,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	Paused               *bool    `protobuf:"varint,1,opt,name=paused" json:"paused,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CSVCMsg_SetPause) Reset()                    { *m = CSVCMsg_SetPause{} }
-func (m *CSVCMsg_SetPause) String() string            { return proto.CompactTextString(m) }
-func (*CSVCMsg_SetPause) ProtoMessage()               {}
-func (*CSVCMsg_SetPause) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{18} }
+func (m *CSVCMsg_SetPause) Reset()         { *m = CSVCMsg_SetPause{} }
+func (m *CSVCMsg_SetPause) String() string { return proto.CompactTextString(m) }
+func (*CSVCMsg_SetPause) ProtoMessage()    {}
+func (*CSVCMsg_SetPause) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{18}
+}
+func (m *CSVCMsg_SetPause) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CSVCMsg_SetPause.Unmarshal(m, b)
+}
+func (m *CSVCMsg_SetPause) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CSVCMsg_SetPause.Marshal(b, m, deterministic)
+}
+func (dst *CSVCMsg_SetPause) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_SetPause.Merge(dst, src)
+}
+func (m *CSVCMsg_SetPause) XXX_Size() int {
+	return xxx_messageInfo_CSVCMsg_SetPause.Size(m)
+}
+func (m *CSVCMsg_SetPause) XXX_DiscardUnknown() {
+	xxx_messageInfo_CSVCMsg_SetPause.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CSVCMsg_SetPause proto.InternalMessageInfo
 
 func (m *CSVCMsg_SetPause) GetPaused() bool {
 	if m != nil && m.Paused != nil {
@@ -1237,16 +1683,37 @@ func (m *CSVCMsg_SetPause) GetPaused() bool {
 }
 
 type CSVCMsg_VoiceInit struct {
-	Quality          *int32  `protobuf:"varint,1,opt,name=quality" json:"quality,omitempty"`
-	Codec            *string `protobuf:"bytes,2,opt,name=codec" json:"codec,omitempty"`
-	Version          *int32  `protobuf:"varint,3,opt,name=version,def=0" json:"version,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Quality              *int32   `protobuf:"varint,1,opt,name=quality" json:"quality,omitempty"`
+	Codec                *string  `protobuf:"bytes,2,opt,name=codec" json:"codec,omitempty"`
+	Version              *int32   `protobuf:"varint,3,opt,name=version,def=0" json:"version,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CSVCMsg_VoiceInit) Reset()                    { *m = CSVCMsg_VoiceInit{} }
-func (m *CSVCMsg_VoiceInit) String() string            { return proto.CompactTextString(m) }
-func (*CSVCMsg_VoiceInit) ProtoMessage()               {}
-func (*CSVCMsg_VoiceInit) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{19} }
+func (m *CSVCMsg_VoiceInit) Reset()         { *m = CSVCMsg_VoiceInit{} }
+func (m *CSVCMsg_VoiceInit) String() string { return proto.CompactTextString(m) }
+func (*CSVCMsg_VoiceInit) ProtoMessage()    {}
+func (*CSVCMsg_VoiceInit) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{19}
+}
+func (m *CSVCMsg_VoiceInit) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CSVCMsg_VoiceInit.Unmarshal(m, b)
+}
+func (m *CSVCMsg_VoiceInit) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CSVCMsg_VoiceInit.Marshal(b, m, deterministic)
+}
+func (dst *CSVCMsg_VoiceInit) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_VoiceInit.Merge(dst, src)
+}
+func (m *CSVCMsg_VoiceInit) XXX_Size() int {
+	return xxx_messageInfo_CSVCMsg_VoiceInit.Size(m)
+}
+func (m *CSVCMsg_VoiceInit) XXX_DiscardUnknown() {
+	xxx_messageInfo_CSVCMsg_VoiceInit.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CSVCMsg_VoiceInit proto.InternalMessageInfo
 
 const Default_CSVCMsg_VoiceInit_Version int32 = 0
 
@@ -1272,14 +1739,35 @@ func (m *CSVCMsg_VoiceInit) GetVersion() int32 {
 }
 
 type CSVCMsg_Print struct {
-	Text             *string `protobuf:"bytes,1,opt,name=text" json:"text,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Text                 *string  `protobuf:"bytes,1,opt,name=text" json:"text,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CSVCMsg_Print) Reset()                    { *m = CSVCMsg_Print{} }
-func (m *CSVCMsg_Print) String() string            { return proto.CompactTextString(m) }
-func (*CSVCMsg_Print) ProtoMessage()               {}
-func (*CSVCMsg_Print) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{20} }
+func (m *CSVCMsg_Print) Reset()         { *m = CSVCMsg_Print{} }
+func (m *CSVCMsg_Print) String() string { return proto.CompactTextString(m) }
+func (*CSVCMsg_Print) ProtoMessage()    {}
+func (*CSVCMsg_Print) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{20}
+}
+func (m *CSVCMsg_Print) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CSVCMsg_Print.Unmarshal(m, b)
+}
+func (m *CSVCMsg_Print) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CSVCMsg_Print.Marshal(b, m, deterministic)
+}
+func (dst *CSVCMsg_Print) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_Print.Merge(dst, src)
+}
+func (m *CSVCMsg_Print) XXX_Size() int {
+	return xxx_messageInfo_CSVCMsg_Print.Size(m)
+}
+func (m *CSVCMsg_Print) XXX_DiscardUnknown() {
+	xxx_messageInfo_CSVCMsg_Print.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CSVCMsg_Print proto.InternalMessageInfo
 
 func (m *CSVCMsg_Print) GetText() string {
 	if m != nil && m.Text != nil {
@@ -1289,15 +1777,36 @@ func (m *CSVCMsg_Print) GetText() string {
 }
 
 type CSVCMsg_Sounds struct {
-	ReliableSound    *bool                       `protobuf:"varint,1,opt,name=reliable_sound,json=reliableSound" json:"reliable_sound,omitempty"`
-	Sounds           []*CSVCMsg_SoundsSounddataT `protobuf:"bytes,2,rep,name=sounds" json:"sounds,omitempty"`
-	XXX_unrecognized []byte                      `json:"-"`
+	ReliableSound        *bool                       `protobuf:"varint,1,opt,name=reliable_sound,json=reliableSound" json:"reliable_sound,omitempty"`
+	Sounds               []*CSVCMsg_SoundsSounddataT `protobuf:"bytes,2,rep,name=sounds" json:"sounds,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                    `json:"-"`
+	XXX_unrecognized     []byte                      `json:"-"`
+	XXX_sizecache        int32                       `json:"-"`
 }
 
-func (m *CSVCMsg_Sounds) Reset()                    { *m = CSVCMsg_Sounds{} }
-func (m *CSVCMsg_Sounds) String() string            { return proto.CompactTextString(m) }
-func (*CSVCMsg_Sounds) ProtoMessage()               {}
-func (*CSVCMsg_Sounds) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{21} }
+func (m *CSVCMsg_Sounds) Reset()         { *m = CSVCMsg_Sounds{} }
+func (m *CSVCMsg_Sounds) String() string { return proto.CompactTextString(m) }
+func (*CSVCMsg_Sounds) ProtoMessage()    {}
+func (*CSVCMsg_Sounds) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{21}
+}
+func (m *CSVCMsg_Sounds) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CSVCMsg_Sounds.Unmarshal(m, b)
+}
+func (m *CSVCMsg_Sounds) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CSVCMsg_Sounds.Marshal(b, m, deterministic)
+}
+func (dst *CSVCMsg_Sounds) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_Sounds.Merge(dst, src)
+}
+func (m *CSVCMsg_Sounds) XXX_Size() int {
+	return xxx_messageInfo_CSVCMsg_Sounds.Size(m)
+}
+func (m *CSVCMsg_Sounds) XXX_DiscardUnknown() {
+	xxx_messageInfo_CSVCMsg_Sounds.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CSVCMsg_Sounds proto.InternalMessageInfo
 
 func (m *CSVCMsg_Sounds) GetReliableSound() bool {
 	if m != nil && m.ReliableSound != nil {
@@ -1314,32 +1823,53 @@ func (m *CSVCMsg_Sounds) GetSounds() []*CSVCMsg_SoundsSounddataT {
 }
 
 type CSVCMsg_SoundsSounddataT struct {
-	OriginX          *int32   `protobuf:"zigzag32,1,opt,name=origin_x,json=originX" json:"origin_x,omitempty"`
-	OriginY          *int32   `protobuf:"zigzag32,2,opt,name=origin_y,json=originY" json:"origin_y,omitempty"`
-	OriginZ          *int32   `protobuf:"zigzag32,3,opt,name=origin_z,json=originZ" json:"origin_z,omitempty"`
-	Volume           *uint32  `protobuf:"varint,4,opt,name=volume" json:"volume,omitempty"`
-	DelayValue       *float32 `protobuf:"fixed32,5,opt,name=delay_value,json=delayValue" json:"delay_value,omitempty"`
-	SequenceNumber   *int32   `protobuf:"varint,6,opt,name=sequence_number,json=sequenceNumber" json:"sequence_number,omitempty"`
-	EntityIndex      *int32   `protobuf:"varint,7,opt,name=entity_index,json=entityIndex" json:"entity_index,omitempty"`
-	Channel          *int32   `protobuf:"varint,8,opt,name=channel" json:"channel,omitempty"`
-	Pitch            *int32   `protobuf:"varint,9,opt,name=pitch" json:"pitch,omitempty"`
-	Flags            *int32   `protobuf:"varint,10,opt,name=flags" json:"flags,omitempty"`
-	SoundNum         *uint32  `protobuf:"varint,11,opt,name=sound_num,json=soundNum" json:"sound_num,omitempty"`
-	SoundNumHandle   *uint32  `protobuf:"fixed32,12,opt,name=sound_num_handle,json=soundNumHandle" json:"sound_num_handle,omitempty"`
-	SpeakerEntity    *int32   `protobuf:"varint,13,opt,name=speaker_entity,json=speakerEntity" json:"speaker_entity,omitempty"`
-	RandomSeed       *int32   `protobuf:"varint,14,opt,name=random_seed,json=randomSeed" json:"random_seed,omitempty"`
-	SoundLevel       *int32   `protobuf:"varint,15,opt,name=sound_level,json=soundLevel" json:"sound_level,omitempty"`
-	IsSentence       *bool    `protobuf:"varint,16,opt,name=is_sentence,json=isSentence" json:"is_sentence,omitempty"`
-	IsAmbient        *bool    `protobuf:"varint,17,opt,name=is_ambient,json=isAmbient" json:"is_ambient,omitempty"`
-	Guid             *uint32  `protobuf:"varint,18,opt,name=guid" json:"guid,omitempty"`
-	SoundResourceId  *uint64  `protobuf:"fixed64,19,opt,name=sound_resource_id,json=soundResourceId" json:"sound_resource_id,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	OriginX              *int32   `protobuf:"zigzag32,1,opt,name=origin_x,json=originX" json:"origin_x,omitempty"`
+	OriginY              *int32   `protobuf:"zigzag32,2,opt,name=origin_y,json=originY" json:"origin_y,omitempty"`
+	OriginZ              *int32   `protobuf:"zigzag32,3,opt,name=origin_z,json=originZ" json:"origin_z,omitempty"`
+	Volume               *uint32  `protobuf:"varint,4,opt,name=volume" json:"volume,omitempty"`
+	DelayValue           *float32 `protobuf:"fixed32,5,opt,name=delay_value,json=delayValue" json:"delay_value,omitempty"`
+	SequenceNumber       *int32   `protobuf:"varint,6,opt,name=sequence_number,json=sequenceNumber" json:"sequence_number,omitempty"`
+	EntityIndex          *int32   `protobuf:"varint,7,opt,name=entity_index,json=entityIndex" json:"entity_index,omitempty"`
+	Channel              *int32   `protobuf:"varint,8,opt,name=channel" json:"channel,omitempty"`
+	Pitch                *int32   `protobuf:"varint,9,opt,name=pitch" json:"pitch,omitempty"`
+	Flags                *int32   `protobuf:"varint,10,opt,name=flags" json:"flags,omitempty"`
+	SoundNum             *uint32  `protobuf:"varint,11,opt,name=sound_num,json=soundNum" json:"sound_num,omitempty"`
+	SoundNumHandle       *uint32  `protobuf:"fixed32,12,opt,name=sound_num_handle,json=soundNumHandle" json:"sound_num_handle,omitempty"`
+	SpeakerEntity        *int32   `protobuf:"varint,13,opt,name=speaker_entity,json=speakerEntity" json:"speaker_entity,omitempty"`
+	RandomSeed           *int32   `protobuf:"varint,14,opt,name=random_seed,json=randomSeed" json:"random_seed,omitempty"`
+	SoundLevel           *int32   `protobuf:"varint,15,opt,name=sound_level,json=soundLevel" json:"sound_level,omitempty"`
+	IsSentence           *bool    `protobuf:"varint,16,opt,name=is_sentence,json=isSentence" json:"is_sentence,omitempty"`
+	IsAmbient            *bool    `protobuf:"varint,17,opt,name=is_ambient,json=isAmbient" json:"is_ambient,omitempty"`
+	Guid                 *uint32  `protobuf:"varint,18,opt,name=guid" json:"guid,omitempty"`
+	SoundResourceId      *uint64  `protobuf:"fixed64,19,opt,name=sound_resource_id,json=soundResourceId" json:"sound_resource_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CSVCMsg_SoundsSounddataT) Reset()                    { *m = CSVCMsg_SoundsSounddataT{} }
-func (m *CSVCMsg_SoundsSounddataT) String() string            { return proto.CompactTextString(m) }
-func (*CSVCMsg_SoundsSounddataT) ProtoMessage()               {}
-func (*CSVCMsg_SoundsSounddataT) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{21, 0} }
+func (m *CSVCMsg_SoundsSounddataT) Reset()         { *m = CSVCMsg_SoundsSounddataT{} }
+func (m *CSVCMsg_SoundsSounddataT) String() string { return proto.CompactTextString(m) }
+func (*CSVCMsg_SoundsSounddataT) ProtoMessage()    {}
+func (*CSVCMsg_SoundsSounddataT) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{21, 0}
+}
+func (m *CSVCMsg_SoundsSounddataT) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CSVCMsg_SoundsSounddataT.Unmarshal(m, b)
+}
+func (m *CSVCMsg_SoundsSounddataT) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CSVCMsg_SoundsSounddataT.Marshal(b, m, deterministic)
+}
+func (dst *CSVCMsg_SoundsSounddataT) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_SoundsSounddataT.Merge(dst, src)
+}
+func (m *CSVCMsg_SoundsSounddataT) XXX_Size() int {
+	return xxx_messageInfo_CSVCMsg_SoundsSounddataT.Size(m)
+}
+func (m *CSVCMsg_SoundsSounddataT) XXX_DiscardUnknown() {
+	xxx_messageInfo_CSVCMsg_SoundsSounddataT.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CSVCMsg_SoundsSounddataT proto.InternalMessageInfo
 
 func (m *CSVCMsg_SoundsSounddataT) GetOriginX() int32 {
 	if m != nil && m.OriginX != nil {
@@ -1475,15 +2005,36 @@ func (m *CSVCMsg_SoundsSounddataT) GetSoundResourceId() uint64 {
 }
 
 type CSVCMsg_Prefetch struct {
-	SoundIndex       *int32        `protobuf:"varint,1,opt,name=sound_index,json=soundIndex" json:"sound_index,omitempty"`
-	ResourceType     *PrefetchType `protobuf:"varint,2,opt,name=resource_type,json=resourceType,enum=dota.PrefetchType,def=0" json:"resource_type,omitempty"`
-	XXX_unrecognized []byte        `json:"-"`
+	SoundIndex           *int32        `protobuf:"varint,1,opt,name=sound_index,json=soundIndex" json:"sound_index,omitempty"`
+	ResourceType         *PrefetchType `protobuf:"varint,2,opt,name=resource_type,json=resourceType,enum=dota.PrefetchType,def=0" json:"resource_type,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}      `json:"-"`
+	XXX_unrecognized     []byte        `json:"-"`
+	XXX_sizecache        int32         `json:"-"`
 }
 
-func (m *CSVCMsg_Prefetch) Reset()                    { *m = CSVCMsg_Prefetch{} }
-func (m *CSVCMsg_Prefetch) String() string            { return proto.CompactTextString(m) }
-func (*CSVCMsg_Prefetch) ProtoMessage()               {}
-func (*CSVCMsg_Prefetch) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{22} }
+func (m *CSVCMsg_Prefetch) Reset()         { *m = CSVCMsg_Prefetch{} }
+func (m *CSVCMsg_Prefetch) String() string { return proto.CompactTextString(m) }
+func (*CSVCMsg_Prefetch) ProtoMessage()    {}
+func (*CSVCMsg_Prefetch) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{22}
+}
+func (m *CSVCMsg_Prefetch) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CSVCMsg_Prefetch.Unmarshal(m, b)
+}
+func (m *CSVCMsg_Prefetch) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CSVCMsg_Prefetch.Marshal(b, m, deterministic)
+}
+func (dst *CSVCMsg_Prefetch) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_Prefetch.Merge(dst, src)
+}
+func (m *CSVCMsg_Prefetch) XXX_Size() int {
+	return xxx_messageInfo_CSVCMsg_Prefetch.Size(m)
+}
+func (m *CSVCMsg_Prefetch) XXX_DiscardUnknown() {
+	xxx_messageInfo_CSVCMsg_Prefetch.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CSVCMsg_Prefetch proto.InternalMessageInfo
 
 const Default_CSVCMsg_Prefetch_ResourceType PrefetchType = PrefetchType_PFT_SOUND
 
@@ -1502,15 +2053,36 @@ func (m *CSVCMsg_Prefetch) GetResourceType() PrefetchType {
 }
 
 type CSVCMsg_SetView struct {
-	EntityIndex      *int32 `protobuf:"varint,1,opt,name=entity_index,json=entityIndex" json:"entity_index,omitempty"`
-	Slot             *int32 `protobuf:"varint,2,opt,name=slot" json:"slot,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	EntityIndex          *int32   `protobuf:"varint,1,opt,name=entity_index,json=entityIndex" json:"entity_index,omitempty"`
+	Slot                 *int32   `protobuf:"varint,2,opt,name=slot" json:"slot,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CSVCMsg_SetView) Reset()                    { *m = CSVCMsg_SetView{} }
-func (m *CSVCMsg_SetView) String() string            { return proto.CompactTextString(m) }
-func (*CSVCMsg_SetView) ProtoMessage()               {}
-func (*CSVCMsg_SetView) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{23} }
+func (m *CSVCMsg_SetView) Reset()         { *m = CSVCMsg_SetView{} }
+func (m *CSVCMsg_SetView) String() string { return proto.CompactTextString(m) }
+func (*CSVCMsg_SetView) ProtoMessage()    {}
+func (*CSVCMsg_SetView) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{23}
+}
+func (m *CSVCMsg_SetView) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CSVCMsg_SetView.Unmarshal(m, b)
+}
+func (m *CSVCMsg_SetView) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CSVCMsg_SetView.Marshal(b, m, deterministic)
+}
+func (dst *CSVCMsg_SetView) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_SetView.Merge(dst, src)
+}
+func (m *CSVCMsg_SetView) XXX_Size() int {
+	return xxx_messageInfo_CSVCMsg_SetView.Size(m)
+}
+func (m *CSVCMsg_SetView) XXX_DiscardUnknown() {
+	xxx_messageInfo_CSVCMsg_SetView.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CSVCMsg_SetView proto.InternalMessageInfo
 
 func (m *CSVCMsg_SetView) GetEntityIndex() int32 {
 	if m != nil && m.EntityIndex != nil {
@@ -1527,15 +2099,36 @@ func (m *CSVCMsg_SetView) GetSlot() int32 {
 }
 
 type CSVCMsg_FixAngle struct {
-	Relative         *bool       `protobuf:"varint,1,opt,name=relative" json:"relative,omitempty"`
-	Angle            *CMsgQAngle `protobuf:"bytes,2,opt,name=angle" json:"angle,omitempty"`
-	XXX_unrecognized []byte      `json:"-"`
+	Relative             *bool       `protobuf:"varint,1,opt,name=relative" json:"relative,omitempty"`
+	Angle                *CMsgQAngle `protobuf:"bytes,2,opt,name=angle" json:"angle,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
+	XXX_unrecognized     []byte      `json:"-"`
+	XXX_sizecache        int32       `json:"-"`
 }
 
-func (m *CSVCMsg_FixAngle) Reset()                    { *m = CSVCMsg_FixAngle{} }
-func (m *CSVCMsg_FixAngle) String() string            { return proto.CompactTextString(m) }
-func (*CSVCMsg_FixAngle) ProtoMessage()               {}
-func (*CSVCMsg_FixAngle) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{24} }
+func (m *CSVCMsg_FixAngle) Reset()         { *m = CSVCMsg_FixAngle{} }
+func (m *CSVCMsg_FixAngle) String() string { return proto.CompactTextString(m) }
+func (*CSVCMsg_FixAngle) ProtoMessage()    {}
+func (*CSVCMsg_FixAngle) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{24}
+}
+func (m *CSVCMsg_FixAngle) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CSVCMsg_FixAngle.Unmarshal(m, b)
+}
+func (m *CSVCMsg_FixAngle) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CSVCMsg_FixAngle.Marshal(b, m, deterministic)
+}
+func (dst *CSVCMsg_FixAngle) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_FixAngle.Merge(dst, src)
+}
+func (m *CSVCMsg_FixAngle) XXX_Size() int {
+	return xxx_messageInfo_CSVCMsg_FixAngle.Size(m)
+}
+func (m *CSVCMsg_FixAngle) XXX_DiscardUnknown() {
+	xxx_messageInfo_CSVCMsg_FixAngle.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CSVCMsg_FixAngle proto.InternalMessageInfo
 
 func (m *CSVCMsg_FixAngle) GetRelative() bool {
 	if m != nil && m.Relative != nil {
@@ -1552,14 +2145,35 @@ func (m *CSVCMsg_FixAngle) GetAngle() *CMsgQAngle {
 }
 
 type CSVCMsg_CrosshairAngle struct {
-	Angle            *CMsgQAngle `protobuf:"bytes,1,opt,name=angle" json:"angle,omitempty"`
-	XXX_unrecognized []byte      `json:"-"`
+	Angle                *CMsgQAngle `protobuf:"bytes,1,opt,name=angle" json:"angle,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
+	XXX_unrecognized     []byte      `json:"-"`
+	XXX_sizecache        int32       `json:"-"`
 }
 
-func (m *CSVCMsg_CrosshairAngle) Reset()                    { *m = CSVCMsg_CrosshairAngle{} }
-func (m *CSVCMsg_CrosshairAngle) String() string            { return proto.CompactTextString(m) }
-func (*CSVCMsg_CrosshairAngle) ProtoMessage()               {}
-func (*CSVCMsg_CrosshairAngle) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{25} }
+func (m *CSVCMsg_CrosshairAngle) Reset()         { *m = CSVCMsg_CrosshairAngle{} }
+func (m *CSVCMsg_CrosshairAngle) String() string { return proto.CompactTextString(m) }
+func (*CSVCMsg_CrosshairAngle) ProtoMessage()    {}
+func (*CSVCMsg_CrosshairAngle) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{25}
+}
+func (m *CSVCMsg_CrosshairAngle) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CSVCMsg_CrosshairAngle.Unmarshal(m, b)
+}
+func (m *CSVCMsg_CrosshairAngle) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CSVCMsg_CrosshairAngle.Marshal(b, m, deterministic)
+}
+func (dst *CSVCMsg_CrosshairAngle) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_CrosshairAngle.Merge(dst, src)
+}
+func (m *CSVCMsg_CrosshairAngle) XXX_Size() int {
+	return xxx_messageInfo_CSVCMsg_CrosshairAngle.Size(m)
+}
+func (m *CSVCMsg_CrosshairAngle) XXX_DiscardUnknown() {
+	xxx_messageInfo_CSVCMsg_CrosshairAngle.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CSVCMsg_CrosshairAngle proto.InternalMessageInfo
 
 func (m *CSVCMsg_CrosshairAngle) GetAngle() *CMsgQAngle {
 	if m != nil {
@@ -1569,18 +2183,39 @@ func (m *CSVCMsg_CrosshairAngle) GetAngle() *CMsgQAngle {
 }
 
 type CSVCMsg_BSPDecal struct {
-	Pos               *CMsgVector `protobuf:"bytes,1,opt,name=pos" json:"pos,omitempty"`
-	DecalTextureIndex *int32      `protobuf:"varint,2,opt,name=decal_texture_index,json=decalTextureIndex" json:"decal_texture_index,omitempty"`
-	EntityIndex       *int32      `protobuf:"varint,3,opt,name=entity_index,json=entityIndex" json:"entity_index,omitempty"`
-	ModelIndex        *int32      `protobuf:"varint,4,opt,name=model_index,json=modelIndex" json:"model_index,omitempty"`
-	LowPriority       *bool       `protobuf:"varint,5,opt,name=low_priority,json=lowPriority" json:"low_priority,omitempty"`
-	XXX_unrecognized  []byte      `json:"-"`
+	Pos                  *CMsgVector `protobuf:"bytes,1,opt,name=pos" json:"pos,omitempty"`
+	DecalTextureIndex    *int32      `protobuf:"varint,2,opt,name=decal_texture_index,json=decalTextureIndex" json:"decal_texture_index,omitempty"`
+	EntityIndex          *int32      `protobuf:"varint,3,opt,name=entity_index,json=entityIndex" json:"entity_index,omitempty"`
+	ModelIndex           *int32      `protobuf:"varint,4,opt,name=model_index,json=modelIndex" json:"model_index,omitempty"`
+	LowPriority          *bool       `protobuf:"varint,5,opt,name=low_priority,json=lowPriority" json:"low_priority,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
+	XXX_unrecognized     []byte      `json:"-"`
+	XXX_sizecache        int32       `json:"-"`
 }
 
-func (m *CSVCMsg_BSPDecal) Reset()                    { *m = CSVCMsg_BSPDecal{} }
-func (m *CSVCMsg_BSPDecal) String() string            { return proto.CompactTextString(m) }
-func (*CSVCMsg_BSPDecal) ProtoMessage()               {}
-func (*CSVCMsg_BSPDecal) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{26} }
+func (m *CSVCMsg_BSPDecal) Reset()         { *m = CSVCMsg_BSPDecal{} }
+func (m *CSVCMsg_BSPDecal) String() string { return proto.CompactTextString(m) }
+func (*CSVCMsg_BSPDecal) ProtoMessage()    {}
+func (*CSVCMsg_BSPDecal) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{26}
+}
+func (m *CSVCMsg_BSPDecal) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CSVCMsg_BSPDecal.Unmarshal(m, b)
+}
+func (m *CSVCMsg_BSPDecal) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CSVCMsg_BSPDecal.Marshal(b, m, deterministic)
+}
+func (dst *CSVCMsg_BSPDecal) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_BSPDecal.Merge(dst, src)
+}
+func (m *CSVCMsg_BSPDecal) XXX_Size() int {
+	return xxx_messageInfo_CSVCMsg_BSPDecal.Size(m)
+}
+func (m *CSVCMsg_BSPDecal) XXX_DiscardUnknown() {
+	xxx_messageInfo_CSVCMsg_BSPDecal.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CSVCMsg_BSPDecal proto.InternalMessageInfo
 
 func (m *CSVCMsg_BSPDecal) GetPos() *CMsgVector {
 	if m != nil {
@@ -1618,16 +2253,37 @@ func (m *CSVCMsg_BSPDecal) GetLowPriority() bool {
 }
 
 type CSVCMsg_SplitScreen struct {
-	Type             *ESplitScreenMessageType `protobuf:"varint,1,opt,name=type,enum=dota.ESplitScreenMessageType,def=0" json:"type,omitempty"`
-	Slot             *int32                   `protobuf:"varint,2,opt,name=slot" json:"slot,omitempty"`
-	PlayerIndex      *int32                   `protobuf:"varint,3,opt,name=player_index,json=playerIndex" json:"player_index,omitempty"`
-	XXX_unrecognized []byte                   `json:"-"`
+	Type                 *ESplitScreenMessageType `protobuf:"varint,1,opt,name=type,enum=dota.ESplitScreenMessageType,def=0" json:"type,omitempty"`
+	Slot                 *int32                   `protobuf:"varint,2,opt,name=slot" json:"slot,omitempty"`
+	PlayerIndex          *int32                   `protobuf:"varint,3,opt,name=player_index,json=playerIndex" json:"player_index,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                 `json:"-"`
+	XXX_unrecognized     []byte                   `json:"-"`
+	XXX_sizecache        int32                    `json:"-"`
 }
 
-func (m *CSVCMsg_SplitScreen) Reset()                    { *m = CSVCMsg_SplitScreen{} }
-func (m *CSVCMsg_SplitScreen) String() string            { return proto.CompactTextString(m) }
-func (*CSVCMsg_SplitScreen) ProtoMessage()               {}
-func (*CSVCMsg_SplitScreen) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{27} }
+func (m *CSVCMsg_SplitScreen) Reset()         { *m = CSVCMsg_SplitScreen{} }
+func (m *CSVCMsg_SplitScreen) String() string { return proto.CompactTextString(m) }
+func (*CSVCMsg_SplitScreen) ProtoMessage()    {}
+func (*CSVCMsg_SplitScreen) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{27}
+}
+func (m *CSVCMsg_SplitScreen) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CSVCMsg_SplitScreen.Unmarshal(m, b)
+}
+func (m *CSVCMsg_SplitScreen) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CSVCMsg_SplitScreen.Marshal(b, m, deterministic)
+}
+func (dst *CSVCMsg_SplitScreen) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_SplitScreen.Merge(dst, src)
+}
+func (m *CSVCMsg_SplitScreen) XXX_Size() int {
+	return xxx_messageInfo_CSVCMsg_SplitScreen.Size(m)
+}
+func (m *CSVCMsg_SplitScreen) XXX_DiscardUnknown() {
+	xxx_messageInfo_CSVCMsg_SplitScreen.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CSVCMsg_SplitScreen proto.InternalMessageInfo
 
 const Default_CSVCMsg_SplitScreen_Type ESplitScreenMessageType = ESplitScreenMessageType_MSG_SPLITSCREEN_ADDUSER
 
@@ -1653,15 +2309,36 @@ func (m *CSVCMsg_SplitScreen) GetPlayerIndex() int32 {
 }
 
 type CSVCMsg_GetCvarValue struct {
-	Cookie           *int32  `protobuf:"varint,1,opt,name=cookie" json:"cookie,omitempty"`
-	CvarName         *string `protobuf:"bytes,2,opt,name=cvar_name,json=cvarName" json:"cvar_name,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Cookie               *int32   `protobuf:"varint,1,opt,name=cookie" json:"cookie,omitempty"`
+	CvarName             *string  `protobuf:"bytes,2,opt,name=cvar_name,json=cvarName" json:"cvar_name,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CSVCMsg_GetCvarValue) Reset()                    { *m = CSVCMsg_GetCvarValue{} }
-func (m *CSVCMsg_GetCvarValue) String() string            { return proto.CompactTextString(m) }
-func (*CSVCMsg_GetCvarValue) ProtoMessage()               {}
-func (*CSVCMsg_GetCvarValue) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{28} }
+func (m *CSVCMsg_GetCvarValue) Reset()         { *m = CSVCMsg_GetCvarValue{} }
+func (m *CSVCMsg_GetCvarValue) String() string { return proto.CompactTextString(m) }
+func (*CSVCMsg_GetCvarValue) ProtoMessage()    {}
+func (*CSVCMsg_GetCvarValue) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{28}
+}
+func (m *CSVCMsg_GetCvarValue) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CSVCMsg_GetCvarValue.Unmarshal(m, b)
+}
+func (m *CSVCMsg_GetCvarValue) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CSVCMsg_GetCvarValue.Marshal(b, m, deterministic)
+}
+func (dst *CSVCMsg_GetCvarValue) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_GetCvarValue.Merge(dst, src)
+}
+func (m *CSVCMsg_GetCvarValue) XXX_Size() int {
+	return xxx_messageInfo_CSVCMsg_GetCvarValue.Size(m)
+}
+func (m *CSVCMsg_GetCvarValue) XXX_DiscardUnknown() {
+	xxx_messageInfo_CSVCMsg_GetCvarValue.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CSVCMsg_GetCvarValue proto.InternalMessageInfo
 
 func (m *CSVCMsg_GetCvarValue) GetCookie() int32 {
 	if m != nil && m.Cookie != nil {
@@ -1678,15 +2355,36 @@ func (m *CSVCMsg_GetCvarValue) GetCvarName() string {
 }
 
 type CSVCMsg_Menu struct {
-	DialogType       *int32 `protobuf:"varint,1,opt,name=dialog_type,json=dialogType" json:"dialog_type,omitempty"`
-	MenuKeyValues    []byte `protobuf:"bytes,2,opt,name=menu_key_values,json=menuKeyValues" json:"menu_key_values,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	DialogType           *int32   `protobuf:"varint,1,opt,name=dialog_type,json=dialogType" json:"dialog_type,omitempty"`
+	MenuKeyValues        []byte   `protobuf:"bytes,2,opt,name=menu_key_values,json=menuKeyValues" json:"menu_key_values,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CSVCMsg_Menu) Reset()                    { *m = CSVCMsg_Menu{} }
-func (m *CSVCMsg_Menu) String() string            { return proto.CompactTextString(m) }
-func (*CSVCMsg_Menu) ProtoMessage()               {}
-func (*CSVCMsg_Menu) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{29} }
+func (m *CSVCMsg_Menu) Reset()         { *m = CSVCMsg_Menu{} }
+func (m *CSVCMsg_Menu) String() string { return proto.CompactTextString(m) }
+func (*CSVCMsg_Menu) ProtoMessage()    {}
+func (*CSVCMsg_Menu) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{29}
+}
+func (m *CSVCMsg_Menu) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CSVCMsg_Menu.Unmarshal(m, b)
+}
+func (m *CSVCMsg_Menu) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CSVCMsg_Menu.Marshal(b, m, deterministic)
+}
+func (dst *CSVCMsg_Menu) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_Menu.Merge(dst, src)
+}
+func (m *CSVCMsg_Menu) XXX_Size() int {
+	return xxx_messageInfo_CSVCMsg_Menu.Size(m)
+}
+func (m *CSVCMsg_Menu) XXX_DiscardUnknown() {
+	xxx_messageInfo_CSVCMsg_Menu.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CSVCMsg_Menu proto.InternalMessageInfo
 
 func (m *CSVCMsg_Menu) GetDialogType() int32 {
 	if m != nil && m.DialogType != nil {
@@ -1703,17 +2401,38 @@ func (m *CSVCMsg_Menu) GetMenuKeyValues() []byte {
 }
 
 type CSVCMsg_SendTable struct {
-	IsEnd            *bool                         `protobuf:"varint,1,opt,name=is_end,json=isEnd" json:"is_end,omitempty"`
-	NetTableName     *string                       `protobuf:"bytes,2,opt,name=net_table_name,json=netTableName" json:"net_table_name,omitempty"`
-	NeedsDecoder     *bool                         `protobuf:"varint,3,opt,name=needs_decoder,json=needsDecoder" json:"needs_decoder,omitempty"`
-	Props            []*CSVCMsg_SendTableSendpropT `protobuf:"bytes,4,rep,name=props" json:"props,omitempty"`
-	XXX_unrecognized []byte                        `json:"-"`
+	IsEnd                *bool                         `protobuf:"varint,1,opt,name=is_end,json=isEnd" json:"is_end,omitempty"`
+	NetTableName         *string                       `protobuf:"bytes,2,opt,name=net_table_name,json=netTableName" json:"net_table_name,omitempty"`
+	NeedsDecoder         *bool                         `protobuf:"varint,3,opt,name=needs_decoder,json=needsDecoder" json:"needs_decoder,omitempty"`
+	Props                []*CSVCMsg_SendTableSendpropT `protobuf:"bytes,4,rep,name=props" json:"props,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                      `json:"-"`
+	XXX_unrecognized     []byte                        `json:"-"`
+	XXX_sizecache        int32                         `json:"-"`
 }
 
-func (m *CSVCMsg_SendTable) Reset()                    { *m = CSVCMsg_SendTable{} }
-func (m *CSVCMsg_SendTable) String() string            { return proto.CompactTextString(m) }
-func (*CSVCMsg_SendTable) ProtoMessage()               {}
-func (*CSVCMsg_SendTable) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{30} }
+func (m *CSVCMsg_SendTable) Reset()         { *m = CSVCMsg_SendTable{} }
+func (m *CSVCMsg_SendTable) String() string { return proto.CompactTextString(m) }
+func (*CSVCMsg_SendTable) ProtoMessage()    {}
+func (*CSVCMsg_SendTable) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{30}
+}
+func (m *CSVCMsg_SendTable) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CSVCMsg_SendTable.Unmarshal(m, b)
+}
+func (m *CSVCMsg_SendTable) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CSVCMsg_SendTable.Marshal(b, m, deterministic)
+}
+func (dst *CSVCMsg_SendTable) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_SendTable.Merge(dst, src)
+}
+func (m *CSVCMsg_SendTable) XXX_Size() int {
+	return xxx_messageInfo_CSVCMsg_SendTable.Size(m)
+}
+func (m *CSVCMsg_SendTable) XXX_DiscardUnknown() {
+	xxx_messageInfo_CSVCMsg_SendTable.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CSVCMsg_SendTable proto.InternalMessageInfo
 
 func (m *CSVCMsg_SendTable) GetIsEnd() bool {
 	if m != nil && m.IsEnd != nil {
@@ -1744,22 +2463,43 @@ func (m *CSVCMsg_SendTable) GetProps() []*CSVCMsg_SendTableSendpropT {
 }
 
 type CSVCMsg_SendTableSendpropT struct {
-	Type             *int32   `protobuf:"varint,1,opt,name=type" json:"type,omitempty"`
-	VarName          *string  `protobuf:"bytes,2,opt,name=var_name,json=varName" json:"var_name,omitempty"`
-	Flags            *int32   `protobuf:"varint,3,opt,name=flags" json:"flags,omitempty"`
-	Priority         *int32   `protobuf:"varint,4,opt,name=priority" json:"priority,omitempty"`
-	DtName           *string  `protobuf:"bytes,5,opt,name=dt_name,json=dtName" json:"dt_name,omitempty"`
-	NumElements      *int32   `protobuf:"varint,6,opt,name=num_elements,json=numElements" json:"num_elements,omitempty"`
-	LowValue         *float32 `protobuf:"fixed32,7,opt,name=low_value,json=lowValue" json:"low_value,omitempty"`
-	HighValue        *float32 `protobuf:"fixed32,8,opt,name=high_value,json=highValue" json:"high_value,omitempty"`
-	NumBits          *int32   `protobuf:"varint,9,opt,name=num_bits,json=numBits" json:"num_bits,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	Type                 *int32   `protobuf:"varint,1,opt,name=type" json:"type,omitempty"`
+	VarName              *string  `protobuf:"bytes,2,opt,name=var_name,json=varName" json:"var_name,omitempty"`
+	Flags                *int32   `protobuf:"varint,3,opt,name=flags" json:"flags,omitempty"`
+	Priority             *int32   `protobuf:"varint,4,opt,name=priority" json:"priority,omitempty"`
+	DtName               *string  `protobuf:"bytes,5,opt,name=dt_name,json=dtName" json:"dt_name,omitempty"`
+	NumElements          *int32   `protobuf:"varint,6,opt,name=num_elements,json=numElements" json:"num_elements,omitempty"`
+	LowValue             *float32 `protobuf:"fixed32,7,opt,name=low_value,json=lowValue" json:"low_value,omitempty"`
+	HighValue            *float32 `protobuf:"fixed32,8,opt,name=high_value,json=highValue" json:"high_value,omitempty"`
+	NumBits              *int32   `protobuf:"varint,9,opt,name=num_bits,json=numBits" json:"num_bits,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CSVCMsg_SendTableSendpropT) Reset()                    { *m = CSVCMsg_SendTableSendpropT{} }
-func (m *CSVCMsg_SendTableSendpropT) String() string            { return proto.CompactTextString(m) }
-func (*CSVCMsg_SendTableSendpropT) ProtoMessage()               {}
-func (*CSVCMsg_SendTableSendpropT) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{30, 0} }
+func (m *CSVCMsg_SendTableSendpropT) Reset()         { *m = CSVCMsg_SendTableSendpropT{} }
+func (m *CSVCMsg_SendTableSendpropT) String() string { return proto.CompactTextString(m) }
+func (*CSVCMsg_SendTableSendpropT) ProtoMessage()    {}
+func (*CSVCMsg_SendTableSendpropT) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{30, 0}
+}
+func (m *CSVCMsg_SendTableSendpropT) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CSVCMsg_SendTableSendpropT.Unmarshal(m, b)
+}
+func (m *CSVCMsg_SendTableSendpropT) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CSVCMsg_SendTableSendpropT.Marshal(b, m, deterministic)
+}
+func (dst *CSVCMsg_SendTableSendpropT) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_SendTableSendpropT.Merge(dst, src)
+}
+func (m *CSVCMsg_SendTableSendpropT) XXX_Size() int {
+	return xxx_messageInfo_CSVCMsg_SendTableSendpropT.Size(m)
+}
+func (m *CSVCMsg_SendTableSendpropT) XXX_DiscardUnknown() {
+	xxx_messageInfo_CSVCMsg_SendTableSendpropT.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CSVCMsg_SendTableSendpropT proto.InternalMessageInfo
 
 func (m *CSVCMsg_SendTableSendpropT) GetType() int32 {
 	if m != nil && m.Type != nil {
@@ -1825,14 +2565,35 @@ func (m *CSVCMsg_SendTableSendpropT) GetNumBits() int32 {
 }
 
 type CSVCMsg_GameEventList struct {
-	Descriptors      []*CSVCMsg_GameEventListDescriptorT `protobuf:"bytes,1,rep,name=descriptors" json:"descriptors,omitempty"`
-	XXX_unrecognized []byte                              `json:"-"`
+	Descriptors          []*CSVCMsg_GameEventListDescriptorT `protobuf:"bytes,1,rep,name=descriptors" json:"descriptors,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                            `json:"-"`
+	XXX_unrecognized     []byte                              `json:"-"`
+	XXX_sizecache        int32                               `json:"-"`
 }
 
-func (m *CSVCMsg_GameEventList) Reset()                    { *m = CSVCMsg_GameEventList{} }
-func (m *CSVCMsg_GameEventList) String() string            { return proto.CompactTextString(m) }
-func (*CSVCMsg_GameEventList) ProtoMessage()               {}
-func (*CSVCMsg_GameEventList) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{31} }
+func (m *CSVCMsg_GameEventList) Reset()         { *m = CSVCMsg_GameEventList{} }
+func (m *CSVCMsg_GameEventList) String() string { return proto.CompactTextString(m) }
+func (*CSVCMsg_GameEventList) ProtoMessage()    {}
+func (*CSVCMsg_GameEventList) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{31}
+}
+func (m *CSVCMsg_GameEventList) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CSVCMsg_GameEventList.Unmarshal(m, b)
+}
+func (m *CSVCMsg_GameEventList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CSVCMsg_GameEventList.Marshal(b, m, deterministic)
+}
+func (dst *CSVCMsg_GameEventList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_GameEventList.Merge(dst, src)
+}
+func (m *CSVCMsg_GameEventList) XXX_Size() int {
+	return xxx_messageInfo_CSVCMsg_GameEventList.Size(m)
+}
+func (m *CSVCMsg_GameEventList) XXX_DiscardUnknown() {
+	xxx_messageInfo_CSVCMsg_GameEventList.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CSVCMsg_GameEventList proto.InternalMessageInfo
 
 func (m *CSVCMsg_GameEventList) GetDescriptors() []*CSVCMsg_GameEventListDescriptorT {
 	if m != nil {
@@ -1842,15 +2603,36 @@ func (m *CSVCMsg_GameEventList) GetDescriptors() []*CSVCMsg_GameEventListDescrip
 }
 
 type CSVCMsg_GameEventListKeyT struct {
-	Type             *int32  `protobuf:"varint,1,opt,name=type" json:"type,omitempty"`
-	Name             *string `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Type                 *int32   `protobuf:"varint,1,opt,name=type" json:"type,omitempty"`
+	Name                 *string  `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CSVCMsg_GameEventListKeyT) Reset()                    { *m = CSVCMsg_GameEventListKeyT{} }
-func (m *CSVCMsg_GameEventListKeyT) String() string            { return proto.CompactTextString(m) }
-func (*CSVCMsg_GameEventListKeyT) ProtoMessage()               {}
-func (*CSVCMsg_GameEventListKeyT) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{31, 0} }
+func (m *CSVCMsg_GameEventListKeyT) Reset()         { *m = CSVCMsg_GameEventListKeyT{} }
+func (m *CSVCMsg_GameEventListKeyT) String() string { return proto.CompactTextString(m) }
+func (*CSVCMsg_GameEventListKeyT) ProtoMessage()    {}
+func (*CSVCMsg_GameEventListKeyT) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{31, 0}
+}
+func (m *CSVCMsg_GameEventListKeyT) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CSVCMsg_GameEventListKeyT.Unmarshal(m, b)
+}
+func (m *CSVCMsg_GameEventListKeyT) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CSVCMsg_GameEventListKeyT.Marshal(b, m, deterministic)
+}
+func (dst *CSVCMsg_GameEventListKeyT) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_GameEventListKeyT.Merge(dst, src)
+}
+func (m *CSVCMsg_GameEventListKeyT) XXX_Size() int {
+	return xxx_messageInfo_CSVCMsg_GameEventListKeyT.Size(m)
+}
+func (m *CSVCMsg_GameEventListKeyT) XXX_DiscardUnknown() {
+	xxx_messageInfo_CSVCMsg_GameEventListKeyT.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CSVCMsg_GameEventListKeyT proto.InternalMessageInfo
 
 func (m *CSVCMsg_GameEventListKeyT) GetType() int32 {
 	if m != nil && m.Type != nil {
@@ -1867,18 +2649,37 @@ func (m *CSVCMsg_GameEventListKeyT) GetName() string {
 }
 
 type CSVCMsg_GameEventListDescriptorT struct {
-	Eventid          *int32                       `protobuf:"varint,1,opt,name=eventid" json:"eventid,omitempty"`
-	Name             *string                      `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
-	Keys             []*CSVCMsg_GameEventListKeyT `protobuf:"bytes,3,rep,name=keys" json:"keys,omitempty"`
-	XXX_unrecognized []byte                       `json:"-"`
+	Eventid              *int32                       `protobuf:"varint,1,opt,name=eventid" json:"eventid,omitempty"`
+	Name                 *string                      `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
+	Keys                 []*CSVCMsg_GameEventListKeyT `protobuf:"bytes,3,rep,name=keys" json:"keys,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                     `json:"-"`
+	XXX_unrecognized     []byte                       `json:"-"`
+	XXX_sizecache        int32                        `json:"-"`
 }
 
 func (m *CSVCMsg_GameEventListDescriptorT) Reset()         { *m = CSVCMsg_GameEventListDescriptorT{} }
 func (m *CSVCMsg_GameEventListDescriptorT) String() string { return proto.CompactTextString(m) }
 func (*CSVCMsg_GameEventListDescriptorT) ProtoMessage()    {}
 func (*CSVCMsg_GameEventListDescriptorT) Descriptor() ([]byte, []int) {
-	return fileDescriptor31, []int{31, 1}
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{31, 1}
 }
+func (m *CSVCMsg_GameEventListDescriptorT) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CSVCMsg_GameEventListDescriptorT.Unmarshal(m, b)
+}
+func (m *CSVCMsg_GameEventListDescriptorT) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CSVCMsg_GameEventListDescriptorT.Marshal(b, m, deterministic)
+}
+func (dst *CSVCMsg_GameEventListDescriptorT) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_GameEventListDescriptorT.Merge(dst, src)
+}
+func (m *CSVCMsg_GameEventListDescriptorT) XXX_Size() int {
+	return xxx_messageInfo_CSVCMsg_GameEventListDescriptorT.Size(m)
+}
+func (m *CSVCMsg_GameEventListDescriptorT) XXX_DiscardUnknown() {
+	xxx_messageInfo_CSVCMsg_GameEventListDescriptorT.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CSVCMsg_GameEventListDescriptorT proto.InternalMessageInfo
 
 func (m *CSVCMsg_GameEventListDescriptorT) GetEventid() int32 {
 	if m != nil && m.Eventid != nil {
@@ -1902,24 +2703,45 @@ func (m *CSVCMsg_GameEventListDescriptorT) GetKeys() []*CSVCMsg_GameEventListKey
 }
 
 type CSVCMsg_PacketEntities struct {
-	MaxEntries                    *int32  `protobuf:"varint,1,opt,name=max_entries,json=maxEntries" json:"max_entries,omitempty"`
-	UpdatedEntries                *int32  `protobuf:"varint,2,opt,name=updated_entries,json=updatedEntries" json:"updated_entries,omitempty"`
-	IsDelta                       *bool   `protobuf:"varint,3,opt,name=is_delta,json=isDelta" json:"is_delta,omitempty"`
-	UpdateBaseline                *bool   `protobuf:"varint,4,opt,name=update_baseline,json=updateBaseline" json:"update_baseline,omitempty"`
-	Baseline                      *int32  `protobuf:"varint,5,opt,name=baseline" json:"baseline,omitempty"`
-	DeltaFrom                     *int32  `protobuf:"varint,6,opt,name=delta_from,json=deltaFrom" json:"delta_from,omitempty"`
-	EntityData                    []byte  `protobuf:"bytes,7,opt,name=entity_data,json=entityData" json:"entity_data,omitempty"`
-	PendingFullFrame              *bool   `protobuf:"varint,8,opt,name=pending_full_frame,json=pendingFullFrame" json:"pending_full_frame,omitempty"`
-	ActiveSpawngroupHandle        *uint32 `protobuf:"varint,9,opt,name=active_spawngroup_handle,json=activeSpawngroupHandle" json:"active_spawngroup_handle,omitempty"`
-	MaxSpawngroupCreationsequence *uint32 `protobuf:"varint,10,opt,name=max_spawngroup_creationsequence,json=maxSpawngroupCreationsequence" json:"max_spawngroup_creationsequence,omitempty"`
-	LastCmdNumber                 *uint32 `protobuf:"varint,11,opt,name=last_cmd_number,json=lastCmdNumber" json:"last_cmd_number,omitempty"`
-	XXX_unrecognized              []byte  `json:"-"`
+	MaxEntries                    *int32   `protobuf:"varint,1,opt,name=max_entries,json=maxEntries" json:"max_entries,omitempty"`
+	UpdatedEntries                *int32   `protobuf:"varint,2,opt,name=updated_entries,json=updatedEntries" json:"updated_entries,omitempty"`
+	IsDelta                       *bool    `protobuf:"varint,3,opt,name=is_delta,json=isDelta" json:"is_delta,omitempty"`
+	UpdateBaseline                *bool    `protobuf:"varint,4,opt,name=update_baseline,json=updateBaseline" json:"update_baseline,omitempty"`
+	Baseline                      *int32   `protobuf:"varint,5,opt,name=baseline" json:"baseline,omitempty"`
+	DeltaFrom                     *int32   `protobuf:"varint,6,opt,name=delta_from,json=deltaFrom" json:"delta_from,omitempty"`
+	EntityData                    []byte   `protobuf:"bytes,7,opt,name=entity_data,json=entityData" json:"entity_data,omitempty"`
+	PendingFullFrame              *bool    `protobuf:"varint,8,opt,name=pending_full_frame,json=pendingFullFrame" json:"pending_full_frame,omitempty"`
+	ActiveSpawngroupHandle        *uint32  `protobuf:"varint,9,opt,name=active_spawngroup_handle,json=activeSpawngroupHandle" json:"active_spawngroup_handle,omitempty"`
+	MaxSpawngroupCreationsequence *uint32  `protobuf:"varint,10,opt,name=max_spawngroup_creationsequence,json=maxSpawngroupCreationsequence" json:"max_spawngroup_creationsequence,omitempty"`
+	LastCmdNumber                 *uint32  `protobuf:"varint,11,opt,name=last_cmd_number,json=lastCmdNumber" json:"last_cmd_number,omitempty"`
+	XXX_NoUnkeyedLiteral          struct{} `json:"-"`
+	XXX_unrecognized              []byte   `json:"-"`
+	XXX_sizecache                 int32    `json:"-"`
 }
 
-func (m *CSVCMsg_PacketEntities) Reset()                    { *m = CSVCMsg_PacketEntities{} }
-func (m *CSVCMsg_PacketEntities) String() string            { return proto.CompactTextString(m) }
-func (*CSVCMsg_PacketEntities) ProtoMessage()               {}
-func (*CSVCMsg_PacketEntities) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{32} }
+func (m *CSVCMsg_PacketEntities) Reset()         { *m = CSVCMsg_PacketEntities{} }
+func (m *CSVCMsg_PacketEntities) String() string { return proto.CompactTextString(m) }
+func (*CSVCMsg_PacketEntities) ProtoMessage()    {}
+func (*CSVCMsg_PacketEntities) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{32}
+}
+func (m *CSVCMsg_PacketEntities) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CSVCMsg_PacketEntities.Unmarshal(m, b)
+}
+func (m *CSVCMsg_PacketEntities) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CSVCMsg_PacketEntities.Marshal(b, m, deterministic)
+}
+func (dst *CSVCMsg_PacketEntities) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_PacketEntities.Merge(dst, src)
+}
+func (m *CSVCMsg_PacketEntities) XXX_Size() int {
+	return xxx_messageInfo_CSVCMsg_PacketEntities.Size(m)
+}
+func (m *CSVCMsg_PacketEntities) XXX_DiscardUnknown() {
+	xxx_messageInfo_CSVCMsg_PacketEntities.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CSVCMsg_PacketEntities proto.InternalMessageInfo
 
 func (m *CSVCMsg_PacketEntities) GetMaxEntries() int32 {
 	if m != nil && m.MaxEntries != nil {
@@ -1999,16 +2821,37 @@ func (m *CSVCMsg_PacketEntities) GetLastCmdNumber() uint32 {
 }
 
 type CSVCMsg_TempEntities struct {
-	Reliable         *bool  `protobuf:"varint,1,opt,name=reliable" json:"reliable,omitempty"`
-	NumEntries       *int32 `protobuf:"varint,2,opt,name=num_entries,json=numEntries" json:"num_entries,omitempty"`
-	EntityData       []byte `protobuf:"bytes,3,opt,name=entity_data,json=entityData" json:"entity_data,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	Reliable             *bool    `protobuf:"varint,1,opt,name=reliable" json:"reliable,omitempty"`
+	NumEntries           *int32   `protobuf:"varint,2,opt,name=num_entries,json=numEntries" json:"num_entries,omitempty"`
+	EntityData           []byte   `protobuf:"bytes,3,opt,name=entity_data,json=entityData" json:"entity_data,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CSVCMsg_TempEntities) Reset()                    { *m = CSVCMsg_TempEntities{} }
-func (m *CSVCMsg_TempEntities) String() string            { return proto.CompactTextString(m) }
-func (*CSVCMsg_TempEntities) ProtoMessage()               {}
-func (*CSVCMsg_TempEntities) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{33} }
+func (m *CSVCMsg_TempEntities) Reset()         { *m = CSVCMsg_TempEntities{} }
+func (m *CSVCMsg_TempEntities) String() string { return proto.CompactTextString(m) }
+func (*CSVCMsg_TempEntities) ProtoMessage()    {}
+func (*CSVCMsg_TempEntities) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{33}
+}
+func (m *CSVCMsg_TempEntities) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CSVCMsg_TempEntities.Unmarshal(m, b)
+}
+func (m *CSVCMsg_TempEntities) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CSVCMsg_TempEntities.Marshal(b, m, deterministic)
+}
+func (dst *CSVCMsg_TempEntities) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_TempEntities.Merge(dst, src)
+}
+func (m *CSVCMsg_TempEntities) XXX_Size() int {
+	return xxx_messageInfo_CSVCMsg_TempEntities.Size(m)
+}
+func (m *CSVCMsg_TempEntities) XXX_DiscardUnknown() {
+	xxx_messageInfo_CSVCMsg_TempEntities.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CSVCMsg_TempEntities proto.InternalMessageInfo
 
 func (m *CSVCMsg_TempEntities) GetReliable() bool {
 	if m != nil && m.Reliable != nil {
@@ -2032,22 +2875,43 @@ func (m *CSVCMsg_TempEntities) GetEntityData() []byte {
 }
 
 type CSVCMsg_CreateStringTable struct {
-	Name              *string `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
-	NumEntries        *int32  `protobuf:"varint,2,opt,name=num_entries,json=numEntries" json:"num_entries,omitempty"`
-	UserDataFixedSize *bool   `protobuf:"varint,3,opt,name=user_data_fixed_size,json=userDataFixedSize" json:"user_data_fixed_size,omitempty"`
-	UserDataSize      *int32  `protobuf:"varint,4,opt,name=user_data_size,json=userDataSize" json:"user_data_size,omitempty"`
-	UserDataSizeBits  *int32  `protobuf:"varint,5,opt,name=user_data_size_bits,json=userDataSizeBits" json:"user_data_size_bits,omitempty"`
-	Flags             *int32  `protobuf:"varint,6,opt,name=flags" json:"flags,omitempty"`
-	StringData        []byte  `protobuf:"bytes,7,opt,name=string_data,json=stringData" json:"string_data,omitempty"`
-	UncompressedSize  *int32  `protobuf:"varint,8,opt,name=uncompressed_size,json=uncompressedSize" json:"uncompressed_size,omitempty"`
-	DataCompressed    *bool   `protobuf:"varint,9,opt,name=data_compressed,json=dataCompressed" json:"data_compressed,omitempty"`
-	XXX_unrecognized  []byte  `json:"-"`
+	Name                 *string  `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
+	NumEntries           *int32   `protobuf:"varint,2,opt,name=num_entries,json=numEntries" json:"num_entries,omitempty"`
+	UserDataFixedSize    *bool    `protobuf:"varint,3,opt,name=user_data_fixed_size,json=userDataFixedSize" json:"user_data_fixed_size,omitempty"`
+	UserDataSize         *int32   `protobuf:"varint,4,opt,name=user_data_size,json=userDataSize" json:"user_data_size,omitempty"`
+	UserDataSizeBits     *int32   `protobuf:"varint,5,opt,name=user_data_size_bits,json=userDataSizeBits" json:"user_data_size_bits,omitempty"`
+	Flags                *int32   `protobuf:"varint,6,opt,name=flags" json:"flags,omitempty"`
+	StringData           []byte   `protobuf:"bytes,7,opt,name=string_data,json=stringData" json:"string_data,omitempty"`
+	UncompressedSize     *int32   `protobuf:"varint,8,opt,name=uncompressed_size,json=uncompressedSize" json:"uncompressed_size,omitempty"`
+	DataCompressed       *bool    `protobuf:"varint,9,opt,name=data_compressed,json=dataCompressed" json:"data_compressed,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CSVCMsg_CreateStringTable) Reset()                    { *m = CSVCMsg_CreateStringTable{} }
-func (m *CSVCMsg_CreateStringTable) String() string            { return proto.CompactTextString(m) }
-func (*CSVCMsg_CreateStringTable) ProtoMessage()               {}
-func (*CSVCMsg_CreateStringTable) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{34} }
+func (m *CSVCMsg_CreateStringTable) Reset()         { *m = CSVCMsg_CreateStringTable{} }
+func (m *CSVCMsg_CreateStringTable) String() string { return proto.CompactTextString(m) }
+func (*CSVCMsg_CreateStringTable) ProtoMessage()    {}
+func (*CSVCMsg_CreateStringTable) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{34}
+}
+func (m *CSVCMsg_CreateStringTable) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CSVCMsg_CreateStringTable.Unmarshal(m, b)
+}
+func (m *CSVCMsg_CreateStringTable) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CSVCMsg_CreateStringTable.Marshal(b, m, deterministic)
+}
+func (dst *CSVCMsg_CreateStringTable) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_CreateStringTable.Merge(dst, src)
+}
+func (m *CSVCMsg_CreateStringTable) XXX_Size() int {
+	return xxx_messageInfo_CSVCMsg_CreateStringTable.Size(m)
+}
+func (m *CSVCMsg_CreateStringTable) XXX_DiscardUnknown() {
+	xxx_messageInfo_CSVCMsg_CreateStringTable.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CSVCMsg_CreateStringTable proto.InternalMessageInfo
 
 func (m *CSVCMsg_CreateStringTable) GetName() string {
 	if m != nil && m.Name != nil {
@@ -2113,16 +2977,37 @@ func (m *CSVCMsg_CreateStringTable) GetDataCompressed() bool {
 }
 
 type CSVCMsg_UpdateStringTable struct {
-	TableId           *int32 `protobuf:"varint,1,opt,name=table_id,json=tableId" json:"table_id,omitempty"`
-	NumChangedEntries *int32 `protobuf:"varint,2,opt,name=num_changed_entries,json=numChangedEntries" json:"num_changed_entries,omitempty"`
-	StringData        []byte `protobuf:"bytes,3,opt,name=string_data,json=stringData" json:"string_data,omitempty"`
-	XXX_unrecognized  []byte `json:"-"`
+	TableId              *int32   `protobuf:"varint,1,opt,name=table_id,json=tableId" json:"table_id,omitempty"`
+	NumChangedEntries    *int32   `protobuf:"varint,2,opt,name=num_changed_entries,json=numChangedEntries" json:"num_changed_entries,omitempty"`
+	StringData           []byte   `protobuf:"bytes,3,opt,name=string_data,json=stringData" json:"string_data,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CSVCMsg_UpdateStringTable) Reset()                    { *m = CSVCMsg_UpdateStringTable{} }
-func (m *CSVCMsg_UpdateStringTable) String() string            { return proto.CompactTextString(m) }
-func (*CSVCMsg_UpdateStringTable) ProtoMessage()               {}
-func (*CSVCMsg_UpdateStringTable) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{35} }
+func (m *CSVCMsg_UpdateStringTable) Reset()         { *m = CSVCMsg_UpdateStringTable{} }
+func (m *CSVCMsg_UpdateStringTable) String() string { return proto.CompactTextString(m) }
+func (*CSVCMsg_UpdateStringTable) ProtoMessage()    {}
+func (*CSVCMsg_UpdateStringTable) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{35}
+}
+func (m *CSVCMsg_UpdateStringTable) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CSVCMsg_UpdateStringTable.Unmarshal(m, b)
+}
+func (m *CSVCMsg_UpdateStringTable) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CSVCMsg_UpdateStringTable.Marshal(b, m, deterministic)
+}
+func (dst *CSVCMsg_UpdateStringTable) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_UpdateStringTable.Merge(dst, src)
+}
+func (m *CSVCMsg_UpdateStringTable) XXX_Size() int {
+	return xxx_messageInfo_CSVCMsg_UpdateStringTable.Size(m)
+}
+func (m *CSVCMsg_UpdateStringTable) XXX_DiscardUnknown() {
+	xxx_messageInfo_CSVCMsg_UpdateStringTable.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CSVCMsg_UpdateStringTable proto.InternalMessageInfo
 
 func (m *CSVCMsg_UpdateStringTable) GetTableId() int32 {
 	if m != nil && m.TableId != nil {
@@ -2146,19 +3031,40 @@ func (m *CSVCMsg_UpdateStringTable) GetStringData() []byte {
 }
 
 type CSVCMsg_VoiceData struct {
-	Audio            *CMsgVoiceAudio `protobuf:"bytes,1,opt,name=audio" json:"audio,omitempty"`
-	Client           *int32          `protobuf:"varint,2,opt,name=client" json:"client,omitempty"`
-	Proximity        *bool           `protobuf:"varint,3,opt,name=proximity" json:"proximity,omitempty"`
-	Xuid             *uint64         `protobuf:"fixed64,4,opt,name=xuid" json:"xuid,omitempty"`
-	AudibleMask      *int32          `protobuf:"varint,5,opt,name=audible_mask,json=audibleMask" json:"audible_mask,omitempty"`
-	Tick             *uint32         `protobuf:"varint,6,opt,name=tick" json:"tick,omitempty"`
-	XXX_unrecognized []byte          `json:"-"`
+	Audio                *CMsgVoiceAudio `protobuf:"bytes,1,opt,name=audio" json:"audio,omitempty"`
+	Client               *int32          `protobuf:"varint,2,opt,name=client" json:"client,omitempty"`
+	Proximity            *bool           `protobuf:"varint,3,opt,name=proximity" json:"proximity,omitempty"`
+	Xuid                 *uint64         `protobuf:"fixed64,4,opt,name=xuid" json:"xuid,omitempty"`
+	AudibleMask          *int32          `protobuf:"varint,5,opt,name=audible_mask,json=audibleMask" json:"audible_mask,omitempty"`
+	Tick                 *uint32         `protobuf:"varint,6,opt,name=tick" json:"tick,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
+	XXX_unrecognized     []byte          `json:"-"`
+	XXX_sizecache        int32           `json:"-"`
 }
 
-func (m *CSVCMsg_VoiceData) Reset()                    { *m = CSVCMsg_VoiceData{} }
-func (m *CSVCMsg_VoiceData) String() string            { return proto.CompactTextString(m) }
-func (*CSVCMsg_VoiceData) ProtoMessage()               {}
-func (*CSVCMsg_VoiceData) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{36} }
+func (m *CSVCMsg_VoiceData) Reset()         { *m = CSVCMsg_VoiceData{} }
+func (m *CSVCMsg_VoiceData) String() string { return proto.CompactTextString(m) }
+func (*CSVCMsg_VoiceData) ProtoMessage()    {}
+func (*CSVCMsg_VoiceData) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{36}
+}
+func (m *CSVCMsg_VoiceData) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CSVCMsg_VoiceData.Unmarshal(m, b)
+}
+func (m *CSVCMsg_VoiceData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CSVCMsg_VoiceData.Marshal(b, m, deterministic)
+}
+func (dst *CSVCMsg_VoiceData) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_VoiceData.Merge(dst, src)
+}
+func (m *CSVCMsg_VoiceData) XXX_Size() int {
+	return xxx_messageInfo_CSVCMsg_VoiceData.Size(m)
+}
+func (m *CSVCMsg_VoiceData) XXX_DiscardUnknown() {
+	xxx_messageInfo_CSVCMsg_VoiceData.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CSVCMsg_VoiceData proto.InternalMessageInfo
 
 func (m *CSVCMsg_VoiceData) GetAudio() *CMsgVoiceAudio {
 	if m != nil {
@@ -2203,16 +3109,37 @@ func (m *CSVCMsg_VoiceData) GetTick() uint32 {
 }
 
 type CSVCMsg_PacketReliable struct {
-	Tick             *int32 `protobuf:"varint,1,opt,name=tick" json:"tick,omitempty"`
-	Messagessize     *int32 `protobuf:"varint,2,opt,name=messagessize" json:"messagessize,omitempty"`
-	State            *bool  `protobuf:"varint,3,opt,name=state" json:"state,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	Tick                 *int32   `protobuf:"varint,1,opt,name=tick" json:"tick,omitempty"`
+	Messagessize         *int32   `protobuf:"varint,2,opt,name=messagessize" json:"messagessize,omitempty"`
+	State                *bool    `protobuf:"varint,3,opt,name=state" json:"state,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CSVCMsg_PacketReliable) Reset()                    { *m = CSVCMsg_PacketReliable{} }
-func (m *CSVCMsg_PacketReliable) String() string            { return proto.CompactTextString(m) }
-func (*CSVCMsg_PacketReliable) ProtoMessage()               {}
-func (*CSVCMsg_PacketReliable) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{37} }
+func (m *CSVCMsg_PacketReliable) Reset()         { *m = CSVCMsg_PacketReliable{} }
+func (m *CSVCMsg_PacketReliable) String() string { return proto.CompactTextString(m) }
+func (*CSVCMsg_PacketReliable) ProtoMessage()    {}
+func (*CSVCMsg_PacketReliable) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{37}
+}
+func (m *CSVCMsg_PacketReliable) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CSVCMsg_PacketReliable.Unmarshal(m, b)
+}
+func (m *CSVCMsg_PacketReliable) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CSVCMsg_PacketReliable.Marshal(b, m, deterministic)
+}
+func (dst *CSVCMsg_PacketReliable) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_PacketReliable.Merge(dst, src)
+}
+func (m *CSVCMsg_PacketReliable) XXX_Size() int {
+	return xxx_messageInfo_CSVCMsg_PacketReliable.Size(m)
+}
+func (m *CSVCMsg_PacketReliable) XXX_DiscardUnknown() {
+	xxx_messageInfo_CSVCMsg_PacketReliable.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CSVCMsg_PacketReliable proto.InternalMessageInfo
 
 func (m *CSVCMsg_PacketReliable) GetTick() int32 {
 	if m != nil && m.Tick != nil {
@@ -2236,17 +3163,38 @@ func (m *CSVCMsg_PacketReliable) GetState() bool {
 }
 
 type CSVCMsg_FullFrameSplit struct {
-	Tick             *int32 `protobuf:"varint,1,opt,name=tick" json:"tick,omitempty"`
-	Section          *int32 `protobuf:"varint,2,opt,name=section" json:"section,omitempty"`
-	Total            *int32 `protobuf:"varint,3,opt,name=total" json:"total,omitempty"`
-	Data             []byte `protobuf:"bytes,4,opt,name=data" json:"data,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	Tick                 *int32   `protobuf:"varint,1,opt,name=tick" json:"tick,omitempty"`
+	Section              *int32   `protobuf:"varint,2,opt,name=section" json:"section,omitempty"`
+	Total                *int32   `protobuf:"varint,3,opt,name=total" json:"total,omitempty"`
+	Data                 []byte   `protobuf:"bytes,4,opt,name=data" json:"data,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CSVCMsg_FullFrameSplit) Reset()                    { *m = CSVCMsg_FullFrameSplit{} }
-func (m *CSVCMsg_FullFrameSplit) String() string            { return proto.CompactTextString(m) }
-func (*CSVCMsg_FullFrameSplit) ProtoMessage()               {}
-func (*CSVCMsg_FullFrameSplit) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{38} }
+func (m *CSVCMsg_FullFrameSplit) Reset()         { *m = CSVCMsg_FullFrameSplit{} }
+func (m *CSVCMsg_FullFrameSplit) String() string { return proto.CompactTextString(m) }
+func (*CSVCMsg_FullFrameSplit) ProtoMessage()    {}
+func (*CSVCMsg_FullFrameSplit) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{38}
+}
+func (m *CSVCMsg_FullFrameSplit) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CSVCMsg_FullFrameSplit.Unmarshal(m, b)
+}
+func (m *CSVCMsg_FullFrameSplit) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CSVCMsg_FullFrameSplit.Marshal(b, m, deterministic)
+}
+func (dst *CSVCMsg_FullFrameSplit) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_FullFrameSplit.Merge(dst, src)
+}
+func (m *CSVCMsg_FullFrameSplit) XXX_Size() int {
+	return xxx_messageInfo_CSVCMsg_FullFrameSplit.Size(m)
+}
+func (m *CSVCMsg_FullFrameSplit) XXX_DiscardUnknown() {
+	xxx_messageInfo_CSVCMsg_FullFrameSplit.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CSVCMsg_FullFrameSplit proto.InternalMessageInfo
 
 func (m *CSVCMsg_FullFrameSplit) GetTick() int32 {
 	if m != nil && m.Tick != nil {
@@ -2277,17 +3225,38 @@ func (m *CSVCMsg_FullFrameSplit) GetData() []byte {
 }
 
 type CSVCMsg_HLTVStatus struct {
-	Master           *string `protobuf:"bytes,1,opt,name=master" json:"master,omitempty"`
-	Clients          *int32  `protobuf:"varint,2,opt,name=clients" json:"clients,omitempty"`
-	Slots            *int32  `protobuf:"varint,3,opt,name=slots" json:"slots,omitempty"`
-	Proxies          *int32  `protobuf:"varint,4,opt,name=proxies" json:"proxies,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Master               *string  `protobuf:"bytes,1,opt,name=master" json:"master,omitempty"`
+	Clients              *int32   `protobuf:"varint,2,opt,name=clients" json:"clients,omitempty"`
+	Slots                *int32   `protobuf:"varint,3,opt,name=slots" json:"slots,omitempty"`
+	Proxies              *int32   `protobuf:"varint,4,opt,name=proxies" json:"proxies,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CSVCMsg_HLTVStatus) Reset()                    { *m = CSVCMsg_HLTVStatus{} }
-func (m *CSVCMsg_HLTVStatus) String() string            { return proto.CompactTextString(m) }
-func (*CSVCMsg_HLTVStatus) ProtoMessage()               {}
-func (*CSVCMsg_HLTVStatus) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{39} }
+func (m *CSVCMsg_HLTVStatus) Reset()         { *m = CSVCMsg_HLTVStatus{} }
+func (m *CSVCMsg_HLTVStatus) String() string { return proto.CompactTextString(m) }
+func (*CSVCMsg_HLTVStatus) ProtoMessage()    {}
+func (*CSVCMsg_HLTVStatus) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{39}
+}
+func (m *CSVCMsg_HLTVStatus) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CSVCMsg_HLTVStatus.Unmarshal(m, b)
+}
+func (m *CSVCMsg_HLTVStatus) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CSVCMsg_HLTVStatus.Marshal(b, m, deterministic)
+}
+func (dst *CSVCMsg_HLTVStatus) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_HLTVStatus.Merge(dst, src)
+}
+func (m *CSVCMsg_HLTVStatus) XXX_Size() int {
+	return xxx_messageInfo_CSVCMsg_HLTVStatus.Size(m)
+}
+func (m *CSVCMsg_HLTVStatus) XXX_DiscardUnknown() {
+	xxx_messageInfo_CSVCMsg_HLTVStatus.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CSVCMsg_HLTVStatus proto.InternalMessageInfo
 
 func (m *CSVCMsg_HLTVStatus) GetMaster() string {
 	if m != nil && m.Master != nil {
@@ -2318,14 +3287,35 @@ func (m *CSVCMsg_HLTVStatus) GetProxies() int32 {
 }
 
 type CSVCMsg_ServerSteamID struct {
-	SteamId          *uint64 `protobuf:"varint,1,opt,name=steam_id,json=steamId" json:"steam_id,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	SteamId              *uint64  `protobuf:"varint,1,opt,name=steam_id,json=steamId" json:"steam_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CSVCMsg_ServerSteamID) Reset()                    { *m = CSVCMsg_ServerSteamID{} }
-func (m *CSVCMsg_ServerSteamID) String() string            { return proto.CompactTextString(m) }
-func (*CSVCMsg_ServerSteamID) ProtoMessage()               {}
-func (*CSVCMsg_ServerSteamID) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{40} }
+func (m *CSVCMsg_ServerSteamID) Reset()         { *m = CSVCMsg_ServerSteamID{} }
+func (m *CSVCMsg_ServerSteamID) String() string { return proto.CompactTextString(m) }
+func (*CSVCMsg_ServerSteamID) ProtoMessage()    {}
+func (*CSVCMsg_ServerSteamID) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{40}
+}
+func (m *CSVCMsg_ServerSteamID) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CSVCMsg_ServerSteamID.Unmarshal(m, b)
+}
+func (m *CSVCMsg_ServerSteamID) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CSVCMsg_ServerSteamID.Marshal(b, m, deterministic)
+}
+func (dst *CSVCMsg_ServerSteamID) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_ServerSteamID.Merge(dst, src)
+}
+func (m *CSVCMsg_ServerSteamID) XXX_Size() int {
+	return xxx_messageInfo_CSVCMsg_ServerSteamID.Size(m)
+}
+func (m *CSVCMsg_ServerSteamID) XXX_DiscardUnknown() {
+	xxx_messageInfo_CSVCMsg_ServerSteamID.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CSVCMsg_ServerSteamID proto.InternalMessageInfo
 
 func (m *CSVCMsg_ServerSteamID) GetSteamId() uint64 {
 	if m != nil && m.SteamId != nil {
@@ -2335,14 +3325,35 @@ func (m *CSVCMsg_ServerSteamID) GetSteamId() uint64 {
 }
 
 type CSVCMsg_CmdKeyValues struct {
-	Data             []byte `protobuf:"bytes,1,opt,name=data" json:"data,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	Data                 []byte   `protobuf:"bytes,1,opt,name=data" json:"data,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CSVCMsg_CmdKeyValues) Reset()                    { *m = CSVCMsg_CmdKeyValues{} }
-func (m *CSVCMsg_CmdKeyValues) String() string            { return proto.CompactTextString(m) }
-func (*CSVCMsg_CmdKeyValues) ProtoMessage()               {}
-func (*CSVCMsg_CmdKeyValues) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{41} }
+func (m *CSVCMsg_CmdKeyValues) Reset()         { *m = CSVCMsg_CmdKeyValues{} }
+func (m *CSVCMsg_CmdKeyValues) String() string { return proto.CompactTextString(m) }
+func (*CSVCMsg_CmdKeyValues) ProtoMessage()    {}
+func (*CSVCMsg_CmdKeyValues) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{41}
+}
+func (m *CSVCMsg_CmdKeyValues) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CSVCMsg_CmdKeyValues.Unmarshal(m, b)
+}
+func (m *CSVCMsg_CmdKeyValues) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CSVCMsg_CmdKeyValues.Marshal(b, m, deterministic)
+}
+func (dst *CSVCMsg_CmdKeyValues) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_CmdKeyValues.Merge(dst, src)
+}
+func (m *CSVCMsg_CmdKeyValues) XXX_Size() int {
+	return xxx_messageInfo_CSVCMsg_CmdKeyValues.Size(m)
+}
+func (m *CSVCMsg_CmdKeyValues) XXX_DiscardUnknown() {
+	xxx_messageInfo_CSVCMsg_CmdKeyValues.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CSVCMsg_CmdKeyValues proto.InternalMessageInfo
 
 func (m *CSVCMsg_CmdKeyValues) GetData() []byte {
 	if m != nil {
@@ -2352,15 +3363,36 @@ func (m *CSVCMsg_CmdKeyValues) GetData() []byte {
 }
 
 type CMsgIPCAddress struct {
-	ComputerGuid     *uint64 `protobuf:"fixed64,1,opt,name=computer_guid,json=computerGuid" json:"computer_guid,omitempty"`
-	ProcessId        *uint32 `protobuf:"varint,2,opt,name=process_id,json=processId" json:"process_id,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	ComputerGuid         *uint64  `protobuf:"fixed64,1,opt,name=computer_guid,json=computerGuid" json:"computer_guid,omitempty"`
+	ProcessId            *uint32  `protobuf:"varint,2,opt,name=process_id,json=processId" json:"process_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CMsgIPCAddress) Reset()                    { *m = CMsgIPCAddress{} }
-func (m *CMsgIPCAddress) String() string            { return proto.CompactTextString(m) }
-func (*CMsgIPCAddress) ProtoMessage()               {}
-func (*CMsgIPCAddress) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{42} }
+func (m *CMsgIPCAddress) Reset()         { *m = CMsgIPCAddress{} }
+func (m *CMsgIPCAddress) String() string { return proto.CompactTextString(m) }
+func (*CMsgIPCAddress) ProtoMessage()    {}
+func (*CMsgIPCAddress) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{42}
+}
+func (m *CMsgIPCAddress) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgIPCAddress.Unmarshal(m, b)
+}
+func (m *CMsgIPCAddress) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgIPCAddress.Marshal(b, m, deterministic)
+}
+func (dst *CMsgIPCAddress) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgIPCAddress.Merge(dst, src)
+}
+func (m *CMsgIPCAddress) XXX_Size() int {
+	return xxx_messageInfo_CMsgIPCAddress.Size(m)
+}
+func (m *CMsgIPCAddress) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgIPCAddress.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgIPCAddress proto.InternalMessageInfo
 
 func (m *CMsgIPCAddress) GetComputerGuid() uint64 {
 	if m != nil && m.ComputerGuid != nil {
@@ -2377,19 +3409,40 @@ func (m *CMsgIPCAddress) GetProcessId() uint32 {
 }
 
 type CMsgServerPeer struct {
-	PlayerSlot         *int32          `protobuf:"varint,1,opt,name=player_slot,json=playerSlot" json:"player_slot,omitempty"`
-	Steamid            *uint64         `protobuf:"fixed64,2,opt,name=steamid" json:"steamid,omitempty"`
-	Ipc                *CMsgIPCAddress `protobuf:"bytes,3,opt,name=ipc" json:"ipc,omitempty"`
-	TheyHearYou        *bool           `protobuf:"varint,4,opt,name=they_hear_you,json=theyHearYou" json:"they_hear_you,omitempty"`
-	YouHearThem        *bool           `protobuf:"varint,5,opt,name=you_hear_them,json=youHearThem" json:"you_hear_them,omitempty"`
-	IsListenserverHost *bool           `protobuf:"varint,6,opt,name=is_listenserver_host,json=isListenserverHost" json:"is_listenserver_host,omitempty"`
-	XXX_unrecognized   []byte          `json:"-"`
+	PlayerSlot           *int32          `protobuf:"varint,1,opt,name=player_slot,json=playerSlot" json:"player_slot,omitempty"`
+	Steamid              *uint64         `protobuf:"fixed64,2,opt,name=steamid" json:"steamid,omitempty"`
+	Ipc                  *CMsgIPCAddress `protobuf:"bytes,3,opt,name=ipc" json:"ipc,omitempty"`
+	TheyHearYou          *bool           `protobuf:"varint,4,opt,name=they_hear_you,json=theyHearYou" json:"they_hear_you,omitempty"`
+	YouHearThem          *bool           `protobuf:"varint,5,opt,name=you_hear_them,json=youHearThem" json:"you_hear_them,omitempty"`
+	IsListenserverHost   *bool           `protobuf:"varint,6,opt,name=is_listenserver_host,json=isListenserverHost" json:"is_listenserver_host,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
+	XXX_unrecognized     []byte          `json:"-"`
+	XXX_sizecache        int32           `json:"-"`
 }
 
-func (m *CMsgServerPeer) Reset()                    { *m = CMsgServerPeer{} }
-func (m *CMsgServerPeer) String() string            { return proto.CompactTextString(m) }
-func (*CMsgServerPeer) ProtoMessage()               {}
-func (*CMsgServerPeer) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{43} }
+func (m *CMsgServerPeer) Reset()         { *m = CMsgServerPeer{} }
+func (m *CMsgServerPeer) String() string { return proto.CompactTextString(m) }
+func (*CMsgServerPeer) ProtoMessage()    {}
+func (*CMsgServerPeer) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{43}
+}
+func (m *CMsgServerPeer) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgServerPeer.Unmarshal(m, b)
+}
+func (m *CMsgServerPeer) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgServerPeer.Marshal(b, m, deterministic)
+}
+func (dst *CMsgServerPeer) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgServerPeer.Merge(dst, src)
+}
+func (m *CMsgServerPeer) XXX_Size() int {
+	return xxx_messageInfo_CMsgServerPeer.Size(m)
+}
+func (m *CMsgServerPeer) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgServerPeer.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgServerPeer proto.InternalMessageInfo
 
 func (m *CMsgServerPeer) GetPlayerSlot() int32 {
 	if m != nil && m.PlayerSlot != nil {
@@ -2434,14 +3487,35 @@ func (m *CMsgServerPeer) GetIsListenserverHost() bool {
 }
 
 type CSVCMsg_PeerList struct {
-	Peer             []*CMsgServerPeer `protobuf:"bytes,1,rep,name=peer" json:"peer,omitempty"`
-	XXX_unrecognized []byte            `json:"-"`
+	Peer                 []*CMsgServerPeer `protobuf:"bytes,1,rep,name=peer" json:"peer,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
+	XXX_unrecognized     []byte            `json:"-"`
+	XXX_sizecache        int32             `json:"-"`
 }
 
-func (m *CSVCMsg_PeerList) Reset()                    { *m = CSVCMsg_PeerList{} }
-func (m *CSVCMsg_PeerList) String() string            { return proto.CompactTextString(m) }
-func (*CSVCMsg_PeerList) ProtoMessage()               {}
-func (*CSVCMsg_PeerList) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{44} }
+func (m *CSVCMsg_PeerList) Reset()         { *m = CSVCMsg_PeerList{} }
+func (m *CSVCMsg_PeerList) String() string { return proto.CompactTextString(m) }
+func (*CSVCMsg_PeerList) ProtoMessage()    {}
+func (*CSVCMsg_PeerList) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{44}
+}
+func (m *CSVCMsg_PeerList) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CSVCMsg_PeerList.Unmarshal(m, b)
+}
+func (m *CSVCMsg_PeerList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CSVCMsg_PeerList.Marshal(b, m, deterministic)
+}
+func (dst *CSVCMsg_PeerList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_PeerList.Merge(dst, src)
+}
+func (m *CSVCMsg_PeerList) XXX_Size() int {
+	return xxx_messageInfo_CSVCMsg_PeerList.Size(m)
+}
+func (m *CSVCMsg_PeerList) XXX_DiscardUnknown() {
+	xxx_messageInfo_CSVCMsg_PeerList.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CSVCMsg_PeerList proto.InternalMessageInfo
 
 func (m *CSVCMsg_PeerList) GetPeer() []*CMsgServerPeer {
 	if m != nil {
@@ -2451,14 +3525,35 @@ func (m *CSVCMsg_PeerList) GetPeer() []*CMsgServerPeer {
 }
 
 type CSVCMsg_ClearAllStringTables struct {
-	Mapname          *string `protobuf:"bytes,1,opt,name=mapname" json:"mapname,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Mapname              *string  `protobuf:"bytes,1,opt,name=mapname" json:"mapname,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CSVCMsg_ClearAllStringTables) Reset()                    { *m = CSVCMsg_ClearAllStringTables{} }
-func (m *CSVCMsg_ClearAllStringTables) String() string            { return proto.CompactTextString(m) }
-func (*CSVCMsg_ClearAllStringTables) ProtoMessage()               {}
-func (*CSVCMsg_ClearAllStringTables) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{45} }
+func (m *CSVCMsg_ClearAllStringTables) Reset()         { *m = CSVCMsg_ClearAllStringTables{} }
+func (m *CSVCMsg_ClearAllStringTables) String() string { return proto.CompactTextString(m) }
+func (*CSVCMsg_ClearAllStringTables) ProtoMessage()    {}
+func (*CSVCMsg_ClearAllStringTables) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{45}
+}
+func (m *CSVCMsg_ClearAllStringTables) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CSVCMsg_ClearAllStringTables.Unmarshal(m, b)
+}
+func (m *CSVCMsg_ClearAllStringTables) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CSVCMsg_ClearAllStringTables.Marshal(b, m, deterministic)
+}
+func (dst *CSVCMsg_ClearAllStringTables) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_ClearAllStringTables.Merge(dst, src)
+}
+func (m *CSVCMsg_ClearAllStringTables) XXX_Size() int {
+	return xxx_messageInfo_CSVCMsg_ClearAllStringTables.Size(m)
+}
+func (m *CSVCMsg_ClearAllStringTables) XXX_DiscardUnknown() {
+	xxx_messageInfo_CSVCMsg_ClearAllStringTables.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CSVCMsg_ClearAllStringTables proto.InternalMessageInfo
 
 func (m *CSVCMsg_ClearAllStringTables) GetMapname() string {
 	if m != nil && m.Mapname != nil {
@@ -2478,15 +3573,34 @@ type ProtoFlattenedSerializerFieldT struct {
 	FieldSerializerVersion *int32   `protobuf:"varint,8,opt,name=field_serializer_version,json=fieldSerializerVersion" json:"field_serializer_version,omitempty"`
 	SendNodeSym            *int32   `protobuf:"varint,9,opt,name=send_node_sym,json=sendNodeSym" json:"send_node_sym,omitempty"`
 	VarEncoderSym          *int32   `protobuf:"varint,10,opt,name=var_encoder_sym,json=varEncoderSym" json:"var_encoder_sym,omitempty"`
+	XXX_NoUnkeyedLiteral   struct{} `json:"-"`
 	XXX_unrecognized       []byte   `json:"-"`
+	XXX_sizecache          int32    `json:"-"`
 }
 
 func (m *ProtoFlattenedSerializerFieldT) Reset()         { *m = ProtoFlattenedSerializerFieldT{} }
 func (m *ProtoFlattenedSerializerFieldT) String() string { return proto.CompactTextString(m) }
 func (*ProtoFlattenedSerializerFieldT) ProtoMessage()    {}
 func (*ProtoFlattenedSerializerFieldT) Descriptor() ([]byte, []int) {
-	return fileDescriptor31, []int{46}
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{46}
 }
+func (m *ProtoFlattenedSerializerFieldT) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ProtoFlattenedSerializerFieldT.Unmarshal(m, b)
+}
+func (m *ProtoFlattenedSerializerFieldT) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ProtoFlattenedSerializerFieldT.Marshal(b, m, deterministic)
+}
+func (dst *ProtoFlattenedSerializerFieldT) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ProtoFlattenedSerializerFieldT.Merge(dst, src)
+}
+func (m *ProtoFlattenedSerializerFieldT) XXX_Size() int {
+	return xxx_messageInfo_ProtoFlattenedSerializerFieldT.Size(m)
+}
+func (m *ProtoFlattenedSerializerFieldT) XXX_DiscardUnknown() {
+	xxx_messageInfo_ProtoFlattenedSerializerFieldT.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ProtoFlattenedSerializerFieldT proto.InternalMessageInfo
 
 func (m *ProtoFlattenedSerializerFieldT) GetVarTypeSym() int32 {
 	if m != nil && m.VarTypeSym != nil {
@@ -2559,16 +3673,37 @@ func (m *ProtoFlattenedSerializerFieldT) GetVarEncoderSym() int32 {
 }
 
 type ProtoFlattenedSerializerT struct {
-	SerializerNameSym *int32  `protobuf:"varint,1,opt,name=serializer_name_sym,json=serializerNameSym" json:"serializer_name_sym,omitempty"`
-	SerializerVersion *int32  `protobuf:"varint,2,opt,name=serializer_version,json=serializerVersion" json:"serializer_version,omitempty"`
-	FieldsIndex       []int32 `protobuf:"varint,3,rep,name=fields_index,json=fieldsIndex" json:"fields_index,omitempty"`
-	XXX_unrecognized  []byte  `json:"-"`
+	SerializerNameSym    *int32   `protobuf:"varint,1,opt,name=serializer_name_sym,json=serializerNameSym" json:"serializer_name_sym,omitempty"`
+	SerializerVersion    *int32   `protobuf:"varint,2,opt,name=serializer_version,json=serializerVersion" json:"serializer_version,omitempty"`
+	FieldsIndex          []int32  `protobuf:"varint,3,rep,name=fields_index,json=fieldsIndex" json:"fields_index,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *ProtoFlattenedSerializerT) Reset()                    { *m = ProtoFlattenedSerializerT{} }
-func (m *ProtoFlattenedSerializerT) String() string            { return proto.CompactTextString(m) }
-func (*ProtoFlattenedSerializerT) ProtoMessage()               {}
-func (*ProtoFlattenedSerializerT) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{47} }
+func (m *ProtoFlattenedSerializerT) Reset()         { *m = ProtoFlattenedSerializerT{} }
+func (m *ProtoFlattenedSerializerT) String() string { return proto.CompactTextString(m) }
+func (*ProtoFlattenedSerializerT) ProtoMessage()    {}
+func (*ProtoFlattenedSerializerT) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{47}
+}
+func (m *ProtoFlattenedSerializerT) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ProtoFlattenedSerializerT.Unmarshal(m, b)
+}
+func (m *ProtoFlattenedSerializerT) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ProtoFlattenedSerializerT.Marshal(b, m, deterministic)
+}
+func (dst *ProtoFlattenedSerializerT) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ProtoFlattenedSerializerT.Merge(dst, src)
+}
+func (m *ProtoFlattenedSerializerT) XXX_Size() int {
+	return xxx_messageInfo_ProtoFlattenedSerializerT.Size(m)
+}
+func (m *ProtoFlattenedSerializerT) XXX_DiscardUnknown() {
+	xxx_messageInfo_ProtoFlattenedSerializerT.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ProtoFlattenedSerializerT proto.InternalMessageInfo
 
 func (m *ProtoFlattenedSerializerT) GetSerializerNameSym() int32 {
 	if m != nil && m.SerializerNameSym != nil {
@@ -2592,16 +3727,37 @@ func (m *ProtoFlattenedSerializerT) GetFieldsIndex() []int32 {
 }
 
 type CSVCMsg_FlattenedSerializer struct {
-	Serializers      []*ProtoFlattenedSerializerT      `protobuf:"bytes,1,rep,name=serializers" json:"serializers,omitempty"`
-	Symbols          []string                          `protobuf:"bytes,2,rep,name=symbols" json:"symbols,omitempty"`
-	Fields           []*ProtoFlattenedSerializerFieldT `protobuf:"bytes,3,rep,name=fields" json:"fields,omitempty"`
-	XXX_unrecognized []byte                            `json:"-"`
+	Serializers          []*ProtoFlattenedSerializerT      `protobuf:"bytes,1,rep,name=serializers" json:"serializers,omitempty"`
+	Symbols              []string                          `protobuf:"bytes,2,rep,name=symbols" json:"symbols,omitempty"`
+	Fields               []*ProtoFlattenedSerializerFieldT `protobuf:"bytes,3,rep,name=fields" json:"fields,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                          `json:"-"`
+	XXX_unrecognized     []byte                            `json:"-"`
+	XXX_sizecache        int32                             `json:"-"`
 }
 
-func (m *CSVCMsg_FlattenedSerializer) Reset()                    { *m = CSVCMsg_FlattenedSerializer{} }
-func (m *CSVCMsg_FlattenedSerializer) String() string            { return proto.CompactTextString(m) }
-func (*CSVCMsg_FlattenedSerializer) ProtoMessage()               {}
-func (*CSVCMsg_FlattenedSerializer) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{48} }
+func (m *CSVCMsg_FlattenedSerializer) Reset()         { *m = CSVCMsg_FlattenedSerializer{} }
+func (m *CSVCMsg_FlattenedSerializer) String() string { return proto.CompactTextString(m) }
+func (*CSVCMsg_FlattenedSerializer) ProtoMessage()    {}
+func (*CSVCMsg_FlattenedSerializer) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{48}
+}
+func (m *CSVCMsg_FlattenedSerializer) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CSVCMsg_FlattenedSerializer.Unmarshal(m, b)
+}
+func (m *CSVCMsg_FlattenedSerializer) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CSVCMsg_FlattenedSerializer.Marshal(b, m, deterministic)
+}
+func (dst *CSVCMsg_FlattenedSerializer) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_FlattenedSerializer.Merge(dst, src)
+}
+func (m *CSVCMsg_FlattenedSerializer) XXX_Size() int {
+	return xxx_messageInfo_CSVCMsg_FlattenedSerializer.Size(m)
+}
+func (m *CSVCMsg_FlattenedSerializer) XXX_DiscardUnknown() {
+	xxx_messageInfo_CSVCMsg_FlattenedSerializer.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CSVCMsg_FlattenedSerializer proto.InternalMessageInfo
 
 func (m *CSVCMsg_FlattenedSerializer) GetSerializers() []*ProtoFlattenedSerializerT {
 	if m != nil {
@@ -2625,14 +3781,35 @@ func (m *CSVCMsg_FlattenedSerializer) GetFields() []*ProtoFlattenedSerializerFie
 }
 
 type CSVCMsg_StopSound struct {
-	Guid             *uint32 `protobuf:"fixed32,1,opt,name=guid" json:"guid,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Guid                 *uint32  `protobuf:"fixed32,1,opt,name=guid" json:"guid,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CSVCMsg_StopSound) Reset()                    { *m = CSVCMsg_StopSound{} }
-func (m *CSVCMsg_StopSound) String() string            { return proto.CompactTextString(m) }
-func (*CSVCMsg_StopSound) ProtoMessage()               {}
-func (*CSVCMsg_StopSound) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{49} }
+func (m *CSVCMsg_StopSound) Reset()         { *m = CSVCMsg_StopSound{} }
+func (m *CSVCMsg_StopSound) String() string { return proto.CompactTextString(m) }
+func (*CSVCMsg_StopSound) ProtoMessage()    {}
+func (*CSVCMsg_StopSound) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{49}
+}
+func (m *CSVCMsg_StopSound) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CSVCMsg_StopSound.Unmarshal(m, b)
+}
+func (m *CSVCMsg_StopSound) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CSVCMsg_StopSound.Marshal(b, m, deterministic)
+}
+func (dst *CSVCMsg_StopSound) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_StopSound.Merge(dst, src)
+}
+func (m *CSVCMsg_StopSound) XXX_Size() int {
+	return xxx_messageInfo_CSVCMsg_StopSound.Size(m)
+}
+func (m *CSVCMsg_StopSound) XXX_DiscardUnknown() {
+	xxx_messageInfo_CSVCMsg_StopSound.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CSVCMsg_StopSound proto.InternalMessageInfo
 
 func (m *CSVCMsg_StopSound) GetGuid() uint32 {
 	if m != nil && m.Guid != nil {
@@ -2642,19 +3819,38 @@ func (m *CSVCMsg_StopSound) GetGuid() uint32 {
 }
 
 type CBidirMsg_RebroadcastGameEvent struct {
-	Posttoserver     *bool   `protobuf:"varint,1,opt,name=posttoserver" json:"posttoserver,omitempty"`
-	Buftype          *int32  `protobuf:"varint,2,opt,name=buftype" json:"buftype,omitempty"`
-	Clientbitcount   *uint32 `protobuf:"varint,3,opt,name=clientbitcount" json:"clientbitcount,omitempty"`
-	Receivingclients *uint64 `protobuf:"varint,4,opt,name=receivingclients" json:"receivingclients,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Posttoserver         *bool    `protobuf:"varint,1,opt,name=posttoserver" json:"posttoserver,omitempty"`
+	Buftype              *int32   `protobuf:"varint,2,opt,name=buftype" json:"buftype,omitempty"`
+	Clientbitcount       *uint32  `protobuf:"varint,3,opt,name=clientbitcount" json:"clientbitcount,omitempty"`
+	Receivingclients     *uint64  `protobuf:"varint,4,opt,name=receivingclients" json:"receivingclients,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *CBidirMsg_RebroadcastGameEvent) Reset()         { *m = CBidirMsg_RebroadcastGameEvent{} }
 func (m *CBidirMsg_RebroadcastGameEvent) String() string { return proto.CompactTextString(m) }
 func (*CBidirMsg_RebroadcastGameEvent) ProtoMessage()    {}
 func (*CBidirMsg_RebroadcastGameEvent) Descriptor() ([]byte, []int) {
-	return fileDescriptor31, []int{50}
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{50}
 }
+func (m *CBidirMsg_RebroadcastGameEvent) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CBidirMsg_RebroadcastGameEvent.Unmarshal(m, b)
+}
+func (m *CBidirMsg_RebroadcastGameEvent) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CBidirMsg_RebroadcastGameEvent.Marshal(b, m, deterministic)
+}
+func (dst *CBidirMsg_RebroadcastGameEvent) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CBidirMsg_RebroadcastGameEvent.Merge(dst, src)
+}
+func (m *CBidirMsg_RebroadcastGameEvent) XXX_Size() int {
+	return xxx_messageInfo_CBidirMsg_RebroadcastGameEvent.Size(m)
+}
+func (m *CBidirMsg_RebroadcastGameEvent) XXX_DiscardUnknown() {
+	xxx_messageInfo_CBidirMsg_RebroadcastGameEvent.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CBidirMsg_RebroadcastGameEvent proto.InternalMessageInfo
 
 func (m *CBidirMsg_RebroadcastGameEvent) GetPosttoserver() bool {
 	if m != nil && m.Posttoserver != nil {
@@ -2685,14 +3881,35 @@ func (m *CBidirMsg_RebroadcastGameEvent) GetReceivingclients() uint64 {
 }
 
 type CBidirMsg_RebroadcastSource struct {
-	Eventsource      *int32 `protobuf:"varint,1,opt,name=eventsource" json:"eventsource,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	Eventsource          *int32   `protobuf:"varint,1,opt,name=eventsource" json:"eventsource,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CBidirMsg_RebroadcastSource) Reset()                    { *m = CBidirMsg_RebroadcastSource{} }
-func (m *CBidirMsg_RebroadcastSource) String() string            { return proto.CompactTextString(m) }
-func (*CBidirMsg_RebroadcastSource) ProtoMessage()               {}
-func (*CBidirMsg_RebroadcastSource) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{51} }
+func (m *CBidirMsg_RebroadcastSource) Reset()         { *m = CBidirMsg_RebroadcastSource{} }
+func (m *CBidirMsg_RebroadcastSource) String() string { return proto.CompactTextString(m) }
+func (*CBidirMsg_RebroadcastSource) ProtoMessage()    {}
+func (*CBidirMsg_RebroadcastSource) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{51}
+}
+func (m *CBidirMsg_RebroadcastSource) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CBidirMsg_RebroadcastSource.Unmarshal(m, b)
+}
+func (m *CBidirMsg_RebroadcastSource) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CBidirMsg_RebroadcastSource.Marshal(b, m, deterministic)
+}
+func (dst *CBidirMsg_RebroadcastSource) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CBidirMsg_RebroadcastSource.Merge(dst, src)
+}
+func (m *CBidirMsg_RebroadcastSource) XXX_Size() int {
+	return xxx_messageInfo_CBidirMsg_RebroadcastSource.Size(m)
+}
+func (m *CBidirMsg_RebroadcastSource) XXX_DiscardUnknown() {
+	xxx_messageInfo_CBidirMsg_RebroadcastSource.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CBidirMsg_RebroadcastSource proto.InternalMessageInfo
 
 func (m *CBidirMsg_RebroadcastSource) GetEventsource() int32 {
 	if m != nil && m.Eventsource != nil {
@@ -2702,14 +3919,35 @@ func (m *CBidirMsg_RebroadcastSource) GetEventsource() int32 {
 }
 
 type SerializedNetAddressT struct {
-	SerializedAddress []byte `protobuf:"bytes,1,req,name=serializedAddress" json:"serializedAddress,omitempty"`
-	XXX_unrecognized  []byte `json:"-"`
+	SerializedAddress    []byte   `protobuf:"bytes,1,req,name=serializedAddress" json:"serializedAddress,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *SerializedNetAddressT) Reset()                    { *m = SerializedNetAddressT{} }
-func (m *SerializedNetAddressT) String() string            { return proto.CompactTextString(m) }
-func (*SerializedNetAddressT) ProtoMessage()               {}
-func (*SerializedNetAddressT) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{52} }
+func (m *SerializedNetAddressT) Reset()         { *m = SerializedNetAddressT{} }
+func (m *SerializedNetAddressT) String() string { return proto.CompactTextString(m) }
+func (*SerializedNetAddressT) ProtoMessage()    {}
+func (*SerializedNetAddressT) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{52}
+}
+func (m *SerializedNetAddressT) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_SerializedNetAddressT.Unmarshal(m, b)
+}
+func (m *SerializedNetAddressT) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_SerializedNetAddressT.Marshal(b, m, deterministic)
+}
+func (dst *SerializedNetAddressT) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SerializedNetAddressT.Merge(dst, src)
+}
+func (m *SerializedNetAddressT) XXX_Size() int {
+	return xxx_messageInfo_SerializedNetAddressT.Size(m)
+}
+func (m *SerializedNetAddressT) XXX_DiscardUnknown() {
+	xxx_messageInfo_SerializedNetAddressT.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_SerializedNetAddressT proto.InternalMessageInfo
 
 func (m *SerializedNetAddressT) GetSerializedAddress() []byte {
 	if m != nil {
@@ -2722,13 +3960,34 @@ type CBidirMsg_RelayInfo struct {
 	Operation               *CBidirMsg_RelayInfo_OperationT `protobuf:"varint,1,req,name=operation,enum=dota.CBidirMsg_RelayInfo_OperationT,def=0" json:"operation,omitempty"`
 	SerializedTargetAddress *SerializedNetAddressT          `protobuf:"bytes,2,opt,name=serializedTargetAddress" json:"serializedTargetAddress,omitempty"`
 	AdditionalHops          *uint32                         `protobuf:"varint,3,opt,name=additionalHops" json:"additionalHops,omitempty"`
+	XXX_NoUnkeyedLiteral    struct{}                        `json:"-"`
 	XXX_unrecognized        []byte                          `json:"-"`
+	XXX_sizecache           int32                           `json:"-"`
 }
 
-func (m *CBidirMsg_RelayInfo) Reset()                    { *m = CBidirMsg_RelayInfo{} }
-func (m *CBidirMsg_RelayInfo) String() string            { return proto.CompactTextString(m) }
-func (*CBidirMsg_RelayInfo) ProtoMessage()               {}
-func (*CBidirMsg_RelayInfo) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{53} }
+func (m *CBidirMsg_RelayInfo) Reset()         { *m = CBidirMsg_RelayInfo{} }
+func (m *CBidirMsg_RelayInfo) String() string { return proto.CompactTextString(m) }
+func (*CBidirMsg_RelayInfo) ProtoMessage()    {}
+func (*CBidirMsg_RelayInfo) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{53}
+}
+func (m *CBidirMsg_RelayInfo) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CBidirMsg_RelayInfo.Unmarshal(m, b)
+}
+func (m *CBidirMsg_RelayInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CBidirMsg_RelayInfo.Marshal(b, m, deterministic)
+}
+func (dst *CBidirMsg_RelayInfo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CBidirMsg_RelayInfo.Merge(dst, src)
+}
+func (m *CBidirMsg_RelayInfo) XXX_Size() int {
+	return xxx_messageInfo_CBidirMsg_RelayInfo.Size(m)
+}
+func (m *CBidirMsg_RelayInfo) XXX_DiscardUnknown() {
+	xxx_messageInfo_CBidirMsg_RelayInfo.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CBidirMsg_RelayInfo proto.InternalMessageInfo
 
 const Default_CBidirMsg_RelayInfo_Operation CBidirMsg_RelayInfo_OperationT = CBidirMsg_RelayInfo_RIO_REQUEST_RELAY
 
@@ -2754,16 +4013,37 @@ func (m *CBidirMsg_RelayInfo) GetAdditionalHops() uint32 {
 }
 
 type SignedPayloadT struct {
-	PayloadData       []byte  `protobuf:"bytes,1,req,name=payloadData" json:"payloadData,omitempty"`
-	Signature         *uint32 `protobuf:"varint,2,req,name=signature" json:"signature,omitempty"`
-	BPayloadEncrypted *bool   `protobuf:"varint,3,req,name=bPayloadEncrypted" json:"bPayloadEncrypted,omitempty"`
-	XXX_unrecognized  []byte  `json:"-"`
+	PayloadData          []byte   `protobuf:"bytes,1,req,name=payloadData" json:"payloadData,omitempty"`
+	Signature            *uint32  `protobuf:"varint,2,req,name=signature" json:"signature,omitempty"`
+	BPayloadEncrypted    *bool    `protobuf:"varint,3,req,name=bPayloadEncrypted" json:"bPayloadEncrypted,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *SignedPayloadT) Reset()                    { *m = SignedPayloadT{} }
-func (m *SignedPayloadT) String() string            { return proto.CompactTextString(m) }
-func (*SignedPayloadT) ProtoMessage()               {}
-func (*SignedPayloadT) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{54} }
+func (m *SignedPayloadT) Reset()         { *m = SignedPayloadT{} }
+func (m *SignedPayloadT) String() string { return proto.CompactTextString(m) }
+func (*SignedPayloadT) ProtoMessage()    {}
+func (*SignedPayloadT) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{54}
+}
+func (m *SignedPayloadT) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_SignedPayloadT.Unmarshal(m, b)
+}
+func (m *SignedPayloadT) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_SignedPayloadT.Marshal(b, m, deterministic)
+}
+func (dst *SignedPayloadT) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SignedPayloadT.Merge(dst, src)
+}
+func (m *SignedPayloadT) XXX_Size() int {
+	return xxx_messageInfo_SignedPayloadT.Size(m)
+}
+func (m *SignedPayloadT) XXX_DiscardUnknown() {
+	xxx_messageInfo_SignedPayloadT.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_SignedPayloadT proto.InternalMessageInfo
 
 func (m *SignedPayloadT) GetPayloadData() []byte {
 	if m != nil {
@@ -2787,17 +4067,38 @@ func (m *SignedPayloadT) GetBPayloadEncrypted() bool {
 }
 
 type CBidirMsg_RelayPacket struct {
-	Prevhopcount     *uint32                                            `protobuf:"varint,1,req,name=prevhopcount" json:"prevhopcount,omitempty"`
-	OriginalSender   *SerializedNetAddressT                             `protobuf:"bytes,2,req,name=originalSender" json:"originalSender,omitempty"`
-	SignedPayload    *SignedPayloadT                                    `protobuf:"bytes,3,req,name=signedPayload" json:"signedPayload,omitempty"`
-	RecipientList    []*CBidirMsg_RelayPacket_SignedDestinationAddressT `protobuf:"bytes,4,rep,name=recipientList" json:"recipientList,omitempty"`
-	XXX_unrecognized []byte                                             `json:"-"`
+	Prevhopcount         *uint32                                            `protobuf:"varint,1,req,name=prevhopcount" json:"prevhopcount,omitempty"`
+	OriginalSender       *SerializedNetAddressT                             `protobuf:"bytes,2,req,name=originalSender" json:"originalSender,omitempty"`
+	SignedPayload        *SignedPayloadT                                    `protobuf:"bytes,3,req,name=signedPayload" json:"signedPayload,omitempty"`
+	RecipientList        []*CBidirMsg_RelayPacket_SignedDestinationAddressT `protobuf:"bytes,4,rep,name=recipientList" json:"recipientList,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                           `json:"-"`
+	XXX_unrecognized     []byte                                             `json:"-"`
+	XXX_sizecache        int32                                              `json:"-"`
 }
 
-func (m *CBidirMsg_RelayPacket) Reset()                    { *m = CBidirMsg_RelayPacket{} }
-func (m *CBidirMsg_RelayPacket) String() string            { return proto.CompactTextString(m) }
-func (*CBidirMsg_RelayPacket) ProtoMessage()               {}
-func (*CBidirMsg_RelayPacket) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{55} }
+func (m *CBidirMsg_RelayPacket) Reset()         { *m = CBidirMsg_RelayPacket{} }
+func (m *CBidirMsg_RelayPacket) String() string { return proto.CompactTextString(m) }
+func (*CBidirMsg_RelayPacket) ProtoMessage()    {}
+func (*CBidirMsg_RelayPacket) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{55}
+}
+func (m *CBidirMsg_RelayPacket) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CBidirMsg_RelayPacket.Unmarshal(m, b)
+}
+func (m *CBidirMsg_RelayPacket) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CBidirMsg_RelayPacket.Marshal(b, m, deterministic)
+}
+func (dst *CBidirMsg_RelayPacket) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CBidirMsg_RelayPacket.Merge(dst, src)
+}
+func (m *CBidirMsg_RelayPacket) XXX_Size() int {
+	return xxx_messageInfo_CBidirMsg_RelayPacket.Size(m)
+}
+func (m *CBidirMsg_RelayPacket) XXX_DiscardUnknown() {
+	xxx_messageInfo_CBidirMsg_RelayPacket.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CBidirMsg_RelayPacket proto.InternalMessageInfo
 
 func (m *CBidirMsg_RelayPacket) GetPrevhopcount() uint32 {
 	if m != nil && m.Prevhopcount != nil {
@@ -2828,10 +4129,12 @@ func (m *CBidirMsg_RelayPacket) GetRecipientList() []*CBidirMsg_RelayPacket_Sign
 }
 
 type CBidirMsg_RelayPacket_SignedDestinationAddressT struct {
-	SerializedAddr      *SerializedNetAddressT `protobuf:"bytes,1,req,name=serializedAddr" json:"serializedAddr,omitempty"`
-	Signature           *uint32                `protobuf:"varint,2,req,name=signature" json:"signature,omitempty"`
-	EncryptedPayloadKey []byte                 `protobuf:"bytes,3,opt,name=encryptedPayloadKey" json:"encryptedPayloadKey,omitempty"`
-	XXX_unrecognized    []byte                 `json:"-"`
+	SerializedAddr       *SerializedNetAddressT `protobuf:"bytes,1,req,name=serializedAddr" json:"serializedAddr,omitempty"`
+	Signature            *uint32                `protobuf:"varint,2,req,name=signature" json:"signature,omitempty"`
+	EncryptedPayloadKey  []byte                 `protobuf:"bytes,3,opt,name=encryptedPayloadKey" json:"encryptedPayloadKey,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}               `json:"-"`
+	XXX_unrecognized     []byte                 `json:"-"`
+	XXX_sizecache        int32                  `json:"-"`
 }
 
 func (m *CBidirMsg_RelayPacket_SignedDestinationAddressT) Reset() {
@@ -2842,8 +4145,25 @@ func (m *CBidirMsg_RelayPacket_SignedDestinationAddressT) String() string {
 }
 func (*CBidirMsg_RelayPacket_SignedDestinationAddressT) ProtoMessage() {}
 func (*CBidirMsg_RelayPacket_SignedDestinationAddressT) Descriptor() ([]byte, []int) {
-	return fileDescriptor31, []int{55, 0}
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{55, 0}
 }
+func (m *CBidirMsg_RelayPacket_SignedDestinationAddressT) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CBidirMsg_RelayPacket_SignedDestinationAddressT.Unmarshal(m, b)
+}
+func (m *CBidirMsg_RelayPacket_SignedDestinationAddressT) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CBidirMsg_RelayPacket_SignedDestinationAddressT.Marshal(b, m, deterministic)
+}
+func (dst *CBidirMsg_RelayPacket_SignedDestinationAddressT) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CBidirMsg_RelayPacket_SignedDestinationAddressT.Merge(dst, src)
+}
+func (m *CBidirMsg_RelayPacket_SignedDestinationAddressT) XXX_Size() int {
+	return xxx_messageInfo_CBidirMsg_RelayPacket_SignedDestinationAddressT.Size(m)
+}
+func (m *CBidirMsg_RelayPacket_SignedDestinationAddressT) XXX_DiscardUnknown() {
+	xxx_messageInfo_CBidirMsg_RelayPacket_SignedDestinationAddressT.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CBidirMsg_RelayPacket_SignedDestinationAddressT proto.InternalMessageInfo
 
 func (m *CBidirMsg_RelayPacket_SignedDestinationAddressT) GetSerializedAddr() *SerializedNetAddressT {
 	if m != nil {
@@ -2867,38 +4187,59 @@ func (m *CBidirMsg_RelayPacket_SignedDestinationAddressT) GetEncryptedPayloadKey
 }
 
 type CMsgServerNetworkStats struct {
-	Dedicated        *bool                            `protobuf:"varint,1,opt,name=dedicated" json:"dedicated,omitempty"`
-	CpuUsage         *int32                           `protobuf:"varint,2,opt,name=cpu_usage,json=cpuUsage" json:"cpu_usage,omitempty"`
-	MemoryUsedMb     *int32                           `protobuf:"varint,3,opt,name=memory_used_mb,json=memoryUsedMb" json:"memory_used_mb,omitempty"`
-	MemoryFreeMb     *int32                           `protobuf:"varint,4,opt,name=memory_free_mb,json=memoryFreeMb" json:"memory_free_mb,omitempty"`
-	Uptime           *int32                           `protobuf:"varint,5,opt,name=uptime" json:"uptime,omitempty"`
-	SpawnCount       *int32                           `protobuf:"varint,6,opt,name=spawn_count,json=spawnCount" json:"spawn_count,omitempty"`
-	NumClients       *int32                           `protobuf:"varint,8,opt,name=num_clients,json=numClients" json:"num_clients,omitempty"`
-	NumBots          *int32                           `protobuf:"varint,9,opt,name=num_bots,json=numBots" json:"num_bots,omitempty"`
-	NumSpectators    *int32                           `protobuf:"varint,10,opt,name=num_spectators,json=numSpectators" json:"num_spectators,omitempty"`
-	NumTvRelays      *int32                           `protobuf:"varint,11,opt,name=num_tv_relays,json=numTvRelays" json:"num_tv_relays,omitempty"`
-	Fps              *float32                         `protobuf:"fixed32,12,opt,name=fps" json:"fps,omitempty"`
-	Ports            []*CMsgServerNetworkStats_Port   `protobuf:"bytes,17,rep,name=ports" json:"ports,omitempty"`
-	AvgLatencyOut    *float32                         `protobuf:"fixed32,18,opt,name=avg_latency_out,json=avgLatencyOut" json:"avg_latency_out,omitempty"`
-	AvgLatencyIn     *float32                         `protobuf:"fixed32,19,opt,name=avg_latency_in,json=avgLatencyIn" json:"avg_latency_in,omitempty"`
-	AvgPacketsOut    *float32                         `protobuf:"fixed32,20,opt,name=avg_packets_out,json=avgPacketsOut" json:"avg_packets_out,omitempty"`
-	AvgPacketsIn     *float32                         `protobuf:"fixed32,21,opt,name=avg_packets_in,json=avgPacketsIn" json:"avg_packets_in,omitempty"`
-	AvgLossOut       *float32                         `protobuf:"fixed32,22,opt,name=avg_loss_out,json=avgLossOut" json:"avg_loss_out,omitempty"`
-	AvgLossIn        *float32                         `protobuf:"fixed32,23,opt,name=avg_loss_in,json=avgLossIn" json:"avg_loss_in,omitempty"`
-	AvgDataOut       *float32                         `protobuf:"fixed32,24,opt,name=avg_data_out,json=avgDataOut" json:"avg_data_out,omitempty"`
-	AvgDataIn        *float32                         `protobuf:"fixed32,25,opt,name=avg_data_in,json=avgDataIn" json:"avg_data_in,omitempty"`
-	TotalDataIn      *uint64                          `protobuf:"varint,26,opt,name=total_data_in,json=totalDataIn" json:"total_data_in,omitempty"`
-	TotalPacketsIn   *uint64                          `protobuf:"varint,27,opt,name=total_packets_in,json=totalPacketsIn" json:"total_packets_in,omitempty"`
-	TotalDataOut     *uint64                          `protobuf:"varint,28,opt,name=total_data_out,json=totalDataOut" json:"total_data_out,omitempty"`
-	TotalPacketsOut  *uint64                          `protobuf:"varint,29,opt,name=total_packets_out,json=totalPacketsOut" json:"total_packets_out,omitempty"`
-	Players          []*CMsgServerNetworkStats_Player `protobuf:"bytes,30,rep,name=players" json:"players,omitempty"`
-	XXX_unrecognized []byte                           `json:"-"`
+	Dedicated            *bool                            `protobuf:"varint,1,opt,name=dedicated" json:"dedicated,omitempty"`
+	CpuUsage             *int32                           `protobuf:"varint,2,opt,name=cpu_usage,json=cpuUsage" json:"cpu_usage,omitempty"`
+	MemoryUsedMb         *int32                           `protobuf:"varint,3,opt,name=memory_used_mb,json=memoryUsedMb" json:"memory_used_mb,omitempty"`
+	MemoryFreeMb         *int32                           `protobuf:"varint,4,opt,name=memory_free_mb,json=memoryFreeMb" json:"memory_free_mb,omitempty"`
+	Uptime               *int32                           `protobuf:"varint,5,opt,name=uptime" json:"uptime,omitempty"`
+	SpawnCount           *int32                           `protobuf:"varint,6,opt,name=spawn_count,json=spawnCount" json:"spawn_count,omitempty"`
+	NumClients           *int32                           `protobuf:"varint,8,opt,name=num_clients,json=numClients" json:"num_clients,omitempty"`
+	NumBots              *int32                           `protobuf:"varint,9,opt,name=num_bots,json=numBots" json:"num_bots,omitempty"`
+	NumSpectators        *int32                           `protobuf:"varint,10,opt,name=num_spectators,json=numSpectators" json:"num_spectators,omitempty"`
+	NumTvRelays          *int32                           `protobuf:"varint,11,opt,name=num_tv_relays,json=numTvRelays" json:"num_tv_relays,omitempty"`
+	Fps                  *float32                         `protobuf:"fixed32,12,opt,name=fps" json:"fps,omitempty"`
+	Ports                []*CMsgServerNetworkStats_Port   `protobuf:"bytes,17,rep,name=ports" json:"ports,omitempty"`
+	AvgLatencyOut        *float32                         `protobuf:"fixed32,18,opt,name=avg_latency_out,json=avgLatencyOut" json:"avg_latency_out,omitempty"`
+	AvgLatencyIn         *float32                         `protobuf:"fixed32,19,opt,name=avg_latency_in,json=avgLatencyIn" json:"avg_latency_in,omitempty"`
+	AvgPacketsOut        *float32                         `protobuf:"fixed32,20,opt,name=avg_packets_out,json=avgPacketsOut" json:"avg_packets_out,omitempty"`
+	AvgPacketsIn         *float32                         `protobuf:"fixed32,21,opt,name=avg_packets_in,json=avgPacketsIn" json:"avg_packets_in,omitempty"`
+	AvgLossOut           *float32                         `protobuf:"fixed32,22,opt,name=avg_loss_out,json=avgLossOut" json:"avg_loss_out,omitempty"`
+	AvgLossIn            *float32                         `protobuf:"fixed32,23,opt,name=avg_loss_in,json=avgLossIn" json:"avg_loss_in,omitempty"`
+	AvgDataOut           *float32                         `protobuf:"fixed32,24,opt,name=avg_data_out,json=avgDataOut" json:"avg_data_out,omitempty"`
+	AvgDataIn            *float32                         `protobuf:"fixed32,25,opt,name=avg_data_in,json=avgDataIn" json:"avg_data_in,omitempty"`
+	TotalDataIn          *uint64                          `protobuf:"varint,26,opt,name=total_data_in,json=totalDataIn" json:"total_data_in,omitempty"`
+	TotalPacketsIn       *uint64                          `protobuf:"varint,27,opt,name=total_packets_in,json=totalPacketsIn" json:"total_packets_in,omitempty"`
+	TotalDataOut         *uint64                          `protobuf:"varint,28,opt,name=total_data_out,json=totalDataOut" json:"total_data_out,omitempty"`
+	TotalPacketsOut      *uint64                          `protobuf:"varint,29,opt,name=total_packets_out,json=totalPacketsOut" json:"total_packets_out,omitempty"`
+	Players              []*CMsgServerNetworkStats_Player `protobuf:"bytes,30,rep,name=players" json:"players,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                         `json:"-"`
+	XXX_unrecognized     []byte                           `json:"-"`
+	XXX_sizecache        int32                            `json:"-"`
 }
 
-func (m *CMsgServerNetworkStats) Reset()                    { *m = CMsgServerNetworkStats{} }
-func (m *CMsgServerNetworkStats) String() string            { return proto.CompactTextString(m) }
-func (*CMsgServerNetworkStats) ProtoMessage()               {}
-func (*CMsgServerNetworkStats) Descriptor() ([]byte, []int) { return fileDescriptor31, []int{56} }
+func (m *CMsgServerNetworkStats) Reset()         { *m = CMsgServerNetworkStats{} }
+func (m *CMsgServerNetworkStats) String() string { return proto.CompactTextString(m) }
+func (*CMsgServerNetworkStats) ProtoMessage()    {}
+func (*CMsgServerNetworkStats) Descriptor() ([]byte, []int) {
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{56}
+}
+func (m *CMsgServerNetworkStats) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgServerNetworkStats.Unmarshal(m, b)
+}
+func (m *CMsgServerNetworkStats) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgServerNetworkStats.Marshal(b, m, deterministic)
+}
+func (dst *CMsgServerNetworkStats) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgServerNetworkStats.Merge(dst, src)
+}
+func (m *CMsgServerNetworkStats) XXX_Size() int {
+	return xxx_messageInfo_CMsgServerNetworkStats.Size(m)
+}
+func (m *CMsgServerNetworkStats) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgServerNetworkStats.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgServerNetworkStats proto.InternalMessageInfo
 
 func (m *CMsgServerNetworkStats) GetDedicated() bool {
 	if m != nil && m.Dedicated != nil {
@@ -3076,17 +4417,36 @@ func (m *CMsgServerNetworkStats) GetPlayers() []*CMsgServerNetworkStats_Player {
 }
 
 type CMsgServerNetworkStats_Port struct {
-	Port             *int32  `protobuf:"varint,1,opt,name=port" json:"port,omitempty"`
-	Name             *string `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Port                 *int32   `protobuf:"varint,1,opt,name=port" json:"port,omitempty"`
+	Name                 *string  `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *CMsgServerNetworkStats_Port) Reset()         { *m = CMsgServerNetworkStats_Port{} }
 func (m *CMsgServerNetworkStats_Port) String() string { return proto.CompactTextString(m) }
 func (*CMsgServerNetworkStats_Port) ProtoMessage()    {}
 func (*CMsgServerNetworkStats_Port) Descriptor() ([]byte, []int) {
-	return fileDescriptor31, []int{56, 0}
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{56, 0}
 }
+func (m *CMsgServerNetworkStats_Port) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgServerNetworkStats_Port.Unmarshal(m, b)
+}
+func (m *CMsgServerNetworkStats_Port) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgServerNetworkStats_Port.Marshal(b, m, deterministic)
+}
+func (dst *CMsgServerNetworkStats_Port) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgServerNetworkStats_Port.Merge(dst, src)
+}
+func (m *CMsgServerNetworkStats_Port) XXX_Size() int {
+	return xxx_messageInfo_CMsgServerNetworkStats_Port.Size(m)
+}
+func (m *CMsgServerNetworkStats_Port) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgServerNetworkStats_Port.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgServerNetworkStats_Port proto.InternalMessageInfo
 
 func (m *CMsgServerNetworkStats_Port) GetPort() int32 {
 	if m != nil && m.Port != nil {
@@ -3103,21 +4463,40 @@ func (m *CMsgServerNetworkStats_Port) GetName() string {
 }
 
 type CMsgServerNetworkStats_Player struct {
-	Steamid          *uint64  `protobuf:"varint,1,opt,name=steamid" json:"steamid,omitempty"`
-	RemoteAddr       *string  `protobuf:"bytes,2,opt,name=remote_addr,json=remoteAddr" json:"remote_addr,omitempty"`
-	PingStddevMs     *int32   `protobuf:"varint,3,opt,name=ping_stddev_ms,json=pingStddevMs" json:"ping_stddev_ms,omitempty"`
-	PingAvgMs        *int32   `protobuf:"varint,4,opt,name=ping_avg_ms,json=pingAvgMs" json:"ping_avg_ms,omitempty"`
-	PacketLossPct    *float32 `protobuf:"fixed32,5,opt,name=packet_loss_pct,json=packetLossPct" json:"packet_loss_pct,omitempty"`
-	IsBot            *bool    `protobuf:"varint,6,opt,name=is_bot,json=isBot" json:"is_bot,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	Steamid              *uint64  `protobuf:"varint,1,opt,name=steamid" json:"steamid,omitempty"`
+	RemoteAddr           *string  `protobuf:"bytes,2,opt,name=remote_addr,json=remoteAddr" json:"remote_addr,omitempty"`
+	PingStddevMs         *int32   `protobuf:"varint,3,opt,name=ping_stddev_ms,json=pingStddevMs" json:"ping_stddev_ms,omitempty"`
+	PingAvgMs            *int32   `protobuf:"varint,4,opt,name=ping_avg_ms,json=pingAvgMs" json:"ping_avg_ms,omitempty"`
+	PacketLossPct        *float32 `protobuf:"fixed32,5,opt,name=packet_loss_pct,json=packetLossPct" json:"packet_loss_pct,omitempty"`
+	IsBot                *bool    `protobuf:"varint,6,opt,name=is_bot,json=isBot" json:"is_bot,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *CMsgServerNetworkStats_Player) Reset()         { *m = CMsgServerNetworkStats_Player{} }
 func (m *CMsgServerNetworkStats_Player) String() string { return proto.CompactTextString(m) }
 func (*CMsgServerNetworkStats_Player) ProtoMessage()    {}
 func (*CMsgServerNetworkStats_Player) Descriptor() ([]byte, []int) {
-	return fileDescriptor31, []int{56, 1}
+	return fileDescriptor_netmessages_fb3fc317c359665a, []int{56, 1}
 }
+func (m *CMsgServerNetworkStats_Player) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgServerNetworkStats_Player.Unmarshal(m, b)
+}
+func (m *CMsgServerNetworkStats_Player) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgServerNetworkStats_Player.Marshal(b, m, deterministic)
+}
+func (dst *CMsgServerNetworkStats_Player) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgServerNetworkStats_Player.Merge(dst, src)
+}
+func (m *CMsgServerNetworkStats_Player) XXX_Size() int {
+	return xxx_messageInfo_CMsgServerNetworkStats_Player.Size(m)
+}
+func (m *CMsgServerNetworkStats_Player) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgServerNetworkStats_Player.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgServerNetworkStats_Player proto.InternalMessageInfo
 
 func (m *CMsgServerNetworkStats_Player) GetSteamid() uint64 {
 	if m != nil && m.Steamid != nil {
@@ -3241,9 +4620,9 @@ func init() {
 	proto.RegisterEnum("dota.CBidirMsg_RelayInfo_OperationT", CBidirMsg_RelayInfo_OperationT_name, CBidirMsg_RelayInfo_OperationT_value)
 }
 
-func init() { proto.RegisterFile("netmessages.proto", fileDescriptor31) }
+func init() { proto.RegisterFile("netmessages.proto", fileDescriptor_netmessages_fb3fc317c359665a) }
 
-var fileDescriptor31 = []byte{
+var fileDescriptor_netmessages_fb3fc317c359665a = []byte{
 	// 5051 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x5a, 0x5f, 0x73, 0x1c, 0x49,
 	0x52, 0xf7, 0x8c, 0x66, 0xa4, 0x99, 0x9c, 0x3f, 0x6e, 0xb5, 0x6d, 0x79, 0x2c, 0xaf, 0xbd, 0x76,

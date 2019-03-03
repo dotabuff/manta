@@ -6,12 +6,18 @@ package dota
 import proto "github.com/golang/protobuf/proto"
 import fmt "fmt"
 import math "math"
-import google_protobuf "github.com/golang/protobuf/protoc-gen-go/descriptor"
+import descriptor "github.com/golang/protobuf/protoc-gen-go/descriptor"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
+
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the proto package it is being compiled against.
+// A compilation error at this line likely means your copy of the
+// proto package needs to be updated.
+const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
 type EHeroSelectionText int32
 
@@ -93,10 +99,12 @@ func (x *EHeroSelectionText) UnmarshalJSON(data []byte) error {
 	*x = EHeroSelectionText(value)
 	return nil
 }
-func (EHeroSelectionText) EnumDescriptor() ([]byte, []int) { return fileDescriptor21, []int{0} }
+func (EHeroSelectionText) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_dota_hud_types_bd7116e494185a93, []int{0}
+}
 
 var E_HudLocalizeToken = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.EnumValueOptions)(nil),
+	ExtendedType:  (*descriptor.EnumValueOptions)(nil),
 	ExtensionType: (*string)(nil),
 	Field:         50501,
 	Name:          "dota.hud_localize_token",
@@ -109,9 +117,11 @@ func init() {
 	proto.RegisterExtension(E_HudLocalizeToken)
 }
 
-func init() { proto.RegisterFile("dota_hud_types.proto", fileDescriptor21) }
+func init() {
+	proto.RegisterFile("dota_hud_types.proto", fileDescriptor_dota_hud_types_bd7116e494185a93)
+}
 
-var fileDescriptor21 = []byte{
+var fileDescriptor_dota_hud_types_bd7116e494185a93 = []byte{
 	// 583 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x95, 0xcb, 0x6e, 0x13, 0x3f,
 	0x14, 0xc6, 0x9b, 0x7f, 0xfb, 0x07, 0x6a, 0x28, 0x58, 0x16, 0x0b, 0x63, 0x81, 0x5a, 0xd4, 0x4d,

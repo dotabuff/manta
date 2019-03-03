@@ -12,6 +12,12 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the proto package it is being compiled against.
+// A compilation error at this line likely means your copy of the
+// proto package needs to be updated.
+const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+
 type ETEProtobufIds int32
 
 const (
@@ -119,18 +125,41 @@ func (x *ETEProtobufIds) UnmarshalJSON(data []byte) error {
 	*x = ETEProtobufIds(value)
 	return nil
 }
-func (ETEProtobufIds) EnumDescriptor() ([]byte, []int) { return fileDescriptor40, []int{0} }
-
-type CMsgTEArmorRicochet struct {
-	Pos              *CMsgVector `protobuf:"bytes,1,opt,name=pos" json:"pos,omitempty"`
-	Dir              *CMsgVector `protobuf:"bytes,2,opt,name=dir" json:"dir,omitempty"`
-	XXX_unrecognized []byte      `json:"-"`
+func (ETEProtobufIds) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_te_31efe690dde86f0b, []int{0}
 }
 
-func (m *CMsgTEArmorRicochet) Reset()                    { *m = CMsgTEArmorRicochet{} }
-func (m *CMsgTEArmorRicochet) String() string            { return proto.CompactTextString(m) }
-func (*CMsgTEArmorRicochet) ProtoMessage()               {}
-func (*CMsgTEArmorRicochet) Descriptor() ([]byte, []int) { return fileDescriptor40, []int{0} }
+type CMsgTEArmorRicochet struct {
+	Pos                  *CMsgVector `protobuf:"bytes,1,opt,name=pos" json:"pos,omitempty"`
+	Dir                  *CMsgVector `protobuf:"bytes,2,opt,name=dir" json:"dir,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
+	XXX_unrecognized     []byte      `json:"-"`
+	XXX_sizecache        int32       `json:"-"`
+}
+
+func (m *CMsgTEArmorRicochet) Reset()         { *m = CMsgTEArmorRicochet{} }
+func (m *CMsgTEArmorRicochet) String() string { return proto.CompactTextString(m) }
+func (*CMsgTEArmorRicochet) ProtoMessage()    {}
+func (*CMsgTEArmorRicochet) Descriptor() ([]byte, []int) {
+	return fileDescriptor_te_31efe690dde86f0b, []int{0}
+}
+func (m *CMsgTEArmorRicochet) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgTEArmorRicochet.Unmarshal(m, b)
+}
+func (m *CMsgTEArmorRicochet) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgTEArmorRicochet.Marshal(b, m, deterministic)
+}
+func (dst *CMsgTEArmorRicochet) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgTEArmorRicochet.Merge(dst, src)
+}
+func (m *CMsgTEArmorRicochet) XXX_Size() int {
+	return xxx_messageInfo_CMsgTEArmorRicochet.Size(m)
+}
+func (m *CMsgTEArmorRicochet) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgTEArmorRicochet.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgTEArmorRicochet proto.InternalMessageInfo
 
 func (m *CMsgTEArmorRicochet) GetPos() *CMsgVector {
 	if m != nil {
@@ -147,25 +176,46 @@ func (m *CMsgTEArmorRicochet) GetDir() *CMsgVector {
 }
 
 type CMsgTEBaseBeam struct {
-	Modelindex       *uint64  `protobuf:"fixed64,1,opt,name=modelindex" json:"modelindex,omitempty"`
-	Haloindex        *uint64  `protobuf:"fixed64,2,opt,name=haloindex" json:"haloindex,omitempty"`
-	Startframe       *uint32  `protobuf:"varint,3,opt,name=startframe" json:"startframe,omitempty"`
-	Framerate        *uint32  `protobuf:"varint,4,opt,name=framerate" json:"framerate,omitempty"`
-	Life             *float32 `protobuf:"fixed32,5,opt,name=life" json:"life,omitempty"`
-	Width            *float32 `protobuf:"fixed32,6,opt,name=width" json:"width,omitempty"`
-	Endwidth         *float32 `protobuf:"fixed32,7,opt,name=endwidth" json:"endwidth,omitempty"`
-	Fadelength       *uint32  `protobuf:"varint,8,opt,name=fadelength" json:"fadelength,omitempty"`
-	Amplitude        *float32 `protobuf:"fixed32,9,opt,name=amplitude" json:"amplitude,omitempty"`
-	Color            *uint32  `protobuf:"fixed32,10,opt,name=color" json:"color,omitempty"`
-	Speed            *uint32  `protobuf:"varint,11,opt,name=speed" json:"speed,omitempty"`
-	Flags            *uint32  `protobuf:"varint,12,opt,name=flags" json:"flags,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	Modelindex           *uint64  `protobuf:"fixed64,1,opt,name=modelindex" json:"modelindex,omitempty"`
+	Haloindex            *uint64  `protobuf:"fixed64,2,opt,name=haloindex" json:"haloindex,omitempty"`
+	Startframe           *uint32  `protobuf:"varint,3,opt,name=startframe" json:"startframe,omitempty"`
+	Framerate            *uint32  `protobuf:"varint,4,opt,name=framerate" json:"framerate,omitempty"`
+	Life                 *float32 `protobuf:"fixed32,5,opt,name=life" json:"life,omitempty"`
+	Width                *float32 `protobuf:"fixed32,6,opt,name=width" json:"width,omitempty"`
+	Endwidth             *float32 `protobuf:"fixed32,7,opt,name=endwidth" json:"endwidth,omitempty"`
+	Fadelength           *uint32  `protobuf:"varint,8,opt,name=fadelength" json:"fadelength,omitempty"`
+	Amplitude            *float32 `protobuf:"fixed32,9,opt,name=amplitude" json:"amplitude,omitempty"`
+	Color                *uint32  `protobuf:"fixed32,10,opt,name=color" json:"color,omitempty"`
+	Speed                *uint32  `protobuf:"varint,11,opt,name=speed" json:"speed,omitempty"`
+	Flags                *uint32  `protobuf:"varint,12,opt,name=flags" json:"flags,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CMsgTEBaseBeam) Reset()                    { *m = CMsgTEBaseBeam{} }
-func (m *CMsgTEBaseBeam) String() string            { return proto.CompactTextString(m) }
-func (*CMsgTEBaseBeam) ProtoMessage()               {}
-func (*CMsgTEBaseBeam) Descriptor() ([]byte, []int) { return fileDescriptor40, []int{1} }
+func (m *CMsgTEBaseBeam) Reset()         { *m = CMsgTEBaseBeam{} }
+func (m *CMsgTEBaseBeam) String() string { return proto.CompactTextString(m) }
+func (*CMsgTEBaseBeam) ProtoMessage()    {}
+func (*CMsgTEBaseBeam) Descriptor() ([]byte, []int) {
+	return fileDescriptor_te_31efe690dde86f0b, []int{1}
+}
+func (m *CMsgTEBaseBeam) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgTEBaseBeam.Unmarshal(m, b)
+}
+func (m *CMsgTEBaseBeam) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgTEBaseBeam.Marshal(b, m, deterministic)
+}
+func (dst *CMsgTEBaseBeam) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgTEBaseBeam.Merge(dst, src)
+}
+func (m *CMsgTEBaseBeam) XXX_Size() int {
+	return xxx_messageInfo_CMsgTEBaseBeam.Size(m)
+}
+func (m *CMsgTEBaseBeam) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgTEBaseBeam.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgTEBaseBeam proto.InternalMessageInfo
 
 func (m *CMsgTEBaseBeam) GetModelindex() uint64 {
 	if m != nil && m.Modelindex != nil {
@@ -252,18 +302,39 @@ func (m *CMsgTEBaseBeam) GetFlags() uint32 {
 }
 
 type CMsgTEBeamEntPoint struct {
-	Base             *CMsgTEBaseBeam `protobuf:"bytes,1,opt,name=base" json:"base,omitempty"`
-	Startentity      *uint32         `protobuf:"varint,2,opt,name=startentity" json:"startentity,omitempty"`
-	Endentity        *uint32         `protobuf:"varint,3,opt,name=endentity" json:"endentity,omitempty"`
-	Start            *CMsgVector     `protobuf:"bytes,4,opt,name=start" json:"start,omitempty"`
-	End              *CMsgVector     `protobuf:"bytes,5,opt,name=end" json:"end,omitempty"`
-	XXX_unrecognized []byte          `json:"-"`
+	Base                 *CMsgTEBaseBeam `protobuf:"bytes,1,opt,name=base" json:"base,omitempty"`
+	Startentity          *uint32         `protobuf:"varint,2,opt,name=startentity" json:"startentity,omitempty"`
+	Endentity            *uint32         `protobuf:"varint,3,opt,name=endentity" json:"endentity,omitempty"`
+	Start                *CMsgVector     `protobuf:"bytes,4,opt,name=start" json:"start,omitempty"`
+	End                  *CMsgVector     `protobuf:"bytes,5,opt,name=end" json:"end,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
+	XXX_unrecognized     []byte          `json:"-"`
+	XXX_sizecache        int32           `json:"-"`
 }
 
-func (m *CMsgTEBeamEntPoint) Reset()                    { *m = CMsgTEBeamEntPoint{} }
-func (m *CMsgTEBeamEntPoint) String() string            { return proto.CompactTextString(m) }
-func (*CMsgTEBeamEntPoint) ProtoMessage()               {}
-func (*CMsgTEBeamEntPoint) Descriptor() ([]byte, []int) { return fileDescriptor40, []int{2} }
+func (m *CMsgTEBeamEntPoint) Reset()         { *m = CMsgTEBeamEntPoint{} }
+func (m *CMsgTEBeamEntPoint) String() string { return proto.CompactTextString(m) }
+func (*CMsgTEBeamEntPoint) ProtoMessage()    {}
+func (*CMsgTEBeamEntPoint) Descriptor() ([]byte, []int) {
+	return fileDescriptor_te_31efe690dde86f0b, []int{2}
+}
+func (m *CMsgTEBeamEntPoint) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgTEBeamEntPoint.Unmarshal(m, b)
+}
+func (m *CMsgTEBeamEntPoint) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgTEBeamEntPoint.Marshal(b, m, deterministic)
+}
+func (dst *CMsgTEBeamEntPoint) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgTEBeamEntPoint.Merge(dst, src)
+}
+func (m *CMsgTEBeamEntPoint) XXX_Size() int {
+	return xxx_messageInfo_CMsgTEBeamEntPoint.Size(m)
+}
+func (m *CMsgTEBeamEntPoint) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgTEBeamEntPoint.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgTEBeamEntPoint proto.InternalMessageInfo
 
 func (m *CMsgTEBeamEntPoint) GetBase() *CMsgTEBaseBeam {
 	if m != nil {
@@ -301,16 +372,37 @@ func (m *CMsgTEBeamEntPoint) GetEnd() *CMsgVector {
 }
 
 type CMsgTEBeamEnts struct {
-	Base             *CMsgTEBaseBeam `protobuf:"bytes,1,opt,name=base" json:"base,omitempty"`
-	Startentity      *uint32         `protobuf:"varint,2,opt,name=startentity" json:"startentity,omitempty"`
-	Endentity        *uint32         `protobuf:"varint,3,opt,name=endentity" json:"endentity,omitempty"`
-	XXX_unrecognized []byte          `json:"-"`
+	Base                 *CMsgTEBaseBeam `protobuf:"bytes,1,opt,name=base" json:"base,omitempty"`
+	Startentity          *uint32         `protobuf:"varint,2,opt,name=startentity" json:"startentity,omitempty"`
+	Endentity            *uint32         `protobuf:"varint,3,opt,name=endentity" json:"endentity,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
+	XXX_unrecognized     []byte          `json:"-"`
+	XXX_sizecache        int32           `json:"-"`
 }
 
-func (m *CMsgTEBeamEnts) Reset()                    { *m = CMsgTEBeamEnts{} }
-func (m *CMsgTEBeamEnts) String() string            { return proto.CompactTextString(m) }
-func (*CMsgTEBeamEnts) ProtoMessage()               {}
-func (*CMsgTEBeamEnts) Descriptor() ([]byte, []int) { return fileDescriptor40, []int{3} }
+func (m *CMsgTEBeamEnts) Reset()         { *m = CMsgTEBeamEnts{} }
+func (m *CMsgTEBeamEnts) String() string { return proto.CompactTextString(m) }
+func (*CMsgTEBeamEnts) ProtoMessage()    {}
+func (*CMsgTEBeamEnts) Descriptor() ([]byte, []int) {
+	return fileDescriptor_te_31efe690dde86f0b, []int{3}
+}
+func (m *CMsgTEBeamEnts) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgTEBeamEnts.Unmarshal(m, b)
+}
+func (m *CMsgTEBeamEnts) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgTEBeamEnts.Marshal(b, m, deterministic)
+}
+func (dst *CMsgTEBeamEnts) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgTEBeamEnts.Merge(dst, src)
+}
+func (m *CMsgTEBeamEnts) XXX_Size() int {
+	return xxx_messageInfo_CMsgTEBeamEnts.Size(m)
+}
+func (m *CMsgTEBeamEnts) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgTEBeamEnts.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgTEBeamEnts proto.InternalMessageInfo
 
 func (m *CMsgTEBeamEnts) GetBase() *CMsgTEBaseBeam {
 	if m != nil {
@@ -334,16 +426,37 @@ func (m *CMsgTEBeamEnts) GetEndentity() uint32 {
 }
 
 type CMsgTEBeamPoints struct {
-	Base             *CMsgTEBaseBeam `protobuf:"bytes,1,opt,name=base" json:"base,omitempty"`
-	Start            *CMsgVector     `protobuf:"bytes,2,opt,name=start" json:"start,omitempty"`
-	End              *CMsgVector     `protobuf:"bytes,3,opt,name=end" json:"end,omitempty"`
-	XXX_unrecognized []byte          `json:"-"`
+	Base                 *CMsgTEBaseBeam `protobuf:"bytes,1,opt,name=base" json:"base,omitempty"`
+	Start                *CMsgVector     `protobuf:"bytes,2,opt,name=start" json:"start,omitempty"`
+	End                  *CMsgVector     `protobuf:"bytes,3,opt,name=end" json:"end,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
+	XXX_unrecognized     []byte          `json:"-"`
+	XXX_sizecache        int32           `json:"-"`
 }
 
-func (m *CMsgTEBeamPoints) Reset()                    { *m = CMsgTEBeamPoints{} }
-func (m *CMsgTEBeamPoints) String() string            { return proto.CompactTextString(m) }
-func (*CMsgTEBeamPoints) ProtoMessage()               {}
-func (*CMsgTEBeamPoints) Descriptor() ([]byte, []int) { return fileDescriptor40, []int{4} }
+func (m *CMsgTEBeamPoints) Reset()         { *m = CMsgTEBeamPoints{} }
+func (m *CMsgTEBeamPoints) String() string { return proto.CompactTextString(m) }
+func (*CMsgTEBeamPoints) ProtoMessage()    {}
+func (*CMsgTEBeamPoints) Descriptor() ([]byte, []int) {
+	return fileDescriptor_te_31efe690dde86f0b, []int{4}
+}
+func (m *CMsgTEBeamPoints) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgTEBeamPoints.Unmarshal(m, b)
+}
+func (m *CMsgTEBeamPoints) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgTEBeamPoints.Marshal(b, m, deterministic)
+}
+func (dst *CMsgTEBeamPoints) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgTEBeamPoints.Merge(dst, src)
+}
+func (m *CMsgTEBeamPoints) XXX_Size() int {
+	return xxx_messageInfo_CMsgTEBeamPoints.Size(m)
+}
+func (m *CMsgTEBeamPoints) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgTEBeamPoints.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgTEBeamPoints proto.InternalMessageInfo
 
 func (m *CMsgTEBeamPoints) GetBase() *CMsgTEBaseBeam {
 	if m != nil {
@@ -367,16 +480,37 @@ func (m *CMsgTEBeamPoints) GetEnd() *CMsgVector {
 }
 
 type CMsgTEBeamRing struct {
-	Base             *CMsgTEBaseBeam `protobuf:"bytes,1,opt,name=base" json:"base,omitempty"`
-	Startentity      *uint32         `protobuf:"varint,2,opt,name=startentity" json:"startentity,omitempty"`
-	Endentity        *uint32         `protobuf:"varint,3,opt,name=endentity" json:"endentity,omitempty"`
-	XXX_unrecognized []byte          `json:"-"`
+	Base                 *CMsgTEBaseBeam `protobuf:"bytes,1,opt,name=base" json:"base,omitempty"`
+	Startentity          *uint32         `protobuf:"varint,2,opt,name=startentity" json:"startentity,omitempty"`
+	Endentity            *uint32         `protobuf:"varint,3,opt,name=endentity" json:"endentity,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
+	XXX_unrecognized     []byte          `json:"-"`
+	XXX_sizecache        int32           `json:"-"`
 }
 
-func (m *CMsgTEBeamRing) Reset()                    { *m = CMsgTEBeamRing{} }
-func (m *CMsgTEBeamRing) String() string            { return proto.CompactTextString(m) }
-func (*CMsgTEBeamRing) ProtoMessage()               {}
-func (*CMsgTEBeamRing) Descriptor() ([]byte, []int) { return fileDescriptor40, []int{5} }
+func (m *CMsgTEBeamRing) Reset()         { *m = CMsgTEBeamRing{} }
+func (m *CMsgTEBeamRing) String() string { return proto.CompactTextString(m) }
+func (*CMsgTEBeamRing) ProtoMessage()    {}
+func (*CMsgTEBeamRing) Descriptor() ([]byte, []int) {
+	return fileDescriptor_te_31efe690dde86f0b, []int{5}
+}
+func (m *CMsgTEBeamRing) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgTEBeamRing.Unmarshal(m, b)
+}
+func (m *CMsgTEBeamRing) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgTEBeamRing.Marshal(b, m, deterministic)
+}
+func (dst *CMsgTEBeamRing) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgTEBeamRing.Merge(dst, src)
+}
+func (m *CMsgTEBeamRing) XXX_Size() int {
+	return xxx_messageInfo_CMsgTEBeamRing.Size(m)
+}
+func (m *CMsgTEBeamRing) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgTEBeamRing.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgTEBeamRing proto.InternalMessageInfo
 
 func (m *CMsgTEBeamRing) GetBase() *CMsgTEBaseBeam {
 	if m != nil {
@@ -400,22 +534,43 @@ func (m *CMsgTEBeamRing) GetEndentity() uint32 {
 }
 
 type CMsgTEBreakModel struct {
-	Origin           *CMsgVector `protobuf:"bytes,1,opt,name=origin" json:"origin,omitempty"`
-	Angles           *CMsgQAngle `protobuf:"bytes,2,opt,name=angles" json:"angles,omitempty"`
-	Size             *CMsgVector `protobuf:"bytes,3,opt,name=size" json:"size,omitempty"`
-	Velocity         *CMsgVector `protobuf:"bytes,4,opt,name=velocity" json:"velocity,omitempty"`
-	Randomization    *uint32     `protobuf:"varint,5,opt,name=randomization" json:"randomization,omitempty"`
-	Modelindex       *uint64     `protobuf:"fixed64,6,opt,name=modelindex" json:"modelindex,omitempty"`
-	Count            *uint32     `protobuf:"varint,7,opt,name=count" json:"count,omitempty"`
-	Time             *float32    `protobuf:"fixed32,8,opt,name=time" json:"time,omitempty"`
-	Flags            *uint32     `protobuf:"varint,9,opt,name=flags" json:"flags,omitempty"`
-	XXX_unrecognized []byte      `json:"-"`
+	Origin               *CMsgVector `protobuf:"bytes,1,opt,name=origin" json:"origin,omitempty"`
+	Angles               *CMsgQAngle `protobuf:"bytes,2,opt,name=angles" json:"angles,omitempty"`
+	Size                 *CMsgVector `protobuf:"bytes,3,opt,name=size" json:"size,omitempty"`
+	Velocity             *CMsgVector `protobuf:"bytes,4,opt,name=velocity" json:"velocity,omitempty"`
+	Randomization        *uint32     `protobuf:"varint,5,opt,name=randomization" json:"randomization,omitempty"`
+	Modelindex           *uint64     `protobuf:"fixed64,6,opt,name=modelindex" json:"modelindex,omitempty"`
+	Count                *uint32     `protobuf:"varint,7,opt,name=count" json:"count,omitempty"`
+	Time                 *float32    `protobuf:"fixed32,8,opt,name=time" json:"time,omitempty"`
+	Flags                *uint32     `protobuf:"varint,9,opt,name=flags" json:"flags,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
+	XXX_unrecognized     []byte      `json:"-"`
+	XXX_sizecache        int32       `json:"-"`
 }
 
-func (m *CMsgTEBreakModel) Reset()                    { *m = CMsgTEBreakModel{} }
-func (m *CMsgTEBreakModel) String() string            { return proto.CompactTextString(m) }
-func (*CMsgTEBreakModel) ProtoMessage()               {}
-func (*CMsgTEBreakModel) Descriptor() ([]byte, []int) { return fileDescriptor40, []int{6} }
+func (m *CMsgTEBreakModel) Reset()         { *m = CMsgTEBreakModel{} }
+func (m *CMsgTEBreakModel) String() string { return proto.CompactTextString(m) }
+func (*CMsgTEBreakModel) ProtoMessage()    {}
+func (*CMsgTEBreakModel) Descriptor() ([]byte, []int) {
+	return fileDescriptor_te_31efe690dde86f0b, []int{6}
+}
+func (m *CMsgTEBreakModel) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgTEBreakModel.Unmarshal(m, b)
+}
+func (m *CMsgTEBreakModel) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgTEBreakModel.Marshal(b, m, deterministic)
+}
+func (dst *CMsgTEBreakModel) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgTEBreakModel.Merge(dst, src)
+}
+func (m *CMsgTEBreakModel) XXX_Size() int {
+	return xxx_messageInfo_CMsgTEBreakModel.Size(m)
+}
+func (m *CMsgTEBreakModel) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgTEBreakModel.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgTEBreakModel proto.InternalMessageInfo
 
 func (m *CMsgTEBreakModel) GetOrigin() *CMsgVector {
 	if m != nil {
@@ -481,18 +636,39 @@ func (m *CMsgTEBreakModel) GetFlags() uint32 {
 }
 
 type CMsgTEBSPDecal struct {
-	Origin           *CMsgVector `protobuf:"bytes,1,opt,name=origin" json:"origin,omitempty"`
-	Normal           *CMsgVector `protobuf:"bytes,2,opt,name=normal" json:"normal,omitempty"`
-	Saxis            *CMsgVector `protobuf:"bytes,3,opt,name=saxis" json:"saxis,omitempty"`
-	Entity           *uint32     `protobuf:"varint,4,opt,name=entity" json:"entity,omitempty"`
-	Index            *uint32     `protobuf:"varint,5,opt,name=index" json:"index,omitempty"`
-	XXX_unrecognized []byte      `json:"-"`
+	Origin               *CMsgVector `protobuf:"bytes,1,opt,name=origin" json:"origin,omitempty"`
+	Normal               *CMsgVector `protobuf:"bytes,2,opt,name=normal" json:"normal,omitempty"`
+	Saxis                *CMsgVector `protobuf:"bytes,3,opt,name=saxis" json:"saxis,omitempty"`
+	Entity               *uint32     `protobuf:"varint,4,opt,name=entity" json:"entity,omitempty"`
+	Index                *uint32     `protobuf:"varint,5,opt,name=index" json:"index,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
+	XXX_unrecognized     []byte      `json:"-"`
+	XXX_sizecache        int32       `json:"-"`
 }
 
-func (m *CMsgTEBSPDecal) Reset()                    { *m = CMsgTEBSPDecal{} }
-func (m *CMsgTEBSPDecal) String() string            { return proto.CompactTextString(m) }
-func (*CMsgTEBSPDecal) ProtoMessage()               {}
-func (*CMsgTEBSPDecal) Descriptor() ([]byte, []int) { return fileDescriptor40, []int{7} }
+func (m *CMsgTEBSPDecal) Reset()         { *m = CMsgTEBSPDecal{} }
+func (m *CMsgTEBSPDecal) String() string { return proto.CompactTextString(m) }
+func (*CMsgTEBSPDecal) ProtoMessage()    {}
+func (*CMsgTEBSPDecal) Descriptor() ([]byte, []int) {
+	return fileDescriptor_te_31efe690dde86f0b, []int{7}
+}
+func (m *CMsgTEBSPDecal) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgTEBSPDecal.Unmarshal(m, b)
+}
+func (m *CMsgTEBSPDecal) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgTEBSPDecal.Marshal(b, m, deterministic)
+}
+func (dst *CMsgTEBSPDecal) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgTEBSPDecal.Merge(dst, src)
+}
+func (m *CMsgTEBSPDecal) XXX_Size() int {
+	return xxx_messageInfo_CMsgTEBSPDecal.Size(m)
+}
+func (m *CMsgTEBSPDecal) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgTEBSPDecal.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgTEBSPDecal proto.InternalMessageInfo
 
 func (m *CMsgTEBSPDecal) GetOrigin() *CMsgVector {
 	if m != nil {
@@ -530,18 +706,39 @@ func (m *CMsgTEBSPDecal) GetIndex() uint32 {
 }
 
 type CMsgTEBubbles struct {
-	Mins             *CMsgVector `protobuf:"bytes,1,opt,name=mins" json:"mins,omitempty"`
-	Maxs             *CMsgVector `protobuf:"bytes,2,opt,name=maxs" json:"maxs,omitempty"`
-	Height           *float32    `protobuf:"fixed32,3,opt,name=height" json:"height,omitempty"`
-	Count            *uint32     `protobuf:"varint,4,opt,name=count" json:"count,omitempty"`
-	Speed            *float32    `protobuf:"fixed32,5,opt,name=speed" json:"speed,omitempty"`
-	XXX_unrecognized []byte      `json:"-"`
+	Mins                 *CMsgVector `protobuf:"bytes,1,opt,name=mins" json:"mins,omitempty"`
+	Maxs                 *CMsgVector `protobuf:"bytes,2,opt,name=maxs" json:"maxs,omitempty"`
+	Height               *float32    `protobuf:"fixed32,3,opt,name=height" json:"height,omitempty"`
+	Count                *uint32     `protobuf:"varint,4,opt,name=count" json:"count,omitempty"`
+	Speed                *float32    `protobuf:"fixed32,5,opt,name=speed" json:"speed,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
+	XXX_unrecognized     []byte      `json:"-"`
+	XXX_sizecache        int32       `json:"-"`
 }
 
-func (m *CMsgTEBubbles) Reset()                    { *m = CMsgTEBubbles{} }
-func (m *CMsgTEBubbles) String() string            { return proto.CompactTextString(m) }
-func (*CMsgTEBubbles) ProtoMessage()               {}
-func (*CMsgTEBubbles) Descriptor() ([]byte, []int) { return fileDescriptor40, []int{8} }
+func (m *CMsgTEBubbles) Reset()         { *m = CMsgTEBubbles{} }
+func (m *CMsgTEBubbles) String() string { return proto.CompactTextString(m) }
+func (*CMsgTEBubbles) ProtoMessage()    {}
+func (*CMsgTEBubbles) Descriptor() ([]byte, []int) {
+	return fileDescriptor_te_31efe690dde86f0b, []int{8}
+}
+func (m *CMsgTEBubbles) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgTEBubbles.Unmarshal(m, b)
+}
+func (m *CMsgTEBubbles) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgTEBubbles.Marshal(b, m, deterministic)
+}
+func (dst *CMsgTEBubbles) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgTEBubbles.Merge(dst, src)
+}
+func (m *CMsgTEBubbles) XXX_Size() int {
+	return xxx_messageInfo_CMsgTEBubbles.Size(m)
+}
+func (m *CMsgTEBubbles) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgTEBubbles.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgTEBubbles proto.InternalMessageInfo
 
 func (m *CMsgTEBubbles) GetMins() *CMsgVector {
 	if m != nil {
@@ -579,18 +776,39 @@ func (m *CMsgTEBubbles) GetSpeed() float32 {
 }
 
 type CMsgTEBubbleTrail struct {
-	Mins             *CMsgVector `protobuf:"bytes,1,opt,name=mins" json:"mins,omitempty"`
-	Maxs             *CMsgVector `protobuf:"bytes,2,opt,name=maxs" json:"maxs,omitempty"`
-	Waterz           *float32    `protobuf:"fixed32,3,opt,name=waterz" json:"waterz,omitempty"`
-	Count            *uint32     `protobuf:"varint,4,opt,name=count" json:"count,omitempty"`
-	Speed            *float32    `protobuf:"fixed32,5,opt,name=speed" json:"speed,omitempty"`
-	XXX_unrecognized []byte      `json:"-"`
+	Mins                 *CMsgVector `protobuf:"bytes,1,opt,name=mins" json:"mins,omitempty"`
+	Maxs                 *CMsgVector `protobuf:"bytes,2,opt,name=maxs" json:"maxs,omitempty"`
+	Waterz               *float32    `protobuf:"fixed32,3,opt,name=waterz" json:"waterz,omitempty"`
+	Count                *uint32     `protobuf:"varint,4,opt,name=count" json:"count,omitempty"`
+	Speed                *float32    `protobuf:"fixed32,5,opt,name=speed" json:"speed,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
+	XXX_unrecognized     []byte      `json:"-"`
+	XXX_sizecache        int32       `json:"-"`
 }
 
-func (m *CMsgTEBubbleTrail) Reset()                    { *m = CMsgTEBubbleTrail{} }
-func (m *CMsgTEBubbleTrail) String() string            { return proto.CompactTextString(m) }
-func (*CMsgTEBubbleTrail) ProtoMessage()               {}
-func (*CMsgTEBubbleTrail) Descriptor() ([]byte, []int) { return fileDescriptor40, []int{9} }
+func (m *CMsgTEBubbleTrail) Reset()         { *m = CMsgTEBubbleTrail{} }
+func (m *CMsgTEBubbleTrail) String() string { return proto.CompactTextString(m) }
+func (*CMsgTEBubbleTrail) ProtoMessage()    {}
+func (*CMsgTEBubbleTrail) Descriptor() ([]byte, []int) {
+	return fileDescriptor_te_31efe690dde86f0b, []int{9}
+}
+func (m *CMsgTEBubbleTrail) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgTEBubbleTrail.Unmarshal(m, b)
+}
+func (m *CMsgTEBubbleTrail) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgTEBubbleTrail.Marshal(b, m, deterministic)
+}
+func (dst *CMsgTEBubbleTrail) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgTEBubbleTrail.Merge(dst, src)
+}
+func (m *CMsgTEBubbleTrail) XXX_Size() int {
+	return xxx_messageInfo_CMsgTEBubbleTrail.Size(m)
+}
+func (m *CMsgTEBubbleTrail) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgTEBubbleTrail.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgTEBubbleTrail proto.InternalMessageInfo
 
 func (m *CMsgTEBubbleTrail) GetMins() *CMsgVector {
 	if m != nil {
@@ -628,18 +846,39 @@ func (m *CMsgTEBubbleTrail) GetSpeed() float32 {
 }
 
 type CMsgTEDecal struct {
-	Origin           *CMsgVector `protobuf:"bytes,1,opt,name=origin" json:"origin,omitempty"`
-	Start            *CMsgVector `protobuf:"bytes,2,opt,name=start" json:"start,omitempty"`
-	Entity           *uint32     `protobuf:"varint,3,opt,name=entity" json:"entity,omitempty"`
-	Hitbox           *uint32     `protobuf:"varint,4,opt,name=hitbox" json:"hitbox,omitempty"`
-	Index            *uint32     `protobuf:"varint,5,opt,name=index" json:"index,omitempty"`
-	XXX_unrecognized []byte      `json:"-"`
+	Origin               *CMsgVector `protobuf:"bytes,1,opt,name=origin" json:"origin,omitempty"`
+	Start                *CMsgVector `protobuf:"bytes,2,opt,name=start" json:"start,omitempty"`
+	Entity               *uint32     `protobuf:"varint,3,opt,name=entity" json:"entity,omitempty"`
+	Hitbox               *uint32     `protobuf:"varint,4,opt,name=hitbox" json:"hitbox,omitempty"`
+	Index                *uint32     `protobuf:"varint,5,opt,name=index" json:"index,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
+	XXX_unrecognized     []byte      `json:"-"`
+	XXX_sizecache        int32       `json:"-"`
 }
 
-func (m *CMsgTEDecal) Reset()                    { *m = CMsgTEDecal{} }
-func (m *CMsgTEDecal) String() string            { return proto.CompactTextString(m) }
-func (*CMsgTEDecal) ProtoMessage()               {}
-func (*CMsgTEDecal) Descriptor() ([]byte, []int) { return fileDescriptor40, []int{10} }
+func (m *CMsgTEDecal) Reset()         { *m = CMsgTEDecal{} }
+func (m *CMsgTEDecal) String() string { return proto.CompactTextString(m) }
+func (*CMsgTEDecal) ProtoMessage()    {}
+func (*CMsgTEDecal) Descriptor() ([]byte, []int) {
+	return fileDescriptor_te_31efe690dde86f0b, []int{10}
+}
+func (m *CMsgTEDecal) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgTEDecal.Unmarshal(m, b)
+}
+func (m *CMsgTEDecal) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgTEDecal.Marshal(b, m, deterministic)
+}
+func (dst *CMsgTEDecal) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgTEDecal.Merge(dst, src)
+}
+func (m *CMsgTEDecal) XXX_Size() int {
+	return xxx_messageInfo_CMsgTEDecal.Size(m)
+}
+func (m *CMsgTEDecal) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgTEDecal.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgTEDecal proto.InternalMessageInfo
 
 func (m *CMsgTEDecal) GetOrigin() *CMsgVector {
 	if m != nil {
@@ -677,32 +916,53 @@ func (m *CMsgTEDecal) GetIndex() uint32 {
 }
 
 type CMsgEffectData struct {
-	Origin           *CMsgVector `protobuf:"bytes,1,opt,name=origin" json:"origin,omitempty"`
-	Start            *CMsgVector `protobuf:"bytes,2,opt,name=start" json:"start,omitempty"`
-	Normal           *CMsgVector `protobuf:"bytes,3,opt,name=normal" json:"normal,omitempty"`
-	Angles           *CMsgQAngle `protobuf:"bytes,4,opt,name=angles" json:"angles,omitempty"`
-	Entity           *uint32     `protobuf:"fixed32,5,opt,name=entity" json:"entity,omitempty"`
-	Otherentity      *uint32     `protobuf:"fixed32,6,opt,name=otherentity" json:"otherentity,omitempty"`
-	Scale            *float32    `protobuf:"fixed32,7,opt,name=scale" json:"scale,omitempty"`
-	Magnitude        *float32    `protobuf:"fixed32,8,opt,name=magnitude" json:"magnitude,omitempty"`
-	Radius           *float32    `protobuf:"fixed32,9,opt,name=radius" json:"radius,omitempty"`
-	Surfaceprop      *uint32     `protobuf:"fixed32,10,opt,name=surfaceprop" json:"surfaceprop,omitempty"`
-	Effectindex      *uint64     `protobuf:"fixed64,11,opt,name=effectindex" json:"effectindex,omitempty"`
-	Damagetype       *uint32     `protobuf:"varint,12,opt,name=damagetype" json:"damagetype,omitempty"`
-	Material         *uint32     `protobuf:"varint,13,opt,name=material" json:"material,omitempty"`
-	Hitbox           *uint32     `protobuf:"varint,14,opt,name=hitbox" json:"hitbox,omitempty"`
-	Color            *uint32     `protobuf:"varint,15,opt,name=color" json:"color,omitempty"`
-	Flags            *uint32     `protobuf:"varint,16,opt,name=flags" json:"flags,omitempty"`
-	Attachmentindex  *int32      `protobuf:"varint,17,opt,name=attachmentindex" json:"attachmentindex,omitempty"`
-	Effectname       *uint32     `protobuf:"varint,18,opt,name=effectname" json:"effectname,omitempty"`
-	Attachmentname   *uint32     `protobuf:"varint,19,opt,name=attachmentname" json:"attachmentname,omitempty"`
-	XXX_unrecognized []byte      `json:"-"`
+	Origin               *CMsgVector `protobuf:"bytes,1,opt,name=origin" json:"origin,omitempty"`
+	Start                *CMsgVector `protobuf:"bytes,2,opt,name=start" json:"start,omitempty"`
+	Normal               *CMsgVector `protobuf:"bytes,3,opt,name=normal" json:"normal,omitempty"`
+	Angles               *CMsgQAngle `protobuf:"bytes,4,opt,name=angles" json:"angles,omitempty"`
+	Entity               *uint32     `protobuf:"fixed32,5,opt,name=entity" json:"entity,omitempty"`
+	Otherentity          *uint32     `protobuf:"fixed32,6,opt,name=otherentity" json:"otherentity,omitempty"`
+	Scale                *float32    `protobuf:"fixed32,7,opt,name=scale" json:"scale,omitempty"`
+	Magnitude            *float32    `protobuf:"fixed32,8,opt,name=magnitude" json:"magnitude,omitempty"`
+	Radius               *float32    `protobuf:"fixed32,9,opt,name=radius" json:"radius,omitempty"`
+	Surfaceprop          *uint32     `protobuf:"fixed32,10,opt,name=surfaceprop" json:"surfaceprop,omitempty"`
+	Effectindex          *uint64     `protobuf:"fixed64,11,opt,name=effectindex" json:"effectindex,omitempty"`
+	Damagetype           *uint32     `protobuf:"varint,12,opt,name=damagetype" json:"damagetype,omitempty"`
+	Material             *uint32     `protobuf:"varint,13,opt,name=material" json:"material,omitempty"`
+	Hitbox               *uint32     `protobuf:"varint,14,opt,name=hitbox" json:"hitbox,omitempty"`
+	Color                *uint32     `protobuf:"varint,15,opt,name=color" json:"color,omitempty"`
+	Flags                *uint32     `protobuf:"varint,16,opt,name=flags" json:"flags,omitempty"`
+	Attachmentindex      *int32      `protobuf:"varint,17,opt,name=attachmentindex" json:"attachmentindex,omitempty"`
+	Effectname           *uint32     `protobuf:"varint,18,opt,name=effectname" json:"effectname,omitempty"`
+	Attachmentname       *uint32     `protobuf:"varint,19,opt,name=attachmentname" json:"attachmentname,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
+	XXX_unrecognized     []byte      `json:"-"`
+	XXX_sizecache        int32       `json:"-"`
 }
 
-func (m *CMsgEffectData) Reset()                    { *m = CMsgEffectData{} }
-func (m *CMsgEffectData) String() string            { return proto.CompactTextString(m) }
-func (*CMsgEffectData) ProtoMessage()               {}
-func (*CMsgEffectData) Descriptor() ([]byte, []int) { return fileDescriptor40, []int{11} }
+func (m *CMsgEffectData) Reset()         { *m = CMsgEffectData{} }
+func (m *CMsgEffectData) String() string { return proto.CompactTextString(m) }
+func (*CMsgEffectData) ProtoMessage()    {}
+func (*CMsgEffectData) Descriptor() ([]byte, []int) {
+	return fileDescriptor_te_31efe690dde86f0b, []int{11}
+}
+func (m *CMsgEffectData) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgEffectData.Unmarshal(m, b)
+}
+func (m *CMsgEffectData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgEffectData.Marshal(b, m, deterministic)
+}
+func (dst *CMsgEffectData) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgEffectData.Merge(dst, src)
+}
+func (m *CMsgEffectData) XXX_Size() int {
+	return xxx_messageInfo_CMsgEffectData.Size(m)
+}
+func (m *CMsgEffectData) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgEffectData.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgEffectData proto.InternalMessageInfo
 
 func (m *CMsgEffectData) GetOrigin() *CMsgVector {
 	if m != nil {
@@ -838,14 +1098,35 @@ func (m *CMsgEffectData) GetAttachmentname() uint32 {
 }
 
 type CMsgTEEffectDispatch struct {
-	Effectdata       *CMsgEffectData `protobuf:"bytes,1,opt,name=effectdata" json:"effectdata,omitempty"`
-	XXX_unrecognized []byte          `json:"-"`
+	Effectdata           *CMsgEffectData `protobuf:"bytes,1,opt,name=effectdata" json:"effectdata,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
+	XXX_unrecognized     []byte          `json:"-"`
+	XXX_sizecache        int32           `json:"-"`
 }
 
-func (m *CMsgTEEffectDispatch) Reset()                    { *m = CMsgTEEffectDispatch{} }
-func (m *CMsgTEEffectDispatch) String() string            { return proto.CompactTextString(m) }
-func (*CMsgTEEffectDispatch) ProtoMessage()               {}
-func (*CMsgTEEffectDispatch) Descriptor() ([]byte, []int) { return fileDescriptor40, []int{12} }
+func (m *CMsgTEEffectDispatch) Reset()         { *m = CMsgTEEffectDispatch{} }
+func (m *CMsgTEEffectDispatch) String() string { return proto.CompactTextString(m) }
+func (*CMsgTEEffectDispatch) ProtoMessage()    {}
+func (*CMsgTEEffectDispatch) Descriptor() ([]byte, []int) {
+	return fileDescriptor_te_31efe690dde86f0b, []int{12}
+}
+func (m *CMsgTEEffectDispatch) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgTEEffectDispatch.Unmarshal(m, b)
+}
+func (m *CMsgTEEffectDispatch) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgTEEffectDispatch.Marshal(b, m, deterministic)
+}
+func (dst *CMsgTEEffectDispatch) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgTEEffectDispatch.Merge(dst, src)
+}
+func (m *CMsgTEEffectDispatch) XXX_Size() int {
+	return xxx_messageInfo_CMsgTEEffectDispatch.Size(m)
+}
+func (m *CMsgTEEffectDispatch) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgTEEffectDispatch.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgTEEffectDispatch proto.InternalMessageInfo
 
 func (m *CMsgTEEffectDispatch) GetEffectdata() *CMsgEffectData {
 	if m != nil {
@@ -855,16 +1136,37 @@ func (m *CMsgTEEffectDispatch) GetEffectdata() *CMsgEffectData {
 }
 
 type CMsgTEEnergySplash struct {
-	Pos              *CMsgVector `protobuf:"bytes,1,opt,name=pos" json:"pos,omitempty"`
-	Dir              *CMsgVector `protobuf:"bytes,2,opt,name=dir" json:"dir,omitempty"`
-	Explosive        *bool       `protobuf:"varint,3,opt,name=explosive" json:"explosive,omitempty"`
-	XXX_unrecognized []byte      `json:"-"`
+	Pos                  *CMsgVector `protobuf:"bytes,1,opt,name=pos" json:"pos,omitempty"`
+	Dir                  *CMsgVector `protobuf:"bytes,2,opt,name=dir" json:"dir,omitempty"`
+	Explosive            *bool       `protobuf:"varint,3,opt,name=explosive" json:"explosive,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
+	XXX_unrecognized     []byte      `json:"-"`
+	XXX_sizecache        int32       `json:"-"`
 }
 
-func (m *CMsgTEEnergySplash) Reset()                    { *m = CMsgTEEnergySplash{} }
-func (m *CMsgTEEnergySplash) String() string            { return proto.CompactTextString(m) }
-func (*CMsgTEEnergySplash) ProtoMessage()               {}
-func (*CMsgTEEnergySplash) Descriptor() ([]byte, []int) { return fileDescriptor40, []int{13} }
+func (m *CMsgTEEnergySplash) Reset()         { *m = CMsgTEEnergySplash{} }
+func (m *CMsgTEEnergySplash) String() string { return proto.CompactTextString(m) }
+func (*CMsgTEEnergySplash) ProtoMessage()    {}
+func (*CMsgTEEnergySplash) Descriptor() ([]byte, []int) {
+	return fileDescriptor_te_31efe690dde86f0b, []int{13}
+}
+func (m *CMsgTEEnergySplash) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgTEEnergySplash.Unmarshal(m, b)
+}
+func (m *CMsgTEEnergySplash) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgTEEnergySplash.Marshal(b, m, deterministic)
+}
+func (dst *CMsgTEEnergySplash) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgTEEnergySplash.Merge(dst, src)
+}
+func (m *CMsgTEEnergySplash) XXX_Size() int {
+	return xxx_messageInfo_CMsgTEEnergySplash.Size(m)
+}
+func (m *CMsgTEEnergySplash) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgTEEnergySplash.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgTEEnergySplash proto.InternalMessageInfo
 
 func (m *CMsgTEEnergySplash) GetPos() *CMsgVector {
 	if m != nil {
@@ -888,16 +1190,37 @@ func (m *CMsgTEEnergySplash) GetExplosive() bool {
 }
 
 type CMsgTEFizz struct {
-	Entity           *uint32 `protobuf:"varint,1,opt,name=entity" json:"entity,omitempty"`
-	Density          *uint32 `protobuf:"varint,2,opt,name=density" json:"density,omitempty"`
-	Current          *int32  `protobuf:"varint,3,opt,name=current" json:"current,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Entity               *uint32  `protobuf:"varint,1,opt,name=entity" json:"entity,omitempty"`
+	Density              *uint32  `protobuf:"varint,2,opt,name=density" json:"density,omitempty"`
+	Current              *int32   `protobuf:"varint,3,opt,name=current" json:"current,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CMsgTEFizz) Reset()                    { *m = CMsgTEFizz{} }
-func (m *CMsgTEFizz) String() string            { return proto.CompactTextString(m) }
-func (*CMsgTEFizz) ProtoMessage()               {}
-func (*CMsgTEFizz) Descriptor() ([]byte, []int) { return fileDescriptor40, []int{14} }
+func (m *CMsgTEFizz) Reset()         { *m = CMsgTEFizz{} }
+func (m *CMsgTEFizz) String() string { return proto.CompactTextString(m) }
+func (*CMsgTEFizz) ProtoMessage()    {}
+func (*CMsgTEFizz) Descriptor() ([]byte, []int) {
+	return fileDescriptor_te_31efe690dde86f0b, []int{14}
+}
+func (m *CMsgTEFizz) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgTEFizz.Unmarshal(m, b)
+}
+func (m *CMsgTEFizz) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgTEFizz.Marshal(b, m, deterministic)
+}
+func (dst *CMsgTEFizz) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgTEFizz.Merge(dst, src)
+}
+func (m *CMsgTEFizz) XXX_Size() int {
+	return xxx_messageInfo_CMsgTEFizz.Size(m)
+}
+func (m *CMsgTEFizz) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgTEFizz.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgTEFizz proto.InternalMessageInfo
 
 func (m *CMsgTEFizz) GetEntity() uint32 {
 	if m != nil && m.Entity != nil {
@@ -921,23 +1244,44 @@ func (m *CMsgTEFizz) GetCurrent() int32 {
 }
 
 type CMsgTEShatterSurface struct {
-	Origin           *CMsgVector `protobuf:"bytes,1,opt,name=origin" json:"origin,omitempty"`
-	Angles           *CMsgQAngle `protobuf:"bytes,2,opt,name=angles" json:"angles,omitempty"`
-	Force            *CMsgVector `protobuf:"bytes,3,opt,name=force" json:"force,omitempty"`
-	Forcepos         *CMsgVector `protobuf:"bytes,4,opt,name=forcepos" json:"forcepos,omitempty"`
-	Width            *float32    `protobuf:"fixed32,5,opt,name=width" json:"width,omitempty"`
-	Height           *float32    `protobuf:"fixed32,6,opt,name=height" json:"height,omitempty"`
-	Shardsize        *float32    `protobuf:"fixed32,7,opt,name=shardsize" json:"shardsize,omitempty"`
-	Surfacetype      *uint32     `protobuf:"varint,8,opt,name=surfacetype" json:"surfacetype,omitempty"`
-	Frontcolor       *uint32     `protobuf:"fixed32,9,opt,name=frontcolor" json:"frontcolor,omitempty"`
-	Backcolor        *uint32     `protobuf:"fixed32,10,opt,name=backcolor" json:"backcolor,omitempty"`
-	XXX_unrecognized []byte      `json:"-"`
+	Origin               *CMsgVector `protobuf:"bytes,1,opt,name=origin" json:"origin,omitempty"`
+	Angles               *CMsgQAngle `protobuf:"bytes,2,opt,name=angles" json:"angles,omitempty"`
+	Force                *CMsgVector `protobuf:"bytes,3,opt,name=force" json:"force,omitempty"`
+	Forcepos             *CMsgVector `protobuf:"bytes,4,opt,name=forcepos" json:"forcepos,omitempty"`
+	Width                *float32    `protobuf:"fixed32,5,opt,name=width" json:"width,omitempty"`
+	Height               *float32    `protobuf:"fixed32,6,opt,name=height" json:"height,omitempty"`
+	Shardsize            *float32    `protobuf:"fixed32,7,opt,name=shardsize" json:"shardsize,omitempty"`
+	Surfacetype          *uint32     `protobuf:"varint,8,opt,name=surfacetype" json:"surfacetype,omitempty"`
+	Frontcolor           *uint32     `protobuf:"fixed32,9,opt,name=frontcolor" json:"frontcolor,omitempty"`
+	Backcolor            *uint32     `protobuf:"fixed32,10,opt,name=backcolor" json:"backcolor,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
+	XXX_unrecognized     []byte      `json:"-"`
+	XXX_sizecache        int32       `json:"-"`
 }
 
-func (m *CMsgTEShatterSurface) Reset()                    { *m = CMsgTEShatterSurface{} }
-func (m *CMsgTEShatterSurface) String() string            { return proto.CompactTextString(m) }
-func (*CMsgTEShatterSurface) ProtoMessage()               {}
-func (*CMsgTEShatterSurface) Descriptor() ([]byte, []int) { return fileDescriptor40, []int{15} }
+func (m *CMsgTEShatterSurface) Reset()         { *m = CMsgTEShatterSurface{} }
+func (m *CMsgTEShatterSurface) String() string { return proto.CompactTextString(m) }
+func (*CMsgTEShatterSurface) ProtoMessage()    {}
+func (*CMsgTEShatterSurface) Descriptor() ([]byte, []int) {
+	return fileDescriptor_te_31efe690dde86f0b, []int{15}
+}
+func (m *CMsgTEShatterSurface) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgTEShatterSurface.Unmarshal(m, b)
+}
+func (m *CMsgTEShatterSurface) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgTEShatterSurface.Marshal(b, m, deterministic)
+}
+func (dst *CMsgTEShatterSurface) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgTEShatterSurface.Merge(dst, src)
+}
+func (m *CMsgTEShatterSurface) XXX_Size() int {
+	return xxx_messageInfo_CMsgTEShatterSurface.Size(m)
+}
+func (m *CMsgTEShatterSurface) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgTEShatterSurface.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgTEShatterSurface proto.InternalMessageInfo
 
 func (m *CMsgTEShatterSurface) GetOrigin() *CMsgVector {
 	if m != nil {
@@ -1010,17 +1354,38 @@ func (m *CMsgTEShatterSurface) GetBackcolor() uint32 {
 }
 
 type CMsgTEGlowSprite struct {
-	Origin           *CMsgVector `protobuf:"bytes,1,opt,name=origin" json:"origin,omitempty"`
-	Scale            *float32    `protobuf:"fixed32,2,opt,name=scale" json:"scale,omitempty"`
-	Life             *float32    `protobuf:"fixed32,3,opt,name=life" json:"life,omitempty"`
-	Brightness       *uint32     `protobuf:"varint,4,opt,name=brightness" json:"brightness,omitempty"`
-	XXX_unrecognized []byte      `json:"-"`
+	Origin               *CMsgVector `protobuf:"bytes,1,opt,name=origin" json:"origin,omitempty"`
+	Scale                *float32    `protobuf:"fixed32,2,opt,name=scale" json:"scale,omitempty"`
+	Life                 *float32    `protobuf:"fixed32,3,opt,name=life" json:"life,omitempty"`
+	Brightness           *uint32     `protobuf:"varint,4,opt,name=brightness" json:"brightness,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
+	XXX_unrecognized     []byte      `json:"-"`
+	XXX_sizecache        int32       `json:"-"`
 }
 
-func (m *CMsgTEGlowSprite) Reset()                    { *m = CMsgTEGlowSprite{} }
-func (m *CMsgTEGlowSprite) String() string            { return proto.CompactTextString(m) }
-func (*CMsgTEGlowSprite) ProtoMessage()               {}
-func (*CMsgTEGlowSprite) Descriptor() ([]byte, []int) { return fileDescriptor40, []int{16} }
+func (m *CMsgTEGlowSprite) Reset()         { *m = CMsgTEGlowSprite{} }
+func (m *CMsgTEGlowSprite) String() string { return proto.CompactTextString(m) }
+func (*CMsgTEGlowSprite) ProtoMessage()    {}
+func (*CMsgTEGlowSprite) Descriptor() ([]byte, []int) {
+	return fileDescriptor_te_31efe690dde86f0b, []int{16}
+}
+func (m *CMsgTEGlowSprite) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgTEGlowSprite.Unmarshal(m, b)
+}
+func (m *CMsgTEGlowSprite) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgTEGlowSprite.Marshal(b, m, deterministic)
+}
+func (dst *CMsgTEGlowSprite) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgTEGlowSprite.Merge(dst, src)
+}
+func (m *CMsgTEGlowSprite) XXX_Size() int {
+	return xxx_messageInfo_CMsgTEGlowSprite.Size(m)
+}
+func (m *CMsgTEGlowSprite) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgTEGlowSprite.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgTEGlowSprite proto.InternalMessageInfo
 
 func (m *CMsgTEGlowSprite) GetOrigin() *CMsgVector {
 	if m != nil {
@@ -1051,16 +1416,37 @@ func (m *CMsgTEGlowSprite) GetBrightness() uint32 {
 }
 
 type CMsgTEImpact struct {
-	Origin           *CMsgVector `protobuf:"bytes,1,opt,name=origin" json:"origin,omitempty"`
-	Normal           *CMsgVector `protobuf:"bytes,2,opt,name=normal" json:"normal,omitempty"`
-	Type             *uint32     `protobuf:"varint,3,opt,name=type" json:"type,omitempty"`
-	XXX_unrecognized []byte      `json:"-"`
+	Origin               *CMsgVector `protobuf:"bytes,1,opt,name=origin" json:"origin,omitempty"`
+	Normal               *CMsgVector `protobuf:"bytes,2,opt,name=normal" json:"normal,omitempty"`
+	Type                 *uint32     `protobuf:"varint,3,opt,name=type" json:"type,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
+	XXX_unrecognized     []byte      `json:"-"`
+	XXX_sizecache        int32       `json:"-"`
 }
 
-func (m *CMsgTEImpact) Reset()                    { *m = CMsgTEImpact{} }
-func (m *CMsgTEImpact) String() string            { return proto.CompactTextString(m) }
-func (*CMsgTEImpact) ProtoMessage()               {}
-func (*CMsgTEImpact) Descriptor() ([]byte, []int) { return fileDescriptor40, []int{17} }
+func (m *CMsgTEImpact) Reset()         { *m = CMsgTEImpact{} }
+func (m *CMsgTEImpact) String() string { return proto.CompactTextString(m) }
+func (*CMsgTEImpact) ProtoMessage()    {}
+func (*CMsgTEImpact) Descriptor() ([]byte, []int) {
+	return fileDescriptor_te_31efe690dde86f0b, []int{17}
+}
+func (m *CMsgTEImpact) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgTEImpact.Unmarshal(m, b)
+}
+func (m *CMsgTEImpact) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgTEImpact.Marshal(b, m, deterministic)
+}
+func (dst *CMsgTEImpact) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgTEImpact.Merge(dst, src)
+}
+func (m *CMsgTEImpact) XXX_Size() int {
+	return xxx_messageInfo_CMsgTEImpact.Size(m)
+}
+func (m *CMsgTEImpact) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgTEImpact.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgTEImpact proto.InternalMessageInfo
 
 func (m *CMsgTEImpact) GetOrigin() *CMsgVector {
 	if m != nil {
@@ -1084,17 +1470,38 @@ func (m *CMsgTEImpact) GetType() uint32 {
 }
 
 type CMsgTEMuzzleFlash struct {
-	Origin           *CMsgVector `protobuf:"bytes,1,opt,name=origin" json:"origin,omitempty"`
-	Angles           *CMsgQAngle `protobuf:"bytes,2,opt,name=angles" json:"angles,omitempty"`
-	Scale            *float32    `protobuf:"fixed32,3,opt,name=scale" json:"scale,omitempty"`
-	Type             *uint32     `protobuf:"varint,4,opt,name=type" json:"type,omitempty"`
-	XXX_unrecognized []byte      `json:"-"`
+	Origin               *CMsgVector `protobuf:"bytes,1,opt,name=origin" json:"origin,omitempty"`
+	Angles               *CMsgQAngle `protobuf:"bytes,2,opt,name=angles" json:"angles,omitempty"`
+	Scale                *float32    `protobuf:"fixed32,3,opt,name=scale" json:"scale,omitempty"`
+	Type                 *uint32     `protobuf:"varint,4,opt,name=type" json:"type,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
+	XXX_unrecognized     []byte      `json:"-"`
+	XXX_sizecache        int32       `json:"-"`
 }
 
-func (m *CMsgTEMuzzleFlash) Reset()                    { *m = CMsgTEMuzzleFlash{} }
-func (m *CMsgTEMuzzleFlash) String() string            { return proto.CompactTextString(m) }
-func (*CMsgTEMuzzleFlash) ProtoMessage()               {}
-func (*CMsgTEMuzzleFlash) Descriptor() ([]byte, []int) { return fileDescriptor40, []int{18} }
+func (m *CMsgTEMuzzleFlash) Reset()         { *m = CMsgTEMuzzleFlash{} }
+func (m *CMsgTEMuzzleFlash) String() string { return proto.CompactTextString(m) }
+func (*CMsgTEMuzzleFlash) ProtoMessage()    {}
+func (*CMsgTEMuzzleFlash) Descriptor() ([]byte, []int) {
+	return fileDescriptor_te_31efe690dde86f0b, []int{18}
+}
+func (m *CMsgTEMuzzleFlash) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgTEMuzzleFlash.Unmarshal(m, b)
+}
+func (m *CMsgTEMuzzleFlash) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgTEMuzzleFlash.Marshal(b, m, deterministic)
+}
+func (dst *CMsgTEMuzzleFlash) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgTEMuzzleFlash.Merge(dst, src)
+}
+func (m *CMsgTEMuzzleFlash) XXX_Size() int {
+	return xxx_messageInfo_CMsgTEMuzzleFlash.Size(m)
+}
+func (m *CMsgTEMuzzleFlash) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgTEMuzzleFlash.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgTEMuzzleFlash proto.InternalMessageInfo
 
 func (m *CMsgTEMuzzleFlash) GetOrigin() *CMsgVector {
 	if m != nil {
@@ -1125,17 +1532,38 @@ func (m *CMsgTEMuzzleFlash) GetType() uint32 {
 }
 
 type CMsgTEBloodStream struct {
-	Origin           *CMsgVector `protobuf:"bytes,1,opt,name=origin" json:"origin,omitempty"`
-	Direction        *CMsgVector `protobuf:"bytes,2,opt,name=direction" json:"direction,omitempty"`
-	Color            *uint32     `protobuf:"fixed32,3,opt,name=color" json:"color,omitempty"`
-	Amount           *uint32     `protobuf:"varint,4,opt,name=amount" json:"amount,omitempty"`
-	XXX_unrecognized []byte      `json:"-"`
+	Origin               *CMsgVector `protobuf:"bytes,1,opt,name=origin" json:"origin,omitempty"`
+	Direction            *CMsgVector `protobuf:"bytes,2,opt,name=direction" json:"direction,omitempty"`
+	Color                *uint32     `protobuf:"fixed32,3,opt,name=color" json:"color,omitempty"`
+	Amount               *uint32     `protobuf:"varint,4,opt,name=amount" json:"amount,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
+	XXX_unrecognized     []byte      `json:"-"`
+	XXX_sizecache        int32       `json:"-"`
 }
 
-func (m *CMsgTEBloodStream) Reset()                    { *m = CMsgTEBloodStream{} }
-func (m *CMsgTEBloodStream) String() string            { return proto.CompactTextString(m) }
-func (*CMsgTEBloodStream) ProtoMessage()               {}
-func (*CMsgTEBloodStream) Descriptor() ([]byte, []int) { return fileDescriptor40, []int{19} }
+func (m *CMsgTEBloodStream) Reset()         { *m = CMsgTEBloodStream{} }
+func (m *CMsgTEBloodStream) String() string { return proto.CompactTextString(m) }
+func (*CMsgTEBloodStream) ProtoMessage()    {}
+func (*CMsgTEBloodStream) Descriptor() ([]byte, []int) {
+	return fileDescriptor_te_31efe690dde86f0b, []int{19}
+}
+func (m *CMsgTEBloodStream) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgTEBloodStream.Unmarshal(m, b)
+}
+func (m *CMsgTEBloodStream) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgTEBloodStream.Marshal(b, m, deterministic)
+}
+func (dst *CMsgTEBloodStream) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgTEBloodStream.Merge(dst, src)
+}
+func (m *CMsgTEBloodStream) XXX_Size() int {
+	return xxx_messageInfo_CMsgTEBloodStream.Size(m)
+}
+func (m *CMsgTEBloodStream) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgTEBloodStream.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgTEBloodStream proto.InternalMessageInfo
 
 func (m *CMsgTEBloodStream) GetOrigin() *CMsgVector {
 	if m != nil {
@@ -1166,22 +1594,43 @@ func (m *CMsgTEBloodStream) GetAmount() uint32 {
 }
 
 type CMsgTEExplosion struct {
-	Origin           *CMsgVector `protobuf:"bytes,1,opt,name=origin" json:"origin,omitempty"`
-	Framerate        *uint32     `protobuf:"varint,2,opt,name=framerate" json:"framerate,omitempty"`
-	Flags            *uint32     `protobuf:"varint,3,opt,name=flags" json:"flags,omitempty"`
-	Normal           *CMsgVector `protobuf:"bytes,4,opt,name=normal" json:"normal,omitempty"`
-	Materialtype     *uint32     `protobuf:"varint,5,opt,name=materialtype" json:"materialtype,omitempty"`
-	Radius           *uint32     `protobuf:"varint,6,opt,name=radius" json:"radius,omitempty"`
-	Magnitude        *uint32     `protobuf:"varint,7,opt,name=magnitude" json:"magnitude,omitempty"`
-	Scale            *float32    `protobuf:"fixed32,8,opt,name=scale" json:"scale,omitempty"`
-	AffectRagdolls   *bool       `protobuf:"varint,9,opt,name=affect_ragdolls,json=affectRagdolls" json:"affect_ragdolls,omitempty"`
-	XXX_unrecognized []byte      `json:"-"`
+	Origin               *CMsgVector `protobuf:"bytes,1,opt,name=origin" json:"origin,omitempty"`
+	Framerate            *uint32     `protobuf:"varint,2,opt,name=framerate" json:"framerate,omitempty"`
+	Flags                *uint32     `protobuf:"varint,3,opt,name=flags" json:"flags,omitempty"`
+	Normal               *CMsgVector `protobuf:"bytes,4,opt,name=normal" json:"normal,omitempty"`
+	Materialtype         *uint32     `protobuf:"varint,5,opt,name=materialtype" json:"materialtype,omitempty"`
+	Radius               *uint32     `protobuf:"varint,6,opt,name=radius" json:"radius,omitempty"`
+	Magnitude            *uint32     `protobuf:"varint,7,opt,name=magnitude" json:"magnitude,omitempty"`
+	Scale                *float32    `protobuf:"fixed32,8,opt,name=scale" json:"scale,omitempty"`
+	AffectRagdolls       *bool       `protobuf:"varint,9,opt,name=affect_ragdolls,json=affectRagdolls" json:"affect_ragdolls,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
+	XXX_unrecognized     []byte      `json:"-"`
+	XXX_sizecache        int32       `json:"-"`
 }
 
-func (m *CMsgTEExplosion) Reset()                    { *m = CMsgTEExplosion{} }
-func (m *CMsgTEExplosion) String() string            { return proto.CompactTextString(m) }
-func (*CMsgTEExplosion) ProtoMessage()               {}
-func (*CMsgTEExplosion) Descriptor() ([]byte, []int) { return fileDescriptor40, []int{20} }
+func (m *CMsgTEExplosion) Reset()         { *m = CMsgTEExplosion{} }
+func (m *CMsgTEExplosion) String() string { return proto.CompactTextString(m) }
+func (*CMsgTEExplosion) ProtoMessage()    {}
+func (*CMsgTEExplosion) Descriptor() ([]byte, []int) {
+	return fileDescriptor_te_31efe690dde86f0b, []int{20}
+}
+func (m *CMsgTEExplosion) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgTEExplosion.Unmarshal(m, b)
+}
+func (m *CMsgTEExplosion) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgTEExplosion.Marshal(b, m, deterministic)
+}
+func (dst *CMsgTEExplosion) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgTEExplosion.Merge(dst, src)
+}
+func (m *CMsgTEExplosion) XXX_Size() int {
+	return xxx_messageInfo_CMsgTEExplosion.Size(m)
+}
+func (m *CMsgTEExplosion) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgTEExplosion.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgTEExplosion proto.InternalMessageInfo
 
 func (m *CMsgTEExplosion) GetOrigin() *CMsgVector {
 	if m != nil {
@@ -1247,17 +1696,38 @@ func (m *CMsgTEExplosion) GetAffectRagdolls() bool {
 }
 
 type CMsgTEDust struct {
-	Origin           *CMsgVector `protobuf:"bytes,1,opt,name=origin" json:"origin,omitempty"`
-	Size             *float32    `protobuf:"fixed32,2,opt,name=size" json:"size,omitempty"`
-	Speed            *float32    `protobuf:"fixed32,3,opt,name=speed" json:"speed,omitempty"`
-	Direction        *CMsgVector `protobuf:"bytes,4,opt,name=direction" json:"direction,omitempty"`
-	XXX_unrecognized []byte      `json:"-"`
+	Origin               *CMsgVector `protobuf:"bytes,1,opt,name=origin" json:"origin,omitempty"`
+	Size                 *float32    `protobuf:"fixed32,2,opt,name=size" json:"size,omitempty"`
+	Speed                *float32    `protobuf:"fixed32,3,opt,name=speed" json:"speed,omitempty"`
+	Direction            *CMsgVector `protobuf:"bytes,4,opt,name=direction" json:"direction,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
+	XXX_unrecognized     []byte      `json:"-"`
+	XXX_sizecache        int32       `json:"-"`
 }
 
-func (m *CMsgTEDust) Reset()                    { *m = CMsgTEDust{} }
-func (m *CMsgTEDust) String() string            { return proto.CompactTextString(m) }
-func (*CMsgTEDust) ProtoMessage()               {}
-func (*CMsgTEDust) Descriptor() ([]byte, []int) { return fileDescriptor40, []int{21} }
+func (m *CMsgTEDust) Reset()         { *m = CMsgTEDust{} }
+func (m *CMsgTEDust) String() string { return proto.CompactTextString(m) }
+func (*CMsgTEDust) ProtoMessage()    {}
+func (*CMsgTEDust) Descriptor() ([]byte, []int) {
+	return fileDescriptor_te_31efe690dde86f0b, []int{21}
+}
+func (m *CMsgTEDust) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgTEDust.Unmarshal(m, b)
+}
+func (m *CMsgTEDust) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgTEDust.Marshal(b, m, deterministic)
+}
+func (dst *CMsgTEDust) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgTEDust.Merge(dst, src)
+}
+func (m *CMsgTEDust) XXX_Size() int {
+	return xxx_messageInfo_CMsgTEDust.Size(m)
+}
+func (m *CMsgTEDust) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgTEDust.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgTEDust proto.InternalMessageInfo
 
 func (m *CMsgTEDust) GetOrigin() *CMsgVector {
 	if m != nil {
@@ -1288,15 +1758,36 @@ func (m *CMsgTEDust) GetDirection() *CMsgVector {
 }
 
 type CMsgTELargeFunnel struct {
-	Origin           *CMsgVector `protobuf:"bytes,1,opt,name=origin" json:"origin,omitempty"`
-	Reversed         *uint32     `protobuf:"varint,2,opt,name=reversed" json:"reversed,omitempty"`
-	XXX_unrecognized []byte      `json:"-"`
+	Origin               *CMsgVector `protobuf:"bytes,1,opt,name=origin" json:"origin,omitempty"`
+	Reversed             *uint32     `protobuf:"varint,2,opt,name=reversed" json:"reversed,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
+	XXX_unrecognized     []byte      `json:"-"`
+	XXX_sizecache        int32       `json:"-"`
 }
 
-func (m *CMsgTELargeFunnel) Reset()                    { *m = CMsgTELargeFunnel{} }
-func (m *CMsgTELargeFunnel) String() string            { return proto.CompactTextString(m) }
-func (*CMsgTELargeFunnel) ProtoMessage()               {}
-func (*CMsgTELargeFunnel) Descriptor() ([]byte, []int) { return fileDescriptor40, []int{22} }
+func (m *CMsgTELargeFunnel) Reset()         { *m = CMsgTELargeFunnel{} }
+func (m *CMsgTELargeFunnel) String() string { return proto.CompactTextString(m) }
+func (*CMsgTELargeFunnel) ProtoMessage()    {}
+func (*CMsgTELargeFunnel) Descriptor() ([]byte, []int) {
+	return fileDescriptor_te_31efe690dde86f0b, []int{22}
+}
+func (m *CMsgTELargeFunnel) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgTELargeFunnel.Unmarshal(m, b)
+}
+func (m *CMsgTELargeFunnel) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgTELargeFunnel.Marshal(b, m, deterministic)
+}
+func (dst *CMsgTELargeFunnel) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgTELargeFunnel.Merge(dst, src)
+}
+func (m *CMsgTELargeFunnel) XXX_Size() int {
+	return xxx_messageInfo_CMsgTELargeFunnel.Size(m)
+}
+func (m *CMsgTELargeFunnel) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgTELargeFunnel.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgTELargeFunnel proto.InternalMessageInfo
 
 func (m *CMsgTELargeFunnel) GetOrigin() *CMsgVector {
 	if m != nil {
@@ -1313,17 +1804,38 @@ func (m *CMsgTELargeFunnel) GetReversed() uint32 {
 }
 
 type CMsgTESparks struct {
-	Origin           *CMsgVector `protobuf:"bytes,1,opt,name=origin" json:"origin,omitempty"`
-	Magnitude        *uint32     `protobuf:"varint,2,opt,name=magnitude" json:"magnitude,omitempty"`
-	Length           *uint32     `protobuf:"varint,3,opt,name=length" json:"length,omitempty"`
-	Direction        *CMsgVector `protobuf:"bytes,4,opt,name=direction" json:"direction,omitempty"`
-	XXX_unrecognized []byte      `json:"-"`
+	Origin               *CMsgVector `protobuf:"bytes,1,opt,name=origin" json:"origin,omitempty"`
+	Magnitude            *uint32     `protobuf:"varint,2,opt,name=magnitude" json:"magnitude,omitempty"`
+	Length               *uint32     `protobuf:"varint,3,opt,name=length" json:"length,omitempty"`
+	Direction            *CMsgVector `protobuf:"bytes,4,opt,name=direction" json:"direction,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
+	XXX_unrecognized     []byte      `json:"-"`
+	XXX_sizecache        int32       `json:"-"`
 }
 
-func (m *CMsgTESparks) Reset()                    { *m = CMsgTESparks{} }
-func (m *CMsgTESparks) String() string            { return proto.CompactTextString(m) }
-func (*CMsgTESparks) ProtoMessage()               {}
-func (*CMsgTESparks) Descriptor() ([]byte, []int) { return fileDescriptor40, []int{23} }
+func (m *CMsgTESparks) Reset()         { *m = CMsgTESparks{} }
+func (m *CMsgTESparks) String() string { return proto.CompactTextString(m) }
+func (*CMsgTESparks) ProtoMessage()    {}
+func (*CMsgTESparks) Descriptor() ([]byte, []int) {
+	return fileDescriptor_te_31efe690dde86f0b, []int{23}
+}
+func (m *CMsgTESparks) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgTESparks.Unmarshal(m, b)
+}
+func (m *CMsgTESparks) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgTESparks.Marshal(b, m, deterministic)
+}
+func (dst *CMsgTESparks) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgTESparks.Merge(dst, src)
+}
+func (m *CMsgTESparks) XXX_Size() int {
+	return xxx_messageInfo_CMsgTESparks.Size(m)
+}
+func (m *CMsgTESparks) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgTESparks.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgTESparks proto.InternalMessageInfo
 
 func (m *CMsgTESparks) GetOrigin() *CMsgVector {
 	if m != nil {
@@ -1364,13 +1876,34 @@ type CMsgTEPhysicsProp struct {
 	Modelindex                 *uint64     `protobuf:"fixed64,8,opt,name=modelindex" json:"modelindex,omitempty"`
 	UnusedBreakmodelsnottomake *uint32     `protobuf:"varint,9,opt,name=unused_breakmodelsnottomake,json=unusedBreakmodelsnottomake" json:"unused_breakmodelsnottomake,omitempty"`
 	Scale                      *float32    `protobuf:"fixed32,10,opt,name=scale" json:"scale,omitempty"`
+	XXX_NoUnkeyedLiteral       struct{}    `json:"-"`
 	XXX_unrecognized           []byte      `json:"-"`
+	XXX_sizecache              int32       `json:"-"`
 }
 
-func (m *CMsgTEPhysicsProp) Reset()                    { *m = CMsgTEPhysicsProp{} }
-func (m *CMsgTEPhysicsProp) String() string            { return proto.CompactTextString(m) }
-func (*CMsgTEPhysicsProp) ProtoMessage()               {}
-func (*CMsgTEPhysicsProp) Descriptor() ([]byte, []int) { return fileDescriptor40, []int{24} }
+func (m *CMsgTEPhysicsProp) Reset()         { *m = CMsgTEPhysicsProp{} }
+func (m *CMsgTEPhysicsProp) String() string { return proto.CompactTextString(m) }
+func (*CMsgTEPhysicsProp) ProtoMessage()    {}
+func (*CMsgTEPhysicsProp) Descriptor() ([]byte, []int) {
+	return fileDescriptor_te_31efe690dde86f0b, []int{24}
+}
+func (m *CMsgTEPhysicsProp) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgTEPhysicsProp.Unmarshal(m, b)
+}
+func (m *CMsgTEPhysicsProp) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgTEPhysicsProp.Marshal(b, m, deterministic)
+}
+func (dst *CMsgTEPhysicsProp) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgTEPhysicsProp.Merge(dst, src)
+}
+func (m *CMsgTEPhysicsProp) XXX_Size() int {
+	return xxx_messageInfo_CMsgTEPhysicsProp.Size(m)
+}
+func (m *CMsgTEPhysicsProp) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgTEPhysicsProp.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgTEPhysicsProp proto.InternalMessageInfo
 
 func (m *CMsgTEPhysicsProp) GetOrigin() *CMsgVector {
 	if m != nil {
@@ -1443,16 +1976,37 @@ func (m *CMsgTEPhysicsProp) GetScale() float32 {
 }
 
 type CMsgTEPlayerDecal struct {
-	Origin           *CMsgVector `protobuf:"bytes,1,opt,name=origin" json:"origin,omitempty"`
-	Player           *uint32     `protobuf:"varint,2,opt,name=player" json:"player,omitempty"`
-	Entity           *uint32     `protobuf:"varint,3,opt,name=entity" json:"entity,omitempty"`
-	XXX_unrecognized []byte      `json:"-"`
+	Origin               *CMsgVector `protobuf:"bytes,1,opt,name=origin" json:"origin,omitempty"`
+	Player               *uint32     `protobuf:"varint,2,opt,name=player" json:"player,omitempty"`
+	Entity               *uint32     `protobuf:"varint,3,opt,name=entity" json:"entity,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
+	XXX_unrecognized     []byte      `json:"-"`
+	XXX_sizecache        int32       `json:"-"`
 }
 
-func (m *CMsgTEPlayerDecal) Reset()                    { *m = CMsgTEPlayerDecal{} }
-func (m *CMsgTEPlayerDecal) String() string            { return proto.CompactTextString(m) }
-func (*CMsgTEPlayerDecal) ProtoMessage()               {}
-func (*CMsgTEPlayerDecal) Descriptor() ([]byte, []int) { return fileDescriptor40, []int{25} }
+func (m *CMsgTEPlayerDecal) Reset()         { *m = CMsgTEPlayerDecal{} }
+func (m *CMsgTEPlayerDecal) String() string { return proto.CompactTextString(m) }
+func (*CMsgTEPlayerDecal) ProtoMessage()    {}
+func (*CMsgTEPlayerDecal) Descriptor() ([]byte, []int) {
+	return fileDescriptor_te_31efe690dde86f0b, []int{25}
+}
+func (m *CMsgTEPlayerDecal) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgTEPlayerDecal.Unmarshal(m, b)
+}
+func (m *CMsgTEPlayerDecal) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgTEPlayerDecal.Marshal(b, m, deterministic)
+}
+func (dst *CMsgTEPlayerDecal) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgTEPlayerDecal.Merge(dst, src)
+}
+func (m *CMsgTEPlayerDecal) XXX_Size() int {
+	return xxx_messageInfo_CMsgTEPlayerDecal.Size(m)
+}
+func (m *CMsgTEPlayerDecal) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgTEPlayerDecal.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgTEPlayerDecal proto.InternalMessageInfo
 
 func (m *CMsgTEPlayerDecal) GetOrigin() *CMsgVector {
 	if m != nil {
@@ -1476,17 +2030,38 @@ func (m *CMsgTEPlayerDecal) GetEntity() uint32 {
 }
 
 type CMsgTEProjectedDecal struct {
-	Origin           *CMsgVector `protobuf:"bytes,1,opt,name=origin" json:"origin,omitempty"`
-	Angles           *CMsgQAngle `protobuf:"bytes,2,opt,name=angles" json:"angles,omitempty"`
-	Index            *uint32     `protobuf:"varint,3,opt,name=index" json:"index,omitempty"`
-	Distance         *float32    `protobuf:"fixed32,4,opt,name=distance" json:"distance,omitempty"`
-	XXX_unrecognized []byte      `json:"-"`
+	Origin               *CMsgVector `protobuf:"bytes,1,opt,name=origin" json:"origin,omitempty"`
+	Angles               *CMsgQAngle `protobuf:"bytes,2,opt,name=angles" json:"angles,omitempty"`
+	Index                *uint32     `protobuf:"varint,3,opt,name=index" json:"index,omitempty"`
+	Distance             *float32    `protobuf:"fixed32,4,opt,name=distance" json:"distance,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
+	XXX_unrecognized     []byte      `json:"-"`
+	XXX_sizecache        int32       `json:"-"`
 }
 
-func (m *CMsgTEProjectedDecal) Reset()                    { *m = CMsgTEProjectedDecal{} }
-func (m *CMsgTEProjectedDecal) String() string            { return proto.CompactTextString(m) }
-func (*CMsgTEProjectedDecal) ProtoMessage()               {}
-func (*CMsgTEProjectedDecal) Descriptor() ([]byte, []int) { return fileDescriptor40, []int{26} }
+func (m *CMsgTEProjectedDecal) Reset()         { *m = CMsgTEProjectedDecal{} }
+func (m *CMsgTEProjectedDecal) String() string { return proto.CompactTextString(m) }
+func (*CMsgTEProjectedDecal) ProtoMessage()    {}
+func (*CMsgTEProjectedDecal) Descriptor() ([]byte, []int) {
+	return fileDescriptor_te_31efe690dde86f0b, []int{26}
+}
+func (m *CMsgTEProjectedDecal) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgTEProjectedDecal.Unmarshal(m, b)
+}
+func (m *CMsgTEProjectedDecal) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgTEProjectedDecal.Marshal(b, m, deterministic)
+}
+func (dst *CMsgTEProjectedDecal) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgTEProjectedDecal.Merge(dst, src)
+}
+func (m *CMsgTEProjectedDecal) XXX_Size() int {
+	return xxx_messageInfo_CMsgTEProjectedDecal.Size(m)
+}
+func (m *CMsgTEProjectedDecal) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgTEProjectedDecal.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgTEProjectedDecal proto.InternalMessageInfo
 
 func (m *CMsgTEProjectedDecal) GetOrigin() *CMsgVector {
 	if m != nil {
@@ -1517,15 +2092,36 @@ func (m *CMsgTEProjectedDecal) GetDistance() float32 {
 }
 
 type CMsgTESmoke struct {
-	Origin           *CMsgVector `protobuf:"bytes,1,opt,name=origin" json:"origin,omitempty"`
-	Scale            *float32    `protobuf:"fixed32,2,opt,name=scale" json:"scale,omitempty"`
-	XXX_unrecognized []byte      `json:"-"`
+	Origin               *CMsgVector `protobuf:"bytes,1,opt,name=origin" json:"origin,omitempty"`
+	Scale                *float32    `protobuf:"fixed32,2,opt,name=scale" json:"scale,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
+	XXX_unrecognized     []byte      `json:"-"`
+	XXX_sizecache        int32       `json:"-"`
 }
 
-func (m *CMsgTESmoke) Reset()                    { *m = CMsgTESmoke{} }
-func (m *CMsgTESmoke) String() string            { return proto.CompactTextString(m) }
-func (*CMsgTESmoke) ProtoMessage()               {}
-func (*CMsgTESmoke) Descriptor() ([]byte, []int) { return fileDescriptor40, []int{27} }
+func (m *CMsgTESmoke) Reset()         { *m = CMsgTESmoke{} }
+func (m *CMsgTESmoke) String() string { return proto.CompactTextString(m) }
+func (*CMsgTESmoke) ProtoMessage()    {}
+func (*CMsgTESmoke) Descriptor() ([]byte, []int) {
+	return fileDescriptor_te_31efe690dde86f0b, []int{27}
+}
+func (m *CMsgTESmoke) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgTESmoke.Unmarshal(m, b)
+}
+func (m *CMsgTESmoke) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgTESmoke.Marshal(b, m, deterministic)
+}
+func (dst *CMsgTESmoke) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgTESmoke.Merge(dst, src)
+}
+func (m *CMsgTESmoke) XXX_Size() int {
+	return xxx_messageInfo_CMsgTESmoke.Size(m)
+}
+func (m *CMsgTESmoke) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgTESmoke.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgTESmoke proto.InternalMessageInfo
 
 func (m *CMsgTESmoke) GetOrigin() *CMsgVector {
 	if m != nil {
@@ -1542,16 +2138,37 @@ func (m *CMsgTESmoke) GetScale() float32 {
 }
 
 type CMsgTEWorldDecal struct {
-	Origin           *CMsgVector `protobuf:"bytes,1,opt,name=origin" json:"origin,omitempty"`
-	Normal           *CMsgVector `protobuf:"bytes,2,opt,name=normal" json:"normal,omitempty"`
-	Index            *uint32     `protobuf:"varint,3,opt,name=index" json:"index,omitempty"`
-	XXX_unrecognized []byte      `json:"-"`
+	Origin               *CMsgVector `protobuf:"bytes,1,opt,name=origin" json:"origin,omitempty"`
+	Normal               *CMsgVector `protobuf:"bytes,2,opt,name=normal" json:"normal,omitempty"`
+	Index                *uint32     `protobuf:"varint,3,opt,name=index" json:"index,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
+	XXX_unrecognized     []byte      `json:"-"`
+	XXX_sizecache        int32       `json:"-"`
 }
 
-func (m *CMsgTEWorldDecal) Reset()                    { *m = CMsgTEWorldDecal{} }
-func (m *CMsgTEWorldDecal) String() string            { return proto.CompactTextString(m) }
-func (*CMsgTEWorldDecal) ProtoMessage()               {}
-func (*CMsgTEWorldDecal) Descriptor() ([]byte, []int) { return fileDescriptor40, []int{28} }
+func (m *CMsgTEWorldDecal) Reset()         { *m = CMsgTEWorldDecal{} }
+func (m *CMsgTEWorldDecal) String() string { return proto.CompactTextString(m) }
+func (*CMsgTEWorldDecal) ProtoMessage()    {}
+func (*CMsgTEWorldDecal) Descriptor() ([]byte, []int) {
+	return fileDescriptor_te_31efe690dde86f0b, []int{28}
+}
+func (m *CMsgTEWorldDecal) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgTEWorldDecal.Unmarshal(m, b)
+}
+func (m *CMsgTEWorldDecal) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgTEWorldDecal.Marshal(b, m, deterministic)
+}
+func (dst *CMsgTEWorldDecal) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgTEWorldDecal.Merge(dst, src)
+}
+func (m *CMsgTEWorldDecal) XXX_Size() int {
+	return xxx_messageInfo_CMsgTEWorldDecal.Size(m)
+}
+func (m *CMsgTEWorldDecal) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgTEWorldDecal.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgTEWorldDecal proto.InternalMessageInfo
 
 func (m *CMsgTEWorldDecal) GetOrigin() *CMsgVector {
 	if m != nil {
@@ -1607,9 +2224,9 @@ func init() {
 	proto.RegisterEnum("dota.ETEProtobufIds", ETEProtobufIds_name, ETEProtobufIds_value)
 }
 
-func init() { proto.RegisterFile("te.proto", fileDescriptor40) }
+func init() { proto.RegisterFile("te.proto", fileDescriptor_te_31efe690dde86f0b) }
 
-var fileDescriptor40 = []byte{
+var fileDescriptor_te_31efe690dde86f0b = []byte{
 	// 1833 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xbc, 0x58, 0xcb, 0x6f, 0x23, 0x49,
 	0x19, 0xa7, 0xbb, 0x6d, 0xc7, 0xa9, 0x4c, 0x92, 0x9e, 0x9a, 0x21, 0x58, 0xc3, 0x6a, 0x15, 0xb5,

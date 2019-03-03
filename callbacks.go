@@ -220,6 +220,8 @@ type Callbacks struct {
 	onCDOTAUserMsg_DamageReport               []func(*dota.CDOTAUserMsg_DamageReport) error
 	onCDOTAUserMsg_SalutePlayer               []func(*dota.CDOTAUserMsg_SalutePlayer) error
 	onCDOTAUserMsg_TipAlert                   []func(*dota.CDOTAUserMsg_TipAlert) error
+	onCDOTAUserMsg_ReplaceQueryUnit           []func(*dota.CDOTAUserMsg_ReplaceQueryUnit) error
+	onCDOTAUserMsg_EmptyTeleportAlert         []func(*dota.CDOTAUserMsg_EmptyTeleportAlert) error
 
 	pb *proto.Buffer
 }
@@ -1293,6 +1295,16 @@ func (c *Callbacks) OnCDOTAUserMsg_SalutePlayer(fn func(*dota.CDOTAUserMsg_Salut
 // OnCDOTAUserMsg_TipAlert registers a callback for EDotaUserMessages_DOTA_UM_TipAlert
 func (c *Callbacks) OnCDOTAUserMsg_TipAlert(fn func(*dota.CDOTAUserMsg_TipAlert) error) {
 	c.onCDOTAUserMsg_TipAlert = append(c.onCDOTAUserMsg_TipAlert, fn)
+}
+
+// OnCDOTAUserMsg_ReplaceQueryUnit registers a callback for EDotaUserMessages_DOTA_UM_ReplaceQueryUnit
+func (c *Callbacks) OnCDOTAUserMsg_ReplaceQueryUnit(fn func(*dota.CDOTAUserMsg_ReplaceQueryUnit) error) {
+	c.onCDOTAUserMsg_ReplaceQueryUnit = append(c.onCDOTAUserMsg_ReplaceQueryUnit, fn)
+}
+
+// OnCDOTAUserMsg_EmptyTeleportAlert registers a callback for EDotaUserMessages_DOTA_UM_EmptyTeleportAlert
+func (c *Callbacks) OnCDOTAUserMsg_EmptyTeleportAlert(fn func(*dota.CDOTAUserMsg_EmptyTeleportAlert) error) {
+	c.onCDOTAUserMsg_EmptyTeleportAlert = append(c.onCDOTAUserMsg_EmptyTeleportAlert, fn)
 }
 
 func (c *Callbacks) callByDemoType(t int32, buf []byte) error {
@@ -5348,6 +5360,44 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		for _, fn := range c.onCDOTAUserMsg_TipAlert {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 578: // dota.EDotaUserMessages_DOTA_UM_ReplaceQueryUnit
+		if c.onCDOTAUserMsg_ReplaceQueryUnit == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_ReplaceQueryUnit{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_ReplaceQueryUnit {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 579: // dota.EDotaUserMessages_DOTA_UM_EmptyTeleportAlert
+		if c.onCDOTAUserMsg_EmptyTeleportAlert == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_EmptyTeleportAlert{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_EmptyTeleportAlert {
 			if err := fn(msg); err != nil {
 				return err
 			}

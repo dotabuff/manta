@@ -123,6 +123,8 @@ enum EDotaUserMessages {
 	DOTA_UM_DamageReport = 575;
 	DOTA_UM_SalutePlayer = 576;
 	DOTA_UM_TipAlert = 577;
+	DOTA_UM_ReplaceQueryUnit = 578;
+	DOTA_UM_EmptyTeleportAlert = 579;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -222,6 +224,8 @@ enum DOTA_CHAT_MESSAGE {
 	CHAT_MESSAGE_WAGER_TOKEN_SPENT = 102;
 	CHAT_MESSAGE_RANK_WAGER = 103;
 	CHAT_MESSAGE_NEW_PLAYER_REMINDER = 104;
+	CHAT_MESSAGE_OBSERVER_WARD_KILLED = 105;
+	CHAT_MESSAGE_SENTRY_WARD_KILLED = 106;
 }
 
 enum DOTA_NO_BATTLE_POINTS_REASONS {
@@ -249,6 +253,9 @@ enum DOTA_ABILITY_PING_TYPE {
 	ABILITY_PING_INSTASH = 7;
 	ABILITY_PING_ONCOURIER = 8;
 	ABILITY_PING_ALLY = 9;
+	ABILITY_PING_LEARN_READY = 10;
+	ABILITY_PING_WILL_LEARN = 11;
+	ABILITY_PING_FUTURE_LEARN = 12;
 }
 
 enum DOTA_REPLAY_STATE_EVENT {
@@ -499,6 +506,12 @@ message CDOTAUserMsg_WillPurchaseAlert {
 	optional int32 suggestion_player_id = 4;
 }
 
+message CDOTAUserMsg_EmptyTeleportAlert {
+	optional int32 source_player_id = 1;
+	optional int32 target_player_id = 2;
+	optional int32 cooldown_seconds = 3;
+}
+
 message CDOTAUserMsg_BuyBackStateAlert {
 	optional int32 player_id = 1;
 }
@@ -522,6 +535,7 @@ message CDOTAUserMsg_CourierKilledAlert {
 	optional int32 entity_handle = 3;
 	optional int32 timestamp = 4;
 	repeated CDOTAUserMsg_CourierKilledAlert.LostItem lost_items = 5;
+	optional int32 killer_player_id = 6;
 }
 
 message CDOTAUserMsg_MinimapEvent {
@@ -557,6 +571,7 @@ message CDOTAUserMsg_CreateLinearProjectile {
 	optional float fow_radius = 9;
 	optional bool sticky_fow_reveal = 10;
 	optional float distance = 11;
+	optional fixed32 colorgemcolor = 12;
 }
 
 message CDOTAUserMsg_DestroyLinearProjectile {
@@ -679,6 +694,7 @@ message CDOTAUserMsg_UnitEvent {
 		optional float fade_in = 3 [default = 0];
 		optional float fade_out = 4 [default = 0.1];
 		optional float playback_rate = 5 [default = 1];
+		optional int32 sequence_variant = 6;
 	}
 
 	message RemoveGesture {
@@ -899,6 +915,7 @@ message CDOTAUserMsg_AbilityPing {
 	optional int32 primary_charges = 9;
 	optional int32 secondary_charges = 10;
 	optional uint32 caster_id = 11;
+	optional bool ctrl_held = 12;
 }
 
 message CDOTAUserMsg_TE_UnitAnimation {
@@ -1231,10 +1248,17 @@ message CDOTAUserMsg_SalutePlayer {
 	optional int32 source_player_id = 1;
 	optional int32 target_player_id = 2;
 	optional uint32 tip_amount = 3;
+	optional uint32 event_id = 4;
 }
 
 message CDOTAUserMsg_TipAlert {
 	optional uint32 player_id = 1;
 	optional string tip_text = 2;
+}
+
+message CDOTAUserMsg_ReplaceQueryUnit {
+	required uint32 player_id = 1;
+	optional uint32 source_entindex = 2;
+	optional uint32 target_entindex = 3;
 }
 

@@ -12,6 +12,12 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the proto package it is being compiled against.
+// A compilation error at this line likely means your copy of the
+// proto package needs to be updated.
+const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+
 type DOTA_MODIFIER_ENTRY_TYPE int32
 
 const (
@@ -44,49 +50,72 @@ func (x *DOTA_MODIFIER_ENTRY_TYPE) UnmarshalJSON(data []byte) error {
 	*x = DOTA_MODIFIER_ENTRY_TYPE(value)
 	return nil
 }
-func (DOTA_MODIFIER_ENTRY_TYPE) EnumDescriptor() ([]byte, []int) { return fileDescriptor23, []int{0} }
-
-type CDOTAModifierBuffTableEntry struct {
-	EntryType           *DOTA_MODIFIER_ENTRY_TYPE `protobuf:"varint,1,req,name=entry_type,json=entryType,enum=dota.DOTA_MODIFIER_ENTRY_TYPE,def=1" json:"entry_type,omitempty"`
-	Parent              *int32                    `protobuf:"varint,2,req,name=parent" json:"parent,omitempty"`
-	Index               *int32                    `protobuf:"varint,3,req,name=index" json:"index,omitempty"`
-	SerialNum           *int32                    `protobuf:"varint,4,req,name=serial_num,json=serialNum" json:"serial_num,omitempty"`
-	ModifierClass       *int32                    `protobuf:"varint,5,opt,name=modifier_class,json=modifierClass" json:"modifier_class,omitempty"`
-	AbilityLevel        *int32                    `protobuf:"varint,6,opt,name=ability_level,json=abilityLevel" json:"ability_level,omitempty"`
-	StackCount          *int32                    `protobuf:"varint,7,opt,name=stack_count,json=stackCount" json:"stack_count,omitempty"`
-	CreationTime        *float32                  `protobuf:"fixed32,8,opt,name=creation_time,json=creationTime" json:"creation_time,omitempty"`
-	Duration            *float32                  `protobuf:"fixed32,9,opt,name=duration,def=-1" json:"duration,omitempty"`
-	Caster              *int32                    `protobuf:"varint,10,opt,name=caster" json:"caster,omitempty"`
-	Ability             *int32                    `protobuf:"varint,11,opt,name=ability" json:"ability,omitempty"`
-	Armor               *int32                    `protobuf:"varint,12,opt,name=armor" json:"armor,omitempty"`
-	FadeTime            *float32                  `protobuf:"fixed32,13,opt,name=fade_time,json=fadeTime" json:"fade_time,omitempty"`
-	Subtle              *bool                     `protobuf:"varint,14,opt,name=subtle" json:"subtle,omitempty"`
-	ChannelTime         *float32                  `protobuf:"fixed32,15,opt,name=channel_time,json=channelTime" json:"channel_time,omitempty"`
-	VStart              *CMsgVector               `protobuf:"bytes,16,opt,name=v_start,json=vStart" json:"v_start,omitempty"`
-	VEnd                *CMsgVector               `protobuf:"bytes,17,opt,name=v_end,json=vEnd" json:"v_end,omitempty"`
-	PortalLoopAppear    *string                   `protobuf:"bytes,18,opt,name=portal_loop_appear,json=portalLoopAppear" json:"portal_loop_appear,omitempty"`
-	PortalLoopDisappear *string                   `protobuf:"bytes,19,opt,name=portal_loop_disappear,json=portalLoopDisappear" json:"portal_loop_disappear,omitempty"`
-	HeroLoopAppear      *string                   `protobuf:"bytes,20,opt,name=hero_loop_appear,json=heroLoopAppear" json:"hero_loop_appear,omitempty"`
-	HeroLoopDisappear   *string                   `protobuf:"bytes,21,opt,name=hero_loop_disappear,json=heroLoopDisappear" json:"hero_loop_disappear,omitempty"`
-	MovementSpeed       *int32                    `protobuf:"varint,22,opt,name=movement_speed,json=movementSpeed" json:"movement_speed,omitempty"`
-	Aura                *bool                     `protobuf:"varint,23,opt,name=aura" json:"aura,omitempty"`
-	Activity            *int32                    `protobuf:"varint,24,opt,name=activity" json:"activity,omitempty"`
-	Damage              *int32                    `protobuf:"varint,25,opt,name=damage" json:"damage,omitempty"`
-	Range               *int32                    `protobuf:"varint,26,opt,name=range" json:"range,omitempty"`
-	DdModifierIndex     *int32                    `protobuf:"varint,27,opt,name=dd_modifier_index,json=ddModifierIndex" json:"dd_modifier_index,omitempty"`
-	DdAbilityId         *int32                    `protobuf:"varint,28,opt,name=dd_ability_id,json=ddAbilityId" json:"dd_ability_id,omitempty"`
-	IllusionLabel       *string                   `protobuf:"bytes,29,opt,name=illusion_label,json=illusionLabel" json:"illusion_label,omitempty"`
-	Active              *bool                     `protobuf:"varint,30,opt,name=active" json:"active,omitempty"`
-	PlayerIds           *string                   `protobuf:"bytes,31,opt,name=player_ids,json=playerIds" json:"player_ids,omitempty"`
-	LuaName             *string                   `protobuf:"bytes,32,opt,name=lua_name,json=luaName" json:"lua_name,omitempty"`
-	AttackSpeed         *int32                    `protobuf:"varint,33,opt,name=attack_speed,json=attackSpeed" json:"attack_speed,omitempty"`
-	XXX_unrecognized    []byte                    `json:"-"`
+func (DOTA_MODIFIER_ENTRY_TYPE) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_dota_modifiers_d85569fd02387bd3, []int{0}
 }
 
-func (m *CDOTAModifierBuffTableEntry) Reset()                    { *m = CDOTAModifierBuffTableEntry{} }
-func (m *CDOTAModifierBuffTableEntry) String() string            { return proto.CompactTextString(m) }
-func (*CDOTAModifierBuffTableEntry) ProtoMessage()               {}
-func (*CDOTAModifierBuffTableEntry) Descriptor() ([]byte, []int) { return fileDescriptor23, []int{0} }
+type CDOTAModifierBuffTableEntry struct {
+	EntryType            *DOTA_MODIFIER_ENTRY_TYPE `protobuf:"varint,1,req,name=entry_type,json=entryType,enum=dota.DOTA_MODIFIER_ENTRY_TYPE,def=1" json:"entry_type,omitempty"`
+	Parent               *int32                    `protobuf:"varint,2,req,name=parent" json:"parent,omitempty"`
+	Index                *int32                    `protobuf:"varint,3,req,name=index" json:"index,omitempty"`
+	SerialNum            *int32                    `protobuf:"varint,4,req,name=serial_num,json=serialNum" json:"serial_num,omitempty"`
+	ModifierClass        *int32                    `protobuf:"varint,5,opt,name=modifier_class,json=modifierClass" json:"modifier_class,omitempty"`
+	AbilityLevel         *int32                    `protobuf:"varint,6,opt,name=ability_level,json=abilityLevel" json:"ability_level,omitempty"`
+	StackCount           *int32                    `protobuf:"varint,7,opt,name=stack_count,json=stackCount" json:"stack_count,omitempty"`
+	CreationTime         *float32                  `protobuf:"fixed32,8,opt,name=creation_time,json=creationTime" json:"creation_time,omitempty"`
+	Duration             *float32                  `protobuf:"fixed32,9,opt,name=duration,def=-1" json:"duration,omitempty"`
+	Caster               *int32                    `protobuf:"varint,10,opt,name=caster" json:"caster,omitempty"`
+	Ability              *int32                    `protobuf:"varint,11,opt,name=ability" json:"ability,omitempty"`
+	Armor                *int32                    `protobuf:"varint,12,opt,name=armor" json:"armor,omitempty"`
+	FadeTime             *float32                  `protobuf:"fixed32,13,opt,name=fade_time,json=fadeTime" json:"fade_time,omitempty"`
+	Subtle               *bool                     `protobuf:"varint,14,opt,name=subtle" json:"subtle,omitempty"`
+	ChannelTime          *float32                  `protobuf:"fixed32,15,opt,name=channel_time,json=channelTime" json:"channel_time,omitempty"`
+	VStart               *CMsgVector               `protobuf:"bytes,16,opt,name=v_start,json=vStart" json:"v_start,omitempty"`
+	VEnd                 *CMsgVector               `protobuf:"bytes,17,opt,name=v_end,json=vEnd" json:"v_end,omitempty"`
+	PortalLoopAppear     *string                   `protobuf:"bytes,18,opt,name=portal_loop_appear,json=portalLoopAppear" json:"portal_loop_appear,omitempty"`
+	PortalLoopDisappear  *string                   `protobuf:"bytes,19,opt,name=portal_loop_disappear,json=portalLoopDisappear" json:"portal_loop_disappear,omitempty"`
+	HeroLoopAppear       *string                   `protobuf:"bytes,20,opt,name=hero_loop_appear,json=heroLoopAppear" json:"hero_loop_appear,omitempty"`
+	HeroLoopDisappear    *string                   `protobuf:"bytes,21,opt,name=hero_loop_disappear,json=heroLoopDisappear" json:"hero_loop_disappear,omitempty"`
+	MovementSpeed        *int32                    `protobuf:"varint,22,opt,name=movement_speed,json=movementSpeed" json:"movement_speed,omitempty"`
+	Aura                 *bool                     `protobuf:"varint,23,opt,name=aura" json:"aura,omitempty"`
+	Activity             *int32                    `protobuf:"varint,24,opt,name=activity" json:"activity,omitempty"`
+	Damage               *int32                    `protobuf:"varint,25,opt,name=damage" json:"damage,omitempty"`
+	Range                *int32                    `protobuf:"varint,26,opt,name=range" json:"range,omitempty"`
+	DdModifierIndex      *int32                    `protobuf:"varint,27,opt,name=dd_modifier_index,json=ddModifierIndex" json:"dd_modifier_index,omitempty"`
+	DdAbilityId          *int32                    `protobuf:"varint,28,opt,name=dd_ability_id,json=ddAbilityId" json:"dd_ability_id,omitempty"`
+	IllusionLabel        *string                   `protobuf:"bytes,29,opt,name=illusion_label,json=illusionLabel" json:"illusion_label,omitempty"`
+	Active               *bool                     `protobuf:"varint,30,opt,name=active" json:"active,omitempty"`
+	PlayerIds            *string                   `protobuf:"bytes,31,opt,name=player_ids,json=playerIds" json:"player_ids,omitempty"`
+	LuaName              *string                   `protobuf:"bytes,32,opt,name=lua_name,json=luaName" json:"lua_name,omitempty"`
+	AttackSpeed          *int32                    `protobuf:"varint,33,opt,name=attack_speed,json=attackSpeed" json:"attack_speed,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                  `json:"-"`
+	XXX_unrecognized     []byte                    `json:"-"`
+	XXX_sizecache        int32                     `json:"-"`
+}
+
+func (m *CDOTAModifierBuffTableEntry) Reset()         { *m = CDOTAModifierBuffTableEntry{} }
+func (m *CDOTAModifierBuffTableEntry) String() string { return proto.CompactTextString(m) }
+func (*CDOTAModifierBuffTableEntry) ProtoMessage()    {}
+func (*CDOTAModifierBuffTableEntry) Descriptor() ([]byte, []int) {
+	return fileDescriptor_dota_modifiers_d85569fd02387bd3, []int{0}
+}
+func (m *CDOTAModifierBuffTableEntry) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CDOTAModifierBuffTableEntry.Unmarshal(m, b)
+}
+func (m *CDOTAModifierBuffTableEntry) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CDOTAModifierBuffTableEntry.Marshal(b, m, deterministic)
+}
+func (dst *CDOTAModifierBuffTableEntry) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CDOTAModifierBuffTableEntry.Merge(dst, src)
+}
+func (m *CDOTAModifierBuffTableEntry) XXX_Size() int {
+	return xxx_messageInfo_CDOTAModifierBuffTableEntry.Size(m)
+}
+func (m *CDOTAModifierBuffTableEntry) XXX_DiscardUnknown() {
+	xxx_messageInfo_CDOTAModifierBuffTableEntry.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CDOTAModifierBuffTableEntry proto.InternalMessageInfo
 
 const Default_CDOTAModifierBuffTableEntry_EntryType DOTA_MODIFIER_ENTRY_TYPE = DOTA_MODIFIER_ENTRY_TYPE_DOTA_MODIFIER_ENTRY_TYPE_ACTIVE
 const Default_CDOTAModifierBuffTableEntry_Duration float32 = -1
@@ -323,15 +352,36 @@ func (m *CDOTAModifierBuffTableEntry) GetAttackSpeed() int32 {
 }
 
 type CDOTALuaModifierEntry struct {
-	ModifierType     *int32  `protobuf:"varint,1,req,name=modifier_type,json=modifierType" json:"modifier_type,omitempty"`
-	ModifierFilename *string `protobuf:"bytes,2,req,name=modifier_filename,json=modifierFilename" json:"modifier_filename,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	ModifierType         *int32   `protobuf:"varint,1,req,name=modifier_type,json=modifierType" json:"modifier_type,omitempty"`
+	ModifierFilename     *string  `protobuf:"bytes,2,req,name=modifier_filename,json=modifierFilename" json:"modifier_filename,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CDOTALuaModifierEntry) Reset()                    { *m = CDOTALuaModifierEntry{} }
-func (m *CDOTALuaModifierEntry) String() string            { return proto.CompactTextString(m) }
-func (*CDOTALuaModifierEntry) ProtoMessage()               {}
-func (*CDOTALuaModifierEntry) Descriptor() ([]byte, []int) { return fileDescriptor23, []int{1} }
+func (m *CDOTALuaModifierEntry) Reset()         { *m = CDOTALuaModifierEntry{} }
+func (m *CDOTALuaModifierEntry) String() string { return proto.CompactTextString(m) }
+func (*CDOTALuaModifierEntry) ProtoMessage()    {}
+func (*CDOTALuaModifierEntry) Descriptor() ([]byte, []int) {
+	return fileDescriptor_dota_modifiers_d85569fd02387bd3, []int{1}
+}
+func (m *CDOTALuaModifierEntry) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CDOTALuaModifierEntry.Unmarshal(m, b)
+}
+func (m *CDOTALuaModifierEntry) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CDOTALuaModifierEntry.Marshal(b, m, deterministic)
+}
+func (dst *CDOTALuaModifierEntry) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CDOTALuaModifierEntry.Merge(dst, src)
+}
+func (m *CDOTALuaModifierEntry) XXX_Size() int {
+	return xxx_messageInfo_CDOTALuaModifierEntry.Size(m)
+}
+func (m *CDOTALuaModifierEntry) XXX_DiscardUnknown() {
+	xxx_messageInfo_CDOTALuaModifierEntry.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CDOTALuaModifierEntry proto.InternalMessageInfo
 
 func (m *CDOTALuaModifierEntry) GetModifierType() int32 {
 	if m != nil && m.ModifierType != nil {
@@ -353,9 +403,11 @@ func init() {
 	proto.RegisterEnum("dota.DOTA_MODIFIER_ENTRY_TYPE", DOTA_MODIFIER_ENTRY_TYPE_name, DOTA_MODIFIER_ENTRY_TYPE_value)
 }
 
-func init() { proto.RegisterFile("dota_modifiers.proto", fileDescriptor23) }
+func init() {
+	proto.RegisterFile("dota_modifiers.proto", fileDescriptor_dota_modifiers_d85569fd02387bd3)
+}
 
-var fileDescriptor23 = []byte{
+var fileDescriptor_dota_modifiers_d85569fd02387bd3 = []byte{
 	// 781 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x84, 0x94, 0x4b, 0x6f, 0x1b, 0x37,
 	0x10, 0xc7, 0xbb, 0xaa, 0x65, 0x4b, 0x23, 0xc9, 0x91, 0xe9, 0x47, 0x19, 0xbb, 0xb1, 0x37, 0x76,

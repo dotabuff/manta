@@ -12,24 +12,51 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the proto package it is being compiled against.
+// A compilation error at this line likely means your copy of the
+// proto package needs to be updated.
+const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+
 type C2S_CONNECT_Message struct {
-	HostVersion       *uint32                       `protobuf:"varint,1,opt,name=host_version,json=hostVersion" json:"host_version,omitempty"`
-	AuthProtocol      *uint32                       `protobuf:"varint,2,opt,name=auth_protocol,json=authProtocol" json:"auth_protocol,omitempty"`
-	ChallengeNumber   *uint32                       `protobuf:"varint,3,opt,name=challenge_number,json=challengeNumber" json:"challenge_number,omitempty"`
-	ReservationCookie *uint64                       `protobuf:"fixed64,4,opt,name=reservation_cookie,json=reservationCookie" json:"reservation_cookie,omitempty"`
-	LowViolence       *bool                         `protobuf:"varint,5,opt,name=low_violence,json=lowViolence" json:"low_violence,omitempty"`
-	EncryptedPassword []byte                        `protobuf:"bytes,6,opt,name=encrypted_password,json=encryptedPassword" json:"encrypted_password,omitempty"`
-	Splitplayers      []*CCLCMsg_SplitPlayerConnect `protobuf:"bytes,7,rep,name=splitplayers" json:"splitplayers,omitempty"`
-	AuthSteam         []byte                        `protobuf:"bytes,8,opt,name=auth_steam,json=authSteam" json:"auth_steam,omitempty"`
-	ChallengeContext  *string                       `protobuf:"bytes,9,opt,name=challenge_context,json=challengeContext" json:"challenge_context,omitempty"`
-	UseSnp            *int32                        `protobuf:"zigzag32,10,opt,name=use_snp,json=useSnp" json:"use_snp,omitempty"`
-	XXX_unrecognized  []byte                        `json:"-"`
+	HostVersion          *uint32                       `protobuf:"varint,1,opt,name=host_version,json=hostVersion" json:"host_version,omitempty"`
+	AuthProtocol         *uint32                       `protobuf:"varint,2,opt,name=auth_protocol,json=authProtocol" json:"auth_protocol,omitempty"`
+	ChallengeNumber      *uint32                       `protobuf:"varint,3,opt,name=challenge_number,json=challengeNumber" json:"challenge_number,omitempty"`
+	ReservationCookie    *uint64                       `protobuf:"fixed64,4,opt,name=reservation_cookie,json=reservationCookie" json:"reservation_cookie,omitempty"`
+	LowViolence          *bool                         `protobuf:"varint,5,opt,name=low_violence,json=lowViolence" json:"low_violence,omitempty"`
+	EncryptedPassword    []byte                        `protobuf:"bytes,6,opt,name=encrypted_password,json=encryptedPassword" json:"encrypted_password,omitempty"`
+	Splitplayers         []*CCLCMsg_SplitPlayerConnect `protobuf:"bytes,7,rep,name=splitplayers" json:"splitplayers,omitempty"`
+	AuthSteam            []byte                        `protobuf:"bytes,8,opt,name=auth_steam,json=authSteam" json:"auth_steam,omitempty"`
+	ChallengeContext     *string                       `protobuf:"bytes,9,opt,name=challenge_context,json=challengeContext" json:"challenge_context,omitempty"`
+	UseSnp               *int32                        `protobuf:"zigzag32,10,opt,name=use_snp,json=useSnp" json:"use_snp,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                      `json:"-"`
+	XXX_unrecognized     []byte                        `json:"-"`
+	XXX_sizecache        int32                         `json:"-"`
 }
 
-func (m *C2S_CONNECT_Message) Reset()                    { *m = C2S_CONNECT_Message{} }
-func (m *C2S_CONNECT_Message) String() string            { return proto.CompactTextString(m) }
-func (*C2S_CONNECT_Message) ProtoMessage()               {}
-func (*C2S_CONNECT_Message) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{0} }
+func (m *C2S_CONNECT_Message) Reset()         { *m = C2S_CONNECT_Message{} }
+func (m *C2S_CONNECT_Message) String() string { return proto.CompactTextString(m) }
+func (*C2S_CONNECT_Message) ProtoMessage()    {}
+func (*C2S_CONNECT_Message) Descriptor() ([]byte, []int) {
+	return fileDescriptor_connectionless_netmessages_10bcca5a5bcf7a3f, []int{0}
+}
+func (m *C2S_CONNECT_Message) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_C2S_CONNECT_Message.Unmarshal(m, b)
+}
+func (m *C2S_CONNECT_Message) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_C2S_CONNECT_Message.Marshal(b, m, deterministic)
+}
+func (dst *C2S_CONNECT_Message) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_C2S_CONNECT_Message.Merge(dst, src)
+}
+func (m *C2S_CONNECT_Message) XXX_Size() int {
+	return xxx_messageInfo_C2S_CONNECT_Message.Size(m)
+}
+func (m *C2S_CONNECT_Message) XXX_DiscardUnknown() {
+	xxx_messageInfo_C2S_CONNECT_Message.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_C2S_CONNECT_Message proto.InternalMessageInfo
 
 func (m *C2S_CONNECT_Message) GetHostVersion() uint32 {
 	if m != nil && m.HostVersion != nil {
@@ -102,15 +129,36 @@ func (m *C2S_CONNECT_Message) GetUseSnp() int32 {
 }
 
 type C2S_CONNECTION_Message struct {
-	AddonName        *string `protobuf:"bytes,1,opt,name=addon_name,json=addonName" json:"addon_name,omitempty"`
-	UseSnp           *bool   `protobuf:"varint,2,opt,name=use_snp,json=useSnp" json:"use_snp,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	AddonName            *string  `protobuf:"bytes,1,opt,name=addon_name,json=addonName" json:"addon_name,omitempty"`
+	UseSnp               *bool    `protobuf:"varint,2,opt,name=use_snp,json=useSnp" json:"use_snp,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *C2S_CONNECTION_Message) Reset()                    { *m = C2S_CONNECTION_Message{} }
-func (m *C2S_CONNECTION_Message) String() string            { return proto.CompactTextString(m) }
-func (*C2S_CONNECTION_Message) ProtoMessage()               {}
-func (*C2S_CONNECTION_Message) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{1} }
+func (m *C2S_CONNECTION_Message) Reset()         { *m = C2S_CONNECTION_Message{} }
+func (m *C2S_CONNECTION_Message) String() string { return proto.CompactTextString(m) }
+func (*C2S_CONNECTION_Message) ProtoMessage()    {}
+func (*C2S_CONNECTION_Message) Descriptor() ([]byte, []int) {
+	return fileDescriptor_connectionless_netmessages_10bcca5a5bcf7a3f, []int{1}
+}
+func (m *C2S_CONNECTION_Message) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_C2S_CONNECTION_Message.Unmarshal(m, b)
+}
+func (m *C2S_CONNECTION_Message) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_C2S_CONNECTION_Message.Marshal(b, m, deterministic)
+}
+func (dst *C2S_CONNECTION_Message) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_C2S_CONNECTION_Message.Merge(dst, src)
+}
+func (m *C2S_CONNECTION_Message) XXX_Size() int {
+	return xxx_messageInfo_C2S_CONNECTION_Message.Size(m)
+}
+func (m *C2S_CONNECTION_Message) XXX_DiscardUnknown() {
+	xxx_messageInfo_C2S_CONNECTION_Message.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_C2S_CONNECTION_Message proto.InternalMessageInfo
 
 func (m *C2S_CONNECTION_Message) GetAddonName() string {
 	if m != nil && m.AddonName != nil {
@@ -131,9 +179,11 @@ func init() {
 	proto.RegisterType((*C2S_CONNECTION_Message)(nil), "dota.C2S_CONNECTION_Message")
 }
 
-func init() { proto.RegisterFile("connectionless_netmessages.proto", fileDescriptor3) }
+func init() {
+	proto.RegisterFile("connectionless_netmessages.proto", fileDescriptor_connectionless_netmessages_10bcca5a5bcf7a3f)
+}
 
-var fileDescriptor3 = []byte{
+var fileDescriptor_connectionless_netmessages_10bcca5a5bcf7a3f = []byte{
 	// 388 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x64, 0x91, 0x51, 0x6f, 0xd3, 0x30,
 	0x14, 0x85, 0xc9, 0x3a, 0xba, 0xc5, 0xed, 0x04, 0x31, 0x12, 0x58, 0x48, 0x48, 0x66, 0xbc, 0x04,

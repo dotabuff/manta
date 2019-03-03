@@ -6,12 +6,18 @@ package dota
 import proto "github.com/golang/protobuf/proto"
 import fmt "fmt"
 import math "math"
-import google_protobuf "github.com/golang/protobuf/protoc-gen-go/descriptor"
+import descriptor "github.com/golang/protobuf/protoc-gen-go/descriptor"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
+
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the proto package it is being compiled against.
+// A compilation error at this line likely means your copy of the
+// proto package needs to be updated.
+const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
 type EProtoExecutionSite int32
 
@@ -45,10 +51,12 @@ func (x *EProtoExecutionSite) UnmarshalJSON(data []byte) error {
 	*x = EProtoExecutionSite(value)
 	return nil
 }
-func (EProtoExecutionSite) EnumDescriptor() ([]byte, []int) { return fileDescriptor39, []int{0} }
+func (EProtoExecutionSite) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_steammessages_unified_base_steamworkssdk_a78da9da5e89e7ae, []int{0}
+}
 
 var E_Description = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.FieldOptions)(nil),
+	ExtendedType:  (*descriptor.FieldOptions)(nil),
 	ExtensionType: (*string)(nil),
 	Field:         50000,
 	Name:          "dota.description",
@@ -57,7 +65,7 @@ var E_Description = &proto.ExtensionDesc{
 }
 
 var E_ServiceDescription = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.ServiceOptions)(nil),
+	ExtendedType:  (*descriptor.ServiceOptions)(nil),
 	ExtensionType: (*string)(nil),
 	Field:         50000,
 	Name:          "dota.service_description",
@@ -66,7 +74,7 @@ var E_ServiceDescription = &proto.ExtensionDesc{
 }
 
 var E_ServiceExecutionSite = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.ServiceOptions)(nil),
+	ExtendedType:  (*descriptor.ServiceOptions)(nil),
 	ExtensionType: (*EProtoExecutionSite)(nil),
 	Field:         50008,
 	Name:          "dota.service_execution_site",
@@ -75,7 +83,7 @@ var E_ServiceExecutionSite = &proto.ExtensionDesc{
 }
 
 var E_MethodDescription = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.MethodOptions)(nil),
+	ExtendedType:  (*descriptor.MethodOptions)(nil),
 	ExtensionType: (*string)(nil),
 	Field:         50000,
 	Name:          "dota.method_description",
@@ -84,7 +92,7 @@ var E_MethodDescription = &proto.ExtensionDesc{
 }
 
 var E_EnumDescription = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.EnumOptions)(nil),
+	ExtendedType:  (*descriptor.EnumOptions)(nil),
 	ExtensionType: (*string)(nil),
 	Field:         50000,
 	Name:          "dota.enum_description",
@@ -93,7 +101,7 @@ var E_EnumDescription = &proto.ExtensionDesc{
 }
 
 var E_EnumValueDescription = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.EnumValueOptions)(nil),
+	ExtendedType:  (*descriptor.EnumValueOptions)(nil),
 	ExtensionType: (*string)(nil),
 	Field:         50000,
 	Name:          "dota.enum_value_description",
@@ -111,9 +119,11 @@ func init() {
 	proto.RegisterExtension(E_EnumValueDescription)
 }
 
-func init() { proto.RegisterFile("steammessages_unified_base.steamworkssdk.proto", fileDescriptor39) }
+func init() {
+	proto.RegisterFile("steammessages_unified_base.steamworkssdk.proto", fileDescriptor_steammessages_unified_base_steamworkssdk_a78da9da5e89e7ae)
+}
 
-var fileDescriptor39 = []byte{
+var fileDescriptor_steammessages_unified_base_steamworkssdk_a78da9da5e89e7ae = []byte{
 	// 339 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x84, 0x91, 0x4d, 0x4b, 0xf3, 0x40,
 	0x14, 0x85, 0x1b, 0xfa, 0xbe, 0x0b, 0x47, 0xd0, 0x3a, 0x2d, 0x45, 0xa5, 0x6a, 0x04, 0x17, 0xe2,

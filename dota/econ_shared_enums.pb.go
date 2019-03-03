@@ -12,6 +12,12 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the proto package it is being compiled against.
+// A compilation error at this line likely means your copy of the
+// proto package needs to be updated.
+const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+
 type EGCEconBaseMsg int32
 
 const (
@@ -41,7 +47,9 @@ func (x *EGCEconBaseMsg) UnmarshalJSON(data []byte) error {
 	*x = EGCEconBaseMsg(value)
 	return nil
 }
-func (EGCEconBaseMsg) EnumDescriptor() ([]byte, []int) { return fileDescriptor27, []int{0} }
+func (EGCEconBaseMsg) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_econ_shared_enums_cbf124cdc3b56a33, []int{0}
+}
 
 type EGCMsgResponse int32
 
@@ -96,7 +104,9 @@ func (x *EGCMsgResponse) UnmarshalJSON(data []byte) error {
 	*x = EGCMsgResponse(value)
 	return nil
 }
-func (EGCMsgResponse) EnumDescriptor() ([]byte, []int) { return fileDescriptor27, []int{1} }
+func (EGCMsgResponse) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_econ_shared_enums_cbf124cdc3b56a33, []int{1}
+}
 
 type EGCPartnerRequestResponse int32
 
@@ -136,7 +146,9 @@ func (x *EGCPartnerRequestResponse) UnmarshalJSON(data []byte) error {
 	*x = EGCPartnerRequestResponse(value)
 	return nil
 }
-func (EGCPartnerRequestResponse) EnumDescriptor() ([]byte, []int) { return fileDescriptor27, []int{2} }
+func (EGCPartnerRequestResponse) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_econ_shared_enums_cbf124cdc3b56a33, []int{2}
+}
 
 type EGCMsgUseItemResponse int32
 
@@ -206,18 +218,41 @@ func (x *EGCMsgUseItemResponse) UnmarshalJSON(data []byte) error {
 	*x = EGCMsgUseItemResponse(value)
 	return nil
 }
-func (EGCMsgUseItemResponse) EnumDescriptor() ([]byte, []int) { return fileDescriptor27, []int{3} }
-
-type CMsgGenericResult struct {
-	Eresult          *uint32 `protobuf:"varint,1,opt,name=eresult,def=2" json:"eresult,omitempty"`
-	DebugMessage     *string `protobuf:"bytes,2,opt,name=debug_message,json=debugMessage" json:"debug_message,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+func (EGCMsgUseItemResponse) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_econ_shared_enums_cbf124cdc3b56a33, []int{3}
 }
 
-func (m *CMsgGenericResult) Reset()                    { *m = CMsgGenericResult{} }
-func (m *CMsgGenericResult) String() string            { return proto.CompactTextString(m) }
-func (*CMsgGenericResult) ProtoMessage()               {}
-func (*CMsgGenericResult) Descriptor() ([]byte, []int) { return fileDescriptor27, []int{0} }
+type CMsgGenericResult struct {
+	Eresult              *uint32  `protobuf:"varint,1,opt,name=eresult,def=2" json:"eresult,omitempty"`
+	DebugMessage         *string  `protobuf:"bytes,2,opt,name=debug_message,json=debugMessage" json:"debug_message,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CMsgGenericResult) Reset()         { *m = CMsgGenericResult{} }
+func (m *CMsgGenericResult) String() string { return proto.CompactTextString(m) }
+func (*CMsgGenericResult) ProtoMessage()    {}
+func (*CMsgGenericResult) Descriptor() ([]byte, []int) {
+	return fileDescriptor_econ_shared_enums_cbf124cdc3b56a33, []int{0}
+}
+func (m *CMsgGenericResult) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgGenericResult.Unmarshal(m, b)
+}
+func (m *CMsgGenericResult) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgGenericResult.Marshal(b, m, deterministic)
+}
+func (dst *CMsgGenericResult) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGenericResult.Merge(dst, src)
+}
+func (m *CMsgGenericResult) XXX_Size() int {
+	return xxx_messageInfo_CMsgGenericResult.Size(m)
+}
+func (m *CMsgGenericResult) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgGenericResult.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgGenericResult proto.InternalMessageInfo
 
 const Default_CMsgGenericResult_Eresult uint32 = 2
 
@@ -243,9 +278,11 @@ func init() {
 	proto.RegisterEnum("dota.EGCMsgUseItemResponse", EGCMsgUseItemResponse_name, EGCMsgUseItemResponse_value)
 }
 
-func init() { proto.RegisterFile("econ_shared_enums.proto", fileDescriptor27) }
+func init() {
+	proto.RegisterFile("econ_shared_enums.proto", fileDescriptor_econ_shared_enums_cbf124cdc3b56a33)
+}
 
-var fileDescriptor27 = []byte{
+var fileDescriptor_econ_shared_enums_cbf124cdc3b56a33 = []byte{
 	// 619 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x52, 0x5d, 0x4f, 0x13, 0x4d,
 	0x14, 0x66, 0x4b, 0xcb, 0xc7, 0xbc, 0xf0, 0x66, 0x1c, 0xe5, 0x43, 0x30, 0xda, 0x88, 0x11, 0x52,

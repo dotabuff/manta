@@ -12,6 +12,12 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the proto package it is being compiled against.
+// A compilation error at this line likely means your copy of the
+// proto package needs to be updated.
+const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+
 type EDOTAStatPopupTypes int32
 
 const (
@@ -56,7 +62,9 @@ func (x *EDOTAStatPopupTypes) UnmarshalJSON(data []byte) error {
 	*x = EDOTAStatPopupTypes(value)
 	return nil
 }
-func (EDOTAStatPopupTypes) EnumDescriptor() ([]byte, []int) { return fileDescriptor8, []int{0} }
+func (EDOTAStatPopupTypes) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_dota_commonmessages_15ad3d103af979c6, []int{0}
+}
 
 type DotaunitorderT int32
 
@@ -195,21 +203,44 @@ func (x *DotaunitorderT) UnmarshalJSON(data []byte) error {
 	*x = DotaunitorderT(value)
 	return nil
 }
-func (DotaunitorderT) EnumDescriptor() ([]byte, []int) { return fileDescriptor8, []int{1} }
-
-type CDOTAMsg_LocationPing struct {
-	X                *int32 `protobuf:"varint,1,opt,name=x" json:"x,omitempty"`
-	Y                *int32 `protobuf:"varint,2,opt,name=y" json:"y,omitempty"`
-	Target           *int32 `protobuf:"varint,3,opt,name=target" json:"target,omitempty"`
-	DirectPing       *bool  `protobuf:"varint,4,opt,name=direct_ping,json=directPing" json:"direct_ping,omitempty"`
-	Type             *int32 `protobuf:"varint,5,opt,name=type" json:"type,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+func (DotaunitorderT) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_dota_commonmessages_15ad3d103af979c6, []int{1}
 }
 
-func (m *CDOTAMsg_LocationPing) Reset()                    { *m = CDOTAMsg_LocationPing{} }
-func (m *CDOTAMsg_LocationPing) String() string            { return proto.CompactTextString(m) }
-func (*CDOTAMsg_LocationPing) ProtoMessage()               {}
-func (*CDOTAMsg_LocationPing) Descriptor() ([]byte, []int) { return fileDescriptor8, []int{0} }
+type CDOTAMsg_LocationPing struct {
+	X                    *int32   `protobuf:"varint,1,opt,name=x" json:"x,omitempty"`
+	Y                    *int32   `protobuf:"varint,2,opt,name=y" json:"y,omitempty"`
+	Target               *int32   `protobuf:"varint,3,opt,name=target" json:"target,omitempty"`
+	DirectPing           *bool    `protobuf:"varint,4,opt,name=direct_ping,json=directPing" json:"direct_ping,omitempty"`
+	Type                 *int32   `protobuf:"varint,5,opt,name=type" json:"type,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CDOTAMsg_LocationPing) Reset()         { *m = CDOTAMsg_LocationPing{} }
+func (m *CDOTAMsg_LocationPing) String() string { return proto.CompactTextString(m) }
+func (*CDOTAMsg_LocationPing) ProtoMessage()    {}
+func (*CDOTAMsg_LocationPing) Descriptor() ([]byte, []int) {
+	return fileDescriptor_dota_commonmessages_15ad3d103af979c6, []int{0}
+}
+func (m *CDOTAMsg_LocationPing) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CDOTAMsg_LocationPing.Unmarshal(m, b)
+}
+func (m *CDOTAMsg_LocationPing) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CDOTAMsg_LocationPing.Marshal(b, m, deterministic)
+}
+func (dst *CDOTAMsg_LocationPing) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CDOTAMsg_LocationPing.Merge(dst, src)
+}
+func (m *CDOTAMsg_LocationPing) XXX_Size() int {
+	return xxx_messageInfo_CDOTAMsg_LocationPing.Size(m)
+}
+func (m *CDOTAMsg_LocationPing) XXX_DiscardUnknown() {
+	xxx_messageInfo_CDOTAMsg_LocationPing.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CDOTAMsg_LocationPing proto.InternalMessageInfo
 
 func (m *CDOTAMsg_LocationPing) GetX() int32 {
 	if m != nil && m.X != nil {
@@ -247,16 +278,37 @@ func (m *CDOTAMsg_LocationPing) GetType() int32 {
 }
 
 type CDOTAMsg_ItemAlert struct {
-	X                *int32 `protobuf:"varint,1,opt,name=x" json:"x,omitempty"`
-	Y                *int32 `protobuf:"varint,2,opt,name=y" json:"y,omitempty"`
-	ItemAbilityId    *int32 `protobuf:"varint,3,opt,name=item_ability_id,json=itemAbilityId" json:"item_ability_id,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	X                    *int32   `protobuf:"varint,1,opt,name=x" json:"x,omitempty"`
+	Y                    *int32   `protobuf:"varint,2,opt,name=y" json:"y,omitempty"`
+	ItemAbilityId        *int32   `protobuf:"varint,3,opt,name=item_ability_id,json=itemAbilityId" json:"item_ability_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CDOTAMsg_ItemAlert) Reset()                    { *m = CDOTAMsg_ItemAlert{} }
-func (m *CDOTAMsg_ItemAlert) String() string            { return proto.CompactTextString(m) }
-func (*CDOTAMsg_ItemAlert) ProtoMessage()               {}
-func (*CDOTAMsg_ItemAlert) Descriptor() ([]byte, []int) { return fileDescriptor8, []int{1} }
+func (m *CDOTAMsg_ItemAlert) Reset()         { *m = CDOTAMsg_ItemAlert{} }
+func (m *CDOTAMsg_ItemAlert) String() string { return proto.CompactTextString(m) }
+func (*CDOTAMsg_ItemAlert) ProtoMessage()    {}
+func (*CDOTAMsg_ItemAlert) Descriptor() ([]byte, []int) {
+	return fileDescriptor_dota_commonmessages_15ad3d103af979c6, []int{1}
+}
+func (m *CDOTAMsg_ItemAlert) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CDOTAMsg_ItemAlert.Unmarshal(m, b)
+}
+func (m *CDOTAMsg_ItemAlert) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CDOTAMsg_ItemAlert.Marshal(b, m, deterministic)
+}
+func (dst *CDOTAMsg_ItemAlert) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CDOTAMsg_ItemAlert.Merge(dst, src)
+}
+func (m *CDOTAMsg_ItemAlert) XXX_Size() int {
+	return xxx_messageInfo_CDOTAMsg_ItemAlert.Size(m)
+}
+func (m *CDOTAMsg_ItemAlert) XXX_DiscardUnknown() {
+	xxx_messageInfo_CDOTAMsg_ItemAlert.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CDOTAMsg_ItemAlert proto.InternalMessageInfo
 
 func (m *CDOTAMsg_ItemAlert) GetX() int32 {
 	if m != nil && m.X != nil {
@@ -280,16 +332,37 @@ func (m *CDOTAMsg_ItemAlert) GetItemAbilityId() int32 {
 }
 
 type CDOTAMsg_MapLine struct {
-	X                *int32 `protobuf:"varint,1,opt,name=x" json:"x,omitempty"`
-	Y                *int32 `protobuf:"varint,2,opt,name=y" json:"y,omitempty"`
-	Initial          *bool  `protobuf:"varint,3,opt,name=initial" json:"initial,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	X                    *int32   `protobuf:"varint,1,opt,name=x" json:"x,omitempty"`
+	Y                    *int32   `protobuf:"varint,2,opt,name=y" json:"y,omitempty"`
+	Initial              *bool    `protobuf:"varint,3,opt,name=initial" json:"initial,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CDOTAMsg_MapLine) Reset()                    { *m = CDOTAMsg_MapLine{} }
-func (m *CDOTAMsg_MapLine) String() string            { return proto.CompactTextString(m) }
-func (*CDOTAMsg_MapLine) ProtoMessage()               {}
-func (*CDOTAMsg_MapLine) Descriptor() ([]byte, []int) { return fileDescriptor8, []int{2} }
+func (m *CDOTAMsg_MapLine) Reset()         { *m = CDOTAMsg_MapLine{} }
+func (m *CDOTAMsg_MapLine) String() string { return proto.CompactTextString(m) }
+func (*CDOTAMsg_MapLine) ProtoMessage()    {}
+func (*CDOTAMsg_MapLine) Descriptor() ([]byte, []int) {
+	return fileDescriptor_dota_commonmessages_15ad3d103af979c6, []int{2}
+}
+func (m *CDOTAMsg_MapLine) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CDOTAMsg_MapLine.Unmarshal(m, b)
+}
+func (m *CDOTAMsg_MapLine) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CDOTAMsg_MapLine.Marshal(b, m, deterministic)
+}
+func (dst *CDOTAMsg_MapLine) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CDOTAMsg_MapLine.Merge(dst, src)
+}
+func (m *CDOTAMsg_MapLine) XXX_Size() int {
+	return xxx_messageInfo_CDOTAMsg_MapLine.Size(m)
+}
+func (m *CDOTAMsg_MapLine) XXX_DiscardUnknown() {
+	xxx_messageInfo_CDOTAMsg_MapLine.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CDOTAMsg_MapLine proto.InternalMessageInfo
 
 func (m *CDOTAMsg_MapLine) GetX() int32 {
 	if m != nil && m.X != nil {
@@ -313,18 +386,39 @@ func (m *CDOTAMsg_MapLine) GetInitial() bool {
 }
 
 type CDOTAMsg_WorldLine struct {
-	X                *int32 `protobuf:"varint,1,opt,name=x" json:"x,omitempty"`
-	Y                *int32 `protobuf:"varint,2,opt,name=y" json:"y,omitempty"`
-	Z                *int32 `protobuf:"varint,3,opt,name=z" json:"z,omitempty"`
-	Initial          *bool  `protobuf:"varint,4,opt,name=initial" json:"initial,omitempty"`
-	End              *bool  `protobuf:"varint,5,opt,name=end" json:"end,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	X                    *int32   `protobuf:"varint,1,opt,name=x" json:"x,omitempty"`
+	Y                    *int32   `protobuf:"varint,2,opt,name=y" json:"y,omitempty"`
+	Z                    *int32   `protobuf:"varint,3,opt,name=z" json:"z,omitempty"`
+	Initial              *bool    `protobuf:"varint,4,opt,name=initial" json:"initial,omitempty"`
+	End                  *bool    `protobuf:"varint,5,opt,name=end" json:"end,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CDOTAMsg_WorldLine) Reset()                    { *m = CDOTAMsg_WorldLine{} }
-func (m *CDOTAMsg_WorldLine) String() string            { return proto.CompactTextString(m) }
-func (*CDOTAMsg_WorldLine) ProtoMessage()               {}
-func (*CDOTAMsg_WorldLine) Descriptor() ([]byte, []int) { return fileDescriptor8, []int{3} }
+func (m *CDOTAMsg_WorldLine) Reset()         { *m = CDOTAMsg_WorldLine{} }
+func (m *CDOTAMsg_WorldLine) String() string { return proto.CompactTextString(m) }
+func (*CDOTAMsg_WorldLine) ProtoMessage()    {}
+func (*CDOTAMsg_WorldLine) Descriptor() ([]byte, []int) {
+	return fileDescriptor_dota_commonmessages_15ad3d103af979c6, []int{3}
+}
+func (m *CDOTAMsg_WorldLine) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CDOTAMsg_WorldLine.Unmarshal(m, b)
+}
+func (m *CDOTAMsg_WorldLine) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CDOTAMsg_WorldLine.Marshal(b, m, deterministic)
+}
+func (dst *CDOTAMsg_WorldLine) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CDOTAMsg_WorldLine.Merge(dst, src)
+}
+func (m *CDOTAMsg_WorldLine) XXX_Size() int {
+	return xxx_messageInfo_CDOTAMsg_WorldLine.Size(m)
+}
+func (m *CDOTAMsg_WorldLine) XXX_DiscardUnknown() {
+	xxx_messageInfo_CDOTAMsg_WorldLine.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CDOTAMsg_WorldLine proto.InternalMessageInfo
 
 func (m *CDOTAMsg_WorldLine) GetX() int32 {
 	if m != nil && m.X != nil {
@@ -362,20 +456,41 @@ func (m *CDOTAMsg_WorldLine) GetEnd() bool {
 }
 
 type CDOTAMsg_SendStatPopup struct {
-	Style            *EDOTAStatPopupTypes `protobuf:"varint,1,opt,name=style,enum=dota.EDOTAStatPopupTypes,def=0" json:"style,omitempty"`
-	StatStrings      []string             `protobuf:"bytes,2,rep,name=stat_strings,json=statStrings" json:"stat_strings,omitempty"`
-	StatImages       []int32              `protobuf:"varint,3,rep,name=stat_images,json=statImages" json:"stat_images,omitempty"`
-	StatImageTypes   []int32              `protobuf:"varint,4,rep,name=stat_image_types,json=statImageTypes" json:"stat_image_types,omitempty"`
-	Duration         *float32             `protobuf:"fixed32,5,opt,name=duration" json:"duration,omitempty"`
-	UseHtml          *bool                `protobuf:"varint,6,opt,name=use_html,json=useHtml" json:"use_html,omitempty"`
-	MovieName        *string              `protobuf:"bytes,7,opt,name=movie_name,json=movieName" json:"movie_name,omitempty"`
-	XXX_unrecognized []byte               `json:"-"`
+	Style                *EDOTAStatPopupTypes `protobuf:"varint,1,opt,name=style,enum=dota.EDOTAStatPopupTypes,def=0" json:"style,omitempty"`
+	StatStrings          []string             `protobuf:"bytes,2,rep,name=stat_strings,json=statStrings" json:"stat_strings,omitempty"`
+	StatImages           []int32              `protobuf:"varint,3,rep,name=stat_images,json=statImages" json:"stat_images,omitempty"`
+	StatImageTypes       []int32              `protobuf:"varint,4,rep,name=stat_image_types,json=statImageTypes" json:"stat_image_types,omitempty"`
+	Duration             *float32             `protobuf:"fixed32,5,opt,name=duration" json:"duration,omitempty"`
+	UseHtml              *bool                `protobuf:"varint,6,opt,name=use_html,json=useHtml" json:"use_html,omitempty"`
+	MovieName            *string              `protobuf:"bytes,7,opt,name=movie_name,json=movieName" json:"movie_name,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}             `json:"-"`
+	XXX_unrecognized     []byte               `json:"-"`
+	XXX_sizecache        int32                `json:"-"`
 }
 
-func (m *CDOTAMsg_SendStatPopup) Reset()                    { *m = CDOTAMsg_SendStatPopup{} }
-func (m *CDOTAMsg_SendStatPopup) String() string            { return proto.CompactTextString(m) }
-func (*CDOTAMsg_SendStatPopup) ProtoMessage()               {}
-func (*CDOTAMsg_SendStatPopup) Descriptor() ([]byte, []int) { return fileDescriptor8, []int{4} }
+func (m *CDOTAMsg_SendStatPopup) Reset()         { *m = CDOTAMsg_SendStatPopup{} }
+func (m *CDOTAMsg_SendStatPopup) String() string { return proto.CompactTextString(m) }
+func (*CDOTAMsg_SendStatPopup) ProtoMessage()    {}
+func (*CDOTAMsg_SendStatPopup) Descriptor() ([]byte, []int) {
+	return fileDescriptor_dota_commonmessages_15ad3d103af979c6, []int{4}
+}
+func (m *CDOTAMsg_SendStatPopup) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CDOTAMsg_SendStatPopup.Unmarshal(m, b)
+}
+func (m *CDOTAMsg_SendStatPopup) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CDOTAMsg_SendStatPopup.Marshal(b, m, deterministic)
+}
+func (dst *CDOTAMsg_SendStatPopup) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CDOTAMsg_SendStatPopup.Merge(dst, src)
+}
+func (m *CDOTAMsg_SendStatPopup) XXX_Size() int {
+	return xxx_messageInfo_CDOTAMsg_SendStatPopup.Size(m)
+}
+func (m *CDOTAMsg_SendStatPopup) XXX_DiscardUnknown() {
+	xxx_messageInfo_CDOTAMsg_SendStatPopup.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CDOTAMsg_SendStatPopup proto.InternalMessageInfo
 
 const Default_CDOTAMsg_SendStatPopup_Style EDOTAStatPopupTypes = EDOTAStatPopupTypes_k_EDOTA_SPT_Textline
 
@@ -429,14 +544,35 @@ func (m *CDOTAMsg_SendStatPopup) GetMovieName() string {
 }
 
 type CDOTAMsg_DismissAllStatPopups struct {
-	TimeDelay        *float32 `protobuf:"fixed32,1,opt,name=time_delay,json=timeDelay" json:"time_delay,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	TimeDelay            *float32 `protobuf:"fixed32,1,opt,name=time_delay,json=timeDelay" json:"time_delay,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CDOTAMsg_DismissAllStatPopups) Reset()                    { *m = CDOTAMsg_DismissAllStatPopups{} }
-func (m *CDOTAMsg_DismissAllStatPopups) String() string            { return proto.CompactTextString(m) }
-func (*CDOTAMsg_DismissAllStatPopups) ProtoMessage()               {}
-func (*CDOTAMsg_DismissAllStatPopups) Descriptor() ([]byte, []int) { return fileDescriptor8, []int{5} }
+func (m *CDOTAMsg_DismissAllStatPopups) Reset()         { *m = CDOTAMsg_DismissAllStatPopups{} }
+func (m *CDOTAMsg_DismissAllStatPopups) String() string { return proto.CompactTextString(m) }
+func (*CDOTAMsg_DismissAllStatPopups) ProtoMessage()    {}
+func (*CDOTAMsg_DismissAllStatPopups) Descriptor() ([]byte, []int) {
+	return fileDescriptor_dota_commonmessages_15ad3d103af979c6, []int{5}
+}
+func (m *CDOTAMsg_DismissAllStatPopups) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CDOTAMsg_DismissAllStatPopups.Unmarshal(m, b)
+}
+func (m *CDOTAMsg_DismissAllStatPopups) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CDOTAMsg_DismissAllStatPopups.Marshal(b, m, deterministic)
+}
+func (dst *CDOTAMsg_DismissAllStatPopups) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CDOTAMsg_DismissAllStatPopups.Merge(dst, src)
+}
+func (m *CDOTAMsg_DismissAllStatPopups) XXX_Size() int {
+	return xxx_messageInfo_CDOTAMsg_DismissAllStatPopups.Size(m)
+}
+func (m *CDOTAMsg_DismissAllStatPopups) XXX_DiscardUnknown() {
+	xxx_messageInfo_CDOTAMsg_DismissAllStatPopups.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CDOTAMsg_DismissAllStatPopups proto.InternalMessageInfo
 
 func (m *CDOTAMsg_DismissAllStatPopups) GetTimeDelay() float32 {
 	if m != nil && m.TimeDelay != nil {
@@ -446,16 +582,37 @@ func (m *CDOTAMsg_DismissAllStatPopups) GetTimeDelay() float32 {
 }
 
 type CDOTAMsg_CoachHUDPing struct {
-	X                *uint32 `protobuf:"varint,1,opt,name=x" json:"x,omitempty"`
-	Y                *uint32 `protobuf:"varint,2,opt,name=y" json:"y,omitempty"`
-	Tgtpath          *string `protobuf:"bytes,3,opt,name=tgtpath" json:"tgtpath,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	X                    *uint32  `protobuf:"varint,1,opt,name=x" json:"x,omitempty"`
+	Y                    *uint32  `protobuf:"varint,2,opt,name=y" json:"y,omitempty"`
+	Tgtpath              *string  `protobuf:"bytes,3,opt,name=tgtpath" json:"tgtpath,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CDOTAMsg_CoachHUDPing) Reset()                    { *m = CDOTAMsg_CoachHUDPing{} }
-func (m *CDOTAMsg_CoachHUDPing) String() string            { return proto.CompactTextString(m) }
-func (*CDOTAMsg_CoachHUDPing) ProtoMessage()               {}
-func (*CDOTAMsg_CoachHUDPing) Descriptor() ([]byte, []int) { return fileDescriptor8, []int{6} }
+func (m *CDOTAMsg_CoachHUDPing) Reset()         { *m = CDOTAMsg_CoachHUDPing{} }
+func (m *CDOTAMsg_CoachHUDPing) String() string { return proto.CompactTextString(m) }
+func (*CDOTAMsg_CoachHUDPing) ProtoMessage()    {}
+func (*CDOTAMsg_CoachHUDPing) Descriptor() ([]byte, []int) {
+	return fileDescriptor_dota_commonmessages_15ad3d103af979c6, []int{6}
+}
+func (m *CDOTAMsg_CoachHUDPing) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CDOTAMsg_CoachHUDPing.Unmarshal(m, b)
+}
+func (m *CDOTAMsg_CoachHUDPing) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CDOTAMsg_CoachHUDPing.Marshal(b, m, deterministic)
+}
+func (dst *CDOTAMsg_CoachHUDPing) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CDOTAMsg_CoachHUDPing.Merge(dst, src)
+}
+func (m *CDOTAMsg_CoachHUDPing) XXX_Size() int {
+	return xxx_messageInfo_CDOTAMsg_CoachHUDPing.Size(m)
+}
+func (m *CDOTAMsg_CoachHUDPing) XXX_DiscardUnknown() {
+	xxx_messageInfo_CDOTAMsg_CoachHUDPing.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CDOTAMsg_CoachHUDPing proto.InternalMessageInfo
 
 func (m *CDOTAMsg_CoachHUDPing) GetX() uint32 {
 	if m != nil && m.X != nil {
@@ -479,21 +636,42 @@ func (m *CDOTAMsg_CoachHUDPing) GetTgtpath() string {
 }
 
 type CDOTAMsg_UnitOrder struct {
-	Issuer           *int32          `protobuf:"zigzag32,1,opt,name=issuer,def=-1" json:"issuer,omitempty"`
-	OrderType        *DotaunitorderT `protobuf:"varint,2,opt,name=order_type,json=orderType,enum=dota.DotaunitorderT,def=0" json:"order_type,omitempty"`
-	Units            []int32         `protobuf:"varint,3,rep,name=units" json:"units,omitempty"`
-	TargetIndex      *int32          `protobuf:"varint,4,opt,name=target_index,json=targetIndex" json:"target_index,omitempty"`
-	AbilityIndex     *int32          `protobuf:"varint,5,opt,name=ability_index,json=abilityIndex" json:"ability_index,omitempty"`
-	Position         *CMsgVector     `protobuf:"bytes,6,opt,name=position" json:"position,omitempty"`
-	Queue            *bool           `protobuf:"varint,7,opt,name=queue" json:"queue,omitempty"`
-	SequenceNumber   *int32          `protobuf:"varint,8,opt,name=sequence_number,json=sequenceNumber" json:"sequence_number,omitempty"`
-	XXX_unrecognized []byte          `json:"-"`
+	Issuer               *int32          `protobuf:"zigzag32,1,opt,name=issuer,def=-1" json:"issuer,omitempty"`
+	OrderType            *DotaunitorderT `protobuf:"varint,2,opt,name=order_type,json=orderType,enum=dota.DotaunitorderT,def=0" json:"order_type,omitempty"`
+	Units                []int32         `protobuf:"varint,3,rep,name=units" json:"units,omitempty"`
+	TargetIndex          *int32          `protobuf:"varint,4,opt,name=target_index,json=targetIndex" json:"target_index,omitempty"`
+	AbilityIndex         *int32          `protobuf:"varint,5,opt,name=ability_index,json=abilityIndex" json:"ability_index,omitempty"`
+	Position             *CMsgVector     `protobuf:"bytes,6,opt,name=position" json:"position,omitempty"`
+	Queue                *bool           `protobuf:"varint,7,opt,name=queue" json:"queue,omitempty"`
+	SequenceNumber       *int32          `protobuf:"varint,8,opt,name=sequence_number,json=sequenceNumber" json:"sequence_number,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
+	XXX_unrecognized     []byte          `json:"-"`
+	XXX_sizecache        int32           `json:"-"`
 }
 
-func (m *CDOTAMsg_UnitOrder) Reset()                    { *m = CDOTAMsg_UnitOrder{} }
-func (m *CDOTAMsg_UnitOrder) String() string            { return proto.CompactTextString(m) }
-func (*CDOTAMsg_UnitOrder) ProtoMessage()               {}
-func (*CDOTAMsg_UnitOrder) Descriptor() ([]byte, []int) { return fileDescriptor8, []int{7} }
+func (m *CDOTAMsg_UnitOrder) Reset()         { *m = CDOTAMsg_UnitOrder{} }
+func (m *CDOTAMsg_UnitOrder) String() string { return proto.CompactTextString(m) }
+func (*CDOTAMsg_UnitOrder) ProtoMessage()    {}
+func (*CDOTAMsg_UnitOrder) Descriptor() ([]byte, []int) {
+	return fileDescriptor_dota_commonmessages_15ad3d103af979c6, []int{7}
+}
+func (m *CDOTAMsg_UnitOrder) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CDOTAMsg_UnitOrder.Unmarshal(m, b)
+}
+func (m *CDOTAMsg_UnitOrder) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CDOTAMsg_UnitOrder.Marshal(b, m, deterministic)
+}
+func (dst *CDOTAMsg_UnitOrder) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CDOTAMsg_UnitOrder.Merge(dst, src)
+}
+func (m *CDOTAMsg_UnitOrder) XXX_Size() int {
+	return xxx_messageInfo_CDOTAMsg_UnitOrder.Size(m)
+}
+func (m *CDOTAMsg_UnitOrder) XXX_DiscardUnknown() {
+	xxx_messageInfo_CDOTAMsg_UnitOrder.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CDOTAMsg_UnitOrder proto.InternalMessageInfo
 
 const Default_CDOTAMsg_UnitOrder_Issuer int32 = -1
 const Default_CDOTAMsg_UnitOrder_OrderType DotaunitorderT = DotaunitorderT_DOTA_UNIT_ORDER_NONE
@@ -567,9 +745,11 @@ func init() {
 	proto.RegisterEnum("dota.DotaunitorderT", DotaunitorderT_name, DotaunitorderT_value)
 }
 
-func init() { proto.RegisterFile("dota_commonmessages.proto", fileDescriptor8) }
+func init() {
+	proto.RegisterFile("dota_commonmessages.proto", fileDescriptor_dota_commonmessages_15ad3d103af979c6)
+}
 
-var fileDescriptor8 = []byte{
+var fileDescriptor_dota_commonmessages_15ad3d103af979c6 = []byte{
 	// 1182 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x84, 0x53, 0xdb, 0x72, 0xdb, 0xb6,
 	0x16, 0x0d, 0x75, 0x71, 0x24, 0xf8, 0x86, 0x20, 0xb6, 0x43, 0x3b, 0x71, 0x22, 0x2b, 0x97, 0xe3,
