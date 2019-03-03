@@ -81,7 +81,7 @@ func (e *GameEvent) GetString(name string) (string, error) {
 
 	// Make sure it's a string.
 	if k.GetType() != gameEventTypeString {
-		return "", _errorf("field %s: expected string, got %s", gameEventTypeNames[k.GetType()])
+		return "", _errorf("field %s: expected string, got %s", name, gameEventTypeNames[k.GetType()])
 	}
 
 	return k.GetValString(), nil
@@ -97,7 +97,7 @@ func (e *GameEvent) GetFloat32(name string) (float32, error) {
 
 	// Make sure it's a bool.
 	if k.GetType() != gameEventTypeFloat {
-		return 0.0, _errorf("field %s: expected float, got %s", gameEventTypeNames[k.GetType()])
+		return 0.0, _errorf("field %s: expected float, got %s", name, gameEventTypeNames[k.GetType()])
 	}
 
 	return k.GetValFloat(), nil
@@ -121,7 +121,7 @@ func (e *GameEvent) GetInt32(name string) (int32, error) {
 		return k.GetValByte(), nil
 	}
 
-	return 0, _errorf("field %s: expected int, got %s", gameEventTypeNames[k.GetType()])
+	return 0, _errorf("field %s: expected int, got %s", name, gameEventTypeNames[k.GetType()])
 }
 
 // Gets the bool value of a named field.
@@ -134,7 +134,7 @@ func (e *GameEvent) GetBool(name string) (bool, error) {
 
 	// Make sure it's a bool.
 	if k.GetType() != gameEventTypeBool {
-		return false, _errorf("field %s: expected bool, got %s", gameEventTypeNames[k.GetType()])
+		return false, _errorf("field %s: expected bool, got %s", name, gameEventTypeNames[k.GetType()])
 	}
 
 	return k.GetValBool(), nil
@@ -150,7 +150,7 @@ func (e *GameEvent) GetUint64(name string) (uint64, error) {
 
 	// Make sure it's a uint64.
 	if k.GetType() != gameEventTypeUint64 {
-		return 0, _errorf("field %s: expected uint64, got %s", gameEventTypeNames[k.GetType()])
+		return 0, _errorf("field %s: expected uint64, got %s", name, gameEventTypeNames[k.GetType()])
 	}
 
 	return k.GetValUint64(), nil

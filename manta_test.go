@@ -47,62 +47,78 @@ func TestMatch1560294294(t *testing.T) { testScenarios[1560294294].test(t) }
 func TestMatch1560289528(t *testing.T) { testScenarios[1560289528].test(t) }
 
 type testScenario struct {
-	matchId                string
-	replayUrl              string
-	debugLevel             uint
-	debugTick              uint32
-	skipPacketEntities     bool
-	expectGameBuild        uint32
-	expectEntityEvents     int32
-	expectCombatLogDamage  int32
-	expectCombatLogHealing int32
-	expectCombatLogDeaths  int32
-	expectCombatLogEvents  int32
-	expectUnitOrderEvents  int32
-	expectPlayer6Name      string
-	expectPlayer6Steamid   uint64
-	expectHeroEntityName   string
-	expectHeroEntityMana   float32
-	skipInCI               bool
+	matchId                  string
+	replayUrl                string
+	debugLevel               uint
+	debugTick                uint32
+	skipPacketEntities       bool
+	expectGameBuild          uint32
+	expectEntityEvents       int32
+	expectCombatLogDamage    int32
+	expectCombatLogHealing   int32
+	expectCombatLogDeaths    int32
+	expectCombatLogEvents    int32
+	expectUnitOrderEvents    int32
+	expectPlayer6Name        string
+	expectPlayer6Steamid     uint64
+	expectHeroEntityName     string
+	expectHeroEntityMana     float32
+	expectHeroEntityPlayerId int32
+	skipInCI                 bool
 }
 
 var testScenarios = map[int64]testScenario{
 	4259518439: {
-		matchId:               "4259518439",
-		replayUrl:             "https://s3-us-west-2.amazonaws.com/manta.dotabuff/4259518439.dem",
-		expectGameBuild:       3267,
-		expectEntityEvents:    2709121,
-		expectUnitOrderEvents: 86120,
+		matchId:                  "4259518439",
+		replayUrl:                "https://s3-us-west-2.amazonaws.com/manta.dotabuff/4259518439.dem",
+		expectGameBuild:          3267,
+		expectEntityEvents:       2709121,
+		expectUnitOrderEvents:    86120,
+		expectHeroEntityName:     "CDOTA_Unit_Hero_Medusa",
+		expectHeroEntityMana:     1764.9392,
+		expectHeroEntityPlayerId: 1,
 	},
 	4257655794: {
-		matchId:               "4257655794",
-		replayUrl:             "https://s3-us-west-2.amazonaws.com/manta.dotabuff/4257655794.dem",
-		expectGameBuild:       3262,
-		expectEntityEvents:    2319568,
-		expectUnitOrderEvents: 78510,
+		matchId:                  "4257655794",
+		replayUrl:                "https://s3-us-west-2.amazonaws.com/manta.dotabuff/4257655794.dem",
+		expectGameBuild:          3262,
+		expectEntityEvents:       2319568,
+		expectUnitOrderEvents:    78510,
+		expectHeroEntityName:     "CDOTA_Unit_Hero_Dazzle",
+		expectHeroEntityMana:     1734.9392,
+		expectHeroEntityPlayerId: 6,
 	},
 	3949386909: {
-		matchId:               "3949386909",
-		replayUrl:             "https://s3-us-west-2.amazonaws.com/manta.dotabuff/3949386909.dem",
-		expectGameBuild:       2956,
-		expectEntityEvents:    3339557,
-		expectUnitOrderEvents: 77975,
+		matchId:                  "3949386909",
+		replayUrl:                "https://s3-us-west-2.amazonaws.com/manta.dotabuff/3949386909.dem",
+		expectGameBuild:          2956,
+		expectEntityEvents:       3339557,
+		expectUnitOrderEvents:    77975,
+		expectHeroEntityName:     "CDOTA_Unit_Hero_Bloodseeker",
+		expectHeroEntityMana:     1101.9386,
+		expectHeroEntityPlayerId: 9,
 	},
 
 	3777736409: {
-		matchId:               "3777736409",
-		replayUrl:             "https://s3-us-west-2.amazonaws.com/manta.dotabuff/3777736409.dem",
-		expectGameBuild:       2735,
-		expectEntityEvents:    2263283,
-		expectUnitOrderEvents: 58814,
+		matchId:                  "3777736409",
+		replayUrl:                "https://s3-us-west-2.amazonaws.com/manta.dotabuff/3777736409.dem",
+		expectGameBuild:          2735,
+		expectEntityEvents:       2263283,
+		expectUnitOrderEvents:    58814,
+		expectHeroEntityName:     "CDOTA_Unit_Hero_Lion",
+		expectHeroEntityMana:     1106.9386,
+		expectHeroEntityPlayerId: 6,
 	},
 
 	3534483793: {
-		matchId:               "3534483793",
-		replayUrl:             "https://s3-us-west-2.amazonaws.com/manta.dotabuff/3534483793.dem",
-		expectGameBuild:       2463,
-		expectEntityEvents:    2170677,
-		expectUnitOrderEvents: 44582,
+		matchId:                  "3534483793",
+		replayUrl:                "https://s3-us-west-2.amazonaws.com/manta.dotabuff/3534483793.dem",
+		expectGameBuild:          2463,
+		expectEntityEvents:       2170677,
+		expectUnitOrderEvents:    44582,
+		expectHeroEntityName:     "CDOTA_Unit_Hero_Rattletrap",
+		expectHeroEntityMana:     1293.9387,
+		expectHeroEntityPlayerId: 8,
 	},
 
 	6682694: {
@@ -210,16 +226,17 @@ var testScenarios = map[int64]testScenario{
 		skipInCI:               true,
 	},
 	1788648401: {
-		matchId:                "1788648401",
-		replayUrl:              "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1788648401.dem",
-		expectGameBuild:        1036,
-		expectEntityEvents:     2357365,
-		expectCombatLogDamage:  0,
-		expectCombatLogHealing: 0,
-		expectCombatLogDeaths:  0,
-		expectCombatLogEvents:  0,
-		expectHeroEntityName:   "CDOTA_Unit_Hero_Earthshaker",
-		expectHeroEntityMana:   1189.9386,
+		matchId:                  "1788648401",
+		replayUrl:                "https://s3-us-west-2.amazonaws.com/manta.dotabuff/1788648401.dem",
+		expectGameBuild:          1036,
+		expectEntityEvents:       2357365,
+		expectCombatLogDamage:    0,
+		expectCombatLogHealing:   0,
+		expectCombatLogDeaths:    0,
+		expectCombatLogEvents:    0,
+		expectHeroEntityName:     "CDOTA_Unit_Hero_Earthshaker",
+		expectHeroEntityMana:     1189.9386,
+		expectHeroEntityPlayerId: 8,
 	},
 	1786687320: {
 		matchId:                "1786687320",
@@ -535,6 +552,7 @@ func (s testScenario) test(t *testing.T) {
 	gotPlayer6Name := "<Missing>"
 	gotPlayer6Steamid := uint64(0)
 	gotHeroEntityMana := float32(0.0)
+	gotHeroEntityPlayerId := int32(0)
 
 	if s.debugTick > 0 {
 		parser.Callbacks.OnCNETMsg_Tick(func(m *dota.CNETMsg_Tick) error {
@@ -561,6 +579,9 @@ func (s testScenario) test(t *testing.T) {
 		if e.class.name == s.expectHeroEntityName {
 			if v, ok := e.Get("m_flMaxMana").(float32); ok {
 				gotHeroEntityMana = v
+			}
+			if v, ok := e.GetInt32("m_iPlayerID"); ok {
+				gotHeroEntityPlayerId = v
 			}
 		}
 
@@ -634,5 +655,8 @@ func (s testScenario) test(t *testing.T) {
 	}
 	if s.expectHeroEntityMana > 0.0 {
 		assert.Equal(s.expectHeroEntityMana, gotHeroEntityMana, s.matchId)
+	}
+	if s.expectHeroEntityPlayerId > 0.0 {
+		assert.Equal(s.expectHeroEntityPlayerId, gotHeroEntityPlayerId, s.matchId)
 	}
 }
