@@ -3,9 +3,11 @@
 
 package dota
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type ELeagueNodeGroupType int32
 
@@ -43,6 +45,7 @@ var ELeagueNodeGroupType_name = map[int32]string{
 	7: "SHOWMATCH",
 	8: "GSL",
 }
+
 var ELeagueNodeGroupType_value = map[string]int32{
 	"INVALID_GROUP_TYPE":        0,
 	"ORGANIZATIONAL":            1,
@@ -60,9 +63,11 @@ func (x ELeagueNodeGroupType) Enum() *ELeagueNodeGroupType {
 	*p = x
 	return p
 }
+
 func (x ELeagueNodeGroupType) String() string {
 	return proto.EnumName(ELeagueNodeGroupType_name, int32(x))
 }
+
 func (x *ELeagueNodeGroupType) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(ELeagueNodeGroupType_value, data, "ELeagueNodeGroupType")
 	if err != nil {
@@ -71,8 +76,9 @@ func (x *ELeagueNodeGroupType) UnmarshalJSON(data []byte) error {
 	*x = ELeagueNodeGroupType(value)
 	return nil
 }
+
 func (ELeagueNodeGroupType) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_common_league_f5c945b2bae2b625, []int{0}
+	return fileDescriptor_2fe4457e2b9dd334, []int{0}
 }
 
 type ELeagueNodeType int32
@@ -92,6 +98,7 @@ var ELeagueNodeType_name = map[int32]string{
 	3: "BEST_OF_FIVE",
 	4: "BEST_OF_TWO",
 }
+
 var ELeagueNodeType_value = map[string]int32{
 	"INVALID_NODE_TYPE": 0,
 	"BEST_OF_ONE":       1,
@@ -105,9 +112,11 @@ func (x ELeagueNodeType) Enum() *ELeagueNodeType {
 	*p = x
 	return p
 }
+
 func (x ELeagueNodeType) String() string {
 	return proto.EnumName(ELeagueNodeType_name, int32(x))
 }
+
 func (x *ELeagueNodeType) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(ELeagueNodeType_value, data, "ELeagueNodeType")
 	if err != nil {
@@ -116,8 +125,9 @@ func (x *ELeagueNodeType) UnmarshalJSON(data []byte) error {
 	*x = ELeagueNodeType(value)
 	return nil
 }
+
 func (ELeagueNodeType) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_common_league_f5c945b2bae2b625, []int{1}
+	return fileDescriptor_2fe4457e2b9dd334, []int{1}
 }
 
 type CMsgDOTALeagueNode struct {
@@ -149,16 +159,17 @@ func (m *CMsgDOTALeagueNode) Reset()         { *m = CMsgDOTALeagueNode{} }
 func (m *CMsgDOTALeagueNode) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTALeagueNode) ProtoMessage()    {}
 func (*CMsgDOTALeagueNode) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_common_league_f5c945b2bae2b625, []int{0}
+	return fileDescriptor_2fe4457e2b9dd334, []int{0}
 }
+
 func (m *CMsgDOTALeagueNode) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTALeagueNode.Unmarshal(m, b)
 }
 func (m *CMsgDOTALeagueNode) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTALeagueNode.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTALeagueNode) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTALeagueNode.Merge(dst, src)
+func (m *CMsgDOTALeagueNode) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTALeagueNode.Merge(m, src)
 }
 func (m *CMsgDOTALeagueNode) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTALeagueNode.Size(m)
@@ -316,16 +327,17 @@ func (m *CMsgDOTALeagueNode_MatchDetails) Reset()         { *m = CMsgDOTALeagueN
 func (m *CMsgDOTALeagueNode_MatchDetails) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTALeagueNode_MatchDetails) ProtoMessage()    {}
 func (*CMsgDOTALeagueNode_MatchDetails) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_common_league_f5c945b2bae2b625, []int{0, 0}
+	return fileDescriptor_2fe4457e2b9dd334, []int{0, 0}
 }
+
 func (m *CMsgDOTALeagueNode_MatchDetails) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTALeagueNode_MatchDetails.Unmarshal(m, b)
 }
 func (m *CMsgDOTALeagueNode_MatchDetails) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTALeagueNode_MatchDetails.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTALeagueNode_MatchDetails) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTALeagueNode_MatchDetails.Merge(dst, src)
+func (m *CMsgDOTALeagueNode_MatchDetails) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTALeagueNode_MatchDetails.Merge(m, src)
 }
 func (m *CMsgDOTALeagueNode_MatchDetails) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTALeagueNode_MatchDetails.Size(m)
@@ -381,16 +393,17 @@ func (m *CMsgDOTALeagueNodeGroup) Reset()         { *m = CMsgDOTALeagueNodeGroup
 func (m *CMsgDOTALeagueNodeGroup) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTALeagueNodeGroup) ProtoMessage()    {}
 func (*CMsgDOTALeagueNodeGroup) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_common_league_f5c945b2bae2b625, []int{1}
+	return fileDescriptor_2fe4457e2b9dd334, []int{1}
 }
+
 func (m *CMsgDOTALeagueNodeGroup) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTALeagueNodeGroup.Unmarshal(m, b)
 }
 func (m *CMsgDOTALeagueNodeGroup) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTALeagueNodeGroup.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTALeagueNodeGroup) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTALeagueNodeGroup.Merge(dst, src)
+func (m *CMsgDOTALeagueNodeGroup) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTALeagueNodeGroup.Merge(m, src)
 }
 func (m *CMsgDOTALeagueNodeGroup) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTALeagueNodeGroup.Size(m)
@@ -572,16 +585,17 @@ func (m *CMsgDOTALeagueNodeGroup_TeamStanding) Reset()         { *m = CMsgDOTALe
 func (m *CMsgDOTALeagueNodeGroup_TeamStanding) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTALeagueNodeGroup_TeamStanding) ProtoMessage()    {}
 func (*CMsgDOTALeagueNodeGroup_TeamStanding) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_common_league_f5c945b2bae2b625, []int{1, 0}
+	return fileDescriptor_2fe4457e2b9dd334, []int{1, 0}
 }
+
 func (m *CMsgDOTALeagueNodeGroup_TeamStanding) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTALeagueNodeGroup_TeamStanding.Unmarshal(m, b)
 }
 func (m *CMsgDOTALeagueNodeGroup_TeamStanding) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTALeagueNodeGroup_TeamStanding.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTALeagueNodeGroup_TeamStanding) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTALeagueNodeGroup_TeamStanding.Merge(dst, src)
+func (m *CMsgDOTALeagueNodeGroup_TeamStanding) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTALeagueNodeGroup_TeamStanding.Merge(m, src)
 }
 func (m *CMsgDOTALeagueNodeGroup_TeamStanding) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTALeagueNodeGroup_TeamStanding.Size(m)
@@ -672,16 +686,17 @@ func (m *CMsgDOTALeague) Reset()         { *m = CMsgDOTALeague{} }
 func (m *CMsgDOTALeague) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTALeague) ProtoMessage()    {}
 func (*CMsgDOTALeague) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_common_league_f5c945b2bae2b625, []int{2}
+	return fileDescriptor_2fe4457e2b9dd334, []int{2}
 }
+
 func (m *CMsgDOTALeague) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTALeague.Unmarshal(m, b)
 }
 func (m *CMsgDOTALeague) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTALeague.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTALeague) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTALeague.Merge(dst, src)
+func (m *CMsgDOTALeague) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTALeague.Merge(m, src)
 }
 func (m *CMsgDOTALeague) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTALeague.Size(m)
@@ -765,16 +780,17 @@ func (m *CMsgDOTALeague_Info) Reset()         { *m = CMsgDOTALeague_Info{} }
 func (m *CMsgDOTALeague_Info) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTALeague_Info) ProtoMessage()    {}
 func (*CMsgDOTALeague_Info) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_common_league_f5c945b2bae2b625, []int{2, 0}
+	return fileDescriptor_2fe4457e2b9dd334, []int{2, 0}
 }
+
 func (m *CMsgDOTALeague_Info) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTALeague_Info.Unmarshal(m, b)
 }
 func (m *CMsgDOTALeague_Info) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTALeague_Info.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTALeague_Info) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTALeague_Info.Merge(dst, src)
+func (m *CMsgDOTALeague_Info) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTALeague_Info.Merge(m, src)
 }
 func (m *CMsgDOTALeague_Info) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTALeague_Info.Size(m)
@@ -900,16 +916,17 @@ func (m *CMsgDOTALeague_Admin) Reset()         { *m = CMsgDOTALeague_Admin{} }
 func (m *CMsgDOTALeague_Admin) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTALeague_Admin) ProtoMessage()    {}
 func (*CMsgDOTALeague_Admin) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_common_league_f5c945b2bae2b625, []int{2, 1}
+	return fileDescriptor_2fe4457e2b9dd334, []int{2, 1}
 }
+
 func (m *CMsgDOTALeague_Admin) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTALeague_Admin.Unmarshal(m, b)
 }
 func (m *CMsgDOTALeague_Admin) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTALeague_Admin.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTALeague_Admin) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTALeague_Admin.Merge(dst, src)
+func (m *CMsgDOTALeague_Admin) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTALeague_Admin.Merge(m, src)
 }
 func (m *CMsgDOTALeague_Admin) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTALeague_Admin.Size(m)
@@ -955,16 +972,17 @@ func (m *CMsgDOTALeague_PrizePoolItem) Reset()         { *m = CMsgDOTALeague_Pri
 func (m *CMsgDOTALeague_PrizePoolItem) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTALeague_PrizePoolItem) ProtoMessage()    {}
 func (*CMsgDOTALeague_PrizePoolItem) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_common_league_f5c945b2bae2b625, []int{2, 2}
+	return fileDescriptor_2fe4457e2b9dd334, []int{2, 2}
 }
+
 func (m *CMsgDOTALeague_PrizePoolItem) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTALeague_PrizePoolItem.Unmarshal(m, b)
 }
 func (m *CMsgDOTALeague_PrizePoolItem) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTALeague_PrizePoolItem.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTALeague_PrizePoolItem) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTALeague_PrizePoolItem.Merge(dst, src)
+func (m *CMsgDOTALeague_PrizePoolItem) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTALeague_PrizePoolItem.Merge(m, src)
 }
 func (m *CMsgDOTALeague_PrizePoolItem) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTALeague_PrizePoolItem.Size(m)
@@ -1017,16 +1035,17 @@ func (m *CMsgDOTALeague_PrizePool) Reset()         { *m = CMsgDOTALeague_PrizePo
 func (m *CMsgDOTALeague_PrizePool) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTALeague_PrizePool) ProtoMessage()    {}
 func (*CMsgDOTALeague_PrizePool) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_common_league_f5c945b2bae2b625, []int{2, 3}
+	return fileDescriptor_2fe4457e2b9dd334, []int{2, 3}
 }
+
 func (m *CMsgDOTALeague_PrizePool) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTALeague_PrizePool.Unmarshal(m, b)
 }
 func (m *CMsgDOTALeague_PrizePool) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTALeague_PrizePool.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTALeague_PrizePool) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTALeague_PrizePool.Merge(dst, src)
+func (m *CMsgDOTALeague_PrizePool) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTALeague_PrizePool.Merge(m, src)
 }
 func (m *CMsgDOTALeague_PrizePool) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTALeague_PrizePool.Size(m)
@@ -1081,16 +1100,17 @@ func (m *CMsgDOTALeague_Stream) Reset()         { *m = CMsgDOTALeague_Stream{} }
 func (m *CMsgDOTALeague_Stream) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTALeague_Stream) ProtoMessage()    {}
 func (*CMsgDOTALeague_Stream) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_common_league_f5c945b2bae2b625, []int{2, 4}
+	return fileDescriptor_2fe4457e2b9dd334, []int{2, 4}
 }
+
 func (m *CMsgDOTALeague_Stream) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTALeague_Stream.Unmarshal(m, b)
 }
 func (m *CMsgDOTALeague_Stream) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTALeague_Stream.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTALeague_Stream) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTALeague_Stream.Merge(dst, src)
+func (m *CMsgDOTALeague_Stream) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTALeague_Stream.Merge(m, src)
 }
 func (m *CMsgDOTALeague_Stream) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTALeague_Stream.Size(m)
@@ -1161,16 +1181,17 @@ func (m *CMsgDOTALeague_SeriesInfo) Reset()         { *m = CMsgDOTALeague_Series
 func (m *CMsgDOTALeague_SeriesInfo) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTALeague_SeriesInfo) ProtoMessage()    {}
 func (*CMsgDOTALeague_SeriesInfo) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_common_league_f5c945b2bae2b625, []int{2, 5}
+	return fileDescriptor_2fe4457e2b9dd334, []int{2, 5}
 }
+
 func (m *CMsgDOTALeague_SeriesInfo) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTALeague_SeriesInfo.Unmarshal(m, b)
 }
 func (m *CMsgDOTALeague_SeriesInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTALeague_SeriesInfo.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTALeague_SeriesInfo) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTALeague_SeriesInfo.Merge(dst, src)
+func (m *CMsgDOTALeague_SeriesInfo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTALeague_SeriesInfo.Merge(m, src)
 }
 func (m *CMsgDOTALeague_SeriesInfo) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTALeague_SeriesInfo.Size(m)
@@ -1236,16 +1257,17 @@ func (m *CMsgDOTALeague_Player) Reset()         { *m = CMsgDOTALeague_Player{} }
 func (m *CMsgDOTALeague_Player) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTALeague_Player) ProtoMessage()    {}
 func (*CMsgDOTALeague_Player) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_common_league_f5c945b2bae2b625, []int{2, 6}
+	return fileDescriptor_2fe4457e2b9dd334, []int{2, 6}
 }
+
 func (m *CMsgDOTALeague_Player) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTALeague_Player.Unmarshal(m, b)
 }
 func (m *CMsgDOTALeague_Player) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTALeague_Player.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTALeague_Player) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTALeague_Player.Merge(dst, src)
+func (m *CMsgDOTALeague_Player) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTALeague_Player.Merge(m, src)
 }
 func (m *CMsgDOTALeague_Player) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTALeague_Player.Size(m)
@@ -1296,16 +1318,17 @@ func (m *CMsgDOTALeagueInfo) Reset()         { *m = CMsgDOTALeagueInfo{} }
 func (m *CMsgDOTALeagueInfo) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTALeagueInfo) ProtoMessage()    {}
 func (*CMsgDOTALeagueInfo) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_common_league_f5c945b2bae2b625, []int{3}
+	return fileDescriptor_2fe4457e2b9dd334, []int{3}
 }
+
 func (m *CMsgDOTALeagueInfo) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTALeagueInfo.Unmarshal(m, b)
 }
 func (m *CMsgDOTALeagueInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTALeagueInfo.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTALeagueInfo) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTALeagueInfo.Merge(dst, src)
+func (m *CMsgDOTALeagueInfo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTALeagueInfo.Merge(m, src)
 }
 func (m *CMsgDOTALeagueInfo) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTALeagueInfo.Size(m)
@@ -1393,16 +1416,17 @@ func (m *CMsgDOTALeagueInfoList) Reset()         { *m = CMsgDOTALeagueInfoList{}
 func (m *CMsgDOTALeagueInfoList) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTALeagueInfoList) ProtoMessage()    {}
 func (*CMsgDOTALeagueInfoList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_common_league_f5c945b2bae2b625, []int{4}
+	return fileDescriptor_2fe4457e2b9dd334, []int{4}
 }
+
 func (m *CMsgDOTALeagueInfoList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTALeagueInfoList.Unmarshal(m, b)
 }
 func (m *CMsgDOTALeagueInfoList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTALeagueInfoList.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTALeagueInfoList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTALeagueInfoList.Merge(dst, src)
+func (m *CMsgDOTALeagueInfoList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTALeagueInfoList.Merge(m, src)
 }
 func (m *CMsgDOTALeagueInfoList) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTALeagueInfoList.Size(m)
@@ -1431,16 +1455,17 @@ func (m *CMsgDOTALeagueLiveGames) Reset()         { *m = CMsgDOTALeagueLiveGames
 func (m *CMsgDOTALeagueLiveGames) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTALeagueLiveGames) ProtoMessage()    {}
 func (*CMsgDOTALeagueLiveGames) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_common_league_f5c945b2bae2b625, []int{5}
+	return fileDescriptor_2fe4457e2b9dd334, []int{5}
 }
+
 func (m *CMsgDOTALeagueLiveGames) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTALeagueLiveGames.Unmarshal(m, b)
 }
 func (m *CMsgDOTALeagueLiveGames) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTALeagueLiveGames.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTALeagueLiveGames) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTALeagueLiveGames.Merge(dst, src)
+func (m *CMsgDOTALeagueLiveGames) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTALeagueLiveGames.Merge(m, src)
 }
 func (m *CMsgDOTALeagueLiveGames) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTALeagueLiveGames.Size(m)
@@ -1478,16 +1503,17 @@ func (m *CMsgDOTALeagueLiveGames_LiveGame) Reset()         { *m = CMsgDOTALeague
 func (m *CMsgDOTALeagueLiveGames_LiveGame) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTALeagueLiveGames_LiveGame) ProtoMessage()    {}
 func (*CMsgDOTALeagueLiveGames_LiveGame) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_common_league_f5c945b2bae2b625, []int{5, 0}
+	return fileDescriptor_2fe4457e2b9dd334, []int{5, 0}
 }
+
 func (m *CMsgDOTALeagueLiveGames_LiveGame) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTALeagueLiveGames_LiveGame.Unmarshal(m, b)
 }
 func (m *CMsgDOTALeagueLiveGames_LiveGame) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTALeagueLiveGames_LiveGame.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTALeagueLiveGames_LiveGame) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTALeagueLiveGames_LiveGame.Merge(dst, src)
+func (m *CMsgDOTALeagueLiveGames_LiveGame) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTALeagueLiveGames_LiveGame.Merge(m, src)
 }
 func (m *CMsgDOTALeagueLiveGames_LiveGame) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTALeagueLiveGames_LiveGame.Size(m)
@@ -1579,16 +1605,17 @@ func (m *CMsgDOTALeagueMessages) Reset()         { *m = CMsgDOTALeagueMessages{}
 func (m *CMsgDOTALeagueMessages) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTALeagueMessages) ProtoMessage()    {}
 func (*CMsgDOTALeagueMessages) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_common_league_f5c945b2bae2b625, []int{6}
+	return fileDescriptor_2fe4457e2b9dd334, []int{6}
 }
+
 func (m *CMsgDOTALeagueMessages) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTALeagueMessages.Unmarshal(m, b)
 }
 func (m *CMsgDOTALeagueMessages) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTALeagueMessages.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTALeagueMessages) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTALeagueMessages.Merge(dst, src)
+func (m *CMsgDOTALeagueMessages) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTALeagueMessages.Merge(m, src)
 }
 func (m *CMsgDOTALeagueMessages) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTALeagueMessages.Size(m)
@@ -1619,16 +1646,17 @@ func (m *CMsgDOTALeagueMessages_Message) Reset()         { *m = CMsgDOTALeagueMe
 func (m *CMsgDOTALeagueMessages_Message) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTALeagueMessages_Message) ProtoMessage()    {}
 func (*CMsgDOTALeagueMessages_Message) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_common_league_f5c945b2bae2b625, []int{6, 0}
+	return fileDescriptor_2fe4457e2b9dd334, []int{6, 0}
 }
+
 func (m *CMsgDOTALeagueMessages_Message) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTALeagueMessages_Message.Unmarshal(m, b)
 }
 func (m *CMsgDOTALeagueMessages_Message) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTALeagueMessages_Message.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTALeagueMessages_Message) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTALeagueMessages_Message.Merge(dst, src)
+func (m *CMsgDOTALeagueMessages_Message) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTALeagueMessages_Message.Merge(m, src)
 }
 func (m *CMsgDOTALeagueMessages_Message) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTALeagueMessages_Message.Size(m)
@@ -1672,16 +1700,17 @@ func (m *CMsgDOTALeaguePrizePool) Reset()         { *m = CMsgDOTALeaguePrizePool
 func (m *CMsgDOTALeaguePrizePool) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTALeaguePrizePool) ProtoMessage()    {}
 func (*CMsgDOTALeaguePrizePool) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_common_league_f5c945b2bae2b625, []int{7}
+	return fileDescriptor_2fe4457e2b9dd334, []int{7}
 }
+
 func (m *CMsgDOTALeaguePrizePool) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTALeaguePrizePool.Unmarshal(m, b)
 }
 func (m *CMsgDOTALeaguePrizePool) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTALeaguePrizePool.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTALeaguePrizePool) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTALeaguePrizePool.Merge(dst, src)
+func (m *CMsgDOTALeaguePrizePool) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTALeaguePrizePool.Merge(m, src)
 }
 func (m *CMsgDOTALeaguePrizePool) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTALeaguePrizePool.Size(m)
@@ -1716,16 +1745,17 @@ func (m *CMsgDOTALeagueInfoListAdminsRequest) Reset()         { *m = CMsgDOTALea
 func (m *CMsgDOTALeagueInfoListAdminsRequest) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTALeagueInfoListAdminsRequest) ProtoMessage()    {}
 func (*CMsgDOTALeagueInfoListAdminsRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_common_league_f5c945b2bae2b625, []int{8}
+	return fileDescriptor_2fe4457e2b9dd334, []int{8}
 }
+
 func (m *CMsgDOTALeagueInfoListAdminsRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTALeagueInfoListAdminsRequest.Unmarshal(m, b)
 }
 func (m *CMsgDOTALeagueInfoListAdminsRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTALeagueInfoListAdminsRequest.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTALeagueInfoListAdminsRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTALeagueInfoListAdminsRequest.Merge(dst, src)
+func (m *CMsgDOTALeagueInfoListAdminsRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTALeagueInfoListAdminsRequest.Merge(m, src)
 }
 func (m *CMsgDOTALeagueInfoListAdminsRequest) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTALeagueInfoListAdminsRequest.Size(m)
@@ -1748,16 +1778,17 @@ func (m *CMsgDOTALeagueNodeRequest) Reset()         { *m = CMsgDOTALeagueNodeReq
 func (m *CMsgDOTALeagueNodeRequest) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTALeagueNodeRequest) ProtoMessage()    {}
 func (*CMsgDOTALeagueNodeRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_common_league_f5c945b2bae2b625, []int{9}
+	return fileDescriptor_2fe4457e2b9dd334, []int{9}
 }
+
 func (m *CMsgDOTALeagueNodeRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTALeagueNodeRequest.Unmarshal(m, b)
 }
 func (m *CMsgDOTALeagueNodeRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTALeagueNodeRequest.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTALeagueNodeRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTALeagueNodeRequest.Merge(dst, src)
+func (m *CMsgDOTALeagueNodeRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTALeagueNodeRequest.Merge(m, src)
 }
 func (m *CMsgDOTALeagueNodeRequest) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTALeagueNodeRequest.Size(m)
@@ -1793,16 +1824,17 @@ func (m *CMsgDOTALeagueNodeResponse) Reset()         { *m = CMsgDOTALeagueNodeRe
 func (m *CMsgDOTALeagueNodeResponse) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTALeagueNodeResponse) ProtoMessage()    {}
 func (*CMsgDOTALeagueNodeResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_common_league_f5c945b2bae2b625, []int{10}
+	return fileDescriptor_2fe4457e2b9dd334, []int{10}
 }
+
 func (m *CMsgDOTALeagueNodeResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTALeagueNodeResponse.Unmarshal(m, b)
 }
 func (m *CMsgDOTALeagueNodeResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTALeagueNodeResponse.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTALeagueNodeResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTALeagueNodeResponse.Merge(dst, src)
+func (m *CMsgDOTALeagueNodeResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTALeagueNodeResponse.Merge(m, src)
 }
 func (m *CMsgDOTALeagueNodeResponse) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTALeagueNodeResponse.Size(m)
@@ -1833,16 +1865,17 @@ func (m *CMsgDOTALeagueAvailableLobbyNodesRequest) Reset() {
 func (m *CMsgDOTALeagueAvailableLobbyNodesRequest) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTALeagueAvailableLobbyNodesRequest) ProtoMessage()    {}
 func (*CMsgDOTALeagueAvailableLobbyNodesRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_common_league_f5c945b2bae2b625, []int{11}
+	return fileDescriptor_2fe4457e2b9dd334, []int{11}
 }
+
 func (m *CMsgDOTALeagueAvailableLobbyNodesRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTALeagueAvailableLobbyNodesRequest.Unmarshal(m, b)
 }
 func (m *CMsgDOTALeagueAvailableLobbyNodesRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTALeagueAvailableLobbyNodesRequest.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTALeagueAvailableLobbyNodesRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTALeagueAvailableLobbyNodesRequest.Merge(dst, src)
+func (m *CMsgDOTALeagueAvailableLobbyNodesRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTALeagueAvailableLobbyNodesRequest.Merge(m, src)
 }
 func (m *CMsgDOTALeagueAvailableLobbyNodesRequest) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTALeagueAvailableLobbyNodesRequest.Size(m)
@@ -1871,16 +1904,17 @@ func (m *CMsgDOTALeagueAvailableLobbyNodes) Reset()         { *m = CMsgDOTALeagu
 func (m *CMsgDOTALeagueAvailableLobbyNodes) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTALeagueAvailableLobbyNodes) ProtoMessage()    {}
 func (*CMsgDOTALeagueAvailableLobbyNodes) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_common_league_f5c945b2bae2b625, []int{12}
+	return fileDescriptor_2fe4457e2b9dd334, []int{12}
 }
+
 func (m *CMsgDOTALeagueAvailableLobbyNodes) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTALeagueAvailableLobbyNodes.Unmarshal(m, b)
 }
 func (m *CMsgDOTALeagueAvailableLobbyNodes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTALeagueAvailableLobbyNodes.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTALeagueAvailableLobbyNodes) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTALeagueAvailableLobbyNodes.Merge(dst, src)
+func (m *CMsgDOTALeagueAvailableLobbyNodes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTALeagueAvailableLobbyNodes.Merge(m, src)
 }
 func (m *CMsgDOTALeagueAvailableLobbyNodes) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTALeagueAvailableLobbyNodes.Size(m)
@@ -1917,16 +1951,17 @@ func (m *CMsgDOTALeagueAvailableLobbyNodes_NodeInfo) String() string {
 }
 func (*CMsgDOTALeagueAvailableLobbyNodes_NodeInfo) ProtoMessage() {}
 func (*CMsgDOTALeagueAvailableLobbyNodes_NodeInfo) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_common_league_f5c945b2bae2b625, []int{12, 0}
+	return fileDescriptor_2fe4457e2b9dd334, []int{12, 0}
 }
+
 func (m *CMsgDOTALeagueAvailableLobbyNodes_NodeInfo) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTALeagueAvailableLobbyNodes_NodeInfo.Unmarshal(m, b)
 }
 func (m *CMsgDOTALeagueAvailableLobbyNodes_NodeInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTALeagueAvailableLobbyNodes_NodeInfo.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTALeagueAvailableLobbyNodes_NodeInfo) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTALeagueAvailableLobbyNodes_NodeInfo.Merge(dst, src)
+func (m *CMsgDOTALeagueAvailableLobbyNodes_NodeInfo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTALeagueAvailableLobbyNodes_NodeInfo.Merge(m, src)
 }
 func (m *CMsgDOTALeagueAvailableLobbyNodes_NodeInfo) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTALeagueAvailableLobbyNodes_NodeInfo.Size(m)
@@ -1983,16 +2018,17 @@ func (m *CMsgDOTALeagueNodeResults) Reset()         { *m = CMsgDOTALeagueNodeRes
 func (m *CMsgDOTALeagueNodeResults) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTALeagueNodeResults) ProtoMessage()    {}
 func (*CMsgDOTALeagueNodeResults) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_common_league_f5c945b2bae2b625, []int{13}
+	return fileDescriptor_2fe4457e2b9dd334, []int{13}
 }
+
 func (m *CMsgDOTALeagueNodeResults) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTALeagueNodeResults.Unmarshal(m, b)
 }
 func (m *CMsgDOTALeagueNodeResults) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTALeagueNodeResults.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTALeagueNodeResults) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTALeagueNodeResults.Merge(dst, src)
+func (m *CMsgDOTALeagueNodeResults) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTALeagueNodeResults.Merge(m, src)
 }
 func (m *CMsgDOTALeagueNodeResults) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTALeagueNodeResults.Size(m)
@@ -2037,16 +2073,17 @@ func (m *CMsgDOTALeagueNodeResults_Result) Reset()         { *m = CMsgDOTALeague
 func (m *CMsgDOTALeagueNodeResults_Result) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTALeagueNodeResults_Result) ProtoMessage()    {}
 func (*CMsgDOTALeagueNodeResults_Result) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_common_league_f5c945b2bae2b625, []int{13, 0}
+	return fileDescriptor_2fe4457e2b9dd334, []int{13, 0}
 }
+
 func (m *CMsgDOTALeagueNodeResults_Result) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTALeagueNodeResults_Result.Unmarshal(m, b)
 }
 func (m *CMsgDOTALeagueNodeResults_Result) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTALeagueNodeResults_Result.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTALeagueNodeResults_Result) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTALeagueNodeResults_Result.Merge(dst, src)
+func (m *CMsgDOTALeagueNodeResults_Result) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTALeagueNodeResults_Result.Merge(m, src)
 }
 func (m *CMsgDOTALeagueNodeResults_Result) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTALeagueNodeResults_Result.Size(m)
@@ -2189,16 +2226,17 @@ func (m *CMsgDOTADPCLeagueResults) Reset()         { *m = CMsgDOTADPCLeagueResul
 func (m *CMsgDOTADPCLeagueResults) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTADPCLeagueResults) ProtoMessage()    {}
 func (*CMsgDOTADPCLeagueResults) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_common_league_f5c945b2bae2b625, []int{14}
+	return fileDescriptor_2fe4457e2b9dd334, []int{14}
 }
+
 func (m *CMsgDOTADPCLeagueResults) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTADPCLeagueResults.Unmarshal(m, b)
 }
 func (m *CMsgDOTADPCLeagueResults) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTADPCLeagueResults.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTADPCLeagueResults) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTADPCLeagueResults.Merge(dst, src)
+func (m *CMsgDOTADPCLeagueResults) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTADPCLeagueResults.Merge(m, src)
 }
 func (m *CMsgDOTADPCLeagueResults) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTADPCLeagueResults.Size(m)
@@ -2249,16 +2287,17 @@ func (m *CMsgDOTADPCLeagueResults_Result) Reset()         { *m = CMsgDOTADPCLeag
 func (m *CMsgDOTADPCLeagueResults_Result) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTADPCLeagueResults_Result) ProtoMessage()    {}
 func (*CMsgDOTADPCLeagueResults_Result) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_common_league_f5c945b2bae2b625, []int{14, 0}
+	return fileDescriptor_2fe4457e2b9dd334, []int{14, 0}
 }
+
 func (m *CMsgDOTADPCLeagueResults_Result) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTADPCLeagueResults_Result.Unmarshal(m, b)
 }
 func (m *CMsgDOTADPCLeagueResults_Result) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTADPCLeagueResults_Result.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTADPCLeagueResults_Result) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTADPCLeagueResults_Result.Merge(dst, src)
+func (m *CMsgDOTADPCLeagueResults_Result) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTADPCLeagueResults_Result.Merge(m, src)
 }
 func (m *CMsgDOTADPCLeagueResults_Result) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTADPCLeagueResults_Result.Size(m)
@@ -2345,16 +2384,17 @@ func (m *CMsgDOTADPCTeamResults) Reset()         { *m = CMsgDOTADPCTeamResults{}
 func (m *CMsgDOTADPCTeamResults) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTADPCTeamResults) ProtoMessage()    {}
 func (*CMsgDOTADPCTeamResults) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_common_league_f5c945b2bae2b625, []int{15}
+	return fileDescriptor_2fe4457e2b9dd334, []int{15}
 }
+
 func (m *CMsgDOTADPCTeamResults) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTADPCTeamResults.Unmarshal(m, b)
 }
 func (m *CMsgDOTADPCTeamResults) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTADPCTeamResults.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTADPCTeamResults) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTADPCTeamResults.Merge(dst, src)
+func (m *CMsgDOTADPCTeamResults) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTADPCTeamResults.Merge(m, src)
 }
 func (m *CMsgDOTADPCTeamResults) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTADPCTeamResults.Size(m)
@@ -2387,16 +2427,17 @@ func (m *CMsgDOTADPCTeamResults_Result) Reset()         { *m = CMsgDOTADPCTeamRe
 func (m *CMsgDOTADPCTeamResults_Result) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTADPCTeamResults_Result) ProtoMessage()    {}
 func (*CMsgDOTADPCTeamResults_Result) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_common_league_f5c945b2bae2b625, []int{15, 0}
+	return fileDescriptor_2fe4457e2b9dd334, []int{15, 0}
 }
+
 func (m *CMsgDOTADPCTeamResults_Result) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTADPCTeamResults_Result.Unmarshal(m, b)
 }
 func (m *CMsgDOTADPCTeamResults_Result) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTADPCTeamResults_Result.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTADPCTeamResults_Result) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTADPCTeamResults_Result.Merge(dst, src)
+func (m *CMsgDOTADPCTeamResults_Result) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTADPCTeamResults_Result.Merge(m, src)
 }
 func (m *CMsgDOTADPCTeamResults_Result) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTADPCTeamResults_Result.Size(m)
@@ -2453,16 +2494,17 @@ func (m *CMsgDOTADPCSeasonResults) Reset()         { *m = CMsgDOTADPCSeasonResul
 func (m *CMsgDOTADPCSeasonResults) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTADPCSeasonResults) ProtoMessage()    {}
 func (*CMsgDOTADPCSeasonResults) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_common_league_f5c945b2bae2b625, []int{16}
+	return fileDescriptor_2fe4457e2b9dd334, []int{16}
 }
+
 func (m *CMsgDOTADPCSeasonResults) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTADPCSeasonResults.Unmarshal(m, b)
 }
 func (m *CMsgDOTADPCSeasonResults) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTADPCSeasonResults.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTADPCSeasonResults) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTADPCSeasonResults.Merge(dst, src)
+func (m *CMsgDOTADPCSeasonResults) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTADPCSeasonResults.Merge(m, src)
 }
 func (m *CMsgDOTADPCSeasonResults) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTADPCSeasonResults.Size(m)
@@ -2498,16 +2540,17 @@ func (m *CMsgDOTADPCSeasonResults_TeamLeagueResult) Reset() {
 func (m *CMsgDOTADPCSeasonResults_TeamLeagueResult) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTADPCSeasonResults_TeamLeagueResult) ProtoMessage()    {}
 func (*CMsgDOTADPCSeasonResults_TeamLeagueResult) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_common_league_f5c945b2bae2b625, []int{16, 0}
+	return fileDescriptor_2fe4457e2b9dd334, []int{16, 0}
 }
+
 func (m *CMsgDOTADPCSeasonResults_TeamLeagueResult) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTADPCSeasonResults_TeamLeagueResult.Unmarshal(m, b)
 }
 func (m *CMsgDOTADPCSeasonResults_TeamLeagueResult) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTADPCSeasonResults_TeamLeagueResult.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTADPCSeasonResults_TeamLeagueResult) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTADPCSeasonResults_TeamLeagueResult.Merge(dst, src)
+func (m *CMsgDOTADPCSeasonResults_TeamLeagueResult) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTADPCSeasonResults_TeamLeagueResult.Merge(m, src)
 }
 func (m *CMsgDOTADPCSeasonResults_TeamLeagueResult) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTADPCSeasonResults_TeamLeagueResult.Size(m)
@@ -2577,16 +2620,17 @@ func (m *CMsgDOTADPCSeasonResults_TeamResult) Reset()         { *m = CMsgDOTADPC
 func (m *CMsgDOTADPCSeasonResults_TeamResult) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTADPCSeasonResults_TeamResult) ProtoMessage()    {}
 func (*CMsgDOTADPCSeasonResults_TeamResult) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_common_league_f5c945b2bae2b625, []int{16, 1}
+	return fileDescriptor_2fe4457e2b9dd334, []int{16, 1}
 }
+
 func (m *CMsgDOTADPCSeasonResults_TeamResult) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTADPCSeasonResults_TeamResult.Unmarshal(m, b)
 }
 func (m *CMsgDOTADPCSeasonResults_TeamResult) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTADPCSeasonResults_TeamResult.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTADPCSeasonResults_TeamResult) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTADPCSeasonResults_TeamResult.Merge(dst, src)
+func (m *CMsgDOTADPCSeasonResults_TeamResult) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTADPCSeasonResults_TeamResult.Merge(m, src)
 }
 func (m *CMsgDOTADPCSeasonResults_TeamResult) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTADPCSeasonResults_TeamResult.Size(m)
@@ -2647,6 +2691,8 @@ func (m *CMsgDOTADPCSeasonResults_TeamResult) GetLeagueResults() []*CMsgDOTADPCS
 }
 
 func init() {
+	proto.RegisterEnum("dota.ELeagueNodeGroupType", ELeagueNodeGroupType_name, ELeagueNodeGroupType_value)
+	proto.RegisterEnum("dota.ELeagueNodeType", ELeagueNodeType_name, ELeagueNodeType_value)
 	proto.RegisterType((*CMsgDOTALeagueNode)(nil), "dota.CMsgDOTALeagueNode")
 	proto.RegisterType((*CMsgDOTALeagueNode_MatchDetails)(nil), "dota.CMsgDOTALeagueNode.MatchDetails")
 	proto.RegisterType((*CMsgDOTALeagueNodeGroup)(nil), "dota.CMsgDOTALeagueNodeGroup")
@@ -2681,15 +2727,13 @@ func init() {
 	proto.RegisterType((*CMsgDOTADPCSeasonResults)(nil), "dota.CMsgDOTADPCSeasonResults")
 	proto.RegisterType((*CMsgDOTADPCSeasonResults_TeamLeagueResult)(nil), "dota.CMsgDOTADPCSeasonResults.TeamLeagueResult")
 	proto.RegisterType((*CMsgDOTADPCSeasonResults_TeamResult)(nil), "dota.CMsgDOTADPCSeasonResults.TeamResult")
-	proto.RegisterEnum("dota.ELeagueNodeGroupType", ELeagueNodeGroupType_name, ELeagueNodeGroupType_value)
-	proto.RegisterEnum("dota.ELeagueNodeType", ELeagueNodeType_name, ELeagueNodeType_value)
 }
 
 func init() {
-	proto.RegisterFile("dota_gcmessages_common_league.proto", fileDescriptor_dota_gcmessages_common_league_f5c945b2bae2b625)
+	proto.RegisterFile("dota_gcmessages_common_league.proto", fileDescriptor_2fe4457e2b9dd334)
 }
 
-var fileDescriptor_dota_gcmessages_common_league_f5c945b2bae2b625 = []byte{
+var fileDescriptor_2fe4457e2b9dd334 = []byte{
 	// 2906 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xd4, 0x59, 0xcd, 0x8f, 0x1b, 0x49,
 	0x15, 0x5f, 0x7f, 0xdb, 0xcf, 0x1f, 0xe3, 0xa9, 0xcc, 0x26, 0x8e, 0x43, 0x92, 0x89, 0xb3, 0x09,

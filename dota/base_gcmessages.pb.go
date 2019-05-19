@@ -3,9 +3,11 @@
 
 package dota
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type EGCBaseMsg int32
 
@@ -65,6 +67,7 @@ var EGCBaseMsg_name = map[int32]string{
 	4517: "k_EMsgGCToGCPerformManualOpCompleted",
 	4518: "k_EMsgGCToGCReloadServerRegionSettings",
 }
+
 var EGCBaseMsg_value = map[string]int32{
 	"k_EMsgGCSystemMessage":                  4001,
 	"k_EMsgGCReplicateConVars":               4002,
@@ -93,9 +96,11 @@ func (x EGCBaseMsg) Enum() *EGCBaseMsg {
 	*p = x
 	return p
 }
+
 func (x EGCBaseMsg) String() string {
 	return proto.EnumName(EGCBaseMsg_name, int32(x))
 }
+
 func (x *EGCBaseMsg) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(EGCBaseMsg_value, data, "EGCBaseMsg")
 	if err != nil {
@@ -104,8 +109,9 @@ func (x *EGCBaseMsg) UnmarshalJSON(data []byte) error {
 	*x = EGCBaseMsg(value)
 	return nil
 }
+
 func (EGCBaseMsg) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{0}
+	return fileDescriptor_19c1b3dff26b5496, []int{0}
 }
 
 type EGCBaseProtoObjectTypes int32
@@ -119,6 +125,7 @@ var EGCBaseProtoObjectTypes_name = map[int32]string{
 	1001: "k_EProtoObjectPartyInvite",
 	1002: "k_EProtoObjectLobbyInvite",
 }
+
 var EGCBaseProtoObjectTypes_value = map[string]int32{
 	"k_EProtoObjectPartyInvite": 1001,
 	"k_EProtoObjectLobbyInvite": 1002,
@@ -129,9 +136,11 @@ func (x EGCBaseProtoObjectTypes) Enum() *EGCBaseProtoObjectTypes {
 	*p = x
 	return p
 }
+
 func (x EGCBaseProtoObjectTypes) String() string {
 	return proto.EnumName(EGCBaseProtoObjectTypes_name, int32(x))
 }
+
 func (x *EGCBaseProtoObjectTypes) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(EGCBaseProtoObjectTypes_value, data, "EGCBaseProtoObjectTypes")
 	if err != nil {
@@ -140,8 +149,9 @@ func (x *EGCBaseProtoObjectTypes) UnmarshalJSON(data []byte) error {
 	*x = EGCBaseProtoObjectTypes(value)
 	return nil
 }
+
 func (EGCBaseProtoObjectTypes) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{1}
+	return fileDescriptor_19c1b3dff26b5496, []int{1}
 }
 
 type ECustomGameInstallStatus int32
@@ -171,6 +181,7 @@ var ECustomGameInstallStatus_name = map[int32]string{
 	106: "k_ECustomGameInstallStatus_FailedSteam",
 	107: "k_ECustomGameInstallStatus_FailedCanceled",
 }
+
 var ECustomGameInstallStatus_value = map[string]int32{
 	"k_ECustomGameInstallStatus_Unknown":                  0,
 	"k_ECustomGameInstallStatus_Ready":                    1,
@@ -189,9 +200,11 @@ func (x ECustomGameInstallStatus) Enum() *ECustomGameInstallStatus {
 	*p = x
 	return p
 }
+
 func (x ECustomGameInstallStatus) String() string {
 	return proto.EnumName(ECustomGameInstallStatus_name, int32(x))
 }
+
 func (x *ECustomGameInstallStatus) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(ECustomGameInstallStatus_value, data, "ECustomGameInstallStatus")
 	if err != nil {
@@ -200,8 +213,9 @@ func (x *ECustomGameInstallStatus) UnmarshalJSON(data []byte) error {
 	*x = ECustomGameInstallStatus(value)
 	return nil
 }
+
 func (ECustomGameInstallStatus) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{2}
+	return fileDescriptor_19c1b3dff26b5496, []int{2}
 }
 
 type CMsgExtractGemsResponse_EExtractGems int32
@@ -221,6 +235,7 @@ var CMsgExtractGemsResponse_EExtractGems_name = map[int32]string{
 	3: "k_ExtractGems_Failed_ToolCannotRemoveGem",
 	4: "k_ExtractGems_Failed_FailedToRemoveGem",
 }
+
 var CMsgExtractGemsResponse_EExtractGems_value = map[string]int32{
 	"k_ExtractGems_Succeeded":                  0,
 	"k_ExtractGems_Failed_ToolIsInvalid":       1,
@@ -234,9 +249,11 @@ func (x CMsgExtractGemsResponse_EExtractGems) Enum() *CMsgExtractGemsResponse_EE
 	*p = x
 	return p
 }
+
 func (x CMsgExtractGemsResponse_EExtractGems) String() string {
 	return proto.EnumName(CMsgExtractGemsResponse_EExtractGems_name, int32(x))
 }
+
 func (x *CMsgExtractGemsResponse_EExtractGems) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(CMsgExtractGemsResponse_EExtractGems_value, data, "CMsgExtractGemsResponse_EExtractGems")
 	if err != nil {
@@ -245,8 +262,9 @@ func (x *CMsgExtractGemsResponse_EExtractGems) UnmarshalJSON(data []byte) error 
 	*x = CMsgExtractGemsResponse_EExtractGems(value)
 	return nil
 }
+
 func (CMsgExtractGemsResponse_EExtractGems) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{63, 0}
+	return fileDescriptor_19c1b3dff26b5496, []int{63, 0}
 }
 
 type CMsgAddSocketResponse_EAddSocket int32
@@ -264,6 +282,7 @@ var CMsgAddSocketResponse_EAddSocket_name = map[int32]string{
 	2: "k_AddSocket_Failed_ItemCannotBeSocketed",
 	3: "k_AddSocket_Failed_FailedToAddSocket",
 }
+
 var CMsgAddSocketResponse_EAddSocket_value = map[string]int32{
 	"k_AddSocket_Succeeded":                   0,
 	"k_AddSocket_Failed_ToolIsInvalid":        1,
@@ -276,9 +295,11 @@ func (x CMsgAddSocketResponse_EAddSocket) Enum() *CMsgAddSocketResponse_EAddSock
 	*p = x
 	return p
 }
+
 func (x CMsgAddSocketResponse_EAddSocket) String() string {
 	return proto.EnumName(CMsgAddSocketResponse_EAddSocket_name, int32(x))
 }
+
 func (x *CMsgAddSocketResponse_EAddSocket) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(CMsgAddSocketResponse_EAddSocket_value, data, "CMsgAddSocketResponse_EAddSocket")
 	if err != nil {
@@ -287,8 +308,9 @@ func (x *CMsgAddSocketResponse_EAddSocket) UnmarshalJSON(data []byte) error {
 	*x = CMsgAddSocketResponse_EAddSocket(value)
 	return nil
 }
+
 func (CMsgAddSocketResponse_EAddSocket) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{65, 0}
+	return fileDescriptor_19c1b3dff26b5496, []int{65, 0}
 }
 
 type CMsgAddItemToSocketResponse_EAddGem int32
@@ -314,6 +336,7 @@ var CMsgAddItemToSocketResponse_EAddGem_name = map[int32]string{
 	6: "k_AddGem_Failed_InvalidGemTypeForSlot",
 	7: "k_AddGem_Failed_SocketContainsUnremovableGem",
 }
+
 var CMsgAddItemToSocketResponse_EAddGem_value = map[string]int32{
 	"k_AddGem_Succeeded":                           0,
 	"k_AddGem_Failed_GemIsInvalid":                 1,
@@ -330,9 +353,11 @@ func (x CMsgAddItemToSocketResponse_EAddGem) Enum() *CMsgAddItemToSocketResponse
 	*p = x
 	return p
 }
+
 func (x CMsgAddItemToSocketResponse_EAddGem) String() string {
 	return proto.EnumName(CMsgAddItemToSocketResponse_EAddGem_name, int32(x))
 }
+
 func (x *CMsgAddItemToSocketResponse_EAddGem) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(CMsgAddItemToSocketResponse_EAddGem_value, data, "CMsgAddItemToSocketResponse_EAddGem")
 	if err != nil {
@@ -341,8 +366,9 @@ func (x *CMsgAddItemToSocketResponse_EAddGem) UnmarshalJSON(data []byte) error {
 	*x = CMsgAddItemToSocketResponse_EAddGem(value)
 	return nil
 }
+
 func (CMsgAddItemToSocketResponse_EAddGem) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{68, 0}
+	return fileDescriptor_19c1b3dff26b5496, []int{68, 0}
 }
 
 type CMsgResetStrangeGemCountResponse_EResetGem int32
@@ -362,6 +388,7 @@ var CMsgResetStrangeGemCountResponse_EResetGem_name = map[int32]string{
 	3: "k_ResetGem_Failed_InvalidSocketId",
 	4: "k_ResetGem_Failed_SocketCannotBeReset",
 }
+
 var CMsgResetStrangeGemCountResponse_EResetGem_value = map[string]int32{
 	"k_ResetGem_Succeeded":                  0,
 	"k_ResetGem_Failed_FailedToResetGem":    1,
@@ -375,9 +402,11 @@ func (x CMsgResetStrangeGemCountResponse_EResetGem) Enum() *CMsgResetStrangeGemC
 	*p = x
 	return p
 }
+
 func (x CMsgResetStrangeGemCountResponse_EResetGem) String() string {
 	return proto.EnumName(CMsgResetStrangeGemCountResponse_EResetGem_name, int32(x))
 }
+
 func (x *CMsgResetStrangeGemCountResponse_EResetGem) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(CMsgResetStrangeGemCountResponse_EResetGem_value, data, "CMsgResetStrangeGemCountResponse_EResetGem")
 	if err != nil {
@@ -386,8 +415,9 @@ func (x *CMsgResetStrangeGemCountResponse_EResetGem) UnmarshalJSON(data []byte) 
 	*x = CMsgResetStrangeGemCountResponse_EResetGem(value)
 	return nil
 }
+
 func (CMsgResetStrangeGemCountResponse_EResetGem) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{70, 0}
+	return fileDescriptor_19c1b3dff26b5496, []int{70, 0}
 }
 
 type CGCStorePurchaseInit_LineItem struct {
@@ -405,16 +435,17 @@ func (m *CGCStorePurchaseInit_LineItem) Reset()         { *m = CGCStorePurchaseI
 func (m *CGCStorePurchaseInit_LineItem) String() string { return proto.CompactTextString(m) }
 func (*CGCStorePurchaseInit_LineItem) ProtoMessage()    {}
 func (*CGCStorePurchaseInit_LineItem) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{0}
+	return fileDescriptor_19c1b3dff26b5496, []int{0}
 }
+
 func (m *CGCStorePurchaseInit_LineItem) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CGCStorePurchaseInit_LineItem.Unmarshal(m, b)
 }
 func (m *CGCStorePurchaseInit_LineItem) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CGCStorePurchaseInit_LineItem.Marshal(b, m, deterministic)
 }
-func (dst *CGCStorePurchaseInit_LineItem) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CGCStorePurchaseInit_LineItem.Merge(dst, src)
+func (m *CGCStorePurchaseInit_LineItem) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CGCStorePurchaseInit_LineItem.Merge(m, src)
 }
 func (m *CGCStorePurchaseInit_LineItem) XXX_Size() int {
 	return xxx_messageInfo_CGCStorePurchaseInit_LineItem.Size(m)
@@ -474,16 +505,17 @@ func (m *CMsgGCStorePurchaseInit) Reset()         { *m = CMsgGCStorePurchaseInit
 func (m *CMsgGCStorePurchaseInit) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCStorePurchaseInit) ProtoMessage()    {}
 func (*CMsgGCStorePurchaseInit) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{1}
+	return fileDescriptor_19c1b3dff26b5496, []int{1}
 }
+
 func (m *CMsgGCStorePurchaseInit) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgGCStorePurchaseInit.Unmarshal(m, b)
 }
 func (m *CMsgGCStorePurchaseInit) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgGCStorePurchaseInit.Marshal(b, m, deterministic)
 }
-func (dst *CMsgGCStorePurchaseInit) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgGCStorePurchaseInit.Merge(dst, src)
+func (m *CMsgGCStorePurchaseInit) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGCStorePurchaseInit.Merge(m, src)
 }
 func (m *CMsgGCStorePurchaseInit) XXX_Size() int {
 	return xxx_messageInfo_CMsgGCStorePurchaseInit.Size(m)
@@ -534,16 +566,17 @@ func (m *CMsgGCStorePurchaseInitResponse) Reset()         { *m = CMsgGCStorePurc
 func (m *CMsgGCStorePurchaseInitResponse) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCStorePurchaseInitResponse) ProtoMessage()    {}
 func (*CMsgGCStorePurchaseInitResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{2}
+	return fileDescriptor_19c1b3dff26b5496, []int{2}
 }
+
 func (m *CMsgGCStorePurchaseInitResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgGCStorePurchaseInitResponse.Unmarshal(m, b)
 }
 func (m *CMsgGCStorePurchaseInitResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgGCStorePurchaseInitResponse.Marshal(b, m, deterministic)
 }
-func (dst *CMsgGCStorePurchaseInitResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgGCStorePurchaseInitResponse.Merge(dst, src)
+func (m *CMsgGCStorePurchaseInitResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGCStorePurchaseInitResponse.Merge(m, src)
 }
 func (m *CMsgGCStorePurchaseInitResponse) XXX_Size() int {
 	return xxx_messageInfo_CMsgGCStorePurchaseInitResponse.Size(m)
@@ -579,16 +612,17 @@ func (m *CMsgSystemBroadcast) Reset()         { *m = CMsgSystemBroadcast{} }
 func (m *CMsgSystemBroadcast) String() string { return proto.CompactTextString(m) }
 func (*CMsgSystemBroadcast) ProtoMessage()    {}
 func (*CMsgSystemBroadcast) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{3}
+	return fileDescriptor_19c1b3dff26b5496, []int{3}
 }
+
 func (m *CMsgSystemBroadcast) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgSystemBroadcast.Unmarshal(m, b)
 }
 func (m *CMsgSystemBroadcast) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgSystemBroadcast.Marshal(b, m, deterministic)
 }
-func (dst *CMsgSystemBroadcast) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgSystemBroadcast.Merge(dst, src)
+func (m *CMsgSystemBroadcast) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgSystemBroadcast.Merge(m, src)
 }
 func (m *CMsgSystemBroadcast) XXX_Size() int {
 	return xxx_messageInfo_CMsgSystemBroadcast.Size(m)
@@ -621,16 +655,17 @@ func (m *CMsgClientPingData) Reset()         { *m = CMsgClientPingData{} }
 func (m *CMsgClientPingData) String() string { return proto.CompactTextString(m) }
 func (*CMsgClientPingData) ProtoMessage()    {}
 func (*CMsgClientPingData) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{4}
+	return fileDescriptor_19c1b3dff26b5496, []int{4}
 }
+
 func (m *CMsgClientPingData) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgClientPingData.Unmarshal(m, b)
 }
 func (m *CMsgClientPingData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgClientPingData.Marshal(b, m, deterministic)
 }
-func (dst *CMsgClientPingData) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgClientPingData.Merge(dst, src)
+func (m *CMsgClientPingData) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientPingData.Merge(m, src)
 }
 func (m *CMsgClientPingData) XXX_Size() int {
 	return xxx_messageInfo_CMsgClientPingData.Size(m)
@@ -691,16 +726,17 @@ func (m *CMsgInviteToParty) Reset()         { *m = CMsgInviteToParty{} }
 func (m *CMsgInviteToParty) String() string { return proto.CompactTextString(m) }
 func (*CMsgInviteToParty) ProtoMessage()    {}
 func (*CMsgInviteToParty) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{5}
+	return fileDescriptor_19c1b3dff26b5496, []int{5}
 }
+
 func (m *CMsgInviteToParty) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgInviteToParty.Unmarshal(m, b)
 }
 func (m *CMsgInviteToParty) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgInviteToParty.Marshal(b, m, deterministic)
 }
-func (dst *CMsgInviteToParty) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgInviteToParty.Merge(dst, src)
+func (m *CMsgInviteToParty) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgInviteToParty.Merge(m, src)
 }
 func (m *CMsgInviteToParty) XXX_Size() int {
 	return xxx_messageInfo_CMsgInviteToParty.Size(m)
@@ -758,16 +794,17 @@ func (m *CMsgInviteToLobby) Reset()         { *m = CMsgInviteToLobby{} }
 func (m *CMsgInviteToLobby) String() string { return proto.CompactTextString(m) }
 func (*CMsgInviteToLobby) ProtoMessage()    {}
 func (*CMsgInviteToLobby) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{6}
+	return fileDescriptor_19c1b3dff26b5496, []int{6}
 }
+
 func (m *CMsgInviteToLobby) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgInviteToLobby.Unmarshal(m, b)
 }
 func (m *CMsgInviteToLobby) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgInviteToLobby.Marshal(b, m, deterministic)
 }
-func (dst *CMsgInviteToLobby) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgInviteToLobby.Merge(dst, src)
+func (m *CMsgInviteToLobby) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgInviteToLobby.Merge(m, src)
 }
 func (m *CMsgInviteToLobby) XXX_Size() int {
 	return xxx_messageInfo_CMsgInviteToLobby.Size(m)
@@ -805,16 +842,17 @@ func (m *CMsgInvitationCreated) Reset()         { *m = CMsgInvitationCreated{} }
 func (m *CMsgInvitationCreated) String() string { return proto.CompactTextString(m) }
 func (*CMsgInvitationCreated) ProtoMessage()    {}
 func (*CMsgInvitationCreated) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{7}
+	return fileDescriptor_19c1b3dff26b5496, []int{7}
 }
+
 func (m *CMsgInvitationCreated) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgInvitationCreated.Unmarshal(m, b)
 }
 func (m *CMsgInvitationCreated) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgInvitationCreated.Marshal(b, m, deterministic)
 }
-func (dst *CMsgInvitationCreated) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgInvitationCreated.Merge(dst, src)
+func (m *CMsgInvitationCreated) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgInvitationCreated.Merge(m, src)
 }
 func (m *CMsgInvitationCreated) XXX_Size() int {
 	return xxx_messageInfo_CMsgInvitationCreated.Size(m)
@@ -860,16 +898,17 @@ func (m *CMsgPartyInviteResponse) Reset()         { *m = CMsgPartyInviteResponse
 func (m *CMsgPartyInviteResponse) String() string { return proto.CompactTextString(m) }
 func (*CMsgPartyInviteResponse) ProtoMessage()    {}
 func (*CMsgPartyInviteResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{8}
+	return fileDescriptor_19c1b3dff26b5496, []int{8}
 }
+
 func (m *CMsgPartyInviteResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgPartyInviteResponse.Unmarshal(m, b)
 }
 func (m *CMsgPartyInviteResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgPartyInviteResponse.Marshal(b, m, deterministic)
 }
-func (dst *CMsgPartyInviteResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgPartyInviteResponse.Merge(dst, src)
+func (m *CMsgPartyInviteResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgPartyInviteResponse.Merge(m, src)
 }
 func (m *CMsgPartyInviteResponse) XXX_Size() int {
 	return xxx_messageInfo_CMsgPartyInviteResponse.Size(m)
@@ -923,16 +962,17 @@ func (m *CMsgLobbyInviteResponse) Reset()         { *m = CMsgLobbyInviteResponse
 func (m *CMsgLobbyInviteResponse) String() string { return proto.CompactTextString(m) }
 func (*CMsgLobbyInviteResponse) ProtoMessage()    {}
 func (*CMsgLobbyInviteResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{9}
+	return fileDescriptor_19c1b3dff26b5496, []int{9}
 }
+
 func (m *CMsgLobbyInviteResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgLobbyInviteResponse.Unmarshal(m, b)
 }
 func (m *CMsgLobbyInviteResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgLobbyInviteResponse.Marshal(b, m, deterministic)
 }
-func (dst *CMsgLobbyInviteResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgLobbyInviteResponse.Merge(dst, src)
+func (m *CMsgLobbyInviteResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgLobbyInviteResponse.Merge(m, src)
 }
 func (m *CMsgLobbyInviteResponse) XXX_Size() int {
 	return xxx_messageInfo_CMsgLobbyInviteResponse.Size(m)
@@ -989,16 +1029,17 @@ func (m *CMsgKickFromParty) Reset()         { *m = CMsgKickFromParty{} }
 func (m *CMsgKickFromParty) String() string { return proto.CompactTextString(m) }
 func (*CMsgKickFromParty) ProtoMessage()    {}
 func (*CMsgKickFromParty) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{10}
+	return fileDescriptor_19c1b3dff26b5496, []int{10}
 }
+
 func (m *CMsgKickFromParty) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgKickFromParty.Unmarshal(m, b)
 }
 func (m *CMsgKickFromParty) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgKickFromParty.Marshal(b, m, deterministic)
 }
-func (dst *CMsgKickFromParty) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgKickFromParty.Merge(dst, src)
+func (m *CMsgKickFromParty) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgKickFromParty.Merge(m, src)
 }
 func (m *CMsgKickFromParty) XXX_Size() int {
 	return xxx_messageInfo_CMsgKickFromParty.Size(m)
@@ -1026,16 +1067,17 @@ func (m *CMsgLeaveParty) Reset()         { *m = CMsgLeaveParty{} }
 func (m *CMsgLeaveParty) String() string { return proto.CompactTextString(m) }
 func (*CMsgLeaveParty) ProtoMessage()    {}
 func (*CMsgLeaveParty) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{11}
+	return fileDescriptor_19c1b3dff26b5496, []int{11}
 }
+
 func (m *CMsgLeaveParty) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgLeaveParty.Unmarshal(m, b)
 }
 func (m *CMsgLeaveParty) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgLeaveParty.Marshal(b, m, deterministic)
 }
-func (dst *CMsgLeaveParty) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgLeaveParty.Merge(dst, src)
+func (m *CMsgLeaveParty) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgLeaveParty.Merge(m, src)
 }
 func (m *CMsgLeaveParty) XXX_Size() int {
 	return xxx_messageInfo_CMsgLeaveParty.Size(m)
@@ -1059,16 +1101,17 @@ func (m *CMsgCustomGameInstallStatus) Reset()         { *m = CMsgCustomGameInsta
 func (m *CMsgCustomGameInstallStatus) String() string { return proto.CompactTextString(m) }
 func (*CMsgCustomGameInstallStatus) ProtoMessage()    {}
 func (*CMsgCustomGameInstallStatus) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{12}
+	return fileDescriptor_19c1b3dff26b5496, []int{12}
 }
+
 func (m *CMsgCustomGameInstallStatus) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgCustomGameInstallStatus.Unmarshal(m, b)
 }
 func (m *CMsgCustomGameInstallStatus) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgCustomGameInstallStatus.Marshal(b, m, deterministic)
 }
-func (dst *CMsgCustomGameInstallStatus) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgCustomGameInstallStatus.Merge(dst, src)
+func (m *CMsgCustomGameInstallStatus) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgCustomGameInstallStatus.Merge(m, src)
 }
 func (m *CMsgCustomGameInstallStatus) XXX_Size() int {
 	return xxx_messageInfo_CMsgCustomGameInstallStatus.Size(m)
@@ -1113,16 +1156,17 @@ func (m *CMsgServerAvailable) Reset()         { *m = CMsgServerAvailable{} }
 func (m *CMsgServerAvailable) String() string { return proto.CompactTextString(m) }
 func (*CMsgServerAvailable) ProtoMessage()    {}
 func (*CMsgServerAvailable) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{13}
+	return fileDescriptor_19c1b3dff26b5496, []int{13}
 }
+
 func (m *CMsgServerAvailable) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgServerAvailable.Unmarshal(m, b)
 }
 func (m *CMsgServerAvailable) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgServerAvailable.Marshal(b, m, deterministic)
 }
-func (dst *CMsgServerAvailable) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgServerAvailable.Merge(dst, src)
+func (m *CMsgServerAvailable) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgServerAvailable.Merge(m, src)
 }
 func (m *CMsgServerAvailable) XXX_Size() int {
 	return xxx_messageInfo_CMsgServerAvailable.Size(m)
@@ -1151,16 +1195,17 @@ func (m *CMsgLANServerAvailable) Reset()         { *m = CMsgLANServerAvailable{}
 func (m *CMsgLANServerAvailable) String() string { return proto.CompactTextString(m) }
 func (*CMsgLANServerAvailable) ProtoMessage()    {}
 func (*CMsgLANServerAvailable) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{14}
+	return fileDescriptor_19c1b3dff26b5496, []int{14}
 }
+
 func (m *CMsgLANServerAvailable) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgLANServerAvailable.Unmarshal(m, b)
 }
 func (m *CMsgLANServerAvailable) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgLANServerAvailable.Marshal(b, m, deterministic)
 }
-func (dst *CMsgLANServerAvailable) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgLANServerAvailable.Merge(dst, src)
+func (m *CMsgLANServerAvailable) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgLANServerAvailable.Merge(m, src)
 }
 func (m *CMsgLANServerAvailable) XXX_Size() int {
 	return xxx_messageInfo_CMsgLANServerAvailable.Size(m)
@@ -1196,16 +1241,17 @@ func (m *CSOEconGameAccountClient) Reset()         { *m = CSOEconGameAccountClie
 func (m *CSOEconGameAccountClient) String() string { return proto.CompactTextString(m) }
 func (*CSOEconGameAccountClient) ProtoMessage()    {}
 func (*CSOEconGameAccountClient) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{15}
+	return fileDescriptor_19c1b3dff26b5496, []int{15}
 }
+
 func (m *CSOEconGameAccountClient) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSOEconGameAccountClient.Unmarshal(m, b)
 }
 func (m *CSOEconGameAccountClient) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSOEconGameAccountClient.Marshal(b, m, deterministic)
 }
-func (dst *CSOEconGameAccountClient) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSOEconGameAccountClient.Merge(dst, src)
+func (m *CSOEconGameAccountClient) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSOEconGameAccountClient.Merge(m, src)
 }
 func (m *CSOEconGameAccountClient) XXX_Size() int {
 	return xxx_messageInfo_CSOEconGameAccountClient.Size(m)
@@ -1292,16 +1338,17 @@ func (m *CSOItemCriteriaCondition) Reset()         { *m = CSOItemCriteriaConditi
 func (m *CSOItemCriteriaCondition) String() string { return proto.CompactTextString(m) }
 func (*CSOItemCriteriaCondition) ProtoMessage()    {}
 func (*CSOItemCriteriaCondition) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{16}
+	return fileDescriptor_19c1b3dff26b5496, []int{16}
 }
+
 func (m *CSOItemCriteriaCondition) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSOItemCriteriaCondition.Unmarshal(m, b)
 }
 func (m *CSOItemCriteriaCondition) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSOItemCriteriaCondition.Marshal(b, m, deterministic)
 }
-func (dst *CSOItemCriteriaCondition) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSOItemCriteriaCondition.Merge(dst, src)
+func (m *CSOItemCriteriaCondition) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSOItemCriteriaCondition.Merge(m, src)
 }
 func (m *CSOItemCriteriaCondition) XXX_Size() int {
 	return xxx_messageInfo_CSOItemCriteriaCondition.Size(m)
@@ -1366,16 +1413,17 @@ func (m *CSOItemCriteria) Reset()         { *m = CSOItemCriteria{} }
 func (m *CSOItemCriteria) String() string { return proto.CompactTextString(m) }
 func (*CSOItemCriteria) ProtoMessage()    {}
 func (*CSOItemCriteria) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{17}
+	return fileDescriptor_19c1b3dff26b5496, []int{17}
 }
+
 func (m *CSOItemCriteria) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSOItemCriteria.Unmarshal(m, b)
 }
 func (m *CSOItemCriteria) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSOItemCriteria.Marshal(b, m, deterministic)
 }
-func (dst *CSOItemCriteria) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSOItemCriteria.Merge(dst, src)
+func (m *CSOItemCriteria) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSOItemCriteria.Merge(m, src)
 }
 func (m *CSOItemCriteria) XXX_Size() int {
 	return xxx_messageInfo_CSOItemCriteria.Size(m)
@@ -1478,16 +1526,17 @@ func (m *CSOItemRecipe) Reset()         { *m = CSOItemRecipe{} }
 func (m *CSOItemRecipe) String() string { return proto.CompactTextString(m) }
 func (*CSOItemRecipe) ProtoMessage()    {}
 func (*CSOItemRecipe) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{18}
+	return fileDescriptor_19c1b3dff26b5496, []int{18}
 }
+
 func (m *CSOItemRecipe) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSOItemRecipe.Unmarshal(m, b)
 }
 func (m *CSOItemRecipe) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSOItemRecipe.Marshal(b, m, deterministic)
 }
-func (dst *CSOItemRecipe) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSOItemRecipe.Merge(dst, src)
+func (m *CSOItemRecipe) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSOItemRecipe.Merge(m, src)
 }
 func (m *CSOItemRecipe) XXX_Size() int {
 	return xxx_messageInfo_CSOItemRecipe.Size(m)
@@ -1643,16 +1692,17 @@ func (m *CMsgApplyStrangePart) Reset()         { *m = CMsgApplyStrangePart{} }
 func (m *CMsgApplyStrangePart) String() string { return proto.CompactTextString(m) }
 func (*CMsgApplyStrangePart) ProtoMessage()    {}
 func (*CMsgApplyStrangePart) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{19}
+	return fileDescriptor_19c1b3dff26b5496, []int{19}
 }
+
 func (m *CMsgApplyStrangePart) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgApplyStrangePart.Unmarshal(m, b)
 }
 func (m *CMsgApplyStrangePart) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgApplyStrangePart.Marshal(b, m, deterministic)
 }
-func (dst *CMsgApplyStrangePart) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgApplyStrangePart.Merge(dst, src)
+func (m *CMsgApplyStrangePart) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgApplyStrangePart.Merge(m, src)
 }
 func (m *CMsgApplyStrangePart) XXX_Size() int {
 	return xxx_messageInfo_CMsgApplyStrangePart.Size(m)
@@ -1689,16 +1739,17 @@ func (m *CMsgApplyPennantUpgrade) Reset()         { *m = CMsgApplyPennantUpgrade
 func (m *CMsgApplyPennantUpgrade) String() string { return proto.CompactTextString(m) }
 func (*CMsgApplyPennantUpgrade) ProtoMessage()    {}
 func (*CMsgApplyPennantUpgrade) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{20}
+	return fileDescriptor_19c1b3dff26b5496, []int{20}
 }
+
 func (m *CMsgApplyPennantUpgrade) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgApplyPennantUpgrade.Unmarshal(m, b)
 }
 func (m *CMsgApplyPennantUpgrade) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgApplyPennantUpgrade.Marshal(b, m, deterministic)
 }
-func (dst *CMsgApplyPennantUpgrade) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgApplyPennantUpgrade.Merge(dst, src)
+func (m *CMsgApplyPennantUpgrade) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgApplyPennantUpgrade.Merge(m, src)
 }
 func (m *CMsgApplyPennantUpgrade) XXX_Size() int {
 	return xxx_messageInfo_CMsgApplyPennantUpgrade.Size(m)
@@ -1735,16 +1786,17 @@ func (m *CMsgApplyEggEssence) Reset()         { *m = CMsgApplyEggEssence{} }
 func (m *CMsgApplyEggEssence) String() string { return proto.CompactTextString(m) }
 func (*CMsgApplyEggEssence) ProtoMessage()    {}
 func (*CMsgApplyEggEssence) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{21}
+	return fileDescriptor_19c1b3dff26b5496, []int{21}
 }
+
 func (m *CMsgApplyEggEssence) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgApplyEggEssence.Unmarshal(m, b)
 }
 func (m *CMsgApplyEggEssence) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgApplyEggEssence.Marshal(b, m, deterministic)
 }
-func (dst *CMsgApplyEggEssence) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgApplyEggEssence.Merge(dst, src)
+func (m *CMsgApplyEggEssence) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgApplyEggEssence.Merge(m, src)
 }
 func (m *CMsgApplyEggEssence) XXX_Size() int {
 	return xxx_messageInfo_CMsgApplyEggEssence.Size(m)
@@ -1782,16 +1834,17 @@ func (m *CSOEconItemAttribute) Reset()         { *m = CSOEconItemAttribute{} }
 func (m *CSOEconItemAttribute) String() string { return proto.CompactTextString(m) }
 func (*CSOEconItemAttribute) ProtoMessage()    {}
 func (*CSOEconItemAttribute) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{22}
+	return fileDescriptor_19c1b3dff26b5496, []int{22}
 }
+
 func (m *CSOEconItemAttribute) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSOEconItemAttribute.Unmarshal(m, b)
 }
 func (m *CSOEconItemAttribute) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSOEconItemAttribute.Marshal(b, m, deterministic)
 }
-func (dst *CSOEconItemAttribute) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSOEconItemAttribute.Merge(dst, src)
+func (m *CSOEconItemAttribute) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSOEconItemAttribute.Merge(m, src)
 }
 func (m *CSOEconItemAttribute) XXX_Size() int {
 	return xxx_messageInfo_CSOEconItemAttribute.Size(m)
@@ -1835,16 +1888,17 @@ func (m *CSOEconItemEquipped) Reset()         { *m = CSOEconItemEquipped{} }
 func (m *CSOEconItemEquipped) String() string { return proto.CompactTextString(m) }
 func (*CSOEconItemEquipped) ProtoMessage()    {}
 func (*CSOEconItemEquipped) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{23}
+	return fileDescriptor_19c1b3dff26b5496, []int{23}
 }
+
 func (m *CSOEconItemEquipped) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSOEconItemEquipped.Unmarshal(m, b)
 }
 func (m *CSOEconItemEquipped) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSOEconItemEquipped.Marshal(b, m, deterministic)
 }
-func (dst *CSOEconItemEquipped) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSOEconItemEquipped.Merge(dst, src)
+func (m *CSOEconItemEquipped) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSOEconItemEquipped.Merge(m, src)
 }
 func (m *CSOEconItemEquipped) XXX_Size() int {
 	return xxx_messageInfo_CSOEconItemEquipped.Size(m)
@@ -1893,16 +1947,17 @@ func (m *CSOEconItem) Reset()         { *m = CSOEconItem{} }
 func (m *CSOEconItem) String() string { return proto.CompactTextString(m) }
 func (*CSOEconItem) ProtoMessage()    {}
 func (*CSOEconItem) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{24}
+	return fileDescriptor_19c1b3dff26b5496, []int{24}
 }
+
 func (m *CSOEconItem) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSOEconItem.Unmarshal(m, b)
 }
 func (m *CSOEconItem) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSOEconItem.Marshal(b, m, deterministic)
 }
-func (dst *CSOEconItem) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSOEconItem.Merge(dst, src)
+func (m *CSOEconItem) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSOEconItem.Merge(m, src)
 }
 func (m *CSOEconItem) XXX_Size() int {
 	return xxx_messageInfo_CSOEconItem.Size(m)
@@ -2030,16 +2085,17 @@ func (m *CMsgSortItems) Reset()         { *m = CMsgSortItems{} }
 func (m *CMsgSortItems) String() string { return proto.CompactTextString(m) }
 func (*CMsgSortItems) ProtoMessage()    {}
 func (*CMsgSortItems) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{25}
+	return fileDescriptor_19c1b3dff26b5496, []int{25}
 }
+
 func (m *CMsgSortItems) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgSortItems.Unmarshal(m, b)
 }
 func (m *CMsgSortItems) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgSortItems.Marshal(b, m, deterministic)
 }
-func (dst *CMsgSortItems) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgSortItems.Merge(dst, src)
+func (m *CMsgSortItems) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgSortItems.Merge(m, src)
 }
 func (m *CMsgSortItems) XXX_Size() int {
 	return xxx_messageInfo_CMsgSortItems.Size(m)
@@ -2071,16 +2127,17 @@ func (m *CSOEconClaimCode) Reset()         { *m = CSOEconClaimCode{} }
 func (m *CSOEconClaimCode) String() string { return proto.CompactTextString(m) }
 func (*CSOEconClaimCode) ProtoMessage()    {}
 func (*CSOEconClaimCode) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{26}
+	return fileDescriptor_19c1b3dff26b5496, []int{26}
 }
+
 func (m *CSOEconClaimCode) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSOEconClaimCode.Unmarshal(m, b)
 }
 func (m *CSOEconClaimCode) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSOEconClaimCode.Marshal(b, m, deterministic)
 }
-func (dst *CSOEconClaimCode) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSOEconClaimCode.Merge(dst, src)
+func (m *CSOEconClaimCode) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSOEconClaimCode.Merge(m, src)
 }
 func (m *CSOEconClaimCode) XXX_Size() int {
 	return xxx_messageInfo_CSOEconClaimCode.Size(m)
@@ -2132,16 +2189,17 @@ func (m *CMsgUpdateItemSchema) Reset()         { *m = CMsgUpdateItemSchema{} }
 func (m *CMsgUpdateItemSchema) String() string { return proto.CompactTextString(m) }
 func (*CMsgUpdateItemSchema) ProtoMessage()    {}
 func (*CMsgUpdateItemSchema) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{27}
+	return fileDescriptor_19c1b3dff26b5496, []int{27}
 }
+
 func (m *CMsgUpdateItemSchema) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgUpdateItemSchema.Unmarshal(m, b)
 }
 func (m *CMsgUpdateItemSchema) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgUpdateItemSchema.Marshal(b, m, deterministic)
 }
-func (dst *CMsgUpdateItemSchema) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgUpdateItemSchema.Merge(dst, src)
+func (m *CMsgUpdateItemSchema) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgUpdateItemSchema.Merge(m, src)
 }
 func (m *CMsgUpdateItemSchema) XXX_Size() int {
 	return xxx_messageInfo_CMsgUpdateItemSchema.Size(m)
@@ -2184,16 +2242,17 @@ func (m *CMsgGCError) Reset()         { *m = CMsgGCError{} }
 func (m *CMsgGCError) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCError) ProtoMessage()    {}
 func (*CMsgGCError) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{28}
+	return fileDescriptor_19c1b3dff26b5496, []int{28}
 }
+
 func (m *CMsgGCError) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgGCError.Unmarshal(m, b)
 }
 func (m *CMsgGCError) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgGCError.Marshal(b, m, deterministic)
 }
-func (dst *CMsgGCError) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgGCError.Merge(dst, src)
+func (m *CMsgGCError) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGCError.Merge(m, src)
 }
 func (m *CMsgGCError) XXX_Size() int {
 	return xxx_messageInfo_CMsgGCError.Size(m)
@@ -2221,16 +2280,17 @@ func (m *CMsgRequestInventoryRefresh) Reset()         { *m = CMsgRequestInventor
 func (m *CMsgRequestInventoryRefresh) String() string { return proto.CompactTextString(m) }
 func (*CMsgRequestInventoryRefresh) ProtoMessage()    {}
 func (*CMsgRequestInventoryRefresh) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{29}
+	return fileDescriptor_19c1b3dff26b5496, []int{29}
 }
+
 func (m *CMsgRequestInventoryRefresh) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgRequestInventoryRefresh.Unmarshal(m, b)
 }
 func (m *CMsgRequestInventoryRefresh) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgRequestInventoryRefresh.Marshal(b, m, deterministic)
 }
-func (dst *CMsgRequestInventoryRefresh) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgRequestInventoryRefresh.Merge(dst, src)
+func (m *CMsgRequestInventoryRefresh) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgRequestInventoryRefresh.Merge(m, src)
 }
 func (m *CMsgRequestInventoryRefresh) XXX_Size() int {
 	return xxx_messageInfo_CMsgRequestInventoryRefresh.Size(m)
@@ -2253,16 +2313,17 @@ func (m *CMsgConVarValue) Reset()         { *m = CMsgConVarValue{} }
 func (m *CMsgConVarValue) String() string { return proto.CompactTextString(m) }
 func (*CMsgConVarValue) ProtoMessage()    {}
 func (*CMsgConVarValue) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{30}
+	return fileDescriptor_19c1b3dff26b5496, []int{30}
 }
+
 func (m *CMsgConVarValue) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgConVarValue.Unmarshal(m, b)
 }
 func (m *CMsgConVarValue) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgConVarValue.Marshal(b, m, deterministic)
 }
-func (dst *CMsgConVarValue) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgConVarValue.Merge(dst, src)
+func (m *CMsgConVarValue) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgConVarValue.Merge(m, src)
 }
 func (m *CMsgConVarValue) XXX_Size() int {
 	return xxx_messageInfo_CMsgConVarValue.Size(m)
@@ -2298,16 +2359,17 @@ func (m *CMsgReplicateConVars) Reset()         { *m = CMsgReplicateConVars{} }
 func (m *CMsgReplicateConVars) String() string { return proto.CompactTextString(m) }
 func (*CMsgReplicateConVars) ProtoMessage()    {}
 func (*CMsgReplicateConVars) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{31}
+	return fileDescriptor_19c1b3dff26b5496, []int{31}
 }
+
 func (m *CMsgReplicateConVars) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgReplicateConVars.Unmarshal(m, b)
 }
 func (m *CMsgReplicateConVars) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgReplicateConVars.Marshal(b, m, deterministic)
 }
-func (dst *CMsgReplicateConVars) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgReplicateConVars.Merge(dst, src)
+func (m *CMsgReplicateConVars) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgReplicateConVars.Merge(m, src)
 }
 func (m *CMsgReplicateConVars) XXX_Size() int {
 	return xxx_messageInfo_CMsgReplicateConVars.Size(m)
@@ -2341,16 +2403,17 @@ func (m *CMsgItemAcknowledged) Reset()         { *m = CMsgItemAcknowledged{} }
 func (m *CMsgItemAcknowledged) String() string { return proto.CompactTextString(m) }
 func (*CMsgItemAcknowledged) ProtoMessage()    {}
 func (*CMsgItemAcknowledged) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{32}
+	return fileDescriptor_19c1b3dff26b5496, []int{32}
 }
+
 func (m *CMsgItemAcknowledged) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgItemAcknowledged.Unmarshal(m, b)
 }
 func (m *CMsgItemAcknowledged) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgItemAcknowledged.Marshal(b, m, deterministic)
 }
-func (dst *CMsgItemAcknowledged) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgItemAcknowledged.Merge(dst, src)
+func (m *CMsgItemAcknowledged) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgItemAcknowledged.Merge(m, src)
 }
 func (m *CMsgItemAcknowledged) XXX_Size() int {
 	return xxx_messageInfo_CMsgItemAcknowledged.Size(m)
@@ -2414,16 +2477,17 @@ func (m *CMsgSetItemPositions) Reset()         { *m = CMsgSetItemPositions{} }
 func (m *CMsgSetItemPositions) String() string { return proto.CompactTextString(m) }
 func (*CMsgSetItemPositions) ProtoMessage()    {}
 func (*CMsgSetItemPositions) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{33}
+	return fileDescriptor_19c1b3dff26b5496, []int{33}
 }
+
 func (m *CMsgSetItemPositions) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgSetItemPositions.Unmarshal(m, b)
 }
 func (m *CMsgSetItemPositions) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgSetItemPositions.Marshal(b, m, deterministic)
 }
-func (dst *CMsgSetItemPositions) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgSetItemPositions.Merge(dst, src)
+func (m *CMsgSetItemPositions) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgSetItemPositions.Merge(m, src)
 }
 func (m *CMsgSetItemPositions) XXX_Size() int {
 	return xxx_messageInfo_CMsgSetItemPositions.Size(m)
@@ -2453,16 +2517,17 @@ func (m *CMsgSetItemPositions_ItemPosition) Reset()         { *m = CMsgSetItemPo
 func (m *CMsgSetItemPositions_ItemPosition) String() string { return proto.CompactTextString(m) }
 func (*CMsgSetItemPositions_ItemPosition) ProtoMessage()    {}
 func (*CMsgSetItemPositions_ItemPosition) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{33, 0}
+	return fileDescriptor_19c1b3dff26b5496, []int{33, 0}
 }
+
 func (m *CMsgSetItemPositions_ItemPosition) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgSetItemPositions_ItemPosition.Unmarshal(m, b)
 }
 func (m *CMsgSetItemPositions_ItemPosition) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgSetItemPositions_ItemPosition.Marshal(b, m, deterministic)
 }
-func (dst *CMsgSetItemPositions_ItemPosition) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgSetItemPositions_ItemPosition.Merge(dst, src)
+func (m *CMsgSetItemPositions_ItemPosition) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgSetItemPositions_ItemPosition.Merge(m, src)
 }
 func (m *CMsgSetItemPositions_ItemPosition) XXX_Size() int {
 	return xxx_messageInfo_CMsgSetItemPositions_ItemPosition.Size(m)
@@ -2500,16 +2565,17 @@ func (m *CMsgGCNameItemNotification) Reset()         { *m = CMsgGCNameItemNotifi
 func (m *CMsgGCNameItemNotification) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCNameItemNotification) ProtoMessage()    {}
 func (*CMsgGCNameItemNotification) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{34}
+	return fileDescriptor_19c1b3dff26b5496, []int{34}
 }
+
 func (m *CMsgGCNameItemNotification) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgGCNameItemNotification.Unmarshal(m, b)
 }
 func (m *CMsgGCNameItemNotification) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgGCNameItemNotification.Marshal(b, m, deterministic)
 }
-func (dst *CMsgGCNameItemNotification) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgGCNameItemNotification.Merge(dst, src)
+func (m *CMsgGCNameItemNotification) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGCNameItemNotification.Merge(m, src)
 }
 func (m *CMsgGCNameItemNotification) XXX_Size() int {
 	return xxx_messageInfo_CMsgGCNameItemNotification.Size(m)
@@ -2555,16 +2621,17 @@ func (m *CMsgGCClientDisplayNotification) Reset()         { *m = CMsgGCClientDis
 func (m *CMsgGCClientDisplayNotification) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCClientDisplayNotification) ProtoMessage()    {}
 func (*CMsgGCClientDisplayNotification) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{35}
+	return fileDescriptor_19c1b3dff26b5496, []int{35}
 }
+
 func (m *CMsgGCClientDisplayNotification) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgGCClientDisplayNotification.Unmarshal(m, b)
 }
 func (m *CMsgGCClientDisplayNotification) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgGCClientDisplayNotification.Marshal(b, m, deterministic)
 }
-func (dst *CMsgGCClientDisplayNotification) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgGCClientDisplayNotification.Merge(dst, src)
+func (m *CMsgGCClientDisplayNotification) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGCClientDisplayNotification.Merge(m, src)
 }
 func (m *CMsgGCClientDisplayNotification) XXX_Size() int {
 	return xxx_messageInfo_CMsgGCClientDisplayNotification.Size(m)
@@ -2614,16 +2681,17 @@ func (m *CMsgGCShowItemsPickedUp) Reset()         { *m = CMsgGCShowItemsPickedUp
 func (m *CMsgGCShowItemsPickedUp) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCShowItemsPickedUp) ProtoMessage()    {}
 func (*CMsgGCShowItemsPickedUp) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{36}
+	return fileDescriptor_19c1b3dff26b5496, []int{36}
 }
+
 func (m *CMsgGCShowItemsPickedUp) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgGCShowItemsPickedUp.Unmarshal(m, b)
 }
 func (m *CMsgGCShowItemsPickedUp) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgGCShowItemsPickedUp.Marshal(b, m, deterministic)
 }
-func (dst *CMsgGCShowItemsPickedUp) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgGCShowItemsPickedUp.Merge(dst, src)
+func (m *CMsgGCShowItemsPickedUp) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGCShowItemsPickedUp.Merge(m, src)
 }
 func (m *CMsgGCShowItemsPickedUp) XXX_Size() int {
 	return xxx_messageInfo_CMsgGCShowItemsPickedUp.Size(m)
@@ -2655,16 +2723,17 @@ func (m *CMsgGCIncrementKillCountResponse) Reset()         { *m = CMsgGCIncremen
 func (m *CMsgGCIncrementKillCountResponse) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCIncrementKillCountResponse) ProtoMessage()    {}
 func (*CMsgGCIncrementKillCountResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{37}
+	return fileDescriptor_19c1b3dff26b5496, []int{37}
 }
+
 func (m *CMsgGCIncrementKillCountResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgGCIncrementKillCountResponse.Unmarshal(m, b)
 }
 func (m *CMsgGCIncrementKillCountResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgGCIncrementKillCountResponse.Marshal(b, m, deterministic)
 }
-func (dst *CMsgGCIncrementKillCountResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgGCIncrementKillCountResponse.Merge(dst, src)
+func (m *CMsgGCIncrementKillCountResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGCIncrementKillCountResponse.Merge(m, src)
 }
 func (m *CMsgGCIncrementKillCountResponse) XXX_Size() int {
 	return xxx_messageInfo_CMsgGCIncrementKillCountResponse.Size(m)
@@ -2721,16 +2790,17 @@ func (m *CSOEconItemDropRateBonus) Reset()         { *m = CSOEconItemDropRateBon
 func (m *CSOEconItemDropRateBonus) String() string { return proto.CompactTextString(m) }
 func (*CSOEconItemDropRateBonus) ProtoMessage()    {}
 func (*CSOEconItemDropRateBonus) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{38}
+	return fileDescriptor_19c1b3dff26b5496, []int{38}
 }
+
 func (m *CSOEconItemDropRateBonus) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSOEconItemDropRateBonus.Unmarshal(m, b)
 }
 func (m *CSOEconItemDropRateBonus) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSOEconItemDropRateBonus.Marshal(b, m, deterministic)
 }
-func (dst *CSOEconItemDropRateBonus) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSOEconItemDropRateBonus.Merge(dst, src)
+func (m *CSOEconItemDropRateBonus) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSOEconItemDropRateBonus.Merge(m, src)
 }
 func (m *CSOEconItemDropRateBonus) XXX_Size() int {
 	return xxx_messageInfo_CSOEconItemDropRateBonus.Size(m)
@@ -2811,16 +2881,17 @@ func (m *CSOEconItemLeagueViewPass) Reset()         { *m = CSOEconItemLeagueView
 func (m *CSOEconItemLeagueViewPass) String() string { return proto.CompactTextString(m) }
 func (*CSOEconItemLeagueViewPass) ProtoMessage()    {}
 func (*CSOEconItemLeagueViewPass) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{39}
+	return fileDescriptor_19c1b3dff26b5496, []int{39}
 }
+
 func (m *CSOEconItemLeagueViewPass) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSOEconItemLeagueViewPass.Unmarshal(m, b)
 }
 func (m *CSOEconItemLeagueViewPass) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSOEconItemLeagueViewPass.Marshal(b, m, deterministic)
 }
-func (dst *CSOEconItemLeagueViewPass) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSOEconItemLeagueViewPass.Merge(dst, src)
+func (m *CSOEconItemLeagueViewPass) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSOEconItemLeagueViewPass.Merge(m, src)
 }
 func (m *CSOEconItemLeagueViewPass) XXX_Size() int {
 	return xxx_messageInfo_CSOEconItemLeagueViewPass.Size(m)
@@ -2872,16 +2943,17 @@ func (m *CSOEconItemEventTicket) Reset()         { *m = CSOEconItemEventTicket{}
 func (m *CSOEconItemEventTicket) String() string { return proto.CompactTextString(m) }
 func (*CSOEconItemEventTicket) ProtoMessage()    {}
 func (*CSOEconItemEventTicket) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{40}
+	return fileDescriptor_19c1b3dff26b5496, []int{40}
 }
+
 func (m *CSOEconItemEventTicket) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSOEconItemEventTicket.Unmarshal(m, b)
 }
 func (m *CSOEconItemEventTicket) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSOEconItemEventTicket.Marshal(b, m, deterministic)
 }
-func (dst *CSOEconItemEventTicket) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSOEconItemEventTicket.Merge(dst, src)
+func (m *CSOEconItemEventTicket) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSOEconItemEventTicket.Merge(m, src)
 }
 func (m *CSOEconItemEventTicket) XXX_Size() int {
 	return xxx_messageInfo_CSOEconItemEventTicket.Size(m)
@@ -2931,16 +3003,17 @@ func (m *CSOEconItemTournamentPassport) Reset()         { *m = CSOEconItemTourna
 func (m *CSOEconItemTournamentPassport) String() string { return proto.CompactTextString(m) }
 func (*CSOEconItemTournamentPassport) ProtoMessage()    {}
 func (*CSOEconItemTournamentPassport) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{41}
+	return fileDescriptor_19c1b3dff26b5496, []int{41}
 }
+
 func (m *CSOEconItemTournamentPassport) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSOEconItemTournamentPassport.Unmarshal(m, b)
 }
 func (m *CSOEconItemTournamentPassport) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSOEconItemTournamentPassport.Marshal(b, m, deterministic)
 }
-func (dst *CSOEconItemTournamentPassport) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSOEconItemTournamentPassport.Merge(dst, src)
+func (m *CSOEconItemTournamentPassport) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSOEconItemTournamentPassport.Merge(m, src)
 }
 func (m *CSOEconItemTournamentPassport) XXX_Size() int {
 	return xxx_messageInfo_CSOEconItemTournamentPassport.Size(m)
@@ -3018,16 +3091,17 @@ func (m *CMsgGCStorePurchaseCancel) Reset()         { *m = CMsgGCStorePurchaseCa
 func (m *CMsgGCStorePurchaseCancel) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCStorePurchaseCancel) ProtoMessage()    {}
 func (*CMsgGCStorePurchaseCancel) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{42}
+	return fileDescriptor_19c1b3dff26b5496, []int{42}
 }
+
 func (m *CMsgGCStorePurchaseCancel) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgGCStorePurchaseCancel.Unmarshal(m, b)
 }
 func (m *CMsgGCStorePurchaseCancel) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgGCStorePurchaseCancel.Marshal(b, m, deterministic)
 }
-func (dst *CMsgGCStorePurchaseCancel) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgGCStorePurchaseCancel.Merge(dst, src)
+func (m *CMsgGCStorePurchaseCancel) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGCStorePurchaseCancel.Merge(m, src)
 }
 func (m *CMsgGCStorePurchaseCancel) XXX_Size() int {
 	return xxx_messageInfo_CMsgGCStorePurchaseCancel.Size(m)
@@ -3056,16 +3130,17 @@ func (m *CMsgGCStorePurchaseCancelResponse) Reset()         { *m = CMsgGCStorePu
 func (m *CMsgGCStorePurchaseCancelResponse) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCStorePurchaseCancelResponse) ProtoMessage()    {}
 func (*CMsgGCStorePurchaseCancelResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{43}
+	return fileDescriptor_19c1b3dff26b5496, []int{43}
 }
+
 func (m *CMsgGCStorePurchaseCancelResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgGCStorePurchaseCancelResponse.Unmarshal(m, b)
 }
 func (m *CMsgGCStorePurchaseCancelResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgGCStorePurchaseCancelResponse.Marshal(b, m, deterministic)
 }
-func (dst *CMsgGCStorePurchaseCancelResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgGCStorePurchaseCancelResponse.Merge(dst, src)
+func (m *CMsgGCStorePurchaseCancelResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGCStorePurchaseCancelResponse.Merge(m, src)
 }
 func (m *CMsgGCStorePurchaseCancelResponse) XXX_Size() int {
 	return xxx_messageInfo_CMsgGCStorePurchaseCancelResponse.Size(m)
@@ -3094,16 +3169,17 @@ func (m *CMsgGCStorePurchaseFinalize) Reset()         { *m = CMsgGCStorePurchase
 func (m *CMsgGCStorePurchaseFinalize) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCStorePurchaseFinalize) ProtoMessage()    {}
 func (*CMsgGCStorePurchaseFinalize) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{44}
+	return fileDescriptor_19c1b3dff26b5496, []int{44}
 }
+
 func (m *CMsgGCStorePurchaseFinalize) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgGCStorePurchaseFinalize.Unmarshal(m, b)
 }
 func (m *CMsgGCStorePurchaseFinalize) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgGCStorePurchaseFinalize.Marshal(b, m, deterministic)
 }
-func (dst *CMsgGCStorePurchaseFinalize) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgGCStorePurchaseFinalize.Merge(dst, src)
+func (m *CMsgGCStorePurchaseFinalize) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGCStorePurchaseFinalize.Merge(m, src)
 }
 func (m *CMsgGCStorePurchaseFinalize) XXX_Size() int {
 	return xxx_messageInfo_CMsgGCStorePurchaseFinalize.Size(m)
@@ -3133,16 +3209,17 @@ func (m *CMsgGCStorePurchaseFinalizeResponse) Reset()         { *m = CMsgGCStore
 func (m *CMsgGCStorePurchaseFinalizeResponse) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCStorePurchaseFinalizeResponse) ProtoMessage()    {}
 func (*CMsgGCStorePurchaseFinalizeResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{45}
+	return fileDescriptor_19c1b3dff26b5496, []int{45}
 }
+
 func (m *CMsgGCStorePurchaseFinalizeResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgGCStorePurchaseFinalizeResponse.Unmarshal(m, b)
 }
 func (m *CMsgGCStorePurchaseFinalizeResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgGCStorePurchaseFinalizeResponse.Marshal(b, m, deterministic)
 }
-func (dst *CMsgGCStorePurchaseFinalizeResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgGCStorePurchaseFinalizeResponse.Merge(dst, src)
+func (m *CMsgGCStorePurchaseFinalizeResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGCStorePurchaseFinalizeResponse.Merge(m, src)
 }
 func (m *CMsgGCStorePurchaseFinalizeResponse) XXX_Size() int {
 	return xxx_messageInfo_CMsgGCStorePurchaseFinalizeResponse.Size(m)
@@ -3178,16 +3255,17 @@ func (m *CMsgGCToGCBannedWordListUpdated) Reset()         { *m = CMsgGCToGCBanne
 func (m *CMsgGCToGCBannedWordListUpdated) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCToGCBannedWordListUpdated) ProtoMessage()    {}
 func (*CMsgGCToGCBannedWordListUpdated) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{46}
+	return fileDescriptor_19c1b3dff26b5496, []int{46}
 }
+
 func (m *CMsgGCToGCBannedWordListUpdated) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgGCToGCBannedWordListUpdated.Unmarshal(m, b)
 }
 func (m *CMsgGCToGCBannedWordListUpdated) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgGCToGCBannedWordListUpdated.Marshal(b, m, deterministic)
 }
-func (dst *CMsgGCToGCBannedWordListUpdated) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgGCToGCBannedWordListUpdated.Merge(dst, src)
+func (m *CMsgGCToGCBannedWordListUpdated) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGCToGCBannedWordListUpdated.Merge(m, src)
 }
 func (m *CMsgGCToGCBannedWordListUpdated) XXX_Size() int {
 	return xxx_messageInfo_CMsgGCToGCBannedWordListUpdated.Size(m)
@@ -3217,16 +3295,17 @@ func (m *CMsgGCToGCDirtySDOCache) Reset()         { *m = CMsgGCToGCDirtySDOCache
 func (m *CMsgGCToGCDirtySDOCache) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCToGCDirtySDOCache) ProtoMessage()    {}
 func (*CMsgGCToGCDirtySDOCache) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{47}
+	return fileDescriptor_19c1b3dff26b5496, []int{47}
 }
+
 func (m *CMsgGCToGCDirtySDOCache) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgGCToGCDirtySDOCache.Unmarshal(m, b)
 }
 func (m *CMsgGCToGCDirtySDOCache) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgGCToGCDirtySDOCache.Marshal(b, m, deterministic)
 }
-func (dst *CMsgGCToGCDirtySDOCache) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgGCToGCDirtySDOCache.Merge(dst, src)
+func (m *CMsgGCToGCDirtySDOCache) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGCToGCDirtySDOCache.Merge(m, src)
 }
 func (m *CMsgGCToGCDirtySDOCache) XXX_Size() int {
 	return xxx_messageInfo_CMsgGCToGCDirtySDOCache.Size(m)
@@ -3263,16 +3342,17 @@ func (m *CMsgGCToGCDirtyMultipleSDOCache) Reset()         { *m = CMsgGCToGCDirty
 func (m *CMsgGCToGCDirtyMultipleSDOCache) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCToGCDirtyMultipleSDOCache) ProtoMessage()    {}
 func (*CMsgGCToGCDirtyMultipleSDOCache) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{48}
+	return fileDescriptor_19c1b3dff26b5496, []int{48}
 }
+
 func (m *CMsgGCToGCDirtyMultipleSDOCache) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgGCToGCDirtyMultipleSDOCache.Unmarshal(m, b)
 }
 func (m *CMsgGCToGCDirtyMultipleSDOCache) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgGCToGCDirtyMultipleSDOCache.Marshal(b, m, deterministic)
 }
-func (dst *CMsgGCToGCDirtyMultipleSDOCache) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgGCToGCDirtyMultipleSDOCache.Merge(dst, src)
+func (m *CMsgGCToGCDirtyMultipleSDOCache) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGCToGCDirtyMultipleSDOCache.Merge(m, src)
 }
 func (m *CMsgGCToGCDirtyMultipleSDOCache) XXX_Size() int {
 	return xxx_messageInfo_CMsgGCToGCDirtyMultipleSDOCache.Size(m)
@@ -3309,16 +3389,17 @@ func (m *CMsgGCToGCApplyLocalizationDiff) Reset()         { *m = CMsgGCToGCApply
 func (m *CMsgGCToGCApplyLocalizationDiff) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCToGCApplyLocalizationDiff) ProtoMessage()    {}
 func (*CMsgGCToGCApplyLocalizationDiff) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{49}
+	return fileDescriptor_19c1b3dff26b5496, []int{49}
 }
+
 func (m *CMsgGCToGCApplyLocalizationDiff) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgGCToGCApplyLocalizationDiff.Unmarshal(m, b)
 }
 func (m *CMsgGCToGCApplyLocalizationDiff) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgGCToGCApplyLocalizationDiff.Marshal(b, m, deterministic)
 }
-func (dst *CMsgGCToGCApplyLocalizationDiff) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgGCToGCApplyLocalizationDiff.Merge(dst, src)
+func (m *CMsgGCToGCApplyLocalizationDiff) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGCToGCApplyLocalizationDiff.Merge(m, src)
 }
 func (m *CMsgGCToGCApplyLocalizationDiff) XXX_Size() int {
 	return xxx_messageInfo_CMsgGCToGCApplyLocalizationDiff.Size(m)
@@ -3356,16 +3437,17 @@ func (m *CMsgGCToGCApplyLocalizationDiffResponse) Reset() {
 func (m *CMsgGCToGCApplyLocalizationDiffResponse) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCToGCApplyLocalizationDiffResponse) ProtoMessage()    {}
 func (*CMsgGCToGCApplyLocalizationDiffResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{50}
+	return fileDescriptor_19c1b3dff26b5496, []int{50}
 }
+
 func (m *CMsgGCToGCApplyLocalizationDiffResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgGCToGCApplyLocalizationDiffResponse.Unmarshal(m, b)
 }
 func (m *CMsgGCToGCApplyLocalizationDiffResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgGCToGCApplyLocalizationDiffResponse.Marshal(b, m, deterministic)
 }
-func (dst *CMsgGCToGCApplyLocalizationDiffResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgGCToGCApplyLocalizationDiffResponse.Merge(dst, src)
+func (m *CMsgGCToGCApplyLocalizationDiffResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGCToGCApplyLocalizationDiffResponse.Merge(m, src)
 }
 func (m *CMsgGCToGCApplyLocalizationDiffResponse) XXX_Size() int {
 	return xxx_messageInfo_CMsgGCToGCApplyLocalizationDiffResponse.Size(m)
@@ -3395,16 +3477,17 @@ func (m *CMsgGCCollectItem) Reset()         { *m = CMsgGCCollectItem{} }
 func (m *CMsgGCCollectItem) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCCollectItem) ProtoMessage()    {}
 func (*CMsgGCCollectItem) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{51}
+	return fileDescriptor_19c1b3dff26b5496, []int{51}
 }
+
 func (m *CMsgGCCollectItem) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgGCCollectItem.Unmarshal(m, b)
 }
 func (m *CMsgGCCollectItem) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgGCCollectItem.Marshal(b, m, deterministic)
 }
-func (dst *CMsgGCCollectItem) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgGCCollectItem.Merge(dst, src)
+func (m *CMsgGCCollectItem) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGCCollectItem.Merge(m, src)
 }
 func (m *CMsgGCCollectItem) XXX_Size() int {
 	return xxx_messageInfo_CMsgGCCollectItem.Size(m)
@@ -3439,16 +3522,17 @@ func (m *CMsgSDONoMemcached) Reset()         { *m = CMsgSDONoMemcached{} }
 func (m *CMsgSDONoMemcached) String() string { return proto.CompactTextString(m) }
 func (*CMsgSDONoMemcached) ProtoMessage()    {}
 func (*CMsgSDONoMemcached) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{52}
+	return fileDescriptor_19c1b3dff26b5496, []int{52}
 }
+
 func (m *CMsgSDONoMemcached) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgSDONoMemcached.Unmarshal(m, b)
 }
 func (m *CMsgSDONoMemcached) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgSDONoMemcached.Marshal(b, m, deterministic)
 }
-func (dst *CMsgSDONoMemcached) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgSDONoMemcached.Merge(dst, src)
+func (m *CMsgSDONoMemcached) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgSDONoMemcached.Merge(m, src)
 }
 func (m *CMsgSDONoMemcached) XXX_Size() int {
 	return xxx_messageInfo_CMsgSDONoMemcached.Size(m)
@@ -3470,16 +3554,17 @@ func (m *CMsgGCToGCUpdateSQLKeyValue) Reset()         { *m = CMsgGCToGCUpdateSQL
 func (m *CMsgGCToGCUpdateSQLKeyValue) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCToGCUpdateSQLKeyValue) ProtoMessage()    {}
 func (*CMsgGCToGCUpdateSQLKeyValue) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{53}
+	return fileDescriptor_19c1b3dff26b5496, []int{53}
 }
+
 func (m *CMsgGCToGCUpdateSQLKeyValue) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgGCToGCUpdateSQLKeyValue.Unmarshal(m, b)
 }
 func (m *CMsgGCToGCUpdateSQLKeyValue) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgGCToGCUpdateSQLKeyValue.Marshal(b, m, deterministic)
 }
-func (dst *CMsgGCToGCUpdateSQLKeyValue) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgGCToGCUpdateSQLKeyValue.Merge(dst, src)
+func (m *CMsgGCToGCUpdateSQLKeyValue) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGCToGCUpdateSQLKeyValue.Merge(m, src)
 }
 func (m *CMsgGCToGCUpdateSQLKeyValue) XXX_Size() int {
 	return xxx_messageInfo_CMsgGCToGCUpdateSQLKeyValue.Size(m)
@@ -3508,16 +3593,17 @@ func (m *CMsgGCServerVersionUpdated) Reset()         { *m = CMsgGCServerVersionU
 func (m *CMsgGCServerVersionUpdated) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCServerVersionUpdated) ProtoMessage()    {}
 func (*CMsgGCServerVersionUpdated) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{54}
+	return fileDescriptor_19c1b3dff26b5496, []int{54}
 }
+
 func (m *CMsgGCServerVersionUpdated) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgGCServerVersionUpdated.Unmarshal(m, b)
 }
 func (m *CMsgGCServerVersionUpdated) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgGCServerVersionUpdated.Marshal(b, m, deterministic)
 }
-func (dst *CMsgGCServerVersionUpdated) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgGCServerVersionUpdated.Merge(dst, src)
+func (m *CMsgGCServerVersionUpdated) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGCServerVersionUpdated.Merge(m, src)
 }
 func (m *CMsgGCServerVersionUpdated) XXX_Size() int {
 	return xxx_messageInfo_CMsgGCServerVersionUpdated.Size(m)
@@ -3546,16 +3632,17 @@ func (m *CMsgGCClientVersionUpdated) Reset()         { *m = CMsgGCClientVersionU
 func (m *CMsgGCClientVersionUpdated) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCClientVersionUpdated) ProtoMessage()    {}
 func (*CMsgGCClientVersionUpdated) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{55}
+	return fileDescriptor_19c1b3dff26b5496, []int{55}
 }
+
 func (m *CMsgGCClientVersionUpdated) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgGCClientVersionUpdated.Unmarshal(m, b)
 }
 func (m *CMsgGCClientVersionUpdated) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgGCClientVersionUpdated.Marshal(b, m, deterministic)
 }
-func (dst *CMsgGCClientVersionUpdated) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgGCClientVersionUpdated.Merge(dst, src)
+func (m *CMsgGCClientVersionUpdated) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGCClientVersionUpdated.Merge(m, src)
 }
 func (m *CMsgGCClientVersionUpdated) XXX_Size() int {
 	return xxx_messageInfo_CMsgGCClientVersionUpdated.Size(m)
@@ -3583,16 +3670,17 @@ func (m *CMsgGCToGCWebAPIAccountChanged) Reset()         { *m = CMsgGCToGCWebAPI
 func (m *CMsgGCToGCWebAPIAccountChanged) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCToGCWebAPIAccountChanged) ProtoMessage()    {}
 func (*CMsgGCToGCWebAPIAccountChanged) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{56}
+	return fileDescriptor_19c1b3dff26b5496, []int{56}
 }
+
 func (m *CMsgGCToGCWebAPIAccountChanged) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgGCToGCWebAPIAccountChanged.Unmarshal(m, b)
 }
 func (m *CMsgGCToGCWebAPIAccountChanged) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgGCToGCWebAPIAccountChanged.Marshal(b, m, deterministic)
 }
-func (dst *CMsgGCToGCWebAPIAccountChanged) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgGCToGCWebAPIAccountChanged.Merge(dst, src)
+func (m *CMsgGCToGCWebAPIAccountChanged) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGCToGCWebAPIAccountChanged.Merge(m, src)
 }
 func (m *CMsgGCToGCWebAPIAccountChanged) XXX_Size() int {
 	return xxx_messageInfo_CMsgGCToGCWebAPIAccountChanged.Size(m)
@@ -3615,16 +3703,17 @@ func (m *CMsgRecipeComponent) Reset()         { *m = CMsgRecipeComponent{} }
 func (m *CMsgRecipeComponent) String() string { return proto.CompactTextString(m) }
 func (*CMsgRecipeComponent) ProtoMessage()    {}
 func (*CMsgRecipeComponent) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{57}
+	return fileDescriptor_19c1b3dff26b5496, []int{57}
 }
+
 func (m *CMsgRecipeComponent) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgRecipeComponent.Unmarshal(m, b)
 }
 func (m *CMsgRecipeComponent) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgRecipeComponent.Marshal(b, m, deterministic)
 }
-func (dst *CMsgRecipeComponent) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgRecipeComponent.Merge(dst, src)
+func (m *CMsgRecipeComponent) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgRecipeComponent.Merge(m, src)
 }
 func (m *CMsgRecipeComponent) XXX_Size() int {
 	return xxx_messageInfo_CMsgRecipeComponent.Size(m)
@@ -3661,16 +3750,17 @@ func (m *CMsgFulfillDynamicRecipeComponent) Reset()         { *m = CMsgFulfillDy
 func (m *CMsgFulfillDynamicRecipeComponent) String() string { return proto.CompactTextString(m) }
 func (*CMsgFulfillDynamicRecipeComponent) ProtoMessage()    {}
 func (*CMsgFulfillDynamicRecipeComponent) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{58}
+	return fileDescriptor_19c1b3dff26b5496, []int{58}
 }
+
 func (m *CMsgFulfillDynamicRecipeComponent) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgFulfillDynamicRecipeComponent.Unmarshal(m, b)
 }
 func (m *CMsgFulfillDynamicRecipeComponent) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgFulfillDynamicRecipeComponent.Marshal(b, m, deterministic)
 }
-func (dst *CMsgFulfillDynamicRecipeComponent) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgFulfillDynamicRecipeComponent.Merge(dst, src)
+func (m *CMsgFulfillDynamicRecipeComponent) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgFulfillDynamicRecipeComponent.Merge(m, src)
 }
 func (m *CMsgFulfillDynamicRecipeComponent) XXX_Size() int {
 	return xxx_messageInfo_CMsgFulfillDynamicRecipeComponent.Size(m)
@@ -3706,16 +3796,17 @@ func (m *CMsgGCClientMarketDataRequest) Reset()         { *m = CMsgGCClientMarke
 func (m *CMsgGCClientMarketDataRequest) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCClientMarketDataRequest) ProtoMessage()    {}
 func (*CMsgGCClientMarketDataRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{59}
+	return fileDescriptor_19c1b3dff26b5496, []int{59}
 }
+
 func (m *CMsgGCClientMarketDataRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgGCClientMarketDataRequest.Unmarshal(m, b)
 }
 func (m *CMsgGCClientMarketDataRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgGCClientMarketDataRequest.Marshal(b, m, deterministic)
 }
-func (dst *CMsgGCClientMarketDataRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgGCClientMarketDataRequest.Merge(dst, src)
+func (m *CMsgGCClientMarketDataRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGCClientMarketDataRequest.Merge(m, src)
 }
 func (m *CMsgGCClientMarketDataRequest) XXX_Size() int {
 	return xxx_messageInfo_CMsgGCClientMarketDataRequest.Size(m)
@@ -3747,16 +3838,17 @@ func (m *CMsgGCClientMarketDataEntry) Reset()         { *m = CMsgGCClientMarketD
 func (m *CMsgGCClientMarketDataEntry) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCClientMarketDataEntry) ProtoMessage()    {}
 func (*CMsgGCClientMarketDataEntry) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{60}
+	return fileDescriptor_19c1b3dff26b5496, []int{60}
 }
+
 func (m *CMsgGCClientMarketDataEntry) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgGCClientMarketDataEntry.Unmarshal(m, b)
 }
 func (m *CMsgGCClientMarketDataEntry) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgGCClientMarketDataEntry.Marshal(b, m, deterministic)
 }
-func (dst *CMsgGCClientMarketDataEntry) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgGCClientMarketDataEntry.Merge(dst, src)
+func (m *CMsgGCClientMarketDataEntry) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGCClientMarketDataEntry.Merge(m, src)
 }
 func (m *CMsgGCClientMarketDataEntry) XXX_Size() int {
 	return xxx_messageInfo_CMsgGCClientMarketDataEntry.Size(m)
@@ -3806,16 +3898,17 @@ func (m *CMsgGCClientMarketData) Reset()         { *m = CMsgGCClientMarketData{}
 func (m *CMsgGCClientMarketData) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCClientMarketData) ProtoMessage()    {}
 func (*CMsgGCClientMarketData) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{61}
+	return fileDescriptor_19c1b3dff26b5496, []int{61}
 }
+
 func (m *CMsgGCClientMarketData) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgGCClientMarketData.Unmarshal(m, b)
 }
 func (m *CMsgGCClientMarketData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgGCClientMarketData.Marshal(b, m, deterministic)
 }
-func (dst *CMsgGCClientMarketData) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgGCClientMarketData.Merge(dst, src)
+func (m *CMsgGCClientMarketData) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGCClientMarketData.Merge(m, src)
 }
 func (m *CMsgGCClientMarketData) XXX_Size() int {
 	return xxx_messageInfo_CMsgGCClientMarketData.Size(m)
@@ -3846,16 +3939,17 @@ func (m *CMsgExtractGems) Reset()         { *m = CMsgExtractGems{} }
 func (m *CMsgExtractGems) String() string { return proto.CompactTextString(m) }
 func (*CMsgExtractGems) ProtoMessage()    {}
 func (*CMsgExtractGems) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{62}
+	return fileDescriptor_19c1b3dff26b5496, []int{62}
 }
+
 func (m *CMsgExtractGems) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgExtractGems.Unmarshal(m, b)
 }
 func (m *CMsgExtractGems) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgExtractGems.Marshal(b, m, deterministic)
 }
-func (dst *CMsgExtractGems) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgExtractGems.Merge(dst, src)
+func (m *CMsgExtractGems) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgExtractGems.Merge(m, src)
 }
 func (m *CMsgExtractGems) XXX_Size() int {
 	return xxx_messageInfo_CMsgExtractGems.Size(m)
@@ -3901,16 +3995,17 @@ func (m *CMsgExtractGemsResponse) Reset()         { *m = CMsgExtractGemsResponse
 func (m *CMsgExtractGemsResponse) String() string { return proto.CompactTextString(m) }
 func (*CMsgExtractGemsResponse) ProtoMessage()    {}
 func (*CMsgExtractGemsResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{63}
+	return fileDescriptor_19c1b3dff26b5496, []int{63}
 }
+
 func (m *CMsgExtractGemsResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgExtractGemsResponse.Unmarshal(m, b)
 }
 func (m *CMsgExtractGemsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgExtractGemsResponse.Marshal(b, m, deterministic)
 }
-func (dst *CMsgExtractGemsResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgExtractGemsResponse.Merge(dst, src)
+func (m *CMsgExtractGemsResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgExtractGemsResponse.Merge(m, src)
 }
 func (m *CMsgExtractGemsResponse) XXX_Size() int {
 	return xxx_messageInfo_CMsgExtractGemsResponse.Size(m)
@@ -3950,16 +4045,17 @@ func (m *CMsgAddSocket) Reset()         { *m = CMsgAddSocket{} }
 func (m *CMsgAddSocket) String() string { return proto.CompactTextString(m) }
 func (*CMsgAddSocket) ProtoMessage()    {}
 func (*CMsgAddSocket) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{64}
+	return fileDescriptor_19c1b3dff26b5496, []int{64}
 }
+
 func (m *CMsgAddSocket) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgAddSocket.Unmarshal(m, b)
 }
 func (m *CMsgAddSocket) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgAddSocket.Marshal(b, m, deterministic)
 }
-func (dst *CMsgAddSocket) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgAddSocket.Merge(dst, src)
+func (m *CMsgAddSocket) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgAddSocket.Merge(m, src)
 }
 func (m *CMsgAddSocket) XXX_Size() int {
 	return xxx_messageInfo_CMsgAddSocket.Size(m)
@@ -4004,16 +4100,17 @@ func (m *CMsgAddSocketResponse) Reset()         { *m = CMsgAddSocketResponse{} }
 func (m *CMsgAddSocketResponse) String() string { return proto.CompactTextString(m) }
 func (*CMsgAddSocketResponse) ProtoMessage()    {}
 func (*CMsgAddSocketResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{65}
+	return fileDescriptor_19c1b3dff26b5496, []int{65}
 }
+
 func (m *CMsgAddSocketResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgAddSocketResponse.Unmarshal(m, b)
 }
 func (m *CMsgAddSocketResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgAddSocketResponse.Marshal(b, m, deterministic)
 }
-func (dst *CMsgAddSocketResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgAddSocketResponse.Merge(dst, src)
+func (m *CMsgAddSocketResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgAddSocketResponse.Merge(m, src)
 }
 func (m *CMsgAddSocketResponse) XXX_Size() int {
 	return xxx_messageInfo_CMsgAddSocketResponse.Size(m)
@@ -4059,16 +4156,17 @@ func (m *CMsgAddItemToSocketData) Reset()         { *m = CMsgAddItemToSocketData
 func (m *CMsgAddItemToSocketData) String() string { return proto.CompactTextString(m) }
 func (*CMsgAddItemToSocketData) ProtoMessage()    {}
 func (*CMsgAddItemToSocketData) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{66}
+	return fileDescriptor_19c1b3dff26b5496, []int{66}
 }
+
 func (m *CMsgAddItemToSocketData) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgAddItemToSocketData.Unmarshal(m, b)
 }
 func (m *CMsgAddItemToSocketData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgAddItemToSocketData.Marshal(b, m, deterministic)
 }
-func (dst *CMsgAddItemToSocketData) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgAddItemToSocketData.Merge(dst, src)
+func (m *CMsgAddItemToSocketData) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgAddItemToSocketData.Merge(m, src)
 }
 func (m *CMsgAddItemToSocketData) XXX_Size() int {
 	return xxx_messageInfo_CMsgAddItemToSocketData.Size(m)
@@ -4105,16 +4203,17 @@ func (m *CMsgAddItemToSocket) Reset()         { *m = CMsgAddItemToSocket{} }
 func (m *CMsgAddItemToSocket) String() string { return proto.CompactTextString(m) }
 func (*CMsgAddItemToSocket) ProtoMessage()    {}
 func (*CMsgAddItemToSocket) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{67}
+	return fileDescriptor_19c1b3dff26b5496, []int{67}
 }
+
 func (m *CMsgAddItemToSocket) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgAddItemToSocket.Unmarshal(m, b)
 }
 func (m *CMsgAddItemToSocket) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgAddItemToSocket.Marshal(b, m, deterministic)
 }
-func (dst *CMsgAddItemToSocket) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgAddItemToSocket.Merge(dst, src)
+func (m *CMsgAddItemToSocket) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgAddItemToSocket.Merge(m, src)
 }
 func (m *CMsgAddItemToSocket) XXX_Size() int {
 	return xxx_messageInfo_CMsgAddItemToSocket.Size(m)
@@ -4152,16 +4251,17 @@ func (m *CMsgAddItemToSocketResponse) Reset()         { *m = CMsgAddItemToSocket
 func (m *CMsgAddItemToSocketResponse) String() string { return proto.CompactTextString(m) }
 func (*CMsgAddItemToSocketResponse) ProtoMessage()    {}
 func (*CMsgAddItemToSocketResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{68}
+	return fileDescriptor_19c1b3dff26b5496, []int{68}
 }
+
 func (m *CMsgAddItemToSocketResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgAddItemToSocketResponse.Unmarshal(m, b)
 }
 func (m *CMsgAddItemToSocketResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgAddItemToSocketResponse.Marshal(b, m, deterministic)
 }
-func (dst *CMsgAddItemToSocketResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgAddItemToSocketResponse.Merge(dst, src)
+func (m *CMsgAddItemToSocketResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgAddItemToSocketResponse.Merge(m, src)
 }
 func (m *CMsgAddItemToSocketResponse) XXX_Size() int {
 	return xxx_messageInfo_CMsgAddItemToSocketResponse.Size(m)
@@ -4207,16 +4307,17 @@ func (m *CMsgResetStrangeGemCount) Reset()         { *m = CMsgResetStrangeGemCou
 func (m *CMsgResetStrangeGemCount) String() string { return proto.CompactTextString(m) }
 func (*CMsgResetStrangeGemCount) ProtoMessage()    {}
 func (*CMsgResetStrangeGemCount) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{69}
+	return fileDescriptor_19c1b3dff26b5496, []int{69}
 }
+
 func (m *CMsgResetStrangeGemCount) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgResetStrangeGemCount.Unmarshal(m, b)
 }
 func (m *CMsgResetStrangeGemCount) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgResetStrangeGemCount.Marshal(b, m, deterministic)
 }
-func (dst *CMsgResetStrangeGemCount) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgResetStrangeGemCount.Merge(dst, src)
+func (m *CMsgResetStrangeGemCount) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgResetStrangeGemCount.Merge(m, src)
 }
 func (m *CMsgResetStrangeGemCount) XXX_Size() int {
 	return xxx_messageInfo_CMsgResetStrangeGemCount.Size(m)
@@ -4252,16 +4353,17 @@ func (m *CMsgResetStrangeGemCountResponse) Reset()         { *m = CMsgResetStran
 func (m *CMsgResetStrangeGemCountResponse) String() string { return proto.CompactTextString(m) }
 func (*CMsgResetStrangeGemCountResponse) ProtoMessage()    {}
 func (*CMsgResetStrangeGemCountResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{70}
+	return fileDescriptor_19c1b3dff26b5496, []int{70}
 }
+
 func (m *CMsgResetStrangeGemCountResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgResetStrangeGemCountResponse.Unmarshal(m, b)
 }
 func (m *CMsgResetStrangeGemCountResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgResetStrangeGemCountResponse.Marshal(b, m, deterministic)
 }
-func (dst *CMsgResetStrangeGemCountResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgResetStrangeGemCountResponse.Merge(dst, src)
+func (m *CMsgResetStrangeGemCountResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgResetStrangeGemCountResponse.Merge(m, src)
 }
 func (m *CMsgResetStrangeGemCountResponse) XXX_Size() int {
 	return xxx_messageInfo_CMsgResetStrangeGemCountResponse.Size(m)
@@ -4294,16 +4396,17 @@ func (m *CMsgGCToClientPollFileRequest) Reset()         { *m = CMsgGCToClientPol
 func (m *CMsgGCToClientPollFileRequest) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCToClientPollFileRequest) ProtoMessage()    {}
 func (*CMsgGCToClientPollFileRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{71}
+	return fileDescriptor_19c1b3dff26b5496, []int{71}
 }
+
 func (m *CMsgGCToClientPollFileRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgGCToClientPollFileRequest.Unmarshal(m, b)
 }
 func (m *CMsgGCToClientPollFileRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgGCToClientPollFileRequest.Marshal(b, m, deterministic)
 }
-func (dst *CMsgGCToClientPollFileRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgGCToClientPollFileRequest.Merge(dst, src)
+func (m *CMsgGCToClientPollFileRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGCToClientPollFileRequest.Merge(m, src)
 }
 func (m *CMsgGCToClientPollFileRequest) XXX_Size() int {
 	return xxx_messageInfo_CMsgGCToClientPollFileRequest.Size(m)
@@ -4347,16 +4450,17 @@ func (m *CMsgGCToClientPollFileResponse) Reset()         { *m = CMsgGCToClientPo
 func (m *CMsgGCToClientPollFileResponse) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCToClientPollFileResponse) ProtoMessage()    {}
 func (*CMsgGCToClientPollFileResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{72}
+	return fileDescriptor_19c1b3dff26b5496, []int{72}
 }
+
 func (m *CMsgGCToClientPollFileResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgGCToClientPollFileResponse.Unmarshal(m, b)
 }
 func (m *CMsgGCToClientPollFileResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgGCToClientPollFileResponse.Marshal(b, m, deterministic)
 }
-func (dst *CMsgGCToClientPollFileResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgGCToClientPollFileResponse.Merge(dst, src)
+func (m *CMsgGCToClientPollFileResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGCToClientPollFileResponse.Merge(m, src)
 }
 func (m *CMsgGCToClientPollFileResponse) XXX_Size() int {
 	return xxx_messageInfo_CMsgGCToClientPollFileResponse.Size(m)
@@ -4393,16 +4497,17 @@ func (m *CMsgGCToGCPerformManualOp) Reset()         { *m = CMsgGCToGCPerformManu
 func (m *CMsgGCToGCPerformManualOp) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCToGCPerformManualOp) ProtoMessage()    {}
 func (*CMsgGCToGCPerformManualOp) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{73}
+	return fileDescriptor_19c1b3dff26b5496, []int{73}
 }
+
 func (m *CMsgGCToGCPerformManualOp) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgGCToGCPerformManualOp.Unmarshal(m, b)
 }
 func (m *CMsgGCToGCPerformManualOp) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgGCToGCPerformManualOp.Marshal(b, m, deterministic)
 }
-func (dst *CMsgGCToGCPerformManualOp) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgGCToGCPerformManualOp.Merge(dst, src)
+func (m *CMsgGCToGCPerformManualOp) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGCToGCPerformManualOp.Merge(m, src)
 }
 func (m *CMsgGCToGCPerformManualOp) XXX_Size() int {
 	return xxx_messageInfo_CMsgGCToGCPerformManualOp.Size(m)
@@ -4439,16 +4544,17 @@ func (m *CMsgGCToGCPerformManualOpCompleted) Reset()         { *m = CMsgGCToGCPe
 func (m *CMsgGCToGCPerformManualOpCompleted) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCToGCPerformManualOpCompleted) ProtoMessage()    {}
 func (*CMsgGCToGCPerformManualOpCompleted) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{74}
+	return fileDescriptor_19c1b3dff26b5496, []int{74}
 }
+
 func (m *CMsgGCToGCPerformManualOpCompleted) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgGCToGCPerformManualOpCompleted.Unmarshal(m, b)
 }
 func (m *CMsgGCToGCPerformManualOpCompleted) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgGCToGCPerformManualOpCompleted.Marshal(b, m, deterministic)
 }
-func (dst *CMsgGCToGCPerformManualOpCompleted) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgGCToGCPerformManualOpCompleted.Merge(dst, src)
+func (m *CMsgGCToGCPerformManualOpCompleted) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGCToGCPerformManualOpCompleted.Merge(m, src)
 }
 func (m *CMsgGCToGCPerformManualOpCompleted) XXX_Size() int {
 	return xxx_messageInfo_CMsgGCToGCPerformManualOpCompleted.Size(m)
@@ -4483,16 +4589,17 @@ func (m *CMsgGCToGCReloadServerRegionSettings) Reset()         { *m = CMsgGCToGC
 func (m *CMsgGCToGCReloadServerRegionSettings) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCToGCReloadServerRegionSettings) ProtoMessage()    {}
 func (*CMsgGCToGCReloadServerRegionSettings) Descriptor() ([]byte, []int) {
-	return fileDescriptor_base_gcmessages_28f9d4e7fa9d4266, []int{75}
+	return fileDescriptor_19c1b3dff26b5496, []int{75}
 }
+
 func (m *CMsgGCToGCReloadServerRegionSettings) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgGCToGCReloadServerRegionSettings.Unmarshal(m, b)
 }
 func (m *CMsgGCToGCReloadServerRegionSettings) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgGCToGCReloadServerRegionSettings.Marshal(b, m, deterministic)
 }
-func (dst *CMsgGCToGCReloadServerRegionSettings) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgGCToGCReloadServerRegionSettings.Merge(dst, src)
+func (m *CMsgGCToGCReloadServerRegionSettings) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGCToGCReloadServerRegionSettings.Merge(m, src)
 }
 func (m *CMsgGCToGCReloadServerRegionSettings) XXX_Size() int {
 	return xxx_messageInfo_CMsgGCToGCReloadServerRegionSettings.Size(m)
@@ -4504,6 +4611,13 @@ func (m *CMsgGCToGCReloadServerRegionSettings) XXX_DiscardUnknown() {
 var xxx_messageInfo_CMsgGCToGCReloadServerRegionSettings proto.InternalMessageInfo
 
 func init() {
+	proto.RegisterEnum("dota.EGCBaseMsg", EGCBaseMsg_name, EGCBaseMsg_value)
+	proto.RegisterEnum("dota.EGCBaseProtoObjectTypes", EGCBaseProtoObjectTypes_name, EGCBaseProtoObjectTypes_value)
+	proto.RegisterEnum("dota.ECustomGameInstallStatus", ECustomGameInstallStatus_name, ECustomGameInstallStatus_value)
+	proto.RegisterEnum("dota.CMsgExtractGemsResponse_EExtractGems", CMsgExtractGemsResponse_EExtractGems_name, CMsgExtractGemsResponse_EExtractGems_value)
+	proto.RegisterEnum("dota.CMsgAddSocketResponse_EAddSocket", CMsgAddSocketResponse_EAddSocket_name, CMsgAddSocketResponse_EAddSocket_value)
+	proto.RegisterEnum("dota.CMsgAddItemToSocketResponse_EAddGem", CMsgAddItemToSocketResponse_EAddGem_name, CMsgAddItemToSocketResponse_EAddGem_value)
+	proto.RegisterEnum("dota.CMsgResetStrangeGemCountResponse_EResetGem", CMsgResetStrangeGemCountResponse_EResetGem_name, CMsgResetStrangeGemCountResponse_EResetGem_value)
 	proto.RegisterType((*CGCStorePurchaseInit_LineItem)(nil), "dota.CGCStorePurchaseInit_LineItem")
 	proto.RegisterType((*CMsgGCStorePurchaseInit)(nil), "dota.CMsgGCStorePurchaseInit")
 	proto.RegisterType((*CMsgGCStorePurchaseInitResponse)(nil), "dota.CMsgGCStorePurchaseInitResponse")
@@ -4581,20 +4695,11 @@ func init() {
 	proto.RegisterType((*CMsgGCToGCPerformManualOp)(nil), "dota.CMsgGCToGCPerformManualOp")
 	proto.RegisterType((*CMsgGCToGCPerformManualOpCompleted)(nil), "dota.CMsgGCToGCPerformManualOpCompleted")
 	proto.RegisterType((*CMsgGCToGCReloadServerRegionSettings)(nil), "dota.CMsgGCToGCReloadServerRegionSettings")
-	proto.RegisterEnum("dota.EGCBaseMsg", EGCBaseMsg_name, EGCBaseMsg_value)
-	proto.RegisterEnum("dota.EGCBaseProtoObjectTypes", EGCBaseProtoObjectTypes_name, EGCBaseProtoObjectTypes_value)
-	proto.RegisterEnum("dota.ECustomGameInstallStatus", ECustomGameInstallStatus_name, ECustomGameInstallStatus_value)
-	proto.RegisterEnum("dota.CMsgExtractGemsResponse_EExtractGems", CMsgExtractGemsResponse_EExtractGems_name, CMsgExtractGemsResponse_EExtractGems_value)
-	proto.RegisterEnum("dota.CMsgAddSocketResponse_EAddSocket", CMsgAddSocketResponse_EAddSocket_name, CMsgAddSocketResponse_EAddSocket_value)
-	proto.RegisterEnum("dota.CMsgAddItemToSocketResponse_EAddGem", CMsgAddItemToSocketResponse_EAddGem_name, CMsgAddItemToSocketResponse_EAddGem_value)
-	proto.RegisterEnum("dota.CMsgResetStrangeGemCountResponse_EResetGem", CMsgResetStrangeGemCountResponse_EResetGem_name, CMsgResetStrangeGemCountResponse_EResetGem_value)
 }
 
-func init() {
-	proto.RegisterFile("base_gcmessages.proto", fileDescriptor_base_gcmessages_28f9d4e7fa9d4266)
-}
+func init() { proto.RegisterFile("base_gcmessages.proto", fileDescriptor_19c1b3dff26b5496) }
 
-var fileDescriptor_base_gcmessages_28f9d4e7fa9d4266 = []byte{
+var fileDescriptor_19c1b3dff26b5496 = []byte{
 	// 4768 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x5a, 0xcd, 0x73, 0x1c, 0x49,
 	0x56, 0x9f, 0xd6, 0x57, 0x77, 0x3f, 0xa9, 0xe5, 0x52, 0x4a, 0xb2, 0x5a, 0xf6, 0xca, 0x96, 0xab,

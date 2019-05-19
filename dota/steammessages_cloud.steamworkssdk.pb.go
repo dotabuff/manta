@@ -3,9 +3,11 @@
 
 package dota
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type CCloud_GetUploadServerInfo_Request struct {
 	Appid                *uint32  `protobuf:"varint,1,opt,name=appid" json:"appid,omitempty"`
@@ -29,16 +31,17 @@ func (m *CCloud_GetUploadServerInfo_Request) Reset()         { *m = CCloud_GetUp
 func (m *CCloud_GetUploadServerInfo_Request) String() string { return proto.CompactTextString(m) }
 func (*CCloud_GetUploadServerInfo_Request) ProtoMessage()    {}
 func (*CCloud_GetUploadServerInfo_Request) Descriptor() ([]byte, []int) {
-	return fileDescriptor_steammessages_cloud_steamworkssdk_d7e08337cd0a63c3, []int{0}
+	return fileDescriptor_d02d9a2eb5e3bafa, []int{0}
 }
+
 func (m *CCloud_GetUploadServerInfo_Request) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CCloud_GetUploadServerInfo_Request.Unmarshal(m, b)
 }
 func (m *CCloud_GetUploadServerInfo_Request) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CCloud_GetUploadServerInfo_Request.Marshal(b, m, deterministic)
 }
-func (dst *CCloud_GetUploadServerInfo_Request) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CCloud_GetUploadServerInfo_Request.Merge(dst, src)
+func (m *CCloud_GetUploadServerInfo_Request) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCloud_GetUploadServerInfo_Request.Merge(m, src)
 }
 func (m *CCloud_GetUploadServerInfo_Request) XXX_Size() int {
 	return xxx_messageInfo_CCloud_GetUploadServerInfo_Request.Size(m)
@@ -67,16 +70,17 @@ func (m *CCloud_GetUploadServerInfo_Response) Reset()         { *m = CCloud_GetU
 func (m *CCloud_GetUploadServerInfo_Response) String() string { return proto.CompactTextString(m) }
 func (*CCloud_GetUploadServerInfo_Response) ProtoMessage()    {}
 func (*CCloud_GetUploadServerInfo_Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor_steammessages_cloud_steamworkssdk_d7e08337cd0a63c3, []int{1}
+	return fileDescriptor_d02d9a2eb5e3bafa, []int{1}
 }
+
 func (m *CCloud_GetUploadServerInfo_Response) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CCloud_GetUploadServerInfo_Response.Unmarshal(m, b)
 }
 func (m *CCloud_GetUploadServerInfo_Response) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CCloud_GetUploadServerInfo_Response.Marshal(b, m, deterministic)
 }
-func (dst *CCloud_GetUploadServerInfo_Response) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CCloud_GetUploadServerInfo_Response.Merge(dst, src)
+func (m *CCloud_GetUploadServerInfo_Response) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCloud_GetUploadServerInfo_Response.Merge(m, src)
 }
 func (m *CCloud_GetUploadServerInfo_Response) XXX_Size() int {
 	return xxx_messageInfo_CCloud_GetUploadServerInfo_Response.Size(m)
@@ -106,16 +110,17 @@ func (m *CCloud_GetFileDetails_Request) Reset()         { *m = CCloud_GetFileDet
 func (m *CCloud_GetFileDetails_Request) String() string { return proto.CompactTextString(m) }
 func (*CCloud_GetFileDetails_Request) ProtoMessage()    {}
 func (*CCloud_GetFileDetails_Request) Descriptor() ([]byte, []int) {
-	return fileDescriptor_steammessages_cloud_steamworkssdk_d7e08337cd0a63c3, []int{2}
+	return fileDescriptor_d02d9a2eb5e3bafa, []int{2}
 }
+
 func (m *CCloud_GetFileDetails_Request) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CCloud_GetFileDetails_Request.Unmarshal(m, b)
 }
 func (m *CCloud_GetFileDetails_Request) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CCloud_GetFileDetails_Request.Marshal(b, m, deterministic)
 }
-func (dst *CCloud_GetFileDetails_Request) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CCloud_GetFileDetails_Request.Merge(dst, src)
+func (m *CCloud_GetFileDetails_Request) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCloud_GetFileDetails_Request.Merge(m, src)
 }
 func (m *CCloud_GetFileDetails_Request) XXX_Size() int {
 	return xxx_messageInfo_CCloud_GetFileDetails_Request.Size(m)
@@ -157,16 +162,17 @@ func (m *CCloud_UserFile) Reset()         { *m = CCloud_UserFile{} }
 func (m *CCloud_UserFile) String() string { return proto.CompactTextString(m) }
 func (*CCloud_UserFile) ProtoMessage()    {}
 func (*CCloud_UserFile) Descriptor() ([]byte, []int) {
-	return fileDescriptor_steammessages_cloud_steamworkssdk_d7e08337cd0a63c3, []int{3}
+	return fileDescriptor_d02d9a2eb5e3bafa, []int{3}
 }
+
 func (m *CCloud_UserFile) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CCloud_UserFile.Unmarshal(m, b)
 }
 func (m *CCloud_UserFile) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CCloud_UserFile.Marshal(b, m, deterministic)
 }
-func (dst *CCloud_UserFile) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CCloud_UserFile.Merge(dst, src)
+func (m *CCloud_UserFile) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCloud_UserFile.Merge(m, src)
 }
 func (m *CCloud_UserFile) XXX_Size() int {
 	return xxx_messageInfo_CCloud_UserFile.Size(m)
@@ -237,16 +243,17 @@ func (m *CCloud_GetFileDetails_Response) Reset()         { *m = CCloud_GetFileDe
 func (m *CCloud_GetFileDetails_Response) String() string { return proto.CompactTextString(m) }
 func (*CCloud_GetFileDetails_Response) ProtoMessage()    {}
 func (*CCloud_GetFileDetails_Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor_steammessages_cloud_steamworkssdk_d7e08337cd0a63c3, []int{4}
+	return fileDescriptor_d02d9a2eb5e3bafa, []int{4}
 }
+
 func (m *CCloud_GetFileDetails_Response) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CCloud_GetFileDetails_Response.Unmarshal(m, b)
 }
 func (m *CCloud_GetFileDetails_Response) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CCloud_GetFileDetails_Response.Marshal(b, m, deterministic)
 }
-func (dst *CCloud_GetFileDetails_Response) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CCloud_GetFileDetails_Response.Merge(dst, src)
+func (m *CCloud_GetFileDetails_Response) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCloud_GetFileDetails_Response.Merge(m, src)
 }
 func (m *CCloud_GetFileDetails_Response) XXX_Size() int {
 	return xxx_messageInfo_CCloud_GetFileDetails_Response.Size(m)
@@ -278,16 +285,17 @@ func (m *CCloud_EnumerateUserFiles_Request) Reset()         { *m = CCloud_Enumer
 func (m *CCloud_EnumerateUserFiles_Request) String() string { return proto.CompactTextString(m) }
 func (*CCloud_EnumerateUserFiles_Request) ProtoMessage()    {}
 func (*CCloud_EnumerateUserFiles_Request) Descriptor() ([]byte, []int) {
-	return fileDescriptor_steammessages_cloud_steamworkssdk_d7e08337cd0a63c3, []int{5}
+	return fileDescriptor_d02d9a2eb5e3bafa, []int{5}
 }
+
 func (m *CCloud_EnumerateUserFiles_Request) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CCloud_EnumerateUserFiles_Request.Unmarshal(m, b)
 }
 func (m *CCloud_EnumerateUserFiles_Request) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CCloud_EnumerateUserFiles_Request.Marshal(b, m, deterministic)
 }
-func (dst *CCloud_EnumerateUserFiles_Request) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CCloud_EnumerateUserFiles_Request.Merge(dst, src)
+func (m *CCloud_EnumerateUserFiles_Request) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCloud_EnumerateUserFiles_Request.Merge(m, src)
 }
 func (m *CCloud_EnumerateUserFiles_Request) XXX_Size() int {
 	return xxx_messageInfo_CCloud_EnumerateUserFiles_Request.Size(m)
@@ -338,16 +346,17 @@ func (m *CCloud_EnumerateUserFiles_Response) Reset()         { *m = CCloud_Enume
 func (m *CCloud_EnumerateUserFiles_Response) String() string { return proto.CompactTextString(m) }
 func (*CCloud_EnumerateUserFiles_Response) ProtoMessage()    {}
 func (*CCloud_EnumerateUserFiles_Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor_steammessages_cloud_steamworkssdk_d7e08337cd0a63c3, []int{6}
+	return fileDescriptor_d02d9a2eb5e3bafa, []int{6}
 }
+
 func (m *CCloud_EnumerateUserFiles_Response) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CCloud_EnumerateUserFiles_Response.Unmarshal(m, b)
 }
 func (m *CCloud_EnumerateUserFiles_Response) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CCloud_EnumerateUserFiles_Response.Marshal(b, m, deterministic)
 }
-func (dst *CCloud_EnumerateUserFiles_Response) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CCloud_EnumerateUserFiles_Response.Merge(dst, src)
+func (m *CCloud_EnumerateUserFiles_Response) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCloud_EnumerateUserFiles_Response.Merge(m, src)
 }
 func (m *CCloud_EnumerateUserFiles_Response) XXX_Size() int {
 	return xxx_messageInfo_CCloud_EnumerateUserFiles_Response.Size(m)
@@ -384,16 +393,17 @@ func (m *CCloud_Delete_Request) Reset()         { *m = CCloud_Delete_Request{} }
 func (m *CCloud_Delete_Request) String() string { return proto.CompactTextString(m) }
 func (*CCloud_Delete_Request) ProtoMessage()    {}
 func (*CCloud_Delete_Request) Descriptor() ([]byte, []int) {
-	return fileDescriptor_steammessages_cloud_steamworkssdk_d7e08337cd0a63c3, []int{7}
+	return fileDescriptor_d02d9a2eb5e3bafa, []int{7}
 }
+
 func (m *CCloud_Delete_Request) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CCloud_Delete_Request.Unmarshal(m, b)
 }
 func (m *CCloud_Delete_Request) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CCloud_Delete_Request.Marshal(b, m, deterministic)
 }
-func (dst *CCloud_Delete_Request) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CCloud_Delete_Request.Merge(dst, src)
+func (m *CCloud_Delete_Request) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCloud_Delete_Request.Merge(m, src)
 }
 func (m *CCloud_Delete_Request) XXX_Size() int {
 	return xxx_messageInfo_CCloud_Delete_Request.Size(m)
@@ -428,16 +438,17 @@ func (m *CCloud_Delete_Response) Reset()         { *m = CCloud_Delete_Response{}
 func (m *CCloud_Delete_Response) String() string { return proto.CompactTextString(m) }
 func (*CCloud_Delete_Response) ProtoMessage()    {}
 func (*CCloud_Delete_Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor_steammessages_cloud_steamworkssdk_d7e08337cd0a63c3, []int{8}
+	return fileDescriptor_d02d9a2eb5e3bafa, []int{8}
 }
+
 func (m *CCloud_Delete_Response) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CCloud_Delete_Response.Unmarshal(m, b)
 }
 func (m *CCloud_Delete_Response) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CCloud_Delete_Response.Marshal(b, m, deterministic)
 }
-func (dst *CCloud_Delete_Response) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CCloud_Delete_Response.Merge(dst, src)
+func (m *CCloud_Delete_Response) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCloud_Delete_Response.Merge(m, src)
 }
 func (m *CCloud_Delete_Response) XXX_Size() int {
 	return xxx_messageInfo_CCloud_Delete_Response.Size(m)
@@ -461,10 +472,10 @@ func init() {
 }
 
 func init() {
-	proto.RegisterFile("steammessages_cloud.steamworkssdk.proto", fileDescriptor_steammessages_cloud_steamworkssdk_d7e08337cd0a63c3)
+	proto.RegisterFile("steammessages_cloud.steamworkssdk.proto", fileDescriptor_d02d9a2eb5e3bafa)
 }
 
-var fileDescriptor_steammessages_cloud_steamworkssdk_d7e08337cd0a63c3 = []byte{
+var fileDescriptor_d02d9a2eb5e3bafa = []byte{
 	// 970 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x55, 0x51, 0x6f, 0xdc, 0x44,
 	0x10, 0x96, 0x49, 0x2e, 0x6d, 0x36, 0x4a, 0x53, 0x2d, 0x14, 0x59, 0x97, 0x96, 0x4e, 0xaf, 0xad,

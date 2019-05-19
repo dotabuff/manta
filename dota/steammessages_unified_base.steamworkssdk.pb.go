@@ -3,10 +3,12 @@
 
 package dota
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
-import descriptor "github.com/golang/protobuf/protoc-gen-go/descriptor"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	descriptor "github.com/golang/protobuf/protoc-gen-go/descriptor"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -17,7 +19,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type EProtoExecutionSite int32
 
@@ -30,6 +32,7 @@ var EProtoExecutionSite_name = map[int32]string{
 	0: "k_EProtoExecutionSiteUnknown",
 	3: "k_EProtoExecutionSiteSteamClient",
 }
+
 var EProtoExecutionSite_value = map[string]int32{
 	"k_EProtoExecutionSiteUnknown":     0,
 	"k_EProtoExecutionSiteSteamClient": 3,
@@ -40,9 +43,11 @@ func (x EProtoExecutionSite) Enum() *EProtoExecutionSite {
 	*p = x
 	return p
 }
+
 func (x EProtoExecutionSite) String() string {
 	return proto.EnumName(EProtoExecutionSite_name, int32(x))
 }
+
 func (x *EProtoExecutionSite) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(EProtoExecutionSite_value, data, "EProtoExecutionSite")
 	if err != nil {
@@ -51,8 +56,9 @@ func (x *EProtoExecutionSite) UnmarshalJSON(data []byte) error {
 	*x = EProtoExecutionSite(value)
 	return nil
 }
+
 func (EProtoExecutionSite) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_steammessages_unified_base_steamworkssdk_a78da9da5e89e7ae, []int{0}
+	return fileDescriptor_c6812d942ea2fee2, []int{0}
 }
 
 var E_Description = &proto.ExtensionDesc{
@@ -69,7 +75,7 @@ var E_ServiceDescription = &proto.ExtensionDesc{
 	ExtensionType: (*string)(nil),
 	Field:         50000,
 	Name:          "dota.service_description",
-	Tag:           "bytes,50000,opt,name=service_description,json=serviceDescription",
+	Tag:           "bytes,50000,opt,name=service_description",
 	Filename:      "steammessages_unified_base.steamworkssdk.proto",
 }
 
@@ -78,7 +84,7 @@ var E_ServiceExecutionSite = &proto.ExtensionDesc{
 	ExtensionType: (*EProtoExecutionSite)(nil),
 	Field:         50008,
 	Name:          "dota.service_execution_site",
-	Tag:           "varint,50008,opt,name=service_execution_site,json=serviceExecutionSite,enum=dota.EProtoExecutionSite,def=0",
+	Tag:           "varint,50008,opt,name=service_execution_site,enum=dota.EProtoExecutionSite,def=0",
 	Filename:      "steammessages_unified_base.steamworkssdk.proto",
 }
 
@@ -87,7 +93,7 @@ var E_MethodDescription = &proto.ExtensionDesc{
 	ExtensionType: (*string)(nil),
 	Field:         50000,
 	Name:          "dota.method_description",
-	Tag:           "bytes,50000,opt,name=method_description,json=methodDescription",
+	Tag:           "bytes,50000,opt,name=method_description",
 	Filename:      "steammessages_unified_base.steamworkssdk.proto",
 }
 
@@ -96,7 +102,7 @@ var E_EnumDescription = &proto.ExtensionDesc{
 	ExtensionType: (*string)(nil),
 	Field:         50000,
 	Name:          "dota.enum_description",
-	Tag:           "bytes,50000,opt,name=enum_description,json=enumDescription",
+	Tag:           "bytes,50000,opt,name=enum_description",
 	Filename:      "steammessages_unified_base.steamworkssdk.proto",
 }
 
@@ -105,7 +111,7 @@ var E_EnumValueDescription = &proto.ExtensionDesc{
 	ExtensionType: (*string)(nil),
 	Field:         50000,
 	Name:          "dota.enum_value_description",
-	Tag:           "bytes,50000,opt,name=enum_value_description,json=enumValueDescription",
+	Tag:           "bytes,50000,opt,name=enum_value_description",
 	Filename:      "steammessages_unified_base.steamworkssdk.proto",
 }
 
@@ -120,10 +126,10 @@ func init() {
 }
 
 func init() {
-	proto.RegisterFile("steammessages_unified_base.steamworkssdk.proto", fileDescriptor_steammessages_unified_base_steamworkssdk_a78da9da5e89e7ae)
+	proto.RegisterFile("steammessages_unified_base.steamworkssdk.proto", fileDescriptor_c6812d942ea2fee2)
 }
 
-var fileDescriptor_steammessages_unified_base_steamworkssdk_a78da9da5e89e7ae = []byte{
+var fileDescriptor_c6812d942ea2fee2 = []byte{
 	// 339 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x84, 0x91, 0x4d, 0x4b, 0xf3, 0x40,
 	0x14, 0x85, 0x1b, 0xfa, 0xbe, 0x0b, 0x47, 0xd0, 0x3a, 0x2d, 0x45, 0xa5, 0x6a, 0x04, 0x17, 0xe2,

@@ -3,9 +3,11 @@
 
 package dota
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type EBaseClientMessages int32
 
@@ -39,6 +41,7 @@ var EBaseClientMessages_name = map[int32]string{
 	285: "CM_RotateAnchor",
 	300: "CM_MAX_BASE",
 }
+
 var EBaseClientMessages_value = map[string]int32{
 	"CM_CustomGameEvent":                  280,
 	"CM_CustomGameEventBounce":            281,
@@ -54,9 +57,11 @@ func (x EBaseClientMessages) Enum() *EBaseClientMessages {
 	*p = x
 	return p
 }
+
 func (x EBaseClientMessages) String() string {
 	return proto.EnumName(EBaseClientMessages_name, int32(x))
 }
+
 func (x *EBaseClientMessages) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(EBaseClientMessages_value, data, "EBaseClientMessages")
 	if err != nil {
@@ -65,8 +70,9 @@ func (x *EBaseClientMessages) UnmarshalJSON(data []byte) error {
 	*x = EBaseClientMessages(value)
 	return nil
 }
+
 func (EBaseClientMessages) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_clientmessages_704d382ba1118406, []int{0}
+	return fileDescriptor_2ecb9f24e0641136, []int{0}
 }
 
 type EClientUIEvent int32
@@ -82,6 +88,7 @@ var EClientUIEvent_name = map[int32]string{
 	1: "EClientUIEvent_DialogFinished",
 	2: "EClientUIEvent_FireOutput",
 }
+
 var EClientUIEvent_value = map[string]int32{
 	"EClientUIEvent_Invalid":        0,
 	"EClientUIEvent_DialogFinished": 1,
@@ -93,9 +100,11 @@ func (x EClientUIEvent) Enum() *EClientUIEvent {
 	*p = x
 	return p
 }
+
 func (x EClientUIEvent) String() string {
 	return proto.EnumName(EClientUIEvent_name, int32(x))
 }
+
 func (x *EClientUIEvent) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(EClientUIEvent_value, data, "EClientUIEvent")
 	if err != nil {
@@ -104,8 +113,9 @@ func (x *EClientUIEvent) UnmarshalJSON(data []byte) error {
 	*x = EClientUIEvent(value)
 	return nil
 }
+
 func (EClientUIEvent) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_clientmessages_704d382ba1118406, []int{1}
+	return fileDescriptor_2ecb9f24e0641136, []int{1}
 }
 
 type CClientMsg_CustomGameEvent struct {
@@ -120,16 +130,17 @@ func (m *CClientMsg_CustomGameEvent) Reset()         { *m = CClientMsg_CustomGam
 func (m *CClientMsg_CustomGameEvent) String() string { return proto.CompactTextString(m) }
 func (*CClientMsg_CustomGameEvent) ProtoMessage()    {}
 func (*CClientMsg_CustomGameEvent) Descriptor() ([]byte, []int) {
-	return fileDescriptor_clientmessages_704d382ba1118406, []int{0}
+	return fileDescriptor_2ecb9f24e0641136, []int{0}
 }
+
 func (m *CClientMsg_CustomGameEvent) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CClientMsg_CustomGameEvent.Unmarshal(m, b)
 }
 func (m *CClientMsg_CustomGameEvent) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CClientMsg_CustomGameEvent.Marshal(b, m, deterministic)
 }
-func (dst *CClientMsg_CustomGameEvent) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CClientMsg_CustomGameEvent.Merge(dst, src)
+func (m *CClientMsg_CustomGameEvent) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CClientMsg_CustomGameEvent.Merge(m, src)
 }
 func (m *CClientMsg_CustomGameEvent) XXX_Size() int {
 	return xxx_messageInfo_CClientMsg_CustomGameEvent.Size(m)
@@ -167,16 +178,17 @@ func (m *CClientMsg_CustomGameEventBounce) Reset()         { *m = CClientMsg_Cus
 func (m *CClientMsg_CustomGameEventBounce) String() string { return proto.CompactTextString(m) }
 func (*CClientMsg_CustomGameEventBounce) ProtoMessage()    {}
 func (*CClientMsg_CustomGameEventBounce) Descriptor() ([]byte, []int) {
-	return fileDescriptor_clientmessages_704d382ba1118406, []int{1}
+	return fileDescriptor_2ecb9f24e0641136, []int{1}
 }
+
 func (m *CClientMsg_CustomGameEventBounce) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CClientMsg_CustomGameEventBounce.Unmarshal(m, b)
 }
 func (m *CClientMsg_CustomGameEventBounce) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CClientMsg_CustomGameEventBounce.Marshal(b, m, deterministic)
 }
-func (dst *CClientMsg_CustomGameEventBounce) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CClientMsg_CustomGameEventBounce.Merge(dst, src)
+func (m *CClientMsg_CustomGameEventBounce) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CClientMsg_CustomGameEventBounce.Merge(m, src)
 }
 func (m *CClientMsg_CustomGameEventBounce) XXX_Size() int {
 	return xxx_messageInfo_CClientMsg_CustomGameEventBounce.Size(m)
@@ -223,16 +235,17 @@ func (m *CClientMsg_ClientUIEvent) Reset()         { *m = CClientMsg_ClientUIEve
 func (m *CClientMsg_ClientUIEvent) String() string { return proto.CompactTextString(m) }
 func (*CClientMsg_ClientUIEvent) ProtoMessage()    {}
 func (*CClientMsg_ClientUIEvent) Descriptor() ([]byte, []int) {
-	return fileDescriptor_clientmessages_704d382ba1118406, []int{2}
+	return fileDescriptor_2ecb9f24e0641136, []int{2}
 }
+
 func (m *CClientMsg_ClientUIEvent) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CClientMsg_ClientUIEvent.Unmarshal(m, b)
 }
 func (m *CClientMsg_ClientUIEvent) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CClientMsg_ClientUIEvent.Marshal(b, m, deterministic)
 }
-func (dst *CClientMsg_ClientUIEvent) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CClientMsg_ClientUIEvent.Merge(dst, src)
+func (m *CClientMsg_ClientUIEvent) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CClientMsg_ClientUIEvent.Merge(m, src)
 }
 func (m *CClientMsg_ClientUIEvent) XXX_Size() int {
 	return xxx_messageInfo_CClientMsg_ClientUIEvent.Size(m)
@@ -295,16 +308,17 @@ func (m *CClientMsg_DevPaletteVisibilityChangedEvent) String() string {
 }
 func (*CClientMsg_DevPaletteVisibilityChangedEvent) ProtoMessage() {}
 func (*CClientMsg_DevPaletteVisibilityChangedEvent) Descriptor() ([]byte, []int) {
-	return fileDescriptor_clientmessages_704d382ba1118406, []int{3}
+	return fileDescriptor_2ecb9f24e0641136, []int{3}
 }
+
 func (m *CClientMsg_DevPaletteVisibilityChangedEvent) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CClientMsg_DevPaletteVisibilityChangedEvent.Unmarshal(m, b)
 }
 func (m *CClientMsg_DevPaletteVisibilityChangedEvent) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CClientMsg_DevPaletteVisibilityChangedEvent.Marshal(b, m, deterministic)
 }
-func (dst *CClientMsg_DevPaletteVisibilityChangedEvent) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CClientMsg_DevPaletteVisibilityChangedEvent.Merge(dst, src)
+func (m *CClientMsg_DevPaletteVisibilityChangedEvent) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CClientMsg_DevPaletteVisibilityChangedEvent.Merge(m, src)
 }
 func (m *CClientMsg_DevPaletteVisibilityChangedEvent) XXX_Size() int {
 	return xxx_messageInfo_CClientMsg_DevPaletteVisibilityChangedEvent.Size(m)
@@ -339,16 +353,17 @@ func (m *CClientMsg_WorldUIControllerHasPanelChangedEvent) String() string {
 }
 func (*CClientMsg_WorldUIControllerHasPanelChangedEvent) ProtoMessage() {}
 func (*CClientMsg_WorldUIControllerHasPanelChangedEvent) Descriptor() ([]byte, []int) {
-	return fileDescriptor_clientmessages_704d382ba1118406, []int{4}
+	return fileDescriptor_2ecb9f24e0641136, []int{4}
 }
+
 func (m *CClientMsg_WorldUIControllerHasPanelChangedEvent) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CClientMsg_WorldUIControllerHasPanelChangedEvent.Unmarshal(m, b)
 }
 func (m *CClientMsg_WorldUIControllerHasPanelChangedEvent) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CClientMsg_WorldUIControllerHasPanelChangedEvent.Marshal(b, m, deterministic)
 }
-func (dst *CClientMsg_WorldUIControllerHasPanelChangedEvent) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CClientMsg_WorldUIControllerHasPanelChangedEvent.Merge(dst, src)
+func (m *CClientMsg_WorldUIControllerHasPanelChangedEvent) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CClientMsg_WorldUIControllerHasPanelChangedEvent.Merge(m, src)
 }
 func (m *CClientMsg_WorldUIControllerHasPanelChangedEvent) XXX_Size() int {
 	return xxx_messageInfo_CClientMsg_WorldUIControllerHasPanelChangedEvent.Size(m)
@@ -391,16 +406,17 @@ func (m *CClientMsg_RotateAnchor) Reset()         { *m = CClientMsg_RotateAnchor
 func (m *CClientMsg_RotateAnchor) String() string { return proto.CompactTextString(m) }
 func (*CClientMsg_RotateAnchor) ProtoMessage()    {}
 func (*CClientMsg_RotateAnchor) Descriptor() ([]byte, []int) {
-	return fileDescriptor_clientmessages_704d382ba1118406, []int{5}
+	return fileDescriptor_2ecb9f24e0641136, []int{5}
 }
+
 func (m *CClientMsg_RotateAnchor) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CClientMsg_RotateAnchor.Unmarshal(m, b)
 }
 func (m *CClientMsg_RotateAnchor) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CClientMsg_RotateAnchor.Marshal(b, m, deterministic)
 }
-func (dst *CClientMsg_RotateAnchor) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CClientMsg_RotateAnchor.Merge(dst, src)
+func (m *CClientMsg_RotateAnchor) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CClientMsg_RotateAnchor.Merge(m, src)
 }
 func (m *CClientMsg_RotateAnchor) XXX_Size() int {
 	return xxx_messageInfo_CClientMsg_RotateAnchor.Size(m)
@@ -419,21 +435,19 @@ func (m *CClientMsg_RotateAnchor) GetAngle() float32 {
 }
 
 func init() {
+	proto.RegisterEnum("dota.EBaseClientMessages", EBaseClientMessages_name, EBaseClientMessages_value)
+	proto.RegisterEnum("dota.EClientUIEvent", EClientUIEvent_name, EClientUIEvent_value)
 	proto.RegisterType((*CClientMsg_CustomGameEvent)(nil), "dota.CClientMsg_CustomGameEvent")
 	proto.RegisterType((*CClientMsg_CustomGameEventBounce)(nil), "dota.CClientMsg_CustomGameEventBounce")
 	proto.RegisterType((*CClientMsg_ClientUIEvent)(nil), "dota.CClientMsg_ClientUIEvent")
 	proto.RegisterType((*CClientMsg_DevPaletteVisibilityChangedEvent)(nil), "dota.CClientMsg_DevPaletteVisibilityChangedEvent")
 	proto.RegisterType((*CClientMsg_WorldUIControllerHasPanelChangedEvent)(nil), "dota.CClientMsg_WorldUIControllerHasPanelChangedEvent")
 	proto.RegisterType((*CClientMsg_RotateAnchor)(nil), "dota.CClientMsg_RotateAnchor")
-	proto.RegisterEnum("dota.EBaseClientMessages", EBaseClientMessages_name, EBaseClientMessages_value)
-	proto.RegisterEnum("dota.EClientUIEvent", EClientUIEvent_name, EClientUIEvent_value)
 }
 
-func init() {
-	proto.RegisterFile("clientmessages.proto", fileDescriptor_clientmessages_704d382ba1118406)
-}
+func init() { proto.RegisterFile("clientmessages.proto", fileDescriptor_2ecb9f24e0641136) }
 
-var fileDescriptor_clientmessages_704d382ba1118406 = []byte{
+var fileDescriptor_2ecb9f24e0641136 = []byte{
 	// 549 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x52, 0x4d, 0x6f, 0xd3, 0x40,
 	0x14, 0xac, 0xdd, 0x46, 0x34, 0x2f, 0x6d, 0xba, 0x2c, 0x81, 0x9a, 0xa2, 0x40, 0xea, 0x0a, 0x29,

@@ -3,9 +3,11 @@
 
 package dota
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type EDOTAStatPopupTypes int32
 
@@ -37,6 +39,7 @@ var EDOTAStatPopupTypes_name = map[int32]string{
 	4: "k_EDOTA_SPT_DualImage",
 	5: "k_EDOTA_SPT_Movie",
 }
+
 var EDOTAStatPopupTypes_value = map[string]int32{
 	"k_EDOTA_SPT_Textline":  0,
 	"k_EDOTA_SPT_Basic":     1,
@@ -51,9 +54,11 @@ func (x EDOTAStatPopupTypes) Enum() *EDOTAStatPopupTypes {
 	*p = x
 	return p
 }
+
 func (x EDOTAStatPopupTypes) String() string {
 	return proto.EnumName(EDOTAStatPopupTypes_name, int32(x))
 }
+
 func (x *EDOTAStatPopupTypes) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(EDOTAStatPopupTypes_value, data, "EDOTAStatPopupTypes")
 	if err != nil {
@@ -62,8 +67,9 @@ func (x *EDOTAStatPopupTypes) UnmarshalJSON(data []byte) error {
 	*x = EDOTAStatPopupTypes(value)
 	return nil
 }
+
 func (EDOTAStatPopupTypes) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_dota_commonmessages_15ad3d103af979c6, []int{0}
+	return fileDescriptor_ea12725bdc87a759, []int{0}
 }
 
 type DotaunitorderT int32
@@ -147,6 +153,7 @@ var DotaunitorderT_name = map[int32]string{
 	35: "DOTA_UNIT_ORDER_CAST_RIVER_PAINT",
 	36: "DOTA_UNIT_ORDER_PREGAME_ADJUST_ITEM_ASSIGNMENT",
 }
+
 var DotaunitorderT_value = map[string]int32{
 	"DOTA_UNIT_ORDER_NONE":                           0,
 	"DOTA_UNIT_ORDER_MOVE_TO_POSITION":               1,
@@ -192,9 +199,11 @@ func (x DotaunitorderT) Enum() *DotaunitorderT {
 	*p = x
 	return p
 }
+
 func (x DotaunitorderT) String() string {
 	return proto.EnumName(DotaunitorderT_name, int32(x))
 }
+
 func (x *DotaunitorderT) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(DotaunitorderT_value, data, "DotaunitorderT")
 	if err != nil {
@@ -203,8 +212,9 @@ func (x *DotaunitorderT) UnmarshalJSON(data []byte) error {
 	*x = DotaunitorderT(value)
 	return nil
 }
+
 func (DotaunitorderT) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_dota_commonmessages_15ad3d103af979c6, []int{1}
+	return fileDescriptor_ea12725bdc87a759, []int{1}
 }
 
 type CDOTAMsg_LocationPing struct {
@@ -222,16 +232,17 @@ func (m *CDOTAMsg_LocationPing) Reset()         { *m = CDOTAMsg_LocationPing{} }
 func (m *CDOTAMsg_LocationPing) String() string { return proto.CompactTextString(m) }
 func (*CDOTAMsg_LocationPing) ProtoMessage()    {}
 func (*CDOTAMsg_LocationPing) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_commonmessages_15ad3d103af979c6, []int{0}
+	return fileDescriptor_ea12725bdc87a759, []int{0}
 }
+
 func (m *CDOTAMsg_LocationPing) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CDOTAMsg_LocationPing.Unmarshal(m, b)
 }
 func (m *CDOTAMsg_LocationPing) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CDOTAMsg_LocationPing.Marshal(b, m, deterministic)
 }
-func (dst *CDOTAMsg_LocationPing) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CDOTAMsg_LocationPing.Merge(dst, src)
+func (m *CDOTAMsg_LocationPing) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CDOTAMsg_LocationPing.Merge(m, src)
 }
 func (m *CDOTAMsg_LocationPing) XXX_Size() int {
 	return xxx_messageInfo_CDOTAMsg_LocationPing.Size(m)
@@ -290,16 +301,17 @@ func (m *CDOTAMsg_ItemAlert) Reset()         { *m = CDOTAMsg_ItemAlert{} }
 func (m *CDOTAMsg_ItemAlert) String() string { return proto.CompactTextString(m) }
 func (*CDOTAMsg_ItemAlert) ProtoMessage()    {}
 func (*CDOTAMsg_ItemAlert) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_commonmessages_15ad3d103af979c6, []int{1}
+	return fileDescriptor_ea12725bdc87a759, []int{1}
 }
+
 func (m *CDOTAMsg_ItemAlert) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CDOTAMsg_ItemAlert.Unmarshal(m, b)
 }
 func (m *CDOTAMsg_ItemAlert) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CDOTAMsg_ItemAlert.Marshal(b, m, deterministic)
 }
-func (dst *CDOTAMsg_ItemAlert) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CDOTAMsg_ItemAlert.Merge(dst, src)
+func (m *CDOTAMsg_ItemAlert) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CDOTAMsg_ItemAlert.Merge(m, src)
 }
 func (m *CDOTAMsg_ItemAlert) XXX_Size() int {
 	return xxx_messageInfo_CDOTAMsg_ItemAlert.Size(m)
@@ -344,16 +356,17 @@ func (m *CDOTAMsg_MapLine) Reset()         { *m = CDOTAMsg_MapLine{} }
 func (m *CDOTAMsg_MapLine) String() string { return proto.CompactTextString(m) }
 func (*CDOTAMsg_MapLine) ProtoMessage()    {}
 func (*CDOTAMsg_MapLine) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_commonmessages_15ad3d103af979c6, []int{2}
+	return fileDescriptor_ea12725bdc87a759, []int{2}
 }
+
 func (m *CDOTAMsg_MapLine) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CDOTAMsg_MapLine.Unmarshal(m, b)
 }
 func (m *CDOTAMsg_MapLine) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CDOTAMsg_MapLine.Marshal(b, m, deterministic)
 }
-func (dst *CDOTAMsg_MapLine) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CDOTAMsg_MapLine.Merge(dst, src)
+func (m *CDOTAMsg_MapLine) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CDOTAMsg_MapLine.Merge(m, src)
 }
 func (m *CDOTAMsg_MapLine) XXX_Size() int {
 	return xxx_messageInfo_CDOTAMsg_MapLine.Size(m)
@@ -400,16 +413,17 @@ func (m *CDOTAMsg_WorldLine) Reset()         { *m = CDOTAMsg_WorldLine{} }
 func (m *CDOTAMsg_WorldLine) String() string { return proto.CompactTextString(m) }
 func (*CDOTAMsg_WorldLine) ProtoMessage()    {}
 func (*CDOTAMsg_WorldLine) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_commonmessages_15ad3d103af979c6, []int{3}
+	return fileDescriptor_ea12725bdc87a759, []int{3}
 }
+
 func (m *CDOTAMsg_WorldLine) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CDOTAMsg_WorldLine.Unmarshal(m, b)
 }
 func (m *CDOTAMsg_WorldLine) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CDOTAMsg_WorldLine.Marshal(b, m, deterministic)
 }
-func (dst *CDOTAMsg_WorldLine) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CDOTAMsg_WorldLine.Merge(dst, src)
+func (m *CDOTAMsg_WorldLine) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CDOTAMsg_WorldLine.Merge(m, src)
 }
 func (m *CDOTAMsg_WorldLine) XXX_Size() int {
 	return xxx_messageInfo_CDOTAMsg_WorldLine.Size(m)
@@ -472,16 +486,17 @@ func (m *CDOTAMsg_SendStatPopup) Reset()         { *m = CDOTAMsg_SendStatPopup{}
 func (m *CDOTAMsg_SendStatPopup) String() string { return proto.CompactTextString(m) }
 func (*CDOTAMsg_SendStatPopup) ProtoMessage()    {}
 func (*CDOTAMsg_SendStatPopup) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_commonmessages_15ad3d103af979c6, []int{4}
+	return fileDescriptor_ea12725bdc87a759, []int{4}
 }
+
 func (m *CDOTAMsg_SendStatPopup) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CDOTAMsg_SendStatPopup.Unmarshal(m, b)
 }
 func (m *CDOTAMsg_SendStatPopup) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CDOTAMsg_SendStatPopup.Marshal(b, m, deterministic)
 }
-func (dst *CDOTAMsg_SendStatPopup) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CDOTAMsg_SendStatPopup.Merge(dst, src)
+func (m *CDOTAMsg_SendStatPopup) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CDOTAMsg_SendStatPopup.Merge(m, src)
 }
 func (m *CDOTAMsg_SendStatPopup) XXX_Size() int {
 	return xxx_messageInfo_CDOTAMsg_SendStatPopup.Size(m)
@@ -554,16 +569,17 @@ func (m *CDOTAMsg_DismissAllStatPopups) Reset()         { *m = CDOTAMsg_DismissA
 func (m *CDOTAMsg_DismissAllStatPopups) String() string { return proto.CompactTextString(m) }
 func (*CDOTAMsg_DismissAllStatPopups) ProtoMessage()    {}
 func (*CDOTAMsg_DismissAllStatPopups) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_commonmessages_15ad3d103af979c6, []int{5}
+	return fileDescriptor_ea12725bdc87a759, []int{5}
 }
+
 func (m *CDOTAMsg_DismissAllStatPopups) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CDOTAMsg_DismissAllStatPopups.Unmarshal(m, b)
 }
 func (m *CDOTAMsg_DismissAllStatPopups) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CDOTAMsg_DismissAllStatPopups.Marshal(b, m, deterministic)
 }
-func (dst *CDOTAMsg_DismissAllStatPopups) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CDOTAMsg_DismissAllStatPopups.Merge(dst, src)
+func (m *CDOTAMsg_DismissAllStatPopups) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CDOTAMsg_DismissAllStatPopups.Merge(m, src)
 }
 func (m *CDOTAMsg_DismissAllStatPopups) XXX_Size() int {
 	return xxx_messageInfo_CDOTAMsg_DismissAllStatPopups.Size(m)
@@ -594,16 +610,17 @@ func (m *CDOTAMsg_CoachHUDPing) Reset()         { *m = CDOTAMsg_CoachHUDPing{} }
 func (m *CDOTAMsg_CoachHUDPing) String() string { return proto.CompactTextString(m) }
 func (*CDOTAMsg_CoachHUDPing) ProtoMessage()    {}
 func (*CDOTAMsg_CoachHUDPing) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_commonmessages_15ad3d103af979c6, []int{6}
+	return fileDescriptor_ea12725bdc87a759, []int{6}
 }
+
 func (m *CDOTAMsg_CoachHUDPing) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CDOTAMsg_CoachHUDPing.Unmarshal(m, b)
 }
 func (m *CDOTAMsg_CoachHUDPing) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CDOTAMsg_CoachHUDPing.Marshal(b, m, deterministic)
 }
-func (dst *CDOTAMsg_CoachHUDPing) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CDOTAMsg_CoachHUDPing.Merge(dst, src)
+func (m *CDOTAMsg_CoachHUDPing) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CDOTAMsg_CoachHUDPing.Merge(m, src)
 }
 func (m *CDOTAMsg_CoachHUDPing) XXX_Size() int {
 	return xxx_messageInfo_CDOTAMsg_CoachHUDPing.Size(m)
@@ -653,16 +670,17 @@ func (m *CDOTAMsg_UnitOrder) Reset()         { *m = CDOTAMsg_UnitOrder{} }
 func (m *CDOTAMsg_UnitOrder) String() string { return proto.CompactTextString(m) }
 func (*CDOTAMsg_UnitOrder) ProtoMessage()    {}
 func (*CDOTAMsg_UnitOrder) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_commonmessages_15ad3d103af979c6, []int{7}
+	return fileDescriptor_ea12725bdc87a759, []int{7}
 }
+
 func (m *CDOTAMsg_UnitOrder) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CDOTAMsg_UnitOrder.Unmarshal(m, b)
 }
 func (m *CDOTAMsg_UnitOrder) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CDOTAMsg_UnitOrder.Marshal(b, m, deterministic)
 }
-func (dst *CDOTAMsg_UnitOrder) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CDOTAMsg_UnitOrder.Merge(dst, src)
+func (m *CDOTAMsg_UnitOrder) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CDOTAMsg_UnitOrder.Merge(m, src)
 }
 func (m *CDOTAMsg_UnitOrder) XXX_Size() int {
 	return xxx_messageInfo_CDOTAMsg_UnitOrder.Size(m)
@@ -733,6 +751,8 @@ func (m *CDOTAMsg_UnitOrder) GetSequenceNumber() int32 {
 }
 
 func init() {
+	proto.RegisterEnum("dota.EDOTAStatPopupTypes", EDOTAStatPopupTypes_name, EDOTAStatPopupTypes_value)
+	proto.RegisterEnum("dota.DotaunitorderT", DotaunitorderT_name, DotaunitorderT_value)
 	proto.RegisterType((*CDOTAMsg_LocationPing)(nil), "dota.CDOTAMsg_LocationPing")
 	proto.RegisterType((*CDOTAMsg_ItemAlert)(nil), "dota.CDOTAMsg_ItemAlert")
 	proto.RegisterType((*CDOTAMsg_MapLine)(nil), "dota.CDOTAMsg_MapLine")
@@ -741,15 +761,11 @@ func init() {
 	proto.RegisterType((*CDOTAMsg_DismissAllStatPopups)(nil), "dota.CDOTAMsg_DismissAllStatPopups")
 	proto.RegisterType((*CDOTAMsg_CoachHUDPing)(nil), "dota.CDOTAMsg_CoachHUDPing")
 	proto.RegisterType((*CDOTAMsg_UnitOrder)(nil), "dota.CDOTAMsg_UnitOrder")
-	proto.RegisterEnum("dota.EDOTAStatPopupTypes", EDOTAStatPopupTypes_name, EDOTAStatPopupTypes_value)
-	proto.RegisterEnum("dota.DotaunitorderT", DotaunitorderT_name, DotaunitorderT_value)
 }
 
-func init() {
-	proto.RegisterFile("dota_commonmessages.proto", fileDescriptor_dota_commonmessages_15ad3d103af979c6)
-}
+func init() { proto.RegisterFile("dota_commonmessages.proto", fileDescriptor_ea12725bdc87a759) }
 
-var fileDescriptor_dota_commonmessages_15ad3d103af979c6 = []byte{
+var fileDescriptor_ea12725bdc87a759 = []byte{
 	// 1182 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x84, 0x53, 0xdb, 0x72, 0xdb, 0xb6,
 	0x16, 0x0d, 0x75, 0x71, 0x24, 0xf8, 0x86, 0x20, 0xb6, 0x43, 0x3b, 0x71, 0x22, 0x2b, 0x97, 0xe3,

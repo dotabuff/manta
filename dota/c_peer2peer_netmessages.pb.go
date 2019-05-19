@@ -3,9 +3,11 @@
 
 package dota
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type P2P_Messages int32
 
@@ -35,6 +37,7 @@ var P2P_Messages_name = map[int32]string{
 	259: "p2p_VRAvatarPosition",
 	260: "p2p_WatchSynchronization",
 }
+
 var P2P_Messages_value = map[string]int32{
 	"p2p_TextMessage":          256,
 	"p2p_Voice":                257,
@@ -48,9 +51,11 @@ func (x P2P_Messages) Enum() *P2P_Messages {
 	*p = x
 	return p
 }
+
 func (x P2P_Messages) String() string {
 	return proto.EnumName(P2P_Messages_name, int32(x))
 }
+
 func (x *P2P_Messages) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(P2P_Messages_value, data, "P2P_Messages")
 	if err != nil {
@@ -59,8 +64,9 @@ func (x *P2P_Messages) UnmarshalJSON(data []byte) error {
 	*x = P2P_Messages(value)
 	return nil
 }
+
 func (P2P_Messages) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_c_peer2peer_netmessages_1ed347a985ab2204, []int{0}
+	return fileDescriptor_1fec9daf05519245, []int{0}
 }
 
 type CP2P_Voice_Handler_Flags int32
@@ -72,6 +78,7 @@ const (
 var CP2P_Voice_Handler_Flags_name = map[int32]string{
 	1: "Played_Audio",
 }
+
 var CP2P_Voice_Handler_Flags_value = map[string]int32{
 	"Played_Audio": 1,
 }
@@ -81,9 +88,11 @@ func (x CP2P_Voice_Handler_Flags) Enum() *CP2P_Voice_Handler_Flags {
 	*p = x
 	return p
 }
+
 func (x CP2P_Voice_Handler_Flags) String() string {
 	return proto.EnumName(CP2P_Voice_Handler_Flags_name, int32(x))
 }
+
 func (x *CP2P_Voice_Handler_Flags) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(CP2P_Voice_Handler_Flags_value, data, "CP2P_Voice_Handler_Flags")
 	if err != nil {
@@ -92,8 +101,9 @@ func (x *CP2P_Voice_Handler_Flags) UnmarshalJSON(data []byte) error {
 	*x = CP2P_Voice_Handler_Flags(value)
 	return nil
 }
+
 func (CP2P_Voice_Handler_Flags) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_c_peer2peer_netmessages_1ed347a985ab2204, []int{2, 0}
+	return fileDescriptor_1fec9daf05519245, []int{2, 0}
 }
 
 type CP2P_TextMessage struct {
@@ -107,16 +117,17 @@ func (m *CP2P_TextMessage) Reset()         { *m = CP2P_TextMessage{} }
 func (m *CP2P_TextMessage) String() string { return proto.CompactTextString(m) }
 func (*CP2P_TextMessage) ProtoMessage()    {}
 func (*CP2P_TextMessage) Descriptor() ([]byte, []int) {
-	return fileDescriptor_c_peer2peer_netmessages_1ed347a985ab2204, []int{0}
+	return fileDescriptor_1fec9daf05519245, []int{0}
 }
+
 func (m *CP2P_TextMessage) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CP2P_TextMessage.Unmarshal(m, b)
 }
 func (m *CP2P_TextMessage) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CP2P_TextMessage.Marshal(b, m, deterministic)
 }
-func (dst *CP2P_TextMessage) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CP2P_TextMessage.Merge(dst, src)
+func (m *CP2P_TextMessage) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CP2P_TextMessage.Merge(m, src)
 }
 func (m *CP2P_TextMessage) XXX_Size() int {
 	return xxx_messageInfo_CP2P_TextMessage.Size(m)
@@ -145,16 +156,17 @@ func (m *CSteam_Voice_Encoding) Reset()         { *m = CSteam_Voice_Encoding{} }
 func (m *CSteam_Voice_Encoding) String() string { return proto.CompactTextString(m) }
 func (*CSteam_Voice_Encoding) ProtoMessage()    {}
 func (*CSteam_Voice_Encoding) Descriptor() ([]byte, []int) {
-	return fileDescriptor_c_peer2peer_netmessages_1ed347a985ab2204, []int{1}
+	return fileDescriptor_1fec9daf05519245, []int{1}
 }
+
 func (m *CSteam_Voice_Encoding) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSteam_Voice_Encoding.Unmarshal(m, b)
 }
 func (m *CSteam_Voice_Encoding) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSteam_Voice_Encoding.Marshal(b, m, deterministic)
 }
-func (dst *CSteam_Voice_Encoding) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSteam_Voice_Encoding.Merge(dst, src)
+func (m *CSteam_Voice_Encoding) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSteam_Voice_Encoding.Merge(m, src)
 }
 func (m *CSteam_Voice_Encoding) XXX_Size() int {
 	return xxx_messageInfo_CSteam_Voice_Encoding.Size(m)
@@ -184,16 +196,17 @@ func (m *CP2P_Voice) Reset()         { *m = CP2P_Voice{} }
 func (m *CP2P_Voice) String() string { return proto.CompactTextString(m) }
 func (*CP2P_Voice) ProtoMessage()    {}
 func (*CP2P_Voice) Descriptor() ([]byte, []int) {
-	return fileDescriptor_c_peer2peer_netmessages_1ed347a985ab2204, []int{2}
+	return fileDescriptor_1fec9daf05519245, []int{2}
 }
+
 func (m *CP2P_Voice) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CP2P_Voice.Unmarshal(m, b)
 }
 func (m *CP2P_Voice) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CP2P_Voice.Marshal(b, m, deterministic)
 }
-func (dst *CP2P_Voice) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CP2P_Voice.Merge(dst, src)
+func (m *CP2P_Voice) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CP2P_Voice.Merge(m, src)
 }
 func (m *CP2P_Voice) XXX_Size() int {
 	return xxx_messageInfo_CP2P_Voice.Size(m)
@@ -230,16 +243,17 @@ func (m *CP2P_Ping) Reset()         { *m = CP2P_Ping{} }
 func (m *CP2P_Ping) String() string { return proto.CompactTextString(m) }
 func (*CP2P_Ping) ProtoMessage()    {}
 func (*CP2P_Ping) Descriptor() ([]byte, []int) {
-	return fileDescriptor_c_peer2peer_netmessages_1ed347a985ab2204, []int{3}
+	return fileDescriptor_1fec9daf05519245, []int{3}
 }
+
 func (m *CP2P_Ping) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CP2P_Ping.Unmarshal(m, b)
 }
 func (m *CP2P_Ping) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CP2P_Ping.Marshal(b, m, deterministic)
 }
-func (dst *CP2P_Ping) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CP2P_Ping.Merge(dst, src)
+func (m *CP2P_Ping) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CP2P_Ping.Merge(m, src)
 }
 func (m *CP2P_Ping) XXX_Size() int {
 	return xxx_messageInfo_CP2P_Ping.Size(m)
@@ -278,16 +292,17 @@ func (m *CP2P_VRAvatarPosition) Reset()         { *m = CP2P_VRAvatarPosition{} }
 func (m *CP2P_VRAvatarPosition) String() string { return proto.CompactTextString(m) }
 func (*CP2P_VRAvatarPosition) ProtoMessage()    {}
 func (*CP2P_VRAvatarPosition) Descriptor() ([]byte, []int) {
-	return fileDescriptor_c_peer2peer_netmessages_1ed347a985ab2204, []int{4}
+	return fileDescriptor_1fec9daf05519245, []int{4}
 }
+
 func (m *CP2P_VRAvatarPosition) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CP2P_VRAvatarPosition.Unmarshal(m, b)
 }
 func (m *CP2P_VRAvatarPosition) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CP2P_VRAvatarPosition.Marshal(b, m, deterministic)
 }
-func (dst *CP2P_VRAvatarPosition) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CP2P_VRAvatarPosition.Merge(dst, src)
+func (m *CP2P_VRAvatarPosition) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CP2P_VRAvatarPosition.Merge(m, src)
 }
 func (m *CP2P_VRAvatarPosition) XXX_Size() int {
 	return xxx_messageInfo_CP2P_VRAvatarPosition.Size(m)
@@ -338,16 +353,17 @@ func (m *CP2P_VRAvatarPosition_COrientation) Reset()         { *m = CP2P_VRAvata
 func (m *CP2P_VRAvatarPosition_COrientation) String() string { return proto.CompactTextString(m) }
 func (*CP2P_VRAvatarPosition_COrientation) ProtoMessage()    {}
 func (*CP2P_VRAvatarPosition_COrientation) Descriptor() ([]byte, []int) {
-	return fileDescriptor_c_peer2peer_netmessages_1ed347a985ab2204, []int{4, 0}
+	return fileDescriptor_1fec9daf05519245, []int{4, 0}
 }
+
 func (m *CP2P_VRAvatarPosition_COrientation) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CP2P_VRAvatarPosition_COrientation.Unmarshal(m, b)
 }
 func (m *CP2P_VRAvatarPosition_COrientation) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CP2P_VRAvatarPosition_COrientation.Marshal(b, m, deterministic)
 }
-func (dst *CP2P_VRAvatarPosition_COrientation) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CP2P_VRAvatarPosition_COrientation.Merge(dst, src)
+func (m *CP2P_VRAvatarPosition_COrientation) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CP2P_VRAvatarPosition_COrientation.Merge(m, src)
 }
 func (m *CP2P_VRAvatarPosition_COrientation) XXX_Size() int {
 	return xxx_messageInfo_CP2P_VRAvatarPosition_COrientation.Size(m)
@@ -390,16 +406,17 @@ func (m *CP2P_WatchSynchronization) Reset()         { *m = CP2P_WatchSynchroniza
 func (m *CP2P_WatchSynchronization) String() string { return proto.CompactTextString(m) }
 func (*CP2P_WatchSynchronization) ProtoMessage()    {}
 func (*CP2P_WatchSynchronization) Descriptor() ([]byte, []int) {
-	return fileDescriptor_c_peer2peer_netmessages_1ed347a985ab2204, []int{5}
+	return fileDescriptor_1fec9daf05519245, []int{5}
 }
+
 func (m *CP2P_WatchSynchronization) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CP2P_WatchSynchronization.Unmarshal(m, b)
 }
 func (m *CP2P_WatchSynchronization) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CP2P_WatchSynchronization.Marshal(b, m, deterministic)
 }
-func (dst *CP2P_WatchSynchronization) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CP2P_WatchSynchronization.Merge(dst, src)
+func (m *CP2P_WatchSynchronization) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CP2P_WatchSynchronization.Merge(m, src)
 }
 func (m *CP2P_WatchSynchronization) XXX_Size() int {
 	return xxx_messageInfo_CP2P_WatchSynchronization.Size(m)
@@ -467,6 +484,8 @@ func (m *CP2P_WatchSynchronization) GetDotaReplaySpeed() int32 {
 }
 
 func init() {
+	proto.RegisterEnum("dota.P2P_Messages", P2P_Messages_name, P2P_Messages_value)
+	proto.RegisterEnum("dota.CP2P_Voice_Handler_Flags", CP2P_Voice_Handler_Flags_name, CP2P_Voice_Handler_Flags_value)
 	proto.RegisterType((*CP2P_TextMessage)(nil), "dota.CP2P_TextMessage")
 	proto.RegisterType((*CSteam_Voice_Encoding)(nil), "dota.CSteam_Voice_Encoding")
 	proto.RegisterType((*CP2P_Voice)(nil), "dota.CP2P_Voice")
@@ -474,15 +493,11 @@ func init() {
 	proto.RegisterType((*CP2P_VRAvatarPosition)(nil), "dota.CP2P_VRAvatarPosition")
 	proto.RegisterType((*CP2P_VRAvatarPosition_COrientation)(nil), "dota.CP2P_VRAvatarPosition.COrientation")
 	proto.RegisterType((*CP2P_WatchSynchronization)(nil), "dota.CP2P_WatchSynchronization")
-	proto.RegisterEnum("dota.P2P_Messages", P2P_Messages_name, P2P_Messages_value)
-	proto.RegisterEnum("dota.CP2P_Voice_Handler_Flags", CP2P_Voice_Handler_Flags_name, CP2P_Voice_Handler_Flags_value)
 }
 
-func init() {
-	proto.RegisterFile("c_peer2peer_netmessages.proto", fileDescriptor_c_peer2peer_netmessages_1ed347a985ab2204)
-}
+func init() { proto.RegisterFile("c_peer2peer_netmessages.proto", fileDescriptor_1fec9daf05519245) }
 
-var fileDescriptor_c_peer2peer_netmessages_1ed347a985ab2204 = []byte{
+var fileDescriptor_1fec9daf05519245 = []byte{
 	// 703 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x6c, 0x93, 0x51, 0x6f, 0x23, 0x35,
 	0x10, 0xc7, 0xd9, 0x4d, 0xd2, 0x26, 0xd3, 0xf4, 0xba, 0x67, 0xd2, 0xb2, 0xe9, 0xa9, 0x22, 0x2c,

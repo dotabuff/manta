@@ -3,10 +3,12 @@
 
 package dota
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
-import descriptor "github.com/golang/protobuf/protoc-gen-go/descriptor"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	descriptor "github.com/golang/protobuf/protoc-gen-go/descriptor"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -17,7 +19,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type EHeroSelectionText int32
 
@@ -62,6 +64,7 @@ var EHeroSelectionText_name = map[int32]string{
 	15: "k_EHeroSelectionText_CaptainsMode_YouBan",
 	16: "k_EHeroSelectionText_CaptainsMode_TheyBan",
 }
+
 var EHeroSelectionText_value = map[string]int32{
 	"k_EHeroSelectionText_Invalid":                              -1,
 	"k_EHeroSelectionText_None":                                 0,
@@ -88,9 +91,11 @@ func (x EHeroSelectionText) Enum() *EHeroSelectionText {
 	*p = x
 	return p
 }
+
 func (x EHeroSelectionText) String() string {
 	return proto.EnumName(EHeroSelectionText_name, int32(x))
 }
+
 func (x *EHeroSelectionText) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(EHeroSelectionText_value, data, "EHeroSelectionText")
 	if err != nil {
@@ -99,8 +104,9 @@ func (x *EHeroSelectionText) UnmarshalJSON(data []byte) error {
 	*x = EHeroSelectionText(value)
 	return nil
 }
+
 func (EHeroSelectionText) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_dota_hud_types_bd7116e494185a93, []int{0}
+	return fileDescriptor_b16d5740bf0aa997, []int{0}
 }
 
 var E_HudLocalizeToken = &proto.ExtensionDesc{
@@ -108,7 +114,7 @@ var E_HudLocalizeToken = &proto.ExtensionDesc{
 	ExtensionType: (*string)(nil),
 	Field:         50501,
 	Name:          "dota.hud_localize_token",
-	Tag:           "bytes,50501,opt,name=hud_localize_token,json=hudLocalizeToken",
+	Tag:           "bytes,50501,opt,name=hud_localize_token",
 	Filename:      "dota_hud_types.proto",
 }
 
@@ -117,11 +123,9 @@ func init() {
 	proto.RegisterExtension(E_HudLocalizeToken)
 }
 
-func init() {
-	proto.RegisterFile("dota_hud_types.proto", fileDescriptor_dota_hud_types_bd7116e494185a93)
-}
+func init() { proto.RegisterFile("dota_hud_types.proto", fileDescriptor_b16d5740bf0aa997) }
 
-var fileDescriptor_dota_hud_types_bd7116e494185a93 = []byte{
+var fileDescriptor_b16d5740bf0aa997 = []byte{
 	// 583 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x95, 0xcb, 0x6e, 0x13, 0x3f,
 	0x14, 0xc6, 0x9b, 0x7f, 0xfb, 0x07, 0x6a, 0x28, 0x58, 0x16, 0x0b, 0x63, 0x81, 0x5a, 0xd4, 0x4d,

@@ -3,9 +3,11 @@
 
 package dota
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type CMsgSpectateFriendGameResponse_EWatchLiveResult int32
 
@@ -53,6 +55,7 @@ var CMsgSpectateFriendGameResponse_EWatchLiveResult_name = map[int32]string{
 	12: "ERROR_FRIENDS_ON_BOTH_SIDES",
 	13: "ERROR_SPECTATOR_IN_THIS_LOBBY",
 }
+
 var CMsgSpectateFriendGameResponse_EWatchLiveResult_value = map[string]int32{
 	"SUCCESS":                        0,
 	"ERROR_GENERIC":                  1,
@@ -75,9 +78,11 @@ func (x CMsgSpectateFriendGameResponse_EWatchLiveResult) Enum() *CMsgSpectateFri
 	*p = x
 	return p
 }
+
 func (x CMsgSpectateFriendGameResponse_EWatchLiveResult) String() string {
 	return proto.EnumName(CMsgSpectateFriendGameResponse_EWatchLiveResult_name, int32(x))
 }
+
 func (x *CMsgSpectateFriendGameResponse_EWatchLiveResult) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(CMsgSpectateFriendGameResponse_EWatchLiveResult_value, data, "CMsgSpectateFriendGameResponse_EWatchLiveResult")
 	if err != nil {
@@ -86,8 +91,9 @@ func (x *CMsgSpectateFriendGameResponse_EWatchLiveResult) UnmarshalJSON(data []b
 	*x = CMsgSpectateFriendGameResponse_EWatchLiveResult(value)
 	return nil
 }
+
 func (CMsgSpectateFriendGameResponse_EWatchLiveResult) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_watch_7c158fb431796a59, []int{14, 0}
+	return fileDescriptor_b094add08ee70dca, []int{14, 0}
 }
 
 type CMsgWatchGameResponse_WatchGameResult int32
@@ -113,6 +119,7 @@ var CMsgWatchGameResponse_WatchGameResult_name = map[int32]string{
 	6: "MISSINGLEAGUESUBSCRIPTION",
 	7: "LOBBYNOTFOUND",
 }
+
 var CMsgWatchGameResponse_WatchGameResult_value = map[string]int32{
 	"PENDING":                   0,
 	"READY":                     1,
@@ -129,9 +136,11 @@ func (x CMsgWatchGameResponse_WatchGameResult) Enum() *CMsgWatchGameResponse_Wat
 	*p = x
 	return p
 }
+
 func (x CMsgWatchGameResponse_WatchGameResult) String() string {
 	return proto.EnumName(CMsgWatchGameResponse_WatchGameResult_name, int32(x))
 }
+
 func (x *CMsgWatchGameResponse_WatchGameResult) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(CMsgWatchGameResponse_WatchGameResult_value, data, "CMsgWatchGameResponse_WatchGameResult")
 	if err != nil {
@@ -140,8 +149,9 @@ func (x *CMsgWatchGameResponse_WatchGameResult) UnmarshalJSON(data []byte) error
 	*x = CMsgWatchGameResponse_WatchGameResult(value)
 	return nil
 }
+
 func (CMsgWatchGameResponse_WatchGameResult) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_watch_7c158fb431796a59, []int{18, 0}
+	return fileDescriptor_b094add08ee70dca, []int{18, 0}
 }
 
 type CSourceTVGameSmall struct {
@@ -184,16 +194,17 @@ func (m *CSourceTVGameSmall) Reset()         { *m = CSourceTVGameSmall{} }
 func (m *CSourceTVGameSmall) String() string { return proto.CompactTextString(m) }
 func (*CSourceTVGameSmall) ProtoMessage()    {}
 func (*CSourceTVGameSmall) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_watch_7c158fb431796a59, []int{0}
+	return fileDescriptor_b094add08ee70dca, []int{0}
 }
+
 func (m *CSourceTVGameSmall) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSourceTVGameSmall.Unmarshal(m, b)
 }
 func (m *CSourceTVGameSmall) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSourceTVGameSmall.Marshal(b, m, deterministic)
 }
-func (dst *CSourceTVGameSmall) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSourceTVGameSmall.Merge(dst, src)
+func (m *CSourceTVGameSmall) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSourceTVGameSmall.Merge(m, src)
 }
 func (m *CSourceTVGameSmall) XXX_Size() int {
 	return xxx_messageInfo_CSourceTVGameSmall.Size(m)
@@ -426,16 +437,17 @@ func (m *CSourceTVGameSmall_Player) Reset()         { *m = CSourceTVGameSmall_Pl
 func (m *CSourceTVGameSmall_Player) String() string { return proto.CompactTextString(m) }
 func (*CSourceTVGameSmall_Player) ProtoMessage()    {}
 func (*CSourceTVGameSmall_Player) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_watch_7c158fb431796a59, []int{0, 0}
+	return fileDescriptor_b094add08ee70dca, []int{0, 0}
 }
+
 func (m *CSourceTVGameSmall_Player) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSourceTVGameSmall_Player.Unmarshal(m, b)
 }
 func (m *CSourceTVGameSmall_Player) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSourceTVGameSmall_Player.Marshal(b, m, deterministic)
 }
-func (dst *CSourceTVGameSmall_Player) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSourceTVGameSmall_Player.Merge(dst, src)
+func (m *CSourceTVGameSmall_Player) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSourceTVGameSmall_Player.Merge(m, src)
 }
 func (m *CSourceTVGameSmall_Player) XXX_Size() int {
 	return xxx_messageInfo_CSourceTVGameSmall_Player.Size(m)
@@ -476,16 +488,17 @@ func (m *CMsgClientToGCFindTopSourceTVGames) Reset()         { *m = CMsgClientTo
 func (m *CMsgClientToGCFindTopSourceTVGames) String() string { return proto.CompactTextString(m) }
 func (*CMsgClientToGCFindTopSourceTVGames) ProtoMessage()    {}
 func (*CMsgClientToGCFindTopSourceTVGames) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_watch_7c158fb431796a59, []int{1}
+	return fileDescriptor_b094add08ee70dca, []int{1}
 }
+
 func (m *CMsgClientToGCFindTopSourceTVGames) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgClientToGCFindTopSourceTVGames.Unmarshal(m, b)
 }
 func (m *CMsgClientToGCFindTopSourceTVGames) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgClientToGCFindTopSourceTVGames.Marshal(b, m, deterministic)
 }
-func (dst *CMsgClientToGCFindTopSourceTVGames) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgClientToGCFindTopSourceTVGames.Merge(dst, src)
+func (m *CMsgClientToGCFindTopSourceTVGames) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCFindTopSourceTVGames.Merge(m, src)
 }
 func (m *CMsgClientToGCFindTopSourceTVGames) XXX_Size() int {
 	return xxx_messageInfo_CMsgClientToGCFindTopSourceTVGames.Size(m)
@@ -561,16 +574,17 @@ func (m *CMsgGCToClientFindTopSourceTVGamesResponse) String() string {
 }
 func (*CMsgGCToClientFindTopSourceTVGamesResponse) ProtoMessage() {}
 func (*CMsgGCToClientFindTopSourceTVGamesResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_watch_7c158fb431796a59, []int{2}
+	return fileDescriptor_b094add08ee70dca, []int{2}
 }
+
 func (m *CMsgGCToClientFindTopSourceTVGamesResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgGCToClientFindTopSourceTVGamesResponse.Unmarshal(m, b)
 }
 func (m *CMsgGCToClientFindTopSourceTVGamesResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgGCToClientFindTopSourceTVGamesResponse.Marshal(b, m, deterministic)
 }
-func (dst *CMsgGCToClientFindTopSourceTVGamesResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgGCToClientFindTopSourceTVGamesResponse.Merge(dst, src)
+func (m *CMsgGCToClientFindTopSourceTVGamesResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGCToClientFindTopSourceTVGamesResponse.Merge(m, src)
 }
 func (m *CMsgGCToClientFindTopSourceTVGamesResponse) XXX_Size() int {
 	return xxx_messageInfo_CMsgGCToClientFindTopSourceTVGamesResponse.Size(m)
@@ -655,16 +669,17 @@ func (m *CMsgGCToClientTopWeekendTourneyGames) Reset()         { *m = CMsgGCToCl
 func (m *CMsgGCToClientTopWeekendTourneyGames) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCToClientTopWeekendTourneyGames) ProtoMessage()    {}
 func (*CMsgGCToClientTopWeekendTourneyGames) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_watch_7c158fb431796a59, []int{3}
+	return fileDescriptor_b094add08ee70dca, []int{3}
 }
+
 func (m *CMsgGCToClientTopWeekendTourneyGames) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgGCToClientTopWeekendTourneyGames.Unmarshal(m, b)
 }
 func (m *CMsgGCToClientTopWeekendTourneyGames) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgGCToClientTopWeekendTourneyGames.Marshal(b, m, deterministic)
 }
-func (dst *CMsgGCToClientTopWeekendTourneyGames) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgGCToClientTopWeekendTourneyGames.Merge(dst, src)
+func (m *CMsgGCToClientTopWeekendTourneyGames) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGCToClientTopWeekendTourneyGames.Merge(m, src)
 }
 func (m *CMsgGCToClientTopWeekendTourneyGames) XXX_Size() int {
 	return xxx_messageInfo_CMsgGCToClientTopWeekendTourneyGames.Size(m)
@@ -695,16 +710,17 @@ func (m *CMsgClientToGCTopMatchesRequest) Reset()         { *m = CMsgClientToGCT
 func (m *CMsgClientToGCTopMatchesRequest) String() string { return proto.CompactTextString(m) }
 func (*CMsgClientToGCTopMatchesRequest) ProtoMessage()    {}
 func (*CMsgClientToGCTopMatchesRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_watch_7c158fb431796a59, []int{4}
+	return fileDescriptor_b094add08ee70dca, []int{4}
 }
+
 func (m *CMsgClientToGCTopMatchesRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgClientToGCTopMatchesRequest.Unmarshal(m, b)
 }
 func (m *CMsgClientToGCTopMatchesRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgClientToGCTopMatchesRequest.Marshal(b, m, deterministic)
 }
-func (dst *CMsgClientToGCTopMatchesRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgClientToGCTopMatchesRequest.Merge(dst, src)
+func (m *CMsgClientToGCTopMatchesRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCTopMatchesRequest.Merge(m, src)
 }
 func (m *CMsgClientToGCTopMatchesRequest) XXX_Size() int {
 	return xxx_messageInfo_CMsgClientToGCTopMatchesRequest.Size(m)
@@ -746,16 +762,17 @@ func (m *CMsgClientToGCTopLeagueMatchesRequest) Reset()         { *m = CMsgClien
 func (m *CMsgClientToGCTopLeagueMatchesRequest) String() string { return proto.CompactTextString(m) }
 func (*CMsgClientToGCTopLeagueMatchesRequest) ProtoMessage()    {}
 func (*CMsgClientToGCTopLeagueMatchesRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_watch_7c158fb431796a59, []int{5}
+	return fileDescriptor_b094add08ee70dca, []int{5}
 }
+
 func (m *CMsgClientToGCTopLeagueMatchesRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgClientToGCTopLeagueMatchesRequest.Unmarshal(m, b)
 }
 func (m *CMsgClientToGCTopLeagueMatchesRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgClientToGCTopLeagueMatchesRequest.Marshal(b, m, deterministic)
 }
-func (dst *CMsgClientToGCTopLeagueMatchesRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgClientToGCTopLeagueMatchesRequest.Merge(dst, src)
+func (m *CMsgClientToGCTopLeagueMatchesRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCTopLeagueMatchesRequest.Merge(m, src)
 }
 func (m *CMsgClientToGCTopLeagueMatchesRequest) XXX_Size() int {
 	return xxx_messageInfo_CMsgClientToGCTopLeagueMatchesRequest.Size(m)
@@ -776,16 +793,17 @@ func (m *CMsgClientToGCTopFriendMatchesRequest) Reset()         { *m = CMsgClien
 func (m *CMsgClientToGCTopFriendMatchesRequest) String() string { return proto.CompactTextString(m) }
 func (*CMsgClientToGCTopFriendMatchesRequest) ProtoMessage()    {}
 func (*CMsgClientToGCTopFriendMatchesRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_watch_7c158fb431796a59, []int{6}
+	return fileDescriptor_b094add08ee70dca, []int{6}
 }
+
 func (m *CMsgClientToGCTopFriendMatchesRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgClientToGCTopFriendMatchesRequest.Unmarshal(m, b)
 }
 func (m *CMsgClientToGCTopFriendMatchesRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgClientToGCTopFriendMatchesRequest.Marshal(b, m, deterministic)
 }
-func (dst *CMsgClientToGCTopFriendMatchesRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgClientToGCTopFriendMatchesRequest.Merge(dst, src)
+func (m *CMsgClientToGCTopFriendMatchesRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCTopFriendMatchesRequest.Merge(m, src)
 }
 func (m *CMsgClientToGCTopFriendMatchesRequest) XXX_Size() int {
 	return xxx_messageInfo_CMsgClientToGCTopFriendMatchesRequest.Size(m)
@@ -807,16 +825,17 @@ func (m *CMsgClientToGCMatchesMinimalRequest) Reset()         { *m = CMsgClientT
 func (m *CMsgClientToGCMatchesMinimalRequest) String() string { return proto.CompactTextString(m) }
 func (*CMsgClientToGCMatchesMinimalRequest) ProtoMessage()    {}
 func (*CMsgClientToGCMatchesMinimalRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_watch_7c158fb431796a59, []int{7}
+	return fileDescriptor_b094add08ee70dca, []int{7}
 }
+
 func (m *CMsgClientToGCMatchesMinimalRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgClientToGCMatchesMinimalRequest.Unmarshal(m, b)
 }
 func (m *CMsgClientToGCMatchesMinimalRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgClientToGCMatchesMinimalRequest.Marshal(b, m, deterministic)
 }
-func (dst *CMsgClientToGCMatchesMinimalRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgClientToGCMatchesMinimalRequest.Merge(dst, src)
+func (m *CMsgClientToGCMatchesMinimalRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCMatchesMinimalRequest.Merge(m, src)
 }
 func (m *CMsgClientToGCMatchesMinimalRequest) XXX_Size() int {
 	return xxx_messageInfo_CMsgClientToGCMatchesMinimalRequest.Size(m)
@@ -846,16 +865,17 @@ func (m *CMsgClientToGCMatchesMinimalResponse) Reset()         { *m = CMsgClient
 func (m *CMsgClientToGCMatchesMinimalResponse) String() string { return proto.CompactTextString(m) }
 func (*CMsgClientToGCMatchesMinimalResponse) ProtoMessage()    {}
 func (*CMsgClientToGCMatchesMinimalResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_watch_7c158fb431796a59, []int{8}
+	return fileDescriptor_b094add08ee70dca, []int{8}
 }
+
 func (m *CMsgClientToGCMatchesMinimalResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgClientToGCMatchesMinimalResponse.Unmarshal(m, b)
 }
 func (m *CMsgClientToGCMatchesMinimalResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgClientToGCMatchesMinimalResponse.Marshal(b, m, deterministic)
 }
-func (dst *CMsgClientToGCMatchesMinimalResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgClientToGCMatchesMinimalResponse.Merge(dst, src)
+func (m *CMsgClientToGCMatchesMinimalResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCMatchesMinimalResponse.Merge(m, src)
 }
 func (m *CMsgClientToGCMatchesMinimalResponse) XXX_Size() int {
 	return xxx_messageInfo_CMsgClientToGCMatchesMinimalResponse.Size(m)
@@ -893,16 +913,17 @@ func (m *CMsgGCToClientTopLeagueMatchesResponse) Reset() {
 func (m *CMsgGCToClientTopLeagueMatchesResponse) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCToClientTopLeagueMatchesResponse) ProtoMessage()    {}
 func (*CMsgGCToClientTopLeagueMatchesResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_watch_7c158fb431796a59, []int{9}
+	return fileDescriptor_b094add08ee70dca, []int{9}
 }
+
 func (m *CMsgGCToClientTopLeagueMatchesResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgGCToClientTopLeagueMatchesResponse.Unmarshal(m, b)
 }
 func (m *CMsgGCToClientTopLeagueMatchesResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgGCToClientTopLeagueMatchesResponse.Marshal(b, m, deterministic)
 }
-func (dst *CMsgGCToClientTopLeagueMatchesResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgGCToClientTopLeagueMatchesResponse.Merge(dst, src)
+func (m *CMsgGCToClientTopLeagueMatchesResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGCToClientTopLeagueMatchesResponse.Merge(m, src)
 }
 func (m *CMsgGCToClientTopLeagueMatchesResponse) XXX_Size() int {
 	return xxx_messageInfo_CMsgGCToClientTopLeagueMatchesResponse.Size(m)
@@ -933,16 +954,17 @@ func (m *CMsgGCToClientTopFriendMatchesResponse) Reset() {
 func (m *CMsgGCToClientTopFriendMatchesResponse) String() string { return proto.CompactTextString(m) }
 func (*CMsgGCToClientTopFriendMatchesResponse) ProtoMessage()    {}
 func (*CMsgGCToClientTopFriendMatchesResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_watch_7c158fb431796a59, []int{10}
+	return fileDescriptor_b094add08ee70dca, []int{10}
 }
+
 func (m *CMsgGCToClientTopFriendMatchesResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgGCToClientTopFriendMatchesResponse.Unmarshal(m, b)
 }
 func (m *CMsgGCToClientTopFriendMatchesResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgGCToClientTopFriendMatchesResponse.Marshal(b, m, deterministic)
 }
-func (dst *CMsgGCToClientTopFriendMatchesResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgGCToClientTopFriendMatchesResponse.Merge(dst, src)
+func (m *CMsgGCToClientTopFriendMatchesResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGCToClientTopFriendMatchesResponse.Merge(m, src)
 }
 func (m *CMsgGCToClientTopFriendMatchesResponse) XXX_Size() int {
 	return xxx_messageInfo_CMsgGCToClientTopFriendMatchesResponse.Size(m)
@@ -976,16 +998,17 @@ func (m *CMsgClientToGCFindTopMatches) Reset()         { *m = CMsgClientToGCFind
 func (m *CMsgClientToGCFindTopMatches) String() string { return proto.CompactTextString(m) }
 func (*CMsgClientToGCFindTopMatches) ProtoMessage()    {}
 func (*CMsgClientToGCFindTopMatches) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_watch_7c158fb431796a59, []int{11}
+	return fileDescriptor_b094add08ee70dca, []int{11}
 }
+
 func (m *CMsgClientToGCFindTopMatches) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgClientToGCFindTopMatches.Unmarshal(m, b)
 }
 func (m *CMsgClientToGCFindTopMatches) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgClientToGCFindTopMatches.Marshal(b, m, deterministic)
 }
-func (dst *CMsgClientToGCFindTopMatches) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgClientToGCFindTopMatches.Merge(dst, src)
+func (m *CMsgClientToGCFindTopMatches) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCFindTopMatches.Merge(m, src)
 }
 func (m *CMsgClientToGCFindTopMatches) XXX_Size() int {
 	return xxx_messageInfo_CMsgClientToGCFindTopMatches.Size(m)
@@ -1057,16 +1080,17 @@ func (m *CMsgGCToClientFindTopLeagueMatchesResponse) String() string {
 }
 func (*CMsgGCToClientFindTopLeagueMatchesResponse) ProtoMessage() {}
 func (*CMsgGCToClientFindTopLeagueMatchesResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_watch_7c158fb431796a59, []int{12}
+	return fileDescriptor_b094add08ee70dca, []int{12}
 }
+
 func (m *CMsgGCToClientFindTopLeagueMatchesResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgGCToClientFindTopLeagueMatchesResponse.Unmarshal(m, b)
 }
 func (m *CMsgGCToClientFindTopLeagueMatchesResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgGCToClientFindTopLeagueMatchesResponse.Marshal(b, m, deterministic)
 }
-func (dst *CMsgGCToClientFindTopLeagueMatchesResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgGCToClientFindTopLeagueMatchesResponse.Merge(dst, src)
+func (m *CMsgGCToClientFindTopLeagueMatchesResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGCToClientFindTopLeagueMatchesResponse.Merge(m, src)
 }
 func (m *CMsgGCToClientFindTopLeagueMatchesResponse) XXX_Size() int {
 	return xxx_messageInfo_CMsgGCToClientFindTopLeagueMatchesResponse.Size(m)
@@ -1124,16 +1148,17 @@ func (m *CMsgSpectateFriendGame) Reset()         { *m = CMsgSpectateFriendGame{}
 func (m *CMsgSpectateFriendGame) String() string { return proto.CompactTextString(m) }
 func (*CMsgSpectateFriendGame) ProtoMessage()    {}
 func (*CMsgSpectateFriendGame) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_watch_7c158fb431796a59, []int{13}
+	return fileDescriptor_b094add08ee70dca, []int{13}
 }
+
 func (m *CMsgSpectateFriendGame) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgSpectateFriendGame.Unmarshal(m, b)
 }
 func (m *CMsgSpectateFriendGame) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgSpectateFriendGame.Marshal(b, m, deterministic)
 }
-func (dst *CMsgSpectateFriendGame) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgSpectateFriendGame.Merge(dst, src)
+func (m *CMsgSpectateFriendGame) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgSpectateFriendGame.Merge(m, src)
 }
 func (m *CMsgSpectateFriendGame) XXX_Size() int {
 	return xxx_messageInfo_CMsgSpectateFriendGame.Size(m)
@@ -1170,16 +1195,17 @@ func (m *CMsgSpectateFriendGameResponse) Reset()         { *m = CMsgSpectateFrie
 func (m *CMsgSpectateFriendGameResponse) String() string { return proto.CompactTextString(m) }
 func (*CMsgSpectateFriendGameResponse) ProtoMessage()    {}
 func (*CMsgSpectateFriendGameResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_watch_7c158fb431796a59, []int{14}
+	return fileDescriptor_b094add08ee70dca, []int{14}
 }
+
 func (m *CMsgSpectateFriendGameResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgSpectateFriendGameResponse.Unmarshal(m, b)
 }
 func (m *CMsgSpectateFriendGameResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgSpectateFriendGameResponse.Marshal(b, m, deterministic)
 }
-func (dst *CMsgSpectateFriendGameResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgSpectateFriendGameResponse.Merge(dst, src)
+func (m *CMsgSpectateFriendGameResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgSpectateFriendGameResponse.Merge(m, src)
 }
 func (m *CMsgSpectateFriendGameResponse) XXX_Size() int {
 	return xxx_messageInfo_CMsgSpectateFriendGameResponse.Size(m)
@@ -1222,16 +1248,17 @@ func (m *CDOTAReplayDownloadInfo) Reset()         { *m = CDOTAReplayDownloadInfo
 func (m *CDOTAReplayDownloadInfo) String() string { return proto.CompactTextString(m) }
 func (*CDOTAReplayDownloadInfo) ProtoMessage()    {}
 func (*CDOTAReplayDownloadInfo) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_watch_7c158fb431796a59, []int{15}
+	return fileDescriptor_b094add08ee70dca, []int{15}
 }
+
 func (m *CDOTAReplayDownloadInfo) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CDOTAReplayDownloadInfo.Unmarshal(m, b)
 }
 func (m *CDOTAReplayDownloadInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CDOTAReplayDownloadInfo.Marshal(b, m, deterministic)
 }
-func (dst *CDOTAReplayDownloadInfo) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CDOTAReplayDownloadInfo.Merge(dst, src)
+func (m *CDOTAReplayDownloadInfo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CDOTAReplayDownloadInfo.Merge(m, src)
 }
 func (m *CDOTAReplayDownloadInfo) XXX_Size() int {
 	return xxx_messageInfo_CDOTAReplayDownloadInfo.Size(m)
@@ -1296,16 +1323,17 @@ func (m *CDOTAReplayDownloadInfo_Highlight) Reset()         { *m = CDOTAReplayDo
 func (m *CDOTAReplayDownloadInfo_Highlight) String() string { return proto.CompactTextString(m) }
 func (*CDOTAReplayDownloadInfo_Highlight) ProtoMessage()    {}
 func (*CDOTAReplayDownloadInfo_Highlight) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_watch_7c158fb431796a59, []int{15, 0}
+	return fileDescriptor_b094add08ee70dca, []int{15, 0}
 }
+
 func (m *CDOTAReplayDownloadInfo_Highlight) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CDOTAReplayDownloadInfo_Highlight.Unmarshal(m, b)
 }
 func (m *CDOTAReplayDownloadInfo_Highlight) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CDOTAReplayDownloadInfo_Highlight.Marshal(b, m, deterministic)
 }
-func (dst *CDOTAReplayDownloadInfo_Highlight) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CDOTAReplayDownloadInfo_Highlight.Merge(dst, src)
+func (m *CDOTAReplayDownloadInfo_Highlight) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CDOTAReplayDownloadInfo_Highlight.Merge(m, src)
 }
 func (m *CDOTAReplayDownloadInfo_Highlight) XXX_Size() int {
 	return xxx_messageInfo_CDOTAReplayDownloadInfo_Highlight.Size(m)
@@ -1345,16 +1373,17 @@ func (m *CMsgWatchGame) Reset()         { *m = CMsgWatchGame{} }
 func (m *CMsgWatchGame) String() string { return proto.CompactTextString(m) }
 func (*CMsgWatchGame) ProtoMessage()    {}
 func (*CMsgWatchGame) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_watch_7c158fb431796a59, []int{16}
+	return fileDescriptor_b094add08ee70dca, []int{16}
 }
+
 func (m *CMsgWatchGame) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgWatchGame.Unmarshal(m, b)
 }
 func (m *CMsgWatchGame) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgWatchGame.Marshal(b, m, deterministic)
 }
-func (dst *CMsgWatchGame) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgWatchGame.Merge(dst, src)
+func (m *CMsgWatchGame) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgWatchGame.Merge(m, src)
 }
 func (m *CMsgWatchGame) XXX_Size() int {
 	return xxx_messageInfo_CMsgWatchGame.Size(m)
@@ -1410,16 +1439,17 @@ func (m *CMsgCancelWatchGame) Reset()         { *m = CMsgCancelWatchGame{} }
 func (m *CMsgCancelWatchGame) String() string { return proto.CompactTextString(m) }
 func (*CMsgCancelWatchGame) ProtoMessage()    {}
 func (*CMsgCancelWatchGame) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_watch_7c158fb431796a59, []int{17}
+	return fileDescriptor_b094add08ee70dca, []int{17}
 }
+
 func (m *CMsgCancelWatchGame) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgCancelWatchGame.Unmarshal(m, b)
 }
 func (m *CMsgCancelWatchGame) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgCancelWatchGame.Marshal(b, m, deterministic)
 }
-func (dst *CMsgCancelWatchGame) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgCancelWatchGame.Merge(dst, src)
+func (m *CMsgCancelWatchGame) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgCancelWatchGame.Merge(m, src)
 }
 func (m *CMsgCancelWatchGame) XXX_Size() int {
 	return xxx_messageInfo_CMsgCancelWatchGame.Size(m)
@@ -1447,16 +1477,17 @@ func (m *CMsgWatchGameResponse) Reset()         { *m = CMsgWatchGameResponse{} }
 func (m *CMsgWatchGameResponse) String() string { return proto.CompactTextString(m) }
 func (*CMsgWatchGameResponse) ProtoMessage()    {}
 func (*CMsgWatchGameResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_watch_7c158fb431796a59, []int{18}
+	return fileDescriptor_b094add08ee70dca, []int{18}
 }
+
 func (m *CMsgWatchGameResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgWatchGameResponse.Unmarshal(m, b)
 }
 func (m *CMsgWatchGameResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgWatchGameResponse.Marshal(b, m, deterministic)
 }
-func (dst *CMsgWatchGameResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgWatchGameResponse.Merge(dst, src)
+func (m *CMsgWatchGameResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgWatchGameResponse.Merge(m, src)
 }
 func (m *CMsgWatchGameResponse) XXX_Size() int {
 	return xxx_messageInfo_CMsgWatchGameResponse.Size(m)
@@ -1529,16 +1560,17 @@ func (m *CMsgPartyLeaderWatchGamePrompt) Reset()         { *m = CMsgPartyLeaderW
 func (m *CMsgPartyLeaderWatchGamePrompt) String() string { return proto.CompactTextString(m) }
 func (*CMsgPartyLeaderWatchGamePrompt) ProtoMessage()    {}
 func (*CMsgPartyLeaderWatchGamePrompt) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_watch_7c158fb431796a59, []int{19}
+	return fileDescriptor_b094add08ee70dca, []int{19}
 }
+
 func (m *CMsgPartyLeaderWatchGamePrompt) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgPartyLeaderWatchGamePrompt.Unmarshal(m, b)
 }
 func (m *CMsgPartyLeaderWatchGamePrompt) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgPartyLeaderWatchGamePrompt.Marshal(b, m, deterministic)
 }
-func (dst *CMsgPartyLeaderWatchGamePrompt) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgPartyLeaderWatchGamePrompt.Merge(dst, src)
+func (m *CMsgPartyLeaderWatchGamePrompt) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgPartyLeaderWatchGamePrompt.Merge(m, src)
 }
 func (m *CMsgPartyLeaderWatchGamePrompt) XXX_Size() int {
 	return xxx_messageInfo_CMsgPartyLeaderWatchGamePrompt.Size(m)
@@ -1576,16 +1608,17 @@ func (m *CDOTABroadcasterInfo) Reset()         { *m = CDOTABroadcasterInfo{} }
 func (m *CDOTABroadcasterInfo) String() string { return proto.CompactTextString(m) }
 func (*CDOTABroadcasterInfo) ProtoMessage()    {}
 func (*CDOTABroadcasterInfo) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_watch_7c158fb431796a59, []int{20}
+	return fileDescriptor_b094add08ee70dca, []int{20}
 }
+
 func (m *CDOTABroadcasterInfo) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CDOTABroadcasterInfo.Unmarshal(m, b)
 }
 func (m *CDOTABroadcasterInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CDOTABroadcasterInfo.Marshal(b, m, deterministic)
 }
-func (dst *CDOTABroadcasterInfo) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CDOTABroadcasterInfo.Merge(dst, src)
+func (m *CDOTABroadcasterInfo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CDOTABroadcasterInfo.Merge(m, src)
 }
 func (m *CDOTABroadcasterInfo) XXX_Size() int {
 	return xxx_messageInfo_CDOTABroadcasterInfo.Size(m)
@@ -1682,16 +1715,17 @@ func (m *CMsgDOTASeries) Reset()         { *m = CMsgDOTASeries{} }
 func (m *CMsgDOTASeries) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTASeries) ProtoMessage()    {}
 func (*CMsgDOTASeries) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_watch_7c158fb431796a59, []int{21}
+	return fileDescriptor_b094add08ee70dca, []int{21}
 }
+
 func (m *CMsgDOTASeries) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTASeries.Unmarshal(m, b)
 }
 func (m *CMsgDOTASeries) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTASeries.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTASeries) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTASeries.Merge(dst, src)
+func (m *CMsgDOTASeries) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTASeries.Merge(m, src)
 }
 func (m *CMsgDOTASeries) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTASeries.Size(m)
@@ -1758,16 +1792,17 @@ func (m *CMsgDOTASeries_TeamInfo) Reset()         { *m = CMsgDOTASeries_TeamInfo
 func (m *CMsgDOTASeries_TeamInfo) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTASeries_TeamInfo) ProtoMessage()    {}
 func (*CMsgDOTASeries_TeamInfo) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_watch_7c158fb431796a59, []int{21, 0}
+	return fileDescriptor_b094add08ee70dca, []int{21, 0}
 }
+
 func (m *CMsgDOTASeries_TeamInfo) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTASeries_TeamInfo.Unmarshal(m, b)
 }
 func (m *CMsgDOTASeries_TeamInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTASeries_TeamInfo.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTASeries_TeamInfo) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTASeries_TeamInfo.Merge(dst, src)
+func (m *CMsgDOTASeries_TeamInfo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTASeries_TeamInfo.Merge(m, src)
 }
 func (m *CMsgDOTASeries_TeamInfo) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTASeries_TeamInfo.Size(m)
@@ -1821,16 +1856,17 @@ func (m *CMsgDOTASeries_LiveGame) Reset()         { *m = CMsgDOTASeries_LiveGame
 func (m *CMsgDOTASeries_LiveGame) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTASeries_LiveGame) ProtoMessage()    {}
 func (*CMsgDOTASeries_LiveGame) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_watch_7c158fb431796a59, []int{21, 1}
+	return fileDescriptor_b094add08ee70dca, []int{21, 1}
 }
+
 func (m *CMsgDOTASeries_LiveGame) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTASeries_LiveGame.Unmarshal(m, b)
 }
 func (m *CMsgDOTASeries_LiveGame) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTASeries_LiveGame.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTASeries_LiveGame) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTASeries_LiveGame.Merge(dst, src)
+func (m *CMsgDOTASeries_LiveGame) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTASeries_LiveGame.Merge(m, src)
 }
 func (m *CMsgDOTASeries_LiveGame) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTASeries_LiveGame.Size(m)
@@ -1877,6 +1913,8 @@ func (m *CMsgDOTASeries_LiveGame) GetTeamDireScore() uint32 {
 }
 
 func init() {
+	proto.RegisterEnum("dota.CMsgSpectateFriendGameResponse_EWatchLiveResult", CMsgSpectateFriendGameResponse_EWatchLiveResult_name, CMsgSpectateFriendGameResponse_EWatchLiveResult_value)
+	proto.RegisterEnum("dota.CMsgWatchGameResponse_WatchGameResult", CMsgWatchGameResponse_WatchGameResult_name, CMsgWatchGameResponse_WatchGameResult_value)
 	proto.RegisterType((*CSourceTVGameSmall)(nil), "dota.CSourceTVGameSmall")
 	proto.RegisterType((*CSourceTVGameSmall_Player)(nil), "dota.CSourceTVGameSmall.Player")
 	proto.RegisterType((*CMsgClientToGCFindTopSourceTVGames)(nil), "dota.CMsgClientToGCFindTopSourceTVGames")
@@ -1903,15 +1941,11 @@ func init() {
 	proto.RegisterType((*CMsgDOTASeries)(nil), "dota.CMsgDOTASeries")
 	proto.RegisterType((*CMsgDOTASeries_TeamInfo)(nil), "dota.CMsgDOTASeries.TeamInfo")
 	proto.RegisterType((*CMsgDOTASeries_LiveGame)(nil), "dota.CMsgDOTASeries.LiveGame")
-	proto.RegisterEnum("dota.CMsgSpectateFriendGameResponse_EWatchLiveResult", CMsgSpectateFriendGameResponse_EWatchLiveResult_name, CMsgSpectateFriendGameResponse_EWatchLiveResult_value)
-	proto.RegisterEnum("dota.CMsgWatchGameResponse_WatchGameResult", CMsgWatchGameResponse_WatchGameResult_name, CMsgWatchGameResponse_WatchGameResult_value)
 }
 
-func init() {
-	proto.RegisterFile("dota_gcmessages_client_watch.proto", fileDescriptor_dota_gcmessages_client_watch_7c158fb431796a59)
-}
+func init() { proto.RegisterFile("dota_gcmessages_client_watch.proto", fileDescriptor_b094add08ee70dca) }
 
-var fileDescriptor_dota_gcmessages_client_watch_7c158fb431796a59 = []byte{
+var fileDescriptor_b094add08ee70dca = []byte{
 	// 2386 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xc4, 0x58, 0xcb, 0x72, 0xdb, 0xc8,
 	0xd5, 0x1e, 0x90, 0xe2, 0xed, 0x50, 0x94, 0xa8, 0x96, 0x25, 0xc1, 0x92, 0x65, 0x71, 0x30, 0x33,
