@@ -3,9 +3,11 @@
 
 package dota
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type CPublishedFile_Subscribe_Request struct {
 	Publishedfileid      *uint64  `protobuf:"varint,1,opt,name=publishedfileid" json:"publishedfileid,omitempty"`
@@ -32,16 +34,17 @@ func (m *CPublishedFile_Subscribe_Request) Reset()         { *m = CPublishedFile
 func (m *CPublishedFile_Subscribe_Request) String() string { return proto.CompactTextString(m) }
 func (*CPublishedFile_Subscribe_Request) ProtoMessage()    {}
 func (*CPublishedFile_Subscribe_Request) Descriptor() ([]byte, []int) {
-	return fileDescriptor_steammessages_publishedfile_steamworkssdk_64a9567990aa6744, []int{0}
+	return fileDescriptor_636bda8e158caf65, []int{0}
 }
+
 func (m *CPublishedFile_Subscribe_Request) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CPublishedFile_Subscribe_Request.Unmarshal(m, b)
 }
 func (m *CPublishedFile_Subscribe_Request) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CPublishedFile_Subscribe_Request.Marshal(b, m, deterministic)
 }
-func (dst *CPublishedFile_Subscribe_Request) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CPublishedFile_Subscribe_Request.Merge(dst, src)
+func (m *CPublishedFile_Subscribe_Request) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CPublishedFile_Subscribe_Request.Merge(m, src)
 }
 func (m *CPublishedFile_Subscribe_Request) XXX_Size() int {
 	return xxx_messageInfo_CPublishedFile_Subscribe_Request.Size(m)
@@ -90,16 +93,17 @@ func (m *CPublishedFile_Subscribe_Response) Reset()         { *m = CPublishedFil
 func (m *CPublishedFile_Subscribe_Response) String() string { return proto.CompactTextString(m) }
 func (*CPublishedFile_Subscribe_Response) ProtoMessage()    {}
 func (*CPublishedFile_Subscribe_Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor_steammessages_publishedfile_steamworkssdk_64a9567990aa6744, []int{1}
+	return fileDescriptor_636bda8e158caf65, []int{1}
 }
+
 func (m *CPublishedFile_Subscribe_Response) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CPublishedFile_Subscribe_Response.Unmarshal(m, b)
 }
 func (m *CPublishedFile_Subscribe_Response) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CPublishedFile_Subscribe_Response.Marshal(b, m, deterministic)
 }
-func (dst *CPublishedFile_Subscribe_Response) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CPublishedFile_Subscribe_Response.Merge(dst, src)
+func (m *CPublishedFile_Subscribe_Response) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CPublishedFile_Subscribe_Response.Merge(m, src)
 }
 func (m *CPublishedFile_Subscribe_Response) XXX_Size() int {
 	return xxx_messageInfo_CPublishedFile_Subscribe_Response.Size(m)
@@ -124,16 +128,17 @@ func (m *CPublishedFile_Unsubscribe_Request) Reset()         { *m = CPublishedFi
 func (m *CPublishedFile_Unsubscribe_Request) String() string { return proto.CompactTextString(m) }
 func (*CPublishedFile_Unsubscribe_Request) ProtoMessage()    {}
 func (*CPublishedFile_Unsubscribe_Request) Descriptor() ([]byte, []int) {
-	return fileDescriptor_steammessages_publishedfile_steamworkssdk_64a9567990aa6744, []int{2}
+	return fileDescriptor_636bda8e158caf65, []int{2}
 }
+
 func (m *CPublishedFile_Unsubscribe_Request) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CPublishedFile_Unsubscribe_Request.Unmarshal(m, b)
 }
 func (m *CPublishedFile_Unsubscribe_Request) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CPublishedFile_Unsubscribe_Request.Marshal(b, m, deterministic)
 }
-func (dst *CPublishedFile_Unsubscribe_Request) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CPublishedFile_Unsubscribe_Request.Merge(dst, src)
+func (m *CPublishedFile_Unsubscribe_Request) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CPublishedFile_Unsubscribe_Request.Merge(m, src)
 }
 func (m *CPublishedFile_Unsubscribe_Request) XXX_Size() int {
 	return xxx_messageInfo_CPublishedFile_Unsubscribe_Request.Size(m)
@@ -182,16 +187,17 @@ func (m *CPublishedFile_Unsubscribe_Response) Reset()         { *m = CPublishedF
 func (m *CPublishedFile_Unsubscribe_Response) String() string { return proto.CompactTextString(m) }
 func (*CPublishedFile_Unsubscribe_Response) ProtoMessage()    {}
 func (*CPublishedFile_Unsubscribe_Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor_steammessages_publishedfile_steamworkssdk_64a9567990aa6744, []int{3}
+	return fileDescriptor_636bda8e158caf65, []int{3}
 }
+
 func (m *CPublishedFile_Unsubscribe_Response) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CPublishedFile_Unsubscribe_Response.Unmarshal(m, b)
 }
 func (m *CPublishedFile_Unsubscribe_Response) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CPublishedFile_Unsubscribe_Response.Marshal(b, m, deterministic)
 }
-func (dst *CPublishedFile_Unsubscribe_Response) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CPublishedFile_Unsubscribe_Response.Merge(dst, src)
+func (m *CPublishedFile_Unsubscribe_Response) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CPublishedFile_Unsubscribe_Response.Merge(m, src)
 }
 func (m *CPublishedFile_Unsubscribe_Response) XXX_Size() int {
 	return xxx_messageInfo_CPublishedFile_Unsubscribe_Response.Size(m)
@@ -228,16 +234,17 @@ func (m *CPublishedFile_Publish_Request) Reset()         { *m = CPublishedFile_P
 func (m *CPublishedFile_Publish_Request) String() string { return proto.CompactTextString(m) }
 func (*CPublishedFile_Publish_Request) ProtoMessage()    {}
 func (*CPublishedFile_Publish_Request) Descriptor() ([]byte, []int) {
-	return fileDescriptor_steammessages_publishedfile_steamworkssdk_64a9567990aa6744, []int{4}
+	return fileDescriptor_636bda8e158caf65, []int{4}
 }
+
 func (m *CPublishedFile_Publish_Request) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CPublishedFile_Publish_Request.Unmarshal(m, b)
 }
 func (m *CPublishedFile_Publish_Request) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CPublishedFile_Publish_Request.Marshal(b, m, deterministic)
 }
-func (dst *CPublishedFile_Publish_Request) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CPublishedFile_Publish_Request.Merge(dst, src)
+func (m *CPublishedFile_Publish_Request) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CPublishedFile_Publish_Request.Merge(m, src)
 }
 func (m *CPublishedFile_Publish_Request) XXX_Size() int {
 	return xxx_messageInfo_CPublishedFile_Publish_Request.Size(m)
@@ -372,16 +379,17 @@ func (m *CPublishedFile_Publish_Response) Reset()         { *m = CPublishedFile_
 func (m *CPublishedFile_Publish_Response) String() string { return proto.CompactTextString(m) }
 func (*CPublishedFile_Publish_Response) ProtoMessage()    {}
 func (*CPublishedFile_Publish_Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor_steammessages_publishedfile_steamworkssdk_64a9567990aa6744, []int{5}
+	return fileDescriptor_636bda8e158caf65, []int{5}
 }
+
 func (m *CPublishedFile_Publish_Response) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CPublishedFile_Publish_Response.Unmarshal(m, b)
 }
 func (m *CPublishedFile_Publish_Response) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CPublishedFile_Publish_Response.Marshal(b, m, deterministic)
 }
-func (dst *CPublishedFile_Publish_Response) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CPublishedFile_Publish_Response.Merge(dst, src)
+func (m *CPublishedFile_Publish_Response) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CPublishedFile_Publish_Response.Merge(m, src)
 }
 func (m *CPublishedFile_Publish_Response) XXX_Size() int {
 	return xxx_messageInfo_CPublishedFile_Publish_Response.Size(m)
@@ -423,16 +431,17 @@ func (m *CPublishedFile_GetDetails_Request) Reset()         { *m = CPublishedFil
 func (m *CPublishedFile_GetDetails_Request) String() string { return proto.CompactTextString(m) }
 func (*CPublishedFile_GetDetails_Request) ProtoMessage()    {}
 func (*CPublishedFile_GetDetails_Request) Descriptor() ([]byte, []int) {
-	return fileDescriptor_steammessages_publishedfile_steamworkssdk_64a9567990aa6744, []int{6}
+	return fileDescriptor_636bda8e158caf65, []int{6}
 }
+
 func (m *CPublishedFile_GetDetails_Request) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CPublishedFile_GetDetails_Request.Unmarshal(m, b)
 }
 func (m *CPublishedFile_GetDetails_Request) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CPublishedFile_GetDetails_Request.Marshal(b, m, deterministic)
 }
-func (dst *CPublishedFile_GetDetails_Request) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CPublishedFile_GetDetails_Request.Merge(dst, src)
+func (m *CPublishedFile_GetDetails_Request) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CPublishedFile_GetDetails_Request.Merge(m, src)
 }
 func (m *CPublishedFile_GetDetails_Request) XXX_Size() int {
 	return xxx_messageInfo_CPublishedFile_GetDetails_Request.Size(m)
@@ -558,16 +567,17 @@ func (m *PublishedFileDetails) Reset()         { *m = PublishedFileDetails{} }
 func (m *PublishedFileDetails) String() string { return proto.CompactTextString(m) }
 func (*PublishedFileDetails) ProtoMessage()    {}
 func (*PublishedFileDetails) Descriptor() ([]byte, []int) {
-	return fileDescriptor_steammessages_publishedfile_steamworkssdk_64a9567990aa6744, []int{7}
+	return fileDescriptor_636bda8e158caf65, []int{7}
 }
+
 func (m *PublishedFileDetails) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_PublishedFileDetails.Unmarshal(m, b)
 }
 func (m *PublishedFileDetails) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_PublishedFileDetails.Marshal(b, m, deterministic)
 }
-func (dst *PublishedFileDetails) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_PublishedFileDetails.Merge(dst, src)
+func (m *PublishedFileDetails) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PublishedFileDetails.Merge(m, src)
 }
 func (m *PublishedFileDetails) XXX_Size() int {
 	return xxx_messageInfo_PublishedFileDetails.Size(m)
@@ -982,16 +992,17 @@ func (m *PublishedFileDetails_Tag) Reset()         { *m = PublishedFileDetails_T
 func (m *PublishedFileDetails_Tag) String() string { return proto.CompactTextString(m) }
 func (*PublishedFileDetails_Tag) ProtoMessage()    {}
 func (*PublishedFileDetails_Tag) Descriptor() ([]byte, []int) {
-	return fileDescriptor_steammessages_publishedfile_steamworkssdk_64a9567990aa6744, []int{7, 0}
+	return fileDescriptor_636bda8e158caf65, []int{7, 0}
 }
+
 func (m *PublishedFileDetails_Tag) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_PublishedFileDetails_Tag.Unmarshal(m, b)
 }
 func (m *PublishedFileDetails_Tag) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_PublishedFileDetails_Tag.Marshal(b, m, deterministic)
 }
-func (dst *PublishedFileDetails_Tag) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_PublishedFileDetails_Tag.Merge(dst, src)
+func (m *PublishedFileDetails_Tag) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PublishedFileDetails_Tag.Merge(m, src)
 }
 func (m *PublishedFileDetails_Tag) XXX_Size() int {
 	return xxx_messageInfo_PublishedFileDetails_Tag.Size(m)
@@ -1032,16 +1043,17 @@ func (m *PublishedFileDetails_Preview) Reset()         { *m = PublishedFileDetai
 func (m *PublishedFileDetails_Preview) String() string { return proto.CompactTextString(m) }
 func (*PublishedFileDetails_Preview) ProtoMessage()    {}
 func (*PublishedFileDetails_Preview) Descriptor() ([]byte, []int) {
-	return fileDescriptor_steammessages_publishedfile_steamworkssdk_64a9567990aa6744, []int{7, 1}
+	return fileDescriptor_636bda8e158caf65, []int{7, 1}
 }
+
 func (m *PublishedFileDetails_Preview) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_PublishedFileDetails_Preview.Unmarshal(m, b)
 }
 func (m *PublishedFileDetails_Preview) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_PublishedFileDetails_Preview.Marshal(b, m, deterministic)
 }
-func (dst *PublishedFileDetails_Preview) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_PublishedFileDetails_Preview.Merge(dst, src)
+func (m *PublishedFileDetails_Preview) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PublishedFileDetails_Preview.Merge(m, src)
 }
 func (m *PublishedFileDetails_Preview) XXX_Size() int {
 	return xxx_messageInfo_PublishedFileDetails_Preview.Size(m)
@@ -1107,16 +1119,17 @@ func (m *PublishedFileDetails_Child) Reset()         { *m = PublishedFileDetails
 func (m *PublishedFileDetails_Child) String() string { return proto.CompactTextString(m) }
 func (*PublishedFileDetails_Child) ProtoMessage()    {}
 func (*PublishedFileDetails_Child) Descriptor() ([]byte, []int) {
-	return fileDescriptor_steammessages_publishedfile_steamworkssdk_64a9567990aa6744, []int{7, 2}
+	return fileDescriptor_636bda8e158caf65, []int{7, 2}
 }
+
 func (m *PublishedFileDetails_Child) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_PublishedFileDetails_Child.Unmarshal(m, b)
 }
 func (m *PublishedFileDetails_Child) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_PublishedFileDetails_Child.Marshal(b, m, deterministic)
 }
-func (dst *PublishedFileDetails_Child) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_PublishedFileDetails_Child.Merge(dst, src)
+func (m *PublishedFileDetails_Child) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PublishedFileDetails_Child.Merge(m, src)
 }
 func (m *PublishedFileDetails_Child) XXX_Size() int {
 	return xxx_messageInfo_PublishedFileDetails_Child.Size(m)
@@ -1160,16 +1173,17 @@ func (m *PublishedFileDetails_KVTag) Reset()         { *m = PublishedFileDetails
 func (m *PublishedFileDetails_KVTag) String() string { return proto.CompactTextString(m) }
 func (*PublishedFileDetails_KVTag) ProtoMessage()    {}
 func (*PublishedFileDetails_KVTag) Descriptor() ([]byte, []int) {
-	return fileDescriptor_steammessages_publishedfile_steamworkssdk_64a9567990aa6744, []int{7, 3}
+	return fileDescriptor_636bda8e158caf65, []int{7, 3}
 }
+
 func (m *PublishedFileDetails_KVTag) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_PublishedFileDetails_KVTag.Unmarshal(m, b)
 }
 func (m *PublishedFileDetails_KVTag) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_PublishedFileDetails_KVTag.Marshal(b, m, deterministic)
 }
-func (dst *PublishedFileDetails_KVTag) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_PublishedFileDetails_KVTag.Merge(dst, src)
+func (m *PublishedFileDetails_KVTag) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PublishedFileDetails_KVTag.Merge(m, src)
 }
 func (m *PublishedFileDetails_KVTag) XXX_Size() int {
 	return xxx_messageInfo_PublishedFileDetails_KVTag.Size(m)
@@ -1207,16 +1221,17 @@ func (m *PublishedFileDetails_VoteData) Reset()         { *m = PublishedFileDeta
 func (m *PublishedFileDetails_VoteData) String() string { return proto.CompactTextString(m) }
 func (*PublishedFileDetails_VoteData) ProtoMessage()    {}
 func (*PublishedFileDetails_VoteData) Descriptor() ([]byte, []int) {
-	return fileDescriptor_steammessages_publishedfile_steamworkssdk_64a9567990aa6744, []int{7, 4}
+	return fileDescriptor_636bda8e158caf65, []int{7, 4}
 }
+
 func (m *PublishedFileDetails_VoteData) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_PublishedFileDetails_VoteData.Unmarshal(m, b)
 }
 func (m *PublishedFileDetails_VoteData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_PublishedFileDetails_VoteData.Marshal(b, m, deterministic)
 }
-func (dst *PublishedFileDetails_VoteData) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_PublishedFileDetails_VoteData.Merge(dst, src)
+func (m *PublishedFileDetails_VoteData) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PublishedFileDetails_VoteData.Merge(m, src)
 }
 func (m *PublishedFileDetails_VoteData) XXX_Size() int {
 	return xxx_messageInfo_PublishedFileDetails_VoteData.Size(m)
@@ -1259,16 +1274,17 @@ func (m *CPublishedFile_GetDetails_Response) Reset()         { *m = CPublishedFi
 func (m *CPublishedFile_GetDetails_Response) String() string { return proto.CompactTextString(m) }
 func (*CPublishedFile_GetDetails_Response) ProtoMessage()    {}
 func (*CPublishedFile_GetDetails_Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor_steammessages_publishedfile_steamworkssdk_64a9567990aa6744, []int{8}
+	return fileDescriptor_636bda8e158caf65, []int{8}
 }
+
 func (m *CPublishedFile_GetDetails_Response) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CPublishedFile_GetDetails_Response.Unmarshal(m, b)
 }
 func (m *CPublishedFile_GetDetails_Response) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CPublishedFile_GetDetails_Response.Marshal(b, m, deterministic)
 }
-func (dst *CPublishedFile_GetDetails_Response) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CPublishedFile_GetDetails_Response.Merge(dst, src)
+func (m *CPublishedFile_GetDetails_Response) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CPublishedFile_GetDetails_Response.Merge(m, src)
 }
 func (m *CPublishedFile_GetDetails_Response) XXX_Size() int {
 	return xxx_messageInfo_CPublishedFile_GetDetails_Response.Size(m)
@@ -1305,16 +1321,17 @@ func (m *CPublishedFile_GetUserFiles_Request) Reset()         { *m = CPublishedF
 func (m *CPublishedFile_GetUserFiles_Request) String() string { return proto.CompactTextString(m) }
 func (*CPublishedFile_GetUserFiles_Request) ProtoMessage()    {}
 func (*CPublishedFile_GetUserFiles_Request) Descriptor() ([]byte, []int) {
-	return fileDescriptor_steammessages_publishedfile_steamworkssdk_64a9567990aa6744, []int{9}
+	return fileDescriptor_636bda8e158caf65, []int{9}
 }
+
 func (m *CPublishedFile_GetUserFiles_Request) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CPublishedFile_GetUserFiles_Request.Unmarshal(m, b)
 }
 func (m *CPublishedFile_GetUserFiles_Request) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CPublishedFile_GetUserFiles_Request.Marshal(b, m, deterministic)
 }
-func (dst *CPublishedFile_GetUserFiles_Request) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CPublishedFile_GetUserFiles_Request.Merge(dst, src)
+func (m *CPublishedFile_GetUserFiles_Request) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CPublishedFile_GetUserFiles_Request.Merge(m, src)
 }
 func (m *CPublishedFile_GetUserFiles_Request) XXX_Size() int {
 	return xxx_messageInfo_CPublishedFile_GetUserFiles_Request.Size(m)
@@ -1406,16 +1423,17 @@ func (m *CPublishedFile_GetUserFiles_Response) Reset()         { *m = CPublished
 func (m *CPublishedFile_GetUserFiles_Response) String() string { return proto.CompactTextString(m) }
 func (*CPublishedFile_GetUserFiles_Response) ProtoMessage()    {}
 func (*CPublishedFile_GetUserFiles_Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor_steammessages_publishedfile_steamworkssdk_64a9567990aa6744, []int{10}
+	return fileDescriptor_636bda8e158caf65, []int{10}
 }
+
 func (m *CPublishedFile_GetUserFiles_Response) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CPublishedFile_GetUserFiles_Response.Unmarshal(m, b)
 }
 func (m *CPublishedFile_GetUserFiles_Response) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CPublishedFile_GetUserFiles_Response.Marshal(b, m, deterministic)
 }
-func (dst *CPublishedFile_GetUserFiles_Response) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CPublishedFile_GetUserFiles_Response.Merge(dst, src)
+func (m *CPublishedFile_GetUserFiles_Response) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CPublishedFile_GetUserFiles_Response.Merge(m, src)
 }
 func (m *CPublishedFile_GetUserFiles_Response) XXX_Size() int {
 	return xxx_messageInfo_CPublishedFile_GetUserFiles_Response.Size(m)
@@ -1470,16 +1488,17 @@ func (m *CPublishedFile_GetUserFiles_Response_App) Reset() {
 func (m *CPublishedFile_GetUserFiles_Response_App) String() string { return proto.CompactTextString(m) }
 func (*CPublishedFile_GetUserFiles_Response_App) ProtoMessage()    {}
 func (*CPublishedFile_GetUserFiles_Response_App) Descriptor() ([]byte, []int) {
-	return fileDescriptor_steammessages_publishedfile_steamworkssdk_64a9567990aa6744, []int{10, 0}
+	return fileDescriptor_636bda8e158caf65, []int{10, 0}
 }
+
 func (m *CPublishedFile_GetUserFiles_Response_App) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CPublishedFile_GetUserFiles_Response_App.Unmarshal(m, b)
 }
 func (m *CPublishedFile_GetUserFiles_Response_App) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CPublishedFile_GetUserFiles_Response_App.Marshal(b, m, deterministic)
 }
-func (dst *CPublishedFile_GetUserFiles_Response_App) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CPublishedFile_GetUserFiles_Response_App.Merge(dst, src)
+func (m *CPublishedFile_GetUserFiles_Response_App) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CPublishedFile_GetUserFiles_Response_App.Merge(m, src)
 }
 func (m *CPublishedFile_GetUserFiles_Response_App) XXX_Size() int {
 	return xxx_messageInfo_CPublishedFile_GetUserFiles_Response_App.Size(m)
@@ -1536,16 +1555,17 @@ func (m *CPublishedFile_Update_Request) Reset()         { *m = CPublishedFile_Up
 func (m *CPublishedFile_Update_Request) String() string { return proto.CompactTextString(m) }
 func (*CPublishedFile_Update_Request) ProtoMessage()    {}
 func (*CPublishedFile_Update_Request) Descriptor() ([]byte, []int) {
-	return fileDescriptor_steammessages_publishedfile_steamworkssdk_64a9567990aa6744, []int{11}
+	return fileDescriptor_636bda8e158caf65, []int{11}
 }
+
 func (m *CPublishedFile_Update_Request) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CPublishedFile_Update_Request.Unmarshal(m, b)
 }
 func (m *CPublishedFile_Update_Request) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CPublishedFile_Update_Request.Marshal(b, m, deterministic)
 }
-func (dst *CPublishedFile_Update_Request) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CPublishedFile_Update_Request.Merge(dst, src)
+func (m *CPublishedFile_Update_Request) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CPublishedFile_Update_Request.Merge(m, src)
 }
 func (m *CPublishedFile_Update_Request) XXX_Size() int {
 	return xxx_messageInfo_CPublishedFile_Update_Request.Size(m)
@@ -1622,16 +1642,17 @@ func (m *CPublishedFile_Update_Response) Reset()         { *m = CPublishedFile_U
 func (m *CPublishedFile_Update_Response) String() string { return proto.CompactTextString(m) }
 func (*CPublishedFile_Update_Response) ProtoMessage()    {}
 func (*CPublishedFile_Update_Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor_steammessages_publishedfile_steamworkssdk_64a9567990aa6744, []int{12}
+	return fileDescriptor_636bda8e158caf65, []int{12}
 }
+
 func (m *CPublishedFile_Update_Response) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CPublishedFile_Update_Response.Unmarshal(m, b)
 }
 func (m *CPublishedFile_Update_Response) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CPublishedFile_Update_Response.Marshal(b, m, deterministic)
 }
-func (dst *CPublishedFile_Update_Response) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CPublishedFile_Update_Response.Merge(dst, src)
+func (m *CPublishedFile_Update_Response) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CPublishedFile_Update_Response.Merge(m, src)
 }
 func (m *CPublishedFile_Update_Response) XXX_Size() int {
 	return xxx_messageInfo_CPublishedFile_Update_Response.Size(m)
@@ -1660,16 +1681,17 @@ func (m *CPublishedFile_RefreshVotingQueue_Request) Reset() {
 func (m *CPublishedFile_RefreshVotingQueue_Request) String() string { return proto.CompactTextString(m) }
 func (*CPublishedFile_RefreshVotingQueue_Request) ProtoMessage()    {}
 func (*CPublishedFile_RefreshVotingQueue_Request) Descriptor() ([]byte, []int) {
-	return fileDescriptor_steammessages_publishedfile_steamworkssdk_64a9567990aa6744, []int{13}
+	return fileDescriptor_636bda8e158caf65, []int{13}
 }
+
 func (m *CPublishedFile_RefreshVotingQueue_Request) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CPublishedFile_RefreshVotingQueue_Request.Unmarshal(m, b)
 }
 func (m *CPublishedFile_RefreshVotingQueue_Request) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CPublishedFile_RefreshVotingQueue_Request.Marshal(b, m, deterministic)
 }
-func (dst *CPublishedFile_RefreshVotingQueue_Request) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CPublishedFile_RefreshVotingQueue_Request.Merge(dst, src)
+func (m *CPublishedFile_RefreshVotingQueue_Request) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CPublishedFile_RefreshVotingQueue_Request.Merge(m, src)
 }
 func (m *CPublishedFile_RefreshVotingQueue_Request) XXX_Size() int {
 	return xxx_messageInfo_CPublishedFile_RefreshVotingQueue_Request.Size(m)
@@ -1738,16 +1760,17 @@ func (m *CPublishedFile_RefreshVotingQueue_Response) String() string {
 }
 func (*CPublishedFile_RefreshVotingQueue_Response) ProtoMessage() {}
 func (*CPublishedFile_RefreshVotingQueue_Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor_steammessages_publishedfile_steamworkssdk_64a9567990aa6744, []int{14}
+	return fileDescriptor_636bda8e158caf65, []int{14}
 }
+
 func (m *CPublishedFile_RefreshVotingQueue_Response) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CPublishedFile_RefreshVotingQueue_Response.Unmarshal(m, b)
 }
 func (m *CPublishedFile_RefreshVotingQueue_Response) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CPublishedFile_RefreshVotingQueue_Response.Marshal(b, m, deterministic)
 }
-func (dst *CPublishedFile_RefreshVotingQueue_Response) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CPublishedFile_RefreshVotingQueue_Response.Merge(dst, src)
+func (m *CPublishedFile_RefreshVotingQueue_Response) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CPublishedFile_RefreshVotingQueue_Response.Merge(m, src)
 }
 func (m *CPublishedFile_RefreshVotingQueue_Response) XXX_Size() int {
 	return xxx_messageInfo_CPublishedFile_RefreshVotingQueue_Response.Size(m)
@@ -1783,10 +1806,10 @@ func init() {
 }
 
 func init() {
-	proto.RegisterFile("steammessages_publishedfile.steamworkssdk.proto", fileDescriptor_steammessages_publishedfile_steamworkssdk_64a9567990aa6744)
+	proto.RegisterFile("steammessages_publishedfile.steamworkssdk.proto", fileDescriptor_636bda8e158caf65)
 }
 
-var fileDescriptor_steammessages_publishedfile_steamworkssdk_64a9567990aa6744 = []byte{
+var fileDescriptor_636bda8e158caf65 = []byte{
 	// 3471 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xcc, 0x3a, 0x4b, 0x73, 0xdc, 0x46,
 	0x7a, 0x35, 0xe6, 0x6b, 0xd8, 0x24, 0x25, 0xaa, 0x4d, 0x2b, 0xed, 0x59, 0xdb, 0x6a, 0x8f, 0x5e,

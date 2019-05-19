@@ -222,6 +222,12 @@ type Callbacks struct {
 	onCDOTAUserMsg_TipAlert                   []func(*dota.CDOTAUserMsg_TipAlert) error
 	onCDOTAUserMsg_ReplaceQueryUnit           []func(*dota.CDOTAUserMsg_ReplaceQueryUnit) error
 	onCDOTAUserMsg_EmptyTeleportAlert         []func(*dota.CDOTAUserMsg_EmptyTeleportAlert) error
+	onCDOTAUserMsg_MarsArenaOfBloodAttack     []func(*dota.CDOTAUserMsg_MarsArenaOfBloodAttack) error
+	onCDOTAUserMsg_ESArcanaCombo              []func(*dota.CDOTAUserMsg_ESArcanaCombo) error
+	onCDOTAUserMsg_ESArcanaComboSummary       []func(*dota.CDOTAUserMsg_ESArcanaComboSummary) error
+	onCDOTAUserMsg_HighFiveLeftHanging        []func(*dota.CDOTAUserMsg_HighFiveLeftHanging) error
+	onCDOTAUserMsg_HighFiveCompleted          []func(*dota.CDOTAUserMsg_HighFiveCompleted) error
+	onCDOTAUserMsg_ShovelUnearth              []func(*dota.CDOTAUserMsg_ShovelUnearth) error
 
 	pb *proto.Buffer
 }
@@ -1305,6 +1311,36 @@ func (c *Callbacks) OnCDOTAUserMsg_ReplaceQueryUnit(fn func(*dota.CDOTAUserMsg_R
 // OnCDOTAUserMsg_EmptyTeleportAlert registers a callback for EDotaUserMessages_DOTA_UM_EmptyTeleportAlert
 func (c *Callbacks) OnCDOTAUserMsg_EmptyTeleportAlert(fn func(*dota.CDOTAUserMsg_EmptyTeleportAlert) error) {
 	c.onCDOTAUserMsg_EmptyTeleportAlert = append(c.onCDOTAUserMsg_EmptyTeleportAlert, fn)
+}
+
+// OnCDOTAUserMsg_MarsArenaOfBloodAttack registers a callback for EDotaUserMessages_DOTA_UM_MarsArenaOfBloodAttack
+func (c *Callbacks) OnCDOTAUserMsg_MarsArenaOfBloodAttack(fn func(*dota.CDOTAUserMsg_MarsArenaOfBloodAttack) error) {
+	c.onCDOTAUserMsg_MarsArenaOfBloodAttack = append(c.onCDOTAUserMsg_MarsArenaOfBloodAttack, fn)
+}
+
+// OnCDOTAUserMsg_ESArcanaCombo registers a callback for EDotaUserMessages_DOTA_UM_ESArcanaCombo
+func (c *Callbacks) OnCDOTAUserMsg_ESArcanaCombo(fn func(*dota.CDOTAUserMsg_ESArcanaCombo) error) {
+	c.onCDOTAUserMsg_ESArcanaCombo = append(c.onCDOTAUserMsg_ESArcanaCombo, fn)
+}
+
+// OnCDOTAUserMsg_ESArcanaComboSummary registers a callback for EDotaUserMessages_DOTA_UM_ESArcanaComboSummary
+func (c *Callbacks) OnCDOTAUserMsg_ESArcanaComboSummary(fn func(*dota.CDOTAUserMsg_ESArcanaComboSummary) error) {
+	c.onCDOTAUserMsg_ESArcanaComboSummary = append(c.onCDOTAUserMsg_ESArcanaComboSummary, fn)
+}
+
+// OnCDOTAUserMsg_HighFiveLeftHanging registers a callback for EDotaUserMessages_DOTA_UM_HighFiveLeftHanging
+func (c *Callbacks) OnCDOTAUserMsg_HighFiveLeftHanging(fn func(*dota.CDOTAUserMsg_HighFiveLeftHanging) error) {
+	c.onCDOTAUserMsg_HighFiveLeftHanging = append(c.onCDOTAUserMsg_HighFiveLeftHanging, fn)
+}
+
+// OnCDOTAUserMsg_HighFiveCompleted registers a callback for EDotaUserMessages_DOTA_UM_HighFiveCompleted
+func (c *Callbacks) OnCDOTAUserMsg_HighFiveCompleted(fn func(*dota.CDOTAUserMsg_HighFiveCompleted) error) {
+	c.onCDOTAUserMsg_HighFiveCompleted = append(c.onCDOTAUserMsg_HighFiveCompleted, fn)
+}
+
+// OnCDOTAUserMsg_ShovelUnearth registers a callback for EDotaUserMessages_DOTA_UM_ShovelUnearth
+func (c *Callbacks) OnCDOTAUserMsg_ShovelUnearth(fn func(*dota.CDOTAUserMsg_ShovelUnearth) error) {
+	c.onCDOTAUserMsg_ShovelUnearth = append(c.onCDOTAUserMsg_ShovelUnearth, fn)
 }
 
 func (c *Callbacks) callByDemoType(t int32, buf []byte) error {
@@ -5398,6 +5434,120 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		for _, fn := range c.onCDOTAUserMsg_EmptyTeleportAlert {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 580: // dota.EDotaUserMessages_DOTA_UM_MarsArenaOfBloodAttack
+		if c.onCDOTAUserMsg_MarsArenaOfBloodAttack == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_MarsArenaOfBloodAttack{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_MarsArenaOfBloodAttack {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 581: // dota.EDotaUserMessages_DOTA_UM_ESArcanaCombo
+		if c.onCDOTAUserMsg_ESArcanaCombo == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_ESArcanaCombo{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_ESArcanaCombo {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 582: // dota.EDotaUserMessages_DOTA_UM_ESArcanaComboSummary
+		if c.onCDOTAUserMsg_ESArcanaComboSummary == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_ESArcanaComboSummary{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_ESArcanaComboSummary {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 583: // dota.EDotaUserMessages_DOTA_UM_HighFiveLeftHanging
+		if c.onCDOTAUserMsg_HighFiveLeftHanging == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_HighFiveLeftHanging{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_HighFiveLeftHanging {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 584: // dota.EDotaUserMessages_DOTA_UM_HighFiveCompleted
+		if c.onCDOTAUserMsg_HighFiveCompleted == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_HighFiveCompleted{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_HighFiveCompleted {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 585: // dota.EDotaUserMessages_DOTA_UM_ShovelUnearth
+		if c.onCDOTAUserMsg_ShovelUnearth == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_ShovelUnearth{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_ShovelUnearth {
 			if err := fn(msg); err != nil {
 				return err
 			}

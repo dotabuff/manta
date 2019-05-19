@@ -3,9 +3,11 @@
 
 package dota
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type EBaseGameEvents int32
 
@@ -51,6 +53,7 @@ var EBaseGameEvents_name = map[int32]string{
 	211: "GE_SosSetLibraryStackFields",
 	212: "GE_SosStopSoundEventHash",
 }
+
 var EBaseGameEvents_value = map[string]int32{
 	"GE_VDebugGameSessionIDEvent":            200,
 	"GE_PlaceDecalEvent":                     201,
@@ -72,9 +75,11 @@ func (x EBaseGameEvents) Enum() *EBaseGameEvents {
 	*p = x
 	return p
 }
+
 func (x EBaseGameEvents) String() string {
 	return proto.EnumName(EBaseGameEvents_name, int32(x))
 }
+
 func (x *EBaseGameEvents) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(EBaseGameEvents_value, data, "EBaseGameEvents")
 	if err != nil {
@@ -83,8 +88,9 @@ func (x *EBaseGameEvents) UnmarshalJSON(data []byte) error {
 	*x = EBaseGameEvents(value)
 	return nil
 }
+
 func (EBaseGameEvents) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_gameevents_38625ccca8ceab8d, []int{0}
+	return fileDescriptor_830232d8fa361916, []int{0}
 }
 
 type CMsgVDebugGameSessionIDEvent struct {
@@ -99,16 +105,17 @@ func (m *CMsgVDebugGameSessionIDEvent) Reset()         { *m = CMsgVDebugGameSess
 func (m *CMsgVDebugGameSessionIDEvent) String() string { return proto.CompactTextString(m) }
 func (*CMsgVDebugGameSessionIDEvent) ProtoMessage()    {}
 func (*CMsgVDebugGameSessionIDEvent) Descriptor() ([]byte, []int) {
-	return fileDescriptor_gameevents_38625ccca8ceab8d, []int{0}
+	return fileDescriptor_830232d8fa361916, []int{0}
 }
+
 func (m *CMsgVDebugGameSessionIDEvent) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgVDebugGameSessionIDEvent.Unmarshal(m, b)
 }
 func (m *CMsgVDebugGameSessionIDEvent) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgVDebugGameSessionIDEvent.Marshal(b, m, deterministic)
 }
-func (dst *CMsgVDebugGameSessionIDEvent) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgVDebugGameSessionIDEvent.Merge(dst, src)
+func (m *CMsgVDebugGameSessionIDEvent) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgVDebugGameSessionIDEvent.Merge(m, src)
 }
 func (m *CMsgVDebugGameSessionIDEvent) XXX_Size() int {
 	return xxx_messageInfo_CMsgVDebugGameSessionIDEvent.Size(m)
@@ -157,16 +164,17 @@ func (m *CMsgPlaceDecalEvent) Reset()         { *m = CMsgPlaceDecalEvent{} }
 func (m *CMsgPlaceDecalEvent) String() string { return proto.CompactTextString(m) }
 func (*CMsgPlaceDecalEvent) ProtoMessage()    {}
 func (*CMsgPlaceDecalEvent) Descriptor() ([]byte, []int) {
-	return fileDescriptor_gameevents_38625ccca8ceab8d, []int{1}
+	return fileDescriptor_830232d8fa361916, []int{1}
 }
+
 func (m *CMsgPlaceDecalEvent) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgPlaceDecalEvent.Unmarshal(m, b)
 }
 func (m *CMsgPlaceDecalEvent) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgPlaceDecalEvent.Marshal(b, m, deterministic)
 }
-func (dst *CMsgPlaceDecalEvent) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgPlaceDecalEvent.Merge(dst, src)
+func (m *CMsgPlaceDecalEvent) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgPlaceDecalEvent.Merge(m, src)
 }
 func (m *CMsgPlaceDecalEvent) XXX_Size() int {
 	return xxx_messageInfo_CMsgPlaceDecalEvent.Size(m)
@@ -286,16 +294,17 @@ func (m *CMsgClearWorldDecalsEvent) Reset()         { *m = CMsgClearWorldDecalsE
 func (m *CMsgClearWorldDecalsEvent) String() string { return proto.CompactTextString(m) }
 func (*CMsgClearWorldDecalsEvent) ProtoMessage()    {}
 func (*CMsgClearWorldDecalsEvent) Descriptor() ([]byte, []int) {
-	return fileDescriptor_gameevents_38625ccca8ceab8d, []int{2}
+	return fileDescriptor_830232d8fa361916, []int{2}
 }
+
 func (m *CMsgClearWorldDecalsEvent) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgClearWorldDecalsEvent.Unmarshal(m, b)
 }
 func (m *CMsgClearWorldDecalsEvent) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgClearWorldDecalsEvent.Marshal(b, m, deterministic)
 }
-func (dst *CMsgClearWorldDecalsEvent) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgClearWorldDecalsEvent.Merge(dst, src)
+func (m *CMsgClearWorldDecalsEvent) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClearWorldDecalsEvent.Merge(m, src)
 }
 func (m *CMsgClearWorldDecalsEvent) XXX_Size() int {
 	return xxx_messageInfo_CMsgClearWorldDecalsEvent.Size(m)
@@ -324,16 +333,17 @@ func (m *CMsgClearEntityDecalsEvent) Reset()         { *m = CMsgClearEntityDecal
 func (m *CMsgClearEntityDecalsEvent) String() string { return proto.CompactTextString(m) }
 func (*CMsgClearEntityDecalsEvent) ProtoMessage()    {}
 func (*CMsgClearEntityDecalsEvent) Descriptor() ([]byte, []int) {
-	return fileDescriptor_gameevents_38625ccca8ceab8d, []int{3}
+	return fileDescriptor_830232d8fa361916, []int{3}
 }
+
 func (m *CMsgClearEntityDecalsEvent) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgClearEntityDecalsEvent.Unmarshal(m, b)
 }
 func (m *CMsgClearEntityDecalsEvent) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgClearEntityDecalsEvent.Marshal(b, m, deterministic)
 }
-func (dst *CMsgClearEntityDecalsEvent) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgClearEntityDecalsEvent.Merge(dst, src)
+func (m *CMsgClearEntityDecalsEvent) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClearEntityDecalsEvent.Merge(m, src)
 }
 func (m *CMsgClearEntityDecalsEvent) XXX_Size() int {
 	return xxx_messageInfo_CMsgClearEntityDecalsEvent.Size(m)
@@ -366,16 +376,17 @@ func (m *CMsgClearDecalsForSkeletonInstanceEvent) Reset() {
 func (m *CMsgClearDecalsForSkeletonInstanceEvent) String() string { return proto.CompactTextString(m) }
 func (*CMsgClearDecalsForSkeletonInstanceEvent) ProtoMessage()    {}
 func (*CMsgClearDecalsForSkeletonInstanceEvent) Descriptor() ([]byte, []int) {
-	return fileDescriptor_gameevents_38625ccca8ceab8d, []int{4}
+	return fileDescriptor_830232d8fa361916, []int{4}
 }
+
 func (m *CMsgClearDecalsForSkeletonInstanceEvent) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgClearDecalsForSkeletonInstanceEvent.Unmarshal(m, b)
 }
 func (m *CMsgClearDecalsForSkeletonInstanceEvent) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgClearDecalsForSkeletonInstanceEvent.Marshal(b, m, deterministic)
 }
-func (dst *CMsgClearDecalsForSkeletonInstanceEvent) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgClearDecalsForSkeletonInstanceEvent.Merge(dst, src)
+func (m *CMsgClearDecalsForSkeletonInstanceEvent) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClearDecalsForSkeletonInstanceEvent.Merge(m, src)
 }
 func (m *CMsgClearDecalsForSkeletonInstanceEvent) XXX_Size() int {
 	return xxx_messageInfo_CMsgClearDecalsForSkeletonInstanceEvent.Size(m)
@@ -418,16 +429,17 @@ func (m *CMsgSource1LegacyGameEventList) Reset()         { *m = CMsgSource1Legac
 func (m *CMsgSource1LegacyGameEventList) String() string { return proto.CompactTextString(m) }
 func (*CMsgSource1LegacyGameEventList) ProtoMessage()    {}
 func (*CMsgSource1LegacyGameEventList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_gameevents_38625ccca8ceab8d, []int{5}
+	return fileDescriptor_830232d8fa361916, []int{5}
 }
+
 func (m *CMsgSource1LegacyGameEventList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgSource1LegacyGameEventList.Unmarshal(m, b)
 }
 func (m *CMsgSource1LegacyGameEventList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgSource1LegacyGameEventList.Marshal(b, m, deterministic)
 }
-func (dst *CMsgSource1LegacyGameEventList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgSource1LegacyGameEventList.Merge(dst, src)
+func (m *CMsgSource1LegacyGameEventList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgSource1LegacyGameEventList.Merge(m, src)
 }
 func (m *CMsgSource1LegacyGameEventList) XXX_Size() int {
 	return xxx_messageInfo_CMsgSource1LegacyGameEventList.Size(m)
@@ -457,16 +469,17 @@ func (m *CMsgSource1LegacyGameEventListKeyT) Reset()         { *m = CMsgSource1L
 func (m *CMsgSource1LegacyGameEventListKeyT) String() string { return proto.CompactTextString(m) }
 func (*CMsgSource1LegacyGameEventListKeyT) ProtoMessage()    {}
 func (*CMsgSource1LegacyGameEventListKeyT) Descriptor() ([]byte, []int) {
-	return fileDescriptor_gameevents_38625ccca8ceab8d, []int{5, 0}
+	return fileDescriptor_830232d8fa361916, []int{5, 0}
 }
+
 func (m *CMsgSource1LegacyGameEventListKeyT) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgSource1LegacyGameEventListKeyT.Unmarshal(m, b)
 }
 func (m *CMsgSource1LegacyGameEventListKeyT) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgSource1LegacyGameEventListKeyT.Marshal(b, m, deterministic)
 }
-func (dst *CMsgSource1LegacyGameEventListKeyT) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgSource1LegacyGameEventListKeyT.Merge(dst, src)
+func (m *CMsgSource1LegacyGameEventListKeyT) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgSource1LegacyGameEventListKeyT.Merge(m, src)
 }
 func (m *CMsgSource1LegacyGameEventListKeyT) XXX_Size() int {
 	return xxx_messageInfo_CMsgSource1LegacyGameEventListKeyT.Size(m)
@@ -506,16 +519,17 @@ func (m *CMsgSource1LegacyGameEventListDescriptorT) Reset() {
 func (m *CMsgSource1LegacyGameEventListDescriptorT) String() string { return proto.CompactTextString(m) }
 func (*CMsgSource1LegacyGameEventListDescriptorT) ProtoMessage()    {}
 func (*CMsgSource1LegacyGameEventListDescriptorT) Descriptor() ([]byte, []int) {
-	return fileDescriptor_gameevents_38625ccca8ceab8d, []int{5, 1}
+	return fileDescriptor_830232d8fa361916, []int{5, 1}
 }
+
 func (m *CMsgSource1LegacyGameEventListDescriptorT) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgSource1LegacyGameEventListDescriptorT.Unmarshal(m, b)
 }
 func (m *CMsgSource1LegacyGameEventListDescriptorT) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgSource1LegacyGameEventListDescriptorT.Marshal(b, m, deterministic)
 }
-func (dst *CMsgSource1LegacyGameEventListDescriptorT) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgSource1LegacyGameEventListDescriptorT.Merge(dst, src)
+func (m *CMsgSource1LegacyGameEventListDescriptorT) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgSource1LegacyGameEventListDescriptorT.Merge(m, src)
 }
 func (m *CMsgSource1LegacyGameEventListDescriptorT) XXX_Size() int {
 	return xxx_messageInfo_CMsgSource1LegacyGameEventListDescriptorT.Size(m)
@@ -559,16 +573,17 @@ func (m *CMsgSource1LegacyListenEvents) Reset()         { *m = CMsgSource1Legacy
 func (m *CMsgSource1LegacyListenEvents) String() string { return proto.CompactTextString(m) }
 func (*CMsgSource1LegacyListenEvents) ProtoMessage()    {}
 func (*CMsgSource1LegacyListenEvents) Descriptor() ([]byte, []int) {
-	return fileDescriptor_gameevents_38625ccca8ceab8d, []int{6}
+	return fileDescriptor_830232d8fa361916, []int{6}
 }
+
 func (m *CMsgSource1LegacyListenEvents) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgSource1LegacyListenEvents.Unmarshal(m, b)
 }
 func (m *CMsgSource1LegacyListenEvents) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgSource1LegacyListenEvents.Marshal(b, m, deterministic)
 }
-func (dst *CMsgSource1LegacyListenEvents) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgSource1LegacyListenEvents.Merge(dst, src)
+func (m *CMsgSource1LegacyListenEvents) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgSource1LegacyListenEvents.Merge(m, src)
 }
 func (m *CMsgSource1LegacyListenEvents) XXX_Size() int {
 	return xxx_messageInfo_CMsgSource1LegacyListenEvents.Size(m)
@@ -606,16 +621,17 @@ func (m *CMsgSource1LegacyGameEvent) Reset()         { *m = CMsgSource1LegacyGam
 func (m *CMsgSource1LegacyGameEvent) String() string { return proto.CompactTextString(m) }
 func (*CMsgSource1LegacyGameEvent) ProtoMessage()    {}
 func (*CMsgSource1LegacyGameEvent) Descriptor() ([]byte, []int) {
-	return fileDescriptor_gameevents_38625ccca8ceab8d, []int{7}
+	return fileDescriptor_830232d8fa361916, []int{7}
 }
+
 func (m *CMsgSource1LegacyGameEvent) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgSource1LegacyGameEvent.Unmarshal(m, b)
 }
 func (m *CMsgSource1LegacyGameEvent) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgSource1LegacyGameEvent.Marshal(b, m, deterministic)
 }
-func (dst *CMsgSource1LegacyGameEvent) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgSource1LegacyGameEvent.Merge(dst, src)
+func (m *CMsgSource1LegacyGameEvent) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgSource1LegacyGameEvent.Merge(m, src)
 }
 func (m *CMsgSource1LegacyGameEvent) XXX_Size() int {
 	return xxx_messageInfo_CMsgSource1LegacyGameEvent.Size(m)
@@ -665,16 +681,17 @@ func (m *CMsgSource1LegacyGameEventKeyT) Reset()         { *m = CMsgSource1Legac
 func (m *CMsgSource1LegacyGameEventKeyT) String() string { return proto.CompactTextString(m) }
 func (*CMsgSource1LegacyGameEventKeyT) ProtoMessage()    {}
 func (*CMsgSource1LegacyGameEventKeyT) Descriptor() ([]byte, []int) {
-	return fileDescriptor_gameevents_38625ccca8ceab8d, []int{7, 0}
+	return fileDescriptor_830232d8fa361916, []int{7, 0}
 }
+
 func (m *CMsgSource1LegacyGameEventKeyT) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgSource1LegacyGameEventKeyT.Unmarshal(m, b)
 }
 func (m *CMsgSource1LegacyGameEventKeyT) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgSource1LegacyGameEventKeyT.Marshal(b, m, deterministic)
 }
-func (dst *CMsgSource1LegacyGameEventKeyT) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgSource1LegacyGameEventKeyT.Merge(dst, src)
+func (m *CMsgSource1LegacyGameEventKeyT) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgSource1LegacyGameEventKeyT.Merge(m, src)
 }
 func (m *CMsgSource1LegacyGameEventKeyT) XXX_Size() int {
 	return xxx_messageInfo_CMsgSource1LegacyGameEventKeyT.Size(m)
@@ -757,16 +774,17 @@ func (m *CMsgSosStartSoundEvent) Reset()         { *m = CMsgSosStartSoundEvent{}
 func (m *CMsgSosStartSoundEvent) String() string { return proto.CompactTextString(m) }
 func (*CMsgSosStartSoundEvent) ProtoMessage()    {}
 func (*CMsgSosStartSoundEvent) Descriptor() ([]byte, []int) {
-	return fileDescriptor_gameevents_38625ccca8ceab8d, []int{8}
+	return fileDescriptor_830232d8fa361916, []int{8}
 }
+
 func (m *CMsgSosStartSoundEvent) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgSosStartSoundEvent.Unmarshal(m, b)
 }
 func (m *CMsgSosStartSoundEvent) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgSosStartSoundEvent.Marshal(b, m, deterministic)
 }
-func (dst *CMsgSosStartSoundEvent) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgSosStartSoundEvent.Merge(dst, src)
+func (m *CMsgSosStartSoundEvent) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgSosStartSoundEvent.Merge(m, src)
 }
 func (m *CMsgSosStartSoundEvent) XXX_Size() int {
 	return xxx_messageInfo_CMsgSosStartSoundEvent.Size(m)
@@ -830,16 +848,17 @@ func (m *CMsgSosStopSoundEvent) Reset()         { *m = CMsgSosStopSoundEvent{} }
 func (m *CMsgSosStopSoundEvent) String() string { return proto.CompactTextString(m) }
 func (*CMsgSosStopSoundEvent) ProtoMessage()    {}
 func (*CMsgSosStopSoundEvent) Descriptor() ([]byte, []int) {
-	return fileDescriptor_gameevents_38625ccca8ceab8d, []int{9}
+	return fileDescriptor_830232d8fa361916, []int{9}
 }
+
 func (m *CMsgSosStopSoundEvent) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgSosStopSoundEvent.Unmarshal(m, b)
 }
 func (m *CMsgSosStopSoundEvent) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgSosStopSoundEvent.Marshal(b, m, deterministic)
 }
-func (dst *CMsgSosStopSoundEvent) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgSosStopSoundEvent.Merge(dst, src)
+func (m *CMsgSosStopSoundEvent) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgSosStopSoundEvent.Merge(m, src)
 }
 func (m *CMsgSosStopSoundEvent) XXX_Size() int {
 	return xxx_messageInfo_CMsgSosStopSoundEvent.Size(m)
@@ -869,16 +888,17 @@ func (m *CMsgSosStopSoundEventHash) Reset()         { *m = CMsgSosStopSoundEvent
 func (m *CMsgSosStopSoundEventHash) String() string { return proto.CompactTextString(m) }
 func (*CMsgSosStopSoundEventHash) ProtoMessage()    {}
 func (*CMsgSosStopSoundEventHash) Descriptor() ([]byte, []int) {
-	return fileDescriptor_gameevents_38625ccca8ceab8d, []int{10}
+	return fileDescriptor_830232d8fa361916, []int{10}
 }
+
 func (m *CMsgSosStopSoundEventHash) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgSosStopSoundEventHash.Unmarshal(m, b)
 }
 func (m *CMsgSosStopSoundEventHash) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgSosStopSoundEventHash.Marshal(b, m, deterministic)
 }
-func (dst *CMsgSosStopSoundEventHash) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgSosStopSoundEventHash.Merge(dst, src)
+func (m *CMsgSosStopSoundEventHash) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgSosStopSoundEventHash.Merge(m, src)
 }
 func (m *CMsgSosStopSoundEventHash) XXX_Size() int {
 	return xxx_messageInfo_CMsgSosStopSoundEventHash.Size(m)
@@ -915,16 +935,17 @@ func (m *CMsgSosSetSoundEventParams) Reset()         { *m = CMsgSosSetSoundEvent
 func (m *CMsgSosSetSoundEventParams) String() string { return proto.CompactTextString(m) }
 func (*CMsgSosSetSoundEventParams) ProtoMessage()    {}
 func (*CMsgSosSetSoundEventParams) Descriptor() ([]byte, []int) {
-	return fileDescriptor_gameevents_38625ccca8ceab8d, []int{11}
+	return fileDescriptor_830232d8fa361916, []int{11}
 }
+
 func (m *CMsgSosSetSoundEventParams) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgSosSetSoundEventParams.Unmarshal(m, b)
 }
 func (m *CMsgSosSetSoundEventParams) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgSosSetSoundEventParams.Marshal(b, m, deterministic)
 }
-func (dst *CMsgSosSetSoundEventParams) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgSosSetSoundEventParams.Merge(dst, src)
+func (m *CMsgSosSetSoundEventParams) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgSosSetSoundEventParams.Merge(m, src)
 }
 func (m *CMsgSosSetSoundEventParams) XXX_Size() int {
 	return xxx_messageInfo_CMsgSosSetSoundEventParams.Size(m)
@@ -961,16 +982,17 @@ func (m *CMsgSosSetLibraryStackFields) Reset()         { *m = CMsgSosSetLibraryS
 func (m *CMsgSosSetLibraryStackFields) String() string { return proto.CompactTextString(m) }
 func (*CMsgSosSetLibraryStackFields) ProtoMessage()    {}
 func (*CMsgSosSetLibraryStackFields) Descriptor() ([]byte, []int) {
-	return fileDescriptor_gameevents_38625ccca8ceab8d, []int{12}
+	return fileDescriptor_830232d8fa361916, []int{12}
 }
+
 func (m *CMsgSosSetLibraryStackFields) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgSosSetLibraryStackFields.Unmarshal(m, b)
 }
 func (m *CMsgSosSetLibraryStackFields) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgSosSetLibraryStackFields.Marshal(b, m, deterministic)
 }
-func (dst *CMsgSosSetLibraryStackFields) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgSosSetLibraryStackFields.Merge(dst, src)
+func (m *CMsgSosSetLibraryStackFields) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgSosSetLibraryStackFields.Merge(m, src)
 }
 func (m *CMsgSosSetLibraryStackFields) XXX_Size() int {
 	return xxx_messageInfo_CMsgSosSetLibraryStackFields.Size(m)
@@ -996,6 +1018,7 @@ func (m *CMsgSosSetLibraryStackFields) GetPackedFields() []byte {
 }
 
 func init() {
+	proto.RegisterEnum("dota.EBaseGameEvents", EBaseGameEvents_name, EBaseGameEvents_value)
 	proto.RegisterType((*CMsgVDebugGameSessionIDEvent)(nil), "dota.CMsgVDebugGameSessionIDEvent")
 	proto.RegisterType((*CMsgPlaceDecalEvent)(nil), "dota.CMsgPlaceDecalEvent")
 	proto.RegisterType((*CMsgClearWorldDecalsEvent)(nil), "dota.CMsgClearWorldDecalsEvent")
@@ -1012,12 +1035,11 @@ func init() {
 	proto.RegisterType((*CMsgSosStopSoundEventHash)(nil), "dota.CMsgSosStopSoundEventHash")
 	proto.RegisterType((*CMsgSosSetSoundEventParams)(nil), "dota.CMsgSosSetSoundEventParams")
 	proto.RegisterType((*CMsgSosSetLibraryStackFields)(nil), "dota.CMsgSosSetLibraryStackFields")
-	proto.RegisterEnum("dota.EBaseGameEvents", EBaseGameEvents_name, EBaseGameEvents_value)
 }
 
-func init() { proto.RegisterFile("gameevents.proto", fileDescriptor_gameevents_38625ccca8ceab8d) }
+func init() { proto.RegisterFile("gameevents.proto", fileDescriptor_830232d8fa361916) }
 
-var fileDescriptor_gameevents_38625ccca8ceab8d = []byte{
+var fileDescriptor_830232d8fa361916 = []byte{
 	// 1130 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x56, 0x4b, 0x73, 0x1b, 0x45,
 	0x10, 0x66, 0xf4, 0x88, 0xa5, 0xb6, 0x95, 0x6c, 0x26, 0x0f, 0xd6, 0x4a, 0x1c, 0xc4, 0x42, 0x39,

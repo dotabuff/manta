@@ -3,9 +3,11 @@
 
 package dota
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type CMsgDOTAGuildCreateResponse_EError int32
 
@@ -45,6 +47,7 @@ var CMsgDOTAGuildCreateResponse_EError_name = map[int32]string{
 	8: "ACCOUNT_TOO_MANY_GUILDS",
 	9: "LOGO_UPLOAD_FAILED",
 }
+
 var CMsgDOTAGuildCreateResponse_EError_value = map[string]int32{
 	"UNSPECIFIED":             0,
 	"NAME_EMPTY":              1,
@@ -63,9 +66,11 @@ func (x CMsgDOTAGuildCreateResponse_EError) Enum() *CMsgDOTAGuildCreateResponse_
 	*p = x
 	return p
 }
+
 func (x CMsgDOTAGuildCreateResponse_EError) String() string {
 	return proto.EnumName(CMsgDOTAGuildCreateResponse_EError_name, int32(x))
 }
+
 func (x *CMsgDOTAGuildCreateResponse_EError) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(CMsgDOTAGuildCreateResponse_EError_value, data, "CMsgDOTAGuildCreateResponse_EError")
 	if err != nil {
@@ -74,8 +79,9 @@ func (x *CMsgDOTAGuildCreateResponse_EError) UnmarshalJSON(data []byte) error {
 	*x = CMsgDOTAGuildCreateResponse_EError(value)
 	return nil
 }
+
 func (CMsgDOTAGuildCreateResponse_EError) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_guild_d1885c7c75798425, []int{4, 0}
+	return fileDescriptor_ce40e801b61ab275, []int{4, 0}
 }
 
 type CMsgDOTAGuildSetAccountRoleResponse_EResult int32
@@ -97,6 +103,7 @@ var CMsgDOTAGuildSetAccountRoleResponse_EResult_name = map[int32]string{
 	4: "ERROR_ACCOUNT_TOO_MANY_GUILDS",
 	5: "ERROR_GUILD_TOO_MANY_MEMBERS",
 }
+
 var CMsgDOTAGuildSetAccountRoleResponse_EResult_value = map[string]int32{
 	"SUCCESS":                       0,
 	"ERROR_UNSPECIFIED":             1,
@@ -111,9 +118,11 @@ func (x CMsgDOTAGuildSetAccountRoleResponse_EResult) Enum() *CMsgDOTAGuildSetAcc
 	*p = x
 	return p
 }
+
 func (x CMsgDOTAGuildSetAccountRoleResponse_EResult) String() string {
 	return proto.EnumName(CMsgDOTAGuildSetAccountRoleResponse_EResult_name, int32(x))
 }
+
 func (x *CMsgDOTAGuildSetAccountRoleResponse_EResult) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(CMsgDOTAGuildSetAccountRoleResponse_EResult_value, data, "CMsgDOTAGuildSetAccountRoleResponse_EResult")
 	if err != nil {
@@ -122,8 +131,9 @@ func (x *CMsgDOTAGuildSetAccountRoleResponse_EResult) UnmarshalJSON(data []byte)
 	*x = CMsgDOTAGuildSetAccountRoleResponse_EResult(value)
 	return nil
 }
+
 func (CMsgDOTAGuildSetAccountRoleResponse_EResult) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_guild_d1885c7c75798425, []int{6, 0}
+	return fileDescriptor_ce40e801b61ab275, []int{6, 0}
 }
 
 type CMsgDOTAGuildInviteAccountResponse_EResult int32
@@ -149,6 +159,7 @@ var CMsgDOTAGuildInviteAccountResponse_EResult_name = map[int32]string{
 	6: "ERROR_GUILD_TOO_MANY_INVITES",
 	7: "ERROR_ACCOUNT_TOO_MANY_GUILDS",
 }
+
 var CMsgDOTAGuildInviteAccountResponse_EResult_value = map[string]int32{
 	"SUCCESS":                        0,
 	"ERROR_UNSPECIFIED":              1,
@@ -165,9 +176,11 @@ func (x CMsgDOTAGuildInviteAccountResponse_EResult) Enum() *CMsgDOTAGuildInviteA
 	*p = x
 	return p
 }
+
 func (x CMsgDOTAGuildInviteAccountResponse_EResult) String() string {
 	return proto.EnumName(CMsgDOTAGuildInviteAccountResponse_EResult_name, int32(x))
 }
+
 func (x *CMsgDOTAGuildInviteAccountResponse_EResult) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(CMsgDOTAGuildInviteAccountResponse_EResult_value, data, "CMsgDOTAGuildInviteAccountResponse_EResult")
 	if err != nil {
@@ -176,8 +189,9 @@ func (x *CMsgDOTAGuildInviteAccountResponse_EResult) UnmarshalJSON(data []byte) 
 	*x = CMsgDOTAGuildInviteAccountResponse_EResult(value)
 	return nil
 }
+
 func (CMsgDOTAGuildInviteAccountResponse_EResult) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_guild_d1885c7c75798425, []int{8, 0}
+	return fileDescriptor_ce40e801b61ab275, []int{8, 0}
 }
 
 type CMsgDOTAGuildCancelInviteResponse_EResult int32
@@ -193,6 +207,7 @@ var CMsgDOTAGuildCancelInviteResponse_EResult_name = map[int32]string{
 	1: "ERROR_UNSPECIFIED",
 	2: "ERROR_NO_PERMISSION",
 }
+
 var CMsgDOTAGuildCancelInviteResponse_EResult_value = map[string]int32{
 	"SUCCESS":             0,
 	"ERROR_UNSPECIFIED":   1,
@@ -204,9 +219,11 @@ func (x CMsgDOTAGuildCancelInviteResponse_EResult) Enum() *CMsgDOTAGuildCancelIn
 	*p = x
 	return p
 }
+
 func (x CMsgDOTAGuildCancelInviteResponse_EResult) String() string {
 	return proto.EnumName(CMsgDOTAGuildCancelInviteResponse_EResult_name, int32(x))
 }
+
 func (x *CMsgDOTAGuildCancelInviteResponse_EResult) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(CMsgDOTAGuildCancelInviteResponse_EResult_value, data, "CMsgDOTAGuildCancelInviteResponse_EResult")
 	if err != nil {
@@ -215,8 +232,9 @@ func (x *CMsgDOTAGuildCancelInviteResponse_EResult) UnmarshalJSON(data []byte) e
 	*x = CMsgDOTAGuildCancelInviteResponse_EResult(value)
 	return nil
 }
+
 func (CMsgDOTAGuildCancelInviteResponse_EResult) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_guild_d1885c7c75798425, []int{10, 0}
+	return fileDescriptor_ce40e801b61ab275, []int{10, 0}
 }
 
 type CMsgDOTAGuildUpdateDetailsResponse_EResult int32
@@ -232,6 +250,7 @@ var CMsgDOTAGuildUpdateDetailsResponse_EResult_name = map[int32]string{
 	1: "ERROR_UNSPECIFIED",
 	2: "ERROR_NO_PERMISSION",
 }
+
 var CMsgDOTAGuildUpdateDetailsResponse_EResult_value = map[string]int32{
 	"SUCCESS":             0,
 	"ERROR_UNSPECIFIED":   1,
@@ -243,9 +262,11 @@ func (x CMsgDOTAGuildUpdateDetailsResponse_EResult) Enum() *CMsgDOTAGuildUpdateD
 	*p = x
 	return p
 }
+
 func (x CMsgDOTAGuildUpdateDetailsResponse_EResult) String() string {
 	return proto.EnumName(CMsgDOTAGuildUpdateDetailsResponse_EResult_name, int32(x))
 }
+
 func (x *CMsgDOTAGuildUpdateDetailsResponse_EResult) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(CMsgDOTAGuildUpdateDetailsResponse_EResult_value, data, "CMsgDOTAGuildUpdateDetailsResponse_EResult")
 	if err != nil {
@@ -254,8 +275,9 @@ func (x *CMsgDOTAGuildUpdateDetailsResponse_EResult) UnmarshalJSON(data []byte) 
 	*x = CMsgDOTAGuildUpdateDetailsResponse_EResult(value)
 	return nil
 }
+
 func (CMsgDOTAGuildUpdateDetailsResponse_EResult) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_guild_d1885c7c75798425, []int{12, 0}
+	return fileDescriptor_ce40e801b61ab275, []int{12, 0}
 }
 
 type CMsgDOTAPartySetOpenGuildResponse_EResult int32
@@ -269,6 +291,7 @@ var CMsgDOTAPartySetOpenGuildResponse_EResult_name = map[int32]string{
 	0: "SUCCESS",
 	1: "ERROR_UNSPECIFIED",
 }
+
 var CMsgDOTAPartySetOpenGuildResponse_EResult_value = map[string]int32{
 	"SUCCESS":           0,
 	"ERROR_UNSPECIFIED": 1,
@@ -279,9 +302,11 @@ func (x CMsgDOTAPartySetOpenGuildResponse_EResult) Enum() *CMsgDOTAPartySetOpenG
 	*p = x
 	return p
 }
+
 func (x CMsgDOTAPartySetOpenGuildResponse_EResult) String() string {
 	return proto.EnumName(CMsgDOTAPartySetOpenGuildResponse_EResult_name, int32(x))
 }
+
 func (x *CMsgDOTAPartySetOpenGuildResponse_EResult) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(CMsgDOTAPartySetOpenGuildResponse_EResult_value, data, "CMsgDOTAPartySetOpenGuildResponse_EResult")
 	if err != nil {
@@ -290,8 +315,9 @@ func (x *CMsgDOTAPartySetOpenGuildResponse_EResult) UnmarshalJSON(data []byte) e
 	*x = CMsgDOTAPartySetOpenGuildResponse_EResult(value)
 	return nil
 }
+
 func (CMsgDOTAPartySetOpenGuildResponse_EResult) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_guild_d1885c7c75798425, []int{18, 0}
+	return fileDescriptor_ce40e801b61ab275, []int{18, 0}
 }
 
 type CMsgDOTAJoinOpenGuildPartyResponse_EResult int32
@@ -305,6 +331,7 @@ var CMsgDOTAJoinOpenGuildPartyResponse_EResult_name = map[int32]string{
 	0: "SUCCESS",
 	1: "ERROR_UNSPECIFIED",
 }
+
 var CMsgDOTAJoinOpenGuildPartyResponse_EResult_value = map[string]int32{
 	"SUCCESS":           0,
 	"ERROR_UNSPECIFIED": 1,
@@ -315,9 +342,11 @@ func (x CMsgDOTAJoinOpenGuildPartyResponse_EResult) Enum() *CMsgDOTAJoinOpenGuil
 	*p = x
 	return p
 }
+
 func (x CMsgDOTAJoinOpenGuildPartyResponse_EResult) String() string {
 	return proto.EnumName(CMsgDOTAJoinOpenGuildPartyResponse_EResult_name, int32(x))
 }
+
 func (x *CMsgDOTAJoinOpenGuildPartyResponse_EResult) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(CMsgDOTAJoinOpenGuildPartyResponse_EResult_value, data, "CMsgDOTAJoinOpenGuildPartyResponse_EResult")
 	if err != nil {
@@ -326,8 +355,9 @@ func (x *CMsgDOTAJoinOpenGuildPartyResponse_EResult) UnmarshalJSON(data []byte) 
 	*x = CMsgDOTAJoinOpenGuildPartyResponse_EResult(value)
 	return nil
 }
+
 func (CMsgDOTAJoinOpenGuildPartyResponse_EResult) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_guild_d1885c7c75798425, []int{20, 0}
+	return fileDescriptor_ce40e801b61ab275, []int{20, 0}
 }
 
 type CMsgDOTAGuildEditLogoResponse_EResult int32
@@ -345,6 +375,7 @@ var CMsgDOTAGuildEditLogoResponse_EResult_name = map[int32]string{
 	2: "LOGO_UPLOAD_FAILED",
 	3: "UNSPECIFIED_ERROR",
 }
+
 var CMsgDOTAGuildEditLogoResponse_EResult_value = map[string]int32{
 	"SUCCESS":            0,
 	"NO_PERMISSION":      1,
@@ -357,9 +388,11 @@ func (x CMsgDOTAGuildEditLogoResponse_EResult) Enum() *CMsgDOTAGuildEditLogoResp
 	*p = x
 	return p
 }
+
 func (x CMsgDOTAGuildEditLogoResponse_EResult) String() string {
 	return proto.EnumName(CMsgDOTAGuildEditLogoResponse_EResult_name, int32(x))
 }
+
 func (x *CMsgDOTAGuildEditLogoResponse_EResult) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(CMsgDOTAGuildEditLogoResponse_EResult_value, data, "CMsgDOTAGuildEditLogoResponse_EResult")
 	if err != nil {
@@ -368,8 +401,9 @@ func (x *CMsgDOTAGuildEditLogoResponse_EResult) UnmarshalJSON(data []byte) error
 	*x = CMsgDOTAGuildEditLogoResponse_EResult(value)
 	return nil
 }
+
 func (CMsgDOTAGuildEditLogoResponse_EResult) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_guild_d1885c7c75798425, []int{26, 0}
+	return fileDescriptor_ce40e801b61ab275, []int{26, 0}
 }
 
 type CMsgDOTAGuildSDO struct {
@@ -394,16 +428,17 @@ func (m *CMsgDOTAGuildSDO) Reset()         { *m = CMsgDOTAGuildSDO{} }
 func (m *CMsgDOTAGuildSDO) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTAGuildSDO) ProtoMessage()    {}
 func (*CMsgDOTAGuildSDO) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_guild_d1885c7c75798425, []int{0}
+	return fileDescriptor_ce40e801b61ab275, []int{0}
 }
+
 func (m *CMsgDOTAGuildSDO) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTAGuildSDO.Unmarshal(m, b)
 }
 func (m *CMsgDOTAGuildSDO) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTAGuildSDO.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTAGuildSDO) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTAGuildSDO.Merge(dst, src)
+func (m *CMsgDOTAGuildSDO) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAGuildSDO.Merge(m, src)
 }
 func (m *CMsgDOTAGuildSDO) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTAGuildSDO.Size(m)
@@ -511,16 +546,17 @@ func (m *CMsgDOTAGuildSDO_Member) Reset()         { *m = CMsgDOTAGuildSDO_Member
 func (m *CMsgDOTAGuildSDO_Member) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTAGuildSDO_Member) ProtoMessage()    {}
 func (*CMsgDOTAGuildSDO_Member) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_guild_d1885c7c75798425, []int{0, 0}
+	return fileDescriptor_ce40e801b61ab275, []int{0, 0}
 }
+
 func (m *CMsgDOTAGuildSDO_Member) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTAGuildSDO_Member.Unmarshal(m, b)
 }
 func (m *CMsgDOTAGuildSDO_Member) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTAGuildSDO_Member.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTAGuildSDO_Member) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTAGuildSDO_Member.Merge(dst, src)
+func (m *CMsgDOTAGuildSDO_Member) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAGuildSDO_Member.Merge(m, src)
 }
 func (m *CMsgDOTAGuildSDO_Member) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTAGuildSDO_Member.Size(m)
@@ -565,16 +601,17 @@ func (m *CMsgDOTAGuildSDO_Invitation) Reset()         { *m = CMsgDOTAGuildSDO_In
 func (m *CMsgDOTAGuildSDO_Invitation) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTAGuildSDO_Invitation) ProtoMessage()    {}
 func (*CMsgDOTAGuildSDO_Invitation) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_guild_d1885c7c75798425, []int{0, 1}
+	return fileDescriptor_ce40e801b61ab275, []int{0, 1}
 }
+
 func (m *CMsgDOTAGuildSDO_Invitation) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTAGuildSDO_Invitation.Unmarshal(m, b)
 }
 func (m *CMsgDOTAGuildSDO_Invitation) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTAGuildSDO_Invitation.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTAGuildSDO_Invitation) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTAGuildSDO_Invitation.Merge(dst, src)
+func (m *CMsgDOTAGuildSDO_Invitation) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAGuildSDO_Invitation.Merge(m, src)
 }
 func (m *CMsgDOTAGuildSDO_Invitation) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTAGuildSDO_Invitation.Size(m)
@@ -618,16 +655,17 @@ func (m *CMsgDOTAGuildAuditSDO) Reset()         { *m = CMsgDOTAGuildAuditSDO{} }
 func (m *CMsgDOTAGuildAuditSDO) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTAGuildAuditSDO) ProtoMessage()    {}
 func (*CMsgDOTAGuildAuditSDO) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_guild_d1885c7c75798425, []int{1}
+	return fileDescriptor_ce40e801b61ab275, []int{1}
 }
+
 func (m *CMsgDOTAGuildAuditSDO) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTAGuildAuditSDO.Unmarshal(m, b)
 }
 func (m *CMsgDOTAGuildAuditSDO) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTAGuildAuditSDO.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTAGuildAuditSDO) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTAGuildAuditSDO.Merge(dst, src)
+func (m *CMsgDOTAGuildAuditSDO) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAGuildAuditSDO.Merge(m, src)
 }
 func (m *CMsgDOTAGuildAuditSDO) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTAGuildAuditSDO.Size(m)
@@ -669,16 +707,17 @@ func (m *CMsgDOTAGuildAuditSDO_Entry) Reset()         { *m = CMsgDOTAGuildAuditS
 func (m *CMsgDOTAGuildAuditSDO_Entry) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTAGuildAuditSDO_Entry) ProtoMessage()    {}
 func (*CMsgDOTAGuildAuditSDO_Entry) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_guild_d1885c7c75798425, []int{1, 0}
+	return fileDescriptor_ce40e801b61ab275, []int{1, 0}
 }
+
 func (m *CMsgDOTAGuildAuditSDO_Entry) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTAGuildAuditSDO_Entry.Unmarshal(m, b)
 }
 func (m *CMsgDOTAGuildAuditSDO_Entry) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTAGuildAuditSDO_Entry.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTAGuildAuditSDO_Entry) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTAGuildAuditSDO_Entry.Merge(dst, src)
+func (m *CMsgDOTAGuildAuditSDO_Entry) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAGuildAuditSDO_Entry.Merge(m, src)
 }
 func (m *CMsgDOTAGuildAuditSDO_Entry) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTAGuildAuditSDO_Entry.Size(m)
@@ -751,16 +790,17 @@ func (m *CMsgDOTAAccountGuildMembershipsSDO) Reset()         { *m = CMsgDOTAAcco
 func (m *CMsgDOTAAccountGuildMembershipsSDO) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTAAccountGuildMembershipsSDO) ProtoMessage()    {}
 func (*CMsgDOTAAccountGuildMembershipsSDO) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_guild_d1885c7c75798425, []int{2}
+	return fileDescriptor_ce40e801b61ab275, []int{2}
 }
+
 func (m *CMsgDOTAAccountGuildMembershipsSDO) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTAAccountGuildMembershipsSDO.Unmarshal(m, b)
 }
 func (m *CMsgDOTAAccountGuildMembershipsSDO) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTAAccountGuildMembershipsSDO.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTAAccountGuildMembershipsSDO) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTAAccountGuildMembershipsSDO.Merge(dst, src)
+func (m *CMsgDOTAAccountGuildMembershipsSDO) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAAccountGuildMembershipsSDO.Merge(m, src)
 }
 func (m *CMsgDOTAAccountGuildMembershipsSDO) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTAAccountGuildMembershipsSDO.Size(m)
@@ -808,16 +848,17 @@ func (m *CMsgDOTAAccountGuildMembershipsSDO_Membership) String() string {
 }
 func (*CMsgDOTAAccountGuildMembershipsSDO_Membership) ProtoMessage() {}
 func (*CMsgDOTAAccountGuildMembershipsSDO_Membership) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_guild_d1885c7c75798425, []int{2, 0}
+	return fileDescriptor_ce40e801b61ab275, []int{2, 0}
 }
+
 func (m *CMsgDOTAAccountGuildMembershipsSDO_Membership) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTAAccountGuildMembershipsSDO_Membership.Unmarshal(m, b)
 }
 func (m *CMsgDOTAAccountGuildMembershipsSDO_Membership) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTAAccountGuildMembershipsSDO_Membership.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTAAccountGuildMembershipsSDO_Membership) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTAAccountGuildMembershipsSDO_Membership.Merge(dst, src)
+func (m *CMsgDOTAAccountGuildMembershipsSDO_Membership) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAAccountGuildMembershipsSDO_Membership.Merge(m, src)
 }
 func (m *CMsgDOTAAccountGuildMembershipsSDO_Membership) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTAAccountGuildMembershipsSDO_Membership.Size(m)
@@ -859,16 +900,17 @@ func (m *CMsgDOTAAccountGuildMembershipsSDO_Invitation) String() string {
 }
 func (*CMsgDOTAAccountGuildMembershipsSDO_Invitation) ProtoMessage() {}
 func (*CMsgDOTAAccountGuildMembershipsSDO_Invitation) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_guild_d1885c7c75798425, []int{2, 1}
+	return fileDescriptor_ce40e801b61ab275, []int{2, 1}
 }
+
 func (m *CMsgDOTAAccountGuildMembershipsSDO_Invitation) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTAAccountGuildMembershipsSDO_Invitation.Unmarshal(m, b)
 }
 func (m *CMsgDOTAAccountGuildMembershipsSDO_Invitation) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTAAccountGuildMembershipsSDO_Invitation.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTAAccountGuildMembershipsSDO_Invitation) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTAAccountGuildMembershipsSDO_Invitation.Merge(dst, src)
+func (m *CMsgDOTAAccountGuildMembershipsSDO_Invitation) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAAccountGuildMembershipsSDO_Invitation.Merge(m, src)
 }
 func (m *CMsgDOTAAccountGuildMembershipsSDO_Invitation) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTAAccountGuildMembershipsSDO_Invitation.Size(m)
@@ -915,16 +957,17 @@ func (m *CMsgDOTAGuildCreateRequest) Reset()         { *m = CMsgDOTAGuildCreateR
 func (m *CMsgDOTAGuildCreateRequest) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTAGuildCreateRequest) ProtoMessage()    {}
 func (*CMsgDOTAGuildCreateRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_guild_d1885c7c75798425, []int{3}
+	return fileDescriptor_ce40e801b61ab275, []int{3}
 }
+
 func (m *CMsgDOTAGuildCreateRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTAGuildCreateRequest.Unmarshal(m, b)
 }
 func (m *CMsgDOTAGuildCreateRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTAGuildCreateRequest.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTAGuildCreateRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTAGuildCreateRequest.Merge(dst, src)
+func (m *CMsgDOTAGuildCreateRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAGuildCreateRequest.Merge(m, src)
 }
 func (m *CMsgDOTAGuildCreateRequest) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTAGuildCreateRequest.Size(m)
@@ -982,16 +1025,17 @@ func (m *CMsgDOTAGuildCreateResponse) Reset()         { *m = CMsgDOTAGuildCreate
 func (m *CMsgDOTAGuildCreateResponse) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTAGuildCreateResponse) ProtoMessage()    {}
 func (*CMsgDOTAGuildCreateResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_guild_d1885c7c75798425, []int{4}
+	return fileDescriptor_ce40e801b61ab275, []int{4}
 }
+
 func (m *CMsgDOTAGuildCreateResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTAGuildCreateResponse.Unmarshal(m, b)
 }
 func (m *CMsgDOTAGuildCreateResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTAGuildCreateResponse.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTAGuildCreateResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTAGuildCreateResponse.Merge(dst, src)
+func (m *CMsgDOTAGuildCreateResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAGuildCreateResponse.Merge(m, src)
 }
 func (m *CMsgDOTAGuildCreateResponse) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTAGuildCreateResponse.Size(m)
@@ -1029,16 +1073,17 @@ func (m *CMsgDOTAGuildSetAccountRoleRequest) Reset()         { *m = CMsgDOTAGuil
 func (m *CMsgDOTAGuildSetAccountRoleRequest) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTAGuildSetAccountRoleRequest) ProtoMessage()    {}
 func (*CMsgDOTAGuildSetAccountRoleRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_guild_d1885c7c75798425, []int{5}
+	return fileDescriptor_ce40e801b61ab275, []int{5}
 }
+
 func (m *CMsgDOTAGuildSetAccountRoleRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTAGuildSetAccountRoleRequest.Unmarshal(m, b)
 }
 func (m *CMsgDOTAGuildSetAccountRoleRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTAGuildSetAccountRoleRequest.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTAGuildSetAccountRoleRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTAGuildSetAccountRoleRequest.Merge(dst, src)
+func (m *CMsgDOTAGuildSetAccountRoleRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAGuildSetAccountRoleRequest.Merge(m, src)
 }
 func (m *CMsgDOTAGuildSetAccountRoleRequest) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTAGuildSetAccountRoleRequest.Size(m)
@@ -1081,16 +1126,17 @@ func (m *CMsgDOTAGuildSetAccountRoleResponse) Reset()         { *m = CMsgDOTAGui
 func (m *CMsgDOTAGuildSetAccountRoleResponse) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTAGuildSetAccountRoleResponse) ProtoMessage()    {}
 func (*CMsgDOTAGuildSetAccountRoleResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_guild_d1885c7c75798425, []int{6}
+	return fileDescriptor_ce40e801b61ab275, []int{6}
 }
+
 func (m *CMsgDOTAGuildSetAccountRoleResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTAGuildSetAccountRoleResponse.Unmarshal(m, b)
 }
 func (m *CMsgDOTAGuildSetAccountRoleResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTAGuildSetAccountRoleResponse.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTAGuildSetAccountRoleResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTAGuildSetAccountRoleResponse.Merge(dst, src)
+func (m *CMsgDOTAGuildSetAccountRoleResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAGuildSetAccountRoleResponse.Merge(m, src)
 }
 func (m *CMsgDOTAGuildSetAccountRoleResponse) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTAGuildSetAccountRoleResponse.Size(m)
@@ -1122,16 +1168,17 @@ func (m *CMsgDOTAGuildInviteAccountRequest) Reset()         { *m = CMsgDOTAGuild
 func (m *CMsgDOTAGuildInviteAccountRequest) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTAGuildInviteAccountRequest) ProtoMessage()    {}
 func (*CMsgDOTAGuildInviteAccountRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_guild_d1885c7c75798425, []int{7}
+	return fileDescriptor_ce40e801b61ab275, []int{7}
 }
+
 func (m *CMsgDOTAGuildInviteAccountRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTAGuildInviteAccountRequest.Unmarshal(m, b)
 }
 func (m *CMsgDOTAGuildInviteAccountRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTAGuildInviteAccountRequest.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTAGuildInviteAccountRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTAGuildInviteAccountRequest.Merge(dst, src)
+func (m *CMsgDOTAGuildInviteAccountRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAGuildInviteAccountRequest.Merge(m, src)
 }
 func (m *CMsgDOTAGuildInviteAccountRequest) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTAGuildInviteAccountRequest.Size(m)
@@ -1167,16 +1214,17 @@ func (m *CMsgDOTAGuildInviteAccountResponse) Reset()         { *m = CMsgDOTAGuil
 func (m *CMsgDOTAGuildInviteAccountResponse) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTAGuildInviteAccountResponse) ProtoMessage()    {}
 func (*CMsgDOTAGuildInviteAccountResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_guild_d1885c7c75798425, []int{8}
+	return fileDescriptor_ce40e801b61ab275, []int{8}
 }
+
 func (m *CMsgDOTAGuildInviteAccountResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTAGuildInviteAccountResponse.Unmarshal(m, b)
 }
 func (m *CMsgDOTAGuildInviteAccountResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTAGuildInviteAccountResponse.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTAGuildInviteAccountResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTAGuildInviteAccountResponse.Merge(dst, src)
+func (m *CMsgDOTAGuildInviteAccountResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAGuildInviteAccountResponse.Merge(m, src)
 }
 func (m *CMsgDOTAGuildInviteAccountResponse) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTAGuildInviteAccountResponse.Size(m)
@@ -1208,16 +1256,17 @@ func (m *CMsgDOTAGuildCancelInviteRequest) Reset()         { *m = CMsgDOTAGuildC
 func (m *CMsgDOTAGuildCancelInviteRequest) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTAGuildCancelInviteRequest) ProtoMessage()    {}
 func (*CMsgDOTAGuildCancelInviteRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_guild_d1885c7c75798425, []int{9}
+	return fileDescriptor_ce40e801b61ab275, []int{9}
 }
+
 func (m *CMsgDOTAGuildCancelInviteRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTAGuildCancelInviteRequest.Unmarshal(m, b)
 }
 func (m *CMsgDOTAGuildCancelInviteRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTAGuildCancelInviteRequest.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTAGuildCancelInviteRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTAGuildCancelInviteRequest.Merge(dst, src)
+func (m *CMsgDOTAGuildCancelInviteRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAGuildCancelInviteRequest.Merge(m, src)
 }
 func (m *CMsgDOTAGuildCancelInviteRequest) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTAGuildCancelInviteRequest.Size(m)
@@ -1253,16 +1302,17 @@ func (m *CMsgDOTAGuildCancelInviteResponse) Reset()         { *m = CMsgDOTAGuild
 func (m *CMsgDOTAGuildCancelInviteResponse) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTAGuildCancelInviteResponse) ProtoMessage()    {}
 func (*CMsgDOTAGuildCancelInviteResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_guild_d1885c7c75798425, []int{10}
+	return fileDescriptor_ce40e801b61ab275, []int{10}
 }
+
 func (m *CMsgDOTAGuildCancelInviteResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTAGuildCancelInviteResponse.Unmarshal(m, b)
 }
 func (m *CMsgDOTAGuildCancelInviteResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTAGuildCancelInviteResponse.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTAGuildCancelInviteResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTAGuildCancelInviteResponse.Merge(dst, src)
+func (m *CMsgDOTAGuildCancelInviteResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAGuildCancelInviteResponse.Merge(m, src)
 }
 func (m *CMsgDOTAGuildCancelInviteResponse) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTAGuildCancelInviteResponse.Size(m)
@@ -1296,16 +1346,17 @@ func (m *CMsgDOTAGuildUpdateDetailsRequest) Reset()         { *m = CMsgDOTAGuild
 func (m *CMsgDOTAGuildUpdateDetailsRequest) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTAGuildUpdateDetailsRequest) ProtoMessage()    {}
 func (*CMsgDOTAGuildUpdateDetailsRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_guild_d1885c7c75798425, []int{11}
+	return fileDescriptor_ce40e801b61ab275, []int{11}
 }
+
 func (m *CMsgDOTAGuildUpdateDetailsRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTAGuildUpdateDetailsRequest.Unmarshal(m, b)
 }
 func (m *CMsgDOTAGuildUpdateDetailsRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTAGuildUpdateDetailsRequest.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTAGuildUpdateDetailsRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTAGuildUpdateDetailsRequest.Merge(dst, src)
+func (m *CMsgDOTAGuildUpdateDetailsRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAGuildUpdateDetailsRequest.Merge(m, src)
 }
 func (m *CMsgDOTAGuildUpdateDetailsRequest) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTAGuildUpdateDetailsRequest.Size(m)
@@ -1355,16 +1406,17 @@ func (m *CMsgDOTAGuildUpdateDetailsResponse) Reset()         { *m = CMsgDOTAGuil
 func (m *CMsgDOTAGuildUpdateDetailsResponse) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTAGuildUpdateDetailsResponse) ProtoMessage()    {}
 func (*CMsgDOTAGuildUpdateDetailsResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_guild_d1885c7c75798425, []int{12}
+	return fileDescriptor_ce40e801b61ab275, []int{12}
 }
+
 func (m *CMsgDOTAGuildUpdateDetailsResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTAGuildUpdateDetailsResponse.Unmarshal(m, b)
 }
 func (m *CMsgDOTAGuildUpdateDetailsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTAGuildUpdateDetailsResponse.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTAGuildUpdateDetailsResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTAGuildUpdateDetailsResponse.Merge(dst, src)
+func (m *CMsgDOTAGuildUpdateDetailsResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAGuildUpdateDetailsResponse.Merge(m, src)
 }
 func (m *CMsgDOTAGuildUpdateDetailsResponse) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTAGuildUpdateDetailsResponse.Size(m)
@@ -1400,16 +1452,17 @@ func (m *CMsgDOTAGCToGCUpdateOpenGuildPartyRequest) Reset() {
 func (m *CMsgDOTAGCToGCUpdateOpenGuildPartyRequest) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTAGCToGCUpdateOpenGuildPartyRequest) ProtoMessage()    {}
 func (*CMsgDOTAGCToGCUpdateOpenGuildPartyRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_guild_d1885c7c75798425, []int{13}
+	return fileDescriptor_ce40e801b61ab275, []int{13}
 }
+
 func (m *CMsgDOTAGCToGCUpdateOpenGuildPartyRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTAGCToGCUpdateOpenGuildPartyRequest.Unmarshal(m, b)
 }
 func (m *CMsgDOTAGCToGCUpdateOpenGuildPartyRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTAGCToGCUpdateOpenGuildPartyRequest.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTAGCToGCUpdateOpenGuildPartyRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTAGCToGCUpdateOpenGuildPartyRequest.Merge(dst, src)
+func (m *CMsgDOTAGCToGCUpdateOpenGuildPartyRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAGCToGCUpdateOpenGuildPartyRequest.Merge(m, src)
 }
 func (m *CMsgDOTAGCToGCUpdateOpenGuildPartyRequest) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTAGCToGCUpdateOpenGuildPartyRequest.Size(m)
@@ -1463,16 +1516,17 @@ func (m *CMsgDOTAGCToGCUpdateOpenGuildPartyResponse) String() string {
 }
 func (*CMsgDOTAGCToGCUpdateOpenGuildPartyResponse) ProtoMessage() {}
 func (*CMsgDOTAGCToGCUpdateOpenGuildPartyResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_guild_d1885c7c75798425, []int{14}
+	return fileDescriptor_ce40e801b61ab275, []int{14}
 }
+
 func (m *CMsgDOTAGCToGCUpdateOpenGuildPartyResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTAGCToGCUpdateOpenGuildPartyResponse.Unmarshal(m, b)
 }
 func (m *CMsgDOTAGCToGCUpdateOpenGuildPartyResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTAGCToGCUpdateOpenGuildPartyResponse.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTAGCToGCUpdateOpenGuildPartyResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTAGCToGCUpdateOpenGuildPartyResponse.Merge(dst, src)
+func (m *CMsgDOTAGCToGCUpdateOpenGuildPartyResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAGCToGCUpdateOpenGuildPartyResponse.Merge(m, src)
 }
 func (m *CMsgDOTAGCToGCUpdateOpenGuildPartyResponse) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTAGCToGCUpdateOpenGuildPartyResponse.Size(m)
@@ -1506,16 +1560,17 @@ func (m *CMsgDOTAGCToGCDestroyOpenGuildPartyRequest) String() string {
 }
 func (*CMsgDOTAGCToGCDestroyOpenGuildPartyRequest) ProtoMessage() {}
 func (*CMsgDOTAGCToGCDestroyOpenGuildPartyRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_guild_d1885c7c75798425, []int{15}
+	return fileDescriptor_ce40e801b61ab275, []int{15}
 }
+
 func (m *CMsgDOTAGCToGCDestroyOpenGuildPartyRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTAGCToGCDestroyOpenGuildPartyRequest.Unmarshal(m, b)
 }
 func (m *CMsgDOTAGCToGCDestroyOpenGuildPartyRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTAGCToGCDestroyOpenGuildPartyRequest.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTAGCToGCDestroyOpenGuildPartyRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTAGCToGCDestroyOpenGuildPartyRequest.Merge(dst, src)
+func (m *CMsgDOTAGCToGCDestroyOpenGuildPartyRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAGCToGCDestroyOpenGuildPartyRequest.Merge(m, src)
 }
 func (m *CMsgDOTAGCToGCDestroyOpenGuildPartyRequest) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTAGCToGCDestroyOpenGuildPartyRequest.Size(m)
@@ -1554,16 +1609,17 @@ func (m *CMsgDOTAGCToGCDestroyOpenGuildPartyResponse) String() string {
 }
 func (*CMsgDOTAGCToGCDestroyOpenGuildPartyResponse) ProtoMessage() {}
 func (*CMsgDOTAGCToGCDestroyOpenGuildPartyResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_guild_d1885c7c75798425, []int{16}
+	return fileDescriptor_ce40e801b61ab275, []int{16}
 }
+
 func (m *CMsgDOTAGCToGCDestroyOpenGuildPartyResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTAGCToGCDestroyOpenGuildPartyResponse.Unmarshal(m, b)
 }
 func (m *CMsgDOTAGCToGCDestroyOpenGuildPartyResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTAGCToGCDestroyOpenGuildPartyResponse.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTAGCToGCDestroyOpenGuildPartyResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTAGCToGCDestroyOpenGuildPartyResponse.Merge(dst, src)
+func (m *CMsgDOTAGCToGCDestroyOpenGuildPartyResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAGCToGCDestroyOpenGuildPartyResponse.Merge(m, src)
 }
 func (m *CMsgDOTAGCToGCDestroyOpenGuildPartyResponse) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTAGCToGCDestroyOpenGuildPartyResponse.Size(m)
@@ -1586,16 +1642,17 @@ func (m *CMsgDOTAPartySetOpenGuildRequest) Reset()         { *m = CMsgDOTAPartyS
 func (m *CMsgDOTAPartySetOpenGuildRequest) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTAPartySetOpenGuildRequest) ProtoMessage()    {}
 func (*CMsgDOTAPartySetOpenGuildRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_guild_d1885c7c75798425, []int{17}
+	return fileDescriptor_ce40e801b61ab275, []int{17}
 }
+
 func (m *CMsgDOTAPartySetOpenGuildRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTAPartySetOpenGuildRequest.Unmarshal(m, b)
 }
 func (m *CMsgDOTAPartySetOpenGuildRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTAPartySetOpenGuildRequest.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTAPartySetOpenGuildRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTAPartySetOpenGuildRequest.Merge(dst, src)
+func (m *CMsgDOTAPartySetOpenGuildRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAPartySetOpenGuildRequest.Merge(m, src)
 }
 func (m *CMsgDOTAPartySetOpenGuildRequest) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTAPartySetOpenGuildRequest.Size(m)
@@ -1631,16 +1688,17 @@ func (m *CMsgDOTAPartySetOpenGuildResponse) Reset()         { *m = CMsgDOTAParty
 func (m *CMsgDOTAPartySetOpenGuildResponse) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTAPartySetOpenGuildResponse) ProtoMessage()    {}
 func (*CMsgDOTAPartySetOpenGuildResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_guild_d1885c7c75798425, []int{18}
+	return fileDescriptor_ce40e801b61ab275, []int{18}
 }
+
 func (m *CMsgDOTAPartySetOpenGuildResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTAPartySetOpenGuildResponse.Unmarshal(m, b)
 }
 func (m *CMsgDOTAPartySetOpenGuildResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTAPartySetOpenGuildResponse.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTAPartySetOpenGuildResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTAPartySetOpenGuildResponse.Merge(dst, src)
+func (m *CMsgDOTAPartySetOpenGuildResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAPartySetOpenGuildResponse.Merge(m, src)
 }
 func (m *CMsgDOTAPartySetOpenGuildResponse) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTAPartySetOpenGuildResponse.Size(m)
@@ -1671,16 +1729,17 @@ func (m *CMsgDOTAJoinOpenGuildPartyRequest) Reset()         { *m = CMsgDOTAJoinO
 func (m *CMsgDOTAJoinOpenGuildPartyRequest) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTAJoinOpenGuildPartyRequest) ProtoMessage()    {}
 func (*CMsgDOTAJoinOpenGuildPartyRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_guild_d1885c7c75798425, []int{19}
+	return fileDescriptor_ce40e801b61ab275, []int{19}
 }
+
 func (m *CMsgDOTAJoinOpenGuildPartyRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTAJoinOpenGuildPartyRequest.Unmarshal(m, b)
 }
 func (m *CMsgDOTAJoinOpenGuildPartyRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTAJoinOpenGuildPartyRequest.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTAJoinOpenGuildPartyRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTAJoinOpenGuildPartyRequest.Merge(dst, src)
+func (m *CMsgDOTAJoinOpenGuildPartyRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAJoinOpenGuildPartyRequest.Merge(m, src)
 }
 func (m *CMsgDOTAJoinOpenGuildPartyRequest) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTAJoinOpenGuildPartyRequest.Size(m)
@@ -1709,16 +1768,17 @@ func (m *CMsgDOTAJoinOpenGuildPartyResponse) Reset()         { *m = CMsgDOTAJoin
 func (m *CMsgDOTAJoinOpenGuildPartyResponse) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTAJoinOpenGuildPartyResponse) ProtoMessage()    {}
 func (*CMsgDOTAJoinOpenGuildPartyResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_guild_d1885c7c75798425, []int{20}
+	return fileDescriptor_ce40e801b61ab275, []int{20}
 }
+
 func (m *CMsgDOTAJoinOpenGuildPartyResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTAJoinOpenGuildPartyResponse.Unmarshal(m, b)
 }
 func (m *CMsgDOTAJoinOpenGuildPartyResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTAJoinOpenGuildPartyResponse.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTAJoinOpenGuildPartyResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTAJoinOpenGuildPartyResponse.Merge(dst, src)
+func (m *CMsgDOTAJoinOpenGuildPartyResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAJoinOpenGuildPartyResponse.Merge(m, src)
 }
 func (m *CMsgDOTAJoinOpenGuildPartyResponse) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTAJoinOpenGuildPartyResponse.Size(m)
@@ -1750,16 +1810,17 @@ func (m *CMsgDOTAGuildOpenPartyRefresh) Reset()         { *m = CMsgDOTAGuildOpen
 func (m *CMsgDOTAGuildOpenPartyRefresh) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTAGuildOpenPartyRefresh) ProtoMessage()    {}
 func (*CMsgDOTAGuildOpenPartyRefresh) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_guild_d1885c7c75798425, []int{21}
+	return fileDescriptor_ce40e801b61ab275, []int{21}
 }
+
 func (m *CMsgDOTAGuildOpenPartyRefresh) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTAGuildOpenPartyRefresh.Unmarshal(m, b)
 }
 func (m *CMsgDOTAGuildOpenPartyRefresh) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTAGuildOpenPartyRefresh.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTAGuildOpenPartyRefresh) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTAGuildOpenPartyRefresh.Merge(dst, src)
+func (m *CMsgDOTAGuildOpenPartyRefresh) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAGuildOpenPartyRefresh.Merge(m, src)
 }
 func (m *CMsgDOTAGuildOpenPartyRefresh) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTAGuildOpenPartyRefresh.Size(m)
@@ -1800,16 +1861,17 @@ func (m *CMsgDOTAGuildOpenPartyRefresh_OpenParty) Reset() {
 func (m *CMsgDOTAGuildOpenPartyRefresh_OpenParty) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTAGuildOpenPartyRefresh_OpenParty) ProtoMessage()    {}
 func (*CMsgDOTAGuildOpenPartyRefresh_OpenParty) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_guild_d1885c7c75798425, []int{21, 0}
+	return fileDescriptor_ce40e801b61ab275, []int{21, 0}
 }
+
 func (m *CMsgDOTAGuildOpenPartyRefresh_OpenParty) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTAGuildOpenPartyRefresh_OpenParty.Unmarshal(m, b)
 }
 func (m *CMsgDOTAGuildOpenPartyRefresh_OpenParty) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTAGuildOpenPartyRefresh_OpenParty.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTAGuildOpenPartyRefresh_OpenParty) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTAGuildOpenPartyRefresh_OpenParty.Merge(dst, src)
+func (m *CMsgDOTAGuildOpenPartyRefresh_OpenParty) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAGuildOpenPartyRefresh_OpenParty.Merge(m, src)
 }
 func (m *CMsgDOTAGuildOpenPartyRefresh_OpenParty) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTAGuildOpenPartyRefresh_OpenParty.Size(m)
@@ -1858,16 +1920,17 @@ func (m *CMsgDOTARequestGuildData) Reset()         { *m = CMsgDOTARequestGuildDa
 func (m *CMsgDOTARequestGuildData) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTARequestGuildData) ProtoMessage()    {}
 func (*CMsgDOTARequestGuildData) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_guild_d1885c7c75798425, []int{22}
+	return fileDescriptor_ce40e801b61ab275, []int{22}
 }
+
 func (m *CMsgDOTARequestGuildData) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTARequestGuildData.Unmarshal(m, b)
 }
 func (m *CMsgDOTARequestGuildData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTARequestGuildData.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTARequestGuildData) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTARequestGuildData.Merge(dst, src)
+func (m *CMsgDOTARequestGuildData) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTARequestGuildData.Merge(m, src)
 }
 func (m *CMsgDOTARequestGuildData) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTARequestGuildData.Size(m)
@@ -1896,16 +1959,17 @@ func (m *CMsgDOTAGuildInviteData) Reset()         { *m = CMsgDOTAGuildInviteData
 func (m *CMsgDOTAGuildInviteData) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTAGuildInviteData) ProtoMessage()    {}
 func (*CMsgDOTAGuildInviteData) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_guild_d1885c7c75798425, []int{23}
+	return fileDescriptor_ce40e801b61ab275, []int{23}
 }
+
 func (m *CMsgDOTAGuildInviteData) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTAGuildInviteData.Unmarshal(m, b)
 }
 func (m *CMsgDOTAGuildInviteData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTAGuildInviteData.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTAGuildInviteData) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTAGuildInviteData.Merge(dst, src)
+func (m *CMsgDOTAGuildInviteData) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAGuildInviteData.Merge(m, src)
 }
 func (m *CMsgDOTAGuildInviteData) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTAGuildInviteData.Size(m)
@@ -1984,16 +2048,17 @@ func (m *CMsgDOTAGuildUpdateMessage) Reset()         { *m = CMsgDOTAGuildUpdateM
 func (m *CMsgDOTAGuildUpdateMessage) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTAGuildUpdateMessage) ProtoMessage()    {}
 func (*CMsgDOTAGuildUpdateMessage) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_guild_d1885c7c75798425, []int{24}
+	return fileDescriptor_ce40e801b61ab275, []int{24}
 }
+
 func (m *CMsgDOTAGuildUpdateMessage) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTAGuildUpdateMessage.Unmarshal(m, b)
 }
 func (m *CMsgDOTAGuildUpdateMessage) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTAGuildUpdateMessage.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTAGuildUpdateMessage) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTAGuildUpdateMessage.Merge(dst, src)
+func (m *CMsgDOTAGuildUpdateMessage) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAGuildUpdateMessage.Merge(m, src)
 }
 func (m *CMsgDOTAGuildUpdateMessage) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTAGuildUpdateMessage.Size(m)
@@ -2030,16 +2095,17 @@ func (m *CMsgDOTAGuildEditLogoRequest) Reset()         { *m = CMsgDOTAGuildEditL
 func (m *CMsgDOTAGuildEditLogoRequest) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTAGuildEditLogoRequest) ProtoMessage()    {}
 func (*CMsgDOTAGuildEditLogoRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_guild_d1885c7c75798425, []int{25}
+	return fileDescriptor_ce40e801b61ab275, []int{25}
 }
+
 func (m *CMsgDOTAGuildEditLogoRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTAGuildEditLogoRequest.Unmarshal(m, b)
 }
 func (m *CMsgDOTAGuildEditLogoRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTAGuildEditLogoRequest.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTAGuildEditLogoRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTAGuildEditLogoRequest.Merge(dst, src)
+func (m *CMsgDOTAGuildEditLogoRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAGuildEditLogoRequest.Merge(m, src)
 }
 func (m *CMsgDOTAGuildEditLogoRequest) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTAGuildEditLogoRequest.Size(m)
@@ -2076,16 +2142,17 @@ func (m *CMsgDOTAGuildEditLogoResponse) Reset()         { *m = CMsgDOTAGuildEdit
 func (m *CMsgDOTAGuildEditLogoResponse) String() string { return proto.CompactTextString(m) }
 func (*CMsgDOTAGuildEditLogoResponse) ProtoMessage()    {}
 func (*CMsgDOTAGuildEditLogoResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dota_gcmessages_client_guild_d1885c7c75798425, []int{26}
+	return fileDescriptor_ce40e801b61ab275, []int{26}
 }
+
 func (m *CMsgDOTAGuildEditLogoResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgDOTAGuildEditLogoResponse.Unmarshal(m, b)
 }
 func (m *CMsgDOTAGuildEditLogoResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgDOTAGuildEditLogoResponse.Marshal(b, m, deterministic)
 }
-func (dst *CMsgDOTAGuildEditLogoResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgDOTAGuildEditLogoResponse.Merge(dst, src)
+func (m *CMsgDOTAGuildEditLogoResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgDOTAGuildEditLogoResponse.Merge(m, src)
 }
 func (m *CMsgDOTAGuildEditLogoResponse) XXX_Size() int {
 	return xxx_messageInfo_CMsgDOTAGuildEditLogoResponse.Size(m)
@@ -2113,6 +2180,14 @@ func (m *CMsgDOTAGuildEditLogoResponse) GetResult() CMsgDOTAGuildEditLogoRespons
 }
 
 func init() {
+	proto.RegisterEnum("dota.CMsgDOTAGuildCreateResponse_EError", CMsgDOTAGuildCreateResponse_EError_name, CMsgDOTAGuildCreateResponse_EError_value)
+	proto.RegisterEnum("dota.CMsgDOTAGuildSetAccountRoleResponse_EResult", CMsgDOTAGuildSetAccountRoleResponse_EResult_name, CMsgDOTAGuildSetAccountRoleResponse_EResult_value)
+	proto.RegisterEnum("dota.CMsgDOTAGuildInviteAccountResponse_EResult", CMsgDOTAGuildInviteAccountResponse_EResult_name, CMsgDOTAGuildInviteAccountResponse_EResult_value)
+	proto.RegisterEnum("dota.CMsgDOTAGuildCancelInviteResponse_EResult", CMsgDOTAGuildCancelInviteResponse_EResult_name, CMsgDOTAGuildCancelInviteResponse_EResult_value)
+	proto.RegisterEnum("dota.CMsgDOTAGuildUpdateDetailsResponse_EResult", CMsgDOTAGuildUpdateDetailsResponse_EResult_name, CMsgDOTAGuildUpdateDetailsResponse_EResult_value)
+	proto.RegisterEnum("dota.CMsgDOTAPartySetOpenGuildResponse_EResult", CMsgDOTAPartySetOpenGuildResponse_EResult_name, CMsgDOTAPartySetOpenGuildResponse_EResult_value)
+	proto.RegisterEnum("dota.CMsgDOTAJoinOpenGuildPartyResponse_EResult", CMsgDOTAJoinOpenGuildPartyResponse_EResult_name, CMsgDOTAJoinOpenGuildPartyResponse_EResult_value)
+	proto.RegisterEnum("dota.CMsgDOTAGuildEditLogoResponse_EResult", CMsgDOTAGuildEditLogoResponse_EResult_name, CMsgDOTAGuildEditLogoResponse_EResult_value)
 	proto.RegisterType((*CMsgDOTAGuildSDO)(nil), "dota.CMsgDOTAGuildSDO")
 	proto.RegisterType((*CMsgDOTAGuildSDO_Member)(nil), "dota.CMsgDOTAGuildSDO.Member")
 	proto.RegisterType((*CMsgDOTAGuildSDO_Invitation)(nil), "dota.CMsgDOTAGuildSDO.Invitation")
@@ -2146,21 +2221,11 @@ func init() {
 	proto.RegisterType((*CMsgDOTAGuildUpdateMessage)(nil), "dota.CMsgDOTAGuildUpdateMessage")
 	proto.RegisterType((*CMsgDOTAGuildEditLogoRequest)(nil), "dota.CMsgDOTAGuildEditLogoRequest")
 	proto.RegisterType((*CMsgDOTAGuildEditLogoResponse)(nil), "dota.CMsgDOTAGuildEditLogoResponse")
-	proto.RegisterEnum("dota.CMsgDOTAGuildCreateResponse_EError", CMsgDOTAGuildCreateResponse_EError_name, CMsgDOTAGuildCreateResponse_EError_value)
-	proto.RegisterEnum("dota.CMsgDOTAGuildSetAccountRoleResponse_EResult", CMsgDOTAGuildSetAccountRoleResponse_EResult_name, CMsgDOTAGuildSetAccountRoleResponse_EResult_value)
-	proto.RegisterEnum("dota.CMsgDOTAGuildInviteAccountResponse_EResult", CMsgDOTAGuildInviteAccountResponse_EResult_name, CMsgDOTAGuildInviteAccountResponse_EResult_value)
-	proto.RegisterEnum("dota.CMsgDOTAGuildCancelInviteResponse_EResult", CMsgDOTAGuildCancelInviteResponse_EResult_name, CMsgDOTAGuildCancelInviteResponse_EResult_value)
-	proto.RegisterEnum("dota.CMsgDOTAGuildUpdateDetailsResponse_EResult", CMsgDOTAGuildUpdateDetailsResponse_EResult_name, CMsgDOTAGuildUpdateDetailsResponse_EResult_value)
-	proto.RegisterEnum("dota.CMsgDOTAPartySetOpenGuildResponse_EResult", CMsgDOTAPartySetOpenGuildResponse_EResult_name, CMsgDOTAPartySetOpenGuildResponse_EResult_value)
-	proto.RegisterEnum("dota.CMsgDOTAJoinOpenGuildPartyResponse_EResult", CMsgDOTAJoinOpenGuildPartyResponse_EResult_name, CMsgDOTAJoinOpenGuildPartyResponse_EResult_value)
-	proto.RegisterEnum("dota.CMsgDOTAGuildEditLogoResponse_EResult", CMsgDOTAGuildEditLogoResponse_EResult_name, CMsgDOTAGuildEditLogoResponse_EResult_value)
 }
 
-func init() {
-	proto.RegisterFile("dota_gcmessages_client_guild.proto", fileDescriptor_dota_gcmessages_client_guild_d1885c7c75798425)
-}
+func init() { proto.RegisterFile("dota_gcmessages_client_guild.proto", fileDescriptor_ce40e801b61ab275) }
 
-var fileDescriptor_dota_gcmessages_client_guild_d1885c7c75798425 = []byte{
+var fileDescriptor_ce40e801b61ab275 = []byte{
 	// 1632 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xb4, 0x58, 0x4b, 0x6f, 0xdc, 0x54,
 	0x1b, 0xae, 0x3d, 0xb7, 0xcc, 0x3b, 0x99, 0xd4, 0x39, 0xbd, 0x4d, 0x93, 0xe6, 0xfb, 0x26, 0xfe,

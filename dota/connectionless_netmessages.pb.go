@@ -3,9 +3,11 @@
 
 package dota
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type C2S_CONNECT_Message struct {
 	HostVersion          *uint32                       `protobuf:"varint,1,opt,name=host_version,json=hostVersion" json:"host_version,omitempty"`
@@ -38,16 +40,17 @@ func (m *C2S_CONNECT_Message) Reset()         { *m = C2S_CONNECT_Message{} }
 func (m *C2S_CONNECT_Message) String() string { return proto.CompactTextString(m) }
 func (*C2S_CONNECT_Message) ProtoMessage()    {}
 func (*C2S_CONNECT_Message) Descriptor() ([]byte, []int) {
-	return fileDescriptor_connectionless_netmessages_10bcca5a5bcf7a3f, []int{0}
+	return fileDescriptor_c5f1aef3c0e41f21, []int{0}
 }
+
 func (m *C2S_CONNECT_Message) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_C2S_CONNECT_Message.Unmarshal(m, b)
 }
 func (m *C2S_CONNECT_Message) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_C2S_CONNECT_Message.Marshal(b, m, deterministic)
 }
-func (dst *C2S_CONNECT_Message) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_C2S_CONNECT_Message.Merge(dst, src)
+func (m *C2S_CONNECT_Message) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_C2S_CONNECT_Message.Merge(m, src)
 }
 func (m *C2S_CONNECT_Message) XXX_Size() int {
 	return xxx_messageInfo_C2S_CONNECT_Message.Size(m)
@@ -140,16 +143,17 @@ func (m *C2S_CONNECTION_Message) Reset()         { *m = C2S_CONNECTION_Message{}
 func (m *C2S_CONNECTION_Message) String() string { return proto.CompactTextString(m) }
 func (*C2S_CONNECTION_Message) ProtoMessage()    {}
 func (*C2S_CONNECTION_Message) Descriptor() ([]byte, []int) {
-	return fileDescriptor_connectionless_netmessages_10bcca5a5bcf7a3f, []int{1}
+	return fileDescriptor_c5f1aef3c0e41f21, []int{1}
 }
+
 func (m *C2S_CONNECTION_Message) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_C2S_CONNECTION_Message.Unmarshal(m, b)
 }
 func (m *C2S_CONNECTION_Message) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_C2S_CONNECTION_Message.Marshal(b, m, deterministic)
 }
-func (dst *C2S_CONNECTION_Message) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_C2S_CONNECTION_Message.Merge(dst, src)
+func (m *C2S_CONNECTION_Message) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_C2S_CONNECTION_Message.Merge(m, src)
 }
 func (m *C2S_CONNECTION_Message) XXX_Size() int {
 	return xxx_messageInfo_C2S_CONNECTION_Message.Size(m)
@@ -179,11 +183,9 @@ func init() {
 	proto.RegisterType((*C2S_CONNECTION_Message)(nil), "dota.C2S_CONNECTION_Message")
 }
 
-func init() {
-	proto.RegisterFile("connectionless_netmessages.proto", fileDescriptor_connectionless_netmessages_10bcca5a5bcf7a3f)
-}
+func init() { proto.RegisterFile("connectionless_netmessages.proto", fileDescriptor_c5f1aef3c0e41f21) }
 
-var fileDescriptor_connectionless_netmessages_10bcca5a5bcf7a3f = []byte{
+var fileDescriptor_c5f1aef3c0e41f21 = []byte{
 	// 388 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x64, 0x91, 0x51, 0x6f, 0xd3, 0x30,
 	0x14, 0x85, 0xc9, 0x3a, 0xba, 0xc5, 0xed, 0x04, 0x31, 0x12, 0x58, 0x48, 0x48, 0x66, 0xbc, 0x04,

@@ -3,9 +3,11 @@
 
 package dota
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type CLC_Messages int32
 
@@ -55,6 +57,7 @@ var CLC_Messages_name = map[int32]string{
 	33: "clc_RequestPause",
 	34: "clc_CmdKeyValues",
 }
+
 var CLC_Messages_value = map[string]int32{
 	"clc_ClientInfo":            20,
 	"clc_Move":                  21,
@@ -78,9 +81,11 @@ func (x CLC_Messages) Enum() *CLC_Messages {
 	*p = x
 	return p
 }
+
 func (x CLC_Messages) String() string {
 	return proto.EnumName(CLC_Messages_name, int32(x))
 }
+
 func (x *CLC_Messages) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(CLC_Messages_value, data, "CLC_Messages")
 	if err != nil {
@@ -89,8 +94,9 @@ func (x *CLC_Messages) UnmarshalJSON(data []byte) error {
 	*x = CLC_Messages(value)
 	return nil
 }
+
 func (CLC_Messages) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{0}
+	return fileDescriptor_52cbc162d33bb4fa, []int{0}
 }
 
 type SVC_Messages int32
@@ -150,6 +156,7 @@ var SVC_Messages_name = map[int32]string{
 	63: "svc_ServerSteamID",
 	70: "svc_FullFrameSplit",
 }
+
 var SVC_Messages_value = map[string]int32{
 	"svc_ServerInfo":           40,
 	"svc_FlattenedSerializer":  41,
@@ -183,9 +190,11 @@ func (x SVC_Messages) Enum() *SVC_Messages {
 	*p = x
 	return p
 }
+
 func (x SVC_Messages) String() string {
 	return proto.EnumName(SVC_Messages_name, int32(x))
 }
+
 func (x *SVC_Messages) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(SVC_Messages_value, data, "SVC_Messages")
 	if err != nil {
@@ -194,8 +203,9 @@ func (x *SVC_Messages) UnmarshalJSON(data []byte) error {
 	*x = SVC_Messages(value)
 	return nil
 }
+
 func (SVC_Messages) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{1}
+	return fileDescriptor_52cbc162d33bb4fa, []int{1}
 }
 
 type VoiceDataFormatT int32
@@ -209,6 +219,7 @@ var VoiceDataFormatT_name = map[int32]string{
 	0: "VOICEDATA_FORMAT_STEAM",
 	1: "VOICEDATA_FORMAT_ENGINE",
 }
+
 var VoiceDataFormatT_value = map[string]int32{
 	"VOICEDATA_FORMAT_STEAM":  0,
 	"VOICEDATA_FORMAT_ENGINE": 1,
@@ -219,9 +230,11 @@ func (x VoiceDataFormatT) Enum() *VoiceDataFormatT {
 	*p = x
 	return p
 }
+
 func (x VoiceDataFormatT) String() string {
 	return proto.EnumName(VoiceDataFormatT_name, int32(x))
 }
+
 func (x *VoiceDataFormatT) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(VoiceDataFormatT_value, data, "VoiceDataFormatT")
 	if err != nil {
@@ -230,8 +243,9 @@ func (x *VoiceDataFormatT) UnmarshalJSON(data []byte) error {
 	*x = VoiceDataFormatT(value)
 	return nil
 }
+
 func (VoiceDataFormatT) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{2}
+	return fileDescriptor_52cbc162d33bb4fa, []int{2}
 }
 
 type RequestPauseT int32
@@ -247,6 +261,7 @@ var RequestPauseT_name = map[int32]string{
 	1: "RP_UNPAUSE",
 	2: "RP_TOGGLEPAUSE",
 }
+
 var RequestPauseT_value = map[string]int32{
 	"RP_PAUSE":       0,
 	"RP_UNPAUSE":     1,
@@ -258,9 +273,11 @@ func (x RequestPauseT) Enum() *RequestPauseT {
 	*p = x
 	return p
 }
+
 func (x RequestPauseT) String() string {
 	return proto.EnumName(RequestPauseT_name, int32(x))
 }
+
 func (x *RequestPauseT) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(RequestPauseT_value, data, "RequestPauseT")
 	if err != nil {
@@ -269,8 +286,9 @@ func (x *RequestPauseT) UnmarshalJSON(data []byte) error {
 	*x = RequestPauseT(value)
 	return nil
 }
+
 func (RequestPauseT) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{3}
+	return fileDescriptor_52cbc162d33bb4fa, []int{3}
 }
 
 type PrefetchType int32
@@ -282,6 +300,7 @@ const (
 var PrefetchType_name = map[int32]string{
 	0: "PFT_SOUND",
 }
+
 var PrefetchType_value = map[string]int32{
 	"PFT_SOUND": 0,
 }
@@ -291,9 +310,11 @@ func (x PrefetchType) Enum() *PrefetchType {
 	*p = x
 	return p
 }
+
 func (x PrefetchType) String() string {
 	return proto.EnumName(PrefetchType_name, int32(x))
 }
+
 func (x *PrefetchType) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(PrefetchType_value, data, "PrefetchType")
 	if err != nil {
@@ -302,8 +323,9 @@ func (x *PrefetchType) UnmarshalJSON(data []byte) error {
 	*x = PrefetchType(value)
 	return nil
 }
+
 func (PrefetchType) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{4}
+	return fileDescriptor_52cbc162d33bb4fa, []int{4}
 }
 
 type ESplitScreenMessageType int32
@@ -317,6 +339,7 @@ var ESplitScreenMessageType_name = map[int32]string{
 	0: "MSG_SPLITSCREEN_ADDUSER",
 	1: "MSG_SPLITSCREEN_REMOVEUSER",
 }
+
 var ESplitScreenMessageType_value = map[string]int32{
 	"MSG_SPLITSCREEN_ADDUSER":    0,
 	"MSG_SPLITSCREEN_REMOVEUSER": 1,
@@ -327,9 +350,11 @@ func (x ESplitScreenMessageType) Enum() *ESplitScreenMessageType {
 	*p = x
 	return p
 }
+
 func (x ESplitScreenMessageType) String() string {
 	return proto.EnumName(ESplitScreenMessageType_name, int32(x))
 }
+
 func (x *ESplitScreenMessageType) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(ESplitScreenMessageType_value, data, "ESplitScreenMessageType")
 	if err != nil {
@@ -338,8 +363,9 @@ func (x *ESplitScreenMessageType) UnmarshalJSON(data []byte) error {
 	*x = ESplitScreenMessageType(value)
 	return nil
 }
+
 func (ESplitScreenMessageType) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{5}
+	return fileDescriptor_52cbc162d33bb4fa, []int{5}
 }
 
 type EQueryCvarValueStatus int32
@@ -357,6 +383,7 @@ var EQueryCvarValueStatus_name = map[int32]string{
 	2: "eQueryCvarValueStatus_NotACvar",
 	3: "eQueryCvarValueStatus_CvarProtected",
 }
+
 var EQueryCvarValueStatus_value = map[string]int32{
 	"eQueryCvarValueStatus_ValueIntact":   0,
 	"eQueryCvarValueStatus_CvarNotFound":  1,
@@ -369,9 +396,11 @@ func (x EQueryCvarValueStatus) Enum() *EQueryCvarValueStatus {
 	*p = x
 	return p
 }
+
 func (x EQueryCvarValueStatus) String() string {
 	return proto.EnumName(EQueryCvarValueStatus_name, int32(x))
 }
+
 func (x *EQueryCvarValueStatus) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(EQueryCvarValueStatus_value, data, "EQueryCvarValueStatus")
 	if err != nil {
@@ -380,8 +409,9 @@ func (x *EQueryCvarValueStatus) UnmarshalJSON(data []byte) error {
 	*x = EQueryCvarValueStatus(value)
 	return nil
 }
+
 func (EQueryCvarValueStatus) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{6}
+	return fileDescriptor_52cbc162d33bb4fa, []int{6}
 }
 
 type DIALOG_TYPE int32
@@ -401,6 +431,7 @@ var DIALOG_TYPE_name = map[int32]string{
 	3: "DIALOG_ENTRY",
 	4: "DIALOG_ASKCONNECT",
 }
+
 var DIALOG_TYPE_value = map[string]int32{
 	"DIALOG_MSG":        0,
 	"DIALOG_MENU":       1,
@@ -414,9 +445,11 @@ func (x DIALOG_TYPE) Enum() *DIALOG_TYPE {
 	*p = x
 	return p
 }
+
 func (x DIALOG_TYPE) String() string {
 	return proto.EnumName(DIALOG_TYPE_name, int32(x))
 }
+
 func (x *DIALOG_TYPE) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(DIALOG_TYPE_value, data, "DIALOG_TYPE")
 	if err != nil {
@@ -425,8 +458,9 @@ func (x *DIALOG_TYPE) UnmarshalJSON(data []byte) error {
 	*x = DIALOG_TYPE(value)
 	return nil
 }
+
 func (DIALOG_TYPE) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{7}
+	return fileDescriptor_52cbc162d33bb4fa, []int{7}
 }
 
 type SVC_Messages_LowFrequency int32
@@ -438,6 +472,7 @@ const (
 var SVC_Messages_LowFrequency_name = map[int32]string{
 	600: "svc_dummy",
 }
+
 var SVC_Messages_LowFrequency_value = map[string]int32{
 	"svc_dummy": 600,
 }
@@ -447,9 +482,11 @@ func (x SVC_Messages_LowFrequency) Enum() *SVC_Messages_LowFrequency {
 	*p = x
 	return p
 }
+
 func (x SVC_Messages_LowFrequency) String() string {
 	return proto.EnumName(SVC_Messages_LowFrequency_name, int32(x))
 }
+
 func (x *SVC_Messages_LowFrequency) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(SVC_Messages_LowFrequency_value, data, "SVC_Messages_LowFrequency")
 	if err != nil {
@@ -458,8 +495,9 @@ func (x *SVC_Messages_LowFrequency) UnmarshalJSON(data []byte) error {
 	*x = SVC_Messages_LowFrequency(value)
 	return nil
 }
+
 func (SVC_Messages_LowFrequency) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{8}
+	return fileDescriptor_52cbc162d33bb4fa, []int{8}
 }
 
 type Bidirectional_Messages int32
@@ -475,6 +513,7 @@ var Bidirectional_Messages_name = map[int32]string{
 	17: "bi_RebroadcastSource",
 	18: "bi_GameEvent",
 }
+
 var Bidirectional_Messages_value = map[string]int32{
 	"bi_RebroadcastGameEvent": 16,
 	"bi_RebroadcastSource":    17,
@@ -486,9 +525,11 @@ func (x Bidirectional_Messages) Enum() *Bidirectional_Messages {
 	*p = x
 	return p
 }
+
 func (x Bidirectional_Messages) String() string {
 	return proto.EnumName(Bidirectional_Messages_name, int32(x))
 }
+
 func (x *Bidirectional_Messages) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(Bidirectional_Messages_value, data, "Bidirectional_Messages")
 	if err != nil {
@@ -497,8 +538,9 @@ func (x *Bidirectional_Messages) UnmarshalJSON(data []byte) error {
 	*x = Bidirectional_Messages(value)
 	return nil
 }
+
 func (Bidirectional_Messages) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{9}
+	return fileDescriptor_52cbc162d33bb4fa, []int{9}
 }
 
 type Bidirectional_Messages_LowFrequency int32
@@ -512,6 +554,7 @@ var Bidirectional_Messages_LowFrequency_name = map[int32]string{
 	700: "bi_RelayInfo",
 	701: "bi_RelayPacket",
 }
+
 var Bidirectional_Messages_LowFrequency_value = map[string]int32{
 	"bi_RelayInfo":   700,
 	"bi_RelayPacket": 701,
@@ -522,9 +565,11 @@ func (x Bidirectional_Messages_LowFrequency) Enum() *Bidirectional_Messages_LowF
 	*p = x
 	return p
 }
+
 func (x Bidirectional_Messages_LowFrequency) String() string {
 	return proto.EnumName(Bidirectional_Messages_LowFrequency_name, int32(x))
 }
+
 func (x *Bidirectional_Messages_LowFrequency) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(Bidirectional_Messages_LowFrequency_value, data, "Bidirectional_Messages_LowFrequency")
 	if err != nil {
@@ -533,8 +578,9 @@ func (x *Bidirectional_Messages_LowFrequency) UnmarshalJSON(data []byte) error {
 	*x = Bidirectional_Messages_LowFrequency(value)
 	return nil
 }
+
 func (Bidirectional_Messages_LowFrequency) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{10}
+	return fileDescriptor_52cbc162d33bb4fa, []int{10}
 }
 
 type CBidirMsg_RelayInfo_OperationT int32
@@ -554,6 +600,7 @@ var CBidirMsg_RelayInfo_OperationT_name = map[int32]string{
 	3: "RIO_REJECT_RELAY",
 	4: "RIO_ESTABLISH_CONNECTION",
 }
+
 var CBidirMsg_RelayInfo_OperationT_value = map[string]int32{
 	"RIO_REQUEST_RELAY":        0,
 	"RIO_WILL_RELAY":           1,
@@ -567,9 +614,11 @@ func (x CBidirMsg_RelayInfo_OperationT) Enum() *CBidirMsg_RelayInfo_OperationT {
 	*p = x
 	return p
 }
+
 func (x CBidirMsg_RelayInfo_OperationT) String() string {
 	return proto.EnumName(CBidirMsg_RelayInfo_OperationT_name, int32(x))
 }
+
 func (x *CBidirMsg_RelayInfo_OperationT) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(CBidirMsg_RelayInfo_OperationT_value, data, "CBidirMsg_RelayInfo_OperationT")
 	if err != nil {
@@ -578,8 +627,9 @@ func (x *CBidirMsg_RelayInfo_OperationT) UnmarshalJSON(data []byte) error {
 	*x = CBidirMsg_RelayInfo_OperationT(value)
 	return nil
 }
+
 func (CBidirMsg_RelayInfo_OperationT) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{53, 0}
+	return fileDescriptor_52cbc162d33bb4fa, []int{53, 0}
 }
 
 type CCLCMsg_ClientInfo struct {
@@ -598,16 +648,17 @@ func (m *CCLCMsg_ClientInfo) Reset()         { *m = CCLCMsg_ClientInfo{} }
 func (m *CCLCMsg_ClientInfo) String() string { return proto.CompactTextString(m) }
 func (*CCLCMsg_ClientInfo) ProtoMessage()    {}
 func (*CCLCMsg_ClientInfo) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{0}
+	return fileDescriptor_52cbc162d33bb4fa, []int{0}
 }
+
 func (m *CCLCMsg_ClientInfo) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CCLCMsg_ClientInfo.Unmarshal(m, b)
 }
 func (m *CCLCMsg_ClientInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CCLCMsg_ClientInfo.Marshal(b, m, deterministic)
 }
-func (dst *CCLCMsg_ClientInfo) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CCLCMsg_ClientInfo.Merge(dst, src)
+func (m *CCLCMsg_ClientInfo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCLCMsg_ClientInfo.Merge(m, src)
 }
 func (m *CCLCMsg_ClientInfo) XXX_Size() int {
 	return xxx_messageInfo_CCLCMsg_ClientInfo.Size(m)
@@ -673,16 +724,17 @@ func (m *CCLCMsg_Move) Reset()         { *m = CCLCMsg_Move{} }
 func (m *CCLCMsg_Move) String() string { return proto.CompactTextString(m) }
 func (*CCLCMsg_Move) ProtoMessage()    {}
 func (*CCLCMsg_Move) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{1}
+	return fileDescriptor_52cbc162d33bb4fa, []int{1}
 }
+
 func (m *CCLCMsg_Move) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CCLCMsg_Move.Unmarshal(m, b)
 }
 func (m *CCLCMsg_Move) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CCLCMsg_Move.Marshal(b, m, deterministic)
 }
-func (dst *CCLCMsg_Move) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CCLCMsg_Move.Merge(dst, src)
+func (m *CCLCMsg_Move) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCLCMsg_Move.Merge(m, src)
 }
 func (m *CCLCMsg_Move) XXX_Size() int {
 	return xxx_messageInfo_CCLCMsg_Move.Size(m)
@@ -730,16 +782,17 @@ func (m *CMsgVoiceAudio) Reset()         { *m = CMsgVoiceAudio{} }
 func (m *CMsgVoiceAudio) String() string { return proto.CompactTextString(m) }
 func (*CMsgVoiceAudio) ProtoMessage()    {}
 func (*CMsgVoiceAudio) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{2}
+	return fileDescriptor_52cbc162d33bb4fa, []int{2}
 }
+
 func (m *CMsgVoiceAudio) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgVoiceAudio.Unmarshal(m, b)
 }
 func (m *CMsgVoiceAudio) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgVoiceAudio.Marshal(b, m, deterministic)
 }
-func (dst *CMsgVoiceAudio) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgVoiceAudio.Merge(dst, src)
+func (m *CMsgVoiceAudio) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgVoiceAudio.Merge(m, src)
 }
 func (m *CMsgVoiceAudio) XXX_Size() int {
 	return xxx_messageInfo_CMsgVoiceAudio.Size(m)
@@ -807,16 +860,17 @@ func (m *CCLCMsg_VoiceData) Reset()         { *m = CCLCMsg_VoiceData{} }
 func (m *CCLCMsg_VoiceData) String() string { return proto.CompactTextString(m) }
 func (*CCLCMsg_VoiceData) ProtoMessage()    {}
 func (*CCLCMsg_VoiceData) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{3}
+	return fileDescriptor_52cbc162d33bb4fa, []int{3}
 }
+
 func (m *CCLCMsg_VoiceData) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CCLCMsg_VoiceData.Unmarshal(m, b)
 }
 func (m *CCLCMsg_VoiceData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CCLCMsg_VoiceData.Marshal(b, m, deterministic)
 }
-func (dst *CCLCMsg_VoiceData) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CCLCMsg_VoiceData.Merge(dst, src)
+func (m *CCLCMsg_VoiceData) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCLCMsg_VoiceData.Merge(m, src)
 }
 func (m *CCLCMsg_VoiceData) XXX_Size() int {
 	return xxx_messageInfo_CCLCMsg_VoiceData.Size(m)
@@ -860,16 +914,17 @@ func (m *CCLCMsg_BaselineAck) Reset()         { *m = CCLCMsg_BaselineAck{} }
 func (m *CCLCMsg_BaselineAck) String() string { return proto.CompactTextString(m) }
 func (*CCLCMsg_BaselineAck) ProtoMessage()    {}
 func (*CCLCMsg_BaselineAck) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{4}
+	return fileDescriptor_52cbc162d33bb4fa, []int{4}
 }
+
 func (m *CCLCMsg_BaselineAck) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CCLCMsg_BaselineAck.Unmarshal(m, b)
 }
 func (m *CCLCMsg_BaselineAck) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CCLCMsg_BaselineAck.Marshal(b, m, deterministic)
 }
-func (dst *CCLCMsg_BaselineAck) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CCLCMsg_BaselineAck.Merge(dst, src)
+func (m *CCLCMsg_BaselineAck) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCLCMsg_BaselineAck.Merge(m, src)
 }
 func (m *CCLCMsg_BaselineAck) XXX_Size() int {
 	return xxx_messageInfo_CCLCMsg_BaselineAck.Size(m)
@@ -905,16 +960,17 @@ func (m *CCLCMsg_ListenEvents) Reset()         { *m = CCLCMsg_ListenEvents{} }
 func (m *CCLCMsg_ListenEvents) String() string { return proto.CompactTextString(m) }
 func (*CCLCMsg_ListenEvents) ProtoMessage()    {}
 func (*CCLCMsg_ListenEvents) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{5}
+	return fileDescriptor_52cbc162d33bb4fa, []int{5}
 }
+
 func (m *CCLCMsg_ListenEvents) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CCLCMsg_ListenEvents.Unmarshal(m, b)
 }
 func (m *CCLCMsg_ListenEvents) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CCLCMsg_ListenEvents.Marshal(b, m, deterministic)
 }
-func (dst *CCLCMsg_ListenEvents) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CCLCMsg_ListenEvents.Merge(dst, src)
+func (m *CCLCMsg_ListenEvents) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCLCMsg_ListenEvents.Merge(m, src)
 }
 func (m *CCLCMsg_ListenEvents) XXX_Size() int {
 	return xxx_messageInfo_CCLCMsg_ListenEvents.Size(m)
@@ -946,16 +1002,17 @@ func (m *CCLCMsg_RespondCvarValue) Reset()         { *m = CCLCMsg_RespondCvarVal
 func (m *CCLCMsg_RespondCvarValue) String() string { return proto.CompactTextString(m) }
 func (*CCLCMsg_RespondCvarValue) ProtoMessage()    {}
 func (*CCLCMsg_RespondCvarValue) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{6}
+	return fileDescriptor_52cbc162d33bb4fa, []int{6}
 }
+
 func (m *CCLCMsg_RespondCvarValue) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CCLCMsg_RespondCvarValue.Unmarshal(m, b)
 }
 func (m *CCLCMsg_RespondCvarValue) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CCLCMsg_RespondCvarValue.Marshal(b, m, deterministic)
 }
-func (dst *CCLCMsg_RespondCvarValue) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CCLCMsg_RespondCvarValue.Merge(dst, src)
+func (m *CCLCMsg_RespondCvarValue) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCLCMsg_RespondCvarValue.Merge(m, src)
 }
 func (m *CCLCMsg_RespondCvarValue) XXX_Size() int {
 	return xxx_messageInfo_CCLCMsg_RespondCvarValue.Size(m)
@@ -1009,16 +1066,17 @@ func (m *CCLCMsg_FileCRCCheck) Reset()         { *m = CCLCMsg_FileCRCCheck{} }
 func (m *CCLCMsg_FileCRCCheck) String() string { return proto.CompactTextString(m) }
 func (*CCLCMsg_FileCRCCheck) ProtoMessage()    {}
 func (*CCLCMsg_FileCRCCheck) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{7}
+	return fileDescriptor_52cbc162d33bb4fa, []int{7}
 }
+
 func (m *CCLCMsg_FileCRCCheck) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CCLCMsg_FileCRCCheck.Unmarshal(m, b)
 }
 func (m *CCLCMsg_FileCRCCheck) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CCLCMsg_FileCRCCheck.Marshal(b, m, deterministic)
 }
-func (dst *CCLCMsg_FileCRCCheck) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CCLCMsg_FileCRCCheck.Merge(dst, src)
+func (m *CCLCMsg_FileCRCCheck) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCLCMsg_FileCRCCheck.Merge(m, src)
 }
 func (m *CCLCMsg_FileCRCCheck) XXX_Size() int {
 	return xxx_messageInfo_CCLCMsg_FileCRCCheck.Size(m)
@@ -1075,16 +1133,17 @@ func (m *CCLCMsg_LoadingProgress) Reset()         { *m = CCLCMsg_LoadingProgress
 func (m *CCLCMsg_LoadingProgress) String() string { return proto.CompactTextString(m) }
 func (*CCLCMsg_LoadingProgress) ProtoMessage()    {}
 func (*CCLCMsg_LoadingProgress) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{8}
+	return fileDescriptor_52cbc162d33bb4fa, []int{8}
 }
+
 func (m *CCLCMsg_LoadingProgress) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CCLCMsg_LoadingProgress.Unmarshal(m, b)
 }
 func (m *CCLCMsg_LoadingProgress) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CCLCMsg_LoadingProgress.Marshal(b, m, deterministic)
 }
-func (dst *CCLCMsg_LoadingProgress) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CCLCMsg_LoadingProgress.Merge(dst, src)
+func (m *CCLCMsg_LoadingProgress) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCLCMsg_LoadingProgress.Merge(m, src)
 }
 func (m *CCLCMsg_LoadingProgress) XXX_Size() int {
 	return xxx_messageInfo_CCLCMsg_LoadingProgress.Size(m)
@@ -1113,16 +1172,17 @@ func (m *CCLCMsg_SplitPlayerConnect) Reset()         { *m = CCLCMsg_SplitPlayerC
 func (m *CCLCMsg_SplitPlayerConnect) String() string { return proto.CompactTextString(m) }
 func (*CCLCMsg_SplitPlayerConnect) ProtoMessage()    {}
 func (*CCLCMsg_SplitPlayerConnect) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{9}
+	return fileDescriptor_52cbc162d33bb4fa, []int{9}
 }
+
 func (m *CCLCMsg_SplitPlayerConnect) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CCLCMsg_SplitPlayerConnect.Unmarshal(m, b)
 }
 func (m *CCLCMsg_SplitPlayerConnect) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CCLCMsg_SplitPlayerConnect.Marshal(b, m, deterministic)
 }
-func (dst *CCLCMsg_SplitPlayerConnect) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CCLCMsg_SplitPlayerConnect.Merge(dst, src)
+func (m *CCLCMsg_SplitPlayerConnect) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCLCMsg_SplitPlayerConnect.Merge(m, src)
 }
 func (m *CCLCMsg_SplitPlayerConnect) XXX_Size() int {
 	return xxx_messageInfo_CCLCMsg_SplitPlayerConnect.Size(m)
@@ -1152,16 +1212,17 @@ func (m *CCLCMsg_ClientMessage) Reset()         { *m = CCLCMsg_ClientMessage{} }
 func (m *CCLCMsg_ClientMessage) String() string { return proto.CompactTextString(m) }
 func (*CCLCMsg_ClientMessage) ProtoMessage()    {}
 func (*CCLCMsg_ClientMessage) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{10}
+	return fileDescriptor_52cbc162d33bb4fa, []int{10}
 }
+
 func (m *CCLCMsg_ClientMessage) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CCLCMsg_ClientMessage.Unmarshal(m, b)
 }
 func (m *CCLCMsg_ClientMessage) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CCLCMsg_ClientMessage.Marshal(b, m, deterministic)
 }
-func (dst *CCLCMsg_ClientMessage) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CCLCMsg_ClientMessage.Merge(dst, src)
+func (m *CCLCMsg_ClientMessage) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCLCMsg_ClientMessage.Merge(m, src)
 }
 func (m *CCLCMsg_ClientMessage) XXX_Size() int {
 	return xxx_messageInfo_CCLCMsg_ClientMessage.Size(m)
@@ -1197,16 +1258,17 @@ func (m *CCLCMsg_SplitPlayerDisconnect) Reset()         { *m = CCLCMsg_SplitPlay
 func (m *CCLCMsg_SplitPlayerDisconnect) String() string { return proto.CompactTextString(m) }
 func (*CCLCMsg_SplitPlayerDisconnect) ProtoMessage()    {}
 func (*CCLCMsg_SplitPlayerDisconnect) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{11}
+	return fileDescriptor_52cbc162d33bb4fa, []int{11}
 }
+
 func (m *CCLCMsg_SplitPlayerDisconnect) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CCLCMsg_SplitPlayerDisconnect.Unmarshal(m, b)
 }
 func (m *CCLCMsg_SplitPlayerDisconnect) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CCLCMsg_SplitPlayerDisconnect.Marshal(b, m, deterministic)
 }
-func (dst *CCLCMsg_SplitPlayerDisconnect) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CCLCMsg_SplitPlayerDisconnect.Merge(dst, src)
+func (m *CCLCMsg_SplitPlayerDisconnect) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCLCMsg_SplitPlayerDisconnect.Merge(m, src)
 }
 func (m *CCLCMsg_SplitPlayerDisconnect) XXX_Size() int {
 	return xxx_messageInfo_CCLCMsg_SplitPlayerDisconnect.Size(m)
@@ -1235,16 +1297,17 @@ func (m *CCLCMsg_ServerStatus) Reset()         { *m = CCLCMsg_ServerStatus{} }
 func (m *CCLCMsg_ServerStatus) String() string { return proto.CompactTextString(m) }
 func (*CCLCMsg_ServerStatus) ProtoMessage()    {}
 func (*CCLCMsg_ServerStatus) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{12}
+	return fileDescriptor_52cbc162d33bb4fa, []int{12}
 }
+
 func (m *CCLCMsg_ServerStatus) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CCLCMsg_ServerStatus.Unmarshal(m, b)
 }
 func (m *CCLCMsg_ServerStatus) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CCLCMsg_ServerStatus.Marshal(b, m, deterministic)
 }
-func (dst *CCLCMsg_ServerStatus) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CCLCMsg_ServerStatus.Merge(dst, src)
+func (m *CCLCMsg_ServerStatus) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCLCMsg_ServerStatus.Merge(m, src)
 }
 func (m *CCLCMsg_ServerStatus) XXX_Size() int {
 	return xxx_messageInfo_CCLCMsg_ServerStatus.Size(m)
@@ -1272,16 +1335,17 @@ func (m *CCLCMsg_ServerPing) Reset()         { *m = CCLCMsg_ServerPing{} }
 func (m *CCLCMsg_ServerPing) String() string { return proto.CompactTextString(m) }
 func (*CCLCMsg_ServerPing) ProtoMessage()    {}
 func (*CCLCMsg_ServerPing) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{13}
+	return fileDescriptor_52cbc162d33bb4fa, []int{13}
 }
+
 func (m *CCLCMsg_ServerPing) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CCLCMsg_ServerPing.Unmarshal(m, b)
 }
 func (m *CCLCMsg_ServerPing) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CCLCMsg_ServerPing.Marshal(b, m, deterministic)
 }
-func (dst *CCLCMsg_ServerPing) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CCLCMsg_ServerPing.Merge(dst, src)
+func (m *CCLCMsg_ServerPing) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCLCMsg_ServerPing.Merge(m, src)
 }
 func (m *CCLCMsg_ServerPing) XXX_Size() int {
 	return xxx_messageInfo_CCLCMsg_ServerPing.Size(m)
@@ -1304,16 +1368,17 @@ func (m *CCLCMsg_RequestPause) Reset()         { *m = CCLCMsg_RequestPause{} }
 func (m *CCLCMsg_RequestPause) String() string { return proto.CompactTextString(m) }
 func (*CCLCMsg_RequestPause) ProtoMessage()    {}
 func (*CCLCMsg_RequestPause) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{14}
+	return fileDescriptor_52cbc162d33bb4fa, []int{14}
 }
+
 func (m *CCLCMsg_RequestPause) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CCLCMsg_RequestPause.Unmarshal(m, b)
 }
 func (m *CCLCMsg_RequestPause) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CCLCMsg_RequestPause.Marshal(b, m, deterministic)
 }
-func (dst *CCLCMsg_RequestPause) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CCLCMsg_RequestPause.Merge(dst, src)
+func (m *CCLCMsg_RequestPause) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCLCMsg_RequestPause.Merge(m, src)
 }
 func (m *CCLCMsg_RequestPause) XXX_Size() int {
 	return xxx_messageInfo_CCLCMsg_RequestPause.Size(m)
@@ -1351,16 +1416,17 @@ func (m *CCLCMsg_CmdKeyValues) Reset()         { *m = CCLCMsg_CmdKeyValues{} }
 func (m *CCLCMsg_CmdKeyValues) String() string { return proto.CompactTextString(m) }
 func (*CCLCMsg_CmdKeyValues) ProtoMessage()    {}
 func (*CCLCMsg_CmdKeyValues) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{15}
+	return fileDescriptor_52cbc162d33bb4fa, []int{15}
 }
+
 func (m *CCLCMsg_CmdKeyValues) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CCLCMsg_CmdKeyValues.Unmarshal(m, b)
 }
 func (m *CCLCMsg_CmdKeyValues) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CCLCMsg_CmdKeyValues.Marshal(b, m, deterministic)
 }
-func (dst *CCLCMsg_CmdKeyValues) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CCLCMsg_CmdKeyValues.Merge(dst, src)
+func (m *CCLCMsg_CmdKeyValues) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CCLCMsg_CmdKeyValues.Merge(m, src)
 }
 func (m *CCLCMsg_CmdKeyValues) XXX_Size() int {
 	return xxx_messageInfo_CCLCMsg_CmdKeyValues.Size(m)
@@ -1405,16 +1471,17 @@ func (m *CSVCMsg_ServerInfo) Reset()         { *m = CSVCMsg_ServerInfo{} }
 func (m *CSVCMsg_ServerInfo) String() string { return proto.CompactTextString(m) }
 func (*CSVCMsg_ServerInfo) ProtoMessage()    {}
 func (*CSVCMsg_ServerInfo) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{16}
+	return fileDescriptor_52cbc162d33bb4fa, []int{16}
 }
+
 func (m *CSVCMsg_ServerInfo) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSVCMsg_ServerInfo.Unmarshal(m, b)
 }
 func (m *CSVCMsg_ServerInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSVCMsg_ServerInfo.Marshal(b, m, deterministic)
 }
-func (dst *CSVCMsg_ServerInfo) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSVCMsg_ServerInfo.Merge(dst, src)
+func (m *CSVCMsg_ServerInfo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_ServerInfo.Merge(m, src)
 }
 func (m *CSVCMsg_ServerInfo) XXX_Size() int {
 	return xxx_messageInfo_CSVCMsg_ServerInfo.Size(m)
@@ -1556,16 +1623,17 @@ func (m *CSVCMsg_ClassInfo) Reset()         { *m = CSVCMsg_ClassInfo{} }
 func (m *CSVCMsg_ClassInfo) String() string { return proto.CompactTextString(m) }
 func (*CSVCMsg_ClassInfo) ProtoMessage()    {}
 func (*CSVCMsg_ClassInfo) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{17}
+	return fileDescriptor_52cbc162d33bb4fa, []int{17}
 }
+
 func (m *CSVCMsg_ClassInfo) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSVCMsg_ClassInfo.Unmarshal(m, b)
 }
 func (m *CSVCMsg_ClassInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSVCMsg_ClassInfo.Marshal(b, m, deterministic)
 }
-func (dst *CSVCMsg_ClassInfo) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSVCMsg_ClassInfo.Merge(dst, src)
+func (m *CSVCMsg_ClassInfo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_ClassInfo.Merge(m, src)
 }
 func (m *CSVCMsg_ClassInfo) XXX_Size() int {
 	return xxx_messageInfo_CSVCMsg_ClassInfo.Size(m)
@@ -1603,16 +1671,17 @@ func (m *CSVCMsg_ClassInfoClassT) Reset()         { *m = CSVCMsg_ClassInfoClassT
 func (m *CSVCMsg_ClassInfoClassT) String() string { return proto.CompactTextString(m) }
 func (*CSVCMsg_ClassInfoClassT) ProtoMessage()    {}
 func (*CSVCMsg_ClassInfoClassT) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{17, 0}
+	return fileDescriptor_52cbc162d33bb4fa, []int{17, 0}
 }
+
 func (m *CSVCMsg_ClassInfoClassT) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSVCMsg_ClassInfoClassT.Unmarshal(m, b)
 }
 func (m *CSVCMsg_ClassInfoClassT) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSVCMsg_ClassInfoClassT.Marshal(b, m, deterministic)
 }
-func (dst *CSVCMsg_ClassInfoClassT) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSVCMsg_ClassInfoClassT.Merge(dst, src)
+func (m *CSVCMsg_ClassInfoClassT) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_ClassInfoClassT.Merge(m, src)
 }
 func (m *CSVCMsg_ClassInfoClassT) XXX_Size() int {
 	return xxx_messageInfo_CSVCMsg_ClassInfoClassT.Size(m)
@@ -1655,16 +1724,17 @@ func (m *CSVCMsg_SetPause) Reset()         { *m = CSVCMsg_SetPause{} }
 func (m *CSVCMsg_SetPause) String() string { return proto.CompactTextString(m) }
 func (*CSVCMsg_SetPause) ProtoMessage()    {}
 func (*CSVCMsg_SetPause) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{18}
+	return fileDescriptor_52cbc162d33bb4fa, []int{18}
 }
+
 func (m *CSVCMsg_SetPause) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSVCMsg_SetPause.Unmarshal(m, b)
 }
 func (m *CSVCMsg_SetPause) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSVCMsg_SetPause.Marshal(b, m, deterministic)
 }
-func (dst *CSVCMsg_SetPause) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSVCMsg_SetPause.Merge(dst, src)
+func (m *CSVCMsg_SetPause) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_SetPause.Merge(m, src)
 }
 func (m *CSVCMsg_SetPause) XXX_Size() int {
 	return xxx_messageInfo_CSVCMsg_SetPause.Size(m)
@@ -1695,16 +1765,17 @@ func (m *CSVCMsg_VoiceInit) Reset()         { *m = CSVCMsg_VoiceInit{} }
 func (m *CSVCMsg_VoiceInit) String() string { return proto.CompactTextString(m) }
 func (*CSVCMsg_VoiceInit) ProtoMessage()    {}
 func (*CSVCMsg_VoiceInit) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{19}
+	return fileDescriptor_52cbc162d33bb4fa, []int{19}
 }
+
 func (m *CSVCMsg_VoiceInit) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSVCMsg_VoiceInit.Unmarshal(m, b)
 }
 func (m *CSVCMsg_VoiceInit) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSVCMsg_VoiceInit.Marshal(b, m, deterministic)
 }
-func (dst *CSVCMsg_VoiceInit) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSVCMsg_VoiceInit.Merge(dst, src)
+func (m *CSVCMsg_VoiceInit) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_VoiceInit.Merge(m, src)
 }
 func (m *CSVCMsg_VoiceInit) XXX_Size() int {
 	return xxx_messageInfo_CSVCMsg_VoiceInit.Size(m)
@@ -1749,16 +1820,17 @@ func (m *CSVCMsg_Print) Reset()         { *m = CSVCMsg_Print{} }
 func (m *CSVCMsg_Print) String() string { return proto.CompactTextString(m) }
 func (*CSVCMsg_Print) ProtoMessage()    {}
 func (*CSVCMsg_Print) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{20}
+	return fileDescriptor_52cbc162d33bb4fa, []int{20}
 }
+
 func (m *CSVCMsg_Print) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSVCMsg_Print.Unmarshal(m, b)
 }
 func (m *CSVCMsg_Print) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSVCMsg_Print.Marshal(b, m, deterministic)
 }
-func (dst *CSVCMsg_Print) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSVCMsg_Print.Merge(dst, src)
+func (m *CSVCMsg_Print) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_Print.Merge(m, src)
 }
 func (m *CSVCMsg_Print) XXX_Size() int {
 	return xxx_messageInfo_CSVCMsg_Print.Size(m)
@@ -1788,16 +1860,17 @@ func (m *CSVCMsg_Sounds) Reset()         { *m = CSVCMsg_Sounds{} }
 func (m *CSVCMsg_Sounds) String() string { return proto.CompactTextString(m) }
 func (*CSVCMsg_Sounds) ProtoMessage()    {}
 func (*CSVCMsg_Sounds) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{21}
+	return fileDescriptor_52cbc162d33bb4fa, []int{21}
 }
+
 func (m *CSVCMsg_Sounds) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSVCMsg_Sounds.Unmarshal(m, b)
 }
 func (m *CSVCMsg_Sounds) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSVCMsg_Sounds.Marshal(b, m, deterministic)
 }
-func (dst *CSVCMsg_Sounds) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSVCMsg_Sounds.Merge(dst, src)
+func (m *CSVCMsg_Sounds) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_Sounds.Merge(m, src)
 }
 func (m *CSVCMsg_Sounds) XXX_Size() int {
 	return xxx_messageInfo_CSVCMsg_Sounds.Size(m)
@@ -1851,16 +1924,17 @@ func (m *CSVCMsg_SoundsSounddataT) Reset()         { *m = CSVCMsg_SoundsSounddat
 func (m *CSVCMsg_SoundsSounddataT) String() string { return proto.CompactTextString(m) }
 func (*CSVCMsg_SoundsSounddataT) ProtoMessage()    {}
 func (*CSVCMsg_SoundsSounddataT) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{21, 0}
+	return fileDescriptor_52cbc162d33bb4fa, []int{21, 0}
 }
+
 func (m *CSVCMsg_SoundsSounddataT) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSVCMsg_SoundsSounddataT.Unmarshal(m, b)
 }
 func (m *CSVCMsg_SoundsSounddataT) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSVCMsg_SoundsSounddataT.Marshal(b, m, deterministic)
 }
-func (dst *CSVCMsg_SoundsSounddataT) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSVCMsg_SoundsSounddataT.Merge(dst, src)
+func (m *CSVCMsg_SoundsSounddataT) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_SoundsSounddataT.Merge(m, src)
 }
 func (m *CSVCMsg_SoundsSounddataT) XXX_Size() int {
 	return xxx_messageInfo_CSVCMsg_SoundsSounddataT.Size(m)
@@ -2016,16 +2090,17 @@ func (m *CSVCMsg_Prefetch) Reset()         { *m = CSVCMsg_Prefetch{} }
 func (m *CSVCMsg_Prefetch) String() string { return proto.CompactTextString(m) }
 func (*CSVCMsg_Prefetch) ProtoMessage()    {}
 func (*CSVCMsg_Prefetch) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{22}
+	return fileDescriptor_52cbc162d33bb4fa, []int{22}
 }
+
 func (m *CSVCMsg_Prefetch) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSVCMsg_Prefetch.Unmarshal(m, b)
 }
 func (m *CSVCMsg_Prefetch) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSVCMsg_Prefetch.Marshal(b, m, deterministic)
 }
-func (dst *CSVCMsg_Prefetch) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSVCMsg_Prefetch.Merge(dst, src)
+func (m *CSVCMsg_Prefetch) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_Prefetch.Merge(m, src)
 }
 func (m *CSVCMsg_Prefetch) XXX_Size() int {
 	return xxx_messageInfo_CSVCMsg_Prefetch.Size(m)
@@ -2064,16 +2139,17 @@ func (m *CSVCMsg_SetView) Reset()         { *m = CSVCMsg_SetView{} }
 func (m *CSVCMsg_SetView) String() string { return proto.CompactTextString(m) }
 func (*CSVCMsg_SetView) ProtoMessage()    {}
 func (*CSVCMsg_SetView) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{23}
+	return fileDescriptor_52cbc162d33bb4fa, []int{23}
 }
+
 func (m *CSVCMsg_SetView) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSVCMsg_SetView.Unmarshal(m, b)
 }
 func (m *CSVCMsg_SetView) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSVCMsg_SetView.Marshal(b, m, deterministic)
 }
-func (dst *CSVCMsg_SetView) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSVCMsg_SetView.Merge(dst, src)
+func (m *CSVCMsg_SetView) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_SetView.Merge(m, src)
 }
 func (m *CSVCMsg_SetView) XXX_Size() int {
 	return xxx_messageInfo_CSVCMsg_SetView.Size(m)
@@ -2110,16 +2186,17 @@ func (m *CSVCMsg_FixAngle) Reset()         { *m = CSVCMsg_FixAngle{} }
 func (m *CSVCMsg_FixAngle) String() string { return proto.CompactTextString(m) }
 func (*CSVCMsg_FixAngle) ProtoMessage()    {}
 func (*CSVCMsg_FixAngle) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{24}
+	return fileDescriptor_52cbc162d33bb4fa, []int{24}
 }
+
 func (m *CSVCMsg_FixAngle) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSVCMsg_FixAngle.Unmarshal(m, b)
 }
 func (m *CSVCMsg_FixAngle) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSVCMsg_FixAngle.Marshal(b, m, deterministic)
 }
-func (dst *CSVCMsg_FixAngle) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSVCMsg_FixAngle.Merge(dst, src)
+func (m *CSVCMsg_FixAngle) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_FixAngle.Merge(m, src)
 }
 func (m *CSVCMsg_FixAngle) XXX_Size() int {
 	return xxx_messageInfo_CSVCMsg_FixAngle.Size(m)
@@ -2155,16 +2232,17 @@ func (m *CSVCMsg_CrosshairAngle) Reset()         { *m = CSVCMsg_CrosshairAngle{}
 func (m *CSVCMsg_CrosshairAngle) String() string { return proto.CompactTextString(m) }
 func (*CSVCMsg_CrosshairAngle) ProtoMessage()    {}
 func (*CSVCMsg_CrosshairAngle) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{25}
+	return fileDescriptor_52cbc162d33bb4fa, []int{25}
 }
+
 func (m *CSVCMsg_CrosshairAngle) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSVCMsg_CrosshairAngle.Unmarshal(m, b)
 }
 func (m *CSVCMsg_CrosshairAngle) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSVCMsg_CrosshairAngle.Marshal(b, m, deterministic)
 }
-func (dst *CSVCMsg_CrosshairAngle) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSVCMsg_CrosshairAngle.Merge(dst, src)
+func (m *CSVCMsg_CrosshairAngle) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_CrosshairAngle.Merge(m, src)
 }
 func (m *CSVCMsg_CrosshairAngle) XXX_Size() int {
 	return xxx_messageInfo_CSVCMsg_CrosshairAngle.Size(m)
@@ -2197,16 +2275,17 @@ func (m *CSVCMsg_BSPDecal) Reset()         { *m = CSVCMsg_BSPDecal{} }
 func (m *CSVCMsg_BSPDecal) String() string { return proto.CompactTextString(m) }
 func (*CSVCMsg_BSPDecal) ProtoMessage()    {}
 func (*CSVCMsg_BSPDecal) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{26}
+	return fileDescriptor_52cbc162d33bb4fa, []int{26}
 }
+
 func (m *CSVCMsg_BSPDecal) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSVCMsg_BSPDecal.Unmarshal(m, b)
 }
 func (m *CSVCMsg_BSPDecal) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSVCMsg_BSPDecal.Marshal(b, m, deterministic)
 }
-func (dst *CSVCMsg_BSPDecal) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSVCMsg_BSPDecal.Merge(dst, src)
+func (m *CSVCMsg_BSPDecal) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_BSPDecal.Merge(m, src)
 }
 func (m *CSVCMsg_BSPDecal) XXX_Size() int {
 	return xxx_messageInfo_CSVCMsg_BSPDecal.Size(m)
@@ -2265,16 +2344,17 @@ func (m *CSVCMsg_SplitScreen) Reset()         { *m = CSVCMsg_SplitScreen{} }
 func (m *CSVCMsg_SplitScreen) String() string { return proto.CompactTextString(m) }
 func (*CSVCMsg_SplitScreen) ProtoMessage()    {}
 func (*CSVCMsg_SplitScreen) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{27}
+	return fileDescriptor_52cbc162d33bb4fa, []int{27}
 }
+
 func (m *CSVCMsg_SplitScreen) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSVCMsg_SplitScreen.Unmarshal(m, b)
 }
 func (m *CSVCMsg_SplitScreen) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSVCMsg_SplitScreen.Marshal(b, m, deterministic)
 }
-func (dst *CSVCMsg_SplitScreen) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSVCMsg_SplitScreen.Merge(dst, src)
+func (m *CSVCMsg_SplitScreen) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_SplitScreen.Merge(m, src)
 }
 func (m *CSVCMsg_SplitScreen) XXX_Size() int {
 	return xxx_messageInfo_CSVCMsg_SplitScreen.Size(m)
@@ -2320,16 +2400,17 @@ func (m *CSVCMsg_GetCvarValue) Reset()         { *m = CSVCMsg_GetCvarValue{} }
 func (m *CSVCMsg_GetCvarValue) String() string { return proto.CompactTextString(m) }
 func (*CSVCMsg_GetCvarValue) ProtoMessage()    {}
 func (*CSVCMsg_GetCvarValue) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{28}
+	return fileDescriptor_52cbc162d33bb4fa, []int{28}
 }
+
 func (m *CSVCMsg_GetCvarValue) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSVCMsg_GetCvarValue.Unmarshal(m, b)
 }
 func (m *CSVCMsg_GetCvarValue) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSVCMsg_GetCvarValue.Marshal(b, m, deterministic)
 }
-func (dst *CSVCMsg_GetCvarValue) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSVCMsg_GetCvarValue.Merge(dst, src)
+func (m *CSVCMsg_GetCvarValue) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_GetCvarValue.Merge(m, src)
 }
 func (m *CSVCMsg_GetCvarValue) XXX_Size() int {
 	return xxx_messageInfo_CSVCMsg_GetCvarValue.Size(m)
@@ -2366,16 +2447,17 @@ func (m *CSVCMsg_Menu) Reset()         { *m = CSVCMsg_Menu{} }
 func (m *CSVCMsg_Menu) String() string { return proto.CompactTextString(m) }
 func (*CSVCMsg_Menu) ProtoMessage()    {}
 func (*CSVCMsg_Menu) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{29}
+	return fileDescriptor_52cbc162d33bb4fa, []int{29}
 }
+
 func (m *CSVCMsg_Menu) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSVCMsg_Menu.Unmarshal(m, b)
 }
 func (m *CSVCMsg_Menu) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSVCMsg_Menu.Marshal(b, m, deterministic)
 }
-func (dst *CSVCMsg_Menu) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSVCMsg_Menu.Merge(dst, src)
+func (m *CSVCMsg_Menu) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_Menu.Merge(m, src)
 }
 func (m *CSVCMsg_Menu) XXX_Size() int {
 	return xxx_messageInfo_CSVCMsg_Menu.Size(m)
@@ -2414,16 +2496,17 @@ func (m *CSVCMsg_SendTable) Reset()         { *m = CSVCMsg_SendTable{} }
 func (m *CSVCMsg_SendTable) String() string { return proto.CompactTextString(m) }
 func (*CSVCMsg_SendTable) ProtoMessage()    {}
 func (*CSVCMsg_SendTable) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{30}
+	return fileDescriptor_52cbc162d33bb4fa, []int{30}
 }
+
 func (m *CSVCMsg_SendTable) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSVCMsg_SendTable.Unmarshal(m, b)
 }
 func (m *CSVCMsg_SendTable) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSVCMsg_SendTable.Marshal(b, m, deterministic)
 }
-func (dst *CSVCMsg_SendTable) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSVCMsg_SendTable.Merge(dst, src)
+func (m *CSVCMsg_SendTable) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_SendTable.Merge(m, src)
 }
 func (m *CSVCMsg_SendTable) XXX_Size() int {
 	return xxx_messageInfo_CSVCMsg_SendTable.Size(m)
@@ -2481,16 +2564,17 @@ func (m *CSVCMsg_SendTableSendpropT) Reset()         { *m = CSVCMsg_SendTableSen
 func (m *CSVCMsg_SendTableSendpropT) String() string { return proto.CompactTextString(m) }
 func (*CSVCMsg_SendTableSendpropT) ProtoMessage()    {}
 func (*CSVCMsg_SendTableSendpropT) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{30, 0}
+	return fileDescriptor_52cbc162d33bb4fa, []int{30, 0}
 }
+
 func (m *CSVCMsg_SendTableSendpropT) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSVCMsg_SendTableSendpropT.Unmarshal(m, b)
 }
 func (m *CSVCMsg_SendTableSendpropT) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSVCMsg_SendTableSendpropT.Marshal(b, m, deterministic)
 }
-func (dst *CSVCMsg_SendTableSendpropT) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSVCMsg_SendTableSendpropT.Merge(dst, src)
+func (m *CSVCMsg_SendTableSendpropT) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_SendTableSendpropT.Merge(m, src)
 }
 func (m *CSVCMsg_SendTableSendpropT) XXX_Size() int {
 	return xxx_messageInfo_CSVCMsg_SendTableSendpropT.Size(m)
@@ -2575,16 +2659,17 @@ func (m *CSVCMsg_GameEventList) Reset()         { *m = CSVCMsg_GameEventList{} }
 func (m *CSVCMsg_GameEventList) String() string { return proto.CompactTextString(m) }
 func (*CSVCMsg_GameEventList) ProtoMessage()    {}
 func (*CSVCMsg_GameEventList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{31}
+	return fileDescriptor_52cbc162d33bb4fa, []int{31}
 }
+
 func (m *CSVCMsg_GameEventList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSVCMsg_GameEventList.Unmarshal(m, b)
 }
 func (m *CSVCMsg_GameEventList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSVCMsg_GameEventList.Marshal(b, m, deterministic)
 }
-func (dst *CSVCMsg_GameEventList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSVCMsg_GameEventList.Merge(dst, src)
+func (m *CSVCMsg_GameEventList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_GameEventList.Merge(m, src)
 }
 func (m *CSVCMsg_GameEventList) XXX_Size() int {
 	return xxx_messageInfo_CSVCMsg_GameEventList.Size(m)
@@ -2614,16 +2699,17 @@ func (m *CSVCMsg_GameEventListKeyT) Reset()         { *m = CSVCMsg_GameEventList
 func (m *CSVCMsg_GameEventListKeyT) String() string { return proto.CompactTextString(m) }
 func (*CSVCMsg_GameEventListKeyT) ProtoMessage()    {}
 func (*CSVCMsg_GameEventListKeyT) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{31, 0}
+	return fileDescriptor_52cbc162d33bb4fa, []int{31, 0}
 }
+
 func (m *CSVCMsg_GameEventListKeyT) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSVCMsg_GameEventListKeyT.Unmarshal(m, b)
 }
 func (m *CSVCMsg_GameEventListKeyT) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSVCMsg_GameEventListKeyT.Marshal(b, m, deterministic)
 }
-func (dst *CSVCMsg_GameEventListKeyT) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSVCMsg_GameEventListKeyT.Merge(dst, src)
+func (m *CSVCMsg_GameEventListKeyT) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_GameEventListKeyT.Merge(m, src)
 }
 func (m *CSVCMsg_GameEventListKeyT) XXX_Size() int {
 	return xxx_messageInfo_CSVCMsg_GameEventListKeyT.Size(m)
@@ -2661,16 +2747,17 @@ func (m *CSVCMsg_GameEventListDescriptorT) Reset()         { *m = CSVCMsg_GameEv
 func (m *CSVCMsg_GameEventListDescriptorT) String() string { return proto.CompactTextString(m) }
 func (*CSVCMsg_GameEventListDescriptorT) ProtoMessage()    {}
 func (*CSVCMsg_GameEventListDescriptorT) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{31, 1}
+	return fileDescriptor_52cbc162d33bb4fa, []int{31, 1}
 }
+
 func (m *CSVCMsg_GameEventListDescriptorT) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSVCMsg_GameEventListDescriptorT.Unmarshal(m, b)
 }
 func (m *CSVCMsg_GameEventListDescriptorT) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSVCMsg_GameEventListDescriptorT.Marshal(b, m, deterministic)
 }
-func (dst *CSVCMsg_GameEventListDescriptorT) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSVCMsg_GameEventListDescriptorT.Merge(dst, src)
+func (m *CSVCMsg_GameEventListDescriptorT) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_GameEventListDescriptorT.Merge(m, src)
 }
 func (m *CSVCMsg_GameEventListDescriptorT) XXX_Size() int {
 	return xxx_messageInfo_CSVCMsg_GameEventListDescriptorT.Size(m)
@@ -2723,16 +2810,17 @@ func (m *CSVCMsg_PacketEntities) Reset()         { *m = CSVCMsg_PacketEntities{}
 func (m *CSVCMsg_PacketEntities) String() string { return proto.CompactTextString(m) }
 func (*CSVCMsg_PacketEntities) ProtoMessage()    {}
 func (*CSVCMsg_PacketEntities) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{32}
+	return fileDescriptor_52cbc162d33bb4fa, []int{32}
 }
+
 func (m *CSVCMsg_PacketEntities) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSVCMsg_PacketEntities.Unmarshal(m, b)
 }
 func (m *CSVCMsg_PacketEntities) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSVCMsg_PacketEntities.Marshal(b, m, deterministic)
 }
-func (dst *CSVCMsg_PacketEntities) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSVCMsg_PacketEntities.Merge(dst, src)
+func (m *CSVCMsg_PacketEntities) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_PacketEntities.Merge(m, src)
 }
 func (m *CSVCMsg_PacketEntities) XXX_Size() int {
 	return xxx_messageInfo_CSVCMsg_PacketEntities.Size(m)
@@ -2833,16 +2921,17 @@ func (m *CSVCMsg_TempEntities) Reset()         { *m = CSVCMsg_TempEntities{} }
 func (m *CSVCMsg_TempEntities) String() string { return proto.CompactTextString(m) }
 func (*CSVCMsg_TempEntities) ProtoMessage()    {}
 func (*CSVCMsg_TempEntities) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{33}
+	return fileDescriptor_52cbc162d33bb4fa, []int{33}
 }
+
 func (m *CSVCMsg_TempEntities) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSVCMsg_TempEntities.Unmarshal(m, b)
 }
 func (m *CSVCMsg_TempEntities) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSVCMsg_TempEntities.Marshal(b, m, deterministic)
 }
-func (dst *CSVCMsg_TempEntities) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSVCMsg_TempEntities.Merge(dst, src)
+func (m *CSVCMsg_TempEntities) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_TempEntities.Merge(m, src)
 }
 func (m *CSVCMsg_TempEntities) XXX_Size() int {
 	return xxx_messageInfo_CSVCMsg_TempEntities.Size(m)
@@ -2893,16 +2982,17 @@ func (m *CSVCMsg_CreateStringTable) Reset()         { *m = CSVCMsg_CreateStringT
 func (m *CSVCMsg_CreateStringTable) String() string { return proto.CompactTextString(m) }
 func (*CSVCMsg_CreateStringTable) ProtoMessage()    {}
 func (*CSVCMsg_CreateStringTable) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{34}
+	return fileDescriptor_52cbc162d33bb4fa, []int{34}
 }
+
 func (m *CSVCMsg_CreateStringTable) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSVCMsg_CreateStringTable.Unmarshal(m, b)
 }
 func (m *CSVCMsg_CreateStringTable) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSVCMsg_CreateStringTable.Marshal(b, m, deterministic)
 }
-func (dst *CSVCMsg_CreateStringTable) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSVCMsg_CreateStringTable.Merge(dst, src)
+func (m *CSVCMsg_CreateStringTable) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_CreateStringTable.Merge(m, src)
 }
 func (m *CSVCMsg_CreateStringTable) XXX_Size() int {
 	return xxx_messageInfo_CSVCMsg_CreateStringTable.Size(m)
@@ -2989,16 +3079,17 @@ func (m *CSVCMsg_UpdateStringTable) Reset()         { *m = CSVCMsg_UpdateStringT
 func (m *CSVCMsg_UpdateStringTable) String() string { return proto.CompactTextString(m) }
 func (*CSVCMsg_UpdateStringTable) ProtoMessage()    {}
 func (*CSVCMsg_UpdateStringTable) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{35}
+	return fileDescriptor_52cbc162d33bb4fa, []int{35}
 }
+
 func (m *CSVCMsg_UpdateStringTable) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSVCMsg_UpdateStringTable.Unmarshal(m, b)
 }
 func (m *CSVCMsg_UpdateStringTable) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSVCMsg_UpdateStringTable.Marshal(b, m, deterministic)
 }
-func (dst *CSVCMsg_UpdateStringTable) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSVCMsg_UpdateStringTable.Merge(dst, src)
+func (m *CSVCMsg_UpdateStringTable) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_UpdateStringTable.Merge(m, src)
 }
 func (m *CSVCMsg_UpdateStringTable) XXX_Size() int {
 	return xxx_messageInfo_CSVCMsg_UpdateStringTable.Size(m)
@@ -3046,16 +3137,17 @@ func (m *CSVCMsg_VoiceData) Reset()         { *m = CSVCMsg_VoiceData{} }
 func (m *CSVCMsg_VoiceData) String() string { return proto.CompactTextString(m) }
 func (*CSVCMsg_VoiceData) ProtoMessage()    {}
 func (*CSVCMsg_VoiceData) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{36}
+	return fileDescriptor_52cbc162d33bb4fa, []int{36}
 }
+
 func (m *CSVCMsg_VoiceData) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSVCMsg_VoiceData.Unmarshal(m, b)
 }
 func (m *CSVCMsg_VoiceData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSVCMsg_VoiceData.Marshal(b, m, deterministic)
 }
-func (dst *CSVCMsg_VoiceData) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSVCMsg_VoiceData.Merge(dst, src)
+func (m *CSVCMsg_VoiceData) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_VoiceData.Merge(m, src)
 }
 func (m *CSVCMsg_VoiceData) XXX_Size() int {
 	return xxx_messageInfo_CSVCMsg_VoiceData.Size(m)
@@ -3121,16 +3213,17 @@ func (m *CSVCMsg_PacketReliable) Reset()         { *m = CSVCMsg_PacketReliable{}
 func (m *CSVCMsg_PacketReliable) String() string { return proto.CompactTextString(m) }
 func (*CSVCMsg_PacketReliable) ProtoMessage()    {}
 func (*CSVCMsg_PacketReliable) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{37}
+	return fileDescriptor_52cbc162d33bb4fa, []int{37}
 }
+
 func (m *CSVCMsg_PacketReliable) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSVCMsg_PacketReliable.Unmarshal(m, b)
 }
 func (m *CSVCMsg_PacketReliable) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSVCMsg_PacketReliable.Marshal(b, m, deterministic)
 }
-func (dst *CSVCMsg_PacketReliable) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSVCMsg_PacketReliable.Merge(dst, src)
+func (m *CSVCMsg_PacketReliable) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_PacketReliable.Merge(m, src)
 }
 func (m *CSVCMsg_PacketReliable) XXX_Size() int {
 	return xxx_messageInfo_CSVCMsg_PacketReliable.Size(m)
@@ -3176,16 +3269,17 @@ func (m *CSVCMsg_FullFrameSplit) Reset()         { *m = CSVCMsg_FullFrameSplit{}
 func (m *CSVCMsg_FullFrameSplit) String() string { return proto.CompactTextString(m) }
 func (*CSVCMsg_FullFrameSplit) ProtoMessage()    {}
 func (*CSVCMsg_FullFrameSplit) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{38}
+	return fileDescriptor_52cbc162d33bb4fa, []int{38}
 }
+
 func (m *CSVCMsg_FullFrameSplit) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSVCMsg_FullFrameSplit.Unmarshal(m, b)
 }
 func (m *CSVCMsg_FullFrameSplit) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSVCMsg_FullFrameSplit.Marshal(b, m, deterministic)
 }
-func (dst *CSVCMsg_FullFrameSplit) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSVCMsg_FullFrameSplit.Merge(dst, src)
+func (m *CSVCMsg_FullFrameSplit) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_FullFrameSplit.Merge(m, src)
 }
 func (m *CSVCMsg_FullFrameSplit) XXX_Size() int {
 	return xxx_messageInfo_CSVCMsg_FullFrameSplit.Size(m)
@@ -3238,16 +3332,17 @@ func (m *CSVCMsg_HLTVStatus) Reset()         { *m = CSVCMsg_HLTVStatus{} }
 func (m *CSVCMsg_HLTVStatus) String() string { return proto.CompactTextString(m) }
 func (*CSVCMsg_HLTVStatus) ProtoMessage()    {}
 func (*CSVCMsg_HLTVStatus) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{39}
+	return fileDescriptor_52cbc162d33bb4fa, []int{39}
 }
+
 func (m *CSVCMsg_HLTVStatus) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSVCMsg_HLTVStatus.Unmarshal(m, b)
 }
 func (m *CSVCMsg_HLTVStatus) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSVCMsg_HLTVStatus.Marshal(b, m, deterministic)
 }
-func (dst *CSVCMsg_HLTVStatus) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSVCMsg_HLTVStatus.Merge(dst, src)
+func (m *CSVCMsg_HLTVStatus) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_HLTVStatus.Merge(m, src)
 }
 func (m *CSVCMsg_HLTVStatus) XXX_Size() int {
 	return xxx_messageInfo_CSVCMsg_HLTVStatus.Size(m)
@@ -3297,16 +3392,17 @@ func (m *CSVCMsg_ServerSteamID) Reset()         { *m = CSVCMsg_ServerSteamID{} }
 func (m *CSVCMsg_ServerSteamID) String() string { return proto.CompactTextString(m) }
 func (*CSVCMsg_ServerSteamID) ProtoMessage()    {}
 func (*CSVCMsg_ServerSteamID) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{40}
+	return fileDescriptor_52cbc162d33bb4fa, []int{40}
 }
+
 func (m *CSVCMsg_ServerSteamID) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSVCMsg_ServerSteamID.Unmarshal(m, b)
 }
 func (m *CSVCMsg_ServerSteamID) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSVCMsg_ServerSteamID.Marshal(b, m, deterministic)
 }
-func (dst *CSVCMsg_ServerSteamID) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSVCMsg_ServerSteamID.Merge(dst, src)
+func (m *CSVCMsg_ServerSteamID) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_ServerSteamID.Merge(m, src)
 }
 func (m *CSVCMsg_ServerSteamID) XXX_Size() int {
 	return xxx_messageInfo_CSVCMsg_ServerSteamID.Size(m)
@@ -3335,16 +3431,17 @@ func (m *CSVCMsg_CmdKeyValues) Reset()         { *m = CSVCMsg_CmdKeyValues{} }
 func (m *CSVCMsg_CmdKeyValues) String() string { return proto.CompactTextString(m) }
 func (*CSVCMsg_CmdKeyValues) ProtoMessage()    {}
 func (*CSVCMsg_CmdKeyValues) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{41}
+	return fileDescriptor_52cbc162d33bb4fa, []int{41}
 }
+
 func (m *CSVCMsg_CmdKeyValues) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSVCMsg_CmdKeyValues.Unmarshal(m, b)
 }
 func (m *CSVCMsg_CmdKeyValues) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSVCMsg_CmdKeyValues.Marshal(b, m, deterministic)
 }
-func (dst *CSVCMsg_CmdKeyValues) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSVCMsg_CmdKeyValues.Merge(dst, src)
+func (m *CSVCMsg_CmdKeyValues) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_CmdKeyValues.Merge(m, src)
 }
 func (m *CSVCMsg_CmdKeyValues) XXX_Size() int {
 	return xxx_messageInfo_CSVCMsg_CmdKeyValues.Size(m)
@@ -3374,16 +3471,17 @@ func (m *CMsgIPCAddress) Reset()         { *m = CMsgIPCAddress{} }
 func (m *CMsgIPCAddress) String() string { return proto.CompactTextString(m) }
 func (*CMsgIPCAddress) ProtoMessage()    {}
 func (*CMsgIPCAddress) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{42}
+	return fileDescriptor_52cbc162d33bb4fa, []int{42}
 }
+
 func (m *CMsgIPCAddress) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgIPCAddress.Unmarshal(m, b)
 }
 func (m *CMsgIPCAddress) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgIPCAddress.Marshal(b, m, deterministic)
 }
-func (dst *CMsgIPCAddress) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgIPCAddress.Merge(dst, src)
+func (m *CMsgIPCAddress) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgIPCAddress.Merge(m, src)
 }
 func (m *CMsgIPCAddress) XXX_Size() int {
 	return xxx_messageInfo_CMsgIPCAddress.Size(m)
@@ -3424,16 +3522,17 @@ func (m *CMsgServerPeer) Reset()         { *m = CMsgServerPeer{} }
 func (m *CMsgServerPeer) String() string { return proto.CompactTextString(m) }
 func (*CMsgServerPeer) ProtoMessage()    {}
 func (*CMsgServerPeer) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{43}
+	return fileDescriptor_52cbc162d33bb4fa, []int{43}
 }
+
 func (m *CMsgServerPeer) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgServerPeer.Unmarshal(m, b)
 }
 func (m *CMsgServerPeer) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgServerPeer.Marshal(b, m, deterministic)
 }
-func (dst *CMsgServerPeer) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgServerPeer.Merge(dst, src)
+func (m *CMsgServerPeer) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgServerPeer.Merge(m, src)
 }
 func (m *CMsgServerPeer) XXX_Size() int {
 	return xxx_messageInfo_CMsgServerPeer.Size(m)
@@ -3497,16 +3596,17 @@ func (m *CSVCMsg_PeerList) Reset()         { *m = CSVCMsg_PeerList{} }
 func (m *CSVCMsg_PeerList) String() string { return proto.CompactTextString(m) }
 func (*CSVCMsg_PeerList) ProtoMessage()    {}
 func (*CSVCMsg_PeerList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{44}
+	return fileDescriptor_52cbc162d33bb4fa, []int{44}
 }
+
 func (m *CSVCMsg_PeerList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSVCMsg_PeerList.Unmarshal(m, b)
 }
 func (m *CSVCMsg_PeerList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSVCMsg_PeerList.Marshal(b, m, deterministic)
 }
-func (dst *CSVCMsg_PeerList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSVCMsg_PeerList.Merge(dst, src)
+func (m *CSVCMsg_PeerList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_PeerList.Merge(m, src)
 }
 func (m *CSVCMsg_PeerList) XXX_Size() int {
 	return xxx_messageInfo_CSVCMsg_PeerList.Size(m)
@@ -3535,16 +3635,17 @@ func (m *CSVCMsg_ClearAllStringTables) Reset()         { *m = CSVCMsg_ClearAllSt
 func (m *CSVCMsg_ClearAllStringTables) String() string { return proto.CompactTextString(m) }
 func (*CSVCMsg_ClearAllStringTables) ProtoMessage()    {}
 func (*CSVCMsg_ClearAllStringTables) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{45}
+	return fileDescriptor_52cbc162d33bb4fa, []int{45}
 }
+
 func (m *CSVCMsg_ClearAllStringTables) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSVCMsg_ClearAllStringTables.Unmarshal(m, b)
 }
 func (m *CSVCMsg_ClearAllStringTables) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSVCMsg_ClearAllStringTables.Marshal(b, m, deterministic)
 }
-func (dst *CSVCMsg_ClearAllStringTables) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSVCMsg_ClearAllStringTables.Merge(dst, src)
+func (m *CSVCMsg_ClearAllStringTables) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_ClearAllStringTables.Merge(m, src)
 }
 func (m *CSVCMsg_ClearAllStringTables) XXX_Size() int {
 	return xxx_messageInfo_CSVCMsg_ClearAllStringTables.Size(m)
@@ -3582,16 +3683,17 @@ func (m *ProtoFlattenedSerializerFieldT) Reset()         { *m = ProtoFlattenedSe
 func (m *ProtoFlattenedSerializerFieldT) String() string { return proto.CompactTextString(m) }
 func (*ProtoFlattenedSerializerFieldT) ProtoMessage()    {}
 func (*ProtoFlattenedSerializerFieldT) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{46}
+	return fileDescriptor_52cbc162d33bb4fa, []int{46}
 }
+
 func (m *ProtoFlattenedSerializerFieldT) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ProtoFlattenedSerializerFieldT.Unmarshal(m, b)
 }
 func (m *ProtoFlattenedSerializerFieldT) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_ProtoFlattenedSerializerFieldT.Marshal(b, m, deterministic)
 }
-func (dst *ProtoFlattenedSerializerFieldT) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ProtoFlattenedSerializerFieldT.Merge(dst, src)
+func (m *ProtoFlattenedSerializerFieldT) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ProtoFlattenedSerializerFieldT.Merge(m, src)
 }
 func (m *ProtoFlattenedSerializerFieldT) XXX_Size() int {
 	return xxx_messageInfo_ProtoFlattenedSerializerFieldT.Size(m)
@@ -3685,16 +3787,17 @@ func (m *ProtoFlattenedSerializerT) Reset()         { *m = ProtoFlattenedSeriali
 func (m *ProtoFlattenedSerializerT) String() string { return proto.CompactTextString(m) }
 func (*ProtoFlattenedSerializerT) ProtoMessage()    {}
 func (*ProtoFlattenedSerializerT) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{47}
+	return fileDescriptor_52cbc162d33bb4fa, []int{47}
 }
+
 func (m *ProtoFlattenedSerializerT) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ProtoFlattenedSerializerT.Unmarshal(m, b)
 }
 func (m *ProtoFlattenedSerializerT) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_ProtoFlattenedSerializerT.Marshal(b, m, deterministic)
 }
-func (dst *ProtoFlattenedSerializerT) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ProtoFlattenedSerializerT.Merge(dst, src)
+func (m *ProtoFlattenedSerializerT) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ProtoFlattenedSerializerT.Merge(m, src)
 }
 func (m *ProtoFlattenedSerializerT) XXX_Size() int {
 	return xxx_messageInfo_ProtoFlattenedSerializerT.Size(m)
@@ -3739,16 +3842,17 @@ func (m *CSVCMsg_FlattenedSerializer) Reset()         { *m = CSVCMsg_FlattenedSe
 func (m *CSVCMsg_FlattenedSerializer) String() string { return proto.CompactTextString(m) }
 func (*CSVCMsg_FlattenedSerializer) ProtoMessage()    {}
 func (*CSVCMsg_FlattenedSerializer) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{48}
+	return fileDescriptor_52cbc162d33bb4fa, []int{48}
 }
+
 func (m *CSVCMsg_FlattenedSerializer) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSVCMsg_FlattenedSerializer.Unmarshal(m, b)
 }
 func (m *CSVCMsg_FlattenedSerializer) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSVCMsg_FlattenedSerializer.Marshal(b, m, deterministic)
 }
-func (dst *CSVCMsg_FlattenedSerializer) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSVCMsg_FlattenedSerializer.Merge(dst, src)
+func (m *CSVCMsg_FlattenedSerializer) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_FlattenedSerializer.Merge(m, src)
 }
 func (m *CSVCMsg_FlattenedSerializer) XXX_Size() int {
 	return xxx_messageInfo_CSVCMsg_FlattenedSerializer.Size(m)
@@ -3791,16 +3895,17 @@ func (m *CSVCMsg_StopSound) Reset()         { *m = CSVCMsg_StopSound{} }
 func (m *CSVCMsg_StopSound) String() string { return proto.CompactTextString(m) }
 func (*CSVCMsg_StopSound) ProtoMessage()    {}
 func (*CSVCMsg_StopSound) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{49}
+	return fileDescriptor_52cbc162d33bb4fa, []int{49}
 }
+
 func (m *CSVCMsg_StopSound) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CSVCMsg_StopSound.Unmarshal(m, b)
 }
 func (m *CSVCMsg_StopSound) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CSVCMsg_StopSound.Marshal(b, m, deterministic)
 }
-func (dst *CSVCMsg_StopSound) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CSVCMsg_StopSound.Merge(dst, src)
+func (m *CSVCMsg_StopSound) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CSVCMsg_StopSound.Merge(m, src)
 }
 func (m *CSVCMsg_StopSound) XXX_Size() int {
 	return xxx_messageInfo_CSVCMsg_StopSound.Size(m)
@@ -3832,16 +3937,17 @@ func (m *CBidirMsg_RebroadcastGameEvent) Reset()         { *m = CBidirMsg_Rebroa
 func (m *CBidirMsg_RebroadcastGameEvent) String() string { return proto.CompactTextString(m) }
 func (*CBidirMsg_RebroadcastGameEvent) ProtoMessage()    {}
 func (*CBidirMsg_RebroadcastGameEvent) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{50}
+	return fileDescriptor_52cbc162d33bb4fa, []int{50}
 }
+
 func (m *CBidirMsg_RebroadcastGameEvent) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CBidirMsg_RebroadcastGameEvent.Unmarshal(m, b)
 }
 func (m *CBidirMsg_RebroadcastGameEvent) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CBidirMsg_RebroadcastGameEvent.Marshal(b, m, deterministic)
 }
-func (dst *CBidirMsg_RebroadcastGameEvent) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CBidirMsg_RebroadcastGameEvent.Merge(dst, src)
+func (m *CBidirMsg_RebroadcastGameEvent) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CBidirMsg_RebroadcastGameEvent.Merge(m, src)
 }
 func (m *CBidirMsg_RebroadcastGameEvent) XXX_Size() int {
 	return xxx_messageInfo_CBidirMsg_RebroadcastGameEvent.Size(m)
@@ -3891,16 +3997,17 @@ func (m *CBidirMsg_RebroadcastSource) Reset()         { *m = CBidirMsg_Rebroadca
 func (m *CBidirMsg_RebroadcastSource) String() string { return proto.CompactTextString(m) }
 func (*CBidirMsg_RebroadcastSource) ProtoMessage()    {}
 func (*CBidirMsg_RebroadcastSource) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{51}
+	return fileDescriptor_52cbc162d33bb4fa, []int{51}
 }
+
 func (m *CBidirMsg_RebroadcastSource) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CBidirMsg_RebroadcastSource.Unmarshal(m, b)
 }
 func (m *CBidirMsg_RebroadcastSource) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CBidirMsg_RebroadcastSource.Marshal(b, m, deterministic)
 }
-func (dst *CBidirMsg_RebroadcastSource) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CBidirMsg_RebroadcastSource.Merge(dst, src)
+func (m *CBidirMsg_RebroadcastSource) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CBidirMsg_RebroadcastSource.Merge(m, src)
 }
 func (m *CBidirMsg_RebroadcastSource) XXX_Size() int {
 	return xxx_messageInfo_CBidirMsg_RebroadcastSource.Size(m)
@@ -3929,16 +4036,17 @@ func (m *SerializedNetAddressT) Reset()         { *m = SerializedNetAddressT{} }
 func (m *SerializedNetAddressT) String() string { return proto.CompactTextString(m) }
 func (*SerializedNetAddressT) ProtoMessage()    {}
 func (*SerializedNetAddressT) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{52}
+	return fileDescriptor_52cbc162d33bb4fa, []int{52}
 }
+
 func (m *SerializedNetAddressT) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_SerializedNetAddressT.Unmarshal(m, b)
 }
 func (m *SerializedNetAddressT) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_SerializedNetAddressT.Marshal(b, m, deterministic)
 }
-func (dst *SerializedNetAddressT) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SerializedNetAddressT.Merge(dst, src)
+func (m *SerializedNetAddressT) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SerializedNetAddressT.Merge(m, src)
 }
 func (m *SerializedNetAddressT) XXX_Size() int {
 	return xxx_messageInfo_SerializedNetAddressT.Size(m)
@@ -3969,16 +4077,17 @@ func (m *CBidirMsg_RelayInfo) Reset()         { *m = CBidirMsg_RelayInfo{} }
 func (m *CBidirMsg_RelayInfo) String() string { return proto.CompactTextString(m) }
 func (*CBidirMsg_RelayInfo) ProtoMessage()    {}
 func (*CBidirMsg_RelayInfo) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{53}
+	return fileDescriptor_52cbc162d33bb4fa, []int{53}
 }
+
 func (m *CBidirMsg_RelayInfo) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CBidirMsg_RelayInfo.Unmarshal(m, b)
 }
 func (m *CBidirMsg_RelayInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CBidirMsg_RelayInfo.Marshal(b, m, deterministic)
 }
-func (dst *CBidirMsg_RelayInfo) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CBidirMsg_RelayInfo.Merge(dst, src)
+func (m *CBidirMsg_RelayInfo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CBidirMsg_RelayInfo.Merge(m, src)
 }
 func (m *CBidirMsg_RelayInfo) XXX_Size() int {
 	return xxx_messageInfo_CBidirMsg_RelayInfo.Size(m)
@@ -4025,16 +4134,17 @@ func (m *SignedPayloadT) Reset()         { *m = SignedPayloadT{} }
 func (m *SignedPayloadT) String() string { return proto.CompactTextString(m) }
 func (*SignedPayloadT) ProtoMessage()    {}
 func (*SignedPayloadT) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{54}
+	return fileDescriptor_52cbc162d33bb4fa, []int{54}
 }
+
 func (m *SignedPayloadT) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_SignedPayloadT.Unmarshal(m, b)
 }
 func (m *SignedPayloadT) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_SignedPayloadT.Marshal(b, m, deterministic)
 }
-func (dst *SignedPayloadT) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SignedPayloadT.Merge(dst, src)
+func (m *SignedPayloadT) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SignedPayloadT.Merge(m, src)
 }
 func (m *SignedPayloadT) XXX_Size() int {
 	return xxx_messageInfo_SignedPayloadT.Size(m)
@@ -4080,16 +4190,17 @@ func (m *CBidirMsg_RelayPacket) Reset()         { *m = CBidirMsg_RelayPacket{} }
 func (m *CBidirMsg_RelayPacket) String() string { return proto.CompactTextString(m) }
 func (*CBidirMsg_RelayPacket) ProtoMessage()    {}
 func (*CBidirMsg_RelayPacket) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{55}
+	return fileDescriptor_52cbc162d33bb4fa, []int{55}
 }
+
 func (m *CBidirMsg_RelayPacket) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CBidirMsg_RelayPacket.Unmarshal(m, b)
 }
 func (m *CBidirMsg_RelayPacket) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CBidirMsg_RelayPacket.Marshal(b, m, deterministic)
 }
-func (dst *CBidirMsg_RelayPacket) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CBidirMsg_RelayPacket.Merge(dst, src)
+func (m *CBidirMsg_RelayPacket) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CBidirMsg_RelayPacket.Merge(m, src)
 }
 func (m *CBidirMsg_RelayPacket) XXX_Size() int {
 	return xxx_messageInfo_CBidirMsg_RelayPacket.Size(m)
@@ -4145,16 +4256,17 @@ func (m *CBidirMsg_RelayPacket_SignedDestinationAddressT) String() string {
 }
 func (*CBidirMsg_RelayPacket_SignedDestinationAddressT) ProtoMessage() {}
 func (*CBidirMsg_RelayPacket_SignedDestinationAddressT) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{55, 0}
+	return fileDescriptor_52cbc162d33bb4fa, []int{55, 0}
 }
+
 func (m *CBidirMsg_RelayPacket_SignedDestinationAddressT) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CBidirMsg_RelayPacket_SignedDestinationAddressT.Unmarshal(m, b)
 }
 func (m *CBidirMsg_RelayPacket_SignedDestinationAddressT) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CBidirMsg_RelayPacket_SignedDestinationAddressT.Marshal(b, m, deterministic)
 }
-func (dst *CBidirMsg_RelayPacket_SignedDestinationAddressT) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CBidirMsg_RelayPacket_SignedDestinationAddressT.Merge(dst, src)
+func (m *CBidirMsg_RelayPacket_SignedDestinationAddressT) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CBidirMsg_RelayPacket_SignedDestinationAddressT.Merge(m, src)
 }
 func (m *CBidirMsg_RelayPacket_SignedDestinationAddressT) XXX_Size() int {
 	return xxx_messageInfo_CBidirMsg_RelayPacket_SignedDestinationAddressT.Size(m)
@@ -4221,16 +4333,17 @@ func (m *CMsgServerNetworkStats) Reset()         { *m = CMsgServerNetworkStats{}
 func (m *CMsgServerNetworkStats) String() string { return proto.CompactTextString(m) }
 func (*CMsgServerNetworkStats) ProtoMessage()    {}
 func (*CMsgServerNetworkStats) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{56}
+	return fileDescriptor_52cbc162d33bb4fa, []int{56}
 }
+
 func (m *CMsgServerNetworkStats) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgServerNetworkStats.Unmarshal(m, b)
 }
 func (m *CMsgServerNetworkStats) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgServerNetworkStats.Marshal(b, m, deterministic)
 }
-func (dst *CMsgServerNetworkStats) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgServerNetworkStats.Merge(dst, src)
+func (m *CMsgServerNetworkStats) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgServerNetworkStats.Merge(m, src)
 }
 func (m *CMsgServerNetworkStats) XXX_Size() int {
 	return xxx_messageInfo_CMsgServerNetworkStats.Size(m)
@@ -4428,16 +4541,17 @@ func (m *CMsgServerNetworkStats_Port) Reset()         { *m = CMsgServerNetworkSt
 func (m *CMsgServerNetworkStats_Port) String() string { return proto.CompactTextString(m) }
 func (*CMsgServerNetworkStats_Port) ProtoMessage()    {}
 func (*CMsgServerNetworkStats_Port) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{56, 0}
+	return fileDescriptor_52cbc162d33bb4fa, []int{56, 0}
 }
+
 func (m *CMsgServerNetworkStats_Port) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgServerNetworkStats_Port.Unmarshal(m, b)
 }
 func (m *CMsgServerNetworkStats_Port) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgServerNetworkStats_Port.Marshal(b, m, deterministic)
 }
-func (dst *CMsgServerNetworkStats_Port) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgServerNetworkStats_Port.Merge(dst, src)
+func (m *CMsgServerNetworkStats_Port) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgServerNetworkStats_Port.Merge(m, src)
 }
 func (m *CMsgServerNetworkStats_Port) XXX_Size() int {
 	return xxx_messageInfo_CMsgServerNetworkStats_Port.Size(m)
@@ -4478,16 +4592,17 @@ func (m *CMsgServerNetworkStats_Player) Reset()         { *m = CMsgServerNetwork
 func (m *CMsgServerNetworkStats_Player) String() string { return proto.CompactTextString(m) }
 func (*CMsgServerNetworkStats_Player) ProtoMessage()    {}
 func (*CMsgServerNetworkStats_Player) Descriptor() ([]byte, []int) {
-	return fileDescriptor_netmessages_fb3fc317c359665a, []int{56, 1}
+	return fileDescriptor_52cbc162d33bb4fa, []int{56, 1}
 }
+
 func (m *CMsgServerNetworkStats_Player) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CMsgServerNetworkStats_Player.Unmarshal(m, b)
 }
 func (m *CMsgServerNetworkStats_Player) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CMsgServerNetworkStats_Player.Marshal(b, m, deterministic)
 }
-func (dst *CMsgServerNetworkStats_Player) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CMsgServerNetworkStats_Player.Merge(dst, src)
+func (m *CMsgServerNetworkStats_Player) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgServerNetworkStats_Player.Merge(m, src)
 }
 func (m *CMsgServerNetworkStats_Player) XXX_Size() int {
 	return xxx_messageInfo_CMsgServerNetworkStats_Player.Size(m)
@@ -4541,6 +4656,18 @@ func (m *CMsgServerNetworkStats_Player) GetIsBot() bool {
 }
 
 func init() {
+	proto.RegisterEnum("dota.CLC_Messages", CLC_Messages_name, CLC_Messages_value)
+	proto.RegisterEnum("dota.SVC_Messages", SVC_Messages_name, SVC_Messages_value)
+	proto.RegisterEnum("dota.VoiceDataFormatT", VoiceDataFormatT_name, VoiceDataFormatT_value)
+	proto.RegisterEnum("dota.RequestPauseT", RequestPauseT_name, RequestPauseT_value)
+	proto.RegisterEnum("dota.PrefetchType", PrefetchType_name, PrefetchType_value)
+	proto.RegisterEnum("dota.ESplitScreenMessageType", ESplitScreenMessageType_name, ESplitScreenMessageType_value)
+	proto.RegisterEnum("dota.EQueryCvarValueStatus", EQueryCvarValueStatus_name, EQueryCvarValueStatus_value)
+	proto.RegisterEnum("dota.DIALOG_TYPE", DIALOG_TYPE_name, DIALOG_TYPE_value)
+	proto.RegisterEnum("dota.SVC_Messages_LowFrequency", SVC_Messages_LowFrequency_name, SVC_Messages_LowFrequency_value)
+	proto.RegisterEnum("dota.Bidirectional_Messages", Bidirectional_Messages_name, Bidirectional_Messages_value)
+	proto.RegisterEnum("dota.Bidirectional_Messages_LowFrequency", Bidirectional_Messages_LowFrequency_name, Bidirectional_Messages_LowFrequency_value)
+	proto.RegisterEnum("dota.CBidirMsg_RelayInfo_OperationT", CBidirMsg_RelayInfo_OperationT_name, CBidirMsg_RelayInfo_OperationT_value)
 	proto.RegisterType((*CCLCMsg_ClientInfo)(nil), "dota.CCLCMsg_ClientInfo")
 	proto.RegisterType((*CCLCMsg_Move)(nil), "dota.CCLCMsg_Move")
 	proto.RegisterType((*CMsgVoiceAudio)(nil), "dota.CMsgVoiceAudio")
@@ -4606,23 +4733,11 @@ func init() {
 	proto.RegisterType((*CMsgServerNetworkStats)(nil), "dota.CMsgServerNetworkStats")
 	proto.RegisterType((*CMsgServerNetworkStats_Port)(nil), "dota.CMsgServerNetworkStats.Port")
 	proto.RegisterType((*CMsgServerNetworkStats_Player)(nil), "dota.CMsgServerNetworkStats.Player")
-	proto.RegisterEnum("dota.CLC_Messages", CLC_Messages_name, CLC_Messages_value)
-	proto.RegisterEnum("dota.SVC_Messages", SVC_Messages_name, SVC_Messages_value)
-	proto.RegisterEnum("dota.VoiceDataFormatT", VoiceDataFormatT_name, VoiceDataFormatT_value)
-	proto.RegisterEnum("dota.RequestPauseT", RequestPauseT_name, RequestPauseT_value)
-	proto.RegisterEnum("dota.PrefetchType", PrefetchType_name, PrefetchType_value)
-	proto.RegisterEnum("dota.ESplitScreenMessageType", ESplitScreenMessageType_name, ESplitScreenMessageType_value)
-	proto.RegisterEnum("dota.EQueryCvarValueStatus", EQueryCvarValueStatus_name, EQueryCvarValueStatus_value)
-	proto.RegisterEnum("dota.DIALOG_TYPE", DIALOG_TYPE_name, DIALOG_TYPE_value)
-	proto.RegisterEnum("dota.SVC_Messages_LowFrequency", SVC_Messages_LowFrequency_name, SVC_Messages_LowFrequency_value)
-	proto.RegisterEnum("dota.Bidirectional_Messages", Bidirectional_Messages_name, Bidirectional_Messages_value)
-	proto.RegisterEnum("dota.Bidirectional_Messages_LowFrequency", Bidirectional_Messages_LowFrequency_name, Bidirectional_Messages_LowFrequency_value)
-	proto.RegisterEnum("dota.CBidirMsg_RelayInfo_OperationT", CBidirMsg_RelayInfo_OperationT_name, CBidirMsg_RelayInfo_OperationT_value)
 }
 
-func init() { proto.RegisterFile("netmessages.proto", fileDescriptor_netmessages_fb3fc317c359665a) }
+func init() { proto.RegisterFile("netmessages.proto", fileDescriptor_52cbc162d33bb4fa) }
 
-var fileDescriptor_netmessages_fb3fc317c359665a = []byte{
+var fileDescriptor_52cbc162d33bb4fa = []byte{
 	// 5051 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x5a, 0x5f, 0x73, 0x1c, 0x49,
 	0x52, 0xf7, 0x8c, 0x66, 0xa4, 0x99, 0x9c, 0x3f, 0x6e, 0xb5, 0x6d, 0x79, 0x2c, 0xaf, 0xbd, 0x76,

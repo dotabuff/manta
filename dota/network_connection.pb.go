@@ -3,10 +3,12 @@
 
 package dota
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
-import descriptor "github.com/golang/protobuf/protoc-gen-go/descriptor"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	descriptor "github.com/golang/protobuf/protoc-gen-go/descriptor"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -17,7 +19,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type ENetworkDisconnectionReason int32
 
@@ -240,6 +242,7 @@ var ENetworkDisconnectionReason_name = map[int32]string{
 	148: "NETWORK_DISCONNECT_REJECT_SERVERCDKEYAUTHINVALID",
 	149: "NETWORK_DISCONNECT_REJECT_BANNED",
 }
+
 var ENetworkDisconnectionReason_value = map[string]int32{
 	"NETWORK_DISCONNECT_INVALID":                               0,
 	"NETWORK_DISCONNECT_SHUTDOWN":                              1,
@@ -355,9 +358,11 @@ func (x ENetworkDisconnectionReason) Enum() *ENetworkDisconnectionReason {
 	*p = x
 	return p
 }
+
 func (x ENetworkDisconnectionReason) String() string {
 	return proto.EnumName(ENetworkDisconnectionReason_name, int32(x))
 }
+
 func (x *ENetworkDisconnectionReason) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(ENetworkDisconnectionReason_value, data, "ENetworkDisconnectionReason")
 	if err != nil {
@@ -366,8 +371,9 @@ func (x *ENetworkDisconnectionReason) UnmarshalJSON(data []byte) error {
 	*x = ENetworkDisconnectionReason(value)
 	return nil
 }
+
 func (ENetworkDisconnectionReason) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_network_connection_99fcbdea2b3038ca, []int{0}
+	return fileDescriptor_ad1ddf950d086460, []int{0}
 }
 
 var E_NetworkConnectionToken = &proto.ExtensionDesc{
@@ -375,7 +381,7 @@ var E_NetworkConnectionToken = &proto.ExtensionDesc{
 	ExtensionType: (*string)(nil),
 	Field:         50500,
 	Name:          "dota.network_connection_token",
-	Tag:           "bytes,50500,opt,name=network_connection_token,json=networkConnectionToken",
+	Tag:           "bytes,50500,opt,name=network_connection_token",
 	Filename:      "network_connection.proto",
 }
 
@@ -384,11 +390,9 @@ func init() {
 	proto.RegisterExtension(E_NetworkConnectionToken)
 }
 
-func init() {
-	proto.RegisterFile("network_connection.proto", fileDescriptor_network_connection_99fcbdea2b3038ca)
-}
+func init() { proto.RegisterFile("network_connection.proto", fileDescriptor_ad1ddf950d086460) }
 
-var fileDescriptor_network_connection_99fcbdea2b3038ca = []byte{
+var fileDescriptor_ad1ddf950d086460 = []byte{
 	// 2763 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x9a, 0x59, 0x9b, 0xdb, 0xb6,
 	0xd5, 0xc7, 0xa3, 0x37, 0x79, 0xdb, 0x46, 0xdd, 0x50, 0xa6, 0x89, 0x69, 0x3a, 0xde, 0x77, 0xc7,

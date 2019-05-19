@@ -3,9 +3,11 @@
 
 package dota
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -16,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type COAuthToken_ImplicitGrantNoPrompt_Request struct {
 	Clientid             *string  `protobuf:"bytes,1,opt,name=clientid" json:"clientid,omitempty"`
@@ -31,16 +33,17 @@ func (m *COAuthToken_ImplicitGrantNoPrompt_Request) Reset() {
 func (m *COAuthToken_ImplicitGrantNoPrompt_Request) String() string { return proto.CompactTextString(m) }
 func (*COAuthToken_ImplicitGrantNoPrompt_Request) ProtoMessage()    {}
 func (*COAuthToken_ImplicitGrantNoPrompt_Request) Descriptor() ([]byte, []int) {
-	return fileDescriptor_steammessages_oauth_steamworkssdk_5b55c627768c6cc8, []int{0}
+	return fileDescriptor_a4bd56839d4a1ee3, []int{0}
 }
+
 func (m *COAuthToken_ImplicitGrantNoPrompt_Request) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_COAuthToken_ImplicitGrantNoPrompt_Request.Unmarshal(m, b)
 }
 func (m *COAuthToken_ImplicitGrantNoPrompt_Request) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_COAuthToken_ImplicitGrantNoPrompt_Request.Marshal(b, m, deterministic)
 }
-func (dst *COAuthToken_ImplicitGrantNoPrompt_Request) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_COAuthToken_ImplicitGrantNoPrompt_Request.Merge(dst, src)
+func (m *COAuthToken_ImplicitGrantNoPrompt_Request) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_COAuthToken_ImplicitGrantNoPrompt_Request.Merge(m, src)
 }
 func (m *COAuthToken_ImplicitGrantNoPrompt_Request) XXX_Size() int {
 	return xxx_messageInfo_COAuthToken_ImplicitGrantNoPrompt_Request.Size(m)
@@ -74,16 +77,17 @@ func (m *COAuthToken_ImplicitGrantNoPrompt_Response) String() string {
 }
 func (*COAuthToken_ImplicitGrantNoPrompt_Response) ProtoMessage() {}
 func (*COAuthToken_ImplicitGrantNoPrompt_Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor_steammessages_oauth_steamworkssdk_5b55c627768c6cc8, []int{1}
+	return fileDescriptor_a4bd56839d4a1ee3, []int{1}
 }
+
 func (m *COAuthToken_ImplicitGrantNoPrompt_Response) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_COAuthToken_ImplicitGrantNoPrompt_Response.Unmarshal(m, b)
 }
 func (m *COAuthToken_ImplicitGrantNoPrompt_Response) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_COAuthToken_ImplicitGrantNoPrompt_Response.Marshal(b, m, deterministic)
 }
-func (dst *COAuthToken_ImplicitGrantNoPrompt_Response) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_COAuthToken_ImplicitGrantNoPrompt_Response.Merge(dst, src)
+func (m *COAuthToken_ImplicitGrantNoPrompt_Response) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_COAuthToken_ImplicitGrantNoPrompt_Response.Merge(m, src)
 }
 func (m *COAuthToken_ImplicitGrantNoPrompt_Response) XXX_Size() int {
 	return xxx_messageInfo_COAuthToken_ImplicitGrantNoPrompt_Response.Size(m)
@@ -114,10 +118,10 @@ func init() {
 }
 
 func init() {
-	proto.RegisterFile("steammessages_oauth.steamworkssdk.proto", fileDescriptor_steammessages_oauth_steamworkssdk_5b55c627768c6cc8)
+	proto.RegisterFile("steammessages_oauth.steamworkssdk.proto", fileDescriptor_a4bd56839d4a1ee3)
 }
 
-var fileDescriptor_steammessages_oauth_steamworkssdk_5b55c627768c6cc8 = []byte{
+var fileDescriptor_a4bd56839d4a1ee3 = []byte{
 	// 443 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x52, 0x4d, 0x6b, 0x14, 0x41,
 	0x14, 0x64, 0x83, 0x07, 0x9d, 0xe4, 0x34, 0x20, 0x0c, 0xb9, 0xf8, 0x58, 0x0f, 0x9b, 0x88, 0x8c,
