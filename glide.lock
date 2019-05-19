@@ -1,12 +1,12 @@
 hash: 77f441945205320177a15c6f0e0e9309580fb4788bdddd8d8375493cd1b29bd7
-updated: 2018-07-08T10:51:00.08791-05:00
+updated: 2019-05-17T17:15:55.83-05:00
 imports:
 - name: github.com/davecgh/go-spew
   version: fc32781af5e85e548d3f1abaf0fa3dbe8a72495c
   subpackages:
   - spew
 - name: github.com/golang/protobuf
-  version: 1325a051a2753cd67556b182843b1b693d0854cd
+  version: 347cf4a86c1cb8d262994d8ef5924d4576c5b331
   subpackages:
   - proto
   - protoc-gen-go/descriptor
