@@ -62,6 +62,8 @@ func floatFactory(f *field) fieldDecoder {
 		return floatCoordDecoder
 	case "simtime":
 		return simulationTimeDecoder
+	case "runetime":
+		return runeTimeDecoder
 	}
 
 	if f.bitCount == nil || (*f.bitCount <= 0 || *f.bitCount >= 32) {
@@ -129,6 +131,10 @@ func floatCoordDecoder(r *reader) interface{} {
 
 func noscaleDecoder(r *reader) interface{} {
 	return math.Float32frombits(r.readBits(32))
+}
+
+func runeTimeDecoder(r *reader) interface{} {
+	return math.Float32frombits(r.readBits(4))
 }
 
 func simulationTimeDecoder(r *reader) interface{} {

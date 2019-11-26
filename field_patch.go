@@ -72,6 +72,8 @@ var fieldPatches = []fieldPatch{
 		switch f.varName {
 		case "m_flSimulationTime", "m_flAnimTime":
 			f.encoder = "simtime"
+		case "m_flRuneTime":
+			f.encoder = "runetime"
 		}
 	}},
 }

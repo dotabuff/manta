@@ -13,6 +13,8 @@ func BenchmarkMatch2159568145(b *testing.B) { testScenarios[2159568145].bench(b)
 // Test client
 func TestMatch6682694(t *testing.T) { testScenarios[6682694].test(t) }
 
+func TestMatch5129306977(t *testing.T) { testScenarios[5129306977].test(t) }
+func TestMatch5129281647(t *testing.T) { testScenarios[5129281647].test(t) }
 func TestMatch4259518439(t *testing.T) { testScenarios[4259518439].test(t) }
 func TestMatch4257655794(t *testing.T) { testScenarios[4257655794].test(t) }
 func TestMatch3949386909(t *testing.T) { testScenarios[3949386909].test(t) }
@@ -68,6 +70,26 @@ type testScenario struct {
 }
 
 var testScenarios = map[int64]testScenario{
+	5129306977: {
+		matchId:                  "5129306977",
+		replayUrl:                "https://s3-us-west-2.amazonaws.com/manta.dotabuff/5129306977.dem",
+		expectGameBuild:          3846,
+		expectEntityEvents:       2466090,
+		expectUnitOrderEvents:    36185,
+		expectHeroEntityName:     "CDOTA_Unit_Hero_Warlock",
+		expectHeroEntityMana:     2582.94,
+		expectHeroEntityPlayerId: 8,
+	},
+	5129281647: {
+		matchId:                  "5129281647",
+		replayUrl:                "https://s3-us-west-2.amazonaws.com/manta.dotabuff/5129281647.dem",
+		expectGameBuild:          3846,
+		expectEntityEvents:       2919107,
+		expectUnitOrderEvents:    43538,
+		expectHeroEntityName:     "CDOTA_Unit_Hero_Pudge",
+		expectHeroEntityMana:     1647.9391,
+		expectHeroEntityPlayerId: 8,
+	},
 	4259518439: {
 		matchId:                  "4259518439",
 		replayUrl:                "https://s3-us-west-2.amazonaws.com/manta.dotabuff/4259518439.dem",
