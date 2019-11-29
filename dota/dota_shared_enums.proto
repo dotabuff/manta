@@ -64,6 +64,7 @@ enum EEvent {
 	EVENT_ID_SPRING_FESTIVAL = 2;
 	EVENT_ID_FROSTIVUS_2013 = 3;
 	EVENT_ID_COMPENDIUM_2014 = 4;
+	EVENT_ID_NEXON_PC_BANG = 5;
 	EVENT_ID_PWRD_DAC_2015 = 6;
 	EVENT_ID_NEW_BLOOM_2015 = 7;
 	EVENT_ID_INTERNATIONAL_2015 = 8;
@@ -84,7 +85,8 @@ enum EEvent {
 	EVENT_ID_FROSTIVUS_2018 = 23;
 	EVENT_ID_NEW_BLOOM_2019 = 24;
 	EVENT_ID_INTERNATIONAL_2019 = 25;
-	EVENT_ID_COUNT = 26;
+	EVENT_ID_NEW_PLAYER_EXPERIENCE = 26;
+	EVENT_ID_COUNT = 27;
 }
 
 enum DOTALeaverStatus_t {
@@ -189,6 +191,7 @@ enum DOTALowPriorityBanType {
 	DOTA_LOW_PRIORITY_BAN_ABANDON = 0;
 	DOTA_LOW_PRIORITY_BAN_REPORTS = 1;
 	DOTA_LOW_PRIORITY_BAN_SECONDARY_ABANDON = 2;
+	DOTA_LOW_PRIORITY_BAN_PRE_GAME_ROLE = 3;
 }
 
 enum DOTALobbyReadyState {
@@ -256,17 +259,25 @@ enum DOTALobbyVisibility {
 enum EDOTAPlayerMMRType {
 	k_EDOTAPlayerMMRType_Invalid = 0;
 	k_EDOTAPlayerMMRType_GeneralHidden = 1;
-	k_EDOTAPlayerMMRType_GeneralCompetitive = 3;
-	k_EDOTAPlayerMMRType_SoloCompetitive = 4;
+	k_EDOTAPlayerMMRType_GeneralCompetitive2019 = 3;
+	k_EDOTAPlayerMMRType_SoloCompetitive2019 = 4;
 	k_EDOTAPlayerMMRType_1v1Competitive_UNUSED = 5;
 	k_EDOTAPlayerMMRType_GeneralSeasonalRanked = 6;
 	k_EDOTAPlayerMMRType_SoloSeasonalRanked = 7;
+	k_EDOTAPlayerMMRType_Competitive_Core = 8;
+	k_EDOTAPlayerMMRType_Competitive_Support = 9;
+}
+
+enum EDOTAMMRBoostType {
+	k_EDOTAMMRBoostType_None = 0;
+	k_EDOTAMMRBoostType_Leader = 1;
+	k_EDOTAMMRBoostType_Follower = 2;
 }
 
 enum MatchType {
 	MATCH_TYPE_CASUAL = 0;
 	MATCH_TYPE_COOP_BOTS = 1;
-	MATCH_TYPE_TEAM_RANKED = 2;
+	MATCH_TYPE_LEGACY_TEAM_RANKED = 2;
 	MATCH_TYPE_LEGACY_SOLO_QUEUE = 3;
 	MATCH_TYPE_COMPETITIVE = 4;
 	MATCH_TYPE_WEEKEND_TOURNEY = 5;
@@ -547,6 +558,11 @@ enum EDPCPushNotification {
 	DPC_PUSH_NOTIFICATION_FANTASY_FINAL_RESULTS = 42;
 }
 
+enum EEventActionScoreMode {
+	k_eEventActionScoreMode_Add = 0;
+	k_eEventActionScoreMode_Min = 1;
+}
+
 message CDOTAClientHardwareSpecs {
 	optional uint32 logical_processors = 1;
 	optional fixed64 cpu_cycles_per_second = 2;
@@ -656,5 +672,16 @@ message CMsgDOTACombatLogEntry {
 	optional bool inflictor_is_stolen_ability = 70;
 	optional uint32 kill_eater_event = 71;
 	optional uint32 unit_status_label = 72;
+	optional bool spell_generated_attack = 73;
+	optional bool at_night_time = 74;
+	optional bool attacker_has_scepter = 75;
+}
+
+message CMsgPendingEventAward {
+	optional EEvent event_id = 1 [default = EVENT_ID_NONE];
+	optional uint32 action_id = 2;
+	optional uint32 num_to_grant = 3;
+	optional EEventActionScoreMode score_mode = 4 [default = k_eEventActionScoreMode_Add];
+	optional uint32 audit_action = 5;
 }
 

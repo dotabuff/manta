@@ -24,7 +24,7 @@ enum EStartFindingMatchResult {
 	k_EStartFindingMatchResult_CompetitiveNoLowPriority = 106;
 	k_EStartFindingMatchResult_CompetitiveNotUnlocked = 107;
 	k_EStartFindingMatchResult_GameModeNotUnlocked = 108;
-	k_EStartFindingMatchResult_CompetitiveNotEnoughSkillData = 109;
+	k_EStartFindingMatchResult_CompetitiveNotEnoughPlayTime = 109;
 	k_EStartFindingMatchResult_MissingInitialSkill = 110;
 	k_EStartFindingMatchResult_CompetitiveRankSpreadTooLarge = 111;
 	k_EStartFindingMatchResult_MemberAlreadyInLobby = 112;
@@ -40,6 +40,8 @@ enum EStartFindingMatchResult {
 	k_EStartFindingMatchResult_NotMemberOfClan = 122;
 	k_EStartFindingMatchResult_CoachesChallengeBadPartySize = 123;
 	k_EStartFindingMatchResult_CoachesChallengeRequirementsNotMet = 124;
+	k_EStartFindingMatchResult_InvalidRoleSelections = 125;
+	k_EStartFindingMatchResult_PhoneNumberDiscrepancy = 126;
 }
 
 message CMsgStartFindingMatch {
@@ -60,6 +62,7 @@ message CMsgStartFindingMatch {
 	optional uint32 steam_clan_account_id = 16;
 	optional bool is_challenge_match = 17;
 	optional uint32 lane_selection_flags = 18;
+	optional bool high_priority_disabled = 19;
 }
 
 message CMsgStartFindingMatchResult {
@@ -460,5 +463,14 @@ message CMsgGCToClientRequestLaneSelection {
 
 message CMsgGCToClientRequestLaneSelectionResponse {
 	optional uint32 lane_selection_flags = 1;
+	optional bool high_priority_disabled = 2;
+}
+
+message CMsgGCToClientRequestMMInfo {
+}
+
+message CMsgClientToGCMMInfo {
+	optional uint32 lane_selection_flags = 1;
+	optional bool high_priority_disabled = 2;
 }
 

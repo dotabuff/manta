@@ -17,7 +17,7 @@ enum ETeamInviteResult {
 	TEAM_INVITE_ERROR_INVITEE_BUSY = 6;
 	TEAM_INVITE_ERROR_INVITEE_ALREADY_MEMBER = 7;
 	TEAM_INVITE_ERROR_INVITEE_AT_TEAM_LIMIT = 8;
-	TEAM_INVITE_ERROR_INVITEE_INSUFFICIENT_LEVEL = 9;
+	TEAM_INVITE_ERROR_INVITEE_INSUFFICIENT_PLAY_TIME = 9;
 	TEAM_INVITE_ERROR_INVITER_INVALID_ACCOUNT_TYPE = 10;
 	TEAM_INVITE_ERROR_INVITER_NOT_ADMIN = 11;
 	TEAM_INVITE_ERROR_INCORRECT_USER_RESPONDED = 12;
@@ -98,8 +98,6 @@ message CMsgDOTATeamInfo {
 	optional string url = 14;
 	optional uint32 wins = 15;
 	optional uint32 losses = 16;
-	optional uint32 rank = 17;
-	optional uint32 calibration_games_remaining = 18;
 	optional uint32 games_played_total = 19;
 	optional uint32 games_played_matchmaking = 20;
 	repeated uint32 registered_member_account_ids = 30;
@@ -213,7 +211,7 @@ message CMsgDOTATeamInvite_InviterToGC {
 message CMsgDOTATeamInvite_GCImmediateResponseToInviter {
 	optional ETeamInviteResult result = 1 [default = TEAM_INVITE_SUCCESS];
 	optional string invitee_name = 2;
-	optional uint32 required_badge_level = 3;
+	optional uint32 required_play_time = 3;
 }
 
 message CMsgDOTATeamInvite_GCRequestToInvitee {

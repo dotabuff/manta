@@ -160,8 +160,8 @@ enum EDOTAGCMsg {
 	k_EMsgGCToGCGetUserRank = 7236;
 	k_EMsgGCToGCGetUserRankResponse = 7237;
 	k_EMsgGCToGCUpdateTeamStats = 7240;
-	k_EMsgGCToGCGetTeamRank = 7241;
-	k_EMsgGCToGCGetTeamRankResponse = 7242;
+	k_EMsgGCToGCValidateTeam = 7241;
+	k_EMsgGCToGCValidateTeamResponse = 7242;
 	k_EMsgGCPassportDataRequest = 7248;
 	k_EMsgGCPassportDataResponse = 7249;
 	k_EMsgGCNotInGuildData = 7251;
@@ -282,7 +282,6 @@ enum EDOTAGCMsg {
 	k_EMsgDOTAAwardEventPoints = 7384;
 	k_EMsgDOTAGetEventPoints = 7387;
 	k_EMsgDOTAGetEventPointsResponse = 7388;
-	k_EMsgGCToGCSignoutAwardEventPoints = 7390;
 	k_EMsgDOTASendFriendRecruits = 7393;
 	k_EMsgDOTAFriendRecruitsRequest = 7394;
 	k_EMsgDOTAFriendRecruitsResponse = 7395;
@@ -347,8 +346,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCQuickJoinCustomLobby = 7470;
 	k_EMsgGCQuickJoinCustomLobbyResponse = 7471;
 	k_EMsgGCToGCGrantEventPointAction = 7472;
-	k_EMsgServerGetEventPoints = 7473;
-	k_EMsgServerGetEventPointsResponse = 7474;
 	k_EMsgServerGrantSurveyPermission = 7475;
 	k_EMsgServerGrantSurveyPermissionResponse = 7476;
 	k_EMsgClientProvideSurveyResult = 7477;
@@ -409,7 +406,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCToClientProfileCardUpdated = 7539;
 	k_EMsgServerToGCVictoryPredictions = 7540;
 	k_EMsgClientToGCMarkNotificationListRead = 7542;
-	k_EMsgGCToClientNewNotificationAdded = 7543;
 	k_EMsgServerToGCSuspiciousActivity = 7544;
 	k_EMsgSignOutCommunicationSummary = 7545;
 	k_EMsgServerToGCRequestStatus_Response = 7546;
@@ -453,8 +449,6 @@ enum EDOTAGCMsg {
 	k_EMsgClientToGCSetAdditionalEquipsResponse = 7593;
 	k_EMsgGCToGCEmoticonUnlockNoRollback = 7594;
 	k_EMsgGCToGCGetCompendiumFanfare = 7595;
-	k_EMsgServerToGCHoldEventPoints = 7596;
-	k_EMsgSignOutReleaseEventPointHolds = 7597;
 	k_EMsgGCToGCChatNewUserSession = 7598;
 	k_EMsgClientToGCApplyGemCombiner = 7603;
 	k_EMsgClientToGCDOTACreateStaticRecipe = 7604;
@@ -518,6 +512,8 @@ enum EDOTAGCMsg {
 	k_EMsgClientToGCVerifyFavoritePlayers = 7678;
 	k_EMsgGCToClientVerifyFavoritePlayersResponse = 7679;
 	k_EMsgGCToClientPartySearchInvites = 7680;
+	k_EMsgGCToClientRequestMMInfo = 7681;
+	k_EMsgClientToGCMMInfo = 7682;
 	k_EMsgGCDev_GrantWarKill = 8001;
 	k_EMsgServerToGCLockCharmTrading = 8004;
 	k_EMsgClientToGCPlayerStatsRequest = 8006;
@@ -638,10 +634,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCToGCSignoutSpendWager = 8141;
 	k_EMsgGCSubmitLobbyMVPVote = 8144;
 	k_EMsgGCSubmitLobbyMVPVoteResponse = 8145;
-	k_EMsgClientToGCRequestLinaPlaysRemaining = 8146;
-	k_EMsgClientToGCRequestLinaPlaysRemainingResponse = 8147;
-	k_EMsgClientToGCRequestLinaGameResult = 8148;
-	k_EMsgClientToGCRequestLinaGameResultResponse = 8149;
 	k_EMsgSignOutCommunityGoalProgress = 8150;
 	k_EMsgGCToClientLobbyMVPNotifyRecipient = 8151;
 	k_EMsgGCToClientLobbyMVPAwarded = 8152;
@@ -793,7 +785,6 @@ enum EDOTAGCMsg {
 	k_EMsgClientToGCRequestSocialFeedResponse = 8304;
 	k_EMsgClientToGCRequestSocialFeedComments = 8305;
 	k_EMsgClientToGCRequestSocialFeedCommentsResponse = 8306;
-	k_EMsgGCToGCSignoutAwardCappedUnderhollowEventGamePoints = 8307;
 	k_EMsgClientToGCCavernCrawlGetClaimedRoomCount = 8308;
 	k_EMsgClientToGCCavernCrawlGetClaimedRoomCountResponse = 8309;
 	k_EMsgGCToGCReconcilePlusAutoGrantItemsUnreliable = 8310;
@@ -833,5 +824,28 @@ enum EDOTAGCMsg {
 	k_EMsgClientToGCVoteForLeagueGameMVP = 8344;
 	k_EMsgClientToGCRequestPlayerCoachMatch = 8345;
 	k_EMsgClientToGCRequestPlayerCoachMatchResponse = 8346;
+	k_EMsgClientToGCRequestContestVotes = 8347;
+	k_EMsgClientToGCRequestContestVotesResponse = 8348;
+	k_EMsgClientToGCMVPVoteTimeout = 8349;
+	k_EMsgClientToGCMVPVoteTimeoutResponse = 8350;
+	k_EMsgClientToGCGetUnderlordsCDKeyRequest = 8351;
+	k_EMsgClientToGCGetUnderlordsCDKeyResponse = 8352;
+	k_EMsgDetailedGameStats = 8353;
+	k_EMsgClientToGCSetFavoriteAllStarPlayer = 8354;
+	k_EMsgClientToGCSetFavoriteAllStarPlayerResponse = 8355;
+	k_EMsgAllStarStats = 8356;
+	k_EMsgClientToGCGetFavoriteAllStarPlayerRequest = 8357;
+	k_EMsgClientToGCGetFavoriteAllStarPlayerResponse = 8358;
+	k_EMsgClientToGCVerifyIntegrity = 8359;
+	k_EMsgMatchMatchmakingStats = 8360;
+	k_EMsgClientToGCSubmitPlayerMatchSurvey = 8361;
+	k_EMsgClientToGCSubmitPlayerMatchSurveyResponse = 8362;
+	k_EMsgSQLGCToGCGrantAllHeroProgressAccount = 8363;
+	k_EMsgSQLGCToGCGrantAllHeroProgressVictory = 8364;
+	k_eMsgGCToGCGetAllHeroCurrent = 8635;
+	k_eMsgGCToGCGetAllHeroCurrentResponse = 8636;
+	k_EMsgGCSubmitPlayerAvoidRequest = 8637;
+	k_EMsgGCSubmitPlayerAvoidRequestResponse = 8638;
+	k_EMsgGCToClientNotificationsUpdated = 8639;
 }
 

@@ -65,6 +65,10 @@ message CMsgPlayerInfo {
 	optional bool ishltv = 6;
 }
 
+message CEntityMsg {
+	optional uint32 target_entity = 1;
+}
+
 message CMsg_CVars {
 	message CVar {
 		optional string name = 1;
@@ -171,6 +175,7 @@ message CNETMsg_SpawnGroup_Load {
 	optional uint32 creationsequence = 16;
 	optional string savegamefilename = 17;
 	optional uint32 spawngroupparenthandle = 18;
+	optional bool leveltransition = 19;
 }
 
 message CNETMsg_SpawnGroup_ManifestUpdate {
@@ -211,6 +216,7 @@ message CSVCMsg_GameSessionConfiguration {
 	optional string server_ip_address = 13;
 	optional bytes data = 14;
 	optional bool is_localonly = 15;
+	optional bool no_steam_server = 19;
 	optional bool is_transition = 16;
 	optional string previouslevel = 17;
 	optional string landmarkname = 18;

@@ -193,6 +193,7 @@ enum EGCItemMsg {
 	k_EMsgGCToGCSelfPing = 2605;
 	k_EMsgGCToGCGetInfuxIntervalStats = 2606;
 	k_EMsgGCToGCGetInfuxIntervalStatsResponse = 2607;
+	k_EMsgGCToGCPurchaseSucceeded = 2608;
 }
 
 enum EItemPurgatoryResponse_Finalize {
@@ -991,6 +992,7 @@ message CMsgGCToGCClientServerVersionsUpdated {
 	optional uint32 client_active_version = 2;
 	optional uint32 server_active_version = 3;
 	optional uint32 server_deployed_version = 4;
+	optional uint32 what_changed = 5;
 }
 
 message CMsgGCToGCBroadcastMessageFromSub {
@@ -1052,5 +1054,15 @@ message CMsgGCToGCGetInfuxIntervalStatsResponse {
 	repeated uint32 stat_samples = 3 [packed = true];
 	repeated uint32 stat_max = 4 [packed = true];
 	optional uint32 sample_duration_ms = 5;
+}
+
+message CMsgGCToGCPurchaseSucceeded {
+}
+
+message CExtraMsgBlock {
+	optional uint32 msg_type = 1;
+	optional bytes contents = 2;
+	optional uint64 msg_key = 3;
+	optional bool is_compressed = 4;
 }
 

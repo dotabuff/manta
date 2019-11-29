@@ -101,6 +101,8 @@ type Callbacks struct {
 	onCUserMessageCloseCaptionPlaceholder     []func(*dota.CUserMessageCloseCaptionPlaceholder) error
 	onCUserMessageCameraTransition            []func(*dota.CUserMessageCameraTransition) error
 	onCUserMessageAudioParameter              []func(*dota.CUserMessageAudioParameter) error
+	onCUserMessageHapticsManagerPulse         []func(*dota.CUserMessageHapticsManagerPulse) error
+	onCUserMessageHapticsManagerEffect        []func(*dota.CUserMessageHapticsManagerEffect) error
 	onCMsgVDebugGameSessionIDEvent            []func(*dota.CMsgVDebugGameSessionIDEvent) error
 	onCMsgPlaceDecalEvent                     []func(*dota.CMsgPlaceDecalEvent) error
 	onCMsgClearWorldDecalsEvent               []func(*dota.CMsgClearWorldDecalsEvent) error
@@ -228,6 +230,15 @@ type Callbacks struct {
 	onCDOTAUserMsg_HighFiveLeftHanging        []func(*dota.CDOTAUserMsg_HighFiveLeftHanging) error
 	onCDOTAUserMsg_HighFiveCompleted          []func(*dota.CDOTAUserMsg_HighFiveCompleted) error
 	onCDOTAUserMsg_ShovelUnearth              []func(*dota.CDOTAUserMsg_ShovelUnearth) error
+	onCDOTAUserMsg_RadarAlert                 []func(*dota.CDOTAUserMsg_RadarAlert) error
+	onCDOTAUserMsg_AllStarEvent               []func(*dota.CDOTAUserMsg_AllStarEvent) error
+	onCDOTAUserMsg_TalentTreeAlert            []func(*dota.CDOTAUserMsg_TalentTreeAlert) error
+	onCDOTAUserMsg_QueuedOrderRemoved         []func(*dota.CDOTAUserMsg_QueuedOrderRemoved) error
+	onCDOTAUserMsg_DebugChallenge             []func(*dota.CDOTAUserMsg_DebugChallenge) error
+	onCDOTAUserMsg_OMArcanaCombo              []func(*dota.CDOTAUserMsg_OMArcanaCombo) error
+	onCDOTAUserMsg_FoundNeutralItem           []func(*dota.CDOTAUserMsg_FoundNeutralItem) error
+	onCDOTAUserMsg_OutpostCaptured            []func(*dota.CDOTAUserMsg_OutpostCaptured) error
+	onCDOTAUserMsg_OutpostGrantedXP           []func(*dota.CDOTAUserMsg_OutpostGrantedXP) error
 
 	pb *proto.Buffer
 }
@@ -706,6 +717,16 @@ func (c *Callbacks) OnCUserMessageCameraTransition(fn func(*dota.CUserMessageCam
 // OnCUserMessageAudioParameter registers a callback for EBaseUserMessages_UM_AudioParameter
 func (c *Callbacks) OnCUserMessageAudioParameter(fn func(*dota.CUserMessageAudioParameter) error) {
 	c.onCUserMessageAudioParameter = append(c.onCUserMessageAudioParameter, fn)
+}
+
+// OnCUserMessageHapticsManagerPulse registers a callback for EBaseUserMessages_UM_HapticsManagerPulse
+func (c *Callbacks) OnCUserMessageHapticsManagerPulse(fn func(*dota.CUserMessageHapticsManagerPulse) error) {
+	c.onCUserMessageHapticsManagerPulse = append(c.onCUserMessageHapticsManagerPulse, fn)
+}
+
+// OnCUserMessageHapticsManagerEffect registers a callback for EBaseUserMessages_UM_HapticsManagerEffect
+func (c *Callbacks) OnCUserMessageHapticsManagerEffect(fn func(*dota.CUserMessageHapticsManagerEffect) error) {
+	c.onCUserMessageHapticsManagerEffect = append(c.onCUserMessageHapticsManagerEffect, fn)
 }
 
 // OnCMsgVDebugGameSessionIDEvent registers a callback for EBaseGameEvents_GE_VDebugGameSessionIDEvent
@@ -1341,6 +1362,51 @@ func (c *Callbacks) OnCDOTAUserMsg_HighFiveCompleted(fn func(*dota.CDOTAUserMsg_
 // OnCDOTAUserMsg_ShovelUnearth registers a callback for EDotaUserMessages_DOTA_UM_ShovelUnearth
 func (c *Callbacks) OnCDOTAUserMsg_ShovelUnearth(fn func(*dota.CDOTAUserMsg_ShovelUnearth) error) {
 	c.onCDOTAUserMsg_ShovelUnearth = append(c.onCDOTAUserMsg_ShovelUnearth, fn)
+}
+
+// OnCDOTAUserMsg_RadarAlert registers a callback for EDotaUserMessages_DOTA_UM_RadarAlert
+func (c *Callbacks) OnCDOTAUserMsg_RadarAlert(fn func(*dota.CDOTAUserMsg_RadarAlert) error) {
+	c.onCDOTAUserMsg_RadarAlert = append(c.onCDOTAUserMsg_RadarAlert, fn)
+}
+
+// OnCDOTAUserMsg_AllStarEvent registers a callback for EDotaUserMessages_DOTA_UM_AllStarEvent
+func (c *Callbacks) OnCDOTAUserMsg_AllStarEvent(fn func(*dota.CDOTAUserMsg_AllStarEvent) error) {
+	c.onCDOTAUserMsg_AllStarEvent = append(c.onCDOTAUserMsg_AllStarEvent, fn)
+}
+
+// OnCDOTAUserMsg_TalentTreeAlert registers a callback for EDotaUserMessages_DOTA_UM_TalentTreeAlert
+func (c *Callbacks) OnCDOTAUserMsg_TalentTreeAlert(fn func(*dota.CDOTAUserMsg_TalentTreeAlert) error) {
+	c.onCDOTAUserMsg_TalentTreeAlert = append(c.onCDOTAUserMsg_TalentTreeAlert, fn)
+}
+
+// OnCDOTAUserMsg_QueuedOrderRemoved registers a callback for EDotaUserMessages_DOTA_UM_QueuedOrderRemoved
+func (c *Callbacks) OnCDOTAUserMsg_QueuedOrderRemoved(fn func(*dota.CDOTAUserMsg_QueuedOrderRemoved) error) {
+	c.onCDOTAUserMsg_QueuedOrderRemoved = append(c.onCDOTAUserMsg_QueuedOrderRemoved, fn)
+}
+
+// OnCDOTAUserMsg_DebugChallenge registers a callback for EDotaUserMessages_DOTA_UM_DebugChallenge
+func (c *Callbacks) OnCDOTAUserMsg_DebugChallenge(fn func(*dota.CDOTAUserMsg_DebugChallenge) error) {
+	c.onCDOTAUserMsg_DebugChallenge = append(c.onCDOTAUserMsg_DebugChallenge, fn)
+}
+
+// OnCDOTAUserMsg_OMArcanaCombo registers a callback for EDotaUserMessages_DOTA_UM_OMArcanaCombo
+func (c *Callbacks) OnCDOTAUserMsg_OMArcanaCombo(fn func(*dota.CDOTAUserMsg_OMArcanaCombo) error) {
+	c.onCDOTAUserMsg_OMArcanaCombo = append(c.onCDOTAUserMsg_OMArcanaCombo, fn)
+}
+
+// OnCDOTAUserMsg_FoundNeutralItem registers a callback for EDotaUserMessages_DOTA_UM_FoundNeutralItem
+func (c *Callbacks) OnCDOTAUserMsg_FoundNeutralItem(fn func(*dota.CDOTAUserMsg_FoundNeutralItem) error) {
+	c.onCDOTAUserMsg_FoundNeutralItem = append(c.onCDOTAUserMsg_FoundNeutralItem, fn)
+}
+
+// OnCDOTAUserMsg_OutpostCaptured registers a callback for EDotaUserMessages_DOTA_UM_OutpostCaptured
+func (c *Callbacks) OnCDOTAUserMsg_OutpostCaptured(fn func(*dota.CDOTAUserMsg_OutpostCaptured) error) {
+	c.onCDOTAUserMsg_OutpostCaptured = append(c.onCDOTAUserMsg_OutpostCaptured, fn)
+}
+
+// OnCDOTAUserMsg_OutpostGrantedXP registers a callback for EDotaUserMessages_DOTA_UM_OutpostGrantedXP
+func (c *Callbacks) OnCDOTAUserMsg_OutpostGrantedXP(fn func(*dota.CDOTAUserMsg_OutpostGrantedXP) error) {
+	c.onCDOTAUserMsg_OutpostGrantedXP = append(c.onCDOTAUserMsg_OutpostGrantedXP, fn)
 }
 
 func (c *Callbacks) callByDemoType(t int32, buf []byte) error {
@@ -3135,6 +3201,44 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		for _, fn := range c.onCUserMessageAudioParameter {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 150: // dota.EBaseUserMessages_UM_HapticsManagerPulse
+		if c.onCUserMessageHapticsManagerPulse == nil {
+			return nil
+		}
+
+		msg := &dota.CUserMessageHapticsManagerPulse{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCUserMessageHapticsManagerPulse {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 151: // dota.EBaseUserMessages_UM_HapticsManagerEffect
+		if c.onCUserMessageHapticsManagerEffect == nil {
+			return nil
+		}
+
+		msg := &dota.CUserMessageHapticsManagerEffect{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCUserMessageHapticsManagerEffect {
 			if err := fn(msg); err != nil {
 				return err
 			}
@@ -5548,6 +5652,177 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		for _, fn := range c.onCDOTAUserMsg_ShovelUnearth {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 587: // dota.EDotaUserMessages_DOTA_UM_RadarAlert
+		if c.onCDOTAUserMsg_RadarAlert == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_RadarAlert{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_RadarAlert {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 588: // dota.EDotaUserMessages_DOTA_UM_AllStarEvent
+		if c.onCDOTAUserMsg_AllStarEvent == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_AllStarEvent{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_AllStarEvent {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 589: // dota.EDotaUserMessages_DOTA_UM_TalentTreeAlert
+		if c.onCDOTAUserMsg_TalentTreeAlert == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_TalentTreeAlert{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_TalentTreeAlert {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 590: // dota.EDotaUserMessages_DOTA_UM_QueuedOrderRemoved
+		if c.onCDOTAUserMsg_QueuedOrderRemoved == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_QueuedOrderRemoved{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_QueuedOrderRemoved {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 591: // dota.EDotaUserMessages_DOTA_UM_DebugChallenge
+		if c.onCDOTAUserMsg_DebugChallenge == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_DebugChallenge{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_DebugChallenge {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 592: // dota.EDotaUserMessages_DOTA_UM_OMArcanaCombo
+		if c.onCDOTAUserMsg_OMArcanaCombo == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_OMArcanaCombo{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_OMArcanaCombo {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 593: // dota.EDotaUserMessages_DOTA_UM_FoundNeutralItem
+		if c.onCDOTAUserMsg_FoundNeutralItem == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_FoundNeutralItem{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_FoundNeutralItem {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 594: // dota.EDotaUserMessages_DOTA_UM_OutpostCaptured
+		if c.onCDOTAUserMsg_OutpostCaptured == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_OutpostCaptured{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_OutpostCaptured {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 595: // dota.EDotaUserMessages_DOTA_UM_OutpostGrantedXP
+		if c.onCDOTAUserMsg_OutpostGrantedXP == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_OutpostGrantedXP{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_OutpostGrantedXP {
 			if err := fn(msg); err != nil {
 				return err
 			}

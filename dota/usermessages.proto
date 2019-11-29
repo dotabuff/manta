@@ -46,9 +46,9 @@ enum EBaseUserMessages {
 	UM_ParticleManager = 145;
 	UM_HudError = 146;
 	UM_CustomGameEvent = 148;
-	UM_HandHapticPulse = 149;
-	UM_AnimGraphUpdate = 150;
-	UM_HandHapticPulsePrecise = 151;
+	UM_AnimGraphUpdate = 149;
+	UM_HapticsManagerPulse = 150;
+	UM_HapticsManagerEffect = 151;
 	UM_MAX_BASE = 200;
 }
 
@@ -303,18 +303,22 @@ message CUserMessageCreditsMsg {
 }
 
 message CEntityMessagePlayJingle {
+	optional CEntityMsg entity_msg = 1;
 }
 
 message CEntityMessageScreenOverlay {
 	optional bool start_effect = 1;
+	optional CEntityMsg entity_msg = 2;
 }
 
 message CEntityMessageRemoveAllDecals {
 	optional bool remove_decals = 1;
+	optional CEntityMsg entity_msg = 2;
 }
 
 message CEntityMessagePropagateForce {
 	optional CMsgVector impulse = 1;
+	optional CEntityMsg entity_msg = 2;
 }
 
 message CEntityMessageDoSpark {
@@ -325,11 +329,13 @@ message CEntityMessageDoSpark {
 	optional uint32 beams = 5;
 	optional float thick = 6;
 	optional float duration = 7;
+	optional CEntityMsg entity_msg = 8;
 }
 
 message CEntityMessageFixAngle {
 	optional bool relative = 1;
 	optional CMsgQAngle angle = 2;
+	optional CEntityMsg entity_msg = 3;
 }
 
 message CUserMessageCameraTransition {
@@ -353,6 +359,7 @@ message CUserMsg_ParticleManager {
 		optional int32 entity_handle = 3;
 		optional int32 entity_handle_for_modifiers = 4;
 		optional bool apply_voice_ban_rules = 5;
+		optional int32 team_behavior = 6;
 	}
 
 	message DestroyParticle {
@@ -483,14 +490,17 @@ message CUserMsg_CustomGameEvent {
 	optional bytes data = 2;
 }
 
-message CUserMessageHapticPulse {
+message CUserMessageHapticsManagerPulse {
 	optional int32 hand_id = 1;
-	optional EHapticPulseType pulse_type = 2 [default = VR_HAND_HAPTIC_PULSE_LIGHT];
+	optional float effect_amplitude = 2;
+	optional float effect_frequency = 3;
+	optional float effect_duration = 4;
 }
 
-message CUserMessageHapticPulsePrecise {
+message CUserMessageHapticsManagerEffect {
 	optional int32 hand_id = 1;
-	optional int32 pulse_duration = 2;
+	optional uint32 effect_name_hash_code = 2;
+	optional float effect_scale = 3;
 }
 
 message CUserMessageAnimStateGraphState {
