@@ -153,6 +153,7 @@ message CSODOTAParty {
 	optional bool party_search_beacon_active = 66;
 	optional uint32 matchmaking_flags = 67;
 	optional EHighPriorityMMState high_priority_state = 68 [default = k_EHighPriorityMM_Unknown];
+	optional bool lane_selections_enabled = 69;
 }
 
 message CSODOTAPartyInvite {
@@ -405,7 +406,6 @@ message CSODOTALobby {
 	optional bool custom_game_browseable = 112;
 	optional uint32 league_phase = 113;
 	optional bool record_detailed_stats = 114;
-	optional bool is_allstar_game = 115;
 }
 
 message CMsgLobbyPlaytestDetails {

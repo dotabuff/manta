@@ -265,6 +265,8 @@ message CMatchPlayerTimedStats {
 	optional uint32 observer_wards_dewarded = 11;
 	optional uint32 reliable_gold_earned = 12;
 	optional uint32 gold_loss_prevented = 13;
+	optional uint32 hero_kill_gold = 14;
+	optional uint32 creep_kill_gold = 15;
 }
 
 message CMatchTeamTimedStats {
@@ -1368,5 +1370,26 @@ message CMsgArcanaVoteMatchVotes {
 	optional uint32 match_id = 1;
 	optional uint32 hero_id = 2;
 	optional uint32 vote_count = 3;
+}
+
+message CMsgGCtoGCAssociatedExploiterAccountInfo {
+	optional uint32 account_id = 1;
+	optional uint32 num_matches_to_search = 2;
+	optional uint32 min_shared_match_count = 3;
+	optional uint32 num_additional_players = 4;
+}
+
+message CMsgGCtoGCAssociatedExploiterAccountInfoResponse {
+	message Account {
+		optional uint32 account_id = 1;
+		optional uint32 num_common_matches = 2;
+		optional uint32 earliest_common_match = 3;
+		optional uint32 latest_common_match = 4;
+		optional uint32 generation = 5;
+		optional string persona = 6;
+		optional bool already_banned = 7;
+	}
+
+	repeated CMsgGCtoGCAssociatedExploiterAccountInfoResponse.Account accounts = 1;
 }
 
