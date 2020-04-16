@@ -123,4 +123,3 @@ message CMsgSosSetLibraryStackFields {
 	optional fixed32 stack_hash = 1;
 	optional bytes packed_fields = 5;
 }
-

@@ -1540,4 +1540,3 @@ enum EMsgClanAccountFlags {
 	k_EMsgClanAccountFlagDisabled = 8;
 	k_EMsgClanAccountFlagOGG = 16;
 }
-

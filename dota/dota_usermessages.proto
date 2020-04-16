@@ -243,6 +243,7 @@ enum DOTA_CHAT_MESSAGE {
 	CHAT_MESSAGE_OBSERVER_WARD_KILLED = 105;
 	CHAT_MESSAGE_SENTRY_WARD_KILLED = 106;
 	CHAT_MESSAGE_ITEM_PLACED_IN_NEUTRAL_STASH = 107;
+	CHAT_MESSAGE_HERO_CHOICE_INVALID = 108;
 }
 
 enum DOTA_NO_BATTLE_POINTS_REASONS {
@@ -695,12 +696,16 @@ message CDOTAResponseQuerySerialized {
 		enum ValueType {
 			NUMERIC = 1;
 			STRING = 2;
+			STRINGTABLE_INDEX = 3;
+			INT_NUMERIC = 4;
 		}
 
 		required int32 key = 1;
 		required CDOTAResponseQuerySerialized.Fact.ValueType valtype = 2 [default = NUMERIC];
 		optional float val_numeric = 3;
 		optional string val_string = 4;
+		optional int32 val_stringtable_index = 5;
+		optional sint32 val_int_numeric = 6;
 	}
 
 	repeated CDOTAResponseQuerySerialized.Fact facts = 1;
@@ -1386,4 +1391,3 @@ message CDOTAUserMsg_OutpostGrantedXP {
 	optional uint32 team_id = 1;
 	optional uint32 xp_amount = 2;
 }
-

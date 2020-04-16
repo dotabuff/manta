@@ -257,4 +257,3 @@ message CMsgDOTAChatRegionsEnabled {
 	optional bool enable_all_regions = 1;
 	repeated CMsgDOTAChatRegionsEnabled.Region enabled_regions = 2;
 }
-
