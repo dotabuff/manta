@@ -25,6 +25,12 @@ enum GCProtoBufMsgSrc {
 	GCProtoBufMsgSrc_SpoofedSteamID = 5;
 }
 
+enum EMobilePaymentProvider {
+	k_EMobilePaymentProvider_Invalid = 0;
+	k_EMobilePaymentProvider_GooglePlay = 1;
+	k_EMobilePaymentProvider_AppleAppStore = 2;
+}
+
 enum EDACPlatform {
 	k_eDACPlatform_None = 0;
 	k_eDACPlatform_PC = 1;
@@ -37,6 +43,7 @@ enum EDACPlatform {
 message CMsgProtoBufHeader {
 	option (msgpool_soft_limit) = 256;
 	option (msgpool_hard_limit) = 1024;
+
 	optional fixed64 client_steam_id = 1;
 	optional int32 client_session_id = 2;
 	optional uint32 source_app_id = 3;
@@ -348,6 +355,7 @@ message CMsgAMGrantGuestPasses2Response {
 message CGCSystemMsg_GetAccountDetails {
 	option (msgpool_soft_limit) = 128;
 	option (msgpool_hard_limit) = 512;
+
 	optional fixed64 steamid = 1;
 	optional uint32 appid = 2;
 }
@@ -355,6 +363,7 @@ message CGCSystemMsg_GetAccountDetails {
 message CGCSystemMsg_GetAccountDetails_Response {
 	option (msgpool_soft_limit) = 128;
 	option (msgpool_hard_limit) = 512;
+
 	optional uint32 eresult_deprecated = 1 [default = 2];
 	optional string account_name = 2;
 	optional string persona_name = 3;
@@ -645,6 +654,27 @@ message CMsgGCCheckClanMembership_Response {
 	optional bool ismember = 1;
 }
 
+message CGCSystemMsg_ReportExternalPurchase_Request {
+	optional uint32 appid = 1;
+	optional fixed64 steamid = 2;
+	optional EMobilePaymentProvider provider = 3 [default = k_EMobilePaymentProvider_Invalid];
+	optional uint64 orderid = 4;
+	optional string provider_orderid = 5;
+	optional int64 amount = 6;
+	optional string currency = 7;
+	optional uint32 quantity = 8;
+	optional uint32 itemid = 9;
+	optional string item_description = 10;
+	optional string language = 11;
+	optional string category = 12;
+	optional uint32 time_created = 13;
+}
+
+message CGCSystemMsg_ReportExternalPurchase_Response {
+	optional fixed64 transid = 1;
+	optional uint64 orderid = 2;
+}
+
 message CWorkshop_AddSpecialPayment_Request {
 	optional uint32 appid = 1;
 	optional uint32 gameitemid = 2;
@@ -673,4 +703,3 @@ message CWorkshop_GetSpecialPayments_Response {
 
 	repeated CWorkshop_GetSpecialPayments_Response.SpecialPayment special_payments = 1;
 }
-

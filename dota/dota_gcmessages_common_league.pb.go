@@ -2577,8 +2577,10 @@ type CMsgDOTADPCSeasonResults_TeamLeagueResult struct {
 func (m *CMsgDOTADPCSeasonResults_TeamLeagueResult) Reset() {
 	*m = CMsgDOTADPCSeasonResults_TeamLeagueResult{}
 }
-func (m *CMsgDOTADPCSeasonResults_TeamLeagueResult) String() string { return proto.CompactTextString(m) }
-func (*CMsgDOTADPCSeasonResults_TeamLeagueResult) ProtoMessage()    {}
+func (m *CMsgDOTADPCSeasonResults_TeamLeagueResult) String() string {
+	return proto.CompactTextString(m)
+}
+func (*CMsgDOTADPCSeasonResults_TeamLeagueResult) ProtoMessage() {}
 func (*CMsgDOTADPCSeasonResults_TeamLeagueResult) Descriptor() ([]byte, []int) {
 	return fileDescriptor_2fe4457e2b9dd334, []int{16, 0}
 }

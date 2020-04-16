@@ -516,8 +516,10 @@ type CMsgSource1LegacyGameEventListDescriptorT struct {
 func (m *CMsgSource1LegacyGameEventListDescriptorT) Reset() {
 	*m = CMsgSource1LegacyGameEventListDescriptorT{}
 }
-func (m *CMsgSource1LegacyGameEventListDescriptorT) String() string { return proto.CompactTextString(m) }
-func (*CMsgSource1LegacyGameEventListDescriptorT) ProtoMessage()    {}
+func (m *CMsgSource1LegacyGameEventListDescriptorT) String() string {
+	return proto.CompactTextString(m)
+}
+func (*CMsgSource1LegacyGameEventListDescriptorT) ProtoMessage() {}
 func (*CMsgSource1LegacyGameEventListDescriptorT) Descriptor() ([]byte, []int) {
 	return fileDescriptor_830232d8fa361916, []int{5, 1}
 }

@@ -6632,8 +6632,10 @@ type CMsgDOTAFantasyPlayerScoreDetailsResponse struct {
 func (m *CMsgDOTAFantasyPlayerScoreDetailsResponse) Reset() {
 	*m = CMsgDOTAFantasyPlayerScoreDetailsResponse{}
 }
-func (m *CMsgDOTAFantasyPlayerScoreDetailsResponse) String() string { return proto.CompactTextString(m) }
-func (*CMsgDOTAFantasyPlayerScoreDetailsResponse) ProtoMessage()    {}
+func (m *CMsgDOTAFantasyPlayerScoreDetailsResponse) String() string {
+	return proto.CompactTextString(m)
+}
+func (*CMsgDOTAFantasyPlayerScoreDetailsResponse) ProtoMessage() {}
 func (*CMsgDOTAFantasyPlayerScoreDetailsResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_ad607e4a12cf9d50, []int{62}
 }
@@ -7111,8 +7113,10 @@ type CMsgClientToGCGetPlayerCardRosterResponse struct {
 func (m *CMsgClientToGCGetPlayerCardRosterResponse) Reset() {
 	*m = CMsgClientToGCGetPlayerCardRosterResponse{}
 }
-func (m *CMsgClientToGCGetPlayerCardRosterResponse) String() string { return proto.CompactTextString(m) }
-func (*CMsgClientToGCGetPlayerCardRosterResponse) ProtoMessage()    {}
+func (m *CMsgClientToGCGetPlayerCardRosterResponse) String() string {
+	return proto.CompactTextString(m)
+}
+func (*CMsgClientToGCGetPlayerCardRosterResponse) ProtoMessage() {}
 func (*CMsgClientToGCGetPlayerCardRosterResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_ad607e4a12cf9d50, []int{69}
 }
@@ -7255,8 +7259,10 @@ type CMsgClientToGCSetPlayerCardRosterResponse struct {
 func (m *CMsgClientToGCSetPlayerCardRosterResponse) Reset() {
 	*m = CMsgClientToGCSetPlayerCardRosterResponse{}
 }
-func (m *CMsgClientToGCSetPlayerCardRosterResponse) String() string { return proto.CompactTextString(m) }
-func (*CMsgClientToGCSetPlayerCardRosterResponse) ProtoMessage()    {}
+func (m *CMsgClientToGCSetPlayerCardRosterResponse) String() string {
+	return proto.CompactTextString(m)
+}
+func (*CMsgClientToGCSetPlayerCardRosterResponse) ProtoMessage() {}
 func (*CMsgClientToGCSetPlayerCardRosterResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_ad607e4a12cf9d50, []int{71}
 }
@@ -7342,8 +7348,10 @@ type CMsgDOTAFantasyDPCLeagueStatus_LeagueInfo struct {
 func (m *CMsgDOTAFantasyDPCLeagueStatus_LeagueInfo) Reset() {
 	*m = CMsgDOTAFantasyDPCLeagueStatus_LeagueInfo{}
 }
-func (m *CMsgDOTAFantasyDPCLeagueStatus_LeagueInfo) String() string { return proto.CompactTextString(m) }
-func (*CMsgDOTAFantasyDPCLeagueStatus_LeagueInfo) ProtoMessage()    {}
+func (m *CMsgDOTAFantasyDPCLeagueStatus_LeagueInfo) String() string {
+	return proto.CompactTextString(m)
+}
+func (*CMsgDOTAFantasyDPCLeagueStatus_LeagueInfo) ProtoMessage() {}
 func (*CMsgDOTAFantasyDPCLeagueStatus_LeagueInfo) Descriptor() ([]byte, []int) {
 	return fileDescriptor_ad607e4a12cf9d50, []int{72, 0}
 }

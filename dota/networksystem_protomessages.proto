@@ -21,4 +21,3 @@ message NetMessagePacketStart {
 
 message NetMessagePacketEnd {
 }
-
