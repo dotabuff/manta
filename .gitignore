@@ -3,3 +3,4 @@
 /replays/*.dem*
 /tmp
 /vendor
+/.idea
