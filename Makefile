@@ -34,6 +34,3 @@ update-protobufs:
 
 generate:
 	go run gen/callbacks.go
-
-sync-replays:
-	s3cmd --region=us-west-2 sync ./replays/*.dem s3://manta.dotabuff/
