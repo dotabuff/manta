@@ -239,6 +239,17 @@ type Callbacks struct {
 	onCDOTAUserMsg_FoundNeutralItem           []func(*dota.CDOTAUserMsg_FoundNeutralItem) error
 	onCDOTAUserMsg_OutpostCaptured            []func(*dota.CDOTAUserMsg_OutpostCaptured) error
 	onCDOTAUserMsg_OutpostGrantedXP           []func(*dota.CDOTAUserMsg_OutpostGrantedXP) error
+	onCDOTAUserMsg_MoveCameraToUnit           []func(*dota.CDOTAUserMsg_MoveCameraToUnit) error
+	onCDOTAUserMsg_PauseMinigameData          []func(*dota.CDOTAUserMsg_PauseMinigameData) error
+	onCDOTAUserMsg_VersusScene_PlayerBehavior []func(*dota.CDOTAUserMsg_VersusScene_PlayerBehavior) error
+	onCDOTAUserMsg_QoP_ArcanaSummary          []func(*dota.CDOTAUserMsg_QoP_ArcanaSummary) error
+	onCDOTAUserMsg_HotPotato_Created          []func(*dota.CDOTAUserMsg_HotPotato_Created) error
+	onCDOTAUserMsg_HotPotato_Exploded         []func(*dota.CDOTAUserMsg_HotPotato_Exploded) error
+	onCDOTAUserMsg_WK_Arcana_Progress         []func(*dota.CDOTAUserMsg_WK_Arcana_Progress) error
+	onCDOTAUserMsg_GuildChallenge_Progress    []func(*dota.CDOTAUserMsg_GuildChallenge_Progress) error
+	onCDOTAUserMsg_WRArcanaProgress           []func(*dota.CDOTAUserMsg_WRArcanaProgress) error
+	onCDOTAUserMsg_WRArcanaSummary            []func(*dota.CDOTAUserMsg_WRArcanaSummary) error
+	onCDOTAUserMsg_EmptyItemSlotAlert         []func(*dota.CDOTAUserMsg_EmptyItemSlotAlert) error
 
 	pb *proto.Buffer
 }
@@ -1407,6 +1418,61 @@ func (c *Callbacks) OnCDOTAUserMsg_OutpostCaptured(fn func(*dota.CDOTAUserMsg_Ou
 // OnCDOTAUserMsg_OutpostGrantedXP registers a callback for EDotaUserMessages_DOTA_UM_OutpostGrantedXP
 func (c *Callbacks) OnCDOTAUserMsg_OutpostGrantedXP(fn func(*dota.CDOTAUserMsg_OutpostGrantedXP) error) {
 	c.onCDOTAUserMsg_OutpostGrantedXP = append(c.onCDOTAUserMsg_OutpostGrantedXP, fn)
+}
+
+// OnCDOTAUserMsg_MoveCameraToUnit registers a callback for EDotaUserMessages_DOTA_UM_MoveCameraToUnit
+func (c *Callbacks) OnCDOTAUserMsg_MoveCameraToUnit(fn func(*dota.CDOTAUserMsg_MoveCameraToUnit) error) {
+	c.onCDOTAUserMsg_MoveCameraToUnit = append(c.onCDOTAUserMsg_MoveCameraToUnit, fn)
+}
+
+// OnCDOTAUserMsg_PauseMinigameData registers a callback for EDotaUserMessages_DOTA_UM_PauseMinigameData
+func (c *Callbacks) OnCDOTAUserMsg_PauseMinigameData(fn func(*dota.CDOTAUserMsg_PauseMinigameData) error) {
+	c.onCDOTAUserMsg_PauseMinigameData = append(c.onCDOTAUserMsg_PauseMinigameData, fn)
+}
+
+// OnCDOTAUserMsg_VersusScene_PlayerBehavior registers a callback for EDotaUserMessages_DOTA_UM_VersusScene_PlayerBehavior
+func (c *Callbacks) OnCDOTAUserMsg_VersusScene_PlayerBehavior(fn func(*dota.CDOTAUserMsg_VersusScene_PlayerBehavior) error) {
+	c.onCDOTAUserMsg_VersusScene_PlayerBehavior = append(c.onCDOTAUserMsg_VersusScene_PlayerBehavior, fn)
+}
+
+// OnCDOTAUserMsg_QoP_ArcanaSummary registers a callback for EDotaUserMessages_DOTA_UM_QoP_ArcanaSummary
+func (c *Callbacks) OnCDOTAUserMsg_QoP_ArcanaSummary(fn func(*dota.CDOTAUserMsg_QoP_ArcanaSummary) error) {
+	c.onCDOTAUserMsg_QoP_ArcanaSummary = append(c.onCDOTAUserMsg_QoP_ArcanaSummary, fn)
+}
+
+// OnCDOTAUserMsg_HotPotato_Created registers a callback for EDotaUserMessages_DOTA_UM_HotPotato_Created
+func (c *Callbacks) OnCDOTAUserMsg_HotPotato_Created(fn func(*dota.CDOTAUserMsg_HotPotato_Created) error) {
+	c.onCDOTAUserMsg_HotPotato_Created = append(c.onCDOTAUserMsg_HotPotato_Created, fn)
+}
+
+// OnCDOTAUserMsg_HotPotato_Exploded registers a callback for EDotaUserMessages_DOTA_UM_HotPotato_Exploded
+func (c *Callbacks) OnCDOTAUserMsg_HotPotato_Exploded(fn func(*dota.CDOTAUserMsg_HotPotato_Exploded) error) {
+	c.onCDOTAUserMsg_HotPotato_Exploded = append(c.onCDOTAUserMsg_HotPotato_Exploded, fn)
+}
+
+// OnCDOTAUserMsg_WK_Arcana_Progress registers a callback for EDotaUserMessages_DOTA_UM_WK_Arcana_Progress
+func (c *Callbacks) OnCDOTAUserMsg_WK_Arcana_Progress(fn func(*dota.CDOTAUserMsg_WK_Arcana_Progress) error) {
+	c.onCDOTAUserMsg_WK_Arcana_Progress = append(c.onCDOTAUserMsg_WK_Arcana_Progress, fn)
+}
+
+// OnCDOTAUserMsg_GuildChallenge_Progress registers a callback for EDotaUserMessages_DOTA_UM_GuildChallenge_Progress
+func (c *Callbacks) OnCDOTAUserMsg_GuildChallenge_Progress(fn func(*dota.CDOTAUserMsg_GuildChallenge_Progress) error) {
+	c.onCDOTAUserMsg_GuildChallenge_Progress = append(c.onCDOTAUserMsg_GuildChallenge_Progress, fn)
+}
+
+// OnCDOTAUserMsg_WRArcanaProgress registers a callback for EDotaUserMessages_DOTA_UM_WRArcanaProgress
+func (c *Callbacks) OnCDOTAUserMsg_WRArcanaProgress(fn func(*dota.CDOTAUserMsg_WRArcanaProgress) error) {
+	c.onCDOTAUserMsg_WRArcanaProgress = append(c.onCDOTAUserMsg_WRArcanaProgress, fn)
+}
+
+// OnCDOTAUserMsg_WRArcanaSummary registers a callback for EDotaUserMessages_DOTA_UM_WRArcanaSummary
+func (c *Callbacks) OnCDOTAUserMsg_WRArcanaSummary(fn func(*dota.CDOTAUserMsg_WRArcanaSummary) error) {
+	c.onCDOTAUserMsg_WRArcanaSummary = append(c.onCDOTAUserMsg_WRArcanaSummary, fn)
+}
+
+// OnCDOTAUserMsg_EmptyItemSlotAlert registers a callback for EDotaUserMessages_DOTA_UM_EmptyItemSlotAlert
+func (c *Callbacks) OnCDOTAUserMsg_EmptyItemSlotAlert(fn func(*dota.CDOTAUserMsg_EmptyItemSlotAlert) error) {
+	c.onCDOTAUserMsg_EmptyItemSlotAlert = append(c.onCDOTAUserMsg_EmptyItemSlotAlert, fn)
 }
 
 func (c *Callbacks) callByDemoType(t int32, buf []byte) error {
@@ -5823,6 +5889,215 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		for _, fn := range c.onCDOTAUserMsg_OutpostGrantedXP {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 596: // dota.EDotaUserMessages_DOTA_UM_MoveCameraToUnit
+		if c.onCDOTAUserMsg_MoveCameraToUnit == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_MoveCameraToUnit{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_MoveCameraToUnit {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 597: // dota.EDotaUserMessages_DOTA_UM_PauseMinigameData
+		if c.onCDOTAUserMsg_PauseMinigameData == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_PauseMinigameData{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_PauseMinigameData {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 598: // dota.EDotaUserMessages_DOTA_UM_VersusScene_PlayerBehavior
+		if c.onCDOTAUserMsg_VersusScene_PlayerBehavior == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_VersusScene_PlayerBehavior{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_VersusScene_PlayerBehavior {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 600: // dota.EDotaUserMessages_DOTA_UM_QoP_ArcanaSummary
+		if c.onCDOTAUserMsg_QoP_ArcanaSummary == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_QoP_ArcanaSummary{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_QoP_ArcanaSummary {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 601: // dota.EDotaUserMessages_DOTA_UM_HotPotato_Created
+		if c.onCDOTAUserMsg_HotPotato_Created == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_HotPotato_Created{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_HotPotato_Created {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 602: // dota.EDotaUserMessages_DOTA_UM_HotPotato_Exploded
+		if c.onCDOTAUserMsg_HotPotato_Exploded == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_HotPotato_Exploded{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_HotPotato_Exploded {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 603: // dota.EDotaUserMessages_DOTA_UM_WK_Arcana_Progress
+		if c.onCDOTAUserMsg_WK_Arcana_Progress == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_WK_Arcana_Progress{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_WK_Arcana_Progress {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 604: // dota.EDotaUserMessages_DOTA_UM_GuildChallenge_Progress
+		if c.onCDOTAUserMsg_GuildChallenge_Progress == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_GuildChallenge_Progress{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_GuildChallenge_Progress {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 605: // dota.EDotaUserMessages_DOTA_UM_WRArcanaProgress
+		if c.onCDOTAUserMsg_WRArcanaProgress == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_WRArcanaProgress{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_WRArcanaProgress {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 606: // dota.EDotaUserMessages_DOTA_UM_WRArcanaSummary
+		if c.onCDOTAUserMsg_WRArcanaSummary == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_WRArcanaSummary{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_WRArcanaSummary {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 607: // dota.EDotaUserMessages_DOTA_UM_EmptyItemSlotAlert
+		if c.onCDOTAUserMsg_EmptyItemSlotAlert == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_EmptyItemSlotAlert{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_EmptyItemSlotAlert {
 			if err := fn(msg); err != nil {
 				return err
 			}
