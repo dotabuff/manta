@@ -26,18 +26,16 @@ type expectedEntity struct {
 }
 
 type entityTestScenario struct {
-	matchId   string
-	replayUrl string
-	tick      uint32
-	entities  []expectedEntity
-	skipInCI  bool
+	matchId  string
+	tick     uint32
+	entities []expectedEntity
+	skipInCI bool
 }
 
 var entityTestScenarios = map[int64]entityTestScenario{
 	3534483793: {
-		matchId:   "3534483793",
-		replayUrl: "https://s3-us-west-2.amazonaws.com/manta.dotabuff/3534483793.dem",
-		tick:      22000,
+		matchId: "3534483793",
+		tick:    22000,
 		entities: []expectedEntity{
 			{
 				class:    "CDOTA_PlayerResource",
@@ -77,9 +75,8 @@ var entityTestScenarios = map[int64]entityTestScenario{
 		},
 	},
 	3619005274: {
-		matchId:   "3619005274",
-		replayUrl: "https://s3-us-west-2.amazonaws.com/manta.dotabuff/3619005274.dem",
-		tick:      2,
+		matchId: "3619005274",
+		tick:    2,
 		entities: []expectedEntity{
 			{
 				class:    "CDOTA_PlayerResource",
@@ -131,7 +128,7 @@ func (s entityTestScenario) test(t *testing.T) {
 		t.Skip("skipping scenario in CI environment")
 	}
 
-	r := mustGetReplayReader(s.matchId, s.replayUrl)
+	r := mustGetReplayReader(s.matchId)
 	defer r.Close()
 
 	parser, err := NewStreamParser(r)

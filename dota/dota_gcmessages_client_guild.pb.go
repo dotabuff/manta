@@ -20,15 +20,5155 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
+type EGuildAuditAction int32
+
+const (
+	EGuildAuditAction_k_EGuildAuditAction_Invalid                    EGuildAuditAction = 0
+	EGuildAuditAction_k_EGuildAuditAction_GuildCreated               EGuildAuditAction = 1
+	EGuildAuditAction_k_EGuildAuditAction_GuildLanguageChanged       EGuildAuditAction = 2
+	EGuildAuditAction_k_EGuildAuditAction_GuildFlagsChanged          EGuildAuditAction = 3
+	EGuildAuditAction_k_EGuildAuditAction_GuildMemberJoined          EGuildAuditAction = 5
+	EGuildAuditAction_k_EGuildAuditAction_GuildMemberLeft            EGuildAuditAction = 6
+	EGuildAuditAction_k_EGuildAuditAction_GuildMemberKicked          EGuildAuditAction = 7
+	EGuildAuditAction_k_EGuildAuditAction_GuildMemberRoleChanged     EGuildAuditAction = 8
+	EGuildAuditAction_k_EGuildAuditAction_GuildLogoChanged           EGuildAuditAction = 9
+	EGuildAuditAction_k_EGuildAuditAction_GuildRegionChanged         EGuildAuditAction = 10
+	EGuildAuditAction_k_EGuildAuditAction_GuildDescriptionChanged    EGuildAuditAction = 11
+	EGuildAuditAction_k_EGuildAuditAction_GuildPrimaryColorChanged   EGuildAuditAction = 12
+	EGuildAuditAction_k_EGuildAuditAction_GuildSecondaryColorChanged EGuildAuditAction = 13
+	EGuildAuditAction_k_EGuildAuditAction_GuildPatternChanged        EGuildAuditAction = 14
+	EGuildAuditAction_k_EGuildAuditAction_AdminClearedLogo           EGuildAuditAction = 15
+	EGuildAuditAction_k_EGuildAuditAction_GuildRequiredRankChanged   EGuildAuditAction = 16
+	EGuildAuditAction_k_EGuildAuditAction_GuildMotDChanged           EGuildAuditAction = 18
+	EGuildAuditAction_k_EGuildAuditAction_AdminResetName             EGuildAuditAction = 19
+	EGuildAuditAction_k_EGuildAuditAction_AdminResetTag              EGuildAuditAction = 20
+	EGuildAuditAction_k_EGuildAuditAction_AdminLock                  EGuildAuditAction = 21
+	EGuildAuditAction_k_EGuildAuditAction_GuildNameChanged           EGuildAuditAction = 22
+	EGuildAuditAction_k_EGuildAuditAction_GuildTagChanged            EGuildAuditAction = 23
+	EGuildAuditAction_k_EGuildAuditAction_AdminPermitted             EGuildAuditAction = 24
+	EGuildAuditAction_k_EGuildAuditAction_AdminBlocked               EGuildAuditAction = 25
+	EGuildAuditAction_k_EGuildAuditAction_AdminBannedUser            EGuildAuditAction = 26
+)
+
+var EGuildAuditAction_name = map[int32]string{
+	0:  "k_EGuildAuditAction_Invalid",
+	1:  "k_EGuildAuditAction_GuildCreated",
+	2:  "k_EGuildAuditAction_GuildLanguageChanged",
+	3:  "k_EGuildAuditAction_GuildFlagsChanged",
+	5:  "k_EGuildAuditAction_GuildMemberJoined",
+	6:  "k_EGuildAuditAction_GuildMemberLeft",
+	7:  "k_EGuildAuditAction_GuildMemberKicked",
+	8:  "k_EGuildAuditAction_GuildMemberRoleChanged",
+	9:  "k_EGuildAuditAction_GuildLogoChanged",
+	10: "k_EGuildAuditAction_GuildRegionChanged",
+	11: "k_EGuildAuditAction_GuildDescriptionChanged",
+	12: "k_EGuildAuditAction_GuildPrimaryColorChanged",
+	13: "k_EGuildAuditAction_GuildSecondaryColorChanged",
+	14: "k_EGuildAuditAction_GuildPatternChanged",
+	15: "k_EGuildAuditAction_AdminClearedLogo",
+	16: "k_EGuildAuditAction_GuildRequiredRankChanged",
+	18: "k_EGuildAuditAction_GuildMotDChanged",
+	19: "k_EGuildAuditAction_AdminResetName",
+	20: "k_EGuildAuditAction_AdminResetTag",
+	21: "k_EGuildAuditAction_AdminLock",
+	22: "k_EGuildAuditAction_GuildNameChanged",
+	23: "k_EGuildAuditAction_GuildTagChanged",
+	24: "k_EGuildAuditAction_AdminPermitted",
+	25: "k_EGuildAuditAction_AdminBlocked",
+	26: "k_EGuildAuditAction_AdminBannedUser",
+}
+
+var EGuildAuditAction_value = map[string]int32{
+	"k_EGuildAuditAction_Invalid":                    0,
+	"k_EGuildAuditAction_GuildCreated":               1,
+	"k_EGuildAuditAction_GuildLanguageChanged":       2,
+	"k_EGuildAuditAction_GuildFlagsChanged":          3,
+	"k_EGuildAuditAction_GuildMemberJoined":          5,
+	"k_EGuildAuditAction_GuildMemberLeft":            6,
+	"k_EGuildAuditAction_GuildMemberKicked":          7,
+	"k_EGuildAuditAction_GuildMemberRoleChanged":     8,
+	"k_EGuildAuditAction_GuildLogoChanged":           9,
+	"k_EGuildAuditAction_GuildRegionChanged":         10,
+	"k_EGuildAuditAction_GuildDescriptionChanged":    11,
+	"k_EGuildAuditAction_GuildPrimaryColorChanged":   12,
+	"k_EGuildAuditAction_GuildSecondaryColorChanged": 13,
+	"k_EGuildAuditAction_GuildPatternChanged":        14,
+	"k_EGuildAuditAction_AdminClearedLogo":           15,
+	"k_EGuildAuditAction_GuildRequiredRankChanged":   16,
+	"k_EGuildAuditAction_GuildMotDChanged":           18,
+	"k_EGuildAuditAction_AdminResetName":             19,
+	"k_EGuildAuditAction_AdminResetTag":              20,
+	"k_EGuildAuditAction_AdminLock":                  21,
+	"k_EGuildAuditAction_GuildNameChanged":           22,
+	"k_EGuildAuditAction_GuildTagChanged":            23,
+	"k_EGuildAuditAction_AdminPermitted":             24,
+	"k_EGuildAuditAction_AdminBlocked":               25,
+	"k_EGuildAuditAction_AdminBannedUser":            26,
+}
+
+func (x EGuildAuditAction) Enum() *EGuildAuditAction {
+	p := new(EGuildAuditAction)
+	*p = x
+	return p
+}
+
+func (x EGuildAuditAction) String() string {
+	return proto.EnumName(EGuildAuditAction_name, int32(x))
+}
+
+func (x *EGuildAuditAction) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(EGuildAuditAction_value, data, "EGuildAuditAction")
+	if err != nil {
+		return err
+	}
+	*x = EGuildAuditAction(value)
+	return nil
+}
+
+func (EGuildAuditAction) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{0}
+}
+
+type EGuildChatType int32
+
+const (
+	EGuildChatType_k_EGuildChatType_Unspecified    EGuildChatType = 0
+	EGuildChatType_k_EGuildChatType_SteamChatGroup EGuildChatType = 1
+	EGuildChatType_k_EGuildChatType_GC             EGuildChatType = 2
+)
+
+var EGuildChatType_name = map[int32]string{
+	0: "k_EGuildChatType_Unspecified",
+	1: "k_EGuildChatType_SteamChatGroup",
+	2: "k_EGuildChatType_GC",
+}
+
+var EGuildChatType_value = map[string]int32{
+	"k_EGuildChatType_Unspecified":    0,
+	"k_EGuildChatType_SteamChatGroup": 1,
+	"k_EGuildChatType_GC":             2,
+}
+
+func (x EGuildChatType) Enum() *EGuildChatType {
+	p := new(EGuildChatType)
+	*p = x
+	return p
+}
+
+func (x EGuildChatType) String() string {
+	return proto.EnumName(EGuildChatType_name, int32(x))
+}
+
+func (x *EGuildChatType) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(EGuildChatType_value, data, "EGuildChatType")
+	if err != nil {
+		return err
+	}
+	*x = EGuildChatType(value)
+	return nil
+}
+
+func (EGuildChatType) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{1}
+}
+
+type CMsgClientToGCCreateGuildResponse_EResponse int32
+
+const (
+	CMsgClientToGCCreateGuildResponse_k_eInternalError      CMsgClientToGCCreateGuildResponse_EResponse = 0
+	CMsgClientToGCCreateGuildResponse_k_eSuccess            CMsgClientToGCCreateGuildResponse_EResponse = 1
+	CMsgClientToGCCreateGuildResponse_k_eTooBusy            CMsgClientToGCCreateGuildResponse_EResponse = 2
+	CMsgClientToGCCreateGuildResponse_k_eDisabled           CMsgClientToGCCreateGuildResponse_EResponse = 3
+	CMsgClientToGCCreateGuildResponse_k_eTimeout            CMsgClientToGCCreateGuildResponse_EResponse = 4
+	CMsgClientToGCCreateGuildResponse_k_eInvalidName        CMsgClientToGCCreateGuildResponse_EResponse = 5
+	CMsgClientToGCCreateGuildResponse_k_eNameAlreadyUsed    CMsgClientToGCCreateGuildResponse_EResponse = 6
+	CMsgClientToGCCreateGuildResponse_k_eInvalidTag         CMsgClientToGCCreateGuildResponse_EResponse = 7
+	CMsgClientToGCCreateGuildResponse_k_eTagAlreadyUsed     CMsgClientToGCCreateGuildResponse_EResponse = 8
+	CMsgClientToGCCreateGuildResponse_k_eInvalidDescription CMsgClientToGCCreateGuildResponse_EResponse = 9
+	CMsgClientToGCCreateGuildResponse_k_eInvalidRegion      CMsgClientToGCCreateGuildResponse_EResponse = 10
+	CMsgClientToGCCreateGuildResponse_k_eInvalidLogo        CMsgClientToGCCreateGuildResponse_EResponse = 11
+	CMsgClientToGCCreateGuildResponse_k_eDoesNotOwnEvent    CMsgClientToGCCreateGuildResponse_EResponse = 12
+	CMsgClientToGCCreateGuildResponse_k_eGuildLimit         CMsgClientToGCCreateGuildResponse_EResponse = 13
+	CMsgClientToGCCreateGuildResponse_k_eInvalidMotD        CMsgClientToGCCreateGuildResponse_EResponse = 14
+	CMsgClientToGCCreateGuildResponse_k_eBlocked            CMsgClientToGCCreateGuildResponse_EResponse = 15
+)
+
+var CMsgClientToGCCreateGuildResponse_EResponse_name = map[int32]string{
+	0:  "k_eInternalError",
+	1:  "k_eSuccess",
+	2:  "k_eTooBusy",
+	3:  "k_eDisabled",
+	4:  "k_eTimeout",
+	5:  "k_eInvalidName",
+	6:  "k_eNameAlreadyUsed",
+	7:  "k_eInvalidTag",
+	8:  "k_eTagAlreadyUsed",
+	9:  "k_eInvalidDescription",
+	10: "k_eInvalidRegion",
+	11: "k_eInvalidLogo",
+	12: "k_eDoesNotOwnEvent",
+	13: "k_eGuildLimit",
+	14: "k_eInvalidMotD",
+	15: "k_eBlocked",
+}
+
+var CMsgClientToGCCreateGuildResponse_EResponse_value = map[string]int32{
+	"k_eInternalError":      0,
+	"k_eSuccess":            1,
+	"k_eTooBusy":            2,
+	"k_eDisabled":           3,
+	"k_eTimeout":            4,
+	"k_eInvalidName":        5,
+	"k_eNameAlreadyUsed":    6,
+	"k_eInvalidTag":         7,
+	"k_eTagAlreadyUsed":     8,
+	"k_eInvalidDescription": 9,
+	"k_eInvalidRegion":      10,
+	"k_eInvalidLogo":        11,
+	"k_eDoesNotOwnEvent":    12,
+	"k_eGuildLimit":         13,
+	"k_eInvalidMotD":        14,
+	"k_eBlocked":            15,
+}
+
+func (x CMsgClientToGCCreateGuildResponse_EResponse) Enum() *CMsgClientToGCCreateGuildResponse_EResponse {
+	p := new(CMsgClientToGCCreateGuildResponse_EResponse)
+	*p = x
+	return p
+}
+
+func (x CMsgClientToGCCreateGuildResponse_EResponse) String() string {
+	return proto.EnumName(CMsgClientToGCCreateGuildResponse_EResponse_name, int32(x))
+}
+
+func (x *CMsgClientToGCCreateGuildResponse_EResponse) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(CMsgClientToGCCreateGuildResponse_EResponse_value, data, "CMsgClientToGCCreateGuildResponse_EResponse")
+	if err != nil {
+		return err
+	}
+	*x = CMsgClientToGCCreateGuildResponse_EResponse(value)
+	return nil
+}
+
+func (CMsgClientToGCCreateGuildResponse_EResponse) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{12, 0}
+}
+
+type CMsgClientToGCSetGuildInfoResponse_EResponse int32
+
+const (
+	CMsgClientToGCSetGuildInfoResponse_k_eInternalError           CMsgClientToGCSetGuildInfoResponse_EResponse = 0
+	CMsgClientToGCSetGuildInfoResponse_k_eSuccess                 CMsgClientToGCSetGuildInfoResponse_EResponse = 1
+	CMsgClientToGCSetGuildInfoResponse_k_eTooBusy                 CMsgClientToGCSetGuildInfoResponse_EResponse = 2
+	CMsgClientToGCSetGuildInfoResponse_k_eDisabled                CMsgClientToGCSetGuildInfoResponse_EResponse = 3
+	CMsgClientToGCSetGuildInfoResponse_k_eTimeout                 CMsgClientToGCSetGuildInfoResponse_EResponse = 4
+	CMsgClientToGCSetGuildInfoResponse_k_eInvalidGuild            CMsgClientToGCSetGuildInfoResponse_EResponse = 5
+	CMsgClientToGCSetGuildInfoResponse_k_eNotMember               CMsgClientToGCSetGuildInfoResponse_EResponse = 6
+	CMsgClientToGCSetGuildInfoResponse_k_eNoPermission            CMsgClientToGCSetGuildInfoResponse_EResponse = 7
+	CMsgClientToGCSetGuildInfoResponse_k_eMotDTooLong             CMsgClientToGCSetGuildInfoResponse_EResponse = 8
+	CMsgClientToGCSetGuildInfoResponse_k_eNameChangeNoPermissions CMsgClientToGCSetGuildInfoResponse_EResponse = 9
+	CMsgClientToGCSetGuildInfoResponse_k_eTagChangeNoPermissions  CMsgClientToGCSetGuildInfoResponse_EResponse = 10
+	CMsgClientToGCSetGuildInfoResponse_k_eNameInvalid             CMsgClientToGCSetGuildInfoResponse_EResponse = 11
+	CMsgClientToGCSetGuildInfoResponse_k_eTagInvalid              CMsgClientToGCSetGuildInfoResponse_EResponse = 12
+	CMsgClientToGCSetGuildInfoResponse_k_eDescriptionInvalid      CMsgClientToGCSetGuildInfoResponse_EResponse = 13
+	CMsgClientToGCSetGuildInfoResponse_k_eBlocked                 CMsgClientToGCSetGuildInfoResponse_EResponse = 14
+)
+
+var CMsgClientToGCSetGuildInfoResponse_EResponse_name = map[int32]string{
+	0:  "k_eInternalError",
+	1:  "k_eSuccess",
+	2:  "k_eTooBusy",
+	3:  "k_eDisabled",
+	4:  "k_eTimeout",
+	5:  "k_eInvalidGuild",
+	6:  "k_eNotMember",
+	7:  "k_eNoPermission",
+	8:  "k_eMotDTooLong",
+	9:  "k_eNameChangeNoPermissions",
+	10: "k_eTagChangeNoPermissions",
+	11: "k_eNameInvalid",
+	12: "k_eTagInvalid",
+	13: "k_eDescriptionInvalid",
+	14: "k_eBlocked",
+}
+
+var CMsgClientToGCSetGuildInfoResponse_EResponse_value = map[string]int32{
+	"k_eInternalError":           0,
+	"k_eSuccess":                 1,
+	"k_eTooBusy":                 2,
+	"k_eDisabled":                3,
+	"k_eTimeout":                 4,
+	"k_eInvalidGuild":            5,
+	"k_eNotMember":               6,
+	"k_eNoPermission":            7,
+	"k_eMotDTooLong":             8,
+	"k_eNameChangeNoPermissions": 9,
+	"k_eTagChangeNoPermissions":  10,
+	"k_eNameInvalid":             11,
+	"k_eTagInvalid":              12,
+	"k_eDescriptionInvalid":      13,
+	"k_eBlocked":                 14,
+}
+
+func (x CMsgClientToGCSetGuildInfoResponse_EResponse) Enum() *CMsgClientToGCSetGuildInfoResponse_EResponse {
+	p := new(CMsgClientToGCSetGuildInfoResponse_EResponse)
+	*p = x
+	return p
+}
+
+func (x CMsgClientToGCSetGuildInfoResponse_EResponse) String() string {
+	return proto.EnumName(CMsgClientToGCSetGuildInfoResponse_EResponse_name, int32(x))
+}
+
+func (x *CMsgClientToGCSetGuildInfoResponse_EResponse) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(CMsgClientToGCSetGuildInfoResponse_EResponse_value, data, "CMsgClientToGCSetGuildInfoResponse_EResponse")
+	if err != nil {
+		return err
+	}
+	*x = CMsgClientToGCSetGuildInfoResponse_EResponse(value)
+	return nil
+}
+
+func (CMsgClientToGCSetGuildInfoResponse_EResponse) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{14, 0}
+}
+
+type CMsgClientToGCRequestGuildDataResponse_EResponse int32
+
+const (
+	CMsgClientToGCRequestGuildDataResponse_k_eInternalError CMsgClientToGCRequestGuildDataResponse_EResponse = 0
+	CMsgClientToGCRequestGuildDataResponse_k_eSuccess       CMsgClientToGCRequestGuildDataResponse_EResponse = 1
+	CMsgClientToGCRequestGuildDataResponse_k_eTooBusy       CMsgClientToGCRequestGuildDataResponse_EResponse = 2
+	CMsgClientToGCRequestGuildDataResponse_k_eDisabled      CMsgClientToGCRequestGuildDataResponse_EResponse = 3
+	CMsgClientToGCRequestGuildDataResponse_k_eTimeout       CMsgClientToGCRequestGuildDataResponse_EResponse = 4
+	CMsgClientToGCRequestGuildDataResponse_k_eInvalidGuild  CMsgClientToGCRequestGuildDataResponse_EResponse = 5
+	CMsgClientToGCRequestGuildDataResponse_k_eNotMember     CMsgClientToGCRequestGuildDataResponse_EResponse = 6
+)
+
+var CMsgClientToGCRequestGuildDataResponse_EResponse_name = map[int32]string{
+	0: "k_eInternalError",
+	1: "k_eSuccess",
+	2: "k_eTooBusy",
+	3: "k_eDisabled",
+	4: "k_eTimeout",
+	5: "k_eInvalidGuild",
+	6: "k_eNotMember",
+}
+
+var CMsgClientToGCRequestGuildDataResponse_EResponse_value = map[string]int32{
+	"k_eInternalError": 0,
+	"k_eSuccess":       1,
+	"k_eTooBusy":       2,
+	"k_eDisabled":      3,
+	"k_eTimeout":       4,
+	"k_eInvalidGuild":  5,
+	"k_eNotMember":     6,
+}
+
+func (x CMsgClientToGCRequestGuildDataResponse_EResponse) Enum() *CMsgClientToGCRequestGuildDataResponse_EResponse {
+	p := new(CMsgClientToGCRequestGuildDataResponse_EResponse)
+	*p = x
+	return p
+}
+
+func (x CMsgClientToGCRequestGuildDataResponse_EResponse) String() string {
+	return proto.EnumName(CMsgClientToGCRequestGuildDataResponse_EResponse_name, int32(x))
+}
+
+func (x *CMsgClientToGCRequestGuildDataResponse_EResponse) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(CMsgClientToGCRequestGuildDataResponse_EResponse_value, data, "CMsgClientToGCRequestGuildDataResponse_EResponse")
+	if err != nil {
+		return err
+	}
+	*x = CMsgClientToGCRequestGuildDataResponse_EResponse(value)
+	return nil
+}
+
+func (CMsgClientToGCRequestGuildDataResponse_EResponse) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{16, 0}
+}
+
+type CMsgClientToGCRequestGuildMembershipResponse_EResponse int32
+
+const (
+	CMsgClientToGCRequestGuildMembershipResponse_k_eInternalError CMsgClientToGCRequestGuildMembershipResponse_EResponse = 0
+	CMsgClientToGCRequestGuildMembershipResponse_k_eSuccess       CMsgClientToGCRequestGuildMembershipResponse_EResponse = 1
+	CMsgClientToGCRequestGuildMembershipResponse_k_eTooBusy       CMsgClientToGCRequestGuildMembershipResponse_EResponse = 2
+	CMsgClientToGCRequestGuildMembershipResponse_k_eDisabled      CMsgClientToGCRequestGuildMembershipResponse_EResponse = 3
+	CMsgClientToGCRequestGuildMembershipResponse_k_eTimeout       CMsgClientToGCRequestGuildMembershipResponse_EResponse = 4
+)
+
+var CMsgClientToGCRequestGuildMembershipResponse_EResponse_name = map[int32]string{
+	0: "k_eInternalError",
+	1: "k_eSuccess",
+	2: "k_eTooBusy",
+	3: "k_eDisabled",
+	4: "k_eTimeout",
+}
+
+var CMsgClientToGCRequestGuildMembershipResponse_EResponse_value = map[string]int32{
+	"k_eInternalError": 0,
+	"k_eSuccess":       1,
+	"k_eTooBusy":       2,
+	"k_eDisabled":      3,
+	"k_eTimeout":       4,
+}
+
+func (x CMsgClientToGCRequestGuildMembershipResponse_EResponse) Enum() *CMsgClientToGCRequestGuildMembershipResponse_EResponse {
+	p := new(CMsgClientToGCRequestGuildMembershipResponse_EResponse)
+	*p = x
+	return p
+}
+
+func (x CMsgClientToGCRequestGuildMembershipResponse_EResponse) String() string {
+	return proto.EnumName(CMsgClientToGCRequestGuildMembershipResponse_EResponse_name, int32(x))
+}
+
+func (x *CMsgClientToGCRequestGuildMembershipResponse_EResponse) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(CMsgClientToGCRequestGuildMembershipResponse_EResponse_value, data, "CMsgClientToGCRequestGuildMembershipResponse_EResponse")
+	if err != nil {
+		return err
+	}
+	*x = CMsgClientToGCRequestGuildMembershipResponse_EResponse(value)
+	return nil
+}
+
+func (CMsgClientToGCRequestGuildMembershipResponse_EResponse) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{20, 0}
+}
+
+type CMsgClientToGCRequestGuildSummaryResponse_EResponse int32
+
+const (
+	CMsgClientToGCRequestGuildSummaryResponse_k_eInternalError CMsgClientToGCRequestGuildSummaryResponse_EResponse = 0
+	CMsgClientToGCRequestGuildSummaryResponse_k_eSuccess       CMsgClientToGCRequestGuildSummaryResponse_EResponse = 1
+	CMsgClientToGCRequestGuildSummaryResponse_k_eTooBusy       CMsgClientToGCRequestGuildSummaryResponse_EResponse = 2
+	CMsgClientToGCRequestGuildSummaryResponse_k_eDisabled      CMsgClientToGCRequestGuildSummaryResponse_EResponse = 3
+	CMsgClientToGCRequestGuildSummaryResponse_k_eTimeout       CMsgClientToGCRequestGuildSummaryResponse_EResponse = 4
+	CMsgClientToGCRequestGuildSummaryResponse_k_eInvalidGuild  CMsgClientToGCRequestGuildSummaryResponse_EResponse = 5
+)
+
+var CMsgClientToGCRequestGuildSummaryResponse_EResponse_name = map[int32]string{
+	0: "k_eInternalError",
+	1: "k_eSuccess",
+	2: "k_eTooBusy",
+	3: "k_eDisabled",
+	4: "k_eTimeout",
+	5: "k_eInvalidGuild",
+}
+
+var CMsgClientToGCRequestGuildSummaryResponse_EResponse_value = map[string]int32{
+	"k_eInternalError": 0,
+	"k_eSuccess":       1,
+	"k_eTooBusy":       2,
+	"k_eDisabled":      3,
+	"k_eTimeout":       4,
+	"k_eInvalidGuild":  5,
+}
+
+func (x CMsgClientToGCRequestGuildSummaryResponse_EResponse) Enum() *CMsgClientToGCRequestGuildSummaryResponse_EResponse {
+	p := new(CMsgClientToGCRequestGuildSummaryResponse_EResponse)
+	*p = x
+	return p
+}
+
+func (x CMsgClientToGCRequestGuildSummaryResponse_EResponse) String() string {
+	return proto.EnumName(CMsgClientToGCRequestGuildSummaryResponse_EResponse_name, int32(x))
+}
+
+func (x *CMsgClientToGCRequestGuildSummaryResponse_EResponse) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(CMsgClientToGCRequestGuildSummaryResponse_EResponse_value, data, "CMsgClientToGCRequestGuildSummaryResponse_EResponse")
+	if err != nil {
+		return err
+	}
+	*x = CMsgClientToGCRequestGuildSummaryResponse_EResponse(value)
+	return nil
+}
+
+func (CMsgClientToGCRequestGuildSummaryResponse_EResponse) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{23, 0}
+}
+
+type CMsgClientToGCJoinGuildResponse_EResponse int32
+
+const (
+	CMsgClientToGCJoinGuildResponse_k_eInternalError       CMsgClientToGCJoinGuildResponse_EResponse = 0
+	CMsgClientToGCJoinGuildResponse_k_eSuccess             CMsgClientToGCJoinGuildResponse_EResponse = 1
+	CMsgClientToGCJoinGuildResponse_k_eTooBusy             CMsgClientToGCJoinGuildResponse_EResponse = 2
+	CMsgClientToGCJoinGuildResponse_k_eDisabled            CMsgClientToGCJoinGuildResponse_EResponse = 3
+	CMsgClientToGCJoinGuildResponse_k_eTimeout             CMsgClientToGCJoinGuildResponse_EResponse = 4
+	CMsgClientToGCJoinGuildResponse_k_eInvalidGuild        CMsgClientToGCJoinGuildResponse_EResponse = 5
+	CMsgClientToGCJoinGuildResponse_k_eGuildFull           CMsgClientToGCJoinGuildResponse_EResponse = 6
+	CMsgClientToGCJoinGuildResponse_k_eAlreadyMember       CMsgClientToGCJoinGuildResponse_EResponse = 7
+	CMsgClientToGCJoinGuildResponse_k_eGuildLimit          CMsgClientToGCJoinGuildResponse_EResponse = 8
+	CMsgClientToGCJoinGuildResponse_k_eGuildRequiresInvite CMsgClientToGCJoinGuildResponse_EResponse = 9
+	CMsgClientToGCJoinGuildResponse_k_eGuildRankTooLow     CMsgClientToGCJoinGuildResponse_EResponse = 10
+)
+
+var CMsgClientToGCJoinGuildResponse_EResponse_name = map[int32]string{
+	0:  "k_eInternalError",
+	1:  "k_eSuccess",
+	2:  "k_eTooBusy",
+	3:  "k_eDisabled",
+	4:  "k_eTimeout",
+	5:  "k_eInvalidGuild",
+	6:  "k_eGuildFull",
+	7:  "k_eAlreadyMember",
+	8:  "k_eGuildLimit",
+	9:  "k_eGuildRequiresInvite",
+	10: "k_eGuildRankTooLow",
+}
+
+var CMsgClientToGCJoinGuildResponse_EResponse_value = map[string]int32{
+	"k_eInternalError":       0,
+	"k_eSuccess":             1,
+	"k_eTooBusy":             2,
+	"k_eDisabled":            3,
+	"k_eTimeout":             4,
+	"k_eInvalidGuild":        5,
+	"k_eGuildFull":           6,
+	"k_eAlreadyMember":       7,
+	"k_eGuildLimit":          8,
+	"k_eGuildRequiresInvite": 9,
+	"k_eGuildRankTooLow":     10,
+}
+
+func (x CMsgClientToGCJoinGuildResponse_EResponse) Enum() *CMsgClientToGCJoinGuildResponse_EResponse {
+	p := new(CMsgClientToGCJoinGuildResponse_EResponse)
+	*p = x
+	return p
+}
+
+func (x CMsgClientToGCJoinGuildResponse_EResponse) String() string {
+	return proto.EnumName(CMsgClientToGCJoinGuildResponse_EResponse_name, int32(x))
+}
+
+func (x *CMsgClientToGCJoinGuildResponse_EResponse) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(CMsgClientToGCJoinGuildResponse_EResponse_value, data, "CMsgClientToGCJoinGuildResponse_EResponse")
+	if err != nil {
+		return err
+	}
+	*x = CMsgClientToGCJoinGuildResponse_EResponse(value)
+	return nil
+}
+
+func (CMsgClientToGCJoinGuildResponse_EResponse) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{25, 0}
+}
+
+type CMsgClientToGCLeaveGuildResponse_EResponse int32
+
+const (
+	CMsgClientToGCLeaveGuildResponse_k_eInternalError CMsgClientToGCLeaveGuildResponse_EResponse = 0
+	CMsgClientToGCLeaveGuildResponse_k_eSuccess       CMsgClientToGCLeaveGuildResponse_EResponse = 1
+	CMsgClientToGCLeaveGuildResponse_k_eTooBusy       CMsgClientToGCLeaveGuildResponse_EResponse = 2
+	CMsgClientToGCLeaveGuildResponse_k_eDisabled      CMsgClientToGCLeaveGuildResponse_EResponse = 3
+	CMsgClientToGCLeaveGuildResponse_k_eTimeout       CMsgClientToGCLeaveGuildResponse_EResponse = 4
+	CMsgClientToGCLeaveGuildResponse_k_eInvalidGuild  CMsgClientToGCLeaveGuildResponse_EResponse = 5
+	CMsgClientToGCLeaveGuildResponse_k_eNotMember     CMsgClientToGCLeaveGuildResponse_EResponse = 6
+	CMsgClientToGCLeaveGuildResponse_k_eLastAdmin     CMsgClientToGCLeaveGuildResponse_EResponse = 7
+)
+
+var CMsgClientToGCLeaveGuildResponse_EResponse_name = map[int32]string{
+	0: "k_eInternalError",
+	1: "k_eSuccess",
+	2: "k_eTooBusy",
+	3: "k_eDisabled",
+	4: "k_eTimeout",
+	5: "k_eInvalidGuild",
+	6: "k_eNotMember",
+	7: "k_eLastAdmin",
+}
+
+var CMsgClientToGCLeaveGuildResponse_EResponse_value = map[string]int32{
+	"k_eInternalError": 0,
+	"k_eSuccess":       1,
+	"k_eTooBusy":       2,
+	"k_eDisabled":      3,
+	"k_eTimeout":       4,
+	"k_eInvalidGuild":  5,
+	"k_eNotMember":     6,
+	"k_eLastAdmin":     7,
+}
+
+func (x CMsgClientToGCLeaveGuildResponse_EResponse) Enum() *CMsgClientToGCLeaveGuildResponse_EResponse {
+	p := new(CMsgClientToGCLeaveGuildResponse_EResponse)
+	*p = x
+	return p
+}
+
+func (x CMsgClientToGCLeaveGuildResponse_EResponse) String() string {
+	return proto.EnumName(CMsgClientToGCLeaveGuildResponse_EResponse_name, int32(x))
+}
+
+func (x *CMsgClientToGCLeaveGuildResponse_EResponse) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(CMsgClientToGCLeaveGuildResponse_EResponse_value, data, "CMsgClientToGCLeaveGuildResponse_EResponse")
+	if err != nil {
+		return err
+	}
+	*x = CMsgClientToGCLeaveGuildResponse_EResponse(value)
+	return nil
+}
+
+func (CMsgClientToGCLeaveGuildResponse_EResponse) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{27, 0}
+}
+
+type CMsgClientToGCKickGuildMemberResponse_EResponse int32
+
+const (
+	CMsgClientToGCKickGuildMemberResponse_k_eInternalError      CMsgClientToGCKickGuildMemberResponse_EResponse = 0
+	CMsgClientToGCKickGuildMemberResponse_k_eSuccess            CMsgClientToGCKickGuildMemberResponse_EResponse = 1
+	CMsgClientToGCKickGuildMemberResponse_k_eTooBusy            CMsgClientToGCKickGuildMemberResponse_EResponse = 2
+	CMsgClientToGCKickGuildMemberResponse_k_eDisabled           CMsgClientToGCKickGuildMemberResponse_EResponse = 3
+	CMsgClientToGCKickGuildMemberResponse_k_eTimeout            CMsgClientToGCKickGuildMemberResponse_EResponse = 4
+	CMsgClientToGCKickGuildMemberResponse_k_eInvalidGuild       CMsgClientToGCKickGuildMemberResponse_EResponse = 5
+	CMsgClientToGCKickGuildMemberResponse_k_eRequesterNotMember CMsgClientToGCKickGuildMemberResponse_EResponse = 6
+	CMsgClientToGCKickGuildMemberResponse_k_eTargetNotMember    CMsgClientToGCKickGuildMemberResponse_EResponse = 7
+	CMsgClientToGCKickGuildMemberResponse_k_eNoPermission       CMsgClientToGCKickGuildMemberResponse_EResponse = 8
+	CMsgClientToGCKickGuildMemberResponse_k_eCantKickSelf       CMsgClientToGCKickGuildMemberResponse_EResponse = 9
+)
+
+var CMsgClientToGCKickGuildMemberResponse_EResponse_name = map[int32]string{
+	0: "k_eInternalError",
+	1: "k_eSuccess",
+	2: "k_eTooBusy",
+	3: "k_eDisabled",
+	4: "k_eTimeout",
+	5: "k_eInvalidGuild",
+	6: "k_eRequesterNotMember",
+	7: "k_eTargetNotMember",
+	8: "k_eNoPermission",
+	9: "k_eCantKickSelf",
+}
+
+var CMsgClientToGCKickGuildMemberResponse_EResponse_value = map[string]int32{
+	"k_eInternalError":      0,
+	"k_eSuccess":            1,
+	"k_eTooBusy":            2,
+	"k_eDisabled":           3,
+	"k_eTimeout":            4,
+	"k_eInvalidGuild":       5,
+	"k_eRequesterNotMember": 6,
+	"k_eTargetNotMember":    7,
+	"k_eNoPermission":       8,
+	"k_eCantKickSelf":       9,
+}
+
+func (x CMsgClientToGCKickGuildMemberResponse_EResponse) Enum() *CMsgClientToGCKickGuildMemberResponse_EResponse {
+	p := new(CMsgClientToGCKickGuildMemberResponse_EResponse)
+	*p = x
+	return p
+}
+
+func (x CMsgClientToGCKickGuildMemberResponse_EResponse) String() string {
+	return proto.EnumName(CMsgClientToGCKickGuildMemberResponse_EResponse_name, int32(x))
+}
+
+func (x *CMsgClientToGCKickGuildMemberResponse_EResponse) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(CMsgClientToGCKickGuildMemberResponse_EResponse_value, data, "CMsgClientToGCKickGuildMemberResponse_EResponse")
+	if err != nil {
+		return err
+	}
+	*x = CMsgClientToGCKickGuildMemberResponse_EResponse(value)
+	return nil
+}
+
+func (CMsgClientToGCKickGuildMemberResponse_EResponse) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{29, 0}
+}
+
+type CMsgClientToGCSetGuildMemberRoleResponse_EResponse int32
+
+const (
+	CMsgClientToGCSetGuildMemberRoleResponse_k_eInternalError      CMsgClientToGCSetGuildMemberRoleResponse_EResponse = 0
+	CMsgClientToGCSetGuildMemberRoleResponse_k_eSuccess            CMsgClientToGCSetGuildMemberRoleResponse_EResponse = 1
+	CMsgClientToGCSetGuildMemberRoleResponse_k_eTooBusy            CMsgClientToGCSetGuildMemberRoleResponse_EResponse = 2
+	CMsgClientToGCSetGuildMemberRoleResponse_k_eDisabled           CMsgClientToGCSetGuildMemberRoleResponse_EResponse = 3
+	CMsgClientToGCSetGuildMemberRoleResponse_k_eTimeout            CMsgClientToGCSetGuildMemberRoleResponse_EResponse = 4
+	CMsgClientToGCSetGuildMemberRoleResponse_k_eInvalidGuild       CMsgClientToGCSetGuildMemberRoleResponse_EResponse = 5
+	CMsgClientToGCSetGuildMemberRoleResponse_k_eRequesterNotMember CMsgClientToGCSetGuildMemberRoleResponse_EResponse = 6
+	CMsgClientToGCSetGuildMemberRoleResponse_k_eTargetNotMember    CMsgClientToGCSetGuildMemberRoleResponse_EResponse = 7
+	CMsgClientToGCSetGuildMemberRoleResponse_k_eNoPermission       CMsgClientToGCSetGuildMemberRoleResponse_EResponse = 8
+	CMsgClientToGCSetGuildMemberRoleResponse_k_eInvalidRole        CMsgClientToGCSetGuildMemberRoleResponse_EResponse = 9
+	CMsgClientToGCSetGuildMemberRoleResponse_k_eAdminViolation     CMsgClientToGCSetGuildMemberRoleResponse_EResponse = 10
+)
+
+var CMsgClientToGCSetGuildMemberRoleResponse_EResponse_name = map[int32]string{
+	0:  "k_eInternalError",
+	1:  "k_eSuccess",
+	2:  "k_eTooBusy",
+	3:  "k_eDisabled",
+	4:  "k_eTimeout",
+	5:  "k_eInvalidGuild",
+	6:  "k_eRequesterNotMember",
+	7:  "k_eTargetNotMember",
+	8:  "k_eNoPermission",
+	9:  "k_eInvalidRole",
+	10: "k_eAdminViolation",
+}
+
+var CMsgClientToGCSetGuildMemberRoleResponse_EResponse_value = map[string]int32{
+	"k_eInternalError":      0,
+	"k_eSuccess":            1,
+	"k_eTooBusy":            2,
+	"k_eDisabled":           3,
+	"k_eTimeout":            4,
+	"k_eInvalidGuild":       5,
+	"k_eRequesterNotMember": 6,
+	"k_eTargetNotMember":    7,
+	"k_eNoPermission":       8,
+	"k_eInvalidRole":        9,
+	"k_eAdminViolation":     10,
+}
+
+func (x CMsgClientToGCSetGuildMemberRoleResponse_EResponse) Enum() *CMsgClientToGCSetGuildMemberRoleResponse_EResponse {
+	p := new(CMsgClientToGCSetGuildMemberRoleResponse_EResponse)
+	*p = x
+	return p
+}
+
+func (x CMsgClientToGCSetGuildMemberRoleResponse_EResponse) String() string {
+	return proto.EnumName(CMsgClientToGCSetGuildMemberRoleResponse_EResponse_name, int32(x))
+}
+
+func (x *CMsgClientToGCSetGuildMemberRoleResponse_EResponse) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(CMsgClientToGCSetGuildMemberRoleResponse_EResponse_value, data, "CMsgClientToGCSetGuildMemberRoleResponse_EResponse")
+	if err != nil {
+		return err
+	}
+	*x = CMsgClientToGCSetGuildMemberRoleResponse_EResponse(value)
+	return nil
+}
+
+func (CMsgClientToGCSetGuildMemberRoleResponse_EResponse) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{31, 0}
+}
+
+type CMsgClientToGCInviteToGuildResponse_EResponse int32
+
+const (
+	CMsgClientToGCInviteToGuildResponse_k_eInternalError       CMsgClientToGCInviteToGuildResponse_EResponse = 0
+	CMsgClientToGCInviteToGuildResponse_k_eSuccess             CMsgClientToGCInviteToGuildResponse_EResponse = 1
+	CMsgClientToGCInviteToGuildResponse_k_eTooBusy             CMsgClientToGCInviteToGuildResponse_EResponse = 2
+	CMsgClientToGCInviteToGuildResponse_k_eDisabled            CMsgClientToGCInviteToGuildResponse_EResponse = 3
+	CMsgClientToGCInviteToGuildResponse_k_eTimeout             CMsgClientToGCInviteToGuildResponse_EResponse = 4
+	CMsgClientToGCInviteToGuildResponse_k_eInvalidGuild        CMsgClientToGCInviteToGuildResponse_EResponse = 5
+	CMsgClientToGCInviteToGuildResponse_k_eGuildFull           CMsgClientToGCInviteToGuildResponse_EResponse = 6
+	CMsgClientToGCInviteToGuildResponse_k_eRequesterNotMember  CMsgClientToGCInviteToGuildResponse_EResponse = 7
+	CMsgClientToGCInviteToGuildResponse_k_eAlreadyAMember      CMsgClientToGCInviteToGuildResponse_EResponse = 8
+	CMsgClientToGCInviteToGuildResponse_k_eAlreadyInvited      CMsgClientToGCInviteToGuildResponse_EResponse = 9
+	CMsgClientToGCInviteToGuildResponse_k_eNoInvitePermissions CMsgClientToGCInviteToGuildResponse_EResponse = 10
+	CMsgClientToGCInviteToGuildResponse_k_eTooManyInvites      CMsgClientToGCInviteToGuildResponse_EResponse = 11
+)
+
+var CMsgClientToGCInviteToGuildResponse_EResponse_name = map[int32]string{
+	0:  "k_eInternalError",
+	1:  "k_eSuccess",
+	2:  "k_eTooBusy",
+	3:  "k_eDisabled",
+	4:  "k_eTimeout",
+	5:  "k_eInvalidGuild",
+	6:  "k_eGuildFull",
+	7:  "k_eRequesterNotMember",
+	8:  "k_eAlreadyAMember",
+	9:  "k_eAlreadyInvited",
+	10: "k_eNoInvitePermissions",
+	11: "k_eTooManyInvites",
+}
+
+var CMsgClientToGCInviteToGuildResponse_EResponse_value = map[string]int32{
+	"k_eInternalError":       0,
+	"k_eSuccess":             1,
+	"k_eTooBusy":             2,
+	"k_eDisabled":            3,
+	"k_eTimeout":             4,
+	"k_eInvalidGuild":        5,
+	"k_eGuildFull":           6,
+	"k_eRequesterNotMember":  7,
+	"k_eAlreadyAMember":      8,
+	"k_eAlreadyInvited":      9,
+	"k_eNoInvitePermissions": 10,
+	"k_eTooManyInvites":      11,
+}
+
+func (x CMsgClientToGCInviteToGuildResponse_EResponse) Enum() *CMsgClientToGCInviteToGuildResponse_EResponse {
+	p := new(CMsgClientToGCInviteToGuildResponse_EResponse)
+	*p = x
+	return p
+}
+
+func (x CMsgClientToGCInviteToGuildResponse_EResponse) String() string {
+	return proto.EnumName(CMsgClientToGCInviteToGuildResponse_EResponse_name, int32(x))
+}
+
+func (x *CMsgClientToGCInviteToGuildResponse_EResponse) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(CMsgClientToGCInviteToGuildResponse_EResponse_value, data, "CMsgClientToGCInviteToGuildResponse_EResponse")
+	if err != nil {
+		return err
+	}
+	*x = CMsgClientToGCInviteToGuildResponse_EResponse(value)
+	return nil
+}
+
+func (CMsgClientToGCInviteToGuildResponse_EResponse) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{33, 0}
+}
+
+type CMsgClientToGCDeclineInviteToGuildResponse_EResponse int32
+
+const (
+	CMsgClientToGCDeclineInviteToGuildResponse_k_eInternalError CMsgClientToGCDeclineInviteToGuildResponse_EResponse = 0
+	CMsgClientToGCDeclineInviteToGuildResponse_k_eSuccess       CMsgClientToGCDeclineInviteToGuildResponse_EResponse = 1
+	CMsgClientToGCDeclineInviteToGuildResponse_k_eTooBusy       CMsgClientToGCDeclineInviteToGuildResponse_EResponse = 2
+	CMsgClientToGCDeclineInviteToGuildResponse_k_eDisabled      CMsgClientToGCDeclineInviteToGuildResponse_EResponse = 3
+	CMsgClientToGCDeclineInviteToGuildResponse_k_eTimeout       CMsgClientToGCDeclineInviteToGuildResponse_EResponse = 4
+	CMsgClientToGCDeclineInviteToGuildResponse_k_eInvalidGuild  CMsgClientToGCDeclineInviteToGuildResponse_EResponse = 5
+	CMsgClientToGCDeclineInviteToGuildResponse_k_eNoInviteFound CMsgClientToGCDeclineInviteToGuildResponse_EResponse = 6
+)
+
+var CMsgClientToGCDeclineInviteToGuildResponse_EResponse_name = map[int32]string{
+	0: "k_eInternalError",
+	1: "k_eSuccess",
+	2: "k_eTooBusy",
+	3: "k_eDisabled",
+	4: "k_eTimeout",
+	5: "k_eInvalidGuild",
+	6: "k_eNoInviteFound",
+}
+
+var CMsgClientToGCDeclineInviteToGuildResponse_EResponse_value = map[string]int32{
+	"k_eInternalError": 0,
+	"k_eSuccess":       1,
+	"k_eTooBusy":       2,
+	"k_eDisabled":      3,
+	"k_eTimeout":       4,
+	"k_eInvalidGuild":  5,
+	"k_eNoInviteFound": 6,
+}
+
+func (x CMsgClientToGCDeclineInviteToGuildResponse_EResponse) Enum() *CMsgClientToGCDeclineInviteToGuildResponse_EResponse {
+	p := new(CMsgClientToGCDeclineInviteToGuildResponse_EResponse)
+	*p = x
+	return p
+}
+
+func (x CMsgClientToGCDeclineInviteToGuildResponse_EResponse) String() string {
+	return proto.EnumName(CMsgClientToGCDeclineInviteToGuildResponse_EResponse_name, int32(x))
+}
+
+func (x *CMsgClientToGCDeclineInviteToGuildResponse_EResponse) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(CMsgClientToGCDeclineInviteToGuildResponse_EResponse_value, data, "CMsgClientToGCDeclineInviteToGuildResponse_EResponse")
+	if err != nil {
+		return err
+	}
+	*x = CMsgClientToGCDeclineInviteToGuildResponse_EResponse(value)
+	return nil
+}
+
+func (CMsgClientToGCDeclineInviteToGuildResponse_EResponse) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{35, 0}
+}
+
+type CMsgClientToGCAcceptInviteToGuildResponse_EResponse int32
+
+const (
+	CMsgClientToGCAcceptInviteToGuildResponse_k_eInternalError  CMsgClientToGCAcceptInviteToGuildResponse_EResponse = 0
+	CMsgClientToGCAcceptInviteToGuildResponse_k_eSuccess        CMsgClientToGCAcceptInviteToGuildResponse_EResponse = 1
+	CMsgClientToGCAcceptInviteToGuildResponse_k_eTooBusy        CMsgClientToGCAcceptInviteToGuildResponse_EResponse = 2
+	CMsgClientToGCAcceptInviteToGuildResponse_k_eDisabled       CMsgClientToGCAcceptInviteToGuildResponse_EResponse = 3
+	CMsgClientToGCAcceptInviteToGuildResponse_k_eTimeout        CMsgClientToGCAcceptInviteToGuildResponse_EResponse = 4
+	CMsgClientToGCAcceptInviteToGuildResponse_k_eInvalidGuild   CMsgClientToGCAcceptInviteToGuildResponse_EResponse = 5
+	CMsgClientToGCAcceptInviteToGuildResponse_k_eNoInviteFound  CMsgClientToGCAcceptInviteToGuildResponse_EResponse = 6
+	CMsgClientToGCAcceptInviteToGuildResponse_k_eGuildFull      CMsgClientToGCAcceptInviteToGuildResponse_EResponse = 7
+	CMsgClientToGCAcceptInviteToGuildResponse_k_eGuildLimit     CMsgClientToGCAcceptInviteToGuildResponse_EResponse = 8
+	CMsgClientToGCAcceptInviteToGuildResponse_k_eInvalidInviter CMsgClientToGCAcceptInviteToGuildResponse_EResponse = 9
+	CMsgClientToGCAcceptInviteToGuildResponse_k_eAlreadyInGuild CMsgClientToGCAcceptInviteToGuildResponse_EResponse = 10
+)
+
+var CMsgClientToGCAcceptInviteToGuildResponse_EResponse_name = map[int32]string{
+	0:  "k_eInternalError",
+	1:  "k_eSuccess",
+	2:  "k_eTooBusy",
+	3:  "k_eDisabled",
+	4:  "k_eTimeout",
+	5:  "k_eInvalidGuild",
+	6:  "k_eNoInviteFound",
+	7:  "k_eGuildFull",
+	8:  "k_eGuildLimit",
+	9:  "k_eInvalidInviter",
+	10: "k_eAlreadyInGuild",
+}
+
+var CMsgClientToGCAcceptInviteToGuildResponse_EResponse_value = map[string]int32{
+	"k_eInternalError":  0,
+	"k_eSuccess":        1,
+	"k_eTooBusy":        2,
+	"k_eDisabled":       3,
+	"k_eTimeout":        4,
+	"k_eInvalidGuild":   5,
+	"k_eNoInviteFound":  6,
+	"k_eGuildFull":      7,
+	"k_eGuildLimit":     8,
+	"k_eInvalidInviter": 9,
+	"k_eAlreadyInGuild": 10,
+}
+
+func (x CMsgClientToGCAcceptInviteToGuildResponse_EResponse) Enum() *CMsgClientToGCAcceptInviteToGuildResponse_EResponse {
+	p := new(CMsgClientToGCAcceptInviteToGuildResponse_EResponse)
+	*p = x
+	return p
+}
+
+func (x CMsgClientToGCAcceptInviteToGuildResponse_EResponse) String() string {
+	return proto.EnumName(CMsgClientToGCAcceptInviteToGuildResponse_EResponse_name, int32(x))
+}
+
+func (x *CMsgClientToGCAcceptInviteToGuildResponse_EResponse) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(CMsgClientToGCAcceptInviteToGuildResponse_EResponse_value, data, "CMsgClientToGCAcceptInviteToGuildResponse_EResponse")
+	if err != nil {
+		return err
+	}
+	*x = CMsgClientToGCAcceptInviteToGuildResponse_EResponse(value)
+	return nil
+}
+
+func (CMsgClientToGCAcceptInviteToGuildResponse_EResponse) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{37, 0}
+}
+
+type CMsgClientToGCCancelInviteToGuildResponse_EResponse int32
+
+const (
+	CMsgClientToGCCancelInviteToGuildResponse_k_eInternalError CMsgClientToGCCancelInviteToGuildResponse_EResponse = 0
+	CMsgClientToGCCancelInviteToGuildResponse_k_eSuccess       CMsgClientToGCCancelInviteToGuildResponse_EResponse = 1
+	CMsgClientToGCCancelInviteToGuildResponse_k_eTooBusy       CMsgClientToGCCancelInviteToGuildResponse_EResponse = 2
+	CMsgClientToGCCancelInviteToGuildResponse_k_eDisabled      CMsgClientToGCCancelInviteToGuildResponse_EResponse = 3
+	CMsgClientToGCCancelInviteToGuildResponse_k_eTimeout       CMsgClientToGCCancelInviteToGuildResponse_EResponse = 4
+	CMsgClientToGCCancelInviteToGuildResponse_k_eInvalidGuild  CMsgClientToGCCancelInviteToGuildResponse_EResponse = 5
+	CMsgClientToGCCancelInviteToGuildResponse_k_eNoInviteFound CMsgClientToGCCancelInviteToGuildResponse_EResponse = 6
+	CMsgClientToGCCancelInviteToGuildResponse_k_eNoPermissions CMsgClientToGCCancelInviteToGuildResponse_EResponse = 7
+)
+
+var CMsgClientToGCCancelInviteToGuildResponse_EResponse_name = map[int32]string{
+	0: "k_eInternalError",
+	1: "k_eSuccess",
+	2: "k_eTooBusy",
+	3: "k_eDisabled",
+	4: "k_eTimeout",
+	5: "k_eInvalidGuild",
+	6: "k_eNoInviteFound",
+	7: "k_eNoPermissions",
+}
+
+var CMsgClientToGCCancelInviteToGuildResponse_EResponse_value = map[string]int32{
+	"k_eInternalError": 0,
+	"k_eSuccess":       1,
+	"k_eTooBusy":       2,
+	"k_eDisabled":      3,
+	"k_eTimeout":       4,
+	"k_eInvalidGuild":  5,
+	"k_eNoInviteFound": 6,
+	"k_eNoPermissions": 7,
+}
+
+func (x CMsgClientToGCCancelInviteToGuildResponse_EResponse) Enum() *CMsgClientToGCCancelInviteToGuildResponse_EResponse {
+	p := new(CMsgClientToGCCancelInviteToGuildResponse_EResponse)
+	*p = x
+	return p
+}
+
+func (x CMsgClientToGCCancelInviteToGuildResponse_EResponse) String() string {
+	return proto.EnumName(CMsgClientToGCCancelInviteToGuildResponse_EResponse_name, int32(x))
+}
+
+func (x *CMsgClientToGCCancelInviteToGuildResponse_EResponse) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(CMsgClientToGCCancelInviteToGuildResponse_EResponse_value, data, "CMsgClientToGCCancelInviteToGuildResponse_EResponse")
+	if err != nil {
+		return err
+	}
+	*x = CMsgClientToGCCancelInviteToGuildResponse_EResponse(value)
+	return nil
+}
+
+func (CMsgClientToGCCancelInviteToGuildResponse_EResponse) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{39, 0}
+}
+
+type CMsgClientToGCAddGuildRoleResponse_EResponse int32
+
+const (
+	CMsgClientToGCAddGuildRoleResponse_k_eInternalError   CMsgClientToGCAddGuildRoleResponse_EResponse = 0
+	CMsgClientToGCAddGuildRoleResponse_k_eSuccess         CMsgClientToGCAddGuildRoleResponse_EResponse = 1
+	CMsgClientToGCAddGuildRoleResponse_k_eTooBusy         CMsgClientToGCAddGuildRoleResponse_EResponse = 2
+	CMsgClientToGCAddGuildRoleResponse_k_eDisabled        CMsgClientToGCAddGuildRoleResponse_EResponse = 3
+	CMsgClientToGCAddGuildRoleResponse_k_eTimeout         CMsgClientToGCAddGuildRoleResponse_EResponse = 4
+	CMsgClientToGCAddGuildRoleResponse_k_eInvalidGuild    CMsgClientToGCAddGuildRoleResponse_EResponse = 5
+	CMsgClientToGCAddGuildRoleResponse_k_eNameAlreadyUsed CMsgClientToGCAddGuildRoleResponse_EResponse = 6
+	CMsgClientToGCAddGuildRoleResponse_k_eNoPermissions   CMsgClientToGCAddGuildRoleResponse_EResponse = 7
+	CMsgClientToGCAddGuildRoleResponse_k_eInvalidFlags    CMsgClientToGCAddGuildRoleResponse_EResponse = 8
+	CMsgClientToGCAddGuildRoleResponse_k_eInvalidName     CMsgClientToGCAddGuildRoleResponse_EResponse = 9
+	CMsgClientToGCAddGuildRoleResponse_k_eAdminViolation  CMsgClientToGCAddGuildRoleResponse_EResponse = 10
+	CMsgClientToGCAddGuildRoleResponse_k_eTooManyRoles    CMsgClientToGCAddGuildRoleResponse_EResponse = 11
+	CMsgClientToGCAddGuildRoleResponse_k_eBlocked         CMsgClientToGCAddGuildRoleResponse_EResponse = 12
+)
+
+var CMsgClientToGCAddGuildRoleResponse_EResponse_name = map[int32]string{
+	0:  "k_eInternalError",
+	1:  "k_eSuccess",
+	2:  "k_eTooBusy",
+	3:  "k_eDisabled",
+	4:  "k_eTimeout",
+	5:  "k_eInvalidGuild",
+	6:  "k_eNameAlreadyUsed",
+	7:  "k_eNoPermissions",
+	8:  "k_eInvalidFlags",
+	9:  "k_eInvalidName",
+	10: "k_eAdminViolation",
+	11: "k_eTooManyRoles",
+	12: "k_eBlocked",
+}
+
+var CMsgClientToGCAddGuildRoleResponse_EResponse_value = map[string]int32{
+	"k_eInternalError":   0,
+	"k_eSuccess":         1,
+	"k_eTooBusy":         2,
+	"k_eDisabled":        3,
+	"k_eTimeout":         4,
+	"k_eInvalidGuild":    5,
+	"k_eNameAlreadyUsed": 6,
+	"k_eNoPermissions":   7,
+	"k_eInvalidFlags":    8,
+	"k_eInvalidName":     9,
+	"k_eAdminViolation":  10,
+	"k_eTooManyRoles":    11,
+	"k_eBlocked":         12,
+}
+
+func (x CMsgClientToGCAddGuildRoleResponse_EResponse) Enum() *CMsgClientToGCAddGuildRoleResponse_EResponse {
+	p := new(CMsgClientToGCAddGuildRoleResponse_EResponse)
+	*p = x
+	return p
+}
+
+func (x CMsgClientToGCAddGuildRoleResponse_EResponse) String() string {
+	return proto.EnumName(CMsgClientToGCAddGuildRoleResponse_EResponse_name, int32(x))
+}
+
+func (x *CMsgClientToGCAddGuildRoleResponse_EResponse) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(CMsgClientToGCAddGuildRoleResponse_EResponse_value, data, "CMsgClientToGCAddGuildRoleResponse_EResponse")
+	if err != nil {
+		return err
+	}
+	*x = CMsgClientToGCAddGuildRoleResponse_EResponse(value)
+	return nil
+}
+
+func (CMsgClientToGCAddGuildRoleResponse_EResponse) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{41, 0}
+}
+
+type CMsgClientToGCModifyGuildRoleResponse_EResponse int32
+
+const (
+	CMsgClientToGCModifyGuildRoleResponse_k_eInternalError   CMsgClientToGCModifyGuildRoleResponse_EResponse = 0
+	CMsgClientToGCModifyGuildRoleResponse_k_eSuccess         CMsgClientToGCModifyGuildRoleResponse_EResponse = 1
+	CMsgClientToGCModifyGuildRoleResponse_k_eTooBusy         CMsgClientToGCModifyGuildRoleResponse_EResponse = 2
+	CMsgClientToGCModifyGuildRoleResponse_k_eDisabled        CMsgClientToGCModifyGuildRoleResponse_EResponse = 3
+	CMsgClientToGCModifyGuildRoleResponse_k_eTimeout         CMsgClientToGCModifyGuildRoleResponse_EResponse = 4
+	CMsgClientToGCModifyGuildRoleResponse_k_eInvalidGuild    CMsgClientToGCModifyGuildRoleResponse_EResponse = 5
+	CMsgClientToGCModifyGuildRoleResponse_k_eInvalidRole     CMsgClientToGCModifyGuildRoleResponse_EResponse = 6
+	CMsgClientToGCModifyGuildRoleResponse_k_eNameAlreadyUsed CMsgClientToGCModifyGuildRoleResponse_EResponse = 7
+	CMsgClientToGCModifyGuildRoleResponse_k_eInvalidFlags    CMsgClientToGCModifyGuildRoleResponse_EResponse = 8
+	CMsgClientToGCModifyGuildRoleResponse_k_eInvalidName     CMsgClientToGCModifyGuildRoleResponse_EResponse = 9
+	CMsgClientToGCModifyGuildRoleResponse_k_eNoPermissions   CMsgClientToGCModifyGuildRoleResponse_EResponse = 10
+	CMsgClientToGCModifyGuildRoleResponse_k_eAdminViolation  CMsgClientToGCModifyGuildRoleResponse_EResponse = 11
+	CMsgClientToGCModifyGuildRoleResponse_k_eBlocked         CMsgClientToGCModifyGuildRoleResponse_EResponse = 12
+)
+
+var CMsgClientToGCModifyGuildRoleResponse_EResponse_name = map[int32]string{
+	0:  "k_eInternalError",
+	1:  "k_eSuccess",
+	2:  "k_eTooBusy",
+	3:  "k_eDisabled",
+	4:  "k_eTimeout",
+	5:  "k_eInvalidGuild",
+	6:  "k_eInvalidRole",
+	7:  "k_eNameAlreadyUsed",
+	8:  "k_eInvalidFlags",
+	9:  "k_eInvalidName",
+	10: "k_eNoPermissions",
+	11: "k_eAdminViolation",
+	12: "k_eBlocked",
+}
+
+var CMsgClientToGCModifyGuildRoleResponse_EResponse_value = map[string]int32{
+	"k_eInternalError":   0,
+	"k_eSuccess":         1,
+	"k_eTooBusy":         2,
+	"k_eDisabled":        3,
+	"k_eTimeout":         4,
+	"k_eInvalidGuild":    5,
+	"k_eInvalidRole":     6,
+	"k_eNameAlreadyUsed": 7,
+	"k_eInvalidFlags":    8,
+	"k_eInvalidName":     9,
+	"k_eNoPermissions":   10,
+	"k_eAdminViolation":  11,
+	"k_eBlocked":         12,
+}
+
+func (x CMsgClientToGCModifyGuildRoleResponse_EResponse) Enum() *CMsgClientToGCModifyGuildRoleResponse_EResponse {
+	p := new(CMsgClientToGCModifyGuildRoleResponse_EResponse)
+	*p = x
+	return p
+}
+
+func (x CMsgClientToGCModifyGuildRoleResponse_EResponse) String() string {
+	return proto.EnumName(CMsgClientToGCModifyGuildRoleResponse_EResponse_name, int32(x))
+}
+
+func (x *CMsgClientToGCModifyGuildRoleResponse_EResponse) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(CMsgClientToGCModifyGuildRoleResponse_EResponse_value, data, "CMsgClientToGCModifyGuildRoleResponse_EResponse")
+	if err != nil {
+		return err
+	}
+	*x = CMsgClientToGCModifyGuildRoleResponse_EResponse(value)
+	return nil
+}
+
+func (CMsgClientToGCModifyGuildRoleResponse_EResponse) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{43, 0}
+}
+
+type CMsgClientToGCRemoveGuildRoleResponse_EResponse int32
+
+const (
+	CMsgClientToGCRemoveGuildRoleResponse_k_eInternalError         CMsgClientToGCRemoveGuildRoleResponse_EResponse = 0
+	CMsgClientToGCRemoveGuildRoleResponse_k_eSuccess               CMsgClientToGCRemoveGuildRoleResponse_EResponse = 1
+	CMsgClientToGCRemoveGuildRoleResponse_k_eTooBusy               CMsgClientToGCRemoveGuildRoleResponse_EResponse = 2
+	CMsgClientToGCRemoveGuildRoleResponse_k_eDisabled              CMsgClientToGCRemoveGuildRoleResponse_EResponse = 3
+	CMsgClientToGCRemoveGuildRoleResponse_k_eTimeout               CMsgClientToGCRemoveGuildRoleResponse_EResponse = 4
+	CMsgClientToGCRemoveGuildRoleResponse_k_eInvalidGuild          CMsgClientToGCRemoveGuildRoleResponse_EResponse = 5
+	CMsgClientToGCRemoveGuildRoleResponse_k_eInvalidRole           CMsgClientToGCRemoveGuildRoleResponse_EResponse = 6
+	CMsgClientToGCRemoveGuildRoleResponse_k_eRoleNotEmpty          CMsgClientToGCRemoveGuildRoleResponse_EResponse = 7
+	CMsgClientToGCRemoveGuildRoleResponse_k_eNoPermissions         CMsgClientToGCRemoveGuildRoleResponse_EResponse = 8
+	CMsgClientToGCRemoveGuildRoleResponse_k_eAdminViolation        CMsgClientToGCRemoveGuildRoleResponse_EResponse = 9
+	CMsgClientToGCRemoveGuildRoleResponse_k_eCantRemoveDefaultRole CMsgClientToGCRemoveGuildRoleResponse_EResponse = 10
+)
+
+var CMsgClientToGCRemoveGuildRoleResponse_EResponse_name = map[int32]string{
+	0:  "k_eInternalError",
+	1:  "k_eSuccess",
+	2:  "k_eTooBusy",
+	3:  "k_eDisabled",
+	4:  "k_eTimeout",
+	5:  "k_eInvalidGuild",
+	6:  "k_eInvalidRole",
+	7:  "k_eRoleNotEmpty",
+	8:  "k_eNoPermissions",
+	9:  "k_eAdminViolation",
+	10: "k_eCantRemoveDefaultRole",
+}
+
+var CMsgClientToGCRemoveGuildRoleResponse_EResponse_value = map[string]int32{
+	"k_eInternalError":         0,
+	"k_eSuccess":               1,
+	"k_eTooBusy":               2,
+	"k_eDisabled":              3,
+	"k_eTimeout":               4,
+	"k_eInvalidGuild":          5,
+	"k_eInvalidRole":           6,
+	"k_eRoleNotEmpty":          7,
+	"k_eNoPermissions":         8,
+	"k_eAdminViolation":        9,
+	"k_eCantRemoveDefaultRole": 10,
+}
+
+func (x CMsgClientToGCRemoveGuildRoleResponse_EResponse) Enum() *CMsgClientToGCRemoveGuildRoleResponse_EResponse {
+	p := new(CMsgClientToGCRemoveGuildRoleResponse_EResponse)
+	*p = x
+	return p
+}
+
+func (x CMsgClientToGCRemoveGuildRoleResponse_EResponse) String() string {
+	return proto.EnumName(CMsgClientToGCRemoveGuildRoleResponse_EResponse_name, int32(x))
+}
+
+func (x *CMsgClientToGCRemoveGuildRoleResponse_EResponse) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(CMsgClientToGCRemoveGuildRoleResponse_EResponse_value, data, "CMsgClientToGCRemoveGuildRoleResponse_EResponse")
+	if err != nil {
+		return err
+	}
+	*x = CMsgClientToGCRemoveGuildRoleResponse_EResponse(value)
+	return nil
+}
+
+func (CMsgClientToGCRemoveGuildRoleResponse_EResponse) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{45, 0}
+}
+
+type CMsgClientToGCSetGuildRoleOrderResponse_EResponse int32
+
+const (
+	CMsgClientToGCSetGuildRoleOrderResponse_k_eInternalError  CMsgClientToGCSetGuildRoleOrderResponse_EResponse = 0
+	CMsgClientToGCSetGuildRoleOrderResponse_k_eSuccess        CMsgClientToGCSetGuildRoleOrderResponse_EResponse = 1
+	CMsgClientToGCSetGuildRoleOrderResponse_k_eTooBusy        CMsgClientToGCSetGuildRoleOrderResponse_EResponse = 2
+	CMsgClientToGCSetGuildRoleOrderResponse_k_eDisabled       CMsgClientToGCSetGuildRoleOrderResponse_EResponse = 3
+	CMsgClientToGCSetGuildRoleOrderResponse_k_eTimeout        CMsgClientToGCSetGuildRoleOrderResponse_EResponse = 4
+	CMsgClientToGCSetGuildRoleOrderResponse_k_eInvalidGuild   CMsgClientToGCSetGuildRoleOrderResponse_EResponse = 5
+	CMsgClientToGCSetGuildRoleOrderResponse_k_eInvalidRole    CMsgClientToGCSetGuildRoleOrderResponse_EResponse = 6
+	CMsgClientToGCSetGuildRoleOrderResponse_k_eInvalidOrder   CMsgClientToGCSetGuildRoleOrderResponse_EResponse = 7
+	CMsgClientToGCSetGuildRoleOrderResponse_k_eNoPermissions  CMsgClientToGCSetGuildRoleOrderResponse_EResponse = 8
+	CMsgClientToGCSetGuildRoleOrderResponse_k_eAdminViolation CMsgClientToGCSetGuildRoleOrderResponse_EResponse = 9
+)
+
+var CMsgClientToGCSetGuildRoleOrderResponse_EResponse_name = map[int32]string{
+	0: "k_eInternalError",
+	1: "k_eSuccess",
+	2: "k_eTooBusy",
+	3: "k_eDisabled",
+	4: "k_eTimeout",
+	5: "k_eInvalidGuild",
+	6: "k_eInvalidRole",
+	7: "k_eInvalidOrder",
+	8: "k_eNoPermissions",
+	9: "k_eAdminViolation",
+}
+
+var CMsgClientToGCSetGuildRoleOrderResponse_EResponse_value = map[string]int32{
+	"k_eInternalError":  0,
+	"k_eSuccess":        1,
+	"k_eTooBusy":        2,
+	"k_eDisabled":       3,
+	"k_eTimeout":        4,
+	"k_eInvalidGuild":   5,
+	"k_eInvalidRole":    6,
+	"k_eInvalidOrder":   7,
+	"k_eNoPermissions":  8,
+	"k_eAdminViolation": 9,
+}
+
+func (x CMsgClientToGCSetGuildRoleOrderResponse_EResponse) Enum() *CMsgClientToGCSetGuildRoleOrderResponse_EResponse {
+	p := new(CMsgClientToGCSetGuildRoleOrderResponse_EResponse)
+	*p = x
+	return p
+}
+
+func (x CMsgClientToGCSetGuildRoleOrderResponse_EResponse) String() string {
+	return proto.EnumName(CMsgClientToGCSetGuildRoleOrderResponse_EResponse_name, int32(x))
+}
+
+func (x *CMsgClientToGCSetGuildRoleOrderResponse_EResponse) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(CMsgClientToGCSetGuildRoleOrderResponse_EResponse_value, data, "CMsgClientToGCSetGuildRoleOrderResponse_EResponse")
+	if err != nil {
+		return err
+	}
+	*x = CMsgClientToGCSetGuildRoleOrderResponse_EResponse(value)
+	return nil
+}
+
+func (CMsgClientToGCSetGuildRoleOrderResponse_EResponse) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{47, 0}
+}
+
+type CMsgClientToGCRequestGuildFeedResponse_EResponse int32
+
+const (
+	CMsgClientToGCRequestGuildFeedResponse_k_eInternalError CMsgClientToGCRequestGuildFeedResponse_EResponse = 0
+	CMsgClientToGCRequestGuildFeedResponse_k_eSuccess       CMsgClientToGCRequestGuildFeedResponse_EResponse = 1
+	CMsgClientToGCRequestGuildFeedResponse_k_eTooBusy       CMsgClientToGCRequestGuildFeedResponse_EResponse = 2
+	CMsgClientToGCRequestGuildFeedResponse_k_eDisabled      CMsgClientToGCRequestGuildFeedResponse_EResponse = 3
+	CMsgClientToGCRequestGuildFeedResponse_k_eTimeout       CMsgClientToGCRequestGuildFeedResponse_EResponse = 4
+	CMsgClientToGCRequestGuildFeedResponse_k_eInvalidGuild  CMsgClientToGCRequestGuildFeedResponse_EResponse = 5
+	CMsgClientToGCRequestGuildFeedResponse_k_eNoPermissions CMsgClientToGCRequestGuildFeedResponse_EResponse = 6
+)
+
+var CMsgClientToGCRequestGuildFeedResponse_EResponse_name = map[int32]string{
+	0: "k_eInternalError",
+	1: "k_eSuccess",
+	2: "k_eTooBusy",
+	3: "k_eDisabled",
+	4: "k_eTimeout",
+	5: "k_eInvalidGuild",
+	6: "k_eNoPermissions",
+}
+
+var CMsgClientToGCRequestGuildFeedResponse_EResponse_value = map[string]int32{
+	"k_eInternalError": 0,
+	"k_eSuccess":       1,
+	"k_eTooBusy":       2,
+	"k_eDisabled":      3,
+	"k_eTimeout":       4,
+	"k_eInvalidGuild":  5,
+	"k_eNoPermissions": 6,
+}
+
+func (x CMsgClientToGCRequestGuildFeedResponse_EResponse) Enum() *CMsgClientToGCRequestGuildFeedResponse_EResponse {
+	p := new(CMsgClientToGCRequestGuildFeedResponse_EResponse)
+	*p = x
+	return p
+}
+
+func (x CMsgClientToGCRequestGuildFeedResponse_EResponse) String() string {
+	return proto.EnumName(CMsgClientToGCRequestGuildFeedResponse_EResponse_name, int32(x))
+}
+
+func (x *CMsgClientToGCRequestGuildFeedResponse_EResponse) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(CMsgClientToGCRequestGuildFeedResponse_EResponse_value, data, "CMsgClientToGCRequestGuildFeedResponse_EResponse")
+	if err != nil {
+		return err
+	}
+	*x = CMsgClientToGCRequestGuildFeedResponse_EResponse(value)
+	return nil
+}
+
+func (CMsgClientToGCRequestGuildFeedResponse_EResponse) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{49, 0}
+}
+
+type CMsgClientToGCAddPlayerToGuildChatResponse_EResponse int32
+
+const (
+	CMsgClientToGCAddPlayerToGuildChatResponse_k_eInternalError       CMsgClientToGCAddPlayerToGuildChatResponse_EResponse = 0
+	CMsgClientToGCAddPlayerToGuildChatResponse_k_eSuccess             CMsgClientToGCAddPlayerToGuildChatResponse_EResponse = 1
+	CMsgClientToGCAddPlayerToGuildChatResponse_k_eTooBusy             CMsgClientToGCAddPlayerToGuildChatResponse_EResponse = 2
+	CMsgClientToGCAddPlayerToGuildChatResponse_k_eDisabled            CMsgClientToGCAddPlayerToGuildChatResponse_EResponse = 3
+	CMsgClientToGCAddPlayerToGuildChatResponse_k_eTimeout             CMsgClientToGCAddPlayerToGuildChatResponse_EResponse = 4
+	CMsgClientToGCAddPlayerToGuildChatResponse_k_eInvalidGuild        CMsgClientToGCAddPlayerToGuildChatResponse_EResponse = 5
+	CMsgClientToGCAddPlayerToGuildChatResponse_k_eNotMember           CMsgClientToGCAddPlayerToGuildChatResponse_EResponse = 6
+	CMsgClientToGCAddPlayerToGuildChatResponse_k_eSteamChatNotEnabled CMsgClientToGCAddPlayerToGuildChatResponse_EResponse = 7
+)
+
+var CMsgClientToGCAddPlayerToGuildChatResponse_EResponse_name = map[int32]string{
+	0: "k_eInternalError",
+	1: "k_eSuccess",
+	2: "k_eTooBusy",
+	3: "k_eDisabled",
+	4: "k_eTimeout",
+	5: "k_eInvalidGuild",
+	6: "k_eNotMember",
+	7: "k_eSteamChatNotEnabled",
+}
+
+var CMsgClientToGCAddPlayerToGuildChatResponse_EResponse_value = map[string]int32{
+	"k_eInternalError":       0,
+	"k_eSuccess":             1,
+	"k_eTooBusy":             2,
+	"k_eDisabled":            3,
+	"k_eTimeout":             4,
+	"k_eInvalidGuild":        5,
+	"k_eNotMember":           6,
+	"k_eSteamChatNotEnabled": 7,
+}
+
+func (x CMsgClientToGCAddPlayerToGuildChatResponse_EResponse) Enum() *CMsgClientToGCAddPlayerToGuildChatResponse_EResponse {
+	p := new(CMsgClientToGCAddPlayerToGuildChatResponse_EResponse)
+	*p = x
+	return p
+}
+
+func (x CMsgClientToGCAddPlayerToGuildChatResponse_EResponse) String() string {
+	return proto.EnumName(CMsgClientToGCAddPlayerToGuildChatResponse_EResponse_name, int32(x))
+}
+
+func (x *CMsgClientToGCAddPlayerToGuildChatResponse_EResponse) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(CMsgClientToGCAddPlayerToGuildChatResponse_EResponse_value, data, "CMsgClientToGCAddPlayerToGuildChatResponse_EResponse")
+	if err != nil {
+		return err
+	}
+	*x = CMsgClientToGCAddPlayerToGuildChatResponse_EResponse(value)
+	return nil
+}
+
+func (CMsgClientToGCAddPlayerToGuildChatResponse_EResponse) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{52, 0}
+}
+
+type CMsgFindGuildByTagResponse_EResponse int32
+
+const (
+	CMsgFindGuildByTagResponse_k_eInternalError CMsgFindGuildByTagResponse_EResponse = 0
+	CMsgFindGuildByTagResponse_k_eSuccess       CMsgFindGuildByTagResponse_EResponse = 1
+	CMsgFindGuildByTagResponse_k_eTooBusy       CMsgFindGuildByTagResponse_EResponse = 2
+	CMsgFindGuildByTagResponse_k_eDisabled      CMsgFindGuildByTagResponse_EResponse = 3
+	CMsgFindGuildByTagResponse_k_eTimeout       CMsgFindGuildByTagResponse_EResponse = 4
+	CMsgFindGuildByTagResponse_k_eInvalidTag    CMsgFindGuildByTagResponse_EResponse = 5
+	CMsgFindGuildByTagResponse_k_eGuildNotFound CMsgFindGuildByTagResponse_EResponse = 6
+)
+
+var CMsgFindGuildByTagResponse_EResponse_name = map[int32]string{
+	0: "k_eInternalError",
+	1: "k_eSuccess",
+	2: "k_eTooBusy",
+	3: "k_eDisabled",
+	4: "k_eTimeout",
+	5: "k_eInvalidTag",
+	6: "k_eGuildNotFound",
+}
+
+var CMsgFindGuildByTagResponse_EResponse_value = map[string]int32{
+	"k_eInternalError": 0,
+	"k_eSuccess":       1,
+	"k_eTooBusy":       2,
+	"k_eDisabled":      3,
+	"k_eTimeout":       4,
+	"k_eInvalidTag":    5,
+	"k_eGuildNotFound": 6,
+}
+
+func (x CMsgFindGuildByTagResponse_EResponse) Enum() *CMsgFindGuildByTagResponse_EResponse {
+	p := new(CMsgFindGuildByTagResponse_EResponse)
+	*p = x
+	return p
+}
+
+func (x CMsgFindGuildByTagResponse_EResponse) String() string {
+	return proto.EnumName(CMsgFindGuildByTagResponse_EResponse_name, int32(x))
+}
+
+func (x *CMsgFindGuildByTagResponse_EResponse) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(CMsgFindGuildByTagResponse_EResponse_value, data, "CMsgFindGuildByTagResponse_EResponse")
+	if err != nil {
+		return err
+	}
+	*x = CMsgFindGuildByTagResponse_EResponse(value)
+	return nil
+}
+
+func (CMsgFindGuildByTagResponse_EResponse) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{53, 0}
+}
+
+type CMsgSearchForOpenGuildsResponse_EResponse int32
+
+const (
+	CMsgSearchForOpenGuildsResponse_k_eInternalError CMsgSearchForOpenGuildsResponse_EResponse = 0
+	CMsgSearchForOpenGuildsResponse_k_eSuccess       CMsgSearchForOpenGuildsResponse_EResponse = 1
+	CMsgSearchForOpenGuildsResponse_k_eTooBusy       CMsgSearchForOpenGuildsResponse_EResponse = 2
+	CMsgSearchForOpenGuildsResponse_k_eDisabled      CMsgSearchForOpenGuildsResponse_EResponse = 3
+	CMsgSearchForOpenGuildsResponse_k_eTimeout       CMsgSearchForOpenGuildsResponse_EResponse = 4
+)
+
+var CMsgSearchForOpenGuildsResponse_EResponse_name = map[int32]string{
+	0: "k_eInternalError",
+	1: "k_eSuccess",
+	2: "k_eTooBusy",
+	3: "k_eDisabled",
+	4: "k_eTimeout",
+}
+
+var CMsgSearchForOpenGuildsResponse_EResponse_value = map[string]int32{
+	"k_eInternalError": 0,
+	"k_eSuccess":       1,
+	"k_eTooBusy":       2,
+	"k_eDisabled":      3,
+	"k_eTimeout":       4,
+}
+
+func (x CMsgSearchForOpenGuildsResponse_EResponse) Enum() *CMsgSearchForOpenGuildsResponse_EResponse {
+	p := new(CMsgSearchForOpenGuildsResponse_EResponse)
+	*p = x
+	return p
+}
+
+func (x CMsgSearchForOpenGuildsResponse_EResponse) String() string {
+	return proto.EnumName(CMsgSearchForOpenGuildsResponse_EResponse_name, int32(x))
+}
+
+func (x *CMsgSearchForOpenGuildsResponse_EResponse) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(CMsgSearchForOpenGuildsResponse_EResponse_value, data, "CMsgSearchForOpenGuildsResponse_EResponse")
+	if err != nil {
+		return err
+	}
+	*x = CMsgSearchForOpenGuildsResponse_EResponse(value)
+	return nil
+}
+
+func (CMsgSearchForOpenGuildsResponse_EResponse) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{54, 0}
+}
+
+type CMsgClientToGCReportGuildContent_EContentFlags int32
+
+const (
+	CMsgClientToGCReportGuildContent_k_eNone              CMsgClientToGCReportGuildContent_EContentFlags = 0
+	CMsgClientToGCReportGuildContent_k_eInappropriateName CMsgClientToGCReportGuildContent_EContentFlags = 1
+	CMsgClientToGCReportGuildContent_k_eInappropriateTag  CMsgClientToGCReportGuildContent_EContentFlags = 2
+	CMsgClientToGCReportGuildContent_k_eInappropriateLogo CMsgClientToGCReportGuildContent_EContentFlags = 4
+	CMsgClientToGCReportGuildContent_k_eValidFlags        CMsgClientToGCReportGuildContent_EContentFlags = 7
+)
+
+var CMsgClientToGCReportGuildContent_EContentFlags_name = map[int32]string{
+	0: "k_eNone",
+	1: "k_eInappropriateName",
+	2: "k_eInappropriateTag",
+	4: "k_eInappropriateLogo",
+	7: "k_eValidFlags",
+}
+
+var CMsgClientToGCReportGuildContent_EContentFlags_value = map[string]int32{
+	"k_eNone":              0,
+	"k_eInappropriateName": 1,
+	"k_eInappropriateTag":  2,
+	"k_eInappropriateLogo": 4,
+	"k_eValidFlags":        7,
+}
+
+func (x CMsgClientToGCReportGuildContent_EContentFlags) Enum() *CMsgClientToGCReportGuildContent_EContentFlags {
+	p := new(CMsgClientToGCReportGuildContent_EContentFlags)
+	*p = x
+	return p
+}
+
+func (x CMsgClientToGCReportGuildContent_EContentFlags) String() string {
+	return proto.EnumName(CMsgClientToGCReportGuildContent_EContentFlags_name, int32(x))
+}
+
+func (x *CMsgClientToGCReportGuildContent_EContentFlags) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(CMsgClientToGCReportGuildContent_EContentFlags_value, data, "CMsgClientToGCReportGuildContent_EContentFlags")
+	if err != nil {
+		return err
+	}
+	*x = CMsgClientToGCReportGuildContent_EContentFlags(value)
+	return nil
+}
+
+func (CMsgClientToGCReportGuildContent_EContentFlags) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{55, 0}
+}
+
+type CMsgClientToGCReportGuildContentResponse_EResponse int32
+
+const (
+	CMsgClientToGCReportGuildContentResponse_k_eInternalError CMsgClientToGCReportGuildContentResponse_EResponse = 0
+	CMsgClientToGCReportGuildContentResponse_k_eSuccess       CMsgClientToGCReportGuildContentResponse_EResponse = 1
+	CMsgClientToGCReportGuildContentResponse_k_eTooBusy       CMsgClientToGCReportGuildContentResponse_EResponse = 2
+	CMsgClientToGCReportGuildContentResponse_k_eDisabled      CMsgClientToGCReportGuildContentResponse_EResponse = 3
+	CMsgClientToGCReportGuildContentResponse_k_eTimeout       CMsgClientToGCReportGuildContentResponse_EResponse = 4
+	CMsgClientToGCReportGuildContentResponse_k_eGuildNotFound CMsgClientToGCReportGuildContentResponse_EResponse = 5
+	CMsgClientToGCReportGuildContentResponse_k_eFlagsInvalid  CMsgClientToGCReportGuildContentResponse_EResponse = 6
+)
+
+var CMsgClientToGCReportGuildContentResponse_EResponse_name = map[int32]string{
+	0: "k_eInternalError",
+	1: "k_eSuccess",
+	2: "k_eTooBusy",
+	3: "k_eDisabled",
+	4: "k_eTimeout",
+	5: "k_eGuildNotFound",
+	6: "k_eFlagsInvalid",
+}
+
+var CMsgClientToGCReportGuildContentResponse_EResponse_value = map[string]int32{
+	"k_eInternalError": 0,
+	"k_eSuccess":       1,
+	"k_eTooBusy":       2,
+	"k_eDisabled":      3,
+	"k_eTimeout":       4,
+	"k_eGuildNotFound": 5,
+	"k_eFlagsInvalid":  6,
+}
+
+func (x CMsgClientToGCReportGuildContentResponse_EResponse) Enum() *CMsgClientToGCReportGuildContentResponse_EResponse {
+	p := new(CMsgClientToGCReportGuildContentResponse_EResponse)
+	*p = x
+	return p
+}
+
+func (x CMsgClientToGCReportGuildContentResponse_EResponse) String() string {
+	return proto.EnumName(CMsgClientToGCReportGuildContentResponse_EResponse_name, int32(x))
+}
+
+func (x *CMsgClientToGCReportGuildContentResponse_EResponse) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(CMsgClientToGCReportGuildContentResponse_EResponse_value, data, "CMsgClientToGCReportGuildContentResponse_EResponse")
+	if err != nil {
+		return err
+	}
+	*x = CMsgClientToGCReportGuildContentResponse_EResponse(value)
+	return nil
+}
+
+func (CMsgClientToGCReportGuildContentResponse_EResponse) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{56, 0}
+}
+
+type CMsgClientToGCRequestAccountGuildPersonaInfoResponse_EResponse int32
+
+const (
+	CMsgClientToGCRequestAccountGuildPersonaInfoResponse_k_eInternalError  CMsgClientToGCRequestAccountGuildPersonaInfoResponse_EResponse = 0
+	CMsgClientToGCRequestAccountGuildPersonaInfoResponse_k_eSuccess        CMsgClientToGCRequestAccountGuildPersonaInfoResponse_EResponse = 1
+	CMsgClientToGCRequestAccountGuildPersonaInfoResponse_k_eTooBusy        CMsgClientToGCRequestAccountGuildPersonaInfoResponse_EResponse = 2
+	CMsgClientToGCRequestAccountGuildPersonaInfoResponse_k_eDisabled       CMsgClientToGCRequestAccountGuildPersonaInfoResponse_EResponse = 3
+	CMsgClientToGCRequestAccountGuildPersonaInfoResponse_k_eTimeout        CMsgClientToGCRequestAccountGuildPersonaInfoResponse_EResponse = 4
+	CMsgClientToGCRequestAccountGuildPersonaInfoResponse_k_eInvalidAccount CMsgClientToGCRequestAccountGuildPersonaInfoResponse_EResponse = 5
+)
+
+var CMsgClientToGCRequestAccountGuildPersonaInfoResponse_EResponse_name = map[int32]string{
+	0: "k_eInternalError",
+	1: "k_eSuccess",
+	2: "k_eTooBusy",
+	3: "k_eDisabled",
+	4: "k_eTimeout",
+	5: "k_eInvalidAccount",
+}
+
+var CMsgClientToGCRequestAccountGuildPersonaInfoResponse_EResponse_value = map[string]int32{
+	"k_eInternalError":  0,
+	"k_eSuccess":        1,
+	"k_eTooBusy":        2,
+	"k_eDisabled":       3,
+	"k_eTimeout":        4,
+	"k_eInvalidAccount": 5,
+}
+
+func (x CMsgClientToGCRequestAccountGuildPersonaInfoResponse_EResponse) Enum() *CMsgClientToGCRequestAccountGuildPersonaInfoResponse_EResponse {
+	p := new(CMsgClientToGCRequestAccountGuildPersonaInfoResponse_EResponse)
+	*p = x
+	return p
+}
+
+func (x CMsgClientToGCRequestAccountGuildPersonaInfoResponse_EResponse) String() string {
+	return proto.EnumName(CMsgClientToGCRequestAccountGuildPersonaInfoResponse_EResponse_name, int32(x))
+}
+
+func (x *CMsgClientToGCRequestAccountGuildPersonaInfoResponse_EResponse) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(CMsgClientToGCRequestAccountGuildPersonaInfoResponse_EResponse_value, data, "CMsgClientToGCRequestAccountGuildPersonaInfoResponse_EResponse")
+	if err != nil {
+		return err
+	}
+	*x = CMsgClientToGCRequestAccountGuildPersonaInfoResponse_EResponse(value)
+	return nil
+}
+
+func (CMsgClientToGCRequestAccountGuildPersonaInfoResponse_EResponse) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{58, 0}
+}
+
+type CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse_EResponse int32
+
+const (
+	CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse_k_eInternalError  CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse_EResponse = 0
+	CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse_k_eSuccess        CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse_EResponse = 1
+	CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse_k_eTooBusy        CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse_EResponse = 2
+	CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse_k_eDisabled       CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse_EResponse = 3
+	CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse_k_eTimeout        CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse_EResponse = 4
+	CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse_k_eInvalidRequest CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse_EResponse = 5
+)
+
+var CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse_EResponse_name = map[int32]string{
+	0: "k_eInternalError",
+	1: "k_eSuccess",
+	2: "k_eTooBusy",
+	3: "k_eDisabled",
+	4: "k_eTimeout",
+	5: "k_eInvalidRequest",
+}
+
+var CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse_EResponse_value = map[string]int32{
+	"k_eInternalError":  0,
+	"k_eSuccess":        1,
+	"k_eTooBusy":        2,
+	"k_eDisabled":       3,
+	"k_eTimeout":        4,
+	"k_eInvalidRequest": 5,
+}
+
+func (x CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse_EResponse) Enum() *CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse_EResponse {
+	p := new(CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse_EResponse)
+	*p = x
+	return p
+}
+
+func (x CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse_EResponse) String() string {
+	return proto.EnumName(CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse_EResponse_name, int32(x))
+}
+
+func (x *CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse_EResponse) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse_EResponse_value, data, "CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse_EResponse")
+	if err != nil {
+		return err
+	}
+	*x = CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse_EResponse(value)
+	return nil
+}
+
+func (CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse_EResponse) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{60, 0}
+}
+
+type CMsgGuildInfo struct {
+	GuildName              *string  `protobuf:"bytes,1,opt,name=guild_name,json=guildName" json:"guild_name,omitempty"`
+	GuildTag               *string  `protobuf:"bytes,2,opt,name=guild_tag,json=guildTag" json:"guild_tag,omitempty"`
+	CreatedTimestamp       *uint32  `protobuf:"varint,3,opt,name=created_timestamp,json=createdTimestamp" json:"created_timestamp,omitempty"`
+	GuildLanguage          *uint32  `protobuf:"varint,4,opt,name=guild_language,json=guildLanguage" json:"guild_language,omitempty"`
+	GuildFlags             *uint32  `protobuf:"varint,5,opt,name=guild_flags,json=guildFlags" json:"guild_flags,omitempty"`
+	GuildLogo              *uint64  `protobuf:"varint,7,opt,name=guild_logo,json=guildLogo" json:"guild_logo,omitempty"`
+	GuildRegion            *uint32  `protobuf:"varint,8,opt,name=guild_region,json=guildRegion" json:"guild_region,omitempty"`
+	GuildChatGroupId       *uint64  `protobuf:"varint,9,opt,name=guild_chat_group_id,json=guildChatGroupId" json:"guild_chat_group_id,omitempty"`
+	GuildDescription       *string  `protobuf:"bytes,10,opt,name=guild_description,json=guildDescription" json:"guild_description,omitempty"`
+	DefaultChatChannelId   *uint64  `protobuf:"varint,11,opt,name=default_chat_channel_id,json=defaultChatChannelId" json:"default_chat_channel_id,omitempty"`
+	GuildPrimaryColor      *uint32  `protobuf:"varint,12,opt,name=guild_primary_color,json=guildPrimaryColor" json:"guild_primary_color,omitempty"`
+	GuildSecondaryColor    *uint32  `protobuf:"varint,13,opt,name=guild_secondary_color,json=guildSecondaryColor" json:"guild_secondary_color,omitempty"`
+	GuildPattern           *uint32  `protobuf:"varint,14,opt,name=guild_pattern,json=guildPattern" json:"guild_pattern,omitempty"`
+	GuildRefreshTimeOffset *uint32  `protobuf:"varint,15,opt,name=guild_refresh_time_offset,json=guildRefreshTimeOffset" json:"guild_refresh_time_offset,omitempty"`
+	GuildRequiredRankTier  *uint32  `protobuf:"varint,16,opt,name=guild_required_rank_tier,json=guildRequiredRankTier" json:"guild_required_rank_tier,omitempty"`
+	GuildMotdTimestamp     *uint32  `protobuf:"varint,17,opt,name=guild_motd_timestamp,json=guildMotdTimestamp" json:"guild_motd_timestamp,omitempty"`
+	GuildMotd              *string  `protobuf:"bytes,18,opt,name=guild_motd,json=guildMotd" json:"guild_motd,omitempty"`
+	XXX_NoUnkeyedLiteral   struct{} `json:"-"`
+	XXX_unrecognized       []byte   `json:"-"`
+	XXX_sizecache          int32    `json:"-"`
+}
+
+func (m *CMsgGuildInfo) Reset()         { *m = CMsgGuildInfo{} }
+func (m *CMsgGuildInfo) String() string { return proto.CompactTextString(m) }
+func (*CMsgGuildInfo) ProtoMessage()    {}
+func (*CMsgGuildInfo) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{0}
+}
+
+func (m *CMsgGuildInfo) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgGuildInfo.Unmarshal(m, b)
+}
+func (m *CMsgGuildInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgGuildInfo.Marshal(b, m, deterministic)
+}
+func (m *CMsgGuildInfo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGuildInfo.Merge(m, src)
+}
+func (m *CMsgGuildInfo) XXX_Size() int {
+	return xxx_messageInfo_CMsgGuildInfo.Size(m)
+}
+func (m *CMsgGuildInfo) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgGuildInfo.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgGuildInfo proto.InternalMessageInfo
+
+func (m *CMsgGuildInfo) GetGuildName() string {
+	if m != nil && m.GuildName != nil {
+		return *m.GuildName
+	}
+	return ""
+}
+
+func (m *CMsgGuildInfo) GetGuildTag() string {
+	if m != nil && m.GuildTag != nil {
+		return *m.GuildTag
+	}
+	return ""
+}
+
+func (m *CMsgGuildInfo) GetCreatedTimestamp() uint32 {
+	if m != nil && m.CreatedTimestamp != nil {
+		return *m.CreatedTimestamp
+	}
+	return 0
+}
+
+func (m *CMsgGuildInfo) GetGuildLanguage() uint32 {
+	if m != nil && m.GuildLanguage != nil {
+		return *m.GuildLanguage
+	}
+	return 0
+}
+
+func (m *CMsgGuildInfo) GetGuildFlags() uint32 {
+	if m != nil && m.GuildFlags != nil {
+		return *m.GuildFlags
+	}
+	return 0
+}
+
+func (m *CMsgGuildInfo) GetGuildLogo() uint64 {
+	if m != nil && m.GuildLogo != nil {
+		return *m.GuildLogo
+	}
+	return 0
+}
+
+func (m *CMsgGuildInfo) GetGuildRegion() uint32 {
+	if m != nil && m.GuildRegion != nil {
+		return *m.GuildRegion
+	}
+	return 0
+}
+
+func (m *CMsgGuildInfo) GetGuildChatGroupId() uint64 {
+	if m != nil && m.GuildChatGroupId != nil {
+		return *m.GuildChatGroupId
+	}
+	return 0
+}
+
+func (m *CMsgGuildInfo) GetGuildDescription() string {
+	if m != nil && m.GuildDescription != nil {
+		return *m.GuildDescription
+	}
+	return ""
+}
+
+func (m *CMsgGuildInfo) GetDefaultChatChannelId() uint64 {
+	if m != nil && m.DefaultChatChannelId != nil {
+		return *m.DefaultChatChannelId
+	}
+	return 0
+}
+
+func (m *CMsgGuildInfo) GetGuildPrimaryColor() uint32 {
+	if m != nil && m.GuildPrimaryColor != nil {
+		return *m.GuildPrimaryColor
+	}
+	return 0
+}
+
+func (m *CMsgGuildInfo) GetGuildSecondaryColor() uint32 {
+	if m != nil && m.GuildSecondaryColor != nil {
+		return *m.GuildSecondaryColor
+	}
+	return 0
+}
+
+func (m *CMsgGuildInfo) GetGuildPattern() uint32 {
+	if m != nil && m.GuildPattern != nil {
+		return *m.GuildPattern
+	}
+	return 0
+}
+
+func (m *CMsgGuildInfo) GetGuildRefreshTimeOffset() uint32 {
+	if m != nil && m.GuildRefreshTimeOffset != nil {
+		return *m.GuildRefreshTimeOffset
+	}
+	return 0
+}
+
+func (m *CMsgGuildInfo) GetGuildRequiredRankTier() uint32 {
+	if m != nil && m.GuildRequiredRankTier != nil {
+		return *m.GuildRequiredRankTier
+	}
+	return 0
+}
+
+func (m *CMsgGuildInfo) GetGuildMotdTimestamp() uint32 {
+	if m != nil && m.GuildMotdTimestamp != nil {
+		return *m.GuildMotdTimestamp
+	}
+	return 0
+}
+
+func (m *CMsgGuildInfo) GetGuildMotd() string {
+	if m != nil && m.GuildMotd != nil {
+		return *m.GuildMotd
+	}
+	return ""
+}
+
+type CMsgGuildSummary struct {
+	GuildInfo            *CMsgGuildInfo                  `protobuf:"bytes,1,opt,name=guild_info,json=guildInfo" json:"guild_info,omitempty"`
+	MemberCount          *uint32                         `protobuf:"varint,2,opt,name=member_count,json=memberCount" json:"member_count,omitempty"`
+	EventPoints          []*CMsgGuildSummary_EventPoints `protobuf:"bytes,3,rep,name=event_points,json=eventPoints" json:"event_points,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                        `json:"-"`
+	XXX_unrecognized     []byte                          `json:"-"`
+	XXX_sizecache        int32                           `json:"-"`
+}
+
+func (m *CMsgGuildSummary) Reset()         { *m = CMsgGuildSummary{} }
+func (m *CMsgGuildSummary) String() string { return proto.CompactTextString(m) }
+func (*CMsgGuildSummary) ProtoMessage()    {}
+func (*CMsgGuildSummary) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{1}
+}
+
+func (m *CMsgGuildSummary) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgGuildSummary.Unmarshal(m, b)
+}
+func (m *CMsgGuildSummary) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgGuildSummary.Marshal(b, m, deterministic)
+}
+func (m *CMsgGuildSummary) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGuildSummary.Merge(m, src)
+}
+func (m *CMsgGuildSummary) XXX_Size() int {
+	return xxx_messageInfo_CMsgGuildSummary.Size(m)
+}
+func (m *CMsgGuildSummary) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgGuildSummary.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgGuildSummary proto.InternalMessageInfo
+
+func (m *CMsgGuildSummary) GetGuildInfo() *CMsgGuildInfo {
+	if m != nil {
+		return m.GuildInfo
+	}
+	return nil
+}
+
+func (m *CMsgGuildSummary) GetMemberCount() uint32 {
+	if m != nil && m.MemberCount != nil {
+		return *m.MemberCount
+	}
+	return 0
+}
+
+func (m *CMsgGuildSummary) GetEventPoints() []*CMsgGuildSummary_EventPoints {
+	if m != nil {
+		return m.EventPoints
+	}
+	return nil
+}
+
+type CMsgGuildSummary_EventPoints struct {
+	EventId              *uint32  `protobuf:"varint,1,opt,name=event_id,json=eventId" json:"event_id,omitempty"`
+	GuildPoints          *uint32  `protobuf:"varint,2,opt,name=guild_points,json=guildPoints" json:"guild_points,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CMsgGuildSummary_EventPoints) Reset()         { *m = CMsgGuildSummary_EventPoints{} }
+func (m *CMsgGuildSummary_EventPoints) String() string { return proto.CompactTextString(m) }
+func (*CMsgGuildSummary_EventPoints) ProtoMessage()    {}
+func (*CMsgGuildSummary_EventPoints) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{1, 0}
+}
+
+func (m *CMsgGuildSummary_EventPoints) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgGuildSummary_EventPoints.Unmarshal(m, b)
+}
+func (m *CMsgGuildSummary_EventPoints) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgGuildSummary_EventPoints.Marshal(b, m, deterministic)
+}
+func (m *CMsgGuildSummary_EventPoints) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGuildSummary_EventPoints.Merge(m, src)
+}
+func (m *CMsgGuildSummary_EventPoints) XXX_Size() int {
+	return xxx_messageInfo_CMsgGuildSummary_EventPoints.Size(m)
+}
+func (m *CMsgGuildSummary_EventPoints) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgGuildSummary_EventPoints.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgGuildSummary_EventPoints proto.InternalMessageInfo
+
+func (m *CMsgGuildSummary_EventPoints) GetEventId() uint32 {
+	if m != nil && m.EventId != nil {
+		return *m.EventId
+	}
+	return 0
+}
+
+func (m *CMsgGuildSummary_EventPoints) GetGuildPoints() uint32 {
+	if m != nil && m.GuildPoints != nil {
+		return *m.GuildPoints
+	}
+	return 0
+}
+
+type CMsgGuildRole struct {
+	RoleId               *uint32  `protobuf:"varint,1,opt,name=role_id,json=roleId" json:"role_id,omitempty"`
+	RoleName             *string  `protobuf:"bytes,2,opt,name=role_name,json=roleName" json:"role_name,omitempty"`
+	RoleFlags            *uint32  `protobuf:"varint,3,opt,name=role_flags,json=roleFlags" json:"role_flags,omitempty"`
+	RoleOrder            *uint32  `protobuf:"varint,4,opt,name=role_order,json=roleOrder" json:"role_order,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CMsgGuildRole) Reset()         { *m = CMsgGuildRole{} }
+func (m *CMsgGuildRole) String() string { return proto.CompactTextString(m) }
+func (*CMsgGuildRole) ProtoMessage()    {}
+func (*CMsgGuildRole) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{2}
+}
+
+func (m *CMsgGuildRole) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgGuildRole.Unmarshal(m, b)
+}
+func (m *CMsgGuildRole) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgGuildRole.Marshal(b, m, deterministic)
+}
+func (m *CMsgGuildRole) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGuildRole.Merge(m, src)
+}
+func (m *CMsgGuildRole) XXX_Size() int {
+	return xxx_messageInfo_CMsgGuildRole.Size(m)
+}
+func (m *CMsgGuildRole) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgGuildRole.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgGuildRole proto.InternalMessageInfo
+
+func (m *CMsgGuildRole) GetRoleId() uint32 {
+	if m != nil && m.RoleId != nil {
+		return *m.RoleId
+	}
+	return 0
+}
+
+func (m *CMsgGuildRole) GetRoleName() string {
+	if m != nil && m.RoleName != nil {
+		return *m.RoleName
+	}
+	return ""
+}
+
+func (m *CMsgGuildRole) GetRoleFlags() uint32 {
+	if m != nil && m.RoleFlags != nil {
+		return *m.RoleFlags
+	}
+	return 0
+}
+
+func (m *CMsgGuildRole) GetRoleOrder() uint32 {
+	if m != nil && m.RoleOrder != nil {
+		return *m.RoleOrder
+	}
+	return 0
+}
+
+type CMsgGuildMember struct {
+	MemberAccountId           *uint32  `protobuf:"varint,1,opt,name=member_account_id,json=memberAccountId" json:"member_account_id,omitempty"`
+	MemberRoleId              *uint32  `protobuf:"varint,2,opt,name=member_role_id,json=memberRoleId" json:"member_role_id,omitempty"`
+	MemberJoinedTimestamp     *uint32  `protobuf:"varint,3,opt,name=member_joined_timestamp,json=memberJoinedTimestamp" json:"member_joined_timestamp,omitempty"`
+	MemberLastActiveTimestamp *uint32  `protobuf:"varint,4,opt,name=member_last_active_timestamp,json=memberLastActiveTimestamp" json:"member_last_active_timestamp,omitempty"`
+	XXX_NoUnkeyedLiteral      struct{} `json:"-"`
+	XXX_unrecognized          []byte   `json:"-"`
+	XXX_sizecache             int32    `json:"-"`
+}
+
+func (m *CMsgGuildMember) Reset()         { *m = CMsgGuildMember{} }
+func (m *CMsgGuildMember) String() string { return proto.CompactTextString(m) }
+func (*CMsgGuildMember) ProtoMessage()    {}
+func (*CMsgGuildMember) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{3}
+}
+
+func (m *CMsgGuildMember) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgGuildMember.Unmarshal(m, b)
+}
+func (m *CMsgGuildMember) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgGuildMember.Marshal(b, m, deterministic)
+}
+func (m *CMsgGuildMember) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGuildMember.Merge(m, src)
+}
+func (m *CMsgGuildMember) XXX_Size() int {
+	return xxx_messageInfo_CMsgGuildMember.Size(m)
+}
+func (m *CMsgGuildMember) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgGuildMember.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgGuildMember proto.InternalMessageInfo
+
+func (m *CMsgGuildMember) GetMemberAccountId() uint32 {
+	if m != nil && m.MemberAccountId != nil {
+		return *m.MemberAccountId
+	}
+	return 0
+}
+
+func (m *CMsgGuildMember) GetMemberRoleId() uint32 {
+	if m != nil && m.MemberRoleId != nil {
+		return *m.MemberRoleId
+	}
+	return 0
+}
+
+func (m *CMsgGuildMember) GetMemberJoinedTimestamp() uint32 {
+	if m != nil && m.MemberJoinedTimestamp != nil {
+		return *m.MemberJoinedTimestamp
+	}
+	return 0
+}
+
+func (m *CMsgGuildMember) GetMemberLastActiveTimestamp() uint32 {
+	if m != nil && m.MemberLastActiveTimestamp != nil {
+		return *m.MemberLastActiveTimestamp
+	}
+	return 0
+}
+
+type CMsgGuildInvite struct {
+	RequesterAccountId   *uint32  `protobuf:"varint,1,opt,name=requester_account_id,json=requesterAccountId" json:"requester_account_id,omitempty"`
+	TargetAccountId      *uint32  `protobuf:"varint,2,opt,name=target_account_id,json=targetAccountId" json:"target_account_id,omitempty"`
+	TimestampSent        *uint32  `protobuf:"varint,3,opt,name=timestamp_sent,json=timestampSent" json:"timestamp_sent,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CMsgGuildInvite) Reset()         { *m = CMsgGuildInvite{} }
+func (m *CMsgGuildInvite) String() string { return proto.CompactTextString(m) }
+func (*CMsgGuildInvite) ProtoMessage()    {}
+func (*CMsgGuildInvite) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{4}
+}
+
+func (m *CMsgGuildInvite) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgGuildInvite.Unmarshal(m, b)
+}
+func (m *CMsgGuildInvite) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgGuildInvite.Marshal(b, m, deterministic)
+}
+func (m *CMsgGuildInvite) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGuildInvite.Merge(m, src)
+}
+func (m *CMsgGuildInvite) XXX_Size() int {
+	return xxx_messageInfo_CMsgGuildInvite.Size(m)
+}
+func (m *CMsgGuildInvite) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgGuildInvite.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgGuildInvite proto.InternalMessageInfo
+
+func (m *CMsgGuildInvite) GetRequesterAccountId() uint32 {
+	if m != nil && m.RequesterAccountId != nil {
+		return *m.RequesterAccountId
+	}
+	return 0
+}
+
+func (m *CMsgGuildInvite) GetTargetAccountId() uint32 {
+	if m != nil && m.TargetAccountId != nil {
+		return *m.TargetAccountId
+	}
+	return 0
+}
+
+func (m *CMsgGuildInvite) GetTimestampSent() uint32 {
+	if m != nil && m.TimestampSent != nil {
+		return *m.TimestampSent
+	}
+	return 0
+}
+
+type CMsgGuildData struct {
+	GuildId              *uint32            `protobuf:"varint,1,opt,name=guild_id,json=guildId" json:"guild_id,omitempty"`
+	GuildInfo            *CMsgGuildInfo     `protobuf:"bytes,2,opt,name=guild_info,json=guildInfo" json:"guild_info,omitempty"`
+	GuildRoles           []*CMsgGuildRole   `protobuf:"bytes,3,rep,name=guild_roles,json=guildRoles" json:"guild_roles,omitempty"`
+	GuildMembers         []*CMsgGuildMember `protobuf:"bytes,4,rep,name=guild_members,json=guildMembers" json:"guild_members,omitempty"`
+	GuildInvites         []*CMsgGuildInvite `protobuf:"bytes,5,rep,name=guild_invites,json=guildInvites" json:"guild_invites,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}           `json:"-"`
+	XXX_unrecognized     []byte             `json:"-"`
+	XXX_sizecache        int32              `json:"-"`
+}
+
+func (m *CMsgGuildData) Reset()         { *m = CMsgGuildData{} }
+func (m *CMsgGuildData) String() string { return proto.CompactTextString(m) }
+func (*CMsgGuildData) ProtoMessage()    {}
+func (*CMsgGuildData) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{5}
+}
+
+func (m *CMsgGuildData) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgGuildData.Unmarshal(m, b)
+}
+func (m *CMsgGuildData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgGuildData.Marshal(b, m, deterministic)
+}
+func (m *CMsgGuildData) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGuildData.Merge(m, src)
+}
+func (m *CMsgGuildData) XXX_Size() int {
+	return xxx_messageInfo_CMsgGuildData.Size(m)
+}
+func (m *CMsgGuildData) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgGuildData.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgGuildData proto.InternalMessageInfo
+
+func (m *CMsgGuildData) GetGuildId() uint32 {
+	if m != nil && m.GuildId != nil {
+		return *m.GuildId
+	}
+	return 0
+}
+
+func (m *CMsgGuildData) GetGuildInfo() *CMsgGuildInfo {
+	if m != nil {
+		return m.GuildInfo
+	}
+	return nil
+}
+
+func (m *CMsgGuildData) GetGuildRoles() []*CMsgGuildRole {
+	if m != nil {
+		return m.GuildRoles
+	}
+	return nil
+}
+
+func (m *CMsgGuildData) GetGuildMembers() []*CMsgGuildMember {
+	if m != nil {
+		return m.GuildMembers
+	}
+	return nil
+}
+
+func (m *CMsgGuildData) GetGuildInvites() []*CMsgGuildInvite {
+	if m != nil {
+		return m.GuildInvites
+	}
+	return nil
+}
+
+type CMsgAccountGuildInvite struct {
+	GuildId              *uint32  `protobuf:"varint,1,opt,name=guild_id,json=guildId" json:"guild_id,omitempty"`
+	RequesterAccountId   *uint32  `protobuf:"varint,2,opt,name=requester_account_id,json=requesterAccountId" json:"requester_account_id,omitempty"`
+	TimestampSent        *uint32  `protobuf:"varint,3,opt,name=timestamp_sent,json=timestampSent" json:"timestamp_sent,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CMsgAccountGuildInvite) Reset()         { *m = CMsgAccountGuildInvite{} }
+func (m *CMsgAccountGuildInvite) String() string { return proto.CompactTextString(m) }
+func (*CMsgAccountGuildInvite) ProtoMessage()    {}
+func (*CMsgAccountGuildInvite) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{6}
+}
+
+func (m *CMsgAccountGuildInvite) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgAccountGuildInvite.Unmarshal(m, b)
+}
+func (m *CMsgAccountGuildInvite) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgAccountGuildInvite.Marshal(b, m, deterministic)
+}
+func (m *CMsgAccountGuildInvite) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgAccountGuildInvite.Merge(m, src)
+}
+func (m *CMsgAccountGuildInvite) XXX_Size() int {
+	return xxx_messageInfo_CMsgAccountGuildInvite.Size(m)
+}
+func (m *CMsgAccountGuildInvite) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgAccountGuildInvite.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgAccountGuildInvite proto.InternalMessageInfo
+
+func (m *CMsgAccountGuildInvite) GetGuildId() uint32 {
+	if m != nil && m.GuildId != nil {
+		return *m.GuildId
+	}
+	return 0
+}
+
+func (m *CMsgAccountGuildInvite) GetRequesterAccountId() uint32 {
+	if m != nil && m.RequesterAccountId != nil {
+		return *m.RequesterAccountId
+	}
+	return 0
+}
+
+func (m *CMsgAccountGuildInvite) GetTimestampSent() uint32 {
+	if m != nil && m.TimestampSent != nil {
+		return *m.TimestampSent
+	}
+	return 0
+}
+
+type CMsgAccountGuildMemberships struct {
+	GuildIds             []uint32                  `protobuf:"varint,1,rep,name=guild_ids,json=guildIds" json:"guild_ids,omitempty"`
+	GuildInvites         []*CMsgAccountGuildInvite `protobuf:"bytes,2,rep,name=guild_invites,json=guildInvites" json:"guild_invites,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                  `json:"-"`
+	XXX_unrecognized     []byte                    `json:"-"`
+	XXX_sizecache        int32                     `json:"-"`
+}
+
+func (m *CMsgAccountGuildMemberships) Reset()         { *m = CMsgAccountGuildMemberships{} }
+func (m *CMsgAccountGuildMemberships) String() string { return proto.CompactTextString(m) }
+func (*CMsgAccountGuildMemberships) ProtoMessage()    {}
+func (*CMsgAccountGuildMemberships) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{7}
+}
+
+func (m *CMsgAccountGuildMemberships) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgAccountGuildMemberships.Unmarshal(m, b)
+}
+func (m *CMsgAccountGuildMemberships) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgAccountGuildMemberships.Marshal(b, m, deterministic)
+}
+func (m *CMsgAccountGuildMemberships) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgAccountGuildMemberships.Merge(m, src)
+}
+func (m *CMsgAccountGuildMemberships) XXX_Size() int {
+	return xxx_messageInfo_CMsgAccountGuildMemberships.Size(m)
+}
+func (m *CMsgAccountGuildMemberships) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgAccountGuildMemberships.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgAccountGuildMemberships proto.InternalMessageInfo
+
+func (m *CMsgAccountGuildMemberships) GetGuildIds() []uint32 {
+	if m != nil {
+		return m.GuildIds
+	}
+	return nil
+}
+
+func (m *CMsgAccountGuildMemberships) GetGuildInvites() []*CMsgAccountGuildInvite {
+	if m != nil {
+		return m.GuildInvites
+	}
+	return nil
+}
+
+type CMsgGuildPersonaInfo struct {
+	GuildId              *uint32  `protobuf:"varint,1,opt,name=guild_id,json=guildId" json:"guild_id,omitempty"`
+	GuildTag             *string  `protobuf:"bytes,2,opt,name=guild_tag,json=guildTag" json:"guild_tag,omitempty"`
+	GuildFlags           *uint32  `protobuf:"varint,3,opt,name=guild_flags,json=guildFlags" json:"guild_flags,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CMsgGuildPersonaInfo) Reset()         { *m = CMsgGuildPersonaInfo{} }
+func (m *CMsgGuildPersonaInfo) String() string { return proto.CompactTextString(m) }
+func (*CMsgGuildPersonaInfo) ProtoMessage()    {}
+func (*CMsgGuildPersonaInfo) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{8}
+}
+
+func (m *CMsgGuildPersonaInfo) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgGuildPersonaInfo.Unmarshal(m, b)
+}
+func (m *CMsgGuildPersonaInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgGuildPersonaInfo.Marshal(b, m, deterministic)
+}
+func (m *CMsgGuildPersonaInfo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGuildPersonaInfo.Merge(m, src)
+}
+func (m *CMsgGuildPersonaInfo) XXX_Size() int {
+	return xxx_messageInfo_CMsgGuildPersonaInfo.Size(m)
+}
+func (m *CMsgGuildPersonaInfo) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgGuildPersonaInfo.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgGuildPersonaInfo proto.InternalMessageInfo
+
+func (m *CMsgGuildPersonaInfo) GetGuildId() uint32 {
+	if m != nil && m.GuildId != nil {
+		return *m.GuildId
+	}
+	return 0
+}
+
+func (m *CMsgGuildPersonaInfo) GetGuildTag() string {
+	if m != nil && m.GuildTag != nil {
+		return *m.GuildTag
+	}
+	return ""
+}
+
+func (m *CMsgGuildPersonaInfo) GetGuildFlags() uint32 {
+	if m != nil && m.GuildFlags != nil {
+		return *m.GuildFlags
+	}
+	return 0
+}
+
+type CMsgAccountGuildsPersonaInfo struct {
+	GuildPersonaInfos    []*CMsgGuildPersonaInfo `protobuf:"bytes,1,rep,name=guild_persona_infos,json=guildPersonaInfos" json:"guild_persona_infos,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                `json:"-"`
+	XXX_unrecognized     []byte                  `json:"-"`
+	XXX_sizecache        int32                   `json:"-"`
+}
+
+func (m *CMsgAccountGuildsPersonaInfo) Reset()         { *m = CMsgAccountGuildsPersonaInfo{} }
+func (m *CMsgAccountGuildsPersonaInfo) String() string { return proto.CompactTextString(m) }
+func (*CMsgAccountGuildsPersonaInfo) ProtoMessage()    {}
+func (*CMsgAccountGuildsPersonaInfo) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{9}
+}
+
+func (m *CMsgAccountGuildsPersonaInfo) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgAccountGuildsPersonaInfo.Unmarshal(m, b)
+}
+func (m *CMsgAccountGuildsPersonaInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgAccountGuildsPersonaInfo.Marshal(b, m, deterministic)
+}
+func (m *CMsgAccountGuildsPersonaInfo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgAccountGuildsPersonaInfo.Merge(m, src)
+}
+func (m *CMsgAccountGuildsPersonaInfo) XXX_Size() int {
+	return xxx_messageInfo_CMsgAccountGuildsPersonaInfo.Size(m)
+}
+func (m *CMsgAccountGuildsPersonaInfo) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgAccountGuildsPersonaInfo.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgAccountGuildsPersonaInfo proto.InternalMessageInfo
+
+func (m *CMsgAccountGuildsPersonaInfo) GetGuildPersonaInfos() []*CMsgGuildPersonaInfo {
+	if m != nil {
+		return m.GuildPersonaInfos
+	}
+	return nil
+}
+
+type CMsgGuildFeedEvent struct {
+	FeedEventId          *uint64  `protobuf:"varint,1,opt,name=feed_event_id,json=feedEventId" json:"feed_event_id,omitempty"`
+	Timestamp            *uint32  `protobuf:"varint,2,opt,name=timestamp" json:"timestamp,omitempty"`
+	EventType            *uint32  `protobuf:"varint,3,opt,name=event_type,json=eventType" json:"event_type,omitempty"`
+	ParamUint_1          *uint32  `protobuf:"varint,4,opt,name=param_uint_1,json=paramUint1" json:"param_uint_1,omitempty"`
+	ParamUint_2          *uint32  `protobuf:"varint,5,opt,name=param_uint_2,json=paramUint2" json:"param_uint_2,omitempty"`
+	ParamUint_3          *uint32  `protobuf:"varint,6,opt,name=param_uint_3,json=paramUint3" json:"param_uint_3,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CMsgGuildFeedEvent) Reset()         { *m = CMsgGuildFeedEvent{} }
+func (m *CMsgGuildFeedEvent) String() string { return proto.CompactTextString(m) }
+func (*CMsgGuildFeedEvent) ProtoMessage()    {}
+func (*CMsgGuildFeedEvent) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{10}
+}
+
+func (m *CMsgGuildFeedEvent) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgGuildFeedEvent.Unmarshal(m, b)
+}
+func (m *CMsgGuildFeedEvent) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgGuildFeedEvent.Marshal(b, m, deterministic)
+}
+func (m *CMsgGuildFeedEvent) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGuildFeedEvent.Merge(m, src)
+}
+func (m *CMsgGuildFeedEvent) XXX_Size() int {
+	return xxx_messageInfo_CMsgGuildFeedEvent.Size(m)
+}
+func (m *CMsgGuildFeedEvent) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgGuildFeedEvent.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgGuildFeedEvent proto.InternalMessageInfo
+
+func (m *CMsgGuildFeedEvent) GetFeedEventId() uint64 {
+	if m != nil && m.FeedEventId != nil {
+		return *m.FeedEventId
+	}
+	return 0
+}
+
+func (m *CMsgGuildFeedEvent) GetTimestamp() uint32 {
+	if m != nil && m.Timestamp != nil {
+		return *m.Timestamp
+	}
+	return 0
+}
+
+func (m *CMsgGuildFeedEvent) GetEventType() uint32 {
+	if m != nil && m.EventType != nil {
+		return *m.EventType
+	}
+	return 0
+}
+
+func (m *CMsgGuildFeedEvent) GetParamUint_1() uint32 {
+	if m != nil && m.ParamUint_1 != nil {
+		return *m.ParamUint_1
+	}
+	return 0
+}
+
+func (m *CMsgGuildFeedEvent) GetParamUint_2() uint32 {
+	if m != nil && m.ParamUint_2 != nil {
+		return *m.ParamUint_2
+	}
+	return 0
+}
+
+func (m *CMsgGuildFeedEvent) GetParamUint_3() uint32 {
+	if m != nil && m.ParamUint_3 != nil {
+		return *m.ParamUint_3
+	}
+	return 0
+}
+
+type CMsgClientToGCCreateGuild struct {
+	GuildInfo            *CMsgGuildInfo  `protobuf:"bytes,1,opt,name=guild_info,json=guildInfo" json:"guild_info,omitempty"`
+	GuildChatType        *EGuildChatType `protobuf:"varint,2,opt,name=guild_chat_type,json=guildChatType,enum=dota.EGuildChatType,def=0" json:"guild_chat_type,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
+	XXX_unrecognized     []byte          `json:"-"`
+	XXX_sizecache        int32           `json:"-"`
+}
+
+func (m *CMsgClientToGCCreateGuild) Reset()         { *m = CMsgClientToGCCreateGuild{} }
+func (m *CMsgClientToGCCreateGuild) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCCreateGuild) ProtoMessage()    {}
+func (*CMsgClientToGCCreateGuild) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{11}
+}
+
+func (m *CMsgClientToGCCreateGuild) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCCreateGuild.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCCreateGuild) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCCreateGuild.Marshal(b, m, deterministic)
+}
+func (m *CMsgClientToGCCreateGuild) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCCreateGuild.Merge(m, src)
+}
+func (m *CMsgClientToGCCreateGuild) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCCreateGuild.Size(m)
+}
+func (m *CMsgClientToGCCreateGuild) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCCreateGuild.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCCreateGuild proto.InternalMessageInfo
+
+const Default_CMsgClientToGCCreateGuild_GuildChatType EGuildChatType = EGuildChatType_k_EGuildChatType_Unspecified
+
+func (m *CMsgClientToGCCreateGuild) GetGuildInfo() *CMsgGuildInfo {
+	if m != nil {
+		return m.GuildInfo
+	}
+	return nil
+}
+
+func (m *CMsgClientToGCCreateGuild) GetGuildChatType() EGuildChatType {
+	if m != nil && m.GuildChatType != nil {
+		return *m.GuildChatType
+	}
+	return Default_CMsgClientToGCCreateGuild_GuildChatType
+}
+
+type CMsgClientToGCCreateGuildResponse struct {
+	Result               *CMsgClientToGCCreateGuildResponse_EResponse `protobuf:"varint,1,opt,name=result,enum=dota.CMsgClientToGCCreateGuildResponse_EResponse,def=0" json:"result,omitempty"`
+	GuildId              *uint32                                      `protobuf:"varint,2,opt,name=guild_id,json=guildId" json:"guild_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                     `json:"-"`
+	XXX_unrecognized     []byte                                       `json:"-"`
+	XXX_sizecache        int32                                        `json:"-"`
+}
+
+func (m *CMsgClientToGCCreateGuildResponse) Reset()         { *m = CMsgClientToGCCreateGuildResponse{} }
+func (m *CMsgClientToGCCreateGuildResponse) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCCreateGuildResponse) ProtoMessage()    {}
+func (*CMsgClientToGCCreateGuildResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{12}
+}
+
+func (m *CMsgClientToGCCreateGuildResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCCreateGuildResponse.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCCreateGuildResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCCreateGuildResponse.Marshal(b, m, deterministic)
+}
+func (m *CMsgClientToGCCreateGuildResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCCreateGuildResponse.Merge(m, src)
+}
+func (m *CMsgClientToGCCreateGuildResponse) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCCreateGuildResponse.Size(m)
+}
+func (m *CMsgClientToGCCreateGuildResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCCreateGuildResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCCreateGuildResponse proto.InternalMessageInfo
+
+const Default_CMsgClientToGCCreateGuildResponse_Result CMsgClientToGCCreateGuildResponse_EResponse = CMsgClientToGCCreateGuildResponse_k_eInternalError
+
+func (m *CMsgClientToGCCreateGuildResponse) GetResult() CMsgClientToGCCreateGuildResponse_EResponse {
+	if m != nil && m.Result != nil {
+		return *m.Result
+	}
+	return Default_CMsgClientToGCCreateGuildResponse_Result
+}
+
+func (m *CMsgClientToGCCreateGuildResponse) GetGuildId() uint32 {
+	if m != nil && m.GuildId != nil {
+		return *m.GuildId
+	}
+	return 0
+}
+
+type CMsgClientToGCSetGuildInfo struct {
+	GuildId              *uint32         `protobuf:"varint,1,opt,name=guild_id,json=guildId" json:"guild_id,omitempty"`
+	GuildInfo            *CMsgGuildInfo  `protobuf:"bytes,2,opt,name=guild_info,json=guildInfo" json:"guild_info,omitempty"`
+	GuildChatType        *EGuildChatType `protobuf:"varint,3,opt,name=guild_chat_type,json=guildChatType,enum=dota.EGuildChatType,def=0" json:"guild_chat_type,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
+	XXX_unrecognized     []byte          `json:"-"`
+	XXX_sizecache        int32           `json:"-"`
+}
+
+func (m *CMsgClientToGCSetGuildInfo) Reset()         { *m = CMsgClientToGCSetGuildInfo{} }
+func (m *CMsgClientToGCSetGuildInfo) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCSetGuildInfo) ProtoMessage()    {}
+func (*CMsgClientToGCSetGuildInfo) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{13}
+}
+
+func (m *CMsgClientToGCSetGuildInfo) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCSetGuildInfo.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCSetGuildInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCSetGuildInfo.Marshal(b, m, deterministic)
+}
+func (m *CMsgClientToGCSetGuildInfo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCSetGuildInfo.Merge(m, src)
+}
+func (m *CMsgClientToGCSetGuildInfo) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCSetGuildInfo.Size(m)
+}
+func (m *CMsgClientToGCSetGuildInfo) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCSetGuildInfo.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCSetGuildInfo proto.InternalMessageInfo
+
+const Default_CMsgClientToGCSetGuildInfo_GuildChatType EGuildChatType = EGuildChatType_k_EGuildChatType_Unspecified
+
+func (m *CMsgClientToGCSetGuildInfo) GetGuildId() uint32 {
+	if m != nil && m.GuildId != nil {
+		return *m.GuildId
+	}
+	return 0
+}
+
+func (m *CMsgClientToGCSetGuildInfo) GetGuildInfo() *CMsgGuildInfo {
+	if m != nil {
+		return m.GuildInfo
+	}
+	return nil
+}
+
+func (m *CMsgClientToGCSetGuildInfo) GetGuildChatType() EGuildChatType {
+	if m != nil && m.GuildChatType != nil {
+		return *m.GuildChatType
+	}
+	return Default_CMsgClientToGCSetGuildInfo_GuildChatType
+}
+
+type CMsgClientToGCSetGuildInfoResponse struct {
+	Result               *CMsgClientToGCSetGuildInfoResponse_EResponse `protobuf:"varint,1,opt,name=result,enum=dota.CMsgClientToGCSetGuildInfoResponse_EResponse,def=0" json:"result,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                      `json:"-"`
+	XXX_unrecognized     []byte                                        `json:"-"`
+	XXX_sizecache        int32                                         `json:"-"`
+}
+
+func (m *CMsgClientToGCSetGuildInfoResponse) Reset()         { *m = CMsgClientToGCSetGuildInfoResponse{} }
+func (m *CMsgClientToGCSetGuildInfoResponse) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCSetGuildInfoResponse) ProtoMessage()    {}
+func (*CMsgClientToGCSetGuildInfoResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{14}
+}
+
+func (m *CMsgClientToGCSetGuildInfoResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCSetGuildInfoResponse.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCSetGuildInfoResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCSetGuildInfoResponse.Marshal(b, m, deterministic)
+}
+func (m *CMsgClientToGCSetGuildInfoResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCSetGuildInfoResponse.Merge(m, src)
+}
+func (m *CMsgClientToGCSetGuildInfoResponse) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCSetGuildInfoResponse.Size(m)
+}
+func (m *CMsgClientToGCSetGuildInfoResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCSetGuildInfoResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCSetGuildInfoResponse proto.InternalMessageInfo
+
+const Default_CMsgClientToGCSetGuildInfoResponse_Result CMsgClientToGCSetGuildInfoResponse_EResponse = CMsgClientToGCSetGuildInfoResponse_k_eInternalError
+
+func (m *CMsgClientToGCSetGuildInfoResponse) GetResult() CMsgClientToGCSetGuildInfoResponse_EResponse {
+	if m != nil && m.Result != nil {
+		return *m.Result
+	}
+	return Default_CMsgClientToGCSetGuildInfoResponse_Result
+}
+
+type CMsgClientToGCRequestGuildData struct {
+	GuildId              *uint32  `protobuf:"varint,1,opt,name=guild_id,json=guildId" json:"guild_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CMsgClientToGCRequestGuildData) Reset()         { *m = CMsgClientToGCRequestGuildData{} }
+func (m *CMsgClientToGCRequestGuildData) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCRequestGuildData) ProtoMessage()    {}
+func (*CMsgClientToGCRequestGuildData) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{15}
+}
+
+func (m *CMsgClientToGCRequestGuildData) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCRequestGuildData.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCRequestGuildData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCRequestGuildData.Marshal(b, m, deterministic)
+}
+func (m *CMsgClientToGCRequestGuildData) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCRequestGuildData.Merge(m, src)
+}
+func (m *CMsgClientToGCRequestGuildData) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCRequestGuildData.Size(m)
+}
+func (m *CMsgClientToGCRequestGuildData) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCRequestGuildData.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCRequestGuildData proto.InternalMessageInfo
+
+func (m *CMsgClientToGCRequestGuildData) GetGuildId() uint32 {
+	if m != nil && m.GuildId != nil {
+		return *m.GuildId
+	}
+	return 0
+}
+
+type CMsgClientToGCRequestGuildDataResponse struct {
+	Result               *CMsgClientToGCRequestGuildDataResponse_EResponse `protobuf:"varint,1,opt,name=result,enum=dota.CMsgClientToGCRequestGuildDataResponse_EResponse,def=0" json:"result,omitempty"`
+	GuildData            *CMsgGuildData                                    `protobuf:"bytes,2,opt,name=guild_data,json=guildData" json:"guild_data,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                          `json:"-"`
+	XXX_unrecognized     []byte                                            `json:"-"`
+	XXX_sizecache        int32                                             `json:"-"`
+}
+
+func (m *CMsgClientToGCRequestGuildDataResponse) Reset() {
+	*m = CMsgClientToGCRequestGuildDataResponse{}
+}
+func (m *CMsgClientToGCRequestGuildDataResponse) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCRequestGuildDataResponse) ProtoMessage()    {}
+func (*CMsgClientToGCRequestGuildDataResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{16}
+}
+
+func (m *CMsgClientToGCRequestGuildDataResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCRequestGuildDataResponse.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCRequestGuildDataResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCRequestGuildDataResponse.Marshal(b, m, deterministic)
+}
+func (m *CMsgClientToGCRequestGuildDataResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCRequestGuildDataResponse.Merge(m, src)
+}
+func (m *CMsgClientToGCRequestGuildDataResponse) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCRequestGuildDataResponse.Size(m)
+}
+func (m *CMsgClientToGCRequestGuildDataResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCRequestGuildDataResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCRequestGuildDataResponse proto.InternalMessageInfo
+
+const Default_CMsgClientToGCRequestGuildDataResponse_Result CMsgClientToGCRequestGuildDataResponse_EResponse = CMsgClientToGCRequestGuildDataResponse_k_eInternalError
+
+func (m *CMsgClientToGCRequestGuildDataResponse) GetResult() CMsgClientToGCRequestGuildDataResponse_EResponse {
+	if m != nil && m.Result != nil {
+		return *m.Result
+	}
+	return Default_CMsgClientToGCRequestGuildDataResponse_Result
+}
+
+func (m *CMsgClientToGCRequestGuildDataResponse) GetGuildData() *CMsgGuildData {
+	if m != nil {
+		return m.GuildData
+	}
+	return nil
+}
+
+type CMsgGCToClientGuildDataUpdated struct {
+	GuildData            *CMsgGuildData `protobuf:"bytes,1,opt,name=guild_data,json=guildData" json:"guild_data,omitempty"`
+	UpdateFlags          *uint32        `protobuf:"varint,2,opt,name=update_flags,json=updateFlags" json:"update_flags,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
+	XXX_unrecognized     []byte         `json:"-"`
+	XXX_sizecache        int32          `json:"-"`
+}
+
+func (m *CMsgGCToClientGuildDataUpdated) Reset()         { *m = CMsgGCToClientGuildDataUpdated{} }
+func (m *CMsgGCToClientGuildDataUpdated) String() string { return proto.CompactTextString(m) }
+func (*CMsgGCToClientGuildDataUpdated) ProtoMessage()    {}
+func (*CMsgGCToClientGuildDataUpdated) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{17}
+}
+
+func (m *CMsgGCToClientGuildDataUpdated) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgGCToClientGuildDataUpdated.Unmarshal(m, b)
+}
+func (m *CMsgGCToClientGuildDataUpdated) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgGCToClientGuildDataUpdated.Marshal(b, m, deterministic)
+}
+func (m *CMsgGCToClientGuildDataUpdated) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGCToClientGuildDataUpdated.Merge(m, src)
+}
+func (m *CMsgGCToClientGuildDataUpdated) XXX_Size() int {
+	return xxx_messageInfo_CMsgGCToClientGuildDataUpdated.Size(m)
+}
+func (m *CMsgGCToClientGuildDataUpdated) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgGCToClientGuildDataUpdated.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgGCToClientGuildDataUpdated proto.InternalMessageInfo
+
+func (m *CMsgGCToClientGuildDataUpdated) GetGuildData() *CMsgGuildData {
+	if m != nil {
+		return m.GuildData
+	}
+	return nil
+}
+
+func (m *CMsgGCToClientGuildDataUpdated) GetUpdateFlags() uint32 {
+	if m != nil && m.UpdateFlags != nil {
+		return *m.UpdateFlags
+	}
+	return 0
+}
+
+type CMsgGCToClientGuildMembersDataUpdated struct {
+	GuildId              *uint32            `protobuf:"varint,1,opt,name=guild_id,json=guildId" json:"guild_id,omitempty"`
+	MembersData          []*CMsgGuildMember `protobuf:"bytes,2,rep,name=members_data,json=membersData" json:"members_data,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}           `json:"-"`
+	XXX_unrecognized     []byte             `json:"-"`
+	XXX_sizecache        int32              `json:"-"`
+}
+
+func (m *CMsgGCToClientGuildMembersDataUpdated) Reset()         { *m = CMsgGCToClientGuildMembersDataUpdated{} }
+func (m *CMsgGCToClientGuildMembersDataUpdated) String() string { return proto.CompactTextString(m) }
+func (*CMsgGCToClientGuildMembersDataUpdated) ProtoMessage()    {}
+func (*CMsgGCToClientGuildMembersDataUpdated) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{18}
+}
+
+func (m *CMsgGCToClientGuildMembersDataUpdated) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgGCToClientGuildMembersDataUpdated.Unmarshal(m, b)
+}
+func (m *CMsgGCToClientGuildMembersDataUpdated) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgGCToClientGuildMembersDataUpdated.Marshal(b, m, deterministic)
+}
+func (m *CMsgGCToClientGuildMembersDataUpdated) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGCToClientGuildMembersDataUpdated.Merge(m, src)
+}
+func (m *CMsgGCToClientGuildMembersDataUpdated) XXX_Size() int {
+	return xxx_messageInfo_CMsgGCToClientGuildMembersDataUpdated.Size(m)
+}
+func (m *CMsgGCToClientGuildMembersDataUpdated) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgGCToClientGuildMembersDataUpdated.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgGCToClientGuildMembersDataUpdated proto.InternalMessageInfo
+
+func (m *CMsgGCToClientGuildMembersDataUpdated) GetGuildId() uint32 {
+	if m != nil && m.GuildId != nil {
+		return *m.GuildId
+	}
+	return 0
+}
+
+func (m *CMsgGCToClientGuildMembersDataUpdated) GetMembersData() []*CMsgGuildMember {
+	if m != nil {
+		return m.MembersData
+	}
+	return nil
+}
+
+type CMsgClientToGCRequestGuildMembership struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CMsgClientToGCRequestGuildMembership) Reset()         { *m = CMsgClientToGCRequestGuildMembership{} }
+func (m *CMsgClientToGCRequestGuildMembership) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCRequestGuildMembership) ProtoMessage()    {}
+func (*CMsgClientToGCRequestGuildMembership) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{19}
+}
+
+func (m *CMsgClientToGCRequestGuildMembership) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCRequestGuildMembership.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCRequestGuildMembership) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCRequestGuildMembership.Marshal(b, m, deterministic)
+}
+func (m *CMsgClientToGCRequestGuildMembership) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCRequestGuildMembership.Merge(m, src)
+}
+func (m *CMsgClientToGCRequestGuildMembership) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCRequestGuildMembership.Size(m)
+}
+func (m *CMsgClientToGCRequestGuildMembership) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCRequestGuildMembership.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCRequestGuildMembership proto.InternalMessageInfo
+
+type CMsgClientToGCRequestGuildMembershipResponse struct {
+	Result               *CMsgClientToGCRequestGuildMembershipResponse_EResponse `protobuf:"varint,1,opt,name=result,enum=dota.CMsgClientToGCRequestGuildMembershipResponse_EResponse,def=0" json:"result,omitempty"`
+	GuildMemberships     *CMsgAccountGuildMemberships                            `protobuf:"bytes,2,opt,name=guild_memberships,json=guildMemberships" json:"guild_memberships,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                `json:"-"`
+	XXX_unrecognized     []byte                                                  `json:"-"`
+	XXX_sizecache        int32                                                   `json:"-"`
+}
+
+func (m *CMsgClientToGCRequestGuildMembershipResponse) Reset() {
+	*m = CMsgClientToGCRequestGuildMembershipResponse{}
+}
+func (m *CMsgClientToGCRequestGuildMembershipResponse) String() string {
+	return proto.CompactTextString(m)
+}
+func (*CMsgClientToGCRequestGuildMembershipResponse) ProtoMessage() {}
+func (*CMsgClientToGCRequestGuildMembershipResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{20}
+}
+
+func (m *CMsgClientToGCRequestGuildMembershipResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCRequestGuildMembershipResponse.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCRequestGuildMembershipResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCRequestGuildMembershipResponse.Marshal(b, m, deterministic)
+}
+func (m *CMsgClientToGCRequestGuildMembershipResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCRequestGuildMembershipResponse.Merge(m, src)
+}
+func (m *CMsgClientToGCRequestGuildMembershipResponse) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCRequestGuildMembershipResponse.Size(m)
+}
+func (m *CMsgClientToGCRequestGuildMembershipResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCRequestGuildMembershipResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCRequestGuildMembershipResponse proto.InternalMessageInfo
+
+const Default_CMsgClientToGCRequestGuildMembershipResponse_Result CMsgClientToGCRequestGuildMembershipResponse_EResponse = CMsgClientToGCRequestGuildMembershipResponse_k_eInternalError
+
+func (m *CMsgClientToGCRequestGuildMembershipResponse) GetResult() CMsgClientToGCRequestGuildMembershipResponse_EResponse {
+	if m != nil && m.Result != nil {
+		return *m.Result
+	}
+	return Default_CMsgClientToGCRequestGuildMembershipResponse_Result
+}
+
+func (m *CMsgClientToGCRequestGuildMembershipResponse) GetGuildMemberships() *CMsgAccountGuildMemberships {
+	if m != nil {
+		return m.GuildMemberships
+	}
+	return nil
+}
+
+type CMsgGCToClientGuildMembershipUpdated struct {
+	GuildMemberships     *CMsgAccountGuildMemberships `protobuf:"bytes,1,opt,name=guild_memberships,json=guildMemberships" json:"guild_memberships,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                     `json:"-"`
+	XXX_unrecognized     []byte                       `json:"-"`
+	XXX_sizecache        int32                        `json:"-"`
+}
+
+func (m *CMsgGCToClientGuildMembershipUpdated) Reset()         { *m = CMsgGCToClientGuildMembershipUpdated{} }
+func (m *CMsgGCToClientGuildMembershipUpdated) String() string { return proto.CompactTextString(m) }
+func (*CMsgGCToClientGuildMembershipUpdated) ProtoMessage()    {}
+func (*CMsgGCToClientGuildMembershipUpdated) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{21}
+}
+
+func (m *CMsgGCToClientGuildMembershipUpdated) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgGCToClientGuildMembershipUpdated.Unmarshal(m, b)
+}
+func (m *CMsgGCToClientGuildMembershipUpdated) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgGCToClientGuildMembershipUpdated.Marshal(b, m, deterministic)
+}
+func (m *CMsgGCToClientGuildMembershipUpdated) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGCToClientGuildMembershipUpdated.Merge(m, src)
+}
+func (m *CMsgGCToClientGuildMembershipUpdated) XXX_Size() int {
+	return xxx_messageInfo_CMsgGCToClientGuildMembershipUpdated.Size(m)
+}
+func (m *CMsgGCToClientGuildMembershipUpdated) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgGCToClientGuildMembershipUpdated.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgGCToClientGuildMembershipUpdated proto.InternalMessageInfo
+
+func (m *CMsgGCToClientGuildMembershipUpdated) GetGuildMemberships() *CMsgAccountGuildMemberships {
+	if m != nil {
+		return m.GuildMemberships
+	}
+	return nil
+}
+
+type CMsgClientToGCRequestGuildSummary struct {
+	GuildId              *uint32  `protobuf:"varint,1,opt,name=guild_id,json=guildId" json:"guild_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CMsgClientToGCRequestGuildSummary) Reset()         { *m = CMsgClientToGCRequestGuildSummary{} }
+func (m *CMsgClientToGCRequestGuildSummary) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCRequestGuildSummary) ProtoMessage()    {}
+func (*CMsgClientToGCRequestGuildSummary) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{22}
+}
+
+func (m *CMsgClientToGCRequestGuildSummary) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCRequestGuildSummary.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCRequestGuildSummary) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCRequestGuildSummary.Marshal(b, m, deterministic)
+}
+func (m *CMsgClientToGCRequestGuildSummary) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCRequestGuildSummary.Merge(m, src)
+}
+func (m *CMsgClientToGCRequestGuildSummary) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCRequestGuildSummary.Size(m)
+}
+func (m *CMsgClientToGCRequestGuildSummary) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCRequestGuildSummary.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCRequestGuildSummary proto.InternalMessageInfo
+
+func (m *CMsgClientToGCRequestGuildSummary) GetGuildId() uint32 {
+	if m != nil && m.GuildId != nil {
+		return *m.GuildId
+	}
+	return 0
+}
+
+type CMsgClientToGCRequestGuildSummaryResponse struct {
+	Result               *CMsgClientToGCRequestGuildSummaryResponse_EResponse `protobuf:"varint,1,opt,name=result,enum=dota.CMsgClientToGCRequestGuildSummaryResponse_EResponse,def=0" json:"result,omitempty"`
+	GuildSummary         *CMsgGuildSummary                                    `protobuf:"bytes,2,opt,name=guild_summary,json=guildSummary" json:"guild_summary,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                             `json:"-"`
+	XXX_unrecognized     []byte                                               `json:"-"`
+	XXX_sizecache        int32                                                `json:"-"`
+}
+
+func (m *CMsgClientToGCRequestGuildSummaryResponse) Reset() {
+	*m = CMsgClientToGCRequestGuildSummaryResponse{}
+}
+func (m *CMsgClientToGCRequestGuildSummaryResponse) String() string {
+	return proto.CompactTextString(m)
+}
+func (*CMsgClientToGCRequestGuildSummaryResponse) ProtoMessage() {}
+func (*CMsgClientToGCRequestGuildSummaryResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{23}
+}
+
+func (m *CMsgClientToGCRequestGuildSummaryResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCRequestGuildSummaryResponse.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCRequestGuildSummaryResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCRequestGuildSummaryResponse.Marshal(b, m, deterministic)
+}
+func (m *CMsgClientToGCRequestGuildSummaryResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCRequestGuildSummaryResponse.Merge(m, src)
+}
+func (m *CMsgClientToGCRequestGuildSummaryResponse) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCRequestGuildSummaryResponse.Size(m)
+}
+func (m *CMsgClientToGCRequestGuildSummaryResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCRequestGuildSummaryResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCRequestGuildSummaryResponse proto.InternalMessageInfo
+
+const Default_CMsgClientToGCRequestGuildSummaryResponse_Result CMsgClientToGCRequestGuildSummaryResponse_EResponse = CMsgClientToGCRequestGuildSummaryResponse_k_eInternalError
+
+func (m *CMsgClientToGCRequestGuildSummaryResponse) GetResult() CMsgClientToGCRequestGuildSummaryResponse_EResponse {
+	if m != nil && m.Result != nil {
+		return *m.Result
+	}
+	return Default_CMsgClientToGCRequestGuildSummaryResponse_Result
+}
+
+func (m *CMsgClientToGCRequestGuildSummaryResponse) GetGuildSummary() *CMsgGuildSummary {
+	if m != nil {
+		return m.GuildSummary
+	}
+	return nil
+}
+
+type CMsgClientToGCJoinGuild struct {
+	GuildId              *uint32  `protobuf:"varint,1,opt,name=guild_id,json=guildId" json:"guild_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CMsgClientToGCJoinGuild) Reset()         { *m = CMsgClientToGCJoinGuild{} }
+func (m *CMsgClientToGCJoinGuild) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCJoinGuild) ProtoMessage()    {}
+func (*CMsgClientToGCJoinGuild) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{24}
+}
+
+func (m *CMsgClientToGCJoinGuild) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCJoinGuild.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCJoinGuild) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCJoinGuild.Marshal(b, m, deterministic)
+}
+func (m *CMsgClientToGCJoinGuild) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCJoinGuild.Merge(m, src)
+}
+func (m *CMsgClientToGCJoinGuild) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCJoinGuild.Size(m)
+}
+func (m *CMsgClientToGCJoinGuild) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCJoinGuild.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCJoinGuild proto.InternalMessageInfo
+
+func (m *CMsgClientToGCJoinGuild) GetGuildId() uint32 {
+	if m != nil && m.GuildId != nil {
+		return *m.GuildId
+	}
+	return 0
+}
+
+type CMsgClientToGCJoinGuildResponse struct {
+	Result               *CMsgClientToGCJoinGuildResponse_EResponse `protobuf:"varint,1,opt,name=result,enum=dota.CMsgClientToGCJoinGuildResponse_EResponse,def=0" json:"result,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                   `json:"-"`
+	XXX_unrecognized     []byte                                     `json:"-"`
+	XXX_sizecache        int32                                      `json:"-"`
+}
+
+func (m *CMsgClientToGCJoinGuildResponse) Reset()         { *m = CMsgClientToGCJoinGuildResponse{} }
+func (m *CMsgClientToGCJoinGuildResponse) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCJoinGuildResponse) ProtoMessage()    {}
+func (*CMsgClientToGCJoinGuildResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{25}
+}
+
+func (m *CMsgClientToGCJoinGuildResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCJoinGuildResponse.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCJoinGuildResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCJoinGuildResponse.Marshal(b, m, deterministic)
+}
+func (m *CMsgClientToGCJoinGuildResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCJoinGuildResponse.Merge(m, src)
+}
+func (m *CMsgClientToGCJoinGuildResponse) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCJoinGuildResponse.Size(m)
+}
+func (m *CMsgClientToGCJoinGuildResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCJoinGuildResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCJoinGuildResponse proto.InternalMessageInfo
+
+const Default_CMsgClientToGCJoinGuildResponse_Result CMsgClientToGCJoinGuildResponse_EResponse = CMsgClientToGCJoinGuildResponse_k_eInternalError
+
+func (m *CMsgClientToGCJoinGuildResponse) GetResult() CMsgClientToGCJoinGuildResponse_EResponse {
+	if m != nil && m.Result != nil {
+		return *m.Result
+	}
+	return Default_CMsgClientToGCJoinGuildResponse_Result
+}
+
+type CMsgClientToGCLeaveGuild struct {
+	GuildId              *uint32  `protobuf:"varint,1,opt,name=guild_id,json=guildId" json:"guild_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CMsgClientToGCLeaveGuild) Reset()         { *m = CMsgClientToGCLeaveGuild{} }
+func (m *CMsgClientToGCLeaveGuild) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCLeaveGuild) ProtoMessage()    {}
+func (*CMsgClientToGCLeaveGuild) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{26}
+}
+
+func (m *CMsgClientToGCLeaveGuild) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCLeaveGuild.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCLeaveGuild) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCLeaveGuild.Marshal(b, m, deterministic)
+}
+func (m *CMsgClientToGCLeaveGuild) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCLeaveGuild.Merge(m, src)
+}
+func (m *CMsgClientToGCLeaveGuild) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCLeaveGuild.Size(m)
+}
+func (m *CMsgClientToGCLeaveGuild) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCLeaveGuild.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCLeaveGuild proto.InternalMessageInfo
+
+func (m *CMsgClientToGCLeaveGuild) GetGuildId() uint32 {
+	if m != nil && m.GuildId != nil {
+		return *m.GuildId
+	}
+	return 0
+}
+
+type CMsgClientToGCLeaveGuildResponse struct {
+	Result               *CMsgClientToGCLeaveGuildResponse_EResponse `protobuf:"varint,1,opt,name=result,enum=dota.CMsgClientToGCLeaveGuildResponse_EResponse,def=0" json:"result,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                    `json:"-"`
+	XXX_unrecognized     []byte                                      `json:"-"`
+	XXX_sizecache        int32                                       `json:"-"`
+}
+
+func (m *CMsgClientToGCLeaveGuildResponse) Reset()         { *m = CMsgClientToGCLeaveGuildResponse{} }
+func (m *CMsgClientToGCLeaveGuildResponse) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCLeaveGuildResponse) ProtoMessage()    {}
+func (*CMsgClientToGCLeaveGuildResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{27}
+}
+
+func (m *CMsgClientToGCLeaveGuildResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCLeaveGuildResponse.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCLeaveGuildResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCLeaveGuildResponse.Marshal(b, m, deterministic)
+}
+func (m *CMsgClientToGCLeaveGuildResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCLeaveGuildResponse.Merge(m, src)
+}
+func (m *CMsgClientToGCLeaveGuildResponse) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCLeaveGuildResponse.Size(m)
+}
+func (m *CMsgClientToGCLeaveGuildResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCLeaveGuildResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCLeaveGuildResponse proto.InternalMessageInfo
+
+const Default_CMsgClientToGCLeaveGuildResponse_Result CMsgClientToGCLeaveGuildResponse_EResponse = CMsgClientToGCLeaveGuildResponse_k_eInternalError
+
+func (m *CMsgClientToGCLeaveGuildResponse) GetResult() CMsgClientToGCLeaveGuildResponse_EResponse {
+	if m != nil && m.Result != nil {
+		return *m.Result
+	}
+	return Default_CMsgClientToGCLeaveGuildResponse_Result
+}
+
+type CMsgClientToGCKickGuildMember struct {
+	GuildId              *uint32  `protobuf:"varint,1,opt,name=guild_id,json=guildId" json:"guild_id,omitempty"`
+	TargetAccountId      *uint32  `protobuf:"varint,2,opt,name=target_account_id,json=targetAccountId" json:"target_account_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CMsgClientToGCKickGuildMember) Reset()         { *m = CMsgClientToGCKickGuildMember{} }
+func (m *CMsgClientToGCKickGuildMember) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCKickGuildMember) ProtoMessage()    {}
+func (*CMsgClientToGCKickGuildMember) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{28}
+}
+
+func (m *CMsgClientToGCKickGuildMember) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCKickGuildMember.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCKickGuildMember) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCKickGuildMember.Marshal(b, m, deterministic)
+}
+func (m *CMsgClientToGCKickGuildMember) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCKickGuildMember.Merge(m, src)
+}
+func (m *CMsgClientToGCKickGuildMember) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCKickGuildMember.Size(m)
+}
+func (m *CMsgClientToGCKickGuildMember) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCKickGuildMember.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCKickGuildMember proto.InternalMessageInfo
+
+func (m *CMsgClientToGCKickGuildMember) GetGuildId() uint32 {
+	if m != nil && m.GuildId != nil {
+		return *m.GuildId
+	}
+	return 0
+}
+
+func (m *CMsgClientToGCKickGuildMember) GetTargetAccountId() uint32 {
+	if m != nil && m.TargetAccountId != nil {
+		return *m.TargetAccountId
+	}
+	return 0
+}
+
+type CMsgClientToGCKickGuildMemberResponse struct {
+	Result               *CMsgClientToGCKickGuildMemberResponse_EResponse `protobuf:"varint,1,opt,name=result,enum=dota.CMsgClientToGCKickGuildMemberResponse_EResponse,def=0" json:"result,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                         `json:"-"`
+	XXX_unrecognized     []byte                                           `json:"-"`
+	XXX_sizecache        int32                                            `json:"-"`
+}
+
+func (m *CMsgClientToGCKickGuildMemberResponse) Reset()         { *m = CMsgClientToGCKickGuildMemberResponse{} }
+func (m *CMsgClientToGCKickGuildMemberResponse) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCKickGuildMemberResponse) ProtoMessage()    {}
+func (*CMsgClientToGCKickGuildMemberResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{29}
+}
+
+func (m *CMsgClientToGCKickGuildMemberResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCKickGuildMemberResponse.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCKickGuildMemberResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCKickGuildMemberResponse.Marshal(b, m, deterministic)
+}
+func (m *CMsgClientToGCKickGuildMemberResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCKickGuildMemberResponse.Merge(m, src)
+}
+func (m *CMsgClientToGCKickGuildMemberResponse) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCKickGuildMemberResponse.Size(m)
+}
+func (m *CMsgClientToGCKickGuildMemberResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCKickGuildMemberResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCKickGuildMemberResponse proto.InternalMessageInfo
+
+const Default_CMsgClientToGCKickGuildMemberResponse_Result CMsgClientToGCKickGuildMemberResponse_EResponse = CMsgClientToGCKickGuildMemberResponse_k_eInternalError
+
+func (m *CMsgClientToGCKickGuildMemberResponse) GetResult() CMsgClientToGCKickGuildMemberResponse_EResponse {
+	if m != nil && m.Result != nil {
+		return *m.Result
+	}
+	return Default_CMsgClientToGCKickGuildMemberResponse_Result
+}
+
+type CMsgClientToGCSetGuildMemberRole struct {
+	GuildId              *uint32  `protobuf:"varint,1,opt,name=guild_id,json=guildId" json:"guild_id,omitempty"`
+	TargetAccountId      *uint32  `protobuf:"varint,2,opt,name=target_account_id,json=targetAccountId" json:"target_account_id,omitempty"`
+	TargetRoleId         *uint32  `protobuf:"varint,3,opt,name=target_role_id,json=targetRoleId" json:"target_role_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CMsgClientToGCSetGuildMemberRole) Reset()         { *m = CMsgClientToGCSetGuildMemberRole{} }
+func (m *CMsgClientToGCSetGuildMemberRole) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCSetGuildMemberRole) ProtoMessage()    {}
+func (*CMsgClientToGCSetGuildMemberRole) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{30}
+}
+
+func (m *CMsgClientToGCSetGuildMemberRole) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCSetGuildMemberRole.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCSetGuildMemberRole) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCSetGuildMemberRole.Marshal(b, m, deterministic)
+}
+func (m *CMsgClientToGCSetGuildMemberRole) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCSetGuildMemberRole.Merge(m, src)
+}
+func (m *CMsgClientToGCSetGuildMemberRole) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCSetGuildMemberRole.Size(m)
+}
+func (m *CMsgClientToGCSetGuildMemberRole) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCSetGuildMemberRole.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCSetGuildMemberRole proto.InternalMessageInfo
+
+func (m *CMsgClientToGCSetGuildMemberRole) GetGuildId() uint32 {
+	if m != nil && m.GuildId != nil {
+		return *m.GuildId
+	}
+	return 0
+}
+
+func (m *CMsgClientToGCSetGuildMemberRole) GetTargetAccountId() uint32 {
+	if m != nil && m.TargetAccountId != nil {
+		return *m.TargetAccountId
+	}
+	return 0
+}
+
+func (m *CMsgClientToGCSetGuildMemberRole) GetTargetRoleId() uint32 {
+	if m != nil && m.TargetRoleId != nil {
+		return *m.TargetRoleId
+	}
+	return 0
+}
+
+type CMsgClientToGCSetGuildMemberRoleResponse struct {
+	Result               *CMsgClientToGCSetGuildMemberRoleResponse_EResponse `protobuf:"varint,1,opt,name=result,enum=dota.CMsgClientToGCSetGuildMemberRoleResponse_EResponse,def=0" json:"result,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                            `json:"-"`
+	XXX_unrecognized     []byte                                              `json:"-"`
+	XXX_sizecache        int32                                               `json:"-"`
+}
+
+func (m *CMsgClientToGCSetGuildMemberRoleResponse) Reset() {
+	*m = CMsgClientToGCSetGuildMemberRoleResponse{}
+}
+func (m *CMsgClientToGCSetGuildMemberRoleResponse) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCSetGuildMemberRoleResponse) ProtoMessage()    {}
+func (*CMsgClientToGCSetGuildMemberRoleResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{31}
+}
+
+func (m *CMsgClientToGCSetGuildMemberRoleResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCSetGuildMemberRoleResponse.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCSetGuildMemberRoleResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCSetGuildMemberRoleResponse.Marshal(b, m, deterministic)
+}
+func (m *CMsgClientToGCSetGuildMemberRoleResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCSetGuildMemberRoleResponse.Merge(m, src)
+}
+func (m *CMsgClientToGCSetGuildMemberRoleResponse) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCSetGuildMemberRoleResponse.Size(m)
+}
+func (m *CMsgClientToGCSetGuildMemberRoleResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCSetGuildMemberRoleResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCSetGuildMemberRoleResponse proto.InternalMessageInfo
+
+const Default_CMsgClientToGCSetGuildMemberRoleResponse_Result CMsgClientToGCSetGuildMemberRoleResponse_EResponse = CMsgClientToGCSetGuildMemberRoleResponse_k_eInternalError
+
+func (m *CMsgClientToGCSetGuildMemberRoleResponse) GetResult() CMsgClientToGCSetGuildMemberRoleResponse_EResponse {
+	if m != nil && m.Result != nil {
+		return *m.Result
+	}
+	return Default_CMsgClientToGCSetGuildMemberRoleResponse_Result
+}
+
+type CMsgClientToGCInviteToGuild struct {
+	GuildId              *uint32  `protobuf:"varint,1,opt,name=guild_id,json=guildId" json:"guild_id,omitempty"`
+	TargetAccountId      *uint32  `protobuf:"varint,2,opt,name=target_account_id,json=targetAccountId" json:"target_account_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CMsgClientToGCInviteToGuild) Reset()         { *m = CMsgClientToGCInviteToGuild{} }
+func (m *CMsgClientToGCInviteToGuild) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCInviteToGuild) ProtoMessage()    {}
+func (*CMsgClientToGCInviteToGuild) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{32}
+}
+
+func (m *CMsgClientToGCInviteToGuild) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCInviteToGuild.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCInviteToGuild) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCInviteToGuild.Marshal(b, m, deterministic)
+}
+func (m *CMsgClientToGCInviteToGuild) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCInviteToGuild.Merge(m, src)
+}
+func (m *CMsgClientToGCInviteToGuild) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCInviteToGuild.Size(m)
+}
+func (m *CMsgClientToGCInviteToGuild) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCInviteToGuild.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCInviteToGuild proto.InternalMessageInfo
+
+func (m *CMsgClientToGCInviteToGuild) GetGuildId() uint32 {
+	if m != nil && m.GuildId != nil {
+		return *m.GuildId
+	}
+	return 0
+}
+
+func (m *CMsgClientToGCInviteToGuild) GetTargetAccountId() uint32 {
+	if m != nil && m.TargetAccountId != nil {
+		return *m.TargetAccountId
+	}
+	return 0
+}
+
+type CMsgClientToGCInviteToGuildResponse struct {
+	Result               *CMsgClientToGCInviteToGuildResponse_EResponse `protobuf:"varint,1,opt,name=result,enum=dota.CMsgClientToGCInviteToGuildResponse_EResponse,def=0" json:"result,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                       `json:"-"`
+	XXX_unrecognized     []byte                                         `json:"-"`
+	XXX_sizecache        int32                                          `json:"-"`
+}
+
+func (m *CMsgClientToGCInviteToGuildResponse) Reset()         { *m = CMsgClientToGCInviteToGuildResponse{} }
+func (m *CMsgClientToGCInviteToGuildResponse) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCInviteToGuildResponse) ProtoMessage()    {}
+func (*CMsgClientToGCInviteToGuildResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{33}
+}
+
+func (m *CMsgClientToGCInviteToGuildResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCInviteToGuildResponse.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCInviteToGuildResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCInviteToGuildResponse.Marshal(b, m, deterministic)
+}
+func (m *CMsgClientToGCInviteToGuildResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCInviteToGuildResponse.Merge(m, src)
+}
+func (m *CMsgClientToGCInviteToGuildResponse) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCInviteToGuildResponse.Size(m)
+}
+func (m *CMsgClientToGCInviteToGuildResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCInviteToGuildResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCInviteToGuildResponse proto.InternalMessageInfo
+
+const Default_CMsgClientToGCInviteToGuildResponse_Result CMsgClientToGCInviteToGuildResponse_EResponse = CMsgClientToGCInviteToGuildResponse_k_eInternalError
+
+func (m *CMsgClientToGCInviteToGuildResponse) GetResult() CMsgClientToGCInviteToGuildResponse_EResponse {
+	if m != nil && m.Result != nil {
+		return *m.Result
+	}
+	return Default_CMsgClientToGCInviteToGuildResponse_Result
+}
+
+type CMsgClientToGCDeclineInviteToGuild struct {
+	GuildId              *uint32  `protobuf:"varint,1,opt,name=guild_id,json=guildId" json:"guild_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CMsgClientToGCDeclineInviteToGuild) Reset()         { *m = CMsgClientToGCDeclineInviteToGuild{} }
+func (m *CMsgClientToGCDeclineInviteToGuild) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCDeclineInviteToGuild) ProtoMessage()    {}
+func (*CMsgClientToGCDeclineInviteToGuild) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{34}
+}
+
+func (m *CMsgClientToGCDeclineInviteToGuild) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCDeclineInviteToGuild.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCDeclineInviteToGuild) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCDeclineInviteToGuild.Marshal(b, m, deterministic)
+}
+func (m *CMsgClientToGCDeclineInviteToGuild) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCDeclineInviteToGuild.Merge(m, src)
+}
+func (m *CMsgClientToGCDeclineInviteToGuild) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCDeclineInviteToGuild.Size(m)
+}
+func (m *CMsgClientToGCDeclineInviteToGuild) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCDeclineInviteToGuild.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCDeclineInviteToGuild proto.InternalMessageInfo
+
+func (m *CMsgClientToGCDeclineInviteToGuild) GetGuildId() uint32 {
+	if m != nil && m.GuildId != nil {
+		return *m.GuildId
+	}
+	return 0
+}
+
+type CMsgClientToGCDeclineInviteToGuildResponse struct {
+	Result               *CMsgClientToGCDeclineInviteToGuildResponse_EResponse `protobuf:"varint,1,opt,name=result,enum=dota.CMsgClientToGCDeclineInviteToGuildResponse_EResponse,def=0" json:"result,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                              `json:"-"`
+	XXX_unrecognized     []byte                                                `json:"-"`
+	XXX_sizecache        int32                                                 `json:"-"`
+}
+
+func (m *CMsgClientToGCDeclineInviteToGuildResponse) Reset() {
+	*m = CMsgClientToGCDeclineInviteToGuildResponse{}
+}
+func (m *CMsgClientToGCDeclineInviteToGuildResponse) String() string {
+	return proto.CompactTextString(m)
+}
+func (*CMsgClientToGCDeclineInviteToGuildResponse) ProtoMessage() {}
+func (*CMsgClientToGCDeclineInviteToGuildResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{35}
+}
+
+func (m *CMsgClientToGCDeclineInviteToGuildResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCDeclineInviteToGuildResponse.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCDeclineInviteToGuildResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCDeclineInviteToGuildResponse.Marshal(b, m, deterministic)
+}
+func (m *CMsgClientToGCDeclineInviteToGuildResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCDeclineInviteToGuildResponse.Merge(m, src)
+}
+func (m *CMsgClientToGCDeclineInviteToGuildResponse) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCDeclineInviteToGuildResponse.Size(m)
+}
+func (m *CMsgClientToGCDeclineInviteToGuildResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCDeclineInviteToGuildResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCDeclineInviteToGuildResponse proto.InternalMessageInfo
+
+const Default_CMsgClientToGCDeclineInviteToGuildResponse_Result CMsgClientToGCDeclineInviteToGuildResponse_EResponse = CMsgClientToGCDeclineInviteToGuildResponse_k_eInternalError
+
+func (m *CMsgClientToGCDeclineInviteToGuildResponse) GetResult() CMsgClientToGCDeclineInviteToGuildResponse_EResponse {
+	if m != nil && m.Result != nil {
+		return *m.Result
+	}
+	return Default_CMsgClientToGCDeclineInviteToGuildResponse_Result
+}
+
+type CMsgClientToGCAcceptInviteToGuild struct {
+	GuildId              *uint32  `protobuf:"varint,1,opt,name=guild_id,json=guildId" json:"guild_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CMsgClientToGCAcceptInviteToGuild) Reset()         { *m = CMsgClientToGCAcceptInviteToGuild{} }
+func (m *CMsgClientToGCAcceptInviteToGuild) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCAcceptInviteToGuild) ProtoMessage()    {}
+func (*CMsgClientToGCAcceptInviteToGuild) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{36}
+}
+
+func (m *CMsgClientToGCAcceptInviteToGuild) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCAcceptInviteToGuild.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCAcceptInviteToGuild) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCAcceptInviteToGuild.Marshal(b, m, deterministic)
+}
+func (m *CMsgClientToGCAcceptInviteToGuild) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCAcceptInviteToGuild.Merge(m, src)
+}
+func (m *CMsgClientToGCAcceptInviteToGuild) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCAcceptInviteToGuild.Size(m)
+}
+func (m *CMsgClientToGCAcceptInviteToGuild) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCAcceptInviteToGuild.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCAcceptInviteToGuild proto.InternalMessageInfo
+
+func (m *CMsgClientToGCAcceptInviteToGuild) GetGuildId() uint32 {
+	if m != nil && m.GuildId != nil {
+		return *m.GuildId
+	}
+	return 0
+}
+
+type CMsgClientToGCAcceptInviteToGuildResponse struct {
+	Result               *CMsgClientToGCAcceptInviteToGuildResponse_EResponse `protobuf:"varint,1,opt,name=result,enum=dota.CMsgClientToGCAcceptInviteToGuildResponse_EResponse,def=0" json:"result,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                             `json:"-"`
+	XXX_unrecognized     []byte                                               `json:"-"`
+	XXX_sizecache        int32                                                `json:"-"`
+}
+
+func (m *CMsgClientToGCAcceptInviteToGuildResponse) Reset() {
+	*m = CMsgClientToGCAcceptInviteToGuildResponse{}
+}
+func (m *CMsgClientToGCAcceptInviteToGuildResponse) String() string {
+	return proto.CompactTextString(m)
+}
+func (*CMsgClientToGCAcceptInviteToGuildResponse) ProtoMessage() {}
+func (*CMsgClientToGCAcceptInviteToGuildResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{37}
+}
+
+func (m *CMsgClientToGCAcceptInviteToGuildResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCAcceptInviteToGuildResponse.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCAcceptInviteToGuildResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCAcceptInviteToGuildResponse.Marshal(b, m, deterministic)
+}
+func (m *CMsgClientToGCAcceptInviteToGuildResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCAcceptInviteToGuildResponse.Merge(m, src)
+}
+func (m *CMsgClientToGCAcceptInviteToGuildResponse) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCAcceptInviteToGuildResponse.Size(m)
+}
+func (m *CMsgClientToGCAcceptInviteToGuildResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCAcceptInviteToGuildResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCAcceptInviteToGuildResponse proto.InternalMessageInfo
+
+const Default_CMsgClientToGCAcceptInviteToGuildResponse_Result CMsgClientToGCAcceptInviteToGuildResponse_EResponse = CMsgClientToGCAcceptInviteToGuildResponse_k_eInternalError
+
+func (m *CMsgClientToGCAcceptInviteToGuildResponse) GetResult() CMsgClientToGCAcceptInviteToGuildResponse_EResponse {
+	if m != nil && m.Result != nil {
+		return *m.Result
+	}
+	return Default_CMsgClientToGCAcceptInviteToGuildResponse_Result
+}
+
+type CMsgClientToGCCancelInviteToGuild struct {
+	GuildId              *uint32  `protobuf:"varint,1,opt,name=guild_id,json=guildId" json:"guild_id,omitempty"`
+	TargetAccountId      *uint32  `protobuf:"varint,2,opt,name=target_account_id,json=targetAccountId" json:"target_account_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CMsgClientToGCCancelInviteToGuild) Reset()         { *m = CMsgClientToGCCancelInviteToGuild{} }
+func (m *CMsgClientToGCCancelInviteToGuild) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCCancelInviteToGuild) ProtoMessage()    {}
+func (*CMsgClientToGCCancelInviteToGuild) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{38}
+}
+
+func (m *CMsgClientToGCCancelInviteToGuild) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCCancelInviteToGuild.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCCancelInviteToGuild) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCCancelInviteToGuild.Marshal(b, m, deterministic)
+}
+func (m *CMsgClientToGCCancelInviteToGuild) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCCancelInviteToGuild.Merge(m, src)
+}
+func (m *CMsgClientToGCCancelInviteToGuild) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCCancelInviteToGuild.Size(m)
+}
+func (m *CMsgClientToGCCancelInviteToGuild) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCCancelInviteToGuild.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCCancelInviteToGuild proto.InternalMessageInfo
+
+func (m *CMsgClientToGCCancelInviteToGuild) GetGuildId() uint32 {
+	if m != nil && m.GuildId != nil {
+		return *m.GuildId
+	}
+	return 0
+}
+
+func (m *CMsgClientToGCCancelInviteToGuild) GetTargetAccountId() uint32 {
+	if m != nil && m.TargetAccountId != nil {
+		return *m.TargetAccountId
+	}
+	return 0
+}
+
+type CMsgClientToGCCancelInviteToGuildResponse struct {
+	Result               *CMsgClientToGCCancelInviteToGuildResponse_EResponse `protobuf:"varint,1,opt,name=result,enum=dota.CMsgClientToGCCancelInviteToGuildResponse_EResponse,def=0" json:"result,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                             `json:"-"`
+	XXX_unrecognized     []byte                                               `json:"-"`
+	XXX_sizecache        int32                                                `json:"-"`
+}
+
+func (m *CMsgClientToGCCancelInviteToGuildResponse) Reset() {
+	*m = CMsgClientToGCCancelInviteToGuildResponse{}
+}
+func (m *CMsgClientToGCCancelInviteToGuildResponse) String() string {
+	return proto.CompactTextString(m)
+}
+func (*CMsgClientToGCCancelInviteToGuildResponse) ProtoMessage() {}
+func (*CMsgClientToGCCancelInviteToGuildResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{39}
+}
+
+func (m *CMsgClientToGCCancelInviteToGuildResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCCancelInviteToGuildResponse.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCCancelInviteToGuildResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCCancelInviteToGuildResponse.Marshal(b, m, deterministic)
+}
+func (m *CMsgClientToGCCancelInviteToGuildResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCCancelInviteToGuildResponse.Merge(m, src)
+}
+func (m *CMsgClientToGCCancelInviteToGuildResponse) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCCancelInviteToGuildResponse.Size(m)
+}
+func (m *CMsgClientToGCCancelInviteToGuildResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCCancelInviteToGuildResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCCancelInviteToGuildResponse proto.InternalMessageInfo
+
+const Default_CMsgClientToGCCancelInviteToGuildResponse_Result CMsgClientToGCCancelInviteToGuildResponse_EResponse = CMsgClientToGCCancelInviteToGuildResponse_k_eInternalError
+
+func (m *CMsgClientToGCCancelInviteToGuildResponse) GetResult() CMsgClientToGCCancelInviteToGuildResponse_EResponse {
+	if m != nil && m.Result != nil {
+		return *m.Result
+	}
+	return Default_CMsgClientToGCCancelInviteToGuildResponse_Result
+}
+
+type CMsgClientToGCAddGuildRole struct {
+	GuildId              *uint32  `protobuf:"varint,1,opt,name=guild_id,json=guildId" json:"guild_id,omitempty"`
+	RoleName             *string  `protobuf:"bytes,2,opt,name=role_name,json=roleName" json:"role_name,omitempty"`
+	RoleFlags            *uint32  `protobuf:"varint,3,opt,name=role_flags,json=roleFlags" json:"role_flags,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CMsgClientToGCAddGuildRole) Reset()         { *m = CMsgClientToGCAddGuildRole{} }
+func (m *CMsgClientToGCAddGuildRole) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCAddGuildRole) ProtoMessage()    {}
+func (*CMsgClientToGCAddGuildRole) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{40}
+}
+
+func (m *CMsgClientToGCAddGuildRole) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCAddGuildRole.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCAddGuildRole) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCAddGuildRole.Marshal(b, m, deterministic)
+}
+func (m *CMsgClientToGCAddGuildRole) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCAddGuildRole.Merge(m, src)
+}
+func (m *CMsgClientToGCAddGuildRole) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCAddGuildRole.Size(m)
+}
+func (m *CMsgClientToGCAddGuildRole) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCAddGuildRole.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCAddGuildRole proto.InternalMessageInfo
+
+func (m *CMsgClientToGCAddGuildRole) GetGuildId() uint32 {
+	if m != nil && m.GuildId != nil {
+		return *m.GuildId
+	}
+	return 0
+}
+
+func (m *CMsgClientToGCAddGuildRole) GetRoleName() string {
+	if m != nil && m.RoleName != nil {
+		return *m.RoleName
+	}
+	return ""
+}
+
+func (m *CMsgClientToGCAddGuildRole) GetRoleFlags() uint32 {
+	if m != nil && m.RoleFlags != nil {
+		return *m.RoleFlags
+	}
+	return 0
+}
+
+type CMsgClientToGCAddGuildRoleResponse struct {
+	Result               *CMsgClientToGCAddGuildRoleResponse_EResponse `protobuf:"varint,1,opt,name=result,enum=dota.CMsgClientToGCAddGuildRoleResponse_EResponse,def=0" json:"result,omitempty"`
+	RoleId               *uint32                                       `protobuf:"varint,2,opt,name=role_id,json=roleId" json:"role_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                      `json:"-"`
+	XXX_unrecognized     []byte                                        `json:"-"`
+	XXX_sizecache        int32                                         `json:"-"`
+}
+
+func (m *CMsgClientToGCAddGuildRoleResponse) Reset()         { *m = CMsgClientToGCAddGuildRoleResponse{} }
+func (m *CMsgClientToGCAddGuildRoleResponse) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCAddGuildRoleResponse) ProtoMessage()    {}
+func (*CMsgClientToGCAddGuildRoleResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{41}
+}
+
+func (m *CMsgClientToGCAddGuildRoleResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCAddGuildRoleResponse.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCAddGuildRoleResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCAddGuildRoleResponse.Marshal(b, m, deterministic)
+}
+func (m *CMsgClientToGCAddGuildRoleResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCAddGuildRoleResponse.Merge(m, src)
+}
+func (m *CMsgClientToGCAddGuildRoleResponse) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCAddGuildRoleResponse.Size(m)
+}
+func (m *CMsgClientToGCAddGuildRoleResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCAddGuildRoleResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCAddGuildRoleResponse proto.InternalMessageInfo
+
+const Default_CMsgClientToGCAddGuildRoleResponse_Result CMsgClientToGCAddGuildRoleResponse_EResponse = CMsgClientToGCAddGuildRoleResponse_k_eInternalError
+
+func (m *CMsgClientToGCAddGuildRoleResponse) GetResult() CMsgClientToGCAddGuildRoleResponse_EResponse {
+	if m != nil && m.Result != nil {
+		return *m.Result
+	}
+	return Default_CMsgClientToGCAddGuildRoleResponse_Result
+}
+
+func (m *CMsgClientToGCAddGuildRoleResponse) GetRoleId() uint32 {
+	if m != nil && m.RoleId != nil {
+		return *m.RoleId
+	}
+	return 0
+}
+
+type CMsgClientToGCModifyGuildRole struct {
+	GuildId              *uint32  `protobuf:"varint,1,opt,name=guild_id,json=guildId" json:"guild_id,omitempty"`
+	RoleId               *uint32  `protobuf:"varint,2,opt,name=role_id,json=roleId" json:"role_id,omitempty"`
+	RoleName             *string  `protobuf:"bytes,3,opt,name=role_name,json=roleName" json:"role_name,omitempty"`
+	RoleFlags            *uint32  `protobuf:"varint,4,opt,name=role_flags,json=roleFlags" json:"role_flags,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CMsgClientToGCModifyGuildRole) Reset()         { *m = CMsgClientToGCModifyGuildRole{} }
+func (m *CMsgClientToGCModifyGuildRole) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCModifyGuildRole) ProtoMessage()    {}
+func (*CMsgClientToGCModifyGuildRole) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{42}
+}
+
+func (m *CMsgClientToGCModifyGuildRole) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCModifyGuildRole.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCModifyGuildRole) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCModifyGuildRole.Marshal(b, m, deterministic)
+}
+func (m *CMsgClientToGCModifyGuildRole) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCModifyGuildRole.Merge(m, src)
+}
+func (m *CMsgClientToGCModifyGuildRole) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCModifyGuildRole.Size(m)
+}
+func (m *CMsgClientToGCModifyGuildRole) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCModifyGuildRole.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCModifyGuildRole proto.InternalMessageInfo
+
+func (m *CMsgClientToGCModifyGuildRole) GetGuildId() uint32 {
+	if m != nil && m.GuildId != nil {
+		return *m.GuildId
+	}
+	return 0
+}
+
+func (m *CMsgClientToGCModifyGuildRole) GetRoleId() uint32 {
+	if m != nil && m.RoleId != nil {
+		return *m.RoleId
+	}
+	return 0
+}
+
+func (m *CMsgClientToGCModifyGuildRole) GetRoleName() string {
+	if m != nil && m.RoleName != nil {
+		return *m.RoleName
+	}
+	return ""
+}
+
+func (m *CMsgClientToGCModifyGuildRole) GetRoleFlags() uint32 {
+	if m != nil && m.RoleFlags != nil {
+		return *m.RoleFlags
+	}
+	return 0
+}
+
+type CMsgClientToGCModifyGuildRoleResponse struct {
+	Result               *CMsgClientToGCModifyGuildRoleResponse_EResponse `protobuf:"varint,1,opt,name=result,enum=dota.CMsgClientToGCModifyGuildRoleResponse_EResponse,def=0" json:"result,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                         `json:"-"`
+	XXX_unrecognized     []byte                                           `json:"-"`
+	XXX_sizecache        int32                                            `json:"-"`
+}
+
+func (m *CMsgClientToGCModifyGuildRoleResponse) Reset()         { *m = CMsgClientToGCModifyGuildRoleResponse{} }
+func (m *CMsgClientToGCModifyGuildRoleResponse) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCModifyGuildRoleResponse) ProtoMessage()    {}
+func (*CMsgClientToGCModifyGuildRoleResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{43}
+}
+
+func (m *CMsgClientToGCModifyGuildRoleResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCModifyGuildRoleResponse.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCModifyGuildRoleResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCModifyGuildRoleResponse.Marshal(b, m, deterministic)
+}
+func (m *CMsgClientToGCModifyGuildRoleResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCModifyGuildRoleResponse.Merge(m, src)
+}
+func (m *CMsgClientToGCModifyGuildRoleResponse) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCModifyGuildRoleResponse.Size(m)
+}
+func (m *CMsgClientToGCModifyGuildRoleResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCModifyGuildRoleResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCModifyGuildRoleResponse proto.InternalMessageInfo
+
+const Default_CMsgClientToGCModifyGuildRoleResponse_Result CMsgClientToGCModifyGuildRoleResponse_EResponse = CMsgClientToGCModifyGuildRoleResponse_k_eInternalError
+
+func (m *CMsgClientToGCModifyGuildRoleResponse) GetResult() CMsgClientToGCModifyGuildRoleResponse_EResponse {
+	if m != nil && m.Result != nil {
+		return *m.Result
+	}
+	return Default_CMsgClientToGCModifyGuildRoleResponse_Result
+}
+
+type CMsgClientToGCRemoveGuildRole struct {
+	GuildId              *uint32  `protobuf:"varint,1,opt,name=guild_id,json=guildId" json:"guild_id,omitempty"`
+	RoleId               *uint32  `protobuf:"varint,2,opt,name=role_id,json=roleId" json:"role_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CMsgClientToGCRemoveGuildRole) Reset()         { *m = CMsgClientToGCRemoveGuildRole{} }
+func (m *CMsgClientToGCRemoveGuildRole) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCRemoveGuildRole) ProtoMessage()    {}
+func (*CMsgClientToGCRemoveGuildRole) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{44}
+}
+
+func (m *CMsgClientToGCRemoveGuildRole) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCRemoveGuildRole.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCRemoveGuildRole) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCRemoveGuildRole.Marshal(b, m, deterministic)
+}
+func (m *CMsgClientToGCRemoveGuildRole) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCRemoveGuildRole.Merge(m, src)
+}
+func (m *CMsgClientToGCRemoveGuildRole) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCRemoveGuildRole.Size(m)
+}
+func (m *CMsgClientToGCRemoveGuildRole) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCRemoveGuildRole.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCRemoveGuildRole proto.InternalMessageInfo
+
+func (m *CMsgClientToGCRemoveGuildRole) GetGuildId() uint32 {
+	if m != nil && m.GuildId != nil {
+		return *m.GuildId
+	}
+	return 0
+}
+
+func (m *CMsgClientToGCRemoveGuildRole) GetRoleId() uint32 {
+	if m != nil && m.RoleId != nil {
+		return *m.RoleId
+	}
+	return 0
+}
+
+type CMsgClientToGCRemoveGuildRoleResponse struct {
+	Result               *CMsgClientToGCRemoveGuildRoleResponse_EResponse `protobuf:"varint,1,opt,name=result,enum=dota.CMsgClientToGCRemoveGuildRoleResponse_EResponse,def=0" json:"result,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                         `json:"-"`
+	XXX_unrecognized     []byte                                           `json:"-"`
+	XXX_sizecache        int32                                            `json:"-"`
+}
+
+func (m *CMsgClientToGCRemoveGuildRoleResponse) Reset()         { *m = CMsgClientToGCRemoveGuildRoleResponse{} }
+func (m *CMsgClientToGCRemoveGuildRoleResponse) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCRemoveGuildRoleResponse) ProtoMessage()    {}
+func (*CMsgClientToGCRemoveGuildRoleResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{45}
+}
+
+func (m *CMsgClientToGCRemoveGuildRoleResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCRemoveGuildRoleResponse.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCRemoveGuildRoleResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCRemoveGuildRoleResponse.Marshal(b, m, deterministic)
+}
+func (m *CMsgClientToGCRemoveGuildRoleResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCRemoveGuildRoleResponse.Merge(m, src)
+}
+func (m *CMsgClientToGCRemoveGuildRoleResponse) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCRemoveGuildRoleResponse.Size(m)
+}
+func (m *CMsgClientToGCRemoveGuildRoleResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCRemoveGuildRoleResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCRemoveGuildRoleResponse proto.InternalMessageInfo
+
+const Default_CMsgClientToGCRemoveGuildRoleResponse_Result CMsgClientToGCRemoveGuildRoleResponse_EResponse = CMsgClientToGCRemoveGuildRoleResponse_k_eInternalError
+
+func (m *CMsgClientToGCRemoveGuildRoleResponse) GetResult() CMsgClientToGCRemoveGuildRoleResponse_EResponse {
+	if m != nil && m.Result != nil {
+		return *m.Result
+	}
+	return Default_CMsgClientToGCRemoveGuildRoleResponse_Result
+}
+
+type CMsgClientToGCSetGuildRoleOrder struct {
+	GuildId              *uint32  `protobuf:"varint,1,opt,name=guild_id,json=guildId" json:"guild_id,omitempty"`
+	RequestedRoleIds     []uint32 `protobuf:"varint,2,rep,name=requested_role_ids,json=requestedRoleIds" json:"requested_role_ids,omitempty"`
+	PreviousRoleIds      []uint32 `protobuf:"varint,3,rep,name=previous_role_ids,json=previousRoleIds" json:"previous_role_ids,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CMsgClientToGCSetGuildRoleOrder) Reset()         { *m = CMsgClientToGCSetGuildRoleOrder{} }
+func (m *CMsgClientToGCSetGuildRoleOrder) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCSetGuildRoleOrder) ProtoMessage()    {}
+func (*CMsgClientToGCSetGuildRoleOrder) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{46}
+}
+
+func (m *CMsgClientToGCSetGuildRoleOrder) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCSetGuildRoleOrder.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCSetGuildRoleOrder) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCSetGuildRoleOrder.Marshal(b, m, deterministic)
+}
+func (m *CMsgClientToGCSetGuildRoleOrder) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCSetGuildRoleOrder.Merge(m, src)
+}
+func (m *CMsgClientToGCSetGuildRoleOrder) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCSetGuildRoleOrder.Size(m)
+}
+func (m *CMsgClientToGCSetGuildRoleOrder) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCSetGuildRoleOrder.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCSetGuildRoleOrder proto.InternalMessageInfo
+
+func (m *CMsgClientToGCSetGuildRoleOrder) GetGuildId() uint32 {
+	if m != nil && m.GuildId != nil {
+		return *m.GuildId
+	}
+	return 0
+}
+
+func (m *CMsgClientToGCSetGuildRoleOrder) GetRequestedRoleIds() []uint32 {
+	if m != nil {
+		return m.RequestedRoleIds
+	}
+	return nil
+}
+
+func (m *CMsgClientToGCSetGuildRoleOrder) GetPreviousRoleIds() []uint32 {
+	if m != nil {
+		return m.PreviousRoleIds
+	}
+	return nil
+}
+
+type CMsgClientToGCSetGuildRoleOrderResponse struct {
+	Result               *CMsgClientToGCSetGuildRoleOrderResponse_EResponse `protobuf:"varint,1,opt,name=result,enum=dota.CMsgClientToGCSetGuildRoleOrderResponse_EResponse,def=0" json:"result,omitempty"`
+	ConfirmedRoleIds     []uint32                                           `protobuf:"varint,2,rep,name=confirmed_role_ids,json=confirmedRoleIds" json:"confirmed_role_ids,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                           `json:"-"`
+	XXX_unrecognized     []byte                                             `json:"-"`
+	XXX_sizecache        int32                                              `json:"-"`
+}
+
+func (m *CMsgClientToGCSetGuildRoleOrderResponse) Reset() {
+	*m = CMsgClientToGCSetGuildRoleOrderResponse{}
+}
+func (m *CMsgClientToGCSetGuildRoleOrderResponse) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCSetGuildRoleOrderResponse) ProtoMessage()    {}
+func (*CMsgClientToGCSetGuildRoleOrderResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{47}
+}
+
+func (m *CMsgClientToGCSetGuildRoleOrderResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCSetGuildRoleOrderResponse.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCSetGuildRoleOrderResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCSetGuildRoleOrderResponse.Marshal(b, m, deterministic)
+}
+func (m *CMsgClientToGCSetGuildRoleOrderResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCSetGuildRoleOrderResponse.Merge(m, src)
+}
+func (m *CMsgClientToGCSetGuildRoleOrderResponse) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCSetGuildRoleOrderResponse.Size(m)
+}
+func (m *CMsgClientToGCSetGuildRoleOrderResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCSetGuildRoleOrderResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCSetGuildRoleOrderResponse proto.InternalMessageInfo
+
+const Default_CMsgClientToGCSetGuildRoleOrderResponse_Result CMsgClientToGCSetGuildRoleOrderResponse_EResponse = CMsgClientToGCSetGuildRoleOrderResponse_k_eInternalError
+
+func (m *CMsgClientToGCSetGuildRoleOrderResponse) GetResult() CMsgClientToGCSetGuildRoleOrderResponse_EResponse {
+	if m != nil && m.Result != nil {
+		return *m.Result
+	}
+	return Default_CMsgClientToGCSetGuildRoleOrderResponse_Result
+}
+
+func (m *CMsgClientToGCSetGuildRoleOrderResponse) GetConfirmedRoleIds() []uint32 {
+	if m != nil {
+		return m.ConfirmedRoleIds
+	}
+	return nil
+}
+
+type CMsgClientToGCGuildFeedRequest struct {
+	GuildId              *uint32  `protobuf:"varint,1,opt,name=guild_id,json=guildId" json:"guild_id,omitempty"`
+	LastSeenId           *uint64  `protobuf:"varint,2,opt,name=last_seen_id,json=lastSeenId" json:"last_seen_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CMsgClientToGCGuildFeedRequest) Reset()         { *m = CMsgClientToGCGuildFeedRequest{} }
+func (m *CMsgClientToGCGuildFeedRequest) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCGuildFeedRequest) ProtoMessage()    {}
+func (*CMsgClientToGCGuildFeedRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{48}
+}
+
+func (m *CMsgClientToGCGuildFeedRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCGuildFeedRequest.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCGuildFeedRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCGuildFeedRequest.Marshal(b, m, deterministic)
+}
+func (m *CMsgClientToGCGuildFeedRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCGuildFeedRequest.Merge(m, src)
+}
+func (m *CMsgClientToGCGuildFeedRequest) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCGuildFeedRequest.Size(m)
+}
+func (m *CMsgClientToGCGuildFeedRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCGuildFeedRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCGuildFeedRequest proto.InternalMessageInfo
+
+func (m *CMsgClientToGCGuildFeedRequest) GetGuildId() uint32 {
+	if m != nil && m.GuildId != nil {
+		return *m.GuildId
+	}
+	return 0
+}
+
+func (m *CMsgClientToGCGuildFeedRequest) GetLastSeenId() uint64 {
+	if m != nil && m.LastSeenId != nil {
+		return *m.LastSeenId
+	}
+	return 0
+}
+
+type CMsgClientToGCRequestGuildFeedResponse struct {
+	Result               *CMsgClientToGCRequestGuildFeedResponse_EResponse `protobuf:"varint,1,opt,name=result,enum=dota.CMsgClientToGCRequestGuildFeedResponse_EResponse,def=0" json:"result,omitempty"`
+	GuildId              *uint32                                           `protobuf:"varint,2,opt,name=guild_id,json=guildId" json:"guild_id,omitempty"`
+	FeedEvents           []*CMsgGuildFeedEvent                             `protobuf:"bytes,3,rep,name=feed_events,json=feedEvents" json:"feed_events,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                          `json:"-"`
+	XXX_unrecognized     []byte                                            `json:"-"`
+	XXX_sizecache        int32                                             `json:"-"`
+}
+
+func (m *CMsgClientToGCRequestGuildFeedResponse) Reset() {
+	*m = CMsgClientToGCRequestGuildFeedResponse{}
+}
+func (m *CMsgClientToGCRequestGuildFeedResponse) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCRequestGuildFeedResponse) ProtoMessage()    {}
+func (*CMsgClientToGCRequestGuildFeedResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{49}
+}
+
+func (m *CMsgClientToGCRequestGuildFeedResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCRequestGuildFeedResponse.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCRequestGuildFeedResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCRequestGuildFeedResponse.Marshal(b, m, deterministic)
+}
+func (m *CMsgClientToGCRequestGuildFeedResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCRequestGuildFeedResponse.Merge(m, src)
+}
+func (m *CMsgClientToGCRequestGuildFeedResponse) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCRequestGuildFeedResponse.Size(m)
+}
+func (m *CMsgClientToGCRequestGuildFeedResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCRequestGuildFeedResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCRequestGuildFeedResponse proto.InternalMessageInfo
+
+const Default_CMsgClientToGCRequestGuildFeedResponse_Result CMsgClientToGCRequestGuildFeedResponse_EResponse = CMsgClientToGCRequestGuildFeedResponse_k_eInternalError
+
+func (m *CMsgClientToGCRequestGuildFeedResponse) GetResult() CMsgClientToGCRequestGuildFeedResponse_EResponse {
+	if m != nil && m.Result != nil {
+		return *m.Result
+	}
+	return Default_CMsgClientToGCRequestGuildFeedResponse_Result
+}
+
+func (m *CMsgClientToGCRequestGuildFeedResponse) GetGuildId() uint32 {
+	if m != nil && m.GuildId != nil {
+		return *m.GuildId
+	}
+	return 0
+}
+
+func (m *CMsgClientToGCRequestGuildFeedResponse) GetFeedEvents() []*CMsgGuildFeedEvent {
+	if m != nil {
+		return m.FeedEvents
+	}
+	return nil
+}
+
+type CMsgGCToClientGuildFeedUpdated struct {
+	GuildId              *uint32  `protobuf:"varint,1,opt,name=guild_id,json=guildId" json:"guild_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CMsgGCToClientGuildFeedUpdated) Reset()         { *m = CMsgGCToClientGuildFeedUpdated{} }
+func (m *CMsgGCToClientGuildFeedUpdated) String() string { return proto.CompactTextString(m) }
+func (*CMsgGCToClientGuildFeedUpdated) ProtoMessage()    {}
+func (*CMsgGCToClientGuildFeedUpdated) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{50}
+}
+
+func (m *CMsgGCToClientGuildFeedUpdated) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgGCToClientGuildFeedUpdated.Unmarshal(m, b)
+}
+func (m *CMsgGCToClientGuildFeedUpdated) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgGCToClientGuildFeedUpdated.Marshal(b, m, deterministic)
+}
+func (m *CMsgGCToClientGuildFeedUpdated) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgGCToClientGuildFeedUpdated.Merge(m, src)
+}
+func (m *CMsgGCToClientGuildFeedUpdated) XXX_Size() int {
+	return xxx_messageInfo_CMsgGCToClientGuildFeedUpdated.Size(m)
+}
+func (m *CMsgGCToClientGuildFeedUpdated) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgGCToClientGuildFeedUpdated.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgGCToClientGuildFeedUpdated proto.InternalMessageInfo
+
+func (m *CMsgGCToClientGuildFeedUpdated) GetGuildId() uint32 {
+	if m != nil && m.GuildId != nil {
+		return *m.GuildId
+	}
+	return 0
+}
+
+type CMsgClientToGCAddPlayerToGuildChat struct {
+	GuildId              *uint32  `protobuf:"varint,1,opt,name=guild_id,json=guildId" json:"guild_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CMsgClientToGCAddPlayerToGuildChat) Reset()         { *m = CMsgClientToGCAddPlayerToGuildChat{} }
+func (m *CMsgClientToGCAddPlayerToGuildChat) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCAddPlayerToGuildChat) ProtoMessage()    {}
+func (*CMsgClientToGCAddPlayerToGuildChat) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{51}
+}
+
+func (m *CMsgClientToGCAddPlayerToGuildChat) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCAddPlayerToGuildChat.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCAddPlayerToGuildChat) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCAddPlayerToGuildChat.Marshal(b, m, deterministic)
+}
+func (m *CMsgClientToGCAddPlayerToGuildChat) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCAddPlayerToGuildChat.Merge(m, src)
+}
+func (m *CMsgClientToGCAddPlayerToGuildChat) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCAddPlayerToGuildChat.Size(m)
+}
+func (m *CMsgClientToGCAddPlayerToGuildChat) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCAddPlayerToGuildChat.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCAddPlayerToGuildChat proto.InternalMessageInfo
+
+func (m *CMsgClientToGCAddPlayerToGuildChat) GetGuildId() uint32 {
+	if m != nil && m.GuildId != nil {
+		return *m.GuildId
+	}
+	return 0
+}
+
+type CMsgClientToGCAddPlayerToGuildChatResponse struct {
+	Result               *CMsgClientToGCAddPlayerToGuildChatResponse_EResponse `protobuf:"varint,1,opt,name=result,enum=dota.CMsgClientToGCAddPlayerToGuildChatResponse_EResponse,def=0" json:"result,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                              `json:"-"`
+	XXX_unrecognized     []byte                                                `json:"-"`
+	XXX_sizecache        int32                                                 `json:"-"`
+}
+
+func (m *CMsgClientToGCAddPlayerToGuildChatResponse) Reset() {
+	*m = CMsgClientToGCAddPlayerToGuildChatResponse{}
+}
+func (m *CMsgClientToGCAddPlayerToGuildChatResponse) String() string {
+	return proto.CompactTextString(m)
+}
+func (*CMsgClientToGCAddPlayerToGuildChatResponse) ProtoMessage() {}
+func (*CMsgClientToGCAddPlayerToGuildChatResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{52}
+}
+
+func (m *CMsgClientToGCAddPlayerToGuildChatResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCAddPlayerToGuildChatResponse.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCAddPlayerToGuildChatResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCAddPlayerToGuildChatResponse.Marshal(b, m, deterministic)
+}
+func (m *CMsgClientToGCAddPlayerToGuildChatResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCAddPlayerToGuildChatResponse.Merge(m, src)
+}
+func (m *CMsgClientToGCAddPlayerToGuildChatResponse) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCAddPlayerToGuildChatResponse.Size(m)
+}
+func (m *CMsgClientToGCAddPlayerToGuildChatResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCAddPlayerToGuildChatResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCAddPlayerToGuildChatResponse proto.InternalMessageInfo
+
+const Default_CMsgClientToGCAddPlayerToGuildChatResponse_Result CMsgClientToGCAddPlayerToGuildChatResponse_EResponse = CMsgClientToGCAddPlayerToGuildChatResponse_k_eInternalError
+
+func (m *CMsgClientToGCAddPlayerToGuildChatResponse) GetResult() CMsgClientToGCAddPlayerToGuildChatResponse_EResponse {
+	if m != nil && m.Result != nil {
+		return *m.Result
+	}
+	return Default_CMsgClientToGCAddPlayerToGuildChatResponse_Result
+}
+
+type CMsgFindGuildByTagResponse struct {
+	Result               *CMsgFindGuildByTagResponse_EResponse `protobuf:"varint,1,opt,name=result,enum=dota.CMsgFindGuildByTagResponse_EResponse,def=0" json:"result,omitempty"`
+	GuildId              *uint32                               `protobuf:"varint,2,opt,name=guild_id,json=guildId" json:"guild_id,omitempty"`
+	GuildSummary         *CMsgGuildSummary                     `protobuf:"bytes,3,opt,name=guild_summary,json=guildSummary" json:"guild_summary,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                              `json:"-"`
+	XXX_unrecognized     []byte                                `json:"-"`
+	XXX_sizecache        int32                                 `json:"-"`
+}
+
+func (m *CMsgFindGuildByTagResponse) Reset()         { *m = CMsgFindGuildByTagResponse{} }
+func (m *CMsgFindGuildByTagResponse) String() string { return proto.CompactTextString(m) }
+func (*CMsgFindGuildByTagResponse) ProtoMessage()    {}
+func (*CMsgFindGuildByTagResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{53}
+}
+
+func (m *CMsgFindGuildByTagResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgFindGuildByTagResponse.Unmarshal(m, b)
+}
+func (m *CMsgFindGuildByTagResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgFindGuildByTagResponse.Marshal(b, m, deterministic)
+}
+func (m *CMsgFindGuildByTagResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgFindGuildByTagResponse.Merge(m, src)
+}
+func (m *CMsgFindGuildByTagResponse) XXX_Size() int {
+	return xxx_messageInfo_CMsgFindGuildByTagResponse.Size(m)
+}
+func (m *CMsgFindGuildByTagResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgFindGuildByTagResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgFindGuildByTagResponse proto.InternalMessageInfo
+
+const Default_CMsgFindGuildByTagResponse_Result CMsgFindGuildByTagResponse_EResponse = CMsgFindGuildByTagResponse_k_eInternalError
+
+func (m *CMsgFindGuildByTagResponse) GetResult() CMsgFindGuildByTagResponse_EResponse {
+	if m != nil && m.Result != nil {
+		return *m.Result
+	}
+	return Default_CMsgFindGuildByTagResponse_Result
+}
+
+func (m *CMsgFindGuildByTagResponse) GetGuildId() uint32 {
+	if m != nil && m.GuildId != nil {
+		return *m.GuildId
+	}
+	return 0
+}
+
+func (m *CMsgFindGuildByTagResponse) GetGuildSummary() *CMsgGuildSummary {
+	if m != nil {
+		return m.GuildSummary
+	}
+	return nil
+}
+
+type CMsgSearchForOpenGuildsResponse struct {
+	Result               *CMsgSearchForOpenGuildsResponse_EResponse      `protobuf:"varint,1,opt,name=result,enum=dota.CMsgSearchForOpenGuildsResponse_EResponse,def=0" json:"result,omitempty"`
+	SearchResults        []*CMsgSearchForOpenGuildsResponse_SearchResult `protobuf:"bytes,2,rep,name=search_results,json=searchResults" json:"search_results,omitempty"`
+	UseWhitelist         *bool                                           `protobuf:"varint,3,opt,name=use_whitelist,json=useWhitelist" json:"use_whitelist,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                        `json:"-"`
+	XXX_unrecognized     []byte                                          `json:"-"`
+	XXX_sizecache        int32                                           `json:"-"`
+}
+
+func (m *CMsgSearchForOpenGuildsResponse) Reset()         { *m = CMsgSearchForOpenGuildsResponse{} }
+func (m *CMsgSearchForOpenGuildsResponse) String() string { return proto.CompactTextString(m) }
+func (*CMsgSearchForOpenGuildsResponse) ProtoMessage()    {}
+func (*CMsgSearchForOpenGuildsResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{54}
+}
+
+func (m *CMsgSearchForOpenGuildsResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgSearchForOpenGuildsResponse.Unmarshal(m, b)
+}
+func (m *CMsgSearchForOpenGuildsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgSearchForOpenGuildsResponse.Marshal(b, m, deterministic)
+}
+func (m *CMsgSearchForOpenGuildsResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgSearchForOpenGuildsResponse.Merge(m, src)
+}
+func (m *CMsgSearchForOpenGuildsResponse) XXX_Size() int {
+	return xxx_messageInfo_CMsgSearchForOpenGuildsResponse.Size(m)
+}
+func (m *CMsgSearchForOpenGuildsResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgSearchForOpenGuildsResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgSearchForOpenGuildsResponse proto.InternalMessageInfo
+
+const Default_CMsgSearchForOpenGuildsResponse_Result CMsgSearchForOpenGuildsResponse_EResponse = CMsgSearchForOpenGuildsResponse_k_eInternalError
+
+func (m *CMsgSearchForOpenGuildsResponse) GetResult() CMsgSearchForOpenGuildsResponse_EResponse {
+	if m != nil && m.Result != nil {
+		return *m.Result
+	}
+	return Default_CMsgSearchForOpenGuildsResponse_Result
+}
+
+func (m *CMsgSearchForOpenGuildsResponse) GetSearchResults() []*CMsgSearchForOpenGuildsResponse_SearchResult {
+	if m != nil {
+		return m.SearchResults
+	}
+	return nil
+}
+
+func (m *CMsgSearchForOpenGuildsResponse) GetUseWhitelist() bool {
+	if m != nil && m.UseWhitelist != nil {
+		return *m.UseWhitelist
+	}
+	return false
+}
+
+type CMsgSearchForOpenGuildsResponse_SearchResult struct {
+	GuildId              *uint32           `protobuf:"varint,1,opt,name=guild_id,json=guildId" json:"guild_id,omitempty"`
+	GuildSummary         *CMsgGuildSummary `protobuf:"bytes,2,opt,name=guild_summary,json=guildSummary" json:"guild_summary,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
+	XXX_unrecognized     []byte            `json:"-"`
+	XXX_sizecache        int32             `json:"-"`
+}
+
+func (m *CMsgSearchForOpenGuildsResponse_SearchResult) Reset() {
+	*m = CMsgSearchForOpenGuildsResponse_SearchResult{}
+}
+func (m *CMsgSearchForOpenGuildsResponse_SearchResult) String() string {
+	return proto.CompactTextString(m)
+}
+func (*CMsgSearchForOpenGuildsResponse_SearchResult) ProtoMessage() {}
+func (*CMsgSearchForOpenGuildsResponse_SearchResult) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{54, 0}
+}
+
+func (m *CMsgSearchForOpenGuildsResponse_SearchResult) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgSearchForOpenGuildsResponse_SearchResult.Unmarshal(m, b)
+}
+func (m *CMsgSearchForOpenGuildsResponse_SearchResult) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgSearchForOpenGuildsResponse_SearchResult.Marshal(b, m, deterministic)
+}
+func (m *CMsgSearchForOpenGuildsResponse_SearchResult) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgSearchForOpenGuildsResponse_SearchResult.Merge(m, src)
+}
+func (m *CMsgSearchForOpenGuildsResponse_SearchResult) XXX_Size() int {
+	return xxx_messageInfo_CMsgSearchForOpenGuildsResponse_SearchResult.Size(m)
+}
+func (m *CMsgSearchForOpenGuildsResponse_SearchResult) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgSearchForOpenGuildsResponse_SearchResult.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgSearchForOpenGuildsResponse_SearchResult proto.InternalMessageInfo
+
+func (m *CMsgSearchForOpenGuildsResponse_SearchResult) GetGuildId() uint32 {
+	if m != nil && m.GuildId != nil {
+		return *m.GuildId
+	}
+	return 0
+}
+
+func (m *CMsgSearchForOpenGuildsResponse_SearchResult) GetGuildSummary() *CMsgGuildSummary {
+	if m != nil {
+		return m.GuildSummary
+	}
+	return nil
+}
+
+type CMsgClientToGCReportGuildContent struct {
+	GuildId              *uint32  `protobuf:"varint,1,opt,name=guild_id,json=guildId" json:"guild_id,omitempty"`
+	GuildContentFlags    *uint32  `protobuf:"varint,2,opt,name=guild_content_flags,json=guildContentFlags" json:"guild_content_flags,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CMsgClientToGCReportGuildContent) Reset()         { *m = CMsgClientToGCReportGuildContent{} }
+func (m *CMsgClientToGCReportGuildContent) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCReportGuildContent) ProtoMessage()    {}
+func (*CMsgClientToGCReportGuildContent) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{55}
+}
+
+func (m *CMsgClientToGCReportGuildContent) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCReportGuildContent.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCReportGuildContent) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCReportGuildContent.Marshal(b, m, deterministic)
+}
+func (m *CMsgClientToGCReportGuildContent) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCReportGuildContent.Merge(m, src)
+}
+func (m *CMsgClientToGCReportGuildContent) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCReportGuildContent.Size(m)
+}
+func (m *CMsgClientToGCReportGuildContent) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCReportGuildContent.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCReportGuildContent proto.InternalMessageInfo
+
+func (m *CMsgClientToGCReportGuildContent) GetGuildId() uint32 {
+	if m != nil && m.GuildId != nil {
+		return *m.GuildId
+	}
+	return 0
+}
+
+func (m *CMsgClientToGCReportGuildContent) GetGuildContentFlags() uint32 {
+	if m != nil && m.GuildContentFlags != nil {
+		return *m.GuildContentFlags
+	}
+	return 0
+}
+
+type CMsgClientToGCReportGuildContentResponse struct {
+	Result               *CMsgClientToGCReportGuildContentResponse_EResponse `protobuf:"varint,1,opt,name=result,enum=dota.CMsgClientToGCReportGuildContentResponse_EResponse,def=0" json:"result,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                            `json:"-"`
+	XXX_unrecognized     []byte                                              `json:"-"`
+	XXX_sizecache        int32                                               `json:"-"`
+}
+
+func (m *CMsgClientToGCReportGuildContentResponse) Reset() {
+	*m = CMsgClientToGCReportGuildContentResponse{}
+}
+func (m *CMsgClientToGCReportGuildContentResponse) String() string { return proto.CompactTextString(m) }
+func (*CMsgClientToGCReportGuildContentResponse) ProtoMessage()    {}
+func (*CMsgClientToGCReportGuildContentResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{56}
+}
+
+func (m *CMsgClientToGCReportGuildContentResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCReportGuildContentResponse.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCReportGuildContentResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCReportGuildContentResponse.Marshal(b, m, deterministic)
+}
+func (m *CMsgClientToGCReportGuildContentResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCReportGuildContentResponse.Merge(m, src)
+}
+func (m *CMsgClientToGCReportGuildContentResponse) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCReportGuildContentResponse.Size(m)
+}
+func (m *CMsgClientToGCReportGuildContentResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCReportGuildContentResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCReportGuildContentResponse proto.InternalMessageInfo
+
+const Default_CMsgClientToGCReportGuildContentResponse_Result CMsgClientToGCReportGuildContentResponse_EResponse = CMsgClientToGCReportGuildContentResponse_k_eInternalError
+
+func (m *CMsgClientToGCReportGuildContentResponse) GetResult() CMsgClientToGCReportGuildContentResponse_EResponse {
+	if m != nil && m.Result != nil {
+		return *m.Result
+	}
+	return Default_CMsgClientToGCReportGuildContentResponse_Result
+}
+
+type CMsgClientToGCRequestAccountGuildPersonaInfo struct {
+	AccountId            *uint32  `protobuf:"varint,1,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CMsgClientToGCRequestAccountGuildPersonaInfo) Reset() {
+	*m = CMsgClientToGCRequestAccountGuildPersonaInfo{}
+}
+func (m *CMsgClientToGCRequestAccountGuildPersonaInfo) String() string {
+	return proto.CompactTextString(m)
+}
+func (*CMsgClientToGCRequestAccountGuildPersonaInfo) ProtoMessage() {}
+func (*CMsgClientToGCRequestAccountGuildPersonaInfo) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{57}
+}
+
+func (m *CMsgClientToGCRequestAccountGuildPersonaInfo) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCRequestAccountGuildPersonaInfo.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCRequestAccountGuildPersonaInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCRequestAccountGuildPersonaInfo.Marshal(b, m, deterministic)
+}
+func (m *CMsgClientToGCRequestAccountGuildPersonaInfo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCRequestAccountGuildPersonaInfo.Merge(m, src)
+}
+func (m *CMsgClientToGCRequestAccountGuildPersonaInfo) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCRequestAccountGuildPersonaInfo.Size(m)
+}
+func (m *CMsgClientToGCRequestAccountGuildPersonaInfo) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCRequestAccountGuildPersonaInfo.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCRequestAccountGuildPersonaInfo proto.InternalMessageInfo
+
+func (m *CMsgClientToGCRequestAccountGuildPersonaInfo) GetAccountId() uint32 {
+	if m != nil && m.AccountId != nil {
+		return *m.AccountId
+	}
+	return 0
+}
+
+type CMsgClientToGCRequestAccountGuildPersonaInfoResponse struct {
+	Result               *CMsgClientToGCRequestAccountGuildPersonaInfoResponse_EResponse `protobuf:"varint,1,opt,name=result,enum=dota.CMsgClientToGCRequestAccountGuildPersonaInfoResponse_EResponse,def=0" json:"result,omitempty"`
+	PersonaInfo          *CMsgAccountGuildsPersonaInfo                                   `protobuf:"bytes,2,opt,name=persona_info,json=personaInfo" json:"persona_info,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                        `json:"-"`
+	XXX_unrecognized     []byte                                                          `json:"-"`
+	XXX_sizecache        int32                                                           `json:"-"`
+}
+
+func (m *CMsgClientToGCRequestAccountGuildPersonaInfoResponse) Reset() {
+	*m = CMsgClientToGCRequestAccountGuildPersonaInfoResponse{}
+}
+func (m *CMsgClientToGCRequestAccountGuildPersonaInfoResponse) String() string {
+	return proto.CompactTextString(m)
+}
+func (*CMsgClientToGCRequestAccountGuildPersonaInfoResponse) ProtoMessage() {}
+func (*CMsgClientToGCRequestAccountGuildPersonaInfoResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{58}
+}
+
+func (m *CMsgClientToGCRequestAccountGuildPersonaInfoResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCRequestAccountGuildPersonaInfoResponse.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCRequestAccountGuildPersonaInfoResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCRequestAccountGuildPersonaInfoResponse.Marshal(b, m, deterministic)
+}
+func (m *CMsgClientToGCRequestAccountGuildPersonaInfoResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCRequestAccountGuildPersonaInfoResponse.Merge(m, src)
+}
+func (m *CMsgClientToGCRequestAccountGuildPersonaInfoResponse) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCRequestAccountGuildPersonaInfoResponse.Size(m)
+}
+func (m *CMsgClientToGCRequestAccountGuildPersonaInfoResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCRequestAccountGuildPersonaInfoResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCRequestAccountGuildPersonaInfoResponse proto.InternalMessageInfo
+
+const Default_CMsgClientToGCRequestAccountGuildPersonaInfoResponse_Result CMsgClientToGCRequestAccountGuildPersonaInfoResponse_EResponse = CMsgClientToGCRequestAccountGuildPersonaInfoResponse_k_eInternalError
+
+func (m *CMsgClientToGCRequestAccountGuildPersonaInfoResponse) GetResult() CMsgClientToGCRequestAccountGuildPersonaInfoResponse_EResponse {
+	if m != nil && m.Result != nil {
+		return *m.Result
+	}
+	return Default_CMsgClientToGCRequestAccountGuildPersonaInfoResponse_Result
+}
+
+func (m *CMsgClientToGCRequestAccountGuildPersonaInfoResponse) GetPersonaInfo() *CMsgAccountGuildsPersonaInfo {
+	if m != nil {
+		return m.PersonaInfo
+	}
+	return nil
+}
+
+type CMsgClientToGCRequestAccountGuildPersonaInfoBatch struct {
+	AccountIds           []uint32 `protobuf:"varint,1,rep,name=account_ids,json=accountIds" json:"account_ids,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CMsgClientToGCRequestAccountGuildPersonaInfoBatch) Reset() {
+	*m = CMsgClientToGCRequestAccountGuildPersonaInfoBatch{}
+}
+func (m *CMsgClientToGCRequestAccountGuildPersonaInfoBatch) String() string {
+	return proto.CompactTextString(m)
+}
+func (*CMsgClientToGCRequestAccountGuildPersonaInfoBatch) ProtoMessage() {}
+func (*CMsgClientToGCRequestAccountGuildPersonaInfoBatch) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{59}
+}
+
+func (m *CMsgClientToGCRequestAccountGuildPersonaInfoBatch) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCRequestAccountGuildPersonaInfoBatch.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCRequestAccountGuildPersonaInfoBatch) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCRequestAccountGuildPersonaInfoBatch.Marshal(b, m, deterministic)
+}
+func (m *CMsgClientToGCRequestAccountGuildPersonaInfoBatch) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCRequestAccountGuildPersonaInfoBatch.Merge(m, src)
+}
+func (m *CMsgClientToGCRequestAccountGuildPersonaInfoBatch) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCRequestAccountGuildPersonaInfoBatch.Size(m)
+}
+func (m *CMsgClientToGCRequestAccountGuildPersonaInfoBatch) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCRequestAccountGuildPersonaInfoBatch.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCRequestAccountGuildPersonaInfoBatch proto.InternalMessageInfo
+
+func (m *CMsgClientToGCRequestAccountGuildPersonaInfoBatch) GetAccountIds() []uint32 {
+	if m != nil {
+		return m.AccountIds
+	}
+	return nil
+}
+
+type CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse struct {
+	Result               *CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse_EResponse `protobuf:"varint,1,opt,name=result,enum=dota.CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse_EResponse,def=0" json:"result,omitempty"`
+	PersonaInfos         []*CMsgAccountGuildsPersonaInfo                                      `protobuf:"bytes,2,rep,name=persona_infos,json=personaInfos" json:"persona_infos,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                             `json:"-"`
+	XXX_unrecognized     []byte                                                               `json:"-"`
+	XXX_sizecache        int32                                                                `json:"-"`
+}
+
+func (m *CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse) Reset() {
+	*m = CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse{}
+}
+func (m *CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse) String() string {
+	return proto.CompactTextString(m)
+}
+func (*CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse) ProtoMessage() {}
+func (*CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ce40e801b61ab275, []int{60}
+}
+
+func (m *CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse.Unmarshal(m, b)
+}
+func (m *CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse.Marshal(b, m, deterministic)
+}
+func (m *CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse.Merge(m, src)
+}
+func (m *CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse) XXX_Size() int {
+	return xxx_messageInfo_CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse.Size(m)
+}
+func (m *CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse proto.InternalMessageInfo
+
+const Default_CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse_Result CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse_EResponse = CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse_k_eInternalError
+
+func (m *CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse) GetResult() CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse_EResponse {
+	if m != nil && m.Result != nil {
+		return *m.Result
+	}
+	return Default_CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse_Result
+}
+
+func (m *CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse) GetPersonaInfos() []*CMsgAccountGuildsPersonaInfo {
+	if m != nil {
+		return m.PersonaInfos
+	}
+	return nil
+}
+
+func init() {
+	proto.RegisterEnum("dota.EGuildAuditAction", EGuildAuditAction_name, EGuildAuditAction_value)
+	proto.RegisterEnum("dota.EGuildChatType", EGuildChatType_name, EGuildChatType_value)
+	proto.RegisterEnum("dota.CMsgClientToGCCreateGuildResponse_EResponse", CMsgClientToGCCreateGuildResponse_EResponse_name, CMsgClientToGCCreateGuildResponse_EResponse_value)
+	proto.RegisterEnum("dota.CMsgClientToGCSetGuildInfoResponse_EResponse", CMsgClientToGCSetGuildInfoResponse_EResponse_name, CMsgClientToGCSetGuildInfoResponse_EResponse_value)
+	proto.RegisterEnum("dota.CMsgClientToGCRequestGuildDataResponse_EResponse", CMsgClientToGCRequestGuildDataResponse_EResponse_name, CMsgClientToGCRequestGuildDataResponse_EResponse_value)
+	proto.RegisterEnum("dota.CMsgClientToGCRequestGuildMembershipResponse_EResponse", CMsgClientToGCRequestGuildMembershipResponse_EResponse_name, CMsgClientToGCRequestGuildMembershipResponse_EResponse_value)
+	proto.RegisterEnum("dota.CMsgClientToGCRequestGuildSummaryResponse_EResponse", CMsgClientToGCRequestGuildSummaryResponse_EResponse_name, CMsgClientToGCRequestGuildSummaryResponse_EResponse_value)
+	proto.RegisterEnum("dota.CMsgClientToGCJoinGuildResponse_EResponse", CMsgClientToGCJoinGuildResponse_EResponse_name, CMsgClientToGCJoinGuildResponse_EResponse_value)
+	proto.RegisterEnum("dota.CMsgClientToGCLeaveGuildResponse_EResponse", CMsgClientToGCLeaveGuildResponse_EResponse_name, CMsgClientToGCLeaveGuildResponse_EResponse_value)
+	proto.RegisterEnum("dota.CMsgClientToGCKickGuildMemberResponse_EResponse", CMsgClientToGCKickGuildMemberResponse_EResponse_name, CMsgClientToGCKickGuildMemberResponse_EResponse_value)
+	proto.RegisterEnum("dota.CMsgClientToGCSetGuildMemberRoleResponse_EResponse", CMsgClientToGCSetGuildMemberRoleResponse_EResponse_name, CMsgClientToGCSetGuildMemberRoleResponse_EResponse_value)
+	proto.RegisterEnum("dota.CMsgClientToGCInviteToGuildResponse_EResponse", CMsgClientToGCInviteToGuildResponse_EResponse_name, CMsgClientToGCInviteToGuildResponse_EResponse_value)
+	proto.RegisterEnum("dota.CMsgClientToGCDeclineInviteToGuildResponse_EResponse", CMsgClientToGCDeclineInviteToGuildResponse_EResponse_name, CMsgClientToGCDeclineInviteToGuildResponse_EResponse_value)
+	proto.RegisterEnum("dota.CMsgClientToGCAcceptInviteToGuildResponse_EResponse", CMsgClientToGCAcceptInviteToGuildResponse_EResponse_name, CMsgClientToGCAcceptInviteToGuildResponse_EResponse_value)
+	proto.RegisterEnum("dota.CMsgClientToGCCancelInviteToGuildResponse_EResponse", CMsgClientToGCCancelInviteToGuildResponse_EResponse_name, CMsgClientToGCCancelInviteToGuildResponse_EResponse_value)
+	proto.RegisterEnum("dota.CMsgClientToGCAddGuildRoleResponse_EResponse", CMsgClientToGCAddGuildRoleResponse_EResponse_name, CMsgClientToGCAddGuildRoleResponse_EResponse_value)
+	proto.RegisterEnum("dota.CMsgClientToGCModifyGuildRoleResponse_EResponse", CMsgClientToGCModifyGuildRoleResponse_EResponse_name, CMsgClientToGCModifyGuildRoleResponse_EResponse_value)
+	proto.RegisterEnum("dota.CMsgClientToGCRemoveGuildRoleResponse_EResponse", CMsgClientToGCRemoveGuildRoleResponse_EResponse_name, CMsgClientToGCRemoveGuildRoleResponse_EResponse_value)
+	proto.RegisterEnum("dota.CMsgClientToGCSetGuildRoleOrderResponse_EResponse", CMsgClientToGCSetGuildRoleOrderResponse_EResponse_name, CMsgClientToGCSetGuildRoleOrderResponse_EResponse_value)
+	proto.RegisterEnum("dota.CMsgClientToGCRequestGuildFeedResponse_EResponse", CMsgClientToGCRequestGuildFeedResponse_EResponse_name, CMsgClientToGCRequestGuildFeedResponse_EResponse_value)
+	proto.RegisterEnum("dota.CMsgClientToGCAddPlayerToGuildChatResponse_EResponse", CMsgClientToGCAddPlayerToGuildChatResponse_EResponse_name, CMsgClientToGCAddPlayerToGuildChatResponse_EResponse_value)
+	proto.RegisterEnum("dota.CMsgFindGuildByTagResponse_EResponse", CMsgFindGuildByTagResponse_EResponse_name, CMsgFindGuildByTagResponse_EResponse_value)
+	proto.RegisterEnum("dota.CMsgSearchForOpenGuildsResponse_EResponse", CMsgSearchForOpenGuildsResponse_EResponse_name, CMsgSearchForOpenGuildsResponse_EResponse_value)
+	proto.RegisterEnum("dota.CMsgClientToGCReportGuildContent_EContentFlags", CMsgClientToGCReportGuildContent_EContentFlags_name, CMsgClientToGCReportGuildContent_EContentFlags_value)
+	proto.RegisterEnum("dota.CMsgClientToGCReportGuildContentResponse_EResponse", CMsgClientToGCReportGuildContentResponse_EResponse_name, CMsgClientToGCReportGuildContentResponse_EResponse_value)
+	proto.RegisterEnum("dota.CMsgClientToGCRequestAccountGuildPersonaInfoResponse_EResponse", CMsgClientToGCRequestAccountGuildPersonaInfoResponse_EResponse_name, CMsgClientToGCRequestAccountGuildPersonaInfoResponse_EResponse_value)
+	proto.RegisterEnum("dota.CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse_EResponse", CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse_EResponse_name, CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse_EResponse_value)
+	proto.RegisterType((*CMsgGuildInfo)(nil), "dota.CMsgGuildInfo")
+	proto.RegisterType((*CMsgGuildSummary)(nil), "dota.CMsgGuildSummary")
+	proto.RegisterType((*CMsgGuildSummary_EventPoints)(nil), "dota.CMsgGuildSummary.EventPoints")
+	proto.RegisterType((*CMsgGuildRole)(nil), "dota.CMsgGuildRole")
+	proto.RegisterType((*CMsgGuildMember)(nil), "dota.CMsgGuildMember")
+	proto.RegisterType((*CMsgGuildInvite)(nil), "dota.CMsgGuildInvite")
+	proto.RegisterType((*CMsgGuildData)(nil), "dota.CMsgGuildData")
+	proto.RegisterType((*CMsgAccountGuildInvite)(nil), "dota.CMsgAccountGuildInvite")
+	proto.RegisterType((*CMsgAccountGuildMemberships)(nil), "dota.CMsgAccountGuildMemberships")
+	proto.RegisterType((*CMsgGuildPersonaInfo)(nil), "dota.CMsgGuildPersonaInfo")
+	proto.RegisterType((*CMsgAccountGuildsPersonaInfo)(nil), "dota.CMsgAccountGuildsPersonaInfo")
+	proto.RegisterType((*CMsgGuildFeedEvent)(nil), "dota.CMsgGuildFeedEvent")
+	proto.RegisterType((*CMsgClientToGCCreateGuild)(nil), "dota.CMsgClientToGCCreateGuild")
+	proto.RegisterType((*CMsgClientToGCCreateGuildResponse)(nil), "dota.CMsgClientToGCCreateGuildResponse")
+	proto.RegisterType((*CMsgClientToGCSetGuildInfo)(nil), "dota.CMsgClientToGCSetGuildInfo")
+	proto.RegisterType((*CMsgClientToGCSetGuildInfoResponse)(nil), "dota.CMsgClientToGCSetGuildInfoResponse")
+	proto.RegisterType((*CMsgClientToGCRequestGuildData)(nil), "dota.CMsgClientToGCRequestGuildData")
+	proto.RegisterType((*CMsgClientToGCRequestGuildDataResponse)(nil), "dota.CMsgClientToGCRequestGuildDataResponse")
+	proto.RegisterType((*CMsgGCToClientGuildDataUpdated)(nil), "dota.CMsgGCToClientGuildDataUpdated")
+	proto.RegisterType((*CMsgGCToClientGuildMembersDataUpdated)(nil), "dota.CMsgGCToClientGuildMembersDataUpdated")
+	proto.RegisterType((*CMsgClientToGCRequestGuildMembership)(nil), "dota.CMsgClientToGCRequestGuildMembership")
+	proto.RegisterType((*CMsgClientToGCRequestGuildMembershipResponse)(nil), "dota.CMsgClientToGCRequestGuildMembershipResponse")
+	proto.RegisterType((*CMsgGCToClientGuildMembershipUpdated)(nil), "dota.CMsgGCToClientGuildMembershipUpdated")
+	proto.RegisterType((*CMsgClientToGCRequestGuildSummary)(nil), "dota.CMsgClientToGCRequestGuildSummary")
+	proto.RegisterType((*CMsgClientToGCRequestGuildSummaryResponse)(nil), "dota.CMsgClientToGCRequestGuildSummaryResponse")
+	proto.RegisterType((*CMsgClientToGCJoinGuild)(nil), "dota.CMsgClientToGCJoinGuild")
+	proto.RegisterType((*CMsgClientToGCJoinGuildResponse)(nil), "dota.CMsgClientToGCJoinGuildResponse")
+	proto.RegisterType((*CMsgClientToGCLeaveGuild)(nil), "dota.CMsgClientToGCLeaveGuild")
+	proto.RegisterType((*CMsgClientToGCLeaveGuildResponse)(nil), "dota.CMsgClientToGCLeaveGuildResponse")
+	proto.RegisterType((*CMsgClientToGCKickGuildMember)(nil), "dota.CMsgClientToGCKickGuildMember")
+	proto.RegisterType((*CMsgClientToGCKickGuildMemberResponse)(nil), "dota.CMsgClientToGCKickGuildMemberResponse")
+	proto.RegisterType((*CMsgClientToGCSetGuildMemberRole)(nil), "dota.CMsgClientToGCSetGuildMemberRole")
+	proto.RegisterType((*CMsgClientToGCSetGuildMemberRoleResponse)(nil), "dota.CMsgClientToGCSetGuildMemberRoleResponse")
+	proto.RegisterType((*CMsgClientToGCInviteToGuild)(nil), "dota.CMsgClientToGCInviteToGuild")
+	proto.RegisterType((*CMsgClientToGCInviteToGuildResponse)(nil), "dota.CMsgClientToGCInviteToGuildResponse")
+	proto.RegisterType((*CMsgClientToGCDeclineInviteToGuild)(nil), "dota.CMsgClientToGCDeclineInviteToGuild")
+	proto.RegisterType((*CMsgClientToGCDeclineInviteToGuildResponse)(nil), "dota.CMsgClientToGCDeclineInviteToGuildResponse")
+	proto.RegisterType((*CMsgClientToGCAcceptInviteToGuild)(nil), "dota.CMsgClientToGCAcceptInviteToGuild")
+	proto.RegisterType((*CMsgClientToGCAcceptInviteToGuildResponse)(nil), "dota.CMsgClientToGCAcceptInviteToGuildResponse")
+	proto.RegisterType((*CMsgClientToGCCancelInviteToGuild)(nil), "dota.CMsgClientToGCCancelInviteToGuild")
+	proto.RegisterType((*CMsgClientToGCCancelInviteToGuildResponse)(nil), "dota.CMsgClientToGCCancelInviteToGuildResponse")
+	proto.RegisterType((*CMsgClientToGCAddGuildRole)(nil), "dota.CMsgClientToGCAddGuildRole")
+	proto.RegisterType((*CMsgClientToGCAddGuildRoleResponse)(nil), "dota.CMsgClientToGCAddGuildRoleResponse")
+	proto.RegisterType((*CMsgClientToGCModifyGuildRole)(nil), "dota.CMsgClientToGCModifyGuildRole")
+	proto.RegisterType((*CMsgClientToGCModifyGuildRoleResponse)(nil), "dota.CMsgClientToGCModifyGuildRoleResponse")
+	proto.RegisterType((*CMsgClientToGCRemoveGuildRole)(nil), "dota.CMsgClientToGCRemoveGuildRole")
+	proto.RegisterType((*CMsgClientToGCRemoveGuildRoleResponse)(nil), "dota.CMsgClientToGCRemoveGuildRoleResponse")
+	proto.RegisterType((*CMsgClientToGCSetGuildRoleOrder)(nil), "dota.CMsgClientToGCSetGuildRoleOrder")
+	proto.RegisterType((*CMsgClientToGCSetGuildRoleOrderResponse)(nil), "dota.CMsgClientToGCSetGuildRoleOrderResponse")
+	proto.RegisterType((*CMsgClientToGCGuildFeedRequest)(nil), "dota.CMsgClientToGCGuildFeedRequest")
+	proto.RegisterType((*CMsgClientToGCRequestGuildFeedResponse)(nil), "dota.CMsgClientToGCRequestGuildFeedResponse")
+	proto.RegisterType((*CMsgGCToClientGuildFeedUpdated)(nil), "dota.CMsgGCToClientGuildFeedUpdated")
+	proto.RegisterType((*CMsgClientToGCAddPlayerToGuildChat)(nil), "dota.CMsgClientToGCAddPlayerToGuildChat")
+	proto.RegisterType((*CMsgClientToGCAddPlayerToGuildChatResponse)(nil), "dota.CMsgClientToGCAddPlayerToGuildChatResponse")
+	proto.RegisterType((*CMsgFindGuildByTagResponse)(nil), "dota.CMsgFindGuildByTagResponse")
+	proto.RegisterType((*CMsgSearchForOpenGuildsResponse)(nil), "dota.CMsgSearchForOpenGuildsResponse")
+	proto.RegisterType((*CMsgSearchForOpenGuildsResponse_SearchResult)(nil), "dota.CMsgSearchForOpenGuildsResponse.SearchResult")
+	proto.RegisterType((*CMsgClientToGCReportGuildContent)(nil), "dota.CMsgClientToGCReportGuildContent")
+	proto.RegisterType((*CMsgClientToGCReportGuildContentResponse)(nil), "dota.CMsgClientToGCReportGuildContentResponse")
+	proto.RegisterType((*CMsgClientToGCRequestAccountGuildPersonaInfo)(nil), "dota.CMsgClientToGCRequestAccountGuildPersonaInfo")
+	proto.RegisterType((*CMsgClientToGCRequestAccountGuildPersonaInfoResponse)(nil), "dota.CMsgClientToGCRequestAccountGuildPersonaInfoResponse")
+	proto.RegisterType((*CMsgClientToGCRequestAccountGuildPersonaInfoBatch)(nil), "dota.CMsgClientToGCRequestAccountGuildPersonaInfoBatch")
+	proto.RegisterType((*CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse)(nil), "dota.CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse")
+}
+
 func init() {
 	proto.RegisterFile("dota_gcmessages_client_guild.proto", fileDescriptor_ce40e801b61ab275)
 }
 
 var fileDescriptor_ce40e801b61ab275 = []byte{
-	// 71 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x52, 0x4a, 0xc9, 0x2f, 0x49,
-	0x8c, 0x4f, 0x4f, 0xce, 0x4d, 0x2d, 0x2e, 0x4e, 0x4c, 0x4f, 0x2d, 0x8e, 0x4f, 0xce, 0xc9, 0x4c,
-	0xcd, 0x2b, 0x89, 0x4f, 0x2f, 0xcd, 0xcc, 0x49, 0xd1, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x62,
-	0x01, 0xa9, 0x71, 0x62, 0xf5, 0x60, 0x6c, 0x60, 0x64, 0x00, 0x04, 0x00, 0x00, 0xff, 0xff, 0xbd,
-	0xd9, 0x7d, 0x47, 0x31, 0x00, 0x00, 0x00,
+	// 3385 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xd4, 0x5b, 0x4d, 0x8c, 0x1c, 0x47,
+	0xf5, 0xf7, 0xcc, 0xec, 0xe7, 0x9b, 0x99, 0xdd, 0x76, 0xf9, 0x6b, 0xec, 0xd8, 0xf1, 0xba, 0xfd,
+	0x91, 0xcd, 0xc6, 0xff, 0x4d, 0xbc, 0xf9, 0xb4, 0xf3, 0x17, 0xd1, 0x7a, 0x77, 0x6d, 0x36, 0xd9,
+	0xb5, 0xad, 0xd9, 0x71, 0x50, 0x02, 0x51, 0x53, 0x9e, 0xae, 0x99, 0xed, 0xec, 0x4c, 0xd7, 0xd0,
+	0xd5, 0xb3, 0xd6, 0x4a, 0x20, 0x21, 0x21, 0x0e, 0x09, 0x41, 0x5c, 0x50, 0x2e, 0x20, 0x0e, 0x20,
+	0x24, 0x24, 0xee, 0x1c, 0x38, 0x70, 0x41, 0x82, 0x08, 0xc1, 0x8d, 0x03, 0x12, 0x48, 0x20, 0x21,
+	0x10, 0x4a, 0x2e, 0x48, 0x20, 0x2e, 0x08, 0x09, 0xd5, 0x57, 0x77, 0x4f, 0x4f, 0x77, 0x6f, 0x8f,
+	0x93, 0xd8, 0xcb, 0x6d, 0xfa, 0xd5, 0x7b, 0xaf, 0xaa, 0xde, 0xfb, 0x55, 0xd5, 0x7b, 0x55, 0x6f,
+	0xc0, 0xb4, 0xa9, 0x8f, 0xad, 0x76, 0xb3, 0x4b, 0x18, 0xc3, 0x6d, 0xc2, 0xac, 0x66, 0xc7, 0x21,
+	0xae, 0x6f, 0xb5, 0xfb, 0x4e, 0xc7, 0x5e, 0xec, 0x79, 0xd4, 0xa7, 0x68, 0x8c, 0xf3, 0x98, 0x7f,
+	0x1e, 0x87, 0xea, 0xca, 0x26, 0x6b, 0xdf, 0xe4, 0x2d, 0xeb, 0x6e, 0x8b, 0xa2, 0x33, 0x00, 0x82,
+	0xcd, 0x72, 0x71, 0x97, 0xd4, 0x0a, 0x73, 0x85, 0xf9, 0xe9, 0xfa, 0xb4, 0xa0, 0xdc, 0xc2, 0x5d,
+	0x82, 0x1e, 0x03, 0xf9, 0x61, 0xf9, 0xb8, 0x5d, 0x2b, 0x8a, 0xd6, 0x29, 0x41, 0x68, 0xe0, 0x36,
+	0x7a, 0x0a, 0x0e, 0x37, 0x3d, 0x82, 0x7d, 0x62, 0x5b, 0xbe, 0xd3, 0x25, 0xcc, 0xc7, 0xdd, 0x5e,
+	0xad, 0x34, 0x57, 0x98, 0xaf, 0xd6, 0x0d, 0xd5, 0xd0, 0xd0, 0x74, 0x74, 0x11, 0x66, 0xa4, 0xa6,
+	0x0e, 0x76, 0xdb, 0x7d, 0xdc, 0x26, 0xb5, 0x31, 0xc1, 0x59, 0x15, 0xd4, 0x0d, 0x45, 0x44, 0x67,
+	0xa1, 0x2c, 0xd9, 0x5a, 0x1d, 0xdc, 0x66, 0xb5, 0x71, 0xc1, 0x23, 0x87, 0x78, 0x83, 0x53, 0xc2,
+	0x01, 0x77, 0x68, 0x9b, 0xd6, 0x26, 0xe7, 0x0a, 0xf3, 0x63, 0x6a, 0xc0, 0x1b, 0xb4, 0x4d, 0xd1,
+	0x39, 0xa8, 0xc8, 0x66, 0x8f, 0xb4, 0x1d, 0xea, 0xd6, 0xa6, 0x84, 0x02, 0xa9, 0xb3, 0x2e, 0x48,
+	0xe8, 0xff, 0xe0, 0x88, 0x64, 0x69, 0x6e, 0x63, 0xdf, 0x6a, 0x7b, 0xb4, 0xdf, 0xb3, 0x1c, 0xbb,
+	0x36, 0x2d, 0x54, 0x19, 0xa2, 0x69, 0x65, 0x1b, 0xfb, 0x37, 0x79, 0xc3, 0xba, 0xcd, 0x67, 0x29,
+	0xd9, 0x6d, 0xc2, 0x9a, 0x9e, 0xd3, 0xf3, 0xb9, 0x5a, 0x10, 0xa6, 0x90, 0xcc, 0xab, 0x21, 0x1d,
+	0x3d, 0x0f, 0x27, 0x6c, 0xd2, 0xc2, 0xfd, 0x8e, 0x2f, 0xb5, 0x37, 0xb7, 0xb1, 0xeb, 0x92, 0x0e,
+	0xd7, 0x5f, 0x16, 0xfa, 0x8f, 0xaa, 0x66, 0xde, 0xc3, 0x8a, 0x6c, 0x5c, 0xb7, 0xd1, 0xa2, 0x1e,
+	0x52, 0xcf, 0x73, 0xba, 0xd8, 0xdb, 0xb3, 0x9a, 0xb4, 0x43, 0xbd, 0x5a, 0x45, 0x0c, 0x5e, 0x76,
+	0x7f, 0x47, 0xb6, 0xac, 0xf0, 0x06, 0xb4, 0x04, 0xc7, 0x24, 0x3f, 0x23, 0x4d, 0xea, 0xda, 0xa1,
+	0x44, 0x55, 0x48, 0x48, 0x65, 0x5b, 0xba, 0x4d, 0xca, 0x9c, 0x87, 0xaa, 0xea, 0x03, 0xfb, 0x3e,
+	0xf1, 0xdc, 0xda, 0x8c, 0xe0, 0x95, 0xe6, 0xba, 0x23, 0x69, 0xe8, 0x2a, 0x9c, 0xd4, 0xe6, 0x6b,
+	0x79, 0x84, 0x6d, 0x0b, 0xc7, 0x5a, 0xb4, 0xd5, 0x62, 0xc4, 0xaf, 0xcd, 0x0a, 0x81, 0xe3, 0xca,
+	0x96, 0xa2, 0x9d, 0xfb, 0xf7, 0xb6, 0x68, 0x45, 0x2f, 0x42, 0x4d, 0x8b, 0x7e, 0xa9, 0xef, 0x78,
+	0xc4, 0xb6, 0x3c, 0xec, 0xee, 0x58, 0xbe, 0x43, 0xbc, 0x9a, 0x21, 0x24, 0x8f, 0x29, 0x49, 0xd9,
+	0x5c, 0xc7, 0xee, 0x4e, 0xc3, 0x21, 0x1e, 0x7a, 0x06, 0x8e, 0x4a, 0xc1, 0x2e, 0xf5, 0xa3, 0x48,
+	0x3a, 0x2c, 0x84, 0x90, 0x68, 0xdb, 0xa4, 0x7e, 0x04, 0x4b, 0x01, 0x06, 0xb8, 0x44, 0x0d, 0x45,
+	0x40, 0xcb, 0xf9, 0xcc, 0xff, 0x14, 0xc0, 0x08, 0x50, 0xbe, 0xd5, 0xef, 0x72, 0xbb, 0xa1, 0x25,
+	0x2d, 0xe3, 0xb8, 0x2d, 0x2a, 0x80, 0x5e, 0x5e, 0x3a, 0xb2, 0xc8, 0x57, 0xc5, 0xe2, 0xc0, 0x8a,
+	0x50, 0x8a, 0xc4, 0xe2, 0x38, 0x07, 0x95, 0x2e, 0xe9, 0xde, 0x23, 0x9e, 0xd5, 0xa4, 0x7d, 0xd7,
+	0x17, 0x0b, 0xa0, 0x5a, 0x2f, 0x4b, 0xda, 0x0a, 0x27, 0xa1, 0x35, 0xa8, 0x90, 0x5d, 0xbe, 0xd8,
+	0x7a, 0xd4, 0x71, 0x7d, 0x56, 0x2b, 0xcd, 0x95, 0xe6, 0xcb, 0x4b, 0x66, 0x4c, 0xb1, 0x1a, 0xc4,
+	0xe2, 0x1a, 0x67, 0xbd, 0x23, 0x38, 0xeb, 0x65, 0x12, 0x7e, 0x9c, 0x7a, 0x0d, 0xca, 0x91, 0x36,
+	0x74, 0x12, 0xa6, 0xa4, 0x56, 0xc7, 0x16, 0x43, 0xad, 0xd6, 0x27, 0xc5, 0xf7, 0xba, 0x1d, 0x02,
+	0x5c, 0x75, 0x58, 0x8c, 0x00, 0x5c, 0x4a, 0x9b, 0x5f, 0x2b, 0x44, 0x56, 0x79, 0x9d, 0x76, 0x08,
+	0x3a, 0x01, 0x93, 0x1e, 0xed, 0x90, 0x50, 0xdd, 0x04, 0xff, 0x5c, 0xb7, 0xf9, 0xfa, 0x16, 0x0d,
+	0x62, 0xf5, 0xab, 0xf5, 0xcd, 0x09, 0x62, 0xf1, 0x9f, 0x01, 0x10, 0x8d, 0x72, 0x29, 0xca, 0x85,
+	0x2d, 0xd8, 0x83, 0x95, 0x28, 0x9a, 0xa9, 0x67, 0x13, 0x4f, 0xad, 0x66, 0xd1, 0x7c, 0x9b, 0x13,
+	0xcc, 0x3f, 0x14, 0x60, 0x36, 0x18, 0xc5, 0xa6, 0x30, 0x19, 0x5a, 0x80, 0xc3, 0xca, 0xa0, 0xb8,
+	0x29, 0x4c, 0x1a, 0x8e, 0x68, 0x56, 0x36, 0x2c, 0x4b, 0xfa, 0xba, 0x8d, 0x2e, 0xc0, 0x8c, 0xe2,
+	0xd5, 0x43, 0x97, 0x53, 0x55, 0x2e, 0xa9, 0xcb, 0x09, 0xbc, 0x00, 0x27, 0x14, 0xd7, 0xdb, 0xd4,
+	0x71, 0x13, 0x76, 0xa2, 0x63, 0xb2, 0xf9, 0x55, 0xd1, 0x1a, 0x42, 0xe8, 0x15, 0x38, 0xad, 0xe4,
+	0x3a, 0x98, 0xf9, 0x16, 0x6e, 0xfa, 0xce, 0x2e, 0x89, 0x08, 0xcb, 0xe9, 0x9c, 0x94, 0x3c, 0x1b,
+	0x98, 0xf9, 0xcb, 0x82, 0x23, 0x50, 0x60, 0xbe, 0x1f, 0x9d, 0xde, 0xba, 0xbb, 0xeb, 0xf8, 0x84,
+	0x23, 0x99, 0x83, 0x9f, 0x30, 0x3f, 0x69, 0x86, 0x28, 0x68, 0x0b, 0x27, 0xb9, 0x00, 0x87, 0x7d,
+	0xec, 0xb5, 0x89, 0x1f, 0x65, 0x97, 0xf3, 0x9c, 0x95, 0x0d, 0x21, 0xef, 0x45, 0x98, 0x09, 0xc6,
+	0x67, 0x31, 0xe2, 0xfa, 0x6a, 0x86, 0xd5, 0x80, 0xba, 0x45, 0x5c, 0xdf, 0x7c, 0xaf, 0x18, 0xf1,
+	0xfe, 0x2a, 0xf6, 0x31, 0x47, 0x93, 0x82, 0x7e, 0x80, 0x26, 0x89, 0x71, 0x3b, 0xb6, 0x2a, 0x8a,
+	0xb9, 0x56, 0xc5, 0x73, 0x7a, 0x8b, 0xe6, 0x7e, 0xd1, 0x88, 0x8f, 0x0b, 0x71, 0xf7, 0xa8, 0x7d,
+	0x9b, 0xff, 0x64, 0xe8, 0x9a, 0xde, 0x7e, 0xa4, 0x49, 0x59, 0x6d, 0x4c, 0xc8, 0x1d, 0x8b, 0xc9,
+	0x49, 0xa0, 0xa8, 0x5d, 0x49, 0x7e, 0x44, 0x64, 0x1d, 0x61, 0x67, 0x7e, 0x2c, 0x24, 0xc9, 0x4a,
+	0x2f, 0x28, 0x59, 0xf9, 0xc1, 0xcc, 0xf7, 0x0a, 0x70, 0x9c, 0x73, 0x28, 0x3b, 0x46, 0xdd, 0x95,
+	0x61, 0x97, 0x34, 0x4f, 0x16, 0x53, 0x3d, 0x99, 0xd3, 0x3b, 0x5f, 0x81, 0xc7, 0xe2, 0xa3, 0x51,
+	0xb3, 0xdc, 0x76, 0x7a, 0x2c, 0x3c, 0x6f, 0x1d, 0x9b, 0xd5, 0x0a, 0x73, 0xa5, 0xf9, 0xaa, 0x3a,
+	0x6f, 0xd7, 0x6d, 0x86, 0x96, 0xe3, 0x66, 0x28, 0x0a, 0x33, 0x9c, 0x0e, 0xcd, 0x30, 0x3c, 0xc9,
+	0x98, 0x35, 0x28, 0x1c, 0x0d, 0xcc, 0x75, 0x87, 0x78, 0x8c, 0xba, 0x58, 0xf8, 0x34, 0xc3, 0x14,
+	0x99, 0x21, 0x40, 0xec, 0xb8, 0x2e, 0xc5, 0x8f, 0x6b, 0xf3, 0x6d, 0x38, 0x1d, 0x1f, 0x18, 0x8b,
+	0x76, 0xfc, 0x6a, 0x70, 0xf2, 0x49, 0xa2, 0x00, 0xa2, 0x9c, 0x7a, 0x79, 0xe9, 0x54, 0xcc, 0xc1,
+	0x11, 0x41, 0x7d, 0x2a, 0x86, 0x14, 0x66, 0xfe, 0xbe, 0x00, 0x28, 0xe0, 0xbd, 0x41, 0x88, 0x2d,
+	0xb6, 0x54, 0x64, 0x42, 0xb5, 0x45, 0x88, 0x6d, 0x0d, 0xec, 0xa8, 0x63, 0xf5, 0x72, 0x4b, 0x73,
+	0xac, 0xdb, 0xe8, 0x34, 0x4c, 0x87, 0x6b, 0x5f, 0x3a, 0x39, 0x24, 0xf0, 0x9d, 0x4e, 0x0a, 0xfb,
+	0x7b, 0x3d, 0xa2, 0x37, 0x42, 0x41, 0x69, 0xec, 0xf5, 0x08, 0x9a, 0x83, 0x4a, 0x0f, 0x7b, 0xb8,
+	0x6b, 0xf5, 0x1d, 0xd7, 0xb7, 0xae, 0xa8, 0xbd, 0x03, 0x04, 0xed, 0xae, 0xe3, 0xfa, 0x57, 0x62,
+	0x1c, 0x4b, 0x3a, 0xac, 0x09, 0x38, 0x96, 0x62, 0x1c, 0xcf, 0xd6, 0x26, 0x62, 0x1c, 0xcf, 0x9a,
+	0x3f, 0x2e, 0xc0, 0x49, 0x3e, 0xbb, 0x15, 0x11, 0xdc, 0x35, 0xe8, 0xcd, 0x95, 0x15, 0x11, 0x63,
+	0x89, 0xd9, 0x3e, 0xd0, 0xf1, 0xf6, 0x26, 0xcc, 0x46, 0x02, 0x21, 0x31, 0x37, 0x3e, 0xf5, 0x99,
+	0xa5, 0xa3, 0x52, 0x70, 0xed, 0xa6, 0x8e, 0x85, 0xf8, 0x34, 0xaf, 0x9d, 0xde, 0xb1, 0x06, 0x29,
+	0xd6, 0x5d, 0x97, 0xf5, 0x48, 0xd3, 0x69, 0x39, 0xc4, 0x56, 0x71, 0x9c, 0x6e, 0x32, 0x3f, 0x2c,
+	0xc1, 0xb9, 0xd4, 0xd1, 0xd6, 0x09, 0xeb, 0x51, 0x97, 0x11, 0xf4, 0x79, 0x98, 0xf0, 0x08, 0xeb,
+	0x77, 0x7c, 0x31, 0xe2, 0x99, 0xa5, 0x2b, 0xe1, 0x88, 0x33, 0x05, 0x17, 0xd7, 0xf4, 0xaf, 0x6b,
+	0xc6, 0x8e, 0x45, 0xd6, 0x5d, 0x1e, 0xbc, 0xe0, 0xce, 0x9a, 0xe7, 0x51, 0xaf, 0xae, 0x54, 0x0e,
+	0x60, 0xba, 0x38, 0x80, 0x69, 0xf3, 0xd7, 0x45, 0x98, 0x0e, 0x54, 0xa0, 0xa3, 0x30, 0xa4, 0xc4,
+	0x38, 0x84, 0x66, 0x00, 0x76, 0x2c, 0xb2, 0xd5, 0x6f, 0x36, 0x09, 0x63, 0x46, 0x41, 0x7d, 0x37,
+	0x28, 0xbd, 0xde, 0x67, 0x7b, 0x46, 0x11, 0xcd, 0x42, 0x79, 0xc7, 0x22, 0xab, 0x0e, 0xc3, 0xf7,
+	0x3a, 0xc4, 0x36, 0x4a, 0x9a, 0xc1, 0xe9, 0x12, 0xda, 0xf7, 0x8d, 0x31, 0x84, 0x60, 0x46, 0xa8,
+	0xdd, 0xc5, 0x1d, 0x47, 0x44, 0xd3, 0xc6, 0x38, 0x3a, 0x0e, 0x68, 0xc7, 0x12, 0xa7, 0xeb, 0x72,
+	0xc7, 0x23, 0xd8, 0xde, 0xbb, 0xcb, 0x88, 0x6d, 0x4c, 0xa0, 0xc3, 0x50, 0x0d, 0x79, 0x1b, 0xb8,
+	0x6d, 0x4c, 0xa2, 0x63, 0x70, 0x98, 0xab, 0xc3, 0xed, 0x28, 0xe7, 0x14, 0x3a, 0x09, 0xc7, 0x42,
+	0xce, 0x48, 0xe8, 0x69, 0x4c, 0x07, 0xf3, 0x10, 0x4d, 0x32, 0xd8, 0x35, 0x60, 0x70, 0x18, 0x3c,
+	0x46, 0x36, 0xca, 0x6a, 0x18, 0xab, 0x94, 0xb0, 0x5b, 0xd4, 0xbf, 0x7d, 0xdf, 0x15, 0xcb, 0xc0,
+	0xa8, 0xa8, 0x61, 0x08, 0x53, 0x6f, 0x38, 0x5d, 0xc7, 0x37, 0xaa, 0x83, 0xe2, 0x9b, 0xd4, 0x5f,
+	0x35, 0x66, 0xd4, 0x4c, 0xaf, 0x77, 0x68, 0x73, 0x87, 0xd8, 0xc6, 0xac, 0xf9, 0xcb, 0x02, 0x9c,
+	0x1a, 0xf4, 0xd9, 0x16, 0xf1, 0xc3, 0x1c, 0xe3, 0x13, 0x3e, 0x7f, 0x12, 0x60, 0x5b, 0xfa, 0xa4,
+	0x60, 0xfb, 0x41, 0x09, 0xcc, 0xf4, 0x99, 0x04, 0x88, 0xf9, 0x42, 0x0c, 0xb7, 0x4b, 0x49, 0xb8,
+	0x4d, 0x92, 0xcc, 0x03, 0x5c, 0xf3, 0xe7, 0x0f, 0x03, 0x9d, 0x47, 0x60, 0x36, 0xf4, 0xab, 0x18,
+	0xa7, 0x31, 0x8e, 0x0c, 0xa8, 0x70, 0x78, 0x52, 0x5f, 0x9e, 0x49, 0xc6, 0x84, 0x62, 0xbb, 0x45,
+	0xef, 0x10, 0xaf, 0xeb, 0x30, 0xc6, 0x21, 0x35, 0xa9, 0x30, 0xc1, 0xc1, 0xd0, 0xa0, 0x74, 0x83,
+	0xba, 0x6d, 0x63, 0x0a, 0x3d, 0x0e, 0xa7, 0x14, 0xb2, 0x79, 0x5a, 0xd3, 0x1e, 0x10, 0x61, 0xc6,
+	0x34, 0x3a, 0x03, 0x27, 0x25, 0x9c, 0x93, 0x9a, 0x35, 0x4a, 0xb9, 0xb8, 0x1a, 0x92, 0x51, 0x56,
+	0x68, 0x6c, 0xe0, 0xb6, 0x26, 0x55, 0x14, 0xfa, 0x23, 0xb0, 0xd7, 0x4d, 0xd5, 0x18, 0x28, 0x67,
+	0xcc, 0x97, 0xe1, 0xf1, 0x41, 0x7f, 0xd4, 0xe5, 0xa1, 0x9d, 0x27, 0x2e, 0x32, 0x7f, 0x55, 0x84,
+	0x4b, 0xd9, 0xd2, 0x81, 0x7f, 0xbe, 0x18, 0xc3, 0xc2, 0x0b, 0x49, 0x58, 0x48, 0x93, 0xce, 0xb5,
+	0x91, 0x05, 0x8b, 0xc4, 0xc6, 0x3e, 0x4e, 0x59, 0x24, 0x42, 0xa9, 0x5c, 0x24, 0xfc, 0xa7, 0xf9,
+	0x4e, 0xe1, 0xc0, 0x60, 0xc8, 0xbc, 0x2f, 0x3d, 0x71, 0x73, 0xa5, 0x41, 0xa5, 0x45, 0x82, 0x11,
+	0xdf, 0xed, 0xd9, 0xd8, 0x27, 0x76, 0x6c, 0x86, 0x85, 0x3c, 0x33, 0xe4, 0x89, 0x50, 0x5f, 0x88,
+	0xab, 0xd8, 0x43, 0x25, 0x42, 0x92, 0x26, 0x83, 0x8f, 0x2f, 0xc3, 0xc5, 0x84, 0x8e, 0x55, 0xbc,
+	0x15, 0xed, 0x3f, 0x63, 0x87, 0x7a, 0x49, 0xe7, 0x80, 0x4c, 0x9b, 0x3f, 0x23, 0x6c, 0x55, 0xa9,
+	0xa1, 0xd0, 0x6d, 0x5e, 0x82, 0x0b, 0xe9, 0x20, 0x08, 0x83, 0x3e, 0x8e, 0xb5, 0xcb, 0x79, 0x18,
+	0x03, 0x6f, 0xb6, 0x62, 0x88, 0xfb, 0xff, 0xfd, 0x10, 0x37, 0xac, 0x23, 0x17, 0xee, 0x6e, 0xe9,
+	0x9b, 0x8f, 0x6e, 0x18, 0xa1, 0x2a, 0xf8, 0x9d, 0x4b, 0x8e, 0x39, 0x23, 0xa1, 0xac, 0xba, 0x1c,
+	0x89, 0x50, 0xcc, 0x7b, 0x9f, 0x3e, 0x24, 0xcd, 0x5d, 0x69, 0xf4, 0x64, 0x97, 0x6f, 0x3b, 0x3d,
+	0xed, 0xf1, 0xc4, 0xb9, 0x15, 0x1e, 0x7c, 0x6e, 0x9f, 0x89, 0x87, 0x3b, 0x51, 0xfb, 0xeb, 0x3b,
+	0x88, 0x8c, 0x0d, 0xe7, 0x17, 0x45, 0x78, 0x72, 0x5f, 0x05, 0x81, 0xf1, 0x9a, 0x31, 0x04, 0x5c,
+	0xdd, 0x0f, 0x01, 0x31, 0x05, 0xb9, 0xdc, 0xff, 0xb2, 0x4e, 0x37, 0x98, 0x14, 0x56, 0xae, 0x3f,
+	0x9e, 0x7c, 0xb7, 0xa1, 0x12, 0x0d, 0xf5, 0x65, 0xde, 0x7f, 0x44, 0xdb, 0x8f, 0xf9, 0x1c, 0x9c,
+	0x18, 0x34, 0x03, 0xcf, 0xfc, 0x65, 0x8c, 0x9c, 0x61, 0xfe, 0xbf, 0x14, 0xe1, 0x6c, 0x8a, 0x58,
+	0x30, 0x8b, 0x37, 0x62, 0x46, 0x7f, 0x3a, 0xc9, 0xe8, 0x43, 0x62, 0xb9, 0x4e, 0xfc, 0xbf, 0x3e,
+	0xe2, 0xdd, 0x5a, 0x66, 0x4c, 0xfd, 0x4e, 0xc7, 0x98, 0x50, 0xbd, 0xab, 0xa0, 0x53, 0xed, 0xe1,
+	0x93, 0xc3, 0x91, 0xe1, 0x14, 0x3a, 0x05, 0xc7, 0x35, 0x49, 0xdd, 0xe9, 0x31, 0x99, 0x66, 0x1a,
+	0xd3, 0x2a, 0xc0, 0x94, 0x6d, 0xd8, 0xdd, 0x11, 0x61, 0xc2, 0x7d, 0x03, 0xcc, 0xe7, 0xa1, 0x36,
+	0x68, 0xaf, 0x0d, 0x82, 0x77, 0xc9, 0xbe, 0xee, 0xf9, 0x6e, 0x11, 0xe6, 0xd2, 0xe4, 0x02, 0xb3,
+	0xbd, 0x19, 0xf3, 0xcf, 0x33, 0x49, 0xfe, 0x19, 0x96, 0xcb, 0xe5, 0xa0, 0xef, 0x1c, 0x9c, 0xe3,
+	0x54, 0x51, 0xc4, 0x9d, 0x94, 0xdd, 0x75, 0x5c, 0x63, 0xd2, 0x6c, 0xc1, 0x99, 0xc1, 0x59, 0xbe,
+	0xe6, 0x34, 0x77, 0xa2, 0xf7, 0x6e, 0x19, 0xe7, 0xdb, 0x08, 0x37, 0x50, 0xe6, 0x1f, 0x8b, 0xf2,
+	0x40, 0x4d, 0xed, 0x28, 0xb0, 0x90, 0x15, 0xf3, 0xc5, 0xf3, 0x49, 0xbe, 0x48, 0x11, 0xce, 0xe5,
+	0x90, 0xdf, 0x3e, 0x32, 0x87, 0xc8, 0x10, 0xb4, 0xae, 0x6f, 0x80, 0xa2, 0x9e, 0x91, 0xa8, 0x6f,
+	0x08, 0xab, 0x85, 0xf4, 0xc9, 0xa4, 0x20, 0x7a, 0x4a, 0x11, 0x57, 0xb0, 0xeb, 0x73, 0x3b, 0x6c,
+	0x91, 0x4e, 0xcb, 0x98, 0x36, 0xbf, 0x55, 0x88, 0x03, 0x5d, 0x67, 0x11, 0x9b, 0xc1, 0xad, 0xe7,
+	0x27, 0xe4, 0x4d, 0x74, 0x01, 0x66, 0x14, 0xaf, 0xbe, 0x60, 0x95, 0x37, 0x1b, 0x15, 0x49, 0x95,
+	0x17, 0xac, 0xe6, 0xbf, 0x8b, 0x30, 0xbf, 0xdf, 0x88, 0x02, 0x3f, 0xdc, 0x8b, 0xb9, 0xfd, 0xa5,
+	0xac, 0xbc, 0x68, 0x58, 0x3e, 0x97, 0xe7, 0x3f, 0xfc, 0x9f, 0xf7, 0xfc, 0x40, 0x4a, 0xcd, 0xe7,
+	0x6f, 0x4c, 0xab, 0x6c, 0x5f, 0x2c, 0xe8, 0xd7, 0x1d, 0xda, 0xc1, 0x22, 0xa5, 0x07, 0xd3, 0x96,
+	0xd7, 0x85, 0xa1, 0xf1, 0xe4, 0x0e, 0xdb, 0xa0, 0xfb, 0x6d, 0x99, 0x23, 0xad, 0xeb, 0xf7, 0x4a,
+	0x70, 0x3e, 0xa3, 0x9b, 0xc0, 0xd8, 0x6f, 0xc5, 0xdc, 0xfb, 0x6c, 0x92, 0x7b, 0x13, 0x45, 0x73,
+	0x79, 0xf6, 0xeb, 0xc5, 0x83, 0x73, 0x0a, 0xa6, 0xfa, 0x5a, 0x5f, 0xcc, 0xa8, 0x03, 0x72, 0x59,
+	0x91, 0xa7, 0x06, 0xc9, 0xd2, 0x08, 0xb6, 0x31, 0xad, 0x4e, 0xc9, 0x5b, 0x54, 0x52, 0x06, 0x93,
+	0x5e, 0x75, 0xc5, 0x43, 0xe9, 0x26, 0x76, 0x95, 0x08, 0x33, 0xca, 0xe6, 0x2b, 0xf1, 0x3b, 0x88,
+	0x55, 0xd2, 0xec, 0x38, 0x2e, 0xc9, 0xeb, 0x7b, 0xf3, 0xfb, 0x45, 0x58, 0xd8, 0x5f, 0x43, 0x60,
+	0x69, 0x3b, 0xe6, 0xd6, 0x6b, 0x49, 0x6e, 0xcd, 0xd2, 0x90, 0xcb, 0xbb, 0xdf, 0x7c, 0x64, 0xeb,
+	0x56, 0xf6, 0xa5, 0x5d, 0x70, 0x83, 0xf6, 0x5d, 0xdb, 0x98, 0x18, 0x8e, 0xd8, 0x97, 0x9b, 0x4d,
+	0xd2, 0xf3, 0x73, 0x1b, 0xf9, 0x1f, 0x43, 0x11, 0x7b, 0x82, 0x82, 0xd1, 0x22, 0xf6, 0x0c, 0x05,
+	0xb9, 0x4c, 0xfc, 0xa7, 0x83, 0x65, 0xe2, 0xa1, 0x65, 0x95, 0x18, 0x46, 0xca, 0x45, 0xa0, 0xf4,
+	0x49, 0x79, 0x2f, 0xdc, 0x10, 0xf5, 0x72, 0x92, 0x1d, 0x81, 0xf9, 0xf6, 0xd0, 0xb5, 0x32, 0x76,
+	0x9b, 0xa4, 0xf3, 0xa9, 0x6c, 0x8b, 0x3f, 0x19, 0xf2, 0x70, 0x42, 0x67, 0xa3, 0x79, 0x38, 0x43,
+	0x41, 0x2e, 0x0f, 0xff, 0xe0, 0x80, 0x79, 0x58, 0x53, 0xa3, 0xfb, 0xda, 0xa4, 0xc9, 0xe2, 0xd7,
+	0xc1, 0xcb, 0xb6, 0x1d, 0x3e, 0x46, 0x67, 0xbf, 0x35, 0x3d, 0xe8, 0x73, 0xb4, 0xf9, 0xa3, 0xa1,
+	0xab, 0xdb, 0x68, 0xaf, 0xa3, 0x5d, 0xdd, 0x26, 0x49, 0xe6, 0xca, 0x99, 0x23, 0x0f, 0xed, 0xc5,
+	0xe8, 0x43, 0xbb, 0xf9, 0xee, 0x23, 0x3b, 0xdb, 0xd2, 0x9e, 0x1c, 0x12, 0x5d, 0x37, 0xa8, 0x42,
+	0x18, 0x36, 0x1e, 0xb0, 0x88, 0x97, 0x8c, 0xb4, 0x80, 0x45, 0xc9, 0xab, 0x23, 0x4d, 0xbc, 0xfc,
+	0x1a, 0xe5, 0xd8, 0xd5, 0x6c, 0x85, 0x47, 0xb9, 0xb1, 0x84, 0x65, 0x93, 0xda, 0x4e, 0x6b, 0x2f,
+	0x17, 0x46, 0xd2, 0x4c, 0x3c, 0x08, 0x9e, 0x52, 0x26, 0x78, 0xc6, 0xe2, 0xe0, 0xf9, 0x76, 0x29,
+	0x9e, 0xd9, 0xc4, 0x46, 0x34, 0x5a, 0x66, 0x93, 0x22, 0x9c, 0x6b, 0x89, 0xbf, 0xf3, 0xc8, 0x90,
+	0x32, 0x1c, 0x97, 0x4e, 0xa4, 0xa0, 0x67, 0x04, 0x9c, 0x24, 0xc1, 0x0c, 0x92, 0xd1, 0x33, 0x0c,
+	0x94, 0xad, 0x38, 0x4e, 0xea, 0xa4, 0x4b, 0x75, 0xfe, 0xfe, 0x80, 0x38, 0x31, 0xff, 0x35, 0x94,
+	0xc5, 0xc6, 0xb4, 0x8e, 0xe6, 0xeb, 0x14, 0xe1, 0x5c, 0xbe, 0xfe, 0xa8, 0x70, 0x90, 0x7c, 0x2d,
+	0x19, 0xf9, 0xc7, 0x2d, 0xea, 0xaf, 0x75, 0x7b, 0xfe, 0x9e, 0x31, 0x99, 0xe8, 0xbf, 0xa9, 0x64,
+	0xff, 0x4d, 0xa3, 0xd3, 0x50, 0x53, 0x39, 0xad, 0xb4, 0xca, 0xaa, 0x2c, 0x76, 0x13, 0xfa, 0xc1,
+	0x7c, 0xbf, 0x10, 0xbf, 0x64, 0xd3, 0xa9, 0x60, 0x5d, 0x57, 0x0d, 0x65, 0x39, 0xf4, 0x32, 0x04,
+	0x75, 0x17, 0xb6, 0x4e, 0x59, 0x65, 0x0d, 0x44, 0xb5, 0x6e, 0x04, 0x2d, 0x32, 0x6d, 0x65, 0xfc,
+	0xa0, 0xef, 0x79, 0x64, 0xd7, 0xa1, 0x7d, 0x16, 0x32, 0x97, 0x04, 0xf3, 0xac, 0x6e, 0x50, 0xbc,
+	0xe6, 0xbb, 0x25, 0x78, 0x62, 0x9f, 0x81, 0x05, 0x4e, 0xc2, 0x31, 0x4c, 0xbc, 0x98, 0x95, 0xe2,
+	0x0e, 0x89, 0xe7, 0x3a, 0x44, 0x2e, 0x03, 0x6a, 0x52, 0xb7, 0xe5, 0x78, 0xdd, 0x84, 0x89, 0x06,
+	0x2d, 0x7a, 0xf0, 0xbf, 0x39, 0x80, 0x18, 0x52, 0x34, 0x31, 0xf5, 0x11, 0x31, 0x64, 0xbe, 0x15,
+	0x7f, 0xb7, 0x0b, 0xca, 0x39, 0x54, 0x36, 0x96, 0x85, 0x91, 0x39, 0xa8, 0x88, 0x7a, 0x2e, 0x46,
+	0x88, 0xab, 0x57, 0xfe, 0x58, 0x1d, 0x38, 0x6d, 0x8b, 0x10, 0x77, 0xdd, 0x36, 0xff, 0x9e, 0xf9,
+	0xb2, 0x27, 0xbb, 0x79, 0xd0, 0x97, 0xbd, 0xa8, 0xf4, 0xc7, 0x2c, 0x51, 0x40, 0x57, 0xa1, 0x1c,
+	0x56, 0xad, 0xe8, 0x2a, 0xab, 0x5a, 0xec, 0xee, 0x3d, 0x28, 0x72, 0xa9, 0x43, 0x50, 0xcd, 0xc2,
+	0x0e, 0x40, 0xa6, 0x15, 0x75, 0xf4, 0x84, 0x7e, 0x89, 0x8d, 0xbd, 0xc9, 0xf0, 0xb1, 0xef, 0xff,
+	0xfe, 0x36, 0x9c, 0x0c, 0x2f, 0xdb, 0xf6, 0x9d, 0x0e, 0xde, 0x23, 0x9e, 0x8a, 0x9f, 0x57, 0xb6,
+	0x71, 0x16, 0x24, 0xcc, 0x9f, 0x0e, 0x25, 0xc3, 0x49, 0x1a, 0x46, 0x4b, 0x86, 0xb3, 0x34, 0xe4,
+	0xda, 0xf8, 0x7f, 0x78, 0x80, 0xee, 0x93, 0xe5, 0x0d, 0xc5, 0x96, 0x4f, 0x70, 0x97, 0xcf, 0x83,
+	0xef, 0xfd, 0xae, 0x54, 0x39, 0x69, 0xfe, 0xae, 0x28, 0x43, 0xf9, 0x1b, 0x8e, 0x2b, 0x35, 0x5c,
+	0xdf, 0x6b, 0xe0, 0x76, 0x30, 0xf0, 0x46, 0xcc, 0x58, 0x0b, 0xa1, 0xb1, 0x92, 0x25, 0x3e, 0xee,
+	0xaa, 0x18, 0x7a, 0x93, 0x2a, 0x8d, 0xf0, 0x26, 0xf5, 0x8d, 0x87, 0x61, 0xf4, 0xa1, 0x4a, 0x1e,
+	0xbd, 0x2a, 0xc4, 0xc0, 0x6e, 0x51, 0x5f, 0xdf, 0x3f, 0x7c, 0x50, 0x92, 0xa7, 0xe1, 0x16, 0xc1,
+	0x5e, 0x73, 0xfb, 0x06, 0xf5, 0x6e, 0xf7, 0x88, 0x4c, 0x73, 0x59, 0x9e, 0x27, 0xa7, 0x0c, 0xb1,
+	0x5c, 0x46, 0x7e, 0x03, 0x66, 0x98, 0x50, 0x61, 0x49, 0x82, 0xae, 0x26, 0x5c, 0xca, 0xd7, 0x85,
+	0x6c, 0xab, 0x0b, 0xd1, 0x7a, 0x95, 0x45, 0xbe, 0x18, 0x3a, 0x0f, 0xd5, 0x3e, 0x23, 0xd6, 0xfd,
+	0x6d, 0xc7, 0x27, 0x1d, 0x87, 0xc9, 0x4a, 0xc8, 0xa9, 0x7a, 0xa5, 0xcf, 0xc8, 0xe7, 0x34, 0xed,
+	0x54, 0x0b, 0x2a, 0x51, 0x1d, 0x59, 0x9b, 0xfa, 0xc7, 0x7a, 0x88, 0x7c, 0x18, 0x8f, 0xce, 0x1f,
+	0x0d, 0xdd, 0xda, 0xd7, 0x49, 0x8f, 0x7a, 0x72, 0x9f, 0x5b, 0xa1, 0xae, 0x4f, 0xdc, 0xcc, 0x09,
+	0x06, 0xe5, 0xff, 0x4d, 0xc9, 0x3b, 0x50, 0xd1, 0x20, 0xdf, 0xa9, 0x95, 0x16, 0x5d, 0xd7, 0x50,
+	0x5d, 0x8b, 0x12, 0x50, 0x19, 0x26, 0xc5, 0xa2, 0x76, 0x89, 0x71, 0x08, 0xd5, 0xe0, 0xa8, 0x98,
+	0x24, 0xee, 0xf5, 0x3c, 0xda, 0xf3, 0x1c, 0xec, 0x8b, 0xf8, 0xdd, 0x28, 0xa0, 0x13, 0x70, 0x24,
+	0xde, 0xc2, 0x11, 0x5a, 0x4c, 0x12, 0x11, 0x95, 0x62, 0x1a, 0xce, 0xaf, 0x87, 0x51, 0xfe, 0xa4,
+	0xf9, 0xbd, 0xa1, 0x17, 0x81, 0xe1, 0xd9, 0x8e, 0xf6, 0x22, 0x90, 0x2e, 0x7f, 0x70, 0x6e, 0x16,
+	0x93, 0x16, 0xf1, 0xb8, 0xda, 0x62, 0x85, 0x65, 0x74, 0x25, 0xd2, 0x84, 0xb9, 0x99, 0x52, 0xcf,
+	0x11, 0xad, 0x26, 0x88, 0xd6, 0xc0, 0x9e, 0x01, 0x18, 0x2a, 0x16, 0x9f, 0xc6, 0xc1, 0x35, 0xd4,
+	0xdf, 0x8a, 0xf0, 0xdc, 0x28, 0xfa, 0x02, 0x4b, 0xb8, 0x31, 0xdb, 0xaf, 0x66, 0xc4, 0x2f, 0xfb,
+	0xe8, 0xca, 0xb5, 0xa5, 0xac, 0x41, 0x25, 0x5a, 0xc5, 0xab, 0x96, 0xa9, 0x99, 0x5c, 0x4e, 0x11,
+	0xad, 0x02, 0xae, 0x97, 0x7b, 0xe1, 0x87, 0xb9, 0xf7, 0x10, 0xbc, 0x39, 0x70, 0xe9, 0xa8, 0x86,
+	0x65, 0x8c, 0x9b, 0x0d, 0xb8, 0x32, 0x8a, 0x75, 0xae, 0x63, 0xbf, 0xb9, 0x8d, 0xce, 0x42, 0x39,
+	0x74, 0x9f, 0xae, 0xda, 0x86, 0xc0, 0x7f, 0xcc, 0xfc, 0x67, 0x11, 0xae, 0x8e, 0xac, 0x36, 0xb0,
+	0x00, 0x8b, 0x79, 0x71, 0x7d, 0x74, 0x2f, 0x0e, 0x28, 0xcc, 0xe5, 0xca, 0x9b, 0x50, 0x1d, 0x2c,
+	0xc8, 0x2e, 0xc6, 0xff, 0xd7, 0x92, 0xea, 0xcb, 0x4a, 0x2f, 0x5a, 0x93, 0xfd, 0xd0, 0x9d, 0xa9,
+	0x2c, 0x61, 0x8c, 0x2f, 0xfc, 0x6c, 0x0a, 0x0e, 0xcb, 0xca, 0xcf, 0xe5, 0xbe, 0xed, 0x88, 0x3f,
+	0x70, 0x50, 0x17, 0x9d, 0x85, 0xc7, 0x74, 0x41, 0x68, 0x84, 0x6c, 0xe9, 0xd5, 0x7b, 0x08, 0x5d,
+	0x80, 0xb9, 0x24, 0x06, 0xb9, 0x3b, 0xc9, 0x7f, 0xb5, 0x19, 0x05, 0x74, 0x19, 0xe6, 0x53, 0xb9,
+	0xf4, 0x9f, 0xd9, 0x64, 0xa5, 0xa3, 0x6d, 0x14, 0xd1, 0x93, 0x70, 0x31, 0x95, 0x5b, 0x6c, 0x1e,
+	0x9a, 0xb5, 0x94, 0xc9, 0xba, 0x19, 0xf9, 0x2b, 0x8b, 0x31, 0x8e, 0x9e, 0x80, 0xf3, 0xfb, 0xb0,
+	0x6e, 0x90, 0x96, 0x6f, 0x4c, 0xe4, 0xd0, 0xf9, 0x9a, 0x23, 0x6e, 0x5c, 0x26, 0xd1, 0x22, 0x2c,
+	0xec, 0xc3, 0xca, 0x13, 0x3d, 0x3d, 0xdc, 0x29, 0x34, 0x0f, 0x17, 0xd2, 0xed, 0x40, 0xdb, 0x54,
+	0x73, 0x4e, 0xa3, 0x05, 0xb8, 0x94, 0xca, 0x29, 0x8b, 0x95, 0x35, 0x2f, 0xa0, 0xa7, 0xe1, 0xa9,
+	0x54, 0xde, 0x48, 0xf1, 0xa7, 0x16, 0x28, 0xa3, 0x67, 0xe0, 0x72, 0xaa, 0x40, 0xf4, 0x9f, 0x73,
+	0x5a, 0xa2, 0x82, 0x96, 0x60, 0x31, 0x55, 0x62, 0xf0, 0x9f, 0x73, 0x5a, 0xa6, 0x8a, 0x9e, 0x82,
+	0x27, 0xd2, 0x7b, 0x91, 0xff, 0xa0, 0xd3, 0xcc, 0x33, 0x69, 0x96, 0x11, 0xf9, 0xee, 0x4a, 0x87,
+	0x60, 0x8f, 0xc8, 0x6a, 0xec, 0xd9, 0xcc, 0xc1, 0x47, 0xff, 0x2d, 0xa7, 0x75, 0x1b, 0x99, 0x56,
+	0xdf, 0xa4, 0xfe, 0xaa, 0xe6, 0x44, 0xe8, 0x12, 0x98, 0xa9, 0xa3, 0xa8, 0x13, 0x46, 0x7c, 0x11,
+	0x1a, 0x1c, 0x41, 0x17, 0xe1, 0x5c, 0x36, 0x1f, 0x0f, 0x14, 0x8e, 0xa2, 0x73, 0x70, 0x26, 0x95,
+	0x6d, 0x83, 0x36, 0x77, 0x8c, 0x63, 0x99, 0x63, 0x0b, 0xcb, 0x83, 0x6d, 0xe3, 0x78, 0x26, 0x7e,
+	0x83, 0x42, 0x61, 0xdb, 0x38, 0x91, 0x39, 0x09, 0x91, 0x6a, 0xfa, 0x7c, 0x51, 0xd6, 0xd2, 0x96,
+	0xae, 0xe0, 0xd3, 0x97, 0x8a, 0x27, 0xd3, 0xba, 0x95, 0x5c, 0xd8, 0x75, 0x89, 0x7d, 0x97, 0x11,
+	0xcf, 0x38, 0xb5, 0xd0, 0x83, 0x99, 0xc1, 0xca, 0x71, 0x34, 0x07, 0x99, 0xd5, 0xe4, 0xc6, 0x21,
+	0x74, 0x1e, 0xce, 0x0e, 0x71, 0x04, 0xa9, 0x95, 0xf8, 0x4b, 0xa9, 0x8e, 0xc3, 0x62, 0x4c, 0x37,
+	0x57, 0x8c, 0xe2, 0xf5, 0xf1, 0xcf, 0x16, 0xbe, 0x5a, 0x38, 0xf4, 0xdf, 0x00, 0x00, 0x00, 0xff,
+	0xff, 0xb6, 0xf2, 0xf3, 0x25, 0xd1, 0x3b, 0x00, 0x00,
 }
