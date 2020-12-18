@@ -6,6 +6,7 @@ import (
 )
 
 var pointerTypes = map[string]bool{
+	"PhysicsRagdollPose_t":       true,
 	"CBodyComponent":             true,
 	"CEntityIdentity":            true,
 	"CPhysicsComponent":          true,

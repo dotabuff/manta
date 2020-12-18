@@ -11,42 +11,44 @@ import (
 func BenchmarkMatch2159568145(b *testing.B) { testScenarios[2159568145].bench(b) }
 
 // Test client
-func TestMatch6682694(t *testing.T) { testScenarios[6682694].test(t) }
-
-func TestMatch5129306977(t *testing.T) { testScenarios[5129306977].test(t) }
-func TestMatch5129281647(t *testing.T) { testScenarios[5129281647].test(t) }
-func TestMatch4259518439(t *testing.T) { testScenarios[4259518439].test(t) }
-func TestMatch4257655794(t *testing.T) { testScenarios[4257655794].test(t) }
-func TestMatch3949386909(t *testing.T) { testScenarios[3949386909].test(t) }
-func TestMatch3777736409(t *testing.T) { testScenarios[3777736409].test(t) }
-func TestMatch3534483793(t *testing.T) { testScenarios[3534483793].test(t) }
-func TestMatch3220517753(t *testing.T) { testScenarios[3220517753].test(t) }
-func TestMatch2369359192(t *testing.T) { testScenarios[2369359192].test(t) }
-func TestMatch2246960647(t *testing.T) { testScenarios[2246960647].test(t) }
-func TestMatch2159568145(t *testing.T) { testScenarios[2159568145].test(t) }
-func TestMatch2109130988(t *testing.T) { testScenarios[2109130988].test(t) }
-func TestMatch1855408730(t *testing.T) { testScenarios[1855408730].test(t) }
-func TestMatch1855345768(t *testing.T) { testScenarios[1855345768].test(t) }
-func TestMatch1855304265(t *testing.T) { testScenarios[1855304265].test(t) }
-func TestMatch1788648401(t *testing.T) { testScenarios[1788648401].test(t) }
-func TestMatch1786687320(t *testing.T) { testScenarios[1786687320].test(t) }
-func TestMatch1785937100(t *testing.T) { testScenarios[1785937100].test(t) }
-func TestMatch1785899023(t *testing.T) { testScenarios[1785899023].test(t) }
-func TestMatch1785874713(t *testing.T) { testScenarios[1785874713].test(t) }
-func TestMatch1781640270(t *testing.T) { testScenarios[1781640270].test(t) }
-func TestMatch1764592109(t *testing.T) { testScenarios[1764592109].test(t) }
-func TestMatch1763193771(t *testing.T) { testScenarios[1763193771].test(t) }
-func TestMatch1763177231(t *testing.T) { testScenarios[1763177231].test(t) }
-func TestMatch1734886116(t *testing.T) { testScenarios[1734886116].test(t) }
-func TestMatch1731962898(t *testing.T) { testScenarios[1731962898].test(t) }
-func TestMatch1716444111(t *testing.T) { testScenarios[1716444111].test(t) }
-func TestMatch1712853372(t *testing.T) { testScenarios[1712853372].test(t) }
-func TestMatch1648457986(t *testing.T) { testScenarios[1648457986].test(t) }
-func TestMatch1605340040(t *testing.T) { testScenarios[1605340040].test(t) }
-func TestMatch1582611189(t *testing.T) { testScenarios[1582611189].test(t) }
-func TestMatch1560315800(t *testing.T) { testScenarios[1560315800].test(t) }
-func TestMatch1560294294(t *testing.T) { testScenarios[1560294294].test(t) }
-func TestMatch1560289528(t *testing.T) { testScenarios[1560289528].test(t) }
+func TestMatch6682694(t *testing.T)       { testScenarios[6682694].test(t) }
+func TestMatchNew5747195393(t *testing.T) { testScenarios[5747195393].test(t) }
+func TestMatchNew5746628011(t *testing.T) { testScenarios[5746628011].test(t) }
+func TestMatchNew5746427505(t *testing.T) { testScenarios[5746427505].test(t) }
+func TestMatch5129306977(t *testing.T)    { testScenarios[5129306977].test(t) }
+func TestMatch5129281647(t *testing.T)    { testScenarios[5129281647].test(t) }
+func TestMatch4259518439(t *testing.T)    { testScenarios[4259518439].test(t) }
+func TestMatch4257655794(t *testing.T)    { testScenarios[4257655794].test(t) }
+func TestMatch3949386909(t *testing.T)    { testScenarios[3949386909].test(t) }
+func TestMatch3777736409(t *testing.T)    { testScenarios[3777736409].test(t) }
+func TestMatch3534483793(t *testing.T)    { testScenarios[3534483793].test(t) }
+func TestMatch3220517753(t *testing.T)    { testScenarios[3220517753].test(t) }
+func TestMatch2369359192(t *testing.T)    { testScenarios[2369359192].test(t) }
+func TestMatch2246960647(t *testing.T)    { testScenarios[2246960647].test(t) }
+func TestMatch2159568145(t *testing.T)    { testScenarios[2159568145].test(t) }
+func TestMatch2109130988(t *testing.T)    { testScenarios[2109130988].test(t) }
+func TestMatch1855408730(t *testing.T)    { testScenarios[1855408730].test(t) }
+func TestMatch1855345768(t *testing.T)    { testScenarios[1855345768].test(t) }
+func TestMatch1855304265(t *testing.T)    { testScenarios[1855304265].test(t) }
+func TestMatch1788648401(t *testing.T)    { testScenarios[1788648401].test(t) }
+func TestMatch1786687320(t *testing.T)    { testScenarios[1786687320].test(t) }
+func TestMatch1785937100(t *testing.T)    { testScenarios[1785937100].test(t) }
+func TestMatch1785899023(t *testing.T)    { testScenarios[1785899023].test(t) }
+func TestMatch1785874713(t *testing.T)    { testScenarios[1785874713].test(t) }
+func TestMatch1781640270(t *testing.T)    { testScenarios[1781640270].test(t) }
+func TestMatch1764592109(t *testing.T)    { testScenarios[1764592109].test(t) }
+func TestMatch1763193771(t *testing.T)    { testScenarios[1763193771].test(t) }
+func TestMatch1763177231(t *testing.T)    { testScenarios[1763177231].test(t) }
+func TestMatch1734886116(t *testing.T)    { testScenarios[1734886116].test(t) }
+func TestMatch1731962898(t *testing.T)    { testScenarios[1731962898].test(t) }
+func TestMatch1716444111(t *testing.T)    { testScenarios[1716444111].test(t) }
+func TestMatch1712853372(t *testing.T)    { testScenarios[1712853372].test(t) }
+func TestMatch1648457986(t *testing.T)    { testScenarios[1648457986].test(t) }
+func TestMatch1605340040(t *testing.T)    { testScenarios[1605340040].test(t) }
+func TestMatch1582611189(t *testing.T)    { testScenarios[1582611189].test(t) }
+func TestMatch1560315800(t *testing.T)    { testScenarios[1560315800].test(t) }
+func TestMatch1560294294(t *testing.T)    { testScenarios[1560294294].test(t) }
+func TestMatch1560289528(t *testing.T)    { testScenarios[1560289528].test(t) }
 
 type testScenario struct {
 	matchId                  string
@@ -70,6 +72,27 @@ type testScenario struct {
 }
 
 var testScenarios = map[int64]testScenario{
+	5747195393: {
+		matchId:               "5747195393",
+		replayUrl:             "https://s3-us-west-2.amazonaws.com/manta.dotabuff/5747195393.dem",
+		expectGameBuild:       4581,
+		expectEntityEvents:    3077503,
+		expectUnitOrderEvents: 70122,
+	},
+	5746628011: {
+		matchId:               "5746628011",
+		replayUrl:             "https://s3-us-west-2.amazonaws.com/manta.dotabuff/5746628011.dem",
+		expectGameBuild:       4577,
+		expectEntityEvents:    5598752,
+		expectUnitOrderEvents: 105684,
+	},
+	5746427505: {
+		matchId:               "5746427505",
+		replayUrl:             "https://s3-us-west-2.amazonaws.com/manta.dotabuff/5746427505.dem",
+		expectGameBuild:       4570,
+		expectEntityEvents:    2739947,
+		expectUnitOrderEvents: 55779,
+	},
 	5129306977: {
 		matchId:                  "5129306977",
 		replayUrl:                "https://s3-us-west-2.amazonaws.com/manta.dotabuff/5129306977.dem",

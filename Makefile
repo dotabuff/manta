@@ -3,6 +3,9 @@ default: build
 test:
 	go test -cover -v
 
+testnew:
+	go test -cover -run=TestMatchNew -v
+
 bench:
 	go test -run=XXX -bench=BenchmarkMatch -benchtime=1m -v
 
