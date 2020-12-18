@@ -163,7 +163,9 @@ func init() {
 	proto.RegisterType((*CUIFontFilePackagePB_CUIEncryptedFontFilePB)(nil), "dota.CUIFontFilePackagePB.CUIEncryptedFontFilePB")
 }
 
-func init() { proto.RegisterFile("uifontfile_format.proto", fileDescriptor_16f5f784597d9c07) }
+func init() {
+	proto.RegisterFile("uifontfile_format.proto", fileDescriptor_16f5f784597d9c07)
+}
 
 var fileDescriptor_16f5f784597d9c07 = []byte{
 	// 255 bytes of a gzipped FileDescriptorProto

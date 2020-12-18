@@ -43,6 +43,11 @@ enum EStartFindingMatchResult {
 	k_EStartFindingMatchResult_InvalidRoleSelections = 125;
 	k_EStartFindingMatchResult_PhoneNumberDiscrepancy = 126;
 	k_EStartFindingMatchResult_NoQueuePoints = 127;
+	k_EStartFindingMatchResult_MemberMissingGauntletFlag = 128;
+	k_EStartFindingMatchResult_MemberGauntletTooRecent = 129;
+	k_EStartFindingMatchResult_DifficultyNotUnlocked = 130;
+	k_EStartFindingMatchResult_CoachesNotAllowedInParty = 131;
+	k_EStartFindingMatchResult_MatchmakingBusy = 132;
 }
 
 message CMsgStartFindingMatch {
@@ -65,6 +70,7 @@ message CMsgStartFindingMatch {
 	optional uint32 lane_selection_flags = 18;
 	optional bool high_priority_disabled = 19;
 	optional bool disable_experimental_gameplay = 20;
+	optional uint32 custom_game_difficulty_mask = 21;
 }
 
 message CMsgStartFindingMatchResult {
@@ -77,6 +83,7 @@ message CMsgStartFindingMatchResult {
 }
 
 message CMsgStopFindingMatch {
+	optional bool accept_cooldown = 1;
 }
 
 message CMsgPartyBuilderOptions {
@@ -144,6 +151,7 @@ message CMsgPracticeLobbySetDetails {
 	optional bool custom_game_penalties = 47;
 	optional string lan_host_ping_location = 48;
 	optional uint32 league_node_id = 49;
+	repeated uint32 requested_hero_ids = 50;
 }
 
 message CMsgPracticeLobbyCreate {

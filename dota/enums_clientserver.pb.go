@@ -4706,7 +4706,9 @@ func init() {
 	proto.RegisterEnum("dota.EMsgClanAccountFlags", EMsgClanAccountFlags_name, EMsgClanAccountFlags_value)
 }
 
-func init() { proto.RegisterFile("enums_clientserver.proto", fileDescriptor_b5e7e2d74d53ef1f) }
+func init() {
+	proto.RegisterFile("enums_clientserver.proto", fileDescriptor_b5e7e2d74d53ef1f)
+}
 
 var fileDescriptor_b5e7e2d74d53ef1f = []byte{
 	// 16272 bytes of a gzipped FileDescriptorProto

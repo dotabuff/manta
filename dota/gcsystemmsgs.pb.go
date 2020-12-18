@@ -156,7 +156,9 @@ func init() {
 	proto.RegisterEnum("dota.EGCBaseClientMsg", EGCBaseClientMsg_name, EGCBaseClientMsg_value)
 }
 
-func init() { proto.RegisterFile("gcsystemmsgs.proto", fileDescriptor_d00de04f4cda8072) }
+func init() {
+	proto.RegisterFile("gcsystemmsgs.proto", fileDescriptor_d00de04f4cda8072)
+}
 
 var fileDescriptor_d00de04f4cda8072 = []byte{
 	// 403 bytes of a gzipped FileDescriptorProto

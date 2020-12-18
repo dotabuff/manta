@@ -495,7 +495,9 @@ func init() {
 	proto.RegisterType((*CP2P_WatchSynchronization)(nil), "dota.CP2P_WatchSynchronization")
 }
 
-func init() { proto.RegisterFile("c_peer2peer_netmessages.proto", fileDescriptor_1fec9daf05519245) }
+func init() {
+	proto.RegisterFile("c_peer2peer_netmessages.proto", fileDescriptor_1fec9daf05519245)
+}
 
 var fileDescriptor_1fec9daf05519245 = []byte{
 	// 703 bytes of a gzipped FileDescriptorProto

@@ -2361,7 +2361,9 @@ func init() {
 	proto.RegisterType((*CMsgDOTABetaParticipation)(nil), "dota.CMsgDOTABetaParticipation")
 }
 
-func init() { proto.RegisterFile("dota_gcmessages_client_team.proto", fileDescriptor_cd3676b1612a35ec) }
+func init() {
+	proto.RegisterFile("dota_gcmessages_client_team.proto", fileDescriptor_cd3676b1612a35ec)
+}
 
 var fileDescriptor_cd3676b1612a35ec = []byte{
 	// 2304 bytes of a gzipped FileDescriptorProto
