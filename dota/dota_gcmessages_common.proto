@@ -64,6 +64,31 @@ enum ECustomGameWhitelistState {
 	CUSTOM_GAME_WHITELIST_STATE_REJECTED = 2;
 }
 
+enum EDOTATriviaQuestionCategory {
+	k_EDOTATriviaQuestionCategory_AbilityIcon = 0;
+	k_EDOTATriviaQuestionCategory_AbilityCooldown = 1;
+	k_EDOTATriviaQuestionCategory_HeroAttributes = 2;
+	k_EDOTATriviaQuestionCategory_HeroMovementSpeed = 3;
+	k_EDOTATriviaQuestionCategory_TalentTree = 4;
+	k_EDOTATriviaQuestionCategory_HeroStats = 5;
+	k_EDOTATriviaQuestionCategory_ItemPrice = 6;
+	k_EDOTATriviaQuestionCategory_AbilitySound = 7;
+	k_EDOTATriviaQuestionCategory_InvokerSpells = 8;
+	k_EDOTATriviaQuestionCategory_AbilityManaCost = 9;
+	k_EDOTATriviaQuestionCategory_HeroAttackSound = 10;
+	k_EDOTATriviaQuestionCategory_AbilityName = 11;
+	k_EDOTATriviaQuestionCategory_ItemComponents = 12;
+	k_EDOTATriviaQuestionCategory_ItemLore = 13;
+	k_EDOTATriviaQuestionCategory_ItemPassives = 14;
+}
+
+enum EOverwatchConviction {
+	k_EOverwatchConviction_None = 0;
+	k_EOverwatchConviction_NotGuilty = 1;
+	k_EOverwatchConviction_GuiltUnclear = 2;
+	k_EOverwatchConviction_Guilty = 3;
+}
+
 message CSODOTAGameAccountClient {
 	message RoleHandicap {
 		optional uint32 role = 1;
@@ -86,10 +111,6 @@ message CSODOTAGameAccountClient {
 	optional uint32 last_secondary_abandoned_game_date = 59;
 	optional uint32 leaver_penalty_count = 23;
 	optional uint32 completed_game_streak = 24;
-	optional uint32 teaching = 28;
-	optional uint32 leadership = 29;
-	optional uint32 friendly = 30;
-	optional uint32 forgiving = 31;
 	optional uint32 account_disabled_until_date = 38;
 	optional uint32 account_disabled_count = 39;
 	optional uint32 match_disabled_until_date = 41;
@@ -147,6 +168,12 @@ message CSODOTAGameAccountClient {
 	optional uint32 competitive_support_calibration_games_remaining = 113;
 	optional uint32 queue_points = 114;
 	repeated CSODOTAGameAccountClient.RoleHandicap role_handicaps = 115;
+	optional uint32 gauntlet_tier = 116;
+	optional uint32 gauntlet_wins = 117;
+	optional uint32 gauntlet_losses = 118;
+	optional uint32 gauntlet_recent_time = 119;
+	optional uint32 event_mode_recent_time = 120;
+	optional uint32 mmr_recalibration_time = 121;
 }
 
 message CSODOTAGameAccountPlus {
@@ -175,9 +202,19 @@ message CMsgLobbyEventPoints {
 		optional uint32 message_id_end = 2;
 	}
 
+	message PingWheelMessageRange {
+		optional uint32 message_id_start = 1;
+		optional uint32 message_id_end = 2;
+	}
+
 	message PeriodicResourceValues {
 		optional uint32 remaining = 1;
 		optional uint32 max = 2;
+	}
+
+	message EventGameCustomActions {
+		optional uint32 action_id = 1;
+		optional uint32 times_granted = 2;
 	}
 
 	message AccountPoints {
@@ -194,12 +231,44 @@ message CMsgLobbyEventPoints {
 		optional CMsgLobbyEventPoints.PeriodicResourceValues wager_tokens = 17;
 		optional CMsgLobbyEventPoints.PeriodicResourceValues rank_wager_tokens = 18;
 		optional CMsgLobbyEventPoints.PeriodicResourceValues tip_tokens = 19;
-		optional uint32 tip_amount = 20;
 		optional CMsgLobbyEventPoints.PeriodicResourceValues periodic_point_adjustments = 21;
+		repeated CMsgLobbyEventPoints.PingWheelMessageRange unlocked_ping_wheel_message_ranges = 22;
+		optional uint32 wager_streak = 23;
+		optional CMsgLobbyEventPoints.PeriodicResourceValues bounties = 24;
+		repeated CMsgLobbyEventPoints.EventGameCustomActions event_game_custom_actions = 25;
+		optional uint32 tip_amount_index = 26;
 	}
 
 	optional uint32 event_id = 1;
 	repeated CMsgLobbyEventPoints.AccountPoints account_points = 2;
+}
+
+message CMsgLobbyEventGameData {
+	optional uint32 game_seed = 1;
+	optional uint32 event_window_start_time = 2;
+}
+
+message CMsgLobbyGauntletProgress {
+	message AccountProgress {
+		optional uint32 account_id = 1;
+		optional uint32 gauntlet_tier = 3;
+		optional uint32 gauntlet_wins = 4;
+		optional uint32 gauntlet_losses = 5;
+	}
+
+	repeated CMsgLobbyGauntletProgress.AccountProgress accounts = 1;
+}
+
+message CMsgLocalServerGuildData {
+	optional uint32 guild_id = 1;
+	optional EEvent event_id = 2 [default = EVENT_ID_NONE];
+	optional uint32 guild_points = 3;
+	optional uint64 guild_logo = 4;
+	optional uint32 guild_primary_color = 5;
+	optional uint32 guild_secondary_color = 6;
+	optional uint32 guild_pattern = 7;
+	optional uint32 guild_flags = 8;
+	optional uint32 guild_weekly_percentile = 9;
 }
 
 message CMsgLocalServerFakeLobbyData {
@@ -209,6 +278,7 @@ message CMsgLocalServerFakeLobbyData {
 	optional uint32 primary_event_id = 4;
 	optional uint32 favorite_team = 5;
 	optional uint32 favorite_team_quality = 6;
+	optional CMsgLocalServerGuildData guild_info = 7;
 }
 
 message CMsgBattleCupVictory {
@@ -288,6 +358,17 @@ message CMatchPlayerTimedStats {
 	optional uint32 courier_gold = 28;
 	optional uint32 roshan_gold = 29;
 	optional uint32 income_gold = 30;
+	optional uint32 custom_stats_1 = 31;
+	optional uint32 custom_stats_2 = 32;
+	optional uint32 custom_stats_3 = 33;
+	optional uint32 custom_stats_4 = 34;
+	optional uint32 custom_stats_5 = 35;
+	optional uint32 item_value = 36;
+	optional uint32 support_gold_spent = 37;
+	optional uint32 camps_stacked = 38;
+	optional uint32 wards_placed = 39;
+	optional uint32 triple_kills = 40;
+	optional uint32 rampages = 41;
 }
 
 message CMatchTeamTimedStats {
@@ -304,6 +385,7 @@ message CMatchAdditionalUnitInventory {
 message CMatchPlayerPermanentBuff {
 	optional uint32 permanent_buff = 1;
 	optional uint32 stack_count = 2;
+	optional uint32 grant_time = 3;
 }
 
 message CMatchHeroSelectEvent {
@@ -474,6 +556,7 @@ message CMsgDOTAProfileCard {
 	optional uint32 rank_tier_mmr_type = 14;
 	optional uint32 leaderboard_rank_core = 17;
 	optional uint32 rank_tier_peak = 21;
+	optional uint32 title = 23;
 }
 
 message CSODOTAPlayerChallenge {
@@ -1032,6 +1115,8 @@ message CMsgDOTAMatch {
 		optional uint32 seconds_dead = 70;
 		optional uint32 gold_lost_to_death = 71;
 		optional uint32 lane_selection_flags = 75;
+		optional uint32 bounty_runes = 77;
+		optional uint32 outposts_captured = 78;
 	}
 
 	message BroadcasterInfo {
@@ -1285,16 +1370,8 @@ message CMsgMatchConsumableUsage {
 }
 
 message CMsgMatchEventActionGrants {
-	message Grant {
-		optional uint32 event_id = 1;
-		optional uint32 action_id = 2;
-		optional uint32 audit = 3;
-		optional uint32 quantity = 4;
-	}
-
 	message PlayerGrants {
 		optional uint32 account_id = 1;
-		repeated CMsgMatchEventActionGrants.Grant actions_granted_old = 2;
 		repeated CMsgPendingEventAward actions_granted = 3;
 	}
 
@@ -1426,4 +1503,44 @@ message CMsgPullTabsData {
 	repeated CMsgPullTabsData.Slot slots = 1;
 	repeated CMsgPullTabsData.Jackpot jackpots = 2;
 	optional uint32 last_board = 3;
+}
+
+message CMsgUnderDraftData {
+	message BenchSlot {
+		optional uint32 slot_id = 1;
+		optional uint32 hero_id = 2;
+		optional uint32 stars = 3;
+	}
+
+	message ShopSlot {
+		optional uint32 slot_id = 1;
+		optional uint32 hero_id = 2;
+		optional bool is_special_reward = 3;
+	}
+
+	repeated CMsgUnderDraftData.BenchSlot bench_slots = 1;
+	repeated CMsgUnderDraftData.ShopSlot shop_slots = 2;
+	optional uint32 gold = 3;
+	optional uint32 total_gold = 4;
+	optional bool not_restorable = 5;
+}
+
+message CMsgPlayerTitleData {
+	repeated uint32 title = 1;
+	repeated uint32 event_id = 2;
+	optional uint32 active = 3;
+}
+
+message CMsgDOTATriviaQuestion {
+	optional uint32 question_id = 1;
+	optional EDOTATriviaQuestionCategory category = 2 [default = k_EDOTATriviaQuestionCategory_AbilityIcon];
+	optional uint32 timestamp = 3;
+	optional string question_value = 4;
+	repeated string answer_values = 5;
+	optional uint32 correct_answer_index = 6;
+}
+
+message CMsgDOTATriviaQuestionAnswersSummary {
+	optional bool summary_available = 1;
+	repeated uint32 picked_count = 2;
 }

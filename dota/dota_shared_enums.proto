@@ -89,7 +89,9 @@ enum EEvent {
 	EVENT_ID_FROSTIVUS_2019 = 27;
 	EVENT_ID_NEW_BLOOM_2020 = 28;
 	EVENT_ID_INTERNATIONAL_2020 = 29;
-	EVENT_ID_COUNT = 30;
+	EVENT_ID_TEAM_FANDOM = 30;
+	EVENT_ID_DIRETIDE_2020 = 31;
+	EVENT_ID_COUNT = 32;
 }
 
 enum DOTALeaverStatus_t {
@@ -149,6 +151,7 @@ enum DOTAChatChannelType_t {
 	DOTAChannelType_Party = 2;
 	DOTAChannelType_Lobby = 3;
 	DOTAChannelType_Team = 4;
+	DOTAChannelType_Guild = 5;
 	DOTAChannelType_Fantasy = 6;
 	DOTAChannelType_Whisper = 7;
 	DOTAChannelType_Console = 8;
@@ -244,15 +247,6 @@ enum DOTAMatchVote {
 	DOTAMatchVote_NEGATIVE = 2;
 }
 
-enum DOTA_LobbyMemberXPBonus {
-	DOTA_LobbyMemberXPBonus_DEFAULT = 0;
-	DOTA_LobbyMemberXPBonus_BATTLE_BOOSTER = 1;
-	DOTA_LobbyMemberXPBonus_SHARE_BONUS = 2;
-	DOTA_LobbyMemberXPBonus_PARTY = 3;
-	DOTA_LobbyMemberXPBonus_RECRUITMENT = 4;
-	DOTA_LobbyMemberXPBonus_PCBANG = 5;
-}
-
 enum DOTALobbyVisibility {
 	DOTALobbyVisibility_Public = 0;
 	DOTALobbyVisibility_Friends = 1;
@@ -292,6 +286,7 @@ enum MatchType {
 	MATCH_TYPE_STEAM_GROUP = 10;
 	MATCH_TYPE_MUTATION = 11;
 	MATCH_TYPE_COACHES_CHALLENGE = 12;
+	MATCH_TYPE_GAUNTLET = 13;
 }
 
 enum DOTABotDifficulty {
@@ -365,6 +360,7 @@ enum EMatchOutcome {
 	k_EMatchOutcome_NotScored_ServerCrash = 66;
 	k_EMatchOutcome_NotScored_NeverStarted = 67;
 	k_EMatchOutcome_NotScored_Canceled = 68;
+	k_EMatchOutcome_NotScored_Suspicious = 69;
 }
 
 enum ELaneType {
@@ -557,6 +553,15 @@ enum EDPCPushNotification {
 enum EEventActionScoreMode {
 	k_eEventActionScoreMode_Add = 0;
 	k_eEventActionScoreMode_Min = 1;
+}
+
+enum EOverwatchReportReason {
+	k_EOverwatchReportReason_Unknown = 0;
+	k_EOverwatchReportReason_Cheating = 1;
+	k_EOverwatchReportReason_Feeding = 2;
+	k_EOverwatchReportReason_Griefing = 3;
+	k_EOverwatchReportReason_Suspicious = 4;
+	k_EOverwatchReportReason_AbilityAbuse = 5;
 }
 
 message CDOTAClientHardwareSpecs {

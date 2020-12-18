@@ -399,6 +399,7 @@ message CGCSystemMsg_GetAccountDetails_Response {
 	optional uint32 rt_identity_linked = 35;
 	optional uint32 rt_birth_date = 36;
 	optional string txn_country_code = 37;
+	optional bool has_accepted_china_ssa = 38;
 }
 
 message CMsgGCGetPersonaNames {
@@ -485,6 +486,9 @@ message CMsgGCGetPartnerAccountLink {
 message CMsgGCGetPartnerAccountLink_Response {
 	optional uint32 pwid = 1;
 	optional uint32 nexonid = 2;
+	optional int32 ageclass = 3 [default = 0];
+	optional bool id_verified = 4 [default = true];
+	optional bool is_adult = 5 [default = true];
 }
 
 message CMsgGCRoutingInfo {

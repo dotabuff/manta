@@ -1301,7 +1301,9 @@ func init() {
 	proto.RegisterType((*CDemoSpawnGroups)(nil), "dota.CDemoSpawnGroups")
 }
 
-func init() { proto.RegisterFile("demo.proto", fileDescriptor_ca53982754088a9d) }
+func init() {
+	proto.RegisterFile("demo.proto", fileDescriptor_ca53982754088a9d)
+}
 
 var fileDescriptor_ca53982754088a9d = []byte{
 	// 1376 bytes of a gzipped FileDescriptorProto

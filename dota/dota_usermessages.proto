@@ -141,6 +141,19 @@ enum EDotaUserMessages {
 	DOTA_UM_FoundNeutralItem = 593;
 	DOTA_UM_OutpostCaptured = 594;
 	DOTA_UM_OutpostGrantedXP = 595;
+	DOTA_UM_MoveCameraToUnit = 596;
+	DOTA_UM_PauseMinigameData = 597;
+	DOTA_UM_VersusScene_PlayerBehavior = 598;
+	DOTA_UM_QoP_ArcanaSummary = 600;
+	DOTA_UM_HotPotato_Created = 601;
+	DOTA_UM_HotPotato_Exploded = 602;
+	DOTA_UM_WK_Arcana_Progress = 603;
+	DOTA_UM_GuildChallenge_Progress = 604;
+	DOTA_UM_WRArcanaProgress = 605;
+	DOTA_UM_WRArcanaSummary = 606;
+	DOTA_UM_EmptyItemSlotAlert = 607;
+	DOTA_UM_AghsStatusAlert = 608;
+	DOTA_UM_PingConfirmation = 609;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -244,6 +257,10 @@ enum DOTA_CHAT_MESSAGE {
 	CHAT_MESSAGE_SENTRY_WARD_KILLED = 106;
 	CHAT_MESSAGE_ITEM_PLACED_IN_NEUTRAL_STASH = 107;
 	CHAT_MESSAGE_HERO_CHOICE_INVALID = 108;
+	CHAT_MESSAGE_BOUNTY = 109;
+	CHAT_MESSAGE_ABILITY_DRAFT_START = 110;
+	CHAT_MESSAGE_HERO_FOUND_CANDY = 111;
+	CHAT_MESSAGE_ABILITY_DRAFT_RANDOMED = 112;
 }
 
 enum DOTA_NO_BATTLE_POINTS_REASONS {
@@ -319,6 +336,8 @@ enum DOTA_OVERHEAD_ALERT {
 	OVERHEAD_ALERT_DISABLE_RESIST = 19;
 	OVERHEAD_ALERT_DEATH = 20;
 	OVERHEAD_ALERT_BLOCKED = 21;
+	OVERHEAD_ALERT_ITEM_RECEIVED = 22;
+	OVERHEAD_ALERT_SHARD = 23;
 }
 
 enum DOTA_ROSHAN_PHASE {
@@ -482,6 +501,13 @@ message CDOTAUserMsg_GlobalLightDirection {
 message CDOTAUserMsg_LocationPing {
 	optional uint32 player_id = 1;
 	optional CDOTAMsg_LocationPing location_ping = 2;
+}
+
+message CDOTAUserMsg_PingConfirmation {
+	optional uint32 player_id_of_original_pinger = 1;
+	optional uint32 entity_index = 2;
+	optional uint32 icon_type = 3;
+	optional CMsgVector location = 4;
 }
 
 message CDOTAUserMsg_ItemAlert {
@@ -719,12 +745,19 @@ message CDOTASpeechMatchOnClient {
 }
 
 message CDOTAUserMsg_UnitEvent {
+	message Interval {
+		optional float start = 1;
+		optional float range = 2;
+	}
+
 	message Speech {
 		optional int32 concept = 1;
 		optional string response = 2;
 		optional int32 recipient_type = 3;
 		optional int32 level = 4;
 		optional bool muteable = 5 [default = false];
+		optional CDOTAUserMsg_UnitEvent.Interval predelay = 6;
+		optional uint32 flags = 7;
 	}
 
 	message SpeechMute {
@@ -1286,6 +1319,7 @@ message CDOTAUserMsg_HeroRelicProgress {
 message CDOTAUserMsg_AbilityDraftRequestAbility {
 	optional uint32 player_id = 1;
 	optional uint32 requested_ability_id = 2;
+	optional bool ctrl_is_down = 3;
 }
 
 message CDOTAUserMsg_DamageReport {
@@ -1336,6 +1370,7 @@ message CDOTAUserMsg_OMArcanaCombo {
 message CDOTAUserMsg_HighFiveCompleted {
 	optional uint32 player_id_1 = 1;
 	optional uint32 player_id_2 = 2;
+	optional bool special_high_five = 3;
 }
 
 message CDOTAUserMsg_HighFiveLeftHanging {
@@ -1344,8 +1379,9 @@ message CDOTAUserMsg_HighFiveLeftHanging {
 
 message CDOTAUserMsg_ShovelUnearth {
 	optional uint32 player_id = 1;
-	optional uint32 shovel_outcome = 2;
-	optional bool all_chat = 3;
+	optional bool all_chat = 2;
+	optional string locstring = 3;
+	optional uint32 quantity = 4;
 }
 
 message CDOTAUserMsg_AllStarEvent {
@@ -1390,4 +1426,106 @@ message CDOTAUserMsg_OutpostCaptured {
 message CDOTAUserMsg_OutpostGrantedXP {
 	optional uint32 team_id = 1;
 	optional uint32 xp_amount = 2;
+}
+
+message CDOTAUserMsg_MoveCameraToUnit {
+	optional int32 unit_ehandle = 1;
+}
+
+message CDOTAUserMsg_PauseMinigameData {
+	message DataBit {
+		optional uint32 index = 1;
+		optional int32 data = 2;
+		optional int64 data_extra = 3;
+	}
+
+	repeated CDOTAUserMsg_PauseMinigameData.DataBit data_bits = 1;
+}
+
+message CDOTAUserMsg_VersusScene_PlayerBehavior {
+	optional uint32 player_id = 1;
+	optional EDOTAVersusScenePlayerBehavior behavior = 2 [default = VS_PLAYER_BEHAVIOR_PLAY_ACTIVITY];
+	optional VersusScene_PlayActivity play_activity = 3;
+	optional VersusScene_ChatWheel chat_wheel = 4;
+	optional VersusScene_PlaybackRate playback_rate = 5;
+}
+
+message CDOTAUserMsg_QoP_ArcanaSummary {
+	optional uint32 ehandle = 1;
+	optional uint32 arcana_level = 2;
+	optional uint32 players_hit = 3;
+	optional uint32 players_killed = 4;
+}
+
+message CDOTAUserMsg_HotPotato_Created {
+	optional uint32 player_id_1 = 1;
+	optional uint32 player_id_2 = 2;
+}
+
+message CDOTAUserMsg_HotPotato_Exploded {
+	optional uint32 player_id = 1;
+}
+
+message CDOTAUserMsg_WK_Arcana_Progress {
+	optional uint32 ehandle = 1;
+	optional uint32 arcana_level = 2;
+	optional uint32 hero_id = 3;
+}
+
+message CDOTAUserMsg_GuildChallenge_Progress {
+	message PlayerProgress {
+		optional uint32 player_id = 1;
+		optional uint32 progress = 6;
+	}
+
+	enum EChallengeType {
+		k_EChallengeType_Invalid = 0;
+		k_EChallengeType_Cooperative = 1;
+		k_EChallengeType_Contract = 2;
+	}
+
+	repeated CDOTAUserMsg_GuildChallenge_Progress.PlayerProgress player_progress = 1;
+	optional uint32 guild_id = 2;
+	optional uint32 challenge_instance_id = 3;
+	optional uint32 challenge_parameter = 4;
+	optional CDOTAUserMsg_GuildChallenge_Progress.EChallengeType challenge_type = 5 [default = k_EChallengeType_Invalid];
+	optional uint32 challenge_progress_at_start = 7;
+	optional bool complete = 8;
+}
+
+message CDOTAUserMsg_WRArcanaProgress {
+	optional uint32 ehandle = 1;
+	optional uint32 target_ehandle = 2;
+	optional uint32 arrows_landed = 3;
+	optional uint32 damage_dealt = 4;
+	optional uint32 target_hp = 5;
+	optional uint32 target_max_hp = 6;
+	optional uint32 arcana_level = 7;
+}
+
+message CDOTAUserMsg_WRArcanaSummary {
+	optional uint32 ehandle = 1;
+	optional uint32 target_ehandle = 2;
+	optional uint32 arrows_landed = 3;
+	optional uint32 damage_dealt = 4;
+	optional uint32 target_hp = 5;
+	optional uint32 target_max_hp = 6;
+	optional uint32 arcana_level = 7;
+	optional bool success = 8;
+}
+
+message CDOTAUserMsg_EmptyItemSlotAlert {
+	optional int32 source_player_id = 1;
+	optional int32 target_player_id = 2;
+	optional int32 slot_index = 3;
+	optional int32 cooldown_seconds = 4;
+}
+
+message CDOTAUserMsg_AghsStatusAlert {
+	optional uint32 source_player_id = 1;
+	optional uint32 target_player_id = 2;
+	optional uint32 target_entindex = 3;
+	optional uint32 alert_type = 4;
+	optional bool has_scepter = 5;
+	optional bool has_shard = 6;
 }

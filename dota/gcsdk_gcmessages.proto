@@ -28,6 +28,25 @@ enum GCConnectionStatus {
 	GCConnectionStatus_STEAM_GOING_DOWN = 6;
 }
 
+message CMsgGCAssertJobData {
+	optional string message_type = 1;
+	optional bytes message_data = 2;
+}
+
+message CMsgGCConCommand {
+	optional string command = 1;
+}
+
+message CMsgSDOAssert {
+	message Request {
+		repeated uint64 key = 1;
+		optional string requesting_job = 2;
+	}
+
+	optional int32 sdo_type = 1;
+	repeated CMsgSDOAssert.Request requests = 2;
+}
+
 message CMsgSHA1Digest {
 	required fixed64 block1 = 1;
 	required fixed64 block2 = 2;
@@ -209,6 +228,8 @@ message CMsgClientHello {
 	optional uint32 render_height = 18;
 	optional uint32 swap_width = 19;
 	optional uint32 swap_height = 20;
+	optional bool is_steam_china = 22;
+	optional string platform_name = 23;
 }
 
 message CMsgClientWelcome {
@@ -228,6 +249,12 @@ message CMsgClientWelcome {
 	optional string items_game_url = 8;
 	optional uint32 gc_socache_file_version = 9;
 	optional string txn_country_code = 10;
+	optional bytes game_data2 = 11;
+	optional uint32 rtime32_gc_welcome_timestamp = 12;
+	optional uint32 currency = 13;
+	optional uint32 balance = 14;
+	optional string balance_url = 15;
+	optional bool has_accepted_china_ssa = 16;
 }
 
 message CMsgConnectionStatus {
@@ -313,7 +340,12 @@ message CWorkshop_SetItemPaymentRules_Request {
 		optional uint64 workshop_file_id = 1;
 		optional float revenue_percentage = 2;
 		optional string rule_description = 3;
-		optional uint32 rule_type = 4;
+		optional uint32 rule_type = 4 [default = 1];
+	}
+
+	message WorkshopDirectPaymentRule {
+		optional uint64 workshop_file_id = 1;
+		optional string rule_description = 2;
 	}
 
 	message PartnerItemPaymentRule {
@@ -328,6 +360,7 @@ message CWorkshop_SetItemPaymentRules_Request {
 	repeated CWorkshop_SetItemPaymentRules_Request.PartnerItemPaymentRule partner_accounts = 4;
 	optional bool validate_only = 5;
 	optional bool make_workshop_files_subscribable = 6;
+	optional CWorkshop_SetItemPaymentRules_Request.WorkshopDirectPaymentRule associated_workshop_file_for_direct_payments = 7;
 }
 
 message CWorkshop_SetItemPaymentRules_Response {

@@ -1,7 +1,6 @@
 package manta
 
 import (
-	"reflect"
 	"strings"
 )
 
@@ -22,10 +21,6 @@ func readFields(r *reader, s *serializer, state *fieldState) {
 		state.set(fp, val)
 
 		if v(6) {
-			if val2 := state.get(fp); !reflect.DeepEqual(val, val2) {
-				_panicf("WRONG READ: %#v != %#v", val, val2)
-			}
-
 			name := strings.Join(s.getNameForFieldPath(fp, 0), ".")
 			fp2 := newFieldPath()
 			b := s.getFieldPathForName(fp2, name)
