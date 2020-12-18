@@ -302,9 +302,7 @@ func init() {
 	proto.RegisterType((*CDOTABroadcastMsg_LANLobbyReply_CLobbyMember)(nil), "dota.CDOTABroadcastMsg_LANLobbyReply.CLobbyMember")
 }
 
-func init() {
-	proto.RegisterFile("dota_broadcastmessages.proto", fileDescriptor_38e3ec129a20c224)
-}
+func init() { proto.RegisterFile("dota_broadcastmessages.proto", fileDescriptor_38e3ec129a20c224) }
 
 var fileDescriptor_38e3ec129a20c224 = []byte{
 	// 415 bytes of a gzipped FileDescriptorProto

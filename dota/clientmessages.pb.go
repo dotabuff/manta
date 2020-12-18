@@ -445,9 +445,7 @@ func init() {
 	proto.RegisterType((*CClientMsg_RotateAnchor)(nil), "dota.CClientMsg_RotateAnchor")
 }
 
-func init() {
-	proto.RegisterFile("clientmessages.proto", fileDescriptor_2ecb9f24e0641136)
-}
+func init() { proto.RegisterFile("clientmessages.proto", fileDescriptor_2ecb9f24e0641136) }
 
 var fileDescriptor_2ecb9f24e0641136 = []byte{
 	// 549 bytes of a gzipped FileDescriptorProto

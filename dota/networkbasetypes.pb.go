@@ -1968,9 +1968,7 @@ func init() {
 	proto.RegisterType((*CSVCMsg_GameSessionConfiguration)(nil), "dota.CSVCMsg_GameSessionConfiguration")
 }
 
-func init() {
-	proto.RegisterFile("networkbasetypes.proto", fileDescriptor_af562a66c2afa27a)
-}
+func init() { proto.RegisterFile("networkbasetypes.proto", fileDescriptor_af562a66c2afa27a) }
 
 var fileDescriptor_af562a66c2afa27a = []byte{
 	// 2275 bytes of a gzipped FileDescriptorProto

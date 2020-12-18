@@ -2863,9 +2863,7 @@ func init() {
 	proto.RegisterEnum("dota.EDOTAGCMsg", EDOTAGCMsg_name, EDOTAGCMsg_value)
 }
 
-func init() {
-	proto.RegisterFile("dota_gcmessages_msgid.proto", fileDescriptor_25e1806dabe58bed)
-}
+func init() { proto.RegisterFile("dota_gcmessages_msgid.proto", fileDescriptor_25e1806dabe58bed) }
 
 var fileDescriptor_25e1806dabe58bed = []byte{
 	// 10414 bytes of a gzipped FileDescriptorProto

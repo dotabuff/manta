@@ -4461,9 +4461,7 @@ func init() {
 	proto.RegisterType((*CUserMessageAnimStateGraphState)(nil), "dota.CUserMessageAnimStateGraphState")
 }
 
-func init() {
-	proto.RegisterFile("usermessages.proto", fileDescriptor_6710c15bb7e2e247)
-}
+func init() { proto.RegisterFile("usermessages.proto", fileDescriptor_6710c15bb7e2e247) }
 
 var fileDescriptor_6710c15bb7e2e247 = []byte{
 	// 4421 bytes of a gzipped FileDescriptorProto

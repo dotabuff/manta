@@ -8778,9 +8778,7 @@ func init() {
 	proto.RegisterType((*CMsgClientToGCGetLimitedItemPurchaseQuantityResponse)(nil), "dota.CMsgClientToGCGetLimitedItemPurchaseQuantityResponse")
 }
 
-func init() {
-	proto.RegisterFile("econ_gcmessages.proto", fileDescriptor_123d8ffb2ecfd02d)
-}
+func init() { proto.RegisterFile("econ_gcmessages.proto", fileDescriptor_123d8ffb2ecfd02d) }
 
 var fileDescriptor_123d8ffb2ecfd02d = []byte{
 	// 9325 bytes of a gzipped FileDescriptorProto

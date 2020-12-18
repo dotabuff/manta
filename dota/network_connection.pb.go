@@ -6,7 +6,7 @@ package dota
 import (
 	fmt "fmt"
 	proto "github.com/golang/protobuf/proto"
-	descriptorpb "google.golang.org/protobuf/types/descriptorpb"
+	descriptor "github.com/golang/protobuf/protoc-gen-go/descriptor"
 	math "math"
 )
 
@@ -377,7 +377,7 @@ func (ENetworkDisconnectionReason) EnumDescriptor() ([]byte, []int) {
 }
 
 var E_NetworkConnectionToken = &proto.ExtensionDesc{
-	ExtendedType:  (*descriptorpb.EnumValueOptions)(nil),
+	ExtendedType:  (*descriptor.EnumValueOptions)(nil),
 	ExtensionType: (*string)(nil),
 	Field:         50500,
 	Name:          "dota.network_connection_token",
@@ -390,9 +390,7 @@ func init() {
 	proto.RegisterExtension(E_NetworkConnectionToken)
 }
 
-func init() {
-	proto.RegisterFile("network_connection.proto", fileDescriptor_ad1ddf950d086460)
-}
+func init() { proto.RegisterFile("network_connection.proto", fileDescriptor_ad1ddf950d086460) }
 
 var fileDescriptor_ad1ddf950d086460 = []byte{
 	// 2763 bytes of a gzipped FileDescriptorProto

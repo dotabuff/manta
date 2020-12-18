@@ -2168,9 +2168,7 @@ func init() {
 	proto.RegisterType((*CMsgTEWorldDecal)(nil), "dota.CMsgTEWorldDecal")
 }
 
-func init() {
-	proto.RegisterFile("te.proto", fileDescriptor_343bab70cd1ad7b7)
-}
+func init() { proto.RegisterFile("te.proto", fileDescriptor_343bab70cd1ad7b7) }
 
 var fileDescriptor_343bab70cd1ad7b7 = []byte{
 	// 1794 bytes of a gzipped FileDescriptorProto

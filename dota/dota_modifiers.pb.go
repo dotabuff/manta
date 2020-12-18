@@ -419,9 +419,7 @@ func init() {
 	proto.RegisterType((*CDOTALuaModifierEntry)(nil), "dota.CDOTALuaModifierEntry")
 }
 
-func init() {
-	proto.RegisterFile("dota_modifiers.proto", fileDescriptor_1f582eabb1c63b44)
-}
+func init() { proto.RegisterFile("dota_modifiers.proto", fileDescriptor_1f582eabb1c63b44) }
 
 var fileDescriptor_1f582eabb1c63b44 = []byte{
 	// 797 bytes of a gzipped FileDescriptorProto

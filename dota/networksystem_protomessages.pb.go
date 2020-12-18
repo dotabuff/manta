@@ -207,9 +207,7 @@ func init() {
 	proto.RegisterType((*NetMessagePacketEnd)(nil), "dota.NetMessagePacketEnd")
 }
 
-func init() {
-	proto.RegisterFile("networksystem_protomessages.proto", fileDescriptor_e6be681d6a8a944d)
-}
+func init() { proto.RegisterFile("networksystem_protomessages.proto", fileDescriptor_e6be681d6a8a944d) }
 
 var fileDescriptor_e6be681d6a8a944d = []byte{
 	// 186 bytes of a gzipped FileDescriptorProto

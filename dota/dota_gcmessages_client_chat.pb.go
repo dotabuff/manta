@@ -2198,9 +2198,7 @@ func init() {
 	proto.RegisterType((*CMsgDOTAChatRegionsEnabled_Region)(nil), "dota.CMsgDOTAChatRegionsEnabled.Region")
 }
 
-func init() {
-	proto.RegisterFile("dota_gcmessages_client_chat.proto", fileDescriptor_56aef27c555bd81b)
-}
+func init() { proto.RegisterFile("dota_gcmessages_client_chat.proto", fileDescriptor_56aef27c555bd81b) }
 
 var fileDescriptor_56aef27c555bd81b = []byte{
 	// 2474 bytes of a gzipped FileDescriptorProto

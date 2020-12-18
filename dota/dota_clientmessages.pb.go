@@ -4214,9 +4214,7 @@ func init() {
 	proto.RegisterType((*CDOTAClientMsg_AghsStatusAlert)(nil), "dota.CDOTAClientMsg_AghsStatusAlert")
 }
 
-func init() {
-	proto.RegisterFile("dota_clientmessages.proto", fileDescriptor_54992387404bd51d)
-}
+func init() { proto.RegisterFile("dota_clientmessages.proto", fileDescriptor_54992387404bd51d) }
 
 var fileDescriptor_54992387404bd51d = []byte{
 	// 4106 bytes of a gzipped FileDescriptorProto

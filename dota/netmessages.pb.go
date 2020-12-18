@@ -4817,9 +4817,7 @@ func init() {
 	proto.RegisterType((*CMsgServerNetworkStats_Player)(nil), "dota.CMsgServerNetworkStats.Player")
 }
 
-func init() {
-	proto.RegisterFile("netmessages.proto", fileDescriptor_52cbc162d33bb4fa)
-}
+func init() { proto.RegisterFile("netmessages.proto", fileDescriptor_52cbc162d33bb4fa) }
 
 var fileDescriptor_52cbc162d33bb4fa = []byte{
 	// 5210 bytes of a gzipped FileDescriptorProto

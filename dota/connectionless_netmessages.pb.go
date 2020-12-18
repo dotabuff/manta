@@ -183,9 +183,7 @@ func init() {
 	proto.RegisterType((*C2S_CONNECTION_Message)(nil), "dota.C2S_CONNECTION_Message")
 }
 
-func init() {
-	proto.RegisterFile("connectionless_netmessages.proto", fileDescriptor_c5f1aef3c0e41f21)
-}
+func init() { proto.RegisterFile("connectionless_netmessages.proto", fileDescriptor_c5f1aef3c0e41f21) }
 
 var fileDescriptor_c5f1aef3c0e41f21 = []byte{
 	// 388 bytes of a gzipped FileDescriptorProto

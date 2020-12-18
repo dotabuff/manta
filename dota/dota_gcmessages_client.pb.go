@@ -32010,9 +32010,7 @@ func init() {
 	proto.RegisterType((*CMsgGCToClientOverwatchCasesAvailable)(nil), "dota.CMsgGCToClientOverwatchCasesAvailable")
 }
 
-func init() {
-	proto.RegisterFile("dota_gcmessages_client.proto", fileDescriptor_77d56a8cd91c4fa0)
-}
+func init() { proto.RegisterFile("dota_gcmessages_client.proto", fileDescriptor_77d56a8cd91c4fa0) }
 
 var fileDescriptor_77d56a8cd91c4fa0 = []byte{
 	// 24740 bytes of a gzipped FileDescriptorProto

@@ -1039,9 +1039,7 @@ func init() {
 	proto.RegisterType((*CMsgSosSetLibraryStackFields)(nil), "dota.CMsgSosSetLibraryStackFields")
 }
 
-func init() {
-	proto.RegisterFile("gameevents.proto", fileDescriptor_830232d8fa361916)
-}
+func init() { proto.RegisterFile("gameevents.proto", fileDescriptor_830232d8fa361916) }
 
 var fileDescriptor_830232d8fa361916 = []byte{
 	// 1130 bytes of a gzipped FileDescriptorProto

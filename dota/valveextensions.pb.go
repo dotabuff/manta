@@ -6,7 +6,7 @@ package dota
 import (
 	fmt "fmt"
 	proto "github.com/golang/protobuf/proto"
-	descriptorpb "google.golang.org/protobuf/types/descriptorpb"
+	descriptor "github.com/golang/protobuf/protoc-gen-go/descriptor"
 	math "math"
 )
 
@@ -22,7 +22,7 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 var E_MapField = &proto.ExtensionDesc{
-	ExtendedType:  (*descriptorpb.FieldOptions)(nil),
+	ExtendedType:  (*descriptor.FieldOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         61000,
 	Name:          "dota.map_field",
@@ -31,7 +31,7 @@ var E_MapField = &proto.ExtensionDesc{
 }
 
 var E_MapKey = &proto.ExtensionDesc{
-	ExtendedType:  (*descriptorpb.FieldOptions)(nil),
+	ExtendedType:  (*descriptor.FieldOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         61001,
 	Name:          "dota.map_key",
@@ -40,7 +40,7 @@ var E_MapKey = &proto.ExtensionDesc{
 }
 
 var E_DiffEncodeField = &proto.ExtensionDesc{
-	ExtendedType:  (*descriptorpb.FieldOptions)(nil),
+	ExtendedType:  (*descriptor.FieldOptions)(nil),
 	ExtensionType: (*int32)(nil),
 	Field:         61002,
 	Name:          "dota.diff_encode_field",
@@ -49,7 +49,7 @@ var E_DiffEncodeField = &proto.ExtensionDesc{
 }
 
 var E_DeltaIgnore = &proto.ExtensionDesc{
-	ExtendedType:  (*descriptorpb.FieldOptions)(nil),
+	ExtendedType:  (*descriptor.FieldOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         61003,
 	Name:          "dota.delta_ignore",
@@ -58,7 +58,7 @@ var E_DeltaIgnore = &proto.ExtensionDesc{
 }
 
 var E_SteammlMaxEntries = &proto.ExtensionDesc{
-	ExtendedType:  (*descriptorpb.FieldOptions)(nil),
+	ExtendedType:  (*descriptor.FieldOptions)(nil),
 	ExtensionType: (*uint32)(nil),
 	Field:         61004,
 	Name:          "dota.steamml_max_entries",
@@ -67,7 +67,7 @@ var E_SteammlMaxEntries = &proto.ExtensionDesc{
 }
 
 var E_SteammlIsTimestamp = &proto.ExtensionDesc{
-	ExtendedType:  (*descriptorpb.FieldOptions)(nil),
+	ExtendedType:  (*descriptor.FieldOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         61005,
 	Name:          "dota.steamml_is_timestamp",
@@ -84,9 +84,7 @@ func init() {
 	proto.RegisterExtension(E_SteammlIsTimestamp)
 }
 
-func init() {
-	proto.RegisterFile("valveextensions.proto", fileDescriptor_e5dff5853c14918f)
-}
+func init() { proto.RegisterFile("valveextensions.proto", fileDescriptor_e5dff5853c14918f) }
 
 var fileDescriptor_e5dff5853c14918f = []byte{
 	// 281 bytes of a gzipped FileDescriptorProto

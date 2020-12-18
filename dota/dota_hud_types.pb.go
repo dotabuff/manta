@@ -6,7 +6,7 @@ package dota
 import (
 	fmt "fmt"
 	proto "github.com/golang/protobuf/proto"
-	descriptorpb "google.golang.org/protobuf/types/descriptorpb"
+	descriptor "github.com/golang/protobuf/protoc-gen-go/descriptor"
 	math "math"
 )
 
@@ -131,7 +131,7 @@ func (EHeroSelectionText) EnumDescriptor() ([]byte, []int) {
 }
 
 var E_HudLocalizeToken = &proto.ExtensionDesc{
-	ExtendedType:  (*descriptorpb.EnumValueOptions)(nil),
+	ExtendedType:  (*descriptor.EnumValueOptions)(nil),
 	ExtensionType: (*string)(nil),
 	Field:         50501,
 	Name:          "dota.hud_localize_token",
@@ -144,9 +144,7 @@ func init() {
 	proto.RegisterExtension(E_HudLocalizeToken)
 }
 
-func init() {
-	proto.RegisterFile("dota_hud_types.proto", fileDescriptor_b16d5740bf0aa997)
-}
+func init() { proto.RegisterFile("dota_hud_types.proto", fileDescriptor_b16d5740bf0aa997) }
 
 var fileDescriptor_b16d5740bf0aa997 = []byte{
 	// 758 bytes of a gzipped FileDescriptorProto

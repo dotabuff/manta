@@ -2845,9 +2845,7 @@ func init() {
 	proto.RegisterType((*CMsgDOTADPCMatch)(nil), "dota.CMsgDOTADPCMatch")
 }
 
-func init() {
-	proto.RegisterFile("dota_match_metadata.proto", fileDescriptor_83d1a4f0be8376b8)
-}
+func init() { proto.RegisterFile("dota_match_metadata.proto", fileDescriptor_83d1a4f0be8376b8) }
 
 var fileDescriptor_83d1a4f0be8376b8 = []byte{
 	// 3883 bytes of a gzipped FileDescriptorProto

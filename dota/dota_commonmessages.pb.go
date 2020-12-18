@@ -1013,9 +1013,7 @@ func init() {
 	proto.RegisterType((*VersusScene_PlaybackRate)(nil), "dota.VersusScene_PlaybackRate")
 }
 
-func init() {
-	proto.RegisterFile("dota_commonmessages.proto", fileDescriptor_ea12725bdc87a759)
-}
+func init() { proto.RegisterFile("dota_commonmessages.proto", fileDescriptor_ea12725bdc87a759) }
 
 var fileDescriptor_ea12725bdc87a759 = []byte{
 	// 1504 bytes of a gzipped FileDescriptorProto

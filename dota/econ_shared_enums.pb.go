@@ -297,9 +297,7 @@ func init() {
 	proto.RegisterType((*CMsgGenericResult)(nil), "dota.CMsgGenericResult")
 }
 
-func init() {
-	proto.RegisterFile("econ_shared_enums.proto", fileDescriptor_df63e448fc286698)
-}
+func init() { proto.RegisterFile("econ_shared_enums.proto", fileDescriptor_df63e448fc286698) }
 
 var fileDescriptor_df63e448fc286698 = []byte{
 	// 619 bytes of a gzipped FileDescriptorProto

@@ -6,7 +6,7 @@ package dota
 import (
 	fmt "fmt"
 	proto "github.com/golang/protobuf/proto"
-	descriptorpb "google.golang.org/protobuf/types/descriptorpb"
+	descriptor "github.com/golang/protobuf/protoc-gen-go/descriptor"
 	math "math"
 )
 
@@ -6127,7 +6127,7 @@ func (m *CWorkshop_GetSpecialPayments_Response_SpecialPayment) GetNetPaymentRowU
 }
 
 var E_KeyField = &proto.ExtensionDesc{
-	ExtendedType:  (*descriptorpb.FieldOptions)(nil),
+	ExtendedType:  (*descriptor.FieldOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         60000,
 	Name:          "dota.key_field",
@@ -6136,7 +6136,7 @@ var E_KeyField = &proto.ExtensionDesc{
 }
 
 var E_MsgpoolSoftLimit = &proto.ExtensionDesc{
-	ExtendedType:  (*descriptorpb.MessageOptions)(nil),
+	ExtendedType:  (*descriptor.MessageOptions)(nil),
 	ExtensionType: (*int32)(nil),
 	Field:         60000,
 	Name:          "dota.msgpool_soft_limit",
@@ -6145,7 +6145,7 @@ var E_MsgpoolSoftLimit = &proto.ExtensionDesc{
 }
 
 var E_MsgpoolHardLimit = &proto.ExtensionDesc{
-	ExtendedType:  (*descriptorpb.MessageOptions)(nil),
+	ExtendedType:  (*descriptor.MessageOptions)(nil),
 	ExtensionType: (*int32)(nil),
 	Field:         60001,
 	Name:          "dota.msgpool_hard_limit",
@@ -6261,9 +6261,7 @@ func init() {
 	proto.RegisterExtension(E_MsgpoolHardLimit)
 }
 
-func init() {
-	proto.RegisterFile("steammessages.proto", fileDescriptor_662a1850681ae3f8)
-}
+func init() { proto.RegisterFile("steammessages.proto", fileDescriptor_662a1850681ae3f8) }
 
 var fileDescriptor_662a1850681ae3f8 = []byte{
 	// 6470 bytes of a gzipped FileDescriptorProto

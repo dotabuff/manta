@@ -13209,9 +13209,7 @@ func init() {
 	proto.RegisterType((*CMsgDOTATriviaQuestionAnswersSummary)(nil), "dota.CMsgDOTATriviaQuestionAnswersSummary")
 }
 
-func init() {
-	proto.RegisterFile("dota_gcmessages_common.proto", fileDescriptor_c7a0b43d4fa15eff)
-}
+func init() { proto.RegisterFile("dota_gcmessages_common.proto", fileDescriptor_c7a0b43d4fa15eff) }
 
 var fileDescriptor_c7a0b43d4fa15eff = []byte{
 	// 15239 bytes of a gzipped FileDescriptorProto

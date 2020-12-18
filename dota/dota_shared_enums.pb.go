@@ -3887,9 +3887,7 @@ func init() {
 	proto.RegisterType((*CMsgPendingEventAward)(nil), "dota.CMsgPendingEventAward")
 }
 
-func init() {
-	proto.RegisterFile("dota_shared_enums.proto", fileDescriptor_8fcb6b36a6ed2ada)
-}
+func init() { proto.RegisterFile("dota_shared_enums.proto", fileDescriptor_8fcb6b36a6ed2ada) }
 
 var fileDescriptor_8fcb6b36a6ed2ada = []byte{
 	// 7072 bytes of a gzipped FileDescriptorProto
