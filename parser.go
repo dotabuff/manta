@@ -2,6 +2,7 @@ package manta
 
 import (
 	"bytes"
+	"fmt"
 	"io"
 
 	"github.com/dotabuff/manta/dota"
@@ -120,8 +121,12 @@ func (p *Parser) Start() (err error) {
 	defer p.afterStop()
 
 	defer func() {
-		if x, ok := recover().(error); ok {
-			err = x
+		if p := recover(); p != nil {
+			if e, ok := p.(error); ok {
+				err = e
+			} else {
+				err = fmt.Errorf("%v", p)
+			}
 		}
 	}()
 
