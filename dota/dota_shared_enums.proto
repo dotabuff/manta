@@ -91,7 +91,8 @@ enum EEvent {
 	EVENT_ID_INTERNATIONAL_2020 = 29;
 	EVENT_ID_TEAM_FANDOM = 30;
 	EVENT_ID_DIRETIDE_2020 = 31;
-	EVENT_ID_COUNT = 32;
+	EVENT_ID_SPRING_2021 = 32;
+	EVENT_ID_COUNT = 33;
 }
 
 enum DOTALeaverStatus_t {
@@ -160,6 +161,7 @@ enum DOTAChatChannelType_t {
 	DOTAChannelType_GameAll = 11;
 	DOTAChannelType_GameAllies = 12;
 	DOTAChannelType_GameSpectator = 13;
+	DOTAChannelType_GameCoaching = 14;
 	DOTAChannelType_Cafe = 15;
 	DOTAChannelType_CustomGame = 16;
 	DOTAChannelType_Private = 17;
@@ -168,6 +170,14 @@ enum DOTAChatChannelType_t {
 	DOTAChannelType_HLTVSpectator = 20;
 	DOTAChannelType_GameEvents = 21;
 	DOTAChannelType_Trivia = 22;
+	DOTAChannelType_NewPlayer = 23;
+	DOTAChannelType_PrivateCoaching = 24;
+}
+
+enum EChatSpecialPrivileges {
+	k_EChatSpecialPrivileges_None = 0;
+	k_EChatSpecialPrivileges_Moderator = 1;
+	k_EChatSpecialPrivileges_SuperModerator = 2;
 }
 
 enum EProfileCardSlotType {
@@ -259,11 +269,6 @@ enum EDOTAPlayerMMRType {
 	k_EDOTAPlayerMMRType_GeneralCompetitive = 3;
 	k_EDOTAPlayerMMRType_SoloCompetitive2019 = 4;
 	k_EDOTAPlayerMMRType_1v1Competitive_UNUSED = 5;
-	k_EDOTAPlayerMMRType_GeneralSeasonalRanked = 6;
-	k_EDOTAPlayerMMRType_SoloSeasonalRanked = 7;
-	k_EDOTAPlayerMMRType_Competitive_Core = 8;
-	k_EDOTAPlayerMMRType_Competitive_Support = 9;
-	k_EDOTAPlayerMMRType_Competitive_Classic = 10;
 }
 
 enum EDOTAMMRBoostType {
@@ -287,6 +292,7 @@ enum MatchType {
 	MATCH_TYPE_MUTATION = 11;
 	MATCH_TYPE_COACHES_CHALLENGE = 12;
 	MATCH_TYPE_GAUNTLET = 13;
+	MATCH_TYPE_NEW_PLAYER_POOL = 14;
 }
 
 enum DOTABotDifficulty {
@@ -299,6 +305,7 @@ enum DOTABotDifficulty {
 	BOT_DIFFICULTY_EXTRA1 = 6;
 	BOT_DIFFICULTY_EXTRA2 = 7;
 	BOT_DIFFICULTY_EXTRA3 = 8;
+	BOT_DIFFICULTY_NPX = 9;
 }
 
 enum DOTA_BOT_MODE {
@@ -328,6 +335,7 @@ enum DOTA_BOT_MODE {
 	DOTA_BOT_MODE_COMPANION = 23;
 	DOTA_BOT_MODE_TUTORIAL_BOSS = 24;
 	DOTA_BOT_MODE_MINION = 25;
+	DOTA_BOT_MODE_OUTPOST = 26;
 }
 
 enum MatchLanguages {
@@ -409,6 +417,8 @@ enum ELeagueTier {
 	LEAGUE_TIER_MAJOR = 4;
 	LEAGUE_TIER_INTERNATIONAL = 5;
 	LEAGUE_TIER_DPC_QUALIFIER = 6;
+	LEAGUE_TIER_DPC_LEAGUE_QUALIFIER = 7;
+	LEAGUE_TIER_DPC_LEAGUE = 8;
 }
 
 enum ELeagueTierCategory {
@@ -462,6 +472,7 @@ enum ELeagueAuditAction {
 	LEAGUE_AUDIT_ACTION_LEAGUE_REMOVE_INVITED_TEAM = 18;
 	LEAGUE_AUDIT_ACTION_LEAGUE_STATUS_CHANGED = 19;
 	LEAGUE_AUDIT_ACTION_LEAGUE_STREAM_EDIT = 20;
+	LEAGUE_AUDIT_ACTION_LEAGUE_TEAM_SWAP = 21;
 	LEAGUE_AUDIT_ACTION_NODEGROUP_CREATE = 100;
 	LEAGUE_AUDIT_ACTION_NODEGROUP_DESTROY = 101;
 	LEAGUE_AUDIT_ACTION_NODEGROUP_ADD_TEAM = 102;
@@ -542,6 +553,8 @@ enum EDPCPushNotification {
 	DPC_PUSH_NOTIFICATION_MATCH_STARTING = 1;
 	DPC_PUSH_NOTIFICATION_PLAYER_LEFT_TEAM = 10;
 	DPC_PUSH_NOTIFICATION_PLAYER_JOINED_TEAM = 11;
+	DPC_PUSH_NOTIFICATION_PLAYER_JOINED_TEAM_AS_COACH = 12;
+	DPC_PUSH_NOTIFICATION_PLAYER_LEFT_TEAM_AS_COACH = 13;
 	DPC_PUSH_NOTIFICATION_LEAGUE_RESULT = 20;
 	DPC_PUSH_NOTIFICATION_PREDICTION_MATCHES_AVAILABLE = 30;
 	DPC_PUSH_NOTIFICATION_PREDICTION_RESULT = 31;
@@ -553,6 +566,15 @@ enum EDPCPushNotification {
 enum EEventActionScoreMode {
 	k_eEventActionScoreMode_Add = 0;
 	k_eEventActionScoreMode_Min = 1;
+}
+
+enum EPlayerChallengeHistoryType {
+	k_EPlayerChallengeHistoryType_Invalid = 0;
+	k_EPlayerChallengeHistoryType_KillEater = 1;
+	k_EPlayerChallengeHistoryType_DotaPlusRelic = 2;
+	k_EPlayerChallengeHistoryType_DotaPlusHeroPlayerChallenge = 3;
+	k_EPlayerChallengeHistoryType_InGameEventChallenge = 4;
+	k_EPlayerChallengeHistoryType_GuildContract = 5;
 }
 
 enum EOverwatchReportReason {

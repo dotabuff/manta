@@ -47,6 +47,12 @@ enum EHighPriorityMMState {
 	k_EHighPriorityMM_HighDemand = 68;
 }
 
+enum ELobbyMemberCoachRequestState {
+	k_eLobbyMemberCoachRequestState_None = 0;
+	k_eLobbyMemberCoachRequestState_Accepted = 1;
+	k_eLobbyMemberCoachRequestState_Rejected = 2;
+}
+
 enum LobbyDotaTVDelay {
 	LobbyDotaTV_10 = 0;
 	LobbyDotaTV_120 = 1;
@@ -199,6 +205,12 @@ message CMsgLeaverState {
 	optional bool mass_disconnect = 6;
 }
 
+message CMsgLobbyCoachFriendRequest {
+	optional uint32 coach_account_id = 1;
+	optional uint32 player_account_id = 2;
+	optional ELobbyMemberCoachRequestState request_state = 3 [default = k_eLobbyMemberCoachRequestState_None];
+}
+
 message CSODOTALobbyMember {
 	optional fixed64 id = 1 [(key_field) = true];
 	optional uint32 hero_id = 2;
@@ -216,6 +228,7 @@ message CSODOTALobbyMember {
 	optional PartnerAccountType partner_account_type = 21 [default = PARTNER_NONE];
 	repeated uint32 enabled_hero_id = 22;
 	optional DOTA_GC_TEAM coach_team = 23 [default = DOTA_GC_TEAM_NOTEAM];
+	repeated uint32 coached_account_ids = 53;
 	optional uint32 coach_rating = 42;
 	optional uint32 pwrd_cyber_cafe_id = 24;
 	optional string pwrd_cyber_cafe_name = 25;
@@ -255,6 +268,7 @@ message CLobbyTeamDetails {
 	optional bool is_challenge_match = 18;
 	optional uint64 challenge_match_token_account = 19;
 	optional string team_logo_url = 20;
+	optional string team_abbreviation = 21;
 }
 
 message CLobbyGuildDetails {
@@ -327,6 +341,7 @@ message CSODOTALobby {
 		SPECTATOR = 11;
 		EVENT_MATCH = 12;
 		GAUNTLET = 13;
+		NEW_PLAYER_POOL = 14;
 	}
 
 	optional uint64 lobby_id = 1 [(key_field) = true];
@@ -428,6 +443,7 @@ message CSODOTALobby {
 	repeated CLobbyGuildDetails guild_details = 118;
 	repeated CMsgLobbyEventPoints lobby_event_points = 119;
 	repeated uint32 requested_hero_ids = 124;
+	repeated CMsgLobbyCoachFriendRequest coach_friend_requests = 125;
 }
 
 message CMsgLobbyPlaytestDetails {
@@ -695,7 +711,7 @@ message CMvpData {
 				kKillEaterEventType_Windrunner_ShackleFocusFireKills = 228;
 				kKillEaterEventType_VengefulSpirit_VengeanceAuraIllusionKills = 229;
 				kKillEaterEventType_Tusk_WalrusPunchKills = 230;
-				kKillEaterEventType_Tinker_TripleHeroLasers = 231;
+				kKillEaterEventType_Tinker_MultiHeroLasers = 231;
 				kKillEaterEventType_TemplarAssassin_MultiHeroPsiBlades = 232;
 				kKillEaterEventType_Sven_KillsDuringGodsStrength = 233;
 				kKillEaterEventType_Sniper_ThreeHeroShrapnels = 234;

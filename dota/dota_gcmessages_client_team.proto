@@ -71,6 +71,46 @@ message CMsgDOTATeam {
 }
 
 message CMsgDOTATeamInfo {
+	message HeroStats {
+		optional uint32 hero_id = 1;
+		optional uint32 picks = 2;
+		optional uint32 wins = 3;
+		optional uint32 bans = 4;
+		optional float avg_kills = 5;
+		optional float avg_deaths = 6;
+		optional float avg_assists = 7;
+		optional float avg_gpm = 8;
+		optional float avg_xpm = 9;
+	}
+
+	message MemberStats {
+		optional uint32 account_id = 1;
+		optional uint32 wins_with_team = 2;
+		optional uint32 losses_with_team = 3;
+		repeated CMsgDOTATeamInfo.HeroStats top_heroes = 4;
+		optional float avg_kills = 5;
+		optional float avg_deaths = 6;
+		optional float avg_assists = 7;
+	}
+
+	message TeamStats {
+		repeated CMsgDOTATeamInfo.HeroStats played_heroes = 1;
+		optional float farming = 2;
+		optional float fighting = 3;
+		optional float versatility = 4;
+		optional float avg_kills = 5;
+		optional float avg_deaths = 6;
+		optional float avg_duration = 7;
+	}
+
+	message DPCResult {
+		optional uint32 league_id = 1;
+		optional uint32 standing = 2;
+		optional uint32 points = 3;
+		optional uint32 earnings = 4;
+		optional uint32 timestamp = 5;
+	}
+
 	message Member {
 		optional uint32 account_id = 1;
 		optional uint32 time_joined = 2;
@@ -100,9 +140,15 @@ message CMsgDOTATeamInfo {
 	optional uint32 losses = 16;
 	optional uint32 games_played_total = 19;
 	optional uint32 games_played_matchmaking = 20;
+	optional string url_logo = 24;
 	repeated uint32 registered_member_account_ids = 30;
+	optional uint32 coach_account_ids = 36;
 	repeated CMsgDOTATeamInfo.AuditEntry audit_entries = 31;
 	optional ELeagueRegion region = 29 [default = LEAGUE_REGION_UNSET];
+	optional string abbreviation = 32;
+	repeated CMsgDOTATeamInfo.MemberStats member_stats = 33;
+	optional CMsgDOTATeamInfo.TeamStats team_stats = 34;
+	repeated CMsgDOTATeamInfo.DPCResult dpc_results = 35;
 }
 
 message CMsgDOTATeamInfoRequest {
@@ -112,6 +158,10 @@ message CMsgDOTATeamInfoRequest {
 message CMsgDOTATeamsInfo {
 	optional uint32 league_id = 1;
 	repeated CMsgDOTATeamInfo teams = 2;
+}
+
+message CMsgDOTATeamInfoList {
+	repeated CMsgDOTATeamInfo teams = 1;
 }
 
 message CMsgDOTAMyTeamInfoRequest {
@@ -127,6 +177,7 @@ message CMsgDOTACreateTeam {
 	optional string country_code = 7;
 	optional string url = 8;
 	optional bool pickup_team = 9;
+	optional string abbreviation = 10;
 }
 
 message CMsgDOTACreateTeamResponse {
@@ -167,6 +218,7 @@ message CMsgDOTAEditTeamDetails {
 	optional string country_code = 8;
 	optional string url = 9;
 	optional bool in_use_by_party = 10;
+	optional string abbreviation = 11;
 }
 
 message CMsgDOTAEditTeamDetailsResponse {

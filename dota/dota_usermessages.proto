@@ -154,6 +154,9 @@ enum EDotaUserMessages {
 	DOTA_UM_EmptyItemSlotAlert = 607;
 	DOTA_UM_AghsStatusAlert = 608;
 	DOTA_UM_PingConfirmation = 609;
+	DOTA_UM_MutedPlayers = 610;
+	DOTA_UM_ContextualTip = 611;
+	DOTA_UM_ChatMessage = 612;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -261,6 +264,7 @@ enum DOTA_CHAT_MESSAGE {
 	CHAT_MESSAGE_ABILITY_DRAFT_START = 110;
 	CHAT_MESSAGE_HERO_FOUND_CANDY = 111;
 	CHAT_MESSAGE_ABILITY_DRAFT_RANDOMED = 112;
+	CHAT_MESSAGE_PRIVATE_COACH_CONNECTED = 113;
 }
 
 enum DOTA_NO_BATTLE_POINTS_REASONS {
@@ -301,6 +305,8 @@ enum DOTA_REPLAY_STATE_EVENT {
 	DOTA_REPLAY_STATE_EVENT_STARTING_HORN = 2;
 	DOTA_REPLAY_STATE_EVENT_FIRST_BLOOD = 3;
 	DOTA_REPLAY_STATE_EVENT_SHOWCASE = 4;
+	DOTA_REPLAY_STATE_EVENT_POST_GAME = 5;
+	DOTA_REPLAY_STATE_EVENT_WAIT_FOR_MAP = 6;
 }
 
 enum EDotaEntityMessages {
@@ -338,6 +344,7 @@ enum DOTA_OVERHEAD_ALERT {
 	OVERHEAD_ALERT_BLOCKED = 21;
 	OVERHEAD_ALERT_ITEM_RECEIVED = 22;
 	OVERHEAD_ALERT_SHARD = 23;
+	OVERHEAD_ALERT_DEADLY_BLOW = 24;
 }
 
 enum DOTA_ROSHAN_PHASE {
@@ -408,6 +415,7 @@ enum EPlayerVoiceListenState {
 	kPVLS_DeniedHLTVTalkerNotBroadcaster = 5;
 	kPVLS_DeniedTeamSpectator = 6;
 	kPVLS_DeniedStudent = 8;
+	kPVLS_DeniedPrivateCoach = 9;
 	kPVLS_Denied = 64;
 	kPVLS_AllowHLTVTalkerIsBroadcaster = 65;
 	kPVLS_AllowCoBroadcaster = 66;
@@ -418,6 +426,7 @@ enum EPlayerVoiceListenState {
 	kPVLS_AllowCoachHearTeam = 71;
 	kPVLS_AllowSameTeam = 72;
 	kPVLS_AllowShowcase = 73;
+	kPVLS_AllowPrivateCoach = 74;
 }
 
 enum EProjectionEvent {
@@ -738,7 +747,7 @@ message CDOTAResponseQuerySerialized {
 }
 
 message CDOTASpeechMatchOnClient {
-	optional int32 concept = 1;
+	optional int32 speech_concept = 1;
 	optional int32 recipient_type = 2;
 	optional CDOTAResponseQuerySerialized responsequery = 3;
 	optional sfixed32 randomseed = 4 [default = 0];
@@ -751,7 +760,7 @@ message CDOTAUserMsg_UnitEvent {
 	}
 
 	message Speech {
-		optional int32 concept = 1;
+		optional int32 speech_concept = 1;
 		optional string response = 2;
 		optional int32 recipient_type = 3;
 		optional int32 level = 4;
@@ -1528,4 +1537,33 @@ message CDOTAUserMsg_AghsStatusAlert {
 	optional uint32 alert_type = 4;
 	optional bool has_scepter = 5;
 	optional bool has_shard = 6;
+}
+
+message CDOTAUserMsg_MutedPlayers {
+	repeated int32 text_muted_player_ids = 1;
+	repeated int32 voice_muted_player_ids = 2;
+}
+
+message CDOTAUserMsg_ContextualTip {
+	optional int32 tip_id = 1;
+	repeated string referenced_abilities = 2;
+	repeated string referenced_units = 3;
+	repeated string panorama_classes = 4;
+	optional bool force_annotation = 5;
+	optional int32 variant = 6;
+	optional int32 int_param = 7;
+	optional int32 int_param2 = 8;
+	optional float float_param = 9;
+	optional float float_param2 = 10;
+	optional string string_param = 11;
+	optional string string_param2 = 12;
+	optional string tip_text_override = 13;
+	optional string tip_annotation_override = 14;
+	optional string panorama_snippet = 15;
+}
+
+message CDOTAUserMsg_ChatMessage {
+	optional int32 source_player_id = 1;
+	optional uint32 channel_type = 2;
+	optional string message_text = 3;
 }
