@@ -15,6 +15,7 @@ var pointerTypes = map[string]bool{
 	"CDOTAGameManager":           true,
 	"CDOTASpectatorGraphManager": true,
 	"CPlayerLocalData":           true,
+	"CPlayer_CameraServices":     true,
 }
 
 var itemCounts = map[string]int{
@@ -84,7 +85,7 @@ func (p *Parser) onCDemoSendTables(m *dota.CDemoSendTables) error {
 					}
 				} else if field.fieldType.count > 0 && field.fieldType.baseType != "char" {
 					field.setModel(fieldModelFixedArray)
-				} else if field.fieldType.baseType == "CUtlVector" {
+				} else if field.fieldType.baseType == "CUtlVector" || field.fieldType.baseType == "CNetworkUtlVectorBase" {
 					field.setModel(fieldModelVariableArray)
 				} else {
 					field.setModel(fieldModelSimple)
