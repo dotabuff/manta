@@ -1,6 +1,9 @@
 syntax = "proto2";
 
 package dota;
+option go_package = "github.com/dotabuff/manta/dota;dota";
+
+import "dota_shared_enums.proto";
 
 option optimize_for = SPEED;
 option cc_generic_services = false;
@@ -31,6 +34,7 @@ enum EGuildAuditAction {
 	k_EGuildAuditAction_AdminPermitted = 24;
 	k_EGuildAuditAction_AdminBlocked = 25;
 	k_EGuildAuditAction_AdminBannedUser = 26;
+	k_EGuildAuditAction_AdminExonerated = 27;
 }
 
 enum EGuildChatType {
@@ -134,7 +138,7 @@ message CMsgGuildFeedEvent {
 
 message CMsgClientToGCCreateGuild {
 	optional CMsgGuildInfo guild_info = 1;
-	optional EGuildChatType guild_chat_type = 2 [default = k_EGuildChatType_Unspecified];
+	optional EGuildChatType guild_chat_type = 2;
 }
 
 message CMsgClientToGCCreateGuildResponse {
@@ -157,14 +161,14 @@ message CMsgClientToGCCreateGuildResponse {
 		k_eBlocked = 15;
 	}
 
-	optional CMsgClientToGCCreateGuildResponse.EResponse result = 1 [default = k_eInternalError];
+	optional CMsgClientToGCCreateGuildResponse.EResponse result = 1;
 	optional uint32 guild_id = 2;
 }
 
 message CMsgClientToGCSetGuildInfo {
 	optional uint32 guild_id = 1;
 	optional CMsgGuildInfo guild_info = 2;
-	optional EGuildChatType guild_chat_type = 3 [default = k_EGuildChatType_Unspecified];
+	optional EGuildChatType guild_chat_type = 3;
 }
 
 message CMsgClientToGCSetGuildInfoResponse {
@@ -186,7 +190,7 @@ message CMsgClientToGCSetGuildInfoResponse {
 		k_eBlocked = 14;
 	}
 
-	optional CMsgClientToGCSetGuildInfoResponse.EResponse result = 1 [default = k_eInternalError];
+	optional CMsgClientToGCSetGuildInfoResponse.EResponse result = 1;
 }
 
 message CMsgClientToGCRequestGuildData {
@@ -204,7 +208,7 @@ message CMsgClientToGCRequestGuildDataResponse {
 		k_eNotMember = 6;
 	}
 
-	optional CMsgClientToGCRequestGuildDataResponse.EResponse result = 1 [default = k_eInternalError];
+	optional CMsgClientToGCRequestGuildDataResponse.EResponse result = 1;
 	optional CMsgGuildData guild_data = 2;
 }
 
@@ -230,30 +234,12 @@ message CMsgClientToGCRequestGuildMembershipResponse {
 		k_eTimeout = 4;
 	}
 
-	optional CMsgClientToGCRequestGuildMembershipResponse.EResponse result = 1 [default = k_eInternalError];
+	optional CMsgClientToGCRequestGuildMembershipResponse.EResponse result = 1;
 	optional CMsgAccountGuildMemberships guild_memberships = 2;
 }
 
 message CMsgGCToClientGuildMembershipUpdated {
 	optional CMsgAccountGuildMemberships guild_memberships = 1;
-}
-
-message CMsgClientToGCRequestGuildSummary {
-	optional uint32 guild_id = 1;
-}
-
-message CMsgClientToGCRequestGuildSummaryResponse {
-	enum EResponse {
-		k_eInternalError = 0;
-		k_eSuccess = 1;
-		k_eTooBusy = 2;
-		k_eDisabled = 3;
-		k_eTimeout = 4;
-		k_eInvalidGuild = 5;
-	}
-
-	optional CMsgClientToGCRequestGuildSummaryResponse.EResponse result = 1 [default = k_eInternalError];
-	optional CMsgGuildSummary guild_summary = 2;
 }
 
 message CMsgClientToGCJoinGuild {
@@ -275,7 +261,7 @@ message CMsgClientToGCJoinGuildResponse {
 		k_eGuildRankTooLow = 10;
 	}
 
-	optional CMsgClientToGCJoinGuildResponse.EResponse result = 1 [default = k_eInternalError];
+	optional CMsgClientToGCJoinGuildResponse.EResponse result = 1;
 }
 
 message CMsgClientToGCLeaveGuild {
@@ -294,7 +280,7 @@ message CMsgClientToGCLeaveGuildResponse {
 		k_eLastAdmin = 7;
 	}
 
-	optional CMsgClientToGCLeaveGuildResponse.EResponse result = 1 [default = k_eInternalError];
+	optional CMsgClientToGCLeaveGuildResponse.EResponse result = 1;
 }
 
 message CMsgClientToGCKickGuildMember {
@@ -316,7 +302,7 @@ message CMsgClientToGCKickGuildMemberResponse {
 		k_eCantKickSelf = 9;
 	}
 
-	optional CMsgClientToGCKickGuildMemberResponse.EResponse result = 1 [default = k_eInternalError];
+	optional CMsgClientToGCKickGuildMemberResponse.EResponse result = 1;
 }
 
 message CMsgClientToGCSetGuildMemberRole {
@@ -340,7 +326,7 @@ message CMsgClientToGCSetGuildMemberRoleResponse {
 		k_eAdminViolation = 10;
 	}
 
-	optional CMsgClientToGCSetGuildMemberRoleResponse.EResponse result = 1 [default = k_eInternalError];
+	optional CMsgClientToGCSetGuildMemberRoleResponse.EResponse result = 1;
 }
 
 message CMsgClientToGCInviteToGuild {
@@ -365,7 +351,7 @@ message CMsgClientToGCInviteToGuildResponse {
 		k_eInvalidUser = 12;
 	}
 
-	optional CMsgClientToGCInviteToGuildResponse.EResponse result = 1 [default = k_eInternalError];
+	optional CMsgClientToGCInviteToGuildResponse.EResponse result = 1;
 }
 
 message CMsgClientToGCDeclineInviteToGuild {
@@ -383,7 +369,7 @@ message CMsgClientToGCDeclineInviteToGuildResponse {
 		k_eNoInviteFound = 6;
 	}
 
-	optional CMsgClientToGCDeclineInviteToGuildResponse.EResponse result = 1 [default = k_eInternalError];
+	optional CMsgClientToGCDeclineInviteToGuildResponse.EResponse result = 1;
 }
 
 message CMsgClientToGCAcceptInviteToGuild {
@@ -405,7 +391,7 @@ message CMsgClientToGCAcceptInviteToGuildResponse {
 		k_eAlreadyInGuild = 10;
 	}
 
-	optional CMsgClientToGCAcceptInviteToGuildResponse.EResponse result = 1 [default = k_eInternalError];
+	optional CMsgClientToGCAcceptInviteToGuildResponse.EResponse result = 1;
 }
 
 message CMsgClientToGCCancelInviteToGuild {
@@ -425,7 +411,7 @@ message CMsgClientToGCCancelInviteToGuildResponse {
 		k_eNoPermissions = 7;
 	}
 
-	optional CMsgClientToGCCancelInviteToGuildResponse.EResponse result = 1 [default = k_eInternalError];
+	optional CMsgClientToGCCancelInviteToGuildResponse.EResponse result = 1;
 }
 
 message CMsgClientToGCAddGuildRole {
@@ -451,7 +437,7 @@ message CMsgClientToGCAddGuildRoleResponse {
 		k_eBlocked = 12;
 	}
 
-	optional CMsgClientToGCAddGuildRoleResponse.EResponse result = 1 [default = k_eInternalError];
+	optional CMsgClientToGCAddGuildRoleResponse.EResponse result = 1;
 	optional uint32 role_id = 2;
 }
 
@@ -479,7 +465,7 @@ message CMsgClientToGCModifyGuildRoleResponse {
 		k_eBlocked = 12;
 	}
 
-	optional CMsgClientToGCModifyGuildRoleResponse.EResponse result = 1 [default = k_eInternalError];
+	optional CMsgClientToGCModifyGuildRoleResponse.EResponse result = 1;
 }
 
 message CMsgClientToGCRemoveGuildRole {
@@ -502,7 +488,7 @@ message CMsgClientToGCRemoveGuildRoleResponse {
 		k_eCantRemoveDefaultRole = 10;
 	}
 
-	optional CMsgClientToGCRemoveGuildRoleResponse.EResponse result = 1 [default = k_eInternalError];
+	optional CMsgClientToGCRemoveGuildRoleResponse.EResponse result = 1;
 }
 
 message CMsgClientToGCSetGuildRoleOrder {
@@ -525,7 +511,7 @@ message CMsgClientToGCSetGuildRoleOrderResponse {
 		k_eAdminViolation = 9;
 	}
 
-	optional CMsgClientToGCSetGuildRoleOrderResponse.EResponse result = 1 [default = k_eInternalError];
+	optional CMsgClientToGCSetGuildRoleOrderResponse.EResponse result = 1;
 	repeated uint32 confirmed_role_ids = 2;
 }
 
@@ -545,7 +531,7 @@ message CMsgClientToGCRequestGuildFeedResponse {
 		k_eNoPermissions = 6;
 	}
 
-	optional CMsgClientToGCRequestGuildFeedResponse.EResponse result = 1 [default = k_eInternalError];
+	optional CMsgClientToGCRequestGuildFeedResponse.EResponse result = 1;
 	optional uint32 guild_id = 2;
 	repeated CMsgGuildFeedEvent feed_events = 3;
 }
@@ -570,7 +556,7 @@ message CMsgClientToGCAddPlayerToGuildChatResponse {
 		k_eSteamChatNotEnabled = 7;
 	}
 
-	optional CMsgClientToGCAddPlayerToGuildChatResponse.EResponse result = 1 [default = k_eInternalError];
+	optional CMsgClientToGCAddPlayerToGuildChatResponse.EResponse result = 1;
 }
 
 message CMsgFindGuildByTagResponse {
@@ -584,7 +570,7 @@ message CMsgFindGuildByTagResponse {
 		k_eGuildNotFound = 6;
 	}
 
-	optional CMsgFindGuildByTagResponse.EResponse result = 1 [default = k_eInternalError];
+	optional CMsgFindGuildByTagResponse.EResponse result = 1;
 	optional uint32 guild_id = 2;
 	optional CMsgGuildSummary guild_summary = 3;
 }
@@ -603,7 +589,7 @@ message CMsgSearchForOpenGuildsResponse {
 		k_eTimeout = 4;
 	}
 
-	optional CMsgSearchForOpenGuildsResponse.EResponse result = 1 [default = k_eInternalError];
+	optional CMsgSearchForOpenGuildsResponse.EResponse result = 1;
 	repeated CMsgSearchForOpenGuildsResponse.SearchResult search_results = 2;
 	optional bool use_whitelist = 3;
 }
@@ -632,7 +618,7 @@ message CMsgClientToGCReportGuildContentResponse {
 		k_eFlagsInvalid = 6;
 	}
 
-	optional CMsgClientToGCReportGuildContentResponse.EResponse result = 1 [default = k_eInternalError];
+	optional CMsgClientToGCReportGuildContentResponse.EResponse result = 1;
 }
 
 message CMsgClientToGCRequestAccountGuildPersonaInfo {
@@ -649,7 +635,7 @@ message CMsgClientToGCRequestAccountGuildPersonaInfoResponse {
 		k_eInvalidAccount = 5;
 	}
 
-	optional CMsgClientToGCRequestAccountGuildPersonaInfoResponse.EResponse result = 1 [default = k_eInternalError];
+	optional CMsgClientToGCRequestAccountGuildPersonaInfoResponse.EResponse result = 1;
 	optional CMsgAccountGuildsPersonaInfo persona_info = 2;
 }
 
@@ -667,6 +653,6 @@ message CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse {
 		k_eInvalidRequest = 5;
 	}
 
-	optional CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse.EResponse result = 1 [default = k_eInternalError];
+	optional CMsgClientToGCRequestAccountGuildPersonaInfoBatchResponse.EResponse result = 1;
 	repeated CMsgAccountGuildsPersonaInfo persona_infos = 2;
 }

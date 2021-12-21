@@ -1,6 +1,7 @@
 syntax = "proto2";
 
 package dota;
+option go_package = "github.com/dotabuff/manta/dota;dota";
 
 import "dota_shared_enums.proto";
 
@@ -33,6 +34,12 @@ message CMsgDOTALeagueNode {
 		optional uint32 winning_team_id = 2;
 	}
 
+	message VOD {
+		optional uint32 series_game = 1;
+		optional uint32 stream_id = 2;
+		optional string url = 3;
+	}
+
 	optional string name = 1;
 	optional uint32 node_id = 2;
 	optional uint32 node_group_id = 3;
@@ -40,7 +47,7 @@ message CMsgDOTALeagueNode {
 	optional uint32 losing_node_id = 5;
 	optional uint32 incoming_node_id_1 = 6;
 	optional uint32 incoming_node_id_2 = 7;
-	optional ELeagueNodeType node_type = 8 [default = INVALID_NODE_TYPE];
+	optional ELeagueNodeType node_type = 8;
 	optional uint32 scheduled_time = 9;
 	optional uint32 actual_time = 19;
 	optional uint32 series_id = 10;
@@ -52,6 +59,7 @@ message CMsgDOTALeagueNode {
 	optional bool has_started = 16;
 	optional bool is_completed = 17;
 	repeated uint32 stream_ids = 18;
+	repeated CMsgDOTALeagueNode.VOD vods = 20;
 }
 
 message CMsgDOTALeagueNodeGroup {
@@ -66,6 +74,10 @@ message CMsgDOTALeagueNodeGroup {
 		optional uint32 losses = 8;
 		optional int64 score = 9;
 		optional string team_abbreviation = 10;
+		optional int64 score_tiebreak_group = 11;
+		optional int64 score_tiebreak_below = 12;
+		optional int64 score_tiebreak_random = 13;
+		optional bool is_pro = 14;
 	}
 
 	optional string name = 1;
@@ -75,15 +87,15 @@ message CMsgDOTALeagueNodeGroup {
 	optional uint32 advancing_node_group_id = 5;
 	optional uint32 advancing_team_count = 6;
 	optional uint32 team_count = 7;
-	optional ELeagueNodeGroupType node_group_type = 8 [default = INVALID_GROUP_TYPE];
-	optional ELeagueNodeType default_node_type = 9 [default = INVALID_NODE_TYPE];
+	optional ELeagueNodeGroupType node_group_type = 8;
+	optional ELeagueNodeType default_node_type = 9;
 	optional uint32 round = 10;
 	optional uint32 max_rounds = 11;
 	optional bool is_tiebreaker = 12;
 	optional bool is_final_group = 13;
 	optional bool is_completed = 14;
-	optional ELeaguePhase phase = 18 [default = LEAGUE_PHASE_UNSET];
-	optional ELeagueRegion region = 19 [default = LEAGUE_REGION_UNSET];
+	optional ELeaguePhase phase = 18;
+	optional ELeagueRegion region = 19;
 	optional uint32 start_time = 20;
 	optional uint32 end_time = 21;
 	optional uint32 secondary_advancing_node_group_id = 22;
@@ -100,8 +112,8 @@ message CMsgDOTALeague {
 	message Info {
 		optional uint32 league_id = 1;
 		optional string name = 2;
-		optional ELeagueTier tier = 3 [default = LEAGUE_TIER_UNSET];
-		optional ELeagueRegion region = 4 [default = LEAGUE_REGION_UNSET];
+		optional ELeagueTier tier = 3;
+		optional ELeagueRegion region = 4;
 		optional string url = 5;
 		optional string description = 6;
 		optional string notes = 7;
@@ -109,7 +121,7 @@ message CMsgDOTALeague {
 		optional uint32 end_timestamp = 9;
 		optional uint32 pro_circuit_points = 10;
 		optional uint32 image_bits = 11;
-		optional ELeagueStatus status = 12 [default = LEAGUE_STATUS_UNSET];
+		optional ELeagueStatus status = 12;
 		optional uint32 most_recent_activity = 13;
 		optional uint32 registration_period = 14;
 	}
@@ -138,7 +150,7 @@ message CMsgDOTALeague {
 		optional uint32 stream_id = 1;
 		optional uint32 language = 2;
 		optional string name = 3;
-		optional ELeagueBroadcastProvider broadcast_provider = 4 [default = LEAGUE_BROADCAST_UNKNOWN];
+		optional ELeagueBroadcastProvider broadcast_provider = 4;
 		optional string stream_url = 5;
 		optional string vod_url = 6;
 	}
@@ -174,8 +186,8 @@ message CMsgDOTALeagueList {
 message CMsgDOTALeagueInfo {
 	optional uint32 league_id = 1;
 	optional string name = 2;
-	optional ELeagueTier tier = 3 [default = LEAGUE_TIER_UNSET];
-	optional ELeagueRegion region = 4 [default = LEAGUE_REGION_UNSET];
+	optional ELeagueTier tier = 3;
+	optional ELeagueRegion region = 4;
 	optional uint32 most_recent_activity = 5;
 	optional uint32 total_prize_pool = 6;
 	optional uint32 start_timestamp = 7;
@@ -201,6 +213,7 @@ message CMsgDOTALeagueLiveGames {
 		optional uint32 spectators = 8;
 		optional uint32 league_node_id = 11;
 		optional uint32 series_id = 12;
+		optional uint64 match_id = 13;
 	}
 
 	repeated CMsgDOTALeagueLiveGames.LiveGame games = 1;
@@ -222,15 +235,6 @@ message CMsgDOTALeaguePrizePool {
 }
 
 message CMsgDOTALeagueInfoListAdminsRequest {
-}
-
-message CMsgDOTALeagueNodeRequest {
-	optional uint32 league_id = 1;
-	optional uint32 node_id = 2;
-}
-
-message CMsgDOTALeagueNodeResponse {
-	optional CMsgDOTALeagueNode node = 1;
 }
 
 message CMsgDOTALeagueAvailableLobbyNodesRequest {
@@ -283,7 +287,7 @@ message CMsgDOTADPCLeagueResults {
 		optional uint32 points = 6;
 		optional uint32 earnings = 7;
 		optional uint32 timestamp = 8;
-		optional ELeaguePhase phase = 9 [default = LEAGUE_PHASE_UNSET];
+		optional ELeaguePhase phase = 9;
 		optional string team_abbreviation = 10;
 	}
 
@@ -312,6 +316,7 @@ message CMsgDOTADPCSeasonResults {
 		optional uint32 points = 4;
 		optional uint32 earnings = 5;
 		optional uint32 audit_action = 6;
+		optional uint32 audit_data = 7;
 	}
 
 	message TeamResult {

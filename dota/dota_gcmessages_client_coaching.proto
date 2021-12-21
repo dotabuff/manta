@@ -1,9 +1,10 @@
 syntax = "proto2";
 
 package dota;
+option go_package = "github.com/dotabuff/manta/dota;dota";
 
 import "dota_shared_enums.proto";
-import "dota_gcmessages_common_match_management.proto";
+import "dota_gcmessages_common_lobby.proto";
 
 option optimize_for = SPEED;
 option cc_generic_services = false;
@@ -37,7 +38,7 @@ enum EPlayerCoachMatchFlag {
 
 message CMsgPlayerCoachMatch {
 	optional uint64 match_id = 1;
-	optional EMatchOutcome match_outcome = 2 [default = k_EMatchOutcome_Unknown];
+	optional EMatchOutcome match_outcome = 2;
 	optional uint32 coached_team = 3;
 	optional fixed32 start_time = 4;
 	optional uint32 duration = 5;
@@ -48,14 +49,14 @@ message CMsgPlayerCoachMatch {
 message CMsgPrivateCoachingSessionMember {
 	optional uint32 account_id = 1;
 	optional uint32 member_flags = 2;
-	optional ECoachTeammateRating member_session_rating = 3 [default = k_ECoachTeammateRating_None];
+	optional ECoachTeammateRating member_session_rating = 3;
 }
 
 message CMsgPrivateCoachingSession {
 	optional uint64 private_coaching_session_id = 1;
 	optional fixed32 requested_timestamp = 2;
 	optional uint32 requested_language = 3;
-	optional EPrivateCoachingSessionState coaching_session_state = 4 [default = k_ePrivateCoachingSessionState_Invalid];
+	optional EPrivateCoachingSessionState coaching_session_state = 4;
 	repeated CMsgPrivateCoachingSessionMember session_members = 5;
 	optional uint64 current_lobby_id = 6;
 	optional uint64 current_server_steam_id = 7;
@@ -92,7 +93,7 @@ message CMsgClientToGCRequestPlayerCoachMatchesResponse {
 		k_eDisabled = 3;
 	}
 
-	optional CMsgClientToGCRequestPlayerCoachMatchesResponse.EResponse result = 1 [default = k_eInternalError];
+	optional CMsgClientToGCRequestPlayerCoachMatchesResponse.EResponse result = 1;
 	repeated CMsgPlayerCoachMatch coach_matches = 2;
 }
 
@@ -108,14 +109,14 @@ message CMsgClientToGCRequestPlayerCoachMatchResponse {
 		k_eDisabled = 3;
 	}
 
-	optional CMsgClientToGCRequestPlayerCoachMatchResponse.EResponse result = 1 [default = k_eInternalError];
+	optional CMsgClientToGCRequestPlayerCoachMatchResponse.EResponse result = 1;
 	optional CMsgPlayerCoachMatch coach_match = 2;
 }
 
 message CMsgClientToGCSubmitCoachTeammateRating {
 	optional uint64 match_id = 1;
 	optional uint32 coach_account_id = 2;
-	optional ECoachTeammateRating rating = 3 [default = k_ECoachTeammateRating_None];
+	optional ECoachTeammateRating rating = 3;
 	optional string reason = 4;
 }
 
@@ -135,7 +136,7 @@ message CMsgClientToGCSubmitCoachTeammateRatingResponse {
 		k_eMatchNotEligible = 11;
 	}
 
-	optional CMsgClientToGCSubmitCoachTeammateRatingResponse.EResponse result = 1 [default = k_eInternalError];
+	optional CMsgClientToGCSubmitCoachTeammateRatingResponse.EResponse result = 1;
 }
 
 message CMsgGCToClientCoachTeammateRatingsChanged {
@@ -164,7 +165,7 @@ message CMsgClientToGCRequestPrivateCoachingSessionResponse {
 		k_eMatchBan = 13;
 	}
 
-	optional CMsgClientToGCRequestPrivateCoachingSessionResponse.EResponse result = 1 [default = k_eInternalError];
+	optional CMsgClientToGCRequestPrivateCoachingSessionResponse.EResponse result = 1;
 	optional CMsgPrivateCoachingSession coaching_session = 2;
 }
 
@@ -198,7 +199,7 @@ message CMsgClientToGCAcceptPrivateCoachingSessionResponse {
 		k_eCoachRankTooLow = 21;
 	}
 
-	optional CMsgClientToGCAcceptPrivateCoachingSessionResponse.EResponse result = 1 [default = k_eInternalError];
+	optional CMsgClientToGCAcceptPrivateCoachingSessionResponse.EResponse result = 1;
 	optional CMsgPrivateCoachingSession coaching_session = 2;
 }
 
@@ -216,7 +217,7 @@ message CMsgClientToGCLeavePrivateCoachingSessionResponse {
 		k_eAlreadyLeft = 6;
 	}
 
-	optional CMsgClientToGCLeavePrivateCoachingSessionResponse.EResponse result = 1 [default = k_eInternalError];
+	optional CMsgClientToGCLeavePrivateCoachingSessionResponse.EResponse result = 1;
 }
 
 message CMsgClientToGCGetCurrentPrivateCoachingSession {
@@ -231,7 +232,7 @@ message CMsgClientToGCGetCurrentPrivateCoachingSessionResponse {
 		k_eTimeout = 4;
 	}
 
-	optional CMsgClientToGCGetCurrentPrivateCoachingSessionResponse.EResponse result = 1 [default = k_eInternalError];
+	optional CMsgClientToGCGetCurrentPrivateCoachingSessionResponse.EResponse result = 1;
 	optional CMsgPrivateCoachingSession current_session = 2;
 }
 
@@ -241,7 +242,7 @@ message CMsgGCToClientPrivateCoachingSessionUpdated {
 
 message CMsgClientToGCSubmitPrivateCoachingSessionRating {
 	optional uint64 coaching_session_id = 1;
-	optional ECoachTeammateRating session_rating = 2 [default = k_ECoachTeammateRating_None];
+	optional ECoachTeammateRating session_rating = 2;
 }
 
 message CMsgClientToGCSubmitPrivateCoachingSessionRatingResponse {
@@ -260,7 +261,7 @@ message CMsgClientToGCSubmitPrivateCoachingSessionRatingResponse {
 		k_eInvalidRating = 11;
 	}
 
-	optional CMsgClientToGCSubmitPrivateCoachingSessionRatingResponse.EResponse result = 1 [default = k_eInternalError];
+	optional CMsgClientToGCSubmitPrivateCoachingSessionRatingResponse.EResponse result = 1;
 }
 
 message CMsgClientToGCGetAvailablePrivateCoachingSessions {
@@ -276,7 +277,7 @@ message CMsgClientToGCGetAvailablePrivateCoachingSessionsResponse {
 		k_eTimeout = 4;
 	}
 
-	optional CMsgClientToGCGetAvailablePrivateCoachingSessionsResponse.EResponse result = 1 [default = k_eInternalError];
+	optional CMsgClientToGCGetAvailablePrivateCoachingSessionsResponse.EResponse result = 1;
 	optional CMsgAvailablePrivateCoachingSessionList available_sessions_list = 2;
 }
 
@@ -292,7 +293,7 @@ message CMsgClientToGCGetAvailablePrivateCoachingSessionsSummaryResponse {
 		k_eTimeout = 4;
 	}
 
-	optional CMsgClientToGCGetAvailablePrivateCoachingSessionsSummaryResponse.EResponse result = 1 [default = k_eInternalError];
+	optional CMsgClientToGCGetAvailablePrivateCoachingSessionsSummaryResponse.EResponse result = 1;
 	optional CMsgAvailablePrivateCoachingSessionSummary coaching_session_summary = 2;
 }
 
@@ -323,7 +324,7 @@ message CMsgClientToGCJoinPrivateCoachingSessionLobbyResponse {
 		k_eJoinFailed = 19;
 	}
 
-	optional CMsgClientToGCJoinPrivateCoachingSessionLobbyResponse.EResponse result = 1 [default = k_eInternalError];
+	optional CMsgClientToGCJoinPrivateCoachingSessionLobbyResponse.EResponse result = 1;
 }
 
 message CMsgClientToGCCoachFriend {
@@ -354,12 +355,12 @@ message CMsgClientToGCCoachFriendResponse {
 		k_eRequestRejected = 19;
 	}
 
-	optional CMsgClientToGCCoachFriendResponse.EResponse result = 1 [default = k_eInternalError];
+	optional CMsgClientToGCCoachFriendResponse.EResponse result = 1;
 }
 
 message CMsgClientToGCRespondToCoachFriendRequest {
 	optional uint32 coach_account_id = 1;
-	optional ELobbyMemberCoachRequestState response = 2 [default = k_eLobbyMemberCoachRequestState_None];
+	optional ELobbyMemberCoachRequestState response = 2;
 }
 
 message CMsgClientToGCRespondToCoachFriendRequestResponse {
@@ -379,5 +380,5 @@ message CMsgClientToGCRespondToCoachFriendRequestResponse {
 		k_eAlreadyResponded = 12;
 	}
 
-	optional CMsgClientToGCRespondToCoachFriendRequestResponse.EResponse result = 1 [default = k_eInternalError];
+	optional CMsgClientToGCRespondToCoachFriendRequestResponse.EResponse result = 1;
 }

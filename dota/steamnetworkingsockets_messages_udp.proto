@@ -1,6 +1,7 @@
 syntax = "proto2";
 
 package dota;
+option go_package = "github.com/dotabuff/manta/dota;dota";
 
 import "steamnetworkingsockets_messages_certs.proto";
 import "steamnetworkingsockets_messages.proto";

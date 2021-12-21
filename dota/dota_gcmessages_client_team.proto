@@ -1,6 +1,7 @@
 syntax = "proto2";
 
 package dota;
+option go_package = "github.com/dotabuff/manta/dota;dota";
 
 import "dota_shared_enums.proto";
 
@@ -22,52 +23,6 @@ enum ETeamInviteResult {
 	TEAM_INVITE_ERROR_INVITER_NOT_ADMIN = 11;
 	TEAM_INVITE_ERROR_INCORRECT_USER_RESPONDED = 12;
 	TEAM_INVITE_ERROR_UNSPECIFIED = 13;
-}
-
-message CMsgDOTATeamMemberSDO {
-	optional uint32 account_id = 1;
-	repeated uint32 team_ids = 2;
-	optional uint32 profile_team_id = 3;
-}
-
-message CMsgDOTATeamAdminSDO {
-	optional uint32 account_id = 1;
-	repeated uint32 team_ids = 2;
-}
-
-message CMsgDOTATeamMember {
-	optional uint32 account_id = 1;
-	optional uint32 time_joined = 4;
-}
-
-message CMsgDOTATeam {
-	repeated CMsgDOTATeamMember members = 1;
-	optional uint32 team_id = 2;
-	optional string name = 3;
-	optional string tag = 4;
-	optional uint32 admin_id = 5;
-	optional uint32 time_created = 6;
-	optional bool disbanded = 7;
-	optional uint32 wins = 8;
-	optional uint32 losses = 9;
-	optional uint32 rank = 10;
-	optional uint32 calibration_games_remaining = 24;
-	optional uint64 logo = 11;
-	optional uint64 base_logo = 12;
-	optional uint64 banner_logo = 13;
-	optional uint64 sponsor_logo = 14;
-	optional string country_code = 15;
-	optional string url = 16;
-	optional uint32 fullgamesplayed = 17;
-	repeated uint32 leagues = 18;
-	optional uint32 gamesplayed = 19;
-	optional uint32 gamesplayedwithcurrentroster = 20;
-	optional uint32 teammatchmakinggamesplayed = 21;
-	optional uint32 lastplayedgametime = 22;
-	optional uint32 lastrenametime = 23;
-	repeated uint64 recent_match_ids = 25;
-	repeated uint64 top_match_ids = 26;
-	optional bool pickup_team = 27;
 }
 
 message CMsgDOTATeamInfo {
@@ -115,6 +70,9 @@ message CMsgDOTATeamInfo {
 		optional uint32 account_id = 1;
 		optional uint32 time_joined = 2;
 		optional bool admin = 3;
+		optional string pro_name = 6;
+		optional Fantasy_Roles role = 8;
+		optional string real_name = 9;
 	}
 
 	message AuditEntry {
@@ -142,17 +100,16 @@ message CMsgDOTATeamInfo {
 	optional uint32 games_played_matchmaking = 20;
 	optional string url_logo = 24;
 	repeated uint32 registered_member_account_ids = 30;
-	optional uint32 coach_account_ids = 36;
+	optional uint32 coach_account_id = 36;
 	repeated CMsgDOTATeamInfo.AuditEntry audit_entries = 31;
-	optional ELeagueRegion region = 29 [default = LEAGUE_REGION_UNSET];
+	optional ELeagueRegion region = 29;
 	optional string abbreviation = 32;
 	repeated CMsgDOTATeamInfo.MemberStats member_stats = 33;
 	optional CMsgDOTATeamInfo.TeamStats team_stats = 34;
 	repeated CMsgDOTATeamInfo.DPCResult dpc_results = 35;
-}
-
-message CMsgDOTATeamInfoRequest {
-	optional CMsgDOTATeamInfo result = 1;
+	optional string color_primary = 37;
+	optional string color_secondary = 38;
+	optional uint32 team_captain = 39;
 }
 
 message CMsgDOTATeamsInfo {
@@ -203,7 +160,7 @@ message CMsgDOTACreateTeamResponse {
 		INVALID_ACCOUNT_TYPE = 17;
 	}
 
-	optional CMsgDOTACreateTeamResponse.Result result = 1 [default = INVALID];
+	optional CMsgDOTACreateTeamResponse.Result result = 1;
 	optional uint32 team_id = 2;
 }
 
@@ -230,29 +187,7 @@ message CMsgDOTAEditTeamDetailsResponse {
 		FAILURE_UNSPECIFIED_ERROR = 4;
 	}
 
-	optional CMsgDOTAEditTeamDetailsResponse.Result result = 1 [default = SUCCESS];
-}
-
-message CMsgDOTATeamProfileResponse {
-	optional uint32 eresult = 1;
-	optional CMsgDOTATeam team = 2;
-}
-
-message CMsgDOTAProTeamListRequest {
-}
-
-message CMsgDOTAProTeamListResponse {
-	message TeamEntry {
-		optional uint32 team_id = 1;
-		optional string tag = 2;
-		optional uint32 time_created = 3;
-		optional uint64 logo = 4;
-		optional string country_code = 5;
-		optional uint32 member_count = 6;
-	}
-
-	repeated CMsgDOTAProTeamListResponse.TeamEntry teams = 1;
-	optional uint32 eresult = 2;
+	optional CMsgDOTAEditTeamDetailsResponse.Result result = 1;
 }
 
 message CMsgDOTATeamInvite_InviterToGC {
@@ -261,7 +196,7 @@ message CMsgDOTATeamInvite_InviterToGC {
 }
 
 message CMsgDOTATeamInvite_GCImmediateResponseToInviter {
-	optional ETeamInviteResult result = 1 [default = TEAM_INVITE_SUCCESS];
+	optional ETeamInviteResult result = 1;
 	optional string invitee_name = 2;
 	optional uint32 required_play_time = 3;
 }
@@ -274,16 +209,16 @@ message CMsgDOTATeamInvite_GCRequestToInvitee {
 }
 
 message CMsgDOTATeamInvite_InviteeResponseToGC {
-	optional ETeamInviteResult result = 1 [default = TEAM_INVITE_SUCCESS];
+	optional ETeamInviteResult result = 1;
 }
 
 message CMsgDOTATeamInvite_GCResponseToInviter {
-	optional ETeamInviteResult result = 1 [default = TEAM_INVITE_SUCCESS];
+	optional ETeamInviteResult result = 1;
 	optional string invitee_name = 2;
 }
 
 message CMsgDOTATeamInvite_GCResponseToInvitee {
-	optional ETeamInviteResult result = 1 [default = TEAM_INVITE_SUCCESS];
+	optional ETeamInviteResult result = 1;
 	optional string team_name = 2;
 }
 
@@ -302,7 +237,7 @@ message CMsgDOTAKickTeamMemberResponse {
 		FAILURE_UNSPECIFIED_ERROR = 5;
 	}
 
-	optional CMsgDOTAKickTeamMemberResponse.Result result = 1 [default = SUCCESS];
+	optional CMsgDOTAKickTeamMemberResponse.Result result = 1;
 }
 
 message CMsgDOTATransferTeamAdmin {
@@ -320,7 +255,7 @@ message CMsgDOTATransferTeamAdminResponse {
 		FAILURE_UNSPECIFIED_ERROR = 5;
 	}
 
-	optional CMsgDOTATransferTeamAdminResponse.Result result = 1 [default = SUCCESS];
+	optional CMsgDOTATransferTeamAdminResponse.Result result = 1;
 }
 
 message CMsgDOTALeaveTeam {
@@ -335,7 +270,7 @@ message CMsgDOTALeaveTeamResponse {
 		FAILURE_UNSPECIFIED_ERROR = 3;
 	}
 
-	optional CMsgDOTALeaveTeamResponse.Result result = 1 [default = SUCCESS];
+	optional CMsgDOTALeaveTeamResponse.Result result = 1;
 }
 
 message CMsgDOTABetaParticipation {

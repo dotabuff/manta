@@ -1,6 +1,7 @@
 syntax = "proto2";
 
 package dota;
+option go_package = "github.com/dotabuff/manta/dota;dota";
 
 import "steammessages.proto";
 
@@ -52,12 +53,6 @@ message CMsgSDOAssert {
 
 	optional int32 sdo_type = 1;
 	repeated CMsgSDOAssert.Request requests = 2;
-}
-
-message CMsgSHA1Digest {
-	required fixed64 block1 = 1;
-	required fixed64 block2 = 2;
-	required fixed32 block3 = 3;
 }
 
 message CMsgSOIDOwner {
@@ -155,7 +150,7 @@ message CGCToGCMsgMasterAck {
 }
 
 message CGCToGCMsgMasterAck_Response {
-	optional int32 eresult = 1 [default = 2];
+	optional int32 eresult = 1;
 }
 
 message CMsgGCToGCUniverseStartup {
@@ -218,10 +213,10 @@ message CMsgClientHello {
 	optional uint32 version = 1;
 	repeated CMsgSOCacheHaveVersion socache_have_versions = 2;
 	optional uint32 client_session_need = 3;
-	optional PartnerAccountType client_launcher = 4 [default = PARTNER_NONE];
+	optional PartnerAccountType client_launcher = 4;
 	optional string secret_key = 5;
 	optional uint32 client_language = 6;
-	optional ESourceEngine engine = 7 [default = k_ESE_Source1];
+	optional ESourceEngine engine = 7;
 	optional bytes steamdatagram_login = 8;
 	optional uint32 platform_id = 9;
 	optional bytes game_msg = 10;
@@ -236,6 +231,7 @@ message CMsgClientHello {
 	optional uint32 swap_width = 19;
 	optional uint32 swap_height = 20;
 	optional bool is_steam_china = 22;
+	optional bool is_steam_china_client = 24;
 	optional string platform_name = 23;
 }
 
@@ -252,8 +248,6 @@ message CMsgClientWelcome {
 	repeated CMsgSOCacheSubscriptionCheck uptodate_subscribed_caches = 4;
 	optional CMsgClientWelcome.Location location = 5;
 	optional bytes save_game_key = 6;
-	optional fixed32 item_schema_crc = 7;
-	optional string items_game_url = 8;
 	optional uint32 gc_socache_file_version = 9;
 	optional string txn_country_code = 10;
 	optional bytes game_data2 = 11;
@@ -267,7 +261,7 @@ message CMsgClientWelcome {
 }
 
 message CMsgConnectionStatus {
-	optional GCConnectionStatus status = 1 [default = GCConnectionStatus_HAVE_SESSION];
+	optional GCConnectionStatus status = 1;
 	optional uint32 client_session_need = 2;
 	optional int32 queue_position = 3;
 	optional int32 queue_size = 4;
@@ -349,7 +343,7 @@ message CWorkshop_SetItemPaymentRules_Request {
 		optional uint64 workshop_file_id = 1;
 		optional float revenue_percentage = 2;
 		optional string rule_description = 3;
-		optional uint32 rule_type = 4 [default = 1];
+		optional uint32 rule_type = 4;
 	}
 
 	message WorkshopDirectPaymentRule {

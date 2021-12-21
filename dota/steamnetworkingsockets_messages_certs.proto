@@ -1,6 +1,7 @@
 syntax = "proto2";
 
 package dota;
+option go_package = "github.com/dotabuff/manta/dota;dota";
 
 option optimize_for = SPEED;
 option cc_generic_services = false;
@@ -19,7 +20,7 @@ message CMsgSteamDatagramCertificate {
 		ED25519 = 1;
 	}
 
-	optional CMsgSteamDatagramCertificate.EKeyType key_type = 1 [default = INVALID];
+	optional CMsgSteamDatagramCertificate.EKeyType key_type = 1;
 	optional bytes key_data = 2;
 	optional fixed64 legacy_steam_id = 4;
 	optional CMsgSteamNetworkingIdentityLegacyBinary legacy_identity_binary = 11;

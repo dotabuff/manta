@@ -1,6 +1,7 @@
 syntax = "proto2";
 
 package dota;
+option go_package = "github.com/dotabuff/manta/dota;dota";
 
 import "dota_commonmessages.proto";
 import "dota_shared_enums.proto";
@@ -98,6 +99,7 @@ enum EDotaClientMessages {
 	DOTA_CM_PerfReport = 391;
 	DOTA_CM_ContextualTips_Subscribe = 393;
 	DOTA_CM_ChatMessage = 394;
+	DOTA_CM_AddCommuncationsReportMarker = 395;
 }
 
 message CDOTAClientMsg_MapPing {
@@ -110,10 +112,10 @@ message CDOTAClientMsg_ItemAlert {
 
 message CDOTAClientMsg_EnemyItemAlert {
 	optional uint32 item_entindex = 1;
-	optional int32 rune_type = 2 [default = -1];
-	optional int32 item_level = 3 [default = -1];
-	optional int32 primary_charges = 4 [default = -1];
-	optional int32 secondary_charges = 5 [default = -1];
+	optional int32 rune_type = 2;
+	optional int32 item_level = 3;
+	optional int32 primary_charges = 4;
+	optional int32 secondary_charges = 5;
 }
 
 message CDOTAClientMsg_ModifierAlert {
@@ -160,8 +162,8 @@ message CDOTAClientMsg_UnitsAutoAttackMode {
 		SUMMONED = 1;
 	}
 
-	optional CDOTAClientMsg_UnitsAutoAttackMode.EMode mode = 1 [default = INVALID];
-	optional CDOTAClientMsg_UnitsAutoAttackMode.EUnitType unit_type = 2 [default = NORMAL];
+	optional CDOTAClientMsg_UnitsAutoAttackMode.EMode mode = 1;
+	optional CDOTAClientMsg_UnitsAutoAttackMode.EUnitType unit_type = 2;
 }
 
 message CDOTAClientMsg_UnitsAutoAttackAfterSpell {
@@ -228,8 +230,8 @@ message CDOTAClientMsg_BeginLastHitChallenge {
 }
 
 message CDOTAClientMsg_UpdateQuickBuyItem {
-	optional int32 item_ability_id = 1 [default = -1];
-	optional bool purchasable = 2 [default = false];
+	optional int32 item_ability_id = 1;
+	optional bool purchasable = 2;
 }
 
 message CDOTAClientMsg_UpdateQuickBuy {
@@ -310,7 +312,7 @@ message CDOTAClientMsg_ChallengeSelect {
 }
 
 message CDOTAClientMsg_ChallengeReroll {
-	optional EEvent event_id = 1 [default = EVENT_ID_NONE];
+	optional EEvent event_id = 1;
 	optional uint32 slot_id = 2;
 	optional uint32 sequence_id = 3;
 	optional uint32 hero_id = 4;
@@ -473,7 +475,7 @@ message CDOTAClientMsg_PauseGameOrder {
 }
 
 message CDOTAClientMsg_VersusScene_PlayerBehavior {
-	optional EDOTAVersusScenePlayerBehavior behavior = 1 [default = VS_PLAYER_BEHAVIOR_PLAY_ACTIVITY];
+	optional EDOTAVersusScenePlayerBehavior behavior = 1;
 	optional VersusScene_PlayActivity play_activity = 2;
 	optional VersusScene_ChatWheel chat_wheel = 3;
 	optional VersusScene_PlaybackRate playback_rate = 4;
@@ -486,8 +488,12 @@ message CDOTAClientMsg_EmptyItemSlotAlert {
 
 message CDOTAClientMsg_AddOverwatchReportMarker {
 	optional int32 target_player_id = 1;
-	optional EOverwatchReportReason reason = 2 [default = k_EOverwatchReportReason_Unknown];
+	optional EOverwatchReportReason reason = 2;
 	optional uint32 seconds_ago = 4;
+}
+
+message CDOTAClientMsg_AddCommuncationsReportMarker {
+	optional int32 target_player_id = 1;
 }
 
 message CDOTAClientMsg_AghsStatusAlert {

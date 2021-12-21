@@ -1,11 +1,19 @@
 syntax = "proto2";
 
 package dota;
+option go_package = "github.com/dotabuff/manta/dota;dota";
 
 import "networkbasetypes.proto";
 
 option optimize_for = SPEED;
 option cc_generic_services = false;
+
+enum EPingSource {
+	k_ePingSource_Default = 0;
+	k_ePingSource_Warning = 1;
+	k_ePingSource_Wheel = 2;
+	k_ePingSource_System = 3;
+}
 
 enum EDOTAStatPopupTypes {
 	k_EDOTA_SPT_Textline = 0;
@@ -56,6 +64,7 @@ enum dotaunitorder_t {
 	DOTA_UNIT_ORDER_PREGAME_ADJUST_ITEM_ASSIGNMENT = 36;
 	DOTA_UNIT_ORDER_DROP_ITEM_AT_FOUNTAIN = 37;
 	DOTA_UNIT_ORDER_TAKE_ITEM_FROM_NEUTRAL_ITEM_STASH = 38;
+	DOTA_UNIT_ORDER_MOVE_RELATIVE = 39;
 }
 
 enum EDOTAVersusScenePlayerBehavior {
@@ -70,6 +79,7 @@ message CDOTAMsg_LocationPing {
 	optional int32 target = 3;
 	optional bool direct_ping = 4;
 	optional int32 type = 5;
+	optional EPingSource ping_source = 6;
 }
 
 message CDOTAMsg_ItemAlert {
@@ -93,7 +103,7 @@ message CDOTAMsg_WorldLine {
 }
 
 message CDOTAMsg_SendStatPopup {
-	optional EDOTAStatPopupTypes style = 1 [default = k_EDOTA_SPT_Textline];
+	optional EDOTAStatPopupTypes style = 1;
 	repeated string stat_strings = 2;
 	repeated int32 stat_images = 3;
 	repeated int32 stat_image_types = 4;
@@ -113,7 +123,7 @@ message CDOTAMsg_CoachHUDPing {
 }
 
 message CDOTAMsg_UnitOrder {
-	optional dotaunitorder_t order_type = 2 [default = DOTA_UNIT_ORDER_NONE];
+	optional dotaunitorder_t order_type = 2;
 	repeated int32 units = 3;
 	optional int32 target_index = 4;
 	optional int32 ability_index = 5;

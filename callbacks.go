@@ -61,6 +61,7 @@ type Callbacks struct {
 	onCSVCMsg_ServerSteamID                   []func(*dota.CSVCMsg_ServerSteamID) error
 	onCSVCMsg_FullFrameSplit                  []func(*dota.CSVCMsg_FullFrameSplit) error
 	onCSVCMsg_RconServerDetails               []func(*dota.CSVCMsg_RconServerDetails) error
+	onCSVCMsg_UserMessage                     []func(*dota.CSVCMsg_UserMessage) error
 	onCUserMessageAchievementEvent            []func(*dota.CUserMessageAchievementEvent) error
 	onCUserMessageCloseCaption                []func(*dota.CUserMessageCloseCaption) error
 	onCUserMessageCloseCaptionDirect          []func(*dota.CUserMessageCloseCaptionDirect) error
@@ -68,10 +69,8 @@ type Callbacks struct {
 	onCUserMessageDesiredTimescale            []func(*dota.CUserMessageDesiredTimescale) error
 	onCUserMessageFade                        []func(*dota.CUserMessageFade) error
 	onCUserMessageGameTitle                   []func(*dota.CUserMessageGameTitle) error
-	onCUserMessageHintText                    []func(*dota.CUserMessageHintText) error
 	onCUserMessageHudMsg                      []func(*dota.CUserMessageHudMsg) error
 	onCUserMessageHudText                     []func(*dota.CUserMessageHudText) error
-	onCUserMessageKeyHintText                 []func(*dota.CUserMessageKeyHintText) error
 	onCUserMessageColoredText                 []func(*dota.CUserMessageColoredText) error
 	onCUserMessageRequestState                []func(*dota.CUserMessageRequestState) error
 	onCUserMessageResetHUD                    []func(*dota.CUserMessageResetHUD) error
@@ -83,14 +82,11 @@ type Callbacks struct {
 	onCUserMessageShakeDir                    []func(*dota.CUserMessageShakeDir) error
 	onCUserMessageTextMsg                     []func(*dota.CUserMessageTextMsg) error
 	onCUserMessageScreenTilt                  []func(*dota.CUserMessageScreenTilt) error
-	onCUserMessageTrain                       []func(*dota.CUserMessageTrain) error
-	onCUserMessageVGUIMenu                    []func(*dota.CUserMessageVGUIMenu) error
 	onCUserMessageVoiceMask                   []func(*dota.CUserMessageVoiceMask) error
 	onCUserMessageVoiceSubtitle               []func(*dota.CUserMessageVoiceSubtitle) error
 	onCUserMessageSendAudio                   []func(*dota.CUserMessageSendAudio) error
 	onCUserMessageItemPickup                  []func(*dota.CUserMessageItemPickup) error
 	onCUserMessageAmmoDenied                  []func(*dota.CUserMessageAmmoDenied) error
-	onCUserMessageCrosshairAngle              []func(*dota.CUserMessageCrosshairAngle) error
 	onCUserMessageShowMenu                    []func(*dota.CUserMessageShowMenu) error
 	onCUserMessageCreditsMsg                  []func(*dota.CUserMessageCreditsMsg) error
 	onCEntityMessagePlayJingle                []func(*dota.CEntityMessagePlayJingle) error
@@ -104,6 +100,7 @@ type Callbacks struct {
 	onCUserMessageAudioParameter              []func(*dota.CUserMessageAudioParameter) error
 	onCUserMessageHapticsManagerPulse         []func(*dota.CUserMessageHapticsManagerPulse) error
 	onCUserMessageHapticsManagerEffect        []func(*dota.CUserMessageHapticsManagerEffect) error
+	onCUserMessageCommandQueueState           []func(*dota.CUserMessageCommandQueueState) error
 	onCMsgVDebugGameSessionIDEvent            []func(*dota.CMsgVDebugGameSessionIDEvent) error
 	onCMsgPlaceDecalEvent                     []func(*dota.CMsgPlaceDecalEvent) error
 	onCMsgClearWorldDecalsEvent               []func(*dota.CMsgClearWorldDecalsEvent) error
@@ -536,6 +533,11 @@ func (c *Callbacks) OnCSVCMsg_RconServerDetails(fn func(*dota.CSVCMsg_RconServer
 	c.onCSVCMsg_RconServerDetails = append(c.onCSVCMsg_RconServerDetails, fn)
 }
 
+// OnCSVCMsg_UserMessage registers a callback for SVC_Messages_svc_UserMessage
+func (c *Callbacks) OnCSVCMsg_UserMessage(fn func(*dota.CSVCMsg_UserMessage) error) {
+	c.onCSVCMsg_UserMessage = append(c.onCSVCMsg_UserMessage, fn)
+}
+
 // OnCUserMessageAchievementEvent registers a callback for EBaseUserMessages_UM_AchievementEvent
 func (c *Callbacks) OnCUserMessageAchievementEvent(fn func(*dota.CUserMessageAchievementEvent) error) {
 	c.onCUserMessageAchievementEvent = append(c.onCUserMessageAchievementEvent, fn)
@@ -571,11 +573,6 @@ func (c *Callbacks) OnCUserMessageGameTitle(fn func(*dota.CUserMessageGameTitle)
 	c.onCUserMessageGameTitle = append(c.onCUserMessageGameTitle, fn)
 }
 
-// OnCUserMessageHintText registers a callback for EBaseUserMessages_UM_HintText
-func (c *Callbacks) OnCUserMessageHintText(fn func(*dota.CUserMessageHintText) error) {
-	c.onCUserMessageHintText = append(c.onCUserMessageHintText, fn)
-}
-
 // OnCUserMessageHudMsg registers a callback for EBaseUserMessages_UM_HudMsg
 func (c *Callbacks) OnCUserMessageHudMsg(fn func(*dota.CUserMessageHudMsg) error) {
 	c.onCUserMessageHudMsg = append(c.onCUserMessageHudMsg, fn)
@@ -584,11 +581,6 @@ func (c *Callbacks) OnCUserMessageHudMsg(fn func(*dota.CUserMessageHudMsg) error
 // OnCUserMessageHudText registers a callback for EBaseUserMessages_UM_HudText
 func (c *Callbacks) OnCUserMessageHudText(fn func(*dota.CUserMessageHudText) error) {
 	c.onCUserMessageHudText = append(c.onCUserMessageHudText, fn)
-}
-
-// OnCUserMessageKeyHintText registers a callback for EBaseUserMessages_UM_KeyHintText
-func (c *Callbacks) OnCUserMessageKeyHintText(fn func(*dota.CUserMessageKeyHintText) error) {
-	c.onCUserMessageKeyHintText = append(c.onCUserMessageKeyHintText, fn)
 }
 
 // OnCUserMessageColoredText registers a callback for EBaseUserMessages_UM_ColoredText
@@ -646,16 +638,6 @@ func (c *Callbacks) OnCUserMessageScreenTilt(fn func(*dota.CUserMessageScreenTil
 	c.onCUserMessageScreenTilt = append(c.onCUserMessageScreenTilt, fn)
 }
 
-// OnCUserMessageTrain registers a callback for EBaseUserMessages_UM_Train
-func (c *Callbacks) OnCUserMessageTrain(fn func(*dota.CUserMessageTrain) error) {
-	c.onCUserMessageTrain = append(c.onCUserMessageTrain, fn)
-}
-
-// OnCUserMessageVGUIMenu registers a callback for EBaseUserMessages_UM_VGUIMenu
-func (c *Callbacks) OnCUserMessageVGUIMenu(fn func(*dota.CUserMessageVGUIMenu) error) {
-	c.onCUserMessageVGUIMenu = append(c.onCUserMessageVGUIMenu, fn)
-}
-
 // OnCUserMessageVoiceMask registers a callback for EBaseUserMessages_UM_VoiceMask
 func (c *Callbacks) OnCUserMessageVoiceMask(fn func(*dota.CUserMessageVoiceMask) error) {
 	c.onCUserMessageVoiceMask = append(c.onCUserMessageVoiceMask, fn)
@@ -679,11 +661,6 @@ func (c *Callbacks) OnCUserMessageItemPickup(fn func(*dota.CUserMessageItemPicku
 // OnCUserMessageAmmoDenied registers a callback for EBaseUserMessages_UM_AmmoDenied
 func (c *Callbacks) OnCUserMessageAmmoDenied(fn func(*dota.CUserMessageAmmoDenied) error) {
 	c.onCUserMessageAmmoDenied = append(c.onCUserMessageAmmoDenied, fn)
-}
-
-// OnCUserMessageCrosshairAngle registers a callback for EBaseUserMessages_UM_CrosshairAngle
-func (c *Callbacks) OnCUserMessageCrosshairAngle(fn func(*dota.CUserMessageCrosshairAngle) error) {
-	c.onCUserMessageCrosshairAngle = append(c.onCUserMessageCrosshairAngle, fn)
 }
 
 // OnCUserMessageShowMenu registers a callback for EBaseUserMessages_UM_ShowMenu
@@ -749,6 +726,11 @@ func (c *Callbacks) OnCUserMessageHapticsManagerPulse(fn func(*dota.CUserMessage
 // OnCUserMessageHapticsManagerEffect registers a callback for EBaseUserMessages_UM_HapticsManagerEffect
 func (c *Callbacks) OnCUserMessageHapticsManagerEffect(fn func(*dota.CUserMessageHapticsManagerEffect) error) {
 	c.onCUserMessageHapticsManagerEffect = append(c.onCUserMessageHapticsManagerEffect, fn)
+}
+
+// OnCUserMessageCommandQueueState registers a callback for EBaseUserMessages_UM_CommandQueueState
+func (c *Callbacks) OnCUserMessageCommandQueueState(fn func(*dota.CUserMessageCommandQueueState) error) {
+	c.onCUserMessageCommandQueueState = append(c.onCUserMessageCommandQueueState, fn)
 }
 
 // OnCMsgVDebugGameSessionIDEvent registers a callback for EBaseGameEvents_GE_VDebugGameSessionIDEvent
@@ -2550,6 +2532,25 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 
 		return nil
 
+	case 72: // dota.SVC_Messages_svc_UserMessage
+		if c.onCSVCMsg_UserMessage == nil {
+			return nil
+		}
+
+		msg := &dota.CSVCMsg_UserMessage{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCSVCMsg_UserMessage {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
 	case 101: // dota.EBaseUserMessages_UM_AchievementEvent
 		if c.onCUserMessageAchievementEvent == nil {
 			return nil
@@ -2683,25 +2684,6 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 
 		return nil
 
-	case 109: // dota.EBaseUserMessages_UM_HintText
-		if c.onCUserMessageHintText == nil {
-			return nil
-		}
-
-		msg := &dota.CUserMessageHintText{}
-		c.pb.SetBuf(buf)
-		if err := c.pb.Unmarshal(msg); err != nil {
-			return err
-		}
-
-		for _, fn := range c.onCUserMessageHintText {
-			if err := fn(msg); err != nil {
-				return err
-			}
-		}
-
-		return nil
-
 	case 110: // dota.EBaseUserMessages_UM_HudMsg
 		if c.onCUserMessageHudMsg == nil {
 			return nil
@@ -2733,25 +2715,6 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		for _, fn := range c.onCUserMessageHudText {
-			if err := fn(msg); err != nil {
-				return err
-			}
-		}
-
-		return nil
-
-	case 112: // dota.EBaseUserMessages_UM_KeyHintText
-		if c.onCUserMessageKeyHintText == nil {
-			return nil
-		}
-
-		msg := &dota.CUserMessageKeyHintText{}
-		c.pb.SetBuf(buf)
-		if err := c.pb.Unmarshal(msg); err != nil {
-			return err
-		}
-
-		for _, fn := range c.onCUserMessageKeyHintText {
 			if err := fn(msg); err != nil {
 				return err
 			}
@@ -2968,44 +2931,6 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 
 		return nil
 
-	case 126: // dota.EBaseUserMessages_UM_Train
-		if c.onCUserMessageTrain == nil {
-			return nil
-		}
-
-		msg := &dota.CUserMessageTrain{}
-		c.pb.SetBuf(buf)
-		if err := c.pb.Unmarshal(msg); err != nil {
-			return err
-		}
-
-		for _, fn := range c.onCUserMessageTrain {
-			if err := fn(msg); err != nil {
-				return err
-			}
-		}
-
-		return nil
-
-	case 127: // dota.EBaseUserMessages_UM_VGUIMenu
-		if c.onCUserMessageVGUIMenu == nil {
-			return nil
-		}
-
-		msg := &dota.CUserMessageVGUIMenu{}
-		c.pb.SetBuf(buf)
-		if err := c.pb.Unmarshal(msg); err != nil {
-			return err
-		}
-
-		for _, fn := range c.onCUserMessageVGUIMenu {
-			if err := fn(msg); err != nil {
-				return err
-			}
-		}
-
-		return nil
-
 	case 128: // dota.EBaseUserMessages_UM_VoiceMask
 		if c.onCUserMessageVoiceMask == nil {
 			return nil
@@ -3094,25 +3019,6 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		for _, fn := range c.onCUserMessageAmmoDenied {
-			if err := fn(msg); err != nil {
-				return err
-			}
-		}
-
-		return nil
-
-	case 133: // dota.EBaseUserMessages_UM_CrosshairAngle
-		if c.onCUserMessageCrosshairAngle == nil {
-			return nil
-		}
-
-		msg := &dota.CUserMessageCrosshairAngle{}
-		c.pb.SetBuf(buf)
-		if err := c.pb.Unmarshal(msg); err != nil {
-			return err
-		}
-
-		for _, fn := range c.onCUserMessageCrosshairAngle {
 			if err := fn(msg); err != nil {
 				return err
 			}
@@ -3360,6 +3266,25 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		for _, fn := range c.onCUserMessageHapticsManagerEffect {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 152: // dota.EBaseUserMessages_UM_CommandQueueState
+		if c.onCUserMessageCommandQueueState == nil {
+			return nil
+		}
+
+		msg := &dota.CUserMessageCommandQueueState{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCUserMessageCommandQueueState {
 			if err := fn(msg); err != nil {
 				return err
 			}

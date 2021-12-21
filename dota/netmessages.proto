@@ -1,6 +1,7 @@
 syntax = "proto2";
 
 package dota;
+option go_package = "github.com/dotabuff/manta/dota;dota";
 
 import "networkbasetypes.proto";
 
@@ -52,6 +53,7 @@ enum SVC_Messages {
 	svc_ServerSteamID = 63;
 	svc_FullFrameSplit = 70;
 	svc_RconServerDetails = 71;
+	svc_UserMessage = 72;
 }
 
 enum VoiceDataFormat_t {
@@ -119,7 +121,7 @@ message CCLCMsg_Move {
 }
 
 message CMsgVoiceAudio {
-	optional VoiceDataFormat_t format = 1 [default = VOICEDATA_FORMAT_STEAM];
+	optional VoiceDataFormat_t format = 1;
 	optional bytes voice_data = 2;
 	optional int32 sequence_bytes = 3;
 	optional uint32 section_number = 4;
@@ -182,7 +184,7 @@ message CCLCMsg_ServerPing {
 }
 
 message CCLCMsg_RequestPause {
-	optional RequestPause_t pause_type = 1 [default = RP_PAUSE];
+	optional RequestPause_t pause_type = 1;
 	optional int32 pause_group = 2;
 }
 
@@ -231,7 +233,7 @@ message CSVCMsg_SetPause {
 message CSVCMsg_VoiceInit {
 	optional int32 quality = 1;
 	optional string codec = 2;
-	optional int32 version = 3 [default = 0];
+	optional int32 version = 3;
 }
 
 message CSVCMsg_Print {
@@ -267,7 +269,7 @@ message CSVCMsg_Sounds {
 
 message CSVCMsg_Prefetch {
 	optional int32 sound_index = 1;
-	optional PrefetchType resource_type = 2 [default = PFT_SOUND];
+	optional PrefetchType resource_type = 2;
 }
 
 message CSVCMsg_SetView {
@@ -293,7 +295,7 @@ message CSVCMsg_BSPDecal {
 }
 
 message CSVCMsg_SplitScreen {
-	optional ESplitScreenMessageType type = 1 [default = MSG_SPLITSCREEN_ADDUSER];
+	optional ESplitScreenMessageType type = 1;
 	optional int32 slot = 2;
 	optional int32 player_index = 3;
 }
@@ -306,6 +308,12 @@ message CSVCMsg_GetCvarValue {
 message CSVCMsg_Menu {
 	optional int32 dialog_type = 1;
 	optional bytes menu_key_values = 2;
+}
+
+message CSVCMsg_UserMessage {
+	optional int32 msg_type = 1;
+	optional bytes msg_data = 2;
+	optional int32 passthrough = 3;
 }
 
 message CSVCMsg_SendTable {
@@ -508,7 +516,7 @@ message CBidirMsg_RelayInfo {
 		RIO_ESTABLISH_CONNECTION = 4;
 	}
 
-	required CBidirMsg_RelayInfo.Operation_t operation = 1 [default = RIO_REQUEST_RELAY];
+	required CBidirMsg_RelayInfo.Operation_t operation = 1;
 	optional SerializedNetAddress_t serializedTargetAddress = 2;
 	optional uint32 additionalHops = 3;
 }

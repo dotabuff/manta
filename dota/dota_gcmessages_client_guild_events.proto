@@ -1,6 +1,7 @@
 syntax = "proto2";
 
 package dota;
+option go_package = "github.com/dotabuff/manta/dota;dota";
 
 import "dota_shared_enums.proto";
 
@@ -16,6 +17,7 @@ enum EGuildEventAuditAction {
 	k_EGuildEventAuditAction_ChallengeProgress = 5;
 	k_EGuildEventAuditAction_CompleteMatch_Loser = 6;
 	k_EGuildEventAuditAction_WeeklyLeaderboard = 7;
+	k_EGuildEventAuditAction_ManualGrant = 8;
 }
 
 message CMsgGuildContract {
@@ -63,7 +65,7 @@ message CMsgGuildEventMember {
 
 message CMsgClientToGCRequestAccountGuildEventData {
 	optional uint32 guild_id = 1;
-	optional EEvent event_id = 2 [default = EVENT_ID_NONE];
+	optional EEvent event_id = 2;
 }
 
 message CMsgClientToGCRequestAccountGuildEventDataResponse {
@@ -79,14 +81,14 @@ message CMsgClientToGCRequestAccountGuildEventDataResponse {
 		k_eInvalidGuildEvent = 8;
 	}
 
-	optional CMsgClientToGCRequestAccountGuildEventDataResponse.EResponse result = 1 [default = k_eInternalError];
-	optional EEvent event_id = 2 [default = EVENT_ID_NONE];
+	optional CMsgClientToGCRequestAccountGuildEventDataResponse.EResponse result = 1;
+	optional EEvent event_id = 2;
 	optional CMsgAccountGuildEventData event_data = 3;
 }
 
 message CMsgGCToClientAccountGuildEventDataUpdated {
 	optional uint32 guild_id = 1;
-	optional EEvent event_id = 2 [default = EVENT_ID_NONE];
+	optional EEvent event_id = 2;
 	optional uint32 update_flags = 3;
 	optional CMsgAccountGuildEventData guild_event_data = 4;
 	optional bool contracts_updated = 5;
@@ -94,7 +96,7 @@ message CMsgGCToClientAccountGuildEventDataUpdated {
 
 message CMsgClientToGCRequestActiveGuildContracts {
 	optional uint32 guild_id = 1;
-	optional EEvent event_id = 2 [default = EVENT_ID_NONE];
+	optional EEvent event_id = 2;
 }
 
 message CMsgClientToGCRequestActiveGuildContractsResponse {
@@ -110,19 +112,19 @@ message CMsgClientToGCRequestActiveGuildContractsResponse {
 		k_eInvalidGuildEvent = 8;
 	}
 
-	optional CMsgClientToGCRequestActiveGuildContractsResponse.EResponse result = 1 [default = k_eInternalError];
+	optional CMsgClientToGCRequestActiveGuildContractsResponse.EResponse result = 1;
 	optional CMsgGuildActiveContracts active_contracts = 2;
 	optional CMsgGuildChallenge active_challenges = 3;
 }
 
 message CMsgGCToClientActiveGuildContractsUpdated {
 	optional uint32 guild_id = 1;
-	optional EEvent event_id = 2 [default = EVENT_ID_NONE];
+	optional EEvent event_id = 2;
 }
 
 message CMsgClientToGCSelectGuildContract {
 	optional uint32 guild_id = 1;
-	optional EEvent event_id = 2 [default = EVENT_ID_NONE];
+	optional EEvent event_id = 2;
 	optional uint64 contract_id = 3;
 	optional uint32 contract_slot = 4;
 }
@@ -147,12 +149,12 @@ message CMsgClientToGCSelectGuildContractResponse {
 		k_eContractSlotTimeError = 15;
 	}
 
-	optional CMsgClientToGCSelectGuildContractResponse.EResponse result = 1 [default = k_eInternalError];
+	optional CMsgClientToGCSelectGuildContractResponse.EResponse result = 1;
 }
 
 message CMsgClientToGCRequestActiveGuildChallenge {
 	optional uint32 guild_id = 1;
-	optional EEvent event_id = 2 [default = EVENT_ID_NONE];
+	optional EEvent event_id = 2;
 }
 
 message CMsgClientToGCRequestActiveGuildChallengeResponse {
@@ -168,19 +170,19 @@ message CMsgClientToGCRequestActiveGuildChallengeResponse {
 		k_eInvalidGuildEvent = 8;
 	}
 
-	optional CMsgClientToGCRequestActiveGuildChallengeResponse.EResponse result = 1 [default = k_eInternalError];
+	optional CMsgClientToGCRequestActiveGuildChallengeResponse.EResponse result = 1;
 	optional CMsgGuildChallenge active_challenge = 2;
 }
 
 message CMsgGCToClientActiveGuildChallengeUpdated {
 	optional uint32 guild_id = 1;
-	optional EEvent event_id = 2 [default = EVENT_ID_NONE];
+	optional EEvent event_id = 2;
 	optional CMsgGuildChallenge active_challenge = 3;
 }
 
 message CMsgClientToGCRequestGuildEventMembers {
 	optional uint32 guild_id = 1;
-	optional EEvent event_id = 2 [default = EVENT_ID_NONE];
+	optional EEvent event_id = 2;
 }
 
 message CMsgClientToGCRequestGuildEventMembersResponse {
@@ -196,39 +198,24 @@ message CMsgClientToGCRequestGuildEventMembersResponse {
 		k_eInvalidGuildEvent = 8;
 	}
 
-	optional CMsgClientToGCRequestGuildEventMembersResponse.EResponse result = 1 [default = k_eInternalError];
+	optional CMsgClientToGCRequestGuildEventMembersResponse.EResponse result = 1;
 	repeated CMsgGuildEventMember members = 2;
 }
 
 message CMsgGuildLeaderboardCombinedResponse {
-	message Entry {
-		optional uint32 id = 1;
-		optional uint32 r = 2;
-		optional uint32 c = 3;
-		optional uint32 w = 4;
-		optional uint32 p = 5;
-	}
-
-	optional EEvent event_id = 1 [default = EVENT_ID_NONE];
+	optional EEvent event_id = 1;
 	optional uint32 region = 2;
 	optional uint32 last_updated = 3;
-	repeated CMsgGuildLeaderboardCombinedResponse.Entry entries = 4;
-}
-
-message CMsgGuildLeaderboardCombinedResponseV2 {
-	optional EEvent event_id = 1 [default = EVENT_ID_NONE];
-	optional uint32 region = 2;
-	optional uint32 last_updated = 3;
-	repeated uint32 id = 4 [packed = true];
-	repeated uint32 r = 5 [packed = true];
-	repeated uint32 c = 6 [packed = true];
-	repeated uint32 w = 7 [packed = true];
-	repeated uint32 p = 8 [packed = true];
+	repeated uint32 guild_id = 4;
+	repeated uint32 rank = 5;
+	repeated uint32 current_percentile = 6;
+	repeated uint32 weekly_percentile = 7;
+	repeated uint32 points = 8;
 }
 
 message CMsgClientToGCClaimLeaderboardRewards {
 	optional uint32 guild_id = 1;
-	optional EEvent event_id = 2 [default = EVENT_ID_NONE];
+	optional EEvent event_id = 2;
 }
 
 message CMsgClientToGCClaimLeaderboardRewardsResponse {
@@ -246,6 +233,6 @@ message CMsgClientToGCClaimLeaderboardRewardsResponse {
 		k_eAlreadyClaimed = 10;
 	}
 
-	optional CMsgClientToGCClaimLeaderboardRewardsResponse.EResponse result = 1 [default = k_eInternalError];
+	optional CMsgClientToGCClaimLeaderboardRewardsResponse.EResponse result = 1;
 	optional uint32 event_points = 2;
 }

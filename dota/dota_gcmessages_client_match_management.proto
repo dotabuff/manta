@@ -1,12 +1,13 @@
 syntax = "proto2";
 
 package dota;
+option go_package = "github.com/dotabuff/manta/dota;dota";
 
 import "steammessages.proto";
 import "dota_shared_enums.proto";
 import "dota_client_enums.proto";
 import "base_gcmessages.proto";
-import "dota_gcmessages_common_match_management.proto";
+import "dota_gcmessages_common_lobby.proto";
 
 option optimize_for = SPEED;
 option cc_generic_services = false;
@@ -54,14 +55,14 @@ enum EStartFindingMatchResult {
 
 message CMsgStartFindingMatch {
 	optional string key = 1;
-	optional uint32 matchgroups = 2 [default = 4294967295];
+	optional uint32 matchgroups = 2;
 	optional uint32 client_version = 3;
-	optional uint32 game_modes = 4 [default = 4294967295];
-	optional DOTABotDifficulty bot_difficulty = 5 [default = BOT_DIFFICULTY_HARD];
-	optional MatchType match_type = 6 [default = MATCH_TYPE_CASUAL];
-	optional uint32 matchlanguages = 7 [default = 4294967295];
+	optional uint32 game_modes = 4;
+	optional DOTABotDifficulty bot_difficulty = 5;
+	optional MatchType match_type = 6;
+	optional uint32 matchlanguages = 7;
 	optional uint32 team_id = 8;
-	optional MatchLanguages game_language_enum = 10 [default = MATCH_LANGUAGE_INVALID];
+	optional MatchLanguages game_language_enum = 10;
 	optional string game_language_name = 11;
 	optional CMsgClientPingData ping_data = 12;
 	optional uint32 region_select_flags = 13;
@@ -76,8 +77,8 @@ message CMsgStartFindingMatch {
 }
 
 message CMsgStartFindingMatchResult {
-	optional uint32 legacy_generic_eresult = 1 [default = 2];
-	optional EStartFindingMatchResult result = 2 [default = k_EStartFindingMatchResult_Invalid];
+	optional uint32 legacy_generic_eresult = 1;
+	optional EStartFindingMatchResult result = 2;
 	optional string error_token = 3;
 	optional string debug_message = 4;
 	repeated fixed64 responsible_party_members = 5;
@@ -90,14 +91,14 @@ message CMsgStopFindingMatch {
 
 message CMsgPartyBuilderOptions {
 	optional uint32 additional_slots = 1;
-	optional MatchType match_type = 2 [default = MATCH_TYPE_CASUAL];
+	optional MatchType match_type = 2;
 	optional uint32 matchgroups = 3;
 	optional uint32 client_version = 4;
-	optional MatchLanguages language = 5 [default = MATCH_LANGUAGE_INVALID];
+	optional MatchLanguages language = 5;
 }
 
 message CMsgReadyUp {
-	optional DOTALobbyReadyState state = 1 [default = DOTALobbyReadyState_UNDECLARED];
+	optional DOTALobbyReadyState state = 1;
 	optional fixed64 ready_up_key = 2;
 	optional CDOTAClientHardwareSpecs hardware_specs = 3;
 }
@@ -111,19 +112,28 @@ message CMsgReadyUpStatus {
 message CMsgAbandonCurrentGame {
 }
 
+message CMsgLobbyScenarioSave {
+	optional int32 version = 1;
+	optional bytes data = 2;
+}
+
 message CMsgPracticeLobbySetDetails {
+	message AbilityDraftSpecificDetails {
+		optional bool shuffle_draft_order = 1;
+	}
+
 	optional uint64 lobby_id = 1;
 	optional string game_name = 2;
 	repeated CLobbyTeamDetails team_details = 3;
 	optional uint32 server_region = 4;
 	optional uint32 game_mode = 5;
-	optional DOTA_CM_PICK cm_pick = 6 [default = DOTA_CM_RANDOM];
-	optional DOTABotDifficulty bot_difficulty_radiant = 9 [default = BOT_DIFFICULTY_PASSIVE];
+	optional DOTA_CM_PICK cm_pick = 6;
+	optional DOTABotDifficulty bot_difficulty_radiant = 9;
 	optional bool allow_cheats = 10;
 	optional bool fill_with_bots = 11;
 	optional bool intro_mode = 12;
 	optional bool allow_spectating = 13;
-	optional DOTAGameVersion game_version = 14 [default = GAME_VERSION_CURRENT];
+	optional DOTAGameVersion game_version = 14;
 	optional string pass_key = 15;
 	optional uint32 leagueid = 16;
 	optional uint32 penalty_level_radiant = 17;
@@ -132,8 +142,8 @@ message CMsgPracticeLobbySetDetails {
 	optional uint32 series_type = 20;
 	optional uint32 radiant_series_wins = 21;
 	optional uint32 dire_series_wins = 22;
-	optional bool allchat = 23 [default = false];
-	optional LobbyDotaTVDelay dota_tv_delay = 24 [default = LobbyDotaTV_120];
+	optional bool allchat = 23;
+	optional LobbyDotaTVDelay dota_tv_delay = 24;
 	optional bool lan = 25;
 	optional string custom_game_mode = 26;
 	optional string custom_map_name = 27;
@@ -141,19 +151,21 @@ message CMsgPracticeLobbySetDetails {
 	optional uint64 custom_game_id = 29;
 	optional uint32 custom_min_players = 30;
 	optional uint32 custom_max_players = 31;
-	optional DOTALobbyVisibility visibility = 33 [default = DOTALobbyVisibility_Public];
+	optional DOTALobbyVisibility visibility = 33;
 	optional fixed64 custom_game_crc = 34;
 	optional fixed32 custom_game_timestamp = 37;
 	optional uint64 previous_match_override = 38;
-	optional LobbyDotaPauseSetting pause_setting = 42 [default = LobbyDotaPauseSetting_Unlimited];
-	optional DOTABotDifficulty bot_difficulty_dire = 43 [default = BOT_DIFFICULTY_PASSIVE];
+	optional LobbyDotaPauseSetting pause_setting = 42;
+	optional DOTABotDifficulty bot_difficulty_dire = 43;
 	optional uint64 bot_radiant = 44;
 	optional uint64 bot_dire = 45;
-	optional DOTASelectionPriorityRules selection_priority_rules = 46 [default = k_DOTASelectionPriorityRules_Manual];
+	optional DOTASelectionPriorityRules selection_priority_rules = 46;
 	optional bool custom_game_penalties = 47;
 	optional string lan_host_ping_location = 48;
 	optional uint32 league_node_id = 49;
 	repeated uint32 requested_hero_ids = 50;
+	optional CMsgLobbyScenarioSave scenario_save = 51;
+	optional CMsgPracticeLobbySetDetails.AbilityDraftSpecificDetails ability_draft_specific_details = 52;
 }
 
 message CMsgPracticeLobbyCreate {
@@ -172,13 +184,13 @@ message CMsgPracticeLobbyCreate {
 }
 
 message CMsgPracticeLobbySetTeamSlot {
-	optional DOTA_GC_TEAM team = 1 [default = DOTA_GC_TEAM_GOOD_GUYS];
+	optional DOTA_GC_TEAM team = 1;
 	optional uint32 slot = 2;
-	optional DOTABotDifficulty bot_difficulty = 3 [default = BOT_DIFFICULTY_PASSIVE];
+	optional DOTABotDifficulty bot_difficulty = 3;
 }
 
 message CMsgPracticeLobbySetCoach {
-	optional DOTA_GC_TEAM team = 1 [default = DOTA_GC_TEAM_GOOD_GUYS];
+	optional DOTA_GC_TEAM team = 1;
 }
 
 message CMsgPracticeLobbyJoinBroadcastChannel {
@@ -214,13 +226,10 @@ message CMsgApplyTeamToPracticeLobby {
 	optional uint32 team_id = 1;
 }
 
-message CMsgClearPracticeLobbyTeam {
-}
-
 message CMsgPracticeLobbyList {
 	optional string pass_key = 2;
 	optional uint32 region = 3;
-	optional DOTA_GameMode game_mode = 4 [default = DOTA_GAMEMODE_NONE];
+	optional DOTA_GameMode game_mode = 4;
 }
 
 message CMsgPracticeLobbyListResponseEntry {
@@ -229,13 +238,13 @@ message CMsgPracticeLobbyListResponseEntry {
 		optional string player_name = 2;
 	}
 
-	optional uint64 id = 1 [(key_field) = true];
+	optional uint64 id = 1;
 	repeated CMsgPracticeLobbyListResponseEntry.CLobbyMember members = 5;
 	optional bool requires_pass_key = 6;
 	optional uint32 leader_account_id = 7;
 	optional string name = 10;
 	optional string custom_game_mode = 11;
-	optional DOTA_GameMode game_mode = 12 [default = DOTA_GAMEMODE_NONE];
+	optional DOTA_GameMode game_mode = 12;
 	optional bool friend_present = 13;
 	optional uint32 players = 14;
 	optional string custom_map_name = 15;
@@ -250,8 +259,8 @@ message CMsgPracticeLobbyListResponse {
 }
 
 message CMsgLobbyList {
-	optional uint32 server_region = 1 [default = 0];
-	optional DOTA_GameMode game_mode = 2 [default = DOTA_GAMEMODE_NONE];
+	optional uint32 server_region = 1;
+	optional DOTA_GameMode game_mode = 2;
 }
 
 message CMsgLobbyListResponse {
@@ -267,7 +276,7 @@ message CMsgPracticeLobbyJoin {
 }
 
 message CMsgPracticeLobbyJoinResponse {
-	optional DOTAJoinLobbyResult result = 1 [default = DOTA_JOIN_RESULT_SUCCESS];
+	optional DOTAJoinLobbyResult result = 1;
 }
 
 message CMsgFriendPracticeLobbyListRequest {
@@ -332,28 +341,19 @@ message CMsgQuickJoinCustomLobby {
 }
 
 message CMsgQuickJoinCustomLobbyResponse {
-	optional DOTAJoinLobbyResult result = 1 [default = DOTA_JOIN_RESULT_SUCCESS];
+	optional DOTAJoinLobbyResult result = 1;
 }
 
 message CMsgBotGameCreate {
 	optional string search_key = 1;
 	optional uint32 client_version = 2;
-	optional DOTABotDifficulty difficulty_radiant = 3 [default = BOT_DIFFICULTY_PASSIVE];
-	optional DOTA_GC_TEAM team = 4 [default = DOTA_GC_TEAM_GOOD_GUYS];
+	optional DOTABotDifficulty difficulty_radiant = 3;
+	optional DOTA_GC_TEAM team = 4;
 	optional uint32 game_mode = 5;
-	optional DOTABotDifficulty difficulty_dire = 6 [default = BOT_DIFFICULTY_PASSIVE];
+	optional DOTABotDifficulty difficulty_dire = 6;
 }
 
 message CMsgCustomGameCreate {
-	optional string search_key = 1;
-	optional uint32 client_version = 2;
-	optional uint32 difficulty = 3;
-	optional string game_mode = 4;
-	optional string map = 5;
-	optional uint64 custom_game_id = 7;
-}
-
-message CMsgEventGameCreate {
 	optional string search_key = 1;
 	optional uint32 client_version = 2;
 	optional uint32 difficulty = 3;
@@ -389,7 +389,7 @@ message CMsgDOTAGroupMergeResponse {
 }
 
 message CMsgDOTAGroupMergeReply {
-	optional EDOTAGroupMergeResult result = 1 [default = k_EDOTAGroupMergeResult_OK];
+	optional EDOTAGroupMergeResult result = 1;
 }
 
 message CMsgSpectatorLobbyGameDetails {

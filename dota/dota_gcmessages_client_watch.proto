@@ -1,6 +1,7 @@
 syntax = "proto2";
 
 package dota;
+option go_package = "github.com/dotabuff/manta/dota;dota";
 
 import "dota_gcmessages_common.proto";
 
@@ -71,12 +72,6 @@ message CMsgGCToClientTopWeekendTourneyGames {
 	repeated CSourceTVGameSmall live_games = 1;
 }
 
-message CMsgClientToGCTopMatchesRequest {
-	optional uint32 hero_id = 1;
-	optional uint32 player_account_id = 2;
-	optional uint32 team_id = 3;
-}
-
 message CMsgClientToGCTopLeagueMatchesRequest {
 }
 
@@ -98,23 +93,6 @@ message CMsgGCToClientTopLeagueMatchesResponse {
 
 message CMsgGCToClientTopFriendMatchesResponse {
 	repeated CMsgDOTAMatchMinimal matches = 1;
-}
-
-message CMsgClientToGCFindTopMatches {
-	optional uint32 start_game = 1;
-	optional uint32 league_id = 2;
-	optional uint32 hero_id = 3;
-	optional uint32 friend_id = 4;
-	optional bool friend_list = 5;
-	optional bool league_list = 6;
-}
-
-message CMsgGCToClientFindTopLeagueMatchesResponse {
-	optional uint32 start_game = 1;
-	optional uint32 league_id = 2;
-	optional uint32 hero_id = 3;
-	repeated uint32 match_ids = 4;
-	repeated CMsgDOTAMatch matches = 5;
 }
 
 message CMsgSpectateFriendGame {
@@ -142,7 +120,7 @@ message CMsgSpectateFriendGameResponse {
 	}
 
 	optional fixed64 server_steamid = 4;
-	optional CMsgSpectateFriendGameResponse.EWatchLiveResult watch_live_result = 5 [default = SUCCESS];
+	optional CMsgSpectateFriendGameResponse.EWatchLiveResult watch_live_result = 5;
 }
 
 message CDOTAReplayDownloadInfo {
@@ -182,7 +160,7 @@ message CMsgWatchGameResponse {
 		LOBBYNOTFOUND = 7;
 	}
 
-	optional CMsgWatchGameResponse.WatchGameResult watch_game_result = 1 [default = PENDING];
+	optional CMsgWatchGameResponse.WatchGameResult watch_game_result = 1;
 	optional uint32 source_tv_public_addr = 2;
 	optional uint32 source_tv_private_addr = 3;
 	optional uint32 source_tv_port = 4;

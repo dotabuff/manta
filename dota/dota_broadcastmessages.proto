@@ -1,6 +1,7 @@
 syntax = "proto2";
 
 package dota;
+option go_package = "github.com/dotabuff/manta/dota;dota";
 
 option optimize_for = SPEED;
 option cc_generic_services = false;
@@ -11,7 +12,7 @@ enum EDotaBroadcastMessages {
 }
 
 message CDOTABroadcastMsg {
-	required EDotaBroadcastMessages type = 1 [default = DOTA_BM_LANLobbyRequest];
+	required EDotaBroadcastMessages type = 1;
 	optional bytes msg = 2;
 }
 
