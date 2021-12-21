@@ -53,15 +53,20 @@ func main() {
 
 ## Developing
 
-To run `make update` you will need the latest version of `protoc` and the `protobuf` package:
+To run `make update` you will need a few things installed:
 
-`go get -u github.com/golang/protobuf/...`
+```sh
+# Install subversion. On OS X:
+brew install subversion
 
-You will also need GNU sed. To install GNU sed on Mac OS X:
+# Install protoc. On OS X:
+brew install protobuf
 
-```
-# Install GNU sed
+# Install gnu-sed. Not needed on Linux. On OS X:
 brew install gnu-sed
+
+# Install protoc-gen-go:
+go install github.com/golang/protobuf/protoc-gen-go@v1.5.2
 ```
 
 ## License
