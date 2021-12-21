@@ -53,21 +53,21 @@ func main() {
 
 ## Developing
 
-To run `make update` you will need the latest version of the `protobuf` package:
+To run `make update` you will need a few things installed:
 
-`go get -u github.com/golang/protobuf/...`
+```sh
+# Install subversion. On OS X:
+brew install subversion
 
-You will also need GNU sed. To install GNU sed on Mac OS X:
+# Install protoc. On OS X:
+brew install protobuf
 
-```
-# Install GNU sed
+# Install gnu-sed. Not needed on Linux. On OS X:
 brew install gnu-sed
-# Create a symlink in /usr/local/bin
-ln -s /usr/local/bin/gsed /usr/local/bin/sed
-# Ensure that /usr/local/bin is foremost in your PATH
-export PATH="/usr/local/bin:$PATH"
-```
 
+# Install protoc-gen-go:
+go install github.com/golang/protobuf/protoc-gen-go@v1.5.2
+```
 
 ## License
 
@@ -87,7 +87,7 @@ Looking to parse Source 1 (original Dota 2) replays? Take a look at [Yasha](http
 
 Manta is maintained and development is sponsored by [Dotabuff](http://www.dotabuff.com), a leading Dota 2 community website with an emphasis on statistics. Manta wouldn't exist without the efforts of a number of people:
 
-* [Michael Fellinger](https://github.com/manveru) built Dotabuff's Source 1 parser [yasha](https://github.com/dotabuff/yasha).
-* [Robin Dietrich](https://github.com/invokr) built the C++ parser [Alice](https://github.com/AliceStats/Alice).
-* [Martin Schrodt](https://github.com/spheenik) built the Java parser [clarity](https://github.com/skadistats/clarity).
-* [Drew Schleck](https://github.com/dschleck), built an original C++ parser [edith](https://github.com/dschleck/edith).
+- [Michael Fellinger](https://github.com/manveru) built Dotabuff's Source 1 parser [yasha](https://github.com/dotabuff/yasha).
+- [Robin Dietrich](https://github.com/invokr) built the C++ parser [Alice](https://github.com/AliceStats/Alice).
+- [Martin Schrodt](https://github.com/spheenik) built the Java parser [clarity](https://github.com/skadistats/clarity).
+- [Drew Schleck](https://github.com/dschleck), built an original C++ parser [edith](https://github.com/dschleck/edith).

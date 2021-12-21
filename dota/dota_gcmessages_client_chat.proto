@@ -1,6 +1,7 @@
 syntax = "proto2";
 
 package dota;
+option go_package = "github.com/dotabuff/manta/dota;dota";
 
 import "dota_shared_enums.proto";
 
@@ -47,30 +48,13 @@ message CMsgGCToClientPrivateChatResponse {
 	}
 
 	optional string private_chat_channel_name = 1;
-	optional CMsgGCToClientPrivateChatResponse.Result result = 2 [default = SUCCESS];
+	optional CMsgGCToClientPrivateChatResponse.Result result = 2;
 	optional string username = 3;
-}
-
-message CMsgClientToGCPrivateChatInfoRequest {
-	optional string private_chat_channel_name = 1;
-}
-
-message CMsgGCToClientPrivateChatInfoResponse {
-	message Member {
-		optional uint32 account_id = 1;
-		optional string name = 2;
-		optional uint32 status = 3;
-	}
-
-	optional string private_chat_channel_name = 1;
-	repeated CMsgGCToClientPrivateChatInfoResponse.Member members = 2;
-	optional uint32 creator = 3;
-	optional uint32 creation_date = 4;
 }
 
 message CMsgDOTAJoinChatChannel {
 	optional string channel_name = 2;
-	optional DOTAChatChannelType_t channel_type = 4 [default = DOTAChannelType_Regional];
+	optional DOTAChatChannelType_t channel_type = 4;
 	optional bool silent_rejection = 5;
 }
 
@@ -81,10 +65,6 @@ message CMsgDOTALeaveChatChannel {
 message CMsgGCChatReportPublicSpam {
 	optional uint64 channel_id = 1;
 	optional uint32 channel_user_id = 2;
-}
-
-message CMsgDOTAClientIgnoredUser {
-	optional uint32 ignored_account_id = 1;
 }
 
 message CMsgDOTAChatModeratorBan {
@@ -121,7 +101,7 @@ message CMsgDOTAChatMessage {
 	optional bool suggest_invite_to_lobby = 11;
 	optional uint32 event_points = 12;
 	optional bool coin_flip = 13;
-	optional int32 player_id = 14 [default = -1];
+	optional int32 player_id = 14;
 	optional uint32 share_profile_account_id = 15;
 	optional uint32 channel_user_id = 16;
 	optional CMsgDOTAChatMessage.DiceRoll dice_roll = 17;
@@ -142,6 +122,8 @@ message CMsgDOTAChatMessage {
 	optional uint32 chat_flags = 34;
 	optional bool started_finding_match = 35;
 	optional bool ctrl_is_down = 36;
+	optional uint32 favorite_team_id = 37;
+	optional uint32 favorite_team_quality = 38;
 }
 
 message CMsgDOTAChatMember {
@@ -179,17 +161,12 @@ message CMsgDOTAJoinChatChannelResponse {
 	optional fixed64 channel_id = 3;
 	optional uint32 max_members = 4;
 	repeated CMsgDOTAChatMember members = 5;
-	optional DOTAChatChannelType_t channel_type = 6 [default = DOTAChannelType_Regional];
-	optional CMsgDOTAJoinChatChannelResponse.Result result = 7 [default = JOIN_SUCCESS];
+	optional DOTAChatChannelType_t channel_type = 6;
+	optional CMsgDOTAJoinChatChannelResponse.Result result = 7;
 	optional bool gc_initiated_join = 8;
 	optional uint32 channel_user_id = 9;
 	optional string welcome_message = 10;
-	optional EChatSpecialPrivileges special_privileges = 11 [default = k_EChatSpecialPrivileges_None];
-}
-
-message CMsgDOTAChatChannelFullUpdate {
-	optional fixed64 channel_id = 1;
-	repeated CMsgDOTAChatMember members = 2;
+	optional EChatSpecialPrivileges special_privileges = 11;
 }
 
 message CMsgDOTAOtherJoinedChatChannel {
@@ -206,19 +183,6 @@ message CMsgDOTAOtherLeftChatChannel {
 	optional uint32 channel_user_id = 3;
 }
 
-message CMsgDOTAChatChannelMemberUpdate {
-	message JoinedMember {
-		optional fixed64 steam_id = 1;
-		optional string persona_name = 2;
-		optional uint32 channel_user_id = 3;
-		optional uint32 status = 4;
-	}
-
-	optional fixed64 channel_id = 1;
-	repeated fixed64 left_steam_ids = 2;
-	repeated CMsgDOTAChatChannelMemberUpdate.JoinedMember joined_members = 3;
-}
-
 message CMsgDOTARequestChatChannelList {
 }
 
@@ -226,14 +190,10 @@ message CMsgDOTARequestChatChannelListResponse {
 	message ChatChannel {
 		optional string channel_name = 1;
 		optional uint32 num_members = 2;
-		optional DOTAChatChannelType_t channel_type = 3 [default = DOTAChannelType_Regional];
+		optional DOTAChatChannelType_t channel_type = 3;
 	}
 
 	repeated CMsgDOTARequestChatChannelListResponse.ChatChannel channels = 1;
-}
-
-message CMsgDOTAChatGetUserList {
-	optional fixed64 channel_id = 1;
 }
 
 message CMsgDOTAChatGetUserListResponse {
@@ -250,12 +210,12 @@ message CMsgDOTAChatGetUserListResponse {
 
 message CMsgDOTAChatGetMemberCount {
 	optional string channel_name = 1;
-	optional DOTAChatChannelType_t channel_type = 2 [default = DOTAChannelType_Regional];
+	optional DOTAChatChannelType_t channel_type = 2;
 }
 
 message CMsgDOTAChatGetMemberCountResponse {
 	optional string channel_name = 1;
-	optional DOTAChatChannelType_t channel_type = 2 [default = DOTAChannelType_Regional];
+	optional DOTAChatChannelType_t channel_type = 2;
 	optional uint32 member_count = 3;
 }
 

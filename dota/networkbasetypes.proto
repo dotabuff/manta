@@ -1,6 +1,7 @@
 syntax = "proto2";
 
 package dota;
+option go_package = "github.com/dotabuff/manta/dota;dota";
 
 import "network_connection.proto";
 
@@ -97,7 +98,7 @@ message CNETMsg_SplitScreenUser {
 }
 
 message CNETMsg_Disconnect {
-	optional ENetworkDisconnectionReason reason = 2 [default = NETWORK_DISCONNECT_INVALID];
+	optional ENetworkDisconnectionReason reason = 2;
 }
 
 message CNETMsg_Tick {
@@ -120,7 +121,7 @@ message CNETMsg_SetConVar {
 }
 
 message CNETMsg_SignonState {
-	optional SignonState_t signon_state = 1 [default = SIGNONSTATE_NONE];
+	optional SignonState_t signon_state = 1;
 	optional uint32 spawn_count = 2;
 	optional uint32 num_server_players = 3;
 	repeated string players_networkids = 4;
@@ -152,20 +153,6 @@ message CSVCMsgList_GameEvents {
 	}
 
 	repeated CSVCMsgList_GameEvents.event_t events = 1;
-}
-
-message CSVCMsg_UserMessage {
-	optional int32 msg_type = 1;
-	optional bytes msg_data = 2;
-}
-
-message CSVCMsgList_UserMessages {
-	message usermsg_t {
-		optional int32 tick = 1;
-		optional CSVCMsg_UserMessage msg = 2;
-	}
-
-	repeated CSVCMsgList_UserMessages.usermsg_t usermsgs = 1;
 }
 
 message CNETMsg_SpawnGroup_Load {

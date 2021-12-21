@@ -1,6 +1,7 @@
 syntax = "proto2";
 
 package dota;
+option go_package = "github.com/dotabuff/manta/dota;dota";
 
 import "google/protobuf/descriptor.proto";
 
@@ -8,10 +9,10 @@ option optimize_for = SPEED;
 option cc_generic_services = false;
 
 extend google.protobuf.FieldOptions {
-	optional bool map_field = 61000 [default = false];
-	optional bool map_key = 61001 [default = false];
-	optional int32 diff_encode_field = 61002 [default = 0];
-	optional bool delta_ignore = 61003 [default = false];
-	optional uint32 steamml_max_entries = 61004 [default = 0];
-	optional bool steamml_is_timestamp = 61005 [default = false];
+	optional bool map_field = 61000;
+	optional bool map_key = 61001;
+	optional int32 diff_encode_field = 61002;
+	optional bool delta_ignore = 61003;
+	optional uint32 steamml_max_entries = 61004;
+	optional bool steamml_is_timestamp = 61005;
 }

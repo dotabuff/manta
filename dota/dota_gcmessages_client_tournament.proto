@@ -1,6 +1,7 @@
 syntax = "proto2";
 
 package dota;
+option go_package = "github.com/dotabuff/manta/dota;dota";
 
 import "dota_client_enums.proto";
 
@@ -20,73 +21,6 @@ enum ETournamentEvent {
 	k_ETournamentEvent_TeamParticipationTimedOut_EntryFeeRefund = 9;
 	k_ETournamentEvent_TeamParticipationTimedOut_EntryFeeForfeit = 10;
 	k_ETournamentEvent_TeamParticipationTimedOut_GrantedVictory = 11;
-}
-
-message CMsgDOTATournamentInfo {
-	message PhaseGroup {
-		optional uint32 group_id = 1;
-		optional string group_name = 2;
-	}
-
-	message Phase {
-		optional uint32 phase_id = 1;
-		optional string phase_name = 2;
-		optional uint32 type_id = 3;
-		optional uint32 iterations = 4;
-		optional uint32 min_start_time = 5;
-		optional uint32 max_start_time = 6;
-		repeated CMsgDOTATournamentInfo.PhaseGroup group_list = 7;
-	}
-
-	message Team {
-		optional uint32 team_id = 1;
-		optional string name = 2;
-		optional string tag = 3;
-		optional uint64 team_logo = 4;
-		optional bool eliminated = 5;
-	}
-
-	message UpcomingMatch {
-		optional uint32 series_id = 1;
-		optional uint32 team1_id = 2;
-		optional uint32 team2_id = 3;
-		optional uint32 bo = 4;
-		optional string stage_name = 5;
-		optional uint32 start_time = 6;
-		optional string winner_stage = 7;
-		optional string loser_stage = 8;
-		optional string team1_tag = 9;
-		optional string team2_tag = 10;
-		optional string team1_prev_opponent_tag = 11;
-		optional string team2_prev_opponent_tag = 12;
-		optional uint64 team1_logo = 13;
-		optional uint64 team2_logo = 14;
-		optional uint64 team1_prev_opponent_logo = 15;
-		optional uint64 team2_prev_opponent_logo = 16;
-		optional uint32 team1_prev_opponent_id = 17;
-		optional uint32 team2_prev_opponent_id = 18;
-		optional uint32 team1_prev_match_score = 19;
-		optional uint32 team1_prev_match_opponent_score = 20;
-		optional uint32 team2_prev_match_score = 21;
-		optional uint32 team2_prev_match_opponent_score = 22;
-		optional uint32 phase_type = 23;
-		optional uint32 team1_score = 24;
-		optional uint32 team2_score = 25;
-		optional uint32 phase_id = 26;
-	}
-
-	message News {
-		optional string link = 1;
-		optional string title = 2;
-		optional string image = 3;
-		optional uint32 timestamp = 4;
-	}
-
-	optional uint32 league_id = 1;
-	repeated CMsgDOTATournamentInfo.Phase phase_list = 2;
-	repeated CMsgDOTATournamentInfo.Team teams_list = 3;
-	repeated CMsgDOTATournamentInfo.UpcomingMatch upcoming_matches_list = 4;
-	repeated CMsgDOTATournamentInfo.News news_list = 5;
 }
 
 message CMsgRequestWeekendTourneySchedule {
@@ -123,9 +57,9 @@ message CMsgDOTATournament {
 	message Team {
 		optional fixed64 team_gid = 1;
 		optional uint32 node_or_state = 2;
-		repeated uint32 players = 3 [packed = true];
-		repeated uint32 player_buyin = 9 [packed = true];
-		repeated uint32 player_skill_level = 10 [packed = true];
+		repeated uint32 players = 3;
+		repeated uint32 player_buyin = 9;
+		repeated uint32 player_skill_level = 10;
 		optional uint32 match_group_mask = 12;
 		optional uint32 team_id = 4;
 		optional string team_name = 5;
@@ -138,7 +72,7 @@ message CMsgDOTATournament {
 		optional fixed64 lobby_id = 2;
 		optional uint64 match_id = 3;
 		optional bool team_a_good = 4;
-		optional ETournamentGameState state = 5 [default = k_ETournamentGameState_Unknown];
+		optional ETournamentGameState state = 5;
 		optional uint32 start_time = 6;
 	}
 
@@ -146,15 +80,15 @@ message CMsgDOTATournament {
 		optional uint32 node_id = 1;
 		optional uint32 team_idx_a = 2;
 		optional uint32 team_idx_b = 3;
-		optional ETournamentNodeState node_state = 4 [default = k_ETournamentNodeState_Unknown];
+		optional ETournamentNodeState node_state = 4;
 	}
 
 	optional uint32 tournament_id = 1;
 	optional uint32 division_id = 2;
 	optional uint32 schedule_time = 3;
 	optional uint32 skill_level = 4;
-	optional ETournamentTemplate tournament_template = 5 [default = k_ETournamentTemplate_None];
-	optional ETournamentState state = 6 [default = k_ETournamentState_Unknown];
+	optional ETournamentTemplate tournament_template = 5;
+	optional ETournamentState state = 6;
 	optional uint32 state_seq_num = 10;
 	optional uint32 season_trophy_id = 11;
 	repeated CMsgDOTATournament.Team teams = 7;
@@ -165,7 +99,7 @@ message CMsgDOTATournament {
 message CMsgDOTATournamentStateChange {
 	message GameChange {
 		optional uint64 match_id = 1;
-		optional ETournamentGameState new_state = 2 [default = k_ETournamentGameState_Unknown];
+		optional ETournamentGameState new_state = 2;
 	}
 
 	message TeamChange {
@@ -175,27 +109,12 @@ message CMsgDOTATournamentStateChange {
 	}
 
 	optional uint32 new_tournament_id = 1;
-	optional ETournamentEvent event = 2 [default = k_ETournamentEvent_None];
-	optional ETournamentState new_tournament_state = 3 [default = k_ETournamentState_Unknown];
+	optional ETournamentEvent event = 2;
+	optional ETournamentState new_tournament_state = 3;
 	repeated CMsgDOTATournamentStateChange.GameChange game_changes = 4;
 	repeated CMsgDOTATournamentStateChange.TeamChange team_changes = 5;
-	repeated uint32 merged_tournament_ids = 6 [packed = true];
+	repeated uint32 merged_tournament_ids = 6;
 	optional uint32 state_seq_num = 7;
-}
-
-message CMsgDOTATournamentRequest {
-	optional uint32 tournament_id = 1;
-	optional uint64 client_tournament_gid = 2;
-}
-
-message CMsgDOTATournamentResponse {
-	optional uint32 result = 1 [default = 2];
-	optional CMsgDOTATournament tournament = 2;
-}
-
-message CMsgDOTAClearTournamentGame {
-	optional uint32 tournament_id = 1;
-	optional uint32 game_id = 2;
 }
 
 message CMsgDOTAWeekendTourneyPlayerSkillLevelStats {
@@ -219,11 +138,6 @@ message CMsgDOTAWeekendTourneyPlayerStats {
 }
 
 message CMsgDOTAWeekendTourneyPlayerStatsRequest {
-	optional uint32 account_id = 1;
-	optional uint32 season_trophy_id = 2;
-}
-
-message CMsgDOTAWeekendTourneyPlayerHistoryRequest {
 	optional uint32 account_id = 1;
 	optional uint32 season_trophy_id = 2;
 }

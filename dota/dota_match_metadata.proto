@@ -1,9 +1,11 @@
 syntax = "proto2";
 
 package dota;
+option go_package = "github.com/dotabuff/manta/dota;dota";
 
 import "base_gcmessages.proto";
 import "dota_gcmessages_common_match_management.proto";
+import "dota_gcmessages_common_lobby.proto";
 import "dota_gcmessages_common.proto";
 import "dota_shared_enums.proto";
 
@@ -75,6 +77,8 @@ message CDOTAMatchMetadata {
 			optional uint32 action_id = 1;
 			optional uint32 quantity = 2;
 			optional uint32 audit = 3;
+			optional bool requires_win = 4;
+			optional uint64 audit_data = 5;
 		}
 
 		message CandyGrant {
@@ -105,6 +109,8 @@ message CDOTAMatchMetadata {
 			optional uint32 team_wager_bonus_pct = 21;
 			optional uint32 wager_streak_pct = 22;
 			repeated CDOTAMatchMetadata.Team.CandyGrant candy_points_granted = 23;
+			optional uint32 active_season_id = 24;
+			optional bool cavern_crawl_half_credit = 25;
 		}
 
 		message GauntletProgress {
@@ -167,7 +173,7 @@ message CDOTAMatchMetadata {
 			optional uint32 sentry_wards_placed = 43;
 			optional uint32 wards_dewarded = 44;
 			optional float stun_duration = 45;
-			optional EDOTAMMRBoostType rank_mmr_boost_type = 46 [default = k_EDOTAMMRBoostType_None];
+			optional EDOTAMMRBoostType rank_mmr_boost_type = 46;
 			optional CDOTAMatchMetadata.Team.GauntletProgress gauntlet_progress = 47;
 			repeated CDOTAMatchMetadata.Team.Player.ContractProgress contract_progress = 48;
 			repeated uint32 guild_ids = 49;
@@ -192,7 +198,7 @@ message CDOTAMatchMetadata {
 		}
 
 		optional uint32 guild_id = 1;
-		optional EEvent event_id = 2 [default = EVENT_ID_NONE];
+		optional EEvent event_id = 2;
 		optional uint32 challenge_instance_id = 3;
 		optional uint32 challenge_parameter = 4;
 		optional uint32 challenge_timestamp = 5;

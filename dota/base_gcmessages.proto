@@ -1,6 +1,7 @@
 syntax = "proto2";
 
 package dota;
+option go_package = "github.com/dotabuff/manta/dota;dota";
 
 import "steammessages.proto";
 import "gcsdk_gcmessages.proto";
@@ -9,7 +10,6 @@ option optimize_for = SPEED;
 option cc_generic_services = false;
 
 enum EGCBaseMsg {
-	k_EMsgGCSystemMessage = 4001;
 	k_EMsgGCReplicateConVars = 4002;
 	k_EMsgGCConVarUpdated = 4003;
 	k_EMsgGCInviteToParty = 4501;
@@ -20,7 +20,6 @@ enum EGCBaseMsg {
 	k_EMsgGCServerAvailable = 4506;
 	k_EMsgGCClientConnectToServer = 4507;
 	k_EMsgGCGameServerInfo = 4508;
-	k_EMsgGCError = 4509;
 	k_EMsgGCLANServerAvailable = 4511;
 	k_EMsgGCInviteToLobby = 4512;
 	k_EMsgGCLobbyInviteResponse = 4513;
@@ -30,11 +29,8 @@ enum EGCBaseMsg {
 	k_EMsgGCToGCPerformManualOpCompleted = 4517;
 	k_EMsgGCToGCReloadServerRegionSettings = 4518;
 	k_EMsgGCAdditionalWelcomeMsgList = 4519;
-}
-
-enum EGCBaseProtoObjectTypes {
-	k_EProtoObjectPartyInvite = 1001;
-	k_EProtoObjectLobbyInvite = 1002;
+	k_EMsgGCToClientApplyRemoteConVars = 4520;
+	k_EMsgGCToServerApplyRemoteConVars = 4521;
 }
 
 enum ECustomGameInstallStatus {
@@ -70,15 +66,11 @@ message CMsgGCStorePurchaseInitResponse {
 	optional uint64 txn_id = 2;
 }
 
-message CMsgSystemBroadcast {
-	optional string message = 1;
-}
-
 message CMsgClientPingData {
-	repeated fixed32 relay_codes = 4 [packed = true];
-	repeated uint32 relay_pings = 5 [packed = true];
-	repeated uint32 region_codes = 8 [packed = true];
-	repeated uint32 region_pings = 9 [packed = true];
+	repeated fixed32 relay_codes = 4;
+	repeated uint32 relay_pings = 5;
+	repeated uint32 region_codes = 8;
+	repeated uint32 region_pings = 9;
 	optional uint32 region_ping_failed_bitmask = 10;
 }
 
@@ -124,7 +116,7 @@ message CMsgLeaveParty {
 }
 
 message CMsgCustomGameInstallStatus {
-	optional ECustomGameInstallStatus status = 1 [default = k_ECustomGameInstallStatus_Unknown];
+	optional ECustomGameInstallStatus status = 1;
 	optional string message = 2;
 	optional fixed32 latest_timestamp_from_steam = 3;
 }
@@ -138,56 +130,14 @@ message CMsgLANServerAvailable {
 }
 
 message CSOEconGameAccountClient {
-	optional uint32 additional_backpack_slots = 1 [default = 0];
-	optional bool trial_account = 2 [default = false];
-	optional bool eligible_for_online_play = 3 [default = true];
+	optional uint32 additional_backpack_slots = 1;
+	optional bool trial_account = 2;
+	optional bool eligible_for_online_play = 3;
 	optional bool need_to_choose_most_helpful_friend = 4;
 	optional bool in_coaches_list = 5;
 	optional fixed32 trade_ban_expiration = 6;
 	optional fixed32 duel_ban_expiration = 7;
-	optional bool made_first_purchase = 9 [default = false];
-}
-
-message CSOItemCriteriaCondition {
-	optional int32 op = 1;
-	optional string field = 2;
-	optional bool required = 3;
-	optional float float_value = 4;
-	optional string string_value = 5;
-}
-
-message CSOItemCriteria {
-	optional uint32 item_level = 1;
-	optional int32 item_quality = 2;
-	optional bool item_level_set = 3;
-	optional bool item_quality_set = 4;
-	optional uint32 initial_inventory = 5;
-	optional uint32 initial_quantity = 6;
-	optional bool ignore_enabled_flag = 8;
-	repeated CSOItemCriteriaCondition conditions = 9;
-	optional bool recent_only = 10;
-}
-
-message CSOItemRecipe {
-	optional uint32 def_index = 1;
-	optional string name = 2;
-	optional string n_a = 3;
-	optional string desc_inputs = 4;
-	optional string desc_outputs = 5;
-	optional string di_a = 6;
-	optional string di_b = 7;
-	optional string di_c = 8;
-	optional string do_a = 9;
-	optional string do_b = 10;
-	optional string do_c = 11;
-	optional bool requires_all_same_class = 12;
-	optional bool requires_all_same_slot = 13;
-	optional int32 class_usage_for_output = 14;
-	optional int32 slot_usage_for_output = 15;
-	optional int32 set_for_output = 16;
-	repeated CSOItemCriteria input_items_criteria = 20;
-	repeated CSOItemCriteria output_items_criteria = 21;
-	repeated uint32 input_item_dupe_counts = 22;
+	optional bool made_first_purchase = 9;
 }
 
 message CMsgApplyStrangePart {
@@ -221,40 +171,20 @@ message CSOEconItem {
 	optional uint32 account_id = 2;
 	optional uint32 inventory = 3;
 	optional uint32 def_index = 4;
-	optional uint32 quantity = 5 [default = 1];
-	optional uint32 level = 6 [default = 1];
-	optional uint32 quality = 7 [default = 4];
-	optional uint32 flags = 8 [default = 0];
-	optional uint32 origin = 9 [default = 0];
+	optional uint32 quantity = 5;
+	optional uint32 level = 6;
+	optional uint32 quality = 7;
+	optional uint32 flags = 8;
+	optional uint32 origin = 9;
 	repeated CSOEconItemAttribute attribute = 12;
 	optional CSOEconItem interior_item = 13;
-	optional uint32 style = 15 [default = 0];
-	optional uint64 original_id = 16 [default = 0];
+	optional uint32 style = 15;
+	optional uint64 original_id = 16;
 	repeated CSOEconItemEquipped equipped_state = 18;
 }
 
 message CMsgSortItems {
 	optional uint32 sort_type = 1;
-}
-
-message CSOEconClaimCode {
-	optional uint32 account_id = 1;
-	optional uint32 code_type = 2;
-	optional uint32 time_acquired = 3;
-	optional string code = 4;
-}
-
-message CMsgUpdateItemSchema {
-	optional bytes items_game = 1;
-	optional fixed32 item_schema_version = 2;
-	optional string items_game_url = 3;
-}
-
-message CMsgGCError {
-	optional string error_text = 1;
-}
-
-message CMsgRequestInventoryRefresh {
 }
 
 message CMsgConVarValue {
@@ -284,52 +214,15 @@ message CMsgSetItemPositions {
 	repeated CMsgSetItemPositions.ItemPosition item_positions = 1;
 }
 
-message CMsgGCNameItemNotification {
-	optional fixed64 player_steamid = 1;
-	optional uint32 item_def_index = 2;
-	optional string item_name_custom = 3;
-}
-
-message CMsgGCClientDisplayNotification {
-	optional string notification_title_localization_key = 1;
-	optional string notification_body_localization_key = 2;
-	repeated string body_substring_keys = 3;
-	repeated string body_substring_values = 4;
-}
-
-message CMsgGCShowItemsPickedUp {
-	optional fixed64 player_steamid = 1;
-}
-
-message CMsgGCIncrementKillCountResponse {
-	optional uint32 killer_account_id = 1 [(key_field) = true];
-	optional uint32 num_kills = 2;
-	optional uint32 item_def = 3;
-	optional uint32 level_type = 4;
-}
-
 message CSOEconItemDropRateBonus {
-	optional uint32 account_id = 1 [(key_field) = true];
+	optional uint32 account_id = 1;
 	optional fixed32 expiration_date = 2;
-	optional float bonus = 3 [(key_field) = true];
+	optional float bonus = 3;
 	optional uint32 bonus_count = 4;
 	optional uint64 item_id = 5;
 	optional uint32 def_index = 6;
 	optional uint32 seconds_left = 7;
-	optional uint32 booster_type = 8 [(key_field) = true];
-}
-
-message CSOEconItemLeagueViewPass {
-	optional uint32 account_id = 1 [(key_field) = true];
-	optional uint32 league_id = 2 [(key_field) = true];
-	optional uint32 itemindex = 4;
-	optional uint32 grant_reason = 5;
-}
-
-message CSOEconItemEventTicket {
-	optional uint32 account_id = 1;
-	optional uint32 event_id = 2;
-	optional uint64 item_id = 3;
+	optional uint32 booster_type = 8;
 }
 
 message CSOEconItemTournamentPassport {
@@ -369,11 +262,6 @@ message CMsgGCToGCDirtySDOCache {
 	optional uint64 key_uint64 = 2;
 }
 
-message CMsgGCToGCDirtyMultipleSDOCache {
-	optional uint32 sdo_type = 1;
-	repeated uint64 key_uint64 = 2;
-}
-
 message CMsgGCToGCApplyLocalizationDiff {
 	optional uint32 language = 1;
 	optional string packed_diff = 2;
@@ -381,11 +269,6 @@ message CMsgGCToGCApplyLocalizationDiff {
 
 message CMsgGCToGCApplyLocalizationDiffResponse {
 	optional bool success = 1;
-}
-
-message CMsgGCCollectItem {
-	optional uint64 collection_item_id = 1;
-	optional uint64 subject_item_id = 2;
 }
 
 message CMsgSDONoMemcached {
@@ -406,35 +289,10 @@ message CMsgGCClientVersionUpdated {
 message CMsgGCToGCWebAPIAccountChanged {
 }
 
-message CMsgRecipeComponent {
-	optional uint64 subject_item_id = 1;
-	optional uint64 attribute_index = 2;
-}
-
-message CMsgFulfillDynamicRecipeComponent {
-	optional uint64 tool_item_id = 1;
-	repeated CMsgRecipeComponent consumption_components = 2;
-}
-
-message CMsgGCClientMarketDataRequest {
-	optional uint32 user_currency = 1;
-}
-
-message CMsgGCClientMarketDataEntry {
-	optional uint32 item_def_index = 1;
-	optional uint32 item_quality = 2;
-	optional uint32 item_sell_listings = 3;
-	optional uint32 price_in_local_currency = 4;
-}
-
-message CMsgGCClientMarketData {
-	repeated CMsgGCClientMarketDataEntry entries = 1;
-}
-
 message CMsgExtractGems {
 	optional uint64 tool_item_id = 1;
 	optional uint64 item_item_id = 2;
-	optional uint32 item_socket_id = 3 [default = 65535];
+	optional uint32 item_socket_id = 3;
 }
 
 message CMsgExtractGemsResponse {
@@ -447,7 +305,7 @@ message CMsgExtractGemsResponse {
 	}
 
 	optional uint64 item_id = 1;
-	optional CMsgExtractGemsResponse.EExtractGems response = 2 [default = k_ExtractGems_Succeeded];
+	optional CMsgExtractGemsResponse.EExtractGems response = 2;
 }
 
 message CMsgAddSocket {
@@ -466,7 +324,7 @@ message CMsgAddSocketResponse {
 
 	optional uint64 item_id = 1;
 	repeated uint32 updated_socket_index = 2;
-	optional CMsgAddSocketResponse.EAddSocket response = 3 [default = k_AddSocket_Succeeded];
+	optional CMsgAddSocketResponse.EAddSocket response = 3;
 }
 
 message CMsgAddItemToSocketData {
@@ -493,7 +351,7 @@ message CMsgAddItemToSocketResponse {
 
 	optional uint64 item_item_id = 1;
 	repeated uint32 updated_socket_index = 2;
-	optional CMsgAddItemToSocketResponse.EAddGem response = 3 [default = k_AddGem_Succeeded];
+	optional CMsgAddItemToSocketResponse.EAddGem response = 3;
 }
 
 message CMsgResetStrangeGemCount {
@@ -510,7 +368,7 @@ message CMsgResetStrangeGemCountResponse {
 		k_ResetGem_Failed_SocketCannotBeReset = 4;
 	}
 
-	optional CMsgResetStrangeGemCountResponse.EResetGem response = 1 [default = k_ResetGem_Succeeded];
+	optional CMsgResetStrangeGemCountResponse.EResetGem response = 1;
 }
 
 message CMsgGCToClientPollFileRequest {
@@ -539,4 +397,24 @@ message CMsgGCToGCReloadServerRegionSettings {
 
 message CMsgGCAdditionalWelcomeMsgList {
 	repeated CExtraMsgBlock welcome_messages = 1;
+}
+
+message CMsgApplyRemoteConVars {
+	message ConVar {
+		optional string name = 1;
+		optional string value = 2;
+		optional uint32 version_min = 3;
+		optional uint32 version_max = 4;
+		optional EGCPlatform platform = 5;
+	}
+
+	repeated CMsgApplyRemoteConVars.ConVar con_vars = 1;
+}
+
+message CMsgGCToClientApplyRemoteConVars {
+	optional CMsgApplyRemoteConVars msg = 1;
+}
+
+message CMsgGCToServerApplyRemoteConVars {
+	optional CMsgApplyRemoteConVars msg = 1;
 }

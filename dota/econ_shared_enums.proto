@@ -1,6 +1,7 @@
 syntax = "proto2";
 
 package dota;
+option go_package = "github.com/dotabuff/manta/dota;dota";
 
 option optimize_for = SPEED;
 option cc_generic_services = false;
@@ -46,6 +47,6 @@ enum EGCMsgUseItemResponse {
 }
 
 message CMsgGenericResult {
-	optional uint32 eresult = 1 [default = 2];
+	optional uint32 eresult = 1;
 	optional string debug_message = 2;
 }

@@ -1,6 +1,7 @@
 syntax = "proto2";
 
 package dota;
+option go_package = "github.com/dotabuff/manta/dota;dota";
 
 option optimize_for = SPEED;
 option cc_generic_services = false;
@@ -33,7 +34,7 @@ message CClientMsg_CustomGameEventBounce {
 }
 
 message CClientMsg_ClientUIEvent {
-	optional EClientUIEvent event = 1 [default = EClientUIEvent_Invalid];
+	optional EClientUIEvent event = 1;
 	optional uint32 ent_ehandle = 2;
 	optional uint32 client_ehandle = 3;
 	optional string data1 = 4;
