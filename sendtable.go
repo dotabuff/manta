@@ -16,6 +16,7 @@ var pointerTypes = map[string]bool{
 	"CDOTASpectatorGraphManager": true,
 	"CPlayerLocalData":           true,
 	"CPlayer_CameraServices":     true,
+	"CDOTAGameRules":             true,
 }
 
 var itemCounts = map[string]int{
@@ -78,7 +79,7 @@ func (p *Parser) onCDemoSendTables(m *dota.CDemoSendTables) error {
 
 				// determine field model
 				if field.serializer != nil {
-					if pointerTypes[field.fieldType.baseType] {
+					if field.fieldType.pointer || pointerTypes[field.fieldType.baseType] {
 						field.setModel(fieldModelFixedTable)
 					} else {
 						field.setModel(fieldModelVariableTable)
