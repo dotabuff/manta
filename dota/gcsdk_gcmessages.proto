@@ -134,16 +134,16 @@ message CMsgGCMultiplexMessage {
 }
 
 message CMsgGCToGCSubGCStarting {
-	optional uint32 dir_index = 1;
+	optional int32 dir_index = 1;
 }
 
 message CGCToGCMsgMasterAck {
 	message Process {
-		optional uint32 dir_index = 1;
+		optional int32 dir_index = 1;
 		repeated uint32 type_instances = 2;
 	}
 
-	optional uint32 dir_index = 1;
+	optional int32 dir_index = 1;
 	optional string machine_name = 3;
 	optional string process_name = 4;
 	repeated CGCToGCMsgMasterAck.Process directory = 6;
@@ -163,7 +163,7 @@ message CMsgGCToGCUniverseStartupResponse {
 
 message CGCToGCMsgMasterStartupComplete {
 	message GCInfo {
-		optional uint32 dir_index = 1;
+		optional int32 dir_index = 1;
 		optional string machine_name = 2;
 	}
 

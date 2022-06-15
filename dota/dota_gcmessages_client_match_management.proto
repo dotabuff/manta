@@ -58,7 +58,6 @@ message CMsgStartFindingMatch {
 	optional uint32 matchgroups = 2;
 	optional uint32 client_version = 3;
 	optional uint32 game_modes = 4;
-	optional DOTABotDifficulty bot_difficulty = 5;
 	optional MatchType match_type = 6;
 	optional uint32 matchlanguages = 7;
 	optional uint32 team_id = 8;
@@ -67,13 +66,14 @@ message CMsgStartFindingMatch {
 	optional CMsgClientPingData ping_data = 12;
 	optional uint32 region_select_flags = 13;
 	optional bool solo_queue = 14;
-	optional uint32 bot_script_index = 15;
 	optional uint32 steam_clan_account_id = 16;
 	optional bool is_challenge_match = 17;
 	optional uint32 lane_selection_flags = 18;
 	optional bool high_priority_disabled = 19;
 	optional bool disable_experimental_gameplay = 20;
 	optional uint32 custom_game_difficulty_mask = 21;
+	optional uint32 bot_difficulty_mask = 22;
+	optional uint32 bot_script_index_mask = 23;
 }
 
 message CMsgStartFindingMatchResult {
@@ -252,6 +252,8 @@ message CMsgPracticeLobbyListResponseEntry {
 	optional uint32 server_region = 17;
 	optional uint32 league_id = 19;
 	optional string lan_host_ping_location = 20;
+	optional uint32 min_player_count = 21;
+	optional bool penalties_enabled = 22;
 }
 
 message CMsgPracticeLobbyListResponse {
@@ -318,6 +320,11 @@ message CMsgJoinableCustomLobbiesResponseEntry {
 	optional uint32 server_region = 9;
 	optional bool has_pass_key = 11;
 	optional string lan_host_ping_location = 12;
+	optional uint32 lobby_creation_time = 13;
+	optional uint32 custom_game_timestamp = 14;
+	optional uint64 custom_game_crc = 15;
+	optional uint32 min_player_count = 16;
+	optional bool penalties_enabled = 17;
 }
 
 message CMsgJoinableCustomLobbiesResponse {
@@ -351,15 +358,6 @@ message CMsgBotGameCreate {
 	optional DOTA_GC_TEAM team = 4;
 	optional uint32 game_mode = 5;
 	optional DOTABotDifficulty difficulty_dire = 6;
-}
-
-message CMsgCustomGameCreate {
-	optional string search_key = 1;
-	optional uint32 client_version = 2;
-	optional uint32 difficulty = 3;
-	optional string game_mode = 4;
-	optional string map = 5;
-	optional uint64 custom_game_id = 7;
 }
 
 message CMsgDOTAPartyMemberSetCoach {

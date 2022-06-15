@@ -340,8 +340,8 @@ message CMsgDOTADPCSeasonResults {
 	}
 
 	message Standing {
-		optional uint32 region = 1;
-		optional uint32 division = 2;
+		optional ELeagueRegion region = 1;
+		optional ELeagueDivision division = 2;
 		repeated CMsgDOTADPCSeasonResults.StandingEntry entries = 3;
 	}
 

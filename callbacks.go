@@ -62,6 +62,9 @@ type Callbacks struct {
 	onCSVCMsg_FullFrameSplit                  []func(*dota.CSVCMsg_FullFrameSplit) error
 	onCSVCMsg_RconServerDetails               []func(*dota.CSVCMsg_RconServerDetails) error
 	onCSVCMsg_UserMessage                     []func(*dota.CSVCMsg_UserMessage) error
+	onCSVCMsg_HltvReplay                      []func(*dota.CSVCMsg_HltvReplay) error
+	onCSVCMsg_Broadcast_Command               []func(*dota.CSVCMsg_Broadcast_Command) error
+	onCSVCMsg_HltvFixupOperatorStatus         []func(*dota.CSVCMsg_HltvFixupOperatorStatus) error
 	onCUserMessageAchievementEvent            []func(*dota.CUserMessageAchievementEvent) error
 	onCUserMessageCloseCaption                []func(*dota.CUserMessageCloseCaption) error
 	onCUserMessageCloseCaptionDirect          []func(*dota.CUserMessageCloseCaptionDirect) error
@@ -83,7 +86,6 @@ type Callbacks struct {
 	onCUserMessageTextMsg                     []func(*dota.CUserMessageTextMsg) error
 	onCUserMessageScreenTilt                  []func(*dota.CUserMessageScreenTilt) error
 	onCUserMessageVoiceMask                   []func(*dota.CUserMessageVoiceMask) error
-	onCUserMessageVoiceSubtitle               []func(*dota.CUserMessageVoiceSubtitle) error
 	onCUserMessageSendAudio                   []func(*dota.CUserMessageSendAudio) error
 	onCUserMessageItemPickup                  []func(*dota.CUserMessageItemPickup) error
 	onCUserMessageAmmoDenied                  []func(*dota.CUserMessageAmmoDenied) error
@@ -101,6 +103,7 @@ type Callbacks struct {
 	onCUserMessageHapticsManagerPulse         []func(*dota.CUserMessageHapticsManagerPulse) error
 	onCUserMessageHapticsManagerEffect        []func(*dota.CUserMessageHapticsManagerEffect) error
 	onCUserMessageCommandQueueState           []func(*dota.CUserMessageCommandQueueState) error
+	onCUserMessageUpdateCssClasses            []func(*dota.CUserMessageUpdateCssClasses) error
 	onCMsgVDebugGameSessionIDEvent            []func(*dota.CMsgVDebugGameSessionIDEvent) error
 	onCMsgPlaceDecalEvent                     []func(*dota.CMsgPlaceDecalEvent) error
 	onCMsgClearWorldDecalsEvent               []func(*dota.CMsgClearWorldDecalsEvent) error
@@ -538,6 +541,21 @@ func (c *Callbacks) OnCSVCMsg_UserMessage(fn func(*dota.CSVCMsg_UserMessage) err
 	c.onCSVCMsg_UserMessage = append(c.onCSVCMsg_UserMessage, fn)
 }
 
+// OnCSVCMsg_HltvReplay registers a callback for SVC_Messages_svc_HltvReplay
+func (c *Callbacks) OnCSVCMsg_HltvReplay(fn func(*dota.CSVCMsg_HltvReplay) error) {
+	c.onCSVCMsg_HltvReplay = append(c.onCSVCMsg_HltvReplay, fn)
+}
+
+// OnCSVCMsg_Broadcast_Command registers a callback for SVC_Messages_svc_Broadcast_Command
+func (c *Callbacks) OnCSVCMsg_Broadcast_Command(fn func(*dota.CSVCMsg_Broadcast_Command) error) {
+	c.onCSVCMsg_Broadcast_Command = append(c.onCSVCMsg_Broadcast_Command, fn)
+}
+
+// OnCSVCMsg_HltvFixupOperatorStatus registers a callback for SVC_Messages_svc_HltvFixupOperatorStatus
+func (c *Callbacks) OnCSVCMsg_HltvFixupOperatorStatus(fn func(*dota.CSVCMsg_HltvFixupOperatorStatus) error) {
+	c.onCSVCMsg_HltvFixupOperatorStatus = append(c.onCSVCMsg_HltvFixupOperatorStatus, fn)
+}
+
 // OnCUserMessageAchievementEvent registers a callback for EBaseUserMessages_UM_AchievementEvent
 func (c *Callbacks) OnCUserMessageAchievementEvent(fn func(*dota.CUserMessageAchievementEvent) error) {
 	c.onCUserMessageAchievementEvent = append(c.onCUserMessageAchievementEvent, fn)
@@ -643,11 +661,6 @@ func (c *Callbacks) OnCUserMessageVoiceMask(fn func(*dota.CUserMessageVoiceMask)
 	c.onCUserMessageVoiceMask = append(c.onCUserMessageVoiceMask, fn)
 }
 
-// OnCUserMessageVoiceSubtitle registers a callback for EBaseUserMessages_UM_VoiceSubtitle
-func (c *Callbacks) OnCUserMessageVoiceSubtitle(fn func(*dota.CUserMessageVoiceSubtitle) error) {
-	c.onCUserMessageVoiceSubtitle = append(c.onCUserMessageVoiceSubtitle, fn)
-}
-
 // OnCUserMessageSendAudio registers a callback for EBaseUserMessages_UM_SendAudio
 func (c *Callbacks) OnCUserMessageSendAudio(fn func(*dota.CUserMessageSendAudio) error) {
 	c.onCUserMessageSendAudio = append(c.onCUserMessageSendAudio, fn)
@@ -731,6 +744,11 @@ func (c *Callbacks) OnCUserMessageHapticsManagerEffect(fn func(*dota.CUserMessag
 // OnCUserMessageCommandQueueState registers a callback for EBaseUserMessages_UM_CommandQueueState
 func (c *Callbacks) OnCUserMessageCommandQueueState(fn func(*dota.CUserMessageCommandQueueState) error) {
 	c.onCUserMessageCommandQueueState = append(c.onCUserMessageCommandQueueState, fn)
+}
+
+// OnCUserMessageUpdateCssClasses registers a callback for EBaseUserMessages_UM_UpdateCssClasses
+func (c *Callbacks) OnCUserMessageUpdateCssClasses(fn func(*dota.CUserMessageUpdateCssClasses) error) {
+	c.onCUserMessageUpdateCssClasses = append(c.onCUserMessageUpdateCssClasses, fn)
 }
 
 // OnCMsgVDebugGameSessionIDEvent registers a callback for EBaseGameEvents_GE_VDebugGameSessionIDEvent
@@ -2551,6 +2569,63 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 
 		return nil
 
+	case 73: // dota.SVC_Messages_svc_HltvReplay
+		if c.onCSVCMsg_HltvReplay == nil {
+			return nil
+		}
+
+		msg := &dota.CSVCMsg_HltvReplay{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCSVCMsg_HltvReplay {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 74: // dota.SVC_Messages_svc_Broadcast_Command
+		if c.onCSVCMsg_Broadcast_Command == nil {
+			return nil
+		}
+
+		msg := &dota.CSVCMsg_Broadcast_Command{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCSVCMsg_Broadcast_Command {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 75: // dota.SVC_Messages_svc_HltvFixupOperatorStatus
+		if c.onCSVCMsg_HltvFixupOperatorStatus == nil {
+			return nil
+		}
+
+		msg := &dota.CSVCMsg_HltvFixupOperatorStatus{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCSVCMsg_HltvFixupOperatorStatus {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
 	case 101: // dota.EBaseUserMessages_UM_AchievementEvent
 		if c.onCUserMessageAchievementEvent == nil {
 			return nil
@@ -2950,25 +3025,6 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 
 		return nil
 
-	case 129: // dota.EBaseUserMessages_UM_VoiceSubtitle
-		if c.onCUserMessageVoiceSubtitle == nil {
-			return nil
-		}
-
-		msg := &dota.CUserMessageVoiceSubtitle{}
-		c.pb.SetBuf(buf)
-		if err := c.pb.Unmarshal(msg); err != nil {
-			return err
-		}
-
-		for _, fn := range c.onCUserMessageVoiceSubtitle {
-			if err := fn(msg); err != nil {
-				return err
-			}
-		}
-
-		return nil
-
 	case 130: // dota.EBaseUserMessages_UM_SendAudio
 		if c.onCUserMessageSendAudio == nil {
 			return nil
@@ -3285,6 +3341,25 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		for _, fn := range c.onCUserMessageCommandQueueState {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 153: // dota.EBaseUserMessages_UM_UpdateCssClasses
+		if c.onCUserMessageUpdateCssClasses == nil {
+			return nil
+		}
+
+		msg := &dota.CUserMessageUpdateCssClasses{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCUserMessageUpdateCssClasses {
 			if err := fn(msg); err != nil {
 				return err
 			}

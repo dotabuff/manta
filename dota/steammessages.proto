@@ -48,7 +48,7 @@ message CMsgProtoBufHeader {
 	optional int32 eresult = 13;
 	optional string error_message = 14;
 	optional GCProtoBufMsgSrc gc_msg_src = 200;
-	optional uint32 gc_dir_index_source = 201;
+	optional int32 gc_dir_index_source = 201;
 }
 
 message CGCSystemMsg_GetAccountDetails {

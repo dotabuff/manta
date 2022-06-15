@@ -259,6 +259,17 @@ message CMsgGameMatchSignOut {
 			optional uint32 wards_placed = 60;
 			optional uint32 camps_stacked = 61;
 			optional uint32 player_slot = 62;
+			optional uint32 predicted_position = 66;
+			optional uint32 lane_outcomes = 67;
+			optional uint32 friendly_t1_destroyed_time = 68;
+			optional uint32 enemy_t1_destroyed_time = 69;
+			optional uint32 friendly_roshan_kills = 70;
+			optional uint32 enemy_roshan_kills = 71;
+			optional uint32 power_runes = 72;
+			optional uint32 water_runes = 73;
+			optional float stun_duration = 74;
+			optional DOTA_GC_TEAM team_number = 75;
+			optional uint32 team_slot = 76;
 		}
 
 		repeated CMsgGameMatchSignOut.CTeam.CPlayer players = 1;
@@ -292,7 +303,7 @@ message CMsgGameMatchSignOut {
 	}
 
 	message WardPlacement {
-		optional uint32 player_id = 1;
+		optional int32 player_id = 1;
 		optional uint32 team_id = 2;
 		optional uint32 placed_time = 3;
 		optional uint32 building_state = 4;
@@ -332,6 +343,7 @@ message CMsgGameMatchSignOut {
 	optional CMsgSignOutGameplayStats gameplay_stats = 44;
 	repeated CExtraMsgBlock extra_messages = 54;
 	optional bool training_data_recorded = 55;
+	optional DOTA_GC_TEAM winning_team = 56;
 }
 
 message CMsgSignOutDraftInfo {
@@ -412,6 +424,8 @@ message CMsgSignOutCommunicationSummary {
 		optional uint32 chat_mutes = 13;
 		optional uint32 voice_mutes = 14;
 		repeated CMsgSignOutCommunicationSummary.PlayerCommunication.PingDetail ping_details = 15;
+		optional uint32 comms_blocks_solo = 16;
+		optional uint32 comms_blocks_mass = 17;
 	}
 
 	repeated CMsgSignOutCommunicationSummary.PlayerCommunication players = 1;
@@ -1064,6 +1078,7 @@ message CMsgServerToGCPlayerChallengeHistory {
 		optional bool team_won = 7;
 		optional uint64 audit_data = 8;
 		optional uint32 hero_id = 9;
+		optional uint32 rank_completed = 10;
 	}
 
 	optional uint64 match_id = 1;

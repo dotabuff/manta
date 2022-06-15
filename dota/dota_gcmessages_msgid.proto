@@ -125,7 +125,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCFantasyLivePlayerStats = 7308;
 	k_EMsgGCFantasyFinalPlayerStats = 7309;
 	k_EMsgGCFlipLobbyTeams = 7320;
-	k_EMsgGCCustomGameCreate = 7321;
 	k_EMsgGCToGCProcessPlayerReportForTarget = 7324;
 	k_EMsgGCToGCProcessReportSuccess = 7325;
 	k_EMsgGCNotifyAccountFlagsChange = 7326;
@@ -216,14 +215,22 @@ enum EDOTAGCMsg {
 	k_EMsgGCToGCUpdateProfileCards = 7533;
 	k_EMsgClientToGCGetProfileCard = 7534;
 	k_EMsgClientToGCGetProfileCardResponse = 7535;
+	k_EMsgClientToGCGetBattleReport = 7536;
+	k_EMsgClientToGCGetBattleReportResponse = 7537;
 	k_EMsgClientToGCSetProfileCardSlots = 7538;
 	k_EMsgGCToClientProfileCardUpdated = 7539;
 	k_EMsgServerToGCVictoryPredictions = 7540;
+	k_EMsgClientToGCGetBattleReportAggregateStats = 7541;
+	k_EMsgClientToGCGetBattleReportAggregateStatsResponse = 7542;
+	k_EMsgClientToGCGetBattleReportInfo = 7543;
+	k_EMsgClientToGCGetBattleReportInfoResponse = 7544;
 	k_EMsgSignOutCommunicationSummary = 7545;
 	k_EMsgServerToGCRequestStatus_Response = 7546;
 	k_EMsgClientToGCCreateHeroStatue = 7547;
 	k_EMsgGCToClientHeroStatueCreateResult = 7548;
 	k_EMsgGCGCToLANServerRelayConnect = 7549;
+	k_EMsgClientToGCAcknowledgeBattleReport = 7550;
+	k_EMsgClientToGCAcknowledgeBattleReportResponse = 7551;
 	k_EMsgServerToGCReportKillSummaries = 7554;
 	k_EMsgGCToGCUpdatePlayerPredictions = 7561;
 	k_EMsgGCToServerPredictionResult = 7562;
@@ -302,6 +309,10 @@ enum EDOTAGCMsg {
 	k_EMsgSignOutTextMuteInfo = 7683;
 	k_EMsgClientToGCPurchaseLabyrinthBlessings = 7684;
 	k_EMsgClientToGCPurchaseLabyrinthBlessingsResponse = 7685;
+	k_EMsgClientToGCPurchaseFilteredPlayerSlot = 7686;
+	k_EMsgGCToClientPurchaseFilteredPlayerSlotResponse = 7687;
+	k_EMsgClientToGCUpdateFilteredPlayerNote = 7688;
+	k_EMsgGCToClientUpdateFilteredPlayerNoteResponse = 7689;
 	k_EMsgServerToGCLockCharmTrading = 8004;
 	k_EMsgClientToGCPlayerStatsRequest = 8006;
 	k_EMsgGCToClientPlayerStatsResponse = 8007;
@@ -664,6 +675,7 @@ enum EDOTAGCMsg {
 	k_EMsgGCToClientUnderDraftGoldUpdated = 8731;
 	k_EMsgGCToServerRecordTrainingData = 8732;
 	k_EMsgSignOutBounties = 8733;
+	k_EMsgLobbyFeaturedGamemodeProgress = 8734;
 	k_EMsgLobbyGauntletProgress = 8735;
 	k_EMsgClientToGCSubmitDraftTriviaMatchAnswer = 8736;
 	k_EMsgClientToGCSubmitDraftTriviaMatchAnswerResponse = 8737;
@@ -750,4 +762,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCToServerScenarioSave = 8820;
 	k_EMsgGCToServerAbilityDraftLobbyData = 8821;
 	k_EMsgSignOutReportCommunications = 8822;
+	k_EMsgClientToGCBatchGetPlayerCardRosterRequest = 8823;
+	k_EMsgClientToGCBatchGetPlayerCardRosterResponse = 8824;
 }
