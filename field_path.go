@@ -284,14 +284,14 @@ func newFieldPath() *fieldPath {
 var fpPool = &sync.Pool{
 	New: func() interface{} {
 		return &fieldPath{
-			path: make([]int, 6),
+			path: make([]int, 7),
 			last: 0,
 			done: false,
 		}
 	},
 }
 
-var fpReset = []int{-1, 0, 0, 0, 0, 0}
+var fpReset = []int{-1, 0, 0, 0, 0, 0, 0}
 
 // reset resets the fieldPath to the empty value
 func (fp *fieldPath) reset() {
