@@ -249,15 +249,24 @@ func parseStringTable(buf []byte, numUpdates int32, name string, userDataFixed b
 		hasValue := r.readBoolean()
 		if hasValue {
 			bitSize := uint32(0)
+			isCompressed := false
 			if userDataFixed {
 				bitSize = uint32(userDataSize)
 			} else {
 				if (flags & 0x1) != 0 {
-					r.readBoolean()
+					isCompressed = r.readBoolean()
 				}
 				bitSize = r.readBits(17) * 8
 			}
 			value = r.readBitsAsBytes(bitSize)
+
+			if isCompressed {
+				tmp, err := snappy.Decode(nil, value)
+				if err != nil {
+					_panicf("unable to decode snappy compressed stringtable item (%s, %d, %s): %s", name, index, key, err)
+				}
+				value = tmp
+			}
 		}
 
 		items = append(items, &stringTableItem{index, key, value})

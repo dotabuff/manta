@@ -11,6 +11,8 @@ import (
 func BenchmarkMatch2159568145(b *testing.B) { testScenarios[2159568145].bench(b) }
 
 // Test client
+func TestMatchNew6841449576(t *testing.T) { testScenarios[6841449576].test(t) }
+func TestMatchNew6841524459(t *testing.T) { testScenarios[6841524459].test(t) }
 func TestMatchNew6792460214(t *testing.T) { testScenarios[6792460214].test(t) }
 func TestMatchNew6492864631(t *testing.T) { testScenarios[6492864631].test(t) }
 func TestMatchNew6320800962(t *testing.T) { testScenarios[6320800962].test(t) }
@@ -75,6 +77,20 @@ type testScenario struct {
 }
 
 var testScenarios = map[int64]testScenario{
+	6841449576: {
+		matchId:               "6841449576",
+		replayUrl:             "https://s3-us-west-2.amazonaws.com/manta.dotabuff/6841449576.dem",
+		expectGameBuild:       5520,
+		expectEntityEvents:    1614296,
+		expectUnitOrderEvents: 45320,
+	},
+	6841524459: {
+		matchId:               "6841524459",
+		replayUrl:             "https://s3-us-west-2.amazonaws.com/manta.dotabuff/6841524459.dem",
+		expectGameBuild:       5520,
+		expectEntityEvents:    3009702,
+		expectUnitOrderEvents: 70702,
+	},
 	6792460214: {
 		matchId:               "6792460214",
 		replayUrl:             "https://s3-us-west-2.amazonaws.com/manta.dotabuff/6792460214.dem",
