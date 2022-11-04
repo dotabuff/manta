@@ -177,6 +177,24 @@ message CMsgTeamFanContentStatus {
 	repeated CMsgTeamFanContentStatus.TeamStatus team_status_list = 1;
 }
 
+message CMsgTeamFanContentAutographStatus {
+	message AutographStatus {
+		optional string pro_name = 1;
+		optional uint32 account_id = 2;
+		optional uint32 timestamp = 3;
+		optional string file = 4;
+	}
+
+	message TeamStatus {
+		optional string name = 1;
+		optional uint32 team_id = 2;
+		repeated CMsgTeamFanContentAutographStatus.AutographStatus autographs = 3;
+		optional uint32 workshop_account_id = 4;
+	}
+
+	repeated CMsgTeamFanContentAutographStatus.TeamStatus team_autographs = 1;
+}
+
 message CMsgDPCEvent {
 	message PhaseInfo {
 		optional CMsgDPCEvent.ELeagueEventPhase phase = 1;
@@ -204,6 +222,8 @@ message CMsgDPCEvent {
 		SUMMER_2022_MAJOR = 10;
 		INTERNATIONAL_2022 = 11;
 		CHINA_REGIONAL_FINALS = 12;
+		INTERNATIONAL_2022_REGIONAL_QUALIFIERS = 13;
+		INTERNATIONAL_2022_LAST_CHANCE_QUALIFIERS = 14;
 	}
 
 	enum ELeagueEventPhase {
@@ -310,4 +330,20 @@ message CMsgChatToxicityReport {
 	optional string status = 5;
 	optional uint32 result = 6;
 	optional string message = 7;
+}
+
+message CMsgGetTeamAuditInformation {
+	message Action {
+		optional uint32 registration_period = 1;
+		optional uint32 account_id = 2;
+		optional uint32 action = 3;
+		optional uint32 timestamp = 4;
+		optional string player_name = 5;
+		optional string player_real_name = 6;
+	}
+
+	optional uint32 team_id = 1;
+	optional string team_name = 2;
+	repeated CMsgGetTeamAuditInformation.Action actions = 3;
+	optional uint32 last_updated = 4;
 }

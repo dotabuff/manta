@@ -252,7 +252,7 @@ message CMsgGameMatchSignOut {
 			optional uint32 command_count = 53;
 			optional uint32 mouse_click_cast_command_count = 54;
 			optional uint32 teleports_used = 55;
-			optional uint32 cavern_crawl_map_variant = 56;
+			optional uint32 cavern_crawl_preferred_map_variant = 56;
 			optional uint32 bounty_runes = 57;
 			optional uint32 outposts_captured = 58;
 			optional uint32 dewards = 59;
@@ -270,6 +270,9 @@ message CMsgGameMatchSignOut {
 			optional float stun_duration = 74;
 			optional DOTA_GC_TEAM team_number = 75;
 			optional uint32 team_slot = 76;
+			optional uint32 time_purchased_shard = 77;
+			optional uint32 time_purchased_aghs = 78;
+			repeated uint32 ability_draft_abilities = 79;
 		}
 
 		repeated CMsgGameMatchSignOut.CTeam.CPlayer players = 1;
@@ -1062,7 +1065,7 @@ message CMsgItemPurchaseSequenceSteamMLEntry {
 message CMsgServerToGCCavernCrawlIsHeroActive {
 	optional uint32 event_id = 1;
 	optional uint32 account_id = 2;
-	optional uint32 map_variant = 3;
+	optional uint32 preferred_map_variant = 3;
 	optional uint32 hero_id = 4;
 	optional bool turbo_mode = 5;
 }
@@ -1093,6 +1096,7 @@ message CMsgServerToGCCavernCrawlIsHeroActiveResponse {
 	}
 
 	optional bool result = 1;
+	optional uint32 map_variant = 5;
 	optional uint32 potential_winnings = 2;
 	repeated CMsgServerToGCCavernCrawlIsHeroActiveResponse.MapResults map_results = 3;
 	optional uint32 potential_plus_shard_winnings = 4;
@@ -1361,4 +1365,17 @@ message CMsgCheerState {
 message CMsgServerToGCReportCheerState {
 	optional CMsgCheerConfig cheer_config = 1;
 	optional CMsgCheerState cheer_state = 2;
+}
+
+message CMsgServerToGCGetStickerHeroes {
+	repeated uint32 account_ids = 1;
+}
+
+message CMsgServerToGCGetStickerHeroesResponse {
+	message Player {
+		optional uint32 account_id = 1;
+		optional CMsgStickerHeroes stickers = 2;
+	}
+
+	repeated CMsgServerToGCGetStickerHeroesResponse.Player players = 1;
 }

@@ -1376,6 +1376,7 @@ message CMsgClientToGCRecyclePlayerCardResponse {
 		ERROR_ITEM_NOT_PLAYER_CARD = 4;
 		ERROR_FAILED_DUST_CARD_CREATE = 5;
 		ERROR_CARD_LOCKED = 6;
+		ERROR_NO_CARDS_SPECIFIED = 7;
 	}
 
 	optional CMsgClientToGCRecyclePlayerCardResponse.Result result = 1;
@@ -1982,6 +1983,7 @@ message CMsgProfileResponse {
 	repeated CMsgSuccessfulHero successful_heroes = 4;
 	optional CMsgRecentMatchInfo recent_match_details = 5;
 	optional CMsgProfileResponse.EResponse result = 6;
+	optional CMsgStickerbookPage stickerbook_page = 7;
 }
 
 message CMsgProfileUpdate {
@@ -1993,6 +1995,9 @@ message CMsgProfileUpdateResponse {
 	enum Result {
 		SUCCESS = 0;
 		FAILURE = 1;
+		FAILURE_BAD_HERO1 = 2;
+		FAILURE_BAD_HERO2 = 3;
+		FAILURE_BAD_HERO3 = 4;
 	}
 
 	optional CMsgProfileUpdateResponse.Result result = 1;
@@ -2934,4 +2939,207 @@ message CMsgClientToGCPurchaseLabyrinthBlessingsResponse {
 	}
 
 	optional CMsgClientToGCPurchaseLabyrinthBlessingsResponse.EResponse result = 1;
+}
+
+message CMsgClientToGCGetStickerbookRequest {
+	optional uint32 account_id = 1;
+}
+
+message CMsgClientToGCGetStickerbookResponse {
+	enum EResponse {
+		k_eInternalError = 0;
+		k_eSuccess = 1;
+		k_eTimeout = 2;
+		k_eNotAllowed = 3;
+		k_eTooBusy = 4;
+	}
+
+	optional CMsgClientToGCGetStickerbookResponse.EResponse response = 1;
+	optional CMsgStickerbook stickerbook = 2;
+}
+
+message CMsgClientToGCCreateStickerbookPageRequest {
+	optional uint32 team_id = 1;
+	optional EEvent event_id = 2;
+	optional EStickerbookPageType page_type = 3;
+}
+
+message CMsgClientToGCCreateStickerbookPageResponse {
+	enum EResponse {
+		k_eInternalError = 0;
+		k_eSuccess = 1;
+		k_eTimeout = 2;
+		k_eTooManyPages = 3;
+		k_eTooBusy = 4;
+	}
+
+	optional CMsgClientToGCCreateStickerbookPageResponse.EResponse response = 1;
+	optional uint32 page_number = 2;
+}
+
+message CMsgClientToGCDeleteStickerbookPageRequest {
+	optional uint32 page_num = 1;
+	optional uint32 sticker_count = 2;
+	optional uint32 sticker_max = 3;
+}
+
+message CMsgClientToGCDeleteStickerbookPageResponse {
+	enum EResponse {
+		k_eInternalError = 0;
+		k_eSuccess = 1;
+		k_eTimeout = 2;
+		k_eInvalidStickerCount = 3;
+		k_eTooBusy = 4;
+		k_eInvalidStickerMax = 5;
+		k_eInvalidPage = 6;
+	}
+
+	optional CMsgClientToGCDeleteStickerbookPageResponse.EResponse response = 1;
+}
+
+message CMsgClientToGCPlaceStickersRequest {
+	message StickerItem {
+		optional uint32 page_num = 2;
+		optional CMsgStickerbookSticker sticker = 3;
+	}
+
+	repeated CMsgClientToGCPlaceStickersRequest.StickerItem sticker_items = 1;
+}
+
+message CMsgClientToGCPlaceStickersResponse {
+	enum EResponse {
+		k_eInternalError = 0;
+		k_eSuccess = 1;
+		k_eTimeout = 2;
+		k_eMissingItem = 3;
+		k_eTooBusy = 4;
+		k_eDuplicateItem = 5;
+		k_eInvalidPage = 6;
+		k_ePageTypeMismatch = 7;
+		k_eTooManyStickers = 8;
+	}
+
+	optional CMsgClientToGCPlaceStickersResponse.EResponse response = 1;
+}
+
+message CMsgClientToGCPlaceCollectionStickersRequest {
+	message Slot {
+		optional uint32 page_num = 1;
+		optional uint32 slot = 2;
+		optional uint64 new_item_id = 3;
+		optional uint32 old_item_def_id = 4;
+		optional uint32 old_quality = 5;
+	}
+
+	repeated CMsgClientToGCPlaceCollectionStickersRequest.Slot slots = 1;
+}
+
+message CMsgClientToGCPlaceCollectionStickersResponse {
+	enum EResponse {
+		k_eInternalError = 0;
+		k_eSuccess = 1;
+		k_eTimeout = 2;
+		k_eMissingItem = 3;
+		k_eTooBusy = 4;
+		k_eDuplicateItem = 5;
+		k_eInvalidPage = 6;
+		k_ePageTypeMismatch = 7;
+		k_eOldItemMismatch = 8;
+		k_eInvalidSlot = 9;
+		k_eSlotTypeMismatch = 10;
+	}
+
+	optional CMsgClientToGCPlaceCollectionStickersResponse.EResponse response = 1;
+}
+
+message CMsgClientToGCOrderStickerbookTeamPageRequest {
+	optional CMsgStickerbookTeamPageOrderSequence page_order_sequence = 1;
+}
+
+message CMsgClientToGCOrderStickerbookTeamPageResponse {
+	enum EResponse {
+		k_eInternalError = 0;
+		k_eSuccess = 1;
+		k_eTimeout = 2;
+		k_eTooManyPages = 3;
+		k_eTooBusy = 4;
+		k_eInvalidPage = 5;
+	}
+
+	optional CMsgClientToGCOrderStickerbookTeamPageResponse.EResponse response = 1;
+}
+
+message CMsgClientToGCSetHeroSticker {
+	optional uint32 hero_id = 1;
+	optional uint64 new_item_id = 2;
+	optional uint64 old_item_id = 3;
+}
+
+message CMsgClientToGCSetHeroStickerResponse {
+	enum EResponse {
+		k_eInternalError = 0;
+		k_eSuccess = 1;
+		k_eTimeout = 2;
+		k_eMissingItem = 3;
+		k_eTooBusy = 4;
+		k_eOldItemMismatch = 5;
+		k_eInvalidHero = 6;
+	}
+
+	optional CMsgClientToGCSetHeroStickerResponse.EResponse response = 1;
+}
+
+message CMsgClientToGCGetHeroStickers {
+}
+
+message CMsgClientToGCGetHeroStickersResponse {
+	enum EResponse {
+		k_eInternalError = 0;
+		k_eSuccess = 1;
+		k_eTimeout = 2;
+		k_eTooBusy = 4;
+	}
+
+	optional CMsgClientToGCGetHeroStickersResponse.EResponse response = 1;
+	optional CMsgStickerHeroes sticker_heroes = 2;
+}
+
+message CMsgClientToGCSetFavoritePage {
+	optional uint32 page_num = 1;
+	optional bool clear = 2;
+}
+
+message CMsgClientToGCSetFavoritePageResponse {
+	enum EResponse {
+		k_eInternalError = 0;
+		k_eSuccess = 1;
+		k_eTimeout = 2;
+		k_eTooBusy = 4;
+		k_eInvalidPage = 5;
+	}
+
+	optional CMsgClientToGCSetFavoritePageResponse.EResponse response = 1;
+}
+
+message CMsgClientToGCClaimSwag {
+	optional EEvent event_id = 1;
+	optional uint32 action_id = 2;
+	optional uint32 data = 3;
+}
+
+message CMsgClientToGCClaimSwagResponse {
+	enum EResponse {
+		k_eInternalError = 0;
+		k_eSuccess = 1;
+		k_eTimeout = 2;
+		k_eTooBusy = 4;
+		k_eAlreadyClaimed = 5;
+		k_eDisabled = 6;
+		k_eInvalidRequest = 7;
+		k_eUserNotEligible = 8;
+		k_eStorageError = 9;
+		k_eRewardDisabled = 10;
+	}
+
+	optional CMsgClientToGCClaimSwagResponse.EResponse response = 1;
 }

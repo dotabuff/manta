@@ -35,6 +35,7 @@ type Callbacks struct {
 	onCNETMsg_SpawnGroup_SetCreationTick      []func(*dota.CNETMsg_SpawnGroup_SetCreationTick) error
 	onCNETMsg_SpawnGroup_Unload               []func(*dota.CNETMsg_SpawnGroup_Unload) error
 	onCNETMsg_SpawnGroup_LoadCompleted        []func(*dota.CNETMsg_SpawnGroup_LoadCompleted) error
+	onCNETMsg_DebugOverlay                    []func(*dota.CNETMsg_DebugOverlay) error
 	onCSVCMsg_ServerInfo                      []func(*dota.CSVCMsg_ServerInfo) error
 	onCSVCMsg_FlattenedSerializer             []func(*dota.CSVCMsg_FlattenedSerializer) error
 	onCSVCMsg_ClassInfo                       []func(*dota.CSVCMsg_ClassInfo) error
@@ -104,6 +105,10 @@ type Callbacks struct {
 	onCUserMessageHapticsManagerEffect        []func(*dota.CUserMessageHapticsManagerEffect) error
 	onCUserMessageCommandQueueState           []func(*dota.CUserMessageCommandQueueState) error
 	onCUserMessageUpdateCssClasses            []func(*dota.CUserMessageUpdateCssClasses) error
+	onCUserMessageServerFrameTime             []func(*dota.CUserMessageServerFrameTime) error
+	onCUserMessageLagCompensationError        []func(*dota.CUserMessageLagCompensationError) error
+	onCUserMessageRequestDllStatus            []func(*dota.CUserMessageRequestDllStatus) error
+	onCUserMessageRequestUtilAction           []func(*dota.CUserMessageRequestUtilAction) error
 	onCMsgVDebugGameSessionIDEvent            []func(*dota.CMsgVDebugGameSessionIDEvent) error
 	onCMsgPlaceDecalEvent                     []func(*dota.CMsgPlaceDecalEvent) error
 	onCMsgClearWorldDecalsEvent               []func(*dota.CMsgClearWorldDecalsEvent) error
@@ -256,6 +261,12 @@ type Callbacks struct {
 	onCDOTAUserMsg_MutedPlayers               []func(*dota.CDOTAUserMsg_MutedPlayers) error
 	onCDOTAUserMsg_ContextualTip              []func(*dota.CDOTAUserMsg_ContextualTip) error
 	onCDOTAUserMsg_ChatMessage                []func(*dota.CDOTAUserMsg_ChatMessage) error
+	onCDOTAUserMsg_NeutralCampAlert           []func(*dota.CDOTAUserMsg_NeutralCampAlert) error
+	onCDOTAUserMsg_RockPaperScissorsStarted   []func(*dota.CDOTAUserMsg_RockPaperScissorsStarted) error
+	onCDOTAUserMsg_RockPaperScissorsFinished  []func(*dota.CDOTAUserMsg_RockPaperScissorsFinished) error
+	onCDOTAUserMsg_DuelOpponentKilled         []func(*dota.CDOTAUserMsg_DuelOpponentKilled) error
+	onCDOTAUserMsg_DuelAccepted               []func(*dota.CDOTAUserMsg_DuelAccepted) error
+	onCDOTAUserMsg_DuelRequested              []func(*dota.CDOTAUserMsg_DuelRequested) error
 
 	pb *proto.Buffer
 }
@@ -404,6 +415,11 @@ func (c *Callbacks) OnCNETMsg_SpawnGroup_Unload(fn func(*dota.CNETMsg_SpawnGroup
 // OnCNETMsg_SpawnGroup_LoadCompleted registers a callback for NET_Messages_net_SpawnGroup_LoadCompleted
 func (c *Callbacks) OnCNETMsg_SpawnGroup_LoadCompleted(fn func(*dota.CNETMsg_SpawnGroup_LoadCompleted) error) {
 	c.onCNETMsg_SpawnGroup_LoadCompleted = append(c.onCNETMsg_SpawnGroup_LoadCompleted, fn)
+}
+
+// OnCNETMsg_DebugOverlay registers a callback for NET_Messages_net_DebugOverlay
+func (c *Callbacks) OnCNETMsg_DebugOverlay(fn func(*dota.CNETMsg_DebugOverlay) error) {
+	c.onCNETMsg_DebugOverlay = append(c.onCNETMsg_DebugOverlay, fn)
 }
 
 // OnCSVCMsg_ServerInfo registers a callback for SVC_Messages_svc_ServerInfo
@@ -749,6 +765,26 @@ func (c *Callbacks) OnCUserMessageCommandQueueState(fn func(*dota.CUserMessageCo
 // OnCUserMessageUpdateCssClasses registers a callback for EBaseUserMessages_UM_UpdateCssClasses
 func (c *Callbacks) OnCUserMessageUpdateCssClasses(fn func(*dota.CUserMessageUpdateCssClasses) error) {
 	c.onCUserMessageUpdateCssClasses = append(c.onCUserMessageUpdateCssClasses, fn)
+}
+
+// OnCUserMessageServerFrameTime registers a callback for EBaseUserMessages_UM_ServerFrameTime
+func (c *Callbacks) OnCUserMessageServerFrameTime(fn func(*dota.CUserMessageServerFrameTime) error) {
+	c.onCUserMessageServerFrameTime = append(c.onCUserMessageServerFrameTime, fn)
+}
+
+// OnCUserMessageLagCompensationError registers a callback for EBaseUserMessages_UM_LagCompensationError
+func (c *Callbacks) OnCUserMessageLagCompensationError(fn func(*dota.CUserMessageLagCompensationError) error) {
+	c.onCUserMessageLagCompensationError = append(c.onCUserMessageLagCompensationError, fn)
+}
+
+// OnCUserMessageRequestDllStatus registers a callback for EBaseUserMessages_UM_RequestDllStatus
+func (c *Callbacks) OnCUserMessageRequestDllStatus(fn func(*dota.CUserMessageRequestDllStatus) error) {
+	c.onCUserMessageRequestDllStatus = append(c.onCUserMessageRequestDllStatus, fn)
+}
+
+// OnCUserMessageRequestUtilAction registers a callback for EBaseUserMessages_UM_RequestUtilAction
+func (c *Callbacks) OnCUserMessageRequestUtilAction(fn func(*dota.CUserMessageRequestUtilAction) error) {
+	c.onCUserMessageRequestUtilAction = append(c.onCUserMessageRequestUtilAction, fn)
 }
 
 // OnCMsgVDebugGameSessionIDEvent registers a callback for EBaseGameEvents_GE_VDebugGameSessionIDEvent
@@ -1511,6 +1547,36 @@ func (c *Callbacks) OnCDOTAUserMsg_ChatMessage(fn func(*dota.CDOTAUserMsg_ChatMe
 	c.onCDOTAUserMsg_ChatMessage = append(c.onCDOTAUserMsg_ChatMessage, fn)
 }
 
+// OnCDOTAUserMsg_NeutralCampAlert registers a callback for EDotaUserMessages_DOTA_UM_NeutralCampAlert
+func (c *Callbacks) OnCDOTAUserMsg_NeutralCampAlert(fn func(*dota.CDOTAUserMsg_NeutralCampAlert) error) {
+	c.onCDOTAUserMsg_NeutralCampAlert = append(c.onCDOTAUserMsg_NeutralCampAlert, fn)
+}
+
+// OnCDOTAUserMsg_RockPaperScissorsStarted registers a callback for EDotaUserMessages_DOTA_UM_RockPaperScissorsStarted
+func (c *Callbacks) OnCDOTAUserMsg_RockPaperScissorsStarted(fn func(*dota.CDOTAUserMsg_RockPaperScissorsStarted) error) {
+	c.onCDOTAUserMsg_RockPaperScissorsStarted = append(c.onCDOTAUserMsg_RockPaperScissorsStarted, fn)
+}
+
+// OnCDOTAUserMsg_RockPaperScissorsFinished registers a callback for EDotaUserMessages_DOTA_UM_RockPaperScissorsFinished
+func (c *Callbacks) OnCDOTAUserMsg_RockPaperScissorsFinished(fn func(*dota.CDOTAUserMsg_RockPaperScissorsFinished) error) {
+	c.onCDOTAUserMsg_RockPaperScissorsFinished = append(c.onCDOTAUserMsg_RockPaperScissorsFinished, fn)
+}
+
+// OnCDOTAUserMsg_DuelOpponentKilled registers a callback for EDotaUserMessages_DOTA_UM_DuelOpponentKilled
+func (c *Callbacks) OnCDOTAUserMsg_DuelOpponentKilled(fn func(*dota.CDOTAUserMsg_DuelOpponentKilled) error) {
+	c.onCDOTAUserMsg_DuelOpponentKilled = append(c.onCDOTAUserMsg_DuelOpponentKilled, fn)
+}
+
+// OnCDOTAUserMsg_DuelAccepted registers a callback for EDotaUserMessages_DOTA_UM_DuelAccepted
+func (c *Callbacks) OnCDOTAUserMsg_DuelAccepted(fn func(*dota.CDOTAUserMsg_DuelAccepted) error) {
+	c.onCDOTAUserMsg_DuelAccepted = append(c.onCDOTAUserMsg_DuelAccepted, fn)
+}
+
+// OnCDOTAUserMsg_DuelRequested registers a callback for EDotaUserMessages_DOTA_UM_DuelRequested
+func (c *Callbacks) OnCDOTAUserMsg_DuelRequested(fn func(*dota.CDOTAUserMsg_DuelRequested) error) {
+	c.onCDOTAUserMsg_DuelRequested = append(c.onCDOTAUserMsg_DuelRequested, fn)
+}
+
 func (c *Callbacks) callByDemoType(t int32, buf []byte) error {
 	switch t {
 	case 0: // dota.EDemoCommands_DEM_Stop
@@ -2049,6 +2115,25 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		for _, fn := range c.onCNETMsg_SpawnGroup_LoadCompleted {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 15: // dota.NET_Messages_net_DebugOverlay
+		if c.onCNETMsg_DebugOverlay == nil {
+			return nil
+		}
+
+		msg := &dota.CNETMsg_DebugOverlay{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCNETMsg_DebugOverlay {
 			if err := fn(msg); err != nil {
 				return err
 			}
@@ -3360,6 +3445,82 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		for _, fn := range c.onCUserMessageUpdateCssClasses {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 154: // dota.EBaseUserMessages_UM_ServerFrameTime
+		if c.onCUserMessageServerFrameTime == nil {
+			return nil
+		}
+
+		msg := &dota.CUserMessageServerFrameTime{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCUserMessageServerFrameTime {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 155: // dota.EBaseUserMessages_UM_LagCompensationError
+		if c.onCUserMessageLagCompensationError == nil {
+			return nil
+		}
+
+		msg := &dota.CUserMessageLagCompensationError{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCUserMessageLagCompensationError {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 156: // dota.EBaseUserMessages_UM_RequestDllStatus
+		if c.onCUserMessageRequestDllStatus == nil {
+			return nil
+		}
+
+		msg := &dota.CUserMessageRequestDllStatus{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCUserMessageRequestDllStatus {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 157: // dota.EBaseUserMessages_UM_RequestUtilAction
+		if c.onCUserMessageRequestUtilAction == nil {
+			return nil
+		}
+
+		msg := &dota.CUserMessageRequestUtilAction{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCUserMessageRequestUtilAction {
 			if err := fn(msg); err != nil {
 				return err
 			}
@@ -6248,6 +6409,120 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		for _, fn := range c.onCDOTAUserMsg_ChatMessage {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 613: // dota.EDotaUserMessages_DOTA_UM_NeutralCampAlert
+		if c.onCDOTAUserMsg_NeutralCampAlert == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_NeutralCampAlert{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_NeutralCampAlert {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 614: // dota.EDotaUserMessages_DOTA_UM_RockPaperScissorsStarted
+		if c.onCDOTAUserMsg_RockPaperScissorsStarted == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_RockPaperScissorsStarted{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_RockPaperScissorsStarted {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 615: // dota.EDotaUserMessages_DOTA_UM_RockPaperScissorsFinished
+		if c.onCDOTAUserMsg_RockPaperScissorsFinished == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_RockPaperScissorsFinished{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_RockPaperScissorsFinished {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 616: // dota.EDotaUserMessages_DOTA_UM_DuelOpponentKilled
+		if c.onCDOTAUserMsg_DuelOpponentKilled == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_DuelOpponentKilled{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_DuelOpponentKilled {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 617: // dota.EDotaUserMessages_DOTA_UM_DuelAccepted
+		if c.onCDOTAUserMsg_DuelAccepted == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_DuelAccepted{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_DuelAccepted {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 618: // dota.EDotaUserMessages_DOTA_UM_DuelRequested
+		if c.onCDOTAUserMsg_DuelRequested == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_DuelRequested{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_DuelRequested {
 			if err := fn(msg); err != nil {
 				return err
 			}

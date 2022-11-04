@@ -99,6 +99,20 @@ enum EHeroRelicRarity {
 	HERO_RELIC_RARITY_RARE = 1;
 }
 
+enum EStickerbookAuditAction {
+	STICKERBOOK_AUDIT_CREATE_PAGE = 0;
+	STICKERBOOK_AUDIT_DELETE_PAGE = 1;
+	STICKERBOOK_AUDIT_STICK_STICKERS = 2;
+	STICKERBOOK_AUDIT_REPLACE_STICKERS = 3;
+	STICKERBOOK_AUDIT_HERO_STICKER = 4;
+}
+
+enum EStickerbookPageType {
+	STICKER_PAGE_GENERIC = 0;
+	STICKER_PAGE_TEAM = 1;
+	STICKER_PAGE_TALENT = 2;
+}
+
 message CSODOTAGameAccountClient {
 	message RoleHandicap {
 		optional uint32 role = 1;
@@ -441,6 +455,7 @@ message CMsgDOTAProfileCard {
 	optional uint32 rank_tier_peak = 21;
 	optional uint32 title = 23;
 	optional uint64 favorite_team_packed = 24;
+	optional uint32 lifetime_games = 25;
 }
 
 message CSODOTAPlayerChallenge {
@@ -845,6 +860,7 @@ message CMsgDOTASeasonPredictions {
 			Special = 4;
 			YesNo = 5;
 			QualifiersTeam = 6;
+			LastChanceTeam = 7;
 		}
 
 		enum EAnswerType {
@@ -1186,6 +1202,7 @@ message CMsgRecentMatchInfo {
 	optional EMatchOutcome match_outcome = 8;
 	optional uint32 timestamp = 9;
 	optional uint32 lobby_type = 10;
+	optional uint32 team_number = 11;
 }
 
 message CMsgMatchTips {
@@ -1585,4 +1602,46 @@ message CSOEconItemTournamentPassport {
 	optional uint32 version = 6;
 	optional uint32 def_index = 7;
 	optional uint32 reward_flags = 8;
+}
+
+message CMsgStickerbookSticker {
+	optional uint32 item_def_id = 1;
+	optional uint32 sticker_num = 2;
+	optional uint32 quality = 3;
+	optional float position_x = 4;
+	optional float position_y = 5;
+	optional float position_z = 8;
+	optional float rotation = 6;
+	optional float scale = 7;
+	optional uint64 source_item_id = 9;
+	optional uint32 depth_bias = 10;
+}
+
+message CMsgStickerbookPage {
+	optional uint32 page_num = 1;
+	optional EEvent event_id = 2;
+	optional uint32 team_id = 3;
+	repeated CMsgStickerbookSticker stickers = 4;
+	optional EStickerbookPageType page_type = 5;
+}
+
+message CMsgStickerbookTeamPageOrderSequence {
+	repeated uint32 page_numbers = 1;
+}
+
+message CMsgStickerbook {
+	repeated CMsgStickerbookPage pages = 1;
+	optional CMsgStickerbookTeamPageOrderSequence team_page_order_sequence = 2;
+	optional uint32 favorite_page_num = 3;
+}
+
+message CMsgStickerHero {
+	optional uint32 hero_id = 1;
+	optional uint32 item_def_id = 2;
+	optional uint32 quality = 3;
+	optional uint64 source_item_id = 4;
+}
+
+message CMsgStickerHeroes {
+	repeated CMsgStickerHero heroes = 1;
 }
