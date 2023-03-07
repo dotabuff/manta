@@ -11,6 +11,7 @@ import (
 func BenchmarkMatch2159568145(b *testing.B) { testScenarios[2159568145].bench(b) }
 
 // Test client
+func TestMatchNew7047839963(t *testing.T) { testScenarios[7047839963].test(t) }
 func TestMatchNew6841449576(t *testing.T) { testScenarios[6841449576].test(t) }
 func TestMatchNew6841524459(t *testing.T) { testScenarios[6841524459].test(t) }
 func TestMatchNew6792460214(t *testing.T) { testScenarios[6792460214].test(t) }
@@ -77,6 +78,15 @@ type testScenario struct {
 }
 
 var testScenarios = map[int64]testScenario{
+	7047839963: {
+		matchId:               "7047839963",
+		replayUrl:             "https://s3-us-west-2.amazonaws.com/manta.dotabuff/7047839963.dem",
+		expectGameBuild:       5630,
+		expectEntityEvents:    2051476,
+		expectUnitOrderEvents: 56231,
+		expectHeroEntityName:  "CDOTA_Unit_Hero_Pudge",
+		expectHeroEntityMana:  1281.9387,
+	},
 	6841449576: {
 		matchId:               "6841449576",
 		replayUrl:             "https://s3-us-west-2.amazonaws.com/manta.dotabuff/6841449576.dem",

@@ -34,6 +34,8 @@ var fieldTypeDecoders = map[string]fieldDecoder{
 	"uint32":  unsignedDecoder,
 	"uint8":   unsignedDecoder,
 
+	"GameTime_t": noscaleDecoder,
+
 	"CBodyComponent":       componentDecoder,
 	"CGameSceneNodeHandle": unsignedDecoder,
 	"Color":                unsignedDecoder,
