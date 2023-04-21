@@ -3,9 +3,6 @@ syntax = "proto2";
 package dota;
 option go_package = "github.com/dotabuff/manta/dota;dota";
 
-option optimize_for = SPEED;
-option cc_generic_services = false;
-
 message CUIFontFilePB {
 	optional string font_file_name = 1;
 	optional bytes opentype_font_data = 2;

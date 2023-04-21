@@ -5,9 +5,6 @@ option go_package = "github.com/dotabuff/manta/dota;dota";
 
 import "dota_shared_enums.proto";
 
-option optimize_for = SPEED;
-option cc_generic_services = false;
-
 enum ETournamentTemplate {
 	k_ETournamentTemplate_None = 0;
 	k_ETournamentTemplate_AutomatedWin3 = 1;

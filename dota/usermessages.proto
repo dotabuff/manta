@@ -5,9 +5,6 @@ option go_package = "github.com/dotabuff/manta/dota;dota";
 
 import "networkbasetypes.proto";
 
-option optimize_for = SPEED;
-option cc_generic_services = false;
-
 enum EBaseUserMessages {
 	UM_AchievementEvent = 101;
 	UM_CloseCaption = 102;
@@ -50,6 +47,10 @@ enum EBaseUserMessages {
 	UM_LagCompensationError = 155;
 	UM_RequestDllStatus = 156;
 	UM_RequestUtilAction = 157;
+	UM_UtilActionResponse = 158;
+	UM_DllStatusResponse = 159;
+	UM_RequestInventory = 160;
+	UM_InventoryResponse = 161;
 	UM_MAX_BASE = 200;
 }
 
@@ -98,6 +99,8 @@ enum PARTICLE_MESSAGE {
 	GAME_PARTICLE_MANAGER_EVENT_SKIP_TO_TIME = 24;
 	GAME_PARTICLE_MANAGER_EVENT_CAN_FREEZE = 25;
 	GAME_PARTICLE_MANAGER_EVENT_SET_NAMED_VALUE_CONTEXT = 26;
+	GAME_PARTICLE_MANAGER_EVENT_UPDATE_TRANSFORM = 27;
+	GAME_PARTICLE_MANAGER_EVENT_FREEZE_TRANSITION_OVERRIDE = 28;
 }
 
 enum EHapticPulseType {
@@ -192,10 +195,6 @@ message CUserMessageHudMsg {
 	optional fixed32 color1 = 4;
 	optional fixed32 color2 = 5;
 	optional uint32 effect = 6;
-	optional float fade_in_time = 7;
-	optional float fade_out_time = 8;
-	optional float hold_time = 9;
-	optional float fx_time = 10;
 	optional string message = 11;
 }
 
@@ -354,22 +353,29 @@ message CUserMsg_ParticleManager {
 		optional bool play_endcap = 4;
 	}
 
-	message UpdateParticle {
+	message UpdateParticle_OBSOLETE {
 		optional int32 control_point = 1;
 		optional CMsgVector position = 2;
 	}
 
-	message UpdateParticleFwd {
+	message UpdateParticleFwd_OBSOLETE {
 		optional int32 control_point = 1;
 		optional CMsgVector forward = 2;
 	}
 
-	message UpdateParticleOrient {
+	message UpdateParticleOrient_OBSOLETE {
 		optional int32 control_point = 1;
 		optional CMsgVector forward = 2;
 		optional CMsgVector deprecated_right = 3;
 		optional CMsgVector up = 4;
 		optional CMsgVector left = 5;
+	}
+
+	message UpdateParticleTransform {
+		optional int32 control_point = 1;
+		optional CMsgVector position = 2;
+		optional CMsgQuaternion orientation = 3;
+		optional float interpolation_interval = 4;
 	}
 
 	message UpdateParticleFallback {
@@ -390,6 +396,8 @@ message CUserMsg_ParticleManager {
 		optional int32 attachment = 4;
 		optional CMsgVector fallback_position = 5;
 		optional bool include_wearables = 6;
+		optional CMsgVector offset_position = 7;
+		optional CMsgQAngle offset_angles = 8;
 	}
 
 	message UpdateParticleSetFrozen {
@@ -458,6 +466,10 @@ message CUserMsg_ParticleManager {
 		optional bool can_freeze = 1;
 	}
 
+	message ParticleFreezeTransitionOverride {
+		optional float freeze_transition_override = 1;
+	}
+
 	message SetParticleNamedValueContext {
 		message FloatContextValue {
 			optional string value_name = 1;
@@ -471,8 +483,17 @@ message CUserMsg_ParticleManager {
 			optional string attachment_name = 4;
 		}
 
+		message TransformContextValue {
+			optional string value_name = 1;
+			optional CMsgQAngle angles = 2;
+			optional CMsgVector translation = 3;
+			optional uint32 ent_index = 4;
+			optional string attachment_name = 5;
+		}
+
 		repeated CUserMsg_ParticleManager.SetParticleNamedValueContext.FloatContextValue float_values = 1;
 		repeated CUserMsg_ParticleManager.SetParticleNamedValueContext.VectorContextValue vector_values = 2;
+		repeated CUserMsg_ParticleManager.SetParticleNamedValueContext.TransformContextValue transform_values = 3;
 	}
 
 	required PARTICLE_MESSAGE type = 1;
@@ -481,9 +502,9 @@ message CUserMsg_ParticleManager {
 	optional CUserMsg_ParticleManager.CreateParticle create_particle = 4;
 	optional CUserMsg_ParticleManager.DestroyParticle destroy_particle = 5;
 	optional CUserMsg_ParticleManager.DestroyParticleInvolving destroy_particle_involving = 6;
-	optional CUserMsg_ParticleManager.UpdateParticle update_particle = 7;
-	optional CUserMsg_ParticleManager.UpdateParticleFwd update_particle_fwd = 8;
-	optional CUserMsg_ParticleManager.UpdateParticleOrient update_particle_orient = 9;
+	optional CUserMsg_ParticleManager.UpdateParticle_OBSOLETE update_particle = 7;
+	optional CUserMsg_ParticleManager.UpdateParticleFwd_OBSOLETE update_particle_fwd = 8;
+	optional CUserMsg_ParticleManager.UpdateParticleOrient_OBSOLETE update_particle_orient = 9;
 	optional CUserMsg_ParticleManager.UpdateParticleFallback update_particle_fallback = 10;
 	optional CUserMsg_ParticleManager.UpdateParticleOffset update_particle_offset = 11;
 	optional CUserMsg_ParticleManager.UpdateParticleEnt update_particle_ent = 12;
@@ -503,6 +524,8 @@ message CUserMsg_ParticleManager {
 	optional CUserMsg_ParticleManager.ParticleSkipToTime particle_skip_to_time = 27;
 	optional CUserMsg_ParticleManager.ParticleCanFreeze particle_can_freeze = 28;
 	optional CUserMsg_ParticleManager.SetParticleNamedValueContext set_named_value_context = 29;
+	optional CUserMsg_ParticleManager.UpdateParticleTransform update_particle_transform = 30;
+	optional CUserMsg_ParticleManager.ParticleFreezeTransitionOverride particle_freeze_transition_override = 31;
 
 	extensions 100 to 201;
 }
@@ -566,9 +589,81 @@ message CUserMessageRequestDllStatus {
 }
 
 message CUserMessageRequestUtilAction {
-	optional string util_action = 1;
-	optional int64 util1 = 2;
-	optional int64 util2 = 3;
-	optional int64 util3 = 4;
-	optional int64 util4 = 5;
+	optional int32 util1 = 2;
+	optional int32 util2 = 3;
+	optional int32 util3 = 4;
+	optional int32 util4 = 5;
+	optional int32 util5 = 6;
+}
+
+message CUserMessage_UtilMsg_Response {
+	message ItemDetail {
+		optional int32 index = 1;
+		optional int32 hash = 2;
+		optional int32 crc = 3;
+		optional string name = 4;
+	}
+
+	optional fixed32 crc = 1;
+	optional int32 item_count = 2;
+	optional fixed32 crc2 = 3;
+	optional int32 item_count2 = 4;
+	repeated int32 crc_part = 5;
+	repeated int32 crc_part2 = 6;
+	optional int32 client_timestamp = 7;
+	optional int32 platform = 8;
+	repeated CUserMessage_UtilMsg_Response.ItemDetail itemdetails = 9;
+	optional int32 itemgroup = 10;
+	optional int32 total_count = 11;
+	optional int32 total_count2 = 12;
+}
+
+message CUserMessage_DllStatus {
+	message CVDiagnostic {
+		optional uint32 id = 1;
+		optional uint32 extended = 2;
+		optional uint64 value = 3;
+		optional string string_value = 4;
+	}
+
+	optional string file_report = 1;
+	optional string command_line = 2;
+	optional uint32 total_files = 3;
+	optional uint32 process_id = 4;
+	optional int32 osversion = 5;
+	optional uint64 client_time = 6;
+	repeated CUserMessage_DllStatus.CVDiagnostic diagnostics = 7;
+}
+
+message CUserMessageRequestInventory {
+	optional int32 inventory = 1;
+	optional int32 offset = 2;
+	optional int32 options = 3;
+}
+
+message CUserMessage_Inventory_Response {
+	message InventoryDetail {
+		optional int32 index = 1;
+		optional int64 primary = 2;
+		optional int64 offset = 3;
+		optional int64 first = 4;
+		optional int64 base = 5;
+		optional string name = 6;
+		optional string base_name = 7;
+		optional int32 base_detail = 8;
+		optional int32 base_time = 9;
+		optional int32 base_hash = 10;
+	}
+
+	optional fixed32 crc = 1;
+	optional int32 item_count = 2;
+	optional int32 osversion = 5;
+	optional int32 perf_time = 6;
+	optional int32 client_timestamp = 7;
+	optional int32 platform = 8;
+	repeated CUserMessage_Inventory_Response.InventoryDetail inventories = 9;
+	repeated CUserMessage_Inventory_Response.InventoryDetail inventories2 = 10;
+	optional int32 inv_type = 11;
+	optional int32 build_version = 12;
+	optional int32 instance = 13;
 }

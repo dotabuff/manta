@@ -6,8 +6,6 @@ option go_package = "github.com/dotabuff/manta/dota;dota";
 import "netmessages.proto";
 import "networkbasetypes.proto";
 
-option cc_generic_services = false;
-
 enum P2P_Messages {
 	p2p_TextMessage = 256;
 	p2p_Voice = 257;

@@ -5,9 +5,6 @@ option go_package = "github.com/dotabuff/manta/dota;dota";
 
 import "dota_shared_enums.proto";
 
-option optimize_for = SPEED;
-option cc_generic_services = false;
-
 enum ELeagueNodeGroupType {
 	INVALID_GROUP_TYPE = 0;
 	ORGANIZATIONAL = 1;

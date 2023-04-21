@@ -7,9 +7,6 @@ import "steammessages.proto";
 import "econ_shared_enums.proto";
 import "gcsdk_gcmessages.proto";
 
-option optimize_for = SPEED;
-option cc_generic_services = false;
-
 enum EGCItemMsg {
 	k_EMsgGCBase = 1000;
 	k_EMsgGCSetItemPosition = 1001;
@@ -633,6 +630,7 @@ message CAttribute_ItemDynamicRecipeComponent {
 	optional uint32 item_rarity = 7;
 	optional string lootlist = 8;
 	optional uint64 fulfilled_item_id = 9;
+	optional uint32 associated_item_def = 10;
 }
 
 message CProtoItemSocket {
