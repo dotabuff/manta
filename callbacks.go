@@ -7,266 +7,268 @@ import (
 
 // Callbacks decodes and routes replay events to callback functions
 type Callbacks struct {
-	onCDemoStop                               []func(*dota.CDemoStop) error
-	onCDemoFileHeader                         []func(*dota.CDemoFileHeader) error
-	onCDemoFileInfo                           []func(*dota.CDemoFileInfo) error
-	onCDemoSyncTick                           []func(*dota.CDemoSyncTick) error
-	onCDemoSendTables                         []func(*dota.CDemoSendTables) error
-	onCDemoClassInfo                          []func(*dota.CDemoClassInfo) error
-	onCDemoStringTables                       []func(*dota.CDemoStringTables) error
-	onCDemoPacket                             []func(*dota.CDemoPacket) error
-	onCDemoSignonPacket                       []func(*dota.CDemoPacket) error
-	onCDemoConsoleCmd                         []func(*dota.CDemoConsoleCmd) error
-	onCDemoCustomData                         []func(*dota.CDemoCustomData) error
-	onCDemoCustomDataCallbacks                []func(*dota.CDemoCustomDataCallbacks) error
-	onCDemoUserCmd                            []func(*dota.CDemoUserCmd) error
-	onCDemoFullPacket                         []func(*dota.CDemoFullPacket) error
-	onCDemoSaveGame                           []func(*dota.CDemoSaveGame) error
-	onCDemoSpawnGroups                        []func(*dota.CDemoSpawnGroups) error
-	onCNETMsg_NOP                             []func(*dota.CNETMsg_NOP) error
-	onCNETMsg_Disconnect                      []func(*dota.CNETMsg_Disconnect) error
-	onCNETMsg_SplitScreenUser                 []func(*dota.CNETMsg_SplitScreenUser) error
-	onCNETMsg_Tick                            []func(*dota.CNETMsg_Tick) error
-	onCNETMsg_StringCmd                       []func(*dota.CNETMsg_StringCmd) error
-	onCNETMsg_SetConVar                       []func(*dota.CNETMsg_SetConVar) error
-	onCNETMsg_SignonState                     []func(*dota.CNETMsg_SignonState) error
-	onCNETMsg_SpawnGroup_Load                 []func(*dota.CNETMsg_SpawnGroup_Load) error
-	onCNETMsg_SpawnGroup_ManifestUpdate       []func(*dota.CNETMsg_SpawnGroup_ManifestUpdate) error
-	onCNETMsg_SpawnGroup_SetCreationTick      []func(*dota.CNETMsg_SpawnGroup_SetCreationTick) error
-	onCNETMsg_SpawnGroup_Unload               []func(*dota.CNETMsg_SpawnGroup_Unload) error
-	onCNETMsg_SpawnGroup_LoadCompleted        []func(*dota.CNETMsg_SpawnGroup_LoadCompleted) error
-	onCNETMsg_DebugOverlay                    []func(*dota.CNETMsg_DebugOverlay) error
-	onCSVCMsg_ServerInfo                      []func(*dota.CSVCMsg_ServerInfo) error
-	onCSVCMsg_FlattenedSerializer             []func(*dota.CSVCMsg_FlattenedSerializer) error
-	onCSVCMsg_ClassInfo                       []func(*dota.CSVCMsg_ClassInfo) error
-	onCSVCMsg_SetPause                        []func(*dota.CSVCMsg_SetPause) error
-	onCSVCMsg_CreateStringTable               []func(*dota.CSVCMsg_CreateStringTable) error
-	onCSVCMsg_UpdateStringTable               []func(*dota.CSVCMsg_UpdateStringTable) error
-	onCSVCMsg_VoiceInit                       []func(*dota.CSVCMsg_VoiceInit) error
-	onCSVCMsg_VoiceData                       []func(*dota.CSVCMsg_VoiceData) error
-	onCSVCMsg_Print                           []func(*dota.CSVCMsg_Print) error
-	onCSVCMsg_Sounds                          []func(*dota.CSVCMsg_Sounds) error
-	onCSVCMsg_SetView                         []func(*dota.CSVCMsg_SetView) error
-	onCSVCMsg_ClearAllStringTables            []func(*dota.CSVCMsg_ClearAllStringTables) error
-	onCSVCMsg_CmdKeyValues                    []func(*dota.CSVCMsg_CmdKeyValues) error
-	onCSVCMsg_BSPDecal                        []func(*dota.CSVCMsg_BSPDecal) error
-	onCSVCMsg_SplitScreen                     []func(*dota.CSVCMsg_SplitScreen) error
-	onCSVCMsg_PacketEntities                  []func(*dota.CSVCMsg_PacketEntities) error
-	onCSVCMsg_Prefetch                        []func(*dota.CSVCMsg_Prefetch) error
-	onCSVCMsg_Menu                            []func(*dota.CSVCMsg_Menu) error
-	onCSVCMsg_GetCvarValue                    []func(*dota.CSVCMsg_GetCvarValue) error
-	onCSVCMsg_StopSound                       []func(*dota.CSVCMsg_StopSound) error
-	onCSVCMsg_PeerList                        []func(*dota.CSVCMsg_PeerList) error
-	onCSVCMsg_PacketReliable                  []func(*dota.CSVCMsg_PacketReliable) error
-	onCSVCMsg_HLTVStatus                      []func(*dota.CSVCMsg_HLTVStatus) error
-	onCSVCMsg_ServerSteamID                   []func(*dota.CSVCMsg_ServerSteamID) error
-	onCSVCMsg_FullFrameSplit                  []func(*dota.CSVCMsg_FullFrameSplit) error
-	onCSVCMsg_RconServerDetails               []func(*dota.CSVCMsg_RconServerDetails) error
-	onCSVCMsg_UserMessage                     []func(*dota.CSVCMsg_UserMessage) error
-	onCSVCMsg_HltvReplay                      []func(*dota.CSVCMsg_HltvReplay) error
-	onCSVCMsg_Broadcast_Command               []func(*dota.CSVCMsg_Broadcast_Command) error
-	onCSVCMsg_HltvFixupOperatorStatus         []func(*dota.CSVCMsg_HltvFixupOperatorStatus) error
-	onCUserMessageAchievementEvent            []func(*dota.CUserMessageAchievementEvent) error
-	onCUserMessageCloseCaption                []func(*dota.CUserMessageCloseCaption) error
-	onCUserMessageCloseCaptionDirect          []func(*dota.CUserMessageCloseCaptionDirect) error
-	onCUserMessageCurrentTimescale            []func(*dota.CUserMessageCurrentTimescale) error
-	onCUserMessageDesiredTimescale            []func(*dota.CUserMessageDesiredTimescale) error
-	onCUserMessageFade                        []func(*dota.CUserMessageFade) error
-	onCUserMessageGameTitle                   []func(*dota.CUserMessageGameTitle) error
-	onCUserMessageHudMsg                      []func(*dota.CUserMessageHudMsg) error
-	onCUserMessageHudText                     []func(*dota.CUserMessageHudText) error
-	onCUserMessageColoredText                 []func(*dota.CUserMessageColoredText) error
-	onCUserMessageRequestState                []func(*dota.CUserMessageRequestState) error
-	onCUserMessageResetHUD                    []func(*dota.CUserMessageResetHUD) error
-	onCUserMessageRumble                      []func(*dota.CUserMessageRumble) error
-	onCUserMessageSayText                     []func(*dota.CUserMessageSayText) error
-	onCUserMessageSayText2                    []func(*dota.CUserMessageSayText2) error
-	onCUserMessageSayTextChannel              []func(*dota.CUserMessageSayTextChannel) error
-	onCUserMessageShake                       []func(*dota.CUserMessageShake) error
-	onCUserMessageShakeDir                    []func(*dota.CUserMessageShakeDir) error
-	onCUserMessageTextMsg                     []func(*dota.CUserMessageTextMsg) error
-	onCUserMessageScreenTilt                  []func(*dota.CUserMessageScreenTilt) error
-	onCUserMessageVoiceMask                   []func(*dota.CUserMessageVoiceMask) error
-	onCUserMessageSendAudio                   []func(*dota.CUserMessageSendAudio) error
-	onCUserMessageItemPickup                  []func(*dota.CUserMessageItemPickup) error
-	onCUserMessageAmmoDenied                  []func(*dota.CUserMessageAmmoDenied) error
-	onCUserMessageShowMenu                    []func(*dota.CUserMessageShowMenu) error
-	onCUserMessageCreditsMsg                  []func(*dota.CUserMessageCreditsMsg) error
-	onCEntityMessagePlayJingle                []func(*dota.CEntityMessagePlayJingle) error
-	onCEntityMessageScreenOverlay             []func(*dota.CEntityMessageScreenOverlay) error
-	onCEntityMessageRemoveAllDecals           []func(*dota.CEntityMessageRemoveAllDecals) error
-	onCEntityMessagePropagateForce            []func(*dota.CEntityMessagePropagateForce) error
-	onCEntityMessageDoSpark                   []func(*dota.CEntityMessageDoSpark) error
-	onCEntityMessageFixAngle                  []func(*dota.CEntityMessageFixAngle) error
-	onCUserMessageCloseCaptionPlaceholder     []func(*dota.CUserMessageCloseCaptionPlaceholder) error
-	onCUserMessageCameraTransition            []func(*dota.CUserMessageCameraTransition) error
-	onCUserMessageAudioParameter              []func(*dota.CUserMessageAudioParameter) error
-	onCUserMessageHapticsManagerPulse         []func(*dota.CUserMessageHapticsManagerPulse) error
-	onCUserMessageHapticsManagerEffect        []func(*dota.CUserMessageHapticsManagerEffect) error
-	onCUserMessageCommandQueueState           []func(*dota.CUserMessageCommandQueueState) error
-	onCUserMessageUpdateCssClasses            []func(*dota.CUserMessageUpdateCssClasses) error
-	onCUserMessageServerFrameTime             []func(*dota.CUserMessageServerFrameTime) error
-	onCUserMessageLagCompensationError        []func(*dota.CUserMessageLagCompensationError) error
-	onCUserMessageRequestDllStatus            []func(*dota.CUserMessageRequestDllStatus) error
-	onCUserMessageRequestUtilAction           []func(*dota.CUserMessageRequestUtilAction) error
-	onCMsgVDebugGameSessionIDEvent            []func(*dota.CMsgVDebugGameSessionIDEvent) error
-	onCMsgPlaceDecalEvent                     []func(*dota.CMsgPlaceDecalEvent) error
-	onCMsgClearWorldDecalsEvent               []func(*dota.CMsgClearWorldDecalsEvent) error
-	onCMsgClearEntityDecalsEvent              []func(*dota.CMsgClearEntityDecalsEvent) error
-	onCMsgClearDecalsForSkeletonInstanceEvent []func(*dota.CMsgClearDecalsForSkeletonInstanceEvent) error
-	onCMsgSource1LegacyGameEventList          []func(*dota.CMsgSource1LegacyGameEventList) error
-	onCMsgSource1LegacyListenEvents           []func(*dota.CMsgSource1LegacyListenEvents) error
-	onCMsgSource1LegacyGameEvent              []func(*dota.CMsgSource1LegacyGameEvent) error
-	onCMsgSosStartSoundEvent                  []func(*dota.CMsgSosStartSoundEvent) error
-	onCMsgSosStopSoundEvent                   []func(*dota.CMsgSosStopSoundEvent) error
-	onCMsgSosSetSoundEventParams              []func(*dota.CMsgSosSetSoundEventParams) error
-	onCMsgSosSetLibraryStackFields            []func(*dota.CMsgSosSetLibraryStackFields) error
-	onCMsgSosStopSoundEventHash               []func(*dota.CMsgSosStopSoundEventHash) error
-	onCDOTAUserMsg_AIDebugLine                []func(*dota.CDOTAUserMsg_AIDebugLine) error
-	onCDOTAUserMsg_ChatEvent                  []func(*dota.CDOTAUserMsg_ChatEvent) error
-	onCDOTAUserMsg_CombatHeroPositions        []func(*dota.CDOTAUserMsg_CombatHeroPositions) error
-	onCDOTAUserMsg_CombatLogBulkData          []func(*dota.CDOTAUserMsg_CombatLogBulkData) error
-	onCDOTAUserMsg_CreateLinearProjectile     []func(*dota.CDOTAUserMsg_CreateLinearProjectile) error
-	onCDOTAUserMsg_DestroyLinearProjectile    []func(*dota.CDOTAUserMsg_DestroyLinearProjectile) error
-	onCDOTAUserMsg_DodgeTrackingProjectiles   []func(*dota.CDOTAUserMsg_DodgeTrackingProjectiles) error
-	onCDOTAUserMsg_GlobalLightColor           []func(*dota.CDOTAUserMsg_GlobalLightColor) error
-	onCDOTAUserMsg_GlobalLightDirection       []func(*dota.CDOTAUserMsg_GlobalLightDirection) error
-	onCDOTAUserMsg_InvalidCommand             []func(*dota.CDOTAUserMsg_InvalidCommand) error
-	onCDOTAUserMsg_LocationPing               []func(*dota.CDOTAUserMsg_LocationPing) error
-	onCDOTAUserMsg_MapLine                    []func(*dota.CDOTAUserMsg_MapLine) error
-	onCDOTAUserMsg_MiniKillCamInfo            []func(*dota.CDOTAUserMsg_MiniKillCamInfo) error
-	onCDOTAUserMsg_MinimapDebugPoint          []func(*dota.CDOTAUserMsg_MinimapDebugPoint) error
-	onCDOTAUserMsg_MinimapEvent               []func(*dota.CDOTAUserMsg_MinimapEvent) error
-	onCDOTAUserMsg_NevermoreRequiem           []func(*dota.CDOTAUserMsg_NevermoreRequiem) error
-	onCDOTAUserMsg_OverheadEvent              []func(*dota.CDOTAUserMsg_OverheadEvent) error
-	onCDOTAUserMsg_SetNextAutobuyItem         []func(*dota.CDOTAUserMsg_SetNextAutobuyItem) error
-	onCDOTAUserMsg_SharedCooldown             []func(*dota.CDOTAUserMsg_SharedCooldown) error
-	onCDOTAUserMsg_SpectatorPlayerClick       []func(*dota.CDOTAUserMsg_SpectatorPlayerClick) error
-	onCDOTAUserMsg_TutorialTipInfo            []func(*dota.CDOTAUserMsg_TutorialTipInfo) error
-	onCDOTAUserMsg_UnitEvent                  []func(*dota.CDOTAUserMsg_UnitEvent) error
-	onCDOTAUserMsg_BotChat                    []func(*dota.CDOTAUserMsg_BotChat) error
-	onCDOTAUserMsg_HudError                   []func(*dota.CDOTAUserMsg_HudError) error
-	onCDOTAUserMsg_ItemPurchased              []func(*dota.CDOTAUserMsg_ItemPurchased) error
-	onCDOTAUserMsg_Ping                       []func(*dota.CDOTAUserMsg_Ping) error
-	onCDOTAUserMsg_ItemFound                  []func(*dota.CDOTAUserMsg_ItemFound) error
-	onCDOTAUserMsg_SwapVerify                 []func(*dota.CDOTAUserMsg_SwapVerify) error
-	onCDOTAUserMsg_WorldLine                  []func(*dota.CDOTAUserMsg_WorldLine) error
-	onCMsgGCToClientTournamentItemDrop        []func(*dota.CMsgGCToClientTournamentItemDrop) error
-	onCDOTAUserMsg_ItemAlert                  []func(*dota.CDOTAUserMsg_ItemAlert) error
-	onCDOTAUserMsg_HalloweenDrops             []func(*dota.CDOTAUserMsg_HalloweenDrops) error
-	onCDOTAUserMsg_ChatWheel                  []func(*dota.CDOTAUserMsg_ChatWheel) error
-	onCDOTAUserMsg_ReceivedXmasGift           []func(*dota.CDOTAUserMsg_ReceivedXmasGift) error
-	onCDOTAUserMsg_UpdateSharedContent        []func(*dota.CDOTAUserMsg_UpdateSharedContent) error
-	onCDOTAUserMsg_TutorialRequestExp         []func(*dota.CDOTAUserMsg_TutorialRequestExp) error
-	onCDOTAUserMsg_TutorialPingMinimap        []func(*dota.CDOTAUserMsg_TutorialPingMinimap) error
-	onCDOTAUserMsg_GamerulesStateChanged      []func(*dota.CDOTAUserMsg_GamerulesStateChanged) error
-	onCDOTAUserMsg_ShowSurvey                 []func(*dota.CDOTAUserMsg_ShowSurvey) error
-	onCDOTAUserMsg_TutorialFade               []func(*dota.CDOTAUserMsg_TutorialFade) error
-	onCDOTAUserMsg_AddQuestLogEntry           []func(*dota.CDOTAUserMsg_AddQuestLogEntry) error
-	onCDOTAUserMsg_SendStatPopup              []func(*dota.CDOTAUserMsg_SendStatPopup) error
-	onCDOTAUserMsg_TutorialFinish             []func(*dota.CDOTAUserMsg_TutorialFinish) error
-	onCDOTAUserMsg_SendRoshanPopup            []func(*dota.CDOTAUserMsg_SendRoshanPopup) error
-	onCDOTAUserMsg_SendGenericToolTip         []func(*dota.CDOTAUserMsg_SendGenericToolTip) error
-	onCDOTAUserMsg_SendFinalGold              []func(*dota.CDOTAUserMsg_SendFinalGold) error
-	onCDOTAUserMsg_CustomMsg                  []func(*dota.CDOTAUserMsg_CustomMsg) error
-	onCDOTAUserMsg_CoachHUDPing               []func(*dota.CDOTAUserMsg_CoachHUDPing) error
-	onCDOTAUserMsg_ClientLoadGridNav          []func(*dota.CDOTAUserMsg_ClientLoadGridNav) error
-	onCDOTAUserMsg_TE_Projectile              []func(*dota.CDOTAUserMsg_TE_Projectile) error
-	onCDOTAUserMsg_TE_ProjectileLoc           []func(*dota.CDOTAUserMsg_TE_ProjectileLoc) error
-	onCDOTAUserMsg_TE_DotaBloodImpact         []func(*dota.CDOTAUserMsg_TE_DotaBloodImpact) error
-	onCDOTAUserMsg_TE_UnitAnimation           []func(*dota.CDOTAUserMsg_TE_UnitAnimation) error
-	onCDOTAUserMsg_TE_UnitAnimationEnd        []func(*dota.CDOTAUserMsg_TE_UnitAnimationEnd) error
-	onCDOTAUserMsg_AbilityPing                []func(*dota.CDOTAUserMsg_AbilityPing) error
-	onCDOTAUserMsg_ShowGenericPopup           []func(*dota.CDOTAUserMsg_ShowGenericPopup) error
-	onCDOTAUserMsg_VoteStart                  []func(*dota.CDOTAUserMsg_VoteStart) error
-	onCDOTAUserMsg_VoteUpdate                 []func(*dota.CDOTAUserMsg_VoteUpdate) error
-	onCDOTAUserMsg_VoteEnd                    []func(*dota.CDOTAUserMsg_VoteEnd) error
-	onCDOTAUserMsg_BoosterState               []func(*dota.CDOTAUserMsg_BoosterState) error
-	onCDOTAUserMsg_WillPurchaseAlert          []func(*dota.CDOTAUserMsg_WillPurchaseAlert) error
-	onCDOTAUserMsg_TutorialMinimapPosition    []func(*dota.CDOTAUserMsg_TutorialMinimapPosition) error
-	onCDOTAUserMsg_PlayerMMR                  []func(*dota.CDOTAUserMsg_PlayerMMR) error
-	onCDOTAUserMsg_AbilitySteal               []func(*dota.CDOTAUserMsg_AbilitySteal) error
-	onCDOTAUserMsg_CourierKilledAlert         []func(*dota.CDOTAUserMsg_CourierKilledAlert) error
-	onCDOTAUserMsg_EnemyItemAlert             []func(*dota.CDOTAUserMsg_EnemyItemAlert) error
-	onCDOTAUserMsg_StatsMatchDetails          []func(*dota.CDOTAUserMsg_StatsMatchDetails) error
-	onCDOTAUserMsg_MiniTaunt                  []func(*dota.CDOTAUserMsg_MiniTaunt) error
-	onCDOTAUserMsg_BuyBackStateAlert          []func(*dota.CDOTAUserMsg_BuyBackStateAlert) error
-	onCDOTAUserMsg_SpeechBubble               []func(*dota.CDOTAUserMsg_SpeechBubble) error
-	onCDOTAUserMsg_CustomHeaderMessage        []func(*dota.CDOTAUserMsg_CustomHeaderMessage) error
-	onCDOTAUserMsg_QuickBuyAlert              []func(*dota.CDOTAUserMsg_QuickBuyAlert) error
-	onCDOTAUserMsg_StatsHeroMinuteDetails     []func(*dota.CDOTAUserMsg_StatsHeroMinuteDetails) error
-	onCDOTAUserMsg_PredictionResult           []func(*dota.CDOTAUserMsg_PredictionResult) error
-	onCDOTAUserMsg_ModifierAlert              []func(*dota.CDOTAUserMsg_ModifierAlert) error
-	onCDOTAUserMsg_HPManaAlert                []func(*dota.CDOTAUserMsg_HPManaAlert) error
-	onCDOTAUserMsg_GlyphAlert                 []func(*dota.CDOTAUserMsg_GlyphAlert) error
-	onCDOTAUserMsg_BeastChat                  []func(*dota.CDOTAUserMsg_BeastChat) error
-	onCDOTAUserMsg_SpectatorPlayerUnitOrders  []func(*dota.CDOTAUserMsg_SpectatorPlayerUnitOrders) error
-	onCDOTAUserMsg_CustomHudElement_Create    []func(*dota.CDOTAUserMsg_CustomHudElement_Create) error
-	onCDOTAUserMsg_CustomHudElement_Modify    []func(*dota.CDOTAUserMsg_CustomHudElement_Modify) error
-	onCDOTAUserMsg_CustomHudElement_Destroy   []func(*dota.CDOTAUserMsg_CustomHudElement_Destroy) error
-	onCDOTAUserMsg_CompendiumState            []func(*dota.CDOTAUserMsg_CompendiumState) error
-	onCDOTAUserMsg_ProjectionAbility          []func(*dota.CDOTAUserMsg_ProjectionAbility) error
-	onCDOTAUserMsg_ProjectionEvent            []func(*dota.CDOTAUserMsg_ProjectionEvent) error
-	onCMsgDOTACombatLogEntry                  []func(*dota.CMsgDOTACombatLogEntry) error
-	onCDOTAUserMsg_XPAlert                    []func(*dota.CDOTAUserMsg_XPAlert) error
-	onCDOTAUserMsg_UpdateQuestProgress        []func(*dota.CDOTAUserMsg_UpdateQuestProgress) error
-	onCDOTAMatchMetadataFile                  []func(*dota.CDOTAMatchMetadataFile) error
-	onCDOTAUserMsg_QuestStatus                []func(*dota.CDOTAUserMsg_QuestStatus) error
-	onCDOTAUserMsg_SuggestHeroPick            []func(*dota.CDOTAUserMsg_SuggestHeroPick) error
-	onCDOTAUserMsg_SuggestHeroRole            []func(*dota.CDOTAUserMsg_SuggestHeroRole) error
-	onCDOTAUserMsg_KillcamDamageTaken         []func(*dota.CDOTAUserMsg_KillcamDamageTaken) error
-	onCDOTAUserMsg_SelectPenaltyGold          []func(*dota.CDOTAUserMsg_SelectPenaltyGold) error
-	onCDOTAUserMsg_RollDiceResult             []func(*dota.CDOTAUserMsg_RollDiceResult) error
-	onCDOTAUserMsg_FlipCoinResult             []func(*dota.CDOTAUserMsg_FlipCoinResult) error
-	onCDOTAUserMsg_SendRoshanSpectatorPhase   []func(*dota.CDOTAUserMsg_SendRoshanSpectatorPhase) error
-	onCDOTAUserMsg_ChatWheelCooldown          []func(*dota.CDOTAUserMsg_ChatWheelCooldown) error
-	onCDOTAUserMsg_DismissAllStatPopups       []func(*dota.CDOTAUserMsg_DismissAllStatPopups) error
-	onCDOTAUserMsg_TE_DestroyProjectile       []func(*dota.CDOTAUserMsg_TE_DestroyProjectile) error
-	onCDOTAUserMsg_HeroRelicProgress          []func(*dota.CDOTAUserMsg_HeroRelicProgress) error
-	onCDOTAUserMsg_AbilityDraftRequestAbility []func(*dota.CDOTAUserMsg_AbilityDraftRequestAbility) error
-	onCDOTAUserMsg_ItemSold                   []func(*dota.CDOTAUserMsg_ItemSold) error
-	onCDOTAUserMsg_DamageReport               []func(*dota.CDOTAUserMsg_DamageReport) error
-	onCDOTAUserMsg_SalutePlayer               []func(*dota.CDOTAUserMsg_SalutePlayer) error
-	onCDOTAUserMsg_TipAlert                   []func(*dota.CDOTAUserMsg_TipAlert) error
-	onCDOTAUserMsg_ReplaceQueryUnit           []func(*dota.CDOTAUserMsg_ReplaceQueryUnit) error
-	onCDOTAUserMsg_EmptyTeleportAlert         []func(*dota.CDOTAUserMsg_EmptyTeleportAlert) error
-	onCDOTAUserMsg_MarsArenaOfBloodAttack     []func(*dota.CDOTAUserMsg_MarsArenaOfBloodAttack) error
-	onCDOTAUserMsg_ESArcanaCombo              []func(*dota.CDOTAUserMsg_ESArcanaCombo) error
-	onCDOTAUserMsg_ESArcanaComboSummary       []func(*dota.CDOTAUserMsg_ESArcanaComboSummary) error
-	onCDOTAUserMsg_HighFiveLeftHanging        []func(*dota.CDOTAUserMsg_HighFiveLeftHanging) error
-	onCDOTAUserMsg_HighFiveCompleted          []func(*dota.CDOTAUserMsg_HighFiveCompleted) error
-	onCDOTAUserMsg_ShovelUnearth              []func(*dota.CDOTAUserMsg_ShovelUnearth) error
-	onCDOTAUserMsg_RadarAlert                 []func(*dota.CDOTAUserMsg_RadarAlert) error
-	onCDOTAUserMsg_AllStarEvent               []func(*dota.CDOTAUserMsg_AllStarEvent) error
-	onCDOTAUserMsg_TalentTreeAlert            []func(*dota.CDOTAUserMsg_TalentTreeAlert) error
-	onCDOTAUserMsg_QueuedOrderRemoved         []func(*dota.CDOTAUserMsg_QueuedOrderRemoved) error
-	onCDOTAUserMsg_DebugChallenge             []func(*dota.CDOTAUserMsg_DebugChallenge) error
-	onCDOTAUserMsg_OMArcanaCombo              []func(*dota.CDOTAUserMsg_OMArcanaCombo) error
-	onCDOTAUserMsg_FoundNeutralItem           []func(*dota.CDOTAUserMsg_FoundNeutralItem) error
-	onCDOTAUserMsg_OutpostCaptured            []func(*dota.CDOTAUserMsg_OutpostCaptured) error
-	onCDOTAUserMsg_OutpostGrantedXP           []func(*dota.CDOTAUserMsg_OutpostGrantedXP) error
-	onCDOTAUserMsg_MoveCameraToUnit           []func(*dota.CDOTAUserMsg_MoveCameraToUnit) error
-	onCDOTAUserMsg_PauseMinigameData          []func(*dota.CDOTAUserMsg_PauseMinigameData) error
-	onCDOTAUserMsg_VersusScene_PlayerBehavior []func(*dota.CDOTAUserMsg_VersusScene_PlayerBehavior) error
-	onCDOTAUserMsg_QoP_ArcanaSummary          []func(*dota.CDOTAUserMsg_QoP_ArcanaSummary) error
-	onCDOTAUserMsg_HotPotato_Created          []func(*dota.CDOTAUserMsg_HotPotato_Created) error
-	onCDOTAUserMsg_HotPotato_Exploded         []func(*dota.CDOTAUserMsg_HotPotato_Exploded) error
-	onCDOTAUserMsg_WK_Arcana_Progress         []func(*dota.CDOTAUserMsg_WK_Arcana_Progress) error
-	onCDOTAUserMsg_GuildChallenge_Progress    []func(*dota.CDOTAUserMsg_GuildChallenge_Progress) error
-	onCDOTAUserMsg_WRArcanaProgress           []func(*dota.CDOTAUserMsg_WRArcanaProgress) error
-	onCDOTAUserMsg_WRArcanaSummary            []func(*dota.CDOTAUserMsg_WRArcanaSummary) error
-	onCDOTAUserMsg_EmptyItemSlotAlert         []func(*dota.CDOTAUserMsg_EmptyItemSlotAlert) error
-	onCDOTAUserMsg_AghsStatusAlert            []func(*dota.CDOTAUserMsg_AghsStatusAlert) error
-	onCDOTAUserMsg_PingConfirmation           []func(*dota.CDOTAUserMsg_PingConfirmation) error
-	onCDOTAUserMsg_MutedPlayers               []func(*dota.CDOTAUserMsg_MutedPlayers) error
-	onCDOTAUserMsg_ContextualTip              []func(*dota.CDOTAUserMsg_ContextualTip) error
-	onCDOTAUserMsg_ChatMessage                []func(*dota.CDOTAUserMsg_ChatMessage) error
-	onCDOTAUserMsg_NeutralCampAlert           []func(*dota.CDOTAUserMsg_NeutralCampAlert) error
-	onCDOTAUserMsg_RockPaperScissorsStarted   []func(*dota.CDOTAUserMsg_RockPaperScissorsStarted) error
-	onCDOTAUserMsg_RockPaperScissorsFinished  []func(*dota.CDOTAUserMsg_RockPaperScissorsFinished) error
-	onCDOTAUserMsg_DuelOpponentKilled         []func(*dota.CDOTAUserMsg_DuelOpponentKilled) error
-	onCDOTAUserMsg_DuelAccepted               []func(*dota.CDOTAUserMsg_DuelAccepted) error
-	onCDOTAUserMsg_DuelRequested              []func(*dota.CDOTAUserMsg_DuelRequested) error
+	onCDemoStop                                            []func(*dota.CDemoStop) error
+	onCDemoFileHeader                                      []func(*dota.CDemoFileHeader) error
+	onCDemoFileInfo                                        []func(*dota.CDemoFileInfo) error
+	onCDemoSyncTick                                        []func(*dota.CDemoSyncTick) error
+	onCDemoSendTables                                      []func(*dota.CDemoSendTables) error
+	onCDemoClassInfo                                       []func(*dota.CDemoClassInfo) error
+	onCDemoStringTables                                    []func(*dota.CDemoStringTables) error
+	onCDemoPacket                                          []func(*dota.CDemoPacket) error
+	onCDemoSignonPacket                                    []func(*dota.CDemoPacket) error
+	onCDemoConsoleCmd                                      []func(*dota.CDemoConsoleCmd) error
+	onCDemoCustomData                                      []func(*dota.CDemoCustomData) error
+	onCDemoCustomDataCallbacks                             []func(*dota.CDemoCustomDataCallbacks) error
+	onCDemoUserCmd                                         []func(*dota.CDemoUserCmd) error
+	onCDemoFullPacket                                      []func(*dota.CDemoFullPacket) error
+	onCDemoSaveGame                                        []func(*dota.CDemoSaveGame) error
+	onCDemoSpawnGroups                                     []func(*dota.CDemoSpawnGroups) error
+	onCNETMsg_NOP                                          []func(*dota.CNETMsg_NOP) error
+	onCNETMsg_Disconnect                                   []func(*dota.CNETMsg_Disconnect) error
+	onCNETMsg_SplitScreenUser                              []func(*dota.CNETMsg_SplitScreenUser) error
+	onCNETMsg_Tick                                         []func(*dota.CNETMsg_Tick) error
+	onCNETMsg_StringCmd                                    []func(*dota.CNETMsg_StringCmd) error
+	onCNETMsg_SetConVar                                    []func(*dota.CNETMsg_SetConVar) error
+	onCNETMsg_SignonState                                  []func(*dota.CNETMsg_SignonState) error
+	onCNETMsg_SpawnGroup_Load                              []func(*dota.CNETMsg_SpawnGroup_Load) error
+	onCNETMsg_SpawnGroup_ManifestUpdate                    []func(*dota.CNETMsg_SpawnGroup_ManifestUpdate) error
+	onCNETMsg_SpawnGroup_SetCreationTick                   []func(*dota.CNETMsg_SpawnGroup_SetCreationTick) error
+	onCNETMsg_SpawnGroup_Unload                            []func(*dota.CNETMsg_SpawnGroup_Unload) error
+	onCNETMsg_SpawnGroup_LoadCompleted                     []func(*dota.CNETMsg_SpawnGroup_LoadCompleted) error
+	onCNETMsg_DebugOverlay                                 []func(*dota.CNETMsg_DebugOverlay) error
+	onCSVCMsg_ServerInfo                                   []func(*dota.CSVCMsg_ServerInfo) error
+	onCSVCMsg_FlattenedSerializer                          []func(*dota.CSVCMsg_FlattenedSerializer) error
+	onCSVCMsg_ClassInfo                                    []func(*dota.CSVCMsg_ClassInfo) error
+	onCSVCMsg_SetPause                                     []func(*dota.CSVCMsg_SetPause) error
+	onCSVCMsg_CreateStringTable                            []func(*dota.CSVCMsg_CreateStringTable) error
+	onCSVCMsg_UpdateStringTable                            []func(*dota.CSVCMsg_UpdateStringTable) error
+	onCSVCMsg_VoiceInit                                    []func(*dota.CSVCMsg_VoiceInit) error
+	onCSVCMsg_VoiceData                                    []func(*dota.CSVCMsg_VoiceData) error
+	onCSVCMsg_Print                                        []func(*dota.CSVCMsg_Print) error
+	onCSVCMsg_Sounds                                       []func(*dota.CSVCMsg_Sounds) error
+	onCSVCMsg_SetView                                      []func(*dota.CSVCMsg_SetView) error
+	onCSVCMsg_ClearAllStringTables                         []func(*dota.CSVCMsg_ClearAllStringTables) error
+	onCSVCMsg_CmdKeyValues                                 []func(*dota.CSVCMsg_CmdKeyValues) error
+	onCSVCMsg_BSPDecal                                     []func(*dota.CSVCMsg_BSPDecal) error
+	onCSVCMsg_SplitScreen                                  []func(*dota.CSVCMsg_SplitScreen) error
+	onCSVCMsg_PacketEntities                               []func(*dota.CSVCMsg_PacketEntities) error
+	onCSVCMsg_Prefetch                                     []func(*dota.CSVCMsg_Prefetch) error
+	onCSVCMsg_Menu                                         []func(*dota.CSVCMsg_Menu) error
+	onCSVCMsg_GetCvarValue                                 []func(*dota.CSVCMsg_GetCvarValue) error
+	onCSVCMsg_StopSound                                    []func(*dota.CSVCMsg_StopSound) error
+	onCSVCMsg_PeerList                                     []func(*dota.CSVCMsg_PeerList) error
+	onCSVCMsg_PacketReliable                               []func(*dota.CSVCMsg_PacketReliable) error
+	onCSVCMsg_HLTVStatus                                   []func(*dota.CSVCMsg_HLTVStatus) error
+	onCSVCMsg_ServerSteamID                                []func(*dota.CSVCMsg_ServerSteamID) error
+	onCSVCMsg_FullFrameSplit                               []func(*dota.CSVCMsg_FullFrameSplit) error
+	onCSVCMsg_RconServerDetails                            []func(*dota.CSVCMsg_RconServerDetails) error
+	onCSVCMsg_UserMessage                                  []func(*dota.CSVCMsg_UserMessage) error
+	onCSVCMsg_HltvReplay                                   []func(*dota.CSVCMsg_HltvReplay) error
+	onCSVCMsg_Broadcast_Command                            []func(*dota.CSVCMsg_Broadcast_Command) error
+	onCSVCMsg_HltvFixupOperatorStatus                      []func(*dota.CSVCMsg_HltvFixupOperatorStatus) error
+	onCUserMessageAchievementEvent                         []func(*dota.CUserMessageAchievementEvent) error
+	onCUserMessageCloseCaption                             []func(*dota.CUserMessageCloseCaption) error
+	onCUserMessageCloseCaptionDirect                       []func(*dota.CUserMessageCloseCaptionDirect) error
+	onCUserMessageCurrentTimescale                         []func(*dota.CUserMessageCurrentTimescale) error
+	onCUserMessageDesiredTimescale                         []func(*dota.CUserMessageDesiredTimescale) error
+	onCUserMessageFade                                     []func(*dota.CUserMessageFade) error
+	onCUserMessageGameTitle                                []func(*dota.CUserMessageGameTitle) error
+	onCUserMessageHudMsg                                   []func(*dota.CUserMessageHudMsg) error
+	onCUserMessageHudText                                  []func(*dota.CUserMessageHudText) error
+	onCUserMessageColoredText                              []func(*dota.CUserMessageColoredText) error
+	onCUserMessageRequestState                             []func(*dota.CUserMessageRequestState) error
+	onCUserMessageResetHUD                                 []func(*dota.CUserMessageResetHUD) error
+	onCUserMessageRumble                                   []func(*dota.CUserMessageRumble) error
+	onCUserMessageSayText                                  []func(*dota.CUserMessageSayText) error
+	onCUserMessageSayText2                                 []func(*dota.CUserMessageSayText2) error
+	onCUserMessageSayTextChannel                           []func(*dota.CUserMessageSayTextChannel) error
+	onCUserMessageShake                                    []func(*dota.CUserMessageShake) error
+	onCUserMessageShakeDir                                 []func(*dota.CUserMessageShakeDir) error
+	onCUserMessageTextMsg                                  []func(*dota.CUserMessageTextMsg) error
+	onCUserMessageScreenTilt                               []func(*dota.CUserMessageScreenTilt) error
+	onCUserMessageVoiceMask                                []func(*dota.CUserMessageVoiceMask) error
+	onCUserMessageSendAudio                                []func(*dota.CUserMessageSendAudio) error
+	onCUserMessageItemPickup                               []func(*dota.CUserMessageItemPickup) error
+	onCUserMessageAmmoDenied                               []func(*dota.CUserMessageAmmoDenied) error
+	onCUserMessageShowMenu                                 []func(*dota.CUserMessageShowMenu) error
+	onCUserMessageCreditsMsg                               []func(*dota.CUserMessageCreditsMsg) error
+	onCEntityMessagePlayJingle                             []func(*dota.CEntityMessagePlayJingle) error
+	onCEntityMessageScreenOverlay                          []func(*dota.CEntityMessageScreenOverlay) error
+	onCEntityMessageRemoveAllDecals                        []func(*dota.CEntityMessageRemoveAllDecals) error
+	onCEntityMessagePropagateForce                         []func(*dota.CEntityMessagePropagateForce) error
+	onCEntityMessageDoSpark                                []func(*dota.CEntityMessageDoSpark) error
+	onCEntityMessageFixAngle                               []func(*dota.CEntityMessageFixAngle) error
+	onCUserMessageCloseCaptionPlaceholder                  []func(*dota.CUserMessageCloseCaptionPlaceholder) error
+	onCUserMessageCameraTransition                         []func(*dota.CUserMessageCameraTransition) error
+	onCUserMessageAudioParameter                           []func(*dota.CUserMessageAudioParameter) error
+	onCUserMessageHapticsManagerPulse                      []func(*dota.CUserMessageHapticsManagerPulse) error
+	onCUserMessageHapticsManagerEffect                     []func(*dota.CUserMessageHapticsManagerEffect) error
+	onCUserMessageCommandQueueState                        []func(*dota.CUserMessageCommandQueueState) error
+	onCUserMessageUpdateCssClasses                         []func(*dota.CUserMessageUpdateCssClasses) error
+	onCUserMessageServerFrameTime                          []func(*dota.CUserMessageServerFrameTime) error
+	onCUserMessageLagCompensationError                     []func(*dota.CUserMessageLagCompensationError) error
+	onCUserMessageRequestDllStatus                         []func(*dota.CUserMessageRequestDllStatus) error
+	onCUserMessageRequestUtilAction                        []func(*dota.CUserMessageRequestUtilAction) error
+	onCUserMessageRequestInventory                         []func(*dota.CUserMessageRequestInventory) error
+	onCMsgVDebugGameSessionIDEvent                         []func(*dota.CMsgVDebugGameSessionIDEvent) error
+	onCMsgPlaceDecalEvent                                  []func(*dota.CMsgPlaceDecalEvent) error
+	onCMsgClearWorldDecalsEvent                            []func(*dota.CMsgClearWorldDecalsEvent) error
+	onCMsgClearEntityDecalsEvent                           []func(*dota.CMsgClearEntityDecalsEvent) error
+	onCMsgClearDecalsForSkeletonInstanceEvent              []func(*dota.CMsgClearDecalsForSkeletonInstanceEvent) error
+	onCMsgSource1LegacyGameEventList                       []func(*dota.CMsgSource1LegacyGameEventList) error
+	onCMsgSource1LegacyListenEvents                        []func(*dota.CMsgSource1LegacyListenEvents) error
+	onCMsgSource1LegacyGameEvent                           []func(*dota.CMsgSource1LegacyGameEvent) error
+	onCMsgSosStartSoundEvent                               []func(*dota.CMsgSosStartSoundEvent) error
+	onCMsgSosStopSoundEvent                                []func(*dota.CMsgSosStopSoundEvent) error
+	onCMsgSosSetSoundEventParams                           []func(*dota.CMsgSosSetSoundEventParams) error
+	onCMsgSosSetLibraryStackFields                         []func(*dota.CMsgSosSetLibraryStackFields) error
+	onCMsgSosStopSoundEventHash                            []func(*dota.CMsgSosStopSoundEventHash) error
+	onCDOTAUserMsg_AIDebugLine                             []func(*dota.CDOTAUserMsg_AIDebugLine) error
+	onCDOTAUserMsg_ChatEvent                               []func(*dota.CDOTAUserMsg_ChatEvent) error
+	onCDOTAUserMsg_CombatHeroPositions                     []func(*dota.CDOTAUserMsg_CombatHeroPositions) error
+	onCDOTAUserMsg_CombatLogBulkData                       []func(*dota.CDOTAUserMsg_CombatLogBulkData) error
+	onCDOTAUserMsg_CreateLinearProjectile                  []func(*dota.CDOTAUserMsg_CreateLinearProjectile) error
+	onCDOTAUserMsg_DestroyLinearProjectile                 []func(*dota.CDOTAUserMsg_DestroyLinearProjectile) error
+	onCDOTAUserMsg_DodgeTrackingProjectiles                []func(*dota.CDOTAUserMsg_DodgeTrackingProjectiles) error
+	onCDOTAUserMsg_GlobalLightColor                        []func(*dota.CDOTAUserMsg_GlobalLightColor) error
+	onCDOTAUserMsg_GlobalLightDirection                    []func(*dota.CDOTAUserMsg_GlobalLightDirection) error
+	onCDOTAUserMsg_InvalidCommand                          []func(*dota.CDOTAUserMsg_InvalidCommand) error
+	onCDOTAUserMsg_LocationPing                            []func(*dota.CDOTAUserMsg_LocationPing) error
+	onCDOTAUserMsg_MapLine                                 []func(*dota.CDOTAUserMsg_MapLine) error
+	onCDOTAUserMsg_MiniKillCamInfo                         []func(*dota.CDOTAUserMsg_MiniKillCamInfo) error
+	onCDOTAUserMsg_MinimapDebugPoint                       []func(*dota.CDOTAUserMsg_MinimapDebugPoint) error
+	onCDOTAUserMsg_MinimapEvent                            []func(*dota.CDOTAUserMsg_MinimapEvent) error
+	onCDOTAUserMsg_NevermoreRequiem                        []func(*dota.CDOTAUserMsg_NevermoreRequiem) error
+	onCDOTAUserMsg_OverheadEvent                           []func(*dota.CDOTAUserMsg_OverheadEvent) error
+	onCDOTAUserMsg_SetNextAutobuyItem                      []func(*dota.CDOTAUserMsg_SetNextAutobuyItem) error
+	onCDOTAUserMsg_SharedCooldown                          []func(*dota.CDOTAUserMsg_SharedCooldown) error
+	onCDOTAUserMsg_SpectatorPlayerClick                    []func(*dota.CDOTAUserMsg_SpectatorPlayerClick) error
+	onCDOTAUserMsg_TutorialTipInfo                         []func(*dota.CDOTAUserMsg_TutorialTipInfo) error
+	onCDOTAUserMsg_UnitEvent                               []func(*dota.CDOTAUserMsg_UnitEvent) error
+	onCDOTAUserMsg_BotChat                                 []func(*dota.CDOTAUserMsg_BotChat) error
+	onCDOTAUserMsg_HudError                                []func(*dota.CDOTAUserMsg_HudError) error
+	onCDOTAUserMsg_ItemPurchased                           []func(*dota.CDOTAUserMsg_ItemPurchased) error
+	onCDOTAUserMsg_Ping                                    []func(*dota.CDOTAUserMsg_Ping) error
+	onCDOTAUserMsg_ItemFound                               []func(*dota.CDOTAUserMsg_ItemFound) error
+	onCDOTAUserMsg_SwapVerify                              []func(*dota.CDOTAUserMsg_SwapVerify) error
+	onCDOTAUserMsg_WorldLine                               []func(*dota.CDOTAUserMsg_WorldLine) error
+	onCMsgGCToClientTournamentItemDrop                     []func(*dota.CMsgGCToClientTournamentItemDrop) error
+	onCDOTAUserMsg_ItemAlert                               []func(*dota.CDOTAUserMsg_ItemAlert) error
+	onCDOTAUserMsg_HalloweenDrops                          []func(*dota.CDOTAUserMsg_HalloweenDrops) error
+	onCDOTAUserMsg_ChatWheel                               []func(*dota.CDOTAUserMsg_ChatWheel) error
+	onCDOTAUserMsg_ReceivedXmasGift                        []func(*dota.CDOTAUserMsg_ReceivedXmasGift) error
+	onCDOTAUserMsg_UpdateSharedContent                     []func(*dota.CDOTAUserMsg_UpdateSharedContent) error
+	onCDOTAUserMsg_TutorialRequestExp                      []func(*dota.CDOTAUserMsg_TutorialRequestExp) error
+	onCDOTAUserMsg_TutorialPingMinimap                     []func(*dota.CDOTAUserMsg_TutorialPingMinimap) error
+	onCDOTAUserMsg_GamerulesStateChanged                   []func(*dota.CDOTAUserMsg_GamerulesStateChanged) error
+	onCDOTAUserMsg_ShowSurvey                              []func(*dota.CDOTAUserMsg_ShowSurvey) error
+	onCDOTAUserMsg_TutorialFade                            []func(*dota.CDOTAUserMsg_TutorialFade) error
+	onCDOTAUserMsg_AddQuestLogEntry                        []func(*dota.CDOTAUserMsg_AddQuestLogEntry) error
+	onCDOTAUserMsg_SendStatPopup                           []func(*dota.CDOTAUserMsg_SendStatPopup) error
+	onCDOTAUserMsg_TutorialFinish                          []func(*dota.CDOTAUserMsg_TutorialFinish) error
+	onCDOTAUserMsg_SendRoshanPopup                         []func(*dota.CDOTAUserMsg_SendRoshanPopup) error
+	onCDOTAUserMsg_SendGenericToolTip                      []func(*dota.CDOTAUserMsg_SendGenericToolTip) error
+	onCDOTAUserMsg_SendFinalGold                           []func(*dota.CDOTAUserMsg_SendFinalGold) error
+	onCDOTAUserMsg_CustomMsg                               []func(*dota.CDOTAUserMsg_CustomMsg) error
+	onCDOTAUserMsg_CoachHUDPing                            []func(*dota.CDOTAUserMsg_CoachHUDPing) error
+	onCDOTAUserMsg_ClientLoadGridNav                       []func(*dota.CDOTAUserMsg_ClientLoadGridNav) error
+	onCDOTAUserMsg_TE_Projectile                           []func(*dota.CDOTAUserMsg_TE_Projectile) error
+	onCDOTAUserMsg_TE_ProjectileLoc                        []func(*dota.CDOTAUserMsg_TE_ProjectileLoc) error
+	onCDOTAUserMsg_TE_DotaBloodImpact                      []func(*dota.CDOTAUserMsg_TE_DotaBloodImpact) error
+	onCDOTAUserMsg_TE_UnitAnimation                        []func(*dota.CDOTAUserMsg_TE_UnitAnimation) error
+	onCDOTAUserMsg_TE_UnitAnimationEnd                     []func(*dota.CDOTAUserMsg_TE_UnitAnimationEnd) error
+	onCDOTAUserMsg_AbilityPing                             []func(*dota.CDOTAUserMsg_AbilityPing) error
+	onCDOTAUserMsg_ShowGenericPopup                        []func(*dota.CDOTAUserMsg_ShowGenericPopup) error
+	onCDOTAUserMsg_VoteStart                               []func(*dota.CDOTAUserMsg_VoteStart) error
+	onCDOTAUserMsg_VoteUpdate                              []func(*dota.CDOTAUserMsg_VoteUpdate) error
+	onCDOTAUserMsg_VoteEnd                                 []func(*dota.CDOTAUserMsg_VoteEnd) error
+	onCDOTAUserMsg_BoosterState                            []func(*dota.CDOTAUserMsg_BoosterState) error
+	onCDOTAUserMsg_WillPurchaseAlert                       []func(*dota.CDOTAUserMsg_WillPurchaseAlert) error
+	onCDOTAUserMsg_TutorialMinimapPosition                 []func(*dota.CDOTAUserMsg_TutorialMinimapPosition) error
+	onCDOTAUserMsg_PlayerMMR                               []func(*dota.CDOTAUserMsg_PlayerMMR) error
+	onCDOTAUserMsg_AbilitySteal                            []func(*dota.CDOTAUserMsg_AbilitySteal) error
+	onCDOTAUserMsg_CourierKilledAlert                      []func(*dota.CDOTAUserMsg_CourierKilledAlert) error
+	onCDOTAUserMsg_EnemyItemAlert                          []func(*dota.CDOTAUserMsg_EnemyItemAlert) error
+	onCDOTAUserMsg_StatsMatchDetails                       []func(*dota.CDOTAUserMsg_StatsMatchDetails) error
+	onCDOTAUserMsg_MiniTaunt                               []func(*dota.CDOTAUserMsg_MiniTaunt) error
+	onCDOTAUserMsg_BuyBackStateAlert                       []func(*dota.CDOTAUserMsg_BuyBackStateAlert) error
+	onCDOTAUserMsg_SpeechBubble                            []func(*dota.CDOTAUserMsg_SpeechBubble) error
+	onCDOTAUserMsg_CustomHeaderMessage                     []func(*dota.CDOTAUserMsg_CustomHeaderMessage) error
+	onCDOTAUserMsg_QuickBuyAlert                           []func(*dota.CDOTAUserMsg_QuickBuyAlert) error
+	onCDOTAUserMsg_StatsHeroMinuteDetails                  []func(*dota.CDOTAUserMsg_StatsHeroMinuteDetails) error
+	onCDOTAUserMsg_PredictionResult                        []func(*dota.CDOTAUserMsg_PredictionResult) error
+	onCDOTAUserMsg_ModifierAlert                           []func(*dota.CDOTAUserMsg_ModifierAlert) error
+	onCDOTAUserMsg_HPManaAlert                             []func(*dota.CDOTAUserMsg_HPManaAlert) error
+	onCDOTAUserMsg_GlyphAlert                              []func(*dota.CDOTAUserMsg_GlyphAlert) error
+	onCDOTAUserMsg_BeastChat                               []func(*dota.CDOTAUserMsg_BeastChat) error
+	onCDOTAUserMsg_SpectatorPlayerUnitOrders               []func(*dota.CDOTAUserMsg_SpectatorPlayerUnitOrders) error
+	onCDOTAUserMsg_CustomHudElement_Create                 []func(*dota.CDOTAUserMsg_CustomHudElement_Create) error
+	onCDOTAUserMsg_CustomHudElement_Modify                 []func(*dota.CDOTAUserMsg_CustomHudElement_Modify) error
+	onCDOTAUserMsg_CustomHudElement_Destroy                []func(*dota.CDOTAUserMsg_CustomHudElement_Destroy) error
+	onCDOTAUserMsg_CompendiumState                         []func(*dota.CDOTAUserMsg_CompendiumState) error
+	onCDOTAUserMsg_ProjectionAbility                       []func(*dota.CDOTAUserMsg_ProjectionAbility) error
+	onCDOTAUserMsg_ProjectionEvent                         []func(*dota.CDOTAUserMsg_ProjectionEvent) error
+	onCMsgDOTACombatLogEntry                               []func(*dota.CMsgDOTACombatLogEntry) error
+	onCDOTAUserMsg_XPAlert                                 []func(*dota.CDOTAUserMsg_XPAlert) error
+	onCDOTAUserMsg_UpdateQuestProgress                     []func(*dota.CDOTAUserMsg_UpdateQuestProgress) error
+	onCDOTAMatchMetadataFile                               []func(*dota.CDOTAMatchMetadataFile) error
+	onCDOTAUserMsg_QuestStatus                             []func(*dota.CDOTAUserMsg_QuestStatus) error
+	onCDOTAUserMsg_SuggestHeroPick                         []func(*dota.CDOTAUserMsg_SuggestHeroPick) error
+	onCDOTAUserMsg_SuggestHeroRole                         []func(*dota.CDOTAUserMsg_SuggestHeroRole) error
+	onCDOTAUserMsg_KillcamDamageTaken                      []func(*dota.CDOTAUserMsg_KillcamDamageTaken) error
+	onCDOTAUserMsg_SelectPenaltyGold                       []func(*dota.CDOTAUserMsg_SelectPenaltyGold) error
+	onCDOTAUserMsg_RollDiceResult                          []func(*dota.CDOTAUserMsg_RollDiceResult) error
+	onCDOTAUserMsg_FlipCoinResult                          []func(*dota.CDOTAUserMsg_FlipCoinResult) error
+	onCDOTAUserMsg_SendRoshanSpectatorPhase                []func(*dota.CDOTAUserMsg_SendRoshanSpectatorPhase) error
+	onCDOTAUserMsg_ChatWheelCooldown                       []func(*dota.CDOTAUserMsg_ChatWheelCooldown) error
+	onCDOTAUserMsg_DismissAllStatPopups                    []func(*dota.CDOTAUserMsg_DismissAllStatPopups) error
+	onCDOTAUserMsg_TE_DestroyProjectile                    []func(*dota.CDOTAUserMsg_TE_DestroyProjectile) error
+	onCDOTAUserMsg_HeroRelicProgress                       []func(*dota.CDOTAUserMsg_HeroRelicProgress) error
+	onCDOTAUserMsg_AbilityDraftRequestAbility              []func(*dota.CDOTAUserMsg_AbilityDraftRequestAbility) error
+	onCDOTAUserMsg_ItemSold                                []func(*dota.CDOTAUserMsg_ItemSold) error
+	onCDOTAUserMsg_DamageReport                            []func(*dota.CDOTAUserMsg_DamageReport) error
+	onCDOTAUserMsg_SalutePlayer                            []func(*dota.CDOTAUserMsg_SalutePlayer) error
+	onCDOTAUserMsg_TipAlert                                []func(*dota.CDOTAUserMsg_TipAlert) error
+	onCDOTAUserMsg_ReplaceQueryUnit                        []func(*dota.CDOTAUserMsg_ReplaceQueryUnit) error
+	onCDOTAUserMsg_EmptyTeleportAlert                      []func(*dota.CDOTAUserMsg_EmptyTeleportAlert) error
+	onCDOTAUserMsg_MarsArenaOfBloodAttack                  []func(*dota.CDOTAUserMsg_MarsArenaOfBloodAttack) error
+	onCDOTAUserMsg_ESArcanaCombo                           []func(*dota.CDOTAUserMsg_ESArcanaCombo) error
+	onCDOTAUserMsg_ESArcanaComboSummary                    []func(*dota.CDOTAUserMsg_ESArcanaComboSummary) error
+	onCDOTAUserMsg_HighFiveLeftHanging                     []func(*dota.CDOTAUserMsg_HighFiveLeftHanging) error
+	onCDOTAUserMsg_HighFiveCompleted                       []func(*dota.CDOTAUserMsg_HighFiveCompleted) error
+	onCDOTAUserMsg_ShovelUnearth                           []func(*dota.CDOTAUserMsg_ShovelUnearth) error
+	onCDOTAUserMsg_RadarAlert                              []func(*dota.CDOTAUserMsg_RadarAlert) error
+	onCDOTAUserMsg_AllStarEvent                            []func(*dota.CDOTAUserMsg_AllStarEvent) error
+	onCDOTAUserMsg_TalentTreeAlert                         []func(*dota.CDOTAUserMsg_TalentTreeAlert) error
+	onCDOTAUserMsg_QueuedOrderRemoved                      []func(*dota.CDOTAUserMsg_QueuedOrderRemoved) error
+	onCDOTAUserMsg_DebugChallenge                          []func(*dota.CDOTAUserMsg_DebugChallenge) error
+	onCDOTAUserMsg_OMArcanaCombo                           []func(*dota.CDOTAUserMsg_OMArcanaCombo) error
+	onCDOTAUserMsg_FoundNeutralItem                        []func(*dota.CDOTAUserMsg_FoundNeutralItem) error
+	onCDOTAUserMsg_OutpostCaptured                         []func(*dota.CDOTAUserMsg_OutpostCaptured) error
+	onCDOTAUserMsg_OutpostGrantedXP                        []func(*dota.CDOTAUserMsg_OutpostGrantedXP) error
+	onCDOTAUserMsg_MoveCameraToUnit                        []func(*dota.CDOTAUserMsg_MoveCameraToUnit) error
+	onCDOTAUserMsg_PauseMinigameData                       []func(*dota.CDOTAUserMsg_PauseMinigameData) error
+	onCDOTAUserMsg_VersusScene_PlayerBehavior              []func(*dota.CDOTAUserMsg_VersusScene_PlayerBehavior) error
+	onCDOTAUserMsg_QoP_ArcanaSummary                       []func(*dota.CDOTAUserMsg_QoP_ArcanaSummary) error
+	onCDOTAUserMsg_HotPotato_Created                       []func(*dota.CDOTAUserMsg_HotPotato_Created) error
+	onCDOTAUserMsg_HotPotato_Exploded                      []func(*dota.CDOTAUserMsg_HotPotato_Exploded) error
+	onCDOTAUserMsg_WK_Arcana_Progress                      []func(*dota.CDOTAUserMsg_WK_Arcana_Progress) error
+	onCDOTAUserMsg_GuildChallenge_Progress                 []func(*dota.CDOTAUserMsg_GuildChallenge_Progress) error
+	onCDOTAUserMsg_WRArcanaProgress                        []func(*dota.CDOTAUserMsg_WRArcanaProgress) error
+	onCDOTAUserMsg_WRArcanaSummary                         []func(*dota.CDOTAUserMsg_WRArcanaSummary) error
+	onCDOTAUserMsg_EmptyItemSlotAlert                      []func(*dota.CDOTAUserMsg_EmptyItemSlotAlert) error
+	onCDOTAUserMsg_AghsStatusAlert                         []func(*dota.CDOTAUserMsg_AghsStatusAlert) error
+	onCDOTAUserMsg_PingConfirmation                        []func(*dota.CDOTAUserMsg_PingConfirmation) error
+	onCDOTAUserMsg_MutedPlayers                            []func(*dota.CDOTAUserMsg_MutedPlayers) error
+	onCDOTAUserMsg_ContextualTip                           []func(*dota.CDOTAUserMsg_ContextualTip) error
+	onCDOTAUserMsg_ChatMessage                             []func(*dota.CDOTAUserMsg_ChatMessage) error
+	onCDOTAUserMsg_NeutralCampAlert                        []func(*dota.CDOTAUserMsg_NeutralCampAlert) error
+	onCDOTAUserMsg_RockPaperScissorsStarted                []func(*dota.CDOTAUserMsg_RockPaperScissorsStarted) error
+	onCDOTAUserMsg_RockPaperScissorsFinished               []func(*dota.CDOTAUserMsg_RockPaperScissorsFinished) error
+	onCDOTAUserMsg_DuelOpponentKilled                      []func(*dota.CDOTAUserMsg_DuelOpponentKilled) error
+	onCDOTAUserMsg_DuelAccepted                            []func(*dota.CDOTAUserMsg_DuelAccepted) error
+	onCDOTAUserMsg_DuelRequested                           []func(*dota.CDOTAUserMsg_DuelRequested) error
+	onCDOTAUserMsg_MuertaReleaseEvent_AssignedTargetKilled []func(*dota.CDOTAUserMsg_MuertaReleaseEvent_AssignedTargetKilled) error
 
 	pb *proto.Buffer
 }
@@ -785,6 +787,11 @@ func (c *Callbacks) OnCUserMessageRequestDllStatus(fn func(*dota.CUserMessageReq
 // OnCUserMessageRequestUtilAction registers a callback for EBaseUserMessages_UM_RequestUtilAction
 func (c *Callbacks) OnCUserMessageRequestUtilAction(fn func(*dota.CUserMessageRequestUtilAction) error) {
 	c.onCUserMessageRequestUtilAction = append(c.onCUserMessageRequestUtilAction, fn)
+}
+
+// OnCUserMessageRequestInventory registers a callback for EBaseUserMessages_UM_RequestInventory
+func (c *Callbacks) OnCUserMessageRequestInventory(fn func(*dota.CUserMessageRequestInventory) error) {
+	c.onCUserMessageRequestInventory = append(c.onCUserMessageRequestInventory, fn)
 }
 
 // OnCMsgVDebugGameSessionIDEvent registers a callback for EBaseGameEvents_GE_VDebugGameSessionIDEvent
@@ -1575,6 +1582,11 @@ func (c *Callbacks) OnCDOTAUserMsg_DuelAccepted(fn func(*dota.CDOTAUserMsg_DuelA
 // OnCDOTAUserMsg_DuelRequested registers a callback for EDotaUserMessages_DOTA_UM_DuelRequested
 func (c *Callbacks) OnCDOTAUserMsg_DuelRequested(fn func(*dota.CDOTAUserMsg_DuelRequested) error) {
 	c.onCDOTAUserMsg_DuelRequested = append(c.onCDOTAUserMsg_DuelRequested, fn)
+}
+
+// OnCDOTAUserMsg_MuertaReleaseEvent_AssignedTargetKilled registers a callback for EDotaUserMessages_DOTA_UM_MuertaReleaseEvent_AssignedTargetKilled
+func (c *Callbacks) OnCDOTAUserMsg_MuertaReleaseEvent_AssignedTargetKilled(fn func(*dota.CDOTAUserMsg_MuertaReleaseEvent_AssignedTargetKilled) error) {
+	c.onCDOTAUserMsg_MuertaReleaseEvent_AssignedTargetKilled = append(c.onCDOTAUserMsg_MuertaReleaseEvent_AssignedTargetKilled, fn)
 }
 
 func (c *Callbacks) callByDemoType(t int32, buf []byte) error {
@@ -3521,6 +3533,25 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		for _, fn := range c.onCUserMessageRequestUtilAction {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 160: // dota.EBaseUserMessages_UM_RequestInventory
+		if c.onCUserMessageRequestInventory == nil {
+			return nil
+		}
+
+		msg := &dota.CUserMessageRequestInventory{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCUserMessageRequestInventory {
 			if err := fn(msg); err != nil {
 				return err
 			}
@@ -6523,6 +6554,25 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		for _, fn := range c.onCDOTAUserMsg_DuelRequested {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 619: // dota.EDotaUserMessages_DOTA_UM_MuertaReleaseEvent_AssignedTargetKilled
+		if c.onCDOTAUserMsg_MuertaReleaseEvent_AssignedTargetKilled == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_MuertaReleaseEvent_AssignedTargetKilled{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_MuertaReleaseEvent_AssignedTargetKilled {
 			if err := fn(msg); err != nil {
 				return err
 			}

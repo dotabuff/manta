@@ -13,19 +13,16 @@ import "econ_gcmessages.proto";
 import "dota_gcmessages_client.proto";
 import "valveextensions.proto";
 
-option optimize_for = SPEED;
-option cc_generic_services = false;
-
 enum ECandyShopAuditAction {
-	k_eInvalid = 0;
-	k_eSupportModify = 1;
-	k_ePurchaseReward = 2;
-	k_eOpenBags = 3;
-	k_eRerollRewards = 4;
-	k_eDoVariableExchange = 5;
-	k_eDoExchange = 6;
-	k_eEventActionGrantInventorySizeIncrease = 7;
-	k_eEventActionGrantRerollChargesIncrease = 8;
+	k_ECandyShopAuditAction_Invalid = 0;
+	k_ECandyShopAuditAction_SupportModify = 1;
+	k_ECandyShopAuditAction_PurchaseReward = 2;
+	k_ECandyShopAuditAction_OpenBags = 3;
+	k_ECandyShopAuditAction_RerollRewards = 4;
+	k_ECandyShopAuditAction_DoVariableExchange = 5;
+	k_ECandyShopAuditAction_DoExchange = 6;
+	k_ECandyShopAuditAction_EventActionGrantInventorySizeIncrease = 7;
+	k_ECandyShopAuditAction_EventActionGrantRerollChargesIncrease = 8;
 }
 
 enum ECandyShopRewardType {
@@ -96,6 +93,7 @@ message CMsgClientToGCCandyShopGetUserDataResponse {
 		k_eDisabled = 3;
 		k_eTimeout = 4;
 		k_eInvalidShop = 5;
+		k_eExpiredShop = 6;
 	}
 
 	optional CMsgClientToGCCandyShopGetUserDataResponse.EResponse response = 1;
@@ -122,6 +120,7 @@ message CMsgClientToGCCandyShopPurchaseRewardResponse {
 		k_eInvalidShop = 5;
 		k_eInvalidReward = 6;
 		k_eNotEnoughCandy = 7;
+		k_eExpiredShop = 8;
 	}
 
 	optional CMsgClientToGCCandyShopPurchaseRewardResponse.EResponse response = 1;
@@ -143,6 +142,7 @@ message CMsgClientToGCCandyShopOpenBagsResponse {
 		k_eInvalidItem = 6;
 		k_eNotEnoughBags = 7;
 		k_eNotEnoughSpace = 8;
+		k_eExpiredShop = 9;
 	}
 
 	optional CMsgClientToGCCandyShopOpenBagsResponse.EResponse response = 1;
@@ -164,6 +164,7 @@ message CMsgClientToGCCandyShopDoExchangeResponse {
 		k_eNotEnoughCandy = 6;
 		k_eInvalidRecipe = 7;
 		k_eNotEnoughSpace = 8;
+		k_eExpiredShop = 9;
 	}
 
 	optional CMsgClientToGCCandyShopDoExchangeResponse.EResponse response = 1;
@@ -186,6 +187,7 @@ message CMsgClientToGCCandyShopDoVariableExchangeResponse {
 		k_eNotEnoughCandy = 6;
 		k_eInvalidRecipe = 7;
 		k_eNotEnoughSpace = 8;
+		k_eExpiredShop = 9;
 	}
 
 	optional CMsgClientToGCCandyShopDoVariableExchangeResponse.EResponse response = 1;
@@ -204,6 +206,7 @@ message CMsgClientToGCCandyShopRerollRewardsResponse {
 		k_eTimeout = 4;
 		k_eInvalidShop = 5;
 		k_eNoRerollCharges = 6;
+		k_eExpiredShop = 7;
 	}
 
 	optional CMsgClientToGCCandyShopRerollRewardsResponse.EResponse response = 1;

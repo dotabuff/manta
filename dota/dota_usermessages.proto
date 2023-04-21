@@ -7,9 +7,6 @@ import "networkbasetypes.proto";
 import "dota_shared_enums.proto";
 import "dota_commonmessages.proto";
 
-option optimize_for = SPEED;
-option cc_generic_services = false;
-
 enum EDotaUserMessages {
 	DOTA_UM_AddUnitToSelection = 464;
 	DOTA_UM_AIDebugLine = 465;
@@ -164,6 +161,9 @@ enum EDotaUserMessages {
 	DOTA_UM_DuelOpponentKilled = 616;
 	DOTA_UM_DuelAccepted = 617;
 	DOTA_UM_DuelRequested = 618;
+	DOTA_UM_MuertaReleaseEvent_AssignedTargetKilled = 619;
+	DOTA_UM_PlayerDraftSuggestPick = 620;
+	DOTA_UM_PlayerDraftPick = 621;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -308,6 +308,7 @@ enum DOTA_ABILITY_PING_TYPE {
 	ABILITY_PING_NEUTRAL_OFFER = 13;
 	ABILITY_PING_NEUTRAL_REQUEST = 14;
 	ABILITY_PING_NEUTRAL_EQUIP = 15;
+	ABILITY_PING_INCOURIERBACKPACK = 16;
 }
 
 enum DOTA_REPLAY_STATE_EVENT {
@@ -500,7 +501,7 @@ message CDOTAUserMsg_ProjectileParticleCPData {
 message CDOTAUserMsg_MiniKillCamInfo {
 	message Attacker {
 		message Ability {
-			optional uint32 ability_id = 1;
+			optional int32 ability_id = 1;
 			optional int32 damage = 2;
 		}
 
@@ -792,7 +793,6 @@ message CDOTAUserMsg_UnitEvent {
 		optional int32 speech_concept = 1;
 		optional string response = 2;
 		optional int32 recipient_type = 3;
-		optional int32 level = 4;
 		optional bool muteable = 5;
 		optional CDOTAUserMsg_UnitEvent.Interval predelay = 6;
 		optional uint32 flags = 7;
@@ -1026,7 +1026,7 @@ message CDOTAUserMsg_TE_DotaBloodImpact {
 
 message CDOTAUserMsg_AbilityPing {
 	optional int32 player_id = 1;
-	optional uint32 ability_id = 2;
+	optional int32 ability_id = 2;
 	optional DOTA_ABILITY_PING_TYPE type = 3;
 	optional uint32 cooldown_seconds = 4;
 	optional uint32 level = 5;
@@ -1096,7 +1096,7 @@ message CDOTAUserMsg_PlayerMMR {
 
 message CDOTAUserMsg_AbilitySteal {
 	optional int32 player_id = 1;
-	optional uint32 ability_id = 2;
+	optional int32 ability_id = 2;
 	optional uint32 ability_level = 3;
 }
 
@@ -1259,7 +1259,7 @@ message CDOTAUserMsg_CompendiumState {
 }
 
 message CDOTAUserMsg_ProjectionAbility {
-	optional uint32 ability_id = 1;
+	optional int32 ability_id = 1;
 	optional int32 caster_ent_index = 2;
 	optional int32 caster_team = 3;
 	optional bool channel_end = 4;
@@ -1298,7 +1298,7 @@ message CDOTAUserMsg_QuestStatus {
 	optional uint32 goal = 5;
 	optional uint32 query = 6;
 	optional float fail_gametime = 7;
-	optional uint32 item_ability_id = 8;
+	optional int32 item_ability_id = 8;
 }
 
 message CDOTAUserMsg_SuggestHeroPick {
@@ -1316,7 +1316,7 @@ message CDOTAUserMsg_KillcamDamageTaken {
 	required int32 player_id = 1;
 	optional uint32 damage_taken = 2;
 	optional uint32 item_type = 3;
-	optional uint32 item_ability_id = 4;
+	optional int32 item_ability_id = 4;
 	optional string hero_name = 5;
 	optional string damage_color = 6;
 }
@@ -1364,7 +1364,7 @@ message CDOTAUserMsg_HeroRelicProgress {
 
 message CDOTAUserMsg_AbilityDraftRequestAbility {
 	optional int32 player_id = 1;
-	optional uint32 requested_ability_id = 2;
+	optional int32 requested_ability_id = 2;
 	optional bool ctrl_is_down = 3;
 }
 
@@ -1382,6 +1382,7 @@ message CDOTAUserMsg_SalutePlayer {
 	optional uint32 tip_amount = 3;
 	optional uint32 event_id = 4;
 	optional string custom_tip_style = 5;
+	optional uint32 num_recent_tips = 6;
 }
 
 message CDOTAUserMsg_TipAlert {
@@ -1461,7 +1462,7 @@ message CDOTAUserMsg_DebugChallenge {
 
 message CDOTAUserMsg_FoundNeutralItem {
 	optional int32 player_id = 1;
-	optional uint32 item_ability_id = 2;
+	optional int32 item_ability_id = 2;
 	optional uint32 item_tier = 3;
 	optional uint32 tier_item_count = 4;
 }
@@ -1631,4 +1632,23 @@ message CDOTAUserMsg_DuelAccepted {
 
 message CDOTAUserMsg_DuelRequested {
 	optional int32 player_id_requestor = 1;
+}
+
+message CDOTAUserMsg_MuertaReleaseEvent_AssignedTargetKilled {
+	required int32 player_id_killer = 1;
+	required int32 player_id_target = 2;
+	required int32 points = 3;
+	required int32 points_total = 4;
+	required bool last_hit = 5;
+}
+
+message CDOTAUserMsg_PlayerDraftSuggestPick {
+	optional int32 player_id = 1;
+	optional int32 suggestion_player_id = 2;
+}
+
+message CDOTAUserMsg_PlayerDraftPick {
+	optional int32 player_id_captain = 1;
+	optional int32 player_id_target = 2;
+	optional int32 team = 3;
 }

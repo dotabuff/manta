@@ -5,8 +5,6 @@ option go_package = "github.com/dotabuff/manta/dota;dota";
 
 import "networkbasetypes.proto";
 
-option cc_generic_services = false;
-
 enum CLC_Messages {
 	clc_ClientInfo = 20;
 	clc_Move = 21;
@@ -409,6 +407,7 @@ message CSVCMsg_CreateStringTable {
 	optional bytes string_data = 7;
 	optional int32 uncompressed_size = 8;
 	optional bool data_compressed = 9;
+	optional bool using_varint_bitcounts = 10;
 }
 
 message CSVCMsg_UpdateStringTable {

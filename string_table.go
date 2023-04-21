@@ -44,6 +44,7 @@ type stringTable struct {
 	userDataFixedSize bool
 	userDataSize      int32
 	flags             int32
+	varintBitCounts   bool
 }
 
 func (st *stringTable) GetIndex() int32                      { return st.index }
@@ -77,6 +78,7 @@ func (p *Parser) onCSVCMsg_CreateStringTable(m *dota.CSVCMsg_CreateStringTable) 
 		userDataFixedSize: m.GetUserDataFixedSize(),
 		userDataSize:      m.GetUserDataSize(),
 		flags:             m.GetFlags(),
+		varintBitCounts:   m.GetUsingVarintBitcounts(),
 	}
 
 	// Increment the index
@@ -103,7 +105,7 @@ func (p *Parser) onCSVCMsg_CreateStringTable(m *dota.CSVCMsg_CreateStringTable) 
 	}
 
 	// Parse the items out of the string table data
-	items := parseStringTable(buf, m.GetNumEntries(), t.name, t.userDataFixedSize, t.userDataSize, t.flags)
+	items := parseStringTable(buf, m.GetNumEntries(), t.name, t.userDataFixedSize, t.userDataSize, t.flags, t.varintBitCounts)
 
 	// Insert the items into the table
 	for _, item := range items {
@@ -135,7 +137,7 @@ func (p *Parser) onCSVCMsg_UpdateStringTable(m *dota.CSVCMsg_UpdateStringTable) 
 	}
 
 	// Parse the updates out of the string table data
-	items := parseStringTable(m.GetStringData(), m.GetNumChangedEntries(), t.name, t.userDataFixedSize, t.userDataSize, t.flags)
+	items := parseStringTable(m.GetStringData(), m.GetNumChangedEntries(), t.name, t.userDataFixedSize, t.userDataSize, t.flags, t.varintBitCounts)
 
 	// Apply the updates to the parser state
 	for _, item := range items {
@@ -161,7 +163,7 @@ func (p *Parser) onCSVCMsg_UpdateStringTable(m *dota.CSVCMsg_UpdateStringTable) 
 }
 
 // Parse a string table data blob, returning a list of item updates.
-func parseStringTable(buf []byte, numUpdates int32, name string, userDataFixed bool, userDataSize int32, flags int32) (items []*stringTableItem) {
+func parseStringTable(buf []byte, numUpdates int32, name string, userDataFixed bool, userDataSize int32, flags int32, varintBitCounts bool) (items []*stringTableItem) {
 	defer func() {
 		if err := recover(); err != nil {
 			_debugf("warning: unable to parse string table %s: %s", name, err)
@@ -256,7 +258,11 @@ func parseStringTable(buf []byte, numUpdates int32, name string, userDataFixed b
 				if (flags & 0x1) != 0 {
 					isCompressed = r.readBoolean()
 				}
-				bitSize = r.readBits(17) * 8
+				if varintBitCounts {
+					bitSize = r.readUBitVar() * 8
+				} else {
+					bitSize = r.readBits(17) * 8
+				}
 			}
 			value = r.readBitsAsBytes(bitSize)
 

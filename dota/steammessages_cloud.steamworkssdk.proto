@@ -1,0 +1,73 @@
+syntax = "proto2";
+
+package dota;
+option go_package = "github.com/dotabuff/manta/dota;dota";
+
+import "steammessages_unified_base.steamworkssdk.proto";
+
+message CCloud_GetUploadServerInfo_Request {
+	optional uint32 appid = 1;
+}
+
+message CCloud_GetUploadServerInfo_Response {
+	optional string server_url = 1;
+}
+
+message CCloud_GetFileDetails_Request {
+	optional uint64 ugcid = 1;
+	optional uint32 appid = 2;
+}
+
+message CCloud_UserFile {
+	optional uint32 appid = 1;
+	optional uint64 ugcid = 2;
+	optional string filename = 3;
+	optional uint64 timestamp = 4;
+	optional uint32 file_size = 5;
+	optional string url = 6;
+	optional fixed64 steamid_creator = 7;
+}
+
+message CCloud_GetFileDetails_Response {
+	optional CCloud_UserFile details = 1;
+}
+
+message CCloud_EnumerateUserFiles_Request {
+	optional uint32 appid = 1;
+	optional bool extended_details = 2;
+	optional uint32 count = 3;
+	optional uint32 start_index = 4;
+}
+
+message CCloud_EnumerateUserFiles_Response {
+	repeated CCloud_UserFile files = 1;
+	optional uint32 total_files = 2;
+}
+
+message CCloud_Delete_Request {
+	optional string filename = 1;
+	optional uint32 appid = 2;
+}
+
+message CCloud_Delete_Response {
+}
+
+service Cloud {
+	option (service_description) = "A service for Steam Cloud operations.";
+
+rpc GetUploadServerInfo (CCloud_GetUploadServerInfo_Request) returns (CCloud_GetUploadServerInfo_Response) {
+		option (method_description) = "Returns the URL of the proper cloud server for a user.";
+	}
+
+rpc GetFileDetails (CCloud_GetFileDetails_Request) returns (CCloud_GetFileDetails_Response) {
+		option (method_description) = "Returns details on a Cloud file.";
+	}
+
+rpc EnumerateUserFiles (CCloud_EnumerateUserFiles_Request) returns (CCloud_EnumerateUserFiles_Response) {
+		option (method_description) = "Enumerates Cloud files for a user of a given app ID. Returns up to 500 files at a time.";
+	}
+
+rpc Delete (CCloud_Delete_Request) returns (CCloud_Delete_Response) {
+		option (method_description) = "Deletes a file from the user's cloud.";
+	}
+}

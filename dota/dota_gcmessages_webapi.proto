@@ -6,9 +6,8 @@ option go_package = "github.com/dotabuff/manta/dota;dota";
 import "steammessages.proto";
 import "gcsdk_gcmessages.proto";
 import "dota_shared_enums.proto";
-
-option optimize_for = SPEED;
-option cc_generic_services = false;
+import "dota_gcmessages_common.proto";
+import "dota_match_metadata.proto";
 
 enum ETeamFanContentStatus {
 	TEAM_FAN_CONTENT_STATUS_INVALID = 0;
@@ -224,6 +223,13 @@ message CMsgDPCEvent {
 		CHINA_REGIONAL_FINALS = 12;
 		INTERNATIONAL_2022_REGIONAL_QUALIFIERS = 13;
 		INTERNATIONAL_2022_LAST_CHANCE_QUALIFIERS = 14;
+		WINTER_2023_LEAGUE = 15;
+		WINTER_2023_MAJOR = 16;
+		SPRING_2023_LEAGUE = 17;
+		SPRING_2023_MAJOR = 18;
+		SUMMER_2023_LEAGUE = 19;
+		SUMMER_2023_MAJOR = 20;
+		INTERNATIONAL_2023 = 21;
 	}
 
 	enum ELeagueEventPhase {
@@ -263,6 +269,11 @@ message CMsgDPCEvent {
 	optional uint32 multicast_league_id = 8;
 	repeated uint32 multicast_streams = 9;
 	optional CMsgDPCEvent.ETour tour = 10;
+	optional uint32 timestamp_drop_lock = 12;
+	optional uint32 timestamp_add_lock = 13;
+	optional uint32 timestamp_content_deadline = 14;
+	optional bool is_fantasy_enabled = 15;
+	optional uint32 timestamp_content_review_deadline = 16;
 }
 
 message CMsgDPCEventList {
@@ -346,4 +357,9 @@ message CMsgGetTeamAuditInformation {
 	optional string team_name = 2;
 	repeated CMsgGetTeamAuditInformation.Action actions = 3;
 	optional uint32 last_updated = 4;
+}
+
+message CMsgDOTADPCMatch {
+	optional CMsgDOTAMatch match = 1;
+	optional CDOTAMatchMetadata metadata = 2;
 }

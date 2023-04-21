@@ -5,9 +5,6 @@ option go_package = "github.com/dotabuff/manta/dota;dota";
 
 import "dota_shared_enums.proto";
 
-option optimize_for = SPEED;
-option cc_generic_services = false;
-
 enum DOTA_2013PassportSelectionIndices {
 	PP13_SEL_ALLSTAR_PLAYER_0 = 0;
 	PP13_SEL_ALLSTAR_PLAYER_1 = 1;

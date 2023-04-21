@@ -3,8 +3,6 @@ syntax = "proto2";
 package dota;
 option go_package = "github.com/dotabuff/manta/dota;dota";
 
-option cc_generic_services = false;
-
 message NetMessageSplitscreenUserChanged {
 	optional uint32 slot = 1;
 }

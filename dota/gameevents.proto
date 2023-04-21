@@ -5,9 +5,6 @@ option go_package = "github.com/dotabuff/manta/dota;dota";
 
 import "networkbasetypes.proto";
 
-option optimize_for = SPEED;
-option cc_generic_services = false;
-
 enum EBaseGameEvents {
 	GE_VDebugGameSessionIDEvent = 200;
 	GE_PlaceDecalEvent = 201;
@@ -96,6 +93,7 @@ message CMsgSource1LegacyGameEvent {
 	optional int32 eventid = 2;
 	repeated CMsgSource1LegacyGameEvent.key_t keys = 3;
 	optional int32 server_tick = 4;
+	optional int32 passthrough = 5;
 }
 
 message CMsgSosStartSoundEvent {

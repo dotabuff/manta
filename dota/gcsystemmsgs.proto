@@ -3,9 +3,6 @@ syntax = "proto2";
 package dota;
 option go_package = "github.com/dotabuff/manta/dota;dota";
 
-option optimize_for = SPEED;
-option cc_generic_services = false;
-
 enum ESOMsg {
 	k_ESOMsg_Create = 21;
 	k_ESOMsg_Update = 22;

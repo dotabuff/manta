@@ -12,9 +12,7 @@ import "network_connection.proto";
 import "dota_gcmessages_common_lobby.proto";
 import "dota_gcmessages_common_match_management.proto";
 import "gcsdk_gcmessages.proto";
-
-option optimize_for = SPEED;
-option cc_generic_services = false;
+import "steammessages_steamlearn.steamworkssdk.proto";
 
 enum EPoorNetworkConditionsType {
 	k_EPoorNetworkConditions_None = 0;
@@ -58,6 +56,12 @@ message CMsgConnectedPlayers {
 		optional ENetworkDisconnectionReason disconnect_reason = 4;
 	}
 
+	message PlayerDraft {
+		optional fixed64 steam_id = 1;
+		optional DOTA_GC_TEAM team = 2;
+		optional int32 team_slot = 3;
+	}
+
 	enum SendReason {
 		INVALID = 0;
 		HEARTBEAT = 1;
@@ -83,6 +87,7 @@ message CMsgConnectedPlayers {
 	optional uint32 dire_kills = 12;
 	optional int32 radiant_lead = 14;
 	optional uint32 building_state = 15;
+	repeated CMsgConnectedPlayers.PlayerDraft player_draft = 16;
 }
 
 message CMsgGameServerInfo {
@@ -206,7 +211,7 @@ message CMsgGameMatchSignOut {
 
 			optional fixed64 steam_id = 1;
 			optional uint32 hero_id = 3;
-			repeated uint32 items = 4;
+			repeated int32 items = 4;
 			repeated uint32 item_purchase_times = 63;
 			optional uint32 gold = 5;
 			optional uint32 kills = 6;
@@ -239,7 +244,7 @@ message CMsgGameMatchSignOut {
 			repeated CMatchPlayerPermanentBuff permanent_buffs = 40;
 			optional CMsgGameMatchSignOut.CTeam.CPlayer.CCustomGameData custom_game_data = 35;
 			optional uint32 match_player_flags = 36;
-			repeated uint32 talent_ability_ids = 41;
+			repeated int32 talent_ability_ids = 41;
 			optional uint32 hero_pick_order = 42;
 			optional bool hero_was_randomed = 43;
 			optional bool hero_was_dota_plus_suggestion = 50;
@@ -272,7 +277,7 @@ message CMsgGameMatchSignOut {
 			optional uint32 team_slot = 76;
 			optional uint32 time_purchased_shard = 77;
 			optional uint32 time_purchased_aghs = 78;
-			repeated uint32 ability_draft_abilities = 79;
+			repeated int32 ability_draft_abilities = 79;
 		}
 
 		repeated CMsgGameMatchSignOut.CTeam.CPlayer players = 1;
@@ -320,7 +325,6 @@ message CMsgGameMatchSignOut {
 	optional uint32 duration = 2;
 	optional bool good_guys_win = 3;
 	optional fixed32 date = 4;
-	repeated uint32 num_players = 5;
 	repeated CMsgGameMatchSignOut.CTeam teams = 6;
 	repeated uint32 tower_status = 8;
 	repeated uint32 barracks_status = 9;
@@ -347,6 +351,7 @@ message CMsgGameMatchSignOut {
 	repeated CExtraMsgBlock extra_messages = 54;
 	optional bool training_data_recorded = 55;
 	optional DOTA_GC_TEAM winning_team = 56;
+	optional float normalized_win_probability_diff = 57;
 }
 
 message CMsgSignOutDraftInfo {
@@ -524,7 +529,7 @@ message CMsgDOTALiveScoreboardUpdate {
 	message Team {
 		message Player {
 			message HeroAbility {
-				optional uint32 ability_id = 1;
+				optional int32 ability_id = 1;
 				optional uint32 ability_level = 2;
 			}
 
@@ -550,12 +555,12 @@ message CMsgDOTALiveScoreboardUpdate {
 			optional float xp_per_min = 13;
 			optional CMsgDOTALiveScoreboardUpdate.Team.Player.DOTAUltimateState ultimate_state = 14;
 			optional float ultimate_cooldown = 15;
-			optional uint32 item0 = 16;
-			optional uint32 item1 = 17;
-			optional uint32 item2 = 18;
-			optional uint32 item3 = 19;
-			optional uint32 item4 = 20;
-			optional uint32 item5 = 21;
+			optional int32 item0 = 16;
+			optional int32 item1 = 17;
+			optional int32 item2 = 18;
+			optional int32 item3 = 19;
+			optional int32 item4 = 20;
+			optional int32 item5 = 21;
 			optional uint32 respawn_timer = 22;
 			optional uint32 account_id = 23;
 			optional float position_x = 24;
@@ -929,11 +934,11 @@ message CMsgGCToGCCompendiumInGamePredictionResults {
 
 message CMsgServerToGCMatchPlayerItemPurchaseHistory {
 	message ItemPurchase {
-		optional uint32 item = 1;
+		optional int32 item = 1;
 		optional uint32 gold = 2;
 		optional uint32 net_worth = 3;
 		optional uint32 game_time = 4;
-		repeated uint32 inventory_items = 5;
+		repeated int32 inventory_items = 5;
 		repeated bool talents_skilled = 7;
 	}
 
@@ -955,11 +960,11 @@ message CMsgServerToGCMatchPlayerItemPurchaseHistory {
 
 message CMsgServerToGCMatchPlayerNeutralItemEquipHistory {
 	message ItemEquip {
-		optional uint32 item = 1;
+		optional int32 item = 1;
 		optional uint32 game_time = 2;
-		repeated uint32 inventory_items = 3;
+		repeated int32 inventory_items = 3;
 		repeated bool talents_skilled = 4;
-		repeated uint32 available_neutral_items = 5;
+		repeated int32 available_neutral_items = 5;
 	}
 
 	message Player {
@@ -1028,8 +1033,8 @@ message CMsgAbilitySelectionSteamMLEntry {
 	optional uint32 hero_id = 2;
 	repeated uint32 enemy_hero_ids = 3;
 	optional uint32 lane = 4;
-	repeated uint32 abilities = 5;
-	optional uint32 selected_ability = 6;
+	repeated int32 abilities = 5;
+	optional int32 selected_ability = 6;
 }
 
 message CMsgItemPurchasePregameSteamMLEntry {
@@ -1039,7 +1044,7 @@ message CMsgItemPurchasePregameSteamMLEntry {
 	optional uint32 hero_id = 4;
 	repeated uint32 allied_hero_ids = 5;
 	repeated uint32 enemy_hero_ids = 6;
-	repeated uint32 items = 7;
+	repeated int32 items = 7;
 }
 
 message CMsgItemPurchaseSteamMLEntry {
@@ -1048,8 +1053,8 @@ message CMsgItemPurchaseSteamMLEntry {
 	optional uint32 hero_id = 3;
 	repeated uint32 allied_hero_ids = 4;
 	repeated uint32 enemy_hero_ids = 5;
-	repeated uint32 items = 6;
-	repeated uint32 items_to_be_purchased = 7;
+	repeated int32 items = 6;
+	repeated int32 items_to_be_purchased = 7;
 }
 
 message CMsgItemPurchaseSequenceSteamMLEntry {
@@ -1058,8 +1063,8 @@ message CMsgItemPurchaseSequenceSteamMLEntry {
 	optional uint32 hero_id = 3;
 	repeated uint32 allied_hero_ids = 4;
 	repeated uint32 enemy_hero_ids = 5;
-	repeated uint32 items = 6;
-	optional uint32 item_to_be_purchased = 7;
+	repeated int32 items = 6;
+	optional int32 item_to_be_purchased = 7;
 }
 
 message CMsgServerToGCCavernCrawlIsHeroActive {
@@ -1165,7 +1170,7 @@ message CMsgDetailedGameStats {
 
 message CMsgNeutralItemStats {
 	message NeutralItem {
-		optional uint32 item_id = 1;
+		optional int32 item_id = 1;
 		optional uint32 time_dropped = 2;
 		optional uint32 team = 3;
 		optional uint32 time_last_equipped = 4;
@@ -1225,7 +1230,7 @@ message CMsgSignOutMVPStats {
 		optional uint32 team_id = 1;
 		optional uint32 team_networth_rank = 2;
 		optional uint32 account_id = 3;
-		optional uint32 slot = 32;
+		optional uint32 player_slot = 32;
 		optional uint32 rank = 33;
 		optional uint32 hero_id = 4;
 		optional uint32 role = 5;
@@ -1378,4 +1383,128 @@ message CMsgServerToGCGetStickerHeroesResponse {
 	}
 
 	repeated CMsgServerToGCGetStickerHeroesResponse.Player players = 1;
+}
+
+message CMsgGCToServerSetSteamLearnDisable {
+}
+
+message CMsgGCToServerSetSteamLearnInferencing {
+	optional bool enable = 1;
+	optional uint32 project_id = 2;
+	optional uint32 published_version = 3;
+	optional string hmac_key = 4;
+}
+
+message CMsgGCToServerSetSteamLearnKeysChanged {
+	optional CMsgSteamLearnHMACKeys keys = 1;
+}
+
+message CMsgSteamLearnMatchInfo {
+	optional uint32 average_mmr = 1;
+	optional bool radiant_won = 2;
+	optional uint32 duration = 3;
+	optional uint32 game_mode = 4;
+	optional uint32 lobby_type = 5;
+}
+
+message CMsgSteamLearnMatchInfoPlayer {
+	optional uint32 average_mmr = 1;
+	optional bool team_won = 2;
+	optional uint32 duration = 3;
+	optional uint32 game_mode = 4;
+	optional uint32 lobby_type = 5;
+}
+
+message CMsgSteamLearnMatchHeroes {
+	repeated uint32 radiant_hero_ids = 1;
+	repeated uint32 dire_hero_ids = 2;
+	repeated uint32 radiant_lanes = 3;
+	repeated uint32 dire_lanes = 4;
+}
+
+message CMsgSteamLearnMatchHero {
+	optional uint32 hero_id = 1;
+	optional uint32 lane = 2;
+	repeated uint32 allied_hero_ids = 3;
+	repeated uint32 enemy_hero_ids = 4;
+}
+
+message CMsgSteamLearnMatchState {
+	message PlayerState {
+		optional uint32 hero_id = 1;
+		optional uint32 net_worth = 2;
+		optional uint32 level = 3;
+		optional uint32 deaths = 4;
+		optional uint32 respawn_time = 5;
+		optional bool has_buyback = 6;
+		optional bool has_aegis = 7;
+		optional bool has_rapier = 8;
+		optional uint32 distance = 9;
+	}
+
+	message TeamState {
+		optional uint32 team = 1;
+		repeated CMsgSteamLearnMatchState.PlayerState player_states = 2;
+		repeated uint32 tower_health_pct = 3;
+		repeated uint32 barracks_health_pct = 4;
+		optional uint32 ancient_health_pct = 5;
+		optional uint32 glyph_cooldown = 6;
+		optional uint32 kills = 7;
+		optional uint32 creep_distance_safe = 8;
+		optional uint32 creep_distance_mid = 9;
+		optional uint32 creep_distance_off = 10;
+	}
+
+	optional float game_time = 1;
+	optional CMsgSteamLearnMatchState.TeamState radiant_state = 2;
+	optional CMsgSteamLearnMatchState.TeamState dire_state = 3;
+}
+
+message CMsgSteamLearnItemPurchase {
+	optional int32 item_id = 1;
+	repeated int32 inventory_items = 2;
+	repeated int32 purchase_history = 3;
+	optional uint32 gold = 4;
+	optional uint32 net_worth = 5;
+	optional uint32 is_radiant_team = 6;
+	optional float game_time = 7;
+	optional bool is_using_dota_plus = 8;
+}
+
+message CMsgSteamLearnPreGameItemPurchases {
+	repeated int32 item_ids = 1;
+	optional uint32 is_radiant_team = 2;
+	optional bool is_using_dota_plus = 3;
+}
+
+message CMsgSteamLearnAbilitySkill {
+	optional int32 ability_id = 1;
+	repeated int32 skilled_abilities = 2;
+	optional float game_time = 3;
+	optional bool is_using_dota_plus = 4;
+}
+
+message CMsgSteamLearnWardPlacement {
+	message Location {
+		optional float x = 1;
+		optional float y = 2;
+	}
+
+	optional CMsgSteamLearnWardPlacement.Location ward_loc = 1;
+	repeated CMsgSteamLearnWardPlacement.Location existing_ward_locs = 2;
+	optional uint32 team = 3;
+}
+
+message CMsgSignOutMuertaMinigame {
+	optional bytes event_game_data = 1;
+}
+
+message CMsgSignOutMapStats {
+	message Player {
+		optional uint32 account_id = 1;
+		optional CMsgMapStatsSnapshot personal_stats = 2;
+	}
+
+	repeated CMsgSignOutMapStats.Player players = 1;
+	optional CMsgMapStatsSnapshot global_stats = 2;
 }

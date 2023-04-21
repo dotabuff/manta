@@ -3,8 +3,6 @@ syntax = "proto2";
 package dota;
 option go_package = "github.com/dotabuff/manta/dota;dota";
 
-option cc_generic_services = false;
-
 enum EDemoCommands {
 	DEM_Error = -1;
 	DEM_Stop = 0;
