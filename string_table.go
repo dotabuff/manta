@@ -203,14 +203,12 @@ func parseStringTable(buf []byte, numUpdates int32, name string, userDataFixed b
 		value := []byte{}
 
 		// Read a boolean to determine whether the operation is an increment or
-		// has a fixed index position. A fixed index position of zero should be
+		// has a relative index position. A fixed index position of zero should be
 		// the last data in the buffer, and indicates that all data has been read.
-		incr := r.readBoolean()
-		if incr {
-			index++
-		} else {
-			index = int32(r.readVarUint32()) + 1
+		if !r.readBoolean() {
+			index += int32(r.readVarUint32()) + 1
 		}
+		index++
 
 		// Some values have keys, some don't.
 		hasKey := r.readBoolean()
