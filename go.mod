@@ -7,5 +7,5 @@ require (
 	github.com/golang/protobuf v1.5.2
 	github.com/golang/snappy v0.0.3
 	github.com/stretchr/testify v1.5.1
-	google.golang.org/protobuf v1.26.0
+	google.golang.org/protobuf v1.33.0
 )
