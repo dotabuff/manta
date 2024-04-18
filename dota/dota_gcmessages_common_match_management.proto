@@ -11,20 +11,20 @@ enum ELaneSelection {
 	k_ELaneSelection_SAFELANE = 0;
 	k_ELaneSelection_OFFLANE = 1;
 	k_ELaneSelection_MIDLANE = 2;
-	k_ELaneSelection_SUPPORT_SOFT = 3;
-	k_ELaneSelection_SUPPORT_HARD = 4;
+	k_ELaneSelection_SUPPORT = 3;
+	k_ELaneSelection_HARDSUPPORT = 4;
 }
 
 enum ELaneSelectionFlags {
-	k_ELaneSelectionFlags_None = 0;
 	k_ELaneSelectionFlags_SAFELANE = 1;
 	k_ELaneSelectionFlags_OFFLANE = 2;
 	k_ELaneSelectionFlags_MIDLANE = 4;
-	k_ELaneSelectionFlags_SUPPORT_SOFT = 8;
-	k_ELaneSelectionFlags_SUPPORT_HARD = 16;
-	k_ELaneSelectionFlags_CORE = 7;
-	k_ELaneSelectionFlags_SUPPORT = 24;
-	k_ELaneSelectionFlags_ALL = 31;
+	k_ELaneSelectionFlags_SUPPORT = 8;
+	k_ELaneSelectionFlags_HARDSUPPORT = 16;
+	k_ELaneSelectionFlagGroup_None = 0;
+	k_ELaneSelectionFlagGroup_CORE = 7;
+	k_ELaneSelectionFlagGroup_SUPPORT = 24;
+	k_ELaneSelectionFlagGroup_ALL = 31;
 }
 
 enum EPartyMatchmakingFlags {
@@ -80,6 +80,7 @@ message CSODOTAPartyMember {
 	optional bool has_hp_resource = 15;
 	optional bool joined_from_partyfinder = 12;
 	optional bool is_steam_china = 16;
+	repeated uint32 banned_hero_ids = 17;
 }
 
 message CSODOTAParty {
@@ -140,6 +141,10 @@ message CSODOTAParty {
 	optional bool is_steam_china = 71;
 	optional uint32 bot_difficulty_mask = 72;
 	optional uint32 bot_script_index_mask = 73;
+	optional bool restricted_from_ranked = 74;
+	optional uint32 restricted_from_ranked_account_id = 75;
+	optional uint32 rank_spread_likert_scale = 76;
+	optional uint32 behavior_score_likert_scale = 77;
 }
 
 message CSODOTAPartyInvite {

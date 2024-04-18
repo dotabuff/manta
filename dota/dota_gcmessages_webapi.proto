@@ -241,6 +241,10 @@ message CMsgDPCEvent {
 		OVERALL = 5;
 		PLAYOFF = 6;
 		RESULTS = 7;
+		DPC_POINT_STANDINGS = 8;
+		GROUP_C = 9;
+		GROUP_D = 10;
+		PLACEMENT = 11;
 	}
 
 	enum ELeagueEventType {
@@ -250,6 +254,7 @@ message CMsgDPCEvent {
 		INTERNATIONAL_QUALIFIERS = 3;
 		INTERNATIONAL = 4;
 		LEAGUE_FINALS = 5;
+		EXTERNAL = 6;
 	}
 
 	enum ETour {
@@ -333,10 +338,22 @@ message CMsgDOTAFantasyCardList {
 	repeated CMsgDOTAFantasyCardList.Card cards = 1;
 }
 
+message CMsgChatToxicityToxicPlayerMatchesReport {
+	message IndividualRow {
+		optional uint32 player_account_id = 1;
+		optional uint32 num_matches_seen = 2;
+		optional uint32 num_messages = 3;
+		optional uint32 num_messages_toxic = 4;
+		optional uint64 first_match_seen = 5;
+		optional uint64 last_match_seen = 6;
+	}
+
+	repeated CMsgChatToxicityToxicPlayerMatchesReport.IndividualRow rows = 1;
+}
+
 message CMsgChatToxicityReport {
 	optional uint32 num_matches_seen = 1;
 	optional uint32 num_messages = 2;
-	optional uint32 num_messages_human_thinks_toxic = 3;
 	optional uint32 num_messages_ml_thinks_toxic = 4;
 	optional string status = 5;
 	optional uint32 result = 6;

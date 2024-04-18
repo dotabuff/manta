@@ -116,6 +116,22 @@ enum EStickerbookPageType {
 	STICKER_PAGE_TALENT = 2;
 }
 
+enum ENewBloomGiftingResponse {
+	kENewBloomGifting_Success = 0;
+	kENewBloomGifting_UnknownFailure = 1;
+	kENewBloomGifting_MalformedRequest = 2;
+	kENewBloomGifting_FeatureDisabled = 3;
+	kENewBloomGifting_ItemNotFound = 4;
+	kENewBloomGifting_PlayerNotAllowedToGiveGifts = 5;
+	kENewBloomGifting_TargetNotAllowedToReceiveGifts = 6;
+	kENewBloomGifting_ServerNotAuthorized = 100;
+	kENewBloomGifting_PlayerNotInLobby = 101;
+	kENewBloomGifting_TargetNotInLobby = 102;
+	kENewBloomGifting_LobbyNotEligible = 103;
+	kENewBloomGifting_TargetNotFriend = 200;
+	kENewBloomGifting_TargetFriendDurationTooShort = 201;
+}
+
 message CSODOTAGameAccountClient {
 	message RoleHandicap {
 		optional uint32 role = 1;
@@ -177,6 +193,7 @@ message CSODOTAGameAccountClient {
 	repeated CSODOTAGameAccountClient.RoleHandicap role_handicaps = 115;
 	optional uint32 event_mode_recent_time = 120;
 	optional uint32 mmr_recalibration_time = 121;
+	repeated uint32 banned_hero_ids = 123;
 }
 
 message CSODOTAGameAccountPlus {
@@ -188,6 +205,10 @@ message CSODOTAGameAccountPlus {
 	optional uint32 prepaid_time_balance = 6;
 	optional fixed32 next_payment_date = 7;
 	optional fixed64 steam_agreement_id = 8;
+}
+
+message CSODOTAChatWheel {
+	optional uint32 message_id = 1;
 }
 
 message CMsgLobbyFeaturedGamemodeProgress {
@@ -559,6 +580,7 @@ message CMsgDOTARealtimeGameStats {
 		repeated CMsgDOTARealtimeGameStats.HeroToHeroStats hero_to_hero_stats = 47;
 		optional bool has_ultimate = 48;
 		optional bool has_ultimate_mana = 49;
+		optional uint32 team_slot = 50;
 	}
 
 	message BuildingDetails {
@@ -681,6 +703,7 @@ message CMsgDOTARealtimeGameStatsTerse {
 		optional uint32 net_worth = 15;
 		repeated int32 abilities = 16;
 		repeated int32 items = 17;
+		optional uint32 team_slot = 18;
 	}
 
 	message BuildingDetails {
@@ -1042,8 +1065,6 @@ message CMsgDOTAMatch {
 	optional string dire_team_logo_url = 55;
 	optional uint32 radiant_team_complete = 27;
 	optional uint32 dire_team_complete = 28;
-	optional uint32 positive_votes = 29;
-	optional uint32 negative_votes = 30;
 	optional DOTA_GameMode game_mode = 31;
 	repeated CMatchHeroSelectEvent picks_bans = 32;
 	optional uint64 match_seq_num = 33;
@@ -1099,6 +1120,13 @@ message CMsgDOTAFantasyPlayerStats {
 	optional uint32 runes_grabbed = 19;
 	optional uint32 first_blood = 20;
 	optional float stuns = 21;
+	optional uint32 smokes = 22;
+	optional uint32 neutral_tokens = 23;
+	optional uint32 watchers = 24;
+	optional uint32 lotuses = 25;
+	optional uint32 tormentors = 26;
+	optional uint32 courier_kills = 27;
+	optional fixed64 title_stats = 28;
 }
 
 message CMsgDOTAFantasyPlayerMatchStats {
@@ -1427,6 +1455,8 @@ message CMsgGameDataSpecialValues {
 	optional bool is_percentage = 4;
 	optional string heading_loc = 5;
 	repeated CMsgGameDataSpecialValueBonus bonuses = 6;
+	repeated float values_shard = 7;
+	repeated float values_scepter = 8;
 }
 
 message CMsgGameDataAbilityOrItem {
@@ -1488,8 +1518,8 @@ message CMsgGameDataHero {
 	optional uint32 complexity = 21;
 	optional uint32 attack_capability = 22;
 	repeated uint32 role_levels = 23;
-	optional uint32 damage_min = 24;
-	optional uint32 damage_max = 25;
+	optional int32 damage_min = 24;
+	optional int32 damage_max = 25;
 	optional float attack_rate = 26;
 	optional uint32 attack_range = 27;
 	optional uint32 projectile_speed = 28;
@@ -1636,13 +1666,13 @@ message CMsgHeroRoleAllRanksStats {
 
 message CMsgMapStatsSnapshot {
 	optional uint32 timestamp = 1;
-	optional uint64 famangos_gained = 2;
+	optional uint64 lotuses_gained = 2;
 	optional uint64 wisdom_runes_gained = 3;
 	optional uint64 roshan_kills_day = 4;
 	optional uint64 roshan_kills_night = 5;
 	optional uint64 portals_used = 6;
-	optional uint64 lanterns_lit = 7;
-	optional uint64 miniboss_kills = 8;
+	optional uint64 watchers_taken = 7;
+	optional uint64 tormentor_kills = 8;
 	optional uint64 outposts_captured = 9;
 	optional uint64 shield_runes_gained = 10;
 }
@@ -1651,4 +1681,9 @@ message CMsgGlobalMapStats {
 	optional CMsgMapStatsSnapshot current = 1;
 	optional CMsgMapStatsSnapshot window_start = 2;
 	optional CMsgMapStatsSnapshot window_end = 3;
+}
+
+message CMsgTrackedStat {
+	optional uint32 tracked_stat_id = 1;
+	optional int32 tracked_stat_value = 2;
 }

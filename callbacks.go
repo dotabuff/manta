@@ -23,6 +23,7 @@ type Callbacks struct {
 	onCDemoFullPacket                                      []func(*dota.CDemoFullPacket) error
 	onCDemoSaveGame                                        []func(*dota.CDemoSaveGame) error
 	onCDemoSpawnGroups                                     []func(*dota.CDemoSpawnGroups) error
+	onCDemoAnimationData                                   []func(*dota.CDemoAnimationData) error
 	onCNETMsg_NOP                                          []func(*dota.CNETMsg_NOP) error
 	onCNETMsg_Disconnect                                   []func(*dota.CNETMsg_Disconnect) error
 	onCNETMsg_SplitScreenUser                              []func(*dota.CNETMsg_SplitScreenUser) error
@@ -84,6 +85,7 @@ type Callbacks struct {
 	onCUserMessageSayTextChannel                           []func(*dota.CUserMessageSayTextChannel) error
 	onCUserMessageShake                                    []func(*dota.CUserMessageShake) error
 	onCUserMessageShakeDir                                 []func(*dota.CUserMessageShakeDir) error
+	onCUserMessageWaterShake                               []func(*dota.CUserMessageWaterShake) error
 	onCUserMessageTextMsg                                  []func(*dota.CUserMessageTextMsg) error
 	onCUserMessageScreenTilt                               []func(*dota.CUserMessageScreenTilt) error
 	onCUserMessageVoiceMask                                []func(*dota.CUserMessageVoiceMask) error
@@ -110,6 +112,7 @@ type Callbacks struct {
 	onCUserMessageRequestDllStatus                         []func(*dota.CUserMessageRequestDllStatus) error
 	onCUserMessageRequestUtilAction                        []func(*dota.CUserMessageRequestUtilAction) error
 	onCUserMessageRequestInventory                         []func(*dota.CUserMessageRequestInventory) error
+	onCUserMessageRequestDiagnostic                        []func(*dota.CUserMessageRequestDiagnostic) error
 	onCMsgVDebugGameSessionIDEvent                         []func(*dota.CMsgVDebugGameSessionIDEvent) error
 	onCMsgPlaceDecalEvent                                  []func(*dota.CMsgPlaceDecalEvent) error
 	onCMsgClearWorldDecalsEvent                            []func(*dota.CMsgClearWorldDecalsEvent) error
@@ -269,6 +272,10 @@ type Callbacks struct {
 	onCDOTAUserMsg_DuelAccepted                            []func(*dota.CDOTAUserMsg_DuelAccepted) error
 	onCDOTAUserMsg_DuelRequested                           []func(*dota.CDOTAUserMsg_DuelRequested) error
 	onCDOTAUserMsg_MuertaReleaseEvent_AssignedTargetKilled []func(*dota.CDOTAUserMsg_MuertaReleaseEvent_AssignedTargetKilled) error
+	onCDOTAUserMsg_PlayerDraftSuggestPick                  []func(*dota.CDOTAUserMsg_PlayerDraftSuggestPick) error
+	onCDOTAUserMsg_PlayerDraftPick                         []func(*dota.CDOTAUserMsg_PlayerDraftPick) error
+	onCDOTAUserMsg_UpdateLinearProjectileCPData            []func(*dota.CDOTAUserMsg_UpdateLinearProjectileCPData) error
+	onCDOTAUserMsg_GiftPlayer                              []func(*dota.CDOTAUserMsg_GiftPlayer) error
 
 	pb *proto.Buffer
 }
@@ -357,6 +364,11 @@ func (c *Callbacks) OnCDemoSaveGame(fn func(*dota.CDemoSaveGame) error) {
 // OnCDemoSpawnGroups registers a callback EDemoCommands_DEM_SpawnGroups
 func (c *Callbacks) OnCDemoSpawnGroups(fn func(*dota.CDemoSpawnGroups) error) {
 	c.onCDemoSpawnGroups = append(c.onCDemoSpawnGroups, fn)
+}
+
+// OnCDemoAnimationData registers a callback EDemoCommands_DEM_AnimationData
+func (c *Callbacks) OnCDemoAnimationData(fn func(*dota.CDemoAnimationData) error) {
+	c.onCDemoAnimationData = append(c.onCDemoAnimationData, fn)
 }
 
 // OnCNETMsg_NOP registers a callback for NET_Messages_net_NOP
@@ -664,6 +676,11 @@ func (c *Callbacks) OnCUserMessageShakeDir(fn func(*dota.CUserMessageShakeDir) e
 	c.onCUserMessageShakeDir = append(c.onCUserMessageShakeDir, fn)
 }
 
+// OnCUserMessageWaterShake registers a callback for EBaseUserMessages_UM_WaterShake
+func (c *Callbacks) OnCUserMessageWaterShake(fn func(*dota.CUserMessageWaterShake) error) {
+	c.onCUserMessageWaterShake = append(c.onCUserMessageWaterShake, fn)
+}
+
 // OnCUserMessageTextMsg registers a callback for EBaseUserMessages_UM_TextMsg
 func (c *Callbacks) OnCUserMessageTextMsg(fn func(*dota.CUserMessageTextMsg) error) {
 	c.onCUserMessageTextMsg = append(c.onCUserMessageTextMsg, fn)
@@ -792,6 +809,11 @@ func (c *Callbacks) OnCUserMessageRequestUtilAction(fn func(*dota.CUserMessageRe
 // OnCUserMessageRequestInventory registers a callback for EBaseUserMessages_UM_RequestInventory
 func (c *Callbacks) OnCUserMessageRequestInventory(fn func(*dota.CUserMessageRequestInventory) error) {
 	c.onCUserMessageRequestInventory = append(c.onCUserMessageRequestInventory, fn)
+}
+
+// OnCUserMessageRequestDiagnostic registers a callback for EBaseUserMessages_UM_RequestDiagnostic
+func (c *Callbacks) OnCUserMessageRequestDiagnostic(fn func(*dota.CUserMessageRequestDiagnostic) error) {
+	c.onCUserMessageRequestDiagnostic = append(c.onCUserMessageRequestDiagnostic, fn)
 }
 
 // OnCMsgVDebugGameSessionIDEvent registers a callback for EBaseGameEvents_GE_VDebugGameSessionIDEvent
@@ -1589,6 +1611,26 @@ func (c *Callbacks) OnCDOTAUserMsg_MuertaReleaseEvent_AssignedTargetKilled(fn fu
 	c.onCDOTAUserMsg_MuertaReleaseEvent_AssignedTargetKilled = append(c.onCDOTAUserMsg_MuertaReleaseEvent_AssignedTargetKilled, fn)
 }
 
+// OnCDOTAUserMsg_PlayerDraftSuggestPick registers a callback for EDotaUserMessages_DOTA_UM_PlayerDraftSuggestPick
+func (c *Callbacks) OnCDOTAUserMsg_PlayerDraftSuggestPick(fn func(*dota.CDOTAUserMsg_PlayerDraftSuggestPick) error) {
+	c.onCDOTAUserMsg_PlayerDraftSuggestPick = append(c.onCDOTAUserMsg_PlayerDraftSuggestPick, fn)
+}
+
+// OnCDOTAUserMsg_PlayerDraftPick registers a callback for EDotaUserMessages_DOTA_UM_PlayerDraftPick
+func (c *Callbacks) OnCDOTAUserMsg_PlayerDraftPick(fn func(*dota.CDOTAUserMsg_PlayerDraftPick) error) {
+	c.onCDOTAUserMsg_PlayerDraftPick = append(c.onCDOTAUserMsg_PlayerDraftPick, fn)
+}
+
+// OnCDOTAUserMsg_UpdateLinearProjectileCPData registers a callback for EDotaUserMessages_DOTA_UM_UpdateLinearProjectileCPData
+func (c *Callbacks) OnCDOTAUserMsg_UpdateLinearProjectileCPData(fn func(*dota.CDOTAUserMsg_UpdateLinearProjectileCPData) error) {
+	c.onCDOTAUserMsg_UpdateLinearProjectileCPData = append(c.onCDOTAUserMsg_UpdateLinearProjectileCPData, fn)
+}
+
+// OnCDOTAUserMsg_GiftPlayer registers a callback for EDotaUserMessages_DOTA_UM_GiftPlayer
+func (c *Callbacks) OnCDOTAUserMsg_GiftPlayer(fn func(*dota.CDOTAUserMsg_GiftPlayer) error) {
+	c.onCDOTAUserMsg_GiftPlayer = append(c.onCDOTAUserMsg_GiftPlayer, fn)
+}
+
 func (c *Callbacks) callByDemoType(t int32, buf []byte) error {
 	switch t {
 	case 0: // dota.EDemoCommands_DEM_Stop
@@ -1888,6 +1930,25 @@ func (c *Callbacks) callByDemoType(t int32, buf []byte) error {
 		}
 
 		for _, fn := range c.onCDemoSpawnGroups {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 16: // dota.EDemoCommands_DEM_AnimationData
+		if c.onCDemoAnimationData == nil {
+			return nil
+		}
+
+		msg := &dota.CDemoAnimationData{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDemoAnimationData {
 			if err := fn(msg); err != nil {
 				return err
 			}
@@ -3065,6 +3126,25 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 
 		return nil
 
+	case 122: // dota.EBaseUserMessages_UM_WaterShake
+		if c.onCUserMessageWaterShake == nil {
+			return nil
+		}
+
+		msg := &dota.CUserMessageWaterShake{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCUserMessageWaterShake {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
 	case 124: // dota.EBaseUserMessages_UM_TextMsg
 		if c.onCUserMessageTextMsg == nil {
 			return nil
@@ -3552,6 +3632,25 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		for _, fn := range c.onCUserMessageRequestInventory {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 162: // dota.EBaseUserMessages_UM_RequestDiagnostic
+		if c.onCUserMessageRequestDiagnostic == nil {
+			return nil
+		}
+
+		msg := &dota.CUserMessageRequestDiagnostic{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCUserMessageRequestDiagnostic {
 			if err := fn(msg); err != nil {
 				return err
 			}
@@ -6573,6 +6672,82 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		for _, fn := range c.onCDOTAUserMsg_MuertaReleaseEvent_AssignedTargetKilled {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 620: // dota.EDotaUserMessages_DOTA_UM_PlayerDraftSuggestPick
+		if c.onCDOTAUserMsg_PlayerDraftSuggestPick == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_PlayerDraftSuggestPick{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_PlayerDraftSuggestPick {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 621: // dota.EDotaUserMessages_DOTA_UM_PlayerDraftPick
+		if c.onCDOTAUserMsg_PlayerDraftPick == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_PlayerDraftPick{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_PlayerDraftPick {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 622: // dota.EDotaUserMessages_DOTA_UM_UpdateLinearProjectileCPData
+		if c.onCDOTAUserMsg_UpdateLinearProjectileCPData == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_UpdateLinearProjectileCPData{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_UpdateLinearProjectileCPData {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 623: // dota.EDotaUserMessages_DOTA_UM_GiftPlayer
+		if c.onCDOTAUserMsg_GiftPlayer == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_GiftPlayer{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_GiftPlayer {
 			if err := fn(msg); err != nil {
 				return err
 			}

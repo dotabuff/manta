@@ -8,6 +8,7 @@ import "dota_gcmessages_common_match_management.proto";
 import "dota_gcmessages_common_lobby.proto";
 import "dota_gcmessages_common.proto";
 import "dota_shared_enums.proto";
+import "gcsdk_gcmessages.proto";
 
 message CDOTAMatchMetadataFile {
 	required int32 version = 1;
@@ -126,6 +127,7 @@ message CDOTAMatchMetadata {
 			optional uint32 active_season_id = 24;
 			optional bool cavern_crawl_half_credit = 25;
 			repeated CDOTAMatchMetadata.Team.PeriodicResourceData periodic_resources = 26;
+			repeated CExtraMsgBlock extra_event_messages = 27;
 		}
 
 		message FeaturedGamemodeProgress {
@@ -197,6 +199,7 @@ message CDOTAMatchMetadata {
 			optional uint32 featured_hero_sticker_quality = 55;
 			repeated CDOTAMatchMetadata.EconItem equipped_econ_items = 56;
 			optional int32 game_player_id = 57;
+			repeated CMsgTrackedStat player_tracked_stats = 58;
 		}
 
 		optional uint32 dota_team = 1;
@@ -207,6 +210,7 @@ message CDOTAMatchMetadata {
 		optional bool cm_first_pick = 6;
 		optional int32 cm_captain_player_id = 7;
 		optional uint32 cm_penalty = 10;
+		repeated CMsgTrackedStat team_tracked_stats = 11;
 	}
 
 	message GuildChallengeProgress {
@@ -242,6 +246,7 @@ message CDOTAMatchMetadata {
 	repeated CDOTAMatchMetadata.GuildChallengeProgress guild_challenge_progress = 10;
 	optional bytes custom_post_game_table = 11;
 	repeated CDOTAMatchMetadata.Tip match_tips = 12;
+	repeated CMsgTrackedStat match_tracked_stats = 13;
 }
 
 message CDOTAMatchPrivateMetadata {
