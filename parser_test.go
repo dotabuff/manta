@@ -2,16 +2,50 @@ package manta
 
 import (
 	"bytes"
-	"compress/bzip2"
 	"io"
 	"net"
-	"net/http"
 	"os"
 	"testing"
-	"time"
 
 	"github.com/stretchr/testify/assert"
 )
+
+type timeoutReader struct {
+	r         io.Reader
+	maxBytes  int
+	readBytes int
+}
+
+var _ io.Reader = &timeoutReader{}
+
+func newTimeoutReader(data []byte, maxBytes int) *timeoutReader {
+	return &timeoutReader{r: bytes.NewReader(data), maxBytes: maxBytes}
+}
+
+func (r *timeoutReader) Read(p []byte) (int, error) {
+	n, err := r.r.Read(p)
+	r.readBytes += n
+	if r.readBytes >= r.maxBytes {
+		return n, timeoutError{}
+	}
+	return n, err
+}
+
+type timeoutError struct{}
+
+var _ net.Error = timeoutError{}
+
+func (e timeoutError) Error() string {
+	return "timed out"
+}
+
+func (e timeoutError) Timeout() bool {
+	return true
+}
+
+func (e timeoutError) Temporary() bool {
+	return true
+}
 
 func TestStreamingReaderTimeout(t *testing.T) {
 	if os.Getenv("CI") != "" {
@@ -20,20 +54,12 @@ func TestStreamingReaderTimeout(t *testing.T) {
 
 	assert := assert.New(t)
 
-	// create a http client with a timeout too low to get the entire replay
-	client := http.Client{
-		Timeout: 2 * time.Second,
-	}
-
-	// request the replay, the timeout should be enough for it to begin successfully
-	resp, err := client.Get("http://replay111.valve.net/570/2526759078_1821332888.dem.bz2")
-	if err != nil {
-		t.Fatalf("unable to get remote replay: %s", err)
-	}
-	defer resp.Body.Close()
+	// get data
+	data := mustGetReplayData("2159568145", "https://s3-us-west-2.amazonaws.com/manta.dotabuff/2159568145.dem")
+	reader := newTimeoutReader(data, 10000)
 
 	// create a new parser with the streaming response
-	parser, err := NewStreamParser(bzip2.NewReader(resp.Body))
+	parser, err := NewStreamParser(reader)
 	if err != nil {
 		t.Fatalf("unable to create parser: %s", err)
 	}

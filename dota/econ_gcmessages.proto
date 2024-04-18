@@ -6,10 +6,13 @@ option go_package = "github.com/dotabuff/manta/dota;dota";
 import "steammessages.proto";
 import "econ_shared_enums.proto";
 import "gcsdk_gcmessages.proto";
+import "base_gcmessages.proto";
 
 enum EGCItemMsg {
 	k_EMsgGCBase = 1000;
 	k_EMsgGCSetItemPosition = 1001;
+	k_EMsgClientToGCPackBundle = 1002;
+	k_EMsgClientToGCPackBundleResponse = 1003;
 	k_EMsgGCDelete = 1004;
 	k_EMsgGCVerifyCacheSubscription = 1005;
 	k_EMsgClientToGCNameItem = 1006;
@@ -44,6 +47,7 @@ enum EGCItemMsg {
 	k_EMsgGCResetStrangeGemCountResponse = 1095;
 	k_EMsgGCServerUseItemRequest = 1103;
 	k_EMsgGCAddGiftItem = 1104;
+	k_EMsgSQLGCToGCRevokeUntrustedGift = 1105;
 	k_EMsgClientToGCRemoveItemGifterAttributes = 1109;
 	k_EMsgClientToGCRemoveItemName = 1110;
 	k_EMsgClientToGCRemoveItemDescription = 1111;
@@ -259,6 +263,7 @@ message CMsgRequestCrateItemsResponse {
 	optional uint32 response = 1;
 	repeated uint32 item_defs = 2;
 	repeated uint32 peek_item_defs = 3;
+	repeated CSOEconItem peek_items = 4;
 }
 
 message CMsgRequestCrateEscalationLevel {
@@ -336,6 +341,7 @@ message CMsgGCToGCGrantAccountRolledItems {
 		repeated CMsgGCToGCGrantAccountRolledItems.Item.DynamicAttribute dynamic_attributes = 5;
 		repeated CMsgGCToGCGrantAccountRolledItems.Item.AdditionalAuditEntry additional_audit_entries = 6;
 		optional uint32 inventory_token = 7;
+		optional int32 quality = 8;
 	}
 
 	optional uint32 account_id = 1;
@@ -440,14 +446,22 @@ message CMsgGCGetAccountSubscriptionItemResponse {
 }
 
 message CMsgGCAddGiftItem {
-	optional uint32 account_id = 1;
-	optional uint64 item_id = 2;
+	optional uint32 gifter_account_id = 1;
+	optional uint32 receiver_account_id = 2;
+	optional CSOEconItem wrapped_item = 3;
+	optional string gift_message = 4;
+	optional bool is_wallet_cash_trusted = 5;
 }
 
 message CMsgClientToGCWrapAndDeliverGift {
 	optional uint64 item_id = 1;
 	optional uint32 give_to_account_id = 2;
 	optional string gift_message = 3;
+}
+
+message CMsgSQLGCToGCRevokeUntrustedGift {
+	optional uint32 account_id = 1;
+	optional uint64 sent_item_id = 4;
 }
 
 message CMsgClientToGCWrapAndDeliverGiftResponse {
@@ -499,6 +513,34 @@ message CMsgClientToGCUnpackBundleResponse {
 	repeated uint64 unpacked_item_ids = 1;
 	optional CMsgClientToGCUnpackBundleResponse.EUnpackBundle response = 2;
 	repeated uint32 unpacked_item_def_indexes = 3;
+}
+
+message CMsgClientToGCPackBundle {
+	repeated uint64 item_ids = 1;
+	optional uint32 bundle_item_def_index = 2;
+}
+
+message CMsgClientToGCPackBundleResponse {
+	enum EPackBundle {
+		k_PackBundle_Succeeded = 0;
+		k_PackBundle_Failed_InternalError = 1;
+		k_PackBundle_Failed_ItemIsNotBundle = 2;
+		k_PackBundle_Failed_SOCacheError = 3;
+		k_PackBundle_Failed_ItemIsInvalid = 4;
+		k_PackBundle_Failed_BadItemQuantity = 5;
+		k_PackBundle_Failed_UnableToDeleteItem = 6;
+		k_PackBundle_Failed_BundleCannotBePacked = 7;
+		k_PackBundle_Failed_ItemIsUntradeable = 8;
+		k_PackBundle_Failed_ItemIsEquipped = 9;
+		k_PackBundle_Failed_ItemHasGems = 10;
+		k_PackBundle_Failed_ItemMixedQuality = 11;
+		k_PackBundle_Failed_ItemInvalidQuality = 12;
+		k_PackBundle_Failed_ItemIsNonEconomy = 13;
+		k_PackBundle_Failed_Disabled = 14;
+	}
+
+	optional uint64 item_id = 1;
+	optional CMsgClientToGCPackBundleResponse.EPackBundle response = 2;
 }
 
 message CMsgGCToClientStoreTransactionCompleted {

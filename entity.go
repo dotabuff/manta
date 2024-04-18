@@ -230,7 +230,7 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 	var e *Entity
 	var op EntityOp
 
-	if !m.GetIsDelta() {
+	if !m.GetLegacyIsDelta() {
 		if p.entityFullPackets > 0 {
 			return nil
 		}

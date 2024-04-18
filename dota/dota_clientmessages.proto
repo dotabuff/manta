@@ -5,6 +5,7 @@ option go_package = "github.com/dotabuff/manta/dota;dota";
 
 import "dota_commonmessages.proto";
 import "dota_shared_enums.proto";
+import "base_gcmessages.proto";
 
 enum EDotaClientMessages {
 	DOTA_CM_MapLine = 301;
@@ -104,6 +105,11 @@ enum EDotaClientMessages {
 	DOTA_CM_PlayerDraftSuggest = 801;
 	DOTA_CM_PlayerDraftPreferRole = 802;
 	DOTA_CM_PlayerDraftPreferTeam = 803;
+	DOTA_CM_ChatWheelAlert = 804;
+	DOTA_CM_AbilityAlert = 805;
+	DOTA_CM_AllyAbilityAlert = 806;
+	DOTA_CM_GiftPlayer = 807;
+	DOTA_CM_GiftEveryone = 808;
 }
 
 message CDOTAClientMsg_MapPing {
@@ -303,6 +309,7 @@ message CDOTAClientMsg_DemoHero {
 	repeated uint64 item_ids = 4;
 	optional uint32 style_index = 5;
 	optional bool keep_existing_demohero = 6;
+	repeated CSOEconItem item_data = 7;
 }
 
 message CDOTAClientMsg_ChallengeSelect {
@@ -452,6 +459,15 @@ message CDOTAClientMsg_SalutePlayer {
 	optional int32 event_id = 2;
 }
 
+message CDOTAClientMsg_GiftPlayer {
+	optional int32 target_player_id = 1;
+	optional uint32 item_def_index = 2;
+}
+
+message CDOTAClientMsg_GiftEveryone {
+	optional uint32 item_def_index = 1;
+}
+
 message CDOTAClientMsg_TipAlert {
 	optional string tip_text = 1;
 }
@@ -567,4 +583,9 @@ message CDOTAClientMsg_PlayerDraftPreferRole {
 
 message CDOTAClientMsg_PlayerDraftPreferTeam {
 	optional int32 team = 1;
+}
+
+message CDOTAClientMsg_AbilityAlert {
+	optional uint32 ability_entindex = 1;
+	optional bool ctrl_held = 2;
 }

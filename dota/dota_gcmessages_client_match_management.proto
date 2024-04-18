@@ -48,6 +48,7 @@ enum EStartFindingMatchResult {
 	k_EStartFindingMatchResult_MatchmakingBusy = 132;
 	k_EStartFindingMatchResult_SteamChinaBanned = 133;
 	k_EStartFindingMatchResult_SteamChinaInvalidMixedParty = 134;
+	k_EStartFindingMatchResult_RestrictedFromRanked = 135;
 }
 
 message CMsgStartFindingMatch {
@@ -104,6 +105,9 @@ message CMsgReadyUpStatus {
 	optional fixed64 lobby_id = 1;
 	repeated uint32 accepted_ids = 2;
 	repeated uint32 declined_ids = 3;
+	repeated uint32 accepted_indices = 4;
+	repeated uint32 declined_indices = 5;
+	optional DOTALobbyReadyState local_ready_state = 6;
 }
 
 message CMsgAbandonCurrentGame {
