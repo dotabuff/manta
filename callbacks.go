@@ -24,6 +24,7 @@ type Callbacks struct {
 	onCDemoSaveGame                                        []func(*dota.CDemoSaveGame) error
 	onCDemoSpawnGroups                                     []func(*dota.CDemoSpawnGroups) error
 	onCDemoAnimationData                                   []func(*dota.CDemoAnimationData) error
+	onCDemoAnimationHeader                                 []func(*dota.CDemoAnimationHeader) error
 	onCNETMsg_NOP                                          []func(*dota.CNETMsg_NOP) error
 	onCNETMsg_Disconnect                                   []func(*dota.CNETMsg_Disconnect) error
 	onCNETMsg_SplitScreenUser                              []func(*dota.CNETMsg_SplitScreenUser) error
@@ -105,7 +106,6 @@ type Callbacks struct {
 	onCUserMessageAudioParameter                           []func(*dota.CUserMessageAudioParameter) error
 	onCUserMessageHapticsManagerPulse                      []func(*dota.CUserMessageHapticsManagerPulse) error
 	onCUserMessageHapticsManagerEffect                     []func(*dota.CUserMessageHapticsManagerEffect) error
-	onCUserMessageCommandQueueState                        []func(*dota.CUserMessageCommandQueueState) error
 	onCUserMessageUpdateCssClasses                         []func(*dota.CUserMessageUpdateCssClasses) error
 	onCUserMessageServerFrameTime                          []func(*dota.CUserMessageServerFrameTime) error
 	onCUserMessageLagCompensationError                     []func(*dota.CUserMessageLagCompensationError) error
@@ -369,6 +369,11 @@ func (c *Callbacks) OnCDemoSpawnGroups(fn func(*dota.CDemoSpawnGroups) error) {
 // OnCDemoAnimationData registers a callback EDemoCommands_DEM_AnimationData
 func (c *Callbacks) OnCDemoAnimationData(fn func(*dota.CDemoAnimationData) error) {
 	c.onCDemoAnimationData = append(c.onCDemoAnimationData, fn)
+}
+
+// OnCDemoAnimationHeader registers a callback EDemoCommands_DEM_AnimationHeader
+func (c *Callbacks) OnCDemoAnimationHeader(fn func(*dota.CDemoAnimationHeader) error) {
+	c.onCDemoAnimationHeader = append(c.onCDemoAnimationHeader, fn)
 }
 
 // OnCNETMsg_NOP registers a callback for NET_Messages_net_NOP
@@ -774,11 +779,6 @@ func (c *Callbacks) OnCUserMessageHapticsManagerPulse(fn func(*dota.CUserMessage
 // OnCUserMessageHapticsManagerEffect registers a callback for EBaseUserMessages_UM_HapticsManagerEffect
 func (c *Callbacks) OnCUserMessageHapticsManagerEffect(fn func(*dota.CUserMessageHapticsManagerEffect) error) {
 	c.onCUserMessageHapticsManagerEffect = append(c.onCUserMessageHapticsManagerEffect, fn)
-}
-
-// OnCUserMessageCommandQueueState registers a callback for EBaseUserMessages_UM_CommandQueueState
-func (c *Callbacks) OnCUserMessageCommandQueueState(fn func(*dota.CUserMessageCommandQueueState) error) {
-	c.onCUserMessageCommandQueueState = append(c.onCUserMessageCommandQueueState, fn)
 }
 
 // OnCUserMessageUpdateCssClasses registers a callback for EBaseUserMessages_UM_UpdateCssClasses
@@ -1949,6 +1949,25 @@ func (c *Callbacks) callByDemoType(t int32, buf []byte) error {
 		}
 
 		for _, fn := range c.onCDemoAnimationData {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 17: // dota.EDemoCommands_DEM_AnimationHeader
+		if c.onCDemoAnimationHeader == nil {
+			return nil
+		}
+
+		msg := &dota.CDemoAnimationHeader{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDemoAnimationHeader {
 			if err := fn(msg); err != nil {
 				return err
 			}
@@ -3499,25 +3518,6 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		for _, fn := range c.onCUserMessageHapticsManagerEffect {
-			if err := fn(msg); err != nil {
-				return err
-			}
-		}
-
-		return nil
-
-	case 152: // dota.EBaseUserMessages_UM_CommandQueueState
-		if c.onCUserMessageCommandQueueState == nil {
-			return nil
-		}
-
-		msg := &dota.CUserMessageCommandQueueState{}
-		c.pb.SetBuf(buf)
-		if err := c.pb.Unmarshal(msg); err != nil {
-			return err
-		}
-
-		for _, fn := range c.onCUserMessageCommandQueueState {
 			if err := fn(msg); err != nil {
 				return err
 			}

@@ -4199,6 +4199,68 @@ func (EOverwatchReportReason) EnumDescriptor() ([]byte, []int) {
 	return file_dota_shared_enums_proto_rawDescGZIP(), []int{50}
 }
 
+type ECandyShopUpgrade int32
+
+const (
+	ECandyShopUpgrade_k_ECandyShopUpgradeInvalid              ECandyShopUpgrade = -1
+	ECandyShopUpgrade_k_ECandyShopUpgrade_InventorySize       ECandyShopUpgrade = 0
+	ECandyShopUpgrade_k_ECandyShopUpgrade_RewardShelf         ECandyShopUpgrade = 1
+	ECandyShopUpgrade_k_ECandyShopUpgrade_ExtraExchangeRecipe ECandyShopUpgrade = 2
+)
+
+// Enum value maps for ECandyShopUpgrade.
+var (
+	ECandyShopUpgrade_name = map[int32]string{
+		-1: "k_ECandyShopUpgradeInvalid",
+		0:  "k_ECandyShopUpgrade_InventorySize",
+		1:  "k_ECandyShopUpgrade_RewardShelf",
+		2:  "k_ECandyShopUpgrade_ExtraExchangeRecipe",
+	}
+	ECandyShopUpgrade_value = map[string]int32{
+		"k_ECandyShopUpgradeInvalid":              -1,
+		"k_ECandyShopUpgrade_InventorySize":       0,
+		"k_ECandyShopUpgrade_RewardShelf":         1,
+		"k_ECandyShopUpgrade_ExtraExchangeRecipe": 2,
+	}
+)
+
+func (x ECandyShopUpgrade) Enum() *ECandyShopUpgrade {
+	p := new(ECandyShopUpgrade)
+	*p = x
+	return p
+}
+
+func (x ECandyShopUpgrade) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ECandyShopUpgrade) Descriptor() protoreflect.EnumDescriptor {
+	return file_dota_shared_enums_proto_enumTypes[51].Descriptor()
+}
+
+func (ECandyShopUpgrade) Type() protoreflect.EnumType {
+	return &file_dota_shared_enums_proto_enumTypes[51]
+}
+
+func (x ECandyShopUpgrade) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Do not use.
+func (x *ECandyShopUpgrade) UnmarshalJSON(b []byte) error {
+	num, err := protoimpl.X.UnmarshalJSONEnum(x.Descriptor(), b)
+	if err != nil {
+		return err
+	}
+	*x = ECandyShopUpgrade(num)
+	return nil
+}
+
+// Deprecated: Use ECandyShopUpgrade.Descriptor instead.
+func (ECandyShopUpgrade) EnumDescriptor() ([]byte, []int) {
+	return file_dota_shared_enums_proto_rawDescGZIP(), []int{51}
+}
+
 type CDOTAClientHardwareSpecs struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -6795,10 +6857,21 @@ var file_dota_shared_enums_proto_rawDesc = []byte{
 	0x73, 0x6f, 0x6e, 0x5f, 0x53, 0x75, 0x73, 0x70, 0x69, 0x63, 0x69, 0x6f, 0x75, 0x73, 0x10, 0x04,
 	0x12, 0x29, 0x0a, 0x25, 0x6b, 0x5f, 0x45, 0x4f, 0x76, 0x65, 0x72, 0x77, 0x61, 0x74, 0x63, 0x68,
 	0x52, 0x65, 0x70, 0x6f, 0x72, 0x74, 0x52, 0x65, 0x61, 0x73, 0x6f, 0x6e, 0x5f, 0x41, 0x62, 0x69,
-	0x6c, 0x69, 0x74, 0x79, 0x41, 0x62, 0x75, 0x73, 0x65, 0x10, 0x05, 0x42, 0x25, 0x5a, 0x23, 0x67,
-	0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x64, 0x6f, 0x74, 0x61, 0x62, 0x75,
-	0x66, 0x66, 0x2f, 0x6d, 0x61, 0x6e, 0x74, 0x61, 0x2f, 0x64, 0x6f, 0x74, 0x61, 0x3b, 0x64, 0x6f,
-	0x74, 0x61,
+	0x6c, 0x69, 0x74, 0x79, 0x41, 0x62, 0x75, 0x73, 0x65, 0x10, 0x05, 0x2a, 0xb5, 0x01, 0x0a, 0x11,
+	0x45, 0x43, 0x61, 0x6e, 0x64, 0x79, 0x53, 0x68, 0x6f, 0x70, 0x55, 0x70, 0x67, 0x72, 0x61, 0x64,
+	0x65, 0x12, 0x27, 0x0a, 0x1a, 0x6b, 0x5f, 0x45, 0x43, 0x61, 0x6e, 0x64, 0x79, 0x53, 0x68, 0x6f,
+	0x70, 0x55, 0x70, 0x67, 0x72, 0x61, 0x64, 0x65, 0x49, 0x6e, 0x76, 0x61, 0x6c, 0x69, 0x64, 0x10,
+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x01, 0x12, 0x25, 0x0a, 0x21, 0x6b, 0x5f,
+	0x45, 0x43, 0x61, 0x6e, 0x64, 0x79, 0x53, 0x68, 0x6f, 0x70, 0x55, 0x70, 0x67, 0x72, 0x61, 0x64,
+	0x65, 0x5f, 0x49, 0x6e, 0x76, 0x65, 0x6e, 0x74, 0x6f, 0x72, 0x79, 0x53, 0x69, 0x7a, 0x65, 0x10,
+	0x00, 0x12, 0x23, 0x0a, 0x1f, 0x6b, 0x5f, 0x45, 0x43, 0x61, 0x6e, 0x64, 0x79, 0x53, 0x68, 0x6f,
+	0x70, 0x55, 0x70, 0x67, 0x72, 0x61, 0x64, 0x65, 0x5f, 0x52, 0x65, 0x77, 0x61, 0x72, 0x64, 0x53,
+	0x68, 0x65, 0x6c, 0x66, 0x10, 0x01, 0x12, 0x2b, 0x0a, 0x27, 0x6b, 0x5f, 0x45, 0x43, 0x61, 0x6e,
+	0x64, 0x79, 0x53, 0x68, 0x6f, 0x70, 0x55, 0x70, 0x67, 0x72, 0x61, 0x64, 0x65, 0x5f, 0x45, 0x78,
+	0x74, 0x72, 0x61, 0x45, 0x78, 0x63, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x52, 0x65, 0x63, 0x69, 0x70,
+	0x65, 0x10, 0x02, 0x42, 0x25, 0x5a, 0x23, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f,
+	0x6d, 0x2f, 0x64, 0x6f, 0x74, 0x61, 0x62, 0x75, 0x66, 0x66, 0x2f, 0x6d, 0x61, 0x6e, 0x74, 0x61,
+	0x2f, 0x64, 0x6f, 0x74, 0x61, 0x3b, 0x64, 0x6f, 0x74, 0x61,
 }
 
 var (
@@ -6813,7 +6886,7 @@ func file_dota_shared_enums_proto_rawDescGZIP() []byte {
 	return file_dota_shared_enums_proto_rawDescData
 }
 
-var file_dota_shared_enums_proto_enumTypes = make([]protoimpl.EnumInfo, 51)
+var file_dota_shared_enums_proto_enumTypes = make([]protoimpl.EnumInfo, 52)
 var file_dota_shared_enums_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_dota_shared_enums_proto_goTypes = []interface{}{
 	(DOTA_GameMode)(0),                                 // 0: dota.DOTA_GameMode
@@ -6867,22 +6940,23 @@ var file_dota_shared_enums_proto_goTypes = []interface{}{
 	(EEventActionScoreMode)(0),                         // 48: dota.EEventActionScoreMode
 	(EPlayerChallengeHistoryType)(0),                   // 49: dota.EPlayerChallengeHistoryType
 	(EOverwatchReportReason)(0),                        // 50: dota.EOverwatchReportReason
-	(*CDOTAClientHardwareSpecs)(nil),                   // 51: dota.CDOTAClientHardwareSpecs
-	(*CDOTASaveGame)(nil),                              // 52: dota.CDOTASaveGame
-	(*CMsgDOTACombatLogEntry)(nil),                     // 53: dota.CMsgDOTACombatLogEntry
-	(*CMsgPendingEventAward)(nil),                      // 54: dota.CMsgPendingEventAward
-	(*CDOTASaveGame_Player)(nil),                       // 55: dota.CDOTASaveGame.Player
-	(*CDOTASaveGame_SaveInstance)(nil),                 // 56: dota.CDOTASaveGame.SaveInstance
-	(*CDOTASaveGame_SaveInstance_PlayerPositions)(nil), // 57: dota.CDOTASaveGame.SaveInstance.PlayerPositions
+	(ECandyShopUpgrade)(0),                             // 51: dota.ECandyShopUpgrade
+	(*CDOTAClientHardwareSpecs)(nil),                   // 52: dota.CDOTAClientHardwareSpecs
+	(*CDOTASaveGame)(nil),                              // 53: dota.CDOTASaveGame
+	(*CMsgDOTACombatLogEntry)(nil),                     // 54: dota.CMsgDOTACombatLogEntry
+	(*CMsgPendingEventAward)(nil),                      // 55: dota.CMsgPendingEventAward
+	(*CDOTASaveGame_Player)(nil),                       // 56: dota.CDOTASaveGame.Player
+	(*CDOTASaveGame_SaveInstance)(nil),                 // 57: dota.CDOTASaveGame.SaveInstance
+	(*CDOTASaveGame_SaveInstance_PlayerPositions)(nil), // 58: dota.CDOTASaveGame.SaveInstance.PlayerPositions
 }
 var file_dota_shared_enums_proto_depIdxs = []int32{
-	55, // 0: dota.CDOTASaveGame.players:type_name -> dota.CDOTASaveGame.Player
-	56, // 1: dota.CDOTASaveGame.save_instances:type_name -> dota.CDOTASaveGame.SaveInstance
+	56, // 0: dota.CDOTASaveGame.players:type_name -> dota.CDOTASaveGame.Player
+	57, // 1: dota.CDOTASaveGame.save_instances:type_name -> dota.CDOTASaveGame.SaveInstance
 	45, // 2: dota.CMsgDOTACombatLogEntry.type:type_name -> dota.DOTA_COMBATLOG_TYPES
 	3,  // 3: dota.CMsgPendingEventAward.event_id:type_name -> dota.EEvent
 	48, // 4: dota.CMsgPendingEventAward.score_mode:type_name -> dota.EEventActionScoreMode
 	2,  // 5: dota.CDOTASaveGame.Player.team:type_name -> dota.DOTA_GC_TEAM
-	57, // 6: dota.CDOTASaveGame.SaveInstance.player_positions:type_name -> dota.CDOTASaveGame.SaveInstance.PlayerPositions
+	58, // 6: dota.CDOTASaveGame.SaveInstance.player_positions:type_name -> dota.CDOTASaveGame.SaveInstance.PlayerPositions
 	7,  // [7:7] is the sub-list for method output_type
 	7,  // [7:7] is the sub-list for method input_type
 	7,  // [7:7] is the sub-list for extension type_name
@@ -6986,7 +7060,7 @@ func file_dota_shared_enums_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_dota_shared_enums_proto_rawDesc,
-			NumEnums:      51,
+			NumEnums:      52,
 			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   0,
