@@ -54,4 +54,5 @@ message CClientMsg_RotateAnchor {
 }
 
 message CClientMsg_ListenForResponseFound {
+	optional int32 player_slot = 1;
 }

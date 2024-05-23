@@ -189,6 +189,7 @@ message CMsgBattleReport_Game {
 	optional int32 item3 = 48;
 	optional int32 item4 = 49;
 	optional int32 item5 = 50;
+	optional uint32 selected_facet = 51;
 }
 
 message CMsgBattleReport_GameList {

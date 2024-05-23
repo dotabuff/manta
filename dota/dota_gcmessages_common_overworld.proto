@@ -30,6 +30,7 @@ enum EOverworldAuditAction {
 	k_eOverworldAuditAction_TokenTraderGained = 12;
 	k_eOverworldAuditAction_EncounterRewardTokenCost = 13;
 	k_eOverworldAuditAction_EncounterRewardTokenReward = 14;
+	k_eOverworldAuditAction_SupportGrantTokens = 16;
 }
 
 message CMsgOverworldTokenCount {
@@ -74,6 +75,7 @@ message CMsgOverworldEncounterProgressData {
 	optional int32 choice = 1;
 	optional int32 progress = 2;
 	optional int32 max_progress = 3;
+	optional bool visited = 4;
 }
 
 message CMsgOverworldEncounterData {
@@ -154,10 +156,17 @@ message CMsgClientToGCOverworldCompletePathResponse {
 	optional CMsgDOTAClaimEventActionResponse claim_response = 2;
 }
 
+message CMsgOverworldEncounterPitFighterRewardData {
+	optional uint32 token_id = 1;
+	optional uint32 choice = 2;
+}
+
 message CMsgClientToGCOverworldClaimEncounterReward {
 	optional uint32 overworld_id = 1;
 	optional uint32 node_id = 2;
 	optional uint32 reward_data = 3;
+	optional uint32 periodic_resource_id = 4;
+	optional CMsgOverworldEncounterData extra_reward_data = 5;
 }
 
 message CMsgClientToGCOverworldClaimEncounterRewardResponse {
@@ -174,13 +183,36 @@ message CMsgClientToGCOverworldClaimEncounterRewardResponse {
 		k_eNodeNotEncounter = 9;
 		k_eEncounterMissingRewards = 10;
 		k_eInvalidEncounterRewardStyle = 11;
-		k_eInvalidEncounterRewardData = 12;
+		k_eInvalidEncounterData = 12;
 		k_eNotEnoughTokensForReward = 13;
+		k_eNotEnoughResourceForReward = 14;
 	}
 
 	optional CMsgClientToGCOverworldClaimEncounterRewardResponse.EResponse response = 1;
 	optional CMsgDOTAClaimEventActionResponse claim_response = 2;
 	optional CMsgOverworldTokenQuantity tokens_received = 3;
+}
+
+message CMsgClientToGCOverworldVisitEncounter {
+	optional uint32 overworld_id = 1;
+	optional uint32 node_id = 2;
+}
+
+message CMsgClientToGCOverworldVisitEncounterResponse {
+	enum EResponse {
+		k_eInternalError = 0;
+		k_eSuccess = 1;
+		k_eTooBusy = 2;
+		k_eDisabled = 3;
+		k_eTimeout = 4;
+		k_eInvalidOverworld = 5;
+		k_eInvalidNode = 6;
+		k_eNodeLocked = 7;
+		k_eNodeNotEncounter = 8;
+		k_eAlreadyVisited = 9;
+	}
+
+	optional CMsgClientToGCOverworldVisitEncounterResponse.EResponse response = 1;
 }
 
 message CMsgClientToGCOverworldMoveToNode {
@@ -204,9 +236,18 @@ message CMsgClientToGCOverworldMoveToNodeResponse {
 }
 
 message CMsgClientToGCOverworldTradeTokens {
+	enum ETradeRecipe {
+		k_eThreeToOneChosen = 1;
+		k_eFourToOneChosen = 2;
+		k_eThreeToTwoRandom = 3;
+		k_eSixScrapToOneChosen = 4;
+	}
+
 	optional uint32 overworld_id = 1;
 	optional CMsgOverworldTokenQuantity token_offer = 2;
 	optional CMsgOverworldTokenQuantity token_request = 3;
+	optional CMsgClientToGCOverworldTradeTokens.ETradeRecipe recipe = 4;
+	optional uint32 encounter_id = 5;
 }
 
 message CMsgClientToGCOverworldTradeTokensResponse {
@@ -221,10 +262,38 @@ message CMsgClientToGCOverworldTradeTokensResponse {
 		k_eInvalidOverworld = 7;
 		k_eInvalidOffer = 8;
 		k_eNotEnoughTokens = 9;
+		k_eInvalidNode = 10;
+		k_eInvalidEncounter = 11;
 	}
 
 	optional CMsgClientToGCOverworldTradeTokensResponse.EResponse response = 1;
 	optional CMsgOverworldTokenQuantity tokens_received = 2;
+}
+
+message CMsgClientToGCOverworldGiftTokens {
+	optional uint32 overworld_id = 1;
+	optional CMsgOverworldTokenCount token_gift = 2;
+	optional uint32 recipient_account_id = 3;
+	optional uint32 periodic_resource_id = 4;
+}
+
+message CMsgClientToGCOverworldGiftTokensResponse {
+	enum EResponse {
+		k_eInternalError = 0;
+		k_eSuccess = 1;
+		k_eTooBusy = 2;
+		k_eDisabled = 3;
+		k_eTimeout = 4;
+		k_eNotAllowed = 5;
+		k_eNodeLocked = 6;
+		k_eInvalidOverworld = 7;
+		k_eInvalidGift = 8;
+		k_eNotEnoughTokens = 9;
+		k_eInvalidRecipient = 10;
+		k_eNotEnoughPeriodicResource = 11;
+	}
+
+	optional CMsgClientToGCOverworldGiftTokensResponse.EResponse response = 1;
 }
 
 message CMsgClientToGCOverworldDevResetAll {
@@ -320,4 +389,28 @@ message CMsgClientToGCOverworldFeedbackResponse {
 	}
 
 	optional CMsgClientToGCOverworldFeedbackResponse.EResponse response = 1;
+}
+
+message CMsgClientToGCOverworldGetDynamicImage {
+	optional uint32 magic = 1;
+	optional uint32 image_id = 2;
+	optional uint32 language = 3;
+}
+
+message CMsgClientToGCOverworldGetDynamicImageResponse {
+	message Image {
+		optional uint32 width = 1;
+		optional uint32 height = 2;
+		optional CMsgClientToGCOverworldGetDynamicImageResponse.EDynamicImageFormat format = 3;
+		optional bytes image_bytes = 4;
+	}
+
+	enum EDynamicImageFormat {
+		k_eUnknown = 0;
+		k_ePNG = 1;
+		k_eData = 2;
+	}
+
+	optional uint32 image_id = 1;
+	repeated CMsgClientToGCOverworldGetDynamicImageResponse.Image images = 2;
 }

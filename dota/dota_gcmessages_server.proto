@@ -279,6 +279,7 @@ message CMsgGameMatchSignOut {
 			repeated int32 ability_draft_abilities = 79;
 			repeated CMsgTrackedStat player_tracked_stats = 80;
 			optional uint32 predicted_rank = 81;
+			optional uint32 selected_facet = 82;
 		}
 
 		repeated CMsgGameMatchSignOut.CTeam.CPlayer players = 1;
@@ -1375,18 +1376,37 @@ message CMsgSteamLearnMatchInfoPlayer {
 	optional uint32 player_mmr = 6;
 }
 
-message CMsgSteamLearnMatchHeroes {
+message CMsgSteamLearnMatchHeroesV1 {
 	repeated uint32 radiant_hero_ids = 1;
 	repeated uint32 dire_hero_ids = 2;
 	repeated uint32 radiant_lanes = 3;
 	repeated uint32 dire_lanes = 4;
 }
 
-message CMsgSteamLearnMatchHero {
+message CMsgSteamLearnMatchHeroesV2 {
+	repeated uint32 radiant_hero_ids = 1;
+	repeated uint32 dire_hero_ids = 2;
+	repeated uint32 radiant_lanes = 3;
+	repeated uint32 dire_lanes = 4;
+	repeated uint32 radiant_hero_facets = 5;
+	repeated uint32 dire_hero_facets = 6;
+}
+
+message CMsgSteamLearnMatchHeroV1 {
 	optional uint32 hero_id = 1;
 	optional uint32 lane = 2;
 	repeated uint32 allied_hero_ids = 3;
 	repeated uint32 enemy_hero_ids = 4;
+}
+
+message CMsgSteamLearnMatchHeroV2 {
+	optional uint32 hero_id = 1;
+	optional uint32 lane = 2;
+	repeated uint32 allied_hero_ids = 3;
+	repeated uint32 enemy_hero_ids = 4;
+	optional uint32 hero_facet = 5;
+	repeated uint32 allied_hero_facets = 6;
+	repeated uint32 enemy_herofacets = 7;
 }
 
 message CMsgSteamLearnPlayerTimedStats {
@@ -1408,7 +1428,7 @@ message CMsgSteamLearnPlayerTimedStats {
 	repeated CMsgSteamLearnPlayerTimedStats.StatBucket stat_buckets = 1;
 }
 
-message CMsgSteamLearnMatchState {
+message CMsgSteamLearnMatchStateV4 {
 	message PlayerState {
 		optional uint32 hero_id = 1;
 		optional uint32 net_worth = 2;
@@ -1423,7 +1443,7 @@ message CMsgSteamLearnMatchState {
 
 	message TeamState {
 		optional uint32 team = 1;
-		repeated CMsgSteamLearnMatchState.PlayerState player_states = 2;
+		repeated CMsgSteamLearnMatchStateV4.PlayerState player_states = 2;
 		repeated uint32 tower_health_pct = 3;
 		repeated uint32 barracks_health_pct = 4;
 		optional uint32 ancient_health_pct = 5;
@@ -1435,8 +1455,40 @@ message CMsgSteamLearnMatchState {
 	}
 
 	optional float game_time = 1;
-	optional CMsgSteamLearnMatchState.TeamState radiant_state = 2;
-	optional CMsgSteamLearnMatchState.TeamState dire_state = 3;
+	optional CMsgSteamLearnMatchStateV4.TeamState radiant_state = 2;
+	optional CMsgSteamLearnMatchStateV4.TeamState dire_state = 3;
+}
+
+message CMsgSteamLearnMatchStateV5 {
+	message PlayerState {
+		optional uint32 hero_id = 1;
+		optional uint32 net_worth = 2;
+		optional uint32 level = 3;
+		optional uint32 deaths = 4;
+		optional uint32 respawn_time = 5;
+		optional bool has_buyback = 6;
+		optional bool has_aegis = 7;
+		optional bool has_rapier = 8;
+		optional uint32 distance = 9;
+		optional uint32 hero_facet = 10;
+	}
+
+	message TeamState {
+		optional uint32 team = 1;
+		repeated CMsgSteamLearnMatchStateV5.PlayerState player_states = 2;
+		repeated uint32 tower_health_pct = 3;
+		repeated uint32 barracks_health_pct = 4;
+		optional uint32 ancient_health_pct = 5;
+		optional uint32 glyph_cooldown = 6;
+		optional uint32 kills = 7;
+		optional uint32 creep_distance_safe = 8;
+		optional uint32 creep_distance_mid = 9;
+		optional uint32 creep_distance_off = 10;
+	}
+
+	optional float game_time = 1;
+	optional CMsgSteamLearnMatchStateV5.TeamState radiant_state = 2;
+	optional CMsgSteamLearnMatchStateV5.TeamState dire_state = 3;
 }
 
 message CMsgSteamLearnItemPurchase {

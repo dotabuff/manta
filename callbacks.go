@@ -26,7 +26,7 @@ type Callbacks struct {
 	onCDemoAnimationData                                   []func(*dota.CDemoAnimationData) error
 	onCDemoAnimationHeader                                 []func(*dota.CDemoAnimationHeader) error
 	onCNETMsg_NOP                                          []func(*dota.CNETMsg_NOP) error
-	onCNETMsg_Disconnect                                   []func(*dota.CNETMsg_Disconnect) error
+	onCNETMsg_Disconnect_Legacy                            []func(*dota.CNETMsg_Disconnect_Legacy) error
 	onCNETMsg_SplitScreenUser                              []func(*dota.CNETMsg_SplitScreenUser) error
 	onCNETMsg_Tick                                         []func(*dota.CNETMsg_Tick) error
 	onCNETMsg_StringCmd                                    []func(*dota.CNETMsg_StringCmd) error
@@ -276,6 +276,8 @@ type Callbacks struct {
 	onCDOTAUserMsg_PlayerDraftPick                         []func(*dota.CDOTAUserMsg_PlayerDraftPick) error
 	onCDOTAUserMsg_UpdateLinearProjectileCPData            []func(*dota.CDOTAUserMsg_UpdateLinearProjectileCPData) error
 	onCDOTAUserMsg_GiftPlayer                              []func(*dota.CDOTAUserMsg_GiftPlayer) error
+	onCDOTAUserMsg_FacetPing                               []func(*dota.CDOTAUserMsg_FacetPing) error
+	onCDOTAUserMsg_InnatePing                              []func(*dota.CDOTAUserMsg_InnatePing) error
 
 	pb *proto.Buffer
 }
@@ -381,9 +383,9 @@ func (c *Callbacks) OnCNETMsg_NOP(fn func(*dota.CNETMsg_NOP) error) {
 	c.onCNETMsg_NOP = append(c.onCNETMsg_NOP, fn)
 }
 
-// OnCNETMsg_Disconnect registers a callback for NET_Messages_net_Disconnect
-func (c *Callbacks) OnCNETMsg_Disconnect(fn func(*dota.CNETMsg_Disconnect) error) {
-	c.onCNETMsg_Disconnect = append(c.onCNETMsg_Disconnect, fn)
+// OnCNETMsg_Disconnect_Legacy registers a callback for NET_Messages_net_Disconnect_Legacy
+func (c *Callbacks) OnCNETMsg_Disconnect_Legacy(fn func(*dota.CNETMsg_Disconnect_Legacy) error) {
+	c.onCNETMsg_Disconnect_Legacy = append(c.onCNETMsg_Disconnect_Legacy, fn)
 }
 
 // OnCNETMsg_SplitScreenUser registers a callback for NET_Messages_net_SplitScreenUser
@@ -1631,6 +1633,16 @@ func (c *Callbacks) OnCDOTAUserMsg_GiftPlayer(fn func(*dota.CDOTAUserMsg_GiftPla
 	c.onCDOTAUserMsg_GiftPlayer = append(c.onCDOTAUserMsg_GiftPlayer, fn)
 }
 
+// OnCDOTAUserMsg_FacetPing registers a callback for EDotaUserMessages_DOTA_UM_FacetPing
+func (c *Callbacks) OnCDOTAUserMsg_FacetPing(fn func(*dota.CDOTAUserMsg_FacetPing) error) {
+	c.onCDOTAUserMsg_FacetPing = append(c.onCDOTAUserMsg_FacetPing, fn)
+}
+
+// OnCDOTAUserMsg_InnatePing registers a callback for EDotaUserMessages_DOTA_UM_InnatePing
+func (c *Callbacks) OnCDOTAUserMsg_InnatePing(fn func(*dota.CDOTAUserMsg_InnatePing) error) {
+	c.onCDOTAUserMsg_InnatePing = append(c.onCDOTAUserMsg_InnatePing, fn)
+}
+
 func (c *Callbacks) callByDemoType(t int32, buf []byte) error {
 	switch t {
 	case 0: // dota.EDemoCommands_DEM_Stop
@@ -2005,18 +2017,18 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 
 		return nil
 
-	case 1: // dota.NET_Messages_net_Disconnect
-		if c.onCNETMsg_Disconnect == nil {
+	case 1: // dota.NET_Messages_net_Disconnect_Legacy
+		if c.onCNETMsg_Disconnect_Legacy == nil {
 			return nil
 		}
 
-		msg := &dota.CNETMsg_Disconnect{}
+		msg := &dota.CNETMsg_Disconnect_Legacy{}
 		c.pb.SetBuf(buf)
 		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
-		for _, fn := range c.onCNETMsg_Disconnect {
+		for _, fn := range c.onCNETMsg_Disconnect_Legacy {
 			if err := fn(msg); err != nil {
 				return err
 			}
@@ -6748,6 +6760,44 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		for _, fn := range c.onCDOTAUserMsg_GiftPlayer {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 624: // dota.EDotaUserMessages_DOTA_UM_FacetPing
+		if c.onCDOTAUserMsg_FacetPing == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_FacetPing{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_FacetPing {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 625: // dota.EDotaUserMessages_DOTA_UM_InnatePing
+		if c.onCDOTAUserMsg_InnatePing == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_InnatePing{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_InnatePing {
 			if err := fn(msg); err != nil {
 				return err
 			}
