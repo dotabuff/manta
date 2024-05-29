@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/dotabuff/manta/dota"
 	"github.com/golang/snappy"
+	"github.com/imprint-esports/manta/dota"
 )
 
 // The first 8 bytes of a replay for Source 1 and Source 2

@@ -1,7 +1,7 @@
 syntax = "proto2";
 
 package dota;
-option go_package = "github.com/dotabuff/manta/dota;dota";
+option go_package = "github.com/imprint-esports/manta/dota;dota";
 
 option optimize_for = SPEED;
 option cc_generic_services = false;

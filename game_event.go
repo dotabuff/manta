@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"fmt"
 
-	"github.com/dotabuff/manta/dota"
+	"github.com/imprint-esports/manta/dota"
 )
 
 const (

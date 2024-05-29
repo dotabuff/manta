@@ -1,8 +1,8 @@
 package manta
 
 import (
-	"github.com/dotabuff/manta/dota"
 	"github.com/golang/protobuf/proto"
+	"github.com/imprint-esports/manta/dota"
 )
 
 // Callbacks decodes and routes replay events to callback functions

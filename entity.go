@@ -3,7 +3,7 @@ package manta
 import (
 	"fmt"
 
-	"github.com/dotabuff/manta/dota"
+	"github.com/imprint-esports/manta/dota"
 )
 
 // EntityOp is a bitmask representing the type of operation performed on an Entity

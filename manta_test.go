@@ -4,7 +4,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/dotabuff/manta/dota"
+	"github.com/imprint-esports/manta/dota"
 	"github.com/stretchr/testify/assert"
 )
 

@@ -1,8 +1,8 @@
 package manta
 
 import (
-	"github.com/dotabuff/manta/dota"
 	"github.com/golang/snappy"
+	"github.com/imprint-esports/manta/dota"
 )
 
 const (
