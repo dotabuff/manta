@@ -18,6 +18,7 @@ var fieldTypeFactories = map[string]fieldFactory{
 	"CHandle":                  unsignedFactory,
 	"CStrongHandle":            unsigned64Factory,
 	"CEntityHandle":            unsignedFactory,
+	"HeroFacetKey_t":           unsigned64Factory,
 }
 
 var fieldNameDecoders = map[string]fieldDecoder{}
@@ -35,6 +36,7 @@ var fieldTypeDecoders = map[string]fieldDecoder{
 	"uint8":   unsignedDecoder,
 
 	"GameTime_t": noscaleDecoder,
+	"BloodType":  unsignedDecoder,
 
 	"CBodyComponent":       componentDecoder,
 	"CGameSceneNodeHandle": unsignedDecoder,
