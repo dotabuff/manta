@@ -25,10 +25,3 @@ jobs:
       - name: run tests
         run: make test
 
-      - name: notify slack
-        if: always()
-        uses: jcoene/slack-notify-action@v1
-        with:
-          job_name: test
-          job_status: ${{ job.status }}
-          slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
