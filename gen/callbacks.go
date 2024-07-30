@@ -223,7 +223,7 @@ func main() {
 	source, err := format.Source(bw.Bytes())
 	if err != nil {
 		fmt.Println("gofmt failed!", err)
-		fmt.Println(string(bw.Bytes()))
+		fmt.Println(bw.String())
 		panic(err)
 	}
 
