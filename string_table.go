@@ -121,6 +121,13 @@ func (p *Parser) onCSVCMsg_CreateStringTable(m *dota.CSVCMsg_CreateStringTable) 
 		p.updateInstanceBaseline()
 	}
 
+	// Emit events for modifier table entry updates
+	if t.name == "ActiveModifiers" {
+		if err := p.emitModifierTableEvents(items); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -157,6 +164,13 @@ func (p *Parser) onCSVCMsg_UpdateStringTable(m *dota.CSVCMsg_UpdateStringTable) 
 	// Apply the updates to baseline state
 	if t.name == "instancebaseline" {
 		p.updateInstanceBaseline()
+	}
+
+	// Emit events for modifier table entry updates
+	if t.name == "ActiveModifiers" {
+		if err := p.emitModifierTableEvents(items); err != nil {
+			return err
+		}
 	}
 
 	return nil

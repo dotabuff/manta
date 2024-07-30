@@ -31,22 +31,23 @@ type Parser struct {
 	// AfterStopCallback is a function to be called when the parser stops.
 	AfterStopCallback func()
 
-	classBaselines    map[int32][]byte
-	classesById       map[int32]*class
-	classesByName     map[string]*class
-	classIdSize       uint32
-	classInfo         bool
-	entities          map[int32]*Entity
-	entityFullPackets int
-	entityHandlers    []EntityHandler
-	gameEventHandlers map[string][]GameEventHandler
-	gameEventNames    map[int32]string
-	gameEventTypes    map[string]*gameEventType
-	isStopping        bool
-	serializers       map[string]*serializer
-	stream            *stream
-	stringTables      *stringTables
-	stopAtTick        uint32
+	classBaselines             map[int32][]byte
+	classesById                map[int32]*class
+	classesByName              map[string]*class
+	classIdSize                uint32
+	classInfo                  bool
+	entities                   map[int32]*Entity
+	entityFullPackets          int
+	entityHandlers             []EntityHandler
+	gameEventHandlers          map[string][]GameEventHandler
+	gameEventNames             map[int32]string
+	gameEventTypes             map[string]*gameEventType
+	isStopping                 bool
+	modifierTableEntryHandlers []ModifierTableEntryHandler
+	serializers                map[string]*serializer
+	stream                     *stream
+	stringTables               *stringTables
+	stopAtTick                 uint32
 }
 
 // Create a new parser from a byte slice.
