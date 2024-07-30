@@ -887,7 +887,7 @@ type CMsgPracticeLobbySetDetails struct {
 	CustomGamePenalties         *bool                                                    `protobuf:"varint,47,opt,name=custom_game_penalties,json=customGamePenalties" json:"custom_game_penalties,omitempty"`
 	LanHostPingLocation         *string                                                  `protobuf:"bytes,48,opt,name=lan_host_ping_location,json=lanHostPingLocation" json:"lan_host_ping_location,omitempty"`
 	LeagueNodeId                *uint32                                                  `protobuf:"varint,49,opt,name=league_node_id,json=leagueNodeId" json:"league_node_id,omitempty"`
-	RequestedHeroIds            []uint32                                                 `protobuf:"varint,50,rep,name=requested_hero_ids,json=requestedHeroIds" json:"requested_hero_ids,omitempty"`
+	RequestedHeroIds            []int32                                                  `protobuf:"varint,50,rep,name=requested_hero_ids,json=requestedHeroIds" json:"requested_hero_ids,omitempty"`
 	ScenarioSave                *CMsgLobbyScenarioSave                                   `protobuf:"bytes,51,opt,name=scenario_save,json=scenarioSave" json:"scenario_save,omitempty"`
 	AbilityDraftSpecificDetails *CMsgPracticeLobbySetDetails_AbilityDraftSpecificDetails `protobuf:"bytes,52,opt,name=ability_draft_specific_details,json=abilityDraftSpecificDetails" json:"ability_draft_specific_details,omitempty"`
 	DoPlayerDraft               *bool                                                    `protobuf:"varint,53,opt,name=do_player_draft,json=doPlayerDraft" json:"do_player_draft,omitempty"`
@@ -1205,7 +1205,7 @@ func (x *CMsgPracticeLobbySetDetails) GetLeagueNodeId() uint32 {
 	return 0
 }
 
-func (x *CMsgPracticeLobbySetDetails) GetRequestedHeroIds() []uint32 {
+func (x *CMsgPracticeLobbySetDetails) GetRequestedHeroIds() []int32 {
 	if x != nil {
 		return x.RequestedHeroIds
 	}
@@ -4777,7 +4777,7 @@ var file_dota_gcmessages_client_match_management_proto_rawDesc = []byte{
 	0x0e, 0x6c, 0x65, 0x61, 0x67, 0x75, 0x65, 0x5f, 0x6e, 0x6f, 0x64, 0x65, 0x5f, 0x69, 0x64, 0x18,
 	0x31, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x0c, 0x6c, 0x65, 0x61, 0x67, 0x75, 0x65, 0x4e, 0x6f, 0x64,
 	0x65, 0x49, 0x64, 0x12, 0x2c, 0x0a, 0x12, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x65, 0x64,
-	0x5f, 0x68, 0x65, 0x72, 0x6f, 0x5f, 0x69, 0x64, 0x73, 0x18, 0x32, 0x20, 0x03, 0x28, 0x0d, 0x52,
+	0x5f, 0x68, 0x65, 0x72, 0x6f, 0x5f, 0x69, 0x64, 0x73, 0x18, 0x32, 0x20, 0x03, 0x28, 0x05, 0x52,
 	0x10, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x65, 0x64, 0x48, 0x65, 0x72, 0x6f, 0x49, 0x64,
 	0x73, 0x12, 0x40, 0x0a, 0x0d, 0x73, 0x63, 0x65, 0x6e, 0x61, 0x72, 0x69, 0x6f, 0x5f, 0x73, 0x61,
 	0x76, 0x65, 0x18, 0x33, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1b, 0x2e, 0x64, 0x6f, 0x74, 0x61, 0x2e,

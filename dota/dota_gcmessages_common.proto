@@ -168,7 +168,7 @@ message CSODOTAGameAccountClient {
 	optional uint32 solo_competitive_games_played = 61;
 	optional uint32 party_competitive_games_played = 62;
 	optional uint32 casual_1v1_games_played = 65;
-	optional uint32 curr_all_hero_challenge_id = 67;
+	optional int32 curr_all_hero_challenge_id = 67;
 	optional uint32 play_time_points = 68;
 	optional uint32 account_flags = 69;
 	optional uint32 play_time_level = 70;
@@ -193,7 +193,7 @@ message CSODOTAGameAccountClient {
 	repeated CSODOTAGameAccountClient.RoleHandicap role_handicaps = 115;
 	optional uint32 event_mode_recent_time = 120;
 	optional uint32 mmr_recalibration_time = 121;
-	repeated uint32 banned_hero_ids = 123;
+	repeated int32 banned_hero_ids = 123;
 }
 
 message CSODOTAGameAccountPlus {
@@ -242,7 +242,7 @@ message CMsgDOTABroadcastNotification {
 }
 
 message CProtoItemHeroStatue {
-	optional uint32 hero_id = 1;
+	optional int32 hero_id = 1;
 	optional uint32 status_effect_index = 2;
 	optional string sequence_name = 3;
 	optional float cycle = 4;
@@ -324,7 +324,7 @@ message CMatchPlayerPermanentBuff {
 message CMatchHeroSelectEvent {
 	optional bool is_pick = 1;
 	optional uint32 team = 2;
-	optional uint32 hero_id = 3;
+	optional int32 hero_id = 3;
 }
 
 message CMatchClip {
@@ -333,7 +333,7 @@ message CMatchClip {
 	optional uint32 game_time_seconds = 3;
 	optional uint32 duration_seconds = 4;
 	optional uint32 player_id = 5;
-	optional uint32 hero_id = 6;
+	optional int32 hero_id = 6;
 	optional int32 ability_id = 7;
 	optional uint32 camera_mode = 8;
 	optional string comment = 9;
@@ -398,7 +398,7 @@ message CMsgDOTAProfileCard {
 		}
 
 		message Hero {
-			optional uint32 hero_id = 1;
+			optional int32 hero_id = 1;
 			optional uint32 hero_wins = 2;
 			optional uint32 hero_losses = 3;
 		}
@@ -462,14 +462,14 @@ message CSODOTAPlayerChallenge {
 	optional uint32 quest_rank = 14;
 	optional uint32 max_quest_rank = 15;
 	optional uint32 instance_id = 16;
-	optional uint32 hero_id = 17;
+	optional int32 hero_id = 17;
 	optional uint32 template_id = 18;
 }
 
 message CMsgClientToGCRerollPlayerChallenge {
 	optional EEvent event_id = 1;
 	optional uint32 sequence_id = 3;
-	optional uint32 hero_id = 4;
+	optional int32 hero_id = 4;
 }
 
 message CMsgGCRerollPlayerChallengeResponse {
@@ -535,7 +535,7 @@ message CMsgDOTARealtimeGameStats {
 		optional int32 playerid = 2;
 		optional string name = 3;
 		optional uint32 team = 4;
-		optional uint32 heroid = 5;
+		optional int32 heroid = 5;
 		optional uint32 healthpoints = 6;
 		optional uint32 maxhealthpoints = 7;
 		optional float healthregenrate = 8;
@@ -605,7 +605,7 @@ message CMsgDOTARealtimeGameStats {
 	}
 
 	message PickBanDetails {
-		optional uint32 hero = 1;
+		optional int32 hero = 1;
 		optional uint32 team = 2;
 	}
 
@@ -690,7 +690,7 @@ message CMsgDOTARealtimeGameStatsTerse {
 		optional int32 playerid = 2;
 		optional string name = 3;
 		optional uint32 team = 4;
-		optional uint32 heroid = 5;
+		optional int32 heroid = 5;
 		optional uint32 level = 6;
 		optional uint32 kill_count = 7;
 		optional uint32 death_count = 8;
@@ -718,7 +718,7 @@ message CMsgDOTARealtimeGameStatsTerse {
 	}
 
 	message PickBanDetails {
-		optional uint32 hero = 1;
+		optional int32 hero = 1;
 		optional uint32 team = 2;
 	}
 
@@ -934,7 +934,7 @@ message CMsgDOTAMatch {
 
 		optional uint32 account_id = 1;
 		optional uint32 player_slot = 2;
-		optional uint32 hero_id = 3;
+		optional int32 hero_id = 3;
 		optional int32 item_0 = 4;
 		optional int32 item_1 = 5;
 		optional int32 item_2 = 6;
@@ -1151,7 +1151,7 @@ message CMsgDOTABotDebugInfo {
 		}
 
 		optional int32 player_owner_id = 1;
-		optional uint32 hero_id = 2;
+		optional int32 hero_id = 2;
 		optional uint32 difficulty = 3;
 		optional uint32 power_current = 4;
 		optional uint32 power_max = 5;
@@ -1180,7 +1180,7 @@ message CMsgDOTABotDebugInfo {
 }
 
 message CMsgSuccessfulHero {
-	optional uint32 hero_id = 1;
+	optional int32 hero_id = 1;
 	optional float win_percent = 2;
 	optional uint32 longest_streak = 3;
 }
@@ -1213,7 +1213,7 @@ message CMsgMatchTips {
 message CMsgDOTAMatchMinimal {
 	message Player {
 		optional uint32 account_id = 1;
-		optional uint32 hero_id = 2;
+		optional int32 hero_id = 2;
 		optional uint32 kills = 3;
 		optional uint32 deaths = 4;
 		optional uint32 assists = 5;
@@ -1297,7 +1297,7 @@ message CMsgPlayerRecentMatchInfo {
 	optional uint32 timestamp = 2;
 	optional uint32 duration = 3;
 	optional bool win = 4;
-	optional uint32 hero_id = 5;
+	optional int32 hero_id = 5;
 	optional uint32 kills = 6;
 	optional uint32 deaths = 7;
 	optional uint32 assists = 8;
@@ -1342,7 +1342,7 @@ message CMsgRecentAccomplishments {
 
 message CMsgServerToGCRequestPlayerRecentAccomplishments {
 	optional uint32 account_id = 1;
-	optional uint32 hero_id = 2;
+	optional int32 hero_id = 2;
 }
 
 message CMsgServerToGCRequestPlayerRecentAccomplishmentsResponse {
@@ -1359,7 +1359,7 @@ message CMsgServerToGCRequestPlayerRecentAccomplishmentsResponse {
 
 message CMsgArcanaVoteMatchVotes {
 	optional uint32 match_id = 1;
-	optional uint32 hero_id = 2;
+	optional int32 hero_id = 2;
 	optional uint32 vote_count = 3;
 }
 
@@ -1388,7 +1388,7 @@ message CMsgPullTabsData {
 	message Slot {
 		optional uint32 event_id = 1;
 		optional uint32 board_id = 2;
-		optional uint32 hero_id = 3;
+		optional int32 hero_id = 3;
 		optional uint32 action_id = 4;
 		optional bool redeemed = 5;
 	}
@@ -1396,7 +1396,7 @@ message CMsgPullTabsData {
 	message Jackpot {
 		optional uint32 board_id = 1;
 		optional uint32 action_id = 2;
-		optional uint32 hero_id = 3;
+		optional int32 hero_id = 3;
 	}
 
 	repeated CMsgPullTabsData.Slot slots = 1;
@@ -1407,13 +1407,13 @@ message CMsgPullTabsData {
 message CMsgUnderDraftData {
 	message BenchSlot {
 		optional uint32 slot_id = 1;
-		optional uint32 hero_id = 2;
+		optional int32 hero_id = 2;
 		optional uint32 stars = 3;
 	}
 
 	message ShopSlot {
 		optional uint32 slot_id = 1;
-		optional uint32 hero_id = 2;
+		optional int32 hero_id = 2;
 		optional bool is_special_reward = 3;
 	}
 
@@ -1525,7 +1525,7 @@ message CMsgGameDataHero {
 		optional int32 gradient_id = 6;
 	}
 
-	optional uint32 id = 1;
+	optional int32 id = 1;
 	optional string name = 2;
 	optional uint32 order_id = 3;
 	optional string name_loc = 5;
@@ -1577,7 +1577,7 @@ message CMsgGameDataHeroes {
 
 message CMsgGameDataHeroList {
 	message HeroInfo {
-		optional uint32 id = 1;
+		optional int32 id = 1;
 		optional string name = 2;
 		optional string name_loc = 3;
 		optional string name_english_loc = 4;
@@ -1658,7 +1658,7 @@ message CMsgStickerbook {
 }
 
 message CMsgStickerHero {
-	optional uint32 hero_id = 1;
+	optional int32 hero_id = 1;
 	optional uint32 item_def_id = 2;
 	optional uint32 quality = 3;
 	optional uint64 source_item_id = 4;
@@ -1675,7 +1675,7 @@ message CMsgHeroRoleStats {
 }
 
 message CMsgHeroRoleHeroStats {
-	optional uint32 hero_id = 1;
+	optional int32 hero_id = 1;
 	repeated CMsgHeroRoleStats role_stats = 2;
 }
 
@@ -1787,4 +1787,24 @@ message CMsgClientToGCDotaLabsFeedbackResponse {
 	}
 
 	optional CMsgClientToGCDotaLabsFeedbackResponse.EResponse response = 1;
+}
+
+message CDotaMsg_PredictionResult {
+	message Prediction {
+		enum EResult {
+			k_eResult_ItemGranted = 1;
+			k_eResult_Destroyed = 2;
+		}
+
+		optional uint32 item_def = 1;
+		optional uint32 num_correct = 2;
+		optional uint32 num_fails = 3;
+		optional CDotaMsg_PredictionResult.Prediction.EResult result = 4;
+		repeated uint32 granted_item_defs = 6;
+	}
+
+	optional uint32 account_id = 1;
+	optional uint64 match_id = 2;
+	optional bool correct = 3;
+	repeated CDotaMsg_PredictionResult.Prediction predictions = 4;
 }

@@ -1910,6 +1910,62 @@ func (CMsgClientToGCDotaLabsFeedbackResponse_EResponse) EnumDescriptor() ([]byte
 	return file_dota_gcmessages_common_proto_rawDescGZIP(), []int{98, 0}
 }
 
+type CDotaMsg_PredictionResult_Prediction_EResult int32
+
+const (
+	CDotaMsg_PredictionResult_Prediction_k_eResult_ItemGranted CDotaMsg_PredictionResult_Prediction_EResult = 1
+	CDotaMsg_PredictionResult_Prediction_k_eResult_Destroyed   CDotaMsg_PredictionResult_Prediction_EResult = 2
+)
+
+// Enum value maps for CDotaMsg_PredictionResult_Prediction_EResult.
+var (
+	CDotaMsg_PredictionResult_Prediction_EResult_name = map[int32]string{
+		1: "k_eResult_ItemGranted",
+		2: "k_eResult_Destroyed",
+	}
+	CDotaMsg_PredictionResult_Prediction_EResult_value = map[string]int32{
+		"k_eResult_ItemGranted": 1,
+		"k_eResult_Destroyed":   2,
+	}
+)
+
+func (x CDotaMsg_PredictionResult_Prediction_EResult) Enum() *CDotaMsg_PredictionResult_Prediction_EResult {
+	p := new(CDotaMsg_PredictionResult_Prediction_EResult)
+	*p = x
+	return p
+}
+
+func (x CDotaMsg_PredictionResult_Prediction_EResult) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (CDotaMsg_PredictionResult_Prediction_EResult) Descriptor() protoreflect.EnumDescriptor {
+	return file_dota_gcmessages_common_proto_enumTypes[27].Descriptor()
+}
+
+func (CDotaMsg_PredictionResult_Prediction_EResult) Type() protoreflect.EnumType {
+	return &file_dota_gcmessages_common_proto_enumTypes[27]
+}
+
+func (x CDotaMsg_PredictionResult_Prediction_EResult) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Do not use.
+func (x *CDotaMsg_PredictionResult_Prediction_EResult) UnmarshalJSON(b []byte) error {
+	num, err := protoimpl.X.UnmarshalJSONEnum(x.Descriptor(), b)
+	if err != nil {
+		return err
+	}
+	*x = CDotaMsg_PredictionResult_Prediction_EResult(num)
+	return nil
+}
+
+// Deprecated: Use CDotaMsg_PredictionResult_Prediction_EResult.Descriptor instead.
+func (CDotaMsg_PredictionResult_Prediction_EResult) EnumDescriptor() ([]byte, []int) {
+	return file_dota_gcmessages_common_proto_rawDescGZIP(), []int{99, 0, 0}
+}
+
 type CSODOTAGameAccountClient struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1945,7 +2001,7 @@ type CSODOTAGameAccountClient struct {
 	SoloCompetitiveGamesPlayed     *uint32                                  `protobuf:"varint,61,opt,name=solo_competitive_games_played,json=soloCompetitiveGamesPlayed" json:"solo_competitive_games_played,omitempty"`
 	PartyCompetitiveGamesPlayed    *uint32                                  `protobuf:"varint,62,opt,name=party_competitive_games_played,json=partyCompetitiveGamesPlayed" json:"party_competitive_games_played,omitempty"`
 	Casual_1V1GamesPlayed          *uint32                                  `protobuf:"varint,65,opt,name=casual_1v1_games_played,json=casual1v1GamesPlayed" json:"casual_1v1_games_played,omitempty"`
-	CurrAllHeroChallengeId         *uint32                                  `protobuf:"varint,67,opt,name=curr_all_hero_challenge_id,json=currAllHeroChallengeId" json:"curr_all_hero_challenge_id,omitempty"`
+	CurrAllHeroChallengeId         *int32                                   `protobuf:"varint,67,opt,name=curr_all_hero_challenge_id,json=currAllHeroChallengeId" json:"curr_all_hero_challenge_id,omitempty"`
 	PlayTimePoints                 *uint32                                  `protobuf:"varint,68,opt,name=play_time_points,json=playTimePoints" json:"play_time_points,omitempty"`
 	AccountFlags                   *uint32                                  `protobuf:"varint,69,opt,name=account_flags,json=accountFlags" json:"account_flags,omitempty"`
 	PlayTimeLevel                  *uint32                                  `protobuf:"varint,70,opt,name=play_time_level,json=playTimeLevel" json:"play_time_level,omitempty"`
@@ -1970,7 +2026,7 @@ type CSODOTAGameAccountClient struct {
 	RoleHandicaps                  []*CSODOTAGameAccountClient_RoleHandicap `protobuf:"bytes,115,rep,name=role_handicaps,json=roleHandicaps" json:"role_handicaps,omitempty"`
 	EventModeRecentTime            *uint32                                  `protobuf:"varint,120,opt,name=event_mode_recent_time,json=eventModeRecentTime" json:"event_mode_recent_time,omitempty"`
 	MmrRecalibrationTime           *uint32                                  `protobuf:"varint,121,opt,name=mmr_recalibration_time,json=mmrRecalibrationTime" json:"mmr_recalibration_time,omitempty"`
-	BannedHeroIds                  []uint32                                 `protobuf:"varint,123,rep,name=banned_hero_ids,json=bannedHeroIds" json:"banned_hero_ids,omitempty"`
+	BannedHeroIds                  []int32                                  `protobuf:"varint,123,rep,name=banned_hero_ids,json=bannedHeroIds" json:"banned_hero_ids,omitempty"`
 }
 
 func (x *CSODOTAGameAccountClient) Reset() {
@@ -2215,7 +2271,7 @@ func (x *CSODOTAGameAccountClient) GetCasual_1V1GamesPlayed() uint32 {
 	return 0
 }
 
-func (x *CSODOTAGameAccountClient) GetCurrAllHeroChallengeId() uint32 {
+func (x *CSODOTAGameAccountClient) GetCurrAllHeroChallengeId() int32 {
 	if x != nil && x.CurrAllHeroChallengeId != nil {
 		return *x.CurrAllHeroChallengeId
 	}
@@ -2390,7 +2446,7 @@ func (x *CSODOTAGameAccountClient) GetMmrRecalibrationTime() uint32 {
 	return 0
 }
 
-func (x *CSODOTAGameAccountClient) GetBannedHeroIds() []uint32 {
+func (x *CSODOTAGameAccountClient) GetBannedHeroIds() []int32 {
 	if x != nil {
 		return x.BannedHeroIds
 	}
@@ -2804,7 +2860,7 @@ type CProtoItemHeroStatue struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	HeroId            *uint32  `protobuf:"varint,1,opt,name=hero_id,json=heroId" json:"hero_id,omitempty"`
+	HeroId            *int32   `protobuf:"varint,1,opt,name=hero_id,json=heroId" json:"hero_id,omitempty"`
 	StatusEffectIndex *uint32  `protobuf:"varint,2,opt,name=status_effect_index,json=statusEffectIndex" json:"status_effect_index,omitempty"`
 	SequenceName      *string  `protobuf:"bytes,3,opt,name=sequence_name,json=sequenceName" json:"sequence_name,omitempty"`
 	Cycle             *float32 `protobuf:"fixed32,4,opt,name=cycle" json:"cycle,omitempty"`
@@ -2846,7 +2902,7 @@ func (*CProtoItemHeroStatue) Descriptor() ([]byte, []int) {
 	return file_dota_gcmessages_common_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *CProtoItemHeroStatue) GetHeroId() uint32 {
+func (x *CProtoItemHeroStatue) GetHeroId() int32 {
 	if x != nil && x.HeroId != nil {
 		return *x.HeroId
 	}
@@ -3551,7 +3607,7 @@ type CMatchHeroSelectEvent struct {
 
 	IsPick *bool   `protobuf:"varint,1,opt,name=is_pick,json=isPick" json:"is_pick,omitempty"`
 	Team   *uint32 `protobuf:"varint,2,opt,name=team" json:"team,omitempty"`
-	HeroId *uint32 `protobuf:"varint,3,opt,name=hero_id,json=heroId" json:"hero_id,omitempty"`
+	HeroId *int32  `protobuf:"varint,3,opt,name=hero_id,json=heroId" json:"hero_id,omitempty"`
 }
 
 func (x *CMatchHeroSelectEvent) Reset() {
@@ -3600,7 +3656,7 @@ func (x *CMatchHeroSelectEvent) GetTeam() uint32 {
 	return 0
 }
 
-func (x *CMatchHeroSelectEvent) GetHeroId() uint32 {
+func (x *CMatchHeroSelectEvent) GetHeroId() int32 {
 	if x != nil && x.HeroId != nil {
 		return *x.HeroId
 	}
@@ -3617,7 +3673,7 @@ type CMatchClip struct {
 	GameTimeSeconds *uint32 `protobuf:"varint,3,opt,name=game_time_seconds,json=gameTimeSeconds" json:"game_time_seconds,omitempty"`
 	DurationSeconds *uint32 `protobuf:"varint,4,opt,name=duration_seconds,json=durationSeconds" json:"duration_seconds,omitempty"`
 	PlayerId        *uint32 `protobuf:"varint,5,opt,name=player_id,json=playerId" json:"player_id,omitempty"`
-	HeroId          *uint32 `protobuf:"varint,6,opt,name=hero_id,json=heroId" json:"hero_id,omitempty"`
+	HeroId          *int32  `protobuf:"varint,6,opt,name=hero_id,json=heroId" json:"hero_id,omitempty"`
 	AbilityId       *int32  `protobuf:"varint,7,opt,name=ability_id,json=abilityId" json:"ability_id,omitempty"`
 	CameraMode      *uint32 `protobuf:"varint,8,opt,name=camera_mode,json=cameraMode" json:"camera_mode,omitempty"`
 	Comment         *string `protobuf:"bytes,9,opt,name=comment" json:"comment,omitempty"`
@@ -3690,7 +3746,7 @@ func (x *CMatchClip) GetPlayerId() uint32 {
 	return 0
 }
 
-func (x *CMatchClip) GetHeroId() uint32 {
+func (x *CMatchClip) GetHeroId() int32 {
 	if x != nil && x.HeroId != nil {
 		return *x.HeroId
 	}
@@ -4282,7 +4338,7 @@ type CSODOTAPlayerChallenge struct {
 	QuestRank     *uint32 `protobuf:"varint,14,opt,name=quest_rank,json=questRank" json:"quest_rank,omitempty"`
 	MaxQuestRank  *uint32 `protobuf:"varint,15,opt,name=max_quest_rank,json=maxQuestRank" json:"max_quest_rank,omitempty"`
 	InstanceId    *uint32 `protobuf:"varint,16,opt,name=instance_id,json=instanceId" json:"instance_id,omitempty"`
-	HeroId        *uint32 `protobuf:"varint,17,opt,name=hero_id,json=heroId" json:"hero_id,omitempty"`
+	HeroId        *int32  `protobuf:"varint,17,opt,name=hero_id,json=heroId" json:"hero_id,omitempty"`
 	TemplateId    *uint32 `protobuf:"varint,18,opt,name=template_id,json=templateId" json:"template_id,omitempty"`
 }
 
@@ -4423,7 +4479,7 @@ func (x *CSODOTAPlayerChallenge) GetInstanceId() uint32 {
 	return 0
 }
 
-func (x *CSODOTAPlayerChallenge) GetHeroId() uint32 {
+func (x *CSODOTAPlayerChallenge) GetHeroId() int32 {
 	if x != nil && x.HeroId != nil {
 		return *x.HeroId
 	}
@@ -4444,7 +4500,7 @@ type CMsgClientToGCRerollPlayerChallenge struct {
 
 	EventId    *EEvent `protobuf:"varint,1,opt,name=event_id,json=eventId,enum=dota.EEvent" json:"event_id,omitempty"`
 	SequenceId *uint32 `protobuf:"varint,3,opt,name=sequence_id,json=sequenceId" json:"sequence_id,omitempty"`
-	HeroId     *uint32 `protobuf:"varint,4,opt,name=hero_id,json=heroId" json:"hero_id,omitempty"`
+	HeroId     *int32  `protobuf:"varint,4,opt,name=hero_id,json=heroId" json:"hero_id,omitempty"`
 }
 
 func (x *CMsgClientToGCRerollPlayerChallenge) Reset() {
@@ -4493,7 +4549,7 @@ func (x *CMsgClientToGCRerollPlayerChallenge) GetSequenceId() uint32 {
 	return 0
 }
 
-func (x *CMsgClientToGCRerollPlayerChallenge) GetHeroId() uint32 {
+func (x *CMsgClientToGCRerollPlayerChallenge) GetHeroId() int32 {
 	if x != nil && x.HeroId != nil {
 		return *x.HeroId
 	}
@@ -6312,7 +6368,7 @@ type CMsgSuccessfulHero struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	HeroId        *uint32  `protobuf:"varint,1,opt,name=hero_id,json=heroId" json:"hero_id,omitempty"`
+	HeroId        *int32   `protobuf:"varint,1,opt,name=hero_id,json=heroId" json:"hero_id,omitempty"`
 	WinPercent    *float32 `protobuf:"fixed32,2,opt,name=win_percent,json=winPercent" json:"win_percent,omitempty"`
 	LongestStreak *uint32  `protobuf:"varint,3,opt,name=longest_streak,json=longestStreak" json:"longest_streak,omitempty"`
 }
@@ -6349,7 +6405,7 @@ func (*CMsgSuccessfulHero) Descriptor() ([]byte, []int) {
 	return file_dota_gcmessages_common_proto_rawDescGZIP(), []int{43}
 }
 
-func (x *CMsgSuccessfulHero) GetHeroId() uint32 {
+func (x *CMsgSuccessfulHero) GetHeroId() int32 {
 	if x != nil && x.HeroId != nil {
 		return *x.HeroId
 	}
@@ -6931,7 +6987,7 @@ type CMsgPlayerRecentMatchInfo struct {
 	Timestamp *uint32 `protobuf:"varint,2,opt,name=timestamp" json:"timestamp,omitempty"`
 	Duration  *uint32 `protobuf:"varint,3,opt,name=duration" json:"duration,omitempty"`
 	Win       *bool   `protobuf:"varint,4,opt,name=win" json:"win,omitempty"`
-	HeroId    *uint32 `protobuf:"varint,5,opt,name=hero_id,json=heroId" json:"hero_id,omitempty"`
+	HeroId    *int32  `protobuf:"varint,5,opt,name=hero_id,json=heroId" json:"hero_id,omitempty"`
 	Kills     *uint32 `protobuf:"varint,6,opt,name=kills" json:"kills,omitempty"`
 	Deaths    *uint32 `protobuf:"varint,7,opt,name=deaths" json:"deaths,omitempty"`
 	Assists   *uint32 `protobuf:"varint,8,opt,name=assists" json:"assists,omitempty"`
@@ -6997,7 +7053,7 @@ func (x *CMsgPlayerRecentMatchInfo) GetWin() bool {
 	return false
 }
 
-func (x *CMsgPlayerRecentMatchInfo) GetHeroId() uint32 {
+func (x *CMsgPlayerRecentMatchInfo) GetHeroId() int32 {
 	if x != nil && x.HeroId != nil {
 		return *x.HeroId
 	}
@@ -7417,7 +7473,7 @@ type CMsgServerToGCRequestPlayerRecentAccomplishments struct {
 	unknownFields protoimpl.UnknownFields
 
 	AccountId *uint32 `protobuf:"varint,1,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
-	HeroId    *uint32 `protobuf:"varint,2,opt,name=hero_id,json=heroId" json:"hero_id,omitempty"`
+	HeroId    *int32  `protobuf:"varint,2,opt,name=hero_id,json=heroId" json:"hero_id,omitempty"`
 }
 
 func (x *CMsgServerToGCRequestPlayerRecentAccomplishments) Reset() {
@@ -7459,7 +7515,7 @@ func (x *CMsgServerToGCRequestPlayerRecentAccomplishments) GetAccountId() uint32
 	return 0
 }
 
-func (x *CMsgServerToGCRequestPlayerRecentAccomplishments) GetHeroId() uint32 {
+func (x *CMsgServerToGCRequestPlayerRecentAccomplishments) GetHeroId() int32 {
 	if x != nil && x.HeroId != nil {
 		return *x.HeroId
 	}
@@ -7527,7 +7583,7 @@ type CMsgArcanaVoteMatchVotes struct {
 	unknownFields protoimpl.UnknownFields
 
 	MatchId   *uint32 `protobuf:"varint,1,opt,name=match_id,json=matchId" json:"match_id,omitempty"`
-	HeroId    *uint32 `protobuf:"varint,2,opt,name=hero_id,json=heroId" json:"hero_id,omitempty"`
+	HeroId    *int32  `protobuf:"varint,2,opt,name=hero_id,json=heroId" json:"hero_id,omitempty"`
 	VoteCount *uint32 `protobuf:"varint,3,opt,name=vote_count,json=voteCount" json:"vote_count,omitempty"`
 }
 
@@ -7570,7 +7626,7 @@ func (x *CMsgArcanaVoteMatchVotes) GetMatchId() uint32 {
 	return 0
 }
 
-func (x *CMsgArcanaVoteMatchVotes) GetHeroId() uint32 {
+func (x *CMsgArcanaVoteMatchVotes) GetHeroId() int32 {
 	if x != nil && x.HeroId != nil {
 		return *x.HeroId
 	}
@@ -8697,7 +8753,7 @@ type CMsgGameDataHero struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id               *uint32                          `protobuf:"varint,1,opt,name=id" json:"id,omitempty"`
+	Id               *int32                           `protobuf:"varint,1,opt,name=id" json:"id,omitempty"`
 	Name             *string                          `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
 	OrderId          *uint32                          `protobuf:"varint,3,opt,name=order_id,json=orderId" json:"order_id,omitempty"`
 	NameLoc          *string                          `protobuf:"bytes,5,opt,name=name_loc,json=nameLoc" json:"name_loc,omitempty"`
@@ -8767,7 +8823,7 @@ func (*CMsgGameDataHero) Descriptor() ([]byte, []int) {
 	return file_dota_gcmessages_common_proto_rawDescGZIP(), []int{74}
 }
 
-func (x *CMsgGameDataHero) GetId() uint32 {
+func (x *CMsgGameDataHero) GetId() int32 {
 	if x != nil && x.Id != nil {
 		return *x.Id
 	}
@@ -9820,7 +9876,7 @@ type CMsgStickerHero struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	HeroId       *uint32 `protobuf:"varint,1,opt,name=hero_id,json=heroId" json:"hero_id,omitempty"`
+	HeroId       *int32  `protobuf:"varint,1,opt,name=hero_id,json=heroId" json:"hero_id,omitempty"`
 	ItemDefId    *uint32 `protobuf:"varint,2,opt,name=item_def_id,json=itemDefId" json:"item_def_id,omitempty"`
 	Quality      *uint32 `protobuf:"varint,3,opt,name=quality" json:"quality,omitempty"`
 	SourceItemId *uint64 `protobuf:"varint,4,opt,name=source_item_id,json=sourceItemId" json:"source_item_id,omitempty"`
@@ -9858,7 +9914,7 @@ func (*CMsgStickerHero) Descriptor() ([]byte, []int) {
 	return file_dota_gcmessages_common_proto_rawDescGZIP(), []int{87}
 }
 
-func (x *CMsgStickerHero) GetHeroId() uint32 {
+func (x *CMsgStickerHero) GetHeroId() int32 {
 	if x != nil && x.HeroId != nil {
 		return *x.HeroId
 	}
@@ -10001,7 +10057,7 @@ type CMsgHeroRoleHeroStats struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	HeroId    *uint32              `protobuf:"varint,1,opt,name=hero_id,json=heroId" json:"hero_id,omitempty"`
+	HeroId    *int32               `protobuf:"varint,1,opt,name=hero_id,json=heroId" json:"hero_id,omitempty"`
 	RoleStats []*CMsgHeroRoleStats `protobuf:"bytes,2,rep,name=role_stats,json=roleStats" json:"role_stats,omitempty"`
 }
 
@@ -10037,7 +10093,7 @@ func (*CMsgHeroRoleHeroStats) Descriptor() ([]byte, []int) {
 	return file_dota_gcmessages_common_proto_rawDescGZIP(), []int{90}
 }
 
-func (x *CMsgHeroRoleHeroStats) GetHeroId() uint32 {
+func (x *CMsgHeroRoleHeroStats) GetHeroId() int32 {
 	if x != nil && x.HeroId != nil {
 		return *x.HeroId
 	}
@@ -10579,6 +10635,77 @@ func (x *CMsgClientToGCDotaLabsFeedbackResponse) GetResponse() CMsgClientToGCDot
 	return CMsgClientToGCDotaLabsFeedbackResponse_k_eInternalError
 }
 
+type CDotaMsg_PredictionResult struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	AccountId   *uint32                                 `protobuf:"varint,1,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	MatchId     *uint64                                 `protobuf:"varint,2,opt,name=match_id,json=matchId" json:"match_id,omitempty"`
+	Correct     *bool                                   `protobuf:"varint,3,opt,name=correct" json:"correct,omitempty"`
+	Predictions []*CDotaMsg_PredictionResult_Prediction `protobuf:"bytes,4,rep,name=predictions" json:"predictions,omitempty"`
+}
+
+func (x *CDotaMsg_PredictionResult) Reset() {
+	*x = CDotaMsg_PredictionResult{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_dota_gcmessages_common_proto_msgTypes[99]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CDotaMsg_PredictionResult) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CDotaMsg_PredictionResult) ProtoMessage() {}
+
+func (x *CDotaMsg_PredictionResult) ProtoReflect() protoreflect.Message {
+	mi := &file_dota_gcmessages_common_proto_msgTypes[99]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CDotaMsg_PredictionResult.ProtoReflect.Descriptor instead.
+func (*CDotaMsg_PredictionResult) Descriptor() ([]byte, []int) {
+	return file_dota_gcmessages_common_proto_rawDescGZIP(), []int{99}
+}
+
+func (x *CDotaMsg_PredictionResult) GetAccountId() uint32 {
+	if x != nil && x.AccountId != nil {
+		return *x.AccountId
+	}
+	return 0
+}
+
+func (x *CDotaMsg_PredictionResult) GetMatchId() uint64 {
+	if x != nil && x.MatchId != nil {
+		return *x.MatchId
+	}
+	return 0
+}
+
+func (x *CDotaMsg_PredictionResult) GetCorrect() bool {
+	if x != nil && x.Correct != nil {
+		return *x.Correct
+	}
+	return false
+}
+
+func (x *CDotaMsg_PredictionResult) GetPredictions() []*CDotaMsg_PredictionResult_Prediction {
+	if x != nil {
+		return x.Predictions
+	}
+	return nil
+}
+
 type CSODOTAGameAccountClient_RoleHandicap struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -10591,7 +10718,7 @@ type CSODOTAGameAccountClient_RoleHandicap struct {
 func (x *CSODOTAGameAccountClient_RoleHandicap) Reset() {
 	*x = CSODOTAGameAccountClient_RoleHandicap{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[99]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[100]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -10604,7 +10731,7 @@ func (x *CSODOTAGameAccountClient_RoleHandicap) String() string {
 func (*CSODOTAGameAccountClient_RoleHandicap) ProtoMessage() {}
 
 func (x *CSODOTAGameAccountClient_RoleHandicap) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[99]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[100]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10647,7 +10774,7 @@ type CMsgLobbyFeaturedGamemodeProgress_AccountProgress struct {
 func (x *CMsgLobbyFeaturedGamemodeProgress_AccountProgress) Reset() {
 	*x = CMsgLobbyFeaturedGamemodeProgress_AccountProgress{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[100]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[101]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -10660,7 +10787,7 @@ func (x *CMsgLobbyFeaturedGamemodeProgress_AccountProgress) String() string {
 func (*CMsgLobbyFeaturedGamemodeProgress_AccountProgress) ProtoMessage() {}
 
 func (x *CMsgLobbyFeaturedGamemodeProgress_AccountProgress) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[100]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[101]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10710,7 +10837,7 @@ type CMsgGCGetPlayerCardItemInfoResponse_PlayerCardInfo struct {
 func (x *CMsgGCGetPlayerCardItemInfoResponse_PlayerCardInfo) Reset() {
 	*x = CMsgGCGetPlayerCardItemInfoResponse_PlayerCardInfo{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[101]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[102]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -10723,7 +10850,7 @@ func (x *CMsgGCGetPlayerCardItemInfoResponse_PlayerCardInfo) String() string {
 func (*CMsgGCGetPlayerCardItemInfoResponse_PlayerCardInfo) ProtoMessage() {}
 
 func (x *CMsgGCGetPlayerCardItemInfoResponse_PlayerCardInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[101]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[102]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10777,7 +10904,7 @@ type CMsgDOTAProfileCard_Slot struct {
 func (x *CMsgDOTAProfileCard_Slot) Reset() {
 	*x = CMsgDOTAProfileCard_Slot{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[102]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[103]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -10790,7 +10917,7 @@ func (x *CMsgDOTAProfileCard_Slot) String() string {
 func (*CMsgDOTAProfileCard_Slot) ProtoMessage() {}
 
 func (x *CMsgDOTAProfileCard_Slot) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[102]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[103]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10867,7 +10994,7 @@ type CMsgDOTAProfileCard_Slot_Trophy struct {
 func (x *CMsgDOTAProfileCard_Slot_Trophy) Reset() {
 	*x = CMsgDOTAProfileCard_Slot_Trophy{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[103]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[104]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -10880,7 +11007,7 @@ func (x *CMsgDOTAProfileCard_Slot_Trophy) String() string {
 func (*CMsgDOTAProfileCard_Slot_Trophy) ProtoMessage() {}
 
 func (x *CMsgDOTAProfileCard_Slot_Trophy) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[103]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[104]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10922,7 +11049,7 @@ type CMsgDOTAProfileCard_Slot_Stat struct {
 func (x *CMsgDOTAProfileCard_Slot_Stat) Reset() {
 	*x = CMsgDOTAProfileCard_Slot_Stat{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[104]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[105]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -10935,7 +11062,7 @@ func (x *CMsgDOTAProfileCard_Slot_Stat) String() string {
 func (*CMsgDOTAProfileCard_Slot_Stat) ProtoMessage() {}
 
 func (x *CMsgDOTAProfileCard_Slot_Stat) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[104]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[105]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10977,7 +11104,7 @@ type CMsgDOTAProfileCard_Slot_Item struct {
 func (x *CMsgDOTAProfileCard_Slot_Item) Reset() {
 	*x = CMsgDOTAProfileCard_Slot_Item{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[105]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[106]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -10990,7 +11117,7 @@ func (x *CMsgDOTAProfileCard_Slot_Item) String() string {
 func (*CMsgDOTAProfileCard_Slot_Item) ProtoMessage() {}
 
 func (x *CMsgDOTAProfileCard_Slot_Item) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[105]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[106]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11025,7 +11152,7 @@ type CMsgDOTAProfileCard_Slot_Hero struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	HeroId     *uint32 `protobuf:"varint,1,opt,name=hero_id,json=heroId" json:"hero_id,omitempty"`
+	HeroId     *int32  `protobuf:"varint,1,opt,name=hero_id,json=heroId" json:"hero_id,omitempty"`
 	HeroWins   *uint32 `protobuf:"varint,2,opt,name=hero_wins,json=heroWins" json:"hero_wins,omitempty"`
 	HeroLosses *uint32 `protobuf:"varint,3,opt,name=hero_losses,json=heroLosses" json:"hero_losses,omitempty"`
 }
@@ -11033,7 +11160,7 @@ type CMsgDOTAProfileCard_Slot_Hero struct {
 func (x *CMsgDOTAProfileCard_Slot_Hero) Reset() {
 	*x = CMsgDOTAProfileCard_Slot_Hero{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[106]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[107]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -11046,7 +11173,7 @@ func (x *CMsgDOTAProfileCard_Slot_Hero) String() string {
 func (*CMsgDOTAProfileCard_Slot_Hero) ProtoMessage() {}
 
 func (x *CMsgDOTAProfileCard_Slot_Hero) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[106]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[107]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11062,7 +11189,7 @@ func (*CMsgDOTAProfileCard_Slot_Hero) Descriptor() ([]byte, []int) {
 	return file_dota_gcmessages_common_proto_rawDescGZIP(), []int{23, 0, 3}
 }
 
-func (x *CMsgDOTAProfileCard_Slot_Hero) GetHeroId() uint32 {
+func (x *CMsgDOTAProfileCard_Slot_Hero) GetHeroId() int32 {
 	if x != nil && x.HeroId != nil {
 		return *x.HeroId
 	}
@@ -11094,7 +11221,7 @@ type CMsgDOTAProfileCard_Slot_Emoticon struct {
 func (x *CMsgDOTAProfileCard_Slot_Emoticon) Reset() {
 	*x = CMsgDOTAProfileCard_Slot_Emoticon{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[107]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[108]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -11107,7 +11234,7 @@ func (x *CMsgDOTAProfileCard_Slot_Emoticon) String() string {
 func (*CMsgDOTAProfileCard_Slot_Emoticon) ProtoMessage() {}
 
 func (x *CMsgDOTAProfileCard_Slot_Emoticon) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[107]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[108]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11141,7 +11268,7 @@ type CMsgDOTAProfileCard_Slot_Team struct {
 func (x *CMsgDOTAProfileCard_Slot_Team) Reset() {
 	*x = CMsgDOTAProfileCard_Slot_Team{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[108]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[109]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -11154,7 +11281,7 @@ func (x *CMsgDOTAProfileCard_Slot_Team) String() string {
 func (*CMsgDOTAProfileCard_Slot_Team) ProtoMessage() {}
 
 func (x *CMsgDOTAProfileCard_Slot_Team) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[108]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[109]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11198,7 +11325,7 @@ type CMsgDOTARealtimeGameStats_TeamDetails struct {
 func (x *CMsgDOTARealtimeGameStats_TeamDetails) Reset() {
 	*x = CMsgDOTARealtimeGameStats_TeamDetails{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[109]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[110]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -11211,7 +11338,7 @@ func (x *CMsgDOTARealtimeGameStats_TeamDetails) String() string {
 func (*CMsgDOTARealtimeGameStats_TeamDetails) ProtoMessage() {}
 
 func (x *CMsgDOTARealtimeGameStats_TeamDetails) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[109]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[110]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11319,7 +11446,7 @@ type CMsgDOTARealtimeGameStats_ItemDetails struct {
 func (x *CMsgDOTARealtimeGameStats_ItemDetails) Reset() {
 	*x = CMsgDOTARealtimeGameStats_ItemDetails{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[110]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[111]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -11332,7 +11459,7 @@ func (x *CMsgDOTARealtimeGameStats_ItemDetails) String() string {
 func (*CMsgDOTARealtimeGameStats_ItemDetails) ProtoMessage() {}
 
 func (x *CMsgDOTARealtimeGameStats_ItemDetails) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[110]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[111]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11398,7 +11525,7 @@ type CMsgDOTARealtimeGameStats_AbilityDetails struct {
 func (x *CMsgDOTARealtimeGameStats_AbilityDetails) Reset() {
 	*x = CMsgDOTARealtimeGameStats_AbilityDetails{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[111]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[112]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -11411,7 +11538,7 @@ func (x *CMsgDOTARealtimeGameStats_AbilityDetails) String() string {
 func (*CMsgDOTARealtimeGameStats_AbilityDetails) ProtoMessage() {}
 
 func (x *CMsgDOTARealtimeGameStats_AbilityDetails) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[111]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[112]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11475,7 +11602,7 @@ type CMsgDOTARealtimeGameStats_HeroToHeroStats struct {
 func (x *CMsgDOTARealtimeGameStats_HeroToHeroStats) Reset() {
 	*x = CMsgDOTARealtimeGameStats_HeroToHeroStats{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[112]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[113]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -11488,7 +11615,7 @@ func (x *CMsgDOTARealtimeGameStats_HeroToHeroStats) String() string {
 func (*CMsgDOTARealtimeGameStats_HeroToHeroStats) ProtoMessage() {}
 
 func (x *CMsgDOTARealtimeGameStats_HeroToHeroStats) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[112]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[113]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11536,7 +11663,7 @@ type CMsgDOTARealtimeGameStats_AbilityList struct {
 func (x *CMsgDOTARealtimeGameStats_AbilityList) Reset() {
 	*x = CMsgDOTARealtimeGameStats_AbilityList{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[113]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[114]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -11549,7 +11676,7 @@ func (x *CMsgDOTARealtimeGameStats_AbilityList) String() string {
 func (*CMsgDOTARealtimeGameStats_AbilityList) ProtoMessage() {}
 
 func (x *CMsgDOTARealtimeGameStats_AbilityList) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[113]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[114]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11581,7 +11708,7 @@ type CMsgDOTARealtimeGameStats_PlayerDetails struct {
 	Playerid         *int32                                       `protobuf:"varint,2,opt,name=playerid" json:"playerid,omitempty"`
 	Name             *string                                      `protobuf:"bytes,3,opt,name=name" json:"name,omitempty"`
 	Team             *uint32                                      `protobuf:"varint,4,opt,name=team" json:"team,omitempty"`
-	Heroid           *uint32                                      `protobuf:"varint,5,opt,name=heroid" json:"heroid,omitempty"`
+	Heroid           *int32                                       `protobuf:"varint,5,opt,name=heroid" json:"heroid,omitempty"`
 	Healthpoints     *uint32                                      `protobuf:"varint,6,opt,name=healthpoints" json:"healthpoints,omitempty"`
 	Maxhealthpoints  *uint32                                      `protobuf:"varint,7,opt,name=maxhealthpoints" json:"maxhealthpoints,omitempty"`
 	Healthregenrate  *float32                                     `protobuf:"fixed32,8,opt,name=healthregenrate" json:"healthregenrate,omitempty"`
@@ -11632,7 +11759,7 @@ type CMsgDOTARealtimeGameStats_PlayerDetails struct {
 func (x *CMsgDOTARealtimeGameStats_PlayerDetails) Reset() {
 	*x = CMsgDOTARealtimeGameStats_PlayerDetails{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[114]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[115]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -11645,7 +11772,7 @@ func (x *CMsgDOTARealtimeGameStats_PlayerDetails) String() string {
 func (*CMsgDOTARealtimeGameStats_PlayerDetails) ProtoMessage() {}
 
 func (x *CMsgDOTARealtimeGameStats_PlayerDetails) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[114]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[115]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11689,7 +11816,7 @@ func (x *CMsgDOTARealtimeGameStats_PlayerDetails) GetTeam() uint32 {
 	return 0
 }
 
-func (x *CMsgDOTARealtimeGameStats_PlayerDetails) GetHeroid() uint32 {
+func (x *CMsgDOTARealtimeGameStats_PlayerDetails) GetHeroid() int32 {
 	if x != nil && x.Heroid != nil {
 		return *x.Heroid
 	}
@@ -12029,7 +12156,7 @@ type CMsgDOTARealtimeGameStats_BuildingDetails struct {
 func (x *CMsgDOTARealtimeGameStats_BuildingDetails) Reset() {
 	*x = CMsgDOTARealtimeGameStats_BuildingDetails{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[115]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[116]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -12042,7 +12169,7 @@ func (x *CMsgDOTARealtimeGameStats_BuildingDetails) String() string {
 func (*CMsgDOTARealtimeGameStats_BuildingDetails) ProtoMessage() {}
 
 func (x *CMsgDOTARealtimeGameStats_BuildingDetails) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[115]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[116]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12127,7 +12254,7 @@ type CMsgDOTARealtimeGameStats_KillDetails struct {
 func (x *CMsgDOTARealtimeGameStats_KillDetails) Reset() {
 	*x = CMsgDOTARealtimeGameStats_KillDetails{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[116]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[117]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -12140,7 +12267,7 @@ func (x *CMsgDOTARealtimeGameStats_KillDetails) String() string {
 func (*CMsgDOTARealtimeGameStats_KillDetails) ProtoMessage() {}
 
 func (x *CMsgDOTARealtimeGameStats_KillDetails) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[116]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[117]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12188,7 +12315,7 @@ type CMsgDOTARealtimeGameStats_BroadcasterDetails struct {
 func (x *CMsgDOTARealtimeGameStats_BroadcasterDetails) Reset() {
 	*x = CMsgDOTARealtimeGameStats_BroadcasterDetails{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[117]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[118]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -12201,7 +12328,7 @@ func (x *CMsgDOTARealtimeGameStats_BroadcasterDetails) String() string {
 func (*CMsgDOTARealtimeGameStats_BroadcasterDetails) ProtoMessage() {}
 
 func (x *CMsgDOTARealtimeGameStats_BroadcasterDetails) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[117]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[118]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12229,14 +12356,14 @@ type CMsgDOTARealtimeGameStats_PickBanDetails struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Hero *uint32 `protobuf:"varint,1,opt,name=hero" json:"hero,omitempty"`
+	Hero *int32  `protobuf:"varint,1,opt,name=hero" json:"hero,omitempty"`
 	Team *uint32 `protobuf:"varint,2,opt,name=team" json:"team,omitempty"`
 }
 
 func (x *CMsgDOTARealtimeGameStats_PickBanDetails) Reset() {
 	*x = CMsgDOTARealtimeGameStats_PickBanDetails{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[118]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[119]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -12249,7 +12376,7 @@ func (x *CMsgDOTARealtimeGameStats_PickBanDetails) String() string {
 func (*CMsgDOTARealtimeGameStats_PickBanDetails) ProtoMessage() {}
 
 func (x *CMsgDOTARealtimeGameStats_PickBanDetails) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[118]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[119]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12265,7 +12392,7 @@ func (*CMsgDOTARealtimeGameStats_PickBanDetails) Descriptor() ([]byte, []int) {
 	return file_dota_gcmessages_common_proto_rawDescGZIP(), []int{28, 9}
 }
 
-func (x *CMsgDOTARealtimeGameStats_PickBanDetails) GetHero() uint32 {
+func (x *CMsgDOTARealtimeGameStats_PickBanDetails) GetHero() int32 {
 	if x != nil && x.Hero != nil {
 		return *x.Hero
 	}
@@ -12309,7 +12436,7 @@ type CMsgDOTARealtimeGameStats_MatchDetails struct {
 func (x *CMsgDOTARealtimeGameStats_MatchDetails) Reset() {
 	*x = CMsgDOTARealtimeGameStats_MatchDetails{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[119]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[120]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -12322,7 +12449,7 @@ func (x *CMsgDOTARealtimeGameStats_MatchDetails) String() string {
 func (*CMsgDOTARealtimeGameStats_MatchDetails) ProtoMessage() {}
 
 func (x *CMsgDOTARealtimeGameStats_MatchDetails) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[119]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[120]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12494,7 +12621,7 @@ type CMsgDOTARealtimeGameStats_GraphData struct {
 func (x *CMsgDOTARealtimeGameStats_GraphData) Reset() {
 	*x = CMsgDOTARealtimeGameStats_GraphData{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[120]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[121]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -12507,7 +12634,7 @@ func (x *CMsgDOTARealtimeGameStats_GraphData) String() string {
 func (*CMsgDOTARealtimeGameStats_GraphData) ProtoMessage() {}
 
 func (x *CMsgDOTARealtimeGameStats_GraphData) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[120]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[121]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12576,7 +12703,7 @@ type CMsgDOTARealtimeGameStats_GraphData_LocationStats struct {
 func (x *CMsgDOTARealtimeGameStats_GraphData_LocationStats) Reset() {
 	*x = CMsgDOTARealtimeGameStats_GraphData_LocationStats{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[121]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[122]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -12589,7 +12716,7 @@ func (x *CMsgDOTARealtimeGameStats_GraphData_LocationStats) String() string {
 func (*CMsgDOTARealtimeGameStats_GraphData_LocationStats) ProtoMessage() {}
 
 func (x *CMsgDOTARealtimeGameStats_GraphData_LocationStats) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[121]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[122]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12623,7 +12750,7 @@ type CMsgDOTARealtimeGameStats_GraphData_TeamLocationStats struct {
 func (x *CMsgDOTARealtimeGameStats_GraphData_TeamLocationStats) Reset() {
 	*x = CMsgDOTARealtimeGameStats_GraphData_TeamLocationStats{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[122]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[123]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -12636,7 +12763,7 @@ func (x *CMsgDOTARealtimeGameStats_GraphData_TeamLocationStats) String() string 
 func (*CMsgDOTARealtimeGameStats_GraphData_TeamLocationStats) ProtoMessage() {}
 
 func (x *CMsgDOTARealtimeGameStats_GraphData_TeamLocationStats) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[122]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[123]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12678,7 +12805,7 @@ type CMsgDOTARealtimeGameStatsTerse_TeamDetails struct {
 func (x *CMsgDOTARealtimeGameStatsTerse_TeamDetails) Reset() {
 	*x = CMsgDOTARealtimeGameStatsTerse_TeamDetails{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[123]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[124]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -12691,7 +12818,7 @@ func (x *CMsgDOTARealtimeGameStatsTerse_TeamDetails) String() string {
 func (*CMsgDOTARealtimeGameStatsTerse_TeamDetails) ProtoMessage() {}
 
 func (x *CMsgDOTARealtimeGameStatsTerse_TeamDetails) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[123]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[124]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12779,7 +12906,7 @@ type CMsgDOTARealtimeGameStatsTerse_PlayerDetails struct {
 	Playerid     *int32   `protobuf:"varint,2,opt,name=playerid" json:"playerid,omitempty"`
 	Name         *string  `protobuf:"bytes,3,opt,name=name" json:"name,omitempty"`
 	Team         *uint32  `protobuf:"varint,4,opt,name=team" json:"team,omitempty"`
-	Heroid       *uint32  `protobuf:"varint,5,opt,name=heroid" json:"heroid,omitempty"`
+	Heroid       *int32   `protobuf:"varint,5,opt,name=heroid" json:"heroid,omitempty"`
 	Level        *uint32  `protobuf:"varint,6,opt,name=level" json:"level,omitempty"`
 	KillCount    *uint32  `protobuf:"varint,7,opt,name=kill_count,json=killCount" json:"kill_count,omitempty"`
 	DeathCount   *uint32  `protobuf:"varint,8,opt,name=death_count,json=deathCount" json:"death_count,omitempty"`
@@ -12798,7 +12925,7 @@ type CMsgDOTARealtimeGameStatsTerse_PlayerDetails struct {
 func (x *CMsgDOTARealtimeGameStatsTerse_PlayerDetails) Reset() {
 	*x = CMsgDOTARealtimeGameStatsTerse_PlayerDetails{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[124]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[125]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -12811,7 +12938,7 @@ func (x *CMsgDOTARealtimeGameStatsTerse_PlayerDetails) String() string {
 func (*CMsgDOTARealtimeGameStatsTerse_PlayerDetails) ProtoMessage() {}
 
 func (x *CMsgDOTARealtimeGameStatsTerse_PlayerDetails) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[124]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[125]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12855,7 +12982,7 @@ func (x *CMsgDOTARealtimeGameStatsTerse_PlayerDetails) GetTeam() uint32 {
 	return 0
 }
 
-func (x *CMsgDOTARealtimeGameStatsTerse_PlayerDetails) GetHeroid() uint32 {
+func (x *CMsgDOTARealtimeGameStatsTerse_PlayerDetails) GetHeroid() int32 {
 	if x != nil && x.Heroid != nil {
 		return *x.Heroid
 	}
@@ -12971,7 +13098,7 @@ type CMsgDOTARealtimeGameStatsTerse_BuildingDetails struct {
 func (x *CMsgDOTARealtimeGameStatsTerse_BuildingDetails) Reset() {
 	*x = CMsgDOTARealtimeGameStatsTerse_BuildingDetails{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[125]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[126]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -12984,7 +13111,7 @@ func (x *CMsgDOTARealtimeGameStatsTerse_BuildingDetails) String() string {
 func (*CMsgDOTARealtimeGameStatsTerse_BuildingDetails) ProtoMessage() {}
 
 func (x *CMsgDOTARealtimeGameStatsTerse_BuildingDetails) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[125]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[126]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13061,14 +13188,14 @@ type CMsgDOTARealtimeGameStatsTerse_PickBanDetails struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Hero *uint32 `protobuf:"varint,1,opt,name=hero" json:"hero,omitempty"`
+	Hero *int32  `protobuf:"varint,1,opt,name=hero" json:"hero,omitempty"`
 	Team *uint32 `protobuf:"varint,2,opt,name=team" json:"team,omitempty"`
 }
 
 func (x *CMsgDOTARealtimeGameStatsTerse_PickBanDetails) Reset() {
 	*x = CMsgDOTARealtimeGameStatsTerse_PickBanDetails{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[126]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[127]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -13081,7 +13208,7 @@ func (x *CMsgDOTARealtimeGameStatsTerse_PickBanDetails) String() string {
 func (*CMsgDOTARealtimeGameStatsTerse_PickBanDetails) ProtoMessage() {}
 
 func (x *CMsgDOTARealtimeGameStatsTerse_PickBanDetails) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[126]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[127]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13097,7 +13224,7 @@ func (*CMsgDOTARealtimeGameStatsTerse_PickBanDetails) Descriptor() ([]byte, []in
 	return file_dota_gcmessages_common_proto_rawDescGZIP(), []int{29, 3}
 }
 
-func (x *CMsgDOTARealtimeGameStatsTerse_PickBanDetails) GetHero() uint32 {
+func (x *CMsgDOTARealtimeGameStatsTerse_PickBanDetails) GetHero() int32 {
 	if x != nil && x.Hero != nil {
 		return *x.Hero
 	}
@@ -13134,7 +13261,7 @@ type CMsgDOTARealtimeGameStatsTerse_MatchDetails struct {
 func (x *CMsgDOTARealtimeGameStatsTerse_MatchDetails) Reset() {
 	*x = CMsgDOTARealtimeGameStatsTerse_MatchDetails{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[127]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[128]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -13147,7 +13274,7 @@ func (x *CMsgDOTARealtimeGameStatsTerse_MatchDetails) String() string {
 func (*CMsgDOTARealtimeGameStatsTerse_MatchDetails) ProtoMessage() {}
 
 func (x *CMsgDOTARealtimeGameStatsTerse_MatchDetails) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[127]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[128]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13265,7 +13392,7 @@ type CMsgDOTARealtimeGameStatsTerse_GraphData struct {
 func (x *CMsgDOTARealtimeGameStatsTerse_GraphData) Reset() {
 	*x = CMsgDOTARealtimeGameStatsTerse_GraphData{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[128]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[129]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -13278,7 +13405,7 @@ func (x *CMsgDOTARealtimeGameStatsTerse_GraphData) String() string {
 func (*CMsgDOTARealtimeGameStatsTerse_GraphData) ProtoMessage() {}
 
 func (x *CMsgDOTARealtimeGameStatsTerse_GraphData) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[128]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[129]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13313,7 +13440,7 @@ type CMsgInGamePrediction_QueryKeyValues struct {
 func (x *CMsgInGamePrediction_QueryKeyValues) Reset() {
 	*x = CMsgInGamePrediction_QueryKeyValues{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[129]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[130]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -13326,7 +13453,7 @@ func (x *CMsgInGamePrediction_QueryKeyValues) String() string {
 func (*CMsgInGamePrediction_QueryKeyValues) ProtoMessage() {}
 
 func (x *CMsgInGamePrediction_QueryKeyValues) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[129]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[130]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13384,7 +13511,7 @@ type CMsgDOTASeasonPredictions_Prediction struct {
 func (x *CMsgDOTASeasonPredictions_Prediction) Reset() {
 	*x = CMsgDOTASeasonPredictions_Prediction{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[130]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[131]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -13397,7 +13524,7 @@ func (x *CMsgDOTASeasonPredictions_Prediction) String() string {
 func (*CMsgDOTASeasonPredictions_Prediction) ProtoMessage() {}
 
 func (x *CMsgDOTASeasonPredictions_Prediction) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[130]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[131]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13550,7 +13677,7 @@ type CMsgDOTASeasonPredictions_Prediction_Answers struct {
 func (x *CMsgDOTASeasonPredictions_Prediction_Answers) Reset() {
 	*x = CMsgDOTASeasonPredictions_Prediction_Answers{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[131]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[132]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -13563,7 +13690,7 @@ func (x *CMsgDOTASeasonPredictions_Prediction_Answers) String() string {
 func (*CMsgDOTASeasonPredictions_Prediction_Answers) ProtoMessage() {}
 
 func (x *CMsgDOTASeasonPredictions_Prediction_Answers) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[131]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[132]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13598,7 +13725,7 @@ type CMsgAvailablePredictions_MatchPrediction struct {
 func (x *CMsgAvailablePredictions_MatchPrediction) Reset() {
 	*x = CMsgAvailablePredictions_MatchPrediction{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[132]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[133]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -13611,7 +13738,7 @@ func (x *CMsgAvailablePredictions_MatchPrediction) String() string {
 func (*CMsgAvailablePredictions_MatchPrediction) ProtoMessage() {}
 
 func (x *CMsgAvailablePredictions_MatchPrediction) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[132]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[133]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13653,7 +13780,7 @@ type CMsgLeagueWatchedGames_Series struct {
 func (x *CMsgLeagueWatchedGames_Series) Reset() {
 	*x = CMsgLeagueWatchedGames_Series{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[133]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[134]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -13666,7 +13793,7 @@ func (x *CMsgLeagueWatchedGames_Series) String() string {
 func (*CMsgLeagueWatchedGames_Series) ProtoMessage() {}
 
 func (x *CMsgLeagueWatchedGames_Series) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[133]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[134]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13708,7 +13835,7 @@ type CMsgLeagueWatchedGames_League struct {
 func (x *CMsgLeagueWatchedGames_League) Reset() {
 	*x = CMsgLeagueWatchedGames_League{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[134]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[135]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -13721,7 +13848,7 @@ func (x *CMsgLeagueWatchedGames_League) String() string {
 func (*CMsgLeagueWatchedGames_League) ProtoMessage() {}
 
 func (x *CMsgLeagueWatchedGames_League) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[134]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[135]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13758,7 +13885,7 @@ type CMsgDOTAMatch_Player struct {
 
 	AccountId                 *uint32                                    `protobuf:"varint,1,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
 	PlayerSlot                *uint32                                    `protobuf:"varint,2,opt,name=player_slot,json=playerSlot" json:"player_slot,omitempty"`
-	HeroId                    *uint32                                    `protobuf:"varint,3,opt,name=hero_id,json=heroId" json:"hero_id,omitempty"`
+	HeroId                    *int32                                     `protobuf:"varint,3,opt,name=hero_id,json=heroId" json:"hero_id,omitempty"`
 	Item_0                    *int32                                     `protobuf:"varint,4,opt,name=item_0,json=item0" json:"item_0,omitempty"`
 	Item_1                    *int32                                     `protobuf:"varint,5,opt,name=item_1,json=item1" json:"item_1,omitempty"`
 	Item_2                    *int32                                     `protobuf:"varint,6,opt,name=item_2,json=item2" json:"item_2,omitempty"`
@@ -13835,7 +13962,7 @@ type CMsgDOTAMatch_Player struct {
 func (x *CMsgDOTAMatch_Player) Reset() {
 	*x = CMsgDOTAMatch_Player{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[135]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[136]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -13848,7 +13975,7 @@ func (x *CMsgDOTAMatch_Player) String() string {
 func (*CMsgDOTAMatch_Player) ProtoMessage() {}
 
 func (x *CMsgDOTAMatch_Player) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[135]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[136]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13878,7 +14005,7 @@ func (x *CMsgDOTAMatch_Player) GetPlayerSlot() uint32 {
 	return 0
 }
 
-func (x *CMsgDOTAMatch_Player) GetHeroId() uint32 {
+func (x *CMsgDOTAMatch_Player) GetHeroId() int32 {
 	if x != nil && x.HeroId != nil {
 		return *x.HeroId
 	}
@@ -14394,7 +14521,7 @@ type CMsgDOTAMatch_BroadcasterInfo struct {
 func (x *CMsgDOTAMatch_BroadcasterInfo) Reset() {
 	*x = CMsgDOTAMatch_BroadcasterInfo{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[136]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[137]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -14407,7 +14534,7 @@ func (x *CMsgDOTAMatch_BroadcasterInfo) String() string {
 func (*CMsgDOTAMatch_BroadcasterInfo) ProtoMessage() {}
 
 func (x *CMsgDOTAMatch_BroadcasterInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[136]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[137]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14451,7 +14578,7 @@ type CMsgDOTAMatch_BroadcasterChannel struct {
 func (x *CMsgDOTAMatch_BroadcasterChannel) Reset() {
 	*x = CMsgDOTAMatch_BroadcasterChannel{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[137]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[138]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -14464,7 +14591,7 @@ func (x *CMsgDOTAMatch_BroadcasterChannel) String() string {
 func (*CMsgDOTAMatch_BroadcasterChannel) ProtoMessage() {}
 
 func (x *CMsgDOTAMatch_BroadcasterChannel) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[137]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[138]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14524,7 +14651,7 @@ type CMsgDOTAMatch_Coach struct {
 func (x *CMsgDOTAMatch_Coach) Reset() {
 	*x = CMsgDOTAMatch_Coach{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[138]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[139]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -14537,7 +14664,7 @@ func (x *CMsgDOTAMatch_Coach) String() string {
 func (*CMsgDOTAMatch_Coach) ProtoMessage() {}
 
 func (x *CMsgDOTAMatch_Coach) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[138]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[139]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14607,7 +14734,7 @@ type CMsgDOTAMatch_CustomGameData struct {
 func (x *CMsgDOTAMatch_CustomGameData) Reset() {
 	*x = CMsgDOTAMatch_CustomGameData{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[139]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[140]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -14620,7 +14747,7 @@ func (x *CMsgDOTAMatch_CustomGameData) String() string {
 func (*CMsgDOTAMatch_CustomGameData) ProtoMessage() {}
 
 func (x *CMsgDOTAMatch_CustomGameData) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[139]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[140]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14662,7 +14789,7 @@ type CMsgDOTAMatch_Player_CustomGameData struct {
 func (x *CMsgDOTAMatch_Player_CustomGameData) Reset() {
 	*x = CMsgDOTAMatch_Player_CustomGameData{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[140]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[141]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -14675,7 +14802,7 @@ func (x *CMsgDOTAMatch_Player_CustomGameData) String() string {
 func (*CMsgDOTAMatch_Player_CustomGameData) ProtoMessage() {}
 
 func (x *CMsgDOTAMatch_Player_CustomGameData) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[140]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[141]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14718,7 +14845,7 @@ type CMsgDOTAMatch_Player_HeroDamageReceived struct {
 func (x *CMsgDOTAMatch_Player_HeroDamageReceived) Reset() {
 	*x = CMsgDOTAMatch_Player_HeroDamageReceived{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[141]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[142]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -14731,7 +14858,7 @@ func (x *CMsgDOTAMatch_Player_HeroDamageReceived) String() string {
 func (*CMsgDOTAMatch_Player_HeroDamageReceived) ProtoMessage() {}
 
 func (x *CMsgDOTAMatch_Player_HeroDamageReceived) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[141]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[142]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14780,7 +14907,7 @@ type CMsgPlayerCard_StatModifier struct {
 func (x *CMsgPlayerCard_StatModifier) Reset() {
 	*x = CMsgPlayerCard_StatModifier{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[142]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[143]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -14793,7 +14920,7 @@ func (x *CMsgPlayerCard_StatModifier) String() string {
 func (*CMsgPlayerCard_StatModifier) ProtoMessage() {}
 
 func (x *CMsgPlayerCard_StatModifier) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[142]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[143]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14829,7 +14956,7 @@ type CMsgDOTABotDebugInfo_Bot struct {
 	unknownFields protoimpl.UnknownFields
 
 	PlayerOwnerId *int32                           `protobuf:"varint,1,opt,name=player_owner_id,json=playerOwnerId" json:"player_owner_id,omitempty"`
-	HeroId        *uint32                          `protobuf:"varint,2,opt,name=hero_id,json=heroId" json:"hero_id,omitempty"`
+	HeroId        *int32                           `protobuf:"varint,2,opt,name=hero_id,json=heroId" json:"hero_id,omitempty"`
 	Difficulty    *uint32                          `protobuf:"varint,3,opt,name=difficulty" json:"difficulty,omitempty"`
 	PowerCurrent  *uint32                          `protobuf:"varint,4,opt,name=power_current,json=powerCurrent" json:"power_current,omitempty"`
 	PowerMax      *uint32                          `protobuf:"varint,5,opt,name=power_max,json=powerMax" json:"power_max,omitempty"`
@@ -14845,7 +14972,7 @@ type CMsgDOTABotDebugInfo_Bot struct {
 func (x *CMsgDOTABotDebugInfo_Bot) Reset() {
 	*x = CMsgDOTABotDebugInfo_Bot{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[143]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[144]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -14858,7 +14985,7 @@ func (x *CMsgDOTABotDebugInfo_Bot) String() string {
 func (*CMsgDOTABotDebugInfo_Bot) ProtoMessage() {}
 
 func (x *CMsgDOTABotDebugInfo_Bot) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[143]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[144]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14881,7 +15008,7 @@ func (x *CMsgDOTABotDebugInfo_Bot) GetPlayerOwnerId() int32 {
 	return 0
 }
 
-func (x *CMsgDOTABotDebugInfo_Bot) GetHeroId() uint32 {
+func (x *CMsgDOTABotDebugInfo_Bot) GetHeroId() int32 {
 	if x != nil && x.HeroId != nil {
 		return *x.HeroId
 	}
@@ -14974,7 +15101,7 @@ type CMsgDOTABotDebugInfo_Bot_Mode struct {
 func (x *CMsgDOTABotDebugInfo_Bot_Mode) Reset() {
 	*x = CMsgDOTABotDebugInfo_Bot_Mode{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[144]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[145]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -14987,7 +15114,7 @@ func (x *CMsgDOTABotDebugInfo_Bot_Mode) String() string {
 func (*CMsgDOTABotDebugInfo_Bot_Mode) ProtoMessage() {}
 
 func (x *CMsgDOTABotDebugInfo_Bot_Mode) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[144]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[145]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15057,7 +15184,7 @@ type CMsgDOTABotDebugInfo_Bot_Action struct {
 func (x *CMsgDOTABotDebugInfo_Bot_Action) Reset() {
 	*x = CMsgDOTABotDebugInfo_Bot_Action{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[145]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[146]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -15070,7 +15197,7 @@ func (x *CMsgDOTABotDebugInfo_Bot_Action) String() string {
 func (*CMsgDOTABotDebugInfo_Bot_Action) ProtoMessage() {}
 
 func (x *CMsgDOTABotDebugInfo_Bot_Action) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[145]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[146]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15114,7 +15241,7 @@ type CMsgMatchTips_SingleTip struct {
 func (x *CMsgMatchTips_SingleTip) Reset() {
 	*x = CMsgMatchTips_SingleTip{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[146]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[147]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -15127,7 +15254,7 @@ func (x *CMsgMatchTips_SingleTip) String() string {
 func (*CMsgMatchTips_SingleTip) ProtoMessage() {}
 
 func (x *CMsgMatchTips_SingleTip) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[146]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[147]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15177,7 +15304,7 @@ type CMsgDOTAMatchMinimal_Player struct {
 	unknownFields protoimpl.UnknownFields
 
 	AccountId  *uint32       `protobuf:"varint,1,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
-	HeroId     *uint32       `protobuf:"varint,2,opt,name=hero_id,json=heroId" json:"hero_id,omitempty"`
+	HeroId     *int32        `protobuf:"varint,2,opt,name=hero_id,json=heroId" json:"hero_id,omitempty"`
 	Kills      *uint32       `protobuf:"varint,3,opt,name=kills" json:"kills,omitempty"`
 	Deaths     *uint32       `protobuf:"varint,4,opt,name=deaths" json:"deaths,omitempty"`
 	Assists    *uint32       `protobuf:"varint,5,opt,name=assists" json:"assists,omitempty"`
@@ -15191,7 +15318,7 @@ type CMsgDOTAMatchMinimal_Player struct {
 func (x *CMsgDOTAMatchMinimal_Player) Reset() {
 	*x = CMsgDOTAMatchMinimal_Player{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[147]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[148]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -15204,7 +15331,7 @@ func (x *CMsgDOTAMatchMinimal_Player) String() string {
 func (*CMsgDOTAMatchMinimal_Player) ProtoMessage() {}
 
 func (x *CMsgDOTAMatchMinimal_Player) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[147]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[148]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15227,7 +15354,7 @@ func (x *CMsgDOTAMatchMinimal_Player) GetAccountId() uint32 {
 	return 0
 }
 
-func (x *CMsgDOTAMatchMinimal_Player) GetHeroId() uint32 {
+func (x *CMsgDOTAMatchMinimal_Player) GetHeroId() int32 {
 	if x != nil && x.HeroId != nil {
 		return *x.HeroId
 	}
@@ -15315,7 +15442,7 @@ type CMsgDOTAMatchMinimal_Tourney struct {
 func (x *CMsgDOTAMatchMinimal_Tourney) Reset() {
 	*x = CMsgDOTAMatchMinimal_Tourney{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[148]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[149]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -15328,7 +15455,7 @@ func (x *CMsgDOTAMatchMinimal_Tourney) String() string {
 func (*CMsgDOTAMatchMinimal_Tourney) ProtoMessage() {}
 
 func (x *CMsgDOTAMatchMinimal_Tourney) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[148]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[149]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15461,7 +15588,7 @@ type CMsgMatchConsumableUsage_PlayerUsage struct {
 func (x *CMsgMatchConsumableUsage_PlayerUsage) Reset() {
 	*x = CMsgMatchConsumableUsage_PlayerUsage{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[149]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[150]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -15474,7 +15601,7 @@ func (x *CMsgMatchConsumableUsage_PlayerUsage) String() string {
 func (*CMsgMatchConsumableUsage_PlayerUsage) ProtoMessage() {}
 
 func (x *CMsgMatchConsumableUsage_PlayerUsage) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[149]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[150]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15516,7 +15643,7 @@ type CMsgMatchEventActionGrants_PlayerGrants struct {
 func (x *CMsgMatchEventActionGrants_PlayerGrants) Reset() {
 	*x = CMsgMatchEventActionGrants_PlayerGrants{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[150]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[151]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -15529,7 +15656,7 @@ func (x *CMsgMatchEventActionGrants_PlayerGrants) String() string {
 func (*CMsgMatchEventActionGrants_PlayerGrants) ProtoMessage() {}
 
 func (x *CMsgMatchEventActionGrants_PlayerGrants) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[150]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[151]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15571,7 +15698,7 @@ type CMsgCustomGameWhitelistForEdit_WhitelistEntry struct {
 func (x *CMsgCustomGameWhitelistForEdit_WhitelistEntry) Reset() {
 	*x = CMsgCustomGameWhitelistForEdit_WhitelistEntry{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[151]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[152]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -15584,7 +15711,7 @@ func (x *CMsgCustomGameWhitelistForEdit_WhitelistEntry) String() string {
 func (*CMsgCustomGameWhitelistForEdit_WhitelistEntry) ProtoMessage() {}
 
 func (x *CMsgCustomGameWhitelistForEdit_WhitelistEntry) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[151]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[152]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15631,7 +15758,7 @@ type CMsgGCtoGCAssociatedExploiterAccountInfoResponse_Account struct {
 func (x *CMsgGCtoGCAssociatedExploiterAccountInfoResponse_Account) Reset() {
 	*x = CMsgGCtoGCAssociatedExploiterAccountInfoResponse_Account{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[152]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[153]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -15644,7 +15771,7 @@ func (x *CMsgGCtoGCAssociatedExploiterAccountInfoResponse_Account) String() stri
 func (*CMsgGCtoGCAssociatedExploiterAccountInfoResponse_Account) ProtoMessage() {}
 
 func (x *CMsgGCtoGCAssociatedExploiterAccountInfoResponse_Account) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[152]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[153]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15716,7 +15843,7 @@ type CMsgPullTabsData_Slot struct {
 
 	EventId  *uint32 `protobuf:"varint,1,opt,name=event_id,json=eventId" json:"event_id,omitempty"`
 	BoardId  *uint32 `protobuf:"varint,2,opt,name=board_id,json=boardId" json:"board_id,omitempty"`
-	HeroId   *uint32 `protobuf:"varint,3,opt,name=hero_id,json=heroId" json:"hero_id,omitempty"`
+	HeroId   *int32  `protobuf:"varint,3,opt,name=hero_id,json=heroId" json:"hero_id,omitempty"`
 	ActionId *uint32 `protobuf:"varint,4,opt,name=action_id,json=actionId" json:"action_id,omitempty"`
 	Redeemed *bool   `protobuf:"varint,5,opt,name=redeemed" json:"redeemed,omitempty"`
 }
@@ -15724,7 +15851,7 @@ type CMsgPullTabsData_Slot struct {
 func (x *CMsgPullTabsData_Slot) Reset() {
 	*x = CMsgPullTabsData_Slot{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[153]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[154]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -15737,7 +15864,7 @@ func (x *CMsgPullTabsData_Slot) String() string {
 func (*CMsgPullTabsData_Slot) ProtoMessage() {}
 
 func (x *CMsgPullTabsData_Slot) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[153]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[154]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15767,7 +15894,7 @@ func (x *CMsgPullTabsData_Slot) GetBoardId() uint32 {
 	return 0
 }
 
-func (x *CMsgPullTabsData_Slot) GetHeroId() uint32 {
+func (x *CMsgPullTabsData_Slot) GetHeroId() int32 {
 	if x != nil && x.HeroId != nil {
 		return *x.HeroId
 	}
@@ -15795,13 +15922,13 @@ type CMsgPullTabsData_Jackpot struct {
 
 	BoardId  *uint32 `protobuf:"varint,1,opt,name=board_id,json=boardId" json:"board_id,omitempty"`
 	ActionId *uint32 `protobuf:"varint,2,opt,name=action_id,json=actionId" json:"action_id,omitempty"`
-	HeroId   *uint32 `protobuf:"varint,3,opt,name=hero_id,json=heroId" json:"hero_id,omitempty"`
+	HeroId   *int32  `protobuf:"varint,3,opt,name=hero_id,json=heroId" json:"hero_id,omitempty"`
 }
 
 func (x *CMsgPullTabsData_Jackpot) Reset() {
 	*x = CMsgPullTabsData_Jackpot{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[154]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[155]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -15814,7 +15941,7 @@ func (x *CMsgPullTabsData_Jackpot) String() string {
 func (*CMsgPullTabsData_Jackpot) ProtoMessage() {}
 
 func (x *CMsgPullTabsData_Jackpot) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[154]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[155]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15844,7 +15971,7 @@ func (x *CMsgPullTabsData_Jackpot) GetActionId() uint32 {
 	return 0
 }
 
-func (x *CMsgPullTabsData_Jackpot) GetHeroId() uint32 {
+func (x *CMsgPullTabsData_Jackpot) GetHeroId() int32 {
 	if x != nil && x.HeroId != nil {
 		return *x.HeroId
 	}
@@ -15857,14 +15984,14 @@ type CMsgUnderDraftData_BenchSlot struct {
 	unknownFields protoimpl.UnknownFields
 
 	SlotId *uint32 `protobuf:"varint,1,opt,name=slot_id,json=slotId" json:"slot_id,omitempty"`
-	HeroId *uint32 `protobuf:"varint,2,opt,name=hero_id,json=heroId" json:"hero_id,omitempty"`
+	HeroId *int32  `protobuf:"varint,2,opt,name=hero_id,json=heroId" json:"hero_id,omitempty"`
 	Stars  *uint32 `protobuf:"varint,3,opt,name=stars" json:"stars,omitempty"`
 }
 
 func (x *CMsgUnderDraftData_BenchSlot) Reset() {
 	*x = CMsgUnderDraftData_BenchSlot{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[155]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[156]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -15877,7 +16004,7 @@ func (x *CMsgUnderDraftData_BenchSlot) String() string {
 func (*CMsgUnderDraftData_BenchSlot) ProtoMessage() {}
 
 func (x *CMsgUnderDraftData_BenchSlot) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[155]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[156]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15900,7 +16027,7 @@ func (x *CMsgUnderDraftData_BenchSlot) GetSlotId() uint32 {
 	return 0
 }
 
-func (x *CMsgUnderDraftData_BenchSlot) GetHeroId() uint32 {
+func (x *CMsgUnderDraftData_BenchSlot) GetHeroId() int32 {
 	if x != nil && x.HeroId != nil {
 		return *x.HeroId
 	}
@@ -15920,14 +16047,14 @@ type CMsgUnderDraftData_ShopSlot struct {
 	unknownFields protoimpl.UnknownFields
 
 	SlotId          *uint32 `protobuf:"varint,1,opt,name=slot_id,json=slotId" json:"slot_id,omitempty"`
-	HeroId          *uint32 `protobuf:"varint,2,opt,name=hero_id,json=heroId" json:"hero_id,omitempty"`
+	HeroId          *int32  `protobuf:"varint,2,opt,name=hero_id,json=heroId" json:"hero_id,omitempty"`
 	IsSpecialReward *bool   `protobuf:"varint,3,opt,name=is_special_reward,json=isSpecialReward" json:"is_special_reward,omitempty"`
 }
 
 func (x *CMsgUnderDraftData_ShopSlot) Reset() {
 	*x = CMsgUnderDraftData_ShopSlot{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[156]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[157]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -15940,7 +16067,7 @@ func (x *CMsgUnderDraftData_ShopSlot) String() string {
 func (*CMsgUnderDraftData_ShopSlot) ProtoMessage() {}
 
 func (x *CMsgUnderDraftData_ShopSlot) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[156]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[157]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15963,7 +16090,7 @@ func (x *CMsgUnderDraftData_ShopSlot) GetSlotId() uint32 {
 	return 0
 }
 
-func (x *CMsgUnderDraftData_ShopSlot) GetHeroId() uint32 {
+func (x *CMsgUnderDraftData_ShopSlot) GetHeroId() int32 {
 	if x != nil && x.HeroId != nil {
 		return *x.HeroId
 	}
@@ -15993,7 +16120,7 @@ type CMsgGameDataHero_Facet struct {
 func (x *CMsgGameDataHero_Facet) Reset() {
 	*x = CMsgGameDataHero_Facet{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[157]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[158]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -16006,7 +16133,7 @@ func (x *CMsgGameDataHero_Facet) String() string {
 func (*CMsgGameDataHero_Facet) ProtoMessage() {}
 
 func (x *CMsgGameDataHero_Facet) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[157]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[158]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -16069,7 +16196,7 @@ type CMsgGameDataHeroList_HeroInfo struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id             *uint32 `protobuf:"varint,1,opt,name=id" json:"id,omitempty"`
+	Id             *int32  `protobuf:"varint,1,opt,name=id" json:"id,omitempty"`
 	Name           *string `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
 	NameLoc        *string `protobuf:"bytes,3,opt,name=name_loc,json=nameLoc" json:"name_loc,omitempty"`
 	NameEnglishLoc *string `protobuf:"bytes,4,opt,name=name_english_loc,json=nameEnglishLoc" json:"name_english_loc,omitempty"`
@@ -16080,7 +16207,7 @@ type CMsgGameDataHeroList_HeroInfo struct {
 func (x *CMsgGameDataHeroList_HeroInfo) Reset() {
 	*x = CMsgGameDataHeroList_HeroInfo{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[158]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[159]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -16093,7 +16220,7 @@ func (x *CMsgGameDataHeroList_HeroInfo) String() string {
 func (*CMsgGameDataHeroList_HeroInfo) ProtoMessage() {}
 
 func (x *CMsgGameDataHeroList_HeroInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[158]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[159]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -16109,7 +16236,7 @@ func (*CMsgGameDataHeroList_HeroInfo) Descriptor() ([]byte, []int) {
 	return file_dota_gcmessages_common_proto_rawDescGZIP(), []int{78, 0}
 }
 
-func (x *CMsgGameDataHeroList_HeroInfo) GetId() uint32 {
+func (x *CMsgGameDataHeroList_HeroInfo) GetId() int32 {
 	if x != nil && x.Id != nil {
 		return *x.Id
 	}
@@ -16166,7 +16293,7 @@ type CMsgGameDataItemAbilityList_ItemAbilityInfo struct {
 func (x *CMsgGameDataItemAbilityList_ItemAbilityInfo) Reset() {
 	*x = CMsgGameDataItemAbilityList_ItemAbilityInfo{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[159]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[160]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -16179,7 +16306,7 @@ func (x *CMsgGameDataItemAbilityList_ItemAbilityInfo) String() string {
 func (*CMsgGameDataItemAbilityList_ItemAbilityInfo) ProtoMessage() {}
 
 func (x *CMsgGameDataItemAbilityList_ItemAbilityInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[159]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[160]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -16242,7 +16369,7 @@ type CMsgDOTAClaimEventActionResponse_MysteryItemRewardData struct {
 func (x *CMsgDOTAClaimEventActionResponse_MysteryItemRewardData) Reset() {
 	*x = CMsgDOTAClaimEventActionResponse_MysteryItemRewardData{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[160]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[161]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -16255,7 +16382,7 @@ func (x *CMsgDOTAClaimEventActionResponse_MysteryItemRewardData) String() string
 func (*CMsgDOTAClaimEventActionResponse_MysteryItemRewardData) ProtoMessage() {}
 
 func (x *CMsgDOTAClaimEventActionResponse_MysteryItemRewardData) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[160]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[161]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -16296,7 +16423,7 @@ type CMsgDOTAClaimEventActionResponse_LootListRewardData struct {
 func (x *CMsgDOTAClaimEventActionResponse_LootListRewardData) Reset() {
 	*x = CMsgDOTAClaimEventActionResponse_LootListRewardData{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[161]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[162]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -16309,7 +16436,7 @@ func (x *CMsgDOTAClaimEventActionResponse_LootListRewardData) String() string {
 func (*CMsgDOTAClaimEventActionResponse_LootListRewardData) ProtoMessage() {}
 
 func (x *CMsgDOTAClaimEventActionResponse_LootListRewardData) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[161]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[162]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -16344,7 +16471,7 @@ type CMsgDOTAClaimEventActionResponse_ActionListRewardData struct {
 func (x *CMsgDOTAClaimEventActionResponse_ActionListRewardData) Reset() {
 	*x = CMsgDOTAClaimEventActionResponse_ActionListRewardData{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[162]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[163]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -16357,7 +16484,7 @@ func (x *CMsgDOTAClaimEventActionResponse_ActionListRewardData) String() string 
 func (*CMsgDOTAClaimEventActionResponse_ActionListRewardData) ProtoMessage() {}
 
 func (x *CMsgDOTAClaimEventActionResponse_ActionListRewardData) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[162]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[163]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -16398,7 +16525,7 @@ type CMsgDOTAClaimEventActionResponse_OverworldTokenRewardData struct {
 func (x *CMsgDOTAClaimEventActionResponse_OverworldTokenRewardData) Reset() {
 	*x = CMsgDOTAClaimEventActionResponse_OverworldTokenRewardData{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[163]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[164]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -16411,7 +16538,7 @@ func (x *CMsgDOTAClaimEventActionResponse_OverworldTokenRewardData) String() str
 func (*CMsgDOTAClaimEventActionResponse_OverworldTokenRewardData) ProtoMessage() {}
 
 func (x *CMsgDOTAClaimEventActionResponse_OverworldTokenRewardData) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[163]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[164]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -16449,7 +16576,7 @@ type CMsgDOTAClaimEventActionResponse_GrantedRewardData struct {
 func (x *CMsgDOTAClaimEventActionResponse_GrantedRewardData) Reset() {
 	*x = CMsgDOTAClaimEventActionResponse_GrantedRewardData{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[164]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[165]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -16462,7 +16589,7 @@ func (x *CMsgDOTAClaimEventActionResponse_GrantedRewardData) String() string {
 func (*CMsgDOTAClaimEventActionResponse_GrantedRewardData) ProtoMessage() {}
 
 func (x *CMsgDOTAClaimEventActionResponse_GrantedRewardData) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[164]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[165]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -16525,7 +16652,7 @@ type CMsgDOTAClaimEventActionResponse_OverworldTokenRewardData_TokenQuantity str
 func (x *CMsgDOTAClaimEventActionResponse_OverworldTokenRewardData_TokenQuantity) Reset() {
 	*x = CMsgDOTAClaimEventActionResponse_OverworldTokenRewardData_TokenQuantity{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dota_gcmessages_common_proto_msgTypes[165]
+		mi := &file_dota_gcmessages_common_proto_msgTypes[166]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -16538,7 +16665,7 @@ func (x *CMsgDOTAClaimEventActionResponse_OverworldTokenRewardData_TokenQuantity
 func (*CMsgDOTAClaimEventActionResponse_OverworldTokenRewardData_TokenQuantity) ProtoMessage() {}
 
 func (x *CMsgDOTAClaimEventActionResponse_OverworldTokenRewardData_TokenQuantity) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[165]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[166]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -16566,6 +16693,85 @@ func (x *CMsgDOTAClaimEventActionResponse_OverworldTokenRewardData_TokenQuantity
 		return *x.TokenCount
 	}
 	return 0
+}
+
+type CDotaMsg_PredictionResult_Prediction struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ItemDef         *uint32                                       `protobuf:"varint,1,opt,name=item_def,json=itemDef" json:"item_def,omitempty"`
+	NumCorrect      *uint32                                       `protobuf:"varint,2,opt,name=num_correct,json=numCorrect" json:"num_correct,omitempty"`
+	NumFails        *uint32                                       `protobuf:"varint,3,opt,name=num_fails,json=numFails" json:"num_fails,omitempty"`
+	Result          *CDotaMsg_PredictionResult_Prediction_EResult `protobuf:"varint,4,opt,name=result,enum=dota.CDotaMsg_PredictionResult_Prediction_EResult" json:"result,omitempty"`
+	GrantedItemDefs []uint32                                      `protobuf:"varint,6,rep,name=granted_item_defs,json=grantedItemDefs" json:"granted_item_defs,omitempty"`
+}
+
+func (x *CDotaMsg_PredictionResult_Prediction) Reset() {
+	*x = CDotaMsg_PredictionResult_Prediction{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_dota_gcmessages_common_proto_msgTypes[167]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CDotaMsg_PredictionResult_Prediction) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CDotaMsg_PredictionResult_Prediction) ProtoMessage() {}
+
+func (x *CDotaMsg_PredictionResult_Prediction) ProtoReflect() protoreflect.Message {
+	mi := &file_dota_gcmessages_common_proto_msgTypes[167]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CDotaMsg_PredictionResult_Prediction.ProtoReflect.Descriptor instead.
+func (*CDotaMsg_PredictionResult_Prediction) Descriptor() ([]byte, []int) {
+	return file_dota_gcmessages_common_proto_rawDescGZIP(), []int{99, 0}
+}
+
+func (x *CDotaMsg_PredictionResult_Prediction) GetItemDef() uint32 {
+	if x != nil && x.ItemDef != nil {
+		return *x.ItemDef
+	}
+	return 0
+}
+
+func (x *CDotaMsg_PredictionResult_Prediction) GetNumCorrect() uint32 {
+	if x != nil && x.NumCorrect != nil {
+		return *x.NumCorrect
+	}
+	return 0
+}
+
+func (x *CDotaMsg_PredictionResult_Prediction) GetNumFails() uint32 {
+	if x != nil && x.NumFails != nil {
+		return *x.NumFails
+	}
+	return 0
+}
+
+func (x *CDotaMsg_PredictionResult_Prediction) GetResult() CDotaMsg_PredictionResult_Prediction_EResult {
+	if x != nil && x.Result != nil {
+		return *x.Result
+	}
+	return CDotaMsg_PredictionResult_Prediction_k_eResult_ItemGranted
+}
+
+func (x *CDotaMsg_PredictionResult_Prediction) GetGrantedItemDefs() []uint32 {
+	if x != nil {
+		return x.GrantedItemDefs
+	}
+	return nil
 }
 
 var File_dota_gcmessages_common_proto protoreflect.FileDescriptor
@@ -16677,7 +16883,7 @@ var file_dota_gcmessages_common_proto_rawDesc = []byte{
 	0x20, 0x01, 0x28, 0x0d, 0x52, 0x14, 0x63, 0x61, 0x73, 0x75, 0x61, 0x6c, 0x31, 0x76, 0x31, 0x47,
 	0x61, 0x6d, 0x65, 0x73, 0x50, 0x6c, 0x61, 0x79, 0x65, 0x64, 0x12, 0x3a, 0x0a, 0x1a, 0x63, 0x75,
 	0x72, 0x72, 0x5f, 0x61, 0x6c, 0x6c, 0x5f, 0x68, 0x65, 0x72, 0x6f, 0x5f, 0x63, 0x68, 0x61, 0x6c,
-	0x6c, 0x65, 0x6e, 0x67, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x43, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x16,
+	0x6c, 0x65, 0x6e, 0x67, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x43, 0x20, 0x01, 0x28, 0x05, 0x52, 0x16,
 	0x63, 0x75, 0x72, 0x72, 0x41, 0x6c, 0x6c, 0x48, 0x65, 0x72, 0x6f, 0x43, 0x68, 0x61, 0x6c, 0x6c,
 	0x65, 0x6e, 0x67, 0x65, 0x49, 0x64, 0x12, 0x28, 0x0a, 0x10, 0x70, 0x6c, 0x61, 0x79, 0x5f, 0x74,
 	0x69, 0x6d, 0x65, 0x5f, 0x70, 0x6f, 0x69, 0x6e, 0x74, 0x73, 0x18, 0x44, 0x20, 0x01, 0x28, 0x0d,
@@ -16761,7 +16967,7 @@ var file_dota_gcmessages_common_proto_rawDesc = []byte{
 	0x79, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x14, 0x6d, 0x6d, 0x72, 0x52, 0x65, 0x63, 0x61, 0x6c, 0x69,
 	0x62, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x69, 0x6d, 0x65, 0x12, 0x26, 0x0a, 0x0f, 0x62,
 	0x61, 0x6e, 0x6e, 0x65, 0x64, 0x5f, 0x68, 0x65, 0x72, 0x6f, 0x5f, 0x69, 0x64, 0x73, 0x18, 0x7b,
-	0x20, 0x03, 0x28, 0x0d, 0x52, 0x0d, 0x62, 0x61, 0x6e, 0x6e, 0x65, 0x64, 0x48, 0x65, 0x72, 0x6f,
+	0x20, 0x03, 0x28, 0x05, 0x52, 0x0d, 0x62, 0x61, 0x6e, 0x6e, 0x65, 0x64, 0x48, 0x65, 0x72, 0x6f,
 	0x49, 0x64, 0x73, 0x1a, 0x3e, 0x0a, 0x0c, 0x52, 0x6f, 0x6c, 0x65, 0x48, 0x61, 0x6e, 0x64, 0x69,
 	0x63, 0x61, 0x70, 0x12, 0x12, 0x0a, 0x04, 0x72, 0x6f, 0x6c, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28,
 	0x0d, 0x52, 0x04, 0x72, 0x6f, 0x6c, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x68, 0x61, 0x6e, 0x64, 0x69,
@@ -16836,7 +17042,7 @@ var file_dota_gcmessages_common_proto_rawDesc = []byte{
 	0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73,
 	0x73, 0x61, 0x67, 0x65, 0x22, 0x97, 0x02, 0x0a, 0x14, 0x43, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x49,
 	0x74, 0x65, 0x6d, 0x48, 0x65, 0x72, 0x6f, 0x53, 0x74, 0x61, 0x74, 0x75, 0x65, 0x12, 0x17, 0x0a,
-	0x07, 0x68, 0x65, 0x72, 0x6f, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x06,
+	0x07, 0x68, 0x65, 0x72, 0x6f, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x06,
 	0x68, 0x65, 0x72, 0x6f, 0x49, 0x64, 0x12, 0x2e, 0x0a, 0x13, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73,
 	0x5f, 0x65, 0x66, 0x66, 0x65, 0x63, 0x74, 0x5f, 0x69, 0x6e, 0x64, 0x65, 0x78, 0x18, 0x02, 0x20,
 	0x01, 0x28, 0x0d, 0x52, 0x11, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x45, 0x66, 0x66, 0x65, 0x63,
@@ -16989,7 +17195,7 @@ var file_dota_gcmessages_common_proto_rawDesc = []byte{
 	0x69, 0x73, 0x5f, 0x70, 0x69, 0x63, 0x6b, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x06, 0x69,
 	0x73, 0x50, 0x69, 0x63, 0x6b, 0x12, 0x12, 0x0a, 0x04, 0x74, 0x65, 0x61, 0x6d, 0x18, 0x02, 0x20,
 	0x01, 0x28, 0x0d, 0x52, 0x04, 0x74, 0x65, 0x61, 0x6d, 0x12, 0x17, 0x0a, 0x07, 0x68, 0x65, 0x72,
-	0x6f, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x06, 0x68, 0x65, 0x72, 0x6f,
+	0x6f, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x05, 0x52, 0x06, 0x68, 0x65, 0x72, 0x6f,
 	0x49, 0x64, 0x22, 0xba, 0x02, 0x0a, 0x0a, 0x43, 0x4d, 0x61, 0x74, 0x63, 0x68, 0x43, 0x6c, 0x69,
 	0x70, 0x12, 0x19, 0x0a, 0x08, 0x6d, 0x61, 0x74, 0x63, 0x68, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20,
 	0x01, 0x28, 0x04, 0x52, 0x07, 0x6d, 0x61, 0x74, 0x63, 0x68, 0x49, 0x64, 0x12, 0x2a, 0x0a, 0x11,
@@ -17003,7 +17209,7 @@ var file_dota_gcmessages_common_proto_rawDesc = []byte{
 	0x64, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x65, 0x63, 0x6f, 0x6e, 0x64, 0x73, 0x12,
 	0x1b, 0x0a, 0x09, 0x70, 0x6c, 0x61, 0x79, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x05, 0x20, 0x01,
 	0x28, 0x0d, 0x52, 0x08, 0x70, 0x6c, 0x61, 0x79, 0x65, 0x72, 0x49, 0x64, 0x12, 0x17, 0x0a, 0x07,
-	0x68, 0x65, 0x72, 0x6f, 0x5f, 0x69, 0x64, 0x18, 0x06, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x06, 0x68,
+	0x68, 0x65, 0x72, 0x6f, 0x5f, 0x69, 0x64, 0x18, 0x06, 0x20, 0x01, 0x28, 0x05, 0x52, 0x06, 0x68,
 	0x65, 0x72, 0x6f, 0x49, 0x64, 0x12, 0x1d, 0x0a, 0x0a, 0x61, 0x62, 0x69, 0x6c, 0x69, 0x74, 0x79,
 	0x5f, 0x69, 0x64, 0x18, 0x07, 0x20, 0x01, 0x28, 0x05, 0x52, 0x09, 0x61, 0x62, 0x69, 0x6c, 0x69,
 	0x74, 0x79, 0x49, 0x64, 0x12, 0x1f, 0x0a, 0x0b, 0x63, 0x61, 0x6d, 0x65, 0x72, 0x61, 0x5f, 0x6d,
@@ -17147,7 +17353,7 @@ var file_dota_gcmessages_common_proto_rawDesc = []byte{
 	0x6d, 0x12, 0x17, 0x0a, 0x07, 0x69, 0x74, 0x65, 0x6d, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01,
 	0x28, 0x04, 0x52, 0x06, 0x69, 0x74, 0x65, 0x6d, 0x49, 0x64, 0x1a, 0x5d, 0x0a, 0x04, 0x48, 0x65,
 	0x72, 0x6f, 0x12, 0x17, 0x0a, 0x07, 0x68, 0x65, 0x72, 0x6f, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20,
-	0x01, 0x28, 0x0d, 0x52, 0x06, 0x68, 0x65, 0x72, 0x6f, 0x49, 0x64, 0x12, 0x1b, 0x0a, 0x09, 0x68,
+	0x01, 0x28, 0x05, 0x52, 0x06, 0x68, 0x65, 0x72, 0x6f, 0x49, 0x64, 0x12, 0x1b, 0x0a, 0x09, 0x68,
 	0x65, 0x72, 0x6f, 0x5f, 0x77, 0x69, 0x6e, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x08,
 	0x68, 0x65, 0x72, 0x6f, 0x57, 0x69, 0x6e, 0x73, 0x12, 0x1f, 0x0a, 0x0b, 0x68, 0x65, 0x72, 0x6f,
 	0x5f, 0x6c, 0x6f, 0x73, 0x73, 0x65, 0x73, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x0a, 0x68,
@@ -17198,7 +17404,7 @@ var file_dota_gcmessages_common_proto_rawDesc = []byte{
 	0x61, 0x78, 0x51, 0x75, 0x65, 0x73, 0x74, 0x52, 0x61, 0x6e, 0x6b, 0x12, 0x1f, 0x0a, 0x0b, 0x69,
 	0x6e, 0x73, 0x74, 0x61, 0x6e, 0x63, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x10, 0x20, 0x01, 0x28, 0x0d,
 	0x52, 0x0a, 0x69, 0x6e, 0x73, 0x74, 0x61, 0x6e, 0x63, 0x65, 0x49, 0x64, 0x12, 0x17, 0x0a, 0x07,
-	0x68, 0x65, 0x72, 0x6f, 0x5f, 0x69, 0x64, 0x18, 0x11, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x06, 0x68,
+	0x68, 0x65, 0x72, 0x6f, 0x5f, 0x69, 0x64, 0x18, 0x11, 0x20, 0x01, 0x28, 0x05, 0x52, 0x06, 0x68,
 	0x65, 0x72, 0x6f, 0x49, 0x64, 0x12, 0x1f, 0x0a, 0x0b, 0x74, 0x65, 0x6d, 0x70, 0x6c, 0x61, 0x74,
 	0x65, 0x5f, 0x69, 0x64, 0x18, 0x12, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x0a, 0x74, 0x65, 0x6d, 0x70,
 	0x6c, 0x61, 0x74, 0x65, 0x49, 0x64, 0x22, 0x88, 0x01, 0x0a, 0x23, 0x43, 0x4d, 0x73, 0x67, 0x43,
@@ -17209,7 +17415,7 @@ var file_dota_gcmessages_common_proto_rawDesc = []byte{
 	0x65, 0x76, 0x65, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x1f, 0x0a, 0x0b, 0x73, 0x65, 0x71, 0x75, 0x65,
 	0x6e, 0x63, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x0a, 0x73, 0x65,
 	0x71, 0x75, 0x65, 0x6e, 0x63, 0x65, 0x49, 0x64, 0x12, 0x17, 0x0a, 0x07, 0x68, 0x65, 0x72, 0x6f,
-	0x5f, 0x69, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x06, 0x68, 0x65, 0x72, 0x6f, 0x49,
+	0x5f, 0x69, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x05, 0x52, 0x06, 0x68, 0x65, 0x72, 0x6f, 0x49,
 	0x64, 0x22, 0xec, 0x01, 0x0a, 0x23, 0x43, 0x4d, 0x73, 0x67, 0x47, 0x43, 0x52, 0x65, 0x72, 0x6f,
 	0x6c, 0x6c, 0x50, 0x6c, 0x61, 0x79, 0x65, 0x72, 0x43, 0x68, 0x61, 0x6c, 0x6c, 0x65, 0x6e, 0x67,
 	0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x49, 0x0a, 0x06, 0x72, 0x65, 0x73,
@@ -17311,7 +17517,7 @@ var file_dota_gcmessages_common_proto_rawDesc = []byte{
 	0x6d, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x12,
 	0x0a, 0x04, 0x74, 0x65, 0x61, 0x6d, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x04, 0x74, 0x65,
 	0x61, 0x6d, 0x12, 0x16, 0x0a, 0x06, 0x68, 0x65, 0x72, 0x6f, 0x69, 0x64, 0x18, 0x05, 0x20, 0x01,
-	0x28, 0x0d, 0x52, 0x06, 0x68, 0x65, 0x72, 0x6f, 0x69, 0x64, 0x12, 0x22, 0x0a, 0x0c, 0x68, 0x65,
+	0x28, 0x05, 0x52, 0x06, 0x68, 0x65, 0x72, 0x6f, 0x69, 0x64, 0x12, 0x22, 0x0a, 0x0c, 0x68, 0x65,
 	0x61, 0x6c, 0x74, 0x68, 0x70, 0x6f, 0x69, 0x6e, 0x74, 0x73, 0x18, 0x06, 0x20, 0x01, 0x28, 0x0d,
 	0x52, 0x0c, 0x68, 0x65, 0x61, 0x6c, 0x74, 0x68, 0x70, 0x6f, 0x69, 0x6e, 0x74, 0x73, 0x12, 0x28,
 	0x0a, 0x0f, 0x6d, 0x61, 0x78, 0x68, 0x65, 0x61, 0x6c, 0x74, 0x68, 0x70, 0x6f, 0x69, 0x6e, 0x74,
@@ -17444,7 +17650,7 @@ var file_dota_gcmessages_common_proto_rawDesc = []byte{
 	0x1b, 0x0a, 0x09, 0x70, 0x6c, 0x61, 0x79, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01,
 	0x28, 0x05, 0x52, 0x08, 0x70, 0x6c, 0x61, 0x79, 0x65, 0x72, 0x49, 0x64, 0x1a, 0x38, 0x0a, 0x0e,
 	0x50, 0x69, 0x63, 0x6b, 0x42, 0x61, 0x6e, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x12, 0x12,
-	0x0a, 0x04, 0x68, 0x65, 0x72, 0x6f, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x04, 0x68, 0x65,
+	0x0a, 0x04, 0x68, 0x65, 0x72, 0x6f, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x04, 0x68, 0x65,
 	0x72, 0x6f, 0x12, 0x12, 0x0a, 0x04, 0x74, 0x65, 0x61, 0x6d, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0d,
 	0x52, 0x04, 0x74, 0x65, 0x61, 0x6d, 0x1a, 0xd6, 0x06, 0x0a, 0x0c, 0x4d, 0x61, 0x74, 0x63, 0x68,
 	0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x12, 0x26, 0x0a, 0x0f, 0x73, 0x65, 0x72, 0x76, 0x65,
@@ -17588,7 +17794,7 @@ var file_dota_gcmessages_common_proto_rawDesc = []byte{
 	0x6c, 0x61, 0x79, 0x65, 0x72, 0x69, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18,
 	0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x74,
 	0x65, 0x61, 0x6d, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x04, 0x74, 0x65, 0x61, 0x6d, 0x12,
-	0x16, 0x0a, 0x06, 0x68, 0x65, 0x72, 0x6f, 0x69, 0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0d, 0x52,
+	0x16, 0x0a, 0x06, 0x68, 0x65, 0x72, 0x6f, 0x69, 0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x05, 0x52,
 	0x06, 0x68, 0x65, 0x72, 0x6f, 0x69, 0x64, 0x12, 0x14, 0x0a, 0x05, 0x6c, 0x65, 0x76, 0x65, 0x6c,
 	0x18, 0x06, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x05, 0x6c, 0x65, 0x76, 0x65, 0x6c, 0x12, 0x1d, 0x0a,
 	0x0a, 0x6b, 0x69, 0x6c, 0x6c, 0x5f, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x07, 0x20, 0x01, 0x28,
@@ -17624,7 +17830,7 @@ var file_dota_gcmessages_common_proto_rawDesc = []byte{
 	0x72, 0x6f, 0x79, 0x65, 0x64, 0x18, 0x08, 0x20, 0x01, 0x28, 0x08, 0x52, 0x09, 0x64, 0x65, 0x73,
 	0x74, 0x72, 0x6f, 0x79, 0x65, 0x64, 0x1a, 0x38, 0x0a, 0x0e, 0x50, 0x69, 0x63, 0x6b, 0x42, 0x61,
 	0x6e, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x12, 0x12, 0x0a, 0x04, 0x68, 0x65, 0x72, 0x6f,
-	0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x04, 0x68, 0x65, 0x72, 0x6f, 0x12, 0x12, 0x0a, 0x04,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x04, 0x68, 0x65, 0x72, 0x6f, 0x12, 0x12, 0x0a, 0x04,
 	0x74, 0x65, 0x61, 0x6d, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x04, 0x74, 0x65, 0x61, 0x6d,
 	0x1a, 0xaa, 0x04, 0x0a, 0x0c, 0x4d, 0x61, 0x74, 0x63, 0x68, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c,
 	0x73, 0x12, 0x26, 0x0a, 0x0f, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72, 0x5f, 0x73, 0x74, 0x65, 0x61,
@@ -18041,7 +18247,7 @@ var file_dota_gcmessages_common_proto_rawDesc = []byte{
 	0x1f, 0x0a, 0x0b, 0x70, 0x6c, 0x61, 0x79, 0x65, 0x72, 0x5f, 0x73, 0x6c, 0x6f, 0x74, 0x18, 0x02,
 	0x20, 0x01, 0x28, 0x0d, 0x52, 0x0a, 0x70, 0x6c, 0x61, 0x79, 0x65, 0x72, 0x53, 0x6c, 0x6f, 0x74,
 	0x12, 0x17, 0x0a, 0x07, 0x68, 0x65, 0x72, 0x6f, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28,
-	0x0d, 0x52, 0x06, 0x68, 0x65, 0x72, 0x6f, 0x49, 0x64, 0x12, 0x15, 0x0a, 0x06, 0x69, 0x74, 0x65,
+	0x05, 0x52, 0x06, 0x68, 0x65, 0x72, 0x6f, 0x49, 0x64, 0x12, 0x15, 0x0a, 0x06, 0x69, 0x74, 0x65,
 	0x6d, 0x5f, 0x30, 0x18, 0x04, 0x20, 0x01, 0x28, 0x05, 0x52, 0x05, 0x69, 0x74, 0x65, 0x6d, 0x30,
 	0x12, 0x15, 0x0a, 0x06, 0x69, 0x74, 0x65, 0x6d, 0x5f, 0x31, 0x18, 0x05, 0x20, 0x01, 0x28, 0x05,
 	0x52, 0x05, 0x69, 0x74, 0x65, 0x6d, 0x31, 0x12, 0x15, 0x0a, 0x06, 0x69, 0x74, 0x65, 0x6d, 0x5f,
@@ -18396,7 +18602,7 @@ var file_dota_gcmessages_common_proto_rawDesc = []byte{
 	0x03, 0x42, 0x6f, 0x74, 0x12, 0x26, 0x0a, 0x0f, 0x70, 0x6c, 0x61, 0x79, 0x65, 0x72, 0x5f, 0x6f,
 	0x77, 0x6e, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0d, 0x70,
 	0x6c, 0x61, 0x79, 0x65, 0x72, 0x4f, 0x77, 0x6e, 0x65, 0x72, 0x49, 0x64, 0x12, 0x17, 0x0a, 0x07,
-	0x68, 0x65, 0x72, 0x6f, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x06, 0x68,
+	0x68, 0x65, 0x72, 0x6f, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x06, 0x68,
 	0x65, 0x72, 0x6f, 0x49, 0x64, 0x12, 0x1e, 0x0a, 0x0a, 0x64, 0x69, 0x66, 0x66, 0x69, 0x63, 0x75,
 	0x6c, 0x74, 0x79, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x0a, 0x64, 0x69, 0x66, 0x66, 0x69,
 	0x63, 0x75, 0x6c, 0x74, 0x79, 0x12, 0x23, 0x0a, 0x0d, 0x70, 0x6f, 0x77, 0x65, 0x72, 0x5f, 0x63,
@@ -18440,7 +18646,7 @@ var file_dota_gcmessages_common_proto_rawDesc = []byte{
 	0x65, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e,
 	0x54, 0x61, 0x72, 0x67, 0x65, 0x74, 0x22, 0x75, 0x0a, 0x12, 0x43, 0x4d, 0x73, 0x67, 0x53, 0x75,
 	0x63, 0x63, 0x65, 0x73, 0x73, 0x66, 0x75, 0x6c, 0x48, 0x65, 0x72, 0x6f, 0x12, 0x17, 0x0a, 0x07,
-	0x68, 0x65, 0x72, 0x6f, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x06, 0x68,
+	0x68, 0x65, 0x72, 0x6f, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x06, 0x68,
 	0x65, 0x72, 0x6f, 0x49, 0x64, 0x12, 0x1f, 0x0a, 0x0b, 0x77, 0x69, 0x6e, 0x5f, 0x70, 0x65, 0x72,
 	0x63, 0x65, 0x6e, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x02, 0x52, 0x0a, 0x77, 0x69, 0x6e, 0x50,
 	0x65, 0x72, 0x63, 0x65, 0x6e, 0x74, 0x12, 0x25, 0x0a, 0x0e, 0x6c, 0x6f, 0x6e, 0x67, 0x65, 0x73,
@@ -18516,7 +18722,7 @@ var file_dota_gcmessages_common_proto_rawDesc = []byte{
 	0x50, 0x6c, 0x61, 0x79, 0x65, 0x72, 0x12, 0x1d, 0x0a, 0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e,
 	0x74, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x09, 0x61, 0x63, 0x63, 0x6f,
 	0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x17, 0x0a, 0x07, 0x68, 0x65, 0x72, 0x6f, 0x5f, 0x69, 0x64,
-	0x18, 0x02, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x06, 0x68, 0x65, 0x72, 0x6f, 0x49, 0x64, 0x12, 0x14,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x06, 0x68, 0x65, 0x72, 0x6f, 0x49, 0x64, 0x12, 0x14,
 	0x0a, 0x05, 0x6b, 0x69, 0x6c, 0x6c, 0x73, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x05, 0x6b,
 	0x69, 0x6c, 0x6c, 0x73, 0x12, 0x16, 0x0a, 0x06, 0x64, 0x65, 0x61, 0x74, 0x68, 0x73, 0x18, 0x04,
 	0x20, 0x01, 0x28, 0x0d, 0x52, 0x06, 0x64, 0x65, 0x61, 0x74, 0x68, 0x73, 0x12, 0x18, 0x0a, 0x07,
@@ -18645,7 +18851,7 @@ var file_dota_gcmessages_common_proto_rawDesc = []byte{
 	0x12, 0x1a, 0x0a, 0x08, 0x64, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x03, 0x20, 0x01,
 	0x28, 0x0d, 0x52, 0x08, 0x64, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x10, 0x0a, 0x03,
 	0x77, 0x69, 0x6e, 0x18, 0x04, 0x20, 0x01, 0x28, 0x08, 0x52, 0x03, 0x77, 0x69, 0x6e, 0x12, 0x17,
-	0x0a, 0x07, 0x68, 0x65, 0x72, 0x6f, 0x5f, 0x69, 0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0d, 0x52,
+	0x0a, 0x07, 0x68, 0x65, 0x72, 0x6f, 0x5f, 0x69, 0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x05, 0x52,
 	0x06, 0x68, 0x65, 0x72, 0x6f, 0x49, 0x64, 0x12, 0x14, 0x0a, 0x05, 0x6b, 0x69, 0x6c, 0x6c, 0x73,
 	0x18, 0x06, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x05, 0x6b, 0x69, 0x6c, 0x6c, 0x73, 0x12, 0x16, 0x0a,
 	0x06, 0x64, 0x65, 0x61, 0x74, 0x68, 0x73, 0x18, 0x07, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x06, 0x64,
@@ -18735,7 +18941,7 @@ var file_dota_gcmessages_common_proto_rawDesc = []byte{
 	0x73, 0x68, 0x6d, 0x65, 0x6e, 0x74, 0x73, 0x12, 0x1d, 0x0a, 0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75,
 	0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x09, 0x61, 0x63, 0x63,
 	0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x17, 0x0a, 0x07, 0x68, 0x65, 0x72, 0x6f, 0x5f, 0x69,
-	0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x06, 0x68, 0x65, 0x72, 0x6f, 0x49, 0x64, 0x22,
+	0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x06, 0x68, 0x65, 0x72, 0x6f, 0x49, 0x64, 0x22,
 	0xc8, 0x02, 0x0a, 0x38, 0x43, 0x4d, 0x73, 0x67, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x54, 0x6f,
 	0x47, 0x43, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x50, 0x6c, 0x61, 0x79, 0x65, 0x72, 0x52,
 	0x65, 0x63, 0x65, 0x6e, 0x74, 0x41, 0x63, 0x63, 0x6f, 0x6d, 0x70, 0x6c, 0x69, 0x73, 0x68, 0x6d,
@@ -18761,7 +18967,7 @@ var file_dota_gcmessages_common_proto_rawDesc = []byte{
 	0x68, 0x56, 0x6f, 0x74, 0x65, 0x73, 0x12, 0x19, 0x0a, 0x08, 0x6d, 0x61, 0x74, 0x63, 0x68, 0x5f,
 	0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x07, 0x6d, 0x61, 0x74, 0x63, 0x68, 0x49,
 	0x64, 0x12, 0x17, 0x0a, 0x07, 0x68, 0x65, 0x72, 0x6f, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01,
-	0x28, 0x0d, 0x52, 0x06, 0x68, 0x65, 0x72, 0x6f, 0x49, 0x64, 0x12, 0x1d, 0x0a, 0x0a, 0x76, 0x6f,
+	0x28, 0x05, 0x52, 0x06, 0x68, 0x65, 0x72, 0x6f, 0x49, 0x64, 0x12, 0x1d, 0x0a, 0x0a, 0x76, 0x6f,
 	0x74, 0x65, 0x5f, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x09,
 	0x76, 0x6f, 0x74, 0x65, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x22, 0xe7, 0x01, 0x0a, 0x28, 0x43, 0x4d,
 	0x73, 0x67, 0x47, 0x43, 0x74, 0x6f, 0x47, 0x43, 0x41, 0x73, 0x73, 0x6f, 0x63, 0x69, 0x61, 0x74,
@@ -18820,7 +19026,7 @@ var file_dota_gcmessages_common_proto_rawDesc = []byte{
 	0x52, 0x07, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x19, 0x0a, 0x08, 0x62, 0x6f, 0x61,
 	0x72, 0x64, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x07, 0x62, 0x6f, 0x61,
 	0x72, 0x64, 0x49, 0x64, 0x12, 0x17, 0x0a, 0x07, 0x68, 0x65, 0x72, 0x6f, 0x5f, 0x69, 0x64, 0x18,
-	0x03, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x06, 0x68, 0x65, 0x72, 0x6f, 0x49, 0x64, 0x12, 0x1b, 0x0a,
+	0x03, 0x20, 0x01, 0x28, 0x05, 0x52, 0x06, 0x68, 0x65, 0x72, 0x6f, 0x49, 0x64, 0x12, 0x1b, 0x0a,
 	0x09, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0d,
 	0x52, 0x08, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x12, 0x1a, 0x0a, 0x08, 0x72, 0x65,
 	0x64, 0x65, 0x65, 0x6d, 0x65, 0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x08, 0x52, 0x08, 0x72, 0x65,
@@ -18829,7 +19035,7 @@ var file_dota_gcmessages_common_proto_rawDesc = []byte{
 	0x01, 0x28, 0x0d, 0x52, 0x07, 0x62, 0x6f, 0x61, 0x72, 0x64, 0x49, 0x64, 0x12, 0x1b, 0x0a, 0x09,
 	0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0d, 0x52,
 	0x08, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x12, 0x17, 0x0a, 0x07, 0x68, 0x65, 0x72,
-	0x6f, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x06, 0x68, 0x65, 0x72, 0x6f,
+	0x6f, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x05, 0x52, 0x06, 0x68, 0x65, 0x72, 0x6f,
 	0x49, 0x64, 0x22, 0xb4, 0x03, 0x0a, 0x12, 0x43, 0x4d, 0x73, 0x67, 0x55, 0x6e, 0x64, 0x65, 0x72,
 	0x44, 0x72, 0x61, 0x66, 0x74, 0x44, 0x61, 0x74, 0x61, 0x12, 0x43, 0x0a, 0x0b, 0x62, 0x65, 0x6e,
 	0x63, 0x68, 0x5f, 0x73, 0x6c, 0x6f, 0x74, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x22,
@@ -18849,12 +19055,12 @@ var file_dota_gcmessages_common_proto_rawDesc = []byte{
 	0x6e, 0x63, 0x68, 0x53, 0x6c, 0x6f, 0x74, 0x12, 0x17, 0x0a, 0x07, 0x73, 0x6c, 0x6f, 0x74, 0x5f,
 	0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x06, 0x73, 0x6c, 0x6f, 0x74, 0x49, 0x64,
 	0x12, 0x17, 0x0a, 0x07, 0x68, 0x65, 0x72, 0x6f, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28,
-	0x0d, 0x52, 0x06, 0x68, 0x65, 0x72, 0x6f, 0x49, 0x64, 0x12, 0x14, 0x0a, 0x05, 0x73, 0x74, 0x61,
+	0x05, 0x52, 0x06, 0x68, 0x65, 0x72, 0x6f, 0x49, 0x64, 0x12, 0x14, 0x0a, 0x05, 0x73, 0x74, 0x61,
 	0x72, 0x73, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x05, 0x73, 0x74, 0x61, 0x72, 0x73, 0x1a,
 	0x68, 0x0a, 0x08, 0x53, 0x68, 0x6f, 0x70, 0x53, 0x6c, 0x6f, 0x74, 0x12, 0x17, 0x0a, 0x07, 0x73,
 	0x6c, 0x6f, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x06, 0x73, 0x6c,
 	0x6f, 0x74, 0x49, 0x64, 0x12, 0x17, 0x0a, 0x07, 0x68, 0x65, 0x72, 0x6f, 0x5f, 0x69, 0x64, 0x18,
-	0x02, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x06, 0x68, 0x65, 0x72, 0x6f, 0x49, 0x64, 0x12, 0x2a, 0x0a,
+	0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x06, 0x68, 0x65, 0x72, 0x6f, 0x49, 0x64, 0x12, 0x2a, 0x0a,
 	0x11, 0x69, 0x73, 0x5f, 0x73, 0x70, 0x65, 0x63, 0x69, 0x61, 0x6c, 0x5f, 0x72, 0x65, 0x77, 0x61,
 	0x72, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x08, 0x52, 0x0f, 0x69, 0x73, 0x53, 0x70, 0x65, 0x63,
 	0x69, 0x61, 0x6c, 0x52, 0x65, 0x77, 0x61, 0x72, 0x64, 0x22, 0x5e, 0x0a, 0x13, 0x43, 0x4d, 0x73,
@@ -19022,7 +19228,7 @@ var file_dota_gcmessages_common_proto_rawDesc = []byte{
 	0x41, 0x62, 0x69, 0x6c, 0x69, 0x74, 0x79, 0x4f, 0x72, 0x49, 0x74, 0x65, 0x6d, 0x52, 0x09, 0x61,
 	0x62, 0x69, 0x6c, 0x69, 0x74, 0x69, 0x65, 0x73, 0x22, 0xa4, 0x0b, 0x0a, 0x10, 0x43, 0x4d, 0x73,
 	0x67, 0x47, 0x61, 0x6d, 0x65, 0x44, 0x61, 0x74, 0x61, 0x48, 0x65, 0x72, 0x6f, 0x12, 0x0e, 0x0a,
-	0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x02, 0x69, 0x64, 0x12, 0x12, 0x0a,
+	0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x02, 0x69, 0x64, 0x12, 0x12, 0x0a,
 	0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d,
 	0x65, 0x12, 0x19, 0x0a, 0x08, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20,
 	0x01, 0x28, 0x0d, 0x52, 0x07, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x49, 0x64, 0x12, 0x19, 0x0a, 0x08,
@@ -19132,7 +19338,7 @@ var file_dota_gcmessages_common_proto_rawDesc = []byte{
 	0x6d, 0x65, 0x44, 0x61, 0x74, 0x61, 0x48, 0x65, 0x72, 0x6f, 0x4c, 0x69, 0x73, 0x74, 0x2e, 0x48,
 	0x65, 0x72, 0x6f, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x06, 0x68, 0x65, 0x72, 0x6f, 0x65, 0x73, 0x1a,
 	0xb6, 0x01, 0x0a, 0x08, 0x48, 0x65, 0x72, 0x6f, 0x49, 0x6e, 0x66, 0x6f, 0x12, 0x0e, 0x0a, 0x02,
-	0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x02, 0x69, 0x64, 0x12, 0x12, 0x0a, 0x04,
+	0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x02, 0x69, 0x64, 0x12, 0x12, 0x0a, 0x04,
 	0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65,
 	0x12, 0x19, 0x0a, 0x08, 0x6e, 0x61, 0x6d, 0x65, 0x5f, 0x6c, 0x6f, 0x63, 0x18, 0x03, 0x20, 0x01,
 	0x28, 0x09, 0x52, 0x07, 0x6e, 0x61, 0x6d, 0x65, 0x4c, 0x6f, 0x63, 0x12, 0x28, 0x0a, 0x10, 0x6e,
@@ -19257,7 +19463,7 @@ var file_dota_gcmessages_common_proto_rawDesc = []byte{
 	0x0d, 0x52, 0x0f, 0x66, 0x61, 0x76, 0x6f, 0x72, 0x69, 0x74, 0x65, 0x50, 0x61, 0x67, 0x65, 0x4e,
 	0x75, 0x6d, 0x22, 0x8a, 0x01, 0x0a, 0x0f, 0x43, 0x4d, 0x73, 0x67, 0x53, 0x74, 0x69, 0x63, 0x6b,
 	0x65, 0x72, 0x48, 0x65, 0x72, 0x6f, 0x12, 0x17, 0x0a, 0x07, 0x68, 0x65, 0x72, 0x6f, 0x5f, 0x69,
-	0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x06, 0x68, 0x65, 0x72, 0x6f, 0x49, 0x64, 0x12,
+	0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x06, 0x68, 0x65, 0x72, 0x6f, 0x49, 0x64, 0x12,
 	0x1e, 0x0a, 0x0b, 0x69, 0x74, 0x65, 0x6d, 0x5f, 0x64, 0x65, 0x66, 0x5f, 0x69, 0x64, 0x18, 0x02,
 	0x20, 0x01, 0x28, 0x0d, 0x52, 0x09, 0x69, 0x74, 0x65, 0x6d, 0x44, 0x65, 0x66, 0x49, 0x64, 0x12,
 	0x18, 0x0a, 0x07, 0x71, 0x75, 0x61, 0x6c, 0x69, 0x74, 0x79, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0d,
@@ -19279,7 +19485,7 @@ var file_dota_gcmessages_common_proto_rawDesc = []byte{
 	0x08, 0x77, 0x69, 0x6e, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x22, 0x68, 0x0a, 0x15, 0x43, 0x4d, 0x73,
 	0x67, 0x48, 0x65, 0x72, 0x6f, 0x52, 0x6f, 0x6c, 0x65, 0x48, 0x65, 0x72, 0x6f, 0x53, 0x74, 0x61,
 	0x74, 0x73, 0x12, 0x17, 0x0a, 0x07, 0x68, 0x65, 0x72, 0x6f, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20,
-	0x01, 0x28, 0x0d, 0x52, 0x06, 0x68, 0x65, 0x72, 0x6f, 0x49, 0x64, 0x12, 0x36, 0x0a, 0x0a, 0x72,
+	0x01, 0x28, 0x05, 0x52, 0x06, 0x68, 0x65, 0x72, 0x6f, 0x49, 0x64, 0x12, 0x36, 0x0a, 0x0a, 0x72,
 	0x6f, 0x6c, 0x65, 0x5f, 0x73, 0x74, 0x61, 0x74, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32,
 	0x17, 0x2e, 0x64, 0x6f, 0x74, 0x61, 0x2e, 0x43, 0x4d, 0x73, 0x67, 0x48, 0x65, 0x72, 0x6f, 0x52,
 	0x6f, 0x6c, 0x65, 0x53, 0x74, 0x61, 0x74, 0x73, 0x52, 0x09, 0x72, 0x6f, 0x6c, 0x65, 0x53, 0x74,
@@ -19445,253 +19651,283 @@ var file_dota_gcmessages_common_proto_rawDesc = []byte{
 	0x6b, 0x5f, 0x65, 0x54, 0x69, 0x6d, 0x65, 0x6f, 0x75, 0x74, 0x10, 0x04, 0x12, 0x11, 0x0a, 0x0d,
 	0x6b, 0x5f, 0x65, 0x4e, 0x6f, 0x74, 0x41, 0x6c, 0x6c, 0x6f, 0x77, 0x65, 0x64, 0x10, 0x05, 0x12,
 	0x12, 0x0a, 0x0e, 0x6b, 0x5f, 0x65, 0x49, 0x6e, 0x76, 0x61, 0x6c, 0x69, 0x64, 0x49, 0x74, 0x65,
-	0x6d, 0x10, 0x06, 0x2a, 0x55, 0x0a, 0x11, 0x45, 0x53, 0x70, 0x65, 0x63, 0x69, 0x61, 0x6c, 0x50,
-	0x69, 0x6e, 0x67, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x12, 0x1f, 0x0a, 0x1a, 0x6b, 0x5f, 0x45, 0x53,
+	0x6d, 0x10, 0x06, 0x22, 0xdc, 0x03, 0x0a, 0x19, 0x43, 0x44, 0x6f, 0x74, 0x61, 0x4d, 0x73, 0x67,
+	0x5f, 0x50, 0x72, 0x65, 0x64, 0x69, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x75, 0x6c,
+	0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x09, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64,
+	0x12, 0x19, 0x0a, 0x08, 0x6d, 0x61, 0x74, 0x63, 0x68, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x04, 0x52, 0x07, 0x6d, 0x61, 0x74, 0x63, 0x68, 0x49, 0x64, 0x12, 0x18, 0x0a, 0x07, 0x63,
+	0x6f, 0x72, 0x72, 0x65, 0x63, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x63, 0x6f,
+	0x72, 0x72, 0x65, 0x63, 0x74, 0x12, 0x4c, 0x0a, 0x0b, 0x70, 0x72, 0x65, 0x64, 0x69, 0x63, 0x74,
+	0x69, 0x6f, 0x6e, 0x73, 0x18, 0x04, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x2a, 0x2e, 0x64, 0x6f, 0x74,
+	0x61, 0x2e, 0x43, 0x44, 0x6f, 0x74, 0x61, 0x4d, 0x73, 0x67, 0x5f, 0x50, 0x72, 0x65, 0x64, 0x69,
+	0x63, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x2e, 0x50, 0x72, 0x65, 0x64,
+	0x69, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x0b, 0x70, 0x72, 0x65, 0x64, 0x69, 0x63, 0x74, 0x69,
+	0x6f, 0x6e, 0x73, 0x1a, 0x9c, 0x02, 0x0a, 0x0a, 0x50, 0x72, 0x65, 0x64, 0x69, 0x63, 0x74, 0x69,
+	0x6f, 0x6e, 0x12, 0x19, 0x0a, 0x08, 0x69, 0x74, 0x65, 0x6d, 0x5f, 0x64, 0x65, 0x66, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x0d, 0x52, 0x07, 0x69, 0x74, 0x65, 0x6d, 0x44, 0x65, 0x66, 0x12, 0x1f, 0x0a,
+	0x0b, 0x6e, 0x75, 0x6d, 0x5f, 0x63, 0x6f, 0x72, 0x72, 0x65, 0x63, 0x74, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x0d, 0x52, 0x0a, 0x6e, 0x75, 0x6d, 0x43, 0x6f, 0x72, 0x72, 0x65, 0x63, 0x74, 0x12, 0x1b,
+	0x0a, 0x09, 0x6e, 0x75, 0x6d, 0x5f, 0x66, 0x61, 0x69, 0x6c, 0x73, 0x18, 0x03, 0x20, 0x01, 0x28,
+	0x0d, 0x52, 0x08, 0x6e, 0x75, 0x6d, 0x46, 0x61, 0x69, 0x6c, 0x73, 0x12, 0x4a, 0x0a, 0x06, 0x72,
+	0x65, 0x73, 0x75, 0x6c, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x32, 0x2e, 0x64, 0x6f,
+	0x74, 0x61, 0x2e, 0x43, 0x44, 0x6f, 0x74, 0x61, 0x4d, 0x73, 0x67, 0x5f, 0x50, 0x72, 0x65, 0x64,
+	0x69, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x2e, 0x50, 0x72, 0x65,
+	0x64, 0x69, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x45, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x52,
+	0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x2a, 0x0a, 0x11, 0x67, 0x72, 0x61, 0x6e, 0x74,
+	0x65, 0x64, 0x5f, 0x69, 0x74, 0x65, 0x6d, 0x5f, 0x64, 0x65, 0x66, 0x73, 0x18, 0x06, 0x20, 0x03,
+	0x28, 0x0d, 0x52, 0x0f, 0x67, 0x72, 0x61, 0x6e, 0x74, 0x65, 0x64, 0x49, 0x74, 0x65, 0x6d, 0x44,
+	0x65, 0x66, 0x73, 0x22, 0x3d, 0x0a, 0x07, 0x45, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x19,
+	0x0a, 0x15, 0x6b, 0x5f, 0x65, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x5f, 0x49, 0x74, 0x65, 0x6d,
+	0x47, 0x72, 0x61, 0x6e, 0x74, 0x65, 0x64, 0x10, 0x01, 0x12, 0x17, 0x0a, 0x13, 0x6b, 0x5f, 0x65,
+	0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x5f, 0x44, 0x65, 0x73, 0x74, 0x72, 0x6f, 0x79, 0x65, 0x64,
+	0x10, 0x02, 0x2a, 0x55, 0x0a, 0x11, 0x45, 0x53, 0x70, 0x65, 0x63, 0x69, 0x61, 0x6c, 0x50, 0x69,
+	0x6e, 0x67, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x12, 0x1f, 0x0a, 0x1a, 0x6b, 0x5f, 0x45, 0x53, 0x70,
+	0x65, 0x63, 0x69, 0x61, 0x6c, 0x50, 0x69, 0x6e, 0x67, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x5f, 0x4e,
+	0x6f, 0x44, 0x61, 0x74, 0x61, 0x10, 0xfe, 0x7f, 0x12, 0x1f, 0x0a, 0x1a, 0x6b, 0x5f, 0x45, 0x53,
 	0x70, 0x65, 0x63, 0x69, 0x61, 0x6c, 0x50, 0x69, 0x6e, 0x67, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x5f,
-	0x4e, 0x6f, 0x44, 0x61, 0x74, 0x61, 0x10, 0xfe, 0x7f, 0x12, 0x1f, 0x0a, 0x1a, 0x6b, 0x5f, 0x45,
-	0x53, 0x70, 0x65, 0x63, 0x69, 0x61, 0x6c, 0x50, 0x69, 0x6e, 0x67, 0x56, 0x61, 0x6c, 0x75, 0x65,
-	0x5f, 0x46, 0x61, 0x69, 0x6c, 0x65, 0x64, 0x10, 0xff, 0x7f, 0x2a, 0x86, 0x05, 0x0a, 0x12, 0x45,
-	0x44, 0x4f, 0x54, 0x41, 0x47, 0x43, 0x53, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x4e, 0x65, 0x65,
-	0x64, 0x12, 0x20, 0x0a, 0x1c, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x47, 0x43, 0x53, 0x65,
-	0x73, 0x73, 0x69, 0x6f, 0x6e, 0x4e, 0x65, 0x65, 0x64, 0x5f, 0x55, 0x6e, 0x6b, 0x6e, 0x6f, 0x77,
-	0x6e, 0x10, 0x00, 0x12, 0x2c, 0x0a, 0x28, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x47, 0x43,
-	0x53, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x4e, 0x65, 0x65, 0x64, 0x5f, 0x55, 0x73, 0x65, 0x72,
-	0x4e, 0x6f, 0x53, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x4e, 0x65, 0x65, 0x64, 0x65, 0x64, 0x10,
-	0x64, 0x12, 0x29, 0x0a, 0x25, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x47, 0x43, 0x53, 0x65,
-	0x73, 0x73, 0x69, 0x6f, 0x6e, 0x4e, 0x65, 0x65, 0x64, 0x5f, 0x55, 0x73, 0x65, 0x72, 0x49, 0x6e,
-	0x4f, 0x6e, 0x6c, 0x69, 0x6e, 0x65, 0x47, 0x61, 0x6d, 0x65, 0x10, 0x65, 0x12, 0x28, 0x0a, 0x24,
-	0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x47, 0x43, 0x53, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e,
-	0x4e, 0x65, 0x65, 0x64, 0x5f, 0x55, 0x73, 0x65, 0x72, 0x49, 0x6e, 0x4c, 0x6f, 0x63, 0x61, 0x6c,
-	0x47, 0x61, 0x6d, 0x65, 0x10, 0x66, 0x12, 0x2d, 0x0a, 0x29, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54,
-	0x41, 0x47, 0x43, 0x53, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x4e, 0x65, 0x65, 0x64, 0x5f, 0x55,
-	0x73, 0x65, 0x72, 0x49, 0x6e, 0x55, 0x49, 0x57, 0x61, 0x73, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63,
-	0x74, 0x65, 0x64, 0x10, 0x67, 0x12, 0x2f, 0x0a, 0x2b, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41,
+	0x46, 0x61, 0x69, 0x6c, 0x65, 0x64, 0x10, 0xff, 0x7f, 0x2a, 0x86, 0x05, 0x0a, 0x12, 0x45, 0x44,
+	0x4f, 0x54, 0x41, 0x47, 0x43, 0x53, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x4e, 0x65, 0x65, 0x64,
+	0x12, 0x20, 0x0a, 0x1c, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x47, 0x43, 0x53, 0x65, 0x73,
+	0x73, 0x69, 0x6f, 0x6e, 0x4e, 0x65, 0x65, 0x64, 0x5f, 0x55, 0x6e, 0x6b, 0x6e, 0x6f, 0x77, 0x6e,
+	0x10, 0x00, 0x12, 0x2c, 0x0a, 0x28, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x47, 0x43, 0x53,
+	0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x4e, 0x65, 0x65, 0x64, 0x5f, 0x55, 0x73, 0x65, 0x72, 0x4e,
+	0x6f, 0x53, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x4e, 0x65, 0x65, 0x64, 0x65, 0x64, 0x10, 0x64,
+	0x12, 0x29, 0x0a, 0x25, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x47, 0x43, 0x53, 0x65, 0x73,
+	0x73, 0x69, 0x6f, 0x6e, 0x4e, 0x65, 0x65, 0x64, 0x5f, 0x55, 0x73, 0x65, 0x72, 0x49, 0x6e, 0x4f,
+	0x6e, 0x6c, 0x69, 0x6e, 0x65, 0x47, 0x61, 0x6d, 0x65, 0x10, 0x65, 0x12, 0x28, 0x0a, 0x24, 0x6b,
+	0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x47, 0x43, 0x53, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x4e,
+	0x65, 0x65, 0x64, 0x5f, 0x55, 0x73, 0x65, 0x72, 0x49, 0x6e, 0x4c, 0x6f, 0x63, 0x61, 0x6c, 0x47,
+	0x61, 0x6d, 0x65, 0x10, 0x66, 0x12, 0x2d, 0x0a, 0x29, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41,
 	0x47, 0x43, 0x53, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x4e, 0x65, 0x65, 0x64, 0x5f, 0x55, 0x73,
-	0x65, 0x72, 0x49, 0x6e, 0x55, 0x49, 0x4e, 0x65, 0x76, 0x65, 0x72, 0x43, 0x6f, 0x6e, 0x6e, 0x65,
-	0x63, 0x74, 0x65, 0x64, 0x10, 0x68, 0x12, 0x26, 0x0a, 0x22, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54,
-	0x41, 0x47, 0x43, 0x53, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x4e, 0x65, 0x65, 0x64, 0x5f, 0x55,
-	0x73, 0x65, 0x72, 0x54, 0x75, 0x74, 0x6f, 0x72, 0x69, 0x61, 0x6c, 0x73, 0x10, 0x69, 0x12, 0x31,
-	0x0a, 0x2d, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x47, 0x43, 0x53, 0x65, 0x73, 0x73, 0x69,
-	0x6f, 0x6e, 0x4e, 0x65, 0x65, 0x64, 0x5f, 0x55, 0x73, 0x65, 0x72, 0x49, 0x6e, 0x55, 0x49, 0x57,
-	0x61, 0x73, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x65, 0x64, 0x49, 0x64, 0x6c, 0x65, 0x10,
-	0x6a, 0x12, 0x33, 0x0a, 0x2f, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x47, 0x43, 0x53, 0x65,
-	0x73, 0x73, 0x69, 0x6f, 0x6e, 0x4e, 0x65, 0x65, 0x64, 0x5f, 0x55, 0x73, 0x65, 0x72, 0x49, 0x6e,
-	0x55, 0x49, 0x4e, 0x65, 0x76, 0x65, 0x72, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x65, 0x64,
-	0x49, 0x64, 0x6c, 0x65, 0x10, 0x6b, 0x12, 0x2a, 0x0a, 0x25, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54,
+	0x65, 0x72, 0x49, 0x6e, 0x55, 0x49, 0x57, 0x61, 0x73, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74,
+	0x65, 0x64, 0x10, 0x67, 0x12, 0x2f, 0x0a, 0x2b, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x47,
+	0x43, 0x53, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x4e, 0x65, 0x65, 0x64, 0x5f, 0x55, 0x73, 0x65,
+	0x72, 0x49, 0x6e, 0x55, 0x49, 0x4e, 0x65, 0x76, 0x65, 0x72, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63,
+	0x74, 0x65, 0x64, 0x10, 0x68, 0x12, 0x26, 0x0a, 0x22, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41,
+	0x47, 0x43, 0x53, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x4e, 0x65, 0x65, 0x64, 0x5f, 0x55, 0x73,
+	0x65, 0x72, 0x54, 0x75, 0x74, 0x6f, 0x72, 0x69, 0x61, 0x6c, 0x73, 0x10, 0x69, 0x12, 0x31, 0x0a,
+	0x2d, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x47, 0x43, 0x53, 0x65, 0x73, 0x73, 0x69, 0x6f,
+	0x6e, 0x4e, 0x65, 0x65, 0x64, 0x5f, 0x55, 0x73, 0x65, 0x72, 0x49, 0x6e, 0x55, 0x49, 0x57, 0x61,
+	0x73, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x65, 0x64, 0x49, 0x64, 0x6c, 0x65, 0x10, 0x6a,
+	0x12, 0x33, 0x0a, 0x2f, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x47, 0x43, 0x53, 0x65, 0x73,
+	0x73, 0x69, 0x6f, 0x6e, 0x4e, 0x65, 0x65, 0x64, 0x5f, 0x55, 0x73, 0x65, 0x72, 0x49, 0x6e, 0x55,
+	0x49, 0x4e, 0x65, 0x76, 0x65, 0x72, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x65, 0x64, 0x49,
+	0x64, 0x6c, 0x65, 0x10, 0x6b, 0x12, 0x2a, 0x0a, 0x25, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41,
+	0x47, 0x43, 0x53, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x4e, 0x65, 0x65, 0x64, 0x5f, 0x47, 0x61,
+	0x6d, 0x65, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x4f, 0x6e, 0x6c, 0x69, 0x6e, 0x65, 0x10, 0xc8,
+	0x01, 0x12, 0x29, 0x0a, 0x24, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x47, 0x43, 0x53, 0x65,
+	0x73, 0x73, 0x69, 0x6f, 0x6e, 0x4e, 0x65, 0x65, 0x64, 0x5f, 0x47, 0x61, 0x6d, 0x65, 0x53, 0x65,
+	0x72, 0x76, 0x65, 0x72, 0x4c, 0x6f, 0x63, 0x61, 0x6c, 0x10, 0xc9, 0x01, 0x12, 0x28, 0x0a, 0x23,
+	0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x47, 0x43, 0x53, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e,
+	0x4e, 0x65, 0x65, 0x64, 0x5f, 0x47, 0x61, 0x6d, 0x65, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x49,
+	0x64, 0x6c, 0x65, 0x10, 0xca, 0x01, 0x12, 0x29, 0x0a, 0x24, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54,
 	0x41, 0x47, 0x43, 0x53, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x4e, 0x65, 0x65, 0x64, 0x5f, 0x47,
-	0x61, 0x6d, 0x65, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x4f, 0x6e, 0x6c, 0x69, 0x6e, 0x65, 0x10,
-	0xc8, 0x01, 0x12, 0x29, 0x0a, 0x24, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x47, 0x43, 0x53,
-	0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x4e, 0x65, 0x65, 0x64, 0x5f, 0x47, 0x61, 0x6d, 0x65, 0x53,
-	0x65, 0x72, 0x76, 0x65, 0x72, 0x4c, 0x6f, 0x63, 0x61, 0x6c, 0x10, 0xc9, 0x01, 0x12, 0x28, 0x0a,
-	0x23, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x47, 0x43, 0x53, 0x65, 0x73, 0x73, 0x69, 0x6f,
-	0x6e, 0x4e, 0x65, 0x65, 0x64, 0x5f, 0x47, 0x61, 0x6d, 0x65, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72,
-	0x49, 0x64, 0x6c, 0x65, 0x10, 0xca, 0x01, 0x12, 0x29, 0x0a, 0x24, 0x6b, 0x5f, 0x45, 0x44, 0x4f,
-	0x54, 0x41, 0x47, 0x43, 0x53, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x4e, 0x65, 0x65, 0x64, 0x5f,
-	0x47, 0x61, 0x6d, 0x65, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x52, 0x65, 0x6c, 0x61, 0x79, 0x10,
-	0xcb, 0x01, 0x12, 0x2f, 0x0a, 0x2a, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x47, 0x43, 0x53,
-	0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x4e, 0x65, 0x65, 0x64, 0x5f, 0x47, 0x61, 0x6d, 0x65, 0x53,
-	0x65, 0x72, 0x76, 0x65, 0x72, 0x4c, 0x6f, 0x63, 0x61, 0x6c, 0x55, 0x70, 0x6c, 0x6f, 0x61, 0x64,
-	0x10, 0xcc, 0x01, 0x2a, 0x86, 0x02, 0x0a, 0x1e, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x4d, 0x61, 0x74,
+	0x61, 0x6d, 0x65, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x52, 0x65, 0x6c, 0x61, 0x79, 0x10, 0xcb,
+	0x01, 0x12, 0x2f, 0x0a, 0x2a, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x47, 0x43, 0x53, 0x65,
+	0x73, 0x73, 0x69, 0x6f, 0x6e, 0x4e, 0x65, 0x65, 0x64, 0x5f, 0x47, 0x61, 0x6d, 0x65, 0x53, 0x65,
+	0x72, 0x76, 0x65, 0x72, 0x4c, 0x6f, 0x63, 0x61, 0x6c, 0x55, 0x70, 0x6c, 0x6f, 0x61, 0x64, 0x10,
+	0xcc, 0x01, 0x2a, 0x86, 0x02, 0x0a, 0x1e, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x4d, 0x61, 0x74, 0x63,
+	0x68, 0x50, 0x6c, 0x61, 0x79, 0x65, 0x72, 0x54, 0x69, 0x6d, 0x65, 0x43, 0x75, 0x73, 0x74, 0x6f,
+	0x6d, 0x53, 0x74, 0x61, 0x74, 0x12, 0x3a, 0x0a, 0x36, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41,
+	0x5f, 0x4d, 0x61, 0x74, 0x63, 0x68, 0x50, 0x6c, 0x61, 0x79, 0x65, 0x72, 0x54, 0x69, 0x6d, 0x65,
+	0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x53, 0x74, 0x61, 0x74, 0x5f, 0x48, 0x50, 0x52, 0x65, 0x67,
+	0x65, 0x6e, 0x55, 0x6e, 0x64, 0x65, 0x72, 0x54, 0x31, 0x54, 0x6f, 0x77, 0x65, 0x72, 0x73, 0x10,
+	0x01, 0x12, 0x4f, 0x0a, 0x4b, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x5f, 0x4d, 0x61, 0x74,
 	0x63, 0x68, 0x50, 0x6c, 0x61, 0x79, 0x65, 0x72, 0x54, 0x69, 0x6d, 0x65, 0x43, 0x75, 0x73, 0x74,
-	0x6f, 0x6d, 0x53, 0x74, 0x61, 0x74, 0x12, 0x3a, 0x0a, 0x36, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54,
-	0x41, 0x5f, 0x4d, 0x61, 0x74, 0x63, 0x68, 0x50, 0x6c, 0x61, 0x79, 0x65, 0x72, 0x54, 0x69, 0x6d,
-	0x65, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x53, 0x74, 0x61, 0x74, 0x5f, 0x48, 0x50, 0x52, 0x65,
-	0x67, 0x65, 0x6e, 0x55, 0x6e, 0x64, 0x65, 0x72, 0x54, 0x31, 0x54, 0x6f, 0x77, 0x65, 0x72, 0x73,
-	0x10, 0x01, 0x12, 0x4f, 0x0a, 0x4b, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x5f, 0x4d, 0x61,
+	0x6f, 0x6d, 0x53, 0x74, 0x61, 0x74, 0x5f, 0x4d, 0x61, 0x67, 0x69, 0x63, 0x44, 0x61, 0x6d, 0x61,
+	0x67, 0x65, 0x52, 0x65, 0x64, 0x75, 0x63, 0x65, 0x64, 0x57, 0x69, 0x74, 0x68, 0x4e, 0x65, 0x77,
+	0x46, 0x6f, 0x72, 0x6d, 0x75, 0x6c, 0x61, 0x5f, 0x41, 0x62, 0x73, 0x6f, 0x6c, 0x75, 0x74, 0x65,
+	0x10, 0x02, 0x12, 0x57, 0x0a, 0x53, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x5f, 0x4d, 0x61,
 	0x74, 0x63, 0x68, 0x50, 0x6c, 0x61, 0x79, 0x65, 0x72, 0x54, 0x69, 0x6d, 0x65, 0x43, 0x75, 0x73,
 	0x74, 0x6f, 0x6d, 0x53, 0x74, 0x61, 0x74, 0x5f, 0x4d, 0x61, 0x67, 0x69, 0x63, 0x44, 0x61, 0x6d,
 	0x61, 0x67, 0x65, 0x52, 0x65, 0x64, 0x75, 0x63, 0x65, 0x64, 0x57, 0x69, 0x74, 0x68, 0x4e, 0x65,
-	0x77, 0x46, 0x6f, 0x72, 0x6d, 0x75, 0x6c, 0x61, 0x5f, 0x41, 0x62, 0x73, 0x6f, 0x6c, 0x75, 0x74,
-	0x65, 0x10, 0x02, 0x12, 0x57, 0x0a, 0x53, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x5f, 0x4d,
-	0x61, 0x74, 0x63, 0x68, 0x50, 0x6c, 0x61, 0x79, 0x65, 0x72, 0x54, 0x69, 0x6d, 0x65, 0x43, 0x75,
-	0x73, 0x74, 0x6f, 0x6d, 0x53, 0x74, 0x61, 0x74, 0x5f, 0x4d, 0x61, 0x67, 0x69, 0x63, 0x44, 0x61,
-	0x6d, 0x61, 0x67, 0x65, 0x52, 0x65, 0x64, 0x75, 0x63, 0x65, 0x64, 0x57, 0x69, 0x74, 0x68, 0x4e,
-	0x65, 0x77, 0x46, 0x6f, 0x72, 0x6d, 0x75, 0x6c, 0x61, 0x5f, 0x50, 0x65, 0x72, 0x63, 0x65, 0x6e,
-	0x74, 0x4f, 0x66, 0x54, 0x6f, 0x74, 0x61, 0x6c, 0x48, 0x50, 0x10, 0x03, 0x2a, 0xf6, 0x01, 0x0a,
-	0x15, 0x44, 0x4f, 0x54, 0x41, 0x5f, 0x54, 0x6f, 0x75, 0x72, 0x6e, 0x61, 0x6d, 0x65, 0x6e, 0x74,
-	0x45, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x12, 0x12, 0x0a, 0x0e, 0x54, 0x45, 0x5f, 0x46, 0x49, 0x52,
-	0x53, 0x54, 0x5f, 0x42, 0x4c, 0x4f, 0x4f, 0x44, 0x10, 0x00, 0x12, 0x0f, 0x0a, 0x0b, 0x54, 0x45,
-	0x5f, 0x47, 0x41, 0x4d, 0x45, 0x5f, 0x45, 0x4e, 0x44, 0x10, 0x01, 0x12, 0x11, 0x0a, 0x0d, 0x54,
-	0x45, 0x5f, 0x4d, 0x55, 0x4c, 0x54, 0x49, 0x5f, 0x4b, 0x49, 0x4c, 0x4c, 0x10, 0x02, 0x12, 0x10,
-	0x0a, 0x0c, 0x54, 0x45, 0x5f, 0x48, 0x45, 0x52, 0x4f, 0x5f, 0x44, 0x45, 0x4e, 0x59, 0x10, 0x03,
-	0x12, 0x11, 0x0a, 0x0d, 0x54, 0x45, 0x5f, 0x41, 0x45, 0x47, 0x49, 0x53, 0x5f, 0x44, 0x45, 0x4e,
-	0x59, 0x10, 0x04, 0x12, 0x13, 0x0a, 0x0f, 0x54, 0x45, 0x5f, 0x41, 0x45, 0x47, 0x49, 0x53, 0x5f,
-	0x53, 0x54, 0x4f, 0x4c, 0x45, 0x4e, 0x10, 0x05, 0x12, 0x0e, 0x0a, 0x0a, 0x54, 0x45, 0x5f, 0x47,
-	0x4f, 0x44, 0x4c, 0x49, 0x4b, 0x45, 0x10, 0x06, 0x12, 0x13, 0x0a, 0x0f, 0x54, 0x45, 0x5f, 0x43,
-	0x4f, 0x55, 0x52, 0x49, 0x45, 0x52, 0x5f, 0x4b, 0x49, 0x4c, 0x4c, 0x10, 0x07, 0x12, 0x0f, 0x0a,
-	0x0b, 0x54, 0x45, 0x5f, 0x45, 0x43, 0x48, 0x4f, 0x53, 0x4c, 0x41, 0x4d, 0x10, 0x08, 0x12, 0x0d,
-	0x0a, 0x09, 0x54, 0x45, 0x5f, 0x52, 0x41, 0x50, 0x49, 0x45, 0x52, 0x10, 0x09, 0x12, 0x13, 0x0a,
-	0x0f, 0x54, 0x45, 0x5f, 0x45, 0x41, 0x52, 0x4c, 0x59, 0x5f, 0x52, 0x4f, 0x53, 0x48, 0x41, 0x4e,
-	0x10, 0x0a, 0x12, 0x11, 0x0a, 0x0d, 0x54, 0x45, 0x5f, 0x42, 0x4c, 0x41, 0x43, 0x4b, 0x5f, 0x48,
-	0x4f, 0x4c, 0x45, 0x10, 0x0b, 0x2a, 0x8d, 0x03, 0x0a, 0x17, 0x45, 0x42, 0x72, 0x6f, 0x61, 0x64,
-	0x63, 0x61, 0x73, 0x74, 0x54, 0x69, 0x6d, 0x65, 0x6c, 0x69, 0x6e, 0x65, 0x45, 0x76, 0x65, 0x6e,
-	0x74, 0x12, 0x28, 0x0a, 0x24, 0x45, 0x42, 0x72, 0x6f, 0x61, 0x64, 0x63, 0x61, 0x73, 0x74, 0x54,
-	0x69, 0x6d, 0x65, 0x6c, 0x69, 0x6e, 0x65, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x5f, 0x4d, 0x61, 0x74,
-	0x63, 0x68, 0x53, 0x74, 0x61, 0x72, 0x74, 0x65, 0x64, 0x10, 0x01, 0x12, 0x2c, 0x0a, 0x28, 0x45,
+	0x77, 0x46, 0x6f, 0x72, 0x6d, 0x75, 0x6c, 0x61, 0x5f, 0x50, 0x65, 0x72, 0x63, 0x65, 0x6e, 0x74,
+	0x4f, 0x66, 0x54, 0x6f, 0x74, 0x61, 0x6c, 0x48, 0x50, 0x10, 0x03, 0x2a, 0xf6, 0x01, 0x0a, 0x15,
+	0x44, 0x4f, 0x54, 0x41, 0x5f, 0x54, 0x6f, 0x75, 0x72, 0x6e, 0x61, 0x6d, 0x65, 0x6e, 0x74, 0x45,
+	0x76, 0x65, 0x6e, 0x74, 0x73, 0x12, 0x12, 0x0a, 0x0e, 0x54, 0x45, 0x5f, 0x46, 0x49, 0x52, 0x53,
+	0x54, 0x5f, 0x42, 0x4c, 0x4f, 0x4f, 0x44, 0x10, 0x00, 0x12, 0x0f, 0x0a, 0x0b, 0x54, 0x45, 0x5f,
+	0x47, 0x41, 0x4d, 0x45, 0x5f, 0x45, 0x4e, 0x44, 0x10, 0x01, 0x12, 0x11, 0x0a, 0x0d, 0x54, 0x45,
+	0x5f, 0x4d, 0x55, 0x4c, 0x54, 0x49, 0x5f, 0x4b, 0x49, 0x4c, 0x4c, 0x10, 0x02, 0x12, 0x10, 0x0a,
+	0x0c, 0x54, 0x45, 0x5f, 0x48, 0x45, 0x52, 0x4f, 0x5f, 0x44, 0x45, 0x4e, 0x59, 0x10, 0x03, 0x12,
+	0x11, 0x0a, 0x0d, 0x54, 0x45, 0x5f, 0x41, 0x45, 0x47, 0x49, 0x53, 0x5f, 0x44, 0x45, 0x4e, 0x59,
+	0x10, 0x04, 0x12, 0x13, 0x0a, 0x0f, 0x54, 0x45, 0x5f, 0x41, 0x45, 0x47, 0x49, 0x53, 0x5f, 0x53,
+	0x54, 0x4f, 0x4c, 0x45, 0x4e, 0x10, 0x05, 0x12, 0x0e, 0x0a, 0x0a, 0x54, 0x45, 0x5f, 0x47, 0x4f,
+	0x44, 0x4c, 0x49, 0x4b, 0x45, 0x10, 0x06, 0x12, 0x13, 0x0a, 0x0f, 0x54, 0x45, 0x5f, 0x43, 0x4f,
+	0x55, 0x52, 0x49, 0x45, 0x52, 0x5f, 0x4b, 0x49, 0x4c, 0x4c, 0x10, 0x07, 0x12, 0x0f, 0x0a, 0x0b,
+	0x54, 0x45, 0x5f, 0x45, 0x43, 0x48, 0x4f, 0x53, 0x4c, 0x41, 0x4d, 0x10, 0x08, 0x12, 0x0d, 0x0a,
+	0x09, 0x54, 0x45, 0x5f, 0x52, 0x41, 0x50, 0x49, 0x45, 0x52, 0x10, 0x09, 0x12, 0x13, 0x0a, 0x0f,
+	0x54, 0x45, 0x5f, 0x45, 0x41, 0x52, 0x4c, 0x59, 0x5f, 0x52, 0x4f, 0x53, 0x48, 0x41, 0x4e, 0x10,
+	0x0a, 0x12, 0x11, 0x0a, 0x0d, 0x54, 0x45, 0x5f, 0x42, 0x4c, 0x41, 0x43, 0x4b, 0x5f, 0x48, 0x4f,
+	0x4c, 0x45, 0x10, 0x0b, 0x2a, 0x8d, 0x03, 0x0a, 0x17, 0x45, 0x42, 0x72, 0x6f, 0x61, 0x64, 0x63,
+	0x61, 0x73, 0x74, 0x54, 0x69, 0x6d, 0x65, 0x6c, 0x69, 0x6e, 0x65, 0x45, 0x76, 0x65, 0x6e, 0x74,
+	0x12, 0x28, 0x0a, 0x24, 0x45, 0x42, 0x72, 0x6f, 0x61, 0x64, 0x63, 0x61, 0x73, 0x74, 0x54, 0x69,
+	0x6d, 0x65, 0x6c, 0x69, 0x6e, 0x65, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x5f, 0x4d, 0x61, 0x74, 0x63,
+	0x68, 0x53, 0x74, 0x61, 0x72, 0x74, 0x65, 0x64, 0x10, 0x01, 0x12, 0x2c, 0x0a, 0x28, 0x45, 0x42,
+	0x72, 0x6f, 0x61, 0x64, 0x63, 0x61, 0x73, 0x74, 0x54, 0x69, 0x6d, 0x65, 0x6c, 0x69, 0x6e, 0x65,
+	0x45, 0x76, 0x65, 0x6e, 0x74, 0x5f, 0x47, 0x61, 0x6d, 0x65, 0x53, 0x74, 0x61, 0x74, 0x65, 0x43,
+	0x68, 0x61, 0x6e, 0x67, 0x65, 0x64, 0x10, 0x02, 0x12, 0x26, 0x0a, 0x22, 0x45, 0x42, 0x72, 0x6f,
+	0x61, 0x64, 0x63, 0x61, 0x73, 0x74, 0x54, 0x69, 0x6d, 0x65, 0x6c, 0x69, 0x6e, 0x65, 0x45, 0x76,
+	0x65, 0x6e, 0x74, 0x5f, 0x54, 0x6f, 0x77, 0x65, 0x72, 0x44, 0x65, 0x61, 0x74, 0x68, 0x10, 0x03,
+	0x12, 0x29, 0x0a, 0x25, 0x45, 0x42, 0x72, 0x6f, 0x61, 0x64, 0x63, 0x61, 0x73, 0x74, 0x54, 0x69,
+	0x6d, 0x65, 0x6c, 0x69, 0x6e, 0x65, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x5f, 0x42, 0x61, 0x72, 0x72,
+	0x61, 0x63, 0x6b, 0x73, 0x44, 0x65, 0x61, 0x74, 0x68, 0x10, 0x04, 0x12, 0x28, 0x0a, 0x24, 0x45,
 	0x42, 0x72, 0x6f, 0x61, 0x64, 0x63, 0x61, 0x73, 0x74, 0x54, 0x69, 0x6d, 0x65, 0x6c, 0x69, 0x6e,
-	0x65, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x5f, 0x47, 0x61, 0x6d, 0x65, 0x53, 0x74, 0x61, 0x74, 0x65,
-	0x43, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x64, 0x10, 0x02, 0x12, 0x26, 0x0a, 0x22, 0x45, 0x42, 0x72,
-	0x6f, 0x61, 0x64, 0x63, 0x61, 0x73, 0x74, 0x54, 0x69, 0x6d, 0x65, 0x6c, 0x69, 0x6e, 0x65, 0x45,
-	0x76, 0x65, 0x6e, 0x74, 0x5f, 0x54, 0x6f, 0x77, 0x65, 0x72, 0x44, 0x65, 0x61, 0x74, 0x68, 0x10,
-	0x03, 0x12, 0x29, 0x0a, 0x25, 0x45, 0x42, 0x72, 0x6f, 0x61, 0x64, 0x63, 0x61, 0x73, 0x74, 0x54,
-	0x69, 0x6d, 0x65, 0x6c, 0x69, 0x6e, 0x65, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x5f, 0x42, 0x61, 0x72,
-	0x72, 0x61, 0x63, 0x6b, 0x73, 0x44, 0x65, 0x61, 0x74, 0x68, 0x10, 0x04, 0x12, 0x28, 0x0a, 0x24,
+	0x65, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x5f, 0x41, 0x6e, 0x63, 0x69, 0x65, 0x6e, 0x74, 0x44, 0x65,
+	0x61, 0x74, 0x68, 0x10, 0x05, 0x12, 0x27, 0x0a, 0x23, 0x45, 0x42, 0x72, 0x6f, 0x61, 0x64, 0x63,
+	0x61, 0x73, 0x74, 0x54, 0x69, 0x6d, 0x65, 0x6c, 0x69, 0x6e, 0x65, 0x45, 0x76, 0x65, 0x6e, 0x74,
+	0x5f, 0x52, 0x6f, 0x73, 0x68, 0x61, 0x6e, 0x44, 0x65, 0x61, 0x74, 0x68, 0x10, 0x06, 0x12, 0x25,
+	0x0a, 0x21, 0x45, 0x42, 0x72, 0x6f, 0x61, 0x64, 0x63, 0x61, 0x73, 0x74, 0x54, 0x69, 0x6d, 0x65,
+	0x6c, 0x69, 0x6e, 0x65, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x5f, 0x48, 0x65, 0x72, 0x6f, 0x44, 0x65,
+	0x61, 0x74, 0x68, 0x10, 0x07, 0x12, 0x25, 0x0a, 0x21, 0x45, 0x42, 0x72, 0x6f, 0x61, 0x64, 0x63,
+	0x61, 0x73, 0x74, 0x54, 0x69, 0x6d, 0x65, 0x6c, 0x69, 0x6e, 0x65, 0x45, 0x76, 0x65, 0x6e, 0x74,
+	0x5f, 0x54, 0x65, 0x61, 0x6d, 0x46, 0x69, 0x67, 0x68, 0x74, 0x10, 0x08, 0x12, 0x26, 0x0a, 0x22,
 	0x45, 0x42, 0x72, 0x6f, 0x61, 0x64, 0x63, 0x61, 0x73, 0x74, 0x54, 0x69, 0x6d, 0x65, 0x6c, 0x69,
-	0x6e, 0x65, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x5f, 0x41, 0x6e, 0x63, 0x69, 0x65, 0x6e, 0x74, 0x44,
-	0x65, 0x61, 0x74, 0x68, 0x10, 0x05, 0x12, 0x27, 0x0a, 0x23, 0x45, 0x42, 0x72, 0x6f, 0x61, 0x64,
-	0x63, 0x61, 0x73, 0x74, 0x54, 0x69, 0x6d, 0x65, 0x6c, 0x69, 0x6e, 0x65, 0x45, 0x76, 0x65, 0x6e,
-	0x74, 0x5f, 0x52, 0x6f, 0x73, 0x68, 0x61, 0x6e, 0x44, 0x65, 0x61, 0x74, 0x68, 0x10, 0x06, 0x12,
-	0x25, 0x0a, 0x21, 0x45, 0x42, 0x72, 0x6f, 0x61, 0x64, 0x63, 0x61, 0x73, 0x74, 0x54, 0x69, 0x6d,
-	0x65, 0x6c, 0x69, 0x6e, 0x65, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x5f, 0x48, 0x65, 0x72, 0x6f, 0x44,
-	0x65, 0x61, 0x74, 0x68, 0x10, 0x07, 0x12, 0x25, 0x0a, 0x21, 0x45, 0x42, 0x72, 0x6f, 0x61, 0x64,
-	0x63, 0x61, 0x73, 0x74, 0x54, 0x69, 0x6d, 0x65, 0x6c, 0x69, 0x6e, 0x65, 0x45, 0x76, 0x65, 0x6e,
-	0x74, 0x5f, 0x54, 0x65, 0x61, 0x6d, 0x46, 0x69, 0x67, 0x68, 0x74, 0x10, 0x08, 0x12, 0x26, 0x0a,
-	0x22, 0x45, 0x42, 0x72, 0x6f, 0x61, 0x64, 0x63, 0x61, 0x73, 0x74, 0x54, 0x69, 0x6d, 0x65, 0x6c,
-	0x69, 0x6e, 0x65, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x5f, 0x46, 0x69, 0x72, 0x73, 0x74, 0x42, 0x6c,
-	0x6f, 0x6f, 0x64, 0x10, 0x09, 0x2a, 0x98, 0x01, 0x0a, 0x19, 0x45, 0x43, 0x75, 0x73, 0x74, 0x6f,
-	0x6d, 0x47, 0x61, 0x6d, 0x65, 0x57, 0x68, 0x69, 0x74, 0x65, 0x6c, 0x69, 0x73, 0x74, 0x53, 0x74,
-	0x61, 0x74, 0x65, 0x12, 0x27, 0x0a, 0x23, 0x43, 0x55, 0x53, 0x54, 0x4f, 0x4d, 0x5f, 0x47, 0x41,
-	0x4d, 0x45, 0x5f, 0x57, 0x48, 0x49, 0x54, 0x45, 0x4c, 0x49, 0x53, 0x54, 0x5f, 0x53, 0x54, 0x41,
-	0x54, 0x45, 0x5f, 0x55, 0x4e, 0x4b, 0x4e, 0x4f, 0x57, 0x4e, 0x10, 0x00, 0x12, 0x28, 0x0a, 0x24,
-	0x43, 0x55, 0x53, 0x54, 0x4f, 0x4d, 0x5f, 0x47, 0x41, 0x4d, 0x45, 0x5f, 0x57, 0x48, 0x49, 0x54,
-	0x45, 0x4c, 0x49, 0x53, 0x54, 0x5f, 0x53, 0x54, 0x41, 0x54, 0x45, 0x5f, 0x41, 0x50, 0x50, 0x52,
-	0x4f, 0x56, 0x45, 0x44, 0x10, 0x01, 0x12, 0x28, 0x0a, 0x24, 0x43, 0x55, 0x53, 0x54, 0x4f, 0x4d,
-	0x5f, 0x47, 0x41, 0x4d, 0x45, 0x5f, 0x57, 0x48, 0x49, 0x54, 0x45, 0x4c, 0x49, 0x53, 0x54, 0x5f,
-	0x53, 0x54, 0x41, 0x54, 0x45, 0x5f, 0x52, 0x45, 0x4a, 0x45, 0x43, 0x54, 0x45, 0x44, 0x10, 0x02,
-	0x2a, 0x9a, 0x07, 0x0a, 0x1b, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x54, 0x72, 0x69, 0x76, 0x69, 0x61,
+	0x6e, 0x65, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x5f, 0x46, 0x69, 0x72, 0x73, 0x74, 0x42, 0x6c, 0x6f,
+	0x6f, 0x64, 0x10, 0x09, 0x2a, 0x98, 0x01, 0x0a, 0x19, 0x45, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d,
+	0x47, 0x61, 0x6d, 0x65, 0x57, 0x68, 0x69, 0x74, 0x65, 0x6c, 0x69, 0x73, 0x74, 0x53, 0x74, 0x61,
+	0x74, 0x65, 0x12, 0x27, 0x0a, 0x23, 0x43, 0x55, 0x53, 0x54, 0x4f, 0x4d, 0x5f, 0x47, 0x41, 0x4d,
+	0x45, 0x5f, 0x57, 0x48, 0x49, 0x54, 0x45, 0x4c, 0x49, 0x53, 0x54, 0x5f, 0x53, 0x54, 0x41, 0x54,
+	0x45, 0x5f, 0x55, 0x4e, 0x4b, 0x4e, 0x4f, 0x57, 0x4e, 0x10, 0x00, 0x12, 0x28, 0x0a, 0x24, 0x43,
+	0x55, 0x53, 0x54, 0x4f, 0x4d, 0x5f, 0x47, 0x41, 0x4d, 0x45, 0x5f, 0x57, 0x48, 0x49, 0x54, 0x45,
+	0x4c, 0x49, 0x53, 0x54, 0x5f, 0x53, 0x54, 0x41, 0x54, 0x45, 0x5f, 0x41, 0x50, 0x50, 0x52, 0x4f,
+	0x56, 0x45, 0x44, 0x10, 0x01, 0x12, 0x28, 0x0a, 0x24, 0x43, 0x55, 0x53, 0x54, 0x4f, 0x4d, 0x5f,
+	0x47, 0x41, 0x4d, 0x45, 0x5f, 0x57, 0x48, 0x49, 0x54, 0x45, 0x4c, 0x49, 0x53, 0x54, 0x5f, 0x53,
+	0x54, 0x41, 0x54, 0x45, 0x5f, 0x52, 0x45, 0x4a, 0x45, 0x43, 0x54, 0x45, 0x44, 0x10, 0x02, 0x2a,
+	0x9a, 0x07, 0x0a, 0x1b, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x54, 0x72, 0x69, 0x76, 0x69, 0x61, 0x51,
+	0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x12,
+	0x2d, 0x0a, 0x29, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x54, 0x72, 0x69, 0x76, 0x69, 0x61,
 	0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79,
-	0x12, 0x2d, 0x0a, 0x29, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x54, 0x72, 0x69, 0x76, 0x69,
+	0x5f, 0x41, 0x62, 0x69, 0x6c, 0x69, 0x74, 0x79, 0x49, 0x63, 0x6f, 0x6e, 0x10, 0x00, 0x12, 0x31,
+	0x0a, 0x2d, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x54, 0x72, 0x69, 0x76, 0x69, 0x61, 0x51,
+	0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x5f,
+	0x41, 0x62, 0x69, 0x6c, 0x69, 0x74, 0x79, 0x43, 0x6f, 0x6f, 0x6c, 0x64, 0x6f, 0x77, 0x6e, 0x10,
+	0x01, 0x12, 0x30, 0x0a, 0x2c, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x54, 0x72, 0x69, 0x76,
+	0x69, 0x61, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f,
+	0x72, 0x79, 0x5f, 0x48, 0x65, 0x72, 0x6f, 0x41, 0x74, 0x74, 0x72, 0x69, 0x62, 0x75, 0x74, 0x65,
+	0x73, 0x10, 0x02, 0x12, 0x33, 0x0a, 0x2f, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x54, 0x72,
+	0x69, 0x76, 0x69, 0x61, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x61, 0x74, 0x65,
+	0x67, 0x6f, 0x72, 0x79, 0x5f, 0x48, 0x65, 0x72, 0x6f, 0x4d, 0x6f, 0x76, 0x65, 0x6d, 0x65, 0x6e,
+	0x74, 0x53, 0x70, 0x65, 0x65, 0x64, 0x10, 0x03, 0x12, 0x2c, 0x0a, 0x28, 0x6b, 0x5f, 0x45, 0x44,
+	0x4f, 0x54, 0x41, 0x54, 0x72, 0x69, 0x76, 0x69, 0x61, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f,
+	0x6e, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x5f, 0x54, 0x61, 0x6c, 0x65, 0x6e, 0x74,
+	0x54, 0x72, 0x65, 0x65, 0x10, 0x04, 0x12, 0x2b, 0x0a, 0x27, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54,
+	0x41, 0x54, 0x72, 0x69, 0x76, 0x69, 0x61, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x43,
+	0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x5f, 0x48, 0x65, 0x72, 0x6f, 0x53, 0x74, 0x61, 0x74,
+	0x73, 0x10, 0x05, 0x12, 0x2b, 0x0a, 0x27, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x54, 0x72,
+	0x69, 0x76, 0x69, 0x61, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x61, 0x74, 0x65,
+	0x67, 0x6f, 0x72, 0x79, 0x5f, 0x49, 0x74, 0x65, 0x6d, 0x50, 0x72, 0x69, 0x63, 0x65, 0x10, 0x06,
+	0x12, 0x2e, 0x0a, 0x2a, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x54, 0x72, 0x69, 0x76, 0x69,
 	0x61, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72,
-	0x79, 0x5f, 0x41, 0x62, 0x69, 0x6c, 0x69, 0x74, 0x79, 0x49, 0x63, 0x6f, 0x6e, 0x10, 0x00, 0x12,
-	0x31, 0x0a, 0x2d, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x54, 0x72, 0x69, 0x76, 0x69, 0x61,
-	0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79,
-	0x5f, 0x41, 0x62, 0x69, 0x6c, 0x69, 0x74, 0x79, 0x43, 0x6f, 0x6f, 0x6c, 0x64, 0x6f, 0x77, 0x6e,
-	0x10, 0x01, 0x12, 0x30, 0x0a, 0x2c, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x54, 0x72, 0x69,
-	0x76, 0x69, 0x61, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x61, 0x74, 0x65, 0x67,
-	0x6f, 0x72, 0x79, 0x5f, 0x48, 0x65, 0x72, 0x6f, 0x41, 0x74, 0x74, 0x72, 0x69, 0x62, 0x75, 0x74,
-	0x65, 0x73, 0x10, 0x02, 0x12, 0x33, 0x0a, 0x2f, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x54,
-	0x72, 0x69, 0x76, 0x69, 0x61, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x61, 0x74,
-	0x65, 0x67, 0x6f, 0x72, 0x79, 0x5f, 0x48, 0x65, 0x72, 0x6f, 0x4d, 0x6f, 0x76, 0x65, 0x6d, 0x65,
-	0x6e, 0x74, 0x53, 0x70, 0x65, 0x65, 0x64, 0x10, 0x03, 0x12, 0x2c, 0x0a, 0x28, 0x6b, 0x5f, 0x45,
-	0x44, 0x4f, 0x54, 0x41, 0x54, 0x72, 0x69, 0x76, 0x69, 0x61, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69,
-	0x6f, 0x6e, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x5f, 0x54, 0x61, 0x6c, 0x65, 0x6e,
-	0x74, 0x54, 0x72, 0x65, 0x65, 0x10, 0x04, 0x12, 0x2b, 0x0a, 0x27, 0x6b, 0x5f, 0x45, 0x44, 0x4f,
-	0x54, 0x41, 0x54, 0x72, 0x69, 0x76, 0x69, 0x61, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e,
-	0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x5f, 0x48, 0x65, 0x72, 0x6f, 0x53, 0x74, 0x61,
-	0x74, 0x73, 0x10, 0x05, 0x12, 0x2b, 0x0a, 0x27, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x54,
-	0x72, 0x69, 0x76, 0x69, 0x61, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x61, 0x74,
-	0x65, 0x67, 0x6f, 0x72, 0x79, 0x5f, 0x49, 0x74, 0x65, 0x6d, 0x50, 0x72, 0x69, 0x63, 0x65, 0x10,
-	0x06, 0x12, 0x2e, 0x0a, 0x2a, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x54, 0x72, 0x69, 0x76,
+	0x79, 0x5f, 0x41, 0x62, 0x69, 0x6c, 0x69, 0x74, 0x79, 0x53, 0x6f, 0x75, 0x6e, 0x64, 0x10, 0x07,
+	0x12, 0x2f, 0x0a, 0x2b, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x54, 0x72, 0x69, 0x76, 0x69,
+	0x61, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72,
+	0x79, 0x5f, 0x49, 0x6e, 0x76, 0x6f, 0x6b, 0x65, 0x72, 0x53, 0x70, 0x65, 0x6c, 0x6c, 0x73, 0x10,
+	0x08, 0x12, 0x31, 0x0a, 0x2d, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x54, 0x72, 0x69, 0x76,
 	0x69, 0x61, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f,
-	0x72, 0x79, 0x5f, 0x41, 0x62, 0x69, 0x6c, 0x69, 0x74, 0x79, 0x53, 0x6f, 0x75, 0x6e, 0x64, 0x10,
-	0x07, 0x12, 0x2f, 0x0a, 0x2b, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x54, 0x72, 0x69, 0x76,
-	0x69, 0x61, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f,
-	0x72, 0x79, 0x5f, 0x49, 0x6e, 0x76, 0x6f, 0x6b, 0x65, 0x72, 0x53, 0x70, 0x65, 0x6c, 0x6c, 0x73,
-	0x10, 0x08, 0x12, 0x31, 0x0a, 0x2d, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x54, 0x72, 0x69,
-	0x76, 0x69, 0x61, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x61, 0x74, 0x65, 0x67,
-	0x6f, 0x72, 0x79, 0x5f, 0x41, 0x62, 0x69, 0x6c, 0x69, 0x74, 0x79, 0x4d, 0x61, 0x6e, 0x61, 0x43,
-	0x6f, 0x73, 0x74, 0x10, 0x09, 0x12, 0x31, 0x0a, 0x2d, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41,
-	0x54, 0x72, 0x69, 0x76, 0x69, 0x61, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x61,
-	0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x5f, 0x48, 0x65, 0x72, 0x6f, 0x41, 0x74, 0x74, 0x61, 0x63,
-	0x6b, 0x53, 0x6f, 0x75, 0x6e, 0x64, 0x10, 0x0a, 0x12, 0x2d, 0x0a, 0x29, 0x6b, 0x5f, 0x45, 0x44,
-	0x4f, 0x54, 0x41, 0x54, 0x72, 0x69, 0x76, 0x69, 0x61, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f,
-	0x6e, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x5f, 0x41, 0x62, 0x69, 0x6c, 0x69, 0x74,
-	0x79, 0x4e, 0x61, 0x6d, 0x65, 0x10, 0x0b, 0x12, 0x30, 0x0a, 0x2c, 0x6b, 0x5f, 0x45, 0x44, 0x4f,
+	0x72, 0x79, 0x5f, 0x41, 0x62, 0x69, 0x6c, 0x69, 0x74, 0x79, 0x4d, 0x61, 0x6e, 0x61, 0x43, 0x6f,
+	0x73, 0x74, 0x10, 0x09, 0x12, 0x31, 0x0a, 0x2d, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x54,
+	0x72, 0x69, 0x76, 0x69, 0x61, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x61, 0x74,
+	0x65, 0x67, 0x6f, 0x72, 0x79, 0x5f, 0x48, 0x65, 0x72, 0x6f, 0x41, 0x74, 0x74, 0x61, 0x63, 0x6b,
+	0x53, 0x6f, 0x75, 0x6e, 0x64, 0x10, 0x0a, 0x12, 0x2d, 0x0a, 0x29, 0x6b, 0x5f, 0x45, 0x44, 0x4f,
 	0x54, 0x41, 0x54, 0x72, 0x69, 0x76, 0x69, 0x61, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e,
-	0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x5f, 0x49, 0x74, 0x65, 0x6d, 0x43, 0x6f, 0x6d,
-	0x70, 0x6f, 0x6e, 0x65, 0x6e, 0x74, 0x73, 0x10, 0x0c, 0x12, 0x2a, 0x0a, 0x26, 0x6b, 0x5f, 0x45,
-	0x44, 0x4f, 0x54, 0x41, 0x54, 0x72, 0x69, 0x76, 0x69, 0x61, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69,
-	0x6f, 0x6e, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x5f, 0x49, 0x74, 0x65, 0x6d, 0x4c,
-	0x6f, 0x72, 0x65, 0x10, 0x0d, 0x12, 0x2e, 0x0a, 0x2a, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41,
-	0x54, 0x72, 0x69, 0x76, 0x69, 0x61, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x61,
-	0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x5f, 0x49, 0x74, 0x65, 0x6d, 0x50, 0x61, 0x73, 0x73, 0x69,
-	0x76, 0x65, 0x73, 0x10, 0x0e, 0x12, 0x36, 0x0a, 0x32, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41,
-	0x54, 0x72, 0x69, 0x76, 0x69, 0x61, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x61,
-	0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x5f, 0x53, 0x54, 0x41, 0x54, 0x49, 0x43, 0x5f, 0x51, 0x55,
-	0x45, 0x53, 0x54, 0x49, 0x4f, 0x4e, 0x53, 0x5f, 0x45, 0x4e, 0x44, 0x10, 0x0f, 0x12, 0x39, 0x0a,
-	0x35, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x54, 0x72, 0x69, 0x76, 0x69, 0x61, 0x51, 0x75,
-	0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x5f, 0x44,
-	0x59, 0x4e, 0x41, 0x4d, 0x49, 0x43, 0x5f, 0x51, 0x55, 0x45, 0x53, 0x54, 0x49, 0x4f, 0x4e, 0x53,
-	0x5f, 0x53, 0x54, 0x41, 0x52, 0x54, 0x10, 0x63, 0x12, 0x33, 0x0a, 0x2f, 0x6b, 0x5f, 0x45, 0x44,
+	0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x5f, 0x41, 0x62, 0x69, 0x6c, 0x69, 0x74, 0x79,
+	0x4e, 0x61, 0x6d, 0x65, 0x10, 0x0b, 0x12, 0x30, 0x0a, 0x2c, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54,
+	0x41, 0x54, 0x72, 0x69, 0x76, 0x69, 0x61, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x43,
+	0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x5f, 0x49, 0x74, 0x65, 0x6d, 0x43, 0x6f, 0x6d, 0x70,
+	0x6f, 0x6e, 0x65, 0x6e, 0x74, 0x73, 0x10, 0x0c, 0x12, 0x2a, 0x0a, 0x26, 0x6b, 0x5f, 0x45, 0x44,
 	0x4f, 0x54, 0x41, 0x54, 0x72, 0x69, 0x76, 0x69, 0x61, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f,
-	0x6e, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x5f, 0x44, 0x79, 0x6e, 0x61, 0x6d, 0x69,
-	0x63, 0x5f, 0x49, 0x74, 0x65, 0x6d, 0x42, 0x75, 0x69, 0x6c, 0x64, 0x10, 0x64, 0x2a, 0xa9, 0x01,
-	0x0a, 0x14, 0x45, 0x4f, 0x76, 0x65, 0x72, 0x77, 0x61, 0x74, 0x63, 0x68, 0x43, 0x6f, 0x6e, 0x76,
-	0x69, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x1f, 0x0a, 0x1b, 0x6b, 0x5f, 0x45, 0x4f, 0x76, 0x65,
+	0x6e, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x5f, 0x49, 0x74, 0x65, 0x6d, 0x4c, 0x6f,
+	0x72, 0x65, 0x10, 0x0d, 0x12, 0x2e, 0x0a, 0x2a, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x54,
+	0x72, 0x69, 0x76, 0x69, 0x61, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x61, 0x74,
+	0x65, 0x67, 0x6f, 0x72, 0x79, 0x5f, 0x49, 0x74, 0x65, 0x6d, 0x50, 0x61, 0x73, 0x73, 0x69, 0x76,
+	0x65, 0x73, 0x10, 0x0e, 0x12, 0x36, 0x0a, 0x32, 0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x54,
+	0x72, 0x69, 0x76, 0x69, 0x61, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x61, 0x74,
+	0x65, 0x67, 0x6f, 0x72, 0x79, 0x5f, 0x53, 0x54, 0x41, 0x54, 0x49, 0x43, 0x5f, 0x51, 0x55, 0x45,
+	0x53, 0x54, 0x49, 0x4f, 0x4e, 0x53, 0x5f, 0x45, 0x4e, 0x44, 0x10, 0x0f, 0x12, 0x39, 0x0a, 0x35,
+	0x6b, 0x5f, 0x45, 0x44, 0x4f, 0x54, 0x41, 0x54, 0x72, 0x69, 0x76, 0x69, 0x61, 0x51, 0x75, 0x65,
+	0x73, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x5f, 0x44, 0x59,
+	0x4e, 0x41, 0x4d, 0x49, 0x43, 0x5f, 0x51, 0x55, 0x45, 0x53, 0x54, 0x49, 0x4f, 0x4e, 0x53, 0x5f,
+	0x53, 0x54, 0x41, 0x52, 0x54, 0x10, 0x63, 0x12, 0x33, 0x0a, 0x2f, 0x6b, 0x5f, 0x45, 0x44, 0x4f,
+	0x54, 0x41, 0x54, 0x72, 0x69, 0x76, 0x69, 0x61, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e,
+	0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x5f, 0x44, 0x79, 0x6e, 0x61, 0x6d, 0x69, 0x63,
+	0x5f, 0x49, 0x74, 0x65, 0x6d, 0x42, 0x75, 0x69, 0x6c, 0x64, 0x10, 0x64, 0x2a, 0xa9, 0x01, 0x0a,
+	0x14, 0x45, 0x4f, 0x76, 0x65, 0x72, 0x77, 0x61, 0x74, 0x63, 0x68, 0x43, 0x6f, 0x6e, 0x76, 0x69,
+	0x63, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x1f, 0x0a, 0x1b, 0x6b, 0x5f, 0x45, 0x4f, 0x76, 0x65, 0x72,
+	0x77, 0x61, 0x74, 0x63, 0x68, 0x43, 0x6f, 0x6e, 0x76, 0x69, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x5f,
+	0x4e, 0x6f, 0x6e, 0x65, 0x10, 0x00, 0x12, 0x24, 0x0a, 0x20, 0x6b, 0x5f, 0x45, 0x4f, 0x76, 0x65,
 	0x72, 0x77, 0x61, 0x74, 0x63, 0x68, 0x43, 0x6f, 0x6e, 0x76, 0x69, 0x63, 0x74, 0x69, 0x6f, 0x6e,
-	0x5f, 0x4e, 0x6f, 0x6e, 0x65, 0x10, 0x00, 0x12, 0x24, 0x0a, 0x20, 0x6b, 0x5f, 0x45, 0x4f, 0x76,
-	0x65, 0x72, 0x77, 0x61, 0x74, 0x63, 0x68, 0x43, 0x6f, 0x6e, 0x76, 0x69, 0x63, 0x74, 0x69, 0x6f,
-	0x6e, 0x5f, 0x4e, 0x6f, 0x74, 0x47, 0x75, 0x69, 0x6c, 0x74, 0x79, 0x10, 0x01, 0x12, 0x27, 0x0a,
-	0x23, 0x6b, 0x5f, 0x45, 0x4f, 0x76, 0x65, 0x72, 0x77, 0x61, 0x74, 0x63, 0x68, 0x43, 0x6f, 0x6e,
-	0x76, 0x69, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x47, 0x75, 0x69, 0x6c, 0x74, 0x55, 0x6e, 0x63,
-	0x6c, 0x65, 0x61, 0x72, 0x10, 0x02, 0x12, 0x21, 0x0a, 0x1d, 0x6b, 0x5f, 0x45, 0x4f, 0x76, 0x65,
-	0x72, 0x77, 0x61, 0x74, 0x63, 0x68, 0x43, 0x6f, 0x6e, 0x76, 0x69, 0x63, 0x74, 0x69, 0x6f, 0x6e,
-	0x5f, 0x47, 0x75, 0x69, 0x6c, 0x74, 0x79, 0x10, 0x03, 0x2a, 0x74, 0x0a, 0x10, 0x45, 0x48, 0x65,
-	0x72, 0x6f, 0x52, 0x65, 0x6c, 0x69, 0x63, 0x52, 0x61, 0x72, 0x69, 0x74, 0x79, 0x12, 0x26, 0x0a,
-	0x19, 0x48, 0x45, 0x52, 0x4f, 0x5f, 0x52, 0x45, 0x4c, 0x49, 0x43, 0x5f, 0x52, 0x41, 0x52, 0x49,
-	0x54, 0x59, 0x5f, 0x49, 0x4e, 0x56, 0x41, 0x4c, 0x49, 0x44, 0x10, 0xff, 0xff, 0xff, 0xff, 0xff,
-	0xff, 0xff, 0xff, 0xff, 0x01, 0x12, 0x1c, 0x0a, 0x18, 0x48, 0x45, 0x52, 0x4f, 0x5f, 0x52, 0x45,
-	0x4c, 0x49, 0x43, 0x5f, 0x52, 0x41, 0x52, 0x49, 0x54, 0x59, 0x5f, 0x43, 0x4f, 0x4d, 0x4d, 0x4f,
-	0x4e, 0x10, 0x00, 0x12, 0x1a, 0x0a, 0x16, 0x48, 0x45, 0x52, 0x4f, 0x5f, 0x52, 0x45, 0x4c, 0x49,
-	0x43, 0x5f, 0x52, 0x41, 0x52, 0x49, 0x54, 0x59, 0x5f, 0x52, 0x41, 0x52, 0x45, 0x10, 0x01, 0x2a,
-	0xd1, 0x01, 0x0a, 0x17, 0x45, 0x53, 0x74, 0x69, 0x63, 0x6b, 0x65, 0x72, 0x62, 0x6f, 0x6f, 0x6b,
-	0x41, 0x75, 0x64, 0x69, 0x74, 0x41, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x21, 0x0a, 0x1d, 0x53,
-	0x54, 0x49, 0x43, 0x4b, 0x45, 0x52, 0x42, 0x4f, 0x4f, 0x4b, 0x5f, 0x41, 0x55, 0x44, 0x49, 0x54,
-	0x5f, 0x43, 0x52, 0x45, 0x41, 0x54, 0x45, 0x5f, 0x50, 0x41, 0x47, 0x45, 0x10, 0x00, 0x12, 0x21,
-	0x0a, 0x1d, 0x53, 0x54, 0x49, 0x43, 0x4b, 0x45, 0x52, 0x42, 0x4f, 0x4f, 0x4b, 0x5f, 0x41, 0x55,
-	0x44, 0x49, 0x54, 0x5f, 0x44, 0x45, 0x4c, 0x45, 0x54, 0x45, 0x5f, 0x50, 0x41, 0x47, 0x45, 0x10,
-	0x01, 0x12, 0x24, 0x0a, 0x20, 0x53, 0x54, 0x49, 0x43, 0x4b, 0x45, 0x52, 0x42, 0x4f, 0x4f, 0x4b,
-	0x5f, 0x41, 0x55, 0x44, 0x49, 0x54, 0x5f, 0x53, 0x54, 0x49, 0x43, 0x4b, 0x5f, 0x53, 0x54, 0x49,
-	0x43, 0x4b, 0x45, 0x52, 0x53, 0x10, 0x02, 0x12, 0x26, 0x0a, 0x22, 0x53, 0x54, 0x49, 0x43, 0x4b,
-	0x45, 0x52, 0x42, 0x4f, 0x4f, 0x4b, 0x5f, 0x41, 0x55, 0x44, 0x49, 0x54, 0x5f, 0x52, 0x45, 0x50,
-	0x4c, 0x41, 0x43, 0x45, 0x5f, 0x53, 0x54, 0x49, 0x43, 0x4b, 0x45, 0x52, 0x53, 0x10, 0x03, 0x12,
-	0x22, 0x0a, 0x1e, 0x53, 0x54, 0x49, 0x43, 0x4b, 0x45, 0x52, 0x42, 0x4f, 0x4f, 0x4b, 0x5f, 0x41,
-	0x55, 0x44, 0x49, 0x54, 0x5f, 0x48, 0x45, 0x52, 0x4f, 0x5f, 0x53, 0x54, 0x49, 0x43, 0x4b, 0x45,
-	0x52, 0x10, 0x04, 0x2a, 0x60, 0x0a, 0x14, 0x45, 0x53, 0x74, 0x69, 0x63, 0x6b, 0x65, 0x72, 0x62,
-	0x6f, 0x6f, 0x6b, 0x50, 0x61, 0x67, 0x65, 0x54, 0x79, 0x70, 0x65, 0x12, 0x18, 0x0a, 0x14, 0x53,
-	0x54, 0x49, 0x43, 0x4b, 0x45, 0x52, 0x5f, 0x50, 0x41, 0x47, 0x45, 0x5f, 0x47, 0x45, 0x4e, 0x45,
-	0x52, 0x49, 0x43, 0x10, 0x00, 0x12, 0x15, 0x0a, 0x11, 0x53, 0x54, 0x49, 0x43, 0x4b, 0x45, 0x52,
-	0x5f, 0x50, 0x41, 0x47, 0x45, 0x5f, 0x54, 0x45, 0x41, 0x4d, 0x10, 0x01, 0x12, 0x17, 0x0a, 0x13,
-	0x53, 0x54, 0x49, 0x43, 0x4b, 0x45, 0x52, 0x5f, 0x50, 0x41, 0x47, 0x45, 0x5f, 0x54, 0x41, 0x4c,
-	0x45, 0x4e, 0x54, 0x10, 0x02, 0x2a, 0xbb, 0x04, 0x0a, 0x18, 0x45, 0x4e, 0x65, 0x77, 0x42, 0x6c,
-	0x6f, 0x6f, 0x6d, 0x47, 0x69, 0x66, 0x74, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
-	0x73, 0x65, 0x12, 0x1d, 0x0a, 0x19, 0x6b, 0x45, 0x4e, 0x65, 0x77, 0x42, 0x6c, 0x6f, 0x6f, 0x6d,
-	0x47, 0x69, 0x66, 0x74, 0x69, 0x6e, 0x67, 0x5f, 0x53, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x10,
-	0x00, 0x12, 0x24, 0x0a, 0x20, 0x6b, 0x45, 0x4e, 0x65, 0x77, 0x42, 0x6c, 0x6f, 0x6f, 0x6d, 0x47,
-	0x69, 0x66, 0x74, 0x69, 0x6e, 0x67, 0x5f, 0x55, 0x6e, 0x6b, 0x6e, 0x6f, 0x77, 0x6e, 0x46, 0x61,
-	0x69, 0x6c, 0x75, 0x72, 0x65, 0x10, 0x01, 0x12, 0x26, 0x0a, 0x22, 0x6b, 0x45, 0x4e, 0x65, 0x77,
-	0x42, 0x6c, 0x6f, 0x6f, 0x6d, 0x47, 0x69, 0x66, 0x74, 0x69, 0x6e, 0x67, 0x5f, 0x4d, 0x61, 0x6c,
-	0x66, 0x6f, 0x72, 0x6d, 0x65, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x10, 0x02, 0x12,
-	0x25, 0x0a, 0x21, 0x6b, 0x45, 0x4e, 0x65, 0x77, 0x42, 0x6c, 0x6f, 0x6f, 0x6d, 0x47, 0x69, 0x66,
-	0x74, 0x69, 0x6e, 0x67, 0x5f, 0x46, 0x65, 0x61, 0x74, 0x75, 0x72, 0x65, 0x44, 0x69, 0x73, 0x61,
-	0x62, 0x6c, 0x65, 0x64, 0x10, 0x03, 0x12, 0x22, 0x0a, 0x1e, 0x6b, 0x45, 0x4e, 0x65, 0x77, 0x42,
-	0x6c, 0x6f, 0x6f, 0x6d, 0x47, 0x69, 0x66, 0x74, 0x69, 0x6e, 0x67, 0x5f, 0x49, 0x74, 0x65, 0x6d,
-	0x4e, 0x6f, 0x74, 0x46, 0x6f, 0x75, 0x6e, 0x64, 0x10, 0x04, 0x12, 0x31, 0x0a, 0x2d, 0x6b, 0x45,
-	0x4e, 0x65, 0x77, 0x42, 0x6c, 0x6f, 0x6f, 0x6d, 0x47, 0x69, 0x66, 0x74, 0x69, 0x6e, 0x67, 0x5f,
-	0x50, 0x6c, 0x61, 0x79, 0x65, 0x72, 0x4e, 0x6f, 0x74, 0x41, 0x6c, 0x6c, 0x6f, 0x77, 0x65, 0x64,
-	0x54, 0x6f, 0x47, 0x69, 0x76, 0x65, 0x47, 0x69, 0x66, 0x74, 0x73, 0x10, 0x05, 0x12, 0x34, 0x0a,
-	0x30, 0x6b, 0x45, 0x4e, 0x65, 0x77, 0x42, 0x6c, 0x6f, 0x6f, 0x6d, 0x47, 0x69, 0x66, 0x74, 0x69,
-	0x6e, 0x67, 0x5f, 0x54, 0x61, 0x72, 0x67, 0x65, 0x74, 0x4e, 0x6f, 0x74, 0x41, 0x6c, 0x6c, 0x6f,
-	0x77, 0x65, 0x64, 0x54, 0x6f, 0x52, 0x65, 0x63, 0x65, 0x69, 0x76, 0x65, 0x47, 0x69, 0x66, 0x74,
-	0x73, 0x10, 0x06, 0x12, 0x29, 0x0a, 0x25, 0x6b, 0x45, 0x4e, 0x65, 0x77, 0x42, 0x6c, 0x6f, 0x6f,
-	0x6d, 0x47, 0x69, 0x66, 0x74, 0x69, 0x6e, 0x67, 0x5f, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x4e,
-	0x6f, 0x74, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x7a, 0x65, 0x64, 0x10, 0x64, 0x12, 0x26,
-	0x0a, 0x22, 0x6b, 0x45, 0x4e, 0x65, 0x77, 0x42, 0x6c, 0x6f, 0x6f, 0x6d, 0x47, 0x69, 0x66, 0x74,
-	0x69, 0x6e, 0x67, 0x5f, 0x50, 0x6c, 0x61, 0x79, 0x65, 0x72, 0x4e, 0x6f, 0x74, 0x49, 0x6e, 0x4c,
-	0x6f, 0x62, 0x62, 0x79, 0x10, 0x65, 0x12, 0x26, 0x0a, 0x22, 0x6b, 0x45, 0x4e, 0x65, 0x77, 0x42,
-	0x6c, 0x6f, 0x6f, 0x6d, 0x47, 0x69, 0x66, 0x74, 0x69, 0x6e, 0x67, 0x5f, 0x54, 0x61, 0x72, 0x67,
-	0x65, 0x74, 0x4e, 0x6f, 0x74, 0x49, 0x6e, 0x4c, 0x6f, 0x62, 0x62, 0x79, 0x10, 0x66, 0x12, 0x26,
-	0x0a, 0x22, 0x6b, 0x45, 0x4e, 0x65, 0x77, 0x42, 0x6c, 0x6f, 0x6f, 0x6d, 0x47, 0x69, 0x66, 0x74,
-	0x69, 0x6e, 0x67, 0x5f, 0x4c, 0x6f, 0x62, 0x62, 0x79, 0x4e, 0x6f, 0x74, 0x45, 0x6c, 0x69, 0x67,
-	0x69, 0x62, 0x6c, 0x65, 0x10, 0x67, 0x12, 0x26, 0x0a, 0x21, 0x6b, 0x45, 0x4e, 0x65, 0x77, 0x42,
-	0x6c, 0x6f, 0x6f, 0x6d, 0x47, 0x69, 0x66, 0x74, 0x69, 0x6e, 0x67, 0x5f, 0x54, 0x61, 0x72, 0x67,
-	0x65, 0x74, 0x4e, 0x6f, 0x74, 0x46, 0x72, 0x69, 0x65, 0x6e, 0x64, 0x10, 0xc8, 0x01, 0x12, 0x33,
-	0x0a, 0x2e, 0x6b, 0x45, 0x4e, 0x65, 0x77, 0x42, 0x6c, 0x6f, 0x6f, 0x6d, 0x47, 0x69, 0x66, 0x74,
-	0x69, 0x6e, 0x67, 0x5f, 0x54, 0x61, 0x72, 0x67, 0x65, 0x74, 0x46, 0x72, 0x69, 0x65, 0x6e, 0x64,
-	0x44, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x6f, 0x6f, 0x53, 0x68, 0x6f, 0x72, 0x74,
-	0x10, 0xc9, 0x01, 0x42, 0x25, 0x5a, 0x23, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f,
-	0x6d, 0x2f, 0x64, 0x6f, 0x74, 0x61, 0x62, 0x75, 0x66, 0x66, 0x2f, 0x6d, 0x61, 0x6e, 0x74, 0x61,
-	0x2f, 0x64, 0x6f, 0x74, 0x61, 0x3b, 0x64, 0x6f, 0x74, 0x61,
+	0x5f, 0x4e, 0x6f, 0x74, 0x47, 0x75, 0x69, 0x6c, 0x74, 0x79, 0x10, 0x01, 0x12, 0x27, 0x0a, 0x23,
+	0x6b, 0x5f, 0x45, 0x4f, 0x76, 0x65, 0x72, 0x77, 0x61, 0x74, 0x63, 0x68, 0x43, 0x6f, 0x6e, 0x76,
+	0x69, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x47, 0x75, 0x69, 0x6c, 0x74, 0x55, 0x6e, 0x63, 0x6c,
+	0x65, 0x61, 0x72, 0x10, 0x02, 0x12, 0x21, 0x0a, 0x1d, 0x6b, 0x5f, 0x45, 0x4f, 0x76, 0x65, 0x72,
+	0x77, 0x61, 0x74, 0x63, 0x68, 0x43, 0x6f, 0x6e, 0x76, 0x69, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x5f,
+	0x47, 0x75, 0x69, 0x6c, 0x74, 0x79, 0x10, 0x03, 0x2a, 0x74, 0x0a, 0x10, 0x45, 0x48, 0x65, 0x72,
+	0x6f, 0x52, 0x65, 0x6c, 0x69, 0x63, 0x52, 0x61, 0x72, 0x69, 0x74, 0x79, 0x12, 0x26, 0x0a, 0x19,
+	0x48, 0x45, 0x52, 0x4f, 0x5f, 0x52, 0x45, 0x4c, 0x49, 0x43, 0x5f, 0x52, 0x41, 0x52, 0x49, 0x54,
+	0x59, 0x5f, 0x49, 0x4e, 0x56, 0x41, 0x4c, 0x49, 0x44, 0x10, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+	0xff, 0xff, 0xff, 0x01, 0x12, 0x1c, 0x0a, 0x18, 0x48, 0x45, 0x52, 0x4f, 0x5f, 0x52, 0x45, 0x4c,
+	0x49, 0x43, 0x5f, 0x52, 0x41, 0x52, 0x49, 0x54, 0x59, 0x5f, 0x43, 0x4f, 0x4d, 0x4d, 0x4f, 0x4e,
+	0x10, 0x00, 0x12, 0x1a, 0x0a, 0x16, 0x48, 0x45, 0x52, 0x4f, 0x5f, 0x52, 0x45, 0x4c, 0x49, 0x43,
+	0x5f, 0x52, 0x41, 0x52, 0x49, 0x54, 0x59, 0x5f, 0x52, 0x41, 0x52, 0x45, 0x10, 0x01, 0x2a, 0xd1,
+	0x01, 0x0a, 0x17, 0x45, 0x53, 0x74, 0x69, 0x63, 0x6b, 0x65, 0x72, 0x62, 0x6f, 0x6f, 0x6b, 0x41,
+	0x75, 0x64, 0x69, 0x74, 0x41, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x21, 0x0a, 0x1d, 0x53, 0x54,
+	0x49, 0x43, 0x4b, 0x45, 0x52, 0x42, 0x4f, 0x4f, 0x4b, 0x5f, 0x41, 0x55, 0x44, 0x49, 0x54, 0x5f,
+	0x43, 0x52, 0x45, 0x41, 0x54, 0x45, 0x5f, 0x50, 0x41, 0x47, 0x45, 0x10, 0x00, 0x12, 0x21, 0x0a,
+	0x1d, 0x53, 0x54, 0x49, 0x43, 0x4b, 0x45, 0x52, 0x42, 0x4f, 0x4f, 0x4b, 0x5f, 0x41, 0x55, 0x44,
+	0x49, 0x54, 0x5f, 0x44, 0x45, 0x4c, 0x45, 0x54, 0x45, 0x5f, 0x50, 0x41, 0x47, 0x45, 0x10, 0x01,
+	0x12, 0x24, 0x0a, 0x20, 0x53, 0x54, 0x49, 0x43, 0x4b, 0x45, 0x52, 0x42, 0x4f, 0x4f, 0x4b, 0x5f,
+	0x41, 0x55, 0x44, 0x49, 0x54, 0x5f, 0x53, 0x54, 0x49, 0x43, 0x4b, 0x5f, 0x53, 0x54, 0x49, 0x43,
+	0x4b, 0x45, 0x52, 0x53, 0x10, 0x02, 0x12, 0x26, 0x0a, 0x22, 0x53, 0x54, 0x49, 0x43, 0x4b, 0x45,
+	0x52, 0x42, 0x4f, 0x4f, 0x4b, 0x5f, 0x41, 0x55, 0x44, 0x49, 0x54, 0x5f, 0x52, 0x45, 0x50, 0x4c,
+	0x41, 0x43, 0x45, 0x5f, 0x53, 0x54, 0x49, 0x43, 0x4b, 0x45, 0x52, 0x53, 0x10, 0x03, 0x12, 0x22,
+	0x0a, 0x1e, 0x53, 0x54, 0x49, 0x43, 0x4b, 0x45, 0x52, 0x42, 0x4f, 0x4f, 0x4b, 0x5f, 0x41, 0x55,
+	0x44, 0x49, 0x54, 0x5f, 0x48, 0x45, 0x52, 0x4f, 0x5f, 0x53, 0x54, 0x49, 0x43, 0x4b, 0x45, 0x52,
+	0x10, 0x04, 0x2a, 0x60, 0x0a, 0x14, 0x45, 0x53, 0x74, 0x69, 0x63, 0x6b, 0x65, 0x72, 0x62, 0x6f,
+	0x6f, 0x6b, 0x50, 0x61, 0x67, 0x65, 0x54, 0x79, 0x70, 0x65, 0x12, 0x18, 0x0a, 0x14, 0x53, 0x54,
+	0x49, 0x43, 0x4b, 0x45, 0x52, 0x5f, 0x50, 0x41, 0x47, 0x45, 0x5f, 0x47, 0x45, 0x4e, 0x45, 0x52,
+	0x49, 0x43, 0x10, 0x00, 0x12, 0x15, 0x0a, 0x11, 0x53, 0x54, 0x49, 0x43, 0x4b, 0x45, 0x52, 0x5f,
+	0x50, 0x41, 0x47, 0x45, 0x5f, 0x54, 0x45, 0x41, 0x4d, 0x10, 0x01, 0x12, 0x17, 0x0a, 0x13, 0x53,
+	0x54, 0x49, 0x43, 0x4b, 0x45, 0x52, 0x5f, 0x50, 0x41, 0x47, 0x45, 0x5f, 0x54, 0x41, 0x4c, 0x45,
+	0x4e, 0x54, 0x10, 0x02, 0x2a, 0xbb, 0x04, 0x0a, 0x18, 0x45, 0x4e, 0x65, 0x77, 0x42, 0x6c, 0x6f,
+	0x6f, 0x6d, 0x47, 0x69, 0x66, 0x74, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
+	0x65, 0x12, 0x1d, 0x0a, 0x19, 0x6b, 0x45, 0x4e, 0x65, 0x77, 0x42, 0x6c, 0x6f, 0x6f, 0x6d, 0x47,
+	0x69, 0x66, 0x74, 0x69, 0x6e, 0x67, 0x5f, 0x53, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x10, 0x00,
+	0x12, 0x24, 0x0a, 0x20, 0x6b, 0x45, 0x4e, 0x65, 0x77, 0x42, 0x6c, 0x6f, 0x6f, 0x6d, 0x47, 0x69,
+	0x66, 0x74, 0x69, 0x6e, 0x67, 0x5f, 0x55, 0x6e, 0x6b, 0x6e, 0x6f, 0x77, 0x6e, 0x46, 0x61, 0x69,
+	0x6c, 0x75, 0x72, 0x65, 0x10, 0x01, 0x12, 0x26, 0x0a, 0x22, 0x6b, 0x45, 0x4e, 0x65, 0x77, 0x42,
+	0x6c, 0x6f, 0x6f, 0x6d, 0x47, 0x69, 0x66, 0x74, 0x69, 0x6e, 0x67, 0x5f, 0x4d, 0x61, 0x6c, 0x66,
+	0x6f, 0x72, 0x6d, 0x65, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x10, 0x02, 0x12, 0x25,
+	0x0a, 0x21, 0x6b, 0x45, 0x4e, 0x65, 0x77, 0x42, 0x6c, 0x6f, 0x6f, 0x6d, 0x47, 0x69, 0x66, 0x74,
+	0x69, 0x6e, 0x67, 0x5f, 0x46, 0x65, 0x61, 0x74, 0x75, 0x72, 0x65, 0x44, 0x69, 0x73, 0x61, 0x62,
+	0x6c, 0x65, 0x64, 0x10, 0x03, 0x12, 0x22, 0x0a, 0x1e, 0x6b, 0x45, 0x4e, 0x65, 0x77, 0x42, 0x6c,
+	0x6f, 0x6f, 0x6d, 0x47, 0x69, 0x66, 0x74, 0x69, 0x6e, 0x67, 0x5f, 0x49, 0x74, 0x65, 0x6d, 0x4e,
+	0x6f, 0x74, 0x46, 0x6f, 0x75, 0x6e, 0x64, 0x10, 0x04, 0x12, 0x31, 0x0a, 0x2d, 0x6b, 0x45, 0x4e,
+	0x65, 0x77, 0x42, 0x6c, 0x6f, 0x6f, 0x6d, 0x47, 0x69, 0x66, 0x74, 0x69, 0x6e, 0x67, 0x5f, 0x50,
+	0x6c, 0x61, 0x79, 0x65, 0x72, 0x4e, 0x6f, 0x74, 0x41, 0x6c, 0x6c, 0x6f, 0x77, 0x65, 0x64, 0x54,
+	0x6f, 0x47, 0x69, 0x76, 0x65, 0x47, 0x69, 0x66, 0x74, 0x73, 0x10, 0x05, 0x12, 0x34, 0x0a, 0x30,
+	0x6b, 0x45, 0x4e, 0x65, 0x77, 0x42, 0x6c, 0x6f, 0x6f, 0x6d, 0x47, 0x69, 0x66, 0x74, 0x69, 0x6e,
+	0x67, 0x5f, 0x54, 0x61, 0x72, 0x67, 0x65, 0x74, 0x4e, 0x6f, 0x74, 0x41, 0x6c, 0x6c, 0x6f, 0x77,
+	0x65, 0x64, 0x54, 0x6f, 0x52, 0x65, 0x63, 0x65, 0x69, 0x76, 0x65, 0x47, 0x69, 0x66, 0x74, 0x73,
+	0x10, 0x06, 0x12, 0x29, 0x0a, 0x25, 0x6b, 0x45, 0x4e, 0x65, 0x77, 0x42, 0x6c, 0x6f, 0x6f, 0x6d,
+	0x47, 0x69, 0x66, 0x74, 0x69, 0x6e, 0x67, 0x5f, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x4e, 0x6f,
+	0x74, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x7a, 0x65, 0x64, 0x10, 0x64, 0x12, 0x26, 0x0a,
+	0x22, 0x6b, 0x45, 0x4e, 0x65, 0x77, 0x42, 0x6c, 0x6f, 0x6f, 0x6d, 0x47, 0x69, 0x66, 0x74, 0x69,
+	0x6e, 0x67, 0x5f, 0x50, 0x6c, 0x61, 0x79, 0x65, 0x72, 0x4e, 0x6f, 0x74, 0x49, 0x6e, 0x4c, 0x6f,
+	0x62, 0x62, 0x79, 0x10, 0x65, 0x12, 0x26, 0x0a, 0x22, 0x6b, 0x45, 0x4e, 0x65, 0x77, 0x42, 0x6c,
+	0x6f, 0x6f, 0x6d, 0x47, 0x69, 0x66, 0x74, 0x69, 0x6e, 0x67, 0x5f, 0x54, 0x61, 0x72, 0x67, 0x65,
+	0x74, 0x4e, 0x6f, 0x74, 0x49, 0x6e, 0x4c, 0x6f, 0x62, 0x62, 0x79, 0x10, 0x66, 0x12, 0x26, 0x0a,
+	0x22, 0x6b, 0x45, 0x4e, 0x65, 0x77, 0x42, 0x6c, 0x6f, 0x6f, 0x6d, 0x47, 0x69, 0x66, 0x74, 0x69,
+	0x6e, 0x67, 0x5f, 0x4c, 0x6f, 0x62, 0x62, 0x79, 0x4e, 0x6f, 0x74, 0x45, 0x6c, 0x69, 0x67, 0x69,
+	0x62, 0x6c, 0x65, 0x10, 0x67, 0x12, 0x26, 0x0a, 0x21, 0x6b, 0x45, 0x4e, 0x65, 0x77, 0x42, 0x6c,
+	0x6f, 0x6f, 0x6d, 0x47, 0x69, 0x66, 0x74, 0x69, 0x6e, 0x67, 0x5f, 0x54, 0x61, 0x72, 0x67, 0x65,
+	0x74, 0x4e, 0x6f, 0x74, 0x46, 0x72, 0x69, 0x65, 0x6e, 0x64, 0x10, 0xc8, 0x01, 0x12, 0x33, 0x0a,
+	0x2e, 0x6b, 0x45, 0x4e, 0x65, 0x77, 0x42, 0x6c, 0x6f, 0x6f, 0x6d, 0x47, 0x69, 0x66, 0x74, 0x69,
+	0x6e, 0x67, 0x5f, 0x54, 0x61, 0x72, 0x67, 0x65, 0x74, 0x46, 0x72, 0x69, 0x65, 0x6e, 0x64, 0x44,
+	0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x6f, 0x6f, 0x53, 0x68, 0x6f, 0x72, 0x74, 0x10,
+	0xc9, 0x01, 0x42, 0x25, 0x5a, 0x23, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d,
+	0x2f, 0x64, 0x6f, 0x74, 0x61, 0x62, 0x75, 0x66, 0x66, 0x2f, 0x6d, 0x61, 0x6e, 0x74, 0x61, 0x2f,
+	0x64, 0x6f, 0x74, 0x61, 0x3b, 0x64, 0x6f, 0x74, 0x61,
 }
 
 var (
@@ -19706,8 +19942,8 @@ func file_dota_gcmessages_common_proto_rawDescGZIP() []byte {
 	return file_dota_gcmessages_common_proto_rawDescData
 }
 
-var file_dota_gcmessages_common_proto_enumTypes = make([]protoimpl.EnumInfo, 27)
-var file_dota_gcmessages_common_proto_msgTypes = make([]protoimpl.MessageInfo, 166)
+var file_dota_gcmessages_common_proto_enumTypes = make([]protoimpl.EnumInfo, 28)
+var file_dota_gcmessages_common_proto_msgTypes = make([]protoimpl.MessageInfo, 168)
 var file_dota_gcmessages_common_proto_goTypes = []interface{}{
 	(ESpecialPingValue)(0),                                                          // 0: dota.ESpecialPingValue
 	(EDOTAGCSessionNeed)(0),                                                         // 1: dota.EDOTAGCSessionNeed
@@ -19736,331 +19972,336 @@ var file_dota_gcmessages_common_proto_goTypes = []interface{}{
 	(CMsgServerToGCRequestPlayerRecentAccomplishmentsResponse_EResponse)(0),         // 24: dota.CMsgServerToGCRequestPlayerRecentAccomplishmentsResponse.EResponse
 	(CMsgDOTAClaimEventActionResponse_ResultCode)(0),                                // 25: dota.CMsgDOTAClaimEventActionResponse.ResultCode
 	(CMsgClientToGCDotaLabsFeedbackResponse_EResponse)(0),                           // 26: dota.CMsgClientToGCDotaLabsFeedbackResponse.EResponse
-	(*CSODOTAGameAccountClient)(nil),                                                // 27: dota.CSODOTAGameAccountClient
-	(*CSODOTAGameAccountPlus)(nil),                                                  // 28: dota.CSODOTAGameAccountPlus
-	(*CSODOTAChatWheel)(nil),                                                        // 29: dota.CSODOTAChatWheel
-	(*CMsgLobbyFeaturedGamemodeProgress)(nil),                                       // 30: dota.CMsgLobbyFeaturedGamemodeProgress
-	(*CMsgBattleCupVictory)(nil),                                                    // 31: dota.CMsgBattleCupVictory
-	(*CMsgLobbyBattleCupVictoryList)(nil),                                           // 32: dota.CMsgLobbyBattleCupVictoryList
-	(*CMsgDOTABroadcastNotification)(nil),                                           // 33: dota.CMsgDOTABroadcastNotification
-	(*CProtoItemHeroStatue)(nil),                                                    // 34: dota.CProtoItemHeroStatue
-	(*CMatchPlayerAbilityUpgrade)(nil),                                              // 35: dota.CMatchPlayerAbilityUpgrade
-	(*CMatchPlayerTimedCustomStat)(nil),                                             // 36: dota.CMatchPlayerTimedCustomStat
-	(*CMatchPlayerTimedStats)(nil),                                                  // 37: dota.CMatchPlayerTimedStats
-	(*CMatchTeamTimedStats)(nil),                                                    // 38: dota.CMatchTeamTimedStats
-	(*CMatchAdditionalUnitInventory)(nil),                                           // 39: dota.CMatchAdditionalUnitInventory
-	(*CMatchPlayerPermanentBuff)(nil),                                               // 40: dota.CMatchPlayerPermanentBuff
-	(*CMatchHeroSelectEvent)(nil),                                                   // 41: dota.CMatchHeroSelectEvent
-	(*CMatchClip)(nil),                                                              // 42: dota.CMatchClip
-	(*CPartySearchClientParty)(nil),                                                 // 43: dota.CPartySearchClientParty
-	(*CMsgDOTAHasItemQuery)(nil),                                                    // 44: dota.CMsgDOTAHasItemQuery
-	(*CMsgDOTAHasItemResponse)(nil),                                                 // 45: dota.CMsgDOTAHasItemResponse
-	(*CMsgGCGetPlayerCardItemInfo)(nil),                                             // 46: dota.CMsgGCGetPlayerCardItemInfo
-	(*CMsgGCGetPlayerCardItemInfoResponse)(nil),                                     // 47: dota.CMsgGCGetPlayerCardItemInfoResponse
-	(*CSODOTAMapLocationState)(nil),                                                 // 48: dota.CSODOTAMapLocationState
-	(*CMsgLeagueAdminList)(nil),                                                     // 49: dota.CMsgLeagueAdminList
-	(*CMsgDOTAProfileCard)(nil),                                                     // 50: dota.CMsgDOTAProfileCard
-	(*CSODOTAPlayerChallenge)(nil),                                                  // 51: dota.CSODOTAPlayerChallenge
-	(*CMsgClientToGCRerollPlayerChallenge)(nil),                                     // 52: dota.CMsgClientToGCRerollPlayerChallenge
-	(*CMsgGCRerollPlayerChallengeResponse)(nil),                                     // 53: dota.CMsgGCRerollPlayerChallengeResponse
-	(*CMsgGCTopCustomGamesList)(nil),                                                // 54: dota.CMsgGCTopCustomGamesList
-	(*CMsgDOTARealtimeGameStats)(nil),                                               // 55: dota.CMsgDOTARealtimeGameStats
-	(*CMsgDOTARealtimeGameStatsTerse)(nil),                                          // 56: dota.CMsgDOTARealtimeGameStatsTerse
-	(*CMsgDOTABroadcastTimelineEvent)(nil),                                          // 57: dota.CMsgDOTABroadcastTimelineEvent
-	(*CMsgGCToClientMatchGroupsVersion)(nil),                                        // 58: dota.CMsgGCToClientMatchGroupsVersion
-	(*CMsgDOTASDOHeroStatsHistory)(nil),                                             // 59: dota.CMsgDOTASDOHeroStatsHistory
-	(*CMsgPredictionChoice)(nil),                                                    // 60: dota.CMsgPredictionChoice
-	(*CMsgInGamePrediction)(nil),                                                    // 61: dota.CMsgInGamePrediction
-	(*CMsgDOTASeasonPredictions)(nil),                                               // 62: dota.CMsgDOTASeasonPredictions
-	(*CMsgAvailablePredictions)(nil),                                                // 63: dota.CMsgAvailablePredictions
-	(*CMsgLeagueWatchedGames)(nil),                                                  // 64: dota.CMsgLeagueWatchedGames
-	(*CMsgDOTAMatch)(nil),                                                           // 65: dota.CMsgDOTAMatch
-	(*CMsgPlayerCard)(nil),                                                          // 66: dota.CMsgPlayerCard
-	(*CMsgDOTAFantasyPlayerStats)(nil),                                              // 67: dota.CMsgDOTAFantasyPlayerStats
-	(*CMsgDOTAFantasyPlayerMatchStats)(nil),                                         // 68: dota.CMsgDOTAFantasyPlayerMatchStats
-	(*CMsgDOTABotDebugInfo)(nil),                                                    // 69: dota.CMsgDOTABotDebugInfo
-	(*CMsgSuccessfulHero)(nil),                                                      // 70: dota.CMsgSuccessfulHero
-	(*CMsgRecentMatchInfo)(nil),                                                     // 71: dota.CMsgRecentMatchInfo
-	(*CMsgMatchTips)(nil),                                                           // 72: dota.CMsgMatchTips
-	(*CMsgDOTAMatchMinimal)(nil),                                                    // 73: dota.CMsgDOTAMatchMinimal
-	(*CMsgConsumableUsage)(nil),                                                     // 74: dota.CMsgConsumableUsage
-	(*CMsgMatchConsumableUsage)(nil),                                                // 75: dota.CMsgMatchConsumableUsage
-	(*CMsgMatchEventActionGrants)(nil),                                              // 76: dota.CMsgMatchEventActionGrants
-	(*CMsgCustomGameWhitelist)(nil),                                                 // 77: dota.CMsgCustomGameWhitelist
-	(*CMsgCustomGameWhitelistForEdit)(nil),                                          // 78: dota.CMsgCustomGameWhitelistForEdit
-	(*CMsgPlayerRecentMatchInfo)(nil),                                               // 79: dota.CMsgPlayerRecentMatchInfo
-	(*CMsgPlayerMatchRecord)(nil),                                                   // 80: dota.CMsgPlayerMatchRecord
-	(*CMsgPlayerRecentMatchOutcomes)(nil),                                           // 81: dota.CMsgPlayerRecentMatchOutcomes
-	(*CMsgPlayerRecentCommends)(nil),                                                // 82: dota.CMsgPlayerRecentCommends
-	(*CMsgPlayerRecentAccomplishments)(nil),                                         // 83: dota.CMsgPlayerRecentAccomplishments
-	(*CMsgPlayerHeroRecentAccomplishments)(nil),                                     // 84: dota.CMsgPlayerHeroRecentAccomplishments
-	(*CMsgRecentAccomplishments)(nil),                                               // 85: dota.CMsgRecentAccomplishments
-	(*CMsgServerToGCRequestPlayerRecentAccomplishments)(nil),                        // 86: dota.CMsgServerToGCRequestPlayerRecentAccomplishments
-	(*CMsgServerToGCRequestPlayerRecentAccomplishmentsResponse)(nil),                // 87: dota.CMsgServerToGCRequestPlayerRecentAccomplishmentsResponse
-	(*CMsgArcanaVoteMatchVotes)(nil),                                                // 88: dota.CMsgArcanaVoteMatchVotes
-	(*CMsgGCtoGCAssociatedExploiterAccountInfo)(nil),                                // 89: dota.CMsgGCtoGCAssociatedExploiterAccountInfo
-	(*CMsgGCtoGCAssociatedExploiterAccountInfoResponse)(nil),                        // 90: dota.CMsgGCtoGCAssociatedExploiterAccountInfoResponse
-	(*CMsgPullTabsData)(nil),                                                        // 91: dota.CMsgPullTabsData
-	(*CMsgUnderDraftData)(nil),                                                      // 92: dota.CMsgUnderDraftData
-	(*CMsgPlayerTitleData)(nil),                                                     // 93: dota.CMsgPlayerTitleData
-	(*CMsgDOTATriviaQuestion)(nil),                                                  // 94: dota.CMsgDOTATriviaQuestion
-	(*CMsgDOTATriviaQuestionAnswersSummary)(nil),                                    // 95: dota.CMsgDOTATriviaQuestionAnswersSummary
-	(*CMsgGameDataSpecialValueBonus)(nil),                                           // 96: dota.CMsgGameDataSpecialValueBonus
-	(*CMsgGameDataSpecialValues)(nil),                                               // 97: dota.CMsgGameDataSpecialValues
-	(*CMsgGameDataFacetAbilityBonus)(nil),                                           // 98: dota.CMsgGameDataFacetAbilityBonus
-	(*CMsgGameDataAbilityOrItem)(nil),                                               // 99: dota.CMsgGameDataAbilityOrItem
-	(*CMsgGameDataAbilityOrItemList)(nil),                                           // 100: dota.CMsgGameDataAbilityOrItemList
-	(*CMsgGameDataHero)(nil),                                                        // 101: dota.CMsgGameDataHero
-	(*CMsgGameDataAbilities)(nil),                                                   // 102: dota.CMsgGameDataAbilities
-	(*CMsgGameDataItems)(nil),                                                       // 103: dota.CMsgGameDataItems
-	(*CMsgGameDataHeroes)(nil),                                                      // 104: dota.CMsgGameDataHeroes
-	(*CMsgGameDataHeroList)(nil),                                                    // 105: dota.CMsgGameDataHeroList
-	(*CMsgGameDataItemAbilityList)(nil),                                             // 106: dota.CMsgGameDataItemAbilityList
-	(*CMsgLobbyAbilityDraftData)(nil),                                               // 107: dota.CMsgLobbyAbilityDraftData
-	(*CSOEconItemDropRateBonus)(nil),                                                // 108: dota.CSOEconItemDropRateBonus
-	(*CSOEconItemTournamentPassport)(nil),                                           // 109: dota.CSOEconItemTournamentPassport
-	(*CMsgStickerbookSticker)(nil),                                                  // 110: dota.CMsgStickerbookSticker
-	(*CMsgStickerbookPage)(nil),                                                     // 111: dota.CMsgStickerbookPage
-	(*CMsgStickerbookTeamPageOrderSequence)(nil),                                    // 112: dota.CMsgStickerbookTeamPageOrderSequence
-	(*CMsgStickerbook)(nil),                                                         // 113: dota.CMsgStickerbook
-	(*CMsgStickerHero)(nil),                                                         // 114: dota.CMsgStickerHero
-	(*CMsgStickerHeroes)(nil),                                                       // 115: dota.CMsgStickerHeroes
-	(*CMsgHeroRoleStats)(nil),                                                       // 116: dota.CMsgHeroRoleStats
-	(*CMsgHeroRoleHeroStats)(nil),                                                   // 117: dota.CMsgHeroRoleHeroStats
-	(*CMsgHeroRoleRankStats)(nil),                                                   // 118: dota.CMsgHeroRoleRankStats
-	(*CMsgHeroRoleAllRanksStats)(nil),                                               // 119: dota.CMsgHeroRoleAllRanksStats
-	(*CMsgMapStatsSnapshot)(nil),                                                    // 120: dota.CMsgMapStatsSnapshot
-	(*CMsgGlobalMapStats)(nil),                                                      // 121: dota.CMsgGlobalMapStats
-	(*CMsgTrackedStat)(nil),                                                         // 122: dota.CMsgTrackedStat
-	(*CMsgDOTAClaimEventActionResponse)(nil),                                        // 123: dota.CMsgDOTAClaimEventActionResponse
-	(*CMsgClientToGCDotaLabsFeedback)(nil),                                          // 124: dota.CMsgClientToGCDotaLabsFeedback
-	(*CMsgClientToGCDotaLabsFeedbackResponse)(nil),                                  // 125: dota.CMsgClientToGCDotaLabsFeedbackResponse
-	(*CSODOTAGameAccountClient_RoleHandicap)(nil),                                   // 126: dota.CSODOTAGameAccountClient.RoleHandicap
-	(*CMsgLobbyFeaturedGamemodeProgress_AccountProgress)(nil),                       // 127: dota.CMsgLobbyFeaturedGamemodeProgress.AccountProgress
-	(*CMsgGCGetPlayerCardItemInfoResponse_PlayerCardInfo)(nil),                      // 128: dota.CMsgGCGetPlayerCardItemInfoResponse.PlayerCardInfo
-	(*CMsgDOTAProfileCard_Slot)(nil),                                                // 129: dota.CMsgDOTAProfileCard.Slot
-	(*CMsgDOTAProfileCard_Slot_Trophy)(nil),                                         // 130: dota.CMsgDOTAProfileCard.Slot.Trophy
-	(*CMsgDOTAProfileCard_Slot_Stat)(nil),                                           // 131: dota.CMsgDOTAProfileCard.Slot.Stat
-	(*CMsgDOTAProfileCard_Slot_Item)(nil),                                           // 132: dota.CMsgDOTAProfileCard.Slot.Item
-	(*CMsgDOTAProfileCard_Slot_Hero)(nil),                                           // 133: dota.CMsgDOTAProfileCard.Slot.Hero
-	(*CMsgDOTAProfileCard_Slot_Emoticon)(nil),                                       // 134: dota.CMsgDOTAProfileCard.Slot.Emoticon
-	(*CMsgDOTAProfileCard_Slot_Team)(nil),                                           // 135: dota.CMsgDOTAProfileCard.Slot.Team
-	(*CMsgDOTARealtimeGameStats_TeamDetails)(nil),                                   // 136: dota.CMsgDOTARealtimeGameStats.TeamDetails
-	(*CMsgDOTARealtimeGameStats_ItemDetails)(nil),                                   // 137: dota.CMsgDOTARealtimeGameStats.ItemDetails
-	(*CMsgDOTARealtimeGameStats_AbilityDetails)(nil),                                // 138: dota.CMsgDOTARealtimeGameStats.AbilityDetails
-	(*CMsgDOTARealtimeGameStats_HeroToHeroStats)(nil),                               // 139: dota.CMsgDOTARealtimeGameStats.HeroToHeroStats
-	(*CMsgDOTARealtimeGameStats_AbilityList)(nil),                                   // 140: dota.CMsgDOTARealtimeGameStats.AbilityList
-	(*CMsgDOTARealtimeGameStats_PlayerDetails)(nil),                                 // 141: dota.CMsgDOTARealtimeGameStats.PlayerDetails
-	(*CMsgDOTARealtimeGameStats_BuildingDetails)(nil),                               // 142: dota.CMsgDOTARealtimeGameStats.BuildingDetails
-	(*CMsgDOTARealtimeGameStats_KillDetails)(nil),                                   // 143: dota.CMsgDOTARealtimeGameStats.KillDetails
-	(*CMsgDOTARealtimeGameStats_BroadcasterDetails)(nil),                            // 144: dota.CMsgDOTARealtimeGameStats.BroadcasterDetails
-	(*CMsgDOTARealtimeGameStats_PickBanDetails)(nil),                                // 145: dota.CMsgDOTARealtimeGameStats.PickBanDetails
-	(*CMsgDOTARealtimeGameStats_MatchDetails)(nil),                                  // 146: dota.CMsgDOTARealtimeGameStats.MatchDetails
-	(*CMsgDOTARealtimeGameStats_GraphData)(nil),                                     // 147: dota.CMsgDOTARealtimeGameStats.GraphData
-	(*CMsgDOTARealtimeGameStats_GraphData_LocationStats)(nil),                       // 148: dota.CMsgDOTARealtimeGameStats.GraphData.LocationStats
-	(*CMsgDOTARealtimeGameStats_GraphData_TeamLocationStats)(nil),                   // 149: dota.CMsgDOTARealtimeGameStats.GraphData.TeamLocationStats
-	(*CMsgDOTARealtimeGameStatsTerse_TeamDetails)(nil),                              // 150: dota.CMsgDOTARealtimeGameStatsTerse.TeamDetails
-	(*CMsgDOTARealtimeGameStatsTerse_PlayerDetails)(nil),                            // 151: dota.CMsgDOTARealtimeGameStatsTerse.PlayerDetails
-	(*CMsgDOTARealtimeGameStatsTerse_BuildingDetails)(nil),                          // 152: dota.CMsgDOTARealtimeGameStatsTerse.BuildingDetails
-	(*CMsgDOTARealtimeGameStatsTerse_PickBanDetails)(nil),                           // 153: dota.CMsgDOTARealtimeGameStatsTerse.PickBanDetails
-	(*CMsgDOTARealtimeGameStatsTerse_MatchDetails)(nil),                             // 154: dota.CMsgDOTARealtimeGameStatsTerse.MatchDetails
-	(*CMsgDOTARealtimeGameStatsTerse_GraphData)(nil),                                // 155: dota.CMsgDOTARealtimeGameStatsTerse.GraphData
-	(*CMsgInGamePrediction_QueryKeyValues)(nil),                                     // 156: dota.CMsgInGamePrediction.QueryKeyValues
-	(*CMsgDOTASeasonPredictions_Prediction)(nil),                                    // 157: dota.CMsgDOTASeasonPredictions.Prediction
-	(*CMsgDOTASeasonPredictions_Prediction_Answers)(nil),                            // 158: dota.CMsgDOTASeasonPredictions.Prediction.Answers
-	(*CMsgAvailablePredictions_MatchPrediction)(nil),                                // 159: dota.CMsgAvailablePredictions.MatchPrediction
-	(*CMsgLeagueWatchedGames_Series)(nil),                                           // 160: dota.CMsgLeagueWatchedGames.Series
-	(*CMsgLeagueWatchedGames_League)(nil),                                           // 161: dota.CMsgLeagueWatchedGames.League
-	(*CMsgDOTAMatch_Player)(nil),                                                    // 162: dota.CMsgDOTAMatch.Player
-	(*CMsgDOTAMatch_BroadcasterInfo)(nil),                                           // 163: dota.CMsgDOTAMatch.BroadcasterInfo
-	(*CMsgDOTAMatch_BroadcasterChannel)(nil),                                        // 164: dota.CMsgDOTAMatch.BroadcasterChannel
-	(*CMsgDOTAMatch_Coach)(nil),                                                     // 165: dota.CMsgDOTAMatch.Coach
-	(*CMsgDOTAMatch_CustomGameData)(nil),                                            // 166: dota.CMsgDOTAMatch.CustomGameData
-	(*CMsgDOTAMatch_Player_CustomGameData)(nil),                                     // 167: dota.CMsgDOTAMatch.Player.CustomGameData
-	(*CMsgDOTAMatch_Player_HeroDamageReceived)(nil),                                 // 168: dota.CMsgDOTAMatch.Player.HeroDamageReceived
-	(*CMsgPlayerCard_StatModifier)(nil),                                             // 169: dota.CMsgPlayerCard.StatModifier
-	(*CMsgDOTABotDebugInfo_Bot)(nil),                                                // 170: dota.CMsgDOTABotDebugInfo.Bot
-	(*CMsgDOTABotDebugInfo_Bot_Mode)(nil),                                           // 171: dota.CMsgDOTABotDebugInfo.Bot.Mode
-	(*CMsgDOTABotDebugInfo_Bot_Action)(nil),                                         // 172: dota.CMsgDOTABotDebugInfo.Bot.Action
-	(*CMsgMatchTips_SingleTip)(nil),                                                 // 173: dota.CMsgMatchTips.SingleTip
-	(*CMsgDOTAMatchMinimal_Player)(nil),                                             // 174: dota.CMsgDOTAMatchMinimal.Player
-	(*CMsgDOTAMatchMinimal_Tourney)(nil),                                            // 175: dota.CMsgDOTAMatchMinimal.Tourney
-	(*CMsgMatchConsumableUsage_PlayerUsage)(nil),                                    // 176: dota.CMsgMatchConsumableUsage.PlayerUsage
-	(*CMsgMatchEventActionGrants_PlayerGrants)(nil),                                 // 177: dota.CMsgMatchEventActionGrants.PlayerGrants
-	(*CMsgCustomGameWhitelistForEdit_WhitelistEntry)(nil),                           // 178: dota.CMsgCustomGameWhitelistForEdit.WhitelistEntry
-	(*CMsgGCtoGCAssociatedExploiterAccountInfoResponse_Account)(nil),                // 179: dota.CMsgGCtoGCAssociatedExploiterAccountInfoResponse.Account
-	(*CMsgPullTabsData_Slot)(nil),                                                   // 180: dota.CMsgPullTabsData.Slot
-	(*CMsgPullTabsData_Jackpot)(nil),                                                // 181: dota.CMsgPullTabsData.Jackpot
-	(*CMsgUnderDraftData_BenchSlot)(nil),                                            // 182: dota.CMsgUnderDraftData.BenchSlot
-	(*CMsgUnderDraftData_ShopSlot)(nil),                                             // 183: dota.CMsgUnderDraftData.ShopSlot
-	(*CMsgGameDataHero_Facet)(nil),                                                  // 184: dota.CMsgGameDataHero.Facet
-	(*CMsgGameDataHeroList_HeroInfo)(nil),                                           // 185: dota.CMsgGameDataHeroList.HeroInfo
-	(*CMsgGameDataItemAbilityList_ItemAbilityInfo)(nil),                             // 186: dota.CMsgGameDataItemAbilityList.ItemAbilityInfo
-	(*CMsgDOTAClaimEventActionResponse_MysteryItemRewardData)(nil),                  // 187: dota.CMsgDOTAClaimEventActionResponse.MysteryItemRewardData
-	(*CMsgDOTAClaimEventActionResponse_LootListRewardData)(nil),                     // 188: dota.CMsgDOTAClaimEventActionResponse.LootListRewardData
-	(*CMsgDOTAClaimEventActionResponse_ActionListRewardData)(nil),                   // 189: dota.CMsgDOTAClaimEventActionResponse.ActionListRewardData
-	(*CMsgDOTAClaimEventActionResponse_OverworldTokenRewardData)(nil),               // 190: dota.CMsgDOTAClaimEventActionResponse.OverworldTokenRewardData
-	(*CMsgDOTAClaimEventActionResponse_GrantedRewardData)(nil),                      // 191: dota.CMsgDOTAClaimEventActionResponse.GrantedRewardData
-	(*CMsgDOTAClaimEventActionResponse_OverworldTokenRewardData_TokenQuantity)(nil), // 192: dota.CMsgDOTAClaimEventActionResponse.OverworldTokenRewardData.TokenQuantity
-	(EEvent)(0),                   // 193: dota.EEvent
-	(DOTA_GameMode)(0),            // 194: dota.DOTA_GameMode
-	(EMatchOutcome)(0),            // 195: dota.EMatchOutcome
-	(ELeagueRegion)(0),            // 196: dota.ELeagueRegion
-	(ELeaguePhase)(0),             // 197: dota.ELeaguePhase
-	(DOTA_GC_TEAM)(0),             // 198: dota.DOTA_GC_TEAM
-	(*CMsgPendingEventAward)(nil), // 199: dota.CMsgPendingEventAward
+	(CDotaMsg_PredictionResult_Prediction_EResult)(0),                               // 27: dota.CDotaMsg_PredictionResult.Prediction.EResult
+	(*CSODOTAGameAccountClient)(nil),                                                // 28: dota.CSODOTAGameAccountClient
+	(*CSODOTAGameAccountPlus)(nil),                                                  // 29: dota.CSODOTAGameAccountPlus
+	(*CSODOTAChatWheel)(nil),                                                        // 30: dota.CSODOTAChatWheel
+	(*CMsgLobbyFeaturedGamemodeProgress)(nil),                                       // 31: dota.CMsgLobbyFeaturedGamemodeProgress
+	(*CMsgBattleCupVictory)(nil),                                                    // 32: dota.CMsgBattleCupVictory
+	(*CMsgLobbyBattleCupVictoryList)(nil),                                           // 33: dota.CMsgLobbyBattleCupVictoryList
+	(*CMsgDOTABroadcastNotification)(nil),                                           // 34: dota.CMsgDOTABroadcastNotification
+	(*CProtoItemHeroStatue)(nil),                                                    // 35: dota.CProtoItemHeroStatue
+	(*CMatchPlayerAbilityUpgrade)(nil),                                              // 36: dota.CMatchPlayerAbilityUpgrade
+	(*CMatchPlayerTimedCustomStat)(nil),                                             // 37: dota.CMatchPlayerTimedCustomStat
+	(*CMatchPlayerTimedStats)(nil),                                                  // 38: dota.CMatchPlayerTimedStats
+	(*CMatchTeamTimedStats)(nil),                                                    // 39: dota.CMatchTeamTimedStats
+	(*CMatchAdditionalUnitInventory)(nil),                                           // 40: dota.CMatchAdditionalUnitInventory
+	(*CMatchPlayerPermanentBuff)(nil),                                               // 41: dota.CMatchPlayerPermanentBuff
+	(*CMatchHeroSelectEvent)(nil),                                                   // 42: dota.CMatchHeroSelectEvent
+	(*CMatchClip)(nil),                                                              // 43: dota.CMatchClip
+	(*CPartySearchClientParty)(nil),                                                 // 44: dota.CPartySearchClientParty
+	(*CMsgDOTAHasItemQuery)(nil),                                                    // 45: dota.CMsgDOTAHasItemQuery
+	(*CMsgDOTAHasItemResponse)(nil),                                                 // 46: dota.CMsgDOTAHasItemResponse
+	(*CMsgGCGetPlayerCardItemInfo)(nil),                                             // 47: dota.CMsgGCGetPlayerCardItemInfo
+	(*CMsgGCGetPlayerCardItemInfoResponse)(nil),                                     // 48: dota.CMsgGCGetPlayerCardItemInfoResponse
+	(*CSODOTAMapLocationState)(nil),                                                 // 49: dota.CSODOTAMapLocationState
+	(*CMsgLeagueAdminList)(nil),                                                     // 50: dota.CMsgLeagueAdminList
+	(*CMsgDOTAProfileCard)(nil),                                                     // 51: dota.CMsgDOTAProfileCard
+	(*CSODOTAPlayerChallenge)(nil),                                                  // 52: dota.CSODOTAPlayerChallenge
+	(*CMsgClientToGCRerollPlayerChallenge)(nil),                                     // 53: dota.CMsgClientToGCRerollPlayerChallenge
+	(*CMsgGCRerollPlayerChallengeResponse)(nil),                                     // 54: dota.CMsgGCRerollPlayerChallengeResponse
+	(*CMsgGCTopCustomGamesList)(nil),                                                // 55: dota.CMsgGCTopCustomGamesList
+	(*CMsgDOTARealtimeGameStats)(nil),                                               // 56: dota.CMsgDOTARealtimeGameStats
+	(*CMsgDOTARealtimeGameStatsTerse)(nil),                                          // 57: dota.CMsgDOTARealtimeGameStatsTerse
+	(*CMsgDOTABroadcastTimelineEvent)(nil),                                          // 58: dota.CMsgDOTABroadcastTimelineEvent
+	(*CMsgGCToClientMatchGroupsVersion)(nil),                                        // 59: dota.CMsgGCToClientMatchGroupsVersion
+	(*CMsgDOTASDOHeroStatsHistory)(nil),                                             // 60: dota.CMsgDOTASDOHeroStatsHistory
+	(*CMsgPredictionChoice)(nil),                                                    // 61: dota.CMsgPredictionChoice
+	(*CMsgInGamePrediction)(nil),                                                    // 62: dota.CMsgInGamePrediction
+	(*CMsgDOTASeasonPredictions)(nil),                                               // 63: dota.CMsgDOTASeasonPredictions
+	(*CMsgAvailablePredictions)(nil),                                                // 64: dota.CMsgAvailablePredictions
+	(*CMsgLeagueWatchedGames)(nil),                                                  // 65: dota.CMsgLeagueWatchedGames
+	(*CMsgDOTAMatch)(nil),                                                           // 66: dota.CMsgDOTAMatch
+	(*CMsgPlayerCard)(nil),                                                          // 67: dota.CMsgPlayerCard
+	(*CMsgDOTAFantasyPlayerStats)(nil),                                              // 68: dota.CMsgDOTAFantasyPlayerStats
+	(*CMsgDOTAFantasyPlayerMatchStats)(nil),                                         // 69: dota.CMsgDOTAFantasyPlayerMatchStats
+	(*CMsgDOTABotDebugInfo)(nil),                                                    // 70: dota.CMsgDOTABotDebugInfo
+	(*CMsgSuccessfulHero)(nil),                                                      // 71: dota.CMsgSuccessfulHero
+	(*CMsgRecentMatchInfo)(nil),                                                     // 72: dota.CMsgRecentMatchInfo
+	(*CMsgMatchTips)(nil),                                                           // 73: dota.CMsgMatchTips
+	(*CMsgDOTAMatchMinimal)(nil),                                                    // 74: dota.CMsgDOTAMatchMinimal
+	(*CMsgConsumableUsage)(nil),                                                     // 75: dota.CMsgConsumableUsage
+	(*CMsgMatchConsumableUsage)(nil),                                                // 76: dota.CMsgMatchConsumableUsage
+	(*CMsgMatchEventActionGrants)(nil),                                              // 77: dota.CMsgMatchEventActionGrants
+	(*CMsgCustomGameWhitelist)(nil),                                                 // 78: dota.CMsgCustomGameWhitelist
+	(*CMsgCustomGameWhitelistForEdit)(nil),                                          // 79: dota.CMsgCustomGameWhitelistForEdit
+	(*CMsgPlayerRecentMatchInfo)(nil),                                               // 80: dota.CMsgPlayerRecentMatchInfo
+	(*CMsgPlayerMatchRecord)(nil),                                                   // 81: dota.CMsgPlayerMatchRecord
+	(*CMsgPlayerRecentMatchOutcomes)(nil),                                           // 82: dota.CMsgPlayerRecentMatchOutcomes
+	(*CMsgPlayerRecentCommends)(nil),                                                // 83: dota.CMsgPlayerRecentCommends
+	(*CMsgPlayerRecentAccomplishments)(nil),                                         // 84: dota.CMsgPlayerRecentAccomplishments
+	(*CMsgPlayerHeroRecentAccomplishments)(nil),                                     // 85: dota.CMsgPlayerHeroRecentAccomplishments
+	(*CMsgRecentAccomplishments)(nil),                                               // 86: dota.CMsgRecentAccomplishments
+	(*CMsgServerToGCRequestPlayerRecentAccomplishments)(nil),                        // 87: dota.CMsgServerToGCRequestPlayerRecentAccomplishments
+	(*CMsgServerToGCRequestPlayerRecentAccomplishmentsResponse)(nil),                // 88: dota.CMsgServerToGCRequestPlayerRecentAccomplishmentsResponse
+	(*CMsgArcanaVoteMatchVotes)(nil),                                                // 89: dota.CMsgArcanaVoteMatchVotes
+	(*CMsgGCtoGCAssociatedExploiterAccountInfo)(nil),                                // 90: dota.CMsgGCtoGCAssociatedExploiterAccountInfo
+	(*CMsgGCtoGCAssociatedExploiterAccountInfoResponse)(nil),                        // 91: dota.CMsgGCtoGCAssociatedExploiterAccountInfoResponse
+	(*CMsgPullTabsData)(nil),                                                        // 92: dota.CMsgPullTabsData
+	(*CMsgUnderDraftData)(nil),                                                      // 93: dota.CMsgUnderDraftData
+	(*CMsgPlayerTitleData)(nil),                                                     // 94: dota.CMsgPlayerTitleData
+	(*CMsgDOTATriviaQuestion)(nil),                                                  // 95: dota.CMsgDOTATriviaQuestion
+	(*CMsgDOTATriviaQuestionAnswersSummary)(nil),                                    // 96: dota.CMsgDOTATriviaQuestionAnswersSummary
+	(*CMsgGameDataSpecialValueBonus)(nil),                                           // 97: dota.CMsgGameDataSpecialValueBonus
+	(*CMsgGameDataSpecialValues)(nil),                                               // 98: dota.CMsgGameDataSpecialValues
+	(*CMsgGameDataFacetAbilityBonus)(nil),                                           // 99: dota.CMsgGameDataFacetAbilityBonus
+	(*CMsgGameDataAbilityOrItem)(nil),                                               // 100: dota.CMsgGameDataAbilityOrItem
+	(*CMsgGameDataAbilityOrItemList)(nil),                                           // 101: dota.CMsgGameDataAbilityOrItemList
+	(*CMsgGameDataHero)(nil),                                                        // 102: dota.CMsgGameDataHero
+	(*CMsgGameDataAbilities)(nil),                                                   // 103: dota.CMsgGameDataAbilities
+	(*CMsgGameDataItems)(nil),                                                       // 104: dota.CMsgGameDataItems
+	(*CMsgGameDataHeroes)(nil),                                                      // 105: dota.CMsgGameDataHeroes
+	(*CMsgGameDataHeroList)(nil),                                                    // 106: dota.CMsgGameDataHeroList
+	(*CMsgGameDataItemAbilityList)(nil),                                             // 107: dota.CMsgGameDataItemAbilityList
+	(*CMsgLobbyAbilityDraftData)(nil),                                               // 108: dota.CMsgLobbyAbilityDraftData
+	(*CSOEconItemDropRateBonus)(nil),                                                // 109: dota.CSOEconItemDropRateBonus
+	(*CSOEconItemTournamentPassport)(nil),                                           // 110: dota.CSOEconItemTournamentPassport
+	(*CMsgStickerbookSticker)(nil),                                                  // 111: dota.CMsgStickerbookSticker
+	(*CMsgStickerbookPage)(nil),                                                     // 112: dota.CMsgStickerbookPage
+	(*CMsgStickerbookTeamPageOrderSequence)(nil),                                    // 113: dota.CMsgStickerbookTeamPageOrderSequence
+	(*CMsgStickerbook)(nil),                                                         // 114: dota.CMsgStickerbook
+	(*CMsgStickerHero)(nil),                                                         // 115: dota.CMsgStickerHero
+	(*CMsgStickerHeroes)(nil),                                                       // 116: dota.CMsgStickerHeroes
+	(*CMsgHeroRoleStats)(nil),                                                       // 117: dota.CMsgHeroRoleStats
+	(*CMsgHeroRoleHeroStats)(nil),                                                   // 118: dota.CMsgHeroRoleHeroStats
+	(*CMsgHeroRoleRankStats)(nil),                                                   // 119: dota.CMsgHeroRoleRankStats
+	(*CMsgHeroRoleAllRanksStats)(nil),                                               // 120: dota.CMsgHeroRoleAllRanksStats
+	(*CMsgMapStatsSnapshot)(nil),                                                    // 121: dota.CMsgMapStatsSnapshot
+	(*CMsgGlobalMapStats)(nil),                                                      // 122: dota.CMsgGlobalMapStats
+	(*CMsgTrackedStat)(nil),                                                         // 123: dota.CMsgTrackedStat
+	(*CMsgDOTAClaimEventActionResponse)(nil),                                        // 124: dota.CMsgDOTAClaimEventActionResponse
+	(*CMsgClientToGCDotaLabsFeedback)(nil),                                          // 125: dota.CMsgClientToGCDotaLabsFeedback
+	(*CMsgClientToGCDotaLabsFeedbackResponse)(nil),                                  // 126: dota.CMsgClientToGCDotaLabsFeedbackResponse
+	(*CDotaMsg_PredictionResult)(nil),                                               // 127: dota.CDotaMsg_PredictionResult
+	(*CSODOTAGameAccountClient_RoleHandicap)(nil),                                   // 128: dota.CSODOTAGameAccountClient.RoleHandicap
+	(*CMsgLobbyFeaturedGamemodeProgress_AccountProgress)(nil),                       // 129: dota.CMsgLobbyFeaturedGamemodeProgress.AccountProgress
+	(*CMsgGCGetPlayerCardItemInfoResponse_PlayerCardInfo)(nil),                      // 130: dota.CMsgGCGetPlayerCardItemInfoResponse.PlayerCardInfo
+	(*CMsgDOTAProfileCard_Slot)(nil),                                                // 131: dota.CMsgDOTAProfileCard.Slot
+	(*CMsgDOTAProfileCard_Slot_Trophy)(nil),                                         // 132: dota.CMsgDOTAProfileCard.Slot.Trophy
+	(*CMsgDOTAProfileCard_Slot_Stat)(nil),                                           // 133: dota.CMsgDOTAProfileCard.Slot.Stat
+	(*CMsgDOTAProfileCard_Slot_Item)(nil),                                           // 134: dota.CMsgDOTAProfileCard.Slot.Item
+	(*CMsgDOTAProfileCard_Slot_Hero)(nil),                                           // 135: dota.CMsgDOTAProfileCard.Slot.Hero
+	(*CMsgDOTAProfileCard_Slot_Emoticon)(nil),                                       // 136: dota.CMsgDOTAProfileCard.Slot.Emoticon
+	(*CMsgDOTAProfileCard_Slot_Team)(nil),                                           // 137: dota.CMsgDOTAProfileCard.Slot.Team
+	(*CMsgDOTARealtimeGameStats_TeamDetails)(nil),                                   // 138: dota.CMsgDOTARealtimeGameStats.TeamDetails
+	(*CMsgDOTARealtimeGameStats_ItemDetails)(nil),                                   // 139: dota.CMsgDOTARealtimeGameStats.ItemDetails
+	(*CMsgDOTARealtimeGameStats_AbilityDetails)(nil),                                // 140: dota.CMsgDOTARealtimeGameStats.AbilityDetails
+	(*CMsgDOTARealtimeGameStats_HeroToHeroStats)(nil),                               // 141: dota.CMsgDOTARealtimeGameStats.HeroToHeroStats
+	(*CMsgDOTARealtimeGameStats_AbilityList)(nil),                                   // 142: dota.CMsgDOTARealtimeGameStats.AbilityList
+	(*CMsgDOTARealtimeGameStats_PlayerDetails)(nil),                                 // 143: dota.CMsgDOTARealtimeGameStats.PlayerDetails
+	(*CMsgDOTARealtimeGameStats_BuildingDetails)(nil),                               // 144: dota.CMsgDOTARealtimeGameStats.BuildingDetails
+	(*CMsgDOTARealtimeGameStats_KillDetails)(nil),                                   // 145: dota.CMsgDOTARealtimeGameStats.KillDetails
+	(*CMsgDOTARealtimeGameStats_BroadcasterDetails)(nil),                            // 146: dota.CMsgDOTARealtimeGameStats.BroadcasterDetails
+	(*CMsgDOTARealtimeGameStats_PickBanDetails)(nil),                                // 147: dota.CMsgDOTARealtimeGameStats.PickBanDetails
+	(*CMsgDOTARealtimeGameStats_MatchDetails)(nil),                                  // 148: dota.CMsgDOTARealtimeGameStats.MatchDetails
+	(*CMsgDOTARealtimeGameStats_GraphData)(nil),                                     // 149: dota.CMsgDOTARealtimeGameStats.GraphData
+	(*CMsgDOTARealtimeGameStats_GraphData_LocationStats)(nil),                       // 150: dota.CMsgDOTARealtimeGameStats.GraphData.LocationStats
+	(*CMsgDOTARealtimeGameStats_GraphData_TeamLocationStats)(nil),                   // 151: dota.CMsgDOTARealtimeGameStats.GraphData.TeamLocationStats
+	(*CMsgDOTARealtimeGameStatsTerse_TeamDetails)(nil),                              // 152: dota.CMsgDOTARealtimeGameStatsTerse.TeamDetails
+	(*CMsgDOTARealtimeGameStatsTerse_PlayerDetails)(nil),                            // 153: dota.CMsgDOTARealtimeGameStatsTerse.PlayerDetails
+	(*CMsgDOTARealtimeGameStatsTerse_BuildingDetails)(nil),                          // 154: dota.CMsgDOTARealtimeGameStatsTerse.BuildingDetails
+	(*CMsgDOTARealtimeGameStatsTerse_PickBanDetails)(nil),                           // 155: dota.CMsgDOTARealtimeGameStatsTerse.PickBanDetails
+	(*CMsgDOTARealtimeGameStatsTerse_MatchDetails)(nil),                             // 156: dota.CMsgDOTARealtimeGameStatsTerse.MatchDetails
+	(*CMsgDOTARealtimeGameStatsTerse_GraphData)(nil),                                // 157: dota.CMsgDOTARealtimeGameStatsTerse.GraphData
+	(*CMsgInGamePrediction_QueryKeyValues)(nil),                                     // 158: dota.CMsgInGamePrediction.QueryKeyValues
+	(*CMsgDOTASeasonPredictions_Prediction)(nil),                                    // 159: dota.CMsgDOTASeasonPredictions.Prediction
+	(*CMsgDOTASeasonPredictions_Prediction_Answers)(nil),                            // 160: dota.CMsgDOTASeasonPredictions.Prediction.Answers
+	(*CMsgAvailablePredictions_MatchPrediction)(nil),                                // 161: dota.CMsgAvailablePredictions.MatchPrediction
+	(*CMsgLeagueWatchedGames_Series)(nil),                                           // 162: dota.CMsgLeagueWatchedGames.Series
+	(*CMsgLeagueWatchedGames_League)(nil),                                           // 163: dota.CMsgLeagueWatchedGames.League
+	(*CMsgDOTAMatch_Player)(nil),                                                    // 164: dota.CMsgDOTAMatch.Player
+	(*CMsgDOTAMatch_BroadcasterInfo)(nil),                                           // 165: dota.CMsgDOTAMatch.BroadcasterInfo
+	(*CMsgDOTAMatch_BroadcasterChannel)(nil),                                        // 166: dota.CMsgDOTAMatch.BroadcasterChannel
+	(*CMsgDOTAMatch_Coach)(nil),                                                     // 167: dota.CMsgDOTAMatch.Coach
+	(*CMsgDOTAMatch_CustomGameData)(nil),                                            // 168: dota.CMsgDOTAMatch.CustomGameData
+	(*CMsgDOTAMatch_Player_CustomGameData)(nil),                                     // 169: dota.CMsgDOTAMatch.Player.CustomGameData
+	(*CMsgDOTAMatch_Player_HeroDamageReceived)(nil),                                 // 170: dota.CMsgDOTAMatch.Player.HeroDamageReceived
+	(*CMsgPlayerCard_StatModifier)(nil),                                             // 171: dota.CMsgPlayerCard.StatModifier
+	(*CMsgDOTABotDebugInfo_Bot)(nil),                                                // 172: dota.CMsgDOTABotDebugInfo.Bot
+	(*CMsgDOTABotDebugInfo_Bot_Mode)(nil),                                           // 173: dota.CMsgDOTABotDebugInfo.Bot.Mode
+	(*CMsgDOTABotDebugInfo_Bot_Action)(nil),                                         // 174: dota.CMsgDOTABotDebugInfo.Bot.Action
+	(*CMsgMatchTips_SingleTip)(nil),                                                 // 175: dota.CMsgMatchTips.SingleTip
+	(*CMsgDOTAMatchMinimal_Player)(nil),                                             // 176: dota.CMsgDOTAMatchMinimal.Player
+	(*CMsgDOTAMatchMinimal_Tourney)(nil),                                            // 177: dota.CMsgDOTAMatchMinimal.Tourney
+	(*CMsgMatchConsumableUsage_PlayerUsage)(nil),                                    // 178: dota.CMsgMatchConsumableUsage.PlayerUsage
+	(*CMsgMatchEventActionGrants_PlayerGrants)(nil),                                 // 179: dota.CMsgMatchEventActionGrants.PlayerGrants
+	(*CMsgCustomGameWhitelistForEdit_WhitelistEntry)(nil),                           // 180: dota.CMsgCustomGameWhitelistForEdit.WhitelistEntry
+	(*CMsgGCtoGCAssociatedExploiterAccountInfoResponse_Account)(nil),                // 181: dota.CMsgGCtoGCAssociatedExploiterAccountInfoResponse.Account
+	(*CMsgPullTabsData_Slot)(nil),                                                   // 182: dota.CMsgPullTabsData.Slot
+	(*CMsgPullTabsData_Jackpot)(nil),                                                // 183: dota.CMsgPullTabsData.Jackpot
+	(*CMsgUnderDraftData_BenchSlot)(nil),                                            // 184: dota.CMsgUnderDraftData.BenchSlot
+	(*CMsgUnderDraftData_ShopSlot)(nil),                                             // 185: dota.CMsgUnderDraftData.ShopSlot
+	(*CMsgGameDataHero_Facet)(nil),                                                  // 186: dota.CMsgGameDataHero.Facet
+	(*CMsgGameDataHeroList_HeroInfo)(nil),                                           // 187: dota.CMsgGameDataHeroList.HeroInfo
+	(*CMsgGameDataItemAbilityList_ItemAbilityInfo)(nil),                             // 188: dota.CMsgGameDataItemAbilityList.ItemAbilityInfo
+	(*CMsgDOTAClaimEventActionResponse_MysteryItemRewardData)(nil),                  // 189: dota.CMsgDOTAClaimEventActionResponse.MysteryItemRewardData
+	(*CMsgDOTAClaimEventActionResponse_LootListRewardData)(nil),                     // 190: dota.CMsgDOTAClaimEventActionResponse.LootListRewardData
+	(*CMsgDOTAClaimEventActionResponse_ActionListRewardData)(nil),                   // 191: dota.CMsgDOTAClaimEventActionResponse.ActionListRewardData
+	(*CMsgDOTAClaimEventActionResponse_OverworldTokenRewardData)(nil),               // 192: dota.CMsgDOTAClaimEventActionResponse.OverworldTokenRewardData
+	(*CMsgDOTAClaimEventActionResponse_GrantedRewardData)(nil),                      // 193: dota.CMsgDOTAClaimEventActionResponse.GrantedRewardData
+	(*CMsgDOTAClaimEventActionResponse_OverworldTokenRewardData_TokenQuantity)(nil), // 194: dota.CMsgDOTAClaimEventActionResponse.OverworldTokenRewardData.TokenQuantity
+	(*CDotaMsg_PredictionResult_Prediction)(nil),                                    // 195: dota.CDotaMsg_PredictionResult.Prediction
+	(EEvent)(0),                   // 196: dota.EEvent
+	(DOTA_GameMode)(0),            // 197: dota.DOTA_GameMode
+	(EMatchOutcome)(0),            // 198: dota.EMatchOutcome
+	(ELeagueRegion)(0),            // 199: dota.ELeagueRegion
+	(ELeaguePhase)(0),             // 200: dota.ELeaguePhase
+	(DOTA_GC_TEAM)(0),             // 201: dota.DOTA_GC_TEAM
+	(*CMsgPendingEventAward)(nil), // 202: dota.CMsgPendingEventAward
 }
 var file_dota_gcmessages_common_proto_depIdxs = []int32{
-	126, // 0: dota.CSODOTAGameAccountClient.role_handicaps:type_name -> dota.CSODOTAGameAccountClient.RoleHandicap
-	127, // 1: dota.CMsgLobbyFeaturedGamemodeProgress.accounts:type_name -> dota.CMsgLobbyFeaturedGamemodeProgress.AccountProgress
-	31,  // 2: dota.CMsgLobbyBattleCupVictoryList.winners:type_name -> dota.CMsgBattleCupVictory
+	128, // 0: dota.CSODOTAGameAccountClient.role_handicaps:type_name -> dota.CSODOTAGameAccountClient.RoleHandicap
+	129, // 1: dota.CMsgLobbyFeaturedGamemodeProgress.accounts:type_name -> dota.CMsgLobbyFeaturedGamemodeProgress.AccountProgress
+	32,  // 2: dota.CMsgLobbyBattleCupVictoryList.winners:type_name -> dota.CMsgBattleCupVictory
 	2,   // 3: dota.CMatchPlayerTimedCustomStat.stat:type_name -> dota.EDOTAMatchPlayerTimeCustomStat
-	36,  // 4: dota.CMatchPlayerTimedStats.custom_stats:type_name -> dota.CMatchPlayerTimedCustomStat
-	128, // 5: dota.CMsgGCGetPlayerCardItemInfoResponse.player_card_infos:type_name -> dota.CMsgGCGetPlayerCardItemInfoResponse.PlayerCardInfo
-	129, // 6: dota.CMsgDOTAProfileCard.slots:type_name -> dota.CMsgDOTAProfileCard.Slot
-	31,  // 7: dota.CMsgDOTAProfileCard.recent_battle_cup_victory:type_name -> dota.CMsgBattleCupVictory
-	193, // 8: dota.CMsgClientToGCRerollPlayerChallenge.event_id:type_name -> dota.EEvent
+	37,  // 4: dota.CMatchPlayerTimedStats.custom_stats:type_name -> dota.CMatchPlayerTimedCustomStat
+	130, // 5: dota.CMsgGCGetPlayerCardItemInfoResponse.player_card_infos:type_name -> dota.CMsgGCGetPlayerCardItemInfoResponse.PlayerCardInfo
+	131, // 6: dota.CMsgDOTAProfileCard.slots:type_name -> dota.CMsgDOTAProfileCard.Slot
+	32,  // 7: dota.CMsgDOTAProfileCard.recent_battle_cup_victory:type_name -> dota.CMsgBattleCupVictory
+	196, // 8: dota.CMsgClientToGCRerollPlayerChallenge.event_id:type_name -> dota.EEvent
 	13,  // 9: dota.CMsgGCRerollPlayerChallengeResponse.result:type_name -> dota.CMsgGCRerollPlayerChallengeResponse.EResult
-	146, // 10: dota.CMsgDOTARealtimeGameStats.match:type_name -> dota.CMsgDOTARealtimeGameStats.MatchDetails
-	136, // 11: dota.CMsgDOTARealtimeGameStats.teams:type_name -> dota.CMsgDOTARealtimeGameStats.TeamDetails
-	142, // 12: dota.CMsgDOTARealtimeGameStats.buildings:type_name -> dota.CMsgDOTARealtimeGameStats.BuildingDetails
-	147, // 13: dota.CMsgDOTARealtimeGameStats.graph_data:type_name -> dota.CMsgDOTARealtimeGameStats.GraphData
-	154, // 14: dota.CMsgDOTARealtimeGameStatsTerse.match:type_name -> dota.CMsgDOTARealtimeGameStatsTerse.MatchDetails
-	150, // 15: dota.CMsgDOTARealtimeGameStatsTerse.teams:type_name -> dota.CMsgDOTARealtimeGameStatsTerse.TeamDetails
-	152, // 16: dota.CMsgDOTARealtimeGameStatsTerse.buildings:type_name -> dota.CMsgDOTARealtimeGameStatsTerse.BuildingDetails
-	155, // 17: dota.CMsgDOTARealtimeGameStatsTerse.graph_data:type_name -> dota.CMsgDOTARealtimeGameStatsTerse.GraphData
+	148, // 10: dota.CMsgDOTARealtimeGameStats.match:type_name -> dota.CMsgDOTARealtimeGameStats.MatchDetails
+	138, // 11: dota.CMsgDOTARealtimeGameStats.teams:type_name -> dota.CMsgDOTARealtimeGameStats.TeamDetails
+	144, // 12: dota.CMsgDOTARealtimeGameStats.buildings:type_name -> dota.CMsgDOTARealtimeGameStats.BuildingDetails
+	149, // 13: dota.CMsgDOTARealtimeGameStats.graph_data:type_name -> dota.CMsgDOTARealtimeGameStats.GraphData
+	156, // 14: dota.CMsgDOTARealtimeGameStatsTerse.match:type_name -> dota.CMsgDOTARealtimeGameStatsTerse.MatchDetails
+	152, // 15: dota.CMsgDOTARealtimeGameStatsTerse.teams:type_name -> dota.CMsgDOTARealtimeGameStatsTerse.TeamDetails
+	154, // 16: dota.CMsgDOTARealtimeGameStatsTerse.buildings:type_name -> dota.CMsgDOTARealtimeGameStatsTerse.BuildingDetails
+	157, // 17: dota.CMsgDOTARealtimeGameStatsTerse.graph_data:type_name -> dota.CMsgDOTARealtimeGameStatsTerse.GraphData
 	4,   // 18: dota.CMsgDOTABroadcastTimelineEvent.event:type_name -> dota.EBroadcastTimelineEvent
 	17,  // 19: dota.CMsgInGamePrediction.type:type_name -> dota.CMsgInGamePrediction.EPredictionType
 	19,  // 20: dota.CMsgInGamePrediction.group:type_name -> dota.CMsgInGamePrediction.ERandomSelectionGroup_t
-	60,  // 21: dota.CMsgInGamePrediction.choices:type_name -> dota.CMsgPredictionChoice
-	156, // 22: dota.CMsgInGamePrediction.query_values:type_name -> dota.CMsgInGamePrediction.QueryKeyValues
+	61,  // 21: dota.CMsgInGamePrediction.choices:type_name -> dota.CMsgPredictionChoice
+	158, // 22: dota.CMsgInGamePrediction.query_values:type_name -> dota.CMsgInGamePrediction.QueryKeyValues
 	18,  // 23: dota.CMsgInGamePrediction.answer_resolution_type:type_name -> dota.CMsgInGamePrediction.EResolutionType_t
 	16,  // 24: dota.CMsgInGamePrediction.raw_value_type:type_name -> dota.CMsgInGamePrediction.ERawValueType_t
-	157, // 25: dota.CMsgDOTASeasonPredictions.predictions:type_name -> dota.CMsgDOTASeasonPredictions.Prediction
-	61,  // 26: dota.CMsgDOTASeasonPredictions.in_game_predictions:type_name -> dota.CMsgInGamePrediction
-	159, // 27: dota.CMsgAvailablePredictions.match_predictions:type_name -> dota.CMsgAvailablePredictions.MatchPrediction
-	161, // 28: dota.CMsgLeagueWatchedGames.leagues:type_name -> dota.CMsgLeagueWatchedGames.League
-	162, // 29: dota.CMsgDOTAMatch.players:type_name -> dota.CMsgDOTAMatch.Player
-	194, // 30: dota.CMsgDOTAMatch.game_mode:type_name -> dota.DOTA_GameMode
-	41,  // 31: dota.CMsgDOTAMatch.picks_bans:type_name -> dota.CMatchHeroSelectEvent
+	159, // 25: dota.CMsgDOTASeasonPredictions.predictions:type_name -> dota.CMsgDOTASeasonPredictions.Prediction
+	62,  // 26: dota.CMsgDOTASeasonPredictions.in_game_predictions:type_name -> dota.CMsgInGamePrediction
+	161, // 27: dota.CMsgAvailablePredictions.match_predictions:type_name -> dota.CMsgAvailablePredictions.MatchPrediction
+	163, // 28: dota.CMsgLeagueWatchedGames.leagues:type_name -> dota.CMsgLeagueWatchedGames.League
+	164, // 29: dota.CMsgDOTAMatch.players:type_name -> dota.CMsgDOTAMatch.Player
+	197, // 30: dota.CMsgDOTAMatch.game_mode:type_name -> dota.DOTA_GameMode
+	42,  // 31: dota.CMsgDOTAMatch.picks_bans:type_name -> dota.CMatchHeroSelectEvent
 	22,  // 32: dota.CMsgDOTAMatch.replay_state:type_name -> dota.CMsgDOTAMatch.ReplayState
-	164, // 33: dota.CMsgDOTAMatch.broadcaster_channels:type_name -> dota.CMsgDOTAMatch.BroadcasterChannel
-	166, // 34: dota.CMsgDOTAMatch.custom_game_data:type_name -> dota.CMsgDOTAMatch.CustomGameData
-	195, // 35: dota.CMsgDOTAMatch.match_outcome:type_name -> dota.EMatchOutcome
-	165, // 36: dota.CMsgDOTAMatch.coaches:type_name -> dota.CMsgDOTAMatch.Coach
-	169, // 37: dota.CMsgPlayerCard.stat_modifier:type_name -> dota.CMsgPlayerCard.StatModifier
-	67,  // 38: dota.CMsgDOTAFantasyPlayerMatchStats.matches:type_name -> dota.CMsgDOTAFantasyPlayerStats
-	170, // 39: dota.CMsgDOTABotDebugInfo.bots:type_name -> dota.CMsgDOTABotDebugInfo.Bot
-	194, // 40: dota.CMsgRecentMatchInfo.game_mode:type_name -> dota.DOTA_GameMode
-	195, // 41: dota.CMsgRecentMatchInfo.match_outcome:type_name -> dota.EMatchOutcome
-	173, // 42: dota.CMsgMatchTips.tips:type_name -> dota.CMsgMatchTips.SingleTip
-	194, // 43: dota.CMsgDOTAMatchMinimal.game_mode:type_name -> dota.DOTA_GameMode
-	174, // 44: dota.CMsgDOTAMatchMinimal.players:type_name -> dota.CMsgDOTAMatchMinimal.Player
-	175, // 45: dota.CMsgDOTAMatchMinimal.tourney:type_name -> dota.CMsgDOTAMatchMinimal.Tourney
-	195, // 46: dota.CMsgDOTAMatchMinimal.match_outcome:type_name -> dota.EMatchOutcome
-	176, // 47: dota.CMsgMatchConsumableUsage.player_consumables_used:type_name -> dota.CMsgMatchConsumableUsage.PlayerUsage
-	177, // 48: dota.CMsgMatchEventActionGrants.player_grants:type_name -> dota.CMsgMatchEventActionGrants.PlayerGrants
-	178, // 49: dota.CMsgCustomGameWhitelistForEdit.whitelist_entries:type_name -> dota.CMsgCustomGameWhitelistForEdit.WhitelistEntry
-	81,  // 50: dota.CMsgPlayerRecentAccomplishments.recent_outcomes:type_name -> dota.CMsgPlayerRecentMatchOutcomes
-	80,  // 51: dota.CMsgPlayerRecentAccomplishments.total_record:type_name -> dota.CMsgPlayerMatchRecord
-	82,  // 52: dota.CMsgPlayerRecentAccomplishments.recent_commends:type_name -> dota.CMsgPlayerRecentCommends
-	79,  // 53: dota.CMsgPlayerRecentAccomplishments.last_match:type_name -> dota.CMsgPlayerRecentMatchInfo
-	81,  // 54: dota.CMsgPlayerRecentAccomplishments.recent_mvps:type_name -> dota.CMsgPlayerRecentMatchOutcomes
-	81,  // 55: dota.CMsgPlayerHeroRecentAccomplishments.recent_outcomes:type_name -> dota.CMsgPlayerRecentMatchOutcomes
-	80,  // 56: dota.CMsgPlayerHeroRecentAccomplishments.total_record:type_name -> dota.CMsgPlayerMatchRecord
-	79,  // 57: dota.CMsgPlayerHeroRecentAccomplishments.last_match:type_name -> dota.CMsgPlayerRecentMatchInfo
-	83,  // 58: dota.CMsgRecentAccomplishments.player_accomplishments:type_name -> dota.CMsgPlayerRecentAccomplishments
-	84,  // 59: dota.CMsgRecentAccomplishments.hero_accomplishments:type_name -> dota.CMsgPlayerHeroRecentAccomplishments
+	166, // 33: dota.CMsgDOTAMatch.broadcaster_channels:type_name -> dota.CMsgDOTAMatch.BroadcasterChannel
+	168, // 34: dota.CMsgDOTAMatch.custom_game_data:type_name -> dota.CMsgDOTAMatch.CustomGameData
+	198, // 35: dota.CMsgDOTAMatch.match_outcome:type_name -> dota.EMatchOutcome
+	167, // 36: dota.CMsgDOTAMatch.coaches:type_name -> dota.CMsgDOTAMatch.Coach
+	171, // 37: dota.CMsgPlayerCard.stat_modifier:type_name -> dota.CMsgPlayerCard.StatModifier
+	68,  // 38: dota.CMsgDOTAFantasyPlayerMatchStats.matches:type_name -> dota.CMsgDOTAFantasyPlayerStats
+	172, // 39: dota.CMsgDOTABotDebugInfo.bots:type_name -> dota.CMsgDOTABotDebugInfo.Bot
+	197, // 40: dota.CMsgRecentMatchInfo.game_mode:type_name -> dota.DOTA_GameMode
+	198, // 41: dota.CMsgRecentMatchInfo.match_outcome:type_name -> dota.EMatchOutcome
+	175, // 42: dota.CMsgMatchTips.tips:type_name -> dota.CMsgMatchTips.SingleTip
+	197, // 43: dota.CMsgDOTAMatchMinimal.game_mode:type_name -> dota.DOTA_GameMode
+	176, // 44: dota.CMsgDOTAMatchMinimal.players:type_name -> dota.CMsgDOTAMatchMinimal.Player
+	177, // 45: dota.CMsgDOTAMatchMinimal.tourney:type_name -> dota.CMsgDOTAMatchMinimal.Tourney
+	198, // 46: dota.CMsgDOTAMatchMinimal.match_outcome:type_name -> dota.EMatchOutcome
+	178, // 47: dota.CMsgMatchConsumableUsage.player_consumables_used:type_name -> dota.CMsgMatchConsumableUsage.PlayerUsage
+	179, // 48: dota.CMsgMatchEventActionGrants.player_grants:type_name -> dota.CMsgMatchEventActionGrants.PlayerGrants
+	180, // 49: dota.CMsgCustomGameWhitelistForEdit.whitelist_entries:type_name -> dota.CMsgCustomGameWhitelistForEdit.WhitelistEntry
+	82,  // 50: dota.CMsgPlayerRecentAccomplishments.recent_outcomes:type_name -> dota.CMsgPlayerRecentMatchOutcomes
+	81,  // 51: dota.CMsgPlayerRecentAccomplishments.total_record:type_name -> dota.CMsgPlayerMatchRecord
+	83,  // 52: dota.CMsgPlayerRecentAccomplishments.recent_commends:type_name -> dota.CMsgPlayerRecentCommends
+	80,  // 53: dota.CMsgPlayerRecentAccomplishments.last_match:type_name -> dota.CMsgPlayerRecentMatchInfo
+	82,  // 54: dota.CMsgPlayerRecentAccomplishments.recent_mvps:type_name -> dota.CMsgPlayerRecentMatchOutcomes
+	82,  // 55: dota.CMsgPlayerHeroRecentAccomplishments.recent_outcomes:type_name -> dota.CMsgPlayerRecentMatchOutcomes
+	81,  // 56: dota.CMsgPlayerHeroRecentAccomplishments.total_record:type_name -> dota.CMsgPlayerMatchRecord
+	80,  // 57: dota.CMsgPlayerHeroRecentAccomplishments.last_match:type_name -> dota.CMsgPlayerRecentMatchInfo
+	84,  // 58: dota.CMsgRecentAccomplishments.player_accomplishments:type_name -> dota.CMsgPlayerRecentAccomplishments
+	85,  // 59: dota.CMsgRecentAccomplishments.hero_accomplishments:type_name -> dota.CMsgPlayerHeroRecentAccomplishments
 	24,  // 60: dota.CMsgServerToGCRequestPlayerRecentAccomplishmentsResponse.result:type_name -> dota.CMsgServerToGCRequestPlayerRecentAccomplishmentsResponse.EResponse
-	85,  // 61: dota.CMsgServerToGCRequestPlayerRecentAccomplishmentsResponse.player_accomplishments:type_name -> dota.CMsgRecentAccomplishments
-	179, // 62: dota.CMsgGCtoGCAssociatedExploiterAccountInfoResponse.accounts:type_name -> dota.CMsgGCtoGCAssociatedExploiterAccountInfoResponse.Account
-	180, // 63: dota.CMsgPullTabsData.slots:type_name -> dota.CMsgPullTabsData.Slot
-	181, // 64: dota.CMsgPullTabsData.jackpots:type_name -> dota.CMsgPullTabsData.Jackpot
-	182, // 65: dota.CMsgUnderDraftData.bench_slots:type_name -> dota.CMsgUnderDraftData.BenchSlot
-	183, // 66: dota.CMsgUnderDraftData.shop_slots:type_name -> dota.CMsgUnderDraftData.ShopSlot
+	86,  // 61: dota.CMsgServerToGCRequestPlayerRecentAccomplishmentsResponse.player_accomplishments:type_name -> dota.CMsgRecentAccomplishments
+	181, // 62: dota.CMsgGCtoGCAssociatedExploiterAccountInfoResponse.accounts:type_name -> dota.CMsgGCtoGCAssociatedExploiterAccountInfoResponse.Account
+	182, // 63: dota.CMsgPullTabsData.slots:type_name -> dota.CMsgPullTabsData.Slot
+	183, // 64: dota.CMsgPullTabsData.jackpots:type_name -> dota.CMsgPullTabsData.Jackpot
+	184, // 65: dota.CMsgUnderDraftData.bench_slots:type_name -> dota.CMsgUnderDraftData.BenchSlot
+	185, // 66: dota.CMsgUnderDraftData.shop_slots:type_name -> dota.CMsgUnderDraftData.ShopSlot
 	6,   // 67: dota.CMsgDOTATriviaQuestion.category:type_name -> dota.EDOTATriviaQuestionCategory
-	96,  // 68: dota.CMsgGameDataSpecialValues.bonuses:type_name -> dota.CMsgGameDataSpecialValueBonus
-	98,  // 69: dota.CMsgGameDataSpecialValues.facet_bonus:type_name -> dota.CMsgGameDataFacetAbilityBonus
-	97,  // 70: dota.CMsgGameDataAbilityOrItem.special_values:type_name -> dota.CMsgGameDataSpecialValues
-	99,  // 71: dota.CMsgGameDataAbilityOrItemList.abilities:type_name -> dota.CMsgGameDataAbilityOrItem
-	184, // 72: dota.CMsgGameDataHero.facets:type_name -> dota.CMsgGameDataHero.Facet
-	99,  // 73: dota.CMsgGameDataHero.abilities:type_name -> dota.CMsgGameDataAbilityOrItem
-	99,  // 74: dota.CMsgGameDataHero.talents:type_name -> dota.CMsgGameDataAbilityOrItem
-	100, // 75: dota.CMsgGameDataHero.facet_abilities:type_name -> dota.CMsgGameDataAbilityOrItemList
-	99,  // 76: dota.CMsgGameDataAbilities.abilities:type_name -> dota.CMsgGameDataAbilityOrItem
-	99,  // 77: dota.CMsgGameDataItems.items:type_name -> dota.CMsgGameDataAbilityOrItem
-	101, // 78: dota.CMsgGameDataHeroes.heroes:type_name -> dota.CMsgGameDataHero
-	185, // 79: dota.CMsgGameDataHeroList.heroes:type_name -> dota.CMsgGameDataHeroList.HeroInfo
-	186, // 80: dota.CMsgGameDataItemAbilityList.itemabilities:type_name -> dota.CMsgGameDataItemAbilityList.ItemAbilityInfo
-	193, // 81: dota.CMsgStickerbookPage.event_id:type_name -> dota.EEvent
-	110, // 82: dota.CMsgStickerbookPage.stickers:type_name -> dota.CMsgStickerbookSticker
+	97,  // 68: dota.CMsgGameDataSpecialValues.bonuses:type_name -> dota.CMsgGameDataSpecialValueBonus
+	99,  // 69: dota.CMsgGameDataSpecialValues.facet_bonus:type_name -> dota.CMsgGameDataFacetAbilityBonus
+	98,  // 70: dota.CMsgGameDataAbilityOrItem.special_values:type_name -> dota.CMsgGameDataSpecialValues
+	100, // 71: dota.CMsgGameDataAbilityOrItemList.abilities:type_name -> dota.CMsgGameDataAbilityOrItem
+	186, // 72: dota.CMsgGameDataHero.facets:type_name -> dota.CMsgGameDataHero.Facet
+	100, // 73: dota.CMsgGameDataHero.abilities:type_name -> dota.CMsgGameDataAbilityOrItem
+	100, // 74: dota.CMsgGameDataHero.talents:type_name -> dota.CMsgGameDataAbilityOrItem
+	101, // 75: dota.CMsgGameDataHero.facet_abilities:type_name -> dota.CMsgGameDataAbilityOrItemList
+	100, // 76: dota.CMsgGameDataAbilities.abilities:type_name -> dota.CMsgGameDataAbilityOrItem
+	100, // 77: dota.CMsgGameDataItems.items:type_name -> dota.CMsgGameDataAbilityOrItem
+	102, // 78: dota.CMsgGameDataHeroes.heroes:type_name -> dota.CMsgGameDataHero
+	187, // 79: dota.CMsgGameDataHeroList.heroes:type_name -> dota.CMsgGameDataHeroList.HeroInfo
+	188, // 80: dota.CMsgGameDataItemAbilityList.itemabilities:type_name -> dota.CMsgGameDataItemAbilityList.ItemAbilityInfo
+	196, // 81: dota.CMsgStickerbookPage.event_id:type_name -> dota.EEvent
+	111, // 82: dota.CMsgStickerbookPage.stickers:type_name -> dota.CMsgStickerbookSticker
 	10,  // 83: dota.CMsgStickerbookPage.page_type:type_name -> dota.EStickerbookPageType
-	111, // 84: dota.CMsgStickerbook.pages:type_name -> dota.CMsgStickerbookPage
-	112, // 85: dota.CMsgStickerbook.team_page_order_sequence:type_name -> dota.CMsgStickerbookTeamPageOrderSequence
-	114, // 86: dota.CMsgStickerHeroes.heroes:type_name -> dota.CMsgStickerHero
-	116, // 87: dota.CMsgHeroRoleHeroStats.role_stats:type_name -> dota.CMsgHeroRoleStats
-	117, // 88: dota.CMsgHeroRoleRankStats.hero_stats:type_name -> dota.CMsgHeroRoleHeroStats
-	118, // 89: dota.CMsgHeroRoleAllRanksStats.rank_stats:type_name -> dota.CMsgHeroRoleRankStats
-	120, // 90: dota.CMsgGlobalMapStats.current:type_name -> dota.CMsgMapStatsSnapshot
-	120, // 91: dota.CMsgGlobalMapStats.window_start:type_name -> dota.CMsgMapStatsSnapshot
-	120, // 92: dota.CMsgGlobalMapStats.window_end:type_name -> dota.CMsgMapStatsSnapshot
+	112, // 84: dota.CMsgStickerbook.pages:type_name -> dota.CMsgStickerbookPage
+	113, // 85: dota.CMsgStickerbook.team_page_order_sequence:type_name -> dota.CMsgStickerbookTeamPageOrderSequence
+	115, // 86: dota.CMsgStickerHeroes.heroes:type_name -> dota.CMsgStickerHero
+	117, // 87: dota.CMsgHeroRoleHeroStats.role_stats:type_name -> dota.CMsgHeroRoleStats
+	118, // 88: dota.CMsgHeroRoleRankStats.hero_stats:type_name -> dota.CMsgHeroRoleHeroStats
+	119, // 89: dota.CMsgHeroRoleAllRanksStats.rank_stats:type_name -> dota.CMsgHeroRoleRankStats
+	121, // 90: dota.CMsgGlobalMapStats.current:type_name -> dota.CMsgMapStatsSnapshot
+	121, // 91: dota.CMsgGlobalMapStats.window_start:type_name -> dota.CMsgMapStatsSnapshot
+	121, // 92: dota.CMsgGlobalMapStats.window_end:type_name -> dota.CMsgMapStatsSnapshot
 	25,  // 93: dota.CMsgDOTAClaimEventActionResponse.result:type_name -> dota.CMsgDOTAClaimEventActionResponse.ResultCode
-	191, // 94: dota.CMsgDOTAClaimEventActionResponse.reward_results:type_name -> dota.CMsgDOTAClaimEventActionResponse.GrantedRewardData
+	193, // 94: dota.CMsgDOTAClaimEventActionResponse.reward_results:type_name -> dota.CMsgDOTAClaimEventActionResponse.GrantedRewardData
 	26,  // 95: dota.CMsgClientToGCDotaLabsFeedbackResponse.response:type_name -> dota.CMsgClientToGCDotaLabsFeedbackResponse.EResponse
-	130, // 96: dota.CMsgDOTAProfileCard.Slot.trophy:type_name -> dota.CMsgDOTAProfileCard.Slot.Trophy
-	131, // 97: dota.CMsgDOTAProfileCard.Slot.stat:type_name -> dota.CMsgDOTAProfileCard.Slot.Stat
-	132, // 98: dota.CMsgDOTAProfileCard.Slot.item:type_name -> dota.CMsgDOTAProfileCard.Slot.Item
-	133, // 99: dota.CMsgDOTAProfileCard.Slot.hero:type_name -> dota.CMsgDOTAProfileCard.Slot.Hero
-	134, // 100: dota.CMsgDOTAProfileCard.Slot.emoticon:type_name -> dota.CMsgDOTAProfileCard.Slot.Emoticon
-	135, // 101: dota.CMsgDOTAProfileCard.Slot.team:type_name -> dota.CMsgDOTAProfileCard.Slot.Team
-	12,  // 102: dota.CMsgDOTAProfileCard.Slot.Stat.stat_id:type_name -> dota.CMsgDOTAProfileCard.EStatID
-	141, // 103: dota.CMsgDOTARealtimeGameStats.TeamDetails.players:type_name -> dota.CMsgDOTARealtimeGameStats.PlayerDetails
-	138, // 104: dota.CMsgDOTARealtimeGameStats.PlayerDetails.abilities:type_name -> dota.CMsgDOTARealtimeGameStats.AbilityDetails
-	137, // 105: dota.CMsgDOTARealtimeGameStats.PlayerDetails.items:type_name -> dota.CMsgDOTARealtimeGameStats.ItemDetails
-	137, // 106: dota.CMsgDOTARealtimeGameStats.PlayerDetails.stashitems:type_name -> dota.CMsgDOTARealtimeGameStats.ItemDetails
-	137, // 107: dota.CMsgDOTARealtimeGameStats.PlayerDetails.itemshoppinglist:type_name -> dota.CMsgDOTARealtimeGameStats.ItemDetails
-	140, // 108: dota.CMsgDOTARealtimeGameStats.PlayerDetails.levelpoints:type_name -> dota.CMsgDOTARealtimeGameStats.AbilityList
-	139, // 109: dota.CMsgDOTARealtimeGameStats.PlayerDetails.hero_to_hero_stats:type_name -> dota.CMsgDOTARealtimeGameStats.HeroToHeroStats
-	145, // 110: dota.CMsgDOTARealtimeGameStats.MatchDetails.picks:type_name -> dota.CMsgDOTARealtimeGameStats.PickBanDetails
-	145, // 111: dota.CMsgDOTARealtimeGameStats.MatchDetails.bans:type_name -> dota.CMsgDOTARealtimeGameStats.PickBanDetails
-	143, // 112: dota.CMsgDOTARealtimeGameStats.MatchDetails.kills:type_name -> dota.CMsgDOTARealtimeGameStats.KillDetails
-	144, // 113: dota.CMsgDOTARealtimeGameStats.MatchDetails.broadcasters:type_name -> dota.CMsgDOTARealtimeGameStats.BroadcasterDetails
-	149, // 114: dota.CMsgDOTARealtimeGameStats.GraphData.team_loc_stats:type_name -> dota.CMsgDOTARealtimeGameStats.GraphData.TeamLocationStats
-	148, // 115: dota.CMsgDOTARealtimeGameStats.GraphData.TeamLocationStats.loc_stats:type_name -> dota.CMsgDOTARealtimeGameStats.GraphData.LocationStats
-	151, // 116: dota.CMsgDOTARealtimeGameStatsTerse.TeamDetails.players:type_name -> dota.CMsgDOTARealtimeGameStatsTerse.PlayerDetails
-	153, // 117: dota.CMsgDOTARealtimeGameStatsTerse.MatchDetails.picks:type_name -> dota.CMsgDOTARealtimeGameStatsTerse.PickBanDetails
-	153, // 118: dota.CMsgDOTARealtimeGameStatsTerse.MatchDetails.bans:type_name -> dota.CMsgDOTARealtimeGameStatsTerse.PickBanDetails
-	20,  // 119: dota.CMsgDOTASeasonPredictions.Prediction.type:type_name -> dota.CMsgDOTASeasonPredictions.Prediction.EPredictionType
-	60,  // 120: dota.CMsgDOTASeasonPredictions.Prediction.choices:type_name -> dota.CMsgPredictionChoice
-	21,  // 121: dota.CMsgDOTASeasonPredictions.Prediction.answer_type:type_name -> dota.CMsgDOTASeasonPredictions.Prediction.EAnswerType
-	158, // 122: dota.CMsgDOTASeasonPredictions.Prediction.answers:type_name -> dota.CMsgDOTASeasonPredictions.Prediction.Answers
-	196, // 123: dota.CMsgDOTASeasonPredictions.Prediction.region:type_name -> dota.ELeagueRegion
-	197, // 124: dota.CMsgDOTASeasonPredictions.Prediction.phases:type_name -> dota.ELeaguePhase
-	193, // 125: dota.CMsgDOTASeasonPredictions.Prediction.reward_event:type_name -> dota.EEvent
-	61,  // 126: dota.CMsgAvailablePredictions.MatchPrediction.predictions:type_name -> dota.CMsgInGamePrediction
-	160, // 127: dota.CMsgLeagueWatchedGames.League.series:type_name -> dota.CMsgLeagueWatchedGames.Series
-	35,  // 128: dota.CMsgDOTAMatch.Player.ability_upgrades:type_name -> dota.CMatchPlayerAbilityUpgrade
-	39,  // 129: dota.CMsgDOTAMatch.Player.additional_units_inventory:type_name -> dota.CMatchAdditionalUnitInventory
-	40,  // 130: dota.CMsgDOTAMatch.Player.permanent_buffs:type_name -> dota.CMatchPlayerPermanentBuff
-	167, // 131: dota.CMsgDOTAMatch.Player.custom_game_data:type_name -> dota.CMsgDOTAMatch.Player.CustomGameData
-	168, // 132: dota.CMsgDOTAMatch.Player.hero_damage_received:type_name -> dota.CMsgDOTAMatch.Player.HeroDamageReceived
-	168, // 133: dota.CMsgDOTAMatch.Player.hero_damage_dealt:type_name -> dota.CMsgDOTAMatch.Player.HeroDamageReceived
-	198, // 134: dota.CMsgDOTAMatch.Player.team_number:type_name -> dota.DOTA_GC_TEAM
-	163, // 135: dota.CMsgDOTAMatch.BroadcasterChannel.broadcaster_infos:type_name -> dota.CMsgDOTAMatch.BroadcasterInfo
-	23,  // 136: dota.CMsgDOTAMatch.Player.HeroDamageReceived.damage_type:type_name -> dota.CMsgDOTAMatch.Player.HeroDamageType
-	171, // 137: dota.CMsgDOTABotDebugInfo.Bot.modes:type_name -> dota.CMsgDOTABotDebugInfo.Bot.Mode
-	172, // 138: dota.CMsgDOTABotDebugInfo.Bot.action:type_name -> dota.CMsgDOTABotDebugInfo.Bot.Action
-	193, // 139: dota.CMsgMatchTips.SingleTip.event_id:type_name -> dota.EEvent
-	198, // 140: dota.CMsgDOTAMatchMinimal.Player.team_number:type_name -> dota.DOTA_GC_TEAM
-	74,  // 141: dota.CMsgMatchConsumableUsage.PlayerUsage.consumables_used:type_name -> dota.CMsgConsumableUsage
-	199, // 142: dota.CMsgMatchEventActionGrants.PlayerGrants.actions_granted:type_name -> dota.CMsgPendingEventAward
-	5,   // 143: dota.CMsgCustomGameWhitelistForEdit.WhitelistEntry.whitelist_state:type_name -> dota.ECustomGameWhitelistState
-	192, // 144: dota.CMsgDOTAClaimEventActionResponse.OverworldTokenRewardData.tokens:type_name -> dota.CMsgDOTAClaimEventActionResponse.OverworldTokenRewardData.TokenQuantity
-	145, // [145:145] is the sub-list for method output_type
-	145, // [145:145] is the sub-list for method input_type
-	145, // [145:145] is the sub-list for extension type_name
-	145, // [145:145] is the sub-list for extension extendee
-	0,   // [0:145] is the sub-list for field type_name
+	195, // 96: dota.CDotaMsg_PredictionResult.predictions:type_name -> dota.CDotaMsg_PredictionResult.Prediction
+	132, // 97: dota.CMsgDOTAProfileCard.Slot.trophy:type_name -> dota.CMsgDOTAProfileCard.Slot.Trophy
+	133, // 98: dota.CMsgDOTAProfileCard.Slot.stat:type_name -> dota.CMsgDOTAProfileCard.Slot.Stat
+	134, // 99: dota.CMsgDOTAProfileCard.Slot.item:type_name -> dota.CMsgDOTAProfileCard.Slot.Item
+	135, // 100: dota.CMsgDOTAProfileCard.Slot.hero:type_name -> dota.CMsgDOTAProfileCard.Slot.Hero
+	136, // 101: dota.CMsgDOTAProfileCard.Slot.emoticon:type_name -> dota.CMsgDOTAProfileCard.Slot.Emoticon
+	137, // 102: dota.CMsgDOTAProfileCard.Slot.team:type_name -> dota.CMsgDOTAProfileCard.Slot.Team
+	12,  // 103: dota.CMsgDOTAProfileCard.Slot.Stat.stat_id:type_name -> dota.CMsgDOTAProfileCard.EStatID
+	143, // 104: dota.CMsgDOTARealtimeGameStats.TeamDetails.players:type_name -> dota.CMsgDOTARealtimeGameStats.PlayerDetails
+	140, // 105: dota.CMsgDOTARealtimeGameStats.PlayerDetails.abilities:type_name -> dota.CMsgDOTARealtimeGameStats.AbilityDetails
+	139, // 106: dota.CMsgDOTARealtimeGameStats.PlayerDetails.items:type_name -> dota.CMsgDOTARealtimeGameStats.ItemDetails
+	139, // 107: dota.CMsgDOTARealtimeGameStats.PlayerDetails.stashitems:type_name -> dota.CMsgDOTARealtimeGameStats.ItemDetails
+	139, // 108: dota.CMsgDOTARealtimeGameStats.PlayerDetails.itemshoppinglist:type_name -> dota.CMsgDOTARealtimeGameStats.ItemDetails
+	142, // 109: dota.CMsgDOTARealtimeGameStats.PlayerDetails.levelpoints:type_name -> dota.CMsgDOTARealtimeGameStats.AbilityList
+	141, // 110: dota.CMsgDOTARealtimeGameStats.PlayerDetails.hero_to_hero_stats:type_name -> dota.CMsgDOTARealtimeGameStats.HeroToHeroStats
+	147, // 111: dota.CMsgDOTARealtimeGameStats.MatchDetails.picks:type_name -> dota.CMsgDOTARealtimeGameStats.PickBanDetails
+	147, // 112: dota.CMsgDOTARealtimeGameStats.MatchDetails.bans:type_name -> dota.CMsgDOTARealtimeGameStats.PickBanDetails
+	145, // 113: dota.CMsgDOTARealtimeGameStats.MatchDetails.kills:type_name -> dota.CMsgDOTARealtimeGameStats.KillDetails
+	146, // 114: dota.CMsgDOTARealtimeGameStats.MatchDetails.broadcasters:type_name -> dota.CMsgDOTARealtimeGameStats.BroadcasterDetails
+	151, // 115: dota.CMsgDOTARealtimeGameStats.GraphData.team_loc_stats:type_name -> dota.CMsgDOTARealtimeGameStats.GraphData.TeamLocationStats
+	150, // 116: dota.CMsgDOTARealtimeGameStats.GraphData.TeamLocationStats.loc_stats:type_name -> dota.CMsgDOTARealtimeGameStats.GraphData.LocationStats
+	153, // 117: dota.CMsgDOTARealtimeGameStatsTerse.TeamDetails.players:type_name -> dota.CMsgDOTARealtimeGameStatsTerse.PlayerDetails
+	155, // 118: dota.CMsgDOTARealtimeGameStatsTerse.MatchDetails.picks:type_name -> dota.CMsgDOTARealtimeGameStatsTerse.PickBanDetails
+	155, // 119: dota.CMsgDOTARealtimeGameStatsTerse.MatchDetails.bans:type_name -> dota.CMsgDOTARealtimeGameStatsTerse.PickBanDetails
+	20,  // 120: dota.CMsgDOTASeasonPredictions.Prediction.type:type_name -> dota.CMsgDOTASeasonPredictions.Prediction.EPredictionType
+	61,  // 121: dota.CMsgDOTASeasonPredictions.Prediction.choices:type_name -> dota.CMsgPredictionChoice
+	21,  // 122: dota.CMsgDOTASeasonPredictions.Prediction.answer_type:type_name -> dota.CMsgDOTASeasonPredictions.Prediction.EAnswerType
+	160, // 123: dota.CMsgDOTASeasonPredictions.Prediction.answers:type_name -> dota.CMsgDOTASeasonPredictions.Prediction.Answers
+	199, // 124: dota.CMsgDOTASeasonPredictions.Prediction.region:type_name -> dota.ELeagueRegion
+	200, // 125: dota.CMsgDOTASeasonPredictions.Prediction.phases:type_name -> dota.ELeaguePhase
+	196, // 126: dota.CMsgDOTASeasonPredictions.Prediction.reward_event:type_name -> dota.EEvent
+	62,  // 127: dota.CMsgAvailablePredictions.MatchPrediction.predictions:type_name -> dota.CMsgInGamePrediction
+	162, // 128: dota.CMsgLeagueWatchedGames.League.series:type_name -> dota.CMsgLeagueWatchedGames.Series
+	36,  // 129: dota.CMsgDOTAMatch.Player.ability_upgrades:type_name -> dota.CMatchPlayerAbilityUpgrade
+	40,  // 130: dota.CMsgDOTAMatch.Player.additional_units_inventory:type_name -> dota.CMatchAdditionalUnitInventory
+	41,  // 131: dota.CMsgDOTAMatch.Player.permanent_buffs:type_name -> dota.CMatchPlayerPermanentBuff
+	169, // 132: dota.CMsgDOTAMatch.Player.custom_game_data:type_name -> dota.CMsgDOTAMatch.Player.CustomGameData
+	170, // 133: dota.CMsgDOTAMatch.Player.hero_damage_received:type_name -> dota.CMsgDOTAMatch.Player.HeroDamageReceived
+	170, // 134: dota.CMsgDOTAMatch.Player.hero_damage_dealt:type_name -> dota.CMsgDOTAMatch.Player.HeroDamageReceived
+	201, // 135: dota.CMsgDOTAMatch.Player.team_number:type_name -> dota.DOTA_GC_TEAM
+	165, // 136: dota.CMsgDOTAMatch.BroadcasterChannel.broadcaster_infos:type_name -> dota.CMsgDOTAMatch.BroadcasterInfo
+	23,  // 137: dota.CMsgDOTAMatch.Player.HeroDamageReceived.damage_type:type_name -> dota.CMsgDOTAMatch.Player.HeroDamageType
+	173, // 138: dota.CMsgDOTABotDebugInfo.Bot.modes:type_name -> dota.CMsgDOTABotDebugInfo.Bot.Mode
+	174, // 139: dota.CMsgDOTABotDebugInfo.Bot.action:type_name -> dota.CMsgDOTABotDebugInfo.Bot.Action
+	196, // 140: dota.CMsgMatchTips.SingleTip.event_id:type_name -> dota.EEvent
+	201, // 141: dota.CMsgDOTAMatchMinimal.Player.team_number:type_name -> dota.DOTA_GC_TEAM
+	75,  // 142: dota.CMsgMatchConsumableUsage.PlayerUsage.consumables_used:type_name -> dota.CMsgConsumableUsage
+	202, // 143: dota.CMsgMatchEventActionGrants.PlayerGrants.actions_granted:type_name -> dota.CMsgPendingEventAward
+	5,   // 144: dota.CMsgCustomGameWhitelistForEdit.WhitelistEntry.whitelist_state:type_name -> dota.ECustomGameWhitelistState
+	194, // 145: dota.CMsgDOTAClaimEventActionResponse.OverworldTokenRewardData.tokens:type_name -> dota.CMsgDOTAClaimEventActionResponse.OverworldTokenRewardData.TokenQuantity
+	27,  // 146: dota.CDotaMsg_PredictionResult.Prediction.result:type_name -> dota.CDotaMsg_PredictionResult.Prediction.EResult
+	147, // [147:147] is the sub-list for method output_type
+	147, // [147:147] is the sub-list for method input_type
+	147, // [147:147] is the sub-list for extension type_name
+	147, // [147:147] is the sub-list for extension extendee
+	0,   // [0:147] is the sub-list for field type_name
 }
 
 func init() { file_dota_gcmessages_common_proto_init() }
@@ -21261,7 +21502,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[99].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CSODOTAGameAccountClient_RoleHandicap); i {
+			switch v := v.(*CDotaMsg_PredictionResult); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21273,7 +21514,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[100].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgLobbyFeaturedGamemodeProgress_AccountProgress); i {
+			switch v := v.(*CSODOTAGameAccountClient_RoleHandicap); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21285,7 +21526,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[101].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgGCGetPlayerCardItemInfoResponse_PlayerCardInfo); i {
+			switch v := v.(*CMsgLobbyFeaturedGamemodeProgress_AccountProgress); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21297,7 +21538,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[102].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgDOTAProfileCard_Slot); i {
+			switch v := v.(*CMsgGCGetPlayerCardItemInfoResponse_PlayerCardInfo); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21309,7 +21550,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[103].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgDOTAProfileCard_Slot_Trophy); i {
+			switch v := v.(*CMsgDOTAProfileCard_Slot); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21321,7 +21562,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[104].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgDOTAProfileCard_Slot_Stat); i {
+			switch v := v.(*CMsgDOTAProfileCard_Slot_Trophy); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21333,7 +21574,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[105].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgDOTAProfileCard_Slot_Item); i {
+			switch v := v.(*CMsgDOTAProfileCard_Slot_Stat); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21345,7 +21586,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[106].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgDOTAProfileCard_Slot_Hero); i {
+			switch v := v.(*CMsgDOTAProfileCard_Slot_Item); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21357,7 +21598,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[107].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgDOTAProfileCard_Slot_Emoticon); i {
+			switch v := v.(*CMsgDOTAProfileCard_Slot_Hero); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21369,7 +21610,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[108].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgDOTAProfileCard_Slot_Team); i {
+			switch v := v.(*CMsgDOTAProfileCard_Slot_Emoticon); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21381,7 +21622,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[109].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgDOTARealtimeGameStats_TeamDetails); i {
+			switch v := v.(*CMsgDOTAProfileCard_Slot_Team); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21393,7 +21634,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[110].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgDOTARealtimeGameStats_ItemDetails); i {
+			switch v := v.(*CMsgDOTARealtimeGameStats_TeamDetails); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21405,7 +21646,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[111].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgDOTARealtimeGameStats_AbilityDetails); i {
+			switch v := v.(*CMsgDOTARealtimeGameStats_ItemDetails); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21417,7 +21658,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[112].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgDOTARealtimeGameStats_HeroToHeroStats); i {
+			switch v := v.(*CMsgDOTARealtimeGameStats_AbilityDetails); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21429,7 +21670,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[113].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgDOTARealtimeGameStats_AbilityList); i {
+			switch v := v.(*CMsgDOTARealtimeGameStats_HeroToHeroStats); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21441,7 +21682,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[114].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgDOTARealtimeGameStats_PlayerDetails); i {
+			switch v := v.(*CMsgDOTARealtimeGameStats_AbilityList); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21453,7 +21694,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[115].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgDOTARealtimeGameStats_BuildingDetails); i {
+			switch v := v.(*CMsgDOTARealtimeGameStats_PlayerDetails); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21465,7 +21706,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[116].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgDOTARealtimeGameStats_KillDetails); i {
+			switch v := v.(*CMsgDOTARealtimeGameStats_BuildingDetails); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21477,7 +21718,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[117].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgDOTARealtimeGameStats_BroadcasterDetails); i {
+			switch v := v.(*CMsgDOTARealtimeGameStats_KillDetails); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21489,7 +21730,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[118].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgDOTARealtimeGameStats_PickBanDetails); i {
+			switch v := v.(*CMsgDOTARealtimeGameStats_BroadcasterDetails); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21501,7 +21742,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[119].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgDOTARealtimeGameStats_MatchDetails); i {
+			switch v := v.(*CMsgDOTARealtimeGameStats_PickBanDetails); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21513,7 +21754,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[120].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgDOTARealtimeGameStats_GraphData); i {
+			switch v := v.(*CMsgDOTARealtimeGameStats_MatchDetails); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21525,7 +21766,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[121].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgDOTARealtimeGameStats_GraphData_LocationStats); i {
+			switch v := v.(*CMsgDOTARealtimeGameStats_GraphData); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21537,7 +21778,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[122].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgDOTARealtimeGameStats_GraphData_TeamLocationStats); i {
+			switch v := v.(*CMsgDOTARealtimeGameStats_GraphData_LocationStats); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21549,7 +21790,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[123].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgDOTARealtimeGameStatsTerse_TeamDetails); i {
+			switch v := v.(*CMsgDOTARealtimeGameStats_GraphData_TeamLocationStats); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21561,7 +21802,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[124].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgDOTARealtimeGameStatsTerse_PlayerDetails); i {
+			switch v := v.(*CMsgDOTARealtimeGameStatsTerse_TeamDetails); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21573,7 +21814,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[125].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgDOTARealtimeGameStatsTerse_BuildingDetails); i {
+			switch v := v.(*CMsgDOTARealtimeGameStatsTerse_PlayerDetails); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21585,7 +21826,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[126].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgDOTARealtimeGameStatsTerse_PickBanDetails); i {
+			switch v := v.(*CMsgDOTARealtimeGameStatsTerse_BuildingDetails); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21597,7 +21838,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[127].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgDOTARealtimeGameStatsTerse_MatchDetails); i {
+			switch v := v.(*CMsgDOTARealtimeGameStatsTerse_PickBanDetails); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21609,7 +21850,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[128].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgDOTARealtimeGameStatsTerse_GraphData); i {
+			switch v := v.(*CMsgDOTARealtimeGameStatsTerse_MatchDetails); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21621,7 +21862,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[129].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgInGamePrediction_QueryKeyValues); i {
+			switch v := v.(*CMsgDOTARealtimeGameStatsTerse_GraphData); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21633,7 +21874,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[130].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgDOTASeasonPredictions_Prediction); i {
+			switch v := v.(*CMsgInGamePrediction_QueryKeyValues); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21645,7 +21886,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[131].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgDOTASeasonPredictions_Prediction_Answers); i {
+			switch v := v.(*CMsgDOTASeasonPredictions_Prediction); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21657,7 +21898,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[132].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgAvailablePredictions_MatchPrediction); i {
+			switch v := v.(*CMsgDOTASeasonPredictions_Prediction_Answers); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21669,7 +21910,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[133].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgLeagueWatchedGames_Series); i {
+			switch v := v.(*CMsgAvailablePredictions_MatchPrediction); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21681,7 +21922,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[134].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgLeagueWatchedGames_League); i {
+			switch v := v.(*CMsgLeagueWatchedGames_Series); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21693,7 +21934,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[135].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgDOTAMatch_Player); i {
+			switch v := v.(*CMsgLeagueWatchedGames_League); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21705,7 +21946,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[136].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgDOTAMatch_BroadcasterInfo); i {
+			switch v := v.(*CMsgDOTAMatch_Player); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21717,7 +21958,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[137].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgDOTAMatch_BroadcasterChannel); i {
+			switch v := v.(*CMsgDOTAMatch_BroadcasterInfo); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21729,7 +21970,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[138].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgDOTAMatch_Coach); i {
+			switch v := v.(*CMsgDOTAMatch_BroadcasterChannel); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21741,7 +21982,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[139].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgDOTAMatch_CustomGameData); i {
+			switch v := v.(*CMsgDOTAMatch_Coach); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21753,7 +21994,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[140].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgDOTAMatch_Player_CustomGameData); i {
+			switch v := v.(*CMsgDOTAMatch_CustomGameData); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21765,7 +22006,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[141].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgDOTAMatch_Player_HeroDamageReceived); i {
+			switch v := v.(*CMsgDOTAMatch_Player_CustomGameData); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21777,7 +22018,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[142].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgPlayerCard_StatModifier); i {
+			switch v := v.(*CMsgDOTAMatch_Player_HeroDamageReceived); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21789,7 +22030,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[143].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgDOTABotDebugInfo_Bot); i {
+			switch v := v.(*CMsgPlayerCard_StatModifier); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21801,7 +22042,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[144].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgDOTABotDebugInfo_Bot_Mode); i {
+			switch v := v.(*CMsgDOTABotDebugInfo_Bot); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21813,7 +22054,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[145].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgDOTABotDebugInfo_Bot_Action); i {
+			switch v := v.(*CMsgDOTABotDebugInfo_Bot_Mode); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21825,7 +22066,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[146].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgMatchTips_SingleTip); i {
+			switch v := v.(*CMsgDOTABotDebugInfo_Bot_Action); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21837,7 +22078,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[147].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgDOTAMatchMinimal_Player); i {
+			switch v := v.(*CMsgMatchTips_SingleTip); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21849,7 +22090,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[148].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgDOTAMatchMinimal_Tourney); i {
+			switch v := v.(*CMsgDOTAMatchMinimal_Player); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21861,7 +22102,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[149].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgMatchConsumableUsage_PlayerUsage); i {
+			switch v := v.(*CMsgDOTAMatchMinimal_Tourney); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21873,7 +22114,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[150].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgMatchEventActionGrants_PlayerGrants); i {
+			switch v := v.(*CMsgMatchConsumableUsage_PlayerUsage); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21885,7 +22126,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[151].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgCustomGameWhitelistForEdit_WhitelistEntry); i {
+			switch v := v.(*CMsgMatchEventActionGrants_PlayerGrants); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21897,7 +22138,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[152].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgGCtoGCAssociatedExploiterAccountInfoResponse_Account); i {
+			switch v := v.(*CMsgCustomGameWhitelistForEdit_WhitelistEntry); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21909,7 +22150,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[153].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgPullTabsData_Slot); i {
+			switch v := v.(*CMsgGCtoGCAssociatedExploiterAccountInfoResponse_Account); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21921,7 +22162,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[154].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgPullTabsData_Jackpot); i {
+			switch v := v.(*CMsgPullTabsData_Slot); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21933,7 +22174,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[155].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgUnderDraftData_BenchSlot); i {
+			switch v := v.(*CMsgPullTabsData_Jackpot); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21945,7 +22186,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[156].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgUnderDraftData_ShopSlot); i {
+			switch v := v.(*CMsgUnderDraftData_BenchSlot); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21957,7 +22198,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[157].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgGameDataHero_Facet); i {
+			switch v := v.(*CMsgUnderDraftData_ShopSlot); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21969,7 +22210,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[158].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgGameDataHeroList_HeroInfo); i {
+			switch v := v.(*CMsgGameDataHero_Facet); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21981,7 +22222,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[159].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgGameDataItemAbilityList_ItemAbilityInfo); i {
+			switch v := v.(*CMsgGameDataHeroList_HeroInfo); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -21993,7 +22234,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[160].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgDOTAClaimEventActionResponse_MysteryItemRewardData); i {
+			switch v := v.(*CMsgGameDataItemAbilityList_ItemAbilityInfo); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -22005,7 +22246,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[161].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgDOTAClaimEventActionResponse_LootListRewardData); i {
+			switch v := v.(*CMsgDOTAClaimEventActionResponse_MysteryItemRewardData); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -22017,7 +22258,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[162].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgDOTAClaimEventActionResponse_ActionListRewardData); i {
+			switch v := v.(*CMsgDOTAClaimEventActionResponse_LootListRewardData); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -22029,7 +22270,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[163].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgDOTAClaimEventActionResponse_OverworldTokenRewardData); i {
+			switch v := v.(*CMsgDOTAClaimEventActionResponse_ActionListRewardData); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -22041,7 +22282,7 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[164].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CMsgDOTAClaimEventActionResponse_GrantedRewardData); i {
+			switch v := v.(*CMsgDOTAClaimEventActionResponse_OverworldTokenRewardData); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -22053,7 +22294,31 @@ func file_dota_gcmessages_common_proto_init() {
 			}
 		}
 		file_dota_gcmessages_common_proto_msgTypes[165].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CMsgDOTAClaimEventActionResponse_GrantedRewardData); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_dota_gcmessages_common_proto_msgTypes[166].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CMsgDOTAClaimEventActionResponse_OverworldTokenRewardData_TokenQuantity); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_dota_gcmessages_common_proto_msgTypes[167].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CDotaMsg_PredictionResult_Prediction); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -22070,8 +22335,8 @@ func file_dota_gcmessages_common_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_dota_gcmessages_common_proto_rawDesc,
-			NumEnums:      27,
-			NumMessages:   166,
+			NumEnums:      28,
+			NumMessages:   168,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

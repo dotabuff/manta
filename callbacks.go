@@ -26,7 +26,6 @@ type Callbacks struct {
 	onCDemoAnimationData                                   []func(*dota.CDemoAnimationData) error
 	onCDemoAnimationHeader                                 []func(*dota.CDemoAnimationHeader) error
 	onCNETMsg_NOP                                          []func(*dota.CNETMsg_NOP) error
-	onCNETMsg_Disconnect_Legacy                            []func(*dota.CNETMsg_Disconnect_Legacy) error
 	onCNETMsg_SplitScreenUser                              []func(*dota.CNETMsg_SplitScreenUser) error
 	onCNETMsg_Tick                                         []func(*dota.CNETMsg_Tick) error
 	onCNETMsg_StringCmd                                    []func(*dota.CNETMsg_StringCmd) error
@@ -65,7 +64,6 @@ type Callbacks struct {
 	onCSVCMsg_FullFrameSplit                               []func(*dota.CSVCMsg_FullFrameSplit) error
 	onCSVCMsg_RconServerDetails                            []func(*dota.CSVCMsg_RconServerDetails) error
 	onCSVCMsg_UserMessage                                  []func(*dota.CSVCMsg_UserMessage) error
-	onCSVCMsg_HltvReplay                                   []func(*dota.CSVCMsg_HltvReplay) error
 	onCSVCMsg_Broadcast_Command                            []func(*dota.CSVCMsg_Broadcast_Command) error
 	onCSVCMsg_HltvFixupOperatorStatus                      []func(*dota.CSVCMsg_HltvFixupOperatorStatus) error
 	onCUserMessageAchievementEvent                         []func(*dota.CUserMessageAchievementEvent) error
@@ -199,7 +197,6 @@ type Callbacks struct {
 	onCDOTAUserMsg_CustomHeaderMessage                     []func(*dota.CDOTAUserMsg_CustomHeaderMessage) error
 	onCDOTAUserMsg_QuickBuyAlert                           []func(*dota.CDOTAUserMsg_QuickBuyAlert) error
 	onCDOTAUserMsg_StatsHeroMinuteDetails                  []func(*dota.CDOTAUserMsg_StatsHeroMinuteDetails) error
-	onCDOTAUserMsg_PredictionResult                        []func(*dota.CDOTAUserMsg_PredictionResult) error
 	onCDOTAUserMsg_ModifierAlert                           []func(*dota.CDOTAUserMsg_ModifierAlert) error
 	onCDOTAUserMsg_HPManaAlert                             []func(*dota.CDOTAUserMsg_HPManaAlert) error
 	onCDOTAUserMsg_GlyphAlert                              []func(*dota.CDOTAUserMsg_GlyphAlert) error
@@ -381,11 +378,6 @@ func (c *Callbacks) OnCDemoAnimationHeader(fn func(*dota.CDemoAnimationHeader) e
 // OnCNETMsg_NOP registers a callback for NET_Messages_net_NOP
 func (c *Callbacks) OnCNETMsg_NOP(fn func(*dota.CNETMsg_NOP) error) {
 	c.onCNETMsg_NOP = append(c.onCNETMsg_NOP, fn)
-}
-
-// OnCNETMsg_Disconnect_Legacy registers a callback for NET_Messages_net_Disconnect_Legacy
-func (c *Callbacks) OnCNETMsg_Disconnect_Legacy(fn func(*dota.CNETMsg_Disconnect_Legacy) error) {
-	c.onCNETMsg_Disconnect_Legacy = append(c.onCNETMsg_Disconnect_Legacy, fn)
 }
 
 // OnCNETMsg_SplitScreenUser registers a callback for NET_Messages_net_SplitScreenUser
@@ -576,11 +568,6 @@ func (c *Callbacks) OnCSVCMsg_RconServerDetails(fn func(*dota.CSVCMsg_RconServer
 // OnCSVCMsg_UserMessage registers a callback for SVC_Messages_svc_UserMessage
 func (c *Callbacks) OnCSVCMsg_UserMessage(fn func(*dota.CSVCMsg_UserMessage) error) {
 	c.onCSVCMsg_UserMessage = append(c.onCSVCMsg_UserMessage, fn)
-}
-
-// OnCSVCMsg_HltvReplay registers a callback for SVC_Messages_svc_HltvReplay
-func (c *Callbacks) OnCSVCMsg_HltvReplay(fn func(*dota.CSVCMsg_HltvReplay) error) {
-	c.onCSVCMsg_HltvReplay = append(c.onCSVCMsg_HltvReplay, fn)
 }
 
 // OnCSVCMsg_Broadcast_Command registers a callback for SVC_Messages_svc_Broadcast_Command
@@ -1246,11 +1233,6 @@ func (c *Callbacks) OnCDOTAUserMsg_QuickBuyAlert(fn func(*dota.CDOTAUserMsg_Quic
 // OnCDOTAUserMsg_StatsHeroMinuteDetails registers a callback for EDotaUserMessages_DOTA_UM_StatsHeroDetails
 func (c *Callbacks) OnCDOTAUserMsg_StatsHeroMinuteDetails(fn func(*dota.CDOTAUserMsg_StatsHeroMinuteDetails) error) {
 	c.onCDOTAUserMsg_StatsHeroMinuteDetails = append(c.onCDOTAUserMsg_StatsHeroMinuteDetails, fn)
-}
-
-// OnCDOTAUserMsg_PredictionResult registers a callback for EDotaUserMessages_DOTA_UM_PredictionResult
-func (c *Callbacks) OnCDOTAUserMsg_PredictionResult(fn func(*dota.CDOTAUserMsg_PredictionResult) error) {
-	c.onCDOTAUserMsg_PredictionResult = append(c.onCDOTAUserMsg_PredictionResult, fn)
 }
 
 // OnCDOTAUserMsg_ModifierAlert registers a callback for EDotaUserMessages_DOTA_UM_ModifierAlert
@@ -2017,25 +1999,6 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 
 		return nil
 
-	case 1: // dota.NET_Messages_net_Disconnect_Legacy
-		if c.onCNETMsg_Disconnect_Legacy == nil {
-			return nil
-		}
-
-		msg := &dota.CNETMsg_Disconnect_Legacy{}
-		c.pb.SetBuf(buf)
-		if err := c.pb.Unmarshal(msg); err != nil {
-			return err
-		}
-
-		for _, fn := range c.onCNETMsg_Disconnect_Legacy {
-			if err := fn(msg); err != nil {
-				return err
-			}
-		}
-
-		return nil
-
 	case 3: // dota.NET_Messages_net_SplitScreenUser
 		if c.onCNETMsg_SplitScreenUser == nil {
 			return nil
@@ -2751,25 +2714,6 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		for _, fn := range c.onCSVCMsg_UserMessage {
-			if err := fn(msg); err != nil {
-				return err
-			}
-		}
-
-		return nil
-
-	case 73: // dota.SVC_Messages_svc_HltvReplay
-		if c.onCSVCMsg_HltvReplay == nil {
-			return nil
-		}
-
-		msg := &dota.CSVCMsg_HltvReplay{}
-		c.pb.SetBuf(buf)
-		if err := c.pb.Unmarshal(msg); err != nil {
-			return err
-		}
-
-		for _, fn := range c.onCSVCMsg_HltvReplay {
 			if err := fn(msg); err != nil {
 				return err
 			}
@@ -5297,25 +5241,6 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		for _, fn := range c.onCDOTAUserMsg_StatsHeroMinuteDetails {
-			if err := fn(msg); err != nil {
-				return err
-			}
-		}
-
-		return nil
-
-	case 542: // dota.EDotaUserMessages_DOTA_UM_PredictionResult
-		if c.onCDOTAUserMsg_PredictionResult == nil {
-			return nil
-		}
-
-		msg := &dota.CDOTAUserMsg_PredictionResult{}
-		c.pb.SetBuf(buf)
-		if err := c.pb.Unmarshal(msg); err != nil {
-			return err
-		}
-
-		for _, fn := range c.onCDOTAUserMsg_PredictionResult {
 			if err := fn(msg); err != nil {
 				return err
 			}
