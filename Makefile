@@ -46,6 +46,7 @@ update-protobufs:
 	$(SED) -i 's/\.CMsgSteamLearn/CMsgSteamLearn/g' dota/*.proto
 	$(SED) -i 's/\.CMsgShowcaseItem/CMsgShowcaseItem/g' dota/*.proto
 	$(SED) -i 's/\.CMsgShowcaseBackground/CMsgShowcaseBackground/g' dota/*.proto
+	$(SED) -i 's/\.CMsgSurvivorsUserData/CMsgSurvivorsUserData/g' dota/*.proto
 	protoc -I dota --go_out=paths=source_relative:dota  dota/*.proto
 
 generate:

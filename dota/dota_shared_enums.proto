@@ -117,6 +117,7 @@ enum EEvent {
 	EVENT_ID_CROWNFALL = 47;
 	EVENT_ID_FROSTIVUS_2023 = 48;
 	EVENT_ID_INTERNATIONAL_2024 = 49;
+	EVENT_ID_FROSTIVUS_2024 = 50;
 }
 
 enum ERankType {
@@ -501,6 +502,10 @@ enum EBadgeType {
 	k_EBadgeType_TI12_PlayoffsDay3 = 15;
 	k_EBadgeType_TI12_FinalsWeekend = 16;
 	k_EBadgeType_TI12_Special = 17;
+	k_EBadgeType_TI13_FinalsDay1 = 18;
+	k_EBadgeType_TI13_FinalsDay2 = 19;
+	k_EBadgeType_TI13_FinalsDay3 = 20;
+	k_EBadgeType_TI13_Special = 21;
 }
 
 enum ELeagueStatus {
@@ -654,6 +659,7 @@ enum DOTA_COMBATLOG_TYPES {
 	DOTA_COMBATLOG_UNIT_TELEPORTED = 41;
 	DOTA_COMBATLOG_KILL_EATER_EVENT = 42;
 	DOTA_COMBATLOG_NEUTRAL_ITEM_EARNED = 43;
+	DOTA_COMBATLOG_STAT_TRACKER_PLAYER = 44;
 }
 
 enum EDPCFavoriteType {
@@ -705,6 +711,20 @@ enum ECandyShopUpgrade {
 	k_ECandyShopUpgrade_InventorySize = 0;
 	k_ECandyShopUpgrade_RewardShelf = 1;
 	k_ECandyShopUpgrade_ExtraExchangeRecipe = 2;
+}
+
+enum EItemSuggestPreference {
+	k_EItemSuggestPreference_None = 0;
+	k_EItemSuggestPreference_Liked = 1;
+	k_EItemSuggestPreference_Disliked = 2;
+}
+
+enum ETimerAlertType {
+	k_TimerAlertType_PowerRune = 1;
+	k_TimerAlertType_BountyRune = 2;
+	k_TimerAlertType_WisdomShrine = 3;
+	k_TimerAlertType_JungleCamps = 4;
+	k_TimerAlertType_LotusPool = 5;
 }
 
 message CDOTAClientHardwareSpecs {
@@ -824,6 +844,7 @@ message CMsgDOTACombatLogEntry {
 	optional float regenerated_health = 77;
 	optional bool will_reincarnate = 78;
 	optional bool uses_charges = 79;
+	optional uint32 tracked_stat_id = 80;
 }
 
 message CMsgPendingEventAward {

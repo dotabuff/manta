@@ -603,6 +603,7 @@ message CMsgDOTAClaimEventAction {
 	optional uint32 action_id = 2;
 	optional uint32 quantity = 3;
 	optional CMsgDOTAClaimEventActionData data = 4;
+	optional EEventActionScoreMode score_mode = 5;
 }
 
 message CMsgClientToGCClaimEventActionUsingItem {
@@ -667,6 +668,14 @@ message CMsgDOTACompendiumSelection {
 }
 
 message CMsgDOTACompendiumSelectionResponse {
+	optional uint32 eresult = 1;
+}
+
+message CMsgDOTACompendiumRemoveAllSelections {
+	optional uint32 leagueid = 1;
+}
+
+message CMsgDOTACompendiumRemoveAllSelectionsResponse {
 	optional uint32 eresult = 1;
 }
 

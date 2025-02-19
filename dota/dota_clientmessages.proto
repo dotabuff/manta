@@ -114,6 +114,13 @@ enum EDotaClientMessages {
 	DOTA_CM_FacetAlert = 810;
 	DOTA_CM_InnateAlert = 811;
 	DOTA_CM_SelectOverworldID = 812;
+	DOTA_CM_RerollNeutralItem = 813;
+	DOTA_CM_RoshanTimer = 814;
+	DOTA_CM_SuggestItemPreference = 815;
+	DOTA_CM_CraftNeutralItem = 816;
+	DOTA_CM_ChooseCraftedNeutral = 817;
+	DOTA_CM_TimerAlert = 818;
+	DOTA_CM_MadstoneAlert = 819;
 }
 
 message CDOTAClientMsg_MapPing {
@@ -424,6 +431,15 @@ message CDOTAClientMsg_FlipCoin {
 message CDOTAClientMsg_RequestItemSuggestions {
 }
 
+message CDOTAClientMsg_SuggestItemPreference {
+	message ItemPreference {
+		optional int32 item_id = 1;
+		optional EItemSuggestPreference preference = 2;
+	}
+
+	repeated CDOTAClientMsg_SuggestItemPreference.ItemPreference item_preferences = 1;
+}
+
 message CDOTAClientMsg_MakeTeamCaptain {
 	optional int32 player_id = 1;
 }
@@ -442,6 +458,7 @@ message CDOTAClientMsg_RequestBulkCombatLog {
 message CDOTAClientMsg_AbilityDraftRequestAbility {
 	optional int32 requested_ability_id = 1;
 	optional bool ctrl_is_down = 2;
+	optional int32 requested_hero_id = 3;
 }
 
 message CDOTAClientMsg_GuideSelectOption {
@@ -575,6 +592,11 @@ message CDOTAClientMsg_ChooseNeutralItem {
 	optional int32 slot_index = 3;
 }
 
+message CDOTAClientMsg_RerollNeutralItem {
+	optional int32 target_entindex = 1;
+	optional int32 slot_index = 2;
+}
+
 message CDOTAClientMsg_PlayerDraftPick {
 	optional int32 player_id = 1;
 }
@@ -619,4 +641,25 @@ message CDOTAClientMsg_InnateAlert {
 
 message CDOTAClientMsg_SelectOverworldID {
 	optional uint32 overworld_id = 1;
+}
+
+message CDOTAClientMsg_RoshanTimer {
+	optional bool negative = 1;
+}
+
+message CDOTAClientMsg_CraftNeutralItem {
+}
+
+message CDOTAClientMsg_ChooseCraftedNeutralItem {
+	optional int32 neutral_item_index = 1;
+	optional int32 item_tier = 2;
+	optional int32 enhancement_index = 3;
+}
+
+message CDOTAClientMsg_TimerAlert {
+	optional ETimerAlertType timer_alert_type = 1;
+}
+
+message CDOTAClientMsg_MadstoneAlert {
+	optional int32 target_entindex = 1;
 }

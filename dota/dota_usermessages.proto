@@ -74,7 +74,6 @@ enum EDotaUserMessages {
 	DOTA_UM_BoosterState = 528;
 	DOTA_UM_WillPurchaseAlert = 529;
 	DOTA_UM_TutorialMinimapPosition = 530;
-	DOTA_UM_PlayerMMR = 531;
 	DOTA_UM_AbilitySteal = 532;
 	DOTA_UM_CourierKilledAlert = 533;
 	DOTA_UM_EnemyItemAlert = 534;
@@ -168,6 +167,10 @@ enum EDotaUserMessages {
 	DOTA_UM_GiftPlayer = 623;
 	DOTA_UM_FacetPing = 624;
 	DOTA_UM_InnatePing = 625;
+	DOTA_UM_RoshanTimer = 626;
+	DOTA_UM_NeutralCraftAvailable = 627;
+	DOTA_UM_TimerAlert = 628;
+	DOTA_UM_MadstoneAlert = 629;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -282,6 +285,9 @@ enum DOTA_CHAT_MESSAGE {
 	CHAT_MESSAGE_MINIBOSS_KILL = 117;
 	CHAT_MESSAGE_PLAYER_IN_GAME_BAN_TEXT = 118;
 	CHAT_MESSAGE_BANNER_PLANTED = 119;
+	CHAT_MESSAGE_ALCHEMIST_GRANTED_SCEPTER = 120;
+	CHAT_MESSAGE_PROTECTOR_SPAWNED = 121;
+	CHAT_MESSAGE_CRAFTING_XP = 122;
 }
 
 enum DOTA_NO_BATTLE_POINTS_REASONS {
@@ -601,6 +607,11 @@ message CDOTAUserMsg_RadarAlert {
 	optional bool negative = 2;
 }
 
+message CDOTAUserMsg_RoshanTimer {
+	optional int32 player_id = 1;
+	optional bool negative = 2;
+}
+
 message CDOTAUserMsg_WillPurchaseAlert {
 	optional int32 item_ability_id = 1;
 	optional int32 player_id = 2;
@@ -790,6 +801,7 @@ message CDOTAUserMsg_UnitEvent {
 		optional bool muteable = 5;
 		optional CDOTAUserMsg_UnitEvent.Interval predelay = 6;
 		optional uint32 flags = 7;
+		optional int32 response_type = 8;
 	}
 
 	message SpeechMute {
@@ -1088,10 +1100,6 @@ message CDOTAUserMsg_BoosterState {
 	repeated CDOTAUserMsg_BoosterStatePlayer boosted_players = 1;
 }
 
-message CDOTAUserMsg_PlayerMMR {
-	repeated sint32 mmr = 1;
-}
-
 message CDOTAUserMsg_AbilitySteal {
 	optional int32 player_id = 1;
 	optional int32 ability_id = 2;
@@ -1365,6 +1373,7 @@ message CDOTAUserMsg_AbilityDraftRequestAbility {
 	optional int32 player_id = 1;
 	optional int32 requested_ability_id = 2;
 	optional bool ctrl_is_down = 3;
+	optional int32 requested_hero_id = 4;
 }
 
 message CDOTAUserMsg_DamageReport {
@@ -1470,6 +1479,8 @@ message CDOTAUserMsg_FoundNeutralItem {
 	optional int32 item_ability_id = 2;
 	optional uint32 item_tier = 3;
 	optional uint32 tier_item_count = 4;
+	optional int32 enhancement_ability_id = 5;
+	optional int32 enhancement_level = 6;
 }
 
 message CDOTAUserMsg_OutpostCaptured {
@@ -1669,4 +1680,26 @@ message CDOTAUserMsg_InnatePing {
 	optional int32 player_id = 1;
 	optional uint32 entity_id = 2;
 	optional bool all_chat = 3;
+}
+
+message CDOTAUserMsg_NeutralCraftAvailable {
+}
+
+message CDOTAUserMsg_TimerAlert {
+	optional int32 player_id = 1;
+	optional ETimerAlertType timer_alert_type = 2;
+}
+
+message CDOTAUserMsg_MadstoneAlert {
+	enum EMadstoneAlertType {
+		CraftAvailable = 0;
+		NeedMadstone = 1;
+		WaitingForNextTier = 2;
+	}
+
+	optional int32 player_id = 1;
+	optional int32 target_entindex = 2;
+	optional int32 tier = 3;
+	optional CDOTAUserMsg_MadstoneAlert.EMadstoneAlertType madstone_alert_type = 4;
+	optional int32 value = 5;
 }
