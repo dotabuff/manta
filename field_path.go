@@ -301,6 +301,14 @@ var fpPool = &sync.Pool{
 	},
 }
 
+// Pool for field path slices to reduce allocations in readFieldPaths
+var fpSlicePool = &sync.Pool{
+	New: func() interface{} {
+		// Pre-allocate with reasonable capacity based on typical usage
+		return make([]*fieldPath, 0, 64)
+	},
+}
+
 // Pre-warm the pool with some field paths to reduce early allocation pressure
 func init() {
 	// Pre-allocate some field paths to reduce initial allocation overhead
@@ -336,7 +344,9 @@ func readFieldPaths(r *reader) []*fieldPath {
 
 	node, next := huffTree, huffTree
 
-	paths := []*fieldPath{}
+	// Get pooled slice instead of allocating new one
+	paths := fpSlicePool.Get().([]*fieldPath)
+	paths = paths[:0] // Reset length but keep capacity
 
 	for !fp.done {
 		if r.readBits(1) == 1 {
@@ -359,6 +369,16 @@ func readFieldPaths(r *reader) []*fieldPath {
 	fp.release()
 
 	return paths
+}
+
+// releaseFieldPaths returns the field path slice to the pool after all paths are released
+func releaseFieldPaths(fps []*fieldPath) {
+	// Reset the slice for reuse but keep the capacity  
+	for i := range fps {
+		fps[i] = nil // Clear references to help GC
+	}
+	fps = fps[:0]
+	fpSlicePool.Put(fps)
 }
 
 // newHuffmanTree creates a new huffmanTree from the field path table
