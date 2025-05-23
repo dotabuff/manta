@@ -157,37 +157,40 @@ func BenchmarkFieldDecoding(b *testing.B) {
 
 Always run benchmarks multiple times and look for consistent results. Use `benchstat` tool to compare benchmark runs statistically.
 
-## Performance Optimization Notes
+## Performance Optimization Summary
 
-### Completed Optimizations (33.4% total improvement achieved)
+### Final Results (30.8% total improvement achieved)
 
-**Phase 0: Go Version Update (28.6% improvement)**
-- Updated Go 1.16.3 → 1.21.13 for immediate runtime performance gains
-- Zero code changes required, excellent ROI
-- Always prioritize infrastructure updates first
+**Comprehensive Optimization Campaign (Phases 0-8)**
+- **Original baseline:** 1163ms per replay, 51 replays/minute
+- **Final performance:** 805ms per replay, 75 replays/minute
+- **Total improvement:** 30.8% faster parsing, 47% higher throughput
 
-**Phase 1: Buffer Management (5.5% additional improvement)**
-- **Stream buffer pooling** (`stream.go`): Eliminated frequent buffer reallocations with intelligent 2x growth strategy
-- **String table key history pooling** (`string_table.go`): Reused slices for string table parsing  
-- **Compression buffer pooling** (`compression.go`): Shared Snappy decompression buffers across codebase
-- **Key insight**: Pool overhead is minimal compared to allocation reduction benefits
+### Key Optimization Insights
 
-**Phase 2: Memory Management (0.4% additional improvement)**
-- **Field state pooling** (`field_state.go`): Size-class pools (8/16/32/64/128 elements) for field state objects
-- **Entity field cache pooling** (`entity.go`): Reused fpCache and fpNoop maps with proper lifecycle management
-- **Key insight**: Incremental improvements provide cumulative benefits under sustained load
+**1. Infrastructure Updates Provide Massive ROI**
+- Go 1.16.3 → 1.21.13 alone achieved 28.6% improvement with zero code changes
+- Always prioritize infrastructure updates before algorithmic optimizations
 
-**Phase 3: Core Optimizations (1.2% additional improvement)**
-- **Field path pool optimization** (`field_path.go`): Pre-warmed with 100 field paths, optimized reset function
-- **Bit reader optimizations** (`reader.go`): Pre-computed bit masks, varint fast paths, single-bit optimization
-- **String interning** (`reader.go`): Automated interning for strings ≤32 chars with 10K cache limit
-- **Key insight**: Core path optimizations provide compounding benefits for high-throughput scenarios
+**2. Memory Pooling Is Highly Effective**
+- sync.Pool provides significant allocation reduction in hot paths
+- Size-class pools (8/16/32/64/128) work well for varying object sizes
+- Buffer reuse patterns show consistent performance improvements
 
-**Phase 4: Advanced Optimizations (1.2% additional improvement)**
-- **Entity map optimization** (`parser.go`): Pre-sized entity map to 2048 capacity for typical game loads
-- **Entity access optimization** (`entity.go`): Fast path lookups with getEntityFast() method
-- **FilterEntity optimization** (`entity.go`): Skip nil entities efficiently, pre-size result arrays
-- **Key insight**: Targeted optimizations in hot paths provide measurable performance gains
+**3. Optimization Has Diminishing Returns**
+- Early phases (0-4) achieved 33.4% improvement with clear ROI
+- Later phases (6-8) showed minimal gains or even regressions
+- Field path optimizations regressed due to map overhead vs. algorithmic benefits
+
+**4. Hot Path Identification Is Critical**
+- Reader bit operations and varint decoding are true performance bottlenecks
+- Field path operations had less impact than expected
+- Entity management optimizations provided modest but measurable gains
+
+**5. Architectural Constraints Limit Further Gains**
+- Interface{} boxing in field decoders remains unavoidable
+- Fundamental parsing algorithm is already well-optimized  
+- Additional improvements require architectural changes or different approaches
 
 ### String Interning Implementation Pattern
 
@@ -249,24 +252,10 @@ func (r *reader) readString() string {
 }
 ```
 
-### Performance Impact Summary
-- **Original baseline (Go 1.16.3):** 1163ms, 51 replays/minute
-- **After Phase 0-4:** 775ms, 78 replays/minute  
-- **Exceeded primary <800ms target with 33.4% total improvement**
-
-### Optimization Lessons Learned
-
-1. **Go version updates provide massive ROI** - should always be first priority
-2. **Buffer pooling works well** for frequently allocated/deallocated objects
-3. **sync.Pool is efficient** for reducing allocation pressure in hot paths
-4. **Smart growth strategies** (2x) reduce reallocation frequency
-5. **Shared utilities** (compression.go) provide consistent optimization across codebase
-6. **Benchmark frequently** - small improvements compound significantly
-
-### Memory Pool Patterns Used
+### Effective Memory Pool Pattern
 
 ```go
-// Effective pool pattern used throughout optimizations
+// Standard pool pattern used throughout optimizations
 var bufferPool = &sync.Pool{
     New: func() interface{} {
         return make([]byte, 0, initialCapacity)
@@ -274,12 +263,36 @@ var bufferPool = &sync.Pool{
 }
 
 // Usage pattern
-buf := bufferPool.Get().([]byte)
-defer bufferPool.Put(buf)
-buf = buf[:0] // Reset length, keep capacity
+func optimizedFunction() {
+    buf := bufferPool.Get().([]byte)
+    defer bufferPool.Put(buf)
+    buf = buf[:0] // Reset length, keep capacity
+    
+    // Use buf for operations...
+}
 ```
 
-### Next Optimization Targets
-- Field state memory pooling for entity updates
-- Entity field cache optimization  
-- Protobuf message pooling for callback system
+### Benchmarking Best Practices
+
+1. **Always benchmark before and after** changes to measure impact
+2. **Run multiple iterations** (-count=3 minimum) for statistical significance  
+3. **Profile both CPU and memory** to identify true bottlenecks
+4. **Focus on hot paths** - optimize where the time is actually spent
+5. **Watch for regressions** - some optimizations add overhead that outweighs benefits
+6. **Document results** in commit messages and roadmaps for future reference
+
+### Performance Tools Used
+
+```bash
+# Primary benchmarking workflow
+go test -bench=BenchmarkMatch2159568145 -benchmem -count=3
+
+# CPU profiling to identify hot paths  
+go test -bench=BenchmarkMatch2159568145 -cpuprofile=cpu.prof
+
+# Memory allocation analysis
+go test -bench=BenchmarkMatch2159568145 -memprofile=mem.prof
+
+# Statistical comparison of benchmark runs
+benchstat old.txt new.txt
+```

@@ -10,9 +10,7 @@
       "Bash(git stash:*)",
       "Bash(mkdir:*)",
       "Bash(mv:*)",
-      "Bash(./manta-concurrent-demo:*)",
-      "Bash(/Users/jcoene/.claude/local/node_modules/@anthropic-ai/claude-code/vendor/ripgrep/arm64-darwin/rg \"concurrent|Concurrent\" --type go --exclude-dir cmd --exclude-dir dota)",
-      "Bash(/Users/jcoene/.claude/local/node_modules/@anthropic-ai/claude-code/vendor/ripgrep/arm64-darwin/rg \"concurrent|Concurrent\" --type go -g \"!cmd/*\" -g \"!dota/*\")"
+      "Bash(./manta-concurrent-demo:*)"
     ],
     "deny": []
   }
