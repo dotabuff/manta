@@ -2,6 +2,7 @@ package manta
 
 import (
 	"fmt"
+	"sync"
 
 	"github.com/dotabuff/manta/dota"
 )
@@ -47,6 +48,20 @@ func (o EntityOp) String() string {
 // EntityHandler is a function that receives Entity updates
 type EntityHandler func(*Entity, EntityOp) error
 
+// Pools for entity field caches to reduce map allocations
+var (
+	fpCachePool = &sync.Pool{
+		New: func() interface{} {
+			return make(map[string]*fieldPath)
+		},
+	}
+	fpNoopPool = &sync.Pool{
+		New: func() interface{} {
+			return make(map[string]bool)
+		},
+	}
+)
+
 // Entity represents a single game entity in the replay
 type Entity struct {
 	index   int32
@@ -60,14 +75,26 @@ type Entity struct {
 
 // newEntity returns a new entity for the given index, serial and class
 func newEntity(index, serial int32, class *class) *Entity {
+	// Get pooled maps and ensure they're empty
+	fpCache := fpCachePool.Get().(map[string]*fieldPath)
+	fpNoop := fpNoopPool.Get().(map[string]bool)
+	
+	// Clear the maps (they might have stale data from previous use)
+	for k := range fpCache {
+		delete(fpCache, k)
+	}
+	for k := range fpNoop {
+		delete(fpNoop, k)
+	}
+	
 	return &Entity{
 		index:   index,
 		serial:  serial,
 		class:   class,
 		active:  true,
 		state:   newFieldState(),
-		fpCache: make(map[string]*fieldPath),
-		fpNoop:  make(map[string]bool),
+		fpCache: fpCache,
+		fpNoop:  fpNoop,
 	}
 }
 
@@ -92,6 +119,11 @@ func (e *Entity) Dump() {
 
 // Get returns the current value of the Entity state for the given key
 func (e *Entity) Get(name string) interface{} {
+	// Guard against cleaned up entity
+	if e.fpCache == nil || e.fpNoop == nil {
+		return nil
+	}
+	
 	if fp, ok := e.fpCache[name]; ok {
 		return e.state.get(fp)
 	}
@@ -176,6 +208,24 @@ func (e *Entity) GetClassName() string {
 // GetIndex returns the index of this Entity
 func (e *Entity) GetIndex() int32 {
 	return e.index
+}
+
+// cleanup releases pooled resources when entity is destroyed
+func (e *Entity) cleanup() {
+	if e.state != nil {
+		e.state.releaseRecursive()
+		e.state = nil
+	}
+	
+	// Return field path cache maps to pools
+	if e.fpCache != nil {
+		fpCachePool.Put(e.fpCache)
+		e.fpCache = nil
+	}
+	if e.fpNoop != nil {
+		fpNoopPool.Put(e.fpNoop)
+		e.fpNoop = nil
+	}
 }
 
 // FindEntity finds a given Entity by index
@@ -296,6 +346,9 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 			op = EntityOpLeft
 			if cmd&0x02 != 0 {
 				op |= EntityOpDeleted
+				if e != nil {
+					e.cleanup()
+				}
 				p.entities[index] = nil
 			}
 		}
