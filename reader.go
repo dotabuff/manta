@@ -4,7 +4,59 @@ import (
 	"encoding/binary"
 	"fmt"
 	"math"
+	"sync"
 )
+
+// Pre-computed bit masks for common bit counts to avoid bit shifting
+var bitMasks = [33]uint64{
+	0x0, 0x1, 0x3, 0x7, 0xF, 0x1F, 0x3F, 0x7F, 0xFF,
+	0x1FF, 0x3FF, 0x7FF, 0xFFF, 0x1FFF, 0x3FFF, 0x7FFF, 0xFFFF,
+	0x1FFFF, 0x3FFFF, 0x7FFFF, 0xFFFFF, 0x1FFFFF, 0x3FFFFF, 0x7FFFFF, 0xFFFFFF,
+	0x1FFFFFF, 0x3FFFFFF, 0x7FFFFFF, 0xFFFFFFF, 0x1FFFFFFF, 0x3FFFFFFF, 0x7FFFFFFF, 0xFFFFFFFF,
+}
+
+// String interning for commonly used strings to reduce memory allocations
+var (
+	stringInternMap   = make(map[string]string)
+	stringInternMutex sync.RWMutex
+	stringBuffer      = &sync.Pool{
+		New: func() interface{} {
+			return make([]byte, 0, 64)
+		},
+	}
+)
+
+// internString returns a canonical version of the string to reduce memory usage
+func internString(s string) string {
+	// Short strings (up to 32 chars) are candidates for interning
+	// This covers most entity names, field names, and common values
+	if len(s) == 0 || len(s) > 32 {
+		return s
+	}
+	
+	stringInternMutex.RLock()
+	if interned, exists := stringInternMap[s]; exists {
+		stringInternMutex.RUnlock()
+		return interned
+	}
+	stringInternMutex.RUnlock()
+	
+	stringInternMutex.Lock()
+	defer stringInternMutex.Unlock()
+	
+	// Double-check after acquiring write lock
+	if interned, exists := stringInternMap[s]; exists {
+		return interned
+	}
+	
+	// Limit map size to prevent memory leaks
+	if len(stringInternMap) < 10000 {
+		stringInternMap[s] = s
+		return s
+	}
+	
+	return s
+}
 
 // reader performs read operations against a buffer
 type reader struct {
@@ -48,12 +100,33 @@ func (r *reader) nextByte() byte {
 
 // readBits returns the uint32 value for the given number of sequential bits
 func (r *reader) readBits(n uint32) uint32 {
+	// Fast path for common single bit reads
+	if n == 1 {
+		if r.bitCount == 0 {
+			r.bitVal = uint64(r.nextByte())
+			r.bitCount = 8
+		}
+		x := r.bitVal & 1
+		r.bitVal >>= 1
+		r.bitCount--
+		return uint32(x)
+	}
+	
+	// Ensure we have enough bits
 	for n > r.bitCount {
 		r.bitVal |= uint64(r.nextByte()) << r.bitCount
 		r.bitCount += 8
 	}
 
-	x := (r.bitVal & ((1 << n) - 1))
+	// Use pre-computed mask instead of bit shifting
+	var mask uint64
+	if n < uint32(len(bitMasks)) {
+		mask = bitMasks[n]
+	} else {
+		mask = (1 << n) - 1 // Fallback for very large n
+	}
+	
+	x := r.bitVal & mask
 	r.bitVal >>= n
 	r.bitCount -= n
 
@@ -98,8 +171,67 @@ func (r *reader) readLeUint64() uint64 {
 	return binary.LittleEndian.Uint64(r.readBytes(8))
 }
 
-// readVarUint64 reads an unsigned 32-bit varint
+// readVarUint32 reads an unsigned 32-bit varint - optimized version
 func (r *reader) readVarUint32() uint32 {
+	// Fast path: try to read from current byte buffer if we're byte aligned
+	if r.bitCount == 0 && r.pos < r.size {
+		var x uint32
+		var s uint32
+		
+		// Unrolled loop for common cases (1-4 bytes)
+		if r.pos < r.size {
+			b := uint32(r.buf[r.pos])
+			r.pos++
+			x = b & 0x7F
+			if (b & 0x80) == 0 {
+				return x
+			}
+			s = 7
+		}
+		
+		if r.pos < r.size && s < 35 {
+			b := uint32(r.buf[r.pos])
+			r.pos++
+			x |= (b & 0x7F) << s
+			if (b & 0x80) == 0 {
+				return x
+			}
+			s += 7
+		}
+		
+		if r.pos < r.size && s < 35 {
+			b := uint32(r.buf[r.pos])
+			r.pos++
+			x |= (b & 0x7F) << s
+			if (b & 0x80) == 0 {
+				return x
+			}
+			s += 7
+		}
+		
+		if r.pos < r.size && s < 35 {
+			b := uint32(r.buf[r.pos])
+			r.pos++
+			x |= (b & 0x7F) << s
+			if (b & 0x80) == 0 {
+				return x
+			}
+			s += 7
+		}
+		
+		// Handle remaining bytes with loop
+		for s < 35 && r.pos < r.size {
+			b := uint32(r.buf[r.pos])
+			r.pos++
+			x |= (b & 0x7F) << s
+			if (b & 0x80) == 0 {
+				return x
+			}
+			s += 7
+		}
+	}
+	
+	// Fallback to bit-based reading for non-aligned access
 	var x, s uint32
 	for {
 		b := uint32(r.readByte())
@@ -201,12 +333,17 @@ func (r *reader) readUBitVarFieldPath() int {
 
 // readStringN reads a string of a given length
 func (r *reader) readStringN(n uint32) string {
-	return string(r.readBytes(n))
+	bytes := r.readBytes(n)
+	s := string(bytes)
+	return internString(s)
 }
 
 // readString reads a null terminated string
 func (r *reader) readString() string {
-	buf := make([]byte, 0)
+	buf := stringBuffer.Get().([]byte)
+	buf = buf[:0] // Reset length but keep capacity
+	defer stringBuffer.Put(buf)
+	
 	for {
 		b := r.readByte()
 		if b == 0 {
@@ -215,7 +352,7 @@ func (r *reader) readString() string {
 		buf = append(buf, b)
 	}
 
-	return string(buf)
+	return internString(string(buf))
 }
 
 // readCoord reads a coord as a float32

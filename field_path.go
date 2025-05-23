@@ -281,6 +281,7 @@ func newFieldPath() *fieldPath {
 	return fp
 }
 
+// Optimized field path pool with better allocation patterns
 var fpPool = &sync.Pool{
 	New: func() interface{} {
 		return &fieldPath{
@@ -291,11 +292,26 @@ var fpPool = &sync.Pool{
 	},
 }
 
-var fpReset = []int{-1, 0, 0, 0, 0, 0, 0}
+// Pre-warm the pool with some field paths to reduce early allocation pressure
+func init() {
+	// Pre-allocate some field paths to reduce initial allocation overhead
+	for i := 0; i < 100; i++ {
+		fp := &fieldPath{
+			path: make([]int, 7),
+			last: 0, 
+			done: false,
+		}
+		fpPool.Put(fp)
+	}
+}
 
-// reset resets the fieldPath to the empty value
+// reset resets the fieldPath to the empty value - optimized version
 func (fp *fieldPath) reset() {
-	copy(fp.path, fpReset)
+	// Fast reset: only clear what we need
+	fp.path[0] = -1
+	for i := 1; i <= fp.last && i < len(fp.path); i++ {
+		fp.path[i] = 0
+	}
 	fp.last = 0
 	fp.done = false
 }
