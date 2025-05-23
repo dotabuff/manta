@@ -4,3 +4,4 @@
 /tmp
 /vendor
 /cmd/manta-concurrent-demo/manta-concurrent-demo
+cpu.prof

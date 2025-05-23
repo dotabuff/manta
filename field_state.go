@@ -109,11 +109,9 @@ func (s *fieldState) set(fp *fieldPath, v interface{}) {
 	for i := 0; i <= fp.last; i++ {
 		z = fp.path[i]
 		if y := len(x.state); y < z+2 {
-			// Simple growth strategy: grow slice in place if possible
-			newSize := max(z+2, y*2)
-			newState := make([]interface{}, newSize)
-			copy(newState, x.state)
-			x.state = newState
+			// Optimized growth strategy: use exponential growth with better size classes
+			newSize := getOptimalGrowthSize(z+2, y)
+			x.grow(newSize)
 		}
 		if i == fp.last {
 			if _, ok := x.state[z].(*fieldState); !ok {
@@ -122,10 +120,63 @@ func (s *fieldState) set(fp *fieldPath, v interface{}) {
 			return
 		}
 		if _, ok := x.state[z].(*fieldState); !ok {
-			x.state[z] = newFieldState()
+			// Use size hint based on the path depth for better pre-sizing
+			x.state[z] = newFieldStateWithSizeHint(fp.last - i)
 		}
 		x = x.state[z].(*fieldState)
 	}
+}
+
+// grow efficiently resizes the field state slice
+func (s *fieldState) grow(newSize int) {
+	oldLen := len(s.state)
+	if cap(s.state) >= newSize {
+		// Extend slice if we have capacity
+		s.state = s.state[:newSize]
+		// Clear new elements
+		for i := oldLen; i < newSize; i++ {
+			s.state[i] = nil
+		}
+	} else {
+		// Need to reallocate
+		newState := make([]interface{}, newSize)
+		copy(newState, s.state)
+		s.state = newState
+	}
+}
+
+// getOptimalGrowthSize calculates optimal growth size based on patterns
+func getOptimalGrowthSize(required, current int) int {
+	// Use size classes that align with our pools
+	switch {
+	case required <= 8:
+		return 8
+	case required <= 16:
+		return 16
+	case required <= 32:
+		return 32
+	case required <= 64:
+		return 64
+	case required <= 128:
+		return 128
+	default:
+		// For larger sizes, use exponential growth
+		newSize := current * 2
+		if newSize < required {
+			newSize = required
+		}
+		return newSize
+	}
+}
+
+// newFieldStateWithSizeHint creates a field state with size hint based on expected depth
+func newFieldStateWithSizeHint(remainingDepth int) *fieldState {
+	// Estimate size based on remaining path depth
+	estimatedSize := 8 // Base size
+	if remainingDepth > 1 {
+		estimatedSize = 16 // Deeper structures likely need more space
+	}
+	return getPooledFieldState(estimatedSize)
 }
 
 func max(a, b int) int {

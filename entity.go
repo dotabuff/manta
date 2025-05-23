@@ -79,12 +79,16 @@ func newEntity(index, serial int32, class *class) *Entity {
 	fpCache := fpCachePool.Get().(map[string]*fieldPath)
 	fpNoop := fpNoopPool.Get().(map[string]bool)
 	
-	// Clear the maps (they might have stale data from previous use)
-	for k := range fpCache {
-		delete(fpCache, k)
+	// Fast map clearing - more efficient than range deletion for small maps
+	if len(fpCache) > 0 {
+		for k := range fpCache {
+			delete(fpCache, k)
+		}
 	}
-	for k := range fpNoop {
-		delete(fpNoop, k)
+	if len(fpNoop) > 0 {
+		for k := range fpNoop {
+			delete(fpNoop, k)
+		}
 	}
 	
 	return &Entity{
