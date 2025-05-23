@@ -26,11 +26,17 @@ BenchmarkReadVarUint32-12    	55252327	        21.66 ns/op	       0 B/op	       
 BenchmarkReadBytesAligned-12 	304416415	         3.935 ns/op	       0 B/op	       0 allocs/op
 ```
 
-**Performance Targets After Optimization:**
-- **Parse Time:** <800ms per replay (30% improvement)
-- **Memory Usage:** <200 MB per replay (35% reduction)
-- **Allocations:** <6 million per replay (45% reduction)
-- **Target Throughput:** >75 replays/minute (50% improvement)
+**Performance Targets After All Optimizations:**
+*Updated targets based on improved Go 1.21.13 baseline (831ms)*
+- **Parse Time:** <600ms per replay (28% additional improvement from current baseline)
+- **Memory Usage:** <200 MB per replay (35% reduction from original 310MB)
+- **Allocations:** <6 million per replay (45% reduction from original 11M)
+- **Target Throughput:** >100 replays/minute (40% improvement from current 72/min)
+
+**Stretch Goals:**
+- **Parse Time:** <500ms per replay (40% additional improvement)
+- **Memory Usage:** <150 MB per replay (50% reduction from original)
+- **Target Throughput:** >120 replays/minute (67% improvement from current)
 
 ## Phase 0 Results (December 2024)
 **Optimization:** Updated Go version from 1.16.3 to 1.21.13
@@ -331,10 +337,20 @@ BenchmarkMatch2159568145-12    	   1   [TIME] ns/op       [BYTES] B/op     [ALLO
 
 ## Expected Outcomes
 
-Based on the analysis, implementing these optimizations should achieve:
-- **2-3x reduction** in memory allocations per replay
-- **30-50% improvement** in parsing throughput
-- **40-60% reduction** in peak memory usage
+**Already Achieved (Phase 0):**
+- ✅ **28.6% performance improvement** from Go update alone (1163ms → 831ms)
+- ✅ **40% throughput increase** (51 → 72 replays/minute)
+
+**Remaining Targets (Phases 1-5):**
+Based on the analysis, implementing the remaining optimizations should achieve:
+- **Additional 28-40% performance improvement** (831ms → 500-600ms)
+- **45% reduction** in memory allocations (11M → 6M allocs/op)
+- **35-50% reduction** in peak memory usage (310MB → 150-200MB)
+- **40-67% additional throughput increase** (72 → 100-120 replays/minute)
 - **Better scalability** for concurrent replay processing
 
-The highest impact optimizations focus on reducing memory allocations in hot paths, particularly around field state management, entity updates, and buffer reuse patterns.
+**Total Improvement from Original Baseline:**
+- **57-69% faster parsing** (1163ms → 500-600ms)
+- **96-135% throughput increase** (51 → 100-120 replays/minute)
+
+The highest impact remaining optimizations focus on reducing memory allocations in hot paths, particularly around field state management, entity updates, and buffer reuse patterns.
