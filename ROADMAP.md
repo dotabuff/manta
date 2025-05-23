@@ -2,6 +2,52 @@
 
 This roadmap outlines performance optimizations to improve Manta's efficiency for processing thousands of replays per hour. Optimizations are prioritized by impact and implementation difficulty.
 
+## Baseline Performance (December 2024)
+
+**Hardware:** Apple Silicon (arm64), Go 1.16.3  
+**Test Command:** `go test -bench=BenchmarkMatch2159568145 -benchmem -count=3`
+
+### Full Replay Parsing Benchmark
+```
+BenchmarkMatch2159568145-12    	       1	1158583167 ns/op	309625632 B/op	11008491 allocs/op
+BenchmarkMatch2159568145-12    	       1	1163703291 ns/op	309661216 B/op	11008010 allocs/op
+BenchmarkMatch2159568145-12    	       1	1167245625 ns/op	309619464 B/op	11007942 allocs/op
+```
+
+**Key Metrics:**
+- **Parse Time:** ~1.16 seconds per replay
+- **Memory Usage:** ~310 MB allocated per replay
+- **Allocations:** ~11 million allocations per replay
+- **Throughput:** ~51 replays/minute (single-threaded)
+
+### Component-Level Benchmarks
+```
+BenchmarkReadVarUint32-12    	55252327	        21.66 ns/op	       0 B/op	       0 allocs/op
+BenchmarkReadBytesAligned-12 	304416415	         3.935 ns/op	       0 B/op	       0 allocs/op
+```
+
+**Performance Targets After Optimization:**
+- **Parse Time:** <800ms per replay (30% improvement)
+- **Memory Usage:** <200 MB per replay (35% reduction)
+- **Allocations:** <6 million per replay (45% reduction)
+- **Target Throughput:** >75 replays/minute (50% improvement)
+
+## Priority 0: Infrastructure Updates (Do First)
+
+### 0.1 Update Go Version
+**Impact:** High | **Effort:** Low | **Target:** Go 1.21+
+
+Current issue: Running on Go 1.16.3 (released March 2021) - missing 3+ years of performance improvements.
+- Update to Go 1.21+ for significant performance improvements in:
+  - GC performance (20-30% improvement in allocation-heavy workloads)
+  - Better CPU optimization and vectorization
+  - Improved memory allocator
+  - Better compiler optimizations
+- Update `go.mod` and dependencies
+- Test for any breaking changes or performance regressions
+
+Expected impact: 15-25% performance improvement from runtime optimizations alone.
+
 ## Priority 1: High Impact, Low-Medium Effort
 
 ### 1.1 Stream Buffer Optimization
@@ -166,46 +212,92 @@ Current issue: Bit operations could leverage SIMD instructions.
 
 ## Implementation Strategy
 
+### Phase 0 (Week 1): Infrastructure
+- Update Go version (0.1)
+- **Benchmark after:** Record improved baseline performance
+
 ### Phase 1 (Weeks 1-2): Quick Wins
 - Stream buffer optimization (1.1)
 - String table key history pool (1.4)
 - Compression buffer optimization (3.3)
+- **Benchmark after:** Measure buffer management improvements
 
 ### Phase 2 (Weeks 3-4): Memory Management
 - Field state memory pool (1.2)
 - Entity field cache optimization (1.3)
 - Protobuf message pooling (3.2)
+- **Benchmark after:** Measure allocation reduction impact
 
 ### Phase 3 (Weeks 5-6): Core Optimizations
 - Field path pool optimization (2.1)
 - Bit reader optimization (2.2)
 - String interning (3.1)
+- **Benchmark after:** Measure core parsing improvements
 
 ### Phase 4 (Weeks 7-8): Advanced Optimizations
 - Field decoder optimization (2.3)
 - Entity map optimization (2.4)
 - Field path computation optimization (4.1)
+- **Benchmark after:** Measure algorithmic improvements
 
 ### Phase 5 (Future): Architectural Changes
 - Concurrent processing (5.2)
 - Memory layout optimization (5.1)
 - SIMD optimizations (5.3)
+- **Benchmark after:** Measure concurrent processing gains
 
 ## Measurement and Validation
 
+### Benchmark Commands
+```bash
+# Primary benchmark - run after each optimization phase
+go test -bench=BenchmarkMatch2159568145 -benchmem -count=5
+
+# Component benchmarks - track low-level improvements  
+go test -bench=BenchmarkReadVarUint32 -benchmem -count=3
+go test -bench=BenchmarkReadBytesAligned -benchmem -count=3
+
+# Memory profiling - identify allocation hotspots
+go test -bench=BenchmarkMatch2159568145 -memprofile=mem.prof -memprofilerate=1
+go tool pprof mem.prof
+
+# CPU profiling - identify performance bottlenecks
+go test -bench=BenchmarkMatch2159568145 -cpuprofile=cpu.prof
+go tool pprof cpu.prof
+
+# Compare benchmarks statistically
+go install golang.org/x/perf/cmd/benchstat@latest
+benchstat old.txt new.txt
+```
+
 ### Benchmarks to Track
-1. **Parsing throughput**: replays/hour on target hardware
-2. **Memory usage**: Peak and average memory consumption per replay
-3. **Allocation rate**: Objects allocated per second during parsing
-4. **CPU utilization**: Percentage of time spent in different parsing phases
-5. **Cache performance**: Cache hit/miss rates for critical data structures
+1. **Parsing throughput**: ns/op for full replay parsing (lower is better)
+2. **Memory allocations**: B/op and allocs/op (both lower is better)
+3. **Component performance**: Individual operation benchmarks
+4. **Regression testing**: Compare against baseline measurements
 
 ### Testing Strategy
-1. Run optimizations against diverse replay dataset
-2. Measure performance impact of each optimization in isolation
-3. Profile memory allocations before and after changes
-4. Validate correctness against existing test suite
-5. Performance regression testing for future changes
+1. Run benchmarks before and after each optimization phase
+2. Record results in this ROADMAP.md file
+3. Use `benchstat` for statistical comparison of results
+4. Validate correctness with existing test suite: `make test`
+5. Profile memory and CPU usage to identify next optimization targets
+
+### Recording Results
+After each phase, add benchmark results in this format:
+```
+## Phase X Results (Date)
+**Optimization:** Description of changes made
+**Command:** go test -bench=BenchmarkMatch2159568145 -benchmem -count=3
+
+Before:
+BenchmarkMatch2159568145-12    	   1   1158583167 ns/op   309625632 B/op   11008491 allocs/op
+
+After:  
+BenchmarkMatch2159568145-12    	   1   [TIME] ns/op       [BYTES] B/op     [ALLOCS] allocs/op
+
+**Improvement:** X% faster, Y% less memory, Z% fewer allocations
+```
 
 ## Expected Outcomes
 
