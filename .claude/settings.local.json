@@ -3,7 +3,8 @@
     "allow": [
       "Bash(rg:*)",
       "Bash(go test:*)",
-      "Bash(go:*)"
+      "Bash(go:*)",
+      "Bash(asdf list-all:*)"
     ],
     "deny": []
   }
