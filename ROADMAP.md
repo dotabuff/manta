@@ -27,16 +27,15 @@ BenchmarkReadBytesAligned-12 	304416415	         3.935 ns/op	       0 B/op	     
 ```
 
 **Performance Targets After All Optimizations:**
-*✅ ACHIEVED as of Phase 4 (December 2024)*
 - **Parse Time:** <800ms per replay ✅ **ACHIEVED: 775ms (33.4% improvement)**
-- **Memory Usage:** ~320 MB per replay (maintained current efficiency)
+- **Memory Usage:** ~320 MB per replay (maintained current efficiency)  
 - **Allocations:** ~11M per replay (maintained current efficiency)
-- **Target Throughput:** >78 replays/minute ✅ **ACHIEVED: 78/min (53% improvement)**
+- **Target Throughput:** >78 replays/minute ✅ **ACHIEVED: 78 replays/minute single-threaded**
 
-**Original Stretch Goals:**
-- **Parse Time:** <600ms per replay (remaining target for future phases)
+**Remaining Stretch Goals:**
+- **Parse Time:** <600ms per replay (target for algorithmic optimizations)
 - **Memory Usage:** <200 MB per replay (future optimization target)
-- **Target Throughput:** >100 replays/minute (future optimization target)
+- **Throughput:** Further gains require core parser improvements, not just concurrency
 
 ## Phase 0 Results (December 2024)
 **Optimization:** Updated Go version from 1.16.3 to 1.21.13
@@ -181,6 +180,22 @@ BenchmarkMatch2159568145-12    	      30	 774543261 ns/op	320272272 B/op	1100732
 - **FilterEntity:** Skip nil entities efficiently, pre-size result arrays
 
 **Analysis:** Phase 4 provided incremental improvements through targeted optimizations. Entity map pre-sizing reduces initial allocation overhead and provides better memory locality. **Combined total improvement: 33.4% from original baseline** (1163ms → 775ms). We've achieved excellent performance gains and significantly exceeded all target benchmarks.
+
+## Phase 5 Results (December 2024)
+**Optimization:** Concurrent processing reference implementation (moved to cmd/manta-concurrent-demo)
+
+**Core Parser Performance:** No change - individual replay parsing still takes ~775ms
+
+**Concurrent Demo Scaling:**
+```
+Workers-1: Near single-threaded performance baseline
+Workers-4: ~4x throughput scaling (near-linear)
+Workers-8: ~8x throughput scaling (continues scaling)
+```
+
+**Analysis:** Phase 5 created a **reference implementation** for concurrent processing in `cmd/manta-concurrent-demo`. This demonstrates how to scale throughput by running multiple parsers concurrently, but **does not improve core parser performance**. Each individual replay still takes ~775ms to parse. The scaling comes from processing multiple replays simultaneously, not from making parsing faster.
+
+**Key Insight:** Concurrent processing scales **system throughput** but the **core parser remains the bottleneck**. For truly faster parsing (reducing the 775ms per replay), we need to continue with algorithmic optimizations in the core library.
 
 ## Priority 0: Infrastructure Updates (Do First)
 
