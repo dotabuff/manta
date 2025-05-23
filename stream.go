@@ -8,18 +8,18 @@ import (
 )
 
 const (
-	bufferInitial = 1024 * 100     // 100KB initial buffer
+	bufferInitial = 1024 * 100      // 100KB initial buffer
 	bufferMax     = 1024 * 1024 * 4 // 4MB max buffer size for pooling
 )
 
 // Size classes for buffer pools (powers of 2 for efficient allocation)
 var bufferSizeClasses = []uint32{
-	1024 * 100,   // 100KB
-	1024 * 200,   // 200KB  
-	1024 * 400,   // 400KB
-	1024 * 800,   // 800KB
-	1024 * 1600,  // 1.6MB
-	1024 * 3200,  // 3.2MB
+	1024 * 100,  // 100KB
+	1024 * 200,  // 200KB
+	1024 * 400,  // 400KB
+	1024 * 800,  // 800KB
+	1024 * 1600, // 1.6MB
+	1024 * 3200, // 3.2MB
 }
 
 // Size-class based buffer pools to reduce allocations
@@ -54,7 +54,7 @@ func getPooledBuffer(requestedSize uint32) ([]byte, int) {
 		// Size too large for pooling, allocate directly
 		return make([]byte, requestedSize), -1
 	}
-	
+
 	buf := streamBufferPools[classIndex].Get().([]byte)
 	return buf, classIndex
 }
@@ -105,16 +105,16 @@ func (s *stream) readBytes(n uint32) ([]byte, error) {
 		if s.pooledBuf {
 			returnPooledBuffer(s.buf, s.classIndex)
 		}
-		
+
 		// Grow buffer intelligently: either 2x current size or requested size, whichever is larger
 		newSize := s.size * 2
 		if n > newSize {
 			newSize = n
 		}
-		
+
 		// Get new buffer from appropriate size class pool
 		newBuf, newClassIndex := getPooledBuffer(newSize)
-		
+
 		s.buf = newBuf
 		s.size = uint32(len(newBuf))
 		s.pooledBuf = newClassIndex >= 0

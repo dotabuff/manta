@@ -166,7 +166,7 @@ func (p *Parser) afterStop() {
 	if p.stream != nil {
 		p.stream.Close()
 	}
-	
+
 	if p.AfterStopCallback != nil {
 		p.AfterStopCallback()
 	}

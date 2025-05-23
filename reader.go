@@ -33,28 +33,28 @@ func internString(s string) string {
 	if len(s) == 0 || len(s) > 32 {
 		return s
 	}
-	
+
 	stringInternMutex.RLock()
 	if interned, exists := stringInternMap[s]; exists {
 		stringInternMutex.RUnlock()
 		return interned
 	}
 	stringInternMutex.RUnlock()
-	
+
 	stringInternMutex.Lock()
 	defer stringInternMutex.Unlock()
-	
+
 	// Double-check after acquiring write lock
 	if interned, exists := stringInternMap[s]; exists {
 		return interned
 	}
-	
+
 	// Limit map size to prevent memory leaks
 	if len(stringInternMap) < 10000 {
 		stringInternMap[s] = s
 		return s
 	}
-	
+
 	return s
 }
 
@@ -111,7 +111,7 @@ func (r *reader) readBits(n uint32) uint32 {
 		r.bitCount--
 		return uint32(x)
 	}
-	
+
 	// Ensure we have enough bits
 	for n > r.bitCount {
 		r.bitVal |= uint64(r.nextByte()) << r.bitCount
@@ -125,7 +125,7 @@ func (r *reader) readBits(n uint32) uint32 {
 	} else {
 		mask = (1 << n) - 1 // Fallback for very large n
 	}
-	
+
 	x := r.bitVal & mask
 	r.bitVal >>= n
 	r.bitCount -= n
@@ -177,25 +177,25 @@ func (r *reader) readVarUint32() uint32 {
 	if b < 0x80 {
 		return b
 	}
-	
+
 	x := b & 0x7F
 	b = uint32(r.readByte())
 	if b < 0x80 {
 		return x | b<<7
 	}
-	
+
 	x |= (b & 0x7F) << 7
 	b = uint32(r.readByte())
 	if b < 0x80 {
 		return x | b<<14
 	}
-	
+
 	x |= (b & 0x7F) << 14
 	b = uint32(r.readByte())
 	if b < 0x80 {
 		return x | b<<21
 	}
-	
+
 	// Last byte for 32-bit varint (only uses 4 bits)
 	x |= (b & 0x7F) << 21
 	b = uint32(r.readByte())
@@ -300,7 +300,7 @@ func (r *reader) readString() string {
 	buf := stringBuffer.Get().([]byte)
 	buf = buf[:0] // Reset length but keep capacity
 	defer stringBuffer.Put(buf)
-	
+
 	for {
 		b := r.readByte()
 		if b == 0 {

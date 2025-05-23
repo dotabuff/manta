@@ -100,7 +100,7 @@ func (p *Parser) onCDemoSendTables(m *dota.CDemoSendTables) error {
 			// add the field to the serializer
 			fieldIndex := len(serializer.fields)
 			serializer.fields = append(serializer.fields, fields[i])
-			
+
 			// Build field index for fast lookup
 			fieldName := fields[i].varName
 			serializer.fieldIndex[fieldName] = fieldIndex

@@ -270,11 +270,11 @@ func (fp *fieldPath) String() string {
 	if fp.last == 0 {
 		return strconv.Itoa(fp.path[0])
 	}
-	
+
 	// Use strings.Builder for better performance
 	var builder strings.Builder
 	builder.Grow(fp.last * 4) // Estimate 4 chars per element
-	
+
 	builder.WriteString(strconv.Itoa(fp.path[0]))
 	for i := 1; i <= fp.last; i++ {
 		builder.WriteByte('/')
@@ -315,7 +315,7 @@ func init() {
 	for i := 0; i < 100; i++ {
 		fp := &fieldPath{
 			path: make([]int, 7),
-			last: 0, 
+			last: 0,
 			done: false,
 		}
 		fpPool.Put(fp)
@@ -373,7 +373,7 @@ func readFieldPaths(r *reader) []*fieldPath {
 
 // releaseFieldPaths returns the field path slice to the pool after all paths are released
 func releaseFieldPaths(fps []*fieldPath) {
-	// Reset the slice for reuse but keep the capacity  
+	// Reset the slice for reuse but keep the capacity
 	for i := range fps {
 		fps[i] = nil // Clear references to help GC
 	}

@@ -88,6 +88,25 @@ Field decoding is complex due to Dota 2's optimized network format:
 - Field types are determined by send table definitions
 - Always check field type before decoding to avoid panics
 
+## Code Style and Formatting
+
+### Go Code Formatting
+**IMPORTANT:** Always run `go fmt` on Go files before committing to ensure consistent formatting.
+
+```bash
+# Format all Go files in the project
+go fmt ./...
+
+# Format specific file
+go fmt filename.go
+```
+
+**Best Practices:**
+- Use tabs for indentation (Go standard)
+- No trailing whitespace
+- Single trailing newline at end of files
+- Use `gofmt` or equivalent in your editor to format on save
+
 ## Benchmarking and Performance Testing
 
 ### Running Benchmarks

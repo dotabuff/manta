@@ -25,7 +25,7 @@ func newFieldStateWithSize(size int) *fieldState {
 
 func getPooledFieldState(minSize int) *fieldState {
 	var fs *fieldState
-	
+
 	switch {
 	case minSize <= 8:
 		fs = fieldStatePool8.Get().(*fieldState)
@@ -41,7 +41,7 @@ func getPooledFieldState(minSize int) *fieldState {
 		// For very large sizes, don't use pool
 		return &fieldState{state: make([]interface{}, minSize)}
 	}
-	
+
 	// Reset the field state for reuse
 	fs.reset()
 	return fs
@@ -68,7 +68,7 @@ func (s *fieldState) release() {
 		fieldStatePool64.Put(s)
 	case cap <= 128:
 		fieldStatePool128.Put(s)
-	// Large field states are not pooled
+		// Large field states are not pooled
 	}
 }
 

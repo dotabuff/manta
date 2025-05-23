@@ -53,7 +53,7 @@ func (s *serializer) getFieldPathForName(fp *fieldPath, name string) bool {
 			return true
 		}
 	}
-	
+
 	// Check for nested field names with dot notation
 	for i, f := range s.fields {
 		if strings.HasPrefix(name, f.varName+".") {

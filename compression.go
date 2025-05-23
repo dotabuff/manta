@@ -2,7 +2,7 @@ package manta
 
 import (
 	"sync"
-	
+
 	"github.com/golang/snappy"
 )
 
@@ -17,12 +17,12 @@ var compressionPool = &sync.Pool{
 func DecodeSnappy(src []byte) ([]byte, error) {
 	buf := compressionPool.Get().([]byte)
 	defer compressionPool.Put(buf)
-	
+
 	result, err := snappy.Decode(buf[:0], src)
 	if err != nil {
 		return nil, err
 	}
-	
+
 	// Copy result since we're returning the buffer to pool
 	output := make([]byte, len(result))
 	copy(output, result)

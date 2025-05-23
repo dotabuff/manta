@@ -2,7 +2,7 @@ package manta
 
 import (
 	"sync"
-	
+
 	"github.com/dotabuff/manta/dota"
 )
 

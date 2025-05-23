@@ -40,7 +40,7 @@ func readFields(r *reader, s *serializer, state *fieldState) {
 
 		fp.release()
 	}
-	
+
 	// Return the field path slice to the pool
 	releaseFieldPaths(fps)
 }

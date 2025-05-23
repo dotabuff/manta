@@ -78,7 +78,7 @@ func newEntity(index, serial int32, class *class) *Entity {
 	// Get pooled maps and ensure they're empty
 	fpCache := fpCachePool.Get().(map[string]*fieldPath)
 	fpNoop := fpNoopPool.Get().(map[string]bool)
-	
+
 	// Fast map clearing - more efficient than range deletion for small maps
 	if len(fpCache) > 0 {
 		for k := range fpCache {
@@ -90,7 +90,7 @@ func newEntity(index, serial int32, class *class) *Entity {
 			delete(fpNoop, k)
 		}
 	}
-	
+
 	return &Entity{
 		index:   index,
 		serial:  serial,
@@ -127,7 +127,7 @@ func (e *Entity) Get(name string) interface{} {
 	if e.fpCache == nil || e.fpNoop == nil {
 		return nil
 	}
-	
+
 	if fp, ok := e.fpCache[name]; ok {
 		return e.state.get(fp)
 	}
@@ -220,7 +220,7 @@ func (e *Entity) cleanup() {
 		e.state.releaseRecursive()
 		e.state = nil
 	}
-	
+
 	// Return field path cache maps to pools
 	if e.fpCache != nil {
 		fpCachePool.Put(e.fpCache)
