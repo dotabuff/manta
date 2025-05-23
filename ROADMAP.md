@@ -1,0 +1,218 @@
+# Manta Performance Optimization Roadmap
+
+This roadmap outlines performance optimizations to improve Manta's efficiency for processing thousands of replays per hour. Optimizations are prioritized by impact and implementation difficulty.
+
+## Priority 1: High Impact, Low-Medium Effort
+
+### 1.1 Stream Buffer Optimization
+**Impact:** High | **Effort:** Low | **File:** `stream.go`
+
+Current issue: Stream buffer is fixed at 100KB and reallocated frequently.
+- Replace fixed buffer with growing buffer pool
+- Implement buffer size heuristics based on typical message sizes
+- Reuse buffers across parser instances
+
+```go
+// Current: s.buf = make([]byte, n) on every readBytes() when n > s.size
+// Target: Pooled, growing buffers with size classes
+```
+
+### 1.2 Field State Memory Pool
+**Impact:** High | **Effort:** Medium | **File:** `field_state.go`
+
+Current issue: Field states allocate new slices frequently during entity updates.
+- Pre-allocate field state pools with common sizes (8, 16, 32, 64 elements)
+- Implement slice pooling for state arrays
+- Reset and reuse field states instead of creating new ones
+
+```go
+// Current: state: make([]interface{}, 8) growing with copy()
+// Target: Pooled slices with size classes
+```
+
+### 1.3 Entity Field Cache Optimization
+**Impact:** High | **Effort:** Medium | **File:** `entity.go`
+
+Current issue: Field path cache map allocates for every entity.
+- Use sync.Pool for fpCache and fpNoop maps
+- Pre-allocate cache maps with expected capacity
+- Consider using more efficient cache structures for hot paths
+
+### 1.4 String Table Key History Pool
+**Impact:** Medium | **Effort:** Low | **File:** `string_table.go`
+
+Current issue: Key history slice allocated for every string table parse.
+- Pool key history slices ([]string with cap=32)
+- Reset instead of reallocating
+
+## Priority 2: High Impact, Medium-High Effort
+
+### 2.1 Field Path Pool Optimization
+**Impact:** High | **Effort:** Medium | **File:** `field_path.go`
+
+Current status: Already has pooling (good!), but can be improved.
+- Increase field path pool size for high concurrency
+- Optimize pool contention with per-goroutine pools
+- Profile pool hit/miss rates and adjust accordingly
+
+### 2.2 Bit Reader Optimization
+**Impact:** High | **Effort:** Medium | **File:** `reader.go`
+
+Current issue: Bit reading operations are not optimized for batch operations.
+- Implement SIMD-friendly bit operations where possible
+- Optimize hot path bit reading functions (readBits, readVarUint32)
+- Cache frequently used bit patterns
+
+### 2.3 Field Decoder Function Pointer Optimization
+**Impact:** Medium | **Effort:** Medium | **File:** `field_decoder.go`
+
+Current issue: Function pointer lookups and interface{} boxing/unboxing.
+- Use type-specific decoder interfaces to reduce allocations
+- Implement decoder function inlining for common types
+- Pre-compile decoder chains for known field patterns
+
+### 2.4 Entity Map Optimization
+**Impact:** Medium | **Effort:** Medium | **File:** `parser.go`
+
+Current issue: Entity map grows without size hints.
+- Pre-size entity map based on game build (typical entity counts)
+- Use more efficient map implementation for entity lookups
+- Consider arena allocation for entities
+
+## Priority 3: Medium Impact, Various Effort
+
+### 3.1 String Interning
+**Impact:** Medium | **Effort:** Medium | **Files:** Multiple
+
+Current issue: String duplication across entities and fields.
+- Implement string interning for common field names and values
+- Pool common strings (class names, field names, etc.)
+- Use string interning for protobuf message fields
+
+### 3.2 Protobuf Message Pooling
+**Impact:** Medium | **Effort:** Medium | **Files:** `dota/*.pb.go`, callbacks
+
+Current issue: Protobuf messages allocated for every callback.
+- Implement protobuf message pools for frequently used message types
+- Reset and reuse messages instead of creating new ones
+- Profile message allocation patterns to identify hotspots
+
+### 3.3 Compression Buffer Optimization
+**Impact:** Medium | **Effort:** Low | **Files:** `parser.go`, `string_table.go`
+
+Current issue: Snappy decompression allocates new buffers each time.
+- Pool decompression buffers
+- Reuse buffers across decompression operations
+- Size buffers based on typical compressed/decompressed ratios
+
+### 3.4 Huffman Tree Optimization
+**Impact:** Low | **Effort:** Low | **File:** `field_path.go`
+
+Current issue: Huffman tree operations could be more cache-friendly.
+- Optimize huffman tree data structure for better cache locality
+- Pre-compute frequently used huffman operations
+
+## Priority 4: Algorithmic Improvements
+
+### 4.1 Field Path Computation Optimization
+**Impact:** High | **Effort:** High | **Files:** `field.go`, `serializer.go`
+
+Current issue: Field path computation is expensive and repeated.
+- Cache computed field paths at the serializer level
+- Pre-compute field path mappings for known serializers
+- Implement field path compilation for hot entities
+
+### 4.2 Entity State Diff Optimization
+**Impact:** Medium | **Effort:** High | **File:** `entity.go`
+
+Current issue: Full entity state tracking even when only small changes occur.
+- Implement incremental entity state updates
+- Track field-level dirty flags
+- Optimize entity change detection
+
+### 4.3 Callback System Optimization
+**Impact:** Medium | **Effort:** Medium | **File:** `callbacks.go`
+
+Current issue: Dynamic callback dispatch overhead.
+- Pre-compile callback chains for known message patterns
+- Use interface-based dispatch instead of reflection where possible
+- Implement callback batching for related events
+
+## Priority 5: Infrastructure Optimizations
+
+### 5.1 Memory Layout Optimization
+**Impact:** Medium | **Effort:** High | **Files:** Multiple
+
+Current issue: Data structures not optimized for cache locality.
+- Reorganize structs for better cache line utilization
+- Use struct-of-arrays pattern where beneficial
+- Align frequently accessed data on cache boundaries
+
+### 5.2 Concurrent Processing
+**Impact:** High | **Effort:** High | **Files:** Multiple
+
+Current issue: Single-threaded parsing limits throughput.
+- Implement pipeline-based concurrent parsing
+- Parallelize independent operations (string table parsing, field decoding)
+- Use worker pools for CPU-intensive operations
+
+### 5.3 SIMD Optimizations
+**Impact:** Medium | **Effort:** High | **Files:** `reader.go`, bit operations
+
+Current issue: Bit operations could leverage SIMD instructions.
+- Implement SIMD-accelerated bit reading where possible
+- Use vectorized operations for batch field decoding
+- Profile and optimize hot loop operations
+
+## Implementation Strategy
+
+### Phase 1 (Weeks 1-2): Quick Wins
+- Stream buffer optimization (1.1)
+- String table key history pool (1.4)
+- Compression buffer optimization (3.3)
+
+### Phase 2 (Weeks 3-4): Memory Management
+- Field state memory pool (1.2)
+- Entity field cache optimization (1.3)
+- Protobuf message pooling (3.2)
+
+### Phase 3 (Weeks 5-6): Core Optimizations
+- Field path pool optimization (2.1)
+- Bit reader optimization (2.2)
+- String interning (3.1)
+
+### Phase 4 (Weeks 7-8): Advanced Optimizations
+- Field decoder optimization (2.3)
+- Entity map optimization (2.4)
+- Field path computation optimization (4.1)
+
+### Phase 5 (Future): Architectural Changes
+- Concurrent processing (5.2)
+- Memory layout optimization (5.1)
+- SIMD optimizations (5.3)
+
+## Measurement and Validation
+
+### Benchmarks to Track
+1. **Parsing throughput**: replays/hour on target hardware
+2. **Memory usage**: Peak and average memory consumption per replay
+3. **Allocation rate**: Objects allocated per second during parsing
+4. **CPU utilization**: Percentage of time spent in different parsing phases
+5. **Cache performance**: Cache hit/miss rates for critical data structures
+
+### Testing Strategy
+1. Run optimizations against diverse replay dataset
+2. Measure performance impact of each optimization in isolation
+3. Profile memory allocations before and after changes
+4. Validate correctness against existing test suite
+5. Performance regression testing for future changes
+
+## Expected Outcomes
+
+Based on the analysis, implementing these optimizations should achieve:
+- **2-3x reduction** in memory allocations per replay
+- **30-50% improvement** in parsing throughput
+- **40-60% reduction** in peak memory usage
+- **Better scalability** for concurrent replay processing
+
+The highest impact optimizations focus on reducing memory allocations in hot paths, particularly around field state management, entity updates, and buffer reuse patterns.
