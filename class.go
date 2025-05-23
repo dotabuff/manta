@@ -5,7 +5,6 @@ import (
 	"math"
 	"regexp"
 	"strconv"
-	"strings"
 
 	"github.com/dotabuff/manta/dota"
 )
@@ -19,7 +18,7 @@ type class struct {
 }
 
 func (c *class) getNameForFieldPath(fp *fieldPath) string {
-	return strings.Join(c.serializer.getNameForFieldPath(fp, 0), ".")
+	return c.serializer.getNameForFieldPathString(fp, 0)
 }
 
 func (c *class) getTypeForFieldPath(fp *fieldPath) *fieldType {

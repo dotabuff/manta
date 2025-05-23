@@ -46,9 +46,10 @@ func (p *Parser) onCDemoSendTables(m *dota.CDemoSendTables) error {
 
 	for _, s := range msg.GetSerializers() {
 		serializer := &serializer{
-			name:    msg.GetSymbols()[s.GetSerializerNameSym()],
-			version: s.GetSerializerVersion(),
-			fields:  []*field{},
+			name:       msg.GetSymbols()[s.GetSerializerNameSym()],
+			version:    s.GetSerializerVersion(),
+			fields:     []*field{},
+			fieldIndex: make(map[string]int),
 		}
 
 		for _, i := range s.GetFieldsIndex() {
@@ -97,7 +98,12 @@ func (p *Parser) onCDemoSendTables(m *dota.CDemoSendTables) error {
 			}
 
 			// add the field to the serializer
+			fieldIndex := len(serializer.fields)
 			serializer.fields = append(serializer.fields, fields[i])
+			
+			// Build field index for fast lookup
+			fieldName := fields[i].varName
+			serializer.fieldIndex[fieldName] = fieldIndex
 		}
 
 		// store the serializer for field reference

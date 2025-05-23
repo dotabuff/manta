@@ -265,13 +265,22 @@ func (fp *fieldPath) copy() *fieldPath {
 	return x
 }
 
-// String returns a string representing the fieldPath
+// String returns a string representing the fieldPath - optimized
 func (fp *fieldPath) String() string {
-	ss := make([]string, fp.last+1)
-	for i := 0; i <= fp.last; i++ {
-		ss[i] = strconv.Itoa(fp.path[i])
+	if fp.last == 0 {
+		return strconv.Itoa(fp.path[0])
 	}
-	return strings.Join(ss, "/")
+	
+	// Use strings.Builder for better performance
+	var builder strings.Builder
+	builder.Grow(fp.last * 4) // Estimate 4 chars per element
+	
+	builder.WriteString(strconv.Itoa(fp.path[0]))
+	for i := 1; i <= fp.last; i++ {
+		builder.WriteByte('/')
+		builder.WriteString(strconv.Itoa(fp.path[i]))
+	}
+	return builder.String()
 }
 
 // newFieldPath returns a new fieldPath ready for use
