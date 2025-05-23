@@ -10,7 +10,11 @@
       "Bash(git stash:*)",
       "Bash(mkdir:*)",
       "Bash(mv:*)",
-      "Bash(./manta-concurrent-demo:*)"
+      "Bash(./manta-concurrent-demo:*)",
+      "Bash(echo:*)",
+      "Bash(make test:*)",
+      "Bash(rm:*)",
+      "Bash(git rm:*)"
     ],
     "deny": []
   }
