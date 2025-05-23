@@ -6,7 +6,6 @@ import (
 	"io"
 
 	"github.com/dotabuff/manta/dota"
-	"github.com/golang/snappy"
 )
 
 // The first 8 bytes of a replay for Source 1 and Source 2
@@ -163,6 +162,11 @@ func (p *Parser) Stop() {
 }
 
 func (p *Parser) afterStop() {
+	// Clean up stream buffer
+	if p.stream != nil {
+		p.stream.Close()
+	}
+	
 	if p.AfterStopCallback != nil {
 		p.AfterStopCallback()
 	}
@@ -229,7 +233,7 @@ func (p *Parser) readOuterMessage() (*outerMessage, error) {
 	// If the buffer is compressed, decompress it with snappy.
 	if msgCompressed {
 		var err error
-		if buf, err = snappy.Decode(nil, buf); err != nil {
+		if buf, err = DecodeSnappy(buf); err != nil {
 			return nil, err
 		}
 	}

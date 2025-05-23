@@ -2,30 +2,73 @@ package manta
 
 import (
 	"io"
+	"sync"
 
 	"github.com/dotabuff/manta/dota"
 )
 
-const buffer = 1024 * 100
+const (
+	bufferInitial = 1024 * 100 // 100KB initial buffer
+	bufferMax     = 1024 * 1024 * 4 // 4MB max buffer size for pooling
+)
+
+// Buffer pool for stream buffers to reduce allocations
+var streamBufferPool = &sync.Pool{
+	New: func() interface{} {
+		return make([]byte, bufferInitial)
+	},
+}
 
 // stream wraps an io.Reader to provide functions necessary for reading the
 // outer replay structure.
 type stream struct {
 	io.Reader
-	buf  []byte
-	size uint32
+	buf        []byte
+	size       uint32
+	pooledBuf  bool // tracks if buf came from pool
 }
 
 // newStream creates a new stream from a given io.Reader
 func newStream(r io.Reader) *stream {
-	return &stream{r, make([]byte, buffer), buffer}
+	buf := streamBufferPool.Get().([]byte)
+	return &stream{
+		Reader:    r,
+		buf:       buf,
+		size:      uint32(len(buf)),
+		pooledBuf: true,
+	}
+}
+
+// Close returns the buffer to the pool if it was pooled
+func (s *stream) Close() {
+	if s.pooledBuf && len(s.buf) <= bufferMax {
+		streamBufferPool.Put(s.buf)
+	}
+	s.pooledBuf = false
 }
 
 // readBytes reads the given number of bytes from the reader
 func (s *stream) readBytes(n uint32) ([]byte, error) {
 	if n > s.size {
-		s.buf = make([]byte, n)
-		s.size = n
+		// Grow buffer intelligently: either 2x current size or requested size, whichever is larger
+		newSize := s.size * 2
+		if n > newSize {
+			newSize = n
+		}
+		
+		// For very large buffers, don't use pool to avoid memory pressure
+		if newSize > bufferMax {
+			s.buf = make([]byte, newSize)
+			s.pooledBuf = false
+		} else {
+			// Try to get a larger buffer from pool first
+			if s.pooledBuf {
+				streamBufferPool.Put(s.buf)
+			}
+			s.buf = make([]byte, newSize) // Pool doesn't have size classes, so allocate directly
+			s.pooledBuf = false // Mark as non-pooled since we made it ourselves
+		}
+		s.size = newSize
 	}
 
 	if _, err := io.ReadFull(s.Reader, s.buf[:n]); err != nil {

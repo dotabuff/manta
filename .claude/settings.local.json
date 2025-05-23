@@ -4,7 +4,9 @@
       "Bash(rg:*)",
       "Bash(go test:*)",
       "Bash(go:*)",
-      "Bash(asdf list-all:*)"
+      "Bash(asdf list-all:*)",
+      "Bash(grep:*)",
+      "Bash(git add:*)"
     ],
     "deny": []
   }

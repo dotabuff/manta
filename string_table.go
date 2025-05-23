@@ -1,13 +1,23 @@
 package manta
 
 import (
+	"sync"
+	
 	"github.com/dotabuff/manta/dota"
-	"github.com/golang/snappy"
 )
 
 const (
 	stringtableKeyHistorySize = 32
 )
+
+// Pool for string table key history slices to reduce allocations
+var keyHistoryPool = &sync.Pool{
+	New: func() interface{} {
+		return make([]string, 0, stringtableKeyHistorySize)
+	},
+}
+
+// Note: Compression buffer pool moved to compression.go for shared access
 
 // Holds and maintains the string table information for an
 // instance of the Parser.
@@ -94,7 +104,7 @@ func (p *Parser) onCSVCMsg_CreateStringTable(m *dota.CSVCMsg_CreateStringTable) 
 		var err error
 
 		if s := r.readStringN(4); s != "LZSS" {
-			if buf, err = snappy.Decode(nil, buf); err != nil {
+			if buf, err = DecodeSnappy(buf); err != nil {
 				return err
 			}
 		} else {
@@ -194,8 +204,10 @@ func parseStringTable(buf []byte, numUpdates int32, name string, userDataFixed b
 	// If the first item is at index 0 it will use a incr operation.
 	index := int32(-1)
 
-	// Maintain a list of key history
-	keys := make([]string, 0, stringtableKeyHistorySize)
+	// Get key history slice from pool and ensure it's reset
+	keys := keyHistoryPool.Get().([]string)
+	keys = keys[:0] // Reset length but keep capacity
+	defer keyHistoryPool.Put(keys)
 
 	// Some tables have no data
 	if len(buf) == 0 {
@@ -281,7 +293,7 @@ func parseStringTable(buf []byte, numUpdates int32, name string, userDataFixed b
 			value = r.readBitsAsBytes(bitSize)
 
 			if isCompressed {
-				tmp, err := snappy.Decode(nil, value)
+				tmp, err := DecodeSnappy(value)
 				if err != nil {
 					_panicf("unable to decode snappy compressed stringtable item (%s, %d, %s): %s", name, index, key, err)
 				}
