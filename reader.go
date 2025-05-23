@@ -171,19 +171,35 @@ func (r *reader) readLeUint64() uint64 {
 	return binary.LittleEndian.Uint64(r.readBytes(8))
 }
 
-// readVarUint32 reads an unsigned 32-bit varint
+// readVarUint32 reads an unsigned 32-bit varint - optimized
 func (r *reader) readVarUint32() uint32 {
-	var x, s uint32
-	for {
-		b := uint32(r.readByte())
-		x |= (b & 0x7F) << s
-		s += 7
-		if ((b & 0x80) == 0) || (s == 35) {
-			break
-		}
+	b := uint32(r.readByte())
+	if b < 0x80 {
+		return b
 	}
-
-	return x
+	
+	x := b & 0x7F
+	b = uint32(r.readByte())
+	if b < 0x80 {
+		return x | b<<7
+	}
+	
+	x |= (b & 0x7F) << 7
+	b = uint32(r.readByte())
+	if b < 0x80 {
+		return x | b<<14
+	}
+	
+	x |= (b & 0x7F) << 14
+	b = uint32(r.readByte())
+	if b < 0x80 {
+		return x | b<<21
+	}
+	
+	// Last byte for 32-bit varint (only uses 4 bits)
+	x |= (b & 0x7F) << 21
+	b = uint32(r.readByte())
+	return x | (b&0x0F)<<28
 }
 
 // readVarInt64 reads a signed 32-bit varint

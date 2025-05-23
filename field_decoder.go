@@ -114,7 +114,15 @@ func handleDecoder(r *reader) interface{} {
 }
 
 func booleanDecoder(r *reader) interface{} {
-	return r.readBoolean()
+	// Inline boolean read for hot path
+	if r.bitCount == 0 {
+		r.bitVal = uint64(r.nextByte())
+		r.bitCount = 8
+	}
+	x := r.bitVal & 1
+	r.bitVal >>= 1
+	r.bitCount--
+	return x == 1
 }
 
 func stringDecoder(r *reader) interface{} {
