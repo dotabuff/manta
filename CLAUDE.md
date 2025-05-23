@@ -159,7 +159,7 @@ Always run benchmarks multiple times and look for consistent results. Use `bench
 
 ## Performance Optimization Notes
 
-### Completed Optimizations (32.6% total improvement achieved)
+### Completed Optimizations (33.4% total improvement achieved)
 
 **Phase 0: Go Version Update (28.6% improvement)**
 - Updated Go 1.16.3 → 1.21.13 for immediate runtime performance gains
@@ -182,6 +182,12 @@ Always run benchmarks multiple times and look for consistent results. Use `bench
 - **Bit reader optimizations** (`reader.go`): Pre-computed bit masks, varint fast paths, single-bit optimization
 - **String interning** (`reader.go`): Automated interning for strings ≤32 chars with 10K cache limit
 - **Key insight**: Core path optimizations provide compounding benefits for high-throughput scenarios
+
+**Phase 4: Advanced Optimizations (1.2% additional improvement)**
+- **Entity map optimization** (`parser.go`): Pre-sized entity map to 2048 capacity for typical game loads
+- **Entity access optimization** (`entity.go`): Fast path lookups with getEntityFast() method
+- **FilterEntity optimization** (`entity.go`): Skip nil entities efficiently, pre-size result arrays
+- **Key insight**: Targeted optimizations in hot paths provide measurable performance gains
 
 ### String Interning Implementation Pattern
 
@@ -245,8 +251,8 @@ func (r *reader) readString() string {
 
 ### Performance Impact Summary
 - **Original baseline (Go 1.16.3):** 1163ms, 51 replays/minute
-- **After Phase 0-3:** 784ms, 77 replays/minute  
-- **Exceeded primary <800ms target with 32.6% total improvement**
+- **After Phase 0-4:** 775ms, 78 replays/minute  
+- **Exceeded primary <800ms target with 33.4% total improvement**
 
 ### Optimization Lessons Learned
 

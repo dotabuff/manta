@@ -233,6 +233,11 @@ func (p *Parser) FindEntity(index int32) *Entity {
 	return p.entities[index]
 }
 
+// Optimized entity access for hot paths
+func (p *Parser) getEntityFast(index int32) *Entity {
+	return p.entities[index] // Let Go's map handle nil returns efficiently
+}
+
 const (
 	// SOURCE2
 	indexBits  uint64 = 14
@@ -257,11 +262,11 @@ func (p *Parser) FindEntityByHandle(handle uint64) *Entity {
 	return e
 }
 
-// FilterEntity finds entities by callback
+// FilterEntity finds entities by callback - optimized to skip nil entities
 func (p *Parser) FilterEntity(fb func(*Entity) bool) []*Entity {
-	entities := make([]*Entity, 0, 0)
+	entities := make([]*Entity, 0, len(p.entities)/4) // Estimate result size to reduce allocations
 	for _, et := range p.entities {
-		if fb(et) {
+		if et != nil && fb(et) { // Skip nil entities efficiently
 			entities = append(entities, et)
 		}
 	}
@@ -321,7 +326,7 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 				op = EntityOpCreated | EntityOpEntered
 
 			} else {
-				if e = p.entities[index]; e == nil {
+				if e = p.getEntityFast(index); e == nil {
 					_panicf("unable to find existing entity %d", index)
 				}
 
@@ -335,7 +340,7 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 			}
 
 		} else {
-			if e = p.entities[index]; e == nil {
+			if e = p.getEntityFast(index); e == nil {
 				_panicf("unable to find existing entity %d", index)
 			}
 

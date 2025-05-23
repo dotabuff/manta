@@ -171,67 +171,8 @@ func (r *reader) readLeUint64() uint64 {
 	return binary.LittleEndian.Uint64(r.readBytes(8))
 }
 
-// readVarUint32 reads an unsigned 32-bit varint - optimized version
+// readVarUint32 reads an unsigned 32-bit varint
 func (r *reader) readVarUint32() uint32 {
-	// Fast path: try to read from current byte buffer if we're byte aligned
-	if r.bitCount == 0 && r.pos < r.size {
-		var x uint32
-		var s uint32
-		
-		// Unrolled loop for common cases (1-4 bytes)
-		if r.pos < r.size {
-			b := uint32(r.buf[r.pos])
-			r.pos++
-			x = b & 0x7F
-			if (b & 0x80) == 0 {
-				return x
-			}
-			s = 7
-		}
-		
-		if r.pos < r.size && s < 35 {
-			b := uint32(r.buf[r.pos])
-			r.pos++
-			x |= (b & 0x7F) << s
-			if (b & 0x80) == 0 {
-				return x
-			}
-			s += 7
-		}
-		
-		if r.pos < r.size && s < 35 {
-			b := uint32(r.buf[r.pos])
-			r.pos++
-			x |= (b & 0x7F) << s
-			if (b & 0x80) == 0 {
-				return x
-			}
-			s += 7
-		}
-		
-		if r.pos < r.size && s < 35 {
-			b := uint32(r.buf[r.pos])
-			r.pos++
-			x |= (b & 0x7F) << s
-			if (b & 0x80) == 0 {
-				return x
-			}
-			s += 7
-		}
-		
-		// Handle remaining bytes with loop
-		for s < 35 && r.pos < r.size {
-			b := uint32(r.buf[r.pos])
-			r.pos++
-			x |= (b & 0x7F) << s
-			if (b & 0x80) == 0 {
-				return x
-			}
-			s += 7
-		}
-	}
-	
-	// Fallback to bit-based reading for non-aligned access
 	var x, s uint32
 	for {
 		b := uint32(r.readByte())

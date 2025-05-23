@@ -67,7 +67,7 @@ func NewStreamParser(r io.Reader) (*Parser, error) {
 		classBaselines:    make(map[int32][]byte),
 		classesById:       make(map[int32]*class),
 		classesByName:     make(map[string]*class),
-		entities:          make(map[int32]*Entity),
+		entities:          make(map[int32]*Entity, 2048), // Pre-size for typical entity counts
 		entityHandlers:    make([]EntityHandler, 0),
 		gameEventHandlers: make(map[string][]GameEventHandler),
 		gameEventNames:    make(map[int32]string),
