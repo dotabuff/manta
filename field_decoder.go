@@ -13,6 +13,7 @@ var fieldTypeFactories = map[string]fieldFactory{
 	"Vector":                   vectorFactory(3),
 	"Vector2D":                 vectorFactory(2),
 	"Vector4D":                 vectorFactory(4),
+	"VectorWS":                 vectorFactory(3),
 	"uint64":                   unsigned64Factory,
 	"QAngle":                   qangleFactory,
 	"CHandle":                  unsignedFactory,
