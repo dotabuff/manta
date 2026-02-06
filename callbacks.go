@@ -67,6 +67,7 @@ type Callbacks struct {
 	onCSVCMsg_UserMessage                                  []func(*dota.CSVCMsg_UserMessage) error
 	onCSVCMsg_Broadcast_Command                            []func(*dota.CSVCMsg_Broadcast_Command) error
 	onCSVCMsg_HltvFixupOperatorStatus                      []func(*dota.CSVCMsg_HltvFixupOperatorStatus) error
+	onCSVCMsg_NextMsgPredicted                             []func(*dota.CSVCMsg_NextMsgPredicted) error
 	onCUserMessageAchievementEvent                         []func(*dota.CUserMessageAchievementEvent) error
 	onCUserMessageCloseCaption                             []func(*dota.CUserMessageCloseCaption) error
 	onCUserMessageCloseCaptionDirect                       []func(*dota.CUserMessageCloseCaptionDirect) error
@@ -116,7 +117,7 @@ type Callbacks struct {
 	onCMsgPlaceDecalEvent                                  []func(*dota.CMsgPlaceDecalEvent) error
 	onCMsgClearWorldDecalsEvent                            []func(*dota.CMsgClearWorldDecalsEvent) error
 	onCMsgClearEntityDecalsEvent                           []func(*dota.CMsgClearEntityDecalsEvent) error
-	onCMsgClearDecalsForSkeletonInstanceEvent              []func(*dota.CMsgClearDecalsForSkeletonInstanceEvent) error
+	onCMsgClearDecalsForEntityEvent                        []func(*dota.CMsgClearDecalsForEntityEvent) error
 	onCMsgSource1LegacyGameEventList                       []func(*dota.CMsgSource1LegacyGameEventList) error
 	onCMsgSource1LegacyListenEvents                        []func(*dota.CMsgSource1LegacyListenEvents) error
 	onCMsgSource1LegacyGameEvent                           []func(*dota.CMsgSource1LegacyGameEvent) error
@@ -279,6 +280,12 @@ type Callbacks struct {
 	onCDOTAUserMsg_NeutralCraftAvailable                   []func(*dota.CDOTAUserMsg_NeutralCraftAvailable) error
 	onCDOTAUserMsg_TimerAlert                              []func(*dota.CDOTAUserMsg_TimerAlert) error
 	onCDOTAUserMsg_MadstoneAlert                           []func(*dota.CDOTAUserMsg_MadstoneAlert) error
+	onCDOTAUserMsg_CourierLeftFountainAlert                []func(*dota.CDOTAUserMsg_CourierLeftFountainAlert) error
+	onCDOTAUserMsg_MonsterHunter_InvestigationsAvailable   []func(*dota.CDOTAUserMsg_MonsterHunter_InvestigationsAvailable) error
+	onCDOTAUserMsg_MonsterHunter_InvestigationGameState    []func(*dota.CDOTAUserMsg_MonsterHunter_InvestigationGameState) error
+	onCDOTAUserMsg_MonsterHunter_HuntAlert                 []func(*dota.CDOTAUserMsg_MonsterHunter_HuntAlert) error
+	onCDOTAUserMsg_TormentorTimer                          []func(*dota.CDOTAUserMsg_TormentorTimer) error
+	onCDOTAUserMsg_KillEffect                              []func(*dota.CDOTAUserMsg_KillEffect) error
 
 	pb *proto.Buffer
 }
@@ -589,6 +596,11 @@ func (c *Callbacks) OnCSVCMsg_HltvFixupOperatorStatus(fn func(*dota.CSVCMsg_Hltv
 	c.onCSVCMsg_HltvFixupOperatorStatus = append(c.onCSVCMsg_HltvFixupOperatorStatus, fn)
 }
 
+// OnCSVCMsg_NextMsgPredicted registers a callback for SVC_Messages_svc_NextMsgPredicted
+func (c *Callbacks) OnCSVCMsg_NextMsgPredicted(fn func(*dota.CSVCMsg_NextMsgPredicted) error) {
+	c.onCSVCMsg_NextMsgPredicted = append(c.onCSVCMsg_NextMsgPredicted, fn)
+}
+
 // OnCUserMessageAchievementEvent registers a callback for EBaseUserMessages_UM_AchievementEvent
 func (c *Callbacks) OnCUserMessageAchievementEvent(fn func(*dota.CUserMessageAchievementEvent) error) {
 	c.onCUserMessageAchievementEvent = append(c.onCUserMessageAchievementEvent, fn)
@@ -834,9 +846,9 @@ func (c *Callbacks) OnCMsgClearEntityDecalsEvent(fn func(*dota.CMsgClearEntityDe
 	c.onCMsgClearEntityDecalsEvent = append(c.onCMsgClearEntityDecalsEvent, fn)
 }
 
-// OnCMsgClearDecalsForSkeletonInstanceEvent registers a callback for EBaseGameEvents_GE_ClearDecalsForSkeletonInstanceEvent
-func (c *Callbacks) OnCMsgClearDecalsForSkeletonInstanceEvent(fn func(*dota.CMsgClearDecalsForSkeletonInstanceEvent) error) {
-	c.onCMsgClearDecalsForSkeletonInstanceEvent = append(c.onCMsgClearDecalsForSkeletonInstanceEvent, fn)
+// OnCMsgClearDecalsForEntityEvent registers a callback for EBaseGameEvents_GE_ClearDecalsForEntityEvent
+func (c *Callbacks) OnCMsgClearDecalsForEntityEvent(fn func(*dota.CMsgClearDecalsForEntityEvent) error) {
+	c.onCMsgClearDecalsForEntityEvent = append(c.onCMsgClearDecalsForEntityEvent, fn)
 }
 
 // OnCMsgSource1LegacyGameEventList registers a callback for EBaseGameEvents_GE_Source1LegacyGameEventList
@@ -1647,6 +1659,36 @@ func (c *Callbacks) OnCDOTAUserMsg_TimerAlert(fn func(*dota.CDOTAUserMsg_TimerAl
 // OnCDOTAUserMsg_MadstoneAlert registers a callback for EDotaUserMessages_DOTA_UM_MadstoneAlert
 func (c *Callbacks) OnCDOTAUserMsg_MadstoneAlert(fn func(*dota.CDOTAUserMsg_MadstoneAlert) error) {
 	c.onCDOTAUserMsg_MadstoneAlert = append(c.onCDOTAUserMsg_MadstoneAlert, fn)
+}
+
+// OnCDOTAUserMsg_CourierLeftFountainAlert registers a callback for EDotaUserMessages_DOTA_UM_CourierLeftFountainAlert
+func (c *Callbacks) OnCDOTAUserMsg_CourierLeftFountainAlert(fn func(*dota.CDOTAUserMsg_CourierLeftFountainAlert) error) {
+	c.onCDOTAUserMsg_CourierLeftFountainAlert = append(c.onCDOTAUserMsg_CourierLeftFountainAlert, fn)
+}
+
+// OnCDOTAUserMsg_MonsterHunter_InvestigationsAvailable registers a callback for EDotaUserMessages_DOTA_UM_MonsterHunter_InvestigationsAvailable
+func (c *Callbacks) OnCDOTAUserMsg_MonsterHunter_InvestigationsAvailable(fn func(*dota.CDOTAUserMsg_MonsterHunter_InvestigationsAvailable) error) {
+	c.onCDOTAUserMsg_MonsterHunter_InvestigationsAvailable = append(c.onCDOTAUserMsg_MonsterHunter_InvestigationsAvailable, fn)
+}
+
+// OnCDOTAUserMsg_MonsterHunter_InvestigationGameState registers a callback for EDotaUserMessages_DOTA_UM_MonsterHunter_InvestigationGameState
+func (c *Callbacks) OnCDOTAUserMsg_MonsterHunter_InvestigationGameState(fn func(*dota.CDOTAUserMsg_MonsterHunter_InvestigationGameState) error) {
+	c.onCDOTAUserMsg_MonsterHunter_InvestigationGameState = append(c.onCDOTAUserMsg_MonsterHunter_InvestigationGameState, fn)
+}
+
+// OnCDOTAUserMsg_MonsterHunter_HuntAlert registers a callback for EDotaUserMessages_DOTA_UM_MonsterHunter_HuntAlert
+func (c *Callbacks) OnCDOTAUserMsg_MonsterHunter_HuntAlert(fn func(*dota.CDOTAUserMsg_MonsterHunter_HuntAlert) error) {
+	c.onCDOTAUserMsg_MonsterHunter_HuntAlert = append(c.onCDOTAUserMsg_MonsterHunter_HuntAlert, fn)
+}
+
+// OnCDOTAUserMsg_TormentorTimer registers a callback for EDotaUserMessages_DOTA_UM_TormentorTimer
+func (c *Callbacks) OnCDOTAUserMsg_TormentorTimer(fn func(*dota.CDOTAUserMsg_TormentorTimer) error) {
+	c.onCDOTAUserMsg_TormentorTimer = append(c.onCDOTAUserMsg_TormentorTimer, fn)
+}
+
+// OnCDOTAUserMsg_KillEffect registers a callback for EDotaUserMessages_DOTA_UM_KillEffect
+func (c *Callbacks) OnCDOTAUserMsg_KillEffect(fn func(*dota.CDOTAUserMsg_KillEffect) error) {
+	c.onCDOTAUserMsg_KillEffect = append(c.onCDOTAUserMsg_KillEffect, fn)
 }
 
 func (c *Callbacks) callByDemoType(t int32, buf []byte) error {
@@ -2802,6 +2844,25 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 
 		return nil
 
+	case 77: // dota.SVC_Messages_svc_NextMsgPredicted
+		if c.onCSVCMsg_NextMsgPredicted == nil {
+			return nil
+		}
+
+		msg := &dota.CSVCMsg_NextMsgPredicted{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCSVCMsg_NextMsgPredicted {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
 	case 101: // dota.EBaseUserMessages_UM_AchievementEvent
 		if c.onCUserMessageAchievementEvent == nil {
 			return nil
@@ -3733,18 +3794,18 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 
 		return nil
 
-	case 204: // dota.EBaseGameEvents_GE_ClearDecalsForSkeletonInstanceEvent
-		if c.onCMsgClearDecalsForSkeletonInstanceEvent == nil {
+	case 204: // dota.EBaseGameEvents_GE_ClearDecalsForEntityEvent
+		if c.onCMsgClearDecalsForEntityEvent == nil {
 			return nil
 		}
 
-		msg := &dota.CMsgClearDecalsForSkeletonInstanceEvent{}
+		msg := &dota.CMsgClearDecalsForEntityEvent{}
 		c.pb.SetBuf(buf)
 		if err := c.pb.Unmarshal(msg); err != nil {
 			return err
 		}
 
-		for _, fn := range c.onCMsgClearDecalsForSkeletonInstanceEvent {
+		for _, fn := range c.onCMsgClearDecalsForEntityEvent {
 			if err := fn(msg); err != nil {
 				return err
 			}
@@ -6823,6 +6884,120 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		for _, fn := range c.onCDOTAUserMsg_MadstoneAlert {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 630: // dota.EDotaUserMessages_DOTA_UM_CourierLeftFountainAlert
+		if c.onCDOTAUserMsg_CourierLeftFountainAlert == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_CourierLeftFountainAlert{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_CourierLeftFountainAlert {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 631: // dota.EDotaUserMessages_DOTA_UM_MonsterHunter_InvestigationsAvailable
+		if c.onCDOTAUserMsg_MonsterHunter_InvestigationsAvailable == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_MonsterHunter_InvestigationsAvailable{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_MonsterHunter_InvestigationsAvailable {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 632: // dota.EDotaUserMessages_DOTA_UM_MonsterHunter_InvestigationGameState
+		if c.onCDOTAUserMsg_MonsterHunter_InvestigationGameState == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_MonsterHunter_InvestigationGameState{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_MonsterHunter_InvestigationGameState {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 633: // dota.EDotaUserMessages_DOTA_UM_MonsterHunter_HuntAlert
+		if c.onCDOTAUserMsg_MonsterHunter_HuntAlert == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_MonsterHunter_HuntAlert{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_MonsterHunter_HuntAlert {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 634: // dota.EDotaUserMessages_DOTA_UM_TormentorTimer
+		if c.onCDOTAUserMsg_TormentorTimer == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_TormentorTimer{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_TormentorTimer {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 635: // dota.EDotaUserMessages_DOTA_UM_KillEffect
+		if c.onCDOTAUserMsg_KillEffect == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_KillEffect{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_KillEffect {
 			if err := fn(msg); err != nil {
 				return err
 			}

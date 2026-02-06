@@ -6,11 +6,9 @@ option go_package = "github.com/dotabuff/manta/dota;dota";
 import "steammessages.proto";
 import "dota_shared_enums.proto";
 import "dota_gcmessages_common.proto";
-import "dota_gcmessages_webapi.proto";
 import "gcsdk_gcmessages.proto";
 import "base_gcmessages.proto";
 import "econ_gcmessages.proto";
-import "dota_gcmessages_client.proto";
 import "valveextensions.proto";
 
 enum CMsgBattleReport_HighlightType {

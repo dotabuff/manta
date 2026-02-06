@@ -53,21 +53,7 @@ func main() {
 
 ## Developing
 
-To run `make update` you will need a few things installed:
-
-```sh
-# Install subversion. On OS X:
-brew install subversion
-
-# Install protoc. On OS X:
-brew install protobuf
-
-# Install gnu-sed. Not needed on Linux. On OS X:
-brew install gnu-sed
-
-# Install protoc-gen-go:
-go install github.com/golang/protobuf/protoc-gen-go@v1.5.2
-```
+You can run `make update` to re-generate protobufs and callbacks based on the [SteamDatabase/Protobufs](https://github.com/SteamDatabase/Protobufs) project.
 
 ## License
 
@@ -87,6 +73,7 @@ Looking to parse Source 1 (original Dota 2) replays? Take a look at [Yasha](http
 
 Manta is maintained and development is sponsored by [Dotabuff](http://www.dotabuff.com), a leading Dota 2 community website with an emphasis on statistics. Manta wouldn't exist without the efforts of a number of people:
 
+- [Jason Coene](https://github.com/jcoene) is the long-time primary maintainer of the project
 - [Michael Fellinger](https://github.com/manveru) built Dotabuff's Source 1 parser [yasha](https://github.com/dotabuff/yasha).
 - [Robin Dietrich](https://github.com/invokr) built the C++ parser [Alice](https://github.com/AliceStats/Alice).
 - [Martin Schrodt](https://github.com/spheenik) built the Java parser [clarity](https://github.com/skadistats/clarity).

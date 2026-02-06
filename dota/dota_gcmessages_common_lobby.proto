@@ -235,6 +235,7 @@ message CSODOTALobby {
 		EVENT_MATCH = 12;
 		NEW_PLAYER_POOL = 14;
 		FEATURED_GAMEMODE = 15;
+		AUTOMATED_BOT_ONLY_MATCH = 16;
 	}
 
 	optional uint64 lobby_id = 1;
@@ -309,6 +310,7 @@ message CSODOTALobby {
 	optional DOTASelectionPriorityChoice series_current_non_priority_team_choice = 101;
 	optional bool series_current_selection_priority_used_coin_toss = 102;
 	optional EEvent current_primary_event = 103;
+	optional EEvent current_primary_event_for_display = 104;
 	repeated int32 emergency_disabled_hero_ids = 105;
 	optional fixed64 custom_game_private_key = 106;
 	optional bool custom_game_penalties = 107;
@@ -332,6 +334,7 @@ message CSODOTALobby {
 message CSODOTAServerLobby {
 	repeated CSODOTAServerLobbyMember all_members = 1;
 	repeated CSODOTALobby.CExtraMsg extra_startup_messages = 2;
+	optional bool broadcast_active = 3;
 }
 
 message CSODOTAStaticLobby {
@@ -344,6 +347,7 @@ message CSODOTAServerStaticLobby {
 	repeated CSODOTAServerStaticLobbyMember all_members = 1;
 	optional float post_patch_strategy_time_buffer = 2;
 	repeated CMsgLobbyEventPoints lobby_event_points = 3;
+	optional string broadcast_url = 4;
 }
 
 message CMsgAdditionalLobbyStartupAccountData {

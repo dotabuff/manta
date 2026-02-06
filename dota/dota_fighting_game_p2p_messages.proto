@@ -54,6 +54,6 @@ message CP2P_FightingGame_GameData {
 	oneof state_data {
 		CMsgFightingGame_GameData_Fighting fight = 2;
 		CMsgFightingGame_GameData_CharacterSelect character_select = 3;
-		CMsgFightingGame_GameData_Loaded loaded = 4;
+		CMsgFightingGame_GameData_Loaded loaded_value = 4;
 	}
 }

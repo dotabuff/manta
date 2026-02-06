@@ -195,65 +195,49 @@ message CPlayer_UpdateSteamAnnouncementLastRead_Response {
 }
 
 service Player {
-	option (service_description) = "A service for accessing Steam player data";
 
-rpc GetMutualFriendsForIncomingInvites (CPlayer_GetMutualFriendsForIncomingInvites_Request) returns (CPlayer_GetMutualFriendsForIncomingInvites_Response) {
-		option (method_description) = "Get me the mutual friends for each of my pending incoming invites (individuals and clans).";
+	rpc GetMutualFriendsForIncomingInvites (CPlayer_GetMutualFriendsForIncomingInvites_Request) returns (CPlayer_GetMutualFriendsForIncomingInvites_Response) {
 	}
 
-rpc GetFriendsGameplayInfo (CPlayer_GetFriendsGameplayInfo_Request) returns (CPlayer_GetFriendsGameplayInfo_Response) {
-		option (method_description) = "Get a list of friends who are playing, have played, own, or want a game";
+	rpc GetFriendsGameplayInfo (CPlayer_GetFriendsGameplayInfo_Request) returns (CPlayer_GetFriendsGameplayInfo_Response) {
 	}
 
-rpc GetGameBadgeLevels (CPlayer_GetGameBadgeLevels_Request) returns (CPlayer_GetGameBadgeLevels_Response) {
-		option (method_description) = "Returns the Steam Level of a user, the Badge level for the game, and if it's foil";
+	rpc GetGameBadgeLevels (CPlayer_GetGameBadgeLevels_Request) returns (CPlayer_GetGameBadgeLevels_Response) {
 	}
 
-rpc ClientGetLastPlayedTimes (CPlayer_GetLastPlayedTimes_Request) returns (CPlayer_GetLastPlayedTimes_Response) {
-		option (method_description) = "Gets the last-played times for the account";
+	rpc ClientGetLastPlayedTimes (CPlayer_GetLastPlayedTimes_Request) returns (CPlayer_GetLastPlayedTimes_Response) {
 	}
 
-rpc AcceptSSA (CPlayer_AcceptSSA_Request) returns (CPlayer_AcceptSSA_Response) {
-		option (method_description) = "User is accepting the SSA";
+	rpc AcceptSSA (CPlayer_AcceptSSA_Request) returns (CPlayer_AcceptSSA_Response) {
 	}
 
-rpc GetNicknameList (CPlayer_GetNicknameList_Request) returns (CPlayer_GetNicknameList_Response) {
-		option (method_description) = "Gets the list of nicknames this user has for other users";
+	rpc GetNicknameList (CPlayer_GetNicknameList_Request) returns (CPlayer_GetNicknameList_Response) {
 	}
 
-rpc GetPerFriendPreferences (CPlayer_GetPerFriendPreferences_Request) returns (CPlayer_GetPerFriendPreferences_Response) {
-		option (method_description) = "Gets the list of per-friend preferences this user has set for other users";
+	rpc GetPerFriendPreferences (CPlayer_GetPerFriendPreferences_Request) returns (CPlayer_GetPerFriendPreferences_Response) {
 	}
 
-rpc SetPerFriendPreferences (CPlayer_SetPerFriendPreferences_Request) returns (CPlayer_SetPerFriendPreferences_Response) {
-		option (method_description) = "Sets the logged in user's per-friend preferences for the given user";
+	rpc SetPerFriendPreferences (CPlayer_SetPerFriendPreferences_Request) returns (CPlayer_SetPerFriendPreferences_Response) {
 	}
 
-rpc AddFriend (CPlayer_AddFriend_Request) returns (CPlayer_AddFriend_Response) {
-		option (method_description) = "Invites another Steam user to be a friend";
+	rpc AddFriend (CPlayer_AddFriend_Request) returns (CPlayer_AddFriend_Response) {
 	}
 
-rpc RemoveFriend (CPlayer_RemoveFriend_Request) returns (CPlayer_RemoveFriend_Response) {
-		option (method_description) = "Removes a friend or ignores a friend suggestion";
+	rpc RemoveFriend (CPlayer_RemoveFriend_Request) returns (CPlayer_RemoveFriend_Response) {
 	}
 
-rpc IgnoreFriend (CPlayer_IgnoreFriend_Request) returns (CPlayer_IgnoreFriend_Response) {
-		option (method_description) = "Blocks or unblocks communication with the user.  Despite name, can be a non-friend.";
+	rpc IgnoreFriend (CPlayer_IgnoreFriend_Request) returns (CPlayer_IgnoreFriend_Response) {
 	}
 
-rpc GetCommunityPreferences (CPlayer_GetCommunityPreferences_Request) returns (CPlayer_GetCommunityPreferences_Response) {
-		option (method_description) = "Returns the player's community preferences";
+	rpc GetCommunityPreferences (CPlayer_GetCommunityPreferences_Request) returns (CPlayer_GetCommunityPreferences_Response) {
 	}
 
-rpc SetCommunityPreferences (CPlayer_SetCommunityPreferences_Request) returns (CPlayer_SetCommunityPreferences_Response) {
-		option (method_description) = "Sets the player's community preferences";
+	rpc SetCommunityPreferences (CPlayer_SetCommunityPreferences_Request) returns (CPlayer_SetCommunityPreferences_Response) {
 	}
 
-rpc GetNewSteamAnnouncementState (CPlayer_GetNewSteamAnnouncementState_Request) returns (CPlayer_GetNewSteamAnnouncementState_Response) {
-		option (method_description) = "Calculates and returns what to display for UI that renders new steam announcement available";
+	rpc GetNewSteamAnnouncementState (CPlayer_GetNewSteamAnnouncementState_Request) returns (CPlayer_GetNewSteamAnnouncementState_Response) {
 	}
 
-rpc UpdateSteamAnnouncementLastRead (CPlayer_UpdateSteamAnnouncementLastRead_Request) returns (CPlayer_UpdateSteamAnnouncementLastRead_Response) {
-		option (method_description) = "Marks latest announcement timestamp read by user";
+	rpc UpdateSteamAnnouncementLastRead (CPlayer_UpdateSteamAnnouncementLastRead_Request) returns (CPlayer_UpdateSteamAnnouncementLastRead_Response) {
 	}
 }

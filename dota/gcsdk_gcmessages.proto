@@ -82,8 +82,6 @@ message CMsgSOSingleObject {
 
 message CMsgSOMultipleObjects {
 	message SingleObject {
-		option (msgpool_soft_limit) = 256;
-		option (msgpool_hard_limit) = 1024;
 
 		optional int32 type_id = 1;
 		optional bytes object_data = 2;
@@ -471,6 +469,7 @@ message CMsgGCToGCMasterBroadcastMessage {
 	optional bool send_to_servers = 3;
 	optional uint32 msg_id = 4;
 	optional bytes msg_data = 5;
+	optional bool trusted_servers_only = 6;
 }
 
 message CMsgGCToGCMasterSubscribeToCache {

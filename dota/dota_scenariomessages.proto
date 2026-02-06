@@ -87,15 +87,28 @@ message CMsgDotaScenario {
 
 	message DamageStatsByType {
 		optional int32 damage_type = 1;
-		optional int32 received_pre_reduction = 2;
-		optional int32 received_post_reduction = 3;
-		optional int32 outgoing_pre_reduction = 4;
-		optional int32 outgoing_post_reduction = 5;
+		optional float received_pre_reduction = 2;
+		optional float received_post_reduction = 3;
+		optional float outgoing_pre_reduction = 4;
+		optional float outgoing_post_reduction = 5;
 	}
 
 	message HeroAbility {
 		optional string name = 1;
 		optional int32 level = 2;
+	}
+
+	message HeroNeutralChoice {
+		optional int32 choice_index = 1;
+		optional string artifact_name = 2;
+		optional string enchantment_name = 3;
+	}
+
+	message HeroNeutralTier {
+		optional uint32 tier = 1;
+		repeated CMsgDotaScenario.HeroNeutralChoice choices = 2;
+		optional int32 selected_artifact = 3;
+		optional int32 selected_enchantment = 4;
 	}
 
 	message Hero {
@@ -141,7 +154,7 @@ message CMsgDotaScenario {
 		optional int32 camps_stacked = 51;
 		optional int32 rune_pickups = 52;
 		optional int32 gold_spent_on_support = 53;
-		optional int32 hero_damage = 54;
+		optional float hero_damage = 54;
 		optional int32 wards_purchased = 55;
 		optional int32 wards_destroyed = 56;
 		optional int32 gold_spent_on_consumables = 58;
@@ -163,6 +176,10 @@ message CMsgDotaScenario {
 		repeated CMsgDotaScenario.DamageStatsByType damage_stats = 151;
 		repeated CMsgDotaScenario.HeroAbility abilities = 152;
 		optional uint32 hero_facet = 153;
+		optional uint32 total_madstone = 154;
+		optional uint32 current_madstone = 155;
+		repeated CMsgDotaScenario.HeroNeutralTier neutral_tiers = 156;
+		optional int32 refresher_charges_used = 157;
 	}
 
 	message Stock {
@@ -199,6 +216,7 @@ message CMsgDotaScenario {
 		optional int32 secondary_charges = 7;
 		optional float lifetime = 8;
 		optional int32 stored_rune_type = 9;
+		optional int32 level = 10;
 	}
 
 	message Modifier {
