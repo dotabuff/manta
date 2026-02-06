@@ -30,6 +30,7 @@ enum DOTA_GameMode {
 	DOTA_GAMEMODE_TURBO = 23;
 	DOTA_GAMEMODE_MUTATION = 24;
 	DOTA_GAMEMODE_COACHES_CHALLENGE = 25;
+	DOTA_GAMEMODE_BOT_CHALLENGE = 26;
 }
 
 enum DOTA_GameState {
@@ -118,6 +119,14 @@ enum EEvent {
 	EVENT_ID_FROSTIVUS_2023 = 48;
 	EVENT_ID_INTERNATIONAL_2024 = 49;
 	EVENT_ID_FROSTIVUS_2024 = 50;
+	EVENT_ID_MONSTER_HUNTER = 51;
+	EVENT_ID_INTERNATIONAL_2025 = 52;
+	EVENT_ID_FALL_2025 = 53;
+	EVENT_ID_WINTER_2025 = 55;
+	EVENT_ID_SPRING_2026 = 56;
+	EVENT_ID_SUMMER_2026 = 57;
+	EVENT_ID_FALL_2026 = 58;
+	EVENT_ID_WINTER_2026 = 59;
 }
 
 enum ERankType {
@@ -179,7 +188,7 @@ enum Fantasy_Scoring {
 	FANTASY_SCORING_FIRST_BLOOD = 10;
 	FANTASY_SCORING_STUNS = 11;
 	FANTASY_SCORING_SMOKES_USED = 12;
-	FANTASY_SCORING_NEUTRAL_TOKENS_FOUND = 13;
+	FANTASY_SCORING_MADSTONE = 13;
 	FANTASY_SCORING_WATCHERS_TAKEN = 14;
 	FANTASY_SCORING_LOTUSES_GAINED = 15;
 	FANTASY_SCORING_TORMENTOR_KILLS = 16;
@@ -429,6 +438,7 @@ enum DOTA_BOT_MODE {
 	DOTA_BOT_MODE_TUTORIAL_BOSS = 24;
 	DOTA_BOT_MODE_MINION = 25;
 	DOTA_BOT_MODE_OUTPOST = 26;
+	DOTA_BOT_MODE_BOT_CHALLENGE_ENDGAME = 27;
 }
 
 enum MatchLanguages {
@@ -506,6 +516,11 @@ enum EBadgeType {
 	k_EBadgeType_TI13_FinalsDay2 = 19;
 	k_EBadgeType_TI13_FinalsDay3 = 20;
 	k_EBadgeType_TI13_Special = 21;
+	k_EBadgeType_TI14_FinalsDay1 = 22;
+	k_EBadgeType_TI14_FinalsDay2 = 23;
+	k_EBadgeType_TI14_FinalsDay3 = 24;
+	k_EBadgeType_TI14_FinalsDay4 = 25;
+	k_EBadgeType_TI14_Special = 26;
 }
 
 enum ELeagueStatus {
@@ -854,4 +869,45 @@ message CMsgPendingEventAward {
 	optional EEventActionScoreMode score_mode = 4;
 	optional uint32 audit_action = 5;
 	optional uint64 audit_data = 6;
+}
+
+message CMsgMonsterHunterMaterialQuantity {
+	message MaterialCountsEntry {
+		optional uint32 key = 1;
+		optional int32 value = 2;
+	}
+
+	repeated CMsgMonsterHunterMaterialQuantity.MaterialCountsEntry material_counts = 1;
+}
+
+message CMsgMonsterHunterInvestigation {
+	optional int32 hero_id = 1;
+	optional int32 persona_id = 2;
+	optional CMsgMonsterHunterMaterialQuantity match_rewards = 3;
+	optional CMsgMonsterHunterMaterialQuantity hunt_rewards = 4;
+	optional bool success_state = 5;
+}
+
+message CMsgMonsterHunterInvestigationGameState {
+	message HuntedBy {
+		optional int32 hero_id = 1;
+		optional int32 persona_id = 2;
+		optional CMsgMonsterHunterMaterialQuantity hunt_rewards = 3;
+		optional bool success_state = 4;
+	}
+
+	optional CMsgMonsterHunterInvestigation selected_investigation = 1;
+	repeated CMsgMonsterHunterInvestigationGameState.HuntedBy hunted_by = 2;
+}
+
+message CMsgMonsterHunterCodexUpdateData {
+	message KillInfo {
+		optional int32 hero_id = 1;
+		optional int32 kill_count = 2;
+	}
+
+	optional int32 player_hero = 1;
+	repeated int32 allies = 2;
+	repeated int32 enemies = 3;
+	repeated CMsgMonsterHunterCodexUpdateData.KillInfo player_kills = 4;
 }

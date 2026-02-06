@@ -33,8 +33,6 @@ enum GCProtoBufMsgSrc {
 }
 
 message CMsgProtoBufHeader {
-	option (msgpool_soft_limit) = 256;
-	option (msgpool_hard_limit) = 1024;
 
 	optional fixed64 client_steam_id = 1;
 	optional int32 client_session_id = 2;
@@ -49,16 +47,12 @@ message CMsgProtoBufHeader {
 }
 
 message CGCSystemMsg_GetAccountDetails {
-	option (msgpool_soft_limit) = 128;
-	option (msgpool_hard_limit) = 512;
 
 	optional fixed64 steamid = 1;
 	optional uint32 appid = 2;
 }
 
 message CGCSystemMsg_GetAccountDetails_Response {
-	option (msgpool_soft_limit) = 128;
-	option (msgpool_hard_limit) = 512;
 
 	optional uint32 eresult_deprecated = 1;
 	optional string account_name = 2;

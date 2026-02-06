@@ -380,6 +380,7 @@ message CMsgDOTAWelcome {
 	optional int32 remaining_playtime = 32;
 	optional bool disable_guild_persona_info = 33;
 	repeated CExtraMsgBlock extra_message_blocks = 34;
+	optional EEvent active_event_for_display = 35;
 }
 
 message CSODOTAGameHeroFavorites {
@@ -453,6 +454,10 @@ message CMsgUpgradeLeagueItemResponse {
 message CMsgGCWatchDownloadedReplay {
 	optional uint64 match_id = 1;
 	optional DOTA_WatchReplayType watch_type = 2;
+}
+
+message CMsgClientToGCWatchingBroadcast {
+	optional uint64 match_id = 1;
 }
 
 message CMsgClientsRejoinChatChannels {
@@ -596,6 +601,7 @@ message CMsgDOTAClaimEventActionData {
 	}
 
 	optional CMsgDOTAClaimEventActionData.GrantItemGiftData grant_item_gift_data = 4;
+	optional uint64 grant_item_choice_item_def = 5;
 }
 
 message CMsgDOTAClaimEventAction {
@@ -604,6 +610,7 @@ message CMsgDOTAClaimEventAction {
 	optional uint32 quantity = 3;
 	optional CMsgDOTAClaimEventActionData data = 4;
 	optional EEventActionScoreMode score_mode = 5;
+	optional bool suppress_rewards = 6;
 }
 
 message CMsgClientToGCClaimEventActionUsingItem {
@@ -611,6 +618,7 @@ message CMsgClientToGCClaimEventActionUsingItem {
 	optional uint32 action_id = 2;
 	optional uint64 item_id = 3;
 	optional uint32 quantity = 4;
+	optional bool suppress_rewards = 5;
 }
 
 message CMsgClientToGCClaimEventActionUsingItemResponse {
@@ -768,11 +776,14 @@ message CMsgGCNotificationsMarkReadRequest {
 }
 
 message CMsgGCPlayerInfoSubmit {
-	optional string name = 1;
+	optional string player_name = 1;
 	optional string country_code = 2;
 	optional uint32 fantasy_role = 3;
 	optional uint32 team_id = 4;
 	optional string sponsor = 5;
+	optional bool accepted_pro_agreement = 6;
+	optional uint32 registration_period = 7;
+	optional string real_name = 8;
 }
 
 message CMsgGCPlayerInfoSubmitResponse {
@@ -1080,8 +1091,16 @@ message CMsgGCGetHeroStatsHistory {
 }
 
 message CMsgGCGetHeroStatsHistoryResponse {
+	enum EResponse {
+		k_eInternalError = 0;
+		k_eSuccess = 1;
+		k_eTooBusy = 2;
+		k_eDisabled = 3;
+	}
+
 	optional int32 hero_id = 1;
 	repeated CMsgDOTASDOHeroStatsHistory records = 2;
+	optional CMsgGCGetHeroStatsHistoryResponse.EResponse result = 3;
 }
 
 message CMsgPlayerConductScorecardRequest {
@@ -2413,6 +2432,13 @@ message CMsgDevResetEventStateResponse {
 	optional EDevEventRequestResult result = 1;
 }
 
+message CMsgDevReloadAllEvents {
+}
+
+message CMsgDevReloadAllEventsResponse {
+	optional EDevEventRequestResult result = 1;
+}
+
 message CMsgConsumeEventSupportGrantItem {
 	optional uint64 item_id = 1;
 }
@@ -3337,4 +3363,105 @@ message CMsgClientToGCUpdateComicBookStats {
 	optional uint32 comic_id = 1;
 	repeated CMsgClientToGCUpdateComicBookStats.SingleStat stats = 2;
 	optional CMsgClientToGCUpdateComicBookStats.LanguageStats language_stats = 3;
+}
+
+message CMsgGCRankedPlayerInfoSubmit {
+	optional string name = 1;
+}
+
+message CMsgGCRankedPlayerInfoSubmitResponse {
+	enum EResult {
+		SUCCESS = 0;
+		ERROR_UNSPECIFIED = 1;
+	}
+
+	optional CMsgGCRankedPlayerInfoSubmitResponse.EResult result = 1;
+}
+
+message CMsgDOTAClaimGatedEvent {
+	optional EEvent event_id = 1;
+}
+
+message CMsgDOTAClaimGatedEventResponse {
+	enum ResultCode {
+		Success = 0;
+		InvalidEvent = 1;
+		EventNotActive = 2;
+		UserIneligible = 3;
+		AlreadyClaimed = 4;
+		ServerError = 5;
+		RateLimit = 6;
+	}
+
+	optional CMsgDOTAClaimGatedEventResponse.ResultCode result = 1;
+}
+
+message CMsgClientToGCGetEventRanking {
+	optional EEvent event_id = 1;
+	optional uint32 account_id = 2;
+}
+
+message CMsgClientToGCGetEventRankingResponse {
+	optional EEvent event_id = 1;
+	optional uint32 account_id = 2;
+	optional float score = 3;
+	optional float percentile = 4;
+	optional uint32 final_rank_bucket = 5;
+}
+
+message CMsgClientToGCGetEventCoupon {
+	optional EEvent event_id = 1;
+	repeated uint32 coupon_ids = 2;
+}
+
+message CMsgClientToGCGetEventCouponResponse {
+	message Coupon {
+		optional uint32 coupon_id = 1;
+		optional string coupon_code = 2;
+	}
+
+	enum ResultCode {
+		Success = 0;
+		InvalidEvent = 1;
+		EventNotActive = 2;
+		UserIneligible = 3;
+		ServerError = 4;
+		Timeout = 5;
+		MultipleCoupons = 6;
+	}
+
+	optional CMsgClientToGCGetEventCouponResponse.ResultCode result = 1;
+	optional EEvent event_id = 2;
+	repeated CMsgClientToGCGetEventCouponResponse.Coupon coupons = 3;
+}
+
+message CMsgClientToGCConvertEventPoints {
+	optional EEvent event_id_points_to_buy = 1;
+	optional EEvent event_id_points_to_spend = 2;
+	optional uint32 num_points_to_buy = 3;
+	optional uint32 num_points_to_spend = 4;
+}
+
+message CMsgClientToGCConvertEventPointsResponse {
+	enum ResultCode {
+		Success = 0;
+		InvalidEvent = 1;
+		EventNotActive = 2;
+		UserIneligible = 3;
+		ServerError = 4;
+		Timeout = 5;
+	}
+
+	optional CMsgClientToGCConvertEventPointsResponse.ResultCode result = 1;
+}
+
+message CMsgClientToGCInviteToDemoMode {
+	optional fixed64 server_id = 1;
+	optional fixed64 invited_player_id = 2;
+}
+
+message CMsgGCToClientInviteToDemoMode {
+	optional fixed64 server_id = 1;
+	optional fixed64 from_player = 2;
+	optional bool party_invite = 3;
 }

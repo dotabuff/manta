@@ -6,6 +6,7 @@ option go_package = "github.com/dotabuff/manta/dota;dota";
 import "steammessages.proto";
 import "gcsdk_gcmessages.proto";
 import "dota_shared_enums.proto";
+import "networkbasetypes.proto";
 
 enum ESpecialPingValue {
 	k_ESpecialPingValue_NoData = 16382;
@@ -630,6 +631,7 @@ message CMsgDOTARealtimeGameStats {
 		optional uint32 cheers_peak = 17;
 		optional uint32 lobby_type = 20;
 		optional uint32 start_timestamp = 21;
+		optional bool is_player_draft = 22;
 	}
 
 	message GraphData {
@@ -736,6 +738,7 @@ message CMsgDOTARealtimeGameStatsTerse {
 		repeated CMsgDOTARealtimeGameStatsTerse.PickBanDetails bans = 12;
 		optional uint32 lobby_type = 13;
 		optional uint32 start_timestamp = 14;
+		optional bool is_player_draft = 15;
 	}
 
 	message GraphData {
@@ -883,6 +886,7 @@ message CMsgDOTASeasonPredictions {
 		repeated ELeaguePhase phases = 18;
 		optional EEvent reward_event = 19;
 		optional uint32 league_node_id = 20;
+		optional string reward_event_action = 21;
 	}
 
 	repeated CMsgDOTASeasonPredictions.Prediction predictions = 1;
@@ -915,6 +919,7 @@ message CMsgLeagueWatchedGames {
 }
 
 message CMsgDOTAMatch {
+
 	message Player {
 		message CustomGameData {
 			optional uint32 dota_team = 1;
@@ -966,6 +971,7 @@ message CMsgDOTAMatch {
 		optional uint32 hero_damage = 24;
 		optional uint32 tower_damage = 25;
 		optional uint32 hero_healing = 26;
+		optional uint32 disable_duration = 85;
 		optional uint32 level = 27;
 		optional uint32 time_last_seen = 28;
 		optional string player_name = 29;
@@ -1125,12 +1131,12 @@ message CMsgDOTAFantasyPlayerStats {
 	optional uint32 first_blood = 20;
 	optional float stuns = 21;
 	optional uint32 smokes = 22;
-	optional uint32 neutral_tokens = 23;
 	optional uint32 watchers = 24;
 	optional uint32 lotuses = 25;
 	optional uint32 tormentors = 26;
 	optional uint32 courier_kills = 27;
 	optional fixed64 title_stats = 28;
+	optional uint32 madstone = 29;
 }
 
 message CMsgDOTAFantasyPlayerMatchStats {
@@ -1255,6 +1261,7 @@ message CMsgDOTAMatchMinimal {
 	optional uint32 radiant_score = 9;
 	optional uint32 dire_score = 10;
 	optional uint32 lobby_type = 11;
+	optional bool is_player_draft = 12;
 }
 
 message CMsgConsumableUsage {
@@ -1526,6 +1533,7 @@ message CMsgGameDataHero {
 		optional string name = 4;
 		optional string icon = 5;
 		optional int32 gradient_id = 6;
+		optional uint32 index = 7;
 	}
 
 	optional int32 id = 1;
@@ -1749,6 +1757,15 @@ message CMsgDOTAClaimEventActionResponse {
 		repeated CMsgDOTAClaimEventActionResponse.OverworldTokenRewardData.TokenQuantity tokens = 1;
 	}
 
+	message MonsterHunterMaterialRewardData {
+		message MaterialQuantity {
+			optional uint32 material_id = 1;
+			optional uint32 material_count = 2;
+		}
+
+		repeated CMsgDOTAClaimEventActionResponse.MonsterHunterMaterialRewardData.MaterialQuantity materials = 1;
+	}
+
 	message GrantedRewardData {
 		optional uint32 grant_index = 1;
 		optional uint32 score_index = 2;
@@ -1818,4 +1835,117 @@ message CDotaMsg_PredictionResult {
 	optional uint64 match_id = 2;
 	optional bool correct = 3;
 	repeated CDotaMsg_PredictionResult.Prediction predictions = 4;
+}
+
+message CDotaMsgStructuredTooltipProperties {
+	message AttributeValueValue {
+		optional float value = 1;
+		optional bool is_active_value = 2;
+	}
+
+	message AttributeValue_Single {
+		optional CDotaMsgStructuredTooltipProperties.AttributeValueValue single_value = 1;
+	}
+
+	message AttributeValue_Variable {
+		repeated CDotaMsgStructuredTooltipProperties.AttributeValueValue values = 1;
+	}
+
+	message AttributeValue_Delta {
+		optional CDotaMsgStructuredTooltipProperties.AttributeValueValue prev = 1;
+		optional CDotaMsgStructuredTooltipProperties.AttributeValueValue next = 2;
+	}
+
+	message AttributeValue {
+		oneof attr_value {
+			CDotaMsgStructuredTooltipProperties.AttributeValue_Single single_value = 1;
+			CDotaMsgStructuredTooltipProperties.AttributeValue_Variable variable_value = 2;
+			CDotaMsgStructuredTooltipProperties.AttributeValue_Delta delta_value = 3;
+		}
+	}
+
+	message FacetDisplayProperties {
+		optional string facet_name_loc_token = 1;
+		optional string facet_desc_loc_token = 2;
+		optional string facet_icon_style_name = 3;
+		optional string facet_color_style_name = 4;
+		optional string facet_gradient_style_name = 5;
+	}
+
+	message Attribute {
+		optional string name_loc_token = 1;
+		optional CDotaMsgStructuredTooltipProperties.EAttributeType type = 2;
+		optional CDotaMsgStructuredTooltipProperties.AttributeValue value = 3;
+		optional CDotaMsgStructuredTooltipProperties.FacetDisplayProperties facet = 4;
+	}
+
+	message AttributeGroupDesc_Basic {
+	}
+
+	message AttributeGroupDesc_Specific {
+		optional string title_loc_token = 1;
+		optional string desc_loc_token = 2;
+	}
+
+	message AttributeGroupDesc_Facet {
+		optional CDotaMsgStructuredTooltipProperties.FacetDisplayProperties facet = 1;
+	}
+
+	message AttributeGroupDescription {
+		oneof attr_group_desc {
+			CDotaMsgStructuredTooltipProperties.AttributeGroupDesc_Basic basic_value = 1;
+			CDotaMsgStructuredTooltipProperties.AttributeGroupDesc_Specific specific_value = 2;
+			CDotaMsgStructuredTooltipProperties.AttributeGroupDesc_Facet facet_value = 3;
+		}
+	}
+
+	message AttributeGroup {
+		optional CDotaMsgStructuredTooltipProperties.AttributeGroupDescription desc = 1;
+		repeated CDotaMsgStructuredTooltipProperties.Attribute attributes = 2;
+	}
+
+	message ContentChunk_AttributeGroup {
+		repeated CDotaMsgStructuredTooltipProperties.AttributeGroup groups = 1;
+	}
+
+	message TooltipContentChunk {
+		oneof content_chunk {
+			CDotaMsgStructuredTooltipProperties.ContentChunk_AttributeGroup attribute_group = 1;
+		}
+	}
+
+	message SummaryDescriptionEmbedValue {
+		optional string name = 1;
+		optional CDotaMsgStructuredTooltipProperties.EAttributeType type = 2;
+		optional CDotaMsgStructuredTooltipProperties.AttributeValue value = 3;
+	}
+
+	enum EAttributeType {
+		kUnknown = 0;
+		kDuration = 1;
+		kManaCost = 2;
+		kHealthCost = 3;
+		kCastRange = 4;
+		kAreaOfEffectRadius = 5;
+		kPhysicalDamage = 6;
+		kMagicalDamage = 7;
+		kPureDamage = 8;
+		kCooldown = 9;
+		kDebuffPercentage = 10;
+		kDebuffValue = 11;
+		kBuffPercentage = 12;
+		kBuffValue = 13;
+	}
+
+	optional string ability_name_loc_token = 1;
+	optional string ability_category_loc_token = 2;
+	optional int32 ability_level = 3;
+	optional int32 current_mana_cost = 4;
+	optional int32 current_health_cost = 5;
+	optional float current_cooldown = 6;
+	optional string summary_description_loc_token = 7;
+	optional string summary_description_level_up_loc_token = 8;
+	repeated CDotaMsgStructuredTooltipProperties.SummaryDescriptionEmbedValue summary_description_embed_values = 9;
+	optional CDotaMsgStructuredTooltipProperties.FacetDisplayProperties summary_description_facet = 10;
+	repeated CDotaMsgStructuredTooltipProperties.TooltipContentChunk chunks = 20;
 }

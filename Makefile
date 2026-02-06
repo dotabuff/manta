@@ -1,8 +1,3 @@
-SED=sed
-ifeq ($(shell uname), Darwin)
-	SED=gsed
-endif
-
 default: build
 
 test:
@@ -30,24 +25,7 @@ memprofile:
 update: update-protobufs generate
 
 update-protobufs:
-	rm -rf dota
-	mkdir -p ./dota/tmp && \
-		curl -L -o - https://github.com/SteamDatabase/GameTracking-Dota2/archive/master.tar.gz | tar -xz --strip-components=1 -C ./dota/tmp && \
-		cp -a ./dota/tmp/Protobufs/*.proto ./dota/ && \
-		rm -rf ./dota/tmp
-	rm -rf dota/gametoolevents.proto dota/dota_messages_mlbot.proto dota/dota_gcmessages_common_bot_script.proto dota/steammessages_base.proto dota/steammessages_clientserver_login.proto dota/tensorflow
-	$(SED) -i 's/\.CMsgFightingGame_GameData/CMsgFightingGame_GameData/g' dota/dota_fighting_game_p2p_messages.proto
-	$(SED) -i 's/^\(\s*\)\(optional\|repeated\|required\|extend\)\s*\./\1\2 /' dota/*.proto
-	$(SED) -i 's!^\s*rpc\s*\(\S*\)\s*(\.\([^)]*\))\s*returns\s*(\.\([^)]*\))\s*{!rpc \1 (\2) returns (\3) {!' dota/*.proto
-	$(SED) -i '1isyntax = "proto2";\n\npackage dota;\noption go_package = "github.com/dotabuff/manta/dota;dota";\n' dota/*.proto
-	$(SED) -i '/^import "google\/protobuf\/valve_extensions\.proto"/d' dota/*.proto
-	$(SED) -i '/^option (/d' dota/*.proto
-	$(SED) -i 's/\s\[.*\]//g' dota/*.proto
-	$(SED) -i 's/\.CMsgSteamLearn/CMsgSteamLearn/g' dota/*.proto
-	$(SED) -i 's/\.CMsgShowcaseItem/CMsgShowcaseItem/g' dota/*.proto
-	$(SED) -i 's/\.CMsgShowcaseBackground/CMsgShowcaseBackground/g' dota/*.proto
-	$(SED) -i 's/\.CMsgSurvivorsUserData/CMsgSurvivorsUserData/g' dota/*.proto
-	protoc -I dota --go_out=paths=source_relative:dota  dota/*.proto
+	go run gen/updateprotos/main.go
 
 generate:
 	go run gen/callbacks.go

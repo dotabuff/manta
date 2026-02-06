@@ -11,7 +11,6 @@ enum CLC_Messages {
 	clc_VoiceData = 22;
 	clc_BaselineAck = 23;
 	clc_RespondCvarValue = 25;
-	clc_FileCRCCheck = 26;
 	clc_LoadingProgress = 27;
 	clc_SplitPlayerConnect = 28;
 	clc_SplitPlayerDisconnect = 30;
@@ -54,6 +53,7 @@ enum SVC_Messages {
 	svc_Broadcast_Command = 74;
 	svc_HltvFixupOperatorStatus = 75;
 	svc_UserCmds = 76;
+	svc_NextMsgPredicted = 77;
 }
 
 enum VoiceDataFormat_t {
@@ -163,14 +163,6 @@ message CCLCMsg_RespondCvarValue {
 	optional string value = 4;
 }
 
-message CCLCMsg_FileCRCCheck {
-	optional int32 code_path = 1;
-	optional string path = 2;
-	optional int32 code_filename = 3;
-	optional string filename = 4;
-	optional fixed32 crc = 5;
-}
-
 message CCLCMsg_LoadingProgress {
 	optional int32 progress = 1;
 }
@@ -193,6 +185,7 @@ message CCLCMsg_RequestPause {
 }
 
 message CCLCMsg_CmdKeyValues {
+
 	optional bytes data = 1;
 }
 
@@ -213,6 +206,8 @@ message CMsgSource2SystemSpecs {
 	optional uint32 gpu_driver_version_low = 45;
 	optional uint32 gpu_dx_support_level = 46;
 	optional uint32 gpu_texture_memory_size_mb = 47;
+	optional uint32 backbuffer_width = 51;
+	optional uint32 backbuffer_height = 52;
 }
 
 message CMsgSource2VProfLiteReportItem {
@@ -252,6 +247,12 @@ message CMsgSource2NetworkFlowQuality {
 	optional uint32 enginemsgs_total = 20;
 	optional uint32 enginemsgs_sec_p95 = 21;
 	optional uint32 enginemsgs_sec_p99 = 22;
+	optional uint32 netframes_total = 30;
+	optional uint32 netframes_dropped = 31;
+	optional uint32 netframes_outoforder = 32;
+	optional uint32 netframes_size_exceeds_mtu = 34;
+	optional uint32 netframes_size_p95 = 35;
+	optional uint32 netframes_size_p99 = 36;
 	optional uint32 ticks_total = 40;
 	optional uint32 ticks_good = 41;
 	optional uint32 ticks_good_almost_late = 42;
@@ -272,11 +273,38 @@ message CMsgSource2NetworkFlowQuality {
 	optional sint32 recvmargin_p50 = 64;
 	optional sint32 recvmargin_p75 = 65;
 	optional sint32 recvmargin_p95 = 66;
+	optional uint32 netframe_jitter_p50 = 70;
+	optional uint32 netframe_jitter_p99 = 71;
+	optional uint32 interval_peakjitter_p50 = 72;
+	optional uint32 interval_peakjitter_p95 = 73;
+	optional uint32 packet_misdelivery_rate_p50_x4 = 74;
+	optional uint32 packet_misdelivery_rate_p95_x4 = 75;
+	optional uint32 net_ping_p5 = 80;
+	optional uint32 net_ping_p50 = 81;
+	optional uint32 net_ping_p95 = 82;
+}
+
+message CMsgSource2PerfIntervalSample {
+	message Tag {
+		optional string tag = 1;
+		optional uint32 max_value = 2;
+	}
+
+	optional float frame_time_max_ms = 1;
+	optional float frame_time_avg_ms = 2;
+	optional float frame_time_min_ms = 3;
+	optional int32 frame_count = 4;
+	optional float frame_time_total_ms = 5;
+	repeated CMsgSource2PerfIntervalSample.Tag tags = 6;
 }
 
 message CCLCMsg_Diagnostic {
+
 	optional CMsgSource2SystemSpecs system_specs = 1;
 	optional CMsgSource2VProfLiteReport vprof_report = 2;
+	optional CMsgSource2NetworkFlowQuality downstream_flow = 3;
+	optional CMsgSource2NetworkFlowQuality upstream_flow = 4;
+	repeated CMsgSource2PerfIntervalSample perf_samples = 5;
 }
 
 message CSource2Metrics_MatchPerfSummary_Notification {
@@ -284,18 +312,23 @@ message CSource2Metrics_MatchPerfSummary_Notification {
 		optional CMsgSource2SystemSpecs system_specs = 1;
 		optional CMsgSource2VProfLiteReport profile = 2;
 		optional uint32 build_id = 3;
+		optional CMsgSource2NetworkFlowQuality downstream_flow = 4;
+		optional CMsgSource2NetworkFlowQuality upstream_flow = 5;
 		optional fixed64 steamid = 10;
+		repeated CMsgSource2PerfIntervalSample perf_samples = 11;
 	}
 
 	optional uint32 appid = 1;
 	optional string game_mode = 2;
 	optional uint32 server_build_id = 3;
+	optional fixed32 server_popid = 4;
 	optional CMsgSource2VProfLiteReport server_profile = 10;
 	repeated CSource2Metrics_MatchPerfSummary_Notification.Client clients = 11;
 	optional string map = 20;
 }
 
 message CSVCMsg_ServerInfo {
+
 	optional int32 protocol = 1;
 	optional int32 server_count = 2;
 	optional bool is_dedicated = 3;
@@ -449,6 +482,7 @@ message CSVCMsg_GameEventList {
 }
 
 message CSVCMsg_PacketEntities {
+
 	message alternate_baseline_t {
 		optional int32 entity_index = 1;
 		optional int32 baseline_index = 2;
@@ -456,6 +490,11 @@ message CSVCMsg_PacketEntities {
 
 	message non_transmitted_entities_t {
 		optional int32 header_count = 1;
+		optional bytes data = 2;
+	}
+
+	message outofpvs_entity_updates_t {
+		optional int32 count = 1;
 		optional bytes data = 2;
 	}
 
@@ -479,6 +518,7 @@ message CSVCMsg_PacketEntities {
 	optional CSVCMsg_PacketEntities.non_transmitted_entities_t non_transmitted_entities = 19;
 	optional uint32 cq_starved_command_ticks = 20;
 	optional uint32 cq_discarded_command_ticks = 21;
+	optional CSVCMsg_PacketEntities.outofpvs_entity_updates_t outofpvs_entity_updates = 23;
 	optional bytes dev_padding = 999;
 }
 
@@ -489,6 +529,7 @@ message CSVCMsg_TempEntities {
 }
 
 message CSVCMsg_CreateStringTable {
+
 	optional string name = 1;
 	optional int32 num_entries = 2;
 	optional bool user_data_fixed_size = 3;
@@ -502,6 +543,7 @@ message CSVCMsg_CreateStringTable {
 }
 
 message CSVCMsg_UpdateStringTable {
+
 	optional int32 table_id = 1;
 	optional int32 num_changed_entries = 2;
 	optional bytes string_data = 3;
@@ -600,6 +642,7 @@ message ProtoFlattenedSerializer_t {
 }
 
 message CSVCMsg_FlattenedSerializer {
+
 	repeated ProtoFlattenedSerializer_t serializers = 1;
 	repeated string symbols = 2;
 	repeated ProtoFlattenedSerializerField_t fields = 3;
@@ -725,4 +768,9 @@ message CMsgServerUserCmd {
 
 message CSVCMsg_UserCommands {
 	repeated CMsgServerUserCmd commands = 1;
+}
+
+message CSVCMsg_NextMsgPredicted {
+	optional int32 predicted_by_player_slot = 1;
+	optional uint32 message_type_id = 2;
 }

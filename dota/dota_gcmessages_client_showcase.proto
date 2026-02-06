@@ -201,20 +201,20 @@ message CMsgShowcaseBackground {
 
 message CMsgShowcaseItemData {
 	oneof item {
-		CMsgShowcaseItem_Trophy trophy = 1;
+		CMsgShowcaseItem_Trophy trophy_value = 1;
 		CMsgShowcaseItem_EconItem econ_item_icon = 2;
 		CMsgShowcaseItem_EconItem sticker = 3;
 		CMsgShowcaseItem_Hero hero_model = 4;
 		CMsgShowcaseItem_PlayerMatch player_match = 5;
 		CMsgShowcaseItem_ChatWheel chat_wheel = 6;
 		CMsgShowcaseItem_ChatWheel spray = 7;
-		CMsgShowcaseItem_Emoticon emoticon = 8;
+		CMsgShowcaseItem_Emoticon emoticon_value = 8;
 		CMsgShowcaseItem_EconItem courier = 10;
 		CMsgShowcaseItem_EconItem ward = 11;
 		CMsgShowcaseItem_HeroIcon hero_icon = 12;
 		CMsgShowcaseItem_SpiderGraph spider_graph = 13;
 		CMsgShowcaseItem_UserFeed user_feed = 14;
-		CMsgShowcaseItem_Stat stat = 15;
+		CMsgShowcaseItem_Stat stat_value = 15;
 		CMsgShowcaseItem_EconItem roshan = 16;
 		CMsgShowcaseItem_EconItem creep = 17;
 		CMsgShowcaseItem_EconItem tower = 18;
