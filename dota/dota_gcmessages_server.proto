@@ -1358,6 +1358,15 @@ message CMsgSteamLearnMatchHeroesV3 {
 	repeated uint32 dire_positions = 8;
 }
 
+message CMsgSteamLearnMatchHeroesV4 {
+	repeated int32 radiant_hero_ids = 1;
+	repeated int32 dire_hero_ids = 2;
+	repeated uint32 radiant_lanes = 3;
+	repeated uint32 dire_lanes = 4;
+	repeated uint32 radiant_positions = 5;
+	repeated uint32 dire_positions = 6;
+}
+
 message CMsgSteamLearnMatchHeroV6 {
 	optional int32 hero_id = 1;
 	optional uint32 facet = 2;
@@ -1366,6 +1375,14 @@ message CMsgSteamLearnMatchHeroV6 {
 	optional uint32 position = 5;
 	repeated uint32 allied_hero_and_facet = 6;
 	repeated uint32 enemy_hero_and_facet = 7;
+}
+
+message CMsgSteamLearnMatchHeroV8 {
+	optional int32 hero_id = 1;
+	optional uint32 lane = 2;
+	optional uint32 position = 3;
+	repeated uint32 allied_heroes = 4;
+	repeated uint32 enemy_heroes = 5;
 }
 
 message CMsgSteamLearnPlayerTimedStats {

@@ -7420,6 +7420,90 @@ func (x *CMsgSteamLearnMatchHeroesV3) GetDirePositions() []uint32 {
 	return nil
 }
 
+type CMsgSteamLearnMatchHeroesV4 struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	RadiantHeroIds   []int32                `protobuf:"varint,1,rep,name=radiant_hero_ids,json=radiantHeroIds" json:"radiant_hero_ids,omitempty"`
+	DireHeroIds      []int32                `protobuf:"varint,2,rep,name=dire_hero_ids,json=direHeroIds" json:"dire_hero_ids,omitempty"`
+	RadiantLanes     []uint32               `protobuf:"varint,3,rep,name=radiant_lanes,json=radiantLanes" json:"radiant_lanes,omitempty"`
+	DireLanes        []uint32               `protobuf:"varint,4,rep,name=dire_lanes,json=direLanes" json:"dire_lanes,omitempty"`
+	RadiantPositions []uint32               `protobuf:"varint,5,rep,name=radiant_positions,json=radiantPositions" json:"radiant_positions,omitempty"`
+	DirePositions    []uint32               `protobuf:"varint,6,rep,name=dire_positions,json=direPositions" json:"dire_positions,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *CMsgSteamLearnMatchHeroesV4) Reset() {
+	*x = CMsgSteamLearnMatchHeroesV4{}
+	mi := &file_dota_gcmessages_server_proto_msgTypes[98]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CMsgSteamLearnMatchHeroesV4) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CMsgSteamLearnMatchHeroesV4) ProtoMessage() {}
+
+func (x *CMsgSteamLearnMatchHeroesV4) ProtoReflect() protoreflect.Message {
+	mi := &file_dota_gcmessages_server_proto_msgTypes[98]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CMsgSteamLearnMatchHeroesV4.ProtoReflect.Descriptor instead.
+func (*CMsgSteamLearnMatchHeroesV4) Descriptor() ([]byte, []int) {
+	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{98}
+}
+
+func (x *CMsgSteamLearnMatchHeroesV4) GetRadiantHeroIds() []int32 {
+	if x != nil {
+		return x.RadiantHeroIds
+	}
+	return nil
+}
+
+func (x *CMsgSteamLearnMatchHeroesV4) GetDireHeroIds() []int32 {
+	if x != nil {
+		return x.DireHeroIds
+	}
+	return nil
+}
+
+func (x *CMsgSteamLearnMatchHeroesV4) GetRadiantLanes() []uint32 {
+	if x != nil {
+		return x.RadiantLanes
+	}
+	return nil
+}
+
+func (x *CMsgSteamLearnMatchHeroesV4) GetDireLanes() []uint32 {
+	if x != nil {
+		return x.DireLanes
+	}
+	return nil
+}
+
+func (x *CMsgSteamLearnMatchHeroesV4) GetRadiantPositions() []uint32 {
+	if x != nil {
+		return x.RadiantPositions
+	}
+	return nil
+}
+
+func (x *CMsgSteamLearnMatchHeroesV4) GetDirePositions() []uint32 {
+	if x != nil {
+		return x.DirePositions
+	}
+	return nil
+}
+
 type CMsgSteamLearnMatchHeroV6 struct {
 	state              protoimpl.MessageState `protogen:"open.v1"`
 	HeroId             *int32                 `protobuf:"varint,1,opt,name=hero_id,json=heroId" json:"hero_id,omitempty"`
@@ -7435,7 +7519,7 @@ type CMsgSteamLearnMatchHeroV6 struct {
 
 func (x *CMsgSteamLearnMatchHeroV6) Reset() {
 	*x = CMsgSteamLearnMatchHeroV6{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[98]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[99]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7447,7 +7531,7 @@ func (x *CMsgSteamLearnMatchHeroV6) String() string {
 func (*CMsgSteamLearnMatchHeroV6) ProtoMessage() {}
 
 func (x *CMsgSteamLearnMatchHeroV6) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[98]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[99]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7460,7 +7544,7 @@ func (x *CMsgSteamLearnMatchHeroV6) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CMsgSteamLearnMatchHeroV6.ProtoReflect.Descriptor instead.
 func (*CMsgSteamLearnMatchHeroV6) Descriptor() ([]byte, []int) {
-	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{98}
+	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{99}
 }
 
 func (x *CMsgSteamLearnMatchHeroV6) GetHeroId() int32 {
@@ -7512,6 +7596,82 @@ func (x *CMsgSteamLearnMatchHeroV6) GetEnemyHeroAndFacet() []uint32 {
 	return nil
 }
 
+type CMsgSteamLearnMatchHeroV8 struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	HeroId        *int32                 `protobuf:"varint,1,opt,name=hero_id,json=heroId" json:"hero_id,omitempty"`
+	Lane          *uint32                `protobuf:"varint,2,opt,name=lane" json:"lane,omitempty"`
+	Position      *uint32                `protobuf:"varint,3,opt,name=position" json:"position,omitempty"`
+	AlliedHeroes  []uint32               `protobuf:"varint,4,rep,name=allied_heroes,json=alliedHeroes" json:"allied_heroes,omitempty"`
+	EnemyHeroes   []uint32               `protobuf:"varint,5,rep,name=enemy_heroes,json=enemyHeroes" json:"enemy_heroes,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CMsgSteamLearnMatchHeroV8) Reset() {
+	*x = CMsgSteamLearnMatchHeroV8{}
+	mi := &file_dota_gcmessages_server_proto_msgTypes[100]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CMsgSteamLearnMatchHeroV8) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CMsgSteamLearnMatchHeroV8) ProtoMessage() {}
+
+func (x *CMsgSteamLearnMatchHeroV8) ProtoReflect() protoreflect.Message {
+	mi := &file_dota_gcmessages_server_proto_msgTypes[100]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CMsgSteamLearnMatchHeroV8.ProtoReflect.Descriptor instead.
+func (*CMsgSteamLearnMatchHeroV8) Descriptor() ([]byte, []int) {
+	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{100}
+}
+
+func (x *CMsgSteamLearnMatchHeroV8) GetHeroId() int32 {
+	if x != nil && x.HeroId != nil {
+		return *x.HeroId
+	}
+	return 0
+}
+
+func (x *CMsgSteamLearnMatchHeroV8) GetLane() uint32 {
+	if x != nil && x.Lane != nil {
+		return *x.Lane
+	}
+	return 0
+}
+
+func (x *CMsgSteamLearnMatchHeroV8) GetPosition() uint32 {
+	if x != nil && x.Position != nil {
+		return *x.Position
+	}
+	return 0
+}
+
+func (x *CMsgSteamLearnMatchHeroV8) GetAlliedHeroes() []uint32 {
+	if x != nil {
+		return x.AlliedHeroes
+	}
+	return nil
+}
+
+func (x *CMsgSteamLearnMatchHeroV8) GetEnemyHeroes() []uint32 {
+	if x != nil {
+		return x.EnemyHeroes
+	}
+	return nil
+}
+
 type CMsgSteamLearnPlayerTimedStats struct {
 	state         protoimpl.MessageState                       `protogen:"open.v1"`
 	StatBuckets   []*CMsgSteamLearnPlayerTimedStats_StatBucket `protobuf:"bytes,1,rep,name=stat_buckets,json=statBuckets" json:"stat_buckets,omitempty"`
@@ -7521,7 +7681,7 @@ type CMsgSteamLearnPlayerTimedStats struct {
 
 func (x *CMsgSteamLearnPlayerTimedStats) Reset() {
 	*x = CMsgSteamLearnPlayerTimedStats{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[99]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[101]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7533,7 +7693,7 @@ func (x *CMsgSteamLearnPlayerTimedStats) String() string {
 func (*CMsgSteamLearnPlayerTimedStats) ProtoMessage() {}
 
 func (x *CMsgSteamLearnPlayerTimedStats) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[99]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[101]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7546,7 +7706,7 @@ func (x *CMsgSteamLearnPlayerTimedStats) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CMsgSteamLearnPlayerTimedStats.ProtoReflect.Descriptor instead.
 func (*CMsgSteamLearnPlayerTimedStats) Descriptor() ([]byte, []int) {
-	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{99}
+	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{101}
 }
 
 func (x *CMsgSteamLearnPlayerTimedStats) GetStatBuckets() []*CMsgSteamLearnPlayerTimedStats_StatBucket {
@@ -7567,7 +7727,7 @@ type CMsgSteamLearnMatchStateV5 struct {
 
 func (x *CMsgSteamLearnMatchStateV5) Reset() {
 	*x = CMsgSteamLearnMatchStateV5{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[100]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[102]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7579,7 +7739,7 @@ func (x *CMsgSteamLearnMatchStateV5) String() string {
 func (*CMsgSteamLearnMatchStateV5) ProtoMessage() {}
 
 func (x *CMsgSteamLearnMatchStateV5) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[100]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[102]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7592,7 +7752,7 @@ func (x *CMsgSteamLearnMatchStateV5) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CMsgSteamLearnMatchStateV5.ProtoReflect.Descriptor instead.
 func (*CMsgSteamLearnMatchStateV5) Descriptor() ([]byte, []int) {
-	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{100}
+	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{102}
 }
 
 func (x *CMsgSteamLearnMatchStateV5) GetGameTime() float32 {
@@ -7626,7 +7786,7 @@ type CMsgSteamLearnItemPurchaseV7 struct {
 
 func (x *CMsgSteamLearnItemPurchaseV7) Reset() {
 	*x = CMsgSteamLearnItemPurchaseV7{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[101]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[103]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7638,7 +7798,7 @@ func (x *CMsgSteamLearnItemPurchaseV7) String() string {
 func (*CMsgSteamLearnItemPurchaseV7) ProtoMessage() {}
 
 func (x *CMsgSteamLearnItemPurchaseV7) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[101]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[103]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7651,7 +7811,7 @@ func (x *CMsgSteamLearnItemPurchaseV7) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CMsgSteamLearnItemPurchaseV7.ProtoReflect.Descriptor instead.
 func (*CMsgSteamLearnItemPurchaseV7) Descriptor() ([]byte, []int) {
-	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{101}
+	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{103}
 }
 
 func (x *CMsgSteamLearnItemPurchaseV7) GetItemId() int32 {
@@ -7679,7 +7839,7 @@ type CMsgSteamLearnPreGameItemPurchases struct {
 
 func (x *CMsgSteamLearnPreGameItemPurchases) Reset() {
 	*x = CMsgSteamLearnPreGameItemPurchases{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[102]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[104]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7691,7 +7851,7 @@ func (x *CMsgSteamLearnPreGameItemPurchases) String() string {
 func (*CMsgSteamLearnPreGameItemPurchases) ProtoMessage() {}
 
 func (x *CMsgSteamLearnPreGameItemPurchases) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[102]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[104]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7704,7 +7864,7 @@ func (x *CMsgSteamLearnPreGameItemPurchases) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use CMsgSteamLearnPreGameItemPurchases.ProtoReflect.Descriptor instead.
 func (*CMsgSteamLearnPreGameItemPurchases) Descriptor() ([]byte, []int) {
-	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{102}
+	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{104}
 }
 
 func (x *CMsgSteamLearnPreGameItemPurchases) GetItemIds() []int32 {
@@ -7738,7 +7898,7 @@ type CMsgSteamLearnPreGameItemPurchase struct {
 
 func (x *CMsgSteamLearnPreGameItemPurchase) Reset() {
 	*x = CMsgSteamLearnPreGameItemPurchase{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[103]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[105]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7750,7 +7910,7 @@ func (x *CMsgSteamLearnPreGameItemPurchase) String() string {
 func (*CMsgSteamLearnPreGameItemPurchase) ProtoMessage() {}
 
 func (x *CMsgSteamLearnPreGameItemPurchase) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[103]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[105]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7763,7 +7923,7 @@ func (x *CMsgSteamLearnPreGameItemPurchase) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use CMsgSteamLearnPreGameItemPurchase.ProtoReflect.Descriptor instead.
 func (*CMsgSteamLearnPreGameItemPurchase) Descriptor() ([]byte, []int) {
-	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{103}
+	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{105}
 }
 
 func (x *CMsgSteamLearnPreGameItemPurchase) GetPurchaseHistory() []int32 {
@@ -7793,7 +7953,7 @@ type CMsgSteamLearnNeutralItemPurchaseV4 struct {
 
 func (x *CMsgSteamLearnNeutralItemPurchaseV4) Reset() {
 	*x = CMsgSteamLearnNeutralItemPurchaseV4{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[104]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[106]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7805,7 +7965,7 @@ func (x *CMsgSteamLearnNeutralItemPurchaseV4) String() string {
 func (*CMsgSteamLearnNeutralItemPurchaseV4) ProtoMessage() {}
 
 func (x *CMsgSteamLearnNeutralItemPurchaseV4) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[104]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[106]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7818,7 +7978,7 @@ func (x *CMsgSteamLearnNeutralItemPurchaseV4) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use CMsgSteamLearnNeutralItemPurchaseV4.ProtoReflect.Descriptor instead.
 func (*CMsgSteamLearnNeutralItemPurchaseV4) Descriptor() ([]byte, []int) {
-	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{104}
+	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{106}
 }
 
 func (x *CMsgSteamLearnNeutralItemPurchaseV4) GetTier() uint32 {
@@ -7868,7 +8028,7 @@ type CMsgSteamLearnAbilitySkill struct {
 
 func (x *CMsgSteamLearnAbilitySkill) Reset() {
 	*x = CMsgSteamLearnAbilitySkill{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[105]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[107]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7880,7 +8040,7 @@ func (x *CMsgSteamLearnAbilitySkill) String() string {
 func (*CMsgSteamLearnAbilitySkill) ProtoMessage() {}
 
 func (x *CMsgSteamLearnAbilitySkill) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[105]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[107]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7893,7 +8053,7 @@ func (x *CMsgSteamLearnAbilitySkill) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CMsgSteamLearnAbilitySkill.ProtoReflect.Descriptor instead.
 func (*CMsgSteamLearnAbilitySkill) Descriptor() ([]byte, []int) {
-	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{105}
+	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{107}
 }
 
 func (x *CMsgSteamLearnAbilitySkill) GetAbilityId() int32 {
@@ -7935,7 +8095,7 @@ type CMsgSteamLearnWardPlacement struct {
 
 func (x *CMsgSteamLearnWardPlacement) Reset() {
 	*x = CMsgSteamLearnWardPlacement{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[106]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[108]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7947,7 +8107,7 @@ func (x *CMsgSteamLearnWardPlacement) String() string {
 func (*CMsgSteamLearnWardPlacement) ProtoMessage() {}
 
 func (x *CMsgSteamLearnWardPlacement) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[106]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[108]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7960,7 +8120,7 @@ func (x *CMsgSteamLearnWardPlacement) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CMsgSteamLearnWardPlacement.ProtoReflect.Descriptor instead.
 func (*CMsgSteamLearnWardPlacement) Descriptor() ([]byte, []int) {
-	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{106}
+	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{108}
 }
 
 func (x *CMsgSteamLearnWardPlacement) GetWardLoc() *CMsgSteamLearnWardPlacement_Location {
@@ -8004,7 +8164,7 @@ type CMsgSteamLearnPlayerMatchState struct {
 
 func (x *CMsgSteamLearnPlayerMatchState) Reset() {
 	*x = CMsgSteamLearnPlayerMatchState{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[107]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[109]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8016,7 +8176,7 @@ func (x *CMsgSteamLearnPlayerMatchState) String() string {
 func (*CMsgSteamLearnPlayerMatchState) ProtoMessage() {}
 
 func (x *CMsgSteamLearnPlayerMatchState) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[107]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[109]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8029,7 +8189,7 @@ func (x *CMsgSteamLearnPlayerMatchState) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CMsgSteamLearnPlayerMatchState.ProtoReflect.Descriptor instead.
 func (*CMsgSteamLearnPlayerMatchState) Descriptor() ([]byte, []int) {
-	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{107}
+	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{109}
 }
 
 func (x *CMsgSteamLearnPlayerMatchState) GetNetWorth() uint32 {
@@ -8125,7 +8285,7 @@ type CMsgSignOutMuertaMinigame struct {
 
 func (x *CMsgSignOutMuertaMinigame) Reset() {
 	*x = CMsgSignOutMuertaMinigame{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[108]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[110]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8137,7 +8297,7 @@ func (x *CMsgSignOutMuertaMinigame) String() string {
 func (*CMsgSignOutMuertaMinigame) ProtoMessage() {}
 
 func (x *CMsgSignOutMuertaMinigame) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[108]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[110]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8150,7 +8310,7 @@ func (x *CMsgSignOutMuertaMinigame) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CMsgSignOutMuertaMinigame.ProtoReflect.Descriptor instead.
 func (*CMsgSignOutMuertaMinigame) Descriptor() ([]byte, []int) {
-	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{108}
+	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{110}
 }
 
 func (x *CMsgSignOutMuertaMinigame) GetEventGameData() []byte {
@@ -8170,7 +8330,7 @@ type CMsgSignOutMapStats struct {
 
 func (x *CMsgSignOutMapStats) Reset() {
 	*x = CMsgSignOutMapStats{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[109]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[111]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8182,7 +8342,7 @@ func (x *CMsgSignOutMapStats) String() string {
 func (*CMsgSignOutMapStats) ProtoMessage() {}
 
 func (x *CMsgSignOutMapStats) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[109]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[111]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8195,7 +8355,7 @@ func (x *CMsgSignOutMapStats) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CMsgSignOutMapStats.ProtoReflect.Descriptor instead.
 func (*CMsgSignOutMapStats) Descriptor() ([]byte, []int) {
-	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{109}
+	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{111}
 }
 
 func (x *CMsgSignOutMapStats) GetPlayers() []*CMsgSignOutMapStats_Player {
@@ -8223,7 +8383,7 @@ type CMsgServerToGCNewBloomGift struct {
 
 func (x *CMsgServerToGCNewBloomGift) Reset() {
 	*x = CMsgServerToGCNewBloomGift{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[110]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[112]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8235,7 +8395,7 @@ func (x *CMsgServerToGCNewBloomGift) String() string {
 func (*CMsgServerToGCNewBloomGift) ProtoMessage() {}
 
 func (x *CMsgServerToGCNewBloomGift) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[110]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[112]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8248,7 +8408,7 @@ func (x *CMsgServerToGCNewBloomGift) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CMsgServerToGCNewBloomGift.ProtoReflect.Descriptor instead.
 func (*CMsgServerToGCNewBloomGift) Descriptor() ([]byte, []int) {
-	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{110}
+	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{112}
 }
 
 func (x *CMsgServerToGCNewBloomGift) GetDefindex() uint32 {
@@ -8282,7 +8442,7 @@ type CMsgServerToGCNewBloomGiftResponse struct {
 
 func (x *CMsgServerToGCNewBloomGiftResponse) Reset() {
 	*x = CMsgServerToGCNewBloomGiftResponse{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[111]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[113]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8294,7 +8454,7 @@ func (x *CMsgServerToGCNewBloomGiftResponse) String() string {
 func (*CMsgServerToGCNewBloomGiftResponse) ProtoMessage() {}
 
 func (x *CMsgServerToGCNewBloomGiftResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[111]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[113]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8307,7 +8467,7 @@ func (x *CMsgServerToGCNewBloomGiftResponse) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use CMsgServerToGCNewBloomGiftResponse.ProtoReflect.Descriptor instead.
 func (*CMsgServerToGCNewBloomGiftResponse) Descriptor() ([]byte, []int) {
-	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{111}
+	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{113}
 }
 
 func (x *CMsgServerToGCNewBloomGiftResponse) GetResult() ENewBloomGiftingResponse {
@@ -8334,7 +8494,7 @@ type CMsgSignOutOverworld struct {
 
 func (x *CMsgSignOutOverworld) Reset() {
 	*x = CMsgSignOutOverworld{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[112]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[114]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8346,7 +8506,7 @@ func (x *CMsgSignOutOverworld) String() string {
 func (*CMsgSignOutOverworld) ProtoMessage() {}
 
 func (x *CMsgSignOutOverworld) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[112]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[114]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8359,7 +8519,7 @@ func (x *CMsgSignOutOverworld) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CMsgSignOutOverworld.ProtoReflect.Descriptor instead.
 func (*CMsgSignOutOverworld) Descriptor() ([]byte, []int) {
-	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{112}
+	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{114}
 }
 
 func (x *CMsgSignOutOverworld) GetPlayers() []*CMsgSignOutOverworld_Player {
@@ -8386,7 +8546,7 @@ type CMsgSignOutCraftworks struct {
 
 func (x *CMsgSignOutCraftworks) Reset() {
 	*x = CMsgSignOutCraftworks{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[113]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[115]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8398,7 +8558,7 @@ func (x *CMsgSignOutCraftworks) String() string {
 func (*CMsgSignOutCraftworks) ProtoMessage() {}
 
 func (x *CMsgSignOutCraftworks) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[113]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[115]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8411,7 +8571,7 @@ func (x *CMsgSignOutCraftworks) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CMsgSignOutCraftworks.ProtoReflect.Descriptor instead.
 func (*CMsgSignOutCraftworks) Descriptor() ([]byte, []int) {
-	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{113}
+	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{115}
 }
 
 func (x *CMsgSignOutCraftworks) GetPlayers() []*CMsgSignOutCraftworks_Player {
@@ -8438,7 +8598,7 @@ type CMsgSignOutMonsterHunter struct {
 
 func (x *CMsgSignOutMonsterHunter) Reset() {
 	*x = CMsgSignOutMonsterHunter{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[114]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[116]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8450,7 +8610,7 @@ func (x *CMsgSignOutMonsterHunter) String() string {
 func (*CMsgSignOutMonsterHunter) ProtoMessage() {}
 
 func (x *CMsgSignOutMonsterHunter) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[114]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[116]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8463,7 +8623,7 @@ func (x *CMsgSignOutMonsterHunter) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CMsgSignOutMonsterHunter.ProtoReflect.Descriptor instead.
 func (*CMsgSignOutMonsterHunter) Descriptor() ([]byte, []int) {
-	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{114}
+	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{116}
 }
 
 func (x *CMsgSignOutMonsterHunter) GetPlayers() []*CMsgSignOutMonsterHunter_Player {
@@ -8493,7 +8653,7 @@ type CMsgServerToGCWarningLowServerFramerate struct {
 
 func (x *CMsgServerToGCWarningLowServerFramerate) Reset() {
 	*x = CMsgServerToGCWarningLowServerFramerate{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[115]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[117]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8505,7 +8665,7 @@ func (x *CMsgServerToGCWarningLowServerFramerate) String() string {
 func (*CMsgServerToGCWarningLowServerFramerate) ProtoMessage() {}
 
 func (x *CMsgServerToGCWarningLowServerFramerate) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[115]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[117]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8518,7 +8678,7 @@ func (x *CMsgServerToGCWarningLowServerFramerate) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use CMsgServerToGCWarningLowServerFramerate.ProtoReflect.Descriptor instead.
 func (*CMsgServerToGCWarningLowServerFramerate) Descriptor() ([]byte, []int) {
-	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{115}
+	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{117}
 }
 
 func (x *CMsgServerToGCWarningLowServerFramerate) GetMatchId() uint64 {
@@ -8567,7 +8727,7 @@ type CMsgServerToGCWarningInvalidBotAbilityUsage struct {
 
 func (x *CMsgServerToGCWarningInvalidBotAbilityUsage) Reset() {
 	*x = CMsgServerToGCWarningInvalidBotAbilityUsage{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[116]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[118]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8579,7 +8739,7 @@ func (x *CMsgServerToGCWarningInvalidBotAbilityUsage) String() string {
 func (*CMsgServerToGCWarningInvalidBotAbilityUsage) ProtoMessage() {}
 
 func (x *CMsgServerToGCWarningInvalidBotAbilityUsage) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[116]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[118]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8592,7 +8752,7 @@ func (x *CMsgServerToGCWarningInvalidBotAbilityUsage) ProtoReflect() protoreflec
 
 // Deprecated: Use CMsgServerToGCWarningInvalidBotAbilityUsage.ProtoReflect.Descriptor instead.
 func (*CMsgServerToGCWarningInvalidBotAbilityUsage) Descriptor() ([]byte, []int) {
-	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{116}
+	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{118}
 }
 
 func (x *CMsgServerToGCWarningInvalidBotAbilityUsage) GetDescription() string {
@@ -8628,7 +8788,7 @@ type CMsgPoorNetworkConditions_Player struct {
 
 func (x *CMsgPoorNetworkConditions_Player) Reset() {
 	*x = CMsgPoorNetworkConditions_Player{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[117]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[119]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8640,7 +8800,7 @@ func (x *CMsgPoorNetworkConditions_Player) String() string {
 func (*CMsgPoorNetworkConditions_Player) ProtoMessage() {}
 
 func (x *CMsgPoorNetworkConditions_Player) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[117]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[119]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8696,7 +8856,7 @@ type CMsgConnectedPlayers_Player struct {
 
 func (x *CMsgConnectedPlayers_Player) Reset() {
 	*x = CMsgConnectedPlayers_Player{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[118]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[120]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8708,7 +8868,7 @@ func (x *CMsgConnectedPlayers_Player) String() string {
 func (*CMsgConnectedPlayers_Player) ProtoMessage() {}
 
 func (x *CMsgConnectedPlayers_Player) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[118]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[120]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8763,7 +8923,7 @@ type CMsgConnectedPlayers_PlayerDraft struct {
 
 func (x *CMsgConnectedPlayers_PlayerDraft) Reset() {
 	*x = CMsgConnectedPlayers_PlayerDraft{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[119]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[121]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8775,7 +8935,7 @@ func (x *CMsgConnectedPlayers_PlayerDraft) String() string {
 func (*CMsgConnectedPlayers_PlayerDraft) ProtoMessage() {}
 
 func (x *CMsgConnectedPlayers_PlayerDraft) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[119]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[121]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8824,7 +8984,7 @@ type CMsgSignOutGameplayStats_CPlayer struct {
 
 func (x *CMsgSignOutGameplayStats_CPlayer) Reset() {
 	*x = CMsgSignOutGameplayStats_CPlayer{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[120]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[122]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8836,7 +8996,7 @@ func (x *CMsgSignOutGameplayStats_CPlayer) String() string {
 func (*CMsgSignOutGameplayStats_CPlayer) ProtoMessage() {}
 
 func (x *CMsgSignOutGameplayStats_CPlayer) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[120]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[122]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8892,7 +9052,7 @@ type CMsgSignOutGameplayStats_CTeam struct {
 
 func (x *CMsgSignOutGameplayStats_CTeam) Reset() {
 	*x = CMsgSignOutGameplayStats_CTeam{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[121]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[123]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8904,7 +9064,7 @@ func (x *CMsgSignOutGameplayStats_CTeam) String() string {
 func (*CMsgSignOutGameplayStats_CTeam) ProtoMessage() {}
 
 func (x *CMsgSignOutGameplayStats_CTeam) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[121]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[123]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8958,7 +9118,7 @@ type CMsgGameMatchSignOut_CTeam struct {
 
 func (x *CMsgGameMatchSignOut_CTeam) Reset() {
 	*x = CMsgGameMatchSignOut_CTeam{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[122]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[124]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8970,7 +9130,7 @@ func (x *CMsgGameMatchSignOut_CTeam) String() string {
 func (*CMsgGameMatchSignOut_CTeam) ProtoMessage() {}
 
 func (x *CMsgGameMatchSignOut_CTeam) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[122]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[124]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9010,7 +9170,7 @@ type CMsgGameMatchSignOut_CAdditionalSignoutMsg struct {
 
 func (x *CMsgGameMatchSignOut_CAdditionalSignoutMsg) Reset() {
 	*x = CMsgGameMatchSignOut_CAdditionalSignoutMsg{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[123]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[125]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9022,7 +9182,7 @@ func (x *CMsgGameMatchSignOut_CAdditionalSignoutMsg) String() string {
 func (*CMsgGameMatchSignOut_CAdditionalSignoutMsg) ProtoMessage() {}
 
 func (x *CMsgGameMatchSignOut_CAdditionalSignoutMsg) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[123]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[125]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9065,7 +9225,7 @@ type CMsgGameMatchSignOut_CSocialFeedMatchEvent struct {
 
 func (x *CMsgGameMatchSignOut_CSocialFeedMatchEvent) Reset() {
 	*x = CMsgGameMatchSignOut_CSocialFeedMatchEvent{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[124]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[126]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9077,7 +9237,7 @@ func (x *CMsgGameMatchSignOut_CSocialFeedMatchEvent) String() string {
 func (*CMsgGameMatchSignOut_CSocialFeedMatchEvent) ProtoMessage() {}
 
 func (x *CMsgGameMatchSignOut_CSocialFeedMatchEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[124]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[126]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9137,7 +9297,7 @@ type CMsgGameMatchSignOut_CCustomGameData struct {
 
 func (x *CMsgGameMatchSignOut_CCustomGameData) Reset() {
 	*x = CMsgGameMatchSignOut_CCustomGameData{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[125]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[127]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9149,7 +9309,7 @@ func (x *CMsgGameMatchSignOut_CCustomGameData) String() string {
 func (*CMsgGameMatchSignOut_CCustomGameData) ProtoMessage() {}
 
 func (x *CMsgGameMatchSignOut_CCustomGameData) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[125]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[127]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9187,7 +9347,7 @@ type CMsgGameMatchSignOut_EventGameLeaderboardEntry struct {
 
 func (x *CMsgGameMatchSignOut_EventGameLeaderboardEntry) Reset() {
 	*x = CMsgGameMatchSignOut_EventGameLeaderboardEntry{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[126]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[128]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9199,7 +9359,7 @@ func (x *CMsgGameMatchSignOut_EventGameLeaderboardEntry) String() string {
 func (*CMsgGameMatchSignOut_EventGameLeaderboardEntry) ProtoMessage() {}
 
 func (x *CMsgGameMatchSignOut_EventGameLeaderboardEntry) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[126]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[128]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9280,7 +9440,7 @@ type CMsgGameMatchSignOut_WardPlacement struct {
 
 func (x *CMsgGameMatchSignOut_WardPlacement) Reset() {
 	*x = CMsgGameMatchSignOut_WardPlacement{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[127]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[129]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9292,7 +9452,7 @@ func (x *CMsgGameMatchSignOut_WardPlacement) String() string {
 func (*CMsgGameMatchSignOut_WardPlacement) ProtoMessage() {}
 
 func (x *CMsgGameMatchSignOut_WardPlacement) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[127]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[129]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9446,7 +9606,7 @@ type CMsgGameMatchSignOut_CTeam_CPlayer struct {
 
 func (x *CMsgGameMatchSignOut_CTeam_CPlayer) Reset() {
 	*x = CMsgGameMatchSignOut_CTeam_CPlayer{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[128]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[130]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9458,7 +9618,7 @@ func (x *CMsgGameMatchSignOut_CTeam_CPlayer) String() string {
 func (*CMsgGameMatchSignOut_CTeam_CPlayer) ProtoMessage() {}
 
 func (x *CMsgGameMatchSignOut_CTeam_CPlayer) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[128]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[130]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10002,7 +10162,7 @@ type CMsgGameMatchSignOut_CTeam_CPlayer_CCustomGameData struct {
 
 func (x *CMsgGameMatchSignOut_CTeam_CPlayer_CCustomGameData) Reset() {
 	*x = CMsgGameMatchSignOut_CTeam_CPlayer_CCustomGameData{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[129]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[131]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10014,7 +10174,7 @@ func (x *CMsgGameMatchSignOut_CTeam_CPlayer_CCustomGameData) String() string {
 func (*CMsgGameMatchSignOut_CTeam_CPlayer_CCustomGameData) ProtoMessage() {}
 
 func (x *CMsgGameMatchSignOut_CTeam_CPlayer_CCustomGameData) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[129]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[131]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10055,7 +10215,7 @@ type CMsgGameMatchSignOut_CTeam_CPlayer_HeroDamageReceived struct {
 
 func (x *CMsgGameMatchSignOut_CTeam_CPlayer_HeroDamageReceived) Reset() {
 	*x = CMsgGameMatchSignOut_CTeam_CPlayer_HeroDamageReceived{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[130]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[132]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10067,7 +10227,7 @@ func (x *CMsgGameMatchSignOut_CTeam_CPlayer_HeroDamageReceived) String() string 
 func (*CMsgGameMatchSignOut_CTeam_CPlayer_HeroDamageReceived) ProtoMessage() {}
 
 func (x *CMsgGameMatchSignOut_CTeam_CPlayer_HeroDamageReceived) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[130]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[132]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10115,7 +10275,7 @@ type CMsgSignOutTextMuteInfo_TextMuteMessage struct {
 
 func (x *CMsgSignOutTextMuteInfo_TextMuteMessage) Reset() {
 	*x = CMsgSignOutTextMuteInfo_TextMuteMessage{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[131]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[133]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10127,7 +10287,7 @@ func (x *CMsgSignOutTextMuteInfo_TextMuteMessage) String() string {
 func (*CMsgSignOutTextMuteInfo_TextMuteMessage) ProtoMessage() {}
 
 func (x *CMsgSignOutTextMuteInfo_TextMuteMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[131]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[133]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10190,7 +10350,7 @@ type CMsgSignOutCommunicationSummary_PlayerCommunication struct {
 
 func (x *CMsgSignOutCommunicationSummary_PlayerCommunication) Reset() {
 	*x = CMsgSignOutCommunicationSummary_PlayerCommunication{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[132]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[134]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10202,7 +10362,7 @@ func (x *CMsgSignOutCommunicationSummary_PlayerCommunication) String() string {
 func (*CMsgSignOutCommunicationSummary_PlayerCommunication) ProtoMessage() {}
 
 func (x *CMsgSignOutCommunicationSummary_PlayerCommunication) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[132]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[134]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10354,7 +10514,7 @@ type CMsgSignOutCommunicationSummary_PlayerCommunication_PingDetail struct {
 
 func (x *CMsgSignOutCommunicationSummary_PlayerCommunication_PingDetail) Reset() {
 	*x = CMsgSignOutCommunicationSummary_PlayerCommunication_PingDetail{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[133]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[135]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10366,7 +10526,7 @@ func (x *CMsgSignOutCommunicationSummary_PlayerCommunication_PingDetail) String(
 func (*CMsgSignOutCommunicationSummary_PlayerCommunication_PingDetail) ProtoMessage() {}
 
 func (x *CMsgSignOutCommunicationSummary_PlayerCommunication_PingDetail) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[133]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[135]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10417,7 +10577,7 @@ type CMsgGameMatchSignoutResponse_PlayerMetadata struct {
 
 func (x *CMsgGameMatchSignoutResponse_PlayerMetadata) Reset() {
 	*x = CMsgGameMatchSignoutResponse_PlayerMetadata{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[134]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[136]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10429,7 +10589,7 @@ func (x *CMsgGameMatchSignoutResponse_PlayerMetadata) String() string {
 func (*CMsgGameMatchSignoutResponse_PlayerMetadata) ProtoMessage() {}
 
 func (x *CMsgGameMatchSignoutResponse_PlayerMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[134]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[136]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10550,7 +10710,7 @@ type CMsgDOTALiveScoreboardUpdate_Team struct {
 
 func (x *CMsgDOTALiveScoreboardUpdate_Team) Reset() {
 	*x = CMsgDOTALiveScoreboardUpdate_Team{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[135]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[137]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10562,7 +10722,7 @@ func (x *CMsgDOTALiveScoreboardUpdate_Team) String() string {
 func (*CMsgDOTALiveScoreboardUpdate_Team) ProtoMessage() {}
 
 func (x *CMsgDOTALiveScoreboardUpdate_Team) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[135]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[137]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10655,7 +10815,7 @@ type CMsgDOTALiveScoreboardUpdate_Team_Player struct {
 
 func (x *CMsgDOTALiveScoreboardUpdate_Team_Player) Reset() {
 	*x = CMsgDOTALiveScoreboardUpdate_Team_Player{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[136]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[138]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10667,7 +10827,7 @@ func (x *CMsgDOTALiveScoreboardUpdate_Team_Player) String() string {
 func (*CMsgDOTALiveScoreboardUpdate_Team_Player) ProtoMessage() {}
 
 func (x *CMsgDOTALiveScoreboardUpdate_Team_Player) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[136]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[138]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10882,7 +11042,7 @@ type CMsgDOTALiveScoreboardUpdate_Team_Player_HeroAbility struct {
 
 func (x *CMsgDOTALiveScoreboardUpdate_Team_Player_HeroAbility) Reset() {
 	*x = CMsgDOTALiveScoreboardUpdate_Team_Player_HeroAbility{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[137]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[139]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10894,7 +11054,7 @@ func (x *CMsgDOTALiveScoreboardUpdate_Team_Player_HeroAbility) String() string {
 func (*CMsgDOTALiveScoreboardUpdate_Team_Player_HeroAbility) ProtoMessage() {}
 
 func (x *CMsgDOTALiveScoreboardUpdate_Team_Player_HeroAbility) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[137]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[139]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10946,7 +11106,7 @@ type CMsgServerToGCRequestBatchPlayerResourcesResponse_Result struct {
 
 func (x *CMsgServerToGCRequestBatchPlayerResourcesResponse_Result) Reset() {
 	*x = CMsgServerToGCRequestBatchPlayerResourcesResponse_Result{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[138]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[140]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10958,7 +11118,7 @@ func (x *CMsgServerToGCRequestBatchPlayerResourcesResponse_Result) String() stri
 func (*CMsgServerToGCRequestBatchPlayerResourcesResponse_Result) ProtoMessage() {}
 
 func (x *CMsgServerToGCRequestBatchPlayerResourcesResponse_Result) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[138]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[140]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11086,7 +11246,7 @@ type CMsgDOTAAwardEventPoints_AwardPoints struct {
 
 func (x *CMsgDOTAAwardEventPoints_AwardPoints) Reset() {
 	*x = CMsgDOTAAwardEventPoints_AwardPoints{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[139]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[141]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -11098,7 +11258,7 @@ func (x *CMsgDOTAAwardEventPoints_AwardPoints) String() string {
 func (*CMsgDOTAAwardEventPoints_AwardPoints) ProtoMessage() {}
 
 func (x *CMsgDOTAAwardEventPoints_AwardPoints) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[139]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[141]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11170,7 +11330,7 @@ type CMsgServerToGCMatchConnectionStats_Player struct {
 
 func (x *CMsgServerToGCMatchConnectionStats_Player) Reset() {
 	*x = CMsgServerToGCMatchConnectionStats_Player{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[140]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[142]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -11182,7 +11342,7 @@ func (x *CMsgServerToGCMatchConnectionStats_Player) String() string {
 func (*CMsgServerToGCMatchConnectionStats_Player) ProtoMessage() {}
 
 func (x *CMsgServerToGCMatchConnectionStats_Player) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[140]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[142]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11249,7 +11409,7 @@ type CSerializedCombatLog_Dictionary struct {
 
 func (x *CSerializedCombatLog_Dictionary) Reset() {
 	*x = CSerializedCombatLog_Dictionary{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[141]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[143]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -11261,7 +11421,7 @@ func (x *CSerializedCombatLog_Dictionary) String() string {
 func (*CSerializedCombatLog_Dictionary) ProtoMessage() {}
 
 func (x *CSerializedCombatLog_Dictionary) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[141]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[143]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11294,7 +11454,7 @@ type CSerializedCombatLog_Dictionary_DictString struct {
 
 func (x *CSerializedCombatLog_Dictionary_DictString) Reset() {
 	*x = CSerializedCombatLog_Dictionary_DictString{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[142]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[144]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -11306,7 +11466,7 @@ func (x *CSerializedCombatLog_Dictionary_DictString) String() string {
 func (*CSerializedCombatLog_Dictionary_DictString) ProtoMessage() {}
 
 func (x *CSerializedCombatLog_Dictionary_DictString) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[142]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[144]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11346,7 +11506,7 @@ type CMsgServerToGCVictoryPredictions_PredictionItem struct {
 
 func (x *CMsgServerToGCVictoryPredictions_PredictionItem) Reset() {
 	*x = CMsgServerToGCVictoryPredictions_PredictionItem{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[143]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[145]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -11358,7 +11518,7 @@ func (x *CMsgServerToGCVictoryPredictions_PredictionItem) String() string {
 func (*CMsgServerToGCVictoryPredictions_PredictionItem) ProtoMessage() {}
 
 func (x *CMsgServerToGCVictoryPredictions_PredictionItem) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[143]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[145]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11399,7 +11559,7 @@ type CMsgServerToGCVictoryPredictions_Record struct {
 
 func (x *CMsgServerToGCVictoryPredictions_Record) Reset() {
 	*x = CMsgServerToGCVictoryPredictions_Record{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[144]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[146]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -11411,7 +11571,7 @@ func (x *CMsgServerToGCVictoryPredictions_Record) String() string {
 func (*CMsgServerToGCVictoryPredictions_Record) ProtoMessage() {}
 
 func (x *CMsgServerToGCVictoryPredictions_Record) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[144]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[146]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11459,7 +11619,7 @@ type CMsgServerToGCKillSummaries_KillSummary struct {
 
 func (x *CMsgServerToGCKillSummaries_KillSummary) Reset() {
 	*x = CMsgServerToGCKillSummaries_KillSummary{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[145]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[147]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -11471,7 +11631,7 @@ func (x *CMsgServerToGCKillSummaries_KillSummary) String() string {
 func (*CMsgServerToGCKillSummaries_KillSummary) ProtoMessage() {}
 
 func (x *CMsgServerToGCKillSummaries_KillSummary) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[145]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[147]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11521,7 +11681,7 @@ type CMsgSignOutUpdatePlayerChallenge_Challenge struct {
 
 func (x *CMsgSignOutUpdatePlayerChallenge_Challenge) Reset() {
 	*x = CMsgSignOutUpdatePlayerChallenge_Challenge{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[146]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[148]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -11533,7 +11693,7 @@ func (x *CMsgSignOutUpdatePlayerChallenge_Challenge) String() string {
 func (*CMsgSignOutUpdatePlayerChallenge_Challenge) ProtoMessage() {}
 
 func (x *CMsgSignOutUpdatePlayerChallenge_Challenge) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[146]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[148]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11595,7 +11755,7 @@ type CMsgSpendWager_Player struct {
 
 func (x *CMsgSpendWager_Player) Reset() {
 	*x = CMsgSpendWager_Player{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[147]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[149]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -11607,7 +11767,7 @@ func (x *CMsgSpendWager_Player) String() string {
 func (*CMsgSpendWager_Player) ProtoMessage() {}
 
 func (x *CMsgSpendWager_Player) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[147]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[149]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11658,7 +11818,7 @@ type CMsgSignOutXPCoins_Player struct {
 
 func (x *CMsgSignOutXPCoins_Player) Reset() {
 	*x = CMsgSignOutXPCoins_Player{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[148]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[150]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -11670,7 +11830,7 @@ func (x *CMsgSignOutXPCoins_Player) String() string {
 func (*CMsgSignOutXPCoins_Player) ProtoMessage() {}
 
 func (x *CMsgSignOutXPCoins_Player) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[148]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[150]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11739,7 +11899,7 @@ type CMsgSignOutBounties_Bounty struct {
 
 func (x *CMsgSignOutBounties_Bounty) Reset() {
 	*x = CMsgSignOutBounties_Bounty{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[149]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[151]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -11751,7 +11911,7 @@ func (x *CMsgSignOutBounties_Bounty) String() string {
 func (*CMsgSignOutBounties_Bounty) ProtoMessage() {}
 
 func (x *CMsgSignOutBounties_Bounty) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[149]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[151]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11798,7 +11958,7 @@ type CMsgSignOutCommunityGoalProgress_EventGoalIncrement struct {
 
 func (x *CMsgSignOutCommunityGoalProgress_EventGoalIncrement) Reset() {
 	*x = CMsgSignOutCommunityGoalProgress_EventGoalIncrement{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[150]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[152]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -11810,7 +11970,7 @@ func (x *CMsgSignOutCommunityGoalProgress_EventGoalIncrement) String() string {
 func (*CMsgSignOutCommunityGoalProgress_EventGoalIncrement) ProtoMessage() {}
 
 func (x *CMsgSignOutCommunityGoalProgress_EventGoalIncrement) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[150]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[152]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11851,7 +12011,7 @@ type CMsgServerToGCCompendiumInGamePredictionResults_PredictionResult struct {
 
 func (x *CMsgServerToGCCompendiumInGamePredictionResults_PredictionResult) Reset() {
 	*x = CMsgServerToGCCompendiumInGamePredictionResults_PredictionResult{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[151]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[153]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -11863,7 +12023,7 @@ func (x *CMsgServerToGCCompendiumInGamePredictionResults_PredictionResult) Strin
 func (*CMsgServerToGCCompendiumInGamePredictionResults_PredictionResult) ProtoMessage() {}
 
 func (x *CMsgServerToGCCompendiumInGamePredictionResults_PredictionResult) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[151]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[153]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11909,7 +12069,7 @@ type CMsgServerToGCCompendiumChosenInGamePredictions_Prediction struct {
 
 func (x *CMsgServerToGCCompendiumChosenInGamePredictions_Prediction) Reset() {
 	*x = CMsgServerToGCCompendiumChosenInGamePredictions_Prediction{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[152]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[154]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -11921,7 +12081,7 @@ func (x *CMsgServerToGCCompendiumChosenInGamePredictions_Prediction) String() st
 func (*CMsgServerToGCCompendiumChosenInGamePredictions_Prediction) ProtoMessage() {}
 
 func (x *CMsgServerToGCCompendiumChosenInGamePredictions_Prediction) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[152]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[154]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11958,7 +12118,7 @@ type CMsgServerToGCMatchPlayerItemPurchaseHistory_ItemPurchase struct {
 
 func (x *CMsgServerToGCMatchPlayerItemPurchaseHistory_ItemPurchase) Reset() {
 	*x = CMsgServerToGCMatchPlayerItemPurchaseHistory_ItemPurchase{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[153]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[155]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -11970,7 +12130,7 @@ func (x *CMsgServerToGCMatchPlayerItemPurchaseHistory_ItemPurchase) String() str
 func (*CMsgServerToGCMatchPlayerItemPurchaseHistory_ItemPurchase) ProtoMessage() {}
 
 func (x *CMsgServerToGCMatchPlayerItemPurchaseHistory_ItemPurchase) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[153]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[155]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12044,7 +12204,7 @@ type CMsgServerToGCMatchPlayerItemPurchaseHistory_Player struct {
 
 func (x *CMsgServerToGCMatchPlayerItemPurchaseHistory_Player) Reset() {
 	*x = CMsgServerToGCMatchPlayerItemPurchaseHistory_Player{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[154]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[156]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12056,7 +12216,7 @@ func (x *CMsgServerToGCMatchPlayerItemPurchaseHistory_Player) String() string {
 func (*CMsgServerToGCMatchPlayerItemPurchaseHistory_Player) ProtoMessage() {}
 
 func (x *CMsgServerToGCMatchPlayerItemPurchaseHistory_Player) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[154]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[156]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12141,7 +12301,7 @@ type CMsgServerToGCMatchPlayerNeutralItemEquipHistory_ItemEquip struct {
 
 func (x *CMsgServerToGCMatchPlayerNeutralItemEquipHistory_ItemEquip) Reset() {
 	*x = CMsgServerToGCMatchPlayerNeutralItemEquipHistory_ItemEquip{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[155]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[157]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12153,7 +12313,7 @@ func (x *CMsgServerToGCMatchPlayerNeutralItemEquipHistory_ItemEquip) String() st
 func (*CMsgServerToGCMatchPlayerNeutralItemEquipHistory_ItemEquip) ProtoMessage() {}
 
 func (x *CMsgServerToGCMatchPlayerNeutralItemEquipHistory_ItemEquip) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[155]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[157]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12217,7 +12377,7 @@ type CMsgServerToGCMatchPlayerNeutralItemEquipHistory_Player struct {
 
 func (x *CMsgServerToGCMatchPlayerNeutralItemEquipHistory_Player) Reset() {
 	*x = CMsgServerToGCMatchPlayerNeutralItemEquipHistory_Player{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[156]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[158]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12229,7 +12389,7 @@ func (x *CMsgServerToGCMatchPlayerNeutralItemEquipHistory_Player) String() strin
 func (*CMsgServerToGCMatchPlayerNeutralItemEquipHistory_Player) ProtoMessage() {}
 
 func (x *CMsgServerToGCMatchPlayerNeutralItemEquipHistory_Player) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[156]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[158]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12297,7 +12457,7 @@ type CMsgServerToGCMatchStateHistory_PlayerState struct {
 
 func (x *CMsgServerToGCMatchStateHistory_PlayerState) Reset() {
 	*x = CMsgServerToGCMatchStateHistory_PlayerState{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[157]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[159]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12309,7 +12469,7 @@ func (x *CMsgServerToGCMatchStateHistory_PlayerState) String() string {
 func (*CMsgServerToGCMatchStateHistory_PlayerState) ProtoMessage() {}
 
 func (x *CMsgServerToGCMatchStateHistory_PlayerState) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[157]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[159]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12406,7 +12566,7 @@ type CMsgServerToGCMatchStateHistory_TeamState struct {
 
 func (x *CMsgServerToGCMatchStateHistory_TeamState) Reset() {
 	*x = CMsgServerToGCMatchStateHistory_TeamState{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[158]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[160]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12418,7 +12578,7 @@ func (x *CMsgServerToGCMatchStateHistory_TeamState) String() string {
 func (*CMsgServerToGCMatchStateHistory_TeamState) ProtoMessage() {}
 
 func (x *CMsgServerToGCMatchStateHistory_TeamState) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[158]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[160]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12515,7 +12675,7 @@ type CMsgServerToGCMatchStateHistory_MatchState struct {
 
 func (x *CMsgServerToGCMatchStateHistory_MatchState) Reset() {
 	*x = CMsgServerToGCMatchStateHistory_MatchState{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[159]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[161]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12527,7 +12687,7 @@ func (x *CMsgServerToGCMatchStateHistory_MatchState) String() string {
 func (*CMsgServerToGCMatchStateHistory_MatchState) ProtoMessage() {}
 
 func (x *CMsgServerToGCMatchStateHistory_MatchState) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[159]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[161]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12582,7 +12742,7 @@ type CMsgServerToGCPlayerChallengeHistory_PlayerChallenge struct {
 
 func (x *CMsgServerToGCPlayerChallengeHistory_PlayerChallenge) Reset() {
 	*x = CMsgServerToGCPlayerChallengeHistory_PlayerChallenge{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[160]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[162]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12594,7 +12754,7 @@ func (x *CMsgServerToGCPlayerChallengeHistory_PlayerChallenge) String() string {
 func (*CMsgServerToGCPlayerChallengeHistory_PlayerChallenge) ProtoMessage() {}
 
 func (x *CMsgServerToGCPlayerChallengeHistory_PlayerChallenge) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[160]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[162]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12690,7 +12850,7 @@ type CMsgServerToGCCavernCrawlIsHeroActiveResponse_MapResults struct {
 
 func (x *CMsgServerToGCCavernCrawlIsHeroActiveResponse_MapResults) Reset() {
 	*x = CMsgServerToGCCavernCrawlIsHeroActiveResponse_MapResults{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[161]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[163]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12702,7 +12862,7 @@ func (x *CMsgServerToGCCavernCrawlIsHeroActiveResponse_MapResults) String() stri
 func (*CMsgServerToGCCavernCrawlIsHeroActiveResponse_MapResults) ProtoMessage() {}
 
 func (x *CMsgServerToGCCavernCrawlIsHeroActiveResponse_MapResults) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[161]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[163]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12746,7 +12906,7 @@ type CMsgNeutralItemStats_NeutralItem struct {
 
 func (x *CMsgNeutralItemStats_NeutralItem) Reset() {
 	*x = CMsgNeutralItemStats_NeutralItem{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[162]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[164]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12758,7 +12918,7 @@ func (x *CMsgNeutralItemStats_NeutralItem) String() string {
 func (*CMsgNeutralItemStats_NeutralItem) ProtoMessage() {}
 
 func (x *CMsgNeutralItemStats_NeutralItem) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[162]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[164]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12827,7 +12987,7 @@ type CMsgGCToServerLobbyHeroBanRates_HeroBanEntry struct {
 
 func (x *CMsgGCToServerLobbyHeroBanRates_HeroBanEntry) Reset() {
 	*x = CMsgGCToServerLobbyHeroBanRates_HeroBanEntry{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[163]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[165]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12839,7 +12999,7 @@ func (x *CMsgGCToServerLobbyHeroBanRates_HeroBanEntry) String() string {
 func (*CMsgGCToServerLobbyHeroBanRates_HeroBanEntry) ProtoMessage() {}
 
 func (x *CMsgGCToServerLobbyHeroBanRates_HeroBanEntry) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[163]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[165]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12887,7 +13047,7 @@ type CMsgSignOutGuildContractProgress_CompletedGuildEventContracts struct {
 
 func (x *CMsgSignOutGuildContractProgress_CompletedGuildEventContracts) Reset() {
 	*x = CMsgSignOutGuildContractProgress_CompletedGuildEventContracts{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[164]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[166]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12899,7 +13059,7 @@ func (x *CMsgSignOutGuildContractProgress_CompletedGuildEventContracts) String()
 func (*CMsgSignOutGuildContractProgress_CompletedGuildEventContracts) ProtoMessage() {}
 
 func (x *CMsgSignOutGuildContractProgress_CompletedGuildEventContracts) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[164]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[166]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12946,7 +13106,7 @@ type CMsgSignOutGuildContractProgress_PlayerContract struct {
 
 func (x *CMsgSignOutGuildContractProgress_PlayerContract) Reset() {
 	*x = CMsgSignOutGuildContractProgress_PlayerContract{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[165]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[167]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12958,7 +13118,7 @@ func (x *CMsgSignOutGuildContractProgress_PlayerContract) String() string {
 func (*CMsgSignOutGuildContractProgress_PlayerContract) ProtoMessage() {}
 
 func (x *CMsgSignOutGuildContractProgress_PlayerContract) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[165]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[167]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13003,7 +13163,7 @@ type CMsgSignOutGuildChallengeProgress_ChallengeProgress struct {
 
 func (x *CMsgSignOutGuildChallengeProgress_ChallengeProgress) Reset() {
 	*x = CMsgSignOutGuildChallengeProgress_ChallengeProgress{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[166]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[168]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13015,7 +13175,7 @@ func (x *CMsgSignOutGuildChallengeProgress_ChallengeProgress) String() string {
 func (*CMsgSignOutGuildChallengeProgress_ChallengeProgress) ProtoMessage() {}
 
 func (x *CMsgSignOutGuildChallengeProgress_ChallengeProgress) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[166]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[168]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13113,7 +13273,7 @@ type CMsgSignOutMVPStats_Player struct {
 
 func (x *CMsgSignOutMVPStats_Player) Reset() {
 	*x = CMsgSignOutMVPStats_Player{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[167]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[169]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13125,7 +13285,7 @@ func (x *CMsgSignOutMVPStats_Player) String() string {
 func (*CMsgSignOutMVPStats_Player) ProtoMessage() {}
 
 func (x *CMsgSignOutMVPStats_Player) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[167]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[169]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13326,7 +13486,7 @@ type CMsgSignOutMVPStats_Player_KillEaterEvent struct {
 
 func (x *CMsgSignOutMVPStats_Player_KillEaterEvent) Reset() {
 	*x = CMsgSignOutMVPStats_Player_KillEaterEvent{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[168]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[170]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13338,7 +13498,7 @@ func (x *CMsgSignOutMVPStats_Player_KillEaterEvent) String() string {
 func (*CMsgSignOutMVPStats_Player_KillEaterEvent) ProtoMessage() {}
 
 func (x *CMsgSignOutMVPStats_Player_KillEaterEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[168]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[170]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13381,7 +13541,7 @@ type CMsgServerToGCGetGuildContractsResponse_ContractDetails struct {
 
 func (x *CMsgServerToGCGetGuildContractsResponse_ContractDetails) Reset() {
 	*x = CMsgServerToGCGetGuildContractsResponse_ContractDetails{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[169]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[171]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13393,7 +13553,7 @@ func (x *CMsgServerToGCGetGuildContractsResponse_ContractDetails) String() strin
 func (*CMsgServerToGCGetGuildContractsResponse_ContractDetails) ProtoMessage() {}
 
 func (x *CMsgServerToGCGetGuildContractsResponse_ContractDetails) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[169]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[171]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13456,7 +13616,7 @@ type CMsgServerToGCGetGuildContractsResponse_Player struct {
 
 func (x *CMsgServerToGCGetGuildContractsResponse_Player) Reset() {
 	*x = CMsgServerToGCGetGuildContractsResponse_Player{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[170]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[172]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13468,7 +13628,7 @@ func (x *CMsgServerToGCGetGuildContractsResponse_Player) String() string {
 func (*CMsgServerToGCGetGuildContractsResponse_Player) ProtoMessage() {}
 
 func (x *CMsgServerToGCGetGuildContractsResponse_Player) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[170]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[172]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13522,7 +13682,7 @@ type CMsgMatchDiretideCandy_CandyDetails struct {
 
 func (x *CMsgMatchDiretideCandy_CandyDetails) Reset() {
 	*x = CMsgMatchDiretideCandy_CandyDetails{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[171]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[173]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13534,7 +13694,7 @@ func (x *CMsgMatchDiretideCandy_CandyDetails) String() string {
 func (*CMsgMatchDiretideCandy_CandyDetails) ProtoMessage() {}
 
 func (x *CMsgMatchDiretideCandy_CandyDetails) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[171]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[173]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13576,7 +13736,7 @@ type CMsgMatchDiretideCandy_PlayerCandy struct {
 
 func (x *CMsgMatchDiretideCandy_PlayerCandy) Reset() {
 	*x = CMsgMatchDiretideCandy_PlayerCandy{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[172]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[174]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13588,7 +13748,7 @@ func (x *CMsgMatchDiretideCandy_PlayerCandy) String() string {
 func (*CMsgMatchDiretideCandy_PlayerCandy) ProtoMessage() {}
 
 func (x *CMsgMatchDiretideCandy_PlayerCandy) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[172]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[174]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13642,7 +13802,7 @@ type CMsgGCToServerCheerData_CheerTypeCount struct {
 
 func (x *CMsgGCToServerCheerData_CheerTypeCount) Reset() {
 	*x = CMsgGCToServerCheerData_CheerTypeCount{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[173]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[175]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13654,7 +13814,7 @@ func (x *CMsgGCToServerCheerData_CheerTypeCount) String() string {
 func (*CMsgGCToServerCheerData_CheerTypeCount) ProtoMessage() {}
 
 func (x *CMsgGCToServerCheerData_CheerTypeCount) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[173]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[175]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13694,7 +13854,7 @@ type CMsgServerToGCGetStickerHeroesResponse_Player struct {
 
 func (x *CMsgServerToGCGetStickerHeroesResponse_Player) Reset() {
 	*x = CMsgServerToGCGetStickerHeroesResponse_Player{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[174]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[176]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13706,7 +13866,7 @@ func (x *CMsgServerToGCGetStickerHeroesResponse_Player) String() string {
 func (*CMsgServerToGCGetStickerHeroesResponse_Player) ProtoMessage() {}
 
 func (x *CMsgServerToGCGetStickerHeroesResponse_Player) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[174]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[176]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13749,7 +13909,7 @@ type CMsgSteamLearnMatchInfoTeam_Player struct {
 
 func (x *CMsgSteamLearnMatchInfoTeam_Player) Reset() {
 	*x = CMsgSteamLearnMatchInfoTeam_Player{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[175]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[177]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13761,7 +13921,7 @@ func (x *CMsgSteamLearnMatchInfoTeam_Player) String() string {
 func (*CMsgSteamLearnMatchInfoTeam_Player) ProtoMessage() {}
 
 func (x *CMsgSteamLearnMatchInfoTeam_Player) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[175]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[177]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13832,7 +13992,7 @@ type CMsgSteamLearnPlayerTimedStats_StatBucket struct {
 
 func (x *CMsgSteamLearnPlayerTimedStats_StatBucket) Reset() {
 	*x = CMsgSteamLearnPlayerTimedStats_StatBucket{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[176]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[178]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13844,7 +14004,7 @@ func (x *CMsgSteamLearnPlayerTimedStats_StatBucket) String() string {
 func (*CMsgSteamLearnPlayerTimedStats_StatBucket) ProtoMessage() {}
 
 func (x *CMsgSteamLearnPlayerTimedStats_StatBucket) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[176]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[178]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13857,7 +14017,7 @@ func (x *CMsgSteamLearnPlayerTimedStats_StatBucket) ProtoReflect() protoreflect.
 
 // Deprecated: Use CMsgSteamLearnPlayerTimedStats_StatBucket.ProtoReflect.Descriptor instead.
 func (*CMsgSteamLearnPlayerTimedStats_StatBucket) Descriptor() ([]byte, []int) {
-	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{99, 0}
+	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{101, 0}
 }
 
 func (x *CMsgSteamLearnPlayerTimedStats_StatBucket) GetGameTime() float32 {
@@ -13962,7 +14122,7 @@ type CMsgSteamLearnMatchStateV5_PlayerState struct {
 
 func (x *CMsgSteamLearnMatchStateV5_PlayerState) Reset() {
 	*x = CMsgSteamLearnMatchStateV5_PlayerState{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[177]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[179]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13974,7 +14134,7 @@ func (x *CMsgSteamLearnMatchStateV5_PlayerState) String() string {
 func (*CMsgSteamLearnMatchStateV5_PlayerState) ProtoMessage() {}
 
 func (x *CMsgSteamLearnMatchStateV5_PlayerState) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[177]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[179]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13987,7 +14147,7 @@ func (x *CMsgSteamLearnMatchStateV5_PlayerState) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use CMsgSteamLearnMatchStateV5_PlayerState.ProtoReflect.Descriptor instead.
 func (*CMsgSteamLearnMatchStateV5_PlayerState) Descriptor() ([]byte, []int) {
-	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{100, 0}
+	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{102, 0}
 }
 
 func (x *CMsgSteamLearnMatchStateV5_PlayerState) GetHeroId() int32 {
@@ -14078,7 +14238,7 @@ type CMsgSteamLearnMatchStateV5_TeamState struct {
 
 func (x *CMsgSteamLearnMatchStateV5_TeamState) Reset() {
 	*x = CMsgSteamLearnMatchStateV5_TeamState{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[178]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[180]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14090,7 +14250,7 @@ func (x *CMsgSteamLearnMatchStateV5_TeamState) String() string {
 func (*CMsgSteamLearnMatchStateV5_TeamState) ProtoMessage() {}
 
 func (x *CMsgSteamLearnMatchStateV5_TeamState) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[178]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[180]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14103,7 +14263,7 @@ func (x *CMsgSteamLearnMatchStateV5_TeamState) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use CMsgSteamLearnMatchStateV5_TeamState.ProtoReflect.Descriptor instead.
 func (*CMsgSteamLearnMatchStateV5_TeamState) Descriptor() ([]byte, []int) {
-	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{100, 1}
+	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{102, 1}
 }
 
 func (x *CMsgSteamLearnMatchStateV5_TeamState) GetTeam() uint32 {
@@ -14186,7 +14346,7 @@ type CMsgSteamLearnWardPlacement_Location struct {
 
 func (x *CMsgSteamLearnWardPlacement_Location) Reset() {
 	*x = CMsgSteamLearnWardPlacement_Location{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[179]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[181]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14198,7 +14358,7 @@ func (x *CMsgSteamLearnWardPlacement_Location) String() string {
 func (*CMsgSteamLearnWardPlacement_Location) ProtoMessage() {}
 
 func (x *CMsgSteamLearnWardPlacement_Location) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[179]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[181]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14211,7 +14371,7 @@ func (x *CMsgSteamLearnWardPlacement_Location) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use CMsgSteamLearnWardPlacement_Location.ProtoReflect.Descriptor instead.
 func (*CMsgSteamLearnWardPlacement_Location) Descriptor() ([]byte, []int) {
-	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{106, 0}
+	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{108, 0}
 }
 
 func (x *CMsgSteamLearnWardPlacement_Location) GetX() float32 {
@@ -14238,7 +14398,7 @@ type CMsgSignOutMapStats_Player struct {
 
 func (x *CMsgSignOutMapStats_Player) Reset() {
 	*x = CMsgSignOutMapStats_Player{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[180]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[182]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14250,7 +14410,7 @@ func (x *CMsgSignOutMapStats_Player) String() string {
 func (*CMsgSignOutMapStats_Player) ProtoMessage() {}
 
 func (x *CMsgSignOutMapStats_Player) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[180]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[182]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14263,7 +14423,7 @@ func (x *CMsgSignOutMapStats_Player) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CMsgSignOutMapStats_Player.ProtoReflect.Descriptor instead.
 func (*CMsgSignOutMapStats_Player) Descriptor() ([]byte, []int) {
-	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{109, 0}
+	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{111, 0}
 }
 
 func (x *CMsgSignOutMapStats_Player) GetAccountId() uint32 {
@@ -14291,7 +14451,7 @@ type CMsgSignOutOverworld_Player struct {
 
 func (x *CMsgSignOutOverworld_Player) Reset() {
 	*x = CMsgSignOutOverworld_Player{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[181]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[183]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14303,7 +14463,7 @@ func (x *CMsgSignOutOverworld_Player) String() string {
 func (*CMsgSignOutOverworld_Player) ProtoMessage() {}
 
 func (x *CMsgSignOutOverworld_Player) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[181]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[183]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14316,7 +14476,7 @@ func (x *CMsgSignOutOverworld_Player) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CMsgSignOutOverworld_Player.ProtoReflect.Descriptor instead.
 func (*CMsgSignOutOverworld_Player) Descriptor() ([]byte, []int) {
-	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{112, 0}
+	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{114, 0}
 }
 
 func (x *CMsgSignOutOverworld_Player) GetAccountId() uint32 {
@@ -14350,7 +14510,7 @@ type CMsgSignOutCraftworks_Player struct {
 
 func (x *CMsgSignOutCraftworks_Player) Reset() {
 	*x = CMsgSignOutCraftworks_Player{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[182]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[184]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14362,7 +14522,7 @@ func (x *CMsgSignOutCraftworks_Player) String() string {
 func (*CMsgSignOutCraftworks_Player) ProtoMessage() {}
 
 func (x *CMsgSignOutCraftworks_Player) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[182]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[184]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14375,7 +14535,7 @@ func (x *CMsgSignOutCraftworks_Player) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CMsgSignOutCraftworks_Player.ProtoReflect.Descriptor instead.
 func (*CMsgSignOutCraftworks_Player) Descriptor() ([]byte, []int) {
-	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{113, 0}
+	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{115, 0}
 }
 
 func (x *CMsgSignOutCraftworks_Player) GetAccountId() uint32 {
@@ -14403,7 +14563,7 @@ type CMsgSignOutMonsterHunter_Player struct {
 
 func (x *CMsgSignOutMonsterHunter_Player) Reset() {
 	*x = CMsgSignOutMonsterHunter_Player{}
-	mi := &file_dota_gcmessages_server_proto_msgTypes[183]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[185]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14415,7 +14575,7 @@ func (x *CMsgSignOutMonsterHunter_Player) String() string {
 func (*CMsgSignOutMonsterHunter_Player) ProtoMessage() {}
 
 func (x *CMsgSignOutMonsterHunter_Player) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_server_proto_msgTypes[183]
+	mi := &file_dota_gcmessages_server_proto_msgTypes[185]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14428,7 +14588,7 @@ func (x *CMsgSignOutMonsterHunter_Player) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CMsgSignOutMonsterHunter_Player.ProtoReflect.Descriptor instead.
 func (*CMsgSignOutMonsterHunter_Player) Descriptor() ([]byte, []int) {
-	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{114, 0}
+	return file_dota_gcmessages_server_proto_rawDescGZIP(), []int{116, 0}
 }
 
 func (x *CMsgSignOutMonsterHunter_Player) GetAccountId() uint32 {
@@ -15629,7 +15789,15 @@ const file_dota_gcmessages_server_proto_rawDesc = "" +
 	"\x13radiant_hero_facets\x18\x05 \x03(\rR\x11radiantHeroFacets\x12(\n" +
 	"\x10dire_hero_facets\x18\x06 \x03(\rR\x0edireHeroFacets\x12+\n" +
 	"\x11radiant_positions\x18\a \x03(\rR\x10radiantPositions\x12%\n" +
-	"\x0edire_positions\x18\b \x03(\rR\rdirePositions\"\x84\x02\n" +
+	"\x0edire_positions\x18\b \x03(\rR\rdirePositions\"\x83\x02\n" +
+	"\x1bCMsgSteamLearnMatchHeroesV4\x12(\n" +
+	"\x10radiant_hero_ids\x18\x01 \x03(\x05R\x0eradiantHeroIds\x12\"\n" +
+	"\rdire_hero_ids\x18\x02 \x03(\x05R\vdireHeroIds\x12#\n" +
+	"\rradiant_lanes\x18\x03 \x03(\rR\fradiantLanes\x12\x1d\n" +
+	"\n" +
+	"dire_lanes\x18\x04 \x03(\rR\tdireLanes\x12+\n" +
+	"\x11radiant_positions\x18\x05 \x03(\rR\x10radiantPositions\x12%\n" +
+	"\x0edire_positions\x18\x06 \x03(\rR\rdirePositions\"\x84\x02\n" +
 	"\x19CMsgSteamLearnMatchHeroV6\x12\x17\n" +
 	"\ahero_id\x18\x01 \x01(\x05R\x06heroId\x12\x14\n" +
 	"\x05facet\x18\x02 \x01(\rR\x05facet\x12$\n" +
@@ -15637,7 +15805,13 @@ const file_dota_gcmessages_server_proto_rawDesc = "" +
 	"\x04lane\x18\x04 \x01(\rR\x04lane\x12\x1a\n" +
 	"\bposition\x18\x05 \x01(\rR\bposition\x121\n" +
 	"\x15allied_hero_and_facet\x18\x06 \x03(\rR\x12alliedHeroAndFacet\x12/\n" +
-	"\x14enemy_hero_and_facet\x18\a \x03(\rR\x11enemyHeroAndFacet\"\x84\x04\n" +
+	"\x14enemy_hero_and_facet\x18\a \x03(\rR\x11enemyHeroAndFacet\"\xac\x01\n" +
+	"\x19CMsgSteamLearnMatchHeroV8\x12\x17\n" +
+	"\ahero_id\x18\x01 \x01(\x05R\x06heroId\x12\x12\n" +
+	"\x04lane\x18\x02 \x01(\rR\x04lane\x12\x1a\n" +
+	"\bposition\x18\x03 \x01(\rR\bposition\x12#\n" +
+	"\rallied_heroes\x18\x04 \x03(\rR\falliedHeroes\x12!\n" +
+	"\fenemy_heroes\x18\x05 \x03(\rR\venemyHeroes\"\x84\x04\n" +
 	"\x1eCMsgSteamLearnPlayerTimedStats\x12R\n" +
 	"\fstat_buckets\x18\x01 \x03(\v2/.dota.CMsgSteamLearnPlayerTimedStats.StatBucketR\vstatBuckets\x1a\x8d\x03\n" +
 	"\n" +
@@ -15806,7 +15980,7 @@ func file_dota_gcmessages_server_proto_rawDescGZIP() []byte {
 }
 
 var file_dota_gcmessages_server_proto_enumTypes = make([]protoimpl.EnumInfo, 6)
-var file_dota_gcmessages_server_proto_msgTypes = make([]protoimpl.MessageInfo, 184)
+var file_dota_gcmessages_server_proto_msgTypes = make([]protoimpl.MessageInfo, 186)
 var file_dota_gcmessages_server_proto_goTypes = []any{
 	(EPoorNetworkConditionsType)(0),                                          // 0: dota.EPoorNetworkConditionsType
 	(CMsgConnectedPlayers_SendReason)(0),                                     // 1: dota.CMsgConnectedPlayers.SendReason
@@ -15912,276 +16086,278 @@ var file_dota_gcmessages_server_proto_goTypes = []any{
 	(*CMsgSteamLearnMatchInfoPlayer)(nil),                                    // 101: dota.CMsgSteamLearnMatchInfoPlayer
 	(*CMsgSteamLearnMatchInfoTeam)(nil),                                      // 102: dota.CMsgSteamLearnMatchInfoTeam
 	(*CMsgSteamLearnMatchHeroesV3)(nil),                                      // 103: dota.CMsgSteamLearnMatchHeroesV3
-	(*CMsgSteamLearnMatchHeroV6)(nil),                                        // 104: dota.CMsgSteamLearnMatchHeroV6
-	(*CMsgSteamLearnPlayerTimedStats)(nil),                                   // 105: dota.CMsgSteamLearnPlayerTimedStats
-	(*CMsgSteamLearnMatchStateV5)(nil),                                       // 106: dota.CMsgSteamLearnMatchStateV5
-	(*CMsgSteamLearnItemPurchaseV7)(nil),                                     // 107: dota.CMsgSteamLearnItemPurchaseV7
-	(*CMsgSteamLearnPreGameItemPurchases)(nil),                               // 108: dota.CMsgSteamLearnPreGameItemPurchases
-	(*CMsgSteamLearnPreGameItemPurchase)(nil),                                // 109: dota.CMsgSteamLearnPreGameItemPurchase
-	(*CMsgSteamLearnNeutralItemPurchaseV4)(nil),                              // 110: dota.CMsgSteamLearnNeutralItemPurchaseV4
-	(*CMsgSteamLearnAbilitySkill)(nil),                                       // 111: dota.CMsgSteamLearnAbilitySkill
-	(*CMsgSteamLearnWardPlacement)(nil),                                      // 112: dota.CMsgSteamLearnWardPlacement
-	(*CMsgSteamLearnPlayerMatchState)(nil),                                   // 113: dota.CMsgSteamLearnPlayerMatchState
-	(*CMsgSignOutMuertaMinigame)(nil),                                        // 114: dota.CMsgSignOutMuertaMinigame
-	(*CMsgSignOutMapStats)(nil),                                              // 115: dota.CMsgSignOutMapStats
-	(*CMsgServerToGCNewBloomGift)(nil),                                       // 116: dota.CMsgServerToGCNewBloomGift
-	(*CMsgServerToGCNewBloomGiftResponse)(nil),                               // 117: dota.CMsgServerToGCNewBloomGiftResponse
-	(*CMsgSignOutOverworld)(nil),                                             // 118: dota.CMsgSignOutOverworld
-	(*CMsgSignOutCraftworks)(nil),                                            // 119: dota.CMsgSignOutCraftworks
-	(*CMsgSignOutMonsterHunter)(nil),                                         // 120: dota.CMsgSignOutMonsterHunter
-	(*CMsgServerToGCWarningLowServerFramerate)(nil),                          // 121: dota.CMsgServerToGCWarningLowServerFramerate
-	(*CMsgServerToGCWarningInvalidBotAbilityUsage)(nil),                      // 122: dota.CMsgServerToGCWarningInvalidBotAbilityUsage
-	(*CMsgPoorNetworkConditions_Player)(nil),                                 // 123: dota.CMsgPoorNetworkConditions.Player
-	(*CMsgConnectedPlayers_Player)(nil),                                      // 124: dota.CMsgConnectedPlayers.Player
-	(*CMsgConnectedPlayers_PlayerDraft)(nil),                                 // 125: dota.CMsgConnectedPlayers.PlayerDraft
-	(*CMsgSignOutGameplayStats_CPlayer)(nil),                                 // 126: dota.CMsgSignOutGameplayStats.CPlayer
-	(*CMsgSignOutGameplayStats_CTeam)(nil),                                   // 127: dota.CMsgSignOutGameplayStats.CTeam
-	(*CMsgGameMatchSignOut_CTeam)(nil),                                       // 128: dota.CMsgGameMatchSignOut.CTeam
-	(*CMsgGameMatchSignOut_CAdditionalSignoutMsg)(nil),                       // 129: dota.CMsgGameMatchSignOut.CAdditionalSignoutMsg
-	(*CMsgGameMatchSignOut_CSocialFeedMatchEvent)(nil),                       // 130: dota.CMsgGameMatchSignOut.CSocialFeedMatchEvent
-	(*CMsgGameMatchSignOut_CCustomGameData)(nil),                             // 131: dota.CMsgGameMatchSignOut.CCustomGameData
-	(*CMsgGameMatchSignOut_EventGameLeaderboardEntry)(nil),                   // 132: dota.CMsgGameMatchSignOut.EventGameLeaderboardEntry
-	(*CMsgGameMatchSignOut_WardPlacement)(nil),                               // 133: dota.CMsgGameMatchSignOut.WardPlacement
-	(*CMsgGameMatchSignOut_CTeam_CPlayer)(nil),                               // 134: dota.CMsgGameMatchSignOut.CTeam.CPlayer
-	(*CMsgGameMatchSignOut_CTeam_CPlayer_CCustomGameData)(nil),               // 135: dota.CMsgGameMatchSignOut.CTeam.CPlayer.CCustomGameData
-	(*CMsgGameMatchSignOut_CTeam_CPlayer_HeroDamageReceived)(nil),            // 136: dota.CMsgGameMatchSignOut.CTeam.CPlayer.HeroDamageReceived
-	(*CMsgSignOutTextMuteInfo_TextMuteMessage)(nil),                          // 137: dota.CMsgSignOutTextMuteInfo.TextMuteMessage
-	(*CMsgSignOutCommunicationSummary_PlayerCommunication)(nil),              // 138: dota.CMsgSignOutCommunicationSummary.PlayerCommunication
-	(*CMsgSignOutCommunicationSummary_PlayerCommunication_PingDetail)(nil),   // 139: dota.CMsgSignOutCommunicationSummary.PlayerCommunication.PingDetail
-	(*CMsgGameMatchSignoutResponse_PlayerMetadata)(nil),                      // 140: dota.CMsgGameMatchSignoutResponse.PlayerMetadata
-	(*CMsgDOTALiveScoreboardUpdate_Team)(nil),                                // 141: dota.CMsgDOTALiveScoreboardUpdate.Team
-	(*CMsgDOTALiveScoreboardUpdate_Team_Player)(nil),                         // 142: dota.CMsgDOTALiveScoreboardUpdate.Team.Player
-	(*CMsgDOTALiveScoreboardUpdate_Team_Player_HeroAbility)(nil),             // 143: dota.CMsgDOTALiveScoreboardUpdate.Team.Player.HeroAbility
-	(*CMsgServerToGCRequestBatchPlayerResourcesResponse_Result)(nil),         // 144: dota.CMsgServerToGCRequestBatchPlayerResourcesResponse.Result
-	(*CMsgDOTAAwardEventPoints_AwardPoints)(nil),                             // 145: dota.CMsgDOTAAwardEventPoints.AwardPoints
-	(*CMsgServerToGCMatchConnectionStats_Player)(nil),                        // 146: dota.CMsgServerToGCMatchConnectionStats.Player
-	(*CSerializedCombatLog_Dictionary)(nil),                                  // 147: dota.CSerializedCombatLog.Dictionary
-	(*CSerializedCombatLog_Dictionary_DictString)(nil),                       // 148: dota.CSerializedCombatLog.Dictionary.DictString
-	(*CMsgServerToGCVictoryPredictions_PredictionItem)(nil),                  // 149: dota.CMsgServerToGCVictoryPredictions.PredictionItem
-	(*CMsgServerToGCVictoryPredictions_Record)(nil),                          // 150: dota.CMsgServerToGCVictoryPredictions.Record
-	(*CMsgServerToGCKillSummaries_KillSummary)(nil),                          // 151: dota.CMsgServerToGCKillSummaries.KillSummary
-	(*CMsgSignOutUpdatePlayerChallenge_Challenge)(nil),                       // 152: dota.CMsgSignOutUpdatePlayerChallenge.Challenge
-	(*CMsgSpendWager_Player)(nil),                                            // 153: dota.CMsgSpendWager.Player
-	(*CMsgSignOutXPCoins_Player)(nil),                                        // 154: dota.CMsgSignOutXPCoins.Player
-	(*CMsgSignOutBounties_Bounty)(nil),                                       // 155: dota.CMsgSignOutBounties.Bounty
-	(*CMsgSignOutCommunityGoalProgress_EventGoalIncrement)(nil),              // 156: dota.CMsgSignOutCommunityGoalProgress.EventGoalIncrement
-	(*CMsgServerToGCCompendiumInGamePredictionResults_PredictionResult)(nil), // 157: dota.CMsgServerToGCCompendiumInGamePredictionResults.PredictionResult
-	(*CMsgServerToGCCompendiumChosenInGamePredictions_Prediction)(nil),       // 158: dota.CMsgServerToGCCompendiumChosenInGamePredictions.Prediction
-	(*CMsgServerToGCMatchPlayerItemPurchaseHistory_ItemPurchase)(nil),        // 159: dota.CMsgServerToGCMatchPlayerItemPurchaseHistory.ItemPurchase
-	(*CMsgServerToGCMatchPlayerItemPurchaseHistory_Player)(nil),              // 160: dota.CMsgServerToGCMatchPlayerItemPurchaseHistory.Player
-	(*CMsgServerToGCMatchPlayerNeutralItemEquipHistory_ItemEquip)(nil),       // 161: dota.CMsgServerToGCMatchPlayerNeutralItemEquipHistory.ItemEquip
-	(*CMsgServerToGCMatchPlayerNeutralItemEquipHistory_Player)(nil),          // 162: dota.CMsgServerToGCMatchPlayerNeutralItemEquipHistory.Player
-	(*CMsgServerToGCMatchStateHistory_PlayerState)(nil),                      // 163: dota.CMsgServerToGCMatchStateHistory.PlayerState
-	(*CMsgServerToGCMatchStateHistory_TeamState)(nil),                        // 164: dota.CMsgServerToGCMatchStateHistory.TeamState
-	(*CMsgServerToGCMatchStateHistory_MatchState)(nil),                       // 165: dota.CMsgServerToGCMatchStateHistory.MatchState
-	(*CMsgServerToGCPlayerChallengeHistory_PlayerChallenge)(nil),             // 166: dota.CMsgServerToGCPlayerChallengeHistory.PlayerChallenge
-	(*CMsgServerToGCCavernCrawlIsHeroActiveResponse_MapResults)(nil),         // 167: dota.CMsgServerToGCCavernCrawlIsHeroActiveResponse.MapResults
-	(*CMsgNeutralItemStats_NeutralItem)(nil),                                 // 168: dota.CMsgNeutralItemStats.NeutralItem
-	(*CMsgGCToServerLobbyHeroBanRates_HeroBanEntry)(nil),                     // 169: dota.CMsgGCToServerLobbyHeroBanRates.HeroBanEntry
-	(*CMsgSignOutGuildContractProgress_CompletedGuildEventContracts)(nil),    // 170: dota.CMsgSignOutGuildContractProgress.CompletedGuildEventContracts
-	(*CMsgSignOutGuildContractProgress_PlayerContract)(nil),                  // 171: dota.CMsgSignOutGuildContractProgress.PlayerContract
-	(*CMsgSignOutGuildChallengeProgress_ChallengeProgress)(nil),              // 172: dota.CMsgSignOutGuildChallengeProgress.ChallengeProgress
-	(*CMsgSignOutMVPStats_Player)(nil),                                       // 173: dota.CMsgSignOutMVPStats.Player
-	(*CMsgSignOutMVPStats_Player_KillEaterEvent)(nil),                        // 174: dota.CMsgSignOutMVPStats.Player.KillEaterEvent
-	(*CMsgServerToGCGetGuildContractsResponse_ContractDetails)(nil),          // 175: dota.CMsgServerToGCGetGuildContractsResponse.ContractDetails
-	(*CMsgServerToGCGetGuildContractsResponse_Player)(nil),                   // 176: dota.CMsgServerToGCGetGuildContractsResponse.Player
-	(*CMsgMatchDiretideCandy_CandyDetails)(nil),                              // 177: dota.CMsgMatchDiretideCandy.CandyDetails
-	(*CMsgMatchDiretideCandy_PlayerCandy)(nil),                               // 178: dota.CMsgMatchDiretideCandy.PlayerCandy
-	(*CMsgGCToServerCheerData_CheerTypeCount)(nil),                           // 179: dota.CMsgGCToServerCheerData.CheerTypeCount
-	(*CMsgServerToGCGetStickerHeroesResponse_Player)(nil),                    // 180: dota.CMsgServerToGCGetStickerHeroesResponse.Player
-	(*CMsgSteamLearnMatchInfoTeam_Player)(nil),                               // 181: dota.CMsgSteamLearnMatchInfoTeam.Player
-	(*CMsgSteamLearnPlayerTimedStats_StatBucket)(nil),                        // 182: dota.CMsgSteamLearnPlayerTimedStats.StatBucket
-	(*CMsgSteamLearnMatchStateV5_PlayerState)(nil),                           // 183: dota.CMsgSteamLearnMatchStateV5.PlayerState
-	(*CMsgSteamLearnMatchStateV5_TeamState)(nil),                             // 184: dota.CMsgSteamLearnMatchStateV5.TeamState
-	(*CMsgSteamLearnWardPlacement_Location)(nil),                             // 185: dota.CMsgSteamLearnWardPlacement.Location
-	(*CMsgSignOutMapStats_Player)(nil),                                       // 186: dota.CMsgSignOutMapStats.Player
-	(*CMsgSignOutOverworld_Player)(nil),                                      // 187: dota.CMsgSignOutOverworld.Player
-	(*CMsgSignOutCraftworks_Player)(nil),                                     // 188: dota.CMsgSignOutCraftworks.Player
-	(*CMsgSignOutMonsterHunter_Player)(nil),                                  // 189: dota.CMsgSignOutMonsterHunter.Player
-	(DOTA_GameState)(0),                                                      // 190: dota.DOTA_GameState
-	(DOTALeaverStatusT)(0),                                                   // 191: dota.DOTALeaverStatus_t
-	(*CMsgLeaverState)(nil),                                                  // 192: dota.CMsgLeaverState
-	(ENetworkDisconnectionReason)(0),                                         // 193: dota.ENetworkDisconnectionReason
-	(*CMsgDOTAFantasyPlayerStats)(nil),                                       // 194: dota.CMsgDOTAFantasyPlayerStats
-	(*CMsgDOTARealtimeGameStatsTerse)(nil),                                   // 195: dota.CMsgDOTARealtimeGameStatsTerse
-	(*CMsgEconPlayerStrangeCountAdjustment)(nil),                             // 196: dota.CMsgEconPlayerStrangeCountAdjustment
-	(*CExtraMsgBlock)(nil),                                                   // 197: dota.CExtraMsgBlock
-	(DOTA_GC_TEAM)(0),                                                        // 198: dota.DOTA_GC_TEAM
-	(*CMsgTrackedStat)(nil),                                                  // 199: dota.CMsgTrackedStat
-	(*CMatchHeroSelectEvent)(nil),                                            // 200: dota.CMatchHeroSelectEvent
-	(DOTABotDifficulty)(0),                                                   // 201: dota.DOTABotDifficulty
-	(*CMsgDOTAMatch)(nil),                                                    // 202: dota.CMsgDOTAMatch
-	(*CMvpData)(nil),                                                         // 203: dota.CMvpData
-	(*CMsgOverworldMatchRewards)(nil),                                        // 204: dota.CMsgOverworldMatchRewards
-	(*CMsgMonsterHunterMatchRewards)(nil),                                    // 205: dota.CMsgMonsterHunterMatchRewards
-	(EEvent)(0),                                                              // 206: dota.EEvent
-	(DOTA_TournamentEvents)(0),                                               // 207: dota.DOTA_TournamentEvents
-	(*CProtoItemHeroStatue)(nil),                                             // 208: dota.CProtoItemHeroStatue
-	(*CMsgDOTACombatLogEntry)(nil),                                           // 209: dota.CMsgDOTACombatLogEntry
-	(*CMsgClientToGCRerollPlayerChallenge)(nil),                              // 210: dota.CMsgClientToGCRerollPlayerChallenge
-	(*CMsgMapStatsSnapshot)(nil),                                             // 211: dota.CMsgMapStatsSnapshot
-	(ENewBloomGiftingResponse)(0),                                            // 212: dota.ENewBloomGiftingResponse
-	(*CMatchPlayerTimedStats)(nil),                                           // 213: dota.CMatchPlayerTimedStats
-	(*CMatchTeamTimedStats)(nil),                                             // 214: dota.CMatchTeamTimedStats
-	(*CMatchPlayerAbilityUpgrade)(nil),                                       // 215: dota.CMatchPlayerAbilityUpgrade
-	(*CMatchAdditionalUnitInventory)(nil),                                    // 216: dota.CMatchAdditionalUnitInventory
-	(*CMatchPlayerPermanentBuff)(nil),                                        // 217: dota.CMatchPlayerPermanentBuff
-	(EPlayerChallengeHistoryType)(0),                                         // 218: dota.EPlayerChallengeHistoryType
-	(*CMsgStickerHeroes)(nil),                                                // 219: dota.CMsgStickerHeroes
-	(*CMsgCraftworksComponents)(nil),                                         // 220: dota.CMsgCraftworksComponents
-	(*CMsgMonsterHunterInvestigationGameState)(nil),                          // 221: dota.CMsgMonsterHunterInvestigationGameState
-	(*CMsgMonsterHunterCodexUpdateData)(nil),                                 // 222: dota.CMsgMonsterHunterCodexUpdateData
+	(*CMsgSteamLearnMatchHeroesV4)(nil),                                      // 104: dota.CMsgSteamLearnMatchHeroesV4
+	(*CMsgSteamLearnMatchHeroV6)(nil),                                        // 105: dota.CMsgSteamLearnMatchHeroV6
+	(*CMsgSteamLearnMatchHeroV8)(nil),                                        // 106: dota.CMsgSteamLearnMatchHeroV8
+	(*CMsgSteamLearnPlayerTimedStats)(nil),                                   // 107: dota.CMsgSteamLearnPlayerTimedStats
+	(*CMsgSteamLearnMatchStateV5)(nil),                                       // 108: dota.CMsgSteamLearnMatchStateV5
+	(*CMsgSteamLearnItemPurchaseV7)(nil),                                     // 109: dota.CMsgSteamLearnItemPurchaseV7
+	(*CMsgSteamLearnPreGameItemPurchases)(nil),                               // 110: dota.CMsgSteamLearnPreGameItemPurchases
+	(*CMsgSteamLearnPreGameItemPurchase)(nil),                                // 111: dota.CMsgSteamLearnPreGameItemPurchase
+	(*CMsgSteamLearnNeutralItemPurchaseV4)(nil),                              // 112: dota.CMsgSteamLearnNeutralItemPurchaseV4
+	(*CMsgSteamLearnAbilitySkill)(nil),                                       // 113: dota.CMsgSteamLearnAbilitySkill
+	(*CMsgSteamLearnWardPlacement)(nil),                                      // 114: dota.CMsgSteamLearnWardPlacement
+	(*CMsgSteamLearnPlayerMatchState)(nil),                                   // 115: dota.CMsgSteamLearnPlayerMatchState
+	(*CMsgSignOutMuertaMinigame)(nil),                                        // 116: dota.CMsgSignOutMuertaMinigame
+	(*CMsgSignOutMapStats)(nil),                                              // 117: dota.CMsgSignOutMapStats
+	(*CMsgServerToGCNewBloomGift)(nil),                                       // 118: dota.CMsgServerToGCNewBloomGift
+	(*CMsgServerToGCNewBloomGiftResponse)(nil),                               // 119: dota.CMsgServerToGCNewBloomGiftResponse
+	(*CMsgSignOutOverworld)(nil),                                             // 120: dota.CMsgSignOutOverworld
+	(*CMsgSignOutCraftworks)(nil),                                            // 121: dota.CMsgSignOutCraftworks
+	(*CMsgSignOutMonsterHunter)(nil),                                         // 122: dota.CMsgSignOutMonsterHunter
+	(*CMsgServerToGCWarningLowServerFramerate)(nil),                          // 123: dota.CMsgServerToGCWarningLowServerFramerate
+	(*CMsgServerToGCWarningInvalidBotAbilityUsage)(nil),                      // 124: dota.CMsgServerToGCWarningInvalidBotAbilityUsage
+	(*CMsgPoorNetworkConditions_Player)(nil),                                 // 125: dota.CMsgPoorNetworkConditions.Player
+	(*CMsgConnectedPlayers_Player)(nil),                                      // 126: dota.CMsgConnectedPlayers.Player
+	(*CMsgConnectedPlayers_PlayerDraft)(nil),                                 // 127: dota.CMsgConnectedPlayers.PlayerDraft
+	(*CMsgSignOutGameplayStats_CPlayer)(nil),                                 // 128: dota.CMsgSignOutGameplayStats.CPlayer
+	(*CMsgSignOutGameplayStats_CTeam)(nil),                                   // 129: dota.CMsgSignOutGameplayStats.CTeam
+	(*CMsgGameMatchSignOut_CTeam)(nil),                                       // 130: dota.CMsgGameMatchSignOut.CTeam
+	(*CMsgGameMatchSignOut_CAdditionalSignoutMsg)(nil),                       // 131: dota.CMsgGameMatchSignOut.CAdditionalSignoutMsg
+	(*CMsgGameMatchSignOut_CSocialFeedMatchEvent)(nil),                       // 132: dota.CMsgGameMatchSignOut.CSocialFeedMatchEvent
+	(*CMsgGameMatchSignOut_CCustomGameData)(nil),                             // 133: dota.CMsgGameMatchSignOut.CCustomGameData
+	(*CMsgGameMatchSignOut_EventGameLeaderboardEntry)(nil),                   // 134: dota.CMsgGameMatchSignOut.EventGameLeaderboardEntry
+	(*CMsgGameMatchSignOut_WardPlacement)(nil),                               // 135: dota.CMsgGameMatchSignOut.WardPlacement
+	(*CMsgGameMatchSignOut_CTeam_CPlayer)(nil),                               // 136: dota.CMsgGameMatchSignOut.CTeam.CPlayer
+	(*CMsgGameMatchSignOut_CTeam_CPlayer_CCustomGameData)(nil),               // 137: dota.CMsgGameMatchSignOut.CTeam.CPlayer.CCustomGameData
+	(*CMsgGameMatchSignOut_CTeam_CPlayer_HeroDamageReceived)(nil),            // 138: dota.CMsgGameMatchSignOut.CTeam.CPlayer.HeroDamageReceived
+	(*CMsgSignOutTextMuteInfo_TextMuteMessage)(nil),                          // 139: dota.CMsgSignOutTextMuteInfo.TextMuteMessage
+	(*CMsgSignOutCommunicationSummary_PlayerCommunication)(nil),              // 140: dota.CMsgSignOutCommunicationSummary.PlayerCommunication
+	(*CMsgSignOutCommunicationSummary_PlayerCommunication_PingDetail)(nil),   // 141: dota.CMsgSignOutCommunicationSummary.PlayerCommunication.PingDetail
+	(*CMsgGameMatchSignoutResponse_PlayerMetadata)(nil),                      // 142: dota.CMsgGameMatchSignoutResponse.PlayerMetadata
+	(*CMsgDOTALiveScoreboardUpdate_Team)(nil),                                // 143: dota.CMsgDOTALiveScoreboardUpdate.Team
+	(*CMsgDOTALiveScoreboardUpdate_Team_Player)(nil),                         // 144: dota.CMsgDOTALiveScoreboardUpdate.Team.Player
+	(*CMsgDOTALiveScoreboardUpdate_Team_Player_HeroAbility)(nil),             // 145: dota.CMsgDOTALiveScoreboardUpdate.Team.Player.HeroAbility
+	(*CMsgServerToGCRequestBatchPlayerResourcesResponse_Result)(nil),         // 146: dota.CMsgServerToGCRequestBatchPlayerResourcesResponse.Result
+	(*CMsgDOTAAwardEventPoints_AwardPoints)(nil),                             // 147: dota.CMsgDOTAAwardEventPoints.AwardPoints
+	(*CMsgServerToGCMatchConnectionStats_Player)(nil),                        // 148: dota.CMsgServerToGCMatchConnectionStats.Player
+	(*CSerializedCombatLog_Dictionary)(nil),                                  // 149: dota.CSerializedCombatLog.Dictionary
+	(*CSerializedCombatLog_Dictionary_DictString)(nil),                       // 150: dota.CSerializedCombatLog.Dictionary.DictString
+	(*CMsgServerToGCVictoryPredictions_PredictionItem)(nil),                  // 151: dota.CMsgServerToGCVictoryPredictions.PredictionItem
+	(*CMsgServerToGCVictoryPredictions_Record)(nil),                          // 152: dota.CMsgServerToGCVictoryPredictions.Record
+	(*CMsgServerToGCKillSummaries_KillSummary)(nil),                          // 153: dota.CMsgServerToGCKillSummaries.KillSummary
+	(*CMsgSignOutUpdatePlayerChallenge_Challenge)(nil),                       // 154: dota.CMsgSignOutUpdatePlayerChallenge.Challenge
+	(*CMsgSpendWager_Player)(nil),                                            // 155: dota.CMsgSpendWager.Player
+	(*CMsgSignOutXPCoins_Player)(nil),                                        // 156: dota.CMsgSignOutXPCoins.Player
+	(*CMsgSignOutBounties_Bounty)(nil),                                       // 157: dota.CMsgSignOutBounties.Bounty
+	(*CMsgSignOutCommunityGoalProgress_EventGoalIncrement)(nil),              // 158: dota.CMsgSignOutCommunityGoalProgress.EventGoalIncrement
+	(*CMsgServerToGCCompendiumInGamePredictionResults_PredictionResult)(nil), // 159: dota.CMsgServerToGCCompendiumInGamePredictionResults.PredictionResult
+	(*CMsgServerToGCCompendiumChosenInGamePredictions_Prediction)(nil),       // 160: dota.CMsgServerToGCCompendiumChosenInGamePredictions.Prediction
+	(*CMsgServerToGCMatchPlayerItemPurchaseHistory_ItemPurchase)(nil),        // 161: dota.CMsgServerToGCMatchPlayerItemPurchaseHistory.ItemPurchase
+	(*CMsgServerToGCMatchPlayerItemPurchaseHistory_Player)(nil),              // 162: dota.CMsgServerToGCMatchPlayerItemPurchaseHistory.Player
+	(*CMsgServerToGCMatchPlayerNeutralItemEquipHistory_ItemEquip)(nil),       // 163: dota.CMsgServerToGCMatchPlayerNeutralItemEquipHistory.ItemEquip
+	(*CMsgServerToGCMatchPlayerNeutralItemEquipHistory_Player)(nil),          // 164: dota.CMsgServerToGCMatchPlayerNeutralItemEquipHistory.Player
+	(*CMsgServerToGCMatchStateHistory_PlayerState)(nil),                      // 165: dota.CMsgServerToGCMatchStateHistory.PlayerState
+	(*CMsgServerToGCMatchStateHistory_TeamState)(nil),                        // 166: dota.CMsgServerToGCMatchStateHistory.TeamState
+	(*CMsgServerToGCMatchStateHistory_MatchState)(nil),                       // 167: dota.CMsgServerToGCMatchStateHistory.MatchState
+	(*CMsgServerToGCPlayerChallengeHistory_PlayerChallenge)(nil),             // 168: dota.CMsgServerToGCPlayerChallengeHistory.PlayerChallenge
+	(*CMsgServerToGCCavernCrawlIsHeroActiveResponse_MapResults)(nil),         // 169: dota.CMsgServerToGCCavernCrawlIsHeroActiveResponse.MapResults
+	(*CMsgNeutralItemStats_NeutralItem)(nil),                                 // 170: dota.CMsgNeutralItemStats.NeutralItem
+	(*CMsgGCToServerLobbyHeroBanRates_HeroBanEntry)(nil),                     // 171: dota.CMsgGCToServerLobbyHeroBanRates.HeroBanEntry
+	(*CMsgSignOutGuildContractProgress_CompletedGuildEventContracts)(nil),    // 172: dota.CMsgSignOutGuildContractProgress.CompletedGuildEventContracts
+	(*CMsgSignOutGuildContractProgress_PlayerContract)(nil),                  // 173: dota.CMsgSignOutGuildContractProgress.PlayerContract
+	(*CMsgSignOutGuildChallengeProgress_ChallengeProgress)(nil),              // 174: dota.CMsgSignOutGuildChallengeProgress.ChallengeProgress
+	(*CMsgSignOutMVPStats_Player)(nil),                                       // 175: dota.CMsgSignOutMVPStats.Player
+	(*CMsgSignOutMVPStats_Player_KillEaterEvent)(nil),                        // 176: dota.CMsgSignOutMVPStats.Player.KillEaterEvent
+	(*CMsgServerToGCGetGuildContractsResponse_ContractDetails)(nil),          // 177: dota.CMsgServerToGCGetGuildContractsResponse.ContractDetails
+	(*CMsgServerToGCGetGuildContractsResponse_Player)(nil),                   // 178: dota.CMsgServerToGCGetGuildContractsResponse.Player
+	(*CMsgMatchDiretideCandy_CandyDetails)(nil),                              // 179: dota.CMsgMatchDiretideCandy.CandyDetails
+	(*CMsgMatchDiretideCandy_PlayerCandy)(nil),                               // 180: dota.CMsgMatchDiretideCandy.PlayerCandy
+	(*CMsgGCToServerCheerData_CheerTypeCount)(nil),                           // 181: dota.CMsgGCToServerCheerData.CheerTypeCount
+	(*CMsgServerToGCGetStickerHeroesResponse_Player)(nil),                    // 182: dota.CMsgServerToGCGetStickerHeroesResponse.Player
+	(*CMsgSteamLearnMatchInfoTeam_Player)(nil),                               // 183: dota.CMsgSteamLearnMatchInfoTeam.Player
+	(*CMsgSteamLearnPlayerTimedStats_StatBucket)(nil),                        // 184: dota.CMsgSteamLearnPlayerTimedStats.StatBucket
+	(*CMsgSteamLearnMatchStateV5_PlayerState)(nil),                           // 185: dota.CMsgSteamLearnMatchStateV5.PlayerState
+	(*CMsgSteamLearnMatchStateV5_TeamState)(nil),                             // 186: dota.CMsgSteamLearnMatchStateV5.TeamState
+	(*CMsgSteamLearnWardPlacement_Location)(nil),                             // 187: dota.CMsgSteamLearnWardPlacement.Location
+	(*CMsgSignOutMapStats_Player)(nil),                                       // 188: dota.CMsgSignOutMapStats.Player
+	(*CMsgSignOutOverworld_Player)(nil),                                      // 189: dota.CMsgSignOutOverworld.Player
+	(*CMsgSignOutCraftworks_Player)(nil),                                     // 190: dota.CMsgSignOutCraftworks.Player
+	(*CMsgSignOutMonsterHunter_Player)(nil),                                  // 191: dota.CMsgSignOutMonsterHunter.Player
+	(DOTA_GameState)(0),                                                      // 192: dota.DOTA_GameState
+	(DOTALeaverStatusT)(0),                                                   // 193: dota.DOTALeaverStatus_t
+	(*CMsgLeaverState)(nil),                                                  // 194: dota.CMsgLeaverState
+	(ENetworkDisconnectionReason)(0),                                         // 195: dota.ENetworkDisconnectionReason
+	(*CMsgDOTAFantasyPlayerStats)(nil),                                       // 196: dota.CMsgDOTAFantasyPlayerStats
+	(*CMsgDOTARealtimeGameStatsTerse)(nil),                                   // 197: dota.CMsgDOTARealtimeGameStatsTerse
+	(*CMsgEconPlayerStrangeCountAdjustment)(nil),                             // 198: dota.CMsgEconPlayerStrangeCountAdjustment
+	(*CExtraMsgBlock)(nil),                                                   // 199: dota.CExtraMsgBlock
+	(DOTA_GC_TEAM)(0),                                                        // 200: dota.DOTA_GC_TEAM
+	(*CMsgTrackedStat)(nil),                                                  // 201: dota.CMsgTrackedStat
+	(*CMatchHeroSelectEvent)(nil),                                            // 202: dota.CMatchHeroSelectEvent
+	(DOTABotDifficulty)(0),                                                   // 203: dota.DOTABotDifficulty
+	(*CMsgDOTAMatch)(nil),                                                    // 204: dota.CMsgDOTAMatch
+	(*CMvpData)(nil),                                                         // 205: dota.CMvpData
+	(*CMsgOverworldMatchRewards)(nil),                                        // 206: dota.CMsgOverworldMatchRewards
+	(*CMsgMonsterHunterMatchRewards)(nil),                                    // 207: dota.CMsgMonsterHunterMatchRewards
+	(EEvent)(0),                                                              // 208: dota.EEvent
+	(DOTA_TournamentEvents)(0),                                               // 209: dota.DOTA_TournamentEvents
+	(*CProtoItemHeroStatue)(nil),                                             // 210: dota.CProtoItemHeroStatue
+	(*CMsgDOTACombatLogEntry)(nil),                                           // 211: dota.CMsgDOTACombatLogEntry
+	(*CMsgClientToGCRerollPlayerChallenge)(nil),                              // 212: dota.CMsgClientToGCRerollPlayerChallenge
+	(*CMsgMapStatsSnapshot)(nil),                                             // 213: dota.CMsgMapStatsSnapshot
+	(ENewBloomGiftingResponse)(0),                                            // 214: dota.ENewBloomGiftingResponse
+	(*CMatchPlayerTimedStats)(nil),                                           // 215: dota.CMatchPlayerTimedStats
+	(*CMatchTeamTimedStats)(nil),                                             // 216: dota.CMatchTeamTimedStats
+	(*CMatchPlayerAbilityUpgrade)(nil),                                       // 217: dota.CMatchPlayerAbilityUpgrade
+	(*CMatchAdditionalUnitInventory)(nil),                                    // 218: dota.CMatchAdditionalUnitInventory
+	(*CMatchPlayerPermanentBuff)(nil),                                        // 219: dota.CMatchPlayerPermanentBuff
+	(EPlayerChallengeHistoryType)(0),                                         // 220: dota.EPlayerChallengeHistoryType
+	(*CMsgStickerHeroes)(nil),                                                // 221: dota.CMsgStickerHeroes
+	(*CMsgCraftworksComponents)(nil),                                         // 222: dota.CMsgCraftworksComponents
+	(*CMsgMonsterHunterInvestigationGameState)(nil),                          // 223: dota.CMsgMonsterHunterInvestigationGameState
+	(*CMsgMonsterHunterCodexUpdateData)(nil),                                 // 224: dota.CMsgMonsterHunterCodexUpdateData
 }
 var file_dota_gcmessages_server_proto_depIdxs = []int32{
 	0,   // 0: dota.CMsgPoorNetworkConditions.detection_type:type_name -> dota.EPoorNetworkConditionsType
-	123, // 1: dota.CMsgPoorNetworkConditions.players:type_name -> dota.CMsgPoorNetworkConditions.Player
-	190, // 2: dota.CMsgGameserverCrash.game_state:type_name -> dota.DOTA_GameState
-	124, // 3: dota.CMsgConnectedPlayers.connected_players:type_name -> dota.CMsgConnectedPlayers.Player
-	124, // 4: dota.CMsgConnectedPlayers.disconnected_players:type_name -> dota.CMsgConnectedPlayers.Player
-	190, // 5: dota.CMsgConnectedPlayers.game_state:type_name -> dota.DOTA_GameState
+	125, // 1: dota.CMsgPoorNetworkConditions.players:type_name -> dota.CMsgPoorNetworkConditions.Player
+	192, // 2: dota.CMsgGameserverCrash.game_state:type_name -> dota.DOTA_GameState
+	126, // 3: dota.CMsgConnectedPlayers.connected_players:type_name -> dota.CMsgConnectedPlayers.Player
+	126, // 4: dota.CMsgConnectedPlayers.disconnected_players:type_name -> dota.CMsgConnectedPlayers.Player
+	192, // 5: dota.CMsgConnectedPlayers.game_state:type_name -> dota.DOTA_GameState
 	6,   // 6: dota.CMsgConnectedPlayers.poor_network_conditions:type_name -> dota.CMsgPoorNetworkConditions
 	1,   // 7: dota.CMsgConnectedPlayers.send_reason:type_name -> dota.CMsgConnectedPlayers.SendReason
-	125, // 8: dota.CMsgConnectedPlayers.player_draft:type_name -> dota.CMsgConnectedPlayers.PlayerDraft
+	127, // 8: dota.CMsgConnectedPlayers.player_draft:type_name -> dota.CMsgConnectedPlayers.PlayerDraft
 	2,   // 9: dota.CMsgGameServerInfo.server_type:type_name -> dota.CMsgGameServerInfo.ServerType
 	3,   // 10: dota.CMsgGameServerInfo.allow_custom_games:type_name -> dota.CMsgGameServerInfo.CustomGames
-	191, // 11: dota.CMsgLeaverDetected.leaver_status:type_name -> dota.DOTALeaverStatus_t
-	192, // 12: dota.CMsgLeaverDetected.leaver_state:type_name -> dota.CMsgLeaverState
-	193, // 13: dota.CMsgLeaverDetected.disconnect_reason:type_name -> dota.ENetworkDisconnectionReason
+	193, // 11: dota.CMsgLeaverDetected.leaver_status:type_name -> dota.DOTALeaverStatus_t
+	194, // 12: dota.CMsgLeaverDetected.leaver_state:type_name -> dota.CMsgLeaverState
+	195, // 13: dota.CMsgLeaverDetected.disconnect_reason:type_name -> dota.ENetworkDisconnectionReason
 	6,   // 14: dota.CMsgLeaverDetected.poor_network_conditions:type_name -> dota.CMsgPoorNetworkConditions
-	194, // 15: dota.CMsgDOTAFantasyFinalPlayerStats.stats:type_name -> dota.CMsgDOTAFantasyPlayerStats
-	194, // 16: dota.CMsgDOTAFantasyLivePlayerStats.stats:type_name -> dota.CMsgDOTAFantasyPlayerStats
-	195, // 17: dota.CMsgServerToGCRealtimeStats.delayed:type_name -> dota.CMsgDOTARealtimeGameStatsTerse
-	127, // 18: dota.CMsgSignOutGameplayStats.teams:type_name -> dota.CMsgSignOutGameplayStats.CTeam
-	128, // 19: dota.CMsgGameMatchSignOut.teams:type_name -> dota.CMsgGameMatchSignOut.CTeam
-	194, // 20: dota.CMsgGameMatchSignOut.fantasy_stats:type_name -> dota.CMsgDOTAFantasyPlayerStats
-	196, // 21: dota.CMsgGameMatchSignOut.player_strange_count_adjustments:type_name -> dota.CMsgEconPlayerStrangeCountAdjustment
+	196, // 15: dota.CMsgDOTAFantasyFinalPlayerStats.stats:type_name -> dota.CMsgDOTAFantasyPlayerStats
+	196, // 16: dota.CMsgDOTAFantasyLivePlayerStats.stats:type_name -> dota.CMsgDOTAFantasyPlayerStats
+	197, // 17: dota.CMsgServerToGCRealtimeStats.delayed:type_name -> dota.CMsgDOTARealtimeGameStatsTerse
+	129, // 18: dota.CMsgSignOutGameplayStats.teams:type_name -> dota.CMsgSignOutGameplayStats.CTeam
+	130, // 19: dota.CMsgGameMatchSignOut.teams:type_name -> dota.CMsgGameMatchSignOut.CTeam
+	196, // 20: dota.CMsgGameMatchSignOut.fantasy_stats:type_name -> dota.CMsgDOTAFantasyPlayerStats
+	198, // 21: dota.CMsgGameMatchSignOut.player_strange_count_adjustments:type_name -> dota.CMsgEconPlayerStrangeCountAdjustment
 	6,   // 22: dota.CMsgGameMatchSignOut.poor_network_conditions:type_name -> dota.CMsgPoorNetworkConditions
-	129, // 23: dota.CMsgGameMatchSignOut.additional_msgs:type_name -> dota.CMsgGameMatchSignOut.CAdditionalSignoutMsg
-	130, // 24: dota.CMsgGameMatchSignOut.social_feed_events:type_name -> dota.CMsgGameMatchSignOut.CSocialFeedMatchEvent
-	131, // 25: dota.CMsgGameMatchSignOut.custom_game_data:type_name -> dota.CMsgGameMatchSignOut.CCustomGameData
-	132, // 26: dota.CMsgGameMatchSignOut.event_game_leaderboard_entries:type_name -> dota.CMsgGameMatchSignOut.EventGameLeaderboardEntry
-	133, // 27: dota.CMsgGameMatchSignOut.ward_placements:type_name -> dota.CMsgGameMatchSignOut.WardPlacement
+	131, // 23: dota.CMsgGameMatchSignOut.additional_msgs:type_name -> dota.CMsgGameMatchSignOut.CAdditionalSignoutMsg
+	132, // 24: dota.CMsgGameMatchSignOut.social_feed_events:type_name -> dota.CMsgGameMatchSignOut.CSocialFeedMatchEvent
+	133, // 25: dota.CMsgGameMatchSignOut.custom_game_data:type_name -> dota.CMsgGameMatchSignOut.CCustomGameData
+	134, // 26: dota.CMsgGameMatchSignOut.event_game_leaderboard_entries:type_name -> dota.CMsgGameMatchSignOut.EventGameLeaderboardEntry
+	135, // 27: dota.CMsgGameMatchSignOut.ward_placements:type_name -> dota.CMsgGameMatchSignOut.WardPlacement
 	17,  // 28: dota.CMsgGameMatchSignOut.gameplay_stats:type_name -> dota.CMsgSignOutGameplayStats
-	197, // 29: dota.CMsgGameMatchSignOut.extra_messages:type_name -> dota.CExtraMsgBlock
-	198, // 30: dota.CMsgGameMatchSignOut.winning_team:type_name -> dota.DOTA_GC_TEAM
-	199, // 31: dota.CMsgGameMatchSignOut.match_tracked_stats:type_name -> dota.CMsgTrackedStat
-	200, // 32: dota.CMsgSignOutDraftInfo.picks_bans:type_name -> dota.CMatchHeroSelectEvent
-	201, // 33: dota.CMsgSignOutBotInfo.bot_difficulty_radiant:type_name -> dota.DOTABotDifficulty
-	201, // 34: dota.CMsgSignOutBotInfo.bot_difficulty_dire:type_name -> dota.DOTABotDifficulty
-	137, // 35: dota.CMsgSignOutTextMuteInfo.text_mute_messages:type_name -> dota.CMsgSignOutTextMuteInfo.TextMuteMessage
-	138, // 36: dota.CMsgSignOutCommunicationSummary.players:type_name -> dota.CMsgSignOutCommunicationSummary.PlayerCommunication
-	202, // 37: dota.CMsgGameMatchSignoutResponse.match_details:type_name -> dota.CMsgDOTAMatch
-	140, // 38: dota.CMsgGameMatchSignoutResponse.players_metadata:type_name -> dota.CMsgGameMatchSignoutResponse.PlayerMetadata
-	203, // 39: dota.CMsgGameMatchSignoutResponse.mvp_data:type_name -> dota.CMvpData
-	204, // 40: dota.CMsgGameMatchSignoutResponse.overworld_rewards:type_name -> dota.CMsgOverworldMatchRewards
-	205, // 41: dota.CMsgGameMatchSignoutResponse.monster_hunter_rewards:type_name -> dota.CMsgMonsterHunterMatchRewards
-	206, // 42: dota.CMsgGameMatchSignOutEventGameData.event_id:type_name -> dota.EEvent
-	141, // 43: dota.CMsgDOTALiveScoreboardUpdate.team_good:type_name -> dota.CMsgDOTALiveScoreboardUpdate.Team
-	141, // 44: dota.CMsgDOTALiveScoreboardUpdate.team_bad:type_name -> dota.CMsgDOTALiveScoreboardUpdate.Team
-	144, // 45: dota.CMsgServerToGCRequestBatchPlayerResourcesResponse.results:type_name -> dota.CMsgServerToGCRequestBatchPlayerResourcesResponse.Result
-	207, // 46: dota.CMsgTournamentItemEvent.event_type:type_name -> dota.DOTA_TournamentEvents
-	208, // 47: dota.CMsgTournamentItemEvent.hero_statues:type_name -> dota.CProtoItemHeroStatue
-	207, // 48: dota.CMsgTournamentItemEventResponse.event_type:type_name -> dota.DOTA_TournamentEvents
-	145, // 49: dota.CMsgDOTAAwardEventPoints.award_points:type_name -> dota.CMsgDOTAAwardEventPoints.AwardPoints
-	206, // 50: dota.CMsgDOTAAwardEventPoints.event_id:type_name -> dota.EEvent
-	146, // 51: dota.CMsgServerToGCMatchConnectionStats.players:type_name -> dota.CMsgServerToGCMatchConnectionStats.Player
-	147, // 52: dota.CSerializedCombatLog.dictionary:type_name -> dota.CSerializedCombatLog.Dictionary
-	209, // 53: dota.CSerializedCombatLog.entries:type_name -> dota.CMsgDOTACombatLogEntry
-	150, // 54: dota.CMsgServerToGCVictoryPredictions.records:type_name -> dota.CMsgServerToGCVictoryPredictions.Record
-	151, // 55: dota.CMsgServerToGCKillSummaries.summaries:type_name -> dota.CMsgServerToGCKillSummaries.KillSummary
-	152, // 56: dota.CMsgSignOutUpdatePlayerChallenge.completed:type_name -> dota.CMsgSignOutUpdatePlayerChallenge.Challenge
-	152, // 57: dota.CMsgSignOutUpdatePlayerChallenge.rerolled:type_name -> dota.CMsgSignOutUpdatePlayerChallenge.Challenge
-	210, // 58: dota.CMsgServerToGCRerollPlayerChallenge.reroll_msg:type_name -> dota.CMsgClientToGCRerollPlayerChallenge
-	153, // 59: dota.CMsgSpendWager.players:type_name -> dota.CMsgSpendWager.Player
-	206, // 60: dota.CMsgSpendWager.event_id:type_name -> dota.EEvent
-	154, // 61: dota.CMsgSignOutXPCoins.players:type_name -> dota.CMsgSignOutXPCoins.Player
-	206, // 62: dota.CMsgSignOutXPCoins.event_id:type_name -> dota.EEvent
-	155, // 63: dota.CMsgSignOutBounties.bounties:type_name -> dota.CMsgSignOutBounties.Bounty
-	206, // 64: dota.CMsgSignOutBounties.event_id:type_name -> dota.EEvent
-	206, // 65: dota.CMsgSignOutCommunityGoalProgress.event_id:type_name -> dota.EEvent
-	156, // 66: dota.CMsgSignOutCommunityGoalProgress.event_increments:type_name -> dota.CMsgSignOutCommunityGoalProgress.EventGoalIncrement
-	157, // 67: dota.CMsgServerToGCCompendiumInGamePredictionResults.results:type_name -> dota.CMsgServerToGCCompendiumInGamePredictionResults.PredictionResult
-	158, // 68: dota.CMsgServerToGCCompendiumChosenInGamePredictions.predictions_chosen:type_name -> dota.CMsgServerToGCCompendiumChosenInGamePredictions.Prediction
+	199, // 29: dota.CMsgGameMatchSignOut.extra_messages:type_name -> dota.CExtraMsgBlock
+	200, // 30: dota.CMsgGameMatchSignOut.winning_team:type_name -> dota.DOTA_GC_TEAM
+	201, // 31: dota.CMsgGameMatchSignOut.match_tracked_stats:type_name -> dota.CMsgTrackedStat
+	202, // 32: dota.CMsgSignOutDraftInfo.picks_bans:type_name -> dota.CMatchHeroSelectEvent
+	203, // 33: dota.CMsgSignOutBotInfo.bot_difficulty_radiant:type_name -> dota.DOTABotDifficulty
+	203, // 34: dota.CMsgSignOutBotInfo.bot_difficulty_dire:type_name -> dota.DOTABotDifficulty
+	139, // 35: dota.CMsgSignOutTextMuteInfo.text_mute_messages:type_name -> dota.CMsgSignOutTextMuteInfo.TextMuteMessage
+	140, // 36: dota.CMsgSignOutCommunicationSummary.players:type_name -> dota.CMsgSignOutCommunicationSummary.PlayerCommunication
+	204, // 37: dota.CMsgGameMatchSignoutResponse.match_details:type_name -> dota.CMsgDOTAMatch
+	142, // 38: dota.CMsgGameMatchSignoutResponse.players_metadata:type_name -> dota.CMsgGameMatchSignoutResponse.PlayerMetadata
+	205, // 39: dota.CMsgGameMatchSignoutResponse.mvp_data:type_name -> dota.CMvpData
+	206, // 40: dota.CMsgGameMatchSignoutResponse.overworld_rewards:type_name -> dota.CMsgOverworldMatchRewards
+	207, // 41: dota.CMsgGameMatchSignoutResponse.monster_hunter_rewards:type_name -> dota.CMsgMonsterHunterMatchRewards
+	208, // 42: dota.CMsgGameMatchSignOutEventGameData.event_id:type_name -> dota.EEvent
+	143, // 43: dota.CMsgDOTALiveScoreboardUpdate.team_good:type_name -> dota.CMsgDOTALiveScoreboardUpdate.Team
+	143, // 44: dota.CMsgDOTALiveScoreboardUpdate.team_bad:type_name -> dota.CMsgDOTALiveScoreboardUpdate.Team
+	146, // 45: dota.CMsgServerToGCRequestBatchPlayerResourcesResponse.results:type_name -> dota.CMsgServerToGCRequestBatchPlayerResourcesResponse.Result
+	209, // 46: dota.CMsgTournamentItemEvent.event_type:type_name -> dota.DOTA_TournamentEvents
+	210, // 47: dota.CMsgTournamentItemEvent.hero_statues:type_name -> dota.CProtoItemHeroStatue
+	209, // 48: dota.CMsgTournamentItemEventResponse.event_type:type_name -> dota.DOTA_TournamentEvents
+	147, // 49: dota.CMsgDOTAAwardEventPoints.award_points:type_name -> dota.CMsgDOTAAwardEventPoints.AwardPoints
+	208, // 50: dota.CMsgDOTAAwardEventPoints.event_id:type_name -> dota.EEvent
+	148, // 51: dota.CMsgServerToGCMatchConnectionStats.players:type_name -> dota.CMsgServerToGCMatchConnectionStats.Player
+	149, // 52: dota.CSerializedCombatLog.dictionary:type_name -> dota.CSerializedCombatLog.Dictionary
+	211, // 53: dota.CSerializedCombatLog.entries:type_name -> dota.CMsgDOTACombatLogEntry
+	152, // 54: dota.CMsgServerToGCVictoryPredictions.records:type_name -> dota.CMsgServerToGCVictoryPredictions.Record
+	153, // 55: dota.CMsgServerToGCKillSummaries.summaries:type_name -> dota.CMsgServerToGCKillSummaries.KillSummary
+	154, // 56: dota.CMsgSignOutUpdatePlayerChallenge.completed:type_name -> dota.CMsgSignOutUpdatePlayerChallenge.Challenge
+	154, // 57: dota.CMsgSignOutUpdatePlayerChallenge.rerolled:type_name -> dota.CMsgSignOutUpdatePlayerChallenge.Challenge
+	212, // 58: dota.CMsgServerToGCRerollPlayerChallenge.reroll_msg:type_name -> dota.CMsgClientToGCRerollPlayerChallenge
+	155, // 59: dota.CMsgSpendWager.players:type_name -> dota.CMsgSpendWager.Player
+	208, // 60: dota.CMsgSpendWager.event_id:type_name -> dota.EEvent
+	156, // 61: dota.CMsgSignOutXPCoins.players:type_name -> dota.CMsgSignOutXPCoins.Player
+	208, // 62: dota.CMsgSignOutXPCoins.event_id:type_name -> dota.EEvent
+	157, // 63: dota.CMsgSignOutBounties.bounties:type_name -> dota.CMsgSignOutBounties.Bounty
+	208, // 64: dota.CMsgSignOutBounties.event_id:type_name -> dota.EEvent
+	208, // 65: dota.CMsgSignOutCommunityGoalProgress.event_id:type_name -> dota.EEvent
+	158, // 66: dota.CMsgSignOutCommunityGoalProgress.event_increments:type_name -> dota.CMsgSignOutCommunityGoalProgress.EventGoalIncrement
+	159, // 67: dota.CMsgServerToGCCompendiumInGamePredictionResults.results:type_name -> dota.CMsgServerToGCCompendiumInGamePredictionResults.PredictionResult
+	160, // 68: dota.CMsgServerToGCCompendiumChosenInGamePredictions.predictions_chosen:type_name -> dota.CMsgServerToGCCompendiumChosenInGamePredictions.Prediction
 	65,  // 69: dota.CMsgGCToGCCompendiumInGamePredictionResults.results:type_name -> dota.CMsgServerToGCCompendiumInGamePredictionResults
-	160, // 70: dota.CMsgServerToGCMatchPlayerItemPurchaseHistory.players:type_name -> dota.CMsgServerToGCMatchPlayerItemPurchaseHistory.Player
-	162, // 71: dota.CMsgServerToGCMatchPlayerNeutralItemEquipHistory.players:type_name -> dota.CMsgServerToGCMatchPlayerNeutralItemEquipHistory.Player
-	165, // 72: dota.CMsgServerToGCMatchStateHistory.match_states:type_name -> dota.CMsgServerToGCMatchStateHistory.MatchState
-	165, // 73: dota.CMsgMatchStateSteamMLEntry.match_state:type_name -> dota.CMsgServerToGCMatchStateHistory.MatchState
-	166, // 74: dota.CMsgServerToGCPlayerChallengeHistory.challenge_records:type_name -> dota.CMsgServerToGCPlayerChallengeHistory.PlayerChallenge
-	167, // 75: dota.CMsgServerToGCCavernCrawlIsHeroActiveResponse.map_results:type_name -> dota.CMsgServerToGCCavernCrawlIsHeroActiveResponse.MapResults
-	168, // 76: dota.CMsgNeutralItemStats.neutral_items:type_name -> dota.CMsgNeutralItemStats.NeutralItem
-	169, // 77: dota.CMsgGCToServerLobbyHeroBanRates.ban_data:type_name -> dota.CMsgGCToServerLobbyHeroBanRates.HeroBanEntry
-	171, // 78: dota.CMsgSignOutGuildContractProgress.player_contracts:type_name -> dota.CMsgSignOutGuildContractProgress.PlayerContract
-	172, // 79: dota.CMsgSignOutGuildChallengeProgress.guild_challenges_progresses:type_name -> dota.CMsgSignOutGuildChallengeProgress.ChallengeProgress
-	173, // 80: dota.CMsgSignOutMVPStats.players:type_name -> dota.CMsgSignOutMVPStats.Player
-	176, // 81: dota.CMsgServerToGCGetGuildContractsResponse.player_contracts:type_name -> dota.CMsgServerToGCGetGuildContractsResponse.Player
-	178, // 82: dota.CMsgMatchDiretideCandy.player_candy_data:type_name -> dota.CMsgMatchDiretideCandy.PlayerCandy
-	206, // 83: dota.CMsgMatchDiretideCandy.event_id:type_name -> dota.EEvent
-	179, // 84: dota.CMsgGCToServerCheerData.cheer_types:type_name -> dota.CMsgGCToServerCheerData.CheerTypeCount
+	162, // 70: dota.CMsgServerToGCMatchPlayerItemPurchaseHistory.players:type_name -> dota.CMsgServerToGCMatchPlayerItemPurchaseHistory.Player
+	164, // 71: dota.CMsgServerToGCMatchPlayerNeutralItemEquipHistory.players:type_name -> dota.CMsgServerToGCMatchPlayerNeutralItemEquipHistory.Player
+	167, // 72: dota.CMsgServerToGCMatchStateHistory.match_states:type_name -> dota.CMsgServerToGCMatchStateHistory.MatchState
+	167, // 73: dota.CMsgMatchStateSteamMLEntry.match_state:type_name -> dota.CMsgServerToGCMatchStateHistory.MatchState
+	168, // 74: dota.CMsgServerToGCPlayerChallengeHistory.challenge_records:type_name -> dota.CMsgServerToGCPlayerChallengeHistory.PlayerChallenge
+	169, // 75: dota.CMsgServerToGCCavernCrawlIsHeroActiveResponse.map_results:type_name -> dota.CMsgServerToGCCavernCrawlIsHeroActiveResponse.MapResults
+	170, // 76: dota.CMsgNeutralItemStats.neutral_items:type_name -> dota.CMsgNeutralItemStats.NeutralItem
+	171, // 77: dota.CMsgGCToServerLobbyHeroBanRates.ban_data:type_name -> dota.CMsgGCToServerLobbyHeroBanRates.HeroBanEntry
+	173, // 78: dota.CMsgSignOutGuildContractProgress.player_contracts:type_name -> dota.CMsgSignOutGuildContractProgress.PlayerContract
+	174, // 79: dota.CMsgSignOutGuildChallengeProgress.guild_challenges_progresses:type_name -> dota.CMsgSignOutGuildChallengeProgress.ChallengeProgress
+	175, // 80: dota.CMsgSignOutMVPStats.players:type_name -> dota.CMsgSignOutMVPStats.Player
+	178, // 81: dota.CMsgServerToGCGetGuildContractsResponse.player_contracts:type_name -> dota.CMsgServerToGCGetGuildContractsResponse.Player
+	180, // 82: dota.CMsgMatchDiretideCandy.player_candy_data:type_name -> dota.CMsgMatchDiretideCandy.PlayerCandy
+	208, // 83: dota.CMsgMatchDiretideCandy.event_id:type_name -> dota.EEvent
+	181, // 84: dota.CMsgGCToServerCheerData.cheer_types:type_name -> dota.CMsgGCToServerCheerData.CheerTypeCount
 	89,  // 85: dota.CMsgGCToServerCheerConfig.cheer_config:type_name -> dota.CMsgCheerConfig
 	89,  // 86: dota.CMsgServerToGCGetCheerConfigResponse.cheer_config:type_name -> dota.CMsgCheerConfig
 	95,  // 87: dota.CMsgCheerState.cheer_types:type_name -> dota.CMsgCheerTypeState
 	89,  // 88: dota.CMsgServerToGCReportCheerState.cheer_config:type_name -> dota.CMsgCheerConfig
 	96,  // 89: dota.CMsgServerToGCReportCheerState.cheer_state:type_name -> dota.CMsgCheerState
-	180, // 90: dota.CMsgServerToGCGetStickerHeroesResponse.players:type_name -> dota.CMsgServerToGCGetStickerHeroesResponse.Player
-	181, // 91: dota.CMsgSteamLearnMatchInfoTeam.radiant_players:type_name -> dota.CMsgSteamLearnMatchInfoTeam.Player
-	181, // 92: dota.CMsgSteamLearnMatchInfoTeam.dire_players:type_name -> dota.CMsgSteamLearnMatchInfoTeam.Player
-	182, // 93: dota.CMsgSteamLearnPlayerTimedStats.stat_buckets:type_name -> dota.CMsgSteamLearnPlayerTimedStats.StatBucket
-	184, // 94: dota.CMsgSteamLearnMatchStateV5.radiant_state:type_name -> dota.CMsgSteamLearnMatchStateV5.TeamState
-	184, // 95: dota.CMsgSteamLearnMatchStateV5.dire_state:type_name -> dota.CMsgSteamLearnMatchStateV5.TeamState
-	185, // 96: dota.CMsgSteamLearnWardPlacement.ward_loc:type_name -> dota.CMsgSteamLearnWardPlacement.Location
-	185, // 97: dota.CMsgSteamLearnWardPlacement.existing_ward_locs:type_name -> dota.CMsgSteamLearnWardPlacement.Location
-	186, // 98: dota.CMsgSignOutMapStats.players:type_name -> dota.CMsgSignOutMapStats.Player
-	211, // 99: dota.CMsgSignOutMapStats.global_stats:type_name -> dota.CMsgMapStatsSnapshot
-	212, // 100: dota.CMsgServerToGCNewBloomGiftResponse.result:type_name -> dota.ENewBloomGiftingResponse
-	187, // 101: dota.CMsgSignOutOverworld.players:type_name -> dota.CMsgSignOutOverworld.Player
-	206, // 102: dota.CMsgSignOutOverworld.event_id:type_name -> dota.EEvent
-	188, // 103: dota.CMsgSignOutCraftworks.players:type_name -> dota.CMsgSignOutCraftworks.Player
-	206, // 104: dota.CMsgSignOutCraftworks.event_id:type_name -> dota.EEvent
-	189, // 105: dota.CMsgSignOutMonsterHunter.players:type_name -> dota.CMsgSignOutMonsterHunter.Player
-	206, // 106: dota.CMsgSignOutMonsterHunter.event_id:type_name -> dota.EEvent
-	193, // 107: dota.CMsgPoorNetworkConditions.Player.disconnect_reason:type_name -> dota.ENetworkDisconnectionReason
-	192, // 108: dota.CMsgConnectedPlayers.Player.leaver_state:type_name -> dota.CMsgLeaverState
-	193, // 109: dota.CMsgConnectedPlayers.Player.disconnect_reason:type_name -> dota.ENetworkDisconnectionReason
-	198, // 110: dota.CMsgConnectedPlayers.PlayerDraft.team:type_name -> dota.DOTA_GC_TEAM
-	213, // 111: dota.CMsgSignOutGameplayStats.CPlayer.timed_player_stats:type_name -> dota.CMatchPlayerTimedStats
-	214, // 112: dota.CMsgSignOutGameplayStats.CTeam.timed_team_stats:type_name -> dota.CMatchTeamTimedStats
-	126, // 113: dota.CMsgSignOutGameplayStats.CTeam.players:type_name -> dota.CMsgSignOutGameplayStats.CPlayer
-	134, // 114: dota.CMsgGameMatchSignOut.CTeam.players:type_name -> dota.CMsgGameMatchSignOut.CTeam.CPlayer
-	199, // 115: dota.CMsgGameMatchSignOut.CTeam.team_tracked_stats:type_name -> dota.CMsgTrackedStat
-	215, // 116: dota.CMsgGameMatchSignOut.CTeam.CPlayer.ability_upgrades:type_name -> dota.CMatchPlayerAbilityUpgrade
-	216, // 117: dota.CMsgGameMatchSignOut.CTeam.CPlayer.additional_units_inventory:type_name -> dota.CMatchAdditionalUnitInventory
-	217, // 118: dota.CMsgGameMatchSignOut.CTeam.CPlayer.permanent_buffs:type_name -> dota.CMatchPlayerPermanentBuff
-	135, // 119: dota.CMsgGameMatchSignOut.CTeam.CPlayer.custom_game_data:type_name -> dota.CMsgGameMatchSignOut.CTeam.CPlayer.CCustomGameData
-	136, // 120: dota.CMsgGameMatchSignOut.CTeam.CPlayer.hero_damage_received:type_name -> dota.CMsgGameMatchSignOut.CTeam.CPlayer.HeroDamageReceived
-	136, // 121: dota.CMsgGameMatchSignOut.CTeam.CPlayer.hero_damage_dealt:type_name -> dota.CMsgGameMatchSignOut.CTeam.CPlayer.HeroDamageReceived
-	198, // 122: dota.CMsgGameMatchSignOut.CTeam.CPlayer.team_number:type_name -> dota.DOTA_GC_TEAM
-	199, // 123: dota.CMsgGameMatchSignOut.CTeam.CPlayer.player_tracked_stats:type_name -> dota.CMsgTrackedStat
+	182, // 90: dota.CMsgServerToGCGetStickerHeroesResponse.players:type_name -> dota.CMsgServerToGCGetStickerHeroesResponse.Player
+	183, // 91: dota.CMsgSteamLearnMatchInfoTeam.radiant_players:type_name -> dota.CMsgSteamLearnMatchInfoTeam.Player
+	183, // 92: dota.CMsgSteamLearnMatchInfoTeam.dire_players:type_name -> dota.CMsgSteamLearnMatchInfoTeam.Player
+	184, // 93: dota.CMsgSteamLearnPlayerTimedStats.stat_buckets:type_name -> dota.CMsgSteamLearnPlayerTimedStats.StatBucket
+	186, // 94: dota.CMsgSteamLearnMatchStateV5.radiant_state:type_name -> dota.CMsgSteamLearnMatchStateV5.TeamState
+	186, // 95: dota.CMsgSteamLearnMatchStateV5.dire_state:type_name -> dota.CMsgSteamLearnMatchStateV5.TeamState
+	187, // 96: dota.CMsgSteamLearnWardPlacement.ward_loc:type_name -> dota.CMsgSteamLearnWardPlacement.Location
+	187, // 97: dota.CMsgSteamLearnWardPlacement.existing_ward_locs:type_name -> dota.CMsgSteamLearnWardPlacement.Location
+	188, // 98: dota.CMsgSignOutMapStats.players:type_name -> dota.CMsgSignOutMapStats.Player
+	213, // 99: dota.CMsgSignOutMapStats.global_stats:type_name -> dota.CMsgMapStatsSnapshot
+	214, // 100: dota.CMsgServerToGCNewBloomGiftResponse.result:type_name -> dota.ENewBloomGiftingResponse
+	189, // 101: dota.CMsgSignOutOverworld.players:type_name -> dota.CMsgSignOutOverworld.Player
+	208, // 102: dota.CMsgSignOutOverworld.event_id:type_name -> dota.EEvent
+	190, // 103: dota.CMsgSignOutCraftworks.players:type_name -> dota.CMsgSignOutCraftworks.Player
+	208, // 104: dota.CMsgSignOutCraftworks.event_id:type_name -> dota.EEvent
+	191, // 105: dota.CMsgSignOutMonsterHunter.players:type_name -> dota.CMsgSignOutMonsterHunter.Player
+	208, // 106: dota.CMsgSignOutMonsterHunter.event_id:type_name -> dota.EEvent
+	195, // 107: dota.CMsgPoorNetworkConditions.Player.disconnect_reason:type_name -> dota.ENetworkDisconnectionReason
+	194, // 108: dota.CMsgConnectedPlayers.Player.leaver_state:type_name -> dota.CMsgLeaverState
+	195, // 109: dota.CMsgConnectedPlayers.Player.disconnect_reason:type_name -> dota.ENetworkDisconnectionReason
+	200, // 110: dota.CMsgConnectedPlayers.PlayerDraft.team:type_name -> dota.DOTA_GC_TEAM
+	215, // 111: dota.CMsgSignOutGameplayStats.CPlayer.timed_player_stats:type_name -> dota.CMatchPlayerTimedStats
+	216, // 112: dota.CMsgSignOutGameplayStats.CTeam.timed_team_stats:type_name -> dota.CMatchTeamTimedStats
+	128, // 113: dota.CMsgSignOutGameplayStats.CTeam.players:type_name -> dota.CMsgSignOutGameplayStats.CPlayer
+	136, // 114: dota.CMsgGameMatchSignOut.CTeam.players:type_name -> dota.CMsgGameMatchSignOut.CTeam.CPlayer
+	201, // 115: dota.CMsgGameMatchSignOut.CTeam.team_tracked_stats:type_name -> dota.CMsgTrackedStat
+	217, // 116: dota.CMsgGameMatchSignOut.CTeam.CPlayer.ability_upgrades:type_name -> dota.CMatchPlayerAbilityUpgrade
+	218, // 117: dota.CMsgGameMatchSignOut.CTeam.CPlayer.additional_units_inventory:type_name -> dota.CMatchAdditionalUnitInventory
+	219, // 118: dota.CMsgGameMatchSignOut.CTeam.CPlayer.permanent_buffs:type_name -> dota.CMatchPlayerPermanentBuff
+	137, // 119: dota.CMsgGameMatchSignOut.CTeam.CPlayer.custom_game_data:type_name -> dota.CMsgGameMatchSignOut.CTeam.CPlayer.CCustomGameData
+	138, // 120: dota.CMsgGameMatchSignOut.CTeam.CPlayer.hero_damage_received:type_name -> dota.CMsgGameMatchSignOut.CTeam.CPlayer.HeroDamageReceived
+	138, // 121: dota.CMsgGameMatchSignOut.CTeam.CPlayer.hero_damage_dealt:type_name -> dota.CMsgGameMatchSignOut.CTeam.CPlayer.HeroDamageReceived
+	200, // 122: dota.CMsgGameMatchSignOut.CTeam.CPlayer.team_number:type_name -> dota.DOTA_GC_TEAM
+	201, // 123: dota.CMsgGameMatchSignOut.CTeam.CPlayer.player_tracked_stats:type_name -> dota.CMsgTrackedStat
 	4,   // 124: dota.CMsgGameMatchSignOut.CTeam.CPlayer.HeroDamageReceived.damage_type:type_name -> dota.CMsgGameMatchSignOut.CTeam.CPlayer.HeroDamageType
-	139, // 125: dota.CMsgSignOutCommunicationSummary.PlayerCommunication.ping_details:type_name -> dota.CMsgSignOutCommunicationSummary.PlayerCommunication.PingDetail
-	142, // 126: dota.CMsgDOTALiveScoreboardUpdate.Team.players:type_name -> dota.CMsgDOTALiveScoreboardUpdate.Team.Player
+	141, // 125: dota.CMsgSignOutCommunicationSummary.PlayerCommunication.ping_details:type_name -> dota.CMsgSignOutCommunicationSummary.PlayerCommunication.PingDetail
+	144, // 126: dota.CMsgDOTALiveScoreboardUpdate.Team.players:type_name -> dota.CMsgDOTALiveScoreboardUpdate.Team.Player
 	5,   // 127: dota.CMsgDOTALiveScoreboardUpdate.Team.Player.ultimate_state:type_name -> dota.CMsgDOTALiveScoreboardUpdate.Team.Player.DOTAUltimateState
-	143, // 128: dota.CMsgDOTALiveScoreboardUpdate.Team.Player.abilities:type_name -> dota.CMsgDOTALiveScoreboardUpdate.Team.Player.HeroAbility
-	148, // 129: dota.CSerializedCombatLog.Dictionary.strings:type_name -> dota.CSerializedCombatLog.Dictionary.DictString
-	149, // 130: dota.CMsgServerToGCVictoryPredictions.Record.prediction_items:type_name -> dota.CMsgServerToGCVictoryPredictions.PredictionItem
-	206, // 131: dota.CMsgSignOutUpdatePlayerChallenge.Challenge.event_id:type_name -> dota.EEvent
-	159, // 132: dota.CMsgServerToGCMatchPlayerItemPurchaseHistory.Player.item_purchases:type_name -> dota.CMsgServerToGCMatchPlayerItemPurchaseHistory.ItemPurchase
-	161, // 133: dota.CMsgServerToGCMatchPlayerNeutralItemEquipHistory.Player.item_equips:type_name -> dota.CMsgServerToGCMatchPlayerNeutralItemEquipHistory.ItemEquip
-	163, // 134: dota.CMsgServerToGCMatchStateHistory.TeamState.player_states:type_name -> dota.CMsgServerToGCMatchStateHistory.PlayerState
-	164, // 135: dota.CMsgServerToGCMatchStateHistory.MatchState.radiant_state:type_name -> dota.CMsgServerToGCMatchStateHistory.TeamState
-	164, // 136: dota.CMsgServerToGCMatchStateHistory.MatchState.dire_state:type_name -> dota.CMsgServerToGCMatchStateHistory.TeamState
-	218, // 137: dota.CMsgServerToGCPlayerChallengeHistory.PlayerChallenge.challenge_type:type_name -> dota.EPlayerChallengeHistoryType
-	170, // 138: dota.CMsgSignOutGuildContractProgress.PlayerContract.completed_contracts:type_name -> dota.CMsgSignOutGuildContractProgress.CompletedGuildEventContracts
-	174, // 139: dota.CMsgSignOutMVPStats.Player.kill_eater_events:type_name -> dota.CMsgSignOutMVPStats.Player.KillEaterEvent
-	206, // 140: dota.CMsgServerToGCGetGuildContractsResponse.Player.event_id:type_name -> dota.EEvent
-	175, // 141: dota.CMsgServerToGCGetGuildContractsResponse.Player.contracts:type_name -> dota.CMsgServerToGCGetGuildContractsResponse.ContractDetails
-	177, // 142: dota.CMsgMatchDiretideCandy.PlayerCandy.candy_breakdown:type_name -> dota.CMsgMatchDiretideCandy.CandyDetails
-	219, // 143: dota.CMsgServerToGCGetStickerHeroesResponse.Player.stickers:type_name -> dota.CMsgStickerHeroes
-	183, // 144: dota.CMsgSteamLearnMatchStateV5.TeamState.player_states:type_name -> dota.CMsgSteamLearnMatchStateV5.PlayerState
-	211, // 145: dota.CMsgSignOutMapStats.Player.personal_stats:type_name -> dota.CMsgMapStatsSnapshot
-	220, // 146: dota.CMsgSignOutCraftworks.Player.components:type_name -> dota.CMsgCraftworksComponents
-	221, // 147: dota.CMsgSignOutMonsterHunter.Player.investigation_game_state:type_name -> dota.CMsgMonsterHunterInvestigationGameState
-	222, // 148: dota.CMsgSignOutMonsterHunter.Player.codex_update_data:type_name -> dota.CMsgMonsterHunterCodexUpdateData
+	145, // 128: dota.CMsgDOTALiveScoreboardUpdate.Team.Player.abilities:type_name -> dota.CMsgDOTALiveScoreboardUpdate.Team.Player.HeroAbility
+	150, // 129: dota.CSerializedCombatLog.Dictionary.strings:type_name -> dota.CSerializedCombatLog.Dictionary.DictString
+	151, // 130: dota.CMsgServerToGCVictoryPredictions.Record.prediction_items:type_name -> dota.CMsgServerToGCVictoryPredictions.PredictionItem
+	208, // 131: dota.CMsgSignOutUpdatePlayerChallenge.Challenge.event_id:type_name -> dota.EEvent
+	161, // 132: dota.CMsgServerToGCMatchPlayerItemPurchaseHistory.Player.item_purchases:type_name -> dota.CMsgServerToGCMatchPlayerItemPurchaseHistory.ItemPurchase
+	163, // 133: dota.CMsgServerToGCMatchPlayerNeutralItemEquipHistory.Player.item_equips:type_name -> dota.CMsgServerToGCMatchPlayerNeutralItemEquipHistory.ItemEquip
+	165, // 134: dota.CMsgServerToGCMatchStateHistory.TeamState.player_states:type_name -> dota.CMsgServerToGCMatchStateHistory.PlayerState
+	166, // 135: dota.CMsgServerToGCMatchStateHistory.MatchState.radiant_state:type_name -> dota.CMsgServerToGCMatchStateHistory.TeamState
+	166, // 136: dota.CMsgServerToGCMatchStateHistory.MatchState.dire_state:type_name -> dota.CMsgServerToGCMatchStateHistory.TeamState
+	220, // 137: dota.CMsgServerToGCPlayerChallengeHistory.PlayerChallenge.challenge_type:type_name -> dota.EPlayerChallengeHistoryType
+	172, // 138: dota.CMsgSignOutGuildContractProgress.PlayerContract.completed_contracts:type_name -> dota.CMsgSignOutGuildContractProgress.CompletedGuildEventContracts
+	176, // 139: dota.CMsgSignOutMVPStats.Player.kill_eater_events:type_name -> dota.CMsgSignOutMVPStats.Player.KillEaterEvent
+	208, // 140: dota.CMsgServerToGCGetGuildContractsResponse.Player.event_id:type_name -> dota.EEvent
+	177, // 141: dota.CMsgServerToGCGetGuildContractsResponse.Player.contracts:type_name -> dota.CMsgServerToGCGetGuildContractsResponse.ContractDetails
+	179, // 142: dota.CMsgMatchDiretideCandy.PlayerCandy.candy_breakdown:type_name -> dota.CMsgMatchDiretideCandy.CandyDetails
+	221, // 143: dota.CMsgServerToGCGetStickerHeroesResponse.Player.stickers:type_name -> dota.CMsgStickerHeroes
+	185, // 144: dota.CMsgSteamLearnMatchStateV5.TeamState.player_states:type_name -> dota.CMsgSteamLearnMatchStateV5.PlayerState
+	213, // 145: dota.CMsgSignOutMapStats.Player.personal_stats:type_name -> dota.CMsgMapStatsSnapshot
+	222, // 146: dota.CMsgSignOutCraftworks.Player.components:type_name -> dota.CMsgCraftworksComponents
+	223, // 147: dota.CMsgSignOutMonsterHunter.Player.investigation_game_state:type_name -> dota.CMsgMonsterHunterInvestigationGameState
+	224, // 148: dota.CMsgSignOutMonsterHunter.Player.codex_update_data:type_name -> dota.CMsgMonsterHunterCodexUpdateData
 	149, // [149:149] is the sub-list for method output_type
 	149, // [149:149] is the sub-list for method input_type
 	149, // [149:149] is the sub-list for extension type_name
@@ -16214,7 +16390,7 @@ func file_dota_gcmessages_server_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_dota_gcmessages_server_proto_rawDesc), len(file_dota_gcmessages_server_proto_rawDesc)),
 			NumEnums:      6,
-			NumMessages:   184,
+			NumMessages:   186,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

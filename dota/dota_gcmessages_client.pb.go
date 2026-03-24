@@ -14613,6 +14613,7 @@ type CMsgDOTARedeemItem struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	CurrencyId    *uint64                `protobuf:"varint,1,opt,name=currency_id,json=currencyId" json:"currency_id,omitempty"`
 	PurchaseDef   *uint32                `protobuf:"varint,2,opt,name=purchase_def,json=purchaseDef" json:"purchase_def,omitempty"`
+	ClaimAsPoints *bool                  `protobuf:"varint,3,opt,name=claim_as_points,json=claimAsPoints" json:"claim_as_points,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -14659,6 +14660,13 @@ func (x *CMsgDOTARedeemItem) GetPurchaseDef() uint32 {
 		return *x.PurchaseDef
 	}
 	return 0
+}
+
+func (x *CMsgDOTARedeemItem) GetClaimAsPoints() bool {
+	if x != nil && x.ClaimAsPoints != nil {
+		return *x.ClaimAsPoints
+	}
+	return false
 }
 
 type CMsgDOTARedeemItemResponse struct {
@@ -33958,11 +33966,12 @@ const file_dota_gcmessages_client_proto_rawDesc = "" +
 	"templateId\x12\x1d\n" +
 	"\n" +
 	"quest_rank\x18\x06 \x01(\rR\tquestRank\x12$\n" +
-	"\x0emax_quest_rank\x18\a \x01(\rR\fmaxQuestRank\"X\n" +
+	"\x0emax_quest_rank\x18\a \x01(\rR\fmaxQuestRank\"\x80\x01\n" +
 	"\x12CMsgDOTARedeemItem\x12\x1f\n" +
 	"\vcurrency_id\x18\x01 \x01(\x04R\n" +
 	"currencyId\x12!\n" +
-	"\fpurchase_def\x18\x02 \x01(\rR\vpurchaseDef\"\x94\x01\n" +
+	"\fpurchase_def\x18\x02 \x01(\rR\vpurchaseDef\x12&\n" +
+	"\x0fclaim_as_points\x18\x03 \x01(\bR\rclaimAsPoints\"\x94\x01\n" +
 	"\x1aCMsgDOTARedeemItemResponse\x12H\n" +
 	"\bresponse\x18\x01 \x01(\x0e2,.dota.CMsgDOTARedeemItemResponse.EResultCodeR\bresponse\",\n" +
 	"\vEResultCode\x12\x0f\n" +

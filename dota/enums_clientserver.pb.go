@@ -98,6 +98,7 @@ const (
 	EMsg_k_EMsgLicenseProcessingComplete                                EMsg = 316
 	EMsg_k_EMsgSetTestFlag                                              EMsg = 317
 	EMsg_k_EMsgQueuedEmailsComplete                                     EMsg = 318
+	EMsg_k_EMsgGMReportPHPError                                         EMsg = 319
 	EMsg_k_EMsgGMDRMSync                                                EMsg = 320
 	EMsg_k_EMsgPhysicalBoxInventory                                     EMsg = 321
 	EMsg_k_EMsgUpdateConfigFile                                         EMsg = 322
@@ -115,8 +116,6 @@ const (
 	EMsg_k_EMsgExpectShellRestart                                       EMsg = 336
 	EMsg_k_EMsgHotFixProgress                                           EMsg = 337
 	EMsg_k_EMsgGMStatsForwardToAdminConnections                         EMsg = 338
-	EMsg_k_EMsgGMGetModifiedConVars                                     EMsg = 339
-	EMsg_k_EMsgGMGetModifiedConVarsResponse                             EMsg = 340
 	EMsg_k_EMsgBaseAIS                                                  EMsg = 400
 	EMsg_k_EMsgAISRequestContentDescription                             EMsg = 402
 	EMsg_k_EMsgAISUpdateAppInfo                                         EMsg = 403
@@ -525,8 +524,11 @@ const (
 	EMsg_k_EMsgClientDPSendSpecialSurveyResponse                        EMsg = 1622
 	EMsg_k_EMsgClientDPSendSpecialSurveyResponseReply                   EMsg = 1623
 	EMsg_k_EMsgDPStoreSaleStatistics                                    EMsg = 1624
+	EMsg_k_EMsgClientDPUpdateAppJobReport                               EMsg = 1625
+	EMsg_k_EMsgClientDPUnsignedInstallScript                            EMsg = 1627
 	EMsg_k_EMsgDPPartnerMicroTxns                                       EMsg = 1628
 	EMsg_k_EMsgDPPartnerMicroTxnsResponse                               EMsg = 1629
+	EMsg_k_EMsgClientDPContentStatsReport                               EMsg = 1630
 	EMsg_k_EMsgDPVRUniquePlayersStat                                    EMsg = 1631
 	EMsg_k_EMsgBaseCM                                                   EMsg = 1700
 	EMsg_k_EMsgCMSetAllowState                                          EMsg = 1701
@@ -572,9 +574,6 @@ const (
 	EMsg_k_EMsgGCHAppCheersReceived                                     EMsg = 2242
 	EMsg_k_EMsgGCHAppCheersGetAllowedTypes                              EMsg = 2243
 	EMsg_k_EMsgGCHAppCheersGetAllowedTypesResponse                      EMsg = 2244
-	EMsg_k_EMsgGCHRoutingRulesFromGCHtoGM                               EMsg = 2245
-	EMsg_k_EMsgGCHRoutingRulesToGCHfromGM                               EMsg = 2246
-	EMsg_k_EMsgUpdateCMMessageRateRules                                 EMsg = 2247
 	EMsg_k_EMsgBaseP2P                                                  EMsg = 2500
 	EMsg_k_EMsgP2PIntroducerMessage                                     EMsg = 2502
 	EMsg_k_EMsgBaseSM                                                   EMsg = 2900
@@ -721,6 +720,8 @@ const (
 	EMsg_k_EMsgAMSendQueuedEmails                                       EMsg = 4152
 	EMsg_k_EMsgAMSetLicenseFlags                                        EMsg = 4153
 	EMsg_k_EMsgCommunityDeleteUserNews                                  EMsg = 4155
+	EMsg_k_EMsgAMAllowUserFilesRequest                                  EMsg = 4156
+	EMsg_k_EMsgAMAllowUserFilesResponse                                 EMsg = 4157
 	EMsg_k_EMsgAMGetAccountStatus                                       EMsg = 4158
 	EMsg_k_EMsgAMGetAccountStatusResponse                               EMsg = 4159
 	EMsg_k_EMsgAMEditBanReason                                          EMsg = 4160
@@ -748,6 +749,7 @@ const (
 	EMsg_k_EMsgAMSupportIsAccountEnabledResponse                        EMsg = 4210
 	EMsg_k_EMsgUGSGetUserStats                                          EMsg = 4211
 	EMsg_k_EMsgAMGSSearch                                               EMsg = 4213
+	EMsg_k_EMsgMarketingMessageUpdate                                   EMsg = 4216
 	EMsg_k_EMsgChatServerRouteFriendMsg                                 EMsg = 4219
 	EMsg_k_EMsgAMTicketAuthRequestOrResponse                            EMsg = 4220
 	EMsg_k_EMsgAMAddFreeLicense                                         EMsg = 4224
@@ -774,6 +776,7 @@ const (
 	EMsg_k_EMsgAMCreateFinancialAdjustment                              EMsg = 4265
 	EMsg_k_EMsgAMPlayerNicknameList                                     EMsg = 4266
 	EMsg_k_EMsgAMPlayerNicknameListResponse                             EMsg = 4267
+	EMsg_k_EMsgAMSetDRMTestConfig                                       EMsg = 4268
 	EMsg_k_EMsgAMGetUserCurrentGameInfo                                 EMsg = 4269
 	EMsg_k_EMsgAMGetUserCurrentGameInfoResponse                         EMsg = 4270
 	EMsg_k_EMsgAMGetGSPlayerList                                        EMsg = 4271
@@ -904,7 +907,6 @@ const (
 	EMsg_k_EMsgAMPerfectWorldPaymentResponse                            EMsg = 4422
 	EMsg_k_EMsgAMECommPayPayment                                        EMsg = 4423
 	EMsg_k_EMsgAMECommPayPaymentResponse                                EMsg = 4424
-	EMsg_k_EMsgAMSetRemoteClientID                                      EMsg = 4425
 	EMsg_k_EMsgBasePSRange                                              EMsg = 5000
 	EMsg_k_EMsgPSCreateShoppingCart                                     EMsg = 5001
 	EMsg_k_EMsgPSCreateShoppingCartResponse                             EMsg = 5002
@@ -994,6 +996,7 @@ const (
 	EMsg_k_EMsgClientP2PConnectionFailInfo                              EMsg = 5435
 	EMsg_k_EMsgClientGetDepotDecryptionKey                              EMsg = 5438
 	EMsg_k_EMsgClientGetDepotDecryptionKeyResponse                      EMsg = 5439
+	EMsg_k_EMsgGSPerformHardwareSurvey                                  EMsg = 5440
 	EMsg_k_EMsgClientEnableTestLicense                                  EMsg = 5443
 	EMsg_k_EMsgClientEnableTestLicenseResponse                          EMsg = 5444
 	EMsg_k_EMsgClientDisableTestLicense                                 EMsg = 5445
@@ -1033,10 +1036,8 @@ const (
 	EMsg_k_EMsgClientOGSEndSession                                      EMsg = 5492
 	EMsg_k_EMsgClientOGSEndSessionResponse                              EMsg = 5493
 	EMsg_k_EMsgClientOGSWriteRow                                        EMsg = 5494
-	EMsg_k_EMsgClientGetPeerContentInfo                                 EMsg = 5495
-	EMsg_k_EMsgClientGetPeerContentInfoResponse                         EMsg = 5496
-	EMsg_k_EMsgClientStartPeerContentServer                             EMsg = 5497
-	EMsg_k_EMsgClientStartPeerContentServerResponse                     EMsg = 5498
+	EMsg_k_EMsgClientDRMTest                                            EMsg = 5495
+	EMsg_k_EMsgClientDRMTestResult                                      EMsg = 5496
 	EMsg_k_EMsgClientServerUnavailable                                  EMsg = 5500
 	EMsg_k_EMsgClientServersAvailable                                   EMsg = 5501
 	EMsg_k_EMsgClientRegisterAuthTicketWithCM                           EMsg = 5502
@@ -1046,6 +1047,7 @@ const (
 	EMsg_k_EMsgClientMicroTxnAuthorizeResponse                          EMsg = 5506
 	EMsg_k_EMsgClientGetMicroTxnInfo                                    EMsg = 5508
 	EMsg_k_EMsgClientGetMicroTxnInfoResponse                            EMsg = 5509
+	EMsg_k_EMsgClientMarketingMessageUpdate2                            EMsg = 5510
 	EMsg_k_EMsgClientDeregisterWithServer                               EMsg = 5511
 	EMsg_k_EMsgClientSubscribeToPersonaFeed                             EMsg = 5512
 	EMsg_k_EMsgClientLogon                                              EMsg = 5514
@@ -1260,6 +1262,8 @@ const (
 	EMsg_k_EMsgClientUCMUpdatePublishedFileResponse                     EMsg = 7326
 	EMsg_k_EMsgUCMUpdatePublishedFile                                   EMsg = 7327
 	EMsg_k_EMsgUCMUpdatePublishedFileResponse                           EMsg = 7328
+	EMsg_k_EMsgUCMDeletePublishedFile                                   EMsg = 7329
+	EMsg_k_EMsgUCMDeletePublishedFileResponse                           EMsg = 7330
 	EMsg_k_EMsgUCMUpdatePublishedFileStat                               EMsg = 7331
 	EMsg_k_EMsgUCMReloadPublishedFile                                   EMsg = 7337
 	EMsg_k_EMsgUCMReloadUserFileListCaches                              EMsg = 7338
@@ -1288,6 +1292,8 @@ const (
 	EMsg_k_EMsgClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse EMsg = 7379
 	EMsg_k_EMsgUCMPublishedFileContentUpdated                           EMsg = 7380
 	EMsg_k_EMsgClientUCMPublishedFileUpdated                            EMsg = 7381
+	EMsg_k_EMsgClientWorkshopItemChangesRequest                         EMsg = 7382
+	EMsg_k_EMsgClientWorkshopItemChangesResponse                        EMsg = 7383
 	EMsg_k_EMsgFSBase                                                   EMsg = 7500
 	EMsg_k_EMsgClientRichPresenceUpload                                 EMsg = 7501
 	EMsg_k_EMsgClientRichPresenceRequest                                EMsg = 7502
@@ -1458,14 +1464,14 @@ const (
 	EMsg_k_EMsgRemoteClientStartStreamResponse                          EMsg = 9504
 	EMsg_k_EMsgRemoteClientPing                                         EMsg = 9505
 	EMsg_k_EMsgRemoteClientPingResponse                                 EMsg = 9506
-	EMsg_k_EMsgClientUnlockH264                                         EMsg = 9507
-	EMsg_k_EMsgClientUnlockH264Response                                 EMsg = 9508
+	EMsg_k_EMsgClientUnlockStreaming                                    EMsg = 9507
+	EMsg_k_EMsgClientUnlockStreamingResponse                            EMsg = 9508
 	EMsg_k_EMsgRemoteClientAcceptEULA                                   EMsg = 9509
 	EMsg_k_EMsgRemoteClientGetControllerConfig                          EMsg = 9510
 	EMsg_k_EMsgRemoteClientGetControllerConfigResponse                  EMsg = 9511
 	EMsg_k_EMsgRemoteClientStreamingEnabled                             EMsg = 9512
-	EMsg_k_EMsgClientUnlockHEVC_OBSOLETE                                EMsg = 9513
-	EMsg_k_EMsgClientUnlockHEVCResponse_OBSOLETE                        EMsg = 9514
+	EMsg_k_EMsgClientUnlockHEVC                                         EMsg = 9513
+	EMsg_k_EMsgClientUnlockHEVCResponse                                 EMsg = 9514
 	EMsg_k_EMsgRemoteClientStatusRequest                                EMsg = 9515
 	EMsg_k_EMsgRemoteClientStatusResponse                               EMsg = 9516
 	EMsg_k_EMsgClientConcurrentSessionsBase                             EMsg = 9600
@@ -1475,6 +1481,7 @@ const (
 	EMsg_k_EMsgClientBroadcastInit                                      EMsg = 9700
 	EMsg_k_EMsgClientBroadcastFrames                                    EMsg = 9701
 	EMsg_k_EMsgClientBroadcastDisconnect                                EMsg = 9702
+	EMsg_k_EMsgClientBroadcastScreenshot                                EMsg = 9703
 	EMsg_k_EMsgClientBroadcastUploadConfig                              EMsg = 9704
 	EMsg_k_EMsgBaseClient3                                              EMsg = 9800
 	EMsg_k_EMsgClientVoiceCallPreAuthorize                              EMsg = 9800
@@ -1483,13 +1490,9 @@ const (
 	EMsg_k_EMsgClientServerTimestampResponse                            EMsg = 9803
 	EMsg_k_EMsgServiceMethodCallFromClientNonAuthed                     EMsg = 9804
 	EMsg_k_EMsgClientHello                                              EMsg = 9805
-	EMsg_k_EMsgClientEnableOrDisableDownloads                           EMsg = 9806
-	EMsg_k_EMsgClientEnableOrDisableDownloadsResponse                   EMsg = 9807
 	EMsg_k_EMsgClientLANP2PBase                                         EMsg = 9900
 	EMsg_k_EMsgClientLANP2PRequestChunk                                 EMsg = 9900
 	EMsg_k_EMsgClientLANP2PRequestChunkResponse                         EMsg = 9901
-	EMsg_k_EMsgClientPeerChunkRequest                                   EMsg = 9902
-	EMsg_k_EMsgClientPeerChunkResponse                                  EMsg = 9903
 	EMsg_k_EMsgClientLANP2PMax                                          EMsg = 9999
 	EMsg_k_EMsgBaseWatchdogServer                                       EMsg = 10000
 	EMsg_k_EMsgNotifyWatchdog                                           EMsg = 10000
@@ -1506,12 +1509,6 @@ const (
 	EMsg_k_EMsgChatServerGetPendingNotificationCountResponse            EMsg = 12001
 	EMsg_k_EMsgBaseSecretServer                                         EMsg = 12100
 	EMsg_k_EMsgServerSecretChanged                                      EMsg = 12100
-	EMsg_k_EMsgBaseWG                                                   EMsg = 12200
-	EMsg_k_EMsgWGConnectionProtocolError                                EMsg = 12200
-	EMsg_k_EMsgWGConnectionValidateUserToken                            EMsg = 12201
-	EMsg_k_EMsgWGConnectionValidateUserTokenResponse                    EMsg = 12202
-	EMsg_k_EMsgWGConnectionLegacyWGRequest                              EMsg = 12203
-	EMsg_k_EMsgWGConnectionLegacyWGResponse                             EMsg = 12204
 )
 
 // Enum value maps for EMsg.
@@ -1591,6 +1588,7 @@ var (
 		316: "k_EMsgLicenseProcessingComplete",
 		317: "k_EMsgSetTestFlag",
 		318: "k_EMsgQueuedEmailsComplete",
+		319: "k_EMsgGMReportPHPError",
 		320: "k_EMsgGMDRMSync",
 		321: "k_EMsgPhysicalBoxInventory",
 		322: "k_EMsgUpdateConfigFile",
@@ -1608,8 +1606,6 @@ var (
 		336: "k_EMsgExpectShellRestart",
 		337: "k_EMsgHotFixProgress",
 		338: "k_EMsgGMStatsForwardToAdminConnections",
-		339: "k_EMsgGMGetModifiedConVars",
-		340: "k_EMsgGMGetModifiedConVarsResponse",
 		400: "k_EMsgBaseAIS",
 		402: "k_EMsgAISRequestContentDescription",
 		403: "k_EMsgAISUpdateAppInfo",
@@ -2018,8 +2014,11 @@ var (
 		1622: "k_EMsgClientDPSendSpecialSurveyResponse",
 		1623: "k_EMsgClientDPSendSpecialSurveyResponseReply",
 		1624: "k_EMsgDPStoreSaleStatistics",
+		1625: "k_EMsgClientDPUpdateAppJobReport",
+		1627: "k_EMsgClientDPUnsignedInstallScript",
 		1628: "k_EMsgDPPartnerMicroTxns",
 		1629: "k_EMsgDPPartnerMicroTxnsResponse",
+		1630: "k_EMsgClientDPContentStatsReport",
 		1631: "k_EMsgDPVRUniquePlayersStat",
 		1700: "k_EMsgBaseCM",
 		1701: "k_EMsgCMSetAllowState",
@@ -2065,9 +2064,6 @@ var (
 		2242: "k_EMsgGCHAppCheersReceived",
 		2243: "k_EMsgGCHAppCheersGetAllowedTypes",
 		2244: "k_EMsgGCHAppCheersGetAllowedTypesResponse",
-		2245: "k_EMsgGCHRoutingRulesFromGCHtoGM",
-		2246: "k_EMsgGCHRoutingRulesToGCHfromGM",
-		2247: "k_EMsgUpdateCMMessageRateRules",
 		2500: "k_EMsgBaseP2P",
 		2502: "k_EMsgP2PIntroducerMessage",
 		2900: "k_EMsgBaseSM",
@@ -2214,6 +2210,8 @@ var (
 		4152: "k_EMsgAMSendQueuedEmails",
 		4153: "k_EMsgAMSetLicenseFlags",
 		4155: "k_EMsgCommunityDeleteUserNews",
+		4156: "k_EMsgAMAllowUserFilesRequest",
+		4157: "k_EMsgAMAllowUserFilesResponse",
 		4158: "k_EMsgAMGetAccountStatus",
 		4159: "k_EMsgAMGetAccountStatusResponse",
 		4160: "k_EMsgAMEditBanReason",
@@ -2241,6 +2239,7 @@ var (
 		4210: "k_EMsgAMSupportIsAccountEnabledResponse",
 		4211: "k_EMsgUGSGetUserStats",
 		4213: "k_EMsgAMGSSearch",
+		4216: "k_EMsgMarketingMessageUpdate",
 		4219: "k_EMsgChatServerRouteFriendMsg",
 		4220: "k_EMsgAMTicketAuthRequestOrResponse",
 		4224: "k_EMsgAMAddFreeLicense",
@@ -2267,6 +2266,7 @@ var (
 		4265: "k_EMsgAMCreateFinancialAdjustment",
 		4266: "k_EMsgAMPlayerNicknameList",
 		4267: "k_EMsgAMPlayerNicknameListResponse",
+		4268: "k_EMsgAMSetDRMTestConfig",
 		4269: "k_EMsgAMGetUserCurrentGameInfo",
 		4270: "k_EMsgAMGetUserCurrentGameInfoResponse",
 		4271: "k_EMsgAMGetGSPlayerList",
@@ -2397,7 +2397,6 @@ var (
 		4422: "k_EMsgAMPerfectWorldPaymentResponse",
 		4423: "k_EMsgAMECommPayPayment",
 		4424: "k_EMsgAMECommPayPaymentResponse",
-		4425: "k_EMsgAMSetRemoteClientID",
 		5000: "k_EMsgBasePSRange",
 		5001: "k_EMsgPSCreateShoppingCart",
 		5002: "k_EMsgPSCreateShoppingCartResponse",
@@ -2487,6 +2486,7 @@ var (
 		5435: "k_EMsgClientP2PConnectionFailInfo",
 		5438: "k_EMsgClientGetDepotDecryptionKey",
 		5439: "k_EMsgClientGetDepotDecryptionKeyResponse",
+		5440: "k_EMsgGSPerformHardwareSurvey",
 		5443: "k_EMsgClientEnableTestLicense",
 		5444: "k_EMsgClientEnableTestLicenseResponse",
 		5445: "k_EMsgClientDisableTestLicense",
@@ -2526,10 +2526,8 @@ var (
 		5492: "k_EMsgClientOGSEndSession",
 		5493: "k_EMsgClientOGSEndSessionResponse",
 		5494: "k_EMsgClientOGSWriteRow",
-		5495: "k_EMsgClientGetPeerContentInfo",
-		5496: "k_EMsgClientGetPeerContentInfoResponse",
-		5497: "k_EMsgClientStartPeerContentServer",
-		5498: "k_EMsgClientStartPeerContentServerResponse",
+		5495: "k_EMsgClientDRMTest",
+		5496: "k_EMsgClientDRMTestResult",
 		5500: "k_EMsgClientServerUnavailable",
 		5501: "k_EMsgClientServersAvailable",
 		5502: "k_EMsgClientRegisterAuthTicketWithCM",
@@ -2539,6 +2537,7 @@ var (
 		5506: "k_EMsgClientMicroTxnAuthorizeResponse",
 		5508: "k_EMsgClientGetMicroTxnInfo",
 		5509: "k_EMsgClientGetMicroTxnInfoResponse",
+		5510: "k_EMsgClientMarketingMessageUpdate2",
 		5511: "k_EMsgClientDeregisterWithServer",
 		5512: "k_EMsgClientSubscribeToPersonaFeed",
 		5514: "k_EMsgClientLogon",
@@ -2753,6 +2752,8 @@ var (
 		7326: "k_EMsgClientUCMUpdatePublishedFileResponse",
 		7327: "k_EMsgUCMUpdatePublishedFile",
 		7328: "k_EMsgUCMUpdatePublishedFileResponse",
+		7329: "k_EMsgUCMDeletePublishedFile",
+		7330: "k_EMsgUCMDeletePublishedFileResponse",
 		7331: "k_EMsgUCMUpdatePublishedFileStat",
 		7337: "k_EMsgUCMReloadPublishedFile",
 		7338: "k_EMsgUCMReloadUserFileListCaches",
@@ -2781,6 +2782,8 @@ var (
 		7379: "k_EMsgClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse",
 		7380: "k_EMsgUCMPublishedFileContentUpdated",
 		7381: "k_EMsgClientUCMPublishedFileUpdated",
+		7382: "k_EMsgClientWorkshopItemChangesRequest",
+		7383: "k_EMsgClientWorkshopItemChangesResponse",
 		7500: "k_EMsgFSBase",
 		7501: "k_EMsgClientRichPresenceUpload",
 		7502: "k_EMsgClientRichPresenceRequest",
@@ -2951,14 +2954,14 @@ var (
 		9504: "k_EMsgRemoteClientStartStreamResponse",
 		9505: "k_EMsgRemoteClientPing",
 		9506: "k_EMsgRemoteClientPingResponse",
-		9507: "k_EMsgClientUnlockH264",
-		9508: "k_EMsgClientUnlockH264Response",
+		9507: "k_EMsgClientUnlockStreaming",
+		9508: "k_EMsgClientUnlockStreamingResponse",
 		9509: "k_EMsgRemoteClientAcceptEULA",
 		9510: "k_EMsgRemoteClientGetControllerConfig",
 		9511: "k_EMsgRemoteClientGetControllerConfigResponse",
 		9512: "k_EMsgRemoteClientStreamingEnabled",
-		9513: "k_EMsgClientUnlockHEVC_OBSOLETE",
-		9514: "k_EMsgClientUnlockHEVCResponse_OBSOLETE",
+		9513: "k_EMsgClientUnlockHEVC",
+		9514: "k_EMsgClientUnlockHEVCResponse",
 		9515: "k_EMsgRemoteClientStatusRequest",
 		9516: "k_EMsgRemoteClientStatusResponse",
 		9600: "k_EMsgClientConcurrentSessionsBase",
@@ -2968,6 +2971,7 @@ var (
 		// Duplicate value: 9700: "k_EMsgClientBroadcastInit",
 		9701: "k_EMsgClientBroadcastFrames",
 		9702: "k_EMsgClientBroadcastDisconnect",
+		9703: "k_EMsgClientBroadcastScreenshot",
 		9704: "k_EMsgClientBroadcastUploadConfig",
 		9800: "k_EMsgBaseClient3",
 		// Duplicate value: 9800: "k_EMsgClientVoiceCallPreAuthorize",
@@ -2976,13 +2980,9 @@ var (
 		9803: "k_EMsgClientServerTimestampResponse",
 		9804: "k_EMsgServiceMethodCallFromClientNonAuthed",
 		9805: "k_EMsgClientHello",
-		9806: "k_EMsgClientEnableOrDisableDownloads",
-		9807: "k_EMsgClientEnableOrDisableDownloadsResponse",
 		9900: "k_EMsgClientLANP2PBase",
 		// Duplicate value: 9900: "k_EMsgClientLANP2PRequestChunk",
 		9901:  "k_EMsgClientLANP2PRequestChunkResponse",
-		9902:  "k_EMsgClientPeerChunkRequest",
-		9903:  "k_EMsgClientPeerChunkResponse",
 		9999:  "k_EMsgClientLANP2PMax",
 		10000: "k_EMsgBaseWatchdogServer",
 		// Duplicate value: 10000: "k_EMsgNotifyWatchdog",
@@ -2999,12 +2999,6 @@ var (
 		12001: "k_EMsgChatServerGetPendingNotificationCountResponse",
 		12100: "k_EMsgBaseSecretServer",
 		// Duplicate value: 12100: "k_EMsgServerSecretChanged",
-		12200: "k_EMsgBaseWG",
-		// Duplicate value: 12200: "k_EMsgWGConnectionProtocolError",
-		12201: "k_EMsgWGConnectionValidateUserToken",
-		12202: "k_EMsgWGConnectionValidateUserTokenResponse",
-		12203: "k_EMsgWGConnectionLegacyWGRequest",
-		12204: "k_EMsgWGConnectionLegacyWGResponse",
 	}
 	EMsg_value = map[string]int32{
 		"k_EMsgInvalid":                                                  0,
@@ -3081,6 +3075,7 @@ var (
 		"k_EMsgLicenseProcessingComplete":                                316,
 		"k_EMsgSetTestFlag":                                              317,
 		"k_EMsgQueuedEmailsComplete":                                     318,
+		"k_EMsgGMReportPHPError":                                         319,
 		"k_EMsgGMDRMSync":                                                320,
 		"k_EMsgPhysicalBoxInventory":                                     321,
 		"k_EMsgUpdateConfigFile":                                         322,
@@ -3098,8 +3093,6 @@ var (
 		"k_EMsgExpectShellRestart":                                       336,
 		"k_EMsgHotFixProgress":                                           337,
 		"k_EMsgGMStatsForwardToAdminConnections":                         338,
-		"k_EMsgGMGetModifiedConVars":                                     339,
-		"k_EMsgGMGetModifiedConVarsResponse":                             340,
 		"k_EMsgBaseAIS":                                                  400,
 		"k_EMsgAISRequestContentDescription":                             402,
 		"k_EMsgAISUpdateAppInfo":                                         403,
@@ -3508,8 +3501,11 @@ var (
 		"k_EMsgClientDPSendSpecialSurveyResponse":                        1622,
 		"k_EMsgClientDPSendSpecialSurveyResponseReply":                   1623,
 		"k_EMsgDPStoreSaleStatistics":                                    1624,
+		"k_EMsgClientDPUpdateAppJobReport":                               1625,
+		"k_EMsgClientDPUnsignedInstallScript":                            1627,
 		"k_EMsgDPPartnerMicroTxns":                                       1628,
 		"k_EMsgDPPartnerMicroTxnsResponse":                               1629,
+		"k_EMsgClientDPContentStatsReport":                               1630,
 		"k_EMsgDPVRUniquePlayersStat":                                    1631,
 		"k_EMsgBaseCM":                                                   1700,
 		"k_EMsgCMSetAllowState":                                          1701,
@@ -3555,9 +3551,6 @@ var (
 		"k_EMsgGCHAppCheersReceived":                                     2242,
 		"k_EMsgGCHAppCheersGetAllowedTypes":                              2243,
 		"k_EMsgGCHAppCheersGetAllowedTypesResponse":                      2244,
-		"k_EMsgGCHRoutingRulesFromGCHtoGM":                               2245,
-		"k_EMsgGCHRoutingRulesToGCHfromGM":                               2246,
-		"k_EMsgUpdateCMMessageRateRules":                                 2247,
 		"k_EMsgBaseP2P":                                                  2500,
 		"k_EMsgP2PIntroducerMessage":                                     2502,
 		"k_EMsgBaseSM":                                                   2900,
@@ -3704,6 +3697,8 @@ var (
 		"k_EMsgAMSendQueuedEmails":                                       4152,
 		"k_EMsgAMSetLicenseFlags":                                        4153,
 		"k_EMsgCommunityDeleteUserNews":                                  4155,
+		"k_EMsgAMAllowUserFilesRequest":                                  4156,
+		"k_EMsgAMAllowUserFilesResponse":                                 4157,
 		"k_EMsgAMGetAccountStatus":                                       4158,
 		"k_EMsgAMGetAccountStatusResponse":                               4159,
 		"k_EMsgAMEditBanReason":                                          4160,
@@ -3731,6 +3726,7 @@ var (
 		"k_EMsgAMSupportIsAccountEnabledResponse":                        4210,
 		"k_EMsgUGSGetUserStats":                                          4211,
 		"k_EMsgAMGSSearch":                                               4213,
+		"k_EMsgMarketingMessageUpdate":                                   4216,
 		"k_EMsgChatServerRouteFriendMsg":                                 4219,
 		"k_EMsgAMTicketAuthRequestOrResponse":                            4220,
 		"k_EMsgAMAddFreeLicense":                                         4224,
@@ -3757,6 +3753,7 @@ var (
 		"k_EMsgAMCreateFinancialAdjustment":                              4265,
 		"k_EMsgAMPlayerNicknameList":                                     4266,
 		"k_EMsgAMPlayerNicknameListResponse":                             4267,
+		"k_EMsgAMSetDRMTestConfig":                                       4268,
 		"k_EMsgAMGetUserCurrentGameInfo":                                 4269,
 		"k_EMsgAMGetUserCurrentGameInfoResponse":                         4270,
 		"k_EMsgAMGetGSPlayerList":                                        4271,
@@ -3887,7 +3884,6 @@ var (
 		"k_EMsgAMPerfectWorldPaymentResponse":                            4422,
 		"k_EMsgAMECommPayPayment":                                        4423,
 		"k_EMsgAMECommPayPaymentResponse":                                4424,
-		"k_EMsgAMSetRemoteClientID":                                      4425,
 		"k_EMsgBasePSRange":                                              5000,
 		"k_EMsgPSCreateShoppingCart":                                     5001,
 		"k_EMsgPSCreateShoppingCartResponse":                             5002,
@@ -3977,6 +3973,7 @@ var (
 		"k_EMsgClientP2PConnectionFailInfo":                              5435,
 		"k_EMsgClientGetDepotDecryptionKey":                              5438,
 		"k_EMsgClientGetDepotDecryptionKeyResponse":                      5439,
+		"k_EMsgGSPerformHardwareSurvey":                                  5440,
 		"k_EMsgClientEnableTestLicense":                                  5443,
 		"k_EMsgClientEnableTestLicenseResponse":                          5444,
 		"k_EMsgClientDisableTestLicense":                                 5445,
@@ -4016,10 +4013,8 @@ var (
 		"k_EMsgClientOGSEndSession":                                      5492,
 		"k_EMsgClientOGSEndSessionResponse":                              5493,
 		"k_EMsgClientOGSWriteRow":                                        5494,
-		"k_EMsgClientGetPeerContentInfo":                                 5495,
-		"k_EMsgClientGetPeerContentInfoResponse":                         5496,
-		"k_EMsgClientStartPeerContentServer":                             5497,
-		"k_EMsgClientStartPeerContentServerResponse":                     5498,
+		"k_EMsgClientDRMTest":                                            5495,
+		"k_EMsgClientDRMTestResult":                                      5496,
 		"k_EMsgClientServerUnavailable":                                  5500,
 		"k_EMsgClientServersAvailable":                                   5501,
 		"k_EMsgClientRegisterAuthTicketWithCM":                           5502,
@@ -4029,6 +4024,7 @@ var (
 		"k_EMsgClientMicroTxnAuthorizeResponse":                          5506,
 		"k_EMsgClientGetMicroTxnInfo":                                    5508,
 		"k_EMsgClientGetMicroTxnInfoResponse":                            5509,
+		"k_EMsgClientMarketingMessageUpdate2":                            5510,
 		"k_EMsgClientDeregisterWithServer":                               5511,
 		"k_EMsgClientSubscribeToPersonaFeed":                             5512,
 		"k_EMsgClientLogon":                                              5514,
@@ -4243,6 +4239,8 @@ var (
 		"k_EMsgClientUCMUpdatePublishedFileResponse":                     7326,
 		"k_EMsgUCMUpdatePublishedFile":                                   7327,
 		"k_EMsgUCMUpdatePublishedFileResponse":                           7328,
+		"k_EMsgUCMDeletePublishedFile":                                   7329,
+		"k_EMsgUCMDeletePublishedFileResponse":                           7330,
 		"k_EMsgUCMUpdatePublishedFileStat":                               7331,
 		"k_EMsgUCMReloadPublishedFile":                                   7337,
 		"k_EMsgUCMReloadUserFileListCaches":                              7338,
@@ -4271,6 +4269,8 @@ var (
 		"k_EMsgClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse": 7379,
 		"k_EMsgUCMPublishedFileContentUpdated":                           7380,
 		"k_EMsgClientUCMPublishedFileUpdated":                            7381,
+		"k_EMsgClientWorkshopItemChangesRequest":                         7382,
+		"k_EMsgClientWorkshopItemChangesResponse":                        7383,
 		"k_EMsgFSBase":                                                   7500,
 		"k_EMsgClientRichPresenceUpload":                                 7501,
 		"k_EMsgClientRichPresenceRequest":                                7502,
@@ -4441,14 +4441,14 @@ var (
 		"k_EMsgRemoteClientStartStreamResponse":                          9504,
 		"k_EMsgRemoteClientPing":                                         9505,
 		"k_EMsgRemoteClientPingResponse":                                 9506,
-		"k_EMsgClientUnlockH264":                                         9507,
-		"k_EMsgClientUnlockH264Response":                                 9508,
+		"k_EMsgClientUnlockStreaming":                                    9507,
+		"k_EMsgClientUnlockStreamingResponse":                            9508,
 		"k_EMsgRemoteClientAcceptEULA":                                   9509,
 		"k_EMsgRemoteClientGetControllerConfig":                          9510,
 		"k_EMsgRemoteClientGetControllerConfigResponse":                  9511,
 		"k_EMsgRemoteClientStreamingEnabled":                             9512,
-		"k_EMsgClientUnlockHEVC_OBSOLETE":                                9513,
-		"k_EMsgClientUnlockHEVCResponse_OBSOLETE":                        9514,
+		"k_EMsgClientUnlockHEVC":                                         9513,
+		"k_EMsgClientUnlockHEVCResponse":                                 9514,
 		"k_EMsgRemoteClientStatusRequest":                                9515,
 		"k_EMsgRemoteClientStatusResponse":                               9516,
 		"k_EMsgClientConcurrentSessionsBase":                             9600,
@@ -4458,6 +4458,7 @@ var (
 		"k_EMsgClientBroadcastInit":                                      9700,
 		"k_EMsgClientBroadcastFrames":                                    9701,
 		"k_EMsgClientBroadcastDisconnect":                                9702,
+		"k_EMsgClientBroadcastScreenshot":                                9703,
 		"k_EMsgClientBroadcastUploadConfig":                              9704,
 		"k_EMsgBaseClient3":                                              9800,
 		"k_EMsgClientVoiceCallPreAuthorize":                              9800,
@@ -4466,13 +4467,9 @@ var (
 		"k_EMsgClientServerTimestampResponse":                            9803,
 		"k_EMsgServiceMethodCallFromClientNonAuthed":                     9804,
 		"k_EMsgClientHello":                                              9805,
-		"k_EMsgClientEnableOrDisableDownloads":                           9806,
-		"k_EMsgClientEnableOrDisableDownloadsResponse":                   9807,
 		"k_EMsgClientLANP2PBase":                                         9900,
 		"k_EMsgClientLANP2PRequestChunk":                                 9900,
 		"k_EMsgClientLANP2PRequestChunkResponse":                         9901,
-		"k_EMsgClientPeerChunkRequest":                                   9902,
-		"k_EMsgClientPeerChunkResponse":                                  9903,
 		"k_EMsgClientLANP2PMax":                                          9999,
 		"k_EMsgBaseWatchdogServer":                                       10000,
 		"k_EMsgNotifyWatchdog":                                           10000,
@@ -4489,12 +4486,6 @@ var (
 		"k_EMsgChatServerGetPendingNotificationCountResponse":            12001,
 		"k_EMsgBaseSecretServer":                                         12100,
 		"k_EMsgServerSecretChanged":                                      12100,
-		"k_EMsgBaseWG":                                                   12200,
-		"k_EMsgWGConnectionProtocolError":                                12200,
-		"k_EMsgWGConnectionValidateUserToken":                            12201,
-		"k_EMsgWGConnectionValidateUserTokenResponse":                    12202,
-		"k_EMsgWGConnectionLegacyWGRequest":                              12203,
-		"k_EMsgWGConnectionLegacyWGResponse":                             12204,
 	}
 )
 
@@ -4772,138 +4763,11 @@ func (ESteamReviewScore) EnumDescriptor() ([]byte, []int) {
 	return file_enums_clientserver_proto_rawDescGZIP(), []int{3}
 }
 
-type ECodecUsagePlatform int32
-
-const (
-	ECodecUsagePlatform_k_ECodecUsagePlatformUnknown   ECodecUsagePlatform = 0
-	ECodecUsagePlatform_k_ECodecUsagePlatformWindows   ECodecUsagePlatform = 1
-	ECodecUsagePlatform_k_ECodecUsagePlatformMacOS     ECodecUsagePlatform = 2
-	ECodecUsagePlatform_k_ECodecUsagePlatformLinux     ECodecUsagePlatform = 3
-	ECodecUsagePlatform_k_ECodecUsagePlatformSteamDeck ECodecUsagePlatform = 4
-)
-
-// Enum value maps for ECodecUsagePlatform.
-var (
-	ECodecUsagePlatform_name = map[int32]string{
-		0: "k_ECodecUsagePlatformUnknown",
-		1: "k_ECodecUsagePlatformWindows",
-		2: "k_ECodecUsagePlatformMacOS",
-		3: "k_ECodecUsagePlatformLinux",
-		4: "k_ECodecUsagePlatformSteamDeck",
-	}
-	ECodecUsagePlatform_value = map[string]int32{
-		"k_ECodecUsagePlatformUnknown":   0,
-		"k_ECodecUsagePlatformWindows":   1,
-		"k_ECodecUsagePlatformMacOS":     2,
-		"k_ECodecUsagePlatformLinux":     3,
-		"k_ECodecUsagePlatformSteamDeck": 4,
-	}
-)
-
-func (x ECodecUsagePlatform) Enum() *ECodecUsagePlatform {
-	p := new(ECodecUsagePlatform)
-	*p = x
-	return p
-}
-
-func (x ECodecUsagePlatform) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (ECodecUsagePlatform) Descriptor() protoreflect.EnumDescriptor {
-	return file_enums_clientserver_proto_enumTypes[4].Descriptor()
-}
-
-func (ECodecUsagePlatform) Type() protoreflect.EnumType {
-	return &file_enums_clientserver_proto_enumTypes[4]
-}
-
-func (x ECodecUsagePlatform) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Do not use.
-func (x *ECodecUsagePlatform) UnmarshalJSON(b []byte) error {
-	num, err := protoimpl.X.UnmarshalJSONEnum(x.Descriptor(), b)
-	if err != nil {
-		return err
-	}
-	*x = ECodecUsagePlatform(num)
-	return nil
-}
-
-// Deprecated: Use ECodecUsagePlatform.Descriptor instead.
-func (ECodecUsagePlatform) EnumDescriptor() ([]byte, []int) {
-	return file_enums_clientserver_proto_rawDescGZIP(), []int{4}
-}
-
-type ECodecUsageReason int32
-
-const (
-	ECodecUsageReason_k_ECodecUsageReasonUnknown      ECodecUsageReason = 0
-	ECodecUsageReason_k_ECodecUsageReasonRemotePlay   ECodecUsageReason = 1
-	ECodecUsageReason_k_ECodecUsageReasonBroadcasting ECodecUsageReason = 2
-	ECodecUsageReason_k_ECodecUsageReasonGameVideo    ECodecUsageReason = 3
-)
-
-// Enum value maps for ECodecUsageReason.
-var (
-	ECodecUsageReason_name = map[int32]string{
-		0: "k_ECodecUsageReasonUnknown",
-		1: "k_ECodecUsageReasonRemotePlay",
-		2: "k_ECodecUsageReasonBroadcasting",
-		3: "k_ECodecUsageReasonGameVideo",
-	}
-	ECodecUsageReason_value = map[string]int32{
-		"k_ECodecUsageReasonUnknown":      0,
-		"k_ECodecUsageReasonRemotePlay":   1,
-		"k_ECodecUsageReasonBroadcasting": 2,
-		"k_ECodecUsageReasonGameVideo":    3,
-	}
-)
-
-func (x ECodecUsageReason) Enum() *ECodecUsageReason {
-	p := new(ECodecUsageReason)
-	*p = x
-	return p
-}
-
-func (x ECodecUsageReason) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (ECodecUsageReason) Descriptor() protoreflect.EnumDescriptor {
-	return file_enums_clientserver_proto_enumTypes[5].Descriptor()
-}
-
-func (ECodecUsageReason) Type() protoreflect.EnumType {
-	return &file_enums_clientserver_proto_enumTypes[5]
-}
-
-func (x ECodecUsageReason) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Do not use.
-func (x *ECodecUsageReason) UnmarshalJSON(b []byte) error {
-	num, err := protoimpl.X.UnmarshalJSONEnum(x.Descriptor(), b)
-	if err != nil {
-		return err
-	}
-	*x = ECodecUsageReason(num)
-	return nil
-}
-
-// Deprecated: Use ECodecUsageReason.Descriptor instead.
-func (ECodecUsageReason) EnumDescriptor() ([]byte, []int) {
-	return file_enums_clientserver_proto_rawDescGZIP(), []int{5}
-}
-
 var File_enums_clientserver_proto protoreflect.FileDescriptor
 
 const file_enums_clientserver_proto_rawDesc = "" +
 	"\n" +
-	"\x18enums_clientserver.proto\x12\x04dota*\x9b\x9f\x03\n" +
+	"\x18enums_clientserver.proto\x12\x04dota*\xf6\x9d\x03\n" +
 	"\x04EMsg\x12\x11\n" +
 	"\rk_EMsgInvalid\x10\x00\x12\x0f\n" +
 	"\vk_EMsgMulti\x10\x01\x12\x19\n" +
@@ -4980,7 +4844,8 @@ const file_enums_clientserver_proto_rawDesc = "" +
 	"\x17k_EMsgGracefulExitShell\x10\xb5\x02\x12$\n" +
 	"\x1fk_EMsgLicenseProcessingComplete\x10\xbc\x02\x12\x16\n" +
 	"\x11k_EMsgSetTestFlag\x10\xbd\x02\x12\x1f\n" +
-	"\x1ak_EMsgQueuedEmailsComplete\x10\xbe\x02\x12\x14\n" +
+	"\x1ak_EMsgQueuedEmailsComplete\x10\xbe\x02\x12\x1b\n" +
+	"\x16k_EMsgGMReportPHPError\x10\xbf\x02\x12\x14\n" +
 	"\x0fk_EMsgGMDRMSync\x10\xc0\x02\x12\x1f\n" +
 	"\x1ak_EMsgPhysicalBoxInventory\x10\xc1\x02\x12\x1b\n" +
 	"\x16k_EMsgUpdateConfigFile\x10\xc2\x02\x12\x15\n" +
@@ -4997,9 +4862,7 @@ const file_enums_clientserver_proto_rawDesc = "" +
 	"-k_EMsgGMTestNextBuildSchemaConversionResponse\x10\xcf\x02\x12\x1d\n" +
 	"\x18k_EMsgExpectShellRestart\x10\xd0\x02\x12\x19\n" +
 	"\x14k_EMsgHotFixProgress\x10\xd1\x02\x12+\n" +
-	"&k_EMsgGMStatsForwardToAdminConnections\x10\xd2\x02\x12\x1f\n" +
-	"\x1ak_EMsgGMGetModifiedConVars\x10\xd3\x02\x12'\n" +
-	"\"k_EMsgGMGetModifiedConVarsResponse\x10\xd4\x02\x12\x12\n" +
+	"&k_EMsgGMStatsForwardToAdminConnections\x10\xd2\x02\x12\x12\n" +
 	"\rk_EMsgBaseAIS\x10\x90\x03\x12'\n" +
 	"\"k_EMsgAISRequestContentDescription\x10\x92\x03\x12\x1b\n" +
 	"\x16k_EMsgAISUpdateAppInfo\x10\x93\x03\x12$\n" +
@@ -5420,9 +5283,12 @@ const file_enums_clientserver_proto_rawDesc = "" +
 	"(k_EMsgClientDPCheckSpecialSurveyResponse\x10\xd5\f\x12,\n" +
 	"'k_EMsgClientDPSendSpecialSurveyResponse\x10\xd6\f\x121\n" +
 	",k_EMsgClientDPSendSpecialSurveyResponseReply\x10\xd7\f\x12 \n" +
-	"\x1bk_EMsgDPStoreSaleStatistics\x10\xd8\f\x12\x1d\n" +
+	"\x1bk_EMsgDPStoreSaleStatistics\x10\xd8\f\x12%\n" +
+	" k_EMsgClientDPUpdateAppJobReport\x10\xd9\f\x12(\n" +
+	"#k_EMsgClientDPUnsignedInstallScript\x10\xdb\f\x12\x1d\n" +
 	"\x18k_EMsgDPPartnerMicroTxns\x10\xdc\f\x12%\n" +
-	" k_EMsgDPPartnerMicroTxnsResponse\x10\xdd\f\x12 \n" +
+	" k_EMsgDPPartnerMicroTxnsResponse\x10\xdd\f\x12%\n" +
+	" k_EMsgClientDPContentStatsReport\x10\xde\f\x12 \n" +
 	"\x1bk_EMsgDPVRUniquePlayersStat\x10\xdf\f\x12\x11\n" +
 	"\fk_EMsgBaseCM\x10\xa4\r\x12\x1a\n" +
 	"\x15k_EMsgCMSetAllowState\x10\xa5\r\x12\x1b\n" +
@@ -5467,10 +5333,7 @@ const file_enums_clientserver_proto_rawDesc = "" +
 	"*k_EMsgGCHRecurringSubscriptionStatusChange\x10\xc1\x11\x12\x1f\n" +
 	"\x1ak_EMsgGCHAppCheersReceived\x10\xc2\x11\x12&\n" +
 	"!k_EMsgGCHAppCheersGetAllowedTypes\x10\xc3\x11\x12.\n" +
-	")k_EMsgGCHAppCheersGetAllowedTypesResponse\x10\xc4\x11\x12%\n" +
-	" k_EMsgGCHRoutingRulesFromGCHtoGM\x10\xc5\x11\x12%\n" +
-	" k_EMsgGCHRoutingRulesToGCHfromGM\x10\xc6\x11\x12#\n" +
-	"\x1ek_EMsgUpdateCMMessageRateRules\x10\xc7\x11\x12\x12\n" +
+	")k_EMsgGCHAppCheersGetAllowedTypesResponse\x10\xc4\x11\x12\x12\n" +
 	"\rk_EMsgBaseP2P\x10\xc4\x13\x12\x1f\n" +
 	"\x1ak_EMsgP2PIntroducerMessage\x10\xc6\x13\x12\x11\n" +
 	"\fk_EMsgBaseSM\x10\xd4\x16\x12\x1c\n" +
@@ -5616,7 +5479,9 @@ const file_enums_clientserver_proto_rawDesc = "" +
 	" k_EMsgAMSetUserNewsSubscriptions\x10\xb5 \x12\x1d\n" +
 	"\x18k_EMsgAMSendQueuedEmails\x10\xb8 \x12\x1c\n" +
 	"\x17k_EMsgAMSetLicenseFlags\x10\xb9 \x12\"\n" +
-	"\x1dk_EMsgCommunityDeleteUserNews\x10\xbb \x12\x1d\n" +
+	"\x1dk_EMsgCommunityDeleteUserNews\x10\xbb \x12\"\n" +
+	"\x1dk_EMsgAMAllowUserFilesRequest\x10\xbc \x12#\n" +
+	"\x1ek_EMsgAMAllowUserFilesResponse\x10\xbd \x12\x1d\n" +
 	"\x18k_EMsgAMGetAccountStatus\x10\xbe \x12%\n" +
 	" k_EMsgAMGetAccountStatusResponse\x10\xbf \x12\x1a\n" +
 	"\x15k_EMsgAMEditBanReason\x10\xc0 \x12(\n" +
@@ -5643,7 +5508,8 @@ const file_enums_clientserver_proto_rawDesc = "" +
 	"\x1fk_EMsgAMSupportIsAccountEnabled\x10\xf1 \x12,\n" +
 	"'k_EMsgAMSupportIsAccountEnabledResponse\x10\xf2 \x12\x1a\n" +
 	"\x15k_EMsgUGSGetUserStats\x10\xf3 \x12\x15\n" +
-	"\x10k_EMsgAMGSSearch\x10\xf5 \x12#\n" +
+	"\x10k_EMsgAMGSSearch\x10\xf5 \x12!\n" +
+	"\x1ck_EMsgMarketingMessageUpdate\x10\xf8 \x12#\n" +
 	"\x1ek_EMsgChatServerRouteFriendMsg\x10\xfb \x12(\n" +
 	"#k_EMsgAMTicketAuthRequestOrResponse\x10\xfc \x12\x1b\n" +
 	"\x16k_EMsgAMAddFreeLicense\x10\x80!\x12\x1e\n" +
@@ -5669,7 +5535,8 @@ const file_enums_clientserver_proto_rawDesc = "" +
 	"\x14k_EMsgAMClearDispute\x10\xa8!\x12&\n" +
 	"!k_EMsgAMCreateFinancialAdjustment\x10\xa9!\x12\x1f\n" +
 	"\x1ak_EMsgAMPlayerNicknameList\x10\xaa!\x12'\n" +
-	"\"k_EMsgAMPlayerNicknameListResponse\x10\xab!\x12#\n" +
+	"\"k_EMsgAMPlayerNicknameListResponse\x10\xab!\x12\x1d\n" +
+	"\x18k_EMsgAMSetDRMTestConfig\x10\xac!\x12#\n" +
 	"\x1ek_EMsgAMGetUserCurrentGameInfo\x10\xad!\x12+\n" +
 	"&k_EMsgAMGetUserCurrentGameInfoResponse\x10\xae!\x12\x1c\n" +
 	"\x17k_EMsgAMGetGSPlayerList\x10\xaf!\x12$\n" +
@@ -5799,8 +5666,7 @@ const file_enums_clientserver_proto_rawDesc = "" +
 	"\x1bk_EMsgAMPerfectWorldPayment\x10\xc5\"\x12(\n" +
 	"#k_EMsgAMPerfectWorldPaymentResponse\x10\xc6\"\x12\x1c\n" +
 	"\x17k_EMsgAMECommPayPayment\x10\xc7\"\x12$\n" +
-	"\x1fk_EMsgAMECommPayPaymentResponse\x10\xc8\"\x12\x1e\n" +
-	"\x19k_EMsgAMSetRemoteClientID\x10\xc9\"\x12\x16\n" +
+	"\x1fk_EMsgAMECommPayPaymentResponse\x10\xc8\"\x12\x16\n" +
 	"\x11k_EMsgBasePSRange\x10\x88'\x12\x1f\n" +
 	"\x1ak_EMsgPSCreateShoppingCart\x10\x89'\x12'\n" +
 	"\"k_EMsgPSCreateShoppingCartResponse\x10\x8a'\x12 \n" +
@@ -5890,6 +5756,7 @@ const file_enums_clientserver_proto_rawDesc = "" +
 	"!k_EMsgClientP2PConnectionFailInfo\x10\xbb*\x12&\n" +
 	"!k_EMsgClientGetDepotDecryptionKey\x10\xbe*\x12.\n" +
 	")k_EMsgClientGetDepotDecryptionKeyResponse\x10\xbf*\x12\"\n" +
+	"\x1dk_EMsgGSPerformHardwareSurvey\x10\xc0*\x12\"\n" +
 	"\x1dk_EMsgClientEnableTestLicense\x10\xc3*\x12*\n" +
 	"%k_EMsgClientEnableTestLicenseResponse\x10\xc4*\x12#\n" +
 	"\x1ek_EMsgClientDisableTestLicense\x10\xc5*\x12+\n" +
@@ -5928,11 +5795,9 @@ const file_enums_clientserver_proto_rawDesc = "" +
 	"#k_EMsgClientOGSBeginSessionResponse\x10\xf3*\x12\x1e\n" +
 	"\x19k_EMsgClientOGSEndSession\x10\xf4*\x12&\n" +
 	"!k_EMsgClientOGSEndSessionResponse\x10\xf5*\x12\x1c\n" +
-	"\x17k_EMsgClientOGSWriteRow\x10\xf6*\x12#\n" +
-	"\x1ek_EMsgClientGetPeerContentInfo\x10\xf7*\x12+\n" +
-	"&k_EMsgClientGetPeerContentInfoResponse\x10\xf8*\x12'\n" +
-	"\"k_EMsgClientStartPeerContentServer\x10\xf9*\x12/\n" +
-	"*k_EMsgClientStartPeerContentServerResponse\x10\xfa*\x12\"\n" +
+	"\x17k_EMsgClientOGSWriteRow\x10\xf6*\x12\x18\n" +
+	"\x13k_EMsgClientDRMTest\x10\xf7*\x12\x1e\n" +
+	"\x19k_EMsgClientDRMTestResult\x10\xf8*\x12\"\n" +
 	"\x1dk_EMsgClientServerUnavailable\x10\xfc*\x12!\n" +
 	"\x1ck_EMsgClientServersAvailable\x10\xfd*\x12)\n" +
 	"$k_EMsgClientRegisterAuthTicketWithCM\x10\xfe*\x12\x1c\n" +
@@ -5941,7 +5806,8 @@ const file_enums_clientserver_proto_rawDesc = "" +
 	"\x1dk_EMsgClientMicroTxnAuthorize\x10\x81+\x12*\n" +
 	"%k_EMsgClientMicroTxnAuthorizeResponse\x10\x82+\x12 \n" +
 	"\x1bk_EMsgClientGetMicroTxnInfo\x10\x84+\x12(\n" +
-	"#k_EMsgClientGetMicroTxnInfoResponse\x10\x85+\x12%\n" +
+	"#k_EMsgClientGetMicroTxnInfoResponse\x10\x85+\x12(\n" +
+	"#k_EMsgClientMarketingMessageUpdate2\x10\x86+\x12%\n" +
 	" k_EMsgClientDeregisterWithServer\x10\x87+\x12'\n" +
 	"\"k_EMsgClientSubscribeToPersonaFeed\x10\x88+\x12\x16\n" +
 	"\x11k_EMsgClientLogon\x10\x8a+\x12!\n" +
@@ -6155,7 +6021,9 @@ const file_enums_clientserver_proto_rawDesc = "" +
 	"\"k_EMsgClientUCMUpdatePublishedFile\x10\x9d9\x12/\n" +
 	"*k_EMsgClientUCMUpdatePublishedFileResponse\x10\x9e9\x12!\n" +
 	"\x1ck_EMsgUCMUpdatePublishedFile\x10\x9f9\x12)\n" +
-	"$k_EMsgUCMUpdatePublishedFileResponse\x10\xa09\x12%\n" +
+	"$k_EMsgUCMUpdatePublishedFileResponse\x10\xa09\x12!\n" +
+	"\x1ck_EMsgUCMDeletePublishedFile\x10\xa19\x12)\n" +
+	"$k_EMsgUCMDeletePublishedFileResponse\x10\xa29\x12%\n" +
 	" k_EMsgUCMUpdatePublishedFileStat\x10\xa39\x12!\n" +
 	"\x1ck_EMsgUCMReloadPublishedFile\x10\xa99\x12&\n" +
 	"!k_EMsgUCMReloadUserFileListCaches\x10\xaa9\x12#\n" +
@@ -6183,7 +6051,9 @@ const file_enums_clientserver_proto_rawDesc = "" +
 	"6k_EMsgClientUCMEnumerateUserSubscribedFilesWithUpdates\x10\xd29\x12C\n" +
 	">k_EMsgClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse\x10\xd39\x12)\n" +
 	"$k_EMsgUCMPublishedFileContentUpdated\x10\xd49\x12(\n" +
-	"#k_EMsgClientUCMPublishedFileUpdated\x10\xd59\x12\x11\n" +
+	"#k_EMsgClientUCMPublishedFileUpdated\x10\xd59\x12+\n" +
+	"&k_EMsgClientWorkshopItemChangesRequest\x10\xd69\x12,\n" +
+	"'k_EMsgClientWorkshopItemChangesResponse\x10\xd79\x12\x11\n" +
 	"\fk_EMsgFSBase\x10\xcc:\x12#\n" +
 	"\x1ek_EMsgClientRichPresenceUpload\x10\xcd:\x12$\n" +
 	"\x1fk_EMsgClientRichPresenceRequest\x10\xce:\x12!\n" +
@@ -6353,15 +6223,15 @@ const file_enums_clientserver_proto_rawDesc = "" +
 	"\x1dk_EMsgRemoteClientStartStream\x10\x9fJ\x12*\n" +
 	"%k_EMsgRemoteClientStartStreamResponse\x10\xa0J\x12\x1b\n" +
 	"\x16k_EMsgRemoteClientPing\x10\xa1J\x12#\n" +
-	"\x1ek_EMsgRemoteClientPingResponse\x10\xa2J\x12\x1b\n" +
-	"\x16k_EMsgClientUnlockH264\x10\xa3J\x12#\n" +
-	"\x1ek_EMsgClientUnlockH264Response\x10\xa4J\x12!\n" +
+	"\x1ek_EMsgRemoteClientPingResponse\x10\xa2J\x12 \n" +
+	"\x1bk_EMsgClientUnlockStreaming\x10\xa3J\x12(\n" +
+	"#k_EMsgClientUnlockStreamingResponse\x10\xa4J\x12!\n" +
 	"\x1ck_EMsgRemoteClientAcceptEULA\x10\xa5J\x12*\n" +
 	"%k_EMsgRemoteClientGetControllerConfig\x10\xa6J\x122\n" +
 	"-k_EMsgRemoteClientGetControllerConfigResponse\x10\xa7J\x12'\n" +
-	"\"k_EMsgRemoteClientStreamingEnabled\x10\xa8J\x12$\n" +
-	"\x1fk_EMsgClientUnlockHEVC_OBSOLETE\x10\xa9J\x12,\n" +
-	"'k_EMsgClientUnlockHEVCResponse_OBSOLETE\x10\xaaJ\x12$\n" +
+	"\"k_EMsgRemoteClientStreamingEnabled\x10\xa8J\x12\x1b\n" +
+	"\x16k_EMsgClientUnlockHEVC\x10\xa9J\x12#\n" +
+	"\x1ek_EMsgClientUnlockHEVCResponse\x10\xaaJ\x12$\n" +
 	"\x1fk_EMsgRemoteClientStatusRequest\x10\xabJ\x12%\n" +
 	" k_EMsgRemoteClientStatusResponse\x10\xacJ\x12'\n" +
 	"\"k_EMsgClientConcurrentSessionsBase\x10\x80K\x12$\n" +
@@ -6370,7 +6240,8 @@ const file_enums_clientserver_proto_rawDesc = "" +
 	"\x19k_EMsgClientBroadcastBase\x10\xe4K\x12\x1e\n" +
 	"\x19k_EMsgClientBroadcastInit\x10\xe4K\x12 \n" +
 	"\x1bk_EMsgClientBroadcastFrames\x10\xe5K\x12$\n" +
-	"\x1fk_EMsgClientBroadcastDisconnect\x10\xe6K\x12&\n" +
+	"\x1fk_EMsgClientBroadcastDisconnect\x10\xe6K\x12$\n" +
+	"\x1fk_EMsgClientBroadcastScreenshot\x10\xe7K\x12&\n" +
 	"!k_EMsgClientBroadcastUploadConfig\x10\xe8K\x12\x16\n" +
 	"\x11k_EMsgBaseClient3\x10\xc8L\x12&\n" +
 	"!k_EMsgClientVoiceCallPreAuthorize\x10\xc8L\x12.\n" +
@@ -6378,14 +6249,10 @@ const file_enums_clientserver_proto_rawDesc = "" +
 	"\"k_EMsgClientServerTimestampRequest\x10\xcaL\x12(\n" +
 	"#k_EMsgClientServerTimestampResponse\x10\xcbL\x12/\n" +
 	"*k_EMsgServiceMethodCallFromClientNonAuthed\x10\xccL\x12\x16\n" +
-	"\x11k_EMsgClientHello\x10\xcdL\x12)\n" +
-	"$k_EMsgClientEnableOrDisableDownloads\x10\xceL\x121\n" +
-	",k_EMsgClientEnableOrDisableDownloadsResponse\x10\xcfL\x12\x1b\n" +
+	"\x11k_EMsgClientHello\x10\xcdL\x12\x1b\n" +
 	"\x16k_EMsgClientLANP2PBase\x10\xacM\x12#\n" +
 	"\x1ek_EMsgClientLANP2PRequestChunk\x10\xacM\x12+\n" +
-	"&k_EMsgClientLANP2PRequestChunkResponse\x10\xadM\x12!\n" +
-	"\x1ck_EMsgClientPeerChunkRequest\x10\xaeM\x12\"\n" +
-	"\x1dk_EMsgClientPeerChunkResponse\x10\xafM\x12\x1a\n" +
+	"&k_EMsgClientLANP2PRequestChunkResponse\x10\xadM\x12\x1a\n" +
 	"\x15k_EMsgClientLANP2PMax\x10\x8fN\x12\x1d\n" +
 	"\x18k_EMsgBaseWatchdogServer\x10\x90N\x12\x19\n" +
 	"\x14k_EMsgNotifyWatchdog\x10\x90N\x12 \n" +
@@ -6401,13 +6268,7 @@ const file_enums_clientserver_proto_rawDesc = "" +
 	"+k_EMsgChatServerGetPendingNotificationCount\x10\xe0]\x128\n" +
 	"3k_EMsgChatServerGetPendingNotificationCountResponse\x10\xe1]\x12\x1b\n" +
 	"\x16k_EMsgBaseSecretServer\x10\xc4^\x12\x1e\n" +
-	"\x19k_EMsgServerSecretChanged\x10\xc4^\x12\x11\n" +
-	"\fk_EMsgBaseWG\x10\xa8_\x12$\n" +
-	"\x1fk_EMsgWGConnectionProtocolError\x10\xa8_\x12(\n" +
-	"#k_EMsgWGConnectionValidateUserToken\x10\xa9_\x120\n" +
-	"+k_EMsgWGConnectionValidateUserTokenResponse\x10\xaa_\x12&\n" +
-	"!k_EMsgWGConnectionLegacyWGRequest\x10\xab_\x12'\n" +
-	"\"k_EMsgWGConnectionLegacyWGResponse\x10\xac_\x1a\x02\x10\x01*\xcf\x04\n" +
+	"\x19k_EMsgServerSecretChanged\x10\xc4^\x1a\x02\x10\x01*\xcf\x04\n" +
 	"\x17EClientPersonaStateFlag\x12#\n" +
 	"\x1fk_EClientPersonaStateFlagStatus\x10\x01\x12'\n" +
 	"#k_EClientPersonaStateFlagPlayerName\x10\x02\x12&\n" +
@@ -6439,18 +6300,7 @@ const file_enums_clientserver_proto_rawDesc = "" +
 	"\x1ck_ESteamReviewScore_Negative\x10\x03\x12$\n" +
 	" k_ESteamReviewScore_VeryNegative\x10\x02\x12.\n" +
 	"*k_ESteamReviewScore_OverwhelminglyNegative\x10\x01\x12\x1c\n" +
-	"\x18k_ESteamReviewScore_None\x10\x00*\xbd\x01\n" +
-	"\x13ECodecUsagePlatform\x12 \n" +
-	"\x1ck_ECodecUsagePlatformUnknown\x10\x00\x12 \n" +
-	"\x1ck_ECodecUsagePlatformWindows\x10\x01\x12\x1e\n" +
-	"\x1ak_ECodecUsagePlatformMacOS\x10\x02\x12\x1e\n" +
-	"\x1ak_ECodecUsagePlatformLinux\x10\x03\x12\"\n" +
-	"\x1ek_ECodecUsagePlatformSteamDeck\x10\x04*\x9d\x01\n" +
-	"\x11ECodecUsageReason\x12\x1e\n" +
-	"\x1ak_ECodecUsageReasonUnknown\x10\x00\x12!\n" +
-	"\x1dk_ECodecUsageReasonRemotePlay\x10\x01\x12#\n" +
-	"\x1fk_ECodecUsageReasonBroadcasting\x10\x02\x12 \n" +
-	"\x1ck_ECodecUsageReasonGameVideo\x10\x03B*H\x01Z#github.com/dotabuff/manta/dota;dota\x80\x01\x00"
+	"\x18k_ESteamReviewScore_None\x10\x00B*H\x01Z#github.com/dotabuff/manta/dota;dota\x80\x01\x00"
 
 var (
 	file_enums_clientserver_proto_rawDescOnce sync.Once
@@ -6464,14 +6314,12 @@ func file_enums_clientserver_proto_rawDescGZIP() []byte {
 	return file_enums_clientserver_proto_rawDescData
 }
 
-var file_enums_clientserver_proto_enumTypes = make([]protoimpl.EnumInfo, 6)
+var file_enums_clientserver_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
 var file_enums_clientserver_proto_goTypes = []any{
 	(EMsg)(0),                    // 0: dota.EMsg
 	(EClientPersonaStateFlag)(0), // 1: dota.EClientPersonaStateFlag
 	(EMsgClanAccountFlags)(0),    // 2: dota.EMsgClanAccountFlags
 	(ESteamReviewScore)(0),       // 3: dota.ESteamReviewScore
-	(ECodecUsagePlatform)(0),     // 4: dota.ECodecUsagePlatform
-	(ECodecUsageReason)(0),       // 5: dota.ECodecUsageReason
 }
 var file_enums_clientserver_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
@@ -6491,7 +6339,7 @@ func file_enums_clientserver_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_enums_clientserver_proto_rawDesc), len(file_enums_clientserver_proto_rawDesc)),
-			NumEnums:      6,
+			NumEnums:      4,
 			NumMessages:   0,
 			NumExtensions: 0,
 			NumServices:   0,
