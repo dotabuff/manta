@@ -132,6 +132,10 @@ enum EDotaClientMessages {
 	DOTA_CM_MonsterHunter_HuntAlert = 828;
 	DOTA_CM_AbilitySpecificChannelRequiresHalt = 829;
 	DOTA_CM_TormentorTimer = 830;
+	DOTA_CM_ChooseDeityBlessing = 831;
+	DOTA_CM_ChooseAghanimUpgrade = 832;
+	DOTA_CM_ChooseAbilityImbue = 833;
+	DOTA_CM_NetworkStats = 834;
 }
 
 message CDOTAClientMsg_MapPing {
@@ -630,6 +634,8 @@ message CDOTAClientMsg_PerfReport {
 	optional float max_idle_time = 18;
 	optional float average_input_processing_time = 19;
 	optional float max_input_processing_time = 20;
+	optional float average_missed_snapshot_rate = 21;
+	optional float max_missed_snapshot_rate = 22;
 }
 
 message CDOTAClientMsg_ContextualTips_Subscribe_Entry {
@@ -751,4 +757,23 @@ message CDOTAClientMsg_MonsterHunter_SelectInvestigation {
 message CDOTAClientMsg_MonsterHunter_HuntAlert {
 	optional uint32 investigation_state_index = 1;
 	optional bool ctrl_pressed = 2;
+}
+
+message CDOTAClientMsg_ChooseDeityBlessing {
+	optional int32 blessing = 1;
+}
+
+message CDOTAClientMsg_ChooseAghanimUpgrade {
+	optional uint32 aghanim_id = 1;
+	optional bool scepter = 2;
+	optional int32 target_entindex = 3;
+}
+
+message CDOTAClientMsg_ChooseAbilityImbue {
+	optional int32 ability_to_imbue = 1;
+}
+
+message CDOTAClientMsg_NetworkStats {
+	optional uint32 tick = 1;
+	optional float missed_snapshot_rate = 2;
 }

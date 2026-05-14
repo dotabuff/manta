@@ -26348,7 +26348,6 @@ func (x *CMsgClientToGCGetEventRankingResponse) GetFinalRankBucket() uint32 {
 type CMsgClientToGCGetEventCoupon struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	EventId       *EEvent                `protobuf:"varint,1,opt,name=event_id,json=eventId,enum=dota.EEvent" json:"event_id,omitempty"`
-	CouponIds     []uint32               `protobuf:"varint,2,rep,name=coupon_ids,json=couponIds" json:"coupon_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -26388,13 +26387,6 @@ func (x *CMsgClientToGCGetEventCoupon) GetEventId() EEvent {
 		return *x.EventId
 	}
 	return EEvent_EVENT_ID_NONE
-}
-
-func (x *CMsgClientToGCGetEventCoupon) GetCouponIds() []uint32 {
-	if x != nil {
-		return x.CouponIds
-	}
-	return nil
 }
 
 type CMsgClientToGCGetEventCouponResponse struct {
@@ -35560,11 +35552,9 @@ const file_dota_gcmessages_client_proto_rawDesc = "" +
 	"\n" +
 	"percentile\x18\x04 \x01(\x02R\n" +
 	"percentile\x12*\n" +
-	"\x11final_rank_bucket\x18\x05 \x01(\rR\x0ffinalRankBucket\"f\n" +
+	"\x11final_rank_bucket\x18\x05 \x01(\rR\x0ffinalRankBucket\"G\n" +
 	"\x1cCMsgClientToGCGetEventCoupon\x12'\n" +
-	"\bevent_id\x18\x01 \x01(\x0e2\f.dota.EEventR\aeventId\x12\x1d\n" +
-	"\n" +
-	"coupon_ids\x18\x02 \x03(\rR\tcouponIds\"\xbc\x03\n" +
+	"\bevent_id\x18\x01 \x01(\x0e2\f.dota.EEventR\aeventId\"\xbc\x03\n" +
 	"$CMsgClientToGCGetEventCouponResponse\x12M\n" +
 	"\x06result\x18\x01 \x01(\x0e25.dota.CMsgClientToGCGetEventCouponResponse.ResultCodeR\x06result\x12'\n" +
 	"\bevent_id\x18\x02 \x01(\x0e2\f.dota.EEventR\aeventId\x12K\n" +

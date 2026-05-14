@@ -1153,6 +1153,50 @@ func (x *CDemoSpawnGroups) GetMsgs() [][]byte {
 	return nil
 }
 
+type CDemoSpawnGroupsHLTVBroadcast struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Data          []byte                 `protobuf:"bytes,1,opt,name=data" json:"data,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CDemoSpawnGroupsHLTVBroadcast) Reset() {
+	*x = CDemoSpawnGroupsHLTVBroadcast{}
+	mi := &file_demo_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CDemoSpawnGroupsHLTVBroadcast) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CDemoSpawnGroupsHLTVBroadcast) ProtoMessage() {}
+
+func (x *CDemoSpawnGroupsHLTVBroadcast) ProtoReflect() protoreflect.Message {
+	mi := &file_demo_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CDemoSpawnGroupsHLTVBroadcast.ProtoReflect.Descriptor instead.
+func (*CDemoSpawnGroupsHLTVBroadcast) Descriptor() ([]byte, []int) {
+	return file_demo_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *CDemoSpawnGroupsHLTVBroadcast) GetData() []byte {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
 type CDemoRecovery struct {
 	state             protoimpl.MessageState                    `protogen:"open.v1"`
 	InitialSpawnGroup *CDemoRecovery_DemoInitialSpawnGroupEntry `protobuf:"bytes,1,opt,name=initial_spawn_group,json=initialSpawnGroup" json:"initial_spawn_group,omitempty"`
@@ -1163,7 +1207,7 @@ type CDemoRecovery struct {
 
 func (x *CDemoRecovery) Reset() {
 	*x = CDemoRecovery{}
-	mi := &file_demo_proto_msgTypes[18]
+	mi := &file_demo_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1175,7 +1219,7 @@ func (x *CDemoRecovery) String() string {
 func (*CDemoRecovery) ProtoMessage() {}
 
 func (x *CDemoRecovery) ProtoReflect() protoreflect.Message {
-	mi := &file_demo_proto_msgTypes[18]
+	mi := &file_demo_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1188,7 +1232,7 @@ func (x *CDemoRecovery) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CDemoRecovery.ProtoReflect.Descriptor instead.
 func (*CDemoRecovery) Descriptor() ([]byte, []int) {
-	return file_demo_proto_rawDescGZIP(), []int{18}
+	return file_demo_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *CDemoRecovery) GetInitialSpawnGroup() *CDemoRecovery_DemoInitialSpawnGroupEntry {
@@ -1224,7 +1268,7 @@ type CGameInfo_CDotaGameInfo struct {
 
 func (x *CGameInfo_CDotaGameInfo) Reset() {
 	*x = CGameInfo_CDotaGameInfo{}
-	mi := &file_demo_proto_msgTypes[19]
+	mi := &file_demo_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1236,7 +1280,7 @@ func (x *CGameInfo_CDotaGameInfo) String() string {
 func (*CGameInfo_CDotaGameInfo) ProtoMessage() {}
 
 func (x *CGameInfo_CDotaGameInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_demo_proto_msgTypes[19]
+	mi := &file_demo_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1338,7 +1382,7 @@ type CGameInfo_CCSGameInfo struct {
 
 func (x *CGameInfo_CCSGameInfo) Reset() {
 	*x = CGameInfo_CCSGameInfo{}
-	mi := &file_demo_proto_msgTypes[20]
+	mi := &file_demo_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1350,7 +1394,7 @@ func (x *CGameInfo_CCSGameInfo) String() string {
 func (*CGameInfo_CCSGameInfo) ProtoMessage() {}
 
 func (x *CGameInfo_CCSGameInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_demo_proto_msgTypes[20]
+	mi := &file_demo_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1386,7 +1430,7 @@ type CGameInfo_CDotaGameInfo_CPlayerInfo struct {
 
 func (x *CGameInfo_CDotaGameInfo_CPlayerInfo) Reset() {
 	*x = CGameInfo_CDotaGameInfo_CPlayerInfo{}
-	mi := &file_demo_proto_msgTypes[21]
+	mi := &file_demo_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1398,7 +1442,7 @@ func (x *CGameInfo_CDotaGameInfo_CPlayerInfo) String() string {
 func (*CGameInfo_CDotaGameInfo_CPlayerInfo) ProtoMessage() {}
 
 func (x *CGameInfo_CDotaGameInfo_CPlayerInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_demo_proto_msgTypes[21]
+	mi := &file_demo_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1460,7 +1504,7 @@ type CGameInfo_CDotaGameInfo_CHeroSelectEvent struct {
 
 func (x *CGameInfo_CDotaGameInfo_CHeroSelectEvent) Reset() {
 	*x = CGameInfo_CDotaGameInfo_CHeroSelectEvent{}
-	mi := &file_demo_proto_msgTypes[22]
+	mi := &file_demo_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1472,7 +1516,7 @@ func (x *CGameInfo_CDotaGameInfo_CHeroSelectEvent) String() string {
 func (*CGameInfo_CDotaGameInfo_CHeroSelectEvent) ProtoMessage() {}
 
 func (x *CGameInfo_CDotaGameInfo_CHeroSelectEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_demo_proto_msgTypes[22]
+	mi := &file_demo_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1520,7 +1564,7 @@ type CDemoClassInfoClassT struct {
 
 func (x *CDemoClassInfoClassT) Reset() {
 	*x = CDemoClassInfoClassT{}
-	mi := &file_demo_proto_msgTypes[23]
+	mi := &file_demo_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1532,7 +1576,7 @@ func (x *CDemoClassInfoClassT) String() string {
 func (*CDemoClassInfoClassT) ProtoMessage() {}
 
 func (x *CDemoClassInfoClassT) ProtoReflect() protoreflect.Message {
-	mi := &file_demo_proto_msgTypes[23]
+	mi := &file_demo_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1579,7 +1623,7 @@ type CDemoStringTablesItemsT struct {
 
 func (x *CDemoStringTablesItemsT) Reset() {
 	*x = CDemoStringTablesItemsT{}
-	mi := &file_demo_proto_msgTypes[24]
+	mi := &file_demo_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1591,7 +1635,7 @@ func (x *CDemoStringTablesItemsT) String() string {
 func (*CDemoStringTablesItemsT) ProtoMessage() {}
 
 func (x *CDemoStringTablesItemsT) ProtoReflect() protoreflect.Message {
-	mi := &file_demo_proto_msgTypes[24]
+	mi := &file_demo_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1633,7 +1677,7 @@ type CDemoStringTablesTableT struct {
 
 func (x *CDemoStringTablesTableT) Reset() {
 	*x = CDemoStringTablesTableT{}
-	mi := &file_demo_proto_msgTypes[25]
+	mi := &file_demo_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1645,7 +1689,7 @@ func (x *CDemoStringTablesTableT) String() string {
 func (*CDemoStringTablesTableT) ProtoMessage() {}
 
 func (x *CDemoStringTablesTableT) ProtoReflect() protoreflect.Message {
-	mi := &file_demo_proto_msgTypes[25]
+	mi := &file_demo_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1699,7 +1743,7 @@ type CDemoRecovery_DemoInitialSpawnGroupEntry struct {
 
 func (x *CDemoRecovery_DemoInitialSpawnGroupEntry) Reset() {
 	*x = CDemoRecovery_DemoInitialSpawnGroupEntry{}
-	mi := &file_demo_proto_msgTypes[26]
+	mi := &file_demo_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1711,7 +1755,7 @@ func (x *CDemoRecovery_DemoInitialSpawnGroupEntry) String() string {
 func (*CDemoRecovery_DemoInitialSpawnGroupEntry) ProtoMessage() {}
 
 func (x *CDemoRecovery_DemoInitialSpawnGroupEntry) ProtoReflect() protoreflect.Message {
-	mi := &file_demo_proto_msgTypes[26]
+	mi := &file_demo_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1724,7 +1768,7 @@ func (x *CDemoRecovery_DemoInitialSpawnGroupEntry) ProtoReflect() protoreflect.M
 
 // Deprecated: Use CDemoRecovery_DemoInitialSpawnGroupEntry.ProtoReflect.Descriptor instead.
 func (*CDemoRecovery_DemoInitialSpawnGroupEntry) Descriptor() ([]byte, []int) {
-	return file_demo_proto_rawDescGZIP(), []int{18, 0}
+	return file_demo_proto_rawDescGZIP(), []int{19, 0}
 }
 
 func (x *CDemoRecovery_DemoInitialSpawnGroupEntry) GetSpawngrouphandle() uint32 {
@@ -1860,7 +1904,9 @@ const file_demo_proto_rawDesc = "" +
 	"cmd_number\x18\x01 \x01(\x05R\tcmdNumber\x12\x12\n" +
 	"\x04data\x18\x02 \x01(\fR\x04data\"&\n" +
 	"\x10CDemoSpawnGroups\x12\x12\n" +
-	"\x04msgs\x18\x03 \x03(\fR\x04msgs\"\x8a\x02\n" +
+	"\x04msgs\x18\x03 \x03(\fR\x04msgs\"3\n" +
+	"\x1dCDemoSpawnGroupsHLTVBroadcast\x12\x12\n" +
+	"\x04data\x18\x01 \x01(\fR\x04data\"\x8a\x02\n" +
 	"\rCDemoRecovery\x12^\n" +
 	"\x13initial_spawn_group\x18\x01 \x01(\v2..dota.CDemoRecovery.DemoInitialSpawnGroupEntryR\x11initialSpawnGroup\x12.\n" +
 	"\x13spawn_group_message\x18\x02 \x01(\fR\x11spawnGroupMessage\x1ai\n" +
@@ -1907,7 +1953,7 @@ func file_demo_proto_rawDescGZIP() []byte {
 }
 
 var file_demo_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_demo_proto_msgTypes = make([]protoimpl.MessageInfo, 27)
+var file_demo_proto_msgTypes = make([]protoimpl.MessageInfo, 28)
 var file_demo_proto_goTypes = []any{
 	(EDemoCommands)(0),                               // 0: dota.EDemoCommands
 	(*CDemoFileHeader)(nil),                          // 1: dota.CDemoFileHeader
@@ -1928,29 +1974,30 @@ var file_demo_proto_goTypes = []any{
 	(*CDemoStop)(nil),                                // 16: dota.CDemoStop
 	(*CDemoUserCmd)(nil),                             // 17: dota.CDemoUserCmd
 	(*CDemoSpawnGroups)(nil),                         // 18: dota.CDemoSpawnGroups
-	(*CDemoRecovery)(nil),                            // 19: dota.CDemoRecovery
-	(*CGameInfo_CDotaGameInfo)(nil),                  // 20: dota.CGameInfo.CDotaGameInfo
-	(*CGameInfo_CCSGameInfo)(nil),                    // 21: dota.CGameInfo.CCSGameInfo
-	(*CGameInfo_CDotaGameInfo_CPlayerInfo)(nil),      // 22: dota.CGameInfo.CDotaGameInfo.CPlayerInfo
-	(*CGameInfo_CDotaGameInfo_CHeroSelectEvent)(nil), // 23: dota.CGameInfo.CDotaGameInfo.CHeroSelectEvent
-	(*CDemoClassInfoClassT)(nil),                     // 24: dota.CDemoClassInfo.class_t
-	(*CDemoStringTablesItemsT)(nil),                  // 25: dota.CDemoStringTables.items_t
-	(*CDemoStringTablesTableT)(nil),                  // 26: dota.CDemoStringTables.table_t
-	(*CDemoRecovery_DemoInitialSpawnGroupEntry)(nil), // 27: dota.CDemoRecovery.DemoInitialSpawnGroupEntry
+	(*CDemoSpawnGroupsHLTVBroadcast)(nil),            // 19: dota.CDemoSpawnGroupsHLTVBroadcast
+	(*CDemoRecovery)(nil),                            // 20: dota.CDemoRecovery
+	(*CGameInfo_CDotaGameInfo)(nil),                  // 21: dota.CGameInfo.CDotaGameInfo
+	(*CGameInfo_CCSGameInfo)(nil),                    // 22: dota.CGameInfo.CCSGameInfo
+	(*CGameInfo_CDotaGameInfo_CPlayerInfo)(nil),      // 23: dota.CGameInfo.CDotaGameInfo.CPlayerInfo
+	(*CGameInfo_CDotaGameInfo_CHeroSelectEvent)(nil), // 24: dota.CGameInfo.CDotaGameInfo.CHeroSelectEvent
+	(*CDemoClassInfoClassT)(nil),                     // 25: dota.CDemoClassInfo.class_t
+	(*CDemoStringTablesItemsT)(nil),                  // 26: dota.CDemoStringTables.items_t
+	(*CDemoStringTablesTableT)(nil),                  // 27: dota.CDemoStringTables.table_t
+	(*CDemoRecovery_DemoInitialSpawnGroupEntry)(nil), // 28: dota.CDemoRecovery.DemoInitialSpawnGroupEntry
 }
 var file_demo_proto_depIdxs = []int32{
-	20, // 0: dota.CGameInfo.dota:type_name -> dota.CGameInfo.CDotaGameInfo
-	21, // 1: dota.CGameInfo.cs:type_name -> dota.CGameInfo.CCSGameInfo
+	21, // 0: dota.CGameInfo.dota:type_name -> dota.CGameInfo.CDotaGameInfo
+	22, // 1: dota.CGameInfo.cs:type_name -> dota.CGameInfo.CCSGameInfo
 	2,  // 2: dota.CDemoFileInfo.game_info:type_name -> dota.CGameInfo
 	15, // 3: dota.CDemoFullPacket.string_table:type_name -> dota.CDemoStringTables
 	4,  // 4: dota.CDemoFullPacket.packet:type_name -> dota.CDemoPacket
-	24, // 5: dota.CDemoClassInfo.classes:type_name -> dota.CDemoClassInfo.class_t
-	26, // 6: dota.CDemoStringTables.tables:type_name -> dota.CDemoStringTables.table_t
-	27, // 7: dota.CDemoRecovery.initial_spawn_group:type_name -> dota.CDemoRecovery.DemoInitialSpawnGroupEntry
-	22, // 8: dota.CGameInfo.CDotaGameInfo.player_info:type_name -> dota.CGameInfo.CDotaGameInfo.CPlayerInfo
-	23, // 9: dota.CGameInfo.CDotaGameInfo.picks_bans:type_name -> dota.CGameInfo.CDotaGameInfo.CHeroSelectEvent
-	25, // 10: dota.CDemoStringTables.table_t.items:type_name -> dota.CDemoStringTables.items_t
-	25, // 11: dota.CDemoStringTables.table_t.items_clientside:type_name -> dota.CDemoStringTables.items_t
+	25, // 5: dota.CDemoClassInfo.classes:type_name -> dota.CDemoClassInfo.class_t
+	27, // 6: dota.CDemoStringTables.tables:type_name -> dota.CDemoStringTables.table_t
+	28, // 7: dota.CDemoRecovery.initial_spawn_group:type_name -> dota.CDemoRecovery.DemoInitialSpawnGroupEntry
+	23, // 8: dota.CGameInfo.CDotaGameInfo.player_info:type_name -> dota.CGameInfo.CDotaGameInfo.CPlayerInfo
+	24, // 9: dota.CGameInfo.CDotaGameInfo.picks_bans:type_name -> dota.CGameInfo.CDotaGameInfo.CHeroSelectEvent
+	26, // 10: dota.CDemoStringTables.table_t.items:type_name -> dota.CDemoStringTables.items_t
+	26, // 11: dota.CDemoStringTables.table_t.items_clientside:type_name -> dota.CDemoStringTables.items_t
 	12, // [12:12] is the sub-list for method output_type
 	12, // [12:12] is the sub-list for method input_type
 	12, // [12:12] is the sub-list for extension type_name
@@ -1969,7 +2016,7 @@ func file_demo_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_demo_proto_rawDesc), len(file_demo_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   27,
+			NumMessages:   28,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

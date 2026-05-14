@@ -1550,6 +1550,7 @@ type CMsgTEExplosion struct {
 	AffectRagdolls    *bool                  `protobuf:"varint,9,opt,name=affect_ragdolls,json=affectRagdolls" json:"affect_ragdolls,omitempty"`
 	SoundName         *string                `protobuf:"bytes,10,opt,name=sound_name,json=soundName" json:"sound_name,omitempty"`
 	ExplosionType     *uint32                `protobuf:"varint,11,opt,name=explosion_type,json=explosionType" json:"explosion_type,omitempty"`
+	ExplosionTypeName *uint32                `protobuf:"varint,15,opt,name=explosion_type_name,json=explosionTypeName" json:"explosion_type_name,omitempty"`
 	CreateDebris      *bool                  `protobuf:"varint,12,opt,name=create_debris,json=createDebris" json:"create_debris,omitempty"`
 	DebrisOrigin      *CMsgVector            `protobuf:"bytes,13,opt,name=debris_origin,json=debrisOrigin" json:"debris_origin,omitempty"`
 	DebrisSurfaceprop *uint32                `protobuf:"fixed32,14,opt,name=debris_surfaceprop,json=debrisSurfaceprop" json:"debris_surfaceprop,omitempty"`
@@ -1639,6 +1640,13 @@ func (x *CMsgTEExplosion) GetSoundName() string {
 func (x *CMsgTEExplosion) GetExplosionType() uint32 {
 	if x != nil && x.ExplosionType != nil {
 		return *x.ExplosionType
+	}
+	return 0
+}
+
+func (x *CMsgTEExplosion) GetExplosionTypeName() uint32 {
+	if x != nil && x.ExplosionTypeName != nil {
+		return *x.ExplosionTypeName
 	}
 	return 0
 }
@@ -2240,7 +2248,7 @@ const file_te_proto_rawDesc = "" +
 	"\x06origin\x18\x01 \x01(\v2\x10.dota.CMsgVectorR\x06origin\x12.\n" +
 	"\tdirection\x18\x02 \x01(\v2\x10.dota.CMsgVectorR\tdirection\x12\x14\n" +
 	"\x05color\x18\x03 \x01(\aR\x05color\x12\x16\n" +
-	"\x06amount\x18\x04 \x01(\rR\x06amount\"\xab\x03\n" +
+	"\x06amount\x18\x04 \x01(\rR\x06amount\"\xdb\x03\n" +
 	"\x0fCMsgTEExplosion\x12(\n" +
 	"\x06origin\x18\x01 \x01(\v2\x10.dota.CMsgVectorR\x06origin\x12\x14\n" +
 	"\x05flags\x18\x03 \x01(\rR\x05flags\x12(\n" +
@@ -2251,7 +2259,8 @@ const file_te_proto_rawDesc = "" +
 	"\n" +
 	"sound_name\x18\n" +
 	" \x01(\tR\tsoundName\x12%\n" +
-	"\x0eexplosion_type\x18\v \x01(\rR\rexplosionType\x12#\n" +
+	"\x0eexplosion_type\x18\v \x01(\rR\rexplosionType\x12.\n" +
+	"\x13explosion_type_name\x18\x0f \x01(\rR\x11explosionTypeName\x12#\n" +
 	"\rcreate_debris\x18\f \x01(\bR\fcreateDebris\x125\n" +
 	"\rdebris_origin\x18\r \x01(\v2\x10.dota.CMsgVectorR\fdebrisOrigin\x12-\n" +
 	"\x12debris_surfaceprop\x18\x0e \x01(\aR\x11debrisSurfaceprop\"\x90\x01\n" +

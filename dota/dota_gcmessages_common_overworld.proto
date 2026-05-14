@@ -39,6 +39,9 @@ enum EOverworldAuditAction {
 	k_eOverworldAuditAction_EncounterRewardTokenReward = 14;
 	k_eOverworldAuditAction_SupportGrantTokens = 16;
 	k_eOverworldAuditAction_TokenGiftSent = 17;
+	k_eOverworldAuditAction_DevSetFortune = 18;
+	k_eOverworldAuditAction_DevClearFortune = 19;
+	k_eOverworldAuditAction_RequestFortune = 20;
 }
 
 enum EOverworldMinigameAction {
@@ -124,6 +127,13 @@ message CMsgOverworldMinigameUserData {
 	optional CMsgOverworldMinigameCustomData custom_data = 3;
 }
 
+message CMsgOverworldFortune {
+	optional uint32 fortune1 = 1;
+	optional uint32 fortune2 = 2;
+	optional uint32 fortune3 = 3;
+	optional uint32 timestamp = 4;
+}
+
 message CMsgOverworldUserData {
 	message MinigameDataEntry {
 		optional uint32 key = 1;
@@ -135,6 +145,7 @@ message CMsgOverworldUserData {
 	repeated CMsgOverworldPath overworld_paths = 3;
 	optional uint32 current_node_id = 4;
 	repeated CMsgOverworldUserData.MinigameDataEntry minigame_data = 5;
+	optional CMsgOverworldFortune current_fortune = 6;
 }
 
 message CMsgOverworldMatchRewards {
@@ -429,6 +440,62 @@ message CMsgClientToGCOverworldDevClearInventoryResponse {
 	}
 
 	optional CMsgClientToGCOverworldDevClearInventoryResponse.EResponse response = 1;
+}
+
+message CMsgClientToGCOverworldDevSetFortune {
+	optional uint32 overworld_id = 1;
+	optional uint32 fortune_id = 2;
+}
+
+message CMsgClientToGCOverworldDevSetFortuneResponse {
+	enum EResponse {
+		k_eInternalError = 0;
+		k_eSuccess = 1;
+		k_eTooBusy = 2;
+		k_eDisabled = 3;
+		k_eTimeout = 4;
+		k_eNotAllowed = 5;
+		k_eInvalidOverworld = 6;
+	}
+
+	optional CMsgClientToGCOverworldDevSetFortuneResponse.EResponse response = 1;
+}
+
+message CMsgClientToGCOverworldDevClearFortune {
+	optional uint32 overworld_id = 1;
+	optional uint32 fortune_id = 2;
+}
+
+message CMsgClientToGCOverworldDevClearFortuneResponse {
+	enum EResponse {
+		k_eInternalError = 0;
+		k_eSuccess = 1;
+		k_eTooBusy = 2;
+		k_eDisabled = 3;
+		k_eTimeout = 4;
+		k_eNotAllowed = 5;
+		k_eInvalidOverworld = 6;
+	}
+
+	optional CMsgClientToGCOverworldDevClearFortuneResponse.EResponse response = 1;
+}
+
+message CMsgClientToGCOverworldRequestFortune {
+	optional uint32 overworld_id = 1;
+}
+
+message CMsgClientToGCOverworldRequestFortuneResponse {
+	enum EResponse {
+		k_eInternalError = 0;
+		k_eSuccess = 1;
+		k_eTooBusy = 2;
+		k_eDisabled = 3;
+		k_eTimeout = 4;
+		k_eNotAllowed = 5;
+		k_eInvalidOverworld = 6;
+	}
+
+	optional CMsgClientToGCOverworldRequestFortuneResponse.EResponse response = 1;
 }
 
 message CMsgClientToGCOverworldFeedback {

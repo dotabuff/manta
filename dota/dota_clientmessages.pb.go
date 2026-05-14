@@ -148,6 +148,10 @@ const (
 	EDotaClientMessages_DOTA_CM_MonsterHunter_HuntAlert                EDotaClientMessages = 828
 	EDotaClientMessages_DOTA_CM_AbilitySpecificChannelRequiresHalt     EDotaClientMessages = 829
 	EDotaClientMessages_DOTA_CM_TormentorTimer                         EDotaClientMessages = 830
+	EDotaClientMessages_DOTA_CM_ChooseDeityBlessing                    EDotaClientMessages = 831
+	EDotaClientMessages_DOTA_CM_ChooseAghanimUpgrade                   EDotaClientMessages = 832
+	EDotaClientMessages_DOTA_CM_ChooseAbilityImbue                     EDotaClientMessages = 833
+	EDotaClientMessages_DOTA_CM_NetworkStats                           EDotaClientMessages = 834
 )
 
 // Enum value maps for EDotaClientMessages.
@@ -277,6 +281,10 @@ var (
 		828: "DOTA_CM_MonsterHunter_HuntAlert",
 		829: "DOTA_CM_AbilitySpecificChannelRequiresHalt",
 		830: "DOTA_CM_TormentorTimer",
+		831: "DOTA_CM_ChooseDeityBlessing",
+		832: "DOTA_CM_ChooseAghanimUpgrade",
+		833: "DOTA_CM_ChooseAbilityImbue",
+		834: "DOTA_CM_NetworkStats",
 	}
 	EDotaClientMessages_value = map[string]int32{
 		"DOTA_CM_MapLine":                                301,
@@ -403,6 +411,10 @@ var (
 		"DOTA_CM_MonsterHunter_HuntAlert":                828,
 		"DOTA_CM_AbilitySpecificChannelRequiresHalt":     829,
 		"DOTA_CM_TormentorTimer":                         830,
+		"DOTA_CM_ChooseDeityBlessing":                    831,
+		"DOTA_CM_ChooseAghanimUpgrade":                   832,
+		"DOTA_CM_ChooseAbilityImbue":                     833,
+		"DOTA_CM_NetworkStats":                           834,
 	}
 )
 
@@ -5229,6 +5241,8 @@ type CDOTAClientMsg_PerfReport struct {
 	MaxIdleTime                           *float32               `protobuf:"fixed32,18,opt,name=max_idle_time,json=maxIdleTime" json:"max_idle_time,omitempty"`
 	AverageInputProcessingTime            *float32               `protobuf:"fixed32,19,opt,name=average_input_processing_time,json=averageInputProcessingTime" json:"average_input_processing_time,omitempty"`
 	MaxInputProcessingTime                *float32               `protobuf:"fixed32,20,opt,name=max_input_processing_time,json=maxInputProcessingTime" json:"max_input_processing_time,omitempty"`
+	AverageMissedSnapshotRate             *float32               `protobuf:"fixed32,21,opt,name=average_missed_snapshot_rate,json=averageMissedSnapshotRate" json:"average_missed_snapshot_rate,omitempty"`
+	MaxMissedSnapshotRate                 *float32               `protobuf:"fixed32,22,opt,name=max_missed_snapshot_rate,json=maxMissedSnapshotRate" json:"max_missed_snapshot_rate,omitempty"`
 	unknownFields                         protoimpl.UnknownFields
 	sizeCache                             protoimpl.SizeCache
 }
@@ -5399,6 +5413,20 @@ func (x *CDOTAClientMsg_PerfReport) GetAverageInputProcessingTime() float32 {
 func (x *CDOTAClientMsg_PerfReport) GetMaxInputProcessingTime() float32 {
 	if x != nil && x.MaxInputProcessingTime != nil {
 		return *x.MaxInputProcessingTime
+	}
+	return 0
+}
+
+func (x *CDOTAClientMsg_PerfReport) GetAverageMissedSnapshotRate() float32 {
+	if x != nil && x.AverageMissedSnapshotRate != nil {
+		return *x.AverageMissedSnapshotRate
+	}
+	return 0
+}
+
+func (x *CDOTAClientMsg_PerfReport) GetMaxMissedSnapshotRate() float32 {
+	if x != nil && x.MaxMissedSnapshotRate != nil {
+		return *x.MaxMissedSnapshotRate
 	}
 	return 0
 }
@@ -6671,6 +6699,206 @@ func (x *CDOTAClientMsg_MonsterHunter_HuntAlert) GetCtrlPressed() bool {
 	return false
 }
 
+type CDOTAClientMsg_ChooseDeityBlessing struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Blessing      *int32                 `protobuf:"varint,1,opt,name=blessing" json:"blessing,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CDOTAClientMsg_ChooseDeityBlessing) Reset() {
+	*x = CDOTAClientMsg_ChooseDeityBlessing{}
+	mi := &file_dota_clientmessages_proto_msgTypes[114]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CDOTAClientMsg_ChooseDeityBlessing) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CDOTAClientMsg_ChooseDeityBlessing) ProtoMessage() {}
+
+func (x *CDOTAClientMsg_ChooseDeityBlessing) ProtoReflect() protoreflect.Message {
+	mi := &file_dota_clientmessages_proto_msgTypes[114]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CDOTAClientMsg_ChooseDeityBlessing.ProtoReflect.Descriptor instead.
+func (*CDOTAClientMsg_ChooseDeityBlessing) Descriptor() ([]byte, []int) {
+	return file_dota_clientmessages_proto_rawDescGZIP(), []int{114}
+}
+
+func (x *CDOTAClientMsg_ChooseDeityBlessing) GetBlessing() int32 {
+	if x != nil && x.Blessing != nil {
+		return *x.Blessing
+	}
+	return 0
+}
+
+type CDOTAClientMsg_ChooseAghanimUpgrade struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	AghanimId      *uint32                `protobuf:"varint,1,opt,name=aghanim_id,json=aghanimId" json:"aghanim_id,omitempty"`
+	Scepter        *bool                  `protobuf:"varint,2,opt,name=scepter" json:"scepter,omitempty"`
+	TargetEntindex *int32                 `protobuf:"varint,3,opt,name=target_entindex,json=targetEntindex" json:"target_entindex,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *CDOTAClientMsg_ChooseAghanimUpgrade) Reset() {
+	*x = CDOTAClientMsg_ChooseAghanimUpgrade{}
+	mi := &file_dota_clientmessages_proto_msgTypes[115]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CDOTAClientMsg_ChooseAghanimUpgrade) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CDOTAClientMsg_ChooseAghanimUpgrade) ProtoMessage() {}
+
+func (x *CDOTAClientMsg_ChooseAghanimUpgrade) ProtoReflect() protoreflect.Message {
+	mi := &file_dota_clientmessages_proto_msgTypes[115]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CDOTAClientMsg_ChooseAghanimUpgrade.ProtoReflect.Descriptor instead.
+func (*CDOTAClientMsg_ChooseAghanimUpgrade) Descriptor() ([]byte, []int) {
+	return file_dota_clientmessages_proto_rawDescGZIP(), []int{115}
+}
+
+func (x *CDOTAClientMsg_ChooseAghanimUpgrade) GetAghanimId() uint32 {
+	if x != nil && x.AghanimId != nil {
+		return *x.AghanimId
+	}
+	return 0
+}
+
+func (x *CDOTAClientMsg_ChooseAghanimUpgrade) GetScepter() bool {
+	if x != nil && x.Scepter != nil {
+		return *x.Scepter
+	}
+	return false
+}
+
+func (x *CDOTAClientMsg_ChooseAghanimUpgrade) GetTargetEntindex() int32 {
+	if x != nil && x.TargetEntindex != nil {
+		return *x.TargetEntindex
+	}
+	return 0
+}
+
+type CDOTAClientMsg_ChooseAbilityImbue struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	AbilityToImbue *int32                 `protobuf:"varint,1,opt,name=ability_to_imbue,json=abilityToImbue" json:"ability_to_imbue,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *CDOTAClientMsg_ChooseAbilityImbue) Reset() {
+	*x = CDOTAClientMsg_ChooseAbilityImbue{}
+	mi := &file_dota_clientmessages_proto_msgTypes[116]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CDOTAClientMsg_ChooseAbilityImbue) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CDOTAClientMsg_ChooseAbilityImbue) ProtoMessage() {}
+
+func (x *CDOTAClientMsg_ChooseAbilityImbue) ProtoReflect() protoreflect.Message {
+	mi := &file_dota_clientmessages_proto_msgTypes[116]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CDOTAClientMsg_ChooseAbilityImbue.ProtoReflect.Descriptor instead.
+func (*CDOTAClientMsg_ChooseAbilityImbue) Descriptor() ([]byte, []int) {
+	return file_dota_clientmessages_proto_rawDescGZIP(), []int{116}
+}
+
+func (x *CDOTAClientMsg_ChooseAbilityImbue) GetAbilityToImbue() int32 {
+	if x != nil && x.AbilityToImbue != nil {
+		return *x.AbilityToImbue
+	}
+	return 0
+}
+
+type CDOTAClientMsg_NetworkStats struct {
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	Tick               *uint32                `protobuf:"varint,1,opt,name=tick" json:"tick,omitempty"`
+	MissedSnapshotRate *float32               `protobuf:"fixed32,2,opt,name=missed_snapshot_rate,json=missedSnapshotRate" json:"missed_snapshot_rate,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *CDOTAClientMsg_NetworkStats) Reset() {
+	*x = CDOTAClientMsg_NetworkStats{}
+	mi := &file_dota_clientmessages_proto_msgTypes[117]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CDOTAClientMsg_NetworkStats) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CDOTAClientMsg_NetworkStats) ProtoMessage() {}
+
+func (x *CDOTAClientMsg_NetworkStats) ProtoReflect() protoreflect.Message {
+	mi := &file_dota_clientmessages_proto_msgTypes[117]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CDOTAClientMsg_NetworkStats.ProtoReflect.Descriptor instead.
+func (*CDOTAClientMsg_NetworkStats) Descriptor() ([]byte, []int) {
+	return file_dota_clientmessages_proto_rawDescGZIP(), []int{117}
+}
+
+func (x *CDOTAClientMsg_NetworkStats) GetTick() uint32 {
+	if x != nil && x.Tick != nil {
+		return *x.Tick
+	}
+	return 0
+}
+
+func (x *CDOTAClientMsg_NetworkStats) GetMissedSnapshotRate() float32 {
+	if x != nil && x.MissedSnapshotRate != nil {
+		return *x.MissedSnapshotRate
+	}
+	return 0
+}
+
 type CDOTAClientMsg_DemoHero_PreviewItem struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ItemDef       *uint32                `protobuf:"varint,1,opt,name=item_def,json=itemDef" json:"item_def,omitempty"`
@@ -6681,7 +6909,7 @@ type CDOTAClientMsg_DemoHero_PreviewItem struct {
 
 func (x *CDOTAClientMsg_DemoHero_PreviewItem) Reset() {
 	*x = CDOTAClientMsg_DemoHero_PreviewItem{}
-	mi := &file_dota_clientmessages_proto_msgTypes[114]
+	mi := &file_dota_clientmessages_proto_msgTypes[118]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6693,7 +6921,7 @@ func (x *CDOTAClientMsg_DemoHero_PreviewItem) String() string {
 func (*CDOTAClientMsg_DemoHero_PreviewItem) ProtoMessage() {}
 
 func (x *CDOTAClientMsg_DemoHero_PreviewItem) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_clientmessages_proto_msgTypes[114]
+	mi := &file_dota_clientmessages_proto_msgTypes[118]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6733,7 +6961,7 @@ type CDOTAClientMsg_SuggestItemPreference_ItemPreference struct {
 
 func (x *CDOTAClientMsg_SuggestItemPreference_ItemPreference) Reset() {
 	*x = CDOTAClientMsg_SuggestItemPreference_ItemPreference{}
-	mi := &file_dota_clientmessages_proto_msgTypes[115]
+	mi := &file_dota_clientmessages_proto_msgTypes[119]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6745,7 +6973,7 @@ func (x *CDOTAClientMsg_SuggestItemPreference_ItemPreference) String() string {
 func (*CDOTAClientMsg_SuggestItemPreference_ItemPreference) ProtoMessage() {}
 
 func (x *CDOTAClientMsg_SuggestItemPreference_ItemPreference) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_clientmessages_proto_msgTypes[115]
+	mi := &file_dota_clientmessages_proto_msgTypes[119]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7093,7 +7321,7 @@ const file_dota_clientmessages_proto_rawDesc = "" +
 	"\x10target_player_id\x18\x02 \x01(\x05R\x0etargetPlayerId\x12'\n" +
 	"\x0ftarget_entindex\x18\x03 \x01(\x05R\x0etargetEntindex\x12\x1d\n" +
 	"\n" +
-	"alert_type\x18\x04 \x01(\rR\talertType\"\xc3\b\n" +
+	"alert_type\x18\x04 \x01(\rR\talertType\"\xbd\t\n" +
 	"\x19CDOTAClientMsg_PerfReport\x12,\n" +
 	"\x12average_frame_time\x18\x01 \x01(\x02R\x10averageFrameTime\x12$\n" +
 	"\x0emax_frame_time\x18\x02 \x01(\x02R\fmaxFrameTime\x120\n" +
@@ -7115,7 +7343,9 @@ const file_dota_clientmessages_proto_rawDesc = "" +
 	"\x11average_idle_time\x18\x11 \x01(\x02R\x0faverageIdleTime\x12\"\n" +
 	"\rmax_idle_time\x18\x12 \x01(\x02R\vmaxIdleTime\x12A\n" +
 	"\x1daverage_input_processing_time\x18\x13 \x01(\x02R\x1aaverageInputProcessingTime\x129\n" +
-	"\x19max_input_processing_time\x18\x14 \x01(\x02R\x16maxInputProcessingTime\"\xbd\x01\n" +
+	"\x19max_input_processing_time\x18\x14 \x01(\x02R\x16maxInputProcessingTime\x12?\n" +
+	"\x1caverage_missed_snapshot_rate\x18\x15 \x01(\x02R\x19averageMissedSnapshotRate\x127\n" +
+	"\x18max_missed_snapshot_rate\x18\x16 \x01(\x02R\x15maxMissedSnapshotRate\"\xbd\x01\n" +
 	"-CDOTAClientMsg_ContextualTips_Subscribe_Entry\x12 \n" +
 	"\vunsubscribe\x18\x01 \x01(\bR\vunsubscribe\x12\x15\n" +
 	"\x06tip_id\x18\x02 \x01(\x05R\x05tipId\x12.\n" +
@@ -7189,7 +7419,19 @@ const file_dota_clientmessages_proto_rawDesc = "" +
 	"\x13investigation_index\x18\x01 \x01(\rR\x12investigationIndex\"\x87\x01\n" +
 	"&CDOTAClientMsg_MonsterHunter_HuntAlert\x12:\n" +
 	"\x19investigation_state_index\x18\x01 \x01(\rR\x17investigationStateIndex\x12!\n" +
-	"\fctrl_pressed\x18\x02 \x01(\bR\vctrlPressed*\xa9\x1e\n" +
+	"\fctrl_pressed\x18\x02 \x01(\bR\vctrlPressed\"@\n" +
+	"\"CDOTAClientMsg_ChooseDeityBlessing\x12\x1a\n" +
+	"\bblessing\x18\x01 \x01(\x05R\bblessing\"\x87\x01\n" +
+	"#CDOTAClientMsg_ChooseAghanimUpgrade\x12\x1d\n" +
+	"\n" +
+	"aghanim_id\x18\x01 \x01(\rR\taghanimId\x12\x18\n" +
+	"\ascepter\x18\x02 \x01(\bR\ascepter\x12'\n" +
+	"\x0ftarget_entindex\x18\x03 \x01(\x05R\x0etargetEntindex\"M\n" +
+	"!CDOTAClientMsg_ChooseAbilityImbue\x12(\n" +
+	"\x10ability_to_imbue\x18\x01 \x01(\x05R\x0eabilityToImbue\"c\n" +
+	"\x1bCDOTAClientMsg_NetworkStats\x12\x12\n" +
+	"\x04tick\x18\x01 \x01(\rR\x04tick\x120\n" +
+	"\x14missed_snapshot_rate\x18\x02 \x01(\x02R\x12missedSnapshotRate*\xaa\x1f\n" +
 	"\x13EDotaClientMessages\x12\x14\n" +
 	"\x0fDOTA_CM_MapLine\x10\xad\x02\x12\x18\n" +
 	"\x13DOTA_CM_AspectRatio\x10\xae\x02\x12\x14\n" +
@@ -7314,7 +7556,11 @@ const file_dota_clientmessages_proto_rawDesc = "" +
 	")DOTA_CM_MonsterHunter_SelectInvestigation\x10\xbb\x06\x12$\n" +
 	"\x1fDOTA_CM_MonsterHunter_HuntAlert\x10\xbc\x06\x12/\n" +
 	"*DOTA_CM_AbilitySpecificChannelRequiresHalt\x10\xbd\x06\x12\x1b\n" +
-	"\x16DOTA_CM_TormentorTimer\x10\xbe\x06B%Z#github.com/dotabuff/manta/dota;dota"
+	"\x16DOTA_CM_TormentorTimer\x10\xbe\x06\x12 \n" +
+	"\x1bDOTA_CM_ChooseDeityBlessing\x10\xbf\x06\x12!\n" +
+	"\x1cDOTA_CM_ChooseAghanimUpgrade\x10\xc0\x06\x12\x1f\n" +
+	"\x1aDOTA_CM_ChooseAbilityImbue\x10\xc1\x06\x12\x19\n" +
+	"\x14DOTA_CM_NetworkStats\x10\xc2\x06B%Z#github.com/dotabuff/manta/dota;dota"
 
 var (
 	file_dota_clientmessages_proto_rawDescOnce sync.Once
@@ -7329,7 +7575,7 @@ func file_dota_clientmessages_proto_rawDescGZIP() []byte {
 }
 
 var file_dota_clientmessages_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
-var file_dota_clientmessages_proto_msgTypes = make([]protoimpl.MessageInfo, 116)
+var file_dota_clientmessages_proto_msgTypes = make([]protoimpl.MessageInfo, 120)
 var file_dota_clientmessages_proto_goTypes = []any{
 	(EDotaClientMessages)(0),                                      // 0: dota.EDotaClientMessages
 	(CDOTAClientMsg_UnitsAutoAttackMode_EMode)(0),                 // 1: dota.CDOTAClientMsg_UnitsAutoAttackMode.EMode
@@ -7449,49 +7695,53 @@ var file_dota_clientmessages_proto_goTypes = []any{
 	(*CDOTAClientMsg_AutoCourierExecute)(nil),                     // 115: dota.CDOTAClientMsg_AutoCourierExecute
 	(*CDOTAClientMsg_MonsterHunter_SelectInvestigation)(nil),      // 116: dota.CDOTAClientMsg_MonsterHunter_SelectInvestigation
 	(*CDOTAClientMsg_MonsterHunter_HuntAlert)(nil),                // 117: dota.CDOTAClientMsg_MonsterHunter_HuntAlert
-	(*CDOTAClientMsg_DemoHero_PreviewItem)(nil),                   // 118: dota.CDOTAClientMsg_DemoHero.PreviewItem
-	(*CDOTAClientMsg_SuggestItemPreference_ItemPreference)(nil),   // 119: dota.CDOTAClientMsg_SuggestItemPreference.ItemPreference
-	(*CDOTAMsg_LocationPing)(nil),                                 // 120: dota.CDOTAMsg_LocationPing
-	(*CDOTAMsg_ItemAlert)(nil),                                    // 121: dota.CDOTAMsg_ItemAlert
-	(*CDOTAMsg_MapLine)(nil),                                      // 122: dota.CDOTAMsg_MapLine
-	(*CDOTAMsg_WorldLine)(nil),                                    // 123: dota.CDOTAMsg_WorldLine
-	(*CDOTAMsg_SendStatPopup)(nil),                                // 124: dota.CDOTAMsg_SendStatPopup
-	(*CDOTAMsg_DismissAllStatPopups)(nil),                         // 125: dota.CDOTAMsg_DismissAllStatPopups
-	(*CSOEconItem)(nil),                                           // 126: dota.CSOEconItem
-	(EEvent)(0),                                                   // 127: dota.EEvent
-	(*CDOTAMsg_UnitOrder)(nil),                                    // 128: dota.CDOTAMsg_UnitOrder
-	(EDOTAVersusScenePlayerBehavior)(0),                           // 129: dota.EDOTAVersusScenePlayerBehavior
-	(*VersusScene_PlayActivity)(nil),                              // 130: dota.VersusScene_PlayActivity
-	(*VersusScene_ChatWheel)(nil),                                 // 131: dota.VersusScene_ChatWheel
-	(*VersusScene_PlaybackRate)(nil),                              // 132: dota.VersusScene_PlaybackRate
-	(EOverwatchReportReason)(0),                                   // 133: dota.EOverwatchReportReason
-	(ETimerAlertType)(0),                                          // 134: dota.ETimerAlertType
-	(EItemSuggestPreference)(0),                                   // 135: dota.EItemSuggestPreference
+	(*CDOTAClientMsg_ChooseDeityBlessing)(nil),                    // 118: dota.CDOTAClientMsg_ChooseDeityBlessing
+	(*CDOTAClientMsg_ChooseAghanimUpgrade)(nil),                   // 119: dota.CDOTAClientMsg_ChooseAghanimUpgrade
+	(*CDOTAClientMsg_ChooseAbilityImbue)(nil),                     // 120: dota.CDOTAClientMsg_ChooseAbilityImbue
+	(*CDOTAClientMsg_NetworkStats)(nil),                           // 121: dota.CDOTAClientMsg_NetworkStats
+	(*CDOTAClientMsg_DemoHero_PreviewItem)(nil),                   // 122: dota.CDOTAClientMsg_DemoHero.PreviewItem
+	(*CDOTAClientMsg_SuggestItemPreference_ItemPreference)(nil),   // 123: dota.CDOTAClientMsg_SuggestItemPreference.ItemPreference
+	(*CDOTAMsg_LocationPing)(nil),                                 // 124: dota.CDOTAMsg_LocationPing
+	(*CDOTAMsg_ItemAlert)(nil),                                    // 125: dota.CDOTAMsg_ItemAlert
+	(*CDOTAMsg_MapLine)(nil),                                      // 126: dota.CDOTAMsg_MapLine
+	(*CDOTAMsg_WorldLine)(nil),                                    // 127: dota.CDOTAMsg_WorldLine
+	(*CDOTAMsg_SendStatPopup)(nil),                                // 128: dota.CDOTAMsg_SendStatPopup
+	(*CDOTAMsg_DismissAllStatPopups)(nil),                         // 129: dota.CDOTAMsg_DismissAllStatPopups
+	(*CSOEconItem)(nil),                                           // 130: dota.CSOEconItem
+	(EEvent)(0),                                                   // 131: dota.EEvent
+	(*CDOTAMsg_UnitOrder)(nil),                                    // 132: dota.CDOTAMsg_UnitOrder
+	(EDOTAVersusScenePlayerBehavior)(0),                           // 133: dota.EDOTAVersusScenePlayerBehavior
+	(*VersusScene_PlayActivity)(nil),                              // 134: dota.VersusScene_PlayActivity
+	(*VersusScene_ChatWheel)(nil),                                 // 135: dota.VersusScene_ChatWheel
+	(*VersusScene_PlaybackRate)(nil),                              // 136: dota.VersusScene_PlaybackRate
+	(EOverwatchReportReason)(0),                                   // 137: dota.EOverwatchReportReason
+	(ETimerAlertType)(0),                                          // 138: dota.ETimerAlertType
+	(EItemSuggestPreference)(0),                                   // 139: dota.EItemSuggestPreference
 }
 var file_dota_clientmessages_proto_depIdxs = []int32{
-	120, // 0: dota.CDOTAClientMsg_MapPing.location_ping:type_name -> dota.CDOTAMsg_LocationPing
-	121, // 1: dota.CDOTAClientMsg_ItemAlert.item_alert:type_name -> dota.CDOTAMsg_ItemAlert
-	122, // 2: dota.CDOTAClientMsg_MapLine.mapline:type_name -> dota.CDOTAMsg_MapLine
+	124, // 0: dota.CDOTAClientMsg_MapPing.location_ping:type_name -> dota.CDOTAMsg_LocationPing
+	125, // 1: dota.CDOTAClientMsg_ItemAlert.item_alert:type_name -> dota.CDOTAMsg_ItemAlert
+	126, // 2: dota.CDOTAClientMsg_MapLine.mapline:type_name -> dota.CDOTAMsg_MapLine
 	1,   // 3: dota.CDOTAClientMsg_UnitsAutoAttackMode.mode:type_name -> dota.CDOTAClientMsg_UnitsAutoAttackMode.EMode
 	2,   // 4: dota.CDOTAClientMsg_UnitsAutoAttackMode.unit_type:type_name -> dota.CDOTAClientMsg_UnitsAutoAttackMode.EUnitType
-	123, // 5: dota.CDOTAClientMsg_WorldLine.worldline:type_name -> dota.CDOTAMsg_WorldLine
-	124, // 6: dota.CDOTAClientMsg_SendStatPopup.statpopup:type_name -> dota.CDOTAMsg_SendStatPopup
-	125, // 7: dota.CDOTAClientMsg_DismissAllStatPopups.dismissallmsg:type_name -> dota.CDOTAMsg_DismissAllStatPopups
+	127, // 5: dota.CDOTAClientMsg_WorldLine.worldline:type_name -> dota.CDOTAMsg_WorldLine
+	128, // 6: dota.CDOTAClientMsg_SendStatPopup.statpopup:type_name -> dota.CDOTAMsg_SendStatPopup
+	129, // 7: dota.CDOTAClientMsg_DismissAllStatPopups.dismissallmsg:type_name -> dota.CDOTAMsg_DismissAllStatPopups
 	33,  // 8: dota.CDOTAClientMsg_UpdateQuickBuy.items:type_name -> dota.CDOTAClientMsg_UpdateQuickBuyItem
 	3,   // 9: dota.CDOTAClientMsg_QuickBuyAction.action:type_name -> dota.CDOTAClientMsg_QuickBuyAction.EActionType
-	118, // 10: dota.CDOTAClientMsg_DemoHero.preview_items:type_name -> dota.CDOTAClientMsg_DemoHero.PreviewItem
-	126, // 11: dota.CDOTAClientMsg_DemoHero.item_data:type_name -> dota.CSOEconItem
-	127, // 12: dota.CDOTAClientMsg_ChallengeReroll.event_id:type_name -> dota.EEvent
-	128, // 13: dota.CDOTAClientMsg_ExecuteOrders.orders:type_name -> dota.CDOTAMsg_UnitOrder
-	119, // 14: dota.CDOTAClientMsg_SuggestItemPreference.item_preferences:type_name -> dota.CDOTAClientMsg_SuggestItemPreference.ItemPreference
-	129, // 15: dota.CDOTAClientMsg_VersusScene_PlayerBehavior.behavior:type_name -> dota.EDOTAVersusScenePlayerBehavior
-	130, // 16: dota.CDOTAClientMsg_VersusScene_PlayerBehavior.play_activity:type_name -> dota.VersusScene_PlayActivity
-	131, // 17: dota.CDOTAClientMsg_VersusScene_PlayerBehavior.chat_wheel:type_name -> dota.VersusScene_ChatWheel
-	132, // 18: dota.CDOTAClientMsg_VersusScene_PlayerBehavior.playback_rate:type_name -> dota.VersusScene_PlaybackRate
-	133, // 19: dota.CDOTAClientMsg_AddOverwatchReportMarker.reason:type_name -> dota.EOverwatchReportReason
+	122, // 10: dota.CDOTAClientMsg_DemoHero.preview_items:type_name -> dota.CDOTAClientMsg_DemoHero.PreviewItem
+	130, // 11: dota.CDOTAClientMsg_DemoHero.item_data:type_name -> dota.CSOEconItem
+	131, // 12: dota.CDOTAClientMsg_ChallengeReroll.event_id:type_name -> dota.EEvent
+	132, // 13: dota.CDOTAClientMsg_ExecuteOrders.orders:type_name -> dota.CDOTAMsg_UnitOrder
+	123, // 14: dota.CDOTAClientMsg_SuggestItemPreference.item_preferences:type_name -> dota.CDOTAClientMsg_SuggestItemPreference.ItemPreference
+	133, // 15: dota.CDOTAClientMsg_VersusScene_PlayerBehavior.behavior:type_name -> dota.EDOTAVersusScenePlayerBehavior
+	134, // 16: dota.CDOTAClientMsg_VersusScene_PlayerBehavior.play_activity:type_name -> dota.VersusScene_PlayActivity
+	135, // 17: dota.CDOTAClientMsg_VersusScene_PlayerBehavior.chat_wheel:type_name -> dota.VersusScene_ChatWheel
+	136, // 18: dota.CDOTAClientMsg_VersusScene_PlayerBehavior.playback_rate:type_name -> dota.VersusScene_PlaybackRate
+	137, // 19: dota.CDOTAClientMsg_AddOverwatchReportMarker.reason:type_name -> dota.EOverwatchReportReason
 	93,  // 20: dota.CDOTAClientMsg_ContextualTips_Subscribe.tips:type_name -> dota.CDOTAClientMsg_ContextualTips_Subscribe_Entry
-	134, // 21: dota.CDOTAClientMsg_TimerAlert.timer_alert_type:type_name -> dota.ETimerAlertType
-	135, // 22: dota.CDOTAClientMsg_SuggestItemPreference.ItemPreference.preference:type_name -> dota.EItemSuggestPreference
+	138, // 21: dota.CDOTAClientMsg_TimerAlert.timer_alert_type:type_name -> dota.ETimerAlertType
+	139, // 22: dota.CDOTAClientMsg_SuggestItemPreference.ItemPreference.preference:type_name -> dota.EItemSuggestPreference
 	23,  // [23:23] is the sub-list for method output_type
 	23,  // [23:23] is the sub-list for method input_type
 	23,  // [23:23] is the sub-list for extension type_name
@@ -7513,7 +7763,7 @@ func file_dota_clientmessages_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_dota_clientmessages_proto_rawDesc), len(file_dota_clientmessages_proto_rawDesc)),
 			NumEnums:      4,
-			NumMessages:   116,
+			NumMessages:   120,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

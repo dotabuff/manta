@@ -1013,6 +1013,13 @@ const (
 	EDOTAGCMsg_k_EMsgClientToGCMonsterHunterClaimCodexRewardResponse               EDOTAGCMsg = 9048
 	EDOTAGCMsg_k_EMsgClientToGCMonsterHunterClaimSetReward                         EDOTAGCMsg = 9049
 	EDOTAGCMsg_k_EMsgClientToGCMonsterHunterClaimSetRewardResponse                 EDOTAGCMsg = 9050
+	EDOTAGCMsg_k_EMsgClientToGCItemBattlerGetUserData                              EDOTAGCMsg = 9100
+	EDOTAGCMsg_k_EMsgClientToGCItemBattlerGetUserDataResponse                      EDOTAGCMsg = 9101
+	EDOTAGCMsg_k_EMsgClientToGCItemBattlerGameAction                               EDOTAGCMsg = 9102
+	EDOTAGCMsg_k_EMsgClientToGCItemBattlerGameActionResponse                       EDOTAGCMsg = 9103
+	EDOTAGCMsg_k_EMsgGCToClientItemBattlerUserDataUpdated                          EDOTAGCMsg = 9104
+	EDOTAGCMsg_k_EMsgClientToGCItemBattlerDevGrantItem                             EDOTAGCMsg = 9105
+	EDOTAGCMsg_k_EMsgClientToGCItemBattlerDevGrantItemResponse                     EDOTAGCMsg = 9106
 	EDOTAGCMsg_k_EMsgClientToGCGetEventRanking                                     EDOTAGCMsg = 9107
 	EDOTAGCMsg_k_EMsgClientToGCGetEventRankingResponse                             EDOTAGCMsg = 9108
 	EDOTAGCMsg_k_EMsgClientToGCGetEventCoupon                                      EDOTAGCMsg = 9109
@@ -1023,6 +1030,12 @@ const (
 	EDOTAGCMsg_k_EMsgServerToGCWarningInvalidBotAbilityUsage                       EDOTAGCMsg = 9114
 	EDOTAGCMsg_k_EMsgClientToGCInviteToDemoMode                                    EDOTAGCMsg = 9115
 	EDOTAGCMsg_k_EMsgGCToClientInviteToDemoMode                                    EDOTAGCMsg = 9116
+	EDOTAGCMsg_k_EMsgClientToGCOverworldDevSetFortune                              EDOTAGCMsg = 9117
+	EDOTAGCMsg_k_EMsgClientToGCOverworldDevSetFortuneResponse                      EDOTAGCMsg = 9118
+	EDOTAGCMsg_k_EMsgClientToGCOverworldRequestFortune                             EDOTAGCMsg = 9119
+	EDOTAGCMsg_k_EMsgClientToGCOverworldRequestFortuneResponse                     EDOTAGCMsg = 9120
+	EDOTAGCMsg_k_EMsgClientToGCOverworldDevClearFortune                            EDOTAGCMsg = 9121
+	EDOTAGCMsg_k_EMsgClientToGCOverworldDevClearFortuneResponse                    EDOTAGCMsg = 9122
 )
 
 // Enum value maps for EDOTAGCMsg.
@@ -2017,6 +2030,13 @@ var (
 		9048: "k_EMsgClientToGCMonsterHunterClaimCodexRewardResponse",
 		9049: "k_EMsgClientToGCMonsterHunterClaimSetReward",
 		9050: "k_EMsgClientToGCMonsterHunterClaimSetRewardResponse",
+		9100: "k_EMsgClientToGCItemBattlerGetUserData",
+		9101: "k_EMsgClientToGCItemBattlerGetUserDataResponse",
+		9102: "k_EMsgClientToGCItemBattlerGameAction",
+		9103: "k_EMsgClientToGCItemBattlerGameActionResponse",
+		9104: "k_EMsgGCToClientItemBattlerUserDataUpdated",
+		9105: "k_EMsgClientToGCItemBattlerDevGrantItem",
+		9106: "k_EMsgClientToGCItemBattlerDevGrantItemResponse",
 		9107: "k_EMsgClientToGCGetEventRanking",
 		9108: "k_EMsgClientToGCGetEventRankingResponse",
 		9109: "k_EMsgClientToGCGetEventCoupon",
@@ -2027,6 +2047,12 @@ var (
 		9114: "k_EMsgServerToGCWarningInvalidBotAbilityUsage",
 		9115: "k_EMsgClientToGCInviteToDemoMode",
 		9116: "k_EMsgGCToClientInviteToDemoMode",
+		9117: "k_EMsgClientToGCOverworldDevSetFortune",
+		9118: "k_EMsgClientToGCOverworldDevSetFortuneResponse",
+		9119: "k_EMsgClientToGCOverworldRequestFortune",
+		9120: "k_EMsgClientToGCOverworldRequestFortuneResponse",
+		9121: "k_EMsgClientToGCOverworldDevClearFortune",
+		9122: "k_EMsgClientToGCOverworldDevClearFortuneResponse",
 	}
 	EDOTAGCMsg_value = map[string]int32{
 		"k_EMsgGCDOTABase":                                                    7000,
@@ -3018,6 +3044,13 @@ var (
 		"k_EMsgClientToGCMonsterHunterClaimCodexRewardResponse":               9048,
 		"k_EMsgClientToGCMonsterHunterClaimSetReward":                         9049,
 		"k_EMsgClientToGCMonsterHunterClaimSetRewardResponse":                 9050,
+		"k_EMsgClientToGCItemBattlerGetUserData":                              9100,
+		"k_EMsgClientToGCItemBattlerGetUserDataResponse":                      9101,
+		"k_EMsgClientToGCItemBattlerGameAction":                               9102,
+		"k_EMsgClientToGCItemBattlerGameActionResponse":                       9103,
+		"k_EMsgGCToClientItemBattlerUserDataUpdated":                          9104,
+		"k_EMsgClientToGCItemBattlerDevGrantItem":                             9105,
+		"k_EMsgClientToGCItemBattlerDevGrantItemResponse":                     9106,
 		"k_EMsgClientToGCGetEventRanking":                                     9107,
 		"k_EMsgClientToGCGetEventRankingResponse":                             9108,
 		"k_EMsgClientToGCGetEventCoupon":                                      9109,
@@ -3028,6 +3061,12 @@ var (
 		"k_EMsgServerToGCWarningInvalidBotAbilityUsage":                       9114,
 		"k_EMsgClientToGCInviteToDemoMode":                                    9115,
 		"k_EMsgGCToClientInviteToDemoMode":                                    9116,
+		"k_EMsgClientToGCOverworldDevSetFortune":                              9117,
+		"k_EMsgClientToGCOverworldDevSetFortuneResponse":                      9118,
+		"k_EMsgClientToGCOverworldRequestFortune":                             9119,
+		"k_EMsgClientToGCOverworldRequestFortuneResponse":                     9120,
+		"k_EMsgClientToGCOverworldDevClearFortune":                            9121,
+		"k_EMsgClientToGCOverworldDevClearFortuneResponse":                    9122,
 	}
 )
 
@@ -3072,7 +3111,7 @@ var File_dota_gcmessages_msgid_proto protoreflect.FileDescriptor
 
 const file_dota_gcmessages_msgid_proto_rawDesc = "" +
 	"\n" +
-	"\x1bdota_gcmessages_msgid.proto\x12\x04dota*\x8e\xd6\x02\n" +
+	"\x1bdota_gcmessages_msgid.proto\x12\x04dota*\x91\xdb\x02\n" +
 	"\n" +
 	"EDOTAGCMsg\x12\x15\n" +
 	"\x10k_EMsgGCDOTABase\x10\xd86\x12\x1d\n" +
@@ -4063,7 +4102,14 @@ const file_dota_gcmessages_msgid_proto_rawDesc = "" +
 	"-k_EMsgClientToGCMonsterHunterClaimCodexReward\x10\xd7F\x12:\n" +
 	"5k_EMsgClientToGCMonsterHunterClaimCodexRewardResponse\x10\xd8F\x120\n" +
 	"+k_EMsgClientToGCMonsterHunterClaimSetReward\x10\xd9F\x128\n" +
-	"3k_EMsgClientToGCMonsterHunterClaimSetRewardResponse\x10\xdaF\x12$\n" +
+	"3k_EMsgClientToGCMonsterHunterClaimSetRewardResponse\x10\xdaF\x12+\n" +
+	"&k_EMsgClientToGCItemBattlerGetUserData\x10\x8cG\x123\n" +
+	".k_EMsgClientToGCItemBattlerGetUserDataResponse\x10\x8dG\x12*\n" +
+	"%k_EMsgClientToGCItemBattlerGameAction\x10\x8eG\x122\n" +
+	"-k_EMsgClientToGCItemBattlerGameActionResponse\x10\x8fG\x12/\n" +
+	"*k_EMsgGCToClientItemBattlerUserDataUpdated\x10\x90G\x12,\n" +
+	"'k_EMsgClientToGCItemBattlerDevGrantItem\x10\x91G\x124\n" +
+	"/k_EMsgClientToGCItemBattlerDevGrantItemResponse\x10\x92G\x12$\n" +
 	"\x1fk_EMsgClientToGCGetEventRanking\x10\x93G\x12,\n" +
 	"'k_EMsgClientToGCGetEventRankingResponse\x10\x94G\x12#\n" +
 	"\x1ek_EMsgClientToGCGetEventCoupon\x10\x95G\x12+\n" +
@@ -4073,7 +4119,13 @@ const file_dota_gcmessages_msgid_proto_rawDesc = "" +
 	")k_EMsgServerToGCWarningLowServerFramerate\x10\x99G\x122\n" +
 	"-k_EMsgServerToGCWarningInvalidBotAbilityUsage\x10\x9aG\x12%\n" +
 	" k_EMsgClientToGCInviteToDemoMode\x10\x9bG\x12%\n" +
-	" k_EMsgGCToClientInviteToDemoMode\x10\x9cGB%Z#github.com/dotabuff/manta/dota;dota"
+	" k_EMsgGCToClientInviteToDemoMode\x10\x9cG\x12+\n" +
+	"&k_EMsgClientToGCOverworldDevSetFortune\x10\x9dG\x123\n" +
+	".k_EMsgClientToGCOverworldDevSetFortuneResponse\x10\x9eG\x12,\n" +
+	"'k_EMsgClientToGCOverworldRequestFortune\x10\x9fG\x124\n" +
+	"/k_EMsgClientToGCOverworldRequestFortuneResponse\x10\xa0G\x12-\n" +
+	"(k_EMsgClientToGCOverworldDevClearFortune\x10\xa1G\x125\n" +
+	"0k_EMsgClientToGCOverworldDevClearFortuneResponse\x10\xa2GB%Z#github.com/dotabuff/manta/dota;dota"
 
 var (
 	file_dota_gcmessages_msgid_proto_rawDescOnce sync.Once

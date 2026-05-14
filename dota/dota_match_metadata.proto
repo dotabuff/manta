@@ -21,8 +21,8 @@ enum EPlayerInventorySnapshotFlags {
 
 message CDOTAMatchMetadataFile {
 
-	required int32 version = 1;
-	required uint64 match_id = 2;
+	optional int32 version = 1;
+	optional uint64 match_id = 2;
 	optional CDOTAMatchMetadata metadata = 3;
 	optional bytes private_metadata = 5;
 }
@@ -387,7 +387,72 @@ message CDOTAMatchPrivateMetadata {
 		repeated CDOTAMatchPrivateMetadata.Team.Building buildings = 3;
 	}
 
+	message ContributionsCombatSegment {
+		message DamageContributionRecord {
+			optional int32 attacker_ability_id = 1;
+			optional int32 attacker_hero_id = 2;
+			optional int32 target_hero_id = 3;
+			optional int32 contributor_ability_id = 4;
+			optional int32 contributor_hero_id = 5;
+			optional uint32 value = 6;
+			optional uint32 type = 7;
+		}
+
+		message DamageMitigationRecord {
+			optional int32 attacker_ability_id = 1;
+			optional int32 attacker_hero_id = 2;
+			optional int32 target_hero_id = 3;
+			optional int32 contributor_ability_id = 4;
+			optional int32 contributor_hero_id = 5;
+			optional uint32 value = 6;
+			optional uint32 type = 7;
+		}
+
+		message HealingContributionRecord {
+			optional int32 attacker_ability_id = 1;
+			optional int32 attacker_hero_id = 2;
+			optional int32 target_hero_id = 3;
+			optional int32 contributor_ability_id = 4;
+			optional int32 contributor_hero_id = 5;
+			optional uint32 value = 6;
+			optional uint32 type = 7;
+		}
+
+		message HealingReductionRecord {
+			optional int32 attacker_ability_id = 1;
+			optional int32 attacker_hero_id = 2;
+			optional int32 target_hero_id = 3;
+			optional int32 contributor_ability_id = 4;
+			optional int32 contributor_hero_id = 5;
+			optional uint32 value = 6;
+			optional uint32 type = 7;
+		}
+
+		message KillingBlow {
+			optional int32 attacker_hero_id = 1;
+			optional int32 target_hero_id = 2;
+			optional int32 inflictor_ability_id = 3;
+		}
+
+		message Dispel {
+			optional int32 attacker_hero_id = 1;
+			optional int32 target_hero_id = 2;
+			optional int32 inflictor_ability_id = 3;
+			optional int32 modifier_ability_id = 4;
+			optional float duration_reduced = 5;
+		}
+
+		optional int32 game_time = 1;
+		repeated CDOTAMatchPrivateMetadata.ContributionsCombatSegment.DamageContributionRecord damage_contributions = 2;
+		repeated CDOTAMatchPrivateMetadata.ContributionsCombatSegment.DamageMitigationRecord damage_mitigations = 3;
+		repeated CDOTAMatchPrivateMetadata.ContributionsCombatSegment.HealingContributionRecord healing_contributions = 4;
+		repeated CDOTAMatchPrivateMetadata.ContributionsCombatSegment.HealingReductionRecord healing_reductions = 5;
+		repeated CDOTAMatchPrivateMetadata.ContributionsCombatSegment.KillingBlow killing_blows = 6;
+		repeated CDOTAMatchPrivateMetadata.ContributionsCombatSegment.Dispel dispels = 7;
+	}
+
 	repeated CDOTAMatchPrivateMetadata.Team teams = 1;
 	repeated float graph_win_probability = 2;
 	repeated CDOTAMatchPrivateMetadata.StringName string_names = 3;
+	repeated CDOTAMatchPrivateMetadata.ContributionsCombatSegment contributions = 4;
 }

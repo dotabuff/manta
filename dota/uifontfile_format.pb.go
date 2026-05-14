@@ -75,7 +75,7 @@ func (x *CUIFontFilePB) GetOpentypeFontData() []byte {
 
 type CUIFontFilePackagePB struct {
 	state              protoimpl.MessageState                         `protogen:"open.v1"`
-	PackageVersion     *uint32                                        `protobuf:"varint,1,req,name=package_version,json=packageVersion" json:"package_version,omitempty"`
+	PackageVersion     *uint32                                        `protobuf:"varint,1,opt,name=package_version,json=packageVersion" json:"package_version,omitempty"`
 	EncryptedFontFiles []*CUIFontFilePackagePB_CUIEncryptedFontFilePB `protobuf:"bytes,2,rep,name=encrypted_font_files,json=encryptedFontFiles" json:"encrypted_font_files,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
@@ -178,7 +178,7 @@ const file_uifontfile_format_proto_rawDesc = "" +
 	"\x0efont_file_name\x18\x01 \x01(\tR\ffontFileName\x12,\n" +
 	"\x12opentype_font_data\x18\x02 \x01(\fR\x10opentypeFontData\"\xed\x01\n" +
 	"\x14CUIFontFilePackagePB\x12'\n" +
-	"\x0fpackage_version\x18\x01 \x02(\rR\x0epackageVersion\x12c\n" +
+	"\x0fpackage_version\x18\x01 \x01(\rR\x0epackageVersion\x12c\n" +
 	"\x14encrypted_font_files\x18\x02 \x03(\v21.dota.CUIFontFilePackagePB.CUIEncryptedFontFilePBR\x12encryptedFontFiles\x1aG\n" +
 	"\x16CUIEncryptedFontFilePB\x12-\n" +
 	"\x12encrypted_contents\x18\x01 \x01(\fR\x11encryptedContentsB%Z#github.com/dotabuff/manta/dota;dota"

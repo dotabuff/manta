@@ -79,10 +79,10 @@ func (DOTA_MODIFIER_ENTRY_TYPE) EnumDescriptor() ([]byte, []int) {
 
 type CDOTAModifierBuffTableEntry struct {
 	state               protoimpl.MessageState    `protogen:"open.v1"`
-	EntryType           *DOTA_MODIFIER_ENTRY_TYPE `protobuf:"varint,1,req,name=entry_type,json=entryType,enum=dota.DOTA_MODIFIER_ENTRY_TYPE" json:"entry_type,omitempty"`
-	Parent              *uint32                   `protobuf:"varint,2,req,name=parent" json:"parent,omitempty"`
-	Index               *int32                    `protobuf:"varint,3,req,name=index" json:"index,omitempty"`
-	SerialNum           *int32                    `protobuf:"varint,4,req,name=serial_num,json=serialNum" json:"serial_num,omitempty"`
+	EntryType           *DOTA_MODIFIER_ENTRY_TYPE `protobuf:"varint,1,opt,name=entry_type,json=entryType,enum=dota.DOTA_MODIFIER_ENTRY_TYPE" json:"entry_type,omitempty"`
+	Parent              *uint32                   `protobuf:"varint,2,opt,name=parent" json:"parent,omitempty"`
+	Index               *int32                    `protobuf:"varint,3,opt,name=index" json:"index,omitempty"`
+	SerialNum           *int32                    `protobuf:"varint,4,opt,name=serial_num,json=serialNum" json:"serial_num,omitempty"`
 	ModifierClass       *int32                    `protobuf:"varint,5,opt,name=modifier_class,json=modifierClass" json:"modifier_class,omitempty"`
 	AbilityLevel        *int32                    `protobuf:"varint,6,opt,name=ability_level,json=abilityLevel" json:"ability_level,omitempty"`
 	StackCount          *int32                    `protobuf:"varint,7,opt,name=stack_count,json=stackCount" json:"stack_count,omitempty"`
@@ -119,6 +119,8 @@ type CDOTAModifierBuffTableEntry struct {
 	CustomEntity        *uint32                   `protobuf:"varint,38,opt,name=custom_entity,json=customEntity" json:"custom_entity,omitempty"`
 	AuraWithinRange     *bool                     `protobuf:"varint,39,opt,name=aura_within_range,json=auraWithinRange" json:"aura_within_range,omitempty"`
 	MoveSlow            *float32                  `protobuf:"fixed32,40,opt,name=move_slow,json=moveSlow" json:"move_slow,omitempty"`
+	HasScepter          *bool                     `protobuf:"varint,41,opt,name=has_scepter,json=hasScepter" json:"has_scepter,omitempty"`
+	HasShard            *bool                     `protobuf:"varint,42,opt,name=has_shard,json=hasShard" json:"has_shard,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -433,10 +435,24 @@ func (x *CDOTAModifierBuffTableEntry) GetMoveSlow() float32 {
 	return 0
 }
 
+func (x *CDOTAModifierBuffTableEntry) GetHasScepter() bool {
+	if x != nil && x.HasScepter != nil {
+		return *x.HasScepter
+	}
+	return false
+}
+
+func (x *CDOTAModifierBuffTableEntry) GetHasShard() bool {
+	if x != nil && x.HasShard != nil {
+		return *x.HasShard
+	}
+	return false
+}
+
 type CDOTALuaModifierEntry struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
-	ModifierType     *int32                 `protobuf:"varint,1,req,name=modifier_type,json=modifierType" json:"modifier_type,omitempty"`
-	ModifierFilename *string                `protobuf:"bytes,2,req,name=modifier_filename,json=modifierFilename" json:"modifier_filename,omitempty"`
+	ModifierType     *int32                 `protobuf:"varint,1,opt,name=modifier_type,json=modifierType" json:"modifier_type,omitempty"`
+	ModifierFilename *string                `protobuf:"bytes,2,opt,name=modifier_filename,json=modifierFilename" json:"modifier_filename,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -489,15 +505,14 @@ var File_dota_modifiers_proto protoreflect.FileDescriptor
 
 const file_dota_modifiers_proto_rawDesc = "" +
 	"\n" +
-	"\x14dota_modifiers.proto\x12\x04dota\x1a\x16networkbasetypes.proto\"\xed\n" +
-	"\n" +
+	"\x14dota_modifiers.proto\x12\x04dota\x1a\x16networkbasetypes.proto\"\xab\v\n" +
 	"\x1bCDOTAModifierBuffTableEntry\x12=\n" +
 	"\n" +
-	"entry_type\x18\x01 \x02(\x0e2\x1e.dota.DOTA_MODIFIER_ENTRY_TYPER\tentryType\x12\x16\n" +
-	"\x06parent\x18\x02 \x02(\rR\x06parent\x12\x14\n" +
-	"\x05index\x18\x03 \x02(\x05R\x05index\x12\x1d\n" +
+	"entry_type\x18\x01 \x01(\x0e2\x1e.dota.DOTA_MODIFIER_ENTRY_TYPER\tentryType\x12\x16\n" +
+	"\x06parent\x18\x02 \x01(\rR\x06parent\x12\x14\n" +
+	"\x05index\x18\x03 \x01(\x05R\x05index\x12\x1d\n" +
 	"\n" +
-	"serial_num\x18\x04 \x02(\x05R\tserialNum\x12%\n" +
+	"serial_num\x18\x04 \x01(\x05R\tserialNum\x12%\n" +
 	"\x0emodifier_class\x18\x05 \x01(\x05R\rmodifierClass\x12#\n" +
 	"\rability_level\x18\x06 \x01(\x05R\fabilityLevel\x12\x1f\n" +
 	"\vstack_count\x18\a \x01(\x05R\n" +
@@ -538,10 +553,13 @@ const file_dota_modifiers_proto_rawDesc = "" +
 	"bonus_mana\x18% \x01(\x05R\tbonusMana\x12#\n" +
 	"\rcustom_entity\x18& \x01(\rR\fcustomEntity\x12*\n" +
 	"\x11aura_within_range\x18' \x01(\bR\x0fauraWithinRange\x12\x1b\n" +
-	"\tmove_slow\x18( \x01(\x02R\bmoveSlow\"i\n" +
+	"\tmove_slow\x18( \x01(\x02R\bmoveSlow\x12\x1f\n" +
+	"\vhas_scepter\x18) \x01(\bR\n" +
+	"hasScepter\x12\x1b\n" +
+	"\thas_shard\x18* \x01(\bR\bhasShard\"i\n" +
 	"\x15CDOTALuaModifierEntry\x12#\n" +
-	"\rmodifier_type\x18\x01 \x02(\x05R\fmodifierType\x12+\n" +
-	"\x11modifier_filename\x18\x02 \x02(\tR\x10modifierFilename*e\n" +
+	"\rmodifier_type\x18\x01 \x01(\x05R\fmodifierType\x12+\n" +
+	"\x11modifier_filename\x18\x02 \x01(\tR\x10modifierFilename*e\n" +
 	"\x18DOTA_MODIFIER_ENTRY_TYPE\x12#\n" +
 	"\x1fDOTA_MODIFIER_ENTRY_TYPE_ACTIVE\x10\x01\x12$\n" +
 	" DOTA_MODIFIER_ENTRY_TYPE_REMOVED\x10\x02B%Z#github.com/dotabuff/manta/dota;dota"

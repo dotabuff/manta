@@ -527,6 +527,8 @@ message CMsgGameMatchSignOutPerfData {
 	optional float server_average_sleep_frame_time = 26;
 	optional float server_max_sleep_frame_time = 27;
 	optional uint32 num_multitick_frames = 28;
+	repeated float average_missed_snapshot_rate = 29;
+	repeated float max_missed_snapshot_rate = 30;
 }
 
 message CMsgGameMatchSignOutBanData {
@@ -540,6 +542,7 @@ message CMsgDOTALiveScoreboardUpdate {
 			message HeroAbility {
 				optional int32 ability_id = 1;
 				optional uint32 ability_level = 2;
+				optional bool tome_upgraded = 3;
 			}
 
 			enum DOTAUltimateState {
@@ -735,8 +738,8 @@ message CMsgServerGCUpdateSpectatorCount {
 message CSerializedCombatLog {
 	message Dictionary {
 		message DictString {
-			required uint32 id = 1;
-			required string value = 2;
+			optional uint32 id = 1;
+			optional string value = 2;
 		}
 
 		repeated CSerializedCombatLog.Dictionary.DictString strings = 1;
@@ -1158,8 +1161,8 @@ message CMsgSignOutGuildChallengeProgress {
 message CMsgSignOutMVPStats {
 	message Player {
 		message KillEaterEvent {
-			required uint32 event_type = 1;
-			required uint32 amount = 2;
+			optional uint32 event_type = 1;
+			optional uint32 amount = 2;
 		}
 
 		optional uint32 team_id = 1;

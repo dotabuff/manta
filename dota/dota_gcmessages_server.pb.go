@@ -2498,6 +2498,8 @@ type CMsgGameMatchSignOutPerfData struct {
 	ServerAverageSleepFrameTime           *float32               `protobuf:"fixed32,26,opt,name=server_average_sleep_frame_time,json=serverAverageSleepFrameTime" json:"server_average_sleep_frame_time,omitempty"`
 	ServerMaxSleepFrameTime               *float32               `protobuf:"fixed32,27,opt,name=server_max_sleep_frame_time,json=serverMaxSleepFrameTime" json:"server_max_sleep_frame_time,omitempty"`
 	NumMultitickFrames                    *uint32                `protobuf:"varint,28,opt,name=num_multitick_frames,json=numMultitickFrames" json:"num_multitick_frames,omitempty"`
+	AverageMissedSnapshotRate             []float32              `protobuf:"fixed32,29,rep,name=average_missed_snapshot_rate,json=averageMissedSnapshotRate" json:"average_missed_snapshot_rate,omitempty"`
+	MaxMissedSnapshotRate                 []float32              `protobuf:"fixed32,30,rep,name=max_missed_snapshot_rate,json=maxMissedSnapshotRate" json:"max_missed_snapshot_rate,omitempty"`
 	unknownFields                         protoimpl.UnknownFields
 	sizeCache                             protoimpl.SizeCache
 }
@@ -2726,6 +2728,20 @@ func (x *CMsgGameMatchSignOutPerfData) GetNumMultitickFrames() uint32 {
 		return *x.NumMultitickFrames
 	}
 	return 0
+}
+
+func (x *CMsgGameMatchSignOutPerfData) GetAverageMissedSnapshotRate() []float32 {
+	if x != nil {
+		return x.AverageMissedSnapshotRate
+	}
+	return nil
+}
+
+func (x *CMsgGameMatchSignOutPerfData) GetMaxMissedSnapshotRate() []float32 {
+	if x != nil {
+		return x.MaxMissedSnapshotRate
+	}
+	return nil
 }
 
 type CMsgGameMatchSignOutBanData struct {
@@ -11036,6 +11052,7 @@ type CMsgDOTALiveScoreboardUpdate_Team_Player_HeroAbility struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	AbilityId     *int32                 `protobuf:"varint,1,opt,name=ability_id,json=abilityId" json:"ability_id,omitempty"`
 	AbilityLevel  *uint32                `protobuf:"varint,2,opt,name=ability_level,json=abilityLevel" json:"ability_level,omitempty"`
+	TomeUpgraded  *bool                  `protobuf:"varint,3,opt,name=tome_upgraded,json=tomeUpgraded" json:"tome_upgraded,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -11082,6 +11099,13 @@ func (x *CMsgDOTALiveScoreboardUpdate_Team_Player_HeroAbility) GetAbilityLevel()
 		return *x.AbilityLevel
 	}
 	return 0
+}
+
+func (x *CMsgDOTALiveScoreboardUpdate_Team_Player_HeroAbility) GetTomeUpgraded() bool {
+	if x != nil && x.TomeUpgraded != nil {
+		return *x.TomeUpgraded
+	}
+	return false
 }
 
 type CMsgServerToGCRequestBatchPlayerResourcesResponse_Result struct {
@@ -11446,8 +11470,8 @@ func (x *CSerializedCombatLog_Dictionary) GetStrings() []*CSerializedCombatLog_D
 
 type CSerializedCombatLog_Dictionary_DictString struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            *uint32                `protobuf:"varint,1,req,name=id" json:"id,omitempty"`
-	Value         *string                `protobuf:"bytes,2,req,name=value" json:"value,omitempty"`
+	Id            *uint32                `protobuf:"varint,1,opt,name=id" json:"id,omitempty"`
+	Value         *string                `protobuf:"bytes,2,opt,name=value" json:"value,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -13478,8 +13502,8 @@ func (x *CMsgSignOutMVPStats_Player) GetHighestKillstreak() uint32 {
 
 type CMsgSignOutMVPStats_Player_KillEaterEvent struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	EventType     *uint32                `protobuf:"varint,1,req,name=event_type,json=eventType" json:"event_type,omitempty"`
-	Amount        *uint32                `protobuf:"varint,2,req,name=amount" json:"amount,omitempty"`
+	EventType     *uint32                `protobuf:"varint,1,opt,name=event_type,json=eventType" json:"event_type,omitempty"`
+	Amount        *uint32                `protobuf:"varint,2,opt,name=amount" json:"amount,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -15066,7 +15090,7 @@ const file_dota_gcmessages_server_proto_rawDesc = "" +
 	"\bmap_name\x18\x03 \x01(\tR\amapName\x12&\n" +
 	"\x0fevent_game_data\x18\x04 \x01(\fR\reventGameData\x12\x1d\n" +
 	"\n" +
-	"start_time\x18\x05 \x01(\rR\tstartTime\"\xa6\f\n" +
+	"start_time\x18\x05 \x01(\rR\tstartTime\"\xa0\r\n" +
 	"\x1cCMsgGameMatchSignOutPerfData\x12,\n" +
 	"\x12average_frame_time\x18\x01 \x03(\x02R\x10averageFrameTime\x12$\n" +
 	"\x0emax_frame_time\x18\x02 \x03(\x02R\fmaxFrameTime\x129\n" +
@@ -15096,10 +15120,12 @@ const file_dota_gcmessages_server_proto_rawDesc = "" +
 	"\x1fserver_max_oversleep_frame_time\x18\x19 \x01(\x02R\x1bserverMaxOversleepFrameTime\x12D\n" +
 	"\x1fserver_average_sleep_frame_time\x18\x1a \x01(\x02R\x1bserverAverageSleepFrameTime\x12<\n" +
 	"\x1bserver_max_sleep_frame_time\x18\x1b \x01(\x02R\x17serverMaxSleepFrameTime\x120\n" +
-	"\x14num_multitick_frames\x18\x1c \x01(\rR\x12numMultitickFrames\"`\n" +
+	"\x14num_multitick_frames\x18\x1c \x01(\rR\x12numMultitickFrames\x12?\n" +
+	"\x1caverage_missed_snapshot_rate\x18\x1d \x03(\x02R\x19averageMissedSnapshotRate\x127\n" +
+	"\x18max_missed_snapshot_rate\x18\x1e \x03(\x02R\x15maxMissedSnapshotRate\"`\n" +
 	"\x1bCMsgGameMatchSignOutBanData\x12\x1b\n" +
 	"\thero_bans\x18\x01 \x03(\x05R\bheroBans\x12$\n" +
-	"\x0ehero_ban_votes\x18\x02 \x03(\x05R\fheroBanVotes\"\xfb\r\n" +
+	"\x0ehero_ban_votes\x18\x02 \x03(\x05R\fheroBanVotes\"\xa0\x0e\n" +
 	"\x1cCMsgDOTALiveScoreboardUpdate\x12#\n" +
 	"\rtournament_id\x18\x01 \x01(\rR\ftournamentId\x12,\n" +
 	"\x12tournament_game_id\x18\x02 \x01(\rR\x10tournamentGameId\x12\x1a\n" +
@@ -15110,7 +15136,7 @@ const file_dota_gcmessages_server_proto_rawDesc = "" +
 	"\bteam_bad\x18\x06 \x01(\v2'.dota.CMsgDOTALiveScoreboardUpdate.TeamR\ateamBad\x120\n" +
 	"\x14roshan_respawn_timer\x18\a \x01(\rR\x12roshanRespawnTimer\x12\x1b\n" +
 	"\tleague_id\x18\b \x01(\rR\bleagueId\x12\x19\n" +
-	"\bmatch_id\x18\t \x01(\x04R\amatchId\x1a\xd8\n" +
+	"\bmatch_id\x18\t \x01(\x04R\amatchId\x1a\xfd\n" +
 	"\n" +
 	"\x04Team\x12H\n" +
 	"\aplayers\x18\x01 \x03(\v2..dota.CMsgDOTALiveScoreboardUpdate.Team.PlayerR\aplayers\x12\x14\n" +
@@ -15120,7 +15146,7 @@ const file_dota_gcmessages_server_proto_rawDesc = "" +
 	"\x0ebarracks_state\x18\x04 \x01(\rR\rbarracksState\x12\x1d\n" +
 	"\n" +
 	"hero_picks\x18\x05 \x03(\x05R\theroPicks\x12\x1b\n" +
-	"\thero_bans\x18\x06 \x03(\x05R\bheroBans\x1a\xeb\b\n" +
+	"\thero_bans\x18\x06 \x03(\x05R\bheroBans\x1a\x90\t\n" +
 	"\x06Player\x12\x1f\n" +
 	"\vplayer_slot\x18\x01 \x01(\rR\n" +
 	"playerSlot\x12\x1f\n" +
@@ -15156,11 +15182,12 @@ const file_dota_gcmessages_server_proto_rawDesc = "" +
 	"\n" +
 	"position_y\x18\x19 \x01(\x02R\tpositionY\x12\x1b\n" +
 	"\tnet_worth\x18\x1a \x01(\rR\bnetWorth\x12X\n" +
-	"\tabilities\x18\x1b \x03(\v2:.dota.CMsgDOTALiveScoreboardUpdate.Team.Player.HeroAbilityR\tabilities\x1aQ\n" +
+	"\tabilities\x18\x1b \x03(\v2:.dota.CMsgDOTALiveScoreboardUpdate.Team.Player.HeroAbilityR\tabilities\x1av\n" +
 	"\vHeroAbility\x12\x1d\n" +
 	"\n" +
 	"ability_id\x18\x01 \x01(\x05R\tabilityId\x12#\n" +
-	"\rability_level\x18\x02 \x01(\rR\fabilityLevel\"\x9b\x01\n" +
+	"\rability_level\x18\x02 \x01(\rR\fabilityLevel\x12#\n" +
+	"\rtome_upgraded\x18\x03 \x01(\bR\ftomeUpgraded\"\x9b\x01\n" +
 	"\x11DOTAUltimateState\x12\"\n" +
 	"\x1ek_EDOTAUltimateStateNotLearned\x10\x00\x12 \n" +
 	"\x1ck_EDOTAUltimateStateCooldown\x10\x01\x12!\n" +
@@ -15294,8 +15321,8 @@ const file_dota_gcmessages_server_proto_rawDesc = "" +
 	"\astrings\x18\x01 \x03(\v20.dota.CSerializedCombatLog.Dictionary.DictStringR\astrings\x1a2\n" +
 	"\n" +
 	"DictString\x12\x0e\n" +
-	"\x02id\x18\x01 \x02(\rR\x02id\x12\x14\n" +
-	"\x05value\x18\x02 \x02(\tR\x05value\"\xd8\x02\n" +
+	"\x02id\x18\x01 \x01(\rR\x02id\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value\"\xd8\x02\n" +
 	" CMsgServerToGCVictoryPredictions\x12G\n" +
 	"\arecords\x18\x01 \x03(\v2-.dota.CMsgServerToGCVictoryPredictions.RecordR\arecords\x1aD\n" +
 	"\x0ePredictionItem\x12\x17\n" +
@@ -15658,8 +15685,8 @@ const file_dota_gcmessages_server_proto_rawDesc = "" +
 	"\x12highest_killstreak\x18# \x01(\rR\x11highestKillstreak\x1aG\n" +
 	"\x0eKillEaterEvent\x12\x1d\n" +
 	"\n" +
-	"event_type\x18\x01 \x02(\rR\teventType\x12\x16\n" +
-	"\x06amount\x18\x02 \x02(\rR\x06amount\"B\n" +
+	"event_type\x18\x01 \x01(\rR\teventType\x12\x16\n" +
+	"\x06amount\x18\x02 \x01(\rR\x06amount\"B\n" +
 	"\x1fCMsgServerToGCGetGuildContracts\x12\x1f\n" +
 	"\vaccount_ids\x18\x01 \x03(\rR\n" +
 	"accountIds\"\xbb\x04\n" +

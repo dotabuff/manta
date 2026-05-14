@@ -203,8 +203,8 @@ message CMsgBattleReport {
 	}
 
 	message Highlight {
-		required uint32 highlight_id = 1;
-		required CMsgBattleReport_HighlightCategory category = 2;
+		optional uint32 highlight_id = 1;
+		optional CMsgBattleReport_HighlightCategory category = 2;
 		optional CMsgBattleReport_HighlightTier tier = 3;
 		optional CMsgBattleReport_HighlightRarity rarity = 4;
 		optional float score = 5;

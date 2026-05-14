@@ -3999,6 +3999,102 @@ func (x *CWorkshop_GetSpecialPayments_Response) GetSpecialPayments() []*CWorksho
 	return nil
 }
 
+type CMsgGCReportMetrics struct {
+	state         protoimpl.MessageState             `protogen:"open.v1"`
+	MetricData    []*CMsgGCReportMetrics_MetricEntry `protobuf:"bytes,1,rep,name=metric_data,json=metricData" json:"metric_data,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CMsgGCReportMetrics) Reset() {
+	*x = CMsgGCReportMetrics{}
+	mi := &file_steammessages_int_proto_msgTypes[64]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CMsgGCReportMetrics) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CMsgGCReportMetrics) ProtoMessage() {}
+
+func (x *CMsgGCReportMetrics) ProtoReflect() protoreflect.Message {
+	mi := &file_steammessages_int_proto_msgTypes[64]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CMsgGCReportMetrics.ProtoReflect.Descriptor instead.
+func (*CMsgGCReportMetrics) Descriptor() ([]byte, []int) {
+	return file_steammessages_int_proto_rawDescGZIP(), []int{64}
+}
+
+func (x *CMsgGCReportMetrics) GetMetricData() []*CMsgGCReportMetrics_MetricEntry {
+	if x != nil {
+		return x.MetricData
+	}
+	return nil
+}
+
+type CMsgGCReportMetrics_Response struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	Eresult          *int32                 `protobuf:"varint,1,opt,name=eresult" json:"eresult,omitempty"`
+	FailedEntryCount *uint32                `protobuf:"varint,2,opt,name=failed_entry_count,json=failedEntryCount" json:"failed_entry_count,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *CMsgGCReportMetrics_Response) Reset() {
+	*x = CMsgGCReportMetrics_Response{}
+	mi := &file_steammessages_int_proto_msgTypes[65]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CMsgGCReportMetrics_Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CMsgGCReportMetrics_Response) ProtoMessage() {}
+
+func (x *CMsgGCReportMetrics_Response) ProtoReflect() protoreflect.Message {
+	mi := &file_steammessages_int_proto_msgTypes[65]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CMsgGCReportMetrics_Response.ProtoReflect.Descriptor instead.
+func (*CMsgGCReportMetrics_Response) Descriptor() ([]byte, []int) {
+	return file_steammessages_int_proto_rawDescGZIP(), []int{65}
+}
+
+func (x *CMsgGCReportMetrics_Response) GetEresult() int32 {
+	if x != nil && x.Eresult != nil {
+		return *x.Eresult
+	}
+	return 0
+}
+
+func (x *CMsgGCReportMetrics_Response) GetFailedEntryCount() uint32 {
+	if x != nil && x.FailedEntryCount != nil {
+		return *x.FailedEntryCount
+	}
+	return 0
+}
+
 type CMsgHttpRequest_RequestHeader struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          *string                `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
@@ -4009,7 +4105,7 @@ type CMsgHttpRequest_RequestHeader struct {
 
 func (x *CMsgHttpRequest_RequestHeader) Reset() {
 	*x = CMsgHttpRequest_RequestHeader{}
-	mi := &file_steammessages_int_proto_msgTypes[64]
+	mi := &file_steammessages_int_proto_msgTypes[66]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4021,7 +4117,7 @@ func (x *CMsgHttpRequest_RequestHeader) String() string {
 func (*CMsgHttpRequest_RequestHeader) ProtoMessage() {}
 
 func (x *CMsgHttpRequest_RequestHeader) ProtoReflect() protoreflect.Message {
-	mi := &file_steammessages_int_proto_msgTypes[64]
+	mi := &file_steammessages_int_proto_msgTypes[66]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4061,7 +4157,7 @@ type CMsgHttpRequest_QueryParam struct {
 
 func (x *CMsgHttpRequest_QueryParam) Reset() {
 	*x = CMsgHttpRequest_QueryParam{}
-	mi := &file_steammessages_int_proto_msgTypes[65]
+	mi := &file_steammessages_int_proto_msgTypes[67]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4073,7 +4169,7 @@ func (x *CMsgHttpRequest_QueryParam) String() string {
 func (*CMsgHttpRequest_QueryParam) ProtoMessage() {}
 
 func (x *CMsgHttpRequest_QueryParam) ProtoReflect() protoreflect.Message {
-	mi := &file_steammessages_int_proto_msgTypes[65]
+	mi := &file_steammessages_int_proto_msgTypes[67]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4113,7 +4209,7 @@ type CMsgHttpResponse_ResponseHeader struct {
 
 func (x *CMsgHttpResponse_ResponseHeader) Reset() {
 	*x = CMsgHttpResponse_ResponseHeader{}
-	mi := &file_steammessages_int_proto_msgTypes[66]
+	mi := &file_steammessages_int_proto_msgTypes[68]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4125,7 +4221,7 @@ func (x *CMsgHttpResponse_ResponseHeader) String() string {
 func (*CMsgHttpResponse_ResponseHeader) ProtoMessage() {}
 
 func (x *CMsgHttpResponse_ResponseHeader) ProtoReflect() protoreflect.Message {
-	mi := &file_steammessages_int_proto_msgTypes[66]
+	mi := &file_steammessages_int_proto_msgTypes[68]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4165,7 +4261,7 @@ type CGCMsgMemCachedGetResponse_ValueTag struct {
 
 func (x *CGCMsgMemCachedGetResponse_ValueTag) Reset() {
 	*x = CGCMsgMemCachedGetResponse_ValueTag{}
-	mi := &file_steammessages_int_proto_msgTypes[67]
+	mi := &file_steammessages_int_proto_msgTypes[69]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4177,7 +4273,7 @@ func (x *CGCMsgMemCachedGetResponse_ValueTag) String() string {
 func (*CGCMsgMemCachedGetResponse_ValueTag) ProtoMessage() {}
 
 func (x *CGCMsgMemCachedGetResponse_ValueTag) ProtoReflect() protoreflect.Message {
-	mi := &file_steammessages_int_proto_msgTypes[67]
+	mi := &file_steammessages_int_proto_msgTypes[69]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4217,7 +4313,7 @@ type CGCMsgMemCachedSet_KeyPair struct {
 
 func (x *CGCMsgMemCachedSet_KeyPair) Reset() {
 	*x = CGCMsgMemCachedSet_KeyPair{}
-	mi := &file_steammessages_int_proto_msgTypes[68]
+	mi := &file_steammessages_int_proto_msgTypes[70]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4229,7 +4325,7 @@ func (x *CGCMsgMemCachedSet_KeyPair) String() string {
 func (*CGCMsgMemCachedSet_KeyPair) ProtoMessage() {}
 
 func (x *CGCMsgMemCachedSet_KeyPair) ProtoReflect() protoreflect.Message {
-	mi := &file_steammessages_int_proto_msgTypes[68]
+	mi := &file_steammessages_int_proto_msgTypes[70]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4269,7 +4365,7 @@ type CMsgAMSendEmail_ReplacementToken struct {
 
 func (x *CMsgAMSendEmail_ReplacementToken) Reset() {
 	*x = CMsgAMSendEmail_ReplacementToken{}
-	mi := &file_steammessages_int_proto_msgTypes[69]
+	mi := &file_steammessages_int_proto_msgTypes[71]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4281,7 +4377,7 @@ func (x *CMsgAMSendEmail_ReplacementToken) String() string {
 func (*CMsgAMSendEmail_ReplacementToken) ProtoMessage() {}
 
 func (x *CMsgAMSendEmail_ReplacementToken) ProtoReflect() protoreflect.Message {
-	mi := &file_steammessages_int_proto_msgTypes[69]
+	mi := &file_steammessages_int_proto_msgTypes[71]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4321,7 +4417,7 @@ type CMsgAMSendEmail_PersonaNameReplacementToken struct {
 
 func (x *CMsgAMSendEmail_PersonaNameReplacementToken) Reset() {
 	*x = CMsgAMSendEmail_PersonaNameReplacementToken{}
-	mi := &file_steammessages_int_proto_msgTypes[70]
+	mi := &file_steammessages_int_proto_msgTypes[72]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4333,7 +4429,7 @@ func (x *CMsgAMSendEmail_PersonaNameReplacementToken) String() string {
 func (*CMsgAMSendEmail_PersonaNameReplacementToken) ProtoMessage() {}
 
 func (x *CMsgAMSendEmail_PersonaNameReplacementToken) ProtoReflect() protoreflect.Message {
-	mi := &file_steammessages_int_proto_msgTypes[70]
+	mi := &file_steammessages_int_proto_msgTypes[72]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4373,7 +4469,7 @@ type CMsgGCGetPersonaNames_Response_PersonaName struct {
 
 func (x *CMsgGCGetPersonaNames_Response_PersonaName) Reset() {
 	*x = CMsgGCGetPersonaNames_Response_PersonaName{}
-	mi := &file_steammessages_int_proto_msgTypes[71]
+	mi := &file_steammessages_int_proto_msgTypes[73]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4385,7 +4481,7 @@ func (x *CMsgGCGetPersonaNames_Response_PersonaName) String() string {
 func (*CMsgGCGetPersonaNames_Response_PersonaName) ProtoMessage() {}
 
 func (x *CMsgGCGetPersonaNames_Response_PersonaName) ProtoReflect() protoreflect.Message {
-	mi := &file_steammessages_int_proto_msgTypes[71]
+	mi := &file_steammessages_int_proto_msgTypes[73]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4428,7 +4524,7 @@ type CMsgGCMsgMasterSetDirectory_SubGC struct {
 
 func (x *CMsgGCMsgMasterSetDirectory_SubGC) Reset() {
 	*x = CMsgGCMsgMasterSetDirectory_SubGC{}
-	mi := &file_steammessages_int_proto_msgTypes[72]
+	mi := &file_steammessages_int_proto_msgTypes[74]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4440,7 +4536,7 @@ func (x *CMsgGCMsgMasterSetDirectory_SubGC) String() string {
 func (*CMsgGCMsgMasterSetDirectory_SubGC) ProtoMessage() {}
 
 func (x *CMsgGCMsgMasterSetDirectory_SubGC) ProtoReflect() protoreflect.Message {
-	mi := &file_steammessages_int_proto_msgTypes[72]
+	mi := &file_steammessages_int_proto_msgTypes[74]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4502,7 +4598,7 @@ type CMsgGCMsgMasterSetWebAPIRouting_Entry struct {
 
 func (x *CMsgGCMsgMasterSetWebAPIRouting_Entry) Reset() {
 	*x = CMsgGCMsgMasterSetWebAPIRouting_Entry{}
-	mi := &file_steammessages_int_proto_msgTypes[73]
+	mi := &file_steammessages_int_proto_msgTypes[75]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4514,7 +4610,7 @@ func (x *CMsgGCMsgMasterSetWebAPIRouting_Entry) String() string {
 func (*CMsgGCMsgMasterSetWebAPIRouting_Entry) ProtoMessage() {}
 
 func (x *CMsgGCMsgMasterSetWebAPIRouting_Entry) ProtoReflect() protoreflect.Message {
-	mi := &file_steammessages_int_proto_msgTypes[73]
+	mi := &file_steammessages_int_proto_msgTypes[75]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4561,7 +4657,7 @@ type CMsgGCMsgMasterSetClientMsgRouting_Entry struct {
 
 func (x *CMsgGCMsgMasterSetClientMsgRouting_Entry) Reset() {
 	*x = CMsgGCMsgMasterSetClientMsgRouting_Entry{}
-	mi := &file_steammessages_int_proto_msgTypes[74]
+	mi := &file_steammessages_int_proto_msgTypes[76]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4573,7 +4669,7 @@ func (x *CMsgGCMsgMasterSetClientMsgRouting_Entry) String() string {
 func (*CMsgGCMsgMasterSetClientMsgRouting_Entry) ProtoMessage() {}
 
 func (x *CMsgGCMsgMasterSetClientMsgRouting_Entry) ProtoReflect() protoreflect.Message {
-	mi := &file_steammessages_int_proto_msgTypes[74]
+	mi := &file_steammessages_int_proto_msgTypes[76]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4613,7 +4709,7 @@ type CMsgGCMsgSetOptions_MessageRange struct {
 
 func (x *CMsgGCMsgSetOptions_MessageRange) Reset() {
 	*x = CMsgGCMsgSetOptions_MessageRange{}
-	mi := &file_steammessages_int_proto_msgTypes[75]
+	mi := &file_steammessages_int_proto_msgTypes[77]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4625,7 +4721,7 @@ func (x *CMsgGCMsgSetOptions_MessageRange) String() string {
 func (*CMsgGCMsgSetOptions_MessageRange) ProtoMessage() {}
 
 func (x *CMsgGCMsgSetOptions_MessageRange) ProtoReflect() protoreflect.Message {
-	mi := &file_steammessages_int_proto_msgTypes[75]
+	mi := &file_steammessages_int_proto_msgTypes[77]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4665,7 +4761,7 @@ type CMsgGCHUpdateSession_ExtraField struct {
 
 func (x *CMsgGCHUpdateSession_ExtraField) Reset() {
 	*x = CMsgGCHUpdateSession_ExtraField{}
-	mi := &file_steammessages_int_proto_msgTypes[76]
+	mi := &file_steammessages_int_proto_msgTypes[78]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4677,7 +4773,7 @@ func (x *CMsgGCHUpdateSession_ExtraField) String() string {
 func (*CMsgGCHUpdateSession_ExtraField) ProtoMessage() {}
 
 func (x *CMsgGCHUpdateSession_ExtraField) ProtoReflect() protoreflect.Message {
-	mi := &file_steammessages_int_proto_msgTypes[76]
+	mi := &file_steammessages_int_proto_msgTypes[78]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4717,7 +4813,7 @@ type CMsgNotificationOfSuspiciousActivity_MultipleGameInstances struct {
 
 func (x *CMsgNotificationOfSuspiciousActivity_MultipleGameInstances) Reset() {
 	*x = CMsgNotificationOfSuspiciousActivity_MultipleGameInstances{}
-	mi := &file_steammessages_int_proto_msgTypes[77]
+	mi := &file_steammessages_int_proto_msgTypes[79]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4729,7 +4825,7 @@ func (x *CMsgNotificationOfSuspiciousActivity_MultipleGameInstances) String() st
 func (*CMsgNotificationOfSuspiciousActivity_MultipleGameInstances) ProtoMessage() {}
 
 func (x *CMsgNotificationOfSuspiciousActivity_MultipleGameInstances) ProtoReflect() protoreflect.Message {
-	mi := &file_steammessages_int_proto_msgTypes[77]
+	mi := &file_steammessages_int_proto_msgTypes[79]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4769,7 +4865,7 @@ type CMsgGCHAppCheersReceived_CheerTypeAmount struct {
 
 func (x *CMsgGCHAppCheersReceived_CheerTypeAmount) Reset() {
 	*x = CMsgGCHAppCheersReceived_CheerTypeAmount{}
-	mi := &file_steammessages_int_proto_msgTypes[78]
+	mi := &file_steammessages_int_proto_msgTypes[80]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4781,7 +4877,7 @@ func (x *CMsgGCHAppCheersReceived_CheerTypeAmount) String() string {
 func (*CMsgGCHAppCheersReceived_CheerTypeAmount) ProtoMessage() {}
 
 func (x *CMsgGCHAppCheersReceived_CheerTypeAmount) ProtoReflect() protoreflect.Message {
-	mi := &file_steammessages_int_proto_msgTypes[78]
+	mi := &file_steammessages_int_proto_msgTypes[80]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4821,7 +4917,7 @@ type CMsgGCHAppCheersReceived_CheerTarget struct {
 
 func (x *CMsgGCHAppCheersReceived_CheerTarget) Reset() {
 	*x = CMsgGCHAppCheersReceived_CheerTarget{}
-	mi := &file_steammessages_int_proto_msgTypes[79]
+	mi := &file_steammessages_int_proto_msgTypes[81]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4833,7 +4929,7 @@ func (x *CMsgGCHAppCheersReceived_CheerTarget) String() string {
 func (*CMsgGCHAppCheersReceived_CheerTarget) ProtoMessage() {}
 
 func (x *CMsgGCHAppCheersReceived_CheerTarget) ProtoReflect() protoreflect.Message {
-	mi := &file_steammessages_int_proto_msgTypes[79]
+	mi := &file_steammessages_int_proto_msgTypes[81]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4874,7 +4970,7 @@ type CMsgGCHAppCheersGetAllowedTypesResponse_CheerRemaps struct {
 
 func (x *CMsgGCHAppCheersGetAllowedTypesResponse_CheerRemaps) Reset() {
 	*x = CMsgGCHAppCheersGetAllowedTypesResponse_CheerRemaps{}
-	mi := &file_steammessages_int_proto_msgTypes[80]
+	mi := &file_steammessages_int_proto_msgTypes[82]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4886,7 +4982,7 @@ func (x *CMsgGCHAppCheersGetAllowedTypesResponse_CheerRemaps) String() string {
 func (*CMsgGCHAppCheersGetAllowedTypesResponse_CheerRemaps) ProtoMessage() {}
 
 func (x *CMsgGCHAppCheersGetAllowedTypesResponse_CheerRemaps) ProtoReflect() protoreflect.Message {
-	mi := &file_steammessages_int_proto_msgTypes[80]
+	mi := &file_steammessages_int_proto_msgTypes[82]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4936,7 +5032,7 @@ type CWorkshop_GetSpecialPayments_Response_SpecialPayment struct {
 
 func (x *CWorkshop_GetSpecialPayments_Response_SpecialPayment) Reset() {
 	*x = CWorkshop_GetSpecialPayments_Response_SpecialPayment{}
-	mi := &file_steammessages_int_proto_msgTypes[81]
+	mi := &file_steammessages_int_proto_msgTypes[83]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4948,7 +5044,7 @@ func (x *CWorkshop_GetSpecialPayments_Response_SpecialPayment) String() string {
 func (*CWorkshop_GetSpecialPayments_Response_SpecialPayment) ProtoMessage() {}
 
 func (x *CWorkshop_GetSpecialPayments_Response_SpecialPayment) ProtoReflect() protoreflect.Message {
-	mi := &file_steammessages_int_proto_msgTypes[81]
+	mi := &file_steammessages_int_proto_msgTypes[83]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4997,6 +5093,283 @@ func (x *CWorkshop_GetSpecialPayments_Response_SpecialPayment) GetNetPaymentRowU
 		return *x.NetPaymentRowUsd
 	}
 	return 0
+}
+
+type CMsgGCReportMetrics_MetricEntry struct {
+	state         protoimpl.MessageState                         `protogen:"open.v1"`
+	Catalog       *string                                        `protobuf:"bytes,1,opt,name=catalog" json:"catalog,omitempty"`
+	Operation     *string                                        `protobuf:"bytes,2,opt,name=operation" json:"operation,omitempty"`
+	Timestamp     *float64                                       `protobuf:"fixed64,3,opt,name=timestamp" json:"timestamp,omitempty"`
+	Dimensions    []*CMsgGCReportMetrics_MetricEntry_Dimension   `protobuf:"bytes,10,rep,name=dimensions" json:"dimensions,omitempty"`
+	Measurements  []*CMsgGCReportMetrics_MetricEntry_Measurement `protobuf:"bytes,11,rep,name=measurements" json:"measurements,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CMsgGCReportMetrics_MetricEntry) Reset() {
+	*x = CMsgGCReportMetrics_MetricEntry{}
+	mi := &file_steammessages_int_proto_msgTypes[84]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CMsgGCReportMetrics_MetricEntry) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CMsgGCReportMetrics_MetricEntry) ProtoMessage() {}
+
+func (x *CMsgGCReportMetrics_MetricEntry) ProtoReflect() protoreflect.Message {
+	mi := &file_steammessages_int_proto_msgTypes[84]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CMsgGCReportMetrics_MetricEntry.ProtoReflect.Descriptor instead.
+func (*CMsgGCReportMetrics_MetricEntry) Descriptor() ([]byte, []int) {
+	return file_steammessages_int_proto_rawDescGZIP(), []int{64, 0}
+}
+
+func (x *CMsgGCReportMetrics_MetricEntry) GetCatalog() string {
+	if x != nil && x.Catalog != nil {
+		return *x.Catalog
+	}
+	return ""
+}
+
+func (x *CMsgGCReportMetrics_MetricEntry) GetOperation() string {
+	if x != nil && x.Operation != nil {
+		return *x.Operation
+	}
+	return ""
+}
+
+func (x *CMsgGCReportMetrics_MetricEntry) GetTimestamp() float64 {
+	if x != nil && x.Timestamp != nil {
+		return *x.Timestamp
+	}
+	return 0
+}
+
+func (x *CMsgGCReportMetrics_MetricEntry) GetDimensions() []*CMsgGCReportMetrics_MetricEntry_Dimension {
+	if x != nil {
+		return x.Dimensions
+	}
+	return nil
+}
+
+func (x *CMsgGCReportMetrics_MetricEntry) GetMeasurements() []*CMsgGCReportMetrics_MetricEntry_Measurement {
+	if x != nil {
+		return x.Measurements
+	}
+	return nil
+}
+
+type CMsgGCReportMetrics_MetricEntry_Dimension struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	Name  *string                `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
+	// Types that are valid to be assigned to Value:
+	//
+	//	*CMsgGCReportMetrics_MetricEntry_Dimension_ValueString
+	//	*CMsgGCReportMetrics_MetricEntry_Dimension_ValueInteger
+	//	*CMsgGCReportMetrics_MetricEntry_Dimension_ValueBoolean
+	Value         isCMsgGCReportMetrics_MetricEntry_Dimension_Value `protobuf_oneof:"value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CMsgGCReportMetrics_MetricEntry_Dimension) Reset() {
+	*x = CMsgGCReportMetrics_MetricEntry_Dimension{}
+	mi := &file_steammessages_int_proto_msgTypes[85]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CMsgGCReportMetrics_MetricEntry_Dimension) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CMsgGCReportMetrics_MetricEntry_Dimension) ProtoMessage() {}
+
+func (x *CMsgGCReportMetrics_MetricEntry_Dimension) ProtoReflect() protoreflect.Message {
+	mi := &file_steammessages_int_proto_msgTypes[85]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CMsgGCReportMetrics_MetricEntry_Dimension.ProtoReflect.Descriptor instead.
+func (*CMsgGCReportMetrics_MetricEntry_Dimension) Descriptor() ([]byte, []int) {
+	return file_steammessages_int_proto_rawDescGZIP(), []int{64, 0, 0}
+}
+
+func (x *CMsgGCReportMetrics_MetricEntry_Dimension) GetName() string {
+	if x != nil && x.Name != nil {
+		return *x.Name
+	}
+	return ""
+}
+
+func (x *CMsgGCReportMetrics_MetricEntry_Dimension) GetValue() isCMsgGCReportMetrics_MetricEntry_Dimension_Value {
+	if x != nil {
+		return x.Value
+	}
+	return nil
+}
+
+func (x *CMsgGCReportMetrics_MetricEntry_Dimension) GetValueString() string {
+	if x != nil {
+		if x, ok := x.Value.(*CMsgGCReportMetrics_MetricEntry_Dimension_ValueString); ok {
+			return x.ValueString
+		}
+	}
+	return ""
+}
+
+func (x *CMsgGCReportMetrics_MetricEntry_Dimension) GetValueInteger() int64 {
+	if x != nil {
+		if x, ok := x.Value.(*CMsgGCReportMetrics_MetricEntry_Dimension_ValueInteger); ok {
+			return x.ValueInteger
+		}
+	}
+	return 0
+}
+
+func (x *CMsgGCReportMetrics_MetricEntry_Dimension) GetValueBoolean() bool {
+	if x != nil {
+		if x, ok := x.Value.(*CMsgGCReportMetrics_MetricEntry_Dimension_ValueBoolean); ok {
+			return x.ValueBoolean
+		}
+	}
+	return false
+}
+
+type isCMsgGCReportMetrics_MetricEntry_Dimension_Value interface {
+	isCMsgGCReportMetrics_MetricEntry_Dimension_Value()
+}
+
+type CMsgGCReportMetrics_MetricEntry_Dimension_ValueString struct {
+	ValueString string `protobuf:"bytes,2,opt,name=value_string,json=valueString,oneof"`
+}
+
+type CMsgGCReportMetrics_MetricEntry_Dimension_ValueInteger struct {
+	ValueInteger int64 `protobuf:"varint,3,opt,name=value_integer,json=valueInteger,oneof"`
+}
+
+type CMsgGCReportMetrics_MetricEntry_Dimension_ValueBoolean struct {
+	ValueBoolean bool `protobuf:"varint,4,opt,name=value_boolean,json=valueBoolean,oneof"`
+}
+
+func (*CMsgGCReportMetrics_MetricEntry_Dimension_ValueString) isCMsgGCReportMetrics_MetricEntry_Dimension_Value() {
+}
+
+func (*CMsgGCReportMetrics_MetricEntry_Dimension_ValueInteger) isCMsgGCReportMetrics_MetricEntry_Dimension_Value() {
+}
+
+func (*CMsgGCReportMetrics_MetricEntry_Dimension_ValueBoolean) isCMsgGCReportMetrics_MetricEntry_Dimension_Value() {
+}
+
+type CMsgGCReportMetrics_MetricEntry_Measurement struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	Name  *string                `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
+	// Types that are valid to be assigned to Value:
+	//
+	//	*CMsgGCReportMetrics_MetricEntry_Measurement_ValueInteger
+	//	*CMsgGCReportMetrics_MetricEntry_Measurement_ValueFloat
+	Value         isCMsgGCReportMetrics_MetricEntry_Measurement_Value `protobuf_oneof:"value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CMsgGCReportMetrics_MetricEntry_Measurement) Reset() {
+	*x = CMsgGCReportMetrics_MetricEntry_Measurement{}
+	mi := &file_steammessages_int_proto_msgTypes[86]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CMsgGCReportMetrics_MetricEntry_Measurement) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CMsgGCReportMetrics_MetricEntry_Measurement) ProtoMessage() {}
+
+func (x *CMsgGCReportMetrics_MetricEntry_Measurement) ProtoReflect() protoreflect.Message {
+	mi := &file_steammessages_int_proto_msgTypes[86]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CMsgGCReportMetrics_MetricEntry_Measurement.ProtoReflect.Descriptor instead.
+func (*CMsgGCReportMetrics_MetricEntry_Measurement) Descriptor() ([]byte, []int) {
+	return file_steammessages_int_proto_rawDescGZIP(), []int{64, 0, 1}
+}
+
+func (x *CMsgGCReportMetrics_MetricEntry_Measurement) GetName() string {
+	if x != nil && x.Name != nil {
+		return *x.Name
+	}
+	return ""
+}
+
+func (x *CMsgGCReportMetrics_MetricEntry_Measurement) GetValue() isCMsgGCReportMetrics_MetricEntry_Measurement_Value {
+	if x != nil {
+		return x.Value
+	}
+	return nil
+}
+
+func (x *CMsgGCReportMetrics_MetricEntry_Measurement) GetValueInteger() int64 {
+	if x != nil {
+		if x, ok := x.Value.(*CMsgGCReportMetrics_MetricEntry_Measurement_ValueInteger); ok {
+			return x.ValueInteger
+		}
+	}
+	return 0
+}
+
+func (x *CMsgGCReportMetrics_MetricEntry_Measurement) GetValueFloat() float64 {
+	if x != nil {
+		if x, ok := x.Value.(*CMsgGCReportMetrics_MetricEntry_Measurement_ValueFloat); ok {
+			return x.ValueFloat
+		}
+	}
+	return 0
+}
+
+type isCMsgGCReportMetrics_MetricEntry_Measurement_Value interface {
+	isCMsgGCReportMetrics_MetricEntry_Measurement_Value()
+}
+
+type CMsgGCReportMetrics_MetricEntry_Measurement_ValueInteger struct {
+	ValueInteger int64 `protobuf:"varint,2,opt,name=value_integer,json=valueInteger,oneof"`
+}
+
+type CMsgGCReportMetrics_MetricEntry_Measurement_ValueFloat struct {
+	ValueFloat float64 `protobuf:"fixed64,3,opt,name=value_float,json=valueFloat,oneof"`
+}
+
+func (*CMsgGCReportMetrics_MetricEntry_Measurement_ValueInteger) isCMsgGCReportMetrics_MetricEntry_Measurement_Value() {
+}
+
+func (*CMsgGCReportMetrics_MetricEntry_Measurement_ValueFloat) isCMsgGCReportMetrics_MetricEntry_Measurement_Value() {
 }
 
 var File_steammessages_int_proto protoreflect.FileDescriptor
@@ -5367,7 +5740,34 @@ const file_steammessages_int_proto_rawDesc = "" +
 	"gameitemid\x12\x12\n" +
 	"\x04date\x18\x03 \x01(\tR\x04date\x12+\n" +
 	"\x12net_payment_us_usd\x18\x04 \x01(\x04R\x0fnetPaymentUsUsd\x12-\n" +
-	"\x13net_payment_row_usd\x18\x05 \x01(\x04R\x10netPaymentRowUsdB%Z#github.com/dotabuff/manta/dota;dota"
+	"\x13net_payment_row_usd\x18\x05 \x01(\x04R\x10netPaymentRowUsd\"\xff\x04\n" +
+	"\x13CMsgGCReportMetrics\x12F\n" +
+	"\vmetric_data\x18\x01 \x03(\v2%.dota.CMsgGCReportMetrics.MetricEntryR\n" +
+	"metricData\x1a\x9f\x04\n" +
+	"\vMetricEntry\x12\x18\n" +
+	"\acatalog\x18\x01 \x01(\tR\acatalog\x12\x1c\n" +
+	"\toperation\x18\x02 \x01(\tR\toperation\x12\x1c\n" +
+	"\ttimestamp\x18\x03 \x01(\x01R\ttimestamp\x12O\n" +
+	"\n" +
+	"dimensions\x18\n" +
+	" \x03(\v2/.dota.CMsgGCReportMetrics.MetricEntry.DimensionR\n" +
+	"dimensions\x12U\n" +
+	"\fmeasurements\x18\v \x03(\v21.dota.CMsgGCReportMetrics.MetricEntry.MeasurementR\fmeasurements\x1a\x9b\x01\n" +
+	"\tDimension\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12#\n" +
+	"\fvalue_string\x18\x02 \x01(\tH\x00R\vvalueString\x12%\n" +
+	"\rvalue_integer\x18\x03 \x01(\x03H\x00R\fvalueInteger\x12%\n" +
+	"\rvalue_boolean\x18\x04 \x01(\bH\x00R\fvalueBooleanB\a\n" +
+	"\x05value\x1at\n" +
+	"\vMeasurement\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12%\n" +
+	"\rvalue_integer\x18\x02 \x01(\x03H\x00R\fvalueInteger\x12!\n" +
+	"\vvalue_float\x18\x03 \x01(\x01H\x00R\n" +
+	"valueFloatB\a\n" +
+	"\x05value\"f\n" +
+	"\x1cCMsgGCReportMetrics_Response\x12\x18\n" +
+	"\aeresult\x18\x01 \x01(\x05R\aeresult\x12,\n" +
+	"\x12failed_entry_count\x18\x02 \x01(\rR\x10failedEntryCountB%Z#github.com/dotabuff/manta/dota;dota"
 
 var (
 	file_steammessages_int_proto_rawDescOnce sync.Once
@@ -5382,7 +5782,7 @@ func file_steammessages_int_proto_rawDescGZIP() []byte {
 }
 
 var file_steammessages_int_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_steammessages_int_proto_msgTypes = make([]protoimpl.MessageInfo, 82)
+var file_steammessages_int_proto_msgTypes = make([]protoimpl.MessageInfo, 87)
 var file_steammessages_int_proto_goTypes = []any{
 	(CMsgGCRoutingInfo_RoutingMethod)(0),                               // 0: dota.CMsgGCRoutingInfo.RoutingMethod
 	(CMsgGCMsgSetOptions_Option)(0),                                    // 1: dota.CMsgGCMsgSetOptions.Option
@@ -5451,60 +5851,68 @@ var file_steammessages_int_proto_goTypes = []any{
 	(*CWorkshop_AddSpecialPayment_Response)(nil),                       // 64: dota.CWorkshop_AddSpecialPayment_Response
 	(*CWorkshop_GetSpecialPayments_Request)(nil),                       // 65: dota.CWorkshop_GetSpecialPayments_Request
 	(*CWorkshop_GetSpecialPayments_Response)(nil),                      // 66: dota.CWorkshop_GetSpecialPayments_Response
-	(*CMsgHttpRequest_RequestHeader)(nil),                              // 67: dota.CMsgHttpRequest.RequestHeader
-	(*CMsgHttpRequest_QueryParam)(nil),                                 // 68: dota.CMsgHttpRequest.QueryParam
-	(*CMsgHttpResponse_ResponseHeader)(nil),                            // 69: dota.CMsgHttpResponse.ResponseHeader
-	(*CGCMsgMemCachedGetResponse_ValueTag)(nil),                        // 70: dota.CGCMsgMemCachedGetResponse.ValueTag
-	(*CGCMsgMemCachedSet_KeyPair)(nil),                                 // 71: dota.CGCMsgMemCachedSet.KeyPair
-	(*CMsgAMSendEmail_ReplacementToken)(nil),                           // 72: dota.CMsgAMSendEmail.ReplacementToken
-	(*CMsgAMSendEmail_PersonaNameReplacementToken)(nil),                // 73: dota.CMsgAMSendEmail.PersonaNameReplacementToken
-	(*CMsgGCGetPersonaNames_Response_PersonaName)(nil),                 // 74: dota.CMsgGCGetPersonaNames_Response.PersonaName
-	(*CMsgGCMsgMasterSetDirectory_SubGC)(nil),                          // 75: dota.CMsgGCMsgMasterSetDirectory.SubGC
-	(*CMsgGCMsgMasterSetWebAPIRouting_Entry)(nil),                      // 76: dota.CMsgGCMsgMasterSetWebAPIRouting.Entry
-	(*CMsgGCMsgMasterSetClientMsgRouting_Entry)(nil),                   // 77: dota.CMsgGCMsgMasterSetClientMsgRouting.Entry
-	(*CMsgGCMsgSetOptions_MessageRange)(nil),                           // 78: dota.CMsgGCMsgSetOptions.MessageRange
-	(*CMsgGCHUpdateSession_ExtraField)(nil),                            // 79: dota.CMsgGCHUpdateSession.ExtraField
-	(*CMsgNotificationOfSuspiciousActivity_MultipleGameInstances)(nil), // 80: dota.CMsgNotificationOfSuspiciousActivity.MultipleGameInstances
-	(*CMsgGCHAppCheersReceived_CheerTypeAmount)(nil),                   // 81: dota.CMsgGCHAppCheersReceived.CheerTypeAmount
-	(*CMsgGCHAppCheersReceived_CheerTarget)(nil),                       // 82: dota.CMsgGCHAppCheersReceived.CheerTarget
-	(*CMsgGCHAppCheersGetAllowedTypesResponse_CheerRemaps)(nil),        // 83: dota.CMsgGCHAppCheersGetAllowedTypesResponse.CheerRemaps
-	(*CWorkshop_GetSpecialPayments_Response_SpecialPayment)(nil),       // 84: dota.CWorkshop_GetSpecialPayments_Response.SpecialPayment
+	(*CMsgGCReportMetrics)(nil),                                        // 67: dota.CMsgGCReportMetrics
+	(*CMsgGCReportMetrics_Response)(nil),                               // 68: dota.CMsgGCReportMetrics_Response
+	(*CMsgHttpRequest_RequestHeader)(nil),                              // 69: dota.CMsgHttpRequest.RequestHeader
+	(*CMsgHttpRequest_QueryParam)(nil),                                 // 70: dota.CMsgHttpRequest.QueryParam
+	(*CMsgHttpResponse_ResponseHeader)(nil),                            // 71: dota.CMsgHttpResponse.ResponseHeader
+	(*CGCMsgMemCachedGetResponse_ValueTag)(nil),                        // 72: dota.CGCMsgMemCachedGetResponse.ValueTag
+	(*CGCMsgMemCachedSet_KeyPair)(nil),                                 // 73: dota.CGCMsgMemCachedSet.KeyPair
+	(*CMsgAMSendEmail_ReplacementToken)(nil),                           // 74: dota.CMsgAMSendEmail.ReplacementToken
+	(*CMsgAMSendEmail_PersonaNameReplacementToken)(nil),                // 75: dota.CMsgAMSendEmail.PersonaNameReplacementToken
+	(*CMsgGCGetPersonaNames_Response_PersonaName)(nil),                 // 76: dota.CMsgGCGetPersonaNames_Response.PersonaName
+	(*CMsgGCMsgMasterSetDirectory_SubGC)(nil),                          // 77: dota.CMsgGCMsgMasterSetDirectory.SubGC
+	(*CMsgGCMsgMasterSetWebAPIRouting_Entry)(nil),                      // 78: dota.CMsgGCMsgMasterSetWebAPIRouting.Entry
+	(*CMsgGCMsgMasterSetClientMsgRouting_Entry)(nil),                   // 79: dota.CMsgGCMsgMasterSetClientMsgRouting.Entry
+	(*CMsgGCMsgSetOptions_MessageRange)(nil),                           // 80: dota.CMsgGCMsgSetOptions.MessageRange
+	(*CMsgGCHUpdateSession_ExtraField)(nil),                            // 81: dota.CMsgGCHUpdateSession.ExtraField
+	(*CMsgNotificationOfSuspiciousActivity_MultipleGameInstances)(nil), // 82: dota.CMsgNotificationOfSuspiciousActivity.MultipleGameInstances
+	(*CMsgGCHAppCheersReceived_CheerTypeAmount)(nil),                   // 83: dota.CMsgGCHAppCheersReceived.CheerTypeAmount
+	(*CMsgGCHAppCheersReceived_CheerTarget)(nil),                       // 84: dota.CMsgGCHAppCheersReceived.CheerTarget
+	(*CMsgGCHAppCheersGetAllowedTypesResponse_CheerRemaps)(nil),        // 85: dota.CMsgGCHAppCheersGetAllowedTypesResponse.CheerRemaps
+	(*CWorkshop_GetSpecialPayments_Response_SpecialPayment)(nil),       // 86: dota.CWorkshop_GetSpecialPayments_Response.SpecialPayment
+	(*CMsgGCReportMetrics_MetricEntry)(nil),                            // 87: dota.CMsgGCReportMetrics.MetricEntry
+	(*CMsgGCReportMetrics_MetricEntry_Dimension)(nil),                  // 88: dota.CMsgGCReportMetrics.MetricEntry.Dimension
+	(*CMsgGCReportMetrics_MetricEntry_Measurement)(nil),                // 89: dota.CMsgGCReportMetrics.MetricEntry.Measurement
 }
 var file_steammessages_int_proto_depIdxs = []int32{
-	67, // 0: dota.CMsgHttpRequest.headers:type_name -> dota.CMsgHttpRequest.RequestHeader
-	68, // 1: dota.CMsgHttpRequest.get_params:type_name -> dota.CMsgHttpRequest.QueryParam
-	68, // 2: dota.CMsgHttpRequest.post_params:type_name -> dota.CMsgHttpRequest.QueryParam
+	69, // 0: dota.CMsgHttpRequest.headers:type_name -> dota.CMsgHttpRequest.RequestHeader
+	70, // 1: dota.CMsgHttpRequest.get_params:type_name -> dota.CMsgHttpRequest.QueryParam
+	70, // 2: dota.CMsgHttpRequest.post_params:type_name -> dota.CMsgHttpRequest.QueryParam
 	3,  // 3: dota.CMsgWebAPIRequest.api_key:type_name -> dota.CMsgWebAPIKey
 	4,  // 4: dota.CMsgWebAPIRequest.request:type_name -> dota.CMsgHttpRequest
-	69, // 5: dota.CMsgHttpResponse.headers:type_name -> dota.CMsgHttpResponse.ResponseHeader
+	71, // 5: dota.CMsgHttpResponse.headers:type_name -> dota.CMsgHttpResponse.ResponseHeader
 	11, // 6: dota.CMsgAMGetLicensesResponse.license:type_name -> dota.CMsgPackageLicense
-	70, // 7: dota.CGCMsgMemCachedGetResponse.values:type_name -> dota.CGCMsgMemCachedGetResponse.ValueTag
-	71, // 8: dota.CGCMsgMemCachedSet.keys:type_name -> dota.CGCMsgMemCachedSet.KeyPair
+	72, // 7: dota.CGCMsgMemCachedGetResponse.values:type_name -> dota.CGCMsgMemCachedGetResponse.ValueTag
+	73, // 8: dota.CGCMsgMemCachedSet.keys:type_name -> dota.CGCMsgMemCachedSet.KeyPair
 	27, // 9: dota.CGCMsgGetIPASNResponse.infos:type_name -> dota.CIPASNInfo
-	73, // 10: dota.CMsgAMSendEmail.persona_name_tokens:type_name -> dota.CMsgAMSendEmail.PersonaNameReplacementToken
-	72, // 11: dota.CMsgAMSendEmail.tokens:type_name -> dota.CMsgAMSendEmail.ReplacementToken
-	74, // 12: dota.CMsgGCGetPersonaNames_Response.succeeded_lookups:type_name -> dota.CMsgGCGetPersonaNames_Response.PersonaName
-	75, // 13: dota.CMsgGCMsgMasterSetDirectory.dir:type_name -> dota.CMsgGCMsgMasterSetDirectory.SubGC
+	75, // 10: dota.CMsgAMSendEmail.persona_name_tokens:type_name -> dota.CMsgAMSendEmail.PersonaNameReplacementToken
+	74, // 11: dota.CMsgAMSendEmail.tokens:type_name -> dota.CMsgAMSendEmail.ReplacementToken
+	76, // 12: dota.CMsgGCGetPersonaNames_Response.succeeded_lookups:type_name -> dota.CMsgGCGetPersonaNames_Response.PersonaName
+	77, // 13: dota.CMsgGCMsgMasterSetDirectory.dir:type_name -> dota.CMsgGCMsgMasterSetDirectory.SubGC
 	0,  // 14: dota.CMsgGCRoutingInfo.method:type_name -> dota.CMsgGCRoutingInfo.RoutingMethod
 	0,  // 15: dota.CMsgGCRoutingInfo.fallback:type_name -> dota.CMsgGCRoutingInfo.RoutingMethod
-	76, // 16: dota.CMsgGCMsgMasterSetWebAPIRouting.entries:type_name -> dota.CMsgGCMsgMasterSetWebAPIRouting.Entry
-	77, // 17: dota.CMsgGCMsgMasterSetClientMsgRouting.entries:type_name -> dota.CMsgGCMsgMasterSetClientMsgRouting.Entry
+	78, // 16: dota.CMsgGCMsgMasterSetWebAPIRouting.entries:type_name -> dota.CMsgGCMsgMasterSetWebAPIRouting.Entry
+	79, // 17: dota.CMsgGCMsgMasterSetClientMsgRouting.entries:type_name -> dota.CMsgGCMsgMasterSetClientMsgRouting.Entry
 	1,  // 18: dota.CMsgGCMsgSetOptions.options:type_name -> dota.CMsgGCMsgSetOptions.Option
-	78, // 19: dota.CMsgGCMsgSetOptions.client_msg_ranges:type_name -> dota.CMsgGCMsgSetOptions.MessageRange
+	80, // 19: dota.CMsgGCMsgSetOptions.client_msg_ranges:type_name -> dota.CMsgGCMsgSetOptions.MessageRange
 	2,  // 20: dota.CMsgGCMsgSetOptions.gcsql_version:type_name -> dota.CMsgGCMsgSetOptions.GCSQLVersion
-	79, // 21: dota.CMsgGCHUpdateSession.extra_fields:type_name -> dota.CMsgGCHUpdateSession.ExtraField
-	80, // 22: dota.CMsgNotificationOfSuspiciousActivity.multiple_instances:type_name -> dota.CMsgNotificationOfSuspiciousActivity.MultipleGameInstances
-	82, // 23: dota.CMsgGCHAppCheersReceived.cheer_targets:type_name -> dota.CMsgGCHAppCheersReceived.CheerTarget
-	83, // 24: dota.CMsgGCHAppCheersGetAllowedTypesResponse.cheer_remaps:type_name -> dota.CMsgGCHAppCheersGetAllowedTypesResponse.CheerRemaps
-	84, // 25: dota.CWorkshop_GetSpecialPayments_Response.special_payments:type_name -> dota.CWorkshop_GetSpecialPayments_Response.SpecialPayment
-	47, // 26: dota.CMsgGCMsgMasterSetWebAPIRouting.Entry.routing:type_name -> dota.CMsgGCRoutingInfo
-	47, // 27: dota.CMsgGCMsgMasterSetClientMsgRouting.Entry.routing:type_name -> dota.CMsgGCRoutingInfo
-	81, // 28: dota.CMsgGCHAppCheersReceived.CheerTarget.cheer_types:type_name -> dota.CMsgGCHAppCheersReceived.CheerTypeAmount
-	29, // [29:29] is the sub-list for method output_type
-	29, // [29:29] is the sub-list for method input_type
-	29, // [29:29] is the sub-list for extension type_name
-	29, // [29:29] is the sub-list for extension extendee
-	0,  // [0:29] is the sub-list for field type_name
+	81, // 21: dota.CMsgGCHUpdateSession.extra_fields:type_name -> dota.CMsgGCHUpdateSession.ExtraField
+	82, // 22: dota.CMsgNotificationOfSuspiciousActivity.multiple_instances:type_name -> dota.CMsgNotificationOfSuspiciousActivity.MultipleGameInstances
+	84, // 23: dota.CMsgGCHAppCheersReceived.cheer_targets:type_name -> dota.CMsgGCHAppCheersReceived.CheerTarget
+	85, // 24: dota.CMsgGCHAppCheersGetAllowedTypesResponse.cheer_remaps:type_name -> dota.CMsgGCHAppCheersGetAllowedTypesResponse.CheerRemaps
+	86, // 25: dota.CWorkshop_GetSpecialPayments_Response.special_payments:type_name -> dota.CWorkshop_GetSpecialPayments_Response.SpecialPayment
+	87, // 26: dota.CMsgGCReportMetrics.metric_data:type_name -> dota.CMsgGCReportMetrics.MetricEntry
+	47, // 27: dota.CMsgGCMsgMasterSetWebAPIRouting.Entry.routing:type_name -> dota.CMsgGCRoutingInfo
+	47, // 28: dota.CMsgGCMsgMasterSetClientMsgRouting.Entry.routing:type_name -> dota.CMsgGCRoutingInfo
+	83, // 29: dota.CMsgGCHAppCheersReceived.CheerTarget.cheer_types:type_name -> dota.CMsgGCHAppCheersReceived.CheerTypeAmount
+	88, // 30: dota.CMsgGCReportMetrics.MetricEntry.dimensions:type_name -> dota.CMsgGCReportMetrics.MetricEntry.Dimension
+	89, // 31: dota.CMsgGCReportMetrics.MetricEntry.measurements:type_name -> dota.CMsgGCReportMetrics.MetricEntry.Measurement
+	32, // [32:32] is the sub-list for method output_type
+	32, // [32:32] is the sub-list for method input_type
+	32, // [32:32] is the sub-list for extension type_name
+	32, // [32:32] is the sub-list for extension extendee
+	0,  // [0:32] is the sub-list for field type_name
 }
 
 func init() { file_steammessages_int_proto_init() }
@@ -5513,13 +5921,22 @@ func file_steammessages_int_proto_init() {
 		return
 	}
 	file_steammessages_proto_init()
+	file_steammessages_int_proto_msgTypes[85].OneofWrappers = []any{
+		(*CMsgGCReportMetrics_MetricEntry_Dimension_ValueString)(nil),
+		(*CMsgGCReportMetrics_MetricEntry_Dimension_ValueInteger)(nil),
+		(*CMsgGCReportMetrics_MetricEntry_Dimension_ValueBoolean)(nil),
+	}
+	file_steammessages_int_proto_msgTypes[86].OneofWrappers = []any{
+		(*CMsgGCReportMetrics_MetricEntry_Measurement_ValueInteger)(nil),
+		(*CMsgGCReportMetrics_MetricEntry_Measurement_ValueFloat)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_steammessages_int_proto_rawDesc), len(file_steammessages_int_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   82,
+			NumMessages:   87,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

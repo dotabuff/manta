@@ -168,6 +168,9 @@ const (
 	EGCMsgUseItemResponse_k_EGCMsgUseItemResponse_EmoticonUnlock_NoNew        EGCMsgUseItemResponse = 11
 	EGCMsgUseItemResponse_k_EGCMsgUseItemResponse_EmoticonUnlock_Complete     EGCMsgUseItemResponse = 12
 	EGCMsgUseItemResponse_k_EGCMsgUseItemResponse_ItemUsed_Compendium         EGCMsgUseItemResponse = 13
+	EGCMsgUseItemResponse_k_EGCMsgUseItemResponse_CannotUseWhileUntradable    EGCMsgUseItemResponse = 14
+	EGCMsgUseItemResponse_k_EGCMsgUseItemResponse_CannotBeUsedByAccount       EGCMsgUseItemResponse = 15
+	EGCMsgUseItemResponse_k_EGCMsgUseItemResponse_RecipientCannotRecieve      EGCMsgUseItemResponse = 16
 )
 
 // Enum value maps for EGCMsgUseItemResponse.
@@ -187,6 +190,9 @@ var (
 		11: "k_EGCMsgUseItemResponse_EmoticonUnlock_NoNew",
 		12: "k_EGCMsgUseItemResponse_EmoticonUnlock_Complete",
 		13: "k_EGCMsgUseItemResponse_ItemUsed_Compendium",
+		14: "k_EGCMsgUseItemResponse_CannotUseWhileUntradable",
+		15: "k_EGCMsgUseItemResponse_CannotBeUsedByAccount",
+		16: "k_EGCMsgUseItemResponse_RecipientCannotRecieve",
 	}
 	EGCMsgUseItemResponse_value = map[string]int32{
 		"k_EGCMsgUseItemResponse_ItemUsed":                    0,
@@ -203,6 +209,9 @@ var (
 		"k_EGCMsgUseItemResponse_EmoticonUnlock_NoNew":        11,
 		"k_EGCMsgUseItemResponse_EmoticonUnlock_Complete":     12,
 		"k_EGCMsgUseItemResponse_ItemUsed_Compendium":         13,
+		"k_EGCMsgUseItemResponse_CannotUseWhileUntradable":    14,
+		"k_EGCMsgUseItemResponse_CannotBeUsedByAccount":       15,
+		"k_EGCMsgUseItemResponse_RecipientCannotRecieve":      16,
 	}
 )
 
@@ -314,7 +323,7 @@ const file_econ_shared_enums_proto_rawDesc = "" +
 	"\x17k_EGCMsgResponseNoMatch\x10\x05\x12 \n" +
 	"\x1ck_EGCMsgResponseUnknownError\x10\x06\x12\x1f\n" +
 	"\x1bk_EGCMsgResponseNotLoggedOn\x10\a\x12\x1a\n" +
-	"\x16k_EGCMsgFailedToCreate\x10\b*\xc5\x05\n" +
+	"\x16k_EGCMsgFailedToCreate\x10\b*\xe2\x06\n" +
 	"\x15EGCMsgUseItemResponse\x12$\n" +
 	" k_EGCMsgUseItemResponse_ItemUsed\x10\x00\x12.\n" +
 	"*k_EGCMsgUseItemResponse_GiftNoOtherPlayers\x10\x01\x12'\n" +
@@ -330,7 +339,10 @@ const file_econ_shared_enums_proto_rawDesc = "" +
 	"\x120\n" +
 	",k_EGCMsgUseItemResponse_EmoticonUnlock_NoNew\x10\v\x123\n" +
 	"/k_EGCMsgUseItemResponse_EmoticonUnlock_Complete\x10\f\x12/\n" +
-	"+k_EGCMsgUseItemResponse_ItemUsed_Compendium\x10\rB%Z#github.com/dotabuff/manta/dota;dota"
+	"+k_EGCMsgUseItemResponse_ItemUsed_Compendium\x10\r\x124\n" +
+	"0k_EGCMsgUseItemResponse_CannotUseWhileUntradable\x10\x0e\x121\n" +
+	"-k_EGCMsgUseItemResponse_CannotBeUsedByAccount\x10\x0f\x122\n" +
+	".k_EGCMsgUseItemResponse_RecipientCannotRecieve\x10\x10B%Z#github.com/dotabuff/manta/dota;dota"
 
 var (
 	file_econ_shared_enums_proto_rawDescOnce sync.Once

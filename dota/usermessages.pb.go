@@ -400,6 +400,8 @@ const (
 	PARTICLE_MESSAGE_GAME_PARTICLE_MANAGER_EVENT_UPDATE_FAN                      PARTICLE_MESSAGE = 37
 	PARTICLE_MESSAGE_GAME_PARTICLE_MANAGER_EVENT_SET_CLUSTER_GROWTH              PARTICLE_MESSAGE = 38
 	PARTICLE_MESSAGE_GAME_PARTICLE_MANAGER_EVENT_REMOVE_FAN                      PARTICLE_MESSAGE = 39
+	PARTICLE_MESSAGE_GAME_PARTICLE_MANAGER_EVENT_CREATE_SMOKE_GRID               PARTICLE_MESSAGE = 40
+	PARTICLE_MESSAGE_GAME_PARTICLE_MANAGER_EVENT_SET_OVERRIDE_TEXTURE            PARTICLE_MESSAGE = 41
 )
 
 // Enum value maps for PARTICLE_MESSAGE.
@@ -445,6 +447,8 @@ var (
 		37: "GAME_PARTICLE_MANAGER_EVENT_UPDATE_FAN",
 		38: "GAME_PARTICLE_MANAGER_EVENT_SET_CLUSTER_GROWTH",
 		39: "GAME_PARTICLE_MANAGER_EVENT_REMOVE_FAN",
+		40: "GAME_PARTICLE_MANAGER_EVENT_CREATE_SMOKE_GRID",
+		41: "GAME_PARTICLE_MANAGER_EVENT_SET_OVERRIDE_TEXTURE",
 	}
 	PARTICLE_MESSAGE_value = map[string]int32{
 		"GAME_PARTICLE_MANAGER_EVENT_CREATE":                          0,
@@ -487,6 +491,8 @@ var (
 		"GAME_PARTICLE_MANAGER_EVENT_UPDATE_FAN":                      37,
 		"GAME_PARTICLE_MANAGER_EVENT_SET_CLUSTER_GROWTH":              38,
 		"GAME_PARTICLE_MANAGER_EVENT_REMOVE_FAN":                      39,
+		"GAME_PARTICLE_MANAGER_EVENT_CREATE_SMOKE_GRID":               40,
+		"GAME_PARTICLE_MANAGER_EVENT_SET_OVERRIDE_TEXTURE":            41,
 	}
 )
 
@@ -2740,8 +2746,8 @@ func (x *CUserMessageCameraTransition) GetParamsDataDriven() *CUserMessageCamera
 
 type CUserMsg_ParticleManager struct {
 	state                            protoimpl.MessageState                                     `protogen:"open.v1"`
-	Type                             *PARTICLE_MESSAGE                                          `protobuf:"varint,1,req,name=type,enum=dota.PARTICLE_MESSAGE" json:"type,omitempty"`
-	Index                            *uint32                                                    `protobuf:"varint,2,req,name=index" json:"index,omitempty"`
+	Type                             *PARTICLE_MESSAGE                                          `protobuf:"varint,1,opt,name=type,enum=dota.PARTICLE_MESSAGE" json:"type,omitempty"`
+	Index                            *uint32                                                    `protobuf:"varint,2,opt,name=index" json:"index,omitempty"`
 	ReleaseParticleIndex             *CUserMsg_ParticleManager_ReleaseParticleIndex             `protobuf:"bytes,3,opt,name=release_particle_index,json=releaseParticleIndex" json:"release_particle_index,omitempty"`
 	CreateParticle                   *CUserMsg_ParticleManager_CreateParticle                   `protobuf:"bytes,4,opt,name=create_particle,json=createParticle" json:"create_particle,omitempty"`
 	DestroyParticle                  *CUserMsg_ParticleManager_DestroyParticle                  `protobuf:"bytes,5,opt,name=destroy_particle,json=destroyParticle" json:"destroy_particle,omitempty"`
@@ -2781,6 +2787,8 @@ type CUserMsg_ParticleManager struct {
 	UpdateFan                        *CUserMsg_ParticleManager_UpdateFan                        `protobuf:"bytes,40,opt,name=update_fan,json=updateFan" json:"update_fan,omitempty"`
 	SetParticleClusterGrowth         *CUserMsg_ParticleManager_SetParticleClusterGrowth         `protobuf:"bytes,41,opt,name=set_particle_cluster_growth,json=setParticleClusterGrowth" json:"set_particle_cluster_growth,omitempty"`
 	RemoveFan                        *CUserMsg_ParticleManager_RemoveFan                        `protobuf:"bytes,42,opt,name=remove_fan,json=removeFan" json:"remove_fan,omitempty"`
+	CreateSmokeGrid                  *CUserMsg_ParticleManager_CreateSmokeGrid                  `protobuf:"bytes,43,opt,name=create_smoke_grid,json=createSmokeGrid" json:"create_smoke_grid,omitempty"`
+	SetOverrideTexture               *CUserMsg_ParticleManager_SetOverrideTexture               `protobuf:"bytes,44,opt,name=set_override_texture,json=setOverrideTexture" json:"set_override_texture,omitempty"`
 	extensionFields                  protoimpl.ExtensionFields
 	unknownFields                    protoimpl.UnknownFields
 	sizeCache                        protoimpl.SizeCache
@@ -3099,6 +3107,20 @@ func (x *CUserMsg_ParticleManager) GetSetParticleClusterGrowth() *CUserMsg_Parti
 func (x *CUserMsg_ParticleManager) GetRemoveFan() *CUserMsg_ParticleManager_RemoveFan {
 	if x != nil {
 		return x.RemoveFan
+	}
+	return nil
+}
+
+func (x *CUserMsg_ParticleManager) GetCreateSmokeGrid() *CUserMsg_ParticleManager_CreateSmokeGrid {
+	if x != nil {
+		return x.CreateSmokeGrid
+	}
+	return nil
+}
+
+func (x *CUserMsg_ParticleManager) GetSetOverrideTexture() *CUserMsg_ParticleManager_SetOverrideTexture {
+	if x != nil {
+		return x.SetOverrideTexture
 	}
 	return nil
 }
@@ -5762,6 +5784,7 @@ func (x *CUserMsg_ParticleManager_SetControlPointSnapshot) GetSnapshotName() str
 type CUserMsg_ParticleManager_SetParticleText struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Text          *string                `protobuf:"bytes,1,opt,name=text" json:"text,omitempty"`
+	Localize      *bool                  `protobuf:"varint,2,opt,name=localize" json:"localize,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -5801,6 +5824,13 @@ func (x *CUserMsg_ParticleManager_SetParticleText) GetText() string {
 		return *x.Text
 	}
 	return ""
+}
+
+func (x *CUserMsg_ParticleManager_SetParticleText) GetLocalize() bool {
+	if x != nil && x.Localize != nil {
+		return *x.Localize
+	}
+	return false
 }
 
 type CUserMsg_ParticleManager_SetTextureAttribute struct {
@@ -5855,6 +5885,50 @@ func (x *CUserMsg_ParticleManager_SetTextureAttribute) GetTextureName() string {
 	return ""
 }
 
+type CUserMsg_ParticleManager_SetOverrideTexture struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TextureName   *string                `protobuf:"bytes,1,opt,name=texture_name,json=textureName" json:"texture_name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CUserMsg_ParticleManager_SetOverrideTexture) Reset() {
+	*x = CUserMsg_ParticleManager_SetOverrideTexture{}
+	mi := &file_usermessages_proto_msgTypes[79]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CUserMsg_ParticleManager_SetOverrideTexture) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CUserMsg_ParticleManager_SetOverrideTexture) ProtoMessage() {}
+
+func (x *CUserMsg_ParticleManager_SetOverrideTexture) ProtoReflect() protoreflect.Message {
+	mi := &file_usermessages_proto_msgTypes[79]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CUserMsg_ParticleManager_SetOverrideTexture.ProtoReflect.Descriptor instead.
+func (*CUserMsg_ParticleManager_SetOverrideTexture) Descriptor() ([]byte, []int) {
+	return file_usermessages_proto_rawDescGZIP(), []int{36, 22}
+}
+
+func (x *CUserMsg_ParticleManager_SetOverrideTexture) GetTextureName() string {
+	if x != nil && x.TextureName != nil {
+		return *x.TextureName
+	}
+	return ""
+}
+
 type CUserMsg_ParticleManager_SetSceneObjectGenericFlag struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	FlagValue     *bool                  `protobuf:"varint,1,opt,name=flag_value,json=flagValue" json:"flag_value,omitempty"`
@@ -5864,7 +5938,7 @@ type CUserMsg_ParticleManager_SetSceneObjectGenericFlag struct {
 
 func (x *CUserMsg_ParticleManager_SetSceneObjectGenericFlag) Reset() {
 	*x = CUserMsg_ParticleManager_SetSceneObjectGenericFlag{}
-	mi := &file_usermessages_proto_msgTypes[79]
+	mi := &file_usermessages_proto_msgTypes[80]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5876,7 +5950,7 @@ func (x *CUserMsg_ParticleManager_SetSceneObjectGenericFlag) String() string {
 func (*CUserMsg_ParticleManager_SetSceneObjectGenericFlag) ProtoMessage() {}
 
 func (x *CUserMsg_ParticleManager_SetSceneObjectGenericFlag) ProtoReflect() protoreflect.Message {
-	mi := &file_usermessages_proto_msgTypes[79]
+	mi := &file_usermessages_proto_msgTypes[80]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5889,7 +5963,7 @@ func (x *CUserMsg_ParticleManager_SetSceneObjectGenericFlag) ProtoReflect() prot
 
 // Deprecated: Use CUserMsg_ParticleManager_SetSceneObjectGenericFlag.ProtoReflect.Descriptor instead.
 func (*CUserMsg_ParticleManager_SetSceneObjectGenericFlag) Descriptor() ([]byte, []int) {
-	return file_usermessages_proto_rawDescGZIP(), []int{36, 22}
+	return file_usermessages_proto_rawDescGZIP(), []int{36, 23}
 }
 
 func (x *CUserMsg_ParticleManager_SetSceneObjectGenericFlag) GetFlagValue() bool {
@@ -5909,7 +5983,7 @@ type CUserMsg_ParticleManager_SetSceneObjectTintAndDesat struct {
 
 func (x *CUserMsg_ParticleManager_SetSceneObjectTintAndDesat) Reset() {
 	*x = CUserMsg_ParticleManager_SetSceneObjectTintAndDesat{}
-	mi := &file_usermessages_proto_msgTypes[80]
+	mi := &file_usermessages_proto_msgTypes[81]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5921,7 +5995,7 @@ func (x *CUserMsg_ParticleManager_SetSceneObjectTintAndDesat) String() string {
 func (*CUserMsg_ParticleManager_SetSceneObjectTintAndDesat) ProtoMessage() {}
 
 func (x *CUserMsg_ParticleManager_SetSceneObjectTintAndDesat) ProtoReflect() protoreflect.Message {
-	mi := &file_usermessages_proto_msgTypes[80]
+	mi := &file_usermessages_proto_msgTypes[81]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5934,7 +6008,7 @@ func (x *CUserMsg_ParticleManager_SetSceneObjectTintAndDesat) ProtoReflect() pro
 
 // Deprecated: Use CUserMsg_ParticleManager_SetSceneObjectTintAndDesat.ProtoReflect.Descriptor instead.
 func (*CUserMsg_ParticleManager_SetSceneObjectTintAndDesat) Descriptor() ([]byte, []int) {
-	return file_usermessages_proto_rawDescGZIP(), []int{36, 23}
+	return file_usermessages_proto_rawDescGZIP(), []int{36, 24}
 }
 
 func (x *CUserMsg_ParticleManager_SetSceneObjectTintAndDesat) GetTint() uint32 {
@@ -5960,7 +6034,7 @@ type CUserMsg_ParticleManager_ParticleSkipToTime struct {
 
 func (x *CUserMsg_ParticleManager_ParticleSkipToTime) Reset() {
 	*x = CUserMsg_ParticleManager_ParticleSkipToTime{}
-	mi := &file_usermessages_proto_msgTypes[81]
+	mi := &file_usermessages_proto_msgTypes[82]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5972,7 +6046,7 @@ func (x *CUserMsg_ParticleManager_ParticleSkipToTime) String() string {
 func (*CUserMsg_ParticleManager_ParticleSkipToTime) ProtoMessage() {}
 
 func (x *CUserMsg_ParticleManager_ParticleSkipToTime) ProtoReflect() protoreflect.Message {
-	mi := &file_usermessages_proto_msgTypes[81]
+	mi := &file_usermessages_proto_msgTypes[82]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5985,7 +6059,7 @@ func (x *CUserMsg_ParticleManager_ParticleSkipToTime) ProtoReflect() protoreflec
 
 // Deprecated: Use CUserMsg_ParticleManager_ParticleSkipToTime.ProtoReflect.Descriptor instead.
 func (*CUserMsg_ParticleManager_ParticleSkipToTime) Descriptor() ([]byte, []int) {
-	return file_usermessages_proto_rawDescGZIP(), []int{36, 24}
+	return file_usermessages_proto_rawDescGZIP(), []int{36, 25}
 }
 
 func (x *CUserMsg_ParticleManager_ParticleSkipToTime) GetSkipToTime() float32 {
@@ -6004,7 +6078,7 @@ type CUserMsg_ParticleManager_ParticleCanFreeze struct {
 
 func (x *CUserMsg_ParticleManager_ParticleCanFreeze) Reset() {
 	*x = CUserMsg_ParticleManager_ParticleCanFreeze{}
-	mi := &file_usermessages_proto_msgTypes[82]
+	mi := &file_usermessages_proto_msgTypes[83]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6016,7 +6090,7 @@ func (x *CUserMsg_ParticleManager_ParticleCanFreeze) String() string {
 func (*CUserMsg_ParticleManager_ParticleCanFreeze) ProtoMessage() {}
 
 func (x *CUserMsg_ParticleManager_ParticleCanFreeze) ProtoReflect() protoreflect.Message {
-	mi := &file_usermessages_proto_msgTypes[82]
+	mi := &file_usermessages_proto_msgTypes[83]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6029,7 +6103,7 @@ func (x *CUserMsg_ParticleManager_ParticleCanFreeze) ProtoReflect() protoreflect
 
 // Deprecated: Use CUserMsg_ParticleManager_ParticleCanFreeze.ProtoReflect.Descriptor instead.
 func (*CUserMsg_ParticleManager_ParticleCanFreeze) Descriptor() ([]byte, []int) {
-	return file_usermessages_proto_rawDescGZIP(), []int{36, 25}
+	return file_usermessages_proto_rawDescGZIP(), []int{36, 26}
 }
 
 func (x *CUserMsg_ParticleManager_ParticleCanFreeze) GetCanFreeze() bool {
@@ -6048,7 +6122,7 @@ type CUserMsg_ParticleManager_ParticleFreezeTransitionOverride struct {
 
 func (x *CUserMsg_ParticleManager_ParticleFreezeTransitionOverride) Reset() {
 	*x = CUserMsg_ParticleManager_ParticleFreezeTransitionOverride{}
-	mi := &file_usermessages_proto_msgTypes[83]
+	mi := &file_usermessages_proto_msgTypes[84]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6060,7 +6134,7 @@ func (x *CUserMsg_ParticleManager_ParticleFreezeTransitionOverride) String() str
 func (*CUserMsg_ParticleManager_ParticleFreezeTransitionOverride) ProtoMessage() {}
 
 func (x *CUserMsg_ParticleManager_ParticleFreezeTransitionOverride) ProtoReflect() protoreflect.Message {
-	mi := &file_usermessages_proto_msgTypes[83]
+	mi := &file_usermessages_proto_msgTypes[84]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6073,7 +6147,7 @@ func (x *CUserMsg_ParticleManager_ParticleFreezeTransitionOverride) ProtoReflect
 
 // Deprecated: Use CUserMsg_ParticleManager_ParticleFreezeTransitionOverride.ProtoReflect.Descriptor instead.
 func (*CUserMsg_ParticleManager_ParticleFreezeTransitionOverride) Descriptor() ([]byte, []int) {
-	return file_usermessages_proto_rawDescGZIP(), []int{36, 26}
+	return file_usermessages_proto_rawDescGZIP(), []int{36, 27}
 }
 
 func (x *CUserMsg_ParticleManager_ParticleFreezeTransitionOverride) GetFreezeTransitionOverride() float32 {
@@ -6094,7 +6168,7 @@ type CUserMsg_ParticleManager_FreezeParticleInvolving struct {
 
 func (x *CUserMsg_ParticleManager_FreezeParticleInvolving) Reset() {
 	*x = CUserMsg_ParticleManager_FreezeParticleInvolving{}
-	mi := &file_usermessages_proto_msgTypes[84]
+	mi := &file_usermessages_proto_msgTypes[85]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6106,7 +6180,7 @@ func (x *CUserMsg_ParticleManager_FreezeParticleInvolving) String() string {
 func (*CUserMsg_ParticleManager_FreezeParticleInvolving) ProtoMessage() {}
 
 func (x *CUserMsg_ParticleManager_FreezeParticleInvolving) ProtoReflect() protoreflect.Message {
-	mi := &file_usermessages_proto_msgTypes[84]
+	mi := &file_usermessages_proto_msgTypes[85]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6119,7 +6193,7 @@ func (x *CUserMsg_ParticleManager_FreezeParticleInvolving) ProtoReflect() protor
 
 // Deprecated: Use CUserMsg_ParticleManager_FreezeParticleInvolving.ProtoReflect.Descriptor instead.
 func (*CUserMsg_ParticleManager_FreezeParticleInvolving) Descriptor() ([]byte, []int) {
-	return file_usermessages_proto_rawDescGZIP(), []int{36, 27}
+	return file_usermessages_proto_rawDescGZIP(), []int{36, 28}
 }
 
 func (x *CUserMsg_ParticleManager_FreezeParticleInvolving) GetSetFrozen() bool {
@@ -6154,7 +6228,7 @@ type CUserMsg_ParticleManager_AddModellistOverrideElement struct {
 
 func (x *CUserMsg_ParticleManager_AddModellistOverrideElement) Reset() {
 	*x = CUserMsg_ParticleManager_AddModellistOverrideElement{}
-	mi := &file_usermessages_proto_msgTypes[85]
+	mi := &file_usermessages_proto_msgTypes[86]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6166,7 +6240,7 @@ func (x *CUserMsg_ParticleManager_AddModellistOverrideElement) String() string {
 func (*CUserMsg_ParticleManager_AddModellistOverrideElement) ProtoMessage() {}
 
 func (x *CUserMsg_ParticleManager_AddModellistOverrideElement) ProtoReflect() protoreflect.Message {
-	mi := &file_usermessages_proto_msgTypes[85]
+	mi := &file_usermessages_proto_msgTypes[86]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6179,7 +6253,7 @@ func (x *CUserMsg_ParticleManager_AddModellistOverrideElement) ProtoReflect() pr
 
 // Deprecated: Use CUserMsg_ParticleManager_AddModellistOverrideElement.ProtoReflect.Descriptor instead.
 func (*CUserMsg_ParticleManager_AddModellistOverrideElement) Descriptor() ([]byte, []int) {
-	return file_usermessages_proto_rawDescGZIP(), []int{36, 28}
+	return file_usermessages_proto_rawDescGZIP(), []int{36, 29}
 }
 
 func (x *CUserMsg_ParticleManager_AddModellistOverrideElement) GetModelName() string {
@@ -6212,7 +6286,7 @@ type CUserMsg_ParticleManager_ClearModellistOverride struct {
 
 func (x *CUserMsg_ParticleManager_ClearModellistOverride) Reset() {
 	*x = CUserMsg_ParticleManager_ClearModellistOverride{}
-	mi := &file_usermessages_proto_msgTypes[86]
+	mi := &file_usermessages_proto_msgTypes[87]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6224,7 +6298,7 @@ func (x *CUserMsg_ParticleManager_ClearModellistOverride) String() string {
 func (*CUserMsg_ParticleManager_ClearModellistOverride) ProtoMessage() {}
 
 func (x *CUserMsg_ParticleManager_ClearModellistOverride) ProtoReflect() protoreflect.Message {
-	mi := &file_usermessages_proto_msgTypes[86]
+	mi := &file_usermessages_proto_msgTypes[87]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6237,7 +6311,7 @@ func (x *CUserMsg_ParticleManager_ClearModellistOverride) ProtoReflect() protore
 
 // Deprecated: Use CUserMsg_ParticleManager_ClearModellistOverride.ProtoReflect.Descriptor instead.
 func (*CUserMsg_ParticleManager_ClearModellistOverride) Descriptor() ([]byte, []int) {
-	return file_usermessages_proto_rawDescGZIP(), []int{36, 29}
+	return file_usermessages_proto_rawDescGZIP(), []int{36, 30}
 }
 
 func (x *CUserMsg_ParticleManager_ClearModellistOverride) GetGroupid() uint32 {
@@ -6259,7 +6333,7 @@ type CUserMsg_ParticleManager_SetParticleNamedValueContext struct {
 
 func (x *CUserMsg_ParticleManager_SetParticleNamedValueContext) Reset() {
 	*x = CUserMsg_ParticleManager_SetParticleNamedValueContext{}
-	mi := &file_usermessages_proto_msgTypes[87]
+	mi := &file_usermessages_proto_msgTypes[88]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6271,7 +6345,7 @@ func (x *CUserMsg_ParticleManager_SetParticleNamedValueContext) String() string 
 func (*CUserMsg_ParticleManager_SetParticleNamedValueContext) ProtoMessage() {}
 
 func (x *CUserMsg_ParticleManager_SetParticleNamedValueContext) ProtoReflect() protoreflect.Message {
-	mi := &file_usermessages_proto_msgTypes[87]
+	mi := &file_usermessages_proto_msgTypes[88]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6284,7 +6358,7 @@ func (x *CUserMsg_ParticleManager_SetParticleNamedValueContext) ProtoReflect() p
 
 // Deprecated: Use CUserMsg_ParticleManager_SetParticleNamedValueContext.ProtoReflect.Descriptor instead.
 func (*CUserMsg_ParticleManager_SetParticleNamedValueContext) Descriptor() ([]byte, []int) {
-	return file_usermessages_proto_rawDescGZIP(), []int{36, 30}
+	return file_usermessages_proto_rawDescGZIP(), []int{36, 31}
 }
 
 func (x *CUserMsg_ParticleManager_SetParticleNamedValueContext) GetFloatValues() []*CUserMsg_ParticleManager_SetParticleNamedValueContext_FloatContextValue {
@@ -6326,7 +6400,7 @@ type CUserMsg_ParticleManager_CreatePhysicsSim struct {
 
 func (x *CUserMsg_ParticleManager_CreatePhysicsSim) Reset() {
 	*x = CUserMsg_ParticleManager_CreatePhysicsSim{}
-	mi := &file_usermessages_proto_msgTypes[88]
+	mi := &file_usermessages_proto_msgTypes[89]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6338,7 +6412,7 @@ func (x *CUserMsg_ParticleManager_CreatePhysicsSim) String() string {
 func (*CUserMsg_ParticleManager_CreatePhysicsSim) ProtoMessage() {}
 
 func (x *CUserMsg_ParticleManager_CreatePhysicsSim) ProtoReflect() protoreflect.Message {
-	mi := &file_usermessages_proto_msgTypes[88]
+	mi := &file_usermessages_proto_msgTypes[89]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6351,7 +6425,7 @@ func (x *CUserMsg_ParticleManager_CreatePhysicsSim) ProtoReflect() protoreflect.
 
 // Deprecated: Use CUserMsg_ParticleManager_CreatePhysicsSim.ProtoReflect.Descriptor instead.
 func (*CUserMsg_ParticleManager_CreatePhysicsSim) Descriptor() ([]byte, []int) {
-	return file_usermessages_proto_rawDescGZIP(), []int{36, 31}
+	return file_usermessages_proto_rawDescGZIP(), []int{36, 32}
 }
 
 func (x *CUserMsg_ParticleManager_CreatePhysicsSim) GetPropGroupName() string {
@@ -6383,7 +6457,7 @@ type CUserMsg_ParticleManager_DestroyPhysicsSim struct {
 
 func (x *CUserMsg_ParticleManager_DestroyPhysicsSim) Reset() {
 	*x = CUserMsg_ParticleManager_DestroyPhysicsSim{}
-	mi := &file_usermessages_proto_msgTypes[89]
+	mi := &file_usermessages_proto_msgTypes[90]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6395,7 +6469,7 @@ func (x *CUserMsg_ParticleManager_DestroyPhysicsSim) String() string {
 func (*CUserMsg_ParticleManager_DestroyPhysicsSim) ProtoMessage() {}
 
 func (x *CUserMsg_ParticleManager_DestroyPhysicsSim) ProtoReflect() protoreflect.Message {
-	mi := &file_usermessages_proto_msgTypes[89]
+	mi := &file_usermessages_proto_msgTypes[90]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6408,7 +6482,51 @@ func (x *CUserMsg_ParticleManager_DestroyPhysicsSim) ProtoReflect() protoreflect
 
 // Deprecated: Use CUserMsg_ParticleManager_DestroyPhysicsSim.ProtoReflect.Descriptor instead.
 func (*CUserMsg_ParticleManager_DestroyPhysicsSim) Descriptor() ([]byte, []int) {
-	return file_usermessages_proto_rawDescGZIP(), []int{36, 32}
+	return file_usermessages_proto_rawDescGZIP(), []int{36, 33}
+}
+
+type CUserMsg_ParticleManager_CreateSmokeGrid struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	VdataName     *string                `protobuf:"bytes,1,opt,name=vdata_name,json=vdataName" json:"vdata_name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CUserMsg_ParticleManager_CreateSmokeGrid) Reset() {
+	*x = CUserMsg_ParticleManager_CreateSmokeGrid{}
+	mi := &file_usermessages_proto_msgTypes[91]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CUserMsg_ParticleManager_CreateSmokeGrid) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CUserMsg_ParticleManager_CreateSmokeGrid) ProtoMessage() {}
+
+func (x *CUserMsg_ParticleManager_CreateSmokeGrid) ProtoReflect() protoreflect.Message {
+	mi := &file_usermessages_proto_msgTypes[91]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CUserMsg_ParticleManager_CreateSmokeGrid.ProtoReflect.Descriptor instead.
+func (*CUserMsg_ParticleManager_CreateSmokeGrid) Descriptor() ([]byte, []int) {
+	return file_usermessages_proto_rawDescGZIP(), []int{36, 34}
+}
+
+func (x *CUserMsg_ParticleManager_CreateSmokeGrid) GetVdataName() string {
+	if x != nil && x.VdataName != nil {
+		return *x.VdataName
+	}
+	return ""
 }
 
 type CUserMsg_ParticleManager_SetVData struct {
@@ -6420,7 +6538,7 @@ type CUserMsg_ParticleManager_SetVData struct {
 
 func (x *CUserMsg_ParticleManager_SetVData) Reset() {
 	*x = CUserMsg_ParticleManager_SetVData{}
-	mi := &file_usermessages_proto_msgTypes[90]
+	mi := &file_usermessages_proto_msgTypes[92]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6432,7 +6550,7 @@ func (x *CUserMsg_ParticleManager_SetVData) String() string {
 func (*CUserMsg_ParticleManager_SetVData) ProtoMessage() {}
 
 func (x *CUserMsg_ParticleManager_SetVData) ProtoReflect() protoreflect.Message {
-	mi := &file_usermessages_proto_msgTypes[90]
+	mi := &file_usermessages_proto_msgTypes[92]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6445,7 +6563,7 @@ func (x *CUserMsg_ParticleManager_SetVData) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use CUserMsg_ParticleManager_SetVData.ProtoReflect.Descriptor instead.
 func (*CUserMsg_ParticleManager_SetVData) Descriptor() ([]byte, []int) {
-	return file_usermessages_proto_rawDescGZIP(), []int{36, 33}
+	return file_usermessages_proto_rawDescGZIP(), []int{36, 35}
 }
 
 func (x *CUserMsg_ParticleManager_SetVData) GetVdataName() string {
@@ -6465,7 +6583,7 @@ type CUserMsg_ParticleManager_SetMaterialOverride struct {
 
 func (x *CUserMsg_ParticleManager_SetMaterialOverride) Reset() {
 	*x = CUserMsg_ParticleManager_SetMaterialOverride{}
-	mi := &file_usermessages_proto_msgTypes[91]
+	mi := &file_usermessages_proto_msgTypes[93]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6477,7 +6595,7 @@ func (x *CUserMsg_ParticleManager_SetMaterialOverride) String() string {
 func (*CUserMsg_ParticleManager_SetMaterialOverride) ProtoMessage() {}
 
 func (x *CUserMsg_ParticleManager_SetMaterialOverride) ProtoReflect() protoreflect.Message {
-	mi := &file_usermessages_proto_msgTypes[91]
+	mi := &file_usermessages_proto_msgTypes[93]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6490,7 +6608,7 @@ func (x *CUserMsg_ParticleManager_SetMaterialOverride) ProtoReflect() protorefle
 
 // Deprecated: Use CUserMsg_ParticleManager_SetMaterialOverride.ProtoReflect.Descriptor instead.
 func (*CUserMsg_ParticleManager_SetMaterialOverride) Descriptor() ([]byte, []int) {
-	return file_usermessages_proto_rawDescGZIP(), []int{36, 34}
+	return file_usermessages_proto_rawDescGZIP(), []int{36, 36}
 }
 
 func (x *CUserMsg_ParticleManager_SetMaterialOverride) GetMaterialName() string {
@@ -6533,7 +6651,7 @@ type CUserMsg_ParticleManager_AddFan struct {
 
 func (x *CUserMsg_ParticleManager_AddFan) Reset() {
 	*x = CUserMsg_ParticleManager_AddFan{}
-	mi := &file_usermessages_proto_msgTypes[92]
+	mi := &file_usermessages_proto_msgTypes[94]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6545,7 +6663,7 @@ func (x *CUserMsg_ParticleManager_AddFan) String() string {
 func (*CUserMsg_ParticleManager_AddFan) ProtoMessage() {}
 
 func (x *CUserMsg_ParticleManager_AddFan) ProtoReflect() protoreflect.Message {
-	mi := &file_usermessages_proto_msgTypes[92]
+	mi := &file_usermessages_proto_msgTypes[94]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6558,7 +6676,7 @@ func (x *CUserMsg_ParticleManager_AddFan) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CUserMsg_ParticleManager_AddFan.ProtoReflect.Descriptor instead.
 func (*CUserMsg_ParticleManager_AddFan) Descriptor() ([]byte, []int) {
-	return file_usermessages_proto_rawDescGZIP(), []int{36, 35}
+	return file_usermessages_proto_rawDescGZIP(), []int{36, 37}
 }
 
 func (x *CUserMsg_ParticleManager_AddFan) GetActive() bool {
@@ -6702,7 +6820,7 @@ type CUserMsg_ParticleManager_UpdateFan struct {
 
 func (x *CUserMsg_ParticleManager_UpdateFan) Reset() {
 	*x = CUserMsg_ParticleManager_UpdateFan{}
-	mi := &file_usermessages_proto_msgTypes[93]
+	mi := &file_usermessages_proto_msgTypes[95]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6714,7 +6832,7 @@ func (x *CUserMsg_ParticleManager_UpdateFan) String() string {
 func (*CUserMsg_ParticleManager_UpdateFan) ProtoMessage() {}
 
 func (x *CUserMsg_ParticleManager_UpdateFan) ProtoReflect() protoreflect.Message {
-	mi := &file_usermessages_proto_msgTypes[93]
+	mi := &file_usermessages_proto_msgTypes[95]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6727,7 +6845,7 @@ func (x *CUserMsg_ParticleManager_UpdateFan) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use CUserMsg_ParticleManager_UpdateFan.ProtoReflect.Descriptor instead.
 func (*CUserMsg_ParticleManager_UpdateFan) Descriptor() ([]byte, []int) {
-	return file_usermessages_proto_rawDescGZIP(), []int{36, 36}
+	return file_usermessages_proto_rawDescGZIP(), []int{36, 38}
 }
 
 func (x *CUserMsg_ParticleManager_UpdateFan) GetActive() bool {
@@ -6787,7 +6905,7 @@ type CUserMsg_ParticleManager_RemoveFan struct {
 
 func (x *CUserMsg_ParticleManager_RemoveFan) Reset() {
 	*x = CUserMsg_ParticleManager_RemoveFan{}
-	mi := &file_usermessages_proto_msgTypes[94]
+	mi := &file_usermessages_proto_msgTypes[96]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6799,7 +6917,7 @@ func (x *CUserMsg_ParticleManager_RemoveFan) String() string {
 func (*CUserMsg_ParticleManager_RemoveFan) ProtoMessage() {}
 
 func (x *CUserMsg_ParticleManager_RemoveFan) ProtoReflect() protoreflect.Message {
-	mi := &file_usermessages_proto_msgTypes[94]
+	mi := &file_usermessages_proto_msgTypes[96]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6812,7 +6930,7 @@ func (x *CUserMsg_ParticleManager_RemoveFan) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use CUserMsg_ParticleManager_RemoveFan.ProtoReflect.Descriptor instead.
 func (*CUserMsg_ParticleManager_RemoveFan) Descriptor() ([]byte, []int) {
-	return file_usermessages_proto_rawDescGZIP(), []int{36, 37}
+	return file_usermessages_proto_rawDescGZIP(), []int{36, 39}
 }
 
 type CUserMsg_ParticleManager_SetParticleClusterGrowth struct {
@@ -6825,7 +6943,7 @@ type CUserMsg_ParticleManager_SetParticleClusterGrowth struct {
 
 func (x *CUserMsg_ParticleManager_SetParticleClusterGrowth) Reset() {
 	*x = CUserMsg_ParticleManager_SetParticleClusterGrowth{}
-	mi := &file_usermessages_proto_msgTypes[95]
+	mi := &file_usermessages_proto_msgTypes[97]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6837,7 +6955,7 @@ func (x *CUserMsg_ParticleManager_SetParticleClusterGrowth) String() string {
 func (*CUserMsg_ParticleManager_SetParticleClusterGrowth) ProtoMessage() {}
 
 func (x *CUserMsg_ParticleManager_SetParticleClusterGrowth) ProtoReflect() protoreflect.Message {
-	mi := &file_usermessages_proto_msgTypes[95]
+	mi := &file_usermessages_proto_msgTypes[97]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6850,7 +6968,7 @@ func (x *CUserMsg_ParticleManager_SetParticleClusterGrowth) ProtoReflect() proto
 
 // Deprecated: Use CUserMsg_ParticleManager_SetParticleClusterGrowth.ProtoReflect.Descriptor instead.
 func (*CUserMsg_ParticleManager_SetParticleClusterGrowth) Descriptor() ([]byte, []int) {
-	return file_usermessages_proto_rawDescGZIP(), []int{36, 38}
+	return file_usermessages_proto_rawDescGZIP(), []int{36, 40}
 }
 
 func (x *CUserMsg_ParticleManager_SetParticleClusterGrowth) GetDuration() float32 {
@@ -6877,7 +6995,7 @@ type CUserMsg_ParticleManager_SetParticleNamedValueContext_FloatContextValue str
 
 func (x *CUserMsg_ParticleManager_SetParticleNamedValueContext_FloatContextValue) Reset() {
 	*x = CUserMsg_ParticleManager_SetParticleNamedValueContext_FloatContextValue{}
-	mi := &file_usermessages_proto_msgTypes[96]
+	mi := &file_usermessages_proto_msgTypes[98]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6889,7 +7007,7 @@ func (x *CUserMsg_ParticleManager_SetParticleNamedValueContext_FloatContextValue
 func (*CUserMsg_ParticleManager_SetParticleNamedValueContext_FloatContextValue) ProtoMessage() {}
 
 func (x *CUserMsg_ParticleManager_SetParticleNamedValueContext_FloatContextValue) ProtoReflect() protoreflect.Message {
-	mi := &file_usermessages_proto_msgTypes[96]
+	mi := &file_usermessages_proto_msgTypes[98]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6902,7 +7020,7 @@ func (x *CUserMsg_ParticleManager_SetParticleNamedValueContext_FloatContextValue
 
 // Deprecated: Use CUserMsg_ParticleManager_SetParticleNamedValueContext_FloatContextValue.ProtoReflect.Descriptor instead.
 func (*CUserMsg_ParticleManager_SetParticleNamedValueContext_FloatContextValue) Descriptor() ([]byte, []int) {
-	return file_usermessages_proto_rawDescGZIP(), []int{36, 30, 0}
+	return file_usermessages_proto_rawDescGZIP(), []int{36, 31, 0}
 }
 
 func (x *CUserMsg_ParticleManager_SetParticleNamedValueContext_FloatContextValue) GetValueNameHash() uint32 {
@@ -6929,7 +7047,7 @@ type CUserMsg_ParticleManager_SetParticleNamedValueContext_VectorContextValue st
 
 func (x *CUserMsg_ParticleManager_SetParticleNamedValueContext_VectorContextValue) Reset() {
 	*x = CUserMsg_ParticleManager_SetParticleNamedValueContext_VectorContextValue{}
-	mi := &file_usermessages_proto_msgTypes[97]
+	mi := &file_usermessages_proto_msgTypes[99]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6941,7 +7059,7 @@ func (x *CUserMsg_ParticleManager_SetParticleNamedValueContext_VectorContextValu
 func (*CUserMsg_ParticleManager_SetParticleNamedValueContext_VectorContextValue) ProtoMessage() {}
 
 func (x *CUserMsg_ParticleManager_SetParticleNamedValueContext_VectorContextValue) ProtoReflect() protoreflect.Message {
-	mi := &file_usermessages_proto_msgTypes[97]
+	mi := &file_usermessages_proto_msgTypes[99]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6954,7 +7072,7 @@ func (x *CUserMsg_ParticleManager_SetParticleNamedValueContext_VectorContextValu
 
 // Deprecated: Use CUserMsg_ParticleManager_SetParticleNamedValueContext_VectorContextValue.ProtoReflect.Descriptor instead.
 func (*CUserMsg_ParticleManager_SetParticleNamedValueContext_VectorContextValue) Descriptor() ([]byte, []int) {
-	return file_usermessages_proto_rawDescGZIP(), []int{36, 30, 1}
+	return file_usermessages_proto_rawDescGZIP(), []int{36, 31, 1}
 }
 
 func (x *CUserMsg_ParticleManager_SetParticleNamedValueContext_VectorContextValue) GetValueNameHash() uint32 {
@@ -6982,7 +7100,7 @@ type CUserMsg_ParticleManager_SetParticleNamedValueContext_TransformContextValue
 
 func (x *CUserMsg_ParticleManager_SetParticleNamedValueContext_TransformContextValue) Reset() {
 	*x = CUserMsg_ParticleManager_SetParticleNamedValueContext_TransformContextValue{}
-	mi := &file_usermessages_proto_msgTypes[98]
+	mi := &file_usermessages_proto_msgTypes[100]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6994,7 +7112,7 @@ func (x *CUserMsg_ParticleManager_SetParticleNamedValueContext_TransformContextV
 func (*CUserMsg_ParticleManager_SetParticleNamedValueContext_TransformContextValue) ProtoMessage() {}
 
 func (x *CUserMsg_ParticleManager_SetParticleNamedValueContext_TransformContextValue) ProtoReflect() protoreflect.Message {
-	mi := &file_usermessages_proto_msgTypes[98]
+	mi := &file_usermessages_proto_msgTypes[100]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7007,7 +7125,7 @@ func (x *CUserMsg_ParticleManager_SetParticleNamedValueContext_TransformContextV
 
 // Deprecated: Use CUserMsg_ParticleManager_SetParticleNamedValueContext_TransformContextValue.ProtoReflect.Descriptor instead.
 func (*CUserMsg_ParticleManager_SetParticleNamedValueContext_TransformContextValue) Descriptor() ([]byte, []int) {
-	return file_usermessages_proto_rawDescGZIP(), []int{36, 30, 2}
+	return file_usermessages_proto_rawDescGZIP(), []int{36, 31, 2}
 }
 
 func (x *CUserMsg_ParticleManager_SetParticleNamedValueContext_TransformContextValue) GetValueNameHash() uint32 {
@@ -7041,7 +7159,7 @@ type CUserMsg_ParticleManager_SetParticleNamedValueContext_EHandleContext struct
 
 func (x *CUserMsg_ParticleManager_SetParticleNamedValueContext_EHandleContext) Reset() {
 	*x = CUserMsg_ParticleManager_SetParticleNamedValueContext_EHandleContext{}
-	mi := &file_usermessages_proto_msgTypes[99]
+	mi := &file_usermessages_proto_msgTypes[101]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7053,7 +7171,7 @@ func (x *CUserMsg_ParticleManager_SetParticleNamedValueContext_EHandleContext) S
 func (*CUserMsg_ParticleManager_SetParticleNamedValueContext_EHandleContext) ProtoMessage() {}
 
 func (x *CUserMsg_ParticleManager_SetParticleNamedValueContext_EHandleContext) ProtoReflect() protoreflect.Message {
-	mi := &file_usermessages_proto_msgTypes[99]
+	mi := &file_usermessages_proto_msgTypes[101]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7066,7 +7184,7 @@ func (x *CUserMsg_ParticleManager_SetParticleNamedValueContext_EHandleContext) P
 
 // Deprecated: Use CUserMsg_ParticleManager_SetParticleNamedValueContext_EHandleContext.ProtoReflect.Descriptor instead.
 func (*CUserMsg_ParticleManager_SetParticleNamedValueContext_EHandleContext) Descriptor() ([]byte, []int) {
-	return file_usermessages_proto_rawDescGZIP(), []int{36, 30, 3}
+	return file_usermessages_proto_rawDescGZIP(), []int{36, 31, 3}
 }
 
 func (x *CUserMsg_ParticleManager_SetParticleNamedValueContext_EHandleContext) GetValueNameHash() uint32 {
@@ -7095,7 +7213,7 @@ type CUserMessage_UtilMsg_Response_ItemDetail struct {
 
 func (x *CUserMessage_UtilMsg_Response_ItemDetail) Reset() {
 	*x = CUserMessage_UtilMsg_Response_ItemDetail{}
-	mi := &file_usermessages_proto_msgTypes[100]
+	mi := &file_usermessages_proto_msgTypes[102]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7107,7 +7225,7 @@ func (x *CUserMessage_UtilMsg_Response_ItemDetail) String() string {
 func (*CUserMessage_UtilMsg_Response_ItemDetail) ProtoMessage() {}
 
 func (x *CUserMessage_UtilMsg_Response_ItemDetail) ProtoReflect() protoreflect.Message {
-	mi := &file_usermessages_proto_msgTypes[100]
+	mi := &file_usermessages_proto_msgTypes[102]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7163,7 +7281,7 @@ type CUserMessage_DllStatus_CVDiagnostic struct {
 
 func (x *CUserMessage_DllStatus_CVDiagnostic) Reset() {
 	*x = CUserMessage_DllStatus_CVDiagnostic{}
-	mi := &file_usermessages_proto_msgTypes[101]
+	mi := &file_usermessages_proto_msgTypes[103]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7175,7 +7293,7 @@ func (x *CUserMessage_DllStatus_CVDiagnostic) String() string {
 func (*CUserMessage_DllStatus_CVDiagnostic) ProtoMessage() {}
 
 func (x *CUserMessage_DllStatus_CVDiagnostic) ProtoReflect() protoreflect.Message {
-	mi := &file_usermessages_proto_msgTypes[101]
+	mi := &file_usermessages_proto_msgTypes[103]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7231,7 +7349,7 @@ type CUserMessage_DllStatus_CModule struct {
 
 func (x *CUserMessage_DllStatus_CModule) Reset() {
 	*x = CUserMessage_DllStatus_CModule{}
-	mi := &file_usermessages_proto_msgTypes[102]
+	mi := &file_usermessages_proto_msgTypes[104]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7243,7 +7361,7 @@ func (x *CUserMessage_DllStatus_CModule) String() string {
 func (*CUserMessage_DllStatus_CModule) ProtoMessage() {}
 
 func (x *CUserMessage_DllStatus_CModule) ProtoReflect() protoreflect.Message {
-	mi := &file_usermessages_proto_msgTypes[102]
+	mi := &file_usermessages_proto_msgTypes[104]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7305,7 +7423,7 @@ type CUserMessage_Inventory_Response_InventoryDetail struct {
 
 func (x *CUserMessage_Inventory_Response_InventoryDetail) Reset() {
 	*x = CUserMessage_Inventory_Response_InventoryDetail{}
-	mi := &file_usermessages_proto_msgTypes[103]
+	mi := &file_usermessages_proto_msgTypes[105]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7317,7 +7435,7 @@ func (x *CUserMessage_Inventory_Response_InventoryDetail) String() string {
 func (*CUserMessage_Inventory_Response_InventoryDetail) ProtoMessage() {}
 
 func (x *CUserMessage_Inventory_Response_InventoryDetail) ProtoReflect() protoreflect.Message {
-	mi := &file_usermessages_proto_msgTypes[103]
+	mi := &file_usermessages_proto_msgTypes[105]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7424,7 +7542,7 @@ type CUserMessageRequestDiagnostic_Diagnostic struct {
 
 func (x *CUserMessageRequestDiagnostic_Diagnostic) Reset() {
 	*x = CUserMessageRequestDiagnostic_Diagnostic{}
-	mi := &file_usermessages_proto_msgTypes[104]
+	mi := &file_usermessages_proto_msgTypes[106]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7436,7 +7554,7 @@ func (x *CUserMessageRequestDiagnostic_Diagnostic) String() string {
 func (*CUserMessageRequestDiagnostic_Diagnostic) ProtoMessage() {}
 
 func (x *CUserMessageRequestDiagnostic_Diagnostic) ProtoReflect() protoreflect.Message {
-	mi := &file_usermessages_proto_msgTypes[104]
+	mi := &file_usermessages_proto_msgTypes[106]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7566,7 +7684,7 @@ type CUserMessage_Diagnostic_Response_Diagnostic struct {
 
 func (x *CUserMessage_Diagnostic_Response_Diagnostic) Reset() {
 	*x = CUserMessage_Diagnostic_Response_Diagnostic{}
-	mi := &file_usermessages_proto_msgTypes[105]
+	mi := &file_usermessages_proto_msgTypes[107]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7578,7 +7696,7 @@ func (x *CUserMessage_Diagnostic_Response_Diagnostic) String() string {
 func (*CUserMessage_Diagnostic_Response_Diagnostic) ProtoMessage() {}
 
 func (x *CUserMessage_Diagnostic_Response_Diagnostic) ProtoReflect() protoreflect.Message {
-	mi := &file_usermessages_proto_msgTypes[105]
+	mi := &file_usermessages_proto_msgTypes[107]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7709,7 +7827,7 @@ type CUserMessage_NotifyResponseFound_Criteria struct {
 
 func (x *CUserMessage_NotifyResponseFound_Criteria) Reset() {
 	*x = CUserMessage_NotifyResponseFound_Criteria{}
-	mi := &file_usermessages_proto_msgTypes[106]
+	mi := &file_usermessages_proto_msgTypes[108]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7721,7 +7839,7 @@ func (x *CUserMessage_NotifyResponseFound_Criteria) String() string {
 func (*CUserMessage_NotifyResponseFound_Criteria) ProtoMessage() {}
 
 func (x *CUserMessage_NotifyResponseFound_Criteria) ProtoReflect() protoreflect.Message {
-	mi := &file_usermessages_proto_msgTypes[106]
+	mi := &file_usermessages_proto_msgTypes[108]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7918,10 +8036,10 @@ const file_usermessages_proto_rawDesc = "" +
 	"\x15Transition_DataDriven\x12\x1a\n" +
 	"\bfilename\x18\x01 \x01(\tR\bfilename\x12(\n" +
 	"\x10attach_ent_index\x18\x02 \x01(\x05R\x0eattachEntIndex\x12\x1a\n" +
-	"\bduration\x18\x03 \x01(\x02R\bduration\"\xe7R\n" +
+	"\bduration\x18\x03 \x01(\x02R\bduration\"\xafU\n" +
 	"\x18CUserMsg_ParticleManager\x12*\n" +
-	"\x04type\x18\x01 \x02(\x0e2\x16.dota.PARTICLE_MESSAGER\x04type\x12\x14\n" +
-	"\x05index\x18\x02 \x02(\rR\x05index\x12i\n" +
+	"\x04type\x18\x01 \x01(\x0e2\x16.dota.PARTICLE_MESSAGER\x04type\x12\x14\n" +
+	"\x05index\x18\x02 \x01(\rR\x05index\x12i\n" +
 	"\x16release_particle_index\x18\x03 \x01(\v23.dota.CUserMsg_ParticleManager.ReleaseParticleIndexR\x14releaseParticleIndex\x12V\n" +
 	"\x0fcreate_particle\x18\x04 \x01(\v2-.dota.CUserMsg_ParticleManager.CreateParticleR\x0ecreateParticle\x12Y\n" +
 	"\x10destroy_particle\x18\x05 \x01(\v2..dota.CUserMsg_ParticleManager.DestroyParticleR\x0fdestroyParticle\x12u\n" +
@@ -7963,7 +8081,9 @@ const file_usermessages_proto_rawDesc = "" +
 	"update_fan\x18( \x01(\v2(.dota.CUserMsg_ParticleManager.UpdateFanR\tupdateFan\x12v\n" +
 	"\x1bset_particle_cluster_growth\x18) \x01(\v27.dota.CUserMsg_ParticleManager.SetParticleClusterGrowthR\x18setParticleClusterGrowth\x12G\n" +
 	"\n" +
-	"remove_fan\x18* \x01(\v2(.dota.CUserMsg_ParticleManager.RemoveFanR\tremoveFan\x1a\x16\n" +
+	"remove_fan\x18* \x01(\v2(.dota.CUserMsg_ParticleManager.RemoveFanR\tremoveFan\x12Z\n" +
+	"\x11create_smoke_grid\x18+ \x01(\v2..dota.CUserMsg_ParticleManager.CreateSmokeGridR\x0fcreateSmokeGrid\x12c\n" +
+	"\x14set_override_texture\x18, \x01(\v21.dota.CUserMsg_ParticleManager.SetOverrideTextureR\x12setOverrideTexture\x1a\x16\n" +
 	"\x14ReleaseParticleIndex\x1a\xdd\x03\n" +
 	"\x0eCreateParticle\x12.\n" +
 	"\x13particle_name_index\x18\x01 \x01(\x06R\x11particleNameIndex\x12\x1f\n" +
@@ -8053,12 +8173,15 @@ const file_usermessages_proto_rawDesc = "" +
 	"model_name\x18\x02 \x01(\tR\tmodelName\x1ac\n" +
 	"\x17SetControlPointSnapshot\x12#\n" +
 	"\rcontrol_point\x18\x01 \x01(\x05R\fcontrolPoint\x12#\n" +
-	"\rsnapshot_name\x18\x02 \x01(\tR\fsnapshotName\x1a%\n" +
+	"\rsnapshot_name\x18\x02 \x01(\tR\fsnapshotName\x1aA\n" +
 	"\x0fSetParticleText\x12\x12\n" +
-	"\x04text\x18\x01 \x01(\tR\x04text\x1a_\n" +
+	"\x04text\x18\x01 \x01(\tR\x04text\x12\x1a\n" +
+	"\blocalize\x18\x02 \x01(\bR\blocalize\x1a_\n" +
 	"\x13SetTextureAttribute\x12%\n" +
 	"\x0eattribute_name\x18\x01 \x01(\tR\rattributeName\x12!\n" +
-	"\ftexture_name\x18\x02 \x01(\tR\vtextureName\x1a:\n" +
+	"\ftexture_name\x18\x02 \x01(\tR\vtextureName\x1a7\n" +
+	"\x12SetOverrideTexture\x12!\n" +
+	"\ftexture_name\x18\x01 \x01(\tR\vtextureName\x1a:\n" +
 	"\x19SetSceneObjectGenericFlag\x12\x1d\n" +
 	"\n" +
 	"flag_value\x18\x01 \x01(\bR\tflagValue\x1aF\n" +
@@ -8107,7 +8230,10 @@ const file_usermessages_proto_rawDesc = "" +
 	"\x0fprop_group_name\x18\x01 \x01(\tR\rpropGroupName\x12=\n" +
 	"\x1buse_high_quality_simulation\x18\x02 \x01(\bR\x18useHighQualitySimulation\x12,\n" +
 	"\x12max_particle_count\x18\x03 \x01(\rR\x10maxParticleCount\x1a\x13\n" +
-	"\x11DestroyPhysicsSim\x1a)\n" +
+	"\x11DestroyPhysicsSim\x1a0\n" +
+	"\x0fCreateSmokeGrid\x12\x1d\n" +
+	"\n" +
+	"vdata_name\x18\x01 \x01(\tR\tvdataName\x1a)\n" +
 	"\bSetVData\x12\x1d\n" +
 	"\n" +
 	"vdata_name\x18\x01 \x01(\tR\tvdataName\x1ae\n" +
@@ -8417,7 +8543,7 @@ const file_usermessages_proto_rawDesc = "" +
 	"ROLL_STATS\x10\x00\x12\x10\n" +
 	"\fROLL_CREDITS\x10\x01\x12\x17\n" +
 	"\x13ROLL_LATE_JOIN_LOGO\x10\x02\x12\x0f\n" +
-	"\vROLL_OUTTRO\x10\x03*\xea\x0f\n" +
+	"\vROLL_OUTTRO\x10\x03*\xd3\x10\n" +
 	"\x10PARTICLE_MESSAGE\x12&\n" +
 	"\"GAME_PARTICLE_MANAGER_EVENT_CREATE\x10\x00\x12&\n" +
 	"\"GAME_PARTICLE_MANAGER_EVENT_UPDATE\x10\x01\x12.\n" +
@@ -8459,7 +8585,9 @@ const file_usermessages_proto_rawDesc = "" +
 	"#GAME_PARTICLE_MANAGER_EVENT_ADD_FAN\x10$\x12*\n" +
 	"&GAME_PARTICLE_MANAGER_EVENT_UPDATE_FAN\x10%\x122\n" +
 	".GAME_PARTICLE_MANAGER_EVENT_SET_CLUSTER_GROWTH\x10&\x12*\n" +
-	"&GAME_PARTICLE_MANAGER_EVENT_REMOVE_FAN\x10'*t\n" +
+	"&GAME_PARTICLE_MANAGER_EVENT_REMOVE_FAN\x10'\x121\n" +
+	"-GAME_PARTICLE_MANAGER_EVENT_CREATE_SMOKE_GRID\x10(\x124\n" +
+	"0GAME_PARTICLE_MANAGER_EVENT_SET_OVERRIDE_TEXTURE\x10)*t\n" +
 	"\x10EHapticPulseType\x12\x1e\n" +
 	"\x1aVR_HAND_HAPTIC_PULSE_LIGHT\x10\x00\x12\x1f\n" +
 	"\x1bVR_HAND_HAPTIC_PULSE_MEDIUM\x10\x01\x12\x1f\n" +
@@ -8478,7 +8606,7 @@ func file_usermessages_proto_rawDescGZIP() []byte {
 }
 
 var file_usermessages_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
-var file_usermessages_proto_msgTypes = make([]protoimpl.MessageInfo, 107)
+var file_usermessages_proto_msgTypes = make([]protoimpl.MessageInfo, 109)
 var file_usermessages_proto_goTypes = []any{
 	(EBaseUserMessages)(0),                                                              // 0: dota.EBaseUserMessages
 	(EBaseEntityMessages)(0),                                                            // 1: dota.EBaseEntityMessages
@@ -8564,53 +8692,55 @@ var file_usermessages_proto_goTypes = []any{
 	(*CUserMsg_ParticleManager_SetControlPointSnapshot)(nil),                            // 81: dota.CUserMsg_ParticleManager.SetControlPointSnapshot
 	(*CUserMsg_ParticleManager_SetParticleText)(nil),                                    // 82: dota.CUserMsg_ParticleManager.SetParticleText
 	(*CUserMsg_ParticleManager_SetTextureAttribute)(nil),                                // 83: dota.CUserMsg_ParticleManager.SetTextureAttribute
-	(*CUserMsg_ParticleManager_SetSceneObjectGenericFlag)(nil),                          // 84: dota.CUserMsg_ParticleManager.SetSceneObjectGenericFlag
-	(*CUserMsg_ParticleManager_SetSceneObjectTintAndDesat)(nil),                         // 85: dota.CUserMsg_ParticleManager.SetSceneObjectTintAndDesat
-	(*CUserMsg_ParticleManager_ParticleSkipToTime)(nil),                                 // 86: dota.CUserMsg_ParticleManager.ParticleSkipToTime
-	(*CUserMsg_ParticleManager_ParticleCanFreeze)(nil),                                  // 87: dota.CUserMsg_ParticleManager.ParticleCanFreeze
-	(*CUserMsg_ParticleManager_ParticleFreezeTransitionOverride)(nil),                   // 88: dota.CUserMsg_ParticleManager.ParticleFreezeTransitionOverride
-	(*CUserMsg_ParticleManager_FreezeParticleInvolving)(nil),                            // 89: dota.CUserMsg_ParticleManager.FreezeParticleInvolving
-	(*CUserMsg_ParticleManager_AddModellistOverrideElement)(nil),                        // 90: dota.CUserMsg_ParticleManager.AddModellistOverrideElement
-	(*CUserMsg_ParticleManager_ClearModellistOverride)(nil),                             // 91: dota.CUserMsg_ParticleManager.ClearModellistOverride
-	(*CUserMsg_ParticleManager_SetParticleNamedValueContext)(nil),                       // 92: dota.CUserMsg_ParticleManager.SetParticleNamedValueContext
-	(*CUserMsg_ParticleManager_CreatePhysicsSim)(nil),                                   // 93: dota.CUserMsg_ParticleManager.CreatePhysicsSim
-	(*CUserMsg_ParticleManager_DestroyPhysicsSim)(nil),                                  // 94: dota.CUserMsg_ParticleManager.DestroyPhysicsSim
-	(*CUserMsg_ParticleManager_SetVData)(nil),                                           // 95: dota.CUserMsg_ParticleManager.SetVData
-	(*CUserMsg_ParticleManager_SetMaterialOverride)(nil),                                // 96: dota.CUserMsg_ParticleManager.SetMaterialOverride
-	(*CUserMsg_ParticleManager_AddFan)(nil),                                             // 97: dota.CUserMsg_ParticleManager.AddFan
-	(*CUserMsg_ParticleManager_UpdateFan)(nil),                                          // 98: dota.CUserMsg_ParticleManager.UpdateFan
-	(*CUserMsg_ParticleManager_RemoveFan)(nil),                                          // 99: dota.CUserMsg_ParticleManager.RemoveFan
-	(*CUserMsg_ParticleManager_SetParticleClusterGrowth)(nil),                           // 100: dota.CUserMsg_ParticleManager.SetParticleClusterGrowth
-	(*CUserMsg_ParticleManager_SetParticleNamedValueContext_FloatContextValue)(nil),     // 101: dota.CUserMsg_ParticleManager.SetParticleNamedValueContext.FloatContextValue
-	(*CUserMsg_ParticleManager_SetParticleNamedValueContext_VectorContextValue)(nil),    // 102: dota.CUserMsg_ParticleManager.SetParticleNamedValueContext.VectorContextValue
-	(*CUserMsg_ParticleManager_SetParticleNamedValueContext_TransformContextValue)(nil), // 103: dota.CUserMsg_ParticleManager.SetParticleNamedValueContext.TransformContextValue
-	(*CUserMsg_ParticleManager_SetParticleNamedValueContext_EHandleContext)(nil),        // 104: dota.CUserMsg_ParticleManager.SetParticleNamedValueContext.EHandleContext
-	(*CUserMessage_UtilMsg_Response_ItemDetail)(nil),                                    // 105: dota.CUserMessage_UtilMsg_Response.ItemDetail
-	(*CUserMessage_DllStatus_CVDiagnostic)(nil),                                         // 106: dota.CUserMessage_DllStatus.CVDiagnostic
-	(*CUserMessage_DllStatus_CModule)(nil),                                              // 107: dota.CUserMessage_DllStatus.CModule
-	(*CUserMessage_Inventory_Response_InventoryDetail)(nil),                             // 108: dota.CUserMessage_Inventory_Response.InventoryDetail
-	(*CUserMessageRequestDiagnostic_Diagnostic)(nil),                                    // 109: dota.CUserMessageRequestDiagnostic.Diagnostic
-	(*CUserMessage_Diagnostic_Response_Diagnostic)(nil),                                 // 110: dota.CUserMessage_Diagnostic_Response.Diagnostic
-	(*CUserMessage_NotifyResponseFound_Criteria)(nil),                                   // 111: dota.CUserMessage_NotifyResponseFound.Criteria
-	(*CMsgVector)(nil),                                                                  // 112: dota.CMsgVector
-	(*CEntityMsg)(nil),                                                                  // 113: dota.CEntityMsg
-	(*CMsgQAngle)(nil),                                                                  // 114: dota.CMsgQAngle
-	(*CMsgQuaternion)(nil),                                                              // 115: dota.CMsgQuaternion
+	(*CUserMsg_ParticleManager_SetOverrideTexture)(nil),                                 // 84: dota.CUserMsg_ParticleManager.SetOverrideTexture
+	(*CUserMsg_ParticleManager_SetSceneObjectGenericFlag)(nil),                          // 85: dota.CUserMsg_ParticleManager.SetSceneObjectGenericFlag
+	(*CUserMsg_ParticleManager_SetSceneObjectTintAndDesat)(nil),                         // 86: dota.CUserMsg_ParticleManager.SetSceneObjectTintAndDesat
+	(*CUserMsg_ParticleManager_ParticleSkipToTime)(nil),                                 // 87: dota.CUserMsg_ParticleManager.ParticleSkipToTime
+	(*CUserMsg_ParticleManager_ParticleCanFreeze)(nil),                                  // 88: dota.CUserMsg_ParticleManager.ParticleCanFreeze
+	(*CUserMsg_ParticleManager_ParticleFreezeTransitionOverride)(nil),                   // 89: dota.CUserMsg_ParticleManager.ParticleFreezeTransitionOverride
+	(*CUserMsg_ParticleManager_FreezeParticleInvolving)(nil),                            // 90: dota.CUserMsg_ParticleManager.FreezeParticleInvolving
+	(*CUserMsg_ParticleManager_AddModellistOverrideElement)(nil),                        // 91: dota.CUserMsg_ParticleManager.AddModellistOverrideElement
+	(*CUserMsg_ParticleManager_ClearModellistOverride)(nil),                             // 92: dota.CUserMsg_ParticleManager.ClearModellistOverride
+	(*CUserMsg_ParticleManager_SetParticleNamedValueContext)(nil),                       // 93: dota.CUserMsg_ParticleManager.SetParticleNamedValueContext
+	(*CUserMsg_ParticleManager_CreatePhysicsSim)(nil),                                   // 94: dota.CUserMsg_ParticleManager.CreatePhysicsSim
+	(*CUserMsg_ParticleManager_DestroyPhysicsSim)(nil),                                  // 95: dota.CUserMsg_ParticleManager.DestroyPhysicsSim
+	(*CUserMsg_ParticleManager_CreateSmokeGrid)(nil),                                    // 96: dota.CUserMsg_ParticleManager.CreateSmokeGrid
+	(*CUserMsg_ParticleManager_SetVData)(nil),                                           // 97: dota.CUserMsg_ParticleManager.SetVData
+	(*CUserMsg_ParticleManager_SetMaterialOverride)(nil),                                // 98: dota.CUserMsg_ParticleManager.SetMaterialOverride
+	(*CUserMsg_ParticleManager_AddFan)(nil),                                             // 99: dota.CUserMsg_ParticleManager.AddFan
+	(*CUserMsg_ParticleManager_UpdateFan)(nil),                                          // 100: dota.CUserMsg_ParticleManager.UpdateFan
+	(*CUserMsg_ParticleManager_RemoveFan)(nil),                                          // 101: dota.CUserMsg_ParticleManager.RemoveFan
+	(*CUserMsg_ParticleManager_SetParticleClusterGrowth)(nil),                           // 102: dota.CUserMsg_ParticleManager.SetParticleClusterGrowth
+	(*CUserMsg_ParticleManager_SetParticleNamedValueContext_FloatContextValue)(nil),     // 103: dota.CUserMsg_ParticleManager.SetParticleNamedValueContext.FloatContextValue
+	(*CUserMsg_ParticleManager_SetParticleNamedValueContext_VectorContextValue)(nil),    // 104: dota.CUserMsg_ParticleManager.SetParticleNamedValueContext.VectorContextValue
+	(*CUserMsg_ParticleManager_SetParticleNamedValueContext_TransformContextValue)(nil), // 105: dota.CUserMsg_ParticleManager.SetParticleNamedValueContext.TransformContextValue
+	(*CUserMsg_ParticleManager_SetParticleNamedValueContext_EHandleContext)(nil),        // 106: dota.CUserMsg_ParticleManager.SetParticleNamedValueContext.EHandleContext
+	(*CUserMessage_UtilMsg_Response_ItemDetail)(nil),                                    // 107: dota.CUserMessage_UtilMsg_Response.ItemDetail
+	(*CUserMessage_DllStatus_CVDiagnostic)(nil),                                         // 108: dota.CUserMessage_DllStatus.CVDiagnostic
+	(*CUserMessage_DllStatus_CModule)(nil),                                              // 109: dota.CUserMessage_DllStatus.CModule
+	(*CUserMessage_Inventory_Response_InventoryDetail)(nil),                             // 110: dota.CUserMessage_Inventory_Response.InventoryDetail
+	(*CUserMessageRequestDiagnostic_Diagnostic)(nil),                                    // 111: dota.CUserMessageRequestDiagnostic.Diagnostic
+	(*CUserMessage_Diagnostic_Response_Diagnostic)(nil),                                 // 112: dota.CUserMessage_Diagnostic_Response.Diagnostic
+	(*CUserMessage_NotifyResponseFound_Criteria)(nil),                                   // 113: dota.CUserMessage_NotifyResponseFound.Criteria
+	(*CMsgVector)(nil),                                                                  // 114: dota.CMsgVector
+	(*CEntityMsg)(nil),                                                                  // 115: dota.CEntityMsg
+	(*CMsgQAngle)(nil),                                                                  // 116: dota.CMsgQAngle
+	(*CMsgQuaternion)(nil),                                                              // 117: dota.CMsgQuaternion
 }
 var file_usermessages_proto_depIdxs = []int32{
 	12,  // 0: dota.CUserMessageShakeDir.shake:type_name -> dota.CUserMessageShake
-	112, // 1: dota.CUserMessageShakeDir.direction:type_name -> dota.CMsgVector
-	112, // 2: dota.CUserMessageScreenTilt.angle:type_name -> dota.CMsgVector
+	114, // 1: dota.CUserMessageShakeDir.direction:type_name -> dota.CMsgVector
+	114, // 2: dota.CUserMessageScreenTilt.angle:type_name -> dota.CMsgVector
 	2,   // 3: dota.CUserMessageCreditsMsg.rolltype:type_name -> dota.eRollType
-	113, // 4: dota.CEntityMessagePlayJingle.entity_msg:type_name -> dota.CEntityMsg
-	113, // 5: dota.CEntityMessageScreenOverlay.entity_msg:type_name -> dota.CEntityMsg
-	113, // 6: dota.CEntityMessageRemoveAllDecals.entity_msg:type_name -> dota.CEntityMsg
-	112, // 7: dota.CEntityMessagePropagateForce.impulse:type_name -> dota.CMsgVector
-	113, // 8: dota.CEntityMessagePropagateForce.entity_msg:type_name -> dota.CEntityMsg
-	112, // 9: dota.CEntityMessageDoSpark.origin:type_name -> dota.CMsgVector
-	113, // 10: dota.CEntityMessageDoSpark.entity_msg:type_name -> dota.CEntityMsg
-	114, // 11: dota.CEntityMessageFixAngle.angle:type_name -> dota.CMsgQAngle
-	113, // 12: dota.CEntityMessageFixAngle.entity_msg:type_name -> dota.CEntityMsg
+	115, // 4: dota.CEntityMessagePlayJingle.entity_msg:type_name -> dota.CEntityMsg
+	115, // 5: dota.CEntityMessageScreenOverlay.entity_msg:type_name -> dota.CEntityMsg
+	115, // 6: dota.CEntityMessageRemoveAllDecals.entity_msg:type_name -> dota.CEntityMsg
+	114, // 7: dota.CEntityMessagePropagateForce.impulse:type_name -> dota.CMsgVector
+	115, // 8: dota.CEntityMessagePropagateForce.entity_msg:type_name -> dota.CEntityMsg
+	114, // 9: dota.CEntityMessageDoSpark.origin:type_name -> dota.CMsgVector
+	115, // 10: dota.CEntityMessageDoSpark.entity_msg:type_name -> dota.CEntityMsg
+	116, // 11: dota.CEntityMessageFixAngle.angle:type_name -> dota.CMsgQAngle
+	115, // 12: dota.CEntityMessageFixAngle.entity_msg:type_name -> dota.CEntityMsg
 	61,  // 13: dota.CUserMessageCameraTransition.params_data_driven:type_name -> dota.CUserMessageCameraTransition.Transition_DataDriven
 	3,   // 14: dota.CUserMsg_ParticleManager.type:type_name -> dota.PARTICLE_MESSAGE
 	62,  // 15: dota.CUserMsg_ParticleManager.release_particle_index:type_name -> dota.CUserMsg_ParticleManager.ReleaseParticleIndex
@@ -8633,74 +8763,76 @@ var file_usermessages_proto_depIdxs = []int32{
 	80,  // 32: dota.CUserMsg_ParticleManager.set_control_point_model:type_name -> dota.CUserMsg_ParticleManager.SetControlPointModel
 	81,  // 33: dota.CUserMsg_ParticleManager.set_control_point_snapshot:type_name -> dota.CUserMsg_ParticleManager.SetControlPointSnapshot
 	83,  // 34: dota.CUserMsg_ParticleManager.set_texture_attribute:type_name -> dota.CUserMsg_ParticleManager.SetTextureAttribute
-	84,  // 35: dota.CUserMsg_ParticleManager.set_scene_object_generic_flag:type_name -> dota.CUserMsg_ParticleManager.SetSceneObjectGenericFlag
-	85,  // 36: dota.CUserMsg_ParticleManager.set_scene_object_tint_and_desat:type_name -> dota.CUserMsg_ParticleManager.SetSceneObjectTintAndDesat
+	85,  // 35: dota.CUserMsg_ParticleManager.set_scene_object_generic_flag:type_name -> dota.CUserMsg_ParticleManager.SetSceneObjectGenericFlag
+	86,  // 36: dota.CUserMsg_ParticleManager.set_scene_object_tint_and_desat:type_name -> dota.CUserMsg_ParticleManager.SetSceneObjectTintAndDesat
 	66,  // 37: dota.CUserMsg_ParticleManager.destroy_particle_named:type_name -> dota.CUserMsg_ParticleManager.DestroyParticleNamed
-	86,  // 38: dota.CUserMsg_ParticleManager.particle_skip_to_time:type_name -> dota.CUserMsg_ParticleManager.ParticleSkipToTime
-	87,  // 39: dota.CUserMsg_ParticleManager.particle_can_freeze:type_name -> dota.CUserMsg_ParticleManager.ParticleCanFreeze
-	92,  // 40: dota.CUserMsg_ParticleManager.set_named_value_context:type_name -> dota.CUserMsg_ParticleManager.SetParticleNamedValueContext
+	87,  // 38: dota.CUserMsg_ParticleManager.particle_skip_to_time:type_name -> dota.CUserMsg_ParticleManager.ParticleSkipToTime
+	88,  // 39: dota.CUserMsg_ParticleManager.particle_can_freeze:type_name -> dota.CUserMsg_ParticleManager.ParticleCanFreeze
+	93,  // 40: dota.CUserMsg_ParticleManager.set_named_value_context:type_name -> dota.CUserMsg_ParticleManager.SetParticleNamedValueContext
 	70,  // 41: dota.CUserMsg_ParticleManager.update_particle_transform:type_name -> dota.CUserMsg_ParticleManager.UpdateParticleTransform
-	88,  // 42: dota.CUserMsg_ParticleManager.particle_freeze_transition_override:type_name -> dota.CUserMsg_ParticleManager.ParticleFreezeTransitionOverride
-	89,  // 43: dota.CUserMsg_ParticleManager.freeze_particle_involving:type_name -> dota.CUserMsg_ParticleManager.FreezeParticleInvolving
-	90,  // 44: dota.CUserMsg_ParticleManager.add_modellist_override_element:type_name -> dota.CUserMsg_ParticleManager.AddModellistOverrideElement
-	91,  // 45: dota.CUserMsg_ParticleManager.clear_modellist_override:type_name -> dota.CUserMsg_ParticleManager.ClearModellistOverride
-	93,  // 46: dota.CUserMsg_ParticleManager.create_physics_sim:type_name -> dota.CUserMsg_ParticleManager.CreatePhysicsSim
-	94,  // 47: dota.CUserMsg_ParticleManager.destroy_physics_sim:type_name -> dota.CUserMsg_ParticleManager.DestroyPhysicsSim
-	95,  // 48: dota.CUserMsg_ParticleManager.set_vdata:type_name -> dota.CUserMsg_ParticleManager.SetVData
-	96,  // 49: dota.CUserMsg_ParticleManager.set_material_override:type_name -> dota.CUserMsg_ParticleManager.SetMaterialOverride
-	97,  // 50: dota.CUserMsg_ParticleManager.add_fan:type_name -> dota.CUserMsg_ParticleManager.AddFan
-	98,  // 51: dota.CUserMsg_ParticleManager.update_fan:type_name -> dota.CUserMsg_ParticleManager.UpdateFan
-	100, // 52: dota.CUserMsg_ParticleManager.set_particle_cluster_growth:type_name -> dota.CUserMsg_ParticleManager.SetParticleClusterGrowth
-	99,  // 53: dota.CUserMsg_ParticleManager.remove_fan:type_name -> dota.CUserMsg_ParticleManager.RemoveFan
-	105, // 54: dota.CUserMessage_UtilMsg_Response.itemdetails:type_name -> dota.CUserMessage_UtilMsg_Response.ItemDetail
-	106, // 55: dota.CUserMessage_DllStatus.diagnostics:type_name -> dota.CUserMessage_DllStatus.CVDiagnostic
-	107, // 56: dota.CUserMessage_DllStatus.modules:type_name -> dota.CUserMessage_DllStatus.CModule
-	108, // 57: dota.CUserMessage_Inventory_Response.inventories:type_name -> dota.CUserMessage_Inventory_Response.InventoryDetail
-	108, // 58: dota.CUserMessage_Inventory_Response.inventories2:type_name -> dota.CUserMessage_Inventory_Response.InventoryDetail
-	108, // 59: dota.CUserMessage_Inventory_Response.inventories3:type_name -> dota.CUserMessage_Inventory_Response.InventoryDetail
-	109, // 60: dota.CUserMessageRequestDiagnostic.diagnostics:type_name -> dota.CUserMessageRequestDiagnostic.Diagnostic
-	110, // 61: dota.CUserMessage_Diagnostic_Response.diagnostics:type_name -> dota.CUserMessage_Diagnostic_Response.Diagnostic
-	111, // 62: dota.CUserMessage_NotifyResponseFound.criteria:type_name -> dota.CUserMessage_NotifyResponseFound.Criteria
-	112, // 63: dota.CUserMessage_PlayResponseConditional.ent_origin:type_name -> dota.CMsgVector
-	112, // 64: dota.CUserMsg_ParticleManager.CreateParticle.aggregation_position:type_name -> dota.CMsgVector
-	112, // 65: dota.CUserMsg_ParticleManager.UpdateParticle_OBSOLETE.position:type_name -> dota.CMsgVector
-	112, // 66: dota.CUserMsg_ParticleManager.UpdateParticleFwd_OBSOLETE.forward:type_name -> dota.CMsgVector
-	112, // 67: dota.CUserMsg_ParticleManager.UpdateParticleOrient_OBSOLETE.forward:type_name -> dota.CMsgVector
-	112, // 68: dota.CUserMsg_ParticleManager.UpdateParticleOrient_OBSOLETE.deprecated_right:type_name -> dota.CMsgVector
-	112, // 69: dota.CUserMsg_ParticleManager.UpdateParticleOrient_OBSOLETE.up:type_name -> dota.CMsgVector
-	112, // 70: dota.CUserMsg_ParticleManager.UpdateParticleOrient_OBSOLETE.left:type_name -> dota.CMsgVector
-	112, // 71: dota.CUserMsg_ParticleManager.UpdateParticleTransform.position:type_name -> dota.CMsgVector
-	115, // 72: dota.CUserMsg_ParticleManager.UpdateParticleTransform.orientation:type_name -> dota.CMsgQuaternion
-	112, // 73: dota.CUserMsg_ParticleManager.UpdateParticleFallback.position:type_name -> dota.CMsgVector
-	112, // 74: dota.CUserMsg_ParticleManager.UpdateParticleOffset.origin_offset:type_name -> dota.CMsgVector
-	114, // 75: dota.CUserMsg_ParticleManager.UpdateParticleOffset.angle_offset:type_name -> dota.CMsgQAngle
-	112, // 76: dota.CUserMsg_ParticleManager.UpdateParticleEnt.fallback_position:type_name -> dota.CMsgVector
-	112, // 77: dota.CUserMsg_ParticleManager.UpdateParticleEnt.offset_position:type_name -> dota.CMsgVector
-	114, // 78: dota.CUserMsg_ParticleManager.UpdateParticleEnt.offset_angles:type_name -> dota.CMsgQAngle
-	112, // 79: dota.CUserMsg_ParticleManager.UpdateEntityPosition.position:type_name -> dota.CMsgVector
-	101, // 80: dota.CUserMsg_ParticleManager.SetParticleNamedValueContext.float_values:type_name -> dota.CUserMsg_ParticleManager.SetParticleNamedValueContext.FloatContextValue
-	102, // 81: dota.CUserMsg_ParticleManager.SetParticleNamedValueContext.vector_values:type_name -> dota.CUserMsg_ParticleManager.SetParticleNamedValueContext.VectorContextValue
-	103, // 82: dota.CUserMsg_ParticleManager.SetParticleNamedValueContext.transform_values:type_name -> dota.CUserMsg_ParticleManager.SetParticleNamedValueContext.TransformContextValue
-	104, // 83: dota.CUserMsg_ParticleManager.SetParticleNamedValueContext.ehandle_values:type_name -> dota.CUserMsg_ParticleManager.SetParticleNamedValueContext.EHandleContext
-	112, // 84: dota.CUserMsg_ParticleManager.AddFan.bounds_mins:type_name -> dota.CMsgVector
-	112, // 85: dota.CUserMsg_ParticleManager.AddFan.bounds_maxs:type_name -> dota.CMsgVector
-	112, // 86: dota.CUserMsg_ParticleManager.AddFan.fan_origin:type_name -> dota.CMsgVector
-	112, // 87: dota.CUserMsg_ParticleManager.AddFan.fan_origin_offset:type_name -> dota.CMsgVector
-	112, // 88: dota.CUserMsg_ParticleManager.AddFan.fan_direction:type_name -> dota.CMsgVector
-	112, // 89: dota.CUserMsg_ParticleManager.UpdateFan.fan_origin:type_name -> dota.CMsgVector
-	112, // 90: dota.CUserMsg_ParticleManager.UpdateFan.fan_origin_offset:type_name -> dota.CMsgVector
-	112, // 91: dota.CUserMsg_ParticleManager.UpdateFan.fan_direction:type_name -> dota.CMsgVector
-	112, // 92: dota.CUserMsg_ParticleManager.UpdateFan.bounds_mins:type_name -> dota.CMsgVector
-	112, // 93: dota.CUserMsg_ParticleManager.UpdateFan.bounds_maxs:type_name -> dota.CMsgVector
-	112, // 94: dota.CUserMsg_ParticleManager.SetParticleClusterGrowth.origin:type_name -> dota.CMsgVector
-	112, // 95: dota.CUserMsg_ParticleManager.SetParticleNamedValueContext.VectorContextValue.value:type_name -> dota.CMsgVector
-	114, // 96: dota.CUserMsg_ParticleManager.SetParticleNamedValueContext.TransformContextValue.angles:type_name -> dota.CMsgQAngle
-	112, // 97: dota.CUserMsg_ParticleManager.SetParticleNamedValueContext.TransformContextValue.translation:type_name -> dota.CMsgVector
-	98,  // [98:98] is the sub-list for method output_type
-	98,  // [98:98] is the sub-list for method input_type
-	98,  // [98:98] is the sub-list for extension type_name
-	98,  // [98:98] is the sub-list for extension extendee
-	0,   // [0:98] is the sub-list for field type_name
+	89,  // 42: dota.CUserMsg_ParticleManager.particle_freeze_transition_override:type_name -> dota.CUserMsg_ParticleManager.ParticleFreezeTransitionOverride
+	90,  // 43: dota.CUserMsg_ParticleManager.freeze_particle_involving:type_name -> dota.CUserMsg_ParticleManager.FreezeParticleInvolving
+	91,  // 44: dota.CUserMsg_ParticleManager.add_modellist_override_element:type_name -> dota.CUserMsg_ParticleManager.AddModellistOverrideElement
+	92,  // 45: dota.CUserMsg_ParticleManager.clear_modellist_override:type_name -> dota.CUserMsg_ParticleManager.ClearModellistOverride
+	94,  // 46: dota.CUserMsg_ParticleManager.create_physics_sim:type_name -> dota.CUserMsg_ParticleManager.CreatePhysicsSim
+	95,  // 47: dota.CUserMsg_ParticleManager.destroy_physics_sim:type_name -> dota.CUserMsg_ParticleManager.DestroyPhysicsSim
+	97,  // 48: dota.CUserMsg_ParticleManager.set_vdata:type_name -> dota.CUserMsg_ParticleManager.SetVData
+	98,  // 49: dota.CUserMsg_ParticleManager.set_material_override:type_name -> dota.CUserMsg_ParticleManager.SetMaterialOverride
+	99,  // 50: dota.CUserMsg_ParticleManager.add_fan:type_name -> dota.CUserMsg_ParticleManager.AddFan
+	100, // 51: dota.CUserMsg_ParticleManager.update_fan:type_name -> dota.CUserMsg_ParticleManager.UpdateFan
+	102, // 52: dota.CUserMsg_ParticleManager.set_particle_cluster_growth:type_name -> dota.CUserMsg_ParticleManager.SetParticleClusterGrowth
+	101, // 53: dota.CUserMsg_ParticleManager.remove_fan:type_name -> dota.CUserMsg_ParticleManager.RemoveFan
+	96,  // 54: dota.CUserMsg_ParticleManager.create_smoke_grid:type_name -> dota.CUserMsg_ParticleManager.CreateSmokeGrid
+	84,  // 55: dota.CUserMsg_ParticleManager.set_override_texture:type_name -> dota.CUserMsg_ParticleManager.SetOverrideTexture
+	107, // 56: dota.CUserMessage_UtilMsg_Response.itemdetails:type_name -> dota.CUserMessage_UtilMsg_Response.ItemDetail
+	108, // 57: dota.CUserMessage_DllStatus.diagnostics:type_name -> dota.CUserMessage_DllStatus.CVDiagnostic
+	109, // 58: dota.CUserMessage_DllStatus.modules:type_name -> dota.CUserMessage_DllStatus.CModule
+	110, // 59: dota.CUserMessage_Inventory_Response.inventories:type_name -> dota.CUserMessage_Inventory_Response.InventoryDetail
+	110, // 60: dota.CUserMessage_Inventory_Response.inventories2:type_name -> dota.CUserMessage_Inventory_Response.InventoryDetail
+	110, // 61: dota.CUserMessage_Inventory_Response.inventories3:type_name -> dota.CUserMessage_Inventory_Response.InventoryDetail
+	111, // 62: dota.CUserMessageRequestDiagnostic.diagnostics:type_name -> dota.CUserMessageRequestDiagnostic.Diagnostic
+	112, // 63: dota.CUserMessage_Diagnostic_Response.diagnostics:type_name -> dota.CUserMessage_Diagnostic_Response.Diagnostic
+	113, // 64: dota.CUserMessage_NotifyResponseFound.criteria:type_name -> dota.CUserMessage_NotifyResponseFound.Criteria
+	114, // 65: dota.CUserMessage_PlayResponseConditional.ent_origin:type_name -> dota.CMsgVector
+	114, // 66: dota.CUserMsg_ParticleManager.CreateParticle.aggregation_position:type_name -> dota.CMsgVector
+	114, // 67: dota.CUserMsg_ParticleManager.UpdateParticle_OBSOLETE.position:type_name -> dota.CMsgVector
+	114, // 68: dota.CUserMsg_ParticleManager.UpdateParticleFwd_OBSOLETE.forward:type_name -> dota.CMsgVector
+	114, // 69: dota.CUserMsg_ParticleManager.UpdateParticleOrient_OBSOLETE.forward:type_name -> dota.CMsgVector
+	114, // 70: dota.CUserMsg_ParticleManager.UpdateParticleOrient_OBSOLETE.deprecated_right:type_name -> dota.CMsgVector
+	114, // 71: dota.CUserMsg_ParticleManager.UpdateParticleOrient_OBSOLETE.up:type_name -> dota.CMsgVector
+	114, // 72: dota.CUserMsg_ParticleManager.UpdateParticleOrient_OBSOLETE.left:type_name -> dota.CMsgVector
+	114, // 73: dota.CUserMsg_ParticleManager.UpdateParticleTransform.position:type_name -> dota.CMsgVector
+	117, // 74: dota.CUserMsg_ParticleManager.UpdateParticleTransform.orientation:type_name -> dota.CMsgQuaternion
+	114, // 75: dota.CUserMsg_ParticleManager.UpdateParticleFallback.position:type_name -> dota.CMsgVector
+	114, // 76: dota.CUserMsg_ParticleManager.UpdateParticleOffset.origin_offset:type_name -> dota.CMsgVector
+	116, // 77: dota.CUserMsg_ParticleManager.UpdateParticleOffset.angle_offset:type_name -> dota.CMsgQAngle
+	114, // 78: dota.CUserMsg_ParticleManager.UpdateParticleEnt.fallback_position:type_name -> dota.CMsgVector
+	114, // 79: dota.CUserMsg_ParticleManager.UpdateParticleEnt.offset_position:type_name -> dota.CMsgVector
+	116, // 80: dota.CUserMsg_ParticleManager.UpdateParticleEnt.offset_angles:type_name -> dota.CMsgQAngle
+	114, // 81: dota.CUserMsg_ParticleManager.UpdateEntityPosition.position:type_name -> dota.CMsgVector
+	103, // 82: dota.CUserMsg_ParticleManager.SetParticleNamedValueContext.float_values:type_name -> dota.CUserMsg_ParticleManager.SetParticleNamedValueContext.FloatContextValue
+	104, // 83: dota.CUserMsg_ParticleManager.SetParticleNamedValueContext.vector_values:type_name -> dota.CUserMsg_ParticleManager.SetParticleNamedValueContext.VectorContextValue
+	105, // 84: dota.CUserMsg_ParticleManager.SetParticleNamedValueContext.transform_values:type_name -> dota.CUserMsg_ParticleManager.SetParticleNamedValueContext.TransformContextValue
+	106, // 85: dota.CUserMsg_ParticleManager.SetParticleNamedValueContext.ehandle_values:type_name -> dota.CUserMsg_ParticleManager.SetParticleNamedValueContext.EHandleContext
+	114, // 86: dota.CUserMsg_ParticleManager.AddFan.bounds_mins:type_name -> dota.CMsgVector
+	114, // 87: dota.CUserMsg_ParticleManager.AddFan.bounds_maxs:type_name -> dota.CMsgVector
+	114, // 88: dota.CUserMsg_ParticleManager.AddFan.fan_origin:type_name -> dota.CMsgVector
+	114, // 89: dota.CUserMsg_ParticleManager.AddFan.fan_origin_offset:type_name -> dota.CMsgVector
+	114, // 90: dota.CUserMsg_ParticleManager.AddFan.fan_direction:type_name -> dota.CMsgVector
+	114, // 91: dota.CUserMsg_ParticleManager.UpdateFan.fan_origin:type_name -> dota.CMsgVector
+	114, // 92: dota.CUserMsg_ParticleManager.UpdateFan.fan_origin_offset:type_name -> dota.CMsgVector
+	114, // 93: dota.CUserMsg_ParticleManager.UpdateFan.fan_direction:type_name -> dota.CMsgVector
+	114, // 94: dota.CUserMsg_ParticleManager.UpdateFan.bounds_mins:type_name -> dota.CMsgVector
+	114, // 95: dota.CUserMsg_ParticleManager.UpdateFan.bounds_maxs:type_name -> dota.CMsgVector
+	114, // 96: dota.CUserMsg_ParticleManager.SetParticleClusterGrowth.origin:type_name -> dota.CMsgVector
+	114, // 97: dota.CUserMsg_ParticleManager.SetParticleNamedValueContext.VectorContextValue.value:type_name -> dota.CMsgVector
+	116, // 98: dota.CUserMsg_ParticleManager.SetParticleNamedValueContext.TransformContextValue.angles:type_name -> dota.CMsgQAngle
+	114, // 99: dota.CUserMsg_ParticleManager.SetParticleNamedValueContext.TransformContextValue.translation:type_name -> dota.CMsgVector
+	100, // [100:100] is the sub-list for method output_type
+	100, // [100:100] is the sub-list for method input_type
+	100, // [100:100] is the sub-list for extension type_name
+	100, // [100:100] is the sub-list for extension extendee
+	0,   // [0:100] is the sub-list for field type_name
 }
 
 func init() { file_usermessages_proto_init() }
@@ -8715,7 +8847,7 @@ func file_usermessages_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_usermessages_proto_rawDesc), len(file_usermessages_proto_rawDesc)),
 			NumEnums:      5,
-			NumMessages:   107,
+			NumMessages:   109,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

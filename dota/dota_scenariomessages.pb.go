@@ -985,6 +985,7 @@ type CMsgDotaScenario_HeroAbility struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          *string                `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
 	Level         *int32                 `protobuf:"varint,2,opt,name=level" json:"level,omitempty"`
+	TomeUpgraded  *bool                  `protobuf:"varint,3,opt,name=tome_upgraded,json=tomeUpgraded" json:"tome_upgraded,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1031,6 +1032,13 @@ func (x *CMsgDotaScenario_HeroAbility) GetLevel() int32 {
 		return *x.Level
 	}
 	return 0
+}
+
+func (x *CMsgDotaScenario_HeroAbility) GetTomeUpgraded() bool {
+	if x != nil && x.TomeUpgraded != nil {
+		return *x.TomeUpgraded
+	}
+	return false
 }
 
 type CMsgDotaScenario_HeroNeutralChoice struct {
@@ -2286,7 +2294,7 @@ const file_dota_scenariomessages_proto_rawDesc = "" +
 	"\bowner_id\x18\x01 \x01(\x05R\aownerId\x12\x17\n" +
 	"\ateam_id\x18\x02 \x01(\x05R\x06teamId\"P\n" +
 	"\x18CScenarioEnt_DroppedItem\x124\n" +
-	"\bposition\x18\x01 \x01(\v2\x18.dota.CScenario_PositionR\bposition\"\xf54\n" +
+	"\bposition\x18\x01 \x01(\v2\x18.dota.CScenario_PositionR\bposition\"\x9a5\n" +
 	"\x10CMsgDotaScenario\x12\x19\n" +
 	"\blobby_id\x18\x01 \x01(\x04R\alobbyId\x12/\n" +
 	"\x04game\x18\x02 \x01(\v2\x1b.dota.CMsgDotaScenario.GameR\x04game\x121\n" +
@@ -2339,10 +2347,11 @@ const file_dota_scenariomessages_proto_rawDesc = "" +
 	"\x16received_pre_reduction\x18\x02 \x01(\x02R\x14receivedPreReduction\x126\n" +
 	"\x17received_post_reduction\x18\x03 \x01(\x02R\x15receivedPostReduction\x124\n" +
 	"\x16outgoing_pre_reduction\x18\x04 \x01(\x02R\x14outgoingPreReduction\x126\n" +
-	"\x17outgoing_post_reduction\x18\x05 \x01(\x02R\x15outgoingPostReduction\x1a7\n" +
+	"\x17outgoing_post_reduction\x18\x05 \x01(\x02R\x15outgoingPostReduction\x1a\\\n" +
 	"\vHeroAbility\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x14\n" +
-	"\x05level\x18\x02 \x01(\x05R\x05level\x1a\x86\x01\n" +
+	"\x05level\x18\x02 \x01(\x05R\x05level\x12#\n" +
+	"\rtome_upgraded\x18\x03 \x01(\bR\ftomeUpgraded\x1a\x86\x01\n" +
 	"\x11HeroNeutralChoice\x12!\n" +
 	"\fchoice_index\x18\x01 \x01(\x05R\vchoiceIndex\x12#\n" +
 	"\rartifact_name\x18\x02 \x01(\tR\fartifactName\x12)\n" +

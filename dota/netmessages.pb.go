@@ -668,7 +668,7 @@ type Bidirectional_Messages int32
 const (
 	Bidirectional_Messages_bi_RebroadcastGameEvent Bidirectional_Messages = 16
 	Bidirectional_Messages_bi_RebroadcastSource    Bidirectional_Messages = 17
-	Bidirectional_Messages_bi_GameEvent            Bidirectional_Messages = 18
+	Bidirectional_Messages_bi_GameEvent_DEPRECATED Bidirectional_Messages = 18
 	Bidirectional_Messages_bi_PredictionEvent      Bidirectional_Messages = 19
 )
 
@@ -677,13 +677,13 @@ var (
 	Bidirectional_Messages_name = map[int32]string{
 		16: "bi_RebroadcastGameEvent",
 		17: "bi_RebroadcastSource",
-		18: "bi_GameEvent",
+		18: "bi_GameEvent_DEPRECATED",
 		19: "bi_PredictionEvent",
 	}
 	Bidirectional_Messages_value = map[string]int32{
 		"bi_RebroadcastGameEvent": 16,
 		"bi_RebroadcastSource":    17,
-		"bi_GameEvent":            18,
+		"bi_GameEvent_DEPRECATED": 18,
 		"bi_PredictionEvent":      19,
 	}
 )
@@ -725,62 +725,6 @@ func (Bidirectional_Messages) EnumDescriptor() ([]byte, []int) {
 	return file_netmessages_proto_rawDescGZIP(), []int{9}
 }
 
-type Bidirectional_Messages_LowFrequency int32
-
-const (
-	Bidirectional_Messages_LowFrequency_bi_RelayInfo   Bidirectional_Messages_LowFrequency = 700
-	Bidirectional_Messages_LowFrequency_bi_RelayPacket Bidirectional_Messages_LowFrequency = 701
-)
-
-// Enum value maps for Bidirectional_Messages_LowFrequency.
-var (
-	Bidirectional_Messages_LowFrequency_name = map[int32]string{
-		700: "bi_RelayInfo",
-		701: "bi_RelayPacket",
-	}
-	Bidirectional_Messages_LowFrequency_value = map[string]int32{
-		"bi_RelayInfo":   700,
-		"bi_RelayPacket": 701,
-	}
-)
-
-func (x Bidirectional_Messages_LowFrequency) Enum() *Bidirectional_Messages_LowFrequency {
-	p := new(Bidirectional_Messages_LowFrequency)
-	*p = x
-	return p
-}
-
-func (x Bidirectional_Messages_LowFrequency) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (Bidirectional_Messages_LowFrequency) Descriptor() protoreflect.EnumDescriptor {
-	return file_netmessages_proto_enumTypes[10].Descriptor()
-}
-
-func (Bidirectional_Messages_LowFrequency) Type() protoreflect.EnumType {
-	return &file_netmessages_proto_enumTypes[10]
-}
-
-func (x Bidirectional_Messages_LowFrequency) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Do not use.
-func (x *Bidirectional_Messages_LowFrequency) UnmarshalJSON(b []byte) error {
-	num, err := protoimpl.X.UnmarshalJSONEnum(x.Descriptor(), b)
-	if err != nil {
-		return err
-	}
-	*x = Bidirectional_Messages_LowFrequency(num)
-	return nil
-}
-
-// Deprecated: Use Bidirectional_Messages_LowFrequency.Descriptor instead.
-func (Bidirectional_Messages_LowFrequency) EnumDescriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{10}
-}
-
 type ReplayEventTypeT int32
 
 const (
@@ -820,11 +764,11 @@ func (x ReplayEventTypeT) String() string {
 }
 
 func (ReplayEventTypeT) Descriptor() protoreflect.EnumDescriptor {
-	return file_netmessages_proto_enumTypes[11].Descriptor()
+	return file_netmessages_proto_enumTypes[10].Descriptor()
 }
 
 func (ReplayEventTypeT) Type() protoreflect.EnumType {
-	return &file_netmessages_proto_enumTypes[11]
+	return &file_netmessages_proto_enumTypes[10]
 }
 
 func (x ReplayEventTypeT) Number() protoreflect.EnumNumber {
@@ -843,7 +787,7 @@ func (x *ReplayEventTypeT) UnmarshalJSON(b []byte) error {
 
 // Deprecated: Use ReplayEventTypeT.Descriptor instead.
 func (ReplayEventTypeT) EnumDescriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{11}
+	return file_netmessages_proto_rawDescGZIP(), []int{10}
 }
 
 type CBidirMsg_PredictionEvent_ESyncType int32
@@ -876,11 +820,11 @@ func (x CBidirMsg_PredictionEvent_ESyncType) String() string {
 }
 
 func (CBidirMsg_PredictionEvent_ESyncType) Descriptor() protoreflect.EnumDescriptor {
-	return file_netmessages_proto_enumTypes[12].Descriptor()
+	return file_netmessages_proto_enumTypes[11].Descriptor()
 }
 
 func (CBidirMsg_PredictionEvent_ESyncType) Type() protoreflect.EnumType {
-	return &file_netmessages_proto_enumTypes[12]
+	return &file_netmessages_proto_enumTypes[11]
 }
 
 func (x CBidirMsg_PredictionEvent_ESyncType) Number() protoreflect.EnumNumber {
@@ -899,7 +843,7 @@ func (x *CBidirMsg_PredictionEvent_ESyncType) UnmarshalJSON(b []byte) error {
 
 // Deprecated: Use CBidirMsg_PredictionEvent_ESyncType.Descriptor instead.
 func (CBidirMsg_PredictionEvent_ESyncType) EnumDescriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{59, 0}
+	return file_netmessages_proto_rawDescGZIP(), []int{53, 0}
 }
 
 type CCLCMsg_ClientInfo struct {
@@ -1678,866 +1622,6 @@ func (x *CCLCMsg_RconServerDetails) GetToken() []byte {
 	return nil
 }
 
-type CMsgSource2SystemSpecs struct {
-	state                  protoimpl.MessageState `protogen:"open.v1"`
-	CpuId                  *string                `protobuf:"bytes,1,opt,name=cpu_id,json=cpuId" json:"cpu_id,omitempty"`
-	CpuBrand               *string                `protobuf:"bytes,2,opt,name=cpu_brand,json=cpuBrand" json:"cpu_brand,omitempty"`
-	CpuModel               *uint32                `protobuf:"varint,3,opt,name=cpu_model,json=cpuModel" json:"cpu_model,omitempty"`
-	CpuNumPhysical         *uint32                `protobuf:"varint,4,opt,name=cpu_num_physical,json=cpuNumPhysical" json:"cpu_num_physical,omitempty"`
-	RamPhysicalTotalMb     *uint32                `protobuf:"varint,21,opt,name=ram_physical_total_mb,json=ramPhysicalTotalMb" json:"ram_physical_total_mb,omitempty"`
-	GpuRendersystemDllName *string                `protobuf:"bytes,41,opt,name=gpu_rendersystem_dll_name,json=gpuRendersystemDllName" json:"gpu_rendersystem_dll_name,omitempty"`
-	GpuVendorId            *uint32                `protobuf:"varint,42,opt,name=gpu_vendor_id,json=gpuVendorId" json:"gpu_vendor_id,omitempty"`
-	GpuDriverName          *string                `protobuf:"bytes,43,opt,name=gpu_driver_name,json=gpuDriverName" json:"gpu_driver_name,omitempty"`
-	GpuDriverVersionHigh   *uint32                `protobuf:"varint,44,opt,name=gpu_driver_version_high,json=gpuDriverVersionHigh" json:"gpu_driver_version_high,omitempty"`
-	GpuDriverVersionLow    *uint32                `protobuf:"varint,45,opt,name=gpu_driver_version_low,json=gpuDriverVersionLow" json:"gpu_driver_version_low,omitempty"`
-	GpuDxSupportLevel      *uint32                `protobuf:"varint,46,opt,name=gpu_dx_support_level,json=gpuDxSupportLevel" json:"gpu_dx_support_level,omitempty"`
-	GpuTextureMemorySizeMb *uint32                `protobuf:"varint,47,opt,name=gpu_texture_memory_size_mb,json=gpuTextureMemorySizeMb" json:"gpu_texture_memory_size_mb,omitempty"`
-	BackbufferWidth        *uint32                `protobuf:"varint,51,opt,name=backbuffer_width,json=backbufferWidth" json:"backbuffer_width,omitempty"`
-	BackbufferHeight       *uint32                `protobuf:"varint,52,opt,name=backbuffer_height,json=backbufferHeight" json:"backbuffer_height,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
-}
-
-func (x *CMsgSource2SystemSpecs) Reset() {
-	*x = CMsgSource2SystemSpecs{}
-	mi := &file_netmessages_proto_msgTypes[14]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CMsgSource2SystemSpecs) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CMsgSource2SystemSpecs) ProtoMessage() {}
-
-func (x *CMsgSource2SystemSpecs) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[14]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CMsgSource2SystemSpecs.ProtoReflect.Descriptor instead.
-func (*CMsgSource2SystemSpecs) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{14}
-}
-
-func (x *CMsgSource2SystemSpecs) GetCpuId() string {
-	if x != nil && x.CpuId != nil {
-		return *x.CpuId
-	}
-	return ""
-}
-
-func (x *CMsgSource2SystemSpecs) GetCpuBrand() string {
-	if x != nil && x.CpuBrand != nil {
-		return *x.CpuBrand
-	}
-	return ""
-}
-
-func (x *CMsgSource2SystemSpecs) GetCpuModel() uint32 {
-	if x != nil && x.CpuModel != nil {
-		return *x.CpuModel
-	}
-	return 0
-}
-
-func (x *CMsgSource2SystemSpecs) GetCpuNumPhysical() uint32 {
-	if x != nil && x.CpuNumPhysical != nil {
-		return *x.CpuNumPhysical
-	}
-	return 0
-}
-
-func (x *CMsgSource2SystemSpecs) GetRamPhysicalTotalMb() uint32 {
-	if x != nil && x.RamPhysicalTotalMb != nil {
-		return *x.RamPhysicalTotalMb
-	}
-	return 0
-}
-
-func (x *CMsgSource2SystemSpecs) GetGpuRendersystemDllName() string {
-	if x != nil && x.GpuRendersystemDllName != nil {
-		return *x.GpuRendersystemDllName
-	}
-	return ""
-}
-
-func (x *CMsgSource2SystemSpecs) GetGpuVendorId() uint32 {
-	if x != nil && x.GpuVendorId != nil {
-		return *x.GpuVendorId
-	}
-	return 0
-}
-
-func (x *CMsgSource2SystemSpecs) GetGpuDriverName() string {
-	if x != nil && x.GpuDriverName != nil {
-		return *x.GpuDriverName
-	}
-	return ""
-}
-
-func (x *CMsgSource2SystemSpecs) GetGpuDriverVersionHigh() uint32 {
-	if x != nil && x.GpuDriverVersionHigh != nil {
-		return *x.GpuDriverVersionHigh
-	}
-	return 0
-}
-
-func (x *CMsgSource2SystemSpecs) GetGpuDriverVersionLow() uint32 {
-	if x != nil && x.GpuDriverVersionLow != nil {
-		return *x.GpuDriverVersionLow
-	}
-	return 0
-}
-
-func (x *CMsgSource2SystemSpecs) GetGpuDxSupportLevel() uint32 {
-	if x != nil && x.GpuDxSupportLevel != nil {
-		return *x.GpuDxSupportLevel
-	}
-	return 0
-}
-
-func (x *CMsgSource2SystemSpecs) GetGpuTextureMemorySizeMb() uint32 {
-	if x != nil && x.GpuTextureMemorySizeMb != nil {
-		return *x.GpuTextureMemorySizeMb
-	}
-	return 0
-}
-
-func (x *CMsgSource2SystemSpecs) GetBackbufferWidth() uint32 {
-	if x != nil && x.BackbufferWidth != nil {
-		return *x.BackbufferWidth
-	}
-	return 0
-}
-
-func (x *CMsgSource2SystemSpecs) GetBackbufferHeight() uint32 {
-	if x != nil && x.BackbufferHeight != nil {
-		return *x.BackbufferHeight
-	}
-	return 0
-}
-
-type CMsgSource2VProfLiteReportItem struct {
-	state                 protoimpl.MessageState `protogen:"open.v1"`
-	Name                  *string                `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
-	ActiveSamples         *uint32                `protobuf:"varint,2,opt,name=active_samples,json=activeSamples" json:"active_samples,omitempty"`
-	ActiveSamples_1Secmax *uint32                `protobuf:"varint,4,opt,name=active_samples_1secmax,json=activeSamples1secmax" json:"active_samples_1secmax,omitempty"`
-	UsecMax               *uint32                `protobuf:"varint,3,opt,name=usec_max,json=usecMax" json:"usec_max,omitempty"`
-	UsecAvgActive         *uint32                `protobuf:"varint,11,opt,name=usec_avg_active,json=usecAvgActive" json:"usec_avg_active,omitempty"`
-	UsecP50Active         *uint32                `protobuf:"varint,12,opt,name=usec_p50_active,json=usecP50Active" json:"usec_p50_active,omitempty"`
-	UsecP99Active         *uint32                `protobuf:"varint,13,opt,name=usec_p99_active,json=usecP99Active" json:"usec_p99_active,omitempty"`
-	UsecAvgAll            *uint32                `protobuf:"varint,21,opt,name=usec_avg_all,json=usecAvgAll" json:"usec_avg_all,omitempty"`
-	UsecP50All            *uint32                `protobuf:"varint,22,opt,name=usec_p50_all,json=usecP50All" json:"usec_p50_all,omitempty"`
-	UsecP99All            *uint32                `protobuf:"varint,23,opt,name=usec_p99_all,json=usecP99All" json:"usec_p99_all,omitempty"`
-	Usec_1SecmaxAvgActive *uint32                `protobuf:"varint,31,opt,name=usec_1secmax_avg_active,json=usec1secmaxAvgActive" json:"usec_1secmax_avg_active,omitempty"`
-	Usec_1SecmaxP50Active *uint32                `protobuf:"varint,32,opt,name=usec_1secmax_p50_active,json=usec1secmaxP50Active" json:"usec_1secmax_p50_active,omitempty"`
-	Usec_1SecmaxP95Active *uint32                `protobuf:"varint,33,opt,name=usec_1secmax_p95_active,json=usec1secmaxP95Active" json:"usec_1secmax_p95_active,omitempty"`
-	Usec_1SecmaxP99Active *uint32                `protobuf:"varint,34,opt,name=usec_1secmax_p99_active,json=usec1secmaxP99Active" json:"usec_1secmax_p99_active,omitempty"`
-	Usec_1SecmaxAvgAll    *uint32                `protobuf:"varint,41,opt,name=usec_1secmax_avg_all,json=usec1secmaxAvgAll" json:"usec_1secmax_avg_all,omitempty"`
-	Usec_1SecmaxP50All    *uint32                `protobuf:"varint,42,opt,name=usec_1secmax_p50_all,json=usec1secmaxP50All" json:"usec_1secmax_p50_all,omitempty"`
-	Usec_1SecmaxP95All    *uint32                `protobuf:"varint,43,opt,name=usec_1secmax_p95_all,json=usec1secmaxP95All" json:"usec_1secmax_p95_all,omitempty"`
-	Usec_1SecmaxP99All    *uint32                `protobuf:"varint,44,opt,name=usec_1secmax_p99_all,json=usec1secmaxP99All" json:"usec_1secmax_p99_all,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
-}
-
-func (x *CMsgSource2VProfLiteReportItem) Reset() {
-	*x = CMsgSource2VProfLiteReportItem{}
-	mi := &file_netmessages_proto_msgTypes[15]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CMsgSource2VProfLiteReportItem) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CMsgSource2VProfLiteReportItem) ProtoMessage() {}
-
-func (x *CMsgSource2VProfLiteReportItem) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[15]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CMsgSource2VProfLiteReportItem.ProtoReflect.Descriptor instead.
-func (*CMsgSource2VProfLiteReportItem) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{15}
-}
-
-func (x *CMsgSource2VProfLiteReportItem) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
-	}
-	return ""
-}
-
-func (x *CMsgSource2VProfLiteReportItem) GetActiveSamples() uint32 {
-	if x != nil && x.ActiveSamples != nil {
-		return *x.ActiveSamples
-	}
-	return 0
-}
-
-func (x *CMsgSource2VProfLiteReportItem) GetActiveSamples_1Secmax() uint32 {
-	if x != nil && x.ActiveSamples_1Secmax != nil {
-		return *x.ActiveSamples_1Secmax
-	}
-	return 0
-}
-
-func (x *CMsgSource2VProfLiteReportItem) GetUsecMax() uint32 {
-	if x != nil && x.UsecMax != nil {
-		return *x.UsecMax
-	}
-	return 0
-}
-
-func (x *CMsgSource2VProfLiteReportItem) GetUsecAvgActive() uint32 {
-	if x != nil && x.UsecAvgActive != nil {
-		return *x.UsecAvgActive
-	}
-	return 0
-}
-
-func (x *CMsgSource2VProfLiteReportItem) GetUsecP50Active() uint32 {
-	if x != nil && x.UsecP50Active != nil {
-		return *x.UsecP50Active
-	}
-	return 0
-}
-
-func (x *CMsgSource2VProfLiteReportItem) GetUsecP99Active() uint32 {
-	if x != nil && x.UsecP99Active != nil {
-		return *x.UsecP99Active
-	}
-	return 0
-}
-
-func (x *CMsgSource2VProfLiteReportItem) GetUsecAvgAll() uint32 {
-	if x != nil && x.UsecAvgAll != nil {
-		return *x.UsecAvgAll
-	}
-	return 0
-}
-
-func (x *CMsgSource2VProfLiteReportItem) GetUsecP50All() uint32 {
-	if x != nil && x.UsecP50All != nil {
-		return *x.UsecP50All
-	}
-	return 0
-}
-
-func (x *CMsgSource2VProfLiteReportItem) GetUsecP99All() uint32 {
-	if x != nil && x.UsecP99All != nil {
-		return *x.UsecP99All
-	}
-	return 0
-}
-
-func (x *CMsgSource2VProfLiteReportItem) GetUsec_1SecmaxAvgActive() uint32 {
-	if x != nil && x.Usec_1SecmaxAvgActive != nil {
-		return *x.Usec_1SecmaxAvgActive
-	}
-	return 0
-}
-
-func (x *CMsgSource2VProfLiteReportItem) GetUsec_1SecmaxP50Active() uint32 {
-	if x != nil && x.Usec_1SecmaxP50Active != nil {
-		return *x.Usec_1SecmaxP50Active
-	}
-	return 0
-}
-
-func (x *CMsgSource2VProfLiteReportItem) GetUsec_1SecmaxP95Active() uint32 {
-	if x != nil && x.Usec_1SecmaxP95Active != nil {
-		return *x.Usec_1SecmaxP95Active
-	}
-	return 0
-}
-
-func (x *CMsgSource2VProfLiteReportItem) GetUsec_1SecmaxP99Active() uint32 {
-	if x != nil && x.Usec_1SecmaxP99Active != nil {
-		return *x.Usec_1SecmaxP99Active
-	}
-	return 0
-}
-
-func (x *CMsgSource2VProfLiteReportItem) GetUsec_1SecmaxAvgAll() uint32 {
-	if x != nil && x.Usec_1SecmaxAvgAll != nil {
-		return *x.Usec_1SecmaxAvgAll
-	}
-	return 0
-}
-
-func (x *CMsgSource2VProfLiteReportItem) GetUsec_1SecmaxP50All() uint32 {
-	if x != nil && x.Usec_1SecmaxP50All != nil {
-		return *x.Usec_1SecmaxP50All
-	}
-	return 0
-}
-
-func (x *CMsgSource2VProfLiteReportItem) GetUsec_1SecmaxP95All() uint32 {
-	if x != nil && x.Usec_1SecmaxP95All != nil {
-		return *x.Usec_1SecmaxP95All
-	}
-	return 0
-}
-
-func (x *CMsgSource2VProfLiteReportItem) GetUsec_1SecmaxP99All() uint32 {
-	if x != nil && x.Usec_1SecmaxP99All != nil {
-		return *x.Usec_1SecmaxP99All
-	}
-	return 0
-}
-
-type CMsgSource2VProfLiteReport struct {
-	state           protoimpl.MessageState            `protogen:"open.v1"`
-	Total           *CMsgSource2VProfLiteReportItem   `protobuf:"bytes,1,opt,name=total" json:"total,omitempty"`
-	Items           []*CMsgSource2VProfLiteReportItem `protobuf:"bytes,2,rep,name=items" json:"items,omitempty"`
-	DiscardedFrames *uint32                           `protobuf:"varint,3,opt,name=discarded_frames,json=discardedFrames" json:"discarded_frames,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
-}
-
-func (x *CMsgSource2VProfLiteReport) Reset() {
-	*x = CMsgSource2VProfLiteReport{}
-	mi := &file_netmessages_proto_msgTypes[16]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CMsgSource2VProfLiteReport) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CMsgSource2VProfLiteReport) ProtoMessage() {}
-
-func (x *CMsgSource2VProfLiteReport) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[16]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CMsgSource2VProfLiteReport.ProtoReflect.Descriptor instead.
-func (*CMsgSource2VProfLiteReport) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{16}
-}
-
-func (x *CMsgSource2VProfLiteReport) GetTotal() *CMsgSource2VProfLiteReportItem {
-	if x != nil {
-		return x.Total
-	}
-	return nil
-}
-
-func (x *CMsgSource2VProfLiteReport) GetItems() []*CMsgSource2VProfLiteReportItem {
-	if x != nil {
-		return x.Items
-	}
-	return nil
-}
-
-func (x *CMsgSource2VProfLiteReport) GetDiscardedFrames() uint32 {
-	if x != nil && x.DiscardedFrames != nil {
-		return *x.DiscardedFrames
-	}
-	return 0
-}
-
-type CMsgSource2NetworkFlowQuality struct {
-	state                         protoimpl.MessageState `protogen:"open.v1"`
-	Duration                      *uint32                `protobuf:"varint,1,opt,name=duration" json:"duration,omitempty"`
-	BytesTotal                    *uint64                `protobuf:"varint,5,opt,name=bytes_total,json=bytesTotal" json:"bytes_total,omitempty"`
-	BytesTotalReliable            *uint64                `protobuf:"varint,6,opt,name=bytes_total_reliable,json=bytesTotalReliable" json:"bytes_total_reliable,omitempty"`
-	BytesTotalVoice               *uint64                `protobuf:"varint,7,opt,name=bytes_total_voice,json=bytesTotalVoice" json:"bytes_total_voice,omitempty"`
-	BytesSecP95                   *uint32                `protobuf:"varint,10,opt,name=bytes_sec_p95,json=bytesSecP95" json:"bytes_sec_p95,omitempty"`
-	BytesSecP99                   *uint32                `protobuf:"varint,11,opt,name=bytes_sec_p99,json=bytesSecP99" json:"bytes_sec_p99,omitempty"`
-	EnginemsgsTotal               *uint32                `protobuf:"varint,20,opt,name=enginemsgs_total,json=enginemsgsTotal" json:"enginemsgs_total,omitempty"`
-	EnginemsgsSecP95              *uint32                `protobuf:"varint,21,opt,name=enginemsgs_sec_p95,json=enginemsgsSecP95" json:"enginemsgs_sec_p95,omitempty"`
-	EnginemsgsSecP99              *uint32                `protobuf:"varint,22,opt,name=enginemsgs_sec_p99,json=enginemsgsSecP99" json:"enginemsgs_sec_p99,omitempty"`
-	NetframesTotal                *uint32                `protobuf:"varint,30,opt,name=netframes_total,json=netframesTotal" json:"netframes_total,omitempty"`
-	NetframesDropped              *uint32                `protobuf:"varint,31,opt,name=netframes_dropped,json=netframesDropped" json:"netframes_dropped,omitempty"`
-	NetframesOutoforder           *uint32                `protobuf:"varint,32,opt,name=netframes_outoforder,json=netframesOutoforder" json:"netframes_outoforder,omitempty"`
-	NetframesSizeExceedsMtu       *uint32                `protobuf:"varint,34,opt,name=netframes_size_exceeds_mtu,json=netframesSizeExceedsMtu" json:"netframes_size_exceeds_mtu,omitempty"`
-	NetframesSizeP95              *uint32                `protobuf:"varint,35,opt,name=netframes_size_p95,json=netframesSizeP95" json:"netframes_size_p95,omitempty"`
-	NetframesSizeP99              *uint32                `protobuf:"varint,36,opt,name=netframes_size_p99,json=netframesSizeP99" json:"netframes_size_p99,omitempty"`
-	TicksTotal                    *uint32                `protobuf:"varint,40,opt,name=ticks_total,json=ticksTotal" json:"ticks_total,omitempty"`
-	TicksGood                     *uint32                `protobuf:"varint,41,opt,name=ticks_good,json=ticksGood" json:"ticks_good,omitempty"`
-	TicksGoodAlmostLate           *uint32                `protobuf:"varint,42,opt,name=ticks_good_almost_late,json=ticksGoodAlmostLate" json:"ticks_good_almost_late,omitempty"`
-	TicksFixedDropped             *uint32                `protobuf:"varint,43,opt,name=ticks_fixed_dropped,json=ticksFixedDropped" json:"ticks_fixed_dropped,omitempty"`
-	TicksFixedLate                *uint32                `protobuf:"varint,44,opt,name=ticks_fixed_late,json=ticksFixedLate" json:"ticks_fixed_late,omitempty"`
-	TicksBadDropped               *uint32                `protobuf:"varint,45,opt,name=ticks_bad_dropped,json=ticksBadDropped" json:"ticks_bad_dropped,omitempty"`
-	TicksBadLate                  *uint32                `protobuf:"varint,46,opt,name=ticks_bad_late,json=ticksBadLate" json:"ticks_bad_late,omitempty"`
-	TicksBadOther                 *uint32                `protobuf:"varint,47,opt,name=ticks_bad_other,json=ticksBadOther" json:"ticks_bad_other,omitempty"`
-	TickMissrateSamplesTotal      *uint32                `protobuf:"varint,50,opt,name=tick_missrate_samples_total,json=tickMissrateSamplesTotal" json:"tick_missrate_samples_total,omitempty"`
-	TickMissrateSamplesPerfect    *uint32                `protobuf:"varint,51,opt,name=tick_missrate_samples_perfect,json=tickMissrateSamplesPerfect" json:"tick_missrate_samples_perfect,omitempty"`
-	TickMissrateSamplesPerfectnet *uint32                `protobuf:"varint,52,opt,name=tick_missrate_samples_perfectnet,json=tickMissrateSamplesPerfectnet" json:"tick_missrate_samples_perfectnet,omitempty"`
-	TickMissratenetP75X10         *uint32                `protobuf:"varint,53,opt,name=tick_missratenet_p75_x10,json=tickMissratenetP75X10" json:"tick_missratenet_p75_x10,omitempty"`
-	TickMissratenetP95X10         *uint32                `protobuf:"varint,54,opt,name=tick_missratenet_p95_x10,json=tickMissratenetP95X10" json:"tick_missratenet_p95_x10,omitempty"`
-	TickMissratenetP99X10         *uint32                `protobuf:"varint,55,opt,name=tick_missratenet_p99_x10,json=tickMissratenetP99X10" json:"tick_missratenet_p99_x10,omitempty"`
-	RecvmarginP1                  *int32                 `protobuf:"zigzag32,61,opt,name=recvmargin_p1,json=recvmarginP1" json:"recvmargin_p1,omitempty"`
-	RecvmarginP5                  *int32                 `protobuf:"zigzag32,62,opt,name=recvmargin_p5,json=recvmarginP5" json:"recvmargin_p5,omitempty"`
-	RecvmarginP25                 *int32                 `protobuf:"zigzag32,63,opt,name=recvmargin_p25,json=recvmarginP25" json:"recvmargin_p25,omitempty"`
-	RecvmarginP50                 *int32                 `protobuf:"zigzag32,64,opt,name=recvmargin_p50,json=recvmarginP50" json:"recvmargin_p50,omitempty"`
-	RecvmarginP75                 *int32                 `protobuf:"zigzag32,65,opt,name=recvmargin_p75,json=recvmarginP75" json:"recvmargin_p75,omitempty"`
-	RecvmarginP95                 *int32                 `protobuf:"zigzag32,66,opt,name=recvmargin_p95,json=recvmarginP95" json:"recvmargin_p95,omitempty"`
-	NetframeJitterP50             *uint32                `protobuf:"varint,70,opt,name=netframe_jitter_p50,json=netframeJitterP50" json:"netframe_jitter_p50,omitempty"`
-	NetframeJitterP99             *uint32                `protobuf:"varint,71,opt,name=netframe_jitter_p99,json=netframeJitterP99" json:"netframe_jitter_p99,omitempty"`
-	IntervalPeakjitterP50         *uint32                `protobuf:"varint,72,opt,name=interval_peakjitter_p50,json=intervalPeakjitterP50" json:"interval_peakjitter_p50,omitempty"`
-	IntervalPeakjitterP95         *uint32                `protobuf:"varint,73,opt,name=interval_peakjitter_p95,json=intervalPeakjitterP95" json:"interval_peakjitter_p95,omitempty"`
-	PacketMisdeliveryRateP50X4    *uint32                `protobuf:"varint,74,opt,name=packet_misdelivery_rate_p50_x4,json=packetMisdeliveryRateP50X4" json:"packet_misdelivery_rate_p50_x4,omitempty"`
-	PacketMisdeliveryRateP95X4    *uint32                `protobuf:"varint,75,opt,name=packet_misdelivery_rate_p95_x4,json=packetMisdeliveryRateP95X4" json:"packet_misdelivery_rate_p95_x4,omitempty"`
-	NetPingP5                     *uint32                `protobuf:"varint,80,opt,name=net_ping_p5,json=netPingP5" json:"net_ping_p5,omitempty"`
-	NetPingP50                    *uint32                `protobuf:"varint,81,opt,name=net_ping_p50,json=netPingP50" json:"net_ping_p50,omitempty"`
-	NetPingP95                    *uint32                `protobuf:"varint,82,opt,name=net_ping_p95,json=netPingP95" json:"net_ping_p95,omitempty"`
-	unknownFields                 protoimpl.UnknownFields
-	sizeCache                     protoimpl.SizeCache
-}
-
-func (x *CMsgSource2NetworkFlowQuality) Reset() {
-	*x = CMsgSource2NetworkFlowQuality{}
-	mi := &file_netmessages_proto_msgTypes[17]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CMsgSource2NetworkFlowQuality) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CMsgSource2NetworkFlowQuality) ProtoMessage() {}
-
-func (x *CMsgSource2NetworkFlowQuality) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[17]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CMsgSource2NetworkFlowQuality.ProtoReflect.Descriptor instead.
-func (*CMsgSource2NetworkFlowQuality) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{17}
-}
-
-func (x *CMsgSource2NetworkFlowQuality) GetDuration() uint32 {
-	if x != nil && x.Duration != nil {
-		return *x.Duration
-	}
-	return 0
-}
-
-func (x *CMsgSource2NetworkFlowQuality) GetBytesTotal() uint64 {
-	if x != nil && x.BytesTotal != nil {
-		return *x.BytesTotal
-	}
-	return 0
-}
-
-func (x *CMsgSource2NetworkFlowQuality) GetBytesTotalReliable() uint64 {
-	if x != nil && x.BytesTotalReliable != nil {
-		return *x.BytesTotalReliable
-	}
-	return 0
-}
-
-func (x *CMsgSource2NetworkFlowQuality) GetBytesTotalVoice() uint64 {
-	if x != nil && x.BytesTotalVoice != nil {
-		return *x.BytesTotalVoice
-	}
-	return 0
-}
-
-func (x *CMsgSource2NetworkFlowQuality) GetBytesSecP95() uint32 {
-	if x != nil && x.BytesSecP95 != nil {
-		return *x.BytesSecP95
-	}
-	return 0
-}
-
-func (x *CMsgSource2NetworkFlowQuality) GetBytesSecP99() uint32 {
-	if x != nil && x.BytesSecP99 != nil {
-		return *x.BytesSecP99
-	}
-	return 0
-}
-
-func (x *CMsgSource2NetworkFlowQuality) GetEnginemsgsTotal() uint32 {
-	if x != nil && x.EnginemsgsTotal != nil {
-		return *x.EnginemsgsTotal
-	}
-	return 0
-}
-
-func (x *CMsgSource2NetworkFlowQuality) GetEnginemsgsSecP95() uint32 {
-	if x != nil && x.EnginemsgsSecP95 != nil {
-		return *x.EnginemsgsSecP95
-	}
-	return 0
-}
-
-func (x *CMsgSource2NetworkFlowQuality) GetEnginemsgsSecP99() uint32 {
-	if x != nil && x.EnginemsgsSecP99 != nil {
-		return *x.EnginemsgsSecP99
-	}
-	return 0
-}
-
-func (x *CMsgSource2NetworkFlowQuality) GetNetframesTotal() uint32 {
-	if x != nil && x.NetframesTotal != nil {
-		return *x.NetframesTotal
-	}
-	return 0
-}
-
-func (x *CMsgSource2NetworkFlowQuality) GetNetframesDropped() uint32 {
-	if x != nil && x.NetframesDropped != nil {
-		return *x.NetframesDropped
-	}
-	return 0
-}
-
-func (x *CMsgSource2NetworkFlowQuality) GetNetframesOutoforder() uint32 {
-	if x != nil && x.NetframesOutoforder != nil {
-		return *x.NetframesOutoforder
-	}
-	return 0
-}
-
-func (x *CMsgSource2NetworkFlowQuality) GetNetframesSizeExceedsMtu() uint32 {
-	if x != nil && x.NetframesSizeExceedsMtu != nil {
-		return *x.NetframesSizeExceedsMtu
-	}
-	return 0
-}
-
-func (x *CMsgSource2NetworkFlowQuality) GetNetframesSizeP95() uint32 {
-	if x != nil && x.NetframesSizeP95 != nil {
-		return *x.NetframesSizeP95
-	}
-	return 0
-}
-
-func (x *CMsgSource2NetworkFlowQuality) GetNetframesSizeP99() uint32 {
-	if x != nil && x.NetframesSizeP99 != nil {
-		return *x.NetframesSizeP99
-	}
-	return 0
-}
-
-func (x *CMsgSource2NetworkFlowQuality) GetTicksTotal() uint32 {
-	if x != nil && x.TicksTotal != nil {
-		return *x.TicksTotal
-	}
-	return 0
-}
-
-func (x *CMsgSource2NetworkFlowQuality) GetTicksGood() uint32 {
-	if x != nil && x.TicksGood != nil {
-		return *x.TicksGood
-	}
-	return 0
-}
-
-func (x *CMsgSource2NetworkFlowQuality) GetTicksGoodAlmostLate() uint32 {
-	if x != nil && x.TicksGoodAlmostLate != nil {
-		return *x.TicksGoodAlmostLate
-	}
-	return 0
-}
-
-func (x *CMsgSource2NetworkFlowQuality) GetTicksFixedDropped() uint32 {
-	if x != nil && x.TicksFixedDropped != nil {
-		return *x.TicksFixedDropped
-	}
-	return 0
-}
-
-func (x *CMsgSource2NetworkFlowQuality) GetTicksFixedLate() uint32 {
-	if x != nil && x.TicksFixedLate != nil {
-		return *x.TicksFixedLate
-	}
-	return 0
-}
-
-func (x *CMsgSource2NetworkFlowQuality) GetTicksBadDropped() uint32 {
-	if x != nil && x.TicksBadDropped != nil {
-		return *x.TicksBadDropped
-	}
-	return 0
-}
-
-func (x *CMsgSource2NetworkFlowQuality) GetTicksBadLate() uint32 {
-	if x != nil && x.TicksBadLate != nil {
-		return *x.TicksBadLate
-	}
-	return 0
-}
-
-func (x *CMsgSource2NetworkFlowQuality) GetTicksBadOther() uint32 {
-	if x != nil && x.TicksBadOther != nil {
-		return *x.TicksBadOther
-	}
-	return 0
-}
-
-func (x *CMsgSource2NetworkFlowQuality) GetTickMissrateSamplesTotal() uint32 {
-	if x != nil && x.TickMissrateSamplesTotal != nil {
-		return *x.TickMissrateSamplesTotal
-	}
-	return 0
-}
-
-func (x *CMsgSource2NetworkFlowQuality) GetTickMissrateSamplesPerfect() uint32 {
-	if x != nil && x.TickMissrateSamplesPerfect != nil {
-		return *x.TickMissrateSamplesPerfect
-	}
-	return 0
-}
-
-func (x *CMsgSource2NetworkFlowQuality) GetTickMissrateSamplesPerfectnet() uint32 {
-	if x != nil && x.TickMissrateSamplesPerfectnet != nil {
-		return *x.TickMissrateSamplesPerfectnet
-	}
-	return 0
-}
-
-func (x *CMsgSource2NetworkFlowQuality) GetTickMissratenetP75X10() uint32 {
-	if x != nil && x.TickMissratenetP75X10 != nil {
-		return *x.TickMissratenetP75X10
-	}
-	return 0
-}
-
-func (x *CMsgSource2NetworkFlowQuality) GetTickMissratenetP95X10() uint32 {
-	if x != nil && x.TickMissratenetP95X10 != nil {
-		return *x.TickMissratenetP95X10
-	}
-	return 0
-}
-
-func (x *CMsgSource2NetworkFlowQuality) GetTickMissratenetP99X10() uint32 {
-	if x != nil && x.TickMissratenetP99X10 != nil {
-		return *x.TickMissratenetP99X10
-	}
-	return 0
-}
-
-func (x *CMsgSource2NetworkFlowQuality) GetRecvmarginP1() int32 {
-	if x != nil && x.RecvmarginP1 != nil {
-		return *x.RecvmarginP1
-	}
-	return 0
-}
-
-func (x *CMsgSource2NetworkFlowQuality) GetRecvmarginP5() int32 {
-	if x != nil && x.RecvmarginP5 != nil {
-		return *x.RecvmarginP5
-	}
-	return 0
-}
-
-func (x *CMsgSource2NetworkFlowQuality) GetRecvmarginP25() int32 {
-	if x != nil && x.RecvmarginP25 != nil {
-		return *x.RecvmarginP25
-	}
-	return 0
-}
-
-func (x *CMsgSource2NetworkFlowQuality) GetRecvmarginP50() int32 {
-	if x != nil && x.RecvmarginP50 != nil {
-		return *x.RecvmarginP50
-	}
-	return 0
-}
-
-func (x *CMsgSource2NetworkFlowQuality) GetRecvmarginP75() int32 {
-	if x != nil && x.RecvmarginP75 != nil {
-		return *x.RecvmarginP75
-	}
-	return 0
-}
-
-func (x *CMsgSource2NetworkFlowQuality) GetRecvmarginP95() int32 {
-	if x != nil && x.RecvmarginP95 != nil {
-		return *x.RecvmarginP95
-	}
-	return 0
-}
-
-func (x *CMsgSource2NetworkFlowQuality) GetNetframeJitterP50() uint32 {
-	if x != nil && x.NetframeJitterP50 != nil {
-		return *x.NetframeJitterP50
-	}
-	return 0
-}
-
-func (x *CMsgSource2NetworkFlowQuality) GetNetframeJitterP99() uint32 {
-	if x != nil && x.NetframeJitterP99 != nil {
-		return *x.NetframeJitterP99
-	}
-	return 0
-}
-
-func (x *CMsgSource2NetworkFlowQuality) GetIntervalPeakjitterP50() uint32 {
-	if x != nil && x.IntervalPeakjitterP50 != nil {
-		return *x.IntervalPeakjitterP50
-	}
-	return 0
-}
-
-func (x *CMsgSource2NetworkFlowQuality) GetIntervalPeakjitterP95() uint32 {
-	if x != nil && x.IntervalPeakjitterP95 != nil {
-		return *x.IntervalPeakjitterP95
-	}
-	return 0
-}
-
-func (x *CMsgSource2NetworkFlowQuality) GetPacketMisdeliveryRateP50X4() uint32 {
-	if x != nil && x.PacketMisdeliveryRateP50X4 != nil {
-		return *x.PacketMisdeliveryRateP50X4
-	}
-	return 0
-}
-
-func (x *CMsgSource2NetworkFlowQuality) GetPacketMisdeliveryRateP95X4() uint32 {
-	if x != nil && x.PacketMisdeliveryRateP95X4 != nil {
-		return *x.PacketMisdeliveryRateP95X4
-	}
-	return 0
-}
-
-func (x *CMsgSource2NetworkFlowQuality) GetNetPingP5() uint32 {
-	if x != nil && x.NetPingP5 != nil {
-		return *x.NetPingP5
-	}
-	return 0
-}
-
-func (x *CMsgSource2NetworkFlowQuality) GetNetPingP50() uint32 {
-	if x != nil && x.NetPingP50 != nil {
-		return *x.NetPingP50
-	}
-	return 0
-}
-
-func (x *CMsgSource2NetworkFlowQuality) GetNetPingP95() uint32 {
-	if x != nil && x.NetPingP95 != nil {
-		return *x.NetPingP95
-	}
-	return 0
-}
-
-type CMsgSource2PerfIntervalSample struct {
-	state            protoimpl.MessageState               `protogen:"open.v1"`
-	FrameTimeMaxMs   *float32                             `protobuf:"fixed32,1,opt,name=frame_time_max_ms,json=frameTimeMaxMs" json:"frame_time_max_ms,omitempty"`
-	FrameTimeAvgMs   *float32                             `protobuf:"fixed32,2,opt,name=frame_time_avg_ms,json=frameTimeAvgMs" json:"frame_time_avg_ms,omitempty"`
-	FrameTimeMinMs   *float32                             `protobuf:"fixed32,3,opt,name=frame_time_min_ms,json=frameTimeMinMs" json:"frame_time_min_ms,omitempty"`
-	FrameCount       *int32                               `protobuf:"varint,4,opt,name=frame_count,json=frameCount" json:"frame_count,omitempty"`
-	FrameTimeTotalMs *float32                             `protobuf:"fixed32,5,opt,name=frame_time_total_ms,json=frameTimeTotalMs" json:"frame_time_total_ms,omitempty"`
-	Tags             []*CMsgSource2PerfIntervalSample_Tag `protobuf:"bytes,6,rep,name=tags" json:"tags,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
-}
-
-func (x *CMsgSource2PerfIntervalSample) Reset() {
-	*x = CMsgSource2PerfIntervalSample{}
-	mi := &file_netmessages_proto_msgTypes[18]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CMsgSource2PerfIntervalSample) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CMsgSource2PerfIntervalSample) ProtoMessage() {}
-
-func (x *CMsgSource2PerfIntervalSample) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[18]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CMsgSource2PerfIntervalSample.ProtoReflect.Descriptor instead.
-func (*CMsgSource2PerfIntervalSample) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{18}
-}
-
-func (x *CMsgSource2PerfIntervalSample) GetFrameTimeMaxMs() float32 {
-	if x != nil && x.FrameTimeMaxMs != nil {
-		return *x.FrameTimeMaxMs
-	}
-	return 0
-}
-
-func (x *CMsgSource2PerfIntervalSample) GetFrameTimeAvgMs() float32 {
-	if x != nil && x.FrameTimeAvgMs != nil {
-		return *x.FrameTimeAvgMs
-	}
-	return 0
-}
-
-func (x *CMsgSource2PerfIntervalSample) GetFrameTimeMinMs() float32 {
-	if x != nil && x.FrameTimeMinMs != nil {
-		return *x.FrameTimeMinMs
-	}
-	return 0
-}
-
-func (x *CMsgSource2PerfIntervalSample) GetFrameCount() int32 {
-	if x != nil && x.FrameCount != nil {
-		return *x.FrameCount
-	}
-	return 0
-}
-
-func (x *CMsgSource2PerfIntervalSample) GetFrameTimeTotalMs() float32 {
-	if x != nil && x.FrameTimeTotalMs != nil {
-		return *x.FrameTimeTotalMs
-	}
-	return 0
-}
-
-func (x *CMsgSource2PerfIntervalSample) GetTags() []*CMsgSource2PerfIntervalSample_Tag {
-	if x != nil {
-		return x.Tags
-	}
-	return nil
-}
-
 type CCLCMsg_Diagnostic struct {
 	state          protoimpl.MessageState           `protogen:"open.v1"`
 	SystemSpecs    *CMsgSource2SystemSpecs          `protobuf:"bytes,1,opt,name=system_specs,json=systemSpecs" json:"system_specs,omitempty"`
@@ -2551,7 +1635,7 @@ type CCLCMsg_Diagnostic struct {
 
 func (x *CCLCMsg_Diagnostic) Reset() {
 	*x = CCLCMsg_Diagnostic{}
-	mi := &file_netmessages_proto_msgTypes[19]
+	mi := &file_netmessages_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2563,7 +1647,7 @@ func (x *CCLCMsg_Diagnostic) String() string {
 func (*CCLCMsg_Diagnostic) ProtoMessage() {}
 
 func (x *CCLCMsg_Diagnostic) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[19]
+	mi := &file_netmessages_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2576,7 +1660,7 @@ func (x *CCLCMsg_Diagnostic) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CCLCMsg_Diagnostic.ProtoReflect.Descriptor instead.
 func (*CCLCMsg_Diagnostic) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{19}
+	return file_netmessages_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *CCLCMsg_Diagnostic) GetSystemSpecs() *CMsgSource2SystemSpecs {
@@ -2614,98 +1698,6 @@ func (x *CCLCMsg_Diagnostic) GetPerfSamples() []*CMsgSource2PerfIntervalSample {
 	return nil
 }
 
-type CSource2Metrics_MatchPerfSummary_Notification struct {
-	state         protoimpl.MessageState                                  `protogen:"open.v1"`
-	Appid         *uint32                                                 `protobuf:"varint,1,opt,name=appid" json:"appid,omitempty"`
-	GameMode      *string                                                 `protobuf:"bytes,2,opt,name=game_mode,json=gameMode" json:"game_mode,omitempty"`
-	ServerBuildId *uint32                                                 `protobuf:"varint,3,opt,name=server_build_id,json=serverBuildId" json:"server_build_id,omitempty"`
-	ServerPopid   *uint32                                                 `protobuf:"fixed32,4,opt,name=server_popid,json=serverPopid" json:"server_popid,omitempty"`
-	ServerProfile *CMsgSource2VProfLiteReport                             `protobuf:"bytes,10,opt,name=server_profile,json=serverProfile" json:"server_profile,omitempty"`
-	Clients       []*CSource2Metrics_MatchPerfSummary_Notification_Client `protobuf:"bytes,11,rep,name=clients" json:"clients,omitempty"`
-	Map           *string                                                 `protobuf:"bytes,20,opt,name=map" json:"map,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CSource2Metrics_MatchPerfSummary_Notification) Reset() {
-	*x = CSource2Metrics_MatchPerfSummary_Notification{}
-	mi := &file_netmessages_proto_msgTypes[20]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CSource2Metrics_MatchPerfSummary_Notification) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CSource2Metrics_MatchPerfSummary_Notification) ProtoMessage() {}
-
-func (x *CSource2Metrics_MatchPerfSummary_Notification) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[20]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CSource2Metrics_MatchPerfSummary_Notification.ProtoReflect.Descriptor instead.
-func (*CSource2Metrics_MatchPerfSummary_Notification) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{20}
-}
-
-func (x *CSource2Metrics_MatchPerfSummary_Notification) GetAppid() uint32 {
-	if x != nil && x.Appid != nil {
-		return *x.Appid
-	}
-	return 0
-}
-
-func (x *CSource2Metrics_MatchPerfSummary_Notification) GetGameMode() string {
-	if x != nil && x.GameMode != nil {
-		return *x.GameMode
-	}
-	return ""
-}
-
-func (x *CSource2Metrics_MatchPerfSummary_Notification) GetServerBuildId() uint32 {
-	if x != nil && x.ServerBuildId != nil {
-		return *x.ServerBuildId
-	}
-	return 0
-}
-
-func (x *CSource2Metrics_MatchPerfSummary_Notification) GetServerPopid() uint32 {
-	if x != nil && x.ServerPopid != nil {
-		return *x.ServerPopid
-	}
-	return 0
-}
-
-func (x *CSource2Metrics_MatchPerfSummary_Notification) GetServerProfile() *CMsgSource2VProfLiteReport {
-	if x != nil {
-		return x.ServerProfile
-	}
-	return nil
-}
-
-func (x *CSource2Metrics_MatchPerfSummary_Notification) GetClients() []*CSource2Metrics_MatchPerfSummary_Notification_Client {
-	if x != nil {
-		return x.Clients
-	}
-	return nil
-}
-
-func (x *CSource2Metrics_MatchPerfSummary_Notification) GetMap() string {
-	if x != nil && x.Map != nil {
-		return *x.Map
-	}
-	return ""
-}
-
 type CSVCMsg_ServerInfo struct {
 	state               protoimpl.MessageState            `protogen:"open.v1"`
 	Protocol            *int32                            `protobuf:"varint,1,opt,name=protocol" json:"protocol,omitempty"`
@@ -2730,7 +1722,7 @@ type CSVCMsg_ServerInfo struct {
 
 func (x *CSVCMsg_ServerInfo) Reset() {
 	*x = CSVCMsg_ServerInfo{}
-	mi := &file_netmessages_proto_msgTypes[21]
+	mi := &file_netmessages_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2742,7 +1734,7 @@ func (x *CSVCMsg_ServerInfo) String() string {
 func (*CSVCMsg_ServerInfo) ProtoMessage() {}
 
 func (x *CSVCMsg_ServerInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[21]
+	mi := &file_netmessages_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2755,7 +1747,7 @@ func (x *CSVCMsg_ServerInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CSVCMsg_ServerInfo.ProtoReflect.Descriptor instead.
 func (*CSVCMsg_ServerInfo) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{21}
+	return file_netmessages_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *CSVCMsg_ServerInfo) GetProtocol() int32 {
@@ -2880,7 +1872,7 @@ type CSVCMsg_ClassInfo struct {
 
 func (x *CSVCMsg_ClassInfo) Reset() {
 	*x = CSVCMsg_ClassInfo{}
-	mi := &file_netmessages_proto_msgTypes[22]
+	mi := &file_netmessages_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2892,7 +1884,7 @@ func (x *CSVCMsg_ClassInfo) String() string {
 func (*CSVCMsg_ClassInfo) ProtoMessage() {}
 
 func (x *CSVCMsg_ClassInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[22]
+	mi := &file_netmessages_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2905,7 +1897,7 @@ func (x *CSVCMsg_ClassInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CSVCMsg_ClassInfo.ProtoReflect.Descriptor instead.
 func (*CSVCMsg_ClassInfo) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{22}
+	return file_netmessages_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *CSVCMsg_ClassInfo) GetCreateOnClient() bool {
@@ -2931,7 +1923,7 @@ type CSVCMsg_SetPause struct {
 
 func (x *CSVCMsg_SetPause) Reset() {
 	*x = CSVCMsg_SetPause{}
-	mi := &file_netmessages_proto_msgTypes[23]
+	mi := &file_netmessages_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2943,7 +1935,7 @@ func (x *CSVCMsg_SetPause) String() string {
 func (*CSVCMsg_SetPause) ProtoMessage() {}
 
 func (x *CSVCMsg_SetPause) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[23]
+	mi := &file_netmessages_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2956,7 +1948,7 @@ func (x *CSVCMsg_SetPause) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CSVCMsg_SetPause.ProtoReflect.Descriptor instead.
 func (*CSVCMsg_SetPause) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{23}
+	return file_netmessages_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *CSVCMsg_SetPause) GetPaused() bool {
@@ -2977,7 +1969,7 @@ type CSVCMsg_VoiceInit struct {
 
 func (x *CSVCMsg_VoiceInit) Reset() {
 	*x = CSVCMsg_VoiceInit{}
-	mi := &file_netmessages_proto_msgTypes[24]
+	mi := &file_netmessages_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2989,7 +1981,7 @@ func (x *CSVCMsg_VoiceInit) String() string {
 func (*CSVCMsg_VoiceInit) ProtoMessage() {}
 
 func (x *CSVCMsg_VoiceInit) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[24]
+	mi := &file_netmessages_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3002,7 +1994,7 @@ func (x *CSVCMsg_VoiceInit) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CSVCMsg_VoiceInit.ProtoReflect.Descriptor instead.
 func (*CSVCMsg_VoiceInit) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{24}
+	return file_netmessages_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *CSVCMsg_VoiceInit) GetQuality() int32 {
@@ -3035,7 +2027,7 @@ type CSVCMsg_Print struct {
 
 func (x *CSVCMsg_Print) Reset() {
 	*x = CSVCMsg_Print{}
-	mi := &file_netmessages_proto_msgTypes[25]
+	mi := &file_netmessages_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3047,7 +2039,7 @@ func (x *CSVCMsg_Print) String() string {
 func (*CSVCMsg_Print) ProtoMessage() {}
 
 func (x *CSVCMsg_Print) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[25]
+	mi := &file_netmessages_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3060,7 +2052,7 @@ func (x *CSVCMsg_Print) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CSVCMsg_Print.ProtoReflect.Descriptor instead.
 func (*CSVCMsg_Print) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{25}
+	return file_netmessages_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *CSVCMsg_Print) GetText() string {
@@ -3080,7 +2072,7 @@ type CSVCMsg_Sounds struct {
 
 func (x *CSVCMsg_Sounds) Reset() {
 	*x = CSVCMsg_Sounds{}
-	mi := &file_netmessages_proto_msgTypes[26]
+	mi := &file_netmessages_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3092,7 +2084,7 @@ func (x *CSVCMsg_Sounds) String() string {
 func (*CSVCMsg_Sounds) ProtoMessage() {}
 
 func (x *CSVCMsg_Sounds) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[26]
+	mi := &file_netmessages_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3105,7 +2097,7 @@ func (x *CSVCMsg_Sounds) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CSVCMsg_Sounds.ProtoReflect.Descriptor instead.
 func (*CSVCMsg_Sounds) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{26}
+	return file_netmessages_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *CSVCMsg_Sounds) GetReliableSound() bool {
@@ -3132,7 +2124,7 @@ type CSVCMsg_Prefetch struct {
 
 func (x *CSVCMsg_Prefetch) Reset() {
 	*x = CSVCMsg_Prefetch{}
-	mi := &file_netmessages_proto_msgTypes[27]
+	mi := &file_netmessages_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3144,7 +2136,7 @@ func (x *CSVCMsg_Prefetch) String() string {
 func (*CSVCMsg_Prefetch) ProtoMessage() {}
 
 func (x *CSVCMsg_Prefetch) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[27]
+	mi := &file_netmessages_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3157,7 +2149,7 @@ func (x *CSVCMsg_Prefetch) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CSVCMsg_Prefetch.ProtoReflect.Descriptor instead.
 func (*CSVCMsg_Prefetch) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{27}
+	return file_netmessages_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *CSVCMsg_Prefetch) GetSoundIndex() int32 {
@@ -3184,7 +2176,7 @@ type CSVCMsg_SetView struct {
 
 func (x *CSVCMsg_SetView) Reset() {
 	*x = CSVCMsg_SetView{}
-	mi := &file_netmessages_proto_msgTypes[28]
+	mi := &file_netmessages_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3196,7 +2188,7 @@ func (x *CSVCMsg_SetView) String() string {
 func (*CSVCMsg_SetView) ProtoMessage() {}
 
 func (x *CSVCMsg_SetView) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[28]
+	mi := &file_netmessages_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3209,7 +2201,7 @@ func (x *CSVCMsg_SetView) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CSVCMsg_SetView.ProtoReflect.Descriptor instead.
 func (*CSVCMsg_SetView) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{28}
+	return file_netmessages_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *CSVCMsg_SetView) GetEntityIndex() int32 {
@@ -3236,7 +2228,7 @@ type CSVCMsg_FixAngle struct {
 
 func (x *CSVCMsg_FixAngle) Reset() {
 	*x = CSVCMsg_FixAngle{}
-	mi := &file_netmessages_proto_msgTypes[29]
+	mi := &file_netmessages_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3248,7 +2240,7 @@ func (x *CSVCMsg_FixAngle) String() string {
 func (*CSVCMsg_FixAngle) ProtoMessage() {}
 
 func (x *CSVCMsg_FixAngle) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[29]
+	mi := &file_netmessages_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3261,7 +2253,7 @@ func (x *CSVCMsg_FixAngle) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CSVCMsg_FixAngle.ProtoReflect.Descriptor instead.
 func (*CSVCMsg_FixAngle) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{29}
+	return file_netmessages_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *CSVCMsg_FixAngle) GetRelative() bool {
@@ -3287,7 +2279,7 @@ type CSVCMsg_CrosshairAngle struct {
 
 func (x *CSVCMsg_CrosshairAngle) Reset() {
 	*x = CSVCMsg_CrosshairAngle{}
-	mi := &file_netmessages_proto_msgTypes[30]
+	mi := &file_netmessages_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3299,7 +2291,7 @@ func (x *CSVCMsg_CrosshairAngle) String() string {
 func (*CSVCMsg_CrosshairAngle) ProtoMessage() {}
 
 func (x *CSVCMsg_CrosshairAngle) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[30]
+	mi := &file_netmessages_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3312,7 +2304,7 @@ func (x *CSVCMsg_CrosshairAngle) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CSVCMsg_CrosshairAngle.ProtoReflect.Descriptor instead.
 func (*CSVCMsg_CrosshairAngle) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{30}
+	return file_netmessages_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *CSVCMsg_CrosshairAngle) GetAngle() *CMsgQAngle {
@@ -3335,7 +2327,7 @@ type CSVCMsg_BSPDecal struct {
 
 func (x *CSVCMsg_BSPDecal) Reset() {
 	*x = CSVCMsg_BSPDecal{}
-	mi := &file_netmessages_proto_msgTypes[31]
+	mi := &file_netmessages_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3347,7 +2339,7 @@ func (x *CSVCMsg_BSPDecal) String() string {
 func (*CSVCMsg_BSPDecal) ProtoMessage() {}
 
 func (x *CSVCMsg_BSPDecal) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[31]
+	mi := &file_netmessages_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3360,7 +2352,7 @@ func (x *CSVCMsg_BSPDecal) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CSVCMsg_BSPDecal.ProtoReflect.Descriptor instead.
 func (*CSVCMsg_BSPDecal) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{31}
+	return file_netmessages_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *CSVCMsg_BSPDecal) GetPos() *CMsgVector {
@@ -3409,7 +2401,7 @@ type CSVCMsg_SplitScreen struct {
 
 func (x *CSVCMsg_SplitScreen) Reset() {
 	*x = CSVCMsg_SplitScreen{}
-	mi := &file_netmessages_proto_msgTypes[32]
+	mi := &file_netmessages_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3421,7 +2413,7 @@ func (x *CSVCMsg_SplitScreen) String() string {
 func (*CSVCMsg_SplitScreen) ProtoMessage() {}
 
 func (x *CSVCMsg_SplitScreen) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[32]
+	mi := &file_netmessages_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3434,7 +2426,7 @@ func (x *CSVCMsg_SplitScreen) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CSVCMsg_SplitScreen.ProtoReflect.Descriptor instead.
 func (*CSVCMsg_SplitScreen) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{32}
+	return file_netmessages_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *CSVCMsg_SplitScreen) GetType() ESplitScreenMessageType {
@@ -3468,7 +2460,7 @@ type CSVCMsg_GetCvarValue struct {
 
 func (x *CSVCMsg_GetCvarValue) Reset() {
 	*x = CSVCMsg_GetCvarValue{}
-	mi := &file_netmessages_proto_msgTypes[33]
+	mi := &file_netmessages_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3480,7 +2472,7 @@ func (x *CSVCMsg_GetCvarValue) String() string {
 func (*CSVCMsg_GetCvarValue) ProtoMessage() {}
 
 func (x *CSVCMsg_GetCvarValue) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[33]
+	mi := &file_netmessages_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3493,7 +2485,7 @@ func (x *CSVCMsg_GetCvarValue) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CSVCMsg_GetCvarValue.ProtoReflect.Descriptor instead.
 func (*CSVCMsg_GetCvarValue) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{33}
+	return file_netmessages_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *CSVCMsg_GetCvarValue) GetCookie() int32 {
@@ -3520,7 +2512,7 @@ type CSVCMsg_Menu struct {
 
 func (x *CSVCMsg_Menu) Reset() {
 	*x = CSVCMsg_Menu{}
-	mi := &file_netmessages_proto_msgTypes[34]
+	mi := &file_netmessages_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3532,7 +2524,7 @@ func (x *CSVCMsg_Menu) String() string {
 func (*CSVCMsg_Menu) ProtoMessage() {}
 
 func (x *CSVCMsg_Menu) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[34]
+	mi := &file_netmessages_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3545,7 +2537,7 @@ func (x *CSVCMsg_Menu) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CSVCMsg_Menu.ProtoReflect.Descriptor instead.
 func (*CSVCMsg_Menu) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{34}
+	return file_netmessages_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *CSVCMsg_Menu) GetDialogType() int32 {
@@ -3573,7 +2565,7 @@ type CSVCMsg_UserMessage struct {
 
 func (x *CSVCMsg_UserMessage) Reset() {
 	*x = CSVCMsg_UserMessage{}
-	mi := &file_netmessages_proto_msgTypes[35]
+	mi := &file_netmessages_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3585,7 +2577,7 @@ func (x *CSVCMsg_UserMessage) String() string {
 func (*CSVCMsg_UserMessage) ProtoMessage() {}
 
 func (x *CSVCMsg_UserMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[35]
+	mi := &file_netmessages_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3598,7 +2590,7 @@ func (x *CSVCMsg_UserMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CSVCMsg_UserMessage.ProtoReflect.Descriptor instead.
 func (*CSVCMsg_UserMessage) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{35}
+	return file_netmessages_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *CSVCMsg_UserMessage) GetMsgType() int32 {
@@ -3634,7 +2626,7 @@ type CSVCMsg_SendTable struct {
 
 func (x *CSVCMsg_SendTable) Reset() {
 	*x = CSVCMsg_SendTable{}
-	mi := &file_netmessages_proto_msgTypes[36]
+	mi := &file_netmessages_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3646,7 +2638,7 @@ func (x *CSVCMsg_SendTable) String() string {
 func (*CSVCMsg_SendTable) ProtoMessage() {}
 
 func (x *CSVCMsg_SendTable) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[36]
+	mi := &file_netmessages_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3659,7 +2651,7 @@ func (x *CSVCMsg_SendTable) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CSVCMsg_SendTable.ProtoReflect.Descriptor instead.
 func (*CSVCMsg_SendTable) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{36}
+	return file_netmessages_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *CSVCMsg_SendTable) GetIsEnd() bool {
@@ -3699,7 +2691,7 @@ type CSVCMsg_GameEventList struct {
 
 func (x *CSVCMsg_GameEventList) Reset() {
 	*x = CSVCMsg_GameEventList{}
-	mi := &file_netmessages_proto_msgTypes[37]
+	mi := &file_netmessages_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3711,7 +2703,7 @@ func (x *CSVCMsg_GameEventList) String() string {
 func (*CSVCMsg_GameEventList) ProtoMessage() {}
 
 func (x *CSVCMsg_GameEventList) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[37]
+	mi := &file_netmessages_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3724,7 +2716,7 @@ func (x *CSVCMsg_GameEventList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CSVCMsg_GameEventList.ProtoReflect.Descriptor instead.
 func (*CSVCMsg_GameEventList) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{37}
+	return file_netmessages_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *CSVCMsg_GameEventList) GetDescriptors() []*CSVCMsg_GameEventListDescriptorT {
@@ -3764,7 +2756,7 @@ type CSVCMsg_PacketEntities struct {
 
 func (x *CSVCMsg_PacketEntities) Reset() {
 	*x = CSVCMsg_PacketEntities{}
-	mi := &file_netmessages_proto_msgTypes[38]
+	mi := &file_netmessages_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3776,7 +2768,7 @@ func (x *CSVCMsg_PacketEntities) String() string {
 func (*CSVCMsg_PacketEntities) ProtoMessage() {}
 
 func (x *CSVCMsg_PacketEntities) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[38]
+	mi := &file_netmessages_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3789,7 +2781,7 @@ func (x *CSVCMsg_PacketEntities) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CSVCMsg_PacketEntities.ProtoReflect.Descriptor instead.
 func (*CSVCMsg_PacketEntities) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{38}
+	return file_netmessages_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *CSVCMsg_PacketEntities) GetMaxEntries() int32 {
@@ -3957,7 +2949,7 @@ type CSVCMsg_TempEntities struct {
 
 func (x *CSVCMsg_TempEntities) Reset() {
 	*x = CSVCMsg_TempEntities{}
-	mi := &file_netmessages_proto_msgTypes[39]
+	mi := &file_netmessages_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3969,7 +2961,7 @@ func (x *CSVCMsg_TempEntities) String() string {
 func (*CSVCMsg_TempEntities) ProtoMessage() {}
 
 func (x *CSVCMsg_TempEntities) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[39]
+	mi := &file_netmessages_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3982,7 +2974,7 @@ func (x *CSVCMsg_TempEntities) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CSVCMsg_TempEntities.ProtoReflect.Descriptor instead.
 func (*CSVCMsg_TempEntities) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{39}
+	return file_netmessages_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *CSVCMsg_TempEntities) GetReliable() bool {
@@ -4024,7 +3016,7 @@ type CSVCMsg_CreateStringTable struct {
 
 func (x *CSVCMsg_CreateStringTable) Reset() {
 	*x = CSVCMsg_CreateStringTable{}
-	mi := &file_netmessages_proto_msgTypes[40]
+	mi := &file_netmessages_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4036,7 +3028,7 @@ func (x *CSVCMsg_CreateStringTable) String() string {
 func (*CSVCMsg_CreateStringTable) ProtoMessage() {}
 
 func (x *CSVCMsg_CreateStringTable) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[40]
+	mi := &file_netmessages_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4049,7 +3041,7 @@ func (x *CSVCMsg_CreateStringTable) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CSVCMsg_CreateStringTable.ProtoReflect.Descriptor instead.
 func (*CSVCMsg_CreateStringTable) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{40}
+	return file_netmessages_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *CSVCMsg_CreateStringTable) GetName() string {
@@ -4133,7 +3125,7 @@ type CSVCMsg_UpdateStringTable struct {
 
 func (x *CSVCMsg_UpdateStringTable) Reset() {
 	*x = CSVCMsg_UpdateStringTable{}
-	mi := &file_netmessages_proto_msgTypes[41]
+	mi := &file_netmessages_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4145,7 +3137,7 @@ func (x *CSVCMsg_UpdateStringTable) String() string {
 func (*CSVCMsg_UpdateStringTable) ProtoMessage() {}
 
 func (x *CSVCMsg_UpdateStringTable) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[41]
+	mi := &file_netmessages_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4158,7 +3150,7 @@ func (x *CSVCMsg_UpdateStringTable) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CSVCMsg_UpdateStringTable.ProtoReflect.Descriptor instead.
 func (*CSVCMsg_UpdateStringTable) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{41}
+	return file_netmessages_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *CSVCMsg_UpdateStringTable) GetTableId() int32 {
@@ -4197,7 +3189,7 @@ type CSVCMsg_VoiceData struct {
 
 func (x *CSVCMsg_VoiceData) Reset() {
 	*x = CSVCMsg_VoiceData{}
-	mi := &file_netmessages_proto_msgTypes[42]
+	mi := &file_netmessages_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4209,7 +3201,7 @@ func (x *CSVCMsg_VoiceData) String() string {
 func (*CSVCMsg_VoiceData) ProtoMessage() {}
 
 func (x *CSVCMsg_VoiceData) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[42]
+	mi := &file_netmessages_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4222,7 +3214,7 @@ func (x *CSVCMsg_VoiceData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CSVCMsg_VoiceData.ProtoReflect.Descriptor instead.
 func (*CSVCMsg_VoiceData) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{42}
+	return file_netmessages_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *CSVCMsg_VoiceData) GetAudio() *CMsgVoiceAudio {
@@ -4285,7 +3277,7 @@ type CSVCMsg_PacketReliable struct {
 
 func (x *CSVCMsg_PacketReliable) Reset() {
 	*x = CSVCMsg_PacketReliable{}
-	mi := &file_netmessages_proto_msgTypes[43]
+	mi := &file_netmessages_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4297,7 +3289,7 @@ func (x *CSVCMsg_PacketReliable) String() string {
 func (*CSVCMsg_PacketReliable) ProtoMessage() {}
 
 func (x *CSVCMsg_PacketReliable) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[43]
+	mi := &file_netmessages_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4310,7 +3302,7 @@ func (x *CSVCMsg_PacketReliable) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CSVCMsg_PacketReliable.ProtoReflect.Descriptor instead.
 func (*CSVCMsg_PacketReliable) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{43}
+	return file_netmessages_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *CSVCMsg_PacketReliable) GetTick() int32 {
@@ -4346,7 +3338,7 @@ type CSVCMsg_FullFrameSplit struct {
 
 func (x *CSVCMsg_FullFrameSplit) Reset() {
 	*x = CSVCMsg_FullFrameSplit{}
-	mi := &file_netmessages_proto_msgTypes[44]
+	mi := &file_netmessages_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4358,7 +3350,7 @@ func (x *CSVCMsg_FullFrameSplit) String() string {
 func (*CSVCMsg_FullFrameSplit) ProtoMessage() {}
 
 func (x *CSVCMsg_FullFrameSplit) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[44]
+	mi := &file_netmessages_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4371,7 +3363,7 @@ func (x *CSVCMsg_FullFrameSplit) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CSVCMsg_FullFrameSplit.ProtoReflect.Descriptor instead.
 func (*CSVCMsg_FullFrameSplit) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{44}
+	return file_netmessages_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *CSVCMsg_FullFrameSplit) GetTick() int32 {
@@ -4414,7 +3406,7 @@ type CSVCMsg_HLTVStatus struct {
 
 func (x *CSVCMsg_HLTVStatus) Reset() {
 	*x = CSVCMsg_HLTVStatus{}
-	mi := &file_netmessages_proto_msgTypes[45]
+	mi := &file_netmessages_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4426,7 +3418,7 @@ func (x *CSVCMsg_HLTVStatus) String() string {
 func (*CSVCMsg_HLTVStatus) ProtoMessage() {}
 
 func (x *CSVCMsg_HLTVStatus) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[45]
+	mi := &file_netmessages_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4439,7 +3431,7 @@ func (x *CSVCMsg_HLTVStatus) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CSVCMsg_HLTVStatus.ProtoReflect.Descriptor instead.
 func (*CSVCMsg_HLTVStatus) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{45}
+	return file_netmessages_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *CSVCMsg_HLTVStatus) GetMaster() string {
@@ -4479,7 +3471,7 @@ type CSVCMsg_ServerSteamID struct {
 
 func (x *CSVCMsg_ServerSteamID) Reset() {
 	*x = CSVCMsg_ServerSteamID{}
-	mi := &file_netmessages_proto_msgTypes[46]
+	mi := &file_netmessages_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4491,7 +3483,7 @@ func (x *CSVCMsg_ServerSteamID) String() string {
 func (*CSVCMsg_ServerSteamID) ProtoMessage() {}
 
 func (x *CSVCMsg_ServerSteamID) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[46]
+	mi := &file_netmessages_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4504,7 +3496,7 @@ func (x *CSVCMsg_ServerSteamID) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CSVCMsg_ServerSteamID.ProtoReflect.Descriptor instead.
 func (*CSVCMsg_ServerSteamID) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{46}
+	return file_netmessages_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *CSVCMsg_ServerSteamID) GetSteamId() uint64 {
@@ -4523,7 +3515,7 @@ type CSVCMsg_CmdKeyValues struct {
 
 func (x *CSVCMsg_CmdKeyValues) Reset() {
 	*x = CSVCMsg_CmdKeyValues{}
-	mi := &file_netmessages_proto_msgTypes[47]
+	mi := &file_netmessages_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4535,7 +3527,7 @@ func (x *CSVCMsg_CmdKeyValues) String() string {
 func (*CSVCMsg_CmdKeyValues) ProtoMessage() {}
 
 func (x *CSVCMsg_CmdKeyValues) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[47]
+	mi := &file_netmessages_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4548,7 +3540,7 @@ func (x *CSVCMsg_CmdKeyValues) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CSVCMsg_CmdKeyValues.ProtoReflect.Descriptor instead.
 func (*CSVCMsg_CmdKeyValues) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{47}
+	return file_netmessages_proto_rawDescGZIP(), []int{41}
 }
 
 func (x *CSVCMsg_CmdKeyValues) GetData() []byte {
@@ -4568,7 +3560,7 @@ type CSVCMsg_RconServerDetails struct {
 
 func (x *CSVCMsg_RconServerDetails) Reset() {
 	*x = CSVCMsg_RconServerDetails{}
-	mi := &file_netmessages_proto_msgTypes[48]
+	mi := &file_netmessages_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4580,7 +3572,7 @@ func (x *CSVCMsg_RconServerDetails) String() string {
 func (*CSVCMsg_RconServerDetails) ProtoMessage() {}
 
 func (x *CSVCMsg_RconServerDetails) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[48]
+	mi := &file_netmessages_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4593,7 +3585,7 @@ func (x *CSVCMsg_RconServerDetails) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CSVCMsg_RconServerDetails.ProtoReflect.Descriptor instead.
 func (*CSVCMsg_RconServerDetails) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{48}
+	return file_netmessages_proto_rawDescGZIP(), []int{42}
 }
 
 func (x *CSVCMsg_RconServerDetails) GetToken() []byte {
@@ -4620,7 +3612,7 @@ type CMsgIPCAddress struct {
 
 func (x *CMsgIPCAddress) Reset() {
 	*x = CMsgIPCAddress{}
-	mi := &file_netmessages_proto_msgTypes[49]
+	mi := &file_netmessages_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4632,7 +3624,7 @@ func (x *CMsgIPCAddress) String() string {
 func (*CMsgIPCAddress) ProtoMessage() {}
 
 func (x *CMsgIPCAddress) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[49]
+	mi := &file_netmessages_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4645,7 +3637,7 @@ func (x *CMsgIPCAddress) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CMsgIPCAddress.ProtoReflect.Descriptor instead.
 func (*CMsgIPCAddress) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{49}
+	return file_netmessages_proto_rawDescGZIP(), []int{43}
 }
 
 func (x *CMsgIPCAddress) GetComputerGuid() uint64 {
@@ -4676,7 +3668,7 @@ type CMsgServerPeer struct {
 
 func (x *CMsgServerPeer) Reset() {
 	*x = CMsgServerPeer{}
-	mi := &file_netmessages_proto_msgTypes[50]
+	mi := &file_netmessages_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4688,7 +3680,7 @@ func (x *CMsgServerPeer) String() string {
 func (*CMsgServerPeer) ProtoMessage() {}
 
 func (x *CMsgServerPeer) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[50]
+	mi := &file_netmessages_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4701,7 +3693,7 @@ func (x *CMsgServerPeer) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CMsgServerPeer.ProtoReflect.Descriptor instead.
 func (*CMsgServerPeer) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{50}
+	return file_netmessages_proto_rawDescGZIP(), []int{44}
 }
 
 func (x *CMsgServerPeer) GetPlayerSlot() int32 {
@@ -4755,7 +3747,7 @@ type CSVCMsg_PeerList struct {
 
 func (x *CSVCMsg_PeerList) Reset() {
 	*x = CSVCMsg_PeerList{}
-	mi := &file_netmessages_proto_msgTypes[51]
+	mi := &file_netmessages_proto_msgTypes[45]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4767,7 +3759,7 @@ func (x *CSVCMsg_PeerList) String() string {
 func (*CSVCMsg_PeerList) ProtoMessage() {}
 
 func (x *CSVCMsg_PeerList) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[51]
+	mi := &file_netmessages_proto_msgTypes[45]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4780,7 +3772,7 @@ func (x *CSVCMsg_PeerList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CSVCMsg_PeerList.ProtoReflect.Descriptor instead.
 func (*CSVCMsg_PeerList) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{51}
+	return file_netmessages_proto_rawDescGZIP(), []int{45}
 }
 
 func (x *CSVCMsg_PeerList) GetPeer() []*CMsgServerPeer {
@@ -4800,7 +3792,7 @@ type CSVCMsg_ClearAllStringTables struct {
 
 func (x *CSVCMsg_ClearAllStringTables) Reset() {
 	*x = CSVCMsg_ClearAllStringTables{}
-	mi := &file_netmessages_proto_msgTypes[52]
+	mi := &file_netmessages_proto_msgTypes[46]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4812,7 +3804,7 @@ func (x *CSVCMsg_ClearAllStringTables) String() string {
 func (*CSVCMsg_ClearAllStringTables) ProtoMessage() {}
 
 func (x *CSVCMsg_ClearAllStringTables) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[52]
+	mi := &file_netmessages_proto_msgTypes[46]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4825,7 +3817,7 @@ func (x *CSVCMsg_ClearAllStringTables) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CSVCMsg_ClearAllStringTables.ProtoReflect.Descriptor instead.
 func (*CSVCMsg_ClearAllStringTables) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{52}
+	return file_netmessages_proto_rawDescGZIP(), []int{46}
 }
 
 func (x *CSVCMsg_ClearAllStringTables) GetMapname() string {
@@ -4862,7 +3854,7 @@ type ProtoFlattenedSerializerFieldT struct {
 
 func (x *ProtoFlattenedSerializerFieldT) Reset() {
 	*x = ProtoFlattenedSerializerFieldT{}
-	mi := &file_netmessages_proto_msgTypes[53]
+	mi := &file_netmessages_proto_msgTypes[47]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4874,7 +3866,7 @@ func (x *ProtoFlattenedSerializerFieldT) String() string {
 func (*ProtoFlattenedSerializerFieldT) ProtoMessage() {}
 
 func (x *ProtoFlattenedSerializerFieldT) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[53]
+	mi := &file_netmessages_proto_msgTypes[47]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4887,7 +3879,7 @@ func (x *ProtoFlattenedSerializerFieldT) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProtoFlattenedSerializerFieldT.ProtoReflect.Descriptor instead.
 func (*ProtoFlattenedSerializerFieldT) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{53}
+	return file_netmessages_proto_rawDescGZIP(), []int{47}
 }
 
 func (x *ProtoFlattenedSerializerFieldT) GetVarTypeSym() int32 {
@@ -4985,7 +3977,7 @@ type ProtoFlattenedSerializerT struct {
 
 func (x *ProtoFlattenedSerializerT) Reset() {
 	*x = ProtoFlattenedSerializerT{}
-	mi := &file_netmessages_proto_msgTypes[54]
+	mi := &file_netmessages_proto_msgTypes[48]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4997,7 +3989,7 @@ func (x *ProtoFlattenedSerializerT) String() string {
 func (*ProtoFlattenedSerializerT) ProtoMessage() {}
 
 func (x *ProtoFlattenedSerializerT) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[54]
+	mi := &file_netmessages_proto_msgTypes[48]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5010,7 +4002,7 @@ func (x *ProtoFlattenedSerializerT) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProtoFlattenedSerializerT.ProtoReflect.Descriptor instead.
 func (*ProtoFlattenedSerializerT) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{54}
+	return file_netmessages_proto_rawDescGZIP(), []int{48}
 }
 
 func (x *ProtoFlattenedSerializerT) GetSerializerNameSym() int32 {
@@ -5045,7 +4037,7 @@ type CSVCMsg_FlattenedSerializer struct {
 
 func (x *CSVCMsg_FlattenedSerializer) Reset() {
 	*x = CSVCMsg_FlattenedSerializer{}
-	mi := &file_netmessages_proto_msgTypes[55]
+	mi := &file_netmessages_proto_msgTypes[49]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5057,7 +4049,7 @@ func (x *CSVCMsg_FlattenedSerializer) String() string {
 func (*CSVCMsg_FlattenedSerializer) ProtoMessage() {}
 
 func (x *CSVCMsg_FlattenedSerializer) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[55]
+	mi := &file_netmessages_proto_msgTypes[49]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5070,7 +4062,7 @@ func (x *CSVCMsg_FlattenedSerializer) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CSVCMsg_FlattenedSerializer.ProtoReflect.Descriptor instead.
 func (*CSVCMsg_FlattenedSerializer) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{55}
+	return file_netmessages_proto_rawDescGZIP(), []int{49}
 }
 
 func (x *CSVCMsg_FlattenedSerializer) GetSerializers() []*ProtoFlattenedSerializerT {
@@ -5103,7 +4095,7 @@ type CSVCMsg_StopSound struct {
 
 func (x *CSVCMsg_StopSound) Reset() {
 	*x = CSVCMsg_StopSound{}
-	mi := &file_netmessages_proto_msgTypes[56]
+	mi := &file_netmessages_proto_msgTypes[50]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5115,7 +4107,7 @@ func (x *CSVCMsg_StopSound) String() string {
 func (*CSVCMsg_StopSound) ProtoMessage() {}
 
 func (x *CSVCMsg_StopSound) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[56]
+	mi := &file_netmessages_proto_msgTypes[50]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5128,7 +4120,7 @@ func (x *CSVCMsg_StopSound) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CSVCMsg_StopSound.ProtoReflect.Descriptor instead.
 func (*CSVCMsg_StopSound) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{56}
+	return file_netmessages_proto_rawDescGZIP(), []int{50}
 }
 
 func (x *CSVCMsg_StopSound) GetGuid() uint32 {
@@ -5150,7 +4142,7 @@ type CBidirMsg_RebroadcastGameEvent struct {
 
 func (x *CBidirMsg_RebroadcastGameEvent) Reset() {
 	*x = CBidirMsg_RebroadcastGameEvent{}
-	mi := &file_netmessages_proto_msgTypes[57]
+	mi := &file_netmessages_proto_msgTypes[51]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5162,7 +4154,7 @@ func (x *CBidirMsg_RebroadcastGameEvent) String() string {
 func (*CBidirMsg_RebroadcastGameEvent) ProtoMessage() {}
 
 func (x *CBidirMsg_RebroadcastGameEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[57]
+	mi := &file_netmessages_proto_msgTypes[51]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5175,7 +4167,7 @@ func (x *CBidirMsg_RebroadcastGameEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CBidirMsg_RebroadcastGameEvent.ProtoReflect.Descriptor instead.
 func (*CBidirMsg_RebroadcastGameEvent) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{57}
+	return file_netmessages_proto_rawDescGZIP(), []int{51}
 }
 
 func (x *CBidirMsg_RebroadcastGameEvent) GetPosttoserver() bool {
@@ -5215,7 +4207,7 @@ type CBidirMsg_RebroadcastSource struct {
 
 func (x *CBidirMsg_RebroadcastSource) Reset() {
 	*x = CBidirMsg_RebroadcastSource{}
-	mi := &file_netmessages_proto_msgTypes[58]
+	mi := &file_netmessages_proto_msgTypes[52]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5227,7 +4219,7 @@ func (x *CBidirMsg_RebroadcastSource) String() string {
 func (*CBidirMsg_RebroadcastSource) ProtoMessage() {}
 
 func (x *CBidirMsg_RebroadcastSource) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[58]
+	mi := &file_netmessages_proto_msgTypes[52]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5240,7 +4232,7 @@ func (x *CBidirMsg_RebroadcastSource) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CBidirMsg_RebroadcastSource.ProtoReflect.Descriptor instead.
 func (*CBidirMsg_RebroadcastSource) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{58}
+	return file_netmessages_proto_rawDescGZIP(), []int{52}
 }
 
 func (x *CBidirMsg_RebroadcastSource) GetEventsource() int32 {
@@ -5252,8 +4244,8 @@ func (x *CBidirMsg_RebroadcastSource) GetEventsource() int32 {
 
 type CBidirMsg_PredictionEvent struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	EventId       *uint32                `protobuf:"varint,1,req,name=event_id,json=eventId" json:"event_id,omitempty"`
-	EventData     []byte                 `protobuf:"bytes,2,req,name=event_data,json=eventData" json:"event_data,omitempty"`
+	EventId       *uint32                `protobuf:"varint,1,opt,name=event_id,json=eventId" json:"event_id,omitempty"`
+	EventData     []byte                 `protobuf:"bytes,2,opt,name=event_data,json=eventData" json:"event_data,omitempty"`
 	SyncType      *uint32                `protobuf:"varint,3,opt,name=sync_type,json=syncType" json:"sync_type,omitempty"`
 	SyncValUint32 *uint32                `protobuf:"varint,4,opt,name=sync_val_uint32,json=syncValUint32" json:"sync_val_uint32,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -5262,7 +4254,7 @@ type CBidirMsg_PredictionEvent struct {
 
 func (x *CBidirMsg_PredictionEvent) Reset() {
 	*x = CBidirMsg_PredictionEvent{}
-	mi := &file_netmessages_proto_msgTypes[59]
+	mi := &file_netmessages_proto_msgTypes[53]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5274,7 +4266,7 @@ func (x *CBidirMsg_PredictionEvent) String() string {
 func (*CBidirMsg_PredictionEvent) ProtoMessage() {}
 
 func (x *CBidirMsg_PredictionEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[59]
+	mi := &file_netmessages_proto_msgTypes[53]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5287,7 +4279,7 @@ func (x *CBidirMsg_PredictionEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CBidirMsg_PredictionEvent.ProtoReflect.Descriptor instead.
 func (*CBidirMsg_PredictionEvent) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{59}
+	return file_netmessages_proto_rawDescGZIP(), []int{53}
 }
 
 func (x *CBidirMsg_PredictionEvent) GetEventId() uint32 {
@@ -5351,7 +4343,7 @@ type CMsgServerNetworkStats struct {
 
 func (x *CMsgServerNetworkStats) Reset() {
 	*x = CMsgServerNetworkStats{}
-	mi := &file_netmessages_proto_msgTypes[60]
+	mi := &file_netmessages_proto_msgTypes[54]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5363,7 +4355,7 @@ func (x *CMsgServerNetworkStats) String() string {
 func (*CMsgServerNetworkStats) ProtoMessage() {}
 
 func (x *CMsgServerNetworkStats) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[60]
+	mi := &file_netmessages_proto_msgTypes[54]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5376,7 +4368,7 @@ func (x *CMsgServerNetworkStats) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CMsgServerNetworkStats.ProtoReflect.Descriptor instead.
 func (*CMsgServerNetworkStats) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{60}
+	return file_netmessages_proto_rawDescGZIP(), []int{54}
 }
 
 func (x *CMsgServerNetworkStats) GetDedicated() bool {
@@ -5570,7 +4562,7 @@ type CSVCMsg_HltvReplay struct {
 
 func (x *CSVCMsg_HltvReplay) Reset() {
 	*x = CSVCMsg_HltvReplay{}
-	mi := &file_netmessages_proto_msgTypes[61]
+	mi := &file_netmessages_proto_msgTypes[55]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5582,7 +4574,7 @@ func (x *CSVCMsg_HltvReplay) String() string {
 func (*CSVCMsg_HltvReplay) ProtoMessage() {}
 
 func (x *CSVCMsg_HltvReplay) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[61]
+	mi := &file_netmessages_proto_msgTypes[55]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5595,7 +4587,7 @@ func (x *CSVCMsg_HltvReplay) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CSVCMsg_HltvReplay.ProtoReflect.Descriptor instead.
 func (*CSVCMsg_HltvReplay) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{61}
+	return file_netmessages_proto_rawDescGZIP(), []int{55}
 }
 
 func (x *CSVCMsg_HltvReplay) GetDelay() int32 {
@@ -5667,7 +4659,7 @@ type CCLCMsg_HltvReplay struct {
 
 func (x *CCLCMsg_HltvReplay) Reset() {
 	*x = CCLCMsg_HltvReplay{}
-	mi := &file_netmessages_proto_msgTypes[62]
+	mi := &file_netmessages_proto_msgTypes[56]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5679,7 +4671,7 @@ func (x *CCLCMsg_HltvReplay) String() string {
 func (*CCLCMsg_HltvReplay) ProtoMessage() {}
 
 func (x *CCLCMsg_HltvReplay) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[62]
+	mi := &file_netmessages_proto_msgTypes[56]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5692,7 +4684,7 @@ func (x *CCLCMsg_HltvReplay) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CCLCMsg_HltvReplay.ProtoReflect.Descriptor instead.
 func (*CCLCMsg_HltvReplay) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{62}
+	return file_netmessages_proto_rawDescGZIP(), []int{56}
 }
 
 func (x *CCLCMsg_HltvReplay) GetRequest() int32 {
@@ -5739,7 +4731,7 @@ type CSVCMsg_Broadcast_Command struct {
 
 func (x *CSVCMsg_Broadcast_Command) Reset() {
 	*x = CSVCMsg_Broadcast_Command{}
-	mi := &file_netmessages_proto_msgTypes[63]
+	mi := &file_netmessages_proto_msgTypes[57]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5751,7 +4743,7 @@ func (x *CSVCMsg_Broadcast_Command) String() string {
 func (*CSVCMsg_Broadcast_Command) ProtoMessage() {}
 
 func (x *CSVCMsg_Broadcast_Command) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[63]
+	mi := &file_netmessages_proto_msgTypes[57]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5764,7 +4756,7 @@ func (x *CSVCMsg_Broadcast_Command) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CSVCMsg_Broadcast_Command.ProtoReflect.Descriptor instead.
 func (*CSVCMsg_Broadcast_Command) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{63}
+	return file_netmessages_proto_rawDescGZIP(), []int{57}
 }
 
 func (x *CSVCMsg_Broadcast_Command) GetCmd() string {
@@ -5790,7 +4782,7 @@ type CCLCMsg_HltvFixupOperatorTick struct {
 
 func (x *CCLCMsg_HltvFixupOperatorTick) Reset() {
 	*x = CCLCMsg_HltvFixupOperatorTick{}
-	mi := &file_netmessages_proto_msgTypes[64]
+	mi := &file_netmessages_proto_msgTypes[58]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5802,7 +4794,7 @@ func (x *CCLCMsg_HltvFixupOperatorTick) String() string {
 func (*CCLCMsg_HltvFixupOperatorTick) ProtoMessage() {}
 
 func (x *CCLCMsg_HltvFixupOperatorTick) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[64]
+	mi := &file_netmessages_proto_msgTypes[58]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5815,7 +4807,7 @@ func (x *CCLCMsg_HltvFixupOperatorTick) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CCLCMsg_HltvFixupOperatorTick.ProtoReflect.Descriptor instead.
 func (*CCLCMsg_HltvFixupOperatorTick) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{64}
+	return file_netmessages_proto_rawDescGZIP(), []int{58}
 }
 
 func (x *CCLCMsg_HltvFixupOperatorTick) GetTick() int32 {
@@ -5884,7 +4876,7 @@ type CSVCMsg_HltvFixupOperatorStatus struct {
 
 func (x *CSVCMsg_HltvFixupOperatorStatus) Reset() {
 	*x = CSVCMsg_HltvFixupOperatorStatus{}
-	mi := &file_netmessages_proto_msgTypes[65]
+	mi := &file_netmessages_proto_msgTypes[59]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5896,7 +4888,7 @@ func (x *CSVCMsg_HltvFixupOperatorStatus) String() string {
 func (*CSVCMsg_HltvFixupOperatorStatus) ProtoMessage() {}
 
 func (x *CSVCMsg_HltvFixupOperatorStatus) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[65]
+	mi := &file_netmessages_proto_msgTypes[59]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5909,7 +4901,7 @@ func (x *CSVCMsg_HltvFixupOperatorStatus) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CSVCMsg_HltvFixupOperatorStatus.ProtoReflect.Descriptor instead.
 func (*CSVCMsg_HltvFixupOperatorStatus) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{65}
+	return file_netmessages_proto_rawDescGZIP(), []int{59}
 }
 
 func (x *CSVCMsg_HltvFixupOperatorStatus) GetMode() uint32 {
@@ -5939,7 +4931,7 @@ type CMsgServerUserCmd struct {
 
 func (x *CMsgServerUserCmd) Reset() {
 	*x = CMsgServerUserCmd{}
-	mi := &file_netmessages_proto_msgTypes[66]
+	mi := &file_netmessages_proto_msgTypes[60]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5951,7 +4943,7 @@ func (x *CMsgServerUserCmd) String() string {
 func (*CMsgServerUserCmd) ProtoMessage() {}
 
 func (x *CMsgServerUserCmd) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[66]
+	mi := &file_netmessages_proto_msgTypes[60]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5964,7 +4956,7 @@ func (x *CMsgServerUserCmd) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CMsgServerUserCmd.ProtoReflect.Descriptor instead.
 func (*CMsgServerUserCmd) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{66}
+	return file_netmessages_proto_rawDescGZIP(), []int{60}
 }
 
 func (x *CMsgServerUserCmd) GetData() []byte {
@@ -6011,7 +5003,7 @@ type CSVCMsg_UserCommands struct {
 
 func (x *CSVCMsg_UserCommands) Reset() {
 	*x = CSVCMsg_UserCommands{}
-	mi := &file_netmessages_proto_msgTypes[67]
+	mi := &file_netmessages_proto_msgTypes[61]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6023,7 +5015,7 @@ func (x *CSVCMsg_UserCommands) String() string {
 func (*CSVCMsg_UserCommands) ProtoMessage() {}
 
 func (x *CSVCMsg_UserCommands) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[67]
+	mi := &file_netmessages_proto_msgTypes[61]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6036,7 +5028,7 @@ func (x *CSVCMsg_UserCommands) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CSVCMsg_UserCommands.ProtoReflect.Descriptor instead.
 func (*CSVCMsg_UserCommands) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{67}
+	return file_netmessages_proto_rawDescGZIP(), []int{61}
 }
 
 func (x *CSVCMsg_UserCommands) GetCommands() []*CMsgServerUserCmd {
@@ -6056,7 +5048,7 @@ type CSVCMsg_NextMsgPredicted struct {
 
 func (x *CSVCMsg_NextMsgPredicted) Reset() {
 	*x = CSVCMsg_NextMsgPredicted{}
-	mi := &file_netmessages_proto_msgTypes[68]
+	mi := &file_netmessages_proto_msgTypes[62]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6068,7 +5060,7 @@ func (x *CSVCMsg_NextMsgPredicted) String() string {
 func (*CSVCMsg_NextMsgPredicted) ProtoMessage() {}
 
 func (x *CSVCMsg_NextMsgPredicted) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[68]
+	mi := &file_netmessages_proto_msgTypes[62]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6081,7 +5073,7 @@ func (x *CSVCMsg_NextMsgPredicted) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CSVCMsg_NextMsgPredicted.ProtoReflect.Descriptor instead.
 func (*CSVCMsg_NextMsgPredicted) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{68}
+	return file_netmessages_proto_rawDescGZIP(), []int{62}
 }
 
 func (x *CSVCMsg_NextMsgPredicted) GetPredictedByPlayerSlot() int32 {
@@ -6098,150 +5090,6 @@ func (x *CSVCMsg_NextMsgPredicted) GetMessageTypeId() uint32 {
 	return 0
 }
 
-type CMsgSource2PerfIntervalSample_Tag struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Tag           *string                `protobuf:"bytes,1,opt,name=tag" json:"tag,omitempty"`
-	MaxValue      *uint32                `protobuf:"varint,2,opt,name=max_value,json=maxValue" json:"max_value,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CMsgSource2PerfIntervalSample_Tag) Reset() {
-	*x = CMsgSource2PerfIntervalSample_Tag{}
-	mi := &file_netmessages_proto_msgTypes[69]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CMsgSource2PerfIntervalSample_Tag) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CMsgSource2PerfIntervalSample_Tag) ProtoMessage() {}
-
-func (x *CMsgSource2PerfIntervalSample_Tag) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[69]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CMsgSource2PerfIntervalSample_Tag.ProtoReflect.Descriptor instead.
-func (*CMsgSource2PerfIntervalSample_Tag) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{18, 0}
-}
-
-func (x *CMsgSource2PerfIntervalSample_Tag) GetTag() string {
-	if x != nil && x.Tag != nil {
-		return *x.Tag
-	}
-	return ""
-}
-
-func (x *CMsgSource2PerfIntervalSample_Tag) GetMaxValue() uint32 {
-	if x != nil && x.MaxValue != nil {
-		return *x.MaxValue
-	}
-	return 0
-}
-
-type CSource2Metrics_MatchPerfSummary_Notification_Client struct {
-	state          protoimpl.MessageState           `protogen:"open.v1"`
-	SystemSpecs    *CMsgSource2SystemSpecs          `protobuf:"bytes,1,opt,name=system_specs,json=systemSpecs" json:"system_specs,omitempty"`
-	Profile        *CMsgSource2VProfLiteReport      `protobuf:"bytes,2,opt,name=profile" json:"profile,omitempty"`
-	BuildId        *uint32                          `protobuf:"varint,3,opt,name=build_id,json=buildId" json:"build_id,omitempty"`
-	DownstreamFlow *CMsgSource2NetworkFlowQuality   `protobuf:"bytes,4,opt,name=downstream_flow,json=downstreamFlow" json:"downstream_flow,omitempty"`
-	UpstreamFlow   *CMsgSource2NetworkFlowQuality   `protobuf:"bytes,5,opt,name=upstream_flow,json=upstreamFlow" json:"upstream_flow,omitempty"`
-	Steamid        *uint64                          `protobuf:"fixed64,10,opt,name=steamid" json:"steamid,omitempty"`
-	PerfSamples    []*CMsgSource2PerfIntervalSample `protobuf:"bytes,11,rep,name=perf_samples,json=perfSamples" json:"perf_samples,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
-}
-
-func (x *CSource2Metrics_MatchPerfSummary_Notification_Client) Reset() {
-	*x = CSource2Metrics_MatchPerfSummary_Notification_Client{}
-	mi := &file_netmessages_proto_msgTypes[70]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CSource2Metrics_MatchPerfSummary_Notification_Client) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CSource2Metrics_MatchPerfSummary_Notification_Client) ProtoMessage() {}
-
-func (x *CSource2Metrics_MatchPerfSummary_Notification_Client) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[70]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CSource2Metrics_MatchPerfSummary_Notification_Client.ProtoReflect.Descriptor instead.
-func (*CSource2Metrics_MatchPerfSummary_Notification_Client) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{20, 0}
-}
-
-func (x *CSource2Metrics_MatchPerfSummary_Notification_Client) GetSystemSpecs() *CMsgSource2SystemSpecs {
-	if x != nil {
-		return x.SystemSpecs
-	}
-	return nil
-}
-
-func (x *CSource2Metrics_MatchPerfSummary_Notification_Client) GetProfile() *CMsgSource2VProfLiteReport {
-	if x != nil {
-		return x.Profile
-	}
-	return nil
-}
-
-func (x *CSource2Metrics_MatchPerfSummary_Notification_Client) GetBuildId() uint32 {
-	if x != nil && x.BuildId != nil {
-		return *x.BuildId
-	}
-	return 0
-}
-
-func (x *CSource2Metrics_MatchPerfSummary_Notification_Client) GetDownstreamFlow() *CMsgSource2NetworkFlowQuality {
-	if x != nil {
-		return x.DownstreamFlow
-	}
-	return nil
-}
-
-func (x *CSource2Metrics_MatchPerfSummary_Notification_Client) GetUpstreamFlow() *CMsgSource2NetworkFlowQuality {
-	if x != nil {
-		return x.UpstreamFlow
-	}
-	return nil
-}
-
-func (x *CSource2Metrics_MatchPerfSummary_Notification_Client) GetSteamid() uint64 {
-	if x != nil && x.Steamid != nil {
-		return *x.Steamid
-	}
-	return 0
-}
-
-func (x *CSource2Metrics_MatchPerfSummary_Notification_Client) GetPerfSamples() []*CMsgSource2PerfIntervalSample {
-	if x != nil {
-		return x.PerfSamples
-	}
-	return nil
-}
-
 type CSVCMsg_ClassInfoClassT struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ClassId       *int32                 `protobuf:"varint,1,opt,name=class_id,json=classId" json:"class_id,omitempty"`
@@ -6252,7 +5100,7 @@ type CSVCMsg_ClassInfoClassT struct {
 
 func (x *CSVCMsg_ClassInfoClassT) Reset() {
 	*x = CSVCMsg_ClassInfoClassT{}
-	mi := &file_netmessages_proto_msgTypes[71]
+	mi := &file_netmessages_proto_msgTypes[63]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6264,7 +5112,7 @@ func (x *CSVCMsg_ClassInfoClassT) String() string {
 func (*CSVCMsg_ClassInfoClassT) ProtoMessage() {}
 
 func (x *CSVCMsg_ClassInfoClassT) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[71]
+	mi := &file_netmessages_proto_msgTypes[63]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6277,7 +5125,7 @@ func (x *CSVCMsg_ClassInfoClassT) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CSVCMsg_ClassInfoClassT.ProtoReflect.Descriptor instead.
 func (*CSVCMsg_ClassInfoClassT) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{22, 0}
+	return file_netmessages_proto_rawDescGZIP(), []int{16, 0}
 }
 
 func (x *CSVCMsg_ClassInfoClassT) GetClassId() int32 {
@@ -6321,7 +5169,7 @@ type CSVCMsg_SoundsSounddataT struct {
 
 func (x *CSVCMsg_SoundsSounddataT) Reset() {
 	*x = CSVCMsg_SoundsSounddataT{}
-	mi := &file_netmessages_proto_msgTypes[72]
+	mi := &file_netmessages_proto_msgTypes[64]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6333,7 +5181,7 @@ func (x *CSVCMsg_SoundsSounddataT) String() string {
 func (*CSVCMsg_SoundsSounddataT) ProtoMessage() {}
 
 func (x *CSVCMsg_SoundsSounddataT) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[72]
+	mi := &file_netmessages_proto_msgTypes[64]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6346,7 +5194,7 @@ func (x *CSVCMsg_SoundsSounddataT) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CSVCMsg_SoundsSounddataT.ProtoReflect.Descriptor instead.
 func (*CSVCMsg_SoundsSounddataT) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{26, 0}
+	return file_netmessages_proto_rawDescGZIP(), []int{20, 0}
 }
 
 func (x *CSVCMsg_SoundsSounddataT) GetOriginX() int32 {
@@ -6499,7 +5347,7 @@ type CSVCMsg_SendTableSendpropT struct {
 
 func (x *CSVCMsg_SendTableSendpropT) Reset() {
 	*x = CSVCMsg_SendTableSendpropT{}
-	mi := &file_netmessages_proto_msgTypes[73]
+	mi := &file_netmessages_proto_msgTypes[65]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6511,7 +5359,7 @@ func (x *CSVCMsg_SendTableSendpropT) String() string {
 func (*CSVCMsg_SendTableSendpropT) ProtoMessage() {}
 
 func (x *CSVCMsg_SendTableSendpropT) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[73]
+	mi := &file_netmessages_proto_msgTypes[65]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6524,7 +5372,7 @@ func (x *CSVCMsg_SendTableSendpropT) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CSVCMsg_SendTableSendpropT.ProtoReflect.Descriptor instead.
 func (*CSVCMsg_SendTableSendpropT) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{36, 0}
+	return file_netmessages_proto_rawDescGZIP(), []int{30, 0}
 }
 
 func (x *CSVCMsg_SendTableSendpropT) GetType() int32 {
@@ -6600,7 +5448,7 @@ type CSVCMsg_GameEventListKeyT struct {
 
 func (x *CSVCMsg_GameEventListKeyT) Reset() {
 	*x = CSVCMsg_GameEventListKeyT{}
-	mi := &file_netmessages_proto_msgTypes[74]
+	mi := &file_netmessages_proto_msgTypes[66]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6612,7 +5460,7 @@ func (x *CSVCMsg_GameEventListKeyT) String() string {
 func (*CSVCMsg_GameEventListKeyT) ProtoMessage() {}
 
 func (x *CSVCMsg_GameEventListKeyT) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[74]
+	mi := &file_netmessages_proto_msgTypes[66]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6625,7 +5473,7 @@ func (x *CSVCMsg_GameEventListKeyT) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CSVCMsg_GameEventListKeyT.ProtoReflect.Descriptor instead.
 func (*CSVCMsg_GameEventListKeyT) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{37, 0}
+	return file_netmessages_proto_rawDescGZIP(), []int{31, 0}
 }
 
 func (x *CSVCMsg_GameEventListKeyT) GetType() int32 {
@@ -6653,7 +5501,7 @@ type CSVCMsg_GameEventListDescriptorT struct {
 
 func (x *CSVCMsg_GameEventListDescriptorT) Reset() {
 	*x = CSVCMsg_GameEventListDescriptorT{}
-	mi := &file_netmessages_proto_msgTypes[75]
+	mi := &file_netmessages_proto_msgTypes[67]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6665,7 +5513,7 @@ func (x *CSVCMsg_GameEventListDescriptorT) String() string {
 func (*CSVCMsg_GameEventListDescriptorT) ProtoMessage() {}
 
 func (x *CSVCMsg_GameEventListDescriptorT) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[75]
+	mi := &file_netmessages_proto_msgTypes[67]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6678,7 +5526,7 @@ func (x *CSVCMsg_GameEventListDescriptorT) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CSVCMsg_GameEventListDescriptorT.ProtoReflect.Descriptor instead.
 func (*CSVCMsg_GameEventListDescriptorT) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{37, 1}
+	return file_netmessages_proto_rawDescGZIP(), []int{31, 1}
 }
 
 func (x *CSVCMsg_GameEventListDescriptorT) GetEventid() int32 {
@@ -6712,7 +5560,7 @@ type CSVCMsg_PacketEntitiesAlternateBaselineT struct {
 
 func (x *CSVCMsg_PacketEntitiesAlternateBaselineT) Reset() {
 	*x = CSVCMsg_PacketEntitiesAlternateBaselineT{}
-	mi := &file_netmessages_proto_msgTypes[76]
+	mi := &file_netmessages_proto_msgTypes[68]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6724,7 +5572,7 @@ func (x *CSVCMsg_PacketEntitiesAlternateBaselineT) String() string {
 func (*CSVCMsg_PacketEntitiesAlternateBaselineT) ProtoMessage() {}
 
 func (x *CSVCMsg_PacketEntitiesAlternateBaselineT) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[76]
+	mi := &file_netmessages_proto_msgTypes[68]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6737,7 +5585,7 @@ func (x *CSVCMsg_PacketEntitiesAlternateBaselineT) ProtoReflect() protoreflect.M
 
 // Deprecated: Use CSVCMsg_PacketEntitiesAlternateBaselineT.ProtoReflect.Descriptor instead.
 func (*CSVCMsg_PacketEntitiesAlternateBaselineT) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{38, 0}
+	return file_netmessages_proto_rawDescGZIP(), []int{32, 0}
 }
 
 func (x *CSVCMsg_PacketEntitiesAlternateBaselineT) GetEntityIndex() int32 {
@@ -6764,7 +5612,7 @@ type CSVCMsg_PacketEntitiesNonTransmittedEntitiesT struct {
 
 func (x *CSVCMsg_PacketEntitiesNonTransmittedEntitiesT) Reset() {
 	*x = CSVCMsg_PacketEntitiesNonTransmittedEntitiesT{}
-	mi := &file_netmessages_proto_msgTypes[77]
+	mi := &file_netmessages_proto_msgTypes[69]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6776,7 +5624,7 @@ func (x *CSVCMsg_PacketEntitiesNonTransmittedEntitiesT) String() string {
 func (*CSVCMsg_PacketEntitiesNonTransmittedEntitiesT) ProtoMessage() {}
 
 func (x *CSVCMsg_PacketEntitiesNonTransmittedEntitiesT) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[77]
+	mi := &file_netmessages_proto_msgTypes[69]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6789,7 +5637,7 @@ func (x *CSVCMsg_PacketEntitiesNonTransmittedEntitiesT) ProtoReflect() protorefl
 
 // Deprecated: Use CSVCMsg_PacketEntitiesNonTransmittedEntitiesT.ProtoReflect.Descriptor instead.
 func (*CSVCMsg_PacketEntitiesNonTransmittedEntitiesT) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{38, 1}
+	return file_netmessages_proto_rawDescGZIP(), []int{32, 1}
 }
 
 func (x *CSVCMsg_PacketEntitiesNonTransmittedEntitiesT) GetHeaderCount() int32 {
@@ -6816,7 +5664,7 @@ type CSVCMsg_PacketEntitiesOutofpvsEntityUpdatesT struct {
 
 func (x *CSVCMsg_PacketEntitiesOutofpvsEntityUpdatesT) Reset() {
 	*x = CSVCMsg_PacketEntitiesOutofpvsEntityUpdatesT{}
-	mi := &file_netmessages_proto_msgTypes[78]
+	mi := &file_netmessages_proto_msgTypes[70]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6828,7 +5676,7 @@ func (x *CSVCMsg_PacketEntitiesOutofpvsEntityUpdatesT) String() string {
 func (*CSVCMsg_PacketEntitiesOutofpvsEntityUpdatesT) ProtoMessage() {}
 
 func (x *CSVCMsg_PacketEntitiesOutofpvsEntityUpdatesT) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[78]
+	mi := &file_netmessages_proto_msgTypes[70]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6841,7 +5689,7 @@ func (x *CSVCMsg_PacketEntitiesOutofpvsEntityUpdatesT) ProtoReflect() protorefle
 
 // Deprecated: Use CSVCMsg_PacketEntitiesOutofpvsEntityUpdatesT.ProtoReflect.Descriptor instead.
 func (*CSVCMsg_PacketEntitiesOutofpvsEntityUpdatesT) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{38, 2}
+	return file_netmessages_proto_rawDescGZIP(), []int{32, 2}
 }
 
 func (x *CSVCMsg_PacketEntitiesOutofpvsEntityUpdatesT) GetCount() int32 {
@@ -6868,7 +5716,7 @@ type ProtoFlattenedSerializerFieldTPolymorphicFieldT struct {
 
 func (x *ProtoFlattenedSerializerFieldTPolymorphicFieldT) Reset() {
 	*x = ProtoFlattenedSerializerFieldTPolymorphicFieldT{}
-	mi := &file_netmessages_proto_msgTypes[79]
+	mi := &file_netmessages_proto_msgTypes[71]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6880,7 +5728,7 @@ func (x *ProtoFlattenedSerializerFieldTPolymorphicFieldT) String() string {
 func (*ProtoFlattenedSerializerFieldTPolymorphicFieldT) ProtoMessage() {}
 
 func (x *ProtoFlattenedSerializerFieldTPolymorphicFieldT) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[79]
+	mi := &file_netmessages_proto_msgTypes[71]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6893,7 +5741,7 @@ func (x *ProtoFlattenedSerializerFieldTPolymorphicFieldT) ProtoReflect() protore
 
 // Deprecated: Use ProtoFlattenedSerializerFieldTPolymorphicFieldT.ProtoReflect.Descriptor instead.
 func (*ProtoFlattenedSerializerFieldTPolymorphicFieldT) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{53, 0}
+	return file_netmessages_proto_rawDescGZIP(), []int{47, 0}
 }
 
 func (x *ProtoFlattenedSerializerFieldTPolymorphicFieldT) GetPolymorphicFieldSerializerNameSym() int32 {
@@ -6920,7 +5768,7 @@ type CMsgServerNetworkStats_Port struct {
 
 func (x *CMsgServerNetworkStats_Port) Reset() {
 	*x = CMsgServerNetworkStats_Port{}
-	mi := &file_netmessages_proto_msgTypes[80]
+	mi := &file_netmessages_proto_msgTypes[72]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6932,7 +5780,7 @@ func (x *CMsgServerNetworkStats_Port) String() string {
 func (*CMsgServerNetworkStats_Port) ProtoMessage() {}
 
 func (x *CMsgServerNetworkStats_Port) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[80]
+	mi := &file_netmessages_proto_msgTypes[72]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6945,7 +5793,7 @@ func (x *CMsgServerNetworkStats_Port) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CMsgServerNetworkStats_Port.ProtoReflect.Descriptor instead.
 func (*CMsgServerNetworkStats_Port) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{60, 0}
+	return file_netmessages_proto_rawDescGZIP(), []int{54, 0}
 }
 
 func (x *CMsgServerNetworkStats_Port) GetPort() int32 {
@@ -6978,7 +5826,7 @@ type CMsgServerNetworkStats_Player struct {
 
 func (x *CMsgServerNetworkStats_Player) Reset() {
 	*x = CMsgServerNetworkStats_Player{}
-	mi := &file_netmessages_proto_msgTypes[81]
+	mi := &file_netmessages_proto_msgTypes[73]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6990,7 +5838,7 @@ func (x *CMsgServerNetworkStats_Player) String() string {
 func (*CMsgServerNetworkStats_Player) ProtoMessage() {}
 
 func (x *CMsgServerNetworkStats_Player) ProtoReflect() protoreflect.Message {
-	mi := &file_netmessages_proto_msgTypes[81]
+	mi := &file_netmessages_proto_msgTypes[73]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7003,7 +5851,7 @@ func (x *CMsgServerNetworkStats_Player) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CMsgServerNetworkStats_Player.ProtoReflect.Descriptor instead.
 func (*CMsgServerNetworkStats_Player) Descriptor() ([]byte, []int) {
-	return file_netmessages_proto_rawDescGZIP(), []int{60, 1}
+	return file_netmessages_proto_rawDescGZIP(), []int{54, 1}
 }
 
 func (x *CMsgServerNetworkStats_Player) GetSteamid() uint64 {
@@ -7066,7 +5914,7 @@ var File_netmessages_proto protoreflect.FileDescriptor
 
 const file_netmessages_proto_rawDesc = "" +
 	"\n" +
-	"\x11netmessages.proto\x12\x04dota\x1a\x16networkbasetypes.proto\"\xb8\x01\n" +
+	"\x11netmessages.proto\x12\x04dota\x1a\x16networkbasetypes.proto\x1a\x19source2_steam_stats.proto\"\xb8\x01\n" +
 	"\x12CCLCMsg_ClientInfo\x12$\n" +
 	"\x0esend_table_crc\x18\x01 \x01(\aR\fsendTableCrc\x12!\n" +
 	"\fserver_count\x18\x02 \x01(\rR\vserverCount\x12\x17\n" +
@@ -7128,134 +5976,13 @@ const file_netmessages_proto_rawDesc = "" +
 	"\x14CCLCMsg_CmdKeyValues\x12\x12\n" +
 	"\x04data\x18\x01 \x01(\fR\x04data\"1\n" +
 	"\x19CCLCMsg_RconServerDetails\x12\x14\n" +
-	"\x05token\x18\x01 \x01(\fR\x05token\"\xfe\x04\n" +
-	"\x16CMsgSource2SystemSpecs\x12\x15\n" +
-	"\x06cpu_id\x18\x01 \x01(\tR\x05cpuId\x12\x1b\n" +
-	"\tcpu_brand\x18\x02 \x01(\tR\bcpuBrand\x12\x1b\n" +
-	"\tcpu_model\x18\x03 \x01(\rR\bcpuModel\x12(\n" +
-	"\x10cpu_num_physical\x18\x04 \x01(\rR\x0ecpuNumPhysical\x121\n" +
-	"\x15ram_physical_total_mb\x18\x15 \x01(\rR\x12ramPhysicalTotalMb\x129\n" +
-	"\x19gpu_rendersystem_dll_name\x18) \x01(\tR\x16gpuRendersystemDllName\x12\"\n" +
-	"\rgpu_vendor_id\x18* \x01(\rR\vgpuVendorId\x12&\n" +
-	"\x0fgpu_driver_name\x18+ \x01(\tR\rgpuDriverName\x125\n" +
-	"\x17gpu_driver_version_high\x18, \x01(\rR\x14gpuDriverVersionHigh\x123\n" +
-	"\x16gpu_driver_version_low\x18- \x01(\rR\x13gpuDriverVersionLow\x12/\n" +
-	"\x14gpu_dx_support_level\x18. \x01(\rR\x11gpuDxSupportLevel\x12:\n" +
-	"\x1agpu_texture_memory_size_mb\x18/ \x01(\rR\x16gpuTextureMemorySizeMb\x12)\n" +
-	"\x10backbuffer_width\x183 \x01(\rR\x0fbackbufferWidth\x12+\n" +
-	"\x11backbuffer_height\x184 \x01(\rR\x10backbufferHeight\"\xaa\x06\n" +
-	"\x1eCMsgSource2VProfLiteReportItem\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\x12%\n" +
-	"\x0eactive_samples\x18\x02 \x01(\rR\ractiveSamples\x124\n" +
-	"\x16active_samples_1secmax\x18\x04 \x01(\rR\x14activeSamples1secmax\x12\x19\n" +
-	"\busec_max\x18\x03 \x01(\rR\ausecMax\x12&\n" +
-	"\x0fusec_avg_active\x18\v \x01(\rR\rusecAvgActive\x12&\n" +
-	"\x0fusec_p50_active\x18\f \x01(\rR\rusecP50Active\x12&\n" +
-	"\x0fusec_p99_active\x18\r \x01(\rR\rusecP99Active\x12 \n" +
-	"\fusec_avg_all\x18\x15 \x01(\rR\n" +
-	"usecAvgAll\x12 \n" +
-	"\fusec_p50_all\x18\x16 \x01(\rR\n" +
-	"usecP50All\x12 \n" +
-	"\fusec_p99_all\x18\x17 \x01(\rR\n" +
-	"usecP99All\x125\n" +
-	"\x17usec_1secmax_avg_active\x18\x1f \x01(\rR\x14usec1secmaxAvgActive\x125\n" +
-	"\x17usec_1secmax_p50_active\x18  \x01(\rR\x14usec1secmaxP50Active\x125\n" +
-	"\x17usec_1secmax_p95_active\x18! \x01(\rR\x14usec1secmaxP95Active\x125\n" +
-	"\x17usec_1secmax_p99_active\x18\" \x01(\rR\x14usec1secmaxP99Active\x12/\n" +
-	"\x14usec_1secmax_avg_all\x18) \x01(\rR\x11usec1secmaxAvgAll\x12/\n" +
-	"\x14usec_1secmax_p50_all\x18* \x01(\rR\x11usec1secmaxP50All\x12/\n" +
-	"\x14usec_1secmax_p95_all\x18+ \x01(\rR\x11usec1secmaxP95All\x12/\n" +
-	"\x14usec_1secmax_p99_all\x18, \x01(\rR\x11usec1secmaxP99All\"\xbf\x01\n" +
-	"\x1aCMsgSource2VProfLiteReport\x12:\n" +
-	"\x05total\x18\x01 \x01(\v2$.dota.CMsgSource2VProfLiteReportItemR\x05total\x12:\n" +
-	"\x05items\x18\x02 \x03(\v2$.dota.CMsgSource2VProfLiteReportItemR\x05items\x12)\n" +
-	"\x10discarded_frames\x18\x03 \x01(\rR\x0fdiscardedFrames\"\x8c\x10\n" +
-	"\x1dCMsgSource2NetworkFlowQuality\x12\x1a\n" +
-	"\bduration\x18\x01 \x01(\rR\bduration\x12\x1f\n" +
-	"\vbytes_total\x18\x05 \x01(\x04R\n" +
-	"bytesTotal\x120\n" +
-	"\x14bytes_total_reliable\x18\x06 \x01(\x04R\x12bytesTotalReliable\x12*\n" +
-	"\x11bytes_total_voice\x18\a \x01(\x04R\x0fbytesTotalVoice\x12\"\n" +
-	"\rbytes_sec_p95\x18\n" +
-	" \x01(\rR\vbytesSecP95\x12\"\n" +
-	"\rbytes_sec_p99\x18\v \x01(\rR\vbytesSecP99\x12)\n" +
-	"\x10enginemsgs_total\x18\x14 \x01(\rR\x0fenginemsgsTotal\x12,\n" +
-	"\x12enginemsgs_sec_p95\x18\x15 \x01(\rR\x10enginemsgsSecP95\x12,\n" +
-	"\x12enginemsgs_sec_p99\x18\x16 \x01(\rR\x10enginemsgsSecP99\x12'\n" +
-	"\x0fnetframes_total\x18\x1e \x01(\rR\x0enetframesTotal\x12+\n" +
-	"\x11netframes_dropped\x18\x1f \x01(\rR\x10netframesDropped\x121\n" +
-	"\x14netframes_outoforder\x18  \x01(\rR\x13netframesOutoforder\x12;\n" +
-	"\x1anetframes_size_exceeds_mtu\x18\" \x01(\rR\x17netframesSizeExceedsMtu\x12,\n" +
-	"\x12netframes_size_p95\x18# \x01(\rR\x10netframesSizeP95\x12,\n" +
-	"\x12netframes_size_p99\x18$ \x01(\rR\x10netframesSizeP99\x12\x1f\n" +
-	"\vticks_total\x18( \x01(\rR\n" +
-	"ticksTotal\x12\x1d\n" +
-	"\n" +
-	"ticks_good\x18) \x01(\rR\tticksGood\x123\n" +
-	"\x16ticks_good_almost_late\x18* \x01(\rR\x13ticksGoodAlmostLate\x12.\n" +
-	"\x13ticks_fixed_dropped\x18+ \x01(\rR\x11ticksFixedDropped\x12(\n" +
-	"\x10ticks_fixed_late\x18, \x01(\rR\x0eticksFixedLate\x12*\n" +
-	"\x11ticks_bad_dropped\x18- \x01(\rR\x0fticksBadDropped\x12$\n" +
-	"\x0eticks_bad_late\x18. \x01(\rR\fticksBadLate\x12&\n" +
-	"\x0fticks_bad_other\x18/ \x01(\rR\rticksBadOther\x12=\n" +
-	"\x1btick_missrate_samples_total\x182 \x01(\rR\x18tickMissrateSamplesTotal\x12A\n" +
-	"\x1dtick_missrate_samples_perfect\x183 \x01(\rR\x1atickMissrateSamplesPerfect\x12G\n" +
-	" tick_missrate_samples_perfectnet\x184 \x01(\rR\x1dtickMissrateSamplesPerfectnet\x127\n" +
-	"\x18tick_missratenet_p75_x10\x185 \x01(\rR\x15tickMissratenetP75X10\x127\n" +
-	"\x18tick_missratenet_p95_x10\x186 \x01(\rR\x15tickMissratenetP95X10\x127\n" +
-	"\x18tick_missratenet_p99_x10\x187 \x01(\rR\x15tickMissratenetP99X10\x12#\n" +
-	"\rrecvmargin_p1\x18= \x01(\x11R\frecvmarginP1\x12#\n" +
-	"\rrecvmargin_p5\x18> \x01(\x11R\frecvmarginP5\x12%\n" +
-	"\x0erecvmargin_p25\x18? \x01(\x11R\rrecvmarginP25\x12%\n" +
-	"\x0erecvmargin_p50\x18@ \x01(\x11R\rrecvmarginP50\x12%\n" +
-	"\x0erecvmargin_p75\x18A \x01(\x11R\rrecvmarginP75\x12%\n" +
-	"\x0erecvmargin_p95\x18B \x01(\x11R\rrecvmarginP95\x12.\n" +
-	"\x13netframe_jitter_p50\x18F \x01(\rR\x11netframeJitterP50\x12.\n" +
-	"\x13netframe_jitter_p99\x18G \x01(\rR\x11netframeJitterP99\x126\n" +
-	"\x17interval_peakjitter_p50\x18H \x01(\rR\x15intervalPeakjitterP50\x126\n" +
-	"\x17interval_peakjitter_p95\x18I \x01(\rR\x15intervalPeakjitterP95\x12B\n" +
-	"\x1epacket_misdelivery_rate_p50_x4\x18J \x01(\rR\x1apacketMisdeliveryRateP50X4\x12B\n" +
-	"\x1epacket_misdelivery_rate_p95_x4\x18K \x01(\rR\x1apacketMisdeliveryRateP95X4\x12\x1e\n" +
-	"\vnet_ping_p5\x18P \x01(\rR\tnetPingP5\x12 \n" +
-	"\fnet_ping_p50\x18Q \x01(\rR\n" +
-	"netPingP50\x12 \n" +
-	"\fnet_ping_p95\x18R \x01(\rR\n" +
-	"netPingP95\"\xe3\x02\n" +
-	"\x1dCMsgSource2PerfIntervalSample\x12)\n" +
-	"\x11frame_time_max_ms\x18\x01 \x01(\x02R\x0eframeTimeMaxMs\x12)\n" +
-	"\x11frame_time_avg_ms\x18\x02 \x01(\x02R\x0eframeTimeAvgMs\x12)\n" +
-	"\x11frame_time_min_ms\x18\x03 \x01(\x02R\x0eframeTimeMinMs\x12\x1f\n" +
-	"\vframe_count\x18\x04 \x01(\x05R\n" +
-	"frameCount\x12-\n" +
-	"\x13frame_time_total_ms\x18\x05 \x01(\x02R\x10frameTimeTotalMs\x12;\n" +
-	"\x04tags\x18\x06 \x03(\v2'.dota.CMsgSource2PerfIntervalSample.TagR\x04tags\x1a4\n" +
-	"\x03Tag\x12\x10\n" +
-	"\x03tag\x18\x01 \x01(\tR\x03tag\x12\x1b\n" +
-	"\tmax_value\x18\x02 \x01(\rR\bmaxValue\"\xfa\x02\n" +
+	"\x05token\x18\x01 \x01(\fR\x05token\"\xfa\x02\n" +
 	"\x12CCLCMsg_Diagnostic\x12?\n" +
 	"\fsystem_specs\x18\x01 \x01(\v2\x1c.dota.CMsgSource2SystemSpecsR\vsystemSpecs\x12C\n" +
 	"\fvprof_report\x18\x02 \x01(\v2 .dota.CMsgSource2VProfLiteReportR\vvprofReport\x12L\n" +
 	"\x0fdownstream_flow\x18\x03 \x01(\v2#.dota.CMsgSource2NetworkFlowQualityR\x0edownstreamFlow\x12H\n" +
 	"\rupstream_flow\x18\x04 \x01(\v2#.dota.CMsgSource2NetworkFlowQualityR\fupstreamFlow\x12F\n" +
-	"\fperf_samples\x18\x05 \x03(\v2#.dota.CMsgSource2PerfIntervalSampleR\vperfSamples\"\xfb\x05\n" +
-	"-CSource2Metrics_MatchPerfSummary_Notification\x12\x14\n" +
-	"\x05appid\x18\x01 \x01(\rR\x05appid\x12\x1b\n" +
-	"\tgame_mode\x18\x02 \x01(\tR\bgameMode\x12&\n" +
-	"\x0fserver_build_id\x18\x03 \x01(\rR\rserverBuildId\x12!\n" +
-	"\fserver_popid\x18\x04 \x01(\aR\vserverPopid\x12G\n" +
-	"\x0eserver_profile\x18\n" +
-	" \x01(\v2 .dota.CMsgSource2VProfLiteReportR\rserverProfile\x12T\n" +
-	"\aclients\x18\v \x03(\v2:.dota.CSource2Metrics_MatchPerfSummary_Notification.ClientR\aclients\x12\x10\n" +
-	"\x03map\x18\x14 \x01(\tR\x03map\x1a\x9a\x03\n" +
-	"\x06Client\x12?\n" +
-	"\fsystem_specs\x18\x01 \x01(\v2\x1c.dota.CMsgSource2SystemSpecsR\vsystemSpecs\x12:\n" +
-	"\aprofile\x18\x02 \x01(\v2 .dota.CMsgSource2VProfLiteReportR\aprofile\x12\x19\n" +
-	"\bbuild_id\x18\x03 \x01(\rR\abuildId\x12L\n" +
-	"\x0fdownstream_flow\x18\x04 \x01(\v2#.dota.CMsgSource2NetworkFlowQualityR\x0edownstreamFlow\x12H\n" +
-	"\rupstream_flow\x18\x05 \x01(\v2#.dota.CMsgSource2NetworkFlowQualityR\fupstreamFlow\x12\x18\n" +
-	"\asteamid\x18\n" +
-	" \x01(\x06R\asteamid\x12F\n" +
-	"\fperf_samples\x18\v \x03(\v2#.dota.CMsgSource2PerfIntervalSampleR\vperfSamples\"\xc3\x04\n" +
+	"\fperf_samples\x18\x05 \x03(\v2#.dota.CMsgSource2PerfIntervalSampleR\vperfSamples\"\xc3\x04\n" +
 	"\x12CSVCMsg_ServerInfo\x12\x1a\n" +
 	"\bprotocol\x18\x01 \x01(\x05R\bprotocol\x12!\n" +
 	"\fserver_count\x18\x02 \x01(\x05R\vserverCount\x12!\n" +
@@ -7529,9 +6256,9 @@ const file_netmessages_proto_rawDesc = "" +
 	"\x1bCBidirMsg_RebroadcastSource\x12 \n" +
 	"\veventsource\x18\x01 \x01(\x05R\veventsource\"\xc7\x01\n" +
 	"\x19CBidirMsg_PredictionEvent\x12\x19\n" +
-	"\bevent_id\x18\x01 \x02(\rR\aeventId\x12\x1d\n" +
+	"\bevent_id\x18\x01 \x01(\rR\aeventId\x12\x1d\n" +
 	"\n" +
-	"event_data\x18\x02 \x02(\fR\teventData\x12\x1b\n" +
+	"event_data\x18\x02 \x01(\fR\teventData\x12\x1b\n" +
 	"\tsync_type\x18\x03 \x01(\rR\bsyncType\x12&\n" +
 	"\x0fsync_val_uint32\x18\x04 \x01(\rR\rsyncValUint32\"+\n" +
 	"\tESyncType\x12\v\n" +
@@ -7703,15 +6430,12 @@ const file_netmessages_proto_rawDesc = "" +
 	"\fDIALOG_ENTRY\x10\x03\x12\x15\n" +
 	"\x11DIALOG_ASKCONNECT\x10\x04*+\n" +
 	"\x19SVC_Messages_LowFrequency\x12\x0e\n" +
-	"\tsvc_dummy\x10\xd8\x04*y\n" +
+	"\tsvc_dummy\x10\xd8\x04*\x84\x01\n" +
 	"\x16Bidirectional_Messages\x12\x1b\n" +
 	"\x17bi_RebroadcastGameEvent\x10\x10\x12\x18\n" +
-	"\x14bi_RebroadcastSource\x10\x11\x12\x10\n" +
-	"\fbi_GameEvent\x10\x12\x12\x16\n" +
-	"\x12bi_PredictionEvent\x10\x13*M\n" +
-	"#Bidirectional_Messages_LowFrequency\x12\x11\n" +
-	"\fbi_RelayInfo\x10\xbc\x05\x12\x13\n" +
-	"\x0ebi_RelayPacket\x10\xbd\x05*\xa1\x01\n" +
+	"\x14bi_RebroadcastSource\x10\x11\x12\x1b\n" +
+	"\x17bi_GameEvent_DEPRECATED\x10\x12\x12\x16\n" +
+	"\x12bi_PredictionEvent\x10\x13*\xa1\x01\n" +
 	"\x11ReplayEventType_t\x12\x17\n" +
 	"\x13REPLAY_EVENT_CANCEL\x10\x00\x12\x16\n" +
 	"\x12REPLAY_EVENT_DEATH\x10\x01\x12\x18\n" +
@@ -7731,158 +6455,143 @@ func file_netmessages_proto_rawDescGZIP() []byte {
 	return file_netmessages_proto_rawDescData
 }
 
-var file_netmessages_proto_enumTypes = make([]protoimpl.EnumInfo, 13)
-var file_netmessages_proto_msgTypes = make([]protoimpl.MessageInfo, 82)
+var file_netmessages_proto_enumTypes = make([]protoimpl.EnumInfo, 12)
+var file_netmessages_proto_msgTypes = make([]protoimpl.MessageInfo, 74)
 var file_netmessages_proto_goTypes = []any{
-	(CLC_Messages)(0),                                            // 0: dota.CLC_Messages
-	(SVC_Messages)(0),                                            // 1: dota.SVC_Messages
-	(VoiceDataFormatT)(0),                                        // 2: dota.VoiceDataFormat_t
-	(RequestPauseT)(0),                                           // 3: dota.RequestPause_t
-	(PrefetchType)(0),                                            // 4: dota.PrefetchType
-	(ESplitScreenMessageType)(0),                                 // 5: dota.ESplitScreenMessageType
-	(EQueryCvarValueStatus)(0),                                   // 6: dota.EQueryCvarValueStatus
-	(DIALOG_TYPE)(0),                                             // 7: dota.DIALOG_TYPE
-	(SVC_Messages_LowFrequency)(0),                               // 8: dota.SVC_Messages_LowFrequency
-	(Bidirectional_Messages)(0),                                  // 9: dota.Bidirectional_Messages
-	(Bidirectional_Messages_LowFrequency)(0),                     // 10: dota.Bidirectional_Messages_LowFrequency
-	(ReplayEventTypeT)(0),                                        // 11: dota.ReplayEventType_t
-	(CBidirMsg_PredictionEvent_ESyncType)(0),                     // 12: dota.CBidirMsg_PredictionEvent.ESyncType
-	(*CCLCMsg_ClientInfo)(nil),                                   // 13: dota.CCLCMsg_ClientInfo
-	(*CCLCMsg_Move)(nil),                                         // 14: dota.CCLCMsg_Move
-	(*CMsgVoiceAudio)(nil),                                       // 15: dota.CMsgVoiceAudio
-	(*CCLCMsg_VoiceData)(nil),                                    // 16: dota.CCLCMsg_VoiceData
-	(*CCLCMsg_BaselineAck)(nil),                                  // 17: dota.CCLCMsg_BaselineAck
-	(*CCLCMsg_ListenEvents)(nil),                                 // 18: dota.CCLCMsg_ListenEvents
-	(*CCLCMsg_RespondCvarValue)(nil),                             // 19: dota.CCLCMsg_RespondCvarValue
-	(*CCLCMsg_LoadingProgress)(nil),                              // 20: dota.CCLCMsg_LoadingProgress
-	(*CCLCMsg_SplitPlayerConnect)(nil),                           // 21: dota.CCLCMsg_SplitPlayerConnect
-	(*CCLCMsg_SplitPlayerDisconnect)(nil),                        // 22: dota.CCLCMsg_SplitPlayerDisconnect
-	(*CCLCMsg_ServerStatus)(nil),                                 // 23: dota.CCLCMsg_ServerStatus
-	(*CCLCMsg_RequestPause)(nil),                                 // 24: dota.CCLCMsg_RequestPause
-	(*CCLCMsg_CmdKeyValues)(nil),                                 // 25: dota.CCLCMsg_CmdKeyValues
-	(*CCLCMsg_RconServerDetails)(nil),                            // 26: dota.CCLCMsg_RconServerDetails
-	(*CMsgSource2SystemSpecs)(nil),                               // 27: dota.CMsgSource2SystemSpecs
-	(*CMsgSource2VProfLiteReportItem)(nil),                       // 28: dota.CMsgSource2VProfLiteReportItem
-	(*CMsgSource2VProfLiteReport)(nil),                           // 29: dota.CMsgSource2VProfLiteReport
-	(*CMsgSource2NetworkFlowQuality)(nil),                        // 30: dota.CMsgSource2NetworkFlowQuality
-	(*CMsgSource2PerfIntervalSample)(nil),                        // 31: dota.CMsgSource2PerfIntervalSample
-	(*CCLCMsg_Diagnostic)(nil),                                   // 32: dota.CCLCMsg_Diagnostic
-	(*CSource2Metrics_MatchPerfSummary_Notification)(nil),        // 33: dota.CSource2Metrics_MatchPerfSummary_Notification
-	(*CSVCMsg_ServerInfo)(nil),                                   // 34: dota.CSVCMsg_ServerInfo
-	(*CSVCMsg_ClassInfo)(nil),                                    // 35: dota.CSVCMsg_ClassInfo
-	(*CSVCMsg_SetPause)(nil),                                     // 36: dota.CSVCMsg_SetPause
-	(*CSVCMsg_VoiceInit)(nil),                                    // 37: dota.CSVCMsg_VoiceInit
-	(*CSVCMsg_Print)(nil),                                        // 38: dota.CSVCMsg_Print
-	(*CSVCMsg_Sounds)(nil),                                       // 39: dota.CSVCMsg_Sounds
-	(*CSVCMsg_Prefetch)(nil),                                     // 40: dota.CSVCMsg_Prefetch
-	(*CSVCMsg_SetView)(nil),                                      // 41: dota.CSVCMsg_SetView
-	(*CSVCMsg_FixAngle)(nil),                                     // 42: dota.CSVCMsg_FixAngle
-	(*CSVCMsg_CrosshairAngle)(nil),                               // 43: dota.CSVCMsg_CrosshairAngle
-	(*CSVCMsg_BSPDecal)(nil),                                     // 44: dota.CSVCMsg_BSPDecal
-	(*CSVCMsg_SplitScreen)(nil),                                  // 45: dota.CSVCMsg_SplitScreen
-	(*CSVCMsg_GetCvarValue)(nil),                                 // 46: dota.CSVCMsg_GetCvarValue
-	(*CSVCMsg_Menu)(nil),                                         // 47: dota.CSVCMsg_Menu
-	(*CSVCMsg_UserMessage)(nil),                                  // 48: dota.CSVCMsg_UserMessage
-	(*CSVCMsg_SendTable)(nil),                                    // 49: dota.CSVCMsg_SendTable
-	(*CSVCMsg_GameEventList)(nil),                                // 50: dota.CSVCMsg_GameEventList
-	(*CSVCMsg_PacketEntities)(nil),                               // 51: dota.CSVCMsg_PacketEntities
-	(*CSVCMsg_TempEntities)(nil),                                 // 52: dota.CSVCMsg_TempEntities
-	(*CSVCMsg_CreateStringTable)(nil),                            // 53: dota.CSVCMsg_CreateStringTable
-	(*CSVCMsg_UpdateStringTable)(nil),                            // 54: dota.CSVCMsg_UpdateStringTable
-	(*CSVCMsg_VoiceData)(nil),                                    // 55: dota.CSVCMsg_VoiceData
-	(*CSVCMsg_PacketReliable)(nil),                               // 56: dota.CSVCMsg_PacketReliable
-	(*CSVCMsg_FullFrameSplit)(nil),                               // 57: dota.CSVCMsg_FullFrameSplit
-	(*CSVCMsg_HLTVStatus)(nil),                                   // 58: dota.CSVCMsg_HLTVStatus
-	(*CSVCMsg_ServerSteamID)(nil),                                // 59: dota.CSVCMsg_ServerSteamID
-	(*CSVCMsg_CmdKeyValues)(nil),                                 // 60: dota.CSVCMsg_CmdKeyValues
-	(*CSVCMsg_RconServerDetails)(nil),                            // 61: dota.CSVCMsg_RconServerDetails
-	(*CMsgIPCAddress)(nil),                                       // 62: dota.CMsgIPCAddress
-	(*CMsgServerPeer)(nil),                                       // 63: dota.CMsgServerPeer
-	(*CSVCMsg_PeerList)(nil),                                     // 64: dota.CSVCMsg_PeerList
-	(*CSVCMsg_ClearAllStringTables)(nil),                         // 65: dota.CSVCMsg_ClearAllStringTables
-	(*ProtoFlattenedSerializerFieldT)(nil),                       // 66: dota.ProtoFlattenedSerializerField_t
-	(*ProtoFlattenedSerializerT)(nil),                            // 67: dota.ProtoFlattenedSerializer_t
-	(*CSVCMsg_FlattenedSerializer)(nil),                          // 68: dota.CSVCMsg_FlattenedSerializer
-	(*CSVCMsg_StopSound)(nil),                                    // 69: dota.CSVCMsg_StopSound
-	(*CBidirMsg_RebroadcastGameEvent)(nil),                       // 70: dota.CBidirMsg_RebroadcastGameEvent
-	(*CBidirMsg_RebroadcastSource)(nil),                          // 71: dota.CBidirMsg_RebroadcastSource
-	(*CBidirMsg_PredictionEvent)(nil),                            // 72: dota.CBidirMsg_PredictionEvent
-	(*CMsgServerNetworkStats)(nil),                               // 73: dota.CMsgServerNetworkStats
-	(*CSVCMsg_HltvReplay)(nil),                                   // 74: dota.CSVCMsg_HltvReplay
-	(*CCLCMsg_HltvReplay)(nil),                                   // 75: dota.CCLCMsg_HltvReplay
-	(*CSVCMsg_Broadcast_Command)(nil),                            // 76: dota.CSVCMsg_Broadcast_Command
-	(*CCLCMsg_HltvFixupOperatorTick)(nil),                        // 77: dota.CCLCMsg_HltvFixupOperatorTick
-	(*CSVCMsg_HltvFixupOperatorStatus)(nil),                      // 78: dota.CSVCMsg_HltvFixupOperatorStatus
-	(*CMsgServerUserCmd)(nil),                                    // 79: dota.CMsgServerUserCmd
-	(*CSVCMsg_UserCommands)(nil),                                 // 80: dota.CSVCMsg_UserCommands
-	(*CSVCMsg_NextMsgPredicted)(nil),                             // 81: dota.CSVCMsg_NextMsgPredicted
-	(*CMsgSource2PerfIntervalSample_Tag)(nil),                    // 82: dota.CMsgSource2PerfIntervalSample.Tag
-	(*CSource2Metrics_MatchPerfSummary_Notification_Client)(nil), // 83: dota.CSource2Metrics_MatchPerfSummary_Notification.Client
-	(*CSVCMsg_ClassInfoClassT)(nil),                              // 84: dota.CSVCMsg_ClassInfo.class_t
-	(*CSVCMsg_SoundsSounddataT)(nil),                             // 85: dota.CSVCMsg_Sounds.sounddata_t
-	(*CSVCMsg_SendTableSendpropT)(nil),                           // 86: dota.CSVCMsg_SendTable.sendprop_t
-	(*CSVCMsg_GameEventListKeyT)(nil),                            // 87: dota.CSVCMsg_GameEventList.key_t
-	(*CSVCMsg_GameEventListDescriptorT)(nil),                     // 88: dota.CSVCMsg_GameEventList.descriptor_t
-	(*CSVCMsg_PacketEntitiesAlternateBaselineT)(nil),             // 89: dota.CSVCMsg_PacketEntities.alternate_baseline_t
-	(*CSVCMsg_PacketEntitiesNonTransmittedEntitiesT)(nil),        // 90: dota.CSVCMsg_PacketEntities.non_transmitted_entities_t
-	(*CSVCMsg_PacketEntitiesOutofpvsEntityUpdatesT)(nil),         // 91: dota.CSVCMsg_PacketEntities.outofpvs_entity_updates_t
-	(*ProtoFlattenedSerializerFieldTPolymorphicFieldT)(nil),      // 92: dota.ProtoFlattenedSerializerField_t.polymorphic_field_t
-	(*CMsgServerNetworkStats_Port)(nil),                          // 93: dota.CMsgServerNetworkStats.Port
-	(*CMsgServerNetworkStats_Player)(nil),                        // 94: dota.CMsgServerNetworkStats.Player
-	(*CSVCMsg_GameSessionConfiguration)(nil),                     // 95: dota.CSVCMsg_GameSessionConfiguration
-	(*CMsgQAngle)(nil),                                           // 96: dota.CMsgQAngle
-	(*CMsgVector)(nil),                                           // 97: dota.CMsgVector
+	(CLC_Messages)(0),                                       // 0: dota.CLC_Messages
+	(SVC_Messages)(0),                                       // 1: dota.SVC_Messages
+	(VoiceDataFormatT)(0),                                   // 2: dota.VoiceDataFormat_t
+	(RequestPauseT)(0),                                      // 3: dota.RequestPause_t
+	(PrefetchType)(0),                                       // 4: dota.PrefetchType
+	(ESplitScreenMessageType)(0),                            // 5: dota.ESplitScreenMessageType
+	(EQueryCvarValueStatus)(0),                              // 6: dota.EQueryCvarValueStatus
+	(DIALOG_TYPE)(0),                                        // 7: dota.DIALOG_TYPE
+	(SVC_Messages_LowFrequency)(0),                          // 8: dota.SVC_Messages_LowFrequency
+	(Bidirectional_Messages)(0),                             // 9: dota.Bidirectional_Messages
+	(ReplayEventTypeT)(0),                                   // 10: dota.ReplayEventType_t
+	(CBidirMsg_PredictionEvent_ESyncType)(0),                // 11: dota.CBidirMsg_PredictionEvent.ESyncType
+	(*CCLCMsg_ClientInfo)(nil),                              // 12: dota.CCLCMsg_ClientInfo
+	(*CCLCMsg_Move)(nil),                                    // 13: dota.CCLCMsg_Move
+	(*CMsgVoiceAudio)(nil),                                  // 14: dota.CMsgVoiceAudio
+	(*CCLCMsg_VoiceData)(nil),                               // 15: dota.CCLCMsg_VoiceData
+	(*CCLCMsg_BaselineAck)(nil),                             // 16: dota.CCLCMsg_BaselineAck
+	(*CCLCMsg_ListenEvents)(nil),                            // 17: dota.CCLCMsg_ListenEvents
+	(*CCLCMsg_RespondCvarValue)(nil),                        // 18: dota.CCLCMsg_RespondCvarValue
+	(*CCLCMsg_LoadingProgress)(nil),                         // 19: dota.CCLCMsg_LoadingProgress
+	(*CCLCMsg_SplitPlayerConnect)(nil),                      // 20: dota.CCLCMsg_SplitPlayerConnect
+	(*CCLCMsg_SplitPlayerDisconnect)(nil),                   // 21: dota.CCLCMsg_SplitPlayerDisconnect
+	(*CCLCMsg_ServerStatus)(nil),                            // 22: dota.CCLCMsg_ServerStatus
+	(*CCLCMsg_RequestPause)(nil),                            // 23: dota.CCLCMsg_RequestPause
+	(*CCLCMsg_CmdKeyValues)(nil),                            // 24: dota.CCLCMsg_CmdKeyValues
+	(*CCLCMsg_RconServerDetails)(nil),                       // 25: dota.CCLCMsg_RconServerDetails
+	(*CCLCMsg_Diagnostic)(nil),                              // 26: dota.CCLCMsg_Diagnostic
+	(*CSVCMsg_ServerInfo)(nil),                              // 27: dota.CSVCMsg_ServerInfo
+	(*CSVCMsg_ClassInfo)(nil),                               // 28: dota.CSVCMsg_ClassInfo
+	(*CSVCMsg_SetPause)(nil),                                // 29: dota.CSVCMsg_SetPause
+	(*CSVCMsg_VoiceInit)(nil),                               // 30: dota.CSVCMsg_VoiceInit
+	(*CSVCMsg_Print)(nil),                                   // 31: dota.CSVCMsg_Print
+	(*CSVCMsg_Sounds)(nil),                                  // 32: dota.CSVCMsg_Sounds
+	(*CSVCMsg_Prefetch)(nil),                                // 33: dota.CSVCMsg_Prefetch
+	(*CSVCMsg_SetView)(nil),                                 // 34: dota.CSVCMsg_SetView
+	(*CSVCMsg_FixAngle)(nil),                                // 35: dota.CSVCMsg_FixAngle
+	(*CSVCMsg_CrosshairAngle)(nil),                          // 36: dota.CSVCMsg_CrosshairAngle
+	(*CSVCMsg_BSPDecal)(nil),                                // 37: dota.CSVCMsg_BSPDecal
+	(*CSVCMsg_SplitScreen)(nil),                             // 38: dota.CSVCMsg_SplitScreen
+	(*CSVCMsg_GetCvarValue)(nil),                            // 39: dota.CSVCMsg_GetCvarValue
+	(*CSVCMsg_Menu)(nil),                                    // 40: dota.CSVCMsg_Menu
+	(*CSVCMsg_UserMessage)(nil),                             // 41: dota.CSVCMsg_UserMessage
+	(*CSVCMsg_SendTable)(nil),                               // 42: dota.CSVCMsg_SendTable
+	(*CSVCMsg_GameEventList)(nil),                           // 43: dota.CSVCMsg_GameEventList
+	(*CSVCMsg_PacketEntities)(nil),                          // 44: dota.CSVCMsg_PacketEntities
+	(*CSVCMsg_TempEntities)(nil),                            // 45: dota.CSVCMsg_TempEntities
+	(*CSVCMsg_CreateStringTable)(nil),                       // 46: dota.CSVCMsg_CreateStringTable
+	(*CSVCMsg_UpdateStringTable)(nil),                       // 47: dota.CSVCMsg_UpdateStringTable
+	(*CSVCMsg_VoiceData)(nil),                               // 48: dota.CSVCMsg_VoiceData
+	(*CSVCMsg_PacketReliable)(nil),                          // 49: dota.CSVCMsg_PacketReliable
+	(*CSVCMsg_FullFrameSplit)(nil),                          // 50: dota.CSVCMsg_FullFrameSplit
+	(*CSVCMsg_HLTVStatus)(nil),                              // 51: dota.CSVCMsg_HLTVStatus
+	(*CSVCMsg_ServerSteamID)(nil),                           // 52: dota.CSVCMsg_ServerSteamID
+	(*CSVCMsg_CmdKeyValues)(nil),                            // 53: dota.CSVCMsg_CmdKeyValues
+	(*CSVCMsg_RconServerDetails)(nil),                       // 54: dota.CSVCMsg_RconServerDetails
+	(*CMsgIPCAddress)(nil),                                  // 55: dota.CMsgIPCAddress
+	(*CMsgServerPeer)(nil),                                  // 56: dota.CMsgServerPeer
+	(*CSVCMsg_PeerList)(nil),                                // 57: dota.CSVCMsg_PeerList
+	(*CSVCMsg_ClearAllStringTables)(nil),                    // 58: dota.CSVCMsg_ClearAllStringTables
+	(*ProtoFlattenedSerializerFieldT)(nil),                  // 59: dota.ProtoFlattenedSerializerField_t
+	(*ProtoFlattenedSerializerT)(nil),                       // 60: dota.ProtoFlattenedSerializer_t
+	(*CSVCMsg_FlattenedSerializer)(nil),                     // 61: dota.CSVCMsg_FlattenedSerializer
+	(*CSVCMsg_StopSound)(nil),                               // 62: dota.CSVCMsg_StopSound
+	(*CBidirMsg_RebroadcastGameEvent)(nil),                  // 63: dota.CBidirMsg_RebroadcastGameEvent
+	(*CBidirMsg_RebroadcastSource)(nil),                     // 64: dota.CBidirMsg_RebroadcastSource
+	(*CBidirMsg_PredictionEvent)(nil),                       // 65: dota.CBidirMsg_PredictionEvent
+	(*CMsgServerNetworkStats)(nil),                          // 66: dota.CMsgServerNetworkStats
+	(*CSVCMsg_HltvReplay)(nil),                              // 67: dota.CSVCMsg_HltvReplay
+	(*CCLCMsg_HltvReplay)(nil),                              // 68: dota.CCLCMsg_HltvReplay
+	(*CSVCMsg_Broadcast_Command)(nil),                       // 69: dota.CSVCMsg_Broadcast_Command
+	(*CCLCMsg_HltvFixupOperatorTick)(nil),                   // 70: dota.CCLCMsg_HltvFixupOperatorTick
+	(*CSVCMsg_HltvFixupOperatorStatus)(nil),                 // 71: dota.CSVCMsg_HltvFixupOperatorStatus
+	(*CMsgServerUserCmd)(nil),                               // 72: dota.CMsgServerUserCmd
+	(*CSVCMsg_UserCommands)(nil),                            // 73: dota.CSVCMsg_UserCommands
+	(*CSVCMsg_NextMsgPredicted)(nil),                        // 74: dota.CSVCMsg_NextMsgPredicted
+	(*CSVCMsg_ClassInfoClassT)(nil),                         // 75: dota.CSVCMsg_ClassInfo.class_t
+	(*CSVCMsg_SoundsSounddataT)(nil),                        // 76: dota.CSVCMsg_Sounds.sounddata_t
+	(*CSVCMsg_SendTableSendpropT)(nil),                      // 77: dota.CSVCMsg_SendTable.sendprop_t
+	(*CSVCMsg_GameEventListKeyT)(nil),                       // 78: dota.CSVCMsg_GameEventList.key_t
+	(*CSVCMsg_GameEventListDescriptorT)(nil),                // 79: dota.CSVCMsg_GameEventList.descriptor_t
+	(*CSVCMsg_PacketEntitiesAlternateBaselineT)(nil),        // 80: dota.CSVCMsg_PacketEntities.alternate_baseline_t
+	(*CSVCMsg_PacketEntitiesNonTransmittedEntitiesT)(nil),   // 81: dota.CSVCMsg_PacketEntities.non_transmitted_entities_t
+	(*CSVCMsg_PacketEntitiesOutofpvsEntityUpdatesT)(nil),    // 82: dota.CSVCMsg_PacketEntities.outofpvs_entity_updates_t
+	(*ProtoFlattenedSerializerFieldTPolymorphicFieldT)(nil), // 83: dota.ProtoFlattenedSerializerField_t.polymorphic_field_t
+	(*CMsgServerNetworkStats_Port)(nil),                     // 84: dota.CMsgServerNetworkStats.Port
+	(*CMsgServerNetworkStats_Player)(nil),                   // 85: dota.CMsgServerNetworkStats.Player
+	(*CMsgSource2SystemSpecs)(nil),                          // 86: dota.CMsgSource2SystemSpecs
+	(*CMsgSource2VProfLiteReport)(nil),                      // 87: dota.CMsgSource2VProfLiteReport
+	(*CMsgSource2NetworkFlowQuality)(nil),                   // 88: dota.CMsgSource2NetworkFlowQuality
+	(*CMsgSource2PerfIntervalSample)(nil),                   // 89: dota.CMsgSource2PerfIntervalSample
+	(*CSVCMsg_GameSessionConfiguration)(nil),                // 90: dota.CSVCMsg_GameSessionConfiguration
+	(*CMsgQAngle)(nil),                                      // 91: dota.CMsgQAngle
+	(*CMsgVector)(nil),                                      // 92: dota.CMsgVector
 }
 var file_netmessages_proto_depIdxs = []int32{
 	2,  // 0: dota.CMsgVoiceAudio.format:type_name -> dota.VoiceDataFormat_t
-	15, // 1: dota.CCLCMsg_VoiceData.audio:type_name -> dota.CMsgVoiceAudio
+	14, // 1: dota.CCLCMsg_VoiceData.audio:type_name -> dota.CMsgVoiceAudio
 	3,  // 2: dota.CCLCMsg_RequestPause.pause_type:type_name -> dota.RequestPause_t
-	28, // 3: dota.CMsgSource2VProfLiteReport.total:type_name -> dota.CMsgSource2VProfLiteReportItem
-	28, // 4: dota.CMsgSource2VProfLiteReport.items:type_name -> dota.CMsgSource2VProfLiteReportItem
-	82, // 5: dota.CMsgSource2PerfIntervalSample.tags:type_name -> dota.CMsgSource2PerfIntervalSample.Tag
-	27, // 6: dota.CCLCMsg_Diagnostic.system_specs:type_name -> dota.CMsgSource2SystemSpecs
-	29, // 7: dota.CCLCMsg_Diagnostic.vprof_report:type_name -> dota.CMsgSource2VProfLiteReport
-	30, // 8: dota.CCLCMsg_Diagnostic.downstream_flow:type_name -> dota.CMsgSource2NetworkFlowQuality
-	30, // 9: dota.CCLCMsg_Diagnostic.upstream_flow:type_name -> dota.CMsgSource2NetworkFlowQuality
-	31, // 10: dota.CCLCMsg_Diagnostic.perf_samples:type_name -> dota.CMsgSource2PerfIntervalSample
-	29, // 11: dota.CSource2Metrics_MatchPerfSummary_Notification.server_profile:type_name -> dota.CMsgSource2VProfLiteReport
-	83, // 12: dota.CSource2Metrics_MatchPerfSummary_Notification.clients:type_name -> dota.CSource2Metrics_MatchPerfSummary_Notification.Client
-	95, // 13: dota.CSVCMsg_ServerInfo.game_session_config:type_name -> dota.CSVCMsg_GameSessionConfiguration
-	84, // 14: dota.CSVCMsg_ClassInfo.classes:type_name -> dota.CSVCMsg_ClassInfo.class_t
-	85, // 15: dota.CSVCMsg_Sounds.sounds:type_name -> dota.CSVCMsg_Sounds.sounddata_t
-	4,  // 16: dota.CSVCMsg_Prefetch.resource_type:type_name -> dota.PrefetchType
-	96, // 17: dota.CSVCMsg_FixAngle.angle:type_name -> dota.CMsgQAngle
-	96, // 18: dota.CSVCMsg_CrosshairAngle.angle:type_name -> dota.CMsgQAngle
-	97, // 19: dota.CSVCMsg_BSPDecal.pos:type_name -> dota.CMsgVector
-	5,  // 20: dota.CSVCMsg_SplitScreen.type:type_name -> dota.ESplitScreenMessageType
-	86, // 21: dota.CSVCMsg_SendTable.props:type_name -> dota.CSVCMsg_SendTable.sendprop_t
-	88, // 22: dota.CSVCMsg_GameEventList.descriptors:type_name -> dota.CSVCMsg_GameEventList.descriptor_t
-	89, // 23: dota.CSVCMsg_PacketEntities.alternate_baselines:type_name -> dota.CSVCMsg_PacketEntities.alternate_baseline_t
-	90, // 24: dota.CSVCMsg_PacketEntities.non_transmitted_entities:type_name -> dota.CSVCMsg_PacketEntities.non_transmitted_entities_t
-	91, // 25: dota.CSVCMsg_PacketEntities.outofpvs_entity_updates:type_name -> dota.CSVCMsg_PacketEntities.outofpvs_entity_updates_t
-	15, // 26: dota.CSVCMsg_VoiceData.audio:type_name -> dota.CMsgVoiceAudio
-	62, // 27: dota.CMsgServerPeer.ipc:type_name -> dota.CMsgIPCAddress
-	63, // 28: dota.CSVCMsg_PeerList.peer:type_name -> dota.CMsgServerPeer
-	92, // 29: dota.ProtoFlattenedSerializerField_t.polymorphic_types:type_name -> dota.ProtoFlattenedSerializerField_t.polymorphic_field_t
-	67, // 30: dota.CSVCMsg_FlattenedSerializer.serializers:type_name -> dota.ProtoFlattenedSerializer_t
-	66, // 31: dota.CSVCMsg_FlattenedSerializer.fields:type_name -> dota.ProtoFlattenedSerializerField_t
-	93, // 32: dota.CMsgServerNetworkStats.ports:type_name -> dota.CMsgServerNetworkStats.Port
-	94, // 33: dota.CMsgServerNetworkStats.players:type_name -> dota.CMsgServerNetworkStats.Player
-	97, // 34: dota.CCLCMsg_HltvFixupOperatorTick.origin:type_name -> dota.CMsgVector
-	96, // 35: dota.CCLCMsg_HltvFixupOperatorTick.eye_angles:type_name -> dota.CMsgQAngle
-	97, // 36: dota.CCLCMsg_HltvFixupOperatorTick.view_offset:type_name -> dota.CMsgVector
-	79, // 37: dota.CSVCMsg_UserCommands.commands:type_name -> dota.CMsgServerUserCmd
-	27, // 38: dota.CSource2Metrics_MatchPerfSummary_Notification.Client.system_specs:type_name -> dota.CMsgSource2SystemSpecs
-	29, // 39: dota.CSource2Metrics_MatchPerfSummary_Notification.Client.profile:type_name -> dota.CMsgSource2VProfLiteReport
-	30, // 40: dota.CSource2Metrics_MatchPerfSummary_Notification.Client.downstream_flow:type_name -> dota.CMsgSource2NetworkFlowQuality
-	30, // 41: dota.CSource2Metrics_MatchPerfSummary_Notification.Client.upstream_flow:type_name -> dota.CMsgSource2NetworkFlowQuality
-	31, // 42: dota.CSource2Metrics_MatchPerfSummary_Notification.Client.perf_samples:type_name -> dota.CMsgSource2PerfIntervalSample
-	87, // 43: dota.CSVCMsg_GameEventList.descriptor_t.keys:type_name -> dota.CSVCMsg_GameEventList.key_t
-	44, // [44:44] is the sub-list for method output_type
-	44, // [44:44] is the sub-list for method input_type
-	44, // [44:44] is the sub-list for extension type_name
-	44, // [44:44] is the sub-list for extension extendee
-	0,  // [0:44] is the sub-list for field type_name
+	86, // 3: dota.CCLCMsg_Diagnostic.system_specs:type_name -> dota.CMsgSource2SystemSpecs
+	87, // 4: dota.CCLCMsg_Diagnostic.vprof_report:type_name -> dota.CMsgSource2VProfLiteReport
+	88, // 5: dota.CCLCMsg_Diagnostic.downstream_flow:type_name -> dota.CMsgSource2NetworkFlowQuality
+	88, // 6: dota.CCLCMsg_Diagnostic.upstream_flow:type_name -> dota.CMsgSource2NetworkFlowQuality
+	89, // 7: dota.CCLCMsg_Diagnostic.perf_samples:type_name -> dota.CMsgSource2PerfIntervalSample
+	90, // 8: dota.CSVCMsg_ServerInfo.game_session_config:type_name -> dota.CSVCMsg_GameSessionConfiguration
+	75, // 9: dota.CSVCMsg_ClassInfo.classes:type_name -> dota.CSVCMsg_ClassInfo.class_t
+	76, // 10: dota.CSVCMsg_Sounds.sounds:type_name -> dota.CSVCMsg_Sounds.sounddata_t
+	4,  // 11: dota.CSVCMsg_Prefetch.resource_type:type_name -> dota.PrefetchType
+	91, // 12: dota.CSVCMsg_FixAngle.angle:type_name -> dota.CMsgQAngle
+	91, // 13: dota.CSVCMsg_CrosshairAngle.angle:type_name -> dota.CMsgQAngle
+	92, // 14: dota.CSVCMsg_BSPDecal.pos:type_name -> dota.CMsgVector
+	5,  // 15: dota.CSVCMsg_SplitScreen.type:type_name -> dota.ESplitScreenMessageType
+	77, // 16: dota.CSVCMsg_SendTable.props:type_name -> dota.CSVCMsg_SendTable.sendprop_t
+	79, // 17: dota.CSVCMsg_GameEventList.descriptors:type_name -> dota.CSVCMsg_GameEventList.descriptor_t
+	80, // 18: dota.CSVCMsg_PacketEntities.alternate_baselines:type_name -> dota.CSVCMsg_PacketEntities.alternate_baseline_t
+	81, // 19: dota.CSVCMsg_PacketEntities.non_transmitted_entities:type_name -> dota.CSVCMsg_PacketEntities.non_transmitted_entities_t
+	82, // 20: dota.CSVCMsg_PacketEntities.outofpvs_entity_updates:type_name -> dota.CSVCMsg_PacketEntities.outofpvs_entity_updates_t
+	14, // 21: dota.CSVCMsg_VoiceData.audio:type_name -> dota.CMsgVoiceAudio
+	55, // 22: dota.CMsgServerPeer.ipc:type_name -> dota.CMsgIPCAddress
+	56, // 23: dota.CSVCMsg_PeerList.peer:type_name -> dota.CMsgServerPeer
+	83, // 24: dota.ProtoFlattenedSerializerField_t.polymorphic_types:type_name -> dota.ProtoFlattenedSerializerField_t.polymorphic_field_t
+	60, // 25: dota.CSVCMsg_FlattenedSerializer.serializers:type_name -> dota.ProtoFlattenedSerializer_t
+	59, // 26: dota.CSVCMsg_FlattenedSerializer.fields:type_name -> dota.ProtoFlattenedSerializerField_t
+	84, // 27: dota.CMsgServerNetworkStats.ports:type_name -> dota.CMsgServerNetworkStats.Port
+	85, // 28: dota.CMsgServerNetworkStats.players:type_name -> dota.CMsgServerNetworkStats.Player
+	92, // 29: dota.CCLCMsg_HltvFixupOperatorTick.origin:type_name -> dota.CMsgVector
+	91, // 30: dota.CCLCMsg_HltvFixupOperatorTick.eye_angles:type_name -> dota.CMsgQAngle
+	92, // 31: dota.CCLCMsg_HltvFixupOperatorTick.view_offset:type_name -> dota.CMsgVector
+	72, // 32: dota.CSVCMsg_UserCommands.commands:type_name -> dota.CMsgServerUserCmd
+	78, // 33: dota.CSVCMsg_GameEventList.descriptor_t.keys:type_name -> dota.CSVCMsg_GameEventList.key_t
+	34, // [34:34] is the sub-list for method output_type
+	34, // [34:34] is the sub-list for method input_type
+	34, // [34:34] is the sub-list for extension type_name
+	34, // [34:34] is the sub-list for extension extendee
+	0,  // [0:34] is the sub-list for field type_name
 }
 
 func init() { file_netmessages_proto_init() }
@@ -7891,13 +6600,14 @@ func file_netmessages_proto_init() {
 		return
 	}
 	file_networkbasetypes_proto_init()
+	file_source2_steam_stats_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_netmessages_proto_rawDesc), len(file_netmessages_proto_rawDesc)),
-			NumEnums:      13,
-			NumMessages:   82,
+			NumEnums:      12,
+			NumMessages:   74,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

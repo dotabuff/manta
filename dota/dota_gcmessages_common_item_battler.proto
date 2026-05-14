@@ -1,0 +1,215 @@
+syntax = "proto2";
+
+package dota;
+option go_package = "github.com/dotabuff/manta/dota;dota";
+
+import "steammessages.proto";
+import "dota_shared_enums.proto";
+import "dota_gcmessages_common.proto";
+import "gcsdk_gcmessages.proto";
+
+enum EItemBattlerAuditAction {
+	k_eItemBattlerAuditAction_Invalid = 0;
+}
+
+enum EItemBattlerGameState {
+	k_eGameState_Invalid = 0;
+	k_eGameState_ChoosingEncounter = 1;
+	k_eGameState_Encounter_Choice = 2;
+	k_eGameState_Encounter_Shop = 3;
+	k_eGameState_ChoosingMonster = 4;
+	k_eGameState_SearchingForOpponent = 5;
+	k_eGameState_ShowingOpponent = 6;
+	k_eGameState_PreFight = 7;
+	k_eGameState_Fight = 8;
+	k_eGameState_PostFight = 9;
+	k_eGameState_GameOver = 10;
+}
+
+message CMsgItemBattlerPlayerInfo {
+	optional uint32 account_id = 1;
+	optional uint32 rank = 2;
+	optional uint32 run_count = 3;
+	optional uint32 victory_count = 4;
+	optional uint32 concede_count = 5;
+}
+
+message CMsgItemBattlerItemModifier {
+	optional uint32 type = 1;
+	optional float value = 2;
+	optional bool multiplicative = 3;
+}
+
+message CMsgItemBattlerItem {
+	optional uint32 item_definition_id = 1;
+	optional uint32 item_instance_id = 2;
+	optional uint32 item_container_id = 3;
+	optional uint32 position_x = 4;
+	optional uint32 position_y = 5;
+	repeated CMsgItemBattlerItemModifier permanent_modifiers = 6;
+}
+
+message CMsgItemBattlerItemContainer {
+	optional uint32 item_container_id = 1;
+	repeated uint32 item_slot_ids = 2;
+	optional int32 width = 3;
+	optional int32 height = 4;
+	optional bool is_shop = 5;
+}
+
+message CMsgItemBattlerFightEvent {
+	optional uint32 item_instance_id = 1;
+	repeated uint32 item_target_instance_ids = 2;
+	optional uint32 tick = 3;
+	optional uint32 effect = 4;
+	optional int32 value = 5;
+	optional bool critical = 6;
+	optional uint32 lifesteal_healing = 7;
+}
+
+message CMsgItemBattlerFightResult {
+	optional bool win = 1;
+	repeated CMsgItemBattlerFightEvent events = 2;
+	optional bool error = 3;
+}
+
+message CMsgItemBattlerPlayerData {
+	optional uint32 account_id = 1;
+	optional uint32 hero_id = 2;
+	optional uint32 monster_id = 3;
+	optional CMsgItemBattlerItemContainer board = 4;
+	optional int32 wins = 5;
+	optional int32 losses = 6;
+	optional int32 prestige = 7;
+	optional uint32 level = 8;
+	optional int32 experience = 9;
+	repeated uint32 skills = 10;
+	optional int32 income = 11;
+	optional int32 gold = 12;
+	optional uint32 base_max_health = 13;
+	optional uint32 bonus_max_health = 14;
+	optional CMsgItemBattlerItemContainer abilities = 15;
+}
+
+message CMsgItemBattlerEncounterData {
+	optional bool is_shop = 1;
+	optional uint32 encounter_id = 2;
+	optional CMsgItemBattlerItemContainer shop_items = 3;
+}
+
+message CMsgItemBattlerGhostData {
+	message ItemsEntry {
+		optional uint32 key = 1;
+		optional CMsgItemBattlerItem value = 2;
+	}
+
+	message AbilitiesEntry {
+		optional uint32 key = 1;
+		optional CMsgItemBattlerItem value = 2;
+	}
+
+	optional CMsgItemBattlerPlayerData player_data = 1;
+	repeated CMsgItemBattlerGhostData.ItemsEntry items = 2;
+	optional int32 day = 3;
+	repeated CMsgItemBattlerGhostData.AbilitiesEntry abilities = 4;
+}
+
+message CMsgItemBattlerWorldData {
+	message ItemsEntry {
+		optional uint32 key = 1;
+		optional CMsgItemBattlerItem value = 2;
+	}
+
+	optional bool run_active = 1;
+	optional uint32 run_id = 2;
+	optional EItemBattlerGameState game_state = 3;
+	optional CMsgItemBattlerPlayerData player_data = 4;
+	optional CMsgItemBattlerPlayerData opponent_data = 5;
+	optional CMsgItemBattlerItemContainer stash = 6;
+	optional CMsgItemBattlerEncounterData encounter = 7;
+	optional CMsgItemBattlerFightResult fight_result = 8;
+	repeated CMsgItemBattlerWorldData.ItemsEntry items = 9;
+	optional int32 day = 10;
+	optional int32 hour = 11;
+	repeated uint32 encounter_choices = 12;
+	repeated uint32 monster_choices = 13;
+	optional bool conceded = 14;
+}
+
+message CMsgItemBattlerGameData {
+	optional uint32 seed = 1;
+	optional CMsgItemBattlerWorldData world_data = 2;
+}
+
+message CMsgClientToGCItemBattlerGetUserData {
+}
+
+message CMsgClientToGCItemBattlerGetUserDataResponse {
+	enum EResponse {
+		k_eInternalError = 0;
+		k_eSuccess = 1;
+		k_eTooBusy = 2;
+		k_eDisabled = 3;
+		k_eTimeout = 4;
+	}
+
+	optional CMsgClientToGCItemBattlerGetUserDataResponse.EResponse response = 1;
+	optional CMsgItemBattlerWorldData world_data = 2;
+}
+
+message CMsgItemBattlerItemAction {
+}
+
+message CMsgClientToGCItemBattlerGameAction {
+	enum EAction {
+		k_eInvalid = 0;
+		k_eStartNewRun = 1;
+		k_eForfeitRun = 2;
+		k_eChooseOption = 3;
+		k_eContinue = 4;
+		k_eItemMove = 5;
+		k_eItemPurchase = 6;
+		k_eItemSell = 7;
+	}
+
+	optional CMsgClientToGCItemBattlerGameAction.EAction action = 1;
+	optional uint32 choice_index = 2;
+	optional uint32 item_instance_id = 3;
+	optional uint32 item_container_id = 4;
+	optional uint32 item_position_x = 5;
+	optional uint32 item_position_y = 6;
+}
+
+message CMsgClientToGCItemBattlerGameActionResponse {
+	enum EResponse {
+		k_eInternalError = 0;
+		k_eSuccess = 1;
+		k_eTooBusy = 2;
+		k_eDisabled = 3;
+		k_eTimeout = 4;
+		k_eInvalidAction = 5;
+	}
+
+	optional CMsgClientToGCItemBattlerGameActionResponse.EResponse response = 1;
+	optional CMsgItemBattlerWorldData updated_world_data = 2;
+}
+
+message CMsgClientToGCItemBattlerDevGrantItem {
+	optional uint32 item_definition_id = 1;
+}
+
+message CMsgClientToGCItemBattlerDevGrantItemResponse {
+	enum EResponse {
+		k_eInternalError = 0;
+		k_eSuccess = 1;
+		k_eTooBusy = 2;
+		k_eDisabled = 3;
+		k_eTimeout = 4;
+	}
+
+	optional CMsgClientToGCItemBattlerDevGrantItemResponse.EResponse response = 1;
+}
+
+message CMsgGCToClientItemBattlerUserDataUpdated {
+	optional CMsgItemBattlerWorldData world_data = 1;
+}

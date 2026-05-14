@@ -287,8 +287,8 @@ func (x *CP2P_Voice) GetBroadcastGroup() uint32 {
 
 type CP2P_Ping struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	SendTime      *uint64                `protobuf:"varint,1,req,name=send_time,json=sendTime" json:"send_time,omitempty"`
-	IsReply       *bool                  `protobuf:"varint,2,req,name=is_reply,json=isReply" json:"is_reply,omitempty"`
+	SendTime      *uint64                `protobuf:"varint,1,opt,name=send_time,json=sendTime" json:"send_time,omitempty"`
+	IsReply       *bool                  `protobuf:"varint,2,opt,name=is_reply,json=isReply" json:"is_reply,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -574,8 +574,8 @@ const file_c_peer2peer_netmessages_proto_rawDesc = "" +
 	"\rHandler_Flags\x12\x10\n" +
 	"\fPlayed_Audio\x10\x01\"C\n" +
 	"\tCP2P_Ping\x12\x1b\n" +
-	"\tsend_time\x18\x01 \x02(\x04R\bsendTime\x12\x19\n" +
-	"\bis_reply\x18\x02 \x02(\bR\aisReply\"\x8b\x02\n" +
+	"\tsend_time\x18\x01 \x01(\x04R\bsendTime\x12\x19\n" +
+	"\bis_reply\x18\x02 \x01(\bR\aisReply\"\x8b\x02\n" +
 	"\x15CP2P_VRAvatarPosition\x12G\n" +
 	"\n" +
 	"body_parts\x18\x01 \x03(\v2(.dota.CP2P_VRAvatarPosition.COrientationR\tbodyParts\x12\x15\n" +

@@ -2518,8 +2518,8 @@ func (x *CMsgBattleReport_HighlightGeneral) GetHighlightScore() float32 {
 
 type CMsgBattleReport_Highlight struct {
 	state                protoimpl.MessageState              `protogen:"open.v1"`
-	HighlightId          *uint32                             `protobuf:"varint,1,req,name=highlight_id,json=highlightId" json:"highlight_id,omitempty"`
-	Category             *CMsgBattleReport_HighlightCategory `protobuf:"varint,2,req,name=category,enum=dota.CMsgBattleReport_HighlightCategory" json:"category,omitempty"`
+	HighlightId          *uint32                             `protobuf:"varint,1,opt,name=highlight_id,json=highlightId" json:"highlight_id,omitempty"`
+	Category             *CMsgBattleReport_HighlightCategory `protobuf:"varint,2,opt,name=category,enum=dota.CMsgBattleReport_HighlightCategory" json:"category,omitempty"`
 	Tier                 *CMsgBattleReport_HighlightTier     `protobuf:"varint,3,opt,name=tier,enum=dota.CMsgBattleReport_HighlightTier" json:"tier,omitempty"`
 	Rarity               *CMsgBattleReport_HighlightRarity   `protobuf:"varint,4,opt,name=rarity,enum=dota.CMsgBattleReport_HighlightRarity" json:"rarity,omitempty"`
 	Score                *float32                            `protobuf:"fixed32,5,opt,name=score" json:"score,omitempty"`
@@ -3104,8 +3104,8 @@ const file_dota_gcmessages_common_battle_report_proto_rawDesc = "" +
 	"\tmmr_delta\x18\x03 \x01(\x05R\bmmrDelta\x12'\n" +
 	"\x0fhighlight_score\x18\x04 \x01(\x02R\x0ehighlightScore\x1a\xe5\x03\n" +
 	"\tHighlight\x12!\n" +
-	"\fhighlight_id\x18\x01 \x02(\rR\vhighlightId\x12D\n" +
-	"\bcategory\x18\x02 \x02(\x0e2(.dota.CMsgBattleReport_HighlightCategoryR\bcategory\x128\n" +
+	"\fhighlight_id\x18\x01 \x01(\rR\vhighlightId\x12D\n" +
+	"\bcategory\x18\x02 \x01(\x0e2(.dota.CMsgBattleReport_HighlightCategoryR\bcategory\x128\n" +
 	"\x04tier\x18\x03 \x01(\x0e2$.dota.CMsgBattleReport_HighlightTierR\x04tier\x12>\n" +
 	"\x06rarity\x18\x04 \x01(\x0e2&.dota.CMsgBattleReport_HighlightRarityR\x06rarity\x12\x14\n" +
 	"\x05score\x18\x05 \x01(\x02R\x05score\x12\x1e\n" +

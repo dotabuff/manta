@@ -79,7 +79,7 @@ func (EDotaBroadcastMessages) EnumDescriptor() ([]byte, []int) {
 
 type CDOTABroadcastMsg struct {
 	state         protoimpl.MessageState  `protogen:"open.v1"`
-	Type          *EDotaBroadcastMessages `protobuf:"varint,1,req,name=type,enum=dota.EDotaBroadcastMessages" json:"type,omitempty"`
+	Type          *EDotaBroadcastMessages `protobuf:"varint,1,opt,name=type,enum=dota.EDotaBroadcastMessages" json:"type,omitempty"`
 	Msg           []byte                  `protobuf:"bytes,2,opt,name=msg" json:"msg,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -331,7 +331,7 @@ const file_dota_broadcastmessages_proto_rawDesc = "" +
 	"\n" +
 	"\x1cdota_broadcastmessages.proto\x12\x04dota\"W\n" +
 	"\x11CDOTABroadcastMsg\x120\n" +
-	"\x04type\x18\x01 \x02(\x0e2\x1c.dota.EDotaBroadcastMessagesR\x04type\x12\x10\n" +
+	"\x04type\x18\x01 \x01(\x0e2\x1c.dota.EDotaBroadcastMessagesR\x04type\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\fR\x03msg\"#\n" +
 	"!CDOTABroadcastMsg_LANLobbyRequest\"\xc5\x03\n" +
 	"\x1fCDOTABroadcastMsg_LANLobbyReply\x12\x0e\n" +

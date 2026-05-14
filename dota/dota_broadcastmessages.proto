@@ -9,7 +9,7 @@ enum EDotaBroadcastMessages {
 }
 
 message CDOTABroadcastMsg {
-	required EDotaBroadcastMessages type = 1;
+	optional EDotaBroadcastMessages type = 1;
 	optional bytes msg = 2;
 }
 

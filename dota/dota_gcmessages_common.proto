@@ -1361,6 +1361,7 @@ message CMsgServerToGCRequestPlayerRecentAccomplishmentsResponse {
 		k_eSuccess = 1;
 		k_eTooBusy = 2;
 		k_eDisabled = 3;
+		k_eForbidden = 4;
 	}
 
 	optional CMsgServerToGCRequestPlayerRecentAccomplishmentsResponse.EResponse result = 1;
@@ -1614,6 +1615,7 @@ message CMsgGameDataItemAbilityList {
 		optional bool is_earlygame_suggested = 7;
 		optional bool is_lategame_suggested = 8;
 		repeated CMsgGameDataItemAbilityList.ItemAbilityInfo.Recipe recipes = 9;
+		optional bool is_innate = 10;
 	}
 
 	repeated CMsgGameDataItemAbilityList.ItemAbilityInfo itemabilities = 1;
@@ -1864,19 +1866,11 @@ message CDotaMsgStructuredTooltipProperties {
 		}
 	}
 
-	message FacetDisplayProperties {
-		optional string facet_name_loc_token = 1;
-		optional string facet_desc_loc_token = 2;
-		optional string facet_icon_style_name = 3;
-		optional string facet_color_style_name = 4;
-		optional string facet_gradient_style_name = 5;
-	}
-
 	message Attribute {
-		optional string name_loc_token = 1;
-		optional CDotaMsgStructuredTooltipProperties.EAttributeType type = 2;
-		optional CDotaMsgStructuredTooltipProperties.AttributeValue value = 3;
-		optional CDotaMsgStructuredTooltipProperties.FacetDisplayProperties facet = 4;
+		optional string internal_name = 1;
+		optional string localized_name_text = 2;
+		optional CDotaMsgStructuredTooltipProperties.EAttributeType type = 3;
+		optional CDotaMsgStructuredTooltipProperties.AttributeValue value = 4;
 	}
 
 	message AttributeGroupDesc_Basic {
@@ -1887,15 +1881,11 @@ message CDotaMsgStructuredTooltipProperties {
 		optional string desc_loc_token = 2;
 	}
 
-	message AttributeGroupDesc_Facet {
-		optional CDotaMsgStructuredTooltipProperties.FacetDisplayProperties facet = 1;
-	}
-
 	message AttributeGroupDescription {
 		oneof attr_group_desc {
 			CDotaMsgStructuredTooltipProperties.AttributeGroupDesc_Basic basic_value = 1;
-			CDotaMsgStructuredTooltipProperties.AttributeGroupDesc_Specific specific_value = 2;
-			CDotaMsgStructuredTooltipProperties.AttributeGroupDesc_Facet facet_value = 3;
+			CDotaMsgStructuredTooltipProperties.AttributeGroupDesc_Basic characteristics = 2;
+			CDotaMsgStructuredTooltipProperties.AttributeGroupDesc_Specific specific_value = 3;
 		}
 	}
 
@@ -1914,10 +1904,17 @@ message CDotaMsgStructuredTooltipProperties {
 		}
 	}
 
-	message SummaryDescriptionEmbedValue {
-		optional string name = 1;
-		optional CDotaMsgStructuredTooltipProperties.EAttributeType type = 2;
-		optional CDotaMsgStructuredTooltipProperties.AttributeValue value = 3;
+	message SummaryDescriptionEmbeddedSubAbility {
+		optional string ability_name_loc_token = 1;
+		optional string ability_desc_loc_token = 2;
+		optional string ability_icon_url = 3;
+	}
+
+	enum EAbilityTooltipCategory {
+		kPassive = 1;
+		kAutocast = 2;
+		kToggle = 3;
+		kChanneled = 4;
 	}
 
 	enum EAttributeType {
@@ -1935,17 +1932,29 @@ message CDotaMsgStructuredTooltipProperties {
 		kDebuffValue = 11;
 		kBuffPercentage = 12;
 		kBuffValue = 13;
+		kMagicalDamagePercentage = 14;
+		kHealthPercentage = 15;
+		kManaPercentage = 16;
+		kNumCharges = 17;
+		kDebuffDuration = 18;
+		kBuffDuration = 19;
+		kAbilityDefinedDamage = 20;
+		kDispellability = 21;
+		kSpellImmunityPiercing = 22;
 	}
 
 	optional string ability_name_loc_token = 1;
-	optional string ability_category_loc_token = 2;
+	optional CDotaMsgStructuredTooltipProperties.EAbilityTooltipCategory ability_category = 2;
 	optional int32 ability_level = 3;
 	optional int32 current_mana_cost = 4;
 	optional int32 current_health_cost = 5;
 	optional float current_cooldown = 6;
 	optional string summary_description_loc_token = 7;
-	optional string summary_description_level_up_loc_token = 8;
-	repeated CDotaMsgStructuredTooltipProperties.SummaryDescriptionEmbedValue summary_description_embed_values = 9;
-	optional CDotaMsgStructuredTooltipProperties.FacetDisplayProperties summary_description_facet = 10;
+	repeated CDotaMsgStructuredTooltipProperties.Attribute summary_description_embed_values = 8;
+	repeated string summary_description_surfaced_lines = 9;
+	repeated CDotaMsgStructuredTooltipProperties.SummaryDescriptionEmbeddedSubAbility summary_description_embedded_sub_abilities = 10;
+	optional string summary_description_aghs_scepter = 11;
+	optional string summary_description_aghs_shard = 12;
+	optional string preview_video_url = 13;
 	repeated CDotaMsgStructuredTooltipProperties.TooltipContentChunk chunks = 20;
 }

@@ -1690,6 +1690,7 @@ const (
 	CMsgServerToGCRequestPlayerRecentAccomplishmentsResponse_k_eSuccess       CMsgServerToGCRequestPlayerRecentAccomplishmentsResponse_EResponse = 1
 	CMsgServerToGCRequestPlayerRecentAccomplishmentsResponse_k_eTooBusy       CMsgServerToGCRequestPlayerRecentAccomplishmentsResponse_EResponse = 2
 	CMsgServerToGCRequestPlayerRecentAccomplishmentsResponse_k_eDisabled      CMsgServerToGCRequestPlayerRecentAccomplishmentsResponse_EResponse = 3
+	CMsgServerToGCRequestPlayerRecentAccomplishmentsResponse_k_eForbidden     CMsgServerToGCRequestPlayerRecentAccomplishmentsResponse_EResponse = 4
 )
 
 // Enum value maps for CMsgServerToGCRequestPlayerRecentAccomplishmentsResponse_EResponse.
@@ -1699,12 +1700,14 @@ var (
 		1: "k_eSuccess",
 		2: "k_eTooBusy",
 		3: "k_eDisabled",
+		4: "k_eForbidden",
 	}
 	CMsgServerToGCRequestPlayerRecentAccomplishmentsResponse_EResponse_value = map[string]int32{
 		"k_eInternalError": 0,
 		"k_eSuccess":       1,
 		"k_eTooBusy":       2,
 		"k_eDisabled":      3,
+		"k_eForbidden":     4,
 	}
 )
 
@@ -1967,23 +1970,94 @@ func (CDotaMsg_PredictionResult_Prediction_EResult) EnumDescriptor() ([]byte, []
 	return file_dota_gcmessages_common_proto_rawDescGZIP(), []int{99, 0, 0}
 }
 
+type CDotaMsgStructuredTooltipProperties_EAbilityTooltipCategory int32
+
+const (
+	CDotaMsgStructuredTooltipProperties_kPassive   CDotaMsgStructuredTooltipProperties_EAbilityTooltipCategory = 1
+	CDotaMsgStructuredTooltipProperties_kAutocast  CDotaMsgStructuredTooltipProperties_EAbilityTooltipCategory = 2
+	CDotaMsgStructuredTooltipProperties_kToggle    CDotaMsgStructuredTooltipProperties_EAbilityTooltipCategory = 3
+	CDotaMsgStructuredTooltipProperties_kChanneled CDotaMsgStructuredTooltipProperties_EAbilityTooltipCategory = 4
+)
+
+// Enum value maps for CDotaMsgStructuredTooltipProperties_EAbilityTooltipCategory.
+var (
+	CDotaMsgStructuredTooltipProperties_EAbilityTooltipCategory_name = map[int32]string{
+		1: "kPassive",
+		2: "kAutocast",
+		3: "kToggle",
+		4: "kChanneled",
+	}
+	CDotaMsgStructuredTooltipProperties_EAbilityTooltipCategory_value = map[string]int32{
+		"kPassive":   1,
+		"kAutocast":  2,
+		"kToggle":    3,
+		"kChanneled": 4,
+	}
+)
+
+func (x CDotaMsgStructuredTooltipProperties_EAbilityTooltipCategory) Enum() *CDotaMsgStructuredTooltipProperties_EAbilityTooltipCategory {
+	p := new(CDotaMsgStructuredTooltipProperties_EAbilityTooltipCategory)
+	*p = x
+	return p
+}
+
+func (x CDotaMsgStructuredTooltipProperties_EAbilityTooltipCategory) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (CDotaMsgStructuredTooltipProperties_EAbilityTooltipCategory) Descriptor() protoreflect.EnumDescriptor {
+	return file_dota_gcmessages_common_proto_enumTypes[28].Descriptor()
+}
+
+func (CDotaMsgStructuredTooltipProperties_EAbilityTooltipCategory) Type() protoreflect.EnumType {
+	return &file_dota_gcmessages_common_proto_enumTypes[28]
+}
+
+func (x CDotaMsgStructuredTooltipProperties_EAbilityTooltipCategory) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Do not use.
+func (x *CDotaMsgStructuredTooltipProperties_EAbilityTooltipCategory) UnmarshalJSON(b []byte) error {
+	num, err := protoimpl.X.UnmarshalJSONEnum(x.Descriptor(), b)
+	if err != nil {
+		return err
+	}
+	*x = CDotaMsgStructuredTooltipProperties_EAbilityTooltipCategory(num)
+	return nil
+}
+
+// Deprecated: Use CDotaMsgStructuredTooltipProperties_EAbilityTooltipCategory.Descriptor instead.
+func (CDotaMsgStructuredTooltipProperties_EAbilityTooltipCategory) EnumDescriptor() ([]byte, []int) {
+	return file_dota_gcmessages_common_proto_rawDescGZIP(), []int{100, 0}
+}
+
 type CDotaMsgStructuredTooltipProperties_EAttributeType int32
 
 const (
-	CDotaMsgStructuredTooltipProperties_kUnknown            CDotaMsgStructuredTooltipProperties_EAttributeType = 0
-	CDotaMsgStructuredTooltipProperties_kDuration           CDotaMsgStructuredTooltipProperties_EAttributeType = 1
-	CDotaMsgStructuredTooltipProperties_kManaCost           CDotaMsgStructuredTooltipProperties_EAttributeType = 2
-	CDotaMsgStructuredTooltipProperties_kHealthCost         CDotaMsgStructuredTooltipProperties_EAttributeType = 3
-	CDotaMsgStructuredTooltipProperties_kCastRange          CDotaMsgStructuredTooltipProperties_EAttributeType = 4
-	CDotaMsgStructuredTooltipProperties_kAreaOfEffectRadius CDotaMsgStructuredTooltipProperties_EAttributeType = 5
-	CDotaMsgStructuredTooltipProperties_kPhysicalDamage     CDotaMsgStructuredTooltipProperties_EAttributeType = 6
-	CDotaMsgStructuredTooltipProperties_kMagicalDamage      CDotaMsgStructuredTooltipProperties_EAttributeType = 7
-	CDotaMsgStructuredTooltipProperties_kPureDamage         CDotaMsgStructuredTooltipProperties_EAttributeType = 8
-	CDotaMsgStructuredTooltipProperties_kCooldown           CDotaMsgStructuredTooltipProperties_EAttributeType = 9
-	CDotaMsgStructuredTooltipProperties_kDebuffPercentage   CDotaMsgStructuredTooltipProperties_EAttributeType = 10
-	CDotaMsgStructuredTooltipProperties_kDebuffValue        CDotaMsgStructuredTooltipProperties_EAttributeType = 11
-	CDotaMsgStructuredTooltipProperties_kBuffPercentage     CDotaMsgStructuredTooltipProperties_EAttributeType = 12
-	CDotaMsgStructuredTooltipProperties_kBuffValue          CDotaMsgStructuredTooltipProperties_EAttributeType = 13
+	CDotaMsgStructuredTooltipProperties_kUnknown                 CDotaMsgStructuredTooltipProperties_EAttributeType = 0
+	CDotaMsgStructuredTooltipProperties_kDuration                CDotaMsgStructuredTooltipProperties_EAttributeType = 1
+	CDotaMsgStructuredTooltipProperties_kManaCost                CDotaMsgStructuredTooltipProperties_EAttributeType = 2
+	CDotaMsgStructuredTooltipProperties_kHealthCost              CDotaMsgStructuredTooltipProperties_EAttributeType = 3
+	CDotaMsgStructuredTooltipProperties_kCastRange               CDotaMsgStructuredTooltipProperties_EAttributeType = 4
+	CDotaMsgStructuredTooltipProperties_kAreaOfEffectRadius      CDotaMsgStructuredTooltipProperties_EAttributeType = 5
+	CDotaMsgStructuredTooltipProperties_kPhysicalDamage          CDotaMsgStructuredTooltipProperties_EAttributeType = 6
+	CDotaMsgStructuredTooltipProperties_kMagicalDamage           CDotaMsgStructuredTooltipProperties_EAttributeType = 7
+	CDotaMsgStructuredTooltipProperties_kPureDamage              CDotaMsgStructuredTooltipProperties_EAttributeType = 8
+	CDotaMsgStructuredTooltipProperties_kCooldown                CDotaMsgStructuredTooltipProperties_EAttributeType = 9
+	CDotaMsgStructuredTooltipProperties_kDebuffPercentage        CDotaMsgStructuredTooltipProperties_EAttributeType = 10
+	CDotaMsgStructuredTooltipProperties_kDebuffValue             CDotaMsgStructuredTooltipProperties_EAttributeType = 11
+	CDotaMsgStructuredTooltipProperties_kBuffPercentage          CDotaMsgStructuredTooltipProperties_EAttributeType = 12
+	CDotaMsgStructuredTooltipProperties_kBuffValue               CDotaMsgStructuredTooltipProperties_EAttributeType = 13
+	CDotaMsgStructuredTooltipProperties_kMagicalDamagePercentage CDotaMsgStructuredTooltipProperties_EAttributeType = 14
+	CDotaMsgStructuredTooltipProperties_kHealthPercentage        CDotaMsgStructuredTooltipProperties_EAttributeType = 15
+	CDotaMsgStructuredTooltipProperties_kManaPercentage          CDotaMsgStructuredTooltipProperties_EAttributeType = 16
+	CDotaMsgStructuredTooltipProperties_kNumCharges              CDotaMsgStructuredTooltipProperties_EAttributeType = 17
+	CDotaMsgStructuredTooltipProperties_kDebuffDuration          CDotaMsgStructuredTooltipProperties_EAttributeType = 18
+	CDotaMsgStructuredTooltipProperties_kBuffDuration            CDotaMsgStructuredTooltipProperties_EAttributeType = 19
+	CDotaMsgStructuredTooltipProperties_kAbilityDefinedDamage    CDotaMsgStructuredTooltipProperties_EAttributeType = 20
+	CDotaMsgStructuredTooltipProperties_kDispellability          CDotaMsgStructuredTooltipProperties_EAttributeType = 21
+	CDotaMsgStructuredTooltipProperties_kSpellImmunityPiercing   CDotaMsgStructuredTooltipProperties_EAttributeType = 22
 )
 
 // Enum value maps for CDotaMsgStructuredTooltipProperties_EAttributeType.
@@ -2003,22 +2077,40 @@ var (
 		11: "kDebuffValue",
 		12: "kBuffPercentage",
 		13: "kBuffValue",
+		14: "kMagicalDamagePercentage",
+		15: "kHealthPercentage",
+		16: "kManaPercentage",
+		17: "kNumCharges",
+		18: "kDebuffDuration",
+		19: "kBuffDuration",
+		20: "kAbilityDefinedDamage",
+		21: "kDispellability",
+		22: "kSpellImmunityPiercing",
 	}
 	CDotaMsgStructuredTooltipProperties_EAttributeType_value = map[string]int32{
-		"kUnknown":            0,
-		"kDuration":           1,
-		"kManaCost":           2,
-		"kHealthCost":         3,
-		"kCastRange":          4,
-		"kAreaOfEffectRadius": 5,
-		"kPhysicalDamage":     6,
-		"kMagicalDamage":      7,
-		"kPureDamage":         8,
-		"kCooldown":           9,
-		"kDebuffPercentage":   10,
-		"kDebuffValue":        11,
-		"kBuffPercentage":     12,
-		"kBuffValue":          13,
+		"kUnknown":                 0,
+		"kDuration":                1,
+		"kManaCost":                2,
+		"kHealthCost":              3,
+		"kCastRange":               4,
+		"kAreaOfEffectRadius":      5,
+		"kPhysicalDamage":          6,
+		"kMagicalDamage":           7,
+		"kPureDamage":              8,
+		"kCooldown":                9,
+		"kDebuffPercentage":        10,
+		"kDebuffValue":             11,
+		"kBuffPercentage":          12,
+		"kBuffValue":               13,
+		"kMagicalDamagePercentage": 14,
+		"kHealthPercentage":        15,
+		"kManaPercentage":          16,
+		"kNumCharges":              17,
+		"kDebuffDuration":          18,
+		"kBuffDuration":            19,
+		"kAbilityDefinedDamage":    20,
+		"kDispellability":          21,
+		"kSpellImmunityPiercing":   22,
 	}
 )
 
@@ -2033,11 +2125,11 @@ func (x CDotaMsgStructuredTooltipProperties_EAttributeType) String() string {
 }
 
 func (CDotaMsgStructuredTooltipProperties_EAttributeType) Descriptor() protoreflect.EnumDescriptor {
-	return file_dota_gcmessages_common_proto_enumTypes[28].Descriptor()
+	return file_dota_gcmessages_common_proto_enumTypes[29].Descriptor()
 }
 
 func (CDotaMsgStructuredTooltipProperties_EAttributeType) Type() protoreflect.EnumType {
-	return &file_dota_gcmessages_common_proto_enumTypes[28]
+	return &file_dota_gcmessages_common_proto_enumTypes[29]
 }
 
 func (x CDotaMsgStructuredTooltipProperties_EAttributeType) Number() protoreflect.EnumNumber {
@@ -2056,7 +2148,7 @@ func (x *CDotaMsgStructuredTooltipProperties_EAttributeType) UnmarshalJSON(b []b
 
 // Deprecated: Use CDotaMsgStructuredTooltipProperties_EAttributeType.Descriptor instead.
 func (CDotaMsgStructuredTooltipProperties_EAttributeType) EnumDescriptor() ([]byte, []int) {
-	return file_dota_gcmessages_common_proto_rawDescGZIP(), []int{100, 0}
+	return file_dota_gcmessages_common_proto_rawDescGZIP(), []int{100, 1}
 }
 
 type CSODOTAGameAccountClient struct {
@@ -10508,20 +10600,23 @@ func (x *CDotaMsg_PredictionResult) GetPredictions() []*CDotaMsg_PredictionResul
 }
 
 type CDotaMsgStructuredTooltipProperties struct {
-	state                             protoimpl.MessageState                                              `protogen:"open.v1"`
-	AbilityNameLocToken               *string                                                             `protobuf:"bytes,1,opt,name=ability_name_loc_token,json=abilityNameLocToken" json:"ability_name_loc_token,omitempty"`
-	AbilityCategoryLocToken           *string                                                             `protobuf:"bytes,2,opt,name=ability_category_loc_token,json=abilityCategoryLocToken" json:"ability_category_loc_token,omitempty"`
-	AbilityLevel                      *int32                                                              `protobuf:"varint,3,opt,name=ability_level,json=abilityLevel" json:"ability_level,omitempty"`
-	CurrentManaCost                   *int32                                                              `protobuf:"varint,4,opt,name=current_mana_cost,json=currentManaCost" json:"current_mana_cost,omitempty"`
-	CurrentHealthCost                 *int32                                                              `protobuf:"varint,5,opt,name=current_health_cost,json=currentHealthCost" json:"current_health_cost,omitempty"`
-	CurrentCooldown                   *float32                                                            `protobuf:"fixed32,6,opt,name=current_cooldown,json=currentCooldown" json:"current_cooldown,omitempty"`
-	SummaryDescriptionLocToken        *string                                                             `protobuf:"bytes,7,opt,name=summary_description_loc_token,json=summaryDescriptionLocToken" json:"summary_description_loc_token,omitempty"`
-	SummaryDescriptionLevelUpLocToken *string                                                             `protobuf:"bytes,8,opt,name=summary_description_level_up_loc_token,json=summaryDescriptionLevelUpLocToken" json:"summary_description_level_up_loc_token,omitempty"`
-	SummaryDescriptionEmbedValues     []*CDotaMsgStructuredTooltipProperties_SummaryDescriptionEmbedValue `protobuf:"bytes,9,rep,name=summary_description_embed_values,json=summaryDescriptionEmbedValues" json:"summary_description_embed_values,omitempty"`
-	SummaryDescriptionFacet           *CDotaMsgStructuredTooltipProperties_FacetDisplayProperties         `protobuf:"bytes,10,opt,name=summary_description_facet,json=summaryDescriptionFacet" json:"summary_description_facet,omitempty"`
-	Chunks                            []*CDotaMsgStructuredTooltipProperties_TooltipContentChunk          `protobuf:"bytes,20,rep,name=chunks" json:"chunks,omitempty"`
-	unknownFields                     protoimpl.UnknownFields
-	sizeCache                         protoimpl.SizeCache
+	state                                  protoimpl.MessageState                                                      `protogen:"open.v1"`
+	AbilityNameLocToken                    *string                                                                     `protobuf:"bytes,1,opt,name=ability_name_loc_token,json=abilityNameLocToken" json:"ability_name_loc_token,omitempty"`
+	AbilityCategory                        *CDotaMsgStructuredTooltipProperties_EAbilityTooltipCategory                `protobuf:"varint,2,opt,name=ability_category,json=abilityCategory,enum=dota.CDotaMsgStructuredTooltipProperties_EAbilityTooltipCategory" json:"ability_category,omitempty"`
+	AbilityLevel                           *int32                                                                      `protobuf:"varint,3,opt,name=ability_level,json=abilityLevel" json:"ability_level,omitempty"`
+	CurrentManaCost                        *int32                                                                      `protobuf:"varint,4,opt,name=current_mana_cost,json=currentManaCost" json:"current_mana_cost,omitempty"`
+	CurrentHealthCost                      *int32                                                                      `protobuf:"varint,5,opt,name=current_health_cost,json=currentHealthCost" json:"current_health_cost,omitempty"`
+	CurrentCooldown                        *float32                                                                    `protobuf:"fixed32,6,opt,name=current_cooldown,json=currentCooldown" json:"current_cooldown,omitempty"`
+	SummaryDescriptionLocToken             *string                                                                     `protobuf:"bytes,7,opt,name=summary_description_loc_token,json=summaryDescriptionLocToken" json:"summary_description_loc_token,omitempty"`
+	SummaryDescriptionEmbedValues          []*CDotaMsgStructuredTooltipProperties_Attribute                            `protobuf:"bytes,8,rep,name=summary_description_embed_values,json=summaryDescriptionEmbedValues" json:"summary_description_embed_values,omitempty"`
+	SummaryDescriptionSurfacedLines        []string                                                                    `protobuf:"bytes,9,rep,name=summary_description_surfaced_lines,json=summaryDescriptionSurfacedLines" json:"summary_description_surfaced_lines,omitempty"`
+	SummaryDescriptionEmbeddedSubAbilities []*CDotaMsgStructuredTooltipProperties_SummaryDescriptionEmbeddedSubAbility `protobuf:"bytes,10,rep,name=summary_description_embedded_sub_abilities,json=summaryDescriptionEmbeddedSubAbilities" json:"summary_description_embedded_sub_abilities,omitempty"`
+	SummaryDescriptionAghsScepter          *string                                                                     `protobuf:"bytes,11,opt,name=summary_description_aghs_scepter,json=summaryDescriptionAghsScepter" json:"summary_description_aghs_scepter,omitempty"`
+	SummaryDescriptionAghsShard            *string                                                                     `protobuf:"bytes,12,opt,name=summary_description_aghs_shard,json=summaryDescriptionAghsShard" json:"summary_description_aghs_shard,omitempty"`
+	PreviewVideoUrl                        *string                                                                     `protobuf:"bytes,13,opt,name=preview_video_url,json=previewVideoUrl" json:"preview_video_url,omitempty"`
+	Chunks                                 []*CDotaMsgStructuredTooltipProperties_TooltipContentChunk                  `protobuf:"bytes,20,rep,name=chunks" json:"chunks,omitempty"`
+	unknownFields                          protoimpl.UnknownFields
+	sizeCache                              protoimpl.SizeCache
 }
 
 func (x *CDotaMsgStructuredTooltipProperties) Reset() {
@@ -10561,11 +10656,11 @@ func (x *CDotaMsgStructuredTooltipProperties) GetAbilityNameLocToken() string {
 	return ""
 }
 
-func (x *CDotaMsgStructuredTooltipProperties) GetAbilityCategoryLocToken() string {
-	if x != nil && x.AbilityCategoryLocToken != nil {
-		return *x.AbilityCategoryLocToken
+func (x *CDotaMsgStructuredTooltipProperties) GetAbilityCategory() CDotaMsgStructuredTooltipProperties_EAbilityTooltipCategory {
+	if x != nil && x.AbilityCategory != nil {
+		return *x.AbilityCategory
 	}
-	return ""
+	return CDotaMsgStructuredTooltipProperties_kPassive
 }
 
 func (x *CDotaMsgStructuredTooltipProperties) GetAbilityLevel() int32 {
@@ -10603,25 +10698,46 @@ func (x *CDotaMsgStructuredTooltipProperties) GetSummaryDescriptionLocToken() st
 	return ""
 }
 
-func (x *CDotaMsgStructuredTooltipProperties) GetSummaryDescriptionLevelUpLocToken() string {
-	if x != nil && x.SummaryDescriptionLevelUpLocToken != nil {
-		return *x.SummaryDescriptionLevelUpLocToken
-	}
-	return ""
-}
-
-func (x *CDotaMsgStructuredTooltipProperties) GetSummaryDescriptionEmbedValues() []*CDotaMsgStructuredTooltipProperties_SummaryDescriptionEmbedValue {
+func (x *CDotaMsgStructuredTooltipProperties) GetSummaryDescriptionEmbedValues() []*CDotaMsgStructuredTooltipProperties_Attribute {
 	if x != nil {
 		return x.SummaryDescriptionEmbedValues
 	}
 	return nil
 }
 
-func (x *CDotaMsgStructuredTooltipProperties) GetSummaryDescriptionFacet() *CDotaMsgStructuredTooltipProperties_FacetDisplayProperties {
+func (x *CDotaMsgStructuredTooltipProperties) GetSummaryDescriptionSurfacedLines() []string {
 	if x != nil {
-		return x.SummaryDescriptionFacet
+		return x.SummaryDescriptionSurfacedLines
 	}
 	return nil
+}
+
+func (x *CDotaMsgStructuredTooltipProperties) GetSummaryDescriptionEmbeddedSubAbilities() []*CDotaMsgStructuredTooltipProperties_SummaryDescriptionEmbeddedSubAbility {
+	if x != nil {
+		return x.SummaryDescriptionEmbeddedSubAbilities
+	}
+	return nil
+}
+
+func (x *CDotaMsgStructuredTooltipProperties) GetSummaryDescriptionAghsScepter() string {
+	if x != nil && x.SummaryDescriptionAghsScepter != nil {
+		return *x.SummaryDescriptionAghsScepter
+	}
+	return ""
+}
+
+func (x *CDotaMsgStructuredTooltipProperties) GetSummaryDescriptionAghsShard() string {
+	if x != nil && x.SummaryDescriptionAghsShard != nil {
+		return *x.SummaryDescriptionAghsShard
+	}
+	return ""
+}
+
+func (x *CDotaMsgStructuredTooltipProperties) GetPreviewVideoUrl() string {
+	if x != nil && x.PreviewVideoUrl != nil {
+		return *x.PreviewVideoUrl
+	}
+	return ""
 }
 
 func (x *CDotaMsgStructuredTooltipProperties) GetChunks() []*CDotaMsgStructuredTooltipProperties_TooltipContentChunk {
@@ -16098,6 +16214,7 @@ type CMsgGameDataItemAbilityList_ItemAbilityInfo struct {
 	IsEarlygameSuggested *bool                                                 `protobuf:"varint,7,opt,name=is_earlygame_suggested,json=isEarlygameSuggested" json:"is_earlygame_suggested,omitempty"`
 	IsLategameSuggested  *bool                                                 `protobuf:"varint,8,opt,name=is_lategame_suggested,json=isLategameSuggested" json:"is_lategame_suggested,omitempty"`
 	Recipes              []*CMsgGameDataItemAbilityList_ItemAbilityInfo_Recipe `protobuf:"bytes,9,rep,name=recipes" json:"recipes,omitempty"`
+	IsInnate             *bool                                                 `protobuf:"varint,10,opt,name=is_innate,json=isInnate" json:"is_innate,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -16193,6 +16310,13 @@ func (x *CMsgGameDataItemAbilityList_ItemAbilityInfo) GetRecipes() []*CMsgGameDa
 		return x.Recipes
 	}
 	return nil
+}
+
+func (x *CMsgGameDataItemAbilityList_ItemAbilityInfo) GetIsInnate() bool {
+	if x != nil && x.IsInnate != nil {
+		return *x.IsInnate
+	}
+	return false
 }
 
 type CMsgGameDataItemAbilityList_ItemAbilityInfo_Recipe struct {
@@ -17025,95 +17149,19 @@ func (*CDotaMsgStructuredTooltipProperties_AttributeValue_VariableValue) isCDota
 func (*CDotaMsgStructuredTooltipProperties_AttributeValue_DeltaValue) isCDotaMsgStructuredTooltipProperties_AttributeValue_AttrValue() {
 }
 
-type CDotaMsgStructuredTooltipProperties_FacetDisplayProperties struct {
-	state                  protoimpl.MessageState `protogen:"open.v1"`
-	FacetNameLocToken      *string                `protobuf:"bytes,1,opt,name=facet_name_loc_token,json=facetNameLocToken" json:"facet_name_loc_token,omitempty"`
-	FacetDescLocToken      *string                `protobuf:"bytes,2,opt,name=facet_desc_loc_token,json=facetDescLocToken" json:"facet_desc_loc_token,omitempty"`
-	FacetIconStyleName     *string                `protobuf:"bytes,3,opt,name=facet_icon_style_name,json=facetIconStyleName" json:"facet_icon_style_name,omitempty"`
-	FacetColorStyleName    *string                `protobuf:"bytes,4,opt,name=facet_color_style_name,json=facetColorStyleName" json:"facet_color_style_name,omitempty"`
-	FacetGradientStyleName *string                `protobuf:"bytes,5,opt,name=facet_gradient_style_name,json=facetGradientStyleName" json:"facet_gradient_style_name,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
-}
-
-func (x *CDotaMsgStructuredTooltipProperties_FacetDisplayProperties) Reset() {
-	*x = CDotaMsgStructuredTooltipProperties_FacetDisplayProperties{}
-	mi := &file_dota_gcmessages_common_proto_msgTypes[177]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CDotaMsgStructuredTooltipProperties_FacetDisplayProperties) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CDotaMsgStructuredTooltipProperties_FacetDisplayProperties) ProtoMessage() {}
-
-func (x *CDotaMsgStructuredTooltipProperties_FacetDisplayProperties) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[177]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CDotaMsgStructuredTooltipProperties_FacetDisplayProperties.ProtoReflect.Descriptor instead.
-func (*CDotaMsgStructuredTooltipProperties_FacetDisplayProperties) Descriptor() ([]byte, []int) {
-	return file_dota_gcmessages_common_proto_rawDescGZIP(), []int{100, 5}
-}
-
-func (x *CDotaMsgStructuredTooltipProperties_FacetDisplayProperties) GetFacetNameLocToken() string {
-	if x != nil && x.FacetNameLocToken != nil {
-		return *x.FacetNameLocToken
-	}
-	return ""
-}
-
-func (x *CDotaMsgStructuredTooltipProperties_FacetDisplayProperties) GetFacetDescLocToken() string {
-	if x != nil && x.FacetDescLocToken != nil {
-		return *x.FacetDescLocToken
-	}
-	return ""
-}
-
-func (x *CDotaMsgStructuredTooltipProperties_FacetDisplayProperties) GetFacetIconStyleName() string {
-	if x != nil && x.FacetIconStyleName != nil {
-		return *x.FacetIconStyleName
-	}
-	return ""
-}
-
-func (x *CDotaMsgStructuredTooltipProperties_FacetDisplayProperties) GetFacetColorStyleName() string {
-	if x != nil && x.FacetColorStyleName != nil {
-		return *x.FacetColorStyleName
-	}
-	return ""
-}
-
-func (x *CDotaMsgStructuredTooltipProperties_FacetDisplayProperties) GetFacetGradientStyleName() string {
-	if x != nil && x.FacetGradientStyleName != nil {
-		return *x.FacetGradientStyleName
-	}
-	return ""
-}
-
 type CDotaMsgStructuredTooltipProperties_Attribute struct {
-	state         protoimpl.MessageState                                      `protogen:"open.v1"`
-	NameLocToken  *string                                                     `protobuf:"bytes,1,opt,name=name_loc_token,json=nameLocToken" json:"name_loc_token,omitempty"`
-	Type          *CDotaMsgStructuredTooltipProperties_EAttributeType         `protobuf:"varint,2,opt,name=type,enum=dota.CDotaMsgStructuredTooltipProperties_EAttributeType" json:"type,omitempty"`
-	Value         *CDotaMsgStructuredTooltipProperties_AttributeValue         `protobuf:"bytes,3,opt,name=value" json:"value,omitempty"`
-	Facet         *CDotaMsgStructuredTooltipProperties_FacetDisplayProperties `protobuf:"bytes,4,opt,name=facet" json:"facet,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState                              `protogen:"open.v1"`
+	InternalName      *string                                             `protobuf:"bytes,1,opt,name=internal_name,json=internalName" json:"internal_name,omitempty"`
+	LocalizedNameText *string                                             `protobuf:"bytes,2,opt,name=localized_name_text,json=localizedNameText" json:"localized_name_text,omitempty"`
+	Type              *CDotaMsgStructuredTooltipProperties_EAttributeType `protobuf:"varint,3,opt,name=type,enum=dota.CDotaMsgStructuredTooltipProperties_EAttributeType" json:"type,omitempty"`
+	Value             *CDotaMsgStructuredTooltipProperties_AttributeValue `protobuf:"bytes,4,opt,name=value" json:"value,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *CDotaMsgStructuredTooltipProperties_Attribute) Reset() {
 	*x = CDotaMsgStructuredTooltipProperties_Attribute{}
-	mi := &file_dota_gcmessages_common_proto_msgTypes[178]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[177]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -17125,7 +17173,7 @@ func (x *CDotaMsgStructuredTooltipProperties_Attribute) String() string {
 func (*CDotaMsgStructuredTooltipProperties_Attribute) ProtoMessage() {}
 
 func (x *CDotaMsgStructuredTooltipProperties_Attribute) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[178]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[177]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -17138,12 +17186,19 @@ func (x *CDotaMsgStructuredTooltipProperties_Attribute) ProtoReflect() protorefl
 
 // Deprecated: Use CDotaMsgStructuredTooltipProperties_Attribute.ProtoReflect.Descriptor instead.
 func (*CDotaMsgStructuredTooltipProperties_Attribute) Descriptor() ([]byte, []int) {
-	return file_dota_gcmessages_common_proto_rawDescGZIP(), []int{100, 6}
+	return file_dota_gcmessages_common_proto_rawDescGZIP(), []int{100, 5}
 }
 
-func (x *CDotaMsgStructuredTooltipProperties_Attribute) GetNameLocToken() string {
-	if x != nil && x.NameLocToken != nil {
-		return *x.NameLocToken
+func (x *CDotaMsgStructuredTooltipProperties_Attribute) GetInternalName() string {
+	if x != nil && x.InternalName != nil {
+		return *x.InternalName
+	}
+	return ""
+}
+
+func (x *CDotaMsgStructuredTooltipProperties_Attribute) GetLocalizedNameText() string {
+	if x != nil && x.LocalizedNameText != nil {
+		return *x.LocalizedNameText
 	}
 	return ""
 }
@@ -17162,13 +17217,6 @@ func (x *CDotaMsgStructuredTooltipProperties_Attribute) GetValue() *CDotaMsgStru
 	return nil
 }
 
-func (x *CDotaMsgStructuredTooltipProperties_Attribute) GetFacet() *CDotaMsgStructuredTooltipProperties_FacetDisplayProperties {
-	if x != nil {
-		return x.Facet
-	}
-	return nil
-}
-
 type CDotaMsgStructuredTooltipProperties_AttributeGroupDesc_Basic struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -17177,7 +17225,7 @@ type CDotaMsgStructuredTooltipProperties_AttributeGroupDesc_Basic struct {
 
 func (x *CDotaMsgStructuredTooltipProperties_AttributeGroupDesc_Basic) Reset() {
 	*x = CDotaMsgStructuredTooltipProperties_AttributeGroupDesc_Basic{}
-	mi := &file_dota_gcmessages_common_proto_msgTypes[179]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[178]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -17189,7 +17237,7 @@ func (x *CDotaMsgStructuredTooltipProperties_AttributeGroupDesc_Basic) String() 
 func (*CDotaMsgStructuredTooltipProperties_AttributeGroupDesc_Basic) ProtoMessage() {}
 
 func (x *CDotaMsgStructuredTooltipProperties_AttributeGroupDesc_Basic) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[179]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[178]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -17202,7 +17250,7 @@ func (x *CDotaMsgStructuredTooltipProperties_AttributeGroupDesc_Basic) ProtoRefl
 
 // Deprecated: Use CDotaMsgStructuredTooltipProperties_AttributeGroupDesc_Basic.ProtoReflect.Descriptor instead.
 func (*CDotaMsgStructuredTooltipProperties_AttributeGroupDesc_Basic) Descriptor() ([]byte, []int) {
-	return file_dota_gcmessages_common_proto_rawDescGZIP(), []int{100, 7}
+	return file_dota_gcmessages_common_proto_rawDescGZIP(), []int{100, 6}
 }
 
 type CDotaMsgStructuredTooltipProperties_AttributeGroupDesc_Specific struct {
@@ -17215,7 +17263,7 @@ type CDotaMsgStructuredTooltipProperties_AttributeGroupDesc_Specific struct {
 
 func (x *CDotaMsgStructuredTooltipProperties_AttributeGroupDesc_Specific) Reset() {
 	*x = CDotaMsgStructuredTooltipProperties_AttributeGroupDesc_Specific{}
-	mi := &file_dota_gcmessages_common_proto_msgTypes[180]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[179]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -17227,7 +17275,7 @@ func (x *CDotaMsgStructuredTooltipProperties_AttributeGroupDesc_Specific) String
 func (*CDotaMsgStructuredTooltipProperties_AttributeGroupDesc_Specific) ProtoMessage() {}
 
 func (x *CDotaMsgStructuredTooltipProperties_AttributeGroupDesc_Specific) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[180]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[179]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -17240,7 +17288,7 @@ func (x *CDotaMsgStructuredTooltipProperties_AttributeGroupDesc_Specific) ProtoR
 
 // Deprecated: Use CDotaMsgStructuredTooltipProperties_AttributeGroupDesc_Specific.ProtoReflect.Descriptor instead.
 func (*CDotaMsgStructuredTooltipProperties_AttributeGroupDesc_Specific) Descriptor() ([]byte, []int) {
-	return file_dota_gcmessages_common_proto_rawDescGZIP(), []int{100, 8}
+	return file_dota_gcmessages_common_proto_rawDescGZIP(), []int{100, 7}
 }
 
 func (x *CDotaMsgStructuredTooltipProperties_AttributeGroupDesc_Specific) GetTitleLocToken() string {
@@ -17257,57 +17305,13 @@ func (x *CDotaMsgStructuredTooltipProperties_AttributeGroupDesc_Specific) GetDes
 	return ""
 }
 
-type CDotaMsgStructuredTooltipProperties_AttributeGroupDesc_Facet struct {
-	state         protoimpl.MessageState                                      `protogen:"open.v1"`
-	Facet         *CDotaMsgStructuredTooltipProperties_FacetDisplayProperties `protobuf:"bytes,1,opt,name=facet" json:"facet,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CDotaMsgStructuredTooltipProperties_AttributeGroupDesc_Facet) Reset() {
-	*x = CDotaMsgStructuredTooltipProperties_AttributeGroupDesc_Facet{}
-	mi := &file_dota_gcmessages_common_proto_msgTypes[181]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CDotaMsgStructuredTooltipProperties_AttributeGroupDesc_Facet) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CDotaMsgStructuredTooltipProperties_AttributeGroupDesc_Facet) ProtoMessage() {}
-
-func (x *CDotaMsgStructuredTooltipProperties_AttributeGroupDesc_Facet) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[181]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CDotaMsgStructuredTooltipProperties_AttributeGroupDesc_Facet.ProtoReflect.Descriptor instead.
-func (*CDotaMsgStructuredTooltipProperties_AttributeGroupDesc_Facet) Descriptor() ([]byte, []int) {
-	return file_dota_gcmessages_common_proto_rawDescGZIP(), []int{100, 9}
-}
-
-func (x *CDotaMsgStructuredTooltipProperties_AttributeGroupDesc_Facet) GetFacet() *CDotaMsgStructuredTooltipProperties_FacetDisplayProperties {
-	if x != nil {
-		return x.Facet
-	}
-	return nil
-}
-
 type CDotaMsgStructuredTooltipProperties_AttributeGroupDescription struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Types that are valid to be assigned to AttrGroupDesc:
 	//
 	//	*CDotaMsgStructuredTooltipProperties_AttributeGroupDescription_BasicValue
+	//	*CDotaMsgStructuredTooltipProperties_AttributeGroupDescription_Characteristics
 	//	*CDotaMsgStructuredTooltipProperties_AttributeGroupDescription_SpecificValue
-	//	*CDotaMsgStructuredTooltipProperties_AttributeGroupDescription_FacetValue
 	AttrGroupDesc isCDotaMsgStructuredTooltipProperties_AttributeGroupDescription_AttrGroupDesc `protobuf_oneof:"attr_group_desc"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -17315,7 +17319,7 @@ type CDotaMsgStructuredTooltipProperties_AttributeGroupDescription struct {
 
 func (x *CDotaMsgStructuredTooltipProperties_AttributeGroupDescription) Reset() {
 	*x = CDotaMsgStructuredTooltipProperties_AttributeGroupDescription{}
-	mi := &file_dota_gcmessages_common_proto_msgTypes[182]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[180]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -17327,7 +17331,7 @@ func (x *CDotaMsgStructuredTooltipProperties_AttributeGroupDescription) String()
 func (*CDotaMsgStructuredTooltipProperties_AttributeGroupDescription) ProtoMessage() {}
 
 func (x *CDotaMsgStructuredTooltipProperties_AttributeGroupDescription) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[182]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[180]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -17340,7 +17344,7 @@ func (x *CDotaMsgStructuredTooltipProperties_AttributeGroupDescription) ProtoRef
 
 // Deprecated: Use CDotaMsgStructuredTooltipProperties_AttributeGroupDescription.ProtoReflect.Descriptor instead.
 func (*CDotaMsgStructuredTooltipProperties_AttributeGroupDescription) Descriptor() ([]byte, []int) {
-	return file_dota_gcmessages_common_proto_rawDescGZIP(), []int{100, 10}
+	return file_dota_gcmessages_common_proto_rawDescGZIP(), []int{100, 8}
 }
 
 func (x *CDotaMsgStructuredTooltipProperties_AttributeGroupDescription) GetAttrGroupDesc() isCDotaMsgStructuredTooltipProperties_AttributeGroupDescription_AttrGroupDesc {
@@ -17359,19 +17363,19 @@ func (x *CDotaMsgStructuredTooltipProperties_AttributeGroupDescription) GetBasic
 	return nil
 }
 
-func (x *CDotaMsgStructuredTooltipProperties_AttributeGroupDescription) GetSpecificValue() *CDotaMsgStructuredTooltipProperties_AttributeGroupDesc_Specific {
+func (x *CDotaMsgStructuredTooltipProperties_AttributeGroupDescription) GetCharacteristics() *CDotaMsgStructuredTooltipProperties_AttributeGroupDesc_Basic {
 	if x != nil {
-		if x, ok := x.AttrGroupDesc.(*CDotaMsgStructuredTooltipProperties_AttributeGroupDescription_SpecificValue); ok {
-			return x.SpecificValue
+		if x, ok := x.AttrGroupDesc.(*CDotaMsgStructuredTooltipProperties_AttributeGroupDescription_Characteristics); ok {
+			return x.Characteristics
 		}
 	}
 	return nil
 }
 
-func (x *CDotaMsgStructuredTooltipProperties_AttributeGroupDescription) GetFacetValue() *CDotaMsgStructuredTooltipProperties_AttributeGroupDesc_Facet {
+func (x *CDotaMsgStructuredTooltipProperties_AttributeGroupDescription) GetSpecificValue() *CDotaMsgStructuredTooltipProperties_AttributeGroupDesc_Specific {
 	if x != nil {
-		if x, ok := x.AttrGroupDesc.(*CDotaMsgStructuredTooltipProperties_AttributeGroupDescription_FacetValue); ok {
-			return x.FacetValue
+		if x, ok := x.AttrGroupDesc.(*CDotaMsgStructuredTooltipProperties_AttributeGroupDescription_SpecificValue); ok {
+			return x.SpecificValue
 		}
 	}
 	return nil
@@ -17385,21 +17389,21 @@ type CDotaMsgStructuredTooltipProperties_AttributeGroupDescription_BasicValue st
 	BasicValue *CDotaMsgStructuredTooltipProperties_AttributeGroupDesc_Basic `protobuf:"bytes,1,opt,name=basic_value,json=basicValue,oneof"`
 }
 
-type CDotaMsgStructuredTooltipProperties_AttributeGroupDescription_SpecificValue struct {
-	SpecificValue *CDotaMsgStructuredTooltipProperties_AttributeGroupDesc_Specific `protobuf:"bytes,2,opt,name=specific_value,json=specificValue,oneof"`
+type CDotaMsgStructuredTooltipProperties_AttributeGroupDescription_Characteristics struct {
+	Characteristics *CDotaMsgStructuredTooltipProperties_AttributeGroupDesc_Basic `protobuf:"bytes,2,opt,name=characteristics,oneof"`
 }
 
-type CDotaMsgStructuredTooltipProperties_AttributeGroupDescription_FacetValue struct {
-	FacetValue *CDotaMsgStructuredTooltipProperties_AttributeGroupDesc_Facet `protobuf:"bytes,3,opt,name=facet_value,json=facetValue,oneof"`
+type CDotaMsgStructuredTooltipProperties_AttributeGroupDescription_SpecificValue struct {
+	SpecificValue *CDotaMsgStructuredTooltipProperties_AttributeGroupDesc_Specific `protobuf:"bytes,3,opt,name=specific_value,json=specificValue,oneof"`
 }
 
 func (*CDotaMsgStructuredTooltipProperties_AttributeGroupDescription_BasicValue) isCDotaMsgStructuredTooltipProperties_AttributeGroupDescription_AttrGroupDesc() {
 }
 
-func (*CDotaMsgStructuredTooltipProperties_AttributeGroupDescription_SpecificValue) isCDotaMsgStructuredTooltipProperties_AttributeGroupDescription_AttrGroupDesc() {
+func (*CDotaMsgStructuredTooltipProperties_AttributeGroupDescription_Characteristics) isCDotaMsgStructuredTooltipProperties_AttributeGroupDescription_AttrGroupDesc() {
 }
 
-func (*CDotaMsgStructuredTooltipProperties_AttributeGroupDescription_FacetValue) isCDotaMsgStructuredTooltipProperties_AttributeGroupDescription_AttrGroupDesc() {
+func (*CDotaMsgStructuredTooltipProperties_AttributeGroupDescription_SpecificValue) isCDotaMsgStructuredTooltipProperties_AttributeGroupDescription_AttrGroupDesc() {
 }
 
 type CDotaMsgStructuredTooltipProperties_AttributeGroup struct {
@@ -17412,7 +17416,7 @@ type CDotaMsgStructuredTooltipProperties_AttributeGroup struct {
 
 func (x *CDotaMsgStructuredTooltipProperties_AttributeGroup) Reset() {
 	*x = CDotaMsgStructuredTooltipProperties_AttributeGroup{}
-	mi := &file_dota_gcmessages_common_proto_msgTypes[183]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[181]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -17424,7 +17428,7 @@ func (x *CDotaMsgStructuredTooltipProperties_AttributeGroup) String() string {
 func (*CDotaMsgStructuredTooltipProperties_AttributeGroup) ProtoMessage() {}
 
 func (x *CDotaMsgStructuredTooltipProperties_AttributeGroup) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[183]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[181]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -17437,7 +17441,7 @@ func (x *CDotaMsgStructuredTooltipProperties_AttributeGroup) ProtoReflect() prot
 
 // Deprecated: Use CDotaMsgStructuredTooltipProperties_AttributeGroup.ProtoReflect.Descriptor instead.
 func (*CDotaMsgStructuredTooltipProperties_AttributeGroup) Descriptor() ([]byte, []int) {
-	return file_dota_gcmessages_common_proto_rawDescGZIP(), []int{100, 11}
+	return file_dota_gcmessages_common_proto_rawDescGZIP(), []int{100, 9}
 }
 
 func (x *CDotaMsgStructuredTooltipProperties_AttributeGroup) GetDesc() *CDotaMsgStructuredTooltipProperties_AttributeGroupDescription {
@@ -17463,7 +17467,7 @@ type CDotaMsgStructuredTooltipProperties_ContentChunk_AttributeGroup struct {
 
 func (x *CDotaMsgStructuredTooltipProperties_ContentChunk_AttributeGroup) Reset() {
 	*x = CDotaMsgStructuredTooltipProperties_ContentChunk_AttributeGroup{}
-	mi := &file_dota_gcmessages_common_proto_msgTypes[184]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[182]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -17475,7 +17479,7 @@ func (x *CDotaMsgStructuredTooltipProperties_ContentChunk_AttributeGroup) String
 func (*CDotaMsgStructuredTooltipProperties_ContentChunk_AttributeGroup) ProtoMessage() {}
 
 func (x *CDotaMsgStructuredTooltipProperties_ContentChunk_AttributeGroup) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[184]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[182]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -17488,7 +17492,7 @@ func (x *CDotaMsgStructuredTooltipProperties_ContentChunk_AttributeGroup) ProtoR
 
 // Deprecated: Use CDotaMsgStructuredTooltipProperties_ContentChunk_AttributeGroup.ProtoReflect.Descriptor instead.
 func (*CDotaMsgStructuredTooltipProperties_ContentChunk_AttributeGroup) Descriptor() ([]byte, []int) {
-	return file_dota_gcmessages_common_proto_rawDescGZIP(), []int{100, 12}
+	return file_dota_gcmessages_common_proto_rawDescGZIP(), []int{100, 10}
 }
 
 func (x *CDotaMsgStructuredTooltipProperties_ContentChunk_AttributeGroup) GetGroups() []*CDotaMsgStructuredTooltipProperties_AttributeGroup {
@@ -17510,7 +17514,7 @@ type CDotaMsgStructuredTooltipProperties_TooltipContentChunk struct {
 
 func (x *CDotaMsgStructuredTooltipProperties_TooltipContentChunk) Reset() {
 	*x = CDotaMsgStructuredTooltipProperties_TooltipContentChunk{}
-	mi := &file_dota_gcmessages_common_proto_msgTypes[185]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[183]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -17522,7 +17526,7 @@ func (x *CDotaMsgStructuredTooltipProperties_TooltipContentChunk) String() strin
 func (*CDotaMsgStructuredTooltipProperties_TooltipContentChunk) ProtoMessage() {}
 
 func (x *CDotaMsgStructuredTooltipProperties_TooltipContentChunk) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[185]
+	mi := &file_dota_gcmessages_common_proto_msgTypes[183]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -17535,7 +17539,7 @@ func (x *CDotaMsgStructuredTooltipProperties_TooltipContentChunk) ProtoReflect()
 
 // Deprecated: Use CDotaMsgStructuredTooltipProperties_TooltipContentChunk.ProtoReflect.Descriptor instead.
 func (*CDotaMsgStructuredTooltipProperties_TooltipContentChunk) Descriptor() ([]byte, []int) {
-	return file_dota_gcmessages_common_proto_rawDescGZIP(), []int{100, 13}
+	return file_dota_gcmessages_common_proto_rawDescGZIP(), []int{100, 11}
 }
 
 func (x *CDotaMsgStructuredTooltipProperties_TooltipContentChunk) GetContentChunk() isCDotaMsgStructuredTooltipProperties_TooltipContentChunk_ContentChunk {
@@ -17565,30 +17569,30 @@ type CDotaMsgStructuredTooltipProperties_TooltipContentChunk_AttributeGroup stru
 func (*CDotaMsgStructuredTooltipProperties_TooltipContentChunk_AttributeGroup) isCDotaMsgStructuredTooltipProperties_TooltipContentChunk_ContentChunk() {
 }
 
-type CDotaMsgStructuredTooltipProperties_SummaryDescriptionEmbedValue struct {
-	state         protoimpl.MessageState                              `protogen:"open.v1"`
-	Name          *string                                             `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
-	Type          *CDotaMsgStructuredTooltipProperties_EAttributeType `protobuf:"varint,2,opt,name=type,enum=dota.CDotaMsgStructuredTooltipProperties_EAttributeType" json:"type,omitempty"`
-	Value         *CDotaMsgStructuredTooltipProperties_AttributeValue `protobuf:"bytes,3,opt,name=value" json:"value,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+type CDotaMsgStructuredTooltipProperties_SummaryDescriptionEmbeddedSubAbility struct {
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	AbilityNameLocToken *string                `protobuf:"bytes,1,opt,name=ability_name_loc_token,json=abilityNameLocToken" json:"ability_name_loc_token,omitempty"`
+	AbilityDescLocToken *string                `protobuf:"bytes,2,opt,name=ability_desc_loc_token,json=abilityDescLocToken" json:"ability_desc_loc_token,omitempty"`
+	AbilityIconUrl      *string                `protobuf:"bytes,3,opt,name=ability_icon_url,json=abilityIconUrl" json:"ability_icon_url,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
-func (x *CDotaMsgStructuredTooltipProperties_SummaryDescriptionEmbedValue) Reset() {
-	*x = CDotaMsgStructuredTooltipProperties_SummaryDescriptionEmbedValue{}
-	mi := &file_dota_gcmessages_common_proto_msgTypes[186]
+func (x *CDotaMsgStructuredTooltipProperties_SummaryDescriptionEmbeddedSubAbility) Reset() {
+	*x = CDotaMsgStructuredTooltipProperties_SummaryDescriptionEmbeddedSubAbility{}
+	mi := &file_dota_gcmessages_common_proto_msgTypes[184]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CDotaMsgStructuredTooltipProperties_SummaryDescriptionEmbedValue) String() string {
+func (x *CDotaMsgStructuredTooltipProperties_SummaryDescriptionEmbeddedSubAbility) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CDotaMsgStructuredTooltipProperties_SummaryDescriptionEmbedValue) ProtoMessage() {}
+func (*CDotaMsgStructuredTooltipProperties_SummaryDescriptionEmbeddedSubAbility) ProtoMessage() {}
 
-func (x *CDotaMsgStructuredTooltipProperties_SummaryDescriptionEmbedValue) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_common_proto_msgTypes[186]
+func (x *CDotaMsgStructuredTooltipProperties_SummaryDescriptionEmbeddedSubAbility) ProtoReflect() protoreflect.Message {
+	mi := &file_dota_gcmessages_common_proto_msgTypes[184]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -17599,30 +17603,30 @@ func (x *CDotaMsgStructuredTooltipProperties_SummaryDescriptionEmbedValue) Proto
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CDotaMsgStructuredTooltipProperties_SummaryDescriptionEmbedValue.ProtoReflect.Descriptor instead.
-func (*CDotaMsgStructuredTooltipProperties_SummaryDescriptionEmbedValue) Descriptor() ([]byte, []int) {
-	return file_dota_gcmessages_common_proto_rawDescGZIP(), []int{100, 14}
+// Deprecated: Use CDotaMsgStructuredTooltipProperties_SummaryDescriptionEmbeddedSubAbility.ProtoReflect.Descriptor instead.
+func (*CDotaMsgStructuredTooltipProperties_SummaryDescriptionEmbeddedSubAbility) Descriptor() ([]byte, []int) {
+	return file_dota_gcmessages_common_proto_rawDescGZIP(), []int{100, 12}
 }
 
-func (x *CDotaMsgStructuredTooltipProperties_SummaryDescriptionEmbedValue) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+func (x *CDotaMsgStructuredTooltipProperties_SummaryDescriptionEmbeddedSubAbility) GetAbilityNameLocToken() string {
+	if x != nil && x.AbilityNameLocToken != nil {
+		return *x.AbilityNameLocToken
 	}
 	return ""
 }
 
-func (x *CDotaMsgStructuredTooltipProperties_SummaryDescriptionEmbedValue) GetType() CDotaMsgStructuredTooltipProperties_EAttributeType {
-	if x != nil && x.Type != nil {
-		return *x.Type
+func (x *CDotaMsgStructuredTooltipProperties_SummaryDescriptionEmbeddedSubAbility) GetAbilityDescLocToken() string {
+	if x != nil && x.AbilityDescLocToken != nil {
+		return *x.AbilityDescLocToken
 	}
-	return CDotaMsgStructuredTooltipProperties_kUnknown
+	return ""
 }
 
-func (x *CDotaMsgStructuredTooltipProperties_SummaryDescriptionEmbedValue) GetValue() *CDotaMsgStructuredTooltipProperties_AttributeValue {
-	if x != nil {
-		return x.Value
+func (x *CDotaMsgStructuredTooltipProperties_SummaryDescriptionEmbeddedSubAbility) GetAbilityIconUrl() string {
+	if x != nil && x.AbilityIconUrl != nil {
+		return *x.AbilityIconUrl
 	}
-	return nil
+	return ""
 }
 
 var File_dota_gcmessages_common_proto protoreflect.FileDescriptor
@@ -18760,17 +18764,18 @@ const file_dota_gcmessages_common_proto_rawDesc = "" +
 	"0CMsgServerToGCRequestPlayerRecentAccomplishments\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\rR\taccountId\x12\x17\n" +
-	"\ahero_id\x18\x02 \x01(\x05R\x06heroId\"\xc8\x02\n" +
+	"\ahero_id\x18\x02 \x01(\x05R\x06heroId\"\xda\x02\n" +
 	"8CMsgServerToGCRequestPlayerRecentAccomplishmentsResponse\x12`\n" +
 	"\x06result\x18\x01 \x01(\x0e2H.dota.CMsgServerToGCRequestPlayerRecentAccomplishmentsResponse.EResponseR\x06result\x12V\n" +
-	"\x16player_accomplishments\x18\x02 \x01(\v2\x1f.dota.CMsgRecentAccomplishmentsR\x15playerAccomplishments\"R\n" +
+	"\x16player_accomplishments\x18\x02 \x01(\v2\x1f.dota.CMsgRecentAccomplishmentsR\x15playerAccomplishments\"d\n" +
 	"\tEResponse\x12\x14\n" +
 	"\x10k_eInternalError\x10\x00\x12\x0e\n" +
 	"\n" +
 	"k_eSuccess\x10\x01\x12\x0e\n" +
 	"\n" +
 	"k_eTooBusy\x10\x02\x12\x0f\n" +
-	"\vk_eDisabled\x10\x03\"m\n" +
+	"\vk_eDisabled\x10\x03\x12\x10\n" +
+	"\fk_eForbidden\x10\x04\"m\n" +
 	"\x18CMsgArcanaVoteMatchVotes\x12\x19\n" +
 	"\bmatch_id\x18\x01 \x01(\rR\amatchId\x12\x17\n" +
 	"\ahero_id\x18\x02 \x01(\x05R\x06heroId\x12\x1d\n" +
@@ -18988,9 +18993,9 @@ const file_dota_gcmessages_common_proto_rawDesc = "" +
 	"\fprimary_attr\x18\x05 \x01(\rR\vprimaryAttr\x12\x1e\n" +
 	"\n" +
 	"complexity\x18\x06 \x01(\rR\n" +
-	"complexity\"\xaf\x04\n" +
+	"complexity\"\xcc\x04\n" +
 	"\x1bCMsgGameDataItemAbilityList\x12W\n" +
-	"\ritemabilities\x18\x01 \x03(\v21.dota.CMsgGameDataItemAbilityList.ItemAbilityInfoR\ritemabilities\x1a\xb6\x03\n" +
+	"\ritemabilities\x18\x01 \x03(\v21.dota.CMsgGameDataItemAbilityList.ItemAbilityInfoR\ritemabilities\x1a\xd3\x03\n" +
 	"\x0fItemAbilityInfo\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x19\n" +
@@ -19000,7 +19005,9 @@ const file_dota_gcmessages_common_proto_rawDesc = "" +
 	"\x14is_pregame_suggested\x18\x06 \x01(\bR\x12isPregameSuggested\x124\n" +
 	"\x16is_earlygame_suggested\x18\a \x01(\bR\x14isEarlygameSuggested\x122\n" +
 	"\x15is_lategame_suggested\x18\b \x01(\bR\x13isLategameSuggested\x12R\n" +
-	"\arecipes\x18\t \x03(\v28.dota.CMsgGameDataItemAbilityList.ItemAbilityInfo.RecipeR\arecipes\x1a\x1e\n" +
+	"\arecipes\x18\t \x03(\v28.dota.CMsgGameDataItemAbilityList.ItemAbilityInfo.RecipeR\arecipes\x12\x1b\n" +
+	"\tis_innate\x18\n" +
+	" \x01(\bR\bisInnate\x1a\x1e\n" +
 	"\x06Recipe\x12\x14\n" +
 	"\x05items\x18\x01 \x03(\x05R\x05items\"K\n" +
 	"\x19CMsgLobbyAbilityDraftData\x12.\n" +
@@ -19184,19 +19191,22 @@ const file_dota_gcmessages_common_proto_rawDesc = "" +
 	"\x11granted_item_defs\x18\x06 \x03(\rR\x0fgrantedItemDefs\"=\n" +
 	"\aEResult\x12\x19\n" +
 	"\x15k_eResult_ItemGranted\x10\x01\x12\x17\n" +
-	"\x13k_eResult_Destroyed\x10\x02\"\xfd\x1d\n" +
+	"\x13k_eResult_Destroyed\x10\x02\"\xd7\x1e\n" +
 	"#CDotaMsgStructuredTooltipProperties\x123\n" +
-	"\x16ability_name_loc_token\x18\x01 \x01(\tR\x13abilityNameLocToken\x12;\n" +
-	"\x1aability_category_loc_token\x18\x02 \x01(\tR\x17abilityCategoryLocToken\x12#\n" +
+	"\x16ability_name_loc_token\x18\x01 \x01(\tR\x13abilityNameLocToken\x12l\n" +
+	"\x10ability_category\x18\x02 \x01(\x0e2A.dota.CDotaMsgStructuredTooltipProperties.EAbilityTooltipCategoryR\x0fabilityCategory\x12#\n" +
 	"\rability_level\x18\x03 \x01(\x05R\fabilityLevel\x12*\n" +
 	"\x11current_mana_cost\x18\x04 \x01(\x05R\x0fcurrentManaCost\x12.\n" +
 	"\x13current_health_cost\x18\x05 \x01(\x05R\x11currentHealthCost\x12)\n" +
 	"\x10current_cooldown\x18\x06 \x01(\x02R\x0fcurrentCooldown\x12A\n" +
-	"\x1dsummary_description_loc_token\x18\a \x01(\tR\x1asummaryDescriptionLocToken\x12Q\n" +
-	"&summary_description_level_up_loc_token\x18\b \x01(\tR!summaryDescriptionLevelUpLocToken\x12\x8f\x01\n" +
-	" summary_description_embed_values\x18\t \x03(\v2F.dota.CDotaMsgStructuredTooltipProperties.SummaryDescriptionEmbedValueR\x1dsummaryDescriptionEmbedValues\x12|\n" +
-	"\x19summary_description_facet\x18\n" +
-	" \x01(\v2@.dota.CDotaMsgStructuredTooltipProperties.FacetDisplayPropertiesR\x17summaryDescriptionFacet\x12U\n" +
+	"\x1dsummary_description_loc_token\x18\a \x01(\tR\x1asummaryDescriptionLocToken\x12|\n" +
+	" summary_description_embed_values\x18\b \x03(\v23.dota.CDotaMsgStructuredTooltipProperties.AttributeR\x1dsummaryDescriptionEmbedValues\x12K\n" +
+	"\"summary_description_surfaced_lines\x18\t \x03(\tR\x1fsummaryDescriptionSurfacedLines\x12\xaa\x01\n" +
+	"*summary_description_embedded_sub_abilities\x18\n" +
+	" \x03(\v2N.dota.CDotaMsgStructuredTooltipProperties.SummaryDescriptionEmbeddedSubAbilityR&summaryDescriptionEmbeddedSubAbilities\x12G\n" +
+	" summary_description_aghs_scepter\x18\v \x01(\tR\x1dsummaryDescriptionAghsScepter\x12C\n" +
+	"\x1esummary_description_aghs_shard\x18\f \x01(\tR\x1bsummaryDescriptionAghsShard\x12*\n" +
+	"\x11preview_video_url\x18\r \x01(\tR\x0fpreviewVideoUrl\x12U\n" +
 	"\x06chunks\x18\x14 \x03(\v2=.dota.CDotaMsgStructuredTooltipProperties.TooltipContentChunkR\x06chunks\x1aS\n" +
 	"\x13AttributeValueValue\x12\x14\n" +
 	"\x05value\x18\x01 \x01(\x02R\x05value\x12&\n" +
@@ -19214,30 +19224,21 @@ const file_dota_gcmessages_common_proto_rawDesc = "" +
 	"\vdelta_value\x18\x03 \x01(\v2>.dota.CDotaMsgStructuredTooltipProperties.AttributeValue_DeltaH\x00R\n" +
 	"deltaValueB\f\n" +
 	"\n" +
-	"attr_value\x1a\x9d\x02\n" +
-	"\x16FacetDisplayProperties\x12/\n" +
-	"\x14facet_name_loc_token\x18\x01 \x01(\tR\x11facetNameLocToken\x12/\n" +
-	"\x14facet_desc_loc_token\x18\x02 \x01(\tR\x11facetDescLocToken\x121\n" +
-	"\x15facet_icon_style_name\x18\x03 \x01(\tR\x12facetIconStyleName\x123\n" +
-	"\x16facet_color_style_name\x18\x04 \x01(\tR\x13facetColorStyleName\x129\n" +
-	"\x19facet_gradient_style_name\x18\x05 \x01(\tR\x16facetGradientStyleName\x1a\xa7\x02\n" +
-	"\tAttribute\x12$\n" +
-	"\x0ename_loc_token\x18\x01 \x01(\tR\fnameLocToken\x12L\n" +
-	"\x04type\x18\x02 \x01(\x0e28.dota.CDotaMsgStructuredTooltipProperties.EAttributeTypeR\x04type\x12N\n" +
-	"\x05value\x18\x03 \x01(\v28.dota.CDotaMsgStructuredTooltipProperties.AttributeValueR\x05value\x12V\n" +
-	"\x05facet\x18\x04 \x01(\v2@.dota.CDotaMsgStructuredTooltipProperties.FacetDisplayPropertiesR\x05facet\x1a\x1a\n" +
+	"attr_value\x1a\xfe\x01\n" +
+	"\tAttribute\x12#\n" +
+	"\rinternal_name\x18\x01 \x01(\tR\finternalName\x12.\n" +
+	"\x13localized_name_text\x18\x02 \x01(\tR\x11localizedNameText\x12L\n" +
+	"\x04type\x18\x03 \x01(\x0e28.dota.CDotaMsgStructuredTooltipProperties.EAttributeTypeR\x04type\x12N\n" +
+	"\x05value\x18\x04 \x01(\v28.dota.CDotaMsgStructuredTooltipProperties.AttributeValueR\x05value\x1a\x1a\n" +
 	"\x18AttributeGroupDesc_Basic\x1ak\n" +
 	"\x1bAttributeGroupDesc_Specific\x12&\n" +
 	"\x0ftitle_loc_token\x18\x01 \x01(\tR\rtitleLocToken\x12$\n" +
-	"\x0edesc_loc_token\x18\x02 \x01(\tR\fdescLocToken\x1ar\n" +
-	"\x18AttributeGroupDesc_Facet\x12V\n" +
-	"\x05facet\x18\x01 \x01(\v2@.dota.CDotaMsgStructuredTooltipProperties.FacetDisplayPropertiesR\x05facet\x1a\xec\x02\n" +
+	"\x0edesc_loc_token\x18\x02 \x01(\tR\fdescLocToken\x1a\xf5\x02\n" +
 	"\x19AttributeGroupDescription\x12e\n" +
 	"\vbasic_value\x18\x01 \x01(\v2B.dota.CDotaMsgStructuredTooltipProperties.AttributeGroupDesc_BasicH\x00R\n" +
 	"basicValue\x12n\n" +
-	"\x0especific_value\x18\x02 \x01(\v2E.dota.CDotaMsgStructuredTooltipProperties.AttributeGroupDesc_SpecificH\x00R\rspecificValue\x12e\n" +
-	"\vfacet_value\x18\x03 \x01(\v2B.dota.CDotaMsgStructuredTooltipProperties.AttributeGroupDesc_FacetH\x00R\n" +
-	"facetValueB\x11\n" +
+	"\x0fcharacteristics\x18\x02 \x01(\v2B.dota.CDotaMsgStructuredTooltipProperties.AttributeGroupDesc_BasicH\x00R\x0fcharacteristics\x12n\n" +
+	"\x0especific_value\x18\x03 \x01(\v2E.dota.CDotaMsgStructuredTooltipProperties.AttributeGroupDesc_SpecificH\x00R\rspecificValueB\x11\n" +
 	"\x0fattr_group_desc\x1a\xbe\x01\n" +
 	"\x0eAttributeGroup\x12W\n" +
 	"\x04desc\x18\x01 \x01(\v2C.dota.CDotaMsgStructuredTooltipProperties.AttributeGroupDescriptionR\x04desc\x12S\n" +
@@ -19248,11 +19249,17 @@ const file_dota_gcmessages_common_proto_rawDesc = "" +
 	"\x06groups\x18\x01 \x03(\v28.dota.CDotaMsgStructuredTooltipProperties.AttributeGroupR\x06groups\x1a\x98\x01\n" +
 	"\x13TooltipContentChunk\x12p\n" +
 	"\x0fattribute_group\x18\x01 \x01(\v2E.dota.CDotaMsgStructuredTooltipProperties.ContentChunk_AttributeGroupH\x00R\x0eattributeGroupB\x0f\n" +
-	"\rcontent_chunk\x1a\xd0\x01\n" +
-	"\x1cSummaryDescriptionEmbedValue\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\x12L\n" +
-	"\x04type\x18\x02 \x01(\x0e28.dota.CDotaMsgStructuredTooltipProperties.EAttributeTypeR\x04type\x12N\n" +
-	"\x05value\x18\x03 \x01(\v28.dota.CDotaMsgStructuredTooltipProperties.AttributeValueR\x05value\"\x8d\x02\n" +
+	"\rcontent_chunk\x1a\xba\x01\n" +
+	"$SummaryDescriptionEmbeddedSubAbility\x123\n" +
+	"\x16ability_name_loc_token\x18\x01 \x01(\tR\x13abilityNameLocToken\x123\n" +
+	"\x16ability_desc_loc_token\x18\x02 \x01(\tR\x13abilityDescLocToken\x12(\n" +
+	"\x10ability_icon_url\x18\x03 \x01(\tR\x0eabilityIconUrl\"S\n" +
+	"\x17EAbilityTooltipCategory\x12\f\n" +
+	"\bkPassive\x10\x01\x12\r\n" +
+	"\tkAutocast\x10\x02\x12\v\n" +
+	"\akToggle\x10\x03\x12\x0e\n" +
+	"\n" +
+	"kChanneled\x10\x04\"\xdc\x03\n" +
 	"\x0eEAttributeType\x12\f\n" +
 	"\bkUnknown\x10\x00\x12\r\n" +
 	"\tkDuration\x10\x01\x12\r\n" +
@@ -19270,7 +19277,16 @@ const file_dota_gcmessages_common_proto_rawDesc = "" +
 	"\fkDebuffValue\x10\v\x12\x13\n" +
 	"\x0fkBuffPercentage\x10\f\x12\x0e\n" +
 	"\n" +
-	"kBuffValue\x10\r*U\n" +
+	"kBuffValue\x10\r\x12\x1c\n" +
+	"\x18kMagicalDamagePercentage\x10\x0e\x12\x15\n" +
+	"\x11kHealthPercentage\x10\x0f\x12\x13\n" +
+	"\x0fkManaPercentage\x10\x10\x12\x0f\n" +
+	"\vkNumCharges\x10\x11\x12\x13\n" +
+	"\x0fkDebuffDuration\x10\x12\x12\x11\n" +
+	"\rkBuffDuration\x10\x13\x12\x19\n" +
+	"\x15kAbilityDefinedDamage\x10\x14\x12\x13\n" +
+	"\x0fkDispellability\x10\x15\x12\x1a\n" +
+	"\x16kSpellImmunityPiercing\x10\x16*U\n" +
 	"\x11ESpecialPingValue\x12\x1f\n" +
 	"\x1ak_ESpecialPingValue_NoData\x10\xfe\x7f\x12\x1f\n" +
 	"\x1ak_ESpecialPingValue_Failed\x10\xff\x7f*\x86\x05\n" +
@@ -19388,8 +19404,8 @@ func file_dota_gcmessages_common_proto_rawDescGZIP() []byte {
 	return file_dota_gcmessages_common_proto_rawDescData
 }
 
-var file_dota_gcmessages_common_proto_enumTypes = make([]protoimpl.EnumInfo, 29)
-var file_dota_gcmessages_common_proto_msgTypes = make([]protoimpl.MessageInfo, 187)
+var file_dota_gcmessages_common_proto_enumTypes = make([]protoimpl.EnumInfo, 30)
+var file_dota_gcmessages_common_proto_msgTypes = make([]protoimpl.MessageInfo, 185)
 var file_dota_gcmessages_common_proto_goTypes = []any{
 	(ESpecialPingValue)(0),                                                                    // 0: dota.ESpecialPingValue
 	(EDOTAGCSessionNeed)(0),                                                                   // 1: dota.EDOTAGCSessionNeed
@@ -19419,380 +19435,376 @@ var file_dota_gcmessages_common_proto_goTypes = []any{
 	(CMsgDOTAClaimEventActionResponse_ResultCode)(0),                                          // 25: dota.CMsgDOTAClaimEventActionResponse.ResultCode
 	(CMsgClientToGCDotaLabsFeedbackResponse_EResponse)(0),                                     // 26: dota.CMsgClientToGCDotaLabsFeedbackResponse.EResponse
 	(CDotaMsg_PredictionResult_Prediction_EResult)(0),                                         // 27: dota.CDotaMsg_PredictionResult.Prediction.EResult
-	(CDotaMsgStructuredTooltipProperties_EAttributeType)(0),                                   // 28: dota.CDotaMsgStructuredTooltipProperties.EAttributeType
-	(*CSODOTAGameAccountClient)(nil),                                                          // 29: dota.CSODOTAGameAccountClient
-	(*CSODOTAGameAccountPlus)(nil),                                                            // 30: dota.CSODOTAGameAccountPlus
-	(*CSODOTAChatWheel)(nil),                                                                  // 31: dota.CSODOTAChatWheel
-	(*CMsgLobbyFeaturedGamemodeProgress)(nil),                                                 // 32: dota.CMsgLobbyFeaturedGamemodeProgress
-	(*CMsgBattleCupVictory)(nil),                                                              // 33: dota.CMsgBattleCupVictory
-	(*CMsgLobbyBattleCupVictoryList)(nil),                                                     // 34: dota.CMsgLobbyBattleCupVictoryList
-	(*CMsgDOTABroadcastNotification)(nil),                                                     // 35: dota.CMsgDOTABroadcastNotification
-	(*CProtoItemHeroStatue)(nil),                                                              // 36: dota.CProtoItemHeroStatue
-	(*CMatchPlayerAbilityUpgrade)(nil),                                                        // 37: dota.CMatchPlayerAbilityUpgrade
-	(*CMatchPlayerTimedCustomStat)(nil),                                                       // 38: dota.CMatchPlayerTimedCustomStat
-	(*CMatchPlayerTimedStats)(nil),                                                            // 39: dota.CMatchPlayerTimedStats
-	(*CMatchTeamTimedStats)(nil),                                                              // 40: dota.CMatchTeamTimedStats
-	(*CMatchAdditionalUnitInventory)(nil),                                                     // 41: dota.CMatchAdditionalUnitInventory
-	(*CMatchPlayerPermanentBuff)(nil),                                                         // 42: dota.CMatchPlayerPermanentBuff
-	(*CMatchHeroSelectEvent)(nil),                                                             // 43: dota.CMatchHeroSelectEvent
-	(*CMatchClip)(nil),                                                                        // 44: dota.CMatchClip
-	(*CPartySearchClientParty)(nil),                                                           // 45: dota.CPartySearchClientParty
-	(*CMsgDOTAHasItemQuery)(nil),                                                              // 46: dota.CMsgDOTAHasItemQuery
-	(*CMsgDOTAHasItemResponse)(nil),                                                           // 47: dota.CMsgDOTAHasItemResponse
-	(*CMsgGCGetPlayerCardItemInfo)(nil),                                                       // 48: dota.CMsgGCGetPlayerCardItemInfo
-	(*CMsgGCGetPlayerCardItemInfoResponse)(nil),                                               // 49: dota.CMsgGCGetPlayerCardItemInfoResponse
-	(*CSODOTAMapLocationState)(nil),                                                           // 50: dota.CSODOTAMapLocationState
-	(*CMsgLeagueAdminList)(nil),                                                               // 51: dota.CMsgLeagueAdminList
-	(*CMsgDOTAProfileCard)(nil),                                                               // 52: dota.CMsgDOTAProfileCard
-	(*CSODOTAPlayerChallenge)(nil),                                                            // 53: dota.CSODOTAPlayerChallenge
-	(*CMsgClientToGCRerollPlayerChallenge)(nil),                                               // 54: dota.CMsgClientToGCRerollPlayerChallenge
-	(*CMsgGCRerollPlayerChallengeResponse)(nil),                                               // 55: dota.CMsgGCRerollPlayerChallengeResponse
-	(*CMsgGCTopCustomGamesList)(nil),                                                          // 56: dota.CMsgGCTopCustomGamesList
-	(*CMsgDOTARealtimeGameStats)(nil),                                                         // 57: dota.CMsgDOTARealtimeGameStats
-	(*CMsgDOTARealtimeGameStatsTerse)(nil),                                                    // 58: dota.CMsgDOTARealtimeGameStatsTerse
-	(*CMsgDOTABroadcastTimelineEvent)(nil),                                                    // 59: dota.CMsgDOTABroadcastTimelineEvent
-	(*CMsgGCToClientMatchGroupsVersion)(nil),                                                  // 60: dota.CMsgGCToClientMatchGroupsVersion
-	(*CMsgDOTASDOHeroStatsHistory)(nil),                                                       // 61: dota.CMsgDOTASDOHeroStatsHistory
-	(*CMsgPredictionChoice)(nil),                                                              // 62: dota.CMsgPredictionChoice
-	(*CMsgInGamePrediction)(nil),                                                              // 63: dota.CMsgInGamePrediction
-	(*CMsgDOTASeasonPredictions)(nil),                                                         // 64: dota.CMsgDOTASeasonPredictions
-	(*CMsgAvailablePredictions)(nil),                                                          // 65: dota.CMsgAvailablePredictions
-	(*CMsgLeagueWatchedGames)(nil),                                                            // 66: dota.CMsgLeagueWatchedGames
-	(*CMsgDOTAMatch)(nil),                                                                     // 67: dota.CMsgDOTAMatch
-	(*CMsgPlayerCard)(nil),                                                                    // 68: dota.CMsgPlayerCard
-	(*CMsgDOTAFantasyPlayerStats)(nil),                                                        // 69: dota.CMsgDOTAFantasyPlayerStats
-	(*CMsgDOTAFantasyPlayerMatchStats)(nil),                                                   // 70: dota.CMsgDOTAFantasyPlayerMatchStats
-	(*CMsgDOTABotDebugInfo)(nil),                                                              // 71: dota.CMsgDOTABotDebugInfo
-	(*CMsgSuccessfulHero)(nil),                                                                // 72: dota.CMsgSuccessfulHero
-	(*CMsgRecentMatchInfo)(nil),                                                               // 73: dota.CMsgRecentMatchInfo
-	(*CMsgMatchTips)(nil),                                                                     // 74: dota.CMsgMatchTips
-	(*CMsgDOTAMatchMinimal)(nil),                                                              // 75: dota.CMsgDOTAMatchMinimal
-	(*CMsgConsumableUsage)(nil),                                                               // 76: dota.CMsgConsumableUsage
-	(*CMsgMatchConsumableUsage)(nil),                                                          // 77: dota.CMsgMatchConsumableUsage
-	(*CMsgMatchEventActionGrants)(nil),                                                        // 78: dota.CMsgMatchEventActionGrants
-	(*CMsgCustomGameWhitelist)(nil),                                                           // 79: dota.CMsgCustomGameWhitelist
-	(*CMsgCustomGameWhitelistForEdit)(nil),                                                    // 80: dota.CMsgCustomGameWhitelistForEdit
-	(*CMsgPlayerRecentMatchInfo)(nil),                                                         // 81: dota.CMsgPlayerRecentMatchInfo
-	(*CMsgPlayerMatchRecord)(nil),                                                             // 82: dota.CMsgPlayerMatchRecord
-	(*CMsgPlayerRecentMatchOutcomes)(nil),                                                     // 83: dota.CMsgPlayerRecentMatchOutcomes
-	(*CMsgPlayerRecentCommends)(nil),                                                          // 84: dota.CMsgPlayerRecentCommends
-	(*CMsgPlayerRecentAccomplishments)(nil),                                                   // 85: dota.CMsgPlayerRecentAccomplishments
-	(*CMsgPlayerHeroRecentAccomplishments)(nil),                                               // 86: dota.CMsgPlayerHeroRecentAccomplishments
-	(*CMsgRecentAccomplishments)(nil),                                                         // 87: dota.CMsgRecentAccomplishments
-	(*CMsgServerToGCRequestPlayerRecentAccomplishments)(nil),                                  // 88: dota.CMsgServerToGCRequestPlayerRecentAccomplishments
-	(*CMsgServerToGCRequestPlayerRecentAccomplishmentsResponse)(nil),                          // 89: dota.CMsgServerToGCRequestPlayerRecentAccomplishmentsResponse
-	(*CMsgArcanaVoteMatchVotes)(nil),                                                          // 90: dota.CMsgArcanaVoteMatchVotes
-	(*CMsgGCtoGCAssociatedExploiterAccountInfo)(nil),                                          // 91: dota.CMsgGCtoGCAssociatedExploiterAccountInfo
-	(*CMsgGCtoGCAssociatedExploiterAccountInfoResponse)(nil),                                  // 92: dota.CMsgGCtoGCAssociatedExploiterAccountInfoResponse
-	(*CMsgPullTabsData)(nil),                                                                  // 93: dota.CMsgPullTabsData
-	(*CMsgUnderDraftData)(nil),                                                                // 94: dota.CMsgUnderDraftData
-	(*CMsgPlayerTitleData)(nil),                                                               // 95: dota.CMsgPlayerTitleData
-	(*CMsgDOTATriviaQuestion)(nil),                                                            // 96: dota.CMsgDOTATriviaQuestion
-	(*CMsgDOTATriviaQuestionAnswersSummary)(nil),                                              // 97: dota.CMsgDOTATriviaQuestionAnswersSummary
-	(*CMsgGameDataSpecialValueBonus)(nil),                                                     // 98: dota.CMsgGameDataSpecialValueBonus
-	(*CMsgGameDataSpecialValues)(nil),                                                         // 99: dota.CMsgGameDataSpecialValues
-	(*CMsgGameDataFacetAbilityBonus)(nil),                                                     // 100: dota.CMsgGameDataFacetAbilityBonus
-	(*CMsgGameDataAbilityOrItem)(nil),                                                         // 101: dota.CMsgGameDataAbilityOrItem
-	(*CMsgGameDataAbilityOrItemList)(nil),                                                     // 102: dota.CMsgGameDataAbilityOrItemList
-	(*CMsgGameDataHero)(nil),                                                                  // 103: dota.CMsgGameDataHero
-	(*CMsgGameDataAbilities)(nil),                                                             // 104: dota.CMsgGameDataAbilities
-	(*CMsgGameDataItems)(nil),                                                                 // 105: dota.CMsgGameDataItems
-	(*CMsgGameDataHeroes)(nil),                                                                // 106: dota.CMsgGameDataHeroes
-	(*CMsgGameDataHeroList)(nil),                                                              // 107: dota.CMsgGameDataHeroList
-	(*CMsgGameDataItemAbilityList)(nil),                                                       // 108: dota.CMsgGameDataItemAbilityList
-	(*CMsgLobbyAbilityDraftData)(nil),                                                         // 109: dota.CMsgLobbyAbilityDraftData
-	(*CSOEconItemDropRateBonus)(nil),                                                          // 110: dota.CSOEconItemDropRateBonus
-	(*CSOEconItemTournamentPassport)(nil),                                                     // 111: dota.CSOEconItemTournamentPassport
-	(*CMsgStickerbookSticker)(nil),                                                            // 112: dota.CMsgStickerbookSticker
-	(*CMsgStickerbookPage)(nil),                                                               // 113: dota.CMsgStickerbookPage
-	(*CMsgStickerbookTeamPageOrderSequence)(nil),                                              // 114: dota.CMsgStickerbookTeamPageOrderSequence
-	(*CMsgStickerbook)(nil),                                                                   // 115: dota.CMsgStickerbook
-	(*CMsgStickerHero)(nil),                                                                   // 116: dota.CMsgStickerHero
-	(*CMsgStickerHeroes)(nil),                                                                 // 117: dota.CMsgStickerHeroes
-	(*CMsgHeroRoleStats)(nil),                                                                 // 118: dota.CMsgHeroRoleStats
-	(*CMsgHeroRoleHeroStats)(nil),                                                             // 119: dota.CMsgHeroRoleHeroStats
-	(*CMsgHeroRoleRankStats)(nil),                                                             // 120: dota.CMsgHeroRoleRankStats
-	(*CMsgHeroRoleAllRanksStats)(nil),                                                         // 121: dota.CMsgHeroRoleAllRanksStats
-	(*CMsgMapStatsSnapshot)(nil),                                                              // 122: dota.CMsgMapStatsSnapshot
-	(*CMsgGlobalMapStats)(nil),                                                                // 123: dota.CMsgGlobalMapStats
-	(*CMsgTrackedStat)(nil),                                                                   // 124: dota.CMsgTrackedStat
-	(*CMsgDOTAClaimEventActionResponse)(nil),                                                  // 125: dota.CMsgDOTAClaimEventActionResponse
-	(*CMsgClientToGCDotaLabsFeedback)(nil),                                                    // 126: dota.CMsgClientToGCDotaLabsFeedback
-	(*CMsgClientToGCDotaLabsFeedbackResponse)(nil),                                            // 127: dota.CMsgClientToGCDotaLabsFeedbackResponse
-	(*CDotaMsg_PredictionResult)(nil),                                                         // 128: dota.CDotaMsg_PredictionResult
-	(*CDotaMsgStructuredTooltipProperties)(nil),                                               // 129: dota.CDotaMsgStructuredTooltipProperties
-	(*CSODOTAGameAccountClient_RoleHandicap)(nil),                                             // 130: dota.CSODOTAGameAccountClient.RoleHandicap
-	(*CMsgLobbyFeaturedGamemodeProgress_AccountProgress)(nil),                                 // 131: dota.CMsgLobbyFeaturedGamemodeProgress.AccountProgress
-	(*CMsgGCGetPlayerCardItemInfoResponse_PlayerCardInfo)(nil),                                // 132: dota.CMsgGCGetPlayerCardItemInfoResponse.PlayerCardInfo
-	(*CMsgDOTAProfileCard_Slot)(nil),                                                          // 133: dota.CMsgDOTAProfileCard.Slot
-	(*CMsgDOTAProfileCard_Slot_Trophy)(nil),                                                   // 134: dota.CMsgDOTAProfileCard.Slot.Trophy
-	(*CMsgDOTAProfileCard_Slot_Stat)(nil),                                                     // 135: dota.CMsgDOTAProfileCard.Slot.Stat
-	(*CMsgDOTAProfileCard_Slot_Item)(nil),                                                     // 136: dota.CMsgDOTAProfileCard.Slot.Item
-	(*CMsgDOTAProfileCard_Slot_Hero)(nil),                                                     // 137: dota.CMsgDOTAProfileCard.Slot.Hero
-	(*CMsgDOTAProfileCard_Slot_Emoticon)(nil),                                                 // 138: dota.CMsgDOTAProfileCard.Slot.Emoticon
-	(*CMsgDOTAProfileCard_Slot_Team)(nil),                                                     // 139: dota.CMsgDOTAProfileCard.Slot.Team
-	(*CMsgDOTARealtimeGameStats_TeamDetails)(nil),                                             // 140: dota.CMsgDOTARealtimeGameStats.TeamDetails
-	(*CMsgDOTARealtimeGameStats_ItemDetails)(nil),                                             // 141: dota.CMsgDOTARealtimeGameStats.ItemDetails
-	(*CMsgDOTARealtimeGameStats_AbilityDetails)(nil),                                          // 142: dota.CMsgDOTARealtimeGameStats.AbilityDetails
-	(*CMsgDOTARealtimeGameStats_HeroToHeroStats)(nil),                                         // 143: dota.CMsgDOTARealtimeGameStats.HeroToHeroStats
-	(*CMsgDOTARealtimeGameStats_AbilityList)(nil),                                             // 144: dota.CMsgDOTARealtimeGameStats.AbilityList
-	(*CMsgDOTARealtimeGameStats_PlayerDetails)(nil),                                           // 145: dota.CMsgDOTARealtimeGameStats.PlayerDetails
-	(*CMsgDOTARealtimeGameStats_BuildingDetails)(nil),                                         // 146: dota.CMsgDOTARealtimeGameStats.BuildingDetails
-	(*CMsgDOTARealtimeGameStats_KillDetails)(nil),                                             // 147: dota.CMsgDOTARealtimeGameStats.KillDetails
-	(*CMsgDOTARealtimeGameStats_BroadcasterDetails)(nil),                                      // 148: dota.CMsgDOTARealtimeGameStats.BroadcasterDetails
-	(*CMsgDOTARealtimeGameStats_PickBanDetails)(nil),                                          // 149: dota.CMsgDOTARealtimeGameStats.PickBanDetails
-	(*CMsgDOTARealtimeGameStats_MatchDetails)(nil),                                            // 150: dota.CMsgDOTARealtimeGameStats.MatchDetails
-	(*CMsgDOTARealtimeGameStats_GraphData)(nil),                                               // 151: dota.CMsgDOTARealtimeGameStats.GraphData
-	(*CMsgDOTARealtimeGameStats_GraphData_LocationStats)(nil),                                 // 152: dota.CMsgDOTARealtimeGameStats.GraphData.LocationStats
-	(*CMsgDOTARealtimeGameStats_GraphData_TeamLocationStats)(nil),                             // 153: dota.CMsgDOTARealtimeGameStats.GraphData.TeamLocationStats
-	(*CMsgDOTARealtimeGameStatsTerse_TeamDetails)(nil),                                        // 154: dota.CMsgDOTARealtimeGameStatsTerse.TeamDetails
-	(*CMsgDOTARealtimeGameStatsTerse_PlayerDetails)(nil),                                      // 155: dota.CMsgDOTARealtimeGameStatsTerse.PlayerDetails
-	(*CMsgDOTARealtimeGameStatsTerse_BuildingDetails)(nil),                                    // 156: dota.CMsgDOTARealtimeGameStatsTerse.BuildingDetails
-	(*CMsgDOTARealtimeGameStatsTerse_PickBanDetails)(nil),                                     // 157: dota.CMsgDOTARealtimeGameStatsTerse.PickBanDetails
-	(*CMsgDOTARealtimeGameStatsTerse_MatchDetails)(nil),                                       // 158: dota.CMsgDOTARealtimeGameStatsTerse.MatchDetails
-	(*CMsgDOTARealtimeGameStatsTerse_GraphData)(nil),                                          // 159: dota.CMsgDOTARealtimeGameStatsTerse.GraphData
-	(*CMsgInGamePrediction_QueryKeyValues)(nil),                                               // 160: dota.CMsgInGamePrediction.QueryKeyValues
-	(*CMsgDOTASeasonPredictions_Prediction)(nil),                                              // 161: dota.CMsgDOTASeasonPredictions.Prediction
-	(*CMsgDOTASeasonPredictions_Prediction_Answers)(nil),                                      // 162: dota.CMsgDOTASeasonPredictions.Prediction.Answers
-	(*CMsgAvailablePredictions_MatchPrediction)(nil),                                          // 163: dota.CMsgAvailablePredictions.MatchPrediction
-	(*CMsgLeagueWatchedGames_Series)(nil),                                                     // 164: dota.CMsgLeagueWatchedGames.Series
-	(*CMsgLeagueWatchedGames_League)(nil),                                                     // 165: dota.CMsgLeagueWatchedGames.League
-	(*CMsgDOTAMatch_Player)(nil),                                                              // 166: dota.CMsgDOTAMatch.Player
-	(*CMsgDOTAMatch_BroadcasterInfo)(nil),                                                     // 167: dota.CMsgDOTAMatch.BroadcasterInfo
-	(*CMsgDOTAMatch_BroadcasterChannel)(nil),                                                  // 168: dota.CMsgDOTAMatch.BroadcasterChannel
-	(*CMsgDOTAMatch_Coach)(nil),                                                               // 169: dota.CMsgDOTAMatch.Coach
-	(*CMsgDOTAMatch_CustomGameData)(nil),                                                      // 170: dota.CMsgDOTAMatch.CustomGameData
-	(*CMsgDOTAMatch_Player_CustomGameData)(nil),                                               // 171: dota.CMsgDOTAMatch.Player.CustomGameData
-	(*CMsgDOTAMatch_Player_HeroDamageReceived)(nil),                                           // 172: dota.CMsgDOTAMatch.Player.HeroDamageReceived
-	(*CMsgPlayerCard_StatModifier)(nil),                                                       // 173: dota.CMsgPlayerCard.StatModifier
-	(*CMsgDOTABotDebugInfo_Bot)(nil),                                                          // 174: dota.CMsgDOTABotDebugInfo.Bot
-	(*CMsgDOTABotDebugInfo_Bot_Mode)(nil),                                                     // 175: dota.CMsgDOTABotDebugInfo.Bot.Mode
-	(*CMsgDOTABotDebugInfo_Bot_Action)(nil),                                                   // 176: dota.CMsgDOTABotDebugInfo.Bot.Action
-	(*CMsgMatchTips_SingleTip)(nil),                                                           // 177: dota.CMsgMatchTips.SingleTip
-	(*CMsgDOTAMatchMinimal_Player)(nil),                                                       // 178: dota.CMsgDOTAMatchMinimal.Player
-	(*CMsgDOTAMatchMinimal_Tourney)(nil),                                                      // 179: dota.CMsgDOTAMatchMinimal.Tourney
-	(*CMsgMatchConsumableUsage_PlayerUsage)(nil),                                              // 180: dota.CMsgMatchConsumableUsage.PlayerUsage
-	(*CMsgMatchEventActionGrants_PlayerGrants)(nil),                                           // 181: dota.CMsgMatchEventActionGrants.PlayerGrants
-	(*CMsgCustomGameWhitelistForEdit_WhitelistEntry)(nil),                                     // 182: dota.CMsgCustomGameWhitelistForEdit.WhitelistEntry
-	(*CMsgGCtoGCAssociatedExploiterAccountInfoResponse_Account)(nil),                          // 183: dota.CMsgGCtoGCAssociatedExploiterAccountInfoResponse.Account
-	(*CMsgPullTabsData_Slot)(nil),                                                             // 184: dota.CMsgPullTabsData.Slot
-	(*CMsgPullTabsData_Jackpot)(nil),                                                          // 185: dota.CMsgPullTabsData.Jackpot
-	(*CMsgUnderDraftData_BenchSlot)(nil),                                                      // 186: dota.CMsgUnderDraftData.BenchSlot
-	(*CMsgUnderDraftData_ShopSlot)(nil),                                                       // 187: dota.CMsgUnderDraftData.ShopSlot
-	(*CMsgGameDataHero_Facet)(nil),                                                            // 188: dota.CMsgGameDataHero.Facet
-	(*CMsgGameDataHeroList_HeroInfo)(nil),                                                     // 189: dota.CMsgGameDataHeroList.HeroInfo
-	(*CMsgGameDataItemAbilityList_ItemAbilityInfo)(nil),                                       // 190: dota.CMsgGameDataItemAbilityList.ItemAbilityInfo
-	(*CMsgGameDataItemAbilityList_ItemAbilityInfo_Recipe)(nil),                                // 191: dota.CMsgGameDataItemAbilityList.ItemAbilityInfo.Recipe
-	(*CMsgDOTAClaimEventActionResponse_MysteryItemRewardData)(nil),                            // 192: dota.CMsgDOTAClaimEventActionResponse.MysteryItemRewardData
-	(*CMsgDOTAClaimEventActionResponse_LootListRewardData)(nil),                               // 193: dota.CMsgDOTAClaimEventActionResponse.LootListRewardData
-	(*CMsgDOTAClaimEventActionResponse_ActionListRewardData)(nil),                             // 194: dota.CMsgDOTAClaimEventActionResponse.ActionListRewardData
-	(*CMsgDOTAClaimEventActionResponse_OverworldTokenRewardData)(nil),                         // 195: dota.CMsgDOTAClaimEventActionResponse.OverworldTokenRewardData
-	(*CMsgDOTAClaimEventActionResponse_MonsterHunterMaterialRewardData)(nil),                  // 196: dota.CMsgDOTAClaimEventActionResponse.MonsterHunterMaterialRewardData
-	(*CMsgDOTAClaimEventActionResponse_GrantedRewardData)(nil),                                // 197: dota.CMsgDOTAClaimEventActionResponse.GrantedRewardData
-	(*CMsgDOTAClaimEventActionResponse_OverworldTokenRewardData_TokenQuantity)(nil),           // 198: dota.CMsgDOTAClaimEventActionResponse.OverworldTokenRewardData.TokenQuantity
-	(*CMsgDOTAClaimEventActionResponse_MonsterHunterMaterialRewardData_MaterialQuantity)(nil), // 199: dota.CMsgDOTAClaimEventActionResponse.MonsterHunterMaterialRewardData.MaterialQuantity
-	(*CDotaMsg_PredictionResult_Prediction)(nil),                                              // 200: dota.CDotaMsg_PredictionResult.Prediction
-	(*CDotaMsgStructuredTooltipProperties_AttributeValueValue)(nil),                           // 201: dota.CDotaMsgStructuredTooltipProperties.AttributeValueValue
-	(*CDotaMsgStructuredTooltipProperties_AttributeValue_Single)(nil),                         // 202: dota.CDotaMsgStructuredTooltipProperties.AttributeValue_Single
-	(*CDotaMsgStructuredTooltipProperties_AttributeValue_Variable)(nil),                       // 203: dota.CDotaMsgStructuredTooltipProperties.AttributeValue_Variable
-	(*CDotaMsgStructuredTooltipProperties_AttributeValue_Delta)(nil),                          // 204: dota.CDotaMsgStructuredTooltipProperties.AttributeValue_Delta
-	(*CDotaMsgStructuredTooltipProperties_AttributeValue)(nil),                                // 205: dota.CDotaMsgStructuredTooltipProperties.AttributeValue
-	(*CDotaMsgStructuredTooltipProperties_FacetDisplayProperties)(nil),                        // 206: dota.CDotaMsgStructuredTooltipProperties.FacetDisplayProperties
+	(CDotaMsgStructuredTooltipProperties_EAbilityTooltipCategory)(0),                          // 28: dota.CDotaMsgStructuredTooltipProperties.EAbilityTooltipCategory
+	(CDotaMsgStructuredTooltipProperties_EAttributeType)(0),                                   // 29: dota.CDotaMsgStructuredTooltipProperties.EAttributeType
+	(*CSODOTAGameAccountClient)(nil),                                                          // 30: dota.CSODOTAGameAccountClient
+	(*CSODOTAGameAccountPlus)(nil),                                                            // 31: dota.CSODOTAGameAccountPlus
+	(*CSODOTAChatWheel)(nil),                                                                  // 32: dota.CSODOTAChatWheel
+	(*CMsgLobbyFeaturedGamemodeProgress)(nil),                                                 // 33: dota.CMsgLobbyFeaturedGamemodeProgress
+	(*CMsgBattleCupVictory)(nil),                                                              // 34: dota.CMsgBattleCupVictory
+	(*CMsgLobbyBattleCupVictoryList)(nil),                                                     // 35: dota.CMsgLobbyBattleCupVictoryList
+	(*CMsgDOTABroadcastNotification)(nil),                                                     // 36: dota.CMsgDOTABroadcastNotification
+	(*CProtoItemHeroStatue)(nil),                                                              // 37: dota.CProtoItemHeroStatue
+	(*CMatchPlayerAbilityUpgrade)(nil),                                                        // 38: dota.CMatchPlayerAbilityUpgrade
+	(*CMatchPlayerTimedCustomStat)(nil),                                                       // 39: dota.CMatchPlayerTimedCustomStat
+	(*CMatchPlayerTimedStats)(nil),                                                            // 40: dota.CMatchPlayerTimedStats
+	(*CMatchTeamTimedStats)(nil),                                                              // 41: dota.CMatchTeamTimedStats
+	(*CMatchAdditionalUnitInventory)(nil),                                                     // 42: dota.CMatchAdditionalUnitInventory
+	(*CMatchPlayerPermanentBuff)(nil),                                                         // 43: dota.CMatchPlayerPermanentBuff
+	(*CMatchHeroSelectEvent)(nil),                                                             // 44: dota.CMatchHeroSelectEvent
+	(*CMatchClip)(nil),                                                                        // 45: dota.CMatchClip
+	(*CPartySearchClientParty)(nil),                                                           // 46: dota.CPartySearchClientParty
+	(*CMsgDOTAHasItemQuery)(nil),                                                              // 47: dota.CMsgDOTAHasItemQuery
+	(*CMsgDOTAHasItemResponse)(nil),                                                           // 48: dota.CMsgDOTAHasItemResponse
+	(*CMsgGCGetPlayerCardItemInfo)(nil),                                                       // 49: dota.CMsgGCGetPlayerCardItemInfo
+	(*CMsgGCGetPlayerCardItemInfoResponse)(nil),                                               // 50: dota.CMsgGCGetPlayerCardItemInfoResponse
+	(*CSODOTAMapLocationState)(nil),                                                           // 51: dota.CSODOTAMapLocationState
+	(*CMsgLeagueAdminList)(nil),                                                               // 52: dota.CMsgLeagueAdminList
+	(*CMsgDOTAProfileCard)(nil),                                                               // 53: dota.CMsgDOTAProfileCard
+	(*CSODOTAPlayerChallenge)(nil),                                                            // 54: dota.CSODOTAPlayerChallenge
+	(*CMsgClientToGCRerollPlayerChallenge)(nil),                                               // 55: dota.CMsgClientToGCRerollPlayerChallenge
+	(*CMsgGCRerollPlayerChallengeResponse)(nil),                                               // 56: dota.CMsgGCRerollPlayerChallengeResponse
+	(*CMsgGCTopCustomGamesList)(nil),                                                          // 57: dota.CMsgGCTopCustomGamesList
+	(*CMsgDOTARealtimeGameStats)(nil),                                                         // 58: dota.CMsgDOTARealtimeGameStats
+	(*CMsgDOTARealtimeGameStatsTerse)(nil),                                                    // 59: dota.CMsgDOTARealtimeGameStatsTerse
+	(*CMsgDOTABroadcastTimelineEvent)(nil),                                                    // 60: dota.CMsgDOTABroadcastTimelineEvent
+	(*CMsgGCToClientMatchGroupsVersion)(nil),                                                  // 61: dota.CMsgGCToClientMatchGroupsVersion
+	(*CMsgDOTASDOHeroStatsHistory)(nil),                                                       // 62: dota.CMsgDOTASDOHeroStatsHistory
+	(*CMsgPredictionChoice)(nil),                                                              // 63: dota.CMsgPredictionChoice
+	(*CMsgInGamePrediction)(nil),                                                              // 64: dota.CMsgInGamePrediction
+	(*CMsgDOTASeasonPredictions)(nil),                                                         // 65: dota.CMsgDOTASeasonPredictions
+	(*CMsgAvailablePredictions)(nil),                                                          // 66: dota.CMsgAvailablePredictions
+	(*CMsgLeagueWatchedGames)(nil),                                                            // 67: dota.CMsgLeagueWatchedGames
+	(*CMsgDOTAMatch)(nil),                                                                     // 68: dota.CMsgDOTAMatch
+	(*CMsgPlayerCard)(nil),                                                                    // 69: dota.CMsgPlayerCard
+	(*CMsgDOTAFantasyPlayerStats)(nil),                                                        // 70: dota.CMsgDOTAFantasyPlayerStats
+	(*CMsgDOTAFantasyPlayerMatchStats)(nil),                                                   // 71: dota.CMsgDOTAFantasyPlayerMatchStats
+	(*CMsgDOTABotDebugInfo)(nil),                                                              // 72: dota.CMsgDOTABotDebugInfo
+	(*CMsgSuccessfulHero)(nil),                                                                // 73: dota.CMsgSuccessfulHero
+	(*CMsgRecentMatchInfo)(nil),                                                               // 74: dota.CMsgRecentMatchInfo
+	(*CMsgMatchTips)(nil),                                                                     // 75: dota.CMsgMatchTips
+	(*CMsgDOTAMatchMinimal)(nil),                                                              // 76: dota.CMsgDOTAMatchMinimal
+	(*CMsgConsumableUsage)(nil),                                                               // 77: dota.CMsgConsumableUsage
+	(*CMsgMatchConsumableUsage)(nil),                                                          // 78: dota.CMsgMatchConsumableUsage
+	(*CMsgMatchEventActionGrants)(nil),                                                        // 79: dota.CMsgMatchEventActionGrants
+	(*CMsgCustomGameWhitelist)(nil),                                                           // 80: dota.CMsgCustomGameWhitelist
+	(*CMsgCustomGameWhitelistForEdit)(nil),                                                    // 81: dota.CMsgCustomGameWhitelistForEdit
+	(*CMsgPlayerRecentMatchInfo)(nil),                                                         // 82: dota.CMsgPlayerRecentMatchInfo
+	(*CMsgPlayerMatchRecord)(nil),                                                             // 83: dota.CMsgPlayerMatchRecord
+	(*CMsgPlayerRecentMatchOutcomes)(nil),                                                     // 84: dota.CMsgPlayerRecentMatchOutcomes
+	(*CMsgPlayerRecentCommends)(nil),                                                          // 85: dota.CMsgPlayerRecentCommends
+	(*CMsgPlayerRecentAccomplishments)(nil),                                                   // 86: dota.CMsgPlayerRecentAccomplishments
+	(*CMsgPlayerHeroRecentAccomplishments)(nil),                                               // 87: dota.CMsgPlayerHeroRecentAccomplishments
+	(*CMsgRecentAccomplishments)(nil),                                                         // 88: dota.CMsgRecentAccomplishments
+	(*CMsgServerToGCRequestPlayerRecentAccomplishments)(nil),                                  // 89: dota.CMsgServerToGCRequestPlayerRecentAccomplishments
+	(*CMsgServerToGCRequestPlayerRecentAccomplishmentsResponse)(nil),                          // 90: dota.CMsgServerToGCRequestPlayerRecentAccomplishmentsResponse
+	(*CMsgArcanaVoteMatchVotes)(nil),                                                          // 91: dota.CMsgArcanaVoteMatchVotes
+	(*CMsgGCtoGCAssociatedExploiterAccountInfo)(nil),                                          // 92: dota.CMsgGCtoGCAssociatedExploiterAccountInfo
+	(*CMsgGCtoGCAssociatedExploiterAccountInfoResponse)(nil),                                  // 93: dota.CMsgGCtoGCAssociatedExploiterAccountInfoResponse
+	(*CMsgPullTabsData)(nil),                                                                  // 94: dota.CMsgPullTabsData
+	(*CMsgUnderDraftData)(nil),                                                                // 95: dota.CMsgUnderDraftData
+	(*CMsgPlayerTitleData)(nil),                                                               // 96: dota.CMsgPlayerTitleData
+	(*CMsgDOTATriviaQuestion)(nil),                                                            // 97: dota.CMsgDOTATriviaQuestion
+	(*CMsgDOTATriviaQuestionAnswersSummary)(nil),                                              // 98: dota.CMsgDOTATriviaQuestionAnswersSummary
+	(*CMsgGameDataSpecialValueBonus)(nil),                                                     // 99: dota.CMsgGameDataSpecialValueBonus
+	(*CMsgGameDataSpecialValues)(nil),                                                         // 100: dota.CMsgGameDataSpecialValues
+	(*CMsgGameDataFacetAbilityBonus)(nil),                                                     // 101: dota.CMsgGameDataFacetAbilityBonus
+	(*CMsgGameDataAbilityOrItem)(nil),                                                         // 102: dota.CMsgGameDataAbilityOrItem
+	(*CMsgGameDataAbilityOrItemList)(nil),                                                     // 103: dota.CMsgGameDataAbilityOrItemList
+	(*CMsgGameDataHero)(nil),                                                                  // 104: dota.CMsgGameDataHero
+	(*CMsgGameDataAbilities)(nil),                                                             // 105: dota.CMsgGameDataAbilities
+	(*CMsgGameDataItems)(nil),                                                                 // 106: dota.CMsgGameDataItems
+	(*CMsgGameDataHeroes)(nil),                                                                // 107: dota.CMsgGameDataHeroes
+	(*CMsgGameDataHeroList)(nil),                                                              // 108: dota.CMsgGameDataHeroList
+	(*CMsgGameDataItemAbilityList)(nil),                                                       // 109: dota.CMsgGameDataItemAbilityList
+	(*CMsgLobbyAbilityDraftData)(nil),                                                         // 110: dota.CMsgLobbyAbilityDraftData
+	(*CSOEconItemDropRateBonus)(nil),                                                          // 111: dota.CSOEconItemDropRateBonus
+	(*CSOEconItemTournamentPassport)(nil),                                                     // 112: dota.CSOEconItemTournamentPassport
+	(*CMsgStickerbookSticker)(nil),                                                            // 113: dota.CMsgStickerbookSticker
+	(*CMsgStickerbookPage)(nil),                                                               // 114: dota.CMsgStickerbookPage
+	(*CMsgStickerbookTeamPageOrderSequence)(nil),                                              // 115: dota.CMsgStickerbookTeamPageOrderSequence
+	(*CMsgStickerbook)(nil),                                                                   // 116: dota.CMsgStickerbook
+	(*CMsgStickerHero)(nil),                                                                   // 117: dota.CMsgStickerHero
+	(*CMsgStickerHeroes)(nil),                                                                 // 118: dota.CMsgStickerHeroes
+	(*CMsgHeroRoleStats)(nil),                                                                 // 119: dota.CMsgHeroRoleStats
+	(*CMsgHeroRoleHeroStats)(nil),                                                             // 120: dota.CMsgHeroRoleHeroStats
+	(*CMsgHeroRoleRankStats)(nil),                                                             // 121: dota.CMsgHeroRoleRankStats
+	(*CMsgHeroRoleAllRanksStats)(nil),                                                         // 122: dota.CMsgHeroRoleAllRanksStats
+	(*CMsgMapStatsSnapshot)(nil),                                                              // 123: dota.CMsgMapStatsSnapshot
+	(*CMsgGlobalMapStats)(nil),                                                                // 124: dota.CMsgGlobalMapStats
+	(*CMsgTrackedStat)(nil),                                                                   // 125: dota.CMsgTrackedStat
+	(*CMsgDOTAClaimEventActionResponse)(nil),                                                  // 126: dota.CMsgDOTAClaimEventActionResponse
+	(*CMsgClientToGCDotaLabsFeedback)(nil),                                                    // 127: dota.CMsgClientToGCDotaLabsFeedback
+	(*CMsgClientToGCDotaLabsFeedbackResponse)(nil),                                            // 128: dota.CMsgClientToGCDotaLabsFeedbackResponse
+	(*CDotaMsg_PredictionResult)(nil),                                                         // 129: dota.CDotaMsg_PredictionResult
+	(*CDotaMsgStructuredTooltipProperties)(nil),                                               // 130: dota.CDotaMsgStructuredTooltipProperties
+	(*CSODOTAGameAccountClient_RoleHandicap)(nil),                                             // 131: dota.CSODOTAGameAccountClient.RoleHandicap
+	(*CMsgLobbyFeaturedGamemodeProgress_AccountProgress)(nil),                                 // 132: dota.CMsgLobbyFeaturedGamemodeProgress.AccountProgress
+	(*CMsgGCGetPlayerCardItemInfoResponse_PlayerCardInfo)(nil),                                // 133: dota.CMsgGCGetPlayerCardItemInfoResponse.PlayerCardInfo
+	(*CMsgDOTAProfileCard_Slot)(nil),                                                          // 134: dota.CMsgDOTAProfileCard.Slot
+	(*CMsgDOTAProfileCard_Slot_Trophy)(nil),                                                   // 135: dota.CMsgDOTAProfileCard.Slot.Trophy
+	(*CMsgDOTAProfileCard_Slot_Stat)(nil),                                                     // 136: dota.CMsgDOTAProfileCard.Slot.Stat
+	(*CMsgDOTAProfileCard_Slot_Item)(nil),                                                     // 137: dota.CMsgDOTAProfileCard.Slot.Item
+	(*CMsgDOTAProfileCard_Slot_Hero)(nil),                                                     // 138: dota.CMsgDOTAProfileCard.Slot.Hero
+	(*CMsgDOTAProfileCard_Slot_Emoticon)(nil),                                                 // 139: dota.CMsgDOTAProfileCard.Slot.Emoticon
+	(*CMsgDOTAProfileCard_Slot_Team)(nil),                                                     // 140: dota.CMsgDOTAProfileCard.Slot.Team
+	(*CMsgDOTARealtimeGameStats_TeamDetails)(nil),                                             // 141: dota.CMsgDOTARealtimeGameStats.TeamDetails
+	(*CMsgDOTARealtimeGameStats_ItemDetails)(nil),                                             // 142: dota.CMsgDOTARealtimeGameStats.ItemDetails
+	(*CMsgDOTARealtimeGameStats_AbilityDetails)(nil),                                          // 143: dota.CMsgDOTARealtimeGameStats.AbilityDetails
+	(*CMsgDOTARealtimeGameStats_HeroToHeroStats)(nil),                                         // 144: dota.CMsgDOTARealtimeGameStats.HeroToHeroStats
+	(*CMsgDOTARealtimeGameStats_AbilityList)(nil),                                             // 145: dota.CMsgDOTARealtimeGameStats.AbilityList
+	(*CMsgDOTARealtimeGameStats_PlayerDetails)(nil),                                           // 146: dota.CMsgDOTARealtimeGameStats.PlayerDetails
+	(*CMsgDOTARealtimeGameStats_BuildingDetails)(nil),                                         // 147: dota.CMsgDOTARealtimeGameStats.BuildingDetails
+	(*CMsgDOTARealtimeGameStats_KillDetails)(nil),                                             // 148: dota.CMsgDOTARealtimeGameStats.KillDetails
+	(*CMsgDOTARealtimeGameStats_BroadcasterDetails)(nil),                                      // 149: dota.CMsgDOTARealtimeGameStats.BroadcasterDetails
+	(*CMsgDOTARealtimeGameStats_PickBanDetails)(nil),                                          // 150: dota.CMsgDOTARealtimeGameStats.PickBanDetails
+	(*CMsgDOTARealtimeGameStats_MatchDetails)(nil),                                            // 151: dota.CMsgDOTARealtimeGameStats.MatchDetails
+	(*CMsgDOTARealtimeGameStats_GraphData)(nil),                                               // 152: dota.CMsgDOTARealtimeGameStats.GraphData
+	(*CMsgDOTARealtimeGameStats_GraphData_LocationStats)(nil),                                 // 153: dota.CMsgDOTARealtimeGameStats.GraphData.LocationStats
+	(*CMsgDOTARealtimeGameStats_GraphData_TeamLocationStats)(nil),                             // 154: dota.CMsgDOTARealtimeGameStats.GraphData.TeamLocationStats
+	(*CMsgDOTARealtimeGameStatsTerse_TeamDetails)(nil),                                        // 155: dota.CMsgDOTARealtimeGameStatsTerse.TeamDetails
+	(*CMsgDOTARealtimeGameStatsTerse_PlayerDetails)(nil),                                      // 156: dota.CMsgDOTARealtimeGameStatsTerse.PlayerDetails
+	(*CMsgDOTARealtimeGameStatsTerse_BuildingDetails)(nil),                                    // 157: dota.CMsgDOTARealtimeGameStatsTerse.BuildingDetails
+	(*CMsgDOTARealtimeGameStatsTerse_PickBanDetails)(nil),                                     // 158: dota.CMsgDOTARealtimeGameStatsTerse.PickBanDetails
+	(*CMsgDOTARealtimeGameStatsTerse_MatchDetails)(nil),                                       // 159: dota.CMsgDOTARealtimeGameStatsTerse.MatchDetails
+	(*CMsgDOTARealtimeGameStatsTerse_GraphData)(nil),                                          // 160: dota.CMsgDOTARealtimeGameStatsTerse.GraphData
+	(*CMsgInGamePrediction_QueryKeyValues)(nil),                                               // 161: dota.CMsgInGamePrediction.QueryKeyValues
+	(*CMsgDOTASeasonPredictions_Prediction)(nil),                                              // 162: dota.CMsgDOTASeasonPredictions.Prediction
+	(*CMsgDOTASeasonPredictions_Prediction_Answers)(nil),                                      // 163: dota.CMsgDOTASeasonPredictions.Prediction.Answers
+	(*CMsgAvailablePredictions_MatchPrediction)(nil),                                          // 164: dota.CMsgAvailablePredictions.MatchPrediction
+	(*CMsgLeagueWatchedGames_Series)(nil),                                                     // 165: dota.CMsgLeagueWatchedGames.Series
+	(*CMsgLeagueWatchedGames_League)(nil),                                                     // 166: dota.CMsgLeagueWatchedGames.League
+	(*CMsgDOTAMatch_Player)(nil),                                                              // 167: dota.CMsgDOTAMatch.Player
+	(*CMsgDOTAMatch_BroadcasterInfo)(nil),                                                     // 168: dota.CMsgDOTAMatch.BroadcasterInfo
+	(*CMsgDOTAMatch_BroadcasterChannel)(nil),                                                  // 169: dota.CMsgDOTAMatch.BroadcasterChannel
+	(*CMsgDOTAMatch_Coach)(nil),                                                               // 170: dota.CMsgDOTAMatch.Coach
+	(*CMsgDOTAMatch_CustomGameData)(nil),                                                      // 171: dota.CMsgDOTAMatch.CustomGameData
+	(*CMsgDOTAMatch_Player_CustomGameData)(nil),                                               // 172: dota.CMsgDOTAMatch.Player.CustomGameData
+	(*CMsgDOTAMatch_Player_HeroDamageReceived)(nil),                                           // 173: dota.CMsgDOTAMatch.Player.HeroDamageReceived
+	(*CMsgPlayerCard_StatModifier)(nil),                                                       // 174: dota.CMsgPlayerCard.StatModifier
+	(*CMsgDOTABotDebugInfo_Bot)(nil),                                                          // 175: dota.CMsgDOTABotDebugInfo.Bot
+	(*CMsgDOTABotDebugInfo_Bot_Mode)(nil),                                                     // 176: dota.CMsgDOTABotDebugInfo.Bot.Mode
+	(*CMsgDOTABotDebugInfo_Bot_Action)(nil),                                                   // 177: dota.CMsgDOTABotDebugInfo.Bot.Action
+	(*CMsgMatchTips_SingleTip)(nil),                                                           // 178: dota.CMsgMatchTips.SingleTip
+	(*CMsgDOTAMatchMinimal_Player)(nil),                                                       // 179: dota.CMsgDOTAMatchMinimal.Player
+	(*CMsgDOTAMatchMinimal_Tourney)(nil),                                                      // 180: dota.CMsgDOTAMatchMinimal.Tourney
+	(*CMsgMatchConsumableUsage_PlayerUsage)(nil),                                              // 181: dota.CMsgMatchConsumableUsage.PlayerUsage
+	(*CMsgMatchEventActionGrants_PlayerGrants)(nil),                                           // 182: dota.CMsgMatchEventActionGrants.PlayerGrants
+	(*CMsgCustomGameWhitelistForEdit_WhitelistEntry)(nil),                                     // 183: dota.CMsgCustomGameWhitelistForEdit.WhitelistEntry
+	(*CMsgGCtoGCAssociatedExploiterAccountInfoResponse_Account)(nil),                          // 184: dota.CMsgGCtoGCAssociatedExploiterAccountInfoResponse.Account
+	(*CMsgPullTabsData_Slot)(nil),                                                             // 185: dota.CMsgPullTabsData.Slot
+	(*CMsgPullTabsData_Jackpot)(nil),                                                          // 186: dota.CMsgPullTabsData.Jackpot
+	(*CMsgUnderDraftData_BenchSlot)(nil),                                                      // 187: dota.CMsgUnderDraftData.BenchSlot
+	(*CMsgUnderDraftData_ShopSlot)(nil),                                                       // 188: dota.CMsgUnderDraftData.ShopSlot
+	(*CMsgGameDataHero_Facet)(nil),                                                            // 189: dota.CMsgGameDataHero.Facet
+	(*CMsgGameDataHeroList_HeroInfo)(nil),                                                     // 190: dota.CMsgGameDataHeroList.HeroInfo
+	(*CMsgGameDataItemAbilityList_ItemAbilityInfo)(nil),                                       // 191: dota.CMsgGameDataItemAbilityList.ItemAbilityInfo
+	(*CMsgGameDataItemAbilityList_ItemAbilityInfo_Recipe)(nil),                                // 192: dota.CMsgGameDataItemAbilityList.ItemAbilityInfo.Recipe
+	(*CMsgDOTAClaimEventActionResponse_MysteryItemRewardData)(nil),                            // 193: dota.CMsgDOTAClaimEventActionResponse.MysteryItemRewardData
+	(*CMsgDOTAClaimEventActionResponse_LootListRewardData)(nil),                               // 194: dota.CMsgDOTAClaimEventActionResponse.LootListRewardData
+	(*CMsgDOTAClaimEventActionResponse_ActionListRewardData)(nil),                             // 195: dota.CMsgDOTAClaimEventActionResponse.ActionListRewardData
+	(*CMsgDOTAClaimEventActionResponse_OverworldTokenRewardData)(nil),                         // 196: dota.CMsgDOTAClaimEventActionResponse.OverworldTokenRewardData
+	(*CMsgDOTAClaimEventActionResponse_MonsterHunterMaterialRewardData)(nil),                  // 197: dota.CMsgDOTAClaimEventActionResponse.MonsterHunterMaterialRewardData
+	(*CMsgDOTAClaimEventActionResponse_GrantedRewardData)(nil),                                // 198: dota.CMsgDOTAClaimEventActionResponse.GrantedRewardData
+	(*CMsgDOTAClaimEventActionResponse_OverworldTokenRewardData_TokenQuantity)(nil),           // 199: dota.CMsgDOTAClaimEventActionResponse.OverworldTokenRewardData.TokenQuantity
+	(*CMsgDOTAClaimEventActionResponse_MonsterHunterMaterialRewardData_MaterialQuantity)(nil), // 200: dota.CMsgDOTAClaimEventActionResponse.MonsterHunterMaterialRewardData.MaterialQuantity
+	(*CDotaMsg_PredictionResult_Prediction)(nil),                                              // 201: dota.CDotaMsg_PredictionResult.Prediction
+	(*CDotaMsgStructuredTooltipProperties_AttributeValueValue)(nil),                           // 202: dota.CDotaMsgStructuredTooltipProperties.AttributeValueValue
+	(*CDotaMsgStructuredTooltipProperties_AttributeValue_Single)(nil),                         // 203: dota.CDotaMsgStructuredTooltipProperties.AttributeValue_Single
+	(*CDotaMsgStructuredTooltipProperties_AttributeValue_Variable)(nil),                       // 204: dota.CDotaMsgStructuredTooltipProperties.AttributeValue_Variable
+	(*CDotaMsgStructuredTooltipProperties_AttributeValue_Delta)(nil),                          // 205: dota.CDotaMsgStructuredTooltipProperties.AttributeValue_Delta
+	(*CDotaMsgStructuredTooltipProperties_AttributeValue)(nil),                                // 206: dota.CDotaMsgStructuredTooltipProperties.AttributeValue
 	(*CDotaMsgStructuredTooltipProperties_Attribute)(nil),                                     // 207: dota.CDotaMsgStructuredTooltipProperties.Attribute
 	(*CDotaMsgStructuredTooltipProperties_AttributeGroupDesc_Basic)(nil),                      // 208: dota.CDotaMsgStructuredTooltipProperties.AttributeGroupDesc_Basic
 	(*CDotaMsgStructuredTooltipProperties_AttributeGroupDesc_Specific)(nil),                   // 209: dota.CDotaMsgStructuredTooltipProperties.AttributeGroupDesc_Specific
-	(*CDotaMsgStructuredTooltipProperties_AttributeGroupDesc_Facet)(nil),                      // 210: dota.CDotaMsgStructuredTooltipProperties.AttributeGroupDesc_Facet
-	(*CDotaMsgStructuredTooltipProperties_AttributeGroupDescription)(nil),                     // 211: dota.CDotaMsgStructuredTooltipProperties.AttributeGroupDescription
-	(*CDotaMsgStructuredTooltipProperties_AttributeGroup)(nil),                                // 212: dota.CDotaMsgStructuredTooltipProperties.AttributeGroup
-	(*CDotaMsgStructuredTooltipProperties_ContentChunk_AttributeGroup)(nil),                   // 213: dota.CDotaMsgStructuredTooltipProperties.ContentChunk_AttributeGroup
-	(*CDotaMsgStructuredTooltipProperties_TooltipContentChunk)(nil),                           // 214: dota.CDotaMsgStructuredTooltipProperties.TooltipContentChunk
-	(*CDotaMsgStructuredTooltipProperties_SummaryDescriptionEmbedValue)(nil),                  // 215: dota.CDotaMsgStructuredTooltipProperties.SummaryDescriptionEmbedValue
-	(EEvent)(0),                   // 216: dota.EEvent
-	(DOTA_GameMode)(0),            // 217: dota.DOTA_GameMode
-	(EMatchOutcome)(0),            // 218: dota.EMatchOutcome
-	(ELeagueRegion)(0),            // 219: dota.ELeagueRegion
-	(ELeaguePhase)(0),             // 220: dota.ELeaguePhase
-	(DOTA_GC_TEAM)(0),             // 221: dota.DOTA_GC_TEAM
-	(*CMsgPendingEventAward)(nil), // 222: dota.CMsgPendingEventAward
+	(*CDotaMsgStructuredTooltipProperties_AttributeGroupDescription)(nil),                     // 210: dota.CDotaMsgStructuredTooltipProperties.AttributeGroupDescription
+	(*CDotaMsgStructuredTooltipProperties_AttributeGroup)(nil),                                // 211: dota.CDotaMsgStructuredTooltipProperties.AttributeGroup
+	(*CDotaMsgStructuredTooltipProperties_ContentChunk_AttributeGroup)(nil),                   // 212: dota.CDotaMsgStructuredTooltipProperties.ContentChunk_AttributeGroup
+	(*CDotaMsgStructuredTooltipProperties_TooltipContentChunk)(nil),                           // 213: dota.CDotaMsgStructuredTooltipProperties.TooltipContentChunk
+	(*CDotaMsgStructuredTooltipProperties_SummaryDescriptionEmbeddedSubAbility)(nil),          // 214: dota.CDotaMsgStructuredTooltipProperties.SummaryDescriptionEmbeddedSubAbility
+	(EEvent)(0),                   // 215: dota.EEvent
+	(DOTA_GameMode)(0),            // 216: dota.DOTA_GameMode
+	(EMatchOutcome)(0),            // 217: dota.EMatchOutcome
+	(ELeagueRegion)(0),            // 218: dota.ELeagueRegion
+	(ELeaguePhase)(0),             // 219: dota.ELeaguePhase
+	(DOTA_GC_TEAM)(0),             // 220: dota.DOTA_GC_TEAM
+	(*CMsgPendingEventAward)(nil), // 221: dota.CMsgPendingEventAward
 }
 var file_dota_gcmessages_common_proto_depIdxs = []int32{
-	130, // 0: dota.CSODOTAGameAccountClient.role_handicaps:type_name -> dota.CSODOTAGameAccountClient.RoleHandicap
-	131, // 1: dota.CMsgLobbyFeaturedGamemodeProgress.accounts:type_name -> dota.CMsgLobbyFeaturedGamemodeProgress.AccountProgress
-	33,  // 2: dota.CMsgLobbyBattleCupVictoryList.winners:type_name -> dota.CMsgBattleCupVictory
+	131, // 0: dota.CSODOTAGameAccountClient.role_handicaps:type_name -> dota.CSODOTAGameAccountClient.RoleHandicap
+	132, // 1: dota.CMsgLobbyFeaturedGamemodeProgress.accounts:type_name -> dota.CMsgLobbyFeaturedGamemodeProgress.AccountProgress
+	34,  // 2: dota.CMsgLobbyBattleCupVictoryList.winners:type_name -> dota.CMsgBattleCupVictory
 	2,   // 3: dota.CMatchPlayerTimedCustomStat.stat:type_name -> dota.EDOTAMatchPlayerTimeCustomStat
-	38,  // 4: dota.CMatchPlayerTimedStats.custom_stats:type_name -> dota.CMatchPlayerTimedCustomStat
-	132, // 5: dota.CMsgGCGetPlayerCardItemInfoResponse.player_card_infos:type_name -> dota.CMsgGCGetPlayerCardItemInfoResponse.PlayerCardInfo
-	133, // 6: dota.CMsgDOTAProfileCard.slots:type_name -> dota.CMsgDOTAProfileCard.Slot
-	33,  // 7: dota.CMsgDOTAProfileCard.recent_battle_cup_victory:type_name -> dota.CMsgBattleCupVictory
-	216, // 8: dota.CMsgClientToGCRerollPlayerChallenge.event_id:type_name -> dota.EEvent
+	39,  // 4: dota.CMatchPlayerTimedStats.custom_stats:type_name -> dota.CMatchPlayerTimedCustomStat
+	133, // 5: dota.CMsgGCGetPlayerCardItemInfoResponse.player_card_infos:type_name -> dota.CMsgGCGetPlayerCardItemInfoResponse.PlayerCardInfo
+	134, // 6: dota.CMsgDOTAProfileCard.slots:type_name -> dota.CMsgDOTAProfileCard.Slot
+	34,  // 7: dota.CMsgDOTAProfileCard.recent_battle_cup_victory:type_name -> dota.CMsgBattleCupVictory
+	215, // 8: dota.CMsgClientToGCRerollPlayerChallenge.event_id:type_name -> dota.EEvent
 	13,  // 9: dota.CMsgGCRerollPlayerChallengeResponse.result:type_name -> dota.CMsgGCRerollPlayerChallengeResponse.EResult
-	150, // 10: dota.CMsgDOTARealtimeGameStats.match:type_name -> dota.CMsgDOTARealtimeGameStats.MatchDetails
-	140, // 11: dota.CMsgDOTARealtimeGameStats.teams:type_name -> dota.CMsgDOTARealtimeGameStats.TeamDetails
-	146, // 12: dota.CMsgDOTARealtimeGameStats.buildings:type_name -> dota.CMsgDOTARealtimeGameStats.BuildingDetails
-	151, // 13: dota.CMsgDOTARealtimeGameStats.graph_data:type_name -> dota.CMsgDOTARealtimeGameStats.GraphData
-	158, // 14: dota.CMsgDOTARealtimeGameStatsTerse.match:type_name -> dota.CMsgDOTARealtimeGameStatsTerse.MatchDetails
-	154, // 15: dota.CMsgDOTARealtimeGameStatsTerse.teams:type_name -> dota.CMsgDOTARealtimeGameStatsTerse.TeamDetails
-	156, // 16: dota.CMsgDOTARealtimeGameStatsTerse.buildings:type_name -> dota.CMsgDOTARealtimeGameStatsTerse.BuildingDetails
-	159, // 17: dota.CMsgDOTARealtimeGameStatsTerse.graph_data:type_name -> dota.CMsgDOTARealtimeGameStatsTerse.GraphData
+	151, // 10: dota.CMsgDOTARealtimeGameStats.match:type_name -> dota.CMsgDOTARealtimeGameStats.MatchDetails
+	141, // 11: dota.CMsgDOTARealtimeGameStats.teams:type_name -> dota.CMsgDOTARealtimeGameStats.TeamDetails
+	147, // 12: dota.CMsgDOTARealtimeGameStats.buildings:type_name -> dota.CMsgDOTARealtimeGameStats.BuildingDetails
+	152, // 13: dota.CMsgDOTARealtimeGameStats.graph_data:type_name -> dota.CMsgDOTARealtimeGameStats.GraphData
+	159, // 14: dota.CMsgDOTARealtimeGameStatsTerse.match:type_name -> dota.CMsgDOTARealtimeGameStatsTerse.MatchDetails
+	155, // 15: dota.CMsgDOTARealtimeGameStatsTerse.teams:type_name -> dota.CMsgDOTARealtimeGameStatsTerse.TeamDetails
+	157, // 16: dota.CMsgDOTARealtimeGameStatsTerse.buildings:type_name -> dota.CMsgDOTARealtimeGameStatsTerse.BuildingDetails
+	160, // 17: dota.CMsgDOTARealtimeGameStatsTerse.graph_data:type_name -> dota.CMsgDOTARealtimeGameStatsTerse.GraphData
 	4,   // 18: dota.CMsgDOTABroadcastTimelineEvent.event:type_name -> dota.EBroadcastTimelineEvent
 	17,  // 19: dota.CMsgInGamePrediction.type:type_name -> dota.CMsgInGamePrediction.EPredictionType
 	19,  // 20: dota.CMsgInGamePrediction.group:type_name -> dota.CMsgInGamePrediction.ERandomSelectionGroup_t
-	62,  // 21: dota.CMsgInGamePrediction.choices:type_name -> dota.CMsgPredictionChoice
-	160, // 22: dota.CMsgInGamePrediction.query_values:type_name -> dota.CMsgInGamePrediction.QueryKeyValues
+	63,  // 21: dota.CMsgInGamePrediction.choices:type_name -> dota.CMsgPredictionChoice
+	161, // 22: dota.CMsgInGamePrediction.query_values:type_name -> dota.CMsgInGamePrediction.QueryKeyValues
 	18,  // 23: dota.CMsgInGamePrediction.answer_resolution_type:type_name -> dota.CMsgInGamePrediction.EResolutionType_t
 	16,  // 24: dota.CMsgInGamePrediction.raw_value_type:type_name -> dota.CMsgInGamePrediction.ERawValueType_t
-	161, // 25: dota.CMsgDOTASeasonPredictions.predictions:type_name -> dota.CMsgDOTASeasonPredictions.Prediction
-	63,  // 26: dota.CMsgDOTASeasonPredictions.in_game_predictions:type_name -> dota.CMsgInGamePrediction
-	163, // 27: dota.CMsgAvailablePredictions.match_predictions:type_name -> dota.CMsgAvailablePredictions.MatchPrediction
-	165, // 28: dota.CMsgLeagueWatchedGames.leagues:type_name -> dota.CMsgLeagueWatchedGames.League
-	166, // 29: dota.CMsgDOTAMatch.players:type_name -> dota.CMsgDOTAMatch.Player
-	217, // 30: dota.CMsgDOTAMatch.game_mode:type_name -> dota.DOTA_GameMode
-	43,  // 31: dota.CMsgDOTAMatch.picks_bans:type_name -> dota.CMatchHeroSelectEvent
+	162, // 25: dota.CMsgDOTASeasonPredictions.predictions:type_name -> dota.CMsgDOTASeasonPredictions.Prediction
+	64,  // 26: dota.CMsgDOTASeasonPredictions.in_game_predictions:type_name -> dota.CMsgInGamePrediction
+	164, // 27: dota.CMsgAvailablePredictions.match_predictions:type_name -> dota.CMsgAvailablePredictions.MatchPrediction
+	166, // 28: dota.CMsgLeagueWatchedGames.leagues:type_name -> dota.CMsgLeagueWatchedGames.League
+	167, // 29: dota.CMsgDOTAMatch.players:type_name -> dota.CMsgDOTAMatch.Player
+	216, // 30: dota.CMsgDOTAMatch.game_mode:type_name -> dota.DOTA_GameMode
+	44,  // 31: dota.CMsgDOTAMatch.picks_bans:type_name -> dota.CMatchHeroSelectEvent
 	22,  // 32: dota.CMsgDOTAMatch.replay_state:type_name -> dota.CMsgDOTAMatch.ReplayState
-	168, // 33: dota.CMsgDOTAMatch.broadcaster_channels:type_name -> dota.CMsgDOTAMatch.BroadcasterChannel
-	170, // 34: dota.CMsgDOTAMatch.custom_game_data:type_name -> dota.CMsgDOTAMatch.CustomGameData
-	218, // 35: dota.CMsgDOTAMatch.match_outcome:type_name -> dota.EMatchOutcome
-	169, // 36: dota.CMsgDOTAMatch.coaches:type_name -> dota.CMsgDOTAMatch.Coach
-	173, // 37: dota.CMsgPlayerCard.stat_modifier:type_name -> dota.CMsgPlayerCard.StatModifier
-	69,  // 38: dota.CMsgDOTAFantasyPlayerMatchStats.matches:type_name -> dota.CMsgDOTAFantasyPlayerStats
-	174, // 39: dota.CMsgDOTABotDebugInfo.bots:type_name -> dota.CMsgDOTABotDebugInfo.Bot
-	217, // 40: dota.CMsgRecentMatchInfo.game_mode:type_name -> dota.DOTA_GameMode
-	218, // 41: dota.CMsgRecentMatchInfo.match_outcome:type_name -> dota.EMatchOutcome
-	177, // 42: dota.CMsgMatchTips.tips:type_name -> dota.CMsgMatchTips.SingleTip
-	217, // 43: dota.CMsgDOTAMatchMinimal.game_mode:type_name -> dota.DOTA_GameMode
-	178, // 44: dota.CMsgDOTAMatchMinimal.players:type_name -> dota.CMsgDOTAMatchMinimal.Player
-	179, // 45: dota.CMsgDOTAMatchMinimal.tourney:type_name -> dota.CMsgDOTAMatchMinimal.Tourney
-	218, // 46: dota.CMsgDOTAMatchMinimal.match_outcome:type_name -> dota.EMatchOutcome
-	180, // 47: dota.CMsgMatchConsumableUsage.player_consumables_used:type_name -> dota.CMsgMatchConsumableUsage.PlayerUsage
-	181, // 48: dota.CMsgMatchEventActionGrants.player_grants:type_name -> dota.CMsgMatchEventActionGrants.PlayerGrants
-	182, // 49: dota.CMsgCustomGameWhitelistForEdit.whitelist_entries:type_name -> dota.CMsgCustomGameWhitelistForEdit.WhitelistEntry
-	83,  // 50: dota.CMsgPlayerRecentAccomplishments.recent_outcomes:type_name -> dota.CMsgPlayerRecentMatchOutcomes
-	82,  // 51: dota.CMsgPlayerRecentAccomplishments.total_record:type_name -> dota.CMsgPlayerMatchRecord
-	84,  // 52: dota.CMsgPlayerRecentAccomplishments.recent_commends:type_name -> dota.CMsgPlayerRecentCommends
-	81,  // 53: dota.CMsgPlayerRecentAccomplishments.last_match:type_name -> dota.CMsgPlayerRecentMatchInfo
-	83,  // 54: dota.CMsgPlayerRecentAccomplishments.recent_mvps:type_name -> dota.CMsgPlayerRecentMatchOutcomes
-	83,  // 55: dota.CMsgPlayerHeroRecentAccomplishments.recent_outcomes:type_name -> dota.CMsgPlayerRecentMatchOutcomes
-	82,  // 56: dota.CMsgPlayerHeroRecentAccomplishments.total_record:type_name -> dota.CMsgPlayerMatchRecord
-	81,  // 57: dota.CMsgPlayerHeroRecentAccomplishments.last_match:type_name -> dota.CMsgPlayerRecentMatchInfo
-	85,  // 58: dota.CMsgRecentAccomplishments.player_accomplishments:type_name -> dota.CMsgPlayerRecentAccomplishments
-	86,  // 59: dota.CMsgRecentAccomplishments.hero_accomplishments:type_name -> dota.CMsgPlayerHeroRecentAccomplishments
+	169, // 33: dota.CMsgDOTAMatch.broadcaster_channels:type_name -> dota.CMsgDOTAMatch.BroadcasterChannel
+	171, // 34: dota.CMsgDOTAMatch.custom_game_data:type_name -> dota.CMsgDOTAMatch.CustomGameData
+	217, // 35: dota.CMsgDOTAMatch.match_outcome:type_name -> dota.EMatchOutcome
+	170, // 36: dota.CMsgDOTAMatch.coaches:type_name -> dota.CMsgDOTAMatch.Coach
+	174, // 37: dota.CMsgPlayerCard.stat_modifier:type_name -> dota.CMsgPlayerCard.StatModifier
+	70,  // 38: dota.CMsgDOTAFantasyPlayerMatchStats.matches:type_name -> dota.CMsgDOTAFantasyPlayerStats
+	175, // 39: dota.CMsgDOTABotDebugInfo.bots:type_name -> dota.CMsgDOTABotDebugInfo.Bot
+	216, // 40: dota.CMsgRecentMatchInfo.game_mode:type_name -> dota.DOTA_GameMode
+	217, // 41: dota.CMsgRecentMatchInfo.match_outcome:type_name -> dota.EMatchOutcome
+	178, // 42: dota.CMsgMatchTips.tips:type_name -> dota.CMsgMatchTips.SingleTip
+	216, // 43: dota.CMsgDOTAMatchMinimal.game_mode:type_name -> dota.DOTA_GameMode
+	179, // 44: dota.CMsgDOTAMatchMinimal.players:type_name -> dota.CMsgDOTAMatchMinimal.Player
+	180, // 45: dota.CMsgDOTAMatchMinimal.tourney:type_name -> dota.CMsgDOTAMatchMinimal.Tourney
+	217, // 46: dota.CMsgDOTAMatchMinimal.match_outcome:type_name -> dota.EMatchOutcome
+	181, // 47: dota.CMsgMatchConsumableUsage.player_consumables_used:type_name -> dota.CMsgMatchConsumableUsage.PlayerUsage
+	182, // 48: dota.CMsgMatchEventActionGrants.player_grants:type_name -> dota.CMsgMatchEventActionGrants.PlayerGrants
+	183, // 49: dota.CMsgCustomGameWhitelistForEdit.whitelist_entries:type_name -> dota.CMsgCustomGameWhitelistForEdit.WhitelistEntry
+	84,  // 50: dota.CMsgPlayerRecentAccomplishments.recent_outcomes:type_name -> dota.CMsgPlayerRecentMatchOutcomes
+	83,  // 51: dota.CMsgPlayerRecentAccomplishments.total_record:type_name -> dota.CMsgPlayerMatchRecord
+	85,  // 52: dota.CMsgPlayerRecentAccomplishments.recent_commends:type_name -> dota.CMsgPlayerRecentCommends
+	82,  // 53: dota.CMsgPlayerRecentAccomplishments.last_match:type_name -> dota.CMsgPlayerRecentMatchInfo
+	84,  // 54: dota.CMsgPlayerRecentAccomplishments.recent_mvps:type_name -> dota.CMsgPlayerRecentMatchOutcomes
+	84,  // 55: dota.CMsgPlayerHeroRecentAccomplishments.recent_outcomes:type_name -> dota.CMsgPlayerRecentMatchOutcomes
+	83,  // 56: dota.CMsgPlayerHeroRecentAccomplishments.total_record:type_name -> dota.CMsgPlayerMatchRecord
+	82,  // 57: dota.CMsgPlayerHeroRecentAccomplishments.last_match:type_name -> dota.CMsgPlayerRecentMatchInfo
+	86,  // 58: dota.CMsgRecentAccomplishments.player_accomplishments:type_name -> dota.CMsgPlayerRecentAccomplishments
+	87,  // 59: dota.CMsgRecentAccomplishments.hero_accomplishments:type_name -> dota.CMsgPlayerHeroRecentAccomplishments
 	24,  // 60: dota.CMsgServerToGCRequestPlayerRecentAccomplishmentsResponse.result:type_name -> dota.CMsgServerToGCRequestPlayerRecentAccomplishmentsResponse.EResponse
-	87,  // 61: dota.CMsgServerToGCRequestPlayerRecentAccomplishmentsResponse.player_accomplishments:type_name -> dota.CMsgRecentAccomplishments
-	183, // 62: dota.CMsgGCtoGCAssociatedExploiterAccountInfoResponse.accounts:type_name -> dota.CMsgGCtoGCAssociatedExploiterAccountInfoResponse.Account
-	184, // 63: dota.CMsgPullTabsData.slots:type_name -> dota.CMsgPullTabsData.Slot
-	185, // 64: dota.CMsgPullTabsData.jackpots:type_name -> dota.CMsgPullTabsData.Jackpot
-	186, // 65: dota.CMsgUnderDraftData.bench_slots:type_name -> dota.CMsgUnderDraftData.BenchSlot
-	187, // 66: dota.CMsgUnderDraftData.shop_slots:type_name -> dota.CMsgUnderDraftData.ShopSlot
+	88,  // 61: dota.CMsgServerToGCRequestPlayerRecentAccomplishmentsResponse.player_accomplishments:type_name -> dota.CMsgRecentAccomplishments
+	184, // 62: dota.CMsgGCtoGCAssociatedExploiterAccountInfoResponse.accounts:type_name -> dota.CMsgGCtoGCAssociatedExploiterAccountInfoResponse.Account
+	185, // 63: dota.CMsgPullTabsData.slots:type_name -> dota.CMsgPullTabsData.Slot
+	186, // 64: dota.CMsgPullTabsData.jackpots:type_name -> dota.CMsgPullTabsData.Jackpot
+	187, // 65: dota.CMsgUnderDraftData.bench_slots:type_name -> dota.CMsgUnderDraftData.BenchSlot
+	188, // 66: dota.CMsgUnderDraftData.shop_slots:type_name -> dota.CMsgUnderDraftData.ShopSlot
 	6,   // 67: dota.CMsgDOTATriviaQuestion.category:type_name -> dota.EDOTATriviaQuestionCategory
-	98,  // 68: dota.CMsgGameDataSpecialValues.bonuses:type_name -> dota.CMsgGameDataSpecialValueBonus
-	100, // 69: dota.CMsgGameDataSpecialValues.facet_bonus:type_name -> dota.CMsgGameDataFacetAbilityBonus
-	99,  // 70: dota.CMsgGameDataAbilityOrItem.special_values:type_name -> dota.CMsgGameDataSpecialValues
-	101, // 71: dota.CMsgGameDataAbilityOrItemList.abilities:type_name -> dota.CMsgGameDataAbilityOrItem
-	188, // 72: dota.CMsgGameDataHero.facets:type_name -> dota.CMsgGameDataHero.Facet
-	101, // 73: dota.CMsgGameDataHero.abilities:type_name -> dota.CMsgGameDataAbilityOrItem
-	101, // 74: dota.CMsgGameDataHero.talents:type_name -> dota.CMsgGameDataAbilityOrItem
-	102, // 75: dota.CMsgGameDataHero.facet_abilities:type_name -> dota.CMsgGameDataAbilityOrItemList
-	101, // 76: dota.CMsgGameDataAbilities.abilities:type_name -> dota.CMsgGameDataAbilityOrItem
-	101, // 77: dota.CMsgGameDataItems.items:type_name -> dota.CMsgGameDataAbilityOrItem
-	103, // 78: dota.CMsgGameDataHeroes.heroes:type_name -> dota.CMsgGameDataHero
-	189, // 79: dota.CMsgGameDataHeroList.heroes:type_name -> dota.CMsgGameDataHeroList.HeroInfo
-	190, // 80: dota.CMsgGameDataItemAbilityList.itemabilities:type_name -> dota.CMsgGameDataItemAbilityList.ItemAbilityInfo
-	216, // 81: dota.CMsgStickerbookPage.event_id:type_name -> dota.EEvent
-	112, // 82: dota.CMsgStickerbookPage.stickers:type_name -> dota.CMsgStickerbookSticker
+	99,  // 68: dota.CMsgGameDataSpecialValues.bonuses:type_name -> dota.CMsgGameDataSpecialValueBonus
+	101, // 69: dota.CMsgGameDataSpecialValues.facet_bonus:type_name -> dota.CMsgGameDataFacetAbilityBonus
+	100, // 70: dota.CMsgGameDataAbilityOrItem.special_values:type_name -> dota.CMsgGameDataSpecialValues
+	102, // 71: dota.CMsgGameDataAbilityOrItemList.abilities:type_name -> dota.CMsgGameDataAbilityOrItem
+	189, // 72: dota.CMsgGameDataHero.facets:type_name -> dota.CMsgGameDataHero.Facet
+	102, // 73: dota.CMsgGameDataHero.abilities:type_name -> dota.CMsgGameDataAbilityOrItem
+	102, // 74: dota.CMsgGameDataHero.talents:type_name -> dota.CMsgGameDataAbilityOrItem
+	103, // 75: dota.CMsgGameDataHero.facet_abilities:type_name -> dota.CMsgGameDataAbilityOrItemList
+	102, // 76: dota.CMsgGameDataAbilities.abilities:type_name -> dota.CMsgGameDataAbilityOrItem
+	102, // 77: dota.CMsgGameDataItems.items:type_name -> dota.CMsgGameDataAbilityOrItem
+	104, // 78: dota.CMsgGameDataHeroes.heroes:type_name -> dota.CMsgGameDataHero
+	190, // 79: dota.CMsgGameDataHeroList.heroes:type_name -> dota.CMsgGameDataHeroList.HeroInfo
+	191, // 80: dota.CMsgGameDataItemAbilityList.itemabilities:type_name -> dota.CMsgGameDataItemAbilityList.ItemAbilityInfo
+	215, // 81: dota.CMsgStickerbookPage.event_id:type_name -> dota.EEvent
+	113, // 82: dota.CMsgStickerbookPage.stickers:type_name -> dota.CMsgStickerbookSticker
 	10,  // 83: dota.CMsgStickerbookPage.page_type:type_name -> dota.EStickerbookPageType
-	113, // 84: dota.CMsgStickerbook.pages:type_name -> dota.CMsgStickerbookPage
-	114, // 85: dota.CMsgStickerbook.team_page_order_sequence:type_name -> dota.CMsgStickerbookTeamPageOrderSequence
-	116, // 86: dota.CMsgStickerHeroes.heroes:type_name -> dota.CMsgStickerHero
-	118, // 87: dota.CMsgHeroRoleHeroStats.role_stats:type_name -> dota.CMsgHeroRoleStats
-	119, // 88: dota.CMsgHeroRoleRankStats.hero_stats:type_name -> dota.CMsgHeroRoleHeroStats
-	120, // 89: dota.CMsgHeroRoleAllRanksStats.rank_stats:type_name -> dota.CMsgHeroRoleRankStats
-	122, // 90: dota.CMsgGlobalMapStats.current:type_name -> dota.CMsgMapStatsSnapshot
-	122, // 91: dota.CMsgGlobalMapStats.window_start:type_name -> dota.CMsgMapStatsSnapshot
-	122, // 92: dota.CMsgGlobalMapStats.window_end:type_name -> dota.CMsgMapStatsSnapshot
+	114, // 84: dota.CMsgStickerbook.pages:type_name -> dota.CMsgStickerbookPage
+	115, // 85: dota.CMsgStickerbook.team_page_order_sequence:type_name -> dota.CMsgStickerbookTeamPageOrderSequence
+	117, // 86: dota.CMsgStickerHeroes.heroes:type_name -> dota.CMsgStickerHero
+	119, // 87: dota.CMsgHeroRoleHeroStats.role_stats:type_name -> dota.CMsgHeroRoleStats
+	120, // 88: dota.CMsgHeroRoleRankStats.hero_stats:type_name -> dota.CMsgHeroRoleHeroStats
+	121, // 89: dota.CMsgHeroRoleAllRanksStats.rank_stats:type_name -> dota.CMsgHeroRoleRankStats
+	123, // 90: dota.CMsgGlobalMapStats.current:type_name -> dota.CMsgMapStatsSnapshot
+	123, // 91: dota.CMsgGlobalMapStats.window_start:type_name -> dota.CMsgMapStatsSnapshot
+	123, // 92: dota.CMsgGlobalMapStats.window_end:type_name -> dota.CMsgMapStatsSnapshot
 	25,  // 93: dota.CMsgDOTAClaimEventActionResponse.result:type_name -> dota.CMsgDOTAClaimEventActionResponse.ResultCode
-	197, // 94: dota.CMsgDOTAClaimEventActionResponse.reward_results:type_name -> dota.CMsgDOTAClaimEventActionResponse.GrantedRewardData
+	198, // 94: dota.CMsgDOTAClaimEventActionResponse.reward_results:type_name -> dota.CMsgDOTAClaimEventActionResponse.GrantedRewardData
 	26,  // 95: dota.CMsgClientToGCDotaLabsFeedbackResponse.response:type_name -> dota.CMsgClientToGCDotaLabsFeedbackResponse.EResponse
-	200, // 96: dota.CDotaMsg_PredictionResult.predictions:type_name -> dota.CDotaMsg_PredictionResult.Prediction
-	215, // 97: dota.CDotaMsgStructuredTooltipProperties.summary_description_embed_values:type_name -> dota.CDotaMsgStructuredTooltipProperties.SummaryDescriptionEmbedValue
-	206, // 98: dota.CDotaMsgStructuredTooltipProperties.summary_description_facet:type_name -> dota.CDotaMsgStructuredTooltipProperties.FacetDisplayProperties
-	214, // 99: dota.CDotaMsgStructuredTooltipProperties.chunks:type_name -> dota.CDotaMsgStructuredTooltipProperties.TooltipContentChunk
-	134, // 100: dota.CMsgDOTAProfileCard.Slot.trophy:type_name -> dota.CMsgDOTAProfileCard.Slot.Trophy
-	135, // 101: dota.CMsgDOTAProfileCard.Slot.stat:type_name -> dota.CMsgDOTAProfileCard.Slot.Stat
-	136, // 102: dota.CMsgDOTAProfileCard.Slot.item:type_name -> dota.CMsgDOTAProfileCard.Slot.Item
-	137, // 103: dota.CMsgDOTAProfileCard.Slot.hero:type_name -> dota.CMsgDOTAProfileCard.Slot.Hero
-	138, // 104: dota.CMsgDOTAProfileCard.Slot.emoticon:type_name -> dota.CMsgDOTAProfileCard.Slot.Emoticon
-	139, // 105: dota.CMsgDOTAProfileCard.Slot.team:type_name -> dota.CMsgDOTAProfileCard.Slot.Team
-	12,  // 106: dota.CMsgDOTAProfileCard.Slot.Stat.stat_id:type_name -> dota.CMsgDOTAProfileCard.EStatID
-	145, // 107: dota.CMsgDOTARealtimeGameStats.TeamDetails.players:type_name -> dota.CMsgDOTARealtimeGameStats.PlayerDetails
-	142, // 108: dota.CMsgDOTARealtimeGameStats.PlayerDetails.abilities:type_name -> dota.CMsgDOTARealtimeGameStats.AbilityDetails
-	141, // 109: dota.CMsgDOTARealtimeGameStats.PlayerDetails.items:type_name -> dota.CMsgDOTARealtimeGameStats.ItemDetails
-	141, // 110: dota.CMsgDOTARealtimeGameStats.PlayerDetails.stashitems:type_name -> dota.CMsgDOTARealtimeGameStats.ItemDetails
-	141, // 111: dota.CMsgDOTARealtimeGameStats.PlayerDetails.itemshoppinglist:type_name -> dota.CMsgDOTARealtimeGameStats.ItemDetails
-	144, // 112: dota.CMsgDOTARealtimeGameStats.PlayerDetails.levelpoints:type_name -> dota.CMsgDOTARealtimeGameStats.AbilityList
-	143, // 113: dota.CMsgDOTARealtimeGameStats.PlayerDetails.hero_to_hero_stats:type_name -> dota.CMsgDOTARealtimeGameStats.HeroToHeroStats
-	149, // 114: dota.CMsgDOTARealtimeGameStats.MatchDetails.picks:type_name -> dota.CMsgDOTARealtimeGameStats.PickBanDetails
-	149, // 115: dota.CMsgDOTARealtimeGameStats.MatchDetails.bans:type_name -> dota.CMsgDOTARealtimeGameStats.PickBanDetails
-	147, // 116: dota.CMsgDOTARealtimeGameStats.MatchDetails.kills:type_name -> dota.CMsgDOTARealtimeGameStats.KillDetails
-	148, // 117: dota.CMsgDOTARealtimeGameStats.MatchDetails.broadcasters:type_name -> dota.CMsgDOTARealtimeGameStats.BroadcasterDetails
-	153, // 118: dota.CMsgDOTARealtimeGameStats.GraphData.team_loc_stats:type_name -> dota.CMsgDOTARealtimeGameStats.GraphData.TeamLocationStats
-	152, // 119: dota.CMsgDOTARealtimeGameStats.GraphData.TeamLocationStats.loc_stats:type_name -> dota.CMsgDOTARealtimeGameStats.GraphData.LocationStats
-	155, // 120: dota.CMsgDOTARealtimeGameStatsTerse.TeamDetails.players:type_name -> dota.CMsgDOTARealtimeGameStatsTerse.PlayerDetails
-	157, // 121: dota.CMsgDOTARealtimeGameStatsTerse.MatchDetails.picks:type_name -> dota.CMsgDOTARealtimeGameStatsTerse.PickBanDetails
-	157, // 122: dota.CMsgDOTARealtimeGameStatsTerse.MatchDetails.bans:type_name -> dota.CMsgDOTARealtimeGameStatsTerse.PickBanDetails
-	20,  // 123: dota.CMsgDOTASeasonPredictions.Prediction.type:type_name -> dota.CMsgDOTASeasonPredictions.Prediction.EPredictionType
-	62,  // 124: dota.CMsgDOTASeasonPredictions.Prediction.choices:type_name -> dota.CMsgPredictionChoice
-	21,  // 125: dota.CMsgDOTASeasonPredictions.Prediction.answer_type:type_name -> dota.CMsgDOTASeasonPredictions.Prediction.EAnswerType
-	162, // 126: dota.CMsgDOTASeasonPredictions.Prediction.answers:type_name -> dota.CMsgDOTASeasonPredictions.Prediction.Answers
-	219, // 127: dota.CMsgDOTASeasonPredictions.Prediction.region:type_name -> dota.ELeagueRegion
-	220, // 128: dota.CMsgDOTASeasonPredictions.Prediction.phases:type_name -> dota.ELeaguePhase
-	216, // 129: dota.CMsgDOTASeasonPredictions.Prediction.reward_event:type_name -> dota.EEvent
-	63,  // 130: dota.CMsgAvailablePredictions.MatchPrediction.predictions:type_name -> dota.CMsgInGamePrediction
-	164, // 131: dota.CMsgLeagueWatchedGames.League.series:type_name -> dota.CMsgLeagueWatchedGames.Series
-	37,  // 132: dota.CMsgDOTAMatch.Player.ability_upgrades:type_name -> dota.CMatchPlayerAbilityUpgrade
-	41,  // 133: dota.CMsgDOTAMatch.Player.additional_units_inventory:type_name -> dota.CMatchAdditionalUnitInventory
-	42,  // 134: dota.CMsgDOTAMatch.Player.permanent_buffs:type_name -> dota.CMatchPlayerPermanentBuff
-	171, // 135: dota.CMsgDOTAMatch.Player.custom_game_data:type_name -> dota.CMsgDOTAMatch.Player.CustomGameData
-	172, // 136: dota.CMsgDOTAMatch.Player.hero_damage_received:type_name -> dota.CMsgDOTAMatch.Player.HeroDamageReceived
-	172, // 137: dota.CMsgDOTAMatch.Player.hero_damage_dealt:type_name -> dota.CMsgDOTAMatch.Player.HeroDamageReceived
-	221, // 138: dota.CMsgDOTAMatch.Player.team_number:type_name -> dota.DOTA_GC_TEAM
-	167, // 139: dota.CMsgDOTAMatch.BroadcasterChannel.broadcaster_infos:type_name -> dota.CMsgDOTAMatch.BroadcasterInfo
-	23,  // 140: dota.CMsgDOTAMatch.Player.HeroDamageReceived.damage_type:type_name -> dota.CMsgDOTAMatch.Player.HeroDamageType
-	175, // 141: dota.CMsgDOTABotDebugInfo.Bot.modes:type_name -> dota.CMsgDOTABotDebugInfo.Bot.Mode
-	176, // 142: dota.CMsgDOTABotDebugInfo.Bot.action:type_name -> dota.CMsgDOTABotDebugInfo.Bot.Action
-	216, // 143: dota.CMsgMatchTips.SingleTip.event_id:type_name -> dota.EEvent
-	221, // 144: dota.CMsgDOTAMatchMinimal.Player.team_number:type_name -> dota.DOTA_GC_TEAM
-	76,  // 145: dota.CMsgMatchConsumableUsage.PlayerUsage.consumables_used:type_name -> dota.CMsgConsumableUsage
-	222, // 146: dota.CMsgMatchEventActionGrants.PlayerGrants.actions_granted:type_name -> dota.CMsgPendingEventAward
-	5,   // 147: dota.CMsgCustomGameWhitelistForEdit.WhitelistEntry.whitelist_state:type_name -> dota.ECustomGameWhitelistState
-	191, // 148: dota.CMsgGameDataItemAbilityList.ItemAbilityInfo.recipes:type_name -> dota.CMsgGameDataItemAbilityList.ItemAbilityInfo.Recipe
-	198, // 149: dota.CMsgDOTAClaimEventActionResponse.OverworldTokenRewardData.tokens:type_name -> dota.CMsgDOTAClaimEventActionResponse.OverworldTokenRewardData.TokenQuantity
-	199, // 150: dota.CMsgDOTAClaimEventActionResponse.MonsterHunterMaterialRewardData.materials:type_name -> dota.CMsgDOTAClaimEventActionResponse.MonsterHunterMaterialRewardData.MaterialQuantity
-	27,  // 151: dota.CDotaMsg_PredictionResult.Prediction.result:type_name -> dota.CDotaMsg_PredictionResult.Prediction.EResult
-	201, // 152: dota.CDotaMsgStructuredTooltipProperties.AttributeValue_Single.single_value:type_name -> dota.CDotaMsgStructuredTooltipProperties.AttributeValueValue
-	201, // 153: dota.CDotaMsgStructuredTooltipProperties.AttributeValue_Variable.values:type_name -> dota.CDotaMsgStructuredTooltipProperties.AttributeValueValue
-	201, // 154: dota.CDotaMsgStructuredTooltipProperties.AttributeValue_Delta.prev:type_name -> dota.CDotaMsgStructuredTooltipProperties.AttributeValueValue
-	201, // 155: dota.CDotaMsgStructuredTooltipProperties.AttributeValue_Delta.next:type_name -> dota.CDotaMsgStructuredTooltipProperties.AttributeValueValue
-	202, // 156: dota.CDotaMsgStructuredTooltipProperties.AttributeValue.single_value:type_name -> dota.CDotaMsgStructuredTooltipProperties.AttributeValue_Single
-	203, // 157: dota.CDotaMsgStructuredTooltipProperties.AttributeValue.variable_value:type_name -> dota.CDotaMsgStructuredTooltipProperties.AttributeValue_Variable
-	204, // 158: dota.CDotaMsgStructuredTooltipProperties.AttributeValue.delta_value:type_name -> dota.CDotaMsgStructuredTooltipProperties.AttributeValue_Delta
-	28,  // 159: dota.CDotaMsgStructuredTooltipProperties.Attribute.type:type_name -> dota.CDotaMsgStructuredTooltipProperties.EAttributeType
-	205, // 160: dota.CDotaMsgStructuredTooltipProperties.Attribute.value:type_name -> dota.CDotaMsgStructuredTooltipProperties.AttributeValue
-	206, // 161: dota.CDotaMsgStructuredTooltipProperties.Attribute.facet:type_name -> dota.CDotaMsgStructuredTooltipProperties.FacetDisplayProperties
-	206, // 162: dota.CDotaMsgStructuredTooltipProperties.AttributeGroupDesc_Facet.facet:type_name -> dota.CDotaMsgStructuredTooltipProperties.FacetDisplayProperties
-	208, // 163: dota.CDotaMsgStructuredTooltipProperties.AttributeGroupDescription.basic_value:type_name -> dota.CDotaMsgStructuredTooltipProperties.AttributeGroupDesc_Basic
+	201, // 96: dota.CDotaMsg_PredictionResult.predictions:type_name -> dota.CDotaMsg_PredictionResult.Prediction
+	28,  // 97: dota.CDotaMsgStructuredTooltipProperties.ability_category:type_name -> dota.CDotaMsgStructuredTooltipProperties.EAbilityTooltipCategory
+	207, // 98: dota.CDotaMsgStructuredTooltipProperties.summary_description_embed_values:type_name -> dota.CDotaMsgStructuredTooltipProperties.Attribute
+	214, // 99: dota.CDotaMsgStructuredTooltipProperties.summary_description_embedded_sub_abilities:type_name -> dota.CDotaMsgStructuredTooltipProperties.SummaryDescriptionEmbeddedSubAbility
+	213, // 100: dota.CDotaMsgStructuredTooltipProperties.chunks:type_name -> dota.CDotaMsgStructuredTooltipProperties.TooltipContentChunk
+	135, // 101: dota.CMsgDOTAProfileCard.Slot.trophy:type_name -> dota.CMsgDOTAProfileCard.Slot.Trophy
+	136, // 102: dota.CMsgDOTAProfileCard.Slot.stat:type_name -> dota.CMsgDOTAProfileCard.Slot.Stat
+	137, // 103: dota.CMsgDOTAProfileCard.Slot.item:type_name -> dota.CMsgDOTAProfileCard.Slot.Item
+	138, // 104: dota.CMsgDOTAProfileCard.Slot.hero:type_name -> dota.CMsgDOTAProfileCard.Slot.Hero
+	139, // 105: dota.CMsgDOTAProfileCard.Slot.emoticon:type_name -> dota.CMsgDOTAProfileCard.Slot.Emoticon
+	140, // 106: dota.CMsgDOTAProfileCard.Slot.team:type_name -> dota.CMsgDOTAProfileCard.Slot.Team
+	12,  // 107: dota.CMsgDOTAProfileCard.Slot.Stat.stat_id:type_name -> dota.CMsgDOTAProfileCard.EStatID
+	146, // 108: dota.CMsgDOTARealtimeGameStats.TeamDetails.players:type_name -> dota.CMsgDOTARealtimeGameStats.PlayerDetails
+	143, // 109: dota.CMsgDOTARealtimeGameStats.PlayerDetails.abilities:type_name -> dota.CMsgDOTARealtimeGameStats.AbilityDetails
+	142, // 110: dota.CMsgDOTARealtimeGameStats.PlayerDetails.items:type_name -> dota.CMsgDOTARealtimeGameStats.ItemDetails
+	142, // 111: dota.CMsgDOTARealtimeGameStats.PlayerDetails.stashitems:type_name -> dota.CMsgDOTARealtimeGameStats.ItemDetails
+	142, // 112: dota.CMsgDOTARealtimeGameStats.PlayerDetails.itemshoppinglist:type_name -> dota.CMsgDOTARealtimeGameStats.ItemDetails
+	145, // 113: dota.CMsgDOTARealtimeGameStats.PlayerDetails.levelpoints:type_name -> dota.CMsgDOTARealtimeGameStats.AbilityList
+	144, // 114: dota.CMsgDOTARealtimeGameStats.PlayerDetails.hero_to_hero_stats:type_name -> dota.CMsgDOTARealtimeGameStats.HeroToHeroStats
+	150, // 115: dota.CMsgDOTARealtimeGameStats.MatchDetails.picks:type_name -> dota.CMsgDOTARealtimeGameStats.PickBanDetails
+	150, // 116: dota.CMsgDOTARealtimeGameStats.MatchDetails.bans:type_name -> dota.CMsgDOTARealtimeGameStats.PickBanDetails
+	148, // 117: dota.CMsgDOTARealtimeGameStats.MatchDetails.kills:type_name -> dota.CMsgDOTARealtimeGameStats.KillDetails
+	149, // 118: dota.CMsgDOTARealtimeGameStats.MatchDetails.broadcasters:type_name -> dota.CMsgDOTARealtimeGameStats.BroadcasterDetails
+	154, // 119: dota.CMsgDOTARealtimeGameStats.GraphData.team_loc_stats:type_name -> dota.CMsgDOTARealtimeGameStats.GraphData.TeamLocationStats
+	153, // 120: dota.CMsgDOTARealtimeGameStats.GraphData.TeamLocationStats.loc_stats:type_name -> dota.CMsgDOTARealtimeGameStats.GraphData.LocationStats
+	156, // 121: dota.CMsgDOTARealtimeGameStatsTerse.TeamDetails.players:type_name -> dota.CMsgDOTARealtimeGameStatsTerse.PlayerDetails
+	158, // 122: dota.CMsgDOTARealtimeGameStatsTerse.MatchDetails.picks:type_name -> dota.CMsgDOTARealtimeGameStatsTerse.PickBanDetails
+	158, // 123: dota.CMsgDOTARealtimeGameStatsTerse.MatchDetails.bans:type_name -> dota.CMsgDOTARealtimeGameStatsTerse.PickBanDetails
+	20,  // 124: dota.CMsgDOTASeasonPredictions.Prediction.type:type_name -> dota.CMsgDOTASeasonPredictions.Prediction.EPredictionType
+	63,  // 125: dota.CMsgDOTASeasonPredictions.Prediction.choices:type_name -> dota.CMsgPredictionChoice
+	21,  // 126: dota.CMsgDOTASeasonPredictions.Prediction.answer_type:type_name -> dota.CMsgDOTASeasonPredictions.Prediction.EAnswerType
+	163, // 127: dota.CMsgDOTASeasonPredictions.Prediction.answers:type_name -> dota.CMsgDOTASeasonPredictions.Prediction.Answers
+	218, // 128: dota.CMsgDOTASeasonPredictions.Prediction.region:type_name -> dota.ELeagueRegion
+	219, // 129: dota.CMsgDOTASeasonPredictions.Prediction.phases:type_name -> dota.ELeaguePhase
+	215, // 130: dota.CMsgDOTASeasonPredictions.Prediction.reward_event:type_name -> dota.EEvent
+	64,  // 131: dota.CMsgAvailablePredictions.MatchPrediction.predictions:type_name -> dota.CMsgInGamePrediction
+	165, // 132: dota.CMsgLeagueWatchedGames.League.series:type_name -> dota.CMsgLeagueWatchedGames.Series
+	38,  // 133: dota.CMsgDOTAMatch.Player.ability_upgrades:type_name -> dota.CMatchPlayerAbilityUpgrade
+	42,  // 134: dota.CMsgDOTAMatch.Player.additional_units_inventory:type_name -> dota.CMatchAdditionalUnitInventory
+	43,  // 135: dota.CMsgDOTAMatch.Player.permanent_buffs:type_name -> dota.CMatchPlayerPermanentBuff
+	172, // 136: dota.CMsgDOTAMatch.Player.custom_game_data:type_name -> dota.CMsgDOTAMatch.Player.CustomGameData
+	173, // 137: dota.CMsgDOTAMatch.Player.hero_damage_received:type_name -> dota.CMsgDOTAMatch.Player.HeroDamageReceived
+	173, // 138: dota.CMsgDOTAMatch.Player.hero_damage_dealt:type_name -> dota.CMsgDOTAMatch.Player.HeroDamageReceived
+	220, // 139: dota.CMsgDOTAMatch.Player.team_number:type_name -> dota.DOTA_GC_TEAM
+	168, // 140: dota.CMsgDOTAMatch.BroadcasterChannel.broadcaster_infos:type_name -> dota.CMsgDOTAMatch.BroadcasterInfo
+	23,  // 141: dota.CMsgDOTAMatch.Player.HeroDamageReceived.damage_type:type_name -> dota.CMsgDOTAMatch.Player.HeroDamageType
+	176, // 142: dota.CMsgDOTABotDebugInfo.Bot.modes:type_name -> dota.CMsgDOTABotDebugInfo.Bot.Mode
+	177, // 143: dota.CMsgDOTABotDebugInfo.Bot.action:type_name -> dota.CMsgDOTABotDebugInfo.Bot.Action
+	215, // 144: dota.CMsgMatchTips.SingleTip.event_id:type_name -> dota.EEvent
+	220, // 145: dota.CMsgDOTAMatchMinimal.Player.team_number:type_name -> dota.DOTA_GC_TEAM
+	77,  // 146: dota.CMsgMatchConsumableUsage.PlayerUsage.consumables_used:type_name -> dota.CMsgConsumableUsage
+	221, // 147: dota.CMsgMatchEventActionGrants.PlayerGrants.actions_granted:type_name -> dota.CMsgPendingEventAward
+	5,   // 148: dota.CMsgCustomGameWhitelistForEdit.WhitelistEntry.whitelist_state:type_name -> dota.ECustomGameWhitelistState
+	192, // 149: dota.CMsgGameDataItemAbilityList.ItemAbilityInfo.recipes:type_name -> dota.CMsgGameDataItemAbilityList.ItemAbilityInfo.Recipe
+	199, // 150: dota.CMsgDOTAClaimEventActionResponse.OverworldTokenRewardData.tokens:type_name -> dota.CMsgDOTAClaimEventActionResponse.OverworldTokenRewardData.TokenQuantity
+	200, // 151: dota.CMsgDOTAClaimEventActionResponse.MonsterHunterMaterialRewardData.materials:type_name -> dota.CMsgDOTAClaimEventActionResponse.MonsterHunterMaterialRewardData.MaterialQuantity
+	27,  // 152: dota.CDotaMsg_PredictionResult.Prediction.result:type_name -> dota.CDotaMsg_PredictionResult.Prediction.EResult
+	202, // 153: dota.CDotaMsgStructuredTooltipProperties.AttributeValue_Single.single_value:type_name -> dota.CDotaMsgStructuredTooltipProperties.AttributeValueValue
+	202, // 154: dota.CDotaMsgStructuredTooltipProperties.AttributeValue_Variable.values:type_name -> dota.CDotaMsgStructuredTooltipProperties.AttributeValueValue
+	202, // 155: dota.CDotaMsgStructuredTooltipProperties.AttributeValue_Delta.prev:type_name -> dota.CDotaMsgStructuredTooltipProperties.AttributeValueValue
+	202, // 156: dota.CDotaMsgStructuredTooltipProperties.AttributeValue_Delta.next:type_name -> dota.CDotaMsgStructuredTooltipProperties.AttributeValueValue
+	203, // 157: dota.CDotaMsgStructuredTooltipProperties.AttributeValue.single_value:type_name -> dota.CDotaMsgStructuredTooltipProperties.AttributeValue_Single
+	204, // 158: dota.CDotaMsgStructuredTooltipProperties.AttributeValue.variable_value:type_name -> dota.CDotaMsgStructuredTooltipProperties.AttributeValue_Variable
+	205, // 159: dota.CDotaMsgStructuredTooltipProperties.AttributeValue.delta_value:type_name -> dota.CDotaMsgStructuredTooltipProperties.AttributeValue_Delta
+	29,  // 160: dota.CDotaMsgStructuredTooltipProperties.Attribute.type:type_name -> dota.CDotaMsgStructuredTooltipProperties.EAttributeType
+	206, // 161: dota.CDotaMsgStructuredTooltipProperties.Attribute.value:type_name -> dota.CDotaMsgStructuredTooltipProperties.AttributeValue
+	208, // 162: dota.CDotaMsgStructuredTooltipProperties.AttributeGroupDescription.basic_value:type_name -> dota.CDotaMsgStructuredTooltipProperties.AttributeGroupDesc_Basic
+	208, // 163: dota.CDotaMsgStructuredTooltipProperties.AttributeGroupDescription.characteristics:type_name -> dota.CDotaMsgStructuredTooltipProperties.AttributeGroupDesc_Basic
 	209, // 164: dota.CDotaMsgStructuredTooltipProperties.AttributeGroupDescription.specific_value:type_name -> dota.CDotaMsgStructuredTooltipProperties.AttributeGroupDesc_Specific
-	210, // 165: dota.CDotaMsgStructuredTooltipProperties.AttributeGroupDescription.facet_value:type_name -> dota.CDotaMsgStructuredTooltipProperties.AttributeGroupDesc_Facet
-	211, // 166: dota.CDotaMsgStructuredTooltipProperties.AttributeGroup.desc:type_name -> dota.CDotaMsgStructuredTooltipProperties.AttributeGroupDescription
-	207, // 167: dota.CDotaMsgStructuredTooltipProperties.AttributeGroup.attributes:type_name -> dota.CDotaMsgStructuredTooltipProperties.Attribute
-	212, // 168: dota.CDotaMsgStructuredTooltipProperties.ContentChunk_AttributeGroup.groups:type_name -> dota.CDotaMsgStructuredTooltipProperties.AttributeGroup
-	213, // 169: dota.CDotaMsgStructuredTooltipProperties.TooltipContentChunk.attribute_group:type_name -> dota.CDotaMsgStructuredTooltipProperties.ContentChunk_AttributeGroup
-	28,  // 170: dota.CDotaMsgStructuredTooltipProperties.SummaryDescriptionEmbedValue.type:type_name -> dota.CDotaMsgStructuredTooltipProperties.EAttributeType
-	205, // 171: dota.CDotaMsgStructuredTooltipProperties.SummaryDescriptionEmbedValue.value:type_name -> dota.CDotaMsgStructuredTooltipProperties.AttributeValue
-	172, // [172:172] is the sub-list for method output_type
-	172, // [172:172] is the sub-list for method input_type
-	172, // [172:172] is the sub-list for extension type_name
-	172, // [172:172] is the sub-list for extension extendee
-	0,   // [0:172] is the sub-list for field type_name
+	210, // 165: dota.CDotaMsgStructuredTooltipProperties.AttributeGroup.desc:type_name -> dota.CDotaMsgStructuredTooltipProperties.AttributeGroupDescription
+	207, // 166: dota.CDotaMsgStructuredTooltipProperties.AttributeGroup.attributes:type_name -> dota.CDotaMsgStructuredTooltipProperties.Attribute
+	211, // 167: dota.CDotaMsgStructuredTooltipProperties.ContentChunk_AttributeGroup.groups:type_name -> dota.CDotaMsgStructuredTooltipProperties.AttributeGroup
+	212, // 168: dota.CDotaMsgStructuredTooltipProperties.TooltipContentChunk.attribute_group:type_name -> dota.CDotaMsgStructuredTooltipProperties.ContentChunk_AttributeGroup
+	169, // [169:169] is the sub-list for method output_type
+	169, // [169:169] is the sub-list for method input_type
+	169, // [169:169] is the sub-list for extension type_name
+	169, // [169:169] is the sub-list for extension extendee
+	0,   // [0:169] is the sub-list for field type_name
 }
 
 func init() { file_dota_gcmessages_common_proto_init() }
@@ -19809,12 +19821,12 @@ func file_dota_gcmessages_common_proto_init() {
 		(*CDotaMsgStructuredTooltipProperties_AttributeValue_VariableValue)(nil),
 		(*CDotaMsgStructuredTooltipProperties_AttributeValue_DeltaValue)(nil),
 	}
-	file_dota_gcmessages_common_proto_msgTypes[182].OneofWrappers = []any{
+	file_dota_gcmessages_common_proto_msgTypes[180].OneofWrappers = []any{
 		(*CDotaMsgStructuredTooltipProperties_AttributeGroupDescription_BasicValue)(nil),
+		(*CDotaMsgStructuredTooltipProperties_AttributeGroupDescription_Characteristics)(nil),
 		(*CDotaMsgStructuredTooltipProperties_AttributeGroupDescription_SpecificValue)(nil),
-		(*CDotaMsgStructuredTooltipProperties_AttributeGroupDescription_FacetValue)(nil),
 	}
-	file_dota_gcmessages_common_proto_msgTypes[185].OneofWrappers = []any{
+	file_dota_gcmessages_common_proto_msgTypes[183].OneofWrappers = []any{
 		(*CDotaMsgStructuredTooltipProperties_TooltipContentChunk_AttributeGroup)(nil),
 	}
 	type x struct{}
@@ -19822,8 +19834,8 @@ func file_dota_gcmessages_common_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_dota_gcmessages_common_proto_rawDesc), len(file_dota_gcmessages_common_proto_rawDesc)),
-			NumEnums:      29,
-			NumMessages:   187,
+			NumEnums:      30,
+			NumMessages:   185,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -126,6 +126,8 @@ type Callbacks struct {
 	onCMsgSosSetSoundEventParams                           []func(*dota.CMsgSosSetSoundEventParams) error
 	onCMsgSosSetLibraryStackFields                         []func(*dota.CMsgSosSetLibraryStackFields) error
 	onCMsgSosStopSoundEventHash                            []func(*dota.CMsgSosStopSoundEventHash) error
+	onCMsgClothStiffenAnimEvent                            []func(*dota.CMsgClothStiffenAnimEvent) error
+	onCMsgClothEffectAnimEvent                             []func(*dota.CMsgClothEffectAnimEvent) error
 	onCDOTAUserMsg_AIDebugLine                             []func(*dota.CDOTAUserMsg_AIDebugLine) error
 	onCDOTAUserMsg_ChatEvent                               []func(*dota.CDOTAUserMsg_ChatEvent) error
 	onCDOTAUserMsg_CombatHeroPositions                     []func(*dota.CDOTAUserMsg_CombatHeroPositions) error
@@ -286,6 +288,7 @@ type Callbacks struct {
 	onCDOTAUserMsg_MonsterHunter_HuntAlert                 []func(*dota.CDOTAUserMsg_MonsterHunter_HuntAlert) error
 	onCDOTAUserMsg_TormentorTimer                          []func(*dota.CDOTAUserMsg_TormentorTimer) error
 	onCDOTAUserMsg_KillEffect                              []func(*dota.CDOTAUserMsg_KillEffect) error
+	onCDOTAUserMsg_GiveItem                                []func(*dota.CDOTAUserMsg_GiveItem) error
 
 	pb *proto.Buffer
 }
@@ -889,6 +892,16 @@ func (c *Callbacks) OnCMsgSosSetLibraryStackFields(fn func(*dota.CMsgSosSetLibra
 // OnCMsgSosStopSoundEventHash registers a callback for EBaseGameEvents_GE_SosStopSoundEventHash
 func (c *Callbacks) OnCMsgSosStopSoundEventHash(fn func(*dota.CMsgSosStopSoundEventHash) error) {
 	c.onCMsgSosStopSoundEventHash = append(c.onCMsgSosStopSoundEventHash, fn)
+}
+
+// OnCMsgClothStiffenAnimEvent registers a callback for EBaseGameEvents_GE_ClothStiffenAnimEvent
+func (c *Callbacks) OnCMsgClothStiffenAnimEvent(fn func(*dota.CMsgClothStiffenAnimEvent) error) {
+	c.onCMsgClothStiffenAnimEvent = append(c.onCMsgClothStiffenAnimEvent, fn)
+}
+
+// OnCMsgClothEffectAnimEvent registers a callback for EBaseGameEvents_GE_ClothEffectAnimEvent
+func (c *Callbacks) OnCMsgClothEffectAnimEvent(fn func(*dota.CMsgClothEffectAnimEvent) error) {
+	c.onCMsgClothEffectAnimEvent = append(c.onCMsgClothEffectAnimEvent, fn)
 }
 
 // OnCDOTAUserMsg_AIDebugLine registers a callback for EDotaUserMessages_DOTA_UM_AIDebugLine
@@ -1689,6 +1702,11 @@ func (c *Callbacks) OnCDOTAUserMsg_TormentorTimer(fn func(*dota.CDOTAUserMsg_Tor
 // OnCDOTAUserMsg_KillEffect registers a callback for EDotaUserMessages_DOTA_UM_KillEffect
 func (c *Callbacks) OnCDOTAUserMsg_KillEffect(fn func(*dota.CDOTAUserMsg_KillEffect) error) {
 	c.onCDOTAUserMsg_KillEffect = append(c.onCDOTAUserMsg_KillEffect, fn)
+}
+
+// OnCDOTAUserMsg_GiveItem registers a callback for EDotaUserMessages_DOTA_UM_GiveItem
+func (c *Callbacks) OnCDOTAUserMsg_GiveItem(fn func(*dota.CDOTAUserMsg_GiveItem) error) {
+	c.onCDOTAUserMsg_GiveItem = append(c.onCDOTAUserMsg_GiveItem, fn)
 }
 
 func (c *Callbacks) callByDemoType(t int32, buf []byte) error {
@@ -3958,6 +3976,44 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		for _, fn := range c.onCMsgSosStopSoundEventHash {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 213: // dota.EBaseGameEvents_GE_ClothStiffenAnimEvent
+		if c.onCMsgClothStiffenAnimEvent == nil {
+			return nil
+		}
+
+		msg := &dota.CMsgClothStiffenAnimEvent{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCMsgClothStiffenAnimEvent {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 214: // dota.EBaseGameEvents_GE_ClothEffectAnimEvent
+		if c.onCMsgClothEffectAnimEvent == nil {
+			return nil
+		}
+
+		msg := &dota.CMsgClothEffectAnimEvent{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCMsgClothEffectAnimEvent {
 			if err := fn(msg); err != nil {
 				return err
 			}
@@ -6998,6 +7054,25 @@ func (c *Callbacks) callByPacketType(t int32, buf []byte) error {
 		}
 
 		for _, fn := range c.onCDOTAUserMsg_KillEffect {
+			if err := fn(msg); err != nil {
+				return err
+			}
+		}
+
+		return nil
+
+	case 636: // dota.EDotaUserMessages_DOTA_UM_GiveItem
+		if c.onCDOTAUserMsg_GiveItem == nil {
+			return nil
+		}
+
+		msg := &dota.CDOTAUserMsg_GiveItem{}
+		c.pb.SetBuf(buf)
+		if err := c.pb.Unmarshal(msg); err != nil {
+			return err
+		}
+
+		for _, fn := range c.onCDOTAUserMsg_GiveItem {
 			if err := fn(msg); err != nil {
 				return err
 			}

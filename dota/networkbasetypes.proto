@@ -198,6 +198,7 @@ message CNETMsg_SpawnGroup_Load {
 }
 
 message CNETMsg_SpawnGroup_ManifestUpdate {
+
 	optional uint32 spawngrouphandle = 1;
 	optional bytes spawngroupmanifest = 2;
 	optional bool manifestincomplete = 3;

@@ -439,6 +439,10 @@ enum DOTA_BOT_MODE {
 	DOTA_BOT_MODE_MINION = 25;
 	DOTA_BOT_MODE_OUTPOST = 26;
 	DOTA_BOT_MODE_BOT_CHALLENGE_ENDGAME = 27;
+	DOTA_BOT_MODE_WATCHER = 28;
+	DOTA_BOT_MODE_WISDOM_SHRINE = 29;
+	DOTA_BOT_MODE_LOTUS_POOL = 30;
+	DOTA_BOT_MODE_DEWARD = 31;
 }
 
 enum MatchLanguages {
@@ -860,6 +864,8 @@ message CMsgDOTACombatLogEntry {
 	optional bool will_reincarnate = 78;
 	optional bool uses_charges = 79;
 	optional uint32 tracked_stat_id = 80;
+	optional float modifier_purged_duration = 81;
+	optional bool heal_from_regen = 82;
 }
 
 message CMsgPendingEventAward {

@@ -501,3 +501,39 @@ message CWorkshop_GetSpecialPayments_Response {
 
 	repeated CWorkshop_GetSpecialPayments_Response.SpecialPayment special_payments = 1;
 }
+
+message CMsgGCReportMetrics {
+	message MetricEntry {
+		message Dimension {
+			optional string name = 1;
+
+			oneof value {
+				string value_string = 2;
+				int64 value_integer = 3;
+				bool value_boolean = 4;
+			}
+		}
+
+		message Measurement {
+			optional string name = 1;
+
+			oneof value {
+				int64 value_integer = 2;
+				double value_float = 3;
+			}
+		}
+
+		optional string catalog = 1;
+		optional string operation = 2;
+		optional double timestamp = 3;
+		repeated CMsgGCReportMetrics.MetricEntry.Dimension dimensions = 10;
+		repeated CMsgGCReportMetrics.MetricEntry.Measurement measurements = 11;
+	}
+
+	repeated CMsgGCReportMetrics.MetricEntry metric_data = 1;
+}
+
+message CMsgGCReportMetrics_Response {
+	optional int32 eresult = 1;
+	optional uint32 failed_entry_count = 2;
+}

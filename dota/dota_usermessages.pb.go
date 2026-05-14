@@ -192,6 +192,7 @@ const (
 	EDotaUserMessages_DOTA_UM_MonsterHunter_HuntAlert                 EDotaUserMessages = 633
 	EDotaUserMessages_DOTA_UM_TormentorTimer                          EDotaUserMessages = 634
 	EDotaUserMessages_DOTA_UM_KillEffect                              EDotaUserMessages = 635
+	EDotaUserMessages_DOTA_UM_GiveItem                                EDotaUserMessages = 636
 )
 
 // Enum value maps for EDotaUserMessages.
@@ -365,6 +366,7 @@ var (
 		633: "DOTA_UM_MonsterHunter_HuntAlert",
 		634: "DOTA_UM_TormentorTimer",
 		635: "DOTA_UM_KillEffect",
+		636: "DOTA_UM_GiveItem",
 	}
 	EDotaUserMessages_value = map[string]int32{
 		"DOTA_UM_AddUnitToSelection":                      464,
@@ -535,6 +537,7 @@ var (
 		"DOTA_UM_MonsterHunter_HuntAlert":                 633,
 		"DOTA_UM_TormentorTimer":                          634,
 		"DOTA_UM_KillEffect":                              635,
+		"DOTA_UM_GiveItem":                                636,
 	}
 )
 
@@ -693,6 +696,8 @@ const (
 	DOTA_CHAT_MESSAGE_CHAT_MESSAGE_PROTECTOR_SPAWNED                         DOTA_CHAT_MESSAGE = 121
 	DOTA_CHAT_MESSAGE_CHAT_MESSAGE_CRAFTING_XP                               DOTA_CHAT_MESSAGE = 122
 	DOTA_CHAT_MESSAGE_CHAT_MESSAGE_ROSHAN_ROAR                               DOTA_CHAT_MESSAGE = 123
+	DOTA_CHAT_MESSAGE_CHAT_MESSAGE_STONE_OF_RECALL_USED                      DOTA_CHAT_MESSAGE = 124
+	DOTA_CHAT_MESSAGE_CHAT_MESSAGE_DEITY_BLESSING                            DOTA_CHAT_MESSAGE = 125
 )
 
 // Enum value maps for DOTA_CHAT_MESSAGE.
@@ -813,6 +818,8 @@ var (
 		121: "CHAT_MESSAGE_PROTECTOR_SPAWNED",
 		122: "CHAT_MESSAGE_CRAFTING_XP",
 		123: "CHAT_MESSAGE_ROSHAN_ROAR",
+		124: "CHAT_MESSAGE_STONE_OF_RECALL_USED",
+		125: "CHAT_MESSAGE_DEITY_BLESSING",
 	}
 	DOTA_CHAT_MESSAGE_value = map[string]int32{
 		"CHAT_MESSAGE_INVALID":                                   -1,
@@ -930,6 +937,8 @@ var (
 		"CHAT_MESSAGE_PROTECTOR_SPAWNED":                         121,
 		"CHAT_MESSAGE_CRAFTING_XP":                               122,
 		"CHAT_MESSAGE_ROSHAN_ROAR":                               123,
+		"CHAT_MESSAGE_STONE_OF_RECALL_USED":                      124,
+		"CHAT_MESSAGE_DEITY_BLESSING":                            125,
 	}
 )
 
@@ -1362,6 +1371,7 @@ const (
 	DOTA_OVERHEAD_ALERT_OVERHEAD_ALERT_FORCE_MISS          DOTA_OVERHEAD_ALERT = 25
 	DOTA_OVERHEAD_ALERT_OVERHEAD_ALERT_AEGIS               DOTA_OVERHEAD_ALERT = 26
 	DOTA_OVERHEAD_ALERT_OVERHEAD_ALERT_DISPEL              DOTA_OVERHEAD_ALERT = 27
+	DOTA_OVERHEAD_ALERT_OVERHEAD_ALERT_BONUS_PURE_DAMAGE   DOTA_OVERHEAD_ALERT = 28
 )
 
 // Enum value maps for DOTA_OVERHEAD_ALERT.
@@ -1392,6 +1402,7 @@ var (
 		25: "OVERHEAD_ALERT_FORCE_MISS",
 		26: "OVERHEAD_ALERT_AEGIS",
 		27: "OVERHEAD_ALERT_DISPEL",
+		28: "OVERHEAD_ALERT_BONUS_PURE_DAMAGE",
 	}
 	DOTA_OVERHEAD_ALERT_value = map[string]int32{
 		"OVERHEAD_ALERT_GOLD":                0,
@@ -1419,6 +1430,7 @@ var (
 		"OVERHEAD_ALERT_FORCE_MISS":          25,
 		"OVERHEAD_ALERT_AEGIS":               26,
 		"OVERHEAD_ALERT_DISPEL":              27,
+		"OVERHEAD_ALERT_BONUS_PURE_DAMAGE":   28,
 	}
 )
 
@@ -2276,6 +2288,62 @@ func (CDOTAUserMsg_MonsterHunter_HuntAlert_EHuntStatusType) EnumDescriptor() ([]
 	return file_dota_usermessages_proto_rawDescGZIP(), []int{170, 1}
 }
 
+type CDOTAUserMsg_GiveItem_EGiveStatus int32
+
+const (
+	CDOTAUserMsg_GiveItem_Start CDOTAUserMsg_GiveItem_EGiveStatus = 0
+	CDOTAUserMsg_GiveItem_End   CDOTAUserMsg_GiveItem_EGiveStatus = 1
+)
+
+// Enum value maps for CDOTAUserMsg_GiveItem_EGiveStatus.
+var (
+	CDOTAUserMsg_GiveItem_EGiveStatus_name = map[int32]string{
+		0: "Start",
+		1: "End",
+	}
+	CDOTAUserMsg_GiveItem_EGiveStatus_value = map[string]int32{
+		"Start": 0,
+		"End":   1,
+	}
+)
+
+func (x CDOTAUserMsg_GiveItem_EGiveStatus) Enum() *CDOTAUserMsg_GiveItem_EGiveStatus {
+	p := new(CDOTAUserMsg_GiveItem_EGiveStatus)
+	*p = x
+	return p
+}
+
+func (x CDOTAUserMsg_GiveItem_EGiveStatus) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (CDOTAUserMsg_GiveItem_EGiveStatus) Descriptor() protoreflect.EnumDescriptor {
+	return file_dota_usermessages_proto_enumTypes[19].Descriptor()
+}
+
+func (CDOTAUserMsg_GiveItem_EGiveStatus) Type() protoreflect.EnumType {
+	return &file_dota_usermessages_proto_enumTypes[19]
+}
+
+func (x CDOTAUserMsg_GiveItem_EGiveStatus) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Do not use.
+func (x *CDOTAUserMsg_GiveItem_EGiveStatus) UnmarshalJSON(b []byte) error {
+	num, err := protoimpl.X.UnmarshalJSONEnum(x.Descriptor(), b)
+	if err != nil {
+		return err
+	}
+	*x = CDOTAUserMsg_GiveItem_EGiveStatus(num)
+	return nil
+}
+
+// Deprecated: Use CDOTAUserMsg_GiveItem_EGiveStatus.Descriptor instead.
+func (CDOTAUserMsg_GiveItem_EGiveStatus) EnumDescriptor() ([]byte, []int) {
+	return file_dota_usermessages_proto_rawDescGZIP(), []int{172, 0}
+}
+
 type CDOTAUserMsg_AIDebugLine struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Message       *string                `protobuf:"bytes,1,opt,name=message" json:"message,omitempty"`
@@ -2418,7 +2486,7 @@ func (x *CDOTAUserMsg_SwapVerify) GetPlayerId() int32 {
 
 type CDOTAUserMsg_ChatEvent struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Type          *DOTA_CHAT_MESSAGE     `protobuf:"varint,1,req,name=type,enum=dota.DOTA_CHAT_MESSAGE" json:"type,omitempty"`
+	Type          *DOTA_CHAT_MESSAGE     `protobuf:"varint,1,opt,name=type,enum=dota.DOTA_CHAT_MESSAGE" json:"type,omitempty"`
 	Value         *uint32                `protobuf:"varint,2,opt,name=value" json:"value,omitempty"`
 	Playerid_1    *int32                 `protobuf:"zigzag32,3,opt,name=playerid_1,json=playerid1" json:"playerid_1,omitempty"`
 	Playerid_2    *int32                 `protobuf:"zigzag32,4,opt,name=playerid_2,json=playerid2" json:"playerid_2,omitempty"`
@@ -4518,7 +4586,7 @@ func (x *CDOTAUserMsg_DestroyLinearProjectile) GetHandle() int32 {
 
 type CDOTAUserMsg_DodgeTrackingProjectiles struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Entindex      *int32                 `protobuf:"varint,1,req,name=entindex" json:"entindex,omitempty"`
+	Entindex      *int32                 `protobuf:"varint,1,opt,name=entindex" json:"entindex,omitempty"`
 	AttacksOnly   *bool                  `protobuf:"varint,2,opt,name=attacks_only,json=attacksOnly" json:"attacks_only,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -4570,7 +4638,7 @@ func (x *CDOTAUserMsg_DodgeTrackingProjectiles) GetAttacksOnly() bool {
 
 type CDOTAUserMsg_SpectatorPlayerClick struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Entindex      *int32                 `protobuf:"varint,1,req,name=entindex" json:"entindex,omitempty"`
+	Entindex      *int32                 `protobuf:"varint,1,opt,name=entindex" json:"entindex,omitempty"`
 	OrderType     *int32                 `protobuf:"varint,2,opt,name=order_type,json=orderType" json:"order_type,omitempty"`
 	TargetIndex   *int32                 `protobuf:"varint,3,opt,name=target_index,json=targetIndex" json:"target_index,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -5254,8 +5322,8 @@ func (x *CDOTASpeechMatchOnClient) GetRandomseed() int32 {
 
 type CDOTAUserMsg_UnitEvent struct {
 	state               protoimpl.MessageState                `protogen:"open.v1"`
-	MsgType             *EDotaEntityMessages                  `protobuf:"varint,1,req,name=msg_type,json=msgType,enum=dota.EDotaEntityMessages" json:"msg_type,omitempty"`
-	EntityIndex         *int32                                `protobuf:"varint,2,req,name=entity_index,json=entityIndex" json:"entity_index,omitempty"`
+	MsgType             *EDotaEntityMessages                  `protobuf:"varint,1,opt,name=msg_type,json=msgType,enum=dota.EDotaEntityMessages" json:"msg_type,omitempty"`
+	EntityIndex         *int32                                `protobuf:"varint,2,opt,name=entity_index,json=entityIndex" json:"entity_index,omitempty"`
 	Speech              *CDOTAUserMsg_UnitEvent_Speech        `protobuf:"bytes,3,opt,name=speech" json:"speech,omitempty"`
 	SpeechMute          *CDOTAUserMsg_UnitEvent_SpeechMute    `protobuf:"bytes,4,opt,name=speech_mute,json=speechMute" json:"speech_mute,omitempty"`
 	AddGesture          *CDOTAUserMsg_UnitEvent_AddGesture    `protobuf:"bytes,5,opt,name=add_gesture,json=addGesture" json:"add_gesture,omitempty"`
@@ -5534,7 +5602,7 @@ func (x *CDOTAUserMsg_ItemFound) GetItemdef() uint32 {
 
 type CDOTAUserMsg_OverheadEvent struct {
 	state                protoimpl.MessageState `protogen:"open.v1"`
-	MessageType          *DOTA_OVERHEAD_ALERT   `protobuf:"varint,1,req,name=message_type,json=messageType,enum=dota.DOTA_OVERHEAD_ALERT" json:"message_type,omitempty"`
+	MessageType          *DOTA_OVERHEAD_ALERT   `protobuf:"varint,1,opt,name=message_type,json=messageType,enum=dota.DOTA_OVERHEAD_ALERT" json:"message_type,omitempty"`
 	Value                *int32                 `protobuf:"varint,2,opt,name=value" json:"value,omitempty"`
 	TargetPlayerEntindex *int32                 `protobuf:"varint,3,opt,name=target_player_entindex,json=targetPlayerEntindex" json:"target_player_entindex,omitempty"`
 	TargetEntindex       *int32                 `protobuf:"varint,4,opt,name=target_entindex,json=targetEntindex" json:"target_entindex,omitempty"`
@@ -7550,8 +7618,8 @@ func (x *CDOTAUserMsg_TE_UnitAnimationEnd) GetSnap() bool {
 
 type CDOTAUserMsg_ShowGenericPopup struct {
 	state              protoimpl.MessageState `protogen:"open.v1"`
-	Header             *string                `protobuf:"bytes,1,req,name=header" json:"header,omitempty"`
-	Body               *string                `protobuf:"bytes,2,req,name=body" json:"body,omitempty"`
+	Header             *string                `protobuf:"bytes,1,opt,name=header" json:"header,omitempty"`
+	Body               *string                `protobuf:"bytes,2,opt,name=body" json:"body,omitempty"`
 	Param1             *string                `protobuf:"bytes,3,opt,name=param1" json:"param1,omitempty"`
 	Param2             *string                `protobuf:"bytes,4,opt,name=param2" json:"param2,omitempty"`
 	TintScreen         *bool                  `protobuf:"varint,5,opt,name=tint_screen,json=tintScreen" json:"tint_screen,omitempty"`
@@ -9578,7 +9646,7 @@ func (*CDOTAUserMsg_UpdateQuestProgress) Descriptor() ([]byte, []int) {
 
 type CDOTAUserMsg_QuestStatus struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	PlayerId      *int32                 `protobuf:"varint,1,req,name=player_id,json=playerId" json:"player_id,omitempty"`
+	PlayerId      *int32                 `protobuf:"varint,1,opt,name=player_id,json=playerId" json:"player_id,omitempty"`
 	QuestId       *uint32                `protobuf:"varint,2,opt,name=quest_id,json=questId" json:"quest_id,omitempty"`
 	ChallengeId   *uint32                `protobuf:"varint,3,opt,name=challenge_id,json=challengeId" json:"challenge_id,omitempty"`
 	Progress      *uint32                `protobuf:"varint,4,opt,name=progress" json:"progress,omitempty"`
@@ -9678,7 +9746,7 @@ func (x *CDOTAUserMsg_QuestStatus) GetItemAbilityId() int32 {
 
 type CDOTAUserMsg_SuggestHeroPick struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	PlayerId      *int32                 `protobuf:"varint,1,req,name=player_id,json=playerId" json:"player_id,omitempty"`
+	PlayerId      *int32                 `protobuf:"varint,1,opt,name=player_id,json=playerId" json:"player_id,omitempty"`
 	HeroId        *int32                 `protobuf:"varint,2,opt,name=hero_id,json=heroId" json:"hero_id,omitempty"`
 	Ban           *bool                  `protobuf:"varint,3,opt,name=ban" json:"ban,omitempty"`
 	FacetId       *uint32                `protobuf:"varint,4,opt,name=facet_id,json=facetId" json:"facet_id,omitempty"`
@@ -9746,7 +9814,7 @@ func (x *CDOTAUserMsg_SuggestHeroPick) GetFacetId() uint32 {
 
 type CDOTAUserMsg_SuggestHeroRole struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	PlayerId      *int32                 `protobuf:"varint,1,req,name=player_id,json=playerId" json:"player_id,omitempty"`
+	PlayerId      *int32                 `protobuf:"varint,1,opt,name=player_id,json=playerId" json:"player_id,omitempty"`
 	HeroRole      *string                `protobuf:"bytes,2,opt,name=hero_role,json=heroRole" json:"hero_role,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -9798,7 +9866,7 @@ func (x *CDOTAUserMsg_SuggestHeroRole) GetHeroRole() string {
 
 type CDOTAUserMsg_KillcamDamageTaken struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	PlayerId      *int32                 `protobuf:"varint,1,req,name=player_id,json=playerId" json:"player_id,omitempty"`
+	PlayerId      *int32                 `protobuf:"varint,1,opt,name=player_id,json=playerId" json:"player_id,omitempty"`
 	DamageTaken   *uint32                `protobuf:"varint,2,opt,name=damage_taken,json=damageTaken" json:"damage_taken,omitempty"`
 	ItemType      *uint32                `protobuf:"varint,3,opt,name=item_type,json=itemType" json:"item_type,omitempty"`
 	ItemAbilityId *int32                 `protobuf:"varint,4,opt,name=item_ability_id,json=itemAbilityId" json:"item_ability_id,omitempty"`
@@ -9882,7 +9950,7 @@ func (x *CDOTAUserMsg_KillcamDamageTaken) GetDamageColor() string {
 
 type CDOTAUserMsg_SelectPenaltyGold struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	PlayerId      *int32                 `protobuf:"varint,1,req,name=player_id,json=playerId" json:"player_id,omitempty"`
+	PlayerId      *int32                 `protobuf:"varint,1,opt,name=player_id,json=playerId" json:"player_id,omitempty"`
 	Cost          *int32                 `protobuf:"zigzag32,2,opt,name=cost" json:"cost,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -10642,7 +10710,7 @@ func (x *CDOTAUserMsg_TipAlert) GetTipText() string {
 
 type CDOTAUserMsg_ReplaceQueryUnit struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	PlayerId       *int32                 `protobuf:"varint,1,req,name=player_id,json=playerId" json:"player_id,omitempty"`
+	PlayerId       *int32                 `protobuf:"varint,1,opt,name=player_id,json=playerId" json:"player_id,omitempty"`
 	SourceEntindex *int32                 `protobuf:"varint,2,opt,name=source_entindex,json=sourceEntindex" json:"source_entindex,omitempty"`
 	TargetEntindex *int32                 `protobuf:"varint,3,opt,name=target_entindex,json=targetEntindex" json:"target_entindex,omitempty"`
 	unknownFields  protoimpl.UnknownFields
@@ -11190,9 +11258,9 @@ func (x *CDOTAUserMsg_QueuedOrderRemoved) GetUnitOrderSequence() []uint32 {
 
 type CDOTAUserMsg_DebugChallenge struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
-	ChallengeType    *uint32                `protobuf:"varint,1,req,name=challenge_type,json=challengeType" json:"challenge_type,omitempty"`
-	ChallengeQueryId *uint32                `protobuf:"varint,2,req,name=challenge_query_id,json=challengeQueryId" json:"challenge_query_id,omitempty"`
-	EventId          *uint32                `protobuf:"varint,3,req,name=event_id,json=eventId" json:"event_id,omitempty"`
+	ChallengeType    *uint32                `protobuf:"varint,1,opt,name=challenge_type,json=challengeType" json:"challenge_type,omitempty"`
+	ChallengeQueryId *uint32                `protobuf:"varint,2,opt,name=challenge_query_id,json=challengeQueryId" json:"challenge_query_id,omitempty"`
+	EventId          *uint32                `protobuf:"varint,3,opt,name=event_id,json=eventId" json:"event_id,omitempty"`
 	InstanceId       *uint32                `protobuf:"varint,4,opt,name=instance_id,json=instanceId" json:"instance_id,omitempty"`
 	ChallengeVar_0   *uint32                `protobuf:"varint,5,opt,name=challenge_var_0,json=challengeVar0" json:"challenge_var_0,omitempty"`
 	ChallengeVar_1   *uint32                `protobuf:"varint,6,opt,name=challenge_var_1,json=challengeVar1" json:"challenge_var_1,omitempty"`
@@ -12838,11 +12906,11 @@ func (x *CDOTAUserMsg_DuelRequested) GetPlayerIdRequestor() int32 {
 
 type CDOTAUserMsg_MuertaReleaseEvent_AssignedTargetKilled struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	PlayerIdKiller *int32                 `protobuf:"varint,1,req,name=player_id_killer,json=playerIdKiller" json:"player_id_killer,omitempty"`
-	PlayerIdTarget *int32                 `protobuf:"varint,2,req,name=player_id_target,json=playerIdTarget" json:"player_id_target,omitempty"`
-	Points         *int32                 `protobuf:"varint,3,req,name=points" json:"points,omitempty"`
-	PointsTotal    *int32                 `protobuf:"varint,4,req,name=points_total,json=pointsTotal" json:"points_total,omitempty"`
-	LastHit        *bool                  `protobuf:"varint,5,req,name=last_hit,json=lastHit" json:"last_hit,omitempty"`
+	PlayerIdKiller *int32                 `protobuf:"varint,1,opt,name=player_id_killer,json=playerIdKiller" json:"player_id_killer,omitempty"`
+	PlayerIdTarget *int32                 `protobuf:"varint,2,opt,name=player_id_target,json=playerIdTarget" json:"player_id_target,omitempty"`
+	Points         *int32                 `protobuf:"varint,3,opt,name=points" json:"points,omitempty"`
+	PointsTotal    *int32                 `protobuf:"varint,4,opt,name=points_total,json=pointsTotal" json:"points_total,omitempty"`
+	LastHit        *bool                  `protobuf:"varint,5,opt,name=last_hit,json=lastHit" json:"last_hit,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -13540,6 +13608,74 @@ func (x *CDOTAUserMsg_KillEffect) GetKillerPlayerId() int32 {
 	return 0
 }
 
+type CDOTAUserMsg_GiveItem struct {
+	state            protoimpl.MessageState             `protogen:"open.v1"`
+	GiverEntIndex    *uint32                            `protobuf:"varint,1,opt,name=giver_ent_index,json=giverEntIndex" json:"giver_ent_index,omitempty"`
+	ReceiverEntIndex *uint32                            `protobuf:"varint,2,opt,name=receiver_ent_index,json=receiverEntIndex" json:"receiver_ent_index,omitempty"`
+	ItemEntIndex     *uint32                            `protobuf:"varint,3,opt,name=item_ent_index,json=itemEntIndex" json:"item_ent_index,omitempty"`
+	GiveStatus       *CDOTAUserMsg_GiveItem_EGiveStatus `protobuf:"varint,4,opt,name=give_status,json=giveStatus,enum=dota.CDOTAUserMsg_GiveItem_EGiveStatus" json:"give_status,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *CDOTAUserMsg_GiveItem) Reset() {
+	*x = CDOTAUserMsg_GiveItem{}
+	mi := &file_dota_usermessages_proto_msgTypes[172]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CDOTAUserMsg_GiveItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CDOTAUserMsg_GiveItem) ProtoMessage() {}
+
+func (x *CDOTAUserMsg_GiveItem) ProtoReflect() protoreflect.Message {
+	mi := &file_dota_usermessages_proto_msgTypes[172]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CDOTAUserMsg_GiveItem.ProtoReflect.Descriptor instead.
+func (*CDOTAUserMsg_GiveItem) Descriptor() ([]byte, []int) {
+	return file_dota_usermessages_proto_rawDescGZIP(), []int{172}
+}
+
+func (x *CDOTAUserMsg_GiveItem) GetGiverEntIndex() uint32 {
+	if x != nil && x.GiverEntIndex != nil {
+		return *x.GiverEntIndex
+	}
+	return 0
+}
+
+func (x *CDOTAUserMsg_GiveItem) GetReceiverEntIndex() uint32 {
+	if x != nil && x.ReceiverEntIndex != nil {
+		return *x.ReceiverEntIndex
+	}
+	return 0
+}
+
+func (x *CDOTAUserMsg_GiveItem) GetItemEntIndex() uint32 {
+	if x != nil && x.ItemEntIndex != nil {
+		return *x.ItemEntIndex
+	}
+	return 0
+}
+
+func (x *CDOTAUserMsg_GiveItem) GetGiveStatus() CDOTAUserMsg_GiveItem_EGiveStatus {
+	if x != nil && x.GiveStatus != nil {
+		return *x.GiveStatus
+	}
+	return CDOTAUserMsg_GiveItem_Start
+}
+
 type CDOTAUserMsg_MiniKillCamInfo_Attacker struct {
 	state         protoimpl.MessageState                           `protogen:"open.v1"`
 	Attacker      *uint32                                          `protobuf:"varint,1,opt,name=attacker" json:"attacker,omitempty"`
@@ -13552,7 +13688,7 @@ type CDOTAUserMsg_MiniKillCamInfo_Attacker struct {
 
 func (x *CDOTAUserMsg_MiniKillCamInfo_Attacker) Reset() {
 	*x = CDOTAUserMsg_MiniKillCamInfo_Attacker{}
-	mi := &file_dota_usermessages_proto_msgTypes[172]
+	mi := &file_dota_usermessages_proto_msgTypes[173]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13564,7 +13700,7 @@ func (x *CDOTAUserMsg_MiniKillCamInfo_Attacker) String() string {
 func (*CDOTAUserMsg_MiniKillCamInfo_Attacker) ProtoMessage() {}
 
 func (x *CDOTAUserMsg_MiniKillCamInfo_Attacker) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_usermessages_proto_msgTypes[172]
+	mi := &file_dota_usermessages_proto_msgTypes[173]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13618,7 +13754,7 @@ type CDOTAUserMsg_MiniKillCamInfo_Attacker_Ability struct {
 
 func (x *CDOTAUserMsg_MiniKillCamInfo_Attacker_Ability) Reset() {
 	*x = CDOTAUserMsg_MiniKillCamInfo_Attacker_Ability{}
-	mi := &file_dota_usermessages_proto_msgTypes[173]
+	mi := &file_dota_usermessages_proto_msgTypes[174]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13630,7 +13766,7 @@ func (x *CDOTAUserMsg_MiniKillCamInfo_Attacker_Ability) String() string {
 func (*CDOTAUserMsg_MiniKillCamInfo_Attacker_Ability) ProtoMessage() {}
 
 func (x *CDOTAUserMsg_MiniKillCamInfo_Attacker_Ability) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_usermessages_proto_msgTypes[173]
+	mi := &file_dota_usermessages_proto_msgTypes[174]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13670,7 +13806,7 @@ type CDOTAUserMsg_CourierKilledAlert_LostItem struct {
 
 func (x *CDOTAUserMsg_CourierKilledAlert_LostItem) Reset() {
 	*x = CDOTAUserMsg_CourierKilledAlert_LostItem{}
-	mi := &file_dota_usermessages_proto_msgTypes[174]
+	mi := &file_dota_usermessages_proto_msgTypes[175]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13682,7 +13818,7 @@ func (x *CDOTAUserMsg_CourierKilledAlert_LostItem) String() string {
 func (*CDOTAUserMsg_CourierKilledAlert_LostItem) ProtoMessage() {}
 
 func (x *CDOTAUserMsg_CourierKilledAlert_LostItem) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_usermessages_proto_msgTypes[174]
+	mi := &file_dota_usermessages_proto_msgTypes[175]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13714,8 +13850,8 @@ func (x *CDOTAUserMsg_CourierKilledAlert_LostItem) GetQuantity() uint32 {
 
 type CDOTAResponseQuerySerialized_Fact struct {
 	state               protoimpl.MessageState                       `protogen:"open.v1"`
-	Key                 *int32                                       `protobuf:"varint,1,req,name=key" json:"key,omitempty"`
-	Valtype             *CDOTAResponseQuerySerialized_Fact_ValueType `protobuf:"varint,2,req,name=valtype,enum=dota.CDOTAResponseQuerySerialized_Fact_ValueType" json:"valtype,omitempty"`
+	Key                 *int32                                       `protobuf:"varint,1,opt,name=key" json:"key,omitempty"`
+	Valtype             *CDOTAResponseQuerySerialized_Fact_ValueType `protobuf:"varint,2,opt,name=valtype,enum=dota.CDOTAResponseQuerySerialized_Fact_ValueType" json:"valtype,omitempty"`
 	ValNumeric          *float32                                     `protobuf:"fixed32,3,opt,name=val_numeric,json=valNumeric" json:"val_numeric,omitempty"`
 	ValString           *string                                      `protobuf:"bytes,4,opt,name=val_string,json=valString" json:"val_string,omitempty"`
 	ValStringtableIndex *int32                                       `protobuf:"varint,5,opt,name=val_stringtable_index,json=valStringtableIndex" json:"val_stringtable_index,omitempty"`
@@ -13726,7 +13862,7 @@ type CDOTAResponseQuerySerialized_Fact struct {
 
 func (x *CDOTAResponseQuerySerialized_Fact) Reset() {
 	*x = CDOTAResponseQuerySerialized_Fact{}
-	mi := &file_dota_usermessages_proto_msgTypes[175]
+	mi := &file_dota_usermessages_proto_msgTypes[176]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13738,7 +13874,7 @@ func (x *CDOTAResponseQuerySerialized_Fact) String() string {
 func (*CDOTAResponseQuerySerialized_Fact) ProtoMessage() {}
 
 func (x *CDOTAResponseQuerySerialized_Fact) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_usermessages_proto_msgTypes[175]
+	mi := &file_dota_usermessages_proto_msgTypes[176]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13806,7 +13942,7 @@ type CDOTAUserMsg_UnitEvent_Interval struct {
 
 func (x *CDOTAUserMsg_UnitEvent_Interval) Reset() {
 	*x = CDOTAUserMsg_UnitEvent_Interval{}
-	mi := &file_dota_usermessages_proto_msgTypes[176]
+	mi := &file_dota_usermessages_proto_msgTypes[177]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13818,7 +13954,7 @@ func (x *CDOTAUserMsg_UnitEvent_Interval) String() string {
 func (*CDOTAUserMsg_UnitEvent_Interval) ProtoMessage() {}
 
 func (x *CDOTAUserMsg_UnitEvent_Interval) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_usermessages_proto_msgTypes[176]
+	mi := &file_dota_usermessages_proto_msgTypes[177]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13863,7 +13999,7 @@ type CDOTAUserMsg_UnitEvent_Speech struct {
 
 func (x *CDOTAUserMsg_UnitEvent_Speech) Reset() {
 	*x = CDOTAUserMsg_UnitEvent_Speech{}
-	mi := &file_dota_usermessages_proto_msgTypes[177]
+	mi := &file_dota_usermessages_proto_msgTypes[178]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13875,7 +14011,7 @@ func (x *CDOTAUserMsg_UnitEvent_Speech) String() string {
 func (*CDOTAUserMsg_UnitEvent_Speech) ProtoMessage() {}
 
 func (x *CDOTAUserMsg_UnitEvent_Speech) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_usermessages_proto_msgTypes[177]
+	mi := &file_dota_usermessages_proto_msgTypes[178]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13949,7 +14085,7 @@ type CDOTAUserMsg_UnitEvent_SpeechMute struct {
 
 func (x *CDOTAUserMsg_UnitEvent_SpeechMute) Reset() {
 	*x = CDOTAUserMsg_UnitEvent_SpeechMute{}
-	mi := &file_dota_usermessages_proto_msgTypes[178]
+	mi := &file_dota_usermessages_proto_msgTypes[179]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13961,7 +14097,7 @@ func (x *CDOTAUserMsg_UnitEvent_SpeechMute) String() string {
 func (*CDOTAUserMsg_UnitEvent_SpeechMute) ProtoMessage() {}
 
 func (x *CDOTAUserMsg_UnitEvent_SpeechMute) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_usermessages_proto_msgTypes[178]
+	mi := &file_dota_usermessages_proto_msgTypes[179]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13998,7 +14134,7 @@ type CDOTAUserMsg_UnitEvent_AddGesture struct {
 
 func (x *CDOTAUserMsg_UnitEvent_AddGesture) Reset() {
 	*x = CDOTAUserMsg_UnitEvent_AddGesture{}
-	mi := &file_dota_usermessages_proto_msgTypes[179]
+	mi := &file_dota_usermessages_proto_msgTypes[180]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14010,7 +14146,7 @@ func (x *CDOTAUserMsg_UnitEvent_AddGesture) String() string {
 func (*CDOTAUserMsg_UnitEvent_AddGesture) ProtoMessage() {}
 
 func (x *CDOTAUserMsg_UnitEvent_AddGesture) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_usermessages_proto_msgTypes[179]
+	mi := &file_dota_usermessages_proto_msgTypes[180]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14077,7 +14213,7 @@ type CDOTAUserMsg_UnitEvent_RemoveGesture struct {
 
 func (x *CDOTAUserMsg_UnitEvent_RemoveGesture) Reset() {
 	*x = CDOTAUserMsg_UnitEvent_RemoveGesture{}
-	mi := &file_dota_usermessages_proto_msgTypes[180]
+	mi := &file_dota_usermessages_proto_msgTypes[181]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14089,7 +14225,7 @@ func (x *CDOTAUserMsg_UnitEvent_RemoveGesture) String() string {
 func (*CDOTAUserMsg_UnitEvent_RemoveGesture) ProtoMessage() {}
 
 func (x *CDOTAUserMsg_UnitEvent_RemoveGesture) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_usermessages_proto_msgTypes[180]
+	mi := &file_dota_usermessages_proto_msgTypes[181]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14123,7 +14259,7 @@ type CDOTAUserMsg_UnitEvent_BloodImpact struct {
 
 func (x *CDOTAUserMsg_UnitEvent_BloodImpact) Reset() {
 	*x = CDOTAUserMsg_UnitEvent_BloodImpact{}
-	mi := &file_dota_usermessages_proto_msgTypes[181]
+	mi := &file_dota_usermessages_proto_msgTypes[182]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14135,7 +14271,7 @@ func (x *CDOTAUserMsg_UnitEvent_BloodImpact) String() string {
 func (*CDOTAUserMsg_UnitEvent_BloodImpact) ProtoMessage() {}
 
 func (x *CDOTAUserMsg_UnitEvent_BloodImpact) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_usermessages_proto_msgTypes[181]
+	mi := &file_dota_usermessages_proto_msgTypes[182]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14181,7 +14317,7 @@ type CDOTAUserMsg_UnitEvent_FadeGesture struct {
 
 func (x *CDOTAUserMsg_UnitEvent_FadeGesture) Reset() {
 	*x = CDOTAUserMsg_UnitEvent_FadeGesture{}
-	mi := &file_dota_usermessages_proto_msgTypes[182]
+	mi := &file_dota_usermessages_proto_msgTypes[183]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14193,7 +14329,7 @@ func (x *CDOTAUserMsg_UnitEvent_FadeGesture) String() string {
 func (*CDOTAUserMsg_UnitEvent_FadeGesture) ProtoMessage() {}
 
 func (x *CDOTAUserMsg_UnitEvent_FadeGesture) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_usermessages_proto_msgTypes[182]
+	mi := &file_dota_usermessages_proto_msgTypes[183]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14226,7 +14362,7 @@ type CDOTAUserMsg_StatsHeroPositionInfo_PositionPair struct {
 
 func (x *CDOTAUserMsg_StatsHeroPositionInfo_PositionPair) Reset() {
 	*x = CDOTAUserMsg_StatsHeroPositionInfo_PositionPair{}
-	mi := &file_dota_usermessages_proto_msgTypes[183]
+	mi := &file_dota_usermessages_proto_msgTypes[184]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14238,7 +14374,7 @@ func (x *CDOTAUserMsg_StatsHeroPositionInfo_PositionPair) String() string {
 func (*CDOTAUserMsg_StatsHeroPositionInfo_PositionPair) ProtoMessage() {}
 
 func (x *CDOTAUserMsg_StatsHeroPositionInfo_PositionPair) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_usermessages_proto_msgTypes[183]
+	mi := &file_dota_usermessages_proto_msgTypes[184]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14279,7 +14415,7 @@ type CDOTAUserMsg_StatsTeamMinuteDetails_LocationPerformance struct {
 
 func (x *CDOTAUserMsg_StatsTeamMinuteDetails_LocationPerformance) Reset() {
 	*x = CDOTAUserMsg_StatsTeamMinuteDetails_LocationPerformance{}
-	mi := &file_dota_usermessages_proto_msgTypes[184]
+	mi := &file_dota_usermessages_proto_msgTypes[185]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14291,7 +14427,7 @@ func (x *CDOTAUserMsg_StatsTeamMinuteDetails_LocationPerformance) String() strin
 func (*CDOTAUserMsg_StatsTeamMinuteDetails_LocationPerformance) ProtoMessage() {}
 
 func (x *CDOTAUserMsg_StatsTeamMinuteDetails_LocationPerformance) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_usermessages_proto_msgTypes[184]
+	mi := &file_dota_usermessages_proto_msgTypes[185]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14340,7 +14476,7 @@ type CDOTAUserMsg_StatsMatchDetails_CDOTAUserMsg_StatsFightTeamDetails struct {
 
 func (x *CDOTAUserMsg_StatsMatchDetails_CDOTAUserMsg_StatsFightTeamDetails) Reset() {
 	*x = CDOTAUserMsg_StatsMatchDetails_CDOTAUserMsg_StatsFightTeamDetails{}
-	mi := &file_dota_usermessages_proto_msgTypes[185]
+	mi := &file_dota_usermessages_proto_msgTypes[186]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14352,7 +14488,7 @@ func (x *CDOTAUserMsg_StatsMatchDetails_CDOTAUserMsg_StatsFightTeamDetails) Stri
 func (*CDOTAUserMsg_StatsMatchDetails_CDOTAUserMsg_StatsFightTeamDetails) ProtoMessage() {}
 
 func (x *CDOTAUserMsg_StatsMatchDetails_CDOTAUserMsg_StatsFightTeamDetails) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_usermessages_proto_msgTypes[185]
+	mi := &file_dota_usermessages_proto_msgTypes[186]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14408,7 +14544,7 @@ type CDOTAUserMsg_StatsMatchDetails_CDOTAUserMsg_StatsFightDetails struct {
 
 func (x *CDOTAUserMsg_StatsMatchDetails_CDOTAUserMsg_StatsFightDetails) Reset() {
 	*x = CDOTAUserMsg_StatsMatchDetails_CDOTAUserMsg_StatsFightDetails{}
-	mi := &file_dota_usermessages_proto_msgTypes[186]
+	mi := &file_dota_usermessages_proto_msgTypes[187]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14420,7 +14556,7 @@ func (x *CDOTAUserMsg_StatsMatchDetails_CDOTAUserMsg_StatsFightDetails) String()
 func (*CDOTAUserMsg_StatsMatchDetails_CDOTAUserMsg_StatsFightDetails) ProtoMessage() {}
 
 func (x *CDOTAUserMsg_StatsMatchDetails_CDOTAUserMsg_StatsFightDetails) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_usermessages_proto_msgTypes[186]
+	mi := &file_dota_usermessages_proto_msgTypes[187]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14474,7 +14610,7 @@ type CDOTAUserMsg_AllStarEvent_PlayerScore struct {
 
 func (x *CDOTAUserMsg_AllStarEvent_PlayerScore) Reset() {
 	*x = CDOTAUserMsg_AllStarEvent_PlayerScore{}
-	mi := &file_dota_usermessages_proto_msgTypes[187]
+	mi := &file_dota_usermessages_proto_msgTypes[188]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14486,7 +14622,7 @@ func (x *CDOTAUserMsg_AllStarEvent_PlayerScore) String() string {
 func (*CDOTAUserMsg_AllStarEvent_PlayerScore) ProtoMessage() {}
 
 func (x *CDOTAUserMsg_AllStarEvent_PlayerScore) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_usermessages_proto_msgTypes[187]
+	mi := &file_dota_usermessages_proto_msgTypes[188]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14527,7 +14663,7 @@ type CDOTAUserMsg_PauseMinigameData_DataBit struct {
 
 func (x *CDOTAUserMsg_PauseMinigameData_DataBit) Reset() {
 	*x = CDOTAUserMsg_PauseMinigameData_DataBit{}
-	mi := &file_dota_usermessages_proto_msgTypes[188]
+	mi := &file_dota_usermessages_proto_msgTypes[189]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14539,7 +14675,7 @@ func (x *CDOTAUserMsg_PauseMinigameData_DataBit) String() string {
 func (*CDOTAUserMsg_PauseMinigameData_DataBit) ProtoMessage() {}
 
 func (x *CDOTAUserMsg_PauseMinigameData_DataBit) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_usermessages_proto_msgTypes[188]
+	mi := &file_dota_usermessages_proto_msgTypes[189]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14586,7 +14722,7 @@ type CDOTAUserMsg_GuildChallenge_Progress_PlayerProgress struct {
 
 func (x *CDOTAUserMsg_GuildChallenge_Progress_PlayerProgress) Reset() {
 	*x = CDOTAUserMsg_GuildChallenge_Progress_PlayerProgress{}
-	mi := &file_dota_usermessages_proto_msgTypes[189]
+	mi := &file_dota_usermessages_proto_msgTypes[190]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14598,7 +14734,7 @@ func (x *CDOTAUserMsg_GuildChallenge_Progress_PlayerProgress) String() string {
 func (*CDOTAUserMsg_GuildChallenge_Progress_PlayerProgress) ProtoMessage() {}
 
 func (x *CDOTAUserMsg_GuildChallenge_Progress_PlayerProgress) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_usermessages_proto_msgTypes[189]
+	mi := &file_dota_usermessages_proto_msgTypes[190]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14641,7 +14777,7 @@ const file_dota_usermessages_proto_rawDesc = "" +
 	"\x17CDOTAUserMsg_SwapVerify\x12\x1b\n" +
 	"\tplayer_id\x18\x01 \x01(\x05R\bplayerId\"\xd9\x02\n" +
 	"\x16CDOTAUserMsg_ChatEvent\x12+\n" +
-	"\x04type\x18\x01 \x02(\x0e2\x17.dota.DOTA_CHAT_MESSAGER\x04type\x12\x14\n" +
+	"\x04type\x18\x01 \x01(\x0e2\x17.dota.DOTA_CHAT_MESSAGER\x04type\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\rR\x05value\x12\x1d\n" +
 	"\n" +
 	"playerid_1\x18\x03 \x01(\x11R\tplayerid1\x12\x1d\n" +
@@ -14824,10 +14960,10 @@ const file_dota_usermessages_proto_rawDesc = "" +
 	"$CDOTAUserMsg_DestroyLinearProjectile\x12\x16\n" +
 	"\x06handle\x18\x01 \x01(\x05R\x06handle\"f\n" +
 	"%CDOTAUserMsg_DodgeTrackingProjectiles\x12\x1a\n" +
-	"\bentindex\x18\x01 \x02(\x05R\bentindex\x12!\n" +
+	"\bentindex\x18\x01 \x01(\x05R\bentindex\x12!\n" +
 	"\fattacks_only\x18\x02 \x01(\bR\vattacksOnly\"\x81\x01\n" +
 	"!CDOTAUserMsg_SpectatorPlayerClick\x12\x1a\n" +
-	"\bentindex\x18\x01 \x02(\x05R\bentindex\x12\x1d\n" +
+	"\bentindex\x18\x01 \x01(\x05R\bentindex\x12\x1d\n" +
 	"\n" +
 	"order_type\x18\x02 \x01(\x05R\torderType\x12!\n" +
 	"\ftarget_index\x18\x03 \x01(\x05R\vtargetIndex\"\x80\x03\n" +
@@ -14876,8 +15012,8 @@ const file_dota_usermessages_proto_rawDesc = "" +
 	"\x1cCDOTAResponseQuerySerialized\x12=\n" +
 	"\x05facts\x18\x01 \x03(\v2'.dota.CDOTAResponseQuerySerialized.FactR\x05facts\x1a\xcf\x02\n" +
 	"\x04Fact\x12\x10\n" +
-	"\x03key\x18\x01 \x02(\x05R\x03key\x12K\n" +
-	"\avaltype\x18\x02 \x02(\x0e21.dota.CDOTAResponseQuerySerialized.Fact.ValueTypeR\avaltype\x12\x1f\n" +
+	"\x03key\x18\x01 \x01(\x05R\x03key\x12K\n" +
+	"\avaltype\x18\x02 \x01(\x0e21.dota.CDOTAResponseQuerySerialized.Fact.ValueTypeR\avaltype\x12\x1f\n" +
 	"\vval_numeric\x18\x03 \x01(\x02R\n" +
 	"valNumeric\x12\x1d\n" +
 	"\n" +
@@ -14899,8 +15035,8 @@ const file_dota_usermessages_proto_rawDesc = "" +
 	"randomseed\"\xe5\n" +
 	"\n" +
 	"\x16CDOTAUserMsg_UnitEvent\x124\n" +
-	"\bmsg_type\x18\x01 \x02(\x0e2\x19.dota.EDotaEntityMessagesR\amsgType\x12!\n" +
-	"\fentity_index\x18\x02 \x02(\x05R\ventityIndex\x12;\n" +
+	"\bmsg_type\x18\x01 \x01(\x0e2\x19.dota.EDotaEntityMessagesR\amsgType\x12!\n" +
+	"\fentity_index\x18\x02 \x01(\x05R\ventityIndex\x12;\n" +
 	"\x06speech\x18\x03 \x01(\v2#.dota.CDOTAUserMsg_UnitEvent.SpeechR\x06speech\x12H\n" +
 	"\vspeech_mute\x18\x04 \x01(\v2'.dota.CDOTAUserMsg_UnitEvent.SpeechMuteR\n" +
 	"speechMute\x12H\n" +
@@ -14952,7 +15088,7 @@ const file_dota_usermessages_proto_rawDesc = "" +
 	"\x06method\x18\x04 \x01(\x05R\x06method\x12\x18\n" +
 	"\aitemdef\x18\x05 \x01(\rR\aitemdef\"\x85\x02\n" +
 	"\x1aCDOTAUserMsg_OverheadEvent\x12<\n" +
-	"\fmessage_type\x18\x01 \x02(\x0e2\x19.dota.DOTA_OVERHEAD_ALERTR\vmessageType\x12\x14\n" +
+	"\fmessage_type\x18\x01 \x01(\x0e2\x19.dota.DOTA_OVERHEAD_ALERTR\vmessageType\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\x05R\x05value\x124\n" +
 	"\x16target_player_entindex\x18\x03 \x01(\x05R\x14targetPlayerEntindex\x12'\n" +
 	"\x0ftarget_entindex\x18\x04 \x01(\x05R\x0etargetEntindex\x124\n" +
@@ -15116,8 +15252,8 @@ const file_dota_usermessages_proto_rawDesc = "" +
 	"\x06entity\x18\x01 \x01(\rR\x06entity\x12\x12\n" +
 	"\x04snap\x18\x02 \x01(\bR\x04snap\"\xcf\x01\n" +
 	"\x1dCDOTAUserMsg_ShowGenericPopup\x12\x16\n" +
-	"\x06header\x18\x01 \x02(\tR\x06header\x12\x12\n" +
-	"\x04body\x18\x02 \x02(\tR\x04body\x12\x16\n" +
+	"\x06header\x18\x01 \x01(\tR\x06header\x12\x12\n" +
+	"\x04body\x18\x02 \x01(\tR\x04body\x12\x16\n" +
 	"\x06param1\x18\x03 \x01(\tR\x06param1\x12\x16\n" +
 	"\x06param2\x18\x04 \x01(\tR\x06param2\x12\x1f\n" +
 	"\vtint_screen\x18\x05 \x01(\bR\n" +
@@ -15307,7 +15443,7 @@ const file_dota_usermessages_proto_rawDesc = "" +
 	"\alearned\x18\x05 \x01(\bR\alearned\"\"\n" +
 	" CDOTAUserMsg_UpdateQuestProgress\"\x88\x02\n" +
 	"\x18CDOTAUserMsg_QuestStatus\x12\x1b\n" +
-	"\tplayer_id\x18\x01 \x02(\x05R\bplayerId\x12\x19\n" +
+	"\tplayer_id\x18\x01 \x01(\x05R\bplayerId\x12\x19\n" +
 	"\bquest_id\x18\x02 \x01(\rR\aquestId\x12!\n" +
 	"\fchallenge_id\x18\x03 \x01(\rR\vchallengeId\x12\x1a\n" +
 	"\bprogress\x18\x04 \x01(\rR\bprogress\x12\x12\n" +
@@ -15316,22 +15452,22 @@ const file_dota_usermessages_proto_rawDesc = "" +
 	"\rfail_gametime\x18\a \x01(\x02R\ffailGametime\x12&\n" +
 	"\x0fitem_ability_id\x18\b \x01(\x05R\ritemAbilityId\"\x81\x01\n" +
 	"\x1cCDOTAUserMsg_SuggestHeroPick\x12\x1b\n" +
-	"\tplayer_id\x18\x01 \x02(\x05R\bplayerId\x12\x17\n" +
+	"\tplayer_id\x18\x01 \x01(\x05R\bplayerId\x12\x17\n" +
 	"\ahero_id\x18\x02 \x01(\x05R\x06heroId\x12\x10\n" +
 	"\x03ban\x18\x03 \x01(\bR\x03ban\x12\x19\n" +
 	"\bfacet_id\x18\x04 \x01(\rR\afacetId\"X\n" +
 	"\x1cCDOTAUserMsg_SuggestHeroRole\x12\x1b\n" +
-	"\tplayer_id\x18\x01 \x02(\x05R\bplayerId\x12\x1b\n" +
+	"\tplayer_id\x18\x01 \x01(\x05R\bplayerId\x12\x1b\n" +
 	"\thero_role\x18\x02 \x01(\tR\bheroRole\"\xe6\x01\n" +
 	"\x1fCDOTAUserMsg_KillcamDamageTaken\x12\x1b\n" +
-	"\tplayer_id\x18\x01 \x02(\x05R\bplayerId\x12!\n" +
+	"\tplayer_id\x18\x01 \x01(\x05R\bplayerId\x12!\n" +
 	"\fdamage_taken\x18\x02 \x01(\rR\vdamageTaken\x12\x1b\n" +
 	"\titem_type\x18\x03 \x01(\rR\bitemType\x12&\n" +
 	"\x0fitem_ability_id\x18\x04 \x01(\x05R\ritemAbilityId\x12\x1b\n" +
 	"\thero_name\x18\x05 \x01(\tR\bheroName\x12!\n" +
 	"\fdamage_color\x18\x06 \x01(\tR\vdamageColor\"Q\n" +
 	"\x1eCDOTAUserMsg_SelectPenaltyGold\x12\x1b\n" +
-	"\tplayer_id\x18\x01 \x02(\x05R\bplayerId\x12\x12\n" +
+	"\tplayer_id\x18\x01 \x01(\x05R\bplayerId\x12\x12\n" +
 	"\x04cost\x18\x02 \x01(\x11R\x04cost\"\xab\x01\n" +
 	"\x1bCDOTAUserMsg_RollDiceResult\x12\x1b\n" +
 	"\tplayer_id\x18\x01 \x01(\x05R\bplayerId\x12!\n" +
@@ -15387,7 +15523,7 @@ const file_dota_usermessages_proto_rawDesc = "" +
 	"\tplayer_id\x18\x01 \x01(\x05R\bplayerId\x12\x19\n" +
 	"\btip_text\x18\x02 \x01(\tR\atipText\"\x8e\x01\n" +
 	"\x1dCDOTAUserMsg_ReplaceQueryUnit\x12\x1b\n" +
-	"\tplayer_id\x18\x01 \x02(\x05R\bplayerId\x12'\n" +
+	"\tplayer_id\x18\x01 \x01(\x05R\bplayerId\x12'\n" +
 	"\x0fsource_entindex\x18\x02 \x01(\x05R\x0esourceEntindex\x12'\n" +
 	"\x0ftarget_entindex\x18\x03 \x01(\x05R\x0etargetEntindex\"z\n" +
 	"\x1aCDOTAUserMsg_ESArcanaCombo\x12\x18\n" +
@@ -15429,9 +15565,9 @@ const file_dota_usermessages_proto_rawDesc = "" +
 	"\x1fCDOTAUserMsg_QueuedOrderRemoved\x12.\n" +
 	"\x13unit_order_sequence\x18\x01 \x03(\rR\x11unitOrderSequence\"\xac\x02\n" +
 	"\x1bCDOTAUserMsg_DebugChallenge\x12%\n" +
-	"\x0echallenge_type\x18\x01 \x02(\rR\rchallengeType\x12,\n" +
-	"\x12challenge_query_id\x18\x02 \x02(\rR\x10challengeQueryId\x12\x19\n" +
-	"\bevent_id\x18\x03 \x02(\rR\aeventId\x12\x1f\n" +
+	"\x0echallenge_type\x18\x01 \x01(\rR\rchallengeType\x12,\n" +
+	"\x12challenge_query_id\x18\x02 \x01(\rR\x10challengeQueryId\x12\x19\n" +
+	"\bevent_id\x18\x03 \x01(\rR\aeventId\x12\x1f\n" +
 	"\vinstance_id\x18\x04 \x01(\rR\n" +
 	"instanceId\x12&\n" +
 	"\x0fchallenge_var_0\x18\x05 \x01(\rR\rchallengeVar0\x12&\n" +
@@ -15572,11 +15708,11 @@ const file_dota_usermessages_proto_rawDesc = "" +
 	"\x1aCDOTAUserMsg_DuelRequested\x12.\n" +
 	"\x13player_id_requestor\x18\x01 \x01(\x05R\x11playerIdRequestor\"\xe0\x01\n" +
 	"4CDOTAUserMsg_MuertaReleaseEvent_AssignedTargetKilled\x12(\n" +
-	"\x10player_id_killer\x18\x01 \x02(\x05R\x0eplayerIdKiller\x12(\n" +
-	"\x10player_id_target\x18\x02 \x02(\x05R\x0eplayerIdTarget\x12\x16\n" +
-	"\x06points\x18\x03 \x02(\x05R\x06points\x12!\n" +
-	"\fpoints_total\x18\x04 \x02(\x05R\vpointsTotal\x12\x19\n" +
-	"\blast_hit\x18\x05 \x02(\bR\alastHit\"t\n" +
+	"\x10player_id_killer\x18\x01 \x01(\x05R\x0eplayerIdKiller\x12(\n" +
+	"\x10player_id_target\x18\x02 \x01(\x05R\x0eplayerIdTarget\x12\x16\n" +
+	"\x06points\x18\x03 \x01(\x05R\x06points\x12!\n" +
+	"\fpoints_total\x18\x04 \x01(\x05R\vpointsTotal\x12\x19\n" +
+	"\blast_hit\x18\x05 \x01(\bR\alastHit\"t\n" +
 	"#CDOTAUserMsg_PlayerDraftSuggestPick\x12\x1b\n" +
 	"\tplayer_id\x18\x01 \x01(\x05R\bplayerId\x120\n" +
 	"\x14suggestion_player_id\x18\x02 \x01(\x05R\x12suggestionPlayerId\"\x88\x01\n" +
@@ -15634,7 +15770,16 @@ const file_dota_usermessages_proto_rawDesc = "" +
 	"\x06Failed\x10\x02\"m\n" +
 	"\x17CDOTAUserMsg_KillEffect\x12(\n" +
 	"\x10victim_ent_index\x18\x01 \x01(\x05R\x0evictimEntIndex\x12(\n" +
-	"\x10killer_player_id\x18\x02 \x01(\x05R\x0ekillerPlayerId*\xbf(\n" +
+	"\x10killer_player_id\x18\x02 \x01(\x05R\x0ekillerPlayerId\"\x80\x02\n" +
+	"\x15CDOTAUserMsg_GiveItem\x12&\n" +
+	"\x0fgiver_ent_index\x18\x01 \x01(\rR\rgiverEntIndex\x12,\n" +
+	"\x12receiver_ent_index\x18\x02 \x01(\rR\x10receiverEntIndex\x12$\n" +
+	"\x0eitem_ent_index\x18\x03 \x01(\rR\fitemEntIndex\x12H\n" +
+	"\vgive_status\x18\x04 \x01(\x0e2'.dota.CDOTAUserMsg_GiveItem.EGiveStatusR\n" +
+	"giveStatus\"!\n" +
+	"\vEGiveStatus\x12\t\n" +
+	"\x05Start\x10\x00\x12\a\n" +
+	"\x03End\x10\x01*\xd6(\n" +
 	"\x11EDotaUserMessages\x12\x1f\n" +
 	"\x1aDOTA_UM_AddUnitToSelection\x10\xd0\x03\x12\x18\n" +
 	"\x13DOTA_UM_AIDebugLine\x10\xd1\x03\x12\x16\n" +
@@ -15803,7 +15948,8 @@ const file_dota_usermessages_proto_rawDesc = "" +
 	",DOTA_UM_MonsterHunter_InvestigationGameState\x10\xf8\x04\x12$\n" +
 	"\x1fDOTA_UM_MonsterHunter_HuntAlert\x10\xf9\x04\x12\x1b\n" +
 	"\x16DOTA_UM_TormentorTimer\x10\xfa\x04\x12\x17\n" +
-	"\x12DOTA_UM_KillEffect\x10\xfb\x04*\xb0 \n" +
+	"\x12DOTA_UM_KillEffect\x10\xfb\x04\x12\x15\n" +
+	"\x10DOTA_UM_GiveItem\x10\xfc\x04*\xf8 \n" +
 	"\x11DOTA_CHAT_MESSAGE\x12!\n" +
 	"\x14CHAT_MESSAGE_INVALID\x10\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\x12\x1a\n" +
 	"\x16CHAT_MESSAGE_HERO_KILL\x10\x00\x12\x1a\n" +
@@ -15920,7 +16066,9 @@ const file_dota_usermessages_proto_rawDesc = "" +
 	"&CHAT_MESSAGE_ALCHEMIST_GRANTED_SCEPTER\x10x\x12\"\n" +
 	"\x1eCHAT_MESSAGE_PROTECTOR_SPAWNED\x10y\x12\x1c\n" +
 	"\x18CHAT_MESSAGE_CRAFTING_XP\x10z\x12\x1c\n" +
-	"\x18CHAT_MESSAGE_ROSHAN_ROAR\x10{*\xb2\x01\n" +
+	"\x18CHAT_MESSAGE_ROSHAN_ROAR\x10{\x12%\n" +
+	"!CHAT_MESSAGE_STONE_OF_RECALL_USED\x10|\x12\x1f\n" +
+	"\x1bCHAT_MESSAGE_DEITY_BLESSING\x10}*\xb2\x01\n" +
 	"\x1dDOTA_NO_BATTLE_POINTS_REASONS\x12%\n" +
 	"!NO_BATTLE_POINTS_WRONG_LOBBY_TYPE\x10\x01\x12\"\n" +
 	"\x1eNO_BATTLE_POINTS_PRACTICE_BOTS\x10\x02\x12#\n" +
@@ -15964,7 +16112,7 @@ const file_dota_usermessages_proto_rawDesc = "" +
 	"\x18DOTA_UNIT_REMOVE_GESTURE\x10\x03\x12!\n" +
 	"\x1dDOTA_UNIT_REMOVE_ALL_GESTURES\x10\x04\x12\x1a\n" +
 	"\x16DOTA_UNIT_FADE_GESTURE\x10\x06\x12%\n" +
-	"!DOTA_UNIT_SPEECH_CLIENTSIDE_RULES\x10\a*\xf9\x05\n" +
+	"!DOTA_UNIT_SPEECH_CLIENTSIDE_RULES\x10\a*\x9f\x06\n" +
 	"\x13DOTA_OVERHEAD_ALERT\x12\x17\n" +
 	"\x13OVERHEAD_ALERT_GOLD\x10\x00\x12\x17\n" +
 	"\x13OVERHEAD_ALERT_DENY\x10\x01\x12\x1b\n" +
@@ -15991,7 +16139,8 @@ const file_dota_usermessages_proto_rawDesc = "" +
 	"\x1aOVERHEAD_ALERT_DEADLY_BLOW\x10\x18\x12\x1d\n" +
 	"\x19OVERHEAD_ALERT_FORCE_MISS\x10\x19\x12\x18\n" +
 	"\x14OVERHEAD_ALERT_AEGIS\x10\x1a\x12\x19\n" +
-	"\x15OVERHEAD_ALERT_DISPEL\x10\x1b*k\n" +
+	"\x15OVERHEAD_ALERT_DISPEL\x10\x1b\x12$\n" +
+	" OVERHEAD_ALERT_BONUS_PURE_DAMAGE\x10\x1c*k\n" +
 	"\x11DOTA_ROSHAN_PHASE\x12\x17\n" +
 	"\x13k_SRSP_ROSHAN_ALIVE\x10\x00\x12\x1c\n" +
 	"\x18k_SRSP_ROSHAN_BASE_TIMER\x10\x01\x12\x1f\n" +
@@ -16082,8 +16231,8 @@ func file_dota_usermessages_proto_rawDescGZIP() []byte {
 	return file_dota_usermessages_proto_rawDescData
 }
 
-var file_dota_usermessages_proto_enumTypes = make([]protoimpl.EnumInfo, 19)
-var file_dota_usermessages_proto_msgTypes = make([]protoimpl.MessageInfo, 190)
+var file_dota_usermessages_proto_enumTypes = make([]protoimpl.EnumInfo, 20)
+var file_dota_usermessages_proto_msgTypes = make([]protoimpl.MessageInfo, 191)
 var file_dota_usermessages_proto_goTypes = []any{
 	(EDotaUserMessages)(0),                                                    // 0: dota.EDotaUserMessages
 	(DOTA_CHAT_MESSAGE)(0),                                                    // 1: dota.DOTA_CHAT_MESSAGE
@@ -16104,299 +16253,302 @@ var file_dota_usermessages_proto_goTypes = []any{
 	(CDOTAUserMsg_MadstoneAlert_EMadstoneAlertType)(0),                        // 16: dota.CDOTAUserMsg_MadstoneAlert.EMadstoneAlertType
 	(CDOTAUserMsg_MonsterHunter_HuntAlert_EHuntAlertType)(0),                  // 17: dota.CDOTAUserMsg_MonsterHunter_HuntAlert.EHuntAlertType
 	(CDOTAUserMsg_MonsterHunter_HuntAlert_EHuntStatusType)(0),                 // 18: dota.CDOTAUserMsg_MonsterHunter_HuntAlert.EHuntStatusType
-	(*CDOTAUserMsg_AIDebugLine)(nil),                                          // 19: dota.CDOTAUserMsg_AIDebugLine
-	(*CDOTAUserMsg_Ping)(nil),                                                 // 20: dota.CDOTAUserMsg_Ping
-	(*CDOTAUserMsg_SwapVerify)(nil),                                           // 21: dota.CDOTAUserMsg_SwapVerify
-	(*CDOTAUserMsg_ChatEvent)(nil),                                            // 22: dota.CDOTAUserMsg_ChatEvent
-	(*CDOTAUserMsg_BotChat)(nil),                                              // 23: dota.CDOTAUserMsg_BotChat
-	(*CDOTAUserMsg_CombatHeroPositions)(nil),                                  // 24: dota.CDOTAUserMsg_CombatHeroPositions
-	(*CDOTAUserMsg_CombatLogBulkData)(nil),                                    // 25: dota.CDOTAUserMsg_CombatLogBulkData
-	(*CDOTAUserMsg_ProjectileParticleCPData)(nil),                             // 26: dota.CDOTAUserMsg_ProjectileParticleCPData
-	(*CDOTAUserMsg_UpdateLinearProjectileCPData)(nil),                         // 27: dota.CDOTAUserMsg_UpdateLinearProjectileCPData
-	(*CDOTAUserMsg_MiniKillCamInfo)(nil),                                      // 28: dota.CDOTAUserMsg_MiniKillCamInfo
-	(*CDOTAUserMsg_GlobalLightColor)(nil),                                     // 29: dota.CDOTAUserMsg_GlobalLightColor
-	(*CDOTAUserMsg_GlobalLightDirection)(nil),                                 // 30: dota.CDOTAUserMsg_GlobalLightDirection
-	(*CDOTAUserMsg_LocationPing)(nil),                                         // 31: dota.CDOTAUserMsg_LocationPing
-	(*CDOTAUserMsg_PingConfirmation)(nil),                                     // 32: dota.CDOTAUserMsg_PingConfirmation
-	(*CDOTAUserMsg_ItemAlert)(nil),                                            // 33: dota.CDOTAUserMsg_ItemAlert
-	(*CDOTAUserMsg_EnemyItemAlert)(nil),                                       // 34: dota.CDOTAUserMsg_EnemyItemAlert
-	(*CDOTAUserMsg_ModifierAlert)(nil),                                        // 35: dota.CDOTAUserMsg_ModifierAlert
-	(*CDOTAUserMsg_HPManaAlert)(nil),                                          // 36: dota.CDOTAUserMsg_HPManaAlert
-	(*CDOTAUserMsg_NeutralCampAlert)(nil),                                     // 37: dota.CDOTAUserMsg_NeutralCampAlert
-	(*CDOTAUserMsg_GlyphAlert)(nil),                                           // 38: dota.CDOTAUserMsg_GlyphAlert
-	(*CDOTAUserMsg_RadarAlert)(nil),                                           // 39: dota.CDOTAUserMsg_RadarAlert
-	(*CDOTAUserMsg_RoshanTimer)(nil),                                          // 40: dota.CDOTAUserMsg_RoshanTimer
-	(*CDOTAUserMsg_TormentorTimer)(nil),                                       // 41: dota.CDOTAUserMsg_TormentorTimer
-	(*CDOTAUserMsg_WillPurchaseAlert)(nil),                                    // 42: dota.CDOTAUserMsg_WillPurchaseAlert
-	(*CDOTAUserMsg_EmptyTeleportAlert)(nil),                                   // 43: dota.CDOTAUserMsg_EmptyTeleportAlert
-	(*CDOTAUserMsg_MarsArenaOfBloodAttack)(nil),                               // 44: dota.CDOTAUserMsg_MarsArenaOfBloodAttack
-	(*CDOTAUserMsg_BuyBackStateAlert)(nil),                                    // 45: dota.CDOTAUserMsg_BuyBackStateAlert
-	(*CDOTAUserMsg_QuickBuyAlert)(nil),                                        // 46: dota.CDOTAUserMsg_QuickBuyAlert
-	(*CDOTAUserMsg_CourierKilledAlert)(nil),                                   // 47: dota.CDOTAUserMsg_CourierKilledAlert
-	(*CDOTAUserMsg_MinimapEvent)(nil),                                         // 48: dota.CDOTAUserMsg_MinimapEvent
-	(*CDOTAUserMsg_MapLine)(nil),                                              // 49: dota.CDOTAUserMsg_MapLine
-	(*CDOTAUserMsg_MinimapDebugPoint)(nil),                                    // 50: dota.CDOTAUserMsg_MinimapDebugPoint
-	(*CDOTAUserMsg_CreateLinearProjectile)(nil),                               // 51: dota.CDOTAUserMsg_CreateLinearProjectile
-	(*CDOTAUserMsg_DestroyLinearProjectile)(nil),                              // 52: dota.CDOTAUserMsg_DestroyLinearProjectile
-	(*CDOTAUserMsg_DodgeTrackingProjectiles)(nil),                             // 53: dota.CDOTAUserMsg_DodgeTrackingProjectiles
-	(*CDOTAUserMsg_SpectatorPlayerClick)(nil),                                 // 54: dota.CDOTAUserMsg_SpectatorPlayerClick
-	(*CDOTAUserMsg_SpectatorPlayerUnitOrders)(nil),                            // 55: dota.CDOTAUserMsg_SpectatorPlayerUnitOrders
-	(*CDOTAUserMsg_NevermoreRequiem)(nil),                                     // 56: dota.CDOTAUserMsg_NevermoreRequiem
-	(*CDOTAUserMsg_InvalidCommand)(nil),                                       // 57: dota.CDOTAUserMsg_InvalidCommand
-	(*CDOTAUserMsg_HudError)(nil),                                             // 58: dota.CDOTAUserMsg_HudError
-	(*CDOTAUserMsg_SharedCooldown)(nil),                                       // 59: dota.CDOTAUserMsg_SharedCooldown
-	(*CDOTAUserMsg_SetNextAutobuyItem)(nil),                                   // 60: dota.CDOTAUserMsg_SetNextAutobuyItem
-	(*CDOTAUserMsg_HalloweenDrops)(nil),                                       // 61: dota.CDOTAUserMsg_HalloweenDrops
-	(*CDOTAUserMsg_CourierLeftFountainAlert)(nil),                             // 62: dota.CDOTAUserMsg_CourierLeftFountainAlert
-	(*CDOTAResponseQuerySerialized)(nil),                                      // 63: dota.CDOTAResponseQuerySerialized
-	(*CDOTASpeechMatchOnClient)(nil),                                          // 64: dota.CDOTASpeechMatchOnClient
-	(*CDOTAUserMsg_UnitEvent)(nil),                                            // 65: dota.CDOTAUserMsg_UnitEvent
-	(*CDOTAUserMsg_ItemPurchased)(nil),                                        // 66: dota.CDOTAUserMsg_ItemPurchased
-	(*CDOTAUserMsg_ItemSold)(nil),                                             // 67: dota.CDOTAUserMsg_ItemSold
-	(*CDOTAUserMsg_ItemFound)(nil),                                            // 68: dota.CDOTAUserMsg_ItemFound
-	(*CDOTAUserMsg_OverheadEvent)(nil),                                        // 69: dota.CDOTAUserMsg_OverheadEvent
-	(*CDOTAUserMsg_TutorialTipInfo)(nil),                                      // 70: dota.CDOTAUserMsg_TutorialTipInfo
-	(*CDOTAUserMsg_TutorialFinish)(nil),                                       // 71: dota.CDOTAUserMsg_TutorialFinish
-	(*CDOTAUserMsg_TutorialMinimapPosition)(nil),                              // 72: dota.CDOTAUserMsg_TutorialMinimapPosition
-	(*CDOTAUserMsg_SendGenericToolTip)(nil),                                   // 73: dota.CDOTAUserMsg_SendGenericToolTip
-	(*CDOTAUserMsg_WorldLine)(nil),                                            // 74: dota.CDOTAUserMsg_WorldLine
-	(*CDOTAUserMsg_ChatWheel)(nil),                                            // 75: dota.CDOTAUserMsg_ChatWheel
-	(*CDOTAUserMsg_ReceivedXmasGift)(nil),                                     // 76: dota.CDOTAUserMsg_ReceivedXmasGift
-	(*CDOTAUserMsg_ShowSurvey)(nil),                                           // 77: dota.CDOTAUserMsg_ShowSurvey
-	(*CDOTAUserMsg_UpdateSharedContent)(nil),                                  // 78: dota.CDOTAUserMsg_UpdateSharedContent
-	(*CDOTAUserMsg_TutorialRequestExp)(nil),                                   // 79: dota.CDOTAUserMsg_TutorialRequestExp
-	(*CDOTAUserMsg_TutorialFade)(nil),                                         // 80: dota.CDOTAUserMsg_TutorialFade
-	(*CDOTAUserMsg_TutorialPingMinimap)(nil),                                  // 81: dota.CDOTAUserMsg_TutorialPingMinimap
-	(*CDOTAUserMsg_GamerulesStateChanged)(nil),                                // 82: dota.CDOTAUserMsg_GamerulesStateChanged
-	(*CDOTAUserMsg_AddQuestLogEntry)(nil),                                     // 83: dota.CDOTAUserMsg_AddQuestLogEntry
-	(*CDOTAUserMsg_SendStatPopup)(nil),                                        // 84: dota.CDOTAUserMsg_SendStatPopup
-	(*CDOTAUserMsg_DismissAllStatPopups)(nil),                                 // 85: dota.CDOTAUserMsg_DismissAllStatPopups
-	(*CDOTAUserMsg_SendRoshanSpectatorPhase)(nil),                             // 86: dota.CDOTAUserMsg_SendRoshanSpectatorPhase
-	(*CDOTAUserMsg_SendRoshanPopup)(nil),                                      // 87: dota.CDOTAUserMsg_SendRoshanPopup
-	(*CDOTAUserMsg_SendFinalGold)(nil),                                        // 88: dota.CDOTAUserMsg_SendFinalGold
-	(*CDOTAUserMsg_CustomMsg)(nil),                                            // 89: dota.CDOTAUserMsg_CustomMsg
-	(*CDOTAUserMsg_CoachHUDPing)(nil),                                         // 90: dota.CDOTAUserMsg_CoachHUDPing
-	(*CDOTAUserMsg_ClientLoadGridNav)(nil),                                    // 91: dota.CDOTAUserMsg_ClientLoadGridNav
-	(*CDOTAUserMsg_TE_Projectile)(nil),                                        // 92: dota.CDOTAUserMsg_TE_Projectile
-	(*CDOTAUserMsg_TE_ProjectileLoc)(nil),                                     // 93: dota.CDOTAUserMsg_TE_ProjectileLoc
-	(*CDOTAUserMsg_TE_DestroyProjectile)(nil),                                 // 94: dota.CDOTAUserMsg_TE_DestroyProjectile
-	(*CDOTAUserMsg_TE_DotaBloodImpact)(nil),                                   // 95: dota.CDOTAUserMsg_TE_DotaBloodImpact
-	(*CDOTAUserMsg_AbilityPing)(nil),                                          // 96: dota.CDOTAUserMsg_AbilityPing
-	(*CDOTAUserMsg_TE_UnitAnimation)(nil),                                     // 97: dota.CDOTAUserMsg_TE_UnitAnimation
-	(*CDOTAUserMsg_TE_UnitAnimationEnd)(nil),                                  // 98: dota.CDOTAUserMsg_TE_UnitAnimationEnd
-	(*CDOTAUserMsg_ShowGenericPopup)(nil),                                     // 99: dota.CDOTAUserMsg_ShowGenericPopup
-	(*CDOTAUserMsg_VoteStart)(nil),                                            // 100: dota.CDOTAUserMsg_VoteStart
-	(*CDOTAUserMsg_VoteUpdate)(nil),                                           // 101: dota.CDOTAUserMsg_VoteUpdate
-	(*CDOTAUserMsg_VoteEnd)(nil),                                              // 102: dota.CDOTAUserMsg_VoteEnd
-	(*CDOTAUserMsg_BoosterStatePlayer)(nil),                                   // 103: dota.CDOTAUserMsg_BoosterStatePlayer
-	(*CDOTAUserMsg_BoosterState)(nil),                                         // 104: dota.CDOTAUserMsg_BoosterState
-	(*CDOTAUserMsg_AbilitySteal)(nil),                                         // 105: dota.CDOTAUserMsg_AbilitySteal
-	(*CDOTAUserMsg_StatsHeroLookup)(nil),                                      // 106: dota.CDOTAUserMsg_StatsHeroLookup
-	(*CDOTAUserMsg_StatsHeroPositionInfo)(nil),                                // 107: dota.CDOTAUserMsg_StatsHeroPositionInfo
-	(*CDOTAUserMsg_StatsHeroMinuteDetails)(nil),                               // 108: dota.CDOTAUserMsg_StatsHeroMinuteDetails
-	(*CDOTAUserMsg_StatsTeamMinuteDetails)(nil),                               // 109: dota.CDOTAUserMsg_StatsTeamMinuteDetails
-	(*CDOTAUserMsg_StatsPlayerKillShare)(nil),                                 // 110: dota.CDOTAUserMsg_StatsPlayerKillShare
-	(*CDOTAUserMsg_StatsKillDetails)(nil),                                     // 111: dota.CDOTAUserMsg_StatsKillDetails
-	(*CDOTAUserMsg_StatsMatchDetails)(nil),                                    // 112: dota.CDOTAUserMsg_StatsMatchDetails
-	(*CDOTAUserMsg_MiniTaunt)(nil),                                            // 113: dota.CDOTAUserMsg_MiniTaunt
-	(*CDOTAUserMsg_SpeechBubble)(nil),                                         // 114: dota.CDOTAUserMsg_SpeechBubble
-	(*CDOTAUserMsg_CustomHeaderMessage)(nil),                                  // 115: dota.CDOTAUserMsg_CustomHeaderMessage
-	(*CMsgHeroAbilityStat)(nil),                                               // 116: dota.CMsgHeroAbilityStat
-	(*CMsgCombatAnalyzerPlayerStat)(nil),                                      // 117: dota.CMsgCombatAnalyzerPlayerStat
-	(*CMsgCombatAnalyzerStats)(nil),                                           // 118: dota.CMsgCombatAnalyzerStats
-	(*CDOTAUserMsg_BeastChat)(nil),                                            // 119: dota.CDOTAUserMsg_BeastChat
-	(*CDOTAUserMsg_CustomHudElement_Create)(nil),                              // 120: dota.CDOTAUserMsg_CustomHudElement_Create
-	(*CDOTAUserMsg_CustomHudElement_Modify)(nil),                              // 121: dota.CDOTAUserMsg_CustomHudElement_Modify
-	(*CDOTAUserMsg_CustomHudElement_Destroy)(nil),                             // 122: dota.CDOTAUserMsg_CustomHudElement_Destroy
-	(*CDOTAUserMsg_CompendiumStatePlayer)(nil),                                // 123: dota.CDOTAUserMsg_CompendiumStatePlayer
-	(*CDOTAUserMsg_CompendiumState)(nil),                                      // 124: dota.CDOTAUserMsg_CompendiumState
-	(*CDOTAUserMsg_ProjectionAbility)(nil),                                    // 125: dota.CDOTAUserMsg_ProjectionAbility
-	(*CDOTAUserMsg_ProjectionEvent)(nil),                                      // 126: dota.CDOTAUserMsg_ProjectionEvent
-	(*CDOTAUserMsg_XPAlert)(nil),                                              // 127: dota.CDOTAUserMsg_XPAlert
-	(*CDOTAUserMsg_TalentTreeAlert)(nil),                                      // 128: dota.CDOTAUserMsg_TalentTreeAlert
-	(*CDOTAUserMsg_UpdateQuestProgress)(nil),                                  // 129: dota.CDOTAUserMsg_UpdateQuestProgress
-	(*CDOTAUserMsg_QuestStatus)(nil),                                          // 130: dota.CDOTAUserMsg_QuestStatus
-	(*CDOTAUserMsg_SuggestHeroPick)(nil),                                      // 131: dota.CDOTAUserMsg_SuggestHeroPick
-	(*CDOTAUserMsg_SuggestHeroRole)(nil),                                      // 132: dota.CDOTAUserMsg_SuggestHeroRole
-	(*CDOTAUserMsg_KillcamDamageTaken)(nil),                                   // 133: dota.CDOTAUserMsg_KillcamDamageTaken
-	(*CDOTAUserMsg_SelectPenaltyGold)(nil),                                    // 134: dota.CDOTAUserMsg_SelectPenaltyGold
-	(*CDOTAUserMsg_RollDiceResult)(nil),                                       // 135: dota.CDOTAUserMsg_RollDiceResult
-	(*CDOTAUserMsg_FlipCoinResult)(nil),                                       // 136: dota.CDOTAUserMsg_FlipCoinResult
-	(*CDOTAUserMessage_RequestItemSuggestions)(nil),                           // 137: dota.CDOTAUserMessage_RequestItemSuggestions
-	(*CDOTAUserMessage_TeamCaptainChanged)(nil),                               // 138: dota.CDOTAUserMessage_TeamCaptainChanged
-	(*CDOTAUserMsg_ChatWheelCooldown)(nil),                                    // 139: dota.CDOTAUserMsg_ChatWheelCooldown
-	(*CDOTAUserMsg_HeroRelicProgress)(nil),                                    // 140: dota.CDOTAUserMsg_HeroRelicProgress
-	(*CDOTAUserMsg_AbilityDraftRequestAbility)(nil),                           // 141: dota.CDOTAUserMsg_AbilityDraftRequestAbility
-	(*CDOTAUserMsg_DamageReport)(nil),                                         // 142: dota.CDOTAUserMsg_DamageReport
-	(*CDOTAUserMsg_SalutePlayer)(nil),                                         // 143: dota.CDOTAUserMsg_SalutePlayer
-	(*CDOTAUserMsg_GiftPlayer)(nil),                                           // 144: dota.CDOTAUserMsg_GiftPlayer
-	(*CDOTAUserMsg_TipAlert)(nil),                                             // 145: dota.CDOTAUserMsg_TipAlert
-	(*CDOTAUserMsg_ReplaceQueryUnit)(nil),                                     // 146: dota.CDOTAUserMsg_ReplaceQueryUnit
-	(*CDOTAUserMsg_ESArcanaCombo)(nil),                                        // 147: dota.CDOTAUserMsg_ESArcanaCombo
-	(*CDOTAUserMsg_ESArcanaComboSummary)(nil),                                 // 148: dota.CDOTAUserMsg_ESArcanaComboSummary
-	(*CDOTAUserMsg_OMArcanaCombo)(nil),                                        // 149: dota.CDOTAUserMsg_OMArcanaCombo
-	(*CDOTAUserMsg_HighFiveCompleted)(nil),                                    // 150: dota.CDOTAUserMsg_HighFiveCompleted
-	(*CDOTAUserMsg_HighFiveLeftHanging)(nil),                                  // 151: dota.CDOTAUserMsg_HighFiveLeftHanging
-	(*CDOTAUserMsg_ShovelUnearth)(nil),                                        // 152: dota.CDOTAUserMsg_ShovelUnearth
-	(*CDOTAUserMsg_AllStarEvent)(nil),                                         // 153: dota.CDOTAUserMsg_AllStarEvent
-	(*CDOTAUserMsg_QueuedOrderRemoved)(nil),                                   // 154: dota.CDOTAUserMsg_QueuedOrderRemoved
-	(*CDOTAUserMsg_DebugChallenge)(nil),                                       // 155: dota.CDOTAUserMsg_DebugChallenge
-	(*CDOTAUserMsg_FoundNeutralItem)(nil),                                     // 156: dota.CDOTAUserMsg_FoundNeutralItem
-	(*CDOTAUserMsg_OutpostCaptured)(nil),                                      // 157: dota.CDOTAUserMsg_OutpostCaptured
-	(*CDOTAUserMsg_OutpostGrantedXP)(nil),                                     // 158: dota.CDOTAUserMsg_OutpostGrantedXP
-	(*CDOTAUserMsg_MoveCameraToUnit)(nil),                                     // 159: dota.CDOTAUserMsg_MoveCameraToUnit
-	(*CDOTAUserMsg_PauseMinigameData)(nil),                                    // 160: dota.CDOTAUserMsg_PauseMinigameData
-	(*CDOTAUserMsg_VersusScene_PlayerBehavior)(nil),                           // 161: dota.CDOTAUserMsg_VersusScene_PlayerBehavior
-	(*CDOTAUserMsg_QoP_ArcanaSummary)(nil),                                    // 162: dota.CDOTAUserMsg_QoP_ArcanaSummary
-	(*CDOTAUserMsg_HotPotato_Created)(nil),                                    // 163: dota.CDOTAUserMsg_HotPotato_Created
-	(*CDOTAUserMsg_HotPotato_Exploded)(nil),                                   // 164: dota.CDOTAUserMsg_HotPotato_Exploded
-	(*CDOTAUserMsg_WK_Arcana_Progress)(nil),                                   // 165: dota.CDOTAUserMsg_WK_Arcana_Progress
-	(*CDOTAUserMsg_GuildChallenge_Progress)(nil),                              // 166: dota.CDOTAUserMsg_GuildChallenge_Progress
-	(*CDOTAUserMsg_WRArcanaProgress)(nil),                                     // 167: dota.CDOTAUserMsg_WRArcanaProgress
-	(*CDOTAUserMsg_WRArcanaSummary)(nil),                                      // 168: dota.CDOTAUserMsg_WRArcanaSummary
-	(*CDOTAUserMsg_EmptyItemSlotAlert)(nil),                                   // 169: dota.CDOTAUserMsg_EmptyItemSlotAlert
-	(*CDOTAUserMsg_AghsStatusAlert)(nil),                                      // 170: dota.CDOTAUserMsg_AghsStatusAlert
-	(*CDOTAUserMsg_MutedPlayers)(nil),                                         // 171: dota.CDOTAUserMsg_MutedPlayers
-	(*CDOTAUserMsg_ContextualTip)(nil),                                        // 172: dota.CDOTAUserMsg_ContextualTip
-	(*CDOTAUserMsg_ChatMessage)(nil),                                          // 173: dota.CDOTAUserMsg_ChatMessage
-	(*CDOTAUserMsg_RockPaperScissorsStarted)(nil),                             // 174: dota.CDOTAUserMsg_RockPaperScissorsStarted
-	(*CDOTAUserMsg_RockPaperScissorsFinished)(nil),                            // 175: dota.CDOTAUserMsg_RockPaperScissorsFinished
-	(*CDOTAUserMsg_DuelOpponentKilled)(nil),                                   // 176: dota.CDOTAUserMsg_DuelOpponentKilled
-	(*CDOTAUserMsg_DuelAccepted)(nil),                                         // 177: dota.CDOTAUserMsg_DuelAccepted
-	(*CDOTAUserMsg_DuelRequested)(nil),                                        // 178: dota.CDOTAUserMsg_DuelRequested
-	(*CDOTAUserMsg_MuertaReleaseEvent_AssignedTargetKilled)(nil),              // 179: dota.CDOTAUserMsg_MuertaReleaseEvent_AssignedTargetKilled
-	(*CDOTAUserMsg_PlayerDraftSuggestPick)(nil),                               // 180: dota.CDOTAUserMsg_PlayerDraftSuggestPick
-	(*CDOTAUserMsg_PlayerDraftPick)(nil),                                      // 181: dota.CDOTAUserMsg_PlayerDraftPick
-	(*CDOTAUserMsg_FacetPing)(nil),                                            // 182: dota.CDOTAUserMsg_FacetPing
-	(*CDOTAUserMsg_InnatePing)(nil),                                           // 183: dota.CDOTAUserMsg_InnatePing
-	(*CDOTAUserMsg_NeutralCraftAvailable)(nil),                                // 184: dota.CDOTAUserMsg_NeutralCraftAvailable
-	(*CDOTAUserMsg_TimerAlert)(nil),                                           // 185: dota.CDOTAUserMsg_TimerAlert
-	(*CDOTAUserMsg_MadstoneAlert)(nil),                                        // 186: dota.CDOTAUserMsg_MadstoneAlert
-	(*CDOTAUserMsg_MonsterHunter_InvestigationsAvailable)(nil),                // 187: dota.CDOTAUserMsg_MonsterHunter_InvestigationsAvailable
-	(*CDOTAUserMsg_MonsterHunter_InvestigationGameState)(nil),                 // 188: dota.CDOTAUserMsg_MonsterHunter_InvestigationGameState
-	(*CDOTAUserMsg_MonsterHunter_HuntAlert)(nil),                              // 189: dota.CDOTAUserMsg_MonsterHunter_HuntAlert
-	(*CDOTAUserMsg_KillEffect)(nil),                                           // 190: dota.CDOTAUserMsg_KillEffect
-	(*CDOTAUserMsg_MiniKillCamInfo_Attacker)(nil),                             // 191: dota.CDOTAUserMsg_MiniKillCamInfo.Attacker
-	(*CDOTAUserMsg_MiniKillCamInfo_Attacker_Ability)(nil),                     // 192: dota.CDOTAUserMsg_MiniKillCamInfo.Attacker.Ability
-	(*CDOTAUserMsg_CourierKilledAlert_LostItem)(nil),                          // 193: dota.CDOTAUserMsg_CourierKilledAlert.LostItem
-	(*CDOTAResponseQuerySerialized_Fact)(nil),                                 // 194: dota.CDOTAResponseQuerySerialized.Fact
-	(*CDOTAUserMsg_UnitEvent_Interval)(nil),                                   // 195: dota.CDOTAUserMsg_UnitEvent.Interval
-	(*CDOTAUserMsg_UnitEvent_Speech)(nil),                                     // 196: dota.CDOTAUserMsg_UnitEvent.Speech
-	(*CDOTAUserMsg_UnitEvent_SpeechMute)(nil),                                 // 197: dota.CDOTAUserMsg_UnitEvent.SpeechMute
-	(*CDOTAUserMsg_UnitEvent_AddGesture)(nil),                                 // 198: dota.CDOTAUserMsg_UnitEvent.AddGesture
-	(*CDOTAUserMsg_UnitEvent_RemoveGesture)(nil),                              // 199: dota.CDOTAUserMsg_UnitEvent.RemoveGesture
-	(*CDOTAUserMsg_UnitEvent_BloodImpact)(nil),                                // 200: dota.CDOTAUserMsg_UnitEvent.BloodImpact
-	(*CDOTAUserMsg_UnitEvent_FadeGesture)(nil),                                // 201: dota.CDOTAUserMsg_UnitEvent.FadeGesture
-	(*CDOTAUserMsg_StatsHeroPositionInfo_PositionPair)(nil),                   // 202: dota.CDOTAUserMsg_StatsHeroPositionInfo.PositionPair
-	(*CDOTAUserMsg_StatsTeamMinuteDetails_LocationPerformance)(nil),           // 203: dota.CDOTAUserMsg_StatsTeamMinuteDetails.LocationPerformance
-	(*CDOTAUserMsg_StatsMatchDetails_CDOTAUserMsg_StatsFightTeamDetails)(nil), // 204: dota.CDOTAUserMsg_StatsMatchDetails.CDOTAUserMsg_StatsFightTeamDetails
-	(*CDOTAUserMsg_StatsMatchDetails_CDOTAUserMsg_StatsFightDetails)(nil),     // 205: dota.CDOTAUserMsg_StatsMatchDetails.CDOTAUserMsg_StatsFightDetails
-	(*CDOTAUserMsg_AllStarEvent_PlayerScore)(nil),                             // 206: dota.CDOTAUserMsg_AllStarEvent.PlayerScore
-	(*CDOTAUserMsg_PauseMinigameData_DataBit)(nil),                            // 207: dota.CDOTAUserMsg_PauseMinigameData.DataBit
-	(*CDOTAUserMsg_GuildChallenge_Progress_PlayerProgress)(nil),               // 208: dota.CDOTAUserMsg_GuildChallenge_Progress.PlayerProgress
-	(*CMsgVector2D)(nil),                                                      // 209: dota.CMsgVector2D
-	(*CMsgDOTACombatLogEntry)(nil),                                            // 210: dota.CMsgDOTACombatLogEntry
-	(*CMsgVector)(nil),                                                        // 211: dota.CMsgVector
-	(*CDOTAMsg_LocationPing)(nil),                                             // 212: dota.CDOTAMsg_LocationPing
-	(*CDOTAMsg_ItemAlert)(nil),                                                // 213: dota.CDOTAMsg_ItemAlert
-	(*CDOTAMsg_MapLine)(nil),                                                  // 214: dota.CDOTAMsg_MapLine
-	(*CDOTAMsg_WorldLine)(nil),                                                // 215: dota.CDOTAMsg_WorldLine
-	(*CDOTAMsg_SendStatPopup)(nil),                                            // 216: dota.CDOTAMsg_SendStatPopup
-	(*CDOTAMsg_DismissAllStatPopups)(nil),                                     // 217: dota.CDOTAMsg_DismissAllStatPopups
-	(*CDOTAMsg_CoachHUDPing)(nil),                                             // 218: dota.CDOTAMsg_CoachHUDPing
-	(EDOTAVersusScenePlayerBehavior)(0),                                       // 219: dota.EDOTAVersusScenePlayerBehavior
-	(*VersusScene_PlayActivity)(nil),                                          // 220: dota.VersusScene_PlayActivity
-	(*VersusScene_ChatWheel)(nil),                                             // 221: dota.VersusScene_ChatWheel
-	(*VersusScene_PlaybackRate)(nil),                                          // 222: dota.VersusScene_PlaybackRate
-	(ETimerAlertType)(0),                                                      // 223: dota.ETimerAlertType
-	(*CMsgMonsterHunterInvestigation)(nil),                                    // 224: dota.CMsgMonsterHunterInvestigation
-	(*CMsgMonsterHunterInvestigationGameState)(nil),                           // 225: dota.CMsgMonsterHunterInvestigationGameState
+	(CDOTAUserMsg_GiveItem_EGiveStatus)(0),                                    // 19: dota.CDOTAUserMsg_GiveItem.EGiveStatus
+	(*CDOTAUserMsg_AIDebugLine)(nil),                                          // 20: dota.CDOTAUserMsg_AIDebugLine
+	(*CDOTAUserMsg_Ping)(nil),                                                 // 21: dota.CDOTAUserMsg_Ping
+	(*CDOTAUserMsg_SwapVerify)(nil),                                           // 22: dota.CDOTAUserMsg_SwapVerify
+	(*CDOTAUserMsg_ChatEvent)(nil),                                            // 23: dota.CDOTAUserMsg_ChatEvent
+	(*CDOTAUserMsg_BotChat)(nil),                                              // 24: dota.CDOTAUserMsg_BotChat
+	(*CDOTAUserMsg_CombatHeroPositions)(nil),                                  // 25: dota.CDOTAUserMsg_CombatHeroPositions
+	(*CDOTAUserMsg_CombatLogBulkData)(nil),                                    // 26: dota.CDOTAUserMsg_CombatLogBulkData
+	(*CDOTAUserMsg_ProjectileParticleCPData)(nil),                             // 27: dota.CDOTAUserMsg_ProjectileParticleCPData
+	(*CDOTAUserMsg_UpdateLinearProjectileCPData)(nil),                         // 28: dota.CDOTAUserMsg_UpdateLinearProjectileCPData
+	(*CDOTAUserMsg_MiniKillCamInfo)(nil),                                      // 29: dota.CDOTAUserMsg_MiniKillCamInfo
+	(*CDOTAUserMsg_GlobalLightColor)(nil),                                     // 30: dota.CDOTAUserMsg_GlobalLightColor
+	(*CDOTAUserMsg_GlobalLightDirection)(nil),                                 // 31: dota.CDOTAUserMsg_GlobalLightDirection
+	(*CDOTAUserMsg_LocationPing)(nil),                                         // 32: dota.CDOTAUserMsg_LocationPing
+	(*CDOTAUserMsg_PingConfirmation)(nil),                                     // 33: dota.CDOTAUserMsg_PingConfirmation
+	(*CDOTAUserMsg_ItemAlert)(nil),                                            // 34: dota.CDOTAUserMsg_ItemAlert
+	(*CDOTAUserMsg_EnemyItemAlert)(nil),                                       // 35: dota.CDOTAUserMsg_EnemyItemAlert
+	(*CDOTAUserMsg_ModifierAlert)(nil),                                        // 36: dota.CDOTAUserMsg_ModifierAlert
+	(*CDOTAUserMsg_HPManaAlert)(nil),                                          // 37: dota.CDOTAUserMsg_HPManaAlert
+	(*CDOTAUserMsg_NeutralCampAlert)(nil),                                     // 38: dota.CDOTAUserMsg_NeutralCampAlert
+	(*CDOTAUserMsg_GlyphAlert)(nil),                                           // 39: dota.CDOTAUserMsg_GlyphAlert
+	(*CDOTAUserMsg_RadarAlert)(nil),                                           // 40: dota.CDOTAUserMsg_RadarAlert
+	(*CDOTAUserMsg_RoshanTimer)(nil),                                          // 41: dota.CDOTAUserMsg_RoshanTimer
+	(*CDOTAUserMsg_TormentorTimer)(nil),                                       // 42: dota.CDOTAUserMsg_TormentorTimer
+	(*CDOTAUserMsg_WillPurchaseAlert)(nil),                                    // 43: dota.CDOTAUserMsg_WillPurchaseAlert
+	(*CDOTAUserMsg_EmptyTeleportAlert)(nil),                                   // 44: dota.CDOTAUserMsg_EmptyTeleportAlert
+	(*CDOTAUserMsg_MarsArenaOfBloodAttack)(nil),                               // 45: dota.CDOTAUserMsg_MarsArenaOfBloodAttack
+	(*CDOTAUserMsg_BuyBackStateAlert)(nil),                                    // 46: dota.CDOTAUserMsg_BuyBackStateAlert
+	(*CDOTAUserMsg_QuickBuyAlert)(nil),                                        // 47: dota.CDOTAUserMsg_QuickBuyAlert
+	(*CDOTAUserMsg_CourierKilledAlert)(nil),                                   // 48: dota.CDOTAUserMsg_CourierKilledAlert
+	(*CDOTAUserMsg_MinimapEvent)(nil),                                         // 49: dota.CDOTAUserMsg_MinimapEvent
+	(*CDOTAUserMsg_MapLine)(nil),                                              // 50: dota.CDOTAUserMsg_MapLine
+	(*CDOTAUserMsg_MinimapDebugPoint)(nil),                                    // 51: dota.CDOTAUserMsg_MinimapDebugPoint
+	(*CDOTAUserMsg_CreateLinearProjectile)(nil),                               // 52: dota.CDOTAUserMsg_CreateLinearProjectile
+	(*CDOTAUserMsg_DestroyLinearProjectile)(nil),                              // 53: dota.CDOTAUserMsg_DestroyLinearProjectile
+	(*CDOTAUserMsg_DodgeTrackingProjectiles)(nil),                             // 54: dota.CDOTAUserMsg_DodgeTrackingProjectiles
+	(*CDOTAUserMsg_SpectatorPlayerClick)(nil),                                 // 55: dota.CDOTAUserMsg_SpectatorPlayerClick
+	(*CDOTAUserMsg_SpectatorPlayerUnitOrders)(nil),                            // 56: dota.CDOTAUserMsg_SpectatorPlayerUnitOrders
+	(*CDOTAUserMsg_NevermoreRequiem)(nil),                                     // 57: dota.CDOTAUserMsg_NevermoreRequiem
+	(*CDOTAUserMsg_InvalidCommand)(nil),                                       // 58: dota.CDOTAUserMsg_InvalidCommand
+	(*CDOTAUserMsg_HudError)(nil),                                             // 59: dota.CDOTAUserMsg_HudError
+	(*CDOTAUserMsg_SharedCooldown)(nil),                                       // 60: dota.CDOTAUserMsg_SharedCooldown
+	(*CDOTAUserMsg_SetNextAutobuyItem)(nil),                                   // 61: dota.CDOTAUserMsg_SetNextAutobuyItem
+	(*CDOTAUserMsg_HalloweenDrops)(nil),                                       // 62: dota.CDOTAUserMsg_HalloweenDrops
+	(*CDOTAUserMsg_CourierLeftFountainAlert)(nil),                             // 63: dota.CDOTAUserMsg_CourierLeftFountainAlert
+	(*CDOTAResponseQuerySerialized)(nil),                                      // 64: dota.CDOTAResponseQuerySerialized
+	(*CDOTASpeechMatchOnClient)(nil),                                          // 65: dota.CDOTASpeechMatchOnClient
+	(*CDOTAUserMsg_UnitEvent)(nil),                                            // 66: dota.CDOTAUserMsg_UnitEvent
+	(*CDOTAUserMsg_ItemPurchased)(nil),                                        // 67: dota.CDOTAUserMsg_ItemPurchased
+	(*CDOTAUserMsg_ItemSold)(nil),                                             // 68: dota.CDOTAUserMsg_ItemSold
+	(*CDOTAUserMsg_ItemFound)(nil),                                            // 69: dota.CDOTAUserMsg_ItemFound
+	(*CDOTAUserMsg_OverheadEvent)(nil),                                        // 70: dota.CDOTAUserMsg_OverheadEvent
+	(*CDOTAUserMsg_TutorialTipInfo)(nil),                                      // 71: dota.CDOTAUserMsg_TutorialTipInfo
+	(*CDOTAUserMsg_TutorialFinish)(nil),                                       // 72: dota.CDOTAUserMsg_TutorialFinish
+	(*CDOTAUserMsg_TutorialMinimapPosition)(nil),                              // 73: dota.CDOTAUserMsg_TutorialMinimapPosition
+	(*CDOTAUserMsg_SendGenericToolTip)(nil),                                   // 74: dota.CDOTAUserMsg_SendGenericToolTip
+	(*CDOTAUserMsg_WorldLine)(nil),                                            // 75: dota.CDOTAUserMsg_WorldLine
+	(*CDOTAUserMsg_ChatWheel)(nil),                                            // 76: dota.CDOTAUserMsg_ChatWheel
+	(*CDOTAUserMsg_ReceivedXmasGift)(nil),                                     // 77: dota.CDOTAUserMsg_ReceivedXmasGift
+	(*CDOTAUserMsg_ShowSurvey)(nil),                                           // 78: dota.CDOTAUserMsg_ShowSurvey
+	(*CDOTAUserMsg_UpdateSharedContent)(nil),                                  // 79: dota.CDOTAUserMsg_UpdateSharedContent
+	(*CDOTAUserMsg_TutorialRequestExp)(nil),                                   // 80: dota.CDOTAUserMsg_TutorialRequestExp
+	(*CDOTAUserMsg_TutorialFade)(nil),                                         // 81: dota.CDOTAUserMsg_TutorialFade
+	(*CDOTAUserMsg_TutorialPingMinimap)(nil),                                  // 82: dota.CDOTAUserMsg_TutorialPingMinimap
+	(*CDOTAUserMsg_GamerulesStateChanged)(nil),                                // 83: dota.CDOTAUserMsg_GamerulesStateChanged
+	(*CDOTAUserMsg_AddQuestLogEntry)(nil),                                     // 84: dota.CDOTAUserMsg_AddQuestLogEntry
+	(*CDOTAUserMsg_SendStatPopup)(nil),                                        // 85: dota.CDOTAUserMsg_SendStatPopup
+	(*CDOTAUserMsg_DismissAllStatPopups)(nil),                                 // 86: dota.CDOTAUserMsg_DismissAllStatPopups
+	(*CDOTAUserMsg_SendRoshanSpectatorPhase)(nil),                             // 87: dota.CDOTAUserMsg_SendRoshanSpectatorPhase
+	(*CDOTAUserMsg_SendRoshanPopup)(nil),                                      // 88: dota.CDOTAUserMsg_SendRoshanPopup
+	(*CDOTAUserMsg_SendFinalGold)(nil),                                        // 89: dota.CDOTAUserMsg_SendFinalGold
+	(*CDOTAUserMsg_CustomMsg)(nil),                                            // 90: dota.CDOTAUserMsg_CustomMsg
+	(*CDOTAUserMsg_CoachHUDPing)(nil),                                         // 91: dota.CDOTAUserMsg_CoachHUDPing
+	(*CDOTAUserMsg_ClientLoadGridNav)(nil),                                    // 92: dota.CDOTAUserMsg_ClientLoadGridNav
+	(*CDOTAUserMsg_TE_Projectile)(nil),                                        // 93: dota.CDOTAUserMsg_TE_Projectile
+	(*CDOTAUserMsg_TE_ProjectileLoc)(nil),                                     // 94: dota.CDOTAUserMsg_TE_ProjectileLoc
+	(*CDOTAUserMsg_TE_DestroyProjectile)(nil),                                 // 95: dota.CDOTAUserMsg_TE_DestroyProjectile
+	(*CDOTAUserMsg_TE_DotaBloodImpact)(nil),                                   // 96: dota.CDOTAUserMsg_TE_DotaBloodImpact
+	(*CDOTAUserMsg_AbilityPing)(nil),                                          // 97: dota.CDOTAUserMsg_AbilityPing
+	(*CDOTAUserMsg_TE_UnitAnimation)(nil),                                     // 98: dota.CDOTAUserMsg_TE_UnitAnimation
+	(*CDOTAUserMsg_TE_UnitAnimationEnd)(nil),                                  // 99: dota.CDOTAUserMsg_TE_UnitAnimationEnd
+	(*CDOTAUserMsg_ShowGenericPopup)(nil),                                     // 100: dota.CDOTAUserMsg_ShowGenericPopup
+	(*CDOTAUserMsg_VoteStart)(nil),                                            // 101: dota.CDOTAUserMsg_VoteStart
+	(*CDOTAUserMsg_VoteUpdate)(nil),                                           // 102: dota.CDOTAUserMsg_VoteUpdate
+	(*CDOTAUserMsg_VoteEnd)(nil),                                              // 103: dota.CDOTAUserMsg_VoteEnd
+	(*CDOTAUserMsg_BoosterStatePlayer)(nil),                                   // 104: dota.CDOTAUserMsg_BoosterStatePlayer
+	(*CDOTAUserMsg_BoosterState)(nil),                                         // 105: dota.CDOTAUserMsg_BoosterState
+	(*CDOTAUserMsg_AbilitySteal)(nil),                                         // 106: dota.CDOTAUserMsg_AbilitySteal
+	(*CDOTAUserMsg_StatsHeroLookup)(nil),                                      // 107: dota.CDOTAUserMsg_StatsHeroLookup
+	(*CDOTAUserMsg_StatsHeroPositionInfo)(nil),                                // 108: dota.CDOTAUserMsg_StatsHeroPositionInfo
+	(*CDOTAUserMsg_StatsHeroMinuteDetails)(nil),                               // 109: dota.CDOTAUserMsg_StatsHeroMinuteDetails
+	(*CDOTAUserMsg_StatsTeamMinuteDetails)(nil),                               // 110: dota.CDOTAUserMsg_StatsTeamMinuteDetails
+	(*CDOTAUserMsg_StatsPlayerKillShare)(nil),                                 // 111: dota.CDOTAUserMsg_StatsPlayerKillShare
+	(*CDOTAUserMsg_StatsKillDetails)(nil),                                     // 112: dota.CDOTAUserMsg_StatsKillDetails
+	(*CDOTAUserMsg_StatsMatchDetails)(nil),                                    // 113: dota.CDOTAUserMsg_StatsMatchDetails
+	(*CDOTAUserMsg_MiniTaunt)(nil),                                            // 114: dota.CDOTAUserMsg_MiniTaunt
+	(*CDOTAUserMsg_SpeechBubble)(nil),                                         // 115: dota.CDOTAUserMsg_SpeechBubble
+	(*CDOTAUserMsg_CustomHeaderMessage)(nil),                                  // 116: dota.CDOTAUserMsg_CustomHeaderMessage
+	(*CMsgHeroAbilityStat)(nil),                                               // 117: dota.CMsgHeroAbilityStat
+	(*CMsgCombatAnalyzerPlayerStat)(nil),                                      // 118: dota.CMsgCombatAnalyzerPlayerStat
+	(*CMsgCombatAnalyzerStats)(nil),                                           // 119: dota.CMsgCombatAnalyzerStats
+	(*CDOTAUserMsg_BeastChat)(nil),                                            // 120: dota.CDOTAUserMsg_BeastChat
+	(*CDOTAUserMsg_CustomHudElement_Create)(nil),                              // 121: dota.CDOTAUserMsg_CustomHudElement_Create
+	(*CDOTAUserMsg_CustomHudElement_Modify)(nil),                              // 122: dota.CDOTAUserMsg_CustomHudElement_Modify
+	(*CDOTAUserMsg_CustomHudElement_Destroy)(nil),                             // 123: dota.CDOTAUserMsg_CustomHudElement_Destroy
+	(*CDOTAUserMsg_CompendiumStatePlayer)(nil),                                // 124: dota.CDOTAUserMsg_CompendiumStatePlayer
+	(*CDOTAUserMsg_CompendiumState)(nil),                                      // 125: dota.CDOTAUserMsg_CompendiumState
+	(*CDOTAUserMsg_ProjectionAbility)(nil),                                    // 126: dota.CDOTAUserMsg_ProjectionAbility
+	(*CDOTAUserMsg_ProjectionEvent)(nil),                                      // 127: dota.CDOTAUserMsg_ProjectionEvent
+	(*CDOTAUserMsg_XPAlert)(nil),                                              // 128: dota.CDOTAUserMsg_XPAlert
+	(*CDOTAUserMsg_TalentTreeAlert)(nil),                                      // 129: dota.CDOTAUserMsg_TalentTreeAlert
+	(*CDOTAUserMsg_UpdateQuestProgress)(nil),                                  // 130: dota.CDOTAUserMsg_UpdateQuestProgress
+	(*CDOTAUserMsg_QuestStatus)(nil),                                          // 131: dota.CDOTAUserMsg_QuestStatus
+	(*CDOTAUserMsg_SuggestHeroPick)(nil),                                      // 132: dota.CDOTAUserMsg_SuggestHeroPick
+	(*CDOTAUserMsg_SuggestHeroRole)(nil),                                      // 133: dota.CDOTAUserMsg_SuggestHeroRole
+	(*CDOTAUserMsg_KillcamDamageTaken)(nil),                                   // 134: dota.CDOTAUserMsg_KillcamDamageTaken
+	(*CDOTAUserMsg_SelectPenaltyGold)(nil),                                    // 135: dota.CDOTAUserMsg_SelectPenaltyGold
+	(*CDOTAUserMsg_RollDiceResult)(nil),                                       // 136: dota.CDOTAUserMsg_RollDiceResult
+	(*CDOTAUserMsg_FlipCoinResult)(nil),                                       // 137: dota.CDOTAUserMsg_FlipCoinResult
+	(*CDOTAUserMessage_RequestItemSuggestions)(nil),                           // 138: dota.CDOTAUserMessage_RequestItemSuggestions
+	(*CDOTAUserMessage_TeamCaptainChanged)(nil),                               // 139: dota.CDOTAUserMessage_TeamCaptainChanged
+	(*CDOTAUserMsg_ChatWheelCooldown)(nil),                                    // 140: dota.CDOTAUserMsg_ChatWheelCooldown
+	(*CDOTAUserMsg_HeroRelicProgress)(nil),                                    // 141: dota.CDOTAUserMsg_HeroRelicProgress
+	(*CDOTAUserMsg_AbilityDraftRequestAbility)(nil),                           // 142: dota.CDOTAUserMsg_AbilityDraftRequestAbility
+	(*CDOTAUserMsg_DamageReport)(nil),                                         // 143: dota.CDOTAUserMsg_DamageReport
+	(*CDOTAUserMsg_SalutePlayer)(nil),                                         // 144: dota.CDOTAUserMsg_SalutePlayer
+	(*CDOTAUserMsg_GiftPlayer)(nil),                                           // 145: dota.CDOTAUserMsg_GiftPlayer
+	(*CDOTAUserMsg_TipAlert)(nil),                                             // 146: dota.CDOTAUserMsg_TipAlert
+	(*CDOTAUserMsg_ReplaceQueryUnit)(nil),                                     // 147: dota.CDOTAUserMsg_ReplaceQueryUnit
+	(*CDOTAUserMsg_ESArcanaCombo)(nil),                                        // 148: dota.CDOTAUserMsg_ESArcanaCombo
+	(*CDOTAUserMsg_ESArcanaComboSummary)(nil),                                 // 149: dota.CDOTAUserMsg_ESArcanaComboSummary
+	(*CDOTAUserMsg_OMArcanaCombo)(nil),                                        // 150: dota.CDOTAUserMsg_OMArcanaCombo
+	(*CDOTAUserMsg_HighFiveCompleted)(nil),                                    // 151: dota.CDOTAUserMsg_HighFiveCompleted
+	(*CDOTAUserMsg_HighFiveLeftHanging)(nil),                                  // 152: dota.CDOTAUserMsg_HighFiveLeftHanging
+	(*CDOTAUserMsg_ShovelUnearth)(nil),                                        // 153: dota.CDOTAUserMsg_ShovelUnearth
+	(*CDOTAUserMsg_AllStarEvent)(nil),                                         // 154: dota.CDOTAUserMsg_AllStarEvent
+	(*CDOTAUserMsg_QueuedOrderRemoved)(nil),                                   // 155: dota.CDOTAUserMsg_QueuedOrderRemoved
+	(*CDOTAUserMsg_DebugChallenge)(nil),                                       // 156: dota.CDOTAUserMsg_DebugChallenge
+	(*CDOTAUserMsg_FoundNeutralItem)(nil),                                     // 157: dota.CDOTAUserMsg_FoundNeutralItem
+	(*CDOTAUserMsg_OutpostCaptured)(nil),                                      // 158: dota.CDOTAUserMsg_OutpostCaptured
+	(*CDOTAUserMsg_OutpostGrantedXP)(nil),                                     // 159: dota.CDOTAUserMsg_OutpostGrantedXP
+	(*CDOTAUserMsg_MoveCameraToUnit)(nil),                                     // 160: dota.CDOTAUserMsg_MoveCameraToUnit
+	(*CDOTAUserMsg_PauseMinigameData)(nil),                                    // 161: dota.CDOTAUserMsg_PauseMinigameData
+	(*CDOTAUserMsg_VersusScene_PlayerBehavior)(nil),                           // 162: dota.CDOTAUserMsg_VersusScene_PlayerBehavior
+	(*CDOTAUserMsg_QoP_ArcanaSummary)(nil),                                    // 163: dota.CDOTAUserMsg_QoP_ArcanaSummary
+	(*CDOTAUserMsg_HotPotato_Created)(nil),                                    // 164: dota.CDOTAUserMsg_HotPotato_Created
+	(*CDOTAUserMsg_HotPotato_Exploded)(nil),                                   // 165: dota.CDOTAUserMsg_HotPotato_Exploded
+	(*CDOTAUserMsg_WK_Arcana_Progress)(nil),                                   // 166: dota.CDOTAUserMsg_WK_Arcana_Progress
+	(*CDOTAUserMsg_GuildChallenge_Progress)(nil),                              // 167: dota.CDOTAUserMsg_GuildChallenge_Progress
+	(*CDOTAUserMsg_WRArcanaProgress)(nil),                                     // 168: dota.CDOTAUserMsg_WRArcanaProgress
+	(*CDOTAUserMsg_WRArcanaSummary)(nil),                                      // 169: dota.CDOTAUserMsg_WRArcanaSummary
+	(*CDOTAUserMsg_EmptyItemSlotAlert)(nil),                                   // 170: dota.CDOTAUserMsg_EmptyItemSlotAlert
+	(*CDOTAUserMsg_AghsStatusAlert)(nil),                                      // 171: dota.CDOTAUserMsg_AghsStatusAlert
+	(*CDOTAUserMsg_MutedPlayers)(nil),                                         // 172: dota.CDOTAUserMsg_MutedPlayers
+	(*CDOTAUserMsg_ContextualTip)(nil),                                        // 173: dota.CDOTAUserMsg_ContextualTip
+	(*CDOTAUserMsg_ChatMessage)(nil),                                          // 174: dota.CDOTAUserMsg_ChatMessage
+	(*CDOTAUserMsg_RockPaperScissorsStarted)(nil),                             // 175: dota.CDOTAUserMsg_RockPaperScissorsStarted
+	(*CDOTAUserMsg_RockPaperScissorsFinished)(nil),                            // 176: dota.CDOTAUserMsg_RockPaperScissorsFinished
+	(*CDOTAUserMsg_DuelOpponentKilled)(nil),                                   // 177: dota.CDOTAUserMsg_DuelOpponentKilled
+	(*CDOTAUserMsg_DuelAccepted)(nil),                                         // 178: dota.CDOTAUserMsg_DuelAccepted
+	(*CDOTAUserMsg_DuelRequested)(nil),                                        // 179: dota.CDOTAUserMsg_DuelRequested
+	(*CDOTAUserMsg_MuertaReleaseEvent_AssignedTargetKilled)(nil),              // 180: dota.CDOTAUserMsg_MuertaReleaseEvent_AssignedTargetKilled
+	(*CDOTAUserMsg_PlayerDraftSuggestPick)(nil),                               // 181: dota.CDOTAUserMsg_PlayerDraftSuggestPick
+	(*CDOTAUserMsg_PlayerDraftPick)(nil),                                      // 182: dota.CDOTAUserMsg_PlayerDraftPick
+	(*CDOTAUserMsg_FacetPing)(nil),                                            // 183: dota.CDOTAUserMsg_FacetPing
+	(*CDOTAUserMsg_InnatePing)(nil),                                           // 184: dota.CDOTAUserMsg_InnatePing
+	(*CDOTAUserMsg_NeutralCraftAvailable)(nil),                                // 185: dota.CDOTAUserMsg_NeutralCraftAvailable
+	(*CDOTAUserMsg_TimerAlert)(nil),                                           // 186: dota.CDOTAUserMsg_TimerAlert
+	(*CDOTAUserMsg_MadstoneAlert)(nil),                                        // 187: dota.CDOTAUserMsg_MadstoneAlert
+	(*CDOTAUserMsg_MonsterHunter_InvestigationsAvailable)(nil),                // 188: dota.CDOTAUserMsg_MonsterHunter_InvestigationsAvailable
+	(*CDOTAUserMsg_MonsterHunter_InvestigationGameState)(nil),                 // 189: dota.CDOTAUserMsg_MonsterHunter_InvestigationGameState
+	(*CDOTAUserMsg_MonsterHunter_HuntAlert)(nil),                              // 190: dota.CDOTAUserMsg_MonsterHunter_HuntAlert
+	(*CDOTAUserMsg_KillEffect)(nil),                                           // 191: dota.CDOTAUserMsg_KillEffect
+	(*CDOTAUserMsg_GiveItem)(nil),                                             // 192: dota.CDOTAUserMsg_GiveItem
+	(*CDOTAUserMsg_MiniKillCamInfo_Attacker)(nil),                             // 193: dota.CDOTAUserMsg_MiniKillCamInfo.Attacker
+	(*CDOTAUserMsg_MiniKillCamInfo_Attacker_Ability)(nil),                     // 194: dota.CDOTAUserMsg_MiniKillCamInfo.Attacker.Ability
+	(*CDOTAUserMsg_CourierKilledAlert_LostItem)(nil),                          // 195: dota.CDOTAUserMsg_CourierKilledAlert.LostItem
+	(*CDOTAResponseQuerySerialized_Fact)(nil),                                 // 196: dota.CDOTAResponseQuerySerialized.Fact
+	(*CDOTAUserMsg_UnitEvent_Interval)(nil),                                   // 197: dota.CDOTAUserMsg_UnitEvent.Interval
+	(*CDOTAUserMsg_UnitEvent_Speech)(nil),                                     // 198: dota.CDOTAUserMsg_UnitEvent.Speech
+	(*CDOTAUserMsg_UnitEvent_SpeechMute)(nil),                                 // 199: dota.CDOTAUserMsg_UnitEvent.SpeechMute
+	(*CDOTAUserMsg_UnitEvent_AddGesture)(nil),                                 // 200: dota.CDOTAUserMsg_UnitEvent.AddGesture
+	(*CDOTAUserMsg_UnitEvent_RemoveGesture)(nil),                              // 201: dota.CDOTAUserMsg_UnitEvent.RemoveGesture
+	(*CDOTAUserMsg_UnitEvent_BloodImpact)(nil),                                // 202: dota.CDOTAUserMsg_UnitEvent.BloodImpact
+	(*CDOTAUserMsg_UnitEvent_FadeGesture)(nil),                                // 203: dota.CDOTAUserMsg_UnitEvent.FadeGesture
+	(*CDOTAUserMsg_StatsHeroPositionInfo_PositionPair)(nil),                   // 204: dota.CDOTAUserMsg_StatsHeroPositionInfo.PositionPair
+	(*CDOTAUserMsg_StatsTeamMinuteDetails_LocationPerformance)(nil),           // 205: dota.CDOTAUserMsg_StatsTeamMinuteDetails.LocationPerformance
+	(*CDOTAUserMsg_StatsMatchDetails_CDOTAUserMsg_StatsFightTeamDetails)(nil), // 206: dota.CDOTAUserMsg_StatsMatchDetails.CDOTAUserMsg_StatsFightTeamDetails
+	(*CDOTAUserMsg_StatsMatchDetails_CDOTAUserMsg_StatsFightDetails)(nil),     // 207: dota.CDOTAUserMsg_StatsMatchDetails.CDOTAUserMsg_StatsFightDetails
+	(*CDOTAUserMsg_AllStarEvent_PlayerScore)(nil),                             // 208: dota.CDOTAUserMsg_AllStarEvent.PlayerScore
+	(*CDOTAUserMsg_PauseMinigameData_DataBit)(nil),                            // 209: dota.CDOTAUserMsg_PauseMinigameData.DataBit
+	(*CDOTAUserMsg_GuildChallenge_Progress_PlayerProgress)(nil),               // 210: dota.CDOTAUserMsg_GuildChallenge_Progress.PlayerProgress
+	(*CMsgVector2D)(nil),                                                      // 211: dota.CMsgVector2D
+	(*CMsgDOTACombatLogEntry)(nil),                                            // 212: dota.CMsgDOTACombatLogEntry
+	(*CMsgVector)(nil),                                                        // 213: dota.CMsgVector
+	(*CDOTAMsg_LocationPing)(nil),                                             // 214: dota.CDOTAMsg_LocationPing
+	(*CDOTAMsg_ItemAlert)(nil),                                                // 215: dota.CDOTAMsg_ItemAlert
+	(*CDOTAMsg_MapLine)(nil),                                                  // 216: dota.CDOTAMsg_MapLine
+	(*CDOTAMsg_WorldLine)(nil),                                                // 217: dota.CDOTAMsg_WorldLine
+	(*CDOTAMsg_SendStatPopup)(nil),                                            // 218: dota.CDOTAMsg_SendStatPopup
+	(*CDOTAMsg_DismissAllStatPopups)(nil),                                     // 219: dota.CDOTAMsg_DismissAllStatPopups
+	(*CDOTAMsg_CoachHUDPing)(nil),                                             // 220: dota.CDOTAMsg_CoachHUDPing
+	(EDOTAVersusScenePlayerBehavior)(0),                                       // 221: dota.EDOTAVersusScenePlayerBehavior
+	(*VersusScene_PlayActivity)(nil),                                          // 222: dota.VersusScene_PlayActivity
+	(*VersusScene_ChatWheel)(nil),                                             // 223: dota.VersusScene_ChatWheel
+	(*VersusScene_PlaybackRate)(nil),                                          // 224: dota.VersusScene_PlaybackRate
+	(ETimerAlertType)(0),                                                      // 225: dota.ETimerAlertType
+	(*CMsgMonsterHunterInvestigation)(nil),                                    // 226: dota.CMsgMonsterHunterInvestigation
+	(*CMsgMonsterHunterInvestigationGameState)(nil),                           // 227: dota.CMsgMonsterHunterInvestigationGameState
 }
 var file_dota_usermessages_proto_depIdxs = []int32{
 	1,   // 0: dota.CDOTAUserMsg_ChatEvent.type:type_name -> dota.DOTA_CHAT_MESSAGE
-	209, // 1: dota.CDOTAUserMsg_CombatHeroPositions.world_pos:type_name -> dota.CMsgVector2D
-	210, // 2: dota.CDOTAUserMsg_CombatLogBulkData.combat_entries:type_name -> dota.CMsgDOTACombatLogEntry
-	211, // 3: dota.CDOTAUserMsg_ProjectileParticleCPData.vector:type_name -> dota.CMsgVector
-	211, // 4: dota.CDOTAUserMsg_UpdateLinearProjectileCPData.vector:type_name -> dota.CMsgVector
-	191, // 5: dota.CDOTAUserMsg_MiniKillCamInfo.attackers:type_name -> dota.CDOTAUserMsg_MiniKillCamInfo.Attacker
-	211, // 6: dota.CDOTAUserMsg_GlobalLightDirection.direction:type_name -> dota.CMsgVector
-	212, // 7: dota.CDOTAUserMsg_LocationPing.location_ping:type_name -> dota.CDOTAMsg_LocationPing
-	211, // 8: dota.CDOTAUserMsg_PingConfirmation.location:type_name -> dota.CMsgVector
-	213, // 9: dota.CDOTAUserMsg_ItemAlert.item_alert:type_name -> dota.CDOTAMsg_ItemAlert
-	193, // 10: dota.CDOTAUserMsg_CourierKilledAlert.lost_items:type_name -> dota.CDOTAUserMsg_CourierKilledAlert.LostItem
-	214, // 11: dota.CDOTAUserMsg_MapLine.mapline:type_name -> dota.CDOTAMsg_MapLine
-	211, // 12: dota.CDOTAUserMsg_MinimapDebugPoint.location:type_name -> dota.CMsgVector
-	211, // 13: dota.CDOTAUserMsg_CreateLinearProjectile.origin:type_name -> dota.CMsgVector
-	209, // 14: dota.CDOTAUserMsg_CreateLinearProjectile.velocity:type_name -> dota.CMsgVector2D
-	209, // 15: dota.CDOTAUserMsg_CreateLinearProjectile.acceleration:type_name -> dota.CMsgVector2D
-	26,  // 16: dota.CDOTAUserMsg_CreateLinearProjectile.particle_cp_data:type_name -> dota.CDOTAUserMsg_ProjectileParticleCPData
-	211, // 17: dota.CDOTAUserMsg_SpectatorPlayerUnitOrders.position:type_name -> dota.CMsgVector
-	211, // 18: dota.CDOTAUserMsg_NevermoreRequiem.origin:type_name -> dota.CMsgVector
-	194, // 19: dota.CDOTAResponseQuerySerialized.facts:type_name -> dota.CDOTAResponseQuerySerialized.Fact
-	63,  // 20: dota.CDOTASpeechMatchOnClient.responsequery:type_name -> dota.CDOTAResponseQuerySerialized
+	211, // 1: dota.CDOTAUserMsg_CombatHeroPositions.world_pos:type_name -> dota.CMsgVector2D
+	212, // 2: dota.CDOTAUserMsg_CombatLogBulkData.combat_entries:type_name -> dota.CMsgDOTACombatLogEntry
+	213, // 3: dota.CDOTAUserMsg_ProjectileParticleCPData.vector:type_name -> dota.CMsgVector
+	213, // 4: dota.CDOTAUserMsg_UpdateLinearProjectileCPData.vector:type_name -> dota.CMsgVector
+	193, // 5: dota.CDOTAUserMsg_MiniKillCamInfo.attackers:type_name -> dota.CDOTAUserMsg_MiniKillCamInfo.Attacker
+	213, // 6: dota.CDOTAUserMsg_GlobalLightDirection.direction:type_name -> dota.CMsgVector
+	214, // 7: dota.CDOTAUserMsg_LocationPing.location_ping:type_name -> dota.CDOTAMsg_LocationPing
+	213, // 8: dota.CDOTAUserMsg_PingConfirmation.location:type_name -> dota.CMsgVector
+	215, // 9: dota.CDOTAUserMsg_ItemAlert.item_alert:type_name -> dota.CDOTAMsg_ItemAlert
+	195, // 10: dota.CDOTAUserMsg_CourierKilledAlert.lost_items:type_name -> dota.CDOTAUserMsg_CourierKilledAlert.LostItem
+	216, // 11: dota.CDOTAUserMsg_MapLine.mapline:type_name -> dota.CDOTAMsg_MapLine
+	213, // 12: dota.CDOTAUserMsg_MinimapDebugPoint.location:type_name -> dota.CMsgVector
+	213, // 13: dota.CDOTAUserMsg_CreateLinearProjectile.origin:type_name -> dota.CMsgVector
+	211, // 14: dota.CDOTAUserMsg_CreateLinearProjectile.velocity:type_name -> dota.CMsgVector2D
+	211, // 15: dota.CDOTAUserMsg_CreateLinearProjectile.acceleration:type_name -> dota.CMsgVector2D
+	27,  // 16: dota.CDOTAUserMsg_CreateLinearProjectile.particle_cp_data:type_name -> dota.CDOTAUserMsg_ProjectileParticleCPData
+	213, // 17: dota.CDOTAUserMsg_SpectatorPlayerUnitOrders.position:type_name -> dota.CMsgVector
+	213, // 18: dota.CDOTAUserMsg_NevermoreRequiem.origin:type_name -> dota.CMsgVector
+	196, // 19: dota.CDOTAResponseQuerySerialized.facts:type_name -> dota.CDOTAResponseQuerySerialized.Fact
+	64,  // 20: dota.CDOTASpeechMatchOnClient.responsequery:type_name -> dota.CDOTAResponseQuerySerialized
 	6,   // 21: dota.CDOTAUserMsg_UnitEvent.msg_type:type_name -> dota.EDotaEntityMessages
-	196, // 22: dota.CDOTAUserMsg_UnitEvent.speech:type_name -> dota.CDOTAUserMsg_UnitEvent.Speech
-	197, // 23: dota.CDOTAUserMsg_UnitEvent.speech_mute:type_name -> dota.CDOTAUserMsg_UnitEvent.SpeechMute
-	198, // 24: dota.CDOTAUserMsg_UnitEvent.add_gesture:type_name -> dota.CDOTAUserMsg_UnitEvent.AddGesture
-	199, // 25: dota.CDOTAUserMsg_UnitEvent.remove_gesture:type_name -> dota.CDOTAUserMsg_UnitEvent.RemoveGesture
-	200, // 26: dota.CDOTAUserMsg_UnitEvent.blood_impact:type_name -> dota.CDOTAUserMsg_UnitEvent.BloodImpact
-	201, // 27: dota.CDOTAUserMsg_UnitEvent.fade_gesture:type_name -> dota.CDOTAUserMsg_UnitEvent.FadeGesture
-	64,  // 28: dota.CDOTAUserMsg_UnitEvent.speech_match_on_client:type_name -> dota.CDOTASpeechMatchOnClient
+	198, // 22: dota.CDOTAUserMsg_UnitEvent.speech:type_name -> dota.CDOTAUserMsg_UnitEvent.Speech
+	199, // 23: dota.CDOTAUserMsg_UnitEvent.speech_mute:type_name -> dota.CDOTAUserMsg_UnitEvent.SpeechMute
+	200, // 24: dota.CDOTAUserMsg_UnitEvent.add_gesture:type_name -> dota.CDOTAUserMsg_UnitEvent.AddGesture
+	201, // 25: dota.CDOTAUserMsg_UnitEvent.remove_gesture:type_name -> dota.CDOTAUserMsg_UnitEvent.RemoveGesture
+	202, // 26: dota.CDOTAUserMsg_UnitEvent.blood_impact:type_name -> dota.CDOTAUserMsg_UnitEvent.BloodImpact
+	203, // 27: dota.CDOTAUserMsg_UnitEvent.fade_gesture:type_name -> dota.CDOTAUserMsg_UnitEvent.FadeGesture
+	65,  // 28: dota.CDOTAUserMsg_UnitEvent.speech_match_on_client:type_name -> dota.CDOTASpeechMatchOnClient
 	7,   // 29: dota.CDOTAUserMsg_OverheadEvent.message_type:type_name -> dota.DOTA_OVERHEAD_ALERT
-	215, // 30: dota.CDOTAUserMsg_WorldLine.worldline:type_name -> dota.CDOTAMsg_WorldLine
-	216, // 31: dota.CDOTAUserMsg_SendStatPopup.statpopup:type_name -> dota.CDOTAMsg_SendStatPopup
-	217, // 32: dota.CDOTAUserMsg_DismissAllStatPopups.dismissallmsg:type_name -> dota.CDOTAMsg_DismissAllStatPopups
+	217, // 30: dota.CDOTAUserMsg_WorldLine.worldline:type_name -> dota.CDOTAMsg_WorldLine
+	218, // 31: dota.CDOTAUserMsg_SendStatPopup.statpopup:type_name -> dota.CDOTAMsg_SendStatPopup
+	219, // 32: dota.CDOTAUserMsg_DismissAllStatPopups.dismissallmsg:type_name -> dota.CDOTAMsg_DismissAllStatPopups
 	8,   // 33: dota.CDOTAUserMsg_SendRoshanSpectatorPhase.phase:type_name -> dota.DOTA_ROSHAN_PHASE
-	218, // 34: dota.CDOTAUserMsg_CoachHUDPing.hud_ping:type_name -> dota.CDOTAMsg_CoachHUDPing
-	211, // 35: dota.CDOTAUserMsg_TE_Projectile.target_loc:type_name -> dota.CMsgVector
-	26,  // 36: dota.CDOTAUserMsg_TE_Projectile.particle_cp_data:type_name -> dota.CDOTAUserMsg_ProjectileParticleCPData
-	211, // 37: dota.CDOTAUserMsg_TE_ProjectileLoc.source_loc:type_name -> dota.CMsgVector
-	211, // 38: dota.CDOTAUserMsg_TE_ProjectileLoc.target_loc:type_name -> dota.CMsgVector
-	26,  // 39: dota.CDOTAUserMsg_TE_ProjectileLoc.particle_cp_data:type_name -> dota.CDOTAUserMsg_ProjectileParticleCPData
+	220, // 34: dota.CDOTAUserMsg_CoachHUDPing.hud_ping:type_name -> dota.CDOTAMsg_CoachHUDPing
+	213, // 35: dota.CDOTAUserMsg_TE_Projectile.target_loc:type_name -> dota.CMsgVector
+	27,  // 36: dota.CDOTAUserMsg_TE_Projectile.particle_cp_data:type_name -> dota.CDOTAUserMsg_ProjectileParticleCPData
+	213, // 37: dota.CDOTAUserMsg_TE_ProjectileLoc.source_loc:type_name -> dota.CMsgVector
+	213, // 38: dota.CDOTAUserMsg_TE_ProjectileLoc.target_loc:type_name -> dota.CMsgVector
+	27,  // 39: dota.CDOTAUserMsg_TE_ProjectileLoc.particle_cp_data:type_name -> dota.CDOTAUserMsg_ProjectileParticleCPData
 	4,   // 40: dota.CDOTAUserMsg_AbilityPing.type:type_name -> dota.DOTA_ABILITY_PING_TYPE
-	103, // 41: dota.CDOTAUserMsg_BoosterState.boosted_players:type_name -> dota.CDOTAUserMsg_BoosterStatePlayer
-	202, // 42: dota.CDOTAUserMsg_StatsHeroPositionInfo.position_details:type_name -> dota.CDOTAUserMsg_StatsHeroPositionInfo.PositionPair
-	107, // 43: dota.CDOTAUserMsg_StatsHeroMinuteDetails.position_info:type_name -> dota.CDOTAUserMsg_StatsHeroPositionInfo
-	108, // 44: dota.CDOTAUserMsg_StatsTeamMinuteDetails.player_stats:type_name -> dota.CDOTAUserMsg_StatsHeroMinuteDetails
-	203, // 45: dota.CDOTAUserMsg_StatsTeamMinuteDetails.lane_performance:type_name -> dota.CDOTAUserMsg_StatsTeamMinuteDetails.LocationPerformance
-	110, // 46: dota.CDOTAUserMsg_StatsKillDetails.kill_shares:type_name -> dota.CDOTAUserMsg_StatsPlayerKillShare
-	106, // 47: dota.CDOTAUserMsg_StatsMatchDetails.hero_lookup:type_name -> dota.CDOTAUserMsg_StatsHeroLookup
-	109, // 48: dota.CDOTAUserMsg_StatsMatchDetails.radiant_stats:type_name -> dota.CDOTAUserMsg_StatsTeamMinuteDetails
-	109, // 49: dota.CDOTAUserMsg_StatsMatchDetails.dire_stats:type_name -> dota.CDOTAUserMsg_StatsTeamMinuteDetails
-	111, // 50: dota.CDOTAUserMsg_StatsMatchDetails.radiant_kills:type_name -> dota.CDOTAUserMsg_StatsKillDetails
-	111, // 51: dota.CDOTAUserMsg_StatsMatchDetails.dire_kills:type_name -> dota.CDOTAUserMsg_StatsKillDetails
-	205, // 52: dota.CDOTAUserMsg_StatsMatchDetails.fight_details:type_name -> dota.CDOTAUserMsg_StatsMatchDetails.CDOTAUserMsg_StatsFightDetails
+	104, // 41: dota.CDOTAUserMsg_BoosterState.boosted_players:type_name -> dota.CDOTAUserMsg_BoosterStatePlayer
+	204, // 42: dota.CDOTAUserMsg_StatsHeroPositionInfo.position_details:type_name -> dota.CDOTAUserMsg_StatsHeroPositionInfo.PositionPair
+	108, // 43: dota.CDOTAUserMsg_StatsHeroMinuteDetails.position_info:type_name -> dota.CDOTAUserMsg_StatsHeroPositionInfo
+	109, // 44: dota.CDOTAUserMsg_StatsTeamMinuteDetails.player_stats:type_name -> dota.CDOTAUserMsg_StatsHeroMinuteDetails
+	205, // 45: dota.CDOTAUserMsg_StatsTeamMinuteDetails.lane_performance:type_name -> dota.CDOTAUserMsg_StatsTeamMinuteDetails.LocationPerformance
+	111, // 46: dota.CDOTAUserMsg_StatsKillDetails.kill_shares:type_name -> dota.CDOTAUserMsg_StatsPlayerKillShare
+	107, // 47: dota.CDOTAUserMsg_StatsMatchDetails.hero_lookup:type_name -> dota.CDOTAUserMsg_StatsHeroLookup
+	110, // 48: dota.CDOTAUserMsg_StatsMatchDetails.radiant_stats:type_name -> dota.CDOTAUserMsg_StatsTeamMinuteDetails
+	110, // 49: dota.CDOTAUserMsg_StatsMatchDetails.dire_stats:type_name -> dota.CDOTAUserMsg_StatsTeamMinuteDetails
+	112, // 50: dota.CDOTAUserMsg_StatsMatchDetails.radiant_kills:type_name -> dota.CDOTAUserMsg_StatsKillDetails
+	112, // 51: dota.CDOTAUserMsg_StatsMatchDetails.dire_kills:type_name -> dota.CDOTAUserMsg_StatsKillDetails
+	207, // 52: dota.CDOTAUserMsg_StatsMatchDetails.fight_details:type_name -> dota.CDOTAUserMsg_StatsMatchDetails.CDOTAUserMsg_StatsFightDetails
 	11,  // 53: dota.CMsgHeroAbilityStat.stat_type:type_name -> dota.EHeroStatType
-	116, // 54: dota.CMsgCombatAnalyzerPlayerStat.hero_ability_stats:type_name -> dota.CMsgHeroAbilityStat
-	117, // 55: dota.CMsgCombatAnalyzerStats.player_stats:type_name -> dota.CMsgCombatAnalyzerPlayerStat
-	123, // 56: dota.CDOTAUserMsg_CompendiumState.compendium_players:type_name -> dota.CDOTAUserMsg_CompendiumStatePlayer
-	211, // 57: dota.CDOTAUserMsg_ProjectionAbility.origin:type_name -> dota.CMsgVector
+	117, // 54: dota.CMsgCombatAnalyzerPlayerStat.hero_ability_stats:type_name -> dota.CMsgHeroAbilityStat
+	118, // 55: dota.CMsgCombatAnalyzerStats.player_stats:type_name -> dota.CMsgCombatAnalyzerPlayerStat
+	124, // 56: dota.CDOTAUserMsg_CompendiumState.compendium_players:type_name -> dota.CDOTAUserMsg_CompendiumStatePlayer
+	213, // 57: dota.CDOTAUserMsg_ProjectionAbility.origin:type_name -> dota.CMsgVector
 	13,  // 58: dota.CDOTAUserMsg_ProjectionEvent.event_id:type_name -> dota.EProjectionEvent
-	206, // 59: dota.CDOTAUserMsg_AllStarEvent.player_scores:type_name -> dota.CDOTAUserMsg_AllStarEvent.PlayerScore
-	207, // 60: dota.CDOTAUserMsg_PauseMinigameData.data_bits:type_name -> dota.CDOTAUserMsg_PauseMinigameData.DataBit
-	219, // 61: dota.CDOTAUserMsg_VersusScene_PlayerBehavior.behavior:type_name -> dota.EDOTAVersusScenePlayerBehavior
-	220, // 62: dota.CDOTAUserMsg_VersusScene_PlayerBehavior.play_activity:type_name -> dota.VersusScene_PlayActivity
-	221, // 63: dota.CDOTAUserMsg_VersusScene_PlayerBehavior.chat_wheel:type_name -> dota.VersusScene_ChatWheel
-	222, // 64: dota.CDOTAUserMsg_VersusScene_PlayerBehavior.playback_rate:type_name -> dota.VersusScene_PlaybackRate
-	208, // 65: dota.CDOTAUserMsg_GuildChallenge_Progress.player_progress:type_name -> dota.CDOTAUserMsg_GuildChallenge_Progress.PlayerProgress
+	208, // 59: dota.CDOTAUserMsg_AllStarEvent.player_scores:type_name -> dota.CDOTAUserMsg_AllStarEvent.PlayerScore
+	209, // 60: dota.CDOTAUserMsg_PauseMinigameData.data_bits:type_name -> dota.CDOTAUserMsg_PauseMinigameData.DataBit
+	221, // 61: dota.CDOTAUserMsg_VersusScene_PlayerBehavior.behavior:type_name -> dota.EDOTAVersusScenePlayerBehavior
+	222, // 62: dota.CDOTAUserMsg_VersusScene_PlayerBehavior.play_activity:type_name -> dota.VersusScene_PlayActivity
+	223, // 63: dota.CDOTAUserMsg_VersusScene_PlayerBehavior.chat_wheel:type_name -> dota.VersusScene_ChatWheel
+	224, // 64: dota.CDOTAUserMsg_VersusScene_PlayerBehavior.playback_rate:type_name -> dota.VersusScene_PlaybackRate
+	210, // 65: dota.CDOTAUserMsg_GuildChallenge_Progress.player_progress:type_name -> dota.CDOTAUserMsg_GuildChallenge_Progress.PlayerProgress
 	15,  // 66: dota.CDOTAUserMsg_GuildChallenge_Progress.challenge_type:type_name -> dota.CDOTAUserMsg_GuildChallenge_Progress.EChallengeType
-	223, // 67: dota.CDOTAUserMsg_TimerAlert.timer_alert_type:type_name -> dota.ETimerAlertType
+	225, // 67: dota.CDOTAUserMsg_TimerAlert.timer_alert_type:type_name -> dota.ETimerAlertType
 	16,  // 68: dota.CDOTAUserMsg_MadstoneAlert.madstone_alert_type:type_name -> dota.CDOTAUserMsg_MadstoneAlert.EMadstoneAlertType
-	224, // 69: dota.CDOTAUserMsg_MonsterHunter_InvestigationsAvailable.investigations:type_name -> dota.CMsgMonsterHunterInvestigation
-	225, // 70: dota.CDOTAUserMsg_MonsterHunter_InvestigationGameState.investigation_game_state:type_name -> dota.CMsgMonsterHunterInvestigationGameState
+	226, // 69: dota.CDOTAUserMsg_MonsterHunter_InvestigationsAvailable.investigations:type_name -> dota.CMsgMonsterHunterInvestigation
+	227, // 70: dota.CDOTAUserMsg_MonsterHunter_InvestigationGameState.investigation_game_state:type_name -> dota.CMsgMonsterHunterInvestigationGameState
 	17,  // 71: dota.CDOTAUserMsg_MonsterHunter_HuntAlert.hunt_alert_type:type_name -> dota.CDOTAUserMsg_MonsterHunter_HuntAlert.EHuntAlertType
 	18,  // 72: dota.CDOTAUserMsg_MonsterHunter_HuntAlert.hunt_status_type:type_name -> dota.CDOTAUserMsg_MonsterHunter_HuntAlert.EHuntStatusType
-	192, // 73: dota.CDOTAUserMsg_MiniKillCamInfo.Attacker.abilities:type_name -> dota.CDOTAUserMsg_MiniKillCamInfo.Attacker.Ability
-	14,  // 74: dota.CDOTAResponseQuerySerialized.Fact.valtype:type_name -> dota.CDOTAResponseQuerySerialized.Fact.ValueType
-	195, // 75: dota.CDOTAUserMsg_UnitEvent.Speech.predelay:type_name -> dota.CDOTAUserMsg_UnitEvent.Interval
-	9,   // 76: dota.CDOTAUserMsg_StatsHeroPositionInfo.PositionPair.position_category:type_name -> dota.DOTA_POSITION_CATEGORY
-	204, // 77: dota.CDOTAUserMsg_StatsMatchDetails.CDOTAUserMsg_StatsFightDetails.radiant_fight_details:type_name -> dota.CDOTAUserMsg_StatsMatchDetails.CDOTAUserMsg_StatsFightTeamDetails
-	204, // 78: dota.CDOTAUserMsg_StatsMatchDetails.CDOTAUserMsg_StatsFightDetails.dire_fight_details:type_name -> dota.CDOTAUserMsg_StatsMatchDetails.CDOTAUserMsg_StatsFightTeamDetails
-	79,  // [79:79] is the sub-list for method output_type
-	79,  // [79:79] is the sub-list for method input_type
-	79,  // [79:79] is the sub-list for extension type_name
-	79,  // [79:79] is the sub-list for extension extendee
-	0,   // [0:79] is the sub-list for field type_name
+	19,  // 73: dota.CDOTAUserMsg_GiveItem.give_status:type_name -> dota.CDOTAUserMsg_GiveItem.EGiveStatus
+	194, // 74: dota.CDOTAUserMsg_MiniKillCamInfo.Attacker.abilities:type_name -> dota.CDOTAUserMsg_MiniKillCamInfo.Attacker.Ability
+	14,  // 75: dota.CDOTAResponseQuerySerialized.Fact.valtype:type_name -> dota.CDOTAResponseQuerySerialized.Fact.ValueType
+	197, // 76: dota.CDOTAUserMsg_UnitEvent.Speech.predelay:type_name -> dota.CDOTAUserMsg_UnitEvent.Interval
+	9,   // 77: dota.CDOTAUserMsg_StatsHeroPositionInfo.PositionPair.position_category:type_name -> dota.DOTA_POSITION_CATEGORY
+	206, // 78: dota.CDOTAUserMsg_StatsMatchDetails.CDOTAUserMsg_StatsFightDetails.radiant_fight_details:type_name -> dota.CDOTAUserMsg_StatsMatchDetails.CDOTAUserMsg_StatsFightTeamDetails
+	206, // 79: dota.CDOTAUserMsg_StatsMatchDetails.CDOTAUserMsg_StatsFightDetails.dire_fight_details:type_name -> dota.CDOTAUserMsg_StatsMatchDetails.CDOTAUserMsg_StatsFightTeamDetails
+	80,  // [80:80] is the sub-list for method output_type
+	80,  // [80:80] is the sub-list for method input_type
+	80,  // [80:80] is the sub-list for extension type_name
+	80,  // [80:80] is the sub-list for extension extendee
+	0,   // [0:80] is the sub-list for field type_name
 }
 
 func init() { file_dota_usermessages_proto_init() }
@@ -16412,8 +16564,8 @@ func file_dota_usermessages_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_dota_usermessages_proto_rawDesc), len(file_dota_usermessages_proto_rawDesc)),
-			NumEnums:      19,
-			NumMessages:   190,
+			NumEnums:      20,
+			NumMessages:   191,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

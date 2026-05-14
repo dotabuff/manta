@@ -37,6 +37,8 @@ const (
 	EBaseGameEvents_GE_SosSetSoundEventParams     EBaseGameEvents = 210
 	EBaseGameEvents_GE_SosSetLibraryStackFields   EBaseGameEvents = 211
 	EBaseGameEvents_GE_SosStopSoundEventHash      EBaseGameEvents = 212
+	EBaseGameEvents_GE_ClothStiffenAnimEvent      EBaseGameEvents = 213
+	EBaseGameEvents_GE_ClothEffectAnimEvent       EBaseGameEvents = 214
 )
 
 // Enum value maps for EBaseGameEvents.
@@ -55,6 +57,8 @@ var (
 		210: "GE_SosSetSoundEventParams",
 		211: "GE_SosSetLibraryStackFields",
 		212: "GE_SosStopSoundEventHash",
+		213: "GE_ClothStiffenAnimEvent",
+		214: "GE_ClothEffectAnimEvent",
 	}
 	EBaseGameEvents_value = map[string]int32{
 		"GE_VDebugGameSessionIDEvent":   200,
@@ -70,6 +74,8 @@ var (
 		"GE_SosSetSoundEventParams":     210,
 		"GE_SosSetLibraryStackFields":   211,
 		"GE_SosStopSoundEventHash":      212,
+		"GE_ClothStiffenAnimEvent":      213,
+		"GE_ClothEffectAnimEvent":       214,
 	}
 )
 
@@ -163,22 +169,23 @@ func (x *CMsgVDebugGameSessionIDEvent) GetGamesessionid() string {
 }
 
 type CMsgPlaceDecalEvent struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	Position       *CMsgVector            `protobuf:"bytes,1,opt,name=position" json:"position,omitempty"`
-	Normal         *CMsgVector            `protobuf:"bytes,2,opt,name=normal" json:"normal,omitempty"`
-	Saxis          *CMsgVector            `protobuf:"bytes,3,opt,name=saxis" json:"saxis,omitempty"`
-	Boneindex      *int32                 `protobuf:"varint,4,opt,name=boneindex" json:"boneindex,omitempty"`
-	Triangleindex  *int32                 `protobuf:"varint,13,opt,name=triangleindex" json:"triangleindex,omitempty"`
-	Flags          *uint32                `protobuf:"varint,5,opt,name=flags" json:"flags,omitempty"`
-	Color          *uint32                `protobuf:"fixed32,6,opt,name=color" json:"color,omitempty"`
-	RandomSeed     *int32                 `protobuf:"varint,7,opt,name=random_seed,json=randomSeed" json:"random_seed,omitempty"`
-	DecalGroupName *uint32                `protobuf:"varint,8,opt,name=decal_group_name,json=decalGroupName" json:"decal_group_name,omitempty"`
-	SizeOverride   *float32               `protobuf:"fixed32,9,opt,name=size_override,json=sizeOverride" json:"size_override,omitempty"`
-	Entityhandle   *uint32                `protobuf:"varint,10,opt,name=entityhandle" json:"entityhandle,omitempty"`
-	MaterialId     *uint64                `protobuf:"varint,11,opt,name=material_id,json=materialId" json:"material_id,omitempty"`
-	SequenceName   *uint32                `protobuf:"varint,12,opt,name=sequence_name,json=sequenceName" json:"sequence_name,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	Position            *CMsgVector            `protobuf:"bytes,1,opt,name=position" json:"position,omitempty"`
+	Normal              *CMsgVector            `protobuf:"bytes,2,opt,name=normal" json:"normal,omitempty"`
+	Saxis               *CMsgVector            `protobuf:"bytes,3,opt,name=saxis" json:"saxis,omitempty"`
+	Boneindex           *int32                 `protobuf:"varint,4,opt,name=boneindex" json:"boneindex,omitempty"`
+	Triangleindex       *int32                 `protobuf:"varint,13,opt,name=triangleindex" json:"triangleindex,omitempty"`
+	Flags               *uint32                `protobuf:"varint,5,opt,name=flags" json:"flags,omitempty"`
+	Color               *uint32                `protobuf:"fixed32,6,opt,name=color" json:"color,omitempty"`
+	RandomSeed          *int32                 `protobuf:"varint,7,opt,name=random_seed,json=randomSeed" json:"random_seed,omitempty"`
+	DecalGroupName      *uint32                `protobuf:"varint,8,opt,name=decal_group_name,json=decalGroupName" json:"decal_group_name,omitempty"`
+	SizeOverride        *float32               `protobuf:"fixed32,9,opt,name=size_override,json=sizeOverride" json:"size_override,omitempty"`
+	Entityhandle        *uint32                `protobuf:"varint,10,opt,name=entityhandle" json:"entityhandle,omitempty"`
+	MaterialId          *uint64                `protobuf:"varint,11,opt,name=material_id,json=materialId" json:"material_id,omitempty"`
+	SequenceName        *uint32                `protobuf:"varint,12,opt,name=sequence_name,json=sequenceName" json:"sequence_name,omitempty"`
+	PositionObjectspace *CMsgVector            `protobuf:"bytes,14,opt,name=position_objectspace,json=positionObjectspace" json:"position_objectspace,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *CMsgPlaceDecalEvent) Reset() {
@@ -300,6 +307,13 @@ func (x *CMsgPlaceDecalEvent) GetSequenceName() uint32 {
 		return *x.SequenceName
 	}
 	return 0
+}
+
+func (x *CMsgPlaceDecalEvent) GetPositionObjectspace() *CMsgVector {
+	if x != nil {
+		return x.PositionObjectspace
+	}
+	return nil
 }
 
 type CMsgClearWorldDecalsEvent struct {
@@ -898,6 +912,174 @@ func (x *CMsgSosSetLibraryStackFields) GetPackedFields() []byte {
 	return nil
 }
 
+type CMsgClothStiffenAnimEvent struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	SourceEntityIndex *int32                 `protobuf:"varint,1,opt,name=source_entity_index,json=sourceEntityIndex" json:"source_entity_index,omitempty"`
+	VertexSetHash     *int32                 `protobuf:"varint,2,opt,name=vertex_set_hash,json=vertexSetHash" json:"vertex_set_hash,omitempty"`
+	Intensity         *float32               `protobuf:"fixed32,3,opt,name=intensity" json:"intensity,omitempty"`
+	Length            *float32               `protobuf:"fixed32,4,opt,name=length" json:"length,omitempty"`
+	SpeedIn           *float32               `protobuf:"fixed32,5,opt,name=speed_in,json=speedIn" json:"speed_in,omitempty"`
+	SpeedOut          *float32               `protobuf:"fixed32,6,opt,name=speed_out,json=speedOut" json:"speed_out,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *CMsgClothStiffenAnimEvent) Reset() {
+	*x = CMsgClothStiffenAnimEvent{}
+	mi := &file_gameevents_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CMsgClothStiffenAnimEvent) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CMsgClothStiffenAnimEvent) ProtoMessage() {}
+
+func (x *CMsgClothStiffenAnimEvent) ProtoReflect() protoreflect.Message {
+	mi := &file_gameevents_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CMsgClothStiffenAnimEvent.ProtoReflect.Descriptor instead.
+func (*CMsgClothStiffenAnimEvent) Descriptor() ([]byte, []int) {
+	return file_gameevents_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *CMsgClothStiffenAnimEvent) GetSourceEntityIndex() int32 {
+	if x != nil && x.SourceEntityIndex != nil {
+		return *x.SourceEntityIndex
+	}
+	return 0
+}
+
+func (x *CMsgClothStiffenAnimEvent) GetVertexSetHash() int32 {
+	if x != nil && x.VertexSetHash != nil {
+		return *x.VertexSetHash
+	}
+	return 0
+}
+
+func (x *CMsgClothStiffenAnimEvent) GetIntensity() float32 {
+	if x != nil && x.Intensity != nil {
+		return *x.Intensity
+	}
+	return 0
+}
+
+func (x *CMsgClothStiffenAnimEvent) GetLength() float32 {
+	if x != nil && x.Length != nil {
+		return *x.Length
+	}
+	return 0
+}
+
+func (x *CMsgClothStiffenAnimEvent) GetSpeedIn() float32 {
+	if x != nil && x.SpeedIn != nil {
+		return *x.SpeedIn
+	}
+	return 0
+}
+
+func (x *CMsgClothStiffenAnimEvent) GetSpeedOut() float32 {
+	if x != nil && x.SpeedOut != nil {
+		return *x.SpeedOut
+	}
+	return 0
+}
+
+type CMsgClothEffectAnimEvent struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	SourceEntityIndex *int32                 `protobuf:"varint,1,opt,name=source_entity_index,json=sourceEntityIndex" json:"source_entity_index,omitempty"`
+	EffectNameHash    *int32                 `protobuf:"varint,2,opt,name=effect_name_hash,json=effectNameHash" json:"effect_name_hash,omitempty"`
+	Operation         *int32                 `protobuf:"varint,3,opt,name=operation" json:"operation,omitempty"`
+	Flags             *int32                 `protobuf:"varint,4,opt,name=flags" json:"flags,omitempty"`
+	Tags              *string                `protobuf:"bytes,5,opt,name=tags" json:"tags,omitempty"`
+	Pte               *CMsgVector            `protobuf:"bytes,6,opt,name=pte" json:"pte,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *CMsgClothEffectAnimEvent) Reset() {
+	*x = CMsgClothEffectAnimEvent{}
+	mi := &file_gameevents_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CMsgClothEffectAnimEvent) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CMsgClothEffectAnimEvent) ProtoMessage() {}
+
+func (x *CMsgClothEffectAnimEvent) ProtoReflect() protoreflect.Message {
+	mi := &file_gameevents_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CMsgClothEffectAnimEvent.ProtoReflect.Descriptor instead.
+func (*CMsgClothEffectAnimEvent) Descriptor() ([]byte, []int) {
+	return file_gameevents_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *CMsgClothEffectAnimEvent) GetSourceEntityIndex() int32 {
+	if x != nil && x.SourceEntityIndex != nil {
+		return *x.SourceEntityIndex
+	}
+	return 0
+}
+
+func (x *CMsgClothEffectAnimEvent) GetEffectNameHash() int32 {
+	if x != nil && x.EffectNameHash != nil {
+		return *x.EffectNameHash
+	}
+	return 0
+}
+
+func (x *CMsgClothEffectAnimEvent) GetOperation() int32 {
+	if x != nil && x.Operation != nil {
+		return *x.Operation
+	}
+	return 0
+}
+
+func (x *CMsgClothEffectAnimEvent) GetFlags() int32 {
+	if x != nil && x.Flags != nil {
+		return *x.Flags
+	}
+	return 0
+}
+
+func (x *CMsgClothEffectAnimEvent) GetTags() string {
+	if x != nil && x.Tags != nil {
+		return *x.Tags
+	}
+	return ""
+}
+
+func (x *CMsgClothEffectAnimEvent) GetPte() *CMsgVector {
+	if x != nil {
+		return x.Pte
+	}
+	return nil
+}
+
 type CMsgSource1LegacyGameEventListKeyT struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Type          *int32                 `protobuf:"varint,1,opt,name=type" json:"type,omitempty"`
@@ -908,7 +1090,7 @@ type CMsgSource1LegacyGameEventListKeyT struct {
 
 func (x *CMsgSource1LegacyGameEventListKeyT) Reset() {
 	*x = CMsgSource1LegacyGameEventListKeyT{}
-	mi := &file_gameevents_proto_msgTypes[13]
+	mi := &file_gameevents_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -920,7 +1102,7 @@ func (x *CMsgSource1LegacyGameEventListKeyT) String() string {
 func (*CMsgSource1LegacyGameEventListKeyT) ProtoMessage() {}
 
 func (x *CMsgSource1LegacyGameEventListKeyT) ProtoReflect() protoreflect.Message {
-	mi := &file_gameevents_proto_msgTypes[13]
+	mi := &file_gameevents_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -961,7 +1143,7 @@ type CMsgSource1LegacyGameEventListDescriptorT struct {
 
 func (x *CMsgSource1LegacyGameEventListDescriptorT) Reset() {
 	*x = CMsgSource1LegacyGameEventListDescriptorT{}
-	mi := &file_gameevents_proto_msgTypes[14]
+	mi := &file_gameevents_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -973,7 +1155,7 @@ func (x *CMsgSource1LegacyGameEventListDescriptorT) String() string {
 func (*CMsgSource1LegacyGameEventListDescriptorT) ProtoMessage() {}
 
 func (x *CMsgSource1LegacyGameEventListDescriptorT) ProtoReflect() protoreflect.Message {
-	mi := &file_gameevents_proto_msgTypes[14]
+	mi := &file_gameevents_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1026,7 +1208,7 @@ type CMsgSource1LegacyGameEventKeyT struct {
 
 func (x *CMsgSource1LegacyGameEventKeyT) Reset() {
 	*x = CMsgSource1LegacyGameEventKeyT{}
-	mi := &file_gameevents_proto_msgTypes[15]
+	mi := &file_gameevents_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1038,7 +1220,7 @@ func (x *CMsgSource1LegacyGameEventKeyT) String() string {
 func (*CMsgSource1LegacyGameEventKeyT) ProtoMessage() {}
 
 func (x *CMsgSource1LegacyGameEventKeyT) ProtoReflect() protoreflect.Message {
-	mi := &file_gameevents_proto_msgTypes[15]
+	mi := &file_gameevents_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1117,7 +1299,7 @@ const file_gameevents_proto_rawDesc = "" +
 	"\x10gameevents.proto\x12\x04dota\x1a\x16networkbasetypes.proto\"`\n" +
 	"\x1cCMsgVDebugGameSessionIDEvent\x12\x1a\n" +
 	"\bclientid\x18\x01 \x01(\x05R\bclientid\x12$\n" +
-	"\rgamesessionid\x18\x02 \x01(\tR\rgamesessionid\"\xdf\x03\n" +
+	"\rgamesessionid\x18\x02 \x01(\tR\rgamesessionid\"\xa4\x04\n" +
 	"\x13CMsgPlaceDecalEvent\x12,\n" +
 	"\bposition\x18\x01 \x01(\v2\x10.dota.CMsgVectorR\bposition\x12(\n" +
 	"\x06normal\x18\x02 \x01(\v2\x10.dota.CMsgVectorR\x06normal\x12&\n" +
@@ -1134,7 +1316,8 @@ const file_gameevents_proto_rawDesc = "" +
 	" \x01(\rR\fentityhandle\x12\x1f\n" +
 	"\vmaterial_id\x18\v \x01(\x04R\n" +
 	"materialId\x12#\n" +
-	"\rsequence_name\x18\f \x01(\rR\fsequenceName\"?\n" +
+	"\rsequence_name\x18\f \x01(\rR\fsequenceName\x12C\n" +
+	"\x14position_objectspace\x18\x0e \x01(\v2\x10.dota.CMsgVectorR\x13positionObjectspace\"?\n" +
 	"\x19CMsgClearWorldDecalsEvent\x12\"\n" +
 	"\fflagstoclear\x18\x01 \x01(\rR\fflagstoclear\"@\n" +
 	"\x1aCMsgClearEntityDecalsEvent\x12\"\n" +
@@ -1194,7 +1377,21 @@ const file_gameevents_proto_rawDesc = "" +
 	"\x1cCMsgSosSetLibraryStackFields\x12\x1d\n" +
 	"\n" +
 	"stack_hash\x18\x01 \x01(\aR\tstackHash\x12#\n" +
-	"\rpacked_fields\x18\x05 \x01(\fR\fpackedFields*\xad\x03\n" +
+	"\rpacked_fields\x18\x05 \x01(\fR\fpackedFields\"\xe1\x01\n" +
+	"\x19CMsgClothStiffenAnimEvent\x12.\n" +
+	"\x13source_entity_index\x18\x01 \x01(\x05R\x11sourceEntityIndex\x12&\n" +
+	"\x0fvertex_set_hash\x18\x02 \x01(\x05R\rvertexSetHash\x12\x1c\n" +
+	"\tintensity\x18\x03 \x01(\x02R\tintensity\x12\x16\n" +
+	"\x06length\x18\x04 \x01(\x02R\x06length\x12\x19\n" +
+	"\bspeed_in\x18\x05 \x01(\x02R\aspeedIn\x12\x1b\n" +
+	"\tspeed_out\x18\x06 \x01(\x02R\bspeedOut\"\xe0\x01\n" +
+	"\x18CMsgClothEffectAnimEvent\x12.\n" +
+	"\x13source_entity_index\x18\x01 \x01(\x05R\x11sourceEntityIndex\x12(\n" +
+	"\x10effect_name_hash\x18\x02 \x01(\x05R\x0eeffectNameHash\x12\x1c\n" +
+	"\toperation\x18\x03 \x01(\x05R\toperation\x12\x14\n" +
+	"\x05flags\x18\x04 \x01(\x05R\x05flags\x12\x12\n" +
+	"\x04tags\x18\x05 \x01(\tR\x04tags\x12\"\n" +
+	"\x03pte\x18\x06 \x01(\v2\x10.dota.CMsgVectorR\x03pte*\xea\x03\n" +
 	"\x0fEBaseGameEvents\x12 \n" +
 	"\x1bGE_VDebugGameSessionIDEvent\x10\xc8\x01\x12\x17\n" +
 	"\x12GE_PlaceDecalEvent\x10\xc9\x01\x12\x1d\n" +
@@ -1208,7 +1405,9 @@ const file_gameevents_proto_rawDesc = "" +
 	"\x14GE_SosStopSoundEvent\x10\xd1\x01\x12\x1e\n" +
 	"\x19GE_SosSetSoundEventParams\x10\xd2\x01\x12 \n" +
 	"\x1bGE_SosSetLibraryStackFields\x10\xd3\x01\x12\x1d\n" +
-	"\x18GE_SosStopSoundEventHash\x10\xd4\x01B%Z#github.com/dotabuff/manta/dota;dota"
+	"\x18GE_SosStopSoundEventHash\x10\xd4\x01\x12\x1d\n" +
+	"\x18GE_ClothStiffenAnimEvent\x10\xd5\x01\x12\x1c\n" +
+	"\x17GE_ClothEffectAnimEvent\x10\xd6\x01B%Z#github.com/dotabuff/manta/dota;dota"
 
 var (
 	file_gameevents_proto_rawDescOnce sync.Once
@@ -1223,7 +1422,7 @@ func file_gameevents_proto_rawDescGZIP() []byte {
 }
 
 var file_gameevents_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_gameevents_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
+var file_gameevents_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
 var file_gameevents_proto_goTypes = []any{
 	(EBaseGameEvents)(0),                              // 0: dota.EBaseGameEvents
 	(*CMsgVDebugGameSessionIDEvent)(nil),              // 1: dota.CMsgVDebugGameSessionIDEvent
@@ -1239,23 +1438,27 @@ var file_gameevents_proto_goTypes = []any{
 	(*CMsgSosStopSoundEventHash)(nil),                 // 11: dota.CMsgSosStopSoundEventHash
 	(*CMsgSosSetSoundEventParams)(nil),                // 12: dota.CMsgSosSetSoundEventParams
 	(*CMsgSosSetLibraryStackFields)(nil),              // 13: dota.CMsgSosSetLibraryStackFields
-	(*CMsgSource1LegacyGameEventListKeyT)(nil),        // 14: dota.CMsgSource1LegacyGameEventList.key_t
-	(*CMsgSource1LegacyGameEventListDescriptorT)(nil), // 15: dota.CMsgSource1LegacyGameEventList.descriptor_t
-	(*CMsgSource1LegacyGameEventKeyT)(nil),            // 16: dota.CMsgSource1LegacyGameEvent.key_t
-	(*CMsgVector)(nil),                                // 17: dota.CMsgVector
+	(*CMsgClothStiffenAnimEvent)(nil),                 // 14: dota.CMsgClothStiffenAnimEvent
+	(*CMsgClothEffectAnimEvent)(nil),                  // 15: dota.CMsgClothEffectAnimEvent
+	(*CMsgSource1LegacyGameEventListKeyT)(nil),        // 16: dota.CMsgSource1LegacyGameEventList.key_t
+	(*CMsgSource1LegacyGameEventListDescriptorT)(nil), // 17: dota.CMsgSource1LegacyGameEventList.descriptor_t
+	(*CMsgSource1LegacyGameEventKeyT)(nil),            // 18: dota.CMsgSource1LegacyGameEvent.key_t
+	(*CMsgVector)(nil),                                // 19: dota.CMsgVector
 }
 var file_gameevents_proto_depIdxs = []int32{
-	17, // 0: dota.CMsgPlaceDecalEvent.position:type_name -> dota.CMsgVector
-	17, // 1: dota.CMsgPlaceDecalEvent.normal:type_name -> dota.CMsgVector
-	17, // 2: dota.CMsgPlaceDecalEvent.saxis:type_name -> dota.CMsgVector
-	15, // 3: dota.CMsgSource1LegacyGameEventList.descriptors:type_name -> dota.CMsgSource1LegacyGameEventList.descriptor_t
-	16, // 4: dota.CMsgSource1LegacyGameEvent.keys:type_name -> dota.CMsgSource1LegacyGameEvent.key_t
-	14, // 5: dota.CMsgSource1LegacyGameEventList.descriptor_t.keys:type_name -> dota.CMsgSource1LegacyGameEventList.key_t
-	6,  // [6:6] is the sub-list for method output_type
-	6,  // [6:6] is the sub-list for method input_type
-	6,  // [6:6] is the sub-list for extension type_name
-	6,  // [6:6] is the sub-list for extension extendee
-	0,  // [0:6] is the sub-list for field type_name
+	19, // 0: dota.CMsgPlaceDecalEvent.position:type_name -> dota.CMsgVector
+	19, // 1: dota.CMsgPlaceDecalEvent.normal:type_name -> dota.CMsgVector
+	19, // 2: dota.CMsgPlaceDecalEvent.saxis:type_name -> dota.CMsgVector
+	19, // 3: dota.CMsgPlaceDecalEvent.position_objectspace:type_name -> dota.CMsgVector
+	17, // 4: dota.CMsgSource1LegacyGameEventList.descriptors:type_name -> dota.CMsgSource1LegacyGameEventList.descriptor_t
+	18, // 5: dota.CMsgSource1LegacyGameEvent.keys:type_name -> dota.CMsgSource1LegacyGameEvent.key_t
+	19, // 6: dota.CMsgClothEffectAnimEvent.pte:type_name -> dota.CMsgVector
+	16, // 7: dota.CMsgSource1LegacyGameEventList.descriptor_t.keys:type_name -> dota.CMsgSource1LegacyGameEventList.key_t
+	8,  // [8:8] is the sub-list for method output_type
+	8,  // [8:8] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_gameevents_proto_init() }
@@ -1270,7 +1473,7 @@ func file_gameevents_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_gameevents_proto_rawDesc), len(file_gameevents_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   16,
+			NumMessages:   18,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

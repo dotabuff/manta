@@ -2544,6 +2544,10 @@ const (
 	DOTA_BOT_MODE_DOTA_BOT_MODE_MINION                DOTA_BOT_MODE = 25
 	DOTA_BOT_MODE_DOTA_BOT_MODE_OUTPOST               DOTA_BOT_MODE = 26
 	DOTA_BOT_MODE_DOTA_BOT_MODE_BOT_CHALLENGE_ENDGAME DOTA_BOT_MODE = 27
+	DOTA_BOT_MODE_DOTA_BOT_MODE_WATCHER               DOTA_BOT_MODE = 28
+	DOTA_BOT_MODE_DOTA_BOT_MODE_WISDOM_SHRINE         DOTA_BOT_MODE = 29
+	DOTA_BOT_MODE_DOTA_BOT_MODE_LOTUS_POOL            DOTA_BOT_MODE = 30
+	DOTA_BOT_MODE_DOTA_BOT_MODE_DEWARD                DOTA_BOT_MODE = 31
 )
 
 // Enum value maps for DOTA_BOT_MODE.
@@ -2577,6 +2581,10 @@ var (
 		25: "DOTA_BOT_MODE_MINION",
 		26: "DOTA_BOT_MODE_OUTPOST",
 		27: "DOTA_BOT_MODE_BOT_CHALLENGE_ENDGAME",
+		28: "DOTA_BOT_MODE_WATCHER",
+		29: "DOTA_BOT_MODE_WISDOM_SHRINE",
+		30: "DOTA_BOT_MODE_LOTUS_POOL",
+		31: "DOTA_BOT_MODE_DEWARD",
 	}
 	DOTA_BOT_MODE_value = map[string]int32{
 		"DOTA_BOT_MODE_NONE":                  0,
@@ -2607,6 +2615,10 @@ var (
 		"DOTA_BOT_MODE_MINION":                25,
 		"DOTA_BOT_MODE_OUTPOST":               26,
 		"DOTA_BOT_MODE_BOT_CHALLENGE_ENDGAME": 27,
+		"DOTA_BOT_MODE_WATCHER":               28,
+		"DOTA_BOT_MODE_WISDOM_SHRINE":         29,
+		"DOTA_BOT_MODE_LOTUS_POOL":            30,
+		"DOTA_BOT_MODE_DEWARD":                31,
 	}
 )
 
@@ -4694,6 +4706,8 @@ type CMsgDOTACombatLogEntry struct {
 	WillReincarnate          *bool                  `protobuf:"varint,78,opt,name=will_reincarnate,json=willReincarnate" json:"will_reincarnate,omitempty"`
 	UsesCharges              *bool                  `protobuf:"varint,79,opt,name=uses_charges,json=usesCharges" json:"uses_charges,omitempty"`
 	TrackedStatId            *uint32                `protobuf:"varint,80,opt,name=tracked_stat_id,json=trackedStatId" json:"tracked_stat_id,omitempty"`
+	ModifierPurgedDuration   *float32               `protobuf:"fixed32,81,opt,name=modifier_purged_duration,json=modifierPurgedDuration" json:"modifier_purged_duration,omitempty"`
+	HealFromRegen            *bool                  `protobuf:"varint,82,opt,name=heal_from_regen,json=healFromRegen" json:"heal_from_regen,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -5286,6 +5300,20 @@ func (x *CMsgDOTACombatLogEntry) GetTrackedStatId() uint32 {
 		return *x.TrackedStatId
 	}
 	return 0
+}
+
+func (x *CMsgDOTACombatLogEntry) GetModifierPurgedDuration() float32 {
+	if x != nil && x.ModifierPurgedDuration != nil {
+		return *x.ModifierPurgedDuration
+	}
+	return 0
+}
+
+func (x *CMsgDOTACombatLogEntry) GetHealFromRegen() bool {
+	if x != nil && x.HealFromRegen != nil {
+		return *x.HealFromRegen
+	}
+	return false
 }
 
 type CMsgPendingEventAward struct {
@@ -6013,7 +6041,7 @@ const file_dota_shared_enums_proto_rawDesc = "" +
 	"\tsave_time\x18\a \x01(\rR\bsaveTime\x1a-\n" +
 	"\x0fPlayerPositions\x12\f\n" +
 	"\x01x\x18\x01 \x01(\x02R\x01x\x12\f\n" +
-	"\x01y\x18\x02 \x01(\x02R\x01y\"\xd9\x19\n" +
+	"\x01y\x18\x02 \x01(\x02R\x01y\"\xbb\x1a\n" +
 	"\x16CMsgDOTACombatLogEntry\x12.\n" +
 	"\x04type\x18\x01 \x01(\x0e2\x1a.dota.DOTA_COMBATLOG_TYPESR\x04type\x12\x1f\n" +
 	"\vtarget_name\x18\x02 \x01(\rR\n" +
@@ -6103,7 +6131,9 @@ const file_dota_shared_enums_proto_rawDesc = "" +
 	"\x12regenerated_health\x18M \x01(\x02R\x11regeneratedHealth\x12)\n" +
 	"\x10will_reincarnate\x18N \x01(\bR\x0fwillReincarnate\x12!\n" +
 	"\fuses_charges\x18O \x01(\bR\vusesCharges\x12&\n" +
-	"\x0ftracked_stat_id\x18P \x01(\rR\rtrackedStatId\"\xfd\x01\n" +
+	"\x0ftracked_stat_id\x18P \x01(\rR\rtrackedStatId\x128\n" +
+	"\x18modifier_purged_duration\x18Q \x01(\x02R\x16modifierPurgedDuration\x12&\n" +
+	"\x0fheal_from_regen\x18R \x01(\bR\rhealFromRegen\"\xfd\x01\n" +
 	"\x15CMsgPendingEventAward\x12'\n" +
 	"\bevent_id\x18\x01 \x01(\x0e2\f.dota.EEventR\aeventId\x12\x1b\n" +
 	"\taction_id\x18\x02 \x01(\rR\bactionId\x12 \n" +
@@ -6497,7 +6527,7 @@ const file_dota_shared_enums_proto_rawDesc = "" +
 	"\x15BOT_DIFFICULTY_EXTRA1\x10\x06\x12\x19\n" +
 	"\x15BOT_DIFFICULTY_EXTRA2\x10\a\x12\x19\n" +
 	"\x15BOT_DIFFICULTY_EXTRA3\x10\b\x12\x16\n" +
-	"\x12BOT_DIFFICULTY_NPX\x10\t*\xd7\x06\n" +
+	"\x12BOT_DIFFICULTY_NPX\x10\t*\xcb\a\n" +
 	"\rDOTA_BOT_MODE\x12\x16\n" +
 	"\x12DOTA_BOT_MODE_NONE\x10\x00\x12\x18\n" +
 	"\x14DOTA_BOT_MODE_LANING\x10\x01\x12\x18\n" +
@@ -6527,7 +6557,11 @@ const file_dota_shared_enums_proto_rawDesc = "" +
 	"\x1bDOTA_BOT_MODE_TUTORIAL_BOSS\x10\x18\x12\x18\n" +
 	"\x14DOTA_BOT_MODE_MINION\x10\x19\x12\x19\n" +
 	"\x15DOTA_BOT_MODE_OUTPOST\x10\x1a\x12'\n" +
-	"#DOTA_BOT_MODE_BOT_CHALLENGE_ENDGAME\x10\x1b*\xf3\x01\n" +
+	"#DOTA_BOT_MODE_BOT_CHALLENGE_ENDGAME\x10\x1b\x12\x19\n" +
+	"\x15DOTA_BOT_MODE_WATCHER\x10\x1c\x12\x1f\n" +
+	"\x1bDOTA_BOT_MODE_WISDOM_SHRINE\x10\x1d\x12\x1c\n" +
+	"\x18DOTA_BOT_MODE_LOTUS_POOL\x10\x1e\x12\x18\n" +
+	"\x14DOTA_BOT_MODE_DEWARD\x10\x1f*\xf3\x01\n" +
 	"\x0eMatchLanguages\x12\x1a\n" +
 	"\x16MATCH_LANGUAGE_INVALID\x10\x00\x12\x1a\n" +
 	"\x16MATCH_LANGUAGE_ENGLISH\x10\x01\x12\x1a\n" +

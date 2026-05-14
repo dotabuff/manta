@@ -176,6 +176,7 @@ enum EDotaUserMessages {
 	DOTA_UM_MonsterHunter_HuntAlert = 633;
 	DOTA_UM_TormentorTimer = 634;
 	DOTA_UM_KillEffect = 635;
+	DOTA_UM_GiveItem = 636;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -294,6 +295,8 @@ enum DOTA_CHAT_MESSAGE {
 	CHAT_MESSAGE_PROTECTOR_SPAWNED = 121;
 	CHAT_MESSAGE_CRAFTING_XP = 122;
 	CHAT_MESSAGE_ROSHAN_ROAR = 123;
+	CHAT_MESSAGE_STONE_OF_RECALL_USED = 124;
+	CHAT_MESSAGE_DEITY_BLESSING = 125;
 }
 
 enum DOTA_NO_BATTLE_POINTS_REASONS {
@@ -375,6 +378,7 @@ enum DOTA_OVERHEAD_ALERT {
 	OVERHEAD_ALERT_FORCE_MISS = 25;
 	OVERHEAD_ALERT_AEGIS = 26;
 	OVERHEAD_ALERT_DISPEL = 27;
+	OVERHEAD_ALERT_BONUS_PURE_DAMAGE = 28;
 }
 
 enum DOTA_ROSHAN_PHASE {
@@ -478,7 +482,7 @@ message CDOTAUserMsg_SwapVerify {
 }
 
 message CDOTAUserMsg_ChatEvent {
-	required DOTA_CHAT_MESSAGE type = 1;
+	optional DOTA_CHAT_MESSAGE type = 1;
 	optional uint32 value = 2;
 	optional sint32 playerid_1 = 3;
 	optional sint32 playerid_2 = 4;
@@ -712,12 +716,12 @@ message CDOTAUserMsg_DestroyLinearProjectile {
 }
 
 message CDOTAUserMsg_DodgeTrackingProjectiles {
-	required int32 entindex = 1;
+	optional int32 entindex = 1;
 	optional bool attacks_only = 2;
 }
 
 message CDOTAUserMsg_SpectatorPlayerClick {
-	required int32 entindex = 1;
+	optional int32 entindex = 1;
 	optional int32 order_type = 2;
 	optional int32 target_index = 3;
 }
@@ -783,8 +787,8 @@ message CDOTAResponseQuerySerialized {
 			INT_NUMERIC = 4;
 		}
 
-		required int32 key = 1;
-		required CDOTAResponseQuerySerialized.Fact.ValueType valtype = 2;
+		optional int32 key = 1;
+		optional CDOTAResponseQuerySerialized.Fact.ValueType valtype = 2;
 		optional float val_numeric = 3;
 		optional string val_string = 4;
 		optional int32 val_stringtable_index = 5;
@@ -844,8 +848,8 @@ message CDOTAUserMsg_UnitEvent {
 		optional int32 activity = 1;
 	}
 
-	required EDotaEntityMessages msg_type = 1;
-	required int32 entity_index = 2;
+	optional EDotaEntityMessages msg_type = 1;
+	optional int32 entity_index = 2;
 	optional CDOTAUserMsg_UnitEvent.Speech speech = 3;
 	optional CDOTAUserMsg_UnitEvent.SpeechMute speech_mute = 4;
 	optional CDOTAUserMsg_UnitEvent.AddGesture add_gesture = 5;
@@ -873,7 +877,7 @@ message CDOTAUserMsg_ItemFound {
 }
 
 message CDOTAUserMsg_OverheadEvent {
-	required DOTA_OVERHEAD_ALERT message_type = 1;
+	optional DOTA_OVERHEAD_ALERT message_type = 1;
 	optional int32 value = 2;
 	optional int32 target_player_entindex = 3;
 	optional int32 target_entindex = 4;
@@ -1080,8 +1084,8 @@ message CDOTAUserMsg_TE_UnitAnimationEnd {
 }
 
 message CDOTAUserMsg_ShowGenericPopup {
-	required string header = 1;
-	required string body = 2;
+	optional string header = 1;
+	optional string body = 2;
 	optional string param1 = 3;
 	optional string param2 = 4;
 	optional bool tint_screen = 5;
@@ -1313,7 +1317,7 @@ message CDOTAUserMsg_UpdateQuestProgress {
 }
 
 message CDOTAUserMsg_QuestStatus {
-	required int32 player_id = 1;
+	optional int32 player_id = 1;
 	optional uint32 quest_id = 2;
 	optional uint32 challenge_id = 3;
 	optional uint32 progress = 4;
@@ -1324,19 +1328,19 @@ message CDOTAUserMsg_QuestStatus {
 }
 
 message CDOTAUserMsg_SuggestHeroPick {
-	required int32 player_id = 1;
+	optional int32 player_id = 1;
 	optional int32 hero_id = 2;
 	optional bool ban = 3;
 	optional uint32 facet_id = 4;
 }
 
 message CDOTAUserMsg_SuggestHeroRole {
-	required int32 player_id = 1;
+	optional int32 player_id = 1;
 	optional string hero_role = 2;
 }
 
 message CDOTAUserMsg_KillcamDamageTaken {
-	required int32 player_id = 1;
+	optional int32 player_id = 1;
 	optional uint32 damage_taken = 2;
 	optional uint32 item_type = 3;
 	optional int32 item_ability_id = 4;
@@ -1345,7 +1349,7 @@ message CDOTAUserMsg_KillcamDamageTaken {
 }
 
 message CDOTAUserMsg_SelectPenaltyGold {
-	required int32 player_id = 1;
+	optional int32 player_id = 1;
 	optional sint32 cost = 2;
 }
 
@@ -1422,7 +1426,7 @@ message CDOTAUserMsg_TipAlert {
 }
 
 message CDOTAUserMsg_ReplaceQueryUnit {
-	required int32 player_id = 1;
+	optional int32 player_id = 1;
 	optional int32 source_entindex = 2;
 	optional int32 target_entindex = 3;
 }
@@ -1482,9 +1486,9 @@ message CDOTAUserMsg_QueuedOrderRemoved {
 }
 
 message CDOTAUserMsg_DebugChallenge {
-	required uint32 challenge_type = 1;
-	required uint32 challenge_query_id = 2;
-	required uint32 event_id = 3;
+	optional uint32 challenge_type = 1;
+	optional uint32 challenge_query_id = 2;
+	optional uint32 event_id = 3;
 	optional uint32 instance_id = 4;
 	optional uint32 challenge_var_0 = 5;
 	optional uint32 challenge_var_1 = 6;
@@ -1669,11 +1673,11 @@ message CDOTAUserMsg_DuelRequested {
 }
 
 message CDOTAUserMsg_MuertaReleaseEvent_AssignedTargetKilled {
-	required int32 player_id_killer = 1;
-	required int32 player_id_target = 2;
-	required int32 points = 3;
-	required int32 points_total = 4;
-	required bool last_hit = 5;
+	optional int32 player_id_killer = 1;
+	optional int32 player_id_target = 2;
+	optional int32 points = 3;
+	optional int32 points_total = 4;
+	optional bool last_hit = 5;
 }
 
 message CDOTAUserMsg_PlayerDraftSuggestPick {
@@ -1758,4 +1762,16 @@ message CDOTAUserMsg_MonsterHunter_HuntAlert {
 message CDOTAUserMsg_KillEffect {
 	optional int32 victim_ent_index = 1;
 	optional int32 killer_player_id = 2;
+}
+
+message CDOTAUserMsg_GiveItem {
+	enum EGiveStatus {
+		Start = 0;
+		End = 1;
+	}
+
+	optional uint32 giver_ent_index = 1;
+	optional uint32 receiver_ent_index = 2;
+	optional uint32 item_ent_index = 3;
+	optional CDOTAUserMsg_GiveItem.EGiveStatus give_status = 4;
 }

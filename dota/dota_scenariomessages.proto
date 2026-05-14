@@ -96,6 +96,7 @@ message CMsgDotaScenario {
 	message HeroAbility {
 		optional string name = 1;
 		optional int32 level = 2;
+		optional bool tome_upgraded = 3;
 	}
 
 	message HeroNeutralChoice {
