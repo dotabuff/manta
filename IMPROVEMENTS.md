@@ -326,7 +326,8 @@ pointer/tuple allocs 4.6%, noscale/signed boxes ~3% each, QAngle `[]float32` 2.2
   indices (all in ActiveModifiers; e.g. manta=11 where correct=50). Invisible to goldens only because no
   test resolves a delta-updated table by index. Applying the one-line fix: `TestParseStringTable*` and 5
   golden `TestMatch*` all pass with identical values. Init stays `-1`; do **not** switch to `readUBitVar`.
-- **Result:** _(pending)_
+- **Result:** Applied the one-line additive fix. Full `go test ./...` green — all golden values identical
+  (no test resolves a delta-updated table by index). Fixes the latent ActiveModifiers mis-indexing. ✅
 
 ### P2.2 — string-table: fail loud
 - `parseStringTable` defers `recover()` and returns partial `items` silently (string_table.go:181-186);

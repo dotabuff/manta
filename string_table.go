@@ -223,7 +223,12 @@ func parseStringTable(buf []byte, numUpdates int32, name string, userDataFixed b
 		if incr {
 			index++
 		} else {
-			index = int32(r.readVarUint32()) + 1
+			// The non-increment delta is additive (relative to the running
+			// index), matching the S2 entity decoder (see entity.go) and
+			// clarity's S2StringTableEmitter. The previous absolute form
+			// (= varuint+1) produced wrong, non-monotonic indices for
+			// delta-updated tables such as ActiveModifiers.
+			index += int32(r.readVarUint32()) + 2
 		}
 
 		// Some values have keys, some don't.
