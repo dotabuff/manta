@@ -221,6 +221,14 @@ func newQuantizedFloatDecoder(bitCount, flags *int32, lowValue, highValue *float
 		qfd.High = qfd.Low + float32(Range2) - qfd.Offset
 	}
 
+	// The bit reader refills its accumulator a word at a time and relies on
+	// every read being at most 32 bits. The integer-encoding path above can in
+	// principle raise the bit count, so guard the invariant explicitly rather
+	// than silently corrupting the stream.
+	if qfd.Bitcount > 32 {
+		_panicf("quantized float bit count %d exceeds 32", qfd.Bitcount)
+	}
+
 	// Assign multipliers
 	qfd.assignMultipliers(uint32(steps))
 

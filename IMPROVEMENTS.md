@@ -235,7 +235,11 @@ pointer/tuple allocs 4.6%, noscale/signed boxes ~3% each, QAngle `[]float32` 2.2
 - **Add a build-time assert** that quantized `Bitcount <= 32` (quantizedfloat.go integer-encode loop can
   raise it) so a pathological field can't overflow the accumulator.
 - **Impact:** large CPU win (only visible after P0). 0 allocs delta.
-- **Result:** _(pending)_
+- **Result:** sec/op 1.198→1.058 (**−11.64%**), allocs/B flat. Word refill masks before shifting (no
+  stale partial-byte bits). Added `realign()` so byte-aligned `readBytes`/`readByte` rewind the
+  buffered word and stay zero-copy — this extended the fast path beyond the old `bitCount==0`, making byte
+  reads zero-copy *more* often than before (hence no B/op regression). Added quantized `Bitcount<=32`
+  assert. go test green. ✅ (also satisfies the P-guard zero-copy invariant; P-guard adds the test.)
 
 ### P1.11 — varints + `readByte`/`readLeUintX` from the accumulator
 - **Now:** `readVarUint32/64` call `readByte` per byte (byte-aligned fast path → `nextByte`), each a
@@ -447,3 +451,4 @@ Verified zero occurrences across all 39 build replays, so safe insurance:
 | P1.7 hoist v(6) debug guard | 1.476 s (−3.1%) | 569.5 MiB (−28.1%) | 18.63M (−10.2%) | PASS |
 | P1.8 buffer stream IO (streaming −6.5%) | 1.483 s (flat, in-mem) | 569.5 MiB | 18.63M | PASS |
 | **P1.9 reusable field-path buffer** | **1.198 s (−21.3%)** | **398.6 MiB (−49.6%)** | **10.65M (−48.7%)** | PASS |
+| **P1.10 word-at-a-time reader** | **1.058 s (−30.5%)** | 398.6 MiB (−49.6%) | 10.65M (−48.7%) | PASS |

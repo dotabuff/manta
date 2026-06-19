@@ -56,24 +56,63 @@ func (r *reader) nextByte() byte {
 	return r.buf[r.pos-1]
 }
 
-// readBits returns the uint32 value for the given number of sequential bits
+// readBitMasks[k] is a bitmask of the low k bits. It is used instead of an
+// inline (1<<k)-1 so that k == 64 (a full word) does not overflow the shift.
+var readBitMasks = func() [65]uint64 {
+	var m [65]uint64
+	for i := 0; i < 64; i++ {
+		m[i] = (uint64(1) << uint(i)) - 1
+	}
+	m[64] = ^uint64(0)
+	return m
+}()
+
+// readBits returns the uint32 value for the given number of sequential bits.
+//
+// The accumulator is refilled a full 64-bit word at a time while at least 8
+// bytes remain, falling back to byte-at-a-time only for the final bytes of the
+// buffer. Every read is <= 32 bits (quantized float decoders are asserted to
+// stay within that), so a single word refill always yields enough bits. The
+// loaded word is masked to the whole bytes of headroom before being merged so
+// no unclaimed (partial-byte) bits are left above bitCount.
 func (r *reader) readBits(n uint32) uint32 {
+	for n > r.bitCount && r.pos+8 <= r.size {
+		w := binary.LittleEndian.Uint64(r.buf[r.pos:])
+		free := (64 - r.bitCount) >> 3 // whole bytes of accumulator headroom
+		bits := free * 8
+		r.bitVal |= (w & readBitMasks[bits]) << r.bitCount
+		r.pos += free
+		r.bitCount += bits
+	}
 	for n > r.bitCount {
 		r.bitVal |= uint64(r.nextByte()) << r.bitCount
 		r.bitCount += 8
 	}
 
-	x := (r.bitVal & ((1 << n) - 1))
+	x := r.bitVal & readBitMasks[n]
 	r.bitVal >>= n
 	r.bitCount -= n
 
 	return uint32(x)
 }
 
+// realign discards the whole bytes the word refill buffered in the accumulator
+// by rewinding the read position, so byte-oriented reads can proceed directly
+// from (and alias) the underlying buffer. Only valid when byte-aligned, i.e.
+// bitCount is a multiple of 8.
+func (r *reader) realign() {
+	r.pos -= r.bitCount >> 3
+	r.bitVal = 0
+	r.bitCount = 0
+}
+
 // readByte reads a single byte
 func (r *reader) readByte() byte {
 	// Fast path if we're byte aligned
-	if r.bitCount == 0 {
+	if r.bitCount&7 == 0 {
+		if r.bitCount != 0 {
+			r.realign()
+		}
 		return r.nextByte()
 	}
 
@@ -83,7 +122,10 @@ func (r *reader) readByte() byte {
 // readBytes reads the given number of bytes
 func (r *reader) readBytes(n uint32) []byte {
 	// Fast path if we're byte aligned
-	if r.bitCount == 0 {
+	if r.bitCount&7 == 0 {
+		if r.bitCount != 0 {
+			r.realign()
+		}
 		r.pos += n
 		if r.pos > r.size {
 			_panicf("readBytes: insufficient buffer (%d of %d)", r.pos, r.size)
