@@ -40,7 +40,7 @@ var fieldTypeDecoders = map[string]fieldDecoder{
 	"HeroFacetKey_t": unsigned64Decoder,
 	"HeroID_t":       signedDecoder,
 	"HSequence":      hSequenceDecoder,
-	"BloodType":      unsignedDecoder,
+	"BloodType":      bloodTypeDecoder,
 
 	"CBodyComponent":       componentDecoder,
 	"CGameSceneNodeHandle": unsignedDecoder,
@@ -138,6 +138,13 @@ func signedDecoder(r *reader) interface{} {
 
 func signed64Decoder(r *reader) interface{} {
 	return r.readVarInt64()
+}
+
+// bloodTypeDecoder reads a fixed 8-bit value, matching clarity's
+// IntUnsignedDecoder(8). This is bit-identical to an unsigned varint only while
+// the value is < 128; the full golden suite gates that this holds on the corpus.
+func bloodTypeDecoder(r *reader) interface{} {
+	return uint64(r.readBits(8))
 }
 
 // hSequenceDecoder decodes a sequence handle as an unsigned varint minus one,

@@ -391,7 +391,8 @@ Verified zero occurrences across all 39 build replays, so safe insurance:
 - `m_nBloodType` (109k× on builds 6600/6601, **in the golden suite**) currently a varint; clarity reads a
   fixed 8-bit. Identical bits only when value < 128; if any ≥127, widths differ → desync → broken goldens.
   **Suite-gated:** apply only if all goldens (esp. 6600/6601) stay green; otherwise drop.
-- **Result:** _(pending)_
+- **Result:** **KEPT** — full suite green, so every `m_nBloodType` in the corpus is < 128 (fixed-8 ≡
+  varint, no desync). Now matches clarity's encoding and is correct for future values ≥ 128. ✅
 
 ### P2.9 — QAngle precise/32/0-bit forward-compat
 - `qangle_pitch_yaw` doesn't handle bitCount ∈ {0,32} (raw float); no `qangle_precise` (20-bit) handling →
