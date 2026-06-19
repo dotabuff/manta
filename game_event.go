@@ -163,7 +163,7 @@ func (e *GameEvent) getEventKey(name string) (*dota.CMsgSource1LegacyGameEventKe
 		return nil, _errorf("field %s: missing", name)
 	}
 
-	if f.i > len(e.m.GetKeys()) {
+	if f.i >= len(e.m.GetKeys()) {
 		return nil, _errorf("field %s: %d out of range", name, f.i)
 	}
 

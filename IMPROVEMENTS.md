@@ -342,7 +342,7 @@ pointer/tuple allocs 4.6%, noscale/signed boxes ~3% each, QAngle `[]float32` 2.2
 ### P2.3 — `getEventKey` off-by-one
 - `if f.i > len(e.m.GetKeys())` lets `f.i == len` pass → `GetKeys()[f.i]` panics (game_event.go:166).
   Change to `>=`. One char; zero golden risk (well-formed descriptors never hit it).
-- **Result:** _(pending)_
+- **Result:** Changed `>` to `>=` (game_event.go). go test green; zero golden change. ✅
 
 ### P2.4 — modifier: skip empty/deleted entries
 - `emitModifierTableEvents` unmarshals every item including empty (`Value == []byte{}`), raising all-zero
