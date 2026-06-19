@@ -140,7 +140,8 @@ pointer/tuple allocs 4.6%, noscale/signed boxes ~3% each, QAngle `[]float32` 2.2
   CDemo* handler retains a subslice across messages, reuse corrupts it. **The full `go test` suite is
   the gate** — do not rely on assertion that string tables copy; verify empirically.
 - **Impact (measured):** −9 MB/op.
-- **Result:** _(pending)_
+- **Result:** B/op 762.6→700.6 MiB (**−8.14%** — snappy full-packet buffers), sec/op 1.519→1.511
+  (−0.49%), allocs/op −0.12% (−30K). Full 48-replay suite green → reuse aliasing is safe on the corpus. ✅
 
 ### P1.4 — modifier emit early-return when no handler
 - **Now:** `emitModifierTableEvents` (modifier.go:18) allocates + unmarshals a proto per ActiveModifiers
@@ -428,3 +429,4 @@ Verified zero occurrences across all 39 build replays, so safe insurance:
 | P0 baseline | 1.523 s ±1% | 791.5 MiB | 20.75M | PASS |
 | P1.1 pendingMessage value-slice | 1.514 s (−0.6%) | 763.8 MiB (−3.5%) | 20.06M (−3.3%) | PASS |
 | P1.2 outerMessage by value | 1.519 s (−0.3%) | 762.6 MiB (−3.7%) | 20.03M (−3.5%) | PASS |
+| P1.3 snappy scratch reuse | 1.511 s (−0.8%) | 700.6 MiB (−11.5%) | 20.00M (−3.6%) | PASS |

@@ -46,6 +46,7 @@ type Parser struct {
 	modifierTableEntryHandlers []ModifierTableEntryHandler
 	serializers                map[string]*serializer
 	pendingMsgBuf              pendingMessages
+	snappyScratch              []byte
 	stream                     *stream
 	stringTables               *stringTables
 	stopAtTick                 uint32
@@ -229,12 +230,18 @@ func (p *Parser) readOuterMessage() (outerMessage, error) {
 		return outerMessage{}, err
 	}
 
-	// If the buffer is compressed, decompress it with snappy.
+	// If the buffer is compressed, decompress it with snappy, reusing a
+	// parser-level scratch buffer across messages. snappy.Decode reuses the
+	// destination when it is large enough, amortizing the decompression
+	// allocation to roughly the largest compressed message seen. This is safe
+	// because the decoded buffer is consumed within the dispatch of this
+	// message and never retained across outer messages.
 	if msgCompressed {
 		var err error
-		if buf, err = snappy.Decode(nil, buf); err != nil {
+		if buf, err = snappy.Decode(p.snappyScratch[:cap(p.snappyScratch)], buf); err != nil {
 			return outerMessage{}, err
 		}
+		p.snappyScratch = buf
 	}
 
 	// Return the message
