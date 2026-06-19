@@ -22,6 +22,41 @@ var (
 
 func init() {
 	huffTreeRoot = flattenHuffmanTree(huffTree)
+	buildHuffLookup()
+}
+
+// huffLookupBits is the width of the field-path op lookup window. Most ops have
+// codes no longer than this and resolve in a single table index.
+const huffLookupBits = 8
+
+// huffLookup resolves up to huffLookupBits of the field-path op stream in one
+// step. Each entry packs the consumed bit count in its low byte (0 meaning the
+// code is longer than the window) and, in its high byte, either the resolved op
+// id (when the low byte is non-zero) or the flat-tree node to continue from.
+var huffLookup [1 << huffLookupBits]uint16
+
+func buildHuffLookup() {
+	for v := 0; v < len(huffLookup); v++ {
+		node := huffTreeRoot
+		resolved := false
+		for bit := uint32(0); bit < huffLookupBits; bit++ {
+			var child int32
+			if (v>>bit)&1 == 1 {
+				child = huffTreeRight[node]
+			} else {
+				child = huffTreeLeft[node]
+			}
+			if child < 0 {
+				huffLookup[v] = uint16(bit+1) | uint16(-child-1)<<8
+				resolved = true
+				break
+			}
+			node = child
+		}
+		if !resolved {
+			huffLookup[v] = uint16(node) << 8
+		}
+	}
 }
 
 // flattenHuffmanTree appends the internal nodes of t to huffTreeLeft/huffTreeRight
@@ -349,27 +384,40 @@ func readFieldPaths(r *reader, paths []fieldPath) []fieldPath {
 	fp := fpPool.Get().(*fieldPath)
 	fp.reset()
 
-	node := huffTreeRoot
-
 	for {
-		var child int32
-		if r.readBits(1) == 1 {
-			child = huffTreeRight[node]
+		// Resolve the op via the 8-bit lookup table, falling back to a flat-tree
+		// walk for the rare codes longer than the lookup window. peekBits never
+		// over-reads, so the final FieldPathEncodeFinish near the end of the
+		// buffer is handled correctly.
+		var op int32
+		entry := huffLookup[r.peekBits(huffLookupBits)]
+		if consumed := entry & 0xFF; consumed != 0 {
+			r.skipBits(uint32(consumed))
+			op = int32(entry >> 8)
 		} else {
-			child = huffTreeLeft[node]
+			r.skipBits(huffLookupBits)
+			node := int32(entry >> 8)
+			for {
+				var child int32
+				if r.readBits(1) == 1 {
+					child = huffTreeRight[node]
+				} else {
+					child = huffTreeLeft[node]
+				}
+				if child < 0 {
+					op = -child - 1
+					break
+				}
+				node = child
+			}
 		}
 
-		if child < 0 {
-			node = huffTreeRoot
-			fieldPathTable[-child-1].fn(r, fp)
-			if fp.done {
-				fpPool.Put(fp)
-				return paths
-			}
-			paths = append(paths, *fp)
-		} else {
-			node = child
+		fieldPathTable[op].fn(r, fp)
+		if fp.done {
+			fpPool.Put(fp)
+			return paths
 		}
+		paths = append(paths, *fp)
 	}
 }
 

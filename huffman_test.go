@@ -1,6 +1,9 @@
 package manta
 
-import "testing"
+import (
+	"math/rand"
+	"testing"
+)
 
 // TestHuffmanFlatMatchesTree verifies the flattened field-path huffman arrays
 // (huffTreeLeft/huffTreeRight) decode identically to the interface tree they are
@@ -40,4 +43,69 @@ func TestHuffmanFlatMatchesTree(t *testing.T) {
 		}
 	}
 	walk(huffTreeRoot, huffTree)
+}
+
+// decodeOneHuffOpLookup decodes a single field-path op code (without executing
+// the op) using the 8-bit lookup fast path.
+func decodeOneHuffOpLookup(r *reader) int32 {
+	entry := huffLookup[r.peekBits(huffLookupBits)]
+	if consumed := entry & 0xFF; consumed != 0 {
+		r.skipBits(uint32(consumed))
+		return int32(entry >> 8)
+	}
+	r.skipBits(huffLookupBits)
+	node := int32(entry >> 8)
+	for {
+		var child int32
+		if r.readBits(1) == 1 {
+			child = huffTreeRight[node]
+		} else {
+			child = huffTreeLeft[node]
+		}
+		if child < 0 {
+			return -child - 1
+		}
+		node = child
+	}
+}
+
+// decodeOneHuffOpWalk decodes a single field-path op code using only the flat
+// tree walk.
+func decodeOneHuffOpWalk(r *reader) int32 {
+	node := huffTreeRoot
+	for {
+		var child int32
+		if r.readBits(1) == 1 {
+			child = huffTreeRight[node]
+		} else {
+			child = huffTreeLeft[node]
+		}
+		if child < 0 {
+			return -child - 1
+		}
+		node = child
+	}
+}
+
+// TestHuffmanLookupMatchesWalk verifies the 8-bit lookup fast path decodes the
+// same op and consumes the same number of bits as the pure flat-tree walk for
+// many random streams. An 8-byte buffer comfortably holds the longest code
+// (17 bits), so neither path reaches the buffer end.
+func TestHuffmanLookupMatchesWalk(t *testing.T) {
+	rng := rand.New(rand.NewSource(1))
+	for trial := 0; trial < 5000; trial++ {
+		buf := make([]byte, 8)
+		for i := range buf {
+			buf[i] = byte(rng.Intn(256))
+		}
+		ra := newReader(buf)
+		rb := newReader(buf)
+		opA := decodeOneHuffOpLookup(ra)
+		opB := decodeOneHuffOpWalk(rb)
+		consumedA := ra.pos*8 - ra.bitCount
+		consumedB := rb.pos*8 - rb.bitCount
+		if opA != opB || consumedA != consumedB {
+			t.Fatalf("trial %d buf %x: lookup op=%d bits=%d, walk op=%d bits=%d", trial, buf, opA, consumedA, opB, consumedB)
+		}
+	}
 }

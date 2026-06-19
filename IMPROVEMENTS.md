@@ -282,7 +282,9 @@ pointer/tuple allocs 4.6%, noscale/signed boxes ~3% each, QAngle `[]float32` 2.2
   (`swapNodes`/`addNode`) after the table is built.
 - **Note:** the "99.7%" is clarity's runtime figure; manta's static weights resolve ~98.4% within ≤8 bits
   (28/40 ops have >8-bit codes, max 17) — still a large majority. Don't cite 99.7% as verified.
-- **Result:** _(pending)_
+- **Result:** sec/op 960.2→796.0 ms (**−17.10%**), allocs/B unchanged. 256-entry lookup resolves most
+  ops in one index; `peekBits` zero-pads (never over-reads), flat-walk fallback for >8-bit codes.
+  `TestHuffmanLookupMatchesWalk` (5000 random streams) confirms lookup ≡ walk (op + bits consumed). go test green. ✅
 
 ### P1.14 — decode class baseline once, clone per entity
 - **Now:** every entity CREATE re-parses raw baseline bytes from scratch
@@ -461,3 +463,4 @@ Verified zero occurrences across all 39 build replays, so safe insurance:
 | **P1.10 word-at-a-time reader** | **1.058 s (−30.5%)** | 398.6 MiB (−49.6%) | 10.65M (−48.7%) | PASS |
 | P1.11 varints from accumulator | _skipped (breaks reader pos contract)_ | — | — | — |
 | **P1.12 flatten huffman tree** | **0.960 s (−37.0%)** | 398.6 MiB (−49.6%) | 10.65M (−48.7%) | PASS |
+| **P1.13 8-bit op lookup table** | **0.796 s (−47.7%)** | 398.6 MiB (−49.6%) | 10.65M (−48.7%) | PASS |

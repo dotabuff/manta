@@ -96,6 +96,34 @@ func (r *reader) readBits(n uint32) uint32 {
 	return uint32(x)
 }
 
+// peekBits returns the next n (<= 32) bits without consuming them, refilling the
+// accumulator as needed. If fewer than n bits remain in the buffer the missing
+// high bits are returned as zero; the buffer is never over-read past its end.
+// This is required by the field-path op lookup, which inspects a fixed window
+// that can extend past the final op near the end of the stream.
+func (r *reader) peekBits(n uint32) uint32 {
+	for n > r.bitCount && r.pos+8 <= r.size {
+		w := binary.LittleEndian.Uint64(r.buf[r.pos:])
+		free := (64 - r.bitCount) >> 3
+		bits := free * 8
+		r.bitVal |= (w & readBitMasks[bits]) << r.bitCount
+		r.pos += free
+		r.bitCount += bits
+	}
+	for n > r.bitCount && r.pos < r.size {
+		r.bitVal |= uint64(r.nextByte()) << r.bitCount
+		r.bitCount += 8
+	}
+
+	return uint32(r.bitVal & readBitMasks[n])
+}
+
+// skipBits discards n (<= bitCount) bits already buffered in the accumulator.
+func (r *reader) skipBits(n uint32) {
+	r.bitVal >>= n
+	r.bitCount -= n
+}
+
 // realign discards the whole bytes the word refill buffered in the accumulator
 // by rewinding the read position, so byte-oriented reads can proceed directly
 // from (and alias) the underlying buffer. Only valid when byte-aligned, i.e.
