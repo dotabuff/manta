@@ -175,7 +175,8 @@ pointer/tuple allocs 4.6%, noscale/signed boxes ~3% each, QAngle `[]float32` 2.2
 - **Clarity:** resolves name→FieldPath on the DTClass, Entity holds only state (Entity.java:88-114).
 - **Impact:** −2 maps/entity + smaller Entity struct. Golden-safe (resolved fieldPath is class-invariant;
   `expectPlayer6Name`/`expectHeroEntityName` guard it).
-- **Result:** _(pending)_
+- **Result:** allocs/op −0.16% (−30K, two maps/entity removed), B/op −0.27%, sec/op ~ (p=0.190, noise).
+  Caches now shared on `*class`; single-goroutine parse so safe. go test green. ✅
 
 ### P1.7 — hoist `v(6)` debug guard out of the per-field loop
 - **Now:** `readFields` calls `v(6)` twice per field path in the hot loop (field_reader.go:13,23).
@@ -436,3 +437,4 @@ Verified zero occurrences across all 39 build replays, so safe insurance:
 | P1.3 snappy scratch reuse | 1.511 s (−0.8%) | 700.6 MiB (−11.5%) | 20.00M (−3.6%) | PASS |
 | P1.4 modifier early-return | 1.479 s (−2.9%) | 647.9 MiB (−18.1%) | 18.74M (−9.7%) | PASS |
 | P1.5 reuse tuples + reader | 1.494 s (−1.9%) | 571.0 MiB (−27.9%) | 18.66M (−10.1%) | PASS |
+| P1.6 hoist fp caches to class | 1.509 s (−0.9%) | 569.5 MiB (−28.1%) | 18.63M (−10.2%) | PASS |

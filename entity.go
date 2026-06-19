@@ -49,25 +49,21 @@ type EntityHandler func(*Entity, EntityOp) error
 
 // Entity represents a single game entity in the replay
 type Entity struct {
-	index   int32
-	serial  int32
-	class   *class
-	active  bool
-	state   *fieldState
-	fpCache map[string]*fieldPath
-	fpNoop  map[string]bool
+	index  int32
+	serial int32
+	class  *class
+	active bool
+	state  *fieldState
 }
 
 // newEntity returns a new entity for the given index, serial and class
 func newEntity(index, serial int32, class *class) *Entity {
 	return &Entity{
-		index:   index,
-		serial:  serial,
-		class:   class,
-		active:  true,
-		state:   newFieldState(),
-		fpCache: make(map[string]*fieldPath),
-		fpNoop:  make(map[string]bool),
+		index:  index,
+		serial: serial,
+		class:  class,
+		active: true,
+		state:  newFieldState(),
 	}
 }
 
@@ -92,20 +88,20 @@ func (e *Entity) Dump() {
 
 // Get returns the current value of the Entity state for the given key
 func (e *Entity) Get(name string) interface{} {
-	if fp, ok := e.fpCache[name]; ok {
+	if fp, ok := e.class.fpCache[name]; ok {
 		return e.state.get(fp)
 	}
-	if e.fpNoop[name] {
+	if e.class.fpNoop[name] {
 		return nil
 	}
 
 	fp := newFieldPath()
 	if !e.class.getFieldPathForName(fp, name) {
-		e.fpNoop[name] = true
+		e.class.fpNoop[name] = true
 		fp.release()
 		return nil
 	}
-	e.fpCache[name] = fp
+	e.class.fpCache[name] = fp
 
 	return e.state.get(fp)
 }
