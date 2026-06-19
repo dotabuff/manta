@@ -99,6 +99,10 @@ No parser code touched → cannot affect correctness.
 `make memprofile` on `8552595443` — this is the reference all later commits compare against, and it
 reconfirms the top alloc sources (expect `readFieldPaths` to dominate).
 
+**Result:** baseline **1.523 s/op ±1%, 791.5 MiB/op, 20.75M allocs/op** (8552595443, M4 Pro, 10x×10).
+Alloc profile confirms `readFieldPaths` #1 at **56.6%**, then quantized-float box 5.4%, `onCDemoPacket`
+pointer/tuple allocs 4.6%, noscale/signed boxes ~3% each, QAngle `[]float32` 2.2%.
+
 ---
 
 ## Phase 1 — safe perf wins
@@ -418,4 +422,4 @@ Verified zero occurrences across all 39 build replays, so safe insurance:
 
 | After goal | sec/op | B/op | allocs/op | go test |
 |------------|--------|------|-----------|---------|
-| P0 baseline | _tbd_ | _tbd_ | _tbd_ | PASS |
+| P0 baseline | 1.523 s ±1% | 791.5 MiB | 20.75M | PASS |

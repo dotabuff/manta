@@ -1,6 +1,7 @@
 package manta
 
 import (
+	"io"
 	"os"
 	"testing"
 
@@ -9,6 +10,7 @@ import (
 )
 
 func BenchmarkMatch2159568145(b *testing.B) { testScenarios[2159568145].bench(b) }
+func BenchmarkMatch8552595443(b *testing.B) { testScenarios[8552595443].bench(b) }
 
 // Test client
 func TestMatchNew8552595443(t *testing.T) { testScenarios[8552595443].test(t) }
@@ -607,10 +609,22 @@ var testScenarios = map[int64]testScenario{
 }
 
 func (s testScenario) bench(b *testing.B) {
-	for n := 0; n < b.N; n++ {
-		r := mustGetReplayReader(s.matchId, s.replayUrl)
+	// Read the replay fully into memory once so the benchmark measures parsing
+	// (CPU + allocations), not per-byte file IO. The streaming os.File path
+	// spends ~80% of CPU in read syscalls, which would otherwise mask the
+	// parser changes we are trying to measure.
+	rc := mustGetReplayReader(s.matchId, s.replayUrl)
+	buf, err := io.ReadAll(rc)
+	rc.Close()
+	if err != nil {
+		b.Fatalf("unable to read replay: %s", err)
+	}
 
-		parser, err := NewStreamParser(r)
+	b.ReportAllocs()
+	b.ResetTimer()
+
+	for n := 0; n < b.N; n++ {
+		parser, err := NewParser(buf)
 		if err != nil {
 			b.Fatalf("unable to instantiate parser: %s", err)
 		}
@@ -624,8 +638,6 @@ func (s testScenario) bench(b *testing.B) {
 			b.Fatal(err)
 		}
 	}
-
-	b.ReportAllocs()
 }
 
 func (s testScenario) test(t *testing.T) {
