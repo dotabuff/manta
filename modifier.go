@@ -24,6 +24,13 @@ func (p *Parser) emitModifierTableEvents(items []*stringTableItem) error {
 	}
 
 	for _, item := range items {
+		// Skip deleted/empty entries (clarity does the same). An empty value
+		// would otherwise unmarshal into an all-zero message and be emitted as a
+		// spurious modifier event. A real modifier is never zero-length on wire.
+		if len(item.Value) == 0 {
+			continue
+		}
+
 		msg := &dota.CDOTAModifierBuffTableEntry{}
 		if err := proto.NewBuffer(item.Value).Unmarshal(msg); err != nil {
 			_debugf("unable to unmarshal ModifierBuffTableEntry: %s", err)

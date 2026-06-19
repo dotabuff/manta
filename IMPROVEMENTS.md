@@ -348,7 +348,8 @@ pointer/tuple allocs 4.6%, noscale/signed boxes ~3% each, QAngle `[]float32` 2.2
 - `emitModifierTableEvents` unmarshals every item including empty (`Value == []byte{}`), raising all-zero
   messages to handlers. Add `if len(item.Value) == 0 { continue }` (modifier.go:19), matching clarity
   `if (value != null)`. A real new modifier is never zero-length on the wire.
-- **Result:** _(pending)_
+- **Result:** Added the empty-value skip. go test green; golden-neutral (the suite registers no modifier
+  handler). ✅
 
 ### P2.5 — combat-log `Type()/TypeName()/String()` descriptor-driven
 - These hardcode `keys[0].GetValByte()` (game_event.go:37,41,46), bypassing the descriptor field map. Resolve
