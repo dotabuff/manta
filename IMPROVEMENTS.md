@@ -383,7 +383,9 @@ Verified zero occurrences across all 39 build replays, so safe insurance:
   different value for negative ids). Both change consumer-visible output but no golden asserts them. Decide
   storage signedness (HSequence `value-1` underflows if stored unsigned at value 0). **Run the full suite
   incl. 6600/6601 replays; accept only if all green.**
-- **Result:** _(pending)_
+- **Result:** Full suite green (incl. 6600/6601 replays). HSequence → `int32(varuint)-1`, HeroID_t →
+  signed varint. Same bits consumed (no desync); neither is asserted, so goldens are identical. Changes
+  live consumer-visible values to match clarity. ✅
 
 ### P2.8 — BloodType fixed-8 decode (risky)
 - `m_nBloodType` (109k× on builds 6600/6601, **in the golden suite**) currently a varint; clarity reads a

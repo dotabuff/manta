@@ -38,6 +38,8 @@ var fieldTypeDecoders = map[string]fieldDecoder{
 
 	"GameTime_t":     noscaleDecoder,
 	"HeroFacetKey_t": unsigned64Decoder,
+	"HeroID_t":       signedDecoder,
+	"HSequence":      hSequenceDecoder,
 	"BloodType":      unsignedDecoder,
 
 	"CBodyComponent":       componentDecoder,
@@ -136,6 +138,13 @@ func signedDecoder(r *reader) interface{} {
 
 func signed64Decoder(r *reader) interface{} {
 	return r.readVarInt64()
+}
+
+// hSequenceDecoder decodes a sequence handle as an unsigned varint minus one,
+// matching clarity's IntMinusOneDecoder. It returns a signed int32 so the
+// "none" handle (wire value 0) is -1 rather than wrapping to a large unsigned.
+func hSequenceDecoder(r *reader) interface{} {
+	return int32(r.readVarUint32()) - 1
 }
 
 // cUtlBinaryBlockDecoder reads a length-prefixed binary blob (varint length
