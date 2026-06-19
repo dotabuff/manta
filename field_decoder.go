@@ -14,6 +14,7 @@ var fieldTypeFactories = map[string]fieldFactory{
 	"Vector2D":                 vectorFactory(2),
 	"Vector4D":                 vectorFactory(4),
 	"VectorWS":                 vectorFactory(3),
+	"Quaternion":               vectorFactory(4),
 	"uint64":                   unsigned64Factory,
 	"QAngle":                   qangleFactory,
 	"CHandle":                  unsignedFactory,
@@ -29,7 +30,7 @@ var fieldTypeDecoders = map[string]fieldDecoder{
 	"color32": unsignedDecoder,
 	"int16":   signedDecoder,
 	"int32":   signedDecoder,
-	"int64":   signedDecoder,
+	"int64":   signed64Decoder,
 	"int8":    signedDecoder,
 	"uint16":  unsignedDecoder,
 	"uint32":  unsignedDecoder,
@@ -47,6 +48,9 @@ var fieldTypeDecoders = map[string]fieldDecoder{
 	"CUtlString":           stringDecoder,
 	"CUtlStringToken":      unsignedDecoder,
 	"CUtlSymbolLarge":      stringDecoder,
+	"CUtlBinaryBlock":      cUtlBinaryBlockDecoder,
+	"CGlobalSymbol":        stringDecoder,
+	"ResourceId_t":         unsigned64Decoder,
 }
 
 func unsignedFactory(f *field) fieldDecoder {
@@ -128,6 +132,21 @@ func defaultDecoder(r *reader) interface{} {
 
 func signedDecoder(r *reader) interface{} {
 	return r.readVarInt32()
+}
+
+func signed64Decoder(r *reader) interface{} {
+	return r.readVarInt64()
+}
+
+// cUtlBinaryBlockDecoder reads a length-prefixed binary blob (varint length
+// followed by that many bytes), matching clarity's CUtlBinaryBlockDecoder. The
+// bytes are copied so the stored value does not alias the transient read buffer.
+func cUtlBinaryBlockDecoder(r *reader) interface{} {
+	n := r.readVarUint32()
+	b := r.readBytes(n)
+	out := make([]byte, len(b))
+	copy(out, b)
+	return out
 }
 
 func floatCoordDecoder(r *reader) interface{} {

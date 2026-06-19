@@ -371,7 +371,11 @@ Verified zero occurrences across all 39 build replays, so safe insurance:
   (see P2.7 for the value-changing nuance). **Drop** `CBaseVRHandAttachmentHandle` (already correct — no-op).
 - Place each in the correct map; note `findDecoderByBaseType` (variable-array childDecoder) consults only
   `fieldTypeDecoders`, not factories.
-- **Result:** _(pending)_
+- **Result:** Added `CUtlBinaryBlock` (varint+bytes), `Quaternion` (vectorFactory4), `ResourceId_t`
+  (unsigned64), `CGlobalSymbol` (string), and `int64`→`signed64Decoder` (full 64-bit varint). The first
+  four never occur on the corpus (zero behavior change). `int64` affects only `m_nTotalDamageTaken`
+  (~175k decodes, ≤1 byte today so the value is unchanged, but `Get` now returns `int64` not `int32`).
+  Dropped CBaseVRHandAttachmentHandle (already correct). go test green (identical golden values). ✅
 
 ### P2.7 — HSequence / HeroID_t decode parity (value-changing, suite-gated)
 - `HSequence` is REAL (644k decodes): manta stores `value`, clarity `value-1` → off-by-one on every
