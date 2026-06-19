@@ -16,6 +16,13 @@ func (p *Parser) OnModifierTableEntry(fn ModifierTableEntryHandler) {
 // emitModifierTableEvents emits ModifierBuffTableEntry events
 // from the given string table items.
 func (p *Parser) emitModifierTableEvents(items []*stringTableItem) error {
+	// Nothing to do if no consumer is listening; avoid the per-item proto
+	// allocation + unmarshal entirely. This is the common case (e.g. the
+	// benchmark and any parse that doesn't register OnModifierTableEntry).
+	if len(p.modifierTableEntryHandlers) == 0 {
+		return nil
+	}
+
 	for _, item := range items {
 		msg := &dota.CDOTAModifierBuffTableEntry{}
 		if err := proto.NewBuffer(item.Value).Unmarshal(msg); err != nil {

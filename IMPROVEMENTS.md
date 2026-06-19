@@ -152,7 +152,9 @@ pointer/tuple allocs 4.6%, noscale/signed boxes ~3% each, QAngle `[]float32` 2.2
   without reset; only safe on fresh msg).
 - **Impact:** removes all modifier unmarshal from the bench hot path. Verified ActiveModifiers-only
   (never touches instancebaseline).
-- **Result:** _(pending)_
+- **Result:** allocs/op 20.00M→18.74M (**−6.32%, −1.26M** — bigger than the profile top-12 suggested;
+  the cost was spread across proto internals), B/op −7.51%, sec/op −2.15%. Did the early-return only;
+  left per-item fresh-msg unmarshal on the handler path (no consumer retain risk). go test green. ✅
 
 ### P1.5 — reuse per-packet `tuples` + entity-data reader
 - **Now:** `onCSVCMsg_PacketEntities` allocates `newReader(m.GetEntityData())` and
@@ -430,3 +432,4 @@ Verified zero occurrences across all 39 build replays, so safe insurance:
 | P1.1 pendingMessage value-slice | 1.514 s (−0.6%) | 763.8 MiB (−3.5%) | 20.06M (−3.3%) | PASS |
 | P1.2 outerMessage by value | 1.519 s (−0.3%) | 762.6 MiB (−3.7%) | 20.03M (−3.5%) | PASS |
 | P1.3 snappy scratch reuse | 1.511 s (−0.8%) | 700.6 MiB (−11.5%) | 20.00M (−3.6%) | PASS |
+| P1.4 modifier early-return | 1.479 s (−2.9%) | 647.9 MiB (−18.1%) | 18.74M (−9.7%) | PASS |
