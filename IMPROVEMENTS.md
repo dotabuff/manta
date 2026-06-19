@@ -423,7 +423,9 @@ Verified zero occurrences across all 39 build replays, so safe insurance:
   out-of-range (field_path.go). Clarity bounds at 7 and fails loudly (S2LongFieldPathFormat.java:7-58). Keep
   7, add a cheap descriptive guard + comment. No behavior change (nothing exceeds 7 today). **Must stay `[7]int`
   when P1.9 lands.**
-- **Result:** _(pending)_
+- **Result:** Added `maxFieldPathDepth = 7` const + comment citing `S2LongFieldPathFormat`, used for the
+  `[maxFieldPathDepth]int` path array. The fixed array already fails loudly (recovered bounds-check) on
+  overflow, so no hot-path guard was added. No behavior change. go test green. ✅
 
 ---
 

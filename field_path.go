@@ -81,8 +81,15 @@ func flattenHuffmanTree(t huffmanTree) int32 {
 	return idx
 }
 
+// maxFieldPathDepth is the maximum field-path depth, matching clarity's
+// S2LongFieldPathFormat (whose BITS_PER_COMPONENT has 7 entries). The fixed-size
+// path array enforces this invariant: a deeper push hits a bounds-check panic
+// that the parser's top-level recover turns into an error, rather than silently
+// corrupting entity state.
+const maxFieldPathDepth = 7
+
 type fieldPath struct {
-	path [7]int
+	path [maxFieldPathDepth]int
 	last int
 	done bool
 }
@@ -362,7 +369,7 @@ var fpPool = &sync.Pool{
 
 // reset resets the fieldPath to the empty value
 func (fp *fieldPath) reset() {
-	fp.path = [7]int{-1}
+	fp.path = [maxFieldPathDepth]int{-1}
 	fp.last = 0
 	fp.done = false
 }
