@@ -309,6 +309,9 @@ pointer/tuple allocs 4.6%, noscale/signed boxes ~3% each, QAngle `[]float32` 2.2
   `demo_packet.go` stores these into `pendingMessage` and parses them **later**, and sendtable/string
   reads depend on the aliasing. A clarity-style padded-copy reader would corrupt this. Add an explicit
   invariant + test that byte-aligned `readBytes` stays zero-copy after the word-reader rewrite.
+- **Result:** Added `TestReaderReadBytesZeroCopy` — verifies byte-aligned `readBytes` aliases the buffer
+  (zero-copy) both at `bitCount==0` and through the word reader's `realign` path (non-zero multiple of 8).
+  Test-only; bench unchanged. The realign mechanism itself landed in P1.10. go test green. ✅
 
 ---
 
@@ -468,3 +471,5 @@ Verified zero occurrences across all 39 build replays, so safe insurance:
 | **P1.12 flatten huffman tree** | **0.960 s (−37.0%)** | 398.6 MiB (−49.6%) | 10.65M (−48.7%) | PASS |
 | **P1.13 8-bit op lookup table** | **0.796 s (−47.7%)** | 398.6 MiB (−49.6%) | 10.65M (−48.7%) | PASS |
 | **P1.14 baseline decode-once clone** | **0.766 s (−49.7%)** | **378.1 MiB (−52.2%)** | **10.26M (−50.6%)** | PASS |
+| P-guard zero-copy readBytes test | test-only (no perf change) | — | — | PASS |
+| **Phase 1 total vs P0** | **−49.7%** | **−52.2%** | **−50.6%** | PASS |
