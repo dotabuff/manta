@@ -8,6 +8,44 @@ import (
 
 var huffTree = newHuffmanTree()
 
+// Flattened representation of huffTree for fast field-path op decoding. Each
+// internal node n occupies huffTreeLeft[n] and huffTreeRight[n]; a non-negative
+// entry is a child node index and a negative entry -(op+1) is a leaf carrying
+// field-path op id op. Walking int arrays avoids the interface-method dispatch
+// and pointer chasing of the huffmanTree on the hot path. It is derived from
+// manta's own huffTree, so the codes are identical to the interface-tree walk.
+var (
+	huffTreeLeft  []int32
+	huffTreeRight []int32
+	huffTreeRoot  int32
+)
+
+func init() {
+	huffTreeRoot = flattenHuffmanTree(huffTree)
+}
+
+// flattenHuffmanTree appends the internal nodes of t to huffTreeLeft/huffTreeRight
+// and returns the index assigned to t. Leaf children are encoded inline as
+// -(op+1).
+func flattenHuffmanTree(t huffmanTree) int32 {
+	idx := int32(len(huffTreeLeft))
+	huffTreeLeft = append(huffTreeLeft, 0)
+	huffTreeRight = append(huffTreeRight, 0)
+
+	if l := t.Left(); l.IsLeaf() {
+		huffTreeLeft[idx] = -(int32(l.Value()) + 1)
+	} else {
+		huffTreeLeft[idx] = flattenHuffmanTree(l)
+	}
+	if r := t.Right(); r.IsLeaf() {
+		huffTreeRight[idx] = -(int32(r.Value()) + 1)
+	} else {
+		huffTreeRight[idx] = flattenHuffmanTree(r)
+	}
+
+	return idx
+}
+
 type fieldPath struct {
 	path [7]int
 	last int
@@ -311,25 +349,26 @@ func readFieldPaths(r *reader, paths []fieldPath) []fieldPath {
 	fp := fpPool.Get().(*fieldPath)
 	fp.reset()
 
-	node, next := huffTree, huffTree
+	node := huffTreeRoot
 
 	for {
+		var child int32
 		if r.readBits(1) == 1 {
-			next = node.Right()
+			child = huffTreeRight[node]
 		} else {
-			next = node.Left()
+			child = huffTreeLeft[node]
 		}
 
-		if next.IsLeaf() {
-			node = huffTree
-			fieldPathTable[next.Value()].fn(r, fp)
+		if child < 0 {
+			node = huffTreeRoot
+			fieldPathTable[-child-1].fn(r, fp)
 			if fp.done {
 				fpPool.Put(fp)
 				return paths
 			}
 			paths = append(paths, *fp)
 		} else {
-			node = next
+			node = child
 		}
 	}
 }

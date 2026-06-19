@@ -266,7 +266,9 @@ pointer/tuple allocs 4.6%, noscale/signed boxes ~3% each, QAngle `[]float32` 2.2
   numbering would desync).
 - **Impact:** removes per-bit interface calls. 0 allocs. **Add a permanent decoder-equivalence test**
   (interface-walk vs flat path → identical ordinal + bits-consumed across all 256 prefixes).
-- **Result:** _(pending)_
+- **Result:** sec/op 1058.5→960.2 ms (**−9.28%**), allocs/B unchanged. Flat `int32` child arrays
+  (negative = leaf op) replace the per-bit interface walk; built from manta's own tree. Added
+  `TestHuffmanFlatMatchesTree` (flat ≡ interface tree). go test green. ✅ (under 1 s now.)
 
 ### P1.13 — 8-bit field-op lookup table
 - **Now:** even flattened, each op is a 3–8 iteration bit-walk.
@@ -458,3 +460,4 @@ Verified zero occurrences across all 39 build replays, so safe insurance:
 | **P1.9 reusable field-path buffer** | **1.198 s (−21.3%)** | **398.6 MiB (−49.6%)** | **10.65M (−48.7%)** | PASS |
 | **P1.10 word-at-a-time reader** | **1.058 s (−30.5%)** | 398.6 MiB (−49.6%) | 10.65M (−48.7%) | PASS |
 | P1.11 varints from accumulator | _skipped (breaks reader pos contract)_ | — | — | — |
+| **P1.12 flatten huffman tree** | **0.960 s (−37.0%)** | 398.6 MiB (−49.6%) | 10.65M (−48.7%) | PASS |
