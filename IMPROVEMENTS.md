@@ -407,7 +407,9 @@ Verified zero occurrences across all 39 build replays, so safe insurance:
   clarity guards on the sentinel `±3.4028235e38` bounds. Adding the guards is a no-op on the corpus
   (robustness/parity). **Keep manta's bespoke 4-bit `runeTimeDecoder`** (Outlanders case) and the `/30`
   simtime API — guards only; touching the runetime decode math risks goldens.
-- **Result:** _(pending)_
+- **Result:** Guarded the mana and runetime patches on the `±MaxFloat32` sentinel bounds (clarity-style);
+  kept the 4-bit runetime decoder and `/30` simtime. These fields always carry the sentinel, so the
+  guards always fire → go test green, identical goldens. Robustness/parity for edge-of-range fields. ✅
 
 ### P2.11 — outer-message size sanity bound
 - `readOuterMessage` passes the size varint straight to `stream.readBytes` which does `make([]byte, n)` with
