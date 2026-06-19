@@ -121,7 +121,8 @@ pointer/tuple allocs 4.6%, noscale/signed boxes ~3% each, QAngle `[]float32` 2.2
 - **Impact (measured):** 11.0M→10.47M allocs, 315→295 MB. **Reentrancy verified safe:** CDemoPacket is
   only dispatched via `callByDemoType`, never nested in `callByPacketType`.
 - _This is the change a review agent prototyped + reverted; reimplement cleanly here with a benchmark._
-- **Result:** _(pending)_
+- **Result:** sec/op 1.523→1.514 (−0.62%, p=0.000), B/op 791.5→763.8 MiB (−3.51%), allocs/op
+  20.75M→20.06M (−3.33%, −0.69M). go test green. ✅
 
 ### P1.2 — `outerMessage` by value
 - **Now:** `readOuterMessage` heap-allocates `&outerMessage{}` per message (parser.go:238); single
@@ -423,3 +424,4 @@ Verified zero occurrences across all 39 build replays, so safe insurance:
 | After goal | sec/op | B/op | allocs/op | go test |
 |------------|--------|------|-----------|---------|
 | P0 baseline | 1.523 s ±1% | 791.5 MiB | 20.75M | PASS |
+| P1.1 pendingMessage value-slice | 1.514 s (−0.6%) | 763.8 MiB (−3.5%) | 20.06M (−3.3%) | PASS |

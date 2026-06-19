@@ -14,7 +14,7 @@ type pendingMessage struct {
 }
 
 // Calculates the priority of the message. Lower is more important.
-func (m *pendingMessage) priority() int {
+func (m pendingMessage) priority() int {
 	switch m.t {
 	case
 		// These messages provide context needed for the rest of the tick
@@ -42,7 +42,7 @@ func (m *pendingMessage) priority() int {
 }
 
 // Provides a sortable structure for storing messages in the same packet.
-type pendingMessages []*pendingMessage
+type pendingMessages []pendingMessage
 
 func (ms pendingMessages) Len() int      { return len(ms) }
 func (ms pendingMessages) Swap(i, j int) { ms[i], ms[j] = ms[j], ms[i] }
@@ -60,9 +60,12 @@ func (ms pendingMessages) Less(i, j int) bool {
 // multiple inner packets from a single CDemoPacket. This is the main structure
 // that contains all other data types in the demo file.
 func (p *Parser) onCDemoPacket(m *dota.CDemoPacket) error {
-	// Create a slice to store pending mesages. Messages are read first as
-	// pending messages then sorted before dispatch.
-	ms := make(pendingMessages, 0, 2)
+	// Reuse a parser-level buffer to store pending messages. Messages are read
+	// first as pending messages then sorted before dispatch. onCDemoPacket is
+	// never re-entrant (it is dispatched only via callByDemoType, never nested
+	// within a callByPacketType call), so a single reused backing array is safe
+	// and avoids a heap allocation per embedded message.
+	ms := p.pendingMsgBuf[:0]
 
 	// Read all messages from the buffer. Messages are packed serially as
 	// {type, size, data}. We keep reading until until less than a byte remains.
@@ -71,20 +74,25 @@ func (p *Parser) onCDemoPacket(m *dota.CDemoPacket) error {
 		t := int32(r.readUBitVar())
 		size := r.readVarUint32()
 		buf := r.readBytes(size)
-		ms = append(ms, &pendingMessage{p.Tick, t, buf})
+		ms = append(ms, pendingMessage{p.Tick, t, buf})
 	}
 
 	// Sort messages to ensure dependencies are met. For example, we need to
-	// process string tables before game events that may reference them.
-	sort.Sort(ms)
+	// process string tables before game events that may reference them. A
+	// stable sort keeps equal-priority messages in their original file order
+	// and avoids the reflection allocations of sort.Sort's interface path.
+	sort.Stable(ms)
 
-	// Dispatch messages in order, returning on handler error.
-	for _, m := range ms {
-		if err := p.Callbacks.callByPacketType(m.t, m.buf); err != nil {
+	// Dispatch messages in order, returning on handler error. Store the
+	// (possibly grown) backing array back on the parser on every exit path.
+	for i := range ms {
+		if err := p.Callbacks.callByPacketType(ms[i].t, ms[i].buf); err != nil {
+			p.pendingMsgBuf = ms
 			return err
 		}
 	}
 
+	p.pendingMsgBuf = ms
 	return nil
 }
 

@@ -45,6 +45,7 @@ type Parser struct {
 	isStopping                 bool
 	modifierTableEntryHandlers []ModifierTableEntryHandler
 	serializers                map[string]*serializer
+	pendingMsgBuf              pendingMessages
 	stream                     *stream
 	stringTables               *stringTables
 	stopAtTick                 uint32
