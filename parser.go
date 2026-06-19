@@ -118,7 +118,7 @@ func NewStreamParser(r io.Reader) (*Parser, error) {
 
 // Start parsing the replay. Will stop processing new events after Stop() is called.
 func (p *Parser) Start() (err error) {
-	var msg *outerMessage
+	var msg outerMessage
 
 	defer p.afterStop()
 
@@ -191,14 +191,16 @@ type outerMessage struct {
 	data   []byte
 }
 
-// Read the next outer message from the buffer.
-func (p *Parser) readOuterMessage() (*outerMessage, error) {
+// Read the next outer message from the buffer. The message is returned by
+// value so it does not escape to the heap (its single caller, Start, consumes
+// it immediately and never retains it).
+func (p *Parser) readOuterMessage() (outerMessage, error) {
 	// Read a command header, which includes both the message type
 	// well as a flag to determine whether or not whether or not the
 	// message is compressed with snappy.
 	command, err := p.stream.readCommand()
 	if err != nil {
-		return nil, err
+		return outerMessage{}, err
 	}
 
 	// Extract the type and compressed flag out of the command
@@ -208,7 +210,7 @@ func (p *Parser) readOuterMessage() (*outerMessage, error) {
 	// Read the tick that the message corresponds with.
 	tick, err := p.stream.readVarUint32()
 	if err != nil {
-		return nil, err
+		return outerMessage{}, err
 	}
 
 	// This appears to actually be an int32, where a -1 means pre-game.
@@ -219,29 +221,28 @@ func (p *Parser) readOuterMessage() (*outerMessage, error) {
 	// Read the size and following buffer.
 	size, err := p.stream.readVarUint32()
 	if err != nil {
-		return nil, err
+		return outerMessage{}, err
 	}
 
 	buf, err := p.stream.readBytes(size)
 	if err != nil {
-		return nil, err
+		return outerMessage{}, err
 	}
 
 	// If the buffer is compressed, decompress it with snappy.
 	if msgCompressed {
 		var err error
 		if buf, err = snappy.Decode(nil, buf); err != nil {
-			return nil, err
+			return outerMessage{}, err
 		}
 	}
 
 	// Return the message
-	msg := &outerMessage{
+	return outerMessage{
 		tick:   tick,
 		typeId: msgType,
 		data:   buf,
-	}
-	return msg, nil
+	}, nil
 }
 
 // parseToTick configures this Parser to stop once it has parsed the given tick.

@@ -129,7 +129,9 @@ pointer/tuple allocs 4.6%, noscale/signed boxes ~3% each, QAngle `[]float32` 2.2
   consumer is `Start()` (parser.go:142), value never retained past the iteration.
 - **Change:** return by value (or reuse a `p.outerMsg` field); update the `var msg *outerMessage` decl.
 - **Impact (measured):** −557K allocs, −17 MB. Zero risk.
-- **Result:** _(pending)_
+- **Result:** allocs/op 20.06M→20.03M (−0.19%, −30K), B/op −0.15%; sec/op +0.32% (run-to-run thermal
+  noise, +5 ms abs). Smaller than the −557K review estimate — the 70 MB replay has far fewer outer
+  messages than 2159568145. go test green. ✅
 
 ### P1.3 — snappy scratch-buffer reuse
 - **Now:** `snappy.Decode(nil, buf)` per compressed outer message (parser.go:232) allocates fresh.
@@ -425,3 +427,4 @@ Verified zero occurrences across all 39 build replays, so safe insurance:
 |------------|--------|------|-----------|---------|
 | P0 baseline | 1.523 s ±1% | 791.5 MiB | 20.75M | PASS |
 | P1.1 pendingMessage value-slice | 1.514 s (−0.6%) | 763.8 MiB (−3.5%) | 20.06M (−3.3%) | PASS |
+| P1.2 outerMessage by value | 1.519 s (−0.3%) | 762.6 MiB (−3.7%) | 20.03M (−3.5%) | PASS |
