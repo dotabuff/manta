@@ -4,14 +4,15 @@ import (
 	"strings"
 )
 
-func readFields(r *reader, s *serializer, state *fieldState) {
-	fps := readFieldPaths(r)
+func readFields(r *reader, s *serializer, state *fieldState, fpBuf []fieldPath) []fieldPath {
+	fpBuf = readFieldPaths(r, fpBuf[:0])
 
 	// Evaluate the debug verbosity once per call rather than twice per field in
 	// the hot loop. readFields is called fresh per entity update, so a mid-parse
 	// debug-level change (e.g. a debug-tick) still takes effect on the next call.
 	dbg := v(6)
-	for _, fp := range fps {
+	for i := range fpBuf {
+		fp := &fpBuf[i]
 		decoder := s.getDecoderForFieldPath(fp, 0)
 
 		if dbg {
@@ -41,7 +42,7 @@ func readFields(r *reader, s *serializer, state *fieldState) {
 
 			_debugf(" => %#v", val)
 		}
-
-		fp.release()
 	}
+
+	return fpBuf
 }

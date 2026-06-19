@@ -49,6 +49,7 @@ type Parser struct {
 	snappyScratch              []byte
 	entityReader               reader
 	entityTuples               []entityOpTuple
+	fpBuf                      []fieldPath
 	stream                     *stream
 	stringTables               *stringTables
 	stopAtTick                 uint32

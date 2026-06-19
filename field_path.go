@@ -9,7 +9,7 @@ import (
 var huffTree = newHuffmanTree()
 
 type fieldPath struct {
-	path []int
+	path [7]int
 	last int
 	done bool
 }
@@ -259,7 +259,7 @@ func (fp *fieldPath) pop(n int) {
 // copy returns a copy of the fieldPath
 func (fp *fieldPath) copy() *fieldPath {
 	x := fpPool.Get().(*fieldPath)
-	copy(x.path, fp.path)
+	x.path = fp.path
 	x.last = fp.last
 	x.done = fp.done
 	return x
@@ -283,19 +283,13 @@ func newFieldPath() *fieldPath {
 
 var fpPool = &sync.Pool{
 	New: func() interface{} {
-		return &fieldPath{
-			path: make([]int, 7),
-			last: 0,
-			done: false,
-		}
+		return &fieldPath{}
 	},
 }
 
-var fpReset = []int{-1, 0, 0, 0, 0, 0, 0}
-
 // reset resets the fieldPath to the empty value
 func (fp *fieldPath) reset() {
-	copy(fp.path, fpReset)
+	fp.path = [7]int{-1}
 	fp.last = 0
 	fp.done = false
 }
@@ -305,15 +299,21 @@ func (fp *fieldPath) release() {
 	fpPool.Put(fp)
 }
 
-// readFieldPaths reads a new slice of fieldPath values from the given reader
-func readFieldPaths(r *reader) []*fieldPath {
-	fp := newFieldPath()
+// readFieldPaths decodes the field-path operation stream from r into the
+// provided buffer (which the caller resets to length 0) and returns the grown
+// slice. Field paths are cumulative deltas, snapshotted by value into the
+// buffer, so there is no per-path allocation or sync.Pool churn and the buffer
+// is reused across calls.
+func readFieldPaths(r *reader, paths []fieldPath) []fieldPath {
+	// Borrow a reusable accumulator from the pool. Taking its address for the
+	// field-path op functions (an indirect call) would otherwise force it to
+	// escape and heap-allocate on every call; the pool keeps that amortized.
+	fp := fpPool.Get().(*fieldPath)
+	fp.reset()
 
 	node, next := huffTree, huffTree
 
-	paths := []*fieldPath{}
-
-	for !fp.done {
+	for {
 		if r.readBits(1) == 1 {
 			next = node.Right()
 		} else {
@@ -323,17 +323,15 @@ func readFieldPaths(r *reader) []*fieldPath {
 		if next.IsLeaf() {
 			node = huffTree
 			fieldPathTable[next.Value()].fn(r, fp)
-			if !fp.done {
-				paths = append(paths, fp.copy())
+			if fp.done {
+				fpPool.Put(fp)
+				return paths
 			}
+			paths = append(paths, *fp)
 		} else {
 			node = next
 		}
 	}
-
-	fp.release()
-
-	return paths
 }
 
 // newHuffmanTree creates a new huffmanTree from the field path table

@@ -266,8 +266,8 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 
 				e = newEntity(index, serial, class)
 				p.entities[index] = e
-				readFields(newReader(baseline), class.serializer, e.state)
-				readFields(r, class.serializer, e.state)
+				p.fpBuf = readFields(newReader(baseline), class.serializer, e.state, p.fpBuf)
+				p.fpBuf = readFields(r, class.serializer, e.state, p.fpBuf)
 				op = EntityOpCreated | EntityOpEntered
 
 			} else {
@@ -281,7 +281,7 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 					op |= EntityOpEntered
 				}
 
-				readFields(r, e.class.serializer, e.state)
+				p.fpBuf = readFields(r, e.class.serializer, e.state, p.fpBuf)
 			}
 
 		} else {

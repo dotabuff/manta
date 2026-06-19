@@ -215,7 +215,10 @@ pointer/tuple allocs 4.6%, noscale/signed boxes ~3% each, QAngle `[]float32` 2.2
   `fieldPaths[MAX_PROPERTIES=0x3FFF]` (FieldReader.java:11-14, S2FieldReader.java:50-65).
 - **Impact:** allocs/op ~11M → ~4–5M. **Keep the fixed depth 7** (`[7]int`). Golden-safe (only the
   container changes; field-path values + decode order unchanged).
-- **Result:** _(pending)_
+- **Result:** allocs/op 18.63M→10.65M (**−42.86%, −7.98M**), B/op 569.5→398.6 MiB (−30.0%), sec/op
+  1.483→1.198 (**−19.22%**). The 56%-of-allocs `readFieldPaths` container is gone. Gotcha: first attempt
+  regressed B/op +31% because `&fp` escaped via the indirect closure call — borrowing the accumulator
+  from the pool fixed it. go test green. ✅ **(headline win)**
 
 ### P1.10 — word-at-a-time bit reader
 - **Now:** `readBits` refills the accumulator one byte at a time (reader.go:50-61) with a per-byte
@@ -443,3 +446,4 @@ Verified zero occurrences across all 39 build replays, so safe insurance:
 | P1.6 hoist fp caches to class | 1.509 s (−0.9%) | 569.5 MiB (−28.1%) | 18.63M (−10.2%) | PASS |
 | P1.7 hoist v(6) debug guard | 1.476 s (−3.1%) | 569.5 MiB (−28.1%) | 18.63M (−10.2%) | PASS |
 | P1.8 buffer stream IO (streaming −6.5%) | 1.483 s (flat, in-mem) | 569.5 MiB | 18.63M | PASS |
+| **P1.9 reusable field-path buffer** | **1.198 s (−21.3%)** | **398.6 MiB (−49.6%)** | **10.65M (−48.7%)** | PASS |
