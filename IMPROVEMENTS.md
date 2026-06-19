@@ -356,7 +356,9 @@ pointer/tuple allocs 4.6%, noscale/signed boxes ~3% each, QAngle `[]float32` 2.2
   `type` via the descriptor (clarity S1CombatLogIndices.java:8) and route through `GetInt32`-style dispatch
   (not raw `GetValByte`). On current descriptors `type` is index 0 → output unchanged; these methods aren't
   called by any manta source/test → zero golden risk. **Fix all three** (the review noted `String()` too).
-- **Result:** _(pending)_
+- **Result:** All three now resolve `type` via `GetInt32("type")` (descriptor + typed dispatch). go test
+  green — and `GetInt32("type")` is golden-guarded (the combat-log test asserts it returns no error on
+  every event), so this is value-identical on current descriptors. ✅
 
 ### P2.6 — decoder forward-compat additions (never-occur today → golden-neutral)
 Verified zero occurrences across all 39 build replays, so safe insurance:
