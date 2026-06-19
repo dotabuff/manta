@@ -335,7 +335,9 @@ pointer/tuple allocs 4.6%, noscale/signed boxes ~3% each, QAngle `[]float32` 2.2
   `error`). `recover` never fires on the bench replay → no healthy-replay regression. Add a truncated-blob
   unit test. (Also reconcile the inconsistency: `UpdateStringTable` `_panicf`s on a missing table id at
   string_table.go:139 — harsher than clarity, which skips unknown ids.)
-- **Result:** _(pending)_
+- **Result:** `parseStringTable` now returns an error (recover → error); both callers propagate it. Added
+  `TestParseStringTableTruncated`. go test green (recover never fires on healthy replays). Left the
+  `UpdateStringTable` `_panicf`-on-missing-table as-is (separate behavior call). ✅
 
 ### P2.3 — `getEventKey` off-by-one
 - `if f.i > len(e.m.GetKeys())` lets `f.i == len` pass → `GetKeys()[f.i]` panics (game_event.go:166).

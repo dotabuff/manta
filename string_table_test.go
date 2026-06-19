@@ -135,7 +135,8 @@ func TestParseStringTableCreate(t *testing.T) {
 		assert.Equal(s.tableName, m.GetName(), s.tableName)
 
 		// Parse the table data
-		items := parseStringTable(buf, m.GetNumEntries(), "", m.GetUserDataFixedSize(), m.GetUserDataSize(), m.GetFlags(), false)
+		items, err := parseStringTable(buf, m.GetNumEntries(), "", m.GetUserDataFixedSize(), m.GetUserDataSize(), m.GetFlags(), false)
+		assert.NoError(err)
 
 		// Make sure we have the correct number of entries
 		assert.Equal(s.itemCount, len(items), s.tableName)
@@ -154,7 +155,8 @@ func TestParseStringTableUpdate(t *testing.T) {
 	assert := assert.New(t)
 	buf := _read_fixture("string_tables/updates/tick_03960_table_7_items_13_size_208")
 
-	items := parseStringTable(buf, 13, "", false, 0, 0, false)
+	items, err := parseStringTable(buf, 13, "", false, 0, 0, false)
+	assert.NoError(err)
 
 	assert.Equal(int32(261), items[0].Index)
 	assert.Equal("broodmother_spawn_spiderlings", items[0].Key)
@@ -162,4 +164,13 @@ func TestParseStringTableUpdate(t *testing.T) {
 	assert.Equal("broodmother_spin_web", items[1].Key)
 	assert.Equal(int32(263), items[2].Index)
 	assert.Equal("broodmother_incapacitating_bite", items[2].Key)
+}
+
+// TestParseStringTableTruncated verifies that a blob which decodes past the end
+// of its buffer surfaces an error instead of silently returning a partial table.
+func TestParseStringTableTruncated(t *testing.T) {
+	_, err := parseStringTable([]byte{0x07}, 1, "test", false, 0, 0, false)
+	if err == nil {
+		t.Fatal("expected an error from a truncated string table, got nil")
+	}
 }

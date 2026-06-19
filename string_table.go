@@ -105,7 +105,10 @@ func (p *Parser) onCSVCMsg_CreateStringTable(m *dota.CSVCMsg_CreateStringTable) 
 	}
 
 	// Parse the items out of the string table data
-	items := parseStringTable(buf, m.GetNumEntries(), t.name, t.userDataFixedSize, t.userDataSizeBits, t.flags, t.varintBitCounts)
+	items, err := parseStringTable(buf, m.GetNumEntries(), t.name, t.userDataFixedSize, t.userDataSizeBits, t.flags, t.varintBitCounts)
+	if err != nil {
+		return err
+	}
 
 	// Insert the items into the table
 	for _, item := range items {
@@ -144,7 +147,10 @@ func (p *Parser) onCSVCMsg_UpdateStringTable(m *dota.CSVCMsg_UpdateStringTable) 
 	}
 
 	// Parse the updates out of the string table data
-	items := parseStringTable(m.GetStringData(), m.GetNumChangedEntries(), t.name, t.userDataFixedSize, t.userDataSizeBits, t.flags, t.varintBitCounts)
+	items, err := parseStringTable(m.GetStringData(), m.GetNumChangedEntries(), t.name, t.userDataFixedSize, t.userDataSizeBits, t.flags, t.varintBitCounts)
+	if err != nil {
+		return err
+	}
 
 	// Apply the updates to the parser state
 	for _, item := range items {
@@ -177,11 +183,13 @@ func (p *Parser) onCSVCMsg_UpdateStringTable(m *dota.CSVCMsg_UpdateStringTable) 
 }
 
 // Parse a string table data blob, returning a list of item updates.
-func parseStringTable(buf []byte, numUpdates int32, name string, userDataFixed bool, userDataSizeBits int32, flags int32, varintBitCounts bool) (items []*stringTableItem) {
+func parseStringTable(buf []byte, numUpdates int32, name string, userDataFixed bool, userDataSizeBits int32, flags int32, varintBitCounts bool) (items []*stringTableItem, err error) {
+	// Surface a decode failure instead of silently returning a partially
+	// populated table, matching clarity's fail-loud behaviour. On healthy
+	// replays this never fires.
 	defer func() {
-		if err := recover(); err != nil {
-			_debugf("warning: unable to parse string table %s: %s", name, err)
-			return
+		if r := recover(); r != nil {
+			err = _errorf("unable to parse string table %s: %v", name, r)
 		}
 	}()
 
@@ -199,7 +207,7 @@ func parseStringTable(buf []byte, numUpdates int32, name string, userDataFixed b
 
 	// Some tables have no data
 	if len(buf) == 0 {
-		return items
+		return items, nil
 	}
 
 	// Loop through entries in the data structure
@@ -297,5 +305,5 @@ func parseStringTable(buf []byte, numUpdates int32, name string, userDataFixed b
 		items = append(items, &stringTableItem{index, key, value})
 	}
 
-	return items
+	return items, nil
 }
