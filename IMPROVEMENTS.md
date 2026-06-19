@@ -194,7 +194,9 @@ pointer/tuple allocs 4.6%, noscale/signed boxes ~3% each, QAngle `[]float32` 2.2
   `io.ByteReader` (`*os.File` isn't; `*bytes.Reader` is → `NewParser` stays unwrapped, no double-buffer).
 - **Impact:** 798→658 ms on the streaming path. **Note:** the canonical in-memory bench (P0) won't show
   this — it's a real-world streaming-path win; verify with a streaming-reader bench variant.
-- **Result:** _(pending)_
+- **Result:** canonical in-memory bench flat (+0.46%, noise — `bytes.Reader` left unwrapped, no
+  regression). Streaming `NewStreamParser(os.File)` path **1.612→1.507 s/op (−6.47%, p=0.002)**, measured
+  with a throwaway streaming bench (reverted before commit). go test green. ✅
 
 ### P1.9 — reusable field-path buffer  ⭐ biggest single win
 - **Now:** `readFieldPaths` (field_path.go:309-337) starts `paths := []*fieldPath{}` (cap 0) and
@@ -440,3 +442,4 @@ Verified zero occurrences across all 39 build replays, so safe insurance:
 | P1.5 reuse tuples + reader | 1.494 s (−1.9%) | 571.0 MiB (−27.9%) | 18.66M (−10.1%) | PASS |
 | P1.6 hoist fp caches to class | 1.509 s (−0.9%) | 569.5 MiB (−28.1%) | 18.63M (−10.2%) | PASS |
 | P1.7 hoist v(6) debug guard | 1.476 s (−3.1%) | 569.5 MiB (−28.1%) | 18.63M (−10.2%) | PASS |
+| P1.8 buffer stream IO (streaming −6.5%) | 1.483 s (flat, in-mem) | 569.5 MiB | 18.63M | PASS |
