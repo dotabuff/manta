@@ -400,6 +400,7 @@ const (
 	EEvent_EVENT_ID_SUMMER_2026               EEvent = 57
 	EEvent_EVENT_ID_FALL_2026                 EEvent = 58
 	EEvent_EVENT_ID_WINTER_2026               EEvent = 59
+	EEvent_EVENT_ID_INTERNATIONAL_2026        EEvent = 60
 )
 
 // Enum value maps for EEvent.
@@ -463,6 +464,7 @@ var (
 		57: "EVENT_ID_SUMMER_2026",
 		58: "EVENT_ID_FALL_2026",
 		59: "EVENT_ID_WINTER_2026",
+		60: "EVENT_ID_INTERNATIONAL_2026",
 	}
 	EEvent_value = map[string]int32{
 		"EVENT_ID_NONE":                      0,
@@ -523,6 +525,7 @@ var (
 		"EVENT_ID_SUMMER_2026":               57,
 		"EVENT_ID_FALL_2026":                 58,
 		"EVENT_ID_WINTER_2026":               59,
+		"EVENT_ID_INTERNATIONAL_2026":        60,
 	}
 )
 
@@ -3009,6 +3012,11 @@ const (
 	EBadgeType_k_EBadgeType_TI14_FinalsDay3    EBadgeType = 24
 	EBadgeType_k_EBadgeType_TI14_FinalsDay4    EBadgeType = 25
 	EBadgeType_k_EBadgeType_TI14_Special       EBadgeType = 26
+	EBadgeType_k_EBadgeType_TI15_FinalsDay1    EBadgeType = 27
+	EBadgeType_k_EBadgeType_TI15_FinalsDay2    EBadgeType = 28
+	EBadgeType_k_EBadgeType_TI15_FinalsDay3    EBadgeType = 29
+	EBadgeType_k_EBadgeType_TI15_FinalsDay4    EBadgeType = 30
+	EBadgeType_k_EBadgeType_TI15_Special       EBadgeType = 31
 )
 
 // Enum value maps for EBadgeType.
@@ -3041,6 +3049,11 @@ var (
 		24: "k_EBadgeType_TI14_FinalsDay3",
 		25: "k_EBadgeType_TI14_FinalsDay4",
 		26: "k_EBadgeType_TI14_Special",
+		27: "k_EBadgeType_TI15_FinalsDay1",
+		28: "k_EBadgeType_TI15_FinalsDay2",
+		29: "k_EBadgeType_TI15_FinalsDay3",
+		30: "k_EBadgeType_TI15_FinalsDay4",
+		31: "k_EBadgeType_TI15_Special",
 	}
 	EBadgeType_value = map[string]int32{
 		"k_EBadgeType_Invalid":            0,
@@ -3070,6 +3083,11 @@ var (
 		"k_EBadgeType_TI14_FinalsDay3":    24,
 		"k_EBadgeType_TI14_FinalsDay4":    25,
 		"k_EBadgeType_TI14_Special":       26,
+		"k_EBadgeType_TI15_FinalsDay1":    27,
+		"k_EBadgeType_TI15_FinalsDay2":    28,
+		"k_EBadgeType_TI15_FinalsDay3":    29,
+		"k_EBadgeType_TI15_FinalsDay4":    30,
+		"k_EBadgeType_TI15_Special":       31,
 	}
 )
 
@@ -6236,7 +6254,7 @@ const file_dota_shared_enums_proto_rawDesc = "" +
 	"\x15DOTA_GC_TEAM_CUSTOM_6\x10\v\x12\x19\n" +
 	"\x15DOTA_GC_TEAM_CUSTOM_7\x10\f\x12\x19\n" +
 	"\x15DOTA_GC_TEAM_CUSTOM_8\x10\r\x12\x19\n" +
-	"\x15DOTA_GC_TEAM_NEUTRALS\x10\x0e*\xcc\r\n" +
+	"\x15DOTA_GC_TEAM_NEUTRALS\x10\x0e*\xed\r\n" +
 	"\x06EEvent\x12\x11\n" +
 	"\rEVENT_ID_NONE\x10\x00\x12\x15\n" +
 	"\x11EVENT_ID_DIRETIDE\x10\x01\x12\x1c\n" +
@@ -6296,7 +6314,8 @@ const file_dota_shared_enums_proto_rawDesc = "" +
 	"\x14EVENT_ID_SPRING_2026\x108\x12\x18\n" +
 	"\x14EVENT_ID_SUMMER_2026\x109\x12\x16\n" +
 	"\x12EVENT_ID_FALL_2026\x10:\x12\x18\n" +
-	"\x14EVENT_ID_WINTER_2026\x10;*\xbb\x02\n" +
+	"\x14EVENT_ID_WINTER_2026\x10;\x12\x1f\n" +
+	"\x1bEVENT_ID_INTERNATIONAL_2026\x10<*\xbb\x02\n" +
 	"\tERankType\x12\x17\n" +
 	"\x13k_ERankType_Invalid\x10\x00\x12\x16\n" +
 	"\x12k_ERankType_Casual\x10\x01\x12\x16\n" +
@@ -6606,7 +6625,7 @@ const file_dota_shared_enums_proto_rawDesc = "" +
 	"\rLANE_TYPE_OFF\x10\x02\x12\x11\n" +
 	"\rLANE_TYPE_MID\x10\x03\x12\x14\n" +
 	"\x10LANE_TYPE_JUNGLE\x10\x04\x12\x12\n" +
-	"\x0eLANE_TYPE_ROAM\x10\x05*\x82\a\n" +
+	"\x0eLANE_TYPE_ROAM\x10\x05*\xa9\b\n" +
 	"\n" +
 	"EBadgeType\x12\x18\n" +
 	"\x14k_EBadgeType_Invalid\x10\x00\x12\x1c\n" +
@@ -6636,7 +6655,12 @@ const file_dota_shared_enums_proto_rawDesc = "" +
 	"\x1ck_EBadgeType_TI14_FinalsDay2\x10\x17\x12 \n" +
 	"\x1ck_EBadgeType_TI14_FinalsDay3\x10\x18\x12 \n" +
 	"\x1ck_EBadgeType_TI14_FinalsDay4\x10\x19\x12\x1d\n" +
-	"\x19k_EBadgeType_TI14_Special\x10\x1a*\xd4\x01\n" +
+	"\x19k_EBadgeType_TI14_Special\x10\x1a\x12 \n" +
+	"\x1ck_EBadgeType_TI15_FinalsDay1\x10\x1b\x12 \n" +
+	"\x1ck_EBadgeType_TI15_FinalsDay2\x10\x1c\x12 \n" +
+	"\x1ck_EBadgeType_TI15_FinalsDay3\x10\x1d\x12 \n" +
+	"\x1ck_EBadgeType_TI15_FinalsDay4\x10\x1e\x12\x1d\n" +
+	"\x19k_EBadgeType_TI15_Special\x10\x1f*\xd4\x01\n" +
 	"\rELeagueStatus\x12\x17\n" +
 	"\x13LEAGUE_STATUS_UNSET\x10\x00\x12\x1d\n" +
 	"\x19LEAGUE_STATUS_UNSUBMITTED\x10\x01\x12\x1b\n" +

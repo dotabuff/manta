@@ -1463,6 +1463,14 @@ message CMsgSteamLearnNeutralItemPurchaseV4 {
 	optional int32 enhancement_id = 5;
 }
 
+message CMsgSteamLearnNeutralItemPurchaseV6 {
+	optional uint32 tier = 1;
+	repeated int32 trinket_options = 2;
+	repeated int32 enhancement_options = 3;
+	optional int32 trinket_id = 4;
+	optional int32 enhancement_id = 5;
+}
+
 message CMsgSteamLearnAbilitySkill {
 	optional int32 ability_id = 1;
 	repeated int32 skilled_abilities = 2;

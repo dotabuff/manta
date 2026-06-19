@@ -698,6 +698,7 @@ const (
 	DOTA_CHAT_MESSAGE_CHAT_MESSAGE_ROSHAN_ROAR                               DOTA_CHAT_MESSAGE = 123
 	DOTA_CHAT_MESSAGE_CHAT_MESSAGE_STONE_OF_RECALL_USED                      DOTA_CHAT_MESSAGE = 124
 	DOTA_CHAT_MESSAGE_CHAT_MESSAGE_DEITY_BLESSING                            DOTA_CHAT_MESSAGE = 125
+	DOTA_CHAT_MESSAGE_CHAT_MESSAGE_SMOKE_ACTIVATED                           DOTA_CHAT_MESSAGE = 126
 )
 
 // Enum value maps for DOTA_CHAT_MESSAGE.
@@ -820,6 +821,7 @@ var (
 		123: "CHAT_MESSAGE_ROSHAN_ROAR",
 		124: "CHAT_MESSAGE_STONE_OF_RECALL_USED",
 		125: "CHAT_MESSAGE_DEITY_BLESSING",
+		126: "CHAT_MESSAGE_SMOKE_ACTIVATED",
 	}
 	DOTA_CHAT_MESSAGE_value = map[string]int32{
 		"CHAT_MESSAGE_INVALID":                                   -1,
@@ -939,6 +941,7 @@ var (
 		"CHAT_MESSAGE_ROSHAN_ROAR":                               123,
 		"CHAT_MESSAGE_STONE_OF_RECALL_USED":                      124,
 		"CHAT_MESSAGE_DEITY_BLESSING":                            125,
+		"CHAT_MESSAGE_SMOKE_ACTIVATED":                           126,
 	}
 )
 
@@ -15949,7 +15952,7 @@ const file_dota_usermessages_proto_rawDesc = "" +
 	"\x1fDOTA_UM_MonsterHunter_HuntAlert\x10\xf9\x04\x12\x1b\n" +
 	"\x16DOTA_UM_TormentorTimer\x10\xfa\x04\x12\x17\n" +
 	"\x12DOTA_UM_KillEffect\x10\xfb\x04\x12\x15\n" +
-	"\x10DOTA_UM_GiveItem\x10\xfc\x04*\xf8 \n" +
+	"\x10DOTA_UM_GiveItem\x10\xfc\x04*\x9a!\n" +
 	"\x11DOTA_CHAT_MESSAGE\x12!\n" +
 	"\x14CHAT_MESSAGE_INVALID\x10\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\x12\x1a\n" +
 	"\x16CHAT_MESSAGE_HERO_KILL\x10\x00\x12\x1a\n" +
@@ -16068,7 +16071,8 @@ const file_dota_usermessages_proto_rawDesc = "" +
 	"\x18CHAT_MESSAGE_CRAFTING_XP\x10z\x12\x1c\n" +
 	"\x18CHAT_MESSAGE_ROSHAN_ROAR\x10{\x12%\n" +
 	"!CHAT_MESSAGE_STONE_OF_RECALL_USED\x10|\x12\x1f\n" +
-	"\x1bCHAT_MESSAGE_DEITY_BLESSING\x10}*\xb2\x01\n" +
+	"\x1bCHAT_MESSAGE_DEITY_BLESSING\x10}\x12 \n" +
+	"\x1cCHAT_MESSAGE_SMOKE_ACTIVATED\x10~*\xb2\x01\n" +
 	"\x1dDOTA_NO_BATTLE_POINTS_REASONS\x12%\n" +
 	"!NO_BATTLE_POINTS_WRONG_LOBBY_TYPE\x10\x01\x12\"\n" +
 	"\x1eNO_BATTLE_POINTS_PRACTICE_BOTS\x10\x02\x12#\n" +

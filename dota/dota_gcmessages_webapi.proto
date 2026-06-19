@@ -220,19 +220,37 @@ message CMsgTalentContentAssetStatus {
 	optional ETalentContentAssetType asset_type = 1;
 	optional uint32 asset_index = 2;
 	optional ETalentContentAssetStatus asset_status = 3;
+	optional uint32 revision = 4;
 }
 
 message CMsgTalentContentStatus {
+	message SubmitRevision {
+		optional string zip_file = 1;
+		optional uint32 timestamp = 2;
+		optional uint32 revision_number = 3;
+	}
+
 	message TalentDetails {
 		optional uint32 account_id = 1;
 		optional string full_name = 2;
 		optional string nickname = 3;
 		optional uint32 workshop_item_id = 4;
-		optional string zip_file = 5;
-		optional ETalentContentStatus status = 6;
-		repeated CMsgTalentContentAssetStatus asset_status = 7;
-		optional uint32 broadcast_language = 8;
-		optional uint32 submission_timestamp = 9;
+		optional ETalentContentStatus status = 5;
+		repeated CMsgTalentContentAssetStatus asset_status = 8;
+		optional uint32 broadcast_language = 9;
+		repeated CMsgTalentContentStatus.SubmitRevision revision = 10;
+		optional uint32 revision_count = 11;
+		optional CMsgTalentContentStatus.EWorkshopItemStatus workshop_item_status = 12;
+		optional string workshop_item_details = 13;
+	}
+
+	enum EWorkshopItemStatus {
+		k_eSuccess = 0;
+		k_eInvalidWorkshopId = 1;
+		k_eWrongAppId = 2;
+		k_eRevenueSharingNotFinalized = 3;
+		k_eWorkshopItemNotFound = 4;
+		k_eUnknown = 5;
 	}
 
 	repeated CMsgTalentContentStatus.TalentDetails talent_status = 1;

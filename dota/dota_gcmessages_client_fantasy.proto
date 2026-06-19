@@ -145,6 +145,7 @@ message CMsgDOTAPlayerInfo {
 
 message CMsgDOTAPlayerInfoList {
 	repeated CMsgDOTAPlayerInfo player_infos = 1;
+	optional uint32 retry_time = 2;
 }
 
 message CMsgDOTATeamRoster {

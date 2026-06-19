@@ -1348,6 +1348,7 @@ func (x *CMsgDOTAPlayerInfo) GetHasPlayedInInternational() bool {
 type CMsgDOTAPlayerInfoList struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	PlayerInfos   []*CMsgDOTAPlayerInfo  `protobuf:"bytes,1,rep,name=player_infos,json=playerInfos" json:"player_infos,omitempty"`
+	RetryTime     *uint32                `protobuf:"varint,2,opt,name=retry_time,json=retryTime" json:"retry_time,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1387,6 +1388,13 @@ func (x *CMsgDOTAPlayerInfoList) GetPlayerInfos() []*CMsgDOTAPlayerInfo {
 		return x.PlayerInfos
 	}
 	return nil
+}
+
+func (x *CMsgDOTAPlayerInfoList) GetRetryTime() uint32 {
+	if x != nil && x.RetryTime != nil {
+		return *x.RetryTime
+	}
+	return 0
 }
 
 type CMsgDOTATeamRoster struct {
@@ -4798,9 +4806,11 @@ const file_dota_gcmessages_client_fantasy_proto_rawDesc = "" +
 	"\rteam_url_logo\x18\x06 \x01(\tR\vteamUrlLogo\x1a`\n" +
 	"\x0fProRegistration\x12/\n" +
 	"\x13registration_period\x18\x01 \x01(\rR\x12registrationPeriod\x12\x1c\n" +
-	"\ttimestamp\x18\x02 \x01(\rR\ttimestamp\"U\n" +
+	"\ttimestamp\x18\x02 \x01(\rR\ttimestamp\"t\n" +
 	"\x16CMsgDOTAPlayerInfoList\x12;\n" +
-	"\fplayer_infos\x18\x01 \x03(\v2\x18.dota.CMsgDOTAPlayerInfoR\vplayerInfos\"\xa3\x01\n" +
+	"\fplayer_infos\x18\x01 \x03(\v2\x18.dota.CMsgDOTAPlayerInfoR\vplayerInfos\x12\x1d\n" +
+	"\n" +
+	"retry_time\x18\x02 \x01(\rR\tretryTime\"\xa3\x01\n" +
 	"\x12CMsgDOTATeamRoster\x12\x1c\n" +
 	"\ttimestamp\x18\x01 \x01(\rR\ttimestamp\x12\x17\n" +
 	"\ateam_id\x18\x02 \x01(\rR\x06teamId\x12,\n" +

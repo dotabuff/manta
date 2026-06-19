@@ -612,6 +612,74 @@ func (CMsgTeamFanContentAssetStatusResponse_EResult) EnumDescriptor() ([]byte, [
 	return file_dota_gcmessages_webapi_proto_rawDescGZIP(), []int{5, 0}
 }
 
+type CMsgTalentContentStatus_EWorkshopItemStatus int32
+
+const (
+	CMsgTalentContentStatus_k_eSuccess                    CMsgTalentContentStatus_EWorkshopItemStatus = 0
+	CMsgTalentContentStatus_k_eInvalidWorkshopId          CMsgTalentContentStatus_EWorkshopItemStatus = 1
+	CMsgTalentContentStatus_k_eWrongAppId                 CMsgTalentContentStatus_EWorkshopItemStatus = 2
+	CMsgTalentContentStatus_k_eRevenueSharingNotFinalized CMsgTalentContentStatus_EWorkshopItemStatus = 3
+	CMsgTalentContentStatus_k_eWorkshopItemNotFound       CMsgTalentContentStatus_EWorkshopItemStatus = 4
+	CMsgTalentContentStatus_k_eUnknown                    CMsgTalentContentStatus_EWorkshopItemStatus = 5
+)
+
+// Enum value maps for CMsgTalentContentStatus_EWorkshopItemStatus.
+var (
+	CMsgTalentContentStatus_EWorkshopItemStatus_name = map[int32]string{
+		0: "k_eSuccess",
+		1: "k_eInvalidWorkshopId",
+		2: "k_eWrongAppId",
+		3: "k_eRevenueSharingNotFinalized",
+		4: "k_eWorkshopItemNotFound",
+		5: "k_eUnknown",
+	}
+	CMsgTalentContentStatus_EWorkshopItemStatus_value = map[string]int32{
+		"k_eSuccess":                    0,
+		"k_eInvalidWorkshopId":          1,
+		"k_eWrongAppId":                 2,
+		"k_eRevenueSharingNotFinalized": 3,
+		"k_eWorkshopItemNotFound":       4,
+		"k_eUnknown":                    5,
+	}
+)
+
+func (x CMsgTalentContentStatus_EWorkshopItemStatus) Enum() *CMsgTalentContentStatus_EWorkshopItemStatus {
+	p := new(CMsgTalentContentStatus_EWorkshopItemStatus)
+	*p = x
+	return p
+}
+
+func (x CMsgTalentContentStatus_EWorkshopItemStatus) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (CMsgTalentContentStatus_EWorkshopItemStatus) Descriptor() protoreflect.EnumDescriptor {
+	return file_dota_gcmessages_webapi_proto_enumTypes[9].Descriptor()
+}
+
+func (CMsgTalentContentStatus_EWorkshopItemStatus) Type() protoreflect.EnumType {
+	return &file_dota_gcmessages_webapi_proto_enumTypes[9]
+}
+
+func (x CMsgTalentContentStatus_EWorkshopItemStatus) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Do not use.
+func (x *CMsgTalentContentStatus_EWorkshopItemStatus) UnmarshalJSON(b []byte) error {
+	num, err := protoimpl.X.UnmarshalJSONEnum(x.Descriptor(), b)
+	if err != nil {
+		return err
+	}
+	*x = CMsgTalentContentStatus_EWorkshopItemStatus(num)
+	return nil
+}
+
+// Deprecated: Use CMsgTalentContentStatus_EWorkshopItemStatus.Descriptor instead.
+func (CMsgTalentContentStatus_EWorkshopItemStatus) EnumDescriptor() ([]byte, []int) {
+	return file_dota_gcmessages_webapi_proto_rawDescGZIP(), []int{9, 0}
+}
+
 type CMsgSetTalentContentResponse_EResult int32
 
 const (
@@ -645,11 +713,11 @@ func (x CMsgSetTalentContentResponse_EResult) String() string {
 }
 
 func (CMsgSetTalentContentResponse_EResult) Descriptor() protoreflect.EnumDescriptor {
-	return file_dota_gcmessages_webapi_proto_enumTypes[9].Descriptor()
+	return file_dota_gcmessages_webapi_proto_enumTypes[10].Descriptor()
 }
 
 func (CMsgSetTalentContentResponse_EResult) Type() protoreflect.EnumType {
-	return &file_dota_gcmessages_webapi_proto_enumTypes[9]
+	return &file_dota_gcmessages_webapi_proto_enumTypes[10]
 }
 
 func (x CMsgSetTalentContentResponse_EResult) Number() protoreflect.EnumNumber {
@@ -767,11 +835,11 @@ func (x CMsgDPCEvent_ELeagueEvent) String() string {
 }
 
 func (CMsgDPCEvent_ELeagueEvent) Descriptor() protoreflect.EnumDescriptor {
-	return file_dota_gcmessages_webapi_proto_enumTypes[10].Descriptor()
+	return file_dota_gcmessages_webapi_proto_enumTypes[11].Descriptor()
 }
 
 func (CMsgDPCEvent_ELeagueEvent) Type() protoreflect.EnumType {
-	return &file_dota_gcmessages_webapi_proto_enumTypes[10]
+	return &file_dota_gcmessages_webapi_proto_enumTypes[11]
 }
 
 func (x CMsgDPCEvent_ELeagueEvent) Number() protoreflect.EnumNumber {
@@ -853,11 +921,11 @@ func (x CMsgDPCEvent_ELeagueEventPhase) String() string {
 }
 
 func (CMsgDPCEvent_ELeagueEventPhase) Descriptor() protoreflect.EnumDescriptor {
-	return file_dota_gcmessages_webapi_proto_enumTypes[11].Descriptor()
+	return file_dota_gcmessages_webapi_proto_enumTypes[12].Descriptor()
 }
 
 func (CMsgDPCEvent_ELeagueEventPhase) Type() protoreflect.EnumType {
-	return &file_dota_gcmessages_webapi_proto_enumTypes[11]
+	return &file_dota_gcmessages_webapi_proto_enumTypes[12]
 }
 
 func (x CMsgDPCEvent_ELeagueEventPhase) Number() protoreflect.EnumNumber {
@@ -924,11 +992,11 @@ func (x CMsgDPCEvent_ELeagueEventType) String() string {
 }
 
 func (CMsgDPCEvent_ELeagueEventType) Descriptor() protoreflect.EnumDescriptor {
-	return file_dota_gcmessages_webapi_proto_enumTypes[12].Descriptor()
+	return file_dota_gcmessages_webapi_proto_enumTypes[13].Descriptor()
 }
 
 func (CMsgDPCEvent_ELeagueEventType) Type() protoreflect.EnumType {
-	return &file_dota_gcmessages_webapi_proto_enumTypes[12]
+	return &file_dota_gcmessages_webapi_proto_enumTypes[13]
 }
 
 func (x CMsgDPCEvent_ELeagueEventType) Number() protoreflect.EnumNumber {
@@ -986,11 +1054,11 @@ func (x CMsgDPCEvent_ETour) String() string {
 }
 
 func (CMsgDPCEvent_ETour) Descriptor() protoreflect.EnumDescriptor {
-	return file_dota_gcmessages_webapi_proto_enumTypes[13].Descriptor()
+	return file_dota_gcmessages_webapi_proto_enumTypes[14].Descriptor()
 }
 
 func (CMsgDPCEvent_ETour) Type() protoreflect.EnumType {
-	return &file_dota_gcmessages_webapi_proto_enumTypes[13]
+	return &file_dota_gcmessages_webapi_proto_enumTypes[14]
 }
 
 func (x CMsgDPCEvent_ETour) Number() protoreflect.EnumNumber {
@@ -1505,6 +1573,7 @@ type CMsgTalentContentAssetStatus struct {
 	AssetType     *ETalentContentAssetType   `protobuf:"varint,1,opt,name=asset_type,json=assetType,enum=dota.ETalentContentAssetType" json:"asset_type,omitempty"`
 	AssetIndex    *uint32                    `protobuf:"varint,2,opt,name=asset_index,json=assetIndex" json:"asset_index,omitempty"`
 	AssetStatus   *ETalentContentAssetStatus `protobuf:"varint,3,opt,name=asset_status,json=assetStatus,enum=dota.ETalentContentAssetStatus" json:"asset_status,omitempty"`
+	Revision      *uint32                    `protobuf:"varint,4,opt,name=revision" json:"revision,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1558,6 +1627,13 @@ func (x *CMsgTalentContentAssetStatus) GetAssetStatus() ETalentContentAssetStatu
 		return *x.AssetStatus
 	}
 	return ETalentContentAssetStatus_k_eTalentContentAssetStatus_None
+}
+
+func (x *CMsgTalentContentAssetStatus) GetRevision() uint32 {
+	if x != nil && x.Revision != nil {
+		return *x.Revision
+	}
+	return 0
 }
 
 type CMsgTalentContentStatus struct {
@@ -2952,24 +3028,86 @@ func (x *CMsgTeamFanContentAutographStatus_TeamStatus) GetWorkshopAccountId() ui
 	return 0
 }
 
+type CMsgTalentContentStatus_SubmitRevision struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	ZipFile        *string                `protobuf:"bytes,1,opt,name=zip_file,json=zipFile" json:"zip_file,omitempty"`
+	Timestamp      *uint32                `protobuf:"varint,2,opt,name=timestamp" json:"timestamp,omitempty"`
+	RevisionNumber *uint32                `protobuf:"varint,3,opt,name=revision_number,json=revisionNumber" json:"revision_number,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *CMsgTalentContentStatus_SubmitRevision) Reset() {
+	*x = CMsgTalentContentStatus_SubmitRevision{}
+	mi := &file_dota_gcmessages_webapi_proto_msgTypes[27]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CMsgTalentContentStatus_SubmitRevision) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CMsgTalentContentStatus_SubmitRevision) ProtoMessage() {}
+
+func (x *CMsgTalentContentStatus_SubmitRevision) ProtoReflect() protoreflect.Message {
+	mi := &file_dota_gcmessages_webapi_proto_msgTypes[27]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CMsgTalentContentStatus_SubmitRevision.ProtoReflect.Descriptor instead.
+func (*CMsgTalentContentStatus_SubmitRevision) Descriptor() ([]byte, []int) {
+	return file_dota_gcmessages_webapi_proto_rawDescGZIP(), []int{9, 0}
+}
+
+func (x *CMsgTalentContentStatus_SubmitRevision) GetZipFile() string {
+	if x != nil && x.ZipFile != nil {
+		return *x.ZipFile
+	}
+	return ""
+}
+
+func (x *CMsgTalentContentStatus_SubmitRevision) GetTimestamp() uint32 {
+	if x != nil && x.Timestamp != nil {
+		return *x.Timestamp
+	}
+	return 0
+}
+
+func (x *CMsgTalentContentStatus_SubmitRevision) GetRevisionNumber() uint32 {
+	if x != nil && x.RevisionNumber != nil {
+		return *x.RevisionNumber
+	}
+	return 0
+}
+
 type CMsgTalentContentStatus_TalentDetails struct {
-	state               protoimpl.MessageState          `protogen:"open.v1"`
-	AccountId           *uint32                         `protobuf:"varint,1,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
-	FullName            *string                         `protobuf:"bytes,2,opt,name=full_name,json=fullName" json:"full_name,omitempty"`
-	Nickname            *string                         `protobuf:"bytes,3,opt,name=nickname" json:"nickname,omitempty"`
-	WorkshopItemId      *uint32                         `protobuf:"varint,4,opt,name=workshop_item_id,json=workshopItemId" json:"workshop_item_id,omitempty"`
-	ZipFile             *string                         `protobuf:"bytes,5,opt,name=zip_file,json=zipFile" json:"zip_file,omitempty"`
-	Status              *ETalentContentStatus           `protobuf:"varint,6,opt,name=status,enum=dota.ETalentContentStatus" json:"status,omitempty"`
-	AssetStatus         []*CMsgTalentContentAssetStatus `protobuf:"bytes,7,rep,name=asset_status,json=assetStatus" json:"asset_status,omitempty"`
-	BroadcastLanguage   *uint32                         `protobuf:"varint,8,opt,name=broadcast_language,json=broadcastLanguage" json:"broadcast_language,omitempty"`
-	SubmissionTimestamp *uint32                         `protobuf:"varint,9,opt,name=submission_timestamp,json=submissionTimestamp" json:"submission_timestamp,omitempty"`
+	state               protoimpl.MessageState                       `protogen:"open.v1"`
+	AccountId           *uint32                                      `protobuf:"varint,1,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	FullName            *string                                      `protobuf:"bytes,2,opt,name=full_name,json=fullName" json:"full_name,omitempty"`
+	Nickname            *string                                      `protobuf:"bytes,3,opt,name=nickname" json:"nickname,omitempty"`
+	WorkshopItemId      *uint32                                      `protobuf:"varint,4,opt,name=workshop_item_id,json=workshopItemId" json:"workshop_item_id,omitempty"`
+	Status              *ETalentContentStatus                        `protobuf:"varint,5,opt,name=status,enum=dota.ETalentContentStatus" json:"status,omitempty"`
+	AssetStatus         []*CMsgTalentContentAssetStatus              `protobuf:"bytes,8,rep,name=asset_status,json=assetStatus" json:"asset_status,omitempty"`
+	BroadcastLanguage   *uint32                                      `protobuf:"varint,9,opt,name=broadcast_language,json=broadcastLanguage" json:"broadcast_language,omitempty"`
+	Revision            []*CMsgTalentContentStatus_SubmitRevision    `protobuf:"bytes,10,rep,name=revision" json:"revision,omitempty"`
+	RevisionCount       *uint32                                      `protobuf:"varint,11,opt,name=revision_count,json=revisionCount" json:"revision_count,omitempty"`
+	WorkshopItemStatus  *CMsgTalentContentStatus_EWorkshopItemStatus `protobuf:"varint,12,opt,name=workshop_item_status,json=workshopItemStatus,enum=dota.CMsgTalentContentStatus_EWorkshopItemStatus" json:"workshop_item_status,omitempty"`
+	WorkshopItemDetails *string                                      `protobuf:"bytes,13,opt,name=workshop_item_details,json=workshopItemDetails" json:"workshop_item_details,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
 
 func (x *CMsgTalentContentStatus_TalentDetails) Reset() {
 	*x = CMsgTalentContentStatus_TalentDetails{}
-	mi := &file_dota_gcmessages_webapi_proto_msgTypes[27]
+	mi := &file_dota_gcmessages_webapi_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2981,7 +3119,7 @@ func (x *CMsgTalentContentStatus_TalentDetails) String() string {
 func (*CMsgTalentContentStatus_TalentDetails) ProtoMessage() {}
 
 func (x *CMsgTalentContentStatus_TalentDetails) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_webapi_proto_msgTypes[27]
+	mi := &file_dota_gcmessages_webapi_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2994,7 +3132,7 @@ func (x *CMsgTalentContentStatus_TalentDetails) ProtoReflect() protoreflect.Mess
 
 // Deprecated: Use CMsgTalentContentStatus_TalentDetails.ProtoReflect.Descriptor instead.
 func (*CMsgTalentContentStatus_TalentDetails) Descriptor() ([]byte, []int) {
-	return file_dota_gcmessages_webapi_proto_rawDescGZIP(), []int{9, 0}
+	return file_dota_gcmessages_webapi_proto_rawDescGZIP(), []int{9, 1}
 }
 
 func (x *CMsgTalentContentStatus_TalentDetails) GetAccountId() uint32 {
@@ -3025,13 +3163,6 @@ func (x *CMsgTalentContentStatus_TalentDetails) GetWorkshopItemId() uint32 {
 	return 0
 }
 
-func (x *CMsgTalentContentStatus_TalentDetails) GetZipFile() string {
-	if x != nil && x.ZipFile != nil {
-		return *x.ZipFile
-	}
-	return ""
-}
-
 func (x *CMsgTalentContentStatus_TalentDetails) GetStatus() ETalentContentStatus {
 	if x != nil && x.Status != nil {
 		return *x.Status
@@ -3053,11 +3184,32 @@ func (x *CMsgTalentContentStatus_TalentDetails) GetBroadcastLanguage() uint32 {
 	return 0
 }
 
-func (x *CMsgTalentContentStatus_TalentDetails) GetSubmissionTimestamp() uint32 {
-	if x != nil && x.SubmissionTimestamp != nil {
-		return *x.SubmissionTimestamp
+func (x *CMsgTalentContentStatus_TalentDetails) GetRevision() []*CMsgTalentContentStatus_SubmitRevision {
+	if x != nil {
+		return x.Revision
+	}
+	return nil
+}
+
+func (x *CMsgTalentContentStatus_TalentDetails) GetRevisionCount() uint32 {
+	if x != nil && x.RevisionCount != nil {
+		return *x.RevisionCount
 	}
 	return 0
+}
+
+func (x *CMsgTalentContentStatus_TalentDetails) GetWorkshopItemStatus() CMsgTalentContentStatus_EWorkshopItemStatus {
+	if x != nil && x.WorkshopItemStatus != nil {
+		return *x.WorkshopItemStatus
+	}
+	return CMsgTalentContentStatus_k_eSuccess
+}
+
+func (x *CMsgTalentContentStatus_TalentDetails) GetWorkshopItemDetails() string {
+	if x != nil && x.WorkshopItemDetails != nil {
+		return *x.WorkshopItemDetails
+	}
+	return ""
 }
 
 type CMsgDPCEvent_PhaseInfo struct {
@@ -3070,7 +3222,7 @@ type CMsgDPCEvent_PhaseInfo struct {
 
 func (x *CMsgDPCEvent_PhaseInfo) Reset() {
 	*x = CMsgDPCEvent_PhaseInfo{}
-	mi := &file_dota_gcmessages_webapi_proto_msgTypes[28]
+	mi := &file_dota_gcmessages_webapi_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3082,7 +3234,7 @@ func (x *CMsgDPCEvent_PhaseInfo) String() string {
 func (*CMsgDPCEvent_PhaseInfo) ProtoMessage() {}
 
 func (x *CMsgDPCEvent_PhaseInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_webapi_proto_msgTypes[28]
+	mi := &file_dota_gcmessages_webapi_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3124,7 +3276,7 @@ type CMsgDPCEvent_League struct {
 
 func (x *CMsgDPCEvent_League) Reset() {
 	*x = CMsgDPCEvent_League{}
-	mi := &file_dota_gcmessages_webapi_proto_msgTypes[29]
+	mi := &file_dota_gcmessages_webapi_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3136,7 +3288,7 @@ func (x *CMsgDPCEvent_League) String() string {
 func (*CMsgDPCEvent_League) ProtoMessage() {}
 
 func (x *CMsgDPCEvent_League) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_webapi_proto_msgTypes[29]
+	mi := &file_dota_gcmessages_webapi_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3190,7 +3342,7 @@ type CMsgDOTAFantasyCardLineup_CardBonus struct {
 
 func (x *CMsgDOTAFantasyCardLineup_CardBonus) Reset() {
 	*x = CMsgDOTAFantasyCardLineup_CardBonus{}
-	mi := &file_dota_gcmessages_webapi_proto_msgTypes[30]
+	mi := &file_dota_gcmessages_webapi_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3202,7 +3354,7 @@ func (x *CMsgDOTAFantasyCardLineup_CardBonus) String() string {
 func (*CMsgDOTAFantasyCardLineup_CardBonus) ProtoMessage() {}
 
 func (x *CMsgDOTAFantasyCardLineup_CardBonus) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_webapi_proto_msgTypes[30]
+	mi := &file_dota_gcmessages_webapi_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3249,7 +3401,7 @@ type CMsgDOTAFantasyCardLineup_Card struct {
 
 func (x *CMsgDOTAFantasyCardLineup_Card) Reset() {
 	*x = CMsgDOTAFantasyCardLineup_Card{}
-	mi := &file_dota_gcmessages_webapi_proto_msgTypes[31]
+	mi := &file_dota_gcmessages_webapi_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3261,7 +3413,7 @@ func (x *CMsgDOTAFantasyCardLineup_Card) String() string {
 func (*CMsgDOTAFantasyCardLineup_Card) ProtoMessage() {}
 
 func (x *CMsgDOTAFantasyCardLineup_Card) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_webapi_proto_msgTypes[31]
+	mi := &file_dota_gcmessages_webapi_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3351,7 +3503,7 @@ type CMsgDOTAFantasyCardLineup_League struct {
 
 func (x *CMsgDOTAFantasyCardLineup_League) Reset() {
 	*x = CMsgDOTAFantasyCardLineup_League{}
-	mi := &file_dota_gcmessages_webapi_proto_msgTypes[32]
+	mi := &file_dota_gcmessages_webapi_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3363,7 +3515,7 @@ func (x *CMsgDOTAFantasyCardLineup_League) String() string {
 func (*CMsgDOTAFantasyCardLineup_League) ProtoMessage() {}
 
 func (x *CMsgDOTAFantasyCardLineup_League) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_webapi_proto_msgTypes[32]
+	mi := &file_dota_gcmessages_webapi_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3412,7 +3564,7 @@ type CMsgDOTAFantasyCardLineup_Period struct {
 
 func (x *CMsgDOTAFantasyCardLineup_Period) Reset() {
 	*x = CMsgDOTAFantasyCardLineup_Period{}
-	mi := &file_dota_gcmessages_webapi_proto_msgTypes[33]
+	mi := &file_dota_gcmessages_webapi_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3424,7 +3576,7 @@ func (x *CMsgDOTAFantasyCardLineup_Period) String() string {
 func (*CMsgDOTAFantasyCardLineup_Period) ProtoMessage() {}
 
 func (x *CMsgDOTAFantasyCardLineup_Period) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_webapi_proto_msgTypes[33]
+	mi := &file_dota_gcmessages_webapi_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3478,7 +3630,7 @@ type CMsgDOTAFantasyCardList_CardBonus struct {
 
 func (x *CMsgDOTAFantasyCardList_CardBonus) Reset() {
 	*x = CMsgDOTAFantasyCardList_CardBonus{}
-	mi := &file_dota_gcmessages_webapi_proto_msgTypes[34]
+	mi := &file_dota_gcmessages_webapi_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3490,7 +3642,7 @@ func (x *CMsgDOTAFantasyCardList_CardBonus) String() string {
 func (*CMsgDOTAFantasyCardList_CardBonus) ProtoMessage() {}
 
 func (x *CMsgDOTAFantasyCardList_CardBonus) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_webapi_proto_msgTypes[34]
+	mi := &file_dota_gcmessages_webapi_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3535,7 +3687,7 @@ type CMsgDOTAFantasyCardList_Card struct {
 
 func (x *CMsgDOTAFantasyCardList_Card) Reset() {
 	*x = CMsgDOTAFantasyCardList_Card{}
-	mi := &file_dota_gcmessages_webapi_proto_msgTypes[35]
+	mi := &file_dota_gcmessages_webapi_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3547,7 +3699,7 @@ func (x *CMsgDOTAFantasyCardList_Card) String() string {
 func (*CMsgDOTAFantasyCardList_Card) ProtoMessage() {}
 
 func (x *CMsgDOTAFantasyCardList_Card) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_webapi_proto_msgTypes[35]
+	mi := &file_dota_gcmessages_webapi_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3626,7 +3778,7 @@ type CMsgChatToxicityToxicPlayerMatchesReport_IndividualRow struct {
 
 func (x *CMsgChatToxicityToxicPlayerMatchesReport_IndividualRow) Reset() {
 	*x = CMsgChatToxicityToxicPlayerMatchesReport_IndividualRow{}
-	mi := &file_dota_gcmessages_webapi_proto_msgTypes[36]
+	mi := &file_dota_gcmessages_webapi_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3638,7 +3790,7 @@ func (x *CMsgChatToxicityToxicPlayerMatchesReport_IndividualRow) String() string
 func (*CMsgChatToxicityToxicPlayerMatchesReport_IndividualRow) ProtoMessage() {}
 
 func (x *CMsgChatToxicityToxicPlayerMatchesReport_IndividualRow) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_webapi_proto_msgTypes[36]
+	mi := &file_dota_gcmessages_webapi_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3710,7 +3862,7 @@ type CMsgGetTeamAuditInformation_Action struct {
 
 func (x *CMsgGetTeamAuditInformation_Action) Reset() {
 	*x = CMsgGetTeamAuditInformation_Action{}
-	mi := &file_dota_gcmessages_webapi_proto_msgTypes[37]
+	mi := &file_dota_gcmessages_webapi_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3722,7 +3874,7 @@ func (x *CMsgGetTeamAuditInformation_Action) String() string {
 func (*CMsgGetTeamAuditInformation_Action) ProtoMessage() {}
 
 func (x *CMsgGetTeamAuditInformation_Action) ProtoReflect() protoreflect.Message {
-	mi := &file_dota_gcmessages_webapi_proto_msgTypes[37]
+	mi := &file_dota_gcmessages_webapi_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3925,26 +4077,43 @@ const file_dota_gcmessages_webapi_proto_rawDesc = "" +
 	"\n" +
 	"autographs\x18\x03 \x03(\v27.dota.CMsgTeamFanContentAutographStatus.AutographStatusR\n" +
 	"autographs\x12.\n" +
-	"\x13workshop_account_id\x18\x04 \x01(\rR\x11workshopAccountId\"\xc1\x01\n" +
+	"\x13workshop_account_id\x18\x04 \x01(\rR\x11workshopAccountId\"\xdd\x01\n" +
 	"\x1cCMsgTalentContentAssetStatus\x12<\n" +
 	"\n" +
 	"asset_type\x18\x01 \x01(\x0e2\x1d.dota.ETalentContentAssetTypeR\tassetType\x12\x1f\n" +
 	"\vasset_index\x18\x02 \x01(\rR\n" +
 	"assetIndex\x12B\n" +
-	"\fasset_status\x18\x03 \x01(\x0e2\x1f.dota.ETalentContentAssetStatusR\vassetStatus\"\xf7\x03\n" +
+	"\fasset_status\x18\x03 \x01(\x0e2\x1f.dota.ETalentContentAssetStatusR\vassetStatus\x12\x1a\n" +
+	"\brevision\x18\x04 \x01(\rR\brevision\"\xcc\a\n" +
 	"\x17CMsgTalentContentStatus\x12P\n" +
-	"\rtalent_status\x18\x01 \x03(\v2+.dota.CMsgTalentContentStatus.TalentDetailsR\ftalentStatus\x1a\x89\x03\n" +
+	"\rtalent_status\x18\x01 \x03(\v2+.dota.CMsgTalentContentStatus.TalentDetailsR\ftalentStatus\x1ar\n" +
+	"\x0eSubmitRevision\x12\x19\n" +
+	"\bzip_file\x18\x01 \x01(\tR\azipFile\x12\x1c\n" +
+	"\ttimestamp\x18\x02 \x01(\rR\ttimestamp\x12'\n" +
+	"\x0frevision_number\x18\x03 \x01(\rR\x0erevisionNumber\x1a\xc5\x04\n" +
 	"\rTalentDetails\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\rR\taccountId\x12\x1b\n" +
 	"\tfull_name\x18\x02 \x01(\tR\bfullName\x12\x1a\n" +
 	"\bnickname\x18\x03 \x01(\tR\bnickname\x12(\n" +
-	"\x10workshop_item_id\x18\x04 \x01(\rR\x0eworkshopItemId\x12\x19\n" +
-	"\bzip_file\x18\x05 \x01(\tR\azipFile\x122\n" +
-	"\x06status\x18\x06 \x01(\x0e2\x1a.dota.ETalentContentStatusR\x06status\x12E\n" +
-	"\fasset_status\x18\a \x03(\v2\".dota.CMsgTalentContentAssetStatusR\vassetStatus\x12-\n" +
-	"\x12broadcast_language\x18\b \x01(\rR\x11broadcastLanguage\x121\n" +
-	"\x14submission_timestamp\x18\t \x01(\rR\x13submissionTimestamp\"\xa5\x01\n" +
+	"\x10workshop_item_id\x18\x04 \x01(\rR\x0eworkshopItemId\x122\n" +
+	"\x06status\x18\x05 \x01(\x0e2\x1a.dota.ETalentContentStatusR\x06status\x12E\n" +
+	"\fasset_status\x18\b \x03(\v2\".dota.CMsgTalentContentAssetStatusR\vassetStatus\x12-\n" +
+	"\x12broadcast_language\x18\t \x01(\rR\x11broadcastLanguage\x12H\n" +
+	"\brevision\x18\n" +
+	" \x03(\v2,.dota.CMsgTalentContentStatus.SubmitRevisionR\brevision\x12%\n" +
+	"\x0erevision_count\x18\v \x01(\rR\rrevisionCount\x12c\n" +
+	"\x14workshop_item_status\x18\f \x01(\x0e21.dota.CMsgTalentContentStatus.EWorkshopItemStatusR\x12workshopItemStatus\x122\n" +
+	"\x15workshop_item_details\x18\r \x01(\tR\x13workshopItemDetails\"\xa2\x01\n" +
+	"\x13EWorkshopItemStatus\x12\x0e\n" +
+	"\n" +
+	"k_eSuccess\x10\x00\x12\x18\n" +
+	"\x14k_eInvalidWorkshopId\x10\x01\x12\x11\n" +
+	"\rk_eWrongAppId\x10\x02\x12!\n" +
+	"\x1dk_eRevenueSharingNotFinalized\x10\x03\x12\x1b\n" +
+	"\x17k_eWorkshopItemNotFound\x10\x04\x12\x0e\n" +
+	"\n" +
+	"k_eUnknown\x10\x05\"\xa5\x01\n" +
 	"\x1cCMsgSetTalentContentResponse\x12B\n" +
 	"\x06result\x18\x01 \x01(\x0e2*.dota.CMsgSetTalentContentResponse.EResultR\x06result\"A\n" +
 	"\aEResult\x12\x0e\n" +
@@ -4162,8 +4331,8 @@ func file_dota_gcmessages_webapi_proto_rawDescGZIP() []byte {
 	return file_dota_gcmessages_webapi_proto_rawDescData
 }
 
-var file_dota_gcmessages_webapi_proto_enumTypes = make([]protoimpl.EnumInfo, 14)
-var file_dota_gcmessages_webapi_proto_msgTypes = make([]protoimpl.MessageInfo, 38)
+var file_dota_gcmessages_webapi_proto_enumTypes = make([]protoimpl.EnumInfo, 15)
+var file_dota_gcmessages_webapi_proto_msgTypes = make([]protoimpl.MessageInfo, 39)
 var file_dota_gcmessages_webapi_proto_goTypes = []any{
 	(ETeamFanContentStatus)(0),                                     // 0: dota.ETeamFanContentStatus
 	(ETeamFanContentAssetType)(0),                                  // 1: dota.ETeamFanContentAssetType
@@ -4174,101 +4343,105 @@ var file_dota_gcmessages_webapi_proto_goTypes = []any{
 	(CMsgArcanaVotes_VotingState)(0),                               // 6: dota.CMsgArcanaVotes.VotingState
 	(CMsgDOTADPCFeed_EFeedElementType)(0),                          // 7: dota.CMsgDOTADPCFeed.EFeedElementType
 	(CMsgTeamFanContentAssetStatusResponse_EResult)(0),             // 8: dota.CMsgTeamFanContentAssetStatusResponse.EResult
-	(CMsgSetTalentContentResponse_EResult)(0),                      // 9: dota.CMsgSetTalentContentResponse.EResult
-	(CMsgDPCEvent_ELeagueEvent)(0),                                 // 10: dota.CMsgDPCEvent.ELeagueEvent
-	(CMsgDPCEvent_ELeagueEventPhase)(0),                            // 11: dota.CMsgDPCEvent.ELeagueEventPhase
-	(CMsgDPCEvent_ELeagueEventType)(0),                             // 12: dota.CMsgDPCEvent.ELeagueEventType
-	(CMsgDPCEvent_ETour)(0),                                        // 13: dota.CMsgDPCEvent.ETour
-	(*CMsgArcanaVotes)(nil),                                        // 14: dota.CMsgArcanaVotes
-	(*CMsgDOTADPCFeed)(nil),                                        // 15: dota.CMsgDOTADPCFeed
-	(*CMsgDOTADPCUserInfo)(nil),                                    // 16: dota.CMsgDOTADPCUserInfo
-	(*CMsgDraftTrivia)(nil),                                        // 17: dota.CMsgDraftTrivia
-	(*CMsgTeamFanContentAssetStatus)(nil),                          // 18: dota.CMsgTeamFanContentAssetStatus
-	(*CMsgTeamFanContentAssetStatusResponse)(nil),                  // 19: dota.CMsgTeamFanContentAssetStatusResponse
-	(*CMsgTeamFanContentStatus)(nil),                               // 20: dota.CMsgTeamFanContentStatus
-	(*CMsgTeamFanContentAutographStatus)(nil),                      // 21: dota.CMsgTeamFanContentAutographStatus
-	(*CMsgTalentContentAssetStatus)(nil),                           // 22: dota.CMsgTalentContentAssetStatus
-	(*CMsgTalentContentStatus)(nil),                                // 23: dota.CMsgTalentContentStatus
-	(*CMsgSetTalentContentResponse)(nil),                           // 24: dota.CMsgSetTalentContentResponse
-	(*CMsgDPCEvent)(nil),                                           // 25: dota.CMsgDPCEvent
-	(*CMsgDPCEventList)(nil),                                       // 26: dota.CMsgDPCEventList
-	(*CMsgDOTAFantasyCardLineup)(nil),                              // 27: dota.CMsgDOTAFantasyCardLineup
-	(*CMsgDOTAFantasyCardList)(nil),                                // 28: dota.CMsgDOTAFantasyCardList
-	(*CMsgChatToxicityToxicPlayerMatchesReport)(nil),               // 29: dota.CMsgChatToxicityToxicPlayerMatchesReport
-	(*CMsgChatToxicityReport)(nil),                                 // 30: dota.CMsgChatToxicityReport
-	(*CMsgGetTeamAuditInformation)(nil),                            // 31: dota.CMsgGetTeamAuditInformation
-	(*CMsgDOTADPCMatch)(nil),                                       // 32: dota.CMsgDOTADPCMatch
-	(*CMsgArcanaVotes_Match)(nil),                                  // 33: dota.CMsgArcanaVotes.Match
-	(*CMsgDOTADPCFeed_Element)(nil),                                // 34: dota.CMsgDOTADPCFeed.Element
-	(*CMsgDraftTrivia_DraftTriviaHeroInfo)(nil),                    // 35: dota.CMsgDraftTrivia.DraftTriviaHeroInfo
-	(*CMsgDraftTrivia_DraftTriviaMatchInfo)(nil),                   // 36: dota.CMsgDraftTrivia.DraftTriviaMatchInfo
-	(*CMsgDraftTrivia_PreviousResult)(nil),                         // 37: dota.CMsgDraftTrivia.PreviousResult
-	(*CMsgTeamFanContentStatus_TeamStatus)(nil),                    // 38: dota.CMsgTeamFanContentStatus.TeamStatus
-	(*CMsgTeamFanContentAutographStatus_AutographStatus)(nil),      // 39: dota.CMsgTeamFanContentAutographStatus.AutographStatus
-	(*CMsgTeamFanContentAutographStatus_TeamStatus)(nil),           // 40: dota.CMsgTeamFanContentAutographStatus.TeamStatus
-	(*CMsgTalentContentStatus_TalentDetails)(nil),                  // 41: dota.CMsgTalentContentStatus.TalentDetails
-	(*CMsgDPCEvent_PhaseInfo)(nil),                                 // 42: dota.CMsgDPCEvent.PhaseInfo
-	(*CMsgDPCEvent_League)(nil),                                    // 43: dota.CMsgDPCEvent.League
-	(*CMsgDOTAFantasyCardLineup_CardBonus)(nil),                    // 44: dota.CMsgDOTAFantasyCardLineup.CardBonus
-	(*CMsgDOTAFantasyCardLineup_Card)(nil),                         // 45: dota.CMsgDOTAFantasyCardLineup.Card
-	(*CMsgDOTAFantasyCardLineup_League)(nil),                       // 46: dota.CMsgDOTAFantasyCardLineup.League
-	(*CMsgDOTAFantasyCardLineup_Period)(nil),                       // 47: dota.CMsgDOTAFantasyCardLineup.Period
-	(*CMsgDOTAFantasyCardList_CardBonus)(nil),                      // 48: dota.CMsgDOTAFantasyCardList.CardBonus
-	(*CMsgDOTAFantasyCardList_Card)(nil),                           // 49: dota.CMsgDOTAFantasyCardList.Card
-	(*CMsgChatToxicityToxicPlayerMatchesReport_IndividualRow)(nil), // 50: dota.CMsgChatToxicityToxicPlayerMatchesReport.IndividualRow
-	(*CMsgGetTeamAuditInformation_Action)(nil),                     // 51: dota.CMsgGetTeamAuditInformation.Action
-	(*CMsgDOTAMatch)(nil),                                          // 52: dota.CMsgDOTAMatch
-	(*CDOTAMatchMetadata)(nil),                                     // 53: dota.CDOTAMatchMetadata
-	(ELeagueRegion)(0),                                             // 54: dota.ELeagueRegion
-	(ELeagueDivision)(0),                                           // 55: dota.ELeagueDivision
+	(CMsgTalentContentStatus_EWorkshopItemStatus)(0),               // 9: dota.CMsgTalentContentStatus.EWorkshopItemStatus
+	(CMsgSetTalentContentResponse_EResult)(0),                      // 10: dota.CMsgSetTalentContentResponse.EResult
+	(CMsgDPCEvent_ELeagueEvent)(0),                                 // 11: dota.CMsgDPCEvent.ELeagueEvent
+	(CMsgDPCEvent_ELeagueEventPhase)(0),                            // 12: dota.CMsgDPCEvent.ELeagueEventPhase
+	(CMsgDPCEvent_ELeagueEventType)(0),                             // 13: dota.CMsgDPCEvent.ELeagueEventType
+	(CMsgDPCEvent_ETour)(0),                                        // 14: dota.CMsgDPCEvent.ETour
+	(*CMsgArcanaVotes)(nil),                                        // 15: dota.CMsgArcanaVotes
+	(*CMsgDOTADPCFeed)(nil),                                        // 16: dota.CMsgDOTADPCFeed
+	(*CMsgDOTADPCUserInfo)(nil),                                    // 17: dota.CMsgDOTADPCUserInfo
+	(*CMsgDraftTrivia)(nil),                                        // 18: dota.CMsgDraftTrivia
+	(*CMsgTeamFanContentAssetStatus)(nil),                          // 19: dota.CMsgTeamFanContentAssetStatus
+	(*CMsgTeamFanContentAssetStatusResponse)(nil),                  // 20: dota.CMsgTeamFanContentAssetStatusResponse
+	(*CMsgTeamFanContentStatus)(nil),                               // 21: dota.CMsgTeamFanContentStatus
+	(*CMsgTeamFanContentAutographStatus)(nil),                      // 22: dota.CMsgTeamFanContentAutographStatus
+	(*CMsgTalentContentAssetStatus)(nil),                           // 23: dota.CMsgTalentContentAssetStatus
+	(*CMsgTalentContentStatus)(nil),                                // 24: dota.CMsgTalentContentStatus
+	(*CMsgSetTalentContentResponse)(nil),                           // 25: dota.CMsgSetTalentContentResponse
+	(*CMsgDPCEvent)(nil),                                           // 26: dota.CMsgDPCEvent
+	(*CMsgDPCEventList)(nil),                                       // 27: dota.CMsgDPCEventList
+	(*CMsgDOTAFantasyCardLineup)(nil),                              // 28: dota.CMsgDOTAFantasyCardLineup
+	(*CMsgDOTAFantasyCardList)(nil),                                // 29: dota.CMsgDOTAFantasyCardList
+	(*CMsgChatToxicityToxicPlayerMatchesReport)(nil),               // 30: dota.CMsgChatToxicityToxicPlayerMatchesReport
+	(*CMsgChatToxicityReport)(nil),                                 // 31: dota.CMsgChatToxicityReport
+	(*CMsgGetTeamAuditInformation)(nil),                            // 32: dota.CMsgGetTeamAuditInformation
+	(*CMsgDOTADPCMatch)(nil),                                       // 33: dota.CMsgDOTADPCMatch
+	(*CMsgArcanaVotes_Match)(nil),                                  // 34: dota.CMsgArcanaVotes.Match
+	(*CMsgDOTADPCFeed_Element)(nil),                                // 35: dota.CMsgDOTADPCFeed.Element
+	(*CMsgDraftTrivia_DraftTriviaHeroInfo)(nil),                    // 36: dota.CMsgDraftTrivia.DraftTriviaHeroInfo
+	(*CMsgDraftTrivia_DraftTriviaMatchInfo)(nil),                   // 37: dota.CMsgDraftTrivia.DraftTriviaMatchInfo
+	(*CMsgDraftTrivia_PreviousResult)(nil),                         // 38: dota.CMsgDraftTrivia.PreviousResult
+	(*CMsgTeamFanContentStatus_TeamStatus)(nil),                    // 39: dota.CMsgTeamFanContentStatus.TeamStatus
+	(*CMsgTeamFanContentAutographStatus_AutographStatus)(nil),      // 40: dota.CMsgTeamFanContentAutographStatus.AutographStatus
+	(*CMsgTeamFanContentAutographStatus_TeamStatus)(nil),           // 41: dota.CMsgTeamFanContentAutographStatus.TeamStatus
+	(*CMsgTalentContentStatus_SubmitRevision)(nil),                 // 42: dota.CMsgTalentContentStatus.SubmitRevision
+	(*CMsgTalentContentStatus_TalentDetails)(nil),                  // 43: dota.CMsgTalentContentStatus.TalentDetails
+	(*CMsgDPCEvent_PhaseInfo)(nil),                                 // 44: dota.CMsgDPCEvent.PhaseInfo
+	(*CMsgDPCEvent_League)(nil),                                    // 45: dota.CMsgDPCEvent.League
+	(*CMsgDOTAFantasyCardLineup_CardBonus)(nil),                    // 46: dota.CMsgDOTAFantasyCardLineup.CardBonus
+	(*CMsgDOTAFantasyCardLineup_Card)(nil),                         // 47: dota.CMsgDOTAFantasyCardLineup.Card
+	(*CMsgDOTAFantasyCardLineup_League)(nil),                       // 48: dota.CMsgDOTAFantasyCardLineup.League
+	(*CMsgDOTAFantasyCardLineup_Period)(nil),                       // 49: dota.CMsgDOTAFantasyCardLineup.Period
+	(*CMsgDOTAFantasyCardList_CardBonus)(nil),                      // 50: dota.CMsgDOTAFantasyCardList.CardBonus
+	(*CMsgDOTAFantasyCardList_Card)(nil),                           // 51: dota.CMsgDOTAFantasyCardList.Card
+	(*CMsgChatToxicityToxicPlayerMatchesReport_IndividualRow)(nil), // 52: dota.CMsgChatToxicityToxicPlayerMatchesReport.IndividualRow
+	(*CMsgGetTeamAuditInformation_Action)(nil),                     // 53: dota.CMsgGetTeamAuditInformation.Action
+	(*CMsgDOTAMatch)(nil),                                          // 54: dota.CMsgDOTAMatch
+	(*CDOTAMatchMetadata)(nil),                                     // 55: dota.CDOTAMatchMetadata
+	(ELeagueRegion)(0),                                             // 56: dota.ELeagueRegion
+	(ELeagueDivision)(0),                                           // 57: dota.ELeagueDivision
 }
 var file_dota_gcmessages_webapi_proto_depIdxs = []int32{
-	33, // 0: dota.CMsgArcanaVotes.matches:type_name -> dota.CMsgArcanaVotes.Match
-	34, // 1: dota.CMsgDOTADPCFeed.elements:type_name -> dota.CMsgDOTADPCFeed.Element
-	36, // 2: dota.CMsgDraftTrivia.match_hero_info:type_name -> dota.CMsgDraftTrivia.DraftTriviaMatchInfo
-	37, // 3: dota.CMsgDraftTrivia.previous_result:type_name -> dota.CMsgDraftTrivia.PreviousResult
+	34, // 0: dota.CMsgArcanaVotes.matches:type_name -> dota.CMsgArcanaVotes.Match
+	35, // 1: dota.CMsgDOTADPCFeed.elements:type_name -> dota.CMsgDOTADPCFeed.Element
+	37, // 2: dota.CMsgDraftTrivia.match_hero_info:type_name -> dota.CMsgDraftTrivia.DraftTriviaMatchInfo
+	38, // 3: dota.CMsgDraftTrivia.previous_result:type_name -> dota.CMsgDraftTrivia.PreviousResult
 	1,  // 4: dota.CMsgTeamFanContentAssetStatus.asset_type:type_name -> dota.ETeamFanContentAssetType
 	2,  // 5: dota.CMsgTeamFanContentAssetStatus.asset_status:type_name -> dota.ETeamFanContentAssetStatus
 	8,  // 6: dota.CMsgTeamFanContentAssetStatusResponse.result:type_name -> dota.CMsgTeamFanContentAssetStatusResponse.EResult
-	38, // 7: dota.CMsgTeamFanContentStatus.team_status_list:type_name -> dota.CMsgTeamFanContentStatus.TeamStatus
-	40, // 8: dota.CMsgTeamFanContentAutographStatus.team_autographs:type_name -> dota.CMsgTeamFanContentAutographStatus.TeamStatus
+	39, // 7: dota.CMsgTeamFanContentStatus.team_status_list:type_name -> dota.CMsgTeamFanContentStatus.TeamStatus
+	41, // 8: dota.CMsgTeamFanContentAutographStatus.team_autographs:type_name -> dota.CMsgTeamFanContentAutographStatus.TeamStatus
 	4,  // 9: dota.CMsgTalentContentAssetStatus.asset_type:type_name -> dota.ETalentContentAssetType
 	5,  // 10: dota.CMsgTalentContentAssetStatus.asset_status:type_name -> dota.ETalentContentAssetStatus
-	41, // 11: dota.CMsgTalentContentStatus.talent_status:type_name -> dota.CMsgTalentContentStatus.TalentDetails
-	9,  // 12: dota.CMsgSetTalentContentResponse.result:type_name -> dota.CMsgSetTalentContentResponse.EResult
-	10, // 13: dota.CMsgDPCEvent.event:type_name -> dota.CMsgDPCEvent.ELeagueEvent
-	12, // 14: dota.CMsgDPCEvent.event_type:type_name -> dota.CMsgDPCEvent.ELeagueEventType
-	43, // 15: dota.CMsgDPCEvent.leagues:type_name -> dota.CMsgDPCEvent.League
-	13, // 16: dota.CMsgDPCEvent.tour:type_name -> dota.CMsgDPCEvent.ETour
-	25, // 17: dota.CMsgDPCEventList.events:type_name -> dota.CMsgDPCEvent
-	47, // 18: dota.CMsgDOTAFantasyCardLineup.periods:type_name -> dota.CMsgDOTAFantasyCardLineup.Period
-	49, // 19: dota.CMsgDOTAFantasyCardList.cards:type_name -> dota.CMsgDOTAFantasyCardList.Card
-	50, // 20: dota.CMsgChatToxicityToxicPlayerMatchesReport.rows:type_name -> dota.CMsgChatToxicityToxicPlayerMatchesReport.IndividualRow
-	51, // 21: dota.CMsgGetTeamAuditInformation.actions:type_name -> dota.CMsgGetTeamAuditInformation.Action
-	52, // 22: dota.CMsgDOTADPCMatch.match:type_name -> dota.CMsgDOTAMatch
-	53, // 23: dota.CMsgDOTADPCMatch.metadata:type_name -> dota.CDOTAMatchMetadata
+	43, // 11: dota.CMsgTalentContentStatus.talent_status:type_name -> dota.CMsgTalentContentStatus.TalentDetails
+	10, // 12: dota.CMsgSetTalentContentResponse.result:type_name -> dota.CMsgSetTalentContentResponse.EResult
+	11, // 13: dota.CMsgDPCEvent.event:type_name -> dota.CMsgDPCEvent.ELeagueEvent
+	13, // 14: dota.CMsgDPCEvent.event_type:type_name -> dota.CMsgDPCEvent.ELeagueEventType
+	45, // 15: dota.CMsgDPCEvent.leagues:type_name -> dota.CMsgDPCEvent.League
+	14, // 16: dota.CMsgDPCEvent.tour:type_name -> dota.CMsgDPCEvent.ETour
+	26, // 17: dota.CMsgDPCEventList.events:type_name -> dota.CMsgDPCEvent
+	49, // 18: dota.CMsgDOTAFantasyCardLineup.periods:type_name -> dota.CMsgDOTAFantasyCardLineup.Period
+	51, // 19: dota.CMsgDOTAFantasyCardList.cards:type_name -> dota.CMsgDOTAFantasyCardList.Card
+	52, // 20: dota.CMsgChatToxicityToxicPlayerMatchesReport.rows:type_name -> dota.CMsgChatToxicityToxicPlayerMatchesReport.IndividualRow
+	53, // 21: dota.CMsgGetTeamAuditInformation.actions:type_name -> dota.CMsgGetTeamAuditInformation.Action
+	54, // 22: dota.CMsgDOTADPCMatch.match:type_name -> dota.CMsgDOTAMatch
+	55, // 23: dota.CMsgDOTADPCMatch.metadata:type_name -> dota.CDOTAMatchMetadata
 	7,  // 24: dota.CMsgDOTADPCFeed.Element.type:type_name -> dota.CMsgDOTADPCFeed.EFeedElementType
-	35, // 25: dota.CMsgDraftTrivia.DraftTriviaMatchInfo.radiant_heroes:type_name -> dota.CMsgDraftTrivia.DraftTriviaHeroInfo
-	35, // 26: dota.CMsgDraftTrivia.DraftTriviaMatchInfo.dire_heroes:type_name -> dota.CMsgDraftTrivia.DraftTriviaHeroInfo
-	36, // 27: dota.CMsgDraftTrivia.PreviousResult.match_hero_info:type_name -> dota.CMsgDraftTrivia.DraftTriviaMatchInfo
+	36, // 25: dota.CMsgDraftTrivia.DraftTriviaMatchInfo.radiant_heroes:type_name -> dota.CMsgDraftTrivia.DraftTriviaHeroInfo
+	36, // 26: dota.CMsgDraftTrivia.DraftTriviaMatchInfo.dire_heroes:type_name -> dota.CMsgDraftTrivia.DraftTriviaHeroInfo
+	37, // 27: dota.CMsgDraftTrivia.PreviousResult.match_hero_info:type_name -> dota.CMsgDraftTrivia.DraftTriviaMatchInfo
 	0,  // 28: dota.CMsgTeamFanContentStatus.TeamStatus.status:type_name -> dota.ETeamFanContentStatus
-	18, // 29: dota.CMsgTeamFanContentStatus.TeamStatus.asset_status:type_name -> dota.CMsgTeamFanContentAssetStatus
-	39, // 30: dota.CMsgTeamFanContentAutographStatus.TeamStatus.autographs:type_name -> dota.CMsgTeamFanContentAutographStatus.AutographStatus
+	19, // 29: dota.CMsgTeamFanContentStatus.TeamStatus.asset_status:type_name -> dota.CMsgTeamFanContentAssetStatus
+	40, // 30: dota.CMsgTeamFanContentAutographStatus.TeamStatus.autographs:type_name -> dota.CMsgTeamFanContentAutographStatus.AutographStatus
 	3,  // 31: dota.CMsgTalentContentStatus.TalentDetails.status:type_name -> dota.ETalentContentStatus
-	22, // 32: dota.CMsgTalentContentStatus.TalentDetails.asset_status:type_name -> dota.CMsgTalentContentAssetStatus
-	11, // 33: dota.CMsgDPCEvent.PhaseInfo.phase:type_name -> dota.CMsgDPCEvent.ELeagueEventPhase
-	54, // 34: dota.CMsgDPCEvent.League.region:type_name -> dota.ELeagueRegion
-	55, // 35: dota.CMsgDPCEvent.League.division:type_name -> dota.ELeagueDivision
-	42, // 36: dota.CMsgDPCEvent.League.phases:type_name -> dota.CMsgDPCEvent.PhaseInfo
-	44, // 37: dota.CMsgDOTAFantasyCardLineup.Card.bonuses:type_name -> dota.CMsgDOTAFantasyCardLineup.CardBonus
-	45, // 38: dota.CMsgDOTAFantasyCardLineup.League.cards:type_name -> dota.CMsgDOTAFantasyCardLineup.Card
-	46, // 39: dota.CMsgDOTAFantasyCardLineup.Period.leagues:type_name -> dota.CMsgDOTAFantasyCardLineup.League
-	48, // 40: dota.CMsgDOTAFantasyCardList.Card.bonuses:type_name -> dota.CMsgDOTAFantasyCardList.CardBonus
-	41, // [41:41] is the sub-list for method output_type
-	41, // [41:41] is the sub-list for method input_type
-	41, // [41:41] is the sub-list for extension type_name
-	41, // [41:41] is the sub-list for extension extendee
-	0,  // [0:41] is the sub-list for field type_name
+	23, // 32: dota.CMsgTalentContentStatus.TalentDetails.asset_status:type_name -> dota.CMsgTalentContentAssetStatus
+	42, // 33: dota.CMsgTalentContentStatus.TalentDetails.revision:type_name -> dota.CMsgTalentContentStatus.SubmitRevision
+	9,  // 34: dota.CMsgTalentContentStatus.TalentDetails.workshop_item_status:type_name -> dota.CMsgTalentContentStatus.EWorkshopItemStatus
+	12, // 35: dota.CMsgDPCEvent.PhaseInfo.phase:type_name -> dota.CMsgDPCEvent.ELeagueEventPhase
+	56, // 36: dota.CMsgDPCEvent.League.region:type_name -> dota.ELeagueRegion
+	57, // 37: dota.CMsgDPCEvent.League.division:type_name -> dota.ELeagueDivision
+	44, // 38: dota.CMsgDPCEvent.League.phases:type_name -> dota.CMsgDPCEvent.PhaseInfo
+	46, // 39: dota.CMsgDOTAFantasyCardLineup.Card.bonuses:type_name -> dota.CMsgDOTAFantasyCardLineup.CardBonus
+	47, // 40: dota.CMsgDOTAFantasyCardLineup.League.cards:type_name -> dota.CMsgDOTAFantasyCardLineup.Card
+	48, // 41: dota.CMsgDOTAFantasyCardLineup.Period.leagues:type_name -> dota.CMsgDOTAFantasyCardLineup.League
+	50, // 42: dota.CMsgDOTAFantasyCardList.Card.bonuses:type_name -> dota.CMsgDOTAFantasyCardList.CardBonus
+	43, // [43:43] is the sub-list for method output_type
+	43, // [43:43] is the sub-list for method input_type
+	43, // [43:43] is the sub-list for extension type_name
+	43, // [43:43] is the sub-list for extension extendee
+	0,  // [0:43] is the sub-list for field type_name
 }
 
 func init() { file_dota_gcmessages_webapi_proto_init() }
@@ -4286,8 +4459,8 @@ func file_dota_gcmessages_webapi_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_dota_gcmessages_webapi_proto_rawDesc), len(file_dota_gcmessages_webapi_proto_rawDesc)),
-			NumEnums:      14,
-			NumMessages:   38,
+			NumEnums:      15,
+			NumMessages:   39,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
