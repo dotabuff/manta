@@ -32,6 +32,7 @@ type Parser struct {
 	AfterStopCallback func()
 
 	classBaselines             map[int32][]byte
+	classBaselineStates        map[int32]*fieldState
 	classesById                map[int32]*class
 	classesByName              map[string]*class
 	classIdSize                uint32
@@ -70,18 +71,19 @@ func NewStreamParser(r io.Reader) (*Parser, error) {
 		NetTick:   0,
 		GameBuild: 0,
 
-		classBaselines:    make(map[int32][]byte),
-		classesById:       make(map[int32]*class),
-		classesByName:     make(map[string]*class),
-		entities:          make(map[int32]*Entity),
-		entityHandlers:    make([]EntityHandler, 0),
-		gameEventHandlers: make(map[string][]GameEventHandler),
-		gameEventNames:    make(map[int32]string),
-		gameEventTypes:    make(map[string]*gameEventType),
-		isStopping:        false,
-		serializers:       make(map[string]*serializer),
-		stream:            newStream(r),
-		stringTables:      newStringTables(),
+		classBaselines:      make(map[int32][]byte),
+		classBaselineStates: make(map[int32]*fieldState),
+		classesById:         make(map[int32]*class),
+		classesByName:       make(map[string]*class),
+		entities:            make(map[int32]*Entity),
+		entityHandlers:      make([]EntityHandler, 0),
+		gameEventHandlers:   make(map[string][]GameEventHandler),
+		gameEventNames:      make(map[int32]string),
+		gameEventTypes:      make(map[string]*gameEventType),
+		isStopping:          false,
+		serializers:         make(map[string]*serializer),
+		stream:              newStream(r),
+		stringTables:        newStringTables(),
 	}
 
 	// Parse out the header, ensuring that it's valid.

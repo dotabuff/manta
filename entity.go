@@ -259,14 +259,23 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 					_panicf("unable to find new class %d", classId)
 				}
 
-				baseline := p.classBaselines[classId]
+				// Decode the class baseline once into a reusable template and
+				// clone it for each new entity, instead of re-decoding the raw
+				// baseline bytes on every creation.
+				baseline := p.classBaselineStates[classId]
 				if baseline == nil {
-					_panicf("unable to find new baseline %d", classId)
+					raw := p.classBaselines[classId]
+					if raw == nil {
+						_panicf("unable to find new baseline %d", classId)
+					}
+					baseline = newFieldState()
+					p.fpBuf = readFields(newReader(raw), class.serializer, baseline, p.fpBuf)
+					p.classBaselineStates[classId] = baseline
 				}
 
 				e = newEntity(index, serial, class)
+				e.state = baseline.clone()
 				p.entities[index] = e
-				p.fpBuf = readFields(newReader(baseline), class.serializer, e.state, p.fpBuf)
 				p.fpBuf = readFields(r, class.serializer, e.state, p.fpBuf)
 				op = EntityOpCreated | EntityOpEntered
 

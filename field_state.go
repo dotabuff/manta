@@ -52,6 +52,21 @@ func (s *fieldState) set(fp *fieldPath, v interface{}) {
 	}
 }
 
+// clone returns a deep copy of the fieldState. Leaf values are shared (they are
+// immutable once decoded), while nested fieldStates are copied recursively so an
+// entity cloned from a baseline template can be mutated independently of the
+// template and its siblings.
+func (s *fieldState) clone() *fieldState {
+	c := &fieldState{state: make([]interface{}, len(s.state))}
+	copy(c.state, s.state)
+	for i, v := range c.state {
+		if sub, ok := v.(*fieldState); ok {
+			c.state[i] = sub.clone()
+		}
+	}
+	return c
+}
+
 func max(a, b int) int {
 	if a > b {
 		return a

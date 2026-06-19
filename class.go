@@ -109,4 +109,8 @@ func (p *Parser) updateInstanceBaseline() {
 		}
 		p.classBaselines[classId] = item.Value
 	}
+
+	// Decoded baseline templates may now be stale; drop them so they are
+	// re-decoded lazily from the updated bytes on the next entity creation.
+	clear(p.classBaselineStates)
 }

@@ -299,7 +299,10 @@ pointer/tuple allocs 4.6%, noscale/signed boxes ~3% each, QAngle `[]float32` 2.2
   (Entities.java:655-676, NestedArrayEntityState.java:28-43,219-224).
 - **Impact:** net win = clone cheaper than re-decode (it is, especially after P3.1 enables cheap COW).
   Golden-critical: cloned+overlaid state must be value-identical to today's fresh decode.
-- **Result:** _(pending)_
+- **Result:** sec/op 796.0→766.5 ms (−3.71%), B/op 398.6→378.1 MiB (−5.14%), allocs/op 10.65M→10.26M
+  (−3.61%, −0.39M). Baseline decoded once per class into a template, `clone()`d per entity (shares
+  immutable leaf values, deep-copies nested states). Templates invalidated (`clear`) on instancebaseline
+  update for correctness. go test green. ✅
 
 ### P-guard — zero-copy `readBytes` invariant (correctness guard, do alongside P1.10/P1.11)
 - `readBytes` aligned path returns `r.buf[r.pos-n:r.pos]` aliasing the protobuf buffer (reader.go:81);
@@ -464,3 +467,4 @@ Verified zero occurrences across all 39 build replays, so safe insurance:
 | P1.11 varints from accumulator | _skipped (breaks reader pos contract)_ | — | — | — |
 | **P1.12 flatten huffman tree** | **0.960 s (−37.0%)** | 398.6 MiB (−49.6%) | 10.65M (−48.7%) | PASS |
 | **P1.13 8-bit op lookup table** | **0.796 s (−47.7%)** | 398.6 MiB (−49.6%) | 10.65M (−48.7%) | PASS |
+| **P1.14 baseline decode-once clone** | **0.766 s (−49.7%)** | **378.1 MiB (−52.2%)** | **10.26M (−50.6%)** | PASS |
