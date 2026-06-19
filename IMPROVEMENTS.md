@@ -415,7 +415,8 @@ Verified zero occurrences across all 39 build replays, so safe insurance:
 - `readOuterMessage` passes the size varint straight to `stream.readBytes` which does `make([]byte, n)` with
   no bound (parser.go:219, stream.go:26) → a corrupt/huge varint can OOM before `io.ReadFull` errors. Add a
   max-size guard (safely above the largest legitimate full packet) returning an error. Golden-neutral.
-- **Result:** _(pending)_
+- **Result:** Added a 256 MiB `maxOuterMessageSize` guard before `readBytes` (every corpus replay is
+  ≤70 MB total, so no single message approaches it). go test green; only rejects corrupt sizes. ✅
 
 ### P2.12 — field-path depth-7 guard + comment
 - `Push*` ops do `fp.last++` then index `fp.path[fp.last]` with no guard → depth>6 panics with a raw

@@ -13,6 +13,11 @@ import (
 var magicSource1 = []byte{'P', 'U', 'F', 'D', 'E', 'M', 'S', '\000'}
 var magicSource2 = []byte{'P', 'B', 'D', 'E', 'M', 'S', '2', '\000'}
 
+// maxOuterMessageSize bounds a single outer message length so a corrupt or
+// truncated size varint cannot trigger a huge allocation. It is far above any
+// legitimate message, including full packets.
+const maxOuterMessageSize = 256 << 20
+
 // Parser is an instance of the replay parser
 type Parser struct {
 	// Callbacks provide a mechanism for receiving notification
@@ -228,6 +233,12 @@ func (p *Parser) readOuterMessage() (outerMessage, error) {
 	size, err := p.stream.readVarUint32()
 	if err != nil {
 		return outerMessage{}, err
+	}
+
+	// Reject an implausibly large size before allocating, so a corrupt or
+	// truncated stream fails cleanly instead of attempting a huge allocation.
+	if size > maxOuterMessageSize {
+		return outerMessage{}, _errorf("outer message size %d exceeds maximum %d", size, maxOuterMessageSize)
 	}
 
 	buf, err := p.stream.readBytes(size)
