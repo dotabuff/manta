@@ -20,6 +20,16 @@ func newReader(buf []byte) *reader {
 	return &reader{buf, uint32(len(buf)), 0, 0, 0}
 }
 
+// reset reinitializes the reader to read from the given buffer, allowing a
+// single reader to be reused across messages without allocating a new one.
+func (r *reader) reset(buf []byte) {
+	r.buf = buf
+	r.size = uint32(len(buf))
+	r.pos = 0
+	r.bitVal = 0
+	r.bitCount = 0
+}
+
 // remBits calculates the number of unread bits in the buffer
 func (r *reader) remBits() uint32 {
 	return r.remBytes() + r.bitCount

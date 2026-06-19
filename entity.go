@@ -218,9 +218,17 @@ func (p *Parser) FilterEntity(fb func(*Entity) bool) []*Entity {
 	return entities
 }
 
+// entityOpTuple pairs an entity with the operation performed on it. Updates are
+// buffered during a PacketEntities message, then dispatched to handlers.
+type entityOpTuple struct {
+	e  *Entity
+	op EntityOp
+}
+
 // Internal Callback for OnCSVCMsg_PacketEntities.
 func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error {
-	r := newReader(m.GetEntityData())
+	r := &p.entityReader
+	r.reset(m.GetEntityData())
 
 	var index = int32(-1)
 	var updates = int(m.GetUpdatedEntries())
@@ -237,11 +245,7 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 		p.entityFullPackets++
 	}
 
-	type tuple struct {
-		e  *Entity
-		op EntityOp
-	}
-	tuples := make([]tuple, 0, updates)
+	tuples := p.entityTuples[:0]
 
 	for ; updates > 0; updates-- {
 		index += int32(r.readUBitVar()) + 1
@@ -300,12 +304,13 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 			}
 		}
 
-		tuples = append(tuples, tuple{e, op})
+		tuples = append(tuples, entityOpTuple{e, op})
 	}
+	p.entityTuples = tuples
 
 	for _, h := range p.entityHandlers {
-		for _, t := range tuples {
-			if err := h(t.e, t.op); err != nil {
+		for i := range tuples {
+			if err := h(tuples[i].e, tuples[i].op); err != nil {
 				return err
 			}
 		}

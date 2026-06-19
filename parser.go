@@ -47,6 +47,8 @@ type Parser struct {
 	serializers                map[string]*serializer
 	pendingMsgBuf              pendingMessages
 	snappyScratch              []byte
+	entityReader               reader
+	entityTuples               []entityOpTuple
 	stream                     *stream
 	stringTables               *stringTables
 	stopAtTick                 uint32

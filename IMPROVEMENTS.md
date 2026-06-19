@@ -163,7 +163,9 @@ pointer/tuple allocs 4.6%, noscale/signed boxes ~3% each, QAngle `[]float32` 2.2
   handlers-outer/tuples-inner emission order `expectEntityEvents` depends on); `reader.reset(buf)`
   method for the entity-data reader.
 - **Impact:** −0.44M allocs. (The baseline reader at entity.go:269 is handled by P1.14, not here.)
-- **Result:** _(pending)_
+- **Result:** B/op 647.9→571.0 MiB (**−11.87%** — the per-packet tuples backing array was large:
+  updates×16B over many packets), allocs/op −0.40% (−80K), sec/op +1.03% (run variance; cumulative sec
+  still −1.9% vs P0). Hoisted tuple to package-level `entityOpTuple`; reused parser-level reader+tuples. go test green. ✅
 
 ### P1.6 — hoist per-entity `fpCache`/`fpNoop` maps to class
 - **Now:** `newEntity` allocates two maps per entity (entity.go:69-70); name→fieldPath depends only on
@@ -433,3 +435,4 @@ Verified zero occurrences across all 39 build replays, so safe insurance:
 | P1.2 outerMessage by value | 1.519 s (−0.3%) | 762.6 MiB (−3.7%) | 20.03M (−3.5%) | PASS |
 | P1.3 snappy scratch reuse | 1.511 s (−0.8%) | 700.6 MiB (−11.5%) | 20.00M (−3.6%) | PASS |
 | P1.4 modifier early-return | 1.479 s (−2.9%) | 647.9 MiB (−18.1%) | 18.74M (−9.7%) | PASS |
+| P1.5 reuse tuples + reader | 1.494 s (−1.9%) | 571.0 MiB (−27.9%) | 18.66M (−10.1%) | PASS |
