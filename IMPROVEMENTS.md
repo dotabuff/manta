@@ -398,7 +398,9 @@ Verified zero occurrences across all 39 build replays, so safe insurance:
 - `qangle_pitch_yaw` doesn't handle bitCount ∈ {0,32} (raw float); no `qangle_precise` (20-bit) handling →
   would fall to the coord path and desync. Zero occurrences on the corpus (observed bitcounts {0,8,13}) →
   pure forward-compat. Add the clarity special-cases (QAnglePitchYawOnly/Precise/NoScale decoders).
-- **Result:** _(pending)_
+- **Result:** Rewrote `qangleFactory` from clarity's actual decoders: `qangle_pitch_yaw` bc∈{0,32}→raw
+  floats; `qangle_precise`→3 flags + 20-bit angles; general bc==32→raw floats. Current fields (bc {8,13})
+  keep identical behavior. go test green; the new branches are dormant on the corpus (forward-compat). ✅
 
 ### P2.10 — mana/runetime patch sentinel guards
 - Mana (builds ≤954) and simtime/runetime (all builds) patches apply unconditionally (field_patch.go:51-78);

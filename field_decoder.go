@@ -182,24 +182,66 @@ func simulationTimeDecoder(r *reader) interface{} {
 }
 
 func qangleFactory(f *field) fieldDecoder {
+	bc := uint32(0)
+	if f.bitCount != nil {
+		bc = uint32(*f.bitCount)
+	}
+
 	if f.encoder == "qangle_pitch_yaw" {
-		n := uint32(*f.bitCount)
+		// Bit counts 0 and 32 carry raw 32-bit floats; otherwise bit angles.
+		if bc == 0 || bc == 32 {
+			return func(r *reader) interface{} {
+				return []float32{
+					math.Float32frombits(r.readBits(32)),
+					math.Float32frombits(r.readBits(32)),
+					0.0,
+				}
+			}
+		}
 		return func(r *reader) interface{} {
 			return []float32{
-				r.readAngle(n),
-				r.readAngle(n),
+				r.readAngle(bc),
+				r.readAngle(bc),
 				0.0,
 			}
 		}
 	}
 
-	if f.bitCount != nil && *f.bitCount != 0 {
-		n := uint32(*f.bitCount)
+	if f.encoder == "qangle_precise" {
+		return func(r *reader) interface{} {
+			ret := make([]float32, 3)
+			rX := r.readBoolean()
+			rY := r.readBoolean()
+			rZ := r.readBoolean()
+			if rX {
+				ret[0] = r.readAngle(20)
+			}
+			if rY {
+				ret[1] = r.readAngle(20)
+			}
+			if rZ {
+				ret[2] = r.readAngle(20)
+			}
+			return ret
+		}
+	}
+
+	if bc == 32 {
 		return func(r *reader) interface{} {
 			return []float32{
-				r.readAngle(n),
-				r.readAngle(n),
-				r.readAngle(n),
+				math.Float32frombits(r.readBits(32)),
+				math.Float32frombits(r.readBits(32)),
+				math.Float32frombits(r.readBits(32)),
+			}
+		}
+	}
+
+	if bc != 0 {
+		return func(r *reader) interface{} {
+			return []float32{
+				r.readAngle(bc),
+				r.readAngle(bc),
+				r.readAngle(bc),
 			}
 		}
 	}
