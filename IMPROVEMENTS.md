@@ -184,7 +184,8 @@ pointer/tuple allocs 4.6%, noscale/signed boxes ~3% each, QAngle `[]float32` 2.2
   tick mutates `debugLevel` mid-parse and `readFields` is called fresh per entity-update, so per-call
   re-eval preserves behavior).
 - **Impact:** −~33M calls/branches (CPU only, ~0 alloc when disabled).
-- **Result:** _(pending)_
+- **Result:** sec/op 1.509→1.476 (**−2.18%**, p=0.002 — `v(6)` was 2 calls/field across millions of
+  fields), allocs/B unchanged (CPU-only). go test green. ✅
 
 ### P1.8 — buffer `stream` IO
 - **Now:** `stream.readByte`→`readBytes(1)`→`io.ReadFull` per byte; 3 varints + payload per outer
@@ -438,3 +439,4 @@ Verified zero occurrences across all 39 build replays, so safe insurance:
 | P1.4 modifier early-return | 1.479 s (−2.9%) | 647.9 MiB (−18.1%) | 18.74M (−9.7%) | PASS |
 | P1.5 reuse tuples + reader | 1.494 s (−1.9%) | 571.0 MiB (−27.9%) | 18.66M (−10.1%) | PASS |
 | P1.6 hoist fp caches to class | 1.509 s (−0.9%) | 569.5 MiB (−28.1%) | 18.63M (−10.2%) | PASS |
+| P1.7 hoist v(6) debug guard | 1.476 s (−3.1%) | 569.5 MiB (−28.1%) | 18.63M (−10.2%) | PASS |
