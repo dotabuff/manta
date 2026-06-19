@@ -250,7 +250,12 @@ pointer/tuple allocs 4.6%, noscale/signed boxes ~3% each, QAngle `[]float32` 2.2
   allocates).
 - **Impact:** compounds P1.10. `BenchmarkReadVarUint32/64` (reader_test.go) measures it directly.
 - **Guard:** preserve `readBytes` zero-copy aliasing (P-guard below).
-- **Result:** _(pending)_
+- **Result:** **SKIPPED.** Routing `readByte`/`readLeUintX` through `readBits` makes them consume into
+  the read-ahead accumulator, leaving `r.pos` ahead of the logical position. The reader unit tests
+  (`TestReaderReplayBeginning`, `TestReaderVarints`) assert exact `r.pos` and manually set `r.pos = 0`, and
+  `r.pos`/`remBytes` are part of the reader contract. The marginal gain (avoiding a `make` on rare
+  *unaligned* `readLeUintX`) wasn't worth rewriting tests and risking the `pos` contract. P1.10's `realign`
+  already keeps these byte reads fast and zero-copy with `pos` accurate. Reverted.
 
 ### P1.12 — flatten huffman tree to int arrays
 - **Now:** `readFieldPaths` walks an interface pointer-tree per bit (`node.Right()/Left()/IsLeaf()/Value()`
@@ -452,3 +457,4 @@ Verified zero occurrences across all 39 build replays, so safe insurance:
 | P1.8 buffer stream IO (streaming −6.5%) | 1.483 s (flat, in-mem) | 569.5 MiB | 18.63M | PASS |
 | **P1.9 reusable field-path buffer** | **1.198 s (−21.3%)** | **398.6 MiB (−49.6%)** | **10.65M (−48.7%)** | PASS |
 | **P1.10 word-at-a-time reader** | **1.058 s (−30.5%)** | 398.6 MiB (−49.6%) | 10.65M (−48.7%) | PASS |
+| P1.11 varints from accumulator | _skipped (breaks reader pos contract)_ | — | — | — |
