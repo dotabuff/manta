@@ -493,3 +493,12 @@ Verified zero occurrences across all 39 build replays, so safe insurance:
 | **P1.14 baseline decode-once clone** | **0.766 s (−49.7%)** | **378.1 MiB (−52.2%)** | **10.26M (−50.6%)** | PASS |
 | P-guard zero-copy readBytes test | test-only (no perf change) | — | — | PASS |
 | **Phase 1 total vs P0** | **−49.7%** | **−52.2%** | **−50.6%** | PASS |
+| Phase 2 (P2.1–P2.12, correctness) | ~ flat | ~ flat | ~ flat | PASS |
+| **End of Phase 2 vs P0** | **−49.7%** | **−52.2%** | **−50.6%** | PASS |
+
+**Phase 2 (correctness) notes:** all 12 goals landed, full suite green with identical golden assertions,
+and no perf regression (sec/op, B/op, allocs/op all statistically flat vs end of Phase 1). Highlights:
+P2.1 fixed the real string-table additive-index bug; P2.6–P2.9 added forward-compat decoders
+(CUtlBinaryBlock, Quaternion, int64-64bit, HSequence/HeroID_t/BloodType aligned to clarity, QAngle
+precise/noscale); P2.2/P2.3/P2.11/P2.12 hardened error paths. P2.7/P2.8 change live field *values* to
+match clarity (not asserted by goldens) — flagged for review.
