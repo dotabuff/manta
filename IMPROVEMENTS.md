@@ -447,7 +447,17 @@ Verified zero occurrences across all 39 build replays, so safe insurance:
 - **Golden-critical:** `Get("m_flMaxMana").(float32)` (manta_test.go:694) must stay bit-identical — `Get`/
   `GetFloat32` must still return a boxed `float32`. Folds in P-decoder findings (quantized/qangle/int boxing)
   which deliver 0 allocs alone and explicitly depend on this. Also unlocks cheap COW for P1.14.
-- **Result:** _(pending)_
+- **Result:** Implemented as a **24-byte tagged-union `cell`**
+  `{ref interface{}; num uint32; kind cellKind}`. Scalars (float32/int32/uint32/bool/≤32-bit uint64
+  handles) live inline in `num` — zero write-path alloc; reference values (string/`[]float32`/`[]byte`) and
+  the rare genuinely-64-bit ints (CStrongHandle/fixed64/int64/steamids) go in `ref`; nested tables in `ref`
+  as `*fieldState`. Decoders now return `cell`; values box lazily in `cell.iface()` only on `Get` (rare).
+  Public API unchanged — `Get` still returns `interface{}` with the exact dynamic type (entity_test's
+  `int32`/`uint64`/`bool`/`string` assertions and `expectHeroEntityMana` float all pass; the >32-bit steamid
+  proves 64-bit values aren't truncated). **vs P2: allocs −57.0% (10.26M→4.41M), sec −4.2%, B/op +2.6%**
+  (residual is the qangle/Vector `[]float32` backing arrays, left boxed to respect no-API-change on `Get`).
+  Tried a 32-byte `uint64`-num cell first (no 64-bit boxing) but it cost +12.9% B/op; the 24-byte variant
+  recovers that for just +1% allocs since 64-bit values are rare (profile-confirmed). go test ./... green. ✅
 
 ---
 
@@ -495,6 +505,8 @@ Verified zero occurrences across all 39 build replays, so safe insurance:
 | **Phase 1 total vs P0** | **−49.7%** | **−52.2%** | **−50.6%** | PASS |
 | Phase 2 (P2.1–P2.12, correctness) | ~ flat | ~ flat | ~ flat | PASS |
 | **End of Phase 2 vs P0** | **−49.7%** | **−52.2%** | **−50.6%** | PASS |
+| P3.1 typed entity state (de-box) | 0.734 s (−4.2% vs P2) | 388.2 MiB (+2.6% vs P2) | 4.41M (−57.0% vs P2) | PASS |
+| **End of Phase 3 vs P0** | **−51.8%** | **−51.0%** | **−78.8%** | PASS |
 
 **Phase 2 (correctness) notes:** all 12 goals landed, full suite green with identical golden assertions,
 and no perf regression (sec/op, B/op, allocs/op all statistically flat vs end of Phase 1). Highlights:

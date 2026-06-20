@@ -40,7 +40,7 @@ func readFields(r *reader, s *serializer, state *fieldState, fpBuf []fieldPath) 
 
 			fp2.release()
 
-			_debugf(" => %#v", val)
+			_debugf(" => %#v", val.iface())
 		}
 	}
 
