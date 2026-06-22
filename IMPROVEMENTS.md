@@ -507,6 +507,12 @@ Verified zero occurrences across all 39 build replays, so safe insurance:
 | **End of Phase 2 vs P0** | **−49.7%** | **−52.2%** | **−50.6%** | PASS |
 | P3.1 typed entity state (de-box) | 0.734 s (−4.2% vs P2) | 388.2 MiB (+2.6% vs P2) | 4.41M (−57.0% vs P2) | PASS |
 | **End of Phase 3 vs P0** | **−51.8%** | **−51.0%** | **−78.8%** | PASS |
+| P4 baseline (re-measured at fbca7ed) | 0.727 s | 388.2 MiB | 4.41M | PASS |
+| P4.1 deep-copy mutable baseline leaves | 0.755 s (~) | 389.4 MiB (+0.3%) | 4.478M (+1.5%) | PASS |
+| P4.2 clear reused tuple/pending buffers | _tbd_ | _tbd_ | _tbd_ | _tbd_ |
+| P4.3 guard skipBits underflow | _tbd_ | _tbd_ | _tbd_ | _tbd_ |
+| P4.4 fix debug position | _tbd_ | _tbd_ | _tbd_ | _tbd_ |
+| P4.5 lock value-changing decoders (tests+docs) | _tbd_ | _tbd_ | _tbd_ | _tbd_ |
 
 **Phase 2 (correctness) notes:** all 12 goals landed, full suite green with identical golden assertions,
 and no perf regression (sec/op, B/op, allocs/op all statistically flat vs end of Phase 1). Highlights:
@@ -514,3 +520,63 @@ P2.1 fixed the real string-table additive-index bug; P2.6–P2.9 added forward-c
 (CUtlBinaryBlock, Quaternion, int64-64bit, HSequence/HeroID_t/BloodType aligned to clarity, QAngle
 precise/noscale); P2.2/P2.3/P2.11/P2.12 hardened error paths. P2.7/P2.8 change live field *values* to
 match clarity (not asserted by goldens) — flagged for review.
+
+---
+
+## Phase 4 — post-review fixes
+
+Addresses external review feedback on the branch. P4.1/P4.2/P4.3 fix real regressions the branch
+introduced; P4.4 is a debug-only cleanup; P4.5 documents and locks the deliberate API changes.
+Re-baselined at `fbca7ed`; each step benchstat'd vs the previous so the *cost* of these correctness
+fixes is explicit.
+
+### P4.1 — deep-copy mutable baseline leaves in clone()
+- **Issue:** `clone()` (field_state.go) shallow-copies cells and only deep-copies nested `*fieldState`.
+  Cells whose `ref` holds `[]float32` (vectors) or `[]byte` (binary blobs) are shared across every entity
+  cloned from the cached class baseline (introduced by P1.14 decode-once + carried through P3.1). A caller
+  mutating a slice from `Entity.Get`/`Map` can corrupt the baseline template and sibling entities. Before
+  the branch, baselines were re-decoded per entity, so this aliasing didn't exist.
+- **Fix:** type-switch in `clone()` and deep-copy `[]float32`/`[]byte` leaves; strings and boxed 64-bit
+  scalars are immutable and stay shared. Only fires for baseline vector/blob leaves, at entity-create.
+- **Result:** **cost** allocs/op 4.410M→4.478M (+1.54%, +68K — the per-entity baseline leaf copies),
+  B/op +0.33%, sec/op ~ (p=0.105). go test green, identical goldens (deep-copy yields equal slices). ✅
+
+### P4.2 — clear reused tuple/pending buffers after dispatch
+- **Issue:** `p.entityTuples` (entity.go) and `p.pendingMsgBuf` (demo_packet.go) are stored back with full
+  length and stale `[len:cap]` entries, retaining `*Entity` pointers (and their de-boxed state) and inner
+  packet buffers an extra packet — stale slots from a larger prior packet can pin *deleted* entities.
+- **Fix:** `clear()` the used entries and store the slice back at `[:0]`. Clearing the full written length
+  each packet keeps `[len:cap]` zero across packets, so no stale refs accumulate.
+- **Result:** _(pending)_
+
+### P4.3 — guard skipBits underflow + truncated-stream test
+- **Issue:** `peekBits` zero-pads at EOF and `skipBits` blindly subtracts, so on truncated/corrupt input a
+  lookup entry can consume more bits than are buffered, underflowing `bitCount` (uint32 wraps huge) and
+  spinning on garbage ops instead of failing. The old per-bit walk hit a clean panic → parser error.
+  Cannot affect well-formed replays (the fast path never under-runs on valid streams). The committed
+  huffman test used 8-byte buffers and never hit the `<8 bits remaining` case.
+- **Fix:** `skipBits` panics cleanly when `n > bitCount` (caught by the parser recover → error), restoring
+  fail-fast. Add a huffman test that truncates an op stream and asserts a clean error.
+- **Result:** _(pending)_
+
+### P4.4 — correct debug position() after word refill
+- **Issue:** `position()` (reader.go) still assumes `bitCount <= 8`, but the word reader can leave 56/48/…
+  Wrong verbose-debug output only; no parsing impact.
+- **Fix:** compute the logical bit position as `pos*8 - bitCount`.
+- **Result:** _(pending)_
+
+### P4.5 — lock value-changing decoders + document Decision A
+- **Decision A (owned):** the branch deliberately changes what `.Get` returns for a few fields, to match
+  clarity's correct representation. We are keeping these and owning them as intentional behavior changes:
+  - `int64` fields: `int32` (truncated >32 bits) → **`int64`** (fixes truncation; type change is forced by
+    the fix).
+  - `HeroID_t`: `uint32` → **`int32`** (signed, clarity parity).
+  - `HSequence`: `uint32` → **`int32`, value − 1** (−1 = "none" handle, clarity parity).
+  - `BloodType`: stayed `uint64`; only the *encoding* changed (fixed-8 vs varint), value identical on the
+    corpus — not an API change.
+  Downstream callers doing concrete type assertions on those specific fields may need updates.
+- **Fix:** add decoder-level representation tests asserting the exact dynamic type **and** value for each
+  (deterministic, not replay-dependent), so the intended downstream-visible values are locked in CI — this
+  is what the review asked for ("prove values are what you intend, not just no-desync"). Also assert the
+  inline-vs-boxed uint64 split round-trips, including a `> 2^32` value to prove no truncation.
+- **Result:** _(pending)_

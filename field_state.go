@@ -136,17 +136,23 @@ func (s *fieldState) set(fp *fieldPath, c cell) {
 	}
 }
 
-// clone returns a deep copy of the fieldState. Leaf cells are copied by value
-// (their ref values — strings, vectors — are immutable once decoded and may be
-// shared), while nested fieldStates are copied recursively so an entity cloned
-// from a baseline template can be mutated independently of the template and its
-// siblings.
+// clone returns a deep copy of the fieldState so an entity cloned from a cached
+// class baseline can be mutated independently of the template and its siblings.
+// Nested fieldStates are copied recursively. Mutable leaf values (vector
+// []float32 and binary-blob []byte) are also deep-copied, since a caller may
+// mutate a slice returned from Entity.Get/Map; strings and boxed integers are
+// immutable and shared by value.
 func (s *fieldState) clone() *fieldState {
 	c := &fieldState{state: make([]cell, len(s.state))}
 	copy(c.state, s.state)
 	for i := range c.state {
-		if sub, ok := c.state[i].sub(); ok {
-			c.state[i].ref = sub.clone()
+		switch v := c.state[i].ref.(type) {
+		case *fieldState:
+			c.state[i].ref = v.clone()
+		case []float32:
+			c.state[i].ref = append([]float32(nil), v...)
+		case []byte:
+			c.state[i].ref = append([]byte(nil), v...)
 		}
 	}
 	return c
