@@ -513,7 +513,14 @@ Verified zero occurrences across all 39 build replays, so safe insurance:
 | P4.3 guard skipBits underflow | 0.763 s (flat) | 389.4 MiB (flat) | 4.478M (flat) | PASS |
 | P4.4 fix debug position | 0.761 s (flat) | 389.4 MiB (flat) | 4.478M (flat) | PASS |
 | P4.5 lock value-changing decoders (tests+docs) | 0.761 s (flat) | 389.4 MiB (flat) | 4.478M (flat) | PASS |
-| **End of Phase 4 vs P3** | flat sec (incl. drift) | +0.3% B/op | +1.5% allocs (baseline isolation) | PASS |
+| **End of Phase 4 vs P3** (cooled re-measure) | 0.748 s (~, p=0.218) | 389.4 MiB (+0.3%) | 4.478M (+1.5%) | PASS |
+| **End of Phase 4 vs P0** | **−50.9%** | **−50.8%** | **−78.4%** | PASS |
+
+**Phase 4 cost (cooled, deterministic):** the only real cost of the post-review correctness/robustness
+fixes is **+1.54% allocs (+68K)** from P4.1's per-entity baseline mutable-leaf isolation; B/op +0.33%,
+sec/op flat (the intermediate sec wobble was thermal drift across the back-to-back bench run, confirmed
+by a cooled re-measure: 744→748 ms, p=0.218). The skipBits guard, buffer clearing, debug fix, and
+decoder-lock tests are all free.
 
 **Phase 2 (correctness) notes:** all 12 goals landed, full suite green with identical golden assertions,
 and no perf regression (sec/op, B/op, allocs/op all statistically flat vs end of Phase 1). Highlights:
