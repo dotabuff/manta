@@ -87,6 +87,22 @@ func decodeOneHuffOpWalk(r *reader) int32 {
 	}
 }
 
+// TestReadFieldPathsTruncated verifies that a truncated field-path op stream
+// fails cleanly instead of underflowing the bit accumulator. An all-zero buffer
+// decodes as an unbounded run of PlusOne ops (code "0") that never reaches
+// FieldPathEncodeFinish; once the bits run out, the lookup would consume past
+// the end of the buffer. With the skipBits guard this panics (the parser
+// recovers it into an error); without it, bitCount underflows and the decode
+// loops forever appending field paths.
+func TestReadFieldPathsTruncated(t *testing.T) {
+	defer func() {
+		if recover() == nil {
+			t.Fatal("expected a panic on a truncated field-path stream")
+		}
+	}()
+	readFieldPaths(newReader([]byte{0x00, 0x00}), nil)
+}
+
 // TestHuffmanLookupMatchesWalk verifies the 8-bit lookup fast path decodes the
 // same op and consumes the same number of bits as the pure flat-tree walk for
 // many random streams. An 8-byte buffer comfortably holds the longest code

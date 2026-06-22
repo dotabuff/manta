@@ -510,7 +510,7 @@ Verified zero occurrences across all 39 build replays, so safe insurance:
 | P4 baseline (re-measured at fbca7ed) | 0.727 s | 388.2 MiB | 4.41M | PASS |
 | P4.1 deep-copy mutable baseline leaves | 0.755 s (~) | 389.4 MiB (+0.3%) | 4.478M (+1.5%) | PASS |
 | P4.2 clear reused tuple/pending buffers | 0.765 s (~thermal) | 389.4 MiB (flat) | 4.478M (flat) | PASS |
-| P4.3 guard skipBits underflow | _tbd_ | _tbd_ | _tbd_ | _tbd_ |
+| P4.3 guard skipBits underflow | 0.763 s (flat) | 389.4 MiB (flat) | 4.478M (flat) | PASS |
 | P4.4 fix debug position | _tbd_ | _tbd_ | _tbd_ | _tbd_ |
 | P4.5 lock value-changing decoders (tests+docs) | _tbd_ | _tbd_ | _tbd_ | _tbd_ |
 
@@ -558,7 +558,9 @@ fixes is explicit.
   huffman test used 8-byte buffers and never hit the `<8 bits remaining` case.
 - **Fix:** `skipBits` panics cleanly when `n > bitCount` (caught by the parser recover → error), restoring
   fail-fast. Add a huffman test that truncates an op stream and asserts a clean error.
-- **Result:** _(pending)_
+- **Result:** all metrics flat (sec p=0.631, B/op p=0.971, allocs p=0.057 — the guard is free).
+  `TestReadFieldPathsTruncated` confirms a truncated stream now panics cleanly instead of looping
+  forever (an all-zero buffer = unbounded PlusOne run). go test green. ✅
 
 ### P4.4 — correct debug position() after word refill
 - **Issue:** `position()` (reader.go) still assumes `bitCount <= 8`, but the word reader can leave 56/48/…

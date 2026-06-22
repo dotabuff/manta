@@ -118,8 +118,15 @@ func (r *reader) peekBits(n uint32) uint32 {
 	return uint32(r.bitVal & readBitMasks[n])
 }
 
-// skipBits discards n (<= bitCount) bits already buffered in the accumulator.
+// skipBits discards n bits already buffered in the accumulator. It panics if
+// fewer than n bits are buffered, which happens only on a truncated or corrupt
+// stream (a field-path op lookup resolving past the end of the buffer). The
+// parser's top-level recover turns that into an error, rather than letting
+// bitCount underflow and the field-path decode spin on garbage.
 func (r *reader) skipBits(n uint32) {
+	if n > r.bitCount {
+		_panicf("skipBits: insufficient buffer (need %d, have %d bits)", n, r.bitCount)
+	}
 	r.bitVal >>= n
 	r.bitCount -= n
 }
