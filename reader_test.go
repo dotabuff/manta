@@ -102,6 +102,45 @@ func TestReaderUnaligned(t *testing.T) {
 	assert.Equal(uint32(0x01), r.readBits(1))
 }
 
+// TestReaderReadBytesZeroCopy guards the invariant that a byte-aligned readBytes
+// returns a slice aliasing the underlying buffer rather than a copy. Callers such
+// as CDemoPacket pendingMessage parsing and sendtables rely on this aliasing, and
+// the word-at-a-time reader must preserve it (via realign) even when it has
+// buffered bytes ahead in the accumulator.
+func TestReaderReadBytesZeroCopy(t *testing.T) {
+	buf := make([]byte, 32)
+	for i := range buf {
+		buf[i] = byte(i + 1)
+	}
+
+	// Aligned read at the start of the buffer (bitCount == 0).
+	r := newReader(buf)
+	got := r.readBytes(4)
+	idx := r.pos - 4
+	buf[idx] ^= 0xFF
+	if got[0] != buf[idx] {
+		t.Fatalf("aligned readBytes returned a copy, not a zero-copy alias")
+	}
+
+	// A bit read first buffers a whole word ahead; the following byte-aligned
+	// readBytes must realign and still alias the buffer (bitCount a non-zero
+	// multiple of 8).
+	for i := range buf {
+		buf[i] = byte(i + 1)
+	}
+	r = newReader(buf)
+	_ = r.readBits(8)
+	if r.bitCount == 0 || r.bitCount%8 != 0 {
+		t.Fatalf("expected non-zero byte alignment after readBits(8), bitCount=%d", r.bitCount)
+	}
+	got = r.readBytes(4)
+	idx = r.pos - 4
+	buf[idx] ^= 0xFF
+	if got[0] != buf[idx] {
+		t.Fatalf("realigned readBytes returned a copy, not a zero-copy alias")
+	}
+}
+
 func BenchmarkReadVarUint32(b *testing.B) {
 	r := newReader([]byte{0x01, 0xFF, 0xFF, 0xFF, 0xFF, 0x0F, 0x8C, 0x01})
 	b.ResetTimer()

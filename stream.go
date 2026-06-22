@@ -1,6 +1,7 @@
 package manta
 
 import (
+	"bufio"
 	"io"
 
 	"github.com/dotabuff/manta/dota"
@@ -16,8 +17,15 @@ type stream struct {
 	size uint32
 }
 
-// newStream creates a new stream from a given io.Reader
+// newStream creates a new stream from a given io.Reader. If the reader does not
+// already provide buffered byte access (e.g. an *os.File), it is wrapped in a
+// bufio.Reader so the per-byte varint reads in the outer loop do not issue one
+// read syscall per byte. In-memory readers such as *bytes.Reader already
+// satisfy io.ByteReader and are left unwrapped to avoid a redundant copy.
 func newStream(r io.Reader) *stream {
+	if _, ok := r.(io.ByteReader); !ok {
+		r = bufio.NewReaderSize(r, buffer)
+	}
 	return &stream{r, make([]byte, buffer), buffer}
 }
 

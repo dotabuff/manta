@@ -49,25 +49,21 @@ type EntityHandler func(*Entity, EntityOp) error
 
 // Entity represents a single game entity in the replay
 type Entity struct {
-	index   int32
-	serial  int32
-	class   *class
-	active  bool
-	state   *fieldState
-	fpCache map[string]*fieldPath
-	fpNoop  map[string]bool
+	index  int32
+	serial int32
+	class  *class
+	active bool
+	state  *fieldState
 }
 
 // newEntity returns a new entity for the given index, serial and class
 func newEntity(index, serial int32, class *class) *Entity {
 	return &Entity{
-		index:   index,
-		serial:  serial,
-		class:   class,
-		active:  true,
-		state:   newFieldState(),
-		fpCache: make(map[string]*fieldPath),
-		fpNoop:  make(map[string]bool),
+		index:  index,
+		serial: serial,
+		class:  class,
+		active: true,
+		state:  newFieldState(),
 	}
 }
 
@@ -92,20 +88,20 @@ func (e *Entity) Dump() {
 
 // Get returns the current value of the Entity state for the given key
 func (e *Entity) Get(name string) interface{} {
-	if fp, ok := e.fpCache[name]; ok {
+	if fp, ok := e.class.fpCache[name]; ok {
 		return e.state.get(fp)
 	}
-	if e.fpNoop[name] {
+	if e.class.fpNoop[name] {
 		return nil
 	}
 
 	fp := newFieldPath()
 	if !e.class.getFieldPathForName(fp, name) {
-		e.fpNoop[name] = true
+		e.class.fpNoop[name] = true
 		fp.release()
 		return nil
 	}
-	e.fpCache[name] = fp
+	e.class.fpCache[name] = fp
 
 	return e.state.get(fp)
 }
@@ -218,9 +214,17 @@ func (p *Parser) FilterEntity(fb func(*Entity) bool) []*Entity {
 	return entities
 }
 
+// entityOpTuple pairs an entity with the operation performed on it. Updates are
+// buffered during a PacketEntities message, then dispatched to handlers.
+type entityOpTuple struct {
+	e  *Entity
+	op EntityOp
+}
+
 // Internal Callback for OnCSVCMsg_PacketEntities.
 func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error {
-	r := newReader(m.GetEntityData())
+	r := &p.entityReader
+	r.reset(m.GetEntityData())
 
 	var index = int32(-1)
 	var updates = int(m.GetUpdatedEntries())
@@ -237,11 +241,7 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 		p.entityFullPackets++
 	}
 
-	type tuple struct {
-		e  *Entity
-		op EntityOp
-	}
-	tuples := make([]tuple, 0, updates)
+	tuples := p.entityTuples[:0]
 
 	for ; updates > 0; updates-- {
 		index += int32(r.readUBitVar()) + 1
@@ -259,15 +259,24 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 					_panicf("unable to find new class %d", classId)
 				}
 
-				baseline := p.classBaselines[classId]
+				// Decode the class baseline once into a reusable template and
+				// clone it for each new entity, instead of re-decoding the raw
+				// baseline bytes on every creation.
+				baseline := p.classBaselineStates[classId]
 				if baseline == nil {
-					_panicf("unable to find new baseline %d", classId)
+					raw := p.classBaselines[classId]
+					if raw == nil {
+						_panicf("unable to find new baseline %d", classId)
+					}
+					baseline = newFieldState()
+					p.fpBuf = readFields(newReader(raw), class.serializer, baseline, p.fpBuf)
+					p.classBaselineStates[classId] = baseline
 				}
 
 				e = newEntity(index, serial, class)
+				e.state = baseline.clone()
 				p.entities[index] = e
-				readFields(newReader(baseline), class.serializer, e.state)
-				readFields(r, class.serializer, e.state)
+				p.fpBuf = readFields(r, class.serializer, e.state, p.fpBuf)
 				op = EntityOpCreated | EntityOpEntered
 
 			} else {
@@ -281,7 +290,7 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 					op |= EntityOpEntered
 				}
 
-				readFields(r, e.class.serializer, e.state)
+				p.fpBuf = readFields(r, e.class.serializer, e.state, p.fpBuf)
 			}
 
 		} else {
@@ -300,18 +309,26 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 			}
 		}
 
-		tuples = append(tuples, tuple{e, op})
+		tuples = append(tuples, entityOpTuple{e, op})
 	}
 
+	var err error
+dispatch:
 	for _, h := range p.entityHandlers {
-		for _, t := range tuples {
-			if err := h(t.e, t.op); err != nil {
-				return err
+		for i := range tuples {
+			if err = h(tuples[i].e, tuples[i].op); err != nil {
+				break dispatch
 			}
 		}
 	}
 
-	return nil
+	// Release the entity references and keep the buffer at length zero so a
+	// reused backing array does not retain (possibly deleted) entities and their
+	// state. This runs on every path (success or error), before the single
+	// return.
+	clear(tuples)
+	p.entityTuples = tuples[:0]
+	return err
 }
 
 // OnEntity registers an EntityHandler that will be called when an entity

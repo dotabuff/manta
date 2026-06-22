@@ -1,6 +1,8 @@
 package manta
 
 import (
+	"math"
+
 	"github.com/golang/protobuf/proto"
 )
 
@@ -51,8 +53,12 @@ var fieldPatches = []fieldPatch{
 	fieldPatch{0, 954, func(f *field) {
 		switch f.varName {
 		case "m_flMana", "m_flMaxMana":
-			f.lowValue = nil
-			f.highValue = proto.Float32(8192.0)
+			// Only override the synthetic full-float-range bounds (the sentinel
+			// the engine emits when no real range is set), matching clarity.
+			if f.highValue != nil && *f.highValue == float32(math.MaxFloat32) {
+				f.lowValue = nil
+				f.highValue = proto.Float32(8192.0)
+			}
 		}
 	}},
 	fieldPatch{1016, 1027, func(f *field) {
@@ -73,7 +79,13 @@ var fieldPatches = []fieldPatch{
 		case "m_flSimulationTime", "m_flAnimTime":
 			f.encoder = "simtime"
 		case "m_flRuneTime":
-			f.encoder = "runetime"
+			// Only patch when the field carries the synthetic full-float-range
+			// bounds, matching clarity's runetime guard. Manta keeps its bespoke
+			// 4-bit runetime decoder (see field_decoder.go).
+			if f.lowValue != nil && f.highValue != nil &&
+				*f.lowValue == -float32(math.MaxFloat32) && *f.highValue == float32(math.MaxFloat32) {
+				f.encoder = "runetime"
+			}
 		}
 	}},
 }

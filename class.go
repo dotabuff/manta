@@ -16,6 +16,12 @@ type class struct {
 	classId    int32
 	name       string
 	serializer *serializer
+
+	// fpCache and fpNoop memoize name -> field-path resolution, which is
+	// class-invariant. They are shared by every entity of the class so a name
+	// is resolved once per class instead of once per entity.
+	fpCache map[string]*fieldPath
+	fpNoop  map[string]bool
 }
 
 func (c *class) getNameForFieldPath(fp *fieldPath) string {
@@ -67,6 +73,8 @@ func (p *Parser) onCDemoClassInfo(m *dota.CDemoClassInfo) error {
 			classId:    classId,
 			name:       networkName,
 			serializer: p.serializers[networkName],
+			fpCache:    make(map[string]*fieldPath),
+			fpNoop:     make(map[string]bool),
 		}
 		p.classesById[class.classId] = class
 		p.classesByName[class.name] = class
@@ -101,4 +109,8 @@ func (p *Parser) updateInstanceBaseline() {
 		}
 		p.classBaselines[classId] = item.Value
 	}
+
+	// Decoded baseline templates may now be stale; drop them so they are
+	// re-decoded lazily from the updated bytes on the next entity creation.
+	clear(p.classBaselineStates)
 }

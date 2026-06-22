@@ -252,7 +252,7 @@ func (f *field) getFieldPaths(fp *fieldPath, state *fieldState) []*fieldPath {
 		if sub, ok := state.get(fp).(*fieldState); ok {
 			fp.last++
 			for i, v := range sub.state {
-				if v != nil {
+				if !v.isEmpty() {
 					fp.path[fp.last] = i
 					x = append(x, fp.copy())
 				}
@@ -271,7 +271,7 @@ func (f *field) getFieldPaths(fp *fieldPath, state *fieldState) []*fieldPath {
 		if sub, ok := state.get(fp).(*fieldState); ok {
 			fp.last++
 			for i, v := range sub.state {
-				if v != nil {
+				if !v.isEmpty() {
 					fp.path[fp.last] = i
 					x = append(x, fp.copy())
 				}
@@ -283,7 +283,7 @@ func (f *field) getFieldPaths(fp *fieldPath, state *fieldState) []*fieldPath {
 		if sub, ok := state.get(fp).(*fieldState); ok {
 			fp.last += 2
 			for i, v := range sub.state {
-				if vv, ok := v.(*fieldState); ok {
+				if vv, ok := v.sub(); ok {
 					fp.path[fp.last-1] = i
 					x = append(x, f.serializer.getFieldPaths(fp, vv)...)
 				}

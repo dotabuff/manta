@@ -20,16 +20,30 @@ func newReader(buf []byte) *reader {
 	return &reader{buf, uint32(len(buf)), 0, 0, 0}
 }
 
+// reset reinitializes the reader to read from the given buffer, allowing a
+// single reader to be reused across messages without allocating a new one.
+func (r *reader) reset(buf []byte) {
+	r.buf = buf
+	r.size = uint32(len(buf))
+	r.pos = 0
+	r.bitVal = 0
+	r.bitCount = 0
+}
+
 // remBits calculates the number of unread bits in the buffer
 func (r *reader) remBits() uint32 {
 	return r.remBytes() + r.bitCount
 }
 
 func (r *reader) position() string {
-	if r.bitCount > 0 {
-		return fmt.Sprintf("%d.%d", r.pos-1, 8-r.bitCount)
+	// Logical bit position consumed so far. The word-at-a-time refill can buffer
+	// many bits (not just the current byte), so derive byte.bit from pos*8 minus
+	// the still-buffered bitCount rather than assuming bitCount <= 8.
+	bits := r.pos*8 - r.bitCount
+	if rem := bits % 8; rem != 0 {
+		return fmt.Sprintf("%d.%d", bits/8, rem)
 	}
-	return fmt.Sprintf("%d", r.pos)
+	return fmt.Sprintf("%d", bits/8)
 }
 
 // remBytes calculates the number of unread bytes in the buffer
@@ -46,24 +60,98 @@ func (r *reader) nextByte() byte {
 	return r.buf[r.pos-1]
 }
 
-// readBits returns the uint32 value for the given number of sequential bits
+// readBitMasks[k] is a bitmask of the low k bits. It is used instead of an
+// inline (1<<k)-1 so that k == 64 (a full word) does not overflow the shift.
+var readBitMasks = func() [65]uint64 {
+	var m [65]uint64
+	for i := 0; i < 64; i++ {
+		m[i] = (uint64(1) << uint(i)) - 1
+	}
+	m[64] = ^uint64(0)
+	return m
+}()
+
+// readBits returns the uint32 value for the given number of sequential bits.
+//
+// The accumulator is refilled a full 64-bit word at a time while at least 8
+// bytes remain, falling back to byte-at-a-time only for the final bytes of the
+// buffer. Every read is <= 32 bits (quantized float decoders are asserted to
+// stay within that), so a single word refill always yields enough bits. The
+// loaded word is masked to the whole bytes of headroom before being merged so
+// no unclaimed (partial-byte) bits are left above bitCount.
 func (r *reader) readBits(n uint32) uint32 {
+	for n > r.bitCount && r.pos+8 <= r.size {
+		w := binary.LittleEndian.Uint64(r.buf[r.pos:])
+		free := (64 - r.bitCount) >> 3 // whole bytes of accumulator headroom
+		bits := free * 8
+		r.bitVal |= (w & readBitMasks[bits]) << r.bitCount
+		r.pos += free
+		r.bitCount += bits
+	}
 	for n > r.bitCount {
 		r.bitVal |= uint64(r.nextByte()) << r.bitCount
 		r.bitCount += 8
 	}
 
-	x := (r.bitVal & ((1 << n) - 1))
+	x := r.bitVal & readBitMasks[n]
 	r.bitVal >>= n
 	r.bitCount -= n
 
 	return uint32(x)
 }
 
+// peekBits returns the next n (<= 32) bits without consuming them, refilling the
+// accumulator as needed. If fewer than n bits remain in the buffer the missing
+// high bits are returned as zero; the buffer is never over-read past its end.
+// This is required by the field-path op lookup, which inspects a fixed window
+// that can extend past the final op near the end of the stream.
+func (r *reader) peekBits(n uint32) uint32 {
+	for n > r.bitCount && r.pos+8 <= r.size {
+		w := binary.LittleEndian.Uint64(r.buf[r.pos:])
+		free := (64 - r.bitCount) >> 3
+		bits := free * 8
+		r.bitVal |= (w & readBitMasks[bits]) << r.bitCount
+		r.pos += free
+		r.bitCount += bits
+	}
+	for n > r.bitCount && r.pos < r.size {
+		r.bitVal |= uint64(r.nextByte()) << r.bitCount
+		r.bitCount += 8
+	}
+
+	return uint32(r.bitVal & readBitMasks[n])
+}
+
+// skipBits discards n bits already buffered in the accumulator. It panics if
+// fewer than n bits are buffered, which happens only on a truncated or corrupt
+// stream (a field-path op lookup resolving past the end of the buffer). The
+// parser's top-level recover turns that into an error, rather than letting
+// bitCount underflow and the field-path decode spin on garbage.
+func (r *reader) skipBits(n uint32) {
+	if n > r.bitCount {
+		_panicf("skipBits: insufficient buffer (need %d, have %d bits)", n, r.bitCount)
+	}
+	r.bitVal >>= n
+	r.bitCount -= n
+}
+
+// realign discards the whole bytes the word refill buffered in the accumulator
+// by rewinding the read position, so byte-oriented reads can proceed directly
+// from (and alias) the underlying buffer. Only valid when byte-aligned, i.e.
+// bitCount is a multiple of 8.
+func (r *reader) realign() {
+	r.pos -= r.bitCount >> 3
+	r.bitVal = 0
+	r.bitCount = 0
+}
+
 // readByte reads a single byte
 func (r *reader) readByte() byte {
 	// Fast path if we're byte aligned
-	if r.bitCount == 0 {
+	if r.bitCount&7 == 0 {
+		if r.bitCount != 0 {
+			r.realign()
+		}
 		return r.nextByte()
 	}
 
@@ -73,7 +161,10 @@ func (r *reader) readByte() byte {
 // readBytes reads the given number of bytes
 func (r *reader) readBytes(n uint32) []byte {
 	// Fast path if we're byte aligned
-	if r.bitCount == 0 {
+	if r.bitCount&7 == 0 {
+		if r.bitCount != 0 {
+			r.realign()
+		}
 		r.pos += n
 		if r.pos > r.size {
 			_panicf("readBytes: insufficient buffer (%d of %d)", r.pos, r.size)

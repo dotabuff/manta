@@ -34,17 +34,20 @@ type GameEvent struct {
 }
 
 func (ge *GameEvent) TypeName() string {
-	return dota.DOTA_COMBATLOG_TYPES_name[ge.m.GetKeys()[0].GetValByte()]
+	return dota.DOTA_COMBATLOG_TYPES_name[int32(ge.Type())]
 }
 
 func (ge *GameEvent) Type() dota.DOTA_COMBATLOG_TYPES {
-	return dota.DOTA_COMBATLOG_TYPES(ge.m.GetKeys()[0].GetValByte())
+	// Resolve the type via the descriptor rather than assuming it is the first
+	// key, and via the typed-int dispatch rather than a raw byte read, so it
+	// stays correct if the key order or encoding changes across versions.
+	t, _ := ge.GetInt32("type")
+	return dota.DOTA_COMBATLOG_TYPES(t)
 }
 
 func (ge *GameEvent) String() string {
 	keys := ge.m.GetKeys()
-	name := dota.DOTA_COMBATLOG_TYPES_name[keys[0].GetValByte()]
-	buf := bytes.NewBufferString("\n  " + name + "\n")
+	buf := bytes.NewBufferString("\n  " + ge.TypeName() + "\n")
 
 	for name, field := range ge.t.fields {
 		key := keys[field.i]
@@ -163,7 +166,7 @@ func (e *GameEvent) getEventKey(name string) (*dota.CMsgSource1LegacyGameEventKe
 		return nil, _errorf("field %s: missing", name)
 	}
 
-	if f.i > len(e.m.GetKeys()) {
+	if f.i >= len(e.m.GetKeys()) {
 		return nil, _errorf("field %s: %d out of range", name, f.i)
 	}
 

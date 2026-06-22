@@ -7,19 +7,19 @@ testnew:
 	go test -cover -run=TestMatchNew -v
 
 bench:
-	go test -run=XXX -bench=BenchmarkMatch -benchtime=1m -v
+	go test -run=XXX -bench=BenchmarkMatch8552595443 -benchmem -benchtime=10x -count=10 -v
 
 cover:
 	go test -cover -coverpkg github.com/dotabuff/manta,github.com/dotabuff/manta/vbkv -coverprofile /tmp/manta.cov -v
 	go tool cover -html=/tmp/manta.cov
 
 cpuprofile:
-	go test -v -run=TestMatch2159568145 -test.cpuprofile=/tmp/manta.cpuprof
+	go test -v -run=TestMatchNew8552595443 -test.cpuprofile=/tmp/manta.cpuprof
 	go tool pprof -svg -output=/tmp/manta.cpuprof.svg manta.test /tmp/manta.cpuprof
 	open /tmp/manta.cpuprof.svg
 
 memprofile:
-	go test -v -run=TestMatch2159568145 -test.memprofile=/tmp/manta.memprof -test.memprofilerate=1
+	go test -v -run=TestMatchNew8552595443 -test.memprofile=/tmp/manta.memprof -test.memprofilerate=1
 	go tool pprof --alloc_space manta.test /tmp/manta.memprof
 
 update: update-protobufs generate

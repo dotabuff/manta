@@ -13,6 +13,11 @@ import (
 var magicSource1 = []byte{'P', 'U', 'F', 'D', 'E', 'M', 'S', '\000'}
 var magicSource2 = []byte{'P', 'B', 'D', 'E', 'M', 'S', '2', '\000'}
 
+// maxOuterMessageSize bounds a single outer message length so a corrupt or
+// truncated size varint cannot trigger a huge allocation. It is far above any
+// legitimate message, including full packets.
+const maxOuterMessageSize = 256 << 20
+
 // Parser is an instance of the replay parser
 type Parser struct {
 	// Callbacks provide a mechanism for receiving notification
@@ -32,6 +37,7 @@ type Parser struct {
 	AfterStopCallback func()
 
 	classBaselines             map[int32][]byte
+	classBaselineStates        map[int32]*fieldState
 	classesById                map[int32]*class
 	classesByName              map[string]*class
 	classIdSize                uint32
@@ -45,6 +51,11 @@ type Parser struct {
 	isStopping                 bool
 	modifierTableEntryHandlers []ModifierTableEntryHandler
 	serializers                map[string]*serializer
+	pendingMsgBuf              pendingMessages
+	snappyScratch              []byte
+	entityReader               reader
+	entityTuples               []entityOpTuple
+	fpBuf                      []fieldPath
 	stream                     *stream
 	stringTables               *stringTables
 	stopAtTick                 uint32
@@ -65,18 +76,19 @@ func NewStreamParser(r io.Reader) (*Parser, error) {
 		NetTick:   0,
 		GameBuild: 0,
 
-		classBaselines:    make(map[int32][]byte),
-		classesById:       make(map[int32]*class),
-		classesByName:     make(map[string]*class),
-		entities:          make(map[int32]*Entity),
-		entityHandlers:    make([]EntityHandler, 0),
-		gameEventHandlers: make(map[string][]GameEventHandler),
-		gameEventNames:    make(map[int32]string),
-		gameEventTypes:    make(map[string]*gameEventType),
-		isStopping:        false,
-		serializers:       make(map[string]*serializer),
-		stream:            newStream(r),
-		stringTables:      newStringTables(),
+		classBaselines:      make(map[int32][]byte),
+		classBaselineStates: make(map[int32]*fieldState),
+		classesById:         make(map[int32]*class),
+		classesByName:       make(map[string]*class),
+		entities:            make(map[int32]*Entity),
+		entityHandlers:      make([]EntityHandler, 0),
+		gameEventHandlers:   make(map[string][]GameEventHandler),
+		gameEventNames:      make(map[int32]string),
+		gameEventTypes:      make(map[string]*gameEventType),
+		isStopping:          false,
+		serializers:         make(map[string]*serializer),
+		stream:              newStream(r),
+		stringTables:        newStringTables(),
 	}
 
 	// Parse out the header, ensuring that it's valid.
@@ -117,7 +129,7 @@ func NewStreamParser(r io.Reader) (*Parser, error) {
 
 // Start parsing the replay. Will stop processing new events after Stop() is called.
 func (p *Parser) Start() (err error) {
-	var msg *outerMessage
+	var msg outerMessage
 
 	defer p.afterStop()
 
@@ -190,14 +202,16 @@ type outerMessage struct {
 	data   []byte
 }
 
-// Read the next outer message from the buffer.
-func (p *Parser) readOuterMessage() (*outerMessage, error) {
+// Read the next outer message from the buffer. The message is returned by
+// value so it does not escape to the heap (its single caller, Start, consumes
+// it immediately and never retains it).
+func (p *Parser) readOuterMessage() (outerMessage, error) {
 	// Read a command header, which includes both the message type
 	// well as a flag to determine whether or not whether or not the
 	// message is compressed with snappy.
 	command, err := p.stream.readCommand()
 	if err != nil {
-		return nil, err
+		return outerMessage{}, err
 	}
 
 	// Extract the type and compressed flag out of the command
@@ -207,7 +221,7 @@ func (p *Parser) readOuterMessage() (*outerMessage, error) {
 	// Read the tick that the message corresponds with.
 	tick, err := p.stream.readVarUint32()
 	if err != nil {
-		return nil, err
+		return outerMessage{}, err
 	}
 
 	// This appears to actually be an int32, where a -1 means pre-game.
@@ -218,29 +232,40 @@ func (p *Parser) readOuterMessage() (*outerMessage, error) {
 	// Read the size and following buffer.
 	size, err := p.stream.readVarUint32()
 	if err != nil {
-		return nil, err
+		return outerMessage{}, err
+	}
+
+	// Reject an implausibly large size before allocating, so a corrupt or
+	// truncated stream fails cleanly instead of attempting a huge allocation.
+	if size > maxOuterMessageSize {
+		return outerMessage{}, _errorf("outer message size %d exceeds maximum %d", size, maxOuterMessageSize)
 	}
 
 	buf, err := p.stream.readBytes(size)
 	if err != nil {
-		return nil, err
+		return outerMessage{}, err
 	}
 
-	// If the buffer is compressed, decompress it with snappy.
+	// If the buffer is compressed, decompress it with snappy, reusing a
+	// parser-level scratch buffer across messages. snappy.Decode reuses the
+	// destination when it is large enough, amortizing the decompression
+	// allocation to roughly the largest compressed message seen. This is safe
+	// because the decoded buffer is consumed within the dispatch of this
+	// message and never retained across outer messages.
 	if msgCompressed {
 		var err error
-		if buf, err = snappy.Decode(nil, buf); err != nil {
-			return nil, err
+		if buf, err = snappy.Decode(p.snappyScratch[:cap(p.snappyScratch)], buf); err != nil {
+			return outerMessage{}, err
 		}
+		p.snappyScratch = buf
 	}
 
 	// Return the message
-	msg := &outerMessage{
+	return outerMessage{
 		tick:   tick,
 		typeId: msgType,
 		data:   buf,
-	}
-	return msg, nil
+	}, nil
 }
 
 // parseToTick configures this Parser to stop once it has parsed the given tick.
