@@ -512,14 +512,16 @@ Verified zero occurrences across all 39 build replays, so safe insurance:
 | P4.2 clear reused tuple/pending buffers | 0.765 s (~thermal) | 389.4 MiB (flat) | 4.478M (flat) | PASS |
 | P4.3 guard skipBits underflow | 0.763 s (flat) | 389.4 MiB (flat) | 4.478M (flat) | PASS |
 | P4.4 fix debug position | 0.761 s (flat) | 389.4 MiB (flat) | 4.478M (flat) | PASS |
-| P4.5 lock value-changing decoders (tests+docs) | _tbd_ | _tbd_ | _tbd_ | _tbd_ |
+| P4.5 lock value-changing decoders (tests+docs) | 0.761 s (flat) | 389.4 MiB (flat) | 4.478M (flat) | PASS |
+| **End of Phase 4 vs P3** | flat sec (incl. drift) | +0.3% B/op | +1.5% allocs (baseline isolation) | PASS |
 
 **Phase 2 (correctness) notes:** all 12 goals landed, full suite green with identical golden assertions,
 and no perf regression (sec/op, B/op, allocs/op all statistically flat vs end of Phase 1). Highlights:
 P2.1 fixed the real string-table additive-index bug; P2.6–P2.9 added forward-compat decoders
 (CUtlBinaryBlock, Quaternion, int64-64bit, HSequence/HeroID_t/BloodType aligned to clarity, QAngle
 precise/noscale); P2.2/P2.3/P2.11/P2.12 hardened error paths. P2.7/P2.8 change live field *values* to
-match clarity (not asserted by goldens) — flagged for review.
+match clarity; these are owned as intentional API changes (Decision A) and locked by
+decoder-representation tests in Phase 4 (P4.5).
 
 ---
 
@@ -582,4 +584,8 @@ fixes is explicit.
   (deterministic, not replay-dependent), so the intended downstream-visible values are locked in CI — this
   is what the review asked for ("prove values are what you intend, not just no-desync"). Also assert the
   inline-vs-boxed uint64 split round-trips, including a `> 2^32` value to prove no truncation.
-- **Result:** _(pending)_
+- **Result:** added `field_decoder_test.go` with `TestDecoderRepresentations` (exact type+value for
+  hSequence `int32`−1, HeroID_t signed `int32`, int64 full `int64`, BloodType `uint64` fixed-8, inline
+  `uint64` incl. `0xFFFFFFFF`, and a `>2^32` steamid + fixed64 with no truncation) and
+  `TestValueChangingDecoderWiring` (locks the `fieldTypeDecoders` map entries). Test-only; bench flat.
+  Decision A documented above. go test green. ✅
