@@ -311,7 +311,6 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 
 		tuples = append(tuples, entityOpTuple{e, op})
 	}
-	p.entityTuples = tuples
 
 	for _, h := range p.entityHandlers {
 		for i := range tuples {
@@ -321,6 +320,11 @@ func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error 
 		}
 	}
 
+	// Release the entity references and keep the buffer at length zero so a
+	// reused backing array does not retain (possibly deleted) entities and
+	// their state until the next packet happens to overwrite the slot.
+	clear(tuples)
+	p.entityTuples = tuples[:0]
 	return nil
 }
 

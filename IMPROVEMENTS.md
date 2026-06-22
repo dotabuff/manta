@@ -509,7 +509,7 @@ Verified zero occurrences across all 39 build replays, so safe insurance:
 | **End of Phase 3 vs P0** | **−51.8%** | **−51.0%** | **−78.8%** | PASS |
 | P4 baseline (re-measured at fbca7ed) | 0.727 s | 388.2 MiB | 4.41M | PASS |
 | P4.1 deep-copy mutable baseline leaves | 0.755 s (~) | 389.4 MiB (+0.3%) | 4.478M (+1.5%) | PASS |
-| P4.2 clear reused tuple/pending buffers | _tbd_ | _tbd_ | _tbd_ | _tbd_ |
+| P4.2 clear reused tuple/pending buffers | 0.765 s (~thermal) | 389.4 MiB (flat) | 4.478M (flat) | PASS |
 | P4.3 guard skipBits underflow | _tbd_ | _tbd_ | _tbd_ | _tbd_ |
 | P4.4 fix debug position | _tbd_ | _tbd_ | _tbd_ | _tbd_ |
 | P4.5 lock value-changing decoders (tests+docs) | _tbd_ | _tbd_ | _tbd_ | _tbd_ |
@@ -547,7 +547,8 @@ fixes is explicit.
   packet buffers an extra packet — stale slots from a larger prior packet can pin *deleted* entities.
 - **Fix:** `clear()` the used entries and store the slice back at `[:0]`. Clearing the full written length
   each packet keeps `[len:cap]` zero across packets, so no stale refs accumulate.
-- **Result:** _(pending)_
+- **Result:** allocs/op and B/op flat (clear is alloc-free); sec/op +1.4% nominal but consistent with the
+  thermal drift seen across the whole P4 run (744→754→765 ms), not the change. go test green. ✅
 
 ### P4.3 — guard skipBits underflow + truncated-stream test
 - **Issue:** `peekBits` zero-pads at EOF and `skipBits` blindly subtracts, so on truncated/corrupt input a
