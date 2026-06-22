@@ -511,7 +511,7 @@ Verified zero occurrences across all 39 build replays, so safe insurance:
 | P4.1 deep-copy mutable baseline leaves | 0.755 s (~) | 389.4 MiB (+0.3%) | 4.478M (+1.5%) | PASS |
 | P4.2 clear reused tuple/pending buffers | 0.765 s (~thermal) | 389.4 MiB (flat) | 4.478M (flat) | PASS |
 | P4.3 guard skipBits underflow | 0.763 s (flat) | 389.4 MiB (flat) | 4.478M (flat) | PASS |
-| P4.4 fix debug position | _tbd_ | _tbd_ | _tbd_ | _tbd_ |
+| P4.4 fix debug position | 0.761 s (flat) | 389.4 MiB (flat) | 4.478M (flat) | PASS |
 | P4.5 lock value-changing decoders (tests+docs) | _tbd_ | _tbd_ | _tbd_ | _tbd_ |
 
 **Phase 2 (correctness) notes:** all 12 goals landed, full suite green with identical golden assertions,
@@ -566,7 +566,7 @@ fixes is explicit.
 - **Issue:** `position()` (reader.go) still assumes `bitCount <= 8`, but the word reader can leave 56/48/…
   Wrong verbose-debug output only; no parsing impact.
 - **Fix:** compute the logical bit position as `pos*8 - bitCount`.
-- **Result:** _(pending)_
+- **Result:** flat (debug-only; called only under the `v(6)` guard, off in bench/test). go test green. ✅
 
 ### P4.5 — lock value-changing decoders + document Decision A
 - **Decision A (owned):** the branch deliberately changes what `.Get` returns for a few fields, to match

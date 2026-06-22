@@ -36,10 +36,14 @@ func (r *reader) remBits() uint32 {
 }
 
 func (r *reader) position() string {
-	if r.bitCount > 0 {
-		return fmt.Sprintf("%d.%d", r.pos-1, 8-r.bitCount)
+	// Logical bit position consumed so far. The word-at-a-time refill can buffer
+	// many bits (not just the current byte), so derive byte.bit from pos*8 minus
+	// the still-buffered bitCount rather than assuming bitCount <= 8.
+	bits := r.pos*8 - r.bitCount
+	if rem := bits % 8; rem != 0 {
+		return fmt.Sprintf("%d.%d", bits/8, rem)
 	}
-	return fmt.Sprintf("%d", r.pos)
+	return fmt.Sprintf("%d", bits/8)
 }
 
 // remBytes calculates the number of unread bytes in the buffer
