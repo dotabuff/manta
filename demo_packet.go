@@ -83,19 +83,20 @@ func (p *Parser) onCDemoPacket(m *dota.CDemoPacket) error {
 	// and avoids the reflection allocations of sort.Sort's interface path.
 	sort.Stable(ms)
 
-	// Dispatch messages in order, returning on handler error.
+	// Dispatch messages in order, stopping on handler error.
+	var err error
 	for i := range ms {
-		if err := p.Callbacks.callByPacketType(ms[i].t, ms[i].buf); err != nil {
-			return err
+		if err = p.Callbacks.callByPacketType(ms[i].t, ms[i].buf); err != nil {
+			break
 		}
 	}
 
 	// Release the inner-packet buffer references and keep the slice at length
-	// zero so the reused backing array does not retain packet data until the
-	// next packet overwrites the slot.
+	// zero so the reused backing array does not retain packet data. This runs on
+	// every path (success or error), before the single return.
 	clear(ms)
 	p.pendingMsgBuf = ms[:0]
-	return nil
+	return err
 }
 
 // Internal parser for callback OnCDemoFullPacket.

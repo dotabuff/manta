@@ -513,6 +513,7 @@ Verified zero occurrences across all 39 build replays, so safe insurance:
 | P4.3 guard skipBits underflow | 0.763 s (flat) | 389.4 MiB (flat) | 4.478M (flat) | PASS |
 | P4.4 fix debug position | 0.761 s (flat) | 389.4 MiB (flat) | 4.478M (flat) | PASS |
 | P4.5 lock value-changing decoders (tests+docs) | 0.761 s (flat) | 389.4 MiB (flat) | 4.478M (flat) | PASS |
+| P4.6 clear buffers on error paths (follow-up) | 0.732 s (flat) | 389.4 MiB (flat) | 4.478M (flat) | PASS |
 | **End of Phase 4 vs P3** (cooled re-measure) | 0.748 s (~, p=0.218) | 389.4 MiB (+0.3%) | 4.478M (+1.5%) | PASS |
 | **End of Phase 4 vs P0** | **−50.9%** | **−50.8%** | **−78.4%** | PASS |
 
@@ -596,3 +597,16 @@ fixes is explicit.
   `uint64` incl. `0xFFFFFFFF`, and a `>2^32` steamid + fixed64 with no truncation) and
   `TestValueChangingDecoderWiring` (locks the `fieldTypeDecoders` map entries). Test-only; bench flat.
   Decision A documented above. go test green. ✅
+
+### P4.6 — clear reused buffers on error paths too (follow-up review)
+- **Issue:** P4.2 only cleared `p.pendingMsgBuf` / `p.entityTuples` after *successful* dispatch. If
+  `callByPacketType` or an entity handler returns an error, the parser field still pointed at the
+  just-refilled backing array, so packet buffers / entity pointers stayed live. Low severity (the parse
+  aborts on error, so it's freed at parser GC; bounded to one packet), but a real inconsistency.
+- **Fix:** dispatch into a result variable (`break` / labeled `break dispatch` on error), then a single
+  `clear()` + `[:0]` cleanup before a single return — so cleanup runs on success *and* error. Used this
+  result-variable pattern rather than a `defer func(){…}()` closure on purpose: the closure captures the
+  slice header (also stored on the Parser), forcing it to escape to the heap — a per-packet allocation in a
+  path that runs thousands of times. The result-variable form is alloc-free. (Panic mid-dispatch still
+  skips cleanup, but that hits the parser's top-level recover and tears the parser down, same as today.)
+- **Result:** alloc- and B/op-neutral (4,478,290 allocs / 408.36M B identical to P4.5); sec flat. go test green. ✅
