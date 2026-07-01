@@ -162,7 +162,10 @@ func (p *Parser) Start() (err error) {
 
 		p.Tick = msg.tick
 
-		if err = p.Callbacks.callByDemoType(msg.typeId, msg.data); err != nil {
+		// dispatchDemo takes the fast envelope path for CDemoPacket when only
+		// the internal handler is registered, falling back to the full
+		// protobuf callback path otherwise.
+		if err = p.dispatchDemo(msg.typeId, msg.data); err != nil {
 			return
 		}
 	}

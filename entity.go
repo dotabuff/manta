@@ -226,18 +226,25 @@ type entityOpTuple struct {
 
 // Internal Callback for OnCSVCMsg_PacketEntities.
 func (p *Parser) onCSVCMsg_PacketEntities(m *dota.CSVCMsg_PacketEntities) error {
+	return p.processPacketEntities(m.GetEntityData(), m.GetUpdatedEntries(), m.GetLegacyIsDelta())
+}
+
+// processPacketEntities is the core of the PacketEntities handler. It takes
+// the three envelope fields the parser actually uses so the fast envelope
+// path (envelope_fast.go) can call it without materializing a proto message.
+func (p *Parser) processPacketEntities(entityData []byte, updatedEntries int32, isDelta bool) error {
 	r := &p.entityReader
-	r.reset(m.GetEntityData())
+	r.reset(entityData)
 
 	var index = int32(-1)
-	var updates = int(m.GetUpdatedEntries())
+	var updates = int(updatedEntries)
 	var cmd uint32
 	var classId int32
 	var serial int32
 	var e *Entity
 	var op EntityOp
 
-	if !m.GetLegacyIsDelta() {
+	if !isDelta {
 		if p.entityFullPackets > 0 {
 			return nil
 		}

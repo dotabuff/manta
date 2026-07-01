@@ -663,9 +663,30 @@ golden gate, commits only (no push, no PR).
 | P5.3 entities map → dense slice | 624.8m ±2% (−28.7%) | 336.3 MiB (−13.6%) | 3.757M (−16.1%) | PASS |
 | P5.4 string-table slab + ring history | 618.7m ±4% (−29.4%) | 335.0 MiB (−14.0%) | 3.597M (−19.7%) | PASS |
 | P5.5 reader smalls (readLeUintX, readString) | 618.8m ±2% (−29.4%) | 334.5 MiB (−14.1%) | 3.540M (−20.9%) | PASS |
+| **P5.6 hand-rolled envelope decode** | **580.5m ±0% (−33.8%)** | **192.7 MiB (−50.5%)** | **2.615M (−41.6%)** | PASS |
 
 \* the P5.0 sec/op baseline was thermally inflated (±8%); treat allocs/B as the
 reliable P5.1 signal and 756m ±1% as the true current sec/op level.
+
+### P5.6 — hand-rolled envelope decode for hot internal messages  ⭐ headline win
+- **Was:** every CDemoPacket / CSVCMsg_PacketEntities / CSVCMsg_UpdateStringTable /
+  CNETMsg_Tick went through the reflective protobuf unmarshal: `reflect.New` per message,
+  a pointer alloc per scalar field, and — 32.7% of all allocated bytes — a fresh copy of
+  every `bytes` payload. The replay's data was effectively copied twice through the proto
+  layer (outer `CDemoPacket.data`, then inner `entity_data`/`string_data`).
+- **Change:** `envelope_fast.go` decodes these four envelopes by hand with `protowire`,
+  aliasing the payload instead of copying, and calls new scalar-arg core methods
+  (`processDemoPacket`/`processPacketEntities`/`processUpdateStringTable`) split out of the
+  internal handlers. **Gating:** NewParser registers exactly one internal handler per list
+  before returning, so `len(list) == 1` means no user callbacks; any user registration
+  reverts that type to the full protobuf path (user-visible messages own their copies, as
+  before). Aliasing lifetimes: `entity_data`/`string_data` alias the packet arena (stable
+  through the dispatch loop, consumed synchronously — string-table values are copied out by
+  `readBitsAsBytes`); `CDemoPacket.data` aliases the outer-message buffer (stable until the
+  next `readOuterMessage`; `processDemoPacket` copies bodies into the arena before dispatch).
+- **Result:** B/op 334.5→192.7 MiB (**−42.39%**), allocs/op 3.540M→2.615M (**−26.13%,
+  −925K**), sec/op 618.8m→580.5m (**−6.18%**, p=0.000). go test green — the goldens
+  exercise the fast path (tests register OnEntity/OnGameEvent, not raw message callbacks). ✅
 
 ### P5.5 — reader smalls: `readLeUintX` via accumulator, `readString` prealloc
 - **Was:** unaligned `readLeUint32/64` allocated through the `readBytes` slow path (24K

@@ -60,6 +60,13 @@ func (ms pendingMessages) Less(i, j int) bool {
 // multiple inner packets from a single CDemoPacket. This is the main structure
 // that contains all other data types in the demo file.
 func (p *Parser) onCDemoPacket(m *dota.CDemoPacket) error {
+	return p.processDemoPacket(m.GetData())
+}
+
+// processDemoPacket is the core of the CDemoPacket handler. It takes the raw
+// packet payload so the fast envelope path (envelope_fast.go) can call it
+// without materializing a proto message.
+func (p *Parser) processDemoPacket(data []byte) error {
 	// Reuse a parser-level buffer to store pending messages. Messages are read
 	// first as pending messages then sorted before dispatch. onCDemoPacket is
 	// never re-entrant (it is dispatched only via callByDemoType, never nested
@@ -74,7 +81,6 @@ func (p *Parser) onCDemoPacket(m *dota.CDemoPacket) error {
 	// protobuf unmarshal copies what it keeps), so reusing the arena across
 	// packets is safe for the same reason reusing pendingMsgBuf is. Message
 	// headers take space too, so the payload total always fits in len(data).
-	data := m.GetData()
 	if cap(p.packetArena) < len(data) {
 		p.packetArena = make([]byte, 0, len(data))
 	}
@@ -102,10 +108,12 @@ func (p *Parser) onCDemoPacket(m *dota.CDemoPacket) error {
 	// and avoids the reflection allocations of sort.Sort's interface path.
 	sort.Stable(ms)
 
-	// Dispatch messages in order, stopping on handler error.
+	// Dispatch messages in order, stopping on handler error. dispatchPacket
+	// takes the fast envelope path for hot internal-only message types and
+	// falls back to the full protobuf callback path otherwise.
 	var err error
 	for i := range ms {
-		if err = p.Callbacks.callByPacketType(ms[i].t, ms[i].buf); err != nil {
+		if err = p.dispatchPacket(ms[i].t, ms[i].buf); err != nil {
 			break
 		}
 	}
@@ -129,7 +137,7 @@ func (p *Parser) onCDemoFullPacket(m *dota.CDemoFullPacket) error {
 
 	// Then the CDemoPacket.
 	if m.Packet != nil {
-		if err := p.onCDemoPacket(m.GetPacket()); err != nil {
+		if err := p.processDemoPacket(m.GetPacket().GetData()); err != nil {
 			return err
 		}
 	}

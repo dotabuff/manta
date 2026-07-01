@@ -136,18 +136,26 @@ func (p *Parser) onCSVCMsg_CreateStringTable(m *dota.CSVCMsg_CreateStringTable) 
 
 // Internal callback for CSVCMsg_UpdateStringTable.
 func (p *Parser) onCSVCMsg_UpdateStringTable(m *dota.CSVCMsg_UpdateStringTable) error {
+	return p.processUpdateStringTable(m.GetTableId(), m.GetNumChangedEntries(), m.GetStringData())
+}
+
+// processUpdateStringTable is the core of the UpdateStringTable handler. It
+// takes the three envelope fields the parser actually uses so the fast
+// envelope path (envelope_fast.go) can call it without materializing a proto
+// message.
+func (p *Parser) processUpdateStringTable(tableId, numChanged int32, data []byte) error {
 	// TODO: integrate
-	t, ok := p.stringTables.Tables[m.GetTableId()]
+	t, ok := p.stringTables.Tables[tableId]
 	if !ok {
-		_panicf("missing string table %d", m.GetTableId())
+		_panicf("missing string table %d", tableId)
 	}
 
 	if v(5) {
-		_debugf("tick=%d name=%s changedEntries=%d size=%d", p.Tick, t.name, m.GetNumChangedEntries(), len(m.GetStringData()))
+		_debugf("tick=%d name=%s changedEntries=%d size=%d", p.Tick, t.name, numChanged, len(data))
 	}
 
 	// Parse the updates out of the string table data
-	items, err := parseStringTable(m.GetStringData(), m.GetNumChangedEntries(), t.name, t.userDataFixedSize, t.userDataSizeBits, t.flags, t.varintBitCounts)
+	items, err := parseStringTable(data, numChanged, t.name, t.userDataFixedSize, t.userDataSizeBits, t.flags, t.varintBitCounts)
 	if err != nil {
 		return err
 	}
