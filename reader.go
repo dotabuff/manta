@@ -390,13 +390,23 @@ func (r *reader) read3BitNormal() []float32 {
 
 // readBitsAsBytes reads the given number of bits in groups of bytes
 func (r *reader) readBitsAsBytes(n uint32) []byte {
-	tmp := make([]byte, 0)
+	// Allocate the exact result size up front (the caller retains the slice, so
+	// a fresh allocation is required) and fill a 32-bit word at a time instead
+	// of growing a cap-0 slice byte by byte.
+	tmp := make([]byte, (n+7)/8)
+	i := 0
+	for n >= 32 {
+		binary.LittleEndian.PutUint32(tmp[i:], r.readBits(32))
+		i += 4
+		n -= 32
+	}
 	for n >= 8 {
-		tmp = append(tmp, r.readByte())
+		tmp[i] = r.readByte()
+		i++
 		n -= 8
 	}
 	if n > 0 {
-		tmp = append(tmp, byte(r.readBits(n)))
+		tmp[i] = byte(r.readBits(n))
 	}
 	return tmp
 }

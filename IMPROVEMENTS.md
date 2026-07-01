@@ -657,3 +657,18 @@ golden gate, commits only (no push, no PR).
 
 | After goal | sec/op | B/op | allocs/op | go test |
 |------------|--------|------|-----------|---------|
+| P5.0 baseline (master 0efe7e1) | 876.7m ±8% | 389.4 MiB | 4.478M | PASS |
+| P5.1 readBitsAsBytes prealloc | 756.3m ±1% (−13.7%*) | 384.4 MiB (−1.3%) | 4.181M (−6.6%) | PASS |
+
+\* the P5.0 sec/op baseline was thermally inflated (±8%); treat allocs/B as the
+reliable P5.1 signal and 756m ±1% as the true current sec/op level.
+
+### P5.1 — `readBitsAsBytes` exact prealloc + word fill
+- **Was:** `tmp := make([]byte, 0)` grown byte-at-a-time via `append(tmp, r.readByte())` —
+  several growth allocations per string-table value (362K objects, 11.6% of allocs).
+- **Change:** allocate the exact `(n+7)/8` result up front (callers retain the slice, so a
+  fresh allocation per value is required) and fill via `readBits(32)` words, then a byte/bit
+  tail. Bit-stream equivalence: bits are consumed LSB-first, so four `readBits(8)` calls and
+  one LE-decoded `readBits(32)` yield identical bytes.
+- **Result:** allocs/op 4.478M→4.181M (**−6.64%, −297K**), B/op −1.29%, sec −13.7% vs the
+  noisy P5.0 run (true level ~756m ±1%). go test green. ✅
