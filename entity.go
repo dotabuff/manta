@@ -176,6 +176,9 @@ func (e *Entity) GetIndex() int32 {
 
 // FindEntity finds a given Entity by index
 func (p *Parser) FindEntity(index int32) *Entity {
+	if index < 0 || int(index) >= len(p.entities) {
+		return nil
+	}
 	return p.entities[index]
 }
 
@@ -207,7 +210,7 @@ func (p *Parser) FindEntityByHandle(handle uint64) *Entity {
 func (p *Parser) FilterEntity(fb func(*Entity) bool) []*Entity {
 	entities := make([]*Entity, 0, 0)
 	for _, et := range p.entities {
-		if fb(et) {
+		if et != nil && fb(et) {
 			entities = append(entities, et)
 		}
 	}

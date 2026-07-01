@@ -660,9 +660,22 @@ golden gate, commits only (no push, no PR).
 | P5.0 baseline (master 0efe7e1) | 876.7m ±8% | 389.4 MiB | 4.478M | PASS |
 | P5.1 readBitsAsBytes prealloc | 756.3m ±1% (−13.7%*) | 384.4 MiB (−1.3%) | 4.181M (−6.6%) | PASS |
 | P5.2 demo-packet arena + word copy | 676.7m ±1% (−22.8%) | 336.3 MiB (−13.6%) | 3.757M (−16.1%) | PASS |
+| P5.3 entities map → dense slice | 624.8m ±2% (−28.7%) | 336.3 MiB (−13.6%) | 3.757M (−16.1%) | PASS |
 
 \* the P5.0 sec/op baseline was thermally inflated (±8%); treat allocs/B as the
 reliable P5.1 signal and 756m ±1% as the true current sec/op level.
+
+### P5.3 — `p.entities` map → dense slice
+- **Was:** `p.entities` was a `map[int32]*Entity`; the PacketEntities update loop does 1–3
+  lookups per entity update (~9% CPU in `mapaccess1_fast32` + inlined key probes). Deletion
+  stored `nil` *into* the map, so `FilterEntity` could pass nil entities to user callbacks —
+  a latent crash.
+- **Change:** dense `[]*Entity` sized `1<<indexBits` (16384 slots, 128 KB per parser —
+  entity indices are 14-bit by the handle encoding). `FindEntity` bounds-checks and keeps
+  its signature; `FilterEntity` skips nil slots (fixes the nil-callback hazard and makes
+  iteration deterministic by index instead of map-random).
+- **Result:** sec/op 676.7m→624.8m (**−7.66%**, p=0.000), B/op and allocs exactly flat
+  (CPU-only). go test green. ✅
 
 ### P5.2 — demo-packet arena + word-copy unaligned `readBytes`
 - **Was:** the `onCDemoPacket` inner stream is bit-shifted after the leading 6-bit
