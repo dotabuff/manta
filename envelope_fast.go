@@ -63,8 +63,45 @@ func (p *Parser) dispatchPacket(t int32, buf []byte) error {
 		if len(p.Callbacks.onCSVCMsg_PacketEntities) == 1 {
 			return p.fastPacketEntities(buf)
 		}
+	case int32(dota.EBaseGameEvents_GE_Source1LegacyGameEvent):
+		if len(p.Callbacks.onCMsgSource1LegacyGameEvent) == 1 && p.skipGameEvent(buf) {
+			return nil
+		}
 	}
 	return p.Callbacks.callByPacketType(t, buf)
+}
+
+// skipGameEvent peeks the eventid (field 2, varint) of a
+// CMsgSource1LegacyGameEvent and reports whether the event is a known type
+// with no registered handlers, in which case the full unmarshal (a message
+// plus a reflect.New per key) can be skipped. The internal handler returns
+// nil for exactly that case; unknown event ids fall back to the full path so
+// its error behaviour is preserved.
+func (p *Parser) skipGameEvent(buf []byte) bool {
+	for len(buf) > 0 {
+		num, typ, n := protowire.ConsumeTag(buf)
+		if n < 0 {
+			return false
+		}
+		buf = buf[n:]
+		if num == 2 && typ == protowire.VarintType {
+			v, n := protowire.ConsumeVarint(buf)
+			if n < 0 {
+				return false
+			}
+			name, ok := p.gameEventNames[int32(v)]
+			if !ok {
+				return false
+			}
+			return p.gameEventHandlers[name] == nil
+		}
+		n = protowire.ConsumeFieldValue(num, typ, buf)
+		if n < 0 {
+			return false
+		}
+		buf = buf[n:]
+	}
+	return false
 }
 
 // fastDemoPacket decodes the CDemoPacket envelope: data = field 3 (bytes).

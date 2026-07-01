@@ -665,9 +665,21 @@ golden gate, commits only (no push, no PR).
 | P5.5 reader smalls (readLeUintX, readString) | 618.8m ±2% (−29.4%) | 334.5 MiB (−14.1%) | 3.540M (−20.9%) | PASS |
 | **P5.6 hand-rolled envelope decode** | **580.5m ±0% (−33.8%)** | **192.7 MiB (−50.5%)** | **2.615M (−41.6%)** | PASS |
 | P5.7 slab-allocated baseline clone | 574.5m ±1% (−34.5%) | 194.4 MiB (−50.1%) | 2.508M (−44.0%) | PASS |
+| P5.8 game-event eventid wire-peek | 572.3m ±1% (−34.7%) | 193.8 MiB (−50.2%) | 2.492M (−44.3%) | PASS |
 
 \* the P5.0 sec/op baseline was thermally inflated (±8%); treat allocs/B as the
 reliable P5.1 signal and 756m ±1% as the true current sec/op level.
+
+### P5.8 — game-event eventid wire-peek
+- **Was:** every `CMsgSource1LegacyGameEvent` was fully unmarshaled (message + a
+  `reflect.New` per key via `consumeMessageSliceInfo`) before the internal handler checked
+  whether any handler is registered for the event name and usually returned nil.
+- **Change:** `skipGameEvent` peeks the eventid varint (field 2) with protowire; a known
+  event with no registered handlers skips the unmarshal entirely. Unknown ids and absent
+  fields fall back to the full path, preserving its error behaviour exactly.
+- **Result:** allocs/op −0.63%, B/op −0.32%, sec ~ (p=0.052). Modest on this bench because
+  it registers a combat-log handler and combat-log events dominate the event stream; the
+  skip is worth more to consumers that register fewer (or no) game-event handlers. ✅
 
 ### P5.7 — slab-allocated baseline clone
 - **Was:** `clone()` allocated a `*fieldState` plus a `[]cell` array per nested state on
