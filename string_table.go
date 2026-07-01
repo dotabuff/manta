@@ -154,16 +154,15 @@ func (p *Parser) onCSVCMsg_UpdateStringTable(m *dota.CSVCMsg_UpdateStringTable) 
 
 	// Apply the updates to the parser state
 	for _, item := range items {
-		index := item.Index
-		if _, ok := t.Items[index]; ok {
-			if item.Key != "" && item.Key != t.Items[index].Key {
-				t.Items[index].Key = item.Key
+		if existing, ok := t.Items[item.Index]; ok {
+			if item.Key != "" && item.Key != existing.Key {
+				existing.Key = item.Key
 			}
 			if len(item.Value) > 0 {
-				t.Items[index].Value = item.Value
+				existing.Value = item.Value
 			}
 		} else {
-			t.Items[index] = item
+			t.Items[item.Index] = item
 		}
 	}
 
@@ -193,7 +192,16 @@ func parseStringTable(buf []byte, numUpdates int32, name string, userDataFixed b
 		}
 	}()
 
-	items = make([]*stringTableItem, 0)
+	// Preallocate the result and back the items with a single slab so a large
+	// update costs two allocations instead of one per item plus append growth.
+	// The cap is bounded so a corrupt numUpdates cannot trigger a huge
+	// allocation; append simply grows past it if a table is legitimately larger.
+	prealloc := int(numUpdates)
+	if prealloc > 4096 {
+		prealloc = 4096
+	}
+	items = make([]*stringTableItem, 0, prealloc)
+	slab := make([]stringTableItem, 0, prealloc)
 
 	// Create a reader for the buffer
 	r := newReader(buf)
@@ -202,8 +210,13 @@ func parseStringTable(buf []byte, numUpdates int32, name string, userDataFixed b
 	// If the first item is at index 0 it will use a incr operation.
 	index := int32(-1)
 
-	// Maintain a list of key history
-	keys := make([]string, 0, stringtableKeyHistorySize)
+	// Maintain a ring buffer of key history. histCount is the total number of
+	// keys ever appended; the ring holds the most recent
+	// stringtableKeyHistorySize of them, so history position pos (counted from
+	// the oldest retained key) lives at (histCount-size+pos) mod size once the
+	// ring is full, and at pos before that.
+	var keyHist [stringtableKeyHistorySize]string
+	histCount := 0
 
 	// Some tables have no data
 	if len(buf) == 0 {
@@ -252,10 +265,18 @@ func parseStringTable(buf []byte, numUpdates int32, name string, userDataFixed b
 				pos := r.readBits(5)
 				size := r.readBits(5)
 
-				if int(pos) >= len(keys) {
+				retained := histCount
+				if retained > stringtableKeyHistorySize {
+					retained = stringtableKeyHistorySize
+				}
+				if int(pos) >= retained {
 					key += r.readString()
 				} else {
-					s := keys[pos]
+					abs := int(pos)
+					if histCount > stringtableKeyHistorySize {
+						abs = histCount - stringtableKeyHistorySize + int(pos)
+					}
+					s := keyHist[abs%stringtableKeyHistorySize]
 					if int(size) > len(s) {
 						key += s + r.readString()
 					} else {
@@ -266,12 +287,8 @@ func parseStringTable(buf []byte, numUpdates int32, name string, userDataFixed b
 				key = r.readString()
 			}
 
-			if len(keys) >= stringtableKeyHistorySize {
-				copy(keys[0:], keys[1:])
-				keys[len(keys)-1] = ""
-				keys = keys[:len(keys)-1]
-			}
-			keys = append(keys, key)
+			keyHist[histCount%stringtableKeyHistorySize] = key
+			histCount++
 		}
 
 		// Some entries have a value.
@@ -302,7 +319,12 @@ func parseStringTable(buf []byte, numUpdates int32, name string, userDataFixed b
 			}
 		}
 
-		items = append(items, &stringTableItem{index, key, value})
+		// Append to the slab and take the address of the slab element. If the
+		// slab regrows, previously taken pointers keep referencing the old
+		// backing array; that is safe because items are only ever read and
+		// mutated through those pointers, never through the slab again.
+		slab = append(slab, stringTableItem{index, key, value})
+		items = append(items, &slab[len(slab)-1])
 	}
 
 	return items, nil

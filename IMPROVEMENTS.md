@@ -661,9 +661,23 @@ golden gate, commits only (no push, no PR).
 | P5.1 readBitsAsBytes prealloc | 756.3m ±1% (−13.7%*) | 384.4 MiB (−1.3%) | 4.181M (−6.6%) | PASS |
 | P5.2 demo-packet arena + word copy | 676.7m ±1% (−22.8%) | 336.3 MiB (−13.6%) | 3.757M (−16.1%) | PASS |
 | P5.3 entities map → dense slice | 624.8m ±2% (−28.7%) | 336.3 MiB (−13.6%) | 3.757M (−16.1%) | PASS |
+| P5.4 string-table slab + ring history | 618.7m ±4% (−29.4%) | 335.0 MiB (−14.0%) | 3.597M (−19.7%) | PASS |
 
 \* the P5.0 sec/op baseline was thermally inflated (±8%); treat allocs/B as the
 reliable P5.1 signal and 756m ±1% as the true current sec/op level.
+
+### P5.4 — string-table item slab + prealloc + ring history + single lookup
+- **Was:** `parseStringTable` allocated a `&stringTableItem` per item plus cap-0 `items`
+  append growth (217K objects); the 32-entry key history shifted the whole window with a
+  `copy` per item once full; the `UpdateStringTable` apply loop did up to four map lookups
+  per item.
+- **Change:** preallocate `items` and back it with a single `[]stringTableItem` slab
+  (bounded at 4096 cap so corrupt `numUpdates` can't OOM; pointer identity survives slab
+  regrowth since items are only touched through the taken pointers). Key history becomes a
+  fixed ring buffer (`histCount`-based indexing reproduces the shift-window semantics
+  exactly). Apply loop hoists to one lookup.
+- **Result:** allocs/op 3.757M→3.597M (**−4.26%, −160K**), B/op −0.38%, sec −0.98%
+  (p=0.043). go test green (string-table goldens + full corpus). ✅
 
 ### P5.3 — `p.entities` map → dense slice
 - **Was:** `p.entities` was a `map[int32]*Entity`; the PacketEntities update loop does 1–3
