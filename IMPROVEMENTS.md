@@ -664,9 +664,20 @@ golden gate, commits only (no push, no PR).
 | P5.4 string-table slab + ring history | 618.7m ±4% (−29.4%) | 335.0 MiB (−14.0%) | 3.597M (−19.7%) | PASS |
 | P5.5 reader smalls (readLeUintX, readString) | 618.8m ±2% (−29.4%) | 334.5 MiB (−14.1%) | 3.540M (−20.9%) | PASS |
 | **P5.6 hand-rolled envelope decode** | **580.5m ±0% (−33.8%)** | **192.7 MiB (−50.5%)** | **2.615M (−41.6%)** | PASS |
+| P5.7 slab-allocated baseline clone | 574.5m ±1% (−34.5%) | 194.4 MiB (−50.1%) | 2.508M (−44.0%) | PASS |
 
 \* the P5.0 sec/op baseline was thermally inflated (±8%); treat allocs/B as the
 reliable P5.1 signal and 756m ±1% as the true current sec/op level.
+
+### P5.7 — slab-allocated baseline clone
+- **Was:** `clone()` allocated a `*fieldState` plus a `[]cell` array per nested state on
+  every entity create (210K objects, 19% of alloc space before P5.6).
+- **Change:** a counting pre-pass sizes two slabs (`[]fieldState`, `[]cell`) and the copy
+  carves from them; vector/blob leaves keep their individual deep copies (P4.1 semantics).
+  Cell slices are cap-limited so a later `set` grow allocates fresh instead of stomping a
+  neighbour's arena region; each entity's slabs are private and die with it.
+- **Result:** allocs/op 2.615M→2.508M (**−4.10%, −107K**), sec −1.03% (p=0.001), B/op
+  +0.92% (slab retention overhead — a good trade for object count). go test green. ✅
 
 ### P5.6 — hand-rolled envelope decode for hot internal messages  ⭐ headline win
 - **Was:** every CDemoPacket / CSVCMsg_PacketEntities / CSVCMsg_UpdateStringTable /
