@@ -67,14 +67,33 @@ func (p *Parser) onCDemoPacket(m *dota.CDemoPacket) error {
 	// and avoids a heap allocation per embedded message.
 	ms := p.pendingMsgBuf[:0]
 
+	// The inner stream is bit-shifted after the leading 6-bit readUBitVar, so
+	// message bodies almost never sit on a byte boundary and must be copied out.
+	// Carve those copies from a single reused arena sized to the packet instead
+	// of allocating per message: the buffers only live until dispatch below (the
+	// protobuf unmarshal copies what it keeps), so reusing the arena across
+	// packets is safe for the same reason reusing pendingMsgBuf is. Message
+	// headers take space too, so the payload total always fits in len(data).
+	data := m.GetData()
+	if cap(p.packetArena) < len(data) {
+		p.packetArena = make([]byte, 0, len(data))
+	}
+	arena := p.packetArena[:0]
+
 	// Read all messages from the buffer. Messages are packed serially as
 	// {type, size, data}. We keep reading until until less than a byte remains.
-	r := newReader(m.GetData())
+	r := newReader(data)
 	for r.remBytes() > 0 {
 		t := int32(r.readUBitVar())
 		size := r.readVarUint32()
-		buf := r.readBytes(size)
-		ms = append(ms, pendingMessage{p.Tick, t, buf})
+		start := len(arena)
+		end := start + int(size)
+		if end > cap(arena) {
+			_panicf("onCDemoPacket: message size %d exceeds packet buffer", size)
+		}
+		arena = arena[:end]
+		r.readBytesInto(arena[start:end])
+		ms = append(ms, pendingMessage{p.Tick, t, arena[start:end:end]})
 	}
 
 	// Sort messages to ensure dependencies are met. For example, we need to

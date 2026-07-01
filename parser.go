@@ -52,6 +52,7 @@ type Parser struct {
 	modifierTableEntryHandlers []ModifierTableEntryHandler
 	serializers                map[string]*serializer
 	pendingMsgBuf              pendingMessages
+	packetArena                []byte
 	snappyScratch              []byte
 	entityReader               reader
 	entityTuples               []entityOpTuple

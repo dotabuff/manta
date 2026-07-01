@@ -659,9 +659,23 @@ golden gate, commits only (no push, no PR).
 |------------|--------|------|-----------|---------|
 | P5.0 baseline (master 0efe7e1) | 876.7m ±8% | 389.4 MiB | 4.478M | PASS |
 | P5.1 readBitsAsBytes prealloc | 756.3m ±1% (−13.7%*) | 384.4 MiB (−1.3%) | 4.181M (−6.6%) | PASS |
+| P5.2 demo-packet arena + word copy | 676.7m ±1% (−22.8%) | 336.3 MiB (−13.6%) | 3.757M (−16.1%) | PASS |
 
 \* the P5.0 sec/op baseline was thermally inflated (±8%); treat allocs/B as the
 reliable P5.1 signal and 756m ±1% as the true current sec/op level.
+
+### P5.2 — demo-packet arena + word-copy unaligned `readBytes`
+- **Was:** the `onCDemoPacket` inner stream is bit-shifted after the leading 6-bit
+  `readUBitVar`, so nearly every embedded message body hit the unaligned `readBytes` slow
+  path: a fresh zeroed `make([]byte, n)` (422K objects, 49.5 MB, plus most of the 8%
+  `memclrNoHeapPointers` CPU) filled one `readBits(8)` at a time.
+- **Change:** (a) new `reader.readBytesInto(dst)` copies unaligned data a 32-bit word at a
+  time; `readBytes`'s slow path routes through it. (b) `onCDemoPacket` carves message
+  buffers from a single parser-level arena sized to `len(m.GetData())` (headers guarantee
+  the payload total fits) and reused across packets. Lifetime matches `pendingMsgBuf`: the
+  buffers only live until dispatch, and the protobuf unmarshal copies what it keeps.
+- **Result:** sec/op 756.3m→676.7m (**−10.52%**, p=0.000), B/op 384.4→336.3 MiB
+  (**−12.52%**), allocs/op 4.181M→3.757M (**−10.13%, −424K**). go test green. ✅
 
 ### P5.1 — `readBitsAsBytes` exact prealloc + word fill
 - **Was:** `tmp := make([]byte, 0)` grown byte-at-a-time via `append(tmp, r.readByte())` —

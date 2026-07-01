@@ -173,10 +173,37 @@ func (r *reader) readBytes(n uint32) []byte {
 	}
 
 	buf := make([]byte, n)
-	for i := uint32(0); i < n; i++ {
-		buf[i] = byte(r.readBits(8))
-	}
+	r.readBytesInto(buf)
 	return buf
+}
+
+// readBytesInto fills dst with the next len(dst) bytes of the stream. Unlike
+// readBytes it never allocates: the caller provides the destination, and the
+// unaligned path copies a 32-bit word at a time rather than byte by byte.
+func (r *reader) readBytesInto(dst []byte) {
+	n := uint32(len(dst))
+
+	// Fast path if we're byte aligned
+	if r.bitCount&7 == 0 {
+		if r.bitCount != 0 {
+			r.realign()
+		}
+		r.pos += n
+		if r.pos > r.size {
+			_panicf("readBytesInto: insufficient buffer (%d of %d)", r.pos, r.size)
+		}
+		copy(dst, r.buf[r.pos-n:r.pos])
+		return
+	}
+
+	i := 0
+	for int(n)-i >= 4 {
+		binary.LittleEndian.PutUint32(dst[i:], r.readBits(32))
+		i += 4
+	}
+	for ; i < int(n); i++ {
+		dst[i] = byte(r.readBits(8))
+	}
 }
 
 // readLeUint32 reads an little-endian uint32
