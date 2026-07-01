@@ -42,7 +42,7 @@ type Parser struct {
 	classesByName              map[string]*class
 	classIdSize                uint32
 	classInfo                  bool
-	entities                   map[int32]*Entity
+	entities                   []*Entity
 	entityFullPackets          int
 	entityHandlers             []EntityHandler
 	gameEventHandlers          map[string][]GameEventHandler
@@ -52,6 +52,7 @@ type Parser struct {
 	modifierTableEntryHandlers []ModifierTableEntryHandler
 	serializers                map[string]*serializer
 	pendingMsgBuf              pendingMessages
+	packetArena                []byte
 	snappyScratch              []byte
 	entityReader               reader
 	entityTuples               []entityOpTuple
@@ -80,7 +81,7 @@ func NewStreamParser(r io.Reader) (*Parser, error) {
 		classBaselineStates: make(map[int32]*fieldState),
 		classesById:         make(map[int32]*class),
 		classesByName:       make(map[string]*class),
-		entities:            make(map[int32]*Entity),
+		entities:            make([]*Entity, 1<<indexBits),
 		entityHandlers:      make([]EntityHandler, 0),
 		gameEventHandlers:   make(map[string][]GameEventHandler),
 		gameEventNames:      make(map[int32]string),
@@ -161,7 +162,10 @@ func (p *Parser) Start() (err error) {
 
 		p.Tick = msg.tick
 
-		if err = p.Callbacks.callByDemoType(msg.typeId, msg.data); err != nil {
+		// dispatchDemo takes the fast envelope path for CDemoPacket when only
+		// the internal handler is registered, falling back to the full
+		// protobuf callback path otherwise.
+		if err = p.dispatchDemo(msg.typeId, msg.data); err != nil {
 			return
 		}
 	}
