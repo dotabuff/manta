@@ -662,9 +662,21 @@ golden gate, commits only (no push, no PR).
 | P5.2 demo-packet arena + word copy | 676.7m ±1% (−22.8%) | 336.3 MiB (−13.6%) | 3.757M (−16.1%) | PASS |
 | P5.3 entities map → dense slice | 624.8m ±2% (−28.7%) | 336.3 MiB (−13.6%) | 3.757M (−16.1%) | PASS |
 | P5.4 string-table slab + ring history | 618.7m ±4% (−29.4%) | 335.0 MiB (−14.0%) | 3.597M (−19.7%) | PASS |
+| P5.5 reader smalls (readLeUintX, readString) | 618.8m ±2% (−29.4%) | 334.5 MiB (−14.1%) | 3.540M (−20.9%) | PASS |
 
 \* the P5.0 sec/op baseline was thermally inflated (±8%); treat allocs/B as the
 reliable P5.1 signal and 756m ±1% as the true current sec/op level.
+
+### P5.5 — reader smalls: `readLeUintX` via accumulator, `readString` prealloc
+- **Was:** unaligned `readLeUint32/64` allocated through the `readBytes` slow path (24K
+  objects via `fixed64Decoder` etc.); `readString` grew a cap-0 buffer byte by byte.
+- **Change:** unaligned `readLeUint32` reads `readBits(32)` straight from the accumulator
+  (bit-stream LSB-first == LE byte decode); `readLeUint64` uses two accumulator words
+  (readBits is capped at 32). Aligned paths keep the zero-copy `readBytes` fast path and
+  the exact `pos` contract the reader tests assert. `readString` starts at cap 32 (stack-
+  allocatable when it doesn't escape).
+- **Result:** allocs/op 3.597M→3.540M (**−1.59%, −57K**), B/op −0.16%, sec ~ (p=0.481).
+  go test green. ✅
 
 ### P5.4 — string-table item slab + prealloc + ring history + single lookup
 - **Was:** `parseStringTable` allocated a `&stringTableItem` per item plus cap-0 `items`

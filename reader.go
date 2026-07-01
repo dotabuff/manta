@@ -208,11 +208,24 @@ func (r *reader) readBytesInto(dst []byte) {
 
 // readLeUint32 reads an little-endian uint32
 func (r *reader) readLeUint32() uint32 {
+	// Unaligned: read straight from the bit accumulator. Bits are consumed
+	// LSB-first from little-endian bytes, so this equals the LE decode of the
+	// next four stream bytes without the readBytes slow-path allocation. The
+	// aligned path keeps the zero-copy readBytes fast path.
+	if r.bitCount&7 != 0 {
+		return r.readBits(32)
+	}
 	return binary.LittleEndian.Uint32(r.readBytes(4))
 }
 
 // readLeUint64 reads a little-endian uint64
 func (r *reader) readLeUint64() uint64 {
+	// See readLeUint32: two accumulator words replace the unaligned readBytes
+	// allocation (readBits is capped at 32 bits per call).
+	if r.bitCount&7 != 0 {
+		lo := uint64(r.readBits(32))
+		return lo | uint64(r.readBits(32))<<32
+	}
 	return binary.LittleEndian.Uint64(r.readBytes(8))
 }
 
@@ -324,7 +337,9 @@ func (r *reader) readStringN(n uint32) string {
 
 // readString reads a null terminated string
 func (r *reader) readString() string {
-	buf := make([]byte, 0)
+	// Most strings here are short field/table keys; a small starting capacity
+	// avoids the repeated growth of a cap-0 append chain.
+	buf := make([]byte, 0, 32)
 	for {
 		b := r.readByte()
 		if b == 0 {
