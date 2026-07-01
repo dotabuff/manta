@@ -666,9 +666,48 @@ golden gate, commits only (no push, no PR).
 | **P5.6 hand-rolled envelope decode** | **580.5m ±0% (−33.8%)** | **192.7 MiB (−50.5%)** | **2.615M (−41.6%)** | PASS |
 | P5.7 slab-allocated baseline clone | 574.5m ±1% (−34.5%) | 194.4 MiB (−50.1%) | 2.508M (−44.0%) | PASS |
 | P5.8 game-event eventid wire-peek | 572.3m ±1% (−34.7%) | 193.8 MiB (−50.2%) | 2.492M (−44.3%) | PASS |
+| P5.9 prefix cache | _skipped (measured flat vs verified-clean baseline)_ | — | — | — |
+| P5.10 inline vec2/vec3 cell | _rejected (allocs −17.9% but B/op +12.0%, sec +1.9%)_ | — | — | — |
+| **End of Phase 5 (verified-clean re-measure)** | **573.9m ±1%** | **193.8 MiB** | **2.492M** | PASS |
+
+**Phase 5 totals.** vs the P5.0 nominal baseline: sec −34.5%, B/op −50.2%, allocs −44.3%.
+The P5.0 sec sample was thermally inflated (±8%); against the credible pre-phase level of
+~750–756m (P4's cooled measure / the P5.1 run), the honest sec/op win is **~−24%**. The
+B/op and allocs columns are ±0% deterministic throughout. Cumulative vs the original P0
+baseline (pre-Phase-1: 1.523 s, 791.5 MiB, 20.75M allocs): **sec −62%, B/op −75%,
+allocs −88%**.
+
+**Remaining targets (final profile, post-P5.8).** Alloc objects: qangle `[]float32` boxes
+now #1 at 20.8% (only fixable by widening the cell — measured a net loss in P5.10 — or by
+an API change); residual protobuf unmarshal ~25% (messages users register for: game-event
+keys `consumeStringPtr`/`reflect.New`, user-message types — shrinkable only by extending
+the fast-envelope set); `readBitsAsBytes` 7.7% (irreducible: one alloc per retained
+string-table value); `newFieldState` in `set` 4.6%; `cloneInto` slabs 3.9%. CPU (in-memory
+bench): `readBits` ~10%, `fieldState.set` ~4.5%, `readFieldPaths` ~10% cum — the bit-reader
+and field-path machinery are now the floor. Parked ideas unchanged from earlier phases:
+string-table Items map→dense slice, CDemoStringTables reconcile, COW baseline clone
+(slab clone reduced the pressure; COW would also cut the copy bytes).
 
 \* the P5.0 sec/op baseline was thermally inflated (±8%); treat allocs/B as the
 reliable P5.1 signal and 756m ±1% as the true current sec/op level.
+
+### P5.10 — inline vec2/vec3 cell — **REJECTED (measured)**
+- **Attempted:** widen `cell` from 24 to 32 bytes (two extra float lanes) so QAngle/Vector/
+  Vector2D/normal values store inline instead of boxing a `[]float32` per write, boxing
+  lazily on `Get` (fresh slice per read).
+- **Measured:** allocs −17.9% (−447K) — but B/op **+12.0%** (+23 MiB; the wider cell
+  inflates every state array and clone slab) and sec/op **+1.87% slower** (p=0.000): the
+  extra copy/clone bytes outweigh the GC win, consistent with P3.1's 32-byte-cell attempt
+  (+12.9% B/op). Reverted; the vector residual (now ~21% of remaining allocs) stays the
+  known cost of the no-API-change constraint.
+
+### P5.9 — prefix cache for `set`/decoder walk — **SKIPPED**
+- **Attempted:** cache the resolved depth-1 sub-state across consecutive sorted field paths
+  sharing `path[0]` (`setDepth`/`subAt` split), skipping the depth-0 walk step per field.
+- **Measured flat:** sec/op ~ (p=0.481 vs a verified-clean P5.8 baseline), allocs/B
+  identical. Most field paths in this workload are depth-1 (`last == 0`), where the cache
+  does nothing, and the depth-0 walk step it skips is already just a bounds+kind check.
+  Reverted per the keep-only-if-confirmed rule.
 
 ### P5.8 — game-event eventid wire-peek
 - **Was:** every `CMsgSource1LegacyGameEvent` was fully unmarshaled (message + a
