@@ -142,20 +142,63 @@ func (s *fieldState) set(fp *fieldPath, c cell) {
 // []float32 and binary-blob []byte) are also deep-copied, since a caller may
 // mutate a slice returned from Entity.Get/Map; strings and boxed integers are
 // immutable and shared by value.
+//
+// The copy is carved from two slab allocations (one []fieldState, one []cell)
+// sized by a counting pre-pass, instead of allocating a struct and a cell
+// array per nested state. Cell slices are cap-limited to their exact length,
+// so a later grow in set() allocates a fresh array rather than stomping a
+// neighbouring state's arena region. An entity's clone shares its slabs with
+// no other entity, so the slabs die with the entity.
 func (s *fieldState) clone() *fieldState {
-	c := &fieldState{state: make([]cell, len(s.state))}
-	copy(c.state, s.state)
-	for i := range c.state {
-		switch v := c.state[i].ref.(type) {
-		case *fieldState:
-			c.state[i].ref = v.clone()
-		case []float32:
-			c.state[i].ref = append([]float32(nil), v...)
-		case []byte:
-			c.state[i].ref = append([]byte(nil), v...)
+	nStates, nCells := s.cloneSize()
+	a := cloneArena{
+		states: make([]fieldState, nStates),
+		cells:  make([]cell, nCells),
+	}
+	root := &a.states[0]
+	a.states = a.states[1:]
+	s.cloneInto(root, &a)
+	return root
+}
+
+// cloneArena holds the remaining unassigned slab space during a clone.
+type cloneArena struct {
+	states []fieldState
+	cells  []cell
+}
+
+// cloneSize counts the nested states and total cells reachable from s.
+func (s *fieldState) cloneSize() (nStates, nCells int) {
+	nStates, nCells = 1, len(s.state)
+	for i := range s.state {
+		if sub, ok := s.state[i].sub(); ok {
+			cs, cc := sub.cloneSize()
+			nStates += cs
+			nCells += cc
 		}
 	}
-	return c
+	return
+}
+
+// cloneInto deep-copies s into dst, carving all nested storage from the arena.
+func (s *fieldState) cloneInto(dst *fieldState, a *cloneArena) {
+	n := len(s.state)
+	dst.state = a.cells[:n:n]
+	a.cells = a.cells[n:]
+	copy(dst.state, s.state)
+	for i := range dst.state {
+		switch v := dst.state[i].ref.(type) {
+		case *fieldState:
+			sub := &a.states[0]
+			a.states = a.states[1:]
+			v.cloneInto(sub, a)
+			dst.state[i].ref = sub
+		case []float32:
+			dst.state[i].ref = append([]float32(nil), v...)
+		case []byte:
+			dst.state[i].ref = append([]byte(nil), v...)
+		}
+	}
 }
 
 func max(a, b int) int {

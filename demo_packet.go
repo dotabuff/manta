@@ -60,6 +60,13 @@ func (ms pendingMessages) Less(i, j int) bool {
 // multiple inner packets from a single CDemoPacket. This is the main structure
 // that contains all other data types in the demo file.
 func (p *Parser) onCDemoPacket(m *dota.CDemoPacket) error {
+	return p.processDemoPacket(m.GetData())
+}
+
+// processDemoPacket is the core of the CDemoPacket handler. It takes the raw
+// packet payload so the fast envelope path (envelope_fast.go) can call it
+// without materializing a proto message.
+func (p *Parser) processDemoPacket(data []byte) error {
 	// Reuse a parser-level buffer to store pending messages. Messages are read
 	// first as pending messages then sorted before dispatch. onCDemoPacket is
 	// never re-entrant (it is dispatched only via callByDemoType, never nested
@@ -67,14 +74,32 @@ func (p *Parser) onCDemoPacket(m *dota.CDemoPacket) error {
 	// and avoids a heap allocation per embedded message.
 	ms := p.pendingMsgBuf[:0]
 
+	// The inner stream is bit-shifted after the leading 6-bit readUBitVar, so
+	// message bodies almost never sit on a byte boundary and must be copied out.
+	// Carve those copies from a single reused arena sized to the packet instead
+	// of allocating per message: the buffers only live until dispatch below (the
+	// protobuf unmarshal copies what it keeps), so reusing the arena across
+	// packets is safe for the same reason reusing pendingMsgBuf is. Message
+	// headers take space too, so the payload total always fits in len(data).
+	if cap(p.packetArena) < len(data) {
+		p.packetArena = make([]byte, 0, len(data))
+	}
+	arena := p.packetArena[:0]
+
 	// Read all messages from the buffer. Messages are packed serially as
 	// {type, size, data}. We keep reading until until less than a byte remains.
-	r := newReader(m.GetData())
+	r := newReader(data)
 	for r.remBytes() > 0 {
 		t := int32(r.readUBitVar())
 		size := r.readVarUint32()
-		buf := r.readBytes(size)
-		ms = append(ms, pendingMessage{p.Tick, t, buf})
+		start := len(arena)
+		end := start + int(size)
+		if end > cap(arena) {
+			_panicf("onCDemoPacket: message size %d exceeds packet buffer", size)
+		}
+		arena = arena[:end]
+		r.readBytesInto(arena[start:end])
+		ms = append(ms, pendingMessage{p.Tick, t, arena[start:end:end]})
 	}
 
 	// Sort messages to ensure dependencies are met. For example, we need to
@@ -83,10 +108,12 @@ func (p *Parser) onCDemoPacket(m *dota.CDemoPacket) error {
 	// and avoids the reflection allocations of sort.Sort's interface path.
 	sort.Stable(ms)
 
-	// Dispatch messages in order, stopping on handler error.
+	// Dispatch messages in order, stopping on handler error. dispatchPacket
+	// takes the fast envelope path for hot internal-only message types and
+	// falls back to the full protobuf callback path otherwise.
 	var err error
 	for i := range ms {
-		if err = p.Callbacks.callByPacketType(ms[i].t, ms[i].buf); err != nil {
+		if err = p.dispatchPacket(ms[i].t, ms[i].buf); err != nil {
 			break
 		}
 	}
@@ -110,7 +137,7 @@ func (p *Parser) onCDemoFullPacket(m *dota.CDemoFullPacket) error {
 
 	// Then the CDemoPacket.
 	if m.Packet != nil {
-		if err := p.onCDemoPacket(m.GetPacket()); err != nil {
+		if err := p.processDemoPacket(m.GetPacket().GetData()); err != nil {
 			return err
 		}
 	}

@@ -173,19 +173,59 @@ func (r *reader) readBytes(n uint32) []byte {
 	}
 
 	buf := make([]byte, n)
-	for i := uint32(0); i < n; i++ {
-		buf[i] = byte(r.readBits(8))
-	}
+	r.readBytesInto(buf)
 	return buf
+}
+
+// readBytesInto fills dst with the next len(dst) bytes of the stream. Unlike
+// readBytes it never allocates: the caller provides the destination, and the
+// unaligned path copies a 32-bit word at a time rather than byte by byte.
+func (r *reader) readBytesInto(dst []byte) {
+	n := uint32(len(dst))
+
+	// Fast path if we're byte aligned
+	if r.bitCount&7 == 0 {
+		if r.bitCount != 0 {
+			r.realign()
+		}
+		r.pos += n
+		if r.pos > r.size {
+			_panicf("readBytesInto: insufficient buffer (%d of %d)", r.pos, r.size)
+		}
+		copy(dst, r.buf[r.pos-n:r.pos])
+		return
+	}
+
+	i := 0
+	for int(n)-i >= 4 {
+		binary.LittleEndian.PutUint32(dst[i:], r.readBits(32))
+		i += 4
+	}
+	for ; i < int(n); i++ {
+		dst[i] = byte(r.readBits(8))
+	}
 }
 
 // readLeUint32 reads an little-endian uint32
 func (r *reader) readLeUint32() uint32 {
+	// Unaligned: read straight from the bit accumulator. Bits are consumed
+	// LSB-first from little-endian bytes, so this equals the LE decode of the
+	// next four stream bytes without the readBytes slow-path allocation. The
+	// aligned path keeps the zero-copy readBytes fast path.
+	if r.bitCount&7 != 0 {
+		return r.readBits(32)
+	}
 	return binary.LittleEndian.Uint32(r.readBytes(4))
 }
 
 // readLeUint64 reads a little-endian uint64
 func (r *reader) readLeUint64() uint64 {
+	// See readLeUint32: two accumulator words replace the unaligned readBytes
+	// allocation (readBits is capped at 32 bits per call).
+	if r.bitCount&7 != 0 {
+		lo := uint64(r.readBits(32))
+		return lo | uint64(r.readBits(32))<<32
+	}
 	return binary.LittleEndian.Uint64(r.readBytes(8))
 }
 
@@ -297,7 +337,9 @@ func (r *reader) readStringN(n uint32) string {
 
 // readString reads a null terminated string
 func (r *reader) readString() string {
-	buf := make([]byte, 0)
+	// Most strings here are short field/table keys; a small starting capacity
+	// avoids the repeated growth of a cap-0 append chain.
+	buf := make([]byte, 0, 32)
 	for {
 		b := r.readByte()
 		if b == 0 {
@@ -390,13 +432,23 @@ func (r *reader) read3BitNormal() []float32 {
 
 // readBitsAsBytes reads the given number of bits in groups of bytes
 func (r *reader) readBitsAsBytes(n uint32) []byte {
-	tmp := make([]byte, 0)
+	// Allocate the exact result size up front (the caller retains the slice, so
+	// a fresh allocation is required) and fill a 32-bit word at a time instead
+	// of growing a cap-0 slice byte by byte.
+	tmp := make([]byte, (n+7)/8)
+	i := 0
+	for n >= 32 {
+		binary.LittleEndian.PutUint32(tmp[i:], r.readBits(32))
+		i += 4
+		n -= 32
+	}
 	for n >= 8 {
-		tmp = append(tmp, r.readByte())
+		tmp[i] = r.readByte()
+		i++
 		n -= 8
 	}
 	if n > 0 {
-		tmp = append(tmp, byte(r.readBits(n)))
+		tmp[i] = byte(r.readBits(n))
 	}
 	return tmp
 }
