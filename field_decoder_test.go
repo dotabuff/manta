@@ -81,3 +81,53 @@ func TestValueChangingDecoderWiring(t *testing.T) {
 	assert.Equal(int64(5_000_000_000), wired("int64", encVarInt(5_000_000_000)))
 	assert.Equal(uint64(66), wired("BloodType", []byte{0x42}))
 }
+
+// TestFixed8Encoder locks the "fixed8" var encoder: the server writes these
+// fields as 8 raw bits whatever their type. Read as varints, a 255 consumed
+// several bytes and desynced the rest of the entity: the first CParticleSystem
+// baseline of match 9032897977 (m_iServerControlPointAssignments = 255 x4)
+// failed with "nextByte: insufficient buffer (380 of 379)".
+func TestFixed8Encoder(t *testing.T) {
+	assert := assert.New(t)
+
+	newFixed8 := func(varName, varType string, model int) *field {
+		f := &field{varName: varName, varType: varType, encoder: "fixed8", fieldType: newFieldType(varType)}
+		f.setModel(model)
+		return f
+	}
+	bitsRead := func(r *reader) uint32 { return r.pos*8 - r.bitCount }
+
+	// uint8[4] of 255 followed by the varint invalid handle 0xFFFFFF, as in
+	// that baseline: the array takes exactly 4 bytes.
+	arr := newFixed8("m_iServerControlPointAssignments", "uint8[4]", fieldModelFixedArray)
+	r := newReader(append([]byte{0xff, 0xff, 0xff, 0xff}, encVarUint(0xffffff)...))
+	for i := 0; i < 4; i++ {
+		assert.Equal(uint64(255), arr.decoder(r).iface())
+	}
+	assert.Equal(uint64(0xffffff), unsignedDecoder(r).iface())
+	assert.Equal(uint32(64), bitsRead(r))
+
+	// int8 is signed, other types unsigned; each reads exactly 8 bits.
+	for _, c := range []struct {
+		varType string
+		in      byte
+		want    interface{}
+	}{
+		{"int8", 0xff, int32(-1)},
+		{"int8", 0x29, int32(41)},
+		{"uint8", 0x83, uint64(131)},
+		{"AnimationAlgorithm_t", 0xff, uint32(255)},
+	} {
+		r := newReader([]byte{c.in, 0x01})
+		assert.Equal(c.want, newFixed8("m_field", c.varType, fieldModelSimple).decoder(r).iface(), c.varType)
+		assert.Equal(uint32(8), bitsRead(r), c.varType)
+	}
+
+	// CNetworkUtlVectorBase< uint8 >: varint length, 8-bit elements.
+	vec := newFixed8("m_vecPlayerDraftPickOrder", "CNetworkUtlVectorBase< uint8 >", fieldModelVariableArray)
+	r = newReader([]byte{0x02, 0xff, 0x80})
+	assert.Equal(uint64(2), vec.baseDecoder(r).iface())
+	assert.Equal(uint64(255), vec.childDecoder(r).iface())
+	assert.Equal(uint64(128), vec.childDecoder(r).iface())
+	assert.Equal(uint32(24), bitsRead(r))
+}

@@ -281,7 +281,34 @@ func componentDecoder(r *reader) cell {
 	return uint32Cell(r.readBits(1))
 }
 
+// fixed8Decoder reads a field the server writes as 8 raw bits (var encoder
+// "fixed8", used on uint8, int8, enums and attachment handles), matching
+// clarity's S2DecoderFactory: signed for int8, unsigned otherwise. The varint
+// decoders picked by type name only agree while the value is below 128; a 255
+// (the usual "unset" value) swallows the following bytes and shifts every
+// later field. Values keep the representation the type-name decoders gave
+// them: int32 for int8, uint64 for uint8, uint32 for everything else.
+func fixed8Decoder(baseType string) fieldDecoder {
+	switch baseType {
+	case "int8":
+		return func(r *reader) cell {
+			return int32Cell(int32(int8(r.readBits(8))))
+		}
+	case "uint8":
+		return func(r *reader) cell {
+			return smallUint64Cell(uint64(r.readBits(8)))
+		}
+	}
+	return func(r *reader) cell {
+		return uint32Cell(r.readBits(8))
+	}
+}
+
 func findDecoder(f *field) fieldDecoder {
+	if f.encoder == "fixed8" {
+		return fixed8Decoder(f.fieldType.baseType)
+	}
+
 	if v, ok := fieldTypeFactories[f.fieldType.baseType]; ok {
 		return v(f)
 	}
