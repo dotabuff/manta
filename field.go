@@ -99,6 +99,11 @@ func (f *field) setModel(model int) {
 		}
 		f.baseDecoder = unsignedDecoder
 		f.childDecoder = findDecoderByBaseType(f.fieldType.genericType.baseType)
+		if f.encoder == "fixed8" {
+			// CNetworkUtlVectorBase< uint8 >: the length stays a varint,
+			// the elements are 8 raw bits.
+			f.childDecoder = fixed8Decoder(f.fieldType.genericType.baseType)
+		}
 
 	case fieldModelVariableTable:
 		f.baseDecoder = unsignedDecoder
