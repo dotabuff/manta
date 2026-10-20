@@ -2,7 +2,9 @@ package manta
 
 import (
 	"encoding/binary"
+	"math"
 	"testing"
+	"unsafe"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -60,6 +62,34 @@ func TestDecoderRepresentations(t *testing.T) {
 	fixedBuf := make([]byte, 8)
 	binary.LittleEndian.PutUint64(fixedBuf, 0x0123456789ABCDEF)
 	assert.Equal(uint64(0x0123456789ABCDEF), dec(fixed64Decoder, fixedBuf))
+
+	// 64-bit values are held inline when they fit in 32 bits and boxed
+	// otherwise; both sides of each boundary must read back exactly.
+	assert.Equal(uint64(0xFFFFFFFF), dec(unsigned64Decoder, encVarUint(0xFFFFFFFF)))
+	assert.Equal(uint64(0x100000000), dec(unsigned64Decoder, encVarUint(0x100000000)))
+	binary.LittleEndian.PutUint64(fixedBuf, 7)
+	assert.Equal(uint64(7), dec(fixed64Decoder, fixedBuf))
+	for _, v := range []int64{0, 1, -1, 2147483647, -2147483648, 2147483648, -2147483649} {
+		assert.Equal(v, dec(signed64Decoder, encVarInt(v)), "int64 %d", v)
+	}
+
+	// Reference values read back with their original type and contents.
+	assert.Equal("npc_dota_hero", dec(stringDecoder, []byte("npc_dota_hero\x00")))
+	assert.Equal("", dec(stringDecoder, []byte{0}))
+	assert.Equal([]byte{1, 2, 3}, dec(cUtlBinaryBlockDecoder, []byte{3, 1, 2, 3}))
+	assert.Equal([]byte{}, dec(cUtlBinaryBlockDecoder, []byte{0}))
+	floatBuf := make([]byte, 8)
+	binary.LittleEndian.PutUint32(floatBuf, math.Float32bits(1.5))
+	binary.LittleEndian.PutUint32(floatBuf[4:], math.Float32bits(-2))
+	assert.Equal([]float32{1.5, -2}, dec(vector2Decoder, floatBuf))
+}
+
+// TestCellSize locks the cell at 16 bytes: it is the element of every entity
+// state array, so its size scales the baseline clone and all state growth.
+func TestCellSize(t *testing.T) {
+	if n := unsafe.Sizeof(cell{}); n != 16 {
+		t.Fatalf("cell is %d bytes, want 16", n)
+	}
 }
 
 // TestValueChangingDecoderWiring locks that the field types whose representation
