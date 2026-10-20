@@ -220,14 +220,34 @@ func (r *reader) readBytesInto(dst []byte) {
 		return
 	}
 
+	// Unaligned: rather than a readBits(32) per word, shift-merge straight from
+	// the buffer. The accumulator holds the bits starting at logical bit
+	// position p (not on a byte boundary), and they are still in buf, so output
+	// byte i is the 8 bits at p+8i, which straddle buf[p/8+i] and the next byte.
+	p := r.pos*8 - r.bitCount
+	if uint64(n)*8 > uint64(r.size)*8-uint64(p) {
+		_panicf("readBytesInto: insufficient buffer (%d bytes at bit %d of %d)", n, p, r.size*8)
+	}
+	shift := p & 7
+	src := r.buf[p>>3 : r.size]
 	i := 0
-	for int(n)-i >= 4 {
-		binary.LittleEndian.PutUint32(dst[i:], r.readBits(32))
-		i += 4
+	// Eight output bytes need nine input bytes, so the word loop stops one
+	// short of the end of src; the remainder takes the byte path.
+	for ; i+9 <= len(src) && i+8 <= len(dst); i += 8 {
+		w := binary.LittleEndian.Uint64(src[i:])
+		binary.LittleEndian.PutUint64(dst[i:], w>>shift|uint64(src[i+8])<<(64-shift))
 	}
-	for ; i < int(n); i++ {
-		dst[i] = byte(r.readBits(8))
+	for ; i < len(dst); i++ {
+		dst[i] = src[i]>>shift | src[i+1]<<(8-shift)
 	}
+
+	// Resume after the copied bytes. The position is still not byte aligned
+	// (it moved by whole bytes), so reload the rest of its byte as the
+	// accumulator, exactly as a byte-at-a-time reader would hold it.
+	end := p>>3 + n
+	r.bitVal = uint64(r.buf[end]) >> shift
+	r.bitCount = 8 - shift
+	r.pos = end + 1
 }
 
 // readLeUint32 reads an little-endian uint32

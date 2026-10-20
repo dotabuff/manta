@@ -1,6 +1,7 @@
 package manta
 
 import (
+	"encoding/binary"
 	"math/rand"
 	"testing"
 
@@ -308,6 +309,68 @@ func TestReaderVarLengthMatchesReference(t *testing.T) {
 				if a, b := ra.readBits(n), rb.readBits(n); a != b {
 					t.Fatalf("%s buf=%x skip=%d: follow-up read %x, want %x", pr.name, buf, skip, a, b)
 				}
+			}
+		}
+	}
+}
+
+// refReadBytesInto is readBytesInto as written before the unaligned
+// shift-merge copy: one readBits(32) per word, then readBits(8) per byte.
+func refReadBytesInto(r *reader, dst []byte) {
+	if r.bitCount&7 == 0 {
+		r.readBytesInto(dst)
+		return
+	}
+	i := 0
+	for len(dst)-i >= 4 {
+		binary.LittleEndian.PutUint32(dst[i:], r.readBits(32))
+		i += 4
+	}
+	for ; i < len(dst); i++ {
+		dst[i] = byte(r.readBits(8))
+	}
+}
+
+// TestReaderReadBytesIntoMatchesReference checks readBytesInto against the
+// reference copy at random bit offsets and lengths, including copies that run
+// off the end of the buffer (both must panic): same bytes, same bits consumed,
+// and the same follow-up reads.
+func TestReaderReadBytesIntoMatchesReference(t *testing.T) {
+	rng := rand.New(rand.NewSource(1))
+	call := func(f func(*reader, []byte), r *reader, dst []byte) (panicked bool) {
+		defer func() { panicked = recover() != nil }()
+		f(r, dst)
+		return false
+	}
+	for trial := 0; trial < 20000; trial++ {
+		buf := make([]byte, rng.Intn(48))
+		rng.Read(buf)
+		skip := uint32(0)
+		if len(buf) > 0 {
+			skip = uint32(rng.Intn(len(buf)*8 + 1))
+		}
+		n := rng.Intn(len(buf) + 2)
+		ra, rb := readerAtBit(buf, skip), readerAtBit(buf, skip)
+		da, db := make([]byte, n), make([]byte, n)
+
+		pa := call((*reader).readBytesInto, ra, da)
+		pb := call(refReadBytesInto, rb, db)
+		if pa != pb {
+			t.Fatalf("buf=%x skip=%d n=%d: panicked=%v, reference panicked=%v", buf, skip, n, pa, pb)
+		}
+		if pa {
+			continue
+		}
+		if string(da) != string(db) {
+			t.Fatalf("buf=%x skip=%d n=%d: got %x, want %x", buf, skip, n, da, db)
+		}
+		if a, b := ra.pos*8-ra.bitCount, rb.pos*8-rb.bitCount; a != b {
+			t.Fatalf("buf=%x skip=%d n=%d: consumed to bit %d, want %d", buf, skip, n, a, b)
+		}
+		for rem := ra.remBits(); rem > 0; rem = ra.remBits() {
+			k := min(rem, uint32(1+rng.Intn(32)))
+			if a, b := ra.readBits(k), rb.readBits(k); a != b {
+				t.Fatalf("buf=%x skip=%d n=%d: follow-up read %x, want %x", buf, skip, n, a, b)
 			}
 		}
 	}
