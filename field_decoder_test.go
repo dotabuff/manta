@@ -161,3 +161,11 @@ func TestFixed8Encoder(t *testing.T) {
 	assert.Equal(uint64(128), vec.childDecoder(r).iface())
 	assert.Equal(uint32(24), bitsRead(r))
 }
+
+// TestFieldPathSize locks the fieldPath at 32 bytes: readFieldPaths snapshots
+// one by value for every decoded field.
+func TestFieldPathSize(t *testing.T) {
+	if n := unsafe.Sizeof(fieldPath{}); n != 32 {
+		t.Fatalf("fieldPath is %d bytes, want 32", n)
+	}
+}

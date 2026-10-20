@@ -186,10 +186,11 @@ func readFieldPathsReference(r *reader) []fieldPath {
 	fp := newFieldPath()
 	defer fp.release()
 	for {
-		fieldPathTable[decodeOneHuffOpWalk(r)].fn(r, fp)
-		if fp.done {
+		op := decodeOneHuffOpWalk(r)
+		if op == fpOpFieldPathEncodeFinish {
 			return paths
 		}
+		fieldPathTable[op].fn(r, fp)
 		paths = append(paths, *fp)
 	}
 }

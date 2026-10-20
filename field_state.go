@@ -164,8 +164,8 @@ func (s *fieldState) get(fp *fieldPath) interface{} {
 // one.
 func (s *fieldState) getCell(fp *fieldPath) cell {
 	x := s
-	for i := 0; i <= fp.last; i++ {
-		z := fp.path[i]
+	for i := int32(0); i <= fp.last; i++ {
+		z := int(fp.path[i])
 		if len(x.state) < z+2 {
 			return cell{}
 		}
@@ -183,8 +183,8 @@ func (s *fieldState) getCell(fp *fieldPath) cell {
 
 func (s *fieldState) set(fp *fieldPath, c cell) {
 	x := s
-	for i := 0; i <= fp.last; i++ {
-		z := fp.path[i]
+	for i := int32(0); i <= fp.last; i++ {
+		z := int(fp.path[i])
 		if y := len(x.state); y < z+2 {
 			grown := make([]cell, max(z+2, y*2))
 			copy(grown, x.state)

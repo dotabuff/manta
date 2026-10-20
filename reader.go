@@ -416,8 +416,8 @@ func (r *reader) readUBitVarFP() uint32 {
 	return uint32(v>>4) & 0x7FFFFFFF
 }
 
-func (r *reader) readUBitVarFieldPath() int {
-	return int(r.readUBitVarFP())
+func (r *reader) readUBitVarFieldPath() int32 {
+	return int32(r.readUBitVarFP())
 }
 
 // readStringN reads a string of a given length
