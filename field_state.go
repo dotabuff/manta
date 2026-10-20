@@ -2,6 +2,7 @@ package manta
 
 import (
 	"math"
+	"slices"
 	"unsafe"
 )
 
@@ -39,6 +40,11 @@ type cell struct {
 	ptr  unsafe.Pointer
 	num  uint32
 	kind cellKind
+
+	// shared marks a vector or blob whose backing array is shared with the
+	// class baseline template (and so with every entity cloned from it); see
+	// clone. iface hands out copies of shared values.
+	shared bool
 }
 
 func floatCell(f float32) cell   { return cell{num: math.Float32bits(f), kind: cellFloat32} }
@@ -133,8 +139,14 @@ func (c cell) iface() interface{} {
 	case cellString:
 		return unsafe.String((*byte)(c.ptr), c.num)
 	case cellFloats:
+		if c.shared {
+			return slices.Clone(c.floats())
+		}
 		return c.floats()
 	case cellBytes:
+		if c.shared {
+			return slices.Clone(c.bytes())
+		}
 		return c.bytes()
 	case cellUint64Box:
 		return *(*uint64)(c.ptr)
@@ -206,10 +218,12 @@ func (s *fieldState) set(fp *fieldPath, c cell) {
 
 // clone returns a deep copy of the fieldState so an entity cloned from a cached
 // class baseline can be mutated independently of the template and its siblings.
-// Nested fieldStates are copied recursively. Mutable leaf values (vector
-// []float32 and binary-blob []byte) are also deep-copied, since a caller may
-// mutate a slice returned from Entity.Get/Map; strings and boxed integers are
-// immutable and shared by value.
+// Nested fieldStates are copied recursively. Leaf values are shared: strings
+// and boxed integers are immutable, and vector ([]float32) and binary-blob
+// ([]byte) leaves are marked shared, so Entity.Get/Map hand out a copy of them
+// rather than the backing array every clone of the template points at; a
+// caller mutating a returned slice therefore cannot corrupt the template or
+// sibling entities. Decoding a new value replaces the cell (and its mark).
 //
 // The copy is carved from two slab allocations (one []fieldState, one []cell)
 // sized by a counting pre-pass, instead of allocating a struct and a cell
@@ -261,10 +275,8 @@ func (s *fieldState) cloneInto(dst *fieldState, a *cloneArena) {
 			a.states = a.states[1:]
 			(*fieldState)(c.ptr).cloneInto(sub, a)
 			c.ptr = unsafe.Pointer(sub)
-		case cellFloats:
-			*c = floatsCell(append([]float32(nil), c.floats()...))
-		case cellBytes:
-			*c = bytesCell(append([]byte(nil), c.bytes()...))
+		case cellFloats, cellBytes:
+			c.shared = true
 		}
 	}
 }
