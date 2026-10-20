@@ -30,9 +30,10 @@ func (r *reader) reset(buf []byte) {
 	r.bitCount = 0
 }
 
-// remBits calculates the number of unread bits in the buffer
+// remBits calculates the number of unread bits in the buffer, including the
+// bits already buffered in the accumulator.
 func (r *reader) remBits() uint32 {
-	return r.remBytes() + r.bitCount
+	return r.remBytes()*8 + r.bitCount
 }
 
 func (r *reader) position() string {

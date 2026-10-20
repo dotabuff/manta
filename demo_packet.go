@@ -87,9 +87,11 @@ func (p *Parser) processDemoPacket(data []byte) error {
 	arena := p.packetArena[:0]
 
 	// Read all messages from the buffer. Messages are packed serially as
-	// {type, size, data}. We keep reading until until less than a byte remains.
+	// {type, size, data}. We keep reading until less than a byte remains. This
+	// counts the bits already buffered in the reader's accumulator: the word
+	// refill can pull whole trailing messages in, leaving r.remBytes() at zero.
 	r := newReader(data)
-	for r.remBytes() > 0 {
+	for r.remBits() >= 8 {
 		t := int32(r.readUBitVar())
 		size := r.readVarUint32()
 		start := len(arena)
