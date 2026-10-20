@@ -375,3 +375,64 @@ func TestReaderReadBytesIntoMatchesReference(t *testing.T) {
 		}
 	}
 }
+
+// refReadBitsAsBytes is readBitsAsBytes as written before it copied whole
+// bytes with readBytesInto.
+func refReadBitsAsBytes(r *reader, n uint32) []byte {
+	tmp := make([]byte, (n+7)/8)
+	i := 0
+	for n >= 32 {
+		binary.LittleEndian.PutUint32(tmp[i:], r.readBits(32))
+		i += 4
+		n -= 32
+	}
+	for n >= 8 {
+		tmp[i] = r.readByte()
+		i++
+		n -= 8
+	}
+	if n > 0 {
+		tmp[i] = byte(r.readBits(n))
+	}
+	return tmp
+}
+
+// TestReaderReadBitsAsBytesMatchesReference checks readBitsAsBytes against the
+// reference at random bit offsets and bit lengths, including overruns.
+func TestReaderReadBitsAsBytesMatchesReference(t *testing.T) {
+	rng := rand.New(rand.NewSource(1))
+	call := func(f func(*reader, uint32) []byte, r *reader, n uint32) (b []byte, panicked bool) {
+		defer func() { panicked = recover() != nil }()
+		return f(r, n), false
+	}
+	for trial := 0; trial < 20000; trial++ {
+		buf := make([]byte, rng.Intn(48))
+		rng.Read(buf)
+		skip := uint32(0)
+		if len(buf) > 0 {
+			skip = uint32(rng.Intn(len(buf)*8 + 1))
+		}
+		n := uint32(rng.Intn(len(buf)*8 + 16))
+		ra, rb := readerAtBit(buf, skip), readerAtBit(buf, skip)
+		a, pa := call((*reader).readBitsAsBytes, ra, n)
+		b, pb := call(refReadBitsAsBytes, rb, n)
+		if pa != pb {
+			t.Fatalf("buf=%x skip=%d n=%d: panicked=%v, reference panicked=%v", buf, skip, n, pa, pb)
+		}
+		if pa {
+			continue
+		}
+		if string(a) != string(b) {
+			t.Fatalf("buf=%x skip=%d n=%d: got %x, want %x", buf, skip, n, a, b)
+		}
+		if x, y := ra.pos*8-ra.bitCount, rb.pos*8-rb.bitCount; x != y {
+			t.Fatalf("buf=%x skip=%d n=%d: consumed to bit %d, want %d", buf, skip, n, x, y)
+		}
+		if rem := ra.remBits(); rem > 0 {
+			k := min(rem, 32)
+			if x, y := ra.readBits(k), rb.readBits(k); x != y {
+				t.Fatalf("buf=%x skip=%d n=%d: follow-up read %x, want %x", buf, skip, n, x, y)
+			}
+		}
+	}
+}

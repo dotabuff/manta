@@ -523,22 +523,14 @@ func (r *reader) read3BitNormal() []float32 {
 // readBitsAsBytes reads the given number of bits in groups of bytes
 func (r *reader) readBitsAsBytes(n uint32) []byte {
 	// Allocate the exact result size up front (the caller retains the slice, so
-	// a fresh allocation is required) and fill a 32-bit word at a time instead
-	// of growing a cap-0 slice byte by byte.
+	// a fresh allocation is required), copy the whole bytes with readBytesInto
+	// (bits are LSB-first, so they are the same bytes readBits(8) would give),
+	// then read the trailing partial byte.
 	tmp := make([]byte, (n+7)/8)
-	i := 0
-	for n >= 32 {
-		binary.LittleEndian.PutUint32(tmp[i:], r.readBits(32))
-		i += 4
-		n -= 32
-	}
-	for n >= 8 {
-		tmp[i] = r.readByte()
-		i++
-		n -= 8
-	}
-	if n > 0 {
-		tmp[i] = byte(r.readBits(n))
+	whole := n / 8
+	r.readBytesInto(tmp[:whole])
+	if rem := n % 8; rem > 0 {
+		tmp[whole] = byte(r.readBits(rem))
 	}
 	return tmp
 }
