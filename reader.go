@@ -77,9 +77,23 @@ var readBitMasks = func() [65]uint64 {
 // bytes remain, falling back to byte-at-a-time only for the final bytes of the
 // buffer. Every read is <= 32 bits (quantized float decoders are asserted to
 // stay within that), so a single word refill always yields enough bits. The
-// loaded word is masked to the whole bytes of headroom before being merged so
-// no unclaimed (partial-byte) bits are left above bitCount.
+// refill lives out of line in fill so this fast path stays small enough to be
+// inlined into its (many, hot) callers.
 func (r *reader) readBits(n uint32) uint32 {
+	if n > r.bitCount {
+		r.fill(n)
+	}
+	x := r.bitVal
+	r.bitVal = x >> n
+	r.bitCount -= n
+	return uint32(x) & (1<<n - 1)
+}
+
+// fill tops up the accumulator until at least n bits are buffered, panicking
+// (via nextByte) if the buffer runs out first. The loaded word is masked to
+// the whole bytes of headroom before being merged so no unclaimed
+// (partial-byte) bits are left above bitCount.
+func (r *reader) fill(n uint32) {
 	for n > r.bitCount && r.pos+8 <= r.size {
 		w := binary.LittleEndian.Uint64(r.buf[r.pos:])
 		free := (64 - r.bitCount) >> 3 // whole bytes of accumulator headroom
@@ -92,12 +106,6 @@ func (r *reader) readBits(n uint32) uint32 {
 		r.bitVal |= uint64(r.nextByte()) << r.bitCount
 		r.bitCount += 8
 	}
-
-	x := r.bitVal & readBitMasks[n]
-	r.bitVal >>= n
-	r.bitCount -= n
-
-	return uint32(x)
 }
 
 // peekBits returns the next n (<= 32) bits without consuming them, refilling the
@@ -106,6 +114,15 @@ func (r *reader) readBits(n uint32) uint32 {
 // This is required by the field-path op lookup, which inspects a fixed window
 // that can extend past the final op near the end of the stream.
 func (r *reader) peekBits(n uint32) uint32 {
+	if n > r.bitCount {
+		r.fillPeek(n)
+	}
+	return uint32(r.bitVal & (1<<n - 1))
+}
+
+// fillPeek is fill for peekBits: it stops at the end of the buffer instead of
+// panicking, leaving the missing high bits zero.
+func (r *reader) fillPeek(n uint32) {
 	for n > r.bitCount && r.pos+8 <= r.size {
 		w := binary.LittleEndian.Uint64(r.buf[r.pos:])
 		free := (64 - r.bitCount) >> 3
@@ -118,8 +135,6 @@ func (r *reader) peekBits(n uint32) uint32 {
 		r.bitVal |= uint64(r.nextByte()) << r.bitCount
 		r.bitCount += 8
 	}
-
-	return uint32(r.bitVal & readBitMasks[n])
 }
 
 // skipBits discards n bits already buffered in the accumulator. It panics if
@@ -129,10 +144,18 @@ func (r *reader) peekBits(n uint32) uint32 {
 // bitCount underflow and the field-path decode spin on garbage.
 func (r *reader) skipBits(n uint32) {
 	if n > r.bitCount {
-		_panicf("skipBits: insufficient buffer (need %d, have %d bits)", n, r.bitCount)
+		r.skipUnderflow(n)
 	}
 	r.bitVal >>= n
 	r.bitCount -= n
+}
+
+// skipUnderflow reports a skipBits past the buffered bits. It is kept out of
+// line so skipBits stays inlinable.
+//
+//go:noinline
+func (r *reader) skipUnderflow(n uint32) {
+	_panicf("skipBits: insufficient buffer (need %d, have %d bits)", n, r.bitCount)
 }
 
 // realign discards the whole bytes the word refill buffered in the accumulator
@@ -282,7 +305,13 @@ func (r *reader) readVarInt64() int64 {
 
 // readBoolean reads and interprets single bit as true or false
 func (r *reader) readBoolean() bool {
-	return r.readBits(1) == 1
+	if r.bitCount == 0 {
+		r.fill(1)
+	}
+	b := r.bitVal&1 != 0
+	r.bitVal >>= 1
+	r.bitCount--
+	return b
 }
 
 // readFloat reads an IEEE 754 float
