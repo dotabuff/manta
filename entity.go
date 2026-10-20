@@ -56,14 +56,15 @@ type Entity struct {
 	state  *fieldState
 }
 
-// newEntity returns a new entity for the given index, serial and class
-func newEntity(index, serial int32, class *class) *Entity {
+// newEntity returns a new entity for the given index, serial, class and
+// initial state
+func newEntity(index, serial int32, class *class, state *fieldState) *Entity {
 	return &Entity{
 		index:  index,
 		serial: serial,
 		class:  class,
 		active: true,
-		state:  newFieldState(),
+		state:  state,
 	}
 }
 
@@ -283,8 +284,7 @@ func (p *Parser) processPacketEntities(entityData []byte, updatedEntries int32, 
 					p.classBaselineStates[classId] = baseline
 				}
 
-				e = newEntity(index, serial, class)
-				e.state = baseline.clone()
+				e = newEntity(index, serial, class, baseline.clone())
 				p.entities[index] = e
 				p.fpBuf = readFields(r, class.serializer, e.state, p.fpBuf)
 				op = EntityOpCreated | EntityOpEntered

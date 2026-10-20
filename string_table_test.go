@@ -143,10 +143,10 @@ func TestParseStringTableCreate(t *testing.T) {
 
 		// Verify the first and last entries
 		if s.firstItem != nil {
-			assert.Equal(s.firstItem, items[0], s.tableName)
+			assert.Equal(s.firstItem, &items[0], s.tableName)
 		}
 		if s.lastItem != nil {
-			assert.Equal(s.lastItem, items[len(items)-1], s.tableName)
+			assert.Equal(s.lastItem, &items[len(items)-1], s.tableName)
 		}
 	}
 }

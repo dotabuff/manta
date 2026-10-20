@@ -15,7 +15,7 @@ func (p *Parser) OnModifierTableEntry(fn ModifierTableEntryHandler) {
 
 // emitModifierTableEvents emits ModifierBuffTableEntry events
 // from the given string table items.
-func (p *Parser) emitModifierTableEvents(items []*stringTableItem) error {
+func (p *Parser) emitModifierTableEvents(items []stringTableItem) error {
 	// Nothing to do if no consumer is listening; avoid the per-item proto
 	// allocation + unmarshal entirely. This is the common case (e.g. the
 	// benchmark and any parse that doesn't register OnModifierTableEntry).

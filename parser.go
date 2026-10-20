@@ -51,7 +51,7 @@ type Parser struct {
 	isStopping                 bool
 	modifierTableEntryHandlers []ModifierTableEntryHandler
 	serializers                map[string]*serializer
-	pendingMsgBuf              pendingMessages
+	pendingMsgBuf              []pendingMessage
 	packetArena                []byte
 	snappyScratch              []byte
 	entityReader               reader

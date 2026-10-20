@@ -111,8 +111,8 @@ func (p *Parser) onCSVCMsg_CreateStringTable(m *dota.CSVCMsg_CreateStringTable) 
 	}
 
 	// Insert the items into the table
-	for _, item := range items {
-		t.Items[item.Index] = item
+	for i := range items {
+		t.Items[items[i].Index] = &items[i]
 	}
 
 	// Add the table to the parser state
@@ -161,7 +161,8 @@ func (p *Parser) processUpdateStringTable(tableId, numChanged int32, data []byte
 	}
 
 	// Apply the updates to the parser state
-	for _, item := range items {
+	for i := range items {
+		item := &items[i]
 		if existing, ok := t.Items[item.Index]; ok {
 			if item.Key != "" && item.Key != existing.Key {
 				existing.Key = item.Key
@@ -189,8 +190,9 @@ func (p *Parser) processUpdateStringTable(tableId, numChanged int32, data []byte
 	return nil
 }
 
-// Parse a string table data blob, returning a list of item updates.
-func parseStringTable(buf []byte, numUpdates int32, name string, userDataFixed bool, userDataSizeBits int32, flags int32, varintBitCounts bool) (items []*stringTableItem, err error) {
+// Parse a string table data blob, returning a list of item updates. Callers
+// that retain an item keep a pointer into the returned slice.
+func parseStringTable(buf []byte, numUpdates int32, name string, userDataFixed bool, userDataSizeBits int32, flags int32, varintBitCounts bool) (items []stringTableItem, err error) {
 	// Surface a decode failure instead of silently returning a partially
 	// populated table, matching clarity's fail-loud behaviour. On healthy
 	// replays this never fires.
@@ -200,16 +202,15 @@ func parseStringTable(buf []byte, numUpdates int32, name string, userDataFixed b
 		}
 	}()
 
-	// Preallocate the result and back the items with a single slab so a large
-	// update costs two allocations instead of one per item plus append growth.
-	// The cap is bounded so a corrupt numUpdates cannot trigger a huge
-	// allocation; append simply grows past it if a table is legitimately larger.
+	// Preallocate the result so a large update costs one allocation instead of
+	// one per item plus append growth. The cap is bounded so a corrupt
+	// numUpdates cannot trigger a huge allocation; append simply grows past it
+	// if a table is legitimately larger.
 	prealloc := int(numUpdates)
 	if prealloc > 4096 {
 		prealloc = 4096
 	}
-	items = make([]*stringTableItem, 0, prealloc)
-	slab := make([]stringTableItem, 0, prealloc)
+	items = make([]stringTableItem, 0, prealloc)
 
 	// Create a reader for the buffer
 	r := newReader(buf)
@@ -327,12 +328,7 @@ func parseStringTable(buf []byte, numUpdates int32, name string, userDataFixed b
 			}
 		}
 
-		// Append to the slab and take the address of the slab element. If the
-		// slab regrows, previously taken pointers keep referencing the old
-		// backing array; that is safe because items are only ever read and
-		// mutated through those pointers, never through the slab again.
-		slab = append(slab, stringTableItem{index, key, value})
-		items = append(items, &slab[len(slab)-1])
+		items = append(items, stringTableItem{index, key, value})
 	}
 
 	return items, nil
