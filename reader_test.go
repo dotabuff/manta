@@ -203,3 +203,112 @@ func rewindBytes(r *reader, n uint32) {
 	r.bitCount = 0
 	r.bitVal = 0
 }
+
+// Reference implementations of the variable-length integer reads, as they were
+// written before decoding straight from the accumulator: one readByte per
+// varint byte and one readBoolean/readBits per flag group.
+func refReadVarUint32(r *reader) uint32 {
+	var x, s uint32
+	for {
+		b := uint32(r.readByte())
+		x |= (b & 0x7F) << s
+		s += 7
+		if ((b & 0x80) == 0) || (s == 35) {
+			break
+		}
+	}
+	return x
+}
+
+func refReadUBitVar(r *reader) uint32 {
+	ret := r.readBits(6)
+	switch ret & 0x30 {
+	case 16:
+		ret = (ret & 15) | (r.readBits(4) << 4)
+	case 32:
+		ret = (ret & 15) | (r.readBits(8) << 4)
+	case 48:
+		ret = (ret & 15) | (r.readBits(28) << 4)
+	}
+	return ret
+}
+
+func refReadUBitVarFP(r *reader) uint32 {
+	if r.readBoolean() {
+		return r.readBits(2)
+	}
+	if r.readBoolean() {
+		return r.readBits(4)
+	}
+	if r.readBoolean() {
+		return r.readBits(10)
+	}
+	if r.readBoolean() {
+		return r.readBits(17)
+	}
+	return r.readBits(31)
+}
+
+// TestReaderVarLengthMatchesReference checks readVarUint32, readUBitVar and
+// readUBitVarFP against the reference implementations on random buffers at
+// random bit offsets, including reads that run off the end of the buffer
+// (both must panic). Results, the logical bits consumed and a follow-up read
+// must agree; byte-aligned varints must also leave pos exact.
+func TestReaderVarLengthMatchesReference(t *testing.T) {
+	rng := rand.New(rand.NewSource(1))
+	type pair struct {
+		name     string
+		fast     func(*reader) uint32
+		ref      func(*reader) uint32
+		exactPos bool // compare pos/bitCount exactly when byte aligned
+	}
+	pairs := []pair{
+		{"readVarUint32", (*reader).readVarUint32, refReadVarUint32, true},
+		{"readUBitVar", (*reader).readUBitVar, refReadUBitVar, false},
+		{"readUBitVarFP", (*reader).readUBitVarFP, refReadUBitVarFP, false},
+	}
+
+	call := func(f func(*reader) uint32, r *reader) (v uint32, panicked bool) {
+		defer func() { panicked = recover() != nil }()
+		return f(r), false
+	}
+
+	for _, pr := range pairs {
+		for trial := 0; trial < 20000; trial++ {
+			buf := make([]byte, rng.Intn(24))
+			for i := range buf {
+				// Bias towards set high bits so long varints are common.
+				buf[i] = byte(rng.Intn(256)) | byte(rng.Intn(2)<<7)
+			}
+			skip := uint32(0)
+			if len(buf) > 0 {
+				skip = uint32(rng.Intn(len(buf)*8 + 1))
+			}
+			ra, rb := readerAtBit(buf, skip), readerAtBit(buf, skip)
+
+			va, pa := call(pr.fast, ra)
+			vb, pb := call(pr.ref, rb)
+			if pa != pb {
+				t.Fatalf("%s buf=%x skip=%d: panicked=%v, reference panicked=%v", pr.name, buf, skip, pa, pb)
+			}
+			if pa {
+				continue
+			}
+			if va != vb {
+				t.Fatalf("%s buf=%x skip=%d: got %d, want %d", pr.name, buf, skip, va, vb)
+			}
+			if a, b := ra.pos*8-ra.bitCount, rb.pos*8-rb.bitCount; a != b {
+				t.Fatalf("%s buf=%x skip=%d: consumed to bit %d, want %d", pr.name, buf, skip, a, b)
+			}
+			if pr.exactPos && skip%8 == 0 && (ra.pos != rb.pos || ra.bitCount != rb.bitCount) {
+				t.Fatalf("%s buf=%x skip=%d: aligned pos/bitCount %d/%d, want %d/%d", pr.name, buf, skip, ra.pos, ra.bitCount, rb.pos, rb.bitCount)
+			}
+			if rem := ra.remBits(); rem > 0 {
+				n := min(rem, 32)
+				if a, b := ra.readBits(n), rb.readBits(n); a != b {
+					t.Fatalf("%s buf=%x skip=%d: follow-up read %x, want %x", pr.name, buf, skip, a, b)
+				}
+			}
+		}
+	}
+}

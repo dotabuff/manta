@@ -255,6 +255,27 @@ func (r *reader) readLeUint64() uint64 {
 
 // readVarUint64 reads an unsigned 32-bit varint
 func (r *reader) readVarUint32() uint32 {
+	// Unaligned (the common case inside entity and packet bitstreams), each
+	// byte would go through readBits(8). Peek up to five bytes from the
+	// accumulator at once instead and consume only the bytes the varint used:
+	// the same bits, in the same order. The aligned path below reads straight
+	// from the buffer and keeps the reader's exact pos.
+	if r.bitCount&7 != 0 {
+		if r.bitCount < 40 {
+			r.fillPeek(40)
+		}
+		v := r.bitVal
+		var x uint32
+		for i := uint32(0); ; i++ {
+			b := uint32(v>>(8*i)) & 0xFF
+			x |= (b & 0x7F) << (7 * i)
+			if b&0x80 == 0 || i == 4 {
+				r.skipBits(8 * (i + 1))
+				return x
+			}
+		}
+	}
+
 	var x, s uint32
 	for {
 		b := uint32(r.readByte())
@@ -322,38 +343,57 @@ func (r *reader) readFloat() float32 {
 
 // readUBitVar reads a variable length uint32 with encoding in last to bits of 6 bit group
 func (r *reader) readUBitVar() uint32 {
-	ret := r.readBits(6)
+	// A 6-bit group whose top two bits select 0, 4, 8 or 28 more bits (at most
+	// 34 in all). Peek the longest form at once and consume only what was used.
+	if r.bitCount < 34 {
+		r.fillPeek(34)
+	}
+	v := r.bitVal
+	ret := uint32(v) & 0x3F
 
 	switch ret & 0x30 {
 	case 16:
-		ret = (ret & 15) | (r.readBits(4) << 4)
-		break
+		r.skipBits(10)
+		return (ret & 15) | (uint32(v>>6)&0xF)<<4
 	case 32:
-		ret = (ret & 15) | (r.readBits(8) << 4)
-		break
+		r.skipBits(14)
+		return (ret & 15) | (uint32(v>>6)&0xFF)<<4
 	case 48:
-		ret = (ret & 15) | (r.readBits(28) << 4)
-		break
+		r.skipBits(34)
+		return (ret & 15) | (uint32(v>>6)&0xFFFFFFF)<<4
 	}
 
+	r.skipBits(6)
 	return ret
 }
 
 // readUBitVarFP reads a variable length uint32 encoded using fieldpath encoding
 func (r *reader) readUBitVarFP() uint32 {
-	if r.readBoolean() {
-		return r.readBits(2)
+	// Up to four flag bits select a 2, 4, 10, 17 or 31-bit value (at most 35
+	// bits in all). Peek the longest form at once and consume only what was
+	// used, rather than testing each flag with its own readBoolean.
+	if r.bitCount < 35 {
+		r.fillPeek(35)
 	}
-	if r.readBoolean() {
-		return r.readBits(4)
+	v := r.bitVal
+
+	switch {
+	case v&1 != 0:
+		r.skipBits(3)
+		return uint32(v>>1) & 0x3
+	case v&2 != 0:
+		r.skipBits(6)
+		return uint32(v>>2) & 0xF
+	case v&4 != 0:
+		r.skipBits(13)
+		return uint32(v>>3) & 0x3FF
+	case v&8 != 0:
+		r.skipBits(21)
+		return uint32(v>>4) & 0x1FFFF
 	}
-	if r.readBoolean() {
-		return r.readBits(10)
-	}
-	if r.readBoolean() {
-		return r.readBits(17)
-	}
-	return r.readBits(31)
+
+	r.skipBits(35)
+	return uint32(v>>4) & 0x7FFFFFFF
 }
 
 func (r *reader) readUBitVarFieldPath() int {
