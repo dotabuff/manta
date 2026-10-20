@@ -54,19 +54,23 @@ type Entity struct {
 	serial int32
 	class  *class
 	active bool
-	state  *fieldState
+
+	// state is the root field state, held inline so creating an entity
+	// allocates only its root cell array.
+	state fieldState
 }
 
-// newEntity returns a new entity for the given index, serial, class and
-// initial state
-func newEntity(index, serial int32, class *class, state *fieldState) *Entity {
-	return &Entity{
+// newEntity returns a new entity for the given index, serial and class, with
+// its state cloned from the class baseline template
+func newEntity(index, serial int32, class *class, baseline *fieldState) *Entity {
+	e := &Entity{
 		index:  index,
 		serial: serial,
 		class:  class,
 		active: true,
-		state:  state,
 	}
+	baseline.cloneTo(&e.state)
+	return e
 }
 
 // String returns a human identifiable string for the Entity
@@ -77,7 +81,7 @@ func (e *Entity) String() string {
 // Map returns a map of current entity state as key-value pairs
 func (e *Entity) Map() map[string]interface{} {
 	values := make(map[string]interface{})
-	for _, fp := range e.class.getFieldPaths(newFieldPath(), e.state) {
+	for _, fp := range e.class.getFieldPaths(newFieldPath(), &e.state) {
 		values[e.class.getNameForFieldPath(fp)] = e.state.get(fp)
 	}
 	return values
@@ -304,9 +308,9 @@ func (p *Parser) processPacketEntities(entityData []byte, updatedEntries int32, 
 					p.classBaselineStates[classId] = baseline
 				}
 
-				e = newEntity(index, serial, class, baseline.clone())
+				e = newEntity(index, serial, class, baseline)
 				p.entities[index] = e
-				p.fpBuf = readFields(r, class.serializer, e.state, p.fpBuf)
+				p.fpBuf = readFields(r, class.serializer, &e.state, p.fpBuf)
 				op = EntityOpCreated | EntityOpEntered
 
 			} else {
@@ -320,7 +324,7 @@ func (p *Parser) processPacketEntities(entityData []byte, updatedEntries int32, 
 					op |= EntityOpEntered
 				}
 
-				p.fpBuf = readFields(r, e.class.serializer, e.state, p.fpBuf)
+				p.fpBuf = readFields(r, e.class.serializer, &e.state, p.fpBuf)
 			}
 
 		} else {

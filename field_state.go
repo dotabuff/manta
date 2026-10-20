@@ -246,7 +246,15 @@ func (s *fieldState) share() {
 // nothing a clone exposes or modifies aliases template storage, and an entity
 // pays only for the parts of the baseline it actually changes.
 func (s *fieldState) clone() *fieldState {
-	return &fieldState{state: slices.Clone(s.state)}
+	c := &fieldState{}
+	s.cloneTo(c)
+	return c
+}
+
+// cloneTo is clone into an existing root, such as the state held inline in
+// an Entity.
+func (s *fieldState) cloneTo(dst *fieldState) {
+	dst.state = slices.Clone(s.state)
 }
 
 func max(a, b int) int {
