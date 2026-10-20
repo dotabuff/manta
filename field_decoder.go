@@ -86,6 +86,17 @@ func floatFactory(f *field) fieldDecoder {
 
 func quantizedFactory(f *field) fieldDecoder {
 	qfd := newQuantizedFloatDecoder(f.bitCount, f.encodeFlags, f.lowValue, f.highValue)
+
+	// With no round/zero flags left, decode is just the scaled read: do it
+	// directly rather than through decode's flag checks and an extra call.
+	// The expression is decode's own, so results are bit-identical.
+	if qfd.Flags&(qff_rounddown|qff_roundup|qff_encode_zero) == 0 {
+		low, high, bitcount, decMul := qfd.Low, qfd.High, qfd.Bitcount, qfd.DecMul
+		return func(r *reader) cell {
+			return floatCell(low + (high-low)*float32(r.readBits(bitcount))*decMul)
+		}
+	}
+
 	return func(r *reader) cell {
 		return floatCell(qfd.decode(r))
 	}

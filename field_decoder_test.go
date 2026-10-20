@@ -3,6 +3,7 @@ package manta
 import (
 	"encoding/binary"
 	"math"
+	"math/rand"
 	"testing"
 	"unsafe"
 
@@ -167,5 +168,44 @@ func TestFixed8Encoder(t *testing.T) {
 func TestFieldPathSize(t *testing.T) {
 	if n := unsafe.Sizeof(fieldPath{}); n != 32 {
 		t.Fatalf("fieldPath is %d bytes, want 32", n)
+	}
+}
+
+// TestQuantizedFactoryMatchesDecode verifies the quantized float decoders built
+// by quantizedFactory (including the unflagged fast path) are bit-identical to
+// quantizedFloatDecoder.decode, across bit counts, flags and ranges.
+func TestQuantizedFactoryMatchesDecode(t *testing.T) {
+	rng := rand.New(rand.NewSource(1))
+	ranges := [][2]float32{{0, 1}, {-1, 1}, {0, 4096}, {-16384, 16384}, {0.5, 3}, {-256, 0}, {0, 102.3}}
+	tested := 0
+	for bc := int32(1); bc < 32; bc++ {
+		for flags := int32(0); flags < 16; flags++ {
+			for _, lh := range ranges {
+				bitCount, encodeFlags, low, high := bc, flags, lh[0], lh[1]
+				qfd, f, ok := func() (q *quantizedFloatDecoder, d fieldDecoder, ok bool) {
+					defer func() { ok = recover() == nil }()
+					q = newQuantizedFloatDecoder(&bitCount, &encodeFlags, &low, &high)
+					d = quantizedFactory(&field{bitCount: &bitCount, encodeFlags: &encodeFlags, lowValue: &low, highValue: &high})
+					return q, d, true
+				}()
+				if !ok {
+					continue // invalid flag combination
+				}
+				for trial := 0; trial < 16; trial++ {
+					buf := make([]byte, 8)
+					rng.Read(buf)
+					ra, rb := newReader(buf), newReader(buf)
+					got := f(ra)
+					want := floatCell(qfd.decode(rb))
+					if got != want || ra.pos*8-ra.bitCount != rb.pos*8-rb.bitCount {
+						t.Fatalf("bc=%d flags=%d range=%v buf=%x: got %v, want %v", bc, flags, lh, buf, got.iface(), want.iface())
+					}
+				}
+				tested++
+			}
+		}
+	}
+	if tested < 1000 {
+		t.Fatalf("only %d decoder configurations tested", tested)
 	}
 }
