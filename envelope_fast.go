@@ -26,13 +26,13 @@ import (
 // (p.packetArena), which is stable for the duration of the packet's dispatch
 // loop; both are fully consumed before the handler returns (string-table
 // values are copied out by readBitsAsBytes/readString). CDemoPacket.data
-// aliases the outer-message buffer, which is stable until the next
-// readOuterMessage; processDemoPacket copies message bodies into the arena
-// before dispatching.
+// (including the packet nested in a CDemoFullPacket) aliases the
+// outer-message buffer, which is stable until the next readOuterMessage;
+// processDemoPacket copies message bodies into the arena before dispatching.
 
 // dispatchDemo routes an outer demo message, taking the fast envelope path
-// for CDemoPacket/CDemoSignonPacket when only the internal handler is
-// registered.
+// for CDemoPacket/CDemoSignonPacket/CDemoFullPacket when only the internal
+// handler is registered.
 func (p *Parser) dispatchDemo(t int32, buf []byte) error {
 	switch t {
 	case int32(dota.EDemoCommands_DEM_Packet):
@@ -42,6 +42,10 @@ func (p *Parser) dispatchDemo(t int32, buf []byte) error {
 	case int32(dota.EDemoCommands_DEM_SignonPacket):
 		if len(p.Callbacks.onCDemoSignonPacket) == 1 {
 			return p.fastDemoPacket(buf)
+		}
+	case int32(dota.EDemoCommands_DEM_FullPacket):
+		if len(p.Callbacks.onCDemoFullPacket) == 1 {
+			return p.fastDemoFullPacket(buf)
 		}
 	}
 	return p.Callbacks.callByDemoType(t, buf)
@@ -106,17 +110,29 @@ func (p *Parser) skipGameEvent(buf []byte) bool {
 
 // fastDemoPacket decodes the CDemoPacket envelope: data = field 3 (bytes).
 func (p *Parser) fastDemoPacket(buf []byte) error {
-	var data []byte
+	data, err := demoPacketData(buf, nil)
+	if err != nil {
+		return _errorf("fastDemoPacket: %s", err)
+	}
+	return p.processDemoPacket(data)
+}
+
+// demoPacketData scans a CDemoPacket body and returns its data field (3,
+// bytes), aliasing buf. data is the value carried in from an earlier
+// occurrence of the same message (nil if none): as with protobuf's merge of a
+// repeated singular field, a later data field replaces it and a body without
+// one keeps it.
+func demoPacketData(buf, data []byte) ([]byte, error) {
 	for len(buf) > 0 {
 		num, typ, n := protowire.ConsumeTag(buf)
 		if n < 0 {
-			return _errorf("fastDemoPacket: invalid tag")
+			return nil, _errorf("invalid tag")
 		}
 		buf = buf[n:]
 		if num == 3 && typ == protowire.BytesType {
 			v, n := protowire.ConsumeBytes(buf)
 			if n < 0 {
-				return _errorf("fastDemoPacket: invalid data field")
+				return nil, _errorf("invalid data field")
 			}
 			data = v
 			buf = buf[n:]
@@ -124,11 +140,58 @@ func (p *Parser) fastDemoPacket(buf []byte) error {
 		}
 		n = protowire.ConsumeFieldValue(num, typ, buf)
 		if n < 0 {
-			return _errorf("fastDemoPacket: invalid field %d", num)
+			return nil, _errorf("invalid field %d", num)
 		}
 		buf = buf[n:]
 	}
+	return data, nil
+}
+
+// fastDemoFullPacket decodes the CDemoFullPacket envelope and processes its
+// packet exactly as onCDemoFullPacket does.
+func (p *Parser) fastDemoFullPacket(buf []byte) error {
+	data, hasPacket, err := fullPacketData(buf)
+	if err != nil {
+		return _errorf("fastDemoFullPacket: %s", err)
+	}
+	if !hasPacket {
+		return nil
+	}
 	return p.processDemoPacket(data)
+}
+
+// fullPacketData scans a CDemoFullPacket body: string_table = 1
+// (CDemoStringTables), packet = 2 (CDemoPacket). It returns the packet's data
+// and whether a packet field was present. The string-table dump is skipped
+// without decoding it, since the internal handler ignores it (see
+// onCDemoStringTables); fully unmarshaling it allocated a message, key and
+// value per string-table item on every full packet.
+func fullPacketData(buf []byte) (data []byte, hasPacket bool, err error) {
+	for len(buf) > 0 {
+		num, typ, n := protowire.ConsumeTag(buf)
+		if n < 0 {
+			return nil, false, _errorf("invalid tag")
+		}
+		buf = buf[n:]
+		if num == 2 && typ == protowire.BytesType {
+			v, n := protowire.ConsumeBytes(buf)
+			if n < 0 {
+				return nil, false, _errorf("invalid packet field")
+			}
+			if data, err = demoPacketData(v, data); err != nil {
+				return nil, false, _errorf("packet: %s", err)
+			}
+			hasPacket = true
+			buf = buf[n:]
+			continue
+		}
+		n = protowire.ConsumeFieldValue(num, typ, buf)
+		if n < 0 {
+			return nil, false, _errorf("invalid field %d", num)
+		}
+		buf = buf[n:]
+	}
+	return data, hasPacket, nil
 }
 
 // fastNetTick decodes the CNETMsg_Tick envelope: tick = field 1 (varint).
