@@ -157,22 +157,28 @@ func newFieldState() *fieldState {
 }
 
 func (s *fieldState) get(fp *fieldPath) interface{} {
+	return s.getCell(fp).iface()
+}
+
+// getCell returns the cell at fp, or an empty cell if fp does not resolve to
+// one.
+func (s *fieldState) getCell(fp *fieldPath) cell {
 	x := s
 	for i := 0; i <= fp.last; i++ {
 		z := fp.path[i]
 		if len(x.state) < z+2 {
-			return nil
+			return cell{}
 		}
 		if i == fp.last {
-			return x.state[z].iface()
+			return x.state[z]
 		}
 		sub, ok := x.state[z].sub()
 		if !ok {
-			return nil
+			return cell{}
 		}
 		x = sub
 	}
-	return nil
+	return cell{}
 }
 
 func (s *fieldState) set(fp *fieldPath, c cell) {
