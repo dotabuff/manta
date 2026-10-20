@@ -41,9 +41,10 @@ type cell struct {
 	num  uint32
 	kind cellKind
 
-	// shared marks a vector or blob whose backing array is shared with the
-	// class baseline template (and so with every entity cloned from it); see
-	// clone. iface hands out copies of shared values.
+	// shared marks a vector, blob or nested state owned by a class baseline
+	// template, and so shared with every entity cloned from it (see share).
+	// iface hands out copies of shared vectors and blobs, and set copies a
+	// shared nested state before writing into it.
 	shared bool
 }
 
@@ -211,74 +212,41 @@ func (s *fieldState) set(fp *fieldPath, c cell) {
 		}
 		if x.state[z].kind != cellSub {
 			x.state[z] = subCell(newFieldState())
+		} else if x.state[z].shared {
+			// First write into a nested state shared with the baseline
+			// template: copy it for this entity (copy on write). Its own
+			// nested states and leaves stay shared until written.
+			x.state[z] = subCell(&fieldState{state: slices.Clone((*fieldState)(x.state[z].ptr).state)})
 		}
 		x, _ = x.state[z].sub()
 	}
 }
 
-// clone returns a deep copy of the fieldState so an entity cloned from a cached
-// class baseline can be mutated independently of the template and its siblings.
-// Nested fieldStates are copied recursively. Leaf values are shared: strings
-// and boxed integers are immutable, and vector ([]float32) and binary-blob
-// ([]byte) leaves are marked shared, so Entity.Get/Map hand out a copy of them
-// rather than the backing array every clone of the template points at; a
-// caller mutating a returned slice therefore cannot corrupt the template or
-// sibling entities. Decoding a new value replaces the cell (and its mark).
-//
-// The copy is carved from two slab allocations (one []fieldState, one []cell)
-// sized by a counting pre-pass, instead of allocating a struct and a cell
-// array per nested state. Cell slices are cap-limited to their exact length,
-// so a later grow in set() allocates a fresh array rather than stomping a
-// neighbouring state's arena region. An entity's clone shares its slabs with
-// no other entity, so the slabs die with the entity.
-func (s *fieldState) clone() *fieldState {
-	nStates, nCells := s.cloneSize()
-	a := cloneArena{
-		states: make([]fieldState, nStates),
-		cells:  make([]cell, nCells),
-	}
-	root := &a.states[0]
-	a.states = a.states[1:]
-	s.cloneInto(root, &a)
-	return root
-}
-
-// cloneArena holds the remaining unassigned slab space during a clone.
-type cloneArena struct {
-	states []fieldState
-	cells  []cell
-}
-
-// cloneSize counts the nested states and total cells reachable from s.
-func (s *fieldState) cloneSize() (nStates, nCells int) {
-	nStates, nCells = 1, len(s.state)
+// share makes s a class baseline template for clone: every vector and blob
+// leaf and every nested state reachable from it is marked shared. s must not
+// be modified afterwards. It is called once per decoded baseline.
+func (s *fieldState) share() {
 	for i := range s.state {
-		if sub, ok := s.state[i].sub(); ok {
-			cs, cc := sub.cloneSize()
-			nStates += cs
-			nCells += cc
-		}
-	}
-	return
-}
-
-// cloneInto deep-copies s into dst, carving all nested storage from the arena.
-func (s *fieldState) cloneInto(dst *fieldState, a *cloneArena) {
-	n := len(s.state)
-	dst.state = a.cells[:n:n]
-	a.cells = a.cells[n:]
-	copy(dst.state, s.state)
-	for i := range dst.state {
-		switch c := &dst.state[i]; c.kind {
+		switch c := &s.state[i]; c.kind {
 		case cellSub:
-			sub := &a.states[0]
-			a.states = a.states[1:]
-			(*fieldState)(c.ptr).cloneInto(sub, a)
-			c.ptr = unsafe.Pointer(sub)
+			(*fieldState)(c.ptr).share()
+			c.shared = true
 		case cellFloats, cellBytes:
 			c.shared = true
 		}
 	}
+}
+
+// clone returns a copy of a baseline template (see share) for a new entity,
+// which can then be mutated independently of the template and its siblings.
+// Only the root cell array is copied. Nested states stay shared until set
+// first writes into one, which copies just that state; shared vectors and
+// blobs are handed out by iface as copies (a caller may mutate a slice
+// returned from Entity.Get/Map); strings and boxed integers are immutable. So
+// nothing a clone exposes or modifies aliases template storage, and an entity
+// pays only for the parts of the baseline it actually changes.
+func (s *fieldState) clone() *fieldState {
+	return &fieldState{state: slices.Clone(s.state)}
 }
 
 func max(a, b int) int {

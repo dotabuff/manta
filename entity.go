@@ -300,6 +300,7 @@ func (p *Parser) processPacketEntities(entityData []byte, updatedEntries int32, 
 					}
 					baseline = newFieldState()
 					p.fpBuf = readFields(newReader(raw), class.serializer, baseline, p.fpBuf)
+					baseline.share()
 					p.classBaselineStates[classId] = baseline
 				}
 
