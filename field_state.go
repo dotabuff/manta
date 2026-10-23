@@ -251,7 +251,7 @@ func (s *fieldState) clone() *fieldState {
 	return c
 }
 
-// cloneTo is clone into an existing root, such as the state held inline in
+// cloneTo is clone into an existing root, such as the state co-allocated with
 // an Entity.
 func (s *fieldState) cloneTo(dst *fieldState) {
 	dst.state = slices.Clone(s.state)

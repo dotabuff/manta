@@ -238,3 +238,14 @@ func TestEntityTypedGettersMatchGet(t *testing.T) {
 		t.Fatalf("only checked %d fields", checked)
 	}
 }
+
+// requireComparable compiles only for comparable types.
+func requireComparable[T comparable]() {}
+
+// TestEntityIsComparable guards that Entity stays a comparable type: callers may
+// compare Entity values with ==, use them as map keys, or pass them as a
+// comparable type argument, so a slice-holding field would be a breaking API
+// change. This fails to compile if Entity stops being comparable.
+func TestEntityIsComparable(t *testing.T) {
+	requireComparable[Entity]()
+}
