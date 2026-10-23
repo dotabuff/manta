@@ -305,7 +305,7 @@ func TestReaderVarLengthMatchesReference(t *testing.T) {
 				t.Fatalf("%s buf=%x skip=%d: aligned pos/bitCount %d/%d, want %d/%d", pr.name, buf, skip, ra.pos, ra.bitCount, rb.pos, rb.bitCount)
 			}
 			if rem := ra.remBits(); rem > 0 {
-				n := min(rem, 32)
+				n := uint32(min(rem, 32))
 				if a, b := ra.readBits(n), rb.readBits(n); a != b {
 					t.Fatalf("%s buf=%x skip=%d: follow-up read %x, want %x", pr.name, buf, skip, a, b)
 				}
@@ -368,7 +368,7 @@ func TestReaderReadBytesIntoMatchesReference(t *testing.T) {
 			t.Fatalf("buf=%x skip=%d n=%d: consumed to bit %d, want %d", buf, skip, n, a, b)
 		}
 		for rem := ra.remBits(); rem > 0; rem = ra.remBits() {
-			k := min(rem, uint32(1+rng.Intn(32)))
+			k := uint32(min(rem, uint64(1+rng.Intn(32))))
 			if a, b := ra.readBits(k), rb.readBits(k); a != b {
 				t.Fatalf("buf=%x skip=%d n=%d: follow-up read %x, want %x", buf, skip, n, a, b)
 			}
@@ -429,10 +429,52 @@ func TestReaderReadBitsAsBytesMatchesReference(t *testing.T) {
 			t.Fatalf("buf=%x skip=%d n=%d: consumed to bit %d, want %d", buf, skip, n, x, y)
 		}
 		if rem := ra.remBits(); rem > 0 {
-			k := min(rem, 32)
+			k := uint32(min(rem, 32))
 			if x, y := ra.readBits(k), rb.readBits(k); x != y {
 				t.Fatalf("buf=%x skip=%d n=%d: follow-up read %x, want %x", buf, skip, n, x, y)
 			}
 		}
+	}
+}
+
+// TestReaderLargeBufferOffsets reads beyond the 512 MiB mark, where a byte
+// position times 8 no longer fits in uint32. Bit positions and remaining bit
+// counts must be computed in 64 bits, or the unaligned copy reads from near the
+// start of the buffer and remBits wraps.
+func TestReaderLargeBufferOffsets(t *testing.T) {
+	if testing.Short() {
+		t.Skip("allocates a 512 MiB buffer")
+	}
+
+	const off = 1<<29 + 64
+	buf := make([]byte, off+64)
+	for i := off; i < len(buf); i++ {
+		buf[i] = byte(i*37 + 11)
+	}
+
+	if got, want := newReader(buf).remBits(), uint64(len(buf))*8; got != want {
+		t.Fatalf("remBits at start = %d, want %d", got, want)
+	}
+
+	// Jump straight to the region of interest, then go unaligned.
+	r := newReader(buf)
+	r.pos = off
+	if got := r.readBits(3); got != uint32(buf[off]&7) {
+		t.Fatalf("readBits(3) = %d, want %d", got, buf[off]&7)
+	}
+
+	dst := make([]byte, 20)
+	r.readBytesInto(dst)
+	for i := range dst {
+		if want := buf[off+i]>>3 | buf[off+i+1]<<5; dst[i] != want {
+			t.Fatalf("byte %d = %02x, want %02x", i, dst[i], want)
+		}
+	}
+
+	if got, want := r.bitPos(), uint64(off)*8+3+20*8; got != want {
+		t.Fatalf("bitPos = %d, want %d", got, want)
+	}
+	if got, want := r.remBits(), uint64(len(buf))*8-(uint64(off)*8+3+20*8); got != want {
+		t.Fatalf("remBits = %d, want %d", got, want)
 	}
 }

@@ -31,16 +31,21 @@ func (r *reader) reset(buf []byte) {
 }
 
 // remBits calculates the number of unread bits in the buffer, including the
-// bits already buffered in the accumulator.
-func (r *reader) remBits() uint32 {
-	return r.remBytes()*8 + r.bitCount
+// bits already buffered in the accumulator. Bit counts are 64-bit: a byte
+// count times 8 overflows uint32 beyond 512 MiB.
+func (r *reader) remBits() uint64 {
+	return uint64(r.remBytes())*8 + uint64(r.bitCount)
+}
+
+// bitPos returns the logical bit position consumed so far. The word-at-a-time
+// refill can buffer many bits (not just the current byte), so it is pos*8 minus
+// the still-buffered bitCount, in 64 bits like remBits.
+func (r *reader) bitPos() uint64 {
+	return uint64(r.pos)*8 - uint64(r.bitCount)
 }
 
 func (r *reader) position() string {
-	// Logical bit position consumed so far. The word-at-a-time refill can buffer
-	// many bits (not just the current byte), so derive byte.bit from pos*8 minus
-	// the still-buffered bitCount rather than assuming bitCount <= 8.
-	bits := r.pos*8 - r.bitCount
+	bits := r.bitPos()
 	if rem := bits % 8; rem != 0 {
 		return fmt.Sprintf("%d.%d", bits/8, rem)
 	}
@@ -224,11 +229,11 @@ func (r *reader) readBytesInto(dst []byte) {
 	// the buffer. The accumulator holds the bits starting at logical bit
 	// position p (not on a byte boundary), and they are still in buf, so output
 	// byte i is the 8 bits at p+8i, which straddle buf[p/8+i] and the next byte.
-	p := r.pos*8 - r.bitCount
-	if uint64(n)*8 > uint64(r.size)*8-uint64(p) {
-		_panicf("readBytesInto: insufficient buffer (%d bytes at bit %d of %d)", n, p, r.size*8)
+	p := r.bitPos()
+	if uint64(n)*8 > uint64(r.size)*8-p {
+		_panicf("readBytesInto: insufficient buffer (%d bytes at bit %d of %d)", n, p, uint64(r.size)*8)
 	}
-	shift := p & 7
+	shift := uint32(p & 7)
 	src := r.buf[p>>3 : r.size]
 	i := 0
 	// Eight output bytes need nine input bytes, so the word loop stops one
@@ -244,7 +249,7 @@ func (r *reader) readBytesInto(dst []byte) {
 	// Resume after the copied bytes. The position is still not byte aligned
 	// (it moved by whole bytes), so reload the rest of its byte as the
 	// accumulator, exactly as a byte-at-a-time reader would hold it.
-	end := p>>3 + n
+	end := uint32(p>>3) + n
 	r.bitVal = uint64(r.buf[end]) >> shift
 	r.bitCount = 8 - shift
 	r.pos = end + 1
