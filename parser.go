@@ -51,7 +51,7 @@ type Parser struct {
 	isStopping                 bool
 	modifierTableEntryHandlers []ModifierTableEntryHandler
 	serializers                map[string]*serializer
-	pendingMsgBuf              pendingMessages
+	pendingMsgBuf              []pendingMessage
 	packetArena                []byte
 	snappyScratch              []byte
 	entityReader               reader
@@ -64,12 +64,18 @@ type Parser struct {
 
 // Create a new parser from a byte slice.
 func NewParser(buf []byte) (*Parser, error) {
-	r := bytes.NewReader(buf)
-	return NewStreamParser(r)
+	// Outer messages are sliced directly out of buf instead of being copied
+	// through a bytes.Reader into a scratch buffer.
+	return newParser(newBufferStream(buf))
 }
 
 // Create a new Parser from an io.Reader
 func NewStreamParser(r io.Reader) (*Parser, error) {
+	return newParser(newStream(r))
+}
+
+// newParser creates a parser reading outer messages from the given stream.
+func newParser(s *stream) (*Parser, error) {
 	// Create a new parser with an internal reader for the given buffer.
 	parser := &Parser{
 		Callbacks: newCallbacks(),
@@ -88,7 +94,7 @@ func NewStreamParser(r io.Reader) (*Parser, error) {
 		gameEventTypes:      make(map[string]*gameEventType),
 		isStopping:          false,
 		serializers:         make(map[string]*serializer),
-		stream:              newStream(r),
+		stream:              s,
 		stringTables:        newStringTables(),
 	}
 

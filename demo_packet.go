@@ -1,7 +1,8 @@
 package manta
 
 import (
-	"sort"
+	"cmp"
+	"slices"
 
 	"github.com/dotabuff/manta/dota"
 )
@@ -41,19 +42,13 @@ func (m pendingMessage) priority() int {
 	return 0
 }
 
-// Provides a sortable structure for storing messages in the same packet.
-type pendingMessages []pendingMessage
-
-func (ms pendingMessages) Len() int      { return len(ms) }
-func (ms pendingMessages) Swap(i, j int) { ms[i], ms[j] = ms[j], ms[i] }
-func (ms pendingMessages) Less(i, j int) bool {
-	if ms[i].tick > ms[j].tick {
-		return false
+// comparePendingMessages orders messages in the same packet by tick, then by
+// priority.
+func comparePendingMessages(a, b pendingMessage) int {
+	if c := cmp.Compare(a.tick, b.tick); c != 0 {
+		return c
 	}
-	if ms[i].tick < ms[j].tick {
-		return true
-	}
-	return ms[i].priority() < ms[j].priority()
+	return cmp.Compare(a.priority(), b.priority())
 }
 
 // Internal parser for callback OnCDemoPacket, responsible for extracting
@@ -87,9 +82,11 @@ func (p *Parser) processDemoPacket(data []byte) error {
 	arena := p.packetArena[:0]
 
 	// Read all messages from the buffer. Messages are packed serially as
-	// {type, size, data}. We keep reading until until less than a byte remains.
+	// {type, size, data}. We keep reading until less than a byte remains. This
+	// counts the bits already buffered in the reader's accumulator: the word
+	// refill can pull whole trailing messages in, leaving r.remBytes() at zero.
 	r := newReader(data)
-	for r.remBytes() > 0 {
+	for r.remBits() >= 8 {
 		t := int32(r.readUBitVar())
 		size := r.readVarUint32()
 		start := len(arena)
@@ -104,9 +101,10 @@ func (p *Parser) processDemoPacket(data []byte) error {
 
 	// Sort messages to ensure dependencies are met. For example, we need to
 	// process string tables before game events that may reference them. A
-	// stable sort keeps equal-priority messages in their original file order
-	// and avoids the reflection allocations of sort.Sort's interface path.
-	sort.Stable(ms)
+	// stable sort keeps equal-priority messages in their original file order.
+	// The generic sort avoids boxing the slice into a sort.Interface (one
+	// allocation per packet with sort.Stable).
+	slices.SortStableFunc(ms, comparePendingMessages)
 
 	// Dispatch messages in order, stopping on handler error. dispatchPacket
 	// takes the fast envelope path for hot internal-only message types and

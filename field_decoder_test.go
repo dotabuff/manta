@@ -2,7 +2,10 @@ package manta
 
 import (
 	"encoding/binary"
+	"math"
+	"math/rand"
 	"testing"
+	"unsafe"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -60,6 +63,34 @@ func TestDecoderRepresentations(t *testing.T) {
 	fixedBuf := make([]byte, 8)
 	binary.LittleEndian.PutUint64(fixedBuf, 0x0123456789ABCDEF)
 	assert.Equal(uint64(0x0123456789ABCDEF), dec(fixed64Decoder, fixedBuf))
+
+	// 64-bit values are held inline when they fit in 32 bits and boxed
+	// otherwise; both sides of each boundary must read back exactly.
+	assert.Equal(uint64(0xFFFFFFFF), dec(unsigned64Decoder, encVarUint(0xFFFFFFFF)))
+	assert.Equal(uint64(0x100000000), dec(unsigned64Decoder, encVarUint(0x100000000)))
+	binary.LittleEndian.PutUint64(fixedBuf, 7)
+	assert.Equal(uint64(7), dec(fixed64Decoder, fixedBuf))
+	for _, v := range []int64{0, 1, -1, 2147483647, -2147483648, 2147483648, -2147483649} {
+		assert.Equal(v, dec(signed64Decoder, encVarInt(v)), "int64 %d", v)
+	}
+
+	// Reference values read back with their original type and contents.
+	assert.Equal("npc_dota_hero", dec(stringDecoder, []byte("npc_dota_hero\x00")))
+	assert.Equal("", dec(stringDecoder, []byte{0}))
+	assert.Equal([]byte{1, 2, 3}, dec(cUtlBinaryBlockDecoder, []byte{3, 1, 2, 3}))
+	assert.Equal([]byte{}, dec(cUtlBinaryBlockDecoder, []byte{0}))
+	floatBuf := make([]byte, 8)
+	binary.LittleEndian.PutUint32(floatBuf, math.Float32bits(1.5))
+	binary.LittleEndian.PutUint32(floatBuf[4:], math.Float32bits(-2))
+	assert.Equal([]float32{1.5, -2}, dec(vector2Decoder, floatBuf))
+}
+
+// TestCellSize locks the cell at 16 bytes: it is the element of every entity
+// state array, so its size scales the baseline clone and all state growth.
+func TestCellSize(t *testing.T) {
+	if n := unsafe.Sizeof(cell{}); n != 16 {
+		t.Fatalf("cell is %d bytes, want 16", n)
+	}
 }
 
 // TestValueChangingDecoderWiring locks that the field types whose representation
@@ -130,4 +161,51 @@ func TestFixed8Encoder(t *testing.T) {
 	assert.Equal(uint64(255), vec.childDecoder(r).iface())
 	assert.Equal(uint64(128), vec.childDecoder(r).iface())
 	assert.Equal(uint32(24), bitsRead(r))
+}
+
+// TestFieldPathSize locks the fieldPath at 32 bytes: readFieldPaths snapshots
+// one by value for every decoded field.
+func TestFieldPathSize(t *testing.T) {
+	if n := unsafe.Sizeof(fieldPath{}); n != 32 {
+		t.Fatalf("fieldPath is %d bytes, want 32", n)
+	}
+}
+
+// TestQuantizedFactoryMatchesDecode verifies the quantized float decoders built
+// by quantizedFactory (including the unflagged fast path) are bit-identical to
+// quantizedFloatDecoder.decode, across bit counts, flags and ranges.
+func TestQuantizedFactoryMatchesDecode(t *testing.T) {
+	rng := rand.New(rand.NewSource(1))
+	ranges := [][2]float32{{0, 1}, {-1, 1}, {0, 4096}, {-16384, 16384}, {0.5, 3}, {-256, 0}, {0, 102.3}}
+	tested := 0
+	for bc := int32(1); bc < 32; bc++ {
+		for flags := int32(0); flags < 16; flags++ {
+			for _, lh := range ranges {
+				bitCount, encodeFlags, low, high := bc, flags, lh[0], lh[1]
+				qfd, f, ok := func() (q *quantizedFloatDecoder, d fieldDecoder, ok bool) {
+					defer func() { ok = recover() == nil }()
+					q = newQuantizedFloatDecoder(&bitCount, &encodeFlags, &low, &high)
+					d = quantizedFactory(&field{bitCount: &bitCount, encodeFlags: &encodeFlags, lowValue: &low, highValue: &high})
+					return q, d, true
+				}()
+				if !ok {
+					continue // invalid flag combination
+				}
+				for trial := 0; trial < 16; trial++ {
+					buf := make([]byte, 8)
+					rng.Read(buf)
+					ra, rb := newReader(buf), newReader(buf)
+					got := f(ra)
+					want := floatCell(qfd.decode(rb))
+					if got != want || ra.pos*8-ra.bitCount != rb.pos*8-rb.bitCount {
+						t.Fatalf("bc=%d flags=%d range=%v buf=%x: got %v, want %v", bc, flags, lh, buf, got.iface(), want.iface())
+					}
+				}
+				tested++
+			}
+		}
+	}
+	if tested < 1000 {
+		t.Fatalf("only %d decoder configurations tested", tested)
+	}
 }

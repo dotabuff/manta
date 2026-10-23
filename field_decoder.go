@@ -86,6 +86,17 @@ func floatFactory(f *field) fieldDecoder {
 
 func quantizedFactory(f *field) fieldDecoder {
 	qfd := newQuantizedFloatDecoder(f.bitCount, f.encodeFlags, f.lowValue, f.highValue)
+
+	// With no round/zero flags left, decode is just the scaled read: do it
+	// directly rather than through decode's flag checks and an extra call.
+	// The expression is decode's own, so results are bit-identical.
+	if qfd.Flags&(qff_rounddown|qff_roundup|qff_encode_zero) == 0 {
+		low, high, bitcount, decMul := qfd.Low, qfd.High, qfd.Bitcount, qfd.DecMul
+		return func(r *reader) cell {
+			return floatCell(low + (high-low)*float32(r.readBits(bitcount))*decMul)
+		}
+	}
+
 	return func(r *reader) cell {
 		return floatCell(qfd.decode(r))
 	}
@@ -103,17 +114,17 @@ func vectorFactory(n int) fieldFactory {
 			for i := 0; i < n; i++ {
 				x[i] = d(r).asFloat32()
 			}
-			return refCell(x)
+			return floatsCell(x)
 		}
 	}
 }
 
 func vectorNormalDecoder(r *reader) cell {
-	return refCell(r.read3BitNormal())
+	return floatsCell(r.read3BitNormal())
 }
 
 func fixed64Decoder(r *reader) cell {
-	return refCell(r.readLeUint64())
+	return uint64Cell(r.readLeUint64())
 }
 
 func handleDecoder(r *reader) cell {
@@ -125,7 +136,7 @@ func booleanDecoder(r *reader) cell {
 }
 
 func stringDecoder(r *reader) cell {
-	return refCell(r.readString())
+	return stringCell(r.readString())
 }
 
 func defaultDecoder(r *reader) cell {
@@ -137,7 +148,7 @@ func signedDecoder(r *reader) cell {
 }
 
 func signed64Decoder(r *reader) cell {
-	return refCell(r.readVarInt64())
+	return int64Cell(r.readVarInt64())
 }
 
 // bloodTypeDecoder reads a fixed 8-bit value, matching clarity's
@@ -162,7 +173,7 @@ func cUtlBinaryBlockDecoder(r *reader) cell {
 	b := r.readBytes(n)
 	out := make([]byte, len(b))
 	copy(out, b)
-	return refCell(out)
+	return bytesCell(out)
 }
 
 func floatCoordDecoder(r *reader) cell {
@@ -191,7 +202,7 @@ func qangleFactory(f *field) fieldDecoder {
 		// Bit counts 0 and 32 carry raw 32-bit floats; otherwise bit angles.
 		if bc == 0 || bc == 32 {
 			return func(r *reader) cell {
-				return refCell([]float32{
+				return floatsCell([]float32{
 					math.Float32frombits(r.readBits(32)),
 					math.Float32frombits(r.readBits(32)),
 					0.0,
@@ -199,7 +210,7 @@ func qangleFactory(f *field) fieldDecoder {
 			}
 		}
 		return func(r *reader) cell {
-			return refCell([]float32{
+			return floatsCell([]float32{
 				r.readAngle(bc),
 				r.readAngle(bc),
 				0.0,
@@ -222,13 +233,13 @@ func qangleFactory(f *field) fieldDecoder {
 			if rZ {
 				ret[2] = r.readAngle(20)
 			}
-			return refCell(ret)
+			return floatsCell(ret)
 		}
 	}
 
 	if bc == 32 {
 		return func(r *reader) cell {
-			return refCell([]float32{
+			return floatsCell([]float32{
 				math.Float32frombits(r.readBits(32)),
 				math.Float32frombits(r.readBits(32)),
 				math.Float32frombits(r.readBits(32)),
@@ -238,7 +249,7 @@ func qangleFactory(f *field) fieldDecoder {
 
 	if bc != 0 {
 		return func(r *reader) cell {
-			return refCell([]float32{
+			return floatsCell([]float32{
 				r.readAngle(bc),
 				r.readAngle(bc),
 				r.readAngle(bc),
@@ -260,12 +271,12 @@ func qangleFactory(f *field) fieldDecoder {
 		if rZ {
 			ret[2] = r.readCoord()
 		}
-		return refCell(ret)
+		return floatsCell(ret)
 	}
 }
 
 func vector2Decoder(r *reader) cell {
-	return refCell([]float32{r.readFloat(), r.readFloat()})
+	return floatsCell([]float32{r.readFloat(), r.readFloat()})
 }
 
 func unsignedDecoder(r *reader) cell {
@@ -274,7 +285,7 @@ func unsignedDecoder(r *reader) cell {
 }
 
 func unsigned64Decoder(r *reader) cell {
-	return refCell(r.readVarUint64())
+	return uint64Cell(r.readVarUint64())
 }
 
 func componentDecoder(r *reader) cell {

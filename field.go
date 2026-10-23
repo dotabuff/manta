@@ -117,7 +117,7 @@ func (f *field) getName() string {
 	return f.varName
 }
 
-func (f *field) getFieldForFieldPath(fp *fieldPath, pos int) *field {
+func (f *field) getFieldForFieldPath(fp *fieldPath, pos int32) *field {
 	switch f.model {
 	case fieldModelFixedArray:
 		return f
@@ -139,7 +139,7 @@ func (f *field) getFieldForFieldPath(fp *fieldPath, pos int) *field {
 	return f
 }
 
-func (f *field) getNameForFieldPath(fp *fieldPath, pos int) []string {
+func (f *field) getNameForFieldPath(fp *fieldPath, pos int32) []string {
 	x := []string{f.varName}
 
 	switch f.model {
@@ -170,7 +170,7 @@ func (f *field) getNameForFieldPath(fp *fieldPath, pos int) []string {
 	return x
 }
 
-func (f *field) getTypeForFieldPath(fp *fieldPath, pos int) *fieldType {
+func (f *field) getTypeForFieldPath(fp *fieldPath, pos int32) *fieldType {
 	switch f.model {
 	case fieldModelFixedArray:
 		return f.fieldType
@@ -194,7 +194,7 @@ func (f *field) getTypeForFieldPath(fp *fieldPath, pos int) *fieldType {
 	return f.fieldType
 }
 
-func (f *field) getDecoderForFieldPath(fp *fieldPath, pos int) fieldDecoder {
+func (f *field) getDecoderForFieldPath(fp *fieldPath, pos int32) fieldDecoder {
 	switch f.model {
 	case fieldModelFixedArray:
 		return f.decoder
@@ -225,7 +225,7 @@ func (f *field) getFieldPathForName(fp *fieldPath, name string) bool {
 	switch f.model {
 	case fieldModelFixedArray:
 		assertLen(name, 4)
-		fp.path[fp.last] = mustAtoi(name)
+		fp.path[fp.last] = int32(mustAtoi(name))
 		return true
 
 	case fieldModelFixedTable:
@@ -233,12 +233,12 @@ func (f *field) getFieldPathForName(fp *fieldPath, name string) bool {
 
 	case fieldModelVariableArray:
 		assertLen(name, 4)
-		fp.path[fp.last] = mustAtoi(name)
+		fp.path[fp.last] = int32(mustAtoi(name))
 		return true
 
 	case fieldModelVariableTable:
 		assertLenMin(name, 6)
-		fp.path[fp.last] = mustAtoi(name[:4])
+		fp.path[fp.last] = int32(mustAtoi(name[:4]))
 		fp.last++
 		return f.serializer.getFieldPathForName(fp, name[5:])
 
@@ -258,7 +258,7 @@ func (f *field) getFieldPaths(fp *fieldPath, state *fieldState) []*fieldPath {
 			fp.last++
 			for i, v := range sub.state {
 				if !v.isEmpty() {
-					fp.path[fp.last] = i
+					fp.path[fp.last] = int32(i)
 					x = append(x, fp.copy())
 				}
 			}
@@ -277,7 +277,7 @@ func (f *field) getFieldPaths(fp *fieldPath, state *fieldState) []*fieldPath {
 			fp.last++
 			for i, v := range sub.state {
 				if !v.isEmpty() {
-					fp.path[fp.last] = i
+					fp.path[fp.last] = int32(i)
 					x = append(x, fp.copy())
 				}
 			}
@@ -289,7 +289,7 @@ func (f *field) getFieldPaths(fp *fieldPath, state *fieldState) []*fieldPath {
 			fp.last += 2
 			for i, v := range sub.state {
 				if vv, ok := v.sub(); ok {
-					fp.path[fp.last-1] = i
+					fp.path[fp.last-1] = int32(i)
 					x = append(x, f.serializer.getFieldPaths(fp, vv)...)
 				}
 			}

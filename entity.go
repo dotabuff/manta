@@ -2,6 +2,7 @@ package manta
 
 import (
 	"fmt"
+	"unsafe"
 
 	"github.com/dotabuff/manta/dota"
 )
@@ -56,15 +57,27 @@ type Entity struct {
 	state  *fieldState
 }
 
-// newEntity returns a new entity for the given index, serial and class
-func newEntity(index, serial int32, class *class) *Entity {
-	return &Entity{
+// entityAlloc co-allocates an Entity with its root field state, so creating
+// an entity costs one allocation for both. Entity itself keeps a pointer to
+// its state rather than embedding it: a slice-holding field would make Entity
+// incomparable, which is part of its public API.
+type entityAlloc struct {
+	entity Entity
+	state  fieldState
+}
+
+// newEntity returns a new entity for the given index, serial and class, with
+// its state cloned from the class baseline template
+func newEntity(index, serial int32, class *class, baseline *fieldState) *Entity {
+	a := &entityAlloc{entity: Entity{
 		index:  index,
 		serial: serial,
 		class:  class,
 		active: true,
-		state:  newFieldState(),
-	}
+	}}
+	a.entity.state = &a.state
+	baseline.cloneTo(&a.state)
+	return &a.entity
 }
 
 // String returns a human identifiable string for the Entity
@@ -88,70 +101,88 @@ func (e *Entity) Dump() {
 
 // Get returns the current value of the Entity state for the given key
 func (e *Entity) Get(name string) interface{} {
+	return e.getCell(name).iface()
+}
+
+// getCell returns the state cell for the given key, or an empty cell if the
+// key does not exist. The typed getters read the cell directly, so unlike Get
+// they never box the value.
+func (e *Entity) getCell(name string) cell {
 	if fp, ok := e.class.fpCache[name]; ok {
-		return e.state.get(fp)
+		return e.state.getCell(fp)
 	}
 	if e.class.fpNoop[name] {
-		return nil
+		return cell{}
 	}
 
 	fp := newFieldPath()
 	if !e.class.getFieldPathForName(fp, name) {
 		e.class.fpNoop[name] = true
 		fp.release()
-		return nil
+		return cell{}
 	}
 	e.class.fpCache[name] = fp
 
-	return e.state.get(fp)
+	return e.state.getCell(fp)
 }
 
 // Exists returns true if the given key exists in the Entity state
 func (e *Entity) Exists(name string) bool {
-	return e.Get(name) != nil
+	return !e.getCell(name).isEmpty()
 }
 
 // GetInt32 gets given key as an int32
 func (e *Entity) GetInt32(name string) (int32, bool) {
-	x, ok := e.Get(name).(int32)
-	return x, ok
+	if c := e.getCell(name); c.kind == cellInt32 {
+		return int32(c.num), true
+	}
+	return 0, false
 }
 
 // GetUint32 gets given key as a uint32
 func (e *Entity) GetUint32(name string) (uint32, bool) {
-	if v := e.Get(name); v != nil {
-		switch x := v.(type) {
-		case uint32:
-			return x, true
-		case uint64:
-			return uint32(x), true
-		}
+	switch c := e.getCell(name); c.kind {
+	case cellUint32, cellUint64:
+		return c.num, true
+	case cellUint64Box:
+		return uint32(*(*uint64)(c.ptr)), true
 	}
 	return 0, false
 }
 
 // GetUint64 gets given key as a uint64
 func (e *Entity) GetUint64(name string) (uint64, bool) {
-	x, ok := e.Get(name).(uint64)
-	return x, ok
+	switch c := e.getCell(name); c.kind {
+	case cellUint64:
+		return uint64(c.num), true
+	case cellUint64Box:
+		return *(*uint64)(c.ptr), true
+	}
+	return 0, false
 }
 
 // GetFloat32 gets given key as an float32
 func (e *Entity) GetFloat32(name string) (float32, bool) {
-	x, ok := e.Get(name).(float32)
-	return x, ok
+	if c := e.getCell(name); c.kind == cellFloat32 {
+		return c.asFloat32(), true
+	}
+	return 0, false
 }
 
 // GetString gets given key as a string
 func (e *Entity) GetString(name string) (string, bool) {
-	x, ok := e.Get(name).(string)
-	return x, ok
+	if c := e.getCell(name); c.kind == cellString {
+		return unsafe.String((*byte)(c.ptr), c.num), true
+	}
+	return "", false
 }
 
 // GetBool gets given key as a bool
 func (e *Entity) GetBool(name string) (bool, bool) {
-	x, ok := e.Get(name).(bool)
-	return x, ok
+	if c := e.getCell(name); c.kind == cellBool {
+		return c.num != 0, true
+	}
+	return false, false
 }
 
 // GetSerial return the serial of the class associated with this Entity
@@ -280,11 +311,11 @@ func (p *Parser) processPacketEntities(entityData []byte, updatedEntries int32, 
 					}
 					baseline = newFieldState()
 					p.fpBuf = readFields(newReader(raw), class.serializer, baseline, p.fpBuf)
+					baseline.share()
 					p.classBaselineStates[classId] = baseline
 				}
 
-				e = newEntity(index, serial, class)
-				e.state = baseline.clone()
+				e = newEntity(index, serial, class, baseline)
 				p.entities[index] = e
 				p.fpBuf = readFields(r, class.serializer, e.state, p.fpBuf)
 				op = EntityOpCreated | EntityOpEntered

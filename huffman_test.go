@@ -125,3 +125,138 @@ func TestHuffmanLookupMatchesWalk(t *testing.T) {
 		}
 	}
 }
+
+// fieldPathOpCodes returns each op's huffman code as (bits, length), with the
+// first bit read in the least significant position.
+func fieldPathOpCodes() (codes [fpOpFieldPathEncodeFinish + 1]uint32, lens [fpOpFieldPathEncodeFinish + 1]uint32) {
+	var walk func(node int32, code, depth uint32)
+	walk = func(node int32, code, depth uint32) {
+		for bit, child := range []int32{huffTreeLeft[node], huffTreeRight[node]} {
+			c := code | uint32(bit)<<depth
+			if child < 0 {
+				codes[-child-1], lens[-child-1] = c, depth+1
+			} else {
+				walk(child, c, depth+1)
+			}
+		}
+	}
+	walk(huffTreeRoot, 0, 0)
+	return
+}
+
+// bitWriter appends bits LSB-first, matching reader's bit order.
+type bitWriter struct {
+	buf []byte
+	n   uint32
+}
+
+func (w *bitWriter) write(v uint32, n uint32) {
+	for i := uint32(0); i < n; i++ {
+		if w.n%8 == 0 {
+			w.buf = append(w.buf, 0)
+		}
+		w.buf[w.n/8] |= byte((v>>i)&1) << (w.n % 8)
+		w.n++
+	}
+}
+
+func (w *bitWriter) truncate(n uint32) {
+	w.buf = w.buf[:(n+7)/8]
+	if n%8 != 0 {
+		w.buf[n/8] &= byte(1)<<(n%8) - 1
+	}
+	w.n = n
+}
+
+// readerAtBit returns a reader over buf advanced by n bits.
+func readerAtBit(buf []byte, n uint32) *reader {
+	r := newReader(buf)
+	for n > 0 {
+		k := min(n, 32)
+		r.readBits(k)
+		n -= k
+	}
+	return r
+}
+
+// readFieldPathsReference is the canonical field-path decoder: a bit-by-bit
+// tree walk applying each op through fieldPathTable's function values.
+func readFieldPathsReference(r *reader) []fieldPath {
+	var paths []fieldPath
+	fp := newFieldPath()
+	defer fp.release()
+	for {
+		op := decodeOneHuffOpWalk(r)
+		if op == fpOpFieldPathEncodeFinish {
+			return paths
+		}
+		fieldPathTable[op].fn(r, fp)
+		paths = append(paths, *fp)
+	}
+}
+
+// TestReadFieldPathsMatchesTable verifies readFieldPaths' switch dispatch
+// applies the same op functions as fieldPathTable, by decoding streams built
+// from random sequences of every op (with random operand bits) and comparing
+// against readFieldPathsReference. Each op is appended only if the reference
+// decoder applies it cleanly, which keeps the path depth in range.
+func TestReadFieldPathsMatchesTable(t *testing.T) {
+	codes, lens := fieldPathOpCodes()
+	rng := rand.New(rand.NewSource(1))
+	seen := make([]int, len(fieldPathTable))
+
+	for trial := 0; trial < 2000; trial++ {
+		w := &bitWriter{}
+		fp := newFieldPath()
+		for k := 0; k < 1+rng.Intn(40); k++ {
+			for attempt := 0; attempt < 50; attempt++ {
+				op := rng.Intn(fpOpFieldPathEncodeFinish)
+				save := w.n
+				w.write(codes[op], lens[op])
+				for i := 0; i < 8; i++ {
+					w.write(rng.Uint32(), 32)
+				}
+				r := readerAtBit(w.buf, save+lens[op])
+				next := *fp
+				ok := func() (ok bool) {
+					defer func() { ok = recover() == nil }()
+					fieldPathTable[op].fn(r, &next)
+					return
+				}()
+				if ok && next.last >= 0 {
+					w.truncate(r.pos*8 - r.bitCount)
+					*fp = next
+					seen[op]++
+					break
+				}
+				w.truncate(save)
+			}
+		}
+		fp.release()
+		w.write(codes[fpOpFieldPathEncodeFinish], lens[fpOpFieldPathEncodeFinish])
+		for i := rng.Intn(3); i > 0; i-- {
+			w.write(rng.Uint32(), 8)
+		}
+
+		ra, rb := newReader(w.buf), newReader(w.buf)
+		got := readFieldPaths(ra, nil)
+		want := readFieldPathsReference(rb)
+		if len(got) != len(want) {
+			t.Fatalf("trial %d: %d paths, want %d", trial, len(got), len(want))
+		}
+		for i := range want {
+			if got[i].last != want[i].last || got[i].path != want[i].path {
+				t.Fatalf("trial %d path %d: got %v/%d, want %v/%d", trial, i, got[i].path, got[i].last, want[i].path, want[i].last)
+			}
+		}
+		if a, b := ra.pos*8-ra.bitCount, rb.pos*8-rb.bitCount; a != b {
+			t.Fatalf("trial %d: consumed %d bits, want %d", trial, a, b)
+		}
+	}
+
+	for op := 0; op < fpOpFieldPathEncodeFinish; op++ {
+		if seen[op] == 0 {
+			t.Errorf("op %s never exercised", fieldPathTable[op].name)
+		}
+	}
+}

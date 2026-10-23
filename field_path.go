@@ -88,10 +88,11 @@ func flattenHuffmanTree(t huffmanTree) int32 {
 // corrupting entity state.
 const maxFieldPathDepth = 7
 
+// A fieldPath is int32-sized throughout (field and element indices are small)
+// to keep it at 32 bytes: readFieldPaths snapshots one per decoded field.
 type fieldPath struct {
-	path [maxFieldPathDepth]int
-	last int
-	done bool
+	path [maxFieldPathDepth]int32
+	last int32
 }
 
 type fieldPathOp struct {
@@ -100,237 +101,367 @@ type fieldPathOp struct {
 	fn     func(r *reader, fp *fieldPath)
 }
 
+// Field-path op ids. An op's id is its huffman leaf value, so these follow the
+// order of fieldPathTable (which is keyed by them).
+const (
+	fpOpPlusOne = iota
+	fpOpPlusTwo
+	fpOpPlusThree
+	fpOpPlusFour
+	fpOpPlusN
+	fpOpPushOneLeftDeltaZeroRightZero
+	fpOpPushOneLeftDeltaZeroRightNonZero
+	fpOpPushOneLeftDeltaOneRightZero
+	fpOpPushOneLeftDeltaOneRightNonZero
+	fpOpPushOneLeftDeltaNRightZero
+	fpOpPushOneLeftDeltaNRightNonZero
+	fpOpPushOneLeftDeltaNRightNonZeroPack6Bits
+	fpOpPushOneLeftDeltaNRightNonZeroPack8Bits
+	fpOpPushTwoLeftDeltaZero
+	fpOpPushTwoPack5LeftDeltaZero
+	fpOpPushThreeLeftDeltaZero
+	fpOpPushThreePack5LeftDeltaZero
+	fpOpPushTwoLeftDeltaOne
+	fpOpPushTwoPack5LeftDeltaOne
+	fpOpPushThreeLeftDeltaOne
+	fpOpPushThreePack5LeftDeltaOne
+	fpOpPushTwoLeftDeltaN
+	fpOpPushTwoPack5LeftDeltaN
+	fpOpPushThreeLeftDeltaN
+	fpOpPushThreePack5LeftDeltaN
+	fpOpPushN
+	fpOpPushNAndNonTopological
+	fpOpPopOnePlusOne
+	fpOpPopOnePlusN
+	fpOpPopAllButOnePlusOne
+	fpOpPopAllButOnePlusN
+	fpOpPopAllButOnePlusNPack3Bits
+	fpOpPopAllButOnePlusNPack6Bits
+	fpOpPopNPlusOne
+	fpOpPopNPlusN
+	fpOpPopNAndNonTopographical
+	fpOpNonTopoComplex
+	fpOpNonTopoPenultimatePlusOne
+	fpOpNonTopoComplexPack4Bits
+	fpOpFieldPathEncodeFinish
+)
+
+// fieldPathTable defines each field-path op: its name, its huffman weight (which
+// fixes the op codes), and its effect. readFieldPaths dispatches the same op
+// functions through a switch of direct calls rather than through fn, so its
+// accumulator does not escape; TestReadFieldPathsMatchesTable checks the two
+// agree.
 var fieldPathTable = []fieldPathOp{
-	fieldPathOp{"PlusOne", 36271, func(r *reader, fp *fieldPath) {
-		fp.path[fp.last] += 1
-	}},
-	fieldPathOp{"PlusTwo", 10334, func(r *reader, fp *fieldPath) {
-		fp.path[fp.last] += 2
-	}},
-	fieldPathOp{"PlusThree", 1375, func(r *reader, fp *fieldPath) {
-		fp.path[fp.last] += 3
-	}},
-	fieldPathOp{"PlusFour", 646, func(r *reader, fp *fieldPath) {
-		fp.path[fp.last] += 4
-	}},
-	fieldPathOp{"PlusN", 4128, func(r *reader, fp *fieldPath) {
-		fp.path[fp.last] += r.readUBitVarFieldPath() + 5
-	}},
-	fieldPathOp{"PushOneLeftDeltaZeroRightZero", 35, func(r *reader, fp *fieldPath) {
-		fp.last++
-		fp.path[fp.last] = 0
-	}},
-	fieldPathOp{"PushOneLeftDeltaZeroRightNonZero", 3, func(r *reader, fp *fieldPath) {
-		fp.last++
-		fp.path[fp.last] = r.readUBitVarFieldPath()
-	}},
-	fieldPathOp{"PushOneLeftDeltaOneRightZero", 521, func(r *reader, fp *fieldPath) {
-		fp.path[fp.last] += 1
-		fp.last++
-		fp.path[fp.last] = 0
-	}},
-	fieldPathOp{"PushOneLeftDeltaOneRightNonZero", 2942, func(r *reader, fp *fieldPath) {
-		fp.path[fp.last] += 1
-		fp.last++
-		fp.path[fp.last] = r.readUBitVarFieldPath()
-	}},
-	fieldPathOp{"PushOneLeftDeltaNRightZero", 560, func(r *reader, fp *fieldPath) {
-		fp.path[fp.last] += r.readUBitVarFieldPath()
-		fp.last++
-		fp.path[fp.last] = 0
-	}},
-	fieldPathOp{"PushOneLeftDeltaNRightNonZero", 471, func(r *reader, fp *fieldPath) {
-		fp.path[fp.last] += r.readUBitVarFieldPath() + 2
-		fp.last++
-		fp.path[fp.last] = r.readUBitVarFieldPath() + 1
-	}},
-	fieldPathOp{"PushOneLeftDeltaNRightNonZeroPack6Bits", 10530, func(r *reader, fp *fieldPath) {
-		fp.path[fp.last] += int(r.readBits(3)) + 2
-		fp.last++
-		fp.path[fp.last] = int(r.readBits(3)) + 1
-	}},
-	fieldPathOp{"PushOneLeftDeltaNRightNonZeroPack8Bits", 251, func(r *reader, fp *fieldPath) {
-		fp.path[fp.last] += int(r.readBits(4)) + 2
-		fp.last++
-		fp.path[fp.last] = int(r.readBits(4)) + 1
-	}},
-	fieldPathOp{"PushTwoLeftDeltaZero", 0, func(r *reader, fp *fieldPath) {
-		fp.last++
-		fp.path[fp.last] += r.readUBitVarFieldPath()
-		fp.last++
-		fp.path[fp.last] += r.readUBitVarFieldPath()
-	}},
-	fieldPathOp{"PushTwoPack5LeftDeltaZero", 0, func(r *reader, fp *fieldPath) {
-		fp.last++
-		fp.path[fp.last] = int(r.readBits(5))
-		fp.last++
-		fp.path[fp.last] = int(r.readBits(5))
-	}},
-	fieldPathOp{"PushThreeLeftDeltaZero", 0, func(r *reader, fp *fieldPath) {
-		fp.last++
-		fp.path[fp.last] += r.readUBitVarFieldPath()
-		fp.last++
-		fp.path[fp.last] += r.readUBitVarFieldPath()
-		fp.last++
-		fp.path[fp.last] += r.readUBitVarFieldPath()
-	}},
-	fieldPathOp{"PushThreePack5LeftDeltaZero", 0, func(r *reader, fp *fieldPath) {
-		fp.last++
-		fp.path[fp.last] = int(r.readBits(5))
-		fp.last++
-		fp.path[fp.last] = int(r.readBits(5))
-		fp.last++
-		fp.path[fp.last] = int(r.readBits(5))
-	}},
-	fieldPathOp{"PushTwoLeftDeltaOne", 0, func(r *reader, fp *fieldPath) {
-		fp.path[fp.last] += 1
-		fp.last++
-		fp.path[fp.last] += r.readUBitVarFieldPath()
-		fp.last++
-		fp.path[fp.last] += r.readUBitVarFieldPath()
-	}},
-	fieldPathOp{"PushTwoPack5LeftDeltaOne", 0, func(r *reader, fp *fieldPath) {
-		fp.path[fp.last] += 1
-		fp.last++
-		fp.path[fp.last] += int(r.readBits(5))
-		fp.last++
-		fp.path[fp.last] += int(r.readBits(5))
-	}},
-	fieldPathOp{"PushThreeLeftDeltaOne", 0, func(r *reader, fp *fieldPath) {
-		fp.path[fp.last] += 1
-		fp.last++
-		fp.path[fp.last] += r.readUBitVarFieldPath()
-		fp.last++
-		fp.path[fp.last] += r.readUBitVarFieldPath()
-		fp.last++
-		fp.path[fp.last] += r.readUBitVarFieldPath()
-	}},
-	fieldPathOp{"PushThreePack5LeftDeltaOne", 0, func(r *reader, fp *fieldPath) {
-		fp.path[fp.last] += 1
-		fp.last++
-		fp.path[fp.last] += int(r.readBits(5))
-		fp.last++
-		fp.path[fp.last] += int(r.readBits(5))
-		fp.last++
-		fp.path[fp.last] += int(r.readBits(5))
-	}},
-	fieldPathOp{"PushTwoLeftDeltaN", 0, func(r *reader, fp *fieldPath) {
-		fp.path[fp.last] += int(r.readUBitVar()) + 2
-		fp.last++
-		fp.path[fp.last] += r.readUBitVarFieldPath()
-		fp.last++
-		fp.path[fp.last] += r.readUBitVarFieldPath()
-	}},
-	fieldPathOp{"PushTwoPack5LeftDeltaN", 0, func(r *reader, fp *fieldPath) {
-		fp.path[fp.last] += int(r.readUBitVar()) + 2
-		fp.last++
-		fp.path[fp.last] += int(r.readBits(5))
-		fp.last++
-		fp.path[fp.last] += int(r.readBits(5))
-	}},
-	fieldPathOp{"PushThreeLeftDeltaN", 0, func(r *reader, fp *fieldPath) {
-		fp.path[fp.last] += int(r.readUBitVar()) + 2
-		fp.last++
-		fp.path[fp.last] += r.readUBitVarFieldPath()
-		fp.last++
-		fp.path[fp.last] += r.readUBitVarFieldPath()
-		fp.last++
-		fp.path[fp.last] += r.readUBitVarFieldPath()
-	}},
-	fieldPathOp{"PushThreePack5LeftDeltaN", 0, func(r *reader, fp *fieldPath) {
-		fp.path[fp.last] += int(r.readUBitVar()) + 2
-		fp.last++
-		fp.path[fp.last] += int(r.readBits(5))
-		fp.last++
-		fp.path[fp.last] += int(r.readBits(5))
-		fp.last++
-		fp.path[fp.last] += int(r.readBits(5))
-	}},
-	fieldPathOp{"PushN", 0, func(r *reader, fp *fieldPath) {
-		n := int(r.readUBitVar())
-		fp.path[fp.last] += int(r.readUBitVar())
-		for i := 0; i < n; i++ {
-			fp.last++
-			fp.path[fp.last] += r.readUBitVarFieldPath()
-		}
-	}},
-	fieldPathOp{"PushNAndNonTopological", 310, func(r *reader, fp *fieldPath) {
-		for i := 0; i <= fp.last; i++ {
-			if r.readBoolean() {
-				fp.path[i] += int(r.readVarInt32()) + 1
-			}
-		}
-		count := int(r.readUBitVar())
-		for i := 0; i < count; i++ {
-			fp.last++
-			fp.path[fp.last] = r.readUBitVarFieldPath()
-		}
-	}},
-	fieldPathOp{"PopOnePlusOne", 2, func(r *reader, fp *fieldPath) {
-		fp.pop(1)
-		fp.path[fp.last] += 1
-	}},
-	fieldPathOp{"PopOnePlusN", 0, func(r *reader, fp *fieldPath) {
-		fp.pop(1)
-		fp.path[fp.last] += r.readUBitVarFieldPath() + 1
-	}},
-	fieldPathOp{"PopAllButOnePlusOne", 1837, func(r *reader, fp *fieldPath) {
-		fp.pop(fp.last)
-		fp.path[0] += 1
-	}},
-	fieldPathOp{"PopAllButOnePlusN", 149, func(r *reader, fp *fieldPath) {
-		fp.pop(fp.last)
-		fp.path[0] += r.readUBitVarFieldPath() + 1
-	}},
-	fieldPathOp{"PopAllButOnePlusNPack3Bits", 300, func(r *reader, fp *fieldPath) {
-		fp.pop(fp.last)
-		fp.path[0] += int(r.readBits(3)) + 1
-	}},
-	fieldPathOp{"PopAllButOnePlusNPack6Bits", 634, func(r *reader, fp *fieldPath) {
-		fp.pop(fp.last)
-		fp.path[0] += int(r.readBits(6)) + 1
-	}},
-	fieldPathOp{"PopNPlusOne", 0, func(r *reader, fp *fieldPath) {
-		fp.pop(r.readUBitVarFieldPath())
-		fp.path[fp.last] += 1
-	}},
-	fieldPathOp{"PopNPlusN", 0, func(r *reader, fp *fieldPath) {
-		fp.pop(r.readUBitVarFieldPath())
-		fp.path[fp.last] += int(r.readVarInt32())
-	}},
-	fieldPathOp{"PopNAndNonTopographical", 1, func(r *reader, fp *fieldPath) {
-		fp.pop(r.readUBitVarFieldPath())
-		for i := 0; i <= fp.last; i++ {
-			if r.readBoolean() {
-				fp.path[i] += int(r.readVarInt32())
-			}
-		}
-	}},
-	fieldPathOp{"NonTopoComplex", 76, func(r *reader, fp *fieldPath) {
-		for i := 0; i <= fp.last; i++ {
-			if r.readBoolean() {
-				fp.path[i] += int(r.readVarInt32())
-			}
-		}
-	}},
-	fieldPathOp{"NonTopoPenultimatePlusOne", 271, func(r *reader, fp *fieldPath) {
-		fp.path[fp.last-1] += 1
-	}},
-	fieldPathOp{"NonTopoComplexPack4Bits", 99, func(r *reader, fp *fieldPath) {
-		for i := 0; i <= fp.last; i++ {
-			if r.readBoolean() {
-				fp.path[i] += int(r.readBits(4)) - 7
-			}
-		}
-	}},
-	fieldPathOp{"FieldPathEncodeFinish", 25474, func(r *reader, fp *fieldPath) {
-		fp.done = true
-	}},
+	fpOpPlusOne:                                {"PlusOne", 36271, fpPlusOne},
+	fpOpPlusTwo:                                {"PlusTwo", 10334, fpPlusTwo},
+	fpOpPlusThree:                              {"PlusThree", 1375, fpPlusThree},
+	fpOpPlusFour:                               {"PlusFour", 646, fpPlusFour},
+	fpOpPlusN:                                  {"PlusN", 4128, fpPlusN},
+	fpOpPushOneLeftDeltaZeroRightZero:          {"PushOneLeftDeltaZeroRightZero", 35, fpPushOneLeftDeltaZeroRightZero},
+	fpOpPushOneLeftDeltaZeroRightNonZero:       {"PushOneLeftDeltaZeroRightNonZero", 3, fpPushOneLeftDeltaZeroRightNonZero},
+	fpOpPushOneLeftDeltaOneRightZero:           {"PushOneLeftDeltaOneRightZero", 521, fpPushOneLeftDeltaOneRightZero},
+	fpOpPushOneLeftDeltaOneRightNonZero:        {"PushOneLeftDeltaOneRightNonZero", 2942, fpPushOneLeftDeltaOneRightNonZero},
+	fpOpPushOneLeftDeltaNRightZero:             {"PushOneLeftDeltaNRightZero", 560, fpPushOneLeftDeltaNRightZero},
+	fpOpPushOneLeftDeltaNRightNonZero:          {"PushOneLeftDeltaNRightNonZero", 471, fpPushOneLeftDeltaNRightNonZero},
+	fpOpPushOneLeftDeltaNRightNonZeroPack6Bits: {"PushOneLeftDeltaNRightNonZeroPack6Bits", 10530, fpPushOneLeftDeltaNRightNonZeroPack6Bits},
+	fpOpPushOneLeftDeltaNRightNonZeroPack8Bits: {"PushOneLeftDeltaNRightNonZeroPack8Bits", 251, fpPushOneLeftDeltaNRightNonZeroPack8Bits},
+	fpOpPushTwoLeftDeltaZero:                   {"PushTwoLeftDeltaZero", 0, fpPushTwoLeftDeltaZero},
+	fpOpPushTwoPack5LeftDeltaZero:              {"PushTwoPack5LeftDeltaZero", 0, fpPushTwoPack5LeftDeltaZero},
+	fpOpPushThreeLeftDeltaZero:                 {"PushThreeLeftDeltaZero", 0, fpPushThreeLeftDeltaZero},
+	fpOpPushThreePack5LeftDeltaZero:            {"PushThreePack5LeftDeltaZero", 0, fpPushThreePack5LeftDeltaZero},
+	fpOpPushTwoLeftDeltaOne:                    {"PushTwoLeftDeltaOne", 0, fpPushTwoLeftDeltaOne},
+	fpOpPushTwoPack5LeftDeltaOne:               {"PushTwoPack5LeftDeltaOne", 0, fpPushTwoPack5LeftDeltaOne},
+	fpOpPushThreeLeftDeltaOne:                  {"PushThreeLeftDeltaOne", 0, fpPushThreeLeftDeltaOne},
+	fpOpPushThreePack5LeftDeltaOne:             {"PushThreePack5LeftDeltaOne", 0, fpPushThreePack5LeftDeltaOne},
+	fpOpPushTwoLeftDeltaN:                      {"PushTwoLeftDeltaN", 0, fpPushTwoLeftDeltaN},
+	fpOpPushTwoPack5LeftDeltaN:                 {"PushTwoPack5LeftDeltaN", 0, fpPushTwoPack5LeftDeltaN},
+	fpOpPushThreeLeftDeltaN:                    {"PushThreeLeftDeltaN", 0, fpPushThreeLeftDeltaN},
+	fpOpPushThreePack5LeftDeltaN:               {"PushThreePack5LeftDeltaN", 0, fpPushThreePack5LeftDeltaN},
+	fpOpPushN:                                  {"PushN", 0, fpPushN},
+	fpOpPushNAndNonTopological:                 {"PushNAndNonTopological", 310, fpPushNAndNonTopological},
+	fpOpPopOnePlusOne:                          {"PopOnePlusOne", 2, fpPopOnePlusOne},
+	fpOpPopOnePlusN:                            {"PopOnePlusN", 0, fpPopOnePlusN},
+	fpOpPopAllButOnePlusOne:                    {"PopAllButOnePlusOne", 1837, fpPopAllButOnePlusOne},
+	fpOpPopAllButOnePlusN:                      {"PopAllButOnePlusN", 149, fpPopAllButOnePlusN},
+	fpOpPopAllButOnePlusNPack3Bits:             {"PopAllButOnePlusNPack3Bits", 300, fpPopAllButOnePlusNPack3Bits},
+	fpOpPopAllButOnePlusNPack6Bits:             {"PopAllButOnePlusNPack6Bits", 634, fpPopAllButOnePlusNPack6Bits},
+	fpOpPopNPlusOne:                            {"PopNPlusOne", 0, fpPopNPlusOne},
+	fpOpPopNPlusN:                              {"PopNPlusN", 0, fpPopNPlusN},
+	fpOpPopNAndNonTopographical:                {"PopNAndNonTopographical", 1, fpPopNAndNonTopographical},
+	fpOpNonTopoComplex:                         {"NonTopoComplex", 76, fpNonTopoComplex},
+	fpOpNonTopoPenultimatePlusOne:              {"NonTopoPenultimatePlusOne", 271, fpNonTopoPenultimatePlusOne},
+	fpOpNonTopoComplexPack4Bits:                {"NonTopoComplexPack4Bits", 99, fpNonTopoComplexPack4Bits},
+	fpOpFieldPathEncodeFinish:                  {"FieldPathEncodeFinish", 25474, fpFieldPathEncodeFinish},
 }
 
-// pop reduces the last element by n, zeroing values in the popped path
-func (fp *fieldPath) pop(n int) {
+func fpPlusOne(r *reader, fp *fieldPath) {
+	fp.path[fp.last] += 1
+}
+
+func fpPlusTwo(r *reader, fp *fieldPath) {
+	fp.path[fp.last] += 2
+}
+
+func fpPlusThree(r *reader, fp *fieldPath) {
+	fp.path[fp.last] += 3
+}
+
+func fpPlusFour(r *reader, fp *fieldPath) {
+	fp.path[fp.last] += 4
+}
+
+func fpPlusN(r *reader, fp *fieldPath) {
+	fp.path[fp.last] += r.readUBitVarFieldPath() + 5
+}
+
+func fpPushOneLeftDeltaZeroRightZero(r *reader, fp *fieldPath) {
+	fp.last++
+	fp.path[fp.last] = 0
+}
+
+func fpPushOneLeftDeltaZeroRightNonZero(r *reader, fp *fieldPath) {
+	fp.last++
+	fp.path[fp.last] = r.readUBitVarFieldPath()
+}
+
+func fpPushOneLeftDeltaOneRightZero(r *reader, fp *fieldPath) {
+	fp.path[fp.last] += 1
+	fp.last++
+	fp.path[fp.last] = 0
+}
+
+func fpPushOneLeftDeltaOneRightNonZero(r *reader, fp *fieldPath) {
+	fp.path[fp.last] += 1
+	fp.last++
+	fp.path[fp.last] = r.readUBitVarFieldPath()
+}
+
+func fpPushOneLeftDeltaNRightZero(r *reader, fp *fieldPath) {
+	fp.path[fp.last] += r.readUBitVarFieldPath()
+	fp.last++
+	fp.path[fp.last] = 0
+}
+
+func fpPushOneLeftDeltaNRightNonZero(r *reader, fp *fieldPath) {
+	fp.path[fp.last] += r.readUBitVarFieldPath() + 2
+	fp.last++
+	fp.path[fp.last] = r.readUBitVarFieldPath() + 1
+}
+
+func fpPushOneLeftDeltaNRightNonZeroPack6Bits(r *reader, fp *fieldPath) {
+	fp.path[fp.last] += int32(r.readBits(3)) + 2
+	fp.last++
+	fp.path[fp.last] = int32(r.readBits(3)) + 1
+}
+
+func fpPushOneLeftDeltaNRightNonZeroPack8Bits(r *reader, fp *fieldPath) {
+	fp.path[fp.last] += int32(r.readBits(4)) + 2
+	fp.last++
+	fp.path[fp.last] = int32(r.readBits(4)) + 1
+}
+
+func fpPushTwoLeftDeltaZero(r *reader, fp *fieldPath) {
+	fp.last++
+	fp.path[fp.last] += r.readUBitVarFieldPath()
+	fp.last++
+	fp.path[fp.last] += r.readUBitVarFieldPath()
+}
+
+func fpPushTwoPack5LeftDeltaZero(r *reader, fp *fieldPath) {
+	fp.last++
+	fp.path[fp.last] = int32(r.readBits(5))
+	fp.last++
+	fp.path[fp.last] = int32(r.readBits(5))
+}
+
+func fpPushThreeLeftDeltaZero(r *reader, fp *fieldPath) {
+	fp.last++
+	fp.path[fp.last] += r.readUBitVarFieldPath()
+	fp.last++
+	fp.path[fp.last] += r.readUBitVarFieldPath()
+	fp.last++
+	fp.path[fp.last] += r.readUBitVarFieldPath()
+}
+
+func fpPushThreePack5LeftDeltaZero(r *reader, fp *fieldPath) {
+	fp.last++
+	fp.path[fp.last] = int32(r.readBits(5))
+	fp.last++
+	fp.path[fp.last] = int32(r.readBits(5))
+	fp.last++
+	fp.path[fp.last] = int32(r.readBits(5))
+}
+
+func fpPushTwoLeftDeltaOne(r *reader, fp *fieldPath) {
+	fp.path[fp.last] += 1
+	fp.last++
+	fp.path[fp.last] += r.readUBitVarFieldPath()
+	fp.last++
+	fp.path[fp.last] += r.readUBitVarFieldPath()
+}
+
+func fpPushTwoPack5LeftDeltaOne(r *reader, fp *fieldPath) {
+	fp.path[fp.last] += 1
+	fp.last++
+	fp.path[fp.last] += int32(r.readBits(5))
+	fp.last++
+	fp.path[fp.last] += int32(r.readBits(5))
+}
+
+func fpPushThreeLeftDeltaOne(r *reader, fp *fieldPath) {
+	fp.path[fp.last] += 1
+	fp.last++
+	fp.path[fp.last] += r.readUBitVarFieldPath()
+	fp.last++
+	fp.path[fp.last] += r.readUBitVarFieldPath()
+	fp.last++
+	fp.path[fp.last] += r.readUBitVarFieldPath()
+}
+
+func fpPushThreePack5LeftDeltaOne(r *reader, fp *fieldPath) {
+	fp.path[fp.last] += 1
+	fp.last++
+	fp.path[fp.last] += int32(r.readBits(5))
+	fp.last++
+	fp.path[fp.last] += int32(r.readBits(5))
+	fp.last++
+	fp.path[fp.last] += int32(r.readBits(5))
+}
+
+func fpPushTwoLeftDeltaN(r *reader, fp *fieldPath) {
+	fp.path[fp.last] += int32(r.readUBitVar()) + 2
+	fp.last++
+	fp.path[fp.last] += r.readUBitVarFieldPath()
+	fp.last++
+	fp.path[fp.last] += r.readUBitVarFieldPath()
+}
+
+func fpPushTwoPack5LeftDeltaN(r *reader, fp *fieldPath) {
+	fp.path[fp.last] += int32(r.readUBitVar()) + 2
+	fp.last++
+	fp.path[fp.last] += int32(r.readBits(5))
+	fp.last++
+	fp.path[fp.last] += int32(r.readBits(5))
+}
+
+func fpPushThreeLeftDeltaN(r *reader, fp *fieldPath) {
+	fp.path[fp.last] += int32(r.readUBitVar()) + 2
+	fp.last++
+	fp.path[fp.last] += r.readUBitVarFieldPath()
+	fp.last++
+	fp.path[fp.last] += r.readUBitVarFieldPath()
+	fp.last++
+	fp.path[fp.last] += r.readUBitVarFieldPath()
+}
+
+func fpPushThreePack5LeftDeltaN(r *reader, fp *fieldPath) {
+	fp.path[fp.last] += int32(r.readUBitVar()) + 2
+	fp.last++
+	fp.path[fp.last] += int32(r.readBits(5))
+	fp.last++
+	fp.path[fp.last] += int32(r.readBits(5))
+	fp.last++
+	fp.path[fp.last] += int32(r.readBits(5))
+}
+
+func fpPushN(r *reader, fp *fieldPath) {
+	n := int(r.readUBitVar())
+	fp.path[fp.last] += int32(r.readUBitVar())
 	for i := 0; i < n; i++ {
+		fp.last++
+		fp.path[fp.last] += r.readUBitVarFieldPath()
+	}
+}
+
+func fpPushNAndNonTopological(r *reader, fp *fieldPath) {
+	for i := int32(0); i <= fp.last; i++ {
+		if r.readBoolean() {
+			fp.path[i] += r.readVarInt32() + 1
+		}
+	}
+	count := int(r.readUBitVar())
+	for i := 0; i < count; i++ {
+		fp.last++
+		fp.path[fp.last] = r.readUBitVarFieldPath()
+	}
+}
+
+func fpPopOnePlusOne(r *reader, fp *fieldPath) {
+	fp.pop(1)
+	fp.path[fp.last] += 1
+}
+
+func fpPopOnePlusN(r *reader, fp *fieldPath) {
+	fp.pop(1)
+	fp.path[fp.last] += r.readUBitVarFieldPath() + 1
+}
+
+func fpPopAllButOnePlusOne(r *reader, fp *fieldPath) {
+	fp.pop(fp.last)
+	fp.path[0] += 1
+}
+
+func fpPopAllButOnePlusN(r *reader, fp *fieldPath) {
+	fp.pop(fp.last)
+	fp.path[0] += r.readUBitVarFieldPath() + 1
+}
+
+func fpPopAllButOnePlusNPack3Bits(r *reader, fp *fieldPath) {
+	fp.pop(fp.last)
+	fp.path[0] += int32(r.readBits(3)) + 1
+}
+
+func fpPopAllButOnePlusNPack6Bits(r *reader, fp *fieldPath) {
+	fp.pop(fp.last)
+	fp.path[0] += int32(r.readBits(6)) + 1
+}
+
+func fpPopNPlusOne(r *reader, fp *fieldPath) {
+	fp.pop(r.readUBitVarFieldPath())
+	fp.path[fp.last] += 1
+}
+
+func fpPopNPlusN(r *reader, fp *fieldPath) {
+	fp.pop(r.readUBitVarFieldPath())
+	fp.path[fp.last] += r.readVarInt32()
+}
+
+func fpPopNAndNonTopographical(r *reader, fp *fieldPath) {
+	fp.pop(r.readUBitVarFieldPath())
+	for i := int32(0); i <= fp.last; i++ {
+		if r.readBoolean() {
+			fp.path[i] += r.readVarInt32()
+		}
+	}
+}
+
+func fpNonTopoComplex(r *reader, fp *fieldPath) {
+	for i := int32(0); i <= fp.last; i++ {
+		if r.readBoolean() {
+			fp.path[i] += r.readVarInt32()
+		}
+	}
+}
+
+func fpNonTopoPenultimatePlusOne(r *reader, fp *fieldPath) {
+	fp.path[fp.last-1] += 1
+}
+
+func fpNonTopoComplexPack4Bits(r *reader, fp *fieldPath) {
+	for i := int32(0); i <= fp.last; i++ {
+		if r.readBoolean() {
+			fp.path[i] += int32(r.readBits(4)) - 7
+		}
+	}
+}
+
+// fpFieldPathEncodeFinish ends the op stream; readFieldPaths stops on its op
+// id, so it has no effect on the path.
+func fpFieldPathEncodeFinish(r *reader, fp *fieldPath) {}
+
+// pop reduces the last element by n, zeroing values in the popped path
+func (fp *fieldPath) pop(n int32) {
+	for i := int32(0); i < n; i++ {
 		fp.path[fp.last] = 0
 		fp.last--
 	}
@@ -341,15 +472,14 @@ func (fp *fieldPath) copy() *fieldPath {
 	x := fpPool.Get().(*fieldPath)
 	x.path = fp.path
 	x.last = fp.last
-	x.done = fp.done
 	return x
 }
 
 // String returns a string representing the fieldPath
 func (fp *fieldPath) String() string {
 	ss := make([]string, fp.last+1)
-	for i := 0; i <= fp.last; i++ {
-		ss[i] = strconv.Itoa(fp.path[i])
+	for i := int32(0); i <= fp.last; i++ {
+		ss[i] = strconv.Itoa(int(fp.path[i]))
 	}
 	return strings.Join(ss, "/")
 }
@@ -369,9 +499,8 @@ var fpPool = &sync.Pool{
 
 // reset resets the fieldPath to the empty value
 func (fp *fieldPath) reset() {
-	fp.path = [maxFieldPathDepth]int{-1}
+	fp.path = [maxFieldPathDepth]int32{-1}
 	fp.last = 0
-	fp.done = false
 }
 
 // release returns the fieldPath to the pool for re-use
@@ -382,13 +511,16 @@ func (fp *fieldPath) release() {
 // readFieldPaths decodes the field-path operation stream from r into the
 // provided buffer (which the caller resets to length 0) and returns the grown
 // slice. Field paths are cumulative deltas, snapshotted by value into the
-// buffer, so there is no per-path allocation or sync.Pool churn and the buffer
-// is reused across calls.
+// buffer, so there is no per-path allocation and the buffer is reused across
+// calls.
+//
+// Ops are dispatched through a switch of direct calls to the fieldPathTable op
+// functions (most of which inline) rather than through the table's function
+// values. Besides avoiding an indirect call per op, this lets escape analysis
+// keep the accumulator on the stack; calling through fn forced it to the heap,
+// which cost a sync.Pool round trip per call.
 func readFieldPaths(r *reader, paths []fieldPath) []fieldPath {
-	// Borrow a reusable accumulator from the pool. Taking its address for the
-	// field-path op functions (an indirect call) would otherwise force it to
-	// escape and heap-allocate on every call; the pool keeps that amortized.
-	fp := fpPool.Get().(*fieldPath)
+	var fp fieldPath
 	fp.reset()
 
 	for {
@@ -419,12 +551,89 @@ func readFieldPaths(r *reader, paths []fieldPath) []fieldPath {
 			}
 		}
 
-		fieldPathTable[op].fn(r, fp)
-		if fp.done {
-			fpPool.Put(fp)
+		switch op {
+		case fpOpPlusOne:
+			fpPlusOne(r, &fp)
+		case fpOpPlusTwo:
+			fpPlusTwo(r, &fp)
+		case fpOpPlusThree:
+			fpPlusThree(r, &fp)
+		case fpOpPlusFour:
+			fpPlusFour(r, &fp)
+		case fpOpPlusN:
+			fpPlusN(r, &fp)
+		case fpOpPushOneLeftDeltaZeroRightZero:
+			fpPushOneLeftDeltaZeroRightZero(r, &fp)
+		case fpOpPushOneLeftDeltaZeroRightNonZero:
+			fpPushOneLeftDeltaZeroRightNonZero(r, &fp)
+		case fpOpPushOneLeftDeltaOneRightZero:
+			fpPushOneLeftDeltaOneRightZero(r, &fp)
+		case fpOpPushOneLeftDeltaOneRightNonZero:
+			fpPushOneLeftDeltaOneRightNonZero(r, &fp)
+		case fpOpPushOneLeftDeltaNRightZero:
+			fpPushOneLeftDeltaNRightZero(r, &fp)
+		case fpOpPushOneLeftDeltaNRightNonZero:
+			fpPushOneLeftDeltaNRightNonZero(r, &fp)
+		case fpOpPushOneLeftDeltaNRightNonZeroPack6Bits:
+			fpPushOneLeftDeltaNRightNonZeroPack6Bits(r, &fp)
+		case fpOpPushOneLeftDeltaNRightNonZeroPack8Bits:
+			fpPushOneLeftDeltaNRightNonZeroPack8Bits(r, &fp)
+		case fpOpPushTwoLeftDeltaZero:
+			fpPushTwoLeftDeltaZero(r, &fp)
+		case fpOpPushTwoPack5LeftDeltaZero:
+			fpPushTwoPack5LeftDeltaZero(r, &fp)
+		case fpOpPushThreeLeftDeltaZero:
+			fpPushThreeLeftDeltaZero(r, &fp)
+		case fpOpPushThreePack5LeftDeltaZero:
+			fpPushThreePack5LeftDeltaZero(r, &fp)
+		case fpOpPushTwoLeftDeltaOne:
+			fpPushTwoLeftDeltaOne(r, &fp)
+		case fpOpPushTwoPack5LeftDeltaOne:
+			fpPushTwoPack5LeftDeltaOne(r, &fp)
+		case fpOpPushThreeLeftDeltaOne:
+			fpPushThreeLeftDeltaOne(r, &fp)
+		case fpOpPushThreePack5LeftDeltaOne:
+			fpPushThreePack5LeftDeltaOne(r, &fp)
+		case fpOpPushTwoLeftDeltaN:
+			fpPushTwoLeftDeltaN(r, &fp)
+		case fpOpPushTwoPack5LeftDeltaN:
+			fpPushTwoPack5LeftDeltaN(r, &fp)
+		case fpOpPushThreeLeftDeltaN:
+			fpPushThreeLeftDeltaN(r, &fp)
+		case fpOpPushThreePack5LeftDeltaN:
+			fpPushThreePack5LeftDeltaN(r, &fp)
+		case fpOpPushN:
+			fpPushN(r, &fp)
+		case fpOpPushNAndNonTopological:
+			fpPushNAndNonTopological(r, &fp)
+		case fpOpPopOnePlusOne:
+			fpPopOnePlusOne(r, &fp)
+		case fpOpPopOnePlusN:
+			fpPopOnePlusN(r, &fp)
+		case fpOpPopAllButOnePlusOne:
+			fpPopAllButOnePlusOne(r, &fp)
+		case fpOpPopAllButOnePlusN:
+			fpPopAllButOnePlusN(r, &fp)
+		case fpOpPopAllButOnePlusNPack3Bits:
+			fpPopAllButOnePlusNPack3Bits(r, &fp)
+		case fpOpPopAllButOnePlusNPack6Bits:
+			fpPopAllButOnePlusNPack6Bits(r, &fp)
+		case fpOpPopNPlusOne:
+			fpPopNPlusOne(r, &fp)
+		case fpOpPopNPlusN:
+			fpPopNPlusN(r, &fp)
+		case fpOpPopNAndNonTopographical:
+			fpPopNAndNonTopographical(r, &fp)
+		case fpOpNonTopoComplex:
+			fpNonTopoComplex(r, &fp)
+		case fpOpNonTopoPenultimatePlusOne:
+			fpNonTopoPenultimatePlusOne(r, &fp)
+		case fpOpNonTopoComplexPack4Bits:
+			fpNonTopoComplexPack4Bits(r, &fp)
+		case fpOpFieldPathEncodeFinish:
 			return paths
 		}
-		paths = append(paths, *fp)
+		paths = append(paths, fp)
 	}
 }
 
